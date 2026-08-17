@@ -32,7 +32,7 @@
 	var/has_rolled_for_stats = FALSE
 
 /mob/living/proc/init_faith()
-	patron = GLOB.patrons_by_type[/datum/patron/godless/godless]
+	patron = GLOB.patron_list[/datum/patron/godless/godless]
 
 /mob/living/proc/set_patron(datum/patron/new_patron, check_antag = FALSE)
 	if(!new_patron)
@@ -40,12 +40,11 @@
 	if(check_antag && mind?.special_role)
 		return FALSE
 	if(ispath(new_patron))
-		new_patron = GLOB.patrons_by_type[new_patron]
+		new_patron = GLOB.patron_list[new_patron]
 	if(!istype(new_patron))
 		return FALSE
 	if(patron && !ispath(patron))
 		patron.on_remove(src)
-		mana_pool?.remove_attunements(patron)
 
 	var/mob/living/carbon/human/devout
 	var/stored_cleric_class
@@ -57,7 +56,6 @@
 
 	patron = new_patron
 	patron.on_gain(src)
-	mana_pool?.set_attunements(patron)
 	if(devout && stored_cleric_class)
 		var/holder = devout.patron?.devotion_holder
 		if(holder)
@@ -205,6 +203,9 @@
 /**
  * Adjusts an existing named stat modifier, adding delta values on top.
  * If no modifier for this source exists yet, creates one.
+ *
+ * This way of stats adjustment should be somewhat temporary (effects, clothing, etc),
+ * and it has much stronger impact on skills.
  *
  * Arguments:
  *   source    - string ID of the modifier to adjust

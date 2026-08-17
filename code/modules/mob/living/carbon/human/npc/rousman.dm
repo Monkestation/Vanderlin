@@ -4,6 +4,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	name = "rousman"
 	icon = 'icons/roguetown/mob/monster/rousman.dmi'
 	icon_state = "rousman"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/rousman
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/rousman, /obj/item/bodypart/head/rousman, /obj/item/bodypart/l_arm/rousman,
@@ -25,7 +26,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	update_appearance(UPDATE_OVERLAYS)
 
 /mob/living/carbon/human/species/rousman/init_faith()
-	patron = GLOB.patrons_by_type[/datum/patron/godless/naivety]
+	patron = GLOB.patron_list[/datum/patron/godless/naivety]
 
 /mob/living/carbon/human/species/rousman/death(gibbed)
 	. = ..()
@@ -40,7 +41,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 /mob/living/carbon/human/species/rousman/npc
 	ai_controller = /datum/ai_controller/human_npc
 	dodgetime = 13
-	canparry = TRUE
 	flee_in_pain = TRUE
 	wander = FALSE
 
@@ -56,11 +56,8 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 	job = "Ambusher Rousman"
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/rousman/ambush)
 	dodgetime = 13
-	canparry = TRUE
 	flee_in_pain = TRUE
 	wander = TRUE
 
@@ -152,8 +149,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	inherent_traits = list(
 		TRAIT_KNOW_ROUS_DOORS,
 		TRAIT_RESISTCOLD,
-		TRAIT_RESISTHIGHPRESSURE,
-		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_RADIMMUNE,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_CRITICAL_WEAKNESS,
@@ -177,6 +172,20 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	native_language = "Rous"
 	possible_ages = NORMAL_AGES_LIST
 
+	organs = list(
+		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
+		ORGAN_SLOT_HEART = /obj/item/organ/heart,
+		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
+		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/nightmare,
+		ORGAN_SLOT_EARS = /obj/item/organ/ears,
+		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue,
+		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
+		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
+		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
+	)
+
 /datum/species/rousman/random_character(mob/living/carbon/human/species/rousman/target_mob)
 	if(istype(target_mob) && target_mob.randomize_rous_name)
 		target_mob.real_name = random_name(target_mob.gender, TRUE)
@@ -184,6 +193,30 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	var/list/skins = get_skin_list()
 	target_mob.skin_tone = skins[pick(skins)]
 	target_mob.accessory = "Nothing"
+
+	validate_customizer_entries(target_mob)
+	reset_all_customizer_accessory_colors(target_mob)
+	randomize_all_customizer_accessories(target_mob)
+	apply_customizers_to_character(target_mob)
+	if(!target_mob.client && target_mob.dna)
+		var/list/organ_list = list()
+		for(var/datum/customizer_entry/entry as anything in customizer_entries)
+			var/datum/customizer_choice/customizer_choice = CUSTOMIZER_CHOICE(entry.customizer_choice_type)
+			var/datum/customizer/customizer = CUSTOMIZER(entry.customizer_type)
+			if(!customizer.is_allowed(target_mob))
+				continue
+			if(entry.disabled)
+				continue
+			var/datum/organ_dna/dna = customizer_choice.create_organ_dna(entry, target_mob)
+			if(!dna)
+				continue
+			organ_list[customizer_choice.get_organ_slot()] = dna
+
+		target_mob.dna.organ_dna = list()
+		var/list/organ_dna_list = organ_list
+		for(var/organ_slot in organ_dna_list)
+			target_mob.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
+		regenerate_organs(target_mob)
 
 	target_mob.update_body()
 	target_mob.update_body_parts()
@@ -310,15 +343,15 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		clear_quirks()
 	update_body()
 	update_eyes()
-	faction = list(FACTION_RATS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_RATS)
 	if(!randomize_rous_name)
 		name = "rousman"
 		real_name = "rousman"
+	add_traits(list(TRAIT_NOMOOD, TRAIT_NOHUNGER), SPECIES_TRAIT)
 
 /datum/component/rot/corpse/rousman/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
+		return
 	var/amt2add = 10 //1 second
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	if(last_process)
@@ -501,6 +534,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	var/obj/structure/rousman_hole/hole
 
 /obj/structure/rousman_alarm/Destroy()
+	hole?.all_alarms -= src
 	hole = null
 	return ..()
 
@@ -508,7 +542,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	. = ..()
 	if(istype(AM, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = AM
-		if(H.ambushable == TRUE && hole.already_ambushed == FALSE)
+		if(H.ambushable() && hole.already_ambushed == FALSE)
 			hole.ambush(H)
 
 ////////////////////////////////
@@ -524,11 +558,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 	job = "Assassin Rousman"
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/rousman/assassin)
 	dodgetime = 13
-	canparry = TRUE
+	REMOVE_TRAIT(src, TRAIT_UNPARRYING, INNATE_TRAIT)
 	flee_in_pain = TRUE
 	wander = TRUE
 
@@ -561,7 +593,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	ADD_TRAIT(H, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(H, TRAIT_ZJUMP, TRAIT_GENERIC)
 
-
 /mob/living/carbon/human/species/rousman/seer/with_ai
 	ai_controller = /datum/ai_controller/human_npc
 
@@ -569,11 +600,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 	job = "Seer Rousman"
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/rousman/seer)
 	dodgetime = 13
-	canparry = TRUE
+	REMOVE_TRAIT(src, TRAIT_UNPARRYING, INNATE_TRAIT)
 	flee_in_pain = TRUE
 	wander = TRUE
 
@@ -584,11 +613,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 	job = "Seer Rousman"
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/rousman/seer_stronger)
 	dodgetime = 13
-	canparry = TRUE
+	REMOVE_TRAIT(src, TRAIT_UNPARRYING, INNATE_TRAIT)
 	flee_in_pain = TRUE
 	wander = TRUE
 
@@ -626,8 +653,10 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_spell_points(17)
-	seer.generate_random_attunements(rand(4,6))
+	//! MAGIC BALANCE POINT
+	ADD_TRAIT(seer, TRAIT_SORCERER, INNATE_TRAIT)
+	seer.adjust_technique_mastery_points(12)
+	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	seer.mana_pool.adjust_mana(100)
 	for(var/spell in spells)
@@ -658,7 +687,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
 	r_hand = /obj/item/weapon/polearm/woodstaff/seer
 	belt = /obj/item/storage/belt/leather/black
-	l_pocket = /obj/item/book/granter/spellbook/expert
+	l_pocket = /obj/item/spellbook/expert/starter/earth
 
 	var/list/spells = list(
 		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
@@ -672,9 +701,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_spell_points(17)
-	seer.generate_random_attunements(rand(4,6))
+	seer.adjust_technique_mastery_points(14)
+	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	seer.mana_pool.adjust_mana(100)
 	for(var/spell in spells)
-		seer.add_spell(spell)
+		seer.add_spell(spell, mastery_spell = TRUE)

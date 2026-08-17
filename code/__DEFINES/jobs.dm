@@ -13,6 +13,7 @@
 #define JOB_UNAVAILABLE_ACCOUNTAGE 12
 #define JOB_UNAVAILABLE_JOB_COOLDOWN 13
 #define JOB_UNAVAILABLE_RACE_BANNED 14
+#define JOB_UNAVAILABLE_WHITELIST 15
 
 /* Job datum job_flags */
 /// Whether the mob is announced on arrival.
@@ -25,6 +26,8 @@
 #define JOB_NEW_PLAYER_JOINABLE (1<<3)
 /// Whether the job can be displayed on the actors list
 #define JOB_SHOW_IN_ACTOR_LIST (1<<4)
+/// if we require a whitelist
+#define JOB_REQUIRE_WHITELIST (1<<5)
 
 #define ALL_FACTIONS list( \
 	FACTION_NONE, \
@@ -41,7 +44,8 @@
 	FACTION_ORCS, \
 	FACTION_BUMS, \
 	FACTION_VIKINGS, \
-	FACTION_MATTHIOS \
+	FACTION_MATTHIOS, \
+	FACTION_GALLOWBAND \
 )
 
 #define FACTION_NONE		"None"
@@ -59,6 +63,8 @@
 #define FACTION_BUMS		"Bums"
 #define FACTION_MATTHIOS	"Matthios"
 #define FACTION_VIKINGS     "Vikings"
+#define FACTION_GALLOWBAND  "Gallowband"
+#define FACTION_INQUISITION	"Inquisition"
 
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)
@@ -72,7 +78,9 @@
 #define INQUISITION 	(1<<9)
 
 #define UNDEAD			(1<<10)
+#define GALLOWBAND		(1<<11)
 
+#define ADMIN_SPECIAL	(1<<12)
 
 #define JCOLOR_NOBLE "#9c40bf"
 #define JCOLOR_MERCHANT "#c2b449"
@@ -109,6 +117,9 @@
 #define JDO_SQUIRE 10
 #define JDO_FORWARDEN 11
 #define JDO_FORGUARD 11.1
+#define JDO_FORFORCER 11.2
+#define JDO_FORPREACH 11.3
+#define JDO_FORSUPP 11.4
 
 #define JDO_PRIEST 12
 #define JDO_GMTEMPLAR 12.1
@@ -168,6 +179,7 @@
 #define JDO_BOGWITCH 35.1
 #define JDO_BOGWITCH_APP 35.2
 
+#define JDO_SWEEPER 35.3
 #define JDO_VAGRANT 36
 #define JDO_ORPHAN 37
 #define JDO_SOILCHILD 38
@@ -215,7 +227,6 @@
 #define JOB_GRAVETENDER "Gravetender"
 #define JOB_TEMPLAR "Templar"
 
-
 #define JOB_TOWNER "Towner"
 #define JOB_SOILSON "Soilson"
 #define JOB_MINER "Miner"
@@ -228,6 +239,7 @@
 #define JOB_BARD "Bard"
 #define JOB_PRISONER "Prisoner"
 #define JOB_BEGGAR "Beggar"
+#define JOB_SWEEPER "Sweeper"
 
 
 #define JOB_SQUIRE "Squire"
@@ -267,8 +279,19 @@
 
 #define JOB_BOGWITCH "Bog Witch"
 #define JOB_BOGWITCH_APP "Bog Witch Apprentice"
-#define JOB_FOREST_WARDEN "Forest Warden"
-#define JOB_FOREST_GUARD "Forest Guard"
+#define JOB_FOREST_WARDEN_CLASSIC "Forest Warden"
+#define JOB_FOREST_GUARD_CLASSIC "Forest Guard"
+#define JOB_FOREST_WARDEN "Warden of the Woods"
+#define JOB_FOREST_ENFORCER "Hersir"
+#define JOB_FOREST_PREACHER "Gothi"
+#define JOB_FOREST_SUPPORT "Vinnumaour"
+#define JOB_FOREST_SUPPORT_FEM "Vinnukona"
+#define JOB_FOREST_GUARD "Gallowband"
+#define JOB_FOREST_GUARD_HUSKARL_SCOUT "Huskarl Scout"
+#define JOB_FOREST_GUARD_HUSKARL_FIGHTER "Huskarl Fighter"
+#define JOB_FOREST_GUARD_THEGN_REAVER "Thegn Reaver"
+#define JOB_FOREST_GUARD_THEGN_RAVAGER "Thegn Ravager"
+#define JOB_FOREST_GUARD_THEGN_RANGER "Thegn Ranger"
 
 
 #define JOB_PRAFEKT "Herr Prafekt"
@@ -281,3 +304,10 @@
 #define JOB_LUMBERJACK "Lumberjack"
 #define JOB_CHEESEMAKER "Cheesemaker"
 #define JOB_BUTCHER "Butcher"
+
+#define ALT_TITLE_FLAG_PATREON_LOCKED (1<<0)
+
+#define JOB_ADMIN_ORACLE "Lunar Oracle"
+#define JOB_ADMIN_LUNAR_SENTINEL "Lunar Order Sentinel"
+#define JOB_ADMIN_LUNAR_CHAMPION "Lunar Order Champion"
+#define JOB_ADMIN_DARKSPAWN "Darkspawn"

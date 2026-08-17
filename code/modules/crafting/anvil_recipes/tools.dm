@@ -31,6 +31,10 @@
 	created_item = /obj/item/reagent_containers/glass/bowl/pewter
 	output_amount = 2
 
+/datum/anvil_recipe/tools/tin/zig
+	name = "tin zigbox"
+	created_item = /obj/item/storage/fancy/cigarettes/tinzig/empty
+
 // --------- COPPER -----------
 
 /datum/anvil_recipe/tools/copper
@@ -220,7 +224,7 @@
 
 /datum/anvil_recipe/tools/iron/headhook
 	name = "Iron Headhook (+Fibers x2)"
-	additional_items = list(/obj/item/natural/fibers = 2)
+	additional_items = list(/obj/item/natural/fibers, /obj/item/natural/fibers)
 	created_item = /obj/item/storage/hip/headhook
 	craftdiff = 3
 
@@ -263,6 +267,17 @@
 	name = "Set of Surgery Tools (+Bar)"
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/surgeontoolspawner
+
+/datum/anvil_recipe/tools/iron/gravefence_iron
+	name = "Iron Gravefence"
+	created_item = /obj/item/gravedecor/gravefence/iron
+	category = "Gravefences"
+
+/datum/anvil_recipe/tools/iron/headstone_malum
+	name = "Malumite Headstone (+Stone Blocks x2)"
+	additional_items = list(/obj/item/natural/stoneblock, /obj/item/natural/stoneblock)
+	created_item = /obj/item/gravedecor/headstone/malum
+	category = "Headstones"
 
 /datum/anvil_recipe/tools/iron/bowl
 	name = "Bowl (iron)"
@@ -356,6 +371,11 @@
 	name = "Platters (gold)"
 	created_item = /obj/item/plate/gold
 	craftdiff = 2
+
+/datum/anvil_recipe/tools/gold/headstone_astrata
+	name = "Golden Astratan Headstone"
+	created_item = /obj/item/gravedecor/headstone/astrata
+	category = "Headstones"
 
 // --------- CASTING TOOLS -----------
 /datum/anvil_recipe/tools/casting

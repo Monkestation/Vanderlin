@@ -9,6 +9,9 @@
 	///How the mob transformation matrix is scaled on init.
 	var/initial_size = RESIZE_DEFAULT_SIZE
 
+	var/job_title_override
+	var/job_honorary_override
+
 	var/lastattacker = null
 	var/lastattackerckey = null
 	var/datum/weakref/lastattacker_weakref = null
@@ -56,8 +59,6 @@
 	//Allows mobs to move through dense areas without restriction. For instance, in space or out of holder objects.
 	var/incorporeal_move = FALSE //FALSE is off, INCORPOREAL_MOVE_BASIC is normal, INCORPOREAL_MOVE_SHADOW is for ninjas
 								//and INCORPOREAL_MOVE_JAUNT is blocked by holy water/salt
-
-	var/list/surgeries //a list of surgery steps. generally empty, they're added when the player is performing them.
 
 	var/now_pushing = null //used by living/Bump() and living/PushAM() to prevent potential infinite loop.
 
@@ -112,7 +113,13 @@
 
 	var/stun_absorption = null //converted to a list of stun absorption sources this mob has when one is added
 
-	var/blood_volume = BLOOD_VOLUME_NORMAL //how much blood the mob has
+	/// How much blood the mob currently has.
+	/// Don't read directly, use get_blood_volume() and get_blood_volume(apply_modifiers = TRUE).
+	/// Don't write directly either, use set_blood_volume() and adjust_blood_volume().
+	/// Also don't initialize this. Initialize default_blood_volume instead.
+	var/blood_volume = 0
+	/// The default blood volume of the mob. Used primarily for healing bloodloss.
+	var/default_blood_volume = BLOOD_VOLUME_NORMAL
 
 	var/see_override = 0 //0 for no override, sets see_invisible = see_override in silicon & carbon life process via update_sight()
 
@@ -181,10 +188,10 @@
 	var/last_fatigued = 0
 	var/last_ps = 0
 
-	var/ambushable = 0
+	/// ONLY TO BE USED TO CONTROL INITIALIZING WITH AMBUSHABLE TRAIT
+	var/ambushable = FALSE
 
 	var/surrendering = 0
-
 
 	/// Combat bonuses for Simple Mobs
 	var/simpmob_attack = 0
@@ -247,10 +254,12 @@
 	var/pegleg = 0			//Handles check & slowdown for peglegs. Fuckin' bootleg, literally, but hey it at least works.
 	var/pet_passive = FALSE
 
-	/// amount of spell points this mob currently has
-	var/spell_points
-	/// amount of spell points this mob has used
-	var/used_spell_points
+	var/list/summoned_minions
+	var/attack_relay_refs = 0
+	var/attack_relay_self_added = FALSE
+
+	/// Whether we are in a swingdelay, used to check for disrupted swingdelays.
+	var/swing_state = FALSE
 
 	var/list/affixes = list()
 	var/delve_level = 0
@@ -272,8 +281,6 @@
 	var/traumatic_shock = 0
 	/// Shock stage, as in how much our crit has progressed
 	var/shock_stage = 0
-	/// Last pain related message we have received - Used to prevent spam
-	var/last_pain_message = ""
 	/// Next time we are able to trigger custom_pain()
 	var/next_pain_time = 0
 	/// Next time we are able to send a custom_pain() chat message
@@ -283,3 +290,10 @@
 
 	/// cooldown for the next time this person can offer
 	COOLDOWN_DECLARE(offer_cooldown)
+
+	/// Direction that this mob is looking at, used for the look_up and look_down procs
+	var/looking_vertically = NONE
+	///looking holder we use for look_up and look_down. we use this over resetting to the turf because we want to glide
+	var/atom/movable/looking_holder/looking_holder
+	///The NAME (not the reference) of the mob's summoner and probable master.
+	var/summoner = null

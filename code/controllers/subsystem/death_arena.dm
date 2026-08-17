@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(death_arena)
 	list_clear_nulls(waiting_fighters)
 	list_clear_nulls(tollless_clients)
 
-	for(var/client as anything in tollless_clients)
+	for(var/client in tollless_clients)
 		if(world.time > tollless_clients[client])
 			for(var/mob/living/carbon/spirit/spirit in waiting_fighters)
 				if(!spirit?.client)
@@ -57,6 +57,9 @@ SUBSYSTEM_DEF(death_arena)
 	fighting = TRUE
 	for(var/mob/living/carbon/spirit/spirit in waiting_fighters)
 		if(!spirit?.client)
+			remove_fighter(spirit)
+			continue
+		else if(!spirit?.paid)
 			remove_fighter(spirit)
 			continue
 
@@ -196,7 +199,7 @@ SUBSYSTEM_DEF(death_arena)
 /obj/structure/table/wood/fine/altar/after_added_effects(obj/item/item, mob/user)
 	if(!istype(item, /obj/item/bodypart/head))
 		return
-	add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_FIGHT_REVIVES, 1)
+	add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_FIGHT_REVIVES, 1)
 	record_round_statistic(STATS_UNDERWORLD_DUELS)
 	SSdeath_arena.process_fight_end(item, user)
 

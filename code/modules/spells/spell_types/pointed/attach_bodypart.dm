@@ -30,7 +30,7 @@
 		for(var/datum/wound/limb_wounds as anything in limb.wounds)
 			qdel(limb_wounds)
 		for(var/datum/injury/limb_wounds as anything in limb.injuries)
-			if(limb_wounds.damage_type == WOUND_DIVINE)
+			if(!limb_wounds.can_heal())
 				continue
 			qdel(limb_wounds)
 		limb.update_damages()

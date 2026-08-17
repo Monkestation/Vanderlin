@@ -23,7 +23,7 @@
 	tutorial = "Try not to get obliterated by the Gods while they toy with you."
 	department_flag = PEASANTS
 	job_flags = (JOB_EQUIP_RANK)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	display_order = JDO_MERCENARY
 	#ifdef TESTSERVER
 	total_positions = 99
@@ -53,7 +53,6 @@
 	. = ..()
 	if(equipped_human.gender == FEMALE)
 		pants = /obj/item/clothing/pants/tights/colored/black
-		beltr = /obj/item/weapon/sword/sabre
 	if(prob(50))
 		armor = /obj/item/clothing/armor/gambeson
 	if(prob(50))

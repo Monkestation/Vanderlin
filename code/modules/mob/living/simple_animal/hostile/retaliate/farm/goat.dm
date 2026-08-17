@@ -105,7 +105,7 @@
 			. += mounted
 
 /mob/living/simple_animal/hostile/retaliate/goat/tamed(mob/user)
-	..()
+	. = ..()
 	deaggroprob = 50
 	if(.) // was already tamed
 		return
@@ -243,7 +243,7 @@
 			. += mounted
 
 /mob/living/simple_animal/hostile/retaliate/goatmale/tamed(mob/user)
-	..()
+	. = ..()
 	deaggroprob = 20
 	if(.) // was already tamed
 		return

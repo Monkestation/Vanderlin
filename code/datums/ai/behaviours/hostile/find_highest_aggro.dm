@@ -167,7 +167,7 @@
 /datum/ai_behavior/find_aggro_targets/proc/new_turf_found(turf/found, datum/ai_controller/controller, datum/targetting_datum/strategy)
 	var/valid_found = FALSE
 	var/mob/pawn = controller.pawn
-	for(var/maybe_target as anything in found)
+	for(var/maybe_target in found)
 		if(atom_allowed(maybe_target, strategy, pawn))
 			valid_found = TRUE
 			break
@@ -184,7 +184,7 @@
 	var/mob/living/pawn = controller.pawn
 	var/list/accepted_targets = list()
 
-	for(var/maybe_target as anything in found)
+	for(var/maybe_target in found)
 		if(atom_allowed(maybe_target, strategy, pawn))
 			accepted_targets += maybe_target
 
@@ -238,6 +238,19 @@
 		pawn.say(pick(GLOB.species_hostile))
 
 /datum/ai_behavior/find_aggro_targets/species_hostile/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
+	. = ..()
+	var/mob/living/pawn = controller.pawn
+	if(pawn)
+		pawn.cmode = FALSE
+
+/datum/ai_behavior/find_aggro_targets/guardsman/finish_action(datum/ai_controller/controller, succeeded, ...)
+	. = ..()
+	if(succeeded)
+		var/mob/living/pawn = controller.pawn
+		pawn.emote("rage")
+		pawn.say("For [SSmapping.config.map_name]!")
+
+/datum/ai_behavior/find_aggro_targets/guardsman/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
 	. = ..()
 	var/mob/living/pawn = controller.pawn
 	if(pawn)

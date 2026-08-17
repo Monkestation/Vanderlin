@@ -43,6 +43,8 @@
 				used = list('sound/vo/female/gen/groan (1).ogg','sound/vo/female/gen/groan (2).ogg','sound/vo/female/gen/groan (3).ogg','sound/vo/female/gen/groan (4).ogg','sound/vo/female/gen/groan (5).ogg')
 			if("grumble")
 				used = 'sound/vo/female/gen/grumble.ogg'
+			if("sniff")
+				used = list('sound/vo/male/gen/humansniff (1).ogg', 'sound/vo/male/gen/humansniff (2).ogg','sound/vo/male/gen/humansniff (3).ogg')
 			if("haltyell")
 				used = list('sound/vo/female/gen/haltyell (1).ogg','sound/vo/female/gen/haltyell (2).ogg')
 			if("haltyellorphan")
@@ -71,12 +73,20 @@
 				used = list('sound/vo/female/gen/rage (1).ogg','sound/vo/female/gen/rage (2).ogg','sound/vo/female/gen/rage (3).ogg')
 			if("scream")
 				used = list('sound/vo/female/gen/scream (1).ogg','sound/vo/female/gen/scream (2).ogg','sound/vo/female/gen/scream (3).ogg','sound/vo/female/gen/scream (4).ogg')
+			if("strain")
+				used = 'sound/vo/female/gen/strain.ogg'
 			if("shh")
 				used = list('sound/vo/female/gen/shh.ogg','sound/vo/female/gen/shh (2).ogg')
 			if("sickcough")
 				used = list('sound/vo/female/gen/sickcough (1).ogg', 'sound/vo/female/gen/sickcough (2).ogg', 'sound/vo/female/gen/sickcough (3).ogg', 'sound/vo/female/gen/sickcough (4).ogg', 'sound/vo/female/gen/sickcough (5).ogg')
 			if("sigh")
 				used = list('sound/vo/female/gen/sigh (1).ogg','sound/vo/female/gen/sigh (2).ogg','sound/vo/female/gen/sigh (3).ogg')
+			if("snap")
+				used = list('sound/foley/fingersnap1.ogg', 'sound/foley/fingersnap2.ogg', 'sound/foley/fingersnap3.ogg', 'sound/foley/fingersnap4.ogg', 'sound/foley/fingersnap5.ogg', 'sound/foley/fingersnap6.ogg', 'sound/foley/fingersnap7.ogg')
+			if("snaptwice")
+				used = list('sound/foley/fingersnappingtwo (1).ogg', 'sound/foley/fingersnappingtwo (2).ogg', 'sound/foley/fingersnappingtwo (3).ogg')
+			if("snapthrice")
+				used = list('sound/foley/fingersnappingthree (1).ogg', 'sound/foley/fingersnappingthree (2).ogg', 'sound/foley/fingersnappingthree (3).ogg')
 			if("snore")
 				used = list('sound/vo/female/gen/snore (1).ogg','sound/vo/female/gen/snore (2).ogg','sound/vo/female/gen/snore (3).ogg')
 			if("whimper")
@@ -91,4 +101,6 @@
 				used = 'sound/vo/psst.ogg'
 			if("clap")
 				used = list('sound/vo/clap (1).ogg', 'sound/vo/clap (2).ogg', 'sound/vo/clap (3).ogg', 'sound/vo/clap (4).ogg')
+			if("claponce")
+				used = list('sound/vo/claponce.ogg')
 	return used

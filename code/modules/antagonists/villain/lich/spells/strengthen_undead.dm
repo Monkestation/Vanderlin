@@ -4,10 +4,9 @@
 	button_icon_state = "raiseskele"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	attunements = list(
-		/datum/attunement/dark = 0.4,
-		/datum/attunement/death = 0.5,
-	)
+	required_form = FORM_DEATH
+	required_technique = TECHNIQUE_RESTORATION
+	required_level = 2
 
 	charge_required = FALSE
 	cooldown_time = 15 SECONDS
@@ -30,9 +29,11 @@
 			if(affecting.heal_damage(50, 50))
 				cast_on.update_damage_overlays()
 			if(affecting.heal_wounds(50, src))
+				record_round_statistic(STATS_WOUNDS_FIXED)
 				cast_on.update_damage_overlays()
 		cast_on.visible_message(span_danger("[cast_on] reforms under the vile energy!"), span_notice("I'm remade by dark magic!"))
 	else
 		cast_on.visible_message(span_info("Necrotic energy floods over [cast_on]!"), span_userdanger("I feel colder as the dark energy floods into me!"))
-		cast_on.Paralyze(5 SECONDS)
+		if(spell_magnitude_modifier >= 2)
+			cast_on.Paralyze(5 SECONDS)
 		cast_on.adjustBruteLoss(20, damage_type = BCLASS_LASHING)

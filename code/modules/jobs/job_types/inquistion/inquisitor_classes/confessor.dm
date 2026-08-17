@@ -13,7 +13,7 @@
 		/datum/attribute/skill/misc/sneaking = 40,
 		/datum/attribute/skill/misc/stealing = 40,
 		/datum/attribute/skill/misc/lockpicking = 40,
-		/datum/attribute/skill/combat/crossbows = 30,
+		/datum/attribute/skill/combat/crossbows = 35,
 	)
 
 /datum/attribute_holder/sheet/job/confessor/arbalist
@@ -27,19 +27,53 @@
 /datum/attribute_holder/sheet/job/confessor/knives
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/knives = list(30, 30)
+		/datum/attribute/skill/combat/knives = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/confessor/axes
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/axesmaces = list(30, 30)
+		/datum/attribute/skill/combat/axesmaces = list(33, 33)
 	)
 
 /datum/attribute_holder/sheet/job/confessor/swords
 	raw_attribute_list = list()
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(30, 30)
+		/datum/attribute/skill/combat/swords = list(33, 33)
+	)
+
+/datum/attribute_holder/sheet/job/confessor/adrenal
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = 1,
+	)
+
+/datum/attribute_holder/sheet/job/confessor/atrophy
+	raw_attribute_list = list(
+		STAT_CONSTITUTION = -3,
+		STAT_SPEED = 4
+	)
+
+/datum/attribute_holder/sheet/job/confessor/greenskin
+	raw_attribute_list = list(
+		STAT_ENDURANCE = -2,
+		STAT_STRENGTH = 2
+	)
+
+/datum/attribute_holder/sheet/job/confessor/stomach
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 2
+	)
+
+/datum/attribute_holder/sheet/job/confessor/nerve
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 3,
+		STAT_FORTUNE = -1
+	)
+
+/datum/attribute_holder/sheet/job/confessor/nightmare
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 2,
+		STAT_PERCEPTION = 1
 	)
 
 /datum/job/advclass/sacrestant/confessor
@@ -116,21 +150,92 @@
 		if("Sunderbolts - Silver-Tipped, Halved Damage")
 			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/bolt/holy(get_turf(spawned)), initial = TRUE)
 
+	// Enhancement selection
+	var/list/enhancements = list(
+		"Auxiliary Adrenal Glands - Pain Resist",
+		"Controlled Atrophy - Rapid Movement",
+		"Formikrag Liver - Reversed Toxin Damage",
+		"Goblin Eyes - Nightvision",
+		"Greenskin Hands - Strong Grip",
+		"Inhumen Stomach - Enhanced Endurance",
+		"Leviathanian Membrane - No Terrain Slowdown",
+		"Nerve Staple - No Mood",
+		"Nightmare Ward - No Sleep and Anti-Scrying",
+		"Serpentine Glands - Thermal Vision and Venom")
+	//only four options
+	enhancements = shuffle(enhancements)
+	enhancements.Cut(4, 0)
+	enhancements += "Disguise Kit - Deceiving Meekness" //Always give this option
+	var/enhancement_choice = browser_input_list(spawned, "CHOOSE YOUR ENHANCEMENT.", "IN THE NAME OF PSYDON.", enhancements)
+
+	switch(enhancement_choice)
+		if("Auxiliary Adrenal Glands - Pain Resist")
+			ADD_TRAIT(spawned, TRAIT_IGNOREDAMAGESLOWDOWN, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/adrenal)
+		if("Controlled Atrophy - Rapid Movement")
+			ADD_TRAIT(spawned, TRAIT_HOLLOWBONES, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/atrophy)
+		if("Formikrag Liver - Reversed Toxin Damage")
+			ADD_TRAIT(spawned, TRAIT_TOXINLOVER, TRAIT_GENERIC)
+			var/obj/item/organ/stomach/stomach = spawned.getorganslot(ORGAN_SLOT_STOMACH)
+			if(stomach)
+				stomach.Remove(spawned,1)
+				QDEL_NULL(stomach)
+			stomach = new /obj/item/organ/stomach/acid_spit
+			stomach.Insert(spawned)
+		if("Goblin Eyes - Nightvision")
+			var/list/eye_list = spawned.getorganslotlist(ORGAN_SLOT_EYES)
+			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
+				eyes.Remove(spawned)
+				QDEL_NULL(eyes)
+
+			var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
+			var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
+			LE.switch_side(LEFT_SIDE)
+
+			LE.Insert(spawned)
+			RE.Insert(spawned)
+		if("Greenskin Hands - Strong Grip")
+			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/greenskin)
+		if("Inhumen Stomach - Enhanced Endurance")
+			ADD_TRAIT(spawned, TRAIT_NASTY_EATER, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/stomach)
+		if("Leviathanian Membrane - No Terrain Slowdown")
+			ADD_TRAIT(spawned, TRAIT_WEBWALK, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_BRUSHWALK, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_SWIMMER, TRAIT_GENERIC)
+		if("Nerve Staple - No Mood")
+			ADD_TRAIT(spawned, TRAIT_NOMOOD, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nerve)
+		if("Nightmare Ward - No Sleep and Anti-Scrying")
+			ADD_TRAIT(spawned, TRAIT_SLEEPIMMUNE, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_NOENERGY, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_ANTISCRYING, TRAIT_GENERIC)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/nightmare)
+		if("Disguise Kit - Deceiving Meekness")
+			ADD_TRAIT(spawned, TRAIT_DECEIVING_MEEKNESS, TRAIT_GENERIC)
+			var/obj/item/harlequin_disguise_kit/kit = new(get_turf(spawned))
+			spawned.put_in_hands(kit)
+		if("Serpentine Glands - Thermal Vision and Venom")
+			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
+
 /datum/outfit/confessor
 	name = "Confessor (Sacrestants)"
 	cloak = /obj/item/storage/backpack/satchel
 	wrists = /obj/item/clothing/neck/psycross/silver
-	gloves = /obj/item/clothing/gloves/leather/otavan
+	gloves = /obj/item/clothing/gloves/leather/grenzel
 	neck = /obj/item/clothing/neck/gorget
-	backr = /obj/item/storage/backpack/satchel/otavan
+	backr = /obj/item/storage/backpack/satchel/grenzel
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/psydonboots
 	mask = /obj/item/clothing/face/facemask/steel/confessor
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
-		/obj/item/key/inquisition = 1,
+		/obj/item/storage/keyring/inquisitor = 1,
 		/obj/item/rope/inqarticles/inquirycord = 1,
 		/obj/item/lockpickring/mundane = 1,
 		/obj/item/clothing/head/inqarticles/blackbag = 1,

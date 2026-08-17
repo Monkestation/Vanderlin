@@ -27,6 +27,7 @@
 	var/quantity = 1
 	var/plural_name
 	var/rigged_outcome = 0 //1 for heads, 2 for tails
+	var/pellet_type = null
 
 /obj/item/coin/get_carry_weight(atom/carrier)
 	. = item_weight * quantity
@@ -109,6 +110,10 @@
 		dropshrink = 0.2
 	else
 		dropshrink = 1
+	if(quantity <= 0)
+		qdel(src)
+		return
+
 	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC | UPDATE_NAME)
 	update_transform()
 
@@ -122,6 +127,9 @@
 		. += span_info("[quantity_to_words(quantity)] [denomination] ([get_real_price()] mammon)")
 		return
 
+	if(pellet_type && quantity >= 6 && GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms) >= SKILL_LEVEL_NOVICE)
+		. += span_info("It looks like you could rig this up to be fired as ammunition.")
+
 	if(HAS_TRAIT(user, TRAIT_COIN_ILLITERATE))
 		if(quantity <= 1)
 			. += span_info("A coin.")
@@ -129,7 +137,7 @@
 			. += span_info("[quantity_to_words(quantity)] coins.")
 		return
 
-	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
+	var/intelligence = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
 	if(quantity <= 1)  // Just so you don't count single coins, observers don't need to count.
 		. += span_info("One [name] ([sellprice] mammon)")
 		return
@@ -201,22 +209,22 @@
 	. = ..()
 
 /obj/item/coin/proc/coin_skill(mob/user, intended)		// Coin counting and splitting
-	var/intelligence = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_INTELLIGENCE)
-	var/perception = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_PERCEPTION)
-	var/speed = user.mind?.GET_MOB_ATTRIBUTE_VALUE(current, STAT_SPEED)
+	var/intelligence = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
+	var/perception = GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)
+	var/speed = GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED)
 	var/mathematics_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/mathematics) || 0
 	var/list/skill_data = list("delay" = 1.2 SECONDS,"error" = 0)
 
 	var/base_tier	// Base intelligence tiers
 	switch(intelligence)
 		if(0 to 6)
-			base_tier = 1 			// Low INT
+			base_tier = 1 // Low INT
 		if(7 to 9)
-			base_tier = 2			// Below average INT
+			base_tier = 2 // Below average INT
 		if(10 to 11)
-			base_tier = 3			// Average INT
+			base_tier = 3 // Average INT
 		if(14 to INFINITY)
-			base_tier = 4	// Very High INT
+			base_tier = 4 // Very High INT
 		else base_tier = 3 // Default for 12-13
 
 	// Apply mathematics tier boost
@@ -309,6 +317,25 @@
 		INVOKE_ASYNC(src, PROC_REF(rig_coin), user)
 		return TRUE
 
+	//turn coins into pellets! fucking fuck whoever snowflaked coins quantity...
+	if(pellet_type && quantity >= 6 && GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms) >= 10)
+		//crafting timer
+		to_chat(user, span_notice("You start rigging up [src] to be fired as ammunition..."))
+		playsound(src, 'sound/foley/lockrattle.ogg', 100, TRUE, -2)
+		if(!do_after(user, 3 SECONDS, src))
+			to_chat(user, span_warning("You stop rigging up [src]."))
+			return
+
+		quantity -= 6
+		if(!quantity)
+			qdel(src)
+			return
+
+		var/obj/item/ammo_casing/caseless/pelletshot/coin/new_pellet = new pellet_type(get_turf(user))
+		user.put_in_hands(new_pellet)
+		playsound(src, 'sound/foley/coins1.ogg', 100, TRUE, -2)
+
+
 /obj/item/coin/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
@@ -400,15 +427,17 @@
 	else
 		desc = ""
 
-/obj/item/coin/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/coin))
-		var/obj/item/coin/G = I
-		if(item_flags & IN_STORAGE)
-			merge(G, user)
-		else
-			G.merge(src, user)
-		return
-	return ..()
+/obj/item/coin/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/coin))
+		return NONE
+
+	var/obj/item/coin/coin = tool
+	if(item_flags & IN_STORAGE)
+		merge(coin, user)
+	else
+		coin.merge(src, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 //GOLD
 /obj/item/coin/gold
@@ -419,6 +448,7 @@
 	base_type = CTYPE_GOLD
 	plural_name = "zenarii"
 	item_weight = 9 GRAMS
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zenar
 
 
 // SILVER
@@ -430,6 +460,7 @@
 	base_type = CTYPE_SILV
 	plural_name = "ziliquae"
 	item_weight = 11 GRAMS
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zil
 
 
 // COPPER
@@ -440,6 +471,7 @@
 	sellprice = 1
 	base_type = CTYPE_COPP
 	plural_name = "zennies"
+	pellet_type = /obj/item/ammo_casing/caseless/pelletshot/coin/zenny
 
 /obj/item/coin/copper/pile/Initialize(mapload, coin_amount)
 	. = ..()

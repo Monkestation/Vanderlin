@@ -41,7 +41,8 @@
 		for(var/datum/antagonist/A in mind.antag_datums)
 			A.on_life(src)
 
-	handle_vamp_dreams()
+	INVOKE_ASYNC(src, PROC_REF(handle_vamp_dreams))
+
 	if(IsSleeping())
 		if(health > 0)
 			remove_status_effect(/datum/status_effect/debuff/trainsleep)
@@ -49,7 +50,7 @@
 			if(has_status_effect(/datum/status_effect/debuff/dreamytime))
 				remove_status_effect(/datum/status_effect/debuff/dreamytime)
 				if(mind)
-					mind.sleep_adv.advance_cycle()
+					INVOKE_ASYNC(mind.sleep_adv, TYPE_PROC_REF(/datum/sleep_adv, advance_cycle))
 					if(!mind.antag_datums || !mind.antag_datums.len)
 						allmig_reward++
 						var/static/list/towner_jobs
@@ -83,7 +84,7 @@
 		for(var/datum/quirk/Q in quirks)
 			Q.on_life(src)
 
-	if(!client && !HAS_TRAIT(src, TRAIT_NOSLEEP) && !ai_controller)
+	if(!client && !HAS_TRAIT(src, TRAIT_SLEEPIMMUNE) && !ai_controller)
 		if(MOBTIMER_EXISTS(src, MT_SLO))
 			if(MOBTIMER_FINISHED(src, MT_SLO, 90 SECONDS)) //?????
 				Sleeping(100)
@@ -96,31 +97,9 @@
 		set_typing_indicator(FALSE)
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
-	handle_gas_mask_sound()
 
 	if(stat != DEAD)
 		return 1
-
-/mob/living/carbon/human/proc/handle_gas_mask_sound()
-	if(!istype(wear_mask, /obj/item/clothing/face/facemask/steel/confessor))
-		if(breathe_tick)
-			breathe_tick = 0
-		return
-	if(stat == DEAD)
-		return
-	if(HAS_TRAIT(src, TRAIT_NOBREATH))
-		return
-	breathe_tick++
-	var/mask_sound
-	if(istype(wear_mask, /obj/item/clothing/face/facemask/steel/confessor))
-		if(breathe_tick>=rand(3,5))
-			breathe_tick = 0
-			mask_sound = pick('sound/items/confessormask1.ogg', 'sound/items/confessormask2.ogg', 'sound/items/confessormask3.ogg',
-							'sound/items/confessormask4.ogg', 'sound/items/confessormask5.ogg', 'sound/items/confessormask6.ogg',
-							'sound/items/confessormask7.ogg', 'sound/items/confessormask8.ogg', 'sound/items/confessormask9.ogg',
-					 		'sound/items/confessormask10.ogg')
-			playsound(src, mask_sound, 90, FALSE, 4, 0)
-			return
 
 /mob/living/carbon/human/DeadLife(delta_time, times_fired)
 	set invisibility = 0
@@ -134,8 +113,19 @@
 
 	. = ..()
 	name = get_visible_name()
-	handle_organs(delta_time, times_fired)
-	handle_bodyparts(delta_time, times_fired)
+
+	var/virus_immunity = virus_immunity()
+	var/antibiotics = get_antibiotics()
+	var/immunity_weakness = immunity_weakness()
+	var/turf/turf_loc = get_turf(loc)
+	var/passed_temp = turf_loc?.return_temperature()
+
+	var/organ_flag = handle_organs(delta_time, times_fired,virus_immunity, antibiotics, immunity_weakness, passed_temp)
+	var/bodypart_flag = handle_bodyparts(delta_time, times_fired,virus_immunity, antibiotics, immunity_weakness, passed_temp)
+
+	if((organ_flag & ORGAN_PROCESS_UPDATE_HEALTH) || (bodypart_flag & BODYPART_LIFE_UPDATE_HEALTH))
+		updatehealth()
+		update_stamina() //gods greatest optimization
 
 /mob/living/carbon/human/proc/on_daypass()
 	if(stat < 3) //not dead
@@ -155,53 +145,50 @@
 /mob/living/carbon/human/proc/handle_hygiene()
 	if(stat == DEAD || HAS_TRAIT(src, TRAIT_NOHYGIENE))
 		return
-	if(HAS_TRAIT(src, TRAIT_ALWAYS_CLEAN))
-		set_hygiene(HYGIENE_LEVEL_CLEAN)
+	var/dirt_factor = HYGIENE_FACTOR * dna.species.hygiene_mod
+	var/hygiene_adjustment = 0
 
-	else
-		var/hygiene_adjustment = 0
+	//Are our clothes dirty?
+	var/obj/item/head = get_item_by_slot(ITEM_SLOT_HEAD)
+	if(head && HAS_BLOOD_DNA(head))
+		hygiene_adjustment -= 1 * dirt_factor
 
-		//Are our clothes dirty?
-		var/obj/item/head = get_item_by_slot(ITEM_SLOT_HEAD)
-		if(head && HAS_BLOOD_DNA(head))
-			hygiene_adjustment -= 1 * HYGIENE_FACTOR
+	var/obj/item/neck = get_item_by_slot(ITEM_SLOT_NECK)
+	if(neck && HAS_BLOOD_DNA(neck))
+		hygiene_adjustment -= 1 * dirt_factor
 
-		var/obj/item/neck = get_item_by_slot(ITEM_SLOT_NECK)
-		if(neck && HAS_BLOOD_DNA(neck))
-			hygiene_adjustment -= 1 * HYGIENE_FACTOR
+	var/obj/item/mask = get_item_by_slot(ITEM_SLOT_MASK)
+	if(mask && HAS_BLOOD_DNA(mask))
+		hygiene_adjustment -= 1 * dirt_factor
 
-		var/obj/item/mask = get_item_by_slot(ITEM_SLOT_MASK)
-		if(mask && HAS_BLOOD_DNA(mask))
-			hygiene_adjustment -= 1 * HYGIENE_FACTOR
+	var/obj/item/shirt = get_item_by_slot(ITEM_SLOT_SHIRT)
+	if(shirt && HAS_BLOOD_DNA(shirt))
+		hygiene_adjustment -= 2 * dirt_factor
 
-		var/obj/item/shirt = get_item_by_slot(ITEM_SLOT_SHIRT)
-		if(shirt && HAS_BLOOD_DNA(shirt))
-			hygiene_adjustment -= 2 * HYGIENE_FACTOR
+	var/obj/item/cloak = get_item_by_slot(ITEM_SLOT_CLOAK)
+	if(cloak && HAS_BLOOD_DNA(cloak))
+		hygiene_adjustment -= 2 * dirt_factor
 
-		var/obj/item/cloak = get_item_by_slot(ITEM_SLOT_CLOAK)
-		if(cloak && HAS_BLOOD_DNA(cloak))
-			hygiene_adjustment -= 2 * HYGIENE_FACTOR
+	var/obj/item/pants = get_item_by_slot(ITEM_SLOT_PANTS)
+	if(pants && HAS_BLOOD_DNA(pants))
+		hygiene_adjustment -= 3 * dirt_factor
 
-		var/obj/item/pants = get_item_by_slot(ITEM_SLOT_PANTS)
-		if(pants && HAS_BLOOD_DNA(pants))
-			hygiene_adjustment -= 3 * HYGIENE_FACTOR
+	var/obj/item/armor = get_item_by_slot(ITEM_SLOT_ARMOR)
+	if(armor && HAS_BLOOD_DNA(armor))
+		hygiene_adjustment -= 3 * dirt_factor
 
-		var/obj/item/armor = get_item_by_slot(ITEM_SLOT_ARMOR)
-		if(armor && HAS_BLOOD_DNA(armor))
-			hygiene_adjustment -= 3 * HYGIENE_FACTOR
+	var/obj/item/shoes = get_item_by_slot(ITEM_SLOT_SHOES)
+	if(shoes && HAS_BLOOD_DNA(shoes))
+		hygiene_adjustment -= 0.5 * dirt_factor
 
-		var/obj/item/shoes = get_item_by_slot(ITEM_SLOT_SHOES)
-		if(shoes && HAS_BLOOD_DNA(shoes))
-			hygiene_adjustment -= 0.5 * HYGIENE_FACTOR
-
-		//Are we bathing?
-		var/current_turf = get_turf(src)
-		if(istype(current_turf, /turf/open/water))
-			var/turf/open/water/bathing_liquid = current_turf
-			hygiene_adjustment += bathing_liquid.cleanliness_factor
+	//Are we bathing?
+	var/current_turf = get_turf(src)
+	if(istype(current_turf, /turf/open/water))
+		var/turf/open/water/bathing_liquid = current_turf
+		hygiene_adjustment += bathing_liquid.cleanliness_factor
 
 
-		adjust_hygiene(hygiene_adjustment)
+	adjust_hygiene(hygiene_adjustment)
 	dna?.species.handle_hygiene(src)
 
 ///FIRE CODE

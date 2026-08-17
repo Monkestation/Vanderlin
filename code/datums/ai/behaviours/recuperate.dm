@@ -30,8 +30,7 @@
 		pawn.adjustBruteLoss( (max_hp * -brute_heal) )
 		pawn.health = clamp(pawn.health, 0, max_hp)
 		pawn.adjust_fire_stacks(-DEFAULT_FIRE_HEAL)
-		pawn.blood_volume += pawn.blood_volume + DEFAULT_BLOOD_RECOVERY
-		pawn.blood_volume = clamp(pawn.blood_volume, 0, BLOOD_VOLUME_NORMAL)
+		pawn.adjust_blood_volume(DEFAULT_BLOOD_RECOVERY, 0, BLOOD_VOLUME_NORMAL)
 
 	finish_action(controller, TRUE)
 

@@ -11,6 +11,7 @@
 	bodyparts = list(/obj/item/bodypart/chest/spirit, /obj/item/bodypart/head/spirit, /obj/item/bodypart/l_arm/spirit,
 					/obj/item/bodypart/r_arm/spirit, /obj/item/bodypart/r_leg/spirit, /obj/item/bodypart/l_leg/spirit, /obj/item/bodypart/mouth)
 	hud_type = /datum/hud/spirit
+	/// If the ghost is able to enter the carriage (return to lobby). Also prevents them from participating in death arena.
 	var/paid = FALSE
 	var/beingmoved = FALSE //repurposed for speak with soul
 	var/livingname = null
@@ -58,7 +59,7 @@
 	put_in_hands(L)
 	AddElement(/datum/element/footstep, FOOTSTEP_MOB_BAREFOOT, 1, -6)
 
-/mob/living/carbon/spirit/create_internal_organs()
+/mob/living/carbon/spirit/proc/create_internal_organs()
 	internal_organs += new /obj/item/organ/lungs
 	internal_organs += new /obj/item/organ/heart
 	internal_organs += new /obj/item/organ/brain
@@ -67,7 +68,6 @@
 	internal_organs += new /obj/item/organ/ears
 	internal_organs += new /obj/item/organ/liver
 	internal_organs += new /obj/item/organ/stomach
-	..()
 
 /mob/living/carbon/spirit/Destroy()
 	GLOB.spirit_list -= src
@@ -199,12 +199,14 @@
 	. = FALSE
 	if(QDELETED(corpse) || (corpse.stat != DEAD))
 		return
-	// funeral + buried will make Journey to Underworld function as return to lobby
 	if(ishuman(corpse))
 		var/mob/living/carbon/human/human_corpse = corpse
 		if(!human_corpse.funeral)
 			human_corpse.funeral = TRUE
 			. = TRUE
+	// Animals have no mind so we have no ghost or spirit to talk to. They still are 'pacified' though.
+	else if(isanimal(corpse))
+		return TRUE
 	var/datum/mind/corpse_mind = get_mind(corpse, include_last = TRUE)
 	if(corpse_mind?.remove_antag_datum(/datum/antagonist/zombie))
 		. = TRUE
@@ -230,7 +232,8 @@
 						to_chat(spirit, span_rose("A coin falls from above into your hands!"))
 					return TRUE
 	else
-		ghost = corpse.ghostize(force_respawn = TRUE)
+		corpse_mind.remove_antag_datum(/datum/antagonist/zombie)
+		ghost = corpse.ghostize()
 
 	if(ghost)
 		var/user_acknowledgement = user ? user.real_name : "a mysterious force"

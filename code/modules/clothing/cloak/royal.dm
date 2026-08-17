@@ -15,18 +15,8 @@
 	detail_tag = "_det"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
-
-/obj/item/clothing/cloak/lordcloak/Initialize(mapload, ...)
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/cloak/lord)
-
-/obj/item/clothing/cloak/lordcloak/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+	has_storage = TRUE
+	storage_component_path = /datum/component/storage/concrete/grid/cloak/lord
 
 /obj/item/clothing/cloak/lordcloak/ladycloak
 	name = "ladylike shortcloak"

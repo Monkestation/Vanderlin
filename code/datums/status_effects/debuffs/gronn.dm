@@ -2,6 +2,7 @@
 	id = "naledimask"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/shamanhood
 	effectedstats = list(STATKEY_LCK = -3)
+	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/shamanhood
 	name = "Lost Hood"

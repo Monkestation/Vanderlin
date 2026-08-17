@@ -2,6 +2,7 @@
 	name = "orc"
 	icon = 'icons/roguetown/mob/monster/orc.dmi'
 	icon_state = "orc"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/orc
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/orc, /obj/item/bodypart/head/orc, /obj/item/bodypart/l_arm/orc,
@@ -14,7 +15,6 @@
 /mob/living/carbon/human/species/orc/slaved
 	ai_controller = /datum/ai_controller/human_npc
 	dodgetime = 15
-	canparry = TRUE
 	wander = FALSE
 
 /mob/living/carbon/human/species/orc/slaved/Initialize()
@@ -33,7 +33,6 @@
 /mob/living/carbon/human/species/orc/npc
 	ai_controller = /datum/ai_controller/human_npc
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	var/orc_outfit
 	wander = FALSE
@@ -58,11 +57,8 @@
 /mob/living/carbon/human/species/orc/ambush/after_creation()
 	..()
 	job = "Ambush Orc"
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/orc/ambush)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -120,10 +116,6 @@
 	apply_overlay(BODY_LAYER)
 	dna.species.update_damage_overlays()
 
-/mob/living/carbon/human/species/orc/update_inv_head(hide_nonstandard = FALSE)
-	update_wearable()
-/mob/living/carbon/human/species/orc/update_inv_armor()
-	update_wearable()
 
 /mob/living/carbon/human/species/orc/Initialize()
 	. = ..()
@@ -172,22 +164,16 @@
 	if(length(quirks))
 		clear_quirks()
 	update_eyes()
-	faction = list(FACTION_ORCS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_ORCS)
 	name = "orc"
 	real_name = "orc"
-	ADD_TRAIT(src, TRAIT_HEAVYARMOR, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
+	add_traits(list(TRAIT_HEAVYARMOR, TRAIT_NOMOOD, TRAIT_NOHUNGER, TRAIT_CRITICAL_WEAKNESS), SPECIES_TRAIT)
 
 /datum/species/orc
 	name = "orc"
 	id = SPEC_ID_ORC
 	species_traits = list(NO_UNDERWEAR)
-	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE,TRAIT_CRITICAL_WEAKNESS, TRAIT_NASTY_EATER, TRAIT_LEECHIMMUNE, TRAIT_INHUMENCAMP)
+	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RADIMMUNE,TRAIT_CRITICAL_WEAKNESS, TRAIT_NASTY_EATER, TRAIT_LEECHIMMUNE, TRAIT_INHUMENCAMP)
 	nojumpsuit = 1
 	sexes = 1
 	damage_overlay_type = ""
@@ -347,11 +333,8 @@
 
 /mob/living/carbon/human/species/orc/tribal/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/orc/tribal)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -401,11 +384,8 @@
 /mob/living/carbon/human/species/orc/warrior/after_creation()
 	..()
 	AddComponent(/datum/component/ai_aggro_system)
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/orc/warrior)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -474,11 +454,8 @@
 /mob/living/carbon/human/species/orc/marauder/after_creation()
 	..()
 	AddComponent(/datum/component/ai_aggro_system)
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/orc/marauder)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -533,11 +510,8 @@
 /mob/living/carbon/human/species/orc/warlord/after_creation()
 	..()
 	AddComponent(/datum/component/ai_aggro_system)
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/orc/warlord)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 
@@ -580,11 +554,8 @@
 
 /mob/living/carbon/human/species/orc/warlord/skilled/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/npc/orc/warlord)
 	dodgetime = 15
-	canparry = TRUE
 	flee_in_pain = FALSE
 	wander = TRUE
 	configure_mind()

@@ -8,7 +8,7 @@
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/craft/alchemy = 20,
-		/datum/attribute/skill/misc/medicine = 20
+		/datum/attribute/skill/misc/medicine = 30
 	)
 
 /datum/attribute_holder/sheet/job/clinicapprentice
@@ -21,7 +21,7 @@
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/craft/alchemy = 20,
-		/datum/attribute/skill/misc/medicine = 20
+		/datum/attribute/skill/misc/medicine = 35
 	)
 
 /datum/job/clinicapprentice
@@ -33,13 +33,15 @@
 	Though most likely you will end up as one of the many countless Physickers roaming Faience."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	display_order = JDO_CLINICAPPRENTICE
 	total_positions = 4
 	spawn_positions = 4
 	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 	give_bank_account = 5
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	//ALL races and ALL ages are intended
 	//a contrast to Noc gatekeeping knowledge, anyone is allowed to learn about Pestra's medicine and alchemy
@@ -84,3 +86,4 @@
 	neck = /obj/item/storage/belt/pouch/cloth
 	wrists = /obj/item/storage/keyring/clinicapprentice
 	belt = /obj/item/storage/belt/leather/rope
+	beltl = /obj/item/storage/fancy/ifak

@@ -211,7 +211,7 @@ SUBSYSTEM_DEF(triumphs)
 					attempt_to_unbuy_triumph_condition(C, active_datum, reason = "CONFLICTS")
 
 	triumph_buy.on_buy(C)
-	call_menu_refresh()
+	add_abstract_elastic_data(ELASCAT_SHOP, "[triumph_buy.name]", 1)
 	return TRUE
 
 /// This occurs when you try to unbuy a triumph condition and removes it, also used for refunding due to conflicts
@@ -254,48 +254,8 @@ SUBSYSTEM_DEF(triumphs)
 /datum/controller/subsystem/triumphs/proc/startup_triumphs_menu(client/C)
 	if(!C || !triumph_buys_enabled)
 		return
-	var/datum/triumph_buy_menu/triumph_buy = active_triumph_menus[C.ckey]
-	if(triumph_buy)
-		triumph_buy.linked_client = C
-		triumph_buy.triumph_menu_startup_slop()
-		return
-	var/datum/triumph_buy_menu/BIGBOY = new()
-	BIGBOY.linked_client = C
-	active_triumph_menus[C.ckey] = BIGBOY
-	BIGBOY.triumph_menu_startup_slop()
-
-/// This tells all alive triumph datums to re_update their visuals, shitty but ya
-/datum/controller/subsystem/triumphs/proc/call_menu_refresh()
-	for(var/MENS in active_triumph_menus)
-		var/datum/triumph_buy_menu/triumph_buy = active_triumph_menus[MENS]
-		if(!triumph_buy) // Insure we actually have something yes?
-			active_triumph_menus.Remove(MENS)
-			continue
-
-		if(!triumph_buy.linked_client) // We have something and it has no client
-			active_triumph_menus.Remove(MENS)
-			qdel(triumph_buy)
-			continue
-
-		triumph_buy.show_menu()
-
-/datum/controller/subsystem/triumphs/proc/refresh_communal_menus()
-	for(var/ckey in active_triumph_menus)
-		var/datum/triumph_buy_menu/menu = active_triumph_menus[ckey]
-		if(menu && menu.current_category == TRIUMPH_CAT_COMMUNAL)
-			menu.show_menu()
-
-/// We cleanup the datum thats just holding the stuff for displaying the menu.
-/datum/controller/subsystem/triumphs/proc/remove_triumph_buy_menu(client/C)
-	if(C && active_triumph_menus[C.ckey])
-		var/datum/triumph_buy_menu/triumph_buy = active_triumph_menus[C.ckey]
-		C << browse(null, "window=triumph_buy_window")
-		active_triumph_menus.Remove(C.ckey)
-		qdel(triumph_buy)
-
-/// Called from the place its slopped in in SSticker, this will occur right after the gamemode starts ideally, aka roundstart.
-/datum/controller/subsystem/triumphs/proc/fire_on_PostSetup()
-	call_menu_refresh()
+	var/datum/tgui_triumph_shop/ui = new /datum/tgui_triumph_shop(C)
+	ui.ui_interact(C.mob)
 
 /// We save everything when its time for reboot
 /datum/controller/subsystem/triumphs/proc/end_triumph_saving_time()

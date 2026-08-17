@@ -1,0 +1,2334 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ar" = (
+/turf/open/openspace,
+/area/under/tomb/indoors/rest)
+"aw" = (
+/obj/structure/spider/stickyweb,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"az" = (
+/turf/open/floor/blocks/newstone/alt,
+/area/under/tomb/indoors/rest)
+"aR" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/glass/cup/wooden,
+/obj/item/reagent_containers/food/snacks/butter,
+/obj/item/kitchen/rollingpin,
+/obj/item/weapon/knife/villager,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"bf" = (
+/obj/item/clothing/head/fancyhat,
+/obj/item/clothing/shirt/undershirt/fancy,
+/obj/item/clothing/cloak/poncho/fancycoat,
+/obj/structure/mannequin/male,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"bE" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass/bush/wall/tall/tundra,
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"bO" = (
+/obj/structure/wild_plant/nospread/apple,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"bS" = (
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"ca" = (
+/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
+/obj/structure/spider/stickyweb{
+	dir = 1
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"ce" = (
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"cu" = (
+/obj/item/clothing/armor/gambeson/arming/fencer,
+/obj/structure/mannequin/male,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"cv" = (
+/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
+/obj/item/clothing/head/flowercrown/salvia{
+	pixel_y = -1
+	},
+/obj/item/clothing/head/peaceflower,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"cL" = (
+/obj/structure/table/wood,
+/obj/item/cooking/pan,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"cR" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"dj" = (
+/obj/structure/hotspring/border/two,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"dq" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"dA" = (
+/obj/structure/mirror/fancy,
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"dC" = (
+/obj/structure/hotspring/border/three,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"dH" = (
+/obj/structure/hotspring/border/twelve,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"dQ" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"ea" = (
+/turf/open/floor/abyss_sand/path,
+/area/under/tomb/indoors/rest)
+"eb" = (
+/turf/closed/mineral/bedrock,
+/area/under/tomb/indoors/rest)
+"ef" = (
+/obj/structure/hotspring/border/eleven,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"ei" = (
+/obj/structure/door/violet,
+/turf/open/floor/blocks/newstone/alt,
+/area/under/tomb/indoors/rest)
+"eq" = (
+/obj/structure/mannequin/male,
+/obj/item/clothing/shirt/undershirt/artificer,
+/obj/item/clothing/head/stewardtophat,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"ev" = (
+/obj/structure/flora/grass/herb/rosa,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"eF" = (
+/obj/structure/table/wood/fancy/purple,
+/obj/item/bouquet/rosa,
+/obj/item/clothing/ring/silver/calm,
+/turf/open/floor/blocks/newstone/alt,
+/area/under/tomb/indoors/rest)
+"fb" = (
+/obj/structure/spider/stickyweb{
+	dir = 1
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"fM" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"fP" = (
+/obj/effect/decal/cleanable/dirt/cobweb,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"fW" = (
+/obj/effect/decal/cleanable/debris/glass,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"gm" = (
+/obj/structure/table/wood/bar,
+/obj/structure/bars/bent,
+/obj/item/weapon/knife/scissors/steel,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"gw" = (
+/obj/structure/door/swing,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"gy" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 1
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"gT" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 4
+	},
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"hq" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"ih" = (
+/obj/structure/bed/wool/double,
+/obj/item/bedsheet/fabric_double,
+/obj/structure/carpet/purple,
+/turf/open/floor/blocks/newstone/alt,
+/area/under/tomb/indoors/rest)
+"il" = (
+/obj/machinery/light/fueled/oven,
+/turf/closed/wall/mineral/decostone/long{
+	color = "#e09dda";
+	dir = 1
+	},
+/area/under/tomb/indoors/rest)
+"iR" = (
+/obj/machinery/light/fueled/firebowl,
+/obj/structure/fluff/railing/tall/stone{
+	dir = 8
+	},
+/turf/open/floor/abyss_sand/path,
+/area/under/tomb/indoors/rest)
+"iW" = (
+/obj/item/clothing/head/peaceflower{
+	pixel_x = -8;
+	pixel_y = 7
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"jq" = (
+/obj/structure/bed/wool,
+/obj/item/bedsheet/wool,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"js" = (
+/obj/item/clothing/head/peaceflower{
+	pixel_x = -8;
+	pixel_y = 7
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"jz" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"jE" = (
+/obj/structure/table/wood/bar,
+/obj/structure/bars/bent,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"jK" = (
+/mob/living/simple_animal/pet/cat/cabbit{
+	color = "#e09dda"
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"jV" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/spider/stickyweb{
+	dir = 1
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"kd" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"kt" = (
+/obj/effect/decal/cleanable/debris/wood,
+/obj/item/clothing/head/crown/wooden,
+/obj/structure/mannequin/male,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"kD" = (
+/obj/structure/mannequin/male/female,
+/obj/item/clothing/head/flowercrown/rosa,
+/obj/item/clothing/armor/gambeson/heavy/winterdress,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"kM" = (
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
+"kQ" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/fruit/plum,
+/obj/item/reagent_containers/food/snacks/produce/fruit/plum,
+/obj/item/reagent_containers/food/snacks/produce/fruit/plum,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/egg,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"lB" = (
+/obj/item/clothing/head/peaceflower,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"lF" = (
+/turf/closed/wall/mineral/decostone/long{
+	color = "#e09dda"
+	},
+/area/under/tomb/indoors/rest)
+"lS" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"lT" = (
+/obj/machinery/tanningrack{
+	pixel_x = -11;
+	pixel_y = -4
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"mt" = (
+/obj/structure/wild_plant/nospread/poppy{
+	name = "wild poppies";
+	pixel_x = 4;
+	pixel_y = -10
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"mU" = (
+/obj/structure/wild_plant/nospread/poppy{
+	name = "wild poppies";
+	pixel_x = 4;
+	pixel_y = -10
+	},
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"mW" = (
+/mob/living/simple_animal/pet/cat/cabbit{
+	color = "#e09dda"
+	},
+/obj/structure/fluff/railing/tall/stone{
+	dir = 8
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"ne" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/obj/structure/flora/grass/bush/wall/tall/tundra,
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"nn" = (
+/obj/structure/flora/grass/herb/rosa,
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"nE" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 1
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"ok" = (
+/obj/structure/wild_plant/nospread/apple,
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"ol" = (
+/obj/structure/flora/hotspring_rocks/small/three,
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"op" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"oy" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 2
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"oU" = (
+/obj/item/clothing/cloak/apron/cook,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"pw" = (
+/obj/item/clothing/head/peaceflower{
+	pixel_x = -8;
+	pixel_y = 7
+	},
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"pK" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 4
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"pN" = (
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"pO" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/turf/open/openspace,
+/area/under/tomb/indoors/rest)
+"pP" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"qi" = (
+/obj/structure/table/church{
+	dir = 1
+	},
+/obj/item/clothing/neck/psycross/silver/divine/eora{
+	pixel_y = 8
+	},
+/obj/item/clothing/ring/band,
+/obj/item/clothing/ring/silver/saffira,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
+"qB" = (
+/obj/structure/hotspring/border/ten,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"qN" = (
+/turf/closed/wall/mineral/decostone/long{
+	color = "#e09dda";
+	dir = 1
+	},
+/area/under/tomb/indoors/rest)
+"qV" = (
+/obj/structure/flora/sakura{
+	pixel_x = -53;
+	pixel_y = 18
+	},
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"rh" = (
+/obj/structure/fluff/railing/tall/stone,
+/turf/open/openspace,
+/area/under/tomb/indoors/rest)
+"ry" = (
+/obj/item/fishingrod,
+/turf/open/floor/abyss_sand/path,
+/area/under/tomb/indoors/rest)
+"sa" = (
+/obj/item/clothing/cloak/half/duelcape,
+/turf/open/floor/blocks/newstone/alt,
+/area/under/tomb/indoors/rest)
+"sc" = (
+/obj/structure/hotspring/border/seven,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"sf" = (
+/obj/structure/hotspring/border/eight,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"sn" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"sz" = (
+/obj/structure/closet/crate/crafted_closet,
+/turf/open/floor/blocks/newstone/alt,
+/area/under/tomb/indoors/rest)
+"sV" = (
+/obj/structure/mannequin/male/female,
+/obj/effect/decal/cleanable/debris/wood,
+/obj/item/clothing/shirt/dress/silkydress,
+/obj/item/clothing/head/flowercrown/salvia,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"tc" = (
+/obj/structure/hotspring/border/five,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"vh" = (
+/obj/item/reagent_containers/glass/bucket/wooden/alter,
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"vt" = (
+/obj/structure/fluff/statue/small,
+/obj/item/clothing/head/flowercrown/salvia{
+	pixel_y = -11
+	},
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"wv" = (
+/obj/structure/mannequin/male/female,
+/obj/item/clothing/shirt/dress/stewarddress,
+/obj/item/clothing/head/crown/circlet/goldheaddress,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"wX" = (
+/obj/structure/table/church/m,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
+"xi" = (
+/obj/structure/table/church,
+/obj/item/clothing/neck/psycross/silver/divine/eora{
+	pixel_y = 6
+	},
+/obj/item/clothing/ring/band,
+/obj/item/clothing/ring/silver/saffira,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
+"xu" = (
+/obj/machinery/light/fueledstreet/blue/midlamp{
+	pixel_y = 0;
+	pixel_x = -15
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"xB" = (
+/obj/structure/spider/stickyweb/solo,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"yG" = (
+/obj/item/clothing/neck/woolen,
+/obj/item/clothing/pants/tights/colored/guardsecond,
+/obj/item/clothing/shirt/undershirt/artificer,
+/obj/item/clothing/head/crown/circlet,
+/obj/structure/mannequin/male{
+	dir = 8
+	},
+/obj/item/clothing/shoes/simpleshoes/colored,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
+"zL" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"Al" = (
+/obj/machinery/tanningrack,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"Aq" = (
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"At" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/blocks/newstone/alt,
+/area/under/tomb/indoors/rest)
+"Ax" = (
+/obj/structure/fluff/statue,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"AD" = (
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"AQ" = (
+/obj/machinery/light/fueled/torchholder/hotspring/standing{
+	pixel_y = 30;
+	pixel_x = -15
+	},
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"Bo" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 4
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"Bx" = (
+/obj/structure/table/wood,
+/obj/structure/fluff/millstone{
+	pixel_x = 2;
+	pixel_y = 7
+	},
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"BL" = (
+/obj/structure/chair/hotspring_bench/right,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"BX" = (
+/obj/machinery/light/fueled/hearth,
+/obj/item/reagent_containers/glass/bucket/pot{
+	pixel_y = 1
+	},
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"Cb" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"Ce" = (
+/obj/machinery/light/fueledstreet/blue/midlamp{
+	pixel_y = 0;
+	pixel_x = -15
+	},
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"CS" = (
+/obj/effect/decal/cleanable/debris/glass,
+/obj/machinery/light/fueledstreet/blue/midlamp{
+	pixel_y = 0;
+	pixel_x = -15
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"Dv" = (
+/obj/structure/flora/grass/herb/necralily,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"Eb" = (
+/obj/structure/door/violet,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"Ej" = (
+/obj/structure/stairs,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"EG" = (
+/obj/structure/fluff/psycross{
+	color = "#e09dda";
+	pixel_y = 20
+	},
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
+"Fi" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/turf/closed/wall/mineral/decostone/long{
+	color = "#e09dda";
+	dir = 1
+	},
+/area/under/tomb/indoors/rest)
+"Fn" = (
+/obj/structure/flora/hotspring_rocks/grassy,
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"Fq" = (
+/obj/structure/stairs{
+	dir = 8
+	},
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"FS" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 2
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"FX" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 8
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"GL" = (
+/obj/structure/dye_bin/luxury,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"GP" = (
+/obj/structure/spider/stickyweb{
+	dir = 4
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"GR" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/openspace,
+/area/under/tomb/indoors/rest)
+"GS" = (
+/obj/structure/window{
+	color = "#e09dda"
+	},
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"Hd" = (
+/obj/structure/hotspring/border/three,
+/obj/machinery/light/fueled/torchholder/hotspring/standing{
+	pixel_y = 23;
+	pixel_x = -15
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"Hi" = (
+/obj/structure/flora/grass{
+	color = "#e09dda"
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"HM" = (
+/obj/structure/hotspring/border/thirteen,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"HQ" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"HS" = (
+/obj/item/orphan_toy/wolf,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"Iu" = (
+/obj/structure/dye_bin/luxury,
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"IF" = (
+/obj/effect/decal/remains/human,
+/obj/item/clothing/neck/psycross/silver/divine/eora{
+	pixel_y = 2;
+	pixel_x = -13
+	},
+/obj/item/clothing/head/peaceflower{
+	pixel_y = 12
+	},
+/obj/item/clothing/shirt/undershirt/artificer,
+/obj/item/clothing/pants/tights/colored/guardsecond,
+/obj/item/reagent_containers/glass/bottle{
+	pixel_y = 10;
+	pixel_x = 13
+	},
+/obj/item/reagent_containers/glass/bottle{
+	pixel_y = -3;
+	pixel_x = -7
+	},
+/obj/item/needle/blessed,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"IS" = (
+/obj/structure/wild_plant/nospread/apple,
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"IT" = (
+/obj/item/recipe_book/gravemaking,
+/obj/item/reagent_containers/glass/bottle,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"IU" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 4
+	},
+/turf/open/openspace,
+/area/under/tomb/indoors/rest)
+"Jf" = (
+/obj/machinery/loom,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"Ju" = (
+/obj/structure/fluff/clock,
+/turf/open/floor/blocks/newstone/alt,
+/area/under/tomb/indoors/rest)
+"JK" = (
+/obj/effect/lily_petal/two,
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"JP" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"JR" = (
+/obj/structure/fluff/railing/tall/stone,
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"Ka" = (
+/obj/effect/decal/cleanable/dirt/cobweb{
+	dir = 1
+	},
+/obj/structure/spider/stickyweb{
+	dir = 1
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"KF" = (
+/obj/effect/decal/cleanable/debris/stone,
+/obj/structure/spider/stickyweb{
+	dir = 1
+	},
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"KN" = (
+/obj/item/weapon/shovel,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"LF" = (
+/mob/living/simple_animal/pet/cat/cabbit{
+	color = "#e09dda"
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"LM" = (
+/turf/open/floor/grass/yel,
+/area/under/tomb/indoors/rest)
+"LN" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"Mc" = (
+/obj/machinery/light/fueled/torchholder/metal_torch/west,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"Mh" = (
+/obj/structure/flora/grass/bush/wall/tall/tundra,
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"MP" = (
+/obj/structure/hotspring/border,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"Nc" = (
+/obj/item/reagent_containers/glass/bottle,
+/obj/item/reagent_containers/glass/bottle{
+	pixel_y = -10;
+	pixel_x = 13
+	},
+/obj/item/reagent_containers/glass/bottle{
+	pixel_y = -10;
+	pixel_x = 13
+	},
+/obj/item/reagent_containers/glass/bottle{
+	pixel_y = 10;
+	pixel_x = 13
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"No" = (
+/obj/structure/flora/grass,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"Nu" = (
+/obj/structure/dye_bin,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"NK" = (
+/obj/effect/dungeon_directional_helper/west{
+	dir = 4
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"OL" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"Po" = (
+/obj/structure/chair/wood/alt/chair_noble/purple,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"PF" = (
+/obj/machinery/light/fueledstreet/blue/midlamp{
+	pixel_y = 0;
+	pixel_x = -15
+	},
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"PS" = (
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"Qp" = (
+/obj/structure/stairs,
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"Qy" = (
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"Qz" = (
+/obj/structure/hotspring/border/nine,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"Ra" = (
+/obj/effect/decal/cleanable/debris/glass,
+/obj/effect/decal/cleanable/debris/glass,
+/obj/item/natural/glass/shard,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"Rl" = (
+/obj/structure/hotspring/border/eleven,
+/obj/machinery/light/fueled/torchholder/hotspring/standing{
+	pixel_y = 23;
+	pixel_x = -15
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"RA" = (
+/obj/structure/flora/grass,
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"Sh" = (
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/abyss_sand/path,
+/area/under/tomb/indoors/rest)
+"Sv" = (
+/obj/structure/chair/hotspring_bench/left,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"SA" = (
+/turf/open/water/clean,
+/area/under/tomb/indoors/rest)
+"SU" = (
+/turf/closed/wall/mineral/stonebrick{
+	color = "#e09dda"
+	},
+/area/under/tomb/indoors/rest)
+"Te" = (
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"Uw" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"Vx" = (
+/obj/structure/well,
+/turf/open/floor/grass/healthy,
+/area/under/tomb/indoors/rest)
+"VI" = (
+/obj/structure/hotspring/border/fourteen,
+/turf/open/floor/dirt/road,
+/area/under/tomb/indoors/rest)
+"WK" = (
+/obj/structure/wild_plant/nospread/sunflower,
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"Xg" = (
+/obj/machinery/light/fueledstreet/blue/midlamp{
+	pixel_y = 0;
+	pixel_x = -15
+	},
+/obj/machinery/light/fueledstreet/blue/midlamp{
+	pixel_y = 0;
+	pixel_x = -15
+	},
+/turf/open/floor/grass/mixyel,
+/area/under/tomb/indoors/rest)
+"Xu" = (
+/obj/structure/mannequin/male/female,
+/obj/item/clothing/shirt/ornate/dress,
+/obj/item/clothing/head/flowercrown/rosa,
+/turf/open/floor/tile/diamond/purple,
+/area/under/tomb/indoors/rest)
+"Xz" = (
+/obj/structure/healing_spring,
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"Yy" = (
+/obj/effect/decal/cleanable/debris/glass,
+/obj/item/natural/glass/shard,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"YD" = (
+/obj/item/orphan_toy/knight,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"YH" = (
+/obj/item/orphan_toy/skeleton,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"YM" = (
+/obj/structure/fluff/railing/tall/stone,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
+"YO" = (
+/turf/open/water/hotspring,
+/area/under/tomb/indoors/rest)
+"Zk" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/under/tomb/indoors/rest)
+"ZK" = (
+/obj/item/bin/water,
+/turf/open/floor/ruinedwood/two,
+/area/under/tomb/indoors/rest)
+"ZN" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/turf/open/floor/abyss_sand/path,
+/area/under/tomb/indoors/rest)
+"ZT" = (
+/obj/structure/mannequin/male/female{
+	dir = 4
+	},
+/obj/item/clothing/head/flowercrown/calendula,
+/obj/item/clothing/shirt/ornate/dress,
+/obj/item/clothing/neck/woolen,
+/obj/item/clothing/pants/tights/colored/guardsecond,
+/obj/item/clothing/shoes/sandals,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
+
+(1,1,1) = {"
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+SU
+LN
+Qy
+SU
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+"}
+(2,1,1) = {"
+eb
+SU
+lF
+sn
+sn
+lF
+lF
+sn
+sn
+SU
+xu
+SU
+Qy
+Qy
+SU
+Te
+Aq
+bO
+SU
+lF
+lF
+dA
+lF
+SU
+eb
+"}
+(3,1,1) = {"
+eb
+qN
+Jf
+bS
+gm
+Iu
+Nu
+bS
+bS
+qN
+JR
+Fq
+Qy
+Qy
+zL
+ne
+Aq
+Aq
+Fi
+sz
+az
+sa
+At
+Fi
+eb
+"}
+(4,1,1) = {"
+eb
+Fi
+lT
+Po
+jE
+bS
+bS
+bS
+bS
+Eb
+ce
+AD
+Qy
+Qy
+AD
+ce
+Ce
+Aq
+qN
+az
+az
+az
+SU
+qN
+eb
+"}
+(5,1,1) = {"
+eb
+qN
+bS
+bS
+jE
+bS
+bS
+bS
+bS
+qN
+ce
+AD
+Qy
+Qy
+AD
+WK
+LM
+LM
+qN
+ih
+eF
+az
+Ju
+qN
+eb
+"}
+(6,1,1) = {"
+eb
+qN
+bS
+bS
+jE
+bS
+SU
+lF
+lF
+SU
+IS
+Qy
+Qy
+Qy
+AD
+ok
+AD
+WK
+SU
+lF
+lF
+ei
+lF
+SU
+eb
+"}
+(7,1,1) = {"
+eb
+qN
+dQ
+bS
+gw
+bS
+qN
+ev
+Uw
+ce
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+Mh
+AD
+vh
+Aq
+Aq
+Qy
+Aq
+bO
+eb
+"}
+(8,1,1) = {"
+eb
+qN
+SU
+bS
+jE
+Mc
+qN
+Uw
+RA
+Qy
+HM
+sc
+sc
+MP
+Qy
+Qy
+iW
+AD
+Vx
+ce
+Aq
+Qy
+mt
+Aq
+eb
+"}
+(9,1,1) = {"
+eb
+SU
+lF
+sn
+lF
+lF
+SU
+Qy
+Qy
+Qy
+tc
+AQ
+pw
+qB
+MP
+Qy
+Qy
+lB
+SU
+Te
+mU
+Qy
+pN
+SU
+eb
+"}
+(10,1,1) = {"
+eb
+Aq
+pK
+Aq
+AD
+bE
+Qy
+Qy
+HM
+sc
+dH
+vt
+Xz
+JK
+qB
+MP
+Qy
+Qy
+RA
+ce
+PF
+Qy
+gT
+Aq
+eb
+"}
+(11,1,1) = {"
+SU
+SU
+kd
+RA
+AD
+Xg
+Qy
+Qy
+tc
+YO
+YO
+qV
+Fn
+YO
+pw
+dj
+Qy
+Qy
+Qy
+No
+No
+Qy
+Qp
+SU
+SU
+"}
+(12,1,1) = {"
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+VI
+ef
+YO
+JK
+YO
+Xz
+YO
+dj
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+Hi
+Qy
+Hi
+"}
+(13,1,1) = {"
+gy
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+VI
+sf
+ef
+YO
+ol
+YO
+dj
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+Qy
+oy
+"}
+(14,1,1) = {"
+Qy
+Qy
+Qy
+LF
+Qy
+Qy
+Qy
+Qy
+Qy
+BL
+Qy
+VI
+ef
+YO
+JK
+dj
+Qy
+Hi
+Qy
+Qy
+Hi
+Qy
+Qy
+Qy
+Hi
+"}
+(15,1,1) = {"
+SU
+SU
+JP
+Uw
+Aq
+Mh
+AD
+Qy
+Qy
+Sv
+Qy
+HM
+dH
+pw
+Qz
+Hd
+Qy
+Hi
+Qy
+No
+RA
+AD
+Qp
+SU
+SU
+"}
+(16,1,1) = {"
+eb
+js
+mW
+js
+jK
+Aq
+Mh
+Qy
+Hi
+Qy
+Qy
+VI
+Rl
+YO
+dj
+Qy
+Qy
+Qy
+Qy
+RA
+RA
+ea
+iR
+ea
+eb
+"}
+(17,1,1) = {"
+eb
+dq
+Aq
+Ax
+Uw
+Aq
+Aq
+Mh
+Hi
+Hi
+Qy
+Qy
+VI
+sf
+dC
+Qy
+Qy
+AD
+RA
+PF
+ea
+ea
+SA
+SA
+eb
+"}
+(18,1,1) = {"
+eb
+SU
+lF
+lF
+lF
+lF
+Aq
+AD
+Mh
+Mh
+Qy
+Qy
+Qy
+Qy
+Qy
+AD
+AD
+AD
+ea
+ea
+ea
+SA
+SA
+SA
+eb
+"}
+(19,1,1) = {"
+eb
+qN
+xi
+kM
+ZT
+kM
+bO
+Aq
+Aq
+AD
+Mh
+Mh
+Qy
+Qy
+PF
+AD
+ea
+ry
+SA
+SA
+SA
+SA
+SA
+SA
+eb
+"}
+(20,1,1) = {"
+eb
+qN
+wX
+EG
+kM
+kM
+Aq
+Aq
+js
+Aq
+Aq
+pN
+Qy
+Qy
+nn
+Sh
+ea
+SA
+SA
+SA
+SA
+SA
+SA
+SA
+eb
+"}
+(21,1,1) = {"
+eb
+qN
+qi
+kM
+yG
+kM
+Aq
+IT
+ev
+Aq
+Aq
+AD
+Qy
+Qy
+AD
+ea
+SA
+SA
+SA
+SA
+SA
+SA
+SA
+SA
+eb
+"}
+(22,1,1) = {"
+eb
+SU
+lF
+lF
+lF
+lF
+ev
+Aq
+Aq
+Aq
+jK
+AD
+Qy
+Qy
+AD
+ea
+SA
+SA
+SA
+SA
+SA
+SA
+SA
+SA
+eb
+"}
+(23,1,1) = {"
+eb
+cv
+IF
+Nc
+Ra
+Aq
+Aq
+bO
+jK
+Aq
+YM
+fM
+Qy
+Qy
+fM
+ZN
+SA
+SA
+SA
+SA
+SA
+SA
+SA
+SA
+eb
+"}
+(24,1,1) = {"
+eb
+Dv
+Dv
+Yy
+Aq
+CS
+KN
+ev
+Aq
+Aq
+ev
+SU
+Qy
+Qy
+SU
+ea
+ea
+SA
+SA
+SA
+SA
+SA
+SA
+SA
+eb
+"}
+(25,1,1) = {"
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+SU
+NK
+Qy
+SU
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+"}
+
+(1,1,2) = {"
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+ar
+ar
+Aq
+pP
+Aq
+Aq
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+"}
+(2,1,2) = {"
+eb
+SU
+lF
+lF
+lF
+lF
+lF
+lF
+lF
+SU
+rh
+Cb
+Aq
+Aq
+Cb
+pO
+ar
+ar
+SU
+lF
+GS
+GS
+lF
+SU
+eb
+"}
+(3,1,2) = {"
+eb
+qN
+xB
+GL
+Nu
+sV
+wv
+Xu
+kD
+qN
+ar
+ar
+Zk
+Zk
+ar
+ar
+ar
+ar
+Fi
+jq
+HS
+YD
+ar
+Fi
+eb
+"}
+(4,1,2) = {"
+eb
+qN
+aw
+OL
+cR
+fW
+jz
+bS
+bS
+op
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+qN
+PS
+PS
+YH
+GR
+qN
+eb
+"}
+(5,1,2) = {"
+eb
+qN
+Ka
+GP
+OL
+kt
+bf
+eq
+cu
+qN
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+il
+PS
+oU
+PS
+PS
+GS
+eb
+"}
+(6,1,2) = {"
+eb
+qN
+fP
+bS
+OL
+OL
+SU
+lF
+lF
+SU
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+qN
+BX
+PS
+PS
+Al
+GS
+eb
+"}
+(7,1,2) = {"
+eb
+qN
+ar
+bS
+KF
+jV
+qN
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+qN
+Bx
+PS
+PS
+kQ
+qN
+eb
+"}
+(8,1,2) = {"
+eb
+qN
+GR
+fb
+fb
+ca
+qN
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+qN
+cL
+aR
+ZK
+hq
+qN
+eb
+"}
+(9,1,2) = {"
+eb
+SU
+lF
+lF
+lF
+lF
+SU
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+SU
+lF
+lF
+lF
+lF
+SU
+eb
+"}
+(10,1,2) = {"
+ar
+IU
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+IU
+eb
+"}
+(11,1,2) = {"
+Aq
+JP
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+Ej
+Aq
+"}
+(12,1,2) = {"
+Aq
+YM
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+lS
+Aq
+"}
+(13,1,2) = {"
+nE
+YM
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+lS
+FS
+"}
+(14,1,2) = {"
+Aq
+YM
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+lS
+Aq
+"}
+(15,1,2) = {"
+Aq
+JP
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+Ej
+Aq
+"}
+(16,1,2) = {"
+eb
+Zk
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+Zk
+eb
+"}
+(17,1,2) = {"
+eb
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+eb
+"}
+(18,1,2) = {"
+eb
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+eb
+"}
+(19,1,2) = {"
+eb
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+eb
+"}
+(20,1,2) = {"
+eb
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+eb
+"}
+(21,1,2) = {"
+eb
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+eb
+"}
+(22,1,2) = {"
+eb
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+eb
+"}
+(23,1,2) = {"
+eb
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+eb
+"}
+(24,1,2) = {"
+eb
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+rh
+HQ
+FX
+FX
+HQ
+pO
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+ar
+eb
+"}
+(25,1,2) = {"
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+Aq
+Bo
+Aq
+Aq
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+eb
+"}

@@ -15,6 +15,10 @@
 		/datum/attribute/skill/labor/taming = 50,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/craft/cooking/brewing = 30,
+		/datum/attribute/skill/craft/cooking/winemaking = 30,
+		/datum/attribute/skill/craft/cooking/distilling = 30,
+		/datum/attribute/skill/craft/cooking/cheesemaking = 30,
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/athletics = 30,
@@ -25,6 +29,7 @@
 
 /datum/job/farmer
 	title = JOB_SOILSON
+	alt_titles = list("Butcher", "Brewer", "Vinter", "Distiller", "Hogman")
 	f_title = "Soilbride"
 	tutorial = "It is a simple life you live. \
 	Your basic understanding of life is something many would be envious of if they knew how perfect it was. \
@@ -34,7 +39,7 @@
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_SOILSON
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 12
 	spawn_positions = 12
 	bypass_lastclass = TRUE
@@ -44,6 +49,8 @@
 
 	outfit = /datum/outfit/farmer
 	give_bank_account = 20
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	can_be_apprentice = TRUE
 
@@ -64,7 +71,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/sailor
 	pants = /obj/item/clothing/pants/tights/sailor
 	wrists = null
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/farmer
 	name = JOB_SOILSON
@@ -123,7 +130,7 @@
 	department_flag = YOUNGFOLK
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_SOILCHILD
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 6
 	spawn_positions = 6
 	allowed_ages = list(AGE_CHILD)
@@ -132,6 +139,8 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/soilchild
 	give_bank_account = 10
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	job_bitflag = BITFLAG_CONSTRUCTOR
 

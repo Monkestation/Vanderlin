@@ -41,6 +41,7 @@
 
 /datum/job/prisoner
 	title = JOB_PRISONER
+	alt_titles = list("Bedlamite", "Blasphemer", "Experiment")
 	tutorial = "For a crime, or false allegation; as a hostage against another, \
 	or held for ransom: your fate until this day has been ill-starred save its first. \
 	Perhaps your story, which none but you recall, \
@@ -51,7 +52,7 @@
 	department_flag = PEASANTS
 	display_order = JDO_PRISONER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 2
 	can_random = FALSE
@@ -89,4 +90,3 @@
 /datum/outfit/prisoner
 	name = JOB_PRISONER
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
-	mask = /obj/item/clothing/face/facemask/prisoner

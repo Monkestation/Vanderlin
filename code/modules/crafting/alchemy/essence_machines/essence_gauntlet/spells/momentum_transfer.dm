@@ -3,11 +3,13 @@
 	desc = "Transfers kinetic energy between objects or creatures."
 	button_icon_state = "longstrider"
 	cast_range = 2
-	point_cost = 6
 	has_visual_effects = FALSE
 	cooldown_time = 2 MINUTES
-	attunements = list(/datum/attunement/light, /datum/attunement/aeromancy)
 	essences = list(/datum/thaumaturgical_essence/energia, /datum/thaumaturgical_essence/motion)
+
+/datum/action/cooldown/spell/essence/momentum_transfer/is_valid_target(atom/cast_on)
+	. = ..()
+	return isliving(cast_on)
 
 /datum/action/cooldown/spell/essence/momentum_transfer/cast(atom/cast_on)
 	. = ..()
@@ -53,14 +55,15 @@
 	UnregisterSignal(owner, COMSIG_MOVABLE_MOVED)
 	discharge()
 
-/datum/status_effect/buff/momentum_boost/proc/on_moved(datum/source, turf/old_turf, turf/new_turf, ...)
+/datum/status_effect/buff/momentum_boost/proc/on_moved(atom/movable/mover, turf/old_turf, direction)
 	SIGNAL_HANDLER
+	var/turf/newturf = get_turf(mover)
 
-	if(!old_turf || !new_turf)
+	if(!old_turf || !newturf)
 		return
-	if(old_turf.z != new_turf.z)
+	if(old_turf.z != newturf.z)
 		return
-	if(get_dist(old_turf, new_turf) > 1)
+	if(get_dist(old_turf, newturf) > 1)
 		return
 	tiles_moved++
 
@@ -98,3 +101,13 @@
 			to_chat(M, span_danger("You are hurled by a kinetic shockwave!"))
 		else
 			AM.throw_at(throw_target, throw_range, throw_speed)
+
+/datum/action/cooldown/spell/essence/momentum_transfer/spell
+	name = "Kinetic Transfer"
+	charge_required = TRUE
+	charge_time = 1 SECONDS
+	spell_cost = 60
+	spell_type = SPELL_MANA
+
+	required_form = FORM_ARCANE
+	required_technique = TECHNIQUE_ALTERATION

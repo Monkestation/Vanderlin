@@ -114,9 +114,6 @@
 
 	placed_mob.forceMove(get_turf(src))
 
-	if(placed_mob.buckled == src)
-		placed_mob.buckled = null
-
 	if(user)
 		to_chat(user, span_notice("You help [placed_mob] out of [src]."))
 

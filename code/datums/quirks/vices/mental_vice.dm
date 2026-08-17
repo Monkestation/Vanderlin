@@ -21,7 +21,7 @@
 /datum/status_effect/debuff/addiction/pyromaniac
 /datum/status_effect/debuff/addiction/kleptomaniac
 /datum/status_effect/debuff/addiction/godfearing
-/datum/status_effect/debuff/addiction/maniac
+/datum/status_effect/debuff/addiction/sadist
 /datum/status_effect/debuff/addiction/greedy
 
 /atom/movable/screen/alert/status_effect/debuff/addiction
@@ -47,6 +47,7 @@
 /datum/quirk/vice/greedy/on_spawn()
 	next_mammon_increase = world.time + rand(15 MINUTES, 25 MINUTES)
 	last_passed_check = world.time
+	return ..()
 
 /datum/quirk/vice/greedy/on_life(mob/living/user)
 	if(!ishuman(user))
@@ -220,6 +221,7 @@
 	name = "Narcoleptic"
 	desc = "I get drowsy during the day and tend to fall asleep suddenly, but I can sleep easier if I want to, and moon dust can help me stay awake."
 	point_value = 4
+	traits_to_add = list(TRAIT_FASTSLEEP)
 	var/last_unconsciousness = 0
 	var/next_sleep = 0
 	var/concious_timer = (10 MINUTES)
@@ -232,10 +234,10 @@
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Sleepy..."))
 
 /datum/quirk/vice/narcoleptic/on_spawn()
-	ADD_TRAIT(owner, TRAIT_FASTSLEEP, "[type]")
 	last_unconsciousness = world.time
 	concious_timer = rand(7 MINUTES, 15 MINUTES)
 	pain_pity_charges = rand(2, 4)
+	return ..()
 
 /datum/quirk/vice/narcoleptic/on_life(mob/living/user)
 	if(!ishuman(user))
@@ -251,8 +253,8 @@
 
 	if(do_sleep)
 		if(next_sleep <= world.time)
-			var/pain = H.getPainLoss()
-			if(pain >= 40 && pain_pity_charges > 0)
+			var/pain = H.getShockStage()
+			if(pain >= SHOCK_STAGE_2 && pain_pity_charges > 0)
 				pain_pity_charges--
 				concious_timer = rand(1 MINUTES, 2 MINUTES)
 				to_chat(H, span_warning("The pain keeps me awake..."))
@@ -276,10 +278,6 @@
 			next_sleep = world.time + rand(7 SECONDS, 11 SECONDS)
 			do_sleep = TRUE
 
-/datum/quirk/vice/narcoleptic/on_remove()
-	if(owner)
-		REMOVE_TRAIT(owner, TRAIT_FASTSLEEP, "[type]")
-
 /proc/narcolepsy_drug_up(mob/living/living)
 	var/datum/quirk/vice/narcoleptic/narco = living.get_quirk(/datum/quirk/vice/narcoleptic)
 	if(!narco)
@@ -299,6 +297,7 @@
 
 /datum/quirk/vice/masochist/on_spawn()
 	next_paincrave = world.time + rand(15 MINUTES, 25 MINUTES)
+	return ..()
 
 /datum/quirk/vice/masochist/on_life(mob/living/user)
 	if(!ishuman(user))
@@ -313,7 +312,9 @@
 	H.apply_status_effect(/datum/status_effect/debuff/addiction)
 
 	var/current_pain = H.getShock()
-	var/bloodloss_factor = clamp(1.0 - (H.blood_volume / BLOOD_VOLUME_NORMAL), 0.0, 0.5)
+	var/bloodloss_factor = 1
+	if(CAN_HAVE_BLOOD(H))
+		bloodloss_factor = clamp(1.0 - (H.get_blood_volume() / BLOOD_VOLUME_NORMAL), 0.0, 0.5)
 	var/new_pain_threshold = get_pain_threshold(current_pain * (1.0 + (bloodloss_factor * 1.4)) * clamp(2 - (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) / 10), 0.5, 1.5))
 
 	if(last_pain_threshold == NONE)
@@ -368,11 +369,11 @@
 		var/affected_parts = min(rand(1, 3), joint_parts.len)
 		for(var/i = 1 to affected_parts)
 			var/obj/item/bodypart/BP = pick_n_take(joint_parts)
-			BP.add_pain(rand(10, 20))
 			BP.limb_flags |= BODYPART_CHRONIC_ARTHRITIS
 			BP.update_chronic()
 
 	to_chat(H, span_warning("Your joints feel stiff and painful - a reminder of your chronic arthritis."))
+	return ..()
 
 /datum/quirk/vice/chronic_back_pain
 	name = "Chronic Back Pain"
@@ -384,10 +385,10 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	var/obj/item/bodypart/BP = H.get_bodypart(BODY_ZONE_CHEST)
-	BP?.add_pain(rand(20, 32.5))
 	BP?.limb_flags |= pick(BODYPART_CHRONIC_FRACTURE, BODYPART_CHRONIC_SCAR)
 	BP?.update_chronic()
 	to_chat(H, span_warning("Your lower back aches with familiar, persistent pain."))
+	return ..()
 
 /datum/quirk/vice/old_war_wound
 	name = "Old War Wound"
@@ -406,14 +407,12 @@
 	if(length(major_parts))
 		for(var/rand in 1 to rand(1, 2))
 			var/obj/item/bodypart/wounded = pick(major_parts)
-			wounded.add_pain(rand(10, 17.5))
 			var/list/remove_one = list(BODYPART_CHRONIC_FRACTURE, BODYPART_CHRONIC_SCAR, BODYPART_CHRONIC_NERVE_DAMAGE)
 			pick_n_take(remove_one)
 			for(var/i in remove_one)
 				wounded.limb_flags |= i
 			wounded.update_chronic()
-			var/damage = rand(5, 9)
-			wounded.bodypart_attacked_by(pick(BCLASS_BLUNT, BCLASS_BITE, BCLASS_CUT, BCLASS_LASHING, BCLASS_BURN), damage, modifiers = list(CRIT_MOD_CHANCE = -100))
 			var/wound_location = wounded.name
 			var/wound_desc = pick("shrapnel wound", "arrow wound", "deep scar", "poorly healed fracture")
 			to_chat(H, span_warning("You feel the familiar ache of your old [wound_desc] in your [wound_location]."))
+	return ..()

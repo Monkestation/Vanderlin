@@ -39,7 +39,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/blue
 	gloves = /obj/item/clothing/gloves/fingerless
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	cloak = /obj/item/clothing/cloak/raincloak
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/gun/ballistic/bow/short
@@ -48,6 +48,6 @@
 	beltl = /obj/item/weapon/sword/short/iron
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
-    	/obj/item/weapon/knife/dagger = 1,
-   		/obj/item/restraints/legcuffs/beartrap/crafted = 1
+		/obj/item/weapon/knife/dagger = 1,
+		/obj/item/restraints/legcuffs/beartrap/crafted = 1
 	)

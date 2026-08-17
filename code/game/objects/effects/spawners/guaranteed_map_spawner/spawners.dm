@@ -2,7 +2,7 @@
 	spawned = list(
 		/obj/item/key/steward = 1,
 		/obj/item/key/atarms = 1,
-		/obj/item/key/walls = 1,
+		/obj/item/key/gatehouse = 1,
 		/obj/item/key/garrison = 1,
 		/obj/item/key/forrestgarrison = 1,
 		/obj/item/key/manor = 1,

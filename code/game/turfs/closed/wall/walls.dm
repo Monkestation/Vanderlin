@@ -182,7 +182,7 @@
 	icon_state = "wood"
 	opacity = FALSE
 	max_integrity = 550
-	pass_flags_self = PASSTABLE|PASSGRILLE
+	pass_flags_self = PASSGRILLE
 
 /turf/closed/wall/mineral/wood/window/Initialize()
 	. = ..()
@@ -255,14 +255,14 @@
 	icon_state = "subwindow"
 	opacity = FALSE
 	explosion_block = 1
-	pass_flags_self = PASSTABLE|PASSGRILLE
+	pass_flags_self = PASSGRILLE
 
 /turf/closed/wall/mineral/wooddark/window/OnCrafted(dirin, mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
 	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
 	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[initial(name)]", 1)
 	return
 
 /turf/closed/wall/mineral/roofwall
@@ -517,3 +517,27 @@
 	climbdiff = 1
 	damage_deflection = 20
 	hardness = 10
+
+/turf/closed/wall/mineral/baddaub
+	name = "daub wall"
+	desc = "An old wattle and daub wall. It's not in the best shape."
+	icon = 'icons/turf/walls.dmi'
+	icon_state = "badplaster"
+	blade_dulling = DULLING_BASHCHOP
+	max_integrity = 700
+	break_sound = 'sound/combat/hits/onwood/destroywalldoor.ogg'
+	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
+//	sheet_type = /obj/item/grown/log/tree/lumber
+	above_floor = /turf/open/floor/ruinedwood
+	baseturfs = /turf/open/floor/ruinedwood
+	neighborlay = "dirtedge"
+	climbdiff = 3
+	explosion_block = 4
+	hardness = 7
+
+	burn_power = 100
+	spread_chance = 1.8
+
+/turf/closed/wall/mineral/baddaub/Initialize()
+	. = ..()
+	dir = pick(GLOB.cardinals)

@@ -85,6 +85,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/datum/admins/proc/fix_death_area,
 	/datum/admins/proc/toggle_debug_pathfinding,
 	/datum/admins/proc/give_all_triumphs,
+	/client/proc/open_wave_creator,
 	/datum/admins/proc/toggleenter,		/*toggles whether people can join the current game*/
 	/datum/admins/proc/toggleguests,	/*toggles whether guests can join the current game*/
 	/datum/admins/proc/announce,		/*priority announce something to all clients.*/
@@ -129,6 +130,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/resetasaycolor,
 	/client/proc/set_personal_admin_ooc_color,
 	/client/proc/reset_personal_admin_ooc_color,
+	/client/proc/lobbyooc,
 	/client/proc/set_ghost_sprite,
 	/client/proc/set_ui_theme,
 	/client/proc/toggleadminhelpsound,
@@ -136,6 +138,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/discord_id_manipulation,
 	/client/proc/ShowAllFamilies,
 	/client/proc/send_bird_letter,
+	/client/proc/grant_ticket_to,
 	)
 GLOBAL_LIST_INIT(admin_verbs_ban, list(/client/proc/unban_panel, /client/proc/ban_panel, /client/proc/role_ban_panel, /client/proc/check_pq, /client/proc/adjust_pq, /client/proc/getcurrentlogs, /client/proc/getserverlogs))
 GLOBAL_PROTECT(admin_verbs_ban)
@@ -146,6 +149,7 @@ GLOBAL_LIST_INIT(admin_verbs_fun, list(
 	/client/proc/cmd_admin_gib_self,
 	/client/proc/drop_bomb,
 	/client/proc/set_dynex_scale,
+	/client/proc/open_ticket_granter,
 	/client/proc/drop_dynex_bomb,
 	/client/proc/object_say,
 	/client/proc/toggle_random_events,
@@ -188,13 +192,14 @@ GLOBAL_PROTECT(admin_verbs_debug)
 /world/proc/AVerbsDebug()
 	return list(
 	/client/proc/restart_controller,
+	/client/proc/view_armor_compare,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/add_job_key_whitelist,
 	/client/proc/Debug2,
 	/client/proc/cmd_debug_mob_lists,
 	/client/proc/cmd_admin_delete,
 	/client/proc/cmd_debug_del_all,
-	/client/proc/restart_controller,
+	/client/proc/cmd_controller_view_ui,
 	/client/proc/enable_debug_verbs,
 	/client/proc/callproc,
 	/client/proc/callproc_datum,
@@ -207,6 +212,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/get_dynex_power,		//*debug verbs for dynex explosions.
 	/client/proc/get_dynex_range,		//*debug verbs for dynex explosions.
 	/client/proc/set_dynex_scale,
+	/client/proc/open_ticket_granter,
 	/client/proc/cmd_display_del_log,
 	/client/proc/debug_huds,
 	/client/proc/map_export,
@@ -255,6 +261,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/cmd_admin_direct_narrate,
 	/client/proc/cmd_admin_world_narrate,
 	/client/proc/cmd_admin_local_narrate,
+	/client/proc/cmd_controller_view_ui,
 	/client/proc/play_local_sound,
 	/client/proc/play_sound,
 	/client/proc/set_round_end_sound,
@@ -265,6 +272,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/get_dynex_range,
 	/client/proc/get_dynex_power,
 	/client/proc/set_dynex_scale,
+	/client/proc/open_ticket_granter,
 	/client/proc/cmd_admin_create_announcement,
 	/client/proc/object_say,
 	/client/proc/toggle_random_events,
@@ -275,6 +283,7 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/everyone_random,
 	/datum/admins/proc/toggleAI,
 	/client/proc/restart_controller,
+	/client/proc/view_armor_compare,
 	/client/proc/cmd_admin_list_open_jobs,
 	/client/proc/add_job_key_whitelist,
 	/client/proc/callproc,
@@ -772,8 +781,8 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 
 	// Ensure the admin stops hearing ghosts like a mortal
 	if(prefs)
-		prefs.chat_toggles &= ~CHAT_GHOSTEARS   // Explicitly remove ghost hearing
-		prefs.chat_toggles &= ~CHAT_GHOSTWHISPER // Explicitly remove ghost whispers
+		prefs.preference_clear_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTEARS)   // Explicitly remove ghost hearing
+		prefs.preference_clear_flag(/datum/preference/bitwise/chat_toggles, CHAT_GHOSTWHISPER) // Explicitly remove ghost whispers
 		prefs.save_preferences()
 		to_chat(src, span_info("I will hear like a mortal."))
 
@@ -863,8 +872,8 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		dat += "<td style='padding: 12px 15px;'>[book["author"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>[book["category"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>"
-		dat += "<a href='?src=[REF(src)];show_book=1;id=[url_encode(encoded_title)]' style='margin-right: 10px;'>View</a>"
-		dat += "<a href='?src=[REF(src)];delete_book=1;author_ckey=[book["author_ckey"]];id=[url_encode(encoded_title)]'>Delete</a>"
+		dat += "<a href='byond://?src=[REF(src)];show_book=1;id=[url_encode(encoded_title)]' style='margin-right: 10px;'>View</a>"
+		dat += "<a href='byond://?src=[REF(src)];delete_book=1;author_ckey=[book["author_ckey"]];id=[url_encode(encoded_title)]'>Delete</a>"
 		dat += "</td>"
 		dat += "</tr>"
 
@@ -943,7 +952,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 					dat += "<td style='padding: 12px 15px;'>[raw_title]</td>"
 					dat += "<td style='padding: 12px 15px;'>[author]</td>"
 					dat += "<td style='padding: 12px 15px;'>"
-					dat += "<a href='?src=[REF(src)];delete_painting=1;id=[url_encode(raw_title)]'>Delete</a>"
+					dat += "<a href='byond://?src=[REF(src)];delete_painting=1;id=[url_encode(raw_title)]'>Delete</a>"
 					dat += "</td>"
 					dat += "</tr>"
 	else
@@ -959,67 +968,62 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 /client/proc/ShowAllFamilies()
 	set category = "GameMaster"
 	set name = "Show All Families"
-	var/dat = SSfamilytree.ReturnAllFamilies()
-	if(!dat)
-		to_chat(src, "<span class='interface'>Family List was Empty.</span>")
-		return
-	var/datum/browser/popup = new(usr, "ALLFAMILIES", "", 260, 400)
-	popup.set_content(dat)
-	popup.open()
+	to_chat(src, "<span class='interface'>TBA.</span>")
 
 /client/proc/tracy_next_round()
 	set name = "Toggle Tracy Next Round"
 	set desc = "Toggle running the byond-tracy profiler next round"
 	set category = "Debug"
+
 	if(!check_rights_for(src, R_DEBUG))
 		return
+
 #ifndef OPENDREAM
 	if(!fexists(TRACY_DLL_PATH))
 		to_chat(src, span_danger("byond-tracy library ([TRACY_DLL_PATH]) not present!"))
 		return
+
 	if(fexists(TRACY_ENABLE_PATH))
 		fdel(TRACY_ENABLE_PATH)
 	else
 		rustg_file_write("[ckey]", TRACY_ENABLE_PATH)
+
 	message_admins(span_adminnotice("[key_name_admin(src)] [fexists(TRACY_ENABLE_PATH) ? "enabled" : "disabled"] the byond-tracy profiler for next round."))
 	log_admin("[key_name(src)] [fexists(TRACY_ENABLE_PATH) ? "enabled" : "disabled"] the byond-tracy profiler for next round.")
-#else
-	to_chat(src, span_danger("byond-tracy is not supported on OpenDream, sorry!"))
 #endif
 
 /client/proc/start_tracy()
 	set name = "Run Tracy Now"
 	set desc = "Start running the byond-tracy profiler immediately."
 	set category = "Debug"
+
 	if(!check_rights_for(src, R_DEBUG))
 		return
+
 #ifndef OPENDREAM
-	if(GLOB.tracy_initialized)
+	if(Tracy.enabled)
 		to_chat(src, span_warning("byond-tracy is already running!"))
 		return
-	else if(GLOB.tracy_init_error)
-		to_chat(src, span_danger("byond-tracy failed to initialize during an earlier attempt: [GLOB.tracy_init_error]"))
+	else if(Tracy.error)
+		to_chat(src, span_danger("byond-tracy failed to initialize during an earlier attempt: [Tracy.error]"))
 		return
-	else if(!fexists(TRACY_DLL_PATH))
-		to_chat(src, span_danger("byond-tracy library ([TRACY_DLL_PATH]) not present!"))
-		return
+
 	message_admins(span_adminnotice("[key_name_admin(src)] is trying to start the byond-tracy profiler."))
 	log_admin("[key_name(src)] is trying to start the byond-tracy profiler.")
-	GLOB.tracy_initialized = FALSE
-	GLOB.tracy_init_reason = "[ckey]"
-	world.init_byond_tracy()
-	if(GLOB.tracy_init_error)
-		to_chat(src, span_danger("byond-tracy failed to initialize: [GLOB.tracy_init_error]"))
-		message_admins(span_adminnotice("[key_name_admin(src)] tried to start the byond-tracy profiler, but it failed to initialize ([GLOB.tracy_init_error])"))
-		log_admin("[key_name(src)] tried to start the byond-tracy profiler, but it failed to initialize ([GLOB.tracy_init_error])")
+
+	if(!Tracy.enable("[ckey]"))
+		var/error = Tracy.error || "N/A"
+		to_chat(src, span_danger("byond-tracy failed to initialize: [error]"))
+		message_admins(span_adminnotice("[key_name_admin(src)] tried to start the byond-tracy profiler, but it failed to initialize ([error])"))
+		log_admin("[key_name(src)] tried to start the byond-tracy profiler, but it failed to initialize ([error])")
 		return
+
 	to_chat(src, span_notice("byond-tracy successfully started!"))
 	message_admins(span_adminnotice("[key_name_admin(src)] started the byond-tracy profiler."))
 	log_admin("[key_name(src)] started the byond-tracy profiler.")
-	if(GLOB.tracy_log)
-		rustg_file_write("[GLOB.tracy_log]", "[GLOB.log_directory]/tracy.loc")
-#else
-	to_chat(src, span_danger("byond-tracy is not supported on OpenDream, sorry!"))
+
+	if(Tracy.trace_path)
+		rustg_file_write("[Tracy.trace_path]", "[GLOB.log_directory]/tracy.loc")
 #endif
 
 /// Debug verb for seeing at a glance what all spells have as set requirements

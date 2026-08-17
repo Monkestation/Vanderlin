@@ -195,7 +195,7 @@
 	return FALSE					//nonliving mobs don't have hands
 
 /mob/living/put_in_hand_check(obj/item/I)
-	if(istype(I) && (((mobility_flags & MOBILITY_PICKUP) || (I.item_flags & ABSTRACT)) \
+	if(istype(I) && !QDELETED(I) && (((mobility_flags & MOBILITY_PICKUP) || (I.item_flags & ABSTRACT)) \
 		&& !(SEND_SIGNAL(src, COMSIG_LIVING_TRY_PUT_IN_HAND, I) & COMPONENT_LIVING_CANT_PUT_IN_HAND)))
 		return TRUE
 	return FALSE
@@ -346,9 +346,12 @@
 	var/list/items = list()
 	for(var/obj/item/item_contents in contents)
 		if(item_contents.item_flags & IN_INVENTORY)
+			if(!(include_flags & INCLUDE_ABSTRACT) && (item_contents.item_flags & ABSTRACT)) //not really flavoured as items
+				continue
 			items += item_contents
 	if (!(include_flags & INCLUDE_HELD))
 		items -= held_items
+
 	return items
 
 /mob/living/proc/unequip_everything(silent = TRUE)

@@ -9,7 +9,9 @@
 //Force mob to rest, does NOT do stamina damage.
 //It's really not recommended to use this proc to give feedback, hence why silent is defaulting to true.
 /mob/living/carbon/KnockToFloor(knockdown_amt = 1, ignore_canknockdown = FALSE, silent = TRUE)
-	if(!silent && (body_position != LYING_DOWN))
+	if((body_position == LYING_DOWN))
+		return
+	if(!silent)
 		to_chat(src, span_warning("I am knocked to the floor!"))
 	Knockdown(knockdown_amt, ignore_canknockdown)
 
@@ -110,7 +112,7 @@
 		return K.duration
 	return 0
 
-/mob/living/proc/Knockdown(amount, ignore_canstun = FALSE) //Can't go below remaining duration
+/mob/living/proc/Knockdown(amount, ignore_canstun = FALSE, prevent_drop = FALSE) //Can't go below remaining duration
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_KNOCKDOWN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -120,10 +122,10 @@
 		if(K)
 			K.duration = max(amount, K.duration)
 		else if(amount > 0)
-			K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount)
+			K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount, prevent_drop)
 		return K
 
-/mob/living/proc/SetKnockdown(amount, ignore_canstun = FALSE) //Sets remaining duration
+/mob/living/proc/SetKnockdown(amount, ignore_canstun = FALSE, prevent_drop = FALSE) //Sets remaining duration
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_KNOCKDOWN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -137,10 +139,10 @@
 			if(K)
 				K.duration = amount
 			else
-				K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount)
+				K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount, prevent_drop)
 		return K
 
-/mob/living/proc/AdjustKnockdown(amount, ignore_canstun = FALSE) //Adds to remaining duration
+/mob/living/proc/AdjustKnockdown(amount, ignore_canstun = FALSE, prevent_drop = FALSE) //Adds to remaining duration
 	if(SEND_SIGNAL(src, COMSIG_LIVING_STATUS_KNOCKDOWN, amount, ignore_canstun) & COMPONENT_NO_STUN)
 		return
 	if(((status_flags & CANKNOCKDOWN) && !HAS_TRAIT(src, TRAIT_STUNIMMUNE)) || ignore_canstun)
@@ -150,7 +152,7 @@
 		if(K)
 			K.duration += amount
 		else if(amount > 0)
-			K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount)
+			K = apply_status_effect(STATUS_EFFECT_KNOCKDOWN, amount, prevent_drop)
 		return K
 
 ///////////////////////////////// IMMOBILIZED ////////////////////////////////////
@@ -353,7 +355,8 @@
 	return FALSE
 
 /mob/living/IsSleeping() //If we're asleep
-	return has_status_effect(STATUS_EFFECT_SLEEPING)
+	if(!HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
+		return has_status_effect(STATUS_EFFECT_SLEEPING)
 
 /mob/living/proc/AmountSleeping() //How many deciseconds remain in our sleep
 	var/datum/status_effect/incapacitating/sleeping/S = IsSleeping()
@@ -624,13 +627,12 @@
 		if(isnum(max_duration) && duration > 0)
 			// Check the duration remaining on the existing status effect
 			// If it's greater than / equal to our passed max duration, we don't need to do anything
-			var/remaining_duration = existing.duration
-			if(remaining_duration >= max_duration)
+			if(existing.duration >= max_duration)
 				return
 
 			// Otherwise, add duration up to the max (max_duration - remaining_duration),
 			// or just add duration if it doesn't exceed our max at all
-			existing.duration += min(max_duration - remaining_duration, duration)
+			existing.duration += min(max_duration - existing.duration, duration)
 
 		else
 			existing.duration += duration
@@ -638,7 +640,7 @@
 		// If the duration was decreased and is now less 0 seconds,
 		// qdel it / clean up the status effect immediately
 		// (rather than waiting for the process tick to handle it)
-		if(existing.duration <= world.time)
+		if(existing.duration <= 0)
 			qdel(existing)
 
 	else if(duration > 0)

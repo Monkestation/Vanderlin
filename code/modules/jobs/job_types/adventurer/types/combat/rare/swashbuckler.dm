@@ -25,6 +25,7 @@
 		SPEC_ID_HUMEN,\
 		SPEC_ID_ELF,\
 		SPEC_ID_HALF_ELF,\
+		SPEC_ID_HALF_DROW,\
 		SPEC_ID_TIEFLING,\
 		SPEC_ID_AASIMAR,\
 		SPEC_ID_HALF_ORC,\
@@ -56,7 +57,7 @@
 	backr = /obj/item/fishingrod/fisher
 	beltl = /obj/item/weapon/sword/sabre/cutlass
 	beltr = /obj/item/weapon/sword/sabre/cutlass
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	neck = /obj/item/clothing/neck/psycross/pearl
 
 /datum/outfit/swashbuckler/pre_equip(mob/living/carbon/human/H, visuals_only)

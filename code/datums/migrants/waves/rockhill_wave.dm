@@ -65,10 +65,8 @@
 	if(equipped_human.gender == FEMALE)
 		head = /obj/item/clothing/head/courtierhat
 		neck = /obj/item/storage/belt/pouch/coins/rich
-		cloak = /obj/item/clothing/cloak/raincloak/furcloak
 		beltr = /obj/item/weapon/sword/rapier
 		ring = /obj/item/clothing/ring/silver
-		shoes = /obj/item/clothing/shoes/nobleboot
 		backr = /obj/item/storage/backpack/satchel
 		backpack_contents = list(
 			/obj/item/storage/belt/pouch/coins/rich = 1,
@@ -78,6 +76,14 @@
 			armor = /obj/item/clothing/armor/gambeson/heavy/dress/alt
 		else
 			armor = /obj/item/clothing/armor/gambeson/heavy/dress
+
+/datum/job/migrant/rockhill/mayor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
 
 /datum/migrant_role/rockhill_knight
 	name = "Knight of Rockhill"
@@ -141,10 +147,15 @@
 		if(!index)
 			index = spawned.real_name
 		S.name = "knight tabard ([index])"
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
 
 /datum/outfit/rockhill/knight
 	name = "Knight of Rockhill (Migrant Wave)"
-	head = /obj/item/clothing/head/helmet
+	head = /obj/item/clothing/head/helmet/visored/hounskull
 	gloves = /obj/item/clothing/gloves/plate
 	pants = /obj/item/clothing/pants/platelegs
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
@@ -229,6 +240,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 	)
 
@@ -242,7 +254,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/guardsecond
 	armor = /obj/item/clothing/armor/medium/scale
 	neck = /obj/item/clothing/neck/gorget
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/sword/arming
 	backl = /obj/item/storage/backpack/satchel
@@ -250,6 +262,14 @@
 		/obj/item/weapon/knife/dagger/steel/special = 1,
 		/obj/item/signal_horn = 1,
 	)
+
+/datum/job/migrant/rockhill/serjeant_at_arms/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
 
 /datum/migrant_role/footman_guard
 	name = "Guardsmen of Rockhill"
@@ -260,6 +280,22 @@
 	title = "Guardsmen of Rockhill"
 	tutorial = "Your Serjeant has been ordered by the mayor of Rockhill to guard them as they visit the rulers of Vanderlin. Ensure they live."
 	is_foreigner = TRUE
+
+/datum/job/migrant/footman_guard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
+
+/datum/job/migrant/footman_bannerman/rockhill/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+	if(!spawned.dna?.species)
+		return
+	var/datum/species/species = spawned.dna.species
+	species.native_language = "Rockhill"
+	species.accent_language = species.get_accent(species.native_language)
 
 /datum/migrant_wave/rockhill_wave
 	name = "The Mayor's Visit"

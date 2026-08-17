@@ -191,8 +191,6 @@
 				var/mob/living/carbon/human/newmob = M.change_mob_type( /mob/living/carbon/human , null, null, delmob )
 				if(posttransformoutfit && istype(newmob))
 					newmob.equipOutfit(posttransformoutfit)
-			if("monkey")
-				M.change_mob_type( /mob/living/carbon/monkey , null, null, delmob )
 			if("cat")
 				M.change_mob_type( /mob/living/simple_animal/pet/cat , null, null, delmob )
 
@@ -415,32 +413,6 @@
 		Game() // updates the main game menu
 		HandleFSecret()
 
-	else if(href_list["monkeyone"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/human/H = locate(href_list["monkeyone"])
-		if(!istype(H))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/human.")
-			return
-
-		log_admin("[key_name_admin(usr)] attempting to monkeyize [key_name(H)].")
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] attempting to monkeyize [key_name_admin(H)].</span>")
-		H.monkeyize()
-
-	else if(href_list["humanone"])
-		if(!check_rights(R_SPAWN))
-			return
-
-		var/mob/living/carbon/monkey/Mo = locate(href_list["humanone"])
-		if(!istype(Mo))
-			to_chat(usr, "This can only be used on instances of type /mob/living/carbon/monkey.")
-			return
-
-		log_admin("[key_name_admin(usr)] attempting to humanize [key_name(Mo)].")
-		message_admins("<span class='adminnotice'>[key_name_admin(usr)] attempting to humanize [key_name_admin(Mo)].</span>")
-		Mo.humanize()
-
 	else if(href_list["forcespeech"])
 		if(!check_rights(R_FUN))
 			return
@@ -629,7 +601,7 @@
 				if(SOFT_CRIT)
 					status = "<font color='orange'><b>Dying</b></font>"
 				if(UNCONSCIOUS)
-					status = "<font color='orange'><b>[L.InCritical() ? "Unconscious and Dying" : "Unconscious"]</b></font>"
+					status = "<font color='orange'><b>[HAS_TRAIT(L, TRAIT_CRITICAL_CONDITION) ? "Unconscious and Dying" : "Unconscious"]</b></font>"
 				if(DEAD)
 					status = "<font color='red'><b>Dead</b></font>"
 			health_description = "Status = [status]"
@@ -739,6 +711,7 @@
 		for(var/datum/job/job in SSjob.joinable_occupations)
 			if(job.title == Add)
 				job.total_positions += 1
+				job.spawn_positions += 1
 				break
 
 		src.manage_free_slots()
@@ -752,13 +725,12 @@
 
 		for(var/datum/job/job in SSjob.joinable_occupations)
 			if(job.title == Add)
-				var/newtime = null
-				newtime = input(usr, "How many jebs do you want?", "Add wanted posters", "[newtime]") as num|null
-				if(!newtime)
-					to_chat(src.owner, "Setting to amount of positions filled for the job")
-					job.total_positions = job.current_positions
+				var/new_slot_count = null
+				new_slot_count = input(usr, "How many jebs do you want?", "Add wanted posters", "[new_slot_count]") as num|null
+				if(!new_slot_count)
 					break
-				job.total_positions = newtime
+				job.total_positions = new_slot_count
+				job.spawn_positions = new_slot_count
 
 		src.manage_free_slots()
 
@@ -771,6 +743,7 @@
 		for(var/datum/job/job in SSjob.joinable_occupations)
 			if(job.title == Remove && job.total_positions - job.current_positions > 0)
 				job.total_positions -= 1
+				job.spawn_positions -= 1
 				break
 
 		src.manage_free_slots()
@@ -1256,7 +1229,7 @@
 			return
 		adjust_playerquality(amt2change, mob_client.ckey, usr.ckey, raisin)
 		for(var/client/C in GLOB.clients) // I hate this, but I'm not refactoring the cancer above this point.
-			if(lowertext(C.key) == lowertext(mob_client.ckey))
+			if(LOWER_TEXT(C.key) == LOWER_TEXT(mob_client.ckey))
 				to_chat(C, "<span class=\"admin\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message linkify\">Your PQ has been adjusted by [amt2change] by [usr.key] for reason: [raisin]</span></span>")
 				return
 	else if(href_list["showpq"])
@@ -1299,7 +1272,7 @@
 		if(!ishuman(M))
 			return
 
-		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patrons_by_type)
+		var/patron_to_change_to = browser_input_list(usr, "Change to what patron?", "THE GODS", GLOB.patron_list)
 		if(!patron_to_change_to)
 			return
 
@@ -1575,6 +1548,12 @@
 			return
 		var/mob/M = locate(href_list["adminbirdletter"])
 		usr.client.send_bird_letter(M)
+
+	else if(href_list["grantticket"])
+		if(!check_rights(R_ADMIN))
+			return
+		var/mob/M = locate(href_list["grantticket"])
+		usr.client.grant_ticket_to(M)
 
 /datum/admins/proc/HandleCMode()
 	if(!check_rights(R_ADMIN))

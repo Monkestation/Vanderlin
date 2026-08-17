@@ -17,7 +17,7 @@
 	unequip_delay_self = 4 SECONDS
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/plate/good
 	body_parts_covered = COVERAGE_FULL
 	prevent_crits = ALL_EXCEPT_BLUNT
 	max_integrity = INTEGRITY_STRONGEST

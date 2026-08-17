@@ -185,7 +185,7 @@
 	var/obj/item/bodypart/part = victim.get_bodypart(prob(50) ? BODY_ZONE_L_LEG : BODY_ZONE_R_LEG)
 	if(isnull(part))
 		part = victim.get_bodypart(BODY_ZONE_CHEST)
-	part?.create_injury(WOUND_PIERCE, 30, TRUE)
+	part?.create_injury(WOUND_PUNCTURE, 30)
 	victim.emote("scream")
 	post_triggered()
 
@@ -195,7 +195,7 @@
 /obj/structure/trap/poison/trigger_step_on(mob/living/victim)
 	..()
 	to_chat(victim,span_danger("I feel a slight prick from beneath me!"))
-	victim.reagents?.add_reagent(/datum/reagent/berrypoison,2.5)
+	victim.reagents?.add_reagent(/datum/reagent/poison/berry,2.5)
 	post_triggered()
 
 /obj/structure/trap/bomb
@@ -246,7 +246,7 @@
 		var/obj/item/bodypart/part = victim.get_bodypart(prob(50) ? BODY_ZONE_L_LEG : BODY_ZONE_R_LEG)
 		if(isnull(part))
 			part = victim.get_bodypart(BODY_ZONE_CHEST)
-		part?.create_injury(WOUND_SLASH, part?.max_damage * 0.4, TRUE)
+		part?.create_injury(WOUND_SLASH, part?.max_damage * 0.4)
 		victim.emote("scream")
 
 /obj/structure/trap/wall_projectile

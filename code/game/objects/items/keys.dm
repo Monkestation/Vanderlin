@@ -1,5 +1,6 @@
 /obj/item/key
 	name = "old key"
+	examine_name = "key"
 	desc = "A simple key of simple uses."
 	icon_state = "brownkey"
 	icon = 'icons/roguetown/items/keys.dmi'
@@ -64,43 +65,55 @@
 	if(access2add)
 		. += span_info("It has been marked with [access2add[1]], but has not been finished.")
 
-/obj/item/key/custom/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!istype(I, /obj/item/weapon/hammer))
-		return ..()
+/obj/item/key/custom/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/weapon/hammer))
+		return NONE
+
 	if(lockids)
 		var/input = (input(user, "What would you name this key?", "", "") as text)
 		if(!input)
-			return
+			return ITEM_INTERACT_BLOCKING
 		name = input + " key"
 		to_chat(user, span_notice("You rename the key to [name]."))
-		return
+		return ITEM_INTERACT_SUCCESS
+
 	var/input = input(user, "What would you like to set the key ID to?", "", 0) as num
 	input = abs(input)
 	if(!input)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	to_chat(user, span_notice("You set the key ID to [input]."))
 	access2add = list("[input]")
 
-/obj/item/key/custom/attackby_secondary(obj/item/I, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/key/custom/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
 	if(lockids)
 		to_chat(user, span_warning("[src] has been finished, it cannot be adjusted again!"))
-		return
-	if(istype(I, /obj/item/weapon/hammer))
+		return ITEM_INTERACT_BLOCKING
+
+	if(istype(tool, /obj/item/weapon/hammer))
 		if(!access2add)
 			to_chat(user, span_warning("[src] is not ready, its teeth are not set!"))
-			return
+			return ITEM_INTERACT_BLOCKING
 		lockids = access2add
 		access2add = null
 		to_chat(user, span_notice("You finish [src]."))
-		return
-	if(!copy_access(I))
-		to_chat(user, span_warning("I cannot forge a key from [I]!"))
-		return
-	to_chat(user, span_notice("I forge the key based on the workings of [I]."))
+		return ITEM_INTERACT_SUCCESS
+
+	if(!copy_access(tool))
+		to_chat(user, span_warning("I cannot forge a key from [tool]!"))
+		return ITEM_INTERACT_BLOCKING
+
+	to_chat(user, span_notice("I forge the key based on the workings of [tool]."))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/key/lord
 	name = "master key"
@@ -173,6 +186,12 @@
 	icon_state = "hornkey"
 	lockids = list(ACCESS_INN)
 
+/obj/item/key/hunter
+	name = "hunter's key"
+	desc = "This key should open the Hunter's Lodge."
+	icon_state = "hornkey"
+	lockids = list(ACCESS_HUNTER)
+
 /obj/item/key/artificer
 	name = "artificer's key"
 	desc = "This bronze key should open the Artificer's guild."
@@ -184,6 +203,12 @@
 	desc = "This bronze key should open the Miner's quarters."
 	icon_state = "brownkey"
 	lockids = list(ACCESS_MINER)
+
+/obj/item/key/sweeper
+	name = "sweeper's key"
+	desc = "This key opens the Sweeper's room. It smells foul."
+	icon_state = "rustkey"
+	lockids = list(ACCESS_SWEEPER)
 
 // Residents
 
@@ -280,11 +305,28 @@
 	icon_state = "mazekey"
 	lockids = list(ACCESS_MANOR)
 
+/obj/item/key/butler
+	name = "keep master key"
+	desc = "This key will open almost all Keep doors."
+	icon_state = "royalkey"
+	lockids = list(ACCESS_MANOR, ACCESS_BUTLER, ACCESS_SERVANT)
+
+/obj/item/key/servant
+	name = "keep servants key"
+	lockids = list(ACCESS_MANOR, ACCESS_SERVANT)
+	icon_state = "servekey"
+
 /obj/item/key/hand
 	name = "hand's key"
 	desc = "This regal key belongs to the Monarch's Right Hand."
 	icon_state = "cheesekey"
-	lockids = list(ACCESS_HAND)
+	lockids = list(ACCESS_HAND, ACCESS_COURTAGENT, ACCESS_SERVANT)
+
+/obj/item/key/courtagent
+	name = "court agent hideout key"
+	desc = "This key should open the doors in the Court Agent's Hideout"
+	icon_state = "rustkey"
+	lockids = list(ACCESS_COURTAGENT)
 
 /obj/item/key/steward
 	name = "steward's key"
@@ -307,20 +349,36 @@
 /obj/item/key/consort
 	name = "consort key"
 	desc = "The Consort's key."
-	icon_state = "mazekey"
-	lockids = list(ACCESS_LORD)
+	icon_state = "royalkey"
+	lockids = list(ACCESS_MANOR, ACCESS_SERVANT, ACCESS_BUTLER, ACCESS_CONSORT)
 
-/obj/item/key/walls
+/obj/item/key/consort/monarch
+	name = "monarch's spare key"
+	desc = "The spare key of the monarch."
+
+/obj/item/key/heir
+	name = "heir's key"
+	desc = "The key of a royal arse."
+	icon_state = "lessroyalkey"
+	lockids = list(ACCESS_HEIR, ACCESS_MANOR)
+
+/obj/item/key/gatehouse
 	name = "keep gatehouse key"
 	desc = "This is a rusty key for the Keep Gatehouse."
 	icon_state = "rustkey"
 	lockids = list(ACCESS_MANOR_GATE)
 
+/obj/item/key/archivist
+	name = "archivist's key"
+	desc = "A smell of ink, parchment and dust clings to this key."
+	icon_state = "ekey"
+	lockids = list(ACCESS_ARCHIVIST)
+
 /obj/item/key/archive
 	name = "archive key"
 	desc = "This key looks barely used."
 	icon_state = "ekey"
-	lockids = list(ACCESS_ARCHIVE)
+	lockids = list(ACCESS_LIBRARY)
 
 /obj/item/key/mage
 	name = "magicians's key"
@@ -335,10 +393,28 @@
 	lockids = list(ACCESS_AT_ARMS)
 
 /obj/item/key/guest
-	name = "guest key"
-	desc = "The key to the manor's guest room. Given to visiting nobles."
+	name = "guest room master key"
+	desc = "The key to the keep guest rooms. Not for distribution."
 	icon_state = "greenkey"
-	lockids = list(ACCESS_GUEST)
+	lockids = list(ACCESS_GUEST1, ACCESS_GUEST2, ACCESS_GUEST3)
+
+/obj/item/key/guest/one
+	name = "guest room 1 key"
+	desc = "The key to the keep guest room. Given to visiting nobles."
+	icon_state = "brownkey"
+	lockids = list(ACCESS_GUEST1)
+
+/obj/item/key/guest/two
+	name = "guest room 2 key"
+	desc = "The key to the keep guest room. Given to visiting nobles."
+	icon_state = "brownkey"
+	lockids = list(ACCESS_GUEST2)
+
+/obj/item/key/guest/three
+	name = "guest room 3 key"
+	desc = "The key to the keep guest room. Given to visiting nobles."
+	icon_state = "brownkey"
+	lockids = list(ACCESS_GUEST3)
 
 /obj/item/key/courtphys
 	name = "court physician's key"
@@ -570,6 +646,54 @@
 /obj/item/key/apartments/penthouse2
 	name = "penthouse ii key"
 	lockids = list("penthouse2")
+
+/obj/item/key/apartments/merc1
+	name = "mercenary apartment i key"
+	lockids = list("merc1")
+
+/obj/item/key/apartments/merc2
+	name = "mercenary apartment ii key"
+	lockids = list("merc2")
+
+/obj/item/key/apartments/merc3
+	name = "mercenary apartment iii key"
+	lockids = list("merc3")
+
+/obj/item/key/apartments/merc4
+	name = "mercenary apartment iv key"
+	lockids = list("merc4")
+
+/obj/item/key/apartments/merc5
+	name = "mercenary apartment v key"
+	lockids = list("merc5")
+
+/obj/item/key/apartments/merc6
+	name = "mercenary apartment vi key"
+	lockids = list("merc6")
+
+/obj/item/key/apartments/adv1
+	name = "adventurer apartment i key"
+	lockids = list("adv1")
+
+/obj/item/key/apartments/adv2
+	name = "adventurer apartment ii key"
+	lockids = list("adv2")
+
+/obj/item/key/apartments/adv3
+	name = "adventurer apartment iii key"
+	lockids = list("adv3")
+
+/obj/item/key/apartments/adv4
+	name = "adventurer apartment iv key"
+	lockids = list("adv4")
+
+/obj/item/key/apartments/adv5
+	name = "adventurer apartment v key"
+	lockids = list("adv5")
+
+/obj/item/key/apartments/adv6
+	name = "adventurer apartment vi key"
+	lockids = list("adv6")
 
 // SHOP KEYS
 

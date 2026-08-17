@@ -12,6 +12,8 @@
 	shared_occurence_type = SHARED_MINOR_THREAT
 	minor_roleset = TRUE
 
+	can_call_midround = TRUE
+
 	restricted_roles = list(
 		/datum/job/lord,
 		/datum/job/consort,
@@ -23,13 +25,16 @@
 		/datum/job/absolver,
 		/datum/job/orthodoxist,
 		/datum/job/adept,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/gmtemplar,
 		/datum/job/templar,
 		/datum/job/tomb_warden,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
+		/datum/job/admin,
 	)
 
 
@@ -49,11 +54,10 @@
 
 	preferred_events = list(
 		/datum/round_event_control/antagonist/solo/wretch = 1,
-		/datum/round_event_control/antagonist/solo/rebel = 1,
 		/datum/round_event_control/antagonist/solo/vampires = 0.7,
 		/datum/round_event_control/antagonist/solo/werewolf = 0.7,
 		/datum/round_event_control/antagonist/solo/vampires_and_werewolves = 0.5,
-		/datum/round_event_control/antagonist/solo/zizo_cult = 0.6,
+		///datum/round_event_control/antagonist/solo/zizo_cult = 0.6,
 		/datum/round_event_control/antagonist/solo/lich = 0.6,
 	)
 

@@ -57,7 +57,6 @@
 /datum/outfit/escprisoner
 	name = "Escaped Prisoner (Migrant Wave)"
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
-	mask = /obj/item/clothing/face/facemask/prisoner
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/weapon/knife/villager

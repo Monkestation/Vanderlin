@@ -25,18 +25,6 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		popup.open(FALSE)
 		return
 
-	if(href_list["view_descriptors"] && (isobserver(usr) || usr.can_perform_action(src, NEED_LIGHT)))
-		if(!ismob(usr))
-			return
-		var/obscure_name
-		if(name == "Unknown" || name == "Unknown Man" || name == "Unknown Woman")
-			obscure_name = TRUE
-		if(isobserver(usr))
-			obscure_name = FALSE
-		var/list/lines = build_cool_description(get_mob_descriptors(obscure_name, usr), src)
-		to_chat(usr, span_info("[lines.Join("\n")]"))
-		return
-
 	if(href_list["inspect_limb"] && (isobserver(usr) || usr.can_perform_action(src, FORBID_TELEKINESIS_REACH)))
 		var/list/msg = list()
 		var/mob/user = usr

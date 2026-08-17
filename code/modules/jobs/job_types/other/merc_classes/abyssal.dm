@@ -7,7 +7,7 @@
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms = 33,
 		/datum/attribute/skill/combat/swords = 20,
 	)
 
@@ -60,8 +60,13 @@
 	if(spawned.gender == MALE)
 		// Male: arcyne trident wielder
 		spawned.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/summon_trident)
+		spawned.add_spell(/datum/action/cooldown/spell/bind_weapon)
+		spawned.add_spell(/datum/action/cooldown/spell/recall_weapon)
 		spawned.add_spell(/datum/action/cooldown/spell/pressure)
 		spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+		ADD_TRAIT(spawned, TRAIT_SORCERER, INNATE_TRAIT)
+		spawned.adjust_form_mastery_points(6)
+		spawned.adjust_technique_mastery_points(3)
 		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/abyssal/boy)
 
 		if(!istype(spawned.patron, /datum/patron/inhumen/zizo))
@@ -73,13 +78,13 @@
 	shoes = /obj/item/clothing/shoes/sandals
 	belt = /obj/item/storage/belt/leather/mercenary
 	backl = /obj/item/storage/backpack/satchel
+	mask = /obj/item/clothing/face/facemask
 	armor = /obj/item/clothing/armor/medium/scale
 	head = /obj/item/clothing/head/helmet/winged
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	beltl = /obj/item/weapon/sword/sabre/cutlass
-	wrists = /obj/item/clothing/wrists/bracers/leather
+	wrists = /obj/item/clothing/wrists/bracers/ironjackchain
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 	backpack_contents = list(
-		/obj/item/storage/keyring/mercenary,
 		/obj/item/storage/belt/pouch/coins/poor,
 	)

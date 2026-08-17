@@ -8,7 +8,6 @@
 	var/list/lord_traits = list()
 	var/lord_title = "Lord"
 	var/vitae_bonus = 500 // Extra vitae for lords
-	var/ascended = FALSE
 
 /datum/clan_leader/lord
 	lord_spells = list(
@@ -22,10 +21,9 @@
 		/mob/living/carbon/human/proc/demand_submission,
 		/mob/living/carbon/human/proc/punish_spawn
 	)
-	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_NOSTAMINA)
+	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOSTAMINA)
 	lord_title = "Lord"
 	vitae_bonus = 500 // Extra vitae for lords
-	ascended = FALSE
 
 /datum/clan_leader/proc/make_new_leader(mob/living/carbon/human/H)
 	// Add lord spells

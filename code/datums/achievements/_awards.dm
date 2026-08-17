@@ -19,7 +19,7 @@
 	var/unlock_message = FALSE
 	/// Whether or not we should play the unlocking sound
 	var/unlock_sound = FALSE
-	 /// If set, this many triumphs are granted when the achievement is first unlocked
+	/// If set, this many triumphs are granted when the achievement is first unlocked
 	var/triumph_reward = 0
 	///these are the flags we have
 	var/award_flags = NONE

@@ -14,7 +14,6 @@
 	can_parry = FALSE
 	wdodgebonus = 30 //To counteract the GREAT_LENGTH penalty.
 	possible_item_intents = list(WHIP_CRACK, WHIP_LASH)
-	minstr = 4
 
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
@@ -42,20 +41,23 @@
 //................ Repenta En ............... //
 /obj/item/weapon/whip/antique
 	name = "\proper repenta en"
-	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle"
+	desc = "An extremely well maintained whip, with a polished steel tip and gilded handle."
 	icon_state = "gwhip"
 	force = DAMAGE_WHIP + 4
-	minstr = 7
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/steel_slag
 	max_integrity = INTEGRITY_STRONG
 	sellprice = 50
 	item_weight = 600 GRAMS
 
+//................ Butler Whip ............... //
+/obj/item/weapon/whip/butler
+	name = "crown's will"
+
 //................ Silver Whip ............... //
 /obj/item/weapon/whip/silver
 	name = "silver whip"
-	desc = "A whip with a silver handle, core and tip. It has been modified for inflicting burning pain on Nitebeasts."
+	desc = "A whip with a silver handle, core and tip. It has been modified for inflicting burning pain on nitebeasts."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psywhip_lesser"
 	force = DAMAGE_WHIP + 2
@@ -146,7 +148,6 @@
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spiderwhip"
 	force = DAMAGE_WHIP + 3
-	minstr = 6
 	item_weight = 500 GRAMS
 
 //................ Chain Whip ............... //
@@ -156,7 +157,6 @@
 	icon_state = "whip_chain"
 	force = DAMAGE_WHIP + 3
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_MTLLASH)
-	minstr = 9
 
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FIRE_PROOF
@@ -195,7 +195,6 @@
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONG
-	minstr = 5
 
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	resistance_flags = FIRE_PROOF

@@ -20,6 +20,7 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/healing/greater,
 		CLERIC_T3 = /datum/action/cooldown/spell/revive,
 	)
+	favored_species = list(SPEC_ID_AASIMAR)
 	viable_tasks = list(
 		/datum/devotion_task/astrata_purge,
 	)
@@ -32,12 +33,40 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/blindness/miracle,
 		CLERIC_T3 = /datum/action/cooldown/spell/projectile/moonlit_dagger,
 	)
+	favored_species = list(SPEC_ID_AASIMAR)
 	viable_tasks = list(
 		/datum/devotion_task/noc_teach,
 		/datum/devotion_task/noc_write,
 		/datum/devotion_task/noc_read,
 	)
 	traits = list(TRAIT_DIVINE_SERVANT)
+
+/datum/devotion/divine/noc/make_oracle()
+	devotion = 300
+	progression = CLERIC_REQ_3
+	passive_devotion_gain = 1
+	/// We're overriding the list.
+	miracles = list(
+		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/healing/greater/noc),
+		CLERIC_T1 = /datum/action/cooldown/spell/status/invisibility,
+		CLERIC_T2 = /datum/action/cooldown/spell/blindness/miracle,
+		CLERIC_T3 = list(/datum/action/cooldown/spell/projectile/moonlit_dagger, /datum/action/cooldown/spell/projectile/moonstrike),
+	)
+	miracles_extra += list(
+		/datum/action/cooldown/spell/revive_noc,
+		/datum/action/cooldown/spell/cure_rot,
+		/datum/action/cooldown/spell/diagnose/holy,
+	)
+	devotion_class = DEVOTION_CLASS_ACOLYTE // Equal to priest, but unique to Noc. Changing patron will reset to Acolyte tier.
+
+/datum/devotion/divine/noc/make_lunar_champion()
+	devotion = 250
+	max_devotion = 500
+	progression = CLERIC_REQ_3
+	devotion_class = DEVOTION_CLASS_TEMPLAR
+	miracles_extra += list(
+		/datum/action/cooldown/spell/projectile/moonstrike,
+	)
 
 /datum/devotion/divine/dendor
 	miracles = list(
@@ -47,6 +76,7 @@
 		CLERIC_T3 = /datum/action/cooldown/spell/beast_tame,
 
 	)
+	favored_species = list(SPEC_ID_AASIMAR)
 	viable_tasks = list(
 		/datum/devotion_task/dendor_tend,
 		/datum/devotion_task/dendor_harvest,
@@ -61,6 +91,7 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/undirected/conjure_item/summon_trident/miracle,
 		CLERIC_T3 = /datum/action/cooldown/spell/ocean_embrace,
 	)
+	favored_species = list(SPEC_ID_AASIMAR)
 	viable_tasks = list(
 		/datum/devotion_task/abyssor_sail,
 		/datum/devotion_task/abyssor_fish,
@@ -74,6 +105,7 @@
 		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/locate_dead, /datum/action/cooldown/spell/aoe/abrogation, /datum/action/cooldown/spell/undirected/soul_speak, ),
 		CLERIC_T3 = /datum/action/cooldown/spell/aoe/churn_undead,
 	)
+	favored_species = list(SPEC_ID_AASIMAR)
 	viable_tasks = list(
 		/datum/devotion_task/necra_bury,
 		/datum/devotion_task/astrata_purge,
@@ -87,6 +119,7 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/undirected/divine_strike,
 		CLERIC_T3 = /datum/action/cooldown/spell/persistence,
 	)
+	favored_species = list(SPEC_ID_AASIMAR)
 	traits = list(TRAIT_DIVINE_SERVANT)
 
 /datum/devotion/divine/xylix
@@ -96,6 +129,7 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/status/wheel,
 		CLERIC_T3 = /datum/action/cooldown/spell/undirected/jaunt/illusory_prop,
 	)
+	favored_species = list(SPEC_ID_AASIMAR)
 	viable_tasks = list(
 		/datum/devotion_task/xylix_gamble,
 		/datum/devotion_task/xylix_trick,
@@ -109,6 +143,7 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/attach_bodypart,
 		CLERIC_T3 = /datum/action/cooldown/spell/cure_rot,
 	)
+	favored_species = list(SPEC_ID_AASIMAR)
 	viable_tasks = list(
 		/datum/devotion_task/pestra_heal,
 		/datum/devotion_task/pestra_medicine,
@@ -122,7 +157,7 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/hammer_fall,
 		CLERIC_T3 = /datum/action/cooldown/spell/heat_metal,
 	)
-	favored_species = list(SPEC_ID_DWARF)
+	favored_species = list(SPEC_ID_DWARF, SPEC_ID_AASIMAR)
 	favored_miracles = list(
 		CLERIC_T2 = /datum/action/cooldown/spell/status/malum_anvil
 	)
@@ -140,7 +175,7 @@
 		CLERIC_T2 = /datum/action/cooldown/spell/projectile/eora_curse,
 		CLERIC_T3 = /datum/action/cooldown/spell/eoran_bloom,
 	)
-	favored_species = list(SPEC_ID_HARPY)
+	favored_species = list(SPEC_ID_HARPY, SPEC_ID_AASIMAR)
 	favored_miracles = list(
 		CLERIC_T3 = /datum/action/cooldown/spell/charm/eoran
 	)
@@ -179,7 +214,7 @@
 	miracles = list(
 		CLERIC_T0 = list(/datum/action/cooldown/spell/undirected/touch/orison, /datum/action/cooldown/spell/aoe/snuff),
 		CLERIC_T1 = /datum/action/cooldown/spell/projectile/profane,
-		CLERIC_T2 = /datum/action/cooldown/spell/conjure/raise_lesser_undead,
+		CLERIC_T2 = /datum/action/cooldown/spell/conjure_summon/raise_lesser_undead,
 		CLERIC_T3 = /datum/action/cooldown/spell/undirected/rituos,
 	)
 	traits = list(TRAIT_DEATHSIGHT)
