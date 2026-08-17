@@ -177,3 +177,18 @@
   - rscadd: Added Nitewalker admin preset.
   - rscadd: Ethereal Jaunt is detected with Arcyne Eye and no longer has a FOB blocker.
   - bugfix: Phantom Ear isn't abducted by teleport sigils.
+2026-08-16:
+  MissyNym:
+  - map: Adds a fenced off chicken coop for the Bog Witch.
+  - map: Adds a rolling pin to the Church on White Palace Pass.
+  realforest2001:
+  - bugfix: Poisons are now correctly subtyped.
+2026-08-17:
+  dwasint:
+  - rscadd: dormant edge protection
+  - rscadd: dormant layering
+  realforest2001:
+  - map: Mapped in new keep areas to Rosewood.
+  - map: Mapped in new keep areas to White Palace Pass.
+  ta3754859-max:
+  - balance: Increased dragonslayer cleave intent CD to 5 seconds
