@@ -3061,7 +3061,7 @@
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 8
 	},
-/turf/open/floor/ruinedwood/alt,
+/turf/open/floor/wood,
 /area/indoors/town/church)
 "btx" = (
 /obj/structure/closet/dirthole/closed,
@@ -10798,6 +10798,11 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
+"eOM" = (
+/obj/structure/fluff/statue/knight/r,
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/blocks,
+/area/outdoors/exposed/church)
 "eOP" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock/alt,
@@ -11581,7 +11586,7 @@
 /obj/structure/fake_machine/scomm{
 	pixel_y = -32
 	},
-/turf/open/floor/ruinedwood/alt,
+/turf/open/floor/wood,
 /area/indoors/town/church)
 "ffp" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -13027,6 +13032,13 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
 /area/outdoors/town/noble_manor/red)
+"fOX" = (
+/obj/structure/fluff/statue/knight/r,
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/blocks,
+/area/outdoors/exposed/church)
 "fPe" = (
 /turf/open/floor/cobblerock/alt,
 /area/indoors/town/noble_manor/blue)
@@ -16790,6 +16802,9 @@
 	icon_state = "barsbent";
 	layer = 2.81
 	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = 2
+	},
 /turf/open/floor/woodturned,
 /area/indoors/town/church)
 "hzC" = (
@@ -20307,8 +20322,8 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
 "iYu" = (
-/obj/structure/fake_machine/scomm/l,
-/turf/open/floor/cobble,
+/obj/structure/fake_machine/scomm/r,
+/turf/open/floor/cobblerock,
 /area/indoors/town/church)
 "iYJ" = (
 /obj/structure/fake_machine/scomm/l,
@@ -23721,7 +23736,7 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/cloak/stabard/templar/ravox,
 /obj/item/storage/backpack/satchel,
-/turf/open/floor/ruinedwood/alt,
+/turf/open/floor/wood,
 /area/indoors/town/church)
 "kuG" = (
 /obj/structure/rack/shelf/biggest,
@@ -27794,14 +27809,9 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/throne)
 "mgJ" = (
-/obj/structure/flora/grass{
-	icon_state = "grass2"
-	},
-/obj/structure/flora/grass{
-	icon_state = "grass2"
-	},
-/obj/structure/flora/ausbushes/ppflowers,
-/turf/open/floor/dirt,
+/obj/structure/door/iron/bars,
+/obj/effect/mapping_helpers/access/keyset/church/general,
+/turf/open/floor/cobblerock,
 /area/outdoors/exposed/church)
 "mgK" = (
 /turf/open/floor/hexstone,
@@ -42625,6 +42635,11 @@
 /obj/item/candle/skull/lit,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church)
+"std" = (
+/obj/structure/flora/ausbushes/ywflowers,
+/obj/structure/flora/grass,
+/turf/open/floor/grass/red,
+/area/outdoors/exposed/church)
 "sto" = (
 /turf/closed/mineral/salt,
 /area/outdoors/river)
@@ -44538,7 +44553,7 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/turf/open/floor/ruinedwood/alt,
+/turf/open/floor/wood,
 /area/indoors/town/church)
 "tiJ" = (
 /obj/structure/rack{
@@ -54978,6 +54993,13 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
+"xrJ" = (
+/obj/structure/flora/grass/bush,
+/obj/structure/flora/grass{
+	icon_state = "grass2"
+	},
+/turf/open/floor/dirt,
+/area/outdoors/exposed/church)
 "xso" = (
 /turf/open/floor/cobble/mossy,
 /area/under/cavewet)
@@ -170001,12 +170023,12 @@ ckE
 ctC
 yfS
 yfS
-gIM
 ctC
+eOM
 fYQ
 fYQ
 fYQ
-hTX
+fOX
 hTX
 njn
 lYj
@@ -170203,15 +170225,15 @@ cwj
 lXn
 mBG
 qCn
-jvD
 yfS
+jcS
 dlS
 dlS
 dlS
-pPT
+mBG
+anA
+wPi
 iYu
-wPi
-wPi
 lYj
 wYu
 wUI
@@ -170405,12 +170427,12 @@ fFC
 cwj
 fFC
 lXn
-vvq
-gIM
+yfS
+mBG
 cwj
 fFC
 fFC
-hTX
+lQu
 hTX
 kZr
 hTX
@@ -170607,13 +170629,13 @@ cwj
 ptO
 fFC
 cwj
-fFC
-yfS
+sty
+qCn
 lXn
 fFC
 cwj
-nFK
-qQT
+xrJ
+bKF
 fFC
 uVu
 fFC
@@ -170809,13 +170831,13 @@ fFC
 vrD
 fFC
 cwj
-cwj
 xgO
+cwj
 fFC
 fmS
 fFC
-xgO
-fFC
+cwj
+mgJ
 fFC
 voO
 lXn
@@ -171011,13 +171033,13 @@ lXn
 lXn
 lQu
 cwj
-fFC
-xgO
+mgJ
+cwj
 fFC
 hfn
 fFC
-xgO
 cwj
+xgO
 cwj
 fFC
 qQT
@@ -171213,13 +171235,13 @@ lXn
 lXn
 lXn
 lXn
-fFC
-yfS
+sty
+bBg
 fFC
 fFC
 lXn
-gIM
-lXn
+mBG
+nFK
 fFC
 fFC
 cwj
@@ -171415,13 +171437,13 @@ lXn
 lXn
 dJo
 mkt
+yfS
 aAG
-gIM
 fFC
 cwj
 fFC
-sty
-mgJ
+std
+gIM
 fFC
 cwj
 fFC
@@ -210614,8 +210636,8 @@ bpi
 wdV
 wdV
 vuq
-iRN
-iRN
+jVU
+jVU
 vNH
 nRI
 nRI
