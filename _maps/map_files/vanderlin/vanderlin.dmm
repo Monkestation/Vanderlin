@@ -10869,6 +10869,9 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/exposed/church)
 "eFi" = (
+/obj/structure/bars/passage/shutter/open{
+	redstone_id = "nite_shutter"
+	},
 /turf/closed/wall/mineral/stone/window,
 /area/indoors/town/clinic_large/apothecary)
 "eFn" = (
@@ -15251,6 +15254,9 @@
 	redstone_id = "apothecary"
 	},
 /obj/structure/bars/bent,
+/obj/structure/bars/passage/shutter/open{
+	redstone_id = "nite_shutter"
+	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "gyF" = (
@@ -19317,6 +19323,9 @@
 	redstone_id = "apothecary"
 	},
 /obj/structure/bars/bent,
+/obj/structure/bars/passage/shutter/open{
+	redstone_id = "nite_shutter"
+	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "ikL" = (
@@ -24938,7 +24947,7 @@
 /area/outdoors/town)
 "kDm" = (
 /obj/structure/bars/passage/shutter/open{
-	redstone_id = "nite_shutter"
+	redstone_id = "Merchant"
 	},
 /turf/closed/wall/mineral/stone/window/moss,
 /area/indoors/town/shop)
@@ -44882,6 +44891,9 @@
 	redstone_id = "apothecary"
 	},
 /obj/structure/bars/bent,
+/obj/structure/bars/passage/shutter/open{
+	redstone_id = "nite_shutter"
+	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "sJZ" = (
