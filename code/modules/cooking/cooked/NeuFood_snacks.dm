@@ -131,7 +131,7 @@
 	nutrition = COOKED_MEAT_NUTRITION + COOKED_VEGGIE_NUTRITION
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
-	list_reagents = list(/datum/reagent/drowsbane = 10)
+	list_reagents = list(/datum/reagent/poison/drowsbane = 10)
 	item_weight = 300 GRAMS
 
 /*	.............   Ribs   ................ */
@@ -717,7 +717,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
 	portable = FALSE
-	list_reagents = list(/datum/reagent/drowsbane = 10)
+	list_reagents = list(/datum/reagent/poison/drowsbane = 10)
 	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/drowsbanejam/slice
