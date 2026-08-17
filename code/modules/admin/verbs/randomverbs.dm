@@ -739,14 +739,17 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Scan Health"
 	set category = "GameMaster.Gods"
 	if(!check_rights())
-		return
+		to_chat(usr, span_warning("You should not have this button. Shoo."))
+		return FALSE
 
 	if(!ishuman(target))
-		return
+		to_chat(usr, span_warning("You can only use this on human targets."))
+		return FALSE
 	var/mob/living/carbon/human/human_target = target
 	if(QDELETED(human_target))
-		return
-	human_target.check_for_injuries(usr, TRUE, TRUE, TRUE, TRUE)
+		return FALSE
+	human_target.check_for_injuries(mob, TRUE, TRUE, TRUE, TRUE)
+	return TRUE
 
 /client/proc/smite(mob/living/target as mob)
 	set name = "Smite"
