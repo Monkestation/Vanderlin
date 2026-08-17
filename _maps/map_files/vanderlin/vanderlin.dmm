@@ -46135,7 +46135,7 @@
 /area/outdoors/basin/safe)
 "tvO" = (
 /obj/structure/window/stained/silver,
-/turf/closed/basic,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large/feldsher)
 "tvP" = (
 /obj/effect/landmark/start/hunter,
