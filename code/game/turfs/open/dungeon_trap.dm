@@ -12,6 +12,7 @@
 	density = TRUE //This will prevent hostile mobs from pathing into chasms, while the canpass override will still let it function like an open turf
 	bullet_bounce_sound = null //abandon all hope ye who enter
 	dynamic_lighting = 1
+	turf_flags = NO_JAUNT //This stops people in ethereal jaunt flying over the pit and suddenly being at the bottom of it.
 
 /// Lets people walk into chasms.
 /turf/open/dungeon_trap/CanAllowThrough(atom/movable/mover, border_dir)

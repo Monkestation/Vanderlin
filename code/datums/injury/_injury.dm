@@ -22,6 +22,8 @@
 	var/min_damage = 0
 	/// General flags like INJURY_BANDAGED, INJURY_SALVED
 	var/injury_flags = (INJURY_SOUND_HINTS)
+	///how much the pain this injury causes is amplified
+	var/pain_modifier = 1
 	/// world.time when this injury was created
 	var/created = 0
 	/// Number of injuries stored in this datum
@@ -241,7 +243,7 @@
 	switch(damage_type)
 		if(WOUND_BLUNT)
 			return DT_PROB(normalized_damage/2, delta_time)
-		if(WOUND_BURN)
+		if(WOUND_BURN, WOUND_INTENSE_BURN)
 			return DT_PROB(normalized_damage*2, delta_time)
 		if(WOUND_SLASH)
 			return DT_PROB(normalized_damage, delta_time)
@@ -418,3 +420,9 @@
 
 /datum/injury/proc/is_bandaged()
 	return CHECK_BITFIELD(injury_flags, INJURY_BANDAGED)
+
+/datum/injury/proc/return_pain()
+	var/other_mod  = SHOCK_MOD_BRUTE
+	if((damage_type == WOUND_BURN) || (damage_type == WOUND_INTENSE_BURN))
+		other_mod = SHOCK_MOD_BURN
+	return damage * pain_modifier * other_mod

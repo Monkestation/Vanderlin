@@ -136,7 +136,8 @@
 /datum/status_effect/proc/on_apply()
 	SHOULD_CALL_PARENT(TRUE)
 
-	owner.set_stat_modifier("[id]", effectedstats)
+	if(length(effectedstats))
+		owner.set_stat_modifier("[id]", effectedstats)
 
 	if(mob_overlay_icon && mob_overlay_icon_state)
 		mob_visual = build_mob_icon()
@@ -152,7 +153,8 @@
 /datum/status_effect/proc/on_remove()
 	SHOULD_CALL_PARENT(TRUE)
 
-	owner.remove_stat_modifier("[id]")
+	if(length(effectedstats))
+		owner.remove_stat_modifier("[id]")
 
 	if(mob_visual)
 		QDEL_NULL(mob_visual)

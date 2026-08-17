@@ -39,7 +39,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/blue
 	gloves = /obj/item/clothing/gloves/fingerless
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	cloak = /obj/item/clothing/cloak/raincloak
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/gun/ballistic/bow/short

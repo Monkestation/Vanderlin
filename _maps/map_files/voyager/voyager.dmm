@@ -5941,7 +5941,7 @@
 /area/ship/nobledeck)
 "NI" = (
 /obj/item/key/manor,
-/obj/item/key/walls,
+/obj/item/key/gatehouse,
 /obj/item/key/blacksmith,
 /obj/item/key/steward,
 /obj/item/key/church,
@@ -6930,7 +6930,7 @@
 /obj/item/clothing/pants/trou/leather/splint,
 /obj/item/clothing/armor/cuirass/iron,
 /obj/item/clothing/neck/gorget,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/storage/belt/leather/black,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/clothing/wrists/bracers/iron,

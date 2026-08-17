@@ -3,9 +3,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 */
 #define OBESITY "obesity"
 
-// ************* atom traits
-#define EAR_DAMAGE "ear_damage"
-
 /// Prevents the affected atom from opening a loot window via alt click. See atom/AltClick()
 #define TRAIT_ALT_CLICK_BLOCKER "no_alt_click"
 
@@ -129,10 +126,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RESISTHEATHANDS "resist_heat_handsonly"
 /// Resists low temperatures
 #define TRAIT_RESISTCOLD "resist_cold"
-/// Resist high pressure enviroments (unused with no atmos)
-#define TRAIT_RESISTHIGHPRESSURE "resist_high_pressure"
-/// Resist low pressure enviroments (unused with no atmos)
-#define TRAIT_RESISTLOWPRESSURE	"resist_low_pressure"
 /// This human is immune to the effects of being exploded. (ex_act)
 #define TRAIT_BOMBIMMUNE "bomb_immunity"
 /// Immunity against germs and viruses crippled
@@ -147,6 +140,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EASYDISMEMBER "easy_dismember"
 /// Limbs can't be dismembered
 #define TRAIT_NODISMEMBER "dismember_immunity"
+/// Cannot be decapitated, other limbs still fall off.
+#define TRAIT_NODECAPITATE "decapitate_immunity"
 /// Can't get fire stacks (can get DIVINE fire stacks)
 #define TRAIT_NOFIRE "Nonflammable"
 /// Can't use guns
@@ -188,12 +183,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOHARDCRIT "nohardcrit"
 /// Can't enter soft crit
 #define TRAIT_NOSOFTCRIT "nosoftcrit"
-/// Shielded from mind altering effects (unused)
-#define TRAIT_MINDSHIELD "mindshield"
-/// Unused
-#define TRAIT_DISSECTED	"dissected"
 /// Can hear dead people
-#define TRAIT_SIXTHSENSE "sixth_sense"
+#define TRAIT_GHOSTEARS "ghost_sense"
 /// Immune to the effects of phobias
 #define TRAIT_FEARLESS "fearless"
 //These are used for brain-based paralysis, where replacing the limb won't fix it
@@ -217,8 +208,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MAGIC_CHOKE "magic_choke"
 /// Immune to nervous cough
 #define TRAIT_SOOTHED_THROAT "soothed-throat"
-/// Can't lower hygiene
-#define TRAIT_ALWAYS_CLEAN "always-clean"
 /// Can throw reagent containers without spilling them
 #define TRAIT_BOOZE_SLIDER "booze-slider"
 /// Unused
@@ -356,6 +345,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_AI_PAUSED "TRAIT_AI_PAUSED"
 ///trait that stops our ai controlled mob from moving at all due to ai planning
 #define TRAIT_AI_MOVEMENT_HALTED "ai_movement_halted"
+///do we have arcyne momentum
+#define TRAIT_ARCYNE_MOMENTUM "arcyne_momentum"
 
 /// Trait given to a living mob and any observer mobs that stem from them if they suicide.
 /// For clarity, this trait should always be associated/tied to a reference to the mob that suicided- not anything else.
@@ -443,8 +434,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SEE_LEYLINES "Magical Visions"
 #define TRAIT_POISONBITE "Poison Bite"
 #define TRAIT_BLOODDRINKER "Blood Drinker" // Can drink blood without vomiting
+#define TRAIT_SILVER_IMMUNE "Silver Immune"
 #define TRAIT_FORAGER "Expert Forager"
 #define TRAIT_TINY "Tiny"
+#define TRAIT_BIGGUY "Big Guy"
 #define TRAIT_DREAM_WATCHER	"Noc Blessed" //Unique Trait of the Dream Watcher Town Elder Class, they have a chance to know about antags or gods influences.
 #define TRAIT_HOLLOWBONES "Hollow Bones"
 #define TRAIT_AMAZING_BACK "Light Load"
@@ -494,6 +487,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NODE_EXTRACTED "Humors Extracted"
 #define TRAIT_NO_EXPERIENCE	"unlearning"
 #define TRAIT_NO_SKILLS "zero_skills"
+#define TRAIT_HASMAGIC "hasmagic"
 /// This mob should never be affected by `/obj/effect/timestop`
 #define TRAIT_TIME_STOP_IMMUNE "timestopimmune"
 /// This mob should never close UI even if it doesn't have a client
@@ -501,6 +495,13 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This mob can't have a split personality
 #define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
 #define TRAIT_VIRGIN	"virginity"
+// This is for UNARMED FIGHTERS. LIMIT ITS USE TO THEM
+#define TRAIT_CLOSECOMBAT "Close Combat"
+
+#define TRAIT_CONJURED_SUMMON "conjured_summon"
+#define TRAIT_CONJURE_BACKLASH "conjure_backlash"
+
+#define TRAIT_SORCERER "Unattuned"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise
@@ -530,6 +531,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DIVINE_CENTRIST "Divine Centrist"
 #define TRAIT_DIVINE_SERVANT "Divine Servant"
 #define TRAIT_DIVINE_CONVERT "Divine Convert"
+#define TRAIT_LUNAR_ORDER "Member of the Lunar Order"
 
 // Inhumen patron trait bonuses
 #define TRAIT_ORGAN_EATER "Blessing of Graggar"//Can eat organs (duh.) and raw meat

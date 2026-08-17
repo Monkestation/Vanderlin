@@ -109,6 +109,9 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "moonflail"
 	sharpness = IS_SHARP
+	max_blade_int = 160
+	possible_item_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_LNGCUT)
+	wlength = WLENGTH_GREAT
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon

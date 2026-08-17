@@ -50,6 +50,10 @@
 	sellprice = 50
 	item_weight = 600 GRAMS
 
+//................ Butler Whip ............... //
+/obj/item/weapon/whip/butler
+	name = "crown's will"
+
 //................ Silver Whip ............... //
 /obj/item/weapon/whip/silver
 	name = "silver whip"

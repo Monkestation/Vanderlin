@@ -53,7 +53,7 @@
 	outfit = /datum/outfit/pilgrim/minermaster
 	total_positions = 1
 	roll_chance = 0
-	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	category_tags = list(CTAG_PILGRIM)
 	apprentice_name = "Miner Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE

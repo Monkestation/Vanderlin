@@ -68,6 +68,8 @@
 		if("WHO NEEDS A WEAPON?")
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 10)
+			spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
+			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 
 /datum/outfit/adventurer/barbarian
 	name = "Barbarian (Adventurer)"

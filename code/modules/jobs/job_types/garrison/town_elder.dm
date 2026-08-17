@@ -7,7 +7,7 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CHIEF
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -20,6 +20,7 @@
 	advclass_cat_rolls = list(CTAG_TOWN_ELDER = 20)
 	give_bank_account = 50
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	can_have_apprentices = FALSE
 
 	exp_type = list(EXP_TYPE_BARD, EXP_TYPE_LIVING)
@@ -83,6 +84,7 @@
 
 /datum/job/advclass/town_elder
 	exp_types_granted = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_BARD)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/town_elder/mayor
 	raw_attribute_list = list(
@@ -152,7 +154,7 @@
 	armor = /obj/item/clothing/armor/leather/vest/winterjacket
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	gloves = /obj/item/clothing/gloves/leather/black
 	ring = /obj/item/clothing/ring/gold/toper
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/black
@@ -560,7 +562,7 @@
 	armor = /obj/item/clothing/armor/leather/jacket/silk_coat
 	shirt = /obj/item/clothing/shirt/tunic/noblecoat
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/half
