@@ -504,8 +504,13 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 		return
 	ADD_TRAIT(user, TRAIT_NOPAIN, TRAIT_GENERIC)
 	to_chat(target, span_notice("I no longer feel pain, but it has come at a terrible cost."))
-	target.change_stat(STAT_STRENGTH, -2)
-	target.change_stat(STAT_CONSTITUTION, -3)
+	target.attributes?.add_sheet(/datum/attribute_holder/sheet/job/nopain)
+
+/datum/attribute_holder/sheet/job/nopain
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_CONSTITUTION = -3,
+	)
 
 /datum/ritual/fleshcrafting/immortality
 	name = "Flawed Immortality"
@@ -534,14 +539,17 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	ADD_TRAIT(user, TRAIT_NOHARDCRIT, TRAIT_GENERIC)
 	ADD_TRAIT(user, TRAIT_NOSOFTCRIT, TRAIT_GENERIC)
 	to_chat(target, span_notice("ZIZO EMPOWERS ME!! SOMETHING HAS GONE WRONG, THE RITUAL FAILED BUT WHAT IT LEFT ME WITH IS STILL POWER!!"))
-	target.adjust_stat_modifier(STATMOD_ABOM, list(
-		STAT_STRENGTH = -3,
-		STAT_SPEED = -4,
-		STAT_ENDURANCE = -4,
-	))
+	target.attributes?.add_sheet(/datum/attribute_holder/sheet/job/immortality)
 	target.Knockdown(5 SECONDS)
 	target.emote("agony", forced = TRUE)
 	target.add_spell(/datum/action/cooldown/spell/undirected/regenerate)
+
+/datum/attribute_holder/sheet/job/immortality
+	raw_attribute_list = list(
+		STAT_STRENGTH = -3,
+		STAT_SPEED = -4,
+		STAT_ENDURANCE = -4,
+	)
 
 /datum/ritual/fleshcrafting/fleshform
 	name = "Stronger Form"
