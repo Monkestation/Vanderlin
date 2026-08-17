@@ -1625,9 +1625,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if (ishuman(user) && length(culture_description)) // make sure the mob has a culture to avoid unecessary controls.
 		var/mob/living/carbon/human/humanexaminer = user
 		if(HAS_TRAIT(humanexaminer, TRAIT_CULTURAL_KNOWLEDGE))
-			for(var/culture_range = 1, culture_range <= culture_description.len, culture_range++)
-				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are culturally knowledgeable.", culture_description[culture_range])]</summary>"
-				str += culture_description[humanexaminer.culture.name]
+			for(var/entry in culture_description)
+				var/culture_desc = culture_description[entry]
+				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are culturally knowledgeable.", entry)]</summary>"
+				str += culture_desc
 				str += "</details>"
 				. += span_info(str)
 		else
