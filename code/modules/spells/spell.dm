@@ -943,21 +943,20 @@
 	if(used_cost <= 0)
 		return TRUE
 
-	if(!HAS_TRAIT(owner, TRAIT_NOSTAMINA) && spell_type != SPELL_BLOOD)
-		var/not_stamina_spell = (spell_type != SPELL_STAMINA)
-		if(!caster.check_stamina(used_cost / (1 + not_stamina_spell)))
-			if(feedback)
-				owner.balloon_alert(owner, "not enough stamina to cast!")
-			return FALSE
-
-	if(spell_type == NONE || spell_type == SPELL_STAMINA)
-		return TRUE
-
 	switch(spell_type)
+		if(NONE, SPELL_STAMINA)
+			if(HAS_TRAIT(caster, TRAIT_NOSTAMINA))
+				return TRUE
+			var/not_stamina_spell = (spell_type != SPELL_STAMINA)
+			if(!caster.check_stamina(used_cost / (1 + not_stamina_spell)))
+				if(feedback)
+					caster.balloon_alert(caster, "not enough stamina to cast!")
+				return FALSE
+
 		if(SPELL_MANA)
 			if(!caster.has_mana_available(used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "not enough mana to cast!")
+					caster.balloon_alert(caster, "not enough mana to cast!")
 				return FALSE
 
 			return TRUE
@@ -965,25 +964,25 @@
 		if(SPELL_BLOOD)
 			if(!caster.has_bloodpool_cost(used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "need more blood to cast!")
+					caster.balloon_alert(caster, "need more vitae to cast!")
 				return FALSE
 
 			return TRUE
 
 		if(SPELL_MIRACLE)
-			var/mob/living/carbon/human/H = caster
-			if(!istype(H) || !H.cleric?.check_devotion(spell_cost))
+			var/mob/living/carbon/human/human_caster = caster
+			if(!istype(human_caster) || !human_caster.cleric?.check_devotion(spell_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "devotion too weak!")
+					human_caster.balloon_alert(human_caster, "devotion too weak!")
 				return FALSE
 
 			return TRUE
 
 		if(SPELL_RAGE)
-			var/mob/living/carbon/human/H = caster
-			if(!istype(H) || !H.rage_datum?.check_rage(spell_cost))
+			var/mob/living/carbon/human/human_caster = caster
+			if(!istype(human_caster) || !human_caster.rage_datum?.check_rage(spell_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "not enough Rage!")
+					human_caster.balloon_alert(human_caster, "not enough Rage!")
 				return FALSE
 
 			return TRUE
