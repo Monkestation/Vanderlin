@@ -20,12 +20,14 @@
 	spell_cost = 30
 	spell_flags = SPELL_RITUOS
 	projectile_type = /obj/projectile/magic/bloodsteal
-	var/vitae_value = 150
+	var/vitae_drain = 150
+	var/blood_drain_perc = 5
 
 	var/current_mode = 1
 	var/list/modes = list(
-		list("name" = "Weak", "tag" = "WEAK", "amount" = 150),
-		list("name" = "Strong", "tag" = "STNG", "amount" = 300),
+		list("name" = "Weak", "tag" = "W", "vitae_drain" = 150, "blood_perc" = 5, "vitae_cost" = 30),
+		list("name" = "Normal", "tag" = "N", "vitae_drain" = 300, "blood_perc" = 10, "vitae_cost" = 60),
+		list("name" = "Enhanced", "tag" = "E", "vitae_drain" = 450, "blood_perc" = 15, "vitae_cost" = 90),
 	)
 
 /datum/action/cooldown/spell/projectile/blood_steal/Grant(mob/grant_to)
@@ -34,10 +36,12 @@
 
 /datum/action/cooldown/spell/projectile/blood_steal/proc/apply_mode(index)
 	var/list/mode = modes[index]
-	vitae_value = mode["amount"]
-	spell_cost = mode["amount"] / 10
+	vitae_drain = mode["vitae_drain"]
+	blood_drain_perc = mode["blood_perc"]
+	spell_cost = mode["vitae_cost"]
+	desc = "Launch a bolt which leeches the blood of those hit. Use [spell_cost] Vitae to drain [blood_perc]% of the target's maximum blood and, if they have any, [vitae_drain] Vitae from their RESERVES."
 	update_mode_maptext(mode["tag"])
-	if(vitae_value < 300)
+	if(vitae_drain < 300)
 		invocation_type = INVOCATION_WHISPER
 	else
 		invocation_type = INVOCATION_SHOUT
@@ -60,8 +64,6 @@
 		holder.maptext = MAPTEXT(tag)
 		holder.color = "#b11212"
 
-
-
 /datum/action/cooldown/spell/projectile/blood_steal/on_cast_hit(atom/source, mob/living/carbon/human/firer, atom/hit, angle)
 	. = ..()
 
@@ -70,7 +72,7 @@
 
 	var/mob/living/carbon/human/target = hit
 
-	var/blood_adjustment = target.default_blood_volume / 10
+	var/blood_adjustment = target.default_blood_volume * (blood_drain_perc/100)
 	if(target.blood_volume < (blood_adjustment + BLOOD_VOLUME_SURVIVE))
 		to_chat(firer, span_bloody("[target] does not have enough blood to steal!"))
 		return
@@ -85,9 +87,9 @@
 		)
 	new /obj/effect/decal/cleanable/blood/puddle(get_turf(target), target.get_blood_type().color)
 
-	if(target.bloodpool >= vitae_value) // You'll only get vitae IF they have vitae.
-		target.adjust_bloodpool(-vitae_value)
-		firer.adjust_bloodpool(vitae_value)
+	if(target.bloodpool >= vitae_drain) // You'll only get vitae IF they have vitae.
+		target.adjust_bloodpool(-vitae_drain)
+		firer.adjust_bloodpool(vitae_drain)
 		to_chat(firer, span_bloody("You drain Vitae from [target]."))
 		to_chat(target, span_bloody("[firer] has drained some of your Vitae!"))
 	else

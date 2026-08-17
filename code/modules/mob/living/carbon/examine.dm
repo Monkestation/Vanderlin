@@ -95,6 +95,7 @@
 			if(istype(BT) && BT.vitae)
 				vitae = round(cached_blood_volume * BT.vitae)
 			LAZYADDASSOCLIST(., EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
+			LAZYADDASSOCLIST(., EXAMINE_SECT_PREGEAR, span_bloody("Vitae Reserves: [round(bloodpool)]/[maxbloodpool] VT"))
 
 	// Antag stuff. This throws itself wherever it feels like.
 	for(var/datum/antagonist/antag_datum in user.mind?.antag_datums)
