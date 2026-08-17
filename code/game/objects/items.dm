@@ -1631,9 +1631,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				str += culture_desc
 				str += "</details>"
 				. += span_info(str)
-		else
-			var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are from [humanexaminer.culture.name]", humanexaminer.culture.name)]</summary>"
-			str += culture_description[humanexaminer.culture.name]
+		else if(culture_description[humanexaminer.culture.name])
+			var/datum/culture/examiner_culture = humanexaminer.culture
+			var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are from [examiner_culture.name]", examiner_culture.name)]</summary>"
+			str += culture_description[examiner_culture.name]
 			str += "</details>"
 			. += span_info(str)
 
