@@ -357,6 +357,10 @@
 		to_chat(user, span_warning("[amputee]'s limbs look too sturdy to amputate."))
 		return ITEM_INTERACT_BLOCKING
 
+	if(HAS_TRAIT(amputee, TRAIT_NODECAPITATE) && (targeted_zone == BODY_ZONE_HEAD))
+		to_chat(user, span_warning("[amputee]'s neck looks too sturdy to amputate."))
+		return ITEM_INTERACT_BLOCKING
+
 	var/obj/item/bodypart/limb_snip_candidate = amputee.get_bodypart(targeted_zone)
 	if(!limb_snip_candidate)
 		to_chat(user, span_warning("[amputee] is already missing that limb, what more do you want?"))

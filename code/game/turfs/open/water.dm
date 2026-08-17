@@ -886,6 +886,19 @@
 	fishing_datum = /datum/fish_source/river
 	river_current = TRUE
 
+
+/turf/open/water/river/flow
+	icon_state = "rockwd2"
+
+/turf/open/water/river/flow/west
+	dir = WEST
+
+/turf/open/water/river/flow/east
+	dir = EAST
+
+/turf/open/water/river/flow/north
+	dir = NORTH
+
 /turf/open/water/river/get_heuristic_slowdown(mob/traverser, travel_dir)
 	. = ..()
 	if(travel_dir & dir) // downriver

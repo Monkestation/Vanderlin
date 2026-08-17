@@ -1,32 +1,3 @@
-// Magic schools
-
-/// Unset / default / "not actually magic" school.
-#define SCHOOL_UNSET "unset"
-
-// GOOD SCHOOLS (allowed by honorbound gods, some of these you can get on station)
-/// Holy school (chaplain magic)
-#define SCHOOL_HOLY "holy"
-/// Mime... school? Mime magic. It counts
-#define SCHOOL_MIME "mime"
-/// Restoration school, which is mostly healing stuff
-#define SCHOOL_RESTORATION "restoration"
-
-// NEUTRAL SPELLS (punished by honorbound gods if you get caught using it)
-/// Evocation school, usually involves killing or destroy stuff, usually out of thin air
-#define SCHOOL_EVOCATION "evocation"
-/// School of transforming stuff into other stuff
-#define SCHOOL_TRANSMUTATION "transmutation"
-/// School of transolcation, usually movement spells
-#define SCHOOL_TRANSLOCATION "translocation"
-/// Conjuration spells summon items / mobs / etc somehow
-#define SCHOOL_CONJURATION "conjuration"
-
-// EVIL SPELLS (instant smite + banishment)
-/// Necromancy spells, usually involves soul / evil / bad stuff
-#define SCHOOL_NECROMANCY "necromancy"
-/// Other forbidden magics, such as heretic spells
-#define SCHOOL_FORBIDDEN "forbidden"
-
 #define NO_MANA_POOL (1<<0)
 #define MANA_POOL_FULL (1<<1)
 
@@ -38,7 +9,7 @@
 
 #define MANA_POOL_TRANSFER_SKIP_ACTIVE (1<<6)
 
-#define LEYLINE_BASE_RECHARGE 0.5 // Per second, we recharge this much man
+#define LEYLINE_BASE_RECHARGE 8 // Per second, we recharge this much man
 
 #define MANA_CRYSTAL_BASE_HARDCAP 200
 #define MANA_CRYSTAL_BASE_RECHARGE 0.001
@@ -46,7 +17,7 @@
 #define BASE_MANA_CAPACITY 1000
 #define MANA_CRYSTAL_BASE_MANA_CAPACITY (BASE_MANA_CAPACITY * 0.2)
 #define CARBON_BASE_MANA_CAPACITY (BASE_MANA_CAPACITY)
-#define LEYLINE_BASE_CAPACITY 600 //todo: standardize
+#define LEYLINE_BASE_CAPACITY 1200 //todo: standardize
 
 #define BASE_MANA_SOFTCAP (BASE_MANA_CAPACITY * 0.2) //20 percent
 #define BASE_MANA_CRYSTAL_SOFTCAP  MANA_CRYSTAL_BASE_MANA_CAPACITY
@@ -71,7 +42,7 @@
 // in mana per second
 #define BASE_MANA_DONATION_RATE (BASE_MANA_CAPACITY * 0.5)
 #define BASE_MANA_CRYSTAL_DONATION_RATE (BASE_MANA_DONATION_RATE * 0.1)
-#define BASE_LEYLINE_DONATION_RATE 30
+#define BASE_LEYLINE_DONATION_RATE 60
 
 #define MANA_BATTERY_MAX_TRANSFER_DISTANCE 3
 
@@ -188,6 +159,10 @@ DEFINE_BITFIELD(antimagic_flags, list(
 #define SPELL_CASTABLE_WITHOUT_INVOCATION (1 << 6)
 /// If the spell requires the user to not move during casting
 #define SPELL_REQUIRES_NO_MOVE (1 << 7)
+/// Whether the spell requires the target to be on the same Z-level as the caster.
+#define SPELL_REQUIRES_SAME_Z (1 << 8)
+/// Whether the spell can be cast while buckled to a living mount (on horseback).
+#define SPELL_CASTABLE_WHILE_MOUNTED (1 << 9)
 
 DEFINE_BITFIELD(spell_requirements, list(
 	"SPELL_CASTABLE_WITHOUT_INVOCATION" = SPELL_CASTABLE_WITHOUT_INVOCATION,
@@ -198,6 +173,8 @@ DEFINE_BITFIELD(spell_requirements, list(
 	"SPELL_REQUIRES_NO_MOVE" = SPELL_REQUIRES_NO_MOVE,
 	"SPELL_REQUIRES_STATION" = SPELL_REQUIRES_STATION,
 	"SPELL_REQUIRES_WIZARD_GARB" = SPELL_REQUIRES_WIZARD_GARB,
+	"SPELL_REQUIRES_SAME_Z" = SPELL_REQUIRES_SAME_Z,
+	"SPELL_CASTABLE_WHILE_MOUNTED" = SPELL_CASTABLE_WHILE_MOUNTED,
 ))
 
 /**
@@ -225,10 +202,108 @@ DEFINE_BITFIELD(spell_requirements, list(
 
 /// Diceroll requirement at each arcane skill tier for aimed-fire
 /// Lower = easier to hit the intended target (roll-under system)
-#define SPELLOBJECT_AIM_REQ_NONE        6
-#define SPELLOBJECT_AIM_REQ_NOVICE      9
-#define SPELLOBJECT_AIM_REQ_APPRENTICE  11
-#define SPELLOBJECT_AIM_REQ_JOURNEYMAN  13
-#define SPELLOBJECT_AIM_REQ_EXPERT      15
-#define SPELLOBJECT_AIM_REQ_MASTER      16
-#define SPELLOBJECT_AIM_REQ_LEGENDARY   17
+#define SPELLOBJECT_AIM_REQ_NONE 6
+#define SPELLOBJECT_AIM_REQ_NOVICE 9
+#define SPELLOBJECT_AIM_REQ_APPRENTICE 11
+#define SPELLOBJECT_AIM_REQ_JOURNEYMAN 13
+#define SPELLOBJECT_AIM_REQ_EXPERT 15
+#define SPELLOBJECT_AIM_REQ_MASTER 16
+#define SPELLOBJECT_AIM_REQ_LEGENDARY 17
+
+#define TECHNIQUE_DESTRUCTION "Destruction"
+#define TECHNIQUE_CREATION "Creation"
+#define TECHNIQUE_SUMMONING "Summoning"
+#define TECHNIQUE_RESTORATION "Restoration"
+#define TECHNIQUE_ALTERATION "Alteration"
+#define TECHNIQUE_ILLUSION "Illusion"
+#define TECHNIQUE_IMBUE "Imbue"
+
+#define FORM_FIRE "Fire"
+#define FORM_ICE "Ice"
+#define FORM_LIGHTNING "Lightning"
+#define FORM_EARTH "Earth"
+#define FORM_ARCANE "Arcane"
+#define FORM_DEATH "Death"
+#define FORM_LIFE "Life"
+#define FORM_AIR "Aeromancy"
+#define FORM_WATER "Hydromancy"
+
+#define MASTERY_RANK_NOVICE 0
+#define MASTERY_RANK_ADEPT 2
+#define MASTERY_RANK_EXPERT 4
+#define MASTERY_RANK_MASTER 6
+
+GLOBAL_LIST_INIT(mastery_rank_names, list(
+	"[MASTERY_RANK_NOVICE]" = "Novice",
+	"[MASTERY_RANK_ADEPT]" = "Adept",
+	"[MASTERY_RANK_EXPERT]" = "Expert",
+	"[MASTERY_RANK_MASTER]" = "Master",
+))
+
+GLOBAL_LIST_INIT(form_colors, list(
+	FORM_FIRE = "#FF4500",
+	FORM_ICE = "#00BFFF",
+	FORM_LIGHTNING = "#FFD700",
+	FORM_WATER = "#00158b",
+	FORM_LIFE = "#32CD32",
+	FORM_DEATH = "#800080",
+	FORM_EARTH = "#8B4513",
+	FORM_AIR = "#C0C0C0",
+	FORM_ARCANE = "#9932CC"
+))
+
+GLOBAL_LIST_INIT(all_techniques, list(
+	TECHNIQUE_DESTRUCTION,
+	TECHNIQUE_CREATION,
+	TECHNIQUE_SUMMONING,
+	TECHNIQUE_RESTORATION,
+	TECHNIQUE_ALTERATION,
+	TECHNIQUE_ILLUSION,
+	TECHNIQUE_IMBUE,
+))
+
+GLOBAL_LIST_INIT(all_forms, list(
+	FORM_FIRE,
+	FORM_ICE,
+	FORM_LIGHTNING,
+	FORM_EARTH,
+	FORM_ARCANE,
+	FORM_LIFE,
+	FORM_DEATH,
+	FORM_AIR,
+	FORM_WATER,
+))
+
+#define CHARGETIME_POKE 0.5 SECONDS // Staple poke spells
+#define CHARGETIME_MINOR 1 SECONDS // Minor utility / support spells
+#define CHARGETIME_MAJOR 1.5 SECONDS // Major projectiles
+#define CHARGETIME_HEAVY 2 SECONDS // Heavy AOE / ultimates
+#define CHARGETIME_BARRAGE 3 SECONDS // Barrage / Channeled spells
+
+#define CHARGING_SLOWDOWN_NONE 0
+#define CHARGING_SLOWDOWN_SMALL 1
+#define CHARGING_SLOWDOWN_MEDIUM 2
+#define CHARGING_SLOWDOWN_HEAVY 3
+
+#define SPELL_RANGE_PROJECTILE 10 // Standard projectile travel distance and projectile spell cast range
+#define SPELL_RANGE_GROUND 7 // Standard ground-targeted / AOE spell cast range
+#define SPELL_RANGE_TWO_SCREENS 14 // Two screens away for very very special spells
+#define SPELL_RANGE_AURA 4 // For 'warcry' type miracles or AOE BUFFS originating on the caster
+#define SPELL_RANGE_ADJACENT 1 // Self explanatory
+
+#define SPELL_IMPACT_NONE 0
+#define SPELL_IMPACT_LOW 1
+#define SPELL_IMPACT_MEDIUM 2
+#define SPELL_IMPACT_HIGH 3
+
+#define CONJURE_RECOIL_LIGHT 0
+#define CONJURE_RECOIL_PARTIAL 1
+#define CONJURE_RECOIL_FULL 2
+
+#define SPELLBOOK_THEME_BASELINE_QUALITY 6
+#define SPELLBOOK_THEME_BASELINE_FORM_POINTS 7
+#define SPELLBOOK_THEME_BASELINE_TECHNIQUE_POINTS 3
+
+#define SPELLMOD_COST "cost"
+#define SPELLMOD_CASTSPEED "castSpeed"
+#define SPELLMOD_MAGNITUDE "magnitude"

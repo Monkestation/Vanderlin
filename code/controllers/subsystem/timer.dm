@@ -457,31 +457,31 @@ SUBSYSTEM_DEF(timer)
 /datum/timedevent/proc/bucketJoin()
 #if defined(TIMER_DEBUG)
 	// Generate debug-friendly list for timer, more complex but also more expensive
-	timer_info = alist(
-		1 = id,
-		2 = timeToRun,
-		3 = wait,
-		4 = flags,
-		5 = callBack, /* Safe to hold this directly becasue it's never del'd */
-		6 = "[callBack.object]",
-		7 = text_ref(callBack.object),
-		8 = getcallingtype(),
-		9 = callBack.delegate,
-		10 = callBack.arguments ? callBack.arguments.Copy() : null,
-		11 = "[source]"
+	timer_info = list(
+		id,
+		timeToRun,
+		wait,
+		flags,
+		callBack, /* Safe to hold this directly becasue it's never del'd */
+		"[callBack.object]",
+		text_ref(callBack.object),
+		getcallingtype(),
+		callBack.delegate,
+		callBack.arguments ? callBack.arguments.Copy() : null,
+		"[source]",
 	)
 #else
 	// Generate a debuggable list for the timer, simpler but wayyyy cheaper, string generation (and ref/copy memes) is a bitch and this saves a LOT of time
-	timer_info = alist(
-		1 = id,
-		2 = timeToRun,
-		3 = wait,
-		4 = flags,
-		5 = callBack, /* Safe to hold this directly becasue it's never del'd */
-		6 = "[callBack.object]",
-		7 = getcallingtype(),
-		8 = callBack.delegate,
-		9 = "[source]"
+	timer_info = list(
+		id,
+		timeToRun,
+		wait,
+		flags,
+		callBack, /* Safe to hold this directly becasue it's never del'd */
+		"[callBack.object]",
+		getcallingtype(),
+		callBack.delegate,
+		"[source]",
 	)
 #endif
 

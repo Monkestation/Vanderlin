@@ -124,8 +124,10 @@ SUBSYSTEM_DEF(ambience)
 
 	if(!used && music_enabled)
 		used = my_area?.get_current_buzz(has_light_nearby())
-		if(!used || islist(used))
+		if(islist(used))
+			stack_trace("List passed from get_current_buzz on area! this should only return sound files directly!")
 			return
+
 	if(cmode && cmode_music)
 		used = cmode_music
 		vol *= 1.2
