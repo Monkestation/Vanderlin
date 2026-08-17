@@ -38,6 +38,8 @@
 
 #define ARMOR_ALL "all_damage_types"
 
+#define EDGE_PROTECTABLE_TYPES list(SLASH, STAB, PIERCE)
+
 /// Armor values that are used for damage
 #define ARMOR_LIST_DAMAGE list(BLUNT, SLASH, STAB, PIERCE)
 
