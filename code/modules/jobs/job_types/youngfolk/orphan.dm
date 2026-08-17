@@ -19,7 +19,7 @@
 
 	knows_the_town = TRUE
 	known_by_the_town = FALSE
-	jobs_i_always_know = list(JOB_MATRON)
+	jobs_i_always_know = list(JOB_MONARCH, JOB_MATRON)
 	jobs_always_know_me = list(JOB_MATRON)
 
 	spells = list(
@@ -35,6 +35,9 @@
 
 /datum/job/advclass/orphanadv
 	factions = list(FACTION_TOWN)
+	department_flag = YOUNGFOLK
+	jobs_i_always_know = list(JOB_MONARCH, JOB_MATRON)
+	jobs_always_know_me = list(JOB_MATRON)
 
 // BOOKISH BRAT - THE COURTLY CHILD
 
