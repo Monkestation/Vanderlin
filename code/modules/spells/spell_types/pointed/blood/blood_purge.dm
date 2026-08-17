@@ -25,7 +25,7 @@
 	if(!isliving(cast_on))
 		return
 	var/mob/living/target = cast_on
-	cast_on.adjustToxLoss(-tox_healing)
+	target.adjustToxLoss(-tox_healing)
 	target.reagents?.remove_all_type(/datum/reagent/toxin, 999)
 	target.reagents?.remove_all_type(/datum/reagent/poison, 999)
 	target.visible_message(span_info("A thin veil of red mist eminates from [cast_on] as their blood expels any toxins!"), span_notice("Needles! Needles stabbing me everywhere!"))
