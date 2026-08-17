@@ -1,0 +1,4 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - rscadd: "Alchemy recipes now show the description of the created recipe."
