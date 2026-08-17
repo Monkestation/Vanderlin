@@ -6,7 +6,7 @@
 
 /obj/machinery/light/fueled/hearth/big_fireplace
 	name = "fireplace"
-	desc = "the bricks allow us to safely experience it's warmth in the comfort of our homes. "
+	desc = "The bricks allow us to safely experience its warmth in the comfort of our homes. "
 	icon_state = "fireplace1"
 	base_state = "fireplace"
 	icon = 'icons/roguetown/misc/fireplace64.dmi'
