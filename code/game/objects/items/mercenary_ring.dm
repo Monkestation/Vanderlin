@@ -65,7 +65,7 @@
 
 	playsound(src, 'sound/items/servant_bell.ogg', 80, TRUE)
 	return ITEM_INTERACT_SUCCESS
-
+	
 /obj/item/mercenary_ring/attack_self(mob/living/user, list/modifiers)
 	. = ..()
 	if(COOLDOWN_FINISHED(src, ring_bell))
