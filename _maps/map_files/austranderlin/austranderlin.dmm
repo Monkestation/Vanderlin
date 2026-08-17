@@ -7512,7 +7512,7 @@
 "dsw" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /obj/item/clothing/shirt/undershirt/fancy,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/head/flowercrown/salvia,
 /turf/open/floor/ruinedwood/darker,
@@ -11634,7 +11634,7 @@
 /obj/item/clothing/head/articap,
 /obj/item/clothing/shirt/undershirt/artificer,
 /obj/item/clothing/pants/trou/artipants,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/metal/barograte,
 /area/indoors/town/dwarfin)
 "ftk" = (
@@ -11902,8 +11902,8 @@
 /obj/structure/door/violet{
 	name = "Kitchen"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/general,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/servant,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "fyJ" = (
@@ -11998,10 +11998,10 @@
 /obj/item/key/atarms,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /obj/effect/mapping_helpers/access/locker,
-/obj/item/key/walls,
-/obj/item/key/walls,
-/obj/item/key/walls,
-/obj/item/key/walls,
+/obj/item/key/gatehouse,
+/obj/item/key/gatehouse,
+/obj/item/key/gatehouse,
+/obj/item/key/gatehouse,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/garrison)
 "fBW" = (
@@ -12104,7 +12104,7 @@
 	name = "servants quarters"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/manor/general,
+/obj/effect/mapping_helpers/access/keyset/manor/servant/garrison,
 /turf/open/floor/tile,
 /area/indoors/town/keep/servant)
 "fEz" = (
@@ -13562,7 +13562,7 @@
 /area/outdoors/town)
 "grV" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/shoes/shortboots,
 /obj/item/clothing/shoes/sandals,
 /turf/open/floor/greenstone,
@@ -15318,6 +15318,7 @@
 	pixel_x = -10;
 	pixel_y = 8
 	},
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "hjs" = (
@@ -15952,7 +15953,7 @@
 "hxT" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /obj/item/clothing/shirt/undershirt/fancy,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/head/flowercrown/rosa,
 /obj/item/clothing/shirt/dress,
@@ -16952,7 +16953,7 @@
 /obj/item/clothing/head/articap,
 /obj/item/clothing/shirt/undershirt/artificer,
 /obj/item/clothing/pants/trou/artipants,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/concrete,
 /area/indoors/town/dwarfin)
 "hUk" = (
@@ -21005,8 +21006,8 @@
 /obj/structure/door/fancy{
 	name = "Lord's Chambers"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/lord,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/lord/consort,
 /turf/open/floor/tile,
 /area/indoors/town/keep/lord_appt)
 "jFQ" = (
@@ -24812,8 +24813,8 @@
 /obj/structure/door/fancy{
 	name = "Lord's Apartment"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/lord,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/lord/butler,
 /turf/open/floor/hexstone,
 /area/indoors/town/keep/lord_appt)
 "lsk" = (
@@ -26296,7 +26297,7 @@
 	pixel_x = 7;
 	pixel_y = -2
 	},
-/obj/item/clothing/shoes/boots{
+/obj/item/clothing/shoes/boots/darkboots{
 	pixel_x = -7;
 	pixel_y = -3
 	},
@@ -26397,8 +26398,8 @@
 /obj/structure/door/fancy{
 	name = "Guest Room"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/guest,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/guest1,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
 "mbn" = (
@@ -27877,7 +27878,7 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/shortboots,
 /obj/item/clothing/cloak/half,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/head/crown/circlet,
 /obj/item/perfume/random,
 /obj/item/perfume/random,
@@ -29113,7 +29114,7 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/shortboots,
 /obj/item/clothing/cloak/half,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/head/crown/circlet,
 /obj/item/perfume/random,
 /obj/item/perfume/random,
@@ -31144,8 +31145,8 @@
 /obj/structure/door/fancy{
 	name = "Bathroom"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/lord,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/lord/consort,
 /turf/open/floor/hexstone,
 /area/indoors/town/keep/lord_appt)
 "oiX" = (
@@ -31686,8 +31687,8 @@
 /obj/structure/door/fancy{
 	name = "Guest Room"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/guest,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/guest2,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
 "otn" = (
@@ -32616,7 +32617,7 @@
 /obj/structure/door{
 	name = "Butler's Quarters"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/atarms,
+/obj/effect/mapping_helpers/access/keyset/manor/butler,
 /turf/open/floor/tile,
 /area/indoors/town/keep/servanthead)
 "oMF" = (
@@ -33546,8 +33547,8 @@
 /obj/structure/door/fancy{
 	name = "Powder Room"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/lord,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/lord/consort,
 /turf/open/floor/tile,
 /area/indoors/town/keep/lord_appt)
 "pho" = (
@@ -33754,8 +33755,8 @@
 /obj/structure/door/stone{
 	name = "Wine Storage"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/general,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/servant,
 /turf/open/floor/church,
 /area/under/town/basement)
 "plQ" = (
@@ -34928,7 +34929,7 @@
 /area/indoors/town/dwarfin)
 "pNF" = (
 /obj/structure/rack,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/tile/masonic/inverted,
 /area/indoors/town/keep/halls/s)
 "pNG" = (
@@ -35163,8 +35164,8 @@
 /obj/item/clothing/pants/trou/formal/shorts,
 /obj/item/storage/belt/leather/suspenders,
 /obj/item/storage/belt/leather/suspenders,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
 "pSY" = (
@@ -36392,7 +36393,7 @@
 /obj/item/weapon/mace/cane/natural,
 /obj/structure/rack,
 /obj/item/clothing/cloak/raincloak/colored/blue,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/metal,
 /area/indoors/town/keep/magician)
 "qxO" = (
@@ -37452,7 +37453,7 @@
 /area/indoors/town)
 "qUb" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
 /obj/machinery/light/fueled/wallfire/candle/blue,
@@ -38952,7 +38953,6 @@
 /area/indoors/town/church/inquisition)
 "rzb" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /obj/structure/closet/keyrack{
 	pixel_y = -32
 	},
@@ -38961,19 +38961,10 @@
 /obj/item/key/manor,
 /obj/item/key/manor,
 /obj/item/key/manor,
-/obj/item/key/guest{
-	pixel_x = -10;
-	pixel_y = 3
-	},
-/obj/item/key/guest{
-	pixel_x = -10;
-	pixel_y = 9
-	},
 /obj/item/key/manor,
-/obj/item/key/guest{
-	pixel_x = -10;
-	pixel_y = 9
-	},
+/obj/effect/mapping_helpers/access/keyset/manor/atarms/butler,
+/obj/item/key/guest/one,
+/obj/item/key/guest/two,
 /turf/open/floor/tile,
 /area/indoors/town/keep/servant)
 "rzd" = (
@@ -42582,7 +42573,7 @@
 	pixel_x = 1;
 	pixel_y = 15
 	},
-/obj/item/clothing/shoes/boots{
+/obj/item/clothing/shoes/boots/darkboots{
 	pixel_x = -7;
 	pixel_y = -3
 	},
@@ -43637,8 +43628,8 @@
 /obj/structure/door/fancy{
 	name = "Powder Room"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/lord,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/lord/consort,
 /turf/open/floor/hexstone,
 /area/indoors/town/keep/lord_appt)
 "tDW" = (
@@ -46686,7 +46677,7 @@
 /area/indoors/town/noble_manor/yellow)
 "uVA" = (
 /obj/structure/rack,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/merc_guild)
 "uVD" = (
@@ -46800,8 +46791,8 @@
 /obj/structure/door/violet{
 	name = "Heir's Chambers"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/general,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/heir,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/heir/heir1)
 "uXI" = (
@@ -48202,6 +48193,7 @@
 /area/outdoors/town)
 "vAf" = (
 /obj/structure/table/wood/counter,
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "vAq" = (
@@ -52600,6 +52592,7 @@
 /obj/item/tray{
 	pixel_y = 6
 	},
+/obj/structure/bars/wooden_arch,
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "xps" = (
@@ -53924,8 +53917,8 @@
 /area/outdoors/eora)
 "xRW" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/trou/formal/shorts,
 /obj/item/clothing/pants/trou/formal/shorts,
 /obj/item/storage/belt/leather/suspenders,
@@ -54626,8 +54619,8 @@
 /area/indoors/town/clocktower)
 "ylD" = (
 /obj/structure/closet/crate/crafted_closet/crafted,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
 	pixel_y = 0

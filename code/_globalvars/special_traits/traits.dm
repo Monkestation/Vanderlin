@@ -180,10 +180,10 @@
 	allowed_jobs = list(/datum/job/magician, /datum/job/mageapprentice)
 
 /datum/special_trait/darkmagic/on_apply(mob/living/carbon/human/character, silent)
-	character.add_spell(/datum/action/cooldown/spell/eyebite, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/projectile/sickness, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/conjure/raise_lesser_undead/necromancer, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/gravemark, silent = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/eyebite, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/projectile/sickness, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/conjure_summon/raise_lesser_undead/necromancer, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/gravemark, silent = TRUE, mastery_spell = TRUE)
 
 /datum/special_trait/too_smart
 	name = "Too smart"
@@ -632,7 +632,8 @@
 	weight = 50
 
 /datum/special_trait/unlucky/on_apply(mob/living/carbon/human/character, silent)
-	GET_MOB_ATTRIBUTE_VALUE(character, STAT_FORTUNE) = rand(1, 10)
+	var/mod = rand(1, 10)
+	character.adjust_stat_modifier("[type]", list(STAT_FORTUNE = -mod))
 
 /datum/special_trait/jesterphobia
 	name = "Jesterphobic"
@@ -828,12 +829,12 @@
 
 /datum/special_trait/thinker/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/thinker)
-	character.adjust_spell_points(14) //Less points than Court Mage, why do Court mage get 17 points? what even?
-	character.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation, silent = TRUE)
-	character.generate_random_attunements(rand(4,6))
+	character.adjust_technique_mastery_points(3)
+	character.adjust_form_mastery_points(8)
+	character.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation, silent = TRUE, mastery_spell = TRUE)
 	character.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	character.mana_pool.adjust_mana(100) //I don't know, they don't spawn with their full mana bar, so we give them a bit more mana at the start.
-	new /obj/item/book/granter/spellbook/master(get_turf(character))
+	new /obj/item/spellbook/master/starter/arcane(get_turf(character))
 
 /datum/special_trait/skeleton
 	name = "Skeleton"
