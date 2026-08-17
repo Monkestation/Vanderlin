@@ -39,12 +39,13 @@
 	vitae_drain = mode["vitae_drain"]
 	blood_drain_perc = mode["blood_perc"]
 	spell_cost = mode["vitae_cost"]
-	desc = "Launch a bolt which leeches the blood of those hit. Use [spell_cost] Vitae to drain [blood_perc]% of the target's maximum blood and, if they have any, [vitae_drain] Vitae from their RESERVES."
+	desc = "Launch a bolt which leeches the blood of those hit. Use [spell_cost] Vitae to drain [blood_drain_perc]% of the target's maximum blood and, if they have any, [vitae_drain] Vitae from their RESERVES."
 	update_mode_maptext(mode["tag"])
-	if(vitae_drain < 300)
-		invocation_type = INVOCATION_WHISPER
-	else
-		invocation_type = INVOCATION_SHOUT
+	switch(current_mode)
+		if(1)
+			invocation_type = INVOCATION_WHISPER
+		if(2, 3)
+			invocation_type = INVOCATION_MESSAGE
 
 /datum/action/cooldown/spell/projectile/blood_steal/toggle_arc_mode(mob/user)
 	current_mode = (current_mode % length(modes)) + 1
