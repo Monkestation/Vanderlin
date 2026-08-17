@@ -21,7 +21,7 @@
 
 /obj/item/mercenary_ring/Initialize(mapload)
 	. = ..()
-	RegisterSignal(SSdcs, COMSIG_GLOB_HUMAN_ENTER_CRYO, PROC_REF(remove_servant))
+	RegisterSignal(SSdcs, COMSIG_GLOB_HUMAN_ENTER_CRYO, PROC_REF(remove_mercenary))
 
 /obj/item/mercenary_ring/Destroy()
 	mob_ref = null
@@ -29,8 +29,12 @@
 
 /obj/item/mercenary_ring/examine(mob/user)
 	. = ..()
-	if(mob_ref)
-		. += span_notice("It has a mercenary bound to it")
+	if(!mob_ref)
+		to_chat(user, span_warning("There is no mercenary bound to the ring."))
+		return
+
+	var/mob/living/carbon/human/bound_merc = mob_ref.resolve()
+	. += span_notice("The ring is bound to [bound_merc.real_name].")
 
 /obj/item/mercenary_ring/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 
@@ -56,23 +60,11 @@
 	if(IS_DEADITE(H))
 		to_chat(user, span_warning("The deadite curse resists the bell's charm."))
 	else
-		add_servant(H)
+		add_mercenary(H)
 		to_chat(user, span_smallnotice("I bind myself to the ring."))
 
 	playsound(src, 'sound/items/servant_bell.ogg', 80, TRUE)
 	return ITEM_INTERACT_SUCCESS
-
-/obj/item/mercenary_ring/attack_hand_secondary(mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	if(!user.client)
-		return
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(!mob_ref)
-		to_chat(user, span_warning("There is no mercenary bound to the ring."))
-		return
-	to_chat(user, "The bond is permanent, the ring can never be made to relinquish its mercenary.")
 
 /obj/item/mercenary_ring/attack_self(mob/living/user, list/modifiers)
 	. = ..()
@@ -106,7 +98,7 @@
 	user.visible_message("[user] twists the mercenary ring.")
 	playsound(src, 'sound/items/servant_bell.ogg', 100, TRUE)
 
-	player.apply_status_effect(/datum/status_effect/signal_horn/servant_bell, null, origin_turf)
+	player.apply_status_effect(/datum/status_effect/signal_horn/mercenary_ring, null, origin_turf)
 	var/dirText = ""
 	var/z_dist = origin_turf.z - player.z
 	if(z_dist != 0)
@@ -125,14 +117,24 @@
 	//sound played for other players, by fem_tanyl !!!1!!
 	player.playsound_local(get_turf(player), 'sound/items/servant_bell.ogg', 35, FALSE, pressure_affected = FALSE)
 
-/obj/item/mercenary_ring/proc/add_servant(mob/living/carbon/human/H)
+/obj/item/mercenary_ring/proc/add_mercenary(mob/living/carbon/human/H)
 	if(mob_ref)
 		return
 	mob_ref = WEAKREF(H)
 
-/obj/item/mercenary_ring/proc/remove_servant(datum/source, mob/living/carbon/human/H)
+/obj/item/mercenary_ring/proc/remove_mercenary(datum/source, mob/living/carbon/human/H)
 	if(!mob_ref || !ishuman(H))
 		return
 	var/mob/living/carbon/human/bound_mob = mob_ref.resolve()
 	if(!bound_mob || bound_mob == H)
 		mob_ref = null
+
+/datum/status_effect/signal_horn/mercenary_ring
+	id = "mercenary ring indicator"
+	duration = 25 SECONDS
+	alert_type = /atom/movable/screen/alert/status_effect/mercenary_ring
+
+/atom/movable/screen/alert/status_effect/mercenary_ring
+	name = "Mercenary Ring"
+	desc = "I've been summoned by the ring."
+	icon_state = "mercenary_ring"

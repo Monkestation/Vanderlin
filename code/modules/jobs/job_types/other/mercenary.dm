@@ -46,7 +46,7 @@
 		to_chat(spawned, "<span class='notice'>You have been added to the available mercenaries list.</span>")
 		var/obj/item/mercenary_ring/mercring = new /obj/item/mercenary_ring(spawned.loc)
 		spawned.put_in_hands(mercring)
-		mercring.add_servant(spawned)
+		mercring.add_mercenary(spawned)
 		if(spawned.mercdesc && (spawned.mercdesc != ""))
 			return
 		spawned.mercdesc = stripped_input(spawned, "Write a description which will be shown to potential employers.", "Description", "", 300)

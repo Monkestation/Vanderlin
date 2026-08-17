@@ -47,7 +47,7 @@
 		if(tgui_alert(user, "Do you want to register as an available mercenary for the mercenary statue?", "MERCENARY", DEFAULT_INPUT_CHOICES, 20 SECONDS) == CHOICE_YES)
 			GLOB.available_mercenaries += user
 			mercring = new /obj/item/mercenary_ring(src)
-			mercring.add_servant(user)
+			mercring.add_mercenary(user)
 			user.put_in_hands(mercring)
 			if(user.mercdesc && (user.mercdesc != ""))
 				return
