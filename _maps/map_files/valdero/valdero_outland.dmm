@@ -44,16 +44,6 @@
 /obj/structure/door/stone,
 /turf/open/floor/blocks/newstone,
 /area/indoors/shelter/mountains)
-"dL" = (
-/obj/structure/fluff/railing/tall/stone{
-	dir = 6;
-	pixel_y = -1
-	},
-/obj/machinery/light/fueled/lanternpost/fixed{
-	dir = 1
-	},
-/turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
 "dZ" = (
 /turf/open/floor/rooftop/green,
 /area/outdoors/mountains)
@@ -122,9 +112,6 @@
 /obj/structure/chair/wood/alt,
 /turf/open/floor/blocks/newstone,
 /area/indoors/shelter/mountains)
-"hN" = (
-/turf/closed/wall/mineral/decorstone,
-/area/outdoors/mountains)
 "it" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 1
@@ -322,12 +309,6 @@
 	dir = 8
 	},
 /area/indoors/shelter/mountains)
-"wr" = (
-/obj/machinery/light/fueled/lanternpost/fixed{
-	dir = 1
-	},
-/turf/open/floor/blocks/newstone,
-/area/outdoors/mountains)
 "wQ" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 8
@@ -363,6 +344,17 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/hexstone,
 /area/under/cave)
+"Ar" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 6;
+	pixel_y = -1
+	},
+/obj/machinery/light/fueled/lanternpost/fixed{
+	dir = 1;
+	plane = -10
+	},
+/turf/open/floor/blocks/newstone,
+/area/outdoors/mountains)
 "Aw" = (
 /turf/open/openspace,
 /area/indoors/shelter/mountains)
@@ -673,6 +665,13 @@
 	dir = 4
 	},
 /turf/open/floor/grass/healthy,
+/area/outdoors/mountains)
+"XR" = (
+/obj/machinery/light/fueled/lanternpost/fixed{
+	dir = 1;
+	plane = -10
+	},
+/turf/open/floor/blocks/newstone,
 /area/outdoors/mountains)
 "XV" = (
 /turf/open/floor/hexstone,
@@ -71560,7 +71559,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 ah
 Sz
 Sz
@@ -71617,7 +71616,7 @@ BP
 tY
 Sz
 Hf
-TN
+fO
 Cg
 eV
 eV
@@ -71627,7 +71626,7 @@ eV
 eV
 eV
 Cg
-Cg
+XR
 ah
 Sz
 Sz
@@ -72624,7 +72623,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 ah
 Sz
 Sz
@@ -72681,7 +72680,7 @@ Sz
 Sz
 Sz
 Hf
-TN
+fO
 Cg
 eV
 eV
@@ -72691,7 +72690,7 @@ eV
 eV
 eV
 Cg
-Cg
+XR
 LQ
 cU
 cU
@@ -73688,7 +73687,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 ah
 Sz
 Sz
@@ -73744,7 +73743,7 @@ cU
 cU
 cU
 cU
-TN
+fO
 Cg
 eV
 eV
@@ -73755,7 +73754,7 @@ eV
 eV
 Cg
 Cg
-NR
+Ar
 cU
 cU
 cU
@@ -74657,8 +74656,8 @@ cU
 TN
 Cg
 eV
-hN
-hN
+eV
+eV
 ar
 ar
 eV
@@ -74752,7 +74751,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -74806,18 +74805,18 @@ cU
 cU
 cU
 cU
-TN
+fO
 Cg
 eV
-hN
-hN
+eV
+eV
 ar
 eV
 eV
 eV
 Cg
 Cg
-NR
+Ar
 cU
 cU
 cU
@@ -75716,7 +75715,7 @@ cU
 cU
 cU
 cU
-ll
+BZ
 Cg
 Cg
 eV
@@ -75727,7 +75726,7 @@ eV
 eV
 eV
 Cg
-Cg
+XR
 LQ
 cU
 cU
@@ -75816,7 +75815,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -76779,7 +76778,7 @@ cU
 cU
 cU
 cU
-TN
+fO
 Cg
 eV
 eV
@@ -76789,7 +76788,7 @@ eV
 eV
 eV
 Cg
-Cg
+XR
 LQ
 cU
 cU
@@ -76880,7 +76879,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -77842,7 +77841,7 @@ cU
 cU
 cU
 cU
-TN
+fO
 Cg
 eV
 eV
@@ -77852,7 +77851,7 @@ eV
 eV
 eV
 Cg
-Cg
+XR
 LQ
 cU
 cU
@@ -77944,7 +77943,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -78916,7 +78915,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -79008,7 +79007,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -79979,7 +79978,7 @@ eV
 eV
 Cg
 Cg
-dL
+Ar
 cU
 cU
 cU
@@ -80072,7 +80071,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -81040,7 +81039,7 @@ eV
 eV
 Cg
 Cg
-dL
+Ar
 cU
 cU
 cU
@@ -81136,7 +81135,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -81951,7 +81950,7 @@ eV
 eV
 Cg
 Cg
-dL
+Ar
 cU
 cU
 cU
@@ -82200,7 +82199,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -82862,7 +82861,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
@@ -83264,7 +83263,7 @@ eV
 eV
 eV
 Cg
-wr
+XR
 LQ
 cU
 cU
