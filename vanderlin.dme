@@ -32,6 +32,7 @@
 #include "code\__DEFINES\animals.dm"
 #include "code\__DEFINES\antagonists.dm"
 #include "code\__DEFINES\area.dm"
+#include "code\__DEFINES\armor.dm"
 #include "code\__DEFINES\assert.dm"
 #include "code\__DEFINES\assets.dm"
 #include "code\__DEFINES\atmospherics.dm"
