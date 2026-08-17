@@ -12,8 +12,7 @@
 	invocation_type = INVOCATION_WHISPER
 	invocation = "Sanguis nota"
 
-	charge_time = 2 SECONDS
-	charge_slowdown = 0.3
+	charge_required = FALSE
 	cooldown_time = 3 MINUTES
 	spell_cost = 150
 	spell_flags = SPELL_RITUOS

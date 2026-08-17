@@ -6,6 +6,8 @@
 	sound = 'sound/magic/churn.ogg'
 
 	click_to_activate = TRUE
+	associated_skill = /datum/attribute/skill/magic/blood
+	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_level = 6
 
@@ -66,21 +68,37 @@
 		to_chat(human_user, span_danger("I do not know what to do with this."))
 		return
 
-	var/confirm = tgui_alert(human_user, "Do you wish to consume this blood pearl?", "CONFIRM", DEFAULT_INPUT_CHOICES)
-	if(confirm != CHOICE_YES)
-		return
-
+	var/choice = tgui_alert(human_user, "What do you wish to do with this blood pearl?", "CHOOSE", list("FEED", "DRAW"))
 	if(!human_user.is_holding(src))
 		return
-	var/blood_to_draw = tgui_input_number(human_user, "How much vitae do you want to draw from the pearl?", "Draw Vitae", 0, vitae_amount)
-	var/missing_vitae = human_user.maxbloodpool - human_user.bloodpool
-	blood_to_draw = min(missing_vitae, blood_to_draw)
-	if(!blood_to_draw || QDELETED(human_user) || QDELETED(src) || !human_user.is_holding(src))
+	var/blood_change_amount
+	var/missing_vitae
+	var/feeding = FALSE
+	switch(choice)
+		if("DRAW")
+			blood_change_amount = tgui_input_number(human_user, "How much vitae do you want to draw from the pearl?", "Draw Vitae", 0, vitae_amount)
+			missing_vitae = human_user.maxbloodpool - human_user.bloodpool
+			blood_change_amount = min(missing_vitae, blood_change_amount)
+		if("FEED")
+			feeding = TRUE
+			blood_change_amount = tgui_input_number(human_user, "How much vitae do you want to feed into the pearl?", "Feed Vitae", 0, human_user.bloodpool)
+			missing_vitae = max_vitae - vitae_amount
+			blood_change_amount = min(missing_vitae, blood_change_amount)
+		else
+			return
+
+	if(!blood_change_amount || QDELETED(human_user) || QDELETED(src) || !human_user.is_holding(src))
 		return
-	to_chat(human_user, span_bloody("You draw [blood_to_draw] Vitae from the pearl."))
-	new /obj/effect/decal/cleanable/blood/puddle(get_turf(human_user), stored_blood_color)
-	human_user.adjust_bloodpool(blood_to_draw)
-	vitae_amount -= blood_to_draw
+	to_chat(human_user, span_bloody("You [feeding ? "feed [blood_change_amount] Vitae into" : "draw [blood_change_amount] Vitae from"] the pearl."))
+	var/blood_color = feeding ? human_user.get_blood_type().color : stored_blood_color
+	new /obj/effect/decal/cleanable/blood/puddle(get_turf(human_user), blood_color)
+
+	if(feeding)
+		human_user.adjust_bloodpool(-blood_change_amount)
+		vitae_amount += blood_change_amount
+	else
+		human_user.adjust_bloodpool(blood_change_amount)
+		vitae_amount -= blood_change_amount
 
 	if(vitae_amount <= 0)
 		shatter()

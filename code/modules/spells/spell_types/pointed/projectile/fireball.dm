@@ -35,6 +35,8 @@
 
 	associated_skill = /datum/attribute/skill/magic/blood
 
+	invocation = "CAEDIS DISPLOSIO!!!"
+
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 

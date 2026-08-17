@@ -12,7 +12,6 @@
 	invocation = "Caedis conspectus"
 
 	charge_required = FALSE
-	charge_slowdown = 0.3
 	cooldown_time = 2 MINUTES
 	spell_cost = 75
 	spell_flags = SPELL_RITUOS
