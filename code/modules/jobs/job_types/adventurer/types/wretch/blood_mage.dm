@@ -11,6 +11,7 @@
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/blood = 40,
+		/datum/attribute/skill/magic/arcane = 10, // Needed for book crafting.
 		/datum/attribute/skill/misc/medicine = 30,
 	)
 

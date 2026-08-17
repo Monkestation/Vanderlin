@@ -1,3 +1,6 @@
+#define PEARL_OPTION_DRAW "DRAW"
+#define PEARL_OPTION_FEED "FEED"
+
 /datum/action/cooldown/spell/blood_pearl
 	name = "Create Blood Pearl"
 	desc = "Congeal Vitae into a pearl for storage."
@@ -67,19 +70,21 @@
 	if(!(HAS_TRAIT(human_user, TRAIT_BLOOD_SENSE) || HAS_TRAIT(human_user, TRAIT_BLOOD_MAGE) || HAS_TRAIT(human_user, TRAIT_BLOOD_SORCERER)))
 		to_chat(human_user, span_danger("I do not know what to do with this."))
 		return
-
-	var/choice = tgui_alert(human_user, "What do you wish to do with this blood pearl?", "CHOOSE", list("FEED", "DRAW"))
+	var/list/options_list = list(PEARL_OPTION_DRAW)
+	if(vitae_amount < max_vitae)
+		options_list += PEARL_OPTION_FEED
+	var/choice = tgui_alert(human_user, "What do you wish to do with this blood pearl?", "CHOOSE", options_list)
 	if(!human_user.is_holding(src))
 		return
 	var/blood_change_amount
 	var/missing_vitae
 	var/feeding = FALSE
 	switch(choice)
-		if("DRAW")
+		if(PEARL_OPTION_DRAW)
 			blood_change_amount = tgui_input_number(human_user, "How much vitae do you want to draw from the pearl?", "Draw Vitae", 0, vitae_amount)
 			missing_vitae = human_user.maxbloodpool - human_user.bloodpool
 			blood_change_amount = min(missing_vitae, blood_change_amount)
-		if("FEED")
+		if(PEARL_OPTION_FEED)
 			feeding = TRUE
 			blood_change_amount = tgui_input_number(human_user, "How much vitae do you want to feed into the pearl?", "Feed Vitae", 0, human_user.bloodpool)
 			missing_vitae = max_vitae - vitae_amount
@@ -113,3 +118,6 @@
 		visible_message(span_bloody("The pearl shatters..."), blind_message = span_info("I hear shattering glass."))
 	playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
 	qdel(src)
+
+#undef PEARL_OPTION_DRAW
+#undef PEARL_OPTION_FEED
