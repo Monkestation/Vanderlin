@@ -952,6 +952,7 @@
 				if(feedback)
 					caster.balloon_alert(caster, "not enough stamina to cast!")
 				return FALSE
+			return TRUE
 
 		if(SPELL_MANA)
 			if(!caster.has_mana_available(used_cost))
