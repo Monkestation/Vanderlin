@@ -69,9 +69,6 @@
 
 	var/range = 9
 
-/mob/living/simple_animal/hostile/retaliate/troll/slaved
-	ai_controller = /datum/ai_controller/summon
-
 /mob/living/simple_animal/hostile/retaliate/troll/slaved/Initialize()
 	. = ..()
 	var/static/list/pet_commands = list(
@@ -169,8 +166,18 @@
 	defdrain = 13
 	range = 3
 
-/mob/living/simple_animal/hostile/retaliate/troll/bog/slaved
-	ai_controller = /datum/ai_controller/summon
+/mob/living/simple_animal/hostile/retaliate/troll/bog/slaved/Initialize()
+	. = ..()
+	var/static/list/pet_commands = list(
+				/datum/pet_command/idle,
+				/datum/pet_command/free,
+				/datum/pet_command/follow,
+				/datum/pet_command/attack,
+				/datum/pet_command/protect_owner,
+				/datum/pet_command/aggressive,
+				/datum/pet_command/calm,
+			)
+	AddComponent(/datum/component/obeys_commands, pet_commands)
 
 /mob/living/simple_animal/hostile/retaliate/troll/slaved/Initialize()
 	. = ..()
@@ -185,6 +192,30 @@
 			)
 	AddComponent(/datum/component/obeys_commands, pet_commands)
 
+/obj/projectile/thrown_stone
+	name = "stone"
+	icon = 'icons/roguetown/items/natural.dmi'
+	icon_state = "stonebig1"
+	damage = 20
+	damage_type = BRUTE
+	speed = 6
+	///this is chip damage/knockback, not a real siege weapon so yea
+	var/explosion_power = 25
+	var/explosion_falloff = 10
+
+/obj/projectile/thrown_stone/on_hit(atom/target, blocked, pierce_hit)
+	. = ..()
+	var/turf/T = get_turf(src)
+	if(!T)
+		return
+	cell_explosion(
+		epicenter = T, \
+		power = explosion_power, \
+		falloff = explosion_falloff, \
+		falloff_shape = EXPLOSION_FALLOFF_SHAPE_LINEAR, \
+		explosion_source = "[name] (Stone Throw)", \
+		burns = FALSE \
+	)
 
 /mob/living/simple_animal/hostile/retaliate/troll/cave
 	name = "cave troll"
@@ -219,9 +250,76 @@
 	throwing_stone.Grant(src)
 	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, throwing_stone)
 
+/mob/living/simple_animal/hostile/retaliate/troll/cave/slaved/Initialize()
+	. = ..()
+	var/static/list/pet_commands = list(
+				/datum/pet_command/idle,
+				/datum/pet_command/free,
+				/datum/pet_command/follow,
+				/datum/pet_command/attack,
+				/datum/pet_command/protect_owner,
+				/datum/pet_command/aggressive,
+				/datum/pet_command/calm,
+			)
+	AddComponent(/datum/component/obeys_commands, pet_commands)
+
 /mob/living/simple_animal/hostile/retaliate/troll/cave/ambush
 	ai_controller = /datum/ai_controller/troll/ambush
 	range = 3
+
+/datum/action/cooldown/spell/ground_slam
+	name = "Ground Slam"
+	desc = "Rears back and slams the ground in a line, crushing anything caught beneath it."
+	button_icon = 'icons/mob/actions/actions_animal.dmi'
+	button_icon_state = "spell_default"
+	cooldown_time = 10 SECONDS
+	charge_required = FALSE
+	spell_type = NONE
+	/// How many tiles out the slam reaches
+	var/slam_range = 4
+	/// How long the troll telegraphs before slamming
+	var/telegraph_time = 1 SECONDS
+	/// Damage dealt per tile hit
+	var/slam_damage = 40
+
+/datum/action/cooldown/spell/ground_slam/cast(atom/cast_on)
+	. = ..()
+	var/mob/living/caster = owner
+	if(!istype(caster) || !cast_on)
+		return
+
+	var/list/turf/line = get_line(get_turf(caster), get_turf(cast_on))
+	if(line.len > slam_range)
+		line = line.Copy(1, slam_range + 1)
+
+	caster.visible_message(
+		span_danger("[caster] rears back, axe raised high!"),
+		span_userdanger("[caster] rears back, axe raised high!"),
+	)
+	caster.Stun(telegraph_time, ignore_canstun = TRUE)
+
+	var/list/real_lines = list()
+	for(var/turf/marked_turf as anything in line)
+		if(isopenspace(marked_turf) || isclosedturf(marked_turf))
+			break
+		new /obj/effect/temp_visual/telegraph_marking/troll_slam(marked_turf)
+		real_lines += marked_turf
+
+	addtimer(CALLBACK(src, PROC_REF(slam_down), real_lines, caster), telegraph_time)
+
+/datum/action/cooldown/spell/ground_slam/proc/slam_down(list/turf/line, mob/living/caster)
+	if(QDELETED(caster))
+		return
+
+	caster.visible_message(span_danger("[caster] slams its axe into the ground!"))
+	playsound(caster, "genblunt", 100, TRUE) // swap for a real impact sound
+
+	for(var/turf/hit_turf as anything in line)
+		for(var/mob/living/hit_mob in hit_turf)
+			if(hit_mob == caster)
+				continue
+			hit_mob.apply_damage(slam_damage, BRUTE, def_zone = BODY_ZONE_HEAD, damage_type = BCLASS_CHOP)
+			hit_mob.visible_message(span_danger("[hit_mob] is crushed by the slam!"))
 
 /mob/living/simple_animal/hostile/retaliate/troll/axe
 	name = "Troll Skull-Splitter"
@@ -236,6 +334,13 @@
 	attack_sound = list('sound/combat/wooshes/blunt/wooshhuge (1).ogg','sound/combat/wooshes/blunt/wooshhuge (2).ogg','sound/combat/wooshes/blunt/wooshhuge (3).ogg')
 	loot = list(/obj/item/weapon/axe/iron/troll)
 	deathmessage = "As the creacher tumbles, it falls upon its axe, snapping the handle."
+	ai_controller = /datum/ai_controller/troll/axe
+
+/mob/living/simple_animal/hostile/retaliate/troll/axe/Initialize()
+	. = ..()
+	var/datum/action/cooldown/spell/ground_slam/swipe = new(src)
+	swipe.Grant(src)
+	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, swipe)
 
 /mob/living/simple_animal/hostile/retaliate/troll/axe/slaved/Initialize()
 	. = ..()
@@ -313,3 +418,115 @@
 	gender = PLURAL
 	icon = 'icons/roguetown/mob/cabbit.dmi'
 	icon_state = "cabbit_remains"
+
+/datum/action/cooldown/spell/projectile/harpoon_pull
+	name = "Harpoon"
+	desc = "Hurls a barbed harpoon; if it connects, the line goes taut and yanks the troll straight to its prey."
+	button_icon = 'icons/mob/actions/actions_animal.dmi'
+	button_icon_state = "spell_default"
+	cooldown_time = 14 SECONDS
+	spell_type = NONE
+	charge_required = FALSE
+	projectile_type = /obj/projectile/harpoon
+
+/datum/action/cooldown/spell/projectile/harpoon_pull/ready_projectile(obj/projectile/to_fire, atom/target, mob/user, iteration)
+	. = ..()
+	user.visible_message(span_danger("[user] hurls a harpoon!"))
+	to_fire.Beam(user, "shisha")
+
+/obj/projectile/harpoon
+	name = "harpoon"
+	icon_state = "harpoon"
+	damage = 15
+	damage_type = BRUTE
+	speed = 1.6
+	/// Delay between the hit landing and the pull happening
+	var/pull_delay = 0.4 SECONDS
+
+/obj/projectile/harpoon/on_hit(atom/target, blocked, pierce_hit)
+	. = ..()
+	if(QDELETED(firer))
+		return
+	if(isliving(target))
+		addtimer(CALLBACK(target, TYPE_PROC_REF(/mob, fly_towards), "is yanked towards [firer] by the harpoon!", firer), pull_delay)
+	else
+		addtimer(CALLBACK(firer, TYPE_PROC_REF(/mob, fly_towards), "is yanked forward by the harpoon line!", target), pull_delay)
+
+/mob/proc/fly_towards(flying_text, atom/target)
+	if(QDELETED(target))
+		return
+	var/turf/destination = get_turf(target)
+	if(!destination)
+		return
+	visible_message(span_danger("[src] [flying_text]"))
+	safe_throw_at(destination, 20, 5, src, TRUE)
+
+/mob/living/simple_animal/hostile/retaliate/troll/sea
+	name = "sea troll"
+	desc = "Bloated and near-translucent from decades in the deep, sailors say these things drag the drowning down rather than let the sea have them."
+	icon = 'icons/mob/creacher/trolls/troll_sea.dmi'
+	icon_state = "angler"
+	icon_living = "angler"
+	icon_dead = "angler_dead"
+
+	health = SEATROLL_HEALTH
+	maxHealth = SEATROLL_HEALTH
+	ai_controller = /datum/ai_controller/troll/sea
+
+	/// Are we currently submerged (sped up + reskinned)?
+	var/submerged = FALSE
+	/// How close the target has to be before we surface even while in water
+	var/surface_distance = 4
+	COOLDOWN_DECLARE(submerge_cooldown)
+
+/mob/living/simple_animal/hostile/retaliate/troll/sea/Initialize(mapload)
+	. = ..()
+	ADD_TRAIT(src, TRAIT_SWIMMER, INNATE_TRAIT)
+
+	var/datum/action/cooldown/spell/projectile/harpoon_pull/harpoon = new(src)
+	harpoon.Grant(src)
+	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, harpoon)
+	RegisterSignal(src, COMSIG_MOVABLE_MOVED, PROC_REF(check_submersion))
+
+/mob/living/simple_animal/hostile/retaliate/troll/sea/slaved/Initialize()
+	. = ..()
+	var/static/list/pet_commands = list(
+			/datum/pet_command/idle,
+			/datum/pet_command/free,
+			/datum/pet_command/follow,
+			/datum/pet_command/attack,
+			/datum/pet_command/protect_owner,
+			/datum/pet_command/aggressive,
+			/datum/pet_command/calm,
+		)
+	AddComponent(/datum/component/obeys_commands, pet_commands)
+
+/mob/living/simple_animal/hostile/retaliate/troll/sea/proc/check_submersion()
+	SIGNAL_HANDLER
+	var/turf/open/water/current_turf = get_turf(src)
+	var/in_water = istype(current_turf)
+
+	var/mob/living/target
+	if(ai_controller)
+		target = ai_controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
+	var/target_close = target && !QDELETED(target) && get_dist(src, target) <= surface_distance
+
+	if(in_water && (!target || !target_close))
+		go_under()
+	else
+		surface()
+
+/mob/living/simple_animal/hostile/retaliate/troll/sea/proc/go_under()
+	if(submerged || !COOLDOWN_FINISHED(src, submerge_cooldown))
+		return
+	submerged = TRUE
+	update_reflection()
+	add_movespeed_modifier(MOVESPEED_ID_WHIRLPOOL, multiplicative_slowdown = -1.5)
+
+/mob/living/simple_animal/hostile/retaliate/troll/sea/proc/surface()
+	if(!submerged)
+		return
+	submerged = FALSE
+	update_reflection()
+	remove_movespeed_modifier(MOVESPEED_ID_WHIRLPOOL)
+	COOLDOWN_START(src, submerge_cooldown, 1 MINUTES)

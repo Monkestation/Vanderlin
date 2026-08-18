@@ -28,7 +28,9 @@
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_THERMAL_VISION, type)
 	owner.update_sight()
+
 /datum/status_effect/buff/secondsight/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_THERMAL_VISION, type)
 	owner.update_sight()
+

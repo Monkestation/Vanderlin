@@ -1,4 +1,5 @@
 /datum/ai_behavior/find_aggro_targets
+	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 	action_cooldown = 1 SECONDS
 
 /datum/ai_behavior/find_aggro_targets/get_cooldown(datum/ai_controller/cooldown_for)

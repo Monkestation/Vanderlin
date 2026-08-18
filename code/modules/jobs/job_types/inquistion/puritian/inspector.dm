@@ -159,6 +159,7 @@
 			spawned.add_traits(list(TRAIT_THERMAL_VISION, TRAIT_POISONBITE), JOB_TRAIT)
 			spawned.update_sight()
 
+
 /datum/outfit/inquisitor/inspector
 	name = "Inspector (Herr Prafekt)"
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq

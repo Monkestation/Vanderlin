@@ -2,7 +2,7 @@
 	icon_state = "skinstealer"
 	icon_living = "skinstealer"
 	icon_dead = "skinstealer_dead"
-	icon = 'icons/obj/cellular/putrid_tall.dmi'
+	icon = 'icons/obj/cellular/putrid_long.dmi'
 
 	tether_distance = 5
 	possible_evolutions = list()

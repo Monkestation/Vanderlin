@@ -429,7 +429,7 @@
 		if(nodmg)
 			return FALSE
 
-/mob/living/carbon/human/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
+/mob/living/carbon/human/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range, burns)
 	if(HAS_TRAIT(src, TRAIT_BOMBIMMUNE))
 		return
 
@@ -446,7 +446,7 @@
 	var/dmgmod = round(rand(0.5, 1.5), 0.1)
 	var/bomb_armor = 0
 
-	if(fdist)
+	if(fdist && burns)
 		var/stacks = ((fdist - fodist) * 2)
 		fire_act(stacks)
 
@@ -476,6 +476,10 @@
 			if(bomb_armor)
 				brute_loss = (10 * (2 - round(bomb_armor*0.01, 0.05)) * ldist) - ((10 * (2 - round(bomb_armor*0.01, 0.05))) * fodist)
 				damage_clothes(max(brute_loss - bomb_armor, 0), BRUTE, "blunt")
+	if(!burns)
+		brute_loss += burn_loss
+		burn_loss = 0
+
 	take_overall_damage(brute_loss,burn_loss, damage_type = BCLASS_BLUNT)
 
 	//attempt to dismember bodyparts

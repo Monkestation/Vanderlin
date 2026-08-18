@@ -21,7 +21,7 @@
 	var/list/preferred_events = list(
 		/datum/round_event_control/antagonist/solo/wretch = 1.5,
 		/datum/round_event_control/antagonist/solo/aspirant = 1,
-		/datum/round_event_control/antagonist/solo/maniac = 1,
+		///datum/round_event_control/antagonist/solo/maniac = 1,
 	)
 	/// Can this trigger mid round? Backup cover for latest_start
 	var/can_call_midround = FALSE
