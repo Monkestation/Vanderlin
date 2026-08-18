@@ -278,8 +278,6 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 	if(!istype(arrived))
 		return
 
-	arrived.item_flags |= IN_STORAGE
-
 	// Item has been forced moved inside
 	if(!(arrived in item_coordinates))
 		var/coordinates = get_valid_coordinates(arrived)
@@ -292,6 +290,7 @@ GLOBAL_LIST_EMPTY(storage_underlay_cache)
 				arrived.forceMove(real_location.drop_location())
 			return
 
+	arrived.item_flags |= IN_STORAGE
 	addtimer(CALLBACK(src, PROC_REF(refresh_views)), 1)
 	arrived.on_enter_storage(src)
 	RegisterSignal(arrived, COMSIG_MOUSEDROPPED_ONTO, PROC_REF(mousedrop_receive))
