@@ -748,7 +748,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/mob/living/carbon/human/human_target = target
 	if(QDELETED(human_target))
 		return FALSE
-	human_target.check_for_injuries(mob, TRUE, TRUE, TRUE, TRUE)
+	human_target.check_for_injuries(mob, TRUE, FALSE, TRUE, TRUE)
 	return TRUE
 
 /client/proc/smite(mob/living/target as mob)
