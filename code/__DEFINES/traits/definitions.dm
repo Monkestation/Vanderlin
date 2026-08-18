@@ -495,6 +495,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This mob can't have a split personality
 #define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
 #define TRAIT_VIRGIN	"virginity"
+#define TRAIT_EXPLOSION_PREVENTER "exploded"
+
+#define TRAIT_BROOD "Broodspawn"
+
 // This is for UNARMED FIGHTERS. LIMIT ITS USE TO THEM
 #define TRAIT_CLOSECOMBAT "Close Combat"
 

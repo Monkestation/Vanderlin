@@ -1,5 +1,6 @@
 /obj/machinery/light/fueled/firebowl
 	name = "brazier"
+	desc = "A bowl safely housing an open flame."
 	icon = 'icons/roguetown/misc/lighting.dmi'
 	icon_state = "stonefire1"
 	density = TRUE
@@ -121,16 +122,19 @@
 
 /obj/machinery/light/fueled/wallfire
 	name = "fireplace"
+	desc = "The bricks allow us to safely experience its warmth in the comfort of our homes. "
 	icon_state = "wallfire1"
 	base_state = "wallfire"
 	density = FALSE
 	fueluse = 0
 	crossfire = FALSE
 	cookonme = TRUE
+	resting_range = 4
 	temperature_change = 30
 
 /obj/machinery/light/fueled/wallfire/candle
 	name = "candles"
+	desc = "A wick encased in wax, a simple way to bring light."
 	icon_state = "wallcandle1"
 	base_state = "wallcandle"
 	bulb_colour = "#ffa35c"
@@ -138,6 +142,7 @@
 	cookonme = FALSE
 	SET_BASE_PIXEL(0, 32)
 	soundloop = null
+	resting_range = 0
 	temperature_change = 0
 
 /obj/machinery/light/fueled/wallfire/candle/OnCrafted(dirin, mob/user)
@@ -216,6 +221,7 @@
 /*	.............   Candle lamp   ................ */
 /obj/machinery/light/fueled/wallfire/candle/lamp // cant get them to start unlit but they work as is
 	name = "candle lamp"
+	desc = "A small lamp containing a candle"
 	icon_state = "candle"
 	base_state = "candle"
 	plane = GAME_PLANE_UPPER
@@ -225,6 +231,7 @@
 
 /obj/machinery/light/fueled/torchholder
 	name = "sconce"
+	desc = "A decorative wall mount for holding lit torches"
 	icon_state = "torchwall1"
 	base_state = "torchwall"
 	brightness = 5
@@ -410,6 +417,7 @@
 	on = FALSE
 	cookonme = TRUE
 	soundloop = /datum/looping_sound/fireloop
+	resting_range = 1
 	// temperature_change = 40
 	var/heat_time = 100
 	var/obj/item/attachment = null
@@ -505,6 +513,7 @@
 
 /obj/machinery/light/fueled/campfire
 	name = "campfire"
+	desc = "A simple unprotected fire for warming or cooking."
 	icon_state = "badfire1"
 	base_state = "badfire"
 	density = FALSE
@@ -516,7 +525,7 @@
 	cookonme = TRUE
 	max_integrity = 30
 	soundloop = /datum/looping_sound/fireloop
-
+	resting_range = 1
 	temperature_change = 25
 
 /obj/machinery/light/fueled/campfire/process()
@@ -552,6 +561,8 @@
 		return TRUE //fires that are on always have this interaction with lmb unless its a torch
 
 /obj/machinery/light/fueled/campfire/densefire
+	name = "stone campfire"
+	desc = "A fire contained in a stone ring for warming or cooking."
 	icon_state = "densefire1"
 	base_state = "densefire"
 	density = TRUE
@@ -560,12 +571,14 @@
 	climbable = TRUE
 	on = FALSE
 	fueluse = 30 MINUTES
+	resting_range = 2
 	pass_flags_self = LETPASSTHROW
 	bulb_colour = "#eea96a"
 	max_integrity = 60
 
 /obj/machinery/light/fueled/campfire/pyre
 	name = "pyre"
+	desc = "A large pile of lumber with a cross at the top. Lash the wicked to this cross, and watch their sins burn away."
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
 	icon_state = "pyre1"
 	base_state = "pyre"

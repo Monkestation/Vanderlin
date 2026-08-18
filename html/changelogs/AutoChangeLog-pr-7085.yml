@@ -1,0 +1,8 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - rscadd: "putrid"
+  - refactor: "orcs and goblins now get their stats applied via their species meaning player controlled ones get stats"
+  - rscadd: "hell goblins explode"
+  - rscadd: "moon goblins know how to summon a brick\nadd; broodmother is now playable in game using the vessel system."
+  - refactor: "as per the species doc, adds orcs to the generic human body list, letting them wear clothes."

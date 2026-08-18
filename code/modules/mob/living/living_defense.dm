@@ -1,18 +1,31 @@
+///so for things that care about EP you pass in a list to give its output as so you can apply both instances of damage. See spec_attacked_by() for an example
+/mob/living/proc/run_armor_check(def_zone = null, attack_flag = "blunt", absorb_text = null, soften_text = null, armor_penetration, penetrated_text, damage, blade_dulling, list/split_output)
+	var/result = getarmor(def_zone, attack_flag, damage, armor_penetration, blade_dulling)
+	var/armor
+	var/blunt_dmg
+	var/typed_dmg
 
-/mob/living/proc/run_armor_check(def_zone = null, attack_flag = "blunt", absorb_text = null, soften_text = null, armor_penetration, penetrated_text, damage, blade_dulling)
-	var/armor = getarmor(def_zone, attack_flag, damage, armor_penetration, blade_dulling)
-	var/armor_check = 0
+	if(islist(result))
+		armor = result[ARMOR_BLOCK]
+		blunt_dmg = result[ARMOR_BLUNT_DMG]
+		typed_dmg = result[ARMOR_TYPE_DMG]
+	else
+		armor = result
+		var/effective = max(0, armor - armor_penetration)
+		typed_dmg = max(0, damage - effective)
+		blunt_dmg = 0
 
-	// Only run armor logic if there actually is armor
+	if(!isnull(split_output))
+		split_output[DAMAGE_BLUNT] = blunt_dmg
+		split_output[DAMAGE_TYPED] = typed_dmg
+
+	var/total_through = blunt_dmg + typed_dmg
+	var/armor_check = max(0, armor - damage)
+
 	if(armor > 0)
-		if(armor_penetration)
-			armor = max(0, armor - armor_penetration)
-		armor_check = max(0, armor - damage)
-
-		// Decide feedback based on how much damage got through
-		if(armor_check == 0 && armor_penetration)
+		if(total_through <= 0 && armor_penetration)
 			to_chat(src, "<span class='danger'>[penetrated_text || "My armor was penetrated!"]</span>")
-		else if(armor_check > 0)
+		else if(armor_check > 0 || (blunt_dmg > 0 && typed_dmg == 0))
 			if(armor_penetration)
 				to_chat(src, "<span class='warning'>[soften_text || "My armor softens the blow!"]</span>")
 			else
