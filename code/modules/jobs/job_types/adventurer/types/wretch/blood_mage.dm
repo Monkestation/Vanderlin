@@ -11,7 +11,7 @@
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/blood = 40,
-		/datum/attribute/skill/magic/arcane = 10, // Needed for book crafting.
+		/datum/attribute/skill/magic/arcane = 20, // Needed for book crafting and basic survivability.
 		/datum/attribute/skill/misc/medicine = 30,
 	)
 
@@ -67,8 +67,22 @@
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "BLOOD MAGE")
 
-	spawned.adjust_bloodpool()
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/adept/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/adept/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/adept/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/adept/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/adept/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/adept/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/adept/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/adept/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/adept/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 1)
+
 	spawned.hud_used?.set_bloody_bloodpool()
+	spawned.adjust_bloodpool()
 	spawned.adjust_form_mastery_points(technique_points, specific_form = FORM_BLOOD)
 
 /datum/outfit/wretch/bloodmage
