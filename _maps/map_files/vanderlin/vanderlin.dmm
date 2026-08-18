@@ -26022,6 +26022,7 @@
 	pixel_x = 8;
 	pixel_y = 11
 	},
+/obj/structure/keyrack,
 /turf/open/floor/churchmarble/gold,
 /area/indoors/town/church)
 "lsD" = (
