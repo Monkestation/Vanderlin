@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/status/blood_sight
 	name = "Blood Sight"
-	desc = "Grant a target blood sight, sensing nearby blood sources."
+	desc = "Grant a target blood sight, sensing nearby blood sources. Allows accurate detection of blood volume and vitae reserves in a target."
 	button_icon_state = "transfixmaster"
 	sound = 'sound/magic/psydonbleeds.ogg'
 
@@ -14,7 +14,7 @@
 	charge_required = FALSE
 	cooldown_time = 2 MINUTES
 	spell_cost = 75
-	spell_flags = SPELL_RITUOS
+	spell_flags = SPELL_UNETCHABLE
 	status_effect = /datum/status_effect/buff/blood_sight
 
 /datum/status_effect/buff/blood_sight

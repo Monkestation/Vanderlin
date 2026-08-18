@@ -20,7 +20,7 @@
 	charge_required = FALSE
 	cooldown_time = 5 MINUTES
 	spell_cost = 600
-	spell_flags = SPELL_RITUOS
+	spell_flags = SPELL_UNETCHABLE
 
 /datum/action/cooldown/spell/blood_pearl/cast(atom/cast_on)
 	. = ..()

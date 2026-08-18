@@ -19,7 +19,7 @@
 	charge_slowdown = 0.7
 	cooldown_time = 30 SECONDS
 	spell_cost = 40
-	spell_flags = SPELL_RITUOS
+	spell_flags = SPELL_UNETCHABLE
 	projectile_type = /obj/projectile/magic/bloodlightning
 
 /datum/action/cooldown/spell/projectile/blood_bolt/arcyne
@@ -29,6 +29,7 @@
 
 	spell_type = SPELL_MANA
 	required_form = FORM_WATER
+	spell_flags = SPELL_RITUOS
 	projectile_type = /obj/projectile/magic/bloodlightning/lesser
 
 /obj/projectile/magic/bloodlightning

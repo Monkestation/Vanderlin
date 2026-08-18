@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/projectile/blood_steal
 	name = "Blood Steal"
-	desc = "Launch a bolt which leeches the blood of those hit."
+	desc = "Launch a bolt that steals the blood and vitae reserves of a target. Shift-G to change modes."
 	button_icon_state = "bloodsteal"
 	sound = 'sound/magic/vlightning.ogg'
 	charge_sound = 'sound/magic/chargingold.ogg'
@@ -18,7 +18,7 @@
 	charge_slowdown = 0.7
 	cooldown_time = 20 SECONDS
 	spell_cost = 30
-	spell_flags = SPELL_RITUOS
+	spell_flags = SPELL_UNETCHABLE
 	projectile_type = /obj/projectile/magic/bloodsteal
 	var/vitae_drain = 150
 	var/blood_drain_perc = 5
@@ -72,29 +72,35 @@
 		return
 
 	var/mob/living/carbon/human/target = hit
+	var/did_something = FALSE
 
 	var/blood_adjustment = target.default_blood_volume * (blood_drain_perc/100)
-	if(target.blood_volume < (blood_adjustment + BLOOD_VOLUME_SURVIVE))
-		to_chat(firer, span_bloody("[target] does not have enough blood to steal!"))
-		return
-	target.adjust_blood_volume(-blood_adjustment)
-	firer.adjust_blood_volume(blood_adjustment)
-	to_chat(firer, span_bloody("You replenish your own blood from [target]."))
-
-	target.visible_message(
-			span_danger("[target] has their blood ripped from their body!"),
-			span_userdanger("Blood erupts from my body!"),
-			span_hear("I hear a fluid spill..."),
-		)
-	new /obj/effect/decal/cleanable/blood/puddle(get_turf(target), target.get_blood_type().color)
-
-	if(target.bloodpool >= vitae_drain) // You'll only get vitae IF they have vitae.
-		target.adjust_bloodpool(-vitae_drain)
-		firer.adjust_bloodpool(vitae_drain)
-		to_chat(firer, span_bloody("You drain Vitae from [target]."))
-		to_chat(target, span_bloody("[firer] has drained some of your Vitae!"))
+	if(target.blood_volume > (blood_adjustment + BLOOD_VOLUME_SURVIVE))
+		target.adjust_blood_volume(-blood_adjustment)
+		firer.adjust_blood_volume(blood_adjustment)
+		to_chat(firer, span_bloody("You replenish your own blood from [target]."))
+		did_something = TRUE
 	else
-		to_chat(firer, span_bloody("[target] does not have enough Vitae to steal!"))
+		to_chat(firer, span_bloody("[target] does not have enough blood to steal!"))
+
+	if(target.bloodpool) // You'll only get vitae IF they have vitae.
+		var/true_drain = min(vitae_drain, target.bloodpool)
+		target.adjust_bloodpool(-true_drain)
+		firer.adjust_bloodpool(true_drain)
+		to_chat(firer, span_bloody("You drain [true_drain] VTR from [target]."))
+		if(HAS_TRAIT(target, TRAIT_BLOOD_SENSE) || HAS_TRAIT(target, TRAIT_BLOOD_MAGE) || HAS_TRAIT(target, TRAIT_BLOOD_SORCERER))
+			to_chat(target, span_bloody("[firer] has drained some of your Vitae!"))
+	else
+		to_chat(firer, span_bloody("[target] does not have any Vitae to steal!"))
+
+	if(!did_something)
+		return
+	target.visible_message(
+		span_danger("[target] has their blood ripped from their body!"),
+		span_userdanger("Blood erupts from my body!"),
+		span_hear("I hear a fluid spill..."),
+	)
+	new /obj/effect/decal/cleanable/blood/puddle(get_turf(target), target.get_blood_type().color)
 
 /obj/projectile/magic/bloodsteal
 	name = "draining bolt"

@@ -24,7 +24,7 @@
 	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	total_positions = 1
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
-	technique_points = 3 // This is mirrored by their form points manually, due to minimal technique-less spells. Do not increase either beyond 3.
+	technique_points = 4 // This is mirrored by their form points manually, due to minimal technique-less spells. Do not increase either beyond 4.
 	factions = list(FACTION_NEUTRAL)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage

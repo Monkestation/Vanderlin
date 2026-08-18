@@ -11,6 +11,7 @@
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 14
+	spell_flags = SPELL_UNETCHABLE
 
 	invocation_type = INVOCATION_SHOUT
 	invocation = "Excieo cruor!!"

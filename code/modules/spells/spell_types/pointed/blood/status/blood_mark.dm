@@ -15,7 +15,7 @@
 	charge_required = FALSE
 	cooldown_time = 3 MINUTES
 	spell_cost = 150
-	spell_flags = SPELL_RITUOS
+	spell_flags = SPELL_UNETCHABLE
 	status_effect = /datum/status_effect/debuff/blood_mark
 	self_cast_possible = FALSE
 

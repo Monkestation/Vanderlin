@@ -18,7 +18,7 @@
 	charge_slowdown = 0.7
 	cooldown_time = 20 SECONDS
 	spell_cost = 30
-	spell_flags = SPELL_RITUOS
+	spell_flags = SPELL_UNETCHABLE
 	projectile_type = /obj/projectile/magic/bloodtransfuse
 
 /datum/action/cooldown/spell/projectile/blood_transfusion/on_cast_hit(atom/source, mob/living/carbon/human/firer, atom/hit, angle)

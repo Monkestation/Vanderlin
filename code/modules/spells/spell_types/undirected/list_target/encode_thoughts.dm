@@ -31,6 +31,9 @@
 	log_directed_talk(owner, cast_on, message, LOG_SAY, name)
 
 	to_chat(owner, "I pluck the strings of [cast_on]'s mind!")
+	handle_message(cast_on)
+
+/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/proc/handle_message(mob/living/cast_on)
 	cast_on.playsound_local(cast_on, sound, 100, TRUE)
 	to_chat(cast_on, "Your mind thinks to itself: </span><font color=#7246ff>\"[message]...\"</font>")
 
@@ -39,3 +42,14 @@
 	spell_type = SPELL_BLOOD
 	spell_flags = NONE
 	required_form = null
+
+/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/dark_whispers
+	name = "Dark Whispers"
+	desc = "Manipulate the blood of your target, conveying a message."
+	spell_type = SPELL_BLOOD
+	spell_flags = SPELL_UNETCHABLE
+	required_form = FORM_BLOOD
+
+/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/dark_whispers/handle_message(mob/living/cast_on)
+	cast_on.playsound_local(cast_on, sound, 100, TRUE)
+	to_chat(cast_on, "[span_bloody("Something deep within you seems to speak into your mind: </span><font color=#ff4646>\"[message]...\"</font>")]")
