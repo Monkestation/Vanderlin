@@ -53,7 +53,7 @@
 	desc = ""
 	icon_state = "honeycomb"
 	tastes = list("bitterness" = 1)
-	list_reagents = list(/datum/reagent/consumable/honey = 5, /datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/consumable/honey = 5, /datum/reagent/poison/berry = 5)
 
 /obj/item/reagent_containers/food/snacks/spiderhoney/honey/luminescent
 	name = "moon honey"

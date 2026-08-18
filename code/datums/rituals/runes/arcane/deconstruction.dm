@@ -107,7 +107,7 @@
 	required_skill = skill
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/decrafting/proc/find_matching_recipe(obj/item/item)
-	for(var/recipe_type as anything in subtypesof(/datum/arcyne_crafting_recipe))
+	for(var/recipe_type in subtypesof(/datum/arcyne_crafting_recipe))
 		var/datum/arcyne_crafting_recipe/R = new recipe_type
 		if(!ispath(R.output) || !istype(item, R.output))
 			qdel(R)
@@ -120,7 +120,7 @@
 		qdel(R)
 		return M
 
-	for(var/recipe_type as anything in subtypesof(/datum/repeatable_crafting_recipe))
+	for(var/recipe_type in subtypesof(/datum/repeatable_crafting_recipe))
 		var/datum/repeatable_crafting_recipe/R = new recipe_type
 		if(!ispath(R.output) || !istype(item, R.output))
 			qdel(R)

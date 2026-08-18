@@ -655,10 +655,6 @@ GLOBAL_LIST_INIT(WALLITEMS_INVERSE, typecacheof(list(
 
 	return L
 
-//gives us the stack trace from CRASH() without ending the current proc.
-/proc/stack_trace(msg)
-	CRASH(msg)
-
 //Key thing that stops lag. Cornerstone of performance in ss13, Just sitting here, in unsorted.dm.
 
 //Increases delay as the server gets more overloaded,
@@ -893,8 +889,6 @@ GLOBAL_DATUM_INIT(dview_mob, /mob/dview, new)
 /proc/CallAsync(datum/source, proctype, list/arguments)
 	set waitfor = FALSE
 	return call(source, proctype)(arglist(arguments))
-
-#define TURF_FROM_COORDS_LIST(List) (locate(List[1], List[2], List[3]))
 
 // Converts browser keycodes to BYOND keycodes.
 /proc/browser_keycode_to_byond(keycode)

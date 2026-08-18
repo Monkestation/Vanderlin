@@ -1,18 +1,10 @@
-/mob/living/New(loc, ...)
-	. = ..()
+/mob/living/Initialize(mapload)
 	var/turf/turf = get_turf(loc)
 	if(turf)
-		if(!("[turf.z]" in GLOB.weatherproof_z_levels))
-			if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
-				GLOB.weatherproof_z_levels |= "[turf.z]"
-		if("[turf.z]" in GLOB.weatherproof_z_levels)
-			faction |= FACTION_MATTHIOS
-			SSmatthios_mobs.register_mob(src)
+		if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_MATTHIOS_DUNGEON)))
+			add_faction(FACTION_MATTHIOS)
 		if(SSterrain_generation.get_island_at_location(turf))
-			faction |= "islander"
-			SSisland_mobs.register_mob(src, SSterrain_generation.get_island_at_location(turf))
-
-/mob/living/Initialize()
+			add_faction("islander")
 	. = ..()
 	if(initial_size != RESIZE_DEFAULT_SIZE)
 		update_transform(initial_size)
@@ -35,15 +27,10 @@
 	if(!ambushable)
 		ADD_TRAIT(src, TRAIT_NOAMBUSH, INNATE_TRAIT)
 	recalculate_stats()
-	var/turf/turf = get_turf(src)
 	if(turf)
 		update_z(turf.z)
 
 /mob/living/Destroy()
-	if(FACTION_MATTHIOS in faction)
-		SSmatthios_mobs.unregister_mob(src)
-	if(cached_island_id)
-		SSisland_mobs.remove_mob(src)
 	update_z(null)
 
 	if(LAZYLEN(status_effects))
@@ -52,12 +39,11 @@
 				qdel(S)
 			else
 				S.be_replaced()
+
 	if(buckled)
 		buckled.unbuckle_mob(src,force=1)
 
 	stop_offering_item()
-
-	QDEL_LIST(surgeries)
 
 	GLOB.mob_living_list -= src
 	for(var/datum/soullink/S as anything in ownedSoullinks)
@@ -425,6 +411,8 @@
 		return FALSE
 	if(body_position == LYING_DOWN)
 		return TRUE
+	if(HAS_TRAIT(L, TRAIT_CLOSECOMBAT))
+		return TRUE
 	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 	if( !(check_zone(L.zone_selected) in acceptable) )
 		to_chat(L, "<span class='warning'>I can't reach that.</span>")
@@ -560,11 +548,11 @@
 			var/used_limb = C.find_used_grab_limb(src, accurate)
 			O.name = "[C]'s [parse_zone(used_limb)]"
 			var/obj/item/bodypart/BP = C.get_bodypart(check_zone(used_limb))
-			C.grabbedby += O
+			LAZYADD(C.grabbedby, O)
 			O.grabbed = C
 			O.set_grabber(src)
 			O.limb_grabbed = BP
-			BP.grabbedby += O
+			LAZYADD(BP.grabbedby, O)
 			SEND_SIGNAL(BP, COMSIG_ATOM_ATTACK_HAND, src) // black briar uses this for triggering infection on grabbers
 			if(item_override)
 				O.sublimb_grabbed = item_override
@@ -1044,6 +1032,10 @@
 		updatehealth()
 		get_up(TRUE)
 
+	// Reapply arcyne momentum if this mind had it before death
+	if(HAS_MIND_TRAIT(src, TRAIT_ARCYNE_MOMENTUM) && !has_status_effect(/datum/status_effect/buff/arcyne_momentum))
+		apply_status_effect(/datum/status_effect/buff/arcyne_momentum)
+
 	// The signal is called after everything else so components can properly check the updated values
 	SEND_SIGNAL(src, COMSIG_LIVING_REVIVE, full_heal_flags)
 
@@ -1073,17 +1065,23 @@
 
 	if(heal_flags & HEAL_TOX) //zero as second argument not automatically call updatehealth().
 		setToxLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_OXY)
 		setOxyLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_CLONE)
 		setCloneLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_BRUTE)
 		setBruteLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_BURN)
 		setFireLoss(0, FALSE, TRUE)
+
 	if(heal_flags & HEAL_STAM)
 		adjust_stamina(-maximum_stamina, internal_regen = FALSE)
 		adjust_energy(max_energy)
+
 	if(heal_flags & HEAL_PAIN_SHOCK)
 		setPainLoss(0, FALSE, TRUE)
 		setShockStage(0, FALSE, TRUE)
@@ -1104,8 +1102,10 @@
 
 	if(heal_flags & HEAL_TEMP)
 		bodytemperature = BODYTEMP_NORMAL
+
 	if(heal_flags & HEAL_BLOOD)
 		restore_blood()
+
 	if(reagents && (heal_flags & HEAL_ALL_REAGENTS))
 		for(var/addi in reagents.addiction_list)
 			reagents.remove_addiction(addi)
@@ -1131,16 +1131,6 @@
 	if(health <= HEALTH_THRESHOLD_DEAD)
 		return FALSE
 	return TRUE
-
-/mob/living/carbon/human/can_be_revived()
-	. = ..()
-	var/obj/item/bodypart/head/H = get_bodypart(BODY_ZONE_HEAD)
-	if(!istype(H) || HAS_TRAIT(H, TRAIT_ROTTEN) || H.skeletonized)
-		return FALSE
-	var/obj/item/organ/brain/B = getorganslot(ORGAN_SLOT_BRAIN)
-	if(!istype(B) || B.brain_death)
-		return FALSE
-
 
 /mob/living/proc/update_damage_overlays()
 	return
@@ -1869,8 +1859,6 @@
 		return FALSE
 	if(is_centcom_level(T.z)) //dont detect mobs on centcom
 		return FALSE
-	if(is_away_level(T.z))
-		return FALSE
 	if(user != null && src == user)
 		return FALSE
 	if(invisibility || alpha == 0)//cloaked
@@ -1974,7 +1962,7 @@
 	var/list/item_contents = list()
 
 	for(var/obj/item/item in src)
-		if(!dropItemToGround(item))
+		if(!dropItemToGround(item) && !(item.item_flags & ABSTRACT))
 			qdel(item)
 			continue
 		item_contents += item
@@ -2214,8 +2202,6 @@
 				//This isn't a problem for AIs with a client since the client will prevent this from being called anyway.
 				controller.set_ai_status(controller.get_expected_ai_status())
 
-		SSmobs.mobs_by_zlevel[new_z] += src
-
 	registered_z = new_z
 
 /mob/living/onTransitZ(turf/old_turf, turf/new_turf)
@@ -2364,12 +2350,12 @@
 	. += {"
 		<br><font size='1'>[VV_HREF_TARGETREF_1V(refid, VV_HK_BASIC_EDIT, "[ckey || "no ckey"]", NAMEOF(src, ckey))] / [VV_HREF_TARGETREF_1V(refid, VV_HK_BASIC_EDIT, "[real_name || "no real name"]", NAMEOF(src, real_name))]</font>
 		<br><font size='1'>
-			BRUTE:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brute' id='brute'>[getBruteLoss()]</a>
-			FIRE:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=fire' id='fire'>[getFireLoss()]</a>
-			TOXIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=toxin' id='toxin'>[getToxLoss()]</a>
-			OXY:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=oxygen' id='oxygen'>[getOxyLoss()]</a>
-			CLONE:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=clone' id='clone'>[getCloneLoss()]</a>
-			BRAIN:<font size='1'><a href='?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brain' id='brain'>[getOrganLoss(ORGAN_SLOT_BRAIN)]</a>
+			BRUTE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brute' id='brute'>[getBruteLoss()]</a>
+			FIRE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=fire' id='fire'>[getFireLoss()]</a>
+			TOXIN:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=toxin' id='toxin'>[getToxLoss()]</a>
+			OXY:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=oxygen' id='oxygen'>[getOxyLoss()]</a>
+			CLONE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=clone' id='clone'>[getCloneLoss()]</a>
+			BRAIN:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=brain' id='brain'>[getOrganLoss(ORGAN_SLOT_BRAIN)]</a>
 			PAIN:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=pain' id='pain'>[getPainLoss()]</a>
 			SHOCK:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=shock' id='shock'>[getShock()]</a>
 			SHOCK STAGE:<font size='1'><a href='byond://?_src_=vars;[HrefToken()];mobToDamage=[refid];adjustDamage=shock_stage' id='shock'>[getShockStage()]</a>
@@ -2704,7 +2690,7 @@
 					briar_notice = TRUE
 
 			if(briar_notice)
-				to_chat(span_briar(span_big("His gaze is enrapturing...")))
+				to_chat(src, span_briar(span_big("His gaze is enrapturing...")))
 				add_stress(/datum/stress_event/black_briar_noc)
 				return
 
@@ -2957,10 +2943,8 @@
 
 	SEND_SIGNAL(src, COMSIG_LIVING_BEFRIENDED, new_friend)
 
-	if(src in SSmatthios_mobs.matthios_mobs)
-		SSmatthios_mobs.unregister_mob(src)
-	if(cached_island_id)
-		SSisland_mobs.remove_mob(src)
+	if(has_faction(FACTION_MATTHIOS))
+		remove_faction(FACTION_MATTHIOS)
 
 	return TRUE
 
@@ -3026,11 +3010,11 @@
  *			  defaults to src and mind makes it transfer with the mind to new mobs.
  * * override - Replace existing spell if present, instead of returning early
  */
-/mob/living/proc/add_spell(datum/action/cooldown/spell/spell_type, silent = TRUE, source, override = FALSE)
+/mob/living/proc/add_spell(datum/action/cooldown/spell/spell_type, silent = TRUE, source, override = FALSE, mastery_spell = FALSE)
 	if(QDELETED(src))
 		return
 
-	var/datum/action/cooldown/spell = get_spell(spell_type, TRUE)
+	var/datum/action/cooldown/spell/spell = get_spell(spell_type, TRUE)
 	if(spell)
 		if(!override)
 			return
@@ -3047,6 +3031,9 @@
 		to_chat(src, span_nicegreen("I learnt [spell.name]!"))
 
 	spell.Grant(src)
+	if(mastery_spell && spell.required_form)
+		var/datum/spell_mastery/mastery = mana_pool?.get_mastery()
+		mastery?.grant_bonus_spell(spell, src)
 
 /mob/living/proc/remove_spell(datum/action/cooldown/spell/spell, return_skill_points = FALSE, silent = TRUE)
 	if(QDELETED(src))
@@ -3056,14 +3043,13 @@
 	if(!real_spell)
 		return
 
-	if(return_skill_points)
-		used_spell_points = max(used_spell_points - real_spell.point_cost, 0)
-		spell_points = max(spell_points + real_spell.point_cost, 0)
-		check_learnspell()
-
 	if(!silent)
 		to_chat(src, span_boldwarning("I forgot [real_spell.name]!"))
 
+	var/datum/spell_mastery/mastery = mana_pool?.get_mastery()
+	if(mastery && (real_spell in mastery.granted_actions))
+		mastery.granted_actions -= real_spell
+		mastery.unlocked_spells -= real_spell.type
 	qdel(real_spell)
 
 /**
@@ -3090,50 +3076,40 @@
 	if(!silent && !silent_individual)
 		to_chat(src, span_boldwarning("I forgot all my spells!"))
 
-/**
- * adjusts the amount of available spellpoints
- *
- * Args
- * * points - amount of points to grant or reduce
- * * used_points - ajust used points
-*/
-/mob/proc/adjust_spell_points(points, used_points = FALSE)
-
-/mob/living/adjust_spell_points(points, used_points = FALSE)
+/mob/living/adjust_form_mastery_points(points, used_points = FALSE, specific_form = null)
 	if(QDELETED(src))
 		return
 
-	if(used_points)
-		used_spell_points += points
-	else
-		spell_points += points
-
+	mana_pool?.get_mastery().adjust_form_mastery_points(points, used_points, specific_form)
+	if(points > 0)
+		mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	check_learnspell()
 
-/// Reset spell points and used spell points
-/mob/living/proc/reset_spell_points(silent = TRUE)
+/mob/living/adjust_technique_mastery_points(points, used_points = FALSE, specific_technique = null)
 	if(QDELETED(src))
 		return
 
-	spell_points = 0
-	used_spell_points = 0
-
-	if(!silent)
-		to_chat(src, span_boldwarning("I lost all my spellpoints!"))
-
+	mana_pool?.get_mastery().adjust_technique_mastery_points(points, used_points, specific_technique)
 	check_learnspell()
+
+/mob/living/reset_form_mastery_points(silent = TRUE)
+	if(QDELETED(src))
+		return
+
+	mana_pool?.get_mastery().reset_form_mastery_points(silent)
+
+/mob/living/reset_technique_mastery_points(silent = TRUE)
+	if(QDELETED(src))
+		return
+
+	mana_pool?.get_mastery().reset_technique_mastery_points(silent)
 
 /// Check if learnspell should be removed or granted
 /mob/living/proc/check_learnspell()
 	if(QDELETED(src))
 		return
 
-	if(get_spell(/datum/action/cooldown/spell/undirected/learn))
-		return
-
-	// Because of kobolds spellpoints can be decimal, but you can't do anything with that if below 1
-	if(floor(spell_points - used_spell_points) > 0)
-		add_spell(/datum/action/cooldown/spell/undirected/learn)
+	mana_pool?.get_mastery()
 
 /**
  * purges all spells and skills
@@ -3143,7 +3119,8 @@
 /mob/living/proc/purge_combat_knowledge(silent = TRUE)
 	purge_all_skills(silent)
 	remove_spells(silent = silent)
-	reset_spell_points(silent)
+	reset_technique_mastery_points(silent)
+	reset_form_mastery_points(silent)
 
 /mob/living/proc/offer_item(mob/living/offered_to, obj/offered_item)
 	if(isnull(offered_to) || isnull(offered_item))

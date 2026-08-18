@@ -25,7 +25,7 @@
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 
 	material_category = ARMOR_MAT_FABRIC
-	item_weight = 3.5 KILOGRAMS
+	item_weight = 0.8 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/light
 	name = "light gambeson"
@@ -56,7 +56,7 @@
 	sellprice = VALUE_HEAVY_GAMBESSON
 
 	armor_type = /datum/armor/padded/good
-	item_weight = 4 KILOGRAMS
+	item_weight = 1 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/heavy/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -169,6 +169,7 @@
 	sellprice = VALUE_GAMBESSON+BONUS_VALUE_MODEST
 
 	body_parts_covered =  COVERAGE_ALL_BUT_LEGS
+	item_weight = 0.4 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/arming/fencer
 	name = "fencing shirt"

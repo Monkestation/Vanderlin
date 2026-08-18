@@ -14,10 +14,6 @@
 	cooldown_time = 3 HOURS
 	spell_cost = 120
 
-	attunements = list(
-		/datum/attunement/death = 0.5
-	)
-
 	/// Weakref to granted spell, for the dream ending
 	var/datum/weakref/granted_spell
 
@@ -64,7 +60,7 @@
 		cast_on.mob_biotypes |= MOB_UNDEAD
 		cast_on.mana_pool.intrinsic_recharge_sources &= ~MANA_ALL_LEYLINES
 		cast_on.mana_pool.set_intrinsic_recharge(MANA_SOULS)
-		cast_on.add_spell(/datum/action/cooldown/spell/undirected/arcyne_eye)
+		cast_on.add_spell(/datum/action/cooldown/spell/undirected/arcyne_eye, mastery_spell = TRUE)
 		to_chat(cast_on, span_smallred("I have forsaken the living. I am now closer to a deadite than a mortal... but I still yet draw breath and bleed."))
 
 	var/obj/item/bodypart/the_part = pick(get_unskeletonized_bodyparts(cast_on))
@@ -79,8 +75,10 @@
 
 	if(!length(get_unskeletonized_bodyparts(cast_on)))
 		cast_on.adjust_stat_modifier(STATMOD_RITUAL, list(/datum/attribute/skill/magic/arcane = 30))
-		cast_on.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation)
-		cast_on.adjust_spell_points(18)
+		cast_on.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation, mastery_spell = TRUE)
+		//! MAGIC BALANCE POINT
+		cast_on.adjust_form_mastery_points(20)
+		cast_on.adjust_technique_mastery_points(12)
 		cast_on.visible_message(
 			span_boldwarning("[cast_on]'s form swells with terrible power as they cast away almost all of \
 			the remnants of their mortal flesh, arcyne runes glowing upon their exposed bones..."),
@@ -100,7 +98,7 @@
 	granted_spell = WEAKREF(spell)
 
 /datum/action/cooldown/spell/undirected/rituos/proc/get_unskeletonized_bodyparts(mob/living/carbon/caster)
-	var/static/list/excluded_bodypart_types = list(/obj/item/bodypart/head)
+	var/static/list/excluded_bodypart_types = list(/obj/item/bodypart/head, /obj/item/bodypart/chest)
 
 	var/list/possible_parts = list()
 	for(var/obj/item/bodypart/BP in caster.bodyparts)

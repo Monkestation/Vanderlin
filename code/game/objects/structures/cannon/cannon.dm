@@ -102,9 +102,9 @@
 			if(tool.reagents.trans_to(reagents, 10, transfered_by = user))
 				user.visible_message(span_notice("[user] fills \the [name] with \the [tool.name]"), span_notice("I fill \the [name] with \the [tool.name]"))
 				playsound(src, 'sound/foley/gunpowder_fill.ogg', 100, FALSE)
-				balloon_alert(user, "Added!")
+				balloon_alert(user, "added!")
 			else
-				balloon_alert(user, "None Left!")
+				balloon_alert(user, "none Left!")
 		return ITEM_INTERACT_SUCCESS
 
 	if(isfuse(tool))

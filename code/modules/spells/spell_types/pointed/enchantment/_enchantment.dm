@@ -43,6 +43,6 @@
 		to_chat(owner, span_warning("There is nothing to enchant!"))
 		return
 	if(spell_type != SPELL_MIRACLE)
-		enchantment_duration *= attuned_strength
+		enchantment_duration *= spell_magnitude_modifier
 	enchant_item.AddComponent(/datum/component/enchanted_weapon, enchantment_duration, allows_refresh, associated_skill, 1, enchantment, holder)
 	cooldown_time = cooldown_time || enchantment_duration

@@ -5,10 +5,7 @@
 	sound = 'sound/magic/gravity.ogg'
 	self_cast_possible = FALSE
 	spell_flags = SPELL_RITUOS
-	point_cost = 2
-	attunements = list(
-		/datum/attunement/dark = 0.6,
-	)
+	required_form = FORM_AIR
 
 	//https://www.youtube.com/watch?v=MfK3Ygb7Jzk
 	invocation = "Fall."
@@ -17,6 +14,8 @@
 	charge_time = 2 SECONDS
 	cooldown_time = 25 SECONDS
 	spell_cost = 35
+	/// Min strength to resist spell.
+	var/strength_level = 13
 
 /datum/action/cooldown/spell/gravity/is_valid_target(atom/cast_on)
 	. = ..()
@@ -27,7 +26,7 @@
 /datum/action/cooldown/spell/gravity/cast(mob/living/cast_on)
 	. = ..()
 	new /obj/effect/temp_visual/gravity(get_turf(cast_on))
-	if(GET_MOB_ATTRIBUTE_VALUE(cast_on, STAT_STRENGTH) >= 13)
+	if(GET_MOB_ATTRIBUTE_VALUE(cast_on, STAT_STRENGTH) >= strength_level)
 		cast_on.OffBalance(3 SECONDS)
 		cast_on.adjustBruteLoss(15, damage_type = BCLASS_BLUNT)
 		to_chat(cast_on, span_userdanger("You're magically weighed down, but your strength resists!"))

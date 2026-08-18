@@ -9,7 +9,7 @@
 	department_flag = NOBLEMEN
 	display_order = JDO_HAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/grant_title)
@@ -18,7 +18,11 @@
 	outfit = /datum/outfit/hand
 	advclass_cat_rolls = list(CTAG_HAND = 20)
 	give_bank_account = 120
+
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_always_know_me = list(JOB_COURT_AGENT)
+
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)
@@ -51,6 +55,7 @@
 	name = JOB_HAND
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/storage/keyring/hand
+	ring = /obj/item/clothing/ring/courtagent_ring/blacksteel
 
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -74,7 +79,8 @@
 			to_chat(H, span_notice(name))
 
 /datum/job/advclass/hand
-	exp_types_granted = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/hand
 	raw_attribute_list = list(
@@ -102,7 +108,6 @@
 	outfit = /datum/outfit/hand/handclassic
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/hand
 	honorary = "General"
@@ -157,7 +162,6 @@
 	outfit = /datum/outfit/hand/spymaster
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/CombatSpymaster.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/spymaster
 	honorary = "Spymaster"
@@ -178,7 +182,7 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
 	beltl = /obj/item/weapon/knife/dagger/steel/hand/parry
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backpack_contents = list(
 		/obj/item/lockpickring/mundane = 1,
 		/obj/item/frumentarii = 1,
@@ -244,7 +248,6 @@
 	outfit = /datum/outfit/hand/advisor
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/advisor
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/advisor/old
@@ -256,7 +259,7 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	beltl = /obj/item/weapon/sword/rapier/caneblade/hand
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
@@ -331,14 +334,13 @@
 /datum/job/advclass/hand/huntsmaster
 	title = "Huntsmaster"
 	tutorial = " A hunter of the crown, you have tracked more living beings through the Wild than you can remember; \
-    a loyal hound by your side, a powerful saiga underneath. You've learnt the rules of the hunt are no different from the court, just simpifed, primal. \
-    The strong survive, the weak die. So, loose your bow over these lands, and let no man, no beast, and no demons think themselves safe from your arrows. \
-    Your agents by your side, you will rid this town of ruffians, rooting out would-be's like one does with a lowly cabbit. \
-    Let the world remember you, the Huntsmaster, as a true slayer of beast, monster, and man."
+	a loyal hound by your side, a powerful saiga underneath. You've learnt the rules of the hunt are no different from the court, just simpifed, primal. \
+	The strong survive, the weak die. So, loose your bow over these lands, and let no man, no beast, and no demons think themselves safe from your arrows. \
+	Your agents by your side, you will rid this town of ruffians, rooting out would-be's like one does with a lowly cabbit. \
+	Let the world remember you, the Huntsmaster, as a true slayer of beast, monster, and man."
 	outfit = /datum/outfit/hand/huntsmaster
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/huntsmaster
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/huntsmaster/old

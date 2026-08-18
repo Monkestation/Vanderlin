@@ -25,6 +25,11 @@
 	penfactor = 10
 	icon_state = "instrike"
 
+/datum/intent/mace/strike/polehammer
+	reach = 2
+	acc_bonus = 10
+	penfactor = 20
+
 // MACE SMASH INTENTS //
 /datum/intent/mace/smash
 	name = "smash"
@@ -93,47 +98,4 @@
 	damfactor = 0.9
 	item_damage_type = "stab"
 	acc_bonus = 12
-
-// FLAIL DERIVING INTENTS //
-
-/datum/intent/flail/strike
-	name = "strike"
-	icon_state = "instrike"
-	blade_class = BCLASS_BLUNT
-	hitsound = list('sound/combat/hits/blunt/flailhit.ogg')
-	swingdelay = 5
-	misscost = 5
-	attack_verb = list("strikes", "hits")
-	penfactor = AP_FLAIL_STRIKE
-	item_damage_type = "slash"
-	acc_bonus = 12
-
-/datum/intent/flail/strike/long
-	reach = 2
-	misscost = 8
-
-/datum/intent/flail/strike/smash
-	name = "smash"
-	icon_state = "insmash"
-	blade_class = BCLASS_SMASH
-	no_early_release = TRUE
-	chargetime = 5
-	chargedloop = /datum/looping_sound/flailswing
-	keep_looping = TRUE
-	misscost = 10
-	attack_verb = list("smashes")
-	damfactor = 1.2
-	penfactor = AP_FLAIL_SMASH
-	item_damage_type = "slash"
-	knockback = TRUE
-
-/datum/intent/flail/strike/smash/long
-	reach = 2
-	misscost = 12
-
-/datum/intent/flail/strike/matthiosflail
-	reach = 2
-
-/datum/intent/flail/strike/smash/matthiosflail
-	reach = 2
 

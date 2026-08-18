@@ -2401,11 +2401,33 @@
 /turf/open/floor/abyss_sand,
 /area/under/cavewet)
 "aYh" = (
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient,
+/obj/item/natural/chaff/wheat,
+/obj/item/natural/chaff/wheat,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/poppy,
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
+/obj/item/reagent_containers/food/snacks/produce/swampweed_dried,
+/obj/item/reagent_containers/food/snacks/produce/swampweed,
+/obj/item/reagent_containers/powder/spice,
+/obj/item/reagent_containers/powder/spice,
+/obj/item/neuFarm/seed/poppy,
 /obj/structure/fluff/railing/wood{
+	dir = 8;
 	pixel_y = -1
 	},
 /obj/structure/fluff/railing/wood{
-	dir = 8;
 	pixel_y = -1
 	},
 /turf/open/floor/dirt,
@@ -3649,29 +3671,11 @@
 	},
 /area/outdoors/bog/beach/east)
 "cll" = (
-/obj/structure/closet/crate/chest/neu_iron,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient,
-/obj/item/natural/chaff/wheat,
-/obj/item/natural/chaff/wheat,
-/obj/item/reagent_containers/food/snacks/produce/poppy,
-/obj/item/reagent_containers/food/snacks/produce/poppy,
-/obj/item/reagent_containers/food/snacks/produce/poppy,
-/obj/item/reagent_containers/food/snacks/produce/poppy,
-/obj/item/reagent_containers/food/snacks/produce/poppy,
-/obj/item/reagent_containers/food/snacks/produce/poppy,
-/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
-/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
-/obj/item/reagent_containers/food/snacks/produce/swampweed_dried,
-/obj/item/reagent_containers/food/snacks/produce/swampweed,
-/obj/item/reagent_containers/powder/spice,
-/obj/item/reagent_containers/powder/spice,
-/obj/item/neuFarm/seed/poppy,
-/turf/open/floor/dirt,
+/obj/structure/door/iron/bars{
+	name = "Chicken Coop"
+	},
+/obj/effect/mapping_helpers/access/keyset/other/bogwitch,
+/turf/open/floor/twig,
 /area/outdoors/bog/witch)
 "cmk" = (
 /obj/effect/decal/cleanable/blood/tracks,
@@ -4171,6 +4175,13 @@
 	},
 /turf/closed/wall/mineral/decostone/moss,
 /area/outdoors/bog/north/west)
+"cNf" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/twig,
+/area/outdoors/bog/witch)
 "cNF" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/north/west)
@@ -4713,6 +4724,13 @@
 /obj/effect/decal/remains/saiga,
 /turf/open/floor/concrete,
 /area/outdoors/bog/e_highroad)
+"dne" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/twig,
+/area/outdoors/bog/witch)
 "dnt" = (
 /obj/structure/flora/pillar,
 /turf/open/floor/abyss_tile,
@@ -5908,7 +5926,7 @@
 /obj/item/clothing/head/crown/circlet/sleepless,
 /obj/item/clothing/neck/mana_star,
 /obj/structure/carpet/blue,
-/obj/item/weapon/polearm/woodstaff/naledi,
+/obj/item/weapon/polearm/woodstaff/psydonian,
 /turf/open/floor/abyss_tile{
 	color = "#7D9BAE"
 	},
@@ -7047,6 +7065,15 @@
 /obj/structure/fermentation_keg,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
+"fwL" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/turf/open/floor/twig,
+/area/outdoors/bog/witch)
 "fwR" = (
 /obj/structure/roguetent,
 /turf/open/floor/concrete,
@@ -7957,17 +7984,17 @@
 /obj/machinery/light/fueled/campfire/longlived,
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"gqq" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8
+	},
+/mob/living/simple_animal/hostile/retaliate/chicken,
+/turf/open/floor/twig,
+/area/outdoors/bog/witch)
 "gra" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/dirt,
 /area/outdoors/bog/east)
-"grD" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/structure/fluff/nest,
-/turf/open/floor/dirt/road,
-/area/outdoors/bog/witch)
 "grH" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -10066,6 +10093,16 @@
 	pixel_y = 0
 	},
 /area/under/cavewet)
+"iBN" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/mob/living/simple_animal/hostile/retaliate/chicken,
+/turf/open/floor/twig,
+/area/outdoors/bog/witch)
 "iCl" = (
 /turf/open/floor/dirt,
 /area/outdoors/bog/central)
@@ -12751,14 +12788,11 @@
 /turf/open/floor/ruinedwood/turned/alt,
 /area/indoors/shelter/bog)
 "lcf" = (
+/obj/structure/fluff/nest,
 /obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
+	dir = 4
 	},
-/obj/structure/fluff/railing/wood{
-	pixel_y = -1
-	},
-/turf/open/floor/dirt,
+/turf/open/floor/twig,
 /area/outdoors/bog/witch)
 "lcg" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -17494,10 +17528,10 @@
 /obj/item/ingot/gold,
 /obj/item/clothing/ring/silver/noc,
 /obj/item/weapon/shield/tower/metal/psy,
-/obj/item/clothing/armor/plate/full/holysee,
-/obj/item/clothing/pants/platelegs/holysee,
-/obj/item/clothing/head/helmet/heavy/holysee,
-/obj/item/clothing/cloak/holysee,
+/obj/item/clothing/armor/plate/full/grandmaster,
+/obj/item/clothing/pants/platelegs/grandmaster,
+/obj/item/clothing/head/helmet/heavy/grandmaster,
+/obj/item/clothing/cloak/grandmaster,
 /obj/item/clothing/cloak/templar/undivided,
 /turf/open/floor/abyss_tile/three{
 	color = "#547285"
@@ -22155,7 +22189,7 @@
 /area/outdoors/bog/north)
 "vsS" = (
 /obj/structure/closet/crate/chest/neu_fancy,
-/obj/item/clothing/face/lordmask/naledi,
+/obj/item/clothing/face/lordmask/preceptor,
 /turf/open/floor/abyss_sand,
 /area/under/cavewet)
 "vtP" = (
@@ -23984,6 +24018,10 @@
 	},
 /turf/open/glass,
 /area/indoors/shelter/bog/lich)
+"xiF" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/twig,
+/area/outdoors/bog/witch)
 "xiW" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/decostone/moss/long,
@@ -24398,10 +24436,6 @@
 	},
 /turf/open/floor/blocks/newstone,
 /area/outdoors/bog/e_highroad)
-"xCj" = (
-/mob/living/simple_animal/hostile/retaliate/chicken,
-/turf/open/floor/dirt,
-/area/outdoors/bog/witch)
 "xCL" = (
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/shelter/bog/lich)
@@ -24892,6 +24926,9 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"ybv" = (
+/turf/open/floor/twig,
+/area/outdoors/bog/witch)
 "ybY" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/ship/topdeck)
@@ -43561,9 +43598,9 @@ kRR
 plD
 plD
 cwA
-plD
-plD
-plD
+fwL
+gqq
+cNf
 rAi
 vSz
 neZ
@@ -43764,8 +43801,8 @@ uPb
 cwA
 cwA
 cll
-plD
-plD
+ybv
+xiF
 rAi
 rAi
 neZ
@@ -43965,9 +44002,9 @@ gQJ
 kFm
 plD
 plD
-oQy
+iBN
 lcf
-plD
+dne
 cwA
 rAi
 neZ
@@ -44167,8 +44204,8 @@ jDN
 uPb
 plD
 plD
-plD
-plD
+oQy
+oQy
 oQy
 aYh
 rAi
@@ -45179,7 +45216,7 @@ cwA
 xks
 cwA
 dYs
-xCj
+cwA
 kUw
 rAi
 neZ
@@ -45784,7 +45821,7 @@ jDN
 cwA
 cwA
 cwA
-xCj
+cwA
 cwA
 jMx
 rAi
@@ -45987,7 +46024,7 @@ cwA
 cwA
 cwA
 ePU
-grD
+fgJ
 vuH
 cwA
 neZ

@@ -52,11 +52,18 @@
 	for(var/tag in html_tags)
 		. = html_tag(tag, .)
 	if(include_honoraries)
-		if(honorary)
+		var/datum/component/disguise/spy = GetComponent(/datum/component/disguise)
+		if(spy)
+			if(spy.examine_prefix)
+				. = "[spy.examine_prefix] [.]"
+		else if(honorary)
 			. = "[honorary] [.]"
 		if(SSticker.regent_mob == src)
 			. = "Regent [.]"
-		if(honorary_suffix)
+		if(spy)
+			if(spy.examine_suffix)
+				. = "[spy.examine_suffix] [.]"
+		else if(honorary_suffix)
 			. += " [honorary_suffix]"
 
 //gets name from ID or PDA itself, ID inside PDA doesn't matter

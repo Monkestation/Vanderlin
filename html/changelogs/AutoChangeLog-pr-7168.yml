@@ -1,6 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - qol: "traders now give 1-5 rep on selling items"
-  - balance: "traders can only buy a limited amount of each item"
-  - balance: "traders prices are now based on the live market rates with a +- variance"

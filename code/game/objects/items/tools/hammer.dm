@@ -251,6 +251,27 @@
 	no_spark = TRUE
 	item_weight = 1.12 KILOGRAMS
 
+/obj/item/weapon/hammer/stone
+	name = "stone hammer"
+	desc = "A simple, if crude and primitive hammer."
+	icon_state = "stonehammer"
+	icon = 'icons/roguetown/weapons/tools.dmi'
+	force = DAMAGE_HAMMER - 4
+	max_integrity = INTEGRITY_POOR
+	melting_material = /obj/item/natural/stone
+	toolspeed = 1
+	no_spark = TRUE
+	item_weight = 1.1 KILOGRAMS
+
+/obj/item/weapon/hammer/stone/rock
+	name = "hammerstone"
+	desc = "A simple rock, rounded and turned almost into a proper tool."
+	icon_state = "hammerstone"
+	force = DAMAGE_HAMMER - 6
+	max_integrity = INTEGRITY_WORST
+	toolspeed = 0.8
+	item_weight = 0.8 KILOGRAMS
+
 /obj/item/weapon/hammer/sledgehammer
 	name = "sledgehammer"
 	desc = "It's almost asking to be put to work."
@@ -260,7 +281,6 @@
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(MACE_HVYSTRIKE, MACE_HVYSMASH)
 	wbalance = EASY_TO_DODGE // Heavy
-	minstr = 8
 
 	gripsprite = TRUE
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
@@ -302,7 +322,6 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_STRONGEST * 1.2
-	minstr = 10
 
 	pixel_y = -16
 	pixel_x = -16

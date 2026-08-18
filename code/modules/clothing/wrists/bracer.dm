@@ -16,7 +16,7 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 1.2 KILOGRAMS
 
-/obj/item/clothing/wrists/bracers/naledi
+/obj/item/clothing/wrists/bracers/preceptor
 	name = "sojourner's wrappings"
 	desc = "Sheared burlap and cloth, meticulously fashioned around the forearms. It provides more freedom of movement than the traditional steel thorns."
 	slot_flags = ITEM_SLOT_WRISTS
@@ -131,7 +131,6 @@
 /obj/item/clothing/wrists/bracers/leather/scabbard/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
-	AddElement(/datum/element/update_icon_updates_onmob, slot_flags|ITEM_SLOT_HANDS)
 	AddComponent(/datum/component/storage/concrete/scabbard/knife)
 
 /obj/item/clothing/wrists/bracers/psythorns

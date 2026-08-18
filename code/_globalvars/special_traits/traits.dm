@@ -180,10 +180,10 @@
 	allowed_jobs = list(/datum/job/magician, /datum/job/mageapprentice)
 
 /datum/special_trait/darkmagic/on_apply(mob/living/carbon/human/character, silent)
-	character.add_spell(/datum/action/cooldown/spell/eyebite, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/projectile/sickness, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/conjure/raise_lesser_undead/necromancer, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/gravemark, silent = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/eyebite, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/projectile/sickness, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/conjure_summon/raise_lesser_undead/necromancer, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/gravemark, silent = TRUE, mastery_spell = TRUE)
 
 /datum/special_trait/too_smart
 	name = "Too smart"
@@ -373,6 +373,8 @@
 
 /datum/special_trait/tavernbrawler/on_apply(mob/living/carbon/human/character)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/tavernbrawler)
+	character.add_spell(/datum/action/innate/clench_fists, TRUE)
+	ADD_TRAIT(character,TRAIT_CLOSECOMBAT, BE_SPECIAL_TRAIT)
 
 /datum/attribute_holder/sheet/job/mastercraftsmen
 	raw_attribute_list = list(
@@ -630,7 +632,8 @@
 	weight = 50
 
 /datum/special_trait/unlucky/on_apply(mob/living/carbon/human/character, silent)
-	GET_MOB_ATTRIBUTE_VALUE(character, STAT_FORTUNE) = rand(1, 10)
+	var/mod = rand(1, 10)
+	character.adjust_stat_modifier("[type]", list(STAT_FORTUNE = -mod))
 
 /datum/special_trait/jesterphobia
 	name = "Jesterphobic"
@@ -826,12 +829,12 @@
 
 /datum/special_trait/thinker/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/thinker)
-	character.adjust_spell_points(14) //Less points than Court Mage, why do Court mage get 17 points? what even?
-	character.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation, silent = TRUE)
-	character.generate_random_attunements(rand(4,6))
+	character.adjust_technique_mastery_points(3)
+	character.adjust_form_mastery_points(8)
+	character.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation, silent = TRUE, mastery_spell = TRUE)
 	character.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	character.mana_pool.adjust_mana(100) //I don't know, they don't spawn with their full mana bar, so we give them a bit more mana at the start.
-	new /obj/item/book/granter/spellbook/master(get_turf(character))
+	new /obj/item/spellbook/master/starter/arcane(get_turf(character))
 
 /datum/special_trait/skeleton
 	name = "Skeleton"
@@ -1063,12 +1066,13 @@
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/combat/wrestling = 30,
-        /datum/attribute/skill/combat/unarmed = 25,
+		/datum/attribute/skill/combat/unarmed = 25,
 	)
 
 /datum/special_trait/musclepriest/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_CRITICAL_RESISTANCE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_NOPAINSTUN, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character,TRAIT_CLOSECOMBAT, BE_SPECIAL_TRAIT)
 	QDEL_NULL(character.wear_pants)
 	QDEL_NULL(character.wear_shirt)
 	QDEL_NULL(character.wear_armor)
@@ -1083,6 +1087,9 @@
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
 	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
 	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
+	var/datum/action/innate/clench_fists/fists = new(character)
+	fists.Grant(character)
+
 /datum/special_trait/nrftw
 	name = "No Rest for the Wicked"
 	greet_text = span_notice("Miracles that heal others scorch me, and i feel as if i am being dreagged to the underworld.")

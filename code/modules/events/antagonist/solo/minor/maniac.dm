@@ -1,3 +1,4 @@
+/*
 /datum/round_event_control/antagonist/solo/maniac
 	name = "Maniacs"
 	tags = list(
@@ -11,6 +12,8 @@
 	antag_flag = ROLE_MANIAC
 	shared_occurence_type = SHARED_MINOR_THREAT
 	minor_roleset = TRUE
+
+	can_call_midround = TRUE
 
 	restricted_roles = list(
 		/datum/job/lord,
@@ -32,6 +35,7 @@
 		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
+		/datum/job/admin,
 	)
 
 
@@ -105,3 +109,4 @@
 		weighted_list -= M
 		final_candidates += M
 	return final_candidates
+*/
