@@ -8,6 +8,7 @@
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_ALTERATION
+	heretical_spell = TRUE
 
 	invocation_type = INVOCATION_WHISPER
 	invocation = "Sanguis nota"

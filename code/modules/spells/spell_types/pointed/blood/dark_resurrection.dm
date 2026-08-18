@@ -12,6 +12,7 @@
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 14
 	spell_flags = SPELL_UNETCHABLE
+	heretical_spell = TRUE
 
 	invocation_type = INVOCATION_SHOUT
 	invocation = "Excieo cruor!!"

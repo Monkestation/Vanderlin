@@ -203,6 +203,8 @@
 	var/spell_impact_intensity = SPELL_IMPACT_LOW
 	/// Override color for the impact effect. If null, uses light_color.
 	var/spell_impact_color
+	/// If this spell is considered heretical or not. Used to display in the spellbook.
+	var/heretical_spell = FALSE
 
 
 

@@ -7,6 +7,7 @@
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
+	heretical_spell = TRUE
 
 	invocation_type = INVOCATION_WHISPER
 	invocation = "Caedis conspectus"

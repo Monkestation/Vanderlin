@@ -162,6 +162,7 @@
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_RESTORATION
+	heretical_spell = TRUE
 	required_level = 3
 	required_items = list()
 

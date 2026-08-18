@@ -13,6 +13,7 @@
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_level = 6
+	heretical_spell = TRUE
 
 	invocation = "Sanguis congeala!"
 	invocation_type = INVOCATION_WHISPER

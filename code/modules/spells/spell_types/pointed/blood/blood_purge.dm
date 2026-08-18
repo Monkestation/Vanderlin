@@ -10,6 +10,7 @@
 	charge_slowdown = 0.3
 	spell_cost = 75
 	spell_flags = SPELL_UNETCHABLE
+	heretical_spell = TRUE
 
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD

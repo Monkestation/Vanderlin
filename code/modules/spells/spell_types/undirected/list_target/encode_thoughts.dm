@@ -49,6 +49,7 @@
 	spell_type = SPELL_BLOOD
 	spell_flags = SPELL_UNETCHABLE
 	required_form = FORM_BLOOD
+	heretical_spell = TRUE
 
 /datum/action/cooldown/spell/undirected/list_target/encode_thoughts/dark_whispers/handle_message(mob/living/cast_on)
 	cast_on.playsound_local(cast_on, sound, 100, TRUE)

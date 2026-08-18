@@ -10,6 +10,7 @@
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_DESTRUCTION
+	heretical_spell = TRUE
 
 	invocation = "Blood Bolt!!"
 	invocation_type = INVOCATION_SHOUT
@@ -30,6 +31,7 @@
 	spell_type = SPELL_MANA
 	required_form = FORM_WATER
 	spell_flags = SPELL_RITUOS
+	heretical_spell = FALSE
 	projectile_type = /obj/projectile/magic/bloodlightning/lesser
 
 /obj/projectile/magic/bloodlightning

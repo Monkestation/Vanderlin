@@ -9,6 +9,7 @@
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = null
+	heretical_spell = TRUE
 
 	invocation = "DR'N LF'E!"
 	invocation_type = INVOCATION_SHOUT

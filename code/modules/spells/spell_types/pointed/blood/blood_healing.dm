@@ -11,6 +11,7 @@
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_RESTORATION
+	heretical_spell = TRUE
 
 	charge_required = FALSE
 	cooldown_time = 10 SECONDS
