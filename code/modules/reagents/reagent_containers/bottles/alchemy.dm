@@ -26,19 +26,19 @@
 	list_reagents = list(/datum/reagent/medicine/strongstam = 75)
 
 /obj/item/reagent_containers/glass/bottle/poison
-	list_reagents = list(/datum/reagent/berrypoison = 15)
+	list_reagents = list(/datum/reagent/poison/berry = 15)
 
 /obj/item/reagent_containers/glass/bottle/strongpoison
-	list_reagents = list(/datum/reagent/strongpoison = 15)
+	list_reagents = list(/datum/reagent/poison/doom = 15)
 
 /obj/item/reagent_containers/glass/bottle/stampoison
-	list_reagents = list(/datum/reagent/stampoison = 15)
+	list_reagents = list(/datum/reagent/poison/stamina = 15)
 
 /obj/item/reagent_containers/glass/bottle/strongstampoison
-	list_reagents = list(/datum/reagent/strongstampoison = 15)
+	list_reagents = list(/datum/reagent/poison/stamina_strong = 15)
 
 /obj/item/reagent_containers/glass/bottle/killersice
-	list_reagents = list(/datum/reagent/killersice = 15)
+	list_reagents = list(/datum/reagent/poison/killersice = 15)
 
 /obj/item/reagent_containers/glass/bottle/water
 	list_reagents = list(/datum/reagent/water = 75)
@@ -74,7 +74,7 @@
 	list_reagents = list(/datum/reagent/medicine/gender_potion = 5)
 
 /obj/item/reagent_containers/glass/bottle/vial/strongpoison
-	list_reagents = list(/datum/reagent/strongpoison = 25)
+	list_reagents = list(/datum/reagent/poison/doom = 25)
 
 /obj/item/reagent_containers/glass/bottle/vial/antidote
 	list_reagents = list(/datum/reagent/medicine/antidote = 25)

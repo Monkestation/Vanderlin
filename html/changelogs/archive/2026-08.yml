@@ -156,3 +156,51 @@
 2026-08-13:
   ModDownloading:
   - balance: New weapons now always start fully sharp.
+2026-08-14:
+  Avalon-Proto:
+  - map: The keep gate has been reinforced by master artificers and masons
+  - map: The steward is no longer a massive weakspot in the wall
+  - map: The area of the vault has been adjusted to stop items from falling into the
+      wall
+2026-08-15:
+  E231kei500bandai:
+  - spellcheck: head housekeeper is now called just "housekeeper"
+  MissyNym:
+  - map: The Prisoner now gets a random soilson wicker basket instead of a generic
+      one. What kind of seeds will they get, I wonder?
+  realforest2001:
+  - rscadd: Added VV dropdown option for enchanting items.
+  - rscadd: Added a trait to stop decapitation without needing NODISMEMBER.
+  - admin: Added a Lobby-OOC button for admins to talk to people in lobby.
+  - rscadd: OOC is now prefixed with OOC and talking in lobby is prefixed with LOBBY.
+  - rscadd: Added Darkspawn admin preset.
+  - rscadd: Added Nitewalker admin preset.
+  - rscadd: Ethereal Jaunt is detected with Arcyne Eye and no longer has a FOB blocker.
+  - bugfix: Phantom Ear isn't abducted by teleport sigils.
+2026-08-16:
+  MissyNym:
+  - map: Adds a fenced off chicken coop for the Bog Witch.
+  - map: Adds a rolling pin to the Church on White Palace Pass.
+  realforest2001:
+  - bugfix: Poisons are now correctly subtyped.
+2026-08-17:
+  dwasint:
+  - rscadd: dormant edge protection
+  - rscadd: dormant layering
+  realforest2001:
+  - map: Mapped in new keep areas to Rosewood.
+  - map: Mapped in new keep areas to White Palace Pass.
+  ta3754859-max:
+  - balance: Increased dragonslayer cleave intent CD to 5 seconds
+2026-08-18:
+  AyyRobotics:
+  - rscadd: Church has been redesigned, adding new areas and overhauling old ones.
+  - rscadd: Pathways around the Church, Graveyard, and Red Manor are more consistent,
+      railings added to the Market Stalls and Mine.
+  - bugfix: GMT's Oath now works in the Prayer Hall, Church, Church Exterior, Graveyard,
+      and Crypt.
+  Sulaboy:
+  - rscadd: Some fires (campfires/fireplaces) give a buff to those nearby allowing
+      passive energy regeneration.
+  dwasint:
+  - rscadd: Alchemy recipes now show the description of the created recipe.
