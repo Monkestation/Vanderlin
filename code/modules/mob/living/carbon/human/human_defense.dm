@@ -663,7 +663,7 @@
 
 	return ..()
 
-/mob/living/carbon/human/proc/check_for_injuries(mob/user = src, advanced = FALSE, silent = FALSE, additional = FALSE)
+/mob/living/carbon/human/proc/check_for_injuries(mob/user = src, advanced = FALSE, silent = FALSE, additional = FALSE, show_reagents = FALSE)
 	var/list/examination = list("<span class='info'>ø ------------ ø")
 	var/m1
 	var/deep_examination = advanced
@@ -754,6 +754,15 @@
 	if(additional)
 		examination += span_info(span_green("[getToxLoss()] TOXIN"))
 		examination += span_info(span_blue("[getOxyLoss()] OXYGEN"))
+
+	if(show_reagents && length(reagents.reagent_list))
+		examination += "ø ------------ ø"
+		for(var/datum/reagent/reagent in reagents.reagent_list)
+			var/toxin_report = ""
+			if(istype(reagent, /datum/reagent/toxin) || istype(reagent, /datum/reagent/poison))
+				toxin_report = " [span_red("\[DANGER\]")]"
+			examination += "<font color = '[reagent.color]'>[reagent.name] ([floor(reagent.volume)])[toxin_report]</font>"
+
 	examination += "ø ------------ ø</span>"
 	if(!silent)
 		to_chat(user, examination.Join("\n"))

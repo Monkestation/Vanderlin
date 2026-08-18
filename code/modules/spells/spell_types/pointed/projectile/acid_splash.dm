@@ -28,6 +28,8 @@
 	name = "Caustic Splash"
 
 	projectile_type = /obj/projectile/magic/acidsplash/quietus
+	required_form = null
+	required_technique = null
 
 /datum/action/cooldown/spell/projectile/acid_splash/organ
 	name = "Acid Spray"
