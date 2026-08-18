@@ -220,7 +220,7 @@
 		if("Serpentine Glands - Thermal Vision and Venom")
 			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
-			owner.update_sight()
+			spawned.update_sight()
 
 /datum/outfit/confessor
 	name = "Confessor (Sacrestants)"
