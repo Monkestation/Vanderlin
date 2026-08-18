@@ -1,3 +1,5 @@
+GLOBAL_LIST_EMPTY(broodmother_eggs)
+
 #define BIOMASS_TIER_1 "tier_1"
 #define BIOMASS_TIER_2 "tier_2"
 #define BIOMASS_TIER_3 "tier_3"
@@ -12,6 +14,9 @@
 #define FRENZY_DURATION 60 SECONDS
 #define FRENZY_COOLDOWN 5 MINUTES
 
+/area/broodmother_den
+	name = "Broodmothers Den"
+
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother
 	name = "Broodmother"
 	desc = "Once, Eora gifted to Graggar the Luxus Pragmas and told him to make a female companion with it.\
@@ -20,6 +25,7 @@
 	icon = 'icons/mob/creacher/trolls/broodmother.dmi'
 	icon_state = "broodmother"
 	gender = FEMALE
+	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
 	SET_BASE_PIXEL(-38, -8)
 	hud_type = /datum/hud/broodmother
 	icon_dead = "broodmother_dead"
@@ -43,9 +49,12 @@
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother/Initialize()
 	. = ..()
 
+	ADD_TRAIT(src, TRAIT_BROOD, INNATE_TRAIT)
 	add_spell(/datum/action/cooldown/spell/projectile/acid_splash_broodmother)
 	add_spell(/datum/action/cooldown/spell/stone_throw)
 	add_spell(/datum/action/cooldown/mob_cooldown/earth_quake)
+	add_spell(/datum/action/cooldown/spell/broodmother_hole)
+	add_spell(/datum/action/cooldown/spell/stone_drop)
 
 	grant_language(/datum/language/common)
 	grant_language(/datum/language/orcish)
@@ -158,13 +167,13 @@
 		tier_3_biomass_amount,
 		)
 
-/mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/attempt_lay_egg(tier)
+/mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/attempt_lay_egg(tier, obj/structure/broodmother_egg/override)
 	if(!tier)
 		stack_trace("didn't pass tier for egg")
 	if(!egg_laying_checks(tier))
 		return
 
-	lay_egg(tier)
+	lay_egg(tier, override)
 
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/egg_laying_checks(tier)
 	var/check = tier
@@ -178,7 +187,7 @@
 
 	return (vars["tier_[tier]_biomass_amount"] >= check) ? TRUE : FALSE // gaming
 
-/mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/lay_egg(tier)
+/mob/living/simple_animal/hostile/retaliate/troll/broodmother/proc/lay_egg(tier, obj/structure/broodmother_egg/override)
 	var/egg_to_lay
 	switch(tier)
 		if(1)
@@ -190,6 +199,9 @@
 		if(3)
 			egg_to_lay = /obj/structure/broodmother_egg/troll
 			adjust_biomass(tier, -tier_3_biomass_cost)
+
+	if(override)
+		egg_to_lay = override
 
 	var/obj/structure/broodmother_egg/made_egg = new egg_to_lay(get_turf(src))
 	made_egg.mother_weak_ref = WEAKREF(src)
@@ -205,6 +217,7 @@
 	adjust_biomass(2, round(nutriments / 150, 0.1))
 	adjust_biomass(3, round(nutriments / 500, 0.1))
 
+///this whole proc is fucking ass holy
 /mob/living/simple_animal/hostile/retaliate/troll/broodmother/MiddleClickOn(atom/A, list/modifiers) // it's so bad :sob: I'm so sorry
 	. = ..()
 	if(isanimal(A))
@@ -235,38 +248,129 @@
 				C.gib()
 	else if(isorgan(A))
 		var/obj/item/organ/organ = A
+		var/turf/organ_turf = get_turf(organ)
 		var/obj/item/reagent_containers/food/snacks/S = organ.prepare_eat(src)
 		if(S)
-			S.attack(src, src)
+			S.forceMove(organ_turf)
+			eat_food(S)
+			eat_food_after(S)
 	else if(issnack(A))
 		var/obj/item/reagent_containers/food/snacks/S = A
-		S.attack(src, src)
+		eat_food(S)
+		eat_food_after(S)
 
 /obj/structure/broodmother_egg
 	name = "egg"
 	desc = "An egg..."
 	abstract_type = /obj/structure/broodmother_egg
 	icon = 'icons/obj/broodmother_32x.dmi'
+	///name that shows in the hud on hover
+	var/hud_name = ""
 	var/hatched = FALSE
 	var/hatch_time = 60 SECONDS
 	var/type_to_spawn
 	var/time_before_first_crack = 30 SECONDS
 	var/cracking_speed = 6 SECONDS
+	///if we wait until a possession happens for hatching
+	var/possessed_only = FALSE
 	var/datum/weakref/mother_weak_ref
+	/// Whitelist vessel ID ghosts get polled against for this egg's occupant
+	var/vessel_id
+	/// If TRUE, the egg hatches the instant a ghost possesses the resident vessel,
+	/// ignoring hatch_time/cracking entirely. Used for mapper-placed broodmother eggs.
+	var/hatch_on_possess = FALSE
+	/// The living mob quietly gestating inside this egg, waiting on a ghost
+	var/mob/living/resident_mob
+	///are we ready to hatch?
+	var/ready_to_hatch = FALSE
+	///maploaded vessel
+	var/maploaded_vessel = TRUE
 
 /obj/structure/broodmother_egg/Initialize()
 	. = ..()
+	if(maploaded_vessel)
+		spawn_resident_vessel()
+	if(hatch_on_possess)
+		return
 	addtimer(CALLBACK(src, PROC_REF(hatch)), hatch_time)
 	addtimer(CALLBACK(src, PROC_REF(crack)), time_before_first_crack)
 
+/obj/structure/broodmother_egg/Destroy()
+	if(resident_mob && !hatched)
+		qdel(resident_mob)
+	resident_mob = null
+	return ..()
+
+/obj/structure/broodmother_egg/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	var/mob/living/liver = mother_weak_ref?.resolve()
+	if(user != liver)
+		return
+	possessed_only = !possessed_only
+	if(possessed_only)
+		to_chat(liver, span_notice("You coat the egg in your mucus preventing it from hatching without a strong will!"))
+	else
+		to_chat(liver, span_notice("You wipe the egg free of mucus!"))
+
+/// Spawns the mob this egg will become, tucks it out of sight inside the egg, and
+/// opens it up to ghosts as a vessel. Whether or not anyone claims it, the mob
+/// already exists and is ready to be revealed at hatch() (or immediately, for
+/// hatch_on_possess eggs).
+/obj/structure/broodmother_egg/proc/spawn_resident_vessel()
+	if(!type_to_spawn)
+		return
+	resident_mob = new type_to_spawn(src)
+	resident_mob.forceMove(src)
+	resident_mob.ai_controller?.can_idle = FALSE
+	resident_mob.AddComponent(
+		/datum/component/ghost_vessel, \
+		null, \
+		vessel_id, \
+		CALLBACK(src, PROC_REF(on_vessel_possessed)), \
+	)
+	ADD_TRAIT(resident_mob, TRAIT_BROOD, INNATE_TRAIT)
+
+/// Whether the resident mob currently has a soul in it (possessed by a ghost).
+/obj/structure/broodmother_egg/proc/is_resident_possessed()
+	return resident_mob?.key || resident_mob?.ckey
+
+/// Called by the ghost_vessel component once a ghost claims the resident mob.
+/// Keeps them locked in place inside the egg (the component's own stasis traits
+/// are gone the moment it qdels itself) until the egg actually hatches.
+/obj/structure/broodmother_egg/proc/on_vessel_possessed(mob/living/vessel_mob, mob/dead/observer/ghost)
+	ADD_TRAIT(vessel_mob, TRAIT_STASIS, BROODMOTHER_EGG_TRAIT)
+	ADD_TRAIT(vessel_mob, TRAIT_IMMOBILIZED, BROODMOTHER_EGG_TRAIT)
+	ADD_TRAIT(vessel_mob, TRAIT_HANDS_BLOCKED, BROODMOTHER_EGG_TRAIT)
+	to_chat(vessel_mob, span_notice("You curl up inside \the [src], waiting to hatch..."))
+	// possessed_only eggs were only ever waiting on a soul - now that one's here, go
+	if(hatch_on_possess || (possessed_only && ready_to_hatch))
+		hatch()
+
 /obj/structure/broodmother_egg/proc/hatch()
+	if(hatched)
+		return
+	// mucus is still up and nobody's home - refuse to hatch, on_vessel_possessed
+	// will call us again the moment a ghost actually claims the resident mob
+	if(possessed_only && !is_resident_possessed())
+		ready_to_hatch = TRUE
+		return
 	hatched = TRUE
 	icon_state = "[icon_state]_hatched"
 	name = "hatched " + name
 	playsound(src, 'sound/foley/eggbreak.ogg', 70, TRUE)
 	animate(src, tag = "hatching_animation", flags = ANIMATION_END_NOW)
-	var/mob/living/spawned = new type_to_spawn(get_turf(src))
-	var/mob/living/mother = mother_weak_ref.resolve()
+
+	var/mob/living/spawned = resident_mob
+	if(spawned)
+		REMOVE_TRAIT(spawned, TRAIT_STASIS, BROODMOTHER_EGG_TRAIT)
+		REMOVE_TRAIT(spawned, TRAIT_IMMOBILIZED, BROODMOTHER_EGG_TRAIT)
+		REMOVE_TRAIT(spawned, TRAIT_HANDS_BLOCKED, BROODMOTHER_EGG_TRAIT)
+		spawned.forceMove(get_turf(src))
+	else
+		spawned = new type_to_spawn(get_turf(src))
+
+	resident_mob = null
+	var/mob/living/mother = mother_weak_ref?.resolve()
 	if(mother)
 		spawned.befriend(mother)
 
@@ -285,12 +389,35 @@
 /obj/structure/broodmother_egg/goblin
 	name = "small egg"
 	icon_state = "goblin_egg"
+	hud_name = "a Goblin Egg"
 	type_to_spawn = /mob/living/carbon/human/species/goblin/slaved
+	vessel_id = BROODSPAWN_GOBLIN_VESSEL_ID
+
+/obj/structure/broodmother_egg/goblin/moon
+	icon_state = "goblin_moon_egg"
+	hud_name = "a Moon Goblin Egg"
+	type_to_spawn = /mob/living/carbon/human/species/goblin/slaved/moon
+
+/obj/structure/broodmother_egg/goblin/hell
+	icon_state = "goblin_hell_egg"
+	hud_name = "a Hell Goblin Egg"
+	type_to_spawn = /mob/living/carbon/human/species/goblin/slaved/hell
+
+/obj/structure/broodmother_egg/goblin/sea
+	icon_state = "goblin_sea_egg"
+	hud_name = "a Sea Goblin Egg"
+	type_to_spawn = /mob/living/carbon/human/species/goblin/slaved/hell
+
+/obj/structure/broodmother_egg/goblin/cave
+	icon_state = "goblin_cave_egg"
+	hud_name = "a Cave Goblin Egg"
+	type_to_spawn = /mob/living/carbon/human/species/goblin/slaved/hell
 
 /obj/structure/broodmother_egg/orc
 	name = "medium egg"
 	icon_state = "orc_egg"
 	type_to_spawn = /mob/living/carbon/human/species/orc/slaved
+	vessel_id = BROODSPAWN_ORC_VESSEL_ID
 	hatch_time = 3 MINUTES
 	time_before_first_crack = 2 MINUTES
 	cracking_speed = 6 SECONDS
@@ -299,9 +426,45 @@
 	name = "large egg"
 	icon_state = "troll_egg"
 	type_to_spawn = /mob/living/simple_animal/hostile/retaliate/troll/slaved
+	vessel_id = BROODSPAWN_TROLL_VESSEL_ID
 	hatch_time = 5 MINUTES
 	time_before_first_crack = 4 MINUTES
 	cracking_speed = 6 SECONDS
+
+/obj/structure/broodmother_egg/troll/sea
+	hud_name = "a Sea Troll Egg"
+	icon_state = "troll_sea_egg"
+	type_to_spawn = /mob/living/simple_animal/hostile/retaliate/troll/sea/slaved
+
+/obj/structure/broodmother_egg/troll/cave
+	hud_name = "a Cave Troll Egg"
+	icon_state = "troll_cave_egg"
+	type_to_spawn = /mob/living/simple_animal/hostile/retaliate/troll/cave/slaved
+
+/obj/structure/broodmother_egg/troll/axe
+	hud_name = "an Axe Troll Egg"
+	icon_state = "troll_axe_egg"
+	type_to_spawn = /mob/living/simple_animal/hostile/retaliate/troll/axe/slaved
+
+/// Mapper-placed egg: sits inert until a ghost claims it, then immediately becomes
+/// a fully active broodmother. No hatch_time/cracking - it's not laid by anything,
+/// it's map-placed decoration-turned-spawner.
+/obj/structure/broodmother_egg/broodmother
+	name = "ancient egg"
+	desc = "A massive, leathery egg humming with old and cunning power."
+	icon_state = "troll_egg"
+	type_to_spawn = /mob/living/simple_animal/hostile/retaliate/troll/broodmother
+	vessel_id = BROODMOTHER_VESSEL_ID
+	hatch_on_possess = TRUE
+	maploaded_vessel = FALSE
+
+/obj/structure/broodmother_egg/broodmother/Initialize()
+	. = ..()
+	LAZYADD(GLOB.broodmother_eggs, src)
+
+/obj/structure/broodmother_egg/broodmother/Destroy()
+	. = ..()
+	LAZYREMOVE(GLOB.broodmother_eggs, src)
 
 #undef BIOMASS_TIER_1
 #undef BIOMASS_TIER_2

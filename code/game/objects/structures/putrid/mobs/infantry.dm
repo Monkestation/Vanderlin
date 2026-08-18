@@ -2,6 +2,7 @@
 	icon_state = "infantry"
 	icon_living = "infantry"
 	icon_dead = "infantry_dead"
+	icon = 'icons/obj/cellular/putrid_small.dmi'
 	ranged = TRUE
 	projectiletype = /obj/projectile/meatbullet
 

@@ -735,6 +735,22 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggled Hub Visibility", "[GLOB.hub_visibility ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/scan_health(mob/living/carbon/target as mob)
+	set name = "Scan Health"
+	set category = "GameMaster.Gods"
+	if(!check_rights())
+		to_chat(usr, span_warning("You should not have this button. Shoo."))
+		return FALSE
+
+	if(!ishuman(target))
+		to_chat(usr, span_warning("You can only use this on human targets."))
+		return FALSE
+	var/mob/living/carbon/human/human_target = target
+	if(QDELETED(human_target))
+		return FALSE
+	human_target.check_for_injuries(mob, TRUE, FALSE, TRUE, TRUE)
+	return TRUE
+
 /client/proc/smite(mob/living/target as mob)
 	set name = "Smite"
 	set category = "GameMaster.Gods"
