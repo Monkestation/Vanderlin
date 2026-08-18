@@ -25,6 +25,18 @@
 	gob_outfit = null
 	ai_controller = /datum/ai_controller/human_npc
 
+/mob/living/carbon/human/species/goblin/slaved/moon
+	race = /datum/species/goblin/moon
+
+/mob/living/carbon/human/species/goblin/slaved/hell
+	race = /datum/species/goblin/hell
+
+/mob/living/carbon/human/species/goblin/slaved/cave
+	race = /datum/species/goblin/cave
+
+/mob/living/carbon/human/species/goblin/slaved/sea
+	race = /datum/species/goblin/sea
+
 /mob/living/carbon/human/species/goblin/slaved/Initialize()
 	. = ..()
 	var/static/list/pet_commands = list(
@@ -65,11 +77,6 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/hell
 	race = /datum/species/goblin/hell
 
-/datum/species/goblin/hell
-	name = "hell goblin"
-	id = "goblin_hell"
-	raceicon = "goblin_hell"
-
 /mob/living/carbon/human/species/goblin/cave
 	name = "cave goblin"
 	race = /datum/species/goblin/cave
@@ -80,20 +87,15 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/cave
 	race = /datum/species/goblin/cave
 
-/datum/species/goblin/cave
-	id = "goblin_cave"
-	raceicon = "goblin_cave"
-
 /mob/living/carbon/human/species/goblin/sea
 	name = "sea goblin"
 	race = /datum/species/goblin/sea
+
 /mob/living/carbon/human/species/goblin/npc/sea
 	race = /datum/species/goblin/sea
+
 /mob/living/carbon/human/species/goblin/npc/ambush/sea
 	race = /datum/species/goblin/sea
-/datum/species/goblin/sea
-	raceicon = "goblin_sea"
-	id = "goblin_sea"
 
 /mob/living/carbon/human/species/goblin/moon
 	name = "moon goblin"
@@ -102,14 +104,6 @@
 	race = /datum/species/goblin/moon
 /mob/living/carbon/human/species/goblin/npc/ambush/moon
 	race = /datum/species/goblin/moon
-/datum/species/goblin/moon
-	id = "goblin_moon"
-	raceicon = "goblin_moon"
-
-/datum/species/goblin/moon/spec_death(gibbed, mob/living/carbon/human/H)
-	new /obj/item/reagent_containers/powder/moondust_purest(get_turf(H))
-	H.visible_message("<span class='blue'>Moondust falls from [H]!</span>")
-//	qdel(H)
 
 /obj/item/bodypart/chest/goblin
 	dismemberable = 0
@@ -134,53 +128,6 @@
 /obj/item/bodypart/head/goblin/skeletonize()
 	. = ..()
 	icon_state = "goblin_skel_head"
-
-/datum/species/goblin
-	name = "goblin"
-	id = SPEC_ID_GOBLIN
-	species_traits = list(NO_UNDERWEAR)
-	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RADIMMUNE, TRAIT_EASYDISMEMBER, TRAIT_CRITICAL_WEAKNESS, TRAIT_NASTY_EATER, TRAIT_LEECHIMMUNE, TRAIT_INHUMENCAMP)
-
-	no_equip = list(ITEM_SLOT_SHIRT, ITEM_SLOT_MASK, ITEM_SLOT_GLOVES, ITEM_SLOT_SHOES, ITEM_SLOT_PANTS)
-	offset_features_m = list(OFFSET_HANDS = list(0,-4))
-	offset_features_f = list(OFFSET_HANDS = list(0,-4))
-
-	dam_icon_f = null
-	dam_icon_m = null
-	damage_overlay_type = ""
-	changesource_flags = WABBAJACK
-	var/raceicon = "goblin"
-	exotic_bloodtype = /datum/blood_type/human/corrupted/goblin
-	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)
-
-/datum/species/goblin/on_species_gain(mob/living/carbon/C, datum/species/old_species)
-	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
-	C.grant_language(/datum/language/hellspeak)
-
-/datum/species/goblin/after_creation(mob/living/carbon/C)
-	..()
-	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
-	C.grant_language(/datum/language/hellspeak)
-
-/datum/species/goblin/on_species_loss(mob/living/carbon/C)
-	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
-	C.remove_language(/datum/language/hellspeak)
-
-/datum/species/goblin/regenerate_icons(mob/living/carbon/human/H)
-	H.icon_state = ""
-	if(HAS_TRAIT(H, TRAIT_NO_TRANSFORM))
-		return 1
-	H.update_inv_hands()
-	H.update_inv_handcuffed()
-	H.update_inv_legcuffed()
-	H.update_fire()
-	H.update_body()
-	var/mob/living/carbon/human/species/goblin/G = H
-	G.update_wearable()
-	H.update_transform()
-	return TRUE
 
 /mob/living/carbon/human/species/goblin/update_body()
 	remove_overlay(BODY_LAYER)
@@ -231,11 +178,6 @@
 
 	apply_overlay(ARMOR_LAYER)
 
-
-/mob/living/carbon/human/species/goblin/update_inv_head(hide_nonstandard = FALSE)
-	update_wearable()
-/mob/living/carbon/human/species/goblin/update_inv_armor()
-	update_wearable()
 
 /datum/species/goblin/update_damage_overlays(mob/living/carbon/human/H)
 	return
@@ -337,50 +279,12 @@
 ////
 ///
 
-/datum/attribute_holder/sheet/job/goblin
-	attribute_variance = list(
-		STAT_STRENGTH = list(-4, 0),
-		STAT_PERCEPTION = list(-5, 0),
-		STAT_INTELLIGENCE = list(-9, -6),
-		STAT_CONSTITUTION = list(-6, -2),
-		STAT_ENDURANCE = list(-2, 2),
-		STAT_SPEED = list(-2, 4),
-	)
-	raw_attribute_list = list(
-		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/polearms = 10,
-		/datum/attribute/skill/combat/knives = 10,
-		/datum/attribute/skill/combat/axesmaces = 10,
-		/datum/attribute/skill/combat/swords = 10,
-	)
 /datum/outfit/npc/goblin/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/goblin)
-
 	if(is_species(H, /datum/species/goblin/hell))
-		H.set_stat_modifier(STATMOD_GOBLIN_RACE, list(
-			STAT_STRENGTH = 6,
-			STAT_CONSTITUTION = 6,
-			STAT_SPEED = -4
-		))
 		H.simpmob_attack += 10
 		H.simpmob_defend += 15
-	if(is_species(H, /datum/species/goblin/cave))
-		H.set_stat_modifier(STATMOD_GOBLIN_RACE, list(
-			STAT_PERCEPTION = 6,
-			STAT_ENDURANCE = 2,
-		))
-	if(is_species(H, /datum/species/goblin/sea))
-		H.set_stat_modifier(STATMOD_GOBLIN_RACE, list(
-			STAT_INTELLIGENCE = 6,
-			STAT_ENDURANCE = 2,
-		))
 	if(is_species(H, /datum/species/goblin/moon))
-		H.set_stat_modifier(STATMOD_GOBLIN_RACE, list(
-			STAT_INTELLIGENCE = 4,
-			STAT_SPEED = 4,
-		))
 		H.simpmob_attack += 10
 		H.simpmob_defend += 25
 	var/loadout = rand(1,5)

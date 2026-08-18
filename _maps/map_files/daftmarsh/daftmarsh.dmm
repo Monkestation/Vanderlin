@@ -26740,9 +26740,9 @@
 /area/indoors/town)
 "xtK" = (
 /obj/structure/closet/crate/crafted_closet/lord,
-/obj/item/clothing/armor/plate/blkknight,
 /obj/item/clothing/head/helmet/visored/blkknight,
 /obj/item/weapon/sword/rapier/dec/lord,
+/obj/item/clothing/armor/plate/blkknight/lordly,
 /turf/open/floor/tile,
 /area/indoors/town/keep/lord_appt)
 "xtO" = (

@@ -157,6 +157,8 @@
 			spawned.put_in_hands(kit)
 		if("Serpentine Glands - Thermal Vision and Venom")
 			spawned.add_traits(list(TRAIT_THERMAL_VISION, TRAIT_POISONBITE), JOB_TRAIT)
+			spawned.update_sight()
+
 
 /datum/outfit/inquisitor/inspector
 	name = "Inspector (Herr Prafekt)"
