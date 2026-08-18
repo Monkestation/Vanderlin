@@ -19,6 +19,7 @@
 		return
 
 	REMOVE_TRAIT(bearer, TRAIT_THERMAL_VISION, TABOO_TRAIT)
+	bearer.update_sight()
 	qdel(bearer.GetComponent(/datum/component/echolocation))
 
 /datum/bodypart_feature/bloodsight_brand

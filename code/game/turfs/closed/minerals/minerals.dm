@@ -138,6 +138,10 @@
 	var/turf/new_turf = ScrapeAway(null, flags)
 	GLOB.mined_resource_loc |= new_turf
 	addtimer(CALLBACK(src, PROC_REF(AfterChange)), 1, TIMER_UNIQUE)
+	return TRUE
+
+/turf/closed/mineral/bedrock/gets_drilled(mob/living/user, triggered_by_explosion, give_exp)
+	return FALSE
 
 /turf/closed/mineral/proc/apply_mining_quality(obj/item/item, mob/living/user)
 	if(!user || !istype(item, /obj/item/ore))
@@ -422,6 +426,7 @@
 	max_integrity = 10000000
 	damage_deflection = 99999999
 	above_floor = /turf/closed/mineral/bedrock
+	turf_flags = NO_JAUNT
 
 /turf/closed/mineral/bedrock/attackby(obj/item/I, mob/user, list/modifiers)
 	to_chat(user, span_warning("This is far too sturdy to be destroyed!"))

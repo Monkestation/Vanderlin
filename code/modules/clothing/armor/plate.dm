@@ -155,6 +155,12 @@
 	sellprice = VALUE_SILVER_ITEM * 6
 	stand_speed_reduction = 1.05
 
+/obj/item/clothing/armor/plate/blkknight/lordly
+	name = "lordly plate"
+	desc ="A full, master-crafted ensemble of fine blacksteel, complete with arm, leg and groin protection, and worn with a heavy, indubitably stylish, fur-lined collar of genuine saigahair to boot. The latest battle-fashion amongst the high nobility of Psydonia."
+	icon_state = "lordly"
+	body_parts_covered = COVERAGE_FULL
+
 //................ Deccorated Half-plate ............... //
 
 /obj/item/clothing/armor/plate/decorated
