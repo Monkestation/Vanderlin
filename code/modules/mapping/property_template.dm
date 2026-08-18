@@ -153,3 +153,21 @@
 	mappath = "_maps/map_files/vanderlin/house_templates/adv6.dmm"
 	width = 3
 	height = 4
+
+/datum/map_template/vanderlin_noble_yellow
+	name = "Vanderlin Noble Yellow"
+	mappath = "_maps/map_files/vanderlin/house_templates/noble_yellow.dmm"
+	width = 25
+	height = 25
+
+/datum/map_template/vanderlin_noble_red
+	name = "Vanderlin Noble Red"
+	mappath = "_maps/map_files/vanderlin/house_templates/noble_red.dmm"
+	width = 29
+	height = 26
+
+/datum/map_template/vanderlin_noble_blue
+	name = "Vanderlin Noble Blue"
+	mappath = "_maps/map_files/vanderlin/house_templates/noble_blue.dmm"
+	width = 24
+	height = 34

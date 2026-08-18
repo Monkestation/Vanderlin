@@ -71,6 +71,8 @@
 	)
 
 	outfit = /datum/outfit/feldsher
+	guild_type = /datum/guild/clinic
+	is_guild_head = TRUE
 	give_bank_account = 100
 	knows_the_town = TRUE
 	known_by_the_town = TRUE

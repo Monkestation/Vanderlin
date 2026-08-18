@@ -248,17 +248,6 @@
 				H.adjustOrganLoss(ORGAN_SLOT_BRAIN, 60, 80)
 			message_admins("[key_name_admin(usr)] made everybody stupid (Mass Braindamage)")
 
-		if("ancap")
-			if(!check_rights(R_FUN))
-				return
-			SSblackbox.record_feedback("nested tally", "admin_secrets_fun_used", 1, list("Anarcho-capitalist Station"))
-			SSeconomy.full_ancap = !SSeconomy.full_ancap
-			message_admins("[key_name_admin(usr)] toggled Anarcho-capitalist mode")
-			if(SSeconomy.full_ancap)
-				priority_announce("The NAP is now in full effect.", null, 'sound/blank.ogg')
-			else
-				priority_announce("The NAP has been revoked.", null, 'sound/blank.ogg')
-
 	if(E)
 		E.processing = FALSE
 		if(E.announceWhen>0)

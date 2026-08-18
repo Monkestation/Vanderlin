@@ -30,6 +30,7 @@
 
 	allowed_races = RACES_PLAYER_ALL
 	attribute_sheet = /datum/attribute_holder/sheet/job/butcher
+	guild_type = /datum/guild/food
 	outfit = /datum/outfit/beastmaster
 	give_bank_account = TRUE
 	knows_the_town = TRUE

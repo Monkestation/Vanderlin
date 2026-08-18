@@ -37,10 +37,13 @@ SUBSYSTEM_DEF(treasury)
 	var/tax_value = 0.1
 	var/queens_tax = 0.15
 	var/treasury_value = 0
+	///list of player bank accounts.
 	var/list/bank_accounts = list()
 	var/list/untaxed_deposits = list()
 	var/list/noble_incomes = list()
 	var/list/stockpile_datums = list()
+	///list of guild accounts
+	var/list/guild_account = list()
 	var/multiple_item_penalty = 0.7
 	var/interest_rate = 0.15
 	var/next_treasury_check = 0
@@ -82,6 +85,8 @@ SUBSYSTEM_DEF(treasury)
 	job_wages[job_title] = max(0, amount)
 	return TRUE
 
+/datum/controller/subsystem/treasury/proc/create_guild_account(datum/guild/new_guild)
+	guild_account[new_guild.type] = 0
 /*
 * Pays every human whose current job has a nonzero
 * wage set. Runs off treasury_value directly, same as
@@ -102,6 +107,20 @@ SUBSYSTEM_DEF(treasury)
 
 	for(var/cat in category_totals)
 		log_to_steward("Paid [category_totals[cat]] total in daily wages to [cat]")
+
+	for(var/datum/guild/type as anything in GLOB.guilds)
+		var/datum/guild/real_type = GLOB.guilds[type]
+		if(!real_type.patron_faction || !real_type.patronage_wage)
+			continue
+		var/mob/head = real_type.patron_faction.head_ref?.resolve()
+		if(!head)
+			real_type.break_patronage()
+			continue
+		var/money = bank_accounts[head]
+		if(money < real_type.patronage_wage)
+			real_type.break_patronage()
+			continue
+		give_money_account(-real_type.patronage_wage, head, "Patronage for the [real_type.name].")
 
 /datum/controller/subsystem/treasury/proc/check_time_of_day(tod)
 	if(tod != "dawn")

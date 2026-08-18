@@ -256,6 +256,15 @@
 	///this is our book path given on middle clicking ui
 	var/obj/item/recipe_book/book_type = /obj/item/recipe_book/survival
 
+	/// Can this job's holder be offered patronage/employment by a noble faction?
+	var/can_select_noble_faction = FALSE
+	/// If set, this job's holder is added to the matching global guild on spawn.
+	/// Use the guild's id (a type path works well as a stable key), NOT an instance.
+	var/datum/guild/guild_type
+	/// Is this job the guild's head (i.e. the one a noble negotiates with for patronage)?
+	var/is_guild_head = FALSE
+
+
 /datum/job/New()
 	. = ..()
 	setup_known_people()
@@ -503,6 +512,12 @@
 	if(job_flags & JOB_SHOW_IN_CREDITS)
 		START_PROCESSING(SScrediticons, player_client)
 
+	if(can_select_noble_faction)
+		INVOKE_ASYNC(src, TYPE_PROC_REF(/datum/job, select_noble_faction), spawned, GLOB.current_noble_factions)
+	if(guild_type)
+		var/datum/guild/G = get_or_create_guild(guild_type)
+		G.add_member(spawned)
+
 /// Callback for anything that sleeps, called after roundstart or async during EquipRank
 /datum/job/proc/on_roundstart(mob/living/spawned, client/player_client)
 	SHOULD_CALL_PARENT(TRUE)
@@ -514,6 +529,27 @@
 	/// Applies here because it relies on mobs having their traits, oh well if they get it midround besides late joining
 	for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
 		alt_hud.apply_to_new_mob(spawned)
+
+/datum/job/proc/select_noble_faction(mob/living/carbon/human/applicant, list/datum/noble_faction/available_factions)
+	if(!can_select_noble_faction || !length(available_factions))
+		return null
+
+	var/list/choices = list("None")
+	var/list/faction_by_name = list()
+	for(var/datum/noble_faction/faction as anything in available_factions)
+		var/mob/living/carbon/human/head = faction.head_ref?.resolve()
+		var/label = "[faction.name] (led by [head?.real_name || "Unknown"])"
+		choices += label
+		faction_by_name[label] = faction
+
+	var/picked = tgui_input_list(applicant, "Take patronage from a noble house?", "Patronage", choices)
+	if(!picked || picked == "None")
+		return null
+
+	var/datum/noble_faction/chosen = faction_by_name[picked]
+	if(chosen)
+		chosen.add_member(applicant)
+	return chosen
 
 /// this "mostly" removes the existence of a job from someone.
 /// the unfortunately reality is that even this is still a flawed removal

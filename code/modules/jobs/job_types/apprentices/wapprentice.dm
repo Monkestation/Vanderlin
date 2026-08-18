@@ -40,6 +40,7 @@
 	allowed_sexes = list(MALE, FEMALE)
 	cmode_music = "sound/music/cmode/adventurer/CombatSorcerer.ogg"
 	outfit = /datum/outfit/mageapprentice
+	guild_type = /datum/guild/mage
 	display_order = JDO_WAPP
 	give_bank_account = TRUE
 	knows_the_town = TRUE

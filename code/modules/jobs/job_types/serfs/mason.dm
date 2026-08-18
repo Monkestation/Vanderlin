@@ -34,6 +34,8 @@
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/mason
+	guild_type = /datum/guild/mason
+	is_guild_head = TRUE
 	give_bank_account = 8
 	knows_the_town = TRUE
 	known_by_the_town = TRUE

@@ -48,6 +48,8 @@
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/farmer
+	guild_type = /datum/guild/food
+	is_guild_head = TRUE
 	give_bank_account = 20
 	knows_the_town = TRUE
 	known_by_the_town = TRUE

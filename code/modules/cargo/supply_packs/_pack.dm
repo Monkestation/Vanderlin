@@ -49,18 +49,6 @@
 	record_cost_history()
 	baseline_price = cost
 
-/datum/supply_pack/proc/generate(atom/A, datum/bank_account/paying_account)
-	var/obj/structure/closet/crate/C
-	if(paying_account)
-		C = new /obj/structure/closet/crate(A)
-		C.name = "[crate_name] - Purchased by [paying_account.account_holder]"
-	else
-		C = new crate_type(A)
-		C.name = "[crate_name] of [LOWER_TEXT(name)]"
-
-	fill(C)
-	return C
-
 /datum/supply_pack/proc/fill(obj/structure/closet/crate/C)
 	if (admin_spawned)
 		for(var/item in contains)

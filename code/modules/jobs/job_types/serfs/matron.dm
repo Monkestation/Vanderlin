@@ -61,6 +61,8 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 
 	outfit = /datum/outfit/matron
+	guild_type = /datum/guild/thieves
+	is_guild_head = TRUE
 	give_bank_account = 35
 	knows_the_town = TRUE
 	known_by_the_town = TRUE

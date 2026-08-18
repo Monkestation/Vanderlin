@@ -52,6 +52,7 @@
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
 
 	outfit = /datum/outfit/shophand
+	guild_type = /datum/guild/merchant
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
 	can_be_apprentice = TRUE

@@ -46,12 +46,20 @@
 	LAZYADD(apprentices, WEAKREF(youngling))
 	youngling.attributes.is_apprentice = TRUE
 
+	var/datum/job/youngling_job = SSjob.GetJob(youngling.job)
+	var/datum/guild/youngling_guild = get_or_create_guild(youngling_job.guild_type)
+	youngling_guild?.remove_member(youngling)
+
+	var/mob/living/owner = parent
+	var/datum/job/job = SSjob.GetJob(owner.job)
+	var/datum/guild/guild = get_or_create_guild(job.guild_type)
+	guild?.add_member(youngling)
+
 	// Build the apprentice title
 	var/title
 	if(apprentice_name)
 		title = apprentice_name // Advanced class override
 	else
-		var/datum/job/job = SSjob.GetJob(parent:job)
 		title = "[job.get_informed_title(youngling)] Apprentice"
 	youngling.attributes.our_apprentice_name = "[parent.real_name]'s [title]"
 

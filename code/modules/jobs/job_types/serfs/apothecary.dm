@@ -52,6 +52,8 @@
 
 	trainable_skills = list(/datum/attribute/skill/craft/alchemy = 0.1)
 	max_apprentices = 2
+	guild_type = /datum/guild/alchemy
+	is_guild_head = TRUE
 	apprentice_name = "Apothecary-in-training"
 	can_have_apprentices = TRUE
 

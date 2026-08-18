@@ -68,6 +68,8 @@
 	max_apprentices = 2
 	honorary = "Archmage"
 	book_type = /obj/item/recipe_book/arcyne
+	guild_type = /datum/guild/mage
+	is_guild_head = TRUE
 
 	spells = list(
 		/datum/action/cooldown/spell/aoe/knock,

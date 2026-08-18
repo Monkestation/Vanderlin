@@ -16,7 +16,7 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	advclass_cat_rolls = list(CTAG_ORPHAN = 7)
 	outfit = /datum/outfit/orphan
-
+	guild_type = /datum/guild/thieves
 	knows_the_town = TRUE
 	known_by_the_town = FALSE
 	jobs_i_always_know = list(JOB_MONARCH, JOB_MATRON)

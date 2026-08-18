@@ -41,6 +41,8 @@
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/blacksmith
+	guild_type = /datum/guild/blacksmith
+	is_guild_head = TRUE
 	display_order = JDO_BLACKSMITH
 	give_bank_account = 30
 	knows_the_town = TRUE

@@ -30,6 +30,8 @@
 		"Gun" = CHOICE_GUN,
 		"Bomb" = CHOICE_BOMB,
 	)
+	///faction we got backing from
+	var/datum/weakref/backing_faction_ref
 
 /datum/antagonist/aspirant/proc/give_equipment_prompt()
 	var/chosen = browser_input_list(owner.current, "How shall I rise to power?", "YOUR ADVANTAGE", equipment_selection, default = CHOICE_POISON)
@@ -79,6 +81,9 @@
 	show_name_in_check_antagonists = TRUE
 	show_in_roundend = FALSE
 	increase_votepwr = FALSE
+	innate_traits = list(
+		TRAIT_ASPIRANT_INSIGHT
+	)
 
 /datum/antagonist/aspirant/on_gain()
 	. = ..()
@@ -98,6 +103,7 @@
 /datum/antagonist/aspirant/ruler/on_gain()
 	SHOULD_CALL_PARENT(FALSE)
 	create_objectives()
+	owner.current.add_spell(/datum/action/cooldown/sway_faction_head)
 
 /datum/antagonist/aspirant/greet()
 	to_chat(owner, span_redtextbig("I have grown weary of being near the throne, but never on it. I have decided that it is time I ruled [SSmapping.config.map_name]."))
@@ -275,3 +281,75 @@
 #undef CHOICE_POISON
 #undef CHOICE_GUN
 #undef CHOICE_BOMB
+
+/datum/action/cooldown/sway_faction_head
+	name = "Sway Faction Head"
+	desc = "Convince the head of a noble house to back your claim to the throne."
+	button_icon_state = "patronage"
+	click_to_activate = TRUE
+	cooldown_time = 5 MINUTES
+	retrigger_after_cooldown = TRUE
+
+/datum/action/cooldown/sway_faction_head/Activate(atom/target)
+	var/mob/living/carbon/human/aspirant_mob = owner
+	if(!ishuman(target))
+		return FALSE
+
+	var/mob/living/carbon/human/head = target
+	var/datum/noble_faction/faction = head.mind?.noble_faction
+	if(!faction)
+		to_chat(aspirant_mob, span_warning("[head.real_name] leads no house."))
+		return FALSE
+	if(faction.head_ref?.resolve() != head)
+		to_chat(aspirant_mob, span_warning("[head.real_name] doesn't speak for [faction.name]."))
+		return FALSE
+	if(faction.backing_aspirant_ref?.resolve() == aspirant_mob)
+		to_chat(aspirant_mob, span_warning("[faction.name] already stands with you."))
+		return FALSE
+
+	var/datum/antagonist/aspirant/aspirant_datum = locate(/datum/antagonist/aspirant) in aspirant_mob.mind?.antag_datums
+	if(!aspirant_datum)
+		return FALSE
+
+	var/prompt_text = "[aspirant_mob.real_name] asks [faction.name] to back their claim to the throne."
+	var/mob/living/carbon/human/current_claimant = faction.backing_aspirant_ref?.resolve()
+	if(current_claimant)
+		prompt_text += " Doing so breaks your house's allegiance to [current_claimant.real_name]."
+
+	var/answer = tgui_alert(head, prompt_text, "A Proposition", list("Accept", "Decline"))
+	if(answer != "Accept")
+		to_chat(aspirant_mob, span_warning("[head.real_name] refuses to hear you out."))
+		StartCooldown()
+		return FALSE
+
+	faction.set_backing_aspirant(aspirant_mob)
+	aspirant_datum.backing_faction_ref = WEAKREF(faction)
+
+	to_chat(aspirant_mob, span_notice("[head.real_name] has pledged [faction.name] to your cause."))
+	to_chat(head, span_notice("You have pledged [faction.name] to [aspirant_mob.real_name]'s cause."))
+	head.add_spell(new /datum/action/cooldown/rally_house(head, faction))
+
+	StartCooldown()
+	return TRUE
+
+/datum/action/cooldown/rally_house
+	name = "Rally the House"
+	desc = "Tell your house who they now serve."
+	button_icon_state = "patronage"
+	click_to_activate = TRUE
+	cooldown_time = 0
+	retrigger_after_cooldown = FALSE
+	var/datum/noble_faction/faction
+
+/datum/action/cooldown/rally_house/New(Target, datum/noble_faction/faction)
+	. = ..()
+	src.faction = faction
+
+/datum/action/cooldown/rally_house/Activate(atom/target)
+	if(!faction)
+		return FALSE
+	for(var/mob/living/carbon/human/member as anything in faction.members)
+		to_chat(member, span_reallybighypnophrase("[faction.name] now stands behind a claimant to the throne."))
+		member.mind?.add_antag_datum(/datum/antagonist/aspirant/supporter)
+	Remove(owner)
+	return TRUE

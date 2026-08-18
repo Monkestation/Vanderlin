@@ -341,6 +341,60 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/minor_bows)
 			spawned.equip_to_appropriate_slot(new /obj/item/ammo_holder/quiver/arrows(), TRUE)
 
+	offer_noble_house(spawned, player_client)
+
+/datum/job/minor_noble/proc/offer_noble_house(mob/living/carbon/human/spawned, client/player_client)
+	if(!length(GLOB.noble_points))
+		return
+
+	//we sleep waiting for a pick and roundstart choices means it could be bad so we check later.
+	var/list/options = list()
+	for(var/obj/effect/landmark/house_spot/noble/candidate as anything in GLOB.noble_points)
+		var/datum/noble_faction/faction = candidate.faction_type
+		var/display_name = candidate.faction_type ? initial(faction.name) : candidate.property_id
+		options[display_name] = candidate
+
+	options["None"] = null
+
+	var/choice = tgui_input_list(spawned, "Claim a noble house?", "Noble House", options, "None")
+	if(!choice || choice == "None")
+		return
+
+	var/obj/effect/landmark/house_spot/noble/chosen = options[choice]
+
+	//another noble may have beaten us to it,
+	if(!istype(chosen) || QDELETED(chosen))
+		to_chat(spawned, span_warning("That house is no longer available."))
+		offer_noble_house(spawned, player_client)
+		return
+
+	if(!(chosen in GLOB.noble_points))
+		to_chat(spawned, span_warning("That house has already been claimed."))
+		return
+
+	if(SShousing.temporary_claims[chosen.property_id])
+		to_chat(spawned, span_warning("That house has already been claimed."))
+		return
+
+	if(!spawned.client)
+		return // disconnected mid-pick
+
+	if(!chosen.check_job_requirement(spawned))
+		to_chat(spawned, span_warning("You no longer qualify to claim that house."))
+		return
+
+	if(SShousing.player_owns_save_id(spawned.ckey, chosen.save_id))
+		to_chat(spawned, span_warning("You already own a property of this type."))
+		return
+
+	if(!SShousing.claim_temporary(chosen, spawned, 1))
+		to_chat(spawned, span_warning("Failed to claim that house."))
+		return
+
+	var/claimed_name = chosen.faction_type ? initial(chosen.faction_type.name) : chosen.property_id
+	chosen.on_claim(spawned)
+	to_chat(spawned, span_notice("You have claimed the [claimed_name] estate as your noble house."))
+
 /datum/outfit/noble
 	name = "Noble Base"
 	shoes = /obj/item/clothing/shoes/boots/darkboots

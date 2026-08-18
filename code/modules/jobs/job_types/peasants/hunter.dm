@@ -68,6 +68,8 @@
 	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
+	guild_type = /datum/guild/hunter
+	is_guild_head = TRUE
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/hunter
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/hunter/old

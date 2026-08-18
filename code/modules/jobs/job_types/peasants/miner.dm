@@ -39,6 +39,7 @@
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/miner
+	guild_type = /datum/guild/mason
 	give_bank_account = 6
 	knows_the_town = TRUE
 	known_by_the_town = TRUE

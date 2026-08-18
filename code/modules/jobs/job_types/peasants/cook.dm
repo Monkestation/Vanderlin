@@ -44,6 +44,7 @@
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/cook
+	guild_type = /datum/guild/inn
 	display_order = JDO_COOK
 	give_bank_account = 8
 	knows_the_town = TRUE

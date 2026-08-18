@@ -16,6 +16,7 @@
 	can_have_apprentices = FALSE
 
 	allowed_races = RACES_PLAYER_ALL
+	guild_type = /datum/guild/merc
 
 	outfit = null
 	outfit_female = null

@@ -73,6 +73,8 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	var/memory
 	/// Job datum indicating the mind's role. This should always exist after initialization, as a reference to a singleton.
 	var/datum/job/assigned_role
+	///our noble faction
+	var/datum/noble_faction/noble_faction
 	/// special role of this mind
 	var/special_role
 	/// list of roles this mind cannot roll

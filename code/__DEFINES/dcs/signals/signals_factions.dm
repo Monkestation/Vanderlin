@@ -1,0 +1,2 @@
+#define COMSIG_NOBLE_FACTION_SIZE_CHANGED "noble_faction_size_changed"
+#define COMSIG_NOBLE_FACTION_ASPIRANT_ELIGIBLE "noble_faction_aspirant_eligible"

@@ -354,7 +354,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Given to a mob that can throw to make them not able to throw
 #define TRAIT_NO_THROWING "no_throwing"
-
+/// Granted to the Aspirant, lets them see noble_faction hover info on faction heads.
+#define TRAIT_ASPIRANT_INSIGHT "aspirant_insight"
 /// Hides the SSD indicator. Used with scrying.
 #define TRAIT_NOSSDINDICATOR "nossdindicator"
 /// Instant grabs on someone else.

@@ -32,6 +32,8 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/merchant
+	guild_type = /datum/guild/merchant
+	is_guild_head = TRUE
 	give_bank_account = 200
 	knows_the_town = TRUE
 	known_by_the_town = TRUE

@@ -51,6 +51,7 @@
 	allowed_races = RACES_PLAYER_ALL
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	outfit = /datum/outfit/clinicapprentice
+	guild_type = /datum/guild/clinic
 	job_bitflag = BITFLAG_CONSTRUCTOR
 	can_be_apprentice = TRUE
 
