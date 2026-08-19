@@ -142,10 +142,7 @@
 	pixel_x = 5;
 	pixel_y = 8
 	},
-/obj/item/clothing/shoes/boots{
-	pixel_x = -2;
-	pixel_y = -7
-	},
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
 "afY" = (
@@ -8563,13 +8560,10 @@
 	pixel_x = 1;
 	pixel_y = 15
 	},
-/obj/item/clothing/shoes/boots{
-	pixel_x = -7;
-	pixel_y = -3
-	},
 /obj/item/clothing/shoes/shortboots{
 	pixel_x = 10
 	},
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
 "gPi" = (
@@ -19229,10 +19223,7 @@
 	pixel_x = 7;
 	pixel_y = -2
 	},
-/obj/item/clothing/shoes/boots{
-	pixel_x = -7;
-	pixel_y = -3
-	},
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/wood,
 /area/indoors/town)
 "pSf" = (
@@ -19253,11 +19244,11 @@
 /obj/item/clothing/shirt/robe/wizard,
 /obj/item/clothing/cloak/raincloak/colored/blue,
 /obj/item/clothing/head/wizhat,
-/obj/item/clothing/shoes/boots,
 /obj/item/clothing/shoes/shortboots,
 /obj/item/clothing/face/spectacles/golden,
 /obj/item/clothing/head/wizhat/witch,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/magician)
 "pSU" = (
@@ -26491,7 +26482,6 @@
 /area/indoors/town/orphanage)
 "whv" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/shoes/boots,
 /obj/item/clothing/pants/trou/formal/shorts,
 /obj/item/storage/belt/leather/suspenders,
 /obj/item/clothing/shirt/undershirt/formal,
@@ -26503,6 +26493,7 @@
 /obj/item/clothing/shirt/dress/maid/servant,
 /obj/item/clothing/head/maidband,
 /obj/item/clothing/cloak/apron/maid,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/servanthead)
 "wiE" = (
