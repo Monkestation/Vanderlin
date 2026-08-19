@@ -15,7 +15,7 @@
 
 	charge_required = FALSE
 	cooldown_time = 10 SECONDS
-	spell_cost = 15
+	spell_cost = 50
 	spell_flags = SPELL_UNETCHABLE
 
 	/// Base healing before adjustments
@@ -82,7 +82,7 @@
 	charge_required = TRUE
 	charge_time = 2 SECONDS
 	cooldown_time = 20 SECONDS
-	spell_cost = 45
+	spell_cost = 100
 
 	invocation_type = INVOCATION_WHISPER
 	invocation = "Sanguis restora"

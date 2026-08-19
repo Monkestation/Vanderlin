@@ -19,7 +19,7 @@
 	charge_drain = 1
 	charge_slowdown = 0.7
 	cooldown_time = 30 SECONDS
-	spell_cost = 40
+	spell_cost = 150
 	spell_flags = SPELL_UNETCHABLE
 	projectile_type = /obj/projectile/magic/bloodlightning
 

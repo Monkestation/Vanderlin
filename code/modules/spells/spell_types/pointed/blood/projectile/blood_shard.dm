@@ -19,7 +19,7 @@
 	charge_drain = 1
 	charge_slowdown = 1.3
 	cooldown_time = 5 SECONDS
-	spell_cost = 50
+	spell_cost = 75
 	spell_flags = SPELL_UNETCHABLE
 	projectile_type = /obj/projectile/magic/energy/bloodshard
 

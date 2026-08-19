@@ -8,7 +8,7 @@
 	charge_time = 2 SECONDS
 	cooldown_time = 1.5 MINUTES
 	charge_slowdown = 0.3
-	spell_cost = 75
+	spell_cost = 125
 	spell_flags = SPELL_UNETCHABLE
 	heretical_spell = TRUE
 

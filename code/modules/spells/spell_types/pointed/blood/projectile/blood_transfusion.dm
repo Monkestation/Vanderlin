@@ -18,7 +18,7 @@
 	charge_drain = 1
 	charge_slowdown = 0.7
 	cooldown_time = 20 SECONDS
-	spell_cost = 30
+	spell_cost = 125
 	spell_flags = SPELL_UNETCHABLE
 	projectile_type = /obj/projectile/magic/bloodtransfuse
 

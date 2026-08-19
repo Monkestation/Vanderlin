@@ -21,7 +21,7 @@
 	charge_time = 8 SECONDS
 	charge_slowdown = 0.7
 	cooldown_time = 3 MINUTES
-	spell_cost = 400
+	spell_cost = 500
 
 /datum/action/cooldown/spell/dark_resurrection/is_valid_target(atom/cast_on)
 	. = ..()
