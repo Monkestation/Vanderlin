@@ -1,3 +1,4 @@
+/*
 /datum/round_event_control/antagonist/solo/maniac
 	name = "Maniacs"
 	tags = list(
@@ -108,3 +109,4 @@
 		weighted_list -= M
 		final_candidates += M
 	return final_candidates
+*/

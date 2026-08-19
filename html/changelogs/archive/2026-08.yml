@@ -192,3 +192,30 @@
   - map: Mapped in new keep areas to White Palace Pass.
   ta3754859-max:
   - balance: Increased dragonslayer cleave intent CD to 5 seconds
+2026-08-18:
+  AyyRobotics:
+  - rscadd: Church has been redesigned, adding new areas and overhauling old ones.
+  - rscadd: Pathways around the Church, Graveyard, and Red Manor are more consistent,
+      railings added to the Market Stalls and Mine.
+  - bugfix: GMT's Oath now works in the Prayer Hall, Church, Church Exterior, Graveyard,
+      and Crypt.
+  Sulaboy:
+  - rscadd: Some fires (campfires/fireplaces) give a buff to those nearby allowing
+      passive energy regeneration.
+  dwasint:
+  - rscadd: Alchemy recipes now show the description of the created recipe.
+2026-08-19:
+  Singul0:
+  - rscadd: Monarch gets an exclusive subtype of blacksteel armor
+  dwasint:
+  - rscadd: putrid
+  - refactor: orcs and goblins now get their stats applied via their species meaning
+      player controlled ones get stats
+  - rscadd: hell goblins explode
+  - rscadd: 'moon goblins know how to summon a brick
+
+      add; broodmother is now playable in game using the vessel system.'
+  - refactor: as per the species doc, adds orcs to the generic human body list, letting
+      them wear clothes.
+  realforest2001:
+  - rscdel: Disables Maniac pending rework to be more fitting.

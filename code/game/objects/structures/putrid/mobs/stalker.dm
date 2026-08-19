@@ -2,6 +2,7 @@
 	icon_state = "stalker"
 	icon_living = "stalker"
 	icon_dead = "stalker_dead"
+	icon = 'icons/obj/cellular/putrid_small.dmi'
 
 	tether_distance = 5
 	possible_evolutions = list(
