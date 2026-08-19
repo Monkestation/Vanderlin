@@ -384,6 +384,9 @@
 	if(is_bandaged() || is_sutured())
 		return FALSE
 
+	if(HAS_TRAIT(parent_mob, TRAIT_SUSPENDED_BLEED))
+		return FALSE
+
 	if(required_status & BODYPART_ROBOTIC)
 		return FALSE
 
@@ -391,6 +394,8 @@
 
 /datum/injury/proc/get_bleed_rate(ignore_is_bleeding = FALSE)
 	if(!CAN_HAVE_BLOOD(parent_mob))
+		return 0
+	if(HAS_TRAIT(parent_mob, TRAIT_SUSPENDED_BLEED))
 		return 0
 	if(!ignore_is_bleeding && !is_bleeding())
 		return 0
