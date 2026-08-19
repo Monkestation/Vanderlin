@@ -639,6 +639,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	..()
 	seer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman/seer)
 
+	seer.grant_language(/datum/language/common)
+	seer.grant_language(/datum/language/sanguine)
+
 	armor = /obj/item/clothing/shirt/robe/rousseer
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
 	r_hand = /obj/item/weapon/polearm/woodstaff/seer
@@ -648,7 +651,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/eyebite,
-		/datum/action/cooldown/spell/projectile/fireball,
+		/datum/action/cooldown/spell/projectile/fireball/baali,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
@@ -684,6 +687,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	seer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman/seer/strong)
 
 	seer.grant_language(/datum/language/common)
+	seer.grant_language(/datum/language/sanguine)
 
 	armor = /obj/item/clothing/shirt/robe/rousseer
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
@@ -692,13 +696,13 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	l_pocket = /obj/item/spellbook/expert/starter/earth
 
 	var/list/spells = list(
-		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
+		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/bloody_jaunt,
 		/datum/action/cooldown/spell/conjure/rous,
 		/datum/action/cooldown/spell/undirected/arcyne_eye,
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/eyebite,
-		/datum/action/cooldown/spell/projectile/fireball,
+		/datum/action/cooldown/spell/projectile/fireball/baali,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 		/datum/action/cooldown/spell/sundering_lightning,
 	)

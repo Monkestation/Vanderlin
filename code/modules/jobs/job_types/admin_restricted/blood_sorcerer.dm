@@ -34,11 +34,13 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
+		TRAIT_BREADY,
+		TRAIT_BLINDFIGHTING,
+		TRAIT_DUALWIELDER,
 		TRAIT_BLOOD_SORCERER,
 		TRAIT_BLOOD_SENSE,
 		TRAIT_DEADNOSE,
 		TRAIT_NOHYGIENE,
-		TRAIT_BLINDFIGHTING,
 	)
 
 	languages = list(
@@ -98,11 +100,10 @@
 	belt = /obj/item/storage/belt/leather/black
 	backl = /obj/item/storage/backpack/satchel/black
 	beltr = /obj/item/reagent_containers/glass/bottle/strongbloodpot
-	r_hand = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
+	backr = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
+	r_hand = /obj/item/weapon/knife/dagger/steel/stiletto
 	backpack_contents = list(
-		/obj/item/chalk = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 		/obj/item/reagent_containers/glass/bottle/strongbloodpot = 1,
 		/obj/item/storage/belt/pouch/coins/mid = 1,
-		/obj/item/weapon/knife/dagger/steel/stiletto = 1
 	)
