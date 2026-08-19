@@ -11984,7 +11984,6 @@
 /obj/item/clothing/shoes/rare/grenzelhoft,
 /obj/item/clothing/cloak/raincloak/furcloak,
 /obj/item/clothing/head/fancyhat,
-/obj/item/clothing/shoes/boots,
 /obj/item/clothing/shirt/dress/silkdress/colored/random,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/tunic/colored/random,
@@ -11998,6 +11997,7 @@
 /obj/item/clothing/shirt/dress/gown/summergown,
 /obj/item/clothing/shirt/dress/gown/wintergown,
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/tile,
 /area/indoors/town/keep/courtagent)
 "jGI" = (
@@ -22108,9 +22108,10 @@
 /area/indoors/town)
 "sqJ" = (
 /obj/item/clothing/neck/talkstone,
-/obj/item/clothing/ring/courtagent_ring,
-/obj/item/clothing/ring/courtagent_ring,
 /obj/structure/closet/crate/chest,
+/obj/item/clothing/ring/courtagent_ring/silver,
+/obj/item/clothing/ring/courtagent_ring/bronze,
+/obj/item/clothing/ring/courtagent_ring/bronze,
 /turf/open/floor/tile,
 /area/indoors/town/keep/courtagent)
 "srb" = (
