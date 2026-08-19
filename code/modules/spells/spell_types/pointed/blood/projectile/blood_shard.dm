@@ -3,6 +3,7 @@
 	desc = "Shoot out rapid shards of burning crystalline blood."
 	button_icon_state =  "unholy_grab"
 	sound = 'sound/magic/icicle.ogg'
+	charge_sound = 'sound/magic/chargingold.ogg'
 
 	cast_range = 12
 
@@ -19,7 +20,7 @@
 	charge_slowdown = 1.3
 	cooldown_time = 5 SECONDS
 	spell_cost = 50
-	spell_flags = SPELL_RITUOS
+	spell_flags = SPELL_UNETCHABLE
 	projectile_type = /obj/projectile/magic/energy/bloodshard
 
 /datum/action/cooldown/spell/projectile/blood_shard/ready_projectile(obj/projectile/to_fire, atom/target, mob/user, iteration)
