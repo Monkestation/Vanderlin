@@ -210,6 +210,13 @@
 /obj/structure/bars/chainlink
 	icon_state = "chainlink"
 
+/obj/structure/bars/wood
+	icon_state = "wooden_barrier"
+	name = "wooden barrier"
+	desc = "Decorative wooden barrier made to keep things in or out."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	attacked_sound = list("sound/combat/hits/onmetal/mwoodimpact (1).ogg", "sound/combat/hits/onmetal/woodimpact (2).ogg")
+
 /obj/structure/bars/alt
 	icon_state = "bars_alt"
 	plane = GAME_PLANE
@@ -839,6 +846,22 @@
 	density = TRUE
 	anchored = FALSE
 
+/obj/structure/fluff/clutter/shrub/red
+	name = "potted shrub"
+	desc = "A stone pot with a red autumnal shrub there-in."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "pottedshrub_red"
+	density = TRUE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/shrub/tundra
+	name = "potted shrub"
+	desc = "A stone pot with a cold tundra shrub there-in."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "pottedshrub_tundra"
+	density = TRUE
+	anchored = FALSE
+
 /obj/structure/fluff/clutter/books
 	name = "stack of books & inkpot"
 	desc = "A few stacks of books with a pot of ink & quill waiting for inspiration."
@@ -852,6 +875,30 @@
 	desc = "A teapot & accompanying cups on a mat."
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "clutter_teapot"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/moonrug
+	name = "moon rug TEST"
+	desc = "A decorative rug depicting the phases of the moon."
+	icon = 'icons/roguetown/misc/96x96.dmi'
+	icon_state = "moonrug"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/fibermat/square
+	name = "square fiber mat TEST"
+	desc = "A rustic mat woven from fiber."
+	icon = 'icons/roguetown/misc/64x64.dmi'
+	icon_state = "fibermat"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/fibermat/round
+	icon = 'icons/roguetown/misc/structure.dmi'
+	name = "round fiber mat TEST"
+	desc = "A rustic mat woven from fiber."
+	icon_state = "fibermat_round"
 	density = FALSE
 	anchored = FALSE
 

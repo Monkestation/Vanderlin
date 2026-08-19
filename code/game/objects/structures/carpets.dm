@@ -48,6 +48,11 @@
 	icon_state = "carpet_red"
 	carpet_type = /obj/item/natural/carpet_fibers/red
 
+/obj/structure/carpet/navy
+	icon = 'icons/obj/smooth_structures/carpet_navy.dmi'
+	icon_state = "carpet_navy"
+	carpet_type = /obj/item/natural/carpet_fibers/navy
+
 /obj/item/natural/bundle/carpet_roll
 	name = "carpet roll"
 	desc = "A roll of carpet fibers. Use it to place carpet tiles."
@@ -163,6 +168,11 @@
 	carpet_type = /obj/structure/carpet/red
 	stacktype = /obj/item/natural/carpet_fibers/red
 
+/obj/item/natural/bundle/carpet_roll/navy
+	name = "navy carpet roll"
+	color = "#0e1547"
+	carpet_type = /obj/structure/carpet/navy
+	stacktype = /obj/item/natural/carpet_fibers/navy
 
 /obj/item/natural/carpet_fibers/blue
 	name = "blue carpet"
@@ -194,6 +204,12 @@
 	carpet_type = /obj/structure/carpet/red
 	bundletype = /obj/item/natural/bundle/carpet_roll/red
 
+/obj/item/natural/carpet_fibers/navy
+	name = "navy carpet"
+	color = "#0d1337"
+	carpet_type = /obj/structure/carpet/navy
+	bundletype = /obj/item/natural/bundle/carpet_roll/navy
+
 // Technically carpets
 /obj/structure/giantfur
 	name = "giant fur"
@@ -212,21 +228,3 @@
 	name = "fur pelt"
 	desc = "Pelt of some foreign creachur."
 	icon_state = "fur_alt2"
-
-/obj/structure/carpet/moonrug
-	name = "moon rug"
-	desc = "A decorative rug depicting the phases of the moon."
-	icon = 'icons/roguetown/misc/96x96.dmi'
-	icon_state = "moonrug"
-
-/obj/structure/carpet/matsquare
-	name = "fiber mat"
-	desc = "A rustic mat woven from fiber."
-	icon = 'icons/roguetown/misc/64x64.dmi'
-	icon_state = "fibermat"
-
-/obj/structure/carpet/matround
-	name = "round fiber mat"
-	desc = "A rustic mat woven from fiber."
-	icon = 'icons/roguetown/misc/structure.dmi'
-	icon_state = "fibermat_round"

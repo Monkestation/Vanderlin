@@ -276,7 +276,6 @@
 	construct_tool = null
 	category = "Structures"
 
-
 /datum/blueprint_recipe/structure/curtain
 	name = "Curtain"
 	desc = "A long-draped curtain."
@@ -432,8 +431,8 @@
 
 /datum/blueprint_recipe/structure/moonrug
 	name = "Moon Rug"
-	desc = "A sturdy crate made up of wood planks and held together with bronze nails."
-	result_type = /obj/structure/carpet/moonrug
+	desc = "A decorative rug depicting the phases of the moon."
+	result_type = /obj/structure/fluff/moonrug
 	required_materials = list(
 		/obj/item/natural/cloth = 3
 	)
@@ -441,10 +440,10 @@
 	category = "Structures"
 	skillcraft = /datum/attribute/skill/misc/sewing
 
-/datum/blueprint_recipe/structure/matsquare
+/datum/blueprint_recipe/structure/fibermat/square
 	name = "Square Fiber Mat"
 	desc = "A rustic mat woven from fiber."
-	result_type = /obj/structure/carpet/matsquare
+	result_type = /obj/structure/fluff/fibermat/square
 	required_materials = list(
 		/obj/item/natural/fibers = 2
 	)
@@ -452,10 +451,10 @@
 	category = "Structures"
 	skillcraft = /datum/attribute/skill/misc/sewing
 
-/datum/blueprint_recipe/structure/matround
+/datum/blueprint_recipe/structure/fibermat/round
 	name = "Round Fiber Mat"
 	desc = "A rustic mat woven from fiber."
-	result_type = /obj/structure/carpet/matround
+	result_type = /obj/structure/fluff/fibermat/round
 	required_materials = list(
 		/obj/item/natural/fibers = 2
 	)
@@ -475,7 +474,25 @@
 /datum/blueprint_recipe/structure/clutter/teapot
 	name = "Clutter (Teapot)"
 	desc = "A teapot & accompanying cups on a mat."
-	result_type = /obj/structure/fluff/clutter/books
+	result_type = /obj/structure/fluff/clutter/teapot
+	required_materials = list(
+		/obj/item/natural/stone = 2
+	)
+	category = "Structures"
+
+/datum/blueprint_recipe/structure/clutter/shrub/tundra
+	name = "potted shrub"
+	desc = "A stone pot with a cold tundra shrub there-in."
+	result_type = /obj/structure/fluff/clutter/shrub/tundra
+	required_materials = list(
+		/obj/item/natural/stone = 2
+	)
+	category = "Structures"
+
+/datum/blueprint_recipe/structure/clutter/shrub/red
+	name = "potted shrub"
+	desc = "A stone pot with a red autumnal shrub there-in."
+	result_type = /obj/structure/fluff/clutter/shrub/red
 	required_materials = list(
 		/obj/item/natural/stone = 2
 	)
