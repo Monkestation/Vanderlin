@@ -81,7 +81,7 @@
 	craftdiff = 0
 
 /datum/blueprint_recipe/masonry/noc
-	name = "statue of noc"
+	name = "statue of Noc"
 	desc = "Noc, the Moon Prince, reigns over magic. Scholars bow to their command of the weave."
 	required_materials = list(
 		/obj/item/ingot/silver = 1,
