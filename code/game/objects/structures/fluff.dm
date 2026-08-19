@@ -885,7 +885,7 @@
 	anchored = FALSE
 
 /obj/structure/fluff/moonrug
-	name = "moon rug TEST"
+	name = "moon rug"
 	desc = "A decorative rug depicting the phases of the moon."
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	icon_state = "moonrug"
@@ -893,7 +893,7 @@
 	anchored = FALSE
 
 /obj/structure/fluff/fibermat/square
-	name = "square fiber mat TEST"
+	name = "square fiber mat"
 	desc = "A rustic mat woven from fiber."
 	icon = 'icons/roguetown/misc/64x64.dmi'
 	icon_state = "fibermat"
@@ -902,7 +902,7 @@
 
 /obj/structure/fluff/fibermat/round
 	icon = 'icons/roguetown/misc/structure.dmi'
-	name = "round fiber mat TEST"
+	name = "round fiber mat"
 	desc = "A rustic mat woven from fiber."
 	icon_state = "fibermat_round"
 	density = FALSE
