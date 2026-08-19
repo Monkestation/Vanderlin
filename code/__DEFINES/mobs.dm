@@ -64,8 +64,8 @@
 
 // ~organ sides
 #define NO_SIDE 0
-#define RIGHT_SIDE (1<<0)
-#define LEFT_SIDE (1<<1)
+#define RIGHT_SIDE 1
+#define LEFT_SIDE 2
 
 //Organ defines for carbon mobs
 #define CHRONIC_ARTHRITIS 1
@@ -276,7 +276,8 @@
 #define SHOCK_ILLUSION (1 << 2)
 ///The shock doesn't stun.
 #define SHOCK_NOSTUN (1 << 3)
-
+///we only show a visual
+#define SHOCK_VISUAL_ONLY (1<<4)
 #define INCORPOREAL_MOVE_BASIC 1
 #define INCORPOREAL_MOVE_SHADOW 2 // leaves a trail of shadows
 #define INCORPOREAL_MOVE_JAUNT 3 // is blocked by holy water/salt

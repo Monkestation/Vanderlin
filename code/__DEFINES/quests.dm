@@ -1,7 +1,6 @@
 GLOBAL_VAR(harlequinn_hunt_quest) // weakref to active /datum/quest/custom/harlequinn_hunt
 
 #define HARLEQUINN_HUNT_COOLDOWN (35 MINUTES)
-#define HARLEQUINN_VESSEL_ID "Harlequinn"
 #define HARLEQUINN_HUNT_REWARD 500
 
 #define QUEST_DIFFICULTY_EASY "Easy"

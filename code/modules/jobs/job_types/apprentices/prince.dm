@@ -8,12 +8,13 @@
 	But someday you'll have to grow up, and that will be the day your carelessness will cost you more than a few mammons."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_PRINCE
 	give_bank_account = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	bypass_lastclass = TRUE
 
 	can_have_apprentices = FALSE
@@ -54,6 +55,7 @@
 	allowed_races = RACES_PLAYER_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE)
 	exp_types_granted = list(EXP_TYPE_NOBLE)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/heir/daring
 	raw_attribute_list = list(
@@ -98,7 +100,7 @@
 	shoes = /obj/item/clothing/shoes/nobleboot
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/weapon/sword
-	beltr = /obj/item/key/manor
+	beltr = /obj/item/key/heir
 	neck = /obj/item/storage/belt/pouch/coins/rich
 	backr = /obj/item/storage/backpack/satchel
 
@@ -144,7 +146,7 @@
 /datum/outfit/heir/aristocrat
 	name = "Sheltered Aristocrat (Prince)"
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/key/manor
+	beltl = /obj/item/key/heir
 	beltr = /obj/item/storage/belt/pouch/coins/rich
 
 /datum/outfit/heir/aristocrat/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -204,7 +206,7 @@
 /datum/outfit/heir/inbred
 	name = "Inbred Wastrel (Prince)"
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/key/manor
+	beltl = /obj/item/key/heir
 	beltr = /obj/item/storage/belt/pouch/coins/rich
 
 /datum/outfit/heir/inbred/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

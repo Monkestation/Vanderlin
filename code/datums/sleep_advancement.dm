@@ -216,6 +216,8 @@
 			</body>
 		</html>
 	"}
+	if(HAS_TRAIT(mind.current, TRAIT_HASMAGIC))
+		dat += "<div class='class_bar_div'><a class='vagrant' href='byond://?src=[REF(src)];task=open_spellbook'>Reshape your innate magic</a></div>"
 	var/datum/browser/popup = new(user, "dreams", "<center>Dreams</center>", 350, 450, src)
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
@@ -382,6 +384,11 @@
 			buy_special()
 		if("continue")
 			finish()
+			return
+		if("open_spellbook")
+			var/datum/spellbook/book = new(mind.current)
+			book.require_sleeping = TRUE
+			book.open_unlearn(mind.current)
 			return
 	show_ui(mind.current)
 
