@@ -7,4 +7,4 @@
 
 #define IS_DEADITE(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/zombie))
 
-GLOBAL_VAR_INIT(midround_antag_permission, prep_antag_perms())
+GLOBAL_VAR_INIT(midround_antag_permission, TRUE)

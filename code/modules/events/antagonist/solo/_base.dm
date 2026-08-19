@@ -257,12 +257,3 @@
 	SEND_SOUND(new_character, sound(null))
 
 	return new_character
-
-
-/proc/prep_antag_perms()
-	addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(revoke_antag_perms)), 3 MINUTES)
-	return TRUE
-
-/proc/revoke_antag_perms()
-	GLOB.midround_antag_permission = FALSE
-	message_admins("ANTAGS: Global Midround Antag Rolling now DISABLED. Antagonists will now roll according to their own settings.")
