@@ -73,8 +73,23 @@
 /datum/job/mageapprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age == AGE_ADULT)
-		spawned.adjust_spell_points(4)
+		spawned.adjust_form_mastery_points(3)
 
+/datum/job/mageapprentice/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/apprentice/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/apprentice/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/apprentice/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/apprentice/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/apprentice/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/apprentice/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/apprentice/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/apprentice/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/apprentice/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 2)
 
 /datum/outfit/mageapprentice
 	name = JOB_MAGIC_APP
@@ -87,7 +102,6 @@
 	shirt = /obj/item/clothing/shirt/dress/silkdress/colored/random
 	head = /obj/item/clothing/head/wizhat/witch
 	backpack_contents = list(
-		/obj/item/book/granter/spellbook/apprentice = 1,
 		/obj/item/chalk = 1
 	)
 

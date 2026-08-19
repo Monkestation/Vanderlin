@@ -112,6 +112,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Blessing of Dendor" = TRAIT_KNEESTINGER_IMMUNITY,
 		"Blessing of Necra" = TRAIT_SOUL_EXAMINE,
 		"Blessing of The Hunt" = TRAIT_MANEATER_IMMUNITY,
+		"Silver Blessed" = TRAIT_SILVER_BLESSED,
 		"Vinewalker" = TRAIT_ENTANGLER_IMMUNITY,
 		"Enlightened Centrist" = TRAIT_DIVINE_CENTRIST,
 		"Divine Servant" = TRAIT_DIVINE_SERVANT,
@@ -180,6 +181,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Magical Visions" = TRAIT_SEE_LEYLINES,
 		"Poison Bite" = TRAIT_POISONBITE,
 		"Blood Drinker" = TRAIT_BLOODDRINKER,
+		"Silver Immune" = TRAIT_SILVER_IMMUNE,
 		"Tiny" = TRAIT_TINY,
 		"Foreigner" = TRAIT_FOREIGNER,
 		"Beautiful" = TRAIT_BEAUTIFUL,
@@ -211,6 +213,8 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Gatekeeper" = TRAIT_GATEKEEPER,
 		"Member of the Lunar Order" = TRAIT_LUNAR_ORDER,
 		"Close Combatant" = TRAIT_CLOSECOMBAT,
+		"Steel Hearted" = TRAIT_STEELHEARTED,
+		"Sorcerer" = TRAIT_SORCERER,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -271,6 +275,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_ROT_EATER = span_necrosis("I can eat rotten food."),
 	TRAIT_ORGAN_EATER = span_bloody("I can eat organs and raw flesh."),
 	TRAIT_BLOODDRINKER = span_bloody("I can drink the blood of others and digest it."),
+	TRAIT_SILVER_IMMUNE = span_info("I am unaffected by the divine properties of silver."),
 	TRAIT_CRACKHEAD = span_love("I can use drugs as much as I want!"),
 	TRAIT_CIVILIZEDBARBARIAN = span_info("My rigorous training in the martial arts has turned me into a living weapon. No limb is out of reach for my fists and feet, and my unarmed strikes now have a higher chance to inflict critical damage."),
 	TRAIT_NUDE_SLEEPER = span_warning("I can't fall asleep unless I'm nude and in bed."),
@@ -353,7 +358,9 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
 	TRAIT_COURTAGENT = span_info("I am an Agent of the Court, employed by the Hand. I am able to recognise my colleagues"),
 	TRAIT_GATEKEEPER = span_info("I am well practiced in the art of swiftly opening and sealing the gates, alongside levers and switches."),
-	TRAIT_CLOSECOMBAT = span_info("I am trained in unarmed combat, and am able to kick with precision.")
+	TRAIT_CLOSECOMBAT = span_info("I am trained in unarmed combat, and am able to kick with precision."),
+	TRAIT_STEELHEARTED = span_bloody("I am steel hearted. The horrors of life do not affect me."),
+	TRAIT_SORCERER = SPAN_GOD_NOC("I am a sorcerer, unable to wield magickal tomes but gifted with innate power."),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

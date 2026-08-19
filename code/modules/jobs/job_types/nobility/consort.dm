@@ -73,6 +73,7 @@
 /datum/job/advclass/consort
 	inherit_parent_title = TRUE
 	exp_types_granted = list(EXP_TYPE_NOBLE)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/highborn
 	raw_attribute_list = list(

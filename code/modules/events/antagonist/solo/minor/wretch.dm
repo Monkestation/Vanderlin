@@ -30,6 +30,7 @@
 		/datum/job/forestenforcer,
 		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
+		/datum/job/admin,
 	)
 
 	base_antags = 1
@@ -44,7 +45,7 @@
 	preferred_events = list(
 		/datum/round_event_control/antagonist/solo/lich = 1,
 		/datum/round_event_control/antagonist/solo/aspirant = 1,
-		/datum/round_event_control/antagonist/solo/maniac = 1,
+		///datum/round_event_control/antagonist/solo/maniac = 1,
 		/datum/round_event_control/antagonist/solo/vampires_and_werewolves = 1,
 		/datum/round_event_control/antagonist/solo/vampires = 1,
 		/datum/round_event_control/antagonist/solo/werewolf = 1,

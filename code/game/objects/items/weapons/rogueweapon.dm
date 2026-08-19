@@ -41,11 +41,6 @@
 	if(weapon_special)
 		weapon_special = new weapon_special
 
-/obj/item/weapon/equipped(mob/user, slot, initial)
-	. = ..()
-	if(initial && randomize_blade_int)
-		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
-
 /obj/item/weapon/Destroy(force)
 	if(istype(weapon_special))
 		QDEL_NULL(weapon_special)

@@ -140,14 +140,10 @@
 	/// Innate spells that get removed when the job is removed
 	var/list/spells
 
-	/// Spell points to give/take to the mob
-	var/spell_points
-
-	/// Upper number of attunements to grant
-	var/attunements_max
-
-	/// Lower number of attunemnets to grant
-	var/attunements_min
+	/// Form points to give/take to the mob
+	var/form_points
+	/// Technique points to give/take to the mob
+	var/technique_points
 
 	var/banned_leprosy = TRUE
 	var/banned_lunatic = TRUE
@@ -405,9 +401,11 @@
 		spawned.set_apprentice_name(apprentice_name)
 
 	add_spells(spawned)
-	spawned.adjust_spell_points(spell_points)
-	spawned.generate_random_attunements(rand(attunements_min, attunements_max))
 
+	if(form_points)
+		spawned.adjust_form_mastery_points(form_points)
+	if(technique_points)
+		spawned.adjust_technique_mastery_points(technique_points)
 	// When we have sourced skill mods (praying, add to this as well)
 	if(clear_job_stats) // Reset for most non-advclasses
 		spawned.remove_stat_modifier(STATMOD_JOB)
@@ -568,7 +566,11 @@
 		else
 			spawned.adjust_skillrank(skill, -amount_or_list, TRUE)
 
-	spawned.adjust_spell_points(-spell_points)
+	if(form_points)
+		spawned.adjust_form_mastery_points(-form_points)
+	if(technique_points)
+		spawned.adjust_technique_mastery_points(-technique_points)
+
 	remove_spells(spawned)
 	spawned.remove_stat_modifier(STATMOD_JOB)
 
@@ -821,7 +823,7 @@
 
 /datum/job/proc/add_spells(mob/living/equipped_human)
 	for(var/datum/action/cooldown/spell/spell as anything in spells)
-		equipped_human.add_spell(spell, source = src)
+		equipped_human.add_spell(spell, source = src, mastery_spell = initial(spell.required_form))
 
 /datum/job/proc/remove_spells(mob/living/equipped_human)
 	equipped_human.remove_spells(source = src)
@@ -1084,3 +1086,44 @@
 			return FALSE
 
 	return TRUE
+
+/datum/job/proc/grant_selected_spellbooks(mob/living/carbon/human/spawned, list/selectable_books, amount = 2)
+	var/list/remaining = selectable_books.Copy()
+	var/list/chosen_paths = list()
+
+	for(var/i in 1 to amount)
+		if(!length(remaining))
+			break
+
+		var/choice = tgui_input_list(spawned, "Choose a spellbook ([i] of [amount]):", "Spellbook Selection", remaining)
+		if(!choice)
+			choice = pick(remaining)
+
+		var/picked_path = remaining[choice]
+		chosen_paths += picked_path
+		remaining -= choice
+
+	for(var/path in chosen_paths)
+		place_spellbook(spawned, path)
+
+/datum/job/proc/place_spellbook(mob/living/carbon/human/spawned, path)
+	var/obj/item/new_item = new path(spawned)
+
+	var/obj/item/container = spawned.get_item_by_slot(ITEM_SLOT_BACK_L)
+	if(!container || !attempt_insert_with_flipping(container, new_item, null, TRUE, TRUE))
+		container = spawned.get_item_by_slot(ITEM_SLOT_BACK_R)
+		if(!container || !attempt_insert_with_flipping(container, new_item, null, TRUE, TRUE))
+			new_item.item_flags &= ~IN_STORAGE
+			if(!spawned.put_in_hands(new_item))
+				container = spawned.get_item_by_slot(ITEM_SLOT_BELT)
+				if(!container || !attempt_insert_with_flipping(container, new_item, null, TRUE, TRUE))
+					new_item.forceMove(get_turf(spawned))
+					message_admins("[spawned] had a granted spellbook ([path]) with no room to store: [new_item]")
+
+/datum/job/proc/attempt_insert_with_flipping(obj/item/storage_item, obj/item/object_to_insert, mob/living/carbon/human/H, silent, force)
+	var/success = FALSE
+	success = SEND_SIGNAL(storage_item, COMSIG_TRY_STORAGE_INSERT, object_to_insert, H, silent, force)
+	if(!success)
+		object_to_insert.inventory_flip()
+		success = SEND_SIGNAL(storage_item, COMSIG_TRY_STORAGE_INSERT, object_to_insert, H, silent, force)
+	return success

@@ -84,6 +84,7 @@
 
 /datum/job/advclass/town_elder
 	exp_types_granted = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_BARD)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/town_elder/mayor
 	raw_attribute_list = list(

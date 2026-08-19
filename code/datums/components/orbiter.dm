@@ -9,13 +9,13 @@
 //rotation_speed: how fast to rotate (how many ds should it take for a rotation to complete)
 //rotation_segments: the resolution of the orbit circle, less = a more block circle, this can be used to produce hexagons (6 segments) triangles (3 segments), and so on, 36 is the best default.
 //pre_rotation: Chooses to rotate src 90 degress towards the orbit dir (clockwise/anticlockwise), useful for things to go "head first" like ghosts
-/datum/component/orbiter/Initialize(atom/movable/orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation)
+/datum/component/orbiter/Initialize(atom/movable/orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation, starting_rotation)
 	if(!istype(orbiter) || !isatom(parent) || isarea(parent))
 		return COMPONENT_INCOMPATIBLE
 
 	orbiter_list = list()
 
-	begin_orbit(orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation)
+	begin_orbit(orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation, starting_rotation)
 
 /datum/component/orbiter/RegisterWithParent()
 	var/atom/target = parent
@@ -60,7 +60,7 @@
 		return COMPONENT_INCOMPATIBLE
 	move_react(new_parent)
 
-/datum/component/orbiter/proc/begin_orbit(atom/movable/orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation)
+/datum/component/orbiter/proc/begin_orbit(atom/movable/orbiter, radius, clockwise, rotation_speed, rotation_segments, pre_rotation, starting_rotation)
 	if(!istype(orbiter))
 		stack_trace("begin orbit called on [orbiter] which is a [orbiter.type]!")
 		return
@@ -90,6 +90,8 @@
 
 	var/matrix/shift = matrix(orbiter.transform)
 	shift.Translate(0, radius)
+	if(starting_rotation)
+		shift.Turn(starting_rotation)
 	orbiter.transform = shift
 
 	orbiter.SpinAnimation(rotation_speed, -1, clockwise, rotation_segments, parallel = FALSE)
@@ -164,11 +166,11 @@
 
 /////////////////////
 
-/atom/movable/proc/orbit(atom/A, radius = 10, clockwise = FALSE, rotation_speed = 20, rotation_segments = 36, pre_rotation = TRUE)
+/atom/movable/proc/orbit(atom/A, radius = 10, clockwise = FALSE, rotation_speed = 20, rotation_segments = 36, pre_rotation = TRUE, starting_rotation = 0)
 	if(!istype(A) || !get_turf(A) || A == src)
 		return
 	orbit_target = A
-	return A.AddComponent(/datum/component/orbiter, src, radius, clockwise, rotation_speed, rotation_segments, pre_rotation)
+	return A.AddComponent(/datum/component/orbiter, src, radius, clockwise, rotation_speed, rotation_segments, pre_rotation, starting_rotation)
 
 /atom/movable/proc/stop_orbit(datum/component/orbiter/orbits)
 	orbit_target = null

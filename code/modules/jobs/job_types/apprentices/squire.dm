@@ -52,6 +52,7 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted = list(EXP_TYPE_GARRISON)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/squire/lancer
 	raw_attribute_list = list(
