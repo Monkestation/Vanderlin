@@ -74,6 +74,7 @@
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	exp_type = list(EXP_TYPE_LIVING)
+	exp_types_granted = list(EXP_TYPE_MEDICAL)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 600
 	)

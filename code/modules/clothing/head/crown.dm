@@ -157,9 +157,10 @@
 /obj/item/clothing/head/crown/circlet/vision/equipped(mob/user, slot)
 	. = ..()
 	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_THERMAL_VISION,"thermal_vision")
+		ADD_TRAIT(user, TRAIT_THERMAL_VISION, "mysical_circlet")
 	else
-		REMOVE_TRAIT(user, TRAIT_THERMAL_VISION,"thermal_vision")
+		REMOVE_TRAIT(user, TRAIT_THERMAL_VISION, "mysical_circlet")
+	user.update_sight()
 
 //............... Nosleep Circlet ............... //
 /obj/item/clothing/head/crown/circlet/sleepless

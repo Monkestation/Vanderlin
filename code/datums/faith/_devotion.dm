@@ -203,13 +203,6 @@
 	max_progression = CLERIC_REQ_2
 	devotion_class = DEVOTION_CLASS_TEMPLAR
 
-/datum/devotion/proc/make_absolver()
-	devotion = 100
-	max_devotion = CLERIC_REQ_3
-	progression = CLERIC_REQ_3
-	max_progression = CLERIC_REQ_3
-	devotion_class = DEVOTION_CLASS_ABSOLVER
-
 /datum/devotion/proc/make_acolyte()
 	progression = CLERIC_REQ_1
 	devotion_class = DEVOTION_CLASS_ACOLYTE
