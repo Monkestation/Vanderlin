@@ -2,7 +2,7 @@
 	name = "Coagulate"
 	desc = "Temporarily slows the movement of blood in a target to stop bleeding."
 	button_icon_state = "coagulate"
-	sound = 'sound/magic/psydonbleeds.ogg'
+	sound = 'sound/magic/PSY.ogg'
 
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD

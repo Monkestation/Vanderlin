@@ -2,7 +2,7 @@
 	name = "Anesthesia"
 	desc = "Fools the senses to alleviate pain temporarily."
 	button_icon_state = "convergence"
-	sound = 'sound/magic/psydonbleeds.ogg'
+	sound = 'sound/magic/psydonrespite.ogg'
 
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD
