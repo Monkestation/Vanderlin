@@ -204,3 +204,18 @@
       passive energy regeneration.
   dwasint:
   - rscadd: Alchemy recipes now show the description of the created recipe.
+2026-08-19:
+  Singul0:
+  - rscadd: Monarch gets an exclusive subtype of blacksteel armor
+  dwasint:
+  - rscadd: putrid
+  - refactor: orcs and goblins now get their stats applied via their species meaning
+      player controlled ones get stats
+  - rscadd: hell goblins explode
+  - rscadd: 'moon goblins know how to summon a brick
+
+      add; broodmother is now playable in game using the vessel system.'
+  - refactor: as per the species doc, adds orcs to the generic human body list, letting
+      them wear clothes.
+  realforest2001:
+  - rscdel: Disables Maniac pending rework to be more fitting.
