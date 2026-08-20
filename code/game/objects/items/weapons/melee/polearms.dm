@@ -138,7 +138,7 @@
 	melting_material = /datum/material/gold
 	melt_amount = 75
 
-/obj/item/rogueweapon/woodstaff/quarterstaff/blacksteel
+/obj/item/weapon/polearm/woodstaff/quarterstaff/blacksteel
 	name = "blacksteel quarterstaff"
 	desc = "A quarterstaff reinforced with blacksteel tips. One might imagine that the elegance of such a design hardly befits the people \
 	who'd traditionally wield such a weapon; then again, who are we to judge?"
