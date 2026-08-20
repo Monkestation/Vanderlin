@@ -61,7 +61,7 @@
 	var/bulb_emergency_pow_mul = 0.75	// the multiplier for determining the light's power in emergency mode
 	var/bulb_emergency_pow_min = 0.5	// the minimum value for the light's power in emergency mode
 
-	var/obj/effect/fog_parter/fog_parter_effect = /obj/effect/fog_parter // set to null to remove fog parter
+	var/obj/effect/fog_parter/fog_parter_effect = null
 
 /obj/machinery/light/Move()
 	if(status != LIGHT_BROKEN)
@@ -84,28 +84,6 @@
 	if(A)
 		on = FALSE
 	return ..()
-
-// /obj/machinery/light/update_icon()
-// 	cut_overlays()
-// 	switch(status)		// set icon_states
-// 		if(LIGHT_OK)
-// 			if(emergency_mode)
-// 				icon_state = "[base_state]_emergency"
-// 				icon_state = null
-// 			else
-// 				icon_state = "[base_state]"
-// 				icon_state = null
-// 				if(on)
-// 					var/mutable_appearance/glowybit = mutable_appearance(overlayicon, base_state, ABOVE_LIGHTING_LAYER, ABOVE_LIGHTING_PLANE)
-// 					glowybit.alpha = CLAMP(light_power*250, 30, 200)
-// 					add_overlay(glowybit)
-// 		if(LIGHT_EMPTY)
-// 			icon_state = "[base_state]-empty"
-// 		if(LIGHT_BURNED)
-// 			icon_state = "[base_state]-burned"
-// 		if(LIGHT_BROKEN)
-// 			icon_state = "[base_state]-broken"
-// 	return
 
 // update the icon_state and luminosity of the light depending on its state
 /obj/machinery/light/proc/update(trigger = TRUE)
