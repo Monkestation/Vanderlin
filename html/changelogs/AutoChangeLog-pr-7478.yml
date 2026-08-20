@@ -1,0 +1,5 @@
+author: "Blumengama"
+delete-after: True
+changes:
+  - rscadd: "Added more furniature options."
+  - image: "Sprites for above."
