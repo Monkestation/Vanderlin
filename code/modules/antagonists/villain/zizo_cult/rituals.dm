@@ -498,6 +498,12 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	e_req = /obj/item/organ/brain
 	n_req = /obj/item/reagent_containers/food/snacks/meat
 
+/datum/attribute_holder/sheet/job/nopain
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_CONSTITUTION = -3,
+	)
+
 /datum/ritual/fleshcrafting/nopain/invoke(mob/living/user, turf/center)
 	var/mob/living/carbon/human/target = locate() in center.contents
 	if(!target)
@@ -506,17 +512,20 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	to_chat(target, span_notice("I no longer feel pain, but it has come at a terrible cost."))
 	target.attributes?.add_sheet(/datum/attribute_holder/sheet/job/nopain)
 
-/datum/attribute_holder/sheet/job/nopain
-	raw_attribute_list = list(
-		STAT_STRENGTH = -2,
-		STAT_CONSTITUTION = -3,
-	)
+
 
 /datum/ritual/fleshcrafting/immortality
 	name = "Flawed Immortality"
 	center_requirement = /mob/living/carbon/human
 
 	n_req = /mob/living/carbon/human
+
+/datum/attribute_holder/sheet/job/immortality
+	raw_attribute_list = list(
+		STAT_STRENGTH = -3,
+		STAT_SPEED = -4,
+		STAT_ENDURANCE = -4,
+	)
 
 /datum/ritual/fleshcrafting/immortality/invoke(mob/living/user, turf/center)
 	var/mob/living/carbon/human/target = locate() in center.contents
@@ -543,13 +552,6 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	target.Knockdown(5 SECONDS)
 	target.emote("agony", forced = TRUE)
 	target.add_spell(/datum/action/cooldown/spell/undirected/regenerate)
-
-/datum/attribute_holder/sheet/job/immortality
-	raw_attribute_list = list(
-		STAT_STRENGTH = -3,
-		STAT_SPEED = -4,
-		STAT_ENDURANCE = -4,
-	)
 
 /datum/ritual/fleshcrafting/fleshform
 	name = "Stronger Form"
