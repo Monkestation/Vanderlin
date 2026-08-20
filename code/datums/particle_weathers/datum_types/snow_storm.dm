@@ -46,6 +46,7 @@
 	maxSeverityChange = 50
 	severitySteps = 50
 	immunity_type = TRAIT_SNOWSTORM_IMMUNE
+	target_trait = PARTICLEWEATHER_SNOW
 	weather_special_effect = /datum/weather_effect/snow
 	forecast_tag = "snow"
 
