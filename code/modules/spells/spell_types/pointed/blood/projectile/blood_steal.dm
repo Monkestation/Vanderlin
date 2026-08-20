@@ -75,7 +75,9 @@
 	var/did_something = FALSE
 
 	var/blood_adjustment = target.default_blood_volume * (blood_drain_perc/100)
-	if(target.blood_volume > (blood_adjustment + BLOOD_VOLUME_SURVIVE))
+	var/safe_to_take_blood = (firer.blood_volume == (BLOOD_VOLUME_SAFE_MAXIMUM - blood_adjustment))
+
+	if(safe_to_take_blood && (target.blood_volume > (blood_adjustment + BLOOD_VOLUME_SURVIVE)))
 		target.adjust_blood_volume(-blood_adjustment)
 		firer.adjust_blood_volume(blood_adjustment)
 		to_chat(firer, span_bloody("You replenish your own blood from [target]."))
