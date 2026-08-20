@@ -44081,12 +44081,6 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
-"svk" = (
-/obj/structure/bars/passage/shutter/open{
-	redstone_id = "apothecary"
-	},
-/turf/closed/wall/mineral/pipe,
-/area/indoors/town/shop)
 "svm" = (
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/dirt,
@@ -115655,7 +115649,7 @@ hZn
 hZn
 hZn
 hZn
-svk
+jEY
 nds
 xIs
 bTK
@@ -116059,7 +116053,7 @@ hZn
 hZn
 hZn
 hZn
-svk
+jEY
 vwo
 xIs
 xIs
