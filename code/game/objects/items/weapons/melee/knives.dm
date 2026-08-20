@@ -342,14 +342,15 @@
 	icon_state = "spiderdagger"
 	item_weight = 200 GRAMS
 
-/obj/item/weapon/knife/dagger/steel/dirk/baotha //this is a placeholder weapon until they actually receive a proper baothan weapon
+/obj/item/weapon/knife/dagger/steel/baotha
 	name = "laced dagger"
 	desc = "Whispers of bliss seep deeper than the blade."
+	icon_state = "baothadagger"
 	color = "#f78ccc"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 	item_weight = 200 GRAMS
 
-/obj/item/weapon/knife/dagger/steel/dirk/baotha/Initialize(mapload)
+/obj/item/weapon/knife/dagger/steel/baotha/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/baothagift)
 
