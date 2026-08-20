@@ -8226,7 +8226,7 @@
 "dxZ" = (
 /obj/structure/fluff/sellsign{
 	pixel_y = 27;
-	desc = "Left: Herb Garden / Right: Storage"
+	name = "Left: Herb Garden / Right: Storage"
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
@@ -20377,7 +20377,7 @@
 	},
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/signage{
-	name = "Church of the Ten - East"
+	name = "Church of the Ten - East / Clinic - Northeast"
 	},
 /turf/open/floor/dirt,
 /area/outdoors/town)
@@ -42404,10 +42404,6 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town/tavern)
-"rJG" = (
-/obj/structure/fluff/walldeco/feldshersign,
-/turf/closed/wall/mineral/decorstone,
-/area/indoors/town/shop)
 "rJW" = (
 /obj/structure/window/openclose,
 /obj/structure/bars/passage/shutter/open{
@@ -118333,7 +118329,7 @@ reT
 reT
 ruy
 fBC
-rJG
+fBC
 ruy
 ruy
 ruy
