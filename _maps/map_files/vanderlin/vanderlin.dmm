@@ -23961,6 +23961,18 @@
 /area/indoors/town/keep/courtagent)
 "kfW" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/rack/shelf/biggest,
+/obj/effect/spawner/map_spawner/loot/potion_vitals{
+	pixel_x = -7;
+	pixel_y = 6
+	},
+/obj/effect/spawner/map_spawner/loot/potion_vitals{
+	pixel_x = 8;
+	pixel_y = 18
+	},
+/obj/effect/spawner/map_spawner/loot/potion_vitals{
+	pixel_y = -3
+	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "kgd" = (
