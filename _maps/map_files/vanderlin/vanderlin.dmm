@@ -2472,6 +2472,16 @@
 "bfG" = (
 /turf/closed/wall/mineral/decowood,
 /area/under/town/basement)
+"bfN" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	layer = 2.7;
+	pixel_x = 2;
+	pixel_y = 7
+	},
+/obj/structure/mercstatue,
+/turf/open/floor/cobble,
+/area/outdoors/town)
 "bfO" = (
 /obj/machinery/light/fueled/torchholder/l{
 	dir = 1
@@ -16338,13 +16348,6 @@
 /obj/structure/carpet/blue,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/magician)
-"hqT" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 4
-	},
-/obj/structure/mercstatue,
-/turf/open/floor/dirt/road,
-/area/outdoors/town)
 "hqX" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -24136,6 +24139,13 @@
 /obj/structure/bed/shit,
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
+"kCm" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 4
+	},
+/obj/structure/mercstatue,
+/turf/open/floor/dirt/road,
+/area/outdoors/town)
 "kCM" = (
 /obj/effect/landmark/start/vagrant,
 /turf/open/floor/dirt,
@@ -25523,6 +25533,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
+"lht" = (
+/obj/structure/mercstatue,
+/turf/open/floor/dirt/road,
+/area/outdoors/beach)
 "lhy" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -32145,6 +32159,10 @@
 /obj/item/clothing/face/shepherd/clothmask,
 /turf/open/floor/tile,
 /area/indoors/town/keep/courtagent)
+"oaS" = (
+/obj/structure/mercstatue,
+/turf/open/floor/dirt/road,
+/area/outdoors/town/keep)
 "oba" = (
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
@@ -33015,10 +33033,6 @@
 /obj/item/dice,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/tavern)
-"osl" = (
-/obj/structure/mercstatue,
-/turf/open/floor/dirt/road,
-/area/outdoors/beach)
 "osm" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/clinic_large/apothecary)
@@ -38198,10 +38212,6 @@
 /obj/structure/fake_machine/hailerboard/l,
 /turf/open/floor/cobble,
 /area/outdoors/town)
-"qBu" = (
-/obj/structure/mercstatue,
-/turf/open/floor/dirt/road,
-/area/outdoors/town/keep)
 "qBO" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/blocks,
@@ -47805,8 +47815,6 @@
 	},
 /turf/open/openspace,
 /area/indoors/town)
-"uHe" = (
-)
 "uHm" = (
 /obj/effect/landmark/house_spot{
 	save_id = "mercapt_5";
@@ -64792,7 +64800,7 @@ pao
 uvp
 mIW
 nTH
-osl
+lht
 npN
 npN
 qAA
@@ -110894,7 +110902,7 @@ oWd
 mFi
 kwJ
 mFi
-hqT
+kCm
 kwJ
 eYe
 xRO
@@ -115903,7 +115911,7 @@ qFx
 qVe
 weQ
 oho
-qBu
+oaS
 xTl
 vqf
 viN
@@ -122066,7 +122074,7 @@ wmF
 wrm
 wrm
 wrm
-vbp
+bfN
 mFi
 hZn
 hZn
@@ -172142,7 +172150,7 @@ nzP
 nzP
 nzP
 dCm
-uHe
+sMC
 szR
 szR
 sMC

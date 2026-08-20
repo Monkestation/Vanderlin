@@ -3384,11 +3384,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/orphanage)
-"cDR" = (
-/obj/machinery/light/fueled/wallfire/candle/l,
-/obj/structure/mercstatue,
-/turf/open/floor/blocks/newstone/alt,
-/area/indoors/town/merc_guild)
 "cEd" = (
 /obj/structure/table/wood{
 	icon_state = "longtable";
@@ -4999,6 +4994,11 @@
 /obj/item/reagent_containers/food/snacks/hardtack,
 /turf/open/water/swamp,
 /area/under/town/sewer)
+"dTz" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/structure/mercstatue,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/merc_guild)
 "dTA" = (
 /obj/structure/fluff/statue/knight/r,
 /turf/open/floor/hexstone,
@@ -6490,10 +6490,6 @@
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
-"eZG" = (
-/obj/structure/mercstatue,
-/turf/open/floor/grass,
-/area/outdoors/town/keep)
 "eZH" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/neuFarm/seed/wheat,
@@ -7855,6 +7851,10 @@
 /obj/item/paper,
 /turf/open/floor/carpet/stellar,
 /area/indoors/town/shop)
+"gjN" = (
+/obj/structure/mercstatue,
+/turf/open/floor/grass,
+/area/outdoors/town/keep)
 "gkh" = (
 /turf/open/floor/hexstone,
 /area/indoors/town/steward)
@@ -22439,8 +22439,6 @@
 	},
 /turf/open/floor/metal/barograte/open,
 /area/indoors/town/clocktower)
-"sGt" = (
-)
 "sGK" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -126168,7 +126166,7 @@ iyJ
 oLO
 tbk
 bcf
-cDR
+dTz
 aKh
 iXR
 iXR
@@ -128547,7 +128545,7 @@ iiV
 iiV
 iiV
 hnl
-sGt
+tpI
 tea
 tea
 tpI
@@ -130566,7 +130564,7 @@ ttL
 vKX
 hYM
 iiV
-eZG
+gjN
 tea
 mGR
 mGR
