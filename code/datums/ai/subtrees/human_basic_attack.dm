@@ -180,7 +180,8 @@
 	if(HAS_TRAIT(target, TRAIT_BLOODLOSS_IMMUNE) || !CAN_HAVE_BLOOD(target))
 		pawn.aimheight_change(rand(12, 19))
 		return
-	if(pawn.dna?.species.id in SPECIES_SHORTIES)
+	var/mob/living/carbon/human/attacked = target
+	if((pawn.dna?.species.id in SPECIES_SHORTIES) && !((attacked.dna?.species.id in SPECIES_SHORTIES) || attacked.age == AGE_CHILD)) // should still aim head against dwarfs or younglings
 		pawn.aimheight_change(pick(rand(1, 4), rand(5, 8), rand(9, 11)))
 		return
 	pawn.aimheight_change(pick(rand(5, 8), rand(9, 11), rand(12, 19)))
