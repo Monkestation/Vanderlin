@@ -219,3 +219,41 @@
       them wear clothes.
   realforest2001:
   - rscdel: Disables Maniac pending rework to be more fitting.
+2026-08-20:
+  Banditwithdrugs:
+  - map: 'Changed the tavern''s first floor
+
+      <!-- Both :cl:''s are required for the changelog to work! You can put your name
+      to the right of the first :cl: if you want to overwrite your GitHub username
+      as author ingame. -->
+
+      <!-- You can use multiple of the same prefix (they''re only used for the icon
+      ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
+      generally represent how a player might be affected by the changes rather than
+      a summary of the PR''s contents. -->
+
+      ## Pre-Merge Checklist
+
+      <!-- Don''t bother filling these in while creating your Pull Request, just click
+      the checkboxes after the Pull Request is opened and you are redirected to the
+      page. -->
+
+      - [x] You tested this on a local server.
+
+      - [x] This code did not runtime during testing.
+
+      - [x] You documented all of your changes.
+
+      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
+      and errors. It is important to test your code/feature/fix locally. -->
+
+      <img width="1120" height="697" alt="image" src="https://github.com/user-attachments/assets/f8328fb3-7f8c-455b-96a0-256839d6052f"
+      />
+
+      <img width="1146" height="802" alt="image" src="https://github.com/user-attachments/assets/92c51956-0838-4521-8441-164d80b6354a"
+      />'
+  Blumengama:
+  - rscadd: Added more furniature options.
+  - image: Sprites for above.
+  ModDownloading:
+  - rscadd: Golden Psycrosses can be bought in the Loadout.
