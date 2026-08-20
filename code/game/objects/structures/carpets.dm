@@ -48,6 +48,11 @@
 	icon_state = "carpet_red"
 	carpet_type = /obj/item/natural/carpet_fibers/red
 
+/obj/structure/carpet/navy
+	icon = 'icons/obj/smooth_structures/carpet_navy.dmi'
+	icon_state = "carpet_navy"
+	carpet_type = /obj/item/natural/carpet_fibers/navy
+
 /obj/item/natural/bundle/carpet_roll
 	name = "carpet roll"
 	desc = "A roll of carpet fibers. Use it to place carpet tiles."
@@ -163,6 +168,11 @@
 	carpet_type = /obj/structure/carpet/red
 	stacktype = /obj/item/natural/carpet_fibers/red
 
+/obj/item/natural/bundle/carpet_roll/navy
+	name = "navy carpet roll"
+	color = "#0e1547"
+	carpet_type = /obj/structure/carpet/navy
+	stacktype = /obj/item/natural/carpet_fibers/navy
 
 /obj/item/natural/carpet_fibers/blue
 	name = "blue carpet"
@@ -193,6 +203,12 @@
 	color = "#DC143C"
 	carpet_type = /obj/structure/carpet/red
 	bundletype = /obj/item/natural/bundle/carpet_roll/red
+
+/obj/item/natural/carpet_fibers/navy
+	name = "navy carpet"
+	color = "#0d1337"
+	carpet_type = /obj/structure/carpet/navy
+	bundletype = /obj/item/natural/bundle/carpet_roll/navy
 
 // Technically carpets
 /obj/structure/giantfur

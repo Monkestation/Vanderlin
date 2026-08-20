@@ -36,7 +36,7 @@
 		failed = FALSE
 		return
 
-	if(is_failing() && owner?.stat == CONSCIOUS)
+	if(is_failing() && (owner?.stat == CONSCIOUS) && !HAS_TRAIT(owner, TRAIT_NOBREATH))
 		owner.visible_message(span_danger("[owner] grabs [owner.p_their()] throat, struggling for breath!"), span_userdanger("You suddenly feel like you can't breathe!"))
 		failed = TRUE
 

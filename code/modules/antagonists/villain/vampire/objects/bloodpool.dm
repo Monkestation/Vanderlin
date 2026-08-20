@@ -311,7 +311,7 @@
 /datum/vampire_project/power_growth/fourth/on_complete()
 	var/mob/living/target = initiator.resolve()
 	var/datum/antagonist/vampire/lord/lord = target?.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
-	if(!lord || lord.ascension_level == ascension_requirement)
+	if(!lord || lord.ascension_level != ascension_requirement)
 		return
 	to_chat(target, span_danger("I AM ANCIENT, I AM THE LAND. EVEN THE SUN BOWS TO ME."))
 	SSmapping.retainer.vlord_ascended = TRUE
