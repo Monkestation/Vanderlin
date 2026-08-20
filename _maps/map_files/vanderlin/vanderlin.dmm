@@ -2506,7 +2506,7 @@
 /area/outdoors/town/noble_manor/yellow)
 "bhC" = (
 /obj/effect/mob_spawn/corpse/human/damaged/kobold,
-/turf/open/water/clean/dirt/under,
+/turf/open/floor/naturalstone,
 /area/under/town/basement)
 "bhL" = (
 /obj/structure/fluff/railing/wood{
@@ -16510,6 +16510,9 @@
 /area/indoors/soilsons)
 "hgY" = (
 /obj/machinery/essence/test_tube,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
 /turf/open/floor/blocks/paving,
 /area/indoors/town/clinic_large/apothecary)
 "hhe" = (
@@ -20361,7 +20364,9 @@
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/kitchen)
 "iKj" = (
-/obj/structure/door,
+/obj/structure/door{
+	name = "Vault"
+	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/merchant,
 /obj/structure/bars/passage/shutter/open{
@@ -37652,7 +37657,7 @@
 "pOo" = (
 /obj/effect/mapping_helpers/access/keyset/town/merchant,
 /obj/structure/door/window{
-	name = "Merchant Counter"
+	name = "Merchant"
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/shop)
@@ -41622,7 +41627,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/mapping_helpers/access/keyset/town/merchant,
 /obj/structure/door/window{
-	name = "Merchant Counter"
+	name = "Merchant"
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/shop)
@@ -46018,7 +46023,9 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/shop)
 "tic" = (
-/obj/structure/door,
+/obj/structure/door{
+	name = "Merchant Counter"
+	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/merchant,
 /turf/open/floor/blocks/stonered,
@@ -50722,7 +50729,7 @@
 /area/outdoors/farm)
 "vih" = (
 /obj/structure/well/climb_up,
-/turf/open/water/clean/dirt/under,
+/turf/open/floor/naturalstone,
 /area/under/town/basement)
 "viL" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -52443,6 +52450,7 @@
 	pixel_x = 6;
 	pixel_y = 3
 	},
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/blocks/paving,
 /area/indoors/town/clinic_large/apothecary)
 "vQR" = (
@@ -124285,8 +124293,8 @@ neD
 neD
 gKQ
 gKQ
-gKQ
-gKQ
+fST
+fST
 gKQ
 gKQ
 neD
