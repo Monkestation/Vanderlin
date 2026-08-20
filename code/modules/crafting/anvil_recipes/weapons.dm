@@ -156,6 +156,11 @@
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/spear/billhook/ji/bronze
 
+/datum/anvil_recipe/weapons/bronze/bronze_whip
+	name = "Bronze Whip (+Cured Hide x2)"
+	additional_items = list(/obj/item/natural/hide/cured,/obj/item/natural/hide/cured)
+	created_item = /obj/item/weapon/whip/bronze
+
 // --------- IRON ------------ Middle Tier, what most disgusting Men at Arms have
 /datum/anvil_recipe/weapons/iron
 	abstract_type = /datum/anvil_recipe/weapons/iron
@@ -512,6 +517,11 @@
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/sword/scimitar/wodao
 
+/datum/anvil_recipe/weapons/steel/whip
+	name = "Steel Whip (+Cured Hide x2)"
+	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
+	created_item = /obj/item/weapon/whip/steel
+
 /datum/anvil_recipe/weapons/steel/urumi
 	name = "Steel Urumi (+Steel Bar)"
 	additional_items = list(/obj/item/ingot/steel)
@@ -767,6 +777,12 @@
 	name = "Decorated Golden Knife Sheath (+Sheath)"
 	additional_items = list(/obj/item/weapon/scabbard/knife)
 	created_item = /obj/item/weapon/scabbard/knife/royal
+
+/datum/anvil_recipe/weapons/gold/staff
+	name = "Golden Quarterstaff (+Small Log)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/gold
 
 /datum/anvil_recipe/weapons/steel/halberd
 	name = "Halberd (+Bar, +Small Log)"
@@ -1089,6 +1105,26 @@
 	craftdiff = 3
 	created_item = /obj/item/weapon/whip/psydon
 	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
+
+
+
+// --------------- Blacksteel --------------------
+
+/datum/anvil_recipe/weapons/blacksteel
+	abstract_type = /datum/anvil_recipe/weapons/blacksteel
+	required_material = /obj/item/ingot/blacksteel
+	craftdiff = 6
+
+/datum/anvil_recipe/weapons/blacksteel/whip
+	name = "Blacksteel Whip (+Cured Hide x2 +Silk)"
+	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured, /obj/item/natural/silk)
+	created_item = /obj/item/weapon/whip/blacksteel
+
+/datum/anvil_recipe/weapons/blacksteel/quarterstaff
+	name = "Blacksteel Quarterstaff (+Small Log)"
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/blacksteel
+
 
 // ------------------ Miscellaneous Weapons ------------------
 
