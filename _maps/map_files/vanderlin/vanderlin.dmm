@@ -42928,7 +42928,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/town/roofs)
 "rVr" = (
-/obj/structure/well,
+/obj/structure/fermentation_keg/water,
 /turf/open/floor/blocks/paving,
 /area/indoors/town/clinic_large/apothecary)
 "rVt" = (
