@@ -637,6 +637,7 @@
 /area/indoors/town/keep/halls/s)
 "anD" = (
 /obj/structure/closet/crate/chest,
+/obj/effect/mapping_helpers/access/keyset/manor/guest2,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
 "anP" = (
@@ -1735,6 +1736,7 @@
 	name = "Guest Room"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/guest1,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
 "aNv" = (
@@ -22194,6 +22196,7 @@
 /area/indoors/town/keep/courtagent)
 "jtK" = (
 /obj/structure/closet/crate/chest,
+/obj/effect/mapping_helpers/access/keyset/manor/guest1,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest1)
 "juk" = (
@@ -33195,6 +33198,7 @@
 	name = "Guest Room"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/guest2,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
 "nXI" = (
