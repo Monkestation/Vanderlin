@@ -412,7 +412,7 @@
 	if(ishuman(src) && ishuman(L))
 		var/mob/living/carbon/human/kicked = src
 		var/mob/living/carbon/human/kicker = L
-		if(((kicked.dna?.species.id in SPECIES_SHORTIES) || kicked.age == AGE_CHILD) && !((kicker.dna?.species.id in SPECIES_SHORTIES) || kicker.age == AGE_CHILD))
+		if(((kicked.dna?.species.id in SPECIES_SHORTIES) || kicked.age == AGE_CHILD || HAS_TRAIT(kicked, TRAIT_TINY)) && !((kicker.dna?.species.id in SPECIES_SHORTIES) || kicker.age == AGE_CHILD || HAS_TRAIT(kicker, TRAIT_TINY)))
 			return TRUE
 	if(body_position == LYING_DOWN)
 		return TRUE
@@ -433,9 +433,9 @@
 	if(ishuman(src) && ishuman(L))
 		var/mob/living/carbon/human/attacked = src
 		var/mob/living/carbon/human/attacker = L
-		if((attacked.dna?.species.id in SPECIES_SHORTIES) || attacked.age == AGE_CHILD)
+		if((attacked.dna?.species.id in SPECIES_SHORTIES) || attacked.age == AGE_CHILD || HAS_TRAIT(attacked, TRAIT_TINY))
 			short_victim = TRUE
-		if((attacker.dna?.species.id in SPECIES_SHORTIES) || attacker.age == AGE_CHILD)
+		if((attacker.dna?.species.id in SPECIES_SHORTIES) || attacker.age == AGE_CHILD || HAS_TRAIT(attacker, TRAIT_TINY))
 			short_attacker = TRUE
 
 	var/CZ = FALSE
@@ -444,14 +444,14 @@
 		if(I)
 			if(I.wlength > WLENGTH_NORMAL)
 				CZ = TRUE
-			else if((HAS_TRAIT(L, TRAIT_TINY) || short_attacker) && !(HAS_TRAIT(src, TRAIT_TINY) || short_victim)) //midget variant, no neck as you any misses will hit head either way
+			else if(short_attacker && !short_victim) //midget variant, no neck as you any misses will hit head either way
 				acceptable = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_PRECISE_R_HAND,BODY_ZONE_PRECISE_L_HAND,BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_CHEST, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
-			else if(!(HAS_TRAIT(L, TRAIT_TINY) || short_attacker)) //we have a short/medium weapon, so allow hitting legs
+			else if(!short_attacker) //we have a short/medium weapon, so allow hitting legs
 				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 		else
-			if((HAS_TRAIT(L, TRAIT_TINY) || short_attacker) && !(HAS_TRAIT(src, TRAIT_TINY) || short_victim)  && (!CZ)) //tiny punches
+			if(short_attacker && !short_victim  && (!CZ)) //tiny punches
 				acceptable = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_PRECISE_R_HAND,BODY_ZONE_PRECISE_L_HAND,BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_CHEST, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
-			else if(!(HAS_TRAIT(L, TRAIT_TINY) || short_attacker) && (!CZ)) //we are punching, no legs
+			else if(!(short_attacker) && (!CZ)) //we are punching, no legs
 				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 	else if(L.body_position == LYING_DOWN && (body_position != LYING_DOWN)) //we are prone, victim is standing
 		if(I)
