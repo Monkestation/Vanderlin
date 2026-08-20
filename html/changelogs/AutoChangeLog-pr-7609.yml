@@ -1,0 +1,8 @@
+author: "copper-404"
+delete-after: True
+changes:
+  - rscadd: "Adds a court agent hideout."
+  - qol: "New and improved Garrison, Stewardry and central square area."
+  - rscadd: "Added a bell to the top of the city watch garrison, a side entrance to the keep, more publicly available SCOMs, and another publicly available stockpile, but most importantly: a slot machine."
+  - qol: "Added a small area of safe, ambush-free basin land southeast of the town."
+  - rscadd: "Added a few religious shrines for the intrepid explorer."
