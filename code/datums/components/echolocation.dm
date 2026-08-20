@@ -47,7 +47,7 @@
 		src.cooldown_time = cooldown_time
 	if(!isnull(image_expiry_time))
 		src.image_expiry_time = image_expiry_time
-	if(!isnull(fade_in_time)
+	if(!isnull(fade_in_time))
 		src.fade_in_time = fade_in_time
 	if(!isnull(fade_out_time))
 		src.fade_out_time = fade_out_time
