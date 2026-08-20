@@ -409,10 +409,16 @@
 /mob/living/carbon/proc/kick_attack_check(mob/living/L)
 	if(L == src)
 		return FALSE
+	if(ishuman(src))
+		var/mob/living/carbon/human/kicked = src
+		var/mob/living/carbon/human/kicker = L
+		if(((kicked.dna?.species.id in SPECIES_SHORTIES) || kicked.age == AGE_CHILD) && !((kicker.dna?.species.id in SPECIES_SHORTIES) || kicker.age == AGE_CHILD))
+			return TRUE
 	if(body_position == LYING_DOWN)
 		return TRUE
 	if(HAS_TRAIT(L, TRAIT_CLOSECOMBAT))
 		return TRUE
+
 	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 	if( !(check_zone(L.zone_selected) in acceptable) )
 		to_chat(L, "<span class='warning'>I can't reach that.</span>")
