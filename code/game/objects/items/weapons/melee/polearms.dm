@@ -133,6 +133,7 @@
 	force = DAMAGE_STAFF + 6
 	force_wielded =  DAMAGE_STAFF_WIELD + 7
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
+	max_integrity = INTEGRITY_STRONGEST * 0.8
 	minstr = 8
 	item_weight = 1.5 KILOGRAMS
 	melting_material = /datum/material/gold
@@ -145,6 +146,7 @@
 	icon_state = "quarterstaff_blacksteel"
 	force = DAMAGE_STAFF + 8
 	force_wielded =  DAMAGE_STAFF_WIELD + 8
+	max_integrity = INTEGRITY_STRONGEST
 	melting_material = /datum/material/blacksteel
 	melt_amount = 75
 
