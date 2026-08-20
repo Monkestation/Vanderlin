@@ -159,9 +159,7 @@
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
 "gy" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 1
-	},
+/obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
 "gT" = (
@@ -332,12 +330,6 @@
 /obj/structure/flora/grass/herb/rosa,
 /turf/open/floor/grass/healthy,
 /area/under/tomb/indoors/rest)
-"nE" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 1
-	},
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "ok" = (
 /obj/structure/wild_plant/nospread/apple,
 /turf/open/floor/grass/mixyel,
@@ -353,9 +345,7 @@
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
 "oy" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 2
-	},
+/obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
 "oU" = (
@@ -384,10 +374,6 @@
 	dir = 1
 	},
 /turf/open/openspace,
-/area/under/tomb/indoors/rest)
-"pP" = (
-/obj/effect/dungeon_directional_helper/west,
-/turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "qi" = (
 /obj/structure/table/church{
@@ -543,12 +529,6 @@
 	},
 /turf/open/water/hotspring,
 /area/under/tomb/indoors/rest)
-"Bo" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 4
-	},
-/turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
 "Bx" = (
 /obj/structure/table/wood,
 /obj/structure/fluff/millstone{
@@ -627,12 +607,6 @@
 	dir = 8
 	},
 /turf/open/floor/grass/mixyel,
-/area/under/tomb/indoors/rest)
-"FS" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 2
-	},
-/turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "FX" = (
 /obj/structure/fluff/railing/tall/stone{
@@ -824,9 +798,7 @@
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
 "NK" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 4
-	},
+/obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt/road,
 /area/under/tomb/indoors/rest)
 "OL" = (
@@ -1670,7 +1642,7 @@ eb
 ar
 ar
 Aq
-pP
+Aq
 Aq
 Aq
 eb
@@ -1982,7 +1954,7 @@ lS
 Aq
 "}
 (13,1,2) = {"
-nE
+Aq
 YM
 ar
 ar
@@ -2006,7 +1978,7 @@ ar
 ar
 ar
 lS
-FS
+Aq
 "}
 (14,1,2) = {"
 Aq
@@ -2318,7 +2290,7 @@ eb
 eb
 eb
 Aq
-Bo
+Aq
 Aq
 Aq
 eb
