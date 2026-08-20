@@ -124,6 +124,30 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/polearm/woodstaff/quarterstaff/gold
+	name = "golden quarterstaff"
+	desc = "The astute may point out that this staff is poorly designed. They would be correct. Gold, even low karat, is a bad material for a \
+	weapon. This one additionally manages to be doubly-sinned by having a heavy chunk of gold at the end. It's almost a polehammer. Practical? \
+	No. But it makes a statement."
+	icon_state = "quarterstaff_gold"
+	force = DAMAGE_STAFF + 6
+	force_wielded =  DAMAGE_STAFF_WIELD + 7
+	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
+	minstr = 8
+	item_weight = 1.5 KILOGRAMS
+	melting_material = /datum/material/gold
+	melt_amount = 75
+
+/obj/item/rogueweapon/woodstaff/quarterstaff/blacksteel
+	name = "blacksteel quarterstaff"
+	desc = "A quarterstaff reinforced with blacksteel tips. One might imagine that the elegance of such a design hardly befits the people \
+	who'd traditionally wield such a weapon; then again, who are we to judge?"
+	icon_state = "quarterstaff_blacksteel"
+	force = DAMAGE_STAFF + 8
+	force_wielded =  DAMAGE_STAFF_WIELD + 8
+	melting_material = /datum/material/blacksteel
+	melt_amount = 75
+
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."
