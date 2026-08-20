@@ -15122,6 +15122,9 @@
 	dir = 4
 	},
 /obj/structure/carpet/purple,
+/obj/effect/landmark/start/tailor{
+	dir = 4
+	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town)
 "gAe" = (
@@ -51451,6 +51454,11 @@
 /obj/item/weapon/knife/dagger,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/merc_guild)
+"vwd" = (
+/obj/structure/chair/stool/bar,
+/obj/effect/landmark/start/apothecary,
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/clinic_large/apothecary)
 "vwe" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/keyset/church/grave,
@@ -123870,7 +123878,7 @@ wDX
 osm
 nFH
 neD
-neD
+vwd
 dNb
 gRT
 vfY
