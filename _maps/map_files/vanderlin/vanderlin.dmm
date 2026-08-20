@@ -14569,6 +14569,7 @@
 "goc" = (
 /obj/item/soap/bath,
 /obj/structure/rack/shelf/biggest,
+/obj/item/broom,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "goh" = (
@@ -29848,8 +29849,16 @@
 /turf/open/floor/dirt/road,
 /area/under/cave)
 "mCH" = (
-/obj/item/broom,
 /obj/structure/rack/shelf/biggest,
+/obj/item/storage/sack{
+	pixel_x = -6;
+	pixel_y = -6
+	},
+/obj/item/storage/sack{
+	pixel_x = 1;
+	pixel_y = 4
+	},
+/obj/item/storage/sack,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "mCN" = (
@@ -41623,6 +41632,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
+"rvv" = (
+/obj/structure/well,
+/turf/open/floor/naturalstone,
+/area/under/cavewet)
 "rvE" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
@@ -166934,7 +166947,7 @@ gKQ
 nKi
 nKi
 nKi
-nKi
+rvv
 nKi
 qFx
 qFx
