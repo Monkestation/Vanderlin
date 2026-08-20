@@ -14,7 +14,7 @@
 	invocation = "Sanguis glacio!"
 
 	charge_required = FALSE
-	cooldown_time = 1.5 MINUTES
+	cooldown_time = 90 SECONDS
 	spell_cost = 150
 	spell_flags = SPELL_UNETCHABLE
 	status_effect = /datum/status_effect/buff/coagulate
@@ -22,7 +22,7 @@
 /datum/status_effect/buff/coagulate
 	id = "coagulate_buff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/coagulate
-	duration = 3 MINUTES
+	duration = 60 SECONDS
 
 /datum/status_effect/buff/coagulate/on_apply()
 	. = ..()

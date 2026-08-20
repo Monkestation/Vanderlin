@@ -15,10 +15,9 @@
 	invocation_type = INVOCATION_SHOUT
 
 	charge_time = 3 SECONDS
-	charge_drain = 1
 	charge_slowdown = 0.7
 	cooldown_time = 20 SECONDS
-	spell_cost = 50
+	spell_cost = 30
 	spell_flags = SPELL_UNETCHABLE
 	projectile_type = /obj/projectile/magic/bloodsteal
 	var/vitae_drain = 150

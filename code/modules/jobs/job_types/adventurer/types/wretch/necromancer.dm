@@ -45,6 +45,7 @@
 		/datum/action/cooldown/spell/gravemark,
 		/datum/action/cooldown/spell/control_undead
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/wretch/necromancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

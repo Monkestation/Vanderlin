@@ -44,6 +44,7 @@
 		/datum/action/cooldown/spell/projectile/blood_steal,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/wretch/bloodmage/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

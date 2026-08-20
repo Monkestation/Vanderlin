@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/projectile/blood_shard
 	name = "Blood Shard"
-	desc = "Shoot out rapid shards of burning crystalline blood."
+	desc = "Shoot out rapid shards of crystalline blood."
 	button_icon_state =  "unholy_grab"
 	sound = 'sound/magic/icicle.ogg'
 	charge_sound = 'sound/magic/chargingold.ogg'
@@ -32,9 +32,9 @@
 	name = "blood shard"
 	icon_state = "blood_bolt"
 	damage = 30
-	damage_type = BURN
-	woundclass = BCLASS_BURN
-	armor_penetration = 30
+	damage_type = BRUTE
+	woundclass = BCLASS_CUT
+	armor_penetration = 15
 	nodamage = FALSE
 	flag = "piercing"
 	speed = 2
