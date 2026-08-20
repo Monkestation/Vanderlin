@@ -174,6 +174,16 @@
 	sellprice = 40
 	item_weight = 1 KILOGRAMS
 
+/obj/item/weapon/polearm/spear/steel/baotha
+	name = "laced swordstaff"
+	desc = "Keep the rest at arm's length, lest you're burdened with the pain of rememberance."
+	icon_state = "swordstaff"
+	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
+
+/obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/baothagift)
+
 /obj/item/weapon/polearm/spear/steel/partizan
 	name = "partizan"
 	desc = "A spear with a heavy steel head, designed for stabbing and chopping."
