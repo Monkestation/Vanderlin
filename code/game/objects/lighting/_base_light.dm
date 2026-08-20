@@ -61,8 +61,6 @@
 	var/bulb_emergency_pow_mul = 0.75	// the multiplier for determining the light's power in emergency mode
 	var/bulb_emergency_pow_min = 0.5	// the minimum value for the light's power in emergency mode
 
-	var/obj/effect/fog_parter/fog_parter_effect = null
-
 /obj/machinery/light/Move()
 	if(status != LIGHT_BROKEN)
 		break_light_tube(1)
@@ -78,8 +76,6 @@
 	addtimer(CALLBACK(src, PROC_REF(update), 0), 1)
 
 /obj/machinery/light/Destroy()
-	if(istype(fog_parter_effect))
-		QDEL_NULL(fog_parter_effect)
 	var/area/A = get_area(src)
 	if(A)
 		on = FALSE
@@ -236,24 +232,3 @@
 	explosion(T, 0, 0, 2, 2)
 	sleep(1)
 	qdel(src)
-
-// FOG RELATED PROC OVERRIDES
-
-/obj/machinery/light/set_light_on(new_value)
-	. = ..()
-	if(isnull(fog_parter_effect))
-		return
-	if(on)
-		if(!istype(fog_parter_effect))
-			fog_parter_effect = new fog_parter_effect(get_turf(src), light_outer_range)
-	else
-		if(istype(fog_parter_effect)) // to check if its initialized instead of a path
-			qdel(fog_parter_effect)
-		fog_parter_effect = initial(fog_parter_effect)
-
-/obj/machinery/light/set_light_range(new_inner_range, new_outer_range)
-	. = ..()
-	if(isnull(.))
-		return
-	if(istype(fog_parter_effect))
-		fog_parter_effect.set_range(light_outer_range)
