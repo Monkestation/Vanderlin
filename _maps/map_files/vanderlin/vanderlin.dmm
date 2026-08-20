@@ -24182,7 +24182,7 @@
 /area/indoors/town/keep/feast)
 "kkv" = (
 /obj/structure/door/viewport{
-	name = "Operating Theatre"
+	name = "Merchant"
 	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/merchant,
