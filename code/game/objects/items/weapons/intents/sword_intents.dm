@@ -151,7 +151,6 @@
 
 /datum/intent/sword/cut/short
 	clickcd = 10
-	damfactor = 0.85
 	item_damage_type = "slash"
 
 /datum/intent/sword/cut/guts
@@ -188,6 +187,8 @@
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	reach = 2
 	misscost = 10
+	chargetime = 2
+	chargedrain = 1
 	penfactor = AP_SWORD_THRUST+30 //50 total
 	clickcd = 18
 	acc_bonus = 15

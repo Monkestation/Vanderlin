@@ -615,7 +615,8 @@
 	name = "iron warhammer"
 	desc = "Made to punch through armor and skull alike."
 	icon_state = "iwarhammer"
-	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE)
+	force = DAMAGE_MACE + 2
+	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
 	gripped_intents = null
 	force_wielded = null
 	item_weight = 2 KILOGRAMS
@@ -635,7 +636,7 @@
 	name = "steel warhammer"
 	desc = "A fine steel warhammer, makes a satisfying sound when paired with a knight's helm."
 	icon_state = "swarhammer"
-	force = DAMAGE_MACE_WIELD
+	force = DAMAGE_MACE_WIELD - 1
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
 	smeltresult = /obj/item/ingot/steel_slag
@@ -647,7 +648,7 @@
 	name = "silver warhammer"
 	desc = "A silver warhammer, made to fight nite-creachers. It makes a satisfying sound when paired with a skeleton's skull."
 	icon_state = "silverhammer"
-	force = DAMAGE_MACE_WIELD
+	force = DAMAGE_MACE_WIELD - 1
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
 	max_integrity = INTEGRITY_STRONGEST * 0.8

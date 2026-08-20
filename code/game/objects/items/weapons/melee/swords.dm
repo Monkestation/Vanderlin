@@ -242,6 +242,7 @@
 	name = "sabre"
 	desc = "A swift sabre, favored by duelists and cut-throats alike."
 	icon_state = "saber"
+	force = DAMAGE_SWORD + 4
 	force_wielded = 0
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST)
@@ -506,7 +507,7 @@
 	icon_state = "rapier"
 	force_wielded = 0
 	wbalance = VERY_HARD_TO_DODGE
-	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT)
+	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT, ESTOC_LUNGE)
 	gripped_intents = null
 	alt_intents = null
 	smeltresult = /obj/item/ingot/steel_slag
