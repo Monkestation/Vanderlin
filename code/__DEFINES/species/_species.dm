@@ -118,6 +118,7 @@
 	SPEC_ID_KOBOLD_FORMIKRAG,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_GOBLIN,\
 )
 
 /// Species not considered discriminated against in Vanderlin. Used for nobility, etc.
@@ -347,6 +348,7 @@
 	SPEC_ID_MEDICATOR,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_ORC,\
 	SPEC_ID_ZIZOMBIE,\
 )
 
