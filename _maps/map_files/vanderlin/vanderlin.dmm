@@ -2095,6 +2095,12 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
+"aVa" = (
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/turf/open/water/clean/dirt/under,
+/area/under/town/basement)
 "aVo" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/structure/toilet/filled,
@@ -3867,6 +3873,7 @@
 /area/indoors/town)
 "bIk" = (
 /obj/structure/well/climb_up,
+/obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/naturalstone,
 /area/under/town/basement)
 "bIq" = (
@@ -9561,6 +9568,12 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt,
 /area/indoors/town/church/inquisition)
+"edy" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/water/clean/dirt/under,
+/area/under/town/basement)
 "edC" = (
 /obj/item/reagent_containers/glass/cup/steel{
 	pixel_x = 7;
@@ -20081,6 +20094,12 @@
 	},
 /turf/open/openspace,
 /area/outdoors/river)
+"iEC" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/turf/open/water/clean/dirt/under,
+/area/under/town/basement)
 "iED" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -24442,6 +24461,12 @@
 "kpr" = (
 /turf/closed/wall/mineral/abyssal,
 /area/outdoors/exposed/church)
+"kpx" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/water/clean/dirt/under,
+/area/under/town/basement)
 "kpB" = (
 /obj/structure/flora/grass/bush,
 /obj/structure/flora/grass{
@@ -52966,6 +52991,10 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
+"vWz" = (
+/obj/structure/fluff/railing/border,
+/turf/open/water/clean/dirt/under,
+/area/under/town/basement)
 "vWG" = (
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/halls)
@@ -128580,9 +128609,9 @@ qFx
 qFx
 qFx
 qFx
-nDz
-nDz
-nDz
+iEC
+edy
+edy
 qFx
 fwi
 hZn
@@ -128782,7 +128811,7 @@ qFx
 qFx
 qFx
 nDz
-nDz
+vWz
 rQh
 bIk
 qFx
@@ -128984,9 +129013,9 @@ qFx
 qFx
 nDz
 nDz
-nDz
-nDz
-nDz
+aVa
+kpx
+kpx
 qFx
 ssf
 nQx
