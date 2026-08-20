@@ -147,6 +147,7 @@
 /obj/item/clothing/head/helmet/kettle/iron,
 /obj/item/clothing/cloak/stabard/jupon/guard,
 /mob/living/carbon/human/species/halforc/base/skilled/naked,
+/obj/item/clothing/shoes/boots/clothlinedanklets,
 /turf/open/floor/dirt/road,
 /area)
 "iE" = (
@@ -178,6 +179,7 @@
 /obj/item/clothing/head/helmet/leather/headscarf,
 /obj/item/clothing/cloak/stabard/jupon/guard,
 /mob/living/carbon/human/species/halforc/base/skilled/naked,
+/obj/item/clothing/shoes/boots/clothlinedanklets,
 /turf/open/floor/dirt/road,
 /area)
 "lU" = (
@@ -631,6 +633,7 @@
 /obj/item/clothing/cloak/stabard/jupon/guard,
 /obj/item/clothing/head/helmet/skullcap,
 /mob/living/carbon/human/species/halforc/base/skilled/naked,
+/obj/item/clothing/shoes/boots/clothlinedanklets,
 /turf/open/floor/dirt/road,
 /area)
 "MN" = (
@@ -673,6 +676,7 @@
 /obj/item/clothing/armor/cuirass/fluted/iron,
 /obj/item/clothing/pants/guard,
 /obj/item/weapon/sword/iron,
+/obj/item/clothing/shoes/boots/clothlinedanklets,
 /turf/open/floor/dirt/road,
 /area)
 "OF" = (
@@ -691,6 +695,7 @@
 /obj/item/clothing/pants/chainlegs/kilt,
 /obj/item/clothing/wrists/bracers/ironjackchain,
 /obj/item/clothing/cloak/graggar/heavy,
+/obj/item/clothing/shoes/boots/armor,
 /turf/open/floor/wood,
 /area)
 "OO" = (
@@ -766,6 +771,7 @@
 /obj/item/clothing/wrists/bracers/leather,
 /obj/item/clothing/head/helmet/sallet/iron,
 /mob/living/carbon/human/species/halforc/base/skilled/naked,
+/obj/item/clothing/shoes/boots/clothlinedanklets,
 /turf/open/floor/dirt/road,
 /area)
 "Ro" = (
