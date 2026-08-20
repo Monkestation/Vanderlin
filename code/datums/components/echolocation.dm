@@ -40,14 +40,14 @@
 	if(!danger_turfs)
 		danger_turfs = typecacheof(list(/turf/open/openspace, /turf/open/lava, /turf/open/water/acid))
 	if(!allowed_paths)
-		allowed_paths = typecacheof(list(/turf/closed, /obj, /mob/living)) + danger_turfs - typecacheof(/obj/effect/decal) - /obj/effect/fog_parter
+		allowed_paths = typecacheof(list(/turf/closed, /obj, /mob/living)) + danger_turfs - typecacheof(/obj/effect/decal)
 	if(!isnull(echo_range))
 		src.echo_range = echo_range
 	if(!isnull(cooldown_time))
 		src.cooldown_time = cooldown_time
 	if(!isnull(image_expiry_time))
 		src.image_expiry_time = image_expiry_time
-	if(!isnull(fade_in_time))
+	if(!isnull(fade_in_time)
 		src.fade_in_time = fade_in_time
 	if(!isnull(fade_out_time))
 		src.fade_out_time = fade_out_time
