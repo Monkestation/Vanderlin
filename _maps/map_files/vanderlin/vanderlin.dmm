@@ -9040,6 +9040,9 @@
 /obj/structure/stairs/stone{
 	dir = 4
 	},
+/obj/structure/fluff/walldeco/feldshersign{
+	pixel_y = -32
+	},
 /turf/open/floor/blocks,
 /area/under/cave)
 "dUn" = (
@@ -23531,6 +23534,13 @@
 /obj/item/natural/worms/leech/propaganda,
 /turf/open/water/sewer,
 /area/under/town/basement)
+"jVj" = (
+/obj/structure/stairs/stone{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/feldshersign,
+/turf/open/floor/blocks,
+/area/under/cave)
 "jVk" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/ruinedwood/turned,
@@ -27330,6 +27340,10 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/dirt,
 /area/indoors/town/church/inquisition)
+"lAC" = (
+/obj/structure/fluff/walldeco/feldshersign,
+/turf/open/floor/cobble,
+/area/outdoors/town)
 "lAO" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_x = -32
@@ -124660,7 +124674,7 @@ unJ
 luJ
 eIh
 pTm
-dUm
+jVj
 dUm
 pTm
 eIh
@@ -130723,7 +130737,7 @@ qFx
 qFx
 qFx
 hWI
-nQx
+lAC
 hZn
 hZn
 hZn
@@ -130925,7 +130939,7 @@ qFx
 qFx
 qFx
 hWI
-hZn
+nQx
 hZn
 hZn
 hZn
