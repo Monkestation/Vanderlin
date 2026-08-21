@@ -102,8 +102,8 @@
 	belt = /obj/item/storage/belt/leather/black
 	backl = /obj/item/storage/backpack/satchel/black
 	beltr = /obj/item/reagent_containers/glass/bottle/strongbloodpot
-	backr = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
-	r_hand = /obj/item/weapon/knife/dagger/steel/stiletto
+	backr = /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
+	r_hand = /obj/item/weapon/knife/dagger/bloodsteel
 	backpack_contents = list(
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 		/obj/item/reagent_containers/glass/bottle/strongbloodpot = 1,

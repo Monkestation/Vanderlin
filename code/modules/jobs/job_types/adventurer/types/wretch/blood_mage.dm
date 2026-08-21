@@ -99,12 +99,12 @@
 	belt = /obj/item/storage/belt/leather/black
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/reagent_containers/glass/bottle/bloodpot
+	beltl = /obj/item/spellbook/expert/starter/blood
 	r_hand = /obj/item/weapon/polearm/woodstaff
 	backpack_contents = list(
-		/obj/item/spellbook/expert/starter/blood = 1,
 		/obj/item/chalk = 1,
-		/obj/item/rope/chain = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1,
-		/obj/item/weapon/knife/dagger/silver/arcyne = 1
+		/obj/item/weapon/knife/dagger/silver/arcyne = 1,
+		/obj/item/weapon/knife/dagger/bloodsteel = 1
 	)
