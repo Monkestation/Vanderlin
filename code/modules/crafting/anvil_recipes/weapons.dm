@@ -1133,9 +1133,18 @@
 	required_material = /obj/item/ingot/blacksteel
 	craftdiff = 6
 
+/datum/anvil_recipe/weapons/blacksteel/dagger
+	name = "Blacksteel Daggers"
+	created_item = /obj/item/weapon/knife/dagger/blacksteel
+	output_amount = 2
+	craftdiff = 5
+
+/datum/anvil_recipe/weapons/blacksteel/misericorde
+	name = "Blacksteel Misericordes"
+	created_item = /obj/item/weapon/knife/dagger/blacksteel/misericorde
+
 /datum/anvil_recipe/weapons/blacksteel/longsword
 	name = "Blacksteel Longsword (+Blacksteel Bar)"
-	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/blacksteel)
 	created_item = /obj/item/weapon/sword/long/blacksteel
 
@@ -1151,20 +1160,17 @@
 
 /datum/anvil_recipe/weapons/blacksteel/mace
 	name = "Blacksteel Mace (+Blacksteel Bar)"
-	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/blacksteel)
 	created_item = /obj/item/weapon/mace/blacksteel
 
 /datum/anvil_recipe/weapons/blacksteel/barmace
 	name = "Blacksteel Barmace (+Blacksteel Bar x2)"
-	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
 	created_item = /obj/item/weapon/mace/blacksteel/barmace
 
 /datum/anvil_recipe/weapons/blacksteel/warhammer
 	name = "Blacksteel Warhammer (+Blacksteel Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
-	appro_skill = /datum/attribute/skill/craft/weaponsmithing
 	created_item = /obj/item/weapon/mace/warhammer/blacksteel
 
 // ------------------ Miscellaneous Weapons ------------------

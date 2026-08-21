@@ -371,6 +371,26 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+//................ Blacksteel Dagger ............... //
+/obj/item/weapon/knife/dagger/blacksteel
+	name = "blacksteel dagger"
+	desc = "A magnificent dagger of blacksteel. The epitome of elegance, without the woes that such weapons traditionally inherit."
+	icon_state = "bs_dagger"
+	force = DAMAGE_DAGGER + 2
+	wdefense = GOOD_PARRY
+	wbalance = VERY_HARD_TO_DODGE
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST
+	melting_material = /datum/material/blacksteel
+	item_weight = 180 GRAMS
+
+/obj/item/weapon/knife/dagger/blacksteel/misericorde
+	name = "blacksteel misericorde"
+	desc = "A magnificent armor-piercing dagger of blacksteel. The curved handle is said to naturally improve one's aim, while locked in a \
+	lyfe-or-death struggle with plate-armored opponents."
+	icon_state = "bs_misericorde"
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
+
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon
 	name = "psydonian dagger"
