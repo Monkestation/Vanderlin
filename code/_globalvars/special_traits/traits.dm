@@ -234,7 +234,7 @@
 	weight = 50
 
 /datum/special_trait/tombraider/on_apply(mob/living/carbon/human/character, silent)
-	character.mind.special_items["Whip"] = /obj/item/weapon/whip/antique
+	character.mind.special_items["Whip"] = /obj/item/weapon/whip/steel
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/tombraider)
 
 /datum/attribute_holder/sheet/job/drunk_rider

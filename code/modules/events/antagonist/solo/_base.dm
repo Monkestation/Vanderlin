@@ -52,7 +52,7 @@
 	var/new_players_arg = round_started ? FALSE : TRUE
 	var/midround_antag_pref_arg = round_started ? FALSE : TRUE
 
-	var/list/candidates = SSgamemode.get_candidates(antag_flag, antag_flag, FALSE, new_players_arg, can_call_midround, midround_antag_pref = midround_antag_pref_arg, \
+	var/list/candidates = SSgamemode.get_candidates(antag_flag, antag_flag, FALSE, new_players_arg, can_call_midround ? can_call_midround : GLOB.midround_antag_permission, midround_antag_pref = midround_antag_pref_arg, \
 													no_antags = TRUE, restricted_roles = restricted_roles, required_roles = exclusive_roles)
 
 	return trim_candidates(candidates)

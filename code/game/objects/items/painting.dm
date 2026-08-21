@@ -116,3 +116,25 @@
 	desc = "A painting of a kingly crown resting on a book."
 	icon_state = "crownpainting_deployed"
 	stolen_painting = /obj/item/painting/crown
+
+/obj/item/painting/moon
+	icon_state = "moonpainting"
+	desc = "A painting of a moonlit nite on the broken coast."
+	sellprice = 40
+	deployed_structure = /obj/structure/fluff/walldeco/painting/moon
+
+/obj/structure/fluff/walldeco/painting/moon
+	desc = "A painting of a moonlit nite on the broken coast."
+	icon_state = "moonpainting_deployed"
+	stolen_painting = /obj/item/painting/moon
+
+/obj/item/painting/flower
+	icon_state = "flowerpainting"
+	desc = "A painting of a lamptern lit vase of flowers."
+	sellprice = 40
+	deployed_structure = /obj/structure/fluff/walldeco/painting/flower
+
+/obj/structure/fluff/walldeco/painting/flower
+	desc = "A painting of a lamptern lit vase of flowers."
+	icon_state = "flowerpainting_deployed"
+	stolen_painting = /obj/item/painting/flower
