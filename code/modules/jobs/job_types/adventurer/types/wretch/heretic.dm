@@ -233,8 +233,8 @@
 			gloves = /obj/item/clothing/gloves/plate
 			pants = /obj/item/clothing/pants/platelegs
 			shoes = /obj/item/clothing/shoes/boots/armor
-			beltr = /obj/item/weapon/knife/dagger/steel/dirk/baotha
-			beltl = /obj/item/weapon/knife/dagger/steel/dirk/baotha
+			beltr = /obj/item/weapon/knife/dagger/steel/baotha
+			beltl = /obj/item/weapon/knife/dagger/steel/baotha
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
 			wrists = /obj/item/clothing/neck/psycross/gold
 			armor = /obj/item/clothing/armor/cuirass/fluted
