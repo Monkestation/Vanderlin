@@ -828,6 +828,18 @@
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/weapon/mace/steel
 
+/datum/anvil_recipe/weapons/steel/flanged_mace
+	name = "Steel Flanged Mace (+Bar)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/weapon/mace/steel/flanged
+
+/datum/anvil_recipe/weapons/steel/barmace
+	name = "Steel Mace (+Bar x2)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/weapon/mace/steel/barmace
+
 /datum/anvil_recipe/weapons/steel/swarhammer
 	name = "Steel Warhammer (+Bar)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -997,6 +1009,12 @@
 	additional_items = list(/obj/item/ingot/silver)
 	created_item = /obj/item/weapon/mace/silver
 
+/datum/anvil_recipe/weapons/silver/barmace
+	name = "Silver Barmace (+Silver Bar x2)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/silver, /obj/item/ingot/silver)
+	created_item = /obj/item/weapon/mace/silver/barmace
+
 /datum/anvil_recipe/weapons/silver/rungu
 	name = "Silver Rungu (+Stick)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -1125,6 +1143,23 @@
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/blacksteel
 
+/datum/anvil_recipe/weapons/blacksteel/mace
+	name = "Blacksteel Mace (+Blacksteel Bar)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/blacksteel)
+	created_item = /obj/item/weapon/mace/blacksteel
+
+/datum/anvil_recipe/weapons/blacksteel/barmace
+	name = "Blacksteel Barmace (+Blacksteel Bar x2)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
+	created_item = /obj/item/weapon/mace/blacksteel/barmace
+
+/datum/anvil_recipe/weapons/blacksteel/warhammer
+	name = "Blacksteel Warhammer (+Blacksteel Bar)"
+	additional_items = list(/obj/item/ingot/blacksteel)
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	created_item = /obj/item/weapon/mace/warhammer/blacksteel
 
 // ------------------ Miscellaneous Weapons ------------------
 

@@ -230,6 +230,10 @@
 	sellprice = 60
 	item_weight = 1.6 KILOGRAMS
 
+/obj/item/weapon/mace/steel/flanged
+	name = "steel flanged mace"
+	icon_state = "flangedmace"
+
 /obj/item/weapon/mace/steel/rungu
 	name = "steel rungu"
 	desc = "A steel mace from the fallen east. Possesses a smoothed out head."
@@ -251,6 +255,13 @@
 	sellprice = 75
 	item_weight = 1.9 KILOGRAMS
 
+/obj/item/weapon/mace/steel/barmace
+	name = "steel bar mace"
+	desc = "A long flanged mace of solid steel, perfect for crushing goblins into pulp."
+	icon_state = "barmace"
+	force = DAMAGE_MACE + 3
+	force_wielded = DAMAGE_MACE_WIELD + 3
+
 //................ Spiked club ............... //
 /obj/item/weapon/mace/spiked
 	name = "spiked mace"
@@ -270,6 +281,28 @@
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 1.8 KILOGRAMS
 
+
+//................ Blacksteel mace ............... //
+/obj/item/weapon/mace/blacksteel
+	name = "blacksteel mace"
+	desc = "A well-crafted mace with a blacksteel head. Easier to control and hits just as hard."
+	icon_state = "bs_mace"
+	force = DAMAGE_MACE + 4
+	force_wielded = DAMAGE_MACE_WIELD + 2
+	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
+	melt_amount = 150
+	sellprice = 120
+	item_weight = 1.3 KILOGRAMS
+
+/obj/item/weapon/mace/blacksteel/barmace
+	name = "blacksteel bar mace"
+	desc = "A long flanged mace of almost pure blacksteel, a beautiful symbol of death and power."
+	icon_state = "bs_barmace"
+	force = DAMAGE_MACE + 6
+	force_wielded = DAMAGE_MACE_WIELD + 4
+	max_integrity = INTEGRITY_STRONGEST
 
 //................ Iron Bludgeon ............... // Less damage, more accurate, similar to a cudgel
 /obj/item/weapon/mace/bludgeon
@@ -661,6 +694,17 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/mace/warhammer/blacksteel
+	name = "blacksteel warhammer"
+	desc = "A magnificent warhammer of blacksteel. Ornamental, resplendant, and - above all else - lethal; the ideal sidearm for a knight."
+	icon_state = "bs_hammer"
+	force = DAMAGE_MACE_WIELD + 6
+	max_integrity = INTEGRITY_BLACKSTEEL
+	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
+	melt_amount = 200
+	item_weight = 1.9 KILOGRAMS
+
 //................ Elven Club  ............... //
 
 /obj/item/weapon/mace/elvenclub
@@ -740,6 +784,13 @@
 /obj/item/weapon/mace/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/mace/silver/barmace
+	name = "silver bar mace"
+	desc = "A long flanged mace of pure silver, a flashing symbol purity and the bane of countless nite creatures."
+	icon_state = "silvermace"
+	force = DAMAGE_MACE + 2
+	force_wielded = DAMAGE_MACE_WIELD + 2
 
 /obj/item/weapon/mace/rungu/silver
 	name = "silver rungu"
