@@ -235,6 +235,24 @@
 	item_weight = 900 GRAMS
 	smeltresult = null
 
+/obj/item/weapon/sword/blacksteel
+	name = "blacksteel arming sword"
+	desc = "A broad blade of blacksteel, mounted to a rosawooden handle that perfectly compliments its wielder's grasp. It is the culmination of \
+	Psydonia's storied history with arming swords; a mastersmith's triumph, only fit for the hands of a true hero.. or a truer villain."
+	icon_state = "bs_sword"
+	force = DAMAGE_SWORD + 2
+	force_wielded = DAMAGE_SWORD_WIELD + 2
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/blacksteel
+	item_weight = 1.1 KILOGRAMS
+
+/obj/item/weapon/sword/blacksteel/decorated
+	name = "decorated blacksteel arming sword"
+	desc = "A broad blade of blacksteel, mounted atop a golden sabreguard that's been meticulously engraved with its commissoner's heraldry. It is \
+	a masterwork of unmatched opulance and lethality, and is - perhaps - the finest arming sword your eyes'll ever lay upon."
+	icon_state = "bs_swordregal"
+
 /*-------\
 | Sabres |	Onehanded, slightly weaker thrust, better for parries. Think rapier but cutting focus.
 \-------*/
@@ -242,6 +260,7 @@
 	name = "sabre"
 	desc = "A swift sabre, favored by duelists and cut-throats alike."
 	icon_state = "saber"
+	force = DAMAGE_SWORD + 4
 	force_wielded = 0
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST)
@@ -506,7 +525,7 @@
 	icon_state = "rapier"
 	force_wielded = 0
 	wbalance = VERY_HARD_TO_DODGE
-	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT)
+	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT, ESTOC_LUNGE)
 	gripped_intents = null
 	alt_intents = null
 	smeltresult = /obj/item/ingot/steel_slag
@@ -684,6 +703,15 @@
 	item_weight = 650 GRAMS
 	SET_BASE_PIXEL(0, 0)
 	bigboy = FALSE
+
+/obj/item/weapon/sword/rapier/blacksteel
+	name = "blacksteel rapier"
+	desc = "A magnificent rapier of blacksteel. Despite originating from the matrimony of cutting-edge swordsmanship techniques and metallurgy, it \
+	doesn't actually have a cutting edge to call its own. Not like that matters as much, of course, when it can pierce straight through plate armor."
+	icon_state = "blacksteelrapier"
+	force = DAMAGE_SWORD + 2
+	smeltresult = /obj/item/ingot/blacksteel
+	item_weight = 600 GRAMS
 
 // Hoplite Kophesh
 /obj/item/weapon/sword/khopesh
@@ -1019,6 +1047,18 @@
 	icon_state = "ravoxflamberge"
 	force = DAMAGE_SWORD + 2
 	item_weight = 1.5 KILOGRAMS
+
+/obj/item/weapon/sword/long/blacksteel
+	name = "blacksteel longsword"
+	desc = "A finely crafted silver longsword"
+	desc = "A sleek blade of a dark, and burnished hue. \
+			A handle carved from a rosawood branch. A pairing that shall sing as it parts the air. \
+			With it, one can write a song across all of Psydonia."
+	icon_state = "bslongsword"
+	force = DAMAGE_SWORD + 3
+	max_integrity = INTEGRITY_BLACKSTEEL
+	smeltresult = /obj/item/ingot/blacksteel
+	sellprice = 220
 
 /obj/item/weapon/sword/long/psydon
 	name = "psydonian longsword"
