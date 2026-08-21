@@ -63,23 +63,29 @@
 	last_used[source] = world.time
 	return
 
-/datum/enchantment/bloodcurse/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/bloodcurse/proc/on_equip(obj/item/cursed_item, mob/living/carbon/human/user)
 	var/curse_effect = get_curse_effect(user)
 	if(!curse_effect)
 		return
 	to_chat(user, span_userdanger("I'm wearing a curse! My blood is boiling, I feel so weak!"))
 	user.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 	if(curse_effect == BLOOD_CURSE_AFFECTED)
-		user.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_equip)
+		if(!istype(cursed_item, /obj/item/weapon) || (istype(cursed_item, /obj/item/weapon/scabbard)))
+			user.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, poison_equip)
+		else
+			user.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_equip)
 
-/datum/enchantment/bloodcurse/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/bloodcurse/proc/on_pickup(obj/item/cursed_item, mob/living/carbon/human/user)
 	var/curse_effect = get_curse_effect(user)
 	if(!curse_effect)
 		return
 	to_chat(user, span_userdanger("I'm holding a curse! My blood is boiling, I feel so weak!"))
 	user.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 	if(curse_effect == BLOOD_CURSE_AFFECTED)
-		user.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_pickup)
+		if(!istype(cursed_item, /obj/item/weapon) || (istype(cursed_item, /obj/item/weapon/scabbard)))
+			user.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, poison_pickup)
+		else
+			user.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_pickup)
 
 /datum/status_effect/debuff/blood_curse
 	id = "blood_curse"
