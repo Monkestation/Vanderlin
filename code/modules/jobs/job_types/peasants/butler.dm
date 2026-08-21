@@ -71,7 +71,7 @@
 	name = JOB_BUTLER
 	shoes = /obj/item/clothing/shoes/nobleboot
 	beltl = /obj/item/storage/belt/pouch/coins/mid
-	beltr = /obj/item/weapon/whip/butler
+	beltr = /obj/item/weapon/whip/bronze/butler
 	backr = /obj/item/storage/backpack/satchel
 
 	backpack_contents = list(

@@ -24,8 +24,6 @@
 		return
 	var/mob/living/L = owner
 	var/INT = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)
-	if(INT <= 10)
-		return
 	var/obj/item/brick = .
 	var/int_scaling = INT - 10
 	brick.force = (brick.force + int_scaling) * spell_magnitude_modifier
