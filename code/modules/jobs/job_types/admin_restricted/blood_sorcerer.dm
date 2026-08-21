@@ -22,7 +22,7 @@
 	outfit = /datum/outfit/admin/blood_sorcerer
 	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
-	technique_points = 9
+	technique_points = 14
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	factions = list(FACTION_NEUTRAL)
 
@@ -85,7 +85,7 @@
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "BLOOD SORCERER")
 
 	spawned.hud_used?.set_bloody_bloodpool()
-	spawned.adjust_form_mastery_points(12, specific_form = FORM_BLOOD)
+	spawned.adjust_form_mastery_points(20, specific_form = FORM_BLOOD)
 	spawned.maxbloodpool += 1000
 	spawned.set_bloodpool(2500)
 
