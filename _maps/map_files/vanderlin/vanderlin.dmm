@@ -31907,6 +31907,19 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
+"nqG" = (
+/obj/structure/closet/keyrack{
+	pixel_y = -32
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/item/key/heir,
+/obj/item/key/heir,
+/obj/item/key/butler,
+/obj/effect/mapping_helpers/access/keyset/manor/lord/consort,
+/turf/open/floor/tile/masonic{
+	dir = 4
+	},
+/area/indoors/town/keep/lord_appt)
 "nqR" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 1
@@ -161297,7 +161310,7 @@ sqk
 htB
 pTb
 dCF
-uSu
+nqG
 qWu
 rVU
 jot
