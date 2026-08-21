@@ -57,7 +57,7 @@
 				break
 
 
-	if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+	if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic) || cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark))
 		if(!prob(33))
 			cast_on.visible_message(
 				span_warning("Divine Light struggles to burn through the Blood Curse upon [cast_on]!"),

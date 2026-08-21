@@ -21,7 +21,13 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	return isliving(cast_on)
+	if(!isliving(cast_on))
+		return FALSE
+	var/mob/living/living_target = cast_on
+	if(living_target.stat == DEAD || !living_target.mind)
+		to_chat(owner, span_warning("You cannot speak to the dead or mindless."))
+		return FALSE
+	return TRUE
 
 /datum/action/cooldown/spell/dark_whispers/cast(mob/living/cast_on)
 	. = ..()

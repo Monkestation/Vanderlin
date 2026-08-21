@@ -38,7 +38,7 @@
 /datum/enchantment/bloodcurse/proc/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
 	if(!user.CanReach(target))
 		return
-	if(!ishuman(target))
+	if(!ishuman(target) || target.stat >= HARD_CRIT)
 		return
 	if(world.time < (src.last_used[source] + BLOOD_CURSE_COOLDOWN))
 		return
@@ -65,7 +65,7 @@
 
 /datum/enchantment/bloodcurse/proc/on_equip(obj/item/cursed_item, mob/living/carbon/human/user)
 	var/curse_effect = get_curse_effect(user)
-	if(!curse_effect)
+	if(!curse_effect || user.stat >= HARD_CRIT)
 		return
 	to_chat(user, span_userdanger("I'm wearing a curse! My blood is boiling, I feel so weak!"))
 	user.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
@@ -77,7 +77,7 @@
 
 /datum/enchantment/bloodcurse/proc/on_pickup(obj/item/cursed_item, mob/living/carbon/human/user)
 	var/curse_effect = get_curse_effect(user)
-	if(!curse_effect)
+	if(!curse_effect || user.stat >= HARD_CRIT)
 		return
 	to_chat(user, span_userdanger("I'm holding a curse! My blood is boiling, I feel so weak!"))
 	user.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
