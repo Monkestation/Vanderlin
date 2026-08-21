@@ -289,7 +289,7 @@
 	icon_state = "bs_mace"
 	force = DAMAGE_MACE + 4
 	force_wielded = DAMAGE_MACE_WIELD + 2
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_BLACKSTEEL
 	smeltresult = /obj/item/ingot/blacksteel
 	melting_material = /datum/material/blacksteel
 	melt_amount = 150
@@ -302,7 +302,7 @@
 	icon_state = "bs_barmace"
 	force = DAMAGE_MACE + 6
 	force_wielded = DAMAGE_MACE_WIELD + 4
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_BLACKSTEEL
 
 //................ Iron Bludgeon ............... // Less damage, more accurate, similar to a cudgel
 /obj/item/weapon/mace/bludgeon

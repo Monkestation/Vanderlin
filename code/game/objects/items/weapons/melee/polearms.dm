@@ -146,7 +146,7 @@
 	icon_state = "quarterstaff_blacksteel"
 	force = DAMAGE_STAFF + 8
 	force_wielded =  DAMAGE_STAFF_WIELD + 8
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
 	melt_amount = 75
 

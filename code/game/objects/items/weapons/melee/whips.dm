@@ -124,7 +124,7 @@
 	force = DAMAGE_WHIP + 4
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/blacksteel
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_BLACKSTEEL
 
 //................ Caning Stick.................//
 /obj/item/weapon/whip/cane
