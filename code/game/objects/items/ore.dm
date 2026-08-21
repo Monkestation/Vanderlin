@@ -114,6 +114,21 @@
 	item_weight = 4.2 KILOGRAMS
 	indexed = TRUE
 
+/obj/item/ore/bloodstone
+	name = "bloodstone"
+	desc = "A blood red stone of uncertain origin, the precursor for bloodsteel."
+	icon_state = "orecorrupt1"
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	sellprice = 0 // No one will buy this
+	item_weight = 4.15 KILOGRAMS
+	mill_result = /obj/item/ore/dust/bloodstone
+
+/obj/item/ore/bloodstone/Initialize(mapload)
+	. = ..()
+	icon_state = "orecorrupt[rand(1,3)]"
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/ore/coal/charcoal
 	name = "charcoal"
 	icon_state = "oreada"
@@ -325,6 +340,19 @@
 	smeltresult = /obj/item/ingot/blacksteel
 	melting_material = /datum/material/blacksteel
 	item_weight = 5.2 KILOGRAMS
+
+/obj/item/ingot/bloodsteel
+	name = "bloodsteel bar"
+	desc = "A bar of cursed bloodsteel."
+	icon_state = "ingotcorrupt"
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	sellprice = M_STEEL
+	item_weight = 5 KILOGRAMS
+
+/obj/item/ingot/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 /obj/item/ingot/steel_slag
 	name = "steel slag"
