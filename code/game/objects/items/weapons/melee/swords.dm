@@ -1020,6 +1020,18 @@
 	force = DAMAGE_SWORD + 2
 	item_weight = 1.5 KILOGRAMS
 
+/obj/item/weapon/sword/long/blacksteel
+	name = "blacksteel longsword"
+	desc = "A finely crafted silver longsword"
+	desc = "A sleek blade of a dark, and burnished hue. \
+			A handle carved from a rosawood branch. A pairing that shall sing as it parts the air. \
+			With it, one can write a song across all of Psydonia."
+	icon_state = "bslongsword"
+	force = DAMAGE_SWORD + 3
+	max_integrity = INTEGRITY_BLACKSTEEL
+	smeltresult = /obj/item/ingot/blacksteel
+	sellprice = 220
+
 /obj/item/weapon/sword/long/psydon
 	name = "psydonian longsword"
 	desc = "A large silver longsword forged in the shape of a psycross."

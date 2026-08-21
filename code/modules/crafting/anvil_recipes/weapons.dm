@@ -1133,6 +1133,12 @@
 	required_material = /obj/item/ingot/blacksteel
 	craftdiff = 6
 
+/datum/anvil_recipe/weapons/blacksteel/longsword
+	name = "Blacksteel Longsword (+Blacksteel Bar)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/blacksteel)
+	created_item = /obj/item/weapon/sword/long/blacksteel
+
 /datum/anvil_recipe/weapons/blacksteel/whip
 	name = "Blacksteel Whip (+Cured Hide x2 +Silk)"
 	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured, /obj/item/natural/silk)
