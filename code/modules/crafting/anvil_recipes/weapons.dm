@@ -1143,6 +1143,19 @@
 	name = "Blacksteel Misericordes"
 	created_item = /obj/item/weapon/knife/dagger/blacksteel/misericorde
 
+/datum/anvil_recipe/weapons/blacksteel/rapier
+	name = "Blacksteel Rapier"
+	created_item = /obj/item/weapon/sword/rapier/blacksteel
+
+/datum/anvil_recipe/weapons/blacksteel/arming
+	name = "Blacksteel Arming Sword"
+	created_item = /obj/item/weapon/sword/blacksteel
+
+/datum/anvil_recipe/weapons/blacksteel/arming_dec
+	name = "Decorated Blacksteel Arming Sword (+Gold Bar)"
+	created_item = /obj/item/weapon/sword/blacksteel/decorated
+	additional_items = list(/obj/item/ingot/gold)
+
 /datum/anvil_recipe/weapons/blacksteel/longsword
 	name = "Blacksteel Longsword (+Blacksteel Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
