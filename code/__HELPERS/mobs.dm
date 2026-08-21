@@ -344,7 +344,7 @@ GLOBAL_LIST_INIT(oldhc, sortList(
 		if(M.client.holder && (chat_toggles & CHAT_DEAD))
 			override = TRUE
 
-		if(HAS_TRAIT(M, TRAIT_SIXTHSENSE))
+		if(HAS_TRAIT(M, TRAIT_GHOSTEARS))
 			override = TRUE
 
 		if(isnewplayer(M) && !override)

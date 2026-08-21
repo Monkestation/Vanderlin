@@ -52,7 +52,7 @@
 		/datum/chimeric_node/input/damage/burn = -10,
 	)
 	output_nodes = list(
-		/datum/chimeric_node/output/wild_magic = 10,
+		/datum/chimeric_node/output/rewinding = 10,
 		/datum/chimeric_node/output/status_effect = 5,
 		/datum/chimeric_node/output/hallucinate = 5,
 	)

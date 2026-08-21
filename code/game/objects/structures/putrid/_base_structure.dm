@@ -49,15 +49,14 @@
 /obj/structure/meatvine/proc/wrap_items_on_turf()
 	var/turf/T = get_turf(src)
 
-	checking_items:
-		for(var/obj/item/Item in T.contents)
-			for(var/generator_type in lair_generators)
-				if(istype(Item, generator_type))
-					continue checking_items
-			Item.try_wrap_up("meat", "meatthings")
+	for(var/obj/item/Item in T)
+		for(var/generator_type in lair_generators)
+			if(istype(Item, generator_type))
+				continue
+		master.add_wrap(Item.try_wrap_up("meat", "meatthings"))
 
 	for(var/obj/structure/closet/Closet in T.contents)
-		Closet.try_wrap_up("meat", "meatthings")
+		master.add_wrap(Closet.try_wrap_up("meat", "meatthings"))
 
 /obj/structure/meatvine/Destroy()
 	if(master)
@@ -121,7 +120,7 @@
 		var/mob/living/M = arrived
 		if(M.stat == DEAD && !istype(M, /mob/living/simple_animal/hostile/retaliate/meatvine))
 			if(prob(5))
-				M.try_wrap_up("meat", "meatthings")
+				master.add_wrap(M.try_wrap_up("meat", "meatthings"))
 				check_for_lair_spawn()
 	else if(isitem(arrived))
 		var/is_generator = FALSE
@@ -131,7 +130,7 @@
 				break
 
 		if(!is_generator && prob(5))
-			arrived.try_wrap_up("meat", "meatthings")
+			master.add_wrap(arrived.try_wrap_up("meat", "meatthings"))
 
 /obj/structure/meatvine/Uncrossed(atom/movable/AM)
 	. = ..()
@@ -166,7 +165,7 @@
 		to_chat(M, "<span class='danger'>The vines [pick("wind", "tangle", "tighten")] around you!</span>")
 
 	if(prob(5))
-		M.try_wrap_up("meat", "meatthings")
+		master.add_wrap(M.try_wrap_up("meat", "meatthings"))
 
 /obj/structure/meatvine/proc/check_for_lair_spawn()
 	if(!master)
@@ -203,11 +202,12 @@
 
 		if(isliving(thing))
 			var/mob/living/Mob = thing
-
+			if(Mob.buckled)
+				continue
 			if(Mob.stat != DEAD || istype(Mob, /mob/living/simple_animal/hostile/retaliate/meatvine))
 				continue
 
-			Mob.try_wrap_up("meat", "meatthings")
+			master.add_wrap(Mob.try_wrap_up("meat", "meatthings"))
 		else
 			qdel(thing)
 

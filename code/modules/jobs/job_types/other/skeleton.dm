@@ -14,7 +14,7 @@
 	tutorial = null
 	department_flag = UNDEAD
 	job_flags = (JOB_EQUIP_RANK)
-	faction = FACTION_UNDEAD
+	factions = list(FACTION_UNDEAD)
 	total_positions = 0
 	spawn_positions = 0
 	antag_job = TRUE

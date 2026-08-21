@@ -168,7 +168,7 @@
 	if(user.cmode)
 		return NONE
 
-	if(!istype(tool, /obj/item/weapon/knife))
+	if(!(tool.tool_behaviour == TOOL_KNIFE))
 		return NONE
 
 	var/datum/component/thorns = GetComponent(/datum/component/cursedrosa)

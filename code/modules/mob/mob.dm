@@ -88,8 +88,8 @@ GLOBAL_VAR_INIT(mobids, 1)
 	prepare_huds()
 	for(var/datum/atom_hud/alternate_appearance/alt_hud as anything in GLOB.active_alternate_appearances)
 		alt_hud.apply_to_new_mob(src)
-	set_nutrition(rand(NUTRITION_LEVEL_START_MIN, NUTRITION_LEVEL_START_MAX))
-	set_hydration(rand(HYDRATION_LEVEL_START_MIN, HYDRATION_LEVEL_START_MAX))
+	set_nutrition(NUTRITION_LEVEL_WELL_FED)
+	set_hydration(HYDRATION_LEVEL_HYDRATED)
 	attribute_initialize()
 	. = ..()
 	initialize_actionspeed()
@@ -1344,3 +1344,14 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/get_examine_name(mob/user, use_article=FALSE)
 	return use_article && article ? "[article] <EM>[real_name]</EM>" : "\a <EM>[real_name]</EM>"
 
+/mob/proc/adjust_form_mastery_points(points, used_points = FALSE, specific_form = null)
+	return
+
+/mob/proc/adjust_technique_mastery_points(points, used_points = FALSE, specific_technique = null)
+	return
+
+/mob/proc/reset_form_mastery_points(silent = TRUE)
+	return
+
+/mob/proc/reset_technique_mastery_points(silent = TRUE)
+	return

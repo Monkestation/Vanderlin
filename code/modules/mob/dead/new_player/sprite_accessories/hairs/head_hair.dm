@@ -29,6 +29,9 @@
 	if(!H)
 		H = bodypart.original_owner
 
+	if(!H)
+		return
+
 	if(H.head)
 		var/obj/item/I = H.head
 		if(isclothing(I))
@@ -66,6 +69,9 @@
 	var/mob/living/carbon/H = bodypart.owner
 	if(!H)
 		H = bodypart.original_owner
+
+	if(!H)
+		return
 
 	if(H.head)
 		var/obj/item/I = H.head
@@ -1647,6 +1653,7 @@
 /datum/sprite_accessory/hair/head/medicator/crown
 	name = "Crown"
 	icon_state = "crown"
+
 
 /datum/sprite_accessory/hair/head/rakshari
 	name = "Base Rakshari"

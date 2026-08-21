@@ -105,3 +105,11 @@ GLOBAL_LIST_EMPTY(virtual_z_link_helpers)
 		if(!length(GLOB.virtual_z_link_helpers[link_id]))
 			GLOB.virtual_z_link_helpers -= link_id
 	return ..()
+
+/obj/effect/mapping_helpers/virtual_z_link/broodmother_base
+	link_id = "broodmother"
+	link_width = 11
+	link_height = 9
+
+/obj/effect/mapping_helpers/virtual_z_link/broodmother_base/entry
+	is_above = TRUE
