@@ -56,7 +56,7 @@
 
 /obj/item/blood_pearl/examine(mob/user)
 	. = ..()
-	if(HAS_TRAIT(user, TRAIT_BLOOD_SENSE) || HAS_TRAIT(user, TRAIT_BLOOD_MAGE) || HAS_TRAIT(user, TRAIT_BLOOD_SORCERER))
+	if(HAS_TRAIT(user, TRAIT_VITAE_USER) || HAS_TRAIT(user, TRAIT_BLOOD_SENSE))
 		. += span_bloody("The pearl contains [vitae_amount]/[max_vitae] Vitae")
 	else if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT))
 		. += SPAN_GOD_NECRA("A Necran could destroy this...")
@@ -68,7 +68,7 @@
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/human_user = user
-	if(!(HAS_TRAIT(human_user, TRAIT_BLOOD_SENSE) || HAS_TRAIT(human_user, TRAIT_BLOOD_MAGE) || HAS_TRAIT(human_user, TRAIT_BLOOD_SORCERER)))
+	if(!(HAS_TRAIT(human_user, TRAIT_VITAE_USER)))
 		to_chat(human_user, span_danger("I do not know what to do with this."))
 		return
 	var/list/options_list = list(PEARL_OPTION_DRAW)

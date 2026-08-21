@@ -428,7 +428,7 @@
 	icon_state = "muscles"
 
 /datum/status_effect/debuff/revive_bloodmagic
-	id = "bloodcurse"
+	id = "blood_revive"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/revive_bloodmagic
 	duration = STATUS_EFFECT_PERMANENT
 	effectedstats = list(STAT_STRENGTH = -2, STAT_SPEED = -2, STAT_ENDURANCE = -2, STAT_CONSTITUTION = -2)
@@ -440,7 +440,7 @@
 		owner.remove_status_effect(/datum/status_effect/debuff/blood_mark)
 
 /atom/movable/screen/alert/status_effect/debuff/revive_bloodmagic
-	name = "Blood Curse"
+	name = "Resurrection Curse"
 	desc = "<span class='bloody '>I have returned from oblivion... but at what cost...</span>"
 	icon_state = "bloodcurse"
 

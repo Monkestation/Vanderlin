@@ -658,6 +658,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 
 	//! MAGIC BALANCE POINT
 	ADD_TRAIT(seer, TRAIT_BLOOD_SORCERER, INNATE_TRAIT)
+	ADD_TRAIT(seer, TRAIT_VITAE_USER, INNATE_TRAIT)
 	seer.hud_used?.set_bloody_bloodpool()
 	seer.adjust_bloodpool()
 	seer.adjust_technique_mastery_points(12)
@@ -708,6 +709,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	)
 
 	ADD_TRAIT(seer, TRAIT_BLOOD_SORCERER, INNATE_TRAIT)
+	ADD_TRAIT(seer, TRAIT_VITAE_USER, INNATE_TRAIT)
 	seer.adjust_technique_mastery_points(14)
 	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)

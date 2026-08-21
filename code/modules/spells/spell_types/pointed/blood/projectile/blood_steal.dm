@@ -90,7 +90,7 @@
 		target.adjust_bloodpool(-true_drain)
 		firer.adjust_bloodpool(true_drain)
 		to_chat(firer, span_bloody("You drain [true_drain] VTR from [target]."))
-		if(HAS_TRAIT(target, TRAIT_BLOOD_SENSE) || HAS_TRAIT(target, TRAIT_BLOOD_MAGE) || HAS_TRAIT(target, TRAIT_BLOOD_SORCERER))
+		if(HAS_TRAIT(target, TRAIT_VITAE_USER) || HAS_TRAIT(target, TRAIT_BLOOD_SENSE))
 			to_chat(target, span_bloody("[firer] has drained some of your Vitae!"))
 	else
 		to_chat(firer, span_bloody("[target] does not have any Vitae to steal!"))
