@@ -393,6 +393,23 @@
 	force = DAMAGE_DAGGER + 3
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
 
+//................ Bloodsteel Dagger ............... //
+/obj/item/weapon/knife/dagger/bloodsteel
+	name = "bloodsteel dagger"
+	desc = "A dagger made of refined bloodsteel."
+	icon_state = "corruptdagger"
+	wdefense = AVERAGE_PARRY
+	wbalance = VERY_HARD_TO_DODGE
+	max_blade_int = 200
+	max_integrity = INTEGRITY_STRONG
+	melting_material = /datum/material/bloodsteel
+	item_weight = 200 GRAMS
+	sellprice = 0
+
+/obj/item/weapon/knife/dagger/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon
 	name = "psydonian dagger"

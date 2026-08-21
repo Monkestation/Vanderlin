@@ -126,6 +126,19 @@
 	smeltresult = /obj/item/ingot/blacksteel
 	max_integrity = INTEGRITY_BLACKSTEEL
 
+//................ Bloodsteel Whip ............... //
+/obj/item/weapon/whip/bloodsteel
+	name = "bloodsteel whip"
+	desc = "A whip with a bloodsteel handle, core and tip."
+	icon_state = "whip_steel"
+	force = DAMAGE_WHIP + 3
+	resistance_flags = FIRE_PROOF
+	smeltresult = /obj/item/ingot/bloodsteel
+	max_integrity = INTEGRITY_STRONGEST
+
+/obj/item/weapon/whip/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 //................ Caning Stick.................//
 /obj/item/weapon/whip/cane
 	name = "caning stick"

@@ -150,6 +150,20 @@
 	melting_material = /datum/material/blacksteel
 	melt_amount = 75
 
+/obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
+	name = "bloodsteel quarterstaff"
+	desc = "A quarterstaff with bloodsteel reinforcements. One would think such a material would be better used on a sharper implement of war, but who are we to judge."
+	icon_state = "quarterstaff_bloodsteel"
+	force = DAMAGE_STAFF + 6
+	force_wielded =  DAMAGE_STAFF_WIELD + 7
+	max_integrity = INTEGRITY_STRONGEST
+	melting_material = /datum/material/bloodsteel
+	sellprice = 0
+
+/obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."
@@ -237,6 +251,23 @@
 /obj/item/weapon/polearm/spear/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/polearm/spear/bloodsteel
+	name = "bloodsteel spear"
+	desc = "A spear with a pronged bloodsteel head."
+	icon_state = "corruptspear"
+	force = DAMAGE_SPEARPLUS + 2
+	force_wielded = DAMAGE_SPEAR_WIELD + 2
+	wbalance = GREAT_PARRY
+	max_integrity = INTEGRITY_STRONGEST
+	max_blade_int = 240
+	smeltresult = /obj/item/ingot/bloodsteel
+	sellprice = 0
+	item_weight = 0.9 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 /obj/item/weapon/polearm/spear/abyssor
 	name = "depthseeker"
@@ -512,6 +543,7 @@
 /obj/item/weapon/polearm/halberd
 	name = "halberd"
 	desc = "A reinforced polearm for clobbering ordained with a crested ax head, pick and sharp point, a royal arm for defence and aggression."
+	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "halberd"
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_HALBERD_WIELD
@@ -533,7 +565,6 @@
 /obj/item/weapon/polearm/halberd/silver
 	name = "silver halberd"
 	desc = "A halberd forged from silver, laying low the beasts of the nite."
-	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverhalberd"
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_HALBERD_WIELD
@@ -548,6 +579,24 @@
 /obj/item/weapon/polearm/halberd/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/polearm/halberd/bloodsteel
+	name = "bloodsteel halberd"
+	desc = "A halberd forged from bloodsteel, the shimmering red metal makes it difficult to see all the blood..."
+	icon_state = "corrupthalberd"
+	force = DAMAGE_SPEAR + 2
+	force_wielded = DAMAGE_HALBERD_WIELD + 2
+	wbalance = EASY_TO_DODGE
+	max_integrity = INTEGRITY_STRONGEST
+	max_blade_int = 300
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 150
+	sellprice = 0
+
+/obj/item/weapon/polearm/halberd/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 /obj/item/weapon/polearm/halberd/getonmobprop(tag)
 	. = ..()

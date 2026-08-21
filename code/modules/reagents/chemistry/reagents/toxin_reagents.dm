@@ -458,6 +458,27 @@
 		else
 			exposed_mob.adjustBruteLoss(reac_volume * 3, 0)
 
+/datum/reagent/poison/bloodstone_essence
+	name = "Bloodstone Essence"
+	description = "A vile blood poison born of bloodstones, whilst rendered inert during the forging process this essence corrupts and kills those who touch raw bloodstone. It is unknown how those who forge bloodsteel weapons live long enough to do so."
+	reagent_state = LIQUID
+	color = "#8B0000"
+	random_reagent_color = FALSE
+	taste_description = "bittersweet blood"
+	scent_description = "cloying blood and sweetness"
+	harmful = TRUE
+	metabolization_rate = 0.4 * REAGENTS_METABOLISM
+
+/datum/reagent/poison/bloodstone_essence/on_mob_life(mob/living/carbon/M, efficiency)
+	if(HAS_TRAIT(M, TRAIT_VITAE_USER))
+		M.remove_reagent(/datum/reagent/poison/bloodstone_essence, volume)
+		return
+	M.adjustOxyLoss(3 * efficiency, 0)
+	M.adjustToxLoss(2 * REM * efficiency, 0)
+	if(current_cycle > 6)
+		M.adjust_dizzy(3 SECONDS * efficiency)
+	. = ..()
+
 /datum/reagent/poison/rotwater
 	name = "Rotwater"
 	description = "Contaminated water drawn from a corpse-pit. Drinking it introduces rapidly multiplying bacteria into the bloodstream. It poisons slowly at first, then accelerates the infection compounds upon itself over time."
