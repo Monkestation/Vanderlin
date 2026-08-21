@@ -11576,6 +11576,12 @@
 /obj/structure/bookcase/random/myths,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/magician)
+"eQy" = (
+/obj/structure/bars/bent,
+/obj/structure/table/wood/reinf_long,
+/obj/structure/fake_machine/atm,
+/turf/open/floor/tile/kitchen,
+/area/indoors/town)
 "eQz" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -14279,16 +14285,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"gau" = (
-/obj/structure/fake_machine/atm{
-	pixel_y = 0;
-	pixel_x = -32
-	},
-/obj/structure/fluff/walldeco/church/line{
-	pixel_y = -3
-	},
-/turf/open/floor/tile/diamond/purple,
-/area/indoors/town)
 "gaE" = (
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -21573,13 +21569,29 @@
 /obj/structure/fake_machine/mail{
 	mailtag = "Tailor"
 	},
-/obj/item/weapon/knife/scissors/steel,
 /obj/item/needle{
 	pixel_x = 7
 	},
-/obj/item/needle{
-	pixel_x = -2;
-	pixel_y = 1
+/obj/item/natural/fur/cabbit,
+/obj/item/natural/fur/cabbit,
+/obj/item/natural/fur,
+/obj/item/natural/bundle/fibers/full{
+	pixel_x = 7;
+	pixel_y = -6
+	},
+/obj/item/natural/fur,
+/obj/item/natural/bundle/silk{
+	amount = 6;
+	pixel_x = 7;
+	pixel_y = 9
+	},
+/obj/item/natural/bundle/fibers/full{
+	pixel_x = -9;
+	pixel_y = 8
+	},
+/obj/item/natural/bundle/fibers/full{
+	pixel_x = -9;
+	pixel_y = -7
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town)
@@ -28905,26 +28917,14 @@
 /obj/structure/table/wood/reinforced_alt{
 	dir = 8
 	},
-/obj/item/natural/bundle/silk{
-	amount = 6;
-	pixel_x = 7;
-	pixel_y = 9
+/obj/item/natural/feather{
+	pixel_x = 5;
+	pixel_y = 4
 	},
-/obj/item/natural/fur,
-/obj/item/natural/bundle/fibers/full{
-	pixel_x = 7;
-	pixel_y = -6
-	},
-/obj/item/natural/fur,
-/obj/item/natural/fur/cabbit,
-/obj/item/natural/fur/cabbit,
-/obj/item/natural/bundle/fibers/full{
-	pixel_x = -9;
-	pixel_y = 8
-	},
-/obj/item/natural/bundle/fibers/full{
-	pixel_x = -9;
-	pixel_y = -7
+/obj/item/weapon/knife/scissors/steel,
+/obj/item/needle{
+	pixel_x = -2;
+	pixel_y = 1
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town)
@@ -121609,7 +121609,7 @@ mFi
 qOq
 qOq
 fXE
-elx
+eQy
 elx
 nQt
 vMF
@@ -121810,7 +121810,7 @@ czz
 mFi
 qOq
 gvm
-gau
+gIj
 ygD
 ygD
 ygD
