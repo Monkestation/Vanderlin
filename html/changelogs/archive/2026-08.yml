@@ -257,3 +257,14 @@
   - image: Sprites for above.
   ModDownloading:
   - rscadd: Golden Psycrosses can be bought in the Loadout.
+2026-08-21:
+  MissyNym:
+  - map: Adjusts doors in the Church to be more descriptive as to their destinations.
+  copper-404:
+  - rscadd: Adds a court agent hideout.
+  - qol: New and improved Garrison, Stewardry and central square area.
+  - rscadd: 'Added a bell to the top of the city watch garrison, a side entrance to
+      the keep, more publicly available SCOMs, and another publicly available stockpile,
+      but most importantly: a slot machine.'
+  - qol: Added a small area of safe, ambush-free basin land southeast of the town.
+  - rscadd: Added a few religious shrines for the intrepid explorer.
