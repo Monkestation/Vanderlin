@@ -268,3 +268,35 @@
       but most importantly: a slot machine.'
   - qol: Added a small area of safe, ambush-free basin land southeast of the town.
   - rscadd: Added a few religious shrines for the intrepid explorer.
+2026-08-22:
+  CheffieGithub:
+  - rscdel: Removed natural fog
+  - balance: Reduced duration and probability of weather
+  ModDownloading:
+  - balance: Shortsword damage increased from 16 to 22, and the Cut intent deals full
+      damage instead of 85%.
+  - balance: Sabre damage increased from 20 to 24.
+  - balance: Iron Warhammer damage increased from 20 to 22, and they have the Thrust
+      intent now like the other Warhammers.
+  - balance: Steel and Silver Warhammer damage reduced from 25 to 24.
+  - balance: Rapiers now have the Lunge intent. All forms of the Lunge intent now
+      have a short charge-up time.
+  - balance: Confessions and Accusations on people with Inquisitorial Suspicion will
+      always give a few marques, even if the target is innocent.
+  Telvayne:
+  - qol: Reduced hunger/thirst rates
+  - refactor: brought hunger and thirst variables back into operation
+  realforest2001:
+  - rscadd: Added Gold and Blacksteel quarterstaves.
+  - rscadd: Added Steel, Bronze and Blacksteel whips.
+  - image: Added sprites for above, plus butler unique whip sprite all from Azure
+      Peak.
+  - rscadd: Changed the description of Repenta En to match the new sprite.
+  - rscdel: Removed Repenta En from all mobs that had it other than Dungeoneer and
+      Gaoler.
+  - image: Added crossbow sprites from Azure Peak.
+  - image: Added sprites for more zizo and other inhumen themed weapons, for later
+      use, from Azure Peak.
+  - rscadd: Added Baotha swordstaff, unaccessible at present.
+  - rscdel: Removed an unused inhumen paladin preset based on maniac patron.
+  - rscadd: Added blacksteel swords, rapier, dagger and throwing knife.
