@@ -512,8 +512,6 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	to_chat(target, span_notice("I no longer feel pain, but it has come at a terrible cost."))
 	target.attributes?.add_sheet(/datum/attribute_holder/sheet/job/nopain)
 
-
-
 /datum/ritual/fleshcrafting/immortality
 	name = "Flawed Immortality"
 	center_requirement = /mob/living/carbon/human
