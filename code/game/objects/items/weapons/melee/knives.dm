@@ -342,14 +342,15 @@
 	icon_state = "spiderdagger"
 	item_weight = 200 GRAMS
 
-/obj/item/weapon/knife/dagger/steel/dirk/baotha //this is a placeholder weapon until they actually receive a proper baothan weapon
+/obj/item/weapon/knife/dagger/steel/baotha
 	name = "laced dagger"
 	desc = "Whispers of bliss seep deeper than the blade."
+	icon_state = "baothadagger"
 	color = "#f78ccc"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 	item_weight = 200 GRAMS
 
-/obj/item/weapon/knife/dagger/steel/dirk/baotha/Initialize(mapload)
+/obj/item/weapon/knife/dagger/steel/baotha/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/baothagift)
 
@@ -369,6 +370,26 @@
 /obj/item/weapon/knife/dagger/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+//................ Blacksteel Dagger ............... //
+/obj/item/weapon/knife/dagger/blacksteel
+	name = "blacksteel dagger"
+	desc = "A magnificent dagger of blacksteel. The epitome of elegance, without the woes that such weapons traditionally inherit."
+	icon_state = "bs_dagger"
+	force = DAMAGE_DAGGER + 2
+	wdefense = GOOD_PARRY
+	wbalance = VERY_HARD_TO_DODGE
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST
+	melting_material = /datum/material/blacksteel
+	item_weight = 180 GRAMS
+
+/obj/item/weapon/knife/dagger/blacksteel/misericorde
+	name = "blacksteel misericorde"
+	desc = "A magnificent armor-piercing dagger of blacksteel. The curved handle is said to naturally improve one's aim, while locked in a \
+	lyfe-or-death struggle with plate-armored opponents."
+	icon_state = "bs_misericorde"
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
 
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon
@@ -625,7 +646,7 @@
 /obj/item/weapon/knife/throwingknife
 	name = "iron tossblade"
 	desc = ""
-	item_state = "bone_dagger"
+	icon_state = "throw_knifei"
 	force = DAMAGE_DAGGER
 	throwforce = DAMAGE_DAGGER + 13
 	wdefense = MEDIOCRE_PARRY
@@ -656,6 +677,7 @@
 	desc = ""
 	icon_state = "throw_knifes"
 	item_state = "bone_dagger"
+	throwforce = DAMAGE_DAGGER + 15
 	throw_speed = 4
 	max_integrity = INTEGRITY_WORST
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
@@ -663,10 +685,23 @@
 	sellprice = 4
 	item_weight = 85 GRAMS
 
+/obj/item/weapon/knife/throwingknife/blacksteel
+	name = "blacksteel tossblade"
+	desc = ""
+	icon_state = "throw_knifebs"
+	item_state = "bone_dagger"
+	throwforce = DAMAGE_DAGGER + 17
+	throw_speed = 4
+	max_integrity = INTEGRITY_POOR
+	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
+	melting_material = /datum/material/blacksteel
+	sellprice = 10
+	item_weight = 85 GRAMS
+
 /obj/item/weapon/knife/throwingknife/psydon
 	name = "psydonian tossblade"
 	desc = "An unconventional method of delivering silver to a heretic; but one PSYDON smiles at, all the same. Doubles as an 'actual' knife in a pinch."
-	icon_state = "throw_knifes"
+	icon_state = "throw_knifep"
 	item_state = "bone_dagger"
 	wdefense = GOOD_PARRY
 	throw_speed = 4

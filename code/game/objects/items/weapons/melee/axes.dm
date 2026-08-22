@@ -256,6 +256,21 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 
+//................ Blacksteel Axe ............... //
+/obj/item/weapon/axe/battle/blacksteel
+	name = "blacksteel axe"
+	desc = "A magnificent battle axe of blacksteel, fitted to counter both unarmored assailants and heavy infantry. The edge might be fluted with nobler alloys, but it is no less wicked when introduced to maille-and-bone."
+	icon_state = "bs_axe"
+	force = DAMAGE_AXE + 2
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 2
+	max_blade_int = 330
+	max_integrity = INTEGRITY_BLACKSTEEL
+	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
+	melt_amount = 200
+	sellprice = 90
+	item_weight = 1.2 KILOGRAMS
+
 
 //------------------ Silver Axe ---------------//
 /obj/item/weapon/axe/silver

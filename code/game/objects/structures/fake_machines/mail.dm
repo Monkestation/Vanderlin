@@ -300,6 +300,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/is_accused = FALSE
 	var/is_indexed = FALSE
 	var/is_selfreport = FALSE
+	var/is_suspect = FALSE
 	var/is_correct = !confession.false_confession
 
 	// Check if confessor is inquisition member
@@ -312,6 +313,9 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 	if(confession.signee.name in GLOB.excommunicated_players)
 		is_correct = TRUE
+
+	if(confession.signee.name in GLOB.inquis_suspect_players)
+		is_suspect = TRUE
 
 	// Check paired indexer
 	if(confession.paired)
@@ -352,10 +356,16 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	// Calculate marque value
 	var/marque_value = confession.marquevalue
 	if(confession.false_confession)
-		var/mob/living/carbon/human/human = confession.signee
-		if(human)
-			human.inquisition_position.merits -= 4
-		to_chat(user, span_notice("To lie to the church is a sin my son, do not do it again."))
+		if (is_suspect) //Even innocent confessions are worth something for suspects.
+			marque_value -= 2
+			GLOB.vanderlin_round_stats[STATS_MARQUES_MADE] += marque_value
+			user.inquisition_position.merits += CEILING(marque_value * 0.5, 1)
+			budget2change(marque_value, user, "MARQUE")
+		else
+			var/mob/living/carbon/human/human = confession.signee
+			if(human)
+				human.inquisition_position.merits -= 4
+			to_chat(user, span_notice("To lie to the church is a sin my son, do not do it again."))
 
 	else if(confession.paired && !is_indexed && !is_correct)
 		marque_value = 2
@@ -484,6 +494,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/is_confessed = FALSE
 	var/is_indexed = FALSE
 	var/is_correct = FALSE
+	var/is_suspect = FALSE
 	var/is_selfreport = FALSE
 
 	// Check if subject is inquisition member
@@ -519,6 +530,10 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	// Check excommunication
 	if(subject?.name in GLOB.excommunicated_players)
 		is_correct = TRUE
+
+	// Check suspicion
+	if(subject?.name in GLOB.inquis_suspect_players)
+		is_suspect = TRUE
 
 	// Check if already indexed
 	if(GLOB.indexed && !is_selfreport)
@@ -556,8 +571,13 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		return
 
 	// Calculate marque value
+	var/marque_value = accusation.marquevalue
+	if(is_suspect && !is_correct) //Even innocent accusations are worth something for suspects.
+		marque_value -= 2
+		budget2change(marque_value, user, "MARQUE")
+		GLOB.vanderlin_round_stats[STATS_MARQUES_MADE] += marque_value
+		user.inquisition_position.merits += CEILING(marque_value * 0.5, 1)
 	if(is_correct)
-		var/marque_value = accusation.marquevalue
 		if(!is_indexed)
 			marque_value += 2
 		if(subject?.mind?.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
