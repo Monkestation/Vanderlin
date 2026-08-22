@@ -37,6 +37,11 @@
 	form_points = list(FORM_FIRE = 1)
 	form_magnitude_modifications = list(FORM_ARCANE = 0.1)
 
+/datum/spellcraft_contribution/ore_bloodstone
+	atom_path = /obj/item/ore/bloodstone
+	form_points = list(FORM_BLOOD = 1)
+	form_magnitude_modifications = list(FORM_BLOOD = 0.1)
+
 /datum/spellcraft_contribution/ore_dust_gold
 	atom_path = /obj/item/ore/dust/gold
 	form_cost_multipliers = list(FORM_ARCANE = 0.95)

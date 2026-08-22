@@ -879,11 +879,10 @@
 /datum/special_trait/dark_secrets
 	name = "Dark Secrets"
 	greet_text = span_notice("You have a dark secret, hidden power you have concealed for most of your life. Is now the time to let it out?")
-	req_text = "Be a Beggar or Pilgrim and be an Apostate."
+	req_text = "Be an Apostate."
 	allowed_patrons = list(/datum/patron/godless/autotheist, /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/godless, /datum/patron/godless/naivety)
-	allowed_jobs = list(/datum/job/vagrant, /datum/job/pilgrim)
-	allowed_ctags = list(CTAG_PILGRIM)
 	weight = 15 //Should be fine.
+	restricted_jobs = list(/datum/job/lord, /datum/job/monk, /datum/job/priest, /datum/job/templar)
 
 /datum/special_trait/dark_secrets/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/dark_secrets)
