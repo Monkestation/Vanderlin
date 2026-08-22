@@ -485,6 +485,12 @@
 	},
 /turf/open/floor/churchmarble,
 /area/outdoors/mountains)
+"nZ" = (
+/obj/structure/fluff/psycross/astrata/gold{
+	pixel_y = 10
+	},
+/turf/open/floor/church,
+/area/outdoors/mountains)
 "og" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/naturalstone,
@@ -655,6 +661,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"tJ" = (
+/obj/structure/fluff/psycross/astrata/gold{
+	pixel_y = 10
+	},
+/turf/open/floor/church/gold,
+/area/outdoors/mountains)
 "tY" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 1
@@ -1205,6 +1217,9 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/churchrough,
 /area/outdoors/mountains)
+"JG" = (
+/turf/open/floor/churchmarble/gold,
+/area/outdoors/mountains)
 "JR" = (
 /turf/open/floor/naturalstone,
 /area/under/cave)
@@ -1586,6 +1601,12 @@
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/railing/tall/stone,
 /turf/open/floor/church,
+/area/outdoors/mountains)
+"Vn" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 4
+	},
+/turf/open/floor/churchmarble/gold,
 /area/outdoors/mountains)
 "Vr" = (
 /turf/closed/wall/mineral/roofwall/middle{
@@ -53155,7 +53176,7 @@ Vy
 Vy
 Vy
 Vy
-Vy
+tJ
 Vy
 Vy
 Vy
@@ -54831,9 +54852,9 @@ Vy
 Vy
 AB
 ms
-Vy
-Vy
-Vy
+Vn
+Vn
+Vn
 aS
 XG
 cU
@@ -54978,9 +54999,9 @@ Vy
 Vy
 RJ
 RJ
-Vy
-Vy
-Vy
+JG
+JG
+JG
 fe
 fe
 Vy
@@ -55130,9 +55151,9 @@ Vy
 Vy
 RJ
 RJ
-Vy
-Vy
-Vy
+JG
+JG
+JG
 fe
 fe
 Vy
@@ -55282,9 +55303,9 @@ AB
 AB
 Rd
 Rd
-Vy
-Vy
-Vy
+JG
+JG
+JG
 Dr
 GB
 AB
@@ -55739,7 +55760,7 @@ cU
 GD
 bU
 bU
-bU
+nZ
 bU
 bU
 Xn
