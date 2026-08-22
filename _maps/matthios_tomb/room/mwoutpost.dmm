@@ -1,10 +1,4 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"am" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 2
-	},
-/turf/open/floor/naturalstone,
-/area/under/tomb/cave)
 "aC" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/item/bodypart/head/goblin,
@@ -53,12 +47,6 @@
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/dirt/road,
 /area/under/tomb/wilds)
-"cq" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 1
-	},
-/turf/open/floor/wood,
-/area/under/tomb/wilds)
 "cs" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/dirt,
@@ -68,10 +56,6 @@
 /obj/item/bedsheet/cloth,
 /turf/open/floor/cobblerock,
 /area/under/tomb/indoors)
-"cI" = (
-/obj/effect/dungeon_directional_helper/west,
-/turf/open/floor/wood,
-/area/under/tomb/wilds)
 "cJ" = (
 /obj/structure/flora/grass,
 /obj/structure/fluff/railing/tall/palisade,
@@ -281,12 +265,6 @@
 /obj/structure/fermentation_keg/beer,
 /turf/open/floor/cobblerock/alt,
 /area/under/tomb/indoors)
-"rz" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 4
-	},
-/turf/open/floor/naturalstone,
-/area/under/tomb/cave)
 "rH" = (
 /obj/item/natural/rock,
 /turf/open/floor/dirt,
@@ -1605,7 +1583,7 @@ ED
 ED
 AF
 AF
-cI
+AF
 AF
 ka
 ED
@@ -1917,7 +1895,7 @@ SY
 Qm
 "}
 (13,1,2) = {"
-cq
+AF
 ka
 YB
 YB
@@ -1941,7 +1919,7 @@ YB
 YB
 YB
 SY
-am
+SY
 "}
 (14,1,2) = {"
 AF
@@ -2253,7 +2231,7 @@ Fp
 Fp
 SY
 SY
-rz
+SY
 Qm
 SY
 Fp
