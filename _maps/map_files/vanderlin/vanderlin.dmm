@@ -2608,7 +2608,7 @@
 	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/clinic,
-/turf/closed/wall/mineral/decorstone,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large)
 "bfD" = (
 /obj/structure/closet/crate/chest/crate,
