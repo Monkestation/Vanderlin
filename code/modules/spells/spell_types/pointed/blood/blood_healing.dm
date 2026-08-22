@@ -13,6 +13,7 @@
 	required_technique = TECHNIQUE_RESTORATION
 	heretical_spell = TRUE
 	antimagic_flags = MAGIC_RESISTANCE_BLOOD
+	check_flags = AB_CHECK_CONSCIOUS
 
 	charge_required = FALSE
 	cooldown_time = 10 SECONDS

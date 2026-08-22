@@ -4,6 +4,7 @@
 	desc = "Manipulate the blood of your target, conveying a message."
 	button_icon_state = "encode_thought"
 	sound = 'sound/magic/PSY.ogg'
+	check_flags = AB_CHECK_CONSCIOUS
 
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD

@@ -47,6 +47,7 @@
 	required_form = FORM_BLOOD
 	heretical_spell = TRUE
 	antimagic_flags = MAGIC_RESISTANCE_BLOOD
+	check_flags = AB_CHECK_CONSCIOUS
 
 	cooldown_time = 5 SECONDS
 	spell_cost = 5

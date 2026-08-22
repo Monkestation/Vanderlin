@@ -10,6 +10,7 @@
 	required_technique = TECHNIQUE_ALTERATION
 	heretical_spell = TRUE
 	antimagic_flags = MAGIC_RESISTANCE_BLOOD
+	check_flags = AB_CHECK_CONSCIOUS
 
 	invocation_type = INVOCATION_SHOUT
 	invocation = "Sanguis glacio!"
