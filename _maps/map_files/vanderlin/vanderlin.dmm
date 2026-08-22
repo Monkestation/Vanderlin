@@ -41588,7 +41588,7 @@
 "reZ" = (
 /obj/structure/fluff/sellsign{
 	pixel_y = 27;
-	name = "Left: Herb Garden / Right: Storage"
+	name = "Left: Apartment / Right: Garden, Clinic, Storage"
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
