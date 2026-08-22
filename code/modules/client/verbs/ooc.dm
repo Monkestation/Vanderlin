@@ -97,7 +97,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 			msg_to_send = "<font color='[color2use]'><EM>OOC: [keyfield]:</EM></font> <span class='message linkify'>[msg]</span>"
 			if(holder)
 				msg_to_send = "<font color='[color2use]'><EM>OOC: [keyfield]:</EM></font> <font color='[admin_message_color ? admin_message_color : GLOB.OOC_COLOR]'><span class='message linkify'>[msg]</span></font>"
-			to_chat(C, msg_to_send)
+			to_chat(C, "[span_ooc(msg_to_send)]")
 
 /client/proc/lobbyooc(msg as text)
 	set category = "OOC"
@@ -175,7 +175,7 @@ GLOBAL_LIST_INIT(oocpronouns_required, list(
 			if(holder)
 				msg_to_send = "<font color='[color2use]'><EM>LOBBY: [keyname][real_key]:</EM></font> <font color='[admin_message_color ? admin_message_color : GLOB.OOC_COLOR]'><span class='message linkify'>[msg]</span></font>"
 
-			to_chat(C, msg_to_send)
+			to_chat(C, "[span_ooc(msg_to_send)]")
 
 /proc/toggle_ooc(toggle = null)
 	if(toggle != null) //if we're specifically en/disabling ooc

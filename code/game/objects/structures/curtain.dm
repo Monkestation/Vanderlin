@@ -63,3 +63,81 @@
 /obj/structure/curtain/bounty/dir
 	icon_state = MAP_SWITCH("bounty-open", "bountydir")
 	directional = TRUE
+
+/obj/structure/curtain/bluecurtain
+	icon_type = "curtain_blue"
+	icon_state = "curtain_blue-open"
+	color = null
+	alpha = 255
+	name = "Fancy Blue Curtain"
+
+/obj/structure/curtain/bluecurtain/dir
+	icon_state = MAP_SWITCH("curtain_blue-open", "curtain_bluedir")
+	directional = TRUE
+
+/obj/structure/curtain/cyancurtain
+	icon_type = "curtain_cyan"
+	icon_state = "curtain_cyan-open"
+	color = null
+	alpha = 255
+	name = "Fancy Cyan Curtain"
+
+/obj/structure/curtain/cyancurtain/dir
+	icon_state = MAP_SWITCH("curtain_cyan-open", "curtain_cyandir")
+	directional = TRUE
+
+/obj/structure/curtain/browncurtain
+	icon_type = "curtain_brown"
+	icon_state = "curtain_brown-open"
+	color = null
+	alpha = 255
+	name = "Fancy Brown Curtain"
+
+/obj/structure/curtain/browncurtain/dir
+	icon_state = MAP_SWITCH("curtain_brown-open", "curtain_browndir")
+	directional = TRUE
+
+/obj/structure/curtain/greencurtain
+	icon_type = "curtain_green"
+	icon_state = "curtain_green-open"
+	color = null
+	alpha = 255
+	name = "Fancy Green Curtain"
+
+/obj/structure/curtain/greencurtain/dir
+	icon_state = MAP_SWITCH("curtain_green-open", "curtain_greendir")
+	directional = TRUE
+
+/obj/structure/curtain/purplecurtain
+	icon_type = "curtain_purple"
+	icon_state = "curtain_purple-open"
+	color = null
+	alpha = 255
+	name = "Fancy Purple Curtain"
+
+/obj/structure/curtain/purplecurtain/dir
+	icon_state = MAP_SWITCH("curtain_purple-open", "curtain_purpledir")
+	directional = TRUE
+
+/obj/structure/curtain/redcurtain
+	icon_type = "curtain_red"
+	icon_state = "curtain_red-open"
+	color = null
+	alpha = 255
+	name = "Fancy Red Curtain"
+
+/obj/structure/curtain/redcurtain/dir
+	icon_state = MAP_SWITCH("curtain_red-open", "curtain_reddir")
+	directional = TRUE
+
+/obj/structure/curtain/noccurtain
+	icon_type = "curtain_noc"
+	icon_state = "curtain_noc-open"
+	color = null
+	alpha = 255
+	name = "Fancy Navy Curtain"
+	desc = "Decorative navy curtains, popular amongst Noccites."
+
+/obj/structure/curtain/noccurtain/dir
+	icon_state = MAP_SWITCH("curtain_noc-open", "curtain_nocdir")
+	directional = TRUE

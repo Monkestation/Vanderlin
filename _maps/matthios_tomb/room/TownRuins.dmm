@@ -61,24 +61,24 @@
 /area/under/tomb/indoors/church)
 "bi" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/fish/dead{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_y = 8;
 	pixel_x = -11
 	},
-/obj/item/reagent_containers/food/snacks/fish,
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp,
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = -11;
 	pixel_y = -7
 	},
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = 5;
 	pixel_y = -8
 	},
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = 5;
 	pixel_y = 11
 	},
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = 14;
 	pixel_y = 4
 	},
@@ -169,20 +169,20 @@
 /area/under/tomb)
 "dy" = (
 /obj/structure/closet/crate/chest/neu,
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = -11;
 	pixel_y = -7
 	},
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = -11;
 	pixel_y = -7
 	},
-/obj/item/reagent_containers/food/snacks/fish,
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp,
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = -11;
 	pixel_y = -7
 	},
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = 5;
 	pixel_y = 11
 	},
@@ -1421,12 +1421,12 @@
 "Dw" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/effect/spawner/map_spawner/loot,
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = 5;
 	pixel_y = -8
 	},
-/obj/item/reagent_containers/food/snacks/fish,
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp,
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = -11;
 	pixel_y = 4
 	},
@@ -2141,15 +2141,15 @@
 "Sx" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/effect/spawner/map_spawner/loot,
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = -11;
 	pixel_y = -7
 	},
-/obj/item/reagent_containers/food/snacks/fish{
+/obj/item/reagent_containers/food/snacks/fish/carp{
 	pixel_x = 5;
 	pixel_y = -8
 	},
-/obj/item/reagent_containers/food/snacks/fish,
+/obj/item/reagent_containers/food/snacks/fish/carp,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
 "SY" = (

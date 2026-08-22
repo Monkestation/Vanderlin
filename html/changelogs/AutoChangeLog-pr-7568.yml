@@ -1,6 +1,0 @@
-author: "AyyRobotics"
-delete-after: True
-changes:
-  - rscadd: "Church has been redesigned, adding new areas and overhauling old ones."
-  - rscadd: "Pathways around the Church, Graveyard, and Red Manor are more consistent, railings added to the Market Stalls and Mine."
-  - bugfix: "GMT's Oath now works in the Prayer Hall, Church, Church Exterior, Graveyard, and Crypt."

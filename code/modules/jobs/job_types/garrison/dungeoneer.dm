@@ -84,7 +84,7 @@
 	beltr = /obj/item/storage/fancy/ifak/prisonerkit
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backr = /obj/item/storage/backpack/satchel	// lack of satchel requires dealing with the merchant to correct, which requires entering town; not ideal. N.
-	backpack_contents = list(/obj/item/clothing/head/menacing, /obj/item/storage/keyring/dungeoneer, /obj/item/weapon/knuckles, /obj/item/weapon/whip/antique)
+	backpack_contents = list(/obj/item/clothing/head/menacing, /obj/item/storage/keyring/dungeoneer, /obj/item/weapon/knuckles, /obj/item/weapon/whip/repenta)
 
 
 /obj/item/storage/fancy/ifak/prisonerkit

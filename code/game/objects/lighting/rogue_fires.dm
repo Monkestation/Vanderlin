@@ -145,6 +145,39 @@
 	resting_range = 0
 	temperature_change = 0
 
+/obj/machinery/light/fueled/wallfire/candle/incense
+	name = "incense"
+	icon_state = "incense1"
+	base_state = "incense"
+	bulb_colour = "#ffa35c"
+	crossfire = FALSE
+	cookonme = FALSE
+	SET_BASE_PIXEL(0, 32)
+	soundloop = null
+	temperature_change = 0
+
+/obj/machinery/light/fueled/wallfire/candle/silver
+	name = "silver candle"
+	icon_state = "silvercandle1"
+	base_state = "silvercandle"
+	bulb_colour = "#ffa35c"
+	crossfire = FALSE
+	cookonme = FALSE
+	SET_BASE_PIXEL(0, 32)
+	soundloop = null
+	temperature_change = 0
+
+/obj/machinery/light/fueled/wallfire/candle/goldcandle
+	name = "gold candle"
+	icon_state = "goldcandle1"
+	base_state = "goldcandle"
+	bulb_colour = "#ffa35c"
+	crossfire = FALSE
+	cookonme = FALSE
+	SET_BASE_PIXEL(0, 32)
+	soundloop = null
+	temperature_change = 0
+
 /obj/machinery/light/fueled/wallfire/candle/OnCrafted(dirin, mob/user)
 	pixel_x = base_pixel_x
 	pixel_y = base_pixel_y
@@ -243,7 +276,6 @@
 	plane = GAME_PLANE_UPPER
 	cookonme = FALSE
 	temperature_change = 0
-	fog_parter_effect = null
 	var/shows_empty = TRUE
 
 /obj/machinery/light/fueled/torchholder/c
