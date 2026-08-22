@@ -13583,13 +13583,6 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
-"fII" = (
-/obj/structure/stairs/stone{
-	dir = 4
-	},
-/obj/structure/fluff/walldeco/feldshersign,
-/turf/open/floor/blocks,
-/area/under/cave)
 "fIW" = (
 /obj/structure/stairs,
 /turf/open/openspace,
@@ -45851,9 +45844,6 @@
 "sMt" = (
 /obj/structure/stairs/stone{
 	dir = 4
-	},
-/obj/structure/fluff/walldeco/feldshersign{
-	pixel_y = -32
 	},
 /turf/open/floor/blocks,
 /area/under/cave)
@@ -125922,7 +125912,7 @@ unJ
 luJ
 eIh
 pTm
-fII
+sMt
 sMt
 pTm
 eIh
@@ -166525,8 +166515,8 @@ iTe
 uEH
 fwi
 kwJ
-mFi
-hZn
+vLE
+vLE
 ele
 vcA
 biy
