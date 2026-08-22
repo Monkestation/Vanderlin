@@ -1560,7 +1560,6 @@
 #include "code\datums\mob_descriptors\descriptors\voice.dm"
 #include "code\datums\particle_weathers\_base.dm"
 #include "code\datums\particle_weathers\datum_types\fall_leaves.dm"
-#include "code\datums\particle_weathers\datum_types\fog.dm"
 #include "code\datums\particle_weathers\datum_types\rain.dm"
 #include "code\datums\particle_weathers\datum_types\snow_storm.dm"
 #include "code\datums\particle_weathers\sounds\looping_sounds.dm"
