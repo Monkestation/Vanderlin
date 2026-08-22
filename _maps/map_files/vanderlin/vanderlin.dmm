@@ -343,7 +343,7 @@
 /obj/structure/table/optable,
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "ahW" = (
 /obj/structure/water_pipe,
 /turf/closed/wall/mineral/pipe,
@@ -975,7 +975,7 @@
 	dir = 8
 	},
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "auT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -1495,7 +1495,7 @@
 "aIG" = (
 /obj/structure/fluff/walldeco/med6,
 /turf/closed/wall/mineral/stone,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "aJj" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -3271,7 +3271,7 @@
 /obj/item/weapon/surgery/scalpel,
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "btH" = (
 /obj/structure/water_pipe,
 /obj/structure/fake_machine/stockpile{
@@ -3734,7 +3734,7 @@
 "bEy" = (
 /obj/effect/decal/cleanable/blood/wallsplatter,
 /turf/closed/wall/mineral/stone,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "bEB" = (
 /obj/item/bait/sweet{
 	pixel_x = -6;
@@ -10496,6 +10496,9 @@
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/dirt,
 /area/outdoors/town)
+"esk" = (
+/turf/open/floor/cobble,
+/area/indoors/town/clinic_large)
 "esp" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone,
@@ -10655,7 +10658,7 @@
 /obj/effect/decal/cleanable/blood/old,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "evs" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobble/alt,
@@ -12685,7 +12688,7 @@
 	},
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "fmL" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 1
@@ -13249,7 +13252,7 @@
 /obj/effect/mapping_helpers/access/keyset/town/doctor,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobble,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "fAH" = (
 /obj/effect/waterfall{
 	pixel_x = 5
@@ -16150,7 +16153,7 @@
 "gPW" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "gQw" = (
 /obj/machinery/light/fueled/smelter,
 /obj/item/storage/crucible/random{
@@ -19156,7 +19159,7 @@
 	dir = 5
 	},
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "ide" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/fishing/line/bobber,
@@ -20157,7 +20160,7 @@
 "iyn" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/wood,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "iyp" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -22845,7 +22848,7 @@
 	dir = 1
 	},
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "jzy" = (
 /obj/structure/door{
 	name = "Sweeper's Quarters"
@@ -26785,7 +26788,7 @@
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "leB" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/burial_shroud,
@@ -27232,7 +27235,7 @@
 	},
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "lnQ" = (
 /obj/structure/fluff/railing/wood,
 /obj/machinery/light/fueled/firebowl/stump,
@@ -28112,7 +28115,7 @@
 "lIh" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/cobble,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "lIj" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -29935,7 +29938,7 @@
 	},
 /obj/item/weapon/tongs,
 /turf/open/floor/wood,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "mtr" = (
 /obj/structure/water_vent{
 	dir = 4
@@ -36945,7 +36948,7 @@
 	pixel_y = -32
 	},
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "plY" = (
 /obj/structure/rack,
 /obj/item/gun/ballistic/bow,
@@ -39240,7 +39243,7 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/cobble,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "qir" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -42688,7 +42691,7 @@
 	dir = 8
 	},
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "rAe" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -43121,7 +43124,7 @@
 "rJd" = (
 /obj/structure/fluff/walldeco/med,
 /turf/closed/wall/mineral/stone,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "rJg" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
@@ -43333,7 +43336,7 @@
 "rNl" = (
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/cobble,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "rNB" = (
 /turf/open/floor/blocks,
 /area/indoors/town/keep/kitchen/cellar)
@@ -44814,7 +44817,7 @@
 /obj/structure/table/wood/plain_alt,
 /obj/item/textbook/novice/medicine,
 /turf/open/floor/cobble,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "stm" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/two,
@@ -48025,7 +48028,7 @@
 	pixel_x = -24
 	},
 /turf/open/floor/wood,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "tJv" = (
 /obj/structure/door{
 	lockid = "apartment19";
@@ -48318,7 +48321,7 @@
 	},
 /obj/structure/chair/stool/bar,
 /turf/open/floor/wood,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "tNo" = (
 /obj/structure/kneestingers,
 /obj/structure/flora/grass/water/reeds,
@@ -52150,7 +52153,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/doctor,
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "vqa" = (
 /obj/structure/stairs{
 	dir = 1
@@ -53758,7 +53761,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/cobble,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "vUF" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/church/purple,
@@ -56639,7 +56642,7 @@
 	pixel_x = 12
 	},
 /turf/open/floor/wood,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "wVb" = (
 /obj/item/bin/water,
 /turf/open/floor/tile/bfloorz,
@@ -56655,7 +56658,7 @@
 /area/outdoors/mountains)
 "wVB" = (
 /turf/open/floor/tile/brick,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "wVN" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/river)
@@ -58846,7 +58849,7 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/wood,
-/area/under/town/sewer)
+/area/indoors/town/clinic_large)
 "xMn" = (
 /obj/structure/trap/wall_projectile,
 /turf/open/floor/churchrough,
@@ -59930,6 +59933,9 @@
 "ykl" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/outdoors/town)
+"ykm" = (
+/turf/open/floor/wood,
+/area/indoors/town/clinic_large)
 "ykx" = (
 /turf/closed/wall/mineral/craftstone,
 /area/outdoors/town/noble_manor/blue)
@@ -87402,15 +87408,15 @@ cAA
 cAA
 qvf
 xDF
-dLs
-dLs
-wpU
-wpU
-wpU
-wpU
-wpU
-dLs
-dLs
+hnC
+hnC
+npg
+npg
+npg
+npg
+npg
+hnC
+hnC
 jEQ
 jEQ
 jEQ
@@ -87604,15 +87610,15 @@ cAA
 cAA
 qvf
 xDF
-dLs
+hnC
 qip
 stl
-nQv
+esk
 lIh
 fAp
-nQv
+esk
 vUD
-dLs
+hnC
 pGp
 pGp
 jEQ
@@ -87806,15 +87812,15 @@ crf
 cAA
 qvf
 wpU
-wpU
-nQv
-nQv
-nQv
+npg
+esk
+esk
+esk
 rNl
-wpU
+npg
 aIG
-wpU
-wpU
+npg
+npg
 pGp
 pGp
 wpU
@@ -88008,15 +88014,15 @@ asC
 crf
 qvf
 wpU
-wpU
+npg
 ley
-nQv
-nQv
+esk
+esk
 rzU
 auM
 auM
 plU
-wpU
+npg
 pGp
 wpU
 wpU
@@ -88211,14 +88217,14 @@ cpf
 wpU
 wpU
 aIG
-hLm
+ykm
 tMT
 tJr
 fmh
 gPW
 wVB
 btz
-wpU
+npg
 pGp
 wpU
 qgv
@@ -88413,7 +88419,7 @@ cAA
 qvf
 wpU
 rJd
-hLm
+ykm
 iyn
 mtp
 jzw
@@ -88614,7 +88620,7 @@ cAA
 cAA
 qvf
 wpU
-dLs
+hnC
 xMg
 iyn
 wUX
@@ -88622,7 +88628,7 @@ evn
 idc
 lnv
 vpM
-dLs
+hnC
 pGp
 wpU
 oPw
@@ -88816,15 +88822,15 @@ cAA
 cAA
 qvf
 wpU
-dLs
-dLs
-wpU
-wpU
-wpU
-wpU
-wpU
-dLs
-dLs
+hnC
+hnC
+npg
+npg
+npg
+npg
+npg
+hnC
+hnC
 pGp
 wpU
 wpU
