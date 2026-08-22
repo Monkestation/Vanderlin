@@ -7378,6 +7378,10 @@
 	},
 /turf/closed/wall/mineral/decorstone/window,
 /area/indoors/town/clinic_large)
+"dcC" = (
+/obj/structure/fluff/fibermat/square,
+/turf/open/floor/cobblerock,
+/area/under/cave)
 "dcE" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/wood,
@@ -126584,7 +126588,7 @@ srW
 osm
 qFx
 wDX
-wDX
+dcC
 qFx
 qFx
 qFx
