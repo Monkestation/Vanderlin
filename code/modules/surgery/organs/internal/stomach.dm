@@ -13,8 +13,8 @@
 	current_blood = 20
 	blood_req = 2
 	oxygen_req = 4
-	nutriment_req = 1.5
-	hydration_req = 1.2
+	nutriment_req = 0.75 * RATE_OF_HUNGER_GLOBAL
+	hydration_req = 0.6 * RATE_OF_THIRST_GLOBAL
 
 	low_threshold_passed = "<span class='info'>My stomach flashes with pain before subsiding. Food doesn't seem like a good idea right now.</span>"
 	high_threshold_passed = "<span class='warning'>My stomach flares up with constant pain. I can hardly stomach the idea of food right now!</span>"
