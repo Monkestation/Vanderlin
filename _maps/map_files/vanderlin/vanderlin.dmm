@@ -15762,7 +15762,7 @@
 /area/indoors/town/shop)
 "gHJ" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir,
+/obj/structure/curtain/purplecurtain/dir,
 /turf/open/floor/ruinedwood,
 /area/indoors/town/tavern)
 "gHN" = (
@@ -15834,7 +15834,7 @@
 /area/indoors/town/church/chapel)
 "gKB" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/bluecurtain/dir{
 	dir = 8
 	},
 /turf/open/floor/churchrough,
@@ -16622,7 +16622,7 @@
 /area/indoors/town/bath)
 "hac" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/bluecurtain/dir{
 	dir = 4
 	},
 /turf/open/floor/churchrough,
@@ -19714,7 +19714,7 @@
 /area/outdoors/farm)
 "iqa" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/purplecurtain/dir{
 	dir = 4
 	},
 /turf/open/floor/wood,
@@ -19770,7 +19770,7 @@
 /area/under/cavewet)
 "irx" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/redcurtain/dir{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
@@ -21022,7 +21022,7 @@
 /area/outdoors/exposed/church)
 "iPl" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/bluecurtain/dir{
 	dir = 8
 	},
 /turf/open/floor/churchrough/pale,
@@ -21826,7 +21826,7 @@
 /area/indoors/town/noble_manor/yellow)
 "jgg" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/purplecurtain/dir{
 	dir = 8
 	},
 /turf/open/floor/woodturned,
@@ -24308,7 +24308,7 @@
 /area/indoors/town/noble_manor/blue)
 "kfo" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/purplecurtain/dir{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
@@ -26625,6 +26625,11 @@
 /obj/structure/flora/grass/water,
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
+"lbt" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/redcurtain/dir,
+/turf/open/floor/ruinedwood,
+/area/indoors/town/tavern)
 "lbx" = (
 /turf/open/openspace,
 /area/indoors/town/clinic_large/feldsher)
@@ -29035,7 +29040,7 @@
 /area/under/cave)
 "lZA" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/purplecurtain/dir{
 	dir = 1
 	},
 /turf/open/floor/wood,
@@ -31327,10 +31332,10 @@
 	},
 /area/outdoors/river)
 "mVN" = (
-/obj/structure/curtain/bounty/dir{
+/obj/structure/window/solid,
+/obj/structure/curtain/purplecurtain/dir{
 	dir = 8
 	},
-/obj/structure/window/solid,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
 "mVQ" = (
@@ -33671,10 +33676,10 @@
 /obj/structure/bars{
 	layer = 2.8
 	},
-/obj/structure/curtain/bounty/dir{
+/obj/structure/window/solid,
+/obj/structure/curtain/greencurtain/dir{
 	dir = 8
 	},
-/obj/structure/window/solid,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/shop)
 "nYq" = (
@@ -40992,7 +40997,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/yellow)
 "qRO" = (
-/obj/structure/curtain/bounty/dir,
+/obj/structure/curtain/bluecurtain/dir,
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/town/tavern)
 "qSj" = (
@@ -43070,10 +43075,10 @@
 /obj/structure/bars{
 	layer = 2.8
 	},
-/obj/structure/curtain/bounty/dir{
+/obj/structure/window/solid,
+/obj/structure/curtain/greencurtain/dir{
 	dir = 1
 	},
-/obj/structure/window/solid,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/shop)
 "rHU" = (
@@ -48066,7 +48071,7 @@
 /area/indoors/town/keep/heir/heir2)
 "tKh" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/purplecurtain/dir{
 	dir = 8
 	},
 /turf/open/floor/wood,
@@ -51821,13 +51826,13 @@
 /turf/open/floor/metal,
 /area/indoors/town)
 "vjT" = (
-/obj/structure/curtain/bounty/dir{
-	dir = 4
-	},
 /obj/structure/bars{
 	layer = 2.8
 	},
 /obj/structure/window/solid,
+/obj/structure/curtain/greencurtain/dir{
+	dir = 4
+	},
 /turf/open/floor/tile,
 /area/indoors/town/shop)
 "vjZ" = (
@@ -54012,10 +54017,10 @@
 /obj/structure/bars{
 	layer = 2.8
 	},
-/obj/structure/curtain/bounty/dir{
+/obj/structure/window/solid,
+/obj/structure/curtain/greencurtain/dir{
 	dir = 4
 	},
-/obj/structure/window/solid,
 /turf/open/floor/tile/diamond/blue,
 /area/indoors/town/shop)
 "wam" = (
@@ -56181,13 +56186,6 @@
 /obj/item/cooking/pan,
 /turf/open/floor/tile,
 /area/indoors/town/noble_manor/blue)
-"wMZ" = (
-/obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
-	dir = 8
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/town)
 "wNb" = (
 /obj/structure/flora/grass/herb/salvia{
 	pixel_x = 7;
@@ -57914,7 +57912,7 @@
 /area/outdoors/town/roofs)
 "xuf" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/purplecurtain/dir{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
@@ -59325,11 +59323,11 @@
 /area/indoors/town/merc_guild)
 "xWP" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
-	dir = 8
-	},
 /obj/structure/bars{
 	layer = 2.8
+	},
+/obj/structure/curtain/greencurtain/dir{
+	dir = 8
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/shop)
@@ -163574,7 +163572,7 @@ lXk
 bYD
 pwZ
 mWr
-wMZ
+mVN
 mVN
 eeE
 pwZ
@@ -245147,7 +245145,7 @@ nRI
 nRI
 nRI
 lsd
-gHJ
+lbt
 sbv
 dkq
 dkq
@@ -245349,7 +245347,7 @@ nRI
 nRI
 nRI
 lsd
-gHJ
+lbt
 bdc
 jVn
 nmC
