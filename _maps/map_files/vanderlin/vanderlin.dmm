@@ -48366,7 +48366,7 @@
 /area/indoors/town/keep/phys)
 "tOT" = (
 /obj/structure/door/stone{
-	name = "Clinic kitchen"
+	name = "Clinic Kitchen"
 	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/town/clinic,
