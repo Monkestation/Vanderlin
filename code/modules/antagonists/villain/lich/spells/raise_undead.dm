@@ -52,7 +52,7 @@
 	if(. & SPELL_CANCEL_CAST)
 		return
 
-	if(cast_on.stat != DEAD)
+	if(cast_on.stat != DEAD && cast_on.get_blood_volume() > BLOOD_VOLUME_SURVIVE)
 		to_chat(owner, span_warning("I cannot raise the living."))
 		return . | SPELL_CANCEL_CAST
 
