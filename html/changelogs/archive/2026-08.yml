@@ -219,3 +219,84 @@
       them wear clothes.
   realforest2001:
   - rscdel: Disables Maniac pending rework to be more fitting.
+2026-08-20:
+  Banditwithdrugs:
+  - map: 'Changed the tavern''s first floor
+
+      <!-- Both :cl:''s are required for the changelog to work! You can put your name
+      to the right of the first :cl: if you want to overwrite your GitHub username
+      as author ingame. -->
+
+      <!-- You can use multiple of the same prefix (they''re only used for the icon
+      ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
+      generally represent how a player might be affected by the changes rather than
+      a summary of the PR''s contents. -->
+
+      ## Pre-Merge Checklist
+
+      <!-- Don''t bother filling these in while creating your Pull Request, just click
+      the checkboxes after the Pull Request is opened and you are redirected to the
+      page. -->
+
+      - [x] You tested this on a local server.
+
+      - [x] This code did not runtime during testing.
+
+      - [x] You documented all of your changes.
+
+      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
+      and errors. It is important to test your code/feature/fix locally. -->
+
+      <img width="1120" height="697" alt="image" src="https://github.com/user-attachments/assets/f8328fb3-7f8c-455b-96a0-256839d6052f"
+      />
+
+      <img width="1146" height="802" alt="image" src="https://github.com/user-attachments/assets/92c51956-0838-4521-8441-164d80b6354a"
+      />'
+  Blumengama:
+  - rscadd: Added more furniature options.
+  - image: Sprites for above.
+  ModDownloading:
+  - rscadd: Golden Psycrosses can be bought in the Loadout.
+2026-08-21:
+  MissyNym:
+  - map: Adjusts doors in the Church to be more descriptive as to their destinations.
+  copper-404:
+  - rscadd: Adds a court agent hideout.
+  - qol: New and improved Garrison, Stewardry and central square area.
+  - rscadd: 'Added a bell to the top of the city watch garrison, a side entrance to
+      the keep, more publicly available SCOMs, and another publicly available stockpile,
+      but most importantly: a slot machine.'
+  - qol: Added a small area of safe, ambush-free basin land southeast of the town.
+  - rscadd: Added a few religious shrines for the intrepid explorer.
+2026-08-22:
+  CheffieGithub:
+  - rscdel: Removed natural fog
+  - balance: Reduced duration and probability of weather
+  ModDownloading:
+  - balance: Shortsword damage increased from 16 to 22, and the Cut intent deals full
+      damage instead of 85%.
+  - balance: Sabre damage increased from 20 to 24.
+  - balance: Iron Warhammer damage increased from 20 to 22, and they have the Thrust
+      intent now like the other Warhammers.
+  - balance: Steel and Silver Warhammer damage reduced from 25 to 24.
+  - balance: Rapiers now have the Lunge intent. All forms of the Lunge intent now
+      have a short charge-up time.
+  - balance: Confessions and Accusations on people with Inquisitorial Suspicion will
+      always give a few marques, even if the target is innocent.
+  Telvayne:
+  - qol: Reduced hunger/thirst rates
+  - refactor: brought hunger and thirst variables back into operation
+  realforest2001:
+  - rscadd: Added Gold and Blacksteel quarterstaves.
+  - rscadd: Added Steel, Bronze and Blacksteel whips.
+  - image: Added sprites for above, plus butler unique whip sprite all from Azure
+      Peak.
+  - rscadd: Changed the description of Repenta En to match the new sprite.
+  - rscdel: Removed Repenta En from all mobs that had it other than Dungeoneer and
+      Gaoler.
+  - image: Added crossbow sprites from Azure Peak.
+  - image: Added sprites for more zizo and other inhumen themed weapons, for later
+      use, from Azure Peak.
+  - rscadd: Added Baotha swordstaff, unaccessible at present.
+  - rscdel: Removed an unused inhumen paladin preset based on maniac patron.
+  - rscadd: Added blacksteel swords, rapier, dagger and throwing knife.

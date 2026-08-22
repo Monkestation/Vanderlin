@@ -4894,6 +4894,13 @@
 	},
 /turf/open/openspace,
 /area/outdoors/town/roofs)
+"ciZ" = (
+/obj/structure/door/stone{
+	name = "Pestra's Mercy"
+	},
+/obj/effect/mapping_helpers/access/keyset/church/general,
+/turf/open/floor/church,
+/area/indoors/town/church)
 "cjg" = (
 /obj/structure/table/wood/counter{
 	dir = 4
@@ -7011,7 +7018,9 @@
 /turf/open/floor/cobblerock,
 /area/under/town/basement)
 "ddy" = (
-/obj/structure/door/window,
+/obj/structure/door/window{
+	name = "Lower Halls"
+	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church)
@@ -9265,7 +9274,9 @@
 	},
 /area/indoors/town/smithy)
 "eeW" = (
-/obj/structure/door/viewport,
+/obj/structure/door/viewport{
+	name = "Soup Kitchen"
+	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /turf/open/floor/blocks,
@@ -23183,7 +23194,9 @@
 "khz" = (
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Briars' Balcony"
+	},
 /turf/open/floor/church,
 /area/indoors/town/church)
 "khF" = (
@@ -24033,7 +24046,8 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/structure/door/viewport{
-	dir = 8
+	dir = 8;
+	name = "Kitchen"
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/church)
@@ -24855,7 +24869,9 @@
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/yellow)
 "kVI" = (
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Graveyard"
+	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
@@ -28185,7 +28201,9 @@
 /turf/open/floor/carpet,
 /area/indoors/town/tavern)
 "mqp" = (
-/obj/structure/door/iron/bars,
+/obj/structure/door/iron/bars{
+	name = "Graveyard"
+	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /turf/open/floor/cobblerock,
 /area/outdoors/exposed/church/graveyard)
@@ -29359,12 +29377,6 @@
 /obj/effect/mapping_helpers/access/keyset/town/tombwarden,
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/closet/keyrack,
-/obj/item/key/mercenary,
-/obj/item/key/mercenary,
-/obj/item/key/mercenary,
-/obj/item/key/mercenary,
-/obj/item/key/mercenary,
-/obj/item/key/mercenary,
 /obj/item/key/tomb,
 /obj/item/key/tomb,
 /obj/item/key/tomb,
@@ -30655,7 +30667,9 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/shop)
 "nsv" = (
-/obj/structure/door/window,
+/obj/structure/door/window{
+	name = "Soup Kitchen Pantry"
+	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /turf/open/floor/blocks,
 /area/indoors/town/church)
@@ -33809,7 +33823,9 @@
 /area/outdoors/farm)
 "oJM" = (
 /obj/effect/mapping_helpers/access/keyset/church/general,
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Briars' Storage"
+	},
 /turf/open/floor/ruinedwood/alt,
 /area/indoors/town/church)
 "oKj" = (
@@ -39199,7 +39215,9 @@
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "qXh" = (
-/obj/structure/door,
+/obj/structure/door{
+	name = "Soup Kitchen"
+	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
@@ -39432,7 +39450,9 @@
 /turf/open/openspace,
 /area/outdoors/river)
 "rcS" = (
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Royal Crypt"
+	},
 /obj/effect/mapping_helpers/access/keyset/church/grave,
 /turf/open/floor/cobble,
 /area/indoors/town/church/crypt)
@@ -41708,7 +41728,9 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/tavern)
 "rZS" = (
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Dining Hall"
+	},
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -44162,7 +44184,9 @@
 "tcZ" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/church/general,
-/obj/structure/door,
+/obj/structure/door{
+	name = "Soup Kitchen Pantry"
+	},
 /turf/open/floor/blocks,
 /area/indoors/town/church)
 "tda" = (
@@ -45216,7 +45240,9 @@
 /turf/open/openspace,
 /area/indoors/town/tavern)
 "tBL" = (
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Stairwell"
+	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /turf/open/floor/churchmarble,
@@ -46229,7 +46255,9 @@
 "tZb" = (
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Dining Hall"
+	},
 /turf/open/floor/cobble,
 /area/indoors/town/church)
 "tZe" = (
@@ -48127,6 +48155,13 @@
 /mob/living/simple_animal/hostile/retaliate/bigrat,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"uOS" = (
+/obj/structure/door/stone{
+	name = "Church Clinic"
+	},
+/obj/effect/mapping_helpers/access/keyset/church/general,
+/turf/open/floor/church,
+/area/indoors/town/church)
 "uPf" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/garrison)
@@ -52074,6 +52109,13 @@
 "wpf" = (
 /turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
+"wpu" = (
+/obj/structure/door/window{
+	name = "Root Cellar"
+	},
+/obj/effect/mapping_helpers/access/keyset/church/general,
+/turf/open/floor/blocks,
+/area/indoors/town/church)
 "wpB" = (
 /obj/structure/pottery_lathe,
 /turf/open/floor/dirt,
@@ -53080,7 +53122,9 @@
 /turf/open/floor/concrete,
 /area/indoors/town/dwarfin)
 "wIi" = (
-/obj/structure/door/stone,
+/obj/structure/door/stone{
+	name = "Church Clinic"
+	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /turf/open/floor/cobblerock,
@@ -130825,7 +130869,7 @@ qFx
 qFx
 hTX
 hTX
-nsv
+wpu
 hTX
 lYj
 lYj
@@ -174447,7 +174491,7 @@ wdh
 jqG
 jCo
 jdg
-jqQ
+uOS
 hTX
 kdm
 jMe
@@ -175461,7 +175505,7 @@ wdV
 wdV
 cwT
 hTX
-jqQ
+ciZ
 hTX
 hTX
 hTX
