@@ -8,6 +8,7 @@
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	heretical_spell = TRUE
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 
 	invocation_type = INVOCATION_WHISPER
 	invocation = "Caedis conspectus"

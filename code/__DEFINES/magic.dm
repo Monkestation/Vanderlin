@@ -100,13 +100,17 @@
 #define MAGIC_RESISTANCE_MIND (1 << 1)
 /// Holy magic resistance that blocks miracles
 #define MAGIC_RESISTANCE_HOLY (1 << 2)
-/// Holy magic resistance that blocks unholy magic (revenant, cult, vampire, voice of god)
+/// Holy magic resistance that blocks unholy magic (revenant, cult, voice of god)
 #define MAGIC_RESISTANCE_UNHOLY (1 << 3)
+/// Magic resistance that blocks vampiric magic and blood spells.
+#define MAGIC_RESISTANCE_BLOOD (1 << 4)
 
 DEFINE_BITFIELD(antimagic_flags, list(
 	"MAGIC_RESISTANCE" = MAGIC_RESISTANCE,
 	"MAGIC_RESISTANCE_HOLY" = MAGIC_RESISTANCE_HOLY,
 	"MAGIC_RESISTANCE_MIND" = MAGIC_RESISTANCE_MIND,
+	"MAGIC_RESISTANCE_UNHOLY" = MAGIC_RESISTANCE_UNHOLY,
+	"MAGIC_RESISTANCE_BLOOD" = MAGIC_RESISTANCE_BLOOD,
 ))
 
 // Spell types
@@ -116,10 +120,9 @@ DEFINE_BITFIELD(antimagic_flags, list(
 #define SPELL_STAMINA 2
 /// Miracle, uses devotion and thus requires a devotion holder
 #define SPELL_MIRACLE 3
-
-/// Casted with the essence gauntlet, using essence vials
+/// Cast with the essence gauntlet, using essence vials
 #define SPELL_ESSENCE 4
-/// Casted using your bloodpool
+/// Cast using your bloodpool
 #define SPELL_BLOOD 5
 ///this is a "miracle" granted by "psydon's" inquisition
 #define SPELL_PSYDONIC_MIRACLE 6

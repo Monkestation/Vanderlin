@@ -10,6 +10,7 @@
 	required_form = FORM_BLOOD
 	required_technique = null
 	heretical_spell = TRUE
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 
 	invocation = "DR'N LF'E!"
 	invocation_type = INVOCATION_SHOUT

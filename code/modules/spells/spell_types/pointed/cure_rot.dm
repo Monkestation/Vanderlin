@@ -119,6 +119,7 @@
 	required_level = 10
 	spell_flags = SPELL_UNETCHABLE
 	heretical_spell = TRUE
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 
 	required_items = list()
 

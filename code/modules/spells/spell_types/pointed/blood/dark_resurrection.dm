@@ -13,6 +13,7 @@
 	required_level = 14
 	spell_flags = SPELL_UNETCHABLE
 	heretical_spell = TRUE
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 
 	invocation_type = INVOCATION_SHOUT
 	invocation = "Excieo cruor!!"

@@ -11,6 +11,7 @@
 	spell_cost = 125
 	spell_flags = SPELL_UNETCHABLE
 	heretical_spell = TRUE
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD

@@ -11,6 +11,7 @@
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_DESTRUCTION
 	heretical_spell = TRUE
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 
 	invocation = "Blood Bolt!!"
 	invocation_type = INVOCATION_SHOUT

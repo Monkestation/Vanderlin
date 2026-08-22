@@ -15,7 +15,7 @@
 	var/list/last_used = list()
 
 	// Volumes of poison added by the curse.
-	var/poison_hit = 0.75
+	var/poison_hit = 1.5
 	var/poison_pickup = 5
 	var/poison_equip = 10
 
