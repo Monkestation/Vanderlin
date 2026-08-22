@@ -4803,14 +4803,6 @@
 /obj/structure/carpet/purple,
 /turf/open/floor/tile,
 /area/indoors/town/church)
-"bYU" = (
-/obj/structure/bookcase,
-/obj/item/recipe_book/underworld,
-/obj/item/recipe_book/underworld,
-/obj/item/recipe_book/alchemy,
-/obj/item/recipe_book/alchemy,
-/turf/open/floor/blocks/stonered/tiny,
-/area/indoors/town/clinic_large/apothecary)
 "bZd" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/candle/yellow,
@@ -9320,7 +9312,7 @@
 	dir = 8
 	},
 /turf/open/floor/dirt/road,
-/area/outdoors/town)
+/area/under/cave)
 "dVc" = (
 /obj/structure/table/wood/reinf_long,
 /obj/item/reagent_containers/glass/cup/wooden{
@@ -15370,6 +15362,10 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
+"gzj" = (
+/obj/item/reagent_containers/glass/bucket/wooden,
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/clinic_large/apothecary)
 "gzm" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
@@ -28967,30 +28963,27 @@
 /area/indoors/town/church)
 "lYo" = (
 /obj/item/essence_vial{
-	pixel_x = -5;
+	pixel_x = -8;
+	pixel_y = 21
+	},
+/obj/item/essence_vial{
 	pixel_y = 15
 	},
 /obj/item/essence_vial{
-	pixel_y = 6;
-	pixel_x = -1
-	},
-/obj/item/essence_vial{
-	pixel_y = 11;
+	pixel_y = 22;
 	pixel_x = 8
 	},
 /obj/item/essence_vial{
-	pixel_x = 7;
+	pixel_x = -8;
+	pixel_y = 9
+	},
+/obj/item/essence_vial{
+	pixel_x = 9;
+	pixel_y = 11
+	},
+/obj/structure/table/wood/reinf_long,
+/obj/item/essence_vial{
 	pixel_y = 3
-	},
-/obj/item/essence_vial{
-	pixel_x = -10;
-	pixel_y = 2
-	},
-/obj/structure/table/wood/reinf_long{
-	dir = 1
-	},
-/obj/item/essence_vial{
-	pixel_y = -4
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/blocks/paving,
@@ -36097,6 +36090,14 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep/garrison)
+"oVT" = (
+/obj/structure/bookcase,
+/obj/item/recipe_book/alchemy,
+/obj/item/recipe_book/alchemy,
+/obj/item/recipe_book/underworld,
+/obj/item/recipe_book/underworld,
+/turf/open/floor/blocks/stonered/tiny,
+/area/indoors/town/clinic_large/apothecary)
 "oVV" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/reagent_containers/glass/bottle/black/komuchisake,
@@ -41884,6 +41885,10 @@
 "rld" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/guest/guest2)
+"rlg" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/dirt/road,
+/area/under/cave)
 "rlk" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/church/purple,
@@ -46515,8 +46520,9 @@
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/magician)
 "tcg" = (
-/obj/effect/landmark/start/clinicapprentice,
-/turf/open/floor/twig,
+/obj/machinery/light/fueled/hearth,
+/obj/item/reagent_containers/glass/bucket/pot,
+/turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "tci" = (
 /obj/structure/chair/bench/couch/right/lord_primary{
@@ -48602,6 +48608,12 @@
 	},
 /turf/open/floor/metal,
 /area/indoors/town/train_station)
+"tUu" = (
+/obj/effect/landmark/start/clinicapprentice{
+	dir = 8
+	},
+/turf/open/floor/twig,
+/area/indoors/town/clinic_large/apothecary)
 "tUJ" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 5
@@ -49790,6 +49802,15 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town)
+"uwR" = (
+/obj/structure/door/viewport{
+	dir = 8;
+	name = "Apothecary Backdoor"
+	},
+/obj/effect/mapping_helpers/access/keyset/town/apothecary,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/blocks/paving,
+/area/indoors/town/clinic_large/apothecary)
 "uwW" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/woodturned/nosmooth,
@@ -55867,10 +55888,10 @@
 /area/outdoors/town/keep)
 "wJA" = (
 /obj/effect/spawner/map_spawner/loot/potion_vitals,
-/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
 /obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "wJF" = (
@@ -125346,9 +125367,9 @@ gRT
 gRT
 gRT
 gRT
+tUu
 gRT
 gRT
-neD
 neD
 moO
 nMH
@@ -125550,7 +125571,7 @@ chO
 chO
 tmo
 tcg
-neD
+gRT
 neD
 moO
 qkD
@@ -125752,7 +125773,7 @@ gRT
 gRT
 gRT
 gRT
-neD
+gRT
 neD
 moO
 qxx
@@ -125954,8 +125975,8 @@ kkQ
 neD
 neD
 neD
-neD
 rnj
+gzj
 moO
 tLm
 osm
@@ -126155,10 +126176,10 @@ rcz
 nEO
 neD
 neD
-bYU
+wAQ
 lYo
-mTb
 aUu
+moO
 gKQ
 gKQ
 qFx
@@ -126357,10 +126378,10 @@ neD
 neD
 neD
 neD
-srW
+oVT
 gKQ
 gKQ
-gKQ
+uwR
 gKQ
 qFx
 qFx
@@ -126559,11 +126580,11 @@ uSZ
 uSZ
 uSZ
 nJd
+srW
 osm
 qFx
-qFx
-qFx
-qFx
+wDX
+wDX
 qFx
 qFx
 qFx
@@ -126764,10 +126785,10 @@ osm
 gKQ
 hnC
 qFx
-qFx
-qFx
-qFx
-qFx
+nam
+wDX
+wDX
+wDX
 qFx
 eIh
 kwJ
@@ -126966,10 +126987,10 @@ gUp
 mJK
 lAf
 qFx
-qFx
-qFx
-qFx
-qFx
+rlg
+wDX
+wDX
+nam
 qFx
 kwJ
 mFi
@@ -127168,11 +127189,11 @@ sHE
 nts
 lAf
 qFx
-qFx
-qFx
-qFx
-kwJ
-mFi
+wDX
+nam
+nam
+nam
+wDX
 kwJ
 mFi
 kwJ
@@ -127370,11 +127391,11 @@ tZE
 eRq
 lAf
 qFx
-qFx
-qFx
-qFx
-kwJ
-mFi
+wDX
+wDX
+wDX
+nam
+wDX
 mFi
 hZn
 kwJ
@@ -127575,7 +127596,7 @@ qFx
 qFx
 qFx
 qFx
-mFi
+wDX
 dUX
 mFi
 kwJ
