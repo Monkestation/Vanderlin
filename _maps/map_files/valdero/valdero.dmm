@@ -334,7 +334,9 @@
 /area/indoors/town/keep/throne)
 "bn" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir,
+/obj/structure/curtain/redcurtain/dir{
+	dir = 1
+	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/tavern)
 "bo" = (
@@ -1042,7 +1044,7 @@
 /obj/structure/window/openclose{
 	dir = 1
 	},
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/cyancurtain/dir{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/darker,
@@ -3309,6 +3311,9 @@
 /area/outdoors/town)
 "mB" = (
 /obj/structure/window/solid,
+/obj/structure/curtain/browncurtain/dir{
+	dir = 4
+	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/shop)
 "mC" = (
@@ -3940,8 +3945,8 @@
 /area/indoors/soilsons)
 "pb" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
-	dir = 8
+/obj/structure/curtain/redcurtain/dir{
+	dir = 4
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
@@ -5227,8 +5232,8 @@
 /area/indoors/shelter/town)
 "tK" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
-	dir = 8
+/obj/structure/curtain/greencurtain/dir{
+	dir = 4
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/merc_guild)
@@ -6219,13 +6224,6 @@
 /obj/item/weapon/tongs,
 /turf/open/floor/cobble,
 /area/indoors/town/garrison)
-"xA" = (
-/obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/town)
 "xB" = (
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
@@ -6615,8 +6613,8 @@
 /obj/structure/window/openclose{
 	dir = 8
 	},
-/obj/structure/curtain/bounty/dir{
-	dir = 4
+/obj/structure/curtain/redcurtain/dir{
+	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/tavern)
@@ -6672,7 +6670,7 @@
 "yW" = (
 /obj/structure/window/solid,
 /obj/structure/curtain/bounty/dir{
-	dir = 4
+	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
@@ -7124,8 +7122,8 @@
 /area/indoors/town/church)
 "Ar" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
-	dir = 8
+/obj/structure/curtain/greencurtain/dir{
+	dir = 4
 	},
 /turf/open/floor/wood,
 /area/indoors/town/merc_guild)
@@ -7858,8 +7856,8 @@
 /obj/structure/window/openclose{
 	dir = 4
 	},
-/obj/structure/curtain/bounty/dir{
-	dir = 8
+/obj/structure/curtain/redcurtain/dir{
+	dir = 4
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/tavern)
@@ -8356,8 +8354,8 @@
 /obj/structure/window/openclose{
 	dir = 8
 	},
-/obj/structure/curtain/bounty/dir{
-	dir = 4
+/obj/structure/curtain/redcurtain/dir{
+	dir = 8
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
@@ -9428,9 +9426,7 @@
 /turf/open/floor/blocks,
 /area/indoors/town/garrison)
 "Jp" = (
-/obj/structure/curtain/bounty{
-	color = "grey"
-	},
+/obj/structure/curtain/redcurtain,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor)
 "Jq" = (
@@ -10852,7 +10848,7 @@
 /obj/structure/window/openclose{
 	dir = 1
 	},
-/obj/structure/curtain/bounty/dir{
+/obj/structure/curtain/greencurtain/dir{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/turned/darker,
@@ -13302,8 +13298,8 @@
 /area/indoors/town/garrison)
 "YC" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
-	dir = 4
+/obj/structure/curtain/greencurtain/dir{
+	dir = 8
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/merc_guild)
@@ -13327,8 +13323,8 @@
 /area/outdoors/mountains)
 "YG" = (
 /obj/structure/window/solid,
-/obj/structure/curtain/bounty/dir{
-	dir = 8
+/obj/structure/curtain/redcurtain/dir{
+	dir = 4
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/tavern)
@@ -138434,7 +138430,7 @@ xh
 xh
 xh
 xh
-xA
+Mq
 Db
 EX
 fQ
