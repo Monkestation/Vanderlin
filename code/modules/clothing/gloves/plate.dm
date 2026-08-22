@@ -91,6 +91,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	melting_material = /datum/material/avantyne
 
 /obj/item/clothing/gloves/plate/matthios
 	name = "gilded gauntlets"

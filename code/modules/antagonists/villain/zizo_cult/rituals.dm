@@ -362,11 +362,11 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	S.set_up(1, 1, center)
 	S.start()
 
-	new /obj/item/weapon/sword/long/greatsword/zizo(center)
+	new /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser(center)
 
-	new /obj/item/weapon/sword/arming(center)
+	new /obj/item/weapon/sword/arming/zizo_arming(center)
 
-	new /obj/item/weapon/mace/steel(center)
+	new /obj/item/weapon/sword/long/zizo_longsword(center)
 
 	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
