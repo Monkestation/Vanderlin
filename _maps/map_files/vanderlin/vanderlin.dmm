@@ -15573,7 +15573,7 @@
 "gCZ" = (
 /obj/structure/well/climb_up,
 /obj/item/reagent_containers/glass/bucket/wooden,
-/turf/open/water/clean/dirt,
+/turf/open/floor/sand,
 /area/under/town/sewer)
 "gDd" = (
 /turf/open/openspace,
