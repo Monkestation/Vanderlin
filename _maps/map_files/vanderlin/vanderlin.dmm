@@ -21002,7 +21002,7 @@
 	dir = 8
 	},
 /obj/effect/mapping_helpers/access/keyset/town/clinic,
-/turf/closed/basic,
+/turf/open/floor/churchbrick,
 /area/indoors/town/clinic_large)
 "iOR" = (
 /turf/open/floor/tile/masonic{
