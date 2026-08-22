@@ -12174,7 +12174,7 @@
 	name = "Clinic"
 	},
 /obj/effect/mapping_helpers/access/keyset/town/clinic,
-/turf/closed/basic,
+/turf/open/floor/tile,
 /area/indoors/town/clinic_large)
 "fbp" = (
 /obj/structure/water_pipe,
