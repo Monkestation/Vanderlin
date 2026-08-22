@@ -8640,7 +8640,7 @@
 	pixel_x = -6;
 	pixel_y = 13;
 	redstone_id = "Merchant";
-	name = "Lockdown"
+	name = "Lockdown/Trapdoor"
 	},
 /obj/structure/table/wood/fancy/blue,
 /obj/structure/lever{
@@ -27446,11 +27446,6 @@
 /obj/effect/mapping_helpers/access/keyset/manor/lord/butler,
 /turf/open/floor/hexstone,
 /area/indoors/town/keep/lord_appt)
-"lsB" = (
-/obj/structure/fake_machine/lottery_roguetown,
-/obj/structure/chair/stool,
-/turf/open/floor/cobble,
-/area/outdoors/town)
 "lsG" = (
 /obj/structure/stairs/stone/church{
 	dir = 1
@@ -29062,6 +29057,14 @@
 /obj/structure/rack,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church)
+"lZK" = (
+/obj/effect/mapping_helpers/access/keyset/church/inquisition,
+/obj/structure/door/iron/bars{
+	name = "Dungeon of the Damned"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/greenstone,
+/area/under/town/basement)
 "lZN" = (
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
@@ -39938,6 +39941,11 @@
 /obj/structure/fake_machine/scomm{
 	pixel_y = -32
 	},
+/obj/structure/fake_machine/lottery_roguetown{
+	pixel_y = 0;
+	pixel_x = -32
+	},
+/obj/structure/chair/stool,
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "qxx" = (
@@ -54285,6 +54293,12 @@
 /obj/structure/door/iron/bars,
 /turf/open/floor/cobble/alt,
 /area/under/town/sewer)
+"weH" = (
+/obj/structure/floordoor{
+	redstone_id = "Merchant"
+	},
+/turf/open/openspace,
+/area/outdoors/town)
 "weQ" = (
 /obj/structure/flora/grass,
 /obj/structure/wild_plant/nospread/poppy{
@@ -79282,15 +79296,15 @@ wpU
 wpU
 wpU
 wpU
-jEQ
-dYE
-fPU
-dYE
-jEQ
-grz
-grz
+wpU
 qvf
 qvf
+qvf
+qvf
+cAA
+cAA
+cAA
+cAA
 wpU
 pGp
 pGp
@@ -79485,11 +79499,11 @@ wpU
 pGp
 pGp
 jEQ
-nxW
-nxW
-nxW
-nxW
-nxW
+dYE
+lZK
+dYE
+jEQ
+grz
 grz
 qvf
 cAA
@@ -119688,9 +119702,9 @@ czz
 gwN
 ujA
 qbb
-lsB
-czz
-hZn
+weH
+weH
+weH
 qxt
 qbb
 wiy
