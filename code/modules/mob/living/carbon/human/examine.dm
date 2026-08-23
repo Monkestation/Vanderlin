@@ -134,7 +134,7 @@
 			LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<img src=[headshot_link] width=100 height=100/>")
 		if(client?.is_donator())
 			if(flavortext || headshot_link || ooc_extra_link) // only show flavor text if there is a flavor text and we show headshot
-				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>")
+				LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_HEADSHOT, "<a href='byond://?src=[REF(src)];task=view_flavor_text;'>Examine Closer</a>")
 
 /mob/living/carbon/human/examine_more(mob/user)
 	. = ..()

@@ -25,14 +25,14 @@
 
 /obj/item/ammo_casing/caseless/bolt/poison/Initialize(mapload, ...)
 	. = ..()
-	reagents.add_reagent(/datum/reagent/berrypoison, 2)
+	reagents.add_reagent(/datum/reagent/poison/berry, 2)
 
 /obj/item/ammo_casing/caseless/bolt/poison/potent
 	desc = "A bolt coated with a potent poison."
 
 /obj/item/ammo_casing/caseless/bolt/poison/potent/Initialize(mapload, ...)
 	. = ..()
-	reagents.add_reagent(/datum/reagent/strongpoison, 2)
+	reagents.add_reagent(/datum/reagent/poison/doom, 2)
 
 /obj/item/ammo_casing/caseless/bolt/pyro
 	name = "pyroclastic bolt"

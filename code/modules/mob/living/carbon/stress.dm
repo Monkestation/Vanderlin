@@ -34,7 +34,7 @@
 	var/oldstress = 0
 	var/stressbuffer = 0
 	/// List of stressor instances
-	var/list/stressors = list()
+	var/list/stressors
 	var/last_announced_event_type
 	COOLDOWN_DECLARE(stress_indicator)
 
@@ -192,7 +192,7 @@
 		existing_event.on_apply(src)
 	else
 		new_event.timer += world.time
-		stressors += new_event
+		LAZYADD(stressors, new_event)
 		adjust_stress(new_event.get_stress(src))
 		new_event.on_apply(src)
 	SEND_SIGNAL(src, COMSIG_CARBON_ADD_STRESS, new_event)
@@ -207,7 +207,7 @@
 		if(stress_event)
 			stress_event.on_remove(src)
 			adjust_stress(-1 * stress_event.get_stress(src))
-			stressors -= stress_event
+			LAZYREMOVE(stressors, stress_event)
 			qdel(stress_event)
 
 /mob/living/carbon/add_stress_list(list/event_list)

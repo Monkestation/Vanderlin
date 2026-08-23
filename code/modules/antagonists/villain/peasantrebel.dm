@@ -56,8 +56,6 @@
 			return FALSE
 		if(new_owner.unconvertable)
 			return FALSE
-		if(new_owner.current && HAS_TRAIT(new_owner.current, TRAIT_MINDSHIELD))
-			return FALSE
 
 
 /datum/antagonist/prebel/create_team(datum/team/prebels/new_team)

@@ -126,12 +126,17 @@
 			stomach = new /obj/item/organ/stomach/acid_spit
 			stomach.Insert(spawned)
 		if("Goblin Eyes - Nightvision")
-			var/obj/item/organ/eyes/eyes = spawned.getorganslot(ORGAN_SLOT_EYES)
-			if(eyes)
+			var/list/eye_list = spawned.getorganslotlist(ORGAN_SLOT_EYES)
+			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
 				eyes.Remove(spawned,1)
 				QDEL_NULL(eyes)
-			eyes = new /obj/item/organ/eyes/night_vision/nightmare
-			eyes.Insert(spawned)
+
+			var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
+			var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
+			LE.switch_side(LEFT_SIDE)
+
+			LE.Insert(spawned)
+			RE.Insert(spawned)
 		if("Greenskin Hands - Strong Grip")
 			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/greenskin)
@@ -152,6 +157,8 @@
 			spawned.put_in_hands(kit)
 		if("Serpentine Glands - Thermal Vision and Venom")
 			spawned.add_traits(list(TRAIT_THERMAL_VISION, TRAIT_POISONBITE), JOB_TRAIT)
+			spawned.update_sight()
+
 
 /datum/outfit/inquisitor/inspector
 	name = "Inspector (Herr Prafekt)"
@@ -167,7 +174,7 @@
 	mask = /obj/item/clothing/face/spectacles/inq/spawnpair
 	gloves = /obj/item/clothing/gloves/leather/grenzel
 	wrists = /obj/item/clothing/neck/psycross/silver
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	armor = /obj/item/clothing/armor/medium/scale/inqcoat/armored
 	r_hand = /obj/item/reagent_containers/glass/bottle/aflask
 	backpack_contents = list(

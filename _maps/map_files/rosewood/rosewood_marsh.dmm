@@ -1789,7 +1789,7 @@
 /obj/item/clothing/armor/plate/full/zizo,
 /obj/item/clothing/shoes/boots/armor/zizo,
 /obj/item/clothing/gloves/plate/zizo,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
 	name = "Zizo Knight";
@@ -3334,7 +3334,7 @@
 /obj/item/clothing/armor/plate/full/zizo,
 /obj/item/clothing/shoes/boots/armor/zizo,
 /obj/item/clothing/gloves/plate/zizo,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
 	name = "Zizo Knight";
@@ -3769,7 +3769,7 @@
 /obj/item/clothing/armor/plate/full/zizo,
 /obj/item/clothing/shoes/boots/armor/zizo,
 /obj/item/clothing/gloves/plate/zizo,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
 	name = "Zizo Knight";
@@ -4540,7 +4540,7 @@
 /obj/item/clothing/armor/plate/full/zizo,
 /obj/item/clothing/shoes/boots/armor/zizo,
 /obj/item/clothing/gloves/plate/zizo,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
 	name = "Zizo Knight";
@@ -6268,7 +6268,7 @@
 /obj/item/clothing/armor/plate/full/zizo,
 /obj/item/clothing/shoes/boots/armor/zizo,
 /obj/item/clothing/gloves/plate/zizo,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
 	name = "Zizo Knight";
@@ -8364,7 +8364,7 @@
 /obj/item/clothing/armor/plate/full/zizo,
 /obj/item/clothing/shoes/boots/armor/zizo,
 /obj/item/clothing/gloves/plate/zizo,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /turf/open/floor/cobblerock,
 /area/indoors/lich)
 "Tu" = (

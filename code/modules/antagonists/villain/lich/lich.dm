@@ -58,6 +58,7 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
 		TRAIT_DEATHSIGHT,
+		TRAIT_NO_ORGAN_PROCESS,
 	)
 
 	var/list/spells = list(
@@ -127,9 +128,9 @@
 
 	L.set_faction(list(FACTION_UNDEAD))
 	L.mob_biotypes |= MOB_UNDEAD
-	L.grant_undead_eyes()
 	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
 	L.skeletonize(FALSE)
+	L.grant_undead_eyes()
 
 	L.equipOutfit(/datum/outfit/lich)
 	L.set_patron(/datum/patron/inhumen/zizo)
@@ -155,10 +156,15 @@
 	beltr = /obj/item/reagent_containers/glass/bottle/manapot
 	beltl = /obj/item/weapon/knife/dagger/steel
 	r_hand = /obj/item/weapon/polearm/woodstaff
+	backpack_contents = list(
+		/obj/item/spellbook/expert/starter/death = 1
+	)
 
 	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lich)
 
-	H.adjust_spell_points(17) //Same as CM - Until they receive their spellbook.
+	H.adjust_technique_mastery_points(12)
+	H.adjust_form_mastery_points(20)
+	H.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_DEATH = 2))
 	H.grant_language(/datum/language/undead)
 	if(H.dna?.species)
 		H.dna.species.native_language = "Zizo Chant"
