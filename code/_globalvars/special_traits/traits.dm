@@ -879,7 +879,7 @@
 /datum/special_trait/dark_secrets
 	name = "Dark Secrets"
 	greet_text = span_notice("You have a dark secret, hidden power you have concealed for most of your life. Is now the time to let it out?")
-	req_text = "Be an Apostate."
+	req_text = "Be an Apostate. Don't be Monarch."
 	allowed_patrons = list(/datum/patron/godless/autotheist, /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/godless, /datum/patron/godless/naivety)
 	weight = 15 //Should be fine.
 	restricted_jobs = list(/datum/job/lord, /datum/job/monk, /datum/job/priest, /datum/job/templar)

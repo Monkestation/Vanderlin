@@ -1215,7 +1215,7 @@
 	created_item = /obj/item/weapon/sword/bloodsteel
 
 /datum/anvil_recipe/weapons/bloodsteel/broadsword
-	name = "Bloodsteel Broadsword (+Blacksteel Bar)"
+	name = "Bloodsteel Broadsword (+Bloodsteel Bar)"
 	additional_items = list(/obj/item/ingot/bloodsteel)
 	created_item = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
 
@@ -1230,7 +1230,7 @@
 	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
 
 /datum/anvil_recipe/weapons/bloodsteel/halberd
-	name = "Bloodsteel Halberd (+Blacksteel Bar, +Small Log)"
+	name = "Bloodsteel Halberd (+Bloodsteel Bar, +Small Log)"
 	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/halberd/bloodsteel
 
