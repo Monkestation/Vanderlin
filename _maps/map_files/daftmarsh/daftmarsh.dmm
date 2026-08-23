@@ -6199,7 +6199,7 @@
 /obj/item/key/apartments/apartment2,
 /obj/item/key/apartments/apartment1,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/hexstone,
 /area/indoors/town/steward)
@@ -11505,7 +11505,7 @@
 /obj/effect/spawner/guaranteed_map_spawner/listed/steward_keys,
 /obj/item/storage/keyring,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/closet/keyrack,
+/obj/structure/keyrack,
 /turf/open/floor/hexstone,
 /area/indoors/town/steward)
 "jtn" = (
@@ -11995,7 +11995,7 @@
 /turf/open/floor/wood/nosmooth,
 /area/outdoors/town)
 "jNM" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = -32;
 	pixel_x = 0
 	},
@@ -17999,7 +17999,7 @@
 	},
 /area/outdoors/town/roofs)
 "oVT" = (
-/obj/structure/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_y = 0;
 	pixel_x = 32
 	},
