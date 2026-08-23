@@ -4603,6 +4603,12 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/middeck)
+"EQ" = (
+/obj/structure/industrial_lift/tram{
+	fake = 1
+	},
+/turf/open/openspace,
+/area/outdoors/beach)
 "ER" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 4
@@ -64995,8 +65001,8 @@ BC
 BC
 BC
 Oz
-BC
-BC
+EQ
+EQ
 BC
 BC
 BC
