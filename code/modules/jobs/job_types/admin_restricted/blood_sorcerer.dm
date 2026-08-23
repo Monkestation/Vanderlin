@@ -72,7 +72,7 @@
 		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
 		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-		"Ominous hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/cult,
+		"Magus hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/magus,
 	)
 	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "BLOOD SORCERER")
 
@@ -80,7 +80,7 @@
 		"Blood robes" = /obj/item/clothing/shirt/robe/colored/blood,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-		"Necromancer robes" = /obj/item/clothing/shirt/robe/necromancer
+		"Magus robes" = /obj/item/clothing/shirt/robe/magus
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "BLOOD SORCERER")
 
