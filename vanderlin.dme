@@ -2235,6 +2235,7 @@
 #include "code\game\objects\items\weapons\melee\swords.dm"
 #include "code\game\objects\items\weapons\melee\unarmed.dm"
 #include "code\game\objects\items\weapons\melee\whips.dm"
+#include "code\game\objects\items\weapons\melee\zizo.dm"
 #include "code\game\objects\lighting\_base_light.dm"
 #include "code\game\objects\lighting\_base_roguelight.dm"
 #include "code\game\objects\lighting\_base_roguestreet.dm"

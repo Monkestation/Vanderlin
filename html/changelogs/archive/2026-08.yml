@@ -300,3 +300,10 @@
   - rscadd: Added Baotha swordstaff, unaccessible at present.
   - rscdel: Removed an unused inhumen paladin preset based on maniac patron.
   - rscadd: Added blacksteel swords, rapier, dagger and throwing knife.
+2026-08-23:
+  TheDoktorZ:
+  - map: A new tomb tile added.
+  realforest2001:
+  - rscadd: Added new darksteel weapons for zizo nerds.
+  ta3754859-max:
+  - bugfix: Painless battle & Flawed immortality rituals no longer nuke your stats
