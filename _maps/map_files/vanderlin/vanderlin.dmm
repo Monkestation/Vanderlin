@@ -477,32 +477,6 @@
 /obj/item/clothing/head/peaceflower,
 /turf/open/water/hotspring,
 /area/outdoors/eora)
-"all" = (
-/obj/structure/table/wood/fancy/purple,
-/obj/item/lipstick/jade,
-/obj/item/lipstick/purple{
-	pixel_x = -6
-	},
-/obj/item/lipstick/white{
-	pixel_x = -2;
-	pixel_y = 7
-	},
-/obj/item/lipstick/green{
-	pixel_x = -3;
-	pixel_y = 12
-	},
-/obj/item/lipstick/blue{
-	pixel_x = 1;
-	pixel_y = 11
-	},
-/obj/item/lipstick/black{
-	pixel_x = -9;
-	pixel_y = 7
-	},
-/obj/item/weapon/knife/scissors/steel,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/tile/diamond/purple,
-/area/under/cave)
 "alu" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/naturalstone,
@@ -916,9 +890,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/merc_guild)
-"atz" = (
-/turf/open/floor/tile/diamond/purple,
-/area/under/cave)
 "atD" = (
 /obj/structure/fluff/statue/gargoyle/moss,
 /turf/open/floor/dirt/road,
@@ -4135,12 +4106,6 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
-"bNc" = (
-/obj/structure/chair/wood/alt/chair_noble/purple{
-	dir = 1
-	},
-/turf/open/floor/tile/diamond/purple,
-/area/under/cave)
 "bNo" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/rope,
@@ -26939,22 +26904,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
-"lgW" = (
-/obj/structure/table/wood/fancy/purple,
-/obj/structure/closet/crate/chest/neu_fancy{
-	pixel_y = 10
-	},
-/obj/item/perfume/cherry,
-/obj/item/perfume/jasmine,
-/obj/item/perfume/lavender,
-/obj/item/perfume/mint,
-/obj/item/perfume/pear,
-/obj/item/perfume/rose,
-/obj/item/perfume/vanilla,
-/obj/item/perfume/strawberry,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/tile/diamond/purple,
-/area/under/cave)
 "lhy" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -38309,11 +38258,6 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass,
 /area/outdoors/exposed/church)
-"pQL" = (
-/obj/structure/table/wood/fancy/purple,
-/obj/structure/mirror,
-/turf/open/floor/tile/diamond/purple,
-/area/under/cave)
 "pQT" = (
 /obj/structure/bed/wool,
 /obj/item/bedsheet/wool,
@@ -116302,9 +116246,9 @@ waU
 qFx
 qFx
 qFx
-eIh
-all
-atz
+qFx
+qFx
+qFx
 qFx
 qFx
 kbY
@@ -116504,9 +116448,9 @@ qOq
 qFx
 qFx
 qFx
-eIh
-pQL
-bNc
+qFx
+qFx
+qFx
 qFx
 qFx
 uuQ
@@ -116706,9 +116650,9 @@ drY
 qFx
 qFx
 qFx
-eIh
-lgW
-atz
+qFx
+qFx
+qFx
 qFx
 qFx
 uuQ
