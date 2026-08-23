@@ -520,3 +520,15 @@
   - bugfix: hdrow still having access to zizo cursed
   - rscadd: snow elves/half snow elves can be younglings now
   - code_imp: snow elf/hsnow elf added to more defines that makes sense
+2026-07-30:
+  Archeonan:
+  - rscdel: Removed dropshrink from most weapons
+  Monkeke2:
+  - rscadd: More songs for accordion, hurdy-gurdy, drums and guitar.
+  realforest2001:
+  - rscadd: Added a strength control variable for Gravity spell.
+2026-07-31:
+  CheffieGithub:
+  - bugfix: Fixed config subsystem having no stat entry
+  Sulaboy:
+  - balance: Kneestingers take damage when walked on by people without immunity.

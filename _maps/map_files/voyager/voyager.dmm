@@ -71,6 +71,25 @@
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/middeck)
+"aE" = (
+/obj/item/weapon/sword/long/exe/cloth,
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/clothing/cloak/raincloak/colored/mortus{
+	name = "cloak"
+	},
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/clothing/pants/trou/leather/splint,
+/obj/item/clothing/armor/cuirass/iron,
+/obj/item/clothing/neck/gorget,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/storage/belt/leather/black,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/item/clothing/wrists/bracers/iron,
+/obj/item/clothing/shirt/undershirt/colored/black,
+/obj/item/clothing/head/sack,
+/turf/open/floor/wood,
+/area/ship/shipbrig)
 "aF" = (
 /obj/structure/table/wood{
 	dir = 8;
@@ -307,31 +326,6 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
-"ck" = (
-/obj/item/natural/worms/leech{
-	pixel_x = -7;
-	pixel_y = -3
-	},
-/obj/item/natural/worms/leech{
-	pixel_x = 1;
-	pixel_y = 3
-	},
-/obj/item/natural/worms/leech{
-	pixel_x = -1;
-	pixel_y = 1
-	},
-/obj/item/natural/worms/leech{
-	pixel_x = 7;
-	pixel_y = -8
-	},
-/obj/item/natural/worms/leech{
-	pixel_x = 10
-	},
-/obj/structure/fluff/walldeco/med{
-	pixel_x = -32
-	},
-/turf/open/water/swamp,
-/area/ship/middeck)
 "cp" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
@@ -2399,6 +2393,31 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/middeck)
+"qy" = (
+/obj/item/natural/worms/leech{
+	pixel_x = -7;
+	pixel_y = -3
+	},
+/obj/item/natural/worms/leech{
+	pixel_x = 1;
+	pixel_y = 3
+	},
+/obj/item/natural/worms/leech{
+	pixel_x = -1;
+	pixel_y = 1
+	},
+/obj/item/natural/worms/leech{
+	pixel_x = 7;
+	pixel_y = -8
+	},
+/obj/item/natural/worms/leech{
+	pixel_x = 10
+	},
+/obj/structure/fluff/walldeco/med{
+	pixel_x = -32
+	},
+/turf/open/water/swamp,
+/area/ship/middeck)
 "qA" = (
 /obj/structure/chair/bench/couch/left/lord_secondary,
 /obj/machinery/light/fueled/wallfire/candle/l{
@@ -4102,15 +4121,6 @@
 	},
 /turf/open/floor/wood,
 /area/ship/middeck)
-"BA" = (
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/obj/machinery/light/fueled/hearth,
-/obj/item/reagent_containers/glass/bucket/pot/copper,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/ruinedwood/chevron,
-/area/ship/middeck)
 "BC" = (
 /turf/open/openspace,
 /area/outdoors/beach)
@@ -4410,6 +4420,15 @@
 /obj/item/clothing/armor/leather/jacket/sea,
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
+"Dz" = (
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/obj/machinery/light/fueled/hearth,
+/obj/item/reagent_containers/glass/bucket/pot/copper,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/ruinedwood/chevron,
+/area/ship/middeck)
 "DC" = (
 /obj/structure/table/wood{
 	icon_state = "longtable";
@@ -6782,25 +6801,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/ship/middeck)
-"TK" = (
-/obj/item/weapon/sword/long/exe/cloth,
-/obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/clothing/cloak/raincloak/colored/mortus{
-	name = "cloak"
-	},
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/clothing/pants/trou/leather/splint,
-/obj/item/clothing/armor/cuirass/iron,
-/obj/item/clothing/neck/gorget,
-/obj/item/clothing/shoes/boots,
-/obj/item/storage/belt/leather/black,
-/obj/item/flashlight/flare/torch/lantern,
-/obj/item/clothing/wrists/bracers/iron,
-/obj/item/clothing/shirt/undershirt/colored/black,
-/obj/item/clothing/head/sack,
-/turf/open/floor/wood,
-/area/ship/shipbrig)
 "TL" = (
 /obj/effect/decal/cobbleedge{
 	dir = 5
@@ -13079,7 +13079,7 @@ hf
 aY
 tL
 tL
-ck
+qy
 tL
 tL
 NT
@@ -13282,7 +13282,7 @@ oY
 MW
 WN
 vs
-BA
+Dz
 tL
 tL
 NT
@@ -17518,7 +17518,7 @@ LM
 LY
 gp
 mR
-TK
+aE
 gH
 LI
 NY

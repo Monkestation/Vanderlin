@@ -618,7 +618,7 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 
 /// Output current targets to the player
 
-/datum/mind/proc/recall_targets(mob/recipient, window=1, var/type)
+/datum/mind/proc/recall_targets(mob/recipient, window=1, type)
 	var/output
 	if(type == "Ordos")
 		output = "<B>[SSmapping.config.map_name] Scouting Report</B><br>"

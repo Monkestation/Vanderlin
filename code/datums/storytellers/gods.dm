@@ -60,6 +60,7 @@
 		),
 		"Set 4" = list(
 			STATS_SKILLS_DREAMED = list("name" = "Skills dreamed:", "points" = 0.265, "capacity" = 80),
+			STATS_NOC_REVIVALS = list("name" = "Holy revivals:", "points" = 6.25, "capacity" = 75),
 		),
 		"Set 5" = list(
 			STATS_MANA_SPENT = list("name" = "Mana spent:", "points" = 0.010, "capacity" = 90),

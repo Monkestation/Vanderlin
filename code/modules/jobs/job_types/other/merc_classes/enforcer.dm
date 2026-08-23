@@ -54,7 +54,7 @@
 		pants = /obj/item/clothing/pants/trou/leather/eastpants1
 		armor = /obj/item/clothing/shirt/undershirt/eastshirt1
 		gloves = /obj/item/clothing/gloves/eastgloves2
-		shoes = /obj/item/clothing/shoes/boots
+		shoes = /obj/item/clothing/shoes/boots/darkboots
 	else
 		armor = /obj/item/clothing/armor/basiceast/captainrobe
 		shoes = /obj/item/clothing/shoes/rumaclan

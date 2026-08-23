@@ -33,13 +33,16 @@
  * want to cancel a spell in before_cast and would like the cooldown restart, call this.
  *
  * ## Other procs of note:
- * - [level_spell][/datum/action/cooldown/spell/level_spell] is where the process of adding a spell level is handled.
- * this can be extended if you wish to add unique effects on level up for wizards.
- * - [delevel_spell][/datum/action/cooldown/spell/delevel_spell] is where the process of removing a spell level is handled.
- * this can be extended if you wish to undo unique effects on level up for wizards.
  * - [update_spell_name][/datum/action/cooldown/spell/update_spell_name] updates the prefix of the spell name based on its level.
  */
+
+/// Dedicated maptext holder for the ARC indicator, separate from cooldown and such
+/atom/movable/screen/arc_maptext_holder
+	maptext_x = 6
+	maptext_y = 12
+
 /datum/action/cooldown/spell
+	abstract_type = /datum/action/cooldown/spell
 	name = "Spell"
 	desc = "A wizard spell."
 	background_icon = 'icons/mob/actions/roguespells.dmi'
@@ -54,25 +57,20 @@
 
 	/// Variable for type of spell.
 	var/spell_type = SPELL_MANA
-	/// School of magic. (Might go unused)
-	var/school = SCHOOL_UNSET
-	/// Cost to learn this spell in the tree.
-	var/point_cost = 0
 	/// Cost to cast based on [spell_type].
 	var/spell_cost = 0
 
 	///this is purely for etching
 	var/spell_tier = 1
 
+	///do we even bother to show in the ui?
+	var/learnable = TRUE
+
 	/// The sound played on cast.
 	var/sound = 'sound/magic/whiteflame.ogg'
 
 	/// If the spell uses the wizard spell rank system, the cooldown reduction per rank of the spell
 	var/cooldown_reduction_per_rank = 0 SECONDS
-	/// The current spell level, if taken multiple times by a wizard
-	var/spell_level = 1
-	/// The max possible spell level
-	var/spell_max_level = 5
 
 	/// What is uttered when the user casts the spell.
 	var/invocation
@@ -108,12 +106,13 @@
 	/// Stat associated with spell enchancements.
 	var/associated_stat = STAT_INTELLIGENCE
 
-	/// Assoc list of [datum/attunement] to value.
-	var/list/attunements
+	///the color we use (overrides attunements for animate color)
+	var/spell_color
+
 	///list of essences we can use as a sub for cost
 	var/list/essences
-	/// Value summed from caster and spell attunements to adjust some spell effects.
-	var/attuned_strength
+	/// Flat magnitude bonus/penalty pulled from active form/technique modifiers (spell_modifier components), computed once per cast.
+	var/spell_magnitude_modifier = 0
 
 	// Pointed vars
 	// In the TG refactor these weren't a given but almost all our spells are pointed including most spell types.
@@ -180,8 +179,37 @@
 	/// Timer ID for the auto cancel, so we can cancel it
 	var/auto_cancel_timer = null
 
+	/// Technique (class) this spell belongs to, e.g. TECHNIQUE_DESTRUCTION. Null = techniqueless.
+	var/required_technique = null
+	/// Form (element) this spell belongs to, e.g. FORM_FIRE. Null = formless.
+	var/required_form = null
+	/// How many points must be invested in required_technique (and required_form, if set)
+	/// before this spell can be learned. Ignored if both required_technique and required_form are null.
+	var/required_level = 0
+	/// Optional list of other spell typepaths that must already be unlocked before this one
+	/// can be learned. Lets you build a simple prerequisite chain within a technique/form.
+	var/list/prerequisite_spells
+	///the amount of charges we have if we are a spellbook varient
+	var/initial_charges = 10
+	/// If TRUE, this spell's uses are gated by a spellbook item's charge pool instead of (or in addition to) spell_cost.
+	var/uses_spellbook_charges = FALSE
+	/// The spell_mastery datum that owns our charge pool, set when granted from a spellbook.
+	var/datum/spell_mastery/mastery_source
+	/// The specific item instance our charge pool is keyed against.
+	var/atom/movable/charge_item
+	/// Cached overlay image showing remaining charges, added/removed from action buttons.
+	var/image/charge_overlay
+	/// Impact visual intensity. SPELL_IMPACT_NONE / SPELL_IMPACT_LOW / SPELL_IMPACT_MEDIUM / SPELL_IMPACT_HIGH
+	var/spell_impact_intensity = SPELL_IMPACT_LOW
+	/// Override color for the impact effect. If null, uses light_color.
+	var/spell_impact_color
+
+
+
 /datum/action/cooldown/spell/New(Target)
 	. = ..()
+	if(!required_technique) //! ONCE WE BALANCE REMOVE
+		initial_charges *= 3
 	if(!active_msg)
 		active_msg = "You prepare to use [src] on a target..."
 	if(!deactive_msg)
@@ -189,6 +217,12 @@
 
 	if(click_to_activate && !charge_required)
 		ranged_mousepointer = 'icons/effects/mousemice/charge/spell_charged.dmi'
+
+	if(required_form && !spell_color)
+		spell_color = GLOB.form_colors[required_form]
+
+	if(!spell_impact_color)
+		spell_impact_color = spell_color
 
 	if(!charge_required)
 		return
@@ -219,7 +253,7 @@
 
 	if(charge_drain)
 		if(!check_cost(charge_drain))
-			owner.balloon_alert(owner, "I cannot uphold the channeling!")
+			owner.balloon_alert(owner, "i cannot uphold the channeling!")
 			cancel_casting()
 			return PROCESS_KILL
 		invoke_cost(charge_drain)
@@ -228,7 +262,7 @@
 	if(world.time > (charge_started_at + charge_target_time))
 		// We don't want that mouseUp to end in sadness
 		if(!check_cost(charge_drain))
-			owner.balloon_alert(owner, "I cannot uphold the channeling!")
+			owner.balloon_alert(owner, "i cannot uphold the channeling!")
 			cancel_casting()
 			return PROCESS_KILL
 		owner.client?.mouse_override_icon = 'icons/effects/mousemice/charge/spell_charged.dmi'
@@ -385,23 +419,30 @@
 		SEND_SIGNAL(owner, COMSIG_MOB_ABILITY_FINISHED, src)
 	return target_val
 
-/// Adjust the base charge time based on the users stats
-/datum/action/cooldown/spell/proc/get_adjusted_charge_time()
-	if(charge_time <= 0)
-		return
+/// Queries the owner for any active form/technique modifiers (from spell_modifier components)
+/// that apply to THIS spell, based on its required_form / required_technique.
+/// Returns list(SPELLMOD_COST = mult, SPELLMOD_CASTSPEED = mult, SPELLMOD_MAGNITUDE = total) - defaults if nothing matches.
+/datum/action/cooldown/spell/proc/get_form_technique_modifiers()
+	var/list/result = list(SPELLMOD_COST = 1, SPELLMOD_CASTSPEED = 1, SPELLMOD_MAGNITUDE = 1)
+	if(!owner)
+		return result
 
-	var/mob/living/living_owner = owner
-	var/new_time = charge_time
+	var/list/modifiers = list()
+	SEND_SIGNAL(owner, COMSIG_SPELL_REQUEST_MODIFIERS, modifiers)
+	if(!length(modifiers))
+		return result
 
-	new_time -= charge_time * GET_MOB_SKILL_VALUE_OLD(living_owner, associated_skill) * 0.05
+	for(var/list/entry in modifiers)
+		if(required_form && entry["form"] == required_form)
+			result[SPELLMOD_COST] *= entry[SPELLMOD_COST]
+			result[SPELLMOD_CASTSPEED] *= entry[SPELLMOD_CASTSPEED]
+			result[SPELLMOD_MAGNITUDE] += entry[SPELLMOD_MAGNITUDE]
+		if(required_technique && entry["technique"] == required_technique)
+			result[SPELLMOD_COST] *= entry[SPELLMOD_COST]
+			result[SPELLMOD_CASTSPEED] *= entry[SPELLMOD_CASTSPEED]
+			result[SPELLMOD_MAGNITUDE] += entry[SPELLMOD_MAGNITUDE]
 
-	var/owner_stat = living_owner.get_stat(associated_stat)
-	if(owner_stat > 10)
-		new_time -= charge_time * (owner_stat - 10) * 0.02
-	else
-		new_time += charge_time * (10 - owner_stat) * 0.02
-
-	return max(new_time, 1 DECISECONDS)
+	return result
 
 /// Adjust the base spell cost based on the users stats
 /datum/action/cooldown/spell/proc/get_adjusted_cost(cost_override)
@@ -421,29 +462,29 @@
 	else
 		new_cost += spell_cost * (10 - owner_stat) * 0.02
 
+	new_cost *= get_form_technique_modifiers()[SPELLMOD_COST]
+
 	return max(new_cost, 0)
 
-/// Do any attunement handling in here or any time after before_cast
-/datum/action/cooldown/spell/proc/handle_attunements()
-	SHOULD_CALL_PARENT(TRUE)
+/// Adjust the base charge time based on the users stats
+/datum/action/cooldown/spell/proc/get_adjusted_charge_time()
+	if(charge_time <= 0)
+		return
 
-	var/mob/living/caster = owner
-	var/list/datum/mana_pool/usable_pools = caster.get_all_pools()
-	var/list/total_attunements = GLOB.default_attunements.Copy()
+	var/mob/living/living_owner = owner
+	var/new_time = charge_time
 
-	for(var/datum/mana_pool/pool as anything in usable_pools)
-		for(var/negative_attunement in pool.negative_attunements)
-			total_attunements[negative_attunement] += pool.negative_attunements[negative_attunement]
-		for(var/attunement in pool.attunements)
-			total_attunements[attunement] += pool.attunements[attunement]
+	new_time -= charge_time * GET_MOB_SKILL_VALUE_OLD(living_owner, associated_skill) * 0.05
 
-	var/total_value = 1
-	for(var/datum/attunement/attunement as anything in attunements)
-		if(!(attunement in total_attunements))
-			continue
-		total_value += total_attunements[attunement] * attunements[attunement]
+	var/owner_stat = living_owner.get_stat(associated_stat)
+	if(owner_stat > 10)
+		new_time -= charge_time * (owner_stat - 10) * 0.02
+	else
+		new_time += charge_time * (10 - owner_stat) * 0.02
 
-	attuned_strength = clamp(total_value, 0.5, 2.5)
+	new_time /= get_form_technique_modifiers()[SPELLMOD_CASTSPEED]
+
+	return max(new_time, 1 DECISECONDS)
 
 /// Checks if the owner of the spell can currently cast it.
 /// Does not check anything involving potential targets.
@@ -453,12 +494,12 @@
 
 	if(!(spell_flags & SPELL_IGNORE_SPELLBLOCK) && HAS_TRAIT(owner, TRAIT_SPELLBLOCK))
 		if(feedback)
-			owner.balloon_alert(owner, "Can't focus on casting...")
+			owner.balloon_alert(owner, "can't focus on casting...")
 		return FALSE
 
 	if(HAS_TRAIT(owner, TRAIT_NOC_CURSE))
 		if(feedback)
-			owner.balloon_alert(owner, "My magicka has left me...")
+			owner.balloon_alert(owner, "my magicka has left me...")
 		return FALSE
 
 	for(var/datum/action/cooldown/spell/spell in owner.actions)
@@ -466,17 +507,27 @@
 			continue
 		if(spell.currently_charging)
 			if(feedback)
-				owner.balloon_alert(owner, "Already channeling!")
+				owner.balloon_alert(owner, "already channeling!")
 			return FALSE
 
 	if(!check_cost(feedback = feedback))
+		return FALSE
+
+	if(!(spell_requirements & SPELL_CASTABLE_WHILE_MOUNTED) && owner.client && owner.buckled && isliving(owner.buckled))
+		if(feedback)
+			owner.balloon_alert(owner, "too distracted riding to cast!")
+		return FALSE
+
+	if(uses_spellbook_charges && mastery_source && !mastery_source.has_spellbook_charges(type))
+		if(feedback)
+			owner.balloon_alert(owner, "no charges remaining!")
 		return FALSE
 
 	// Certain spells are not allowed on the centcom zlevel
 	var/turf/caster_turf = get_turf(owner)
 	if((spell_requirements & SPELL_REQUIRES_STATION) && is_centcom_level(caster_turf.z))
 		if(feedback)
-			owner.balloon_alert(owner, "Cannot cast here!")
+			owner.balloon_alert(owner, "cannot cast here!")
 		return FALSE
 
 	if((spell_requirements & SPELL_REQUIRES_MIND) && !owner.mind)
@@ -487,7 +538,7 @@
 	// that corresponds with the spell's antimagic, then they can't actually cast the spell
 	if((spell_requirements & SPELL_REQUIRES_NO_ANTIMAGIC) && !owner.can_cast_magic(antimagic_flags))
 		if(feedback)
-			owner.balloon_alert(owner, "Antimagic is preventing casting!")
+			owner.balloon_alert(owner, "antimagic is preventing casting!")
 		return FALSE
 
 	if(!can_invoke(feedback = feedback))
@@ -496,7 +547,7 @@
 	if(!ishuman(owner))
 		if(spell_requirements & (SPELL_REQUIRES_HUMAN))
 			if(feedback)
-				owner.balloon_alert(owner, "Can only be cast by humans!")
+				owner.balloon_alert(owner, "can only be cast by humans!")
 			return FALSE
 
 	if(LAZYLEN(required_items))
@@ -506,9 +557,25 @@
 				found = TRUE
 				break
 		if(!found && feedback)
-			owner.balloon_alert(owner, "Missing something to cast!")
+			owner.balloon_alert(owner, "missing something to cast!")
 			return FALSE
 
+	return TRUE
+
+/datum/action/cooldown/spell/proc/can_cast_lunar_magic(feedback)
+	if(!owner)
+		return FALSE
+
+	if(HAS_TRAIT(owner, TRAIT_NOC_CURSE))
+		if(feedback)
+			to_chat(owner, span_warning("The Moon Prince has turned his divine wrath upon me! I cannot wield the moonlight!"))
+		return FALSE
+
+	var/area/indoors/town/church/dreamcave/chamber = get_area(owner)
+	if((GLOB.tod == DAWN || GLOB.tod == DAY) && !(istype(chamber)))
+		if(feedback)
+			to_chat(owner, span_warning("I cannot wield moonlight during the day!"))
+		return FALSE
 	return TRUE
 
 /**
@@ -520,9 +587,12 @@
 /datum/action/cooldown/spell/proc/is_valid_target(atom/cast_on)
 	if(click_to_activate && !self_cast_possible)
 		if(cast_on == owner)
-			owner.balloon_alert(owner, "Can't self cast!")
+			owner.balloon_alert(owner, "can't self cast!")
 			return FALSE
-
+	if(spell_requirements & SPELL_REQUIRES_SAME_Z)
+		if(owner.z != cast_on.z)
+			owner.balloon_alert(owner, "they are to far to cast on!")
+			return FALSE
 	return TRUE
 
 // The actual cast chain occurs here, in Activate().
@@ -550,8 +620,7 @@
 		// That way stuff like teleports or shape-shifts can be invoked before ocurring
 		spell_feedback(owner)
 
-	if(length(attunements))
-		handle_attunements()
+	spell_magnitude_modifier = get_form_technique_modifiers()[SPELLMOD_MAGNITUDE]
 
 	// Actually cast the spell. Main effects go here
 	cast(target)
@@ -598,7 +667,7 @@
 			return sig_return
 
 		if(get_dist(owner, cast_on) > cast_range)
-			owner.balloon_alert(owner, "Too far away!")
+			owner.balloon_alert(owner, "too far away!")
 			return sig_return | SPELL_CANCEL_CAST
 
 		if((spell_type == SPELL_MIRACLE) && HAS_TRAIT(cast_on, TRAIT_ATHEISM_CURSE))
@@ -642,6 +711,47 @@
 		return FALSE
 	return TRUE
 
+/datum/action/cooldown/spell/proc/get_remaining_charges()
+	if(!uses_spellbook_charges || !mastery_source || !charge_item)
+		return -1
+	var/list/charges = mastery_source.spellbook_charges[charge_item]
+	if(!charges)
+		return -1
+	return charges[type] || 0
+
+/datum/action/cooldown/spell/update_button_status(atom/movable/screen/movable/action_button/button, force = FALSE)
+	. = ..()
+	if(!uses_spellbook_charges || !button)
+		return
+
+	var/charges = get_remaining_charges()
+	if(charges < 0)
+		if(charge_overlay)
+			button.cut_overlay(charge_overlay)
+			charge_overlay = null
+		return
+
+	if(charge_overlay)
+		button.cut_overlay(charge_overlay)
+	else
+		charge_overlay = image(icon = 'icons/hud/screen_gen.dmi', icon_state = "")
+		charge_overlay.plane = ABOVE_HUD_PLANE
+		charge_overlay.pixel_x = 20
+		charge_overlay.pixel_y = 20
+		charge_overlay.maptext_x = 0
+		charge_overlay.maptext_y = 0
+		charge_overlay.maptext_width = 16
+		charge_overlay.maptext_height = 16
+
+	var/badge_color = (charges <= 0) ? "#ff4444" : "#ffffff"
+	charge_overlay.maptext = MAPTEXT_PIXELIFY("<font color='[badge_color]'>[charges]</font>")
+
+	button.add_overlay(charge_overlay)
+
+	// Red-out the whole button when it genuinely cannot fire right now
+	if(charges <= 0 && !active_background_icon_state && !active_icon_state && !active_overlay_icon_state)
+		button.color = "#ff4444"
+
 /**
  * Actions done as the main effect of the spell.
  *
@@ -653,6 +763,9 @@
 
 	SEND_SIGNAL(src, COMSIG_SPELL_CAST, cast_on)
 	record_featured_object_stat(FEATURED_STATS_SPELLS, name)
+	if(uses_spellbook_charges && mastery_source)
+		mastery_source.consume_spellbook_charge(type)
+		build_all_button_icons(UPDATE_BUTTON_STATUS)
 	if(owner)
 		SEND_SIGNAL(owner, COMSIG_MOB_CAST_SPELL, src, cast_on)
 		if(owner.ckey)
@@ -688,7 +801,7 @@
 
 	if(has_visual_effects)
 		var/mob/living/caster = owner
-		caster.finish_spell_visual_effects(attunements)
+		caster.finish_spell_visual_effects(spell_color)
 
 /// Provides feedback after a spell cast occurs, in the form of a cast sound and/or invocation
 /datum/action/cooldown/spell/proc/spell_feedback(mob/living/invoker)
@@ -736,13 +849,13 @@
 
 	if(has_visual_effects)
 		var/mob/living/caster = owner
-		caster.start_spell_visual_effects(attunements)
+		caster.start_spell_visual_effects(spell_color)
 
 	if(charge_message)
 		owner.balloon_alert(owner, charge_message)
 
 	if(spell_requirements & SPELL_REQUIRES_NO_MOVE)
-		owner.balloon_alert(owner, "Be still while channelling...")
+		owner.balloon_alert(owner, "be still while channelling...")
 
 	if(owner?.mmb_intent)
 		owner.mmb_intent_change(null)
@@ -756,7 +869,7 @@
 		charged = TRUE
 		return
 	if(owner)
-		owner.balloon_alert(owner, "Channeling was interrupted!")
+		owner.balloon_alert(owner, "channeling was interrupted!")
 
 /// End the charging cycle
 /datum/action/cooldown/spell/proc/end_charging()
@@ -801,12 +914,12 @@
 	var/mob/living/living_owner = owner
 	if(invocation_type == INVOCATION_EMOTE && HAS_TRAIT(living_owner, TRAIT_EMOTEMUTE))
 		if(feedback)
-			owner.balloon_alert(owner, "Can't position your hands correctly to invoke!")
+			owner.balloon_alert(owner, "can't position your hands correctly to invoke!")
 		return FALSE
 
 	if((invocation_type == INVOCATION_WHISPER || invocation_type == INVOCATION_SHOUT) && !ignore_can_speak && !living_owner.can_speak_vocal())
 		if(feedback)
-			owner.balloon_alert(owner, "Can't get the words out to invoke!")
+			owner.balloon_alert(owner, "can't get the words out to invoke!")
 		return FALSE
 
 	return TRUE
@@ -818,65 +931,9 @@
 	next_use_time -= cooldown_time // Basically, ensures that the ability can be used now
 	build_all_button_icons()
 
-// Spell level is unused currently, it could be used for attunement thresholds
-
-/**
- * Levels the spell up a single level, reducing the cooldown.
- * If bypass_cap is TRUE, will level the spell up past it's set cap.
- */
-/datum/action/cooldown/spell/proc/level_spell(bypass_cap = FALSE)
-	// Spell cannot be levelled
-	if(spell_max_level <= 1)
-		return FALSE
-
-	// Spell is at cap, and we will not bypass it
-	if(!bypass_cap && (spell_level >= spell_max_level))
-		return FALSE
-
-	spell_level++
-	cooldown_time = max(cooldown_time - cooldown_reduction_per_rank, 0)
-	build_all_button_icons(UPDATE_BUTTON_NAME)
-	return TRUE
-
-/**
- * Levels the spell down a single level, down to 1.
- */
-/datum/action/cooldown/spell/proc/delevel_spell()
-	// Spell cannot be levelled
-	if(spell_max_level <= 1)
-		return FALSE
-
-	if(spell_level <= 1)
-		return FALSE
-
-	spell_level--
-	if(cooldown_reduction_per_rank > 0 SECONDS)
-		cooldown_time = min(cooldown_time + cooldown_reduction_per_rank, initial(cooldown_time))
-	else
-		cooldown_time = max(cooldown_time + cooldown_reduction_per_rank, initial(cooldown_time))
-
-	build_all_button_icons(UPDATE_BUTTON_NAME)
-	return TRUE
-
 /datum/action/cooldown/spell/update_button_name(atom/movable/screen/movable/action_button/button, force)
-	name = "[get_spell_title()][initial(name)]"
+	name = "[initial(name)]"
 	return ..()
-
-/// Gets the title of the spell based on its level.
-/datum/action/cooldown/spell/proc/get_spell_title()
-	switch(spell_level)
-		if(2)
-			return "Efficient "
-		if(3)
-			return "Quickened "
-		if(4)
-			return "Free "
-		if(5)
-			return "Instant "
-		if(6)
-			return "Ludicrous "
-
-	return ""
 
 /// Check if the spell is castable by cost
 /datum/action/cooldown/spell/proc/check_cost(cost_override, feedback = TRUE)
@@ -890,7 +947,7 @@
 		var/not_stamina_spell = (spell_type != SPELL_STAMINA)
 		if(!caster.check_stamina(used_cost / (1 + not_stamina_spell)))
 			if(feedback)
-				owner.balloon_alert(owner, "Not enough stamina to cast!")
+				owner.balloon_alert(owner, "not enough stamina to cast!")
 			return FALSE
 
 	if(spell_type == NONE || spell_type == SPELL_STAMINA)
@@ -898,9 +955,9 @@
 
 	switch(spell_type)
 		if(SPELL_MANA)
-			if(!caster.has_mana_available(attunements, used_cost))
+			if(!caster.has_mana_available(used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Not enough mana to cast!")
+					owner.balloon_alert(owner, "not enough mana to cast!")
 				return FALSE
 
 			return TRUE
@@ -908,7 +965,7 @@
 		if(SPELL_BLOOD)
 			if(!caster.has_bloodpool_cost(used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Need more blood to cast!")
+					owner.balloon_alert(owner, "need more blood to cast!")
 				return FALSE
 
 			return TRUE
@@ -917,7 +974,7 @@
 			var/mob/living/carbon/human/H = caster
 			if(!istype(H) || !H.cleric?.check_devotion(spell_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Devotion too weak!")
+					owner.balloon_alert(owner, "devotion too weak!")
 				return FALSE
 
 			return TRUE
@@ -926,7 +983,7 @@
 			var/mob/living/carbon/human/H = caster
 			if(!istype(H) || !H.rage_datum?.check_rage(spell_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Not enough Rage!")
+					owner.balloon_alert(owner, "not enough Rage!")
 				return FALSE
 
 			return TRUE
@@ -943,7 +1000,7 @@
 				return FALSE
 			if(!gaunt.can_consume_essence(used_cost, essences))
 				if(feedback)
-					owner.balloon_alert(owner, "Not enough essence!")
+					owner.balloon_alert(owner, "not enough essence!")
 				return FALSE
 
 			return TRUE
@@ -951,7 +1008,7 @@
 		if(SPELL_PSYDONIC_MIRACLE)
 			if(!caster.has_bloodpool_cost(used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "Need more grace to cast!")
+					owner.balloon_alert(owner, "need more grace to cast!")
 				return FALSE
 
 			return TRUE
@@ -990,7 +1047,7 @@
 	switch(used_type)
 		if(SPELL_MANA)
 			var/mob/living/caster = owner
-			caster.consume_mana(attunements, used_cost)
+			caster.consume_mana(used_cost)
 
 		if(SPELL_MIRACLE)
 			var/mob/living/carbon/human/H = owner
@@ -1013,7 +1070,7 @@
 				owner.balloon_alert(owner, "not enough essence!")
 				return
 
-			gaunt.consume_essence(used_cost, attunements)
+			gaunt.consume_essence(used_cost, essences)
 
 		if(SPELL_BLOOD)
 			var/mob/living/caster = owner
@@ -1126,6 +1183,11 @@
 
 	cancel_casting()
 
+
+/// Override on spells that have an alt mode (e.g. cycling ward types). Called by the Alt Mode keybind (Shift+G).
+/// Return TRUE if handled.
+/datum/action/cooldown/spell/proc/toggle_alt_mode(mob/user)
+	return FALSE
 
 /**
 *Used to calculate bonuses to Great Hunt miracles/spells.

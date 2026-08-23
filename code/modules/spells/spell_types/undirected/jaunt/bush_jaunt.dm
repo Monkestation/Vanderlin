@@ -13,7 +13,6 @@
 	cooldown_time = 2 MINUTES
 	spell_cost = 20
 	has_visual_effects = FALSE
-	attunements = list(/datum/attunement/life = 0.5)
 
 	var/obj/effect/dummy/bush_disguise/active_dummy = null
 	var/static/list/allowed_structures = list(

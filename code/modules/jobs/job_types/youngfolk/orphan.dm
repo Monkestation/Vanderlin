@@ -6,7 +6,7 @@
 	department_flag = YOUNGFOLK
 	job_flags = (JOB_NEW_PLAYER_JOINABLE | JOB_EQUIP_RANK)
 	display_order = JDO_ORPHAN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	allowed_ages = list(AGE_CHILD)
 	total_positions = 12
 	spawn_positions = 12
@@ -16,7 +16,11 @@
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	advclass_cat_rolls = list(CTAG_ORPHAN = 7)
 	outfit = /datum/outfit/orphan
+
 	knows_the_town = TRUE
+	known_by_the_town = FALSE
+	jobs_i_always_know = list(JOB_MONARCH, JOB_MATRON)
+	jobs_always_know_me = list(JOB_MATRON)
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_for_hag,
@@ -26,12 +30,14 @@
 		TRAIT_ORPHAN,
 	)
 
-/datum/job/orphan/New()
-	. = ..()
-	peopleknowme = list()
-
 /datum/outfit/orphan
 	name = JOB_ORPHAN
+
+/datum/job/advclass/orphanadv
+	factions = list(FACTION_TOWN)
+	department_flag = YOUNGFOLK
+	jobs_i_always_know = list(JOB_MONARCH, JOB_MATRON)
+	jobs_always_know_me = list(JOB_MATRON)
 
 // BOOKISH BRAT - THE COURTLY CHILD
 

@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 /proc/initialize_laws_of_the_land()
 	var/list/laws = strings("laws_of_the_land.json", "lawsets")
 	var/list/lawsets_weighted = list()
-	for(var/lawset_name as anything in laws)
+	for(var/lawset_name in laws)
 		var/list/lawset = laws[lawset_name]
 		lawsets_weighted[lawset_name] = lawset["weight"]
 	var/chosen_lawset = pickweight(lawsets_weighted)
@@ -451,7 +451,7 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 		/datum/job/churchling::title,
 	)
 	var/list/possible_positions = list()
-	for(var/j_title as anything in unfiltered_positions)
+	for(var/j_title in unfiltered_positions)
 		var/datum/job/pos = SSjob.GetJob(j_title)
 		if(pos.total_positions != 0 && pos.spawn_positions != 0)
 			possible_positions += j_title

@@ -49,6 +49,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/manage_paintings,
 	/client/proc/ShowAllFamilies,
 	/datum/admins/proc/anoint_priest,
+	/client/proc/scan_health,
 	)
 GLOBAL_LIST_INIT(admin_verbs_admin, world.AVerbsAdmin())
 GLOBAL_PROTECT(admin_verbs_admin)
@@ -130,6 +131,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/resetasaycolor,
 	/client/proc/set_personal_admin_ooc_color,
 	/client/proc/reset_personal_admin_ooc_color,
+	/client/proc/lobbyooc,
 	/client/proc/set_ghost_sprite,
 	/client/proc/set_ui_theme,
 	/client/proc/toggleadminhelpsound,
@@ -871,8 +873,8 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		dat += "<td style='padding: 12px 15px;'>[book["author"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>[book["category"]]</td>"
 		dat += "<td style='padding: 12px 15px;'>"
-		dat += "<a href='?src=[REF(src)];show_book=1;id=[url_encode(encoded_title)]' style='margin-right: 10px;'>View</a>"
-		dat += "<a href='?src=[REF(src)];delete_book=1;author_ckey=[book["author_ckey"]];id=[url_encode(encoded_title)]'>Delete</a>"
+		dat += "<a href='byond://?src=[REF(src)];show_book=1;id=[url_encode(encoded_title)]' style='margin-right: 10px;'>View</a>"
+		dat += "<a href='byond://?src=[REF(src)];delete_book=1;author_ckey=[book["author_ckey"]];id=[url_encode(encoded_title)]'>Delete</a>"
 		dat += "</td>"
 		dat += "</tr>"
 
@@ -951,7 +953,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 					dat += "<td style='padding: 12px 15px;'>[raw_title]</td>"
 					dat += "<td style='padding: 12px 15px;'>[author]</td>"
 					dat += "<td style='padding: 12px 15px;'>"
-					dat += "<a href='?src=[REF(src)];delete_painting=1;id=[url_encode(raw_title)]'>Delete</a>"
+					dat += "<a href='byond://?src=[REF(src)];delete_painting=1;id=[url_encode(raw_title)]'>Delete</a>"
 					dat += "</td>"
 					dat += "</tr>"
 	else

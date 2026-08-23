@@ -113,6 +113,10 @@
 	background_track_night = null
 	threat_region = THREAT_REGION_MOUNT_DECAP
 
+/area/outdoors/open_sky
+	name = "Open Sky"
+	icon_state = "sky"
+
 /area/outdoors/basin
 	name = "town basin"
 	icon_state = "basin"

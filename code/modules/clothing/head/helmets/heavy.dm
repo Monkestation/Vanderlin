@@ -209,6 +209,7 @@
 	item_weight = 4.5 KILOGRAMS
 	block2add = FOV_BEHIND
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	melting_material = /datum/material/avantyne
 
 /obj/item/clothing/head/helmet/heavy/zizo/volfhelm
 	name = "avantyne volf-face bascinet"
@@ -222,7 +223,6 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	max_integrity = ARMOR_INT_HELMET_HEAVY_STEEL - ARMOR_INT_HELMET_HEAVY_ADJUSTABLE_PENALTY
-	melting_material = /datum/material/steel
 
 /obj/item/clothing/head/helmet/heavy/zizo/bascinet
 	name = "avantyne bascinet"
@@ -234,7 +234,6 @@
 	flags_inv = HIDEFACE|HIDEEARS|HIDEHAIR
 	body_parts_covered = HEAD|EARS|HAIR
 	adjustable = CANT_CADJUST
-	melting_material = /datum/material/steel
 
 //............... Matthios Helmet ............... //
 
@@ -482,7 +481,7 @@
 		return
 	if(!picked)
 		var/list/icons = HELMET_KNIGHT_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -510,7 +509,7 @@
 		return
 	if(!picked)
 		var/list/icons = HELMET_HOUNSKULL_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -535,7 +534,7 @@
 		return
 	if(!picked)
 		var/list/icons = HELMET_BUCKET_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -560,7 +559,7 @@
 		return
 	if(!picked)
 		var/list/icons = HELMET_GOLD_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -590,7 +589,7 @@
 		return
 	if(!picked)
 		var/list/icons = BASCINET_DECORATIONS
-		var/choice = input(user, "Choose a crest.", "Knightly crests") as anything in icons
+		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice

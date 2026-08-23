@@ -124,6 +124,32 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/polearm/woodstaff/quarterstaff/gold
+	name = "golden quarterstaff"
+	desc = "The astute may point out that this staff is poorly designed. They would be correct. Gold, even low karat, is a bad material for a \
+	weapon. This one additionally manages to be doubly-sinned by having a heavy chunk of gold at the end. It's almost a polehammer. Practical? \
+	No. But it makes a statement."
+	icon_state = "quarterstaff_gold"
+	force = DAMAGE_STAFF + 6
+	force_wielded =  DAMAGE_STAFF_WIELD + 7
+	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
+	max_integrity = INTEGRITY_STRONGEST * 0.8
+	minstr = 8
+	item_weight = 1.5 KILOGRAMS
+	melting_material = /datum/material/gold
+	melt_amount = 75
+
+/obj/item/weapon/polearm/woodstaff/quarterstaff/blacksteel
+	name = "blacksteel quarterstaff"
+	desc = "A quarterstaff reinforced with blacksteel tips. One might imagine that the elegance of such a design hardly befits the people \
+	who'd traditionally wield such a weapon; then again, who are we to judge?"
+	icon_state = "quarterstaff_blacksteel"
+	force = DAMAGE_STAFF + 8
+	force_wielded =  DAMAGE_STAFF_WIELD + 8
+	max_integrity = INTEGRITY_BLACKSTEEL
+	melting_material = /datum/material/blacksteel
+	melt_amount = 75
+
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."
@@ -173,6 +199,16 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 40
 	item_weight = 1 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/steel/baotha
+	name = "laced swordstaff"
+	desc = "Keep the rest at arm's length, lest you're burdened with the pain of rememberance."
+	icon_state = "swordstaff"
+	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
+
+/obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/baothagift)
 
 /obj/item/weapon/polearm/spear/steel/partizan
 	name = "partizan"

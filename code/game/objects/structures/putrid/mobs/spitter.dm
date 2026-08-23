@@ -1,7 +1,8 @@
 /mob/living/simple_animal/hostile/retaliate/meatvine/range
-	icon_state = "harvester"
-	icon_living = "harvester"
-	icon_dead = "harvester_dead"
+	icon_state = "spitter"
+	icon_living = "spitter"
+	icon_dead = "spitter_dead"
+	icon = 'icons/obj/cellular/putrid_small.dmi'
 	ranged = TRUE
 	projectiletype = /obj/projectile/meatbullet
 
