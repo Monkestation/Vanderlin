@@ -327,6 +327,9 @@
 /obj/item/natural/worms/leech{
 	pixel_x = 10
 	},
+/obj/structure/fluff/walldeco/med{
+	pixel_x = -32
+	},
 /turf/open/water/swamp,
 /area/ship/middeck)
 "cp" = (
@@ -4105,9 +4108,6 @@
 	},
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot/copper,
-/obj/structure/fluff/walldeco/med{
-	pixel_x = -32
-	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/middeck)
