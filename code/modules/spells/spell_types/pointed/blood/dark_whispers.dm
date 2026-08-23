@@ -31,17 +31,20 @@
 		return FALSE
 	return TRUE
 
-/datum/action/cooldown/spell/dark_whispers/cast(mob/living/cast_on)
+/datum/action/cooldown/spell/dark_whispers/before_cast(atom/cast_on)
 	. = ..()
 	if(. & SPELL_CANCEL_CAST)
 		return
-	message = tgui_input_text(owner, "What thought do you wish to weave to [cast_on]?", "[src]", timeout=20 SECONDS)
 	if(QDELETED(src) || QDELETED(owner) || QDELETED(cast_on) || !can_cast_spell())
 		return . | SPELL_CANCEL_CAST
 
+/datum/action/cooldown/spell/dark_whispers/cast(mob/living/cast_on)
+	. = ..()
+	message = tgui_input_text(owner, "What thought do you wish to weave to [cast_on]?", "[src]", timeout=20 SECONDS)
+
 	if(!message)
 		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
+		return
 
 	handle_message(cast_on)
 
