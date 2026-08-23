@@ -8747,6 +8747,10 @@
 "dHt" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/candle/yellow,
+/obj/structure/fake_machine/mail{
+	pixel_y = -32;
+	mailtag = "Apothecary"
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large/apothecary)
 "dHy" = (
