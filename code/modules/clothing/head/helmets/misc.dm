@@ -676,6 +676,7 @@
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	smeltresult = /obj/item/ingot/avantyne
 	item_weight = 3.7 KILOGRAMS
 
 //................. Silver Bascinet .............. //
