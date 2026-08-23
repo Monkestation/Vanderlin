@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "'necromancer' robes have been renamed to magus robes (there was already a version with this name so we're sticking with it."
+  - rscadd: "ominous hood renamed to magus hood and given a crafting recipe."
+  - rscdel: "Removed the hood from a few outfits that had it but didn't fit."
