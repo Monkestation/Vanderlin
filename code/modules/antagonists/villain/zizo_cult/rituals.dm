@@ -362,11 +362,11 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	S.set_up(1, 1, center)
 	S.start()
 
-	new /obj/item/weapon/sword/long/greatsword/zizo(center)
+	new /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser(center)
 
-	new /obj/item/weapon/sword/arming(center)
+	new /obj/item/weapon/sword/arming/zizo_arming(center)
 
-	new /obj/item/weapon/mace/steel(center)
+	new /obj/item/weapon/sword/long/zizo_longsword(center)
 
 	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
@@ -498,20 +498,32 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	e_req = /obj/item/organ/brain
 	n_req = /obj/item/reagent_containers/food/snacks/meat
 
+/datum/attribute_holder/sheet/job/nopain
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_CONSTITUTION = -3,
+	)
+
 /datum/ritual/fleshcrafting/nopain/invoke(mob/living/user, turf/center)
 	var/mob/living/carbon/human/target = locate() in center.contents
 	if(!target)
 		return
 	ADD_TRAIT(user, TRAIT_NOPAIN, TRAIT_GENERIC)
 	to_chat(target, span_notice("I no longer feel pain, but it has come at a terrible cost."))
-	target.change_stat(STAT_STRENGTH, -2)
-	target.change_stat(STAT_CONSTITUTION, -3)
+	target.attributes?.add_sheet(/datum/attribute_holder/sheet/job/nopain)
 
 /datum/ritual/fleshcrafting/immortality
 	name = "Flawed Immortality"
 	center_requirement = /mob/living/carbon/human
 
 	n_req = /mob/living/carbon/human
+
+/datum/attribute_holder/sheet/job/immortality
+	raw_attribute_list = list(
+		STAT_STRENGTH = -3,
+		STAT_SPEED = -4,
+		STAT_ENDURANCE = -4,
+	)
 
 /datum/ritual/fleshcrafting/immortality/invoke(mob/living/user, turf/center)
 	var/mob/living/carbon/human/target = locate() in center.contents
@@ -534,11 +546,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	ADD_TRAIT(user, TRAIT_NOHARDCRIT, TRAIT_GENERIC)
 	ADD_TRAIT(user, TRAIT_NOSOFTCRIT, TRAIT_GENERIC)
 	to_chat(target, span_notice("ZIZO EMPOWERS ME!! SOMETHING HAS GONE WRONG, THE RITUAL FAILED BUT WHAT IT LEFT ME WITH IS STILL POWER!!"))
-	target.adjust_stat_modifier(STATMOD_ABOM, list(
-		STAT_STRENGTH = -3,
-		STAT_SPEED = -4,
-		STAT_ENDURANCE = -4,
-	))
+	target.attributes?.add_sheet(/datum/attribute_holder/sheet/job/immortality)
 	target.Knockdown(5 SECONDS)
 	target.emote("agony", forced = TRUE)
 	target.add_spell(/datum/action/cooldown/spell/undirected/regenerate)

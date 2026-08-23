@@ -56,7 +56,7 @@
 	beltl = /obj/item/weapon/whip/spiderwhip
 	beltr = /obj/item/weapon/knife/dagger/steel/dirk
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/sword/long/greatsword/zizo
+	backr = /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser
 	scabbards = list(/obj/item/weapon/scabbard/knife)
 
 /datum/migrant_role/zizo_cultist_lesser
