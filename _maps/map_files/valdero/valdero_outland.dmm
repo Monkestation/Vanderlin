@@ -1816,15 +1816,6 @@
 "Hf" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/mountains)
-"Hi" = (
-/obj/structure/stairs/stone/reddish{
-	dir = 4
-	},
-/obj/structure/stairs/stone/reddish{
-	dir = 4
-	},
-/turf/open/floor/church/gold,
-/area/outdoors/mountains)
 "Hq" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/herringbone,
@@ -2138,11 +2129,6 @@
 "Nf" = (
 /turf/open/water/river/under,
 /area/under/cavewet)
-"Nh" = (
-/obj/structure/stairs/stone/reddish,
-/obj/structure/stairs/stone/reddish,
-/turf/open/floor/church/gold,
-/area/outdoors/mountains)
 "Np" = (
 /obj/structure/rack/shelf,
 /obj/item/burial_shroud{
@@ -77367,7 +77353,7 @@ kv
 hv
 hv
 hv
-Hi
+Of
 hv
 hv
 hv
@@ -78276,7 +78262,7 @@ kv
 kv
 kv
 kv
-Nh
+kv
 kv
 kv
 qA
