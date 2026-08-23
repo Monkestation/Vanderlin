@@ -14,16 +14,7 @@
 	name = "Light Footed"
 	desc = "You move with grace and agility. Your steps are quieter then most."
 	point_value = -6
-
-/datum/quirk/boon/light_footed/on_spawn()
-	if(!ishuman(owner))
-		return
-	ADD_TRAIT(owner, TRAIT_LIGHT_STEP, "[type]")
-
-/datum/quirk/boon/light_footed/on_remove()
-	if(!ishuman(owner))
-		return
-	REMOVE_TRAIT(owner, TRAIT_LIGHT_STEP, "[type]")
+	traits_to_add = list(TRAIT_LIGHT_STEP)
 
 /datum/quirk/boon/quick_learner
 	name = "Quick Learner"
@@ -34,13 +25,7 @@
 	name = "Iron Will"
 	desc = "Your resolve is unshakeable. You handle the horrors of war better then most."
 	point_value = -4
-
-/datum/quirk/boon/iron_will/on_spawn()
-	ADD_TRAIT(owner, TRAIT_STEELHEARTED, "[type]")
-
-/datum/quirk/boon/iron_will/on_remove()
-	if(owner)
-		REMOVE_TRAIT(owner, TRAIT_STEELHEARTED, "[type]")
+	traits_to_add = list(TRAIT_STEELHEARTED)
 
 /datum/quirk/boon/composed
 	name = "Composed"
@@ -81,6 +66,7 @@
 		/datum/language/newpsydonic,
 		/datum/language/hellspeak,
 		/datum/language/orcish,
+		/datum/language/gronnic,
 	)
 
 /datum/quirk/boon/second_language/on_spawn()
@@ -92,6 +78,7 @@
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		H.grant_language(customization_value)
+	return ..()
 
 /datum/quirk/boon/pet
 	name = "Loyal Companion"
@@ -112,6 +99,7 @@
 	var/mob/living/simple_animal/pet_mob
 
 /datum/quirk/boon/pet/on_spawn()
+	. = ..()
 	if(!get_turf(owner))
 		addtimer(CALLBACK(src, PROC_REF(on_spawn)), 0.5 SECONDS)
 		return
@@ -135,12 +123,6 @@
 	pet_mob.tamed(H)
 	ADD_TRAIT(pet_mob, TRAIT_TINY, "[type]")
 
-	// Set a name if the pet doesn't have a unique one
-	if(pet_mob.name == initial(pet_mob.name))
-		var/new_name = stripped_input(H, "What is your pet's name?", "Pet Name", initial(pet_mob.name), MAX_NAME_LEN)
-		if(new_name)
-			pet_mob.fully_replace_character_name(null, new_name)
-
 	var/datum/component/obeys_commands/command_component = pet_mob.GetComponent(/datum/component/obeys_commands)
 	if(command_component)
 		var/datum/pet_command/follow/follow_command = command_component.available_commands["Follow"]
@@ -149,9 +131,9 @@
 			follow_command.execute_action(pet_mob.ai_controller)
 
 /datum/quirk/boon/pet/on_remove()
+	. = ..()
 	// Don't delete the pet when quirk is removed, just release it
 	if(pet_mob && !QDELETED(pet_mob))
-		pet_mob.owner = null
 		pet_mob.tame = FALSE
 		pet_mob = null
 
@@ -192,29 +174,13 @@
 	name = "Quick Hands"
 	desc = "You have great hand-eye coordination and know how to move your fingers fast. All crafts are 10% faster."
 	point_value = -4
-
-/datum/quirk/boon/quick_hands/on_spawn()
-	if(!ishuman(owner))
-		return
-	ADD_TRAIT(owner, TRAIT_QUICK_HANDS, "[type]")
-
-/datum/quirk/boon/quick_hands/on_remove()
-	if(!ishuman(owner))
-		return
-	REMOVE_TRAIT(owner, TRAIT_QUICK_HANDS, "[type]")
+	traits_to_add = list(TRAIT_QUICK_HANDS)
 
 /datum/quirk/boon/naturalist
 	name = "Naturalist"
 	desc = "Your body is attuned to the natural world. You extract more nourishment from unprocessed, natural foods - fruits, vegetables, and simple preparations sustain you better than they do others."
 	point_value = -8
-
-/datum/quirk/boon/naturalist/on_spawn()
-	ADD_TRAIT(owner, TRAIT_FORAGER, "[type]")
-
-/datum/quirk/boon/naturalist/on_remove()
-	if(!ishuman(owner))
-		return
-	REMOVE_TRAIT(owner, TRAIT_FORAGER, "[type]")
+	traits_to_add = list(TRAIT_FORAGER)
 
 /datum/quirk/boon/always_prepared
 	name = "Always Prepared"
@@ -234,6 +200,7 @@
 	var/obj/item/tent_kit/tent
 
 /datum/quirk/boon/always_prepared/on_spawn()
+	. = ..()
 	if(!owner)
 		return
 	if(!customization_value)
@@ -272,7 +239,7 @@
 /datum/quirk/boon/packmule
 	name = "Packmule"
 	desc = "There's no such thing as having too much storage! You start with a backpack."
-	point_value = -8
+	point_value = -4
 	preview_render = FALSE
 
 /datum/quirk/boon/packmule/after_job_spawn(datum/job/job)
@@ -299,6 +266,7 @@
 	S.tamed(H)
 
 	to_chat(owner, span_notice("Your trusted mount awaits you."))
+	return ..()
 
 /datum/quirk/boon/rider/after_job_spawn(datum/job/job)
 	. = ..()
@@ -312,16 +280,11 @@
 	name = "Strikingly Beautiful"
 	desc = "You are remarkably attractive, improving social interactions."
 	point_value = -4
+	traits_to_add = list(TRAIT_BEAUTIFUL)
 
 /datum/quirk/boon/beautiful/on_spawn()
+	. = ..()
 	if(!owner)
 		return
-
-	ADD_TRAIT(owner, TRAIT_BEAUTIFUL, "[type]")
 
 	to_chat(owner, span_notice("You catch your reflection and can't help but admire yourself."))
-
-/datum/quirk/boon/beautiful/on_remove()
-	if(!owner)
-		return
-	REMOVE_TRAIT(owner, TRAIT_BEAUTIFUL, "[type]")

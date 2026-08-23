@@ -5,8 +5,6 @@
 	var/list/weakrefed_friends = list()
 	///list of friendship levels that we send BEFRIEND signals on, if someone drops below these levels its over
 	var/befriend_level
-	///list of all befriended refs
-	var/list/befriended_refs = list()
 	var/visible_level = TRUE
 	var/happiness_multiplier = 1.0
 
@@ -19,7 +17,6 @@
 	src.visible_level = visible_level
 
 /datum/component/friendship_container/Destroy(force)
-	befriended_refs = null
 	weakrefed_friends = null
 	friendship_levels = null
 	return ..()
@@ -47,15 +44,12 @@
 		if(!IS_WEAKREF_OF(target, ref))
 			continue
 		if(amount < 0)
-			if((friendship_levels[befriend_level] > weakrefed_friends[ref]) && (ref in befriended_refs))
+			if((friendship_levels[befriend_level] > weakrefed_friends[ref]) && source.has_ally(target))
 				SEND_SIGNAL(parent, COMSIG_LIVING_UNFRIENDED, ref.resolve())
-				befriended_refs -= ref
 				source.ai_controller?.remove_thing_from_blackboard_key(BB_FRIENDS_LIST, target)
-		else if((friendship_levels[befriend_level] <= weakrefed_friends[ref]) && !(ref in befriended_refs))
-			befriended_refs += ref
-			if(!(target in source.ai_controller?.blackboard[BB_FRIENDS_LIST]))
-				SEND_SIGNAL(parent, COMSIG_LIVING_BEFRIENDED, ref.resolve())
-			source.ai_controller?.insert_blackboard_key_lazylist(BB_FRIENDS_LIST, target)
+				source.remove_ally(target)
+		else if((friendship_levels[befriend_level] <= weakrefed_friends[ref]) && !source.has_ally(target))
+			source.befriend(target)
 
 		weakrefed_friends[ref] += amount
 		return TRUE

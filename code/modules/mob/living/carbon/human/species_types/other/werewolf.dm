@@ -25,8 +25,6 @@
 	inherent_traits = list(
 		TRAIT_NOSTAMINA,
 		TRAIT_RESISTCOLD,
-		TRAIT_RESISTHIGHPRESSURE,
-		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_RADIMMUNE,
 		TRAIT_NODISMEMBER,
 		TRAIT_STRONGBITE,
@@ -41,7 +39,6 @@
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_IGNORESLOWDOWN,
 		TRAIT_HARDDISMEMBER,
-		TRAIT_UNDODGING,
 		TRAIT_UNPARRYING,
 		TRAIT_LONGSTRIDER,
 		TRAIT_BLOODDRINKER,
@@ -63,6 +60,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/werewolf,

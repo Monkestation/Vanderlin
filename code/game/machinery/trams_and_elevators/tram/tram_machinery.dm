@@ -8,7 +8,7 @@ GLOBAL_LIST_EMPTY(tram_doors)
 	icon_state = "tram_controls"
 	layer = SIGN_LAYER
 	density = FALSE
-	flags_1 = NODECONSTRUCT_1
+	flags_1 = NO_DEBRIS_AFTER_DECONSTRUCTION
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	light_color = COLOR_BLUE_LIGHT
 	light_outer_range = 0 //we dont want to spam SSlighting with source updates every movement

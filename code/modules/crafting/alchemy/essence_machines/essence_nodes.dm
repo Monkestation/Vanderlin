@@ -29,11 +29,11 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 		essence_type = pick_random_essence_type()
 	switch(tier)
 		if(0)
-			max_essence = rand(50, 150)
-			recharge_rate = rand(1, 3)
+			max_essence = rand(100, 150)
+			recharge_rate = rand(2, 3)
 			max_integrity = 100
 		if(1)
-			max_essence = rand(200, 400)
+			max_essence = rand(300, 400)
 			recharge_rate = rand(3, 6)
 			max_integrity = 200
 

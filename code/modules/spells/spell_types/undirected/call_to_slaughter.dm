@@ -23,7 +23,7 @@
 		if(istype(target.patron, /datum/patron/psydon))
 			to_chat(target, span_danger("You feel a surge of cold wash over you; leaving your body as quick as it hit.."))	//No effect on Psydonians, Endure.
 			continue
-		if(!owner.faction_check_mob(target))
+		if(!owner.faction_check_atom(target))
 			continue
 		if(target.mob_biotypes & MOB_UNDEAD)
 			continue

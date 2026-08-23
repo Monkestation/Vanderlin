@@ -24,14 +24,17 @@
 		item.initialize_cooked_food(list(created_output), 1)
 
 /datum/container_craft/pan/try_craft(obj/item/crafter, list/pathed_items, mob/initiator, datum/callback/on_craft_start, datum/callback/on_craft_failed)
-	if(!istype(crafter.loc, /obj/machinery/light/fueled))
-		return FALSE
-	var/obj/machinery/light/fueled/fueled = crafter.loc
-	if(!fueled.fueluse)
-		return FALSE
+	if(!crafter.has_enchantment(/datum/enchantment/eternal_flames))
+		if(!istype(crafter.loc, /obj/machinery/light/fueled))
+			return FALSE
+		var/obj/machinery/light/fueled/fueled = crafter.loc
+		if(!fueled.fueluse)
+			return FALSE
 	. = ..()
 
 /datum/container_craft/pan/check_failure(obj/item/crafter, mob/user)
+	if(crafter.has_enchantment(/datum/enchantment/eternal_flames))
+		return FALSE
 	if(!istype(crafter.loc, /obj/machinery/light/fueled))
 		return TRUE
 	var/obj/machinery/light/fueled/fueled = crafter.loc
@@ -135,7 +138,7 @@
 /datum/container_craft/pan/egg/proc/on_start_recipe(atom/crafter, initiator, highest_multiplier)
 	var/list/stored_items = crafter.contents
 	playsound(crafter, 'sound/foley/eggbreak.ogg', 100, TRUE, -1)
-	crafter.visible_message("The [lowertext(name)] starts to cook.")
+	crafter.visible_message("The [LOWER_TEXT(name)] starts to cook.")
 	var/count = 0
 	for(var/obj/item/reagent_containers/food/snacks/egg/egg in stored_items)
 		if(count >= highest_multiplier)

@@ -21,7 +21,6 @@
 	opacity = TRUE
 	resistance_flags = FLAMMABLE
 	max_integrity = 200
-	armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = 50, "acid" = 0)
 	var/state = 0
 	var/list/allowed_books = list(/obj/item/book, /obj/item/recipe_book) //Things allowed in the bookcase
 
@@ -71,10 +70,9 @@
 				choice.forceMove(drop_location())
 			update_appearance(UPDATE_ICON_STATE)
 
-/obj/structure/bookcase/deconstruct(disassembled = TRUE)
+/obj/structure/bookcase/atom_deconstruct(disassembled)
 	for(var/obj/item/B in contents)
-		B.forceMove(get_turf(src))
-	qdel(src)
+		B.forceMove(loc)
 
 /obj/structure/bookcase/update_icon_state()
 	if((length(contents) >= 1) && (length(contents) <= 15))

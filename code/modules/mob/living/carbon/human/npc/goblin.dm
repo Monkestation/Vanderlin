@@ -1,9 +1,9 @@
 /mob/living/carbon/human/species/goblin
 	name = "goblin"
-
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	icon_state = "goblin"
 	race = /datum/species/goblin
+	faction = list(FACTION_HOSTILE)
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/goblin, /obj/item/bodypart/head/goblin, /obj/item/bodypart/l_arm/goblin,
 					/obj/item/bodypart/r_arm/goblin, /obj/item/bodypart/r_leg/goblin, /obj/item/bodypart/l_leg/goblin, /obj/item/bodypart/mouth)
@@ -24,6 +24,18 @@
 /mob/living/carbon/human/species/goblin/slaved
 	gob_outfit = null
 	ai_controller = /datum/ai_controller/human_npc
+
+/mob/living/carbon/human/species/goblin/slaved/moon
+	race = /datum/species/goblin/moon
+
+/mob/living/carbon/human/species/goblin/slaved/hell
+	race = /datum/species/goblin/hell
+
+/mob/living/carbon/human/species/goblin/slaved/cave
+	race = /datum/species/goblin/cave
+
+/mob/living/carbon/human/species/goblin/slaved/sea
+	race = /datum/species/goblin/sea
 
 /mob/living/carbon/human/species/goblin/slaved/Initialize()
 	. = ..()
@@ -65,11 +77,6 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/hell
 	race = /datum/species/goblin/hell
 
-/datum/species/goblin/hell
-	name = "hell goblin"
-	id = "goblin_hell"
-	raceicon = "goblin_hell"
-
 /mob/living/carbon/human/species/goblin/cave
 	name = "cave goblin"
 	race = /datum/species/goblin/cave
@@ -80,20 +87,15 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/cave
 	race = /datum/species/goblin/cave
 
-/datum/species/goblin/cave
-	id = "goblin_cave"
-	raceicon = "goblin_cave"
-
 /mob/living/carbon/human/species/goblin/sea
 	name = "sea goblin"
 	race = /datum/species/goblin/sea
+
 /mob/living/carbon/human/species/goblin/npc/sea
 	race = /datum/species/goblin/sea
+
 /mob/living/carbon/human/species/goblin/npc/ambush/sea
 	race = /datum/species/goblin/sea
-/datum/species/goblin/sea
-	raceicon = "goblin_sea"
-	id = "goblin_sea"
 
 /mob/living/carbon/human/species/goblin/moon
 	name = "moon goblin"
@@ -102,14 +104,6 @@
 	race = /datum/species/goblin/moon
 /mob/living/carbon/human/species/goblin/npc/ambush/moon
 	race = /datum/species/goblin/moon
-/datum/species/goblin/moon
-	id = "goblin_moon"
-	raceicon = "goblin_moon"
-
-/datum/species/goblin/moon/spec_death(gibbed, mob/living/carbon/human/H)
-	new /obj/item/reagent_containers/powder/moondust_purest(get_turf(H))
-	H.visible_message("<span class='blue'>Moondust falls from [H]!</span>")
-//	qdel(H)
 
 /obj/item/bodypart/chest/goblin
 	dismemberable = 0
@@ -134,38 +128,6 @@
 /obj/item/bodypart/head/goblin/skeletonize()
 	. = ..()
 	icon_state = "goblin_skel_head"
-
-/datum/species/goblin
-	name = "goblin"
-	id = SPEC_ID_GOBLIN
-	species_traits = list(NO_UNDERWEAR)
-	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE, TRAIT_EASYDISMEMBER, TRAIT_CRITICAL_WEAKNESS, TRAIT_NASTY_EATER, TRAIT_LEECHIMMUNE, TRAIT_INHUMENCAMP)
-
-	no_equip = list(ITEM_SLOT_SHIRT, ITEM_SLOT_MASK, ITEM_SLOT_GLOVES, ITEM_SLOT_SHOES, ITEM_SLOT_PANTS)
-	offset_features_m = list(OFFSET_HANDS = list(0,-4))
-	offset_features_f = list(OFFSET_HANDS = list(0,-4))
-
-	dam_icon_f = null
-	dam_icon_m = null
-	damage_overlay_type = ""
-	changesource_flags = WABBAJACK
-	var/raceicon = "goblin"
-	exotic_bloodtype = /datum/blood_type/human/corrupted/goblin
-	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)
-
-/datum/species/goblin/regenerate_icons(mob/living/carbon/human/H)
-	H.icon_state = ""
-	if(HAS_TRAIT(H, TRAIT_NO_TRANSFORM))
-		return 1
-	H.update_inv_hands()
-	H.update_inv_handcuffed()
-	H.update_inv_legcuffed()
-	H.update_fire()
-	H.update_body()
-	var/mob/living/carbon/human/species/goblin/G = H
-	G.update_wearable()
-	H.update_transform()
-	return TRUE
 
 /mob/living/carbon/human/species/goblin/update_body()
 	remove_overlay(BODY_LAYER)
@@ -217,11 +179,6 @@
 	apply_overlay(ARMOR_LAYER)
 
 
-/mob/living/carbon/human/species/goblin/update_inv_head(hide_nonstandard = FALSE)
-	update_wearable()
-/mob/living/carbon/human/species/goblin/update_inv_armor()
-	update_wearable()
-
 /datum/species/goblin/update_damage_overlays(mob/living/carbon/human/H)
 	return
 
@@ -239,23 +196,27 @@
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/goblins.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
-	var/obj/item/organ/eyes/eyes = src.getorganslot(ORGAN_SLOT_EYES)
-	if(eyes)
+	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
+	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
 		eyes.Remove(src,1)
 		QDEL_NULL(eyes)
-	eyes = new /obj/item/organ/eyes/night_vision/nightmare
-	eyes.Insert(src)
+
+	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
+	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
+	LE.switch_side(LEFT_SIDE)
+
+	LE.Insert(src)
+	RE.Insert(src)
+
 	for(var/slot in internal_organs_slot)
-		var/obj/item/organ/organ = internal_organs_slot[slot]
-		organ.sellprice = 5
+		for(var/obj/item/organ/organ as anything in internal_organs_slot[slot])
+			organ.sellprice = max(initial(organ.sellprice) / 2, 1)
 	src.underwear = "Nude"
 	if(length(quirks))
 		clear_quirks()
 	update_body()
-	faction = list(FACTION_ORCS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	update_eyes()
+	add_faction(FACTION_ORCS)
 	name = "goblin"
 	real_name = "goblin"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
@@ -270,6 +231,8 @@
 			equipOutfit(O)
 
 /datum/component/rot/corpse/goblin/process()
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
+		return
 	var/amt2add = 10 //1 second
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
 	if(last_process)
@@ -294,10 +257,10 @@
 				should_update = TRUE
 	else if(amount > 12 MINUTES)
 		for(var/obj/item/bodypart/B in C.bodyparts)
-			if(!B.rotted)
-				B.rotted = TRUE
+			if(!HAS_TRAIT(B, TRAIT_ROTTEN))
+				B.kill_limb()
 				should_update = TRUE
-			if(B.rotted && amount < 16 MINUTES && !(FACTION_MATTHIOS in C.faction))
+			if(HAS_TRAIT(B, TRAIT_ROTTEN) && amount < 16 MINUTES && !C.has_faction(FACTION_MATTHIOS))
 				var/turf/open/T = C.loc
 				if(istype(T))
 					T.pollute_turf(/datum/pollutant/rot, 4)
@@ -316,42 +279,12 @@
 ////
 ///
 
-/datum/attribute_holder/sheet/job/goblin
-	attribute_variance = list(
-		STAT_STRENGTH = list(-4, 0),
-		STAT_PERCEPTION = list(-5, 0),
-		STAT_INTELLIGENCE = list(-9, -6),
-		STAT_CONSTITUTION = list(-6, -2),
-		STAT_ENDURANCE = list(-2, 2),
-		STAT_SPEED = list(-2, 4),
-	)
 /datum/outfit/npc/goblin/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/goblin)
-
 	if(is_species(H, /datum/species/goblin/hell))
-		H.set_stat_modifier(STATMOD_GOBLIN_RACE, list(
-			STAT_STRENGTH = 6,
-			STAT_CONSTITUTION = 6,
-			STAT_SPEED = -4
-		))
 		H.simpmob_attack += 10
 		H.simpmob_defend += 15
-	if(is_species(H, /datum/species/goblin/cave))
-		H.set_stat_modifier(STATMOD_GOBLIN_RACE, list(
-			STAT_PERCEPTION = 6,
-			STAT_ENDURANCE = 2,
-		))
-	if(is_species(H, /datum/species/goblin/sea))
-		H.set_stat_modifier(STATMOD_GOBLIN_RACE, list(
-			STAT_INTELLIGENCE = 6,
-			STAT_ENDURANCE = 2,
-		))
 	if(is_species(H, /datum/species/goblin/moon))
-		H.set_stat_modifier(STATMOD_GOBLIN_RACE, list(
-			STAT_INTELLIGENCE = 4,
-			STAT_SPEED = 4,
-		))
 		H.simpmob_attack += 10
 		H.simpmob_defend += 25
 	var/loadout = rand(1,5)
@@ -448,6 +381,7 @@
 	gobs++
 	var/mob/living/carbon/human/species/goblin/npc/N = new (get_turf(src))
 	N.key = user.key
+	addtimer(CALLBACK(N, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), "GOBLIN"), 5 SECONDS)
 	qdel(user)
 
 

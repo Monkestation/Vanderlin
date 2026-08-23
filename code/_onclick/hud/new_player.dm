@@ -7,14 +7,11 @@
 	var/list/shown_station_trait_buttons
 
 /datum/hud/new_player/New(mob/owner)
-
-	scannies = new /atom/movable/screen/scannies(null, src)
-	static_inventory += scannies
-	if(owner.client?.prefs?.crt == TRUE)
-		scannies.alpha = 70
-
 	if (!owner?.client)
 		return
+
+	var/atom/movable/screen/using = new /atom/movable/screen/backhudl/empty(null, src)
+	static_inventory += using
 
 	var/list/buttons = subtypesof(/atom/movable/screen/lobby)
 	for (var/atom/movable/screen/lobby/lobbyscreen as anything in buttons)

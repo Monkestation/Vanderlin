@@ -16,10 +16,6 @@
 	charge_slowdown = 1.2
 	summon_radius = 0
 	self_cast_possible = FALSE
-	attunements = list(
-		/datum/attunement/arcyne = 0.3,
-		/datum/attunement/life = 0.7
-	)
 
 	var/datum/weakref/gardener_ref
 	var/static/list/garden_fae = list(
@@ -68,7 +64,6 @@
 	if(!gardener)
 		return
 	gardener.befriend(owner)
-	gardener.owner = owner
 	gardener_ref = WEAKREF(gardener)
 
 /datum/action/cooldown/spell/conjure/garden_fae/Destroy()

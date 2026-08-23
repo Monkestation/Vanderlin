@@ -36,7 +36,7 @@
 
 	owner.visible_message(span_danger("[owner] effortlessly dodges the projectile!"), span_userdanger("You dodge the projectile!"))
 	owner.add_filter("evade", 2, gauss_blur_filter(5))
-	addtimer(CALLBACK(owner, TYPE_PROC_REF(/atom/movable, remove_filter), "evade"), 0.5 SECONDS)
+	addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, remove_filter), "evade"), 0.5 SECONDS)
 	return BULLET_ACT_FORCE_PIERCE
 
 

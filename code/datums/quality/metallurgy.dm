@@ -1,33 +1,34 @@
+
 /datum/quality_calculator/metallurgy
 	name = "Metallurgy Quality"
 
-	quality_descriptors = list(
-		"-1" = list(
+	quality_descriptors = alist(
+		SMELTERY_QUALITY_SPOIL = list(
 			"name_prefix" = "awful",
 			"description" = "",
 		),
-		"0" = list(
+		SMELTERY_QUALITY_POOR = list(
 			"name_prefix" = "",
 			"description" = "",
 		),
-		"1" = list(
+		SMELTERY_QUALITY_NORMAL = list(
 			"name_prefix" = "",
 			"description" = "",
 		),
-		"2" = list(
+		SMELTERY_QUALITY_GOOD = list(
 			"name_prefix" = list("refined", "processed"),
 			"description" = "It shows signs of careful refinement.",
 		),
-		"3" = list(
-			"name_prefix" = list("high-grade", "superior", "fine"),
+		SMELTERY_QUALITY_GREAT = list(
+			"name_prefix" = list("high-grade", "superior"),
 			"description" = list(
 				"It gleams with exceptional purity.",
 				"The metal structure appears flawless.",
 				"It radiates quality craftsmanship."
 			),
 		),
-		"4" = list(
-			"name_prefix" = list("pristine", "flawless", "legendary"),
+		SMELTERY_QUALITY_EXCELLENT = list(
+			"name_prefix" = list("pristine", "legendary"),
 			"description" = list(
 				"It represents the pinnacle of metallurgical perfection.",
 				"The metal seems to shine with inner light.",
@@ -37,78 +38,35 @@
 	)
 
 /datum/quality_calculator/metallurgy/calculate_final_quality()
-	var/skill_factor = skill_quality / 8 // Smaller impact than others
-	var/material_factor = material_quality * 0.1 // Minor factor
-	var/reagent_factor = reagent_quality * 0.9 // Major factor
+	/* SHOULD MATCH CALCULATIONS OF SMELTERS
+	RANDOMLY PICKED NUMBER ACCORDING TO SMELTER SKILL:
+		NO SKILL: 		between 10 and 30
+		NOVICE:	 		between 25 and 30
+		APPRENTICE:	 	between 40 and 50
+		JOURNEYMAN: 	between 55 and 75
+		EXPERT: 		between 70 and 100
+		MASTER: 		between 85 and 125
+		LEGENDARY: 		between 100 and 150
+	PICKED NUMBER GETS DIVIDED BY SMELTING_DENOMINATOR.
+	*/
+	var/skill_factor = (rand(skill_quality*15 + 10, max(30, skill_quality*25)) / SMELTING_DENOMINATOR)
+	var/material_factor = (material_quality - SMELTERY_QUALITY_SPOIL) * 0.5
 
-	var/final_quality = material_factor + skill_factor + reagent_factor
-	return max(-1, CEILING(min(4, final_quality), 1))
+	var/final_quality = floor(material_factor + skill_factor)
 
-/datum/quality_calculator/metallurgy/apply_quality_to_item(obj/item/target, track_masterworks = FALSE)
+	return clamp(final_quality, SMELTERY_QUALITY_SPOIL, SMELTERY_QUALITY_EXCELLENT)
+
+/datum/quality_calculator/metallurgy/apply_quality_to_item(obj/item/target, track_creation, quality_override)
 	if(!target)
 		return FALSE
 
-	var/final_quality = calculate_final_quality()
-	var/list/quality_data = get_quality_data(final_quality)
+	if(!quality_override)
+		quality_override = calculate_final_quality()
+	quality_override = clamp(quality_override, SMELTERY_QUALITY_SPOIL, SMELTERY_QUALITY_EXCELLENT)
 
-	if(!quality_data)
-		return FALSE
+	. = ..(target, track_creation, quality_override)
+	target.set_quality(quality_override)
 
-	var/name_prefix = quality_data["name_prefix"]
-	if(islist(name_prefix))
-		var/list/names = name_prefix
-		name_prefix = pick(names)
-
-	var/description_prefix = quality_data["description"]
-	if(islist(description_prefix))
-		var/list/names = description_prefix
-		description_prefix = pick(names)
-	// Apply name prefix
-	if(name_prefix && name_prefix != "")
-		target.name = "[name_prefix] [target.name]"
-
-	// Apply description prefix
-	if(description_prefix && description_prefix != "")
-		target.desc += "\n[description_prefix]"
-
-
-	target.set_quality(final_quality)
-
-	if(track_masterworks && final_quality >= 4)
+/datum/quality_calculator/metallurgy/track_item_creation(obj/item/target, final_quality)
+	if(final_quality >= SMELTERY_QUALITY_EXCELLENT)
 		record_round_statistic(STATS_MASTERWORKS_FORGED, 1)
-
-	return TRUE
-
-/datum/quality_calculator/metallurgy/proc/apply_smelt_to_ingot(obj/item/target, final_quality = 0, track_masterworks = FALSE)
-	if(!target)
-		return FALSE
-	final_quality = max(-1, CEILING(min(4, final_quality), 1))
-
-	var/list/quality_data = get_quality_data(final_quality)
-
-	if(!quality_data)
-		return FALSE
-
-	var/name_prefix = quality_data["name_prefix"]
-	if(islist(name_prefix))
-		var/list/names = name_prefix
-		name_prefix = pick(names)
-	var/description_prefix = quality_data["description"]
-	if(islist(description_prefix))
-		var/list/names = description_prefix
-		description_prefix = pick(names)
-	// Apply name prefix
-	if(name_prefix && name_prefix != "")
-		target.name = "[name_prefix] [target.name]"
-
-	// Apply description prefix
-	if(description_prefix && description_prefix != "")
-		target.desc += "\n[description_prefix]"
-
-
-	target.set_quality(final_quality)
-
-	if(track_masterworks && final_quality >= 4)
-		record_round_statistic(STATS_MASTERWORKS_FORGED, 1)
-
-	return TRUE

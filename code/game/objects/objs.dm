@@ -28,8 +28,8 @@
 
 	blade_dulling = DULLING_BASHCHOP
 
+	/// Dropped upon atom_deconstruct() with a +1/-1 random amount
 	var/debris = null
-	var/static_debris = null
 	var/destroy_sound = 'sound/foley/breaksound.ogg'
 	var/destroy_message = null
 
@@ -49,6 +49,13 @@
 	var/rarity_mod = 0
 
 	vis_flags = VIS_INHERIT_PLANE
+
+	/// The sound this obj makes when something is buckled to it
+	var/buckle_sound = null
+
+	/// The sound this obj makes when something is unbuckled from it
+	var/unbuckle_sound = null
+
 	uses_integrity = TRUE
 
 	// See /code/datums/locks
@@ -88,12 +95,6 @@
 	return ..()
 
 /obj/Initialize(mapload, ...)
-	if(islist(armor))
-		armor = getArmor(arglist(armor))
-	else if(!armor)
-		armor = getArmor()
-	else if(!istype(armor, /datum/armor))
-		stack_trace("Invalid type [armor.type] found in .armor during /obj Initialize()")
 	if(main_material)
 		set_material_information()
 	if(lockid)

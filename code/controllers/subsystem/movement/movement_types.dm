@@ -33,7 +33,7 @@
 	src.controller = controller
 	src.extra_info = extra_info
 	if(extra_info)
-		RegisterSignal(extra_info, COMSIG_PARENT_QDELETING, PROC_REF(info_deleted))
+		RegisterSignal(extra_info, COMSIG_QDELETING, PROC_REF(info_deleted))
 	src.moving = moving
 	src.priority = priority
 	src.flags = flags
@@ -120,7 +120,16 @@
 		return
 
 	var/visual_delay = controller.visual_delay
+
+	var/old_dir = moving.dir
+	var/old_loc = moving.loc
+
+	owner?.processing_move_loop_flags = (flags | MOVED_BY_MOVEMENT_LOOP)
 	var/result = move() //Result is an enum value. Enums defined in __DEFINES/movement.dm
+	if(moving)
+		var/direction = get_dir(old_loc, moving.loc)
+		SEND_SIGNAL(moving, COMSIG_MOVABLE_MOVED_FROM_LOOP, src, old_dir, direction)
+	owner?.processing_move_loop_flags = NONE
 
 	SEND_SIGNAL(src, COMSIG_MOVELOOP_POSTPROCESS, result, delay * visual_delay)
 
@@ -128,10 +137,13 @@
 	if(QDELETED(src) || result != MOVELOOP_SUCCESS) //Can happen
 		return
 
+	if(flags & MOVEMENT_LOOP_IGNORE_GLIDE)
+		return
+
 	moving.set_glide_size(MOVEMENT_ADJUSTED_GLIDE_SIZE(delay, visual_delay))
 
 ///Handles the actual move, overriden by children
-///Returns FALSE if nothing happen, TRUE otherwise
+///Any return value that isn't MOVELOOP_SUCCESS makes nothing happen
 /datum/move_loop/proc/move()
 	return MOVELOOP_FAILURE
 
@@ -198,6 +210,7 @@
 	var/atom/old_loc = moving.loc
 	moving.Move(get_step(moving, direction), direction, FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 	// We cannot rely on the return value of Move(), we care about teleports and it doesn't
+	// Moving also can be null on occasion, if the move deleted it and therefore us
 	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /**
@@ -224,7 +237,6 @@
 	var/atom/old_loc = moving.loc
 	step_to(moving, get_step(moving, direction))
 	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
-
 
 /**
  * Like move(), but we don't care about collision at all
@@ -267,7 +279,7 @@
 	target = chasing
 
 	if(!isturf(target))
-		RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(handle_no_target)) //Don't do this for turfs, because we don't care
+		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(handle_no_target)) //Don't do this for turfs, because we don't care
 
 
 /datum/move_loop/has_target/compare_loops(datum/move_loop/loop_type, priority, flags, extra_info, delay, timeout, atom/chasing)
@@ -283,6 +295,31 @@
 	SIGNAL_HANDLER
 	qdel(src)
 
+/**
+ * Used for force-move loops, similar to move_towards_legacy() but not quite the same
+ *
+ * Returns TRUE if the loop successfully started, or FALSE if it failed
+ *
+ * Arguments:
+ * moving - The atom we want to move
+ * chasing - The atom we want to move towards
+ * delay - How many deci-seconds to wait between fires. Defaults to the lowest value, 0.1
+ * timeout - Time in deci-seconds until the moveloop self expires. Defaults to infinity
+ * subsystem - The movement subsystem to use. Defaults to SSmovement. Only one loop can exist for any one subsystem
+ * priority - Defines how different move loops override each other. Lower numbers beat higher numbers, equal defaults to what currently exists. Defaults to MOVEMENT_DEFAULT_PRIORITY
+ * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
+ *
+**/
+/datum/move_manager/proc/force_move(moving, chasing, delay, timeout, subsystem, priority, flags, datum/extra_info)
+	return add_to_loop(moving, subsystem, /datum/move_loop/has_target/force_move, priority, flags, extra_info, delay, timeout, chasing)
+
+///Used for force-move loops
+/datum/move_loop/has_target/force_move
+
+/datum/move_loop/has_target/force_move/move()
+	var/atom/old_loc = moving.loc
+	moving.forceMove(get_step(moving, get_dir(moving, target)))
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 ///Base class of move_to and move_away, deals with the distance and target aspect of things
 /datum/move_loop/has_target/dist_bound
@@ -308,7 +345,6 @@
 		timer = world.time //Make sure to move as soon as possible
 		return MOVELOOP_FAILURE
 	return MOVELOOP_SUCCESS
-
 
 /**
  * Wrapper around walk_to()
@@ -340,7 +376,8 @@
 	if(!.)
 		return
 	var/atom/old_loc = moving.loc
-	step_to(moving, target)
+	var/turf/next = get_step_to(moving, target)
+	moving.Move(next, get_dir(moving, next), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /**
@@ -373,9 +410,9 @@
 	if(!.)
 		return
 	var/atom/old_loc = moving.loc
-	step_away(moving, target)
+	var/turf/next = get_step_away(moving, target)
+	moving.Move(next, get_dir(moving, next), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
-
 
 /**
  * Helper proc for the move_towards datum
@@ -475,7 +512,7 @@
 	if(y_ticker >= 1)
 		y_ticker = MODULUS(x_ticker, 1)
 	var/atom/old_loc = moving.loc
-	moving.Move(moving_towards, get_dir(moving, moving_towards))
+	moving.Move(moving_towards, get_dir(moving, moving_towards), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 
 	//YOU FOUND THEM! GOOD JOB
 	if(home && get_turf(moving) == get_turf(target))
@@ -557,10 +594,8 @@
 /datum/move_loop/has_target/move_towards_budget/move()
 	var/turf/target_turf = get_step_towards(moving, target)
 	var/atom/old_loc = moving.loc
-	moving.Move(target_turf, get_dir(moving, target_turf))
-	return old_loc != moving?.loc  ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
-
-
+	moving.Move(target_turf, get_dir(moving, target_turf), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 /**
  * Helper proc for the move_rand datum
  *
@@ -604,11 +639,11 @@
 
 /datum/move_loop/move_rand/move()
 	var/list/potential_dirs = potential_directions.Copy()
-	while(potential_dirs.len)
+	while(length(potential_dirs))
 		var/testdir = pick(potential_dirs)
 		var/turf/moving_towards = get_step(moving, testdir)
 		var/atom/old_loc = moving.loc
-		moving.Move(moving_towards, testdir)
+		moving.Move(moving_towards, testdir, FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 		if(old_loc != moving?.loc)  //If it worked, we're done
 			return MOVELOOP_SUCCESS
 		potential_dirs -= testdir
@@ -638,4 +673,57 @@
 	var/atom/old_loc = moving.loc
 	var/turf/next = get_step_rand(moving)
 	moving.Move(next, get_dir(moving, next), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
+
+/datum/move_loop/minecart
+	var/direction
+	var/aerial_distance
+	var/aerial_velocity
+
+/datum/move_loop/minecart/setup(delay, timeout, dir)
+	. = ..()
+	if(!.)
+		return
+	direction = dir
+
+/datum/move_loop/minecart/Destroy()
+	if(!QDELETED(moving) && istype(moving, /obj/structure/closet/crate/miningcar))
+		var/turf/moving_turf = get_turf(moving)
+		if(istype(moving_turf, /turf/open/openspace))
+			var/obj/structure/closet/crate/miningcar/minecart = moving
+			minecart.handle_aerial_fall(freefall = TRUE)
+	return ..()
+
+/datum/move_loop/minecart/process()
+	. = ..()
+	if(QDELETED(src) || QDELETED(moving))
+		return
+	var/turf/moving_turf = get_turf(moving)
+	if(istype(moving_turf, /turf/open/openspace))
+		aerial_velocity += (delay / 10) * 9.8
+		aerial_distance += aerial_velocity * (delay / 10)
+		if(aerial_distance >= 1)
+			aerial_distance -= 1
+			if(istype(moving, /obj/structure/closet/crate/miningcar))
+				var/obj/structure/closet/crate/miningcar/minecart = moving
+				minecart.handle_aerial_fall()
+	else
+		aerial_distance = 0
+		aerial_velocity = 0
+
+/datum/move_loop/minecart/move()
+	var/atom/old_loc = moving.loc
+	var/turf/new_loc = get_step(moving, direction)
+	if(locate(/obj/structure/minecart_rail) in old_loc)
+		if(istype(new_loc, /turf/open/openspace))
+			var/turf/below_turf = GET_TURF_BELOW(new_loc)
+			if(locate(/obj/structure/minecart_rail) in below_turf)
+				new_loc = below_turf
+		else if(!(locate(/obj/structure/minecart_rail) in new_loc))
+			var/turf/above_turf = GET_TURF_ABOVE(new_loc)
+			if(locate(/obj/structure/minecart_rail) in above_turf)
+				new_loc = above_turf
+
+	moving.Move(new_loc, direction, FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
+	// We cannot rely on the return value of Move(), we care about teleports and it doesn't
 	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE

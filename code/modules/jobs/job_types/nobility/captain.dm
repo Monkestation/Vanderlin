@@ -38,13 +38,17 @@
 
 /datum/job/captain
 	title = JOB_GUARD_CAPTAIN
+	alt_titles = list("Commander of The Watch", "Knight Commander", "Watch Master", "Marshal")
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Sir")
+	alt_honorary_female = list("Dame")
 	tutorial = "Law and Order, your divine reason for existence. \
 	You have been given command over the town and keep garrison to help ensure order and peace within the city, \
 	and defend it against the many dangers of the peninsula."
 	department_flag = NOBLEMEN
 	display_order = JDO_CAPTAIN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -59,6 +63,8 @@
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/serjeant
 		)
 	give_bank_account = 120
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/antag/CombatSausageMaker.ogg'
 	noble_income = 11
 
@@ -71,11 +77,13 @@
 	job_bitflag = BITFLAG_ROYALTY | BITFLAG_GARRISON
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/captain
+	tennite_triumph_exclusive = TRUE
 
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 	verbs = list(
@@ -114,12 +122,13 @@
 	armor = /obj/item/clothing/armor/brigandine/captain
 	neck = /obj/item/clothing/neck/gorget
 	shirt = /obj/item/clothing/shirt/undershirt/colored/guard
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backl = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/weapon/mace/cudgel
 	cloak = /obj/item/clothing/cloak/captain
 	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/storage/keyring/captain = 1,
 		/obj/item/signal_horn = 1
 	)

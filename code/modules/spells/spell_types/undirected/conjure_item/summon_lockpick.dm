@@ -17,4 +17,4 @@
 
 /datum/action/cooldown/spell/undirected/conjure_item/summon_lockpick/cast(mob/living/cast_on)
 	. = ..()
-	cast_on.adjustBruteLoss(3) // This shit ain't free, man
+	cast_on.adjustBruteLoss(5, damage_type = BCLASS_PIERCE) // This shit ain't free, man

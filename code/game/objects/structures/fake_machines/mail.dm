@@ -300,6 +300,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/is_accused = FALSE
 	var/is_indexed = FALSE
 	var/is_selfreport = FALSE
+	var/is_suspect = FALSE
 	var/is_correct = !confession.false_confession
 
 	// Check if confessor is inquisition member
@@ -312,6 +313,9 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 	if(confession.signee.name in GLOB.excommunicated_players)
 		is_correct = TRUE
+
+	if(confession.signee.name in GLOB.inquis_suspect_players)
+		is_suspect = TRUE
 
 	// Check paired indexer
 	if(confession.paired)
@@ -352,10 +356,16 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	// Calculate marque value
 	var/marque_value = confession.marquevalue
 	if(confession.false_confession)
-		var/mob/living/carbon/human/human = confession.signee
-		if(human)
-			human.inquisition_position.merits -= 4
-		to_chat(user, span_notice("To lie to the church is a sin my son, do not do it again."))
+		if (is_suspect) //Even innocent confessions are worth something for suspects.
+			marque_value -= 2
+			GLOB.vanderlin_round_stats[STATS_MARQUES_MADE] += marque_value
+			user.inquisition_position.merits += CEILING(marque_value * 0.5, 1)
+			budget2change(marque_value, user, "MARQUE")
+		else
+			var/mob/living/carbon/human/human = confession.signee
+			if(human)
+				human.inquisition_position.merits -= 4
+			to_chat(user, span_notice("To lie to the church is a sin my son, do not do it again."))
 
 	else if(confession.paired && !is_indexed && !is_correct)
 		marque_value = 2
@@ -484,6 +494,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	var/is_confessed = FALSE
 	var/is_indexed = FALSE
 	var/is_correct = FALSE
+	var/is_suspect = FALSE
 	var/is_selfreport = FALSE
 
 	// Check if subject is inquisition member
@@ -502,7 +513,8 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			if(/datum/antagonist/bandit, /datum/antagonist/maniac, /datum/antagonist/assassin,
 			   /datum/antagonist/zizocultist, /datum/antagonist/zizocultist/leader,
 			   /datum/antagonist/werewolf, /datum/antagonist/werewolf/lesser,
-			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lords_spawn, /datum/antagonist/vampire/lord/daewalker)
+			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lords_spawn,
+			   /datum/antagonist/vampire/lord/daewalker, /datum/antagonist/vampire/lord/nitewalker)
 				is_correct = TRUE
 				break
 
@@ -518,6 +530,10 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	// Check excommunication
 	if(subject?.name in GLOB.excommunicated_players)
 		is_correct = TRUE
+
+	// Check suspicion
+	if(subject?.name in GLOB.inquis_suspect_players)
+		is_suspect = TRUE
 
 	// Check if already indexed
 	if(GLOB.indexed && !is_selfreport)
@@ -555,8 +571,13 @@ GLOBAL_LIST_EMPTY(letters_sent)
 		return
 
 	// Calculate marque value
+	var/marque_value = accusation.marquevalue
+	if(is_suspect && !is_correct) //Even innocent accusations are worth something for suspects.
+		marque_value -= 2
+		budget2change(marque_value, user, "MARQUE")
+		GLOB.vanderlin_round_stats[STATS_MARQUES_MADE] += marque_value
+		user.inquisition_position.merits += CEILING(marque_value * 0.5, 1)
 	if(is_correct)
-		var/marque_value = accusation.marquevalue
 		if(!is_indexed)
 			marque_value += 2
 		if(subject?.mind?.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
@@ -703,7 +724,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 
 /obj/structure/fake_machine/mail/examine(mob/user)
 	. = ..()
-	. += "<a href='?src=[REF(src)];directory=1'>Directory:</a> [mailtag]"
+	. += "<a href='byond://?src=[REF(src)];directory=1'>Directory:</a> [mailtag]"
 
 /obj/structure/fake_machine/mail/Topic(href, href_list)
 	..()
@@ -809,10 +830,10 @@ GLOBAL_LIST_EMPTY(letters_sent)
 	contents = "<center>  THE ORATORIUM'S RELIQUARY  <BR>"
 	contents += "ERADICATE HERESY, SO THAT PSYDONIA MAY ENDURE <BR>"
 	if(HAS_TRAIT(user, TRAIT_PURITAN))
-		contents += "  <a href='?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a>  <BR>"
+		contents += "  <a href='byond://?src=[REF(src)];locktoggle=1]'> PURITAN'S LOCK: [inqonly ? "YES":"NO"]</a>  <BR>"
 	else
 		contents += "  PURITAN'S LOCK: [inqonly ? "YES":"NO"]  <BR>"
-	contents += "<a href='?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a><BR>"
+	contents += "<a href='byond://?src=[REF(src)];eject=1'>MARQUES LOADED: [inqcoins]</a><BR>"
 
 	if(cat_current == "1")
 		contents += "<BR> <table style='width: 100%' line-height: 40px;'>"
@@ -820,19 +841,19 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			for(var/i = 1, i <= inq_category.len, i++)
 				contents += "<tr>"
 				contents += "<td style='width: 100%; text-align: center;'>\
-					<a href='?src=[REF(src)];changecat=[inq_category[i]]'>[inq_category[i]]</a>\
+					<a href='byond://?src=[REF(src)];changecat=[inq_category[i]]'>[inq_category[i]]</a>\
 					</td>"
 				contents += "</tr>"*/
 		for(var/i = 1, i <= category.len, i++)
 			contents += "<tr>"
 			contents += "<td style='width: 100%; text-align: center;'>\
-				<a href='?src=[REF(src)];changecat=[category[i]]'>[category[i]]</a>\
+				<a href='byond://?src=[REF(src)];changecat=[category[i]]'>[category[i]]</a>\
 				</td>"
 			contents += "</tr>"
 		contents += "</table>"
 	else
 		contents += "<center>[cat_current]<BR></center>"
-		contents += "<center><a href='?src=[REF(src)];changecat=1'>\[RETURN\]</a><BR><BR></center>"
+		contents += "<center><a href='byond://?src=[REF(src)];changecat=1'>\[RETURN\]</a><BR><BR></center>"
 		contents += "<center>"
 		var/list/items = list()
 		for(var/datum/inqports/PA as anything in GLOB.inqsupplies)
@@ -845,7 +866,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			if(inqonly && !HAS_TRAIT(user, TRAIT_PURITAN) || (PA.maximum && !PA.remaining) || inqcoins < PA.marquescost)
 				contents += "[name]<BR>"
 			else
-				contents += "<a href='?src=[REF(src)];buy=[PA.type]'>[name]</a><BR>"
+				contents += "<a href='byond://?src=[REF(src)];buy=[PA.type]'>[name]</a><BR>"
 		contents += "</center>"
 	var/datum/browser/popup = new(user, "VENDORTHING", "", 500, 600)
 	popup.set_content(contents)

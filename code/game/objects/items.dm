@@ -5,6 +5,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item
 	name = "item"
+	var/examine_name = null
 	icon = 'icons/obj/items_and_weapons.dmi'
 	pass_flags_self = PASSITEM
 	pass_flags = PASSTABLE
@@ -15,6 +16,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
 	///Icon file for right inhand overlays
 	var/righthand_file = 'icons/mob/inhands/items_righthand.dmi'
+	///basically avoiding adding an atom var this is the we are indexed by the recipe book call
+	var/indexed = FALSE
 
 	///Icon file for mob worn overlays.
 	///no var for state because it should *always* be the same as icon_state
@@ -39,6 +42,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	obj_flags = NONE
 	var/item_flags = NONE
+	///do we have a child icon?
+	var/childcore = FALSE
 
 	var/list/hitsound
 	///Played when the item is used, for example tools
@@ -81,7 +86,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/interaction_flags_item = INTERACT_ITEM_ATTACK_HAND_PICKUP
 
 	// Takes bitflags. See setup.dm for appropriate bit flags
-	var/body_parts_covered = 0
+	var/body_parts_covered = NONE
+	var/body_parts_access_allowed = NONE
 	var/gas_transfer_coefficient = 1 // for leaking gas from turf to mask and vice-versa (for masks right now, but at some point, i'd like to include space helmets)
 	var/permeability_coefficient = 1 // for chemicals/diseases
 	var/siemens_coefficient = 1 // for electrical admittance/conductance (electrocution checks and shit)
@@ -107,7 +113,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/list/attack_verb //Used in attackby() to say how something was attacked "[x] has been [z.attack_verb] by [y] with [z]"
 	var/list/species_exception = null	// list() of species types, if a species cannot put items in a certain slot, but species type is in list, it will be able to wear that item
 
-	var/mob/thrownby = null
+	///A weakref to the mob who threw the item
+	var/datum/weakref/thrownby = null //I cannot verbally describe how much I hate this var
 
 	mouse_drag_pointer = MOUSE_ACTIVE_POINTER //the icon to indicate this object is being dragged
 
@@ -119,8 +126,12 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	// All items with sharpness of IS_SHARP (1) or higher will automatically get the butchering component. See combat.dm for defines.
 	var/sharpness = IS_BLUNT
 
-	var/tool_behaviour = NONE
+	var/tool_behaviour = null
+	///How fast does the tool work
 	var/toolspeed = 1
+
+	/// Organ storage component requires this
+	var/atom/stored_in
 
 	var/block_chance = 0
 	//If you want to have something unrelated to blocking/armour piercing etc. Maybe not needed, but trying to think ahead/allow more freedom
@@ -155,7 +166,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	var/canMouseDown = FALSE
 	var/can_parry = FALSE
-	var/associated_skill
+	var/datum/attribute/associated_skill
 
 	var/list/possible_item_intents = list(/datum/intent/use)
 
@@ -223,7 +234,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/mailer = null
 	var/mailedto = null
 
-	var/list/examine_effects = list()
+	var/list/examine_effects
 
 	var/list/blocksound //played when an item that is equipped blocks a hit
 
@@ -234,8 +245,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	var/last_used = 0
 
-	// Boolean sanity var for smelteries to avoid runtimes. Is this is a bar smelted through ore for exp gain?
-	var/smelted = FALSE
 	// Can this be used against a training dummy to learn skills? Prevents dumb exploits.
 	var/istrainable = FALSE
 
@@ -262,14 +271,12 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/grid_height
 	///this is used to see how many times we've been repaired via melding
 	var/integrity_restores = 0
-	///our melting material, basically if exists this is what we melt into in a crucible
+	/// Set this to have smelting results not equal to a single ingot (100). Otherwise use smeltresult
 	var/datum/material/melting_material
-	///our metling amount
+	/// The melting amount. Set this to have smelting results not equal to a single ingot (100). Otherwise use smeltresult
 	var/melt_amount = 0
 	///our current in progress slapcraft
 	var/datum/orderless_slapcraft/in_progress_slapcraft
-	///these are flags of what tools can interact with this atom useful to stop hard coding interactions
-	var/tool_flags = NONE
 
 	var/list/attunement_values
 	///this is in KG
@@ -279,11 +286,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	/// Artificers Recipe
 	var/datum/artificer_recipe/artrecipe
+	/// Current anvil/forging recipe
+	var/datum/anvil_recipe/currecipe
 
 	/// angle of the icon, these are used for attack animations
 	var/icon_angle = 50 // most of our icons are angled
 	///the processing quality we have
-	var/recipe_quality = 1
+	var/recipe_quality
 
 	// Lock related
 
@@ -295,6 +304,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/wield_block = TRUE
 	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
 	var/toggle_state
+	///if this is set we add the spell modifier component with these stats
+	var/datum/spellcraft_contribution/item/spell_modifier
 
 /obj/item/Initialize(mapload)
 	if (attack_verb)
@@ -313,6 +324,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				getmoboverlay(i,prop,behind=FALSE,mirrored=TRUE)
 				getmoboverlay(i,prop,behind=TRUE,mirrored=TRUE)
 
+	if(spell_modifier)
+		apply_spell_modifiers()
 	if(experimental_onhip)
 		if(slot_flags & ITEM_SLOT_BELT)
 			var/i = "onbelt"
@@ -362,11 +375,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		max_blade_int = 0
 		blade_int = 0
 
-	//Randomizes blade sharpness on initialize to between 60-100%
 	if(max_blade_int && !blade_int)
 		blade_int = max_blade_int
-		if(randomize_blade_int)
-			blade_int += rand(-(max_blade_int * 0.4), 0)
 
 	if(!pixel_x && !pixel_y && !bigboy)
 		pixel_x = rand(-5,5)
@@ -387,8 +397,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			lordcolor()
 		else
 			RegisterSignal(SSdcs, COMSIG_LORD_COLORS_SET, TYPE_PROC_REF(/obj/item, lordcolor))
-	else if(get_detail_color()) // Lord color does this
-		update_appearance(UPDATE_OVERLAYS)
+
+	if(get_detail_color()) // Lord color does this
+		update_appearance(UPDATE_ICON)
 
 	if(slot_flags)
 		AddElement(/datum/element/update_icon_updates_onmob, slot_flags)
@@ -413,37 +424,29 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else if(isliving(loc))
 			var/mob/living/embedded_mob = loc
 			embedded_mob.simple_remove_embedded_object(src)
+
+	remove_all_enchantments()
+
 	if(artrecipe)
 		QDEL_NULL(artrecipe)
+
+	if(currecipe)
+		QDEL_NULL(currecipe)
+
 	if(istype(loc, /obj/machinery/artificer_table))
 		var/obj/machinery/artificer_table/A = loc
 		A.material = null
 		A.update_appearance(UPDATE_OVERLAYS)
-	return ..()
 
+	return ..()
 
 /obj/item/update_overlays()
 	. = ..()
-	//details tags for items/clothes
-	if(get_detail_tag())
-		var/mutable_appearance/pic = mutable_appearance(icon, "[icon_state][detail_tag]")
-		pic.appearance_flags = RESET_COLOR
-		if(get_detail_color())
-			pic.color = get_detail_color()
-		. += pic
 
-	// Add quality overlay to the food item
-	if(recipe_quality <= 0 || !ismob(loc))
+	if(!get_detail_tag())
 		return
-	var/list/quality_icons = list(
-		null, // Regular has no overlay
-		// "bronze",
-		"silver",
-		"gold",
-		"diamond",
-	)
-	if(recipe_quality <= length(quality_icons) && quality_icons[recipe_quality])
-		. += mutable_appearance('icons/effects/crop_quality.dmi', quality_icons[recipe_quality])
+
+	. += mutable_appearance(icon, "[icon_state][detail_tag]", color = get_detail_color(), appearance_flags = RESET_COLOR)
 
 /**
  * Handles adding components to the item. Added in Initialize()
@@ -538,7 +541,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		CRASH("item add_item_action got a type or instance of something that wasn't an action.")
 
 	LAZYADD(actions, action)
-	RegisterSignal(action, COMSIG_PARENT_QDELETING, PROC_REF(on_action_deleted))
+	RegisterSignal(action, COMSIG_QDELETING, PROC_REF(on_action_deleted))
 	if(ismob(loc))
 		// We're being held or are equipped by someone while adding an action?
 		// Then they should also probably be granted the action, given it's in a correct slot
@@ -552,7 +555,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!action)
 		return
 
-	UnregisterSignal(action, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(action, COMSIG_QDELETING)
 	LAZYREMOVE(actions, action)
 	qdel(action)
 
@@ -613,8 +616,28 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!islist(inspect_list))
 		inspect_list = list()
 
+	if(max_blade_int)
+		inspect_list += "\n<b>SHARPNESS:</b> "
+		var/meme = round(((blade_int / max_blade_int) * 100), 1)
+		inspect_list += "[meme]%"
+
+//**** General durability
+	if(uses_integrity)
+		inspect_list += "\n<b>DURABILITY:</b> "
+		var/meme = round(((atom_integrity / max_integrity) * 100), 1)
+		inspect_list += "[meme]%"
+
 	if(minstr)
 		inspect_list += "\n<b>MIN.STR:</b> [minstr]"
+
+	if(associated_skill)
+		inspect_list += "\n<b>SKILL:</b> [associated_skill::name]"
+
+	if(!istype(src, /obj/item/clothing))
+		if(can_parry)
+			inspect_list += "\n<b>PARRY:</b> [wdefense]"
+		else
+			inspect_list +=  "\n<b>PARRY:</b> Cannot Parry"
 
 	if(wbalance)
 		inspect_list += "\n<b>BALANCE: </b>"
@@ -639,20 +662,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(alt_intents)
 		inspect_list += "\n<b>ALT-GRIPPABLE</b>"
 
-	if(can_parry)
-		inspect_list += "\n<b>PARRY:</b> [wdefense]"
-
-	if(max_blade_int)
-		inspect_list += "\n<b>SHARPNESS:</b> "
-		var/meme = round(((blade_int / max_blade_int) * 100), 1)
-		inspect_list += "[meme]%"
-
-//**** General durability
-	if(uses_integrity)
-		inspect_list += "\n<b>DURABILITY:</b> "
-		var/meme = round(((atom_integrity / max_integrity) * 100), 1)
-		inspect_list += "[meme]%"
-
 	return inspect_list
 
 /obj/item/interact(mob/user)
@@ -671,23 +680,23 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 	return attempt_pickup(user)
 
-/obj/item/proc/attempt_pickup(mob/user)
+/obj/item/proc/attempt_pickup(mob/living/user)
 	. = TRUE
-	var/mob/living/carbon/C = user
-	if(C.has_status_effect(/datum/status_effect/tremor_grip_loss))
-		return
 
-	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH))
-		to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
-		return
+	if(HAS_TRAIT(src, TRAIT_NEEDS_QUENCH) && iscarbon(user))
+		var/mob/living/carbon/C = user
+		if(!C.can_touch_burning(src))
+			to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
 
 	if(resistance_flags & ON_FIRE)
 		var/can_handle_hot = FALSE
-		if(!istype(C))
-			can_handle_hot = TRUE
-		else if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
-			can_handle_hot = TRUE
-		else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS))
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
+				can_handle_hot = TRUE
+			else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS))
+				can_handle_hot = TRUE
+		else
 			can_handle_hot = TRUE
 
 		if(can_handle_hot)
@@ -696,38 +705,73 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else
 			user.visible_message("<span class='warning'>[user] burns [user.p_their()] hand putting out the fire on [src]!</span>")
 			extinguish()
-			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
-			if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
-				C.update_damage_overlays()
+			var/obj/item/bodypart/affecting = user.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting?.receive_damage(0, 5))		// 5 burn damage
+				user.update_damage_overlays()
 			return
 
-	if(acid_level > 20 && !ismob(loc))// so we can still remove the clothes on us that have acid.
-		if(istype(C))
-			if(!C.gloves || (!(C.gloves.resistance_flags & (UNACIDABLE|ACID_PROOF))))
-				to_chat(user, "<span class='warning'>The acid on [src] burns my hand!</span>")
-				var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
-				if(affecting && affecting.receive_damage( 0, 5 ))		// 5 burn damage
-					C.update_damage_overlays()
+	if(resistance_flags & ON_FIRE)
+		var/can_handle_hot = TRUE
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			if(!C.can_touch_burning(src))
+				can_handle_hot = FALSE
+
+		extinguish()
+
+		if(can_handle_hot)
+			user.visible_message("<span class='warning'>[user] puts out the fire on [src].</span>")
+			return
+
+		user.visible_message("<span class='warning'>[user] burns [user.p_their()] hand putting out the fire on [src]!</span>")
+		extinguish()
+		if(iscarbon(user))
+			var/mob/living/carbon/C = user
+			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting?.receive_damage(0, 5))		// 5 burn damage
+				C.update_damage_overlays()
+
+		return
+
+	if(acid_level && iscarbon(user))// so we can still remove the clothes on us that have acid.
+		var/mob/living/carbon/C = user
+		if(!C.can_touch_acid(src))
+			to_chat(user, "<span class='warning'>The acid on [src] burns my hand!</span>")
+			var/obj/item/bodypart/affecting = C.get_bodypart("[(user.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
+			if(affecting?.receive_damage(0, 5))
+				C.update_damage_overlays()
 
 	if(!(interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))		//See if we're supposed to auto pickup.
 		return
 
-	if(SEND_SIGNAL(loc, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
-		return
+	if(stored_in)
+		if(SEND_SIGNAL(stored_in, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
+			return
+	else
+		if(SEND_SIGNAL(loc, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
+			return
 
 	if(!ontable() && isturf(loc))
-		if(!do_after(user, 3 DECISECONDS, src))
-			return
+		if(stored_in)
+			if(!do_after(user, 3 DECISECONDS, stored_in))
+				return
+		else
+			if(!do_after(user, 3 DECISECONDS, src))
+				return
 
 	//If the item is in a storage item, take it out
 	var/outside_storage = !(item_flags & IN_STORAGE)
 	var/turf/storage_turf
-	if(!outside_storage)
+	if(!outside_storage || stored_in)
 		//We want the pickup animation to play even if we're moving the item between movables. Unless the mob is not located on a turf.
 		if(isturf(user.loc))
 			storage_turf = get_turf(loc)
-		if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
-			return
+		if(stored_in)
+			if(!SEND_SIGNAL(stored_in, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
+				return
+		else
+			if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
+				return
 	if(QDELETED(src)) //moving it out of the storage destroyed it.
 		return
 
@@ -737,7 +781,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(throwing)
 		throwing.finalize(FALSE)
 	if(loc == user && outside_storage)
-		if(!allow_attack_hand_drop(user) || !user.temporarilyRemoveItemFromInventory(src))
+		if(!allow_attack_hand_drop(user) || !user.temporarilyRemoveItemFromInventory(src, source = user))
 			return
 
 	. = FALSE
@@ -1011,7 +1055,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		)
 	if(is_human_victim)
 		var/mob/living/carbon/human/U = M
-		U.apply_damage(7, BRUTE, affecting)
+		U.apply_damage(7, BRUTE, affecting, damage_type = BCLASS_STAB)
 
 	else
 		M.take_bodypart_damage(7)
@@ -1069,7 +1113,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return hit_atom.hitby(src, 0, itempush, throwingdatum=throwingdatum, damage_type = src.damage_type)
 
 /obj/item/throw_at(atom/target, range, speed, mob/thrower, spin=1, diagonals_first = 0, datum/callback/callback, force, gentle = FALSE)
-	thrownby = thrower
+	if(HAS_TRAIT(src, TRAIT_NODROP))
+		return
+	thrownby = WEAKREF(thrower)
 	callback = CALLBACK(src, PROC_REF(after_throw), callback) //replace their callback with our own
 	. = ..(target, range, speed, thrower, spin, diagonals_first, callback, force)
 
@@ -1205,7 +1251,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/turf/T = get_turf(src)
 		var/ash_type = /obj/item/fertilizer/ash
 		if(w_class == WEIGHT_CLASS_HUGE || w_class == WEIGHT_CLASS_GIGANTIC)
-			ash_type = /obj/item/fertilizer/ash
+			ash_type = /obj/item/fertilizer/ash/large
 		var/obj/item/fertilizer/ash/A = new ash_type(T)
 		A.desc += "\nLooks like this used to be \an [name] some time ago."
 		..()
@@ -1305,6 +1351,24 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	return TRUE
 
+/obj/item/proc/apply_spell_modifiers()
+	var/datum/spellcraft_contribution/contribution = GLOB.spellcraft_items[spell_modifier]
+
+	if(!contribution)
+		return
+
+	if(contribution.is_empty())
+		return
+
+	AddComponent(/datum/component/spell_modifier, \
+		contribution.form_cost_multipliers, \
+		contribution.form_cast_speed_multipliers, \
+		contribution.form_magnitude_modifications, \
+		contribution.technique_cost_multipliers, \
+		contribution.technique_cast_speed_multipliers, \
+		contribution.technique_magnitude_modifications \
+	)
+
 // Called before use_tool if there is a delay, or by use_tool if there isn't.
 // Only ever used by welding tools and stacks, so it's not added on any other use_tool checks.
 /obj/item/proc/tool_start_check(mob/living/user, amount=0)
@@ -1377,7 +1441,17 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	return !HAS_TRAIT(src, TRAIT_NODROP)
 
 /obj/item/proc/doStrip(mob/stripper, mob/owner)
-	return owner.dropItemToGround(src)
+	return owner.dropItemToGround(src, source = stripper)
+
+///Called by the carbon throw_item() proc. Returns null if the item negates the throw, or a reference to the thing to suffer the throw else.
+/obj/item/proc/on_thrown(mob/living/carbon/user, atom/target)
+	if((item_flags & ABSTRACT) || HAS_TRAIT(src, TRAIT_NODROP))
+		return
+	user.dropItemToGround(src, silent = TRUE)
+	if(throwforce && (HAS_TRAIT(user, TRAIT_PACIFISM)) || HAS_TRAIT(user, TRAIT_NO_THROWING))
+		to_chat(user, span_notice("You set [src] down gently on the ground."))
+		return
+	return src
 
 /obj/item/update_appearance(updates)
 	. = ..()
@@ -1410,22 +1484,30 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else
 			to_chat(user, span_notice("I wield [src] normally."))
 
-/obj/item/on_fall_impact(mob/living/impactee, fall_speed)
+/obj/item/onZImpact(turf/impacted_turf, levels, impact_flags)
 	. = ..()
-	if(!item_weight)
+
+	var/mass_kg = get_carry_weight()
+	if(!mass_kg)
+		return
+
+	var/mob/living/carbon/human/impactee = locate(/mob/living/carbon/human) in impacted_turf
+	if (isnull(impactee))
 		return
 
 	var/target_zone = BODY_ZONE_HEAD
-	/*
-	if(impactee.lying)
+	if(impactee.body_position == LYING_DOWN)
 		target_zone = BODY_ZONE_CHEST
-	*/
-	playsound(impactee, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+	// playsound(impactee, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 	add_blood_DNA(GET_ATOM_BLOOD_DNA(impactee))
-	impactee.visible_message(span_danger("[src] crashes into [impactee]'s [target_zone]!"), span_danger("A [src] hits you in your [target_zone]!"))
-	impactee.apply_damage(item_weight * fall_speed, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt", damage = item_weight * fall_speed))
+	var/fall_factor = sqrt(max(levels, 1))
+	var/impact_damage = mass_kg * fall_factor * FALL_DAMAGE_SCALE
+	impactee.visible_message(span_danger("[src] crashes into [impactee]'s [target_zone]!"), span_danger("[src] hits you in your [target_zone]!"))
+	impactee.apply_damage(impact_damage, BRUTE, target_zone, impactee.run_armor_check(target_zone, "blunt"))
 
 /obj/item/proc/on_consume(mob/living/eater)
+	SHOULD_CALL_PARENT(TRUE)
+	SEND_SIGNAL(src, COMSIG_ITEM_EATEN, eater)
 	return
 
 /obj/item/proc/on_anti_consume(mob/living/eater)
@@ -1461,6 +1543,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = ..()
 	if(ismob(loc))
 		update_slot_icon()
+	if(clean_types & CLEAN_WASH)
+		set_germ_level(0)
 
 /obj/item/proc/do_pickup_animation(atom/target, turf/source)
 	set waitfor = FALSE
@@ -1548,6 +1632,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/examine(mob/user)
 	. = ..()
+	if(currecipe)
+		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
 	if(!get_precursor_data(src))
 		return
 	var/alch_skill = user.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/alchemy) : 60
@@ -1570,15 +1656,30 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
 
+/**
+ * Returns the atom(either itself or an internal module) that will interact/attack the target on behalf of us
+ * For example an object can have different `tool_behaviours` (e.g borg omni tool) but will return an internal reference of that tool to attack for us
+ * You can use it for general purpose polymorphism if you need a proxy atom to interact in a specific way
+ * with a target on behalf on this atom
+ *
+ * Currently used only in the object melee attack chain but can be used anywhere else or even moved up to the atom level if required
+ */
+/obj/item/proc/get_proxy_attacker_for(atom/target, mob/user)
+	RETURN_TYPE(/obj/item)
+
+	return src
+
 /obj/item/proc/set_quality(quality)
-	recipe_quality = clamp(quality, 0, 4)
-	update_appearance(UPDATE_OVERLAYS)
-	if(recipe_quality >= 3) // gold tier and above
-		AddComponent(/datum/component/particle_spewer/sparkle)
-	else
-		var/datum/component/particle_spewer = GetComponent(/datum/component/particle_spewer/sparkle)
-		if(particle_spewer)
-			particle_spewer.RemoveComponent()
+	recipe_quality = quality
+
+/obj/item/get_examine_string(mob/user, thats = FALSE, examine_list_bool = FALSE)
+	if(examine_name && examine_list_bool)
+		var/display_name = article ? "[article] <b>[examine_name]</b>" : gender == PLURAL ? "some <b>[examine_name]</b>" : "\a <b>[examine_name]</b>"
+		var/list/override = list(article || (gender == PLURAL ? "some" : "a"), " ", "[get_examine_name(user, FALSE)]")
+		if(SEND_SIGNAL(src, COMSIG_ATOM_GET_EXAMINE_NAME, user, override) & COMPONENT_EXNAME_CHANGED)
+			display_name = override.Join("")
+		return "[thats ? ismob(src) ? "This is " : "That's " : ""][display_name]"
+	return ..()
 
 /obj/item/atom_break(damage_flag, silent)
 	. = ..()
@@ -1587,4 +1688,122 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		return
 
 	if(!silent)
-		balloon_alert_to_viewers(span_warning("[name]<br>breaks!"))
+		balloon_alert_to_viewers(("[name]<br>breaks!"))
+
+/obj/item/return_recipe_data()
+	var/has_grind = length(grind_results)
+	var/has_juice = length(juice_results)
+	var/list/milled_from_paths = GLOB.snack_mill_reverse[type]
+	var/list/sliced_from_paths = GLOB.snack_slice_reverse[type]
+
+	if(!has_grind&& !has_juice && !length(milled_from_paths) && !length(sliced_from_paths))
+		return null
+
+	var/list/data = list()
+	data["type"] = "snack_processing"
+	data["name"] = name
+	data["category"] = "Processing"
+	data["_output_path"] = "[type]"
+	data["output_name"] = name
+	data["output_icon"] = "[icon]"
+	data["output_state"] = "[icon_state]"
+
+	if(has_grind)
+		var/list/grind = list()
+		for(var/datum/reagent/path as anything in grind_results)
+			grind += list(list("name" = initial(path.name), "amount" = grind_results[path]))
+		data["grind_results"] = grind
+
+	if(has_juice)
+		var/list/juice = list()
+		var/list/combined_path = juice_results
+		for(var/datum/reagent/path as anything in combined_path)
+			juice += list(list("name" = initial(path.name), "amount" = combined_path[path]))
+		data["juice_results"] = juice
+
+	if(length(sliced_from_paths))
+		var/list/sliced_from = list()
+		for(var/atom/src_path as anything in sliced_from_paths)
+			sliced_from += list(list(
+				"name" = initial(src_path.name),
+				"icon" = "[initial(src_path.icon)]",
+				"icon_state" = "[initial(src_path.icon_state)]",
+				"_path" = "[src_path]",
+			))
+		data["sliced_from"] = sliced_from
+
+	if(length(milled_from_paths))
+		var/list/milled_from = list()
+		for(var/atom/src_path as anything in milled_from_paths)
+			milled_from += list(list(
+				"name" = initial(src_path.name),
+				"icon" = "[initial(src_path.icon)]",
+				"icon_state" = "[initial(src_path.icon_state)]",
+				"_path" = "[src_path]",
+			))
+		data["milled_from"] = milled_from
+
+	if(length(obtained_from))
+		var/list/sources = list()
+		for(var/list/entry as anything in obtained_from)
+			if(!islist(entry) || length(entry) < 2) continue
+			var/label = entry[1]
+			var/atom/src_path = entry[2]
+			sources += list(list(
+				"label" = label,
+				"_path" = "[src_path]",
+				"name" = initial(src_path.name),
+				"icon" = "[initial(src_path.icon)]",
+				"icon_state" = "[initial(src_path.icon_state)]",
+			))
+		data["sources"] = sources
+
+	return data
+
+
+/obj/item/vv_get_dropdown()
+	. = ..()
+	VV_DROPDOWN_OPTION("", "---")
+	VV_DROPDOWN_OPTION(VV_HK_ADDENCHANT, "Add Enchantment")
+	VV_DROPDOWN_OPTION(VV_HK_REMOVEENCHANT, "Remove Enchantment")
+
+/obj/item/vv_do_topic(list/href_list)
+	if(!(. = ..()))
+		return
+	var/obj/item/target = src
+	if(href_list[VV_HK_ADDENCHANT])
+		if(!check_rights(NONE))
+			return
+
+		var/list/enchantment_subtypes = sortList(subtypesof(/datum/enchantment), GLOBAL_PROC_REF(cmp_typepaths_asc))
+		var/result = tgui_input_list(usr, "Choose an Enchantment to add", "Add Enchantment", enchantment_subtypes)
+		if(isnull(result))
+			return
+		if(!usr)
+			return
+
+		if(QDELETED(src))
+			to_chat(usr, "That thing doesn't exist anymore!")
+			return
+
+		target.enchant(result)
+		log_admin("[key_name(usr)] has added [result] to [key_name(target)].")
+		message_admins(span_notice("[key_name_admin(usr)] has added [result] enchantment to [key_name_admin(target)]."))
+
+	if(href_list[VV_HK_REMOVEENCHANT])
+		if(!check_rights(NONE))
+			return
+
+		var/list/enchantments = target.enchantments.Copy()
+
+		var/path = tgui_input_list(usr, "Choose an enchantment to remove.", "Remove Enchantment", enchantments)
+		if(isnull(path))
+			return
+		if(!usr)
+			return
+		if(QDELETED(src))
+			to_chat(usr, "That thing doesn't exist anymore!")
+			return
+
+		target.remove_enchantment(path)
+		message_admins(span_notice("[key_name_admin(usr)] has removed [path] enchantment from [target]."))

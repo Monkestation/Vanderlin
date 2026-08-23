@@ -17,6 +17,8 @@ GLOBAL_LIST_EMPTY(cache_timestamps) // Timestamps for each cache entry
 	var/import_only = FALSE
 	var/stable_price = FALSE
 	var/percent_bounty = FALSE
+	var/oversupply_amount = 999
+	var/oversupply_payout = 0
 
 	var/stockpile_id = STOCK_GENERIC // ID to match with stockpile objects
 	var/list/tracked_items = list() // Weakref list of tracked items
@@ -122,8 +124,9 @@ GLOBAL_LIST_EMPTY(cache_timestamps) // Timestamps for each cache entry
 
 	// Register signals for movement and deletion
 	RegisterSignal(I, COMSIG_MOVABLE_MOVED, PROC_REF(on_item_moved))
-	RegisterSignal(I, COMSIG_PARENT_QDELETING, PROC_REF(on_item_deleted))
+	RegisterSignal(I, COMSIG_QDELETING, PROC_REF(on_item_deleted))
 	RegisterSignal(I, COMSIG_ITEM_PICKUP, PROC_REF(on_item_picked_up))
+	ADD_TRAIT(I, TRAIT_NO_ROT, STOCK_TRAIT)
 
 	return TRUE
 
@@ -135,7 +138,8 @@ GLOBAL_LIST_EMPTY(cache_timestamps) // Timestamps for each cache entry
 	tracked_items -= item_ref
 
 	// Unregister signals
-	UnregisterSignal(I, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING, COMSIG_ITEM_PICKUP))
+	UnregisterSignal(I, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING, COMSIG_ITEM_PICKUP))
+	REMOVE_TRAIT(I, TRAIT_NO_ROT, STOCK_TRAIT)
 
 	return TRUE
 
@@ -143,7 +147,7 @@ GLOBAL_LIST_EMPTY(cache_timestamps) // Timestamps for each cache entry
 	for(var/datum/weakref/item_ref as anything in tracked_items)
 		var/obj/item/I = item_ref.resolve()
 		if(I)
-			UnregisterSignal(I, list(COMSIG_MOVABLE_MOVED, COMSIG_PARENT_QDELETING, COMSIG_ITEM_PICKUP))
+			UnregisterSignal(I, list(COMSIG_MOVABLE_MOVED, COMSIG_QDELETING, COMSIG_ITEM_PICKUP))
 	tracked_items = list()
 
 /datum/stock/proc/on_item_moved(obj/item/source, atom/old_loc, direction, forced, list/old_locs, momentum_change)

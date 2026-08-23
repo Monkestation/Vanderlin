@@ -1,20 +1,21 @@
 // Character category and its buys
-#define TRIUMPH_CAT_CHARACTER "CHARACTER"
+#define TRIUMPH_CAT_CHARACTER "Character"
 
 #define TRIUMPH_BUY_RACE_ALL "race_all"
+#define TRIUMPH_BUY_HERETIC_NOBLE "heretic_noble"
 #define TRIUMPH_BUY_ANY_CLASS "pick_any"
 #define TRIUMPH_BUY_ADOPTION "adoption"
 #define TRIUMPH_BUY_FART "fart"
 #define TRIUMPH_BUY_SECRET_OFFICIANT "secret_officiant"
 
 // Character category and its buys
-#define TRIUMPH_CAT_CHALLENGES "CHALLENGES"
+#define TRIUMPH_CAT_CHALLENGES "Challenges"
 
 #define TRIUMPH_BUY_LEPROSY "leprosy"
 #define TRIUMPH_BUY_CURSE "curse"
 
 // Storyteller category and its buys
-#define TRIUMPH_CAT_STORYTELLER "STORYTELLER"
+#define TRIUMPH_CAT_STORYTELLER "Storyteller"
 
 #define TRIUMPH_BUY_ASTRATA_INFLUENCE "astrata_influence"
 #define TRIUMPH_BUY_NOC_INFLUENCE "noc_influence"
@@ -47,22 +48,29 @@
 #define TRIUMPH_BUY_ASTRATA_INFLUENCE_REDUCTION "astrata_influence_reduction"
 
 // Misc category and its buys
-#define TRIUMPH_CAT_MISC "MISC"
+#define TRIUMPH_CAT_MISC "Misc"
 
 #define TRIUMPH_BUY_PSYDON_FAVOURITE "psydon_favourite"
 
 // Misc category and its buys
-#define TRIUMPH_CAT_COMMUNAL "COMMUNAL"
+#define TRIUMPH_CAT_COMMUNAL "Communal"
 
 #define TRIUMPH_BUY_PSYDON_RETIREMENT "psydon_retirement"
 #define TRIUMPH_BUY_ORPHANAGE_RENOVATION "orphanage_renovation"
 #define TRIUMPH_BUY_LONGER_WEEK "longer_week"
 #define TRIUMPH_BUY_EXOTIC_TASTES "exotic_tastes"
 
-#define TRIUMPH_CAT_SEASONAL "SEASONAL"
+#define TRIUMPH_CAT_SEASONAL "Seasonal"
 
 #define TRIUMPH_BUY_SUBTERRAN_DWARF "subterran_dwarf"
 #define TRIUMPH_BUY_FORMIKRAG_KOBOLD "formikrag_kobold"
+#define TRIUMPH_BUY_SNOW_ELF "snow_elf"
+#define TRIUMPH_BUY_HALF_SNOW_ELF "half_snow_elf"
 
 // Bought triumph buys category
-#define TRIUMPH_CAT_ACTIVE_DATUMS "BOUGHT"
+#define TRIUMPH_CAT_ACTIVE_DATUMS "Bought"
+
+/// Cost to roll a random eligible special trait
+#define TRIUMPH_COST_RANDOM_SPECIAL 1
+/// Cost to directly pick a specific eligible special trait
+#define TRIUMPH_COST_SPECIFIC_SPECIAL 400

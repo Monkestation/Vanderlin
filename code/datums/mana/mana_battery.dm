@@ -71,6 +71,8 @@
 	name = MAGIC_MATERIAL_NAME + " crystal"
 	desc = "Crystalized mana." //placeholder desc
 	icon = 'icons/obj/crystals.dmi' //placeholder
+	grind_results = list(/datum/reagent/toxin/plasma = 40)
+	indexed = TRUE
 
 // Do not use, basetype
 /datum/mana_pool/mana_battery/mana_crystal
@@ -90,19 +92,22 @@
 	name = "stabilized primordial quartz crystal"
 	desc = "A stabilized Primordial Quartz Crystal, one of the few objects capable of stably storing mana without binding."
 	icon_state = "standard"
+	grid_height = 64
+	grid_width = 32
 
-/obj/item/mana_battery/mana_crystal/standard/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(!istype(I, /obj/item/weapon/knife))
-		return
+/obj/item/mana_battery/mana_crystal/standard/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!(tool.tool_behaviour == TOOL_KNIFE))
+		return NONE
 
 	user.visible_message(span_notice("[user] starts to chop up [src]!"), span_notice("You start to chop up [src]!"))
 	if(!do_after(user, 3 SECONDS, src))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	new /obj/item/mana_battery/mana_crystal/small (get_turf(src))
 	new /obj/item/mana_battery/mana_crystal/small (get_turf(src))
 	visible_message(span_notice("Mana flows freely into the newly created crystals!"))
 	qdel(src)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/mana_battery/mana_crystal/standard/get_initial_mana_pool_type()
 	return /datum/mana_pool/mana_battery/mana_crystal/standard
@@ -114,6 +119,8 @@
 	desc = "A miniaturized Primordial Quartz Crystal, formed using the run-off of cutting larger ones. Able to hold mana still, although not as much as a proper formation."
 	icon_state = "small"
 	w_class = WEIGHT_CLASS_SMALL
+	grid_height = 32
+	grid_width = 32
 
 /obj/item/mana_battery/mana_crystal/small/get_initial_mana_pool_type()
 	return /datum/mana_pool/mana_battery/mana_crystal/small
@@ -149,7 +156,6 @@
 /obj/item/clothing/neck/mana_star/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/mana_regeneration)
-	enchant(/datum/enchantment/mana_capacity)
 
 /obj/item/clothing/neck/mana_star/get_initial_mana_pool_type()
 	return /datum/mana_pool/mana_star
@@ -191,18 +197,20 @@
 		var/datum/attunement/attunement = mana_pool.network_attunement
 		. += span_blue("It is attuned to [initial(attunement.name)]")
 
-/obj/item/mana_battery/mana_crystal/small/focus/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(!istype(I, /obj/item/gem))
-		return
+/obj/item/mana_battery/mana_crystal/small/focus/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/gem))
+		return NONE
 
-	var/obj/item/gem/gem = I
+	var/obj/item/gem/gem = tool
 	if(!gem.attuned)
-		return
+		return NONE
+
 	user.visible_message(span_notice("[user] starts to attune [src]."), span_notice("You start to attune [src]."))
 	if(!do_after(user, 3 SECONDS, src))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	mana_pool.network_attunement = gem.attuned
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/mana_battery/mana_crystal/small/focus/Initialize(mapload)
 	. = ..()
@@ -218,6 +226,15 @@
 	amount = 0
 	ethereal_recharge_rate = 0
 	intrinsic_recharge_sources = MANA_ALL_LEYLINES
+	var/transfer_threshold = 0
+
+/datum/mana_pool/mana_pylon/transfer_specific_mana(datum/mana_pool/other_pool, amount_to_transfer, decrement_budget = TRUE)
+	if(istype(other_pool, /datum/mana_pool/mana_pylon))
+		if(amount - amount_to_transfer < transfer_threshold)
+			amount_to_transfer = max(0, amount - transfer_threshold)
+		if(!amount_to_transfer)
+			return 0
+	return ..()
 
 /datum/mana_pool/mana_fountain
 	maximum_mana_capacity = 1000

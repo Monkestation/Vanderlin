@@ -43,10 +43,6 @@
 	user.visible_message("<span class='suicide'>[user] is putting [src] close to [user.p_their()] eyes and turning it on! It looks like [user.p_theyre()] trying to commit suicide!</span>")
 	return (FIRELOSS)
 
-/obj/item/flashlight/attack(mob/living/carbon/M, mob/living/carbon/human/user, list/modifiers)
-	add_fingerprint(user)
-	return ..()
-
 // FLARES
 
 /obj/item/flashlight/flare
@@ -189,6 +185,7 @@
 		turn_off()
 
 /obj/item/flashlight/flare/torch/extinguish()
+	. = ..()
 	if(on && prob(extinguish_prob))
 		turn_off()
 

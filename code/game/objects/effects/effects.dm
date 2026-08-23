@@ -36,10 +36,6 @@
 				if(prob(25))
 					qdel(src)
 
-
-/obj/effect/ConveyorMove()
-	return
-
 /obj/effect/abstract/ex_act(severity, target)
 	return
 

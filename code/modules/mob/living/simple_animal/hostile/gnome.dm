@@ -1,7 +1,3 @@
-// ===============================
-// GNOME HOMUNCULUS MOB
-// ===============================
-
 /mob/living/simple_animal/hostile/gnome_homunculus
 	name = "gnome homunculus"
 	desc = "A small, industrious magical construct that resembles a tiny gnome. Its eyes glow with alchemical energy, and it seems eager to help with menial tasks."
@@ -11,6 +7,8 @@
 	icon_dead = "gnome_dead"
 
 	pass_flags = PASSMOB
+
+	animal_type = /datum/blood_type/putrid
 
 	maxHealth = 50
 	health = 50
@@ -45,29 +43,10 @@
 	var/hat_state
 
 	var/static/list/pet_commands = list(
-		/datum/pet_command/follow,
-		/datum/pet_command/idle,
-		/datum/pet_command/fetch,
-		/datum/pet_command/gnome/search_range,
-
-		/datum/pet_command/gnome/set_waypoint,
-		/datum/pet_command/gnome/set_waypoint/b,
-
-		/datum/pet_command/gnome/set_filter,
-		/datum/pet_command/gnome/clear_filter,
-
-		/datum/pet_command/gnome/use_splitter,
-		/datum/pet_command/gnome/stop_splitter,
-
-		/datum/pet_command/gnome/move_item,
-		/datum/pet_command/gnome/stop_move_item,
-
-		/datum/pet_command/gnome/tend_crops,
-		/datum/pet_command/gnome/stop_tending,
-
-		/datum/pet_command/gnome/select_recipe,
-		/datum/pet_command/gnome/start_alchemy,
-		/datum/pet_command/gnome/stop_alchemy,
+		/datum/pet_command/follow/gnome,
+		/datum/pet_command/idle/gnome,
+		/datum/pet_command/fetch/gnome,
+		/datum/pet_command/free/gnome,
 	)
 
 	var/list/gnome_friendship_levels = list(
@@ -144,15 +123,11 @@
 
 	// Collect friends before dying - PROPERLY using befriended_refs
 	var/list/my_friends = list()
-	var/datum/component/friendship_container/friendships = GetComponent(/datum/component/friendship_container)
-	if(friendships)
-		// Get friends from the befriended_refs list
-		for(var/datum/weakref/friend_ref in friendships.befriended_refs)
-			if(QDELETED(friend_ref))
-				continue
-			var/mob/living/friend_mob = friend_ref.resolve()
-			if(friend_mob && !QDELETED(friend_mob))
-				my_friends += friend_mob
+
+	for(var/datum/friend as anything in ai_controller?.blackboard?[BB_FRIENDS_LIST])
+		if(QDELETED(friend))
+			continue
+		my_friends |= friend
 
 	// Create death message for nearby gnomes to remember
 	var/death_message = pick(

@@ -27,7 +27,7 @@
 
 /datum/status_effect/dizziness/tick()
 	// How much time is left, in seconds
-	var/amount = (duration - world.time) / 10
+	var/amount = duration / 10
 	if(amount <= 0)
 		return
 

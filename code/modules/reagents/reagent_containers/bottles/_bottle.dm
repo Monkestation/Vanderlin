@@ -52,27 +52,31 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	if(desc != initial(desc))
 		fancy = initial(fancy)
 
-/obj/item/reagent_containers/glass/bottle/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/paper/scroll))
-		if(reagents?.total_volume)
-			to_chat(user, span_notice("I cannot put a message in [src] while it is full!"))
-			return
-		if(closed)
-			to_chat(user, span_notice("I cannot put a message in [src] while it is closed!"))
-			return
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			var/obj/item/paper/scroll/P = I
-			var/obj/item/bottlemessage/BM = new
-			BM.icon_state = "[icon_state]_message"
+/obj/item/reagent_containers/glass/bottle/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/paper/scroll))
+		return ..()
 
-			P.forceMove(BM)
-			BM.contained = P
-			H.put_in_active_hand(BM)
-			playsound(src, 'sound/items/scroll_open.ogg', 100, FALSE)
-			qdel(src)
+	if(reagents?.total_volume)
+		balloon_alert(user, "it's full!")
 		return
-	return ..()
+
+	if(closed)
+		balloon_alert(user, "it's closed!")
+		return
+
+	playsound(src, 'sound/items/scroll_open.ogg', 100, FALSE)
+
+	var/obj/item/paper/scroll/scroll = tool
+	var/obj/item/bottlemessage/BM = new(get_turf(src))
+	BM.icon_state = "[icon_state]_message"
+	BM.contained = scroll
+
+	scroll.forceMove(BM)
+	user.put_in_hands(BM)
+
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/glass/bottle/update_overlays()
 	. = ..()
@@ -93,7 +97,7 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 	if(closed)
 		reagent_flags &= ~TRANSFERABLE
 		reagents.flags = reagent_flags
-		balloon_alert(user, "I press the cork back in.")
+		balloon_alert(user, "i press the cork back in.")
 		spillable = FALSE
 		GLOB.weather_act_upon_list -= src
 		if(!fancy)
@@ -102,7 +106,7 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
 		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
-		balloon_alert(user, "I thumb off the cork.")
+		balloon_alert(user, "i thumb off the cork.")
 		spillable = TRUE
 		GLOB.weather_act_upon_list |= src
 		if(!fancy)
@@ -228,12 +232,12 @@ GLOBAL_LIST_INIT(wisdoms, file2list("strings/rt/wisdoms.txt"))
 		reagent_flags &= ~TRANSFERABLE
 		reagents.flags = reagent_flags
 		desc = "A vial with a cork."
-		balloon_alert(user, "I press the cork back in.")
+		balloon_alert(user, "i press the cork back in.")
 		spillable = FALSE
 	else
 		reagent_flags |= TRANSFERABLE
 		reagents.flags = reagent_flags
-		balloon_alert(user, "I thumb off the cork.")
+		balloon_alert(user, "i thumb off the cork.")
 		playsound(user,'sound/items/uncork.ogg', 100, TRUE)
 		desc = "An open vial, easy to drink quickly."
 		spillable = TRUE

@@ -19,7 +19,7 @@
 /datum/action/cooldown/spell/undirected/call_to_arms/cast(atom/cast_on)
 	. = ..()
 	for(var/mob/living/carbon/target in viewers(3, get_turf(owner)))
-		if(!owner.faction_check_mob(target))
+		if(!owner.faction_check_atom(target))
 			continue
 		if(!target.mind?.isactuallygood())
 			continue

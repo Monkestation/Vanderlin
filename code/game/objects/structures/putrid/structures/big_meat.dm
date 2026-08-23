@@ -124,7 +124,7 @@ GLOBAL_LIST_EMPTY(putrid_evolutions)
 		if(integrity_percent < PAPAMEAT_CRITICAL_HEALTH)
 			SEND_GLOBAL_SIGNAL(COMSIG_PAPAMEAT_CRITICAL, src)
 
-/obj/structure/meatvine/papameat/proc/consume_mob(mob/living/sacrifice)
+/obj/structure/meatvine/papameat/proc/consume_mob(mob/living/sacrifice, mob/living/simple_animal/hostile/retaliate/meatvine/giver)
 	if(!istype(sacrifice) || sacrifice.stat != DEAD)
 		return FALSE
 	visible_message(span_danger("[src] absorbs [sacrifice]!"))
@@ -138,11 +138,13 @@ GLOBAL_LIST_EMPTY(putrid_evolutions)
 	if(sacrifice.client)
 		master.consume_client_mob(sacrifice)
 	qdel(sacrifice)
+	giver.gain_evolution_progress(30)
+	master.adjust_global_evolution_progress(0.1)
 	return TRUE
 
 /obj/structure/meatvine/papameat/proc/sacrifice_living_mob(mob/living/sacrifice)
 	if(!istype(sacrifice) || sacrifice.stat == DEAD)
 		return FALSE
 	visible_message(span_danger("[sacrifice] throws itself into [src], being consumed alive!"))
-	sacrifice.adjustBruteLoss(sacrifice.health + 10)
+	sacrifice.adjustBruteLoss(sacrifice.health + 10, damage_type = BCLASS_BITE)
 	return consume_mob(sacrifice)

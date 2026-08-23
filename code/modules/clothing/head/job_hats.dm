@@ -173,6 +173,7 @@
 	icon_state = "dochat1"
 	item_state = "dochat1"
 	detail_tag = "_detail"
+	detail_color = CLOTHING_SCARLET
 	uses_lord_coloring = LORD_PRIMARY
 
 /obj/item/clothing/head/courtphysician/female
@@ -181,6 +182,7 @@
 	icon_state = "dochat2"
 	item_state = "dochat2"
 	detail_tag = "_detail"
+	detail_color = CLOTHING_ROYAL_MAJENTA
 	uses_lord_coloring = LORD_PRIMARY
 
 /obj/item/clothing/head/maidband
@@ -196,7 +198,7 @@
 	AddComponent(
 		/datum/component/equipment_stress/job_specific, \
 		/datum/stress_event/maidband, \
-		list(TRAIT_VILLAIN = null, TRAIT_NOBLE_BLOOD = /datum/stress_event/maidband/noble), \
+		list(TRAIT_VILLAIN = null, TRAIT_COURTAGENT = null, TRAIT_NOBLE_BLOOD = /datum/stress_event/maidband/noble), \
 		immune_jobs = list(/datum/job/prince, /datum/job/squire, /datum/job/advclass/pilgrim/noble, /datum/job/advclass/pilgrim/rare/zaladin, /datum/job/advclass/pilgrim/rare/grenzelhoft, /datum/job/advclass/pilgrim/rare/merchant), \
 		immune_departments = (NOBLEMEN | GARRISON | OUTSIDERS | COMPANY), \
 		department_exceptions = list(/datum/job/advclass/pilgrim, /datum/job/grabber), \

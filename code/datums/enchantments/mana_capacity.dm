@@ -7,8 +7,7 @@
 		/datum/thaumaturgical_essence/crystal = 30
 	)
 	var/hardcap_increase = 1000
-
-	var/list/affecting_mobs = list()
+	var/active_item = FALSE
 
 /datum/enchantment/mana_capacity/register_triggers(atom/item)
 	. = ..()
@@ -18,24 +17,19 @@
 	RegisterSignal(item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 
 /datum/enchantment/mana_capacity/proc/on_equip(obj/item/source, mob/living/carbon/equipper, slot)
-	if(!(source in affecting_mobs))
-		affecting_mobs |= source
-		affecting_mobs[source] = list()
-	if(equipper in affecting_mobs[source])
+	if(active_item)
 		return
-	affecting_mobs[source] |= equipper
-
-	equipper.mana_pool?.set_max_mana(equipper.mana_pool.maximum_mana_capacity + hardcap_increase, change_softcap = FALSE)
-
+	else
+		active_item = TRUE
+		equipper.mana_pool?.set_max_mana(equipper.mana_pool.maximum_mana_capacity + hardcap_increase, change_softcap = TRUE)
 
 /datum/enchantment/mana_capacity/proc/on_drop(datum/source, mob/living/carbon/user)
-	if(!(source in affecting_mobs))
-		affecting_mobs |= source
-		affecting_mobs[source] = list()
-	if(!istype(user))
+	if(enchanted_item.loc == user)
 		return
-	if(user in affecting_mobs[source])
-		return
-	affecting_mobs[source] -= user
+	if(active_item)
+		active_item = FALSE
 
-	user.mana_pool?.set_max_mana(user.mana_pool.maximum_mana_capacity - hardcap_increase)
+	var/new_max = user.mana_pool.maximum_mana_capacity - hardcap_increase
+	user.mana_pool?.set_max_mana(new_max)
+	if(user.mana_pool?.amount > new_max)
+		user.mana_pool.amount = new_max * 0.9

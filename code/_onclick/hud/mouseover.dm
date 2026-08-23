@@ -15,10 +15,7 @@
 
 	SEND_SIGNAL(client, COMSIG_CLIENT_HOVER_NEW, src)
 	SEND_SIGNAL(src, COMSIG_ATOM_MOUSE_ENTERED, user)
-	SEND_SIGNAL(user, COMSIG_USER_MOUSE_ENTERED, src)
-
-	if(isturf(src))
-		SEND_SIGNAL(user, COMSIG_MOUSE_ENTERED, src)
+	SEND_SIGNAL(user, COMSIG_MOB_MOUSE_ENTERED, src)
 
 /atom/MouseExited(params)
 	if(no_over_text)

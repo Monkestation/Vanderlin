@@ -25,6 +25,7 @@
 	allowed_races = list(\
 		SPEC_ID_HUMEN,\
 		SPEC_ID_HALF_ELF,\
+		SPEC_ID_HALF_DROW,\
 		SPEC_ID_DWARF,\
 		SPEC_ID_HALF_ORC,\
 		SPEC_ID_TIEFLING,\
@@ -32,8 +33,6 @@
 	outfit = /datum/outfit/adventurer/barbarian
 	category_tags = list(CTAG_ADVENTURER)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
-
-	allowed_patrons = list(/datum/patron/divine/ravox, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/dendor,/datum/patron/inhumen/graggar, /datum/patron/godless/godless, /datum/patron/godless/autotheist, /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/naivety, /datum/patron/godless/rashan, /datum/patron/godless/galadros)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/barbarian
 
@@ -53,33 +52,31 @@
 /datum/job/advclass/combat/barbarian/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	var/static/list/selectableweapon = list(
-		"Axe" = /obj/item/weapon/axe/iron,
-		"Mace" = /obj/item/weapon/mace/spiked,
-		"Sword" = /obj/item/weapon/sword/iron,
-		"Club" = /obj/item/weapon/mace/woodclub
+	var/static/list/selectable = list( \
+		"Claymore" = /obj/item/weapon/sword/long/greatsword/claymore/iron, \
+		"Greataxe" = /obj/item/weapon/greataxe, \
+		"Goedendag" = /obj/item/weapon/mace/goden, \
+		"Dual Axes" = list(/obj/item/weapon/axe/iron, /obj/item/weapon/axe/iron), \
+		"WHO NEEDS A WEAPON?" = /obj/item/clothing/gloves/bandages/pugilist, \
 	)
-
-	var/choice = spawned.select_equippable(player_client, selectableweapon, message = "Choose Your Specialisation", title = "BARBARIAN")
-	if(!choice)
-		return
-
+	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "SPILL SOME BLOOD!")
 	switch(choice)
-		if("Axe")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, 30, TRUE)
-		if("Mace")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, 30, TRUE)
-		if("Sword")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 30, TRUE)
-		if("Club")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, 30, TRUE)
+		if("Claymore")
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 20)
+		if("Greataxe", "Goedendag", "Dual Axes")
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20)
+		if("WHO NEEDS A WEAPON?")
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5)
+			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 10)
+			spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
+			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 
 /datum/outfit/adventurer/barbarian
 	name = "Barbarian (Adventurer)"
 	head = /obj/item/clothing/head/helmet/horned
 	backl = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/adventurer
 	shoes = /obj/item/clothing/shoes/boots/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 

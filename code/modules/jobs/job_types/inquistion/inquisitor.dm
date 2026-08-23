@@ -2,7 +2,7 @@
 	title = JOB_PRAFEKT
 	f_title = "Frau Prafekt"
 	department_flag = INQUISITION
-	faction = "Station"
+	factions = list(FACTION_INQUISITION, FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -24,6 +24,8 @@
 	display_order = JDO_PURITAN
 	advclass_cat_rolls = list(CTAG_PURITAN = 20)
 	give_bank_account = 30
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	bypass_lastclass = TRUE
 	antag_role = /datum/antagonist/purishep
 
@@ -63,6 +65,7 @@
 	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
 	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
+	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
 
 	var/datum/species/species = spawned.dna?.species
 	if(!species)
@@ -75,6 +78,7 @@
 	if(.)
 		spawned.maxbloodpool = initial(spawned.maxbloodpool)
 		spawned.hud_used?.shutdown_bloodpool()
+		qdel(spawned.GetComponent(/datum/component/bloodpool_regen))
 
 
 ////Classic Inquisitor with a much more underground twist. Use listening devices, sneak into places to gather evidence, track down suspicious individuals. Has relatively the same utility stats as Confessor, but fulfills a different niche in terms of their combative job as the head honcho.
@@ -105,8 +109,7 @@
 		to_chat(src, span_warning("[H] needs time to recover before being tortured again!"))
 		return
 
-	var/painpercent = (H.get_complex_pain() / (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) * 12)) * 100
-	if(painpercent < 100)
+	if(H.getShockStage() < SHOCK_STAGE_4)
 		to_chat(src, span_warning("Not ready to speak yet."))
 		return
 	if(!do_after(src, 4 SECONDS, H))
@@ -160,8 +163,7 @@
 		to_chat(src, span_warning("[H] needs time to recover before being tortured again!"))
 		return
 
-	var/painpercent = (H.get_complex_pain() / (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) * 12)) * 100
-	if(painpercent < 2)
+	if(H.getShockStage() < SHOCK_STAGE_4)
 		to_chat(src, span_warning("Not ready to speak yet."))
 		return
 	if(!do_after(src, 4 SECONDS, H))
@@ -197,20 +199,29 @@
 		return
 	mind.recall_targets(src, type="Ordos")
 
+#define RESIST_TORTURE "RESIST!!"
+#define CONFESS_SINS "CONFESS!!"
+
 /mob/living/carbon/human/proc/confession_time(confession_type = "antag", mob/living/carbon/human/user)
 	var/timerid = addtimer(CALLBACK(src, PROC_REF(confess_sins), confession_type, FALSE, user), 10 SECONDS, TIMER_STOPPABLE)
-	var/static/list/options = list("RESIST!!", "CONFESS!!")
-	var/responsey = browser_input_list(src, "Resist torture?", "TEST OF PAIN", options)
+	var/responsey = tgui_input_list(src, "Resist torture?", "TEST OF PAIN", list(RESIST_TORTURE, CONFESS_SINS), RESIST_TORTURE)
 
 	if(SStimer.timer_id_dict[timerid])
 		deltimer(timerid)
 	else
 		to_chat(src, span_warning("Too late..."))
 		return
-	if(responsey == "RESIST!!")
-		confess_sins(confession_type, resist=TRUE, interrogator=user)
-	else
-		confess_sins(confession_type, resist=FALSE, interrogator=user)
+
+	if(responsey == CONFESS_SINS)
+		var/confirm = tgui_alert(src, "Are you certain you wish to confess?", "CONFIRM CONFESSION", DEFAULT_INPUT_CHOICES, 10 SECONDS)
+		if(confirm != CHOICE_YES)
+			responsey = RESIST_TORTURE
+
+	var/resistance = (responsey == RESIST_TORTURE)
+	confess_sins(confession_type, resist=resistance, interrogator=user)
+
+#undef RESIST_TORTURE
+#undef CONFESS_SINS
 
 /mob/living/carbon/human/proc/confess_sins(confession_type = "antag", resist, mob/living/carbon/human/interrogator, torture=TRUE, obj/item/paper/inqslip/confession/confession_paper, false_result)
 	if(stat == DEAD)
@@ -441,3 +452,4 @@
 
 /datum/job/advclass/puritan
 	exp_types_granted = list(EXP_TYPE_INQUISITION, EXP_TYPE_COMBAT, EXP_TYPE_LEADERSHIP)
+	factions = list(FACTION_INQUISITION, FACTION_TOWN)

@@ -1,6 +1,6 @@
 /mob/living/carbon/human/species/human/northern/militia //weak peasant infantry. Neutral but can be given factions for events. doesn't attack players.
 	ai_controller = /datum/ai_controller/human_npc
-	faction = list("neutral")
+	faction = list(FACTION_NEUTRAL)
 	ambushable = FALSE
 	wander = TRUE
 	dodgetime = 30
@@ -46,7 +46,7 @@
 	)
 
 /datum/outfit/job/human/species/human/northern/militia/pre_equip(mob/living/carbon/human/H)
-	if(H.faction && ("viking" in H.faction))
+	if(H.has_faction("viking"))
 		cloak = /obj/item/clothing/cloak/stabard/mercenary
 	else
 		cloak = /obj/item/clothing/cloak/stabard/guard

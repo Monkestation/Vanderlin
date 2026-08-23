@@ -5,23 +5,27 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/redstone_structure = FALSE //If you want the structure to interact with player built redstone
 	var/redstone_id //Used for connecting mapload structures
 	var/last_redstone_power
-	var/list/redstone_attached = list()
+	var/list/redstone_attached
 
 /obj/structure/multitool_act(mob/living/user, obj/item/I)
-	. = ..()
 	if(!redstone_structure)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(!istype(I, /obj/item/contraption/linker))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	var/obj/item/contraption/linker/multitool = I
 	if(!multitool.current_charge)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering) < 1)
 		to_chat(user, span_warning("I have no idea how to use [multitool]!"))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	user.visible_message("[user] starts tinkering with [src].", "You start tinkering with [src].")
 	if(!do_after(user, 8 SECONDS, src))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	var/datum/effect_system/spark_spread/noisy/S = new()
 	var/turf/front = get_turf(src)
 	S.set_up(1, 1, front)
@@ -31,12 +35,12 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		if(src == buffer_structure)
 			to_chat(user, "You uncalibrate [src] from all its connections.")
 			for(var/obj/structure/O in redstone_attached)
-				O.redstone_attached -= src
-				redstone_attached -= O
+				LAZYREMOVE(O.redstone_attached, src)
+				LAZYREMOVE(redstone_attached, O)
 			GLOB.redstone_objs -= src
 			return
-		buffer_structure.redstone_attached |= src
-		redstone_attached |= buffer_structure
+		LAZYOR(buffer_structure.redstone_attached, src)
+		LAZYOR(redstone_attached, buffer_structure)
 		GLOB.redstone_objs |= src
 		GLOB.redstone_objs |= buffer_structure
 		to_chat(user, "You calibrate [src] to the output of [buffer_structure].")
@@ -44,6 +48,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		to_chat(user, "You store the internal schematics of [src] on [multitool].")
 		multitool.set_buffer(src)
 	multitool.charge_deduction(src, user, 1)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/vv_edit_var(var_name, var_value)
 	switch (var_name)
@@ -63,8 +69,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 			if(S == src)
 				continue
 			if(S.redstone_id == redstone_id)
-				redstone_attached |= S
-				S.redstone_attached |= src
+				LAZYOR(redstone_attached, S)
+				LAZYOR(S.redstone_attached, src)
 
 /obj/structure/proc/redstone_triggered(mob/user)
 	return
@@ -89,7 +95,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		var/used_time = pulltime - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 1 SECONDS)
 		user.visible_message("<span class='warning'>[user] pulls the lever.</span>")
 		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
-		if(do_after(user, used_time))
+		if(HAS_TRAIT(user, TRAIT_GATEKEEPER) || do_after(user, used_time))
 			for(var/obj/structure/structure in redstone_attached)
 				INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
 			trigger_wire_network(user)
@@ -136,7 +142,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(!isliving(user))
 		return
 	var/mob/living/L = user
-	if(!(accessor_trait && HAS_MIND_TRAIT(user, accessor_trait)))
+	if(!(accessor_trait && HAS_CHARACTER_TRAIT(user, accessor_trait)))
 		var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
 		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses < hidden_dc)
 			return // nothing here!
@@ -168,6 +174,10 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 /obj/structure/lever/hidden/thieves_guild
 	hidden_dc = 13
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
+
+/obj/structure/lever/hidden/courtagent
+	hidden_dc = 14
+	accessor_trait = TRAIT_KNOW_COURTAGENT_DOORS
 
 /obj/structure/lever/hidden/rous
 	hidden_dc = 16
@@ -404,9 +414,11 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/togg = FALSE
 	var/base_state = "floorhatch"
 	resistance_flags = INDESTRUCTIBLE
+	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/floordoor/Initialize()
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD)
+	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 	return ..()
 
@@ -425,6 +437,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(togg)
 		icon_state = "[base_state]0"
 		obj_flags = null
+		RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		var/turf/T = loc
 		if(istype(T))
 			for(var/atom/movable/M in loc)
@@ -432,6 +445,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	else
 		icon_state = "[base_state]1"
 		obj_flags = BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	if(user)
 		log_game("[user] triggered [src] at [x], [y], [z]. REDSTONE ID: [redstone_id]")
 
@@ -463,6 +477,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		sleep(delay2open)
 		icon_state = "[base_state]0"
 		obj_flags = null
+		RemoveElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		var/turf/T = loc
 		if(istype(T))
 			for(var/atom/movable/M in loc)
@@ -473,6 +488,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		sleep(delay2close)
 		icon_state = "[base_state]1"
 		obj_flags = BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 		sleep(40-delay2close)
 		changing_state = FALSE
 

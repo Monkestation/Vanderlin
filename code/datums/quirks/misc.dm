@@ -14,6 +14,7 @@
 		root.remove_immunity(owner)
 		return
 	var/obj/item/bodypart/bp = owner.get_bodypart() // defaults to chest
-	root = bp?.add_wound(/datum/wound/black_briar_curse/chest, TRUE)
+	//forcing this lets us ignore godmode from people who are advclassing
+	root = bp?.add_wound(/datum/wound/black_briar_curse/chest, TRUE, forced = TRUE)
 	root?.infection = root.max_infection * BBC_STAGE_LATE
 	root?.infection_percent = BBC_STAGE_LATE

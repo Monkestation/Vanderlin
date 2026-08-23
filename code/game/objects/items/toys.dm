@@ -225,33 +225,34 @@
 		cardUser << browse(null, "window=deck")
 		return
 
-/obj/item/toy/cards/deck/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(istype(I, /obj/item/toy/cards/singlecard))
-		var/obj/item/toy/cards/singlecard/SC = I
+/obj/item/toy/cards/deck/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/toy/cards/singlecard))
+		var/obj/item/toy/cards/singlecard/SC = tool
 		if(SC.parentdeck == src)
 			if(!user.temporarilyRemoveItemFromInventory(SC))
 				to_chat(user, span_warning("The card is stuck to your hand, you can't add it to the deck!"))
-				return
+				return ITEM_INTERACT_BLOCKING
 			cards += SC.cardname
 			user.visible_message(span_notice("[user] adds a card to the bottom of the deck."), span_notice("I add the card to the bottom of the deck."))
 			qdel(SC)
 		else
 			to_chat(user, span_warning("I can't mix cards from other decks!"))
 		update_appearance(UPDATE_ICON_STATE)
-	else if(istype(I, /obj/item/toy/cards/cardhand))
-		var/obj/item/toy/cards/cardhand/CH = I
+		return ITEM_INTERACT_SUCCESS
+
+	if(istype(tool, /obj/item/toy/cards/cardhand))
+		var/obj/item/toy/cards/cardhand/CH = tool
 		if(CH.parentdeck == src)
 			if(!user.temporarilyRemoveItemFromInventory(CH))
 				to_chat(user, span_warning("The hand of cards is stuck to your hand, you can't add it to the deck!"))
-				return
+				return ITEM_INTERACT_BLOCKING
 			cards += CH.currenthand
 			user.visible_message(span_notice("[user] puts [user.p_their()] hand of cards in the deck."), span_notice("I put the hand of cards in the deck."))
 			qdel(CH)
 		else
 			to_chat(user, span_warning("I can't mix cards from other decks!"))
 		update_appearance(UPDATE_ICON_STATE)
-	else
-		return ..()
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/toy/cards/deck/MouseDrop(atom/over_object)
 	. = ..()
@@ -320,13 +321,13 @@
 			cardUser.visible_message(span_notice("[cardUser] draws a card from [cardUser.p_their()] hand."), span_notice("I take the [C.cardname] from your hand."))
 
 			interact(cardUser)
-			if(currenthand.len < 3)
+			if(length(currenthand) < 3)
 				icon_state = "[deckstyle]_hand2"
-			else if(currenthand.len < 4)
+			else if(length(currenthand) < 4)
 				icon_state = "[deckstyle]_hand3"
-			else if(currenthand.len < 5)
+			else if(length(currenthand) < 5)
 				icon_state = "[deckstyle]_hand4"
-			if(currenthand.len == 1)
+			if(length(currenthand) == 1)
 				var/obj/item/toy/cards/singlecard/N = new/obj/item/toy/cards/singlecard(loc)
 				N.parentdeck = parentdeck
 				N.cardname = currenthand[1]
@@ -338,23 +339,28 @@
 				cardUser << browse(null, "window=cardhand")
 		return
 
-/obj/item/toy/cards/cardhand/attackby(obj/item/toy/cards/singlecard/C, mob/living/user, list/modifiers)
-	if(istype(C))
-		if(C.parentdeck == parentdeck)
-			currenthand += C.cardname
-			user.visible_message(span_notice("[user] adds a card to [user.p_their()] hand."), span_notice("I add the [C.cardname] to your hand."))
-			qdel(C)
-			interact(user)
-			if(currenthand.len > 4)
-				icon_state = "[deckstyle]_hand5"
-			else if(currenthand.len > 3)
-				icon_state = "[deckstyle]_hand4"
-			else if(currenthand.len > 2)
-				icon_state = "[deckstyle]_hand3"
-		else
-			to_chat(user, span_warning("I can't mix cards from other decks!"))
-	else
-		return ..()
+/obj/item/toy/cards/cardhand/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/toy/cards/singlecard))
+		return NONE
+
+	var/obj/item/toy/cards/singlecard/card = tool
+
+	if(card.parentdeck != parentdeck)
+		to_chat(user, span_warning("I can't mix cards from other decks!"))
+		return ITEM_INTERACT_BLOCKING
+
+	currenthand += card.cardname
+	user.visible_message(span_notice("[user] adds a card to [user.p_their()] hand."), span_notice("I add the [card.cardname] to your hand."))
+	qdel(card)
+	interact(user)
+	if(length(currenthand) > 4)
+		icon_state = "[deckstyle]_hand5"
+	else if(length(currenthand) > 3)
+		icon_state = "[deckstyle]_hand4"
+	else if(length(currenthand) > 2)
+		icon_state = "[deckstyle]_hand3"
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/toy/cards/cardhand/apply_card_vars(obj/item/toy/cards/newobj,obj/item/toy/cards/sourceobj)
 	..()
@@ -412,9 +418,9 @@
 		name = "card"
 		pixel_x = base_pixel_x - 5
 
-/obj/item/toy/cards/singlecard/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(istype(I, /obj/item/toy/cards/singlecard/))
-		var/obj/item/toy/cards/singlecard/C = I
+/obj/item/toy/cards/singlecard/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/toy/cards/singlecard))
+		var/obj/item/toy/cards/singlecard/C = tool
 		if(C.parentdeck == parentdeck)
 			var/obj/item/toy/cards/cardhand/H = new/obj/item/toy/cards/cardhand(user.loc)
 			H.currenthand += C.cardname
@@ -428,24 +434,24 @@
 			user.put_in_active_hand(H)
 		else
 			to_chat(user, span_warning("I can't mix cards from other decks!"))
+		return ITEM_INTERACT_SUCCESS
 
-	if(istype(I, /obj/item/toy/cards/cardhand/))
-		var/obj/item/toy/cards/cardhand/H = I
+	if(istype(tool, /obj/item/toy/cards/cardhand))
+		var/obj/item/toy/cards/cardhand/H = tool
 		if(H.parentdeck == parentdeck)
 			H.currenthand += cardname
 			user.visible_message(span_notice("[user] adds a card to [user.p_their()] hand."), span_notice("I add the [cardname] to your hand."))
 			qdel(src)
 			H.interact(user)
-			if(H.currenthand.len > 4)
+			if(length(H.currenthand) > 4)
 				H.icon_state = "[deckstyle]_hand5"
-			else if(H.currenthand.len > 3)
+			else if(length(H.currenthand) > 3)
 				H.icon_state = "[deckstyle]_hand4"
-			else if(H.currenthand.len > 2)
+			else if(length(H.currenthand) > 2)
 				H.icon_state = "[deckstyle]_hand3"
 		else
 			to_chat(user, span_warning("I can't mix cards from other decks!"))
-	else
-		return ..()
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/toy/cards/singlecard/attack_self(mob/living/carbon/human/user, list/modifiers)
 	if(!ishuman(user) || !(user.mobility_flags & MOBILITY_USE))

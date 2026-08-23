@@ -20,16 +20,16 @@
 		if(is_mob)
 			var/mob/M = parent
 			M.add_filter(outline_filter_id, 2, list("type" = "outline", "color" = "#ff0000", "size" = 0.5))
-			RegisterSignal(parent, COMSIG_MOB_DEATH, PROC_REF(on_target_death))
-			RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_mob_examine))
+			RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(on_target_death))
+			RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_mob_examine))
 		else
 			var/obj/item/I = parent
 			I.add_filter(outline_filter_id, 2, list("type" = "outline", "color" = "#008cff", "size" = 0.5))
-			RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+			RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 			RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_item_dropped))
 			RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(on_item_dropped))
 
-	RegisterSignal(target_quest, COMSIG_PARENT_QDELETING, PROC_REF(on_quest_deleted))
+	RegisterSignal(target_quest, COMSIG_QDELETING, PROC_REF(on_quest_deleted))
 
 /datum/component/quest_object/Destroy()
 	if(QDELETED(parent))
@@ -70,7 +70,7 @@
 	var/list/user_scrolls = find_quest_scrolls(user)
 	for(var/obj/item/paper/scroll/quest/scroll in user_scrolls)
 		var/datum/quest/user_quest = scroll.assigned_quest
-		if(user_quest && (user_quest.quest_type in list(QUEST_KILL_EASY, QUEST_CLEAR_OUT, QUEST_RAID, QUEST_OUTLAW)) && istype(parent, user_quest.target_mob_type))
+		if(user_quest && (user_quest.quest_type in list(QUEST_KILL_EASY, QUEST_CLEAR_OUT, QUEST_RAID, QUEST_OUTLAW, QUEST_PLANAR)) && istype(parent, user_quest.target_mob_type))
 			examine_list += span_notice("This looks like the target of your quest: [user_quest.title]!")
 			if(Q.target_spawn_area != get_area(get_turf(src)))
 				examine_list += span_notice("It was last reported in the [Q.target_spawn_area] area, however.")

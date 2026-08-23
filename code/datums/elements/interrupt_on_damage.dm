@@ -1,6 +1,6 @@
 /datum/element/interrupt_on_damage
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 
 /datum/element/interrupt_on_damage/Attach(mob/living/target)
 	. = ..()

@@ -41,7 +41,7 @@
 		var/datum/ai_controller/ally_ctrl = ally.ai_controller
 		if(!ally_ctrl)
 			continue
-		if(!living_pawn.faction_check_mob(ally, FALSE))
+		if(!living_pawn.faction_check_atom(ally, FALSE))
 			continue
 		if(ally_ctrl.blackboard[BB_BASIC_MOB_CURRENT_TARGET] == current_target)
 			continue

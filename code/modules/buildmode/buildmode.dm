@@ -67,7 +67,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 	mode.enter_mode(src)
 	current_category = BM_CATEGORY_TURF
 	open_item_browser()
-	RegisterSignal(holder.mob, COMSIG_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
+	RegisterSignal(holder.mob, COMSIG_MOB_MOUSE_ENTERED, PROC_REF(on_mouse_moved))
 	RegisterSignal(holder.mob, COMSIG_ATOM_MOUSE_ENTERED, PROC_REF(on_mouse_moved_pre))
 
 /**
@@ -82,7 +82,7 @@ GLOBAL_LIST_EMPTY(buildmode_appearance_cache)
 		item_browser.close()
 		item_browser = null
 	if(holder?.mob)
-		UnregisterSignal(holder.mob, COMSIG_MOUSE_ENTERED)
+		UnregisterSignal(holder.mob, COMSIG_MOB_MOUSE_ENTERED)
 		UnregisterSignal(holder.mob, COMSIG_ATOM_MOUSE_ENTERED)
 
 	qdel(src)

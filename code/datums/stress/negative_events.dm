@@ -66,7 +66,7 @@
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.dna?.species)
-			return "<span class='red'>Another [lowertext(H.dna.species.name)] perished.</span>"
+			return "<span class='red'>Another [LOWER_TEXT(H.dna.species.name)] perished.</span>"
 	return desc
 
 /datum/stress_event/viewdismember
@@ -220,6 +220,11 @@
 	timer = 3 MINUTES
 	stress_change = 3
 	desc = span_phobia("IT'S THE FUCKING DAEWALKER!!")
+
+/datum/stress_event/its_the_nitewalker
+	timer = 3 MINUTES
+	stress_change = 2
+	desc = span_phobia("THE NITEWALKER ROAMS!!")
 
 /datum/stress_event/fishface
 	timer = 1 MINUTES
@@ -650,7 +655,7 @@
 	timer = 3 MINUTES
 
 /datum/stress_event/slipped
-	desc = "<span class='warning'>I slipped. I should be more careful next timer...</span>\n"
+	desc = "<span class='warning'>I slipped. I should be more careful next time...</span>\n"
 	stress_change = 2
 	timer = 3 MINUTES
 
@@ -668,11 +673,6 @@
 	desc = "<span class='boldwarning'>I can't even end it all!</span>\n"
 	stress_change = 15
 	timer = 60 SECONDS
-
-/datum/stress_event/dismembered
-	desc = "<span class='boldwarning'>AHH! I WAS USING THAT LIMB!</span>\n"
-	stress_change = 10
-	timer = 8 MINUTES
 
 /datum/stress_event/embedded
 	desc = "<span class='boldwarning'>Pull it out!</span>\n"
@@ -803,7 +803,6 @@
 	stress_change = 10
 	desc = span_red("The horrid wails of the dead call for relief!")
 
-
 /datum/stress_event/soulchurnerpsydon
 	timer = 1 MINUTES
 	stress_change = 1
@@ -828,6 +827,11 @@
 	timer = 3 MINUTES
 	stress_change = 2
 	desc = span_red("I've been covered in shite! Disgusting!")
+
+/datum/stress_event/bad_grave
+	stress_change = 1
+	desc = span_red("Can the dead find true rest within such a poorly made grave..?")
+	timer = 5 MINUTES
 
 /datum/stress_event/malaguero
 	timer = 1 MINUTES
@@ -864,11 +868,6 @@
 	if(istiefling(user))
 		return 0
 	return ..()
-
-/datum/stress_event/shamanhoodlost
-	stress_change = 3
-	desc = span_boldred("I have lost my hood! My failure to protect it leaves open the defilement my future reincarnations!")
-	timer = 999 MINUTES
 
 /datum/stress_event/black_briar1
 	timer = 999 MINUTES

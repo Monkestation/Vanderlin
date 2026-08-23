@@ -24,7 +24,7 @@
 	max_sockets = initial_max_sockets
 
 	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ATOM_GET_RESISTANCE, PROC_REF(on_get_resistance))
 	RegisterSignal(parent, COMSIG_ATOM_GET_MAX_RESISTANCE, PROC_REF(on_get_max_resistance))
 	RegisterSignal(parent, COMSIG_ATOM_GET_STATUS_MOD, PROC_REF(on_get_status_mod))

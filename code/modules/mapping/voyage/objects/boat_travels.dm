@@ -66,9 +66,7 @@ GLOBAL_LIST_EMPTY(boat_landmarks)
 		user.pulling.recent_travel = world.time
 	user.recent_travel = world.time
 	user.log_message("[user.mind?.key ? user.mind?.key : user.real_name] has travelled to [loc_name(destination)] from", LOG_GAME, color = "#0000ff")
-	movable_travel_z_level(user, destination)
-	if(!user.client)
-		user.force_island_check()
+	user.zMove(target = destination, z_move_flags = ZMOVE_LADDER_FLAGS)
 
 /obj/effect/landmark/boat_transfer/proc/can_go(atom/movable/AM)
 	. = TRUE

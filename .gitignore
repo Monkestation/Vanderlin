@@ -256,3 +256,8 @@ define_sanity_output.txt
 # Running OpenDream locally
 vanderlin.json
 rust_g64.dll
+
+/tools/Tgstation.DiscordDiscussions/.vs/*
+/tools/Tgstation.DiscordDiscussions/bin/*
+/tools/Tgstation.DiscordDiscussions/obj/*
+/tools/Tgstation.DiscordDiscussions/Properties/launchSettings.json

@@ -144,9 +144,13 @@
 	return TRUE
 
 /mob/living/check_energy(has_amount)
-	if(!has_amount || has_amount > max_energy)
-		return FALSE
-	if((max_energy - energy) < has_amount)
+	///this trait affects both stamina and energy since they are part of the same system.
+	if(HAS_TRAIT(src, TRAIT_NOSTAMINA))
+		return TRUE
+	///This trait specifically affect energy.
+	if(HAS_TRAIT(src, TRAIT_NOENERGY))
+		return TRUE
+	if(has_amount > max_energy || has_amount > energy)
 		return FALSE
 	return TRUE
 
@@ -157,6 +161,13 @@
 /mob/living/adjust_stamina(added as num, emote_override, force_emote = TRUE, internal_regen = TRUE) //call update_stamina here and set last_fatigued, return false when not enough fatigue left
 	if(HAS_TRAIT(src, TRAIT_NOSTAMINA))
 		return TRUE
+	var/energetic = get_chem_effect(CE_ENERGETIC) * 0.1
+	if(added <= 0)
+		energetic *= max(0.1, 1 - energetic)
+	else
+		energetic *= max(0.1, 1 + energetic)
+	added += energetic
+
 	stamina = CLAMP(stamina+added, 0, maximum_stamina)
 	SEND_SIGNAL(src, COMSIG_LIVING_ADJUSTED, -added, STAMINA)
 	if(internal_regen && added < 0)

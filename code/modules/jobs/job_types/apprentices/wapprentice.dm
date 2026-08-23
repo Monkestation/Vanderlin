@@ -31,7 +31,7 @@
 	As long as you can keep your grades up, that is..."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
 
@@ -42,6 +42,8 @@
 	outfit = /datum/outfit/mageapprentice
 	display_order = JDO_WAPP
 	give_bank_account = TRUE
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 	can_have_apprentices = FALSE
@@ -66,12 +68,28 @@
 	attribute_sheet_adult = /datum/attribute_holder/sheet/job/mageapprentice/adult
 
 	skill_multipliers = list(/datum/attribute/skill/magic/arcane = 1.25)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/mageapprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.age == AGE_ADULT)
-		spawned.adjust_spell_points(4)
+		spawned.adjust_form_mastery_points(3)
 
+/datum/job/mageapprentice/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/apprentice/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/apprentice/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/apprentice/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/apprentice/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/apprentice/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/apprentice/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/apprentice/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/apprentice/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/apprentice/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 2)
 
 /datum/outfit/mageapprentice
 	name = JOB_MAGIC_APP
@@ -84,7 +102,6 @@
 	shirt = /obj/item/clothing/shirt/dress/silkdress/colored/random
 	head = /obj/item/clothing/head/wizhat/witch
 	backpack_contents = list(
-		/obj/item/book/granter/spellbook/apprentice = 1,
 		/obj/item/chalk = 1
 	)
 

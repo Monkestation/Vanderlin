@@ -1,18 +1,31 @@
+///so for things that care about EP you pass in a list to give its output as so you can apply both instances of damage. See spec_attacked_by() for an example
+/mob/living/proc/run_armor_check(def_zone = null, attack_flag = "blunt", absorb_text = null, soften_text = null, armor_penetration, penetrated_text, damage, blade_dulling, list/split_output)
+	var/result = getarmor(def_zone, attack_flag, damage, armor_penetration, blade_dulling)
+	var/armor
+	var/blunt_dmg
+	var/typed_dmg
 
-/mob/living/proc/run_armor_check(def_zone = null, attack_flag = "blunt", absorb_text = null, soften_text = null, armor_penetration, penetrated_text, damage, blade_dulling)
-	var/armor = getarmor(def_zone, attack_flag, damage, armor_penetration, blade_dulling)
-	var/armor_check = 0
+	if(islist(result))
+		armor = result[ARMOR_BLOCK]
+		blunt_dmg = result[ARMOR_BLUNT_DMG]
+		typed_dmg = result[ARMOR_TYPE_DMG]
+	else
+		armor = result
+		var/effective = max(0, armor - armor_penetration)
+		typed_dmg = max(0, damage - effective)
+		blunt_dmg = 0
 
-	// Only run armor logic if there actually is armor
+	if(!isnull(split_output))
+		split_output[DAMAGE_BLUNT] = blunt_dmg
+		split_output[DAMAGE_TYPED] = typed_dmg
+
+	var/total_through = blunt_dmg + typed_dmg
+	var/armor_check = max(0, armor - damage)
+
 	if(armor > 0)
-		if(armor_penetration)
-			armor = max(0, armor - armor_penetration)
-		armor_check = max(0, armor - damage)
-
-		// Decide feedback based on how much damage got through
-		if(armor_check == 0 && armor_penetration)
+		if(total_through <= 0 && armor_penetration)
 			to_chat(src, "<span class='danger'>[penetrated_text || "My armor was penetrated!"]</span>")
-		else if(armor_check > 0)
+		else if(armor_check > 0 || (blunt_dmg > 0 && typed_dmg == 0))
 			if(armor_penetration)
 				to_chat(src, "<span class='warning'>[soften_text || "My armor softens the blow!"]</span>")
 			else
@@ -28,9 +41,18 @@
 /mob/living/proc/get_eye_protection()
 	return 0
 
+///A easy to use proc to apply both organ damage and temporary deafness at once, so you don't have to get the ears everytime.
+/mob/living/proc/sound_damage(damage, deafen)
+	return
+
 //this returns the mob's protection against ear damage (0:no protection; 1: some ear protection; 2: has no ears)
-/mob/living/proc/get_ear_protection()
-	return 0
+/mob/living/proc/get_ear_protection(ignore_deafness = FALSE)
+	if(!ignore_deafness && HAS_TRAIT(src, TRAIT_DEAF))
+		return INFINITY //For all my homies that can not hear in the world
+	var/list/sig_protection = list(0)
+	SEND_SIGNAL(src, COMSIG_LIVING_GET_EAR_PROTECTION, sig_protection)
+	var/protection = sig_protection[EAR_PROTECTION_ARG]
+	return protection
 
 /**
  * Checks if our mob has their mouth covered.
@@ -43,13 +65,15 @@
  *
  * Retuns a truthy value (a ref to what is covering mouth), or a falsy value (null)
  */
-/mob/living/proc/is_mouth_covered(head_only = 0, mask_only = 0)
+/mob/living/proc/is_mouth_covered(check_flags)
 	return FALSE
 
-/mob/living/proc/is_eyes_covered(check_glasses = 1, check_head = 1, check_mask = 1)
+/mob/living/proc/is_eyes_covered(check_flags)
 	return FALSE
+
 /mob/living/proc/is_pepper_proof(check_head = TRUE, check_mask = TRUE)
 	return FALSE
+
 /mob/living/proc/on_hit(obj/projectile/P)
 	return BULLET_ACT_HIT
 
@@ -127,9 +151,11 @@
 					damagetype = BRUTE
 				if("fire", "acid")
 					damagetype = BURN
-			if(!apply_damage(I.throwforce, damagetype, zone, armor))
+			var/real_damage = apply_damage(I.throwforce, damagetype, zone, armor)
+			if(!real_damage)
 				nodmg = TRUE
 				next_attack_msg += span_warning(" Armor stops the damage.")
+			var/mob/thrown_by = I.thrownby?.resolve()
 			if(!nodmg)
 				if(iscarbon(src))
 					var/obj/item/bodypart/affecting = get_bodypart(zone)
@@ -137,19 +163,19 @@
 						var/throwee = null
 						if(throwingdatum)
 							throwee = isliving(throwingdatum.thrower) ? throwingdatum.thrower : null
-						affecting.bodypart_attacked_by(I.thrown_bclass, I.throwforce, throwee, affecting.body_zone, crit_message = TRUE)
+						affecting.bodypart_attacked_by(I.thrown_bclass, real_damage, throwee, affecting.body_zone, crit_message = TRUE, incoming_germ = I.germ_level, pre_applied = TRUE)
 					I.do_special_attack_effect(I.thrownby, affecting, null, src, zone, thrown = TRUE)
 				else
 					simple_woundcritroll(I.thrown_bclass, I.throwforce, null, zone, crit_message = TRUE)
 					if(((throwingdatum ? throwingdatum.speed : I.throw_speed) >= EMBED_THROWSPEED_THRESHOLD) || I.embedding.embedded_ignore_throwspeed_threshold)
 						if(I.can_embed() && prob(I.embedding.embed_chance) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) && !HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
 							simple_add_embedded_object(I, silent = FALSE, crit_message = TRUE)
-					I.do_special_attack_effect(I.thrownby, null, null, src, null, thrown = TRUE)
+					I.do_special_attack_effect(thrown_by, null, null, src, null, thrown = TRUE)
 			visible_message("<span class='danger'>[src] is hit by [I]![next_attack_msg.Join()]</span>", \
 							"<span class='danger'>I'm hit by [I]![next_attack_msg.Join()]</span>")
 			next_attack_msg.Cut()
-			if(I.thrownby)
-				log_combat(I.thrownby, src, "threw and hit", I)
+			if(thrown_by)
+				log_combat(thrown_by, src, "threw and hit", I)
 		else
 			return 1
 	else
@@ -220,7 +246,7 @@
 
 	if(!prob(probby) && !instant && !stat && cmode)
 		var/self_message
-		if(src.client?.prefs.showrolls)
+		if(src.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 			self_message = span_warning("I struggle with [user]! ([probby]%)")
 		else
 			self_message = span_warning("I struggle with [user]!")
@@ -326,7 +352,7 @@
 	return TRUE
 
 
-/mob/living/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/attack_paw(mob/living/carbon/M)
 	if(isturf(loc) && istype(loc.loc, /area/start))
 //		to_chat(M, "No attacking people at spawn, you jackass.")
 		return FALSE
@@ -368,10 +394,12 @@
 		return FALSE
 	if(HAS_TRAIT(src, TRAIT_SHOCKIMMUNE))
 		return FALSE
-	if(shock_damage < 1)
-		return FALSE
-	if(!(flags & SHOCK_ILLUSION))
-		adjustFireLoss(shock_damage)
+	if(!(flags & SHOCK_VISUAL_ONLY))
+		if(shock_damage < 1)
+			return FALSE
+		if(!(flags & SHOCK_ILLUSION))
+			adjustFireLoss(shock_damage)
+
 	visible_message(
 		"<span class='danger'>[src] was shocked by [source ? "\the [source]" : "something"]!</span>", \
 		"<span class='danger'>I feel a powerful shock coursing through my body!</span>", \
@@ -391,8 +419,37 @@
 	return FALSE
 
 //called when the mob receives a loud bang
-/mob/living/proc/soundbang_act()
-	return 0
+/mob/living/proc/soundbang_act(intensity = SOUNDBANG_NORMAL, stun_pwr = 2 SECONDS, damage_pwr = 5, deafen_pwr = 1.5 SECONDS, ignore_deafness = FALSE, send_sound = TRUE)
+	var/protection = get_ear_protection(ignore_deafness)
+	if(protection >= intensity)
+		return FALSE
+
+	///The amplitude of the effect is reduced by sound protection, while weakness only makes it worse.
+	var/effect_amount = protection > 0 ? 1 - (protection/intensity) : 1 - protection
+	if(stun_pwr)
+		Paralyze(stun_pwr * effect_amount * 0.1)
+		Knockdown(stun_pwr * effect_amount)
+
+	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
+
+	. = effect_amount //how soundbanged we are
+	if(!ears || !(deafen_pwr || damage_pwr))
+		return
+
+	var/ear_damage = damage_pwr * effect_amount
+	var/deaf = deafen_pwr * effect_amount
+	sound_damage(ear_damage, deaf)
+
+	if(send_sound)
+		SEND_SOUND(src, sound('sound/flash_ring.ogg',0, 1, 0, 250))
+
+	if(ears.damage >= 15 && prob(ears.damage - 5))
+		to_chat(src, span_userdanger("You can't hear anything!"))
+		// Makes you deaf, enough that you need a proper source of healing, it won't self heal
+		// you need earmuffs, inacusiate, or replacement
+		ears.setOrganDamage(ears.maxHealth)
+	else if(ears.damage >= 5)
+		to_chat(src, span_warning("Your ears start to ring[ears.damage >= 15 ? " badly!":"!"]"))
 
 //to damage the clothes worn by a mob
 /mob/living/proc/damage_clothes(damage_amount, damage_type = BRUTE, damage_flag = 0, def_zone)

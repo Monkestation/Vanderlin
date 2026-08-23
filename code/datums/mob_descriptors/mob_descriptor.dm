@@ -13,7 +13,7 @@
 /datum/mob_descriptor/New()
 	. = ..()
 	if(!describe)
-		describe = lowertext(name)
+		describe = LOWER_TEXT(name)
 	if(prefix)
 		pre_string = "[prefix] "
 	if(suffix)
@@ -46,6 +46,9 @@
 
 /datum/mob_descriptor/proc/get_coalesce_text(mob/living/described, list/used_verbage)
 	return "[should_add_verbage(described, used_verbage) ? "[get_verbage(described)] " : ""][get_pre_string(described)][get_description(described)][post_string]"
+
+/datum/mob_descriptor/proc/get_coalesce_text_nofluff(mob/living/described, list/used_verbage)
+	return "[get_description(described)]"
 
 /datum/mob_descriptor/proc/get_description(mob/living/described)
 	return describe

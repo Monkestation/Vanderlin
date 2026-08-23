@@ -29,9 +29,10 @@
 	attack_sound = 'sound/blank.ogg'
 	canparry = TRUE
 	d_intent = INTENT_PARRY
+	animal_type = /datum/blood_type/human/corrupted/orc
 	speak_emote = list("grunts")
 	speak = list("WAAAGH!", "KRUSH AND KILL!", "Never should have come here!", "Slaughter them all!", "Kill everything!", "Hahaha! Die!")
-	loot = list(/obj/effect/mob_spawn/human/orc/corpse/savageorc,
+	loot = list(/obj/effect/mob_spawn/corpse/orc/savage,
 			/obj/item/weapon/axe/boneaxe,
 			/obj/effect/decal/cleanable/blood)
 	faction = list(FACTION_ORCS)
@@ -47,7 +48,7 @@
 	icon_state = "savageorc2"
 	icon_living = "savageorc2"
 	icon_dead = "savageorc2"
-	loot = list(/obj/effect/mob_spawn/human/orc/corpse/savageorc2,
+	loot = list(/obj/effect/mob_spawn/corpse/orc/savage/alt,
 			/obj/item/weapon/axe/boneaxe,
 			/obj/effect/decal/cleanable/blood)
 
@@ -61,7 +62,7 @@
 	armor_penetration = 35
 	maxHealth = 200
 	health = 200
-	loot = list(/obj/effect/mob_spawn/human/orc/corpse/orcmarauder,
+	loot = list(/obj/effect/mob_spawn/corpse/orc/marauder,
 			/obj/item/weapon/sword/scimitar/messer,
 			/obj/effect/decal/cleanable/blood)
 
@@ -70,7 +71,7 @@
 	icon_living = "orcmarauder_spear"
 	icon_dead = "orcmarauder_spear"
 	base_intents = list(/datum/intent/simple/spear)
-	loot = list(/obj/effect/mob_spawn/human/orc/corpse/orcmarauder,
+	loot = list(/obj/effect/mob_spawn/corpse/orc/marauder,
 			/obj/item/weapon/polearm/spear,
 			/obj/effect/decal/cleanable/blood)
 
@@ -83,7 +84,7 @@
 	armor_penetration = 40
 	maxHealth = 500
 	health = 500
-	loot = list(/obj/effect/mob_spawn/human/orc/corpse/orcravager,
+	loot = list(/obj/effect/mob_spawn/corpse/orc/ravager,
 			/obj/item/weapon/polearm/halberd/bardiche,
 			/obj/effect/decal/cleanable/blood)
 
@@ -98,7 +99,7 @@
 	attack_verb_continuous = list("stabs", "slashes", "skewers")
 	attack_verb_simple = "stab"
 	attack_sound = 'sound/blank.ogg'
-	loot = list(/obj/effect/mob_spawn/human/orc/corpse/savageorc,
+	loot = list(/obj/effect/mob_spawn/corpse/orc/savage,
 			/obj/item/weapon/polearm/spear/bonespear,
 			/obj/effect/decal/cleanable/blood)
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
@@ -107,7 +108,7 @@
 	icon_state = "savageorc_spear2"
 	icon_living = "savageorc_spear2"
 	icon_dead = "savageorc_spear2"
-	loot = list(/obj/effect/mob_spawn/human/orc/corpse/savageorc2,
+	loot = list(/obj/effect/mob_spawn/corpse/orc/savage/alt,
 			/obj/item/weapon/polearm/spear/bonespear,
 			/obj/effect/decal/cleanable/blood)
 
@@ -127,7 +128,7 @@
 	. = ..()
 	if(!target)
 		if(prob(3))
-			emote(pick("idle"), TRUE)
+			INVOKE_ASYNC(src, PROC_REF(emote), "idle")
 
 /mob/living/simple_animal/hostile/orc/taunted(mob/user)
 	emote("aggro")
@@ -162,10 +163,12 @@
 	retreat_distance = 2
 	minimum_distance = 5
 	ranged_cooldown_time = 60
-	loot = list(/obj/effect/mob_spawn/human/orc/corpse/savageorc2,
-			/obj/item/gun/ballistic/bow,
-			/obj/item/ammo_casing/caseless/arrow = 3,
-			/obj/effect/decal/cleanable/blood)
+	loot = list(
+		/obj/effect/mob_spawn/corpse/orc/savage/alt,
+		/obj/item/gun/ballistic/bow,
+		/obj/item/ammo_casing/caseless/arrow = 3,
+		/obj/effect/decal/cleanable/blood,
+	)
 	maxHealth = 100
 	health = 100
 	ai_controller = /datum/ai_controller/orc_ranged

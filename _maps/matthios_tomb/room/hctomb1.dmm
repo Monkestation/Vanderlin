@@ -27,7 +27,7 @@
 /area/under/tomb/indoors)
 "ci" = (
 /obj/structure/closet/dirthole/closed,
-/obj/structure/gravemarker,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "cx" = (

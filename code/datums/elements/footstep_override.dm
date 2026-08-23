@@ -1,6 +1,7 @@
 ///When attached, the footstep sound played by the footstep element will be replaced by this one's
 /datum/element/footstep_override
-	element_flags = ELEMENT_BESPOKE|ELEMENT_DETACH
+	element_flags = ELEMENT_BESPOKE|ELEMENT_DETACH_ON_HOST_DESTROY
+	argument_hash_start_idx = 2
 	///The sound played for movables with claw step sound type.
 	var/clawfootstep
 	///The sound played for movables with barefoot step sound type.
@@ -33,6 +34,7 @@
 		occupy_turf(target, target.loc)
 
 /datum/element/footstep_override/Detach(atom/movable/source)
+	UnregisterSignal(source, COMSIG_MOVABLE_MOVED)
 	if(isturf(source.loc))
 		vacate_turf(source, source.loc)
 	return ..()
@@ -77,3 +79,4 @@
 	steps[FOOTSTEP_MOB_HEAVY] = heavyfootstep
 	steps[FOOTSTEP_MOB_CLAW] = clawfootstep
 	steps[STEP_SOUND_PRIORITY] = priority
+	return FOOTSTEP_OVERRIDEN

@@ -148,7 +148,7 @@
 		user.put_in_hands(mounted_fish)
 	balloon_alert_to_viewers("fish removed")
 
-/obj/structure/fish_mount/Exited(atom/movable/gone, atom/new_loc)
+/obj/structure/fish_mount/Exited(atom/movable/gone, direction)
 	if(gone != mounted_fish)
 		return ..()
 	if(!QDELETED(mounted_fish) && (!persistence_loaded_fish || roll_for_safe_removal()))

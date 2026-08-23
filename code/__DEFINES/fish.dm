@@ -395,6 +395,8 @@
 #define TRAIT_FISHING_SPOT "fishing_spot"
 ///This trait gets you a list of fishes that can be caught when examining a fishing spot.
 #define TRAIT_EXAMINE_FISHING_SPOT "examine_fishing_spot"
+/// Atoms with this trait can be right-clicked with a fish to release them, presumably back in the fishing spot they were caught from.
+#define TRAIT_CATCH_AND_RELEASE "catch_and_release"
 
 ///coming from a fish trait datum.
 #define FISH_TRAIT_DATUM "fish_trait_datum"

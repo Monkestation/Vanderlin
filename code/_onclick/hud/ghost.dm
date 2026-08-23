@@ -22,30 +22,39 @@
 
 /atom/movable/screen/ghost/teleport
 	name = "Teleport"
-	screen_loc = "SOUTH:6,CENTER:24"
+	screen_loc = "SOUTH:6,CENTER+1:24"
 	icon_state = "teleport"
 
 /atom/movable/screen/ghost/teleport/Click()
 	var/mob/dead/observer/G = usr
 	G.dead_tele()
 
+/atom/movable/screen/ghost/set_final_words
+	name = "Set Final Words"
+	screen_loc = "SOUTH:6,CENTER:24"
+	icon_state = "set_final_words"
+
+/atom/movable/screen/ghost/set_final_words/Click()
+	var/mob/dead/observer/G = usr
+	G.set_final_words()
+
 /atom/movable/screen/ghost/ghost_up
 	name = "Ghost Up"
-	screen_loc = "SOUTH:6,CENTER+1:24"
+	screen_loc = "SOUTH:6,CENTER+2:24"
 	icon_state = "up"
 
 /atom/movable/screen/ghost/ghost_up/Click()
 	var/mob/dead/observer/G = usr
-	G.ghost_up()
+	G.up()
 
 /atom/movable/screen/ghost/ghost_down
 	name = "Ghost Down"
-	screen_loc = "SOUTH:6,CENTER+2:24"
+	screen_loc = "SOUTH:6,CENTER+3:24"
 	icon_state = "down"
 
 /atom/movable/screen/ghost/ghost_down/Click()
 	var/mob/dead/observer/G = usr
-	G.ghost_down()
+	G.down()
 
 /atom/movable/screen/ghost/after_life
 	name = "AFTERLIFE"
@@ -77,19 +86,20 @@
 	if(!GLOB.admin_datums[owner.ckey]) // If you are adminned, you will not get the dead hud obstruction.
 		using =  new /atom/movable/screen/backhudl/ghost(null, src)
 		static_inventory += using
-
-	scannies = new /atom/movable/screen/scannies(null, src)
-	static_inventory += scannies
-	if(owner.client?.prefs?.crt == TRUE)
-		scannies.alpha = 70
+	else
+		using = new /atom/movable/screen/backhudl/empty(null, src)
+		static_inventory += using
 
 	using = new /atom/movable/screen/ghost/orbit(null, src)
 	static_inventory += using
 
-	using = new /atom/movable/screen/ghost/teleport(null, src)
+	using = new /atom/movable/screen/ghost/reenter_corpse(null, src)
 	static_inventory += using
 
-	using = new /atom/movable/screen/ghost/reenter_corpse(null, src)
+	using = new /atom/movable/screen/ghost/set_final_words(null, src)
+	static_inventory += using
+
+	using = new /atom/movable/screen/ghost/teleport(null, src)
 	static_inventory += using
 
 	using = new /atom/movable/screen/ghost/ghost_up(null, src)
@@ -112,7 +122,7 @@
 	if(!.)
 		return
 	var/mob/screenmob = viewmob || mymob
-	if(!screenmob.client.prefs.ghost_hud)
+	if(!screenmob.client.prefs.read_preference(/datum/preference/toggle/ghost_hud))
 		screenmob.client.screen -= static_inventory
 	else
 		screenmob.client.screen += static_inventory
@@ -123,11 +133,6 @@
 
 	using =  new /atom/movable/screen/backhudl/ghost(null, src)
 	static_inventory += using
-
-	scannies = new /atom/movable/screen/scannies(null, src)
-	static_inventory += scannies
-	if(owner.client?.prefs?.crt == TRUE)
-		scannies.alpha = 70
 
 /datum/hud/eye/show_hud(version = 0, mob/viewmob)
 	// don't show this HUD if observing; show the HUD of the observee
@@ -140,19 +145,14 @@
 	if(!.)
 		return
 	var/mob/screenmob = viewmob || mymob
-	if(!screenmob.client.prefs.ghost_hud)
+	if(!screenmob.client.prefs.read_preference(/datum/preference/toggle/ghost_hud))
 		screenmob.client.screen -= static_inventory
 	else
 		screenmob.client.screen += static_inventory
 
-/datum/hud/obs/New(mob/owner)
+/datum/hud/obscured/New(mob/owner)
 	..()
 	var/atom/movable/screen/using
 
-	using =  new /atom/movable/screen/backhudl/obs(null, src)
+	using =  new /atom/movable/screen/backhudl/obscured(null, src)
 	static_inventory += using
-
-	scannies = new /atom/movable/screen/scannies(null, src)
-	static_inventory += scannies
-	if(owner.client?.prefs?.crt == TRUE)
-		scannies.alpha = 70

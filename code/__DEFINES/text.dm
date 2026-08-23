@@ -30,3 +30,13 @@
 #define STRIP_HTML_FULL(text, limit) (copytext(html_decode(GLOB.html_tags.Replace(text, "")), 1, limit))
 
 #define SANITIZE_HEAR_MESSAGE(text) (GLOB.hearing_stripped_chars.Replace(text, ""))
+
+/**
+ * stuff like `copytext(input, length(input))` will trim the last character of the input,
+ * because DM does it so it copies until the char BEFORE the `end` arg, so we need to bump `end` by 1 in these cases.
+ */
+#define PREVENT_CHARACTER_TRIM_LOSS(integer) (integer + 1) //thank you gummie
+
+/// BYOND's string procs don't support being used on datum references (as in it doesn't look for a name for stringification)
+/// We just use this macro to ensure that we will only pass strings to this BYOND-level function without developers needing to really worry about it.
+#define LOWER_TEXT(thing) lowertext(UNLINT("[thing]"))

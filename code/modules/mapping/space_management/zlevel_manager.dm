@@ -14,6 +14,7 @@
 	for (var/I in 1 to default_map_traits.len)
 		var/list/features = default_map_traits[I]
 		var/datum/space_level/S = new(I, features[DL_NAME], features[DL_TRAITS])
+		build_area_turfs(I)
 		z_list += S
 
 /// Generates a real, honest to god new z level. Will create the actual space, and also generate a datum that holds info about the new plot of land
@@ -21,10 +22,21 @@
 /datum/controller/subsystem/mapping/proc/add_new_zlevel(name, traits = list(), z_type = /datum/space_level, delve = 0)
 	UNTIL(!adding_new_zlevel)
 	adding_new_zlevel = TRUE
-	var/new_z = z_list.len + 1
+
+	var/new_z = length(z_list) + 1
 	if (world.maxz < new_z)
 		world.incrementMaxZ()
 		CHECK_TICK
+
+	if(ZTRAIT_TOWN in traits)
+		GLOB.town_z_levels += new_z
+
+	if(ZTRAIT_MATTHIOS_DUNGEON in traits)
+		GLOB.tomb_z_levels += new_z
+
+	if(ZTRAIT_IGNORE_WEATHER_TRAIT in traits)
+		GLOB.weatherproof_z_levels += "[new_z]"
+
 	// TODO: sleep here if the Z level needs to be cleared
 	var/datum/space_level/S = new z_type(new_z, name, traits)
 	S.delve = delve

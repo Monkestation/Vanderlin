@@ -10,6 +10,12 @@
 ///The AI is currently in idle mode.
 #define AI_STATUS_IDLE "ai_idle"
 
+//Flags returned by get_able_to_run()
+///pauses AI processing
+#define AI_UNABLE_TO_RUN (1<<1)
+///bypass canceling our actions on set_ai_status()
+#define AI_PREVENT_CANCEL_ACTIONS (1<<2)
+
 ///Carbon checks
 #define SHOULD_RESIST(source) (source.on_fire || source.buckled || HAS_TRAIT(source, TRAIT_RESTRAINED) || (source.pulledby && (source.pulledby != source) && source.pulledby.grab_state > GRAB_PASSIVE))
 #define SHOULD_STAND(source) (source.resting)
@@ -56,6 +62,8 @@
 /// Signal sent when a blackboard key is set to a new value
 #define COMSIG_AI_BLACKBOARD_KEY_SET(blackboard_key) "ai_blackboard_key_set_[blackboard_key]"
 #define COMSIG_AI_BLACKBOARD_KEY_CLEARED(blackboard_key) "ai_blackboard_key_clear_[blackboard_key]"
+
+#define COMSIG_AI_PATHING_FAILED "ai_pathing_failed"
 
 ///sent from ai controllers when they pick behaviors: (list/datum/ai_behavior/old_behaviors, list/datum/ai_behavior/new_behaviors)
 #define COMSIG_AI_CONTROLLER_PICKED_BEHAVIORS "ai_controller_picked_behaviors"
@@ -160,6 +168,9 @@
 #define BB_SNEAKING "bb_sneaking"
 #define BB_SNEAK_COOLDOWN "bb_sneak_cooldown"
 
+#define BB_COMMANDED_ACTION "commanded_action"
+#define BB_COMMANDED_TARGET "commanded_target"
+
 ///key holds the world timer for swimming
 #define BB_KEY_SWIM_TIME "key_swim_time"
 ///key holds the water or land target turf
@@ -177,6 +188,9 @@
 #define BB_MAX_LEYLINE_ENERGY "max_leyline_energy"
 #define BB_ENERGY_REGEN_RATE "energy_regen"
 #define BB_BASIC_MOB_STOP_FLEEING "bb_stop_fleeing"
+
+///Blackboard key for a whitelist typecache of "things we can target while trying to move"
+#define BB_OBSTACLE_TARGETING_WHITELIST "BB_targeting_whitelist"
 
 #define BB_DRAGGER_HUNTING_COOLDOWN "dragger_hunting_cooldown"
 #define BB_DRAGGER_TELEPORT_COOLDOWN "dragger_teleport_cooldown"
@@ -205,6 +219,8 @@
 #define BB_CAT_GET_UP_CHANCE "cat_getup"
 #define BB_CAT_GROOM_CHANCE "cat_groom"
 #define BB_CAT_RACISM  "cat_racist"
+
+#define BB_FORCED_ATTACK_ZONE	"bb_forced_attack_zone"
 
 /// key that holds the target we will battle over our turf
 #define BB_TRESSPASSER_TARGET "tresspasser_target"
@@ -266,6 +282,9 @@
 #define ARCHER_NPC_ARROW_SEARCH_RANGE   9
 #define ARCHER_NPC_SIMULATED_CHARGETIME 1.5 SECONDS // fallback charge wait in deciseconds
 
+#define BB_WAVE_COORDINATOR "BB_wave_coordinator"
+#define BB_WAVE_TARGET_POINT "BB_wave_target"
+#define BB_WAVE_ATTACK_TARGET "BB_wave_attack_target"
 
 #define BB_CAT_KITTEN_TARGET "BB_cat_kitten_target"
 #define BB_CAT_HOLDING_FOOD "BB_cat_holding_food"
@@ -289,6 +308,7 @@
 #define BB_FLESH_CONSUMED_BODIES "flesh_consumed_bodies"
 
 #define BB_GNOME_WAYPOINT_A "bb_gnome_waypoint_a"
+#define BB_GNOME_SPLITTER_SOURCE "bb_gnome_split_source"
 #define BB_GNOME_WAYPOINT_B "bb_gnome_waypoint_b"
 #define BB_GNOME_TARGET_ITEM "bb_gnome_target_item"
 #define BB_GNOME_HOME_TURF "bb_gnome_home_turf"
@@ -301,17 +321,28 @@
 #define BB_GNOME_TRANSPORT_SOURCE "bb_gnome_source"
 #define BB_GNOME_TRANSPORT_DEST "bb_gnome_dest"
 #define BB_GNOME_SPLITTER_MODE "gnome_splitter_mode"
+#define BB_GNOME_EXTRACTOR_MODE "gnome_extractor_mode"
 #define BB_GNOME_TARGET_SPLITTER "gnome_target_splitter"
+#define BB_GNOME_TARGET_EXTRACTOR "gnome_target_extractor"
 #define BB_GNOME_CROP_MODE "bb_gnome_crop_mode"
 #define BB_GNOME_WATER_SOURCE "gnome_water_source"
 #define BB_GNOME_COMPOST_SOURCE "gnome_compost_source"
 #define BB_GNOME_SEED_SOURCE "gnome_seed_source"
 #define BB_GNOME_SEARCH_RANGE "gnome_search_range"
+#define BB_GNOME_PRIORITY_OVERRIDES "priority_mappings"
 #define BB_ACTION_STATE_MANAGER "action_state_manager"
+
+#define GNOME_PRIORITY_NONE 0
+#define GNOME_PRIORITY_LOW 10
+#define GNOME_PRIORITY_NORMAL 50
+#define GNOME_PRIORITY_HIGH 80
+#define GNOME_PRIORITY_CRITICAL 100
+#define GNOME_PRIORITY_USER_STEP 4
 
 #define BB_GNOME_ALCHEMY_MODE "alch_mode"
 #define BB_GNOME_TARGET_CAULDRON "target_cauldron"
 #define BB_GNOME_TARGET_WELL "well_target"
+#define BB_FARMING_TARGET_WELL "farm_well_target" //why the distinction? because gnomes can support literally everything
 #define BB_GNOME_CURRENT_RECIPE "current_potion"
 #define BB_GNOME_ALCHEMY_STATE "alch_state"
 #define BB_GNOME_ESSENCE_STORAGE "essence_storage"
@@ -374,5 +405,12 @@ GLOBAL_LIST_INIT(ai_item_flags, list(
 ))
 
 #define AI_INVENTORY_WATCHED_SLOTS (ITEM_SLOT_BELT | ITEM_SLOT_BACK_L | ITEM_SLOT_BACK_R | \
-    ITEM_SLOT_BELT_L | ITEM_SLOT_BELT_R | ITEM_SLOT_ARMOR | ITEM_SLOT_PANTS | \
-    ITEM_SLOT_SHIRT | ITEM_SLOT_CLOAK | ITEM_SLOT_BACK | ITEM_SLOT_NECK)
+	ITEM_SLOT_BELT_L | ITEM_SLOT_BELT_R | ITEM_SLOT_ARMOR | ITEM_SLOT_PANTS | \
+	ITEM_SLOT_SHIRT | ITEM_SLOT_CLOAK | ITEM_SLOT_BACK | ITEM_SLOT_NECK)
+
+#define WAVE_ADVANCING 1
+#define WAVE_OCCUPYING 2
+#define WAVE_COMPLETE 3
+#define WAVE_FAILED 4
+
+#define WAVE_DEFENSE_POINT_RADIUS 5

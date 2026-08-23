@@ -30,7 +30,7 @@
 		if(L.stat == DEAD)
 			if(L.blood_drained >= 60)
 				if(L.skinned)
-					. += span_warning("[L] has been fully drained of blood and skinned. I can butcher it with a cleaver.")
+					. += span_warning("[L] has been fully drained of blood and skinned. I can butcher it with a knife.")
 				else
 					. += span_warning("[L] has had its blood fully drained. I can skin it with a knife.")
 			else
@@ -38,6 +38,15 @@
 					. += span_warning("[L] is having its blood drained. If I try to skin or butcher it now, I may lose some parts.")
 				else
 					. += span_warning("There is a corpse ready to be worked on. I might need a knife for this.")
+
+/obj/structure/meathook/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_notice("To see the next step of butchering examine the meat hook.")
+	. += span_notice("To hang a mob from a meat hook aggressively grab them then click drag them on the meat hook.")
+	. += span_notice("If the mob is dead using middle click will start draining blood, using a bucket on the meathook will allow you to collect the blood.")
+	. += span_notice("Waiting for blood to drain fully will yield larger amounts of resources, but is not required.")
+	. += span_notice("Middle click the mob with a short sharp object to skin it.")
+	. += span_notice("Middle click the mob with a short sharp object after skining it to butcher it.")
 
 /obj/structure/meathook/attack_paw(mob/user)
 	return attack_hand(user)
@@ -65,7 +74,7 @@
 	L.forceMove(drop_location())
 	L.emote("scream")
 	L.add_splatter_floor()
-	L.adjustBruteLoss(30)
+	L.adjustBruteLoss(30, damage_type = BCLASS_PIERCE)
 	L.setDir(SOUTH)
 	ADD_TRAIT(L, TRAIT_EASYDISMEMBER, "[type]")
 	buckle_mob(L, force=1)
@@ -90,7 +99,7 @@
 			M.visible_message(span_warning("[M] struggles to break free from [src]!"),\
 				span_notice("I struggle to break free from [src], tearing my legs! (Stay still for two minutes.)"),\
 				span_hear("I hear the sound of torn flesh and whimpering..."))
-			M.adjustBruteLoss(30)
+			M.adjustBruteLoss(30, damage_type = BCLASS_PIERCE)
 			if(!do_after(M, 30 SECONDS, src))
 				if(M && M.buckled)
 					to_chat(M, span_warning("I fail to free myself!"))
@@ -133,11 +142,11 @@
 
 /obj/structure/meathook/proc/release_mob(mob/living/M)
 	REMOVE_TRAIT(M, TRAIT_EASYDISMEMBER, "[type]")
-	M.adjustBruteLoss(30)
+	M.adjustBruteLoss(30, damage_type = BCLASS_PIERCE)
 	src.visible_message(span_danger("[M] falls free of [src]!"))
 	unbuckle_mob(M,force=1)
 	M.set_lying_angle(pick(90,270))
-	INVOKE_ASYNC(M, TYPE_PROC_REF(/mob, emote), "painscream")
+	M.emote("painscream", forced = TRUE)
 	M.AdjustParalyzed(20)
 	draining_blood = FALSE
 
@@ -147,10 +156,9 @@
 			release_mob(L)
 	return ..()
 
-/obj/structure/meathook/deconstruct()
+/obj/structure/meathook/atom_deconstruct(disassembled)
 	new /obj/item/grown/log/tree/small(loc, 1)
 	new /obj/item/rope(loc, 1)
-	qdel(src)
 
 /obj/structure/meathook/proc/butchery(mob/living/user, mob/living/simple_animal/butchery_target)
 	var/list/butcher = list()
@@ -167,7 +175,7 @@
 	var/happiness_bonus = butchery_target.get_happiness_yield_bonus(1)
 
 	if(!draining_blood && butchery_target.blood_drained < 60)
-		if(!(user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
+		if(!(user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/dagger/chop/cleaver || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
 			return
 		var/cut_time = 4 SECONDS - (0.5 SECONDS * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering))
 		to_chat(user, span_notice("I prepare to drain [butchery_target]'s blood by cutting the skin..."))
@@ -177,7 +185,7 @@
 			START_PROCESSING(SSmachines, src)
 		return
 
-	if(!butchery_target.skinned && (user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
+	if(!butchery_target.skinned && (user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/dagger/chop/cleaver || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut))
 		var/cut_time = 6 SECONDS - (0.5 SECONDS * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering))
 		to_chat(user, span_notice("I start to skin [butchery_target]."))
 		if(do_after(user, cut_time, src, (IGNORE_HELD_ITEM)))
@@ -237,7 +245,7 @@
 	if(!butchery_target.skinned)
 		return
 
-	if(user.used_intent.type == /datum/intent/dagger/chop/cleaver)
+	if(user.used_intent.type == /datum/intent/dagger/cut || user.used_intent.type == /datum/intent/dagger/chop/cleaver || user.used_intent.type == /datum/intent/sword/cut || user.used_intent.type == /datum/intent/axe/cut)
 		var/cut_time = 6 SECONDS - (0.5 SECONDS * GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering))
 		to_chat(user, span_notice("I start to butcher [butchery_target]."))
 		if(do_after(user, cut_time, src, (IGNORE_HELD_ITEM)))

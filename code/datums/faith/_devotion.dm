@@ -1,15 +1,20 @@
 // Cleric Holder Datums
 /datum/devotion
+	/// The mob that this devotion datum is attached to
 	var/mob/living/carbon/human/holder_mob = null
 
+	/// How much devotion the `holder_mob` can use
 	var/devotion = 0
+	/// How much devotion the `holder_mob` can have
 	var/max_devotion = 1000
+	/// Progress on reaching next tier, granting access to new miracles
 	var/progression = 0
+	/// How far the `holder_mob` can progress, use defines at `code\__DEFINES\faith.dm`
 	var/max_progression = CLERIC_REQ_3
 
-	/// How much devotion is gained per process call
+	/// How much devotion is gained per process call. Update this variable using `update_passive_devotion`
 	var/passive_devotion_gain = 0
-	/// How much progression is gained per process call
+	/// How much progression is gained per process call. Update this variable using `update_passive_progression`
 	var/passive_progression_gain = 0
 	/// How much devotion is gained per prayer cycle
 	var/prayer_effectiveness = 2
@@ -54,7 +59,7 @@
 		initialize_hud()
 	else
 		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(initialize_hud)))
-	for(var/trait as anything in traits)
+	for(var/trait in traits)
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
 		grant_miracle(miracle)
@@ -92,7 +97,7 @@
 		holder_mob.cleric = null
 		holder_mob.remove_spells(source = src)
 		remove_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
-		for(var/trait as anything in traits)
+		for(var/trait in traits)
 			REMOVE_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	holder_mob = null
 
@@ -124,6 +129,28 @@
 
 	if(.)
 		check_progression()
+
+/// Updates `passive_devotion_gain` for mob, if it gets to 0 and `passive_progression_gain` is also 0, it will stop processing on next `process()`
+/// If `passive_devotion_gain` started at 0, we will have it start processing
+/datum/devotion/proc/update_passive_devotion(amount)
+	if(!amount)
+		return
+
+	passive_devotion_gain = max(0, passive_devotion_gain + amount)
+
+	if(passive_devotion_gain)
+		START_PROCESSING(SSprocessing, src)
+
+/// Updates `passive_progression_gain` for mob, if it gets to 0 and `passive_devotion_gain` is also 0, it will stop processing on next `process()`
+/// If `passive_progression_gain` started at 0, we will have it start processing
+/datum/devotion/proc/update_passive_progression(amount)
+	if(!amount)
+		return
+
+	passive_progression_gain = max(0, passive_progression_gain + amount)
+
+	if(passive_progression_gain)
+		START_PROCESSING(SSprocessing, src)
 
 /datum/devotion/proc/check_progression()
 	var/static/list/tiers = list(
@@ -158,6 +185,7 @@
 	miracles_extra += list(
 		/datum/action/cooldown/spell/undirected/touch/orison,
 		/datum/action/cooldown/spell/cure_rot,
+		/datum/action/cooldown/spell/diagnose/holy,
 	)
 	devotion_class = DEVOTION_CLASS_PRIEST
 
@@ -174,13 +202,6 @@
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_2
 	devotion_class = DEVOTION_CLASS_TEMPLAR
-
-/datum/devotion/proc/make_absolver()
-	devotion = 100
-	max_devotion = CLERIC_REQ_3
-	progression = CLERIC_REQ_3
-	max_progression = CLERIC_REQ_3
-	devotion_class = DEVOTION_CLASS_ABSOLVER
 
 /datum/devotion/proc/make_acolyte()
 	progression = CLERIC_REQ_1
@@ -207,6 +228,12 @@
 		/datum/action/cooldown/spell/diagnose/holy,
 	)
 	devotion_class = DEVOTION_CLASS_CHURCHLING
+
+/datum/devotion/proc/make_oracle()
+	make_acolyte()
+
+/datum/devotion/proc/make_lunar_champion()
+	make_templar()
 
 /mob/living/carbon/human/proc/devotionreport()
 	set name = "Check Devotion"

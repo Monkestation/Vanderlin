@@ -44,7 +44,7 @@
 	)
 	isgoodguy = TRUE
 	chooses_name = FALSE
-	ascended = 4
+	ascension_level = 4
 	outfit = /datum/outfit/daewalker
 	patron = /datum/patron/divine/astrata
 	innate_traits = list(
@@ -106,14 +106,14 @@
 	blade.grant_language(/datum/language/celestial)
 	blade.grant_language(/datum/language/newpsydonic)
 	blade.grant_language(/datum/language/oldpsydonic)
-	blade.add_quirk(/datum/quirk/vice/godfearing)
+	blade.add_quirk(/datum/quirk/vice/addiction/godfearing)
 
-	RegisterSignal(blade, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(blade, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/antagonist/vampire/lord/daewalker/on_removal()
 	if(owner.current)
 		owner.current.remove_stat_modifier("[type]")
-		UnregisterSignal(owner.current, COMSIG_PARENT_EXAMINE)
+		UnregisterSignal(owner.current, COMSIG_ATOM_EXAMINE)
 	. = ..()
 
 /datum/antagonist/vampire/lord/daewalker/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
@@ -173,7 +173,7 @@
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 	beltr = /obj/item/ammo_holder/bullet/bullets
-	backl = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	backr = /obj/item/weapon/scabbard/sword/noble
 	r_hand = /obj/item/weapon/sword/long/daewalker
 	backpack_contents = list(/obj/item/reagent_containers/glass/bottle/aflask = 1, /obj/item/smokebomb = 2, /obj/item/needle/blessed = 1)
@@ -193,14 +193,13 @@
 	wdefense = ULTMATE_PARRY
 	max_blade_int = 50000
 	max_integrity = 50000
-	randomize_blade_int = FALSE
 	resistance_flags = INDESTRUCTIBLE
 	sellprice = 0
 	slot_flags = 0 //scabbard only
 
 /obj/item/weapon/sword/long/daewalker/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/vampiric)
+	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/silver)
 	RegisterSignal(src, COMSIG_ITEM_AFTER_PICKUP, PROC_REF(hands_off))
 
@@ -267,7 +266,7 @@
 	icon_state = "psydonboots"
 	item_state = "psydonboots"
 	color = CLOTHING_ROYAL_BLACK
-	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0,"fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/boots/leather/daewalker
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	max_integrity = INTEGRITY_STRONG
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -278,13 +277,13 @@
 
 /obj/item/clothing/pants/trou/beltpants/daewalker
 	color = CLOTHING_ROYAL_BLACK
-	armor = list("blunt" = 70, "slash" = 60, "stab" = 30, "piercing" = 20,"fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/pants/leather/daewalker
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	max_integrity = INTEGRITY_STRONG
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/daewalker
-	armor = list("blunt" = 60, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/wrist/leather/advanced
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	max_integrity = INTEGRITY_STANDARD + 50
 	misc_flags = CRAFTING_TEST_EXCLUDE

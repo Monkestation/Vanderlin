@@ -4,9 +4,8 @@
 	button_icon_state = "raiseskele"
 	sound = 'sound/items/beartrap.ogg'
 
-	attunements = list(
-		/datum/attunement/dark = 0.4,
-	)
+	required_form = FORM_DEATH
+	required_level = 2
 
 	charge_time = 2 SECONDS
 	charge_drain = 1
@@ -26,6 +25,13 @@
 		span_userdanger("I feel arcyne teeth biting into my eyes!"),
 		span_hear("I hear a loud crunch"),
 	)
-	cast_on.adjustBruteLoss(30)
+	if(iscarbon(cast_on))
+		var/mob/living/carbon/carbon = cast_on
+		var/obj/item/organ/eyer = LAZYACCESS(carbon.eye_organs, 2)
+		var/obj/item/organ/eyel = LAZYACCESS(carbon.eye_organs, 1)
+		eyer.take_damage(15)
+		eyel.take_damage(15)
+	else
+		cast_on.adjustBruteLoss(30, damage_type = BCLASS_BITE)
 	cast_on.adjust_temp_blindness(4 SECONDS)
 	cast_on.set_eye_blur_if_lower(20 SECONDS)

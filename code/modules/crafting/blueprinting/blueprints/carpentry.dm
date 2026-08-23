@@ -155,6 +155,15 @@
 	)
 	craftdiff = 1
 
+/datum/blueprint_recipe/carpentry/decorative_arch
+	name = "wooden decorative arch"
+	desc = "A wooden decorative arch intended to complement a table or worktop while preventing intrusion."
+	result_type = /obj/structure/bars/wooden_arch
+	required_materials = list(
+		/obj/item/grown/log/tree/small = 2,
+	)
+	craftdiff = 2
+
 /datum/blueprint_recipe/carpentry/pyre
 	name = "wooden pyre"
 	desc = "A wooden funeral pyre."
@@ -404,6 +413,17 @@
 	supports_directions = TRUE
 	craftdiff = 0
 
+/datum/blueprint_recipe/carpentry/wooden_table/smooth
+	name = "wooden table"
+	desc = "A sturdy wooden table."
+	result_type = /obj/structure/table/wood/smooth
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1
+	)
+	supports_directions = TRUE
+	craftdiff = 0
+
 /datum/blueprint_recipe/carpentry/pillory
 	name = "pillory"
 	desc = "A restraining device for punishment."
@@ -414,6 +434,18 @@
 	)
 	supports_directions = TRUE
 	craftdiff = 2
+
+
+/datum/blueprint_recipe/structure/bars/wood
+	name = "wooden barrier"
+	desc = "A sturdy wooden barrier for keeping things out."
+	result_type = /obj/structure/bars/wood
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1
+	)
+	supports_directions = FALSE
+	craftdiff = 0
 
 /datum/blueprint_recipe/carpentry/easel
 	name = "wooden easel"

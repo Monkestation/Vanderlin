@@ -35,7 +35,7 @@ GLOBAL_LIST_INIT(find_and_set_interested_atoms, typecacheof(list(/obj/item, /mob
 /datum/ai_behavior/find_and_set/edible/search_tactic(datum/ai_controller/controller, locate_path, search_range)
 	var/mob/living/living_pawn = controller.pawn
 	var/list/food_candidates = list()
-	for(var/held_candidate as anything in living_pawn.held_items)
+	for(var/held_candidate in living_pawn.held_items)
 		if(!held_candidate || !istype(held_candidate, /obj/item/reagent_containers/food))
 			continue
 		food_candidates += held_candidate
@@ -180,14 +180,14 @@ GLOBAL_LIST_INIT(find_and_set_interested_atoms, typecacheof(list(/obj/item, /mob
 	if(!ishuman(checking))
 		return FALSE
 	var/mob/living/living_pawn = pawn
-	return living_pawn.faction.Find(REF(checking)) ? TRUE : FALSE
+	return living_pawn.has_ally(checking) ? TRUE : FALSE
 
 /datum/ai_behavior/find_and_set/nearby_friends/search_tactic(datum/ai_controller/controller, locate_path, search_range)
 	var/atom/friend = locate(/mob/living/carbon/human) in oview(search_range, controller.pawn)
 	if(isnull(friend))
 		return null
 	var/mob/living/living_pawn = controller.pawn
-	var/potential_friend = living_pawn.faction.Find(REF(friend)) ? friend : null
+	var/potential_friend = living_pawn.has_ally(friend) ? friend : null
 	return potential_friend
 
 /datum/ai_behavior/find_and_set/in_list/turf_types
@@ -254,7 +254,7 @@ GLOBAL_LIST_INIT(find_and_set_interested_atoms, typecacheof(list(/obj/item, /mob
 /datum/ai_behavior/find_and_set/armor/search_tactic(datum/ai_controller/controller, locate_path, search_range)
 	var/mob/living/carbon/living_pawn = controller.pawn
 	var/list/armor = list()
-	for(var/obj/item/clothing/local_candidate as anything in oview(search_range, controller.pawn))
+	for(var/obj/item/clothing/local_candidate in oview(search_range, controller.pawn))
 		if(!istype(local_candidate, /obj/item/clothing))
 			continue
 		var/obj/item/clothing/clothing = local_candidate
@@ -389,7 +389,7 @@ GLOBAL_LIST_INIT(find_and_set_interested_atoms, typecacheof(list(/obj/item, /mob
 	if(!field)
 		return FALSE
 
-	for(var/maybe_cat as anything in found)
+	for(var/maybe_cat in found)
 		if(maybe_cat == pawn)
 			continue
 		if(!atom_allowed(maybe_cat, field.locate_path, pawn))
@@ -535,7 +535,7 @@ GLOBAL_LIST_INIT(find_and_set_interested_atoms, typecacheof(list(/obj/item, /mob
 /datum/ai_behavior/find_and_set/proc/new_turf_found(turf/found, datum/ai_controller/controller)
 	var/valid_found = FALSE
 	var/atom/pawn = controller.pawn
-	for(var/maybe_item as anything in found)
+	for(var/maybe_item in found)
 		if(maybe_item == pawn)
 			continue
 		if(!is_type_in_typecache(maybe_item, GLOB.find_and_set_interested_atoms))
@@ -565,7 +565,7 @@ GLOBAL_LIST_INIT(find_and_set_interested_atoms, typecacheof(list(/obj/item, /mob
 	if(!field)
 		return FALSE
 
-	for(var/maybe_item as anything in found)
+	for(var/maybe_item in found)
 		if(maybe_item == pawn)
 			continue
 		if(!atom_allowed(maybe_item, field.locate_path, pawn))

@@ -33,12 +33,12 @@
 	color = "#00a000"
 	metabolization_rate = 0.1 * REAGENTS_METABOLISM
 
-/datum/reagent/distillery/on_mob_life(mob/living/carbon/M)
+/datum/reagent/distillery/on_mob_life(mob/living/carbon/M, efficiency)
 	var/repair_strength = 1
 	var/obj/item/organ/liver/L = M.getorganslot(ORGAN_SLOT_LIVER)
 	if(L.damage > 0)
 		L.damage = max(L.damage - 4 * repair_strength, 0)
 		M.set_confusion_if_lower(2 SECONDS)
-	M.reagents.remove_all_type(/datum/reagent/medicine, 3*REM, 0, 1)
-	M.adjustToxLoss(-6)
+	M.reagents.remove_all_type(/datum/reagent/medicine, 3*REM * efficiency, 0, 1)
+	M.adjustToxLoss(-6 * efficiency)
 	. = ..()

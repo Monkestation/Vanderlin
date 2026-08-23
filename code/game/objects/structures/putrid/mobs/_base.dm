@@ -1,10 +1,11 @@
 /mob/living/simple_animal/hostile/retaliate/meatvine
 	name = "Horrible creature"
+	abstract_type = /mob/living/simple_animal/hostile/retaliate/meatvine
 	desc = "What is that?!"
-	icon = 'icons/obj/cellular/meat.dmi'
-	icon_state = "bloodling_stage_1"
-	icon_living = "bloodling_stage_1"
-	icon_dead = "bloodling_stage_1_dead"
+	icon = 'icons/obj/cellular/putrid_small.dmi'
+	icon_state = "base"
+	icon_living = "base"
+	icon_dead = "base_dead"
 	faction = list("meat")
 
 	health = VOLF_HEALTH
@@ -24,7 +25,6 @@
 	defprob = 35
 	defdrain = 5
 
-	aggressive = 1
 
 	hud_type = /datum/hud/putrid
 	see_in_dark = 10
@@ -33,10 +33,13 @@
 	stat_attack = 1
 
 	ai_controller = /datum/ai_controller/meatvine_defender
+	animal_type = /datum/blood_type/putrid
 
 	pass_flags = PASSTABLE
 	can_buckle = TRUE
 	buckle_lying = 0
+
+	base_intents = list(INTENT_BITE, SWORD_CUT, SWORD_CLEAVE)
 
 	var/tether_distance = 3
 

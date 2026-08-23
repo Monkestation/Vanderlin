@@ -12,7 +12,7 @@
 	full_name = "Quick Equip"
 	description = "Quickly puts an item in the best slot available"
 
-/datum/keybinding/human/quick_equip/down(client/user)
+/datum/keybinding/human/quick_equip/down(client/user, turf/target, mousepos_x, mousepos_y)
 	var/mob/living/carbon/human/H = user.mob
 	H.quick_equip()
 	return TRUE */
@@ -23,7 +23,7 @@
 	full_name = "Quick equip belt"
 	description = "Put held thing in belt or take out most recent thing from belt"
 
-/datum/keybinding/human/quick_equipbelt/down(client/user)
+/datum/keybinding/human/quick_equipbelt/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/carbon/human/H = user.mob
 	if(do_after(H, CLICK_CD_MELEE, H))
@@ -36,7 +36,7 @@
 	full_name = "Bag Equip Left"
 	description = "Put held item in the left backpack slot or take out the most recent item from the left backpack slot"
 
-/datum/keybinding/human/bag_equip_backl/down(client/user)
+/datum/keybinding/human/bag_equip_backl/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/carbon/human/H = user.mob
 	if(do_after(H, CLICK_CD_MELEE, H))
@@ -49,7 +49,7 @@
 	full_name = "Bag Equip Right"
 	description = "Put held item in the right backpack slot or take out the most recent item from the right backpack slot"
 
-/datum/keybinding/human/bag_equip_backr/down(client/user)
+/datum/keybinding/human/bag_equip_backr/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/carbon/human/H = user.mob
 	if(do_after(H, CLICK_CD_MELEE, H))
@@ -62,7 +62,7 @@
 	full_name = "Fixed Eye"
 	description = "Focus in a direction."
 
-/datum/keybinding/human/fixeye/down(client/user)
+/datum/keybinding/human/fixeye/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/carbon/human/H = user.mob
 	H.toggle_eye_intent(H)

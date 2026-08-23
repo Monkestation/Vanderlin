@@ -43,13 +43,13 @@
 	)
 
 	spells = list(
-		/datum/action/cooldown/spell/vicious_mockery,
+		/datum/action/cooldown/spell/projectile/vicious_mockery,
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
 /datum/job/advclass/combat/bard/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.inspiration = new /datum/inspiration(spawned)
+	spawned.grant_inspiration()
 
 	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
 		spawned.cmode_music = 'sound/music/cmode/combat_dwarf.ogg'
@@ -73,7 +73,7 @@
 /datum/outfit/adventurer/bard
 	name = "Bard (Adventurer)"
 	head = /obj/item/clothing/head/bardhat
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/armor/gambeson/light // very, very shitty armor
 	belt = /obj/item/storage/belt/leather

@@ -13,7 +13,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
-	armor = list("blunt" = 100, "slash" = 100, "stab" = 100,  "piercing" = 100, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/boots/plate/elf
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 30
 	max_integrity = INTEGRITY_STRONGEST
@@ -42,18 +42,6 @@
 	name = "elvish plated boots"
 	icon_state = "welfshoes"
 	item_state = "welfshoes"
-
-/obj/item/clothing/shoes/boots/rare/dwarfplate
-	name = "decorated dwarven plate boots"
-	allowed_race = list(SPEC_ID_DWARF)
-	allowed_sex = list(MALE, FEMALE)
-	desc = "Laced with golden bands, these dwarven plated boots glitter with glory as they are used to kick enemy's shins."
-	body_parts_covered = FEET|LEGS
-	icon_state = "dwarfshoe"
-	item_state = "dwarfshoe"
-	color = null
-	blocksound = PLATEHIT
-	item_weight = 2.1 KILOGRAMS
 
 /obj/item/clothing/shoes/boots/rare/grenzelplate
 	name = "grenzelhoft \"Elvenbane\" sabatons"

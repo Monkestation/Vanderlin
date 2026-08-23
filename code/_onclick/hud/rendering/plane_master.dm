@@ -207,15 +207,6 @@
 	// only render images inside the FOV mask
 	add_filter("vision_cone", 1, alpha_mask_filter(render_source = FIELD_OF_VISION_MASK_RENDER_TARGET))
 
-/atom/movable/screen/plane_master/fog_cutter
-	name = "fog cutting plane master"
-	plane = PLANE_FOG_CUTTER
-	render_target = FOG_RENDER_TARGET
-	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-	blend_mode = BLEND_MULTIPLY
-	blend_mode_override = BLEND_MULTIPLY
-	render_relay_plane = null
-
 //Contains all weather overlays
 /atom/movable/screen/plane_master/weather_overlay
 	name = "weather overlay master"
@@ -235,7 +226,6 @@
 
 /atom/movable/screen/plane_master/weather_effect/Initialize()
 	. = ..()
-	//add_filter("weather_effect", 1, alpha_mask_filter(render_source = WEATHER_RENDER_TARGET))
 	SSoutdoor_effects.weather_planes_need_vis |= src
 
 /atom/movable/screen/plane_master/weather_effect/Destroy()
@@ -258,7 +248,7 @@
 	appearance_flags = PLANE_MASTER
 	blend_mode = BLEND_OVERLAY
 	//render_target = GAME_PLANE_RENDER_TARGET
-	render_relay_plane = null
+	render_relay_plane = GAME_PLANE
 
 /atom/movable/screen/plane_master/leylines/backdrop(mob/mymob)
 	. = ..()

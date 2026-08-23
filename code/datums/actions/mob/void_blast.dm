@@ -65,7 +65,7 @@
 		for(var/mob/living/hit_mob in affected_turf.contents)
 			hit_mob.apply_damage(damage = 25, damagetype = BURN)
 			to_chat(hit_mob, span_userdanger("You're blasted by [owner]'s brimbeam!"))
-		RegisterSignal(new_obeliskbeam, COMSIG_PARENT_QDELETING, PROC_REF(extinguish_laser)) // In case idk a singularity eats it or something
+		RegisterSignal(new_obeliskbeam, COMSIG_QDELETING, PROC_REF(extinguish_laser)) // In case idk a singularity eats it or something
 	if(!length(beam_parts))
 		return FALSE
 	var/atom/last_obeliskbeam = beam_parts[length(beam_parts)]

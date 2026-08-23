@@ -16,14 +16,13 @@
 	pickup_sound = "rustle"
 	break_sound = 'sound/foley/breaksound.ogg'
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	melt_amount = 75
-	melting_material = /datum/material/steel
+	smeltresult = /obj/item/ingot/steel_slag
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/pants/plate
 	max_integrity = INTEGRITY_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 3.95 KILOGRAMS
@@ -41,7 +40,7 @@
 	item_state = "iplate_legs"
 	smeltresult = /obj/item/ingot/iron
 
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/pants/plate/bad
 	max_integrity = INTEGRITY_STRONG
 	item_weight = 3.95 KILOGRAMS
 
@@ -63,7 +62,7 @@
 	item_state = "rustpants"
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/pants/plate/bad
 	max_integrity = INTEGRITY_STANDARD
 
 /obj/item/clothing/pants/platelegs/blk
@@ -76,8 +75,8 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
-	item_weight = 4.95 KILOGRAMS
+	armor_type = /datum/armor/pants/plate/good
+	item_weight = 3 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
 //............... Evil Pants ............... //
@@ -89,6 +88,7 @@
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	smeltresult = /obj/item/ingot/avantyne
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 
 /obj/item/clothing/pants/platelegs/matthios
@@ -116,9 +116,9 @@
 	desc = "A finely forged pair of silver plate leggings, offering additional protection against blunt force."
 	icon_state = "silverlegs"
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
-	armor = ARMOR_PLATE_SILVER
+	armor_type = /datum/armor/pants/plate/silver
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 5.42 KILOGRAMS
+	item_weight = 3.95 KILOGRAMS
 	sellprice = VALUE_SILVER_ARMOR
 
 /obj/item/clothing/pants/platelegs/silver/Initialize(mapload)

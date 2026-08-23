@@ -18,6 +18,7 @@
  * (generally) inadvisable unless you know what you're doing
  */
 /datum/action/cooldown/spell/undirected/touch
+	abstract_type = /datum/action/cooldown/spell/undirected/touch
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_HANDS_BLOCKED
 	charge_required = FALSE
 	has_visual_effects = FALSE
@@ -99,10 +100,11 @@
  * If reset_cooldown_after is TRUE, we will additionally refund the cooldown of the spell.
  * If reset_cooldown_after is FALSE, we will instead just start the spell's cooldown
  */
-/datum/action/cooldown/spell/undirected/touch/proc/remove_hand(mob/living/hand_owner, reset_cooldown_after = FALSE)
+/datum/action/cooldown/spell/undirected/touch/proc/remove_hand(mob/living/hand_owner, reset_cooldown_after = FALSE, skipper = FALSE)
 	if(!QDELETED(attached_hand))
 		unregister_hand_signals()
-		hand_owner?.temporarilyRemoveItemFromInventory(attached_hand)
+		if(!skipper)
+			hand_owner?.temporarilyRemoveItemFromInventory(attached_hand)
 		QDEL_NULL(attached_hand)
 	attached_hand = null
 
@@ -122,7 +124,7 @@
 	SHOULD_CALL_PARENT(TRUE)
 
 	RegisterSignal(attached_hand, COMSIG_ITEM_AFTERATTACK, PROC_REF(on_hand_hit))
-	RegisterSignal(attached_hand, COMSIG_PARENT_QDELETING, PROC_REF(on_hand_deleted))
+	RegisterSignal(attached_hand, COMSIG_QDELETING, PROC_REF(on_hand_deleted))
 	RegisterSignal(attached_hand, COMSIG_ITEM_DROPPED, PROC_REF(on_hand_dropped))
 
 /// Unregisters all signal procs for the hand.
@@ -131,7 +133,7 @@
 
 	UnregisterSignal(attached_hand, list(
 		COMSIG_ITEM_AFTERATTACK,
-		COMSIG_PARENT_QDELETING,
+		COMSIG_QDELETING,
 		COMSIG_ITEM_DROPPED,
 	))
 
@@ -249,7 +251,7 @@
 	return SECONDARY_ATTACK_CALL_NORMAL
 
 /**
- * Signal proc for [COMSIG_PARENT_QDELETING] from our attached hand.
+ * Signal proc for [COMSIG_QDELETING] from our attached hand.
  *
  * If our hand is deleted for a reason unrelated to our spell,
  * unlink it (clear refs) and revert the cooldown
@@ -314,6 +316,10 @@
 		return TRUE
 	return ..()
 
+/obj/item/melee/touch_attack/dropped(mob/user, silent)
+	. = ..()
+	remove_hand_with_no_refund(user, TRUE)
+
 /**
  * When the hand component of a touch spell is qdel'd, (the hand is dropped or otherwise lost),
  * the cooldown on the spell that made it is automatically refunded.
@@ -321,14 +327,15 @@
  * However, if you want to consume the hand and not give a cooldown,
  * such as adding a unique behavior to the hand specifically, this function will do that.
  */
-/obj/item/melee/touch_attack/proc/remove_hand_with_no_refund(mob/holder)
+/obj/item/melee/touch_attack/proc/remove_hand_with_no_refund(mob/holder, skipper = FALSE)
 	var/datum/action/cooldown/spell/undirected/touch/hand_spell = spell_which_made_us?.resolve()
 	if(!QDELETED(hand_spell))
-		hand_spell.remove_hand(holder, reset_cooldown_after = FALSE)
+		hand_spell.remove_hand(holder, reset_cooldown_after = FALSE, skipper = skipper)
 		return
 
 	// We have no spell associated for some reason, just delete us as normal.
-	holder.temporarilyRemoveItemFromInventory(src, force = TRUE)
+	if(!skipper)
+		holder.temporarilyRemoveItemFromInventory(src, force = TRUE)
 	qdel(src)
 
 /obj/item/melee/touch_attack/attack_self(mob/user, list/modifiers)

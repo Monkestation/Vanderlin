@@ -141,7 +141,7 @@
 	var/retreat_dir = REVERSE_DIR(get_dir(pawn, target))
 	for(var/i in 1 to HARASS_RETREAT_DIST)
 		var/turf/next = get_step(retreat_turf, retreat_dir)
-		if(!next || !next.can_traverse_safely(pawn) || next.density)
+		if(!next || !next.can_cross_safely(pawn) || next.density)
 			break
 		retreat_turf = next
 	set_movement_target(controller, retreat_turf)
@@ -155,7 +155,7 @@
 	var/turf/move_target = controller.current_movement_target
 	if(!move_target || get_dist(pawn, move_target) <= 1)
 		finish_action(controller, TRUE)
-		return.
+		return
 
 #undef HARASS_HEALTH_THRESHOLD
 #undef HARASS_STAMINA_THRESHOLD

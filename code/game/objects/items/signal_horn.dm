@@ -135,7 +135,7 @@
 	. = ..()
 	if(.)
 		target = sound_source
-		RegisterSignal(target, COMSIG_PARENT_QDELETING, PROC_REF(qdel), src)
+		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(qdel), src)
 		tick()
 
 /datum/status_effect/signal_horn/on_apply()

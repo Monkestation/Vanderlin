@@ -27,7 +27,7 @@
 /turf/open/floor/dirt,
 /area/template_noop)
 "m" = (
-/obj/effect/decal/cleanable/roguerune/arcyne/summoning/mid,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/mid,
 /mob/living/simple_animal/hostile/dragger,
 /turf/open/floor/naturalstone,
 /area/template_noop)

@@ -1,96 +1,43 @@
 
-//////////////////////
-// STACKING EFFECTS //
-//////////////////////
-
+/// Status effects that can stack.
 /datum/status_effect/stacking
-	abstract_type = /datum/status_effect/stacking
-	id = "stacking_base"
-	// Removed under specific conditions
-	duration = STATUS_EFFECT_PERMANENT
-	// Refresh adds stacks
-	status_type = STATUS_EFFECT_REFRESH
+	id = STATUS_EFFECT_ID_ABSTRACT
+	duration = STATUS_EFFECT_PERMANENT // Only removed under specific conditions.
+	tick_interval = 1 SECONDS // Deciseconds between decays, once decay starts
 	alert_type = null
-	// Deciseconds between decays once decay starts
-	tick_interval = 10
-
-	/// How many stacks are accumulated, also is # of stacks that target will have when first applied
+	/// How many stacks are currently accumulated.
+	/// Also, the default stacks number given on application.
 	var/stacks = 0
-	/// Deciseconds until ticks start occuring, which removes stacks (first stack will be removed at this time plus tick_interval)
+	// Deciseconds until ticks start occurring, which removes stacks
+	/// (first stack will be removed at this time plus tick_interval)
 	var/delay_before_decay
-
 	/// How many stacks are lost per tick (decay trigger)
 	var/stack_decay = 1
-	/// Special effects trigger when stacks reach this amount
+	/// The threshold for having special effects occur when a certain stack number is reached
 	var/stack_threshold
-	/// Stacks cannot exceed this amount
+	/// The maximum number of stacks that can be applied
 	var/max_stacks
-	/// If status should be removed once threshold is crossed
+	/// If TRUE, the status effect is consumed / removed when stack_threshold is met
 	var/consumed_on_threshold = TRUE
-	/// Set to true once the threshold is crossed, false once it falls back below
+	/// Set to true once the stack_threshold is crossed, and false once it falls back below
 	var/threshold_crossed = FALSE
 
 	/// Icon file for overlays applied when the status effect is applied
 	var/overlay_file
-	/// Icon file for underlays applied when the status effect is applied
-	var/underlay_file
 	/// Icon state for overlays applied when the status effect is applied
 	/// States in the file must be given a name, followed by a number which corresponds to a number of stacks.
-	/// States in .dmi must be given a name followed by a number which corresponds to a number of stacks. put the state name without the number in these state vars
+	/// Put the state name without the number in these state vars
 	var/overlay_state
-	/// Icon state for underlays applied when the status effect is applied
-	/// The number is concatenated onto the string based on the number of stacks to get the correct state name
-	var/underlay_state
 	/// A reference to our overlay appearance
 	var/mutable_appearance/status_overlay
-	/// A reference to our underlay appearance
-	var/mutable_appearance/status_underlay
 
-/datum/status_effect/stacking/on_creation(mob/living/new_owner, duration_override, stacks_to_apply, ...)
-	. = ..()
-	if(.)
-		add_stacks(stacks_to_apply)
+/datum/status_effect/stacking/Destroy()
+	if(!owner || !status_overlay)
+		return ..()
 
-/datum/status_effect/stacking/on_apply()
-	if(!can_have_status())
-		return FALSE
-
-	if(overlay_file || underlay_file)
-		if(overlay_file)
-			status_overlay = mutable_appearance(overlay_file, "[overlay_state][stacks]")
-		if(underlay_file)
-			status_underlay = mutable_appearance(underlay_file, "[underlay_state][stacks]")
-
-		var/icon/I = icon(owner.icon, owner.icon_state, owner.dir)
-		var/icon_height = I.Height()
-
-		if(status_overlay)
-			status_overlay.pixel_x = -owner.pixel_x
-			status_overlay.pixel_y = FLOOR(icon_height * 0.25, 1)
-			status_overlay.transform = matrix() * (icon_height/world.icon_size) //scale the status's overlay size based on the target's icon size
-			owner.add_overlay(status_overlay)
-
-		if(status_underlay)
-			status_underlay.pixel_x = -owner.pixel_x
-			status_underlay.transform = matrix() * (icon_height/world.icon_size) * 3
-			status_underlay.alpha = 40
-			owner.underlays += status_underlay
-
+	owner.cut_overlay(status_overlay)
+	QDEL_NULL(status_overlay)
 	return ..()
-
-/datum/status_effect/stacking/on_remove()
-	if(QDELETED(owner))
-		return
-	if(status_overlay)
-		owner.cut_overlay(status_overlay)
-		status_overlay = null
-	if(status_underlay)
-		owner.underlays -= status_underlay
-		status_underlay = null
-	return ..()
-
-/datum/status_effect/stacking/refresh(mob/living/new_owner, duration_override, stacks_to_apply, ...)
-	add_stacks(stacks_to_apply || 1)
 
 /// Effects that occur when the stack count crosses stack_threshold
 /datum/status_effect/stacking/proc/threshold_cross_effect()
@@ -129,7 +76,26 @@
 /datum/status_effect/stacking/proc/can_gain_stacks()
 	return owner.stat != DEAD
 
-/datum/status_effect/stacking/tick()
+/datum/status_effect/stacking/on_creation(mob/living/new_owner, duration_override, stacks_to_apply)
+	. = ..()
+	if(.)
+		add_stacks(stacks_to_apply)
+
+/datum/status_effect/stacking/on_apply()
+	if(!can_have_status())
+		return FALSE
+	if(!overlay_file || !overlay_state)
+		return ..()
+	status_overlay = mutable_appearance(overlay_file, "[overlay_state][stacks]")
+	var/icon/I = icon(owner.icon, owner.icon_state, owner.dir)
+	var/icon_height = I.Height()
+	status_overlay.pixel_w = -owner.pixel_x
+	status_overlay.pixel_z = FLOOR(icon_height * 0.25, 1)
+	status_overlay.transform = matrix() * (icon_height / ICON_SIZE_Y) //scale the status's overlay size based on the target's icon size
+	owner.add_overlay(status_overlay)
+	return ..()
+
+/datum/status_effect/stacking/tick(seconds_between_ticks)
 	if(!can_have_status())
 		qdel(src)
 	else
@@ -140,31 +106,26 @@
 /datum/status_effect/stacking/proc/add_stacks(stacks_added)
 	if(stacks_added > 0 && !can_gain_stacks())
 		return FALSE
-
 	if(status_overlay)
 		owner.cut_overlay(status_overlay)
-	if(status_underlay)
-		owner.underlays -= status_underlay
-
-	stacks += stacks_added
-	if(stacks > 0)
-		if(stacks >= stack_threshold && !threshold_crossed) //threshold_crossed check prevents threshold effect from occuring if changing from above threshold to still above threshold
-			threshold_crossed = TRUE
-			on_threshold_cross()
-			if(consumed_on_threshold)
-				return
-		else if(stacks < stack_threshold && threshold_crossed)
-			threshold_crossed = FALSE //resets threshold effect if we fall below threshold so threshold effect can trigger again
-			on_threshold_drop()
-		if((stacks_added > 0) && delay_before_decay)
-			tick_interval = world.time + delay_before_decay //refreshes time until decay
-		stacks = min(stacks, max_stacks)
-		if(status_overlay)
-			status_overlay.icon_state = "[overlay_state][stacks]"
-			owner.add_overlay(status_overlay)
-		if(status_underlay)
-			status_underlay.icon_state = "[underlay_state][stacks]"
-			owner.underlays += status_underlay
-	else
+	stacks = min(stacks + stacks_added, max_stacks)
+	if(stacks <= 0)
 		fadeout_effect()
-		qdel(src) //deletes status if stacks fall under one
+		qdel(src) // deletes status if stacks fall under one
+		return
+
+	if(stacks >= stack_threshold && !threshold_crossed) // threshold_crossed check prevents threshold effect from occurring if changing from above threshold to still above threshold
+		threshold_crossed = TRUE
+		on_threshold_cross()
+		if(consumed_on_threshold)
+			return
+	else if(stacks < stack_threshold && threshold_crossed)
+		threshold_crossed = FALSE // resets threshold effect if we fall below threshold so threshold effect can trigger again
+		on_threshold_drop()
+
+	if(stacks_added > 0)
+		time_until_next_tick += delay_before_decay // refreshes time until decay
+
+	if (status_overlay)
+		status_overlay.icon_state = "[overlay_state][stacks]"
+		owner.add_overlay(status_overlay)

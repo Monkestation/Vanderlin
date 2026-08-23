@@ -38,8 +38,8 @@
 
 /datum/component/breed/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_HOSTILE_PRE_ATTACKINGTARGET, PROC_REF(breed_with_partner))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
-	RegisterSignal(parent, COMSIG_PARENT_IMPREGNATE, PROC_REF(impregnate))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_IMPREGNATE, PROC_REF(impregnate))
 	ADD_TRAIT(parent, TRAIT_MOB_BREEDER, REF(src))
 	var/mob/living/parent_mob = parent
 	parent_mob.ai_controller?.set_blackboard_key(breed_key, ready_to_breed)
@@ -78,7 +78,7 @@
 		var/mob/living/simple_animal/simple_animal = source
 		SEND_SIGNAL(simple_animal, COMSIG_MOB_DRAIN_HUNGER, 0.2)
 
-	SEND_SIGNAL(target, COMSIG_PARENT_IMPREGNATE, source)
+	SEND_SIGNAL(target, COMSIG_IMPREGNATE, source)
 	return COMPONENT_HOSTILE_NO_PREATTACK
 
 /datum/component/breed/proc/on_examine(datum/source, mob/user, list/examine_list)

@@ -7,8 +7,8 @@
 		return
 
 	unregister_triggers()
-	registered_signals += COMSIG_MOB_FALL_IMPACT
-	RegisterSignal(target, COMSIG_MOB_FALL_IMPACT, PROC_REF(on_fall))
+	registered_signals += COMSIG_LIVING_Z_IMPACT
+	RegisterSignal(target, COMSIG_LIVING_Z_IMPACT, PROC_REF(on_fall))
 
 /datum/chimeric_node/input/fall/proc/on_fall(datum/source, levels)
 	SIGNAL_HANDLER
@@ -17,5 +17,5 @@
 	trigger_output((node_purity * 0.01) * tier * 3)
 
 	if(levels <= tier + 1)
-		return TRUE
-	return FALSE
+		return ZIMPACT_CANCEL_DAMAGE
+	return NONE

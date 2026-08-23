@@ -154,7 +154,7 @@
 		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 2.5 SECONDS)
 
 		if(victim.IsOffBalanced())
-			victim.Knockdown(2 SECONDS)
+			victim.CombatKnockdown(2 SECONDS)
 		else
 			victim.OffBalance(5 SECONDS)
 
@@ -276,9 +276,9 @@
 	damage = (parent.force * (GET_MOB_ATTRIBUTE_VALUE(user, STAT_STRENGTH) / 10)) + 10
 
 	if(user.used_hand == 1)	//We mirror it if it's the left arm.
-		tile_coordinates += AXE_SWING_GRID_MIRROR
+		tile_coordinates = AXE_SWING_GRID_MIRROR
 	else
-		tile_coordinates += AXE_SWING_GRID_DEFAULT //Initial() doesn't work with lists so we copy paste the original
+		tile_coordinates = AXE_SWING_GRID_DEFAULT
 
 /datum/special_intent/axe_swing/apply_hit(mob/living/user, obj/item/parent, turf/target)
 	for(var/mob/living/victim in target)

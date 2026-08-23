@@ -5,6 +5,7 @@
 	layer = BELOW_OBJ_LAYER
 	anchored = TRUE
 	pass_flags_self = PASSSTRUCTURE
+	armor_type = /datum/armor/structure
 	var/climb_time = 20
 	var/climb_stun = 0
 	var/climb_sound = 'sound/foley/woodclimb.ogg'
@@ -18,8 +19,6 @@
 //	move_resist = MOVE_FORCE_STRONG
 
 /obj/structure/Initialize()
-	if (!armor)
-		armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = 50, "acid" = 50)
 	. = ..()
 	if(smoothing_flags & (SMOOTH_BITMASK|SMOOTH_BITMASK_CARDINALS))
 		QUEUE_SMOOTH(src)
@@ -35,26 +34,50 @@
 
 /obj/structure/Bumped(atom/movable/AM)
 	..()
-	if(density)
-		if(ishuman(AM))
-			var/mob/living/carbon/human/H = AM
-			if(H.dir == get_dir(H,src) && H.m_intent == MOVE_INTENT_RUN && H.body_position != LYING_DOWN)
-				H.Immobilize(10)
-				H.apply_damage(15, BRUTE, "chest", H.run_armor_check("chest", "blunt", damage = 15))
-				H.toggle_rogmove_intent(MOVE_INTENT_WALK, TRUE)
-				playsound(src, "genblunt", 100, TRUE)
-				H.visible_message("<span class='warning'>[H] runs into [src]!</span>", "<span class='warning'>I run into [src]!</span>")
-				addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, Knockdown), 10), 10)
+	if(!density)
+		return
+	if(!ishuman(AM))
+		return
+	var/mob/living/carbon/human/H = AM
+	if(H.dir != get_dir(H,src) || H.m_intent != MOVE_INTENT_RUN || H.body_position == LYING_DOWN)
+		return
+	var/is_bigguy = FALSE
+	if(HAS_TRAIT(H,TRAIT_BIGGUY))
+		if(istype(src,/obj/structure/door))
+			var/obj/structure/door/S = src
+			if(S.smashable)
+				is_bigguy = TRUE
+	if(is_bigguy && get_integrity() > max_integrity / 3)
+		if(max_integrity > 1000) 	//Custom-set HP door, should be respected
+			take_damage(max_integrity / 6 + 1)
+		else
+			if(GET_MOB_ATTRIBUTE_VALUE(H, STAT_STRENGTH) >= 13)	//STR adding role w/ Giant or half-orc, seems fair
+				take_damage((max_integrity / 3) * 2 + 1)
+			else
+				take_damage(max_integrity / 3 + 1)
+		H.Immobilize(20)
+		//hurts you a little bit but doesn't immediately chestfrac  you lmao
+		H.apply_damage(20, BRUTE, BODY_ZONE_CHEST, H.run_armor_check("chest", "blunt", damage = 20), damage_type = BCLASS_BLUNT)
+		audible_message(span_warning("\The [src] shakes under the force of a great impact!"))
+		playsound(src, "meteor", 100, TRUE)
+		addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, Knockdown), 10), 10)
+	else
+		H.Immobilize(10)
+		H.apply_damage(15, BRUTE, BODY_ZONE_CHEST, H.run_armor_check("chest", "blunt", damage = 15), damage_type = BCLASS_BLUNT)
+		H.toggle_rogmove_intent(MOVE_INTENT_WALK, TRUE)
+		playsound(src, "genblunt", 100, TRUE)
+		H.visible_message("<span class='warning'>[H] runs into [src]!</span>", "<span class='warning'>I run into [src]!</span>")
+		addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, Knockdown), 10), 10)
 
 /obj/structure/Destroy()
 	if(isturf(loc))
 		for(var/mob/living/user in loc)
 			if(climb_offset)
-				user.reset_offsets("structure_climb")
+				user.remove_offsets("structure_climb")
 	if(redstone_id)
 		for(var/obj/structure/O in redstone_attached)
-			O.redstone_attached -= src
-			redstone_attached -= O
+			LAZYREMOVE(O.redstone_attached, src)
+			LAZYREMOVE(redstone_attached, O)
 		GLOB.redstone_objs -= src
 	return ..()
 
@@ -77,14 +100,14 @@
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.set_mob_offsets("structure_climb", _x = 0, _y = climb_offset)
+			user.add_offsets("structure_climb", x_add = 0, y_add = climb_offset)
 
 /obj/structure/Uncrossed(atom/movable/AM)
 	. = ..()
 	if(isliving(AM) && !AM.throwing)
 		var/mob/living/user = AM
 		if(climb_offset)
-			user.reset_offsets("structure_climb")
+			user.remove_offsets("structure_climb")
 
 /obj/structure/ui_act(action, params)
 	..()
@@ -155,8 +178,44 @@
 		var/healthpercent = (atom_integrity / max_integrity) * 100
 		switch(healthpercent)
 			if(50 to 99)
-				return  "It looks slightly damaged."
+				return "It looks slightly damaged."
 			if(25 to 50)
-				return  "It appears heavily damaged."
+				return "It appears heavily damaged."
 			if(1 to 25)
-				return  "<span class='warning'>It's falling apart!</span>"
+				return span_warning("It's falling apart!")
+
+/obj/structure/onZImpact(turf/impacted_turf, levels, impact_flags)
+	. = ..()
+
+	var/impact_damage
+	if(w_class == WEIGHT_CLASS_TINY)
+		impact_damage = 0
+	else if(w_class == WEIGHT_CLASS_GIGANTIC)
+		impact_damage = 300
+	else
+		impact_damage = 3**(w_class-1)
+	if(!impact_damage)
+		return
+
+	for(var/mob/living/crumpled_mob in contents)
+		visible_message(span_danger("[src] falls on [crumpled_mob.name]!"))
+		crumpled_mob.Stun(1)
+		crumpled_mob.AdjustKnockdown(levels * 20)
+		crumpled_mob.take_overall_damage(impact_damage, damage_type = BCLASS_BLUNT)
+
+/obj/structure/proc/try_fetch_special_item(mob/user)
+	if(!user.mind && isliving(user))
+		return FALSE
+
+	if(!length(user.mind.special_items))
+		return FALSE
+	var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
+	if(item)
+		if(user.Adjacent(src))
+			if(user.mind.special_items[item])
+				var/path2item = user.mind.special_items[item]
+				user.mind.special_items -= item
+				var/obj/item/I = new path2item(user.loc)
+				apply_item_colors(I, user.mind)
+				user.put_in_hands(I)
+	return TRUE

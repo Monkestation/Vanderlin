@@ -1,7 +1,40 @@
+#define ALCHEMY_WATER_MIN       50
+#define ALCHEMY_BREW_DONE       21
+#define ALCHEMY_OVERFLOW_VOL    10
+
 /datum/action_state/alchemy
 	name = "alchemy"
-	description = "Automated alchemy brewing - simplified for auto-cauldron"
+	description = "Automated alchemy brewing"
 	var/current_phase = "check_cauldron"
+	priority_eval_interval = 2 SECONDS
+
+/datum/action_state/alchemy/evaluate_priority(datum/ai_controller/controller)
+	if(!controller.blackboard[BB_GNOME_ALCHEMY_MODE])
+		return GNOME_PRIORITY_NONE
+
+	var/obj/machinery/light/fueled/cauldron/cauldron = controller.blackboard[BB_GNOME_TARGET_CAULDRON]
+	var/obj/structure/well/well = controller.blackboard[BB_GNOME_TARGET_WELL]
+
+	if(!cauldron || !well)
+		return GNOME_PRIORITY_NONE
+
+	// Cauldron finished brewing and has a lot of reagents overflowing risk.
+	if(cauldron.brewing >= ALCHEMY_BREW_DONE && cauldron.reagents.total_volume > ALCHEMY_OVERFLOW_VOL)
+		var/obj/item/bottle = find_suitable_bottle(controller)
+		if(!bottle)
+			return GNOME_PRIORITY_CRITICAL  // Done brewing but can't bottle urgent.
+		return GNOME_PRIORITY_HIGH          // Done brewing, bottle ready.
+
+	// Cauldron needs water to begin.
+	if(cauldron.brewing == 0 && cauldron.reagents.get_reagent_amount(/datum/reagent/water) < ALCHEMY_WATER_MIN)
+		return GNOME_PRIORITY_HIGH
+
+	// Otherwise just monitor periodically.
+	return GNOME_PRIORITY_NORMAL
+
+// ---------------------------------------------------------------------------
+// Processing
+// ---------------------------------------------------------------------------
 
 /datum/action_state/alchemy/process_state(datum/ai_controller/controller, delta_time)
 	if(!controller.blackboard[BB_GNOME_ALCHEMY_MODE])
@@ -16,13 +49,10 @@
 
 	switch(current_phase)
 		if("check_cauldron")
-			// Check if cauldron needs water
-			if(cauldron.brewing == 0 && cauldron.reagents.get_reagent_amount(/datum/reagent/water) < 50)
+			if(cauldron.brewing == 0 && cauldron.reagents.get_reagent_amount(/datum/reagent/water) < ALCHEMY_WATER_MIN)
 				current_phase = "need_water"
-			// Check if cauldron is done brewing and needs bottling
-			else if(cauldron.brewing >= 21 && cauldron.reagents.total_volume > 0)
+			else if(cauldron.brewing >= ALCHEMY_BREW_DONE && cauldron.reagents.total_volume > 0)
 				current_phase = "need_bottles"
-			// Otherwise just wait
 			else
 				current_phase = "idle"
 			return ACTION_STATE_CONTINUE
@@ -67,7 +97,7 @@
 			if(get_dist(pawn, well) > 1)
 				return ACTION_STATE_CONTINUE
 
-			carried.reagents?.add_reagent(/datum/reagent/water, 50)
+			carried.reagents?.add_reagent(/datum/reagent/water, ALCHEMY_WATER_MIN)
 			pawn.visible_message(span_notice("[pawn] fills [carried] with water."))
 			current_phase = "adding_water"
 			manager.set_movement_target(controller, cauldron)
@@ -82,7 +112,7 @@
 			if(get_dist(pawn, cauldron) > 1)
 				return ACTION_STATE_CONTINUE
 
-			carried.reagents.trans_to(cauldron, 50)
+			carried.reagents.trans_to(cauldron, ALCHEMY_WATER_MIN)
 			pawn.visible_message(span_notice("[pawn] pours water into [cauldron]."))
 			pawn.dropItemToGround(carried)
 			controller.clear_blackboard_key(BB_SIMPLE_CARRY_ITEM)
@@ -137,7 +167,7 @@
 
 			controller.clear_blackboard_key(BB_SIMPLE_CARRY_ITEM)
 
-			if(cauldron.reagents && cauldron.reagents.total_volume > 10)
+			if(cauldron.reagents && cauldron.reagents.total_volume > ALCHEMY_OVERFLOW_VOL)
 				current_phase = "need_bottles"
 			else
 				current_phase = "check_cauldron"
@@ -145,17 +175,20 @@
 			return ACTION_STATE_CONTINUE
 
 		if("idle")
-			// Just wait near the cauldron
 			if(get_dist(pawn, cauldron) > 2)
 				manager.set_movement_target(controller, cauldron)
 
-			// Periodically check the cauldron state
+			// Periodically re-check so we catch brew completions.
 			if(prob(20))
 				current_phase = "check_cauldron"
 
 			return ACTION_STATE_CONTINUE
 
 	return ACTION_STATE_CONTINUE
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
 
 /datum/action_state/alchemy/proc/is_water_container(obj/item/I)
 	return (istype(I, /obj/item/reagent_containers) && I.reagents)
@@ -190,10 +223,14 @@
 			if(I.reagents && I.reagents.total_volume == 0)
 				return I
 
-	// Fallback: search around essence machinery
+	// Fallback: look near any essence machinery in range.
 	for(var/obj/machinery/essence/machinery in view(15, pawn))
 		for(var/obj/item/reagent_containers/I in range(3, machinery))
 			if(I.reagents && I.reagents.total_volume == 0)
 				return I
 
 	return null
+
+#undef ALCHEMY_WATER_MIN
+#undef ALCHEMY_BREW_DONE
+#undef ALCHEMY_OVERFLOW_VOL

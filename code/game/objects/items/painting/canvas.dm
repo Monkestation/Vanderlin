@@ -77,9 +77,8 @@
 	RegisterSignal(user, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_shower))
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/canvas/attackby(obj/item/I, mob/living/user, list/modifiers)
-	. = ..()
-	if(istype(I, /obj/item/natural/feather))
+/obj/item/canvas/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/natural/feather))
 		author = browser_input_text(user, "Who's the author of this painting?", "NAME YOURSELF", max_length = MAX_NAME_LEN)
 		author_ckey = user.ckey
 		SEND_SIGNAL(user, COMSIG_ART_CREATED)
@@ -89,33 +88,38 @@
 		if(author)
 			desc = "Painted by: [author]."
 
-		return
+		return ITEM_INTERACT_SUCCESS
 
-	if(!istype(I, /obj/item/paint_brush))
-		return
+	if(!istype(tool, /obj/item/paint_brush))
+		return NONE
+
 	if(user in showers)
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	user?.client.screen += used_canvas
 	showers |= user
 	RegisterSignal(user, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_shower))
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/canvas/proc/remove_showers()
 	for(var/mob/mob in showers)
 		remove_shower(mob)
 
-/obj/item/canvas/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isclosedturf(attacked_atom))
-		return ..()
+/obj/item/canvas/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isclosedturf(interacting_with))
+		return NONE
 
-	. = TRUE
-	to_chat(user, "I start mounting [src] to [attacked_atom]...")
-	if(!do_after(user, 3 SECONDS, attacked_atom))
-		return
+	to_chat(user, "I start mounting [src] to [interacting_with]...")
+	if(!do_after(user, 3 SECONDS, interacting_with))
+		return ITEM_INTERACT_BLOCKING
+
 	user.dropItemToGround(src)
-	forceMove(attacked_atom)
+	forceMove(interacting_with)
 	pixel_x = base_pixel_x
 	pixel_y = base_pixel_y
 	anchored = TRUE
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/canvas/proc/remove_shower(mob/source)
 	showers -= source

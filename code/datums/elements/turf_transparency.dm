@@ -1,10 +1,9 @@
 
 /datum/element/turf_z_transparency
-	element_flags = ELEMENT_DETACH
-	var/is_openspace = FALSE
+	element_flags = ELEMENT_DETACH_ON_HOST_DESTROY
 
 ///This proc sets up the signals to handle updating viscontents when turfs above/below update. Handle plane and layer here too so that they don't cover other obs/turfs in Dream Maker
-/datum/element/turf_z_transparency/Attach(datum/target, is_openspace = FALSE)
+/datum/element/turf_z_transparency/Attach(datum/target)
 	. = ..()
 	if(!isturf(target))
 		return ELEMENT_INCOMPATIBLE
@@ -12,15 +11,10 @@
 	var/turf/our_turf = target
 
 	our_turf.layer = OPENSPACE_LAYER
-	if(is_openspace) // openspace and windows have different visual effects but both share this component.
-		our_turf.plane = OPENSPACE_PLANE
-	else
-		our_turf.plane = TRANSPARENT_FLOOR_PLANE
+	our_turf.plane = OPENSPACE_PLANE
 
 	RegisterSignal(target, COMSIG_TURF_MULTIZ_DEL, PROC_REF(on_multiz_turf_del))
 	RegisterSignal(target, COMSIG_TURF_MULTIZ_NEW, PROC_REF(on_multiz_turf_new))
-
-	ADD_TRAIT(our_turf, TRAIT_Z_TRANSPARENT, ELEMENT_TRAIT(type))
 
 	var/turf/below_turf = GET_TURF_BELOW(our_turf)
 	if(below_turf)
@@ -31,8 +25,8 @@
 	. = ..()
 	var/turf/our_turf = source
 	our_turf.vis_contents.Cut()
+
 	UnregisterSignal(our_turf, list(COMSIG_TURF_MULTIZ_NEW, COMSIG_TURF_MULTIZ_DEL))
-	REMOVE_TRAIT(our_turf, TRAIT_Z_TRANSPARENT, ELEMENT_TRAIT(type))
 
 ///Updates the viscontents or underlays below this tile.
 /datum/element/turf_z_transparency/proc/update_multi_z(turf/our_turf)

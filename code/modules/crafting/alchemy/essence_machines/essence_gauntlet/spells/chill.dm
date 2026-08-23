@@ -4,7 +4,7 @@
 	button_icon_state = "chill"
 	//sound = 'sound/magic/whiff.ogg'
 	cast_range = 1
-	attunements = list(/datum/attunement/ice)
+	essences = list(/datum/thaumaturgical_essence/frost)
 
 /datum/action/cooldown/spell/essence/chill/cast(atom/cast_on)
 	. = ..()
@@ -17,7 +17,7 @@
 	//playsound(target, 'sound/magic/whiff.ogg', 50, TRUE)
 
 	var/obj/structure/ice_zone/zone = new(get_turf(target))
-	QDEL_IN(zone, 45 MINUTES)
+	QDEL_IN(zone, 3 MINUTES)
 
 /obj/structure/ice_zone
 	name = "frozen zone"
@@ -31,8 +31,23 @@
 
 /obj/structure/ice_zone/Initialize()
 	. = ..()
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	propagate_temp_change(-30, 8, 0.9, 2) // Cooling effect
+
+/obj/structure/ice_zone/Crossed(atom/movable/AM)
+	. = ..()
+	if(isliving(AM))
+		apply_frost_stack(AM, 1)
 
 /obj/structure/ice_zone/Destroy()
 	remove_temp_effect()
 	return ..()
+
+/datum/action/cooldown/spell/essence/chill/spell
+	name = "Ice Zone"
+	charge_required = TRUE
+	charge_time = 0.5 SECONDS
+	spell_cost = 20
+	spell_type = SPELL_MANA
+
+	required_form = FORM_ICE

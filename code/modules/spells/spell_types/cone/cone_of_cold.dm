@@ -2,7 +2,6 @@
 	name = "Cone of Cold"
 	desc = "Shoots out a freezing cone in front of you."
 
-	school = SCHOOL_EVOCATION
 	cooldown_time = 30 SECONDS
 	cooldown_reduction_per_rank = 4 SECONDS
 
@@ -12,10 +11,10 @@
 	cone_levels = 4
 	respect_density = TRUE
 	delay_between_level = 0.05 SECONDS
-	point_cost = 3
-	attunements = list(
-		/datum/attunement/ice = 0.3,
-	)
+
+	required_form = FORM_ICE
+	required_level = 2
+
 	button_icon_state = "frostbolt"
 	charge_time = 2 SECONDS
 	charge_drain = 1
@@ -66,10 +65,10 @@
 	if(ispath(frozen_status_effect_path) && unfreeze_mob_duration > 0 SECONDS) // 0 duration = don't apply the status effect
 		var/datum/status_effect/freeze = target_mob.apply_status_effect(frozen_status_effect_path)
 		if(unfreeze_mob_duration != INFINITY)
-			freeze.duration = world.time + unfreeze_mob_duration
+			freeze.duration = unfreeze_mob_duration
 
 	if(on_freeze_brute_damage || on_freeze_burn_damage)
-		target_mob.take_overall_damage(on_freeze_brute_damage, on_freeze_burn_damage)
+		target_mob.take_overall_damage(on_freeze_brute_damage, on_freeze_burn_damage, damage_type = BCLASS_BLUNT)
 
 	to_chat(target_mob, span_userdanger("You feel a bitter cold!"))
 

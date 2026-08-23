@@ -5,27 +5,33 @@
 	return {"
 		<div>
 		<h2>What is a Grimoire</h2>
-		Griomires are how you study arcyne. They are needed to improve your magic skills. They are bound to the first person who uses it.<br>
+		Grimoires are how mages cast spells. They are bound to the first person who uses them.<br>
+		They will shock anyone who isn't bound or trusted with the book who tries to cast spells with it. <br>
 		</div>
 		<br>
 
 		<div>
 		<h2> How to make a Grimoire </h2>
-		You first need to start with some hide.<br>
-		Then you fill the bindings with scrolls until its full.<br>
+		You first need some hide.<br>
+		Put it on a table and work a scroll into it to start the binding. This gives you an empty, unbound tome.<br>
+		Keep working scrolls into the tome, on a table, until the binding is complete.<br>
 		<br>
-		 Now here is where its most important. The gem you use determines how powerful your book is. <br>
-		For instance arcyne melds are how you get the higher tiered books. Starting off however you can even use rocks that have magical powers in them. <br>
-		Its recommened to use a low powered stone for your first tome as thats the easist material to get.
+		Once bound, the tome has no arcyne energy of its own yet. Activate it to open the crafting circle.<br>
+		Set a catalyst in the center of the circle. This is what actually channels the arcyne, and determines the quality of the finished book. Arcyne melds make the strongest books; gems are a solid step down; a plain magic stone is the easiest thing to get your hands on for a first attempt.<br>
+		There are also six slots around the circle for materials. These aren't required, but anything arcyne you slot in there feeds your study points once the book is finished, and can also shift how the book's spells cost, cast, and hit.<br>
+		Assembling takes a little time to focus, same as anything else arcyne. Faster hands make for a faster binding.
 		</div>
 		<br>
 
 		<div>
 		<h2> Things to consider </h2>
-		You can slot a gem into your spellbook and based on its arcyne power increase your study quality when you study with it.<br>
-		You need to rest before you can study again this limits how fast you can grow. <br>
-		Performing summoning rituals and finding magic materials is highly recommended to get the better griomires as they drastically increase your study quality. <br>
-		Griomires do not store mana, when fighting it may be better to hold a foci or Primordial Crystal instead to have extra mana reserves. <br>
-		Griomires are bound to their creators, the creator can hit someone with the grimoire will allow them to study with it. <br>
+		You need real skill with the arcane to channel a catalyst safely. If you don't have it yet, what happens depends on what you tried to use:<br>
+		- A gem won't do anything for an unskilled hand. It'll just sit there looking pretty - press it into the cover and admire it, nothing is lost.<br>
+		- A stone might still work through sheer luck, but if it doesn't, it'll pop and shock you for your trouble.<br>
+		- Anything else arcyne is likely to simply explode in your hands.<br>
+		So if you're starting out, practice on a stone rather than risking a gem or a proper meld - a wasted stone stings a lot less.<br>
+		<br>
+		Performing summoning rituals and finding magic materials is highly recommended, as slotting them in during assembly drastically increases what you get out of the finished grimoire.<br>
+		Grimoires are bound to their creators - the creator can hit someone with the grimoire to let them use it too.<br>
 		</div>
 	"}

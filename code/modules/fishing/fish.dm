@@ -272,9 +272,38 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
+/obj/item/reagent_containers/food/snacks/fish/interact_with_atom_secondary(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!HAS_TRAIT(interacting_with, TRAIT_CATCH_AND_RELEASE))
+		return NONE
+
+	if(HAS_TRAIT(src, TRAIT_NODROP))
+		balloon_alert(user, "[p_theyre()] stuck to your hand!")
+		return ITEM_INTERACT_BLOCKING
+
+	balloon_alert(user, "releasing fish...")
+	if(!do_after(user, 3 SECONDS, interacting_with))
+		return ITEM_INTERACT_BLOCKING
+
+	balloon_alert(user, "fish released")
+	var/goodbye_text = ""
+	if(status == FISH_DEAD)
+		goodbye_text = "[src] sinks motionlessly into [interacting_with]..."
+	else
+		goodbye_text = "[src] dives into [interacting_with]!"
+
+	user.visible_message(
+		span_notice("[user] releases [src] into [interacting_with]. [goodbye_text]"), \
+		span_notice("You release [src] into [interacting_with]. [goodbye_text]"), \
+		span_notice("You hear a splash.")
+	)
+
+	released(interacting_with, user)
+	return ITEM_INTERACT_SUCCESS
+
 /obj/item/reagent_containers/food/snacks/fish/proc/released(atom/location, mob/living/user)
 	playsound(location, 'sound/effects/splash.ogg', 50)
 	SEND_SIGNAL(location, COMSIG_FISH_RELEASED_INTO, src, user)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, src)
 	qdel(src)
 
 ///Main proc that makes the fish edible.
@@ -323,7 +352,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fish/proc/get_base_edible_reagents_to_add()
 	var/return_list = list(
 		/datum/reagent/consumable/nutriment = 2,
-		/datum/reagent/blood = 1,
 	)
 	if(required_fluid_type == FISH_FLUID_SALTWATER)
 		return_list[/datum/reagent/flour] = 0.4
@@ -341,21 +369,6 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	else
 		icon_state = base_icon_state
 	return ..()
-
-/*
-/obj/item/reagent_containers/food/snacks/fish/attackby(obj/item/item, mob/living/user, list/modifiers, list/attack_modifiers)
-	if(!istype(item, /obj/item/reagent_containers/cup/fish_feed))
-		return ..()
-	if(!item.reagents.total_volume)
-		balloon_alert(user, "[item.name] is empty!")
-		return TRUE
-	if(status == FISH_DEAD)
-		balloon_alert(user, "[name] is dead!")
-		return TRUE
-	feed(item.reagents)
-	balloon_alert(user, "fed [name]")
-	return TRUE
-*/
 
 /obj/item/reagent_containers/food/snacks/fish/examine(mob/user)
 	. = ..()
@@ -761,7 +774,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	if(HAS_TRAIT(src, TRAIT_FISH_STASIS) || status != FISH_ALIVE)
 		return
 	do_fish_process(seconds_per_tick)
-	if(status != FISH_ALIVE || !is_type_in_typecache(loc, SSfishing.fish_safe_turfs_by_type[type]))
+	if(loc && !HAS_TRAIT(loc, TRAIT_CATCH_AND_RELEASE))
 		time_passed_on_safe_turf = 0 SECONDS
 		return
 	time_passed_on_safe_turf += seconds_per_tick SECONDS
@@ -1056,7 +1069,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 				vision_distance = DEFAULT_MESSAGE_RANGE - 3,
 			)
 		var/body_zone = pick(BODY_ZONE_R_ARM, BODY_ZONE_L_ARM)
-		user.apply_damage((force * 0.2) + w_class * 2, BRUTE, body_zone, user.run_armor_check(body_zone))
+		user.apply_damage((force * 0.2) + w_class * 2, BRUTE, body_zone, user.run_armor_check(body_zone), damage_type = BCLASS_BITE)
 		playsound(src,'sound/items/weapons/bite.ogg', 45, TRUE, -1)
 	else
 		if(in_aquarium)
@@ -1230,21 +1243,26 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	eat_effect = list(/datum/status_effect/buff/foodbuff, /datum/status_effect/buff/blessed)
 
 /*	.................   Chocolate Fish   ................... */
+/obj/item/reagent_containers/food/snacks/fryfish/carp/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/reagent_containers/food/snacks/chocolate))
+		return ..()
 
-/obj/item/reagent_containers/food/snacks/fryfish/carp/attackby(obj/item/I, mob/living/user, list/modifiers)
-	..()
-	if(user.mind)
-		short_cooktime = (50 - ((GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/cooking))*0.8))
-	var/found_table = locate(/obj/structure/table) in (loc)
-	if(isturf(loc)&& (found_table))
-		if(istype(I, /obj/item/reagent_containers/food/snacks/chocolate))
-			playsound(user, 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
-			to_chat(user, span_notice("Creating an insult against cooking..."))
-			if(do_after(user, short_cooktime, src))
-				new /obj/item/reagent_containers/food/snacks/chocolate_carp(loc)
-				qdel(I)
-				qdel(src)
-				user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/confectionery, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.5))
+	if(!isturf(loc) || !locate(/obj/structure/table) in loc)
+		return ITEM_INTERACT_BLOCKING
+
+	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
+
+	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
+	to_chat(user, span_notice("Creating an insult against cooking..."))
+	if(!do_after(user, short_cooktime, src))
+		return ITEM_INTERACT_BLOCKING
+
+	new /obj/item/reagent_containers/food/snacks/chocolate_carp(loc)
+
+	qdel(tool)
+	qdel(src)
+	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/confectionery, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.5))
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/chocolate_carp
 	name = "le carp au chocolat"

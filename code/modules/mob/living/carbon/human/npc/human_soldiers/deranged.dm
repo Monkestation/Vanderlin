@@ -26,13 +26,13 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 	AddComponent(/datum/component/ai_aggro_system)
 	is_silent = TRUE
 	var/head = get_bodypart(BODY_ZONE_HEAD)
-	RegisterSignal(head, COMSIG_MOB_DISMEMBER, PROC_REF(handle_drop_limb))
+	RegisterSignal(head, COMSIG_CARBON_DISMEMBER, PROC_REF(handle_drop_limb))
 
 
 /mob/living/carbon/human/species/human/northern/deranged_knight/Destroy()
 	var/head = get_bodypart(BODY_ZONE_HEAD)
 	if(head)
-		UnregisterSignal(head, COMSIG_MOB_DISMEMBER)
+		UnregisterSignal(head, COMSIG_CARBON_DISMEMBER)
 	return ..()
 
 /// Snowflake DK behavior for decaps. Yes, they turn to dust prior to decaps.
@@ -208,7 +208,7 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 	shoes = /obj/item/clothing/shoes/boots/armor/blkknight
 	gloves = /obj/item/clothing/gloves/plate/blk
 	wrists = /obj/item/clothing/wrists/bracers
-	head = /obj/item/clothing/head/helmet/blacksteel
+	head = /obj/item/clothing/head/helmet/blacksteel/bucket
 	neck = /obj/item/clothing/neck/gorget
 	r_hand = /obj/item/weapon/sword/long/greatsword
 	mask = /obj/item/clothing/face/facemask/steel

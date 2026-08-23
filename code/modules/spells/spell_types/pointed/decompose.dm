@@ -7,12 +7,11 @@
 	self_cast_possible = FALSE
 	spell_flags = SPELL_RITUOS
 	cast_range = 1
-	point_cost = 3
-	associated_skill = /datum/attribute/skill/magic/blood
-	attunements = list(
-		/datum/attunement/death = 0.3,
-		/datum/attunement/blood = 0.2,
-	)
+	associated_skill = /datum/attribute/skill/magic/arcane
+
+	required_form = FORM_DEATH
+	required_technique = TECHNIQUE_ALTERATION
+
 	invocation = "Return to rot."
 	invocation_type = INVOCATION_WHISPER
 
@@ -46,8 +45,8 @@
 	if(!ishuman(cast_on))
 		return
 	var/mob/living/carbon/human/target = cast_on
+	for(var/datum/injury/injury in target.all_injuries)
+		injury.adjust_germ_level(250)
+
 	if(target.stat == DEAD)
-		var/datum/antagonist/zombie/z_check = target.zombie_check() //why is this called zombie check when it makes you a zombie...
-		if(!z_check)
-			return
-		z_check.wake_zombie(TRUE)
+		target.zombie_check() //why is this called zombie check when it makes you a zombie...

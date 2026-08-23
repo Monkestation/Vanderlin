@@ -7,10 +7,19 @@
 	armor_penetration = 100
 	pass_flags = PASSTABLE | PASSGRILLE
 	flag = "magic"
+
+	dam_falloff_factor = 0.5
+	suppress_effects_past_range = TRUE
+	max_range = 7
+
 	/// determines what type of antimagic can block the spell projectile
 	var/antimagic_flags = MAGIC_RESISTANCE
 	/// determines the drain cost on the antimagic item
 	var/antimagic_charge_cost = 1
+	/// Impact visual intensity. SPELL_IMPACT_NONE / SPELL_IMPACT_LOW / SPELL_IMPACT_MEDIUM / SPELL_IMPACT_HIGH
+	var/spell_impact_intensity = SPELL_IMPACT_LOW
+	/// Override color for the impact effect. If null, uses light_color.
+	var/spell_impact_color
 
 /obj/projectile/magic/prehit_pierce(mob/living/target)
 	. = ..()
@@ -18,28 +27,33 @@
 		visible_message(span_warning("[src] fizzles on contact with [target]!"))
 		return PROJECTILE_DELETE_WITHOUT_HITTING
 
+
+/obj/projectile/magic/on_hit(atom/target, blocked = FALSE)
+	. = ..()
+	if(spell_impact_intensity > SPELL_IMPACT_NONE)
+		var/impact_color = spell_impact_color || light_color || "#FFFFFF"
+		new /obj/effect/temp_visual/spell_impact(get_turf(target), impact_color, spell_impact_intensity)
+
 /obj/projectile/magic/death
 	name = "bolt of death"
 	icon_state = "pulse1_bl"
 
 /obj/projectile/magic/death/on_hit(target)
 	. = ..()
-	if(ismob(target))
-		var/mob/M = target
-		if(isliving(M))
-			var/mob/living/L = M
-			if(L.mob_biotypes & MOB_UNDEAD) //negative energy heals the undead
-				if(L.hellbound && L.stat == DEAD)
-					return BULLET_ACT_BLOCK
-				if(L.revive(ADMIN_HEAL_ALL))
-					L.grab_ghost(force = TRUE) // even suicides
-					to_chat(L, "<span class='notice'>I rise with a start, I'm undead!!!</span>")
-				else if(L.stat != DEAD)
-					to_chat(L, "<span class='notice'>I feel great!</span>")
-			else
-				L.death(0)
-		else
-			M.death(0)
+
+	if(isliving(target))
+		var/mob/living/victim = target
+		if(victim.mob_biotypes & MOB_UNDEAD) //negative energy heals the undead
+			if(victim.hellbound && victim.stat == DEAD)
+				return BULLET_ACT_BLOCK
+			if(victim.revive(ADMIN_HEAL_ALL & ~HEAL_REFRESH_ORGANS , force_grab_ghost = TRUE)) // This heals suicides
+				victim.grab_ghost(force = TRUE)
+				to_chat(victim, span_notice("I rise with a start, I'm undead!!!"))
+			else if(victim.stat != DEAD)
+				to_chat(victim, span_notice("I feel great!"))
+			return
+		// victim.investigate_log("has been killed by a bolt of death.", INVESTIGATE_DEATHS)
+		victim.death()
 
 /obj/projectile/magic/resurrection
 	name = "bolt of resurrection"

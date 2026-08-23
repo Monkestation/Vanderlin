@@ -43,24 +43,24 @@
 /datum/component/obeys_commands/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_LIVING_BEFRIENDED, PROC_REF(add_friend))
 	RegisterSignal(parent, COMSIG_LIVING_UNFRIENDED, PROC_REF(remove_friend))
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_CLICK_CTRL, PROC_REF(check_name))
 
 /datum/component/obeys_commands/UnregisterFromParent()
-	UnregisterSignal(parent, list(COMSIG_LIVING_BEFRIENDED, COMSIG_LIVING_UNFRIENDED, COMSIG_PARENT_EXAMINE, COMSIG_CLICK_CTRL))
+	UnregisterSignal(parent, list(COMSIG_LIVING_BEFRIENDED, COMSIG_LIVING_UNFRIENDED, COMSIG_ATOM_EXAMINE, COMSIG_CLICK_CTRL))
 
 /// Add someone to our friends list
 /datum/component/obeys_commands/proc/add_friend(datum/source, mob/living/new_friend)
 	SIGNAL_HANDLER
 	RegisterSignal(new_friend, COMSIG_KB_LIVING_VIEW_PET_COMMANDS, PROC_REF(on_key_pressed))
 	RegisterSignal(new_friend, DEACTIVATE_KEYBIND(COMSIG_KB_LIVING_VIEW_PET_COMMANDS), PROC_REF(on_key_unpressed))
-	for(var/command_name as anything in available_commands)
+	for(var/command_name in available_commands)
 		var/datum/pet_command/command = available_commands[command_name]
 		INVOKE_ASYNC(command, TYPE_PROC_REF(/datum/pet_command, add_new_friend), new_friend)
 
 /datum/component/obeys_commands/proc/on_key_unpressed(mob/living/source)
 	SIGNAL_HANDLER
-	UnregisterSignal(source, COMSIG_USER_MOUSE_ENTERED)
+	UnregisterSignal(source, COMSIG_MOB_MOUSE_ENTERED)
 
 /datum/component/obeys_commands/proc/remove_from_viewers(mob/living/source)
 	radial_viewers -= REF(source)
@@ -72,7 +72,7 @@
 		COMSIG_KB_LIVING_VIEW_PET_COMMANDS,
 		DEACTIVATE_KEYBIND(COMSIG_KB_LIVING_VIEW_PET_COMMANDS),
 	))
-	for (var/command_name as anything in available_commands)
+	for (var/command_name in available_commands)
 		var/datum/pet_command/command = available_commands[command_name]
 		INVOKE_ASYNC(command, TYPE_PROC_REF(/datum/pet_command, remove_friend), old_friend)
 
@@ -88,7 +88,7 @@
 
 /datum/component/obeys_commands/proc/on_key_pressed(mob/living/friend)
 	SIGNAL_HANDLER
-	RegisterSignal(friend, COMSIG_USER_MOUSE_ENTERED, PROC_REF(on_mouse_hover))
+	RegisterSignal(friend, COMSIG_MOB_MOUSE_ENTERED, PROC_REF(on_mouse_hover))
 
 /datum/component/obeys_commands/proc/on_mouse_hover(mob/living/friend, atom/mouse_hovered)
 	SIGNAL_HANDLER
@@ -115,7 +115,7 @@
 /// Actually display the radial menu and then do something with the result
 /datum/component/obeys_commands/proc/display_radial_menu(mob/living/friend)
 	var/list/radial_options = list()
-	for(var/command_name as anything in available_commands)
+	for(var/command_name in available_commands)
 		var/datum/pet_command/command = available_commands[command_name]
 		var/datum/radial_menu_choice/choice = command.provide_radial_data()
 		if (!choice)

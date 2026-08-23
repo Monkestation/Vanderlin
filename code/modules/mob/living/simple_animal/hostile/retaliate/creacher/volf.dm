@@ -56,13 +56,13 @@
 	retreat_health = 0.4
 
 	dodgetime = 17
-	aggressive = 1
 //	stat_attack = UNCONSCIOUS
 	remains_type = /obj/effect/decal/remains/wolf
 	body_eater = TRUE
 
 	///this mob was updated to new ai
 
+	living_flags = MOVES_ON_ITS_OWN|CAN_BE_FIREMANNED
 
 	ai_controller = /datum/ai_controller/volf
 	var/static/list/pet_commands = list(

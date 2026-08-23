@@ -10,7 +10,7 @@
 	attacked_sound = 'sound/misc/woodhit.ogg'
 	blade_dulling = DULLING_CUT
 	max_integrity = 30
-	static_debris = list(/obj/item/grown/log/tree/small = 2)
+	var/list/static_debris = list(/obj/item/grown/log/tree/small = 2)
 	obj_flags = CAN_BE_HIT
 	resistance_flags = FLAMMABLE
 	gripped_intents = list(INTENT_GENERIC)
@@ -19,7 +19,6 @@
 	w_class = WEIGHT_CLASS_HUGE
 	metalizer_result = /obj/item/rotation_contraption/water_pipe
 	item_weight = 2.4 KILOGRAMS
-	var/quality = SMELTERY_LEVEL_NORMAL // For it not to ruin recipes that need it
 	var/lumber = /obj/item/grown/log/tree/small //These are solely for lumberjack calculations
 	var/lumber_alt
 	var/lumber_amount = 1
@@ -58,7 +57,6 @@
 		return TRUE
 	. = ..()
 
-
 /obj/item/grown/log/tree/attackby_secondary(obj/item/I, mob/living/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
@@ -91,31 +89,11 @@
 		qdel(src)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/*
-* Okay so the root of this proc defines dissasemble
-* but doesnt do anything with it. This means despite
-* burn() calling deconstruct(FALSE) it will still
-* spawn the debris.
-*/
-/obj/item/grown/log/tree/deconstruct(disassembled = TRUE)
-	if(disassembled)
-		return ..()
-	qdel(src)
-
-/obj/item/grown/log/tree/atom_destruction(damage_flag)
-	SHOULD_CALL_PARENT(FALSE)
-	SEND_SIGNAL(src, COMSIG_ATOM_DESTRUCTION, damage_flag)
-	if(damage_flag == "acid")
-		acid_melt()
-	else if(damage_flag == "fire")
-		burn()
-	else
-		if(destroy_sound)
-			playsound(src, destroy_sound, 100, TRUE)
-		if(destroy_message)
-			visible_message(destroy_message)
-		deconstruct(TRUE)
-	return TRUE
+/obj/item/grown/log/tree/atom_deconstruct(disassembled)
+	var/atom/drop_loc = drop_location()
+	for(var/I in static_debris)
+		for(var/i in 1 to static_debris[I])
+			new I(drop_loc)
 
 /obj/item/grown/log/tree/small
 	name = "small log"
@@ -137,6 +115,8 @@
 	grid_height = 64
 	grid_width = 64
 	item_weight = 1.4 KILOGRAMS
+	grind_results = list(/datum/reagent/tree_sap = 10)
+
 
 /obj/item/grown/log/tree/small/apply_components()
 	return
@@ -160,6 +140,7 @@
 	lumber_amount = 0
 	lumber = null
 	item_weight = 121 GRAMS
+	grind_results = null
 
 /obj/item/grown/log/tree/stick/apply_components()
 	return
@@ -188,30 +169,36 @@
 	playsound(user,'sound/items/seedextract.ogg', 100, FALSE)
 	qdel(src)
 
-/obj/item/grown/log/tree/stick/attackby(obj/item/I, mob/living/user, list/modifiers)
-	user.changeNext_move(CLICK_CD_MELEE)
-	if(istype(I, /obj/item/natural/bundle/stick))
-		var/obj/item/natural/bundle/stick/B = I
-		if(B.amount < B.maxamount)
-			to_chat(user, span_notice("I add [src] to [B]."))
-			B.amount += 1
-			B.update_bundle()
-			qdel(src)
-		return
-	return ..()
+/obj/item/grown/log/tree/stick/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-/obj/item/grown/log/tree/stick/attackby_secondary(obj/item/I, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
+	if(!istype(tool, /obj/item/natural/bundle/stick))
+		return NONE
 
-	if(istype(I, /obj/item/grown/log/tree/stick))
-		var/obj/item/natural/bundle/stick/F = new(get_turf(user))
-		qdel(I)
+	var/obj/item/natural/bundle/stick/B = tool
+	if(B.amount < B.maxamount)
+		user.balloon_alert(user, "[name] added.")
+		B.amount += 1
+		B.update_bundle()
 		qdel(src)
-		user.put_in_hands(F)
-		to_chat(user, "You collect the [F.stackname] into a bundle.")
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	return ITEM_INTERACT_SUCCESS
+
+/obj/item/grown/log/tree/stick/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!istype(tool, /obj/item/grown/log/tree/stick))
+		return NONE
+
+	var/obj/item/natural/bundle/stick/F = new(get_turf(user))
+	qdel(tool)
+	qdel(src)
+	user.put_in_hands(F)
+	user.balloon_alert(user, "[F.stackname] bundled.")
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/grown/log/tree/stake
 	name = "stake"
@@ -235,6 +222,7 @@
 	lumber_amount = 0
 	tool_behaviour = TOOL_IMPROVISED_RETRACTOR
 	item_weight = 95 GRAMS
+	grind_results = null
 
 /obj/item/grown/log/tree/stake/apply_components()
 	return
@@ -293,3 +281,4 @@
 	grid_height = 64
 	grid_width = 64
 	item_weight = 100 GRAMS
+	grind_results = null

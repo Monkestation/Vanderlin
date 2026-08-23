@@ -8,7 +8,7 @@
 	blade_dulling = DULLING_BASHCHOP
 	resistance_flags = FLAMMABLE // Made of leather
 
-	armor = ARMOR_PADDED_BAD
+	armor_type = /datum/armor/gloves/padded/bad
 	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = INTEGRITY_POOR
 	salvage_result = null
@@ -24,16 +24,16 @@
 /obj/item/clothing/gloves/leather/advanced
 	name = "hardened leather gloves"
 	desc = "Sturdy, durable, flexible. A marvel of the dark ages that exists solely to protect your fingers."
-	max_integrity = INTEGRITY_STANDARD
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	armor = list("blunt" = 50, "slash" = 40, "stab" = 20, "piercing" = 0, "fire" = 0, "acid" = 0)
+	max_integrity = INTEGRITY_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor_type = /datum/armor/gloves/leather/advanced
 
 /obj/item/clothing/gloves/leather/masterwork
 	name = "masterwork leather gloves"
 	desc = "These gloves are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STRONG
-	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP) //we're adding chop here!
-	armor = list("blunt" = 80, "slash" = 60, "stab" = 40, "piercing" = 0, "fire" = 0, "acid" = 0)
+	max_integrity = INTEGRITY_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
+	armor_type = /datum/armor/gloves/leather/master
 
 /obj/item/clothing/gloves/leather/masterwork/Initialize()
 	. = ..()
@@ -54,12 +54,13 @@
 	desc = "Thick leather gloves for pulling thorny plants... or cracking skulls."
 	icon_state = "apothgloves"
 
-/obj/item/clothing/gloves/leather/otavan
+/obj/item/clothing/gloves/leather/grenzel
 	name = "grenzelhoftian leather gloves"
+	examine_name = "leather gloves"
 	desc = "A pair of heavy Grenzelhoftian leather gloves, commonly used by fencers, renowned for their quality."
 	icon_state = "fencergloves"
 	item_state = "fencergloves"
-	armor = ARMOR_LEATHER_GOOD
+	armor_type = /datum/armor/gloves/leather/good
 	prevent_crits = list(BCLASS_CHOP, BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	resistance_flags = FIRE_PROOF
 	blocksound = SOFTHIT
@@ -72,8 +73,9 @@
 	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
 
-/obj/item/clothing/gloves/leather/otavan/inqgloves
+/obj/item/clothing/gloves/leather/grenzel/inqgloves
 	name = "inquisitorial leather gloves"
+	examine_name = "leather gloves"
 	desc = "Gloves of worn leather. Alas, the psydonian fetish wrapped around one is but a powerless replica."
 	icon_state = "inqgloves"
 	item_state = "inqgloves"
@@ -85,7 +87,7 @@
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	resistance_flags = FLAMMABLE // Made of leather
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/gloves/leather
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	max_integrity = INTEGRITY_STANDARD
 	salvage_result = /obj/item/natural/fur
@@ -99,16 +101,18 @@
 	icon = 'icons/roguetown/clothing/courtphys.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
-	detail_tag = "_detail"
-	uses_lord_coloring = LORD_PRIMARY
 
 /obj/item/clothing/gloves/leather/courtphysician/female
 	name = "sanguine sleeves"
 	desc = "Carefully sewn leather gloves with silk sleeves covering them, unrestricting to your ability to wield surgical tools, and stylish!"
 	icon_state = "docsleeves"
 	item_state = "docsleeves"
-	icon = 'icons/roguetown/clothing/courtphys.dmi'
-	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_courtphys.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/courtphys.dmi'
 	detail_tag = "_detail"
+	detail_color = CLOTHING_ROYAL_MAJENTA
 	uses_lord_coloring = LORD_PRIMARY
+
+/obj/item/clothing/gloves/leather/fencer
+	name = "fencing gloves"
+	desc = "Lightweight leather gloves designed for fencers, they'll hopefully protect your fingers from stray blows."
+	icon_state = "fencergloves"
+	armor_type = /datum/armor/gloves/leather/fencer

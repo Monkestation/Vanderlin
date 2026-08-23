@@ -1,7 +1,7 @@
 /// Element that grants an achievement to all mobs around the owner when it dies, different to one that forces participation.
 /datum/element/kill_achievement
 	element_flags = ELEMENT_BESPOKE
-	id_arg_index = 2
+	argument_hash_start_idx = 2
 	/// Achievements to grant when killed
 	var/list/achievement_types = null
 	/// Range in which to grant the achievement

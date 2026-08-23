@@ -20,24 +20,24 @@
 /datum/customizer_choice/bodypart_feature/hair/validate_entry(datum/preferences/prefs, datum/customizer_entry/entry)
 	..()
 	var/datum/customizer_entry/hair/hair_entry = entry
-	hair_entry.hair_color = sanitize_hexcolor(hair_entry.hair_color, 6, TRUE, initial(hair_entry.hair_color))
-	hair_entry.natural_color = sanitize_hexcolor(hair_entry.natural_color, 6, TRUE, initial(hair_entry.natural_color))
-	hair_entry.dye_color = sanitize_hexcolor(hair_entry.dye_color, 6, TRUE, initial(hair_entry.dye_color))
+	hair_entry.hair_color = sanitize_hexcolor(hair_entry.hair_color, default = initial(hair_entry.hair_color))
+	hair_entry.natural_color = sanitize_hexcolor(hair_entry.natural_color, default = initial(hair_entry.natural_color))
+	hair_entry.dye_color = sanitize_hexcolor(hair_entry.dye_color, default = initial(hair_entry.dye_color))
 
 /datum/customizer_choice/bodypart_feature/hair/generate_pref_choices(list/dat, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
 	..()
 	var/datum/customizer_entry/hair/hair_entry = entry
-	dat += "<br>Hair Color: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=hair_color''><span class='color_holder_box' style='background-color:[hair_entry.hair_color]'></span></a>"
+	dat += "<br>Hair Color: <a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=hair_color''><span class='color_holder_box' style='background-color:[hair_entry.hair_color]'></span></a>"
 	if(allows_natural_gradient)
 		var/datum/hair_gradient/gradient = HAIR_GRADIENT(hair_entry.natural_gradient)
-		dat += "<br>Natural Gradient: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=natural_gradient'>[gradient.name]</a>"
+		dat += "<br>Natural Gradient: <a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=natural_gradient'>[gradient.name]</a>"
 		if(hair_entry.natural_gradient != /datum/hair_gradient/none)
-			dat += "<br>Natural Color: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=natural_gradient_color''><span class='color_holder_box' style='background-color:[hair_entry.natural_color]'></span></a>"
+			dat += "<br>Natural Color: <a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=natural_gradient_color''><span class='color_holder_box' style='background-color:[hair_entry.natural_color]'></span></a>"
 	if(allows_dye_gradient)
 		var/datum/hair_gradient/gradient = HAIR_GRADIENT(hair_entry.dye_gradient)
-		dat += "<br>Dye Gradient: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=dye_gradient'>[gradient.name]</a>"
+		dat += "<br>Dye Gradient: <a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=dye_gradient'>[gradient.name]</a>"
 		if(hair_entry.dye_gradient != /datum/hair_gradient/none)
-			dat += "<br>Dye Color: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=dye_gradient_color''><span class='color_holder_box' style='background-color:[hair_entry.dye_color]'></span></a>"
+			dat += "<br>Dye Color: <a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=dye_gradient_color''><span class='color_holder_box' style='background-color:[hair_entry.dye_color]'></span></a>"
 
 /datum/customizer_choice/bodypart_feature/hair/handle_topic(mob/user, list/href_list, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
 	..()
@@ -46,7 +46,7 @@
 		if("hair_color")
 			var/list/hairs
 			var/new_color
-			if(prefs.age == AGE_OLD && (OLDGREY in prefs.pref_species.species_traits))
+			if(prefs.read_preference(/datum/preference/choiced/age) == AGE_OLD && (OLDGREY in prefs.pref_species.species_traits))
 				hairs = prefs.pref_species.get_oldhc_list()
 			else
 				hairs = prefs.pref_species.get_hairc_list()
@@ -55,7 +55,7 @@
 				new_color = hairs[new_hair]
 			if(!new_color)
 				return
-			hair_entry.hair_color = sanitize_hexcolor(new_color, 6, TRUE)
+			hair_entry.hair_color = sanitize_hexcolor(new_color)
 		if("natural_gradient")
 			if(!allows_natural_gradient)
 				return
@@ -70,7 +70,7 @@
 			var/new_color = color_pick_sanitized_lumi(user, "Choose your natural gradient color:", "Character Preference", hair_entry.natural_color)
 			if(!new_color)
 				return
-			hair_entry.natural_color = sanitize_hexcolor(new_color, 6, TRUE)
+			hair_entry.natural_color = sanitize_hexcolor(new_color)
 		if("dye_gradient")
 			if(!allows_dye_gradient)
 				return
@@ -85,7 +85,7 @@
 			var/new_color = color_pick_sanitized_lumi(user, "Choose your dye gradient color:", "Character Preference", hair_entry.dye_color)
 			if(!new_color)
 				return
-			hair_entry.dye_color = sanitize_hexcolor(new_color, 6, TRUE)
+			hair_entry.dye_color = sanitize_hexcolor(new_color)
 
 /datum/customizer_entry/hair
 	var/hair_color = "#FFFFFF"
@@ -94,19 +94,25 @@
 	var/dye_gradient = /datum/hair_gradient/none
 	var/dye_color = "#FFFFFF"
 
-/datum/customizer_choice/bodypart_feature/hair/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)
+/datum/customizer_choice/bodypart_feature/hair/get_random_accessory(datum/customizer_entry/entry, mob/living/carbon/human/human)
 	return pick(sprite_accessories)
 
-/datum/customizer_choice/bodypart_feature/hair/get_random_color(datum/customizer_entry/entry, datum/preferences/prefs, accessory_type)
-	var/datum/species/species = return_species(prefs)
+/datum/customizer_choice/bodypart_feature/hair/get_random_color(datum/customizer_entry/entry, mob/living/carbon/human/human, accessory_type)
+	var/datum/species/species = return_species(human)
 	var/list/hairs
 	var/new_color
-	if(prefs.age == AGE_OLD)
+	var/age
+	if(istype(human))
+		age = human.age
+	else
+		var/datum/preferences/prefs = human
+		age = prefs.read_preference(/datum/preference/choiced/age)
+	if(age == AGE_OLD)
 		hairs = species.get_oldhc_list()
 	else
 		hairs = species.get_hairc_list()
 	new_color = hairs[pick(hairs)]
-	return sanitize_hexcolor(new_color, 6, TRUE)
+	return sanitize_hexcolor(new_color)
 
 /datum/customizer_choice/bodypart_feature/hair/set_accessory_colors(datum/preferences/prefs, datum/customizer_entry/entry, color)
 	var/datum/customizer_entry/hair/hair_entry = entry
@@ -352,7 +358,22 @@
 		/datum/sprite_accessory/hair/head/farmday,
 		/datum/sprite_accessory/hair/head/curlybob,
 		/datum/sprite_accessory/hair/head/snowdriftbangs,
-		/datum/sprite_accessory/hair/head/poofypoms
+		/datum/sprite_accessory/hair/head/poofypoms,
+		/datum/sprite_accessory/hair/head/wolfcut,
+		/datum/sprite_accessory/hair/head/triplebuns,
+		/datum/sprite_accessory/hair/head/nest,
+		/datum/sprite_accessory/hair/head/strand,
+		/datum/sprite_accessory/hair/head/sodden,
+		/datum/sprite_accessory/hair/head/guildupdo,
+		/datum/sprite_accessory/hair/head/tapstersbun,
+		/datum/sprite_accessory/hair/head/thescientist,
+		/datum/sprite_accessory/hair/head/sleek,
+		/datum/sprite_accessory/hair/head/delver,
+		/datum/sprite_accessory/hair/head/mean_girl,
+		/datum/sprite_accessory/hair/head/muzzy,
+		/datum/sprite_accessory/hair/head/baothan,
+		/datum/sprite_accessory/hair/head/scabbard,
+		/datum/sprite_accessory/hair/head/dreamer
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton
@@ -371,6 +392,7 @@
 		/datum/sprite_accessory/hair/head/triton/gorgon,
 		/datum/sprite_accessory/hair/head/triton/lion,
 		/datum/sprite_accessory/hair/head/triton/betta,
+		/datum/sprite_accessory/hair/head/triton/susie
 	)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/medicator
@@ -407,11 +429,17 @@
 	abstract_type = /datum/customizer/bodypart_feature/hair/facial
 	name = "Facial Hair"
 
-/datum/customizer/bodypart_feature/hair/facial/is_allowed(datum/preferences/prefs)
-	var/datum/species/species = return_species(prefs)
-	if(prefs.age == AGE_CHILD && !(YOUNGBEARD in species.species_traits))
-		return FALSE
-	return (prefs.gender == MALE) || (istype(species, /datum/species/dwarf) && prefs.gender == FEMALE) || istype(species, /datum/species/triton)
+/datum/customizer/bodypart_feature/hair/facial/is_allowed(mob/living/carbon/human/human)
+	var/datum/species/species = return_species(human)
+	if(istype(human))//shitcode but fuck man
+		if(human.age == AGE_CHILD && !(YOUNGBEARD in species.species_traits))
+			return FALSE
+		return (human.gender == MALE) || (istype(species, /datum/species/dwarf) && human.gender == FEMALE) || istype(species, /datum/species/triton)
+	else
+		var/datum/preferences/pref = human
+		if(pref.read_preference(/datum/preference/choiced/age) == AGE_CHILD && !(YOUNGBEARD in species.species_traits))
+			return FALSE
+		return (pref.read_preference(/datum/preference/choiced/gender) == MALE) || (istype(species, /datum/species/dwarf) && pref.read_preference(/datum/preference/choiced/gender) == FEMALE) || istype(species, /datum/species/triton)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid
 	customizer_choices = list(/datum/customizer_choice/bodypart_feature/hair/facial/humanoid)
@@ -451,6 +479,11 @@
 		/datum/sprite_accessory/hair/facial/pinnacle,
 		/datum/sprite_accessory/hair/facial/enchanter,
 		/datum/sprite_accessory/hair/facial/curlypom,
+		/datum/sprite_accessory/hair/facial/facial_genius,
+		/datum/sprite_accessory/hair/facial/facial_curled,
+		/datum/sprite_accessory/hair/facial/facial_general,
+		/datum/sprite_accessory/hair/facial/facial_teadrinker,
+		/datum/sprite_accessory/hair/facial/facial_pacifist
 	)
 
 /datum/customizer/bodypart_feature/hair/facial/humanoid/rakshari
@@ -476,10 +509,15 @@
 		/datum/sprite_accessory/hair/facial/triton/catfish,
 	)
 
-/datum/customizer_choice/bodypart_feature/hair/facial/humanoid/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)
-	var/datum/species/species = return_species(prefs)
-
-	if((prefs.gender == MALE) || istype(species, /datum/species/dwarf))
+/datum/customizer_choice/bodypart_feature/hair/facial/humanoid/get_random_accessory(datum/customizer_entry/entry, mob/living/carbon/human/human)
+	var/datum/species/species = return_species(human)
+	var/age
+	if(istype(human))
+		age = human.age
+	else
+		var/datum/preferences/prefs = human
+		age = prefs.read_preference(/datum/preference/choiced/age)
+	if((age == MALE) || istype(species, /datum/species/dwarf))
 		return pick(sprite_accessories)
 	else
 		return /datum/sprite_accessory/hair/facial/shaved

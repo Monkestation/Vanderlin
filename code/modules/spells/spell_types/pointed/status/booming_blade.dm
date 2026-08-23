@@ -5,10 +5,9 @@
 	self_cast_possible = FALSE
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC|SPELL_REQUIRES_NO_MOVE // reap what you sow
 
-	point_cost = 1
-	attunements = list(
-		/datum/attunement/arcyne = 0.4,
-	)
+	required_form = FORM_ARCANE
+	required_technique = TECHNIQUE_ALTERATION
+
 	spell_flags = SPELL_RITUOS
 	invocation = "Be still!"
 	invocation_type = INVOCATION_SHOUT
@@ -20,10 +19,6 @@
 	spell_cost = 50
 
 	status_effect = /datum/status_effect/debuff/booming_blade
-
-/datum/action/cooldown/spell/status/booming_blade/handle_attunements()
-	. = ..()
-	extra_args = list(attuned_strength)
 
 /datum/status_effect/debuff/booming_blade
 	id = "booming_blade"
@@ -62,7 +57,7 @@
 	var/damage = round(10 * strength_multiplier)  // Scale damage
 
 	explosion(owner, -1, exp_heavy, exp_light, exp_flash, 0, flame_range = exp_fire)
-	owner.adjustBruteLoss(damage)
+	owner.adjustBruteLoss(damage, damage_type = BCLASS_BLUNT)
 	owner.visible_message(span_warning("A thunderous boom emanates from [owner]!"), span_danger("A thunderous boom emanates from me!"))
 
 	boomed = TRUE

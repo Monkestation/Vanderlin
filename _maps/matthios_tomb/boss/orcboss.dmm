@@ -211,7 +211,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "MQ" = (
-/obj/structure/closet/dirthole/closed/loot,
+/obj/structure/closet/dirthole/closed,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "OH" = (

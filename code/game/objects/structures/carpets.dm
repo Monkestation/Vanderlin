@@ -48,6 +48,11 @@
 	icon_state = "carpet_red"
 	carpet_type = /obj/item/natural/carpet_fibers/red
 
+/obj/structure/carpet/navy
+	icon = 'icons/obj/smooth_structures/carpet_navy.dmi'
+	icon_state = "carpet_navy"
+	carpet_type = /obj/item/natural/carpet_fibers/navy
+
 /obj/item/natural/bundle/carpet_roll
 	name = "carpet roll"
 	desc = "A roll of carpet fibers. Use it to place carpet tiles."
@@ -67,27 +72,26 @@
 	icon2step = 8
 	var/carpet_type = /obj/structure/carpet
 
-/obj/item/natural/bundle/carpet_roll/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
-	if(!isturf(target) || !proximity_flag)
-		return
-	if(amount < 1)
-		to_chat(user, "<span class='warning'>The carpet roll is empty!</span>")
-		return
+/obj/item/natural/bundle/carpet_roll/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isturf(interacting_with))
+		return NONE
 
-	var/turf/T = get_turf(target)
-	if(!T)
-		return
+	var/turf/T = interacting_with
 
 	// Check if there's already a carpet here thats the EXACT type
 	for(var/obj/structure/carpet/C in T)
 		if(C.type == carpet_type)
 			to_chat(user, "<span class='warning'>There's already carpet here!</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
 
 	user.visible_message(span_notice("[user] starts to lay down [src]."), span_notice("You start to lay down [src]."))
+
 	if(!do_after(user, 1 SECONDS, T))
-		return
+		return ITEM_INTERACT_BLOCKING
+
+	// Place the carpet
+	new carpet_type(T)
+	to_chat(user, "<span class='notice'>You place down some carpet.</span>")
 
 	// Place the carpet
 	new carpet_type(T)
@@ -97,6 +101,8 @@
 
 	if(amount <= 0)
 		qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/carpet_fibers
 	name = "carpet"
@@ -108,29 +114,29 @@
 	item_weight = 650 GRAMS //going off the standard 35oz per square yard so around 650 grams for our usage
 	var/carpet_type = /obj/structure/carpet
 
-/obj/item/natural/carpet_fibers/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
-	if(!isturf(target) || !proximity_flag)
-		return
-	var/turf/T = get_turf(target)
-	if(!T)
-		return
+/obj/item/natural/carpet_fibers/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isturf(interacting_with))
+		return NONE
+
+	var/turf/T = interacting_with
 
 	// Check if there's already a carpet here thats the EXACT type
 	for(var/obj/structure/carpet/C in T)
 		if(C.type == carpet_type)
 			to_chat(user, "<span class='warning'>There's already carpet here!</span>")
-			return
+			return ITEM_INTERACT_BLOCKING
 
 	user.visible_message(span_notice("[user] starts to lay down [src]."), span_notice("You start to lay down [src]."))
 
 	if(!do_after(user, 1 SECONDS, T))
-		return
+		return ITEM_INTERACT_BLOCKING
+
 	// Place the carpet
 	new carpet_type(T)
 	to_chat(user, "<span class='notice'>You place down some carpet.</span>")
 	qdel(src)
 
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/natural/bundle/carpet_roll/blue
 	name = "blue carpet roll"
@@ -162,6 +168,11 @@
 	carpet_type = /obj/structure/carpet/red
 	stacktype = /obj/item/natural/carpet_fibers/red
 
+/obj/item/natural/bundle/carpet_roll/navy
+	name = "navy carpet roll"
+	color = "#0e1547"
+	carpet_type = /obj/structure/carpet/navy
+	stacktype = /obj/item/natural/carpet_fibers/navy
 
 /obj/item/natural/carpet_fibers/blue
 	name = "blue carpet"
@@ -192,6 +203,12 @@
 	color = "#DC143C"
 	carpet_type = /obj/structure/carpet/red
 	bundletype = /obj/item/natural/bundle/carpet_roll/red
+
+/obj/item/natural/carpet_fibers/navy
+	name = "navy carpet"
+	color = "#0d1337"
+	carpet_type = /obj/structure/carpet/navy
+	bundletype = /obj/item/natural/bundle/carpet_roll/navy
 
 // Technically carpets
 /obj/structure/giantfur

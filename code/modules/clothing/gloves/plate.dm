@@ -17,7 +17,7 @@
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/gloves/plate
 	prevent_crits = ALL_EXCEPT_STAB
 	max_integrity = INTEGRITY_STRONGEST
 
@@ -32,8 +32,14 @@
 	desc = "Plated gauntlets made out of iron. Offers good protection against melee attacks."
 	icon_state = "igauntlets"
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/gloves/plate/bad
 	max_integrity = INTEGRITY_STRONG
+
+/obj/item/clothing/gloves/plate/iron/banded
+	name = "banded iron gauntlets"
+	desc = "A pair of leather gloves layered under a fur wrap with an iron plate hastily tightened together on both ends. It's primarily worn in the cold north, where armor has to sometimes be cobbled together due to logistical shortages."
+	icon_state = "bandedgloves"
+	item_state = "bandedgloves"
 
 /obj/item/clothing/gloves/plate/rust
 	name = "rusted riveted gauntlets"
@@ -45,7 +51,7 @@
 	item_state = "rustgloves"
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/gloves/plate/bad
 	max_integrity = INTEGRITY_STANDARD
 
 /obj/item/clothing/gloves/plate/blk
@@ -58,7 +64,7 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/gloves/plate/good
 	item_weight = 1.65 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 
@@ -66,7 +72,7 @@
 	name = "silver gauntlets"
 	desc = "Finely forged gauntlets made out of silver."
 	icon_state = "silvergloves"
-	armor = ARMOR_PLATE_SILVER
+	armor_type = /datum/armor/gloves/plate/silver
 	smeltresult = /obj/item/ingot/silver
 	item_weight = 2.94 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
@@ -85,6 +91,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	melting_material = /datum/material/avantyne
 
 /obj/item/clothing/gloves/plate/matthios
 	name = "gilded gauntlets"
@@ -104,6 +111,14 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // See above comment
 
+/obj/item/clothing/gloves/plate/graggar/heavy
+	name = "vicious plated gauntlets"
+	desc = "Steel plated gauntlets overlaid by an ornamental imagery of fractured bone and entrails. The violet smears; a tether to the life that once was - and now, a stinging reminder of what could've been."
+	icon_state = "graggarplategloves_heavy"
+	sleeved = 'icons/roguetown/clothing/onmob/gloves.dmi'
+	icon = 'icons/roguetown/clothing/gloves.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gloves.dmi'
+
 //............... Gronnic gloves ............... //
 /obj/item/clothing/gloves/plate/iron/gronn
 	name = "osslandic iron gauntlets"
@@ -113,3 +128,25 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/gronn.dmi'
 
+/obj/item/clothing/gloves/plate/kote
+	name = "jjajeungna gauntlets"
+	desc = "A set of reinforced Blackmeadow gauntlets. Difficult to do much other than fight in, but not entirely arresting."
+	icon_state = "kazengungauntlets"
+	item_state = "kazengungauntlets"
+	body_parts_covered = HANDS|ARMS
+	detail_tag = "_detail"
+	detail_color = CLOTHING_ASH_GREY
+
+/obj/item/clothing/gloves/plate/kote/attack_hand_secondary(mob/user, list/modifiers)
+	. = ..()
+	var/choice = tgui_input_list(user, "Choose a color.", "Uniform colors", GLOB.noble_dyes)
+	if(!choice)
+		return
+	detail_color = GLOB.noble_dyes[choice]
+	update_appearance(UPDATE_ICON)
+
+//............... Cadwyn gloves ............... //
+/obj/item/clothing/gloves/plate/cadwyn
+	name = "cadwyn gauntlets"
+	desc = "Metal gauntlets wrapped in the chains the Order is named for. Let no bite or claw reach you."
+	icon_state = "cadwyngauntlets"

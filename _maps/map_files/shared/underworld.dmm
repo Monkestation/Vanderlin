@@ -273,7 +273,8 @@
 /area/underworld)
 "Vp" = (
 /obj/structure/gate/bars{
-	max_integrity = 5000000
+	max_integrity = 5000000;
+	redstone_id = "death"
 	},
 /turf/open/floor/churchrough,
 /area/underworld)

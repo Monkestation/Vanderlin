@@ -34,7 +34,7 @@
 	var/oldstress = 0
 	var/stressbuffer = 0
 	/// List of stressor instances
-	var/list/stressors = list()
+	var/list/stressors
 	var/last_announced_event_type
 	COOLDOWN_DECLARE(stress_indicator)
 
@@ -133,6 +133,7 @@
 		if(new_stress_level != stress_level)
 			stress_level = new_stress_level
 			attributes.add_or_update_variable_diceroll_modifier(/datum/diceroll_modifier/stress, stress_level)
+			add_or_update_variable_actionspeed_modifier(/datum/actionspeed_modifier/stress, -(stress_level * 0.1))
 
 	if(stress >= STRESS_INSANE && prob(5))
 		var/text = pick_list("stress_messages.json", "insanity")
@@ -168,7 +169,7 @@
 /mob/living/carbon/get_negative_stressors()
 	. = list()
 	for(var/datum/stress_event/event as anything in stressors)
-		if(event.get_stress(src) < 0)
+		if(event.get_stress(src) > 0)
 			. += event
 
 /mob/living/carbon/add_stress(event_type)
@@ -191,10 +192,10 @@
 		existing_event.on_apply(src)
 	else
 		new_event.timer += world.time
-		stressors += new_event
+		LAZYADD(stressors, new_event)
 		adjust_stress(new_event.get_stress(src))
 		new_event.on_apply(src)
-	SEND_SIGNAL(src, COMSIG_MOB_ADD_STRESS, new_event)
+	SEND_SIGNAL(src, COMSIG_CARBON_ADD_STRESS, new_event)
 
 /// Accepts stress typepaths or a list of stress typepaths to remove.
 /mob/living/carbon/remove_stress(event_to_remove)
@@ -206,7 +207,7 @@
 		if(stress_event)
 			stress_event.on_remove(src)
 			adjust_stress(-1 * stress_event.get_stress(src))
-			stressors -= stress_event
+			LAZYREMOVE(stressors, stress_event)
 			qdel(stress_event)
 
 /mob/living/carbon/add_stress_list(list/event_list)

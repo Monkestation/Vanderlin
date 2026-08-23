@@ -13,11 +13,11 @@
 	RegisterSignal(mob, COMSIG_AI_PATH_GENERATED, PROC_REF(regenerate_path))
 	RegisterSignal(mob, COMSIG_AI_MOVEMENT_SET, PROC_REF(output_target_change))
 	RegisterSignal(mob, COMSIG_AI_GENERAL_CHANGE, PROC_REF(output_information))
-	RegisterSignal(mob, COMSIG_PARENT_QDELETING, PROC_REF(clean))
+	RegisterSignal(mob, COMSIG_QDELETING, PROC_REF(clean))
 
 
 /datum/component/ai_path_renderer/Destroy(force)
-	UnregisterSignal(mob, list(COMSIG_MOVABLE_MOVED,COMSIG_AI_PATH_GENERATED,COMSIG_AI_MOVEMENT_SET,COMSIG_AI_GENERAL_CHANGE,COMSIG_PARENT_QDELETING))
+	UnregisterSignal(mob, list(COMSIG_MOVABLE_MOVED,COMSIG_AI_PATH_GENERATED,COMSIG_AI_MOVEMENT_SET,COMSIG_AI_GENERAL_CHANGE,COMSIG_QDELETING))
 	cut_path()
 
 	mob = null

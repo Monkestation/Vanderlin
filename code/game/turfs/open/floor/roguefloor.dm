@@ -695,7 +695,7 @@
 	icon_state = "church-gold_marble"
 
 /turf/open/floor/churchrough/gold
-	icon_state = "church-gold_marble"
+	icon_state = "church-gold_rough"
 
 // Green - Dendor shrines.
 /turf/open/floor/church/green
@@ -847,7 +847,6 @@
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	footstepstealth = TRUE
 	damage_deflection = 10
 	max_integrity = 800
 
@@ -866,6 +865,24 @@
 
 /turf/open/floor/tile/masonic/spiral
 	icon_state = "masonicspiral"
+
+/turf/open/floor/tile/masonic/moondark
+	icon_state = "moontile_dark"
+
+/turf/open/floor/tile/masonic/moonbw
+	icon_state = "moontile_bw"
+
+/turf/open/floor/tile/masonic/full
+	icon_state = "masonicfull_white"
+
+/turf/open/floor/tile/masonic/full/inverted
+	icon_state = "masonicfull_black"
+
+/turf/open/floor/tile/masonic/arrow
+	icon_state = "masonicarrow"
+
+/turf/open/floor/tile/masonic/arrow/inverted
+	icon_state = "masonicarrow_invert"
 
 /turf/open/floor/tile/brick
 	icon_state = "bricktile"
@@ -931,7 +948,6 @@
 	barefootstep = FOOTSTEP_HARD_BAREFOOT
 	clawfootstep = FOOTSTEP_HARD_CLAW
 	heavyfootstep = FOOTSTEP_GENERIC_HEAVY
-	footstepstealth = TRUE
 	damage_deflection = 16
 	max_integrity = 1400
 	attacked_sound = list('sound/combat/hits/onmetal/grille (1).ogg', 'sound/combat/hits/onmetal/grille (2).ogg', 'sound/combat/hits/onmetal/grille (3).ogg')

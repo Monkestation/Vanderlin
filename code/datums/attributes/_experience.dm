@@ -185,6 +185,8 @@ GLOBAL_VAR_INIT(sleep_experience_modifier, 1.0)
 		multiplier += 0.05
 	if(parent?.has_quirk(/datum/quirk/boon/quick_learner))
 		multiplier += 0.2
+	if(HAS_TRAIT(parent, TRAIT_ARCANE_KNOWLEDGE))
+		multiplier += 0.4
 
 	// Catchup multiplier: boost XP when skill is below its default-attribute floor
 	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)

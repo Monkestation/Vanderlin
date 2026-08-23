@@ -68,7 +68,7 @@
 			var/turf/cardinal_turf = get_step(src, direction)
 			if(istype(cardinal_turf, /turf/open/water))
 				var/turf/open/water/water = cardinal_turf
-				if(water.water_volume < 10)
+				if(water.volume_status == WATER_VOLUME_DRY)
 					continue
 				if(water.blocked_flow_directions & get_dir(water, src))
 					continue
@@ -96,7 +96,7 @@
 		if(water_reagent != water_parent.water_reagent)
 			water_reagent = water_parent.water_reagent
 			update_appearance(UPDATE_OVERLAYS)
-		if(water_parent.water_volume >= 10)
+		if(water_parent.volume_status != WATER_VOLUME_DRY)
 			return
 		water_logged = FALSE
 		update_appearance(UPDATE_OVERLAYS)
@@ -116,14 +116,14 @@
 		var/obj/item/weapon/shovel/shovel = I
 		if(!shovel.heldclod)
 			user.visible_message("[user] starts digging a trench.", "I start digging a trench.")
-			if(!do_after(user, 10 SECONDS * shovel.time_multiplier, src))
+			if(!do_after(user, 10 SECONDS * shovel.toolspeed, src))
 				return
 			new /obj/structure/trench(get_turf(src))
 			qdel(src)
 			return TRUE
 
 		user.visible_message("[user] starts filling [src].", "You start filling [src].")
-		if(!do_after(user, 4 SECONDS * shovel.time_multiplier, src))
+		if(!do_after(user, 4 SECONDS * shovel.toolspeed, src))
 			return
 		QDEL_NULL(shovel.heldclod)
 		shovel.update_appearance(UPDATE_OVERLAYS)

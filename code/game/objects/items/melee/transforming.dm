@@ -30,12 +30,10 @@
 /obj/item/melee/transforming/attack(mob/living/target, mob/living/carbon/human/user, list/modifiers)
 	var/nemesis_faction = FALSE
 	if(LAZYLEN(nemesis_factions))
-		for(var/F in target.faction)
-			if(F in nemesis_factions)
-				nemesis_faction = TRUE
-				force += faction_bonus_force
-				nemesis_effects(user, target)
-				break
+		if(target.has_faction(nemesis_factions))
+			nemesis_faction = TRUE
+			force += faction_bonus_force
+			nemesis_effects(user, target)
 	. = ..()
 	if(nemesis_faction)
 		force -= faction_bonus_force

@@ -1,6 +1,6 @@
 /datum/component/ai_aggro_system
 	/// Default threat threshold before a mob is considered hostile
-	var/default_threat_threshold = 10
+	var/default_threat_threshold = 5
 	/// Default range at which mobs detect and add threats
 	var/default_aggro_range = 9
 	/// Default range at which mobs maintain aggro before dropping target
@@ -29,7 +29,7 @@
 	START_PROCESSING(SSaggro, src)
 	// Register signals
 	RegisterSignal(parent, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_attacked))
-	RegisterSignal(parent, COMSIG_MOB_DEATH, PROC_REF(on_death))
+	RegisterSignal(parent, COMSIG_LIVING_DEATH, PROC_REF(on_death))
 
 /datum/component/ai_aggro_system/Destroy(force)
 	STOP_PROCESSING(SSaggro, src)
@@ -37,7 +37,7 @@
 	// Unregister signals
 	UnregisterSignal(parent, list(
 		COMSIG_ATOM_WAS_ATTACKED,
-		COMSIG_MOB_DEATH
+		COMSIG_LIVING_DEATH
 	))
 
 	return ..()

@@ -7,8 +7,8 @@
 	return show_ds ? "[time_string]:[world.timeofday % 10]" : time_string
 
 /proc/time_stamp_metric()
-	var/date_portion = time2text(world.timeofday, "YYYY-MM-DD")
-	var/time_portion = time2text(world.timeofday, "hh:mm:ss")
+	var/date_portion = time2text(world.timeofday, "YYYY-MM-DD", 0)
+	var/time_portion = time2text(world.timeofday, "hh:mm:ss", 0)
 	return "[date_portion]T[time_portion]"
 
 /proc/gameTimestamp(format = "hh:mm:ss", wtime=null)

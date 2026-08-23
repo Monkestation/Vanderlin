@@ -30,6 +30,7 @@
 	traits = list(
 		TRAIT_STEELHEARTED,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_FANATICAL,
 	)
 
@@ -57,7 +58,6 @@
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
-			spawned.virginity = FALSE
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
@@ -216,7 +216,8 @@
 			gloves = /obj/item/clothing/gloves/plate/zizo
 			pants = /obj/item/clothing/pants/platelegs/zizo
 			shoes = /obj/item/clothing/shoes/boots/armor/zizo
-			backr = /obj/item/weapon/sword/long/greatsword/zizo
+			var/zizo_sword = pick(/obj/item/weapon/sword/long/zizo_longsword, /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser, /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword)
+			backr = zizo_sword
 		if(/datum/patron/inhumen/matthios)
 			head = /obj/item/clothing/head/helmet/heavy/matthios
 			armor = /obj/item/clothing/armor/plate/full/matthios
@@ -233,8 +234,8 @@
 			gloves = /obj/item/clothing/gloves/plate
 			pants = /obj/item/clothing/pants/platelegs
 			shoes = /obj/item/clothing/shoes/boots/armor
-			beltr = /obj/item/weapon/knife/dagger/steel/dirk/baotha
-			beltl = /obj/item/weapon/knife/dagger/steel/dirk/baotha
+			beltr = /obj/item/weapon/knife/dagger/steel/baotha
+			beltl = /obj/item/weapon/knife/dagger/steel/baotha
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
 			wrists = /obj/item/clothing/neck/psycross/gold
 			armor = /obj/item/clothing/armor/cuirass/fluted
@@ -248,4 +249,4 @@
 			head = /obj/item/clothing/head/helmet/heavy/bucket
 			wrists = /obj/item/clothing/neck/psycross/silver/divine
 			cloak = /obj/item/clothing/cloak/templar/undivided
-			beltr = /obj/item/weapon/sword/long/decorated
+			beltr = /obj/item/weapon/sword/long/silver/decorated

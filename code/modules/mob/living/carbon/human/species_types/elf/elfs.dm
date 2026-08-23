@@ -12,7 +12,6 @@
 
 /datum/attribute_holder/sheet/job/species/snow
 	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
 		STAT_PERCEPTION = 1,
 		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = -1,
@@ -59,6 +58,7 @@
 
 	organs = list(
 		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
 		ORGAN_SLOT_HEART = /obj/item/organ/heart,
 		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
 		ORGAN_SLOT_EYES = /obj/item/organ/eyes/elf,

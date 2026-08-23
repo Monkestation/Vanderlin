@@ -17,12 +17,7 @@
 	AddElement(/datum/element/relay_attackers)
 	RegisterSignal(src, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(on_attacked))
 
-	if(M.buckled)
-		var/datum/component/riding/ride = M.buckled.GetComponent(/datum/component/riding)
-		if(ride)
-			ride.force_dismount(M)
-		else
-			M.buckled.unbuckle_mob(M, force = TRUE)
+	M.buckled?.unbuckle_mob(M, force = TRUE)
 
 	M.forceMove(src)
 	src.original_name = M.name
@@ -56,7 +51,7 @@
 	animate(pixel_y = old_y - 3, transform = T2, time = 1)
 	animate(pixel_y = old_y, transform = null, time = 1)
 
-	step(src, direction)
+	try_step_multiz(direction)
 	return 1
 
 /obj/effect/dummy/bush_disguise/proc/on_attacked(atom/attacker, damage)

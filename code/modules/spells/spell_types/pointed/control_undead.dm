@@ -9,9 +9,9 @@
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/arcane
-	attunements = list(
-		/datum/attunement/death = 1,
-	)
+
+	required_form = FORM_DEATH
+	required_technique = TECHNIQUE_SUMMONING
 
 	invocation = "Obey me."
 	invocation_type = INVOCATION_WHISPER
@@ -19,6 +19,10 @@
 	charge_required = FALSE
 	cooldown_time = 1 MINUTES
 	spell_cost = 75
+
+	var/recoil_energy_floor = 200
+	var/recoil_severity = CONJURE_RECOIL_LIGHT
+	var/recoil_stamina_only = FALSE
 
 	var/static/list/pet_commands = list(
 		/datum/pet_command/idle,
@@ -49,9 +53,10 @@
 	cast_on.LoadComponent(/datum/component/obeys_commands, pet_commands)
 	cast_on.ai_controller.CancelActions()
 	cast_on.ai_controller.set_blackboard_key(BB_PET_TARGETING_DATUM, new /datum/targetting_datum/basic/not_friends())
-	cast_on.faction = list("Cabal", "Undead")
+	cast_on.set_faction(list(FACTION_CABAL, FACTION_UNDEAD))
 	cast_on.befriend(owner)
 	cast_on.pet_passive = TRUE
+	cast_on.AddComponent(/datum/component/conjured_minion, owner, recoil_energy_floor, recoil_severity, recoil_stamina_only)
 
 	owner.visible_message(
 		span_greentext("[owner] soothes \the [cast_on] with zizo's blessing."),

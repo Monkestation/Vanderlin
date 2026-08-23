@@ -50,7 +50,7 @@
 
 			var/female = FALSE
 
-			if(ispath(obj_path, /obj/item/clothing/shirt/undershirt/easttats))
+			if(ispath(obj_path, /obj/item/clothing/armor/regenerating/skin/easttats))
 				continue
 
 			if(istype(obj_path, /obj/item/clothing/cloak) || istype(obj_path, /obj/item/clothing/shoes) || istype(obj_path, /obj/item/clothing/gloves) || istype(obj_path, /obj/item/clothing/pants) ||istype(obj_path, /obj/item/clothing/shirt))

@@ -1,4 +1,5 @@
 /area/under/dungeon
+	name = "dungeon basement"
 	icon_state = "basement"
 	soundenv = 5
 	droning_index = DRONING_BASEMENT
@@ -10,6 +11,8 @@
 	background_track_night = null
 
 /area/indoors/dungeon
+	name = "dungeon"
+	icon_state = "dungeon"
 	droning_index = DRONING_BASEMENT
 	droning_index_night = DRONING_BASEMENT
 	ambient_index = AMBIENCE_DUNGEON

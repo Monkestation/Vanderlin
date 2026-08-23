@@ -1,3 +1,13 @@
+
+/mob/living/carbon/human/get_equipped_items(include_flags = NONE)
+	var/list/items = ..()
+	// if(!(include_flags & INCLUDE_POCKETS))
+	// 	items -= list(l_store, r_store, s_store)
+	// if((include_flags & INCLUDE_ACCESSORIES) && w_uniform)
+	// 	var/obj/item/clothing/under/worn_under = w_uniform
+	// 	items += worn_under.attached_accessories
+	return items
+
 /mob/living/carbon/human/can_equip(obj/item/I, slot, disable_warning = FALSE, bypass_equip_delay_self = FALSE)
 	return dna?.species?.can_equip(I, slot, disable_warning, src, bypass_equip_delay_self)
 
@@ -191,7 +201,7 @@
 	for(var/obj/item/thing in get_all_slots())
 		. += thing?.slowdown
 
-/mob/living/carbon/human/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE)
+/mob/living/carbon/human/doUnEquip(obj/item/I, force, newloc, no_move, invdrop = TRUE, silent = FALSE, atom/source)
 	var/index = get_held_index_of_item(I)
 	. = ..() //See mob.dm for an explanation on this and some rage about people copypasting instead of calling ..() like they should.
 	if(!. || !I)

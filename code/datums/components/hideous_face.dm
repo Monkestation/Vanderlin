@@ -16,18 +16,19 @@
 
 /datum/component/hideous_face/RegisterWithParent()
 	. = ..()
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
 /datum/component/hideous_face/UnregisterFromParent()
 	. = ..()
-	UnregisterSignal(parent, list(COMSIG_PARENT_EXAMINE))
+	UnregisterSignal(parent, list(COMSIG_ATOM_EXAMINE))
 
 /datum/component/hideous_face/proc/on_examine(mob/living/carbon/human/source, mob/living/carbon/human/user, list/examine_list, list/P)
+	SIGNAL_HANDLER
 	if(!is_human_part_visible(source, HIDEFACE))
 		return
 	if(source != user && user.affects_masquerade())
-		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, html_tag("h2", span_boldannounce("[uppertext(P[THEIR])] FACE! WHAT'S WRONG WITH [uppertext(P[THEIR])] FACE?!")))
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, html_tag("h2", span_boldannounce("[uppertext(P[THEIR])] FACE! WHAT'S WRONG WITH [uppertext(P[THEIR])] FACE?!")))
 	else
-		LAZYADDASSOCLIST(., EXAMINE_SECT_FACE, span_boldannounce("[capitalize(P[THEIR])] face is hideous."))
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_boldannounce("[capitalize(P[THEIR])] face is hideous."))
 	seen_callback?.Invoke(source, user)
 

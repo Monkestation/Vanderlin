@@ -70,11 +70,11 @@
 		if(ishuman(arrived))
 			playsound(src, 'sound/misc/lava_death.ogg', 100, FALSE)
 
-/turf/open/lava/Exited(atom/movable/gone, atom/new_loc)
+/turf/open/lava/Exited(atom/movable/gone, direction)
 	. = ..()
-	if(isliving(gone))
+	if(isliving(gone) && !islava(gone.loc))
 		var/mob/living/L = gone
-		if(!islava(new_loc) && !L.on_fire)
+		if(!L.on_fire)
 			L.update_fire()
 
 /turf/open/lava/hitby(atom/movable/AM, skipcatch, hitpush, blocked, datum/thrownthing/throwingdatum, damage_type = "blunt")
@@ -111,10 +111,10 @@
 	var/atom/movable/our_movable = pass_info.requester_ref.resolve()
 	if(!our_movable)
 		return
-	return can_traverse_safely(our_movable)
+	return can_cross_safely(our_movable)
 
-/turf/open/lava/can_traverse_safely(atom/movable/traveler)
-	return HAS_TRAIT(traveler, immunity_trait) || HAS_TRAIT(traveler, TRAIT_MOVE_FLYING)
+/turf/open/lava/can_cross_safely(atom/movable/traveler)
+	return ..() && !can_burn_stuff(traveler) // can traverse safely if you won't burn in it
 
 ///Proc that sets on fire something or everything on the turf that's not immune to lava. Returns TRUE to make the turf start processing.
 /turf/open/lava/proc/burn_stuff(atom/movable/to_burn)
@@ -191,8 +191,8 @@
 			burn_obj.resistance_flags |= FLAMMABLE //Even fireproof things burn up in lava
 		if(burn_obj.resistance_flags & FIRE_PROOF)
 			burn_obj.resistance_flags &= ~FIRE_PROOF
-		if(burn_obj.armor?.getRating("fire") > 50) //obj with 100% fire armor still get slowly burned away.
-			burn_obj.armor.setRating(fire = 50)
+		if(burn_obj.get_armor().get_rating(FIRE) > 50) //obj with 100% fire armor still get slowly burned away.
+			burn_obj.set_armor_rating(FIRE, 50)
 		burn_obj.fire_act(temperature_damage, 1000)
 		if(QDELETED(burn_obj))
 			return FALSE
@@ -207,7 +207,7 @@
 		var/mob/living/burn_living = burn_target
 		burn_living.adjust_fire_stacks(lava_firestacks)
 		burn_living.IgniteMob()
-		burn_living.adjustFireLoss(lava_damage)
+		burn_living.adjustFireLoss(lava_damage, intense = TRUE)
 		if(burn_living.health <= 0)
 			burn_living.dust(drop_items = TRUE)
 		return TRUE

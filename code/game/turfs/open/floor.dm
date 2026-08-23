@@ -26,7 +26,7 @@
 	burn_power = 50
 
 /turf/open/floor/Initialize(mapload)
-	if (!broken_states)
+	if (!length(broken_states))
 		broken_states = typelist("broken_states", list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5"))
 	else
 		broken_states = typelist("broken_states", broken_states)
@@ -34,10 +34,11 @@
 		attacked_sound = typelist("attacked_sound", list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg'))
 	else
 		attacked_sound = typelist("attacked_sound", attacked_sound)
-	burnt_states = typelist("burnt_states", burnt_states)
+	if(length(burnt_states))
+		burnt_states = typelist("burnt_states", burnt_states)
 	if(!broken && broken_states && (icon_state in broken_states))
 		broken = TRUE
-	if(!burnt && burnt_states && (icon_state in burnt_states))
+	if(!burnt && length(burnt_states) && (icon_state in burnt_states))
 		burnt = TRUE
 	. = ..()
 	//This is so damaged or burnt tiles or platings don't get remembered as the default tile
@@ -60,14 +61,18 @@
 		icon_regular_floor = icon_state
 
 /turf/open/floor/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
-	var/shielded = is_shielded()
-	..()
-	if(severity != 1 && shielded && target != src)
-		return
+	. = ..()
+
 	if(target == src)
 		ScrapeAway(flags = CHANGETURF_INHERIT_AIR)
 		take_damage(INFINITY, BRUTE, "blunt", 0)
 		return
+	if(is_explosion_shielded(severity))
+		return FALSE
+
+	if(target)
+		severity = EXPLODE_LIGHT
+
 	var/ddist = devastation_range
 	var/hdist = heavy_impact_range
 	var/ldist = light_impact_range
@@ -92,10 +97,13 @@
 		var/stacks = ((fdist - fodist) * 2)
 		fire_act(stacks)
 
-/turf/open/floor/is_shielded()
-	for(var/obj/structure/A in contents)
-		if(A.level == 3)
-			return 1
+/turf/open/floor/is_explosion_shielded(severity)
+	if(severity >= EXPLODE_DEVASTATE)
+		return FALSE
+	for(var/obj/blocker in src)
+		if(blocker.density)
+			return TRUE
+	return FALSE
 
 /turf/open/floor/attack_paw(mob/user)
 	return attack_hand(user)

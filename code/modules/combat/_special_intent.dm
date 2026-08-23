@@ -291,9 +291,25 @@
 	else
 		var/mob/living/carbon/human/human_victim = victim
 		var/obj/item/bodypart/affecting = human_victim.get_bodypart(damage_zone)
-		var/armor_block = human_victim.run_armor_check(damage_zone, damage_type, damage = damage)
-		if(human_victim.apply_damage(damage, damage_type, affecting, armor_block))
-			affecting?.bodypart_attacked_by(damage_class, damage, user, crit_message = TRUE, modifiers = list(CRIT_MOD_CHANCE = -100))
+
+		var/list/split = list()
+		human_victim.run_armor_check(damage_zone, damage_type, damage = damage, split_output = split)
+
+		var/typed_actual = 0
+		var/blunt_actual = 0
+
+		if(split[DAMAGE_TYPED] > 0)
+			typed_actual = human_victim.apply_damage(split[DAMAGE_TYPED], damage_type, affecting, 0)
+		if(split[DAMAGE_BLUNT] > 0)
+			blunt_actual = human_victim.apply_damage(split[DAMAGE_BLUNT], BRUTE, affecting, 0, can_crit = FALSE)
+
+		var/real_damage = typed_actual + blunt_actual
+
+		if(real_damage)
+			if(typed_actual > 0)
+				affecting?.bodypart_attacked_by(damage_class, typed_actual, user, crit_message = TRUE, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT), incoming_germ = weapon.germ_level, pre_applied = TRUE)
+			if(blunt_actual > 0)
+				affecting?.bodypart_attacked_by(BCLASS_BLUNT, blunt_actual, user, crit_message = (typed_actual <= 0), modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT), incoming_germ = weapon.germ_level, pre_applied = TRUE)
 			message += "<b> It pierces through to their flesh!</b>"
 			playsound(human_victim, weapon.hitsound, 80, TRUE)
 

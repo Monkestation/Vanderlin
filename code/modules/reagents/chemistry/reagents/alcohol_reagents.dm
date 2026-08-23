@@ -13,15 +13,25 @@
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	liquid_fire_power = 10
 	hydration_factor = 10
+	boiling_point = T0C + 78 // Ethanol boils at 78.4C
 	var/boozepwr = 65 //Higher numbers equal higher hardness, higher hardness equals more intense alcohol poisoning
 	var/datum/reagent/age_path
 	var/age_time = 10 MINUTES
 	var/age_timer
 
+/datum/reagent/consumable/ethanol/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	affected_bodypart.disinfect_limb(boozepwr)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
+		injury.adjust_germ_level(-boozepwr * 0.5)
+	affected_bodypart.adjust_germ_level(-boozepwr * 0.1)
+	return ..()
+
 /datum/reagent/consumable/ethanol/New()
 	. = ..()
 	if(age_path && holder)
 		age_timer = addtimer(CALLBACK(src, PROC_REF(age_beer)), age_time, TIMER_OVERRIDE | TIMER_STOPPABLE | TIMER_UNIQUE)
+	if(!price_per_unit)
+		price_per_unit = 0.5 + (boozepwr * 0.02)
 
 /datum/reagent/consumable/ethanol/on_merge(data, amount)
 	. = ..()
@@ -37,11 +47,15 @@
 
 /datum/reagent/consumable/ethanol/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.increase_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+	L.increase_chem_effect(CE_PAINKILLER, boozepwr * 0.3, "[type]")
 
 /datum/reagent/consumable/ethanol/on_mob_end_metabolize(mob/living/L)
 	. = ..()
-	L.decrease_chem_effect(CE_PAINKILLER, boozepwr/5, "[type]")
+	L.decrease_chem_effect(CE_PAINKILLER, boozepwr * 0.3, "[type]")
+
+/datum/reagent/consumable/ethanol/reaction_obj(obj/O, reac_volume)
+	. = ..()
+	O.adjust_germ_level(-boozepwr * reac_volume)
 
 /datum/reagent/consumable/ethanol/proc/age_beer()
 	var/old_volume = volume
@@ -67,10 +81,10 @@ All effects don't start immediately, but rather get worse over time; the rate is
 91-100: Dangerously toxic - swift death
 */
 
-/datum/reagent/consumable/ethanol/on_mob_life(mob/living/carbon/C)
-	if(C.drunkenness < volume * boozepwr * ALCOHOL_THRESHOLD_MODIFIER || boozepwr < 0)
+/datum/reagent/consumable/ethanol/on_mob_life(mob/living/carbon/C, efficiency)
+	if(C.drunkenness < volume * boozepwr * ALCOHOL_THRESHOLD_MODIFIER * efficiency || boozepwr < 0)
 		var/booze_power = boozepwr
-		C.drunkenness = max((C.drunkenness + (sqrt(volume) * booze_power * ALCOHOL_RATE)), 0) //Volume, power, and server alcohol rate effect how quickly one gets drunk
+		C.drunkenness = max((C.drunkenness + (sqrt(volume) * booze_power * ALCOHOL_RATE * efficiency)), 0) //Volume, power, and server alcohol rate effect how quickly one gets drunk
 	return ..()
 
 /datum/reagent/consumable/ethanol/reaction_obj(obj/O, reac_volume)
@@ -87,12 +101,12 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			O.visible_message("<span class='warning'>[O]'s ink is smeared by [name], but doesn't wash away!</span>")
 	return
 
-/datum/reagent/consumable/ethanol/reaction_mob(mob/living/M, method=TOUCH, reac_volume)//Splashing people with ethanol isn't quite as good as fuel.
-	if(!isliving(M))
+/datum/reagent/consumable/ethanol/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)//Splashing people with ethanol isn't quite as good as fuel.
+	if(!isliving(exposed_mob))
 		return
 
-	if(method in list(TOUCH, VAPOR, PATCH))
-		M.adjust_fire_stacks(reac_volume / 15)
+	if(methods in list(TOUCH, VAPOR, PATCH))
+		exposed_mob.adjust_fire_stacks(reac_volume / 15)
 
 	return ..()
 
@@ -105,6 +119,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "ale"
 	glass_name = "glass of beer"
 	glass_desc = ""
+	price_per_unit = 0.05
 
 /datum/reagent/consumable/ethanol/rum
 	name = "Rum"
@@ -195,6 +210,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "cheap pisswater"
 	color = "#DBD77F"
 	quality = DRINK_NICE
+	price_per_unit = 0.055
 
 /datum/reagent/consumable/ethanol/hagwoodbitter
 	name = "Hagwood Bitter"
@@ -202,6 +218,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "dull crispness"
 	color = "#BBB525"
 	quality = DRINK_NICE
+	price_per_unit = 0.0525
 
 /datum/reagent/consumable/ethanol/blackgoat
 	name = "Black Gote Kriek"
@@ -209,6 +226,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "overwhelming sourness"
 	color = "#401806"
 	quality = DRINK_NICE
+	price_per_unit = 0.1
 
 /datum/reagent/consumable/ethanol/onion
 	name = "Royal Onion Cognac"
@@ -216,6 +234,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "spicy sweet malty overtones"
 	color = "#683e00"
 	quality = DRINK_NICE
+	price_per_unit = 0.025
 
 // Elf Production - LEAF-LOVERS MOTHERFUCKER
 
@@ -225,6 +244,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "subtle herbaceous undertones"
 	color = "#5D8A8A"
 	quality = DRINK_NICE
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/fireleaf // cabbbage
 	name = "Fireleaf"
@@ -232,6 +252,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "bland liquor"
 	color = "#475e45"
 	quality = DRINK_NICE
+	price_per_unit = 0.2
 
 // Dwarven Production - Best in the Realms
 
@@ -241,6 +262,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "buttery richness"
 	color = "#5D8A8A"
 	quality = DRINK_GOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/stonebeards
 	name = "Stonebeard Reserve"
@@ -248,6 +270,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "potent oatlike liquor"
 	color = "#5D8A8A"
 	quality = DRINK_GOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/voddena // Not vodka. Trust me.
 	name = "Voddena"
@@ -255,6 +278,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "burning starchy wet dirt"
 	color = "#a1a1a1"
 	quality = DRINK_NICE
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/limoncello
 	name = "Limoncello"
@@ -272,6 +296,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	boozepwr = 20
 	taste_description = "sour wine"
 	color = "#552b4b"
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/whitewine
 	name = "White Wine"
@@ -279,6 +304,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "sweet white wine"
 	color = "#F3ED91"
 	quality = DRINK_NICE
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/redwine
 	name = "Red Wine"
@@ -286,6 +312,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "tannin-stricken wine"
 	color = "#571111"
 	quality = DRINK_NICE
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/jackberrywine
 	name = "Jacksberry Wine"
@@ -295,6 +322,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_NICE
 	age_path = /datum/reagent/consumable/ethanol/jackberrywine/aged
 	age_time = 10 MINUTES
+	price_per_unit = 0.2
 
 /datum/reagent/consumable/ethanol/jackberrywine/aged
 	name = "Aged Jacksberry Wine"
@@ -442,6 +470,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "delectable fruity notes"
 	color = "#6C0000"
 	quality = DRINK_GOOD
+	price_per_unit = 1.75
 
 /datum/reagent/consumable/ethanol/elfblue
 	name = "Valmora Blue"
@@ -449,6 +478,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "saintly sweetness"
 	color = "#2C9DAF"
 	quality = DRINK_FANTASTIC
+	price_per_unit = 3
 
 /datum/reagent/consumable/ethanol/jagdtrunk // JÄGERMEISTER!!!!
 	name = "Jagdtrunk"
@@ -574,14 +604,15 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "hints of questionable choices--a bouquet of murkwater and pure ethanol"
 	color = "#4b1e00"
 
-/datum/reagent/consumable/ethanol/murkwine/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/murkwine/on_mob_life(mob/living/carbon/M, efficiency)
 	M.apply_status_effect(/datum/status_effect/buff/murkwine)
-	M.adjust_stamina(0.1)
+	M.adjust_stamina(0.1 * efficiency)
 	..()
 	. = 1
 
-/datum/reagent/consumable/ethanol/murkwine/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/murkwine)
+/datum/reagent/consumable/ethanol/murkwine/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/murkwine)
 
 /datum/reagent/consumable/ethanol/nocshine // wait, no, NOCSHINE
 	name = "Noc's Shine"
@@ -591,17 +622,18 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_NICE
 
 
-/datum/reagent/consumable/ethanol/nocshine/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/nocshine/on_mob_life(mob/living/carbon/M, efficiency)
 	M.apply_status_effect(/datum/status_effect/buff/nocshine)
 	if(HAS_TRAIT(M, TRAIT_CRACKHEAD))
-		M.adjustToxLoss(0.1, 0)
+		M.adjustToxLoss(0.1 * efficiency, 0)
 	else
-		M.adjustToxLoss(0.75, 0)
+		M.adjustToxLoss(0.75 * efficiency, 0)
 	..()
 	. = 1
 
-/datum/reagent/consumable/ethanol/nocshine/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/nocshine)
+/datum/reagent/consumable/ethanol/nocshine/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/nocshine)
 
 /datum/reagent/consumable/ethanol/luxwine // oh no.
 	name = "Luxintenebre" // lux left w/ sugar in a darkened place for quite some time... U could say... Light in Darkness.....
@@ -612,15 +644,16 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_VERYGOOD // good stuff!
 	age_path = /datum/reagent/consumable/ethanol/luxwine/aged
 
-/datum/reagent/consumable/ethanol/luxwine/on_mob_life(mob/living/carbon/M) // stolen healthpot code. i am shameless.
+/datum/reagent/consumable/ethanol/luxwine/on_mob_life(mob/living/carbon/M, efficiency) // stolen healthpot code. i am shameless.
 	M.apply_status_effect(/datum/status_effect/buff/lux_drank)
 	if(volume > 0.99) // i have no clue if this works.
-		M.adjustBruteLoss(-1*REM, 0)
-		M.adjustFireLoss(-1*REM, 0)
+		M.adjustBruteLoss(-1*REM * efficiency, 0)
+		M.adjustFireLoss(-1*REM * efficiency, 0)
 	..()
 
-/datum/reagent/consumable/ethanol/luxwine/on_mob_end_metabolize(mob/living/M)
-	M.remove_status_effect(/datum/status_effect/buff/lux_drank)
+/datum/reagent/consumable/ethanol/luxwine/on_mob_end_metabolize(mob/living/affected_mob)
+	. = ..()
+	affected_mob.remove_status_effect(/datum/status_effect/buff/lux_drank)
 
 /datum/reagent/consumable/ethanol/luxwine/aged
 	name = "Aged Luxintenebre"
@@ -630,11 +663,11 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_VERYGOOD
 	age_path = /datum/reagent/consumable/ethanol/luxwine/delectable
 
-/datum/reagent/consumable/ethanol/luxwine/aged/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/luxwine/aged/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
-		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.05*REM)
-		M.adjustBruteLoss(-2*REM, 0)
-		M.adjustFireLoss(-2*REM, 0)
+		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.05*REM * efficiency)
+		M.adjustBruteLoss(-2*REM * efficiency, 0)
+		M.adjustFireLoss(-2*REM * efficiency, 0)
 	..()
 
 /datum/reagent/consumable/ethanol/luxwine/delectable
@@ -645,35 +678,37 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	quality = DRINK_FANTASTIC
 	age_path = null
 
-/datum/reagent/consumable/ethanol/luxwine/delectable/on_mob_life(mob/living/carbon/M)
+/datum/reagent/consumable/ethanol/luxwine/delectable/on_mob_life(mob/living/carbon/M, efficiency)
 	var/list/wCount = M.get_wounds()
 	if(wCount.len > 0)
 		M.heal_wounds(3) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
 	if(volume > 0.99)
-		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.25*REM)
-		M.adjustBruteLoss(-5*REM, 0)
-		M.adjustFireLoss(-5*REM, 0)
+		M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.25*REM * efficiency)
+		M.adjustBruteLoss(-5*REM * efficiency, 0)
+		M.adjustFireLoss(-5*REM * efficiency, 0)
 	..()
 
 /datum/reagent/consumable/ethanol/whipwine // dont ask
 	name = "Magickal Whip Wine"
-	description = "A recipe recently floated into the Peaks. Magickal Whip Wine is said to increase one's potence and stamina sevenfold."
+	description = "A dubious recent recipe from abroad. Magickal Whip Wine is said to increase one's potence and stamina sevenfold."
 	boozepwr = 10 // it's a whip. it's an actual whip.
 	taste_description = "leather, bitter herbs, and regret" // what did you expect
 	color = "#3a1d18"
 
 /datum/reagent/consumable/ethanol/komuchisake // if you put this outside the lich dungeon i'll kill you
 	name = "Divine Snake Wine"
-	description = "The True Form of the Whipwine. The Magickal Snake Wine was an exclusively produced medicinal wine from over three centuries ago in the Kazengun Shogunate..."
+	description = "The True Form of the Whipwine. The Magickal Snake Wine was an exclusively produced medicinal wine from over three centuries ago..."
 	boozepwr = 60 // ancient lichebrau...
 	taste_description = "bitterness, pain, iron, and ancient mistakes" // what did you expect [2]
 	color = "#553837"
+	price_per_unit = 0.45
 
 /datum/reagent/consumable/ethanol/huangjiu
 	name = "Huangjiu"
 	boozepwr = 30
 	taste_description = "a mix of sweet and sour"
 	color = "#d8b84c"
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/baijiu
 	name = "Baijiu"
@@ -681,6 +716,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "fiery and pungent alcohol with a hint of sweetness"
 	color = "#f8fdfc"
 	quality = DRINK_GOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/yaojiu
 	name = "Yaojiu"
@@ -688,6 +724,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "bittersweet alcohol with deep herbal notes"
 	color = "#8C4B1F"
 	quality = DRINK_VERYGOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/shejiu
 	name = "Shejiu"
@@ -695,6 +732,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "musky and strong alcohol with a hint of gaminess"
 	color = "#C49A6C"
 	quality = DRINK_VERYGOOD
+	price_per_unit = 0.3
 
 /datum/reagent/consumable/ethanol/kgunshochu
 	name = "Shochu"
@@ -702,6 +740,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	taste_description = "dry, clean finish"
 	color = "#F8FDFC"
 	quality = DRINK_VERYGOOD
+	price_per_unit = 0.3
 
 #undef ALCOHOL_THRESHOLD_MODIFIER
 #undef ALCOHOL_EXPONENT

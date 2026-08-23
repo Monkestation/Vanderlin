@@ -25,7 +25,7 @@
 	var/sit_bonus2 = 0
 	var/psicross_bonus = 0
 
-	for(var/obj/item/clothing/neck/current_item in H.get_equipped_items(TRUE))
+	for(var/obj/item/clothing/neck/current_item in H.get_equipped_items(INCLUDE_POCKETS))
 		if(istype(current_item, /obj/item/clothing/neck/psycross))
 			switch(current_item.type) // Worn Psicross Piety bonus. For fun.
 				if(/obj/item/clothing/neck/psycross)
@@ -70,7 +70,7 @@
 	if(zcross_trigger)
 		user.visible_message(span_warning("[user] shuddered. Something's very wrong."), span_userdanger("Cold shoots through my spine. Something laughs at me for trying."))
 		user.playsound_local(user, 'sound/misc/zizo.ogg', 25, FALSE)
-		user.adjustBruteLoss(25)
+		user.adjustBruteLoss(25, damage_type = WOUND_DIVINE)
 		return FALSE
 
 	if(do_after(H, 50))

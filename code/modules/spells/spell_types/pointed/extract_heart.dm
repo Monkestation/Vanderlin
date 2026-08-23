@@ -51,7 +51,8 @@
 	owner.put_in_hands(heart)
 
 	cast_on.add_splatter_floor()
-	cast_on.adjustBruteLoss(20)
+	var/obj/item/bodypart/chest = cast_on.get_bodypart(BODY_ZONE_CHEST)
+	chest.bodypart_attacked_by(BCLASS_PIERCE, 30)
 
 	owner.visible_message(span_warning("[owner] rips [cast_on]'s heart out with a roar!"), \
 						span_red("You present the heart to Graggar! The God chuckles upon this offering."))

@@ -37,8 +37,8 @@
 				var/mob/living/carbon/C = A
 				if(istype(C))
 					var/damage = 10
-					C.apply_damage(damage, BRUTE, BODY_ZONE_L_LEG)
-					C.apply_damage(damage, BRUTE, BODY_ZONE_R_LEG)
+					C.apply_damage(damage, BURN, BODY_ZONE_L_LEG)
+					C.apply_damage(damage, BURN, BODY_ZONE_R_LEG)
 
 			if(istype(A, /obj/structure))
 				var/obj/structure/S = A

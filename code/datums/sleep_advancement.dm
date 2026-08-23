@@ -4,6 +4,8 @@
 #define RESTED_XP_INITIAL      500   // granted on datum creation so new chars aren't penalized
 
 /datum/sleep_adv
+	///were we a viable sleep at some point?
+	var/viable_sleep = FALSE
 	var/sleep_adv_cycle = 0
 	var/sleep_adv_points = 0
 	var/stress_amount = 0
@@ -11,6 +13,8 @@
 	var/rolled_specials = 0
 	var/retained_dust = 0
 	var/datum/mind/mind = null
+
+	var/list/cached_dream_candidates = null
 
 	/// Flat pool of rested XP, shared across all skills, drains 1:1 as bonus XP
 	var/rested_xp_pool = 0
@@ -20,6 +24,9 @@
 	var/list/available_modes = list("one_truth", "one_lie", "two_truths", "two_lies", "truth_lie")
 	var/list/remaining_modes = list()
 	var/list/daily_skill_xp = list()  // skill typepath -> raw XP earned today
+
+	/// Is the UI open?
+	var/ui_is_open = FALSE
 
 /datum/sleep_adv/New(datum/mind/passed_mind)
 	. = ..()
@@ -46,7 +53,7 @@
 	if(!mind?.current)
 		return
 	//this is pre multi so catchup doesn't screw you
-	if(!(skill_type  in daily_skill_xp))
+	if(!(skill_type in daily_skill_xp))
 		daily_skill_xp |= skill_type //?? why this shouldn't need to be here but it runtimes otherwise
 		daily_skill_xp[skill_type] = 0
 	daily_skill_xp[skill_type] = nulltozero(daily_skill_xp[skill_type]) + amount
@@ -68,6 +75,7 @@
 	if(prob(0)) // TODO SLEEP ADV SPECIALS
 		rolled_specials++
 
+	cached_dream_candidates = null
 	to_chat(mind.current, span_notice("My consciousness slips and I start dreaming..."))
 	var/dreamwatcher = HAS_TRAIT(mind.current, TRAIT_DREAM_WATCHER)
 
@@ -150,6 +158,7 @@
 	daily_skill_xp = list()
 
 /datum/sleep_adv/proc/show_ui(mob/living/user)
+	ui_is_open = TRUE
 	var/list/dat = list()
 	SSassets.transport.send_assets(user.client, list("try4_border.png", "try4.png", "slop_menustyle2.css"))
 	dat += {"
@@ -182,11 +191,14 @@
 	dat += "<br><center>Dream, for those who dream may reach higher heights</center><br>"
 	dat += "<center>\Roman[sleep_adv_points] dream points</center>"
 	dat += "<br><center><small>Rested pool: [rested_xp_pool] XP</small></center><br>"
-	var/list/dream_skills = get_dream_skill_candidates()
+	var/list/dream_skills = cached_dream_candidates
+	if(!dream_skills)
+		dream_skills = get_dream_skill_candidates()
+		cached_dream_candidates = dream_skills
 	for(var/skill_type in dream_skills)
 		var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
 		var/already_active = rested_skill_multipliers[skill_type]
-		var/current_level = nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type))
+		var/current_level = GET_MOB_SKILL_VALUE(mind.current, skill_type)
 		var/level_name = skill.description_from_level(current_level)
 		if(already_active)
 			dat += "<div class='class_bar_div'><span class='vagrant'>[skill.name] ([level_name]) - <b>1.5x active</b></span></div>"
@@ -204,15 +216,23 @@
 			</body>
 		</html>
 	"}
+	if(HAS_TRAIT(mind.current, TRAIT_HASMAGIC))
+		dat += "<div class='class_bar_div'><a class='vagrant' href='byond://?src=[REF(src)];task=open_spellbook'>Reshape your innate magic</a></div>"
 	var/datum/browser/popup = new(user, "dreams", "<center>Dreams</center>", 350, 450, src)
 	popup.set_window_options(can_close = FALSE)
 	popup.set_content(dat.Join())
 	popup.open(TRUE)
+	viable_sleep = TRUE
 
 /datum/sleep_adv/proc/close_ui()
+	if(!ui_is_open)
+		return
+	if(viable_sleep)
+		mind?.has_studied = FALSE
 	if(!mind.current)
 		return
 	mind.current << browse(null, "window=dreams")
+	ui_is_open = FALSE
 
 /datum/sleep_adv/proc/process_sleep()
 	if(is_considered_sleeping())
@@ -235,7 +255,7 @@
 /datum/sleep_adv/proc/get_next_level_for_skill(skill_type)
 	if(!mind.current)
 		return 0
-	return nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type)) + 1
+	return GET_MOB_SKILL_VALUE(mind.current, skill_type) + 1
 
 /datum/sleep_adv/proc/get_skill_cost(skill_type)
 	var/datum/attribute/skill/skill = GET_ATTRIBUTE_DATUM(skill_type)
@@ -259,8 +279,9 @@
 	if(dream_text)
 		to_chat(mind.current, span_notice(dream_text))
 	sleep_adv_points -= get_skill_cost(skill_type)
+	cached_dream_candidates = null
 	rested_skill_multipliers[skill_type] = TRUE
-	to_chat(mind.current, span_nicegreen("You feel driven to practice [lowertext(skill.name)]... your efforts will be rewarded while you remain rested."))
+	to_chat(mind.current, span_nicegreen("You feel driven to practice [LOWER_TEXT(skill.name)]... your efforts will be rewarded while you remain rested."))
 	record_round_statistic(STATS_SKILLS_DREAMED)
 
 /datum/sleep_adv/proc/get_dream_skill_candidates(max_count = 6)
@@ -274,10 +295,12 @@
 		if(already_active)
 			weighted[skill_type] = -1
 			continue
-		var/current_level = nulltozero(GET_MOB_SKILL_VALUE(mind.current, skill_type))
+		var/current_level = GET_MOB_SKILL_VALUE(mind.current, skill_type)
 		weighted[skill_type] = max(1, 1 + current_level * 3)
 
 	var/list/result = list()
+
+	// Pin already-active multipliers first
 	for(var/skill_type in weighted)
 		if(weighted[skill_type] == -1)
 			result += skill_type
@@ -286,30 +309,41 @@
 	var/reinforcement_slots = FLOOR(remaining_slots / 2, 1)
 	var/discovery_slots = remaining_slots - reinforcement_slots
 
+	// Build separate candidate pools
 	var/list/discovery_candidates = list()
+	var/list/reinforcement_candidates = list()
+
 	for(var/skill_type in weighted)
-		if(weighted[skill_type] != -1)
+		if(weighted[skill_type] == -1)
+			continue
+		var/daily_xp = nulltozero(daily_skill_xp[skill_type])
+		if(daily_xp > 0)
+			reinforcement_candidates[skill_type] = daily_xp
+		else
 			discovery_candidates[skill_type] = weighted[skill_type]
 
-	while(discovery_slots > 0 && discovery_candidates.len > 0)
-		var/skill_type = pickweight(discovery_candidates)
-		result += skill_type
-		discovery_candidates -= skill_type
-		reinforcement_slots-- // if daily_xp picked this already we don't double-dip
-		discovery_slots--
-
-	var/list/reinforcement_candidates = list()
-	for(var/skill_type in weighted)
-		if(weighted[skill_type] != -1 && !(skill_type in result))
-			var/daily_xp = nulltozero(daily_skill_xp[skill_type])
-			if(daily_xp > 0)
-				reinforcement_candidates[skill_type] = daily_xp
-
+	// Fill reinforcement slots first from skills used today
 	while(reinforcement_slots > 0 && reinforcement_candidates.len > 0)
 		var/skill_type = pickweight(reinforcement_candidates)
 		result += skill_type
 		reinforcement_candidates -= skill_type
 		reinforcement_slots--
+
+	// Any unused reinforcement slots spill into discovery
+	discovery_slots += reinforcement_slots
+
+	// Fill discovery slots from remaining skills
+	while(discovery_slots > 0 && discovery_candidates.len > 0)
+		var/skill_type = pickweight(discovery_candidates)
+		result += skill_type
+		discovery_candidates -= skill_type
+		discovery_slots--
+
+	// If discovery pool was small, try reinforcement overflow
+	while(result.len < max_count && reinforcement_candidates.len > 0)
+		var/skill_type = pickweight(reinforcement_candidates)
+		result += skill_type
+		reinforcement_candidates -= skill_type
 
 	return result
 
@@ -351,12 +385,17 @@
 		if("continue")
 			finish()
 			return
+		if("open_spellbook")
+			var/datum/spellbook/book = new(mind.current)
+			book.require_sleeping = TRUE
+			book.open_unlearn(mind.current)
+			return
 	show_ui(mind.current)
 
 /proc/can_train_combat_skill(mob/living/user, skill_type, target_skill_level)
 	if(!user.mind)
 		return FALSE
-	var/user_skill_level = nulltozero(GET_MOB_SKILL_VALUE(user, skill_type))
+	var/user_skill_level = GET_MOB_SKILL_VALUE(user, skill_type)
 	var/level_diff = target_skill_level - user_skill_level
 	if(level_diff <= 0)
 		return FALSE

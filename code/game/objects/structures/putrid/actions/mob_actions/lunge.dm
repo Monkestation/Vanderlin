@@ -74,7 +74,7 @@
 	if(targeted_limb)
 		targeted_limb.receive_damage(brute = damage)
 	else
-		victim.apply_damage(damage, BRUTE, user.zone_selected)
+		victim.apply_damage(damage, BRUTE, user.zone_selected, damage_type = BCLASS_CUT)
 	. = ..()
 	return TRUE
 

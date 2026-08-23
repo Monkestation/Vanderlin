@@ -306,7 +306,7 @@
 				if(ishuman(owner))
 					var/mob/living/carbon/human/H = owner
 					var/obj/item/bodypart/BP = pick(H.bodyparts)
-					BP.rotted = TRUE
+					BP.adjust_germ_level(50)
 					H.regenerate_icons()
 				cooldown_time = 8 MINUTES
 				to_chat(owner, span_userdanger("Your cursed flesh begins to decay!"))

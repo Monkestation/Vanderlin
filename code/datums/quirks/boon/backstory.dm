@@ -33,13 +33,15 @@
 	var/datum/attribute/skill/granted_skill = initial(B.granted_skill)
 	var/stat_penalty = initial(B.stat_penalty)
 	var/stat_reduction = initial(B.stat_reduction)
+	var/skill_amount = initial(B.amount)
+	var/skill_clamp = initial(B.clamp)
 
 	base_desc += "<br><br><b>Selected: [initial(B.name)]</b>"
 	base_desc += "<br>[initial(B.desc)]"
 
 	// Add skill grant information
 	if(granted_skill)
-		base_desc += "<br><b>Grants:</b> +1 [initial(granted_skill.name)]"
+		base_desc += "<br><b>Grants:</b> +[skill_amount] [initial(granted_skill.name)] (MAX: [skill_clamp])"
 
 	// Add stat penalty information
 	if(stat_penalty && stat_reduction > 0)
@@ -82,14 +84,14 @@
 	var/mob/living/carbon/human/H = owner
 
 	if(initial(B.granted_skill))
-		H.clamped_adjust_skill_level(initial(B.granted_skill), 10, initial(B.clamp), TRUE)
+		H.clamped_adjust_skill_level(initial(B.granted_skill), B.amount, initial(B.clamp), TRUE)
 		H.adjust_skill_exp_multiplier(initial(B.granted_skill), initial(B.xp_multiplier))
 
 	// Apply stat penalty
 	if(initial(B.stat_penalty) && initial(B.stat_reduction) > 0)
 		H.adjust_stat_modifier(STATMOD_QUIRK, list(initial(B.stat_penalty) = -initial(B.stat_reduction)))
 
-	to_chat(H, span_notice("Your experience as [lowertext(initial(B.name))] has shaped who you are today."))
+	to_chat(H, span_notice("Your experience as [LOWER_TEXT(initial(B.name))] has shaped who you are today."))
 
 /datum/quirk/boon/backstory/on_remove()
 	if(!ishuman(owner))
@@ -105,6 +107,7 @@
 		H.adjust_stat_modifier(STATMOD_QUIRK, list(initial(B.stat_penalty) = initial(B.stat_reduction)))
 
 	H.adjust_skill_exp_multiplier(initial(B.granted_skill), -initial(B.xp_multiplier))
+	return ..()
 
 /datum/backstory
 	/// The name of the backstory shown to players
@@ -117,19 +120,21 @@
 	var/stat_penalty
 	/// How much to reduce the stat
 	var/stat_reduction = 1
+	///ammount we give
+	var/amount = 10
 	///what we clamp to
 	var/clamp = 60
 	///how much of an xp multiplier we add
 	var/xp_multiplier = 0.2
 
 	/// List of allowed ages (empty = all allowed)
-	var/list/allowed_ages = list()
+	var/list/allowed_ages
 	/// List of blocked ages
-	var/list/blocked_ages = list()
+	var/list/blocked_ages
 	/// List of allowed species (empty = all allowed)
-	var/list/allowed_species = list()
+	var/list/allowed_species
 	/// List of blocked species
-	var/list/blocked_species = list()
+	var/list/blocked_species
 
 
 /datum/backstory/proc/is_available(datum/preferences/prefs)
@@ -137,15 +142,15 @@
 		return TRUE
 
 	// Check age restrictions
-	if(length(allowed_ages) && !(prefs.age in allowed_ages))
+	if(length(allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in allowed_ages))
 		return FALSE
-	if(prefs.age in blocked_ages)
+	if(length(blocked_ages) && (prefs.read_preference(/datum/preference/choiced/age) in blocked_ages))
 		return FALSE
 
 	// Check species restrictions
 	if(length(allowed_species) && !(prefs.pref_species in allowed_species))
 		return FALSE
-	if(prefs.pref_species in blocked_species)
+	if(length(blocked_species) && (prefs.pref_species in blocked_species))
 		return FALSE
 
 	return TRUE
@@ -153,6 +158,7 @@
 /datum/backstory/combat
 	abstract_type = /datum/backstory/combat
 	desc = "A combat-focused background."
+	amount = 20
 	clamp = 20
 	xp_multiplier = 0.1
 

@@ -6,7 +6,7 @@
 	var/mob/living/basic_pawn = controller.pawn
 	if(!istype(basic_pawn) || basic_pawn.stat) // Can't act dead if you're dead
 		return
-	basic_pawn.emote("deathgasp", intentional=FALSE)
+	basic_pawn.emote("deathgasp", intentional = FALSE)
 	ADD_TRAIT(basic_pawn, TRAIT_FAKEDEATH, "basic_death")
 	basic_pawn.look_dead()
 

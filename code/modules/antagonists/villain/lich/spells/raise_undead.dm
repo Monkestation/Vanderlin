@@ -4,16 +4,42 @@
 	button_icon_state = "raiseskele"
 	sound = 'sound/magic/magnet.ogg'
 
-	attunements = list(
-		/datum/attunement/dark = 0.4,
-		/datum/attunement/death = 1,
-	)
+	required_form = FORM_DEATH
+	required_technique = TECHNIQUE_SUMMONING
+	required_level = 12
 
 	charge_time = 6 SECONDS
 	charge_drain = 1
 	charge_slowdown = 0.3
 	cooldown_time = 30 SECONDS
 	spell_cost = 40
+
+	var/max_summons = 30
+	var/list/conjured_mobs = list()
+	var/recoil_energy_floor = 200
+	var/recoil_severity = CONJURE_RECOIL_LIGHT
+	var/recoil_stamina_only = FALSE
+
+/datum/action/cooldown/spell/raise_undead/Destroy()
+	for(var/mob/living/M as anything in conjured_mobs.Copy())
+		if(!QDELETED(M))
+			qdel(M)
+	conjured_mobs.Cut()
+	return ..()
+
+/datum/action/cooldown/spell/raise_undead/proc/remove_conjure(mob/living/summoned)
+	SIGNAL_HANDLER
+	conjured_mobs -= summoned
+
+/datum/action/cooldown/spell/raise_undead/proc/register_minion(mob/living/minion, mob/living/user)
+	var/mob/living/last = conjured_mobs[length(conjured_mobs)]
+	if(!QDELETED(last))
+		qdel(last)
+	conjured_mobs.len--
+
+	conjured_mobs += minion
+	RegisterSignal(minion, COMSIG_QDELETING, PROC_REF(remove_conjure))
+	minion.AddComponent(/datum/component/conjured_minion, user, recoil_energy_floor, recoil_severity, recoil_stamina_only)
 
 /datum/action/cooldown/spell/raise_undead/is_valid_target(atom/cast_on)
 	. = ..()
@@ -48,6 +74,7 @@
 			to_chat(cast_on, span_danger("You rise as a minion."))
 			cast_on.turn_to_minion(owner, cast_on.ckey)
 			cast_on.visible_message(span_warning("[cast_on.real_name]'s eyes light up with an evil glow."), runechat_message = TRUE)
+			register_minion(cast_on, owner)
 			return
 		else
 			to_chat(cast_on, span_danger("Another soul will take over."))
@@ -60,6 +87,8 @@
 	else
 		cast_on.turn_to_minion(owner)
 		cast_on.visible_message(span_warning("[cast_on.real_name]'s eyes light up with a weak glow."), runechat_message = TRUE)
+
+	register_minion(cast_on, owner)
 
 /mob/living/carbon/human/proc/turn_to_minion(mob/living/carbon/human/master, ckey)
 	if(!master)
@@ -83,7 +112,6 @@
 	mind.current.job = null
 	mind.add_antag_datum(/datum/antagonist/skeleton)
 
-	dna.species.species_traits |= NOBLOOD
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()
 	dna.species.soundpack_f = new /datum/voicepack/skeleton()
 
@@ -100,27 +128,36 @@
 	copy_known_languages_from(master, TRUE)
 	mob_biotypes = MOB_UNDEAD
 	faction = list(FACTION_UNDEAD)
-	ambushable = FALSE
-	candodge = FALSE
+
+	add_traits(list(TRAIT_NOMOOD, \
+		TRAIT_NOHUNGER, \
+		TRAIT_NOBREATH, \
+		TRAIT_NOHYGIENE, \
+		TRAIT_NOPAIN, \
+		TRAIT_SLEEPIMMUNE, \
+		TRAIT_EASYDISMEMBER, \
+		TRAIT_TOXIMMUNE, \
+		TRAIT_LIMBATTACHMENT, \
+		TRAIT_CRITICAL_WEAKNESS, \
+		TRAIT_NO_ORGAN_PROCESS, \
+		TRAIT_NOBLOOD, \
+		TRAIT_NOENERGY, \
+		TRAIT_SHOCKIMMUNE, \
+		TRAIT_NOAMBUSH, \
+		TRAIT_UNDODGING)
+		, SPECIES_TRAIT)
 
 	skeletonize(FALSE)
+	fully_heal(HEAL_TRAUMAS)
+
 	skele_look()
 	grant_undead_eyes()
 
+	for(var/obj/item/organ/organ as anything in internal_organs)
+		organ.regenerate_organ()
+
 	if(length(quirks))
 		clear_quirks()
-
-	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_EASYDISMEMBER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_LIMBATTACHMENT, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOENERGY, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOPAIN, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_NOSLEEP, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_SHOCKIMMUNE, TRAIT_GENERIC)
-	ADD_TRAIT(src, TRAIT_CRITICAL_WEAKNESS, TRAIT_GENERIC)
 
 	update_body()
 

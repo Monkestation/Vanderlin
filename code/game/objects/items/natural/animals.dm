@@ -13,6 +13,25 @@
 	sellprice = 5
 	item_weight = 350 GRAMS
 
+/obj/item/natural/hide/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/paper/scroll))
+		return ..()
+
+	if(!isturf(loc) || !locate(/obj/structure/table) in loc)
+		to_chat(user, "<span class='warning'>You need to put the [src] on a table to work on it.</span>")
+		return ITEM_INTERACT_BLOCKING
+
+	var/crafttime = max(0, 100 - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) * 5)
+	if(!do_after(user, crafttime, target = src))
+		return ITEM_INTERACT_BLOCKING
+
+	playsound(src, 'sound/items/book_close.ogg', 100, TRUE)
+	to_chat(user, span_notice("I add the first few pages to the leather cover..."))
+	new /obj/item/spellbook_unfinished(loc)
+	qdel(tool)
+	qdel(src)
+	return ITEM_INTERACT_SUCCESS
+
 /obj/item/natural/hide/cured
 	name = "cured leather"
 	icon_state = "leather"
@@ -56,43 +75,52 @@
 	item_weight = 300 GRAMS
 
 /obj/item/natural/fur/gote
+	name = "gote fur"
 	desc = "Pelt from a gote."
 	icon_state = "pelt_gote"
 
 /obj/item/natural/fur/volf
+	name = "volf fur"
 	desc = "Pelt from a volf."
 	icon_state = "pelt_volf"
 
 /obj/item/natural/fur/mole
+	name = "mole fur"
 	desc = "Pelt from a mole."
 	icon_state = "pelt_mole"
 
 /obj/item/natural/fur/rous
+	name = "rous fur"
 	desc = "Pelt from a rous."
 	icon_state = "pelt_rous"
 
 /obj/item/natural/fur/cabbit
+	name = "cabbit fur"
 	desc = "Pelt from a cabbit."
 	icon_state = "wool2"
 
 /obj/item/natural/fur/direbear
+	name = "direbear fur"
 	desc = "fur from one of Dendor's mightiest creachers."
 	icon_state = "pelt_direbear"
 	color = "#33302b"
 	sellprice = 28
 
 /obj/item/natural/fur/fox
+	name = "venard fur"
 	desc = "Fur from a venard."
 	icon_state = "pelt_fox"
 	color = null
 
 /obj/item/natural/fur/raccoon
+	name = "raccoon fur"
 	desc = "Fur from a raccoon."
 	icon_state = "pelt_raccoon"
 	color = null
 	sellprice = 12
 
 /obj/item/natural/fur/bobcat
+	name = "bobcat fur"
 	desc = "Fur from a lynx."
 	icon_state = "pelt_bobcat"
 	color = null
@@ -274,20 +302,30 @@
 /obj/item/natural/saddle/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
 
-/obj/item/natural/saddle/attack(mob/living/target, mob/living/carbon/human/user, list/modifiers)
-	if(istype(target, /mob/living/simple_animal))
-		var/mob/living/simple_animal/S = target
-		if(S.can_saddle && !S.ssaddle)
-			if(!target.has_buckled_mobs())
-				user.visible_message("<span class='warning'>[user] tries to saddle [target]...</span>")
-				if(do_after(user, 4 SECONDS, target))
-					playsound(src, 'sound/foley/saddledismount.ogg', 100, FALSE)
-					user.dropItemToGround(src)
-					S.ssaddle = src
-					src.forceMove(S)
-					S.update_appearance(UPDATE_OVERLAYS)
-		return
-	..()
+/obj/item/natural/saddle/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!istype(interacting_with, /mob/living/simple_animal))
+		return NONE
+
+	var/mob/living/simple_animal/simple = interacting_with
+
+	if(!simple.can_saddle || simple.ssaddle)
+		return ITEM_INTERACT_BLOCKING
+
+	if(simple.has_buckled_mobs())
+		return ITEM_INTERACT_BLOCKING
+
+	user.visible_message(span_warning("[user] tries to saddle [simple]..."))
+
+	if(!do_after(user, 4 SECONDS, simple))
+		return ITEM_INTERACT_BLOCKING
+
+	playsound(src, 'sound/foley/saddledismount.ogg', 100, FALSE)
+	user.dropItemToGround(src)
+	simple.ssaddle = src
+	forceMove(simple)
+	simple.update_appearance(UPDATE_OVERLAYS)
+
+	return ITEM_INTERACT_SUCCESS
 
 /mob/living/simple_animal/onbite(mob/living/user)
 	. = ..()

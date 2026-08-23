@@ -29,16 +29,15 @@
 		/obj/item/dye_pack/mage,
 	)
 
-/obj/structure/dye_bin/deconstruct(disassembled)
+/obj/structure/dye_bin/atom_deconstruct(disassembled)
 	visible_message( \
 		span_warning("[src] falls over, spilling out [p_their()] contents!"), \
 		null, \
 		span_warning("Something was knocked over!")
 	)
-	new /obj/effect/decal/cleanable/dyes(get_turf(src))
+	new /obj/effect/decal/cleanable/dyes(loc)
 	var/obj/item/bin/I = new(loc)
 	I.kover = TRUE
-	return ..()
 
 /obj/structure/dye_bin/Initialize(mapload, obj/item/dye_pack/inserted_pack)
 	. = ..()

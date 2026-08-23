@@ -3,7 +3,7 @@
 		STAT_PERCEPTION = 1,
 		STAT_SPEED = 2,
 		STAT_ENDURANCE = -1,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 36,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/athletics = 30,
@@ -29,7 +29,7 @@
 
 
 	spells = list(
-		/datum/action/cooldown/spell/vicious_mockery,
+		/datum/action/cooldown/spell/projectile/vicious_mockery,
 		// /datum/action/cooldown/spell/bardic_inspiration
 	)
 
@@ -43,7 +43,7 @@
 /datum/job/advclass/mercenary/sworddancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	spawned.inspiration = new /datum/inspiration(spawned)
+	spawned.grant_inspiration()
 	spawned.merctype = 9
 
 /datum/job/advclass/mercenary/sworddancer/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
@@ -65,8 +65,8 @@
 /datum/outfit/mercenary/sworddancer
 	name = "Sword Dancer (Mercenary)"
 	head = /obj/item/clothing/head/bardhat
-	shoes = /obj/item/clothing/shoes/boots
-	pants = /obj/item/clothing/pants/tights/colored/random
+	shoes = /obj/item/clothing/shoes/boots/darkboots
+	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/shirt/tunic/noblecoat
 	gloves = /obj/item/clothing/gloves/fingerless
 	belt = /obj/item/storage/belt/leather/mercenary

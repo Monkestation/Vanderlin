@@ -7,12 +7,11 @@
 	color = "#1f8016"
 	metabolization_rate = 2.5 * REAGENTS_METABOLISM  //0.5u/second
 
-/datum/reagent/eldritch/on_mob_life(mob/living/carbon/drinker)
+/datum/reagent/eldritch/on_mob_life(mob/living/carbon/drinker, efficiency)
 	drinker.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3 * REM, 150)
 	drinker.adjustToxLoss(2 * REM, FALSE)
 	drinker.adjustFireLoss(2 * REM, FALSE)
 	drinker.adjustOxyLoss(2 * REM, FALSE)
-	drinker.adjustBruteLoss(2 * REM, FALSE)
 	..()
 	return TRUE
 
@@ -76,10 +75,7 @@
 	button_icon_state = "eldritch_blast"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	point_cost = 1
-	attunements = list(
-		/datum/attunement/dark = 0.3,
-	)
+	required_form = FORM_DEATH
 
 	invocation = "Eldritch blast!"
 	invocation_type = INVOCATION_SHOUT

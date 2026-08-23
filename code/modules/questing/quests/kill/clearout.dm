@@ -1,5 +1,8 @@
 /datum/quest/kill/clearout
 	quest_type = QUEST_CLEAR_OUT
+	quest_difficulty = QUEST_DIFFICULTY_MEDIUM
+	minimum_payout = QUEST_REWARD_MEDIUM_LOW
+	maximum_payout = QUEST_REWARD_MEDIUM_HIGH
 	mob_types_to_spawn = QUEST_KILL_MEDIUM_LIST
 	count_min = 3
 	count_max = 6

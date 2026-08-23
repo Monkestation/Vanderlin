@@ -25,11 +25,11 @@
 	if(!_source)
 		return
 	hosted_source = _source
-	RegisterSignal(hosted_source, COMSIG_PARENT_QDELETING, PROC_REF(early_end))
+	RegisterSignal(hosted_source, COMSIG_QDELETING, PROC_REF(early_end))
 
 /datum/orderless_slapcraft/Destroy(force)
 	. = ..()
-	UnregisterSignal(hosted_source, COMSIG_PARENT_QDELETING)
+	UnregisterSignal(hosted_source, COMSIG_QDELETING)
 	hosted_source?.in_progress_slapcraft = null
 	QDEL_LIST(atoms_to_pass)
 
@@ -65,7 +65,7 @@
 	if(HAS_TRAIT(user, TRAIT_QUICK_HANDS))
 		modified_action_time *= 0.9
 
-	for(var/requirement as anything in requirements)
+	for(var/requirement in requirements)
 		if(islist(requirement))
 			for(var/listed_item in requirement)
 				if(!istype(attacking_item, listed_item))

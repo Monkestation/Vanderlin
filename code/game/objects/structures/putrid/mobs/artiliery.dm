@@ -2,7 +2,7 @@
 	icon_state = "artiliery"
 	icon_living = "artiliery"
 	icon_dead = "artiliery_dead"
-	icon = 'icons/obj/cellular/putrid_large.dmi'
+	icon = 'icons/obj/cellular/putrid_small.dmi'
 
 	ranged = TRUE
 	projectiletype = /obj/projectile/meatbullet

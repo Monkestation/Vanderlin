@@ -93,66 +93,17 @@
 	if(!client)
 		return
 	SEND_SIGNAL(src, COMSIG_FOV_SHOW)
-	var/atom/movable/screen/plane_master/game_world_fov_hidden/PM = locate(/atom/movable/screen/plane_master/game_world_fov_hidden) in client.screen
-	PM?.backdrop(src)
 
 /mob/proc/hide_cone()
 	if(!client)
 		return
 	SEND_SIGNAL(src, COMSIG_FOV_HIDE)
-	var/atom/movable/screen/plane_master/game_world_fov_hidden/PM = locate(/atom/movable/screen/plane_master/game_world_fov_hidden) in client.screen
-	PM?.backdrop(src)
 
 /mob/proc/update_fov_angles()
-	fovangle = initial(fovangle)
-	if(ishuman(src) && fovangle)
-		var/mob/living/carbon/human/H = src
-		if(H.head?.block2add)
-			fovangle |= H.head.block2add
-		if(H.wear_mask?.block2add)
-			fovangle |= H.wear_mask.block2add
-		if(GET_MOB_ATTRIBUTE_VALUE(H, STAT_PERCEPTION) < 5)
-			fovangle |= FOV_LEFT
-			fovangle |= FOV_RIGHT
-		else
-			if(HAS_TRAIT(src, TRAIT_CYCLOPS_LEFT))
-				fovangle |= FOV_LEFT
-			if(HAS_TRAIT(src, TRAIT_CYCLOPS_RIGHT))
-				fovangle |= FOV_RIGHT
+	return
 
-	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
-	if(!fov)
-		return
+/atom/movable/screen/fullscreen/impaired/left
+	icon_state = "impairedoverlay_left"
 
-	if(!(fovangle & FOV_DEFAULT))
-		fov.fov_holder?.alpha = 0
-		return
-
-	var/new_shadow_angle
-	var/new_angle
-
-	if(fovangle & FOV_RIGHT)
-		if(fovangle & FOV_LEFT)
-			new_shadow_angle = FOV_270_DEGREES
-			new_angle = 0
-		else if(fovangle & FOV_BEHIND)
-			new_shadow_angle = FOV_180PLUS45_DEGREES
-			new_angle = -45
-		else
-			new_shadow_angle = FOV_180PLUS45_DEGREES
-			new_angle = 45
-	else if(fovangle & FOV_LEFT)
-		if(fovangle & FOV_BEHIND)
-			new_shadow_angle = FOV_180MINUS45_DEGREES
-			new_angle = 45
-		else
-			new_shadow_angle = FOV_180MINUS45_DEGREES
-			new_angle = -45
-	else if(fovangle & FOV_BEHIND)
-		new_shadow_angle = FOV_180_DEGREES
-		new_angle = 0
-	else
-		new_shadow_angle = FOV_90_DEGREES
-		new_angle = 0
-
-	fov.generate_fov_holder(src, new_shadow_angle, new_angle, register = FALSE, delete_holder = TRUE)
+/atom/movable/screen/fullscreen/impaired/right
+	icon_state = "impairedoverlay_right"

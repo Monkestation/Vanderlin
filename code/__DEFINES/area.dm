@@ -15,3 +15,5 @@
 #define UNIQUE_AREA (1 << 6)
 /// Whether or not this area falls as "bog territory, a cheaper alternative to a bunch of typechecks."
 #define BOGGY_AREA (1 << 7)
+/// If people are allowed to suicide in it. Mostly for OOC stuff like minigames
+#define BLOCK_SUICIDE (1<<8)

@@ -34,7 +34,7 @@ And it also helps for the character set panel
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
 		TRAIT_STEELHEARTED,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_VAMPMANSION,
 		TRAIT_VAMP_DREAMS,
 		TRAIT_NOAMBUSH,
@@ -105,7 +105,7 @@ And it also helps for the character set panel
 /datum/clan/proc/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
 	SHOULD_CALL_PARENT(TRUE)
 	initialize_rune_words()
-	RegisterSignal(H, COMSIG_PARENT_QDELETING, PROC_REF(on_lose))
+	RegisterSignal(H, COMSIG_QDELETING, PROC_REF(on_lose))
 	RegisterSignal(H, COMSIG_MOB_EXAMINATE_CARBON, PROC_REF(examine_target))
 
 	var/datum/action/clan_menu/menu_action = new /datum/action/clan_menu(H.mind)
@@ -256,7 +256,7 @@ And it also helps for the character set panel
 
 
 /datum/clan/proc/disable_covens(mob/living/carbon/human/vampire)
-	for(var/coven as anything in vampire.covens)
+	for(var/coven in vampire.covens)
 		var/datum/coven/real_coven = vampire.covens[coven]
 		if(real_coven?.coven_action?.active)
 			real_coven.current_power?.deactivate()
@@ -272,7 +272,7 @@ And it also helps for the character set panel
  */
 /datum/clan/proc/on_lose(mob/living/carbon/human/vampire)
 	SHOULD_CALL_PARENT(TRUE)
-	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_PARENT_QDELETING, COMSIG_MOB_EXAMINATE_CARBON))
+	UnregisterSignal(vampire, list(COMSIG_HUMAN_LIFE, COMSIG_QDELETING, COMSIG_MOB_EXAMINATE_CARBON))
 
 	// Remove unique Clan feature traits
 	for (var/trait in clane_traits)
@@ -366,8 +366,7 @@ And it also helps for the character set panel
 
 /datum/clan/proc/examine_target(mob/living/user, mob/living/carbon/examined, list/P, list/examine_contents)
 	if(user != examined) // no need to beat yourself up over it buddy
-		var/mob/living/carbon/human/H = examined
-		if(istype(H) && H.virginity && ((blood_preference|blood_disgust) & BLOOD_PREFERENCE_VIRGIN))
+		if(HAS_TRAIT(examined, TRAIT_VIRGIN) && ((blood_preference|blood_disgust) & BLOOD_PREFERENCE_VIRGIN))
 			LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_boldred("[P[THEYRE]] a virgin!"))
 	var/clan_examine = examined.get_clan_hierarchy_examine(user)
 	if(clan_examine)
@@ -533,7 +532,8 @@ And it also helps for the character set panel
 	. = ..()
 	if(.)
 		owner.add_stress(/datum/stress_event/bad_blood)
-		owner.adjustBruteLoss(5)
+		var/obj/item/organ/stomach = owner.getorganslot(ORGAN_SLOT_STOMACH)
+		stomach?.take_damage(5)
 
 /datum/status_effect/debuff/blood_disgust/on_remove()
 	. = ..()

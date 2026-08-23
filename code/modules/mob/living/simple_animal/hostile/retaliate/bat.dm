@@ -34,21 +34,7 @@
 //this is literally a shapeshift and ai can't actually use it
 	ai_controller = /datum/ai_controller/bat
 
-
 /mob/living/simple_animal/hostile/retaliate/bat/Initialize()
 	. = ..()
-	add_verb(src, list(/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_up, /mob/living/simple_animal/hostile/retaliate/bat/proc/bat_down))
-
-/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_up()
-	set category = "RoleUnique.Vampire Bat"
-	set name = "Move Up"
-
-	if(zMove(UP, TRUE))
-		to_chat(src, "<span class='notice'>I fly upwards.</span>")
-
-/mob/living/simple_animal/hostile/retaliate/bat/proc/bat_down()
-	set category = "RoleUnique.Vampire Bat"
-	set name = "Move Down"
-
-	if(zMove(DOWN, TRUE))
-		to_chat(src, "<span class='notice'>I fly down.</span>")
+	AddElement(/datum/element/simple_flying)
+	AddElement(/datum/element/ai_retaliate)

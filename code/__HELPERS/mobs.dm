@@ -27,8 +27,6 @@
 			. += "000"
 
 /proc/random_underwear(gender)
-	if(!GLOB.underwear_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/underwear, GLOB.underwear_list, GLOB.underwear_m, GLOB.underwear_f)
 	switch(gender)
 		if(MALE)
 			return pick(GLOB.underwear_m)
@@ -38,8 +36,6 @@
 			return pick(GLOB.underwear_list)
 
 /proc/random_undershirt(gender)
-	if(!GLOB.undershirt_list.len)
-		init_sprite_accessory_subtypes(/datum/sprite_accessory/undershirt, GLOB.undershirt_list, GLOB.undershirt_m, GLOB.undershirt_f)
 	switch(gender)
 		if(MALE)
 			return pick(GLOB.undershirt_m)
@@ -238,6 +234,7 @@ GLOBAL_LIST_INIT(oldhc, sortList(
 
 /mob/proc/do_after_coefficent() // This gets added to the delay on a do_after, default 1
 	. = 1
+	. *= cached_multiplicative_actions_slowdown
 	return
 
 /// Returns the total amount of do_afters this mob is taking part in
@@ -339,15 +336,15 @@ GLOBAL_LIST_INIT(oldhc, sortList(
 
 		if(M.client?.prefs)
 			var/datum/preferences/prefs = M.client?.prefs
-			chat_toggles = prefs.chat_toggles
-			toggles = prefs.toggles
+			chat_toggles = prefs.read_preference(/datum/preference/bitwise/chat_toggles)
+			toggles = prefs.read_preference(/datum/preference/bitwise/toggles)
 			ignoring = prefs.ignoring
 
 		var/override = FALSE
 		if(M.client.holder && (chat_toggles & CHAT_DEAD))
 			override = TRUE
 
-		if(HAS_TRAIT(M, TRAIT_SIXTHSENSE))
+		if(HAS_TRAIT(M, TRAIT_GHOSTEARS))
 			override = TRUE
 
 		if(isnewplayer(M) && !override)
@@ -407,6 +404,19 @@ GLOBAL_LIST_INIT(oldhc, sortList(
 		chosen = pick(mob_spawn_meancritters)
 	var/mob/living/simple_animal/C = new chosen(spawn_location)
 	return C
+
+/proc/passtable_on(target, source)
+	var/mob/living/L = target
+	if (!HAS_TRAIT(L, TRAIT_PASSTABLE) && L.pass_flags & PASSTABLE)
+		ADD_TRAIT(L, TRAIT_PASSTABLE, INNATE_TRAIT)
+	ADD_TRAIT(L, TRAIT_PASSTABLE, source)
+	L.pass_flags |= PASSTABLE
+
+/proc/passtable_off(target, source)
+	var/mob/living/L = target
+	REMOVE_TRAIT(L, TRAIT_PASSTABLE, source)
+	if(!HAS_TRAIT(L, TRAIT_PASSTABLE))
+		L.pass_flags &= ~PASSTABLE
 
 /proc/dance_rotate(atom/movable/AM, datum/callback/callperrotate, set_original_dir=FALSE)
 	set waitfor = FALSE

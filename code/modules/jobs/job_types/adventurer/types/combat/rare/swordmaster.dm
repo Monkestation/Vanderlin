@@ -30,6 +30,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 
 	languages = list(/datum/language/newpsydonic)

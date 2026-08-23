@@ -31,6 +31,8 @@
 #define MOB_SHARED_COOLDOWN_2 (1<<1)
 #define MOB_SHARED_COOLDOWN_3 (1<<2)
 
+#define FIREBALL_SHARED_COOLDOWN (1<<3)
+
 //TIMER COOLDOWN MACROS
 
 #define COMSIG_CD_STOP(cd_index) "cooldown_[cd_index]"
@@ -40,6 +42,8 @@
 
 /// Checks if a timer based cooldown is NOT finished.
 #define TIMER_COOLDOWN_RUNNING(cd_source, cd_index) LAZYACCESS(cd_source.cooldowns, cd_index)
+
+#define TIMER_COOLDOWN_CHECK(cd_source, cd_index) LAZYACCESS(cd_source.cooldowns, cd_index)
 
 /// Checks if a timer based cooldown is finished.
 #define TIMER_COOLDOWN_FINISHED(cd_source, cd_index) (!TIMER_COOLDOWN_RUNNING(cd_source, cd_index))
@@ -84,3 +88,5 @@
 #define DODGING_PENALTY_COOLDOWN_DURATION 0
 /// Cooldown before resetting the parrying penalty
 #define PARRYING_PENALTY_COOLDOWN_DURATION 4 SECONDS
+
+#define COOLDOWN_YAWN_PROPAGATION "yawn_propagation_cooldown"

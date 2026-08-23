@@ -36,13 +36,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	. = ..()
 	if(!istype(examined))
 		return
-	if(NOBLOOD in examined.dna?.species?.species_traits)
+	if(!CAN_HAVE_BLOOD(examined))
 		return
+	var/cached_blood_volume = examined.get_blood_volume()
 	var/vitae = 0
 	var/datum/blood_type/BT = examined.get_blood_type()
 	if(istype(BT) && BT.vitae)
-		vitae = round(examined.blood_volume * BT.vitae)
-	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(examined.blood_volume)] ([vitae] VT)"))
+		vitae = round(cached_blood_volume * BT.vitae)
+	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
 
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"
@@ -53,9 +54,15 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	default_clan = /datum/clan/caitiff
 
 /datum/antagonist/vampire/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+	if(!isliving(examiner))
+		return
+	var/mob/living/the_examiner = examiner
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
 		examiner.add_stress(/datum/stress_event/its_the_fucking_daewalker)
 		return span_phobia("THE DIABLERIST OF THE SUN QUEEN!!")
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker) && !istype(the_examiner?.clan, /datum/clan/nitewalker))
+		examiner.add_stress(/datum/stress_event/its_the_nitewalker)
+		return span_phobia("THE DIABLERIST OF THE MOON PRINCE!!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Kaine's firstborn!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lords_spawn))

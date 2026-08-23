@@ -1,6 +1,9 @@
-/datum/hud/spirit/New(mob/living/carbon/monkey/owner)
+/datum/hud/spirit/New(mob/living/carbon/owner)
 	..()
 	var/atom/movable/screen/using
+
+	backhudl = new /atom/movable/screen/backhudl/empty_border(null, src)
+	static_inventory += backhudl
 
 	action_intent = new /atom/movable/screen/act_intent/rogintent(null, src)
 	action_intent.icon = ui_style
@@ -38,7 +41,7 @@
 /datum/hud/spirit/persistent_inventory_update()
 	if(!mymob)
 		return
-	var/mob/living/carbon/monkey/M = mymob
+	var/mob/living/carbon/M = mymob
 
 	if(hud_version != HUD_STYLE_NOHUD)
 		for(var/obj/item/I in M.held_items)

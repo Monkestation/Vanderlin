@@ -1,5 +1,14 @@
 // This shit sucks ass
 
+/obj/structure/spider
+	var/list/static_debris
+
+/obj/structure/spider/atom_deconstruct(disassembled)
+	var/atom/drop_loc = drop_location()
+	for(var/I in static_debris)
+		for(var/i in 1 to static_debris[I])
+			new I(drop_loc)
+
 /*	..................   Spider stuff   ................... */
 /obj/structure/spider/attacked_by(obj/item/I, mob/living/user) //Snipping action for webs, scissors turning webs into silk fast!
 	if(user.used_intent.type != /datum/intent/snip)
@@ -51,9 +60,7 @@
 	dir = pick(GLOB.cardinals)
 	alpha = rand(80,109)
 	switch(pick(1,2))
-		if (1)
-			static_debris = FALSE
-		if (2)
+		if(1)
 			static_debris = list(/obj/item/natural/silk = 1)
 	. = ..()
 
@@ -83,12 +90,12 @@
 			static_debris = list(/obj/item/natural/silk = 2, /obj/item/natural/stone = 1)
 			icon_state = pick("cocoon1","cocoon2")
 
-/obj/structure/spider/cocoon/deconstruct(disassembled)
-	. = ..()
+/obj/structure/spider/cocoon/Destroy()
 	var/turf/T = get_turf(src)
-	visible_message("<span class='warning'>\The [src] splits open.</span>")
+	src.visible_message(span_warning("\The [src] splits open."))
 	for(var/atom/movable/A in contents)
 		A.forceMove(T)
+	return ..()
 
 /obj/structure/spider/cocoon/container_resist(mob/living/user)
 	var/breakout_time = 1 MINUTES

@@ -75,9 +75,9 @@
 				pipe_turf = GET_TURF_BELOW(pipe_turf)
 		if(istype(pipe_turf, /turf/open/water))
 			var/turf/open/water/water = pipe_turf
-			if(water.mapped)
+			if(water.volume_status == WATER_VOLUME_INFINITE)
 				return
-			water.water_volume = min(water.water_volume + taking_pressure, water.water_maximum)
+			water.water_volume = min(water.water_volume + taking_pressure, water.water_volume_maximum)
 
 		for(var/mob/living/mob in pipe_turf.contents)
 			if(!splash_holder)

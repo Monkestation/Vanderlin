@@ -68,7 +68,7 @@
 	for(var/filter_name in filters_handled)
 		filters_handled[filter_name]["x"] = rand(-variation_x, variation_x)
 		filters_handled[filter_name]["y"] = rand(-variation_y, variation_y)
-	update_filters(4 SECONDS)
+	handle_filters(4 SECONDS)
 
 /datum/status_effect/incapacitating/concussion/proc/end_animation()
 	var/atom/movable/screen/plane_master/rendering_plate/old_filter_plate = filter_plate
@@ -79,7 +79,7 @@
 		filters_handled[filter_name]["y"] = 0
 		filters_handled[filter_name]["color"] = kill_color
 		old_filters_handled += filter_name
-	update_filters(4 SECONDS)
+	handle_filters(4 SECONDS)
 	//Sleep call ensures the ending looks smooth no matter what, do not change this to a timer
 	sleep(4 SECONDS)
 	//KILL the filters now
@@ -87,7 +87,7 @@
 		for(var/filter_name in old_filters_handled)
 			old_filter_plate.remove_filter(filter_name)
 
-/datum/status_effect/incapacitating/concussion/proc/update_filters(time = 4 SECONDS)
+/datum/status_effect/incapacitating/concussion/proc/handle_filters(time = 4 SECONDS)
 	for(var/filter_name in filters_handled)
 		var/list/filter_params = filters_handled[filter_name].Copy()
 		filter_params -= "type"

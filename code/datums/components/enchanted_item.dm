@@ -43,11 +43,11 @@
 	if(n_current_user)
 		current_user = WEAKREF(n_current_user)
 
-	RegisterSignal(parent, COMSIG_PARENT_EXAMINE, PROC_REF(on_examine))
+	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 	RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
 	RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 	RegisterSignal(parent, COMSIG_ITEM_AFTERATTACK, PROC_REF(item_afterattack))
-	RegisterSignal(parent, COMSIG_PARENT_QDELETING, PROC_REF(clean_up))
+	RegisterSignal(parent, COMSIG_QDELETING, PROC_REF(clean_up))
 
 	var/obj/item/weapon/I = parent
 	switch(enchant_type)
