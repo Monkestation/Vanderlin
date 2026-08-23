@@ -3702,9 +3702,6 @@
 	},
 /turf/open/water/bath,
 /area/ship/middeck)
-"yd" = (
-/turf/open,
-/area/outdoors/beach)
 "yh" = (
 /obj/structure/table/wood{
 	icon_state = "longtable";
@@ -4492,12 +4489,6 @@
 /obj/item/candle/skull/lit,
 /turf/open/floor/hay,
 /area/ship/topdeck)
-"Eg" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/turf/open,
-/area/outdoors/beach)
 "Eh" = (
 /obj/structure/bars{
 	icon_state = "barsbent";
@@ -58940,7 +58931,7 @@ Sh
 Sh
 GH
 tL
-Eg
+Md
 BC
 BC
 BC
@@ -59142,7 +59133,7 @@ pV
 Es
 Tc
 tL
-yd
+BC
 BC
 BC
 BC
@@ -145805,9 +145796,9 @@ BC
 BC
 BC
 BC
-yd
-yd
-yd
+BC
+BC
+BC
 BC
 BC
 BC
@@ -146007,7 +145998,7 @@ BC
 BC
 BC
 BC
-yd
+BC
 BC
 BC
 BC
@@ -146209,7 +146200,7 @@ BC
 BC
 BC
 BC
-yd
+BC
 BC
 BC
 BC
@@ -146411,7 +146402,7 @@ BC
 BC
 BC
 BC
-yd
+BC
 BC
 BC
 BC
@@ -146613,7 +146604,7 @@ BC
 BC
 BC
 BC
-yd
+BC
 BC
 BC
 BC
@@ -146815,7 +146806,7 @@ BC
 BC
 BC
 BC
-yd
+BC
 BC
 BC
 BC
@@ -147017,7 +147008,7 @@ BC
 BC
 BC
 BC
-yd
+BC
 BC
 BC
 BC
@@ -147219,7 +147210,7 @@ BC
 BC
 BC
 BC
-yd
+BC
 BC
 BC
 BC
