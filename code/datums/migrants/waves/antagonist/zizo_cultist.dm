@@ -42,8 +42,7 @@
 
 /datum/outfit/zizo_cultist
 	name = "Zizo's Ascendant"
-	head = /obj/item/clothing/head/helmet/skullcap/cult
-	mask = /obj/item/clothing/face/shepherd/shadowmask
+	head = /obj/item/clothing/head/helmet/visored/zizo
 	neck = /obj/item/clothing/neck/chaincoif
 	shirt = /obj/item/clothing/shirt/shadowshirt
 	armor = /obj/item/clothing/armor/plate/full/zizo
@@ -100,7 +99,6 @@
 
 /datum/outfit/zizo_cultist_lesser
 	name = "Ascendant Follower"
-	head = /obj/item/clothing/head/helmet/skullcap/cult
 	mask = /obj/item/clothing/face/shepherd/shadowmask
 	neck = /obj/item/clothing/neck/highcollier
 	shirt = /obj/item/clothing/armor/chainmail

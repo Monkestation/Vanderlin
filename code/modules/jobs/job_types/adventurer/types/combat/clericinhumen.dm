@@ -115,7 +115,7 @@
 				beltl = /obj/item/weapon/axe/boneaxe
 				beltr = /obj/item/weapon/axe/boneaxe
 			if(/datum/patron/inhumen/zizo)
-				head = /obj/item/clothing/head/helmet/skullcap/cult
+				head = /obj/item/clothing/head/helmet/skullcap
 				backr = /obj/item/weapon/shield/heater
 				beltl = /obj/item/weapon/sword/short/iron
 			if(/datum/patron/inhumen/matthios)
