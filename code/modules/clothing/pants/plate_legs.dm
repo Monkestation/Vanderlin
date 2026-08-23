@@ -88,6 +88,7 @@
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	smeltresult = /obj/item/ingot/avantyne
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 
 /obj/item/clothing/pants/platelegs/matthios

@@ -216,7 +216,8 @@
 			gloves = /obj/item/clothing/gloves/plate/zizo
 			pants = /obj/item/clothing/pants/platelegs/zizo
 			shoes = /obj/item/clothing/shoes/boots/armor/zizo
-			backr = /obj/item/weapon/sword/long/greatsword/zizo
+			var/zizo_sword = pick(/obj/item/weapon/sword/long/zizo_longsword, /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser, /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword)
+			backr = zizo_sword
 		if(/datum/patron/inhumen/matthios)
 			head = /obj/item/clothing/head/helmet/heavy/matthios
 			armor = /obj/item/clothing/armor/plate/full/matthios
