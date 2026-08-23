@@ -59,19 +59,19 @@
 	. = ..()
 
 	var/static/list/selectablehat = list(
+		"Magus hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/magus,
+		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
 		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
 		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-		"Ominous hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/cult,
 	)
 	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "NECROMANCER")
 
 	var/static/list/selectablerobe = list(
+		"Magus robes" = /obj/item/clothing/shirt/robe/magus,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-		"Necromancer robes" = /obj/item/clothing/shirt/robe/necromancer
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "NECROMANCER")
 
