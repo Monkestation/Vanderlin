@@ -446,7 +446,7 @@
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord
 		if(3)
-			r_hand = /obj/item/weapon/whip/antique
+			r_hand = /obj/item/weapon/whip/bronze
 			l_hand = /obj/item/weapon/sword/short/iron
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord

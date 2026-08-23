@@ -112,12 +112,12 @@
 	. = ..()
 
 	var/static/list/selectableweapon = list(
-		"Sword" = pick(list(/obj/item/weapon/sword/iron, /obj/item/weapon/sword/scimitar/messer, /obj/item/weapon/sword/sabre/scythe)),
+		"Sword" = /obj/item/weapon/sword/iron,
 		"Axe" = /obj/item/weapon/axe/iron,
-		"Mace" = pick(list(/obj/item/weapon/mace/bludgeon, /obj/item/weapon/mace/spiked, /obj/item/weapon/hammer/sledgehammer)),
+		"Mace" = /obj/item/weapon/mace/spiked,
 		"Warhammer" = /obj/item/weapon/mace/warhammer,
 		"Spear" = /obj/item/weapon/polearm/spear,
-		"Flail" = pick(list(/obj/item/weapon/flail, /obj/item/weapon/flail/militia)),
+		"Flail" = /obj/item/weapon/flail,
 		"Great flail" = /obj/item/weapon/flail/peasant,
 		"Goedendag" = /obj/item/weapon/mace/goden,
 		"Great axe" = /obj/item/weapon/polearm/halberd/bardiche/woodcutter,
