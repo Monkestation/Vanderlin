@@ -1341,17 +1341,6 @@ GLOBAL_VAR_INIT(mobids, 1)
 	SEND_SIGNAL(src, COMSIG_MOB_GET_STATUS_TAB_ITEMS, .)
 	return .
 
-/mob/proc/do_game_over()
-	if(SSticker.current_state != GAME_STATE_FINISHED)
-		return
-	status_flags |= GODMODE
-	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, ROUNDSTART_TRAIT)
-	ai_controller?.set_ai_status(AI_STATUS_OFF)
-	if(client)
-		add_verb(client, /client/proc/lobbyooc)
-		add_verb(client, /client/proc/view_stats)
-		client.show_game_over()
-
 /mob/get_examine_name(mob/user, use_article=FALSE)
 	return use_article && article ? "[article] <EM>[real_name]</EM>" : "\a <EM>[real_name]</EM>"
 
