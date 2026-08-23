@@ -350,8 +350,6 @@
 	var/datum/alch_cauldron_recipe/found_recipe = recipe_result["recipe"]
 	var/batch_count = recipe_result["batches"]
 
-	essence_contents = list()
-
 	if(reagents)
 		var/in_cauldron = reagents.get_reagent_amount(/datum/reagent/water)
 		reagents.remove_reagent(/datum/reagent/water, in_cauldron)
@@ -362,7 +360,7 @@
 			scaled_reagents[reagent] = found_recipe.output_reagents[reagent] * batch_count
 		reagents.add_reagent_list(scaled_reagents)
 
-	if(found_recipe.output_items.len)
+	if(length(found_recipe.output_items))
 		for(var/itempath in found_recipe.output_items)
 			for(var/i = 1 to batch_count)
 				new itempath(get_turf(src))

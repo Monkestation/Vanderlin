@@ -44,7 +44,7 @@
 	)
 	isgoodguy = TRUE
 	chooses_name = FALSE
-	ascended = 4
+	ascension_level = 4
 	outfit = /datum/outfit/daewalker
 	patron = /datum/patron/divine/astrata
 	innate_traits = list(
@@ -193,7 +193,6 @@
 	wdefense = ULTMATE_PARRY
 	max_blade_int = 50000
 	max_integrity = 50000
-	randomize_blade_int = FALSE
 	resistance_flags = INDESTRUCTIBLE
 	sellprice = 0
 	slot_flags = 0 //scabbard only

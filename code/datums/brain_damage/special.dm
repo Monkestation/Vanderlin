@@ -39,12 +39,12 @@
 	..()
 
 /datum/brain_trauma/special/death_whispers/proc/whispering()
-	ADD_TRAIT(owner, TRAIT_SIXTHSENSE, TRAUMA_TRAIT)
+	ADD_TRAIT(owner, TRAIT_GHOSTEARS, TRAUMA_TRAIT)
 	active = TRUE
 	addtimer(CALLBACK(src, PROC_REF(cease_whispering)), rand(50, 300))
 
 /datum/brain_trauma/special/death_whispers/proc/cease_whispering()
-	REMOVE_TRAIT(owner, TRAIT_SIXTHSENSE, TRAUMA_TRAIT)
+	REMOVE_TRAIT(owner, TRAIT_GHOSTEARS, TRAUMA_TRAIT)
 	active = FALSE
 
 /datum/brain_trauma/special/existential_crisis

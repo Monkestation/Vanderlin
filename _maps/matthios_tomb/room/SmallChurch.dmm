@@ -38,7 +38,7 @@
 /obj/item/clothing/gloves/chain,
 /obj/item/clothing/pants/chainlegs,
 /obj/item/clothing/wrists/bracers/copper,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/face/facemask,
 /turf/open/floor/concrete,
 /area/under/tomb/indoors/church)
@@ -901,7 +901,7 @@
 /obj/item/clothing/gloves/chain,
 /obj/item/clothing/pants/chainlegs,
 /obj/item/clothing/wrists/bracers/copper,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/face/facemask,
 /turf/open/floor/concrete,
 /area/under/tomb/indoors/church)

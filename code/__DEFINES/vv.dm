@@ -95,6 +95,9 @@
 #define VV_HK_OSAY "osay"
 #define VV_HK_MASS_DEL_TYPE "mass_delete_type"
 #define VV_HK_ARMOR_MOD "mod_obj_armor"
+#define VV_HK_ADDENCHANT "add_enchantment"
+#define VV_HK_REMOVEENCHANT "remove_enchantment"
+
 
 // /mob
 #define VV_HK_GIB "gib"
@@ -117,6 +120,7 @@
 #define VV_HK_MARTIAL_ART "give_martial_art"
 #define VV_HK_GIVE_TRAUMA "give_trauma"
 #define VV_HK_CURE_TRAUMA "cure_trauma"
+#define VV_HK_CURE_ROT "cure_rot"
 #define VV_HK_SHOW_RELATIONS "show_relations"
 
 // /mob/living/carbon/human

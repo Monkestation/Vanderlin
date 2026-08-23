@@ -415,6 +415,18 @@
 	desc = "<span class='warning'>I have returned from oblivion... but the fatigue of death still affects me.</span>\n"
 	icon_state = "muscles"
 
+/datum/status_effect/debuff/revive_noc
+	id = "lunar_revive"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/revive_noc
+	duration = 15 MINUTES
+	effectedstats = list(STAT_STRENGTH = -4, STAT_SPEED = -3, STAT_ENDURANCE = -3, STAT_CONSTITUTION = -4, STAT_INTELLIGENCE = -2)
+	tick_interval = STATUS_EFFECT_NO_TICK
+
+/atom/movable/screen/alert/status_effect/debuff/revive_noc
+	name = "Lunar Revival Sickness"
+	desc = "<span class='warning'>I have returned from oblivion... but the fatigue of death still affects me.</span>\n"
+	icon_state = "muscles"
+
 /datum/status_effect/debuff/chilled
 	id = "chilled"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/chilled

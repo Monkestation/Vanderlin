@@ -162,14 +162,14 @@
 
 /datum/reagent/medicine/manapot/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
-	M.mana_pool.adjust_mana(0.8 * REAGENTS_MODIFIER)
+	M.safe_adjust_personal_mana(4.8 * REAGENTS_MODIFIER)
 
 /datum/reagent/medicine/manapot/weak
 	name = "Weak Mana Potion"
 
-/datum/reagent/medicine/manapot/weak/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+/datum/reagent/medicine/manapot/weak/on_mob_life(mob/living/carbon/M, efficiency)
 	. = ..()
-	M.mana_pool.adjust_mana(0.4 * REAGENTS_MODIFIER)
+	M.safe_adjust_personal_mana(1.2 * REAGENTS_MODIFIER)
 
 /datum/reagent/medicine/strongmana
 	name = "Strong Mana Potion"
@@ -182,7 +182,7 @@
 
 /datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
-	M.mana_pool.adjust_mana(1.6 * REAGENTS_MODIFIER)
+	M.safe_adjust_personal_mana(9.6 * REAGENTS_MODIFIER)
 
 /datum/reagent/medicine/stampot
 	name = "Stamina Potion"
@@ -373,7 +373,7 @@
 	if(volume > 4 && !M.has_status_effect(/datum/status_effect/buff/alch/fortunepot))
 		M.apply_status_effect(/datum/status_effect/buff/alch/fortunepot)
 
-/datum/reagent/berrypoison	// Weaker poison, balanced to make you wish for death and incapacitate but not kill
+/datum/reagent/poison/berry	// Weaker poison, balanced to make you wish for death and incapacitate but not kill
 	name = "Berry Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -385,7 +385,7 @@
 	var/naus = 0.6
 	var/tox = 0.4
 
-/datum/reagent/berrypoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+/datum/reagent/poison/berry/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 
 	if(volume < 0.09)
@@ -400,7 +400,7 @@
 
 	return TRUE
 
-/datum/reagent/berrypoison/shroom
+/datum/reagent/poison/berry/shroom
 	name = "Mushroom Poison"
 	color = "#5647e0"
 	taste_description = "acidity"
@@ -408,7 +408,7 @@
 	naus = 1
 	tox = 0.5
 
-/datum/reagent/strongpoison		// Strong poison, meant to be somewhat difficult to produce using alchemy or spawned with select antags. Designed to kill in one full dose (5u) better drink antidote fast
+/datum/reagent/poison/doom		// Strong poison, meant to be somewhat difficult to produce using alchemy or spawned with select antags. Designed to kill in one full dose (5u) better drink antidote fast
 	name = "Doom Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -418,7 +418,8 @@
 	scent_description = "charcoal"
 	metabolization_rate = REAGENTS_METABOLISM / 10
 
-/datum/reagent/strongpoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+
+/datum/reagent/poison/doom/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 
 	if(volume < 0.09)
@@ -433,7 +434,7 @@
 
 	return TRUE
 
-/datum/reagent/organpoison
+/datum/reagent/poison/organ
 	name = "Organ Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -444,7 +445,7 @@
 	metabolization_rate = REAGENTS_METABOLISM / 10
 	var/list/cannibalism_pool = ALL_RACES_LIST
 
-/datum/reagent/organpoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+/datum/reagent/poison/organ/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 
 	if(!(M.dna?.species?.id in cannibalism_pool))
@@ -518,15 +519,15 @@
 	set_patron(/datum/patron/inhumen/graggar)
 	to_chat(src, SPAN_GOD_GRAGGAR("The Beast's teeth close around your heart! Devour! Conquer! Graggar!"))
 
-/datum/reagent/organpoison/human
+/datum/reagent/poison/organ/human
 	name = "Humen Organ Poison"
 	cannibalism_pool = SPECIES_CANNIBAL_MEN
 
-/datum/reagent/organpoison/kobold
+/datum/reagent/poison/organ/kobold
 	name = "Kobold Organ Poison"
 	cannibalism_pool = SPECIES_CANNIBALISM_KOBOLD
 
-/datum/reagent/stampoison
+/datum/reagent/poison/stamina
 	name = "Stamina Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -536,15 +537,16 @@
 	scent_description = "dust"
 	metabolization_rate = REAGENTS_METABOLISM * 0.3
 
-/datum/reagent/stampoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+/datum/reagent/poison/stamina/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.adjust_stamina(0.15 * REAGENTS_MODIFIER)
 		else
 			M.adjust_stamina(0.45 * REAGENTS_MODIFIER) //Slowly leech stamina
 
-/datum/reagent/strongstampoison
+/datum/reagent/poison/stamina_strong
 	name = "Strong Stamina Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -554,8 +556,9 @@
 	scent_description = "freezing dust"
 	metabolization_rate = REAGENTS_METABOLISM * 0.9
 
-/datum/reagent/strongstampoison/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+/datum/reagent/poison/stamina_strong/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.adjust_stamina(0.9 * REAGENTS_MODIFIER)
@@ -566,7 +569,7 @@
 //THIS SHOULDN'T BE SPAWNABLE, LEAVE IT CRAFT ONLY
 //If you do think this should be spawnable, make it spawn in INCREDIBLY small amounts
 //reminder this is incredibly potent, the poison to out poison anyone, this the shit that killed Psydon
-/datum/reagent/dreaddeath
+/datum/reagent/poison/dreaddeath
 	name = "Dread Death"
 	description = "A terribly potent poison."
 	reagent_state = LIQUID
@@ -576,7 +579,7 @@
 	scent_description = "nothing"
 	metabolization_rate = REAGENTS_METABOLISM * 0.5
 
-/datum/reagent/dreaddeath/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+/datum/reagent/poison/dreaddeath/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
@@ -597,7 +600,7 @@
 
 	return TRUE
 
-/datum/reagent/killersice
+/datum/reagent/poison/killersice
 	name = "Killer's Ice"
 	description = ""
 	reagent_state = LIQUID
@@ -606,7 +609,7 @@
 	scent_description = "freezing dust"
 	metabolization_rate = REAGENTS_METABOLISM / 10
 
-/datum/reagent/killersice/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+/datum/reagent/poison/killersice/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
@@ -614,7 +617,7 @@
 
 	return TRUE
 
-/datum/reagent/drowsbane
+/datum/reagent/poison/drowsbane
 	name = "Drowsbane"
 	description = ""
 	reagent_state = LIQUID
@@ -625,7 +628,7 @@
 	var/tox = 0.2
 	var/oxy = 1
 
-/datum/reagent/drowsbane/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+/datum/reagent/poison/drowsbane/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 
 	if(volume <  0.09)
