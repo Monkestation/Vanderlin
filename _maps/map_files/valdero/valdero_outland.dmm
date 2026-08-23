@@ -158,6 +158,14 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/churchmarble,
 /area/indoors/shelter/mountains)
+"cO" = (
+/obj/structure/fluff/psycross/astrata/gold{
+	pixel_y = -16;
+	pixel_x = 16
+	},
+/obj/structure/stairs/stone/reddish,
+/turf/open/floor/church/gold,
+/area/outdoors/mountains)
 "cT" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/church,
@@ -253,6 +261,7 @@
 	dir = 8
 	},
 /obj/structure/fluff/walldeco/church/line,
+/obj/structure/fluff/statue/knight/interior,
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
 "ez" = (
@@ -276,6 +285,13 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/churchrough/pale,
 /area/under/cave)
+"eU" = (
+/obj/structure/fluff/walldeco/bigpainting/rainuponthevalley{
+	pixel_x = 0;
+	pixel_y = -32
+	},
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
 "eV" = (
 /turf/open/floor/concrete,
 /area/outdoors/mountains)
@@ -414,6 +430,7 @@
 /obj/structure/fluff/railing/tall/stone{
 	dir = 10
 	},
+/obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
 "hm" = (
@@ -421,6 +438,25 @@
 /turf/open/floor/blocks/newstone,
 /area/indoors/shelter/mountains)
 "hv" = (
+/turf/closed/wall/mineral/decorstone/window{
+	color = "#ffddd7"
+	},
+/area/outdoors/mountains)
+"hy" = (
+/obj/structure/stairs/stone/reddish,
+/obj/structure/fluff/railing/tall/stone{
+	dir = 4;
+	pixel_y = -1
+	},
+/obj/structure/fluff/walldeco/painting/crown{
+	pixel_x = 32
+	},
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
+"hK" = (
+/obj/structure/fluff/psycross/astrata/gold{
+	pixel_y = 10
+	},
 /turf/open/floor/church/gold,
 /area/outdoors/mountains)
 "hP" = (
@@ -434,12 +470,14 @@
 /obj/effect/decal/shadow_floor{
 	dir = 9
 	},
+/obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
 "hR" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 5
 	},
+/obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
 "im" = (
@@ -570,7 +608,7 @@
 /area/under/cave)
 "kK" = (
 /obj/structure/carpet/blue,
-/turf/open/floor/churchmarble,
+/turf/open/floor/church,
 /area/indoors/shelter/mountains)
 "kN" = (
 /turf/open/floor/churchrough/pale,
@@ -661,6 +699,7 @@
 /obj/structure/fluff/railing/tall/stone{
 	dir = 6
 	},
+/obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
 "mz" = (
@@ -927,6 +966,7 @@
 /area/outdoors/mountains)
 "sR" = (
 /obj/structure/window/stained,
+/obj/structure/curtain/bluecurtain,
 /turf/open/floor/church,
 /area/indoors/shelter/mountains)
 "sU" = (
@@ -1039,6 +1079,12 @@
 /obj/structure/trap/fire,
 /turf/open/floor/churchmarble/gold,
 /area/indoors/shelter/mountains)
+"vm" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/churchmarble/gold,
+/area/indoors/shelter/mountains)
 "vC" = (
 /obj/structure/closet/dirthole/closed,
 /turf/open/floor/grass/healthy,
@@ -1121,6 +1167,12 @@
 /obj/structure/trap/shock,
 /turf/open/floor/church,
 /area/indoors/shelter/mountains)
+"xp" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
+/obj/item/orphan_toy/saiga,
+/turf/open/floor/grass/healthy,
+/area/outdoors/mountains)
 "xs" = (
 /obj/structure/fluff/statue{
 	name = "The Veiled Lady";
@@ -1198,6 +1250,16 @@
 	},
 /turf/open/floor/churchmarble/pale,
 /area/under/cave)
+"yD" = (
+/obj/machinery/light/fueled/firebowl/church,
+/turf/open/floor/churchmarble/gold,
+/area/indoors/shelter/mountains)
+"zm" = (
+/obj/structure/fluff/walldeco/painting/crown{
+	pixel_x = 32
+	},
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
 "zv" = (
 /obj/effect/decal/shadow_floor{
 	dir = 4
@@ -1244,6 +1306,7 @@
 	dir = 4
 	},
 /obj/structure/fluff/walldeco/church/line,
+/obj/item/orphan_toy/knight,
 /turf/open/floor/herringbone,
 /area/indoors/shelter/mountains)
 "Al" = (
@@ -1342,6 +1405,10 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/shelter/mountains)
+"Bl" = (
+/obj/item/alch/golddust,
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
 "Br" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 5
@@ -1355,6 +1422,12 @@
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/blocks/newstone,
 /area/outdoors/mountains)
+"BB" = (
+/obj/structure/fluff/walldeco/painting/seraphina{
+	pixel_x = -32
+	},
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
 "BD" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/table/wood/smooth,
@@ -1412,6 +1485,10 @@
 	},
 /turf/open/floor/blocks/newstone,
 /area/outdoors/mountains)
+"Cb" = (
+/obj/machinery/light/fueled/firebowl/church,
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
 "Cg" = (
 /turf/open/floor/blocks/newstone,
 /area/outdoors/mountains)
@@ -1459,6 +1536,9 @@
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4;
 	pixel_y = -1
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 1
 	},
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
@@ -1515,6 +1595,10 @@
 "Ee" = (
 /turf/closed/wall/mineral/craftstone,
 /area/under/cavewet)
+"Eh" = (
+/obj/machinery/light/fueled/firebowl/standing,
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
 "Em" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -1541,11 +1625,27 @@
 /obj/structure/fluff/railing/tall/stone{
 	dir = 9
 	},
+/obj/machinery/light/fueled/firebowl/standing,
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
+"EC" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 1
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 1
+	},
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
 "EF" = (
 /turf/open/floor/dirt,
 /area/outdoors/mountains)
+"EG" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 1
+	},
+/turf/open/floor/churchmarble,
+/area/indoors/shelter/mountains)
 "EO" = (
 /turf/open/water/bath,
 /area/under/cavewet)
@@ -1607,6 +1707,7 @@
 /obj/effect/decal/borderfall{
 	dir = 1
 	},
+/obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
 "FT" = (
@@ -1629,6 +1730,16 @@
 	},
 /turf/open/floor/grass/healthy,
 /area/outdoors/mountains)
+"Gg" = (
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
+/obj/item/orphan_toy/bard,
+/turf/open/floor/grass/healthy,
+/area/outdoors/mountains)
+"Gq" = (
+/obj/structure/curtain/browncurtain,
+/turf/closed/wall/window/stained/yellow,
+/area/indoors/shelter/mountains)
 "Gw" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/grass/healthy,
@@ -1643,6 +1754,9 @@
 	},
 /obj/structure/stairs/stone/reddish{
 	dir = 1
+	},
+/obj/structure/fluff/walldeco/painting/crown{
+	pixel_x = 32
 	},
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
@@ -1678,10 +1792,20 @@
 "Hc" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/chair/bench,
+/obj/item/orphan_toy/skeleton,
 /turf/open/floor/churchrough/pale,
 /area/outdoors/mountains)
 "Hf" = (
 /turf/open/floor/dirt/road,
+/area/outdoors/mountains)
+"Hi" = (
+/obj/structure/stairs/stone/reddish{
+	dir = 4
+	},
+/obj/structure/stairs/stone/reddish{
+	dir = 4
+	},
+/turf/open/floor/church/gold,
 /area/outdoors/mountains)
 "Hq" = (
 /obj/structure/fluff/walldeco/church/line,
@@ -2002,6 +2126,11 @@
 "Nf" = (
 /turf/open/water/river/under,
 /area/under/cavewet)
+"Nh" = (
+/obj/structure/stairs/stone/reddish,
+/obj/structure/stairs/stone/reddish,
+/turf/open/floor/church/gold,
+/area/outdoors/mountains)
 "Np" = (
 /obj/structure/rack/shelf,
 /obj/item/burial_shroud{
@@ -2226,6 +2355,7 @@
 	dir = 4;
 	pixel_y = -1
 	},
+/obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
 "Rk" = (
@@ -2408,6 +2538,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
+/obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
 "Va" = (
@@ -2606,6 +2737,15 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/indoors/shelter/mountains)
+"Yi" = (
+/obj/structure/stairs/stone/reddish,
+/obj/structure/fluff/walldeco/church/line,
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
+"Yn" = (
+/obj/structure/fluff/walldeco/church/line,
+/turf/open/floor/churchmarble,
+/area/indoors/shelter/mountains)
 "Yp" = (
 /turf/open/floor/churchrough/pale,
 /area/outdoors/mountains)
@@ -2613,6 +2753,12 @@
 /obj/effect/decal/remains/human,
 /turf/open/floor/church/pale,
 /area/under/cave)
+"YF" = (
+/obj/structure/fluff/walldeco/bigpainting{
+	pixel_x = 0
+	},
+/turf/open/floor/church/gold,
+/area/indoors/shelter/mountains)
 "Za" = (
 /obj/structure/stairs/stone/church{
 	dir = 4
@@ -2702,6 +2848,7 @@
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
+/obj/item/orphan_toy/knight,
 /turf/open/floor/herringbone,
 /area/indoors/shelter/mountains)
 "ZJ" = (
@@ -29480,7 +29627,7 @@ FK
 Sz
 Sz
 Sz
-dP
+Gg
 Sz
 Sz
 Sz
@@ -30092,7 +30239,7 @@ vC
 Sz
 Sz
 Sz
-dP
+xp
 Sz
 Sz
 Sz
@@ -32520,11 +32667,11 @@ BR
 BR
 BR
 BR
-BR
+Yn
 kK
 kK
 kK
-BR
+EG
 BR
 BR
 BR
@@ -32672,11 +32819,11 @@ io
 io
 io
 nT
-BR
-BR
-BR
-BR
-BR
+Yn
+AH
+AH
+AH
+EG
 sh
 io
 io
@@ -32824,11 +32971,11 @@ io
 io
 io
 nT
-BR
-BR
-BR
-BR
-BR
+Yn
+AH
+AH
+AH
+EG
 sh
 io
 io
@@ -32976,11 +33123,11 @@ Gx
 Gx
 Gx
 BR
-BR
-BR
-BR
-BR
-BR
+Yn
+Ct
+Ct
+Ct
+EG
 BR
 Gx
 Gx
@@ -53797,19 +53944,19 @@ Za
 Za
 Gx
 Gx
-Zv
-Zv
-Zv
-nb
-Gx
-Zv
-Zv
-Zv
+Gq
+Gq
+Gq
 Gx
 nb
 Zv
 Zv
 Zv
+nb
+Gx
+Gq
+Gq
+Gq
 Gx
 Gx
 Za
@@ -53948,21 +54095,21 @@ Za
 Za
 Za
 Gx
+Cb
 Vy
 Vy
 Vy
-Vy
-Vy
+BB
 Vy
 Ps
 sl
 Ww
 IG
+BB
 Vy
 Vy
 Vy
-Vy
-Vy
+Cb
 Gx
 Za
 Za
@@ -54099,7 +54246,7 @@ GD
 bU
 bU
 bU
-Zv
+Gq
 Vy
 Vy
 Vy
@@ -54107,7 +54254,7 @@ ji
 VL
 hP
 dL
-dL
+yD
 dL
 FP
 VL
@@ -54115,7 +54262,7 @@ ji
 Vy
 Vy
 Vy
-Zv
+Gq
 bU
 bU
 bU
@@ -54251,12 +54398,12 @@ GD
 aO
 bU
 bU
-Zv
+Gq
 Vy
 Vy
 Vy
 RJ
-Vy
+Bl
 EU
 vl
 vl
@@ -54267,7 +54414,7 @@ fe
 Vy
 Vy
 Vy
-Zv
+Gq
 bU
 bU
 aO
@@ -54403,7 +54550,7 @@ GD
 bU
 bU
 bU
-Zv
+Gq
 Vy
 Vy
 Vy
@@ -54419,7 +54566,7 @@ fe
 Vy
 Vy
 Vy
-Zv
+Gq
 bU
 bU
 bU
@@ -54556,7 +54703,7 @@ bU
 nZ
 bU
 Gx
-Vy
+Eh
 Vy
 Vy
 RJ
@@ -54566,11 +54713,11 @@ vl
 vl
 vl
 aw
-Vy
+Bl
 fe
 Vy
 Vy
-Vy
+Eh
 Gx
 bU
 nZ
@@ -54707,7 +54854,7 @@ GD
 bU
 bU
 bU
-Zv
+Gq
 Vy
 Vy
 Vy
@@ -54723,7 +54870,7 @@ ER
 Vy
 Vy
 Vy
-Zv
+Gq
 bU
 bU
 bU
@@ -54859,7 +55006,7 @@ GD
 aO
 bU
 bU
-Zv
+Gq
 Vy
 QR
 QR
@@ -54875,7 +55022,7 @@ QR
 QR
 QR
 Vy
-Zv
+Gq
 bU
 bU
 aO
@@ -55011,7 +55158,7 @@ GD
 bU
 bU
 bU
-Zv
+Gq
 Vy
 QR
 QR
@@ -55027,7 +55174,7 @@ QR
 QR
 QR
 Vy
-Zv
+Gq
 bU
 bU
 bU
@@ -55164,7 +55311,7 @@ SE
 SE
 SE
 Gx
-Vy
+YF
 QR
 QR
 QR
@@ -55178,7 +55325,7 @@ QR
 QR
 QR
 QR
-Vy
+eU
 Gx
 SE
 SE
@@ -55320,13 +55467,13 @@ Vy
 Vy
 Vy
 Vy
-Vy
+Eh
 EU
 JG
 JG
 JG
 aw
-Vy
+Eh
 Vy
 Vy
 Vy
@@ -55467,7 +55614,7 @@ cU
 cU
 cU
 cU
-Zv
+Gq
 Vy
 gQ
 gJ
@@ -55483,7 +55630,7 @@ gQ
 gJ
 DI
 Vy
-Zv
+Gq
 cU
 cU
 cU
@@ -55619,7 +55766,7 @@ cU
 cU
 cU
 cU
-Zv
+Gq
 lt
 Aw
 Aw
@@ -55635,7 +55782,7 @@ Aw
 Aw
 Aw
 aS
-Zv
+Gq
 cU
 cU
 cU
@@ -55771,7 +55918,7 @@ cU
 cU
 cU
 cU
-Zv
+Gq
 lt
 iX
 iX
@@ -55787,7 +55934,7 @@ Vn
 Vn
 Vn
 aS
-Zv
+Gq
 cU
 cU
 cU
@@ -55923,23 +56070,23 @@ cU
 cU
 cU
 cU
-Zv
+Gq
 lt
 HM
 Sj
 Sj
 RJ
-RJ
+Yi
 JG
 JG
 JG
-fe
+EC
 fe
 Sj
 Sj
 GS
 aS
-Zv
+Gq
 cU
 cU
 cU
@@ -56075,23 +56222,23 @@ cU
 cU
 cU
 cU
-Zv
+Gq
 lt
 HM
 Sj
 Sj
 RJ
-RJ
+Yi
 JG
 JG
 JG
-fe
+EC
 fe
 Sj
 Sj
 GS
 aS
-Zv
+Gq
 cU
 cU
 cU
@@ -56228,21 +56375,21 @@ cU
 cU
 cU
 Gx
-Vy
+zm
 rK
 ZU
 ZU
+hy
 Rd
-Rd
-JG
-JG
-JG
+vm
+vm
+vm
 Dr
 GB
 AB
 AB
 Kc
-Vy
+zm
 Gx
 cU
 cU
@@ -56384,13 +56531,13 @@ Gx
 Zv
 Zv
 Zv
-nb
-Gx
-Zv
-Zv
-Zv
 Gx
 nb
+Zv
+Zv
+Zv
+nb
+Gx
 Zv
 Zv
 Zv
@@ -77212,7 +77359,7 @@ kv
 hv
 hv
 hv
-hv
+Hi
 hv
 hv
 hv
@@ -77362,11 +77509,11 @@ kv
 kv
 kv
 hv
+hK
 hv
+Of
 hv
-hv
-hv
-hv
+hK
 hv
 sO
 sO
@@ -77516,7 +77663,7 @@ kv
 hv
 hv
 hv
-hv
+Of
 hv
 hv
 hv
@@ -77665,13 +77812,13 @@ kv
 kv
 kv
 kv
-hv
-hv
-hv
-hv
-hv
-hv
-hv
+kv
+kv
+kv
+Of
+sO
+sO
+sO
 sO
 sO
 sO
@@ -77817,13 +77964,13 @@ kv
 kv
 kv
 kv
-hv
-hv
-hv
-hv
-hv
-hv
-hv
+kv
+kv
+cO
+Of
+sO
+sO
+sO
 sO
 sO
 sO
@@ -77969,13 +78116,13 @@ kv
 kv
 kv
 kv
-hv
-hv
-hv
-hv
-hv
-hv
-hv
+kv
+kv
+kv
+qA
+sO
+sO
+sO
 sO
 sO
 sO
@@ -78121,13 +78268,13 @@ kv
 kv
 kv
 kv
-hv
-hv
-hv
-hv
-hv
-hv
-hv
+Nh
+kv
+kv
+qA
+sO
+sO
+sO
 sO
 sO
 sO
@@ -78276,7 +78423,7 @@ kv
 hv
 hv
 hv
-hv
+qA
 hv
 hv
 hv
@@ -78426,11 +78573,11 @@ kv
 kv
 kv
 hv
+hK
 hv
+qA
 hv
-hv
-hv
-hv
+hK
 hv
 sO
 sO
@@ -78580,7 +78727,7 @@ kv
 hv
 hv
 hv
-hv
+qA
 hv
 hv
 hv
