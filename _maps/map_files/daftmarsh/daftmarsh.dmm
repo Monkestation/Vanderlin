@@ -2159,10 +2159,6 @@
 /area/indoors/town/church)
 "bDi" = (
 /obj/structure/table/wood/crafted,
-/obj/item/paper{
-	pixel_x = -6;
-	pixel_y = 5
-	},
 /obj/item/natural/feather{
 	pixel_x = 8;
 	pixel_y = 6
@@ -2170,6 +2166,11 @@
 /obj/item/broken_phylactery{
 	pixel_x = -10;
 	pixel_y = -7
+	},
+/obj/item/paper{
+	pixel_x = -12;
+	pixel_y = 8;
+	info = "The Device waits for me under the tower's ruins."
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
@@ -8792,6 +8793,15 @@
 /obj/structure/ladder,
 /turf/open/floor/wood,
 /area/indoors/town/smithy)
+"gUs" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/church,
+/area/under/cavewet)
 "gUR" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/throne)
@@ -9073,6 +9083,12 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/wood,
 /area/outdoors/town)
+"hjG" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/churchrough,
+/area/under/cavewet)
 "hjR" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/woodturned/nosmooth,
@@ -12807,6 +12823,12 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/town)
+"klE" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/churchrough,
+/area/under/cavewet)
 "klF" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/keyset/church/general,
@@ -16856,6 +16878,15 @@
 /obj/structure/closet/crate/crafted_closet/inn/chest,
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/town)
+"nBX" = (
+/obj/structure/fluff/walldeco/church/line{
+	pixel_y = -5
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/churchrough,
+/area/under/cavewet)
 "nCk" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/marsh,
@@ -22533,6 +22564,15 @@
 /obj/structure/fluff/wallclock/l,
 /turf/open/floor/woodturned,
 /area/indoors/butchershop)
+"syh" = (
+/obj/structure/fluff/walldeco/church/line{
+	pixel_y = -5
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/turf/open/floor/churchrough,
+/area/under/cavewet)
 "syp" = (
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /obj/structure/fluff/railing/wood{
@@ -71150,8 +71190,8 @@ ftQ
 ftQ
 ftQ
 jSg
-cAN
-cAN
+hjG
+nBX
 qon
 qon
 qon
@@ -71354,10 +71394,10 @@ ftQ
 jSg
 eLb
 cAN
-cAN
-cAN
-cAN
-cAN
+gUs
+gUs
+gUs
+gUs
 bYq
 qYT
 bTI
@@ -71554,8 +71594,8 @@ ftQ
 ftQ
 ftQ
 jSg
-cAN
-cAN
+klE
+syh
 qon
 qon
 qon
