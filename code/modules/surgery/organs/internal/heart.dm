@@ -15,10 +15,9 @@
 	current_blood = 600
 	blood_req = 5
 	oxygen_req = 5
-	nutriment_req = 3
-	hydration_req = 1.5
+	nutriment_req = 1.5 * RATE_OF_HUNGER_GLOBAL
+	hydration_req = 0.75 * RATE_OF_THIRST_GLOBAL
 	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/heart
-
 	/// Have we been bypassed to avoid nasty blockages?
 	var/open = FALSE
 
