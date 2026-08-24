@@ -159,3 +159,6 @@ GLOBAL_VAR_INIT(__pathfinding_debug_generate, FALSE)
 		images += node_display
 		usr.client.images += node_display
 #endif
+
+#undef START_PATH_DEBUG
+#undef STOP_PATH_DEBUG
