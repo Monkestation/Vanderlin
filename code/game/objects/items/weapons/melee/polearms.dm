@@ -569,7 +569,7 @@
 	wbalance = HARD_TO_DODGE
 	max_integrity = INTEGRITY_BLACKSTEEL
 	max_blade_int = 450
-	smeltresult = /obj/item/ingot/blacksteel
+	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 200
 	sellprice = 250

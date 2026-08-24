@@ -277,7 +277,7 @@
 	force_wielded = DAMAGE_HEAVYAXE_WIELD + 2
 	max_blade_int = 330
 	max_integrity = INTEGRITY_BLACKSTEEL
-	smeltresult = /obj/item/ingot/blacksteel
+	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 200
 	sellprice = 90
