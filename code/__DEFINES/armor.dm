@@ -13,8 +13,13 @@
 
 #define INTEGRITY_PLACEHOLDER 100
 
+/*-------------------------\
+| MATERIAL MODIFIER DEFINES |
+\-------------------------*/
+
 /// A bonus applied to certain antag/special equipment, only in cases where it is necessary for the equipment to be particularly resilient comparative to material.
 #define INTEGRITY_SPECIAL_BONUS 1.2
+/// A malus applied to certain antag/special equipment, only in cases where it is necessary for the equipment to be weaker comparative to the material.
 #define INTEGRITY_SPECIAL_MALUS 0.8
 
 #define INTEGRITY_MOD_BLACKSTEEL 1.3
@@ -31,6 +36,10 @@
 #define INTEGRITY_MOD_IMPROV 0.15
 
 
+/*-------------------------\
+| WEAPON INTEGRITY DEFINES |
+\-------------------------*/
+
 #define INTEGRITY_GOD_WEAPON 1750
 
 #define INTEGRITY_SLEDGEHAMMER 900
@@ -40,18 +49,23 @@
 #define INTEGRITY_FLAIL 700
 #define INTEGRITY_HAMMER 700
 
-#define INTEGRITY_SWORD 650
-#define INTEGRITY_LONGSWORD 750
 #define INTEGRITY_GREATSWORD 800
+#define INTEGRITY_LONGSWORD 750
+#define INTEGRITY_SWORD 650
 #define INTEGRITY_RAPIER 600
 
-#define INTEGRITY_WHIP 500
 #define INTEGRITY_URUMI 600
+#define INTEGRITY_WHIP 500
 
-#define INTEGRITY_AXE 650
-#define INTEGRITY_BATTLEAXE 700
-#define INTEGRITY_DBL_BATTLEAXE INTEGRITY_BATTLEAXE + 50
 #define INTEGRITY_GREATAXE 800
+#define INTEGRITY_DBL_BATTLEAXE INTEGRITY_BATTLEAXE + 50
+#define INTEGRITY_BATTLEAXE 700
+#define INTEGRITY_AXE 650
+
+#define INTEGRITY_HALBERD 700
+#define INTEGRITY_SPEAR 600
+#define INTEGRITY_QUARTERSTAFF 550
+#define INTEGRITY_JAVELIN 450
 
 #define INTEGRITY_HANDCLAW 350
 
@@ -59,15 +73,21 @@
 #define INTEGRITY_KNIFE 325
 #define INTEGRITY_TOSSBLADE 175
 
+#define INTEGRITY_SHIELD 600
+
+/*-------------------------\
+| STATIC INTEGRITY DEFINES |
+\-------------------------*/
+
 #define INTEGRITY_STATIC_200 200
 #define INTEGRITY_STATIC_300 300
 #define INTEGRITY_STATIC_400 400
 
 #define INTEGRITY_UNBREAKABLE 10000000
 
-/*------------------------\
-| ARMOR INTEGRITY DEFINES |	- So armor makes sense
-\------------------------*/
+/*----------------------\
+| OLD INTEGRITY DEFINES |
+\----------------------*/
 
 #define INTEGRITY_OLD_BLACKSTEEL	650		// BLACKSTEEL
 #define INTEGRITY_OLD_STRONGEST		500		// STEEL
