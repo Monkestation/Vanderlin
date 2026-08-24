@@ -17,14 +17,14 @@
 	// Volumes of poison added by the curse.
 	var/poison_hit = 1.5
 	var/poison_pickup = 5
-	var/poison_equip = 10
+	var/poison_equip = 7.5
 
 /datum/enchantment/bloodcurse/register_triggers(atom/item)
 	. = ..()
 	registered_signals += COMSIG_ITEM_ATTACK
 	RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
-	registered_signals += COMSIG_ITEM_PICKUP
-	RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
+	//registered_signals += COMSIG_ITEM_PICKUP
+	//RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	registered_signals += COMSIG_ITEM_EQUIPPED
 	RegisterSignal(item, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
 
@@ -67,7 +67,7 @@
 	var/curse_effect = get_curse_effect(user)
 	if(!curse_effect || user.stat >= HARD_CRIT)
 		return
-	to_chat(user, span_userdanger("I'm wearing a curse! My blood is boiling, I feel so weak!"))
+	to_chat(user, span_userdanger("I'm holding a curse! My blood is boiling, I feel so weak!"))
 	user.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 	if(curse_effect == BLOOD_CURSE_AFFECTED)
 		user.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, poison_equip)
