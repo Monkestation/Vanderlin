@@ -205,7 +205,7 @@
 	desc = "Keep the rest at arm's length, lest you're burdened with the pain of rememberance."
 	icon_state = "swordstaff"
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
-	max_integrity = INTEGRITY_STRONGEST * 2
+	max_integrity = INTEGRITY_BLACKSTEEL
 
 /obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
 	. = ..()
