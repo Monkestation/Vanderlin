@@ -1137,8 +1137,6 @@
 	created_item = /obj/item/weapon/whip/psydon
 	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
 
-
-
 // --------------- Blacksteel --------------------
 
 /datum/anvil_recipe/weapons/blacksteel
@@ -1210,6 +1208,11 @@
 	name = "Blacksteel Barmace (+Blacksteel Bar x2)"
 	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
 	created_item = /obj/item/weapon/mace/blacksteel/barmace
+
+/datum/anvil_recipe/weapons/blacksteel/battleaxe
+	name = "Blacksteel Battle Axe (+Blacksteel Bar)"
+	additional_items = list(/obj/item/ingot/blacksteel)
+	created_item = /obj/item/weapon/axe/battle/blacksteel
 
 /datum/anvil_recipe/weapons/blacksteel/warhammer
 	name = "Blacksteel Warhammer (+Blacksteel Bar)"

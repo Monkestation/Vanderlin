@@ -84,6 +84,7 @@
 		TRAIT_BLOOD_SORCERER,
 		TRAIT_VITAE_USER,
 		TRAIT_NOPAIN,
+		TRAIT_VITAE_USER,
 	)
 
 	languages = list(
