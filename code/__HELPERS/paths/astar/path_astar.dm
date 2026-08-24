@@ -41,6 +41,11 @@
 	/// An optional callback to invoke to return a positive value to add to the path's distance.
 	var/datum/callback/heuristic_function
 
+	/// If true, when we can't find a path to a point we unwind the last valid node
+	var/return_closest_approach = FALSE
+	/// Node with the best node_heuristic
+	var/datum/astar_node/best_node
+
 #ifdef DEBUG_PATHFINDING
 	/// List of all nodes we've parsed, used for debug spew.
 	var/list/all_nodes_ever = list()
@@ -57,6 +62,7 @@
 	use_diagonals,
 	list/on_finish,
 	datum/callback/heuristic_function,
+	return_closest_approach
 )
 	src.invoker = invoker
 	src.pass_info = new(invoker, access)
@@ -73,6 +79,7 @@
 	src.use_diagonals = use_diagonals
 	src.on_finish = on_finish
 	src.heuristic_function = heuristic_function || CALLBACK(src, PROC_REF(generic_heuristic))
+	src.return_closest_approach = return_closest_approach
 
 /datum/pathfind/astar/Destroy(force, ...)
 	invoker = null
@@ -81,6 +88,7 @@
 	open_turf_to_node = null
 	closed = null
 	heuristic_function = null
+	best_node = null
 	return ..()
 
 /**
@@ -128,7 +136,6 @@
 #endif
 	return ..()
 
-// This copies most of Astar but this is so we don't slow down Astar with multiZ checks we aren't using
 /datum/pathfind/astar/search_step(tick_check = TRUE)
 	if(QDELETED(invoker))
 		return FALSE
@@ -233,9 +240,21 @@
 		if(tick_check && TICK_CHECK)
 			return TRUE
 
+	if(best_node && !length(path))
+		unwind_path(best_node)
+
 	return TRUE
 
 /datum/pathfind/astar/proc/binary_insert_node(datum/astar_node/node)
+	if(return_closest_approach)
+		if(!best_node)
+			best_node = node
+		else
+			// 0 is the start
+			var/old_heuristic = best_node.node_heuristic ? best_node.node_heuristic : INFINITY
+			if(node.node_heuristic < old_heuristic)
+				best_node = node
+
 	BINARY_INSERT_REVERSE(node, open_binary_tree, /datum/astar_node, node, f_value, COMPARE_KEY)
 
 /datum/pathfind/astar/proc/can_step_diagonal(turf/from_turf, turf/to_turf)
