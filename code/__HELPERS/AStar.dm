@@ -160,18 +160,18 @@ Actual Adjacent procs :
  * Useful for wave defense etc, where a point might be behind unbroken obstacles -
  * mobs should still path as close as possible instead of giving up entirely.
  */
-/proc/get_path_to_closest_approach(atom/movable/requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
-	var/l = SSpathfinder.mobs.getfree(requester)
-	while (!l)
-		stoplag(3)
-		if(QDELETED(requester))
-			return list()
-		l = SSpathfinder.mobs.getfree(requester)
-	var/list/path = AStarClosestApproach(requester, end, dist, maxnodes, maxnodedepth, mintargetdist, adjacent, id, exclude, simulated_only, check_z_levels)
-	SSpathfinder.mobs.found(l)
-	if (!path)
-		path = list()
-	return path
+// /proc/get_path_to_closest_approach(atom/movable/requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
+// 	var/l = SSpathfinder.mobs.getfree(requester)
+// 	while (!l)
+// 		stoplag(3)
+// 		if(QDELETED(requester))
+// 			return list()
+// 		l = SSpathfinder.mobs.getfree(requester)
+// 	var/list/path = AStarClosestApproach(requester, end, dist, maxnodes, maxnodedepth, mintargetdist, adjacent, id, exclude, simulated_only, check_z_levels)
+// 	SSpathfinder.mobs.found(l)
+// 	if (!path)
+// 		path = list()
+// 	return path
 
 /proc/AStarClosestApproach(atom/movable/requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
 	var/turf/end = get_turf(_end)

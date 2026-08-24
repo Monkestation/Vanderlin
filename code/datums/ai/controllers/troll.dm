@@ -106,7 +106,7 @@
 
 /datum/ai_controller/troll/sea
 	movement_delay = 0.7 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar/adaptive
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items()
 	)

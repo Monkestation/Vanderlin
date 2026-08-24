@@ -1,7 +1,7 @@
 /datum/ai_controller/guardsman
 	movement_delay = 0.5 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar/adaptive
 
 	blackboard = list(
 		BB_WEAPON_TYPE = /obj/item/weapon,

@@ -15,7 +15,7 @@
 		if(istype(moving_turf, /turf/open/openspace))
 			var/obj/structure/closet/crate/miningcar/minecart = moving
 			minecart.handle_aerial_fall(freefall = TRUE)
-	. = ..()
+	return ..()
 
 /datum/move_loop/minecart/process()
 	. = ..()
@@ -47,7 +47,6 @@
 			if(locate(/obj/structure/minecart_rail) in above_turf)
 				new_loc = above_turf
 
-	moving.Move(new_loc, direction)
+	moving.Move(new_loc, direction, FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 	// We cannot rely on the return value of Move(), we care about teleports and it doesn't
 	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
-

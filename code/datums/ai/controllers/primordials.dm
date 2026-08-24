@@ -1,6 +1,6 @@
 /datum/ai_controller/flame_primordial
 	movement_delay = 0.15 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar/adaptive
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic()
 	)
@@ -16,7 +16,7 @@
 
 /datum/ai_controller/water_primordial
 	movement_delay = 0.15 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar/adaptive
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic()
 	)
@@ -32,7 +32,7 @@
 
 /datum/ai_controller/air_primordial
 	movement_delay = 0.1 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/astar/adaptive
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic()
 	)

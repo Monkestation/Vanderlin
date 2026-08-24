@@ -74,7 +74,7 @@ GLOBAL_VAR_INIT(__pathfinding_debug_generate, FALSE)
 	var/time = world.timeofday
 	START_PATH_DEBUG //Enable node list dumping.
 
-	path = SSpathfinder.astar_pathfind_now(usr, T, 100, 0, access, null, FALSE, include_diagonals, path_heuristic)
+	path = SSpathfinder.astar_pathfind_now(usr, T, 100, 0, access, null, FALSE, include_diagonals, path_heuristic, multi_z = TRUE)
 
 	STOP_PATH_DEBUG //Disable node list dumping.
 
