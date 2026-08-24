@@ -72,7 +72,7 @@
 	var/turf/checking = get_turf(controller.pawn)
 	var/mintargetdist = controller.get_minimum_distance()
 
-	var/dist_to_end = get_dist(end, checking)
+	var/dist_to_end = get_dist_3d(end, checking)
 
 	// Same as ASTAR_CLOSE_ENOUGH_TO_END
 	if(end == checking || (mintargetdist && (dist_to_end <= mintargetdist)))

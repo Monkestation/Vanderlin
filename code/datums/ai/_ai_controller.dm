@@ -96,19 +96,18 @@ have ways of interacting with a specific atom and control it. They posses a blac
 /datum/ai_controller/proc/set_movement_target(source, atom/target, datum/ai_movement/new_movement)
 	if(current_movement_target)
 		UnregisterSignal(current_movement_target, list(COMSIG_MOVABLE_MOVED, COMSIG_PREQDELETED))
+
 	if(!isnull(target) && !isatom(target))
 		stack_trace("[pawn]'s current movement target is not an atom, rather a [target.type]! Did you accidentally set it to a weakref?")
 		CancelActions()
 		return
-	// if(target != current_movement_target)
-	// 	var/datum/ai_movement/hybrid_pathing/hybrid = ai_movement
-	// 	if(istype(hybrid))
-	// 		hybrid.using_closest_approach -= WEAKREF(src)
+
 	movement_target_source = source
 	current_movement_target = target
 	if(!isnull(current_movement_target))
 		RegisterSignal(current_movement_target, COMSIG_MOVABLE_MOVED, PROC_REF(on_movement_target_move))
 		RegisterSignal(current_movement_target, COMSIG_PREQDELETED, PROC_REF(on_movement_target_delete))
+
 	if(new_movement)
 		change_ai_movement_type(new_movement)
 
