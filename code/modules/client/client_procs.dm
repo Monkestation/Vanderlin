@@ -1467,11 +1467,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	)
 	return address in localhost_addresses
 
-/client/proc/show_game_over()
-	var/atom/movable/screen/splash/credits/S = new(null, null, src, FALSE, FALSE)
-	S.Fade(FALSE,FALSE)
-	RollCredits()
-
 /client/verb/toggle_fullscreen()
 	set name = "Toggle Fullscreen"
 	set category = "Preferences.Options"

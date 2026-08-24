@@ -74,6 +74,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	///this is just so we can pause/unpause ai from arbitrary signals
 	var/list/pause_signals
 
+	COOLDOWN_DECLARE(loot_scan_cooldown)
+
 /datum/ai_controller/New(atom/new_pawn)
 	change_ai_movement_type(ai_movement)
 	init_subtrees()
@@ -98,10 +100,10 @@ have ways of interacting with a specific atom and control it. They posses a blac
 		stack_trace("[pawn]'s current movement target is not an atom, rather a [target.type]! Did you accidentally set it to a weakref?")
 		CancelActions()
 		return
-	if(target != current_movement_target)
-		var/datum/ai_movement/hybrid_pathing/hybrid = ai_movement
-		if(istype(hybrid))
-			hybrid.using_closest_approach -= WEAKREF(src)
+	// if(target != current_movement_target)
+	// 	var/datum/ai_movement/hybrid_pathing/hybrid = ai_movement
+	// 	if(istype(hybrid))
+	// 		hybrid.using_closest_approach -= WEAKREF(src)
 	movement_target_source = source
 	current_movement_target = target
 	if(!isnull(current_movement_target))
@@ -377,8 +379,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	var/run_flags = get_able_to_run()
 	if(run_flags & AI_UNABLE_TO_RUN)
 		able_to_run = FALSE
-		walk(pawn, 0) //stop moving
-		// GLOB.move_manager.stop_looping(pawn) //stop moving
+		GLOB.move_manager.stop_looping(pawn) //stop moving
 	else
 		able_to_run = TRUE
 	set_ai_status(get_expected_ai_status(), run_flags)
@@ -463,7 +464,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 
 /// Generates a plan and see if our existing one is still valid.
 /datum/ai_controller/process(delta_time)
-	if(!able_to_run())
+	if(!able_to_run)
 		GLOB.move_manager.stop_looping(pawn) //stop moving
 		return //this should remove them from processing in the future through event-based stuff.
 

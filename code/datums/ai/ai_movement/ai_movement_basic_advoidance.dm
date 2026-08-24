@@ -13,17 +13,17 @@
 /datum/ai_movement/basic_avoidance/proc/pre_move(datum/move_loop/has_target/dist_bound/source)
 	SIGNAL_HANDLER
 
-	var/atom/movable/pawn = source.moving
 	var/datum/ai_controller/controller = source.extra_info
 	source.delay = controller.movement_delay
 	source.distance = controller.blackboard[BB_CURRENT_MIN_MOVE_DISTANCE]
 
 	// Check if this controller can actually run, so we don't chase people with corpses
-	if(!controller.able_to_run())
+	if(!controller.able_to_run)
 		controller.CancelActions()
 		qdel(source) //stop moving
 		return MOVELOOP_SKIP_STEP
 
+	var/atom/movable/pawn = source.moving
 	var/can_move = controller.can_move()
 
 	var/turf/target_turf = get_step_to(pawn, source.target)

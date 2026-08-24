@@ -226,7 +226,6 @@
 #ifdef DEBUG_PATHFINDING
 			all_nodes_ever[++all_nodes_ever.len] = new_node
 #endif
-
 			// Check to see if we're close enough to the end destination.
 			if(ASTAR_CLOSE_ENOUGH_TO_END(end, new_node))
 				unwind_path(new_node)
