@@ -210,7 +210,7 @@
 	block2add = FOV_BEHIND
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_PLACEHOLDER * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/head/helmet/heavy/zizo/volfhelm
 	name = "avantyne volf-face bascinet"

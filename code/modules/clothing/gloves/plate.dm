@@ -67,7 +67,7 @@
 	armor_type = /datum/armor/gloves/plate/good
 	item_weight = 1.65 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
-	max_integrity = INTEGRITY_OLD_BLACKSTEEL * INTEGRITY_MOD_BLACKSTEEL
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 /obj/item/clothing/gloves/plate/silver
 	name = "silver gauntlets"
@@ -93,7 +93,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_PLACEHOLDER * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/gloves/plate/matthios
 	name = "gilded gauntlets"

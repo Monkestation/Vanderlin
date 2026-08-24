@@ -403,7 +403,7 @@
 	armor_type = /datum/armor/head/plate/good
 	item_weight = 6.4 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
-	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_BLACKSTEEL
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 //............... Visored Sallet ............... //
 /obj/item/clothing/head/helmet/visored/sallet
@@ -679,7 +679,7 @@
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	smeltresult = /obj/item/ingot/avantyne
 	item_weight = 3.7 KILOGRAMS
-	max_integrity = INTEGRITY_PLACEHOLDER * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 //................. Silver Bascinet .............. //
 
@@ -744,7 +744,7 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	item_weight = 4.5 KILOGRAMS
-	max_integrity = INTEGRITY_OLD_BLACKSTEEL * INTEGRITY_MOD_BLACKSTEEL
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 /obj/item/clothing/head/helmet/blacksteel/psythorns
 	name = "crown of psydonian thorns"

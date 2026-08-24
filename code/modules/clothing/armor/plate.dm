@@ -15,7 +15,7 @@
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS //Has shoulder guards, and nothing else to suggest leg protection
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_OLD_STRONGEST
+	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
 	stand_speed_reduction = 1.2
 	item_weight = 9 KILOGRAMS
 
@@ -31,7 +31,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_OLD_STRONG
+	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
 
 /obj/item/clothing/armor/plate/iron/banded
 	name = "banded iron armor"
@@ -110,7 +110,7 @@
 	smeltresult = /obj/item/ingot/iron
 
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_OLD_STRONG
+	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
 	item_weight = 15 KILOGRAMS
 
 //................ Rusted Half-plate ............... //
@@ -125,7 +125,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_OLD_STANDARD
+	max_integrity = ARMOR_INT_CHEST_PLATE_DECREPIT
 	item_weight = 8.75 KILOGRAMS
 
 /obj/item/clothing/armor/plate/silver
@@ -149,7 +149,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
-	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL * INTEGRITY_MOD_BLACKSTEEL
+	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	item_weight = 8 KILOGRAMS
@@ -238,7 +238,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_PLACEHOLDER * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 //................ Matthios Armor ...............//
 

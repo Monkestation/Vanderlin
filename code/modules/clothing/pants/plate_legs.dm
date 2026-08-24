@@ -78,7 +78,7 @@
 	armor_type = /datum/armor/pants/plate/good
 	item_weight = 3 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
-	max_integrity = INTEGRITY_OLD_BLACKSTEEL * INTEGRITY_MOD_BLACKSTEEL
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 //............... Evil Pants ............... //
 
@@ -91,7 +91,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	smeltresult = /obj/item/ingot/avantyne
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
-	max_integrity = INTEGRITY_PLACEHOLDER * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/pants/platelegs/matthios
 	name = "gilded leggings"

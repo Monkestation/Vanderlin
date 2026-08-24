@@ -10,9 +10,6 @@
 
 
 // Modifiers for a material.
-
-#define INTEGRITY_PLACEHOLDER 100
-
 /*-------------------------\
 | MATERIAL MODIFIER DEFINES |
 \-------------------------*/
