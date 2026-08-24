@@ -1,0 +1,7 @@
+author: "Avalon-Proto"
+delete-after: True
+changes:
+  - rscadd: "Adds Blacksteel Weapons - Halberd, Axe, Double headed axe"
+  - rscadd: "Adds Weapons - Silver Double headed axe, Double headed steel battle axe"
+  - balance: "Ensures all Blacksteel weapons are very durable"
+  - balance: "Trade's the matron's stiletto for a Misericorde"

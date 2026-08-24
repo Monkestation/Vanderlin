@@ -307,3 +307,12 @@
   - rscadd: Added new darksteel weapons for zizo nerds.
   ta3754859-max:
   - bugfix: Painless battle & Flawed immortality rituals no longer nuke your stats
+2026-08-24:
+  realforest2001:
+  - rscadd: '''necromancer'' robes have been renamed to magus robes (there was already
+      a version with this name so we''re sticking with it.'
+  - rscadd: ominous hood renamed to magus hood and given a crafting recipe.
+  - rscdel: Removed the hood from a few outfits that had it but didn't fit.
+  - bugfix: Fixes a runtime with shirts in the loadout menu.
+  - bugfix: Fixes runtime with ore sight.
+  - bugfix: Fixes being able to fly while carrying people (and subsequent bug).
