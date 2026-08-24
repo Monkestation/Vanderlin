@@ -380,8 +380,9 @@
 	wdefense = GOOD_PARRY
 	wbalance = VERY_HARD_TO_DODGE
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
+	melt_amount = 50
 	item_weight = 180 GRAMS
 
 /obj/item/weapon/knife/dagger/blacksteel/misericorde
@@ -389,6 +390,7 @@
 	desc = "A magnificent armor-piercing dagger of blacksteel. The curved handle is said to naturally improve one's aim, while locked in a \
 	lyfe-or-death struggle with plate-armored opponents."
 	icon_state = "bs_misericorde"
+	force = DAMAGE_DAGGER + 3
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
 
 //................ Psydonian Dagger ............... //

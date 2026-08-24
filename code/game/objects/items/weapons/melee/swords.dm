@@ -242,9 +242,11 @@
 	icon_state = "bs_sword"
 	force = DAMAGE_SWORD + 2
 	force_wielded = DAMAGE_SWORD_WIELD + 2
-	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST
+	max_blade_int = 360
+	max_integrity = INTEGRITY_BLACKSTEEL
 	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
+	melt_amount = 100
 	item_weight = 1.1 KILOGRAMS
 
 /obj/item/weapon/sword/blacksteel/decorated
@@ -711,6 +713,8 @@
 	icon_state = "blacksteelrapier"
 	force = DAMAGE_SWORD + 2
 	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
+	melt_amount = 100
 	item_weight = 600 GRAMS
 
 // Hoplite Kophesh
@@ -1057,7 +1061,10 @@
 	icon_state = "bslongsword"
 	force = DAMAGE_SWORD + 3
 	max_integrity = INTEGRITY_BLACKSTEEL
+	max_blade_int = 400
 	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
+	melt_amount = 200
 	sellprice = 220
 
 /obj/item/weapon/sword/long/psydon
