@@ -1,0 +1,7 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added Bloodstone (ore) and Bloodsteel metal."
+  - rscadd: "Added Bloodsteel weapons and crafting recipes."
+  - rscadd: "Added Blood Curse, applied by holding bloodsteel/bloodstones or attacking with bloodsteel weapons."
+  - rscadd: "Added Bloodstone essence poison, used by the Blood Curse."
