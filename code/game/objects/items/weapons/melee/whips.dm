@@ -138,7 +138,7 @@
 	force = DAMAGE_WHIP + 3
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/bloodsteel
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BLOODSTEEL
 
 /obj/item/weapon/whip/bloodsteel/Initialize(mapload)
 	. = ..()

@@ -155,7 +155,7 @@
 	icon_state = "quarterstaff_bloodsteel"
 	force = DAMAGE_STAFF + 6
 	force_wielded =  DAMAGE_STAFF_WIELD + 7
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_QUARTERSTAFF * INTEGRITY_MOD_BLOODSTEEL
 	melting_material = /datum/material/bloodsteel
 	sellprice = 0
 
@@ -260,7 +260,7 @@
 	force = DAMAGE_SPEARPLUS + 2
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
 	wbalance = GREAT_PARRY
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BLOODSTEEL
 	max_blade_int = 240
 	smeltresult = /obj/item/ingot/bloodsteel
 	sellprice = 0
@@ -591,7 +591,7 @@
 	force = DAMAGE_SPEAR + 2
 	force_wielded = DAMAGE_HALBERD_WIELD + 2
 	wbalance = EASY_TO_DODGE
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_BLOODSTEEL
 	max_blade_int = 300
 	smeltresult = /obj/item/ingot/bloodsteel
 	melting_material = /datum/material/bloodsteel

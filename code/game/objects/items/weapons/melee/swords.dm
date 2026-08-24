@@ -133,6 +133,7 @@
 	sellprice = 0
 	item_weight = 600 GRAMS
 	smeltresult = /obj/item/ingot/bloodsteel
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BLOODSTEEL
 
 /obj/item/weapon/sword/short/ida //Worse thrust but more damage for cutting.
 	name = "steel ida"
@@ -203,7 +204,7 @@
 	force = DAMAGE_SWORD + 2
 	force_wielded = DAMAGE_SWORD_WIELD + 2
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BLOODSTEEL
 	smeltresult = /obj/item/ingot/bloodsteel
 	sellprice = 0
 	item_weight = 1 KILOGRAMS
@@ -763,6 +764,7 @@
 	force = DAMAGE_SWORD + 2
 	smeltresult = /obj/item/ingot/bloodsteel
 	item_weight = 600 GRAMS
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_BLOODSTEEL
 
 /obj/item/weapon/sword/rapier/bloodsteel/Initialize(mapload)
 	. = ..()
@@ -1424,7 +1426,7 @@
 	force = DAMAGE_SWORD + 2
 	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_BLOODSTEEL
 	smeltresult = /obj/item/ingot/bloodsteel
 	sellprice = 0
 	item_weight = 2.5 KILOGRAMS

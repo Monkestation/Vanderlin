@@ -404,7 +404,7 @@
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_HARD_TO_DODGE
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BLOODSTEEL
 	melting_material = /datum/material/bloodsteel
 	item_weight = 200 GRAMS
 	sellprice = 0
