@@ -715,6 +715,8 @@
 	smeltresult = /obj/item/ingot/blacksteel
 	melting_material = /datum/material/blacksteel
 	melt_amount = 100
+	max_blade_int = 400
+	max_integrity = INTEGRITY_BLACKSTEEL
 	item_weight = 600 GRAMS
 
 // Hoplite Kophesh
