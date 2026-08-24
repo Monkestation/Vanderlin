@@ -87,7 +87,8 @@
 		source.avoid, \
 		source.skip_first, \
 		source.use_diagonals, \
-		source.heuristic)
+		source.heuristic, \
+	)
 
 	if(!length(path))
 		return

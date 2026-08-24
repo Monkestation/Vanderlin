@@ -17,7 +17,6 @@
 	previous_node = null
 	return ..()
 
-
 /datum/pathfind/astar
 	/// The thing that we're actually trying to path for
 	var/atom/movable/invoker
@@ -93,12 +92,8 @@
 	. = ..()
 	if(!.)
 		return
-
 	if(!get_turf(end))
 		stack_trace("Invalid A* destination")
-		return FALSE
-
-	if(start.z != end.z || start == end ) //no pathfinding between z levels
 		return FALSE
 
 	// If the turf is out of the step range we already know it's too far.
@@ -114,6 +109,7 @@
 
 	open_turf_to_node[start] = start_node
 	binary_insert_node(start_node)
+
 	return TRUE
 
 /**
@@ -132,15 +128,8 @@
 #endif
 	return ..()
 
-/**
- * search_step() is the workhorse of pathfinding. It'll do the searching logic, and will slowly build up a path
- * returns TRUE if everything is stable, FALSE if the pathfinding logic has failed, and we need to abort
- */
+// This copies most of Astar but this is so we don't slow down Astar with multiZ checks we aren't using
 /datum/pathfind/astar/search_step(tick_check = TRUE)
-	. = ..()
-	if(!.)
-		return
-
 	if(QDELETED(invoker))
 		return FALSE
 
@@ -158,22 +147,31 @@
 			continue
 
 		// Check to see if we're close enough to the end destination.
-		if(ASTAR_CLOSE_ENOUGH_TO_END(end, current_node_turf))
+		if(current_node_turf.z == end.z && ASTAR_CLOSE_ENOUGH_TO_END(end, current_node_turf))
 			unwind_path(current_node)
 			return TRUE
 
 		// Scan cardinal turfs for valid movements.
 		for(var/scan_direction in use_diagonals ? all_search_dirs : lateral_search_dirs)
-			var/turf/searching_turf = get_step(current_node_turf, scan_direction)
 			var/is_diagonal = ISDIAGONALDIR(scan_direction)
+			var/turf/searching_turf = is_diagonal ? get_step(current_node_turf, scan_direction) : null
+
+			// For cardinal moves check if there is stairs to move onto first
+			if(!is_diagonal)
+				var/obj/structure/stairs/z_mover = locate() in current_node_turf
+				if(!z_mover)
+					searching_turf = get_step(current_node_turf, scan_direction)
+				else
+					// Technically we could go further and account for legendary skills/flying/etc to just jump straight off open space,
+					// we aren't going to (yet)
+					searching_turf = z_mover.get_transit_destination(scan_direction)
+
 			if(closed[searching_turf] & scan_direction)
 				continue // Turf is known to be blocked from this direction, skip!
 
 			if(!(is_diagonal ? can_step_diagonal(current_node_turf, searching_turf) : CAN_STEP(current_node_turf, searching_turf, pass_info, avoid)))
 				closed[searching_turf] |= scan_direction
 				continue // Turf cannot be entered, atleast from this direction. Skip!
-
-			// At this point we consider this turf a valid node.
 
 			var/datum/astar_node/existing_node = open_turf_to_node[searching_turf]
 
@@ -227,7 +225,7 @@
 			all_nodes_ever[++all_nodes_ever.len] = new_node
 #endif
 			// Check to see if we're close enough to the end destination.
-			if(ASTAR_CLOSE_ENOUGH_TO_END(end, new_node))
+			if(new_node.turf.z == end.z && ASTAR_CLOSE_ENOUGH_TO_END(end, new_node.turf))
 				unwind_path(new_node)
 				return TRUE
 
@@ -255,7 +253,6 @@
 			return TRUE
 
 	return FALSE
-
 
 /// The generic heuristic
 /datum/pathfind/astar/proc/generic_heuristic(turf/searching_turf, turf/end)

@@ -50,7 +50,7 @@
 
 	var/time = world.timeofday
 
-	var/list/path = SSpathfinder.astar_pathfind_now(user, target, 100, 0, null, null, FALSE, diagonals, path_heuristic, TRUE)
+	var/list/path = SSpathfinder.astar_pathfind_now(user, target, 100, 0, null, null, FALSE, diagonals, path_heuristic)
 
 	var/after_time = world.timeofday
 
