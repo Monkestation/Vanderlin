@@ -135,6 +135,7 @@
 	desc = "The weight of His anguish, His pain, His hope and His love for humenkind - all hanging on this ornamental silver-steel head chained to this arm. A declaration of love for all that Psydon lives for, and a crushing reminder that the Ordo Benetarus will endure anything to defend it."
 	icon_state = "psymorningstar"
 	item_weight = 1.5 KILOGRAMS
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/flail/psydon/relic/Initialize(mapload)
 	. = ..()
