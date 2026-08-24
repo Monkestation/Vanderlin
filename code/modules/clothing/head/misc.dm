@@ -99,7 +99,7 @@
 	desc = "A fuzzy helmet of fur typically worn by frontiersmen of the far steppes."
 	icon_state = "papakha"
 	sellprice = VALUE_FINE_CLOTHING
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	min_cold_protection_temperature = -20
 	item_weight = 155 GRAMS
 
@@ -187,7 +187,7 @@
 	armor_type = /datum/armor/head/padded
 	body_parts_covered = HEAD|HAIR|EARS
 	prevent_crits =  MINOR_CRITICALS
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 120 GRAMS
 
 

@@ -14,7 +14,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	max_blade_int = 100
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	parrysound = list('sound/combat/parry/wood/parrywood (1).ogg', 'sound/combat/parry/wood/parrywood (2).ogg', 'sound/combat/parry/wood/parrywood (3).ogg')
@@ -49,7 +49,7 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(POLEARM_BASH)
 	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	smeltresult = /obj/item/fertilizer/ash
 	slot_flags = ITEM_SLOT_BACK
 	sharpness = IS_BLUNT
@@ -73,7 +73,7 @@
 	desc = "A staff that makes any journey easier. Durable and swift, capable of bludgeoning stray volves and ruffians alike."
 	icon_state = "quarterstaff"
 	force_wielded =  DAMAGE_STAFF_WIELD + 3
-	max_integrity = INTEGRITY_STRONG * 0.8
+	max_integrity = INTEGRITY_OLD_STRONG * 0.8
 	sellprice = 10
 	item_weight = 1.2 KILOGRAMS
 
@@ -85,7 +85,7 @@
 	force = DAMAGE_STAFF + 4
 	force_wielded = DAMAGE_STAFF_WIELD + 5
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	minstr = 7
 	item_weight = 1 KILOGRAMS
 	smeltresult = null
@@ -99,7 +99,7 @@
 	force = DAMAGE_STAFF + 6
 	force_wielded =  DAMAGE_STAFF_WIELD + 7
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	minstr = 7
 	item_weight = 1 KILOGRAMS
 	smeltresult = null
@@ -113,7 +113,7 @@
 	force = DAMAGE_STAFF + 6
 	force_wielded =  DAMAGE_STAFF_WIELD + 7
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_OLD_STRONGEST * 0.8
 	minstr = 7
 	item_weight = 1 KILOGRAMS
 	smeltresult = null
@@ -133,7 +133,7 @@
 	force = DAMAGE_STAFF + 6
 	force_wielded =  DAMAGE_STAFF_WIELD + 7
 	gripped_intents = list(POLEARM_BASH, MACE_SMASH)
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_OLD_STRONGEST * 0.8
 	minstr = 8
 	item_weight = 1.5 KILOGRAMS
 	melting_material = /datum/material/gold
@@ -146,7 +146,7 @@
 	icon_state = "quarterstaff_blacksteel"
 	force = DAMAGE_STAFF + 8
 	force_wielded =  DAMAGE_STAFF_WIELD + 8
-	max_integrity = INTEGRITY_BLACKSTEEL
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL * INTEGRITY_MOD_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
 	melt_amount = 75
 
@@ -194,7 +194,7 @@
 	force = DAMAGE_SPEARPLUS + 2
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
 	wbalance = GREAT_PARRY
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	max_blade_int = 200
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 40
@@ -205,7 +205,7 @@
 	desc = "Keep the rest at arm's length, lest you're burdened with the pain of rememberance."
 	icon_state = "swordstaff"
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
-	max_integrity = INTEGRITY_BLACKSTEEL
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 /obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
 	. = ..()
@@ -218,7 +218,7 @@
 	force = DAMAGE_SPEARPLUS + 3
 	force_wielded = DAMAGE_SPEAR_WIELD + 5
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST * 1.25
+	max_integrity = INTEGRITY_OLD_STRONGEST * 1.25
 	sellprice = 50
 
 /obj/item/weapon/polearm/spear/silver
@@ -228,7 +228,7 @@
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_SPEAR_WIELD
 	wbalance = GREAT_PARRY
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_OLD_STRONGEST * 0.8
 	max_blade_int = 200
 	smeltresult = /obj/item/ingot/silver
 	sellprice = 60
@@ -311,7 +311,7 @@
 	icon_state = "ji_iron"
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_SPEAR_WIELD - 2
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	max_blade_int = 150
 	smeltresult = /obj/item/ingot/iron
 	item_weight = 2 KILOGRAMS
@@ -322,7 +322,7 @@
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_SPEAR_WIELD - 3
 	wdefense = GOOD_PARRY
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	max_blade_int = 100
 	smeltresult = /obj/item/ingot/bronze
 	item_weight = 2 KILOGRAMS
@@ -338,7 +338,7 @@
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_LONG
 	max_blade_int = 50
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
@@ -385,10 +385,10 @@
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_LONG
 	max_blade_int = 50
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 70
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	melting_material = /datum/material/copper
 	melt_amount = 75
 	sellprice = 15
@@ -417,7 +417,7 @@
 	melt_amount = 75
 	throwforce = DAMAGE_SPEAR_WIELD + 5
 	max_blade_int = 80
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	throw_speed = 4
 	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 60, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
@@ -433,7 +433,7 @@
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_SPEAR + 3
 	max_blade_int = 100
-	max_integrity = INTEGRITY_STANDARD * 1.25
+	max_integrity = INTEGRITY_OLD_STANDARD * 1.25
 	throw_speed = 4
 	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 75, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
@@ -449,7 +449,7 @@
 	melt_amount = 75
 	throwforce = DAMAGE_SPEAR_WIELD + 8
 	max_blade_int = 100
-	max_integrity = INTEGRITY_STANDARD * 0.8
+	max_integrity = INTEGRITY_OLD_STANDARD * 0.8
 	throw_speed = 4
 	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 70, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
@@ -463,7 +463,7 @@
 	icon_state = "bspear"
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 60
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	sellprice = 5
 	throw_speed = 4
@@ -488,7 +488,7 @@
 	icon_state = "bspear"
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 60
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	sellprice = 5
 	throw_speed = 4
@@ -520,7 +520,7 @@
 	possible_item_intents = list(POLEARM_THRUST, POLEARM_BASH) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 
 	slot_flags = ITEM_SLOT_BACK
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
@@ -538,7 +538,7 @@
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_HALBERD_WIELD
 	wbalance = EASY_TO_DODGE
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_OLD_STRONGEST * 0.8
 	max_blade_int = 300
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
@@ -567,7 +567,7 @@
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_HALBERD_WIELD + 2
 	wbalance = HARD_TO_DODGE
-	max_integrity = INTEGRITY_BLACKSTEEL
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL * INTEGRITY_MOD_BLACKSTEEL
 	max_blade_int = 450
 	smeltresult = null
 	melting_material = /datum/material/blacksteel
@@ -627,7 +627,7 @@
 	possible_item_intents = list(AXE_CUT)
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SPEAR_THRUST)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 	swingsound = BLADEWOOSH_MED
 	axe_cut = 10
@@ -678,7 +678,7 @@
 	force = DAMAGE_AXE + 2
 	wlength = WLENGTH_LONG
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	minstr = 9
 
 	axe_cut = 15
@@ -751,7 +751,7 @@
 	icon_state = "glaive"
 	force = DAMAGE_AXE + 2
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
@@ -769,7 +769,7 @@
 	possible_item_intents = list(POLEARM_BASH, POLEARM_CHOP) //bash is for nonlethal takedowns, only targets limbs
 	gripped_intents = list(POLEHAMMER_STRIKE, POLEARM_THRUST, MACE_HVYSMASH, DAZE_BASH)
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 
 	slot_flags = ITEM_SLOT_BACK
 	smeltresult = /obj/item/ingot/steel_slag
@@ -799,7 +799,7 @@
 	force_wielded = DAMAGE_HALBERD_WIELD -3
 	wbalance = VERY_EASY_TO_DODGE
 	wdefense = AVERAGE_PARRY
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	melt_amount = 150
@@ -853,7 +853,7 @@
 	possible_item_intents = list(SPEAR_CUT) //truly just a long knife
 	gripped_intents = list(SPEAR_CUT)
 	max_blade_int = 150
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
@@ -883,7 +883,7 @@
 	throwforce = DAMAGE_SPEARPLUS + 2
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 75
-	max_integrity = INTEGRITY_WORST * 0.8
+	max_integrity = INTEGRITY_OLD_WORST * 0.8
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -905,7 +905,7 @@
 	throwforce = DAMAGE_SPEARPLUS + 2
 	anvilrepair = /datum/attribute/skill/craft/crafting
 	max_blade_int = 125
-	max_integrity = INTEGRITY_WORST * 0.8 + 50
+	max_integrity = INTEGRITY_OLD_WORST * 0.8 + 50
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
@@ -945,7 +945,7 @@
 	force_wielded = DAMAGE_SPEAR_WIELD
 	possible_item_intents = list(POLEARM_BASH)
 	gripped_intents = list(POLEARM_BASH, MACE_WOODSMASH)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/polearm/woodstaff/psydonian/getonmobprop(tag)

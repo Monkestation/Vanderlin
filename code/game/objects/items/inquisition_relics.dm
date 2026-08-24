@@ -1047,7 +1047,7 @@
 	unequip_delay_self = 45
 	equip_delay_other = 360 SECONDS // No getting around it. Cheater. LEFT CLICK THEM!!!
 	equip_delay_self = 360 SECONDS
-	max_integrity = 10000 // No breaking it. NO CHEAP FRAGS.
+	max_integrity = INTEGRITY_UNBREAKABLE // No breaking it. NO CHEAP FRAGS.
 	strip_delay = 10
 	slot_flags = ITEM_SLOT_HEAD
 	body_parts_covered = FULL_HEAD

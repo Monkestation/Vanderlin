@@ -4,6 +4,7 @@
 	icon_state = "zizodagger"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/weapon/sword/arming/zizo_arming
 	name = "darksteel arming sword"
@@ -11,6 +12,7 @@
 	icon_state = "zizoarming"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	smeltresult = /obj/item/ingot/avantyne
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/weapon/sword/rapier/zizo_rapier
 	name = "darksteel rapier"
@@ -18,6 +20,7 @@
 	icon_state = "zizorapier"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	smeltresult = /obj/item/ingot/avantyne
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/weapon/sword/long/zizo_longsword
 	name = "darksteel longsword"
@@ -26,6 +29,7 @@
 	icon_state = "zizolongsword"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	smeltresult = /obj/item/ingot/avantyne
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword
 	name = "darksteel greatsword"
@@ -34,6 +38,7 @@
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	item_weight = 2.4 KILOGRAMS
 	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser
 	name = "darksteel kriegsmesser"
@@ -43,6 +48,7 @@
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	item_weight = 2.3 KILOGRAMS
 	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser/getonmobprop(tag)
 	. = ..()
