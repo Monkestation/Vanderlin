@@ -1,6 +1,6 @@
 /datum/ai_controller/fiend
 	movement_delay = 1 SECONDS
-	ai_movement = /datum/ai_movement/astar
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic(),

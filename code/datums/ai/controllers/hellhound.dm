@@ -1,7 +1,7 @@
 /datum/ai_controller/hellhound
 	movement_delay = 0.4 SECONDS
 
-	ai_movement = /datum/ai_movement/astar
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 
 	blackboard = list(
 		BB_HELLHOUND_FIRE = 0,

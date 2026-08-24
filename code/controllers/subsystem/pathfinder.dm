@@ -46,6 +46,7 @@ SUBSYSTEM_DEF(pathfinder)
 	use_diagonals = TRUE,
 	list/on_finish,
 	datum/callback/heuristic,
+	closest_approach,
 )
 
 	var/datum/pathfind/astar/path = new(
@@ -59,6 +60,7 @@ SUBSYSTEM_DEF(pathfinder)
 		use_diagonals,
 		on_finish,
 		heuristic,
+		closest_approach,
 	)
 
 	if(path.start())
@@ -77,6 +79,7 @@ SUBSYSTEM_DEF(pathfinder)
 	skip_first = TRUE,
 	use_diagonals = TRUE,
 	datum/callback/heuristic,
+	closest_approach,
 )
 
 	var/datum/pathfind/astar/path = new(
@@ -90,6 +93,7 @@ SUBSYSTEM_DEF(pathfinder)
 		use_diagonals,
 		null,
 		heuristic,
+		closest_approach,
 	)
 
 	if(!path.start())

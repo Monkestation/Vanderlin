@@ -3,6 +3,10 @@
  */
 /datum/ai_movement/astar
 	max_pathing_attempts = 4
+	var/closest_approach = FALSE
+
+/datum/ai_movement/astar/closest_approach
+	closest_approach = TRUE
 
 /datum/ai_movement/astar/start_moving_towards(datum/ai_controller/controller, atom/current_movement_target, min_distance)
 	. = ..()
@@ -20,6 +24,7 @@
 		subsystem = SSai_movement,
 		extra_info = controller,
 		initial_path = controller.blackboard[BB_PATH_TO_USE],
+		closest_approach = src.closest_approach
 	)
 	controller.clear_blackboard_key(BB_PATH_TO_USE)
 

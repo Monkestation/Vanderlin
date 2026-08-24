@@ -2,7 +2,7 @@
 /datum/ai_controller/human_npc
 	movement_delay = 0.5 SECONDS
 	max_target_distance = 13
-	ai_movement = /datum/ai_movement/astar
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 
 	blackboard = list(
 		BB_WEAPON_TYPE = /obj/item/weapon,

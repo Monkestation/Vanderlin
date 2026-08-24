@@ -7,7 +7,7 @@
 		BB_BASIC_MOB_FLEEING = TRUE,
 	)
 
-	ai_movement = /datum/ai_movement/astar
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	planning_subtrees = list(
@@ -41,7 +41,7 @@
 		BB_BASIC_MOB_FLEEING = TRUE,
 	)
 
-	ai_movement = /datum/ai_movement/astar
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 	idle_behavior = /datum/idle_behavior/idle_random_walk
 
 	planning_subtrees = list(

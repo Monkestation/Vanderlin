@@ -1,6 +1,6 @@
 /datum/ai_controller/voiddragon
 	movement_delay = 0.5 SECONDS
-	ai_movement = /datum/ai_movement/astar
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic(),
 		BB_DRAGON_ENRAGED = FALSE,

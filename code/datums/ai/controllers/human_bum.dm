@@ -1,7 +1,7 @@
 /datum/ai_controller/human_bum
 	movement_delay = 0.5 SECONDS
 
-	ai_movement = /datum/ai_movement/astar
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 
 	blackboard = list(
 		BB_WEAPON_TYPE = /obj/item/weapon,

@@ -1,7 +1,7 @@
 /datum/ai_controller/warden
 	movement_delay = 0.8 SECONDS
 
-	ai_movement = /datum/ai_movement/astar
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 
 	blackboard = list(
 		BB_HELLHOUND_FIRE = 0,

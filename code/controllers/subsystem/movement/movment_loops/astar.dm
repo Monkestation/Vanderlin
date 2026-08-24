@@ -38,6 +38,7 @@
 	initial_path,
 	use_diagonals,
 	datum/callback/heuristic,
+	closest_approach,
 )
 	return add_to_loop(
 		moving,
@@ -58,6 +59,7 @@
 		initial_path,
 		use_diagonals,
 		heuristic,
+		closest_approach,
 	)
 
 /datum/move_loop/has_target/astar
@@ -87,6 +89,8 @@
 	var/list/datum/callback/on_finish_callbacks = list()
 	///AStar heuristic function
 	var/datum/callback/heuristic
+	///If the closest approach is returned when pathing fails EXPENSIVE!
+	var/closest_approach
 
 /datum/move_loop/has_target/astar/New(datum/movement_packet/owner, datum/controller/subsystem/movement/controller, atom/moving, priority, flags, datum/extra_info)
 	. = ..()
@@ -105,6 +109,7 @@
 	list/initial_path,
 	use_diagonals,
 	datum/callback/heuristic,
+	closest_approach,
 )
 	. = ..()
 	if(!.)
@@ -117,6 +122,7 @@
 	src.skip_first = skip_first
 	src.use_diagonals = use_diagonals
 	src.heuristic = heuristic
+	src.closest_approach = closest_approach
 	movement_path = initial_path?.Copy()
 
 /datum/move_loop/has_target/astar/compare_loops(
@@ -136,6 +142,7 @@
 	initial_path,
 	use_diagonals,
 	datum/callback/heuristic,
+	closest_approach,
 )
 	if(..() && \
 	repath_delay == src.repath_delay && \
@@ -144,7 +151,8 @@
 	access ~= src.access && \
 	avoid == src.avoid && \
 	use_diagonals == src.use_diagonals && \
-	heuristic == src.heuristic)
+	heuristic == src.heuristic && \
+	closest_approach == src.closest_approach)
 		return TRUE
 	return FALSE
 
@@ -179,7 +187,8 @@
 		skip_first,
 		use_diagonals = use_diagonals,
 		on_finish = on_finish_callbacks,
-		heuristic = heuristic
+		heuristic = heuristic,
+		closest_approach = closest_approach,
 	)
 
 	if(path_ok)

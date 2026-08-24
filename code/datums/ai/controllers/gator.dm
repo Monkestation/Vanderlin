@@ -1,6 +1,6 @@
 /datum/ai_controller/gator
 	movement_delay = 0.8 SECONDS // Gators are slower than rats on land
-	ai_movement = /datum/ai_movement/astar
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items(),
 		BB_PET_TARGETING_DATUM = new /datum/targetting_datum/basic/not_friends(),
