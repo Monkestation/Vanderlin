@@ -30,7 +30,7 @@
 	. = ..()
 	var/mob/living/living_pawn = new_pawn
 	RegisterSignal(new_pawn, COMSIG_MOB_MOVESPEED_UPDATED, PROC_REF(update_movespeed))
-	movement_delay = living_pawn.cached_multiplicative_slowdown
+	movement_delay = living_pawn.cached_multiplicative_slowdown || 1
 
 
 /datum/ai_controller/guardsman/UnpossessPawn(destroy)
@@ -43,4 +43,4 @@
 
 /datum/ai_controller/guardsman/proc/update_movespeed(mob/living/pawn)
 	SIGNAL_HANDLER
-	movement_delay = pawn.cached_multiplicative_slowdown
+	movement_delay = pawn.cached_multiplicative_slowdown || 1
