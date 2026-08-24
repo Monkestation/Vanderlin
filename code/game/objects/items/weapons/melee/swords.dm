@@ -1062,6 +1062,7 @@
 			With it, one can write a song across all of Psydonia."
 	icon_state = "bslongsword"
 	force = DAMAGE_SWORD + 3
+	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
 	max_integrity = INTEGRITY_BLACKSTEEL
 	max_blade_int = 400
 	smeltresult = /obj/item/ingot/blacksteel
