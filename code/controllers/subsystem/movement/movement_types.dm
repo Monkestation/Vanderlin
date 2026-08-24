@@ -52,6 +52,9 @@
 		return FALSE
 
 	src.delay = max(delay, world.tick_lag) //Please...
+	if(!src.delay)
+		stack_trace("Movement loop delay set to 0")
+		src.delay = 1
 	src.lifetime = timeout
 	return TRUE
 
