@@ -290,7 +290,7 @@
 	force = DAMAGE_MACE + 4
 	force_wielded = DAMAGE_MACE_WIELD + 2
 	max_integrity = INTEGRITY_BLACKSTEEL
-	smeltresult = /obj/item/ingot/blacksteel
+	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 150
 	sellprice = 120

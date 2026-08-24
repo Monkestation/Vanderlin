@@ -205,6 +205,7 @@
 	desc = "Keep the rest at arm's length, lest you're burdened with the pain of rememberance."
 	icon_state = "swordstaff"
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
+	max_integrity = INTEGRITY_BLACKSTEEL
 
 /obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
 	. = ..()
@@ -558,6 +559,21 @@
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+/obj/item/weapon/polearm/halberd/blacksteel
+	name = "blacksteel halberd"
+	desc = "A graceful blacksteel weapon, shaped much like the wing of a dragon. May it sweep through your foes with grace, splattering flowing crimson with every blow."
+	icon_state = "bs_halberd"
+	force = DAMAGE_SPEARPLUS
+	force_wielded = DAMAGE_HALBERD_WIELD + 2
+	wbalance = HARD_TO_DODGE
+	max_integrity = INTEGRITY_BLACKSTEEL
+	max_blade_int = 450
+	smeltresult = null
+	melting_material = /datum/material/blacksteel
+	melt_amount = 200
+	sellprice = 250
+	axe_cut = 20
 
 //................ Psydonian Halberd ............... //
 /obj/item/weapon/polearm/halberd/psydon
