@@ -2824,6 +2824,12 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/blocks,
 /area/indoors/town)
+"bkz" = (
+/obj/machinery/light/fueled/lanternpost/fixed{
+	pixel_x = -5
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/town)
 "bkC" = (
 /obj/structure/chair/bench/church{
 	dir = 1
@@ -9347,6 +9353,7 @@
 	pixel_y = 4;
 	pixel_x = -13
 	},
+/obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/grass,
 /area/indoors/town/clinic_large)
 "dVV" = (
@@ -13281,6 +13288,13 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
+"fCi" = (
+/obj/structure/fluff/walldeco/feldshersign{
+	pixel_y = 0;
+	pixel_x = 32
+	},
+/turf/open/floor/dirt,
+/area/outdoors/town)
 "fCF" = (
 /obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
@@ -28068,6 +28082,13 @@
 "lHY" = (
 /turf/open/floor/cobblerock,
 /area/under/cavewet)
+"lHZ" = (
+/obj/machinery/light/fueled/lanternpost/fixed{
+	pixel_x = 6;
+	dir = 1
+	},
+/turf/open/floor/cobble,
+/area/outdoors/town)
 "lId" = (
 /obj/structure/flora/grass/water,
 /obj/machinery/light/fueled/wallfire/candle/lamp{
@@ -45081,7 +45102,8 @@
 /area/indoors/town/church)
 "syD" = (
 /obj/structure/fake_machine/drugmachine{
-	pixel_x = -32
+	pixel_x = -32;
+	density = 0
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
@@ -53841,10 +53863,11 @@
 /obj/effect/landmark/start/merchant{
 	dir = 4
 	},
-/obj/structure/chair/wood/alt/chair_noble{
-	dir = 4
-	},
 /obj/structure/carpet/cyan,
+/obj/structure/chair/wood{
+	dir = 4;
+	desc = "This chair feels less plush, but more sturdy somehow."
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/shop)
 "vXG" = (
@@ -55337,6 +55360,14 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/keep/halls/e)
+"wAl" = (
+/obj/structure/fluff/signage{
+	name = "Clinic - East";
+	density = 0;
+	pixel_y = 24
+	},
+/turf/open/floor/metal/barograte,
+/area/outdoors/town)
 "wAm" = (
 /obj/structure/window/solid,
 /turf/open/floor/woodturned,
@@ -56413,6 +56444,7 @@
 	icon_state = "grass3"
 	},
 /obj/item/reagent_containers/glass/bucket/wooden,
+/obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/grass,
 /area/indoors/town/clinic_large)
 "wSg" = (
@@ -123515,7 +123547,7 @@ fVi
 fVi
 fVi
 iXB
-oNa
+wAl
 oNa
 eKV
 jWE
@@ -124930,7 +124962,7 @@ icA
 lxP
 pny
 kwJ
-mFi
+fGe
 gKQ
 kfW
 neD
@@ -125536,7 +125568,7 @@ icA
 oWz
 imJ
 mFi
-fGe
+mFi
 osm
 hFZ
 bWb
@@ -125940,7 +125972,7 @@ xbB
 fVi
 oLy
 mFi
-mFi
+fGe
 osm
 gKQ
 gKQ
@@ -126746,7 +126778,7 @@ sEp
 eeG
 ele
 mFi
-cJK
+bkz
 kwJ
 kwJ
 xyx
@@ -127756,7 +127788,7 @@ hZn
 mFi
 kwJ
 ele
-eYe
+fCi
 eYe
 lAf
 lUm
@@ -127949,7 +127981,7 @@ pny
 ele
 mFi
 kwJ
-cJK
+bkz
 hZn
 mFi
 mFi
@@ -129563,7 +129595,7 @@ cpq
 cpq
 ssf
 wmF
-chG
+lHZ
 hZn
 mFi
 lAf
