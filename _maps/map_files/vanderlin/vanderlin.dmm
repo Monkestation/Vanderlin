@@ -48937,8 +48937,10 @@
 /obj/effect/landmark/start/apothecary{
 	dir = 1
 	},
-/obj/structure/chair/stool/bar,
 /obj/structure/fluff/fibermat/round,
+/obj/structure/chair/stool/bar{
+	dir = 1
+	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "udU" = (
