@@ -831,6 +831,10 @@
 /obj/structure/bars/passage/shutter/open{
 	redstone_id = "Merchant"
 	},
+/obj/structure/fake_machine/atm{
+	pixel_y = 0;
+	pixel_x = -32
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/shop)
 "arZ" = (
@@ -13513,7 +13517,8 @@
 "fIw" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/fake_machine/merchantvend{
-	pixel_x = 32
+	pixel_x = 32;
+	density = 0
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/shop)
