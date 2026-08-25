@@ -80,7 +80,7 @@
 	START_PROCESSING(SSobj, src)
 
 // This is awful
-/obj/item/chilltouch/process()
+/obj/item/chilltouch/process(seconds_per_tick)
 	var/hand_proc = pick(1,2,3,4,5)
 	var/mult = pick(1,2)
 	var/mob/living/target = host

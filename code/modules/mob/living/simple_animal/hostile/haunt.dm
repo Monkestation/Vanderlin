@@ -192,19 +192,14 @@
 		slavepile = null
 	. = ..()
 
-/mob/living/simple_animal/hostile/haunt/Life()
+/mob/living/simple_animal/hostile/haunt/Life(seconds_per_tick)
 	. = ..()
-	if(slavepile)
-		var/offset_x = x - slavepile.x
-		var/offset_y = y - slavepile.y
-		if(offset_x > 8 || offset_x < -8 || offset_y > 8 || offset_y < -8 || (z != slavepile.z))
-			if(isturf(slavepile.loc))
-				src.forceMove(slavepile.loc)
-			else
-				death()
-	if(!target)
-		if(prob(3))
-			INVOKE_ASYNC(src, PROC_REF(emote), pick("laugh", "moan", "whisper"))
+
+	if(slavepile && get_dist(src, slavepile) >= 8)
+		if(isturf(slavepile.loc))
+			forceMove(slavepile.loc)
+		else
+			death()
 
 /mob/living/simple_animal/hostile/haunt/get_sound(input)
 	switch(input)

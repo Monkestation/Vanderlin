@@ -286,19 +286,21 @@
 	update_wounds()
 	update_pain_coeff()
 
-/obj/item/bodypart/proc/on_owner_life()
+/obj/item/bodypart/proc/on_owner_life(seconds_per_tick)
 	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_FRACTURE))
-		on_chronic_fracture_life()
+		on_chronic_fracture_life(seconds_per_tick)
 	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_ARTHRITIS))
-		on_arthritis_life()
+		on_arthritis_life(seconds_per_tick)
 	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_MIGRAINE))
-		on_migraine_life()
+		on_migraine_life(seconds_per_tick)
 
-/obj/item/bodypart/proc/on_chronic_fracture_life()
-	if(!prob(2))
+/obj/item/bodypart/proc/on_chronic_fracture_life(seconds_per_tick)
+	if(!SPT_PROB(1, seconds_per_tick))
 		return
+
 	if(pain_dam >= SHOCK_STAGE_3)
 		return
+
 	if(owner.encumbrance >= ENCUMBRANCE_HEAVY)
 		var/pain_amount = rand(3, 5)
 		if(owner.encumbrance >= ENCUMBRANCE_EXTREME)
@@ -308,21 +310,21 @@
 			to_chat(owner, span_warning("The weight of your equipment aggravates your chronic [name] pain!"))
 		add_pain(pain_amount)
 
-/obj/item/bodypart/proc/on_arthritis_life()
-	if(prob(2) && pain_dam < SHOCK_STAGE_2)
+/obj/item/bodypart/proc/on_arthritis_life(seconds_per_tick)
+	if(SPT_PROB(1, seconds_per_tick) && pain_dam < SHOCK_STAGE_2)
 		add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_1))
 		var/pain_msg = pick("Your [name] throbs with arthritic pain!",
 							"A sharp ache shoots through your [name]!",
 							"Your [name] feels stiff and painful!")
 		to_chat(owner, span_warning(pain_msg))
 
-	if(prob(1) && owner.loc && pain_dam < (SHOCK_STAGE_2 / 2))
+	if(SPT_PROB(0.5, seconds_per_tick) && owner.loc && pain_dam < (SHOCK_STAGE_2 / 2))
 		if(SSParticleWeather.runningWeather && SSParticleWeather.runningWeather.can_weather(owner))
 			add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_1))
 			to_chat(owner, span_warning("The weather makes your arthritis act up."))
 
-/obj/item/bodypart/proc/on_migraine_life()
-	if(prob(2) && pain_dam < SHOCK_STAGE_2)
+/obj/item/bodypart/proc/on_migraine_life(seconds_per_tick)
+	if(SPT_PROB(1, seconds_per_tick) && pain_dam < SHOCK_STAGE_2)
 		add_pain(rand(SHOCK_STAGE_1 * 0.5, SHOCK_STAGE_2 * 0.5))
 
 		if(prob(30))
@@ -331,7 +333,7 @@
 		else
 			to_chat(owner, span_warning("A migraine headache begins to build."))
 
-	if(prob(1))
+	if(SPT_PROB(0.5, seconds_per_tick))
 		if(pain_dam < SHOCK_STAGE_2 && owner.loc?.luminosity > 2)
 			add_pain(rand(SHOCK_STAGE_1 * 0.3, SHOCK_STAGE_1 * 0.5))
 			to_chat(owner, span_warning("The flickering flames make your migraine worse!"))
@@ -451,19 +453,19 @@
 	update_limb_efficiency()
 
 /// Return TRUE to get whatever mob this is in to update health.
-/obj/item/bodypart/proc/on_life(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+/obj/item/bodypart/proc/on_life(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	if(pain_heal_tick)
 		var/multiplier = 1
 		if(owner.body_position == LYING_DOWN)
 			multiplier *= pain_heal_rest_multiplier
-		if(remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE))
+		if(remove_pain(amount = (pain_heal_tick * multiplier * seconds_per_tick * (PAIN_SYSTEM_SPEED_MODIFIER / 10)), updating_health = FALSE))
 			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(can_decay(passed_temp))
 		if(germ_level || (getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY))
-			update_germs(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness)
+			update_germs(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness)
 			. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(number_injuries)
-		update_injuries(delta_time, times_fired)
+		update_injuries(seconds_per_tick)
 		. |= BODYPART_LIFE_UPDATE_HEALTH
 
 /// Check if we need to run on_life()
@@ -613,7 +615,7 @@
 		post_damage_change()
 
 /// Deal with injury healing and other updates
-/obj/item/bodypart/proc/update_injuries(delta_time, times_fired)
+/obj/item/bodypart/proc/update_injuries(seconds_per_tick)
 	var/toxins = 0
 	if(owner)
 		toxins = owner.get_chem_effect(CE_TOXIN)
@@ -627,7 +629,6 @@
 		if(injury.damage <= 0)
 			qdel(injury)
 			continue
-
 		// Slow healing
 		var/heal_amt = injury.base_autoheal_amount
 		if(!toxins && injury.can_autoheal())
@@ -636,7 +637,7 @@
 				heal_amt *= 2
 		if(heal_amt)
 			heal_amt *= injury.amount
-			injury.heal_damage(heal_amt * delta_time)
+			injury.heal_damage(heal_amt * seconds_per_tick)
 
 	if(post_damage_change(FALSE))
 		owner.update_damage_overlays()
@@ -657,17 +658,16 @@
 
 		number_injuries += injury.amount
 
-/// General handling of infections
-/obj/item/bodypart/proc/update_germs(delta_time, times_fired, virus_immunity, antibiotics)
+/obj/item/bodypart/proc/update_germs(seconds_per_tick, virus_immunity, antibiotics)
 	//Cryo stops germs from moving and doing their bad stuffs
 	if(owner.bodytemperature <= -15)
 		return
-	handle_germ_sync(delta_time, times_fired)
-	handle_germ_effects(delta_time, times_fired, virus_immunity, antibiotics)
-	handle_antibiotics(delta_time, times_fired)
+	handle_germ_sync(seconds_per_tick)
+	handle_germ_effects(seconds_per_tick, virus_immunity, antibiotics)
+	handle_antibiotics(seconds_per_tick)
 
 /// Try to sync wound/inuries etc with our germ level
-/obj/item/bodypart/proc/handle_germ_sync(delta_time, times_fired)
+/obj/item/bodypart/proc/handle_germ_sync(seconds_per_tick)
 	// If we have no wounds, nor injuries, nor germ level, no point in trying to update
 	if(!length(wounds) && !length(injuries) && (germ_level <= 0))
 		return
@@ -680,8 +680,8 @@
 	// Open injuries can become infected, regardless of antibiotics
 	if(istype(open_turf))
 		for(var/datum/injury/injury as anything in injuries)
-			if(injury.infection_check(delta_time, times_fired) && (max(open_turf.germ_level, owner_germ_level) > injury.germ_level))
-				injury.adjust_germ_level(injury.infection_rate * delta_time)
+			if(injury.infection_check(seconds_per_tick) && (max(open_turf.germ_level, owner_germ_level) > injury.germ_level))
+				injury.adjust_germ_level(injury.infection_rate * seconds_per_tick)
 
 	// If we have sufficient antibiotics, then skip over this stuff, the infection is going away
 	var/antibiotics = owner.get_antibiotics()
@@ -690,39 +690,37 @@
 
 	for(var/datum/injury/injury as anything in injuries)
 		//Infected injuries raise the bodypart's germ level
-		if(injury.germ_level > germ_level || DT_PROB(CEILING(min(injury.germ_level/5, 40)/2, 1), delta_time))
-			adjust_germ_level(injury.infection_rate * delta_time)
+		if(injury.germ_level > germ_level || SPT_PROB(CEILING(min(injury.germ_level/5, 40)/2, 1), seconds_per_tick))
+			adjust_germ_level(injury.infection_rate * seconds_per_tick)
 			break	//limit increase to a maximum of one injury infection increase per 2 seconds
 
-
-/// Handle infection effects
-/obj/item/bodypart/proc/handle_germ_effects(delta_time, times_fired, immunity, antibiotics, immunity_weakness)
+/obj/item/bodypart/proc/handle_germ_effects(seconds_per_tick, immunity, antibiotics, immunity_weakness)
 	var/arterial_efficiency = getorganslotefficiency(ORGAN_SLOT_ARTERY)
 
 	// Being properly oxygenated
 	if(!artery_needed() || (arterial_efficiency >= ORGAN_FAILING_EFFICIENCY))
-		if(germ_level > 0 && (germ_level < INFECTION_LEVEL_ONE/2) && DT_PROB(immunity*0.3, delta_time))
-			adjust_germ_level(-0.5 * delta_time)
+		if(germ_level > 0 && (germ_level < INFECTION_LEVEL_ONE/2) && SPT_PROB(immunity * 0.3, seconds_per_tick))
+			adjust_germ_level(-0.5 * seconds_per_tick)
 			return
 	// Dry gangrene
 	else
-		adjust_germ_level(0.5 * delta_time)
+		adjust_germ_level(0.5 * seconds_per_tick)
 
 	if(germ_level >= INFECTION_LEVEL_ONE/2)
 		//Warn the user that they're a bit fucked
-		if(germ_level <= INFECTION_LEVEL_ONE && (owner.stat < DEAD) && DT_PROB(2, delta_time))
+		if(germ_level <= INFECTION_LEVEL_ONE && (owner.stat < DEAD) && SPT_PROB(2, seconds_per_tick))
 			owner.custom_pain("My [src.name] feels a bit warm and swollen...", 6, FALSE, src)
 		//Aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes, when immunity is full.
-		if(antibiotics < 5 && DT_PROB(FLOOR(germ_level/6 * immunity_weakness * 0.005, 1), delta_time))
+		if(antibiotics < 5 && SPT_PROB(FLOOR(germ_level/6 * immunity_weakness * 0.005, 1), seconds_per_tick))
 			if(immunity > 0)
 				//Immunity starts at 100. This doubles infection rate at 50% immunity. Rounded to nearest whole.
-				adjust_germ_level(clamp(FLOOR(0.5/immunity, 1), 1, 10) * delta_time)
+				adjust_germ_level(clamp(FLOOR(0.5/immunity, 1), 1, 10) * seconds_per_tick)
 			else
 				//Will only trigger if immunity has hit zero. Once it does, 10x infection rate.
-				adjust_germ_level(5 * delta_time)
+				adjust_germ_level(5 * seconds_per_tick)
 
 	if(germ_level >= INFECTION_LEVEL_ONE && (antibiotics < 20))
-		if(DT_PROB(3, delta_time) && (owner.stat < DEAD) && germ_level <= INFECTION_LEVEL_TWO)
+		if(SPT_PROB(3, seconds_per_tick) && (owner.stat < DEAD) && germ_level <= INFECTION_LEVEL_TWO)
 			owner.custom_pain("My [src.name] feels hotter than normal...", 12, FALSE, src)
 		var/fever_temperature = (BODYTEMP_HEAT_DAMAGE_LIMIT - BODYTEMP_NORMAL - 5) * min(germ_level/INFECTION_LEVEL_TWO, 1) + BODYTEMP_NORMAL
 		owner.adjust_bodytemperature(clamp((fever_temperature - 2)/BODYTEMP_COLD_DIVISOR + 1, 0, fever_temperature - owner.bodytemperature))
@@ -730,7 +728,7 @@
 	// Spread the infection to internal organs, child and parent bodyparts
 	if(germ_level >= INFECTION_LEVEL_TWO && antibiotics < 25)
 		// Chance to cause pain, while also informing the owner
-		if(owner && (owner.stat < DEAD) && DT_PROB(4, delta_time))
+		if(owner && (owner.stat < DEAD) && SPT_PROB(4, seconds_per_tick))
 			owner.custom_pain("My [src.name] starts leaking some pus...", 16, FALSE, src)
 
 		// Make internal organs become infected one at a time instead of all at once
@@ -746,7 +744,7 @@
 
 		// Infect the target organ
 		if(target_organ)
-			target_organ.adjust_germ_level(0.5 * delta_time)
+			target_organ.adjust_germ_level(0.5 * seconds_per_tick)
 
 		// Spread the infection to child and parent organs
 		var/zones = list()
@@ -755,11 +753,11 @@
 			for(var/zone in zones)
 				var/obj/item/bodypart/bodypart = owner.get_bodypart(zone)
 				if(bodypart && (bodypart.germ_level < germ_level))
-					if(bodypart.germ_level < INFECTION_LEVEL_TWO || DT_PROB(15, delta_time))
-						bodypart.adjust_germ_level(0.5 * delta_time)
+					if(bodypart.germ_level < INFECTION_LEVEL_TWO || SPT_PROB(15, seconds_per_tick))
+						bodypart.adjust_germ_level(0.5 * seconds_per_tick)
 
 /// Handle the antibiotic chem effect
-/obj/item/bodypart/proc/handle_antibiotics(delta_time, times_fired)
+/obj/item/bodypart/proc/handle_antibiotics(seconds_per_tick)
 	if(!owner || (owner.stat >= DEAD) || (germ_level <= 0))
 		return
 
@@ -771,9 +769,9 @@
 		if(getorganslotefficiency(ORGAN_SLOT_ARTERY) >= ORGAN_FAILING_EFFICIENCY)
 			set_germ_level(0) //cure instantly
 	else
-		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * delta_time)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
+		adjust_germ_level(-antibiotics * SANITIZATION_ANTIBIOTIC * seconds_per_tick)	//at germ_level == 500 and 50 antibiotic, this should cure the infection in 5 minutes
 		if(owner?.body_position == LYING_DOWN)
-			adjust_germ_level(-SANITIZATION_LYING * delta_time)
+			adjust_germ_level(-SANITIZATION_LYING * seconds_per_tick)
 
 /obj/item/bodypart/proc/create_base_organs()
 	if(CHECK_BITFIELD(limb_flags, BODYPART_HAS_ARTERY))

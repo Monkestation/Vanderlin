@@ -40,12 +40,14 @@
 	if(clonable)
 		return new type(phobia_type)
 
-/datum/brain_trauma/mild/phobia/on_life()
+/datum/brain_trauma/mild/phobia/on_life(seconds_per_tick)
 	..()
 	if(HAS_TRAIT(owner, TRAIT_FEARLESS))
 		return
+
 	if(owner.is_blind())
 		return
+
 	if(!COOLDOWN_FINISHED(src, check_cooldown) || !COOLDOWN_FINISHED(src, scare_cooldown))
 		return
 

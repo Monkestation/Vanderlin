@@ -101,10 +101,10 @@
 			return pick('sound/vo/mobs/troll/cidle1.ogg','sound/vo/mobs/troll/aggro2.ogg')
 
 
-/mob/living/simple_animal/hostile/retaliate/troll/Life()
-	..()
+/mob/living/simple_animal/hostile/retaliate/troll/Life(seconds_per_tick)
+	. = ..()
 	if(fire_stacks + divine_fire_stacks <= 0)
-		adjustHealth(-rand(20,35))
+		adjustHealth(-rand(10, 17) * seconds_per_tick)
 
 /mob/living/simple_animal/hostile/retaliate/troll/simple_limb_hit(zone)
 	return ..()

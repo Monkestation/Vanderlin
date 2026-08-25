@@ -121,7 +121,7 @@
 		. = TRUE
 	needs_processing = .
 
-/obj/item/organ/brain/can_self_heal(delta_time, times_fired, in_bleedout)
+/obj/item/organ/brain/can_self_heal(seconds_per_tick, in_bleedout)
 	. = ..()
 	if(!.)
 		return
@@ -131,13 +131,13 @@
 	if(effective_blood_oxygenation < BLOOD_VOLUME_BAD)
 		return FALSE
 
-/obj/item/organ/brain/handle_blood(delta_time, times_fired, in_bleedout)
+/obj/item/organ/brain/handle_blood(seconds_per_tick, in_bleedout)
 	var/effective_blood_oxygenation = GET_EFFECTIVE_BLOOD_VOL(owner.get_blood_oxygenation(), owner.total_blood_req)
 	// Very low blood, danger!!
 	if((is_failing_without_bleedout() || in_bleedout) || (effective_blood_oxygenation <= BLOOD_VOLUME_SURVIVE))
-		current_blood = max(current_blood - (blood_req * delta_time * 2), 0)
+		current_blood = max(current_blood - (blood_req * seconds_per_tick * 2), 0)
 	else
-		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * delta_time * 2), 0)
+		current_blood = max(current_blood - (blood_req * ((BLOOD_VOLUME_NORMAL-effective_blood_oxygenation)/BLOOD_VOLUME_NORMAL) * seconds_per_tick * 2), 0)
 	// When all blood is lost, take blood from blood vessels
 	if(current_blood < max_blood_storage && (effective_blood_oxygenation >= BLOOD_VOLUME_SURVIVE))
 		var/obj/item/organ/artery
@@ -147,12 +147,12 @@
 				artery = candidate
 				break
 		if(artery?.current_blood)
-			var/blood_needed = min(max_blood_storage - current_blood, blood_req * delta_time * 2)
+			var/blood_needed = min(max_blood_storage - current_blood, blood_req * seconds_per_tick * 2)
 			var/blood_taken = min(artery.current_blood, blood_needed)
 			artery.current_blood = max(artery.current_blood - blood_taken, 0)
 			artery.consider_processing()
 			current_blood = min(current_blood + blood_taken, max_blood_storage)
-		//Don't apply damage, this is handled by the organ process datum, if necessary
+	//Don't apply damage, this is handled by the organ process datum, if necessary
 	consider_processing()
 
 /obj/item/organ/brain/get_mechanics_examine(mob/user)

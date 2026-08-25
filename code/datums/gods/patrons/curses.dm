@@ -6,8 +6,9 @@
 	/// Trait given by this curse
 	var/trait
 
-/datum/curse/proc/on_life()
+/datum/curse/proc/on_life(var/mob/living/carbon/human/owner, seconds_per_tick)
 	return
+
 /datum/curse/proc/on_death()
 	return
 
@@ -17,18 +18,16 @@
 		to_chat(owner, span_userdanger("Something is wrong... I feel cursed."))
 		to_chat(owner, span_danger(description))
 	owner.playsound_local(get_turf(owner), 'sound/misc/cursed.ogg', 80, FALSE, pressure_affected = FALSE)
-	return
 
 /datum/curse/proc/on_loss(mob/living/carbon/human/owner)
 	REMOVE_TRAIT(owner, trait, TRAIT_CURSE)
 	to_chat(owner, span_userdanger("Something has changed... I feel relieved."))
 	owner.playsound_local(get_turf(owner), 'sound/misc/curse_lifted.ogg', 80, FALSE, pressure_affected = FALSE)
 	qdel(src)
-	return
 
-/mob/living/carbon/human/proc/handle_curses()
+/mob/living/carbon/human/proc/handle_curses(seconds_per_tick)
 	for(var/datum/curse/C as anything in curses)
-		C.on_life(src)
+		C.on_life(src, seconds_per_tick)
 
 /mob/living/carbon/human/proc/add_curse(datum/curse/C, silent = FALSE)
 	if(is_cursed(C))
@@ -113,13 +112,13 @@
 	description = "I can no longer distinguish reality from delusion."
 	trait = TRAIT_ZIZO_CURSE
 	/// Chance to call hallucination handle procs on life
-	var/hallucination_prob = 100
+	var/hallucination_prob = 37
 	var/atom/movable/screen/fullscreen/maniac/hallucinations
 
 /datum/curse/zizo/minor
 	name = "Zizo's Minor Curse"
 	description = "I struggle to distinguish reality from delusion."
-	hallucination_prob = 10
+	hallucination_prob = 5
 
 /datum/curse/schizophrenic //zizo curse but without the jumpscares and meta hallucinations
 	name = "Schizophrenic"
@@ -180,8 +179,7 @@
 //////////////////////
 ///    ON LIFE     ///
 //////////////////////
-/datum/curse/pestra/on_life(mob/living/carbon/human/owner)
-	. = ..()
+/datum/curse/pestra/on_life(mob/living/carbon/human/owner, seconds_per_tick)
 	if(!MOBTIMER_FINISHED(owner, MT_CURSE_PESTRA, rand(120, 480) SECONDS)) //this isn't how mob timers work
 		return
 
@@ -201,7 +199,7 @@
 			owner.playsound_local(get_turf(owner), 'sound/foley/butcher.ogg', 80, FALSE, pressure_affected = FALSE)
 			owner.regenerate_icons()
 
-/datum/curse/baotha/on_life(mob/living/carbon/human/owner)
+/datum/curse/baotha/on_life(mob/living/carbon/human/owner, seconds_per_tick)
 	. = ..()
 	if(!MOBTIMER_FINISHED(owner, MT_CURSE_BAOTHA, rand(60, 420) SECONDS)) //this isn't how mob timers work
 		return
@@ -210,22 +208,23 @@
 
 	owner.reagents.add_reagent(/datum/reagent/druqks, 3)
 
-/datum/curse/graggar/on_life(mob/living/carbon/human/owner)
-	. = ..()
+/datum/curse/graggar/on_life(mob/living/carbon/human/owner, seconds_per_tick)
 	if(!MOBTIMER_FINISHED(owner, MT_CURSE_GRAGGAR, rand(180, 480) SECONDS)) //this isn't how mob timers work
 		return
 
 	MOBTIMER_SET(owner, MT_CURSE_GRAGGAR)
+
+	owner.emote("rage")
+
 	for(var/mob/living/carbon/human in view(1, owner))
-		owner.emote("rage")
 		human.attacked_by(owner.get_active_held_item(), owner)
-		owner.cursed_freak_out()
 		break
 
+	owner.cursed_freak_out()
+
 // Currently calls maniac hallucinations
-/datum/curse/zizo/on_life(mob/living/carbon/human/owner)
-	. = ..()
-	if(prob(hallucination_prob))
+/datum/curse/zizo/on_life(mob/living/carbon/human/owner, seconds_per_tick)
+	if(SPT_PROB(hallucination_prob, seconds_per_tick))
 		handle_maniac_visions(owner, hallucinations)
 		handle_maniac_hallucinations(owner)
 		//handle_maniac_floors(owner)
@@ -239,13 +238,12 @@
 	. = ..()
 	hallucinations = null
 
-/datum/curse/schizophrenic/on_life(mob/living/carbon/human/owner)
-	. = ..()
-	if(prob(1))
+/datum/curse/schizophrenic/on_life(mob/living/carbon/human/owner, seconds_per_tick)
+	if(SPT_PROB(0.5, seconds_per_tick))
 		INVOKE_ASYNC(owner, GLOBAL_PROC_REF(handle_maniac_visions), owner, hallucinations)
-	if(prob(0.5))
+	if(SPT_PROB(0.25, seconds_per_tick))
 		INVOKE_ASYNC(owner, GLOBAL_PROC_REF(handle_maniac_mob_hallucination), owner)
-	else if(prob(2))
+	else if(SPT_PROB(1, seconds_per_tick))
 		INVOKE_ASYNC(owner, GLOBAL_PROC_REF(handle_maniac_object_hallucination), owner)
 
 // cursed_freak_out() is freak_out() without stress adjustments

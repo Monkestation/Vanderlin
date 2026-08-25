@@ -30,7 +30,7 @@
 		return new type
 
 //Called on life ticks
-/datum/brain_trauma/proc/on_life()
+/datum/brain_trauma/proc/on_life(seconds_per_tick)
 	return
 
 //Called on death

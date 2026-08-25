@@ -36,7 +36,7 @@
 // Processing
 // ---------------------------------------------------------------------------
 
-/datum/action_state/alchemy/process_state(datum/ai_controller/controller, delta_time)
+/datum/action_state/alchemy/process_state(datum/ai_controller/controller, seconds_per_tick)
 	if(!controller.blackboard[BB_GNOME_ALCHEMY_MODE])
 		return ACTION_STATE_COMPLETE
 

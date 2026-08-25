@@ -201,7 +201,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		ADD_TRAIT(src, TRAIT_MOVE_FLYING, ROUNDSTART_TRAIT)
 	if(food_max)
 		var/initial_hunger = food_max * 0.75
-		AddComponent(/datum/component/generic_mob_hunger, food_max, 0.25, starting_hunger = initial_hunger)
+		AddComponent(/datum/component/generic_mob_hunger, food_max, 0.125, starting_hunger = initial_hunger)
 	if(happy_funtime_mob)
 		AddComponent(/datum/component/friendship_container, mob_friends, "friend")
 		AddComponent(/datum/component/happiness_container, 30, list(), list(), food_type)
@@ -430,7 +430,7 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 			set_stat(CONSCIOUS)
 	// SEND_SIGNAL(src, COMSIG_MOB_STATCHANGE, stat)
 
-/mob/living/simple_animal/handle_status_effects()
+/mob/living/simple_animal/handle_status_effects(seconds_per_tick)
 	..()
 	if(stuttering)
 		stuttering = 0
@@ -475,18 +475,18 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 					else
 						emote("me", 2, pick(emote_hear))
 
-/mob/living/simple_animal/handle_environment()
+/mob/living/simple_animal/handle_environment(seconds_per_tick)
 	var/atom/A = src.loc
 	if(isturf(A))
 		var/areatemp = BODYTEMP_NORMAL
 		if( abs(areatemp - bodytemperature) > 5)
 			var/diff = areatemp - bodytemperature
-			diff = diff / 5
-			adjust_bodytemperature(diff)
+			diff = diff / 10
+			adjust_bodytemperature(diff * seconds_per_tick)
 
-	handle_temperature_damage()
+	handle_temperature_damage(seconds_per_tick)
 
-/mob/living/simple_animal/proc/handle_temperature_damage()
+/mob/living/simple_animal/proc/handle_temperature_damage(seconds_per_tick)
 	return
 
 /mob/living/simple_animal/MiddleClick(mob/living/user, list/modifiers)
@@ -753,14 +753,15 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 		..()
 		// SEND_SIGNAL(src, COMSIG_MOB_STATCHANGE, DEAD)
 
-/mob/living/simple_animal/handle_fire()
+/mob/living/simple_animal/handle_fire(seconds_per_tick)
 	. = ..()
 	if(!on_fire)
 		return TRUE
+
 	if(fire_stacks + divine_fire_stacks > 0)
-		apply_damage(5, BURN)
+		apply_damage(2.5 * seconds_per_tick, BURN)
 		if(fire_stacks + divine_fire_stacks > 5)
-			apply_damage(10, BURN)
+			apply_damage(5 * seconds_per_tick, BURN)
 
 /mob/living/simple_animal/revive(full_heal_flags = NONE, excess_healing = 0, force_grab_ghost = FALSE)
 	. = ..()
@@ -1014,14 +1015,16 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 /mob/living/simple_animal/buckle_mob(mob/living/buckled_mob, force = 0, check_loc = 1)
 	. = ..()
 
-/mob/living/simple_animal/Life()
+/mob/living/simple_animal/Life(seconds_per_tick)
 	. = ..()
-	if(.)
-		if(SEND_SIGNAL(src, COMSIG_MOB_RETURN_HUNGER) > 0)
-			pooprog += 0.5
-			if(pooprog >= 100)
-				pooprog = 0
-				poop()
+	if(!.)
+		return
+
+	if(SEND_SIGNAL(src, COMSIG_MOB_RETURN_HUNGER) > 0)
+		pooprog += 0.25 * seconds_per_tick
+		if(pooprog >= 100)
+			pooprog = 0
+			poop()
 
 /mob/living/simple_animal/proc/poop()
 	if(pooptype)

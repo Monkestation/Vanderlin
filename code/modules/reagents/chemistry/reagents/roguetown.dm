@@ -6,14 +6,15 @@
 	taste_description = "ugly"
 	metabolization_rate = 1
 
-/datum/reagent/miasmagas/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/miasmagas/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	if(!HAS_TRAIT(M, TRAIT_DEADNOSE))
 		if(M.has_quirk(/datum/quirk/vice/addiction/sadist))
 			M.add_stress(/datum/stress_event/miasmagasmaniac)
 		else
-			M.add_nausea(3 * efficiency)
+			M.add_nausea(0.6 * REAGENTS_MODIFIER)
 			M.add_stress(/datum/stress_event/miasmagas)
-	return ..()
 
 /datum/reagent/rogueacid
 	name = "Acid"

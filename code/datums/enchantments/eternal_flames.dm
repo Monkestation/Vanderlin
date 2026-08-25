@@ -8,10 +8,11 @@
 		/datum/thaumaturgical_essence/cycle = 25
 	)
 
-/datum/enchantment/eternal_flames/process()
+/datum/enchantment/eternal_flames/process(seconds_per_tick)
 	if(!enchanted_item)
 		STOP_PROCESSING(SSenchantment, src)
 		return
+
 	enchanted_item.reagents?.expose_temperature(900, 0.1)
 	for(var/obj/item/item as anything in enchanted_item.contents)
 		item.reagents?.expose_temperature(900, 0.1)

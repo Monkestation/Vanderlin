@@ -275,22 +275,23 @@
 		return
 	. = ..()
 
-/obj/machinery/light/fueled/process(delta_time)
-	. = ..()
-	if(on)
-		if(initial(fueluse) > 0)
-			if(fueluse > 0)
-				fueluse = max(fueluse - 1 SECONDS * delta_time, 0)
-			if(fueluse == 0)
-				burn_out()
-		if(length(contents)) // burn kobolds in ovens and smelters
-			for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
-				holder.held_mob?.adjust_fire_stacks(5)
-				holder.held_mob?.IgniteMob()
-				holder.update_appearance()
+/obj/machinery/light/fueled/process(seconds_per_tick)
+	if(!on)
+		return PROCESS_KILL
 
-		if(resting_range > 0)
-			for(var/mob/living/carbon/human/human in range(resting_range, src))
-				human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
-				human.add_stress(/datum/stress_event/campfire)
+	if(initial(fueluse) > 0)
+		if(fueluse > 0)
+			fueluse = max(fueluse - SPT_TO_DECISECONDS(seconds_per_tick), 0)
+		if(fueluse == 0)
+			burn_out()
 
+	if(length(contents)) // burn kobolds in ovens and smelters
+		for(var/obj/item/mob_holder/holder in GetAllContents(/obj/item/mob_holder))
+			holder.held_mob?.adjust_fire_stacks(5)
+			holder.held_mob?.IgniteMob()
+			holder.update_appearance()
+
+	if(resting_range > 0)
+		for(var/mob/living/carbon/human/human in range(resting_range, src))
+			human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
+			human.add_stress(/datum/stress_event/campfire)

@@ -152,7 +152,7 @@
 	travel_direction = get_dir(anchor, destination)
 	travel_distance = get_dist(anchor, destination)
 
-/datum/lift_master/tram/process()
+/datum/lift_master/tram/process(seconds_per_tick)
 	if(!travel_distance)
 		if(!is_at_destination())
 			// counter ran out but we're not actually there the actual fuck?

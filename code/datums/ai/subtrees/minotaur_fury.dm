@@ -1,5 +1,5 @@
 /datum/ai_planning_subtree/minotaur_enrage
-/datum/ai_planning_subtree/minotaur_enrage/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/minotaur_enrage/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/minotaur/boss = controller.pawn
 	if(!istype(boss))

@@ -15,9 +15,9 @@
 	id = "healingrejuvesong"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/healing
 	duration = 15 SECONDS
-	healing_on_tick = 0.6 // Lesser bard (66%)
+	healing_per_second = 0.6 // Lesser bard (66%)
 	outline_colour = "#c92f2f"
 	effect_color = "#660759"
 
 /datum/status_effect/buff/healing/rejuvenationsong/full
-	healing_on_tick = 1 // Full bard (100%)
+	healing_per_second = 1 // Full bard (100%)

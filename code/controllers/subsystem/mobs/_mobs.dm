@@ -43,13 +43,12 @@ SUBSYSTEM_DEF(mobs)
 		mobs_by_zlevel[length(dead_players_by_zlevel)] = list()
 
 /datum/controller/subsystem/mobs/fire(resumed = FALSE)
-	var/seconds = wait * 0.1
+	var/seconds_per_tick = wait / (1 SECONDS)
 
 	if(!resumed)
 		src.currentrun = build_currentrun()
 
 	var/list/currentrun = src.currentrun
-	var/times_fired = src.times_fired
 	while(length(currentrun))
 		var/mob/living/L = currentrun[length(currentrun)]
 		currentrun.len--
@@ -57,9 +56,9 @@ SUBSYSTEM_DEF(mobs)
 			continue
 
 		if(L.stat == DEAD)
-			L.DeadLife(seconds, times_fired)
+			L.DeadLife(seconds_per_tick)
 		else
-			L.Life(seconds, times_fired)
+			L.Life(seconds_per_tick)
 
 		if(MC_TICK_CHECK)
 			return

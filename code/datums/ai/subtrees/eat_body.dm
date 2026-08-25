@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/eat_dead_body
 	var/datum/ai_behavior/eat_dead_body/behavior = /datum/ai_behavior/eat_dead_body
 
-/datum/ai_planning_subtree/eat_dead_body/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/eat_dead_body/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_FOOD_TARGET]
 	if(QDELETED(target))

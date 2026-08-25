@@ -24,5 +24,5 @@
 	return TRUE
 
 /// Handles the processing, if we passed the proper checks
-/datum/organ_process/proc/handle_process(mob/living/carbon/owner, delta_time = SSMOBS_DT, times_fired)
+/datum/organ_process/proc/handle_process(mob/living/carbon/owner, seconds_per_tick = SSMOBS_DT)
 	return TRUE

@@ -41,28 +41,35 @@
 	STOP_PROCESSING(SSprocessing, src)
 	return ..()
 
-/datum/devotion/process()
+/datum/devotion/process(seconds_per_tick)
 	if(!passive_devotion_gain && !passive_progression_gain)
 		return PROCESS_KILL
+
 	if(holder_mob.stat >= DEAD)
 		return
-	update_devotion(passive_devotion_gain, passive_progression_gain)
+
+	update_devotion(passive_devotion_gain * seconds_per_tick, passive_progression_gain* seconds_per_tick)
 
 /datum/devotion/proc/grant_to(mob/living/carbon/human/holder)
 	if(!holder)
 		return
+
 	if(passive_devotion_gain || passive_progression_gain)
 		START_PROCESSING(SSprocessing, src)
+
 	holder_mob = holder
 	holder_mob.cleric = src
 	if(SSticker.HasRoundStarted())
 		initialize_hud()
 	else
 		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(initialize_hud)))
+
 	for(var/trait in traits)
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
+
 	for(var/datum/action/miracle as anything in miracles_extra)
 		grant_miracle(miracle)
+
 	add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 	check_progression()
 	initialize_tasks()
@@ -181,7 +188,7 @@
 /datum/devotion/proc/make_priest()
 	devotion = 300
 	progression = CLERIC_REQ_3
-	passive_devotion_gain = 1
+	passive_devotion_gain = 0.5
 	miracles_extra += list(
 		/datum/action/cooldown/spell/undirected/touch/orison,
 		/datum/action/cooldown/spell/cure_rot,
@@ -252,14 +259,19 @@
 
 	if(!ishuman(src))
 		return
+
 	var/datum/devotion/C = src.cleric
 	if(!C || src.stat >= DEAD)
 		return
+
 	if(C.devotion >= C.max_devotion)
 		to_chat(src, "<font color='red'>I have reached the limit of my devotion...</font>")
 		return
+
 	var/prayersesh = 0
+
 	visible_message("[src] kneels their head in prayer.", "I kneel my head in prayer to [patron.name].")
+
 	for(var/i in 1 to 50)
 		if(do_after(src, 3 SECONDS, timed_action_flags = (IGNORE_USER_DIR_CHANGE), hidden = FALSE))
 			if(C.devotion >= C.max_devotion)
@@ -275,6 +287,7 @@
 		else
 			visible_message("[src] concludes their prayer.", "I conclude my prayer.")
 			break
+
 	to_chat(src, "<font color='purple'>I gained [prayersesh] devotion!</font>")
 
 /datum/devotion/proc/excommunicate()

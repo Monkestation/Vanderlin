@@ -117,17 +117,17 @@
 	// Let the storage component handle item insertion
 	return ..()
 
-/obj/structure/channel_connector/furnace/process()
+/obj/structure/channel_connector/furnace/process(seconds_per_tick)
 	if(!on || !fuel_left)
 		if(on)
 			on = FALSE
 			update_appearance(UPDATE_OVERLAYS)
-		furnace_temperature = max(300, furnace_temperature - 15)
+		furnace_temperature = max(300, furnace_temperature - 12 * seconds_per_tick)
 		internal_reagents?.expose_temperature(furnace_temperature, 1)
 		return
 
 	// Consume fuel
-	fuel_left = max(0, fuel_left - 2)
+	fuel_left = max(0, fuel_left - SPT_TO_DECISECONDS(seconds_per_tick))
 
 	// Heat up - similar to crucible heating logic
 	if(furnace_temperature < max_temperature)

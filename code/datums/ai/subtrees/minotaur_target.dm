@@ -1,5 +1,5 @@
 /datum/ai_planning_subtree/minotaur_targeting
-/datum/ai_planning_subtree/minotaur_targeting/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/minotaur_targeting/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/minotaur/boss = controller.pawn
 
@@ -10,7 +10,7 @@
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(!QDELETED(target))
 		var/current_rage = controller.blackboard[BB_MINOTAUR_RAGE_METER]
-		var/rage_increase = delta_time * 2
+		var/rage_increase = seconds_per_tick * 2
 
 		// More rage at lower health
 		if(istype(boss))

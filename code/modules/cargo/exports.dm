@@ -100,20 +100,9 @@
 
 /datum/export/New()
 	..()
-	SSprocessing.processing += src
 	init_cost = cost
 	export_types = typecacheof(export_types)
 	exclude_types = typecacheof(exclude_types)
-
-/datum/export/Destroy()
-	SSprocessing.processing -= src
-	return ..()
-
-/datum/export/process()
-	..()
-	cost *= NUM_E**(k_elasticity * (1/30))
-	if(cost > init_cost)
-		cost = init_cost
 
 // Checks the cost. 0 cost items are skipped in export.
 /datum/export/proc/get_cost(obj/O, allowed_categories = NONE, apply_elastic = TRUE)

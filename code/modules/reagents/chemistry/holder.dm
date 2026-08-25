@@ -342,13 +342,14 @@
 	R.handle_reactions()
 	return amount
 
-/datum/reagents/proc/metabolize(mob/living/carbon/C, can_overdose = FALSE, liverless = FALSE, efficiency = 100, health_update = TRUE)
+/datum/reagents/proc/metabolize(mob/living/carbon/C, can_overdose = FALSE, liverless = FALSE, efficiency = 100, health_update = TRUE, seconds_per_tick = seconds_per_tick)
 	var/list/cached_reagents = reagent_list
 	var/list/cached_addictions = addiction_list
 	if(C)
 		expose_temperature(C.bodytemperature, 0.25)
 		if(HAS_TRAIT(C, TRAIT_CRACKHEAD))
 			can_overdose = FALSE
+
 	var/need_mob_update = 0
 	for(var/datum/reagent/R as anything in cached_reagents)
 		if(QDELETED(R.holder))
@@ -361,29 +362,36 @@
 			if(C.reagent_check(R) != TRUE)
 				if(liverless && !R.self_consuming) //need to be metabolized
 					continue
+
+				if(!R.liver_chemical || R.self_consuming)
+					efficiency = 100
+
 				if(!R.metabolizing)
 					R.metabolizing = TRUE
 					R.on_mob_metabolize(C)
+
 				if(can_overdose)
 					if(R.overdose_threshold)
 						if(R.volume >= R.overdose_threshold && !R.overdosed)
 							R.overdosed = 1
 							need_mob_update += R.overdose_start(C)
 							log_game("[key_name(C)] has started overdosing on [R.name] at [R.volume] units.")
+
 					if(R.addiction_threshold)
 						if(R.volume >= R.addiction_threshold && !is_type_in_list(R, cached_addictions))
 							var/datum/reagent/new_reagent = new R.type()
 							cached_addictions.Add(new_reagent)
 							log_game("[key_name(C)] has become addicted to [R.name] at [R.volume] units.")
+
 					if(R.overdosed)
-						need_mob_update += R.overdose_process(C)
+						need_mob_update += R.overdose_process(C, efficiency / 100, seconds_per_tick)
+
 					if(is_type_in_list(R,cached_addictions))
 						for(var/datum/reagent/A as anything in cached_addictions)
 							if(istype(R, A))
 								A.addiction_stage = -15 // you're satisfied for a good while.
-				if(!R.liver_chemical)
-					efficiency = 100
-				need_mob_update += R.on_mob_life(C, efficiency * 0.01)
+
+				need_mob_update += R.on_mob_life(C, efficiency / 100, seconds_per_tick)
 
 	if(can_overdose)
 		if(addiction_tick == 6)
@@ -403,12 +411,12 @@
 						if(40 to INFINITY)
 							remove_addiction(R)
 		addiction_tick++
+
 	if(C && need_mob_update) //some of the metabolized reagents had effects on the mob that requires some updates.
 		if(health_update)
 			C.updatehealth()
 			C.update_stamina()
-		else
-			. |= ORGAN_PROCESS_UPDATE_HEALTH
+
 	update_total()
 
 /datum/reagents/proc/remove_addiction(datum/reagent/R)

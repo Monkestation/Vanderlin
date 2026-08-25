@@ -449,7 +449,7 @@
 	to_chat(src, span_notice("Move order created: [S.name] will be moved to [dest_turf.x], [dest_turf.y]."))
 
 
-/mob/camera/strategy_controller/process()
+/mob/camera/strategy_controller/process(seconds_per_tick)
 	building_icon?.update(src)
 
 	if(length(building_requests))

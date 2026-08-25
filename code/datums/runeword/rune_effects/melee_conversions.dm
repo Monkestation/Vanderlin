@@ -70,10 +70,10 @@
 	var/orbit_index = 1
 	var/total_orbits = 1
 	var/orbit_time = 0
-	var/max_orbit_time = 200 // How long to orbit before disappearing (in deciseconds)
+	var/max_orbit_time = 20 SECONDS // How long to orbit before disappearing (in seconds)
 	var/base_orbit_angle = 0
 	var/orbit_radius = 32
-	var/orbit_speed = 3 // Degrees per process cycle
+	var/orbit_speed = 30 // Degrees per second
 	var/atom/orbit_center
 	var/current_angle = 0
 	var/list/already_hit = list() // Track what we've already damaged
@@ -121,13 +121,14 @@
 		pixel_x = ((new_x - round(new_x)) * 32)
 		pixel_y = ((new_y - round(new_y)) * 32)
 
-/obj/projectile/orbital/process()
+/obj/projectile/orbital/process(seconds_per_tick)
 	if(!orbit_center || QDELETED(orbit_center))
 		qdel(src)
 		return PROCESS_KILL
 
 	// Update angle
-	current_angle += orbit_speed
+	current_angle += orbit_speed * seconds_per_tick
+
 	if(current_angle >= 360)
 		current_angle -= 360
 
@@ -138,7 +139,7 @@
 	check_orbital_collisions()
 
 	// Increment orbit time
-	orbit_time += 1
+	orbit_time += SPT_TO_DECISECONDS(seconds_per_tick)
 
 /obj/projectile/orbital/proc/check_orbital_collisions()
 	if(!loc)

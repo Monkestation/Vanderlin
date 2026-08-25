@@ -11,4 +11,4 @@
 /datum/chimeric_node/output/hallucinate/trigger_effect(multiplier)
 	. = ..()
 	for(var/mob/living/carbon/listening_carbon in range(range * multiplier))
-		handle_maniac_hallucinations(listening_carbon, 10)
+		handle_maniac_hallucinations(listening_carbon, 5)

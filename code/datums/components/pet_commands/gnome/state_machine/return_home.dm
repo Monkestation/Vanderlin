@@ -24,7 +24,7 @@
 
 	return GNOME_PRIORITY_LOW
 
-/datum/action_state/return_home/process_state(datum/ai_controller/controller, delta_time)
+/datum/action_state/return_home/process_state(datum/ai_controller/controller, seconds_per_tick)
 	var/mob/living/pawn = controller.pawn
 	var/turf/home_turf = controller.blackboard[BB_GNOME_HOME_TURF]
 

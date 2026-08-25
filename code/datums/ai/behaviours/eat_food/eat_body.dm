@@ -10,7 +10,7 @@
 		return FALSE
 	set_movement_target(controller, (target))
 
-/datum/ai_behavior/eat_dead_body/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/eat_dead_body/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
 	var/mob/living/simple_animal/basic_mob = controller.pawn
 	//targetting datum will kill the action if not real anymore

@@ -16,7 +16,7 @@
 	set_movement_target(controller, (target))
 	SEND_SIGNAL(controller.pawn, COMSIG_COMBAT_TARGET_SET, TRUE)
 
-/datum/ai_behavior/basic_melee_attack/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/basic_melee_attack/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
 	var/mob/living/simple_animal/basic_mob = controller.pawn
 	//targetting datum will kill the action if not real anymore
@@ -100,7 +100,7 @@
 	set_movement_target(controller, (target))
 
 
-/datum/ai_behavior/basic_ranged_attack/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/basic_ranged_attack/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
 	var/mob/living/simple_animal/basic_mob = controller.pawn
 	//targetting datum will kill the action if not real anymore
@@ -144,7 +144,7 @@
 	action_cooldown = 0.2 SECONDS // We gotta check unfortunately often because we're in a race condition with nextmove
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT | AI_BEHAVIOR_REQUIRE_REACH | AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 
-/datum/ai_behavior/basic_melee_attack/saiga/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/basic_melee_attack/saiga/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	var/mob/living/simple_animal/basic_mob = controller.pawn
 	//targetting datum will kill the action if not real anymore
 	var/atom/target = controller.blackboard[target_key]
@@ -186,7 +186,7 @@
 		SEND_SIGNAL(basic_mob, COMSIG_MOB_BREAK_SNEAK)
 		finish_action(controller, TRUE, target_key)
 
-/datum/ai_behavior/basic_melee_attack/hellhound/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/basic_melee_attack/hellhound/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	var/mob/living/simple_animal/basic_mob = controller.pawn
 	//targetting datum will kill the action if not real anymore
 	var/mob/living/target = controller.blackboard[target_key]
@@ -253,7 +253,7 @@
 		target.visible_message(span_danger("[basic_mob] sets [target] on fire!"))
 
 
-/datum/ai_behavior/basic_melee_attack/warden/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/basic_melee_attack/warden/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
 	var/mob/living/simple_animal/basic_mob = controller.pawn
 	//targetting datum will kill the action if not real anymore
@@ -264,7 +264,7 @@
 	target.throw_at(throw_target, 7, 4)
 	target.adjustBruteLoss(20, damage_type = BCLASS_BLUNT)
 
-/datum/ai_behavior/basic_melee_attack/species_hostile/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+/datum/ai_behavior/basic_melee_attack/species_hostile/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
 
 	var/mob/living/pawn = controller.pawn

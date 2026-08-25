@@ -113,13 +113,13 @@
 	points = min(points+cost, 100)
 
 
-/datum/boss_active_timed_battle/process()
+/datum/boss_active_timed_battle/process(seconds_per_tick)
 	if(world.time >= next_point_time)
 		next_point_time = world.time + point_regen_delay
 		points = min(100, ++points) //has to be out of 100
 
 	if(abilities)
-		chance_to_hold_onto_points = highest_cost*0.5
+		chance_to_hold_onto_points = highest_cost* 0.5
 		if(points != 100 && prob(chance_to_hold_onto_points))
 			return //Let's save our points for a better ability (unless we're at max points, in which case we can't save anymore!)
 		if(!boss.client)

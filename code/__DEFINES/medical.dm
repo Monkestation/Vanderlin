@@ -386,9 +386,9 @@ DEFINE_BITFIELD(organ_flags, list(
 /// How often can we annoy the player about their bleeding? This duration is extended if it's not serious bleeding
 #define BLEEDING_MESSAGE_BASE_CD 15 SECONDS
 /// Arbitrary value for "noticeable bleeding"
-#define BLEED_RATE_NOTICABLE	1.5
+#define BLEED_RATE_NOTICABLE 1.5
 
-/// Injuries bleed at (bleed_rate / BLEED_DAMAGE_RATIO) per tick
+/// Injuries bleed at (bleed_rate / BLEED_DAMAGE_RATIO) per second
 #define BLEED_DAMAGE_RATIO 25
 
 // /obj/item/bodypart on_mob_life() retval flag

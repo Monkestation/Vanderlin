@@ -86,7 +86,7 @@
 	desc = "<span class='boldwarning'>I am dying of starvation! I need to find food, quick!</span>\n"
 	icon_state = "hunger4"
 
-/datum/status_effect/debuff/hungryt4/tick()
+/datum/status_effect/debuff/hungryt4/tick(seconds_between_ticks)
 	owner.adjustToxLoss(CONFIG_GET(number/starvation_damage_per_tick), forced = TRUE)
 
 /datum/status_effect/debuff/hungryt4/on_apply()
@@ -191,7 +191,7 @@
 	desc = "<span class='boldwarning'>I am dying of thirst! I need to find water, quick!</span>\n"
 	icon_state = "thirst4"
 
-/datum/status_effect/debuff/thirstyt4/tick()
+/datum/status_effect/debuff/thirstyt4/tick(seconds_between_ticks)
 	owner.adjustToxLoss(CONFIG_GET(number/dehydration_damage_per_tick), forced = TRUE)
 
 /datum/status_effect/debuff/thirstyt4/on_apply()

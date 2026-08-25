@@ -18,7 +18,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 	return ..()
 
-/datum/objective/personal/hoard_mammons/process()
+/datum/objective/personal/hoard_mammons/process(seconds_per_tick)
 	if(world.time < next_check || completed || !owner?.current)
 		return
 

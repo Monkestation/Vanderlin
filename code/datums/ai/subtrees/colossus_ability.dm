@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/collossus_special_abilities
 	var/datum/ai_behavior/collossus_quake/quake_behavior = /datum/ai_behavior/collossus_quake
 
-/datum/ai_planning_subtree/collossus_special_abilities/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/collossus_special_abilities/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 
@@ -28,7 +28,7 @@
 
 	set_movement_target(controller, target)
 
-/datum/ai_behavior/collossus_quake/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/collossus_quake/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/behemoth_pawn = controller.pawn
 	var/atom/target = controller.blackboard[target_key]

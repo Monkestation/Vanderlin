@@ -66,7 +66,7 @@
 	if(!M.client)
 		return COMPONENT_INCOMPATIBLE
 
-/datum/component/ore_sight/process()
+/datum/component/ore_sight/process(seconds_per_tick)
 	if(is_active)
 		if(world.time > (last_pulse + interval))
 			mine_pulse()

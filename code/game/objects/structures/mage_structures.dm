@@ -167,15 +167,16 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 	icon_state = "infernal0"
 	base_state = "infernal"
 
-/obj/machinery/light/fueled/forge/arcane/process()
+/obj/machinery/light/fueled/forge/arcane/process(seconds_per_tick)
 	if(isopenturf(loc))
 		var/turf/open/O = loc
 		if(IS_WET_OPEN_TURF(O))
 			extinguish()
+
 	if(on)
 		if(initial(fueluse) > 0)
 			if(fueluse > 0)
-				fueluse = max(fueluse - 10, 0)
+				fueluse = max(fueluse - SPT_TO_DECISECONDS(seconds_per_tick), 0)
 			if(fueluse == 0)//It's literally powered by arcane lava. It's not gonna run out of fuel.
 				fueluse = 4000
 		update_appearance(UPDATE_ICON_STATE)

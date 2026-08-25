@@ -50,9 +50,7 @@
 	owner.visible_message(span_notice("The transaction is made, [cast_on] is bathed in empowerment!"))
 	to_chat(owner, "<font color='yellow'>[held_item] burns into the air suddenly, my Transaction is accepted.</font>")
 	if(iscarbon(cast_on))
-		var/mob/living/carbon/C = cast_on
-		var/datum/status_effect/buff/healing/matthioshealing/heal_effect = C.apply_status_effect(/datum/status_effect/buff/healing/matthioshealing)
-		heal_effect.healing_on_tick = helditemvalue/2
+		cast_on.apply_status_effect(/datum/status_effect/buff/healing/matthioshealing, null, helditemvalue / 2)
 	else
 		cast_on.adjustBruteLoss(helditemvalue / 2)
 		cast_on.adjustFireLoss(helditemvalue / 2)
@@ -65,12 +63,11 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/matthioshealing
 	examine_text = "SUBJECTPRONOUN is bathed in a restorative aura!"
 	duration = 10 SECONDS
-	healing_on_tick = 1
 	outline_colour = "#c42424"
 
-/datum/status_effect/buff/healing/matthioshealing/tick()
+/datum/status_effect/buff/healing/matthioshealing/tick(seconds_between_ticks)
 	. = ..()
-	owner.adjust_blood_volume(10, maximum = BLOOD_VOLUME_NORMAL)
+	owner.adjust_blood_volume(10 * seconds_between_ticks, maximum = BLOOD_VOLUME_NORMAL)
 
 /atom/movable/screen/alert/status_effect/buff/matthioshealing
 	name = "Healing Miracle"

@@ -549,13 +549,16 @@
 /mob/living/carbon/proc/add_nausea(amt)
 	nausea = clamp(nausea + amt, 0, 300)
 
-/mob/living/carbon/proc/handle_nausea()
+/mob/living/carbon/proc/handle_nausea(seconds_per_tick)
 	if(HAS_TRAIT(src, TRAIT_ROTMAN))
 		return TRUE
+
 	if(stat == DEAD)
 		return TRUE
+
 	if(nausea <= 50 && MOBTIMER_EXISTS(src, MT_PUKE))
 		MOBTIMER_UNSET(src, MT_PUKE)
+
 	if(nausea >= 100)
 		if(!MOBTIMER_EXISTS(src, MT_PUKE))
 			MOBTIMER_SET(src, MT_PUKE)
@@ -565,11 +568,10 @@
 				MOBTIMER_SET(src, MT_PUKE)
 				to_chat(src, span_warning("I'm going to puke..."))
 				addtimer(CALLBACK(src, PROC_REF(vomit), 50), rand(8 SECONDS, 15 SECONDS))
-		else
-			if(prob(3))
-				to_chat(src, span_warning("I feel sick..."))
+		else if(SPT_PROB(1.5, seconds_per_tick))
+			to_chat(src, span_warning("I feel sick..."))
 
-	add_nausea(-1)
+	add_nausea(-seconds_per_tick)
 
 /mob/living/carbon/proc/vomit(lost_nutrition = 50, blood = FALSE, stun = TRUE, distance = 1, message = TRUE, toxic = FALSE, harm = FALSE, force = FALSE)
 	if(HAS_TRAIT(src, TRAIT_TOXINLOVER) && !force)

@@ -20,7 +20,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 	return ..()
 
-/datum/objective/personal/listen_whispers/process()
+/datum/objective/personal/listen_whispers/process(seconds_per_tick)
 	if(world.time < last_check + check_interval || completed || !owner?.current)
 		return
 

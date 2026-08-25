@@ -115,9 +115,10 @@
 		animate(icon_state = "p2", time = frame_stage)
 		animate(icon_state = "p1", time = frame_stage)
 
-/obj/structure/water_pump/process()
+/obj/structure/water_pump/process(seconds_per_tick)
 	if(!rotations_per_minute)
 		return
+
 	if(!pumping_from)
 		var/turf/open/water/water = get_step(src, REVERSE_DIR(dir))
 		if(!istype(water))
@@ -132,7 +133,6 @@
 
 	stop_spray()
 	var/obj/structure/water_pipe/pipe  = locate(/obj/structure/water_pipe) in pipe_turf
-
 
 	var/new_pressure = rotations_per_minute + bonus_pressure
 	// if(last_provided_pressure != new_pressure)

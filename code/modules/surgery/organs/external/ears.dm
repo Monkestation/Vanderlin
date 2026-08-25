@@ -51,7 +51,7 @@
 	if(temporary_deafness)
 		on_undeafened(M)
 
-/obj/item/organ/ears/on_life(delta_time, times_fired)
+/obj/item/organ/ears/on_life(seconds_per_tick)
 	. = ..()
 	// if we have non-damage related deafness like mutations, quirks or clothing (earmuffs), don't bother processing here.
 	// Ear healing from earmuffs or chems happen elsewhere
@@ -61,7 +61,7 @@
 	if(is_failing())
 		return
 	if(temporary_deafness)
-		adjust_temporary_deafness(-delta_time SECONDS)
+		adjust_temporary_deafness(-seconds_per_tick SECONDS)
 
 ///Adjust the temporary deafness of the person, up or down
 /obj/item/organ/ears/proc/adjust_temporary_deafness(amount)

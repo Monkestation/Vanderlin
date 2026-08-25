@@ -16,19 +16,21 @@
 	registered_signals += COMSIG_HUMAN_LIFE
 	RegisterSignal(target, COMSIG_HUMAN_LIFE, PROC_REF(on_heartbeat))
 
-/datum/chimeric_node/input/sunlight/proc/on_heartbeat(datum/source)
+/datum/chimeric_node/input/sunlight/proc/on_heartbeat(datum/source, seconds_per_tick)
 	SIGNAL_HANDLER
+
 	if(GLOB.tod != DAY)
 		return
 
-	if(isturf(hosted_carbon.loc))
-		var/turf/T = hosted_carbon.loc
-		if(!T.can_see_sky())
-			return
-	else
+	if(!isturf(hosted_carbon.loc))
+		return
+
+	var/turf/T = hosted_carbon.loc
+	if(!T.can_see_sky())
 		return
 
 	current_beats++
+
 	if(current_beats >= beats_per_trigger)
 		current_beats = 0
 		var/potency = node_purity / 100

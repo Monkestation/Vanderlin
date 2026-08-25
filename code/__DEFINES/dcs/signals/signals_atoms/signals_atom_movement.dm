@@ -30,5 +30,5 @@
 #define COMSIG_ATOM_PRE_DIR_CHANGE "atom_pre_face_atom"
 	#define COMPONENT_ATOM_BLOCK_DIR_CHANGE (1<<0)
 
-///From base of /datum/move_loop/process() after attempting to move a movable: (datum/move_loop/loop, old_dir)
+///From base of /datum/move_loop/process(seconds_per_tick) after attempting to move a movable: (datum/move_loop/loop, old_dir)
 #define COMSIG_MOVABLE_MOVED_FROM_LOOP "movable_moved_from_loop"

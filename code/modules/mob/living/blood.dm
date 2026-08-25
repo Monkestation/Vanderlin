@@ -2,13 +2,13 @@
 				BLOOD SYSTEM
 ****************************************************/
 
-/mob/living/proc/handle_blood()
+/mob/living/proc/handle_blood(seconds_per_tick = SSMOBS_DT)
 	if(!CAN_HAVE_BLOOD(src)) //cryosleep or husked people do not pump the blood.
 		bleed_rate = 0
-		adjustOxyLoss(1.6)
 		return
 
-	bleed_rate = min(get_bleed_rate(), 10)
+	bleed_rate = min(get_bleed_rate() / 2, 5) * seconds_per_tick
+
 	var/cached_blood_volume = get_blood_volume()
 
 	if(cached_blood_volume < BLOOD_VOLUME_NORMAL && blood_volume && !bleed_rate)
@@ -18,32 +18,33 @@
 	if(!HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE) && stat != DEAD)
 		switch(cached_blood_volume)
 			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-				if(prob(3))
+				if(SPT_PROB(1.5, seconds_per_tick))
 					to_chat(src, span_warning("I feel dizzy."))
 				remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 				remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 				apply_status_effect(/datum/status_effect/debuff/bleeding)
 			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-				if(prob(3))
-					set_eye_blur_if_lower(12 SECONDS)
+				if(SPT_PROB(1.5, seconds_per_tick))
+					set_eye_blur_if_lower(6 SECONDS * seconds_per_tick)
 					to_chat(src, span_warning("I feel faint."))
 				remove_status_effect(/datum/status_effect/debuff/bleeding)
 				remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 				apply_status_effect(/datum/status_effect/debuff/bleedingworse)
 			if(0 to BLOOD_VOLUME_BAD)
-				if(prob(3))
-					set_eye_blur_if_lower(12 SECONDS)
+				if(SPT_PROB(1.5, seconds_per_tick))
+					set_eye_blur_if_lower(6 SECONDS * seconds_per_tick)
 					to_chat(src, span_warning("I feel faint."))
-				if(prob(3) && stat < UNCONSCIOUS)
-					Unconscious(rand(5 SECONDS,10 SECONDS))
+				if(SPT_PROB(1.5, seconds_per_tick) && stat < UNCONSCIOUS)
+					Unconscious(rand(2.5 SECONDS * seconds_per_tick, 5 SECONDS * seconds_per_tick))
 					to_chat(src, span_warning("I feel drained."))
 				remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 				remove_status_effect(/datum/status_effect/debuff/bleeding)
 				apply_status_effect(/datum/status_effect/debuff/bleedingworst)
+
 		if(cached_blood_volume <= BLOOD_VOLUME_BAD)
-			adjustOxyLoss(2)
+			adjustOxyLoss(1 * seconds_per_tick)
 			if(cached_blood_volume <= BLOOD_VOLUME_SURVIVE)
-				adjustOxyLoss(4)
+				adjustOxyLoss(2 * seconds_per_tick)
 	else
 		remove_status_effect(/datum/status_effect/debuff/bleeding)
 		remove_status_effect(/datum/status_effect/debuff/bleedingworse)
@@ -53,7 +54,7 @@
 		bleed(bleed_rate)
 
 	if(cached_blood_volume in -INFINITY to BLOOD_VOLUME_SURVIVE)
-		adjustOxyLoss(1.6)
+		adjustOxyLoss(0.8 * seconds_per_tick)
 
 // Takes care blood loss and regeneration
 /mob/living/carbon/handle_blood()

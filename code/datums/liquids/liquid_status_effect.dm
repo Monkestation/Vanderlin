@@ -6,7 +6,7 @@
 /datum/status_effect/water_affected/on_apply()
 	. = ..()
 
-/datum/status_effect/water_affected/tick()
+/datum/status_effect/water_affected/tick(seconds_between_ticks)
 	var/turf/owner_turf = get_turf(owner)
 	if(QDELETED(owner_turf) || QDELETED(owner_turf.liquids) || owner_turf.liquids.liquid_group.group_overlay_state == LIQUID_STATE_PUDDLE)
 		qdel(src)

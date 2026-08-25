@@ -66,10 +66,9 @@
 	else
 		. += "It is static, still, unmoving."
 
-/obj/structure/life_candle/process()
+/obj/structure/life_candle/process(seconds_per_tick)
 	if(!LAZYLEN(linked_minds))
-		STOP_PROCESSING(SSobj, src)
-		return
+		return PROCESS_KILL
 
 	for(var/datum/mind/mind as anything in linked_minds)
 		if(!mind.current || (mind.current && mind.current.stat == DEAD))

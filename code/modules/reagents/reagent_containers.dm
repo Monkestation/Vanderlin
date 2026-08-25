@@ -218,7 +218,7 @@
 
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/item/reagent_containers/process()
+/obj/item/reagent_containers/process(seconds_per_tick)
 	if(!soaking_item || !reagents || !reagents.total_volume)
 		return PROCESS_KILL
 

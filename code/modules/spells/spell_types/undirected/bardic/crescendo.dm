@@ -204,7 +204,7 @@
 	id = "crescendo_mending"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/healing
 	duration = CRESCENDO_MENDING_DURATION
-	healing_on_tick = CRESCENDO_MENDING_TICK
+	healing_per_second = CRESCENDO_MENDING_TICK
 	outline_colour = GLOW_COLOR_BARDIC
 
 #undef CRESCENDO_FILTER

@@ -141,10 +141,10 @@
 		REMOVE_TRAIT(affected, TRAIT_NOPAIN, "[type]")
 		affected.cure_nearsighted("[type]")
 
-/datum/wound/fracture/head/on_life()
+/datum/wound/fracture/head/on_life(seconds_per_tick)
 	. = ..()
 	if(owner)
-		owner.stuttering = max(owner.stuttering, 5)
+		owner.stuttering = max(owner.stuttering, 2.5 * seconds_per_tick)
 
 /datum/wound/fracture/head/brain
 	name = "depressed cranial fracture"
@@ -162,9 +162,9 @@
 	min_damage_dividend = 0.95
 	viable_zones = list(BODY_ZONE_PRECISE_SKULL)
 
-/datum/wound/fracture/head/brain/on_life()
+/datum/wound/fracture/head/brain/on_life(seconds_per_tick)
 	. = ..()
-	owner.adjustOxyLoss(2.5)
+	owner.adjustOxyLoss(1.2 * seconds_per_tick)
 	if(HAS_TRAIT(owner, TRAIT_ROTMAN)) // brain crit kills deadites
 		owner.death()
 
@@ -271,9 +271,9 @@
 	REMOVE_TRAIT(affected, TRAIT_PARALYSIS, "[type]")
 	REMOVE_TRAIT(affected, TRAIT_NOPAIN, "[type]")
 
-/datum/wound/fracture/neck/on_life()
+/datum/wound/fracture/neck/on_life(seconds_per_tick)
 	. = ..()
-	owner.adjustOxyLoss(2.5)
+	owner.adjustOxyLoss(1.2 * seconds_per_tick)
 
 /datum/wound/fracture/chest
 	name = "rib fracture"

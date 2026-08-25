@@ -103,11 +103,13 @@
 	to_chat(owner.current, span_userdanger("Death is not the end..."))
 	return ..()
 
-/datum/antagonist/zombie/on_life(mob/user)
+/datum/antagonist/zombie/on_life(mob/user, seconds_per_tick)
 	if(!user)
 		return
+
 	if(user.stat == DEAD)
 		return
+
 	var/mob/living/carbon/human/zombie = user
 	if(COOLDOWN_FINISHED(src, next_idle_sound))
 		zombie.emote("zmoan")

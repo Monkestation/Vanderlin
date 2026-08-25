@@ -38,7 +38,7 @@
 /obj/machinery/essence/enchantment_altar/push_to_linked(datum/essence_storage/from_storage)
 	push_surplus_to_linked(from_storage)
 
-/obj/machinery/essence/enchantment_altar/process()
+/obj/machinery/essence/enchantment_altar/process(seconds_per_tick)
 	if(enchanting || !selected_recipe || recipe_complete())
 		return
 	pull_from_linked(storage)

@@ -6,7 +6,7 @@
 
 /datum/ai_planning_subtree/wounded_harass
 
-/datum/ai_planning_subtree/wounded_harass/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/wounded_harass/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/mob/living/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
@@ -64,7 +64,7 @@
 		return FALSE
 	set_movement_target(controller, target)
 
-/datum/ai_behavior/human_npc_harass_dart_in/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/human_npc_harass_dart_in/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/mob/living/target = controller.blackboard[target_key]
 	if(!target || QDELETED(target))
@@ -83,7 +83,7 @@
 	action_cooldown = 0.2 SECONDS
 	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 
-/datum/ai_behavior/human_npc_harass_strike/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key)
+/datum/ai_behavior/human_npc_harass_strike/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key)
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/mob/living/target = controller.blackboard[target_key]
 	var/datum/targetting_datum/td = controller.blackboard[targetting_datum_key]
@@ -146,7 +146,7 @@
 		retreat_turf = next
 	set_movement_target(controller, retreat_turf)
 
-/datum/ai_behavior/human_npc_harass_retreat/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/human_npc_harass_retreat/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/mob/living/target = controller.blackboard[target_key]
 	// Keep facing target while backing off so we don't turn our back

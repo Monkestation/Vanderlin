@@ -13,7 +13,7 @@
 	controller.set_blackboard_key(BB_PAPAMEAT_HEALING, TRUE)
 	set_movement_target(controller, papameat)
 
-/datum/ai_behavior/papameat_sacrifice/perform(delta_time, datum/ai_controller/controller, papameat_key)
+/datum/ai_behavior/papameat_sacrifice/perform(seconds_per_tick, datum/ai_controller/controller, papameat_key)
 	. = ..()
 	var/mob/living/simple_animal/our_mob = controller.pawn
 	var/obj/structure/meatvine/papameat/papameat = controller.blackboard[papameat_key]
@@ -62,7 +62,7 @@
 	set_movement_target(controller, target)
 
 
-/datum/ai_behavior/papameat_feed_corpse/perform(delta_time, datum/ai_controller/controller, corpse_key)
+/datum/ai_behavior/papameat_feed_corpse/perform(seconds_per_tick, datum/ai_controller/controller, corpse_key)
 	. = ..()
 	var/mob/living/simple_animal/our_mob = controller.pawn
 	var/atom/movable/target = controller.blackboard[corpse_key]
@@ -139,7 +139,7 @@
 
 	set_movement_target(controller, papameat)
 
-/datum/ai_behavior/papameat_defend/perform(delta_time, datum/ai_controller/controller, papameat_key)
+/datum/ai_behavior/papameat_defend/perform(seconds_per_tick, datum/ai_controller/controller, papameat_key)
 	. = ..()
 	var/mob/living/simple_animal/our_mob = controller.pawn
 	var/obj/structure/meatvine/papameat/papameat = controller.blackboard[papameat_key]
@@ -175,7 +175,7 @@
 	controller.set_blackboard_key(BB_BRIDGING, TRUE)
 	set_movement_target(controller, request.target_location)
 
-/datum/ai_behavior/meatvine_bridge/perform(delta_time, datum/ai_controller/controller, bridge_key)
+/datum/ai_behavior/meatvine_bridge/perform(seconds_per_tick, datum/ai_controller/controller, bridge_key)
 	. = ..()
 	var/mob/living/simple_animal/our_mob = controller.pawn
 	var/datum/bridge_request/request = controller.blackboard[bridge_key]
@@ -243,7 +243,7 @@
 	controller.set_blackboard_key(BB_ATTACKING_OBSTACLE, TRUE)
 	set_movement_target(controller, obstacle)
 
-/datum/ai_behavior/meatvine_destroy_obstacle/perform(delta_time, datum/ai_controller/controller, obstacle_key)
+/datum/ai_behavior/meatvine_destroy_obstacle/perform(seconds_per_tick, datum/ai_controller/controller, obstacle_key)
 	. = ..()
 	var/mob/living/simple_animal/our_mob = controller.pawn
 	var/atom/obstacle = controller.blackboard[obstacle_key]
@@ -325,7 +325,7 @@
 
 	set_movement_target(controller, papameat)
 
-/datum/ai_behavior/meatvine_evolve/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/meatvine_evolve/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/meatvine/mob = controller.pawn
 	var/obj/structure/meatvine/papameat/papameat = controller.blackboard[target_key]
@@ -373,7 +373,7 @@
 
 
 
-/datum/ai_behavior/use_personal_ability/perform(delta_time, datum/ai_controller/controller, ability_key)
+/datum/ai_behavior/use_personal_ability/perform(seconds_per_tick, datum/ai_controller/controller, ability_key)
 	. = ..()
 	var/datum/action/cooldown/meatvine/personal/ability = controller.blackboard[ability_key]
 

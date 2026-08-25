@@ -93,7 +93,7 @@
 	if(!length(vines))
 		qdel(src)
 
-/datum/component/vine_controller/process()
+/datum/component/vine_controller/process(seconds_per_tick)
 	processing_calls++
 	if(processing_calls < grow_speed)
 		return

@@ -793,9 +793,9 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 ///update the vertical pixel position of both fish and bait, and the icon state of the completion bar
 /datum/fishing_challenge/proc/update_visuals(seconds_per_tick)
 	var/bait_offset_mult = bait_position / FISHING_MINIGAME_AREA
-	animate(fishing_hud.hud_bait, pixel_z = MINIGAME_SLIDER_HEIGHT * bait_offset_mult, time = seconds_per_tick SECONDS)
+	animate(fishing_hud.hud_bait, pixel_z = MINIGAME_SLIDER_HEIGHT * bait_offset_mult, time = SPT_TO_DECISECONDS(seconds_per_tick))
 	var/fish_offset_mult = fish_position / FISHING_MINIGAME_AREA
-	animate(fishing_hud.hud_fish, pixel_z = MINIGAME_SLIDER_HEIGHT * fish_offset_mult, time = seconds_per_tick SECONDS)
+	animate(fishing_hud.hud_fish, pixel_z = MINIGAME_SLIDER_HEIGHT * fish_offset_mult, time = SPT_TO_DECISECONDS(seconds_per_tick))
 	fishing_hud.hud_completion.update_state(completion, seconds_per_tick)
 
 ///The screen object which bait, fish, and completion bar are visually attached to.
@@ -880,7 +880,7 @@ GLOBAL_LIST_EMPTY(fishing_challenges_by_user)
 	add_filter("completion_mask", 1, alpha_mask_filter(icon = icon(icon, "completion_overlay")))
 
 /atom/movable/screen/hud_completion/proc/update_state(completion, seconds_per_tick)
-	animate(get_filter("completion_mask"), y = -MINIGAME_COMPLETION_BAR_HEIGHT * (1 - completion * 0.01), time = seconds_per_tick SECONDS)
+	animate(get_filter("completion_mask"), y = -MINIGAME_COMPLETION_BAR_HEIGHT * (1 - completion * 0.01), time = SPT_TO_DECISECONDS(seconds_per_tick))
 
 /// The visual that appears over the fishing spot
 /obj/effect/fishing_float

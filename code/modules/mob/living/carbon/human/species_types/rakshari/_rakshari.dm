@@ -128,17 +128,24 @@
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/zalad)
 
-/datum/species/rakshari/spec_life(mob/living/carbon/human/H)
+/datum/species/rakshari/spec_life(mob/living/carbon/human/H, seconds_per_tick)
 	. = ..()
-	if(prob(1) && !(H.rogue_sneaking))
-		if(!COOLDOWN_FINISHED(src, cat_meow_cooldown))
-			return
-		var/emote = "meow"
-		if(prob(15))
-			emote = "purr"
-		H.emote(emote, forced = TRUE)
+	if(H.rogue_sneaking)
+		return
 
-		COOLDOWN_START(src, cat_meow_cooldown, 5 MINUTES)
+	if(!COOLDOWN_FINISHED(src, cat_meow_cooldown))
+		return
+
+	if(!SPT_PROB(0.3, seconds_per_tick))
+		return
+
+	var/emote = "meow"
+	if(prob(15))
+		emote = "purr"
+
+	H.emote(emote, forced = TRUE)
+
+	COOLDOWN_START(src, cat_meow_cooldown, 15 MINUTES)
 
 /datum/species/rakshari/on_species_loss(mob/living/carbon/C)
 	. = ..()

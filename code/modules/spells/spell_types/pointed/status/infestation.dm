@@ -43,7 +43,7 @@
 /datum/status_effect/debuff/infestation/proc/wash_off()
 	qdel(src)
 
-/datum/status_effect/debuff/infestation/tick()
+/datum/status_effect/debuff/infestation/tick(seconds_between_ticks)
 	var/static/list/messages = list(
 		"Ticks on my skin start to engorge with blood!",
 		"Flies are laying eggs in my open wounds!",
@@ -65,13 +65,13 @@
 	)
 	var/mob/living/L = owner
 
-	L.adjustToxLoss(2)
-	if(prob(20))
-		L.adjustBruteLoss(5, damage_type = BCLASS_BITE)
+	L.adjustToxLoss(2 * seconds_between_ticks)
+	if(SPT_PROB(20, seconds_between_ticks))
+		L.adjustBruteLoss(5 * seconds_between_ticks, damage_type = BCLASS_BITE)
 
-	if(prob(33) && iscarbon(L))
+	if(SPT_PROB(33, seconds_between_ticks) && iscarbon(L))
 		var/mob/living/carbon/C = L
-		C.add_nausea(rand(10,20))
+		C.add_nausea(rand(10, 20) * seconds_between_ticks)
 		to_chat(C, span_warning(pick(messages)))
 
 /atom/movable/screen/alert/status_effect/debuff/infestation

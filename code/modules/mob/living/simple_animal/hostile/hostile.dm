@@ -66,7 +66,7 @@
 	targets_from = null
 	return ..()
 
-/mob/living/simple_animal/hostile/Life()
+/mob/living/simple_animal/hostile/Life(seconds_per_tick)
 	. = ..()
 	if(!.) //dead
 		walk(src, 0) //stops walking

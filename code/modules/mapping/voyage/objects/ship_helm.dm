@@ -791,14 +791,12 @@
 	if(new_direction)
 		sailing_direction = new_direction
 
-/obj/structure/ship_wheel/process()
-	if(!sailing_direction || sailing_speed == 0)
-		STOP_PROCESSING(SSobj, src)
-		return
+/obj/structure/ship_wheel/process(seconds_per_tick)
+	if(!sailing_direction || sailing_speed <= 0)
+		return PROCESS_KILL
 
 	if(controlled_ship.docked_island)
-		STOP_PROCESSING(SSobj, src)
-		return
+		return PROCESS_KILL
 
 	if(target_island)
 		var/dx = target_island.nav_x - nav_x

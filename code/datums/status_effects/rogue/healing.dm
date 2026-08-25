@@ -24,41 +24,42 @@
 	alert_type = /atom/movable/screen/alert/status_effect/buff/healing
 	duration = 10 SECONDS
 
-	var/healing_on_tick = 1
+	var/healing_per_second = 1
 
 	var/outline_colour = "#c42424"
-	var/outline_alpha = 60
 
 	var/visual_type = /obj/effect/temp_visual/heal_rogue
 	var/effect_color = "#FF0000"
 
-/datum/status_effect/buff/healing/on_creation(mob/living/new_owner, duration_override, new_healing_on_tick)
-	if(!isnull(new_healing_on_tick))
-		healing_on_tick = new_healing_on_tick
+/datum/status_effect/buff/healing/on_creation(mob/living/new_owner, duration_override, healing_per_second)
+	if(!isnull(healing_per_second))
+		src.healing_per_second = healing_per_second
 	return ..()
 
 /datum/status_effect/buff/healing/on_apply()
 	. = ..()
 	if(outline_colour)
-		owner.add_filter(id, 2, list("type" = "outline", "color" = outline_colour, "alpha" = outline_alpha, "size" = 1))
+		owner.add_filter(id, 2, outline_filter(1, outline_colour))
+
+/datum/status_effect/buff/healing/on_remove()
+	. = ..()
+	if(outline_colour)
+		owner.remove_filter(id)
 
 /datum/status_effect/buff/healing/tick(seconds_between_ticks)
 	if(visual_type)
 		var/obj/effect/temp_visual/heal/H = new /obj/effect/temp_visual/heal_rogue(get_turf(owner))
 		H.color = effect_color
 
-	owner.adjust_blood_volume(healing_on_tick + 1, maximum = BLOOD_VOLUME_NORMAL)
-	owner.adjustOxyLoss(-healing_on_tick, FALSE)
-	owner.adjustToxLoss(-healing_on_tick, FALSE)
-	owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -healing_on_tick)
-	owner.adjustCloneLoss(-healing_on_tick, FALSE)
-	owner.adjustBruteLoss(-healing_on_tick, FALSE)
-	owner.adjustFireLoss(-healing_on_tick, TRUE)
+	var/base_healing = healing_per_second * seconds_between_ticks
 
-	if(length(owner.get_wounds()) && owner.heal_wounds(healing_on_tick, src))
+	owner.adjust_blood_volume(base_healing * 2, maximum = BLOOD_VOLUME_NORMAL)
+	owner.adjustOxyLoss(-base_healing, FALSE)
+	owner.adjustToxLoss(-base_healing, FALSE)
+	owner.adjustOrganLoss(ORGAN_SLOT_BRAIN, -base_healing)
+	owner.adjustCloneLoss(-base_healing, FALSE)
+	owner.adjustBruteLoss(-base_healing, FALSE)
+	owner.adjustFireLoss(-base_healing, TRUE)
+
+	if(length(owner.get_wounds()) && owner.heal_wounds(base_healing, src))
 		owner.update_damage_overlays()
-
-/datum/status_effect/buff/healing/on_remove()
-	. = ..()
-	if(outline_colour)
-		owner.remove_filter(id)

@@ -239,7 +239,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 	return ..()
 
-/datum/component/familial_bond/process()
+/datum/component/familial_bond/process(seconds_per_tick)
 	if(!bonded_with || QDELETED(bonded_with) || !parent || QDELETED(parent))
 		end_bond()
 		return
@@ -448,7 +448,7 @@
 	STOP_PROCESSING(SSprocessing, src)
 	return ..()
 
-/datum/component/empathic_obsession/process()
+/datum/component/empathic_obsession/process(seconds_per_tick)
 	if(!obsession_target || QDELETED(obsession_target) || !parent || QDELETED(parent))
 		end_obsession()
 		return

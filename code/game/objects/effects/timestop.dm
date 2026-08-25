@@ -184,7 +184,7 @@
 /datum/proximity_monitor/advanced/timestop/proc/unfreeze_structure(obj/O)
 	escape_the_negative_zone(O)
 
-/datum/proximity_monitor/advanced/timestop/process()
+/datum/proximity_monitor/advanced/timestop/process(seconds_per_tick)
 	for(var/mob/living/frozen_mob as anything in frozen_mobs)
 		frozen_mob.apply_status_effect(/datum/status_effect/time_stopped)
 

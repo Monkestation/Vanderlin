@@ -78,13 +78,13 @@
 		receivers -= list(echolocate_receiver)
 	return ..()
 
-/datum/component/echolocation/process()
+/datum/component/echolocation/process(seconds_per_tick)
 	var/mob/living/echolocator = parent
 	if(echolocator.stat == DEAD)
 		return
-	echolocate()
+	echolocate(seconds_per_tick)
 
-/datum/component/echolocation/proc/echolocate()
+/datum/component/echolocation/proc/echolocate(seconds_per_tick)
 	if(!COOLDOWN_FINISHED(src, cooldown_last))
 		return
 	COOLDOWN_START(src, cooldown_last, cooldown_time)

@@ -62,33 +62,8 @@
 	overlay.color = water_parent.water_reagent.color
 	. += overlay
 
-/obj/structure/irrigation_channel/process()
-	if(!water_logged)
-		for(var/direction in GLOB.cardinals)
-			var/turf/cardinal_turf = get_step(src, direction)
-			if(istype(cardinal_turf, /turf/open/water))
-				var/turf/open/water/water = cardinal_turf
-				if(water.volume_status == WATER_VOLUME_DRY)
-					continue
-				if(water.blocked_flow_directions & get_dir(water, src))
-					continue
-				water_logged = TRUE
-				water_parent = water
-				RegisterSignal(water_parent, COMSIG_TURF_CHANGE, PROC_REF(dry_up), override = TRUE)
-				set_diged_ways(get_dir(src, cardinal_turf))
-				update_appearance(UPDATE_OVERLAYS)
-				return
-
-			for(var/obj/structure/irrigation_channel/irrigation_channel in cardinal_turf)
-				if(!istype(irrigation_channel))
-					continue
-				if(!irrigation_channel.water_logged)
-					continue
-				water_parent = irrigation_channel.water_parent
-				RegisterSignal(water_parent, COMSIG_TURF_CHANGE, PROC_REF(dry_up), override = TRUE)
-				water_logged = TRUE
-				update_appearance(UPDATE_OVERLAYS)
-	else
+/obj/structure/irrigation_channel/process(seconds_per_tick)
+	if(water_logged)
 		if(water_parent.blocked_flow_directions & get_dir(water_parent, src))
 			water_logged = FALSE
 			update_appearance(UPDATE_OVERLAYS)
@@ -96,10 +71,36 @@
 		if(water_reagent != water_parent.water_reagent)
 			water_reagent = water_parent.water_reagent
 			update_appearance(UPDATE_OVERLAYS)
+
 		if(water_parent.volume_status != WATER_VOLUME_DRY)
+			water_logged = FALSE
+			update_appearance(UPDATE_OVERLAYS)
 			return
-		water_logged = FALSE
-		update_appearance(UPDATE_OVERLAYS)
+
+	for(var/direction in GLOB.cardinals)
+		var/turf/cardinal_turf = get_step(src, direction)
+		if(istype(cardinal_turf, /turf/open/water))
+			var/turf/open/water/water = cardinal_turf
+			if(water.volume_status == WATER_VOLUME_DRY)
+				continue
+			if(water.blocked_flow_directions & get_dir(water, src))
+				continue
+			water_logged = TRUE
+			water_parent = water
+			RegisterSignal(water_parent, COMSIG_TURF_CHANGE, PROC_REF(dry_up), override = TRUE)
+			set_diged_ways(get_dir(src, cardinal_turf))
+			update_appearance(UPDATE_OVERLAYS)
+			return
+
+		for(var/obj/structure/irrigation_channel/irrigation_channel in cardinal_turf)
+			if(!istype(irrigation_channel))
+				continue
+			if(!irrigation_channel.water_logged)
+				continue
+			water_parent = irrigation_channel.water_parent
+			RegisterSignal(water_parent, COMSIG_TURF_CHANGE, PROC_REF(dry_up), override = TRUE)
+			water_logged = TRUE
+			update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/irrigation_channel/proc/dry_up()
 	water_logged = FALSE

@@ -23,12 +23,12 @@
 	var/consistent = FALSE
 	/// Are we giving or receiving blood?
 	var/giving = FALSE
-	/// How much blood we waste away on process()
-	var/drainage = 1
-	/// How much blood we suck on on_embed_life()
-	var/blood_sucking = 2
-	/// How much toxin damage we heal on on_embed_life()
-	var/toxin_healing = 1.5
+	/// How much blood we waste away per second
+	var/drainage = 0.5
+	/// How much blood we suck on on_embed_life() per second
+	var/blood_sucking = 1
+	/// How much toxin damage we heal on on_embed_life() per second
+	var/toxin_healing = 1
 	/// Amount of blood we have stored
 	var/blood_storage = 0
 	/// Maximum amount of blood we can store
@@ -44,10 +44,10 @@
 	if(drainage)
 		START_PROCESSING(SSobj, src)
 
-/obj/item/natural/worms/leech/process()
+/obj/item/natural/worms/leech/process(seconds_per_tick)
 	if(!drainage)
 		return PROCESS_KILL
-	blood_storage = max(blood_storage - drainage, 0)
+	blood_storage = max(blood_storage - (0.5 * seconds_per_tick), 0)
 
 /obj/item/natural/worms/leech/examine(mob/user)
 	. = ..()
@@ -104,9 +104,10 @@
 
 	return ITEM_INTERACT_SUCCESS
 
-/obj/item/natural/worms/leech/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
+/obj/item/natural/worms/leech/on_embed_life(mob/living/user, obj/item/bodypart/bodypart, seconds_per_tick)
 	if(!user)
 		return
+
 	if(bodypart?.skeletonized || !bodypart?.is_organic_limb())
 		bodypart.remove_embedded_object(src)
 		return TRUE
@@ -115,7 +116,7 @@
 		return TRUE
 
 	if(giving)
-		var/blood_given = min(BLOOD_VOLUME_NORMAL - user.get_blood_volume(), blood_storage, blood_sucking)
+		var/blood_given = min(BLOOD_VOLUME_NORMAL - user.get_blood_volume(), blood_storage, blood_sucking) * seconds_per_tick
 		user.adjust_blood_volume(blood_given)
 		blood_storage = max(blood_storage - blood_given, 0)
 		if((blood_storage <= 0) || (user.get_blood_volume() >= BLOOD_VOLUME_SAFE_MAXIMUM))
@@ -126,8 +127,8 @@
 			return TRUE
 	else
 		var/modifier = bodypart.get_cut(TRUE, TRUE) ? 1.5 : 1 //ignore bandage because leech is embedded
-		user.adjustToxLoss(-1 * toxin_healing * modifier)
-		var/blood_extracted = min(blood_maximum - blood_storage, user.get_blood_volume(), blood_sucking) * modifier
+		user.adjustToxLoss(-1 * toxin_healing * seconds_per_tick * modifier)
+		var/blood_extracted = min(blood_maximum - blood_storage, user.get_blood_volume(), blood_sucking) * modifier * seconds_per_tick
 		if(HAS_TRAIT(user, TRAIT_LEECHIMMUNE))
 			blood_extracted *= 0.05 // 95% drain reduction
 		user.adjust_blood_volume(-blood_extracted)
@@ -255,35 +256,35 @@
 		"embedded_bloodloss"= 0,
 	)
 
-/obj/item/natural/worms/leech/propaganda/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
+/obj/item/natural/worms/leech/propaganda/on_embed_life(mob/living/user, obj/item/bodypart/bodypart, seconds_per_tick)
 	. = ..()
 	if(!user)
 		return
-	if(iscarbon(user))
-		var/mob/living/carbon/V = user
-		if(prob(5))
-			record_round_statistic(STATS_ZIZO_PRAISED)
-			V.say(pick( \
-				"PRAISE ZIZO!", \
-				"DEATH TO THE TEN...", \
-				"Astrata will fail!", \
-				"The Ten cannot stop me!", \
-				"Zizo shows the way!", \
-				"The Dark Lady has shown me the truth!", \
-				"My life for Zizo...", \
-				"Curse your Beast God!", \
-				"Noc's magick is nothing to Zizo!", \
-				"Abyssor is but a grain of salt!", \
-				"Pestra is the most foul of goddesses!", \
-				"Ravox's justice is flawed and dull!", \
-				"Rip the Sun Tyrant from the sky!", \
-				"Xylix is the tongue that must be severed off!", \
-				"Cast Malum into the fires of hell!", \
-				"The only truth there is lies with the Dark Elves!", \
-				"I will defile Necra's dead, a thousand times!", \
-				"I will butcher the Ten like Necra butchered Psydon!", \
-				"Snuff out the beating hearts of Eora!"))
-		V.add_stress(/datum/stress_event/leechcult)
+
+	user.add_stress(/datum/stress_event/leechcult)
+
+	if(SPT_PROB(2.5, seconds_per_tick))
+		record_round_statistic(STATS_ZIZO_PRAISED)
+		user.say(pick( \
+			"PRAISE ZIZO!", \
+			"DEATH TO THE TEN...", \
+			"Astrata will fail!", \
+			"The Ten cannot stop me!", \
+			"Zizo shows the way!", \
+			"The Dark Lady has shown me the truth!", \
+			"My life for Zizo...", \
+			"Curse your Beast God!", \
+			"Noc's magick is nothing to Zizo!", \
+			"Abyssor is but a grain of salt!", \
+			"Pestra is the most foul of goddesses!", \
+			"Ravox's justice is flawed and dull!", \
+			"Rip the Sun Tyrant from the sky!", \
+			"Xylix is the tongue that must be severed off!", \
+			"Cast Malum into the fires of hell!", \
+			"The only truth there is lies with the Dark Elves!", \
+			"I will defile Necra's dead, a thousand times!", \
+			"I will butcher the Ten like Necra butchered Psydon!", \
+			"Snuff out the beating hearts of Eora!"))
 
 /obj/item/natural/worms/leech/abyssoid
 	name = "abyssoid leech"
@@ -300,13 +301,12 @@
 		"embedded_bloodloss"= 0,
 	)
 
-/obj/item/natural/worms/leech/abyssoid/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
+/obj/item/natural/worms/leech/abyssoid/on_embed_life(mob/living/user, obj/item/bodypart/bodypart, seconds_per_tick)
 	. = ..()
 	if(!user)
 		return
-	if(iscarbon(user))
-		var/mob/living/carbon/V = user
-		if(prob(3))
-			V.say(pick("PRAISE ABYSSOR!", "REMEMBER ABYSSOR!", "ABYSSOR LIVES!", "GLORY TO ABYSSOR!", "ABYSSOR IS COMING!"))
+
+	if(SPT_PROB(1.5, seconds_per_tick))
+		user.say(pick("PRAISE ABYSSOR!", "REMEMBER ABYSSOR!", "ABYSSOR LIVES!", "GLORY TO ABYSSOR!", "ABYSSOR IS COMING!"))
 
 #undef MAX_LEECH_EVILNESS

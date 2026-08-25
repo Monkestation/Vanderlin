@@ -9,7 +9,7 @@
 	set_movement_target(controller, water_target)
 	return TRUE
 
-/datum/ai_behavior/return_to_water/perform(delta_time, datum/ai_controller/controller, water_target_key)
+/datum/ai_behavior/return_to_water/perform(seconds_per_tick, datum/ai_controller/controller, water_target_key)
 	. = ..()
 	var/atom/water_target = controller.blackboard[water_target_key]
 	var/mob/living/simple_animal/hostile/retaliate/gator/gator_pawn = controller.pawn

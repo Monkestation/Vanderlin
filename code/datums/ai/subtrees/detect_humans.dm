@@ -1,6 +1,6 @@
 /datum/ai_planning_subtree/detect_humans
 
-/datum/ai_planning_subtree/detect_humans/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/detect_humans/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	// Don't scan for humans if we're already engaged in combat
 	if(controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET])

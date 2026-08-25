@@ -41,14 +41,15 @@
 	. = ..()
 	proximity_monitor = new(src, 1)
 
-/obj/structure/flora/grass/maneater/real/process()
+/obj/structure/flora/grass/maneater/real/process(seconds_per_tick)
 	if(COOLDOWN_FINISHED(src, activity_cooldown))
 		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
-		STOP_PROCESSING(SSobj, src)
-		return TRUE
+		return PROCESS_KILL
+
 	// we can't munch yet, we're on cooldown
 	if(COOLDOWN_TIMELEFT(src, activity_cooldown) > munch_time)
 		return
+
 	for(var/mob/living/L as anything in buckled_mobs)
 		if(L.status_flags & GODMODE)
 			continue
@@ -58,6 +59,7 @@
 		addtimer(CALLBACK(src, PROC_REF(munch), L), sleep_time - munch_time)
 		COOLDOWN_START(src, activity_cooldown, sleep_time)
 		return
+
 	//if we made it this far there's no one buckled or theyre eating
 	for(var/obj/item/F in view(1, src))
 		if(!is_type_in_list(F, eatablez))

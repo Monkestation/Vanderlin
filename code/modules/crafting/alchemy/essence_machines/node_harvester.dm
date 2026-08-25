@@ -1,14 +1,14 @@
 
 /obj/machinery/essence/harvester
-	name        = "essence harvester"
-	desc        = "A mechanical solution to large-scale essence extraction. Install an essence node to begin leeching alchemical energy from the land."
-	icon        = 'icons/roguetown/misc/splitter.dmi'
-	icon_state  = "splitter"
+	name = "essence harvester"
+	desc = "A mechanical solution to large-scale essence extraction. Install an essence node to begin leeching alchemical energy from the land."
+	icon = 'icons/roguetown/misc/splitter.dmi'
+	icon_state = "splitter"
 	network_priority = 1
 
 	var/obj/structure/essence_node/installed_node
-	/// Units harvested from the node per process tick
-	var/harvest_rate = 2
+	/// Units harvested from the node per second
+	var/harvest_rate = 1
 	/// Multiplier applied to the node's natural recharge rate
 	var/efficiency_bonus = 1.5
 
@@ -28,7 +28,7 @@
 /obj/machinery/essence/harvester/build_allowed_types()
 	return list()
 
-/obj/machinery/essence/harvester/process()
+/obj/machinery/essence/harvester/process(seconds_per_tick)
 	// 1. Recharge the installed node
 	if(installed_node)
 		if(installed_node.current_essence < installed_node.max_essence \
@@ -42,7 +42,7 @@
 
 		// 2. Harvest from node into local storage
 		if(installed_node.current_essence > 0)
-			var/harvested = min(installed_node.current_essence, harvest_rate)
+			var/harvested = min(installed_node.current_essence, harvest_rate * seconds_per_tick)
 			var/added = storage.add(installed_node.essence_type.type, harvested)
 			if(added > 0)
 				installed_node.current_essence -= added

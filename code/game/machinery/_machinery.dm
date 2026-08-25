@@ -55,7 +55,7 @@
 
 	return ..()
 
-/obj/machinery/process()//If you dont use process or power why are you here
+/obj/machinery/process(seconds_per_tick)//If you dont use process or power why are you here
 	return PROCESS_KILL
 
 /obj/machinery/proc/can_be_occupant(atom/movable/am)

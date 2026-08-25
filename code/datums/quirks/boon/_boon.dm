@@ -32,12 +32,13 @@
 	desc = "You handle stress better than most. Pressure doesn't get to you as easily."
 	point_value = -3
 
-/datum/quirk/boon/composed/on_life(mob/living/user)
+/datum/quirk/boon/composed/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
 		return
+
 	var/mob/living/carbon/human/H = user
-	if(prob(1) && H.get_stress_amount() > 5)
-		H.adjust_stress(-1)
+	if(SPT_PROB(0.5, seconds_per_tick) && H.get_stress_amount() > 5)
+		H.adjust_stress(-seconds_per_tick)
 
 /* This is a future idea
 /datum/quirk/boon/light_sleeper

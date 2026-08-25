@@ -54,7 +54,7 @@ SUBSYSTEM_DEF(tgui)
 		current_run.len--
 		// TODO: Move user/src_object check to process()
 		if(ui?.user && ui.src_object)
-			ui.process(wait * 0.1)
+			ui.process(wait / (1 SECONDS))
 		else
 			ui.close(0)
 		if(MC_TICK_CHECK)
@@ -199,7 +199,7 @@ SUBSYSTEM_DEF(tgui)
 	for(var/datum/tgui/ui in src_object.open_uis)
 		// Check if UI is valid.
 		if(ui?.src_object && ui.user && ui.src_object.ui_host(ui.user))
-			INVOKE_ASYNC(ui, TYPE_PROC_REF(/datum/tgui, process), wait * 0.1, TRUE)
+			INVOKE_ASYNC(ui, TYPE_PROC_REF(/datum/tgui, process), wait / (1 SECONDS), TRUE)
 			count++
 	return count
 
@@ -257,7 +257,7 @@ SUBSYSTEM_DEF(tgui)
 
 	for(var/datum/tgui/ui in user.tgui_open_uis)
 		if(isnull(src_object) || ui.src_object == src_object)
-			ui.process(wait * 0.1, force = TRUE)
+			ui.process(wait / (1 SECONDS), force = TRUE)
 			count++
 
 	return count

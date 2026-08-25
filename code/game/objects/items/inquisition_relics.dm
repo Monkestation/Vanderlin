@@ -203,30 +203,35 @@
 	effect_color = "#800000"
 	return ..()
 
-/datum/status_effect/buff/cranking_soulchurner/tick()
+/datum/status_effect/buff/cranking_soulchurner/tick(seconds_between_ticks)
 	var/obj/effect/temp_visual/music_rogue/M = new /obj/effect/temp_visual/music_rogue(get_turf(owner))
 	M.color = "#800000"
 	pulse += 1
-	if (pulse >= ticks_to_apply)
-		pulse = 0
-		if(!HAS_TRAIT(owner, TRAIT_INQUISITION))
-			owner.add_stress(/datum/stress_event/soulchurnerhorror)
-		for (var/mob/living/carbon/human/H in hearers(7, owner))
-			if (!H.client || !H.patron)
-				continue
-			if (!H.has_stress_type(/datum/stress_event/soulchurner))
-				var/list/lines = patron_lines[H.patron.type]
-				if(lines)
-					if(istype(H.patron, /datum/patron/psydon))
-						H.add_stress(/datum/stress_event/soulchurnerpsydon)
-						if(HAS_TRAIT(H, TRAIT_INQUISITION))
-							H.apply_status_effect(/datum/status_effect/buff/churnerprotection)
-					else
-						H.add_stress(/datum/stress_event/soulchurner)
-						if(!H.has_status_effect(/datum/status_effect/buff/churnernegative))
-							H.apply_status_effect(/datum/status_effect/buff/churnernegative)
-					to_chat(H, (span_hypnophrase("A voice calls out from the song for you...")))
-					to_chat(H, (span_cultsmall(pick(lines))))
+	if(pulse < ticks_to_apply)
+		return
+
+	pulse = 0
+	if(!HAS_TRAIT(owner, TRAIT_INQUISITION))
+		owner.add_stress(/datum/stress_event/soulchurnerhorror)
+
+	for(var/mob/living/carbon/human/H in hearers(7, owner))
+		if(!H.client || !H.patron)
+			continue
+		if(H.has_stress_type(/datum/stress_event/soulchurner))
+			continue
+		var/list/lines = patron_lines[H.patron.type]
+		if(!length(lines))
+			continue
+		if(istype(H.patron, /datum/patron/psydon))
+			H.add_stress(/datum/stress_event/soulchurnerpsydon)
+			if(HAS_TRAIT(H, TRAIT_INQUISITION))
+				H.apply_status_effect(/datum/status_effect/buff/churnerprotection)
+		else
+			H.add_stress(/datum/stress_event/soulchurner)
+			if(!H.has_status_effect(/datum/status_effect/buff/churnernegative))
+				H.apply_status_effect(/datum/status_effect/buff/churnernegative)
+		to_chat(H, (span_hypnophrase("A voice calls out from the song for you...")))
+		to_chat(H, (span_cultsmall(pick(lines))))
 
 /atom/movable/screen/alert/status_effect/buff/censerbuff
 	name = "Inspired by Psydon."
@@ -322,7 +327,7 @@
 		to_chat(user, span_info("It is gone. You weep."))
 		user.emote("cry")
 
-/obj/item/flashlight/flare/torch/lantern/psycenser/process()
+/obj/item/flashlight/flare/torch/lantern/psycenser/process(seconds_per_tick)
 	if(on && next_smoke < world.time)
 		new /obj/effect/temp_visual/censer_dust(get_turf(src))
 		next_smoke = world.time + smoke_interval
@@ -668,7 +673,7 @@
 
 /obj/item/inqarticles/tallowpot
 	name = "tallowpot"
-	desc = "A small metal pot meant for holding waxes or melted redtallow. Convenient for coating signet rings and making an imprint. The warmth of a torch or lamptern should be enough to melt the redtallow for stamping writs."
+	desc = "A small metal pot for holding waxes or melted redtallow. Convenient for coating signet rings and making an imprint. The warmth of a torch or lamptern should be enough to melt the redtallow for stamping writs."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "tallowpot"
 	item_state = "tallowpot"
@@ -684,84 +689,86 @@
 	w_class = WEIGHT_CLASS_SMALL
 	embedding = null
 	item_weight = 150 GRAMS
-	var/tallow
-	var/remaining
-	var/heatedup
-	var/messageshown = 1
 	sellprice = 0
+	/// If the pot has tallow in it
+	var/tallow = FALSE
+	/// Amount of tallow remaining in deciseconds
+	var/remaining = 0
+	/// Heated time remaining in deciseconds
+	var/heatedup = 0
 
-/obj/item/inqarticles/tallowpot/Initialize(mapload)
-	. = ..()
-	START_PROCESSING(SSobj, src)	// For making sure it melts.
+/obj/item/inqarticles/tallowpot/filled
+	tallow = TRUE
+	remaining = 2 MINUTES
 
-/obj/item/inqarticles/tallowpot/Destroy()
-	. = ..()
-	STOP_PROCESSING(SSobj, src)
+/obj/item/inqarticles/tallowpot/process(seconds_per_tick)
+	heatedup -= SPT_TO_DECISECONDS(seconds_per_tick)
+	remaining -= SPT_TO_DECISECONDS(seconds_per_tick)
 
-/obj/item/inqarticles/tallowpot/process()
-	if(heatedup > 0)
-		heatedup -= 4
-		remaining = max(remaining - 20, 0)
-		messageshown = 0
-	else
-		if(tallow)
-			if(!messageshown)
-				visible_message(span_info("The redtallow in [src] hardens again."))
-				messageshown = 1
-			update_appearance(UPDATE_ICON_STATE)
-	if(remaining == 0)
-		qdel(tallow)
-		tallow = initial(tallow)
+	if(!heatedup)
+		visible_message(span_info("The redtallow in [src] hardens again."))
 		update_appearance(UPDATE_ICON_STATE)
+		return PROCESS_KILL
 
-/obj/item/inqarticles/tallowpot/attacked_by(obj/item/I, mob/living/user)
-	. = ..()
+	if(!remaining)
+		tallow = FALSE
+		heatedup = 0
+		update_appearance(UPDATE_ICON_STATE)
+		return PROCESS_KILL
+
+/obj/item/inqarticles/tallowpot/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(istype(I, /obj/item/reagent_containers/food/snacks/tallow))
 		if(!istype(I,/obj/item/reagent_containers/food/snacks/tallow/red)) // Tells players to make redtallow.
 			to_chat(user,span_warning("Normal tallow lacks the properties to act as wax. Add viscera to it first."))
 			return
-		if(!tallow)
-			var/obj/item/reagent_containers/food/snacks/tallow/red/Q = I
-			tallow = Q
-			user.transferItemToLoc(Q, src, TRUE)
-			remaining = 300
-			update_appearance(UPDATE_ICON_STATE)
-		else
-			to_chat(user, span_info("[src] already has redtallow in it."))
 
+		if(tallow)
+			to_chat(user, span_info("[src] already has redtallow in it."))
+			return
+
+		tallow = TRUE
+		qdel(I)
+		remaining = 2 MINUTES
+		update_appearance(UPDATE_ICON_STATE)
+		return
 
 	if(istype(I, /obj/item/flashlight/flare/torch))
-		heatedup = 28
+		heatedup = 40 SECONDS
+		START_PROCESSING(SSobj, src)
 		visible_message(span_info("[user] warms [src] with [I]."))
 		update_appearance(UPDATE_ICON_STATE)
+		return
 
 	if(istype(I, /obj/item/clothing/ring/signet))
 		if(tallow && heatedup)
 			var/obj/item/clothing/ring/signet/ring = I
 			ring.tallowed = TRUE
 			ring.update_appearance(UPDATE_ICON_STATE)
+			return
+
+	return ..()
 
 /obj/item/inqarticles/tallowpot/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!proximity_flag)
 		return
+
 	//Both static light sources and torches/lanterns have on bool so this invalid cast... it just works yeah
 	var/obj/machinery/light/fueled/F = target
 
-	if((istype(target, /obj/machinery/light/fueled) || istype(target, /obj/item/flashlight/flare/torch)) && F.on)
-		heatedup = 28
+	if(istype(F) && F.on)
+		heatedup = 20 SECONDS
+		START_PROCESSING(SSobj, src)
 		visible_message(span_info("[user] warms [src] using [target]."))
 		update_appearance(UPDATE_ICON_STATE)
 
-
 /obj/item/inqarticles/tallowpot/update_icon_state()
 	. = ..()
-	if(tallow)
-		icon_state = "[initial(icon_state)]_filled"
-		if(heatedup)
-			icon_state = "[initial(icon_state)]_melted"
-	else
+	if(!tallow)
 		icon_state = "[initial(icon_state)]"
+		return
+
+	icon_state = "[initial(icon_state)]_[heatedup ? "melted" : "filled"]"
 
 /obj/item/rope/inqarticles/inquirycord
 	name = "inquiry cordage"

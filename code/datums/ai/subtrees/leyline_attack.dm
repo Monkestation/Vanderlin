@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/leyline_melee_attack
 	var/melee_attack_behavior = /datum/ai_behavior/leyline_melee_attack
 
-/datum/ai_planning_subtree/leyline_melee_attack/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/leyline_melee_attack/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
 	if(QDELETED(target))
@@ -27,7 +27,7 @@
 	set_movement_target(controller, target)
 	SEND_SIGNAL(controller.pawn, COMSIG_COMBAT_TARGET_SET, TRUE)
 
-/datum/ai_behavior/leyline_melee_attack/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key)
+/datum/ai_behavior/leyline_melee_attack/perform(seconds_per_tick, datum/ai_controller/controller, target_key, targetting_datum_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/leylinelycan/lycan = controller.pawn
 

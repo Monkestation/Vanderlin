@@ -405,9 +405,10 @@
 		return
 	bandage_limb()
 
-/obj/item/bodypart/proc/try_bandage_expire()
+/obj/item/bodypart/proc/try_bandage_expire(seconds_per_tick)
 	if(!bandage)
 		return FALSE
+
 	var/bleed_rate = get_bleed_rate(TRUE)
 	if(!bleed_rate)
 		return FALSE
@@ -423,7 +424,7 @@
 						continue
 					var/amount_to_transfer = min(reagent.volume, reagent.metabolization_rate)
 					if(amount_to_transfer > 0)
-						if(reagent.on_bodypart_absorb(owner, src, amount_to_transfer))
+						if(reagent.on_bodypart_absorb(owner, src, amount_to_transfer, seconds_per_tick))
 							cloth.reagents.trans_id_to(owner, reagent.type, amount_to_transfer)
 						else
 							cloth.reagents.remove_reagent(reagent.type, amount_to_transfer)
@@ -436,6 +437,7 @@
 
 	if(bandage_health <= 0)
 		return bandage_expire()
+
 	return FALSE
 
 /obj/item/bodypart/proc/bandage_expire()

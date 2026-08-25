@@ -689,7 +689,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	origin_keg.update_appearance(UPDATE_OVERLAYS)
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/structure/fermentation_keg/process()
+/obj/structure/fermentation_keg/process(seconds_per_tick)
 	if(accepts_water_input && input && selected_recipe && !brewing && !ready_to_bottle)
 		var/datum/reagent/incoming_reagent = input.carrying_reagent
 		if((incoming_reagent in selected_recipe.needed_reagents))
@@ -709,7 +709,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 		start_time = world.time
 
 	if(heat_decay < world.time)
-		heat = max(300, heat-5)
+		heat = max(300, heat - (2.5 * seconds_per_tick))
 
 /obj/structure/fermentation_keg/distiller
 	name = "copper distiller"

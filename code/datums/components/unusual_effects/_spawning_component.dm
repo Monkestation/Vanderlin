@@ -107,11 +107,14 @@
 /datum/component/particle_spewer/process(seconds_per_tick)
 	if(!get_turf(source_object) || paused)
 		return PROCESS_KILL
+
 	if(spawn_interval != 1)
 		count++
 		if(count < spawn_interval)
 			return
+
 	count = 0
+
 	spawn_particles()
 
 /datum/component/particle_spewer/proc/update_processing()

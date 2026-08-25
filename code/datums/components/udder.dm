@@ -131,13 +131,13 @@
 		cooldown_time *= 0.25
 	COOLDOWN_START(src, require_consume_cooldown, cooldown_time)
 
-/obj/item/udder/process()
+/obj/item/udder/process(seconds_per_tick)
 	if(isanimal(udder_mob))
 		var/mob/living/simple_animal/simple_animal = udder_mob
 		if(SEND_SIGNAL(simple_animal, COMSIG_MOB_RETURN_HUNGER) <= 0)
 			return
 	if(udder_mob.stat != DEAD)
-		generate() //callback is on generate() itself as sometimes generate does not add new reagents, or is not called via process
+		generate(seconds_per_tick) //callback is on generate() itself as sometimes generate does not add new reagents, or is not called via process
 
 /**
  * Proc called on creation separate from the reagent datum creation to allow for signalled milk generation instead of processing milk generation
@@ -150,13 +150,13 @@
 /**
  * Proc called every 2 seconds from SSMobs to add whatever reagent the udder is generating.
  */
-/obj/item/udder/proc/generate()
+/obj/item/udder/proc/generate(seconds_per_tick)
 	if(!isnull(require_consume_type) && COOLDOWN_FINISHED(src, require_consume_cooldown))
 		return
 	// if(prob(95))
 	// 	return
 	// reagents.add_reagent(reagent_produced_typepath, rand(5, 10))
-	reagents.add_reagent(reagent_produced_typepath, 1)
+	reagents.add_reagent(reagent_produced_typepath, seconds_per_tick)
 	if(on_generate_callback)
 		on_generate_callback.Invoke(reagents.total_volume, reagents.maximum_volume)
 

@@ -6,7 +6,7 @@
 	max_path_distance = 30
 
 ///Put your movement behavior in here!
-/datum/ai_movement/astar/process(delta_time)
+/datum/ai_movement/astar/process(seconds_per_tick)
 	for(var/datum/ai_controller/controller as anything in moving_controllers)
 		if(!COOLDOWN_FINISHED(controller, movement_cooldown))
 			continue

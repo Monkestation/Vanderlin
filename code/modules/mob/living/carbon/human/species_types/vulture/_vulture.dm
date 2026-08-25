@@ -120,17 +120,24 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 
-/datum/species/medicator/spec_life(mob/living/carbon/human/H)
+/datum/species/medicator/spec_life(mob/living/carbon/human/H, seconds_per_tick)
 	. = ..()
-	if(prob(0.1))
-		if(!COOLDOWN_FINISHED(src, medicator_cough_cooldown))
-			return
-		var/list/emotes = list("cough", "sneeze", "clearthroat")
-		if(prob(15))
-			emotes = list("choke")
-		H.emote(pick(emotes), forced = TRUE)
+	if(H.rogue_sneaking)
+		return
 
-		COOLDOWN_START(src, medicator_cough_cooldown, 15 MINUTES)
+	if(!COOLDOWN_FINISHED(src, medicator_cough_cooldown))
+		return
+
+	if(!SPT_PROB(0.3, seconds_per_tick))
+		return
+
+	var/list/emotes = list("cough", "sneeze", "clearthroat")
+	if(prob(15))
+		emotes = list("choke")
+
+	H.emote(pick(emotes), forced = TRUE)
+
+	COOLDOWN_START(src, medicator_cough_cooldown, 15 MINUTES)
 
 /datum/species/medicator/check_roundstart_eligible()
 	return TRUE

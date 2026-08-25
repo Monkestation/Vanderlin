@@ -113,7 +113,7 @@
 /**
  * Process tick for crafting progress
  */
-/datum/container_craft_operation/process()
+/datum/container_craft_operation/process(seconds_per_tick)
 	// Check if the container or user are still valid
 	if(recipe.user_craft)
 		if((QDELETED(initiator) || !initiator.can_perform_action(crafter, NEED_DEXTERITY|FORBID_TELEKINESIS_REACH)))
@@ -138,7 +138,7 @@
 		return
 
 	// Update progress
-	progress += SSprocessing.wait
+	progress += SPT_TO_DECISECONDS(seconds_per_tick)
 	last_progress_time = world.time
 
 	// Check if craft is complete

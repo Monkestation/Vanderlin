@@ -4,7 +4,7 @@
 	var/datum/ai_behavior/fishboss_deep_call/deep_call_behavior = /datum/ai_behavior/fishboss_deep_call
 	var/datum/ai_behavior/fishboss_coral_wall/coral_behavior = /datum/ai_behavior/fishboss_coral_wall
 
-/datum/ai_planning_subtree/fishboss_special_ability/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/fishboss_special_ability/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/phase = controller.blackboard[BB_RAGE_PHASE]
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]

@@ -31,7 +31,7 @@
 	var/damage_on_contact = 10
 	var/can_grow = TRUE
 	var/range = 2
-	var/grow_chance = 2
+	var/grow_chance = 1
 
 /obj/structure/coral_formation/Initialize()
 	. = ..()
@@ -42,16 +42,19 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/structure/coral_formation/process()
-	// Chance to grow to adjacent tiles
-	if(can_grow && prob(grow_chance))
-		var/list/cardinals = GLOB.cardinals.Copy()
-		for(var/direction in cardinals)
-			var/turf/T = get_step(src, direction)
-			if(istype(T, /turf/open/floor) && !T.density && !locate(/obj/structure/coral_formation) in T)
-				if(prob(20))
-					new /obj/structure/coral_formation/small(T)
-					break
+/obj/structure/coral_formation/process(seconds_per_tick)
+	if(!can_grow)
+		return
+
+	if(SPT_PROB(grow_chance, seconds_per_tick))
+		return
+
+	for(var/direction in GLOB.cardinals)
+		var/turf/T = get_step(src, direction)
+		if(istype(T, /turf/open/floor) && !T.density && !locate(/obj/structure/coral_formation) in T)
+			if(prob(20))
+				new /obj/structure/coral_formation/small(T)
+				break
 
 /obj/structure/coral_formation/Bumped(atom/movable/AM)
 	. = ..()
@@ -82,7 +85,7 @@
 /datum/ai_behavior/fishboss_coral_wall
 	action_cooldown = 0.5 SECONDS
 
-/datum/ai_behavior/fishboss_coral_wall/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/fishboss_coral_wall/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/boss/fishboss/boss = controller.pawn
 	if(!istype(boss))

@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/dragger_hunting
 	var/hunting_cooldown = 15 SECONDS
 
-/datum/ai_planning_subtree/dragger_hunting/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/dragger_hunting/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 
 	var/hunt_cooldown = controller.blackboard[BB_DRAGGER_HUNTING_COOLDOWN]
@@ -24,7 +24,7 @@
 	action_cooldown = 5 SECONDS
 	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 
-/datum/ai_behavior/find_hunt_target/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/find_hunt_target/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 
 	var/mob/living/simple_animal/hostile/dragger/dragger_pawn = controller.pawn
@@ -51,7 +51,7 @@
 /datum/ai_behavior/find_darkness
 	action_cooldown = 2 SECONDS
 
-/datum/ai_behavior/find_darkness/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/find_darkness/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 
 	var/mob/living/simple_animal/hostile/dragger/dragger_pawn = controller.pawn
@@ -90,7 +90,7 @@
 /datum/ai_behavior/teleport_to_darkness
 	action_cooldown = 3 SECONDS
 
-/datum/ai_behavior/teleport_to_darkness/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/teleport_to_darkness/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 
 	var/mob/living/simple_animal/hostile/dragger/dragger_pawn = controller.pawn

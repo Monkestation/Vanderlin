@@ -12,14 +12,14 @@
 	var/amount = 3
 	animate_movement = NO_STEPS
 	var/metal = 0
-	var/lifetime = 40
+	var/lifetime = 8 SECONDS
 	var/reagent_divisor = 7
 	var/static/list/blacklisted_turfs = typecacheof(list(
 	/turf/open/lava))
 	var/slippery_foam = TRUE
 
 /obj/effect/particle_effect/foam/long_life
-	lifetime = 150
+	lifetime = 30 SECONDS
 
 /obj/effect/particle_effect/foam/Initialize()
 	. = ..()
@@ -39,14 +39,15 @@
 	flick("[icon_state]-disolve", src)
 	QDEL_IN(src, 5)
 
-/obj/effect/particle_effect/foam/process()
-	lifetime--
+/obj/effect/particle_effect/foam/process(seconds_per_tick)
+	lifetime -= SPT_TO_DECISECONDS(seconds_per_tick)
+
 	if(lifetime < 1)
 		kill_foam()
 		return
 
-	var/fraction = 1/initial(reagent_divisor)
-	for(var/obj/O in range(0,src))
+	var/fraction = 1 / initial(reagent_divisor)
+	for(var/obj/O in get_turf(src))
 		if(O.type == src.type)
 			continue
 		if(isturf(O.loc))
@@ -55,17 +56,21 @@
 				continue
 		if(lifetime % reagent_divisor)
 			reagents.reaction(O, VAPOR, fraction)
+
 	var/hit = 0
-	for(var/mob/living/L in range(0,src))
+	for(var/mob/living/L in get_turf(src))
 		hit += foam_mob(L)
+
 	if(hit)
-		lifetime++ //this is so the decrease from mobs hit and the natural decrease don't cumulate.
+		lifetime += SPT_TO_DECISECONDS(seconds_per_tick) //this is so the decrease from mobs hit and the natural decrease don't cumulate.
+
 	var/T = get_turf(src)
 	if(lifetime % reagent_divisor)
 		reagents.reaction(T, VAPOR, fraction)
 
 	if(--amount < 0)
 		return
+
 	spread_foam()
 
 /obj/effect/particle_effect/foam/proc/foam_mob(mob/living/L)

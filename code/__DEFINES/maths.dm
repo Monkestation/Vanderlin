@@ -225,13 +225,16 @@
 #define RULE_OF_THREE(a, b, x) ((a*x)/b)
 // )
 
-/// Converts a probability/second chance to probability/delta_time chance
-/// For example, if you want an event to happen with a 10% per second chance, but your proc only runs every 5 seconds, do `if(prob(100*DT_PROB_RATE(0.1, 5)))`
-#define DT_PROB_RATE(prob_per_second, delta_time) (1 - (1 - (prob_per_second)) ** (delta_time))
-
-/// Like DT_PROB_RATE but easier to use, simply put `if(DT_PROB(10, 5))`
-#define DT_PROB(prob_per_second_percent, delta_time) (prob(100*DT_PROB_RATE((prob_per_second_percent)/100, (delta_time))))
-// )
-
 /// Avoids division by zero by returning 0 if the divisor is 0 or null.
 #define SAFE_DIVIDE(dividend, divisor) (!divisor ? 0 : dividend/divisor)
+
+/// Converts a probability/second chance to probability/seconds_per_tick chance
+/// For example, if you want an event to happen with a 10% per second chance, but your proc only runs every 5 seconds, do `if(prob(100*SPT_PROB_RATE(0.1, 5)))`
+#define SPT_PROB_RATE(prob_per_second, seconds_per_tick) (1 - (1 - (prob_per_second)) ** (seconds_per_tick))
+
+/// Like SPT_PROB_RATE but easier to use, simply put `if(SPT_PROB(10, 5))`
+#define SPT_PROB(prob_per_second_percent, seconds_per_tick) (prob(100 * SPT_PROB_RATE((prob_per_second_percent) / 100, (seconds_per_tick))))
+
+/// We generally want timers to use time macros but seconds_per_tick is directly in seconds, so we use this to convert for timers.
+/// Using this for clarity and convience over seconds_per_tick * (1 SECONDS) on it's own.
+#define SPT_TO_DECISECONDS(seconds_per_tick) (seconds_per_tick * (1 SECONDS))

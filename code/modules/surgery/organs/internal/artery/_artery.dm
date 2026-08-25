@@ -33,7 +33,7 @@
 	/// Kill the owner if they have TRAIT_CRITICAL_WEAKNESS and the artery is dissected
 	var/crit_weakness_lethal = FALSE
 
-/obj/item/organ/artery/can_self_heal(delta_time, times_fired, in_bleedout)
+/obj/item/organ/artery/can_self_heal(seconds_per_tick, in_bleedout)
 	return FALSE
 
 /obj/item/organ/artery/proc/is_bleeding()
@@ -41,7 +41,7 @@
 		return
 	return TRUE
 
-/obj/item/organ/artery/on_life(delta_time, times_fired)
+/obj/item/organ/artery/on_life(seconds_per_tick)
 	. = ..()
 	// Dead, pulseless or cryosleep people do not pump blood
 	if(!is_bruised() || !owner.pulse || (owner.bodytemperature <= -15))
@@ -65,7 +65,7 @@
 			bleed_mod *= 1.25
 		if(PULSE_FASTER, PULSE_THREADY)
 			bleed_mod *= 1.5
-	var/final_bleed_rate = CEILING(blood_flow * bleed_mod * delta_time, 0.1)
+	var/final_bleed_rate = CEILING(blood_flow * bleed_mod * seconds_per_tick, 0.1)
 	if(final_bleed_rate <= 0)
 		return
 	if(COOLDOWN_FINISHED(src, next_squirt))
@@ -73,12 +73,12 @@
 	else
 		squirt_less(final_bleed_rate)
 
-/obj/item/organ/artery/handle_blood(delta_time, times_fired, in_bleedout)
+/obj/item/organ/artery/handle_blood(seconds_per_tick, in_bleedout)
 	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
 	var/failer = is_failing_without_bleedout()
 	if(failer || in_bleedout)
 		return
-	current_blood = min(current_blood + (2.5 * delta_time) * (max(1, arterial_efficiency)/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
+	current_blood = min(current_blood + (2.5 * seconds_per_tick) * (max(1, arterial_efficiency)/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
 
 /obj/item/organ/artery/tear()
 	if(!owner)

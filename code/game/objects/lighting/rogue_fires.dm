@@ -331,7 +331,7 @@
 	QDEL_NULL(torchy)
 	. = ..()
 
-/obj/machinery/light/fueled/torchholder/process()
+/obj/machinery/light/fueled/torchholder/process(seconds_per_tick)
 	if(on)
 		if(torchy)
 			if(torchy.fuel <= 0)
@@ -523,15 +523,16 @@
 			return TRUE
 
 
-/obj/machinery/light/fueled/hearth/process()
+/obj/machinery/light/fueled/hearth/process(seconds_per_tick)
 	if(isopenturf(loc))
 		var/turf/open/O = loc
 		if(IS_WET_OPEN_TURF(O))
 			extinguish()
+
 	if(on)
 		if(initial(fueluse) > 0)
 			if(fueluse > 0)
-				fueluse = max(fueluse - 10, 0)
+				fueluse = max(fueluse - 5 * seconds_per_tick, 0)
 			if(fueluse == 0)
 				burn_out()
 		if(attachment?.reagents)
@@ -560,7 +561,7 @@
 	resting_range = 1
 	temperature_change = 25
 
-/obj/machinery/light/fueled/campfire/process()
+/obj/machinery/light/fueled/campfire/process(seconds_per_tick)
 	..()
 	if(isopenturf(loc))
 		var/turf/open/O = loc

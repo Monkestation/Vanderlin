@@ -7,12 +7,14 @@
 	color = "#1f8016"
 	metabolization_rate = 2.5 * REAGENTS_METABOLISM  //0.5u/second
 
-/datum/reagent/eldritch/on_mob_life(mob/living/carbon/drinker, efficiency)
-	drinker.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3 * REM, 150)
-	drinker.adjustToxLoss(2 * REM, FALSE)
-	drinker.adjustFireLoss(2 * REM, FALSE)
-	drinker.adjustOxyLoss(2 * REM, FALSE)
-	..()
+/datum/reagent/eldritch/on_mob_life(mob/living/carbon/drinker, efficiency, seconds_per_tick)
+	. = ..()
+
+	drinker.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1.5 * REAGENTS_MODIFIER, 150)
+	drinker.adjustToxLoss(1 * REAGENTS_MODIFIER, FALSE)
+	drinker.adjustFireLoss(1 * REAGENTS_MODIFIER, FALSE)
+	drinker.adjustOxyLoss(1 * REAGENTS_MODIFIER, FALSE)
+
 	return TRUE
 
 /datum/status_effect/amok
@@ -27,7 +29,7 @@
 	to_chat(owner, span_boldwarning("You feel filled with a rage that is not your own!"))
 	return TRUE
 
-/datum/status_effect/amok/tick()
+/datum/status_effect/amok/tick(seconds_between_ticks)
 	var/prev_combat_mode = owner.cmode
 	owner.cmode = TRUE
 

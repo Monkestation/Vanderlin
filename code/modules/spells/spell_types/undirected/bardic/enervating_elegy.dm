@@ -27,5 +27,5 @@
 /datum/status_effect/debuff/song/enervating_elegy/full
 	drain_amount = 6 // Blue drained per tick (full bard, 100%)
 
-/datum/status_effect/debuff/song/enervating_elegy/tick()
-	owner.adjust_stamina(drain_amount)
+/datum/status_effect/debuff/song/enervating_elegy/tick(healing_per_second)
+	owner.adjust_stamina(drain_amount * healing_per_second)

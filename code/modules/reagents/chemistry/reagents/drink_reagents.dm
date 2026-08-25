@@ -7,15 +7,17 @@
 	glass_name = "glass of milk"
 	glass_desc = ""
 
-/datum/reagent/consumable/milk/on_mob_life(mob/living/carbon/M, efficiency)
-	if(M.getBruteLoss() && prob(20))
-		M.heal_bodypart_damage(1 * efficiency,0, 0)
-		. = 1
+/datum/reagent/consumable/milk/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
-			H.adjust_hydration(10 * efficiency)
-	..()
+			H.adjust_hydration(2 * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(19, seconds_per_tick))
+		M.heal_bodypart_damage(0.2 * REAGENTS_MODIFIER, 0, 0)
+		return TRUE
 
 
 /datum/reagent/consumable/coffee
@@ -29,17 +31,17 @@
 	glass_name = "glass of coffee"
 	glass_desc = ""
 
-/datum/reagent/consumable/coffee/overdose_process(mob/living/M)
-	M.adjust_jitter(5 SECONDS)
-	..()
+/datum/reagent/consumable/coffee/overdose_process(mob/living/M, efficiency, seconds_per_tick)
+	. = ..()
+	M.adjust_jitter(1 SECONDS * REAGENTS_MODIFIER)
 
-/datum/reagent/consumable/coffee/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjust_drowsiness(-10 SECONDS * efficiency)
-	M.adjust_drowsiness(-6 SECONDS * efficiency)
-	M.AdjustSleeping(-4 SECONDS * efficiency)
-	M.adjust_bodytemperature(2 * efficiency, 0, BODYTEMP_NORMAL)
-	..()
-	. = 1
+/datum/reagent/consumable/coffee/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjust_drowsiness(-2 SECONDS * REAGENTS_MODIFIER)
+	M.adjust_drowsiness(-1.2 SECONDS * REAGENTS_MODIFIER)
+	M.AdjustSleeping(-0.6 SECONDS * REAGENTS_MODIFIER)
+	M.adjust_bodytemperature(0.4 * REAGENTS_MODIFIER, 0, BODYTEMP_NORMAL)
 
 /datum/reagent/consumable/ice
 	name = "Ice"
@@ -51,9 +53,9 @@
 	glass_name = "glass of ice"
 	glass_desc = ""
 
-/datum/reagent/consumable/ice/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjust_bodytemperature(-2 * TEMPERATURE_DAMAGE_COEFFICIENT * efficiency, BODYTEMP_NORMAL)
-	..()
+/datum/reagent/consumable/ice/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+	M.adjust_bodytemperature(-0.4 * TEMPERATURE_DAMAGE_COEFFICIENT * REAGENTS_MODIFIER, BODYTEMP_NORMAL)
 
 /datum/reagent/consumable/golden_calendula_tea
 	name = "Golden Calendula Tea"
@@ -68,19 +70,20 @@
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
-/datum/reagent/consumable/golden_calendula_tea/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/golden_calendula_tea/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-		M.adjust_stamina(-0.5 * efficiency, internal_regen = FALSE)
-	var/list/wCount = M.get_wounds()
-	if(wCount.len > 0)
-		M.heal_wounds(1 * efficiency) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
+		M.adjust_stamina(-0.1 * REAGENTS_MODIFIER, internal_regen = FALSE)
+
 	if(volume > 0.99)
-		M.adjustBruteLoss(-0.75*REM * efficiency, 0)
-		M.adjustFireLoss(-0.75*REM * efficiency, 0)
-		M.adjustOxyLoss(-0.25 * efficiency, 0)
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -1*REM * efficiency)
-		M.adjustCloneLoss(-0.75*REM * efficiency, 0)
-	..()
+		M.adjustBruteLoss(-0.15 * REAGENTS_MODIFIER, 0)
+		M.adjustFireLoss(-0.15 * REAGENTS_MODIFIER, 0)
+		M.adjustOxyLoss(-0.05 * REAGENTS_MODIFIER, 0)
+		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -0.5 * REAGENTS_MODIFIER)
+		M.adjustCloneLoss(-0.40 * REAGENTS_MODIFIER, 0)
+		M.heal_wounds(0.2 * REAGENTS_MODIFIER)
+		return TRUE
 
 /datum/reagent/consumable/soothing_valerian_tea
 	name = "Soothing Valerin Tea"
@@ -88,10 +91,11 @@
 	color = "#3b9146"
 	quality = DRINK_FANTASTIC
 
-/datum/reagent/consumable/soothing_valerian_tea/on_mob_life(mob/living/carbon/M, efficiency)
-	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-		M.adjust_stamina(-0.3 * efficiency, internal_regen = FALSE)
-	..()
+/datum/reagent/consumable/soothing_valerian_tea/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(!HAS_TRAIT(M, TRAIT_NOSTAMINA))
+		M.adjust_stamina(-0.06 * REAGENTS_MODIFIER, internal_regen = FALSE)
 
 /datum/reagent/consumable/caffeine
 	name = "Caffeine"
@@ -99,15 +103,17 @@
 	hydration_factor = 5
 	overdose_threshold = 60
 
-/datum/reagent/consumable/caffeine/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/caffeine/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
-	M.adjust_stamina(-5 * efficiency)
+	M.adjust_stamina(-1 * REAGENTS_MODIFIER)
 	M.apply_status_effect(/datum/status_effect/buff/vigor)
 
-/datum/reagent/consumable/caffeine/overdose_process(mob/living/carbon/M)
+/datum/reagent/consumable/caffeine/overdose_process(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
-	M.adjust_jitter(4 SECONDS)
-	if(prob(5))
+
+	M.adjust_jitter(0.8 SECONDS * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(2, seconds_per_tick))
 		M.heart_attack()
 
 /datum/reagent/consumable/caffeine/coffee

@@ -18,7 +18,7 @@
 	storage.max_total = 5000
 	storage.max_types = 25
 
-/obj/machinery/essence/reservoir/process()
+/obj/machinery/essence/reservoir/process(seconds_per_tick)
 	if(void_mode && GLOB.thaumic_research?.has_research(/datum/thaumic_research_node/resevoir_decay))
 		if(storage.total() > 0)
 			var/remaining = void_rate

@@ -40,7 +40,7 @@
 /mob/living/carbon/human/species/orc/npc/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
-	AddComponent(/datum/component/combat_noise, list("aggro" = 2))
+	AddComponent(/datum/component/combat_noise, list("aggro" = 1))
 
 /mob/living/carbon/human/species/orc/npc/after_creation()
 	..()

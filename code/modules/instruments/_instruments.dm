@@ -82,7 +82,7 @@
 	QDEL_NULL(soundloop)
 	. = ..()
 
-/obj/item/instrument/process()
+/obj/item/instrument/process(seconds_per_tick)
 	var/source
 	if(!ishuman(loc))
 		var/atom/thing = loc
@@ -107,6 +107,7 @@
 		if(user.get_inactive_held_item() && GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/music) < 4)
 			terminate_playing(user)
 			return PROCESS_KILL
+
 	user.apply_status_effect(/datum/status_effect/buff/playing_music) // Handles regular stress event in tick()
 	var/boon = user?.get_learning_boon(/datum/attribute/skill/misc/music)
 	user?.adjust_experience(/datum/attribute/skill/misc/music, CEILING((GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2) * boon, 1) * 0.25) // And gain exp
@@ -116,14 +117,14 @@
 
 	for(var/obj/structure/soil/soil in view(5, source))
 		var/distance = max(1, get_dist(source, soil))
-		soil.process_npk_growth(round(2 / distance, 0.1))
+		soil.process_npk_growth(round(seconds_per_tick / distance, 0.1))
 
 	for(var/obj/item/reagent_containers/food/snacks/smallrat/I in view(4, user))
 		if(I.loc != user)
 			step_towards(I, user)
 
 	var/list/active_buffs = user.get_selected_instrument_buffs()
-	if(!active_buffs || !active_buffs.len)
+	if(!length(active_buffs))
 		return
 
 	for(var/mob/living/carbon/listener in hearers(5, source))

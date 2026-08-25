@@ -26,7 +26,7 @@
 	. = ..()
 	cast_on.apply_status_effect(/datum/status_effect/buff/divine_beauty)
 	cast_on.wash(CLEAN_WASH)
-	cast_on.AddComponent(/datum/component/temporary_pollution_emission, pick(subtypesof(/datum/pollutant/fragrance)), 1, 2 MINUTES)
+	cast_on.AddComponent(/datum/component/temporary_pollution_emission, pick(subtypesof(/datum/pollutant/fragrance)), 0.5, 2 MINUTES)
 	if(ishuman(cast_on))
 		var/mob/living/carbon/human/stinky_boy = cast_on
 		stinky_boy.set_hygiene(HYGIENE_LEVEL_CLEAN)

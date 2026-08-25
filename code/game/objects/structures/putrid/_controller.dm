@@ -37,7 +37,8 @@
 
 	var/consumed_resource_pool = 0
 	var/consumed_resource_max = 500
-	var/consumed_resource_regen_rate = 2
+	/// Regeneration per second
+	var/consumed_resource_regen_rate = 1
 
 	var/hive_spread_chance = 50
 
@@ -56,7 +57,8 @@
 	var/list/obstacle_targets = list()
 	var/list/cooldown_obstacles = list()
 	var/bridge_request_cooldown = 0
-	var/bridge_request_interval = 10
+	/// Interval in deciseconds
+	var/bridge_request_interval = 20 SECONDS
 
 	var/list/obj/structure/meatvine/lair/lairs = list()
 	var/lair_spawn_threshold = 10
@@ -302,13 +304,13 @@
 
 // MAIN PROCESS - This now only handles controller-level logic
 // Individual vine spreading/growth is handled by the subsystem
-/obj/effect/meatvine_controller/process()
-	if(!vines.len)
+/obj/effect/meatvine_controller/process(seconds_per_tick)
+	if(!length(vines))
 		qdel(src)
-		return
+		return PROCESS_KILL
 
 	// Try to spawn papameat if needed
-	if(prob(10))
+	if(SPT_PROB(5, seconds_per_tick))
 		try_spawn_papameat()
 
 	// Try to spawn humor from organic matter
@@ -323,6 +325,7 @@
 	// Update size thresholds
 	if(vines.len >= collapse_size && !reached_collapse_size)
 		reached_collapse_size = TRUE
+
 	if(vines.len >= slowdown_size && !reached_slowdown_size)
 		reached_slowdown_size = TRUE
 
@@ -340,12 +343,12 @@
 		vine.gain_evolution_progress(passive_evolution_gains)
 
 	if(wall_generation_cooldown > 0)
-		wall_generation_cooldown--
+		wall_generation_cooldown -= SPT_TO_DECISECONDS(seconds_per_tick)
 
 	if(bridge_request_cooldown > 0)
-		bridge_request_cooldown--
+		bridge_request_cooldown -= SPT_TO_DECISECONDS(seconds_per_tick)
 
-	if(bridge_request_cooldown <= 0 && prob(20))
+	if(bridge_request_cooldown <= 0 && SPT_PROB(10, seconds_per_tick))
 		check_for_bridge_opportunities()
 
 	// Clean up dead lairs
@@ -355,7 +358,7 @@
 
 	// Regenerate resource pool
 	if(consumed_resource_pool < consumed_resource_max)
-		consumed_resource_pool = min(consumed_resource_pool + consumed_resource_regen_rate, consumed_resource_max)
+		consumed_resource_pool = min(consumed_resource_pool + (consumed_resource_regen_rate * seconds_per_tick), consumed_resource_max)
 
 	SEND_SIGNAL(src, COMSIG_MEATVINE_RESOURCE_CHANGE, consumed_resource_pool)
 
@@ -425,7 +428,7 @@
 
 		wall_segments += segment
 		wall_budget -= wall_cost
-		wall_generation_cooldown = rand(30, 60)
+		wall_generation_cooldown = rand(1 MINUTES, 2 MINUTES)
 		return TRUE
 
 	return FALSE

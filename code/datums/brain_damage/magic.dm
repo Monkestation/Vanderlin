@@ -13,8 +13,8 @@
 	lose_text = span_notice("Light no longer bothers you.")
 	var/next_damage_warning = 0
 
-/datum/brain_trauma/magic/lumiphobia/on_life()
-	..()
+/datum/brain_trauma/magic/lumiphobia/on_life(seconds_per_tick)
+	. = ..()
 	var/turf/T = owner.loc
 	if(istype(T))
 		var/light_amount = T.get_lumcount()
@@ -31,9 +31,9 @@
 	gain_text = span_warning("I feel a hateful presence close to you.")
 	lose_text = span_notice("I feel the hateful presence fade away.")
 
-/datum/brain_trauma/magic/poltergeist/on_life()
-	..()
-	if(prob(4))
+/datum/brain_trauma/magic/poltergeist/on_life(seconds_per_tick)
+	. = ..()
+	if(SPT_PROB(2, seconds_per_tick))
 		var/most_violent = -1 //So it can pick up items with 0 throwforce if there's nothing else
 		var/obj/item/throwing
 		for(var/obj/item/I in view(5, get_turf(owner)))

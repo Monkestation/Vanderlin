@@ -6,7 +6,7 @@
 	density = TRUE
 	anchored = TRUE
 	max_integrity = 200
-	var/timer = 480 //eventually the person will be freed
+	var/timer = 8 MINUTES //eventually the person will be freed
 	var/mob/living/petrified_mob
 
 /obj/structure/statue/petrified/Initialize(mapload, mob/living/L, statue_timer)
@@ -27,8 +27,12 @@
 /obj/structure/statue/petrified/process(seconds_per_tick)
 	if(!petrified_mob)
 		STOP_PROCESSING(SSobj, src)
-	timer -= seconds_per_tick * 10
-	petrified_mob.Stun(40) //So they can't do anything while petrified
+		return
+
+	timer -= SPT_TO_DECISECONDS(seconds_per_tick)
+
+	petrified_mob.Stun(20 * seconds_per_tick) //So they can't do anything while petrified
+
 	if(timer <= 0)
 		STOP_PROCESSING(SSobj, src)
 		qdel(src)

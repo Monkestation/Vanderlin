@@ -109,32 +109,35 @@
 						return
 	..()
 
-/obj/item/reagent_containers/food/snacks/smallrat/process()
-	..()
+/obj/item/reagent_containers/food/snacks/smallrat/process(seconds_per_tick)
+	. = ..()
 	if(dead)
 		return
+
 	if(!isturf(loc)) //no floating out of bags
 		return
-	if(prob(5))
+
+	if(SPT_PROB(2.5, seconds_per_tick))
 		playsound(src, pick('sound/vo/mobs/rat/rat_life.ogg','sound/vo/mobs/rat/rat_life2.ogg','sound/vo/mobs/rat/rat_life3.ogg'), 100, TRUE, -1)
-	if(prob(75) && !dead)
-		dir = pick(GLOB.cardinals)
-		step(src, dir)
-		for(var/obj/item/reagent_containers/food/snacks/S in loc)
-			if(is_type_in_typecache(S, GLOB.RATS_DONT_EAT))
-				return
-			if(S != src)
-				qdel(S)
-				playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-				if(prob(23))
-					var/turf/T = src.loc
-					if(T)
-						new /mob/living/simple_animal/hostile/retaliate/bigrat(T)
-						dead = TRUE
-						qdel(src)
-						break
 
+	if(!SPT_PROB(50, seconds_per_tick))
+		return
 
+	SSmove_manager.move_rand(src, GLOB.cardinals)
+
+	for(var/obj/item/reagent_containers/food/snacks/S in loc)
+		if(is_type_in_typecache(S, GLOB.RATS_DONT_EAT))
+			continue
+		if(S != src)
+			qdel(S)
+			playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
+			if(prob(23))
+				var/turf/T = src.loc
+				if(T)
+					new /mob/living/simple_animal/hostile/retaliate/bigrat(T)
+					dead = TRUE
+					qdel(src)
+					break
 
 
 /obj/item/reagent_containers/food/snacks/smallrat/atom_destruction(damage_flag)

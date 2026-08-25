@@ -16,22 +16,27 @@
 	next_sate = world.time + rand(10 MINUTES, 20 MINUTES)
 	return ..()
 
-/datum/quirk/vice/addiction/on_life(mob/living/user)
+/datum/quirk/vice/addiction/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
 		return
+
 	var/mob/living/carbon/human/H = user
+
 	// Skip for certain antags
 	if(H.mind?.antag_datums)
 		for(var/datum/antagonist/D in H.mind.antag_datums)
 			if(istype(D, /datum/antagonist/vampire) || istype(D, /datum/antagonist/werewolf) || istype(D, /datum/antagonist/skeleton) || istype(D, /datum/antagonist/zombie))
 				return
+
 	var/oldsated = sated
 	if(oldsated && next_sate && world.time > next_sate)
 		sated = FALSE
+
 	if(sated != oldsated)
 		unsate_time = world.time
 		if(needsate_text)
 			to_chat(user, span_boldwarning("[needsate_text]"))
+
 	if(!sated)
 		switch(world.time - unsate_time)
 			if(0 to 5 MINUTES)

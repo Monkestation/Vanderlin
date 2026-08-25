@@ -1,7 +1,7 @@
 /datum/ai_behavior/fishboss_summon_minions
 	action_cooldown = 60 SECONDS // Matches the original cooldown of 600
 
-/datum/ai_behavior/fishboss_summon_minions/perform(delta_time, datum/ai_controller/controller, minions_key)
+/datum/ai_behavior/fishboss_summon_minions/perform(seconds_per_tick, datum/ai_controller/controller, minions_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/boss/fishboss/fishboss = controller.pawn
 	var/minions_to_spawn = controller.blackboard[minions_key]

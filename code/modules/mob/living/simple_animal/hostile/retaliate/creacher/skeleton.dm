@@ -120,12 +120,6 @@
 		if (cabal_affine)
 			add_faction(FACTION_CABAL)
 
-/mob/living/simple_animal/hostile/skeleton/Life()
-	. = ..()
-	if(!target)
-		if(prob(60))
-			INVOKE_ASYNC(src, PROC_REF(emote), "idle")
-
 /mob/living/simple_animal/hostile/skeleton/taunted(mob/user)
 	emote("aggro")
 	return

@@ -124,12 +124,6 @@
 		if("idle")
 			return pick('sound/vo/mobs/simple_orcs/orc_idle.ogg','sound/vo/mobs/simple_orcs/orc_idle2.ogg','sound/vo/mobs/simple_orcs/orc_idle3.ogg','sound/vo/mobs/simple_orcs/orc_idle4.ogg')
 
-/mob/living/simple_animal/hostile/orc/Life()
-	. = ..()
-	if(!target)
-		if(prob(3))
-			INVOKE_ASYNC(src, PROC_REF(emote), "idle")
-
 /mob/living/simple_animal/hostile/orc/taunted(mob/user)
 	emote("aggro")
 	return

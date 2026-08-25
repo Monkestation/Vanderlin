@@ -1,6 +1,6 @@
 /datum/ai_planning_subtree/fishboss_check_phase
 
-/datum/ai_planning_subtree/fishboss_check_phase/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/fishboss_check_phase/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/simple_animal/hostile/boss/fishboss/boss = controller.pawn
 	if(!istype(boss))

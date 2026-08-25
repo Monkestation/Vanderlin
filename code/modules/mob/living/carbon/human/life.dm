@@ -21,27 +21,27 @@
 /mob/living/carbon/human
 	var/allmig_reward = 0
 
-/mob/living/carbon/human/Life()
+/mob/living/carbon/human/Life(seconds_per_tick)
 //	set invisibility = 0
-	SEND_SIGNAL(src, COMSIG_HUMAN_LIFE)
+	SEND_SIGNAL(src, COMSIG_HUMAN_LIFE, seconds_per_tick)
 
-	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
-		return
+	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
+		return TRUE
 
 	. = ..()
 
-	if (QDELETED(src))
-		return 0
+	if(QDELETED(src))
+		return FALSE
 
 	if(advsetup)
-		Stun(50)
+		Stun(25 * seconds_per_tick)
 
 	if(mind)
 		mind.sleep_adv.add_stress_cycle(get_stress_amount())
 		for(var/datum/antagonist/A in mind.antag_datums)
-			A.on_life(src)
+			A.on_life(src, seconds_per_tick)
 
-	INVOKE_ASYNC(src, PROC_REF(handle_vamp_dreams))
+	INVOKE_ASYNC(src, PROC_REF(handle_vamp_dreams), seconds_per_tick)
 
 	if(IsSleeping())
 		if(health > 0)
@@ -50,7 +50,7 @@
 			if(has_status_effect(/datum/status_effect/debuff/dreamytime))
 				remove_status_effect(/datum/status_effect/debuff/dreamytime)
 				if(mind)
-					INVOKE_ASYNC(mind.sleep_adv, TYPE_PROC_REF(/datum/sleep_adv, advance_cycle))
+					INVOKE_ASYNC(mind.sleep_adv, TYPE_PROC_REF(/datum/sleep_adv, advance_cycle), seconds_per_tick)
 					if(!mind.antag_datums || !mind.antag_datums.len)
 						allmig_reward++
 						var/static/list/towner_jobs
@@ -60,30 +60,34 @@
 						to_chat(src, span_danger("Nights Survived: \Roman[allmig_reward]"))
 						if(allmig_reward > 0 && allmig_reward % 2 == 0)
 							adjust_triumphs(1)
+
 	if(!HAS_TRAIT(src, TRAIT_STASIS))
 		if(HAS_TRAIT(src, TRAIT_LEPROSY))
 			if(MOBTIMER_FINISHED(src, MT_LEPERBLEED, 12 MINUTES))
-				if(prob(5))
+				if(SPT_PROB(2.5, seconds_per_tick))
 					to_chat(src, span_warning("My skin opens up and bleeds..."))
 					MOBTIMER_SET(src, MT_LEPERBLEED)
 					var/obj/item/bodypart/part = pick(bodyparts)
 					if(part)
 						part.create_injury(WOUND_SLASH, 5, TRUE)
 					adjustToxLoss(10)
-		update_stamina()
-		update_energy()
-		handle_environment()
-		handle_hygiene()
+
+		update_stamina(seconds_per_tick)
+		update_energy(seconds_per_tick)
+		handle_environment(seconds_per_tick)
+		handle_hygiene(seconds_per_tick)
+
 		if(dna?.species)
-			dna.species.spec_life(src) // for mutantraces
+			dna.species.spec_life(src, seconds_per_tick) // for mutantraces
 
 	//heart attack stuff
-	handle_curses()
+	handle_curses(seconds_per_tick)
 
-	if(quirks && quirks.len)
+	if(length(quirks))
 		for(var/datum/quirk/Q in quirks)
-			Q.on_life(src)
+			Q.on_life(src, seconds_per_tick)
 
+#ifndef LOWMEMORYMODE
 	if(!client && !HAS_TRAIT(src, TRAIT_SLEEPIMMUNE) && !ai_controller)
 		if(MOBTIMER_EXISTS(src, MT_SLO))
 			if(MOBTIMER_FINISHED(src, MT_SLO, 90 SECONDS)) //?????
@@ -95,13 +99,15 @@
 
 	if(!typing)
 		set_typing_indicator(FALSE)
+#endif
+
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
 
 	if(stat != DEAD)
-		return 1
+		return TRUE
 
-/mob/living/carbon/human/DeadLife(delta_time, times_fired)
+/mob/living/carbon/human/DeadLife(seconds_per_tick)
 	set invisibility = 0
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -109,9 +115,10 @@
 
 	if(mind)
 		for(var/datum/antagonist/A in mind.antag_datums)
-			A.on_life(src)
+			A.on_life(src, seconds_per_tick)
 
 	. = ..()
+
 	name = get_visible_name()
 
 	var/virus_immunity = virus_immunity()
@@ -120,32 +127,24 @@
 	var/turf/turf_loc = get_turf(loc)
 	var/passed_temp = turf_loc?.return_temperature()
 
-	var/organ_flag = handle_organs(delta_time, times_fired,virus_immunity, antibiotics, immunity_weakness, passed_temp)
-	var/bodypart_flag = handle_bodyparts(delta_time, times_fired,virus_immunity, antibiotics, immunity_weakness, passed_temp)
+	var/organ_flag = handle_organs(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+	var/bodypart_flag = handle_bodyparts(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 
 	if((organ_flag & ORGAN_PROCESS_UPDATE_HEALTH) || (bodypart_flag & BODYPART_LIFE_UPDATE_HEALTH))
 		updatehealth()
 		update_stamina() //gods greatest optimization
 
-/mob/living/carbon/human/proc/on_daypass()
-	if(stat < 3) //not dead
-		if(dna?.species)
-			if(STUBBLE in dna.species.species_traits)
-				if(gender == MALE)
-					if(prob(50))
-						has_stubble = TRUE
-						update_body()
-
-/mob/living/proc/handle_environment()
+/mob/living/proc/handle_environment(seconds_per_tick)
 	return
 
-/mob/living/carbon/human/handle_environment()
-	dna?.species.handle_environment(src)
+/mob/living/carbon/human/handle_environment(seconds_per_tick)
+	dna?.species.handle_environment(src, seconds_per_tick)
 
-/mob/living/carbon/human/proc/handle_hygiene()
+/mob/living/carbon/human/proc/handle_hygiene(seconds_per_tick)
 	if(stat == DEAD || HAS_TRAIT(src, TRAIT_NOHYGIENE))
 		return
-	var/dirt_factor = HYGIENE_FACTOR * dna.species.hygiene_mod
+
+	var/dirt_factor = HYGIENE_FACTOR * dna.species.hygiene_mod * seconds_per_tick
 	var/hygiene_adjustment = 0
 
 	//Are our clothes dirty?
@@ -185,27 +184,26 @@
 	var/current_turf = get_turf(src)
 	if(istype(current_turf, /turf/open/water))
 		var/turf/open/water/bathing_liquid = current_turf
-		hygiene_adjustment += bathing_liquid.cleanliness_factor
-
+		hygiene_adjustment += bathing_liquid.cleanliness_factor * seconds_per_tick
 
 	adjust_hygiene(hygiene_adjustment)
-	dna?.species.handle_hygiene(src)
+	dna?.species.handle_hygiene(src, seconds_per_tick)
 
 ///FIRE CODE
-/mob/living/carbon/human/handle_fire()
+/mob/living/carbon/human/handle_fire(seconds_per_tick)
 	. = ..()
 	if(.) //if the mob isn't on fire anymore
 		return
 
 	if(dna)
-		. = dna.species.handle_fire(src) //do special handling based on the mob's species. TRUE = they are immune to the effects of the fire.
+		. = dna.species.handle_fire(src, seconds_per_tick = seconds_per_tick) //do special handling based on the mob's species. TRUE = they are immune to the effects of the fire.
 
 	if(!last_fire_update)
 		last_fire_update = fire_stacks + divine_fire_stacks
+
 	if((fire_stacks + divine_fire_stacks > 10 && last_fire_update <= 10) || (fire_stacks + divine_fire_stacks <= 10 && last_fire_update > 10))
 		last_fire_update = fire_stacks + divine_fire_stacks
 		update_fire()
-
 
 /mob/living/carbon/human/proc/get_thermal_protection()
 	var/thermal_protection = 0 //Simple check to estimate how protected we are against multiple temperatures
@@ -389,13 +387,16 @@
 
 	return min(1,thermal_protection)
 
-/mob/living/carbon/human/handle_random_events()
-	..()
+/mob/living/carbon/human/handle_random_events(seconds_per_tick)
+	. = ..()
 	//Puke if toxloss is too high
-	if(!stat)
-		if(prob(33) && getToxLoss() >= 75)
-			MOBTIMER_SET(src, MT_PUKE)
-			vomit(1, blood = TRUE)
+	if(stat || getToxLoss() < 75)
+		return
+
+	if(SPT_PROB(10, seconds_per_tick))
+		return
+
+	vomit(1, blood = TRUE)
 
 /mob/living/carbon/human/has_smoke_protection()
 	if(wear_mask)
@@ -407,22 +408,29 @@
 			return TRUE
 	return ..()
 
-/mob/living/carbon/human/proc/handle_vamp_dreams()
+/mob/living/carbon/human/proc/handle_vamp_dreams(seconds_per_tick)
 	if(!HAS_TRAIT(src, TRAIT_VAMP_DREAMS))
 		return
+
 	if(!mind)
 		return
+
 	if(!has_status_effect(/datum/status_effect/debuff/vamp_dreams))
 		return
+
 	if(!eyesclosed)
 		return
+
 	if(body_position != LYING_DOWN)
 		return
+
 	if(!istype(loc, /obj/structure/closet/crate/coffin))
 		return
+
 	var/obj/structure/closet/crate/coffin/coffin = loc
 	if(coffin.opened)
 		return
+
 	remove_status_effect(/datum/status_effect/debuff/vamp_dreams)
 	mind.sleep_adv.advance_cycle()
 

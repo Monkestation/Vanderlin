@@ -1,8 +1,8 @@
-/mob/living/proc/Life(seconds, times_fired)
+/mob/living/proc/Life(seconds_per_tick = SSMOBS_DT)
 	set waitfor = FALSE
 	SHOULD_NOT_SLEEP(TRUE)
 
-	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds, times_fired)
+	var/signal_result = SEND_SIGNAL(src, COMSIG_LIVING_LIFE, seconds_per_tick)
 
 	if(signal_result & COMPONENT_LIVING_CANCEL_LIFE_PROCESSING) // mmm less work
 		return
@@ -30,36 +30,29 @@
 		//Breathing, if applicable
 		handle_temperature()
 		if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-			handle_wounds()
-			handle_embedded_objects()
-			handle_blood()
+			handle_wounds(seconds_per_tick)
+			handle_embedded_objects(seconds_per_tick)
+			handle_blood(seconds_per_tick)
 			//passively heal even wounds with no passive healing
 			for(var/datum/wound/wound as anything in get_wounds())
-				wound.heal_wound(1)
+				wound.heal_wound(seconds_per_tick)
 
 		if(HAS_TRAIT(src, TRAIT_WOUNDREGEN))
 			//passively heal wounds
 			for(var/datum/wound/wound as anything in get_wounds())
-				wound.heal_wound(10)
+				wound.heal_wound(5 * seconds_per_tick)
 
-		/// ENDURE AS HE DOES.
-		if(!stat && HAS_TRAIT(src, TRAIT_PSYDONIAN_GRIT) && !HAS_TRAIT(src, TRAIT_PARALYSIS))
-			handle_wounds()
-			//passively heal wounds, but not if you're skullcracked OR DEAD.
-			if(!CAN_HAVE_BLOOD(src) || get_blood_volume() > BLOOD_VOLUME_SURVIVE)
-				for(var/datum/wound/wound as anything in get_wounds())
-					wound.heal_wound(wound.passive_healing * 0.25)
-
-		if (QDELETED(src)) // diseases can qdel the mob via transformations
+		if(QDELETED(src)) // diseases can qdel the mob via transformations
 			return
 
 		//Random events (vomiting etc)
-		handle_random_events()
+		handle_random_events(seconds_per_tick)
 
-		handle_status_effects() //all special effects, stun, knockdown, jitteryness, hallucination, sleeping, etc
+		handle_status_effects(seconds_per_tick) //all special effects, stun, knockdown, jitteryness, hallucination, sleeping, etc
 
 	update_sneak_invis()
-	handle_fire()
+
+	handle_fire(seconds_per_tick)
 
 	if(machine)
 		machine.check_eye(src)
@@ -72,74 +65,89 @@
 	if(stat != DEAD)
 		return 1
 
-/mob/living/proc/DeadLife()
+/mob/living/proc/DeadLife(seconds_per_tick)
 	set invisibility = 0
+
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
+
 	if(!loc)
 		return
+
 	if(HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
-		handle_wounds()
-		handle_embedded_objects()
-		handle_blood()
+		handle_wounds(seconds_per_tick)
+		handle_embedded_objects(seconds_per_tick)
+		handle_blood(seconds_per_tick)
+
 	update_sneak_invis()
-	handle_fire()
+	handle_fire(seconds_per_tick)
 	handle_typing_indicator()
 
-/mob/living/proc/handle_temperature()
+/mob/living/proc/handle_temperature(seconds_per_tick)
 	return
 
-/mob/living/proc/handle_random_events()
+/mob/living/proc/handle_random_events(seconds_per_tick)
 	//random painstun
 	if(stat || HAS_TRAIT(src, TRAIT_NOPAINSTUN) || !can_feel_pain())
 		return
+
 	if(!MOBTIMER_FINISHED(src, MT_PAINSTUN, 60 SECONDS))
 		return
+
 	if((getBruteLoss() + getFireLoss()) < (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 10))
 		return
 
-	var/probby = 53 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 2)
+	var/probby = 32 - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) * 2)
 	if(body_position == LYING_DOWN)
-		probby = probby - 20
-	if(prob(probby))
-		MOBTIMER_SET(src, MT_PAINSTUN)
-		Immobilize(10)
-		INVOKE_ASYNC(src, PROC_REF(emote), "painscream")
-		visible_message("<span class='warning'>[src] freezes in pain!</span>",
-					"<span class='warning'>I'm frozen in pain!</span>")
-		addtimer(CALLBACK(src, PROC_REF(Stun), 11 SECONDS), 1 SECONDS)
-		addtimer(CALLBACK(src, PROC_REF(Knockdown), 1 SECONDS, 1 SECONDS))
+		probby -= 12
 
-/mob/living/proc/handle_fire()
+	if(!SPT_PROB(probby, seconds_per_tick))
+		return
+
+	MOBTIMER_SET(src, MT_PAINSTUN)
+	Immobilize(1 SECONDS * seconds_per_tick)
+	emote("painscream")
+	visible_message(
+		"<span class='warning'>[src] freezes in pain!</span>",
+		"<span class='warning'>I'm frozen in pain!</span>",
+	)
+	addtimer(CALLBACK(src, PROC_REF(Stun), 11 SECONDS), 1 SECONDS)
+	addtimer(CALLBACK(src, PROC_REF(Knockdown), 1 SECONDS), 1 SECONDS)
+
+/mob/living/proc/handle_fire(seconds_per_tick)
 	if(fire_stacks < 0) //If we've doused ourselves in water to avoid fire, dry off slowly
-		fire_stacks = min(0, fire_stacks + 0.4)//So we dry ourselves back to default, nonflammable.
+		fire_stacks = min(0, fire_stacks + (0.2 * seconds_per_tick))//So we dry ourselves back to default, nonflammable.
+
 	if(!on_fire)
 		return TRUE //the mob is no longer on fire, no need to do the rest.
+
 	if(fire_stacks + divine_fire_stacks > 0)
-		adjust_divine_fire_stacks(-0.05)
+		adjust_divine_fire_stacks(-0.025 * seconds_per_tick)
 		if(fire_stacks > 0)
-			adjust_fire_stacks(-0.05) //the fire is slowly consumed
+			adjust_fire_stacks(-0.025 * seconds_per_tick) //the fire is slowly consumed
 	else
 		ExtinguishMob()
 		return TRUE //mob was put out, on_fire = FALSE via ExtinguishMob(), no need to update everything down the chain.
+
 	update_fire()
 	var/turf/location = get_turf(src)
-	location?.hotspot_expose(700, 50, 1)
+	location?.hotspot_expose(350 * seconds_per_tick, 50, 1)
 
-/mob/living/proc/handle_wounds()
+/mob/living/proc/handle_wounds(seconds_per_tick)
 	if(stat >= DEAD)
 		for(var/datum/wound/wound as anything in get_wounds())
-			wound.on_death()
+			wound.on_death(seconds_per_tick)
 		return
-	for(var/datum/wound/wound as anything in get_wounds())
-		wound.on_life()
 
-/obj/item/proc/on_embed_life(mob/living/user, obj/item/bodypart/bodypart)
+	for(var/datum/wound/wound as anything in get_wounds())
+		wound.on_life(seconds_per_tick)
+
+/obj/item/proc/on_embed_life(mob/living/user, obj/item/bodypart/bodypart, seconds_per_tick)
 	return
 
-/mob/living/proc/handle_embedded_objects()
+/mob/living/proc/handle_embedded_objects(seconds_per_tick)
 	for(var/obj/item/embedded in simple_embedded_objects)
-		if(embedded.on_embed_life(src))
+		if(embedded.on_embed_life(src, seconds_per_tick))
 			continue
 
 		if(prob(embedded.embedding.embedded_pain_chance))
@@ -202,7 +210,7 @@
 	return reagents.get_reagent_amount(reagent)
 
 //this updates all special effects: knockdown, druggy, stuttering, etc..
-/mob/living/proc/handle_status_effects()
+/mob/living/proc/handle_status_effects(seconds_per_tick)
 	if(slowdown)
 		slowdown = max(slowdown - 1, 0)
 	if(slowdown <= 0)

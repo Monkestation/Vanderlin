@@ -4,7 +4,7 @@
 	bleed_threshold = INFINITY
 	fade_away_time = INFINITY
 
-/datum/injury/internal_bruise/infection_check(delta_time, times_fired)
+/datum/injury/internal_bruise/infection_check(seconds_per_tick)
 	return FALSE
 
 /datum/injury/internal_bruise/get_desc(count)

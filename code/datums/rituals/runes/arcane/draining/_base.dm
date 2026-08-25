@@ -204,16 +204,17 @@
 	. = ..()
 	to_chat(owner, span_cultsmall("The siphon's warmth fades from you."))
 
-/datum/status_effect/mana_siphon_buff/tick()
+/datum/status_effect/mana_siphon_buff/tick(seconds_between_ticks)
 	var/turf/source = source_rune.loc
 	if(!source_rune.siphon_active)
 		owner.remove_status_effect(src.type)
 		return
+
 	var/dist = source.Distance3D(get_turf(owner))
 	if(dist > max_range)
 		return
+
 	duration = initial(duration)
-	return
 
 /atom/movable/screen/alert/status_effect/mana_siphon_buff
 	name = "Mana Siphon"

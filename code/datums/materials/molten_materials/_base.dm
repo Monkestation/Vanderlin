@@ -21,13 +21,9 @@
 			var/datum/material_trait/new_trait = GLOB.material_traits[trait]
 			new_trait.on_consume(exposed_mob, reac_volume)
 
-/datum/reagent/molten_metal/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/molten_metal/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
-	M.adjustFireLoss(5)
-	to_chat(M, span_danger("[src] is burning up insides!"))
-	for(var/datum/material_trait/trait as anything in initial(largest_metal.traits))
-		var/datum/material_trait/new_trait = GLOB.material_traits[trait]
-		new_trait.on_life(M)
+	M.adjustFireLoss(1 * REAGENTS_MODIFIER)
 
 /datum/reagent/molten_metal/on_new(list/incoming_data)
 	. = ..()

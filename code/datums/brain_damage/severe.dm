@@ -123,27 +123,52 @@
 
 /datum/brain_trauma/severe/narcolepsy
 	name = "Narcolepsy"
-	desc = ""
+	desc = "Patient may involuntarily fall asleep during normal activities."
 	scan_desc = ""
 	gain_text = span_warning("I have a constant feeling of drowsiness...")
 	lose_text = span_notice("I feel awake and aware again.")
+	/// Odds seconds_per_tick the user falls asleep
+	var/sleep_chance = 1
+	/// Odds seconds_per_tick the user falls asleep while running
+	var/sleep_chance_running = 2
+	/// Odds seconds_per_tick the user falls asleep while drowsy
+	var/sleep_chance_drowsy = 3
+	/// Time values for how long the user will stay drowsy
+	var/drowsy_time_minimum = 20 SECONDS
+	var/drowsy_time_maximum = 30 SECONDS
+	/// Time values for how long the user will stay asleep
+	var/sleep_time_minimum = 6 SECONDS
+	var/sleep_time_maximum = 6 SECONDS
 
-/datum/brain_trauma/severe/narcolepsy/on_life()
-	..()
+/datum/brain_trauma/severe/narcolepsy/on_life(seconds_per_tick)
 	if(owner.IsSleeping())
 		return
-	var/sleep_chance = 1
-	if(owner.m_intent == MOVE_INTENT_RUN)
-		sleep_chance += 2
+
 	var/drowsy = !!owner.has_status_effect(/datum/status_effect/drowsiness)
+	var/final_sleep_chance = sleep_chance
+	if(owner.m_intent == MOVE_INTENT_RUN)
+		final_sleep_chance += sleep_chance_running
+
 	if(drowsy)
-		sleep_chance += 3
-	if(prob(sleep_chance))
-		to_chat(owner, span_warning("I fall asleep."))
-		owner.Sleeping(60)
-	else if(!drowsy && prob(sleep_chance * 2))
-		to_chat(owner, span_warning("I feel tired..."))
-		owner.adjust_drowsiness(20 SECONDS)
+		final_sleep_chance += sleep_chance_drowsy //stack drowsy ontop of base or running odds with the += operator
+
+	if(!SPT_PROB(final_sleep_chance, seconds_per_tick))
+		return
+
+	//if not drowsy, don't fall asleep but make them drowsy
+	if(!drowsy)
+		to_chat(owner, span_warning("You feel tired..."))
+		owner.adjust_drowsiness(rand(drowsy_time_minimum, drowsy_time_maximum))
+		if(prob(50))
+			owner.emote("yawn")
+		else if(prob(33)) //rarest message is a custom emote
+			owner.visible_message("rubs [owner.p_their()] eyes.")
+	//drowsy, so fall asleep. you've had your chance to remedy it
+	else
+		to_chat(owner, span_warning("You fall asleep."))
+		owner.Sleeping(rand(sleep_time_minimum, sleep_time_maximum))
+		if(prob(50) && owner.IsSleeping())
+			owner.emote("snore")
 
 /datum/brain_trauma/severe/monophobia
 	name = "Monophobia"
@@ -160,14 +185,14 @@
 	else
 		to_chat(owner, span_notice("I feel safe, as long as you have people around you."))
 
-/datum/brain_trauma/severe/monophobia/on_life()
+/datum/brain_trauma/severe/monophobia/on_life(seconds_per_tick)
 	..()
 	if(check_alone())
-		stress = min(stress + 0.5, 100)
-		if(stress > 10 && (prob(5)))
+		stress = min(stress + seconds_per_tick, 100)
+		if(stress > 10 && (SPT_PROB(2.5, seconds_per_tick)))
 			stress_reaction()
 	else
-		stress = max(stress - 4, 0)
+		stress = max(stress - 2 * seconds_per_tick, 0)
 
 /datum/brain_trauma/severe/monophobia/proc/check_alone()
 	var/check_radius = 7
@@ -266,7 +291,7 @@
 	..()
 	owner.remove_status_effect(/datum/status_effect/trance)
 
-/datum/brain_trauma/severe/hypnotic_stupor/on_life()
+/datum/brain_trauma/severe/hypnotic_stupor/on_life(seconds_per_tick)
 	..()
-	if(prob(1) && !owner.has_status_effect(/datum/status_effect/trance))
+	if(SPT_PROB(0.5, seconds_per_tick) && !owner.has_status_effect(/datum/status_effect/trance))
 		owner.apply_status_effect(/datum/status_effect/trance, rand(100,300), FALSE)

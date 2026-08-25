@@ -113,10 +113,10 @@
 		return
 
 	if (duration != STATUS_EFFECT_PERMANENT)
-		duration = max(0, duration - (seconds_per_tick SECONDS)) // doing it first means its more up to date for ticks to read
+		duration = max(0, duration - (SPT_TO_DECISECONDS(seconds_per_tick))) // doing it first means its more up to date for ticks to read
 
 	if (tick_interval != STATUS_EFFECT_NO_TICK)
-		time_until_next_tick = max(0, time_until_next_tick - (seconds_per_tick SECONDS)) // same here
+		time_until_next_tick = max(0, time_until_next_tick - (SPT_TO_DECISECONDS(seconds_per_tick))) // same here
 
 	if(tick_interval == STATUS_EFFECT_AUTO_TICK)
 		tick(seconds_per_tick)

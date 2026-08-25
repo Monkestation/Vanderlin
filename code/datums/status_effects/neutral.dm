@@ -58,7 +58,7 @@
 	alert_type = null
 	var/stat_allowed = DEAD //if owner's stat is below this, will remove itself
 
-/datum/status_effect/sigil_mark/tick()
+/datum/status_effect/sigil_mark/tick(seconds_between_ticks)
 	if(owner.stat < stat_allowed)
 		qdel(src)
 
@@ -87,10 +87,9 @@
 		date = love_interest
 	linked_alert.desc = ""
 
-/datum/status_effect/in_love/tick()
+/datum/status_effect/in_love/tick(seconds_between_ticks)
 	if(date)
 		new /obj/effect/temp_visual/love_heart/invisible(get_turf(date.loc), owner)
-
 
 /datum/status_effect/throat_soothed
 	id = "throat_soothed"
@@ -121,23 +120,24 @@
 	playsound(owner, 'sound/blank.ogg', 75, FALSE)
 	return ..()
 
-/datum/status_effect/bounty/tick()
+/datum/status_effect/bounty/tick(seconds_between_ticks)
 	if(owner.stat == DEAD)
-		rewards()
+		rewards(seconds_between_ticks)
 		qdel(src)
 
-/datum/status_effect/bounty/proc/rewards()
+/datum/status_effect/bounty/proc/rewards(seconds_between_ticks)
 	if(rewarded && rewarded.mind && rewarded.stat != DEAD)
 		to_chat(owner, span_boldnotice("You hear something behind you talking... \"Bounty claimed.\""))
 		playsound(owner, 'sound/blank.ogg', 75, FALSE)
 		to_chat(rewarded, span_greentext("You feel a surge of mana flow into you!"))
 		for(var/datum/action/cooldown/spell/spell in rewarded.actions)
 			spell.reset_spell_cooldown()
-		rewarded.adjustBruteLoss(-25)
-		rewarded.adjustFireLoss(-25)
-		rewarded.adjustToxLoss(-25)
-		rewarded.adjustOxyLoss(-25)
-		rewarded.adjustCloneLoss(-25)
+		var/healing = 25 * seconds_between_ticks
+		rewarded.adjustBruteLoss(-healing, FALSE)
+		rewarded.adjustFireLoss(-healing, FALSE)
+		rewarded.adjustToxLoss(-healing, FALSE)
+		rewarded.adjustOxyLoss(-healing, FALSE)
+		rewarded.adjustCloneLoss(-healing, TRUE)
 
 /datum/status_effect/bugged //Lets another mob hear everything you can
 	id = "bugged"

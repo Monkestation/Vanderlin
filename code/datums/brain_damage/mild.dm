@@ -11,8 +11,8 @@
 	gain_text = span_warning("Speaking clearly is getting harder.")
 	lose_text = span_notice("I feel in control of my speech.")
 
-/datum/brain_trauma/mild/stuttering/on_life()
-	owner.stuttering = min(owner.stuttering + 5, 25)
+/datum/brain_trauma/mild/stuttering/on_life(seconds_per_tick)
+	owner.stuttering = min(owner.stuttering + 2.5 * seconds_per_tick, 25)
 	..()
 
 /datum/brain_trauma/mild/stuttering/on_lose()
@@ -30,9 +30,9 @@
 	ADD_TRAIT(owner, TRAIT_DUMB, TRAUMA_TRAIT)
 	..()
 
-/datum/brain_trauma/mild/dumbness/on_life()
-	owner.derpspeech = min(owner.derpspeech + 5, 25)
-	if(prob(3))
+/datum/brain_trauma/mild/dumbness/on_life(seconds_per_tick)
+	owner.derpspeech = min(owner.derpspeech + 2.5 * seconds_per_tick, 25)
+	if(SPT_PROB(1.5, seconds_per_tick))
 		owner.emote("drool")
 	// else if(owner.stat == CONSCIOUS && prob(3))
 	// 	owner.say(pick_list_replacements(BRAIN_DAMAGE_FILE, "brain_damage"), forced = "brain damage")
@@ -65,8 +65,8 @@
 	gain_text = span_warning("My head hurts!")
 	lose_text = span_notice("The pressure inside my head starts fading.")
 
-/datum/brain_trauma/mild/concussion/on_life()
-	if(prob(5))
+/datum/brain_trauma/mild/concussion/on_life(seconds_per_tick)
+	if(SPT_PROB(2.5, seconds_per_tick))
 		switch(rand(1,11))
 			if(1)
 				owner.vomit()
@@ -93,24 +93,26 @@
 	gain_text = span_warning("My muscles feel oddly faint.")
 	lose_text = span_notice("I feel in control of my muscles again.")
 
-/datum/brain_trauma/mild/muscle_weakness/on_life()
-	var/fall_chance = 1
+/datum/brain_trauma/mild/muscle_weakness/on_life(seconds_per_tick)
+	var/fall_chance = 0.5
 	if(owner.m_intent == MOVE_INTENT_RUN)
-		fall_chance += 2
-	if(prob(fall_chance) && (owner.body_position != LYING_DOWN))
+		fall_chance += 1
+
+	if(SPT_PROB(fall_chance, seconds_per_tick) && (owner.body_position != LYING_DOWN))
 		to_chat(owner, span_warning("My leg gives out!"))
-		owner.Paralyze(35)
+		owner.Paralyze(3.5 SECONDS)
 
 	else if(owner.get_active_held_item())
-		var/drop_chance = 1
+		var/drop_chance = 0.5
 		var/obj/item/I = owner.get_active_held_item()
-		drop_chance += I.w_class
-		if(prob(drop_chance) && owner.dropItemToGround(I))
+		drop_chance += I.w_class / 2
+		if(SPT_PROB(drop_chance, seconds_per_tick) && owner.dropItemToGround(I))
 			to_chat(owner, span_warning("I drop [I]!"))
 
-	else if(prob(3))
+	else if(SPT_PROB(1.5, seconds_per_tick))
 		to_chat(owner, span_warning("I feel a sudden weakness in my muscles!"))
-	..()
+
+	return ..()
 
 /datum/brain_trauma/mild/muscle_spasms
 	name = "Muscle Spasms"
@@ -134,15 +136,15 @@
 	gain_text = span_warning("My throat itches incessantly...")
 	lose_text = span_notice("My throat stops itching.")
 
-/datum/brain_trauma/mild/nervous_cough/on_life()
-	if(prob(6) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
-		owner.emote("cough", forced = TRUE)
-		if(prob(12))
+/datum/brain_trauma/mild/nervous_cough/on_life(seconds_per_tick)
+	if(SPT_PROB(6, seconds_per_tick) && !HAS_TRAIT(owner, TRAIT_SOOTHED_THROAT))
+		if(prob(5))
 			to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
 			owner.Immobilize(20)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 6)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 12)
-			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob, emote), "cough"), 18)
+			owner.emote("cough")
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/, emote), "cough"), 0.6 SECONDS)
+			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/, emote), "cough"), 1.2 SECONDS)
+		owner.emote("cough")
 	..()
 
 /datum/brain_trauma/mild/expressive_aphasia

@@ -20,16 +20,17 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	desc = ""
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "match_unlit"
-	var/lit = FALSE
-	var/burnt = FALSE
-	var/smoketime = 15 // 10 seconds
 	w_class = WEIGHT_CLASS_TINY
 	heat = 1000
 	item_weight = 2 GRAMS
 
-/obj/item/match/process()
-	smoketime--
-	if(smoketime < 1)
+	var/lit = FALSE
+	var/burnt = FALSE
+	var/smoketime = 10 SECONDS
+
+/obj/item/match/process(seconds_per_tick)
+	smoketime -= SPT_TO_DECISECONDS(seconds_per_tick)
+	if(smoketime <= 0)
 		matchburnout()
 	else
 		open_flame(heat)
@@ -123,6 +124,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 //FINE SMOKABLES//
 //////////////////
 /obj/item/clothing/face/cigarette
+	abstract_type = /obj/item/clothing/face/cigarette
 	name = "cigarette"
 	desc = ""
 	icon_state = "spliffoff"
@@ -149,12 +151,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	var/icon_off = "cigoff"
 	var/type_butt = /obj/item/cigbutt
 	var/lastHolder = null
-	var/smoketime = 180 // 1 is 2 seconds, so a single cigarette will last 6 minutes.
+	var/smoketime = 6 MINUTES
 	var/highest_metab_time = 0
 	var/total_transferred = 0
 	var/chem_volume = 30
 	var/list/list_reagents = list(/datum/reagent/drug/nicotine = 15)
-	abstract_type = /obj/item/clothing/face/cigarette
 
 /obj/item/clothing/face/cigarette/suicide_act(mob/user)
 	user.visible_message(span_suicide("[user] is huffing [src] as quickly as [user.p_they()] can! It looks like [user.p_theyre()] trying to give [user.p_them()]self cancer."))
@@ -273,13 +274,15 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!reagents.trans_to(smoker, transfer_rate, method = INGEST))
 		reagents.remove_all(transfer_rate)
 
-/obj/item/clothing/face/cigarette/process()
-	smoketime--
-	if(smoketime >= 1)
+/obj/item/clothing/face/cigarette/process(seconds_per_tick)
+	smoketime -= SPT_TO_DECISECONDS(seconds_per_tick)
+
+	if(smoketime > 0)
 		if(reagents?.total_volume)
 			handle_reagents()
 		open_flame()
 		return
+
 	reagents.remove_any(reagents.total_volume)
 	if(type_butt)
 		var/obj/item/butt = new type_butt(get_turf(src))
@@ -287,7 +290,9 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			var/mob/living/carbon/M = loc
 			M.dropItemToGround(src, silent = TRUE)
 			M.equip_to_slot_if_possible(butt, qdel_on_fail = FALSE, disable_warning = TRUE)
+
 	qdel(src)
+	return PROCESS_KILL
 
 /obj/item/clothing/face/cigarette/attack_self(mob/user, list/modifiers)
 	if(lit)
@@ -398,7 +403,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	item_state = "pipeoff"
 	icon_on = "pipeon"  //Note - these are in masks.dmi
 	icon_off = "pipeoff"
-	smoketime = 120
+	smoketime = 16 MINUTES
 	chem_volume = 100
 	list_reagents = null
 	var/packeditem = 0
@@ -428,18 +433,21 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	STOP_PROCESSING(SSobj, src)
 	. = ..()
 
-/obj/item/clothing/face/cigarette/pipe/process()
+/obj/item/clothing/face/cigarette/pipe/process(seconds_per_tick)
 	if(!packeditem)
 		smoketime = 0
 		extinguish()
 		return
+
 	if(!has_enchantment(/datum/enchantment/eternal_blunt))
-		smoketime--
-	if(smoketime >= 1)
+		smoketime -= SPT_TO_DECISECONDS(seconds_per_tick)
+
+	if(smoketime > 0)
 		if(reagents?.total_volume)
 			handle_reagents()
 		open_flame()
 		return
+
 	packeditem = FALSE
 	extinguish()
 
@@ -629,12 +637,11 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	else
 		cig.light(span_notice("[user] holds the [name] out for [M], and lights [M.p_their()] [cig.name]."))
 
-/obj/item/lighter/process()
+/obj/item/lighter/process(seconds_per_tick)
 	open_flame()
 
 /obj/item/lighter/get_temperature()
 	return lit * heat
-
 
 /obj/item/lighter/greyscale
 	name = "cheap lighter"

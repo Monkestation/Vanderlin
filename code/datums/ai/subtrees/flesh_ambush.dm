@@ -1,4 +1,4 @@
-/datum/ai_planning_subtree/flesh_ambush_subtree/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/flesh_ambush_subtree/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	// Don't ambush while regenerating or in frenzy
 	if(controller.blackboard[BB_FLESH_IS_REGENERATING] || controller.blackboard[BB_FLESH_FRENZY_ACTIVE])
@@ -35,7 +35,7 @@
 	set_movement_target(controller, ambush_spot)
 	return TRUE
 
-/datum/ai_behavior/setup_ambush/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/setup_ambush/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 	var/datum/targetting_datum/targetting_datum = controller.blackboard[BB_TARGETTING_DATUM]
@@ -62,7 +62,7 @@
 	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 	action_cooldown = 0.5 SECONDS
 
-/datum/ai_behavior/continue_ambush/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/continue_ambush/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 	var/mob/living/target = controller.blackboard[BB_FLESH_AMBUSH_TARGET]

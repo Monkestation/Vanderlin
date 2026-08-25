@@ -246,11 +246,13 @@
 	var/turf/location = get_turf(loc)
 	if(!can_process(location))
 		return stop()
+
 	if(reagents.chem_temp < required_temp)
 		reagents.adjust_thermal_energy(heating_rate * seconds_per_tick * SPECIFIC_HEAT_DEFAULT * reagents.maximum_volume)
 		reagents.chem_temp = min(reagents.chem_temp, required_temp)
 		update_appearance(UPDATE_ICON)
 		return
+
 	if(reagents.chem_temp >= required_temp)
 		if(!boiling)
 			boiling = TRUE
@@ -258,9 +260,7 @@
 			soundloop.start()
 		var/vapor_amount = distillation_rate * seconds_per_tick
 		reagents.trans_id_to(condenser, separating_reagent.type, vapor_amount)
-		//! IMPORTANT, readd this after either borbops or potatos pr merges
-		//condenser.set_temperature(273.15 + location.return_temperature())
-		condenser.chem_temp = 273.15 + location.return_temperature()
+		condenser.set_temperature(273.15 + location.return_temperature())
 
 		// I hate this >:(
 		check_recipe()
@@ -289,6 +289,7 @@
 		boiling = FALSE
 		active_recipe = null
 		soundloop.stop()
+
 	update_appearance(UPDATE_ICON)
 
 /// Returns TRUE if any recipe exists for the current separating_reagent,

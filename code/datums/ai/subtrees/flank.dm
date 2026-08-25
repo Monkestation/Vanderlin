@@ -6,7 +6,7 @@
 
 /datum/ai_planning_subtree/squad_flank
 
-/datum/ai_planning_subtree/squad_flank/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/squad_flank/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/mob/living/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
@@ -101,7 +101,7 @@
 		return FALSE
 	set_movement_target(controller, flank_turf)
 
-/datum/ai_behavior/human_npc_move_to_flank/perform(delta_time, datum/ai_controller/controller, flank_turf_key, target_key)
+/datum/ai_behavior/human_npc_move_to_flank/perform(seconds_per_tick, datum/ai_controller/controller, flank_turf_key, target_key)
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/turf/flank_turf = controller.blackboard[flank_turf_key]
 	var/mob/living/target = controller.blackboard[target_key]

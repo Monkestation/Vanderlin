@@ -138,7 +138,7 @@
 	alpha = heat_a
 
 #define INSUFFICIENT(path) (!location.air.gases[path] || location.air.gases[path][MOLES] < 0.5)
-/obj/effect/hotspot/process()
+/obj/effect/hotspot/process(seconds_per_tick)
 	if(just_spawned)
 		just_spawned = FALSE
 		return
@@ -158,7 +158,6 @@
 			H.sate_addiction(/datum/quirk/vice/addiction/pyromaniac)
 
 	perform_exposure()
-	return
 
 /obj/effect/hotspot/Destroy()
 	set_light(0)

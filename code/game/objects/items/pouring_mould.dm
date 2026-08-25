@@ -165,9 +165,11 @@
 	cooling = TRUE
 	START_PROCESSING(SSobj, src)
 
-/obj/item/mould/process(delta_time)
-	cooling_progress += cooling_amount * delta_time
+/obj/item/mould/process(seconds_per_tick)
+	cooling_progress += cooling_amount * seconds_per_tick
+
 	update_appearance(UPDATE_OVERLAYS)
+
 	if(cooling_progress >= 100)
 		STOP_PROCESSING(SSobj, src)
 		create_item()

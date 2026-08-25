@@ -107,9 +107,9 @@
 		to_chat(user, span_warning("[src] doesn't have enough power to be wielded!"))
 		return COMPONENT_TWOHANDED_BLOCK_WIELD
 
-/obj/item/weapon/pick/drill/process()
+/obj/item/weapon/pick/drill/process(seconds_per_tick)
 	if(HAS_TRAIT(src, TRAIT_WIELDED))
-		if(!SEND_SIGNAL(src, COMSIG_ATOM_STEAM_USE, 1))
+		if(!SEND_SIGNAL(src, COMSIG_ATOM_STEAM_USE, seconds_per_tick))
 			var/datum/component/two_handed/twohanded = GetComponent(/datum/component/two_handed)
 			if(ismob(loc))
 				twohanded.unwield(loc)

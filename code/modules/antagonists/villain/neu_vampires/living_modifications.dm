@@ -310,36 +310,42 @@
 	clan_menu_interface.generate_interface()
 
 
-/mob/living/carbon/human/proc/process_vampire_life()
+/mob/living/carbon/human/proc/process_vampire_life(seconds_per_tick)
 	if(!clan)
 		return
 
 	// Handle low bloodpool effects
-	handle_bloodpool_effects()
+	handle_bloodpool_effects(seconds_per_tick)
 
 	// Coffin regeneration
 	var/obj/structure/closet/crate/coffin/coffin = loc
-	if(istype(coffin) && (src in coffin.contents))
+	if(istype(coffin))
 		if(HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) && !HAS_TRAIT(src, TRAIT_DEATHCOMA))
 			to_chat(src, span_notice("You enter the horrible slumber of deathless Torpor. You will heal until you are renewed."))
 			ADD_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
-		heal_overall_damage(5, 5)
-		adjustToxLoss(-5)
-		heal_wounds(25)
+
+		var/coffin_heal = 2.5 * seconds_per_tick
+		heal_overall_damage(coffin_heal, coffin_heal)
+		adjustToxLoss(-coffin_heal)
+		heal_wounds(coffin_heal * 5)
+
 		for(var/obj/item/organ/artery/artery in getorganslotlist(ORGAN_SLOT_ARTERY))
-			artery.applyOrganDamage(-5)
-		if(prob(3))
-			regenerate_limb(silent=FALSE)
+			artery.applyOrganDamage(-coffin_heal)
+
+		if(SPT_PROB(1.5, seconds_per_tick))
+			regenerate_limb(silent = FALSE)
+
 		if(get_blood_volume() <= BLOOD_VOLUME_NORMAL)
 			if(get_blood_volume() < BLOOD_VOLUME_SAFE)
 				set_blood_volume(BLOOD_VOLUME_SAFE)
-			adjust_blood_volume(10)
-		set_bloodpool(max(bloodpool, min(maxbloodpool * 0.25, bloodpool + 5)))
+			adjust_blood_volume(coffin_heal * 2)
+
+		set_bloodpool(max(bloodpool, min(maxbloodpool * 0.25, bloodpool + coffin_heal)))
 	else if(HAS_TRAIT(src, TRAIT_DEATHCOMA) && (!HAS_TRAIT(src, TRAIT_CRITICAL_CONDITION) || (!istype(coffin) || !(src in coffin.contents))))
 		REMOVE_TRAIT(src, TRAIT_DEATHCOMA, VAMPIRE_TRAIT)
 		to_chat(src, span_warning("You have recovered from Torpor."))
 
-/mob/living/carbon/human/proc/handle_bloodpool_effects()
+/mob/living/carbon/human/proc/handle_bloodpool_effects(seconds_per_tick)
 	// Apply thirst effects based on bloodpool levels
 	switch(bloodpool)
 		if(VITAE_LEVEL_HUNGRY to VITAE_LEVEL_FED)
@@ -357,7 +363,7 @@
 			if(prob(3))
 				playsound(src, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 
-	if(bloodpool < 100 && prob(9))
+	if(bloodpool < 100 && SPT_PROB(4.5, seconds_per_tick))
 		if(last_frenzy_check + 5 MINUTES < world.time)
 			rollfrenzy()
 

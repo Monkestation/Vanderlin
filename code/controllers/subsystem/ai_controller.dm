@@ -78,6 +78,7 @@ SUBSYSTEM_DEF(ai_controllers)
 	if(!resumed)
 		src.currentrun = build_currentrun()
 
+	var/seconds_per_tick = wait / (1 SECONDS)
 	var/list/currentrun = src.currentrun
 	while(currentrun.len)
 		var/datum/ai_controller/ai_controller = currentrun[currentrun.len]
@@ -88,8 +89,8 @@ SUBSYSTEM_DEF(ai_controllers)
 			continue
 		if(!ai_controller.able_to_plan())
 			continue
-		ai_controller.SelectBehaviors(wait * 0.1)
-		if(!LAZYLEN(ai_controller.current_behaviors))
+		ai_controller.SelectBehaviors(seconds_per_tick)
+		if(!LAZYLEN(ai_controller.current_behaviors)) //Still no plan
 			COOLDOWN_START(ai_controller, failed_planning_cooldown, AI_FAILED_PLANNING_COOLDOWN)
 		if(MC_TICK_CHECK)
 			return

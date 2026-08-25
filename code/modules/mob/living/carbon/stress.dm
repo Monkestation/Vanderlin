@@ -53,6 +53,7 @@
 /mob/living/carbon/update_stress()
 	if(HAS_TRAIT(src, TRAIT_NOMOOD))
 		stress = 0
+
 	for(var/datum/stress_event/event as anything in stressors)
 		if(event.timer)
 			if(world.time >= event.timer)
@@ -116,6 +117,7 @@
 
 		if(hud_used?.stressies)
 			hud_used.stressies.update_appearance(UPDATE_OVERLAYS)
+
 	oldstress = stress
 	if(attributes)
 		var/new_stress_level

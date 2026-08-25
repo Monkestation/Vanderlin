@@ -433,22 +433,27 @@
 		return
 	water = min(MAX_PLANT_WATER, water + min(5, severity / 4))
 
-/obj/structure/soil/process(delta_time)
-	delta_time = delta_time SECONDS
+/obj/structure/soil/process(seconds_per_tick)
 	var/force_update = FALSE
-	process_weeds(delta_time)
-	force_update = process_plant(delta_time)
+
+	process_weeds(seconds_per_tick)
+
+	force_update = process_plant(seconds_per_tick)
 	if(world.time < accellerated_growth)
-		force_update = process_plant(delta_time)
-	process_soil(delta_time)
+		force_update = process_plant(seconds_per_tick)
+
+	process_soil(seconds_per_tick)
 	if(soil_decay_time <= 0)
 		decay_soil(TRUE)
 		return
+
 	if(force_update)
 		update_appearance(UPDATE_OVERLAYS)
 		return
+
 	if(!COOLDOWN_FINISHED(src, soil_update))
 		return
+
 	COOLDOWN_START(src, soil_update, 10 SECONDS)
 	update_appearance(UPDATE_OVERLAYS) // only update icon after all the processes have run
 
@@ -559,43 +564,43 @@
 	if(pollination_time > 0)
 		. += span_good("The soil has been pollinated.")
 
-/obj/structure/soil/proc/process_weeds(dt)
+/obj/structure/soil/proc/process_weeds(seconds_per_tick)
 	// Blessed soil will have the weeds die
 	if(blessed_time > 0)
-		adjust_weeds(-dt * BLESSING_WEED_DECAY_RATE)
+		adjust_weeds(-seconds_per_tick * BLESSING_WEED_DECAY_RATE)
 	if(plant && plant.weed_immune)
 		// Weeds die if the plant is immune to them
-		adjust_weeds(-dt * WEED_RESISTANCE_DECAY_RATE)
+		adjust_weeds(-seconds_per_tick * WEED_RESISTANCE_DECAY_RATE)
 		return
 	if(water <= 0)
 		// Weeds die without water in soil
-		adjust_weeds(-dt * WEED_DECAY_RATE)
+		adjust_weeds(-seconds_per_tick * WEED_DECAY_RATE)
 		return
 
 	// Weeds eat water and NPK nutrients to grow
 	var/weed_factor = weeds / MAX_PLANT_WEEDS
-	adjust_water(-dt * weed_factor * WEED_WATER_CONSUMPTION_RATE)
-	adjust_nitrogen(-dt * weed_factor * WEED_NUTRITION_CONSUMPTION_RATE)
-	adjust_phosphorus(-dt * weed_factor * WEED_NUTRITION_CONSUMPTION_RATE)
-	adjust_potassium(-dt * weed_factor * WEED_NUTRITION_CONSUMPTION_RATE)
+	adjust_water(-seconds_per_tick * weed_factor * WEED_WATER_CONSUMPTION_RATE)
+	adjust_nitrogen(-seconds_per_tick * weed_factor * WEED_NUTRITION_CONSUMPTION_RATE)
+	adjust_phosphorus(-seconds_per_tick * weed_factor * WEED_NUTRITION_CONSUMPTION_RATE)
+	adjust_potassium(-seconds_per_tick * weed_factor * WEED_NUTRITION_CONSUMPTION_RATE)
 
 	if((get_total_npk() > 0) && plant_genetics)
 		var/genetic_value = (TRAIT_GRADE_AVERAGE / max(plant_genetics.disease_resistance, TRAIT_GRADE_POOR))
-		adjust_weeds(dt * WEED_GROWTH_RATE * genetic_value)
+		adjust_weeds(seconds_per_tick * WEED_GROWTH_RATE * genetic_value)
 
-/obj/structure/soil/proc/process_plant(dt)
+/obj/structure/soil/proc/process_plant(seconds_per_tick)
 	if(!plant)
 		return
 	if(plant_dead)
 		return
 	var/should_update
-	process_plant_nutrition(dt)
-	should_update = process_plant_health(dt)
+	process_plant_nutrition(seconds_per_tick)
+	should_update = process_plant_health(seconds_per_tick)
 	if(!produce_ready)
-		process_crop_quality(dt)
+		process_crop_quality(seconds_per_tick)
 	return should_update
 
-/obj/structure/soil/proc/process_crop_quality(dt)
+/obj/structure/soil/proc/process_crop_quality(seconds_per_tick)
 	if(!plant || plant_dead || produce_ready)
 		return
 
@@ -660,7 +665,7 @@
 	var/diminishing_returns = 1 - (progress_ratio * 0.8)  // Slightly reduced diminishing returns
 
 	// Accumulate quality points
-	quality_points += (dt / 10) * quality_rate * 0.26 * phase_multiplier * diminishing_returns
+	quality_points += (seconds_per_tick / 10) * quality_rate * 0.26 * phase_multiplier * diminishing_returns
 	quality_points = min(quality_points, max_quality_points)
 
 	// Quality tier thresholds
@@ -783,7 +788,7 @@
 	// Combine all factors
 	return balance_modifier * availability_modifier * (0.8 + avg_sufficiency * 0.4)
 
-/obj/structure/soil/proc/process_plant_health(dt)
+/obj/structure/soil/proc/process_plant_health(seconds_per_tick)
 	if(!plant)
 		return
 	var/drain_rate = plant.water_drain_rate
@@ -800,21 +805,21 @@
 			var/hardiness_modifier = (plant_genetics.disease_resistance - TRAIT_GRADE_AVERAGE) / 100
 			weed_damage_multiplier = (1 - hardiness_modifier * 0.5) // Up to 25% less weed damage
 		weed_damage_multiplier *= (weeds / MAX_PLANT_WEEDS)
-		should_update |= adjust_plant_health(-dt * PLANT_WEEDS_HARM_RATE * weed_damage_multiplier)
+		should_update |= adjust_plant_health(-seconds_per_tick * PLANT_WEEDS_HARM_RATE * weed_damage_multiplier)
 
 	// Regenerate plant health if we dont drain water, or we have the water
 	if(drain_rate <= 0 || water > 0)
-		should_update |= adjust_plant_health(dt * PLANT_REGENERATION_RATE)
+		should_update |= adjust_plant_health(seconds_per_tick * PLANT_REGENERATION_RATE)
 	if(drain_rate > 0)
 		// If we're dry and we want to drain water, we loose health
 		if(water <= 0)
-			should_update |= adjust_plant_health(-dt * PLANT_DECAY_RATE)
+			should_update |= adjust_plant_health(-seconds_per_tick * PLANT_DECAY_RATE)
 		else
 			// Drain water with genetics modifier
-			adjust_water(-dt * drain_rate)
+			adjust_water(-seconds_per_tick * drain_rate)
 	// Blessed plants heal!!
 	if(blessed_time > 0)
-		should_update |= adjust_plant_health(dt * PLANT_BLESS_HEAL_RATE)
+		should_update |= adjust_plant_health(seconds_per_tick * PLANT_BLESS_HEAL_RATE)
 	return should_update
 
 /obj/structure/soil/proc/improve_genetics_naturally()
@@ -843,7 +848,7 @@
 	improved.generation += 1
 	return improved
 
-/obj/structure/soil/proc/process_plant_nutrition(dt)
+/obj/structure/soil/proc/process_plant_nutrition(seconds_per_tick)
 	if(!plant)
 		return
 	var/turf/location = loc
@@ -894,10 +899,10 @@
 	if(istype(src, /obj/structure/soil/mushmound) && plant.mound_growth)
 		growth_multiplier *= 1.2
 		nutriment_eat_multiplier *= 0.8
-	var/target_growth_time = growth_multiplier * dt
-	return process_npk_growth(target_growth_time, nutriment_eat_multiplier, dt)
+	var/target_growth_time = growth_multiplier * seconds_per_tick
+	return process_npk_growth(target_growth_time, nutriment_eat_multiplier, seconds_per_tick)
 
-/obj/structure/soil/proc/process_npk_growth(target_growth_time, nutriment_multiplier = 1.0, dt)
+/obj/structure/soil/proc/process_npk_growth(target_growth_time, nutriment_multiplier = 1.0, seconds_per_tick)
 	if(!plant)
 		return
 
@@ -937,11 +942,11 @@
 
 	// Apply nutrient multipliers only to nutrients that are actually needed
 	if(nitrogen_needed > 0)
-		nitrogen_needed *= nutriment_multiplier
+		nitrogen_needed *= nutriment_multiplier * seconds_per_tick
 	if(phosphorus_needed > 0)
-		phosphorus_needed *= nutriment_multiplier
+		phosphorus_needed *= nutriment_multiplier * seconds_per_tick
 	if(potassium_needed > 0)
-		potassium_needed *= nutriment_multiplier
+		potassium_needed *= nutriment_multiplier * seconds_per_tick
 
 	// Apply genetics modifiers if available
 	if(plant_genetics)
@@ -996,7 +1001,7 @@
 	if(potassium_needed && potassium_factor < 0.1)
 		actual_growth_time *= 0.95
 
-	var/drain_rate = plant.water_drain_rate * dt
+	var/drain_rate = plant.water_drain_rate * seconds_per_tick
 	if(plant_genetics)
 		var/efficiency_modifier = (plant_genetics.water_efficiency - TRAIT_GRADE_AVERAGE) / 100
 		drain_rate *= (1 - efficiency_modifier * 0.4) // Up to 20% less water consumption
@@ -1042,7 +1047,7 @@
 		produce_ready = TRUE
 		return TRUE
 
-/obj/structure/soil/proc/process_soil(dt)
+/obj/structure/soil/proc/process_soil(seconds_per_tick)
 	var/found_irrigation = FALSE
 	for(var/obj/structure/irrigation_channel/channel in range(1, src))
 		if(!istype(channel))
@@ -1058,16 +1063,16 @@
 		soil_decay_time = SOIL_DECAY_TIME
 	else
 		// Otherwise, "decay" the soil
-		soil_decay_time = max(soil_decay_time - dt, 0)
+		soil_decay_time = max(soil_decay_time - SPT_TO_DECISECONDS(seconds_per_tick), 0)
 
 	if(!found_irrigation)
-		adjust_water(-dt * SOIL_WATER_DECAY_RATE, FALSE)
+		adjust_water(-seconds_per_tick * SOIL_WATER_DECAY_RATE, FALSE)
 	else
-		adjust_water(dt)
+		adjust_water(seconds_per_tick)
 
-	tilled_time = max(tilled_time - dt, 0)
-	blessed_time = max(blessed_time - dt, 0)
-	pollination_time = max(pollination_time - dt, 0)
+	tilled_time = max(tilled_time - SPT_TO_DECISECONDS(seconds_per_tick), 0)
+	blessed_time = max(blessed_time - SPT_TO_DECISECONDS(seconds_per_tick), 0)
+	pollination_time = max(pollination_time - SPT_TO_DECISECONDS(seconds_per_tick), 0)
 
 /obj/structure/soil/proc/decay_soil()
 	plant = null

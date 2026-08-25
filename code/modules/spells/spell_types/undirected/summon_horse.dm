@@ -36,7 +36,7 @@ GLOBAL_VAR_INIT(nya_catmodder_go, FALSE)
 		AddElement(/datum/element/ridable, /datum/component/riding/creature/equestria)
 
 /datum/status_effect/buff/healing/saddleborn
-	healing_on_tick = 0.25
+	healing_per_second = 0.25
 	duration = 5 MINUTES
 	examine_text = "They look well-rested!"
 	outline_colour = "#f5c2c2"

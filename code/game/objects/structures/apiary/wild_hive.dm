@@ -26,8 +26,8 @@
 	new /obj/item/queen_bee(get_turf(src))
 	return ..()
 
-/obj/structure/beehive/wild/process()
-	if(bee_count < max_bees && prob(5))
+/obj/structure/beehive/wild/process(seconds_per_tick)
+	if(bee_count < max_bees && SPT_PROB(2.5, seconds_per_tick))
 		bee_count++
 
 /obj/structure/beehive/wild/proc/send_out_bees()
@@ -92,7 +92,7 @@
 	var/wander_behavior = FALSE
 	var/return_home_timer = 0
 
-/obj/effect/bees/wild/process()
+/obj/effect/bees/wild/process(seconds_per_tick)
 	. = ..()
 	if(agitated && target_mob)
 		if(get_dist(src, target_mob) > 1)
@@ -102,13 +102,13 @@
 			attack_mob(target_mob)
 
 	else if(wander_behavior)
-		if(prob(40))
+		if(SPT_PROB(23, seconds_per_tick))
 			var/turf/T = get_step(src, pick(GLOB.alldirs))
 			Move(T)
 
-		return_home_timer++
+		return_home_timer += SPT_TO_DECISECONDS(seconds_per_tick)
 
-		if(return_home_timer > 50)
+		if(return_home_timer > 3 MINUTES)
 			return_to_wild_hive()
 
 	if(home_hive && ((agitation_countdown <= 0 && agitated) || stored_pollen > 5))
@@ -143,5 +143,3 @@
 	home_hive.bee_count += bee_count
 	home_hive.bee_objects -= src
 	qdel(src)
-
-/obj/effect/decal/cleanable/insect

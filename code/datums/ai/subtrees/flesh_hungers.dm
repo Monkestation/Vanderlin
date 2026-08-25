@@ -1,9 +1,9 @@
-/datum/ai_planning_subtree/flesh_hunger_subtree/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/flesh_hunger_subtree/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/hunger = controller.blackboard[BB_FLESH_HUNGER]
 
 	// Increment hunger over time
-	controller.blackboard[BB_FLESH_HUNGER] = min(250, hunger + (delta_time * 0.1))
+	controller.blackboard[BB_FLESH_HUNGER] = min(250, hunger + (seconds_per_tick * 0.1))
 
 	// Prioritize eating when very hungry
 	if(hunger > 150 && !controller.blackboard[BB_FLESH_IS_REGENERATING])
@@ -38,7 +38,7 @@
 
 	return FALSE
 
-/datum/ai_behavior/find_food_urgently/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/find_food_urgently/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 	var/atom/food_target = controller.blackboard[BB_TEMP_FOOD_TARGET]

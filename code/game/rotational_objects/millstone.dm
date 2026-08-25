@@ -102,18 +102,21 @@
 		animate(icon_state = "millstone2", time = frame_stage)
 		animate(icon_state = "millstone1", time = frame_stage)
 
-/obj/structure/fluff/millstone/process()
+/obj/structure/fluff/millstone/process(seconds_per_tick)
 	if(rotations_per_minute && !rotation_network.overstressed)
-		work_on_mill(powered = TRUE)
+		work_on_mill(powered = TRUE, seconds_per_tick = seconds_per_tick)
 
-/obj/structure/fluff/millstone/proc/work_on_mill(mob/living/user, powered = FALSE)
+/obj/structure/fluff/millstone/proc/work_on_mill(mob/living/user, powered = FALSE, seconds_per_tick = SSOBJ_DT)
 	if(!user && !powered)
 		return
+
 	if(!length(millable_contents))
 		return
+
 	playsound(src, 'sound/foley/milling.ogg', 100, TRUE, -1)
+
 	if(powered)
-		mill_progress += rotations_per_minute * 2
+		mill_progress += rotations_per_minute * seconds_per_tick
 	else
 		if(do_after(user, 2 SECONDS, src))
 			mill_progress += 50

@@ -193,7 +193,7 @@
 			human_owner.add_stress(/datum/stress_event/sleepfloor)
 	. = ..()
 
-/datum/status_effect/incapacitating/sleeping/tick()
+/datum/status_effect/incapacitating/sleeping/tick(seconds_between_ticks)
 	if(!owner.client)
 		return
 
@@ -209,8 +209,8 @@
 					sleptonground = TRUE
 					break
 
-	human_owner?.drunkenness *= 0.997 //reduce drunkenness by 0.3% per tick, 6% per 2 seconds
-	if(prob(20))
+	human_owner?.drunkenness *= 0.997 * seconds_between_ticks //reduce drunkenness by 0.3% per tick, 6% per 2 seconds
+	if(SPT_PROB(20, seconds_between_ticks))
 		carbon_owner?.handle_dreams()
 		if(prob(10) && !HAS_TRAIT(carbon_owner, TRAIT_CRITICAL_CONDITION))
 			owner.emote("snore")
@@ -256,7 +256,7 @@
 	// 	var/mob/living/carbon/carbon_owner = owner
 	// 	carbon_owner.update_bodypart_bleed_overlays()
 
-/datum/status_effect/grouped/stasis/tick()
+/datum/status_effect/grouped/stasis/tick(seconds_between_ticks)
 	update_time_of_death()
 
 /datum/status_effect/grouped/stasis/on_remove()
@@ -335,11 +335,11 @@
 	alert_type = null
 	duration = -1
 
-/datum/status_effect/neck_slice/tick()
+/datum/status_effect/neck_slice/tick(seconds_between_ticks)
 	var/mob/living/carbon/human/H = owner
 	if(H.stat == DEAD || H.bleed_rate <= 8)
 		H.remove_status_effect(/datum/status_effect/neck_slice)
-	if(prob(10))
+	if(SPT_PROB(10, seconds_between_ticks))
 		H.emote(pick("gasp", "gag", "choke"))
 
 /obj/effect/temp_visual/curse
@@ -349,7 +349,6 @@
 	id = "trance"
 	status_type = STATUS_EFFECT_UNIQUE
 	duration = 300
-	tick_interval = 1 SECONDS
 	var/stun = TRUE
 	alert_type = /atom/movable/screen/alert/status_effect/trance
 
@@ -361,10 +360,10 @@
 /datum/status_effect/trance/get_examine_text()
 	return span_warning("They seem slow and unfocused.")
 
-/datum/status_effect/trance/tick()
+/datum/status_effect/trance/tick(seconds_between_ticks)
 	if(stun)
-		owner.Stun(6 SECONDS, TRUE)
-	owner.set_dizzy(20 SECONDS)
+		owner.Stun(6 SECONDS * seconds_between_ticks, TRUE)
+	owner.set_dizzy(20 SECONDS * seconds_between_ticks)
 
 /datum/status_effect/trance/on_apply()
 	. = ..()
@@ -405,56 +404,58 @@
 	status_type = STATUS_EFFECT_MULTIPLE
 	alert_type = null
 
-/datum/status_effect/spasms/tick()
-	if(prob(15))
-		switch(rand(1,5))
-			if(1)
-				if(!HAS_TRAIT(owner, TRAIT_IMMOBILIZED) && isturf(owner.loc))
-					to_chat(owner, "<span class='warning'>My leg spasms!</span>")
-					step(owner, pick(GLOB.cardinals))
-			if(2)
-				if(owner.incapacitated(IGNORE_GRAB))
-					return
-				var/obj/item/I = owner.get_active_held_item()
-				if(I)
-					to_chat(owner, "<span class='warning'>My fingers spasm!</span>")
-					owner.log_message("used [I] due to a Muscle Spasm", LOG_ATTACK)
-					I.attack_self(owner)
-			if(3)
-				var/prev_intent = owner.a_intent
-				owner.a_intent = INTENT_HARM
+/datum/status_effect/spasms/tick(seconds_between_ticks)
+	if(SPT_PROB(15, seconds_between_ticks))
+		return
 
-				var/range = 1
-				if(istype(owner.get_active_held_item(), /obj/item/gun)) //get targets to shoot at
-					range = 7
+	switch(rand(1,5))
+		if(1)
+			if(!HAS_TRAIT(owner, TRAIT_IMMOBILIZED) && isturf(owner.loc))
+				to_chat(owner, "<span class='warning'>My leg spasms!</span>")
+				step(owner, pick(GLOB.cardinals))
+		if(2)
+			if(owner.incapacitated(IGNORE_GRAB))
+				return
+			var/obj/item/I = owner.get_active_held_item()
+			if(I)
+				to_chat(owner, "<span class='warning'>My fingers spasm!</span>")
+				owner.log_message("used [I] due to a Muscle Spasm", LOG_ATTACK)
+				I.attack_self(owner)
+		if(3)
+			var/prev_intent = owner.a_intent
+			owner.a_intent = INTENT_HARM
 
-				var/list/mob/living/targets = list()
-				for(var/mob/M in oview(owner, range))
-					if(isliving(M))
-						targets += M
-				if(LAZYLEN(targets))
-					to_chat(owner, "<span class='warning'>My arm spasms!</span>")
-					owner.log_message(" attacked someone due to a Muscle Spasm", LOG_ATTACK) //the following attack will log itself
-					owner.ClickOn(pick(targets))
-				owner.a_intent = prev_intent
-			if(4)
-				var/prev_intent = owner.a_intent
-				owner.a_intent = INTENT_HARM
+			var/range = 1
+			if(istype(owner.get_active_held_item(), /obj/item/gun)) //get targets to shoot at
+				range = 7
+
+			var/list/mob/living/targets = list()
+			for(var/mob/M in oview(owner, range))
+				if(isliving(M))
+					targets += M
+			if(LAZYLEN(targets))
 				to_chat(owner, "<span class='warning'>My arm spasms!</span>")
-				owner.log_message("attacked [owner.p_them()]self to a Muscle Spasm", LOG_ATTACK)
-				owner.ClickOn(owner)
-				owner.a_intent = prev_intent
-			if(5)
-				if(owner.incapacitated(IGNORE_GRAB))
-					return
-				var/obj/item/I = owner.get_active_held_item()
-				var/list/turf/targets = list()
-				for(var/turf/T in oview(owner, 3))
-					targets += T
-				if(LAZYLEN(targets) && I)
-					to_chat(owner, "<span class='warning'>My arm spasms!</span>")
-					owner.log_message("threw [I] due to a Muscle Spasm", LOG_ATTACK)
-					owner.throw_item(pick(targets))
+				owner.log_message(" attacked someone due to a Muscle Spasm", LOG_ATTACK) //the following attack will log itself
+				owner.ClickOn(pick(targets))
+			owner.a_intent = prev_intent
+		if(4)
+			var/prev_intent = owner.a_intent
+			owner.a_intent = INTENT_HARM
+			to_chat(owner, "<span class='warning'>My arm spasms!</span>")
+			owner.log_message("attacked [owner.p_them()]self to a Muscle Spasm", LOG_ATTACK)
+			owner.ClickOn(owner)
+			owner.a_intent = prev_intent
+		if(5)
+			if(owner.incapacitated(IGNORE_GRAB))
+				return
+			var/obj/item/I = owner.get_active_held_item()
+			var/list/turf/targets = list()
+			for(var/turf/T in oview(owner, 3))
+				targets += T
+			if(LAZYLEN(targets) && I)
+				to_chat(owner, "<span class='warning'>My arm spasms!</span>")
+				owner.log_message("threw [I] due to a Muscle Spasm", LOG_ATTACK)
+				owner.throw_item(pick(targets))
 
 /datum/status_effect/go_away
 	id = "go_away"
@@ -469,7 +470,7 @@
 	direction = pick(NORTH, SOUTH, EAST, WEST)
 	new_owner.setDir(direction)
 
-/datum/status_effect/go_away/tick()
+/datum/status_effect/go_away/tick(seconds_between_ticks)
 	owner.AdjustStun(1, ignore_canstun = TRUE)
 	var/turf/T = get_step(owner, direction)
 	owner.forceMove(T)
@@ -478,49 +479,6 @@
 	name = "TO THE STARS AND BEYOND!"
 	desc = ""
 	icon_state = "high"
-
-/datum/status_effect/fake_virus
-	id = "fake_virus"
-	duration = 1800//3 minutes
-	status_type = STATUS_EFFECT_REPLACE
-	tick_interval = 1
-	alert_type = null
-	var/msg_stage = 0//so you dont get the most intense messages immediately
-
-/datum/status_effect/fake_virus/tick()
-	var/fake_msg = ""
-	var/fake_emote = ""
-	switch(msg_stage)
-		if(0 to 300)
-			if(prob(1))
-				fake_msg = pick("<span class='warning'>[pick("Your head hurts.", "Your head pounds.")]</span>",
-				"<span class='warning'>[pick("You're having difficulty breathing.", "Your breathing becomes heavy.")]</span>",
-				"<span class='warning'>[pick("You feel dizzy.", "Your head spins.")]</span>",
-				"<span notice='warning'>[pick("You swallow excess mucus.", "You lightly cough.")]</span>",
-				"<span class='warning'>[pick("Your head hurts.", "Your mind blanks for a moment.")]</span>",
-				"<span class='warning'>[pick("Your throat hurts.", "You clear my throat.")]</span>")
-		if(301 to 600)
-			if(prob(2))
-				fake_msg = pick("<span class='warning'>[pick("Your head hurts a lot.", "Your head pounds incessantly.")]</span>",
-				"<span class='warning'>[pick("Your windpipe feels like a straw.", "Your breathing becomes tremendously difficult.")]</span>",
-				"<span class='warning'>I feel very [pick("dizzy","woozy","faint")].</span>",
-				"<span class='warning'>[pick("You hear a ringing in my ear.", "Your ears pop.")]</span>",
-				"<span class='warning'>I nod off for a moment.</span>")
-		else
-			if(prob(3))
-				if(prob(50))// coin flip to throw a message or an emote
-					fake_msg = pick("<span class='danger'>[pick("Your head hurts!", "You feel a burning knife inside my brain!", "A wave of pain fills my head!")]</span>",
-					"<span class='danger'>[pick("Your lungs hurt!", "It hurts to breathe!")]</span>",
-					"<span class='warning'>[pick("You feel nauseated.", "You feel like you're going to throw up!")]</span>")
-				else
-					fake_emote = pick("cough", "sniff", "sneeze")
-
-	if(fake_emote)
-		owner.emote(fake_emote)
-	else if(fake_msg)
-		to_chat(owner, fake_msg)
-
-	msg_stage++
 
 /// Prevent clicks for the "duration" of the status
 /datum/status_effect/debuff/clickcd

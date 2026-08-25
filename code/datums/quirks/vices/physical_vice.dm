@@ -25,9 +25,10 @@
 		owner.remove_status_effect(/datum/status_effect/debuff/badvision)
 	. = ..()
 
-/datum/quirk/vice/bad_sight/on_life(mob/living/user)
+/datum/quirk/vice/bad_sight/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
 		return
+
 	if(user.is_nearsighted_currently())
 		user.apply_status_effect(/datum/status_effect/debuff/badvision)
 
@@ -360,7 +361,7 @@
 	START_PROCESSING(SSobj, src)
 	return ..()
 
-/datum/quirk/vice/nightmares/process()
+/datum/quirk/vice/nightmares/process(seconds_per_tick)
 	if(!owner)
 		return
 	if(owner.stat == UNCONSCIOUS && owner.IsSleeping())
@@ -396,7 +397,7 @@
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Scared of the Dark..."))
 
-/datum/quirk/vice/fear_darkness/on_life(mob/living/user)
+/datum/quirk/vice/fear_darkness/on_life(mob/living/user, seconds_per_tick)
 	if(!owner)
 		return
 

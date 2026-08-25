@@ -777,7 +777,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	if(loc && !HAS_TRAIT(loc, TRAIT_CATCH_AND_RELEASE))
 		time_passed_on_safe_turf = 0 SECONDS
 		return
-	time_passed_on_safe_turf += seconds_per_tick SECONDS
+	time_passed_on_safe_turf += SPT_TO_DECISECONDS(seconds_per_tick)
 	if(time_passed_on_safe_turf >= (get_starvation_mult() ? STARVING_FISH_SUBMERGING_THRESHOLD : FISH_SUBMERGING_THRESHOLD))
 		visible_message(span_notice("[src] disperses into \the [loc]"), span_notice("You hear a splash."))
 		released(loc)
@@ -785,8 +785,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 /obj/item/reagent_containers/food/snacks/fish/proc/do_fish_process(seconds_per_tick)
 	//safe mode, don't do much except a few things that don't involve growing or reproducing.
 	if(loc)
-		last_feeding += seconds_per_tick SECONDS
-		breeding_wait += seconds_per_tick SECONDS
+		last_feeding += SPT_TO_DECISECONDS(seconds_per_tick)
+		breeding_wait += SPT_TO_DECISECONDS(seconds_per_tick)
 	else
 		process_health(seconds_per_tick)
 

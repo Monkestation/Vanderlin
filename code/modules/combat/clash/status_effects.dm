@@ -68,7 +68,7 @@
 
 	owner.apply_status_effect(/datum/status_effect/debuff/clashcd)
 
-/datum/status_effect/buff/clash/tick()
+/datum/status_effect/buff/clash/tick(seconds_between_ticks)
 	if(QDELETED(src))
 		return
 

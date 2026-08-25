@@ -229,45 +229,51 @@ All foods are distributed among various categories. Use common sense.
 /obj/item/reagent_containers/food/snacks/proc/begin_rotting()
 	START_PROCESSING(SSobj, src)
 
-/obj/item/reagent_containers/food/snacks/process()
-	..()
+/obj/item/reagent_containers/food/snacks/process(seconds_per_tick)
 	if(QDELETED(src))
 		return PROCESS_KILL
-	if(rotprocess && !HAS_TRAIT(src, TRAIT_NO_ROT))
-		var/turf/open/T = get_turf(src)
-		var/temp_modifier = 1.0
-		var/turf_temp = T?.return_temperature()
 
-		var/obj/structure/closet/dirthole/dirtgrave = recursive_loc_check(src, /obj/structure/closet/dirthole)
-		var/obj/structure/closet/crate/chest/chest = recursive_loc_check(src, /obj/structure/closet/crate/chest)
-		if(dirtgrave && chest && !dirtgrave.opened && !chest.opened)
-			var/temp_mod = T.temperature_modification
-			var/amb_temp = turf_temp - temp_mod
-			amb_temp = 11 + CEILING(amb_temp * 0.1, 1) // chests in graves act as cellars
-			turf_temp = amb_temp + temp_mod
+	if(!rotprocess || HAS_TRAIT(src, TRAIT_NO_ROT))
+		return
 
-		if(turf_temp)
-			if(turf_temp > 20)
-				// Each 10 degrees above room temp increases rot rate by 20%
-				temp_modifier = 1.0 + ((turf_temp - 20) / 10) * 0.2
-				temp_modifier = min(temp_modifier, 3.0) // Cap at 3x speed
-			else
-				// Each 3 degrees below room temp decreases rot rate by 20%
-				temp_modifier = max(0.2, 1.0 - ((20 -turf_temp) / 3) * 0.2)
-				// Minimum 0.2x speed (cold slows but doesn't completely stop rot)
+	if(istype(loc, /obj/item/storage/backpack/backpack/artibackpack))
+		return // Awful should use flags
 
-		var/turf/location = get_turf(src)
-		var/obj/structure/fake_machine/vendor = locate(/obj/structure/fake_machine/vendor) in location
-		if(!istype(loc, /obj/item/storage/backpack/backpack/artibackpack))
-			var/obj/structure/table/located = locate(/obj/structure/table) in location
-			if(located || vendor || chest)
-				warming -= 4 * temp_modifier
-			else
-				warming -= 20 * temp_modifier //ssobj processing has a wait of 20
-			if(warming < (-1*rotprocess))
-				if(become_rotten())
-					STOP_PROCESSING(SSobj, src)
-					return PROCESS_KILL
+	var/turf/location = get_turf(src)
+
+	var/area/A = get_area(location)
+	if(istype(A, /area/indoors/town/vault))
+		return
+
+	var/temp_modifier = 1.0
+	var/turf_temp = location?.return_temperature()
+
+	var/obj/structure/closet/dirthole/dirtgrave = recursive_loc_check(src, /obj/structure/closet/dirthole)
+	var/obj/structure/closet/crate/chest/chest = recursive_loc_check(src, /obj/structure/closet/crate/chest)
+	if(dirtgrave && chest && !dirtgrave.opened && !chest.opened)
+		var/temp_mod = location.temperature_modification
+		var/amb_temp = turf_temp - temp_mod
+		amb_temp = 11 + CEILING(amb_temp * 0.1, 1) // chests in graves act as cellars
+		turf_temp = amb_temp + temp_mod
+
+	if(turf_temp)
+		if(turf_temp > 20)
+			// Each 10 degrees above room temp increases rot rate by 20%
+			temp_modifier = 1.0 + ((turf_temp - 20) / 10) * 0.2
+			temp_modifier = min(temp_modifier, 3.0) // Cap at 3x speed
+		else
+			// Each 3 degrees below room temp decreases rot rate by 20%
+			temp_modifier = max(0.2, 1.0 - ((20 -turf_temp) / 3) * 0.2)
+			// Minimum 0.2x speed (cold slows but doesn't completely stop rot)
+
+	if((locate(/obj/structure/table) in location) || istype(loc, /obj/structure/fake_machine) || chest)
+		warming -= SPT_TO_DECISECONDS(seconds_per_tick) * 0.2 * temp_modifier
+	else
+		warming -= SPT_TO_DECISECONDS(seconds_per_tick) * temp_modifier
+
+	if((rotprocess - warming) <= 0)
+		if(become_rotten())
+			return PROCESS_KILL
 
 /obj/item/reagent_containers/food/snacks/proc/become_rotten()
 	if(QDELETED(src))

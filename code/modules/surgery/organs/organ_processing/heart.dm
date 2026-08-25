@@ -4,19 +4,21 @@
 	var/static/sound/slowbeat = sound('sound/heart/slowbeat.ogg', volume = 20, channel = CHANNEL_HEARTBEAT, repeat = TRUE)
 	var/static/sound/fastbeat = sound('sound/heart/fastbeat.ogg', volume = 10, channel = CHANNEL_HEARTBEAT, repeat = TRUE)
 
-/datum/organ_process/heart/handle_process(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/handle_process(mob/living/carbon/owner, seconds_per_tick)
 	var/return_val = NONE
+
 	if(owner.needs_heart())
-		handle_heart_failure(owner, delta_time, times_fired)
-		handle_pulse(owner, delta_time, times_fired)
+		handle_heart_failure(owner, seconds_per_tick)
+		handle_pulse(owner, seconds_per_tick)
 		if(owner.pulse)
-			handle_heartbeat(owner, delta_time, times_fired)
-	return_val |= handle_blood(owner, delta_time, times_fired)
+			handle_heartbeat(owner, seconds_per_tick)
+	return_val |= handle_blood(owner, seconds_per_tick)
+
 	return return_val
 
 /// Handles the failure messaging and cardiac arrest flagging for a failing heart.
 /// Separated from handle_pulse so the logic is readable and the failed flag is managed cleanly.
-/datum/organ_process/heart/proc/handle_heart_failure(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/proc/handle_heart_failure(mob/living/carbon/owner, seconds_per_tick)
 	for(var/obj/item/organ/heart/heart as anything in owner.getorganslotlist(ORGAN_SLOT_HEART))
 		if(!istype(heart))
 			continue
@@ -29,7 +31,7 @@
 			playsound(owner, heart.convulsion_sound, 95, FALSE)
 			heart.failed = TRUE
 
-/datum/organ_process/heart/proc/handle_pulse(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/proc/handle_pulse(mob/living/carbon/owner, seconds_per_tick)
 	// Pulse mod starts out as just the chemical effect amount
 	// Your heart will fail and stop beating if it runs out of current_blood. Pumping heart resets current_blood and heart beating.
 	var/heart_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_HEART)
@@ -39,7 +41,7 @@
 	// If you have enough heart pulse chemicals to be over 2, you're likely to take extra damage.
 	if(pulse_mod > 2 && !is_stable)
 		var/damage_chance = (pulse_mod - 2) ** 2
-		if(DT_PROB(damage_chance / 2, delta_time))
+		if(SPT_PROB(damage_chance / 2, seconds_per_tick))
 			owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
 
 	// Now pulse mod is impacted by shock stage and other things too
@@ -85,19 +87,19 @@
 			owner.pulse++
 
 	// High pulse can cause heart damage
-	if(owner.pulse >= PULSE_THREADY && DT_PROB(2.5, delta_time))
+	if(owner.pulse >= PULSE_THREADY && SPT_PROB(2.5, seconds_per_tick))
 		owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
-	else if(owner.pulse >= PULSE_FASTER && DT_PROB(0.5, delta_time))
+	else if(owner.pulse >= PULSE_FASTER && SPT_PROB(0.5, seconds_per_tick))
 		owner.adjustOrganLoss(ORGAN_SLOT_HEART, 1)
 
 	// Finally, check if we should go into cardiac arrest
 	// cardiovascular shock, not enough liquid to pump
 	/*
-	var/should_stop = (owner.get_blood_circulation() < GET_EFFECTIVE_BLOOD_VOL(BLOOD_VOLUME_SURVIVE, owner.total_blood_req)) && DT_PROB(40, delta_time)
+	var/should_stop = (owner.get_blood_circulation() < GET_EFFECTIVE_BLOOD_VOL(BLOOD_VOLUME_SURVIVE, owner.total_blood_req)) && SPT_PROB(40, seconds_per_tick)
 	// brain failing to work heart properly
-	should_stop = should_stop || DT_PROB(CEILING(max(0, GETBRAINLOSS(owner) - (owner.maxHealth * 0.5)) / 2, 1), delta_time)
+	should_stop = should_stop || SPT_PROB(CEILING(max(0, GETBRAINLOSS(owner) - (owner.maxHealth * 0.5)) / 2, 1), seconds_per_tick)
 	// erratic heart patterns, usually caused by oxyloss
-	should_stop = should_stop || ((owner.pulse >= PULSE_THREADY) && DT_PROB(6, delta_time))
+	should_stop = should_stop || ((owner.pulse >= PULSE_THREADY) && SPT_PROB(6, seconds_per_tick))
 
 	// One heart has stopped due to going into traumatic or cardiovascular shock
 	if(should_stop)
@@ -115,7 +117,7 @@
 	else
 		REMOVE_TRAIT(owner, TRAIT_DEATHS_DOOR, ASYSTOLE_TRAIT)
 
-/datum/organ_process/heart/proc/handle_blood(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/proc/handle_blood(mob/living/carbon/owner, seconds_per_tick)
 	// Dead or pulseless people do not pump blood
 	if(!owner.pulse)
 		return
@@ -124,7 +126,7 @@
 	switch(effective_blood_circulation)
 		if(BLOOD_VOLUME_EXCESS to BLOOD_VOLUME_MAXIMUM)
 			owner.status_flags &= ~BLEEDOUT
-			if(DT_PROB(2.5, delta_time))
+			if(SPT_PROB(2.5, seconds_per_tick))
 				to_chat(owner, span_userdanger("Blood starts to tear my arteries apart!"))
 				var/obj/item/bodypart/artery_popper = pick(owner.bodyparts)
 				if(!artery_popper.is_artery_torn())
@@ -133,7 +135,7 @@
 			if(!(owner.status_flags & BLEEDOUT))
 				owner.status_flags |= BLEEDOUT
 				to_chat(owner, span_userdanger("My organs feel outrageously heavy!"))
-			else if(DT_PROB(2.5, delta_time))
+			else if(SPT_PROB(2.5, seconds_per_tick))
 				to_chat(owner, span_userdanger("Not... Enough... Blood..."))
 		else
 			owner.status_flags &= ~BLEEDOUT
@@ -141,7 +143,7 @@
 	var/temp_bleed = 0
 	var/bleed_mod = 1
 	for(var/obj/item/bodypart/bleed_part as anything in owner.bodyparts)
-		var/true_bleed = bleed_part.get_bleed_rate() * delta_time
+		var/true_bleed = bleed_part.get_bleed_rate() * seconds_per_tick
 		switch(owner.pulse)
 			if(PULSE_SLOW)
 				true_bleed *= 0.8
@@ -154,7 +156,8 @@
 		true_bleed = CEILING(true_bleed * bleed_mod, 0.1)
 		temp_bleed += true_bleed
 		if(bleed_part.bandage)
-			bleed_part.try_bandage_expire()
+			bleed_part.try_bandage_expire(seconds_per_tick)
+
 	if(temp_bleed > 0)
 		if(owner.bleed(temp_bleed, FALSE) && temp_bleed >= BLEED_RATE_NOTICABLE && owner.body_position == STANDING_UP)
 			var/bleed_sound = "sound/gore/blood[rand(1, 6)].ogg"
@@ -190,7 +193,7 @@
 	else
 		owner.remove_stress(/datum/stress_event/bleeding)
 
-/datum/organ_process/heart/proc/handle_heartbeat(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/heart/proc/handle_heartbeat(mob/living/carbon/owner, seconds_per_tick)
 	// Beyond deals with sound effects, so nothing needs to be done if no client
 	if(isnull(owner.client))
 		return

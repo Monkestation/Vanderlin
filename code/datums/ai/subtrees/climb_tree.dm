@@ -1,6 +1,6 @@
 /datum/ai_planning_subtree/tree_climb
 
-/datum/ai_planning_subtree/tree_climb/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/tree_climb/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
@@ -26,7 +26,7 @@
 	action_cooldown = 1 SECONDS
 	behavior_flags = AI_BEHAVIOR_REQUIRE_MOVEMENT
 
-/datum/ai_behavior/human_npc_climb_tree/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/human_npc_climb_tree/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/atom/target = controller.blackboard[target_key]
 	if(!target)

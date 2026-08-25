@@ -29,13 +29,13 @@
 	AddComponent( \
 		/datum/component/aura_healing, \
 		range = 7, \
-		brute_heal = 1.4, \
-		burn_heal = 1.4, \
-		toxin_heal = 1.4, \
-		suffocation_heal = 1.4, \
-		stamina_heal = 1.4, \
-		clone_heal = 0.4, \
-		simple_heal = 1.4, \
+		brute_heal = 0.7, \
+		burn_heal = 0.7, \
+		toxin_heal = 0.7, \
+		suffocation_heal = 0.7, \
+		stamina_heal = 0.7, \
+		clone_heal = 0.2, \
+		simple_heal = 0.7, \
 		organ_healing = TRUE, \
 		healing_color = "#375637", \
 	)

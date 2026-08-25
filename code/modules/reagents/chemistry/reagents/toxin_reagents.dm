@@ -11,10 +11,11 @@
 	var/toxpwr = 1.5
 	var/silent_toxin = FALSE //won't produce a pain message when processed by liver/life() if there isn't another non-silent toxin present.
 
-/datum/reagent/toxin/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/toxin/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	if(toxpwr)
-		M.adjustToxLoss(toxpwr*REM * efficiency, 0)
-	return ..()
+		M.adjustToxLoss(toxpwr * REAGENTS_MODIFIER * 0.2, 0)
 
 /datum/reagent/toxin/amatoxin
 	name = "Amatoxin"
@@ -64,15 +65,17 @@
 	metabolization_rate = 1 * REAGENTS_METABOLISM
 	alpha = 225
 
-/datum/reagent/medicine/soporpot/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjust_confusion(2 SECONDS * efficiency)
-	M.adjust_dizzy(2 SECONDS * efficiency)
-	M.adjust_energy(-25 * efficiency)
+/datum/reagent/medicine/soporpot/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjust_confusion(0.4 SECONDS * REAGENTS_MODIFIER)
+	M.adjust_dizzy(0.4 SECONDS * REAGENTS_MODIFIER)
+	M.adjust_energy(-5 * REAGENTS_MODIFIER)
+
 	if(M.stamina > 75)
-		M.adjust_drowsiness(4 SECONDS * efficiency)
+		M.adjust_drowsiness(0.8 SECONDS * REAGENTS_MODIFIER)
 	else
-		M.adjust_stamina(15 * efficiency)
-	..()
+		M.adjust_stamina(3 * REAGENTS_MODIFIER)
 
 /datum/reagent/toxin/venom
 	name = "Venom"
@@ -82,10 +85,9 @@
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
 	toxpwr = 0
 
-/datum/reagent/toxin/venom/on_mob_life(mob/living/carbon/M, efficiency)
-	toxpwr = 0.2*volume * efficiency
-	. = 1
-	..()
+/datum/reagent/toxin/venom/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	toxpwr = 0.04 * volume * REAGENTS_MODIFIER
+	return ..()
 
 /datum/reagent/toxin/fentanyl
 	name = "Fentanyl"
@@ -96,15 +98,20 @@
 	toxpwr = 0
 	price_per_unit = 3
 
-/datum/reagent/toxin/fentanyl/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3*REM * efficiency, 150)
+/datum/reagent/toxin/fentanyl/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1.5 * REAGENTS_MODIFIER, 150)
+
 	if(M.toxloss <= 60)
-		M.adjustToxLoss(1*REM * efficiency, 0)
+		M.adjustToxLoss(0.5 * REAGENTS_MODIFIER, 0)
+
 	if(current_cycle >= 4)
 		M.add_stress(/datum/stress_event/narcotic_heavy)
+
 	if(current_cycle >= 18)
-		M.Sleeping(40 * efficiency, 0)
-	..()
+		M.Sleeping(0.8 SECONDS * REAGENTS_MODIFIER, 0)
+
 	return TRUE
 
 /datum/reagent/toxin/killersice
@@ -115,11 +122,13 @@
 	metabolization_rate = 0.01
 	toxpwr = 0
 
-/datum/reagent/toxin/killersice/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/toxin/killersice/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	//testing("Someone was poisoned") // This is too gold to remove
 	if(volume > 0.95)
-		M.adjustToxLoss(10 * efficiency, 0)
-	return ..()
+		M.adjustToxLoss(2 * REAGENTS_MODIFIER)
+		return TRUE
 
 /datum/reagent/toxin/bad_food
 	name = "Bad Food"
@@ -202,11 +211,12 @@
 
 	L.mana_pool.halt_mana_disperse("manabloom")
 
-/datum/reagent/toxin/manabloom_juice/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/toxin/manabloom_juice/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 	if(!M.mana_pool)
 		return
-	M.mana_pool.adjust_mana(volume * efficiency)
+
+	M.mana_pool.adjust_mana(volume * REAGENTS_MODIFIER * 0.2)
 
 /datum/reagent/toxin/manabloom_juice/on_mob_end_metabolize(mob/living/L)
 	. = ..()
@@ -214,7 +224,6 @@
 		return
 
 	L.mana_pool.restore_mana_disperse("manabloom")
-
 
 /datum/reagent/toxin/spidervenom_paralytic
 	name = "Aragn Essence"
@@ -242,15 +251,13 @@
 		venom_resistance = 0
 		venom_resistance += (GET_MOB_ATTRIBUTE_VALUE(L, STAT_FORTUNE) * 5)
 
-/datum/reagent/toxin/spidervenom_paralytic/on_mob_end_metabolize(mob/living/L)
-	..()
+/datum/reagent/toxin/spidervenom_paralytic/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+	if(!(current_cycle % 5) && !(SPT_PROB(venom_resistance / 10, seconds_per_tick)))
+		M.Paralyze(1 SECONDS * REAGENTS_MODIFIER)
 
-/datum/reagent/toxin/spidervenom_paralytic/on_mob_life(mob/living/carbon/M, efficiency)
-	..()
-	if(!(current_cycle % 5) && !(prob(venom_resistance / 5)))
-		M.Paralyze(50 * efficiency)
-	if(current_cycle >= 60 && !(current_cycle % 5) && prob(venom_resistance))
-		M.reagents.remove_reagent(/datum/reagent/toxin/spidervenom_paralytic, 100)
+	if(current_cycle >= 60 && !(current_cycle % 5) && SPT_PROB(venom_resistance / 2, seconds_per_tick))
+		M.reagents.remove_reagent(type, volume)
 
 /datum/reagent/toxin/spidervenom_inert
 	name = "Inert Aragn Essence"
@@ -279,12 +286,13 @@
 	harmful = TRUE
 	metabolization_rate = 0.4 * REAGENTS_METABOLISM
 
-/datum/reagent/poison/mirelung_brew/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustOxyLoss(4 * efficiency, 0)
-	M.adjustToxLoss(1 * REM * efficiency, 0)
-	if(current_cycle > 6)
-		M.adjust_dizzy(3 SECONDS * efficiency)
+/datum/reagent/poison/mirelung_brew/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustOxyLoss(0.8 * REAGENTS_MODIFIER)
+	M.adjustToxLoss(0.5 * REAGENTS_MODIFIER)
+	if(current_cycle > 6)
+		M.adjust_dizzy(0.6 SECONDS * REAGENTS_MODIFIER)
 
 /datum/reagent/poison/heatcramp_oil
 	name = "Heatcramp Oil"
@@ -301,12 +309,14 @@
 	if(methods & TOUCH)
 		exposed_mob.set_jitter(10 SECONDS)
 
-/datum/reagent/poison/heatcramp_oil/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjust_jitter(4 SECONDS * efficiency)
-	if(!HAS_TRAIT(M, TRAIT_NOSTAMINA))
-		M.adjust_stamina(3 * efficiency)
-	M.adjustToxLoss(0.75 * REM * efficiency, 0)
+/datum/reagent/poison/heatcramp_oil/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjust_jitter(0.8 SECONDS * REAGENTS_MODIFIER)
+	M.adjust_stamina(0.6 * REAGENTS_MODIFIER)
+	M.adjustToxLoss(0.375 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/poison/blinding_spore
 	name = "Blinding Spore"
@@ -326,11 +336,14 @@
 			if(show_message)
 				exposed_mob.visible_message(span_danger("[exposed_mob] staggers, clutching at their eyes!"), span_userdanger("Your eyes burn and your vision whites out!"))
 
-/datum/reagent/poison/blinding_spore/on_mob_life(mob/living/carbon/M, efficiency)
-	M.set_eye_blur_if_lower(4 * efficiency)
-	M.adjust_dizzy(2 SECONDS * efficiency)
-	M.adjustToxLoss(0.5 * REM * efficiency, 0)
+/datum/reagent/poison/blinding_spore/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.set_eye_blur_if_lower(0.4 SECONDS)
+	M.adjust_dizzy(0.4 SECONDS * REAGENTS_MODIFIER)
+	M.adjustToxLoss(0.25 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/poison/soulbane_ichor
 	name = "Soulbane Ichor"
@@ -352,12 +365,15 @@
 	L.remove_chem_effect(CE_PULSE, "[type]")
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
-/datum/reagent/poison/soulbane_ichor/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustBruteLoss(2 * REM * efficiency, 0)
-	M.adjustFireLoss(2 * REM * efficiency, 0)
-	M.adjustToxLoss(3 * REM * efficiency, 0)
-	M.adjustOxyLoss(1.5 * efficiency, 0)
+/datum/reagent/poison/soulbane_ichor/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustBruteLoss(1 * REAGENTS_MODIFIER, 0)
+	M.adjustFireLoss(1 * REAGENTS_MODIFIER, 0)
+	M.adjustToxLoss(1.5 * REAGENTS_MODIFIER, 0)
+	M.adjustOxyLoss(0.3 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/poison/ironblight
 	name = "Ironblight"
@@ -379,10 +395,13 @@
 				continue
 			clothes.take_damage(reac_volume * 0.25)
 
-/datum/reagent/poison/ironblight/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustBruteLoss(1.5 * REM * efficiency, 0)
-	M.adjustToxLoss(1 * REM * efficiency, 0)
+/datum/reagent/poison/ironblight/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustBruteLoss(0.3 * REAGENTS_MODIFIER)
+	M.adjustToxLoss(0.5 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/poison/quietdeath
 	name = "Quietdeath"
@@ -395,13 +414,14 @@
 	metabolization_rate = 0.1 * REAGENTS_METABOLISM
 	boiling_point = T0C + 100
 
-/datum/reagent/poison/quietdeath/on_mob_life(mob/living/carbon/M, efficiency)
-	// Silent until it detonates
-	if(current_cycle < 20)
-		return .()
-	M.adjustToxLoss(current_cycle * 0.3 * REM * efficiency, 0)
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1 * REM * efficiency, 150)
+/datum/reagent/poison/quietdeath/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	if(current_cycle < 20)
+		return
+
+	M.adjustToxLoss(current_cycle * 0.15 * REAGENTS_MODIFIER, 0)
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.5 * REAGENTS_MODIFIER, 150)
 
 /datum/reagent/poison/quietdeath/on_mob_delete(mob/living/M)
 	if(current_cycle >= 10)
@@ -426,14 +446,17 @@
 		if(show_message)
 			exposed_mob.visible_message(span_danger("[exposed_mob] writhes as the silvery liquid disrupts their form!"), span_userdanger("The liquid tears at your very existence!"))
 
-/datum/reagent/poison/mirrorwaste/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/poison/mirrorwaste/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	if(M.mob_biotypes & MOB_UNDEAD)
-		M.adjustBruteLoss(4 * REM * efficiency, 0)
-		M.adjustToxLoss(3 * REM * efficiency, 0)
+		M.adjustBruteLoss(2 * REAGENTS_MODIFIER)
+		M.adjustToxLoss(1.5 * REAGENTS_MODIFIER)
 	else
 		// Minor toxic reaction in normal creatures
-		M.adjustToxLoss(0.5 * REM * efficiency, 0)
-	. = ..()
+		M.adjustToxLoss(0.25 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/poison/hexblood_poison
 	name = "Hexblood Poison"
@@ -511,13 +534,18 @@
 					continue
 				injury.adjust_germ_level(reac_volume * 4)
 
-/datum/reagent/poison/rotwater/on_mob_life(mob/living/carbon/M, efficiency)
-	var/compound_rate = min(0.5 + (current_cycle * 0.15), 4)
-	M.adjustToxLoss(compound_rate * REM * efficiency, 0)
-	M.add_nausea(1 * efficiency)
+/datum/reagent/poison/rotwater/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	var/compound_rate = min(0.5 + (current_cycle * 0.08), 4)
+
+	M.adjustToxLoss(compound_rate * REAGENTS_MODIFIER, 0)
+	M.add_nausea(0.2 * REAGENTS_MODIFIER)
+
 	if(current_cycle > 8)
 		M.add_chem_effect(CE_ANTIBIOTIC, -5, "[type]")
-	. = ..()
+
+	return TRUE
 
 /datum/reagent/poison/gloomvenom
 	name = "Gloomvenom"
@@ -530,14 +558,19 @@
 	metabolization_rate = 0.3 * REAGENTS_METABOLISM
 	boiling_point = T0C + 110
 
-/datum/reagent/poison/gloomvenom/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjust_confusion(4 SECONDS * efficiency)
-	M.adjust_dizzy(3 SECONDS * efficiency)
-	if(current_cycle > 5)
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 1.5 * REM * efficiency, 150)
-	if(current_cycle > 10)
-		M.adjustToxLoss(1.5 * REM * efficiency, 0)
+/datum/reagent/poison/gloomvenom/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjust_confusion(0.8 SECONDS * REAGENTS_MODIFIER)
+	M.adjust_dizzy(0.6 SECONDS * REAGENTS_MODIFIER)
+
+	if(current_cycle > 5)
+		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.75 * REAGENTS_MODIFIER, 150)
+
+	if(current_cycle > 10)
+		M.adjustToxLoss(0.75 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/poison/ashfall_dust
 	name = "Ashfall Dust"
@@ -554,9 +587,12 @@
 		exposed_mob.adjust_fire_stacks(reac_volume * 0.5)
 		exposed_mob.adjustFireLoss(reac_volume, 0)
 
-/datum/reagent/poison/ashfall_dust/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustFireLoss(2 * REM * efficiency, 0)
+/datum/reagent/poison/ashfall_dust/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustFireLoss(1 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/poison/blistergall
 	name = "Blistergall"
@@ -574,7 +610,8 @@
 		if(show_message)
 			exposed_mob.visible_message(span_danger("[exposed_mob]'s skin erupts in blistering welts!"), span_userdanger("Your skin erupts in boiling blisters!"))
 
-/datum/reagent/poison/blistergall/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustFireLoss(3 * REM * efficiency, 0)
-	M.adjustToxLoss(2 * REM * efficiency, 0)
+/datum/reagent/poison/blistergall/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustFireLoss(1.5 * REAGENTS_MODIFIER, 0)
+	M.adjustToxLoss(1 * REAGENTS_MODIFIER, 0)

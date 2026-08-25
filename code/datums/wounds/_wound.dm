@@ -46,7 +46,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 	/// How many "health points" this wound has, AKA how hard it is to heal
 	var/whp = 60
-	/// How much this wound bleeds. Remember this is multiplied by delta_time
+	/// How much this wound bleeds. Remember this is multiplied by seconds_per_tick
 	var/bleed_rate = 0
 	/// Some wounds clot over time, reducing bleeding - This is the rate at which they do so
 	var/clotting_rate = 0.01
@@ -389,11 +389,13 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		affected.update_damage_overlays()
 
 /// Called on handle_wounds(), on the life() proc
-/datum/wound/proc/on_life()
+/datum/wound/proc/on_life(seconds_per_tick)
 	if(!isnull(clotting_threshold) && clotting_rate && (bleed_rate > clotting_threshold))
-		bleed_rate = max(clotting_threshold, bleed_rate - clotting_rate)
+		bleed_rate = max(clotting_threshold, bleed_rate - clotting_rate) * seconds_per_tick
+
 	if(passive_healing)
-		heal_wound(passive_healing)
+		heal_wound(passive_healing * seconds_per_tick)
+
 	return TRUE
 
 /// Called on handle_wounds(), on the life() proc

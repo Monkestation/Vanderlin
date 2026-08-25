@@ -10,24 +10,23 @@
 		return FALSE
 	return ..()
 
-/datum/organ_process/lungs/handle_process(mob/living/carbon/owner, delta_time, times_fired)
+/datum/organ_process/lungs/handle_process(mob/living/carbon/owner, seconds_per_tick)
 	var/next_breath = 4
 	if(owner.getorganslotefficiency(slot) <= failing_threshold)
 		next_breath--
 	if(owner.getorganslotefficiency(ORGAN_SLOT_HEART) <= failing_threshold)
 		next_breath--
 	var/owner_failed_breath = owner.failed_last_breath
-
-	if((times_fired % next_breath) == 0 || owner_failed_breath)
+	if((SSmobs.times_fired % next_breath) == 0 || owner_failed_breath)
 		// Breathe per 4 ticks if healthy, down to 2 if our lungs or heart are damaged, unless suffocating
-		breathe(owner, delta_time, times_fired, owner_failed_breath ? 1 : next_breath)
+		breathe(owner, seconds_per_tick, owner_failed_breath ? 1 : next_breath)
 	else if(isobj(owner.loc))
 		var/obj/location_as_object = owner.loc
 		location_as_object.handle_internal_lifeform(owner, 0)
 
 	return TRUE
 
-/datum/organ_process/lungs/proc/breathe(mob/living/carbon/owner, delta_time, times_fired, next_breath = 4)
+/datum/organ_process/lungs/proc/breathe(mob/living/carbon/owner, seconds_per_tick, next_breath = 4)
 	var/obj/item/organ/lungs/lungs
 	var/highest_efficiency = 0
 	for(var/obj/item/organ/lungs/possible_lung as anything in owner.getorganslotlist(slot))
@@ -35,16 +34,17 @@
 		if(possible_efficiency >= highest_efficiency)
 			lungs = possible_lung
 			highest_efficiency = possible_efficiency
+
 	if((owner.pulledby?.grab_state >= GRAB_KILL) || (lungs?.is_failing()))
 		owner.losebreath++  //You can't breath at all when being choked or if your lungs are failing, so you're going to miss a breath
 
-	var/pre_sig_return = SEND_SIGNAL(owner, COMSIG_CARBON_ATTEMPT_BREATHE, delta_time, times_fired)
+	var/pre_sig_return = SEND_SIGNAL(owner, COMSIG_CARBON_ATTEMPT_BREATHE, seconds_per_tick)
 	if(pre_sig_return & COMSIG_CARBON_BLOCK_BREATH)
 		return
 	if(pre_sig_return & BREATHE_SKIP_BREATH)
 		owner.losebreath = max(owner.losebreath, 1)
 
-	SEND_SIGNAL(owner, COMSIG_CARBON_PRE_BREATHE, delta_time)
+	SEND_SIGNAL(owner, COMSIG_CARBON_PRE_BREATHE, seconds_per_tick)
 
 	var/breath
 
@@ -55,14 +55,14 @@
 		skip_breath = TRUE
 		if(isobj(owner.loc))
 			var/obj/location_as_object = owner.loc
-			location_as_object.handle_internal_lifeform(owner, 0, delta_time)
+			location_as_object.handle_internal_lifeform(owner, 0, seconds_per_tick)
 	else
 		breath = TRUE
 		if(isobj(owner.loc))
 			var/obj/loc_as_obj = owner.loc
-			loc_as_obj.handle_internal_lifeform(owner, 1.99, delta_time)
+			loc_as_obj.handle_internal_lifeform(owner, 1.99, seconds_per_tick)
 
-	owner.check_breath(breath, skip_breath, delta_time)
+	owner.check_breath(breath, skip_breath, seconds_per_tick)
 
 /**
  * This proc tests if the lungs can breathe, if the mob can breathe a given gas mixture, and throws/clears gas alerts.
@@ -76,7 +76,7 @@
  * * skip_breath: Used to differentiate between a failed breath and a lack of breath.
  * A mob suffocating due to being in a vacuum may be treated differently than a mob suffocating due to lung failure.
  */
-/mob/living/carbon/proc/check_breath(breath, skip_breath = FALSE, delta_time)
+/mob/living/carbon/proc/check_breath(breath, skip_breath = FALSE, seconds_per_tick)
 	if(status_flags & GODMODE)
 		failed_last_breath = FALSE
 		return FALSE
@@ -85,22 +85,22 @@
 		return FALSE
 	return TRUE
 
-/mob/living/carbon/human/check_breath(breath, skip_breath = FALSE, delta_time)
+/mob/living/carbon/human/check_breath(breath, skip_breath = FALSE, seconds_per_tick)
 	. = ..()
 	if(!.)
 		return
 
 	var/obj/item/organ/lungs/human_lungs = getorganslot(ORGAN_SLOT_LUNGS)
 	if(human_lungs)
-		return human_lungs.check_breath(breath, src, skip_breath, delta_time)
+		return human_lungs.check_breath(breath, src, skip_breath, seconds_per_tick)
 
 	// Lungs are missing! Can't breathe.
 	// Extra damage, let God sort ’em out!
-	adjustOxyLoss((total_oxygen_req / 10) * delta_time)
+	adjustOxyLoss((total_oxygen_req / 10) * seconds_per_tick)
 	failed_last_breath = TRUE
 	return FALSE
 
-/obj/item/organ/lungs/proc/check_breath(breath, mob/living/carbon/human/breather, skip_breath, delta_time)
+/obj/item/organ/lungs/proc/check_breath(breath, mob/living/carbon/human/breather, skip_breath, seconds_per_tick)
 	. = TRUE
 	if(breather.status_flags & GODMODE)
 		breather.failed_last_breath = FALSE
@@ -122,12 +122,12 @@
 		. = FALSE // Returning FALSE indicates the breath failed.
 		breather.failed_last_breath = TRUE
 
-	breathe_air(breather, breath, delta_time)
-	breathe_pollution(breather, breath, delta_time)
+	breathe_air(breather, breath, seconds_per_tick)
+	breathe_pollution(breather, breath, seconds_per_tick)
 
-/obj/item/organ/lungs/proc/breathe_air(mob/living/carbon/breather, breath, delta_time)
+/obj/item/organ/lungs/proc/breathe_air(mob/living/carbon/breather, breath, seconds_per_tick)
 	if(!breath)
-		return handle_suffocation(breather, delta_time)
+		return handle_suffocation(breather, seconds_per_tick)
 
 	if(breather.getOxyLoss())
 		var/lung_efficiency = get_slot_efficiency(ORGAN_SLOT_LUNGS)/ORGAN_OPTIMAL_EFFICIENCY
@@ -137,9 +137,9 @@
 			blood_modifier = breather.get_blood_volume() / BLOOD_VOLUME_NORMAL
 
 		var/oxygen_req_modifier = clamp(30/max(breather.total_oxygen_req, 1), 0.5, 1.5)
-		breather.adjustOxyLoss(-5 * blood_modifier * lung_efficiency * oxygen_req_modifier * delta_time)
+		breather.adjustOxyLoss(-5 * blood_modifier * lung_efficiency * oxygen_req_modifier * seconds_per_tick)
 
-/obj/item/organ/lungs/proc/breathe_pollution(mob/living/carbon/breather, breath, delta_time)
+/obj/item/organ/lungs/proc/breathe_pollution(mob/living/carbon/breather, breath, seconds_per_tick)
 	if(!breath)
 		return
 
@@ -156,16 +156,20 @@
 		breather.next_smell = world.time + 30 SECONDS
 		breather_loc.pollution.smell_act(breather)
 
-/obj/item/organ/lungs/proc/handle_suffocation(mob/living/carbon/human/suffocator = null, delta_time)
+/obj/item/organ/lungs/proc/handle_suffocation(mob/living/carbon/human/suffocator = null, seconds_per_tick)
 	// Can't suffocate without a Human, or without minimum breath pressure.
 	if(!suffocator)
 		return
+
 	// Mob is suffocating.
 	suffocator.failed_last_breath = TRUE
+
 	// Give them a chance to notice something is wrong.
-	if(DT_PROB(5, delta_time))
+	if(SPT_PROB(5, seconds_per_tick))
 		suffocator.emote("gasp")
-	suffocator.adjustOxyLoss((suffocator.total_oxygen_req / 10) * delta_time, FALSE)
+
+	suffocator.adjustOxyLoss((suffocator.total_oxygen_req / 10) * seconds_per_tick, FALSE)
+
 	return ORGAN_PROCESS_UPDATE_HEALTH
 
 /obj/item/organ/lungs/proc/handle_breath_temperature(breath, mob/living/carbon/human/breather)
@@ -238,14 +242,14 @@
 
 	QDEL_IN(holder, breath_particle.lifespan)
 
-/obj/proc/handle_internal_lifeform(mob/living/lifeform_inside_me, breath_request, delta_time)
+/obj/proc/handle_internal_lifeform(mob/living/lifeform_inside_me, breath_request, seconds_per_tick)
 	return
 
-/obj/structure/closet/dirthole/handle_internal_lifeform(mob/living/lifeform_inside_me, breath_request, delta_time)
+/obj/structure/closet/dirthole/handle_internal_lifeform(mob/living/lifeform_inside_me, breath_request, seconds_per_tick)
 	var/suffocation_damage = 5 * (breath_request ? 2 : 1)
-	return lifeform_inside_me.adjustOxyLoss(suffocation_damage * delta_time)
+	return lifeform_inside_me.adjustOxyLoss(suffocation_damage * seconds_per_tick)
 
-/obj/structure/closet/burial_shroud/handle_internal_lifeform(mob/living/lifeform_inside_me, breath_request, delta_time)
+/obj/structure/closet/burial_shroud/handle_internal_lifeform(mob/living/lifeform_inside_me, breath_request, seconds_per_tick)
 	if(recursive_loc_check(lifeform_inside_me, /obj/structure/closet/dirthole))
 		var/suffocation_damage = 5 * (breath_request ? 2 : 1)
-		return lifeform_inside_me.adjustOxyLoss(suffocation_damage * delta_time)
+		return lifeform_inside_me.adjustOxyLoss(suffocation_damage * seconds_per_tick)

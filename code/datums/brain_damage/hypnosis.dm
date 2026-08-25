@@ -42,9 +42,9 @@
 	owner.clear_alert("hypnosis")
 	..()
 
-/datum/brain_trauma/hypnosis/on_life()
-	..()
-	if(prob(2))
+/datum/brain_trauma/hypnosis/on_life(seconds_per_tick)
+	. = ..()
+	if(SPT_PROB(1, seconds_per_tick))
 		to_chat(owner, "<i>...[LOWER_TEXT(hypnotic_phrase)]...</i>")
 
 /datum/brain_trauma/hypnosis/handle_hearing(datum/source, list/hearing_args)

@@ -16,14 +16,15 @@
 	var/hydration_factor = 0
 	var/quality = 0	//affects mood, typically higher for mixed drinks with more complex recipes
 
-/datum/reagent/consumable/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!HAS_TRAIT(H, TRAIT_NOHUNGER))
 			var/actual_metabolized = min(volume, metabolization_rate)
-			H.adjust_nutrition(nutriment_factor * actual_metabolized * efficiency)
-			H.adjust_hydration(hydration_factor * actual_metabolized  * efficiency)
-	return ..()
+			H.adjust_nutrition(nutriment_factor * actual_metabolized * REAGENTS_MODIFIER * 0.2)
+			H.adjust_hydration(hydration_factor * actual_metabolized * REAGENTS_MODIFIER * 0.2)
 
 /datum/reagent/consumable/expose_mob(mob/living/exposed_mob, methods = TOUCH, reac_volume)
 	if ((methods & INGEST) && ishuman(exposed_mob))
@@ -88,11 +89,12 @@
 	var/brute_heal = 0
 	var/burn_heal = 0
 
-/datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M, efficiency)
-	if(prob(50))
-		M.heal_bodypart_damage(brute_heal * efficiency,burn_heal * efficiency, 0)
-		. = 1
-	..()
+/datum/reagent/consumable/nutriment/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(SPT_PROB(29, seconds_per_tick))
+		M.heal_bodypart_damage(brute_heal * REAGENTS_MODIFIER * 0.2, burn_heal * REAGENTS_MODIFIER * 0.2)
+		return TRUE
 
 /datum/reagent/consumable/nutriment/on_new(list/supplied_data)
 	. = ..()
@@ -146,10 +148,11 @@
 	brute_heal = 1
 	burn_heal = 1
 
-/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/affected_mob, delta_time)
+/datum/reagent/consumable/nutriment/vitamin/on_mob_life(mob/living/carbon/affected_mob, efficiency, seconds_per_tick)
 	. = ..()
+
 	if(affected_mob.satiety < MAX_SATIETY)
-		affected_mob.satiety += 15 * delta_time
+		affected_mob.satiety += 3 * REAGENTS_MODIFIER
 
 /datum/reagent/consumable/nutriment/bone_marrow
 	name = "Bone Marrow"
@@ -182,10 +185,9 @@
 	M.AdjustSleeping(600)
 	. = 1
 
-/datum/reagent/consumable/sugar/overdose_process(mob/living/M)
-	M.AdjustSleeping(40)
-	..()
-	. = 1
+/datum/reagent/consumable/sugar/overdose_process(mob/living/M, efficiency, seconds_per_tick)
+	. = ..()
+	M.AdjustSleeping(0.8 SECONDS * REAGENTS_MODIFIER)
 
 /datum/reagent/consumable/sugar/molasses
 	name ="Molasses"
@@ -226,28 +228,30 @@
 	metabolization_rate = 0.2 * REAGENTS_METABOLISM
 	taste_description = "mushroom"
 
-/datum/reagent/drug/mushroomhallucinogen/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/drug/mushroomhallucinogen/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	if(!M.slurring)
 		M.slurring = 1
+
 	switch(current_cycle)
 		if(1 to 5)
-			M.set_dizzy(10 SECONDS * efficiency)
-			M.set_drugginess(30 SECONDS * efficiency)
-			if(prob(10))
+			M.set_dizzy(2 SECONDS * REAGENTS_MODIFIER)
+			M.set_drugginess(6 SECONDS * REAGENTS_MODIFIER)
+			if(SPT_PROB(5, seconds_per_tick))
 				M.emote(pick("twitch","giggle"))
 		if(5 to 10)
-			M.adjust_jitter(10 SECONDS * efficiency)
-			M.set_dizzy(20 SECONDS * efficiency)
-			M.set_drugginess(35 SECONDS * efficiency)
-			if(prob(20))
+			M.adjust_jitter(2 SECONDS * REAGENTS_MODIFIER)
+			M.set_dizzy(4 SECONDS * REAGENTS_MODIFIER)
+			M.set_drugginess(7 SECONDS * REAGENTS_MODIFIER)
+			if(SPT_PROB(10, seconds_per_tick))
 				M.emote(pick("twitch","giggle"))
 		if (10 to INFINITY)
-			M.adjust_jitter(20 SECONDS * efficiency)
-			M.set_dizzy(30 SECONDS * efficiency)
-			M.set_drugginess(40 SECONDS * efficiency)
-			if(prob(30))
+			M.adjust_jitter(4 SECONDS * REAGENTS_MODIFIER)
+			M.set_dizzy(6 SECONDS * REAGENTS_MODIFIER)
+			M.set_drugginess(8 SECONDS * REAGENTS_MODIFIER)
+			if(SPT_PROB(15, seconds_per_tick))
 				M.emote(pick("twitch","giggle"))
-	..()
 
 /datum/reagent/consumable/eggyolk
 	name = "Egg Yolk"
@@ -264,11 +268,14 @@
 	metabolization_rate = 1 * REAGENTS_METABOLISM
 	taste_description = "sweetness"
 
-/datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M, efficiency)
-	M.reagents.add_reagent(/datum/reagent/consumable/sugar,3)
-	if(prob(55))
-		M.adjustBruteLoss(-1*REM * efficiency, 0)
-		M.adjustFireLoss(-1*REM * efficiency, 0)
-		M.adjustOxyLoss(-1*REM * efficiency, 0)
-		M.adjustToxLoss(-1*REM * efficiency, 0)
-	..()
+/datum/reagent/consumable/honey/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.reagents.add_reagent(/datum/reagent/consumable/sugar, 0.6 * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(32, seconds_per_tick))
+		M.adjustBruteLoss(-0.5 * REAGENTS_MODIFIER)
+		M.adjustFireLoss(-0.5 * REAGENTS_MODIFIER)
+		M.adjustOxyLoss(-0.5 * REAGENTS_MODIFIER)
+		M.adjustToxLoss(-0.5 * REAGENTS_MODIFIER)
+		return TRUE

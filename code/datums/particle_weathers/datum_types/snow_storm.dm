@@ -143,11 +143,11 @@
 		bordered_snow.update_appearance(UPDATE_OVERLAYS)
 
 
-/obj/structure/snow/process()
+/obj/structure/snow/process(seconds_per_tick)
 	if(!SSParticleWeather.runningWeather)
-		damage_act(3)
+		damage_act(0.1 * seconds_per_tick)
 	else if(!istype(SSParticleWeather.runningWeather, /datum/weather_effect/snow))
-		damage_act(6)
+		damage_act(0.2 * seconds_per_tick)
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/structure/snow/proc/get_slowdown()

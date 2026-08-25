@@ -14,11 +14,14 @@
 	registered_signals += COMSIG_HUMAN_LIFE
 	RegisterSignal(target, COMSIG_HUMAN_LIFE, PROC_REF(on_heartbeat))
 
-/datum/chimeric_node/input/racist/proc/on_heartbeat(datum/source)
+/datum/chimeric_node/input/racist/proc/on_heartbeat(datum/source, seconds_per_tick)
 	SIGNAL_HANDLER
+
 	current_beats++
+
 	if(current_beats < beats_per_trigger)
 		return
+
 	current_beats = 0
 	for(var/mob/living/carbon/human/human in view(7, hosted_carbon))
 		if(is_species(human, disliked_species))

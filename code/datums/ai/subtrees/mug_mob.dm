@@ -2,7 +2,7 @@
 	var/scan_range = 2
 	var/mug_want_category = AI_ITEM_POWDER
 
-/datum/ai_planning_subtree/mug/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/mug/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	if(controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET])
 		return
 	if(controller.blackboard[BB_BASIC_MOB_FLEEING])
@@ -60,7 +60,7 @@
 	controller.set_blackboard_key(BB_MUG_DEMAND_ELAPSED, 0)
 	return TRUE
 
-/datum/ai_behavior/mug/perform(delta_time, datum/ai_controller/controller, target_key, item_key)
+/datum/ai_behavior/mug/perform(seconds_per_tick, datum/ai_controller/controller, target_key, item_key)
 	. = ..()
 	var/mob/living/target = controller.blackboard[target_key]
 	var/obj/item/wanted = controller.blackboard[item_key]
@@ -93,7 +93,7 @@
 					finish_action(controller, TRUE, target_key, item_key)
 					return
 
-	var/elapsed = controller.blackboard[BB_MUG_DEMAND_ELAPSED] + delta_time
+	var/elapsed = controller.blackboard[BB_MUG_DEMAND_ELAPSED] + seconds_per_tick
 	controller.set_blackboard_key(BB_MUG_DEMAND_ELAPSED, elapsed)
 
 	if(elapsed >= demand_duration)

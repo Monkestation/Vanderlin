@@ -101,7 +101,7 @@
 	. = ..()
 	del_on_deaggro = 0
 
-/mob/living/simple_animal/hostile/retaliate/Life()
+/mob/living/simple_animal/hostile/retaliate/Life(seconds_per_tick)
 	. = ..()
 	if(!.)
 		return
@@ -137,20 +137,6 @@
 		//Oh yuck ew dont eat that.
 		if(B.status != BODYPART_ORGANIC)
 			return FALSE
-
-/*
-/mob/living/simple_animal/hostile/retaliate/beckoned(mob/user)
-	if(tame && !stop_automated_movement)
-		stop_automated_movement = TRUE
-		Goto(user,move_to_delay)
-		addtimer(CALLBACK(src, PROC_REF(return_action)), 3 SECONDS)
-
-/mob/living/simple_animal/hostile/retaliate/food_tempted(obj/item/O, mob/user)
-	if(is_type_in_list(O, food_type) && !stop_automated_movement)
-		stop_automated_movement = TRUE
-		Goto(user,move_to_delay)
-		addtimer(CALLBACK(src, PROC_REF(return_action)), 3 SECONDS)
-*/
 
 /mob/living/simple_animal/hostile/retaliate/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
 	. = ..()

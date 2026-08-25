@@ -9,14 +9,17 @@
 	should_process = TRUE
 	required_type = list(/obj/item/clothing)
 
-/datum/enchantment/bloodmend/process(delta_time)
+/datum/enchantment/bloodmend/process(seconds_per_tick)
 	if(!enchanted_item)
 		STOP_PROCESSING(SSenchantment, src)
 		return
+
 	if(!iscarbon(enchanted_item?.loc))
 		return
+
 	if(enchanted_item.get_integrity() >= enchanted_item.max_integrity)
 		return
+
 	var/mob/living/carbon/carbon = enchanted_item.loc
 	if(!CAN_HAVE_BLOOD(carbon))
 		return
@@ -41,10 +44,10 @@
 		else
 			bodypart = carbon.get_bodypart(slot2body_zone(clothing.slot_flags))
 
-		bodypart?.bodypart_attacked_by(BCLASS_BITE, 20, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
+		bodypart?.bodypart_attacked_by(BCLASS_BITE, 12 * seconds_per_tick, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
 
 	var/missing_integrity = enchanted_item.max_integrity - enchanted_item.get_integrity()
-	carbon.adjust_blood_volume(-missing_integrity * 0.5)
+	carbon.adjust_blood_volume(-missing_integrity * seconds_per_tick)
 	enchanted_item.update_integrity(enchanted_item.max_integrity)
 	playsound(enchanted_item,'sound/items/weapons/bite.ogg', 45, TRUE, -1)
 	to_chat(carbon, span_danger("[enchanted_item] gnaws at you!"))

@@ -558,25 +558,30 @@
 	taste_description = "something gross"
 	metabolization_rate = 0.3
 
-/datum/reagent/consumable/soup/stew/gross/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/consumable/soup/stew/gross/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
 	if(is_vagrant_job(M.mind.assigned_role)) // beggars gets revitalized, a little
-		M.adjustBruteLoss(-0.1 * efficiency)
-		M.adjustFireLoss(-0.1 * efficiency)
-		M.adjust_energy(2 * efficiency)
-		return
+		M.adjustBruteLoss(-0.1 * REAGENTS_MODIFIER)
+		M.adjustFireLoss(-0.1 * REAGENTS_MODIFIER)
+		M.adjust_energy(2 * REAGENTS_MODIFIER)
+		return TRUE
+
 	if(HAS_TRAIT(M, TRAIT_NASTY_EATER))
 		return
-	if(prob(8 * efficiency))
+
+	if(SPT_PROB(4, seconds_per_tick))
 		to_chat(M, span_danger(pick(
 			"I feel bile rising...", \
 			"I feel nauseous...", \
 			"My breath smells terrible...", \
-			"My stomach churns...")))
-	if(prob(8 * efficiency))
+			"My stomach churns...",
+	)))
+
+	if(SPT_PROB(4, seconds_per_tick))
 		M.emote("gag")
-		M.add_nausea(9 * efficiency)
-	..()
-	. = TRUE
+		M.add_nausea(9 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/yuck/cursed_soup	// toxic sludge, though its edible for NASTY_EATERS like orcs, healing them slightly
 	name = "cursed soup"
@@ -585,24 +590,21 @@
 	taste_description = "something truly vile"
 	metabolization_rate = 0.2
 
-/datum/reagent/yuck/cursed_soup/on_mob_life(mob/living/carbon/M, efficiency)
-	if(HAS_TRAIT(M, TRAIT_NASTY_EATER ))
-		M.adjustBruteLoss(-0.2 * efficiency, 0)
-		M.adjustFireLoss(-0.2 * efficiency, 0)
-		M.adjust_energy(5 * efficiency)
-		return
-	else
-		if(prob(12 * efficiency))
-			M.emote("gag")
-			M.add_nausea(9 * efficiency)
-			if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
-				M.adjustToxLoss(2 * efficiency)
-			else
-				M.adjustToxLoss(5 * efficiency)
-	..()
-	. = TRUE
+/datum/reagent/yuck/cursed_soup/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+	if(HAS_TRAIT(M, TRAIT_NASTY_EATER))
+		M.adjustBruteLoss(-0.2 * REAGENTS_MODIFIER, 0)
+		M.adjustFireLoss(-0.2 * REAGENTS_MODIFIER, 0)
+		M.adjust_energy(3 * REAGENTS_MODIFIER)
+		return TRUE
 
-
+	if(SPT_PROB(6, seconds_per_tick))
+		M.emote("gag")
+		M.add_nausea(9 * efficiency)
+		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
+			M.adjustToxLoss(1 * REAGENTS_MODIFIER)
+		else
+			M.adjustToxLoss(2 * REAGENTS_MODIFIER)
 
 /*--------------\
 | Flour & Salt |
@@ -624,11 +626,12 @@
 	description = ""
 	color = "#FFFFFF" // rgb: 96, 165, 132
 
-/datum/reagent/flour/on_mob_life(mob/living/carbon/M, efficiency)
-	if(prob(30 * efficiency))
-		M.adjust_confusion(6 SECONDS * efficiency)
-	M.emote(pick("cough"))
-	..()
+/datum/reagent/flour/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+	if(SPT_PROB(16, seconds_per_tick))
+		M.adjust_confusion(6 SECONDS * REAGENTS_MODIFIER)
+	if(SPT_PROB(20, seconds_per_tick))
+		M.emote(pick("cough"))
 
 /obj/item/reagent_containers/powder/flour/throw_impact(atom/hit_atom, datum/thrownthing/thrownthing)
 	new /obj/effect/decal/cleanable/food/flour(get_turf(src))

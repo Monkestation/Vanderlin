@@ -1,12 +1,14 @@
 
-/mob/living/brain/Life()
+/mob/living/brain/Life(seconds_per_tick)
 	set invisibility = 0
+
 	if (HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
+
 	if(isnull(loc) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
+
 	. = ..()
-	handle_emp_damage()
 
 /mob/living/brain/update_stat()
 	if(status_flags & GODMODE)
@@ -20,12 +22,5 @@
 		if(BR)
 			BR.brain_death = TRUE //beaten to a pulp
 
-/mob/living/brain/proc/handle_emp_damage()
-	if(emp_damage)
-		if(stat == DEAD)
-			emp_damage = 0
-		else
-			emp_damage = max(emp_damage-1, 0)
-
-/mob/living/brain/handle_status_effects()
+/mob/living/brain/handle_status_effects(seconds_per_tick)
 	return

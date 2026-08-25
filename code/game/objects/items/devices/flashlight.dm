@@ -56,14 +56,16 @@
 	heat = 1000
 	light_color = LIGHT_COLOR_FLARE
 
-	var/fuel = 12000
+	var/fuel = 20 MINUTES
 	var/on_damage = 7
 	var/produce_heat = 1500
 	var/times_used = 0
 
-/obj/item/flashlight/flare/process()
+/obj/item/flashlight/flare/process(seconds_per_tick)
 	open_flame(heat)
-	fuel = max(fuel - 1, 0)
+
+	fuel = max(fuel - SPT_TO_DECISECONDS(seconds_per_tick), 0)
+
 	if(!fuel || !on)
 		turn_off()
 		if(!fuel)
@@ -131,17 +133,17 @@
 	flags_1 = null
 	possible_item_intents = list(/datum/intent/use, /datum/intent/hit)
 	slot_flags = ITEM_SLOT_HIP
-	var/should_self_destruct = TRUE //added for torch burnout
-	var/max_uses = 12
 	max_integrity = 40
-	fuel = 30 MINUTES
+	fuel = 10 MINUTES
 	light_depth = 0
 	light_height = 0
 	metalizer_result = /obj/item/flashlight/flare/torch/lantern
-
 	grid_width = 32
 	grid_height = 32
+
 	var/extinguish_prob = 100
+	var/should_self_destruct = TRUE //added for torch burnout
+	var/max_uses = 12
 
 /obj/item/flashlight/flare/torch/getonmobprop(tag)
 	. = ..()
@@ -152,14 +154,16 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/flashlight/flare/torch/process()
+/obj/item/flashlight/flare/torch/process(seconds_per_tick)
 	open_flame(heat)
+
 	if(!fuel || !on)
 		turn_off()
 		STOP_PROCESSING(SSobj, src)
 		if(!fuel)
 			icon_state = "torch-empty"
 		return
+
 	if(!istype(loc,/obj/machinery/light/fueled/torchholder))
 		if(!ismob(loc))
 			if(prob(23))
@@ -173,7 +177,8 @@
 					turn_off()
 					STOP_PROCESSING(SSobj, src)
 					return
-		fuel = max(fuel - 10, 0)
+
+		fuel = max(fuel - seconds_per_tick, 0)
 
 /obj/item/flashlight/flare/torch/attack_self(mob/user, list/modifiers)
 
@@ -268,7 +273,7 @@
 	slot_flags = ITEM_SLOT_HIP
 	force = 1
 	on_damage = 5
-	fuel = 120 MINUTES
+	fuel = 2 HOURS
 	should_self_destruct = FALSE
 	metalizer_result = null
 	extinguish_prob = 10
@@ -286,9 +291,11 @@
 		else
 			A.fire_act(3,3)
 
-/obj/item/flashlight/flare/torch/lantern/process()
+/obj/item/flashlight/flare/torch/lantern/process(seconds_per_tick)
 	open_flame(heat)
-	fuel = max(fuel - 1, 0)
+
+	fuel = max(fuel - SPT_TO_DECISECONDS(seconds_per_tick), 0)
+
 	if(!fuel || !on)
 		turn_off()
 		STOP_PROCESSING(SSobj, src)

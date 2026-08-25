@@ -59,7 +59,7 @@
 	if(!QDELETED(filter_plate))
 		INVOKE_ASYNC(src, PROC_REF(perform_animation))
 
-/datum/status_effect/incapacitating/concussion/tick()
+/datum/status_effect/incapacitating/concussion/tick(seconds_between_ticks)
 	. = ..()
 	if(!QDELETED(filter_plate))
 		INVOKE_ASYNC(src, PROC_REF(perform_animation))

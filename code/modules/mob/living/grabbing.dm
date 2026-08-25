@@ -102,7 +102,7 @@
 /atom/movable //reference to all obj/item/grabbing
 	var/list/grabbedby
 
-/obj/item/grabbing/process()
+/obj/item/grabbing/process(seconds_per_tick)
 	if(valid_check())
 		if(grab_state > GRAB_PASSIVE && sublimb_grabbed == BODY_ZONE_PRECISE_NECK && ((grabbee && (grabbed.dir == turn(get_dir(grabbed,grabbee), 180))) || grabbee.body_position == LYING_DOWN))
 			chokehold = TRUE

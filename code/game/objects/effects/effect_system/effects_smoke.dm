@@ -14,9 +14,8 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	animate_movement = 0
 	var/amount = 4
-	var/lifetime = 5
+	var/lifetime = 10 SECONDS
 	var/opaque = 1 //whether the smoke can block the view when in enough amount
-
 
 /obj/effect/particle_effect/smoke/proc/fade_out(frames = 16)
 	if(alpha == 0) //Handle already transparent case
@@ -46,14 +45,14 @@
 	INVOKE_ASYNC(src, PROC_REF(fade_out))
 	QDEL_IN(src, 10)
 
-/obj/effect/particle_effect/smoke/process()
-	lifetime--
+/obj/effect/particle_effect/smoke/process(seconds_per_tick)
+	lifetime -= SPT_TO_DECISECONDS(seconds_per_tick)
 	if(lifetime < 1)
 		kill_smoke()
-		return 0
-	for(var/mob/living/L in range(0,src))
+		return PROCESS_KILL
+
+	for(var/mob/living/L in range(0, src))
 		smoke_mob(L)
-	return 1
 
 /obj/effect/particle_effect/smoke/proc/smoke_mob(mob/living/carbon/C)
 	if(!istype(C))
@@ -184,12 +183,12 @@
 /////////////////////////////////////////////
 
 /obj/effect/particle_effect/smoke/chem
-	lifetime = 10
+	lifetime = 20 SECONDS
 
 /obj/effect/particle_effect/smoke/chem/fast
-	lifetime = 3
+	lifetime = 6 SECONDS
 
-/obj/effect/particle_effect/smoke/chem/process()
+/obj/effect/particle_effect/smoke/chem/process(seconds_per_tick)
 	if(..())
 		var/turf/T = get_turf(src)
 		var/fraction = 1/initial(lifetime)
@@ -201,7 +200,6 @@
 			reagents.reaction(AM, TOUCH, fraction)
 
 		reagents.reaction(T, TOUCH, fraction)
-		return 1
 
 /obj/effect/particle_effect/smoke/chem/smoke_mob(mob/living/carbon/M)
 	if(lifetime<1)
@@ -212,8 +210,6 @@
 	reagents.copy_to(M, fraction*reagents.total_volume)
 	reagents.reaction(M, INGEST, fraction)
 	return 1
-
-
 
 /datum/effect_system/smoke_spread/chem/fast
 	effect_type = /obj/effect/particle_effect/smoke/chem/fast

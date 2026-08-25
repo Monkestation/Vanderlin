@@ -1,4 +1,4 @@
-/datum/ai_planning_subtree/sneak/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/sneak/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	if(controller.blackboard[BB_SNEAKING] || (world.time < controller.blackboard[BB_SNEAK_COOLDOWN]))
 		return
 
@@ -31,7 +31,7 @@
 	if(isnull(controller.blackboard[sneaking_key]))
 		controller.set_blackboard_key(sneaking_key, FALSE)
 
-/datum/ai_behavior/basic_sneak/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/basic_sneak/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/basic_mob = controller.pawn
 

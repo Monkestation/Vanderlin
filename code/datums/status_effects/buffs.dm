@@ -43,7 +43,7 @@
 	return ..()
 
 
-/datum/status_effect/sword_spin/tick()
+/datum/status_effect/sword_spin/tick(seconds_between_ticks)
 	playsound(owner, 'sound/blank.ogg', 75, FALSE)
 	var/obj/item/slashy
 	slashy = owner.get_active_held_item()
@@ -62,15 +62,15 @@
 	duration = 10 SECONDS
 	alert_type = /atom/movable/screen/alert/status_effect/fleshmend
 
-/datum/status_effect/fleshmend/tick()
+/datum/status_effect/fleshmend/tick(seconds_between_ticks)
 	if(owner.on_fire)
 		linked_alert.icon_state = "fleshmend_fire"
 		return
 	else
 		linked_alert.icon_state = "fleshmend"
-	owner.adjustBruteLoss(-10, FALSE)
-	owner.adjustFireLoss(-5, FALSE)
-	owner.adjustOxyLoss(-10)
+	owner.adjustBruteLoss(-10 * seconds_between_ticks, FALSE)
+	owner.adjustFireLoss(-5 * seconds_between_ticks, FALSE)
+	owner.adjustOxyLoss(-10 * seconds_between_ticks)
 
 /atom/movable/screen/alert/status_effect/fleshmend
 	name = "Fleshmend"
@@ -95,15 +95,15 @@
 	id = "Good Music"
 	alert_type = null
 	duration = 6 SECONDS
-	tick_interval = 1 SECONDS
+	tick_interval = 2 SECONDS
 	status_type = STATUS_EFFECT_REFRESH
 
-/datum/status_effect/good_music/tick()
+/datum/status_effect/good_music/tick(seconds_between_ticks)
 	if(HAS_TRAIT(owner, TRAIT_DEAF))
 		return
-	owner.adjust_dizzy(-4 SECONDS)
-	owner.adjust_jitter(-4 SECONDS)
-	owner.adjust_confusion(-1 SECONDS)
+	owner.adjust_dizzy(-4 SECONDS * seconds_between_ticks)
+	owner.adjust_jitter(-4 SECONDS * seconds_between_ticks)
+	owner.adjust_confusion(-1 SECONDS * seconds_between_ticks)
 	owner.add_stress(/datum/stress_event/goodmusic)
 
 /atom/movable/screen/alert/status_effect/regenerative_core

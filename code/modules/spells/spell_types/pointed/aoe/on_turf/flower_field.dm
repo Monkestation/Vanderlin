@@ -255,7 +255,7 @@
 			flower_overlay = null
 		UnregisterSignal(M, COMSIG_MOVABLE_MOVED)
 
-/datum/status_effect/debuff/flower_base/tick()
+/datum/status_effect/debuff/flower_base/tick(seconds_between_ticks)
 	check_field_presence()
 
 /datum/status_effect/debuff/flower_base/proc/_check_flower_field(mob/living/L)
@@ -264,8 +264,9 @@
 
 /datum/status_effect/debuff/flower_base/proc/check_field_presence()
 	var/mob/living/L = owner
-	if (!L) return
-	if (!locate(field_path) in get_turf(L))
+	if(!L)
+		return
+	if(!locate(field_path) in get_turf(L))
 		L.remove_status_effect(src)
 
 
@@ -284,7 +285,7 @@
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_PACIFISM, TRAIT_GENERIC)
 
-/datum/status_effect/debuff/rosa_pacification/tick()
+/datum/status_effect/debuff/rosa_pacification/tick(seconds_between_ticks)
 	check_field_presence()
 
 /datum/status_effect/debuff/rosa_pacification/on_remove()
@@ -302,22 +303,23 @@
 	id = "salvia_madness"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/salvia_madness
 	duration = -1
-	tick_interval = 20
+	tick_interval = 2 SECONDS
 	status_type = STATUS_EFFECT_REFRESH
 	overlay_state = "salvia_overlay"
 	field_path = /obj/structure/flora/field/salvia
 	var/tick_counter = 0
 
-/datum/status_effect/debuff/salvia_madness/tick()
+/datum/status_effect/debuff/salvia_madness/tick(seconds_between_ticks)
 	var/mob/living/L = owner
-	if (!L) return
+	if(!L)
+		return
 	check_field_presence()
 	tick_counter++
-	L.Stun(3)
-	L.adjust_jitter(4 SECONDS)
+	L.Stun(1.5 * seconds_between_ticks)
+	L.adjust_jitter(2 SECONDS * seconds_between_ticks)
 	L.emote(pick("spin", "dance"), forced=TRUE)
 	L.emote(pick("laugh", "giggle"), forced=TRUE)
-	if (tick_counter >= 4)
+	if(tick_counter >= 4)
 		L.emote("faint", forced=TRUE)
 		qdel(src)
 
@@ -342,17 +344,18 @@
 	. = ..()
 	owner.visible_message(span_danger("[owner] is pierced by thorns!"))
 
-/datum/status_effect/debuff/euphorbia_thorns/tick()
+/datum/status_effect/debuff/euphorbia_thorns/tick(seconds_between_ticks)
 	var/mob/living/L = owner
-	if (!L) return
+	if(!L)
+		return
 	check_field_presence()
-	if(prob(20))
-		L.adjustBruteLoss(5, damage_type = BCLASS_CUT)
+	if(SPT_PROB(20, seconds_between_ticks))
+		L.adjustBruteLoss(5 * seconds_between_ticks, damage_type = BCLASS_CUT)
 
-	if (locate(/obj/structure/flora/field/euphorbia) in get_turf(L))
+	if(locate(/obj/structure/flora/field/euphorbia) in get_turf(L))
 		to_chat(L, span_warning("The spines hurt your feet"))
 
-	if (prob(20) && ishuman(L))
+	if(SPT_PROB(20, seconds_between_ticks) && ishuman(L))
 		var/mob/living/carbon/human/H = L
 		var/obj/item/bodypart/BP = pick(H.bodyparts)
 		var/obj/item/natural/thorn/TH = new(get_turf(H))
@@ -377,19 +380,20 @@
 	field_path = /obj/structure/flora/field/calendula
 	var/tick_counter = 0
 
-/datum/status_effect/debuff/calendula_sedation/tick()
-	tick_counter++
+/datum/status_effect/debuff/calendula_sedation/tick(seconds_between_ticks)
 	var/mob/living/L = owner
-	if (!L) return
+	if(!L)
+		return
+
+	tick_counter++
+
 	check_field_presence()
 
-	L.adjustBruteLoss(-2)
-	L.adjustFireLoss(-2)
-	L.adjustToxLoss(-1.5)
-	L.adjustOxyLoss(-1.3)
-	var/list/wounds = L.get_wounds()
-	if(wounds.len > 0)
-		L.heal_wounds(1)
+	L.adjustBruteLoss(-2 * seconds_between_ticks)
+	L.adjustFireLoss(-2 * seconds_between_ticks)
+	L.adjustToxLoss(-1.5 * seconds_between_ticks)
+	L.adjustOxyLoss(-1.3 * seconds_between_ticks)
+	L.heal_wounds(1 * seconds_between_ticks)
 
 	if (tick_counter % 15 == 5)
 		if (!HAS_TRAIT(L, TRAIT_NOSTAMINA) && prob(30))
@@ -427,7 +431,7 @@
 	ADD_TRAIT(owner, TRAIT_SPELLBLOCK, TRAIT_GENERIC)
 	ADD_TRAIT(owner, TRAIT_MUTE, TRAIT_GENERIC)
 
-/datum/status_effect/debuff/manabloom_silence/tick()
+/datum/status_effect/debuff/manabloom_silence/tick(seconds_between_ticks)
 	check_field_presence()
 
 /datum/status_effect/debuff/manabloom_silence/on_remove()
@@ -453,14 +457,16 @@
 	overlay_state = "matricaria_overlay"
 	field_path = /obj/structure/flora/field/matricaria
 
-/datum/status_effect/debuff/matricaria_remedy/tick()
+/datum/status_effect/debuff/matricaria_remedy/tick(seconds_between_ticks)
 	var/mob/living/M = owner
-	if (!M || M.stat != CONSCIOUS) return
+	if (!M || M.stat != CONSCIOUS)
+		return
+
 	check_field_presence()
-	M.set_confusion_if_lower(0.5 SECONDS)
-	if (prob(15) && !M.has_status_effect(/datum/status_effect/frost_trap))
+	M.set_confusion_if_lower(0.5 SECONDS * seconds_between_ticks)
+	if (SPT_PROB(15, seconds_between_ticks) && !M.has_status_effect(/datum/status_effect/frost_trap))
 		M.apply_status_effect(/datum/status_effect/frost_trap)
-		M.adjustFireLoss(-8)
+		M.adjustFireLoss(-8 * seconds_between_ticks)
 
 /atom/movable/screen/alert/status_effect/debuff/matricaria_remedy
 	name = "Chill"

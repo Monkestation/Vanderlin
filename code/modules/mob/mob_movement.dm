@@ -102,7 +102,7 @@
 			to_chat(src, "<span class='warning'>My spirit hasn't manifested yet.</span>")
 		return FALSE
 
-	if(mob.force_moving)
+	if(SEND_SIGNAL(mob, COMSIG_MOB_CLIENT_PRE_LIVING_MOVE, new_loc, direct) & COMSIG_MOB_CLIENT_BLOCK_PRE_LIVING_MOVE)
 		return FALSE
 
 	var/mob/living/L = mob  //Already checked for isliving earlier

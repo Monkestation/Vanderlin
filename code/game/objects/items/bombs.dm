@@ -49,7 +49,7 @@
 	desc = "A sacred relic carried by Brother Maynard."
 	icon = 'icons/obj/holy_grenade.dmi'
 	icon_state = "holy_grenade"
-	var/fuze = 25
+	var/fuze = 3 SECONDS
 	var/primed = FALSE
 
 	/// How many lines have been heard
@@ -78,8 +78,8 @@
 	lose_hearing_sensitivity()
 	return ..()
 
-/obj/item/holy_grenade/process()
-	fuze--
+/obj/item/holy_grenade/process(seconds_per_tick)
+	fuze -= SPT_TO_DECISECONDS(seconds_per_tick)
 	if(fuze <= 0)
 		explode(TRUE)
 
@@ -113,7 +113,7 @@
 	qdel(src)
 
 /obj/item/holy_grenade/longer_fuze
-	fuze = 50
+	fuze = 5 SECONDS
 
 /obj/item/holy_grenade/ready
 	scripture_heard = 1

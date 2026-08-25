@@ -1,4 +1,4 @@
-/datum/ai_planning_subtree/use_healing_drink/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/use_healing_drink/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/datum/component/ai_inventory_manager/inv = controller.get_inventory()
 	if(!inv)
 		return
@@ -25,7 +25,7 @@
 	action_cooldown = 70 SECONDS
 	behavior_flags = AI_BEHAVIOR_MOVE_AND_PERFORM | AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION | AI_BEHAVIOR_EXECUTE_ALONGSIDE
 
-/datum/ai_behavior/consume_healing_drink/perform(delta_time, datum/ai_controller/controller, consumable_key, obj/item/reagent_containers/glass/bottle/drink)
+/datum/ai_behavior/consume_healing_drink/perform(seconds_per_tick, datum/ai_controller/controller, consumable_key, obj/item/reagent_containers/glass/bottle/drink)
 	controller.set_blackboard_key(BB_HELD_CONSUMABLE, drink)
 	var/datum/component/ai_inventory_manager/inv = controller.get_inventory()
 	var/mob/living/carbon/human/H = controller.pawn

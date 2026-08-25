@@ -721,17 +721,17 @@
 /atom/movable/screen/alert/status_effect/bardbuff/awaken
 	name = "Awaken!"
 
-/datum/status_effect/bardicbuff/awaken/tick()
-	for (var/mob/living/carbon/human/H in hearers(7, owner))
-		if (!H.client)
+/datum/status_effect/bardicbuff/awaken/tick(seconds_between_ticks)
+	for(var/mob/living/carbon/human/H in hearers(7, owner))
+		if(!H.client)
 			continue
 		if(HAS_TRAIT(H, TRAIT_DEAF))
 			continue
 		if(H.mind?.has_antag_datum(/datum/antagonist))
 			if(!H.mind?.isactuallygood())
 				continue
-		H.adjust_energy(H.max_energy * 0.002)
-		H.adjust_stamina(-H.maximum_stamina * 0.02, internal_regen = FALSE)
+		H.adjust_energy(H.max_energy * 0.002 * seconds_between_ticks)
+		H.adjust_stamina(-H.maximum_stamina * 0.02 * seconds_between_ticks, internal_regen = FALSE)
 
 /datum/status_effect/buff/magicknowledge
 	id = "Runic Cunning"
@@ -866,10 +866,11 @@
 	name = "lesser arcane perception"
 	desc = "I can see somethings."
 	icon_state = "buff"
+
 /atom/movable/screen/alert/status_effect/bardbuff/awaken
 	name = "Awaken!"
 
-/datum/status_effect/bardicbuff/awaken/tick()
+/datum/status_effect/bardicbuff/awaken/tick(seconds_between_ticks)
 	for (var/mob/living/carbon/human/H in hearers(7, owner))
 		if (!H.client)
 			continue
@@ -878,8 +879,8 @@
 		if(H.mind?.has_antag_datum(/datum/antagonist))
 			if(!H.mind?.isactuallygood())
 				continue
-		H.adjust_energy(1)
-		H.adjust_stamina(-0.5, internal_regen = FALSE)
+		H.adjust_energy(1 * seconds_between_ticks)
+		H.adjust_stamina(-0.5 * seconds_between_ticks, internal_regen = FALSE)
 
 /datum/status_effect/debuff/cold
 	id = "Frostveiled"

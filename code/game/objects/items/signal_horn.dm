@@ -152,7 +152,7 @@
 			owner.client.screen -= signal_horn_object
 	return ..()
 
-/datum/status_effect/signal_horn/tick()
+/datum/status_effect/signal_horn/tick(seconds_between_ticks)
 	var/target_angle = get_angle(owner, target)
 	var/matrix/rotation = matrix()
 	rotation.Turn(target_angle)

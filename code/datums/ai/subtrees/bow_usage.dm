@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/ranged_attack_subtree
 	parent_type = /datum/ai_planning_subtree/archer_base
 
-/datum/ai_planning_subtree/ranged_attack_subtree/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/ranged_attack_subtree/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	if(!validate_archer_equipment(controller))
 		return
 	var/mob/living/carbon/human/pawn = controller.pawn
@@ -110,7 +110,7 @@
 	SEND_SIGNAL(controller.pawn, COMSIG_COMBAT_TARGET_SET, TRUE)
 	return TRUE
 
-/datum/ai_behavior/ranged_attack_bow/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/ranged_attack_bow/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/atom/target = controller.blackboard[target_key]
 

@@ -19,7 +19,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/queen_bee/process()
+/obj/item/queen_bee/process(seconds_per_tick)
 	queen_age += 0.01
 
 	if(queen_age > (max_queen_age * 0.7))
@@ -55,16 +55,16 @@
 		qdel(queen_bee)
 	return ..()
 
-/obj/effect/bee_swarm/process()
+/obj/effect/bee_swarm/process(seconds_per_tick)
 	if(!established)
-		if(prob(50))
+		if(SPT_PROB(29, seconds_per_tick))
 			var/turf/T = get_step(src, pick(GLOB.alldirs))
 			if(T)
 				Move(T)
 
-	search_time++
+	search_time += SPT_TO_DECISECONDS(seconds_per_tick)
 
-	if(search_time >= 20)
+	if(search_time >= 1 MINUTES)
 		search_time = 0
 		find_new_home()
 
@@ -153,7 +153,7 @@
 	START_PROCESSING(SSfaster_obj, src)
 	update_appearance(UPDATE_OVERLAYS)
 
-/obj/effect/bees/process()
+/obj/effect/bees/process(seconds_per_tick)
 	switch(bee_state)
 		if(BEE_STATE_MERGING)
 			process_merging()

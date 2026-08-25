@@ -54,12 +54,14 @@ SUBSYSTEM_DEF(machines)
 	if (!resumed)
 		src.currentrun = processing.Copy()
 
+	var/seconds_per_tick = wait / (1 SECONDS)
+
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 	while(length(currentrun))
 		var/obj/machinery/thing = currentrun[length(currentrun)]
 		currentrun.len--
-		if(QDELETED(thing) || thing.process(wait * 0.1) == PROCESS_KILL)
+		if(QDELETED(thing) || thing.process(seconds_per_tick) == PROCESS_KILL)
 			processing -= thing
 		if (MC_TICK_CHECK)
 			return

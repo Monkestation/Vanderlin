@@ -1,6 +1,6 @@
 /datum/ai_planning_subtree/fiend_abilities
 
-/datum/ai_planning_subtree/fiend_abilities/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/fiend_abilities/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 
 	var/atom/target = controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET]
@@ -24,7 +24,7 @@
 
 /datum/ai_behavior/fiend_meteor_attack
 
-/datum/ai_behavior/fiend_meteor_attack/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/fiend_meteor_attack/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 
 	var/mob/living/simple_animal/fiend = controller.pawn
@@ -52,7 +52,7 @@
 
 /datum/ai_behavior/fiend_summon_reinforcements
 
-/datum/ai_behavior/fiend_summon_reinforcements/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/fiend_summon_reinforcements/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 
 	var/mob/living/simple_animal/fiend = controller.pawn

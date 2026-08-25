@@ -264,17 +264,21 @@
 		chargedprog = 0
 		START_PROCESSING(SSmousecharge, src)
 
-/client/process()
+/client/process(seconds_per_tick)
 	if(!mob || !isliving(mob))
 		return PROCESS_KILL
+
 	var/mob/living/L = mob
 	if(!L.client)
 		return PROCESS_KILL
+
 	if(update_to_mob(L))
 		L.update_mouse_pointer()
 		return
+
 	if(L.curplaying)
 		L.curplaying.on_mouse_up()
+
 	L.update_charging_movespeed()
 	mouse_override_icon = null
 	L.update_mouse_pointer()

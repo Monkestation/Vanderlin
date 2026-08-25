@@ -108,33 +108,36 @@
 				return
 		release_mob(M)
 
-/obj/structure/meathook/process()
+/obj/structure/meathook/process(seconds_per_tick)
 	if(!length(buckled_mobs) || !draining_blood)
 		draining_blood = FALSE
-		STOP_PROCESSING(SSmachines, src)
-		return
+		return PROCESS_KILL
+
 	var/mob/living/L = buckled_mobs[1]
-	if(L.blood_drained >= 60)
-		L.blood_drained = 60
+	if(L.blood_drained >= 2 MINUTES)
+		L.blood_drained = 2 MINUTES
 		draining_blood = FALSE
-		STOP_PROCESSING(SSmachines, src)
-		return
-	L.blood_drained++
+		return PROCESS_KILL
+
+	L.blood_drained += SPT_TO_DECISECONDS(seconds_per_tick) // Yes this is a measure of time
+
 	var/datum/blood_type/bloodtype = L.get_blood_type()
 
 	var/obj/item/reagent_containers/container = locate(/obj/item/reagent_containers) in get_turf(src)
+
 	playsound(src, 'sound/misc/bleed (3).ogg', 100, FALSE)
+
 	if(container && container.is_open_container() && container.reagents.total_volume < container.reagents.maximum_volume)
-		container.reagents.add_reagent(initial(bloodtype.reagent_type), 5, data = bloodtype.get_blood_data(L))
+		container.reagents.add_reagent(initial(bloodtype.reagent_type), 2.5 * seconds_per_tick, data = bloodtype.get_blood_data(L))
 	else
 		var/obj/effect/decal/cleanable/blood/puddle/P = locate() in get_turf(src)
 		if(P)
-			P.blood_vol += 5
+			P.blood_vol += 2.5 * seconds_per_tick
 			P.update_appearance(UPDATE_ICON_STATE)
 		else
 			var/obj/effect/decal/cleanable/blood/drip/D = locate() in get_turf(src)
 			if(D)
-				D.blood_vol += 5
+				D.blood_vol += 2.5 * seconds_per_tick
 				D.drips++
 				D.update_appearance(UPDATE_ICON_STATE)
 			else

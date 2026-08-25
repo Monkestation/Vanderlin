@@ -68,13 +68,14 @@
 	opacity = FALSE
 	anchored = TRUE
 	max_integrity = 300
-	var/list/essence_contents = list()
-	var/max_essence_types = 6
-	var/brewing = 0
-	var/datum/weakref/lastuser
 	fueluse = 20 MINUTES
 	crossfire = FALSE
 
+	var/list/essence_contents = list()
+	var/max_essence_types = 6
+	/// Amount of time that the cauldron has been brewing for
+	var/brewing = 0
+	var/datum/weakref/lastuser
 	var/datum/alch_cauldron_recipe/selected_recipe = null
 	var/auto_repeat = FALSE
 	var/obj/machinery/essence/cauldron_node/essence_node = null
@@ -228,13 +229,17 @@
 	. = ..()
 	if(!reagents?.total_volume || !LAZYLEN(essence_contents))
 		return
+
 	var/mutable_appearance/filling
 	if(!brewing)
 		filling = mutable_appearance('icons/roguetown/misc/alchemy.dmi', "cauldron_full")
+
 	if(brewing > 0)
 		filling = mutable_appearance('icons/roguetown/misc/alchemy.dmi', "cauldron_boiling")
+
 	if(!filling)
 		return
+
 	filling.color = calculate_mixture_color()
 	. += filling
 
@@ -310,7 +315,7 @@
 			return FALSE
 	return TRUE
 
-/obj/machinery/light/fueled/cauldron/process()
+/obj/machinery/light/fueled/cauldron/process(seconds_per_tick)
 	..()
 
 	if(!on)
@@ -322,62 +327,64 @@
 		if(!has_required_essences())
 			return // Waiting for essences to arrive via network
 
-	if(length(essence_contents))
-		if(brewing < 20)
-			if(src.reagents.has_reagent(/datum/reagent/water, 50))
-				brewing++
-				update_appearance(UPDATE_OVERLAYS)
-				if(prob(10))
-					playsound(src, "bubbles", 100, FALSE)
-		else if(brewing == 20)
-			var/list/recipe_result = find_matching_recipe_with_batches()
-			if(recipe_result)
-				var/datum/alch_cauldron_recipe/found_recipe = recipe_result["recipe"]
-				var/batch_count = recipe_result["batches"]
+	if(!length(essence_contents))
+		return
 
-				essence_contents = list()
+	if(brewing < 40 SECONDS)
+		if(reagents.has_reagent(/datum/reagent/water, 50))
+			brewing += SPT_TO_DECISECONDS(seconds_per_tick)
+			update_appearance(UPDATE_OVERLAYS)
+			if(SPT_PROB(5, seconds_per_tick))
+				playsound(src, "bubbles", 100, FALSE)
+		return
 
-				if(reagents)
-					var/in_cauldron = src.reagents.get_reagent_amount(/datum/reagent/water)
-					src.reagents.remove_reagent(/datum/reagent/water, in_cauldron)
+	var/list/recipe_result = find_matching_recipe_with_batches()
+	if(!recipe_result)
+		brewing = 0
+		essence_contents = list()
+		visible_message(span_info("The essences in the [src] fail to combine properly..."))
+		playsound(src, 'sound/misc/smelter_fin.ogg', 30, FALSE)
+		update_appearance(UPDATE_OVERLAYS)
+		return
 
-				if(found_recipe.output_reagents.len)
-					var/list/scaled_reagents = list()
-					for(var/reagent in found_recipe.output_reagents)
-						scaled_reagents[reagent] = found_recipe.output_reagents[reagent] * batch_count
-					src.reagents.add_reagent_list(scaled_reagents)
+	var/datum/alch_cauldron_recipe/found_recipe = recipe_result["recipe"]
+	var/batch_count = recipe_result["batches"]
 
-				if(length(found_recipe.output_items))
-					for(var/itempath in found_recipe.output_items)
-						for(var/i = 1 to batch_count)
-							new itempath(get_turf(src))
+	if(reagents)
+		var/in_cauldron = reagents.get_reagent_amount(/datum/reagent/water)
+		reagents.remove_reagent(/datum/reagent/water, in_cauldron)
 
-				if(batch_count > 1)
-					src.visible_message(span_info("The cauldron finishes boiling [batch_count] batches with a strong [found_recipe.smells_like] smell."))
-				else
-					src.visible_message(span_info("The cauldron finishes boiling with a faint [found_recipe.smells_like] smell."))
+	if(found_recipe.output_reagents.len)
+		var/list/scaled_reagents = list()
+		for(var/reagent in found_recipe.output_reagents)
+			scaled_reagents[reagent] = found_recipe.output_reagents[reagent] * batch_count
+		reagents.add_reagent_list(scaled_reagents)
 
-				if(lastuser)
-					var/mob/living/L = lastuser.resolve()
-					record_featured_stat(FEATURED_STATS_ALCHEMISTS, L)
-					record_round_statistic(STATS_POTIONS_BREWED, batch_count)
-					var/boon = L.get_learning_boon(/datum/attribute/skill/craft/alchemy)
-					var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) * 2 * batch_count
-					L.adjust_experience(/datum/attribute/skill/craft/alchemy, amt2raise * boon, FALSE)
+	if(length(found_recipe.output_items))
+		for(var/itempath in found_recipe.output_items)
+			for(var/i = 1 to batch_count)
+				new itempath(get_turf(src))
 
-				playsound(src, "bubbles", 100, TRUE)
-				playsound(src, 'sound/misc/smelter_fin.ogg', 30, FALSE)
-				brewing = 21
-				update_appearance(UPDATE_OVERLAYS)
+	if(batch_count > 1)
+		visible_message(span_info("The cauldron finishes boiling [batch_count] batches with a strong [found_recipe.smells_like] smell."))
+	else
+		visible_message(span_info("The cauldron finishes boiling with a faint [found_recipe.smells_like] smell."))
 
-				if(auto_repeat && selected_recipe)
-					brewing = 0 // Reset immediately for next batch
-			else
-				brewing = 0
-				essence_contents = list()
-				src.visible_message(span_info("The essences in the [src] fail to combine properly..."))
-				playsound(src, 'sound/misc/smelter_fin.ogg', 30, FALSE)
-				update_appearance(UPDATE_OVERLAYS)
+	if(lastuser)
+		var/mob/living/L = lastuser.resolve()
+		record_featured_stat(FEATURED_STATS_ALCHEMISTS, L)
+		record_round_statistic(STATS_POTIONS_BREWED, batch_count)
+		var/boon = L.get_learning_boon(/datum/attribute/skill/craft/alchemy)
+		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE) * 2 * batch_count
+		L.adjust_experience(/datum/attribute/skill/craft/alchemy, amt2raise * boon, FALSE)
+
+	playsound(src, "bubbles", 100, TRUE)
+	playsound(src, 'sound/misc/smelter_fin.ogg', 30, FALSE)
+
+	update_appearance(UPDATE_OVERLAYS)
+
+	if(auto_repeat && selected_recipe)
+		brewing = 0 // Reset immediately for next batch
 
 /obj/machinery/light/fueled/cauldron/proc/calculate_mixture_color()
 	if(essence_contents.len == 0)

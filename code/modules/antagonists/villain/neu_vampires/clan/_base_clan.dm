@@ -363,8 +363,8 @@ And it also helps for the character set panel
 	for(var/mob/living/mob as anything in clan_members)
 		mob.maxbloodpool += adjust
 
-/datum/clan/proc/on_vampire_life(mob/living/carbon/human/H)
-	H.process_vampire_life()
+/datum/clan/proc/on_vampire_life(mob/living/carbon/human/H, seconds_per_tick)
+	H.process_vampire_life(seconds_per_tick)
 
 /datum/clan/proc/examine_target(mob/living/user, mob/living/carbon/examined, list/P, list/examine_contents)
 	if(user != examined) // no need to beat yourself up over it buddy
@@ -566,13 +566,13 @@ And it also helps for the character set panel
 		owner.add_stress(/datum/stress_event/good_blood)
 		owner.adjustBruteLoss(-5)
 
-/datum/status_effect/buff/blood_preference/tick()
-	. = ..()
-	owner.adjustBruteLoss(-2)
-
 /datum/status_effect/buff/blood_preference/on_remove()
 	. = ..()
 	owner.remove_stress(/datum/stress_event/good_blood)
+
+/datum/status_effect/buff/blood_preference/tick(seconds_between_ticks)
+	. = ..()
+	owner.adjustBruteLoss(-2 * seconds_between_ticks)
 
 /datum/stress_event/good_blood
 	desc = span_good("That blood was euphoric!")

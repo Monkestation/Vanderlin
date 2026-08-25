@@ -642,7 +642,7 @@
 			else // potential_grave_devotion_gain is over MAX, have devotion set to max
 				devotion_change = GRAVE_DEVOTION_GLOBAL_MAX - current_passive_gain
 
-			devotion.update_passive_devotion(devotion_change)
+			devotion.update_passive_devotion(devotion_change / 2)
 
 /obj/structure/closet/dirthole/update_icon_state()
 	. = ..()

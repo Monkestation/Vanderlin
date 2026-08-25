@@ -25,5 +25,5 @@
 /datum/status_effect/buff/song/recovery/full
 	stamina_recovery = -6 // Full bard (100%)
 
-/datum/status_effect/buff/song/recovery/tick()
-	owner.adjust_stamina(stamina_recovery)
+/datum/status_effect/buff/song/recovery/tick(seconds_between_ticks)
+	owner.adjust_stamina(stamina_recovery * seconds_between_ticks)

@@ -13,6 +13,7 @@
 	. = ..()
 	UnregisterSignal(target, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED))
 	user_by_item -= target
+	STOP_PROCESSING(SSdcs, src)
 
 /datum/element/earhealing/proc/on_equip(datum/source, mob/living/carbon/user, slot)
 	SIGNAL_HANDLER
@@ -32,4 +33,5 @@
 
 		ears.adjust_temporary_deafness(-0.5 SECONDS * seconds_per_tick)
 		ears.applyOrganDamage(-0.025 * seconds_per_tick)
+
 		CHECK_TICK

@@ -313,12 +313,13 @@
 			"The testicles are torsioned!",
 		)
 
-/datum/wound/cbt/on_life()
+/datum/wound/cbt/on_life(seconds_per_tick)
 	. = ..()
 	if(!iscarbon(owner))
 		return
+
 	var/mob/living/carbon/carbon_owner = owner
-	if(!carbon_owner.stat && prob(7))
+	if(!carbon_owner.stat && SPT_PROB(4.5, seconds_per_tick))
 		carbon_owner.vomit(1, stun = TRUE)
 
 /datum/wound/cbt/permanent

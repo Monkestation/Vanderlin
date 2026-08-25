@@ -99,7 +99,7 @@
 		return
 	adjustBruteLoss(diff, updating_health, forced, required_bodytype, damage_type)
 
-/mob/living/carbon/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_status, damage_type = WOUND_INTERNAL_BRUISE, can_crit = FALSE)
+/mob/living/carbon/adjustBruteLoss(amount, updating_health = FALSE, forced = FALSE, required_status, damage_type = WOUND_INTERNAL_BRUISE, can_crit = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	if(amount > 0)
@@ -124,7 +124,7 @@
 		heal_overall_damage(0, abs(amount), required_status ? required_status : BODYPART_ORGANIC, updating_health)
 	return amount
 
-/mob/living/carbon/adjustToxLoss(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/carbon/adjustToxLoss(amount, updating_health = FALSE, forced = FALSE)
 	if(!forced && HAS_TRAIT(src, TRAIT_TOXINLOVER)) //damage becomes healing and healing becomes damage
 		amount = -amount
 		if(amount > 0)
@@ -135,7 +135,7 @@
 		amount = min(amount, 0)
 	return ..()
 
-/mob/living/carbon/adjustOxyLoss(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/carbon/adjustOxyLoss(amount, updating_health = FALSE, forced = FALSE)
 	. = ..()
 	if(isnull(.))
 		return

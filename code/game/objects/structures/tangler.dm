@@ -45,22 +45,25 @@
 	. = ..()
 	proximity_monitor = new(src, 1)
 
-/obj/structure/flora/grass/tangler/real/process()
-	if(!has_buckled_mobs())
-		if(world.time > last_eat + 5)
-			var/list/around = view(1, src)
-			for(var/obj/item/F in around)
-				if(is_type_in_list(F, eatablez))
-					aggroed = world.time
-					last_eat = world.time
-					playsound(src,'sound/misc/eat.ogg', rand(30,60), TRUE)
-					qdel(F)
-					return
-		if(world.time > aggroed + 15 SECONDS)
-			aggroed = 0
-			update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
-			STOP_PROCESSING(SSobj, src)
-			return TRUE
+/obj/structure/flora/grass/tangler/real/process(seconds_per_tick)
+	if(has_buckled_mobs())
+		return
+
+	if(world.time > last_eat + 5 SECONDS)
+		var/list/around = view(1, src)
+		for(var/obj/item/F in around)
+			if(is_type_in_list(F, eatablez))
+				aggroed = world.time
+				last_eat = world.time
+				playsound(src,'sound/misc/eat.ogg', rand(30, 60), TRUE)
+				qdel(F)
+				return
+
+	if(world.time > aggroed + 15 SECONDS)
+		aggroed = 0
+		update_appearance(UPDATE_ICON_STATE | UPDATE_NAME)
+		STOP_PROCESSING(SSobj, src)
+		return TRUE
 
 /obj/structure/flora/grass/tangler/real/update_icon_state()
 	. = ..()

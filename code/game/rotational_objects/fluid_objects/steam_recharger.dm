@@ -35,13 +35,13 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/steam_recharger/process()
+/obj/structure/steam_recharger/process(seconds_per_tick)
 	if(placed_atom)
-		process_item_charging()
+		process_item_charging(seconds_per_tick)
 	else if(placed_mob)
-		process_mob_charging()
+		process_mob_charging(seconds_per_tick)
 
-/obj/structure/steam_recharger/proc/process_item_charging()
+/obj/structure/steam_recharger/proc/process_item_charging(seconds_per_tick)
 	if(!input)
 		return
 	if(!ispath(input.carrying_reagent, /datum/reagent/steam))
@@ -51,17 +51,18 @@
 		remove_placed()
 		return
 
-	var/taking_pressure = min(100, input.water_pressure)
+	var/taking_pressure = min(100, input.water_pressure) / 2
 	var/obj/structure/water_pipe/picked_provider = pick(input.providers)
-	picked_provider?.taking_from?.use_water_pressure(taking_pressure)
+	picked_provider?.taking_from?.use_water_pressure(taking_pressure * seconds_per_tick)
 
 	if(!SEND_SIGNAL(placed_atom, COMSIG_ATOM_STEAM_INCREASE, taking_pressure))
 		visible_message(span_notice("[placed_atom] is fully charged."))
 		remove_placed()
 
-/obj/structure/steam_recharger/proc/process_mob_charging()
+/obj/structure/steam_recharger/proc/process_mob_charging(seconds_per_tick)
 	if(!input)
 		return
+
 	if(!ispath(input.carrying_reagent, /datum/reagent/steam))
 		return
 
@@ -80,9 +81,9 @@
 		visible_message(span_notice("[H] is non-functional."))
 		return
 
-	var/taking_pressure = min(100, input.water_pressure)
+	var/taking_pressure = min(100, input.water_pressure) / 2
 	var/obj/structure/water_pipe/picked_provider = pick(input.providers)
-	picked_provider?.taking_from?.use_water_pressure(taking_pressure)
+	picked_provider?.taking_from?.use_water_pressure(taking_pressure * seconds_per_tick)
 
 	if(!SEND_SIGNAL(H, COMSIG_ATOM_STEAM_INCREASE, taking_pressure))
 		visible_message(span_notice("[H] is fully charged."))

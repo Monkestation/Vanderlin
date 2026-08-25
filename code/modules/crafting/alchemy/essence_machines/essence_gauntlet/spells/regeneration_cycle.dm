@@ -23,15 +23,15 @@
 	id = "regeneration_cycle"
 	alert_type = /atom/movable/screen/alert/status_effect/regeneration_cycle
 	duration = 300 SECONDS
-	tick_interval = 10 SECONDS
+	tick_interval = 2 SECONDS
 
-/datum/status_effect/buff/regeneration_cycle/tick()
+/datum/status_effect/buff/regeneration_cycle/tick(seconds_between_ticks)
 	var/mob/living/carbon/carbon = owner
 	if(!iscarbon(owner))
 		return
 
-	carbon.adjustBruteLoss(-0.1, FALSE)
-	carbon.adjustFireLoss(-0.1, TRUE)
+	carbon.adjustBruteLoss(-0.1 * seconds_between_ticks, FALSE)
+	carbon.adjustFireLoss(-0.1 * seconds_between_ticks, TRUE)
 
 /datum/action/cooldown/spell/essence/regeneration_cycle/spell
 	name = "Rejuvenation Cycle"

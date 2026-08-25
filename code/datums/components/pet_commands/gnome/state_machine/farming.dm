@@ -53,7 +53,7 @@
 	current_target = null
 	stuck_ticks = 0
 
-/datum/action_state/farming/process_state(datum/ai_controller/controller, delta_time)
+/datum/action_state/farming/process_state(datum/ai_controller/controller, seconds_per_tick)
 	if(!controller.blackboard[BB_GNOME_CROP_MODE])
 		return ACTION_STATE_COMPLETE
 

@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/retrieve_arrows
 	parent_type = /datum/ai_planning_subtree/archer_base
 
-/datum/ai_planning_subtree/retrieve_arrows/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/retrieve_arrows/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	if(!validate_archer_equipment(controller))
 		return
 	var/obj/item/gun/ballistic/bow/bow = controller.blackboard[BB_ARCHER_NPC_BOW]
@@ -44,7 +44,7 @@
 	controller.current_movement_target = arrow
 	return TRUE
 
-/datum/ai_behavior/retrieve_arrow/perform(delta_time, datum/ai_controller/controller, arrow_key)
+/datum/ai_behavior/retrieve_arrow/perform(seconds_per_tick, datum/ai_controller/controller, arrow_key)
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/obj/item/ammo_casing/arrow = controller.blackboard[arrow_key]
 

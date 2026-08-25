@@ -100,7 +100,7 @@
 	effect_color = colour
 	return ..()
 
-/datum/status_effect/buff/playing_music/tick()
+/datum/status_effect/buff/playing_music/tick(damage_per_second)
 	var/obj/effect/temp_visual/music_rogue/M = new /obj/effect/temp_visual/music_rogue(get_turf(owner))
 	M.color = effect_color
 	for (var/mob/living/carbon/human/H in hearers(7, owner))

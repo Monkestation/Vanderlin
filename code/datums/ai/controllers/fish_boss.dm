@@ -34,7 +34,7 @@
 	anchored = TRUE
 	layer = BELOW_MOB_LAYER
 	var/slow_factor = 2
-	var/heal_amount = 5
+	var/heal_amount = 2.5
 
 /obj/effect/deep_water/Initialize()
 	. = ..()
@@ -44,21 +44,21 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/deep_water/process()
+/obj/effect/deep_water/process(seconds_per_tick)
 	for(var/mob/living/L in loc)
 		if(istype(L, /mob/living/simple_animal/hostile/boss/fishboss))
 			// Heal the boss if it's in deep water
 			var/mob/living/simple_animal/hostile/boss/fishboss/F = L
-			F.adjustHealth(-heal_amount)
-			if(prob(30))
+			F.adjustHealth(-heal_amount * seconds_per_tick)
+			if(SPT_PROB(15, seconds_per_tick))
 				new /obj/effect/temp_visual/heal(get_turf(F))
 		else if(!L.has_faction("deepone"))
 			// Slow down players/non-deep ones
 			L.add_movespeed_modifier(MOVESPEED_ID_FISH_BOSS, multiplicative_slowdown = 2)
 
 			// Small chance of damage from unseen creatures in the water
-			if(prob(5))
-				L.apply_damage(3, BRUTE)
+			if(SPT_PROB(2.5, seconds_per_tick))
+				L.apply_damage(2 * seconds_per_tick, BRUTE)
 				to_chat(L, "<span class='danger'>Something brushes against you in the dark water!</span>")
 
 /obj/effect/deep_water/Crossed(atom/movable/AM)

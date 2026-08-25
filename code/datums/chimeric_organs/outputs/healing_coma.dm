@@ -3,7 +3,7 @@
 	desc = "When activated puts you into a sleep to heal"
 	weight = 2
 
-	var/amount_healed = 5
+	var/amount_healed = 2.5
 	var/healing_until = 40
 	var/healing = FALSE
 
@@ -25,13 +25,13 @@
 	START_PROCESSING(SSobj, src)
 	enter_coma()
 
-/datum/chimeric_node/output/healing_coma/process()
+/datum/chimeric_node/output/healing_coma/process(seconds_per_tick)
 	var/total_damage = hosted_carbon.getBruteLoss() + hosted_carbon.getFireLoss()
 	if(total_damage < healing_until)
 		STOP_PROCESSING(SSobj, src)
 		exit_coma()
 		return
-	hosted_carbon.heal_overall_damage(amount_healed, amount_healed)
+	hosted_carbon.heal_overall_damage(amount_healed * seconds_per_tick, amount_healed * seconds_per_tick)
 
 /datum/chimeric_node/output/healing_coma/proc/enter_coma()
 	hosted_carbon.fakedeath("healing_coma")

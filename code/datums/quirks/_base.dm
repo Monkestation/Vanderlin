@@ -145,7 +145,7 @@ GLOBAL_LIST_INIT(quirk_registry, init_quirk_registry())
 	return
 
 /// Called every life tick if implemented
-/datum/quirk/proc/on_life(mob/living/user)
+/datum/quirk/proc/on_life(mob/living/user, seconds_per_tick)
 	return
 
 /// Check if this quirk is compatible with a list of existing quirks

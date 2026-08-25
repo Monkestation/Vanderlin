@@ -84,16 +84,17 @@
 
 	return ..()
 
-/obj/structure/channel_connector/heater/process()
+/obj/structure/channel_connector/heater/process(seconds_per_tick)
 	if(!on || !fuel_left)
 		if(on)
 			on = FALSE
 			update_appearance(UPDATE_OVERLAYS)
-		current_temperature = max(300, current_temperature - 10)
+		current_temperature = max(300, current_temperature - 5 * seconds_per_tick)
 		internal_reagents?.expose_temperature(current_temperature, 1)
 		return
 
-	fuel_left = max(0, fuel_left - 1)
+	fuel_left = max(0, fuel_left - SPT_TO_DECISECONDS(seconds_per_tick))
+
 	if(current_temperature < target_temperature)
 		current_temperature = min(target_temperature, current_temperature + heating_rate)
 	internal_reagents.expose_temperature(current_temperature, 1)

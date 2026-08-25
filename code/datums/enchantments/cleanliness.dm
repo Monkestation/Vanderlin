@@ -8,7 +8,7 @@
 		/datum/thaumaturgical_essence/cycle = 25
 	)
 
-/datum/enchantment/eternal_clean/process()
+/datum/enchantment/eternal_clean/process(seconds_per_tick)
 	if(!enchanted_item)
 		STOP_PROCESSING(SSenchantment, src)
 		return

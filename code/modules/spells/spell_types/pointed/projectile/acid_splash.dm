@@ -108,9 +108,9 @@
 	. = ..()
 	damage_per_tick = scaled_damage
 
-/datum/status_effect/debuff/acidsplash/tick()
+/datum/status_effect/debuff/acidsplash/tick(seconds_between_ticks)
 	var/mob/living/target = owner
-	target.adjustFireLoss(damage_per_tick)
+	target.adjustFireLoss(damage_per_tick * seconds_between_ticks)
 
 /atom/movable/screen/alert/status_effect/debuff/acidsplash
 	name = "Acid Burn"

@@ -9,8 +9,8 @@
 	var/obj/item/essence_node_portable/contained_node
 	var/max_tier = 0
 
-	var/jar_slowdown = 0.5 // Much less than carrying raw node
-	var/jar_stamina_drain = 1 // Minimal drain
+	/// Drain per second when holding
+	var/jar_stamina_drain = 1
 	var/last_drain = 0
 
 /obj/item/essence_node_jar/Initialize()
@@ -20,23 +20,26 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/essence_node_jar/Destroy()
+	QDEL_NULL(contained_node)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/essence_node_jar/process()
-	if(contained_node)
-		var/mob/living/holder = loc
-		if(istype(holder) && (src in holder.held_items))
-			apply_jar_penalties(holder)
+/obj/item/essence_node_jar/process(seconds_per_tick)
+	if(!contained_node)
+		return
 
-/obj/item/essence_node_jar/proc/apply_jar_penalties(mob/living/holder)
-	if(world.time >= last_drain + 2 MINUTES) // Less frequent drain
-		if(holder.stamina)
-			var/drain_amount = jar_stamina_drain * (contained_node.tier + 1)
-			holder.stamina = max(0, holder.stamina - drain_amount)
-			if(contained_node.tier >= 1 && holder.stamina <= 30)
-				to_chat(holder, span_notice("The contained essence node creates a slight burden."))
-		last_drain = world.time
+	var/mob/living/holder = loc
+	if(!istype(holder) || !(src in holder.held_items))
+		return
+
+	if(world.time < last_drain + 2 MINUTES) // Less frequent drain
+		return
+
+	if(holder.stamina)
+		var/drain_amount = jar_stamina_drain * seconds_per_tick * (contained_node.tier + 1)
+		holder.stamina = max(0, holder.stamina - drain_amount)
+
+	last_drain = world.time
 
 /obj/item/essence_node_jar/update_overlays()
 	. = ..()
@@ -112,5 +115,4 @@
 	desc = "A masterwork containment vessel capable of safely transporting even the most powerful essence nodes. Advanced stabilization reduces carrying burden significantly."
 	icon_state = "node_jar"
 	max_tier = 1
-	jar_slowdown = 0.2
 	jar_stamina_drain = 0.5

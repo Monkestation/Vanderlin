@@ -401,7 +401,6 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	id = "fleshmend"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/fleshmend
 	visual_type = /obj/effect/temp_visual/heal_rogue/fleshmend
-	outline_alpha = 160
 	duration = 30 SECONDS
 	status_type = STATUS_EFFECT_REPLACE
 

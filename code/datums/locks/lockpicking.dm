@@ -263,32 +263,30 @@
 
 /atom/movable/screen/movable/snap/lockpicking/proc/on_mouse_up(datum/source, atom/object, turf/location, control, params)
 	SIGNAL_HANDLER
+
 	mouse_status = LOCKPICK_MOUSEUP
-	lock_angle -= 10
-	process()
 
 /atom/movable/screen/movable/snap/lockpicking/proc/move_pick_forward(control, params)
 	SIGNAL_HANDLER
+
 	mouse_status = LOCKPICK_MOUSEDOWN
-	lock_angle += 10
-	process()
 
 //compilcated circle mathematics about rotations and shit, signals and the like
-/atom/movable/screen/movable/snap/lockpicking/process()
+/atom/movable/screen/movable/snap/lockpicking/process(seconds_per_tick)
 	if(!linked_lock || !picker)
 		lock_angle = 0
 		return FALSE
 
 	switch(mouse_status)
 		if(LOCKPICK_MOUSEDOWN)
-			lock_angle += 10
+			lock_angle += 50 * seconds_per_tick
 		if(LOCKPICK_MOUSEUP)
-			lock_angle -= 10
+			lock_angle -= 50 * seconds_per_tick
 
-	lock_angle = clamp(lock_angle,0,90)
+	lock_angle = clamp(lock_angle, 0, 90)
 
-	var/complete_multiplier = lock_angle/90 // 1 means we've unlocked it.
-	angle_distance = abs(sweet_spot-pick_angle) //How far are we, in angular units, are we from the sweet spot?
+	var/complete_multiplier = lock_angle / 90 // 1 means we've unlocked it.
+	angle_distance = abs(sweet_spot - pick_angle) //How far are we, in angular units, are we from the sweet spot?
 	//The larger the angle distance, the easier it is to fail.
 
 	var/failing = (angle_distance * complete_multiplier) > (difficulty + (skill_level))
@@ -310,7 +308,7 @@
 	if(failing)
 		if(break_checking_cooldown <= world.time)
 			var/break_prob = clamp(10 - skill_level + (6 - difficulty) * 2, 0, 100)
-			if(prob(break_prob))
+			if(SPT_PROB(break_prob / 1.8, seconds_per_tick))
 				to_chat(picker, span_notice("My \the [the_lockpick] broke!"))
 				playsound(src, 'sound/items/LPBreak.ogg', min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
 				qdel(the_lockpick)
@@ -327,6 +325,7 @@
 
 		lock_angle -= 20
 		playsound(picker, pick('sound/items/LPtry.ogg', 'sound/items/LPtry2.ogg'), min(100 - (15 * skill_level) + (10 * 6 - difficulty), 100), extrarange = SILENCED_SOUND_EXTRARANGE)
+
 	if(lock_angle >= 1 && !failing && !playing_lock_sound)
 		play_turn_sound()
 		playing_lock_sound = TRUE
@@ -343,6 +342,7 @@
 			picking_object.picked(picker, the_lockpick, skill_level, difficulty)
 			qdel(src)
 		return FALSE
+
 	return TRUE
 
 /atom/movable/screen/movable/snap/lockpicking/proc/play_turn_sound(timerd)

@@ -1014,10 +1014,10 @@
 	H.apply_overlay(BODY_LAYER)
 	H.apply_overlay(ABOVE_BODY_FRONT_LAYER)
 
-/datum/species/proc/spec_life(mob/living/carbon/human/H)
+/datum/species/proc/spec_life(mob/living/carbon/human/H, seconds_per_tick)
 	SHOULD_CALL_PARENT(TRUE)
-	if(H.stat == DEAD)
-		return
+
+	return
 
 /datum/species/proc/spec_death(gibbed, mob/living/carbon/human/H)
 	return
@@ -1291,11 +1291,13 @@
 	H.set_hair_style(/datum/sprite_accessory/hair/head/bald)
 
 
-/datum/species/proc/handle_hygiene(mob/living/carbon/human/H)
+/datum/species/proc/handle_hygiene(mob/living/carbon/human/H, seconds_per_tick)
 	if(H.stat == DEAD)
 		return
+
 	if(HAS_TRAIT(H, TRAIT_NOHYGIENE))
 		return
+
 	switch(H.hygiene)
 		if(HYGIENE_LEVEL_CLEAN to HYGIENE_LEVEL_CLEAN)
 			if(HAS_TRAIT(H, TRAIT_STINKY))
@@ -1329,11 +1331,6 @@
 			H.remove_stress(/datum/stress_event/forced_clean)
 			H.remove_stress(/datum/stress_event/disgusting)
 			H.remove_stress(/datum/stress_event/clean)
-
-
-
-
-
 
 //////////////////
 // ATTACK PROCS //
@@ -2102,9 +2099,10 @@
 /obj/item/proc/blockproj(mob/living/carbon/human/H)
 	return
 
-/datum/species/proc/handle_environment(mob/living/carbon/human/H)
+/datum/species/proc/handle_environment(mob/living/carbon/human/H, seconds_per_tick)
 	if(!H.client) //I cannot be assed to balance random npcs freezing
 		return
+
 	var/turf/T = get_turf(H)
 	var/loc_temp = T ? T.return_temperature() : AMBIENT_COMFORT_MIN + 5 // Default to comfortable
 
@@ -2123,13 +2121,13 @@
 		if(should_affect_body_temp)
 			var/thermal_protection = calculate_thermal_protection(H, loc_temp)
 			var/temp_change = calculate_temperature_change(H, loc_temp, thermal_protection, natural_adjustment)
-			H.adjust_bodytemperature(temp_change)
+			H.adjust_bodytemperature((temp_change / 2) * seconds_per_tick)
 		else
 			// Just natural regulation in comfort zone
-			H.adjust_bodytemperature(natural_adjustment)
+			H.adjust_bodytemperature((natural_adjustment / 2) * seconds_per_tick)
 
 	// Apply temperature damage and effects
-	handle_temperature_effects(H)
+	handle_temperature_effects(H, seconds_per_tick)
 
 /datum/species/proc/calculate_thermal_protection(mob/living/carbon/human/H, loc_temp)
 	if(loc_temp < H.bodytemperature)
@@ -2166,7 +2164,7 @@
 			return round(adjusted_natural + environmental_effect, 0.1)
 	return natural_adjustment
 
-/datum/species/proc/handle_temperature_effects(mob/living/carbon/human/H)
+/datum/species/proc/handle_temperature_effects(mob/living/carbon/human/H, seconds_per_tick)
 	var/debuff_level = 0
 	// Heat damage and effects
 	if(H.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT && !HAS_TRAIT(H, TRAIT_RESISTHEAT))
@@ -2180,9 +2178,9 @@
 		debuff_level = calculate_heat_debuff_level(heat_excess)
 		// Apply damage
 		if(burn_damage > 0)
-			var/final_damage = CLAMP(burn_damage * H.physiology.heat_mod, 0, CONFIG_GET(number/per_tick/max_fire_damage))
+			var/final_damage = CLAMP(burn_damage * H.physiology.heat_mod * seconds_per_tick, 0, CONFIG_GET(number/per_tick/max_fire_damage))
 			INVOKE_ASYNC(H, PROC_REF(apply_damage), final_damage, BURN, spread_damage = TRUE, flashes = FALSE)
-			if(H.stat < UNCONSCIOUS && prob(burn_damage * 10 / 4))
+			if(H.stat < UNCONSCIOUS && SPT_PROB((burn_damage * 10) / 8, seconds_per_tick))
 				INVOKE_ASYNC(H, TYPE_PROC_REF(/mob, emote), "pain")
 		// Apply building heat debuffs
 		apply_heat_debuffs(H, debuff_level)
@@ -2197,7 +2195,7 @@
 		debuff_level = calculate_cold_debuff_level(cold_deficit)
 		// Apply damage
 		if(cold_damage > 0)
-			INVOKE_ASYNC(H, PROC_REF(apply_damage), cold_damage * H.physiology.cold_mod, BURN,  flashes = FALSE)
+			INVOKE_ASYNC(H, PROC_REF(apply_damage), cold_damage * H.physiology.cold_mod * seconds_per_tick, BURN,  flashes = FALSE)
 		// Apply building cold debuffs
 		apply_cold_debuffs(H, debuff_level, cold_deficit)
 	// Clear effects when in safe range
@@ -2275,15 +2273,15 @@
 	stress_change = 6
 
 /datum/species/proc/calculate_heat_damage(mob/living/carbon/human/H, heat_excess)
-	var/firemodifier = (H.fire_stacks + H.divine_fire_stacks) / 50
+	var/firemodifier = (H.fire_stacks + H.divine_fire_stacks) / 100
 
 	if(H.on_fire)
 		if((H.fire_stacks + H.divine_fire_stacks) >= HUMAN_FIRE_STACK_ICON_NUM)
-			return 200
-		return 20
-	else
-		firemodifier = min(firemodifier, 0)
-		return max(log(2-firemodifier, (H.bodytemperature-BODYTEMP_NORMAL))-5, 0)
+			return 100
+		return 10
+
+	firemodifier = min(firemodifier, 0)
+	return max(log(2-firemodifier, (H.bodytemperature-BODYTEMP_NORMAL))-5, 0)
 
 /datum/species/proc/calculate_cold_damage(cold_deficit)
 	switch(cold_deficit)
@@ -2374,9 +2372,10 @@
 // FIRE //
 //////////
 
-/datum/species/proc/handle_fire(mob/living/carbon/human/H, no_protection = FALSE)
+/datum/species/proc/handle_fire(mob/living/carbon/human/H, no_protection = FALSE, seconds_per_tick = SSMOBS_DT)
 	if(!CanIgniteMob(H))
 		return TRUE
+
 	if(H.on_fire)
 		//the fire tries to damage the exposed clothes and items
 		var/list/burning_items = list()
@@ -2421,14 +2420,15 @@
 			burning_items |= leg_clothes
 
 		for(var/obj/item/I as anything in burning_items)
-			I.fire_act(((H.fire_stacks + H.divine_fire_stacks) * 25)) //damage taken is reduced to 2% of this value by fire_act()
+			I.fire_act(((H.fire_stacks + H.divine_fire_stacks) * 12.5 * seconds_per_tick)) //damage taken is reduced to 2% of this value by fire_act()
 
 		var/thermal_protection = H.get_thermal_protection()
 
 		if(thermal_protection >= 30000 && !no_protection)
 			return
+
 		if(thermal_protection >= 30000 && !no_protection)
-			H.adjust_bodytemperature(5)
+			H.adjust_bodytemperature(2.5 * seconds_per_tick)
 		else
 			H.adjust_bodytemperature(BODYTEMP_HEATING_MAX + ((H.fire_stacks + H.divine_fire_stacks)* 12))
 			H.add_stress(/datum/stress_event/on_fire)

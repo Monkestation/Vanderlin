@@ -269,7 +269,7 @@
 	build_all_button_icons(UPDATE_BUTTON_STATUS|UPDATE_BUTTON_BACKGROUND)
 	return TRUE
 
-/datum/action/cooldown/process()
+/datum/action/cooldown/process(seconds_per_tick)
 	if(!owner || (next_use_time - world.time) <= 0)
 		build_all_button_icons(UPDATE_BUTTON_STATUS)
 		STOP_PROCESSING(SSfastprocess, src)

@@ -38,7 +38,7 @@
 	push_surplus_to_linked(from_storage)
 
 // Called each tick only while waiting for essences
-/obj/machinery/essence/infuser/process()
+/obj/machinery/essence/infuser/process(seconds_per_tick)
 	pull_from_linked(storage)
 	if(recipe_ready())
 		STOP_PROCESSING(SSobj, src)

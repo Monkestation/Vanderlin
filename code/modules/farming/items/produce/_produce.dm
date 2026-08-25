@@ -174,31 +174,6 @@
 		var/mob/living/carbon/human/H = eater
 		bitten_names |= H.real_name
 
-/obj/item/reagent_containers/food/snacks/produce/fruit/apple/blockproj(mob/living/carbon/human/H)
-	if(prob(98))
-		H.visible_message(span_notice("[H] is saved by the apple!"))
-		H.dropItemToGround(H.head)
-		return 1
-	else
-		H.dropItemToGround(H.head)
-		return 0
-
-/obj/item/reagent_containers/food/snacks/produce/fruit/apple/equipped(mob/M)
-	..()
-	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
-		if(H.head == src)
-			equippedloc = H.loc
-			START_PROCESSING(SSobj, src)
-
-/obj/item/reagent_containers/food/snacks/produce/fruit/apple/process()
-	. = ..()
-	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
-		if(H.head == src)
-			if(equippedloc != H.loc)
-				H.dropItemToGround(H.head)
-
 /obj/item/reagent_containers/food/snacks/produce/fruit/strawberry
 	seed = /obj/item/neuFarm/seed/strawberry
 	name = "strawberry"

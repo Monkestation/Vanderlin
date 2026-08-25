@@ -53,7 +53,7 @@
 		QDEL_NULL(torchy)
 	return ..()
 
-/obj/machinery/light/fueled/lanternpost/process()
+/obj/machinery/light/fueled/lanternpost/process(seconds_per_tick)
 	if(on)
 		if(torchy)
 			if(torchy.fuel <= 0)

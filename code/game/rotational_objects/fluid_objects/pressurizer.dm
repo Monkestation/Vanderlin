@@ -31,9 +31,10 @@
 	connected_pipe = null
 	return ..()
 
-/obj/structure/pressurizer/process()
+/obj/structure/pressurizer/process(seconds_per_tick)
 	if(!connected_pipe)
 		return
+
 	if(last_pressure_added == 0 && rotations_per_minute != 0)
 		update_pressure()
 

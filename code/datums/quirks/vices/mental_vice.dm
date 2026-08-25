@@ -49,9 +49,10 @@
 	last_passed_check = world.time
 	return ..()
 
-/datum/quirk/vice/greedy/on_life(mob/living/user)
+/datum/quirk/vice/greedy/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
 		return
+
 	var/mob/living/carbon/human/H = user
 
 	if(!first_tick)
@@ -108,9 +109,10 @@
 	point_value = 3
 	var/last_check = 0
 
-/datum/quirk/vice/paranoid/on_life(mob/living/user)
+/datum/quirk/vice/paranoid/on_life(mob/living/user, seconds_per_tick)
 	if(world.time < last_check + 10 SECONDS)
 		return
+
 	if(!ishuman(user))
 		return
 
@@ -158,9 +160,10 @@
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Clingy..."))
 
-/datum/quirk/vice/clingy/on_life(mob/living/user)
+/datum/quirk/vice/clingy/on_life(mob/living/user, seconds_per_tick)
 	if(world.time < last_check + 10 SECONDS)
 		return
+
 	if(!user)
 		return
 
@@ -194,9 +197,10 @@
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Introvert..."))
 
-/datum/quirk/vice/isolationist/on_life(mob/living/user)
+/datum/quirk/vice/isolationist/on_life(mob/living/user, seconds_per_tick)
 	if(world.time < last_check + 10 SECONDS)
 		return
+
 	if(!user)
 		return
 
@@ -239,9 +243,10 @@
 	pain_pity_charges = rand(2, 4)
 	return ..()
 
-/datum/quirk/vice/narcoleptic/on_life(mob/living/user)
+/datum/quirk/vice/narcoleptic/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
 		return
+
 	var/mob/living/carbon/human/H = user
 
 	if(H.stat != CONSCIOUS)
@@ -270,13 +275,14 @@
 					H.visible_message(span_warning("[H] suddenly collapses!"))
 			do_sleep = FALSE
 			last_unconsciousness = world.time
-	else
-		if(last_unconsciousness + concious_timer < world.time)
-			drugged_up = FALSE
-			to_chat(H, span_blue("I'm getting drowsy..."))
-			H.emote("yawn", forced = TRUE)
-			next_sleep = world.time + rand(7 SECONDS, 11 SECONDS)
-			do_sleep = TRUE
+		return
+
+	if(last_unconsciousness + concious_timer < world.time)
+		drugged_up = FALSE
+		to_chat(H, span_blue("I'm getting drowsy..."))
+		H.emote("yawn", forced = TRUE)
+		next_sleep = world.time + rand(7 SECONDS, 11 SECONDS)
+		do_sleep = TRUE
 
 /proc/narcolepsy_drug_up(mob/living/living)
 	var/datum/quirk/vice/narcoleptic/narco = living.get_quirk(/datum/quirk/vice/narcoleptic)
@@ -299,9 +305,10 @@
 	next_paincrave = world.time + rand(15 MINUTES, 25 MINUTES)
 	return ..()
 
-/datum/quirk/vice/masochist/on_life(mob/living/user)
+/datum/quirk/vice/masochist/on_life(mob/living/user, seconds_per_tick)
 	if(!ishuman(user))
 		return
+
 	var/mob/living/carbon/human/H = user
 
 	if(next_paincrave > world.time)

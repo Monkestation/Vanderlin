@@ -375,17 +375,17 @@
 	affected_turfs = null
 	return ..()
 
-/obj/effect/bombard_zone/process()
-	affect_targets()
+/obj/effect/bombard_zone/process(seconds_per_tick)
+	affect_targets(seconds_per_tick)
 
-/obj/effect/bombard_zone/proc/affect_targets()
+/obj/effect/bombard_zone/proc/affect_targets(seconds_per_tick)
 	for(var/turf/T in affected_turfs)
 		for(var/mob/living/M in T)
 			if(istype(M, /mob/living/simple_animal/hostile/retaliate/meatvine))
 				continue
-			apply_effect(M)
+			apply_effect(M, seconds_per_tick)
 
-/obj/effect/bombard_zone/proc/apply_effect(mob/living/M)
+/obj/effect/bombard_zone/proc/apply_effect(mob/living/M, seconds_per_tick)
 	return
 
 /obj/effect/bombard_zone/acid
@@ -396,8 +396,8 @@
 	light_color = "#00ff00"
 	light_outer_range = 3
 
-/obj/effect/bombard_zone/acid/apply_effect(mob/living/M)
-	M.apply_damage(5, BURN)
+/obj/effect/bombard_zone/acid/apply_effect(mob/living/M, seconds_per_tick)
+	M.apply_damage(2.5 * seconds_per_tick, BURN)
 	M.adjust_fire_stacks(1)
 
 /obj/effect/bombard_zone/neurotoxin
@@ -408,12 +408,12 @@
 	light_color = "#9900ff"
 	light_outer_range = 3
 
-/obj/effect/bombard_zone/neurotoxin/apply_effect(mob/living/carbon/C)
-	C.adjustOxyLoss(3)
-	C.adjust_eye_blur(4 SECONDS)
+/obj/effect/bombard_zone/neurotoxin/apply_effect(mob/living/carbon/C, seconds_per_tick)
+	C.adjustOxyLoss(1.5 * seconds_per_tick)
+	C.adjust_eye_blur_up_to(2 SECONDS * seconds_per_tick, 20 SECONDS)
 
-	if(prob(10))
-		C.apply_damage(2, TOX)
+	if(SPT_PROB(5, seconds_per_tick))
+		C.apply_damage(1 * seconds_per_tick, TOX)
 
 /obj/effect/temp_visual/bombard_zone_tile
 	icon = 'icons/effects/effects.dmi'

@@ -156,7 +156,7 @@
 	light_outer_range = 2
 	light_color = LIGHT_COLOR_FIRE
 	duration = 4 SECONDS
-	var/damage_per_tick = 5
+	var/damage_per_second = 2.5
 	var/knockdown_time = 0.5 SECONDS
 	var/warned = FALSE
 	var/active = FALSE
@@ -190,7 +190,7 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/temp_visual/minotaur_fury_zone/process()
+/obj/effect/temp_visual/minotaur_fury_zone/process(seconds_per_tick)
 	if(!active)
 		return
 
@@ -198,13 +198,13 @@
 		if(L.has_faction("caves"))
 			continue
 
-		L.adjustFireLoss(damage_per_tick)
+		L.adjustFireLoss(damage_per_second * seconds_per_tick)
 
-		if(!warned && prob(50))
+		if(!warned)
 			to_chat(L, "<span class='danger'>The flames sear your flesh!</span>")
 			warned = TRUE
 
-		if(knockdown_time > 0 && prob(20))
+		if(knockdown_time > 0 && SPT_PROB(20, seconds_per_tick))
 			L.Knockdown(knockdown_time)
 
 /obj/effect/temp_visual/minotaur_fury_zone/strong
@@ -214,7 +214,7 @@
 	light_outer_range = 3
 	light_color = "#FF3300"
 	duration = 5 SECONDS
-	damage_per_tick = 8
+	damage_per_second = 4
 	knockdown_time = 1 SECONDS
 
 /obj/effect/temp_visual/minotaur_fury_zone/strong/Initialize(mapload)

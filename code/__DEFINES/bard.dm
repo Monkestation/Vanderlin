@@ -38,11 +38,11 @@
 // Rhythm damage values
 #define RHYTHM_RESONATING_DAMAGE 20 // Parry-bypassing brute on hit (armor-checked)
 #define RHYTHM_CONCUSSIVE_DAMAGE 8 // Minor knockback damage
-#define RHYTHM_REGEN_TICK 0.5 // Heal-over-time per tick (compare: miracle = 1.0, hymn = 0.6)
+#define RHYTHM_REGEN_TICK 0.5 // Heal-over-time per second (compare: miracle = 1.0, hymn = 0.6)
 #define RHYTHM_REGEN_DURATION 10 SECONDS // Duration of regen HoT
 
 // Crescendo damage values (cone AoE, T2 only)
 #define CRESCENDO_RESONATING_DAMAGE 55 // Parry-bypassing brute in cone (armor-checked)
 #define CRESCENDO_CONCUSSIVE_DAMAGE 25 // Brute + 3-tile knockback in cone
 #define CRESCENDO_MENDING_DURATION 30 SECONDS // Duration of crescendo HoT on audience (2x rhythm_regen)
-#define CRESCENDO_MENDING_TICK 1.0 // Heal-over-time per tick (compare: rhythm_regen = 0.5)
+#define CRESCENDO_MENDING_TICK 1 // Heal-over-time per second (compare: rhythm_regen = 0.5)

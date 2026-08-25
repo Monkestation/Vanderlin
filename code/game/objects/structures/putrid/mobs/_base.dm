@@ -97,7 +97,7 @@
 	QDEL_IN(src, rand(60, 120) SECONDS)
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/meatvine/Life(seconds_per_tick, times_fired)
+/mob/living/simple_animal/hostile/retaliate/meatvine/Life(seconds_per_tick)
 	. = ..()
 	if(stat != DEAD)
 		regenerate_personal_resources(seconds_per_tick)

@@ -1,8 +1,8 @@
 /datum/component/steam_life
 	var/steam_charge = 100
 	var/max_steam_charge = 100
-	///this to be easier to understand is how much should be drained per minute
-	var/steam_drain_rate = 4
+	/// Steam drain per second
+	var/steam_drain_rate = 0.06
 	var/mob/living/carbon/human/host
 	var/tmp/needs_particles = TRUE
 
@@ -24,20 +24,22 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/datum/component/steam_life/process()
+/datum/component/steam_life/process(seconds_per_tick)
 	if(!host)
 		return
+
 	if(HAS_TRAIT(host, TRAIT_STASIS))
 		return
-	steam_charge = max(0, steam_charge - (steam_drain_rate / 60))
+
+	steam_charge = max(0, steam_charge - (steam_drain_rate * seconds_per_tick))
 
 	if(steam_charge <= 0)
 		host.Unconscious(20)
-		if(prob(10))
+		if(SPT_PROB(5, seconds_per_tick))
 			host.emote("shutdown", forced = TRUE)
 			to_chat(host, span_danger("CRITICAL POWER FAILURE - ENTERING DORMANT MODE"))
 	else if(steam_charge <= 20)
-		if(prob(5))
+		if(SPT_PROB(2.5, seconds_per_tick))
 			host.emote("malfunction", forced = TRUE)
 			to_chat(host, span_warning("WARNING: POWER RESERVES CRITICALLY LOW"))
 	update_steam()

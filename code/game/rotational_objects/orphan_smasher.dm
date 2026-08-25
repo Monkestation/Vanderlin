@@ -75,11 +75,13 @@
 		if(STEP_LEVER)
 			. += span_notice("To toggle the machine, use MMB.")
 
-/obj/structure/orphan_smasher/process()
+/obj/structure/orphan_smasher/process(seconds_per_tick)
 	if(!working)
 		return
+
 	if(!length(anvil_recipes_to_craft))
 		return
+
 	try_set_recipe_stuff()
 
 	if(current.rotations_required > rotations_per_minute)
@@ -95,7 +97,8 @@
 	if(length(material_copy))
 		return
 
-	progress += 5 * (rotations_per_minute / 16)
+	progress += 2.5 * seconds_per_tick * (rotations_per_minute / 16)
+
 	if(progress >= needed_progress)
 		create_current()
 

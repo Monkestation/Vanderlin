@@ -313,7 +313,7 @@
 /datum/worker_mind/proc/start_task()
 	current_task.start_working(worker)
 
-/datum/worker_mind/process()
+/datum/worker_mind/process(seconds_per_tick)
 	if(worker.stat >= DEAD)
 		return
 	check_worktree()

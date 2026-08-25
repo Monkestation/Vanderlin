@@ -1,12 +1,12 @@
-/mob/living/carbon/Life(delta_time = SSMOBS_DT, times_fired)
+/mob/living/carbon/Life(seconds_per_tick)
 	set invisibility = 0
 
 	if(grab_fatigue > 0)
 		if(!pulling)
 			// Exponential decay mostly
-			grab_fatigue -= max(grab_fatigue * 0.15, 0.5)
+			grab_fatigue -= max(grab_fatigue * 0.1 * seconds_per_tick, 0.5)
 		else
-			grab_fatigue -= 0.5
+			grab_fatigue -= 0.5 * seconds_per_tick
 		grab_fatigue = max(0, grab_fatigue)
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -19,21 +19,19 @@
 	if(HAS_TRAIT(src, TRAIT_STASIS))
 		. = ..()
 	else
-		//Reagent processing needs to come before breathing, to prevent edge cases.
-
 		var/virus_immunity = virus_immunity()
 		var/antibiotics = get_antibiotics()
 		var/immunity_weakness = immunity_weakness()
 		var/turf/turf_loc = get_turf(loc)
 		var/passed_temp = turf_loc?.return_temperature()
 
-		var/organ_flag = handle_organs(delta_time, times_fired,virus_immunity, antibiotics, immunity_weakness, passed_temp)
-		var/bodypart_flag = handle_bodyparts(delta_time, times_fired,virus_immunity, antibiotics, immunity_weakness, passed_temp)
+		var/organ_flag = handle_organs(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+		var/bodypart_flag = handle_bodyparts(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 		var/sleep_flag = handle_sleep()
 
 		var/shock_flag = NONE
-		shock_flag |= handle_shock(delta_time, times_fired)
-		shock_flag |= handle_shock_stage(delta_time, times_fired)
+		shock_flag |= handle_shock(seconds_per_tick)
+		shock_flag |= handle_shock_stage(seconds_per_tick)
 
 		if((organ_flag & ORGAN_PROCESS_UPDATE_HEALTH) || (bodypart_flag & BODYPART_LIFE_UPDATE_HEALTH) || (shock_flag & SHOCK_PROCESS_UPDATE_HEALTH) || (sleep_flag & BODYPART_LIFE_UPDATE_HEALTH))
 			updatehealth()
@@ -41,35 +39,36 @@
 
 		. = ..()
 
-		if (QDELETED(src))
+		if(QDELETED(src))
 			return
 
-		handle_wounds()
-		handle_embedded_objects()
+		handle_wounds(seconds_per_tick)
+		handle_embedded_objects(seconds_per_tick)
 		update_stress()
-		handle_nausea()
+		handle_nausea(seconds_per_tick)
 
-
-	check_cremation()
+	check_cremation(seconds_per_tick)
 
 	if(stat != DEAD)
 		return 1
 
-/mob/living/carbon/DeadLife()
+/mob/living/carbon/DeadLife(seconds_per_tick)
 	set invisibility = 0
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 
 	. = ..()
-	if (QDELETED(src))
+
+	if(QDELETED(src))
 		return
-	handle_wounds()
-	handle_embedded_objects()
 
-	check_cremation()
+	handle_wounds(seconds_per_tick)
+	handle_embedded_objects(seconds_per_tick)
 
-/mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
+	check_cremation(seconds_per_tick)
+
+/mob/living/carbon/handle_random_events(seconds_per_tick) //BP/WOUND BASED PAIN
 	return
 
 ///////////////
@@ -81,12 +80,12 @@
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/proc/handle_bodyparts(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+/mob/living/carbon/proc/handle_bodyparts(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		if(bodypart.needs_processing)
-			. |= bodypart.on_life(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+			. |= bodypart.on_life(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 
-/mob/living/carbon/proc/handle_organs(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+/mob/living/carbon/proc/handle_organs(seconds_per_tick, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically
 		return
 
@@ -103,7 +102,8 @@
 			// This exists mostly because reagent metabolization can cause organ shuffling
 			if(!QDELETED(organ) && !already_processed_life[organ] && (organ.owner == src))
 				if(in_bleedout || organ.needs_processing)
-					. |= organ.on_life(delta_time, times_fired, in_bleedout, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+					. |= organ.on_life(seconds_per_tick, in_bleedout, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+
 				already_processed_life[organ] = TRUE
 
 	if(stat < DEAD)
@@ -112,17 +112,16 @@
 				break
 			var/datum/organ_process/organ_process = GLOB.organ_processes_by_slot[thing]
 			if(organ_process.needs_process(src))
-				. |= organ_process.handle_process(src, delta_time, times_fired)
+				. |= organ_process.handle_process(src, seconds_per_tick)
 	else
 		for(var/obj/item/organ/organ as anything in internal_organs)
 			//Needed so organs decay while inside the body
-			. |= organ.on_death(delta_time, times_fired, passed_temp)
+			. |= organ.on_death(seconds_per_tick, passed_temp)
 
-
-/mob/living/carbon/handle_embedded_objects()
+/mob/living/carbon/handle_embedded_objects(seconds_per_tick)
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		for(var/obj/item/embedded as anything in bodypart.embedded_objects)
-			if(embedded.on_embed_life(src, bodypart))
+			if(embedded.on_embed_life(src, bodypart, seconds_per_tick))
 				continue
 
 			if(prob(embedded.embedding.embedded_pain_chance))
@@ -154,7 +153,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 */
 
 //this updates all special effects: stun, sleeping, knockdown, druggy, stuttering, etc..
-/mob/living/carbon/handle_status_effects()
+/mob/living/carbon/handle_status_effects(seconds_per_tick)
 	..()
 
 	// These should all be real status effects :)))))))))
@@ -256,7 +255,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 /////////////
 //CREMATION//
 /////////////
-/mob/living/carbon/proc/check_cremation()
+/mob/living/carbon/proc/check_cremation(seconds_per_tick)
 	//Only cremate while actively on fire
 	if(!on_fire)
 		return
@@ -277,7 +276,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		limb = get_bodypart(zone)
 		if(limb && !limb.skeletonized)
 			if(limb.get_damage() >= (limb.max_damage - 5))
-				limb.cremation_progress += rand(2,5)
+				limb.cremation_progress += rand(2, 5)
 				if(CAN_HAVE_BLOOD(src))
 					adjust_blood_volume(-10)
 				if(limb.cremation_progress >= 50)
@@ -327,9 +326,9 @@ All effects don't start immediately, but rather get worse over time; the rate is
 //BRAIN DAMAGE//
 ////////////////
 
-/mob/living/carbon/proc/handle_brain_damage()
+/mob/living/carbon/proc/handle_brain_damage(seconds_per_tick)
 	for(var/datum/brain_trauma/BT as anything in get_traumas())
-		BT.on_life()
+		BT.on_life(seconds_per_tick)
 
 /////////////////////////////////////
 //MONKEYS WITH TOO MUCH CHOLOESTROL//
@@ -415,9 +414,10 @@ All effects don't start immediately, but rather get worse over time; the rate is
 *	Hunger and Hydration.
 */
 
-/mob/living/carbon/proc/handle_sleep()
+/mob/living/carbon/proc/handle_sleep(seconds_per_tick)
 	if(HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
 		return
+
 	var/cant_fall_asleep = FALSE
 	var/cause = "I just can't..."
 	var/list/equipped_items = get_equipped_items(FALSE)
@@ -433,7 +433,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 
 	//Healing while sleeping in a bed
 	if(stat >= UNCONSCIOUS)
-		var/sleepy_mod = buckled?.sleepy || 0.5
+		var/sleepy_mod = (buckled?.sleepy || 0.5) * seconds_per_tick
 		var/bleed_rate = get_bleed_rate()
 		var/yess = HAS_TRAIT(src, TRAIT_NOHUNGER)
 		if(nutrition > 0 || yess)
@@ -459,7 +459,8 @@ All effects don't start immediately, but rather get worse over time; the rate is
 				adjustToxLoss(-(sleepy_mod * 0.15), FALSE, TRUE)
 				. |= BODYPART_LIFE_UPDATE_HEALTH
 			if(eyesclosed && !HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
-				Sleeping(300)
+				Sleeping(30 SECONDS)
+
 		tiredness = 0
 	else if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
 		// Resting on a bed or something
@@ -478,13 +479,13 @@ All effects don't start immediately, but rather get worse over time; the rate is
 							bed_check.sheet_tucked = FALSE
 
 				if(fallingas > 15)
-					Sleeping(300)
+					Sleeping(30 SECONDS)
 			else if(eyesclosed && fallingas >= 10 && cant_fall_asleep)
 				if(fallingas != 13)
 					to_chat(src, span_boldwarning("I can't sleep...[cause]"))
 				fallingas -= 5
 			else
-				adjust_energy(buckled.sleepy * (max_energy * 0.01))
+				adjust_energy(buckled.sleepy * (max_energy * 0.005) * seconds_per_tick)
 		// Resting on the ground (not sleeping or with eyes closed and about to fall asleep)
 		else if(body_position == LYING_DOWN)
 			if(eyesclosed && !cant_fall_asleep || (eyesclosed && !(fallingas >= 10 && cant_fall_asleep)))
@@ -492,13 +493,14 @@ All effects don't start immediately, but rather get worse over time; the rate is
 					to_chat(src, span_warning("I'll fall asleep soon, although a bed would be more comfortable..."))
 				fallingas++
 				if(fallingas > 25)
-					Sleeping(300)
+					Sleeping(30 SECONDS)
 			else if(eyesclosed && fallingas >= 10 && cant_fall_asleep)
 				if(fallingas != 13)
 					to_chat(src, span_boldwarning("I can't sleep...[cause]"))
 				fallingas -= 5
 			else
-				adjust_energy((max_energy * 0.01))
+				adjust_energy(max_energy * 0.005 * seconds_per_tick)
 		else if(fallingas)
 			fallingas = 0
-		tiredness = min(tiredness + 1, 100)
+
+		tiredness = min(tiredness + seconds_per_tick, 100)

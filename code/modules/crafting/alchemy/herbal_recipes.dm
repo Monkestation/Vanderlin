@@ -16,14 +16,18 @@
 	taste_description = "earthy herbs"
 	scent_description = "green leaves"
 
-/datum/reagent/medicine/herbal/symphitum_tea/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.adjustBruteLoss(-0.5*REM * efficiency, 0)
-		M.adjustFireLoss(-0.5*REM * efficiency, 0)
-		var/list/wCount = M.get_wounds()
-		if(wCount.len > 0 && prob(15 * efficiency))
-			M.heal_wounds(1 * efficiency)
-	..()
+/datum/reagent/medicine/herbal/symphitum_tea/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	M.adjustBruteLoss(-0.5 * REAGENTS_MODIFIER, 0)
+	M.adjustFireLoss(-0.5 * REAGENTS_MODIFIER, 0)
+	if(SPT_PROB(12, seconds_per_tick))
+		M.heal_wounds(1 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/medicine/herbal/taraxacum_extract
 	name = "Taraxacum Extract"
@@ -40,11 +44,16 @@
 	. = ..()
 	L.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
 
-/datum/reagent/medicine/herbal/taraxacum_extract/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.adjustToxLoss(-0.75, 0)
-		M.adjustBruteLoss(-0.25*REM, 0)
-	..()
+/datum/reagent/medicine/herbal/taraxacum_extract/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	M.adjustToxLoss(-0.25 * REAGENTS_MODIFIER, 0)
+	M.adjustBruteLoss(-0.1 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/medicine/herbal/urtica_brew
 	name = "Urtica Brew"
@@ -63,10 +72,10 @@
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_STIMULANT, "[type]")
 
-/datum/reagent/medicine/herbal/urtica_brew/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/medicine/herbal/urtica_brew/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-		M.adjust_stamina(-0.75, internal_regen = FALSE)
-	..()
+		M.adjust_stamina(-0.15 * REAGENTS_MODIFIER, internal_regen = FALSE)
 
 /datum/reagent/medicine/herbal/calendula_salve
 	name = "Calendula Salve"
@@ -75,20 +84,26 @@
 	taste_description = "bitter flowers"
 	scent_description = "marigold"
 
-/datum/reagent/medicine/herbal/calendula_salve/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+/datum/reagent/medicine/herbal/calendula_salve/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		if(!injury.can_heal())
 			continue
-		injury.adjust_germ_level(-5)
+		injury.adjust_germ_level(-0.4 * REM * seconds_per_tick)
 		injury.salve_injury()
+
 		if(injury.damage_type & FIRE_WOUND_TYPES)
-			injury.heal_damage(3)
+			injury.heal_damage(0.6 * REM * seconds_per_tick)
+
 		if(QDELETED(injury))
 			continue
-		injury.heal_damage(1)
+
+		injury.heal_damage(0.2 * REM * seconds_per_tick)
+
 	if(affected_bodypart.post_damage_change())
 		affected_mob.update_damage_overlays()
-	affected_bodypart.disinfect_limb(20 SECONDS)
+
+	affected_bodypart.disinfect_limb(4 SECONDS * REM * seconds_per_tick)
+
 	return FALSE
 
 // Weak Mana/Stamina Potions (based on hypericum/benedictus/mentha)
@@ -107,13 +122,17 @@
 	. = ..()
 	L.remove_chem_effect(CE_OXYGENATED, "[type]")
 
-/datum/reagent/medicine/herbal/hypericum_tonic/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		if(M.mana_pool)
-			M.mana_pool.adjust_mana(1.5)
-		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-			M.adjust_stamina(-0.5, internal_regen = FALSE)
-	..()
+/datum/reagent/medicine/herbal/hypericum_tonic/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	if(M.mana_pool)
+		M.mana_pool.adjust_mana(0.3 * REAGENTS_MODIFIER)
+
+	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
+		M.adjust_stamina(-0.1 * REAGENTS_MODIFIER, internal_regen = FALSE)
 
 /datum/reagent/medicine/herbal/mentha_tea
 	name = "Mentha Tea"
@@ -132,12 +151,15 @@
 	L.remove_chem_effect(CE_ENERGETIC, "[type]")
 	L.remove_chem_effect(CE_STABLE, "[type]")
 
-/datum/reagent/medicine/herbal/mentha_tea/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.add_nausea(-1)
-		if(M.mana_pool)
-			M.mana_pool.adjust_mana(1)
-	..()
+/datum/reagent/medicine/herbal/mentha_tea/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	M.add_nausea(-0.2 * REAGENTS_MODIFIER)
+	if(M.mana_pool)
+		M.mana_pool.adjust_mana(0.2 * REAGENTS_MODIFIER)
 
 // Mild Buff Potions (based on salvia/artemisia)
 /datum/reagent/buff/herbal
@@ -161,15 +183,19 @@
 	. = ..()
 	L.remove_chem_effect(CE_PULSE, "[type]")
 
-/datum/reagent/buff/herbal/salvia_wisdom/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -0.25*REM)
-		M.adjustBruteLoss(-0.1*REM, 0) // Very minor toughness
-	if(M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot/weak))
-		return ..()
-	if(volume > 2)
+/datum/reagent/buff/herbal/salvia_wisdom/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/constitutionpot/weak))
 		M.apply_status_effect(/datum/status_effect/buff/alch/constitutionpot/weak)
-	..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, -0.1 * REAGENTS_MODIFIER)
+	M.adjustBruteLoss(-0.05 * REAGENTS_MODIFIER, 0) // Very minor toughness
+
+	return TRUE
 
 /datum/reagent/buff/herbal/artemisia_luck
 	name = "Artemisia Fortune Tea"
@@ -188,16 +214,20 @@
 	L.remove_chem_effect(CE_STIMULANT, "[type]")
 	L.remove_chem_effect(CE_OXYGENATED, "[type]")
 
-/datum/reagent/buff/herbal/artemisia_luck/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.adjustBruteLoss(-0.1*REM, 0)
-		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-			M.adjust_stamina(-0.25, internal_regen = FALSE)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/artemisia_luck))
-		return ..()
-	if(volume > 2)
+/datum/reagent/buff/herbal/artemisia_luck/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/artemisia_luck))
 		M.apply_status_effect(/datum/status_effect/buff/alch/artemisia_luck)
-	..()
+
+	M.adjustBruteLoss(-0.02 * REAGENTS_MODIFIER, 0)
+	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
+		M.adjust_stamina(-0.1 * REAGENTS_MODIFIER, internal_regen = FALSE)
+
+	return TRUE
 
 /datum/reagent/buff/herbal/euphorbia_strength
 	name = "Euphorbia Strength Tea"
@@ -216,14 +246,16 @@
 	L.remove_chem_effect(CE_STIMULANT, "[type]")
 	L.remove_chem_effect(CE_PULSE, "[type]")
 
-/datum/reagent/buff/herbal/euphorbia_strength/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.add_nausea(0.5)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/strengthpot/weak))
-		return ..()
-	if(volume > 2)
+/datum/reagent/buff/herbal/euphorbia_strength/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/strengthpot/weak))
 		M.apply_status_effect(/datum/status_effect/buff/alch/strengthpot/weak)
-	..()
+
+	M.add_nausea(0.1 * REAGENTS_MODIFIER)
 
 // Very Mild Poisons (based on atropa/matricaria/paris but much weaker)
 /datum/reagent/poison/herbal
@@ -239,11 +271,16 @@
 	taste_description = "bitter nightshade"
 	scent_description = "danger"
 
-/datum/reagent/poison/herbal/weak_atropa/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.add_nausea(0.5)
-		M.adjustToxLoss(0.1)
-	..()
+/datum/reagent/poison/herbal/weak_atropa/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	M.add_nausea(0.1 * REAGENTS_MODIFIER)
+	M.adjustToxLoss(0.02 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/poison/herbal/matricaria_irritant
 	name = "Matricaria Irritant"
@@ -262,16 +299,18 @@
 	L.remove_chem_effect(CE_PULSE, "[type]")
 	L.remove_chem_effect(CE_PAINKILLER, "[type]")
 
-/datum/reagent/poison/herbal/matricaria_irritant/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.add_nausea(1)
-		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-			M.adjust_stamina(0.5) // Very mild stamina drain
-	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak))
-		return ..()
-	if(volume > 2)
+/datum/reagent/poison/herbal/matricaria_irritant/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	if(volume > 2 && ! M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak))
 		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak)
-	..()
+
+	M.add_nausea(0.2 * REAGENTS_MODIFIER)
+	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
+		M.adjust_stamina(0.1, REAGENTS_MODIFIER) // Very mild stamina drain
 
 //Simple Herbal Recipes using single herbs
 /datum/reagent/medicine/herbal/simple_rosa
@@ -281,12 +320,17 @@
 	taste_description = "floral"
 	scent_description = "roses"
 
-/datum/reagent/medicine/herbal/simple_rosa/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.adjustBruteLoss(-0.1*REM, 0)
-		M.adjustFireLoss(-0.1*REM, 0)
-		M.add_nausea(-1)
-	..()
+/datum/reagent/medicine/herbal/simple_rosa/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	if(volume < 0.99)
+		return
+
+	M.adjustBruteLoss(-0.02 * REAGENTS_MODIFIER, 0)
+	M.adjustFireLoss(-0.02 * REAGENTS_MODIFIER, 0)
+	M.add_nausea(-0.2 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 /datum/reagent/medicine/herbal/euphrasia_eye_wash
 	name = "Euphrasia Eye Wash"
@@ -303,17 +347,21 @@
 	. = ..()
 	L.remove_chem_effect(CE_OXYGENATED, "[type]")
 
-/datum/reagent/medicine/herbal/euphrasia_eye_wash/on_mob_life(mob/living/carbon/M, efficiency)
-	if(volume > 0.99)
-		M.adjustOrganLoss(ORGAN_SLOT_EYES, -0.1*REM)
-		if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
-			M.adjust_stamina(-0.1, internal_regen = FALSE)
+/datum/reagent/medicine/herbal/euphrasia_eye_wash/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
 
-	if(M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak))
-		return ..()
-	if(volume > 2)
+	if(volume < 0.99)
+		return
+
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak))
 		M.apply_status_effect(/datum/status_effect/buff/alch/perceptionpot/weak)
-	..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_EYES, -0.05 * REAGENTS_MODIFIER)
+
+	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
+		M.adjust_stamina(-0.02 * REAGENTS_MODIFIER, internal_regen = FALSE)
+
+	return TRUE
 
 // Advanced Herbal Reagents
 
@@ -338,17 +386,14 @@
 	. = ..()
 	M.remove_chem_effect(CE_STABLE, "[type]")
 
-/datum/reagent/medicine/herbal/valeriana_draught/on_mob_life(mob/living/carbon/M, efficiency)
-	var/datum/status_effect/drowsiness = M.has_status_effect(/datum/status_effect/drowsiness)
-	if(istype(drowsiness))
-		if(drowsiness?.duration < sleep_power)
-			M.adjust_drowsiness_up_to(10 SECONDS, 60 SECONDS)
-	M.adjust_stamina(2)
+/datum/reagent/medicine/herbal/valeriana_draught/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+	M.adjust_drowsiness_up_to(2 SECONDS * REAGENTS_MODIFIER, sleep_power)
+	M.adjust_stamina(0.4 * REAGENTS_MODIFIER)
 
-/datum/reagent/medicine/herbal/valeriana_draught/overdose_process(mob/living/M)
-	M.Unconscious(60)
+/datum/reagent/medicine/herbal/valeriana_draught/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+	M.Unconscious(1.2 SECONDS * REAGENTS_MODIFIER)
 
 // Stamina and Vigor Buffs
 
@@ -374,17 +419,18 @@
 	M.remove_chem_effect(CE_OXYGENATED, "[type]")
 	M.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 
-/datum/reagent/buff/herbal/benedictus_vigor/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjust_stamina(3)
-	if(M.satiety < 600)
-		M.adjust_nutrition(2)
-	if(prob(10))
-		M.heal_bodypart_damage(0.5, 0, 0)
-	if(M.has_status_effect(/datum/status_effect/buff/alch/endurancepot/weak))
-		return ..()
-	if(volume > 2)
+/datum/reagent/buff/herbal/benedictus_vigor/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	if(volume > 2 && !M.has_status_effect(/datum/status_effect/buff/alch/endurancepot/weak))
 		M.apply_status_effect(/datum/status_effect/buff/alch/endurancepot/weak)
+
 	. = ..()
+
+	M.adjust_stamina(0.6 * REAGENTS_MODIFIER)
+	if(M.satiety < 600)
+		M.adjust_nutrition(0.4 * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(5, seconds_per_tick))
+		M.heal_bodypart_damage(0.1 * REAGENTS_MODIFIER, 0, 0)
 
 // Topical Medicine
 
@@ -397,17 +443,24 @@
 	overdose_threshold = 30
 	taste_description = "bitter numbness"
 
-/datum/reagent/medicine/herbal/paris_poultice/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	if(affected_bodypart.heal_damage(0.5, 0.75, TRUE, required_status = BODYPART_ORGANIC))
+/datum/reagent/medicine/herbal/paris_poultice/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
+	. = ..()
+
+	if(affected_bodypart.heal_damage(0.1 * REM * seconds_per_tick, 0.15 * REM * seconds_per_tick, TRUE, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
-	affected_bodypart.add_pain(-amount_to_transfer * 0.3)
+
+	affected_bodypart.add_pain(-amount_to_transfer * 0.06 * REM * seconds_per_tick)
+
 	return FALSE
 
-/datum/reagent/medicine/herbal/paris_poultice/overdose_process(mob/living/M)
-	M.adjustToxLoss(0.5)
-	if(prob(5))
-		to_chat(M, span_warning("You feel numbness spreading through your body..."))
+/datum/reagent/medicine/herbal/paris_poultice/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+	if(SPT_PROB(2.5, seconds_per_tick))
+		to_chat(M, span_warning("You feel numbness spreading through your body..."))
+
+	M.adjustToxLoss(0.1 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 // Multi-Herb Healing
 
@@ -435,13 +488,16 @@
 	M.remove_chem_effect(CE_ANTIBIOTIC, "[type]")
 	M.remove_chem_effect(CE_OXYGENATED, "[type]")
 
-/datum/reagent/medicine/herbal/herbalist_panacea/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustBruteLoss(-1.5*REM*efficiency, FALSE)
-	M.adjustFireLoss(-1.5*REM*efficiency, FALSE)
-	M.adjustToxLoss(-1*REM*efficiency, FALSE)
-	M.adjustOxyLoss(-1*efficiency, TRUE)
-	M.adjust_stamina(2*REM*efficiency)
+/datum/reagent/medicine/herbal/herbalist_panacea/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustBruteLoss(-1 * REAGENTS_MODIFIER, FALSE)
+	M.adjustFireLoss(-1 * REAGENTS_MODIFIER, FALSE)
+	M.adjustToxLoss(-0.5 * REAGENTS_MODIFIER, FALSE)
+	M.adjustOxyLoss(-0.5 * REAGENTS_MODIFIER, TRUE)
+	M.adjust_stamina(1 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 // Anti-Poison Blend
 
@@ -454,13 +510,16 @@
 	overdose_threshold = 45
 	taste_description = "floral purification"
 
-/datum/reagent/medicine/herbal/witches_bane/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustToxLoss(-2)
+/datum/reagent/medicine/herbal/witches_bane/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjustToxLoss(-0.4 * REAGENTS_MODIFIER)
 	// Purge small amounts of other poisons
 	for(var/datum/reagent/R in M.reagents.reagent_list)
 		if(istype(R, /datum/reagent/poison) || istype(R, /datum/reagent/toxin))
-			M.reagents.remove_reagent(R.type, 0.5)
-	. = ..()
+			M.reagents.remove_reagent(R.type, 0.1 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 // Mental Enhancement
 
@@ -484,12 +543,11 @@
 	M.remove_chem_effect(CE_OXYGENATED, "[type]")
 	M.remove_chem_effect(CE_STABLE, "[type]")
 
-/datum/reagent/buff/herbal/scholar_focus/on_mob_life(mob/living/carbon/M, efficiency)
-	if(M.has_status_effect(/datum/status_effect/drowsiness))
-		M.adjust_drowsiness(-6 SECONDS)
-	if(prob(5))
-		to_chat(M, span_notice("Your mind feels sharp and focused."))
+/datum/reagent/buff/herbal/scholar_focus/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+	M.adjust_drowsiness(-1 SECONDS * REAGENTS_MODIFIER)
+	if(SPT_PROB(2.5, seconds_per_tick))
+		to_chat(M, span_notice("Your mind feels sharp and focused."))
 
 // Herbal Oils
 
@@ -513,11 +571,12 @@
 	metabolization_rate = 0.3
 	taste_description = "cooling mint"
 
-/datum/reagent/medicine/herbal/mentha_oil/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
-	affected_bodypart.add_pain(-(amount_to_transfer * 0.3))
-	return ..()
+/datum/reagent/medicine/herbal/mentha_oil/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
+	. = ..()
 
-/datum/reagent/medicine/herbal/mentha_oil/on_mob_life(mob/living/carbon/M, efficiency)
+	affected_bodypart.add_pain(-(amount_to_transfer * 0.06  * REM * seconds_per_tick))
+
+/datum/reagent/medicine/herbal/mentha_oil/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 	M.adjust_stamina(1.5 * efficiency)
 	M.adjust_bodytemperature(-0.3 * efficiency, BODYTEMP_NORMAL - 2)
@@ -529,23 +588,32 @@
 	description = "A concentrated poison derived from deadly nightshade. Extremely lethal."
 	reagent_state = LIQUID
 	color = "#2f1b2c"
-	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	metabolization_rate = REAGENTS_METABOLISM / 10
 	overdose_threshold = 10
 	taste_description = "bitter death"
 
-/datum/reagent/poison/herbal/atropa_concentrate/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustToxLoss(3 * efficiency)
-	if(prob(20))
-		M.set_eye_blur_if_lower(10 SECONDS * efficiency)
-		M.set_confusion_if_lower(0.5 SECONDS * efficiency)
+/datum/reagent/poison/herbal/atropa_concentrate/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
 
-/datum/reagent/poison/herbal/atropa_concentrate/overdose_process(mob/living/carbon/M)
-	M.adjustToxLoss(5)
-	M.vomit()
-	if(prob(10))
-		M.Unconscious(30)
+	M.adjustToxLoss(0.6 * REAGENTS_MODIFIER)
+
+	if(prob(20))
+		M.set_eye_blur_if_lower(1 SECONDS * REAGENTS_MODIFIER)
+		M.set_confusion_if_lower(0.5 SECONDS * REAGENTS_MODIFIER)
+
+	return TRUE
+
+/datum/reagent/poison/herbal/atropa_concentrate/overdose_process(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustToxLoss(1 * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(4, seconds_per_tick))
+		M.Unconscious(0.6 SECONDS * REAGENTS_MODIFIER)
+	if(SPT_PROB(8, seconds_per_tick))
+		M.vomit()
+
+	return TRUE
 
 /datum/reagent/poison/herbal/swamp_miasma
 	name = "Swamp Miasma"
@@ -565,14 +633,19 @@
 	M.remove_chem_effect(CE_BLOCKAGE, "[type]")
 	M.remove_chem_effect(CE_BREATHLOSS, "[type]")
 
-/datum/reagent/poison/herbal/swamp_miasma/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustToxLoss(1.5 * efficiency)
-	if(prob(15))
+/datum/reagent/poison/herbal/swamp_miasma/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjustToxLoss(0.3 * REAGENTS_MODIFIER)
+
+	if(SPT_PROB(12.5, seconds_per_tick))
 		M.emote("cough")
+
 	var/turf/T = get_turf(M)
 	if(T)
-		T.pollute_turf(/datum/pollutant/rot, 16 * efficiency)
-	. = ..()
+		T.pollute_turf(/datum/pollutant/rot, 3 * REAGENTS_MODIFIER)
+
+	return TRUE
 
 // Magical Enhancement
 
@@ -629,12 +702,13 @@
 	M.remove_chem_effect(CE_PULSE, "[type]")
 	M.remove_chem_effect(CE_ENERGETIC, "[type]")
 
-/datum/reagent/buff/herbal/battle_stim/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjust_stamina(-2 * efficiency)
-	// Slight combat bonuses
-	if(prob(10))
-		M.heal_bodypart_damage(0.5 * efficiency, 0, 0)
+/datum/reagent/buff/herbal/battle_stim/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjust_stamina(-0.4 * REAGENTS_MODIFIER)
+	// Slight combat bonuses
+	if(SPT_PROB(5, seconds_per_tick))
+		M.heal_bodypart_damage(0.1 * REAGENTS_MODIFIER, 0, 0)
 
 // Knowledge Enhancement
 
@@ -679,13 +753,17 @@
 	M.remove_chem_effect(CE_OXYGENATED, "[type]")
 	M.remove_chem_effect(CE_STABLE, "[type]")
 
-/datum/reagent/medicine/herbal/purification_draught/on_mob_life(mob/living/carbon/M, efficiency)
-	M.adjustToxLoss(-2)
+/datum/reagent/medicine/herbal/purification_draught/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
+	M.adjustToxLoss(-0.4 * REAGENTS_MODIFIER)
+
 	//lower debuff durations
 	for(var/datum/status_effect/debuff/debuff in M.status_effects)
 		if(debuff.duration != -1)
-			debuff.duration--
-	. = ..()
+			debuff.duration -= SPT_TO_DECISECONDS(seconds_per_tick)
+
+	return TRUE
 
 // Mood Events for Herbal Effects
 

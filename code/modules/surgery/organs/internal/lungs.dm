@@ -40,7 +40,7 @@
 		owner.visible_message(span_danger("[owner] grabs [owner.p_their()] throat, struggling for breath!"), span_userdanger("You suddenly feel like you can't breathe!"))
 		failed = TRUE
 
-/obj/item/organ/lungs/proc/cough_blood(delta_time)
+/obj/item/organ/lungs/proc/cough_blood(seconds_per_tick)
 	if(!owner || !is_bruised())
 		return
 
@@ -48,7 +48,7 @@
 	if(damage >= medium_threshold)
 		cough_prob = 5
 
-	if(!SPT_PROB(cough_prob, delta_time)) // between : past high
+	if(!SPT_PROB(cough_prob, seconds_per_tick)) // between : past high
 		return
 
 	if((damage >= medium_threshold) && prob(33))

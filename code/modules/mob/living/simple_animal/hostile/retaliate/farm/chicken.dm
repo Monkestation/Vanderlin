@@ -133,10 +133,10 @@
 	--chicken_count
 	return ..()
 
-/mob/living/simple_animal/hostile/retaliate/chicken/Life()
-	..()
+/mob/living/simple_animal/hostile/retaliate/chicken/Life(seconds_per_tick)
+	. = ..()
 	if(SEND_SIGNAL(src, COMSIG_MOB_RETURN_HUNGER) > 0)
-		var/productive = 1
+		var/productive = seconds_per_tick
 		if(HAS_TRAIT(src, TRAIT_ANIMAL_PRODUCTIVE))
 			productive *= 3
 		production = min(production + productive, 100)

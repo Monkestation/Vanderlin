@@ -131,10 +131,11 @@
 	. = ..()
 	rebuild_root_network(affected)
 
-/datum/wound/black_briar_curse/on_life()
+/datum/wound/black_briar_curse/on_life(seconds_per_tick)
 	//death comsig can fuck this all up
 	if(QDELETED(owner) || QDELETED(bodypart_owner) || QDELETED(src))
 		return FALSE
+
 	. = ..()
 
 	progress_infection()
@@ -270,29 +271,32 @@
 	if(!QDELETED(comp))
 		qdel(comp)
 
-/datum/wound/black_briar_curse/chest/on_life()
+/datum/wound/black_briar_curse/chest/on_life(seconds_per_tick)
 	. = ..()
 	if(!.)
 		return
-	owner.adjust_energy(max(0, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) - 20)) * (SSmobs.wait * 0.1) * infection_percent)
+
+	owner.adjust_energy(max(0, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_ENDURANCE) - 20)) * (seconds_per_tick * 0.1) * infection_percent)
 	if(infection_percent >= 1)
 		if(owner.can_feel_pain())
 			to_chat(owner, span_briar("IT HURTS! IT HURTS!"))
-			if(prob(80))
+			if(SPT_PROB(55, seconds_per_tick))
 				owner.emote(pick("agony", "painscream", "firescream", "laugh"))
 		owner.Paralyze(3 SECONDS, TRUE)
-		if(prob(10))
+		if(SPT_PROB(5, seconds_per_tick))
 			owner.death()
 		return
+
 	if(infection_percent >= BBC_STAGE_LATE)
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar2)
 		if(!istype(owner.patron, /datum/patron/alternate/black_briar))
 			owner.set_patron(/datum/patron/alternate/black_briar)
 	else
 		owner.remove_status_effect(/datum/status_effect/debuff/black_briar2)
+
 	if(infection_percent >= BBC_STAGE_MID)
 		owner.apply_status_effect(/datum/status_effect/debuff/black_briar1)
-		if(prob(6) && !HAS_ANY_OF_TRAITS(owner, list(TRAIT_NOBREATH, TRAIT_SOOTHED_THROAT)))
+		if(!HAS_ANY_OF_TRAITS(owner, list(TRAIT_NOBREATH, TRAIT_SOOTHED_THROAT)) && SPT_PROB(3, seconds_per_tick))
 			cough()
 			if(prob(12))
 				to_chat(owner, span_warning("[pick("You have a coughing fit!", "You can't stop coughing!")]"))
@@ -318,14 +322,16 @@
 					BP = null
 				BP?.add_wound(get_black_briar_wound_type(BP?.body_zone), TRUE)
 				COOLDOWN_START(src, next_limb_infection, max_infection * BBC_SPREAD_RATE)
-	else
-		owner.remove_status_effect(/datum/status_effect/debuff/black_briar1)
-		var/_emote = pick("yawn", "cough", "clearthroat")
-		if(prob(0.5))
-			owner.emote(_emote, forced = TRUE)
-		if(overlay)
-			owner.clear_fullscreen("briar")
-			overlay = null
+		return
+
+	owner.remove_status_effect(/datum/status_effect/debuff/black_briar1)
+
+	if(SPT_PROB(0.25, seconds_per_tick))
+		owner.emote(pick("yawn", "cough", "clearthroat"), forced = TRUE)
+
+	if(overlay)
+		owner.clear_fullscreen("briar")
+		overlay = null
 
 /datum/wound/black_briar_curse/chest/proc/cough()
 	owner.emote("sickcough", forced = TRUE)
@@ -420,7 +426,7 @@
 	var/datum/brain_trauma/mild/concussion/concussion
 	var/datum/brain_trauma/mild/speech_impediment/impediment
 
-/datum/wound/black_briar_curse/head/on_life()
+/datum/wound/black_briar_curse/head/on_life(seconds_per_tick)
 	. = ..()
 	if(!.)
 		return
@@ -452,7 +458,7 @@
 	//show_in_book = FALSE
 	body_zones = list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
 
-/datum/wound/black_briar_curse/arm/on_life()
+/datum/wound/black_briar_curse/arm/on_life(seconds_per_tick)
 	. = ..()
 	if(!.)
 		return
@@ -487,7 +493,7 @@
 	affected.remove_movespeed_modifier("[MOVESPEED_ID_BLACK_BRIAR]_[specific_zone]", (!other == TRUE))
 	too_slow = FALSE
 
-/datum/wound/black_briar_curse/leg/on_life()
+/datum/wound/black_briar_curse/leg/on_life(seconds_per_tick)
 	. = ..()
 	if(!.)
 		return

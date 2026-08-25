@@ -250,7 +250,7 @@
 	popup.set_content(contents)
 	popup.open()
 
-/obj/structure/fake_machine/vendor/process()
+/obj/structure/fake_machine/vendor/process(seconds_per_tick)
 	if(obj_broken)
 		return
 	if(world.time > next_hawk)

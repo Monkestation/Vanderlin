@@ -54,18 +54,19 @@
 		return TRUE
 	return FALSE
 
-/obj/structure/boiler/process()
+/obj/structure/boiler/process(seconds_per_tick)
 	if(input && fuel && length(input.providers))
 		var/obj/structure/water_pipe/picked_provider = pick(input.providers)
 		var/steam_left = maximum_steam - stored_steam
 		var/taking_pressure = min(steam_left,input.water_pressure)
 		if(taking_pressure)
-			picked_provider?.taking_from?.use_water_pressure(taking_pressure * 0.5)
+			picked_provider?.taking_from?.use_water_pressure(taking_pressure * seconds_per_tick)
 		stored_steam += taking_pressure
 
 	var/true_pressure = min(pressure_target, stored_steam)
 	if(!output || !true_pressure)
 		return
+
 	output.make_provider(/datum/reagent/steam, true_pressure, src)
 
 /obj/structure/boiler/use_water_pressure(pressure)

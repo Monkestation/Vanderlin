@@ -107,12 +107,14 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	return
 
 /// Return TRUE if reagent should be transfered to affected_mob when absorbed through a bodypart
-/datum/reagent/proc/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+/datum/reagent/proc/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer, seconds_per_tick)
 	return TRUE
 
-/datum/reagent/proc/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/proc/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick = SSMOBS_DT)
 	SHOULD_CALL_PARENT(TRUE)
+
 	current_cycle++
+
 	if(holder)
 		var/adjusted_metabolization_rate = metabolization_rate
 		if(istype(src, /datum/reagent/consumable/ethanol) && has_world_trait(/datum/world_trait/baotha_revelry))
@@ -127,6 +129,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 				record_round_statistic(STATS_ALCOHOL_CONSUMED, adjusted_metabolization_rate)
 			if(istype(src, /datum/reagent/water))
 				record_round_statistic(STATS_WATER_CONSUMED, adjusted_metabolization_rate)
+
+	return TRUE
 
 /datum/reagent/proc/on_transfer(atom/A, method=TOUCH, trans_volume) //Called after a reagent is transfered
 	if(iscarbon(A))
@@ -165,13 +169,13 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	return
 
 /// Called when a reagent is inside of a mob when they are dead
-/datum/reagent/proc/on_mob_dead(mob/living/carbon/C, delta_time)
+/datum/reagent/proc/on_mob_dead(mob/living/carbon/C, seconds_per_tick)
 	if(!dead_head)
 		return
 	current_cycle++
 	if(length(reagent_removal_skip_list))
 		return
-	holder.remove_reagent(type, metabolization_rate * C.metabolism_efficiency * delta_time)
+	holder.remove_reagent(type, metabolization_rate * C.metabolism_efficiency * seconds_per_tick)
 
 /datum/reagent/proc/on_move(mob/M)
 	return
@@ -209,7 +213,7 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	return
 
 // Called if the reagent has passed the overdose threshold and is set to be triggering overdose effects
-/datum/reagent/proc/overdose_process(mob/living/M)
+/datum/reagent/proc/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	return
 
 /datum/reagent/proc/overdose_start(mob/living/M)

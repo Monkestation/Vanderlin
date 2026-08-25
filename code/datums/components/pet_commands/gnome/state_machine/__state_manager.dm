@@ -47,7 +47,7 @@
 	return best
 
 
-/datum/action_state_manager/proc/process_machine(datum/ai_controller/controller, delta_time)
+/datum/action_state_manager/proc/process_machine(datum/ai_controller/controller, seconds_per_tick)
 	var/mob/living/pawn = controller.pawn
 
 	// Movement handling, same as original
@@ -65,7 +65,7 @@
 		change_state(controller, best)
 
 	// Process current state
-	var/result = current_state.process_state(controller, delta_time)
+	var/result = current_state.process_state(controller, seconds_per_tick)
 	switch(result)
 		if(ACTION_STATE_COMPLETE, ACTION_STATE_FAILED)
 			// Invalidate priority so we re-evaluate immediately next tick

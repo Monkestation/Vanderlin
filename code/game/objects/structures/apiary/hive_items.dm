@@ -65,50 +65,52 @@
 	icon = 'icons/obj/structures/apiary.dmi'
 	icon_state = "smoker"
 	w_class = WEIGHT_CLASS_SMALL
-	var/fuel = 20
-	var/max_fuel = 20
+	var/fuel = 20 SECONDS
+	var/max_fuel = 20 SECONDS
 	var/active = FALSE
+
+/obj/item/bee_smoker/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/item/bee_smoker/attack_self(mob/user)
 	if(!active && fuel > 0)
 		to_chat(user, span_notice("You light [src]."))
 		active = TRUE
 		update_appearance(UPDATE_ICON_STATE)
-		process_smoker(user)
+		START_PROCESSING(SSobj, src)
 	else if(active)
 		to_chat(user, span_notice("You extinguish [src]."))
 		active = FALSE
 		update_appearance(UPDATE_ICON_STATE)
+		STOP_PROCESSING(SSobj, src)
 	else
 		to_chat(user, span_warning("[src] is out of fuel!"))
 
-/obj/item/bee_smoker/proc/process_smoker(mob/user)
+/obj/item/bee_smoker/process(seconds_per_tick)
 	if(!active)
-		return
+		return PROCESS_KILL
 
 	if(fuel <= 0)
 		active = FALSE
 		update_appearance(UPDATE_ICON_STATE)
-		to_chat(user, span_warning("[src] runs out of fuel!"))
-		return
+		return PROCESS_KILL
 
 	var/turf/T = get_turf(src)
 	var/datum/effect_system/smoke_spread/chem/S = new
 	S.set_up(1, T, 0)
 	S.start()
 
-	for(var/obj/effect/bees/B in view(3, user))
+	for(var/obj/effect/bees/B in view(3, get_turf(src)))
 		B.agitated = FALSE
 		B.agitation_countdown = 0
 		B.attacked_mobs.Cut()
 		B.bee_state = BEE_STATE_IDLE
 
-	for(var/obj/structure/apiary/A in view(2, user))
+	for(var/obj/structure/apiary/A in view(2, get_turf(src)))
 		A.calm_bees()
 
-	fuel--
-
-	addtimer(CALLBACK(src, PROC_REF(process_smoker), user), 1 SECONDS)
+	fuel -= SPT_TO_DECISECONDS(seconds_per_tick)
 
 /obj/item/bee_smoker/update_icon_state()
 	. = ..()

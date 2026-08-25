@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/glimmerwing_special_abilities
 	var/datum/ai_behavior/glimmerwing_drug/shroom_behavior = /datum/ai_behavior/glimmerwing_drug
 
-/datum/ai_planning_subtree/glimmerwing_special_abilities/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/glimmerwing_special_abilities/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/current_time = world.time
 	var/shroom_cooldown = controller.blackboard[BB_DRUG_COOLDOWN] || 0
@@ -25,7 +25,7 @@
 	SEND_SIGNAL(controller.pawn, COMSIG_COMBAT_TARGET_SET, TRUE)
 
 
-/datum/ai_behavior/glimmerwing_drug/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/glimmerwing_drug/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	. = ..()
 	var/mob/living/simple_animal/sylph = controller.pawn
 	var/mob/living/target = controller.blackboard[target_key]

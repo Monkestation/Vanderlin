@@ -1,6 +1,7 @@
 #define MAXIMUM_TOTAL_COMPOST 2000
 #define COMPOST_PER_PRODUCED_ITEM 100
-#define COMPOST_PROCESS_RATE 300 / (1 MINUTES)
+/// Amount of compost processed per second
+#define COMPOST_PROCESS_RATE 25
 
 /obj/structure/composter
 	name = "composter"
@@ -39,9 +40,8 @@
 	STOP_PROCESSING(SSprocessing, src)
 	. = ..()
 
-/obj/structure/composter/process()
-	var/dt = 10
-	var/compost_to_process = min(dt * COMPOST_PROCESS_RATE, flipped_compost)
+/obj/structure/composter/process(seconds_per_tick)
+	var/compost_to_process = min(seconds_per_tick * COMPOST_PROCESS_RATE, flipped_compost)
 	// Change flipped compost into most processed compost, and some back unflipped
 	flipped_compost -= compost_to_process
 	unflipped_compost += compost_to_process * 0.25

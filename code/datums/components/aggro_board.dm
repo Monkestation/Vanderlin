@@ -123,7 +123,7 @@
 	update_highest_threat(victim)
 
 /// Periodically decays threat levels
-/datum/component/ai_aggro_system/process()
+/datum/component/ai_aggro_system/process(seconds_per_tick)
 	var/decay_amount = default_decay_rate
 	var/mob/living/living_mob = parent
 	if(!living_mob?.ai_controller)

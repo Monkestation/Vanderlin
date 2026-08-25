@@ -12,7 +12,7 @@
 /datum/ai_planning_subtree/dragon_attack_subtree
 	var/datum/ai_behavior/dragon_attack/attack_behavior = /datum/ai_behavior/dragon_attack
 
-/datum/ai_planning_subtree/dragon_attack_subtree/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/dragon_attack_subtree/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 
 	if(world.time < controller.blackboard[BB_DRAGON_SPECIAL_COOLDOWN])
@@ -157,7 +157,7 @@
 
 	set_movement_target(controller, target)
 
-/datum/ai_behavior/dragon_attack/perform(delta_time, datum/ai_controller/controller, target_key, attack_type_key)
+/datum/ai_behavior/dragon_attack/perform(seconds_per_tick, datum/ai_controller/controller, target_key, attack_type_key)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/voiddragon/dragon = controller.pawn
 	var/atom/target = controller.blackboard[target_key]

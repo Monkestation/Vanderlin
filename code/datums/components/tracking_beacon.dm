@@ -155,7 +155,7 @@ GLOBAL_LIST_EMPTY(tracker_beacons)
 // Handles the parent being moved and updates the direction of the arrows.
 //===========
 
-/datum/component/team_monitor/process()
+/datum/component/team_monitor/process(seconds_per_tick)
 	update_all_directions()
 
 //When the parent is removed, we need to update our arrows

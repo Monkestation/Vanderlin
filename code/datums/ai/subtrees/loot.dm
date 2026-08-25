@@ -3,7 +3,7 @@
 	var/scan_range = 7
 	var/scan_interval = 15 SECONDS
 
-/datum/ai_planning_subtree/loot/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/loot/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	if(controller.blackboard[BB_BASIC_MOB_CURRENT_TARGET])
 		return
 	if(controller.blackboard[BB_BASIC_MOB_FLEEING])
@@ -101,7 +101,7 @@
 	set_movement_target(controller, target)
 	return TRUE
 
-/datum/ai_behavior/loot_pick_up/perform(delta_time, datum/ai_controller/controller, target_key)
+/datum/ai_behavior/loot_pick_up/perform(seconds_per_tick, datum/ai_controller/controller, target_key)
 	var/obj/item/target = controller.blackboard[target_key]
 	if(QDELETED(target) || !isturf(target.loc))
 		finish_action(controller, FALSE, target_key)
@@ -157,7 +157,7 @@
 	set_movement_target(controller, body)
 	return TRUE
 
-/datum/ai_behavior/loot_strip_body/perform(delta_time, datum/ai_controller/controller, body_key, item_key)
+/datum/ai_behavior/loot_strip_body/perform(seconds_per_tick, datum/ai_controller/controller, body_key, item_key)
 	var/mob/living/body = controller.blackboard[body_key]
 	var/obj/item/target_item = controller.blackboard[item_key]
 

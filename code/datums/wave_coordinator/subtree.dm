@@ -1,7 +1,7 @@
 /datum/ai_planning_subtree/wave_defense
 	operational_datums = list(/datum/ai_behavior/wave_attack_point, /datum/ai_behavior/wave_occupy_point)
 
-/datum/ai_planning_subtree/wave_defense/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/wave_defense/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	var/datum/wave_defense_coordinator/coordinator = controller.blackboard[BB_WAVE_COORDINATOR]
 	if(!coordinator)
 		return

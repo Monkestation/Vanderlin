@@ -1,4 +1,4 @@
-/datum/ai_planning_subtree/flesh_frenzy_subtree/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/flesh_frenzy_subtree/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 	var/current_time = world.time
@@ -17,7 +17,7 @@
 /datum/ai_behavior/start_flesh_frenzy
 	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 
-/datum/ai_behavior/start_flesh_frenzy/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/start_flesh_frenzy/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 
@@ -35,7 +35,7 @@
 /datum/ai_behavior/end_flesh_frenzy
 	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 
-/datum/ai_behavior/end_flesh_frenzy/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/end_flesh_frenzy/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 
@@ -52,7 +52,7 @@
 	finish_action(controller, TRUE)
 
 
-/datum/ai_planning_subtree/flesh_regeneration_subtree/SelectBehaviors(datum/ai_controller/controller, delta_time)
+/datum/ai_planning_subtree/flesh_regeneration_subtree/SelectBehaviors(datum/ai_controller/controller, seconds_per_tick)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 
@@ -98,7 +98,7 @@
 
 	return TRUE
 
-/datum/ai_behavior/start_flesh_regeneration/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/start_flesh_regeneration/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 
@@ -118,7 +118,7 @@
 	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 	action_cooldown = 3 SECONDS
 
-/datum/ai_behavior/continue_flesh_regeneration/perform(delta_time, datum/ai_controller/controller)
+/datum/ai_behavior/continue_flesh_regeneration/perform(seconds_per_tick, datum/ai_controller/controller)
 	. = ..()
 	var/mob/living/simple_animal/hostile/retaliate/blood/flesh = controller.pawn
 

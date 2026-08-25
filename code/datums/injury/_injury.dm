@@ -226,7 +226,7 @@
 
 // checks if injury is considered open for external infections
 // untreated cuts (and bleeding bruises) and burns are possibly infectable, chance higher if injury is bigger
-/datum/injury/proc/infection_check(delta_time = 2, times_fired)
+/datum/injury/proc/infection_check(seconds_per_tick = 2)
 	var/normalized_damage = damage_per_injury()
 	if((normalized_damage < 10) || germ_level < INFECTION_LEVEL_ONE)	//small cuts, tiny bruises, and moderate burns shouldn't be infectable.
 		return FALSE
@@ -242,15 +242,15 @@
 
 	switch(damage_type)
 		if(WOUND_BLUNT)
-			return DT_PROB(normalized_damage/2, delta_time)
+			return SPT_PROB(normalized_damage / 2, seconds_per_tick)
 		if(WOUND_BURN, WOUND_INTENSE_BURN)
-			return DT_PROB(normalized_damage*2, delta_time)
+			return SPT_PROB(normalized_damage * 2, seconds_per_tick)
 		if(WOUND_SLASH)
-			return DT_PROB(normalized_damage, delta_time)
+			return SPT_PROB(normalized_damage, seconds_per_tick)
 		if(WOUND_PUNCTURE)
-			return DT_PROB(normalized_damage*1.25, delta_time)
+			return SPT_PROB(normalized_damage * 1.25, seconds_per_tick)
 		if(WOUND_LASH)
-			return DT_PROB(normalized_damage * 1.15, delta_time)
+			return SPT_PROB(normalized_damage * 1.15, seconds_per_tick)
 	return FALSE
 
 //bleeding from being dragged against the ground

@@ -18,9 +18,11 @@ SUBSYSTEM_DEF(fire_burning)
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 	var/fire_multiplier = CONFIG_GET(number/damage_multiplier/fire)
-	var/max_fire_damage_per_tick = CONFIG_GET(number/per_tick/max_fire_damage)
+	var/max_fire_damage_per_second = CONFIG_GET(number/per_tick/max_fire_damage)
 	/// The longer the burn timer / stack the more intense the burn damage. Increases by  (Default: 5)
 	var/fire_intensity = 5
+
+	var/seconds_per_tick = wait / (1 SECONDS)
 
 	while(length(currentrun))
 		var/obj/O = currentrun[length(currentrun)]
@@ -45,8 +47,8 @@ SUBSYSTEM_DEF(fire_burning)
 
 		if(O.resistance_flags & ON_FIRE) //in case an object is extinguished while still in currentrun
 			if(!(O.resistance_flags & FIRE_PROOF) && !is_wet)
-				// Minimum of 8 burn per tick. Config for max fire damage per tick found in game_options.
-				O.take_damage((2 * fire_multiplier) + CLAMP(fire_intensity, 0, max_fire_damage_per_tick), BURN, FIRE, 0)
+				// Minimum of 8 burn per second. Config for max fire damage per second found in game_options.
+				O.take_damage((2 * seconds_per_tick * fire_multiplier) + clamp(fire_intensity, 0, max_fire_damage_per_second), BURN, FIRE, 0)
 			else
 				O.extinguish()
 			if(!O.fire_burn_start)

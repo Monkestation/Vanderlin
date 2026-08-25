@@ -719,7 +719,7 @@
 		H.cut_overlay(mutable_appearance('icons/effects/effects.dmi', "void_corruption_overlay"))
 		to_chat(H, span_notice("The void corruption fades from my body."))
 
-/datum/status_effect/void_corruption/tick()
+/datum/status_effect/void_corruption/tick(seconds_between_ticks)
 	if(world.time >= next_damage_time)
 		apply_damage()
 		next_damage_time = world.time + damage_tick

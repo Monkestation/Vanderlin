@@ -57,9 +57,10 @@
 	..()
 	item_state = "[initial(item_state)]"
 
-/obj/item/flashlight/flare/light/process()
+/obj/item/flashlight/flare/light/process(seconds_per_tick)
 	item_state = "[initial(item_state)]"
 	on = TRUE
+
 	update_brightness()
 	open_flame(heat)
 	if(!fuel || !on)
@@ -68,6 +69,7 @@
 		if(!fuel)
 			item_state = "[initial(item_state)]"
 		return
+
 	if(!istype(loc,/obj/machinery/light/fueled/torchholder))
 		if(!ismob(loc))
 			if(prob(23))

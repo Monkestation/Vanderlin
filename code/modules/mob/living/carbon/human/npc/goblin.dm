@@ -59,7 +59,7 @@
 /mob/living/carbon/human/species/goblin/npc/Initialize()
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
-	AddComponent(/datum/component/combat_noise, list("laugh" = 2))
+	AddComponent(/datum/component/combat_noise, list("laugh" = 1))
 
 /mob/living/carbon/human/species/goblin/npc/ambush
 	simpmob_attack = 35
@@ -230,13 +230,15 @@
 		if(O)
 			equipOutfit(O)
 
-/datum/component/rot/corpse/goblin/process()
+/datum/component/rot/corpse/goblin/process(seconds_per_tick)
 	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
 		return
-	var/amt2add = 10 //1 second
+	var/amt2add = SPT_TO_DECISECONDS(seconds_per_tick)
 	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
+
 	if(last_process)
 		amt2add = ((world.time - last_process)/10) * amt2add
+
 	last_process = world.time
 	amount += amt2add
 	if(has_world_trait(/datum/world_trait/pestra_mercy))
@@ -245,10 +247,12 @@
 	var/mob/living/carbon/C = parent
 	if(!C)
 		qdel(src)
-		return
+		return PROCESS_KILL
+
 	if(C.stat != DEAD)
 		qdel(src)
-		return
+		return PROCESS_KILL
+
 	var/should_update = FALSE
 	if(amount > 20 MINUTES)
 		for(var/obj/item/bodypart/B in C.bodyparts)
@@ -263,12 +267,13 @@
 			if(HAS_TRAIT(B, TRAIT_ROTTEN) && amount < 16 MINUTES && !C.has_faction(FACTION_MATTHIOS))
 				var/turf/open/T = C.loc
 				if(istype(T))
-					T.pollute_turf(/datum/pollutant/rot, 4)
+					T.pollute_turf(/datum/pollutant/rot, 2 * seconds_per_tick)
+
 	if(should_update)
 		if(amount > 20 MINUTES)
 			C.update_body()
 			qdel(src)
-			return
+			return PROCESS_KILL
 		else if(amount > 12 MINUTES)
 			C.update_body()
 

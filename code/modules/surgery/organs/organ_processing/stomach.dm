@@ -5,15 +5,15 @@
 /datum/organ_process/stomach/needs_process(mob/living/carbon/owner)
 	return (..() && !(NOSTOMACH in owner.dna.species.species_traits))
 
-/datum/organ_process/stomach/handle_process(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/handle_process(mob/living/carbon/human/owner, seconds_per_tick)
 	if(!HAS_TRAIT(owner, TRAIT_NOHUNGER))
-		handle_nutrition(owner, delta_time, times_fired)
-	handle_digestion(owner, delta_time, times_fired)
+		handle_nutrition(owner, seconds_per_tick)
+	handle_digestion(owner, seconds_per_tick)
 	owner.dna?.species?.handle_digestion(owner) //for halfling bs
-	handle_disgust(owner, delta_time, times_fired)
+	handle_disgust(owner, seconds_per_tick)
 	return TRUE
 
-/datum/organ_process/stomach/proc/handle_nutrition(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/proc/handle_nutrition(mob/living/carbon/human/owner, seconds_per_tick)
 	var/stomach_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_STOMACH)
 	//fat fuck friday
 	if(HAS_TRAIT_FROM(owner, TRAIT_FAT, OBESITY))
@@ -40,24 +40,25 @@
 			owner.satiety = -MAX_SATIETY
 		else if(owner.satiety < 0)
 			owner.satiety++
-			if(SPT_PROB(round(-owner.satiety/77), delta_time))
+			if(SPT_PROB(round(-owner.satiety/77), seconds_per_tick))
 				owner.set_jitter_if_lower(10 SECONDS)
 			hunger_rate *= 3
 		hunger_rate *= owner.physiology.hunger_mod
 		hunger_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
 		if (ishuman(owner))
 			hunger_rate *= owner.dna.species.nutrition_mod
-		owner.adjust_nutrition(-hunger_rate * delta_time)
+		owner.adjust_nutrition(-hunger_rate * seconds_per_tick)
+
 	if(owner.hydration > 0)
 		var/thirst_rate = owner.total_hydration_req
 		thirst_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
-		owner.adjust_hydration(-thirst_rate  * delta_time)
+		owner.adjust_hydration(-thirst_rate  * seconds_per_tick)
 
 	if(owner.nutrition > NUTRITION_LEVEL_FULL)
 		if(owner.overeatduration < 20 MINUTES)
-			owner.overeatduration = min(owner.overeatduration + (1 SECONDS * delta_time), 20 MINUTES)
+			owner.overeatduration = min(owner.overeatduration + (1 SECONDS * seconds_per_tick), 20 MINUTES)
 	else if(owner.overeatduration > 0)
-		owner.overeatduration = max(owner.overeatduration - (2 SECONDS * delta_time), 0)
+		owner.overeatduration = max(owner.overeatduration - (2 SECONDS * seconds_per_tick), 0)
 
 	//metabolism change
 	if(owner.nutrition > NUTRITION_LEVEL_FAT)
@@ -75,9 +76,9 @@
 			to_chat(owner, span_notice("You no longer feel vigorous."))
 		owner.metabolism_efficiency = 1
 
-	handle_nutrition_hydration_state(owner, delta_time, times_fired)
+	handle_nutrition_hydration_state(owner, seconds_per_tick)
 
-/datum/organ_process/stomach/proc/handle_nutrition_hydration_state(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/proc/handle_nutrition_hydration_state(mob/living/carbon/human/owner, seconds_per_tick)
 	switch(owner.nutrition)
 		if(NUTRITION_LEVEL_FED to INFINITY)
 			owner.remove_status_effect(/datum/status_effect/debuff/hungryt1)
@@ -100,7 +101,7 @@
 			owner.remove_status_effect(/datum/status_effect/debuff/hungryt2)
 			if(CONFIG_GET(flag/starvation_death))
 				owner.apply_status_effect(/datum/status_effect/debuff/hungryt4)
-			if(DT_PROB(3, delta_time))
+			if(SPT_PROB(3, seconds_per_tick))
 				playsound(owner, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 
 	switch(owner.hydration)
@@ -126,7 +127,7 @@
 			if(CONFIG_GET(flag/dehydration_death))
 				owner.apply_status_effect(/datum/status_effect/debuff/thirstyt4)
 
-/datum/organ_process/stomach/proc/handle_digestion(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/proc/handle_digestion(mob/living/carbon/human/owner, seconds_per_tick)
 	var/stomachal_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_STOMACH)
 	var/list/stomachs = owner.getorganslotlist(ORGAN_SLOT_STOMACH)
 
@@ -138,7 +139,7 @@
 			var/amount_min = max(bit.metabolization_rate, STOMACH_METABOLISM_CONSTANT)
 			var/amount_max = bit.volume
 			var/this_stomach_efficiency = stomach.get_slot_efficiency(ORGAN_SLOT_STOMACH)
-			var/amount = min((round(stomach.metabolism_efficiency * (this_stomach_efficiency/optimal_threshold) * amount_max, 0.05) + amount_min) * delta_time, amount_max)
+			var/amount = min((round(stomach.metabolism_efficiency * (this_stomach_efficiency/optimal_threshold) * amount_max, 0.05) + amount_min) * seconds_per_tick, amount_max)
 			if(amount <= 0)
 				continue
 
@@ -153,17 +154,17 @@
 			continue
 
 		if(stomach.damage < stomach.high_threshold)
-			if(DT_PROB(0.025 * stomachal_efficiency * (nutri.volume ** 2), delta_time))
+			if(SPT_PROB(0.025 * stomachal_efficiency * (nutri.volume ** 2), seconds_per_tick))
 				owner.vomit(stomachal_efficiency)
 				to_chat(owner, span_warning("My [stomach.name] reels in pain as you're incapable of holding down all that food!"))
 				return
 		else
-			if(DT_PROB(0.1 * stomachal_efficiency * (nutri.volume ** 2), delta_time))
+			if(SPT_PROB(0.1 * stomachal_efficiency * (nutri.volume ** 2), seconds_per_tick))
 				owner.vomit(stomachal_efficiency)
 				to_chat(owner, span_warning("My [stomach.name] reels in pain as you're incapable of holding down all that food!"))
 				return
 
-/datum/organ_process/stomach/proc/handle_disgust(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/proc/handle_disgust(mob/living/carbon/human/owner, seconds_per_tick)
 	var/combined_disgust_metabolism = 0
 	for(var/obj/item/organ/stomach/stomach as anything in owner.getorganslotlist(ORGAN_SLOT_STOMACH))
 		combined_disgust_metabolism += stomach.disgust_metabolism
@@ -171,22 +172,22 @@
 	if(owner.disgust)
 		var/pukeprob = 5 + (0.05 * owner.disgust)
 		if(owner.disgust >= DISGUST_LEVEL_GROSS)
-			if(DT_PROB(10, delta_time))
+			if(SPT_PROB(10, seconds_per_tick))
 				owner.stuttering += 1
 				owner.adjust_confusion(4 SECONDS)
-			if(DT_PROB(10, delta_time) && !owner.stat)
+			if(SPT_PROB(10, seconds_per_tick) && !owner.stat)
 				to_chat(owner, span_warning("I feel kind of iffy..."))
 			owner.adjust_jitter(-6 SECONDS)
 		if(owner.disgust >= DISGUST_LEVEL_VERYGROSS)
-			if(DT_PROB(pukeprob, delta_time))
+			if(SPT_PROB(pukeprob, seconds_per_tick))
 				owner.adjust_confusion(5 SECONDS)
 				owner.stuttering += 1
 				owner.vomit(10, 0, 1, 0, 1, 0)
 			owner.set_dizzy(10 SECONDS)
 		if(owner.disgust >= DISGUST_LEVEL_DISGUSTED)
-			if(DT_PROB(25, delta_time))
+			if(SPT_PROB(25, seconds_per_tick))
 				owner.set_eye_blur_if_lower(6 SECONDS)
-		owner.adjust_disgust(-0.5 * combined_disgust_metabolism * delta_time)
+		owner.adjust_disgust(-0.5 * combined_disgust_metabolism * seconds_per_tick)
 
 	switch(owner.disgust)
 		if(0 to DISGUST_LEVEL_GROSS)

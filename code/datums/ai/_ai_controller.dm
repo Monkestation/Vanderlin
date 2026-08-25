@@ -446,9 +446,9 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	return AI_STATUS_ON
 
 /// Generates a plan and see if our existing one is still valid.
-/datum/ai_controller/process(delta_time)
+/datum/ai_controller/process(seconds_per_tick)
 	if(!LAZYLEN(current_behaviors) && idle_behavior)
-		idle_behavior.perform_idle_behavior(delta_time, src) //Do some stupid shit while we have nothing to do
+		idle_behavior.perform_idle_behavior(seconds_per_tick, src) //Do some stupid shit while we have nothing to do
 		return
 
 	if(current_movement_target)
@@ -463,19 +463,19 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	SEND_SIGNAL(src, COMSIG_AI_CONTROLLER_PICKED_BEHAVIORS, current_behaviors, planned_behaviors)
 
 	for(var/datum/ai_behavior/current_behavior as anything in current_behaviors)
-		var/action_delta_time = max(current_behavior.get_cooldown(src) * 0.1, delta_time)
+		var/action_seconds_per_tick = max(current_behavior.get_cooldown(src) * 0.1, seconds_per_tick)
 
 		if(!(current_behavior.behavior_flags & AI_BEHAVIOR_EXECUTE_ALONGSIDE))
 			continue
 		if(behavior_cooldowns[current_behavior] > world.time)
 			continue
-		ProcessBehavior(action_delta_time, current_behavior)
+		ProcessBehavior(action_seconds_per_tick, current_behavior)
 
 	for(var/datum/ai_behavior/current_behavior as anything in current_behaviors)
 		// Convert the current behaviour action cooldown to realtime seconds from deciseconds.current_behavior
-		// Then pick the max of this and the delta_time passed to ai_controller.process()
-		// Action cooldowns cannot happen faster than delta_time, so delta_time should be the value used in this scenario.
-		var/action_delta_time = max(current_behavior.get_cooldown(src) * 0.1, delta_time)
+		// Then pick the max of this and the seconds_per_tick passed to ai_controller.process()
+		// Action cooldowns cannot happen faster than seconds_per_tick, so seconds_per_tick should be the value used in this scenario.
+		var/action_seconds_per_tick = max(current_behavior.get_cooldown(src) * 0.1, seconds_per_tick)
 
 		if(current_behavior.behavior_flags & AI_BEHAVIOR_REQUIRE_MOVEMENT) //Might need to move closer
 			if(!current_movement_target)
@@ -508,7 +508,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 
 				if(behavior_cooldowns[current_behavior] > world.time) //Still on cooldown
 					continue
-				ProcessBehavior(action_delta_time, current_behavior)
+				ProcessBehavior(action_seconds_per_tick, current_behavior)
 				return
 
 			else if(ai_movement.moving_controllers[src] != current_movement_target) //We're too far, if we're not already moving start doing it.
@@ -517,12 +517,12 @@ have ways of interacting with a specific atom and control it. They posses a blac
 			if(current_behavior.behavior_flags & AI_BEHAVIOR_MOVE_AND_PERFORM) //If we can move and perform then do so.
 				if(behavior_cooldowns[current_behavior] > world.time) //Still on cooldown
 					continue
-				ProcessBehavior(action_delta_time, current_behavior)
+				ProcessBehavior(action_seconds_per_tick, current_behavior)
 				return
 		else //No movement required
 			if(behavior_cooldowns[current_behavior] > world.time) //Still on cooldown
 				continue
-			ProcessBehavior(action_delta_time, current_behavior)
+			ProcessBehavior(action_seconds_per_tick, current_behavior)
 			return
 
 ///Determines whether the AI can currently make a new plan
@@ -534,7 +534,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 			break
 
 ///This is where you decide what actions are taken by the AI.
-/datum/ai_controller/proc/SelectBehaviors(delta_time)
+/datum/ai_controller/proc/SelectBehaviors(seconds_per_tick)
 	SHOULD_NOT_SLEEP(TRUE) //Fuck you don't sleep in procs like this.
 	if(!COOLDOWN_FINISHED(src, failed_planning_cooldown))
 		return FALSE
@@ -543,7 +543,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 
 	if(LAZYLEN(planning_subtrees))
 		for(var/datum/ai_planning_subtree/subtree as anything in planning_subtrees)
-			if(subtree.SelectBehaviors(src, delta_time) == SUBTREE_RETURN_FINISH_PLANNING)
+			if(subtree.SelectBehaviors(src, seconds_per_tick) == SUBTREE_RETURN_FINISH_PLANNING)
 				break
 
 	for(var/datum/ai_behavior/current_behavior as anything in current_behaviors)
@@ -636,11 +636,11 @@ have ways of interacting with a specific atom and control it. They posses a blac
 		return pawn?.GetComponent(/datum/component/ai_inventory_manager)
 	return inventory_component
 
-/datum/ai_controller/proc/ProcessBehavior(delta_time, datum/ai_behavior/behavior)
+/datum/ai_controller/proc/ProcessBehavior(seconds_per_tick, datum/ai_behavior/behavior)
 	var/mob/living/liver = pawn
 	if(liver.doing())
 		return
-	var/list/arguments = list(delta_time, src)
+	var/list/arguments = list(seconds_per_tick, src)
 	var/list/stored_arguments = behavior_args[behavior.type]
 	if(stored_arguments)
 		arguments += stored_arguments

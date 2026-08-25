@@ -69,11 +69,11 @@
 		final_amount = FLOOR(amount * RESTED_XP_TIRED_RATE, 1)
 	mind.current.adjust_experience(skill_type, final_amount, silent, daily_xp = FALSE)
 
-/datum/sleep_adv/proc/advance_cycle()
+/datum/sleep_adv/proc/advance_cycle(seconds_per_tick)
 	if(!mind.current)
 		return
-	if(prob(0)) // TODO SLEEP ADV SPECIALS
-		rolled_specials++
+
+	rolled_specials++
 
 	cached_dream_candidates = null
 	to_chat(mind.current, span_notice("My consciousness slips and I start dreaming..."))

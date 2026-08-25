@@ -150,18 +150,22 @@
 	blend_mode = 0
 	show_when_dead = FALSE
 
-/datum/reagent/druqks/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/druqks/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-	M.set_drugginess(30 SECONDS * efficiency)
+
+	M.set_drugginess(6 SECONDS * REAGENTS_MODIFIER)
 	M.apply_status_effect(/datum/status_effect/buff/druqks)
-	if(prob(5))
+
+	if(SPT_PROB(2.5, seconds_per_tick))
 		if(M.gender == FEMALE)
 			M.emote(pick("twitch_s","giggle"))
 		else
 			M.emote(pick("twitch_s","chuckle"))
+
 	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
 		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
-	..()
 
 /datum/reagent/druqks/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
@@ -178,10 +182,13 @@
 	if(affected_mob.client)
 		affected_mob.refresh_looping_ambience()
 
-/datum/reagent/druqks/overdose_process(mob/living/M)
-	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.25*REM)
-	M.adjustToxLoss(0.25*REM, 0)
+/datum/reagent/druqks/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 0.125 * REAGENTS_MODIFIER)
+	M.adjustToxLoss(0.125 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/druqks/overdose_start(mob/living/M)
 	M.visible_message(span_warning("Blood runs from [M]'s nose."))
@@ -213,18 +220,22 @@
 	L.remove_chem_effect(CE_PAINKILLER, "[type]")
 	L.remove_chem_effect(CE_STIMULANT, "[type]")
 
-/datum/reagent/ozium/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/ozium/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+
 	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
 		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
-	if(prob(5))
-		M.flash_fullscreen("whiteflash")
-	M.apply_status_effect(/datum/status_effect/buff/ozium)
-	..()
 
-/datum/reagent/ozium/overdose_process(mob/living/M)
-	M.adjustToxLoss(0.25*REM, 0)
+	M.apply_status_effect(/datum/status_effect/buff/ozium)
+
+/datum/reagent/ozium/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustToxLoss(0.125 * REAGENTS_MODIFIER, 0)
+
+	return TRUE
 
 /datum/reagent/ozium/overdose_start(mob/living/M)
 	M.playsound_local(get_turf(M), 'sound/misc/heroin_rush.ogg', 100, FALSE)
@@ -259,20 +270,23 @@
 	animate(affected_mob.client)
 	affected_mob.remove_chem_effect(CE_PULSE, "[type]")
 
-/datum/reagent/moondust/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/moondust/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
+
 	if(M.has_reagent(/datum/reagent/moondust_purest))
-		M.Sleeping(40, 0)
+		M.Sleeping(0.8 SECONDS * REAGENTS_MODIFIER)
+
 	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
 		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
-	M.apply_status_effect(/datum/status_effect/buff/moondust)
-	if(prob(2))
-		M.flash_fullscreen("whiteflash")
-	..()
 
-/datum/reagent/moondust/overdose_process(mob/living/M)
-	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.25*REM, 0)
+	M.apply_status_effect(/datum/status_effect/buff/moondust)
+
+/datum/reagent/moondust/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.125 * REAGENTS_MODIFIER)
 
 /datum/reagent/moondust/overdose_start(mob/living/M)
 	M.playsound_local(get_turf(M), 'sound/misc/heroin_rush.ogg', 100, FALSE)
@@ -310,20 +324,22 @@
 	affected_mob.remove_status_effect(/datum/status_effect/buff/moondust_purest)
 	affected_mob.remove_chem_effect(CE_PULSE, "[type]")
 
-/datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/moondust_purest/on_mob_life(mob/living/carbon/M, efficiency, seconds_per_tick)
+	. = ..()
+
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
 	if(M.has_reagent(/datum/reagent/moondust))
-		M.Sleeping(40 * efficiency, 0)
+		M.Sleeping(0.8 SECONDS * REAGENTS_MODIFIER, 0)
+
 	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
 		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
-	M.apply_status_effect(/datum/status_effect/buff/moondust_purest)
-	if(prob(20))
-		M.flash_fullscreen("whiteflash")
-	..()
 
-/datum/reagent/moondust_purest/overdose_process(mob/living/M)
-	M.adjustOrganLoss(ORGAN_SLOT_HEART,0.25*REM, 0)
+	M.apply_status_effect(/datum/status_effect/buff/moondust_purest)
+
+/datum/reagent/moondust_purest/overdose_process(mob/living/M, efficiency, seconds_per_tick)
 	. = ..()
+
+	M.adjustOrganLoss(ORGAN_SLOT_HEART, 0.125 * REAGENTS_MODIFIER)
 
 /datum/reagent/moondust_purest/overdose_start(mob/living/M)
 	M.playsound_local(get_turf(M), 'sound/misc/heroin_rush.ogg', 100, FALSE)

@@ -18,8 +18,8 @@
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/datum/component/pollutant/process()
+/datum/component/pollutant/process(seconds_per_tick)
 	if(world.time >= expiry_time)
 		qdel(src)
 		return
-	pollutant_type.on_life(parent)
+	pollutant_type.on_life(parent, seconds_per_tick)

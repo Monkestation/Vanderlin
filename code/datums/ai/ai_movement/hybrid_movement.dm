@@ -28,7 +28,7 @@
 	/// Per-controller: are we currently using a closest-approach fallback path (target confirmed unreachable)
 	var/list/using_closest_approach = list()
 
-/datum/ai_movement/hybrid_pathing/process(delta_time)
+/datum/ai_movement/hybrid_pathing/process(seconds_per_tick)
 	if(world.time < next_resolve)
 		next_resolve = world.time + 5 MINUTES
 
