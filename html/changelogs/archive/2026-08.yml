@@ -316,3 +316,15 @@
   - bugfix: Fixes a runtime with shirts in the loadout menu.
   - bugfix: Fixes runtime with ore sight.
   - bugfix: Fixes being able to fly while carrying people (and subsequent bug).
+2026-08-25:
+  Avalon-Proto:
+  - rscadd: Adds Blacksteel Weapons - Halberd, Axe, Double headed axe
+  - rscadd: Adds Weapons - Silver Double headed axe, Double headed steel battle axe
+  - balance: Ensures all Blacksteel weapons are very durable
+  - balance: Trade's the matron's stiletto for a Misericorde
+  realforest2001:
+  - rscadd: Added Bloodstone (ore) and Bloodsteel metal.
+  - rscadd: Added Bloodsteel weapons and crafting recipes.
+  - rscadd: Added Blood Curse, applied by holding bloodsteel/bloodstones or attacking
+      with bloodsteel weapons.
+  - rscadd: Added Bloodstone essence poison, used by the Blood Curse.
