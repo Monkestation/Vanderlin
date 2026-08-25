@@ -85,6 +85,7 @@
 	charge_time = 2 SECONDS
 	cooldown_time = 20 SECONDS
 	spell_cost = 100
+	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_PHASED
 
 	invocation_type = INVOCATION_WHISPER
 	invocation = "Sanguis restora"
