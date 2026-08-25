@@ -7,9 +7,7 @@
 	spell_type = SPELL_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
-	attunements = list(
-		/datum/attunement/blood = 0.5,
-	)
+
 	projectile_type = /obj/projectile/magic/revel_in_slaughter
 	charge_time = 1 SECONDS
 	charge_drain = 1

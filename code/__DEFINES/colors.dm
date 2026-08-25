@@ -117,6 +117,7 @@
 #define CLOTHING_WET "#afafaf"
 
 #define GLOW_COLOR_BARDIC "#E8837C" // Warm rose, for bardic songs and cadences
+#define GLOW_COLOR_ICE "#87CEEB" // Cyan
 
 #define CM_COLOR_SAT_MIN 0.6
 #define CM_COLOR_SAT_MAX 0.7

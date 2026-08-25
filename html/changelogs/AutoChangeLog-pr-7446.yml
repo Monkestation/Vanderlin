@@ -1,5 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - qol: "you now bleedout 50% slower when in critical so you can more easily be saved"
-  - qol: "Off-Balance now applies Combat Knockdown instead of regular knockdown, which cannot stack if you are already knocked down."

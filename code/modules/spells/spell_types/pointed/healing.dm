@@ -312,6 +312,10 @@
 	stun_undead = TRUE
 	patron_restrictive = TRUE
 
+/datum/action/cooldown/spell/healing/greater/noc
+	name = "Lunar Miracle"
+	button_icon_state = "noc"
+
 /datum/action/cooldown/spell/healing/greater/profane
 	name = "Corrupt Miracle"
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY

@@ -113,7 +113,6 @@
 	var/rarity_rank = 0
 
 /obj/item/reagent_containers/food/snacks/fish/dead
-	abstract_type = /obj/item/reagent_containers/food/snacks/fish/dead
 	status = FISH_DEAD
 	fish_id = "dead"
 
@@ -123,16 +122,16 @@
 	gender = PLURAL
 	foodtype = RAW | MEAT | GROSS
 	bitesize = 3
-	list_reagents = list(/datum/reagent/organpoison/human = 1)
-	grind_results = list(/datum/reagent/organpoison/human = 2)
+	list_reagents = list(/datum/reagent/poison/organ/human = 1)
+	grind_results = list(/datum/reagent/poison/organ/human = 2)
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
 	item_weight = 250 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/fatty/dwarf
 	name = "fatty manflesh" // porky
-	list_reagents = list(/datum/reagent/organpoison/human = 1)
-	grind_results = list(/datum/reagent/organpoison/human = 2)
+	list_reagents = list(/datum/reagent/poison/organ/human = 1)
+	grind_results = list(/datum/reagent/poison/organ/human = 2)
 	nutrition = RAWMEAT_NUTRITION
 	foodtype = RAW | MEAT | GROSS
 	cannibalism = TRUE
@@ -142,8 +141,8 @@
 /obj/item/reagent_containers/food/snacks/meat/fatty/kobold
 	name = "raw wyrmflesh"
 	foodtype = RAW | MEAT | GROSS
-	list_reagents = list(/datum/reagent/organpoison/kobold = 1)
-	grind_results = list(/datum/reagent/organpoison/kobold = 2)
+	list_reagents = list(/datum/reagent/poison/organ/kobold = 1)
+	grind_results = list(/datum/reagent/poison/organ/kobold = 2)
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBALISM_KOBOLD
 	tastes = list("gamey meat" = 1, "crunchy bits" = 1, "ash" = 1)
@@ -152,8 +151,8 @@
 
 /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/harpy
 	name = "harpy cutlet"
-	list_reagents = list(/datum/reagent/organpoison/human = 1)
-	grind_results = list(/datum/reagent/organpoison/human = 2)
+	list_reagents = list(/datum/reagent/poison/organ/human = 1)
+	grind_results = list(/datum/reagent/poison/organ/human = 2)
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
 	item_weight = 200 GRAMS
@@ -162,8 +161,8 @@
 	name = "deepflesh"
 	icon_state = "fishfillet"
 	slice_path = /obj/item/reagent_containers/food/snacks/meat/mince/fish
-	list_reagents = list(/datum/reagent/organpoison/human = 1)
-	grind_results = list(/datum/reagent/organpoison/human = 2)
+	list_reagents = list(/datum/reagent/poison/organ/human = 1)
+	grind_results = list(/datum/reagent/poison/organ/human = 2)
 	slices_num = 2
 	become_rot_type = null
 	cannibalism = TRUE
@@ -174,8 +173,8 @@
 	name = "foul manflesh"
 	cannibalism = TRUE
 	cannibalism_for = SPECIES_CANNIBAL_MEN
-	list_reagents = list(/datum/reagent/organpoison/human = 1)
-	grind_results = list(/datum/reagent/organpoison/human = 2)
+	list_reagents = list(/datum/reagent/poison/organ/human = 1)
+	grind_results = list(/datum/reagent/poison/organ/human = 2)
 	item_weight = 150 GRAMS
 
 
@@ -183,8 +182,8 @@
 	name = "organ"
 	icon_state = "guts"
 	icon = 'icons/obj/surgery.dmi'
-	list_reagents = list(/datum/reagent/organpoison = 0.5)
-	grind_results = list(/datum/reagent/organpoison = 1)
+	list_reagents = list(/datum/reagent/poison/organ = 0.5)
+	grind_results = list(/datum/reagent/poison/organ = 1)
 	gender = NEUTER
 	nutrition = MINCE_NUTRITION
 	foodtype = RAW | MEAT | GROSS
@@ -206,24 +205,24 @@
 /obj/item/reagent_containers/food/snacks/meat/organ/heart
 	name = "heart"
 	icon_state = "heart"
-	list_reagents = list(/datum/reagent/organpoison = 1)
-	grind_results = list(/datum/reagent/organpoison = 2)
+	list_reagents = list(/datum/reagent/poison/organ = 1)
+	grind_results = list(/datum/reagent/poison/organ = 2)
 	nutrition = RAWMEAT_NUTRITION
 	item_weight = 250 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/organ/lungs
 	name = "lungs"
 	icon_state = "lungs"
-	list_reagents = list(/datum/reagent/organpoison = 1)
-	grind_results = list(/datum/reagent/organpoison = 2)
+	list_reagents = list(/datum/reagent/poison/organ = 1)
+	grind_results = list(/datum/reagent/poison/organ = 2)
 	nutrition = RAWMEAT_NUTRITION
 	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/meat/organ/liver
 	name = "liver"
 	icon_state = "liver"
-	list_reagents = list(/datum/reagent/organpoison = 1)
-	grind_results = list(/datum/reagent/organpoison = 2)
+	list_reagents = list(/datum/reagent/poison/organ = 1)
+	grind_results = list(/datum/reagent/poison/organ = 2)
 	nutrition = RAWMEAT_NUTRITION
 	item_weight = 300 GRAMS
 

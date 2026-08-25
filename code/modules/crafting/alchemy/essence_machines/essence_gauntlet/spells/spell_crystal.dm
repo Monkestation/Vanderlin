@@ -4,7 +4,6 @@
 	button_icon_state = "quartz"
 	button_icon = 'icons/roguetown/items/gems.dmi'
 	cast_range = 1
-	point_cost = 9
 	cooldown_time = 3 MINUTES
 	essences = list(/datum/thaumaturgical_essence/magic, /datum/thaumaturgical_essence/crystal)
 
@@ -59,7 +58,7 @@
 	var/list/eligible = list()
 	for(var/datum/action/cooldown/spell/S in user.actions)
 		// Exclude the essence family (creation spells) and anything already essence-flagged
-		if(S.spell_type == SPELL_ESSENCE)
+		if(S.spell_type != SPELL_MANA)
 			continue
 		if(S.spell_flags & SPELL_TEMPORARY)
 			continue
@@ -94,7 +93,6 @@
 		return
 
 	granted_spell = new stored_spell_type(user)
-	granted_spell.point_cost = 0
 	granted_spell.cooldown_time = 0
 	granted_spell.background_icon_state = "spelltemp"
 	granted_spell.base_background_icon_state = "spelltemp0"

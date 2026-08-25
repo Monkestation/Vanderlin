@@ -64,7 +64,8 @@
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)//only noc or zizo worshippers can be mages
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
-	spell_points = 8 //less than courtmagician, more than an adventurer wizard
+	form_points = 8
+	technique_points = 1
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sellmage
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/sellmage/old
@@ -101,6 +102,20 @@
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "WIZARD")
 
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/adept/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/adept/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/adept/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/adept/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/adept/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/adept/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/adept/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/adept/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/adept/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 2)
+
 /datum/outfit/mercenary/sellmage
 	name = "Sellmage (Mercenary)"
 	shirt = /obj/item/clothing/armor/chainmail/hauberk/iron
@@ -114,7 +129,6 @@
 	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
 	backpack_contents = list(
-		/obj/item/book/granter/spellbook/adept = 1,
 		/obj/item/chalk = 1,
 		/obj/item/reagent_containers/glass/bottle/manapot = 1
 	)

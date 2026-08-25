@@ -51,7 +51,7 @@
 
 	///// Lockpicking
 	/// Difficulty of the lock, smaller is harder
-	var/difficulty = 5
+	var/difficulty = LOCK_NOVICE
 	/// Picks able to be used
 	var/list/lockpicks = list(/obj/item/lockpick)
 	/// Wedges able to be used
@@ -127,7 +127,7 @@
 	toggle(user, tool, silent)
 
 /datum/lock/key/proc/set_pick_difficulty(difficulty)
-	src.difficulty = CLAMP(difficulty, 1, 6)
+	src.difficulty = CLAMP(difficulty, LOCK_LEGENDARY, LOCK_BASIC)
 
 /datum/lock/key/proc/get_string_difficulty()
 	switch(difficulty)

@@ -59,8 +59,9 @@
 //................ Battle Axe ............... //
 /obj/item/weapon/axe/battle
 	name = "battle axe"
-	desc = "A masterfully constructed ax, with additional weights in the form of ornate spikes and practical edges."
+	desc = "A masterfully constructed axe, with additional weights in the form of ornate spikes and practical edges."
 	icon_state = "battleaxe"
+	force = DAMAGE_AXE + 3
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	max_blade_int = 300
 	max_integrity = INTEGRITY_STRONGEST
@@ -84,6 +85,17 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 	return ..()
 
+/obj/item/weapon/axe/battle/double
+	name = "double headed battle axe"
+	desc = "Twice the heads for twice the carnage, excellent for cleaving the heads of your foes and the timber of the wood"
+	icon_state = "battleaxedouble"
+	force = DAMAGE_AXE + 5
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 4
+	max_blade_int = 400
+	max_integrity = INTEGRITY_STRONGEST * 1.25
+	melt_amount = 300
+	sellprice = 120
+	item_weight = 2.2 KILOGRAMS
 
 //................ Iron Axe ............... //
 /obj/item/weapon/axe/iron
@@ -256,6 +268,33 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 
+//................ Blacksteel Axe ............... //
+/obj/item/weapon/axe/battle/blacksteel
+	name = "blacksteel axe"
+	desc = "A magnificent battle axe of blacksteel, fitted to counter both unarmored assailants and heavy infantry. The edge might be fluted with nobler alloys, but it is no less wicked when introduced to maille-and-bone."
+	icon_state = "bs_axe"
+	force = DAMAGE_AXE + 2
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 2
+	max_blade_int = 330
+	max_integrity = INTEGRITY_BLACKSTEEL
+	smeltresult = null
+	melting_material = /datum/material/blacksteel
+	melt_amount = 200
+	sellprice = 90
+	item_weight = 1.2 KILOGRAMS
+
+/obj/item/weapon/axe/battle/blacksteel/double
+	name = "double headed blacksteel axe"
+	desc = "A weapon with the grace of a dragon, and the power as well. The extra weight of the second head pounds the blade into the heaviest plate, leaving grievous wounds with graceful power."
+	icon_state = "bs_axedouble"
+	force = DAMAGE_AXE + 5
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 5
+	max_blade_int = 450
+	max_integrity = INTEGRITY_BLACKSTEEL * 1.25
+	melt_amount = 300
+	sellprice = 150
+	item_weight = 1.8 KILOGRAMS
+
 
 //------------------ Silver Axe ---------------//
 /obj/item/weapon/axe/silver
@@ -264,7 +303,6 @@
 	icon_state = "silveraxe"
 	max_blade_int = 200
 	max_integrity = INTEGRITY_STRONGEST * 0.8
-	minstr = 6
 	smeltresult = /obj/item/ingot/silver
 	resistance_flags = FIRE_PROOF
 	sellprice = 80
@@ -286,7 +324,15 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 
-
+/obj/item/weapon/axe/silver/double
+	name = "double headed silver axe"
+	desc = "A silver axe with two cleaving heads, for sweeping thorugh the beasts of the nite"
+	icon_state = "silveraxedouble"
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST * 1.25
+	sellprice = 150
+	axe_cut = 18
+	item_weight = 2 KILOGRAMS
 
 //.................. Bearded Axe ...............//
 /obj/item/weapon/axe/steel/bearded

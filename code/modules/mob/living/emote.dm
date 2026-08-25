@@ -265,6 +265,18 @@
 	set category = "Emotes.Noises"
 	emote("choke", intentional = TRUE)
 
+/datum/emote/living/sniff
+	key = "sniff"
+	key_third_person = "sniffs"
+	message = "sniffs..."
+	emote_type = EMOTE_AUDIBLE
+	ignore_silent = TRUE
+
+/mob/living/carbon/human/verb/emote_sniff()
+	set name = "Sniff"
+	set category = "Emotes.Noises"
+	emote("sniff", intentional = TRUE)
+
 /datum/emote/living/cross
 	key = "crossarms"
 	key_third_person = "crossesarms"
@@ -517,6 +529,15 @@
 	message = "groans."
 	message_muffled = "makes a muffled groan."
 	emote_type = EMOTE_AUDIBLE
+
+/datum/emote/living/attack
+	key = "attack"
+	key_third_person = "attacks"
+	message = ""
+	nomsg = TRUE
+	message_muffled = "makes a muffled groan."
+	emote_type = EMOTE_AUDIBLE
+	show_runechat = FALSE
 
 /mob/living/carbon/human/verb/emote_groan()
 	set name = "Groan"
@@ -1192,6 +1213,32 @@
 	set name = "Snap"
 	set category = "Emotes.Noises"
 	emote("snap", intentional = TRUE)
+
+/datum/emote/living/snaptwice
+	key = "snaptwice"
+	key_third_person = "snaps their fingers twice."
+	message = "snaps their fingers twice."
+	message_muffled = "snaps their fingers twice."
+	restraint_check = TRUE
+	emote_type = EMOTE_VISIBLE
+
+/mob/living/carbon/human/verb/emote_snaptwice()
+	set name = "Snaptwice"
+	set category = "Emotes.Noises"
+	emote("snaptwice", intentional = TRUE)
+
+/datum/emote/living/snapthrice
+	key = "snapthrice"
+	key_third_person = "snaps their fingers thrice."
+	message = "snaps their fingers thrice."
+	message_muffled = "snaps their fingers thrice."
+	restraint_check = TRUE
+	emote_type = EMOTE_VISIBLE
+
+/mob/living/carbon/human/verb/emote_snapthrice()
+	set name = "Snapthrice"
+	set category = "Emotes.Noises"
+	emote("snapthrice", intentional = TRUE)
 
 /datum/emote/living/stare
 	key = "stare"

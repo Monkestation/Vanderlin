@@ -21,7 +21,7 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 	base_antags = 1
 	maximum_antags = 1
 	roundstart = FALSE
-	earliest_start = 30 MINUTES
+	earliest_start = 5 MINUTES //if he can spawn 5 minutes in he is 100% needed wtf
 	secondary_prob = 0
 	prompted_picking = TRUE
 	//not actually, see check_enemies proc
@@ -43,12 +43,9 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 /datum/round_event_control/antagonist/solo/from_ghosts/daewalker/check_enemies(return_players = FALSE)
 	var/list/suckheads = list()
 	var/list/fuckheads = list()
-	for(var/datum/mind/M in SSmapping.retainer.vampires)
+	for(var/datum/mind/M in SSmapping.retainer.vampires) // clanless vampires can exist even though they shouldnt really so double check
 		if(M.current && M.current.stat < DEAD)
 			suckheads |= M.current
-	for(var/datum/mind/M in SSmapping.retainer.death_knights)
-		if(M.current && M.current.stat < DEAD)
-			fuckheads |= M.current
 	for(var/datum/clan/rave in GLOB.vampire_clans)
 		for(var/mob/living/vamp in rave.clan_members)
 			if(!QDELETED(vamp) && vamp.stat < DEAD) // this shouldnt be possible since they ash but hey, never know.
@@ -58,6 +55,12 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 				fuckheads |= ghoul
 	// how many living vampires + how many living thralls + how many times they've been seen
 	var/attention = length(suckheads) + length(fuckheads) * 0.5 + GLOB.vamp_detection * 0.125
+	for(var/mob/living/vamp in suckheads)
+		var/datum/antagonist/vampire/lord/L = vamp.mind?.has_antag_datum(/datum/antagonist/vampire/lord)
+		if(istype(L))
+			attention += L.ascension_level * 0.5
+	if(SSmapping.retainer.vlord_ascended)
+		attention += 2 // a bonus for full ascension, makes one full vlord a total of 5 attention
 	if(OMEN_SUNSTEAL in GLOB.badomens)
 		attention += 5
 	if(attention >= required_enemies)
