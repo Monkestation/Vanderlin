@@ -150,6 +150,20 @@
 	melting_material = /datum/material/blacksteel
 	melt_amount = 75
 
+/obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
+	name = "bloodsteel quarterstaff"
+	desc = "A quarterstaff with bloodsteel reinforcements. One would think such a material would be better used on a sharper implement of war, but who are we to judge."
+	icon_state = "quarterstaff_bloodsteel"
+	force = DAMAGE_STAFF + 6
+	force_wielded =  DAMAGE_STAFF_WIELD + 7
+	max_integrity = INTEGRITY_STRONGEST
+	melting_material = /datum/material/bloodsteel
+	sellprice = 0
+
+/obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."
@@ -205,6 +219,7 @@
 	desc = "Keep the rest at arm's length, lest you're burdened with the pain of rememberance."
 	icon_state = "swordstaff"
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
+	max_integrity = INTEGRITY_BLACKSTEEL
 
 /obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
 	. = ..()
@@ -236,6 +251,23 @@
 /obj/item/weapon/polearm/spear/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/polearm/spear/bloodsteel
+	name = "bloodsteel spear"
+	desc = "A spear with a pronged bloodsteel head."
+	icon_state = "corruptspear"
+	force = DAMAGE_SPEARPLUS + 2
+	force_wielded = DAMAGE_SPEAR_WIELD + 2
+	wbalance = GREAT_PARRY
+	max_integrity = INTEGRITY_STRONGEST
+	max_blade_int = 240
+	smeltresult = /obj/item/ingot/bloodsteel
+	sellprice = 0
+	item_weight = 0.9 KILOGRAMS
+
+/obj/item/weapon/polearm/spear/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 /obj/item/weapon/polearm/spear/abyssor
 	name = "depthseeker"
@@ -511,6 +543,7 @@
 /obj/item/weapon/polearm/halberd
 	name = "halberd"
 	desc = "A reinforced polearm for clobbering ordained with a crested ax head, pick and sharp point, a royal arm for defence and aggression."
+	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "halberd"
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_HALBERD_WIELD
@@ -532,7 +565,6 @@
 /obj/item/weapon/polearm/halberd/silver
 	name = "silver halberd"
 	desc = "A halberd forged from silver, laying low the beasts of the nite."
-	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "silverhalberd"
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_HALBERD_WIELD
@@ -548,6 +580,24 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/polearm/halberd/bloodsteel
+	name = "bloodsteel halberd"
+	desc = "A halberd forged from bloodsteel, the shimmering red metal makes it difficult to see all the blood..."
+	icon_state = "corrupthalberd"
+	force = DAMAGE_SPEAR + 2
+	force_wielded = DAMAGE_HALBERD_WIELD + 2
+	wbalance = EASY_TO_DODGE
+	max_integrity = INTEGRITY_STRONGEST
+	max_blade_int = 300
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 150
+	sellprice = 0
+
+/obj/item/weapon/polearm/halberd/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/weapon/polearm/halberd/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -558,6 +608,21 @@
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -3,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -1,"ex" = 3,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+/obj/item/weapon/polearm/halberd/blacksteel
+	name = "blacksteel halberd"
+	desc = "A graceful blacksteel weapon, shaped much like the wing of a dragon. May it sweep through your foes with grace, splattering flowing crimson with every blow."
+	icon_state = "bs_halberd"
+	force = DAMAGE_SPEARPLUS
+	force_wielded = DAMAGE_HALBERD_WIELD + 2
+	wbalance = HARD_TO_DODGE
+	max_integrity = INTEGRITY_BLACKSTEEL
+	max_blade_int = 450
+	smeltresult = null
+	melting_material = /datum/material/blacksteel
+	melt_amount = 200
+	sellprice = 250
+	axe_cut = 20
 
 //................ Psydonian Halberd ............... //
 /obj/item/weapon/polearm/halberd/psydon
