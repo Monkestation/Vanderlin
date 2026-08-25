@@ -39,8 +39,8 @@
 	var/damage_value_full = min(base_damage_full * blood_multiplier, 75)
 	var/damage_value_resisted = min(base_damage_resisted * blood_multiplier, 22.5)
 	if(GET_MOB_ATTRIBUTE_VALUE(cast_on, STAT_CONSTITUTION) >= constitution_level)
-		cast_on.adjustFireLoss(base_damage_resisted)
+		cast_on.adjustFireLoss(damage_value_resisted)
 		to_chat(cast_on, span_userdanger("Your blood reacts to hostile powers, but your constitution resists!"))
 	else
-		cast_on.adjustFireLoss(base_damage_full)
+		cast_on.adjustFireLoss(damage_value_full)
 		to_chat(cast_on, span_userdanger("Your blood reacts to hostile powers, it feels like its boiling!"))
