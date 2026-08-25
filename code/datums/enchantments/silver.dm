@@ -16,8 +16,8 @@
 	. = ..()
 	registered_signals += COMSIG_ITEM_ATTACK
 	RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
-	registered_signals += COMSIG_ITEM_PICKUP
-	RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
+	//registered_signals += COMSIG_ITEM_PICKUP
+	//RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	registered_signals += COMSIG_ITEM_EQUIPPED
 	RegisterSignal(item, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
 
@@ -73,7 +73,7 @@
 	var/affected = affected_by_bane(user)
 	if(!affected)
 		return
-	to_chat(user, span_userdanger("I have worn my BANE!"))
+	to_chat(user, span_userdanger("I have held my BANE!"))
 	user.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
 	if(affected != AFFECTED_VLORD)
 		user.adjustFireLoss(25)

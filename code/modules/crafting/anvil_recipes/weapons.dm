@@ -604,6 +604,13 @@
 	created_item = /obj/item/weapon/axe/battle
 	craftdiff = 3
 
+/datum/anvil_recipe/weapons/steel/double_battleaxe
+	name = "Double-headed Battle Axe (+Steel Bar x2)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/weapon/axe/battle/double
+	craftdiff = 5
+
 /datum/anvil_recipe/weapons/steel/billhook
 	name = "Billhook (+Small Log)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -1045,6 +1052,12 @@
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/weapon/axe/silver
 
+/datum/anvil_recipe/weapons/silver/double_silveraxe
+	name = "Double-headed Silver Axe (+Silver Bar, +Stick)"
+	appro_skill = /datum/attribute/skill/craft/weaponsmithing
+	additional_items = list(/obj/item/ingot/silver, /obj/item/grown/log/tree/stick)
+	created_item = /obj/item/weapon/axe/silver/double
+
 // --------------- Psydonite --------------------
 /datum/anvil_recipe/weapons/psy/axe
 	name = "Psydonian War Axe (+B. Silver, +Stick)"
@@ -1124,14 +1137,22 @@
 	created_item = /obj/item/weapon/whip/psydon
 	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
 
-
-
 // --------------- Blacksteel --------------------
 
 /datum/anvil_recipe/weapons/blacksteel
 	abstract_type = /datum/anvil_recipe/weapons/blacksteel
 	required_material = /obj/item/ingot/blacksteel
 	craftdiff = 6
+
+/datum/anvil_recipe/weapons/blacksteel/battleaxe
+	name = "Blacksteel Axe (+Blacksteel Bar)"
+	additional_items = list(/obj/item/ingot/blacksteel)
+	created_item = /obj/item/weapon/axe/battle/blacksteel
+
+/datum/anvil_recipe/weapons/blacksteel/double_battleaxe
+	name = "Double-headed Blacksteel Axe (+Blacksteel Bar x2)"
+	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
+	created_item = /obj/item/weapon/axe/battle/blacksteel/double
 
 /datum/anvil_recipe/weapons/blacksteel/dagger
 	name = "Blacksteel Daggers"
@@ -1142,6 +1163,8 @@
 /datum/anvil_recipe/weapons/blacksteel/misericorde
 	name = "Blacksteel Misericordes"
 	created_item = /obj/item/weapon/knife/dagger/blacksteel/misericorde
+	output_amount = 2
+	craftdiff = 5
 
 /datum/anvil_recipe/weapons/blacksteel/rapier
 	name = "Blacksteel Rapier"
@@ -1171,6 +1194,11 @@
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/blacksteel
 
+/datum/anvil_recipe/weapons/blacksteel/halberd
+	name = "Blacksteel Halberd (+Blacksteel Bar, +Small Log)"
+	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/halberd/blacksteel
+
 /datum/anvil_recipe/weapons/blacksteel/mace
 	name = "Blacksteel Mace (+Blacksteel Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
@@ -1181,10 +1209,66 @@
 	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
 	created_item = /obj/item/weapon/mace/blacksteel/barmace
 
+/datum/anvil_recipe/weapons/blacksteel/battleaxe
+	name = "Blacksteel Battle Axe (+Blacksteel Bar)"
+	additional_items = list(/obj/item/ingot/blacksteel)
+	created_item = /obj/item/weapon/axe/battle/blacksteel
+
 /datum/anvil_recipe/weapons/blacksteel/warhammer
 	name = "Blacksteel Warhammer (+Blacksteel Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
 	created_item = /obj/item/weapon/mace/warhammer/blacksteel
+
+// --------------- Bloodsteel --------------------
+
+/datum/anvil_recipe/weapons/bloodsteel
+	abstract_type = /datum/anvil_recipe/weapons/bloodsteel
+	required_material = /obj/item/ingot/bloodsteel
+	craftdiff = 6
+
+/datum/anvil_recipe/weapons/bloodsteel/dagger
+	name = "Bloodsteel Daggers"
+	created_item = /obj/item/weapon/knife/dagger/bloodsteel
+	output_amount = 2
+	craftdiff = 5
+
+/datum/anvil_recipe/weapons/bloodsteel/rapier
+	name = "Bloodsteel Rapier"
+	created_item = /obj/item/weapon/sword/rapier/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/arming
+	name = "Bloodsteel Short Sword"
+	created_item = /obj/item/weapon/sword/short/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/sword
+	name = "Bloodsteel Sword"
+	created_item = /obj/item/weapon/sword/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/broadsword
+	name = "Bloodsteel Broadsword (+Bloodsteel Bar)"
+	additional_items = list(/obj/item/ingot/bloodsteel)
+	created_item = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/whip
+	name = "Bloodsteel Whip (+Cured Hide x2)"
+	additional_items = list(/obj/item/natural/hide/cured, /obj/item/natural/hide/cured)
+	created_item = /obj/item/weapon/whip/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/quarterstaff
+	name = "Bloodsteel Quarterstaff (+Small Log)"
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/halberd
+	name = "Bloodsteel Halberd (+Bloodsteel Bar, +Small Log)"
+	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/halberd/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/spear
+	name = "Bloodsteel Spears (+Small Log)"
+	additional_items = list(/obj/item/grown/log/tree/small)
+	created_item = /obj/item/weapon/polearm/spear/bloodsteel
+	output_amount = 2
 
 // ------------------ Miscellaneous Weapons ------------------
 
