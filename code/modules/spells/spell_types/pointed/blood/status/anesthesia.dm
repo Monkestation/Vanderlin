@@ -7,7 +7,7 @@
 	associated_skill = /datum/attribute/skill/magic/blood
 	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
-	required_technique = TECHNIQUE_ALTERATION
+	required_technique = TECHNIQUE_ILLUSION
 	heretical_spell = TRUE
 	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 	check_flags = AB_CHECK_CONSCIOUS
