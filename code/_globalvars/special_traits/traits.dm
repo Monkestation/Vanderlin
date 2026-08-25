@@ -888,6 +888,7 @@
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/dark_secrets)
 	character.add_spell(/datum/action/cooldown/spell/status/blood_sight, silent = TRUE, mastery_spell = TRUE)
 	character.add_spell(/datum/action/cooldown/spell/projectile/blood_steal, silent = TRUE, mastery_spell = TRUE)
+	character.grant_language(/datum/language/sanguine)
 	character.adjust_technique_mastery_points(2)
 	character.adjust_form_mastery_points(3, specific_form = FORM_BLOOD)
 	ADD_TRAIT(character, TRAIT_BLOOD_MAGE, BE_SPECIAL_TRAIT)

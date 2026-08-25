@@ -1,7 +1,7 @@
 /datum/action/cooldown/spell/blood_poison
 	name = "Create Blood Poison"
 	desc = "Coat a blade with deadly poison or contaminate target food and drink."
-	button_icon_state = "dream_track"
+	button_icon_state = "dream_lotus"
 	sound = 'sound/magic/psydonbleeds.ogg'
 
 	associated_skill = /datum/attribute/skill/magic/blood
