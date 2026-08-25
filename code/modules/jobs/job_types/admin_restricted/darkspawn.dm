@@ -83,6 +83,7 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_SORCERER,
 		TRAIT_NOPAIN,
+		TRAIT_VITAE_USER,
 	)
 
 	languages = list(

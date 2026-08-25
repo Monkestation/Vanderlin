@@ -161,6 +161,7 @@ Thing can move up or down an armor class by significant changes to coverage & cr
 | ARMOR INTEGRITY DEFINES |	- So armor makes sense
 \------------------------*/
 
+#define INTEGRITY_BLACKSTEEL	650		// BLACKSTEEL
 #define INTEGRITY_STRONGEST		500		// STEEL
 #define INTEGRITY_STRONG		300		// IRON
 #define INTEGRITY_STANDARD		200		// LEATHER

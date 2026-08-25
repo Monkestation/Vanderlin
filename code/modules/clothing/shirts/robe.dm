@@ -71,15 +71,6 @@
 	icon_state = "nocrobe"
 	sleeved = null
 
-//someone should make sure the necromancer robe gets dwarf and child sprites
-/obj/item/clothing/shirt/robe/necromancer
-	name = "necromancer robes"
-	desc = "Eerie black garb of death."
-	icon_state = "warlock"
-	allowed_ages = ALL_AGES_LIST
-	allowed_race = SPECIES_BASE_BODY
-	sleeved = null
-
 /obj/item/clothing/shirt/robe/dendor
 	name = "briar robe"
 	desc = "Nature nurtures us and we, in turn, will nurture it back in the end."
@@ -137,8 +128,8 @@
 	icon_state = "wizardrobes"
 
 /obj/item/clothing/shirt/robe/magus
-	name = "magus's robe"
-	desc = "A dark padded robe worn by only the most mysterious of mages, the magi."
+	name = "magus robe"
+	desc = "A dark padded robe gilded with golden thread. Worn by only the most mysterious of mages, the magi."
 	icon_state = "warlock"
 	allowed_sex = list(MALE)
 	allowed_race = SPECIES_BASE_BODY
@@ -146,6 +137,7 @@
 	armor_type = /datum/armor/robe/magus
 	prevent_crits = list(BCLASS_CUT, BCLASS_TWIST)
 	max_integrity = 200
+	sleeved = null
 
 /obj/item/clothing/shirt/robe/merchant
 	name = "guilder jacket"

@@ -123,6 +123,15 @@
 	. = ..()						//+2 force, +50 blade int, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 2, 50, 50, 1, TRUE)
 
+/obj/item/weapon/sword/short/bloodsteel
+	name = "bloodsteel short sword"
+	desc = "A sword of shortened design and a reduced grip for single hand use, the blade is made with shimmering red bloodsteel."
+	icon_state = "corruptswordshort"
+	force = DAMAGE_SHORTSWORD + 2
+	sellprice = 0
+	item_weight = 600 GRAMS
+	smeltresult = /obj/item/ingot/bloodsteel
+
 /obj/item/weapon/sword/short/ida //Worse thrust but more damage for cutting.
 	name = "steel ida"
 	desc = "A steel short sword with a leaf-shaped blade. Used to be a popular weapon in the east."
@@ -183,6 +192,22 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/sword/bloodsteel
+	name = "bloodsteel sword"
+	desc = "A simple sword with a shimmering red bloodsteel blade."
+	icon_state = "corruptsword"
+	force = DAMAGE_SWORD + 2
+	force_wielded = DAMAGE_SWORD_WIELD + 2
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/bloodsteel
+	sellprice = 0
+	item_weight = 1 KILOGRAMS
+
+/obj/item/weapon/sword/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/weapon/sword/iron
 	desc = "A simple iron sword with a tested edge, sharp and true."
 	icon_state = "isword"
@@ -235,6 +260,26 @@
 	item_weight = 900 GRAMS
 	smeltresult = null
 
+/obj/item/weapon/sword/blacksteel
+	name = "blacksteel arming sword"
+	desc = "A broad blade of blacksteel, mounted to a rosawooden handle that perfectly compliments its wielder's grasp. It is the culmination of \
+	Psydonia's storied history with arming swords; a mastersmith's triumph, only fit for the hands of a true hero.. or a truer villain."
+	icon_state = "bs_sword"
+	force = DAMAGE_SWORD + 2
+	force_wielded = DAMAGE_SWORD_WIELD + 2
+	max_blade_int = 360
+	max_integrity = INTEGRITY_BLACKSTEEL
+	smeltresult = null
+	melting_material = /datum/material/blacksteel
+	melt_amount = 100
+	item_weight = 1.1 KILOGRAMS
+
+/obj/item/weapon/sword/blacksteel/decorated
+	name = "decorated blacksteel arming sword"
+	desc = "A broad blade of blacksteel, mounted atop a golden sabreguard that's been meticulously engraved with its commissoner's heraldry. It is \
+	a masterwork of unmatched opulance and lethality, and is - perhaps - the finest arming sword your eyes'll ever lay upon."
+	icon_state = "bs_swordregal"
+
 /*-------\
 | Sabres |	Onehanded, slightly weaker thrust, better for parries. Think rapier but cutting focus.
 \-------*/
@@ -242,6 +287,7 @@
 	name = "sabre"
 	desc = "A swift sabre, favored by duelists and cut-throats alike."
 	icon_state = "saber"
+	force = DAMAGE_SWORD + 4
 	force_wielded = 0
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST)
@@ -506,7 +552,7 @@
 	icon_state = "rapier"
 	force_wielded = 0
 	wbalance = VERY_HARD_TO_DODGE
-	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT)
+	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT, ESTOC_LUNGE)
 	gripped_intents = null
 	alt_intents = null
 	smeltresult = /obj/item/ingot/steel_slag
@@ -684,6 +730,31 @@
 	item_weight = 650 GRAMS
 	SET_BASE_PIXEL(0, 0)
 	bigboy = FALSE
+
+/obj/item/weapon/sword/rapier/blacksteel
+	name = "blacksteel rapier"
+	desc = "A magnificent rapier of blacksteel. Despite originating from the matrimony of cutting-edge swordsmanship techniques and metallurgy, it \
+	doesn't actually have a cutting edge to call its own. Not like that matters as much, of course, when it can pierce straight through plate armor."
+	icon_state = "blacksteelrapier"
+	force = DAMAGE_SWORD + 2
+	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
+	melt_amount = 100
+	max_blade_int = 400
+	max_integrity = INTEGRITY_BLACKSTEEL
+	item_weight = 600 GRAMS
+
+/obj/item/weapon/sword/rapier/bloodsteel
+	name = "bloodsteel rapier"
+	desc = "A narrow length of shimmering bloodsteel, a flashing streak of red leaving pools of blood in its wake."
+	icon_state = "corruptrapier"
+	force = DAMAGE_SWORD + 2
+	smeltresult = /obj/item/ingot/bloodsteel
+	item_weight = 600 GRAMS
+
+/obj/item/weapon/sword/rapier/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 // Hoplite Kophesh
 /obj/item/weapon/sword/khopesh
@@ -1020,6 +1091,22 @@
 	force = DAMAGE_SWORD + 2
 	item_weight = 1.5 KILOGRAMS
 
+/obj/item/weapon/sword/long/blacksteel
+	name = "blacksteel longsword"
+	desc = "A finely crafted silver longsword"
+	desc = "A sleek blade of a dark, and burnished hue. \
+			A handle carved from a rosawood branch. A pairing that shall sing as it parts the air. \
+			With it, one can write a song across all of Psydonia."
+	icon_state = "bslongsword"
+	force = DAMAGE_SWORD + 3
+	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
+	max_integrity = INTEGRITY_BLACKSTEEL
+	max_blade_int = 400
+	smeltresult = null
+	melting_material = /datum/material/blacksteel
+	melt_amount = 200
+	sellprice = 220
+
 /obj/item/weapon/sword/long/psydon
 	name = "psydonian longsword"
 	desc = "A large silver longsword forged in the shape of a psycross."
@@ -1258,28 +1345,6 @@
 			if("onback")
 				return list("shrink" = 0.6,"sx" = -1,"sy" = 3,"nx" = -1,"ny" = 2,"wx" = 3,"wy" = 4,"ex" = -1,"ey" = 5,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 20,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 
-//................ Zizo Sword ............... //
-/obj/item/weapon/sword/long/greatsword/zizo
-	name = "darksteel kriegsmesser"
-	desc = "A dark red curved blade. Called forth from Her will, if you wield this blade you are to be feared, if you do not, you are dead."
-	icon_state = "zizosword"
-	wdefense = ULTMATE_PARRY
-	sellprice = 0 // Super evil Zizo sword, nobody wants this
-	item_weight = 2.3 KILOGRAMS
-
-/obj/item/weapon/sword/long/greatsword/zizo/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.6,"sx" = -6,"sy" = 6,"nx" = 6,"ny" = 7,"wx" = 0,"wy" = 5,"ex" = -1,"ey" = 7,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -50,"sturn" = 40,"wturn" = 50,"eturn" = -50,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-			if("altgrip")
-				return list("shrink" = 0.6,"sx" = -6,"sy" = 6,"nx" = 6,"ny" = 7,"wx" = 0,"wy" = 5,"ex" = -1,"ey" = 7,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 130,"sturn" = 220,"wturn" = 230,"eturn" = 130,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-			if("wielded")
-				return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 4,"sflip" = 4,"wflip" = 1,"eflip" = 0)
-			if("onback")
-				return list("shrink" = 0.6,"sx" = -1,"sy" = 3,"nx" = -1,"ny" = 2,"wx" = 3,"wy" = 4,"ex" = -1,"ey" = 5,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 20,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
-
 //................ Claymores ............... //
 
 /obj/item/weapon/sword/long/greatsword/claymore/iron
@@ -1350,6 +1415,31 @@
 			if("gen") return list("shrink" = 0.5, "sx" = -14, "sy" = -8, "nx" = 15, "ny" = -7, "wx" = -10, "wy" = -5, "ex" = 7, "ey" = -6, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0, "nturn" = -13, "sturn" = 110, "wturn" = -60, "eturn" = -30, "nflip" = 1, "sflip" = 1, "wflip" = 8, "eflip" = 1)
 			if("wielded") return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
 			if("onback") return list("shrink" = 0.5, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1, "nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1, "northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0)
+
+/obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
+	name = "bloodsteel broadsword"
+	desc = "A finely crafted broadsword, wide and heavy, with a shimmering red bloodsteel blade."
+	icon_state = "corruptbroadsword"
+	force = DAMAGE_SWORD + 2
+	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
+	max_blade_int = 240
+	max_integrity = INTEGRITY_STRONGEST
+	smeltresult = /obj/item/ingot/bloodsteel
+	sellprice = 0
+	item_weight = 2.5 KILOGRAMS
+
+/obj/item/weapon/sword/long/greatsword/claymore/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
+/obj/item/weapon/sword/long/greatsword/claymore/bloodsteel/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen") return list("shrink" = 0.5, "sx" = -14, "sy" = -8, "nx" = 15, "ny" = -7, "wx" = -10, "wy" = -5, "ex" = 7, "ey" = -6, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0, "nturn" = -13, "sturn" = 110, "wturn" = -60, "eturn" = -30, "nflip" = 1, "sflip" = 1, "wflip" = 8, "eflip" = 1)
+			if("wielded") return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
+			if("onback") return list("shrink" = 0.5, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1, "nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1, "northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0)
+
 
 /obj/item/weapon/sword/long/greatsword/claymore/gold //Uncraftable
 	name = "ravoxian claymore"

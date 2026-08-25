@@ -67,9 +67,9 @@
 	sellprice = VALUE_FANCY_HAT
 
 //................ Cultist Hood ............... //
-/obj/item/clothing/head/helmet/skullcap/cult
-	name = "ominous hood"
-	desc = "It echoes with ominous laughter. Worn over a skullcap"
+/obj/item/clothing/head/helmet/skullcap/magus
+	name = "magus hood"
+	desc = "A dark padded hood gilded with golden thread. Worn over a skullcap by the most mysterious of mages, the magi."
 	icon_state = "warlockhood"
 	dynamic_hair_suffix = ""
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
@@ -676,6 +676,7 @@
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	smeltresult = /obj/item/ingot/avantyne
 	item_weight = 3.7 KILOGRAMS
 
 //................. Silver Bascinet .............. //

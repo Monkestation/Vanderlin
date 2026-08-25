@@ -114,6 +114,21 @@
 	item_weight = 4.2 KILOGRAMS
 	indexed = TRUE
 
+/obj/item/ore/bloodstone
+	name = "bloodstone"
+	desc = "A blood red stone of uncertain origin, the precursor for bloodsteel."
+	icon_state = "orecorrupt1"
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	sellprice = 0 // No one will buy this
+	item_weight = 4.15 KILOGRAMS
+	mill_result = /obj/item/ore/dust/bloodstone
+
+/obj/item/ore/bloodstone/Initialize(mapload)
+	. = ..()
+	icon_state = "orecorrupt[rand(1,3)]"
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/ore/coal/charcoal
 	name = "charcoal"
 	icon_state = "oreada"
@@ -326,6 +341,19 @@
 	melting_material = /datum/material/blacksteel
 	item_weight = 5.2 KILOGRAMS
 
+/obj/item/ingot/bloodsteel
+	name = "bloodsteel bar"
+	desc = "A bar of cursed bloodsteel."
+	icon_state = "ingotcorrupt"
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	sellprice = M_STEEL
+	item_weight = 5 KILOGRAMS
+
+/obj/item/ingot/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/ingot/steel_slag
 	name = "steel slag"
 	desc = "Slag containing steel, the result of blooming iron and coal."
@@ -400,8 +428,7 @@
 	name = "avantyne wafer"
 	desc = "This ingot, though borne of unholy circumstance, rumbles with otherworldly potential. Chiseled onto the darksteel is a forbidden iteration of the psycross; a foreboding sign for those who bow to lesser gods."
 	icon_state = "ingotavantyne"
-	smeltresult = null
-	sellprice = 130
+	sellprice = 0 // Super evil Zizo material, nobody wants this
 	smeltresult = /obj/item/ingot/avantyne
 	melting_material = /datum/material/avantyne
 
@@ -409,7 +436,6 @@
 	name = "ketryl ingot"
 	desc = "Named after its mythical status, this ingot is forged as per the dwarven standards etched in a small imprint on the ingot's surface. Ketryl is often folded in thin layers, stronger than steel, yet unusually light at the same time."
 	icon_state = "ingotketryl"
-	smeltresult = null
 	sellprice = 555
 	smeltresult = /obj/item/ingot/ketryl
 	melting_material = /datum/material/ketryl
@@ -479,7 +505,7 @@
 	name = "avantyne thread"
 	desc = "These strands, though borne of unholy circumstance, shimmer with otherworldly potential. Each wire of darksteel seem to twitch with vigor, whenever brought close to another alloy; like a parasite drawn to a host."
 	icon_state = "component_avantynethread"
-	sellprice = 66
+	sellprice = 0 // Super evil Zizo material, nobody wants this
 
 /obj/item/ingot/component/threadketryl
 	name = "ketryl thread"
@@ -492,6 +518,7 @@
 	desc = "Whispering fragments of an otherworldly alloy. </br>Power always comes at a price."
 	icon_state = "component_zizo"
 	dropshrink = 0.7
+	sellprice = 0 // Super evil Zizo material, nobody wants this
 
 /obj/item/ingot/component/graggar
 	name = "vicious fragment"
