@@ -1,12 +1,12 @@
 /mob/living/simple_animal/hostile/retaliate/spider
-	icon = 'icons/roguetown/mob/monster/spider.dmi'
 	name = "beespider"
 	desc = "Swamp-lurking creachers with a wicked bite. They make honey from flowers and spin silk from their abdomen. Some dark elves see them as a sacred animal."
+	icon = 'icons/roguetown/mob/monster/spider.dmi'
 	icon_state = "honeys"
 	icon_living = "honeys"
 	icon_dead = "honeys-dead"
 
-	faction = list("bugs")
+	faction = list(FACTION_SPIDERS)
 	move_to_delay = 2
 	vision_range = 5
 	aggro_vision_range = 5

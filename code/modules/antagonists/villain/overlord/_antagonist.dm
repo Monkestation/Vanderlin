@@ -177,7 +177,7 @@
 	owner.transfer_to(overlord_mob, TRUE)
 
 	overlord_mob.skeletonize(FALSE)
-	overlord_mob.add_faction(list(FACTION_UNDEAD, "overlord"))
+	overlord_mob.add_faction(list(FACTION_UNDEAD, FACTION_OVERLORD))
 	if(length(overlord_mob.quirks))
 		overlord_mob.clear_quirks()
 	overlord_mob.mob_biotypes |= MOB_UNDEAD
