@@ -291,7 +291,7 @@
 	the gospel of Her disciples. Zizo sought to ward Her children from extinction, but failed; and in the throes of divine mania, She had come \
 	to realize that this world was no longer worth saving."
 	icon_state = "zizoshield"
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_DARKSTEEL
 	sellprice = 0
 	smeltresult = /obj/item/ingot/avantyne
 	design_chosen = FALSE
@@ -301,17 +301,18 @@
 	name = "blacksteel shield"
 	desc = "A magnificent kite shield of blacksteel. Be it knight-or-knave, those who have the strength to lift it shall yet stand against perdition."
 	icon_state = "blacksteelsh"
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_BLACKSTEEL
 	sellprice = 100
 	smeltresult = /obj/item/ingot/blacksteel
 	design_chosen = FALSE
 	item_weight = 4 KILOGRAMS
 
-/obj/item/rogueweapon/shield/tower/metal/gold
+/obj/item/weapon/shield/tower/metal/gold
 	name = "golden shield"
 	desc = "A resplendant kite shield, assembled from six golden plates that've been hooked together by a glimmering holy sigil. Nobility may be fragile, \
 	but - so long as its grip remains steadfast - none could ever hope to sever its weakest link."
 	icon_state = "goldshield"
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_BLACKSTEEL //Special exemption.
 	sellprice = 150
 	smeltresult = /obj/item/ingot/gold
 	design_chosen = FALSE

@@ -849,9 +849,12 @@
 
 /obj/item/weapon/polearm/eaglebeak/blacksteel
 	name = "blacksteel eagle's beak"
+	desc = "A magnificent polehammer of blacksteel. Purpose-made for killing plate-armored opponents, it features a maillebreaker's point and a \
+	flared macehead; excellent for piercing and shattering alloys, respectively. Wrap a length of cloth around the shaft to bear your heraldry."
 	icon_state = "bs_eaglebeak"
 	force = DAMAGE_SPEAR + 2
 	force_wielded = DAMAGE_HALBERD_WIELD + 2
+	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
 	melt_amount = 150
 	sellprice = 90

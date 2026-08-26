@@ -1296,6 +1296,7 @@
 	icon_state = "blackflamb"
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 3
 	smeltresult = /obj/item/ingot/blacksteel
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_BLACKSTEEL
 
 /obj/item/weapon/sword/long/greatsword/zwei
 	name = "zweihander"

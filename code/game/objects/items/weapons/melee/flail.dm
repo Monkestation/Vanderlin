@@ -153,7 +153,7 @@
 	has the stamina to swing its alloyed chains around."
 	icon_state = "bs_flail"
 	force = DAMAGE_GOOD_FLAIL + 2
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLACKSTEEL
 	minstr = 4
 	smeltresult = /obj/item/ingot/blacksteel
 	sellprice = 120
@@ -165,7 +165,7 @@
 	desc = "A heavy carved bloodstone attached to a chain of red bloodsteel, built to crush even the strongest of armors."
 	icon_state = "bs_flail"
 	force = DAMAGE_GOOD_FLAIL + 3
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLOODSTEEL
 	minstr = 5
 	smeltresult = /obj/item/ingot/bloodsteel
 	sellprice = 0

@@ -389,6 +389,7 @@
 	icon_state = "silverkatar"
 	item_weight = 400 GRAMS
 	smeltresult = /obj/item/ingot/silver
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/katar/silver/Initialize(mapload)
 	. = ..()
@@ -495,6 +496,7 @@
 	icon_state = "ironknuckle"
 	smeltresult = /obj/item/ingot/iron
 	force = DAMAGE_KNUCKLES - 2
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IRON
 
 /obj/item/weapon/knuckles/bronze
 	name = "bronze knuckles"
@@ -502,6 +504,7 @@
 	icon_state = "bronzeknuckle"
 	smeltresult = /obj/item/ingot/bronze
 	force = DAMAGE_KNUCKLES - 4
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BRONZE
 
 /obj/item/weapon/knuckles/silver
 	name = "silver knuckles"
@@ -510,6 +513,7 @@
 	icon_state = "silverknuckle"
 	smeltresult = /obj/item/ingot/silver
 	force = DAMAGE_KNUCKLES + 2
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/knuckles/silver/Initialize(mapload)
 	. = ..()
@@ -521,3 +525,4 @@
 	icon_state = "bsknuckle"
 	smeltresult = /obj/item/ingot/blacksteel
 	force = DAMAGE_KNUCKLES + 4
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLACKSTEEL

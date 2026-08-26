@@ -581,7 +581,7 @@
 	icon_state = "bs_greataxe"
 	force_wielded = DAMAGE_HEAVYAXE_WIELD + 3
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
 	melt_amount = 150
 	sellprice = 120
