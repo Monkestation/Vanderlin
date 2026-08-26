@@ -90,7 +90,7 @@
 									/obj/item/alch/bone = 1,
 									/obj/item/alch/viscera = 2,
 									/obj/item/natural/head/direbear = 1)
-	faction = null //This mf will kill undead - swapped to its own faction, doesn't trigger ambushes
+	faction = list(FACTION_HOSTILE)
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	melee_damage_lower = 50		// Ey, Boo-Boo!
 	melee_damage_upper = 60		// We're gonna take his pic-a-ic basket!
