@@ -1209,11 +1209,6 @@
 	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
 	created_item = /obj/item/weapon/mace/blacksteel/barmace
 
-/datum/anvil_recipe/weapons/blacksteel/battleaxe
-	name = "Blacksteel Battle Axe (+Blacksteel Bar)"
-	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/weapon/axe/battle/blacksteel
-
 /datum/anvil_recipe/weapons/blacksteel/warhammer
 	name = "Blacksteel Warhammer (+Blacksteel Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
