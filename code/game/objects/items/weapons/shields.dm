@@ -294,6 +294,7 @@
 	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_DARKSTEEL
 	sellprice = 0
 	smeltresult = /obj/item/ingot/avantyne
+	melting_material = null
 	design_chosen = FALSE
 	item_weight = 4 KILOGRAMS
 
@@ -304,6 +305,7 @@
 	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_BLACKSTEEL
 	sellprice = 100
 	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = null
 	design_chosen = FALSE
 	item_weight = 4 KILOGRAMS
 
@@ -315,6 +317,7 @@
 	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_BLACKSTEEL //Special exemption.
 	sellprice = 150
 	smeltresult = /obj/item/ingot/gold
+	melting_material = null
 	design_chosen = FALSE
 	item_weight = 6 KILOGRAMS
 

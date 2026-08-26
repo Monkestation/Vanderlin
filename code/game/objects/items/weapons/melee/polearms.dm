@@ -264,7 +264,7 @@
 	wbalance = GREAT_PARRY
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BLOODSTEEL
 	max_blade_int = 240
-	melting_material = /datum/material/blacksteel
+	melting_material = /datum/material/bloodsteel
 	sellprice = 0
 	item_weight = 0.9 KILOGRAMS
 
@@ -332,6 +332,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = null
 	sellprice = 60
 	item_weight = 2 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL
@@ -396,9 +397,11 @@
 	wlength = WLENGTH_LONG
 
 	gripsprite = FALSE
+	smeltresult = /obj/item/ingot/iron
 	throw_speed = 2
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 	item_weight = 1.5 KILOGRAMS
+	melt_amount = null
 
 /obj/item/weapon/polearm/spear/assegai/steel
 	name = "steel assegai"
@@ -907,7 +910,7 @@
 	desc = "A spear forged of bronze. Expensive but more durable than a regular iron one."
 	icon_state = "bronzespear"
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BRONZE
 

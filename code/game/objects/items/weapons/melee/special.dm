@@ -495,6 +495,7 @@
 	desc = "A mean looking pair of iron knuckles, not that good in quality but they do the job."
 	icon_state = "ironknuckle"
 	smeltresult = /obj/item/ingot/iron
+	melting_material = null
 	force = DAMAGE_KNUCKLES - 2
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IRON
 
@@ -503,6 +504,7 @@
 	desc = "A mean looking pair of bronze knuckles. Mildly heavier than its steel counterpart, making it a solid defensive option, if less wieldy."
 	icon_state = "bronzeknuckle"
 	smeltresult = /obj/item/ingot/bronze
+	melting_material = null
 	force = DAMAGE_KNUCKLES - 4
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BRONZE
 
@@ -512,6 +514,7 @@
 	more strongly associated with underground pugilistic tournaments; a solid right hook could drive more-than-enough force to blow a yeoman's jaw clean off."
 	icon_state = "silverknuckle"
 	smeltresult = /obj/item/ingot/silver
+	melting_material = null
 	force = DAMAGE_KNUCKLES + 2
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 
@@ -524,5 +527,6 @@
 	desc = "An exotic use for an expensive metal, punch them with wealth."
 	icon_state = "bsknuckle"
 	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = null
 	force = DAMAGE_KNUCKLES + 4
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLACKSTEEL
