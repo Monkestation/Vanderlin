@@ -34,7 +34,7 @@
 	id = "blood_choke_deb"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/blood_choke
 	duration = 20 SECONDS
-	var/damage_cooldown_duration = 2 SECONDS
+	tick_interval = 2 SECONDS
 	var/damage_cooldown
 	var/damage_per_tick = 5
 
@@ -47,8 +47,6 @@
 	to_chat(owner, span_bloody("My throat clears, I can breathe once more!"))
 
 /datum/status_effect/debuff/blood_choke/tick(seconds_between_ticks)
-	if(!COOLDOWN_FINISHED(src, damage_cooldown))
-		return
 	owner.emote("choke")
 	owner.adjustOxyLoss(damage_per_tick)
 	owner.visible_message(span_danger("[owner] chokes upon their own blood!"), \
