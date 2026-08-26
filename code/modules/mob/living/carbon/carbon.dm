@@ -1281,6 +1281,7 @@
 	VV_DROPDOWN_OPTION(VV_HK_MARTIAL_ART, "Give Martial Arts")
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_TRAUMA, "Give Brain Trauma")
 	VV_DROPDOWN_OPTION(VV_HK_CURE_TRAUMA, "Cure Brain Traumas")
+	VV_DROPDOWN_OPTION(VV_HK_CURE_ROT, "Cure Rot")
 	VV_DROPDOWN_OPTION(VV_HK_SHOW_RELATIONS, "Show Relations")
 
 /mob/living/carbon/vv_do_topic(list/href_list)
