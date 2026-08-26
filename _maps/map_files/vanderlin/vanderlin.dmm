@@ -13876,10 +13876,6 @@
 "fPe" = (
 /turf/open/floor/cobblerock/alt,
 /area/indoors/town/noble_manor/blue)
-"fPo" = (
-/obj/structure/fluff/walldeco/feldshersign,
-/turf/open/floor/cobble,
-/area/outdoors/town)
 "fPr" = (
 /obj/effect/landmark/start/late/vagrant{
 	dir = 1
@@ -129395,7 +129391,7 @@ qFx
 gMp
 hZn
 hZn
-szF
+hZn
 qFx
 ssf
 wmF
@@ -132018,7 +132014,7 @@ qFx
 qFx
 qFx
 hWI
-fPo
+hZn
 hZn
 hZn
 hZn
