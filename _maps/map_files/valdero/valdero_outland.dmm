@@ -147,8 +147,22 @@
 	},
 /turf/open/floor/blocks/newstone,
 /area/indoors/shelter/mountains)
+"bM" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/floor/church/pale,
+/area/under/cave)
+"bO" = (
+/obj/structure/carpet/red,
+/turf/open/floor/hexstone,
+/area/outdoors/mountains)
 "bU" = (
 /turf/open/floor/church,
+/area/outdoors/mountains)
+"cj" = (
+/obj/structure/stairs/stone,
+/turf/open/floor/hexstone,
 /area/outdoors/mountains)
 "ck" = (
 /obj/structure/stairs/stone{
@@ -170,12 +184,6 @@
 	pixel_x = 16
 	},
 /turf/open/floor/churchmarble/pale,
-/area/under/cave)
-"cA" = (
-/obj/item/weapon/whip/psydon{
-	pixel_y = 9
-	},
-/turf/open/floor/hexstone,
 /area/under/cave)
 "cJ" = (
 /obj/effect/decal/shadow_floor{
@@ -281,6 +289,12 @@
 "dZ" = (
 /turf/open/floor/rooftop/green,
 /area/outdoors/mountains)
+"eg" = (
+/obj/structure/chair/stool{
+	dir = 4
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
 "ek" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -296,6 +310,16 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
+"en" = (
+/obj/structure/table/map/amber{
+	dir = 5
+	},
+/obj/item/orphan_toy/knight{
+	pixel_x = -12
+	},
+/obj/structure/carpet/blue,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "et" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -304,6 +328,11 @@
 /obj/structure/fluff/statue/knight/interior,
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
+"ew" = (
+/obj/structure/table/wood/smooth,
+/obj/item/weapon/knife/cleaver,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "ez" = (
 /obj/effect/decal/shadow_floor{
 	dir = 8
@@ -334,6 +363,13 @@
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/churchrough/pale,
 /area/under/cave)
+"eS" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "eU" = (
 /obj/structure/fluff/walldeco/bigpainting/rainuponthevalley{
 	pixel_x = 0;
@@ -352,6 +388,12 @@
 /obj/item/natural/feather,
 /turf/open/floor/wood,
 /area/indoors/shelter/mountains)
+"fd" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/floor/church/pale,
+/area/under/cave)
 "fe" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 1
@@ -379,6 +421,13 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
+"fo" = (
+/obj/structure/chair/bench/church/smallbench{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line,
+/turf/open/floor/churchrough/pale,
+/area/under/cave)
 "fs" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/churchrough/pale,
@@ -420,6 +469,13 @@
 	},
 /turf/open/floor/blocks/newstone,
 /area/outdoors/mountains)
+"fY" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/churchmarble/pale,
+/area/under/cave)
 "fZ" = (
 /obj/structure/bars/grille,
 /turf/open/water/river,
@@ -429,6 +485,13 @@
 	dir = 8
 	},
 /area/outdoors/mountains)
+"gc" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "gk" = (
 /turf/open/water/river/under{
 	dir = 4
@@ -449,6 +512,10 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/hexstone,
 /area/under/cave)
+"gp" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/hexstone,
+/area/outdoors/mountains)
 "gt" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass/healthy,
@@ -480,6 +547,14 @@
 	},
 /turf/open/openspace,
 /area/indoors/shelter/mountains)
+"hf" = (
+/obj/machinery/light/fueled/wallfire/candle/skull,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/blood/gibs/core,
+/turf/open/floor/churchmarble/pale,
+/area/under/cave)
 "hj" = (
 /obj/effect/decal/shadow_floor{
 	dir = 5
@@ -593,6 +668,10 @@
 	},
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
+"jt" = (
+/obj/machinery/light/fueled/oven/east,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "ju" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -642,6 +721,13 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/churchrough/pale,
 /area/under/cavewet)
+"kg" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/church/pale,
+/area/under/cave)
 "kj" = (
 /obj/structure/chair/wood/alt{
 	dir = 1
@@ -661,6 +747,22 @@
 /obj/structure/bars/grille,
 /turf/open/openspace,
 /area/outdoors/mountains)
+"ko" = (
+/obj/structure/table/wood/smooth,
+/obj/item/plate,
+/obj/item/kitchen/fork{
+	pixel_x = 12
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_y = 12;
+	pixel_x = -11
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
+"kq" = (
+/obj/structure/table/wood/smooth,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "kr" = (
 /turf/closed/wall/mineral/craftstone,
 /area/outdoors/river)
@@ -668,6 +770,12 @@
 /obj/structure/stairs/stone/reddish,
 /turf/open/floor/church/gold,
 /area/outdoors/mountains)
+"ky" = (
+/obj/structure/wallladder{
+	dir = 4
+	},
+/turf/open/floor/sand,
+/area/outdoors/river)
 "kA" = (
 /obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/blocks/newstone,
@@ -696,6 +804,19 @@
 /obj/structure/door/iron/bars,
 /turf/open/floor/churchrough/pale,
 /area/outdoors/mountains)
+"la" = (
+/obj/structure/table/wood/smooth,
+/obj/item/plate,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/kitchen/fork{
+	pixel_x = -10
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_y = 12;
+	pixel_x = 12
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
 "lb" = (
 /turf/open/water/river{
 	dir = 8
@@ -762,6 +883,16 @@
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/blocks/newstone,
 /area/indoors/shelter/mountains)
+"lO" = (
+/obj/structure/table/map/amber{
+	dir = 6
+	},
+/obj/item/orphan_toy/knight{
+	pixel_y = 18
+	},
+/obj/structure/carpet/blue,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "lX" = (
 /turf/open/floor/churchmarble/pale,
 /area/under/cave)
@@ -794,16 +925,28 @@
 	},
 /turf/open/floor/church/pale,
 /area/under/cavewet)
-"mz" = (
-/obj/structure/fluff/psycross/psycrucifix/silver,
+"mC" = (
+/obj/structure/stairs/fancy{
+	dir = 1
+	},
 /turf/open/floor/hexstone,
-/area/under/cave)
+/area/outdoors/mountains)
 "mH" = (
 /obj/structure/door/stone{
 	name = "Contemplation Room"
 	},
 /turf/open/floor/churchmarble/pale,
 /area/under/cavewet)
+"mJ" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/churchmarble/pale,
+/area/under/cave)
+"mL" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/rack,
+/obj/item/gun/ballistic/powder/musket,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "mM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
@@ -817,6 +960,12 @@
 /obj/structure/flora/astrata,
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/shelter/mountains)
+"nc" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "ni" = (
 /turf/open/water/clean/under,
 /area/outdoors/river)
@@ -837,6 +986,12 @@
 /obj/effect/decal/remains/human,
 /turf/open/floor/church/pale,
 /area/outdoors/mountains)
+"nW" = (
+/obj/structure/wallladder{
+	dir = 8
+	},
+/turf/open/floor/sand,
+/area/outdoors/river)
 "nZ" = (
 /obj/structure/fluff/psycross/astrata/gold{
 	pixel_y = 10
@@ -870,6 +1025,12 @@
 	dir = 4
 	},
 /area/outdoors/mountains)
+"ot" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "oy" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 10;
@@ -891,6 +1052,15 @@
 	},
 /turf/open/floor/church/pale,
 /area/under/cave)
+"oS" = (
+/turf/open/floor/sand,
+/area/outdoors/river)
+"oX" = (
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "oY" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -917,7 +1087,7 @@
 /area/indoors/shelter/mountains)
 "pA" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
-/turf/open/floor/dirt/road,
+/turf/open/floor/sand,
 /area/outdoors/river)
 "pE" = (
 /obj/structure/fluff/railing/tall/stone{
@@ -938,12 +1108,24 @@
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/blocks/newstone,
 /area/indoors/shelter/mountains)
+"pN" = (
+/obj/structure/chair/bench/church/smallbench{
+	dir = 4
+	},
+/turf/open/floor/churchrough/pale,
+/area/under/cave)
 "pO" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 5
 	},
 /turf/open/floor/blocks/newstone,
 /area/indoors/shelter/mountains)
+"pR" = (
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "pS" = (
 /turf/open/floor/rooftop/green{
 	dir = 1
@@ -979,6 +1161,10 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/hexstone,
 /area/under/cave)
+"qr" = (
+/obj/structure/carpet/green,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "qA" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 8
@@ -989,6 +1175,19 @@
 /obj/structure/fluff/railing/tall/stone,
 /turf/open/floor/metal/alt,
 /area/indoors/shelter/mountains)
+"qP" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/floor/church/pale,
+/area/under/cave)
+"qU" = (
+/obj/structure/door/iron{
+	name = "Chapel of Psydon"
+	},
+/turf/open/floor/churchrough/pale,
+/area/under/cave)
 "re" = (
 /obj/effect/decal/shadow_floor{
 	dir = 4
@@ -1147,6 +1346,19 @@
 /obj/structure/table/wood/smooth,
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
+"tz" = (
+/obj/structure/table/wood/smooth,
+/obj/item/plate,
+/obj/item/kitchen/fork{
+	pixel_x = 12
+	},
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_y = 12;
+	pixel_x = -11
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
 "tD" = (
 /turf/open/floor/sand,
 /area/outdoors/mountains)
@@ -1245,6 +1457,10 @@
 	},
 /turf/open/floor/churchmarble/gold,
 /area/indoors/shelter/mountains)
+"vs" = (
+/obj/structure/stairs/fancy,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "vC" = (
 /obj/structure/closet/dirthole/closed,
 /turf/open/floor/grass/healthy,
@@ -1270,11 +1486,40 @@
 "vT" = (
 /turf/open/water/river,
 /area/indoors/shelter/mountains)
+"vV" = (
+/obj/structure/table/map/amber,
+/obj/structure/carpet/red,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "wd" = (
 /turf/closed/wall/mineral/roofwall/outercorner{
 	dir = 8
 	},
 /area/indoors/shelter/mountains)
+"wf" = (
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/structure/closet/crate/chest/neu,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "wg" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -1293,6 +1538,10 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/shelter/mountains)
+"wl" = (
+/obj/structure/pillory/double,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "wJ" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -1426,6 +1675,24 @@
 "yh" = (
 /turf/closed/wall/mineral/stonebrick/reddish,
 /area/under/cave)
+"yn" = (
+/obj/structure/door/iron{
+	name = "Barracks"
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
+"yt" = (
+/obj/structure/wallladder{
+	dir = 4
+	},
+/obj/structure/wallladder{
+	dir = 4
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
+"yw" = (
+/turf/open/floor/sand,
+/area/under/cavewet)
 "yy" = (
 /obj/structure/door/stone{
 	name = "Contemplation Room"
@@ -1436,6 +1703,18 @@
 /obj/machinery/light/fueled/firebowl/church,
 /turf/open/floor/churchmarble/gold,
 /area/indoors/shelter/mountains)
+"zb" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
+"ze" = (
+/obj/structure/flora/pillar{
+	pixel_y = 12
+	},
+/turf/open/floor/blocks/newstone/alt,
+/area/outdoors/mountains)
 "zh" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/dirt,
@@ -1478,10 +1757,20 @@
 	},
 /turf/open/floor/churchrough/pale,
 /area/indoors/shelter/mountains)
+"zJ" = (
+/obj/structure/carpet/red,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "zO" = (
 /obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
 /obj/structure/closet/dirthole/closed,
 /turf/open/floor/grass/healthy,
+/area/outdoors/mountains)
+"zQ" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/hexstone,
 /area/outdoors/mountains)
 "zX" = (
 /turf/open/floor/grass/healthy,
@@ -1507,6 +1796,11 @@
 /obj/item/orphan_toy/knight,
 /turf/open/floor/herringbone,
 /area/indoors/shelter/mountains)
+"Ak" = (
+/obj/structure/fluff/walldeco/bigpainting/rainuponthevalley,
+/obj/item/weapon/whip/psydon,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "Al" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -1517,6 +1811,12 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/hexstone,
 /area/under/cave)
+"Ap" = (
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "Ar" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 6;
@@ -1553,6 +1853,13 @@
 	},
 /turf/open/floor/churchmarble/gold,
 /area/indoors/shelter/mountains)
+"Az" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/floor/church/pale,
+/area/under/cave)
 "AB" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4;
@@ -1614,6 +1921,12 @@
 /obj/item/alch/golddust,
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
+"Bp" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/rack,
+/obj/item/weapon/sword/long/greatsword/zwei/steel,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "Br" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 5
@@ -1661,6 +1974,12 @@
 /obj/item/weapon/shovel/necran,
 /turf/open/floor/churchrough/pale,
 /area/under/cave)
+"BI" = (
+/obj/structure/fluff/railing/border{
+	dir = 6
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "BP" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 8
@@ -1766,6 +2085,15 @@
 	},
 /turf/open/openspace,
 /area/outdoors/mountains)
+"DA" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/turf/open/floor/church/pale,
+/area/under/cave)
 "DC" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 1
@@ -1951,6 +2279,10 @@
 "Gc" = (
 /turf/open/floor/church/pale,
 /area/under/cavewet)
+"Gd" = (
+/obj/structure/fluff/railing/border,
+/turf/open/openspace,
+/area/outdoors/mountains)
 "Gf" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 1
@@ -1972,10 +2304,34 @@
 	},
 /turf/open/floor/church/pale,
 /area/under/cave)
+"Go" = (
+/obj/structure/chair/bench/church/smallbench{
+	dir = 4
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 1
+	},
+/turf/open/floor/churchrough/pale,
+/area/under/cave)
 "Gq" = (
 /obj/structure/curtain/browncurtain,
 /turf/closed/wall/window/stained/yellow,
 /area/indoors/shelter/mountains)
+"Gt" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/hexstone,
+/area/outdoors/mountains)
+"Gu" = (
+/obj/structure/table/map/amber{
+	dir = 9
+	},
+/obj/item/orphan_toy/skeleton{
+	pixel_x = 7;
+	pixel_y = 4
+	},
+/obj/structure/carpet/green,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "Gw" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/grass/healthy,
@@ -2006,6 +2362,12 @@
 "GN" = (
 /turf/closed/wall/mineral/roofwall/center,
 /area/indoors/shelter/mountains)
+"GP" = (
+/obj/structure/door/iron{
+	name = "Kitchen"
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
 "GS" = (
 /obj/effect/decal/shadow_floor{
 	dir = 1
@@ -2035,6 +2397,9 @@
 "Hf" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/mountains)
+"Hn" = (
+/turf/open/water/blood,
+/area/under/cave)
 "Hq" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/herringbone,
@@ -2087,6 +2452,18 @@
 /obj/structure/grindwheel,
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
+"HY" = (
+/obj/structure/table/wood/smooth,
+/obj/item/plate,
+/obj/item/kitchen/fork{
+	pixel_x = -10
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_y = 12;
+	pixel_x = 12
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
 "Ij" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -2126,10 +2503,6 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/shelter/mountains)
-"IQ" = (
-/obj/structure/door/iron,
-/turf/open/floor/hexstone,
-/area/under/cave)
 "IR" = (
 /obj/structure/fluff/statue/knight/interior{
 	pixel_x = 13
@@ -2142,9 +2515,25 @@
 /area/indoors/shelter/mountains)
 "IU" = (
 /obj/structure/door/viewport{
-	dir = 8
+	dir = 8;
+	name = "STAY OUT"
 	},
 /turf/open/floor/naturalstone,
+/area/under/cave)
+"Ja" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4;
+	pixel_y = -1
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/obj/structure/closet/crate/chest/neu,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/hexstone,
 /area/under/cave)
 "Jb" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -2243,6 +2632,11 @@
 /obj/structure/table/wood/smooth,
 /turf/open/floor/hexstone,
 /area/under/cave)
+"KF" = (
+/obj/structure/table/wood/smooth,
+/obj/structure/fluff/millstone,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "KL" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -2275,6 +2669,11 @@
 /obj/structure/trap/shock,
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
+"Lp" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/carpet/red,
+/turf/open/floor/hexstone,
+/area/outdoors/mountains)
 "LA" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
@@ -2316,6 +2715,15 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
+"LT" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/glass/bottle/water,
+/obj/item/reagent_containers/glass/bottle/water,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "LW" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -2379,6 +2787,11 @@
 "ML" = (
 /turf/closed/basic,
 /area)
+"MR" = (
+/obj/structure/carpet/green,
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "Nf" = (
 /turf/open/water/river/under,
 /area/under/cavewet)
@@ -2446,6 +2859,17 @@
 "NV" = (
 /turf/closed/mineral,
 /area/indoors/shelter/mountains)
+"NW" = (
+/obj/structure/table/map/amber{
+	dir = 10
+	},
+/obj/item/orphan_toy/skeleton{
+	pixel_x = 10;
+	pixel_y = 18
+	},
+/obj/structure/carpet/green,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "NZ" = (
 /turf/closed/wall/mineral/roofwall/middle,
 /area/indoors/shelter/mountains)
@@ -2498,6 +2922,28 @@
 /obj/structure/bars/grille,
 /turf/open/openspace,
 /area/outdoors/mountains)
+"OZ" = (
+/obj/structure/table/map/amber{
+	dir = 1
+	},
+/obj/item/orphan_toy/wolf,
+/obj/structure/carpet/red,
+/turf/open/floor/hexstone,
+/area/under/cave)
+"Pe" = (
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/obj/structure/closet/crate/chest/neu,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
 "Pg" = (
 /obj/structure/handcart{
 	dir = 4
@@ -2593,12 +3039,24 @@
 "PP" = (
 /turf/open/water/river,
 /area/under/cavewet)
+"PS" = (
+/obj/effect/decal/borderfall{
+	dir = 1
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
 "PU" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/concrete,
 /area/outdoors/mountains)
+"Qd" = (
+/obj/structure/door/iron{
+	name = "Preparatory Area"
+	},
+/turf/open/floor/churchmarble/pale,
+/area/under/cave)
 "Qe" = (
 /turf/open/floor/metal,
 /area/indoors/shelter/mountains)
@@ -2607,6 +3065,10 @@
 	dir = 8
 	},
 /turf/open/floor/church/pale,
+/area/under/cave)
+"Qk" = (
+/obj/effect/decal/cleanable/blood/over_wall,
+/turf/closed/wall/mineral/stonebrick/reddish,
 /area/under/cave)
 "Qw" = (
 /obj/machinery/light/fueled/wallfire/candle/weak{
@@ -2683,6 +3145,12 @@
 	dir = 8
 	},
 /area/outdoors/mountains)
+"RH" = (
+/obj/structure/chair/stool{
+	dir = 8
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
 "RJ" = (
 /obj/structure/stairs/stone/reddish,
 /turf/open/floor/church/gold,
@@ -2712,6 +3180,21 @@
 	dir = 4
 	},
 /area/indoors/shelter/mountains)
+"Sg" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/openspace,
+/area/outdoors/mountains)
+"Sl" = (
+/obj/structure/chair/bench/church/smallbench{
+	dir = 4
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/churchrough/pale,
+/area/under/cave)
+"Sn" = (
+/obj/structure/stairs/fancy,
+/turf/open/floor/hexstone,
+/area/outdoors/mountains)
 "Sz" = (
 /turf/open/floor/grass/healthy,
 /area/outdoors/mountains)
@@ -2740,6 +3223,10 @@
 	},
 /turf/open/floor/church,
 /area/outdoors/mountains)
+"SK" = (
+/mob/living/carbon/human/species/zizombie/npc/grenzel,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "SL" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 8
@@ -2749,6 +3236,12 @@
 "Tb" = (
 /turf/closed/wall/mineral/decostone,
 /area/indoors/shelter/mountains)
+"Tc" = (
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/turf/open/floor/churchmarble/pale,
+/area/under/cave)
 "Te" = (
 /obj/structure/rack,
 /obj/item/weapon/shield/tower/metal,
@@ -2758,6 +3251,13 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
+"Th" = (
+/obj/structure/stairs/stone,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
 "Ti" = (
 /obj/structure/stairs/stone/church{
 	dir = 4
@@ -2773,6 +3273,10 @@
 /obj/effect/decal/remains/human,
 /turf/open/floor/churchmarble/gold,
 /area/indoors/shelter/mountains)
+"Tp" = (
+/obj/structure/carpet/blue,
+/turf/open/floor/hexstone,
+/area/under/cave)
 "Tv" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -2798,10 +3302,21 @@
 "TD" = (
 /turf/closed/wall/mineral/decorstone,
 /area/under/cave)
+"TF" = (
+/obj/structure/wallladder{
+	dir = 8
+	},
+/turf/open/openspace,
+/area/outdoors/mountains)
 "TG" = (
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/blocks/newstone,
 /area/outdoors/mountains)
+"TJ" = (
+/obj/item/book/bibble/psy,
+/obj/structure/table/wood/smooth,
+/turf/open/floor/church/pale,
+/area/under/cave)
 "TM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/hexstone,
@@ -2833,6 +3348,15 @@
 	},
 /turf/open/floor/church,
 /area/indoors/shelter/mountains)
+"Ua" = (
+/obj/structure/chair/bench/church/smallbench{
+	dir = 4
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/churchrough/pale,
+/area/under/cave)
 "Uq" = (
 /obj/structure/bars,
 /obj/effect/mapping_helpers/structure/breaker,
@@ -2867,6 +3391,16 @@
 "UN" = (
 /turf/open/floor/dirt,
 /area/indoors/shelter/mountains)
+"UR" = (
+/obj/structure/table/wood/smooth,
+/obj/item/soap/bath,
+/obj/item/natural/cloth,
+/obj/structure/mirror{
+	pixel_y = 0;
+	pixel_x = 32
+	},
+/turf/open/floor/churchmarble/pale,
+/area/under/cave)
 "UU" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -2881,6 +3415,20 @@
 /obj/structure/fluff/statue/knight/interior,
 /turf/open/floor/churchrough,
 /area/indoors/shelter/mountains)
+"Vd" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 1
+	},
+/obj/structure/fluff/walldeco/church/line,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/obj/structure/fluff/psycross/psycrucifix/stone{
+	pixel_y = 12
+	},
+/turf/open/floor/churchmarble/pale,
+/area/under/cave)
 "Vi" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/railing/tall/stone,
@@ -2909,6 +3457,15 @@
 	},
 /turf/open/floor/church/gold,
 /area/indoors/shelter/mountains)
+"VU" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/hexstone,
+/area/under/cave)
+"VW" = (
+/turf/open/floor/hexstone,
+/area/outdoors/mountains)
 "VX" = (
 /obj/structure/bars/alt,
 /turf/closed/wall/mineral/decorstone/window,
@@ -2976,6 +3533,12 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/dirt/road,
 /area/under/cavewet)
+"WS" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/hexstone,
+/area/outdoors/mountains)
 "Xg" = (
 /obj/item/reagent_containers/glass/cup/wooden{
 	pixel_x = -5;
@@ -3189,6 +3752,9 @@
 	dir = 1
 	},
 /turf/open/floor/grass/healthy,
+/area/outdoors/mountains)
+"ZM" = (
+/turf/closed/wall/mineral/stonebrick/reddish,
 /area/outdoors/mountains)
 "ZN" = (
 /turf/open/water/river,
@@ -15561,8 +16127,8 @@ pV
 pV
 pV
 pV
-bG
-bG
+oS
+oS
 DV
 DV
 Ep
@@ -15709,13 +16275,13 @@ ML
 ML
 pV
 pV
-bG
-bG
-bG
-bG
-bG
-bG
-DV
+oS
+oS
+oS
+oS
+oS
+oS
+yw
 DV
 DV
 Ep
@@ -15859,16 +16425,16 @@ ML
 "}
 (84,1,1) = {"
 ML
-bG
-bG
+nW
+oS
 pA
-bG
-bG
-bG
+oS
+oS
+oS
 pA
-bG
-DV
-DV
+ky
+yw
+yw
 DV
 DV
 Ep
@@ -18754,7 +19320,7 @@ sA
 sA
 yh
 TM
-XV
+qr
 TM
 yh
 sA
@@ -18762,15 +19328,15 @@ sA
 sA
 sA
 sA
-yh
-yh
-yh
-yh
-yh
-yh
-yh
-yh
-yh
+sA
+sA
+sA
+sA
+sA
+sA
+sA
+sA
+sA
 sA
 sA
 sA
@@ -18906,7 +19472,7 @@ yh
 yh
 yh
 XV
-XV
+qr
 XV
 yh
 yh
@@ -18915,13 +19481,13 @@ yh
 yh
 yh
 yh
-jx
-XV
-XV
-XV
-XV
-XV
-XV
+yh
+yh
+yh
+yh
+yh
+yh
+yh
 yh
 sA
 sA
@@ -19058,7 +19624,7 @@ rH
 XV
 uT
 XV
-XV
+qr
 XV
 TM
 XV
@@ -19067,13 +19633,13 @@ XV
 XV
 XV
 yh
-gl
-XV
-XV
-XV
-XV
-XV
-XV
+jx
+TM
+jx
+yh
+jt
+jt
+ew
 yh
 sA
 sA
@@ -19210,22 +19776,22 @@ Xg
 XV
 XV
 XV
-XV
-XV
-XV
-XV
-XV
-XV
+qr
+eg
+eg
+eg
+eg
+eg
 XV
 XV
 yh
-jx
+gl
+XV
+Ja
+yh
 XV
 XV
-XV
-XV
-XV
-XV
+ma
 yh
 sA
 sA
@@ -19362,22 +19928,22 @@ Kt
 XV
 XV
 XV
+qr
+tz
+ko
+ko
+ko
+ko
 XV
-XV
-XV
-XV
-XV
-XV
-QL
 XV
 yh
-fA
+jx
+XV
+jx
+yh
 XV
 XV
-XV
-XV
-XV
-XV
+KF
 yh
 sA
 sA
@@ -19514,22 +20080,22 @@ ma
 XV
 XV
 XV
-XV
-XV
-XV
-XV
-XV
-XV
+qr
+HY
+HY
+HY
+la
+HY
 XV
 XV
 yh
-jx
+fA
+XV
+Pe
+yh
 XV
 XV
-XV
-XV
-XV
-XV
+qo
 yh
 sA
 sA
@@ -19662,26 +20228,26 @@ ML
 sA
 sA
 yh
-Ao
+Az
+bM
+eS
+PS
+qr
+RH
+RH
+RH
+RH
+RH
 XV
 XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-mM
 yh
+jx
+XV
+jx
 yh
-yh
-yh
-IQ
-yh
-yh
-yh
+XV
+XV
+wf
 yh
 sA
 sA
@@ -19814,27 +20380,27 @@ ML
 sA
 sA
 yh
+wl
+wU
+Bp
+PS
+qr
 XV
 XV
 XV
 XV
 XV
 XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-sA
-sA
-sA
+mM
+yh
+yh
+yn
+yh
+yh
+GP
+yh
+yh
+yh
 sA
 sA
 sA
@@ -19966,26 +20532,26 @@ ML
 sA
 sA
 yh
-mz
-cA
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-sA
-sA
+wU
+wU
+wU
+VU
+qr
+qr
+Gu
+NW
+qr
+qr
+qr
+qr
+qr
+qr
+qr
+qr
+MR
+qr
+Th
+yh
 sA
 sA
 sA
@@ -20118,26 +20684,26 @@ ML
 sA
 sA
 yh
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-sA
-sA
+Ak
+wU
+wU
+VU
+zJ
+zJ
+OZ
+vV
+zJ
+zJ
+zJ
+zJ
+zJ
+zJ
+zJ
+zJ
+zJ
+zJ
+vs
+yh
 sA
 sA
 sA
@@ -20270,26 +20836,26 @@ ML
 sA
 sA
 yh
-Ao
+wU
+wU
+wU
+VU
+Tp
+Tp
+en
+lO
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+Tp
+vE
 XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-mM
+Th
 yh
-yh
-yh
-yh
-yh
-yh
-sA
-sA
 sA
 sA
 sA
@@ -20422,7 +20988,10 @@ ML
 sA
 sA
 yh
-ma
+wl
+SK
+mL
+PS
 XV
 XV
 XV
@@ -20430,18 +20999,15 @@ XV
 XV
 XV
 XV
-XV
-XV
-XV
-XV
+mM
 yh
-sA
-sA
-sA
-sA
-sA
-sA
-sA
+yh
+yh
+qU
+yh
+yh
+yh
+yh
 sA
 sA
 sA
@@ -20574,25 +21140,25 @@ ML
 sA
 sA
 yh
-ma
+qP
+fd
+gc
+PS
 XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
-XV
+eg
+eg
+eg
+eg
+eg
 XV
 XV
 yh
-sA
-sA
-sA
-sA
-sA
-sA
+Gn
+Gn
+wU
+Gn
+Gn
+yh
 sA
 sA
 sA
@@ -20726,25 +21292,25 @@ ML
 sA
 sA
 yh
-Xg
-XV
-QL
+ma
 XV
 XV
 XV
 XV
-XV
-XV
-XV
+tz
+ko
+ko
+tz
+ko
 XV
 XV
 yh
-sA
-sA
-sA
-sA
-sA
-sA
+Sl
+fo
+wU
+Go
+Ua
+yh
 sA
 sA
 sA
@@ -20878,25 +21444,25 @@ ML
 sA
 sA
 yh
-qo
-XV
-vE
+ma
 XV
 XV
 XV
-vE
 XV
-QL
-XV
+HY
+la
+HY
+HY
+HY
 XV
 XV
 yh
-sA
-sA
-sA
-sA
-sA
-sA
+pN
+fo
+wU
+Go
+pN
+yh
 sA
 sA
 sA
@@ -21030,25 +21596,25 @@ ML
 sA
 sA
 yh
+Xg
+XV
+QL
+XV
+XV
+RH
+RH
+RH
+RH
+RH
+XV
+XV
 yh
+pN
+fo
+wU
+Go
+pN
 yh
-yh
-yh
-yh
-yh
-yh
-yh
-yh
-yh
-yh
-yh
-yh
-sA
-sA
-sA
-sA
-sA
-sA
 sA
 sA
 sA
@@ -21181,26 +21747,26 @@ ML
 ML
 sA
 sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
+yh
+qo
+XV
+vE
+XV
+XV
+XV
+vE
+XV
+QL
+XV
+XV
+XV
+yh
+kg
+Qf
+wU
+Qf
+DA
+yh
 sA
 sA
 sA
@@ -21333,26 +21899,26 @@ ML
 ML
 sA
 sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
+yh
+yh
+yh
+yh
+yh
+yh
+yh
+yh
+yh
+yh
+yh
+yh
+yh
+yh
+wU
+LT
+Vd
+TJ
+kq
+yh
 sA
 sA
 sA
@@ -21498,13 +22064,13 @@ sA
 sA
 sA
 sA
-sA
-sA
-sA
-sA
-sA
-sA
-sA
+yh
+Qd
+yh
+yh
+yh
+yh
+yh
 sA
 sA
 sA
@@ -21650,11 +22216,11 @@ sA
 sA
 sA
 sA
-sA
-sA
-sA
-sA
-sA
+Qk
+lX
+lX
+mJ
+yh
 sA
 sA
 sA
@@ -21802,11 +22368,11 @@ sA
 sA
 sA
 sA
-sA
-sA
-sA
-sA
-sA
+yh
+hf
+Tc
+QT
+yh
 sA
 sA
 sA
@@ -21954,11 +22520,11 @@ sA
 sA
 sA
 sA
-sA
-sA
-sA
-sA
-sA
+yh
+Hn
+fY
+UR
+yh
 sA
 sA
 sA
@@ -22106,11 +22672,11 @@ sA
 sA
 sA
 sA
-sA
-sA
-sA
-sA
-sA
+yh
+yh
+yh
+yh
+yh
 sA
 sA
 sA
@@ -38660,14 +39226,14 @@ ML
 "}
 (84,1,2) = {"
 ML
+TF
 cU
 cU
 cU
 cU
 cU
 cU
-cU
-cU
+yt
 Aw
 Aw
 Aw
@@ -42632,12 +43198,12 @@ iJ
 iJ
 iJ
 iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
+ZM
+ZM
+ZM
+ZM
+ZM
+ZM
 iJ
 iJ
 iJ
@@ -42778,18 +43344,18 @@ iJ
 iJ
 iJ
 iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
+VW
+VW
+VW
+VW
+VW
+VW
+ZM
+Sg
+cj
+VW
+WS
+ZM
 iJ
 iJ
 iJ
@@ -42930,18 +43496,18 @@ iJ
 iJ
 iJ
 iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
+VW
+VW
+VW
+VW
+VW
+VW
+ZM
+cU
+Sn
+bO
+VW
+ZM
 iJ
 iJ
 iJ
@@ -43082,18 +43648,18 @@ iJ
 iJ
 iJ
 iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
+VW
+VW
+VW
+VW
+VW
+VW
+ZM
+Sg
+cj
+bO
+VW
+ZM
 iJ
 iJ
 iJ
@@ -43234,18 +43800,18 @@ iJ
 iJ
 iJ
 iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
+VW
+VW
+VW
+VW
+VW
+VW
+ZM
+ZM
+ZM
+Lp
+WS
+ZM
 iJ
 iJ
 iJ
@@ -43386,18 +43952,18 @@ iJ
 iJ
 iJ
 iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
+VW
+VW
+VW
+VW
+VW
+VW
+gp
+zQ
+zQ
+bO
+VW
+ZM
 iJ
 iJ
 iJ
@@ -43538,18 +44104,18 @@ iJ
 iJ
 iJ
 iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
+VW
+VW
+VW
+VW
+VW
+VW
+VW
+mC
+mC
+bO
+VW
+ZM
 iJ
 iJ
 iJ
@@ -43690,18 +44256,18 @@ iJ
 iJ
 iJ
 iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
+VW
+VW
+VW
+VW
+VW
+VW
+Gt
+zQ
+zQ
+VW
+WS
+ZM
 iJ
 iJ
 iJ
@@ -43842,18 +44408,18 @@ iJ
 iJ
 iJ
 iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
-iJ
+ZM
+ZM
+ZM
+ZM
+ZM
+ZM
+ZM
+ZM
+ZM
+ZM
+ZM
+ZM
 iJ
 iJ
 iJ
@@ -59278,15 +59844,15 @@ cU
 cU
 cU
 cU
+BI
+nc
 cU
 cU
 cU
 cU
 cU
-cU
-cU
-cU
-cU
+nc
+pR
 cU
 cU
 cU
@@ -59430,15 +59996,15 @@ cU
 cU
 cU
 cU
-cU
-CG
+Gd
+ze
 ck
 ck
 ck
 ck
 ck
-CG
-cU
+ze
+zb
 cU
 cU
 cU
@@ -61558,15 +62124,15 @@ cU
 cU
 cU
 cU
-cU
-CG
+Gd
+ze
 Ew
 Ew
 Ew
 Ew
 Ew
-CG
-cU
+ze
+zb
 cU
 cU
 cU
@@ -61710,15 +62276,15 @@ cU
 cU
 cU
 cU
+oX
+ot
 cU
 cU
 cU
 cU
 cU
-cU
-cU
-cU
-cU
+ot
+Ap
 cU
 cU
 cU
