@@ -75,7 +75,7 @@
 #define FACTION_FAE "Fae"
 #define FACTION_SPIDERS "Spiders"
 #define FACTION_ELEMENTAL "Elemental"
-#define FACTION_ABEREANT "Aberrant"
+#define FACTION_ABERRANT "Aberrant"
 #define FACTION_INFERNAL "Infernal"
 #define FACTION_LEYLINE "Leyline"
 #define FACTION_OVERLORD "Overlord"
