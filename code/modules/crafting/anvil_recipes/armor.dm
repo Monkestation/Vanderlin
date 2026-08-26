@@ -520,6 +520,11 @@
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/cuirass/fluted
 
+/datum/anvil_recipe/armor/steel/ornate_fluted_cuirass
+	name = "Ornate Fluted Cuirass"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/armor/cuirass/fluted/ornate
+
 /datum/anvil_recipe/armor/steel/brigadine
 	name = "Brigandine (+Bar x2, +Cloth)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel, /obj/item/natural/cloth)

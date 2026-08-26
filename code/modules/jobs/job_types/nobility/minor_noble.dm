@@ -108,7 +108,7 @@
 	head = /obj/item/clothing/head/helmet/heavy/decorated/bascinet
 	cloak = /obj/item/clothing/cloak/cape
 	shirt = /obj/item/clothing/armor/gambeson/arming
-	armor = /obj/item/clothing/armor/cuirass/fluted
+	armor = /obj/item/clothing/armor/cuirass/fluted/ornate
 	gloves = /obj/item/clothing/gloves/plate
 	backl = /obj/item/storage/backpack/satchel
 
