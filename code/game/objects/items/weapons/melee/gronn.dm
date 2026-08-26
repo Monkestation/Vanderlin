@@ -61,6 +61,37 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 900 GRAMS
 
+/obj/item/weapon/handclaw/steel/silver
+	name = "silver mantis claws"
+	desc = "A pair of silver claws, an extremely rare sight in and out of Ossland. Their longer blades offer a superior defence option but their added weight slows them down."
+	icon_state = "silverclaws"
+	force = DAMAGE_KATAR + 7
+	max_integrity = INTEGRITY_STRONG
+	smeltresult = /obj/item/ingot/silver
+	item_weight = 800 GRAMS
+
+/obj/item/weapon/handclaw/steel/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/handclaw/steel/blacksteel
+	name = "blacksteel mantis claws"
+	desc = "An exquisite mimicry of a classic Osslandic weapon. Long blades offer effective defense while retaining lethal striking power."
+	icon_state = "bskatarclaw"
+	force = DAMAGE_KATAR + 9
+	smeltresult = /obj/item/ingot/blacksteel
+
+/obj/item/weapon/handclaw/steel/bloodsteel
+	name = "bloodsteel mantis claws"
+	desc = "A dark mimicry of a classic Osslandic weapon. Long blades offer effective defense while retaining lethal striking power."
+	icon_state = "corruptclaws"
+	force = DAMAGE_KATAR + 8
+	smeltresult = /obj/item/ingot/bloodsteel
+
+/obj/item/weapon/handclaw/steel/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/weapon/handclaw/gronn
 	name = "ossland beast claws"
 	desc = "A pair of uniquely reinforced iron claws forged with the addition of bone by the cleric-priests of Ossland. \
