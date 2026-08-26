@@ -1261,6 +1261,11 @@
 	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
 	created_item = /obj/item/weapon/shield/tower/metal/blacksteel
 
+/datum/anvil_recipe/weapons/blacksteel/flamberge
+	name = "Blacksteel Flamberge (+Bar x3)"
+	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
+	created_item = /obj/item/weapon/sword/long/greatsword/flamberge/blacksteel
+
 // --------------- Bloodsteel --------------------
 
 /datum/anvil_recipe/weapons/bloodsteel
