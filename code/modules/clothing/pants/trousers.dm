@@ -38,10 +38,6 @@
 	max_integrity = INTEGRITY_STANDARD
 	item_weight = 1.2 KILOGRAMS
 
-/obj/item/clothing/pants/trou/leather/guard
-	uses_lord_coloring = LORD_PRIMARY
-	misc_flags = CRAFTING_TEST_EXCLUDE
-
 /obj/item/clothing/pants/trou/leather/advanced
 	name = "hardened leather chausses"
 	desc = "Sturdy, durable, flexible. The finest leather to protect your nether regions."
