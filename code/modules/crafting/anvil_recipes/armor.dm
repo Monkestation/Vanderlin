@@ -366,8 +366,8 @@
 	additional_items = list(/obj/item/ingot/gold)
 
 /datum/anvil_recipe/armor/iron/nasal_helmet
-	name = "Nasal helmet"
-	created_item = /obj/item/clothing/head/helmet/nasal
+	name = "Iron Nasal Helmet"
+	created_item = /obj/item/clothing/head/helmet/nasal/iron
 
 /datum/anvil_recipe/armor/iron/skullcap
 	name = "x2 Skullcap"
