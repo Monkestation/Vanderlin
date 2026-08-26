@@ -953,6 +953,7 @@
 #include "code\datums\armor\clothing\heavy\plate.dm"
 #include "code\datums\armor\clothing\heavy\boots\plate.dm"
 #include "code\datums\armor\clothing\heavy\gloves\plate.dm"
+#include "code\datums\armor\clothing\heavy\head\cloth.dm"
 #include "code\datums\armor\clothing\heavy\head\plate.dm"
 #include "code\datums\armor\clothing\heavy\neck\plate.dm"
 #include "code\datums\armor\clothing\heavy\pants\plate.dm"

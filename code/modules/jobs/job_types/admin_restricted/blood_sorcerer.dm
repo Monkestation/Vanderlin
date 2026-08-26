@@ -18,13 +18,13 @@
 	tutorial = "You have been ostracized and hunted by society for your use of forbidden Blood Magic."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
-	allowed_patrons = list(/datum/patron/godless/dystheist, /datum/patron/godless/autotheist, /datum/patron/godless/godless, /datum/patron/godless/defiant, /datum/patron/divine/noc, /datum/patron/divine/pestra, /datum/patron/inhumen/zizo)
+	allowed_patrons = list(/datum/patron/godless/dystheist, /datum/patron/godless/autotheist, /datum/patron/godless/godless, /datum/patron/godless/defiant, /datum/patron/godless/galadros)
 	outfit = /datum/outfit/admin/blood_sorcerer
 	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	technique_points = 14
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_NEUTRAL)
+	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage
 
@@ -41,6 +41,7 @@
 		TRAIT_BLOOD_SENSE,
 		TRAIT_VITAE_USER,
 		TRAIT_DEADNOSE,
+		TRAIT_STEELHEARTED,
 		TRAIT_NOHYGIENE,
 	)
 
@@ -66,18 +67,17 @@
 	. = ..()
 
 	var/static/list/selectablehat = list(
-		"Blood hood" = /obj/item/clothing/head/roguehood/colored/blood,
-		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
-		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Blood Red hood (Discreet)" = /obj/item/clothing/head/roguehood/colored/blood,
+		"Enhanced Blood Red hood (Obvious)" = /obj/item/clothing/head/roguehood/colored/blood/enhanced,
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Magus hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/magus,
 	)
 	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "BLOOD SORCERER")
 
 	var/static/list/selectablerobe = list(
-		"Blood robes" = /obj/item/clothing/shirt/robe/colored/blood,
+		"Blood Red robes (Discreet)" = /obj/item/clothing/shirt/robe/colored/blood,
+		"Enhanced Blood Red robes (Obvious)" = /obj/item/clothing/shirt/robe/colored/blood/enhanced,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Magus robes" = /obj/item/clothing/shirt/robe/magus

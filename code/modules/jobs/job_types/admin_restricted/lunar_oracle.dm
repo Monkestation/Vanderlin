@@ -133,7 +133,7 @@
 	backl = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/raincloak/colored/chalk
 	backpack_contents = list(
-		/obj/item/needle = 1,
+		/obj/item/needle/blessed = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1
 	)
 

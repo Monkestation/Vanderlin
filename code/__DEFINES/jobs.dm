@@ -65,6 +65,7 @@
 #define FACTION_VIKINGS     "Vikings"
 #define FACTION_GALLOWBAND  "Gallowband"
 #define FACTION_INQUISITION	"Inquisition"
+#define FACTION_BLOOD_MAGIC	"Blood Magic"
 
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)
