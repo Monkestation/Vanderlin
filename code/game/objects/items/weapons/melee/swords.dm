@@ -1287,6 +1287,13 @@
 	sellprice = 120
 	item_weight = 2.8 KILOGRAMS
 
+/obj/item/weapon/sword/long/greatsword/flamberge/blacksteel
+	name = "blacksteel flamberge"
+	desc = "Commonly known as a flame-bladed sword, this weapon has an undulating blade. Its wave-like form distributes force better, and is less likely to break on impact."
+	icon_state = "blackflamb"
+	force_wielded = DAMAGE_GREATSWORD_WIELD + 3
+	smeltresult = /obj/item/ingot/blacksteel
+
 /obj/item/weapon/sword/long/greatsword/zwei
 	name = "zweihander"
 	desc = "Sometimes known as a doppelhander or beidhander, this weapon's size is so impressive that its handling properties are more akin to that of a polearm than a sword."
