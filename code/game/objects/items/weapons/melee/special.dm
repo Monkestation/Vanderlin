@@ -337,7 +337,7 @@
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(KATAR_CUT, KATAR_THRUST)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_STEEL
 
 	gripsprite = FALSE
 	w_class = WEIGHT_CLASS_SMALL
@@ -357,6 +357,7 @@
 	icon_state = "psykatar"
 	item_weight = 400 GRAMS
 	smeltresult = /obj/item/ingot/silverblessed
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
 	. = ..()						//+3 force, +50 int, +1 def, make silver
@@ -365,6 +366,7 @@
 /obj/item/weapon/katar/psydon/relic
 	name = "\proper anguish"
 	desc = "An exotic weapon unfamiliar to Grenzelhoft, but taken and given blessings to fit in the Armoury of Psydon. May its blows cause naught but anguish to those who dare raise up arms against you."
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/katar/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -414,7 +416,7 @@
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(KNUCKLE_STRIKE, KNUCKLE_SMASH)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL
 
 	gripsprite = FALSE
 	w_class = WEIGHT_CLASS_SMALL
@@ -448,6 +450,7 @@
 	icon_state = "psyknuckle"
 	item_weight = 200 GRAMS
 	melting_material = /datum/material/silver
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/knuckles/psydon/Initialize(mapload)
 	. = ..()							//+3 force, +50 int, +1 def, make silver
@@ -456,6 +459,7 @@
 /obj/item/weapon/knuckles/psydon/relic
 	name = "\proper confidence"
 	desc = "Silver knuckles, fashioned in the iconography of Psydon. May your strikes be confident and true, and done in His name."
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/knuckles/psydon/relic/Initialize(mapload)
 	. = ..()							//+5 force, +100 int, +1 def, make silver
@@ -472,3 +476,4 @@
 	icon_state = "eoraknuckle"
 	force = DAMAGE_KNUCKLES + 2
 	item_weight = 200 GRAMS
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS

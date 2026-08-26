@@ -91,6 +91,7 @@
 #define ORGAN_SLOT_ANTENNAS "antennas"
 #define ORGAN_SLOT_WINGS "wings"
 #define ORGAN_SLOT_SNOUT "snout"
+#define ORGAN_SLOT_ZOMBIE "zombie_organ"
 
 #define ORGAN_SLOT_NECK_FEATURE "neck_feature"
 #define ORGAN_SLOT_HEAD_FEATURE "head_feature"
@@ -397,3 +398,12 @@ DEFINE_BITFIELD(organ_flags, list(
 #define ORGAN_PROCESS_UPDATE_HEALTH (1<<1) // why is this like so? cause
 // /mob/living/carbon/handle_shock() retval flag
 #define SHOCK_PROCESS_UPDATE_HEALTH (1<<0)
+
+#define TOURNIQUET_LIMBS list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+#define TOURNIQUET_ISCHEMIA_DELAY (5 MINUTES)  // pain starts accumulating past this
+#define TOURNIQUET_NECROSIS_DELAY (25 MINUTES) // limb dies past this
+#define TOURNIQUET_DAMAGE_PROB 4
+#define SPLINT_BREAK_THRESHOLD 8 // brute damage in one hit that snaps a splint
+
+#define PUMP_HEART_GRACE_WINDOW (10 SECONDS) // must land another compression within this window to keep mitigation active
+#define PUMP_HEART_BRAIN_DAMAGE_MITIGATION 0.15 // multiplier on damage probability while grace is active

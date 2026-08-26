@@ -1138,7 +1138,7 @@
 		if(heal_flags & HEAL_ADMIN) //reset rot on admin revives
 			for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 				bodypart.revive_limb()
-				bodypart.germ_level = 0
+				bodypart.set_germ_level(0)
 				bodypart.skeletonized = FALSE
 				bodypart.remove_pain(bodypart.pain_dam)
 
@@ -1281,6 +1281,7 @@
 	VV_DROPDOWN_OPTION(VV_HK_MARTIAL_ART, "Give Martial Arts")
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_TRAUMA, "Give Brain Trauma")
 	VV_DROPDOWN_OPTION(VV_HK_CURE_TRAUMA, "Cure Brain Traumas")
+	VV_DROPDOWN_OPTION(VV_HK_CURE_ROT, "Cure Rot")
 	VV_DROPDOWN_OPTION(VV_HK_SHOW_RELATIONS, "Show Relations")
 
 /mob/living/carbon/vv_do_topic(list/href_list)

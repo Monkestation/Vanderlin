@@ -34,7 +34,7 @@
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(/datum/intent/claw/cut, /datum/intent/claw/lunge, /datum/intent/claw/rend)
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_IRON
 
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CUT
@@ -57,7 +57,7 @@
 	possible_item_intents = list(/datum/intent/claw/cut/steel, /datum/intent/claw/lunge/steel, /datum/intent/claw/rend/steel)
 	wbalance = EASY_TO_DODGE
 	max_blade_int = 250
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_STEEL
 	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 900 GRAMS
 
@@ -71,6 +71,7 @@
 	possible_item_intents = list(/datum/intent/claw/cut, /datum/intent/claw/lunge/gronn, /datum/intent/claw/rend)
 	wbalance = HARD_TO_DODGE
 	item_weight = 750 GRAMS
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_STEEL
 
 
 /obj/item/weapon/handclaw/getonmobprop(tag)

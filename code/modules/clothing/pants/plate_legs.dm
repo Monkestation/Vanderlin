@@ -23,7 +23,7 @@
 
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/pants/plate
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 3.95 KILOGRAMS
 
@@ -41,7 +41,7 @@
 	smeltresult = /obj/item/ingot/iron
 
 	armor_type = /datum/armor/pants/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 3.95 KILOGRAMS
 
 /obj/item/clothing/pants/platelegs/captain
@@ -63,7 +63,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/pants/plate/bad
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 
 /obj/item/clothing/pants/platelegs/blk
 	name = "blacksteel legs"
@@ -78,6 +78,7 @@
 	armor_type = /datum/armor/pants/plate/good
 	item_weight = 3 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 //............... Evil Pants ............... //
 
@@ -90,6 +91,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	smeltresult = /obj/item/ingot/avantyne
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/pants/platelegs/matthios
 	name = "gilded leggings"

@@ -11,7 +11,7 @@
 	wdefense = TERRIBLE_PARRY
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(FLAIL_STRIKE, FLAIL_SMASH)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_IRON
 
 	sharpness = IS_BLUNT
 	w_class = WEIGHT_CLASS_NORMAL
@@ -55,7 +55,7 @@
 	force = DAMAGE_WEAK_FLAIL
 	possible_item_intents = list(MACE_WDSTRIKE)
 	gripped_intents = list(FLAIL_THRESH, MACE_WDSTRIKE)
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_IMPROV
 	smeltresult = /obj/item/fertilizer/ash
 	sellprice = 10
 	item_weight = 700 GRAMS
@@ -67,11 +67,11 @@
 	desc = "A knightly flail made of worked steel, with a flanged head. An effective and brutal design."
 	icon_state = "flail"
 	force = DAMAGE_GOOD_FLAIL
-	max_integrity = INTEGRITY_STRONGEST
 	smeltresult = null
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 35
 	item_weight = 1.4 KILOGRAMS
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/flail/sflail/ancient
 	name = "ancient flail"
@@ -92,7 +92,7 @@
 	desc = "A shining silver flail, bane of all who lurk in the night. Crush the skull of the nitebeast."
 	icon_state = "silverflail"
 	force = DAMAGE_GOOD_FLAIL - 1
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_SILVER
 	minstr = 4
 	smeltresult = null
 	smeltresult = /obj/item/ingot/silver
@@ -120,7 +120,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyflail"
 	force = DAMAGE_GOOD_FLAIL
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_SILVER
 	smeltresult = /obj/item/ingot/silverblessed
 	sellprice = 50
 	last_used = 0
@@ -135,6 +135,7 @@
 	desc = "The weight of His anguish, His pain, His hope and His love for humenkind - all hanging on this ornamental silver-steel head chained to this arm. A declaration of love for all that Psydon lives for, and a crushing reminder that the Ordo Benetarus will endure anything to defend it."
 	icon_state = "psymorningstar"
 	item_weight = 1.5 KILOGRAMS
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/flail/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -153,7 +154,6 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(FLAIL_LNGSTRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH)
-	max_integrity = INTEGRITY_STRONG
 
 	bigboy = TRUE
 	gripsprite = TRUE
@@ -216,7 +216,7 @@
 	force_wielded = DAMAGE_GOOD_FLAIL + 7
 	possible_item_intents = list(MATTHIOS_STRIKE)
 	gripped_intents = list(MATTHIOS_STRIKE, MATTHIOS_SMASH)
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_STEEL
 	slot_flags = ITEM_SLOT_BACK
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	smeltresult = /obj/item/ingot/steel_slag
