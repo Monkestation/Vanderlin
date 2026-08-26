@@ -821,7 +821,6 @@
 	max_integrity = INTEGRITY_STRONGEST
 
 	slot_flags = ITEM_SLOT_BACK
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -839,6 +838,15 @@
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -2,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -2,"ex" = 5,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+/obj/item/weapon/polearm/eaglebeak/blacksteel
+	name = "blacksteel eagle's beak"
+	icon_state = "bs_eaglebeak"
+	force = DAMAGE_SPEAR + 2
+	force_wielded = DAMAGE_HALBERD_WIELD + 2
+	melting_material = /datum/material/blacksteel
+	melt_amount = 150
+	sellprice = 90
 
 //................ Lucerne Hammer ............... //
 /obj/item/weapon/polearm/eaglebeak/lucerne

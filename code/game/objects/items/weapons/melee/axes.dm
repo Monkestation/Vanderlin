@@ -596,3 +596,15 @@
 	max_blade_int = 500
 	sellprice = 0
 
+/obj/item/weapon/greataxe/blacksteel
+	name = "blacksteel greataxe"
+	desc = "A magnificent greataxe of blacksteel, tipped with spikes to keep the horrors at bay. No one's quite sure as to whether it's meant \
+	to be called a 'poleaxe' or 'greataxe'; at this point, however, the terms might as well be interchangeable amongst the laymen."
+	icon_state = "bs_greataxe"
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 3
+	max_blade_int = 300
+	max_integrity = INTEGRITY_STRONGEST
+	melting_material = /datum/material/blacksteel
+	melt_amount = 150
+	sellprice = 120
+	item_weight = 4 KILOGRAMS
