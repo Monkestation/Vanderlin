@@ -62,7 +62,6 @@
 
 /datum/action/cooldown/spell/conjure_summon/raise_lesser_undead/necromancer
 	name = "Lesser Necromancy"
-	desc = "Summons a temporary spectral skeleton to aid you."
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE
 	associated_skill = /datum/attribute/skill/magic/arcane
@@ -70,6 +69,28 @@
 	cooldown_time = 30 SECONDS
 	summon_lifespan = 1 MINUTES
 
+/datum/action/cooldown/spell/conjure_summon/raise_lesser_undead/spectral
+	name = "Summon Spectral Skeleton"
+	desc = "Summons a temporary spectral skeleton to aid you."
+	spell_type = SPELL_MANA
+	antimagic_flags = MAGIC_RESISTANCE
+	associated_skill = /datum/attribute/skill/magic/arcane
+	cooldown_time = 30 SECONDS
+	summon_lifespan = 1 MINUTES
+
 	required_form = FORM_DEATH
 	required_technique = TECHNIQUE_SUMMONING
 	required_level = 2
+
+/datum/action/cooldown/spell/conjure_summon/raise_lesser_undead/spectral/pick_skeleton_type()
+	var/skeleton_roll = rand(1, 100)
+	switch(skeleton_roll)
+		if(1 to 20)
+			return /mob/living/simple_animal/hostile/skeleton/axe/spectral
+		if(21 to 40)
+			return /mob/living/simple_animal/hostile/skeleton/spear/spectral
+		if(41 to 60)
+			return /mob/living/simple_animal/hostile/skeleton/guard/spectral
+		if(61 to 80)
+			return /mob/living/simple_animal/hostile/skeleton/bow/spectral
+	return /mob/living/simple_animal/hostile/skeleton/spectral
