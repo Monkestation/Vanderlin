@@ -5233,13 +5233,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/keep/magician)
-"ckF" = (
-/obj/structure/fake_machine/mail{
-	mailtag = "Feldesher";
-	pixel_y = -32
-	},
-/turf/open/floor/woodturned,
-/area/indoors/town/clinic_large/feldsher)
 "ckL" = (
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/library)
@@ -11987,7 +11980,7 @@
 /area/outdoors/mountains)
 "eXg" = (
 /obj/structure/closet/crate/chest/neu_iron{
-	name = "Patient's gear"
+	name = "Patient's Gear"
 	},
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -37594,6 +37587,7 @@
 	},
 /obj/structure/fluff/walldeco/church/line,
 /obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/item/weapon/surgery/retractor,
 /turf/open/floor/churchbrick,
 /area/indoors/town/clinic_large)
 "pEa" = (
@@ -45950,7 +45944,7 @@
 /area/outdoors/town/noble_manor/blue)
 "sOF" = (
 /obj/structure/door/window{
-	name = "Storage Room"
+	name = "Apothecary Storage"
 	},
 /obj/effect/mapping_helpers/access/keyset/town/apothecary,
 /obj/effect/mapping_helpers/access/locker,
@@ -48666,7 +48660,7 @@
 	name = "Herb Farm"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/town/apothecary,
+/obj/effect/mapping_helpers/access/keyset/town/clinic,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "tXd" = (
@@ -52405,6 +52399,9 @@
 	pixel_y = 5;
 	pixel_x = 10
 	},
+/obj/structure/fake_machine/mail/l{
+	mailtag = "Feldsher"
+	},
 /turf/open/floor/carpet,
 /area/indoors/town/clinic_large/feldsher)
 "vvh" = (
@@ -52456,6 +52453,12 @@
 /obj/item/natural/feather,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/merc_guild)
+"vvS" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/town)
 "vvX" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
@@ -124962,7 +124965,7 @@ icA
 lxP
 pny
 kwJ
-fGe
+vvS
 gKQ
 kfW
 neD
@@ -125972,7 +125975,7 @@ xbB
 fVi
 oLy
 mFi
-fGe
+vvS
 osm
 gKQ
 gKQ
@@ -169399,7 +169402,7 @@ gCw
 gCw
 wGM
 eRH
-ckF
+eRH
 lAf
 rWQ
 klj
