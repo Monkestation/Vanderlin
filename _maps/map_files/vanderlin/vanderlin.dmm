@@ -45609,6 +45609,7 @@
 	dir = 8
 	},
 /obj/structure/fluff/walldeco/church/line,
+/obj/structure/fermentation_keg/water,
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "sHI" = (
@@ -48784,11 +48785,6 @@
 /obj/effect/landmark/events/haunts,
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town)
-"tZE" = (
-/obj/structure/fermentation_keg/water,
-/obj/structure/fluff/walldeco/church/line,
-/turf/open/floor/church,
-/area/indoors/town/clinic_large)
 "tZK" = (
 /turf/open/floor/blocks,
 /area/outdoors/mountains)
@@ -54755,8 +54751,22 @@
 /turf/open/floor/metal/barograte,
 /area/outdoors/town)
 "woj" = (
-/obj/structure/fermentation_keg/water,
 /obj/structure/fluff/walldeco/church/line,
+/obj/structure/closet/crate/chest/neu_iron{
+	name = "Splints, Staves and Tourniquets"
+	},
+/obj/item/tourniquet,
+/obj/item/tourniquet,
+/obj/item/tourniquet,
+/obj/item/tourniquet,
+/obj/item/tourniquet,
+/obj/item/splint,
+/obj/item/splint,
+/obj/item/splint,
+/obj/item/splint,
+/obj/item/splint,
+/obj/item/weapon/polearm/woodstaff,
+/obj/item/weapon/polearm/woodstaff,
 /turf/open/floor/churchbrick,
 /area/indoors/town/clinic_large)
 "won" = (
@@ -127399,7 +127409,7 @@ xeC
 lAf
 jsa
 cGn
-tZE
+sLA
 eRq
 lAf
 qFx
