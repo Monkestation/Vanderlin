@@ -799,6 +799,12 @@
 	additional_items = list(/obj/item/grown/log/tree/small)
 	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/gold
 
+/datum/anvil_recipe/weapons/gold/kiteshield
+	name = "Golden Kite Shield (+Bar x2)"
+	appro_skill = /datum/attribute/skill/craft/armorsmithing
+	additional_items = list(/obj/item/ingot/gold, /obj/item/ingot/gold)
+	created_item = /obj/item/weapon/shield/tower/metal/gold
+
 /datum/anvil_recipe/weapons/steel/halberd
 	name = "Halberd (+Bar, +Small Log)"
 	appro_skill = /datum/attribute/skill/craft/weaponsmithing
@@ -1248,6 +1254,12 @@
 	name = "Blacksteel Warhammer (+Blacksteel Bar)"
 	additional_items = list(/obj/item/ingot/blacksteel)
 	created_item = /obj/item/weapon/mace/warhammer/blacksteel
+
+/datum/anvil_recipe/weapons/blacksteel/kiteshield
+	name = "Blacksteel Kite Shield (+Bar x2)"
+	appro_skill = /datum/attribute/skill/craft/armorsmithing
+	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
+	created_item = /obj/item/weapon/shield/tower/metal/blacksteel
 
 // --------------- Bloodsteel --------------------
 
