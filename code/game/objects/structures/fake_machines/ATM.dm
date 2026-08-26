@@ -17,7 +17,7 @@
 		user_mob.cursed_freak_out()
 		return
 
-	if(user_mob.real_name in GLOB.outlawed_players)
+	if(GLOB.outlawed_players?[user_mob.real_name])
 		say("OUTLAW DETECTED! REFUSING SERVICE!")
 		return
 
@@ -90,14 +90,14 @@
 		H.cursed_freak_out()
 		return ITEM_INTERACT_SUCCESS
 
-	if(user.real_name in GLOB.outlawed_players)
-		say("OUTLAW DETECTED! REFUSING SERVICE!")
-		return ITEM_INTERACT_SUCCESS
+	if(GLOB.outlawed_players?[user.real_name])
+			say("OUTLAW DETECTED! REFUSING SERVICE!")
+	    return ITEM_INTERACT_SUCCESS
 
 	if(!(H in SStreasury.bank_accounts))
 		say("No account found. Submit your fingers for inspection.")
 		return ITEM_INTERACT_SUCCESS
-
+      
 	var/list/deposit_results = SStreasury.generate_money_account(tool.get_real_price(), H)
 	if(islist(deposit_results))
 		record_round_statistic(STATS_MAMMONS_DEPOSITED, deposit_results[1] - deposit_results[2])

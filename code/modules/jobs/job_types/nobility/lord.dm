@@ -101,9 +101,10 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER,
+		TRAIT_CAN_DECLARE_OUTLAW,
 		TRAIT_NOSEGRAB,
 		TRAIT_HEAVYARMOR,
-		TRAIT_MEDIUMARMOR,
+		TRAIT_MEDIUMARMOR
 	)
 
 	voicepack_m = /datum/voicepack/male/evil

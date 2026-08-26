@@ -194,7 +194,7 @@
 			if(/datum/patron/inhumen/matthios)
 				cast_on.visible_message(span_info("A shadowed hand passes [cast_on] a small, stolen vial... its contents glimmer faintly before sinking into their veins..."), span_notice("A quick swig and the ache fades..."))
 				// COMRADES! WE MUST BAND TOGETHER! Or Outlaw.
-				if(HAS_TRAIT(cast_on, TRAIT_BANDITCAMP) || (cast_on.real_name in GLOB.outlawed_players))
+				if(HAS_TRAIT(cast_on, TRAIT_BANDITCAMP) || (GLOB.outlawed_players?[cast_on.real_name]))
 					conditional_buff = TRUE
 					situational_bonus = 25
 

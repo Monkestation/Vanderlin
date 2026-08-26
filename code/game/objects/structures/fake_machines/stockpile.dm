@@ -145,7 +145,7 @@
 
 /obj/structure/fake_machine/stockpile/attackby(obj/item/P, mob/user, list/modifiers)
 	if(ishuman(user))
-		if(user.real_name in GLOB.outlawed_players)
+		if(GLOB.outlawed_players?[user.real_name])
 			say("OUTLAW DETECTED! REFUSING SERVICE!")
 			return
 		if(istype(P, /obj/item/coin))
@@ -160,7 +160,7 @@
 		return
 	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(ishuman(user))
-		if(user.real_name in GLOB.outlawed_players)
+		if(GLOB.outlawed_players?[user.real_name])
 			say("OUTLAW DETECTED! REFUSING SERVICE!")
 			return
 		var/total_value = 0

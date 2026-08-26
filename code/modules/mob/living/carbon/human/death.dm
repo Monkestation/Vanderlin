@@ -79,7 +79,7 @@
 		if(istype(buckled, /obj/structure/fluff/psycross) || istype(buckled, /obj/machinery/light/fueled/campfire/pyre))
 			if((real_name in GLOB.excommunicated_players) || (real_name in GLOB.heretical_players))
 				yeae = FALSE
-			if(real_name in GLOB.outlawed_players)
+			if(GLOB.outlawed_players?[real_name])
 				yeae = FALSE
 
 	if(mind && yeae)

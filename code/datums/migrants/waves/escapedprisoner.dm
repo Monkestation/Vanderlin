@@ -52,7 +52,7 @@
 
 /datum/job/migrant/escprisoner/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	GLOB.outlawed_players |= spawned.real_name
+	add_outlaw(spawned.client, spawned.real_name, "Escaping the Dungeon")
 
 /datum/outfit/escprisoner
 	name = "Escaped Prisoner (Migrant Wave)"

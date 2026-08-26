@@ -461,11 +461,16 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BAD_MOOD "Bad Mood"
 #define TRAIT_NIGHT_OWL "Night Owl"
 #define TRAIT_SIMPLE_WOUNDS "simple_wounds"
-#define TRAIT_SCHIZO_AMBIENCE "schizo_ambience" //replaces all ambience with creepy shit
-#define TRAIT_SCREENSHAKE "screenshake" //screen will always be shaking, you cannot stop it
+/// Replaces all ambience with creepy shit
+#define TRAIT_SCHIZO_AMBIENCE "schizo_ambience"
+/// Screen will always be shaking, you cannot stop it
+#define TRAIT_SCREENSHAKE "screenshake"
 #define TRAIT_PUNISHMENT_CURSE "PunishmentCurse"
 #define TRAIT_BANDITCAMP "banditcamp"
+/// Can identify Outlaws when examining them (if their face is visible)
 #define TRAIT_KNOWBANDITS "knowbandits"
+/// Used for wanted posters, can declare someone an Outlaw using them
+#define TRAIT_CAN_DECLARE_OUTLAW "declareoutlaw"
 #define TRAIT_KNOWCOURTAGENTS "knowagents"
 #define TRAIT_VAMPMANSION "vampiremansion"
 #define TRAIT_VAMP_DREAMS "vamp_dreams"

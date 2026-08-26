@@ -43,7 +43,8 @@
 	)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
-		TRAIT_NOBLE_POWER
+		TRAIT_NOBLE_POWER,
+		TRAIT_CAN_DECLARE_OUTLAW
 	)
 	verbs = list(
 		/mob/living/carbon/human/proc/torture_victim

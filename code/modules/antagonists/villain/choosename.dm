@@ -25,7 +25,7 @@
 	while(FALSE)
 
 	if(mind.has_antag_datum(/datum/antagonist/bandit))
-		GLOB.outlawed_players |= new_name
+		add_outlaw(client, new_name, "General Banditry")
 
 	fully_replace_character_name(old_name, new_name)
 	var/fakekey = get_display_ckey(ckey)

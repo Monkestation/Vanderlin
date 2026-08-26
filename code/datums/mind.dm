@@ -889,6 +889,9 @@ GLOBAL_LIST_EMPTY(personal_objective_minds)
 	if(assigned_role == new_role)
 		return assigned_role
 	. = assigned_role
+	if(current)
+		current.job = new_role.title
+		current.job_type = new_role.type
 	assigned_role = new_role
 
 /datum/mind/proc/update_alt_title(datum/job/new_role)

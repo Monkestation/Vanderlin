@@ -411,31 +411,54 @@
 	name = "Trembling Hands"
 	desc = "My hands are shaking uncontrollably! I can't grip anything!"
 
-/datum/quirk/vice/heretic_outlaw
-	name = "Heretic or Outlaw"
-	desc = "You begin your journey marked as either a heretic or an outlaw, despised by society."
+/datum/quirk/vice/heretic
+	name = "Heretic"
+	desc = "You begin your journey marked as a Heretic by the Tennite clergy, SHAME!"
 	point_value = 2
 	customization_type = QUIRK_SELECT
 	customization_label = "Choose your mark"
 	customization_options = list("Heretic", "Outlaw", "Both!")
 	preview_render = FALSE
 
-/datum/quirk/vice/heretic_outlaw/on_spawn()
+/datum/quirk/vice/heretic/on_spawn()
 	if(!owner || !ishuman(owner))
 		return
 
 	var/mob/living/carbon/human/H = owner
 
-	if(!customization_value)
-		customization_value = pick(customization_options)
+	GLOB.excommunicated_players += H.real_name
+	to_chat(H, span_boldwarning("I've been denounced by the church for either reasons legitimate or not!"))
 
-	if((customization_value == "Heretic") || (customization_value == "Both!"))
-		GLOB.excommunicated_players += H.real_name
-		to_chat(H, span_boldwarning("I've been denounced by the church for either reasons legitimate or not!"))
-	if((customization_value == "Outlaw") || (customization_value == "Both!"))
-		GLOB.outlawed_players |= H.real_name
-		to_chat(H, span_boldwarning("Whether for crimes I did or was accused of, I have been declared an outlaw!"))
-	return ..()
+
+/datum/quirk/vice/outlaw
+	name = "Outlaw"
+	desc = "You begin your journey declared an outlaw by those who rule these lands, there is likely a notable mammon reward for your capture or head..."
+	point_value = 2
+	customization_type = QUIRK_TEXT
+	customization_label = "What are my crimes?"
+	customization_placeholder = "General crimes."
+	preview_render = FALSE
+
+/datum/quirk/vice/outlaw/get_desc(datum/preferences/prefs)
+	var/reason = prefs?.quirk_customizations[type]
+	if(!reason)
+		reason = customization_value
+	if(reason && reason != "")
+		return "[desc]<br><br><b>Wanted for:</b> [reason]"
+	return "[desc]<br><br><b>Wanted for:</b> General crimes."
+
+/datum/quirk/vice/outlaw/on_spawn()
+	if(!owner || !ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/H = owner
+
+	var/crimes = customization_value
+	if(!crimes)
+		crimes = "General Crimes"
+
+	add_outlaw(H.client, H.real_name, crimes)
+	to_chat(H, span_boldwarning("Whether for crimes I did or was accused of, I have been declared an outlaw!"))
 
 /datum/quirk/vice/suspicion
 	name = "Inquisitorial Suspicion"
@@ -444,6 +467,7 @@
 	customization_type = QUIRK_TEXT
 	customization_label = "Why do they suspect me?"
 	customization_placeholder = "Spotted eating organs."
+	preview_render = FALSE
 
 /datum/quirk/vice/suspicion/get_desc(datum/preferences/prefs)
 	var/reason = prefs?.quirk_customizations[type]

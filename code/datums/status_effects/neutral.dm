@@ -188,3 +188,28 @@
 	L.remove_status_effect(/datum/status_effect/bugged)
 
 	return TRUE
+
+/datum/status_effect/has_outlaw_requests
+	id = "outlaw_requests"
+	duration = STATUS_EFFECT_PERMANENT
+	status_type = STATUS_EFFECT_UNIQUE
+	alert_type = /atom/movable/screen/alert/status_effect/has_outlaw_requests
+
+/atom/movable/screen/alert/status_effect/has_outlaw_requests
+	name = "Open Outlaw Requests"
+	desc = "I should check a wanted poster for who my subordinates want me to declare an Outlaw..."
+	icon_state = "outlaw_request"
+
+/atom/movable/screen/alert/status_effect/has_outlaw_requests/Click()
+	var/mob/living/L = usr
+
+	if(!L.has_status_effect(/datum/status_effect/has_outlaw_requests))
+		return FALSE
+
+	if(!length(GLOB.outlaw_requested_players))
+		L.remove_status_effect(/datum/status_effect/has_outlaw_requests) // This is done as an 'emergency', idealy this is removed from whatever cleared the last entry
+		return TRUE
+	if(length(GLOB.outlaw_requested_players) > 1)
+		to_chat(L, span_notice("There are about \Roman[length(GLOB.outlaw_requested_players)] requests for me to review."))
+	else
+		to_chat(L, span_notice("There is an Outlaw request I need to review."))

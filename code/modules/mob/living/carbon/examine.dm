@@ -164,8 +164,9 @@
 			. += span_redtextbig("HERETIC! SHAME!")
 
 		// Outlaws
-		if(HAS_MIND_TRAIT(user, TRAIT_KNOWBANDITS) && (real_name in GLOB.outlawed_players))
-			. += span_boldred(mind?.special_role == ROLE_BANDIT ? "BANDIT!" : "OUTLAW!")
+		if(HAS_MIND_TRAIT(user, TRAIT_KNOWBANDITS) && (GLOB.outlawed_players?[real_name]))
+			. += span_boldred(mind?.special_role == "Bandit" ? "BANDIT!" : "OUTLAW!")
+			. += span_boldred("[GLOB.outlawed_players[real_name]]") // TODO remove when done debugging
 
 		// Court Agents
 		if(HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS) && (real_name in GLOB.court_agents))

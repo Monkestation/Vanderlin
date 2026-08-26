@@ -24,12 +24,12 @@
 
 /datum/antagonist/bandit/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/bandit))
-		if(examiner.real_name in GLOB.outlawed_players)
-			if(examined.real_name in GLOB.outlawed_players)
+		if(GLOB.outlawed_players?[examiner.real_name])
+			if(GLOB.outlawed_players?[examined.real_name])
 				return span_boldnotice("Another free man. My ally.")
 			else
 				return span_boldnotice("Pardoned free man?! Can I still trust [examined.p_them()]?!")
-		else if(examined.real_name in GLOB.outlawed_players)
+		else if(GLOB.outlawed_players?[examined.real_name])
 			return span_boldnotice("Free man still on the run. Fool.")
 		else
 			return span_boldnotice("Fellow pardoned free man.")

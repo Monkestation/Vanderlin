@@ -695,7 +695,7 @@
 
 			var/list/outlaws = list()
 			for(var/mob/living/carbon/human/outlaw in GLOB.human_list)
-				if(outlaw.real_name in GLOB.outlawed_players)
+				if(GLOB.outlawed_players?[outlaw.real_name])
 					var/icon/credit_icon = SScrediticons.get_credit_icon(outlaw, TRUE)
 					if(credit_icon)
 						outlaws += list(list(
