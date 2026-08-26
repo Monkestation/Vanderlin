@@ -14,7 +14,7 @@
 /obj/item/clothing/armor/leather/advanced/forrester/masterwork
 	name = "masterwork forrester's armor"
 	desc = "Armour worn by few, those that live to hunt, to battle. \nThe soft, cloth linings with masterfully tanned leather make it easy to repair with a needle."
-	max_integrity = INTEGRITY_STRONG + 200
+	max_integrity = INTEGRITY_OLD_STRONG + 200
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/leather/master
 

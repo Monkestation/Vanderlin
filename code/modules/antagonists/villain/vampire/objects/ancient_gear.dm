@@ -32,7 +32,7 @@
 	body_parts_covered = HEAD_NECK
 	block2add = FOV_BEHIND
 	item_weight = 4.6 KILOGRAMS
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET
 
@@ -62,7 +62,7 @@
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 	armor_type = /datum/armor/neck/plate
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 
 //................ Armor ............... //
 
@@ -171,7 +171,7 @@
 	item_state = "ancientsandals"
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	armor_type = /datum/armor/boots/maille/good
 	item_weight = 1.2 KILOGRAMS
 
