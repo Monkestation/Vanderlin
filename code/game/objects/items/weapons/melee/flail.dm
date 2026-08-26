@@ -70,7 +70,7 @@
 /obj/item/weapon/flail/sflail
 	name = "steel flail"
 	desc = "A knightly flail made of worked steel, with a flanged head. An effective and brutal design."
-	icon_state = "steelflail"
+	icon_state = "flail"
 	force = DAMAGE_GOOD_FLAIL
 	smeltresult = null
 	smeltresult = /obj/item/ingot/steel_slag

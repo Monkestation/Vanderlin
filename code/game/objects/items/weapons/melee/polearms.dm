@@ -185,7 +185,8 @@
 	max_blade_int = 150
 
 	slot_flags = ITEM_SLOT_BACK
-	smeltresult = /obj/item/ingot/iron
+	melt_amount = 50
+	melting_material = /datum/material/iron
 	thrown_bclass = BCLASS_STAB
 	sellprice = 22
 	item_weight = 1 KILOGRAMS
@@ -210,7 +211,7 @@
 	wbalance = GREAT_PARRY
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	sellprice = 40
 	item_weight = 1 KILOGRAMS
 
@@ -220,7 +221,7 @@
 	icon_state = "swordstaff"
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BLACKSTEEL
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 
 /obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
 	. = ..()
@@ -235,6 +236,7 @@
 	max_blade_int = 300
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	sellprice = 50
+	melt_amount = 100
 
 /obj/item/weapon/polearm/spear/silver
 	name = "silver spear"
@@ -245,7 +247,7 @@
 	wbalance = GREAT_PARRY
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_SILVER
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	sellprice = 60
 	item_weight = 1 KILOGRAMS
 
@@ -262,7 +264,7 @@
 	wbalance = GREAT_PARRY
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BLOODSTEEL
 	max_blade_int = 240
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/blacksteel
 	sellprice = 0
 	item_weight = 0.9 KILOGRAMS
 
