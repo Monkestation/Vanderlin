@@ -139,6 +139,7 @@
 /obj/item/weapon/whip/bloodsteel/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)
+
 //................ Caning Stick.................//
 /obj/item/weapon/whip/cane
 	name = "caning stick"

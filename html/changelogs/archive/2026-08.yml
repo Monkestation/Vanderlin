@@ -328,3 +328,21 @@
   - rscadd: Added Blood Curse, applied by holding bloodsteel/bloodstones or attacking
       with bloodsteel weapons.
   - rscadd: Added Bloodstone essence poison, used by the Blood Curse.
+2026-08-26:
+  dwasint:
+  - rscadd: splint which allows you to restore a limbs usability when fractured, but
+      it breaks if you take a blunt hit.
+  - rscadd: tourniquet which disables a limb but stops the bleeding, after 5 minutes
+      the limb starts suffering pain, and at 25 minutes it rots if left on.
+  - qol: There is now a 10 second grace period that drastically reduces the brain
+      damage you suffer while in crit after each CPR stage.
+  - qol: after each cpr stage a 10 second grace window is applied to arteries that
+      allow it to move blood even if the body is fully failing preventing organ rot.
+  - rscadd: limbs now rot independantly and skeletonize independantly
+  - rscadd: oozeing mass, it appears in your head when you die and can start turning
+      undead. When you are fully rotted starts turning you into a zombie. It can be
+      removed to delay zombification if you need time to remove the rot on the limbs.
+  - rscadd: zombies biting can start a living infection which slowly rots your limbs
+      until you turn into a zombie aswell (this was just broken lol)
+  realforest2001:
+  - rscdel: Removed duplicate crafting entry for blacksteel axe.
