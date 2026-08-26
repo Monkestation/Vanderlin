@@ -254,12 +254,6 @@
 	required_material = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/armor/chainmail/iron
 
-/datum/anvil_recipe/armor/iron/hauberk
-	name = "Hauberk (+Bar)"
-	required_material = /obj/item/ingot/iron
-	additional_items = list(/obj/item/ingot/iron)
-	created_item = /obj/item/clothing/armor/chainmail/hauberk/iron
-
 /datum/anvil_recipe/armor/iron/cuirass
 	name = "Iron Cuirass"
 	required_material = /obj/item/ingot/iron
@@ -643,7 +637,7 @@
 	output_amount = 2
 
 /datum/anvil_recipe/armor/steel/hauberk
-	name = "Hauberk (+Bar)"
+	name = "Steel Hauberk (+Bar)"
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/chainmail/hauberk
 	craftdiff = 3
