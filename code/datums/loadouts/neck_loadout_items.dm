@@ -12,8 +12,7 @@
 
 	triumph_cost_permanent = 25
 
-/datum/loadout_item/bell_collar
-	name = "Bell Collar"
+/datum/loadout_item/bell_collar  
 	item_path = /obj/item/clothing/neck/bellcollar
 	ui_category = "Neck"
 

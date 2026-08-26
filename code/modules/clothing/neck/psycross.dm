@@ -251,10 +251,46 @@
 	qdel(src)
 
 /obj/item/clothing/neck/psycross/silver/divine/pestra
-	name = "amulet of Pestra"
-	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate."
+	name = "Amulet of Pestra"
+	desc = "When pure, alcohol is best used as a cleanser of wounds and a cleanser of the palate. The amulet feels hollow, and you can barely see a tiny cap at the top."
+	icon = 'icons/roguetown/clothing/neck.dmi'
 	icon_state = "pestra"
-	resistance_flags = FIRE_PROOF
+	var/amount_per_transfer_from_this = 3
+	var/possible_transfer_amounts = list(3)
+	var/volume = 15
+	dropshrink = 0.8
+	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS|ITEM_SLOT_MOUTH
+	obj_flags = CAN_BE_HIT
+	var/spillable = FALSE
+	var/closed = TRUE
+	var/reagent_flags = null
+	w_class = WEIGHT_CLASS_SMALL
+	grid_width = 32
+	grid_height = 32
+	var/drinksounds = list('sound/items/drink_bottle (1).ogg','sound/items/drink_bottle (2).ogg')
+	var/fillsounds = list('sound/items/fillcup.ogg')
+	var/poursounds = list('sound/items/fillbottle.ogg')
+
+/obj/item/clothing/neck/psycross/silver/divine/pestra/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver) //while I could make it contain ethanol, I want it to be a flask wich can be filled with anything and refilled, so more customization in fluid is good
+
+/obj/item/clothing/neck/psycross/silver/divine/pestra/attack_self_secondary(mob/user, list/modifiers)
+	closed = !closed
+	user.changeNext_move(CLICK_CD_RAPID)
+	if(closed)
+		reagent_flags &= ~TRANSFERABLE
+		reagents.flags = reagent_flags
+		desc = "A flask with a screwcap."
+		balloon_alert(user, "I screw the cap back on.")
+		spillable = FALSE
+	else
+		reagent_flags |= TRANSFERABLE
+		reagents.flags = reagent_flags
+		balloon_alert(user, "I silently screw the cap off.")
+		desc = "An open flask, easy to drink quickly."
+		spillable = TRUE
+
 
 /obj/item/clothing/neck/psycross/silver/divine/malum
 	name = "amulet of Malum"

@@ -1,6 +1,7 @@
 #define ORISON_FILL /datum/intent/orison/fill
 #define ORISON_TOUCH /datum/intent/orison/touch
 #define ORISON_LIGHT /datum/intent/orison/light
+#define ORISON_ETHANOL /datum/intent/orison/fill/ethanol
 
 /datum/intent/orison
 	noaa = TRUE
@@ -23,6 +24,11 @@
 	reach = 1
 	name = "light"
 	icon_state = "inlight"
+
+/datum/intent/orison/fill/ethanol
+	reach = 1
+	name = "fill"
+	icon_state = "infill"
 
 /datum/action/cooldown/spell/undirected/touch/orison
 	name = "Orison"
@@ -56,6 +62,8 @@
 			thaumaturgy(victim, caster)
 		if(ORISON_LIGHT)
 			cast_light(victim, caster)
+		if(ORISON_ETHANOL)
+			create_ethanol(victim, caster)
 	return FALSE
 
 /datum/action/cooldown/spell/undirected/touch/orison/cast_on_secondary_hand_hit(obj/item/melee/touch_attack/hand, atom/victim, mob/living/carbon/caster, list/modifiers)
@@ -196,6 +204,54 @@
 	desc = "The fundamental teachings of theology return to you:\n \
 		<b>Fill</b>: Beseech your Divine to create a small quantity of holy water in a container that you touch for some devotion."
 	possible_item_intents = list(ORISON_FILL)
+
+/datum/action/cooldown/spell/undirected/touch/orison/pestra
+	name = "Pestran Orison"
+
+	hand_path = /obj/item/melee/touch_attack/orison/pestra
+	charges = 3
+
+/obj/item/melee/touch_attack/orison/pestra
+	name = "Pestras Fang"
+	desc = "The fundamental teachings of the pestran sect returns to you, generate pure ethanol using devotion, or cut and seal flesh."
+	possible_item_intents = list(ORISON_ETHANOL) //pure alcohol because alcoholism and disinfectant
+	tool_behaviour = TOOL_SAW && TOOL_CAUTERY
+
+/datum/action/cooldown/spell/undirected/touch/orison/proc/create_ethanol(atom/victim, mob/living/carbon/human/user)
+	if(victim.is_refillable())
+		if(victim.reagents.holder_full())
+			to_chat(user, span_warning("[victim] is full."))
+			return FALSE
+
+		user.visible_message(
+			span_info("[user] closes [user.p_their()] eyes in prayer and extends a hand over [victim] as ethanol begins to stream from [user.p_their()] fingertips..."),
+			span_notice("I utter forth a plea to [user.patron.name] for succour, and hold my hand out above [victim]...")
+		)
+
+		var/holy_skill = GET_MOB_SKILL_VALUE_OLD(user, associated_skill)
+		var/drip_speed = 5.6 SECONDS - (holy_skill * 8)
+		var/fatigue_spent = 0
+		var/fatigue_used = max(3, holy_skill)
+		while(do_after(user, drip_speed, victim))
+			if(victim.reagents.holder_full() || (user.cleric.devotion - fatigue_used <= 0))
+				break
+
+			var/ethanol_qty = max(1, holy_skill) + 1
+			var/list/water_contents = list(/datum/reagent/consumable/ethanol = ethanol_qty)
+			var/datum/reagents/reagents_to_add = new()
+			reagents_to_add.add_reagent_list(water_contents)
+			reagents_to_add.trans_to(victim, reagents_to_add.total_volume, transfered_by = user, method = INGEST)
+
+			fatigue_spent += fatigue_used
+			user.adjust_stamina(fatigue_used)
+			user.cleric?.update_devotion(-1)
+
+			if(prob(80))
+				playsound(user, 'sound/items/fillcup.ogg', 55, TRUE)
+
+		handle_xp(user, fatigue_spent)
+		return TRUE
+
 
 /datum/reagent/water/blessed
 	name = "blessed water"
@@ -344,3 +400,4 @@
 #undef ORISON_FILL
 #undef ORISON_TOUCH
 #undef ORISON_LIGHT
+#undef ORISON_ETHANOL
