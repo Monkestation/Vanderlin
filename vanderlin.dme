@@ -4347,6 +4347,7 @@
 #include "code\modules\spells\spell_types\pointed\blood\dark_whispers.dm"
 #include "code\modules\spells\spell_types\pointed\blood\conjure\blood_pearl.dm"
 #include "code\modules\spells\spell_types\pointed\blood\conjure\blood_poison.dm"
+#include "code\modules\spells\spell_types\pointed\blood\list_target\take_student.dm"
 #include "code\modules\spells\spell_types\pointed\blood\projectile\blood_lightning.dm"
 #include "code\modules\spells\spell_types\pointed\blood\projectile\blood_shard.dm"
 #include "code\modules\spells\spell_types\pointed\blood\projectile\blood_steal.dm"
