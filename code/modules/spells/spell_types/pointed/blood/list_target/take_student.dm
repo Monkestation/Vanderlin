@@ -45,9 +45,9 @@
 		for(var/mob/living/carbon/human/nearby_human in oview(target_radius, center))
 			if(nearby_human == owner)
 				continue
-			if(HAS_TRAIT(nearby_human, TRAIT_VITAE_USER) || HAS_TRAIT(nearby_human, TRAIT_BLOOD_MAGIC_BLOCKED) || HAS_TRAIT(nearby_human, TRAIT_BLOOD_STUDENT))
+			if(HAS_TRAIT(nearby_human, TRAIT_INQUISITION) || nearby_human.cleric || nearby_human.stat)
 				continue
-			if(nearby_human.cleric || nearby_human.stat)
+			if(HAS_TRAIT(nearby_human, TRAIT_VITAE_USER) || HAS_TRAIT(nearby_human, TRAIT_BLOOD_MAGIC_BLOCKED) || HAS_TRAIT(nearby_human, TRAIT_BLOOD_STUDENT))
 				continue
 			things += nearby_human
 	if(length(current_students))
@@ -119,6 +119,7 @@
 	apprentice.add_spell(/datum/action/cooldown/spell/projectile/blood_steal, mastery_spell = TRUE)
 	apprentice.adjust_form_mastery_points(3, specific_form = FORM_BLOOD)
 	apprentice.adjust_technique_mastery_points(2)
+	apprentice.hud_used?.set_bloody_bloodpool()
 
 /datum/action/cooldown/spell/undirected/list_target/teach_blood_magic/proc/revoke_apprenticeship(mob/living/carbon/human/apprentice, death = FALSE)
 	current_students -= apprentice.weak_reference
