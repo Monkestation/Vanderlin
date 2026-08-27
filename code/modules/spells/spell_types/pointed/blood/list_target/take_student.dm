@@ -1,15 +1,26 @@
 #define APPRENTICE_SPLITTER "--- APPRENTICES ---"
 
+/datum/attribute_holder/sheet/job/blood_student
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 2,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/magic/blood = list(10, 10),
+	)
+
 /datum/action/cooldown/spell/undirected/list_target/teach_blood_magic
-	name = "Take Student"
-	desc = "Latch onto the mind of one who is nearby, weaving a particular thought into their mind."
-	button_icon_state = "encode_thought"
+	name = "Blood Apprenticeship"
+	desc = "Teach a student how to wield Blood Magic.<br>This forms a powerful bond between Apprentice and Tutor, \
+	should you have cause to revoke that bond their connection to Blood Magic will be forever severed.\
+	<br><br>You cannot apprentice a servant of the gods, nor any who already wield the power of Vitae."
+	button_icon_state = "dream_summon"
 	sound = 'sound/magic/PSY.ogg'
 
 	required_form = null
 
 	cooldown_time = 25 SECONDS
 	spell_cost = 0
+	spell_type = SPELL_BLOOD
 
 	choose_target_message = "Choose who to teach."
 	target_radius = 3
@@ -28,14 +39,13 @@
 		revoke_apprenticeship(apprentice, TRUE)
 	. = ..()
 
-
 /datum/action/cooldown/spell/undirected/list_target/teach_blood_magic/get_list_targets(atom/center, target_radius = 7)
 	var/list/things = list()
 	if(target_radius)
 		for(var/mob/living/carbon/human/nearby_human in oview(target_radius, center))
 			if(nearby_human == owner)
 				continue
-			if(HAS_TRAIT(nearby_human, TRAIT_VITAE_USER))
+			if(HAS_TRAIT(nearby_human, TRAIT_VITAE_USER) || HAS_TRAIT(nearby_human, TRAIT_BLOOD_MAGIC_BLOCKED) || HAS_TRAIT(nearby_human, TRAIT_BLOOD_STUDENT))
 				continue
 			if(nearby_human.cleric || nearby_human.stat)
 				continue
@@ -91,24 +101,35 @@
 
 /datum/action/cooldown/spell/undirected/list_target/teach_blood_magic/proc/offer_apprenticeship(mob/living/carbon/human/apprentice)
 	if(tgui_alert(apprentice, "You have been offered an Apprenticeship in Blood Magic, do you accept?", "Seek Power", DEFAULT_INPUT_CONFIRMATIONS) != CHOICE_CONFIRM)
-		to_chat(owner, span_warning("[apprentice] has refused your offer of apprenticeship!"))
+		to_chat(owner, span_warning("[apprentice.real_name] has refused your offer of apprenticeship!"))
 		return FALSE
-	to_chat(owner, span_warning("[apprentice] has accepted your offer of apprenticeship!"))
+	to_chat(owner, span_warning("[apprentice.real_name] has accepted your offer of apprenticeship!"))
+	to_chat(apprentice, span_warning("You have accepted an apprenticeship in Blood Magic under [owner.real_name]!"))
 	current_students |= WEAKREF(apprentice)
 	RegisterSignal(apprentice, COMSIG_BLOOD_ASCENSION, PROC_REF(unlink_apprentice), apprentice, TRUE)
-	ADD_TRAIT(apprentice, TRAIT_BLOOD_STUDENT, owner)
-	ADD_TRAIT(apprentice, TRAIT_VITAE_USER, owner)
+	ADD_TRAIT(apprentice, TRAIT_BLOOD_STUDENT, REF(owner))
+
+	to_chat(apprentice, span_bloody("Your tutor will teach you the ways of Blood Magic and its limitations.\
+	<br>Heed them well for if your apprenticeship is revoked you will be marked, never able wield Blood Magic again.\
+	<br>It may be possible for you to break the chains of your apprenticeship with sufficient work and strength..."))
+
+	apprentice.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_student)
+
+	apprentice.add_spell(/datum/action/cooldown/spell/status/blood_sight, mastery_spell = TRUE)
+	apprentice.add_spell(/datum/action/cooldown/spell/projectile/blood_steal, mastery_spell = TRUE)
+	apprentice.adjust_form_mastery_points(3, specific_form = FORM_BLOOD)
+	apprentice.adjust_technique_mastery_points(2)
 
 /datum/action/cooldown/spell/undirected/list_target/teach_blood_magic/proc/revoke_apprenticeship(mob/living/carbon/human/apprentice, death = FALSE)
 	current_students -= apprentice.weak_reference
 	UnregisterSignal(apprentice, COMSIG_BLOOD_ASCENSION)
-	REMOVE_TRAIT(apprentice, TRAIT_BLOOD_STUDENT, owner)
-	REMOVE_TRAIT(apprentice, TRAIT_VITAE_USER, owner)
+	REMOVE_TRAIT(apprentice, TRAIT_BLOOD_STUDENT, REF(owner))
 	if(death)
 		to_chat(apprentice, span_userdanger("The connection to my Tutor has shattered! I've lost my connection to Blood Magic!"))
 		return TRUE
 	to_chat(apprentice, span_userdanger("My tutor has revoked my access to Blood Magic!"))
 	to_chat(owner, span_warning("I revoke my apprentice's access to Blood Magic."))
+	ADD_TRAIT(apprentice, TRAIT_BLOOD_MAGIC_BLOCKED, REF(owner))
 	return TRUE
 
 /datum/action/cooldown/spell/undirected/list_target/teach_blood_magic/proc/unlink_apprentice(datum/source, mob/living/carbon/human/apprentice, ascension = FALSE)

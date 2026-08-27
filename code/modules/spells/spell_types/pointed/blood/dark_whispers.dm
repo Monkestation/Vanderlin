@@ -46,10 +46,9 @@
 		reset_spell_cooldown()
 		return
 
-	handle_message(cast_on)
+	to_chat(owner, span_bloody("I impress a message upon [cast_on]'s blood!"))
+	to_chat(owner, span_bloody("Sent: '[message]'"))
 
-/datum/action/cooldown/spell/dark_whispers/proc/handle_message(mob/living/cast_on)
-	to_chat(owner, "I impress a message upon [cast_on]'s blood!")
 	log_directed_talk(owner, cast_on, message, LOG_SAY, name)
 	cast_on.playsound_local(cast_on, sound, 100, TRUE)
 	to_chat(cast_on, "[span_bloody("Something deep within you seems to speak into your mind: </span><font color=#ff4646>\"[message]...\"</font>")]")

@@ -1,5 +1,5 @@
 #define BLOOD_CURSE_BENEFIT 0
-#define BLOOD_CURSE_MINDLESS 1
+#define BLOOD_CURSE_WEAKENED 1
 #define BLOOD_CURSE_AFFECTED 2
 #define BLOOD_CURSE_MAX_STACKS 6
 #define BLOOD_CURSE_COOLDOWN (3 SECONDS)
@@ -31,8 +31,8 @@
 /datum/enchantment/bloodcurse/proc/get_curse_effect(mob/target)
 	if(HAS_TRAIT(target, TRAIT_VITAE_USER))
 		return BLOOD_CURSE_BENEFIT
-	if(!ishuman(target) || !target.mind)
-		return BLOOD_CURSE_MINDLESS
+	if(!ishuman(target) || !target.mind || HAS_TRAIT(target, TRAIT_BLOOD_STUDENT))
+		return BLOOD_CURSE_WEAKENED
 	return BLOOD_CURSE_AFFECTED
 
 /datum/enchantment/bloodcurse/proc/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
@@ -51,7 +51,7 @@
 	var/vitae_gain = 0
 
 	switch(curse_effect)
-		if(BLOOD_CURSE_MINDLESS, BLOOD_CURSE_AFFECTED)
+		if(BLOOD_CURSE_WEAKENED, BLOOD_CURSE_AFFECTED)
 			to_chat(target, span_userdanger("My blood boils as my strength is sapped!"))
 			target.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 			vitae_gain += 1
@@ -131,7 +131,7 @@
 	is_stunned = TRUE
 	to_chat(owner, span_userdanger("The blood curse overwhelms me!"))
 
-	if(curse_type == BLOOD_CURSE_MINDLESS)
+	if(curse_type == BLOOD_CURSE_WEAKENED)
 		// Mindless mobs have lighter consequences.
 		owner.Knockdown(30)
 		owner.Stun(15)
@@ -165,7 +165,7 @@
 		desc = span_warning("I am blood cursed. [max_stacks - stacks] more contact[max_stacks - stacks == 1 ? "" : "s"] will overwhelm me!")
 
 #undef BLOOD_CURSE_BENEFIT
-#undef BLOOD_CURSE_MINDLESS
+#undef BLOOD_CURSE_WEAKENED
 #undef BLOOD_CURSE_AFFECTED
 #undef BLOOD_CURSE_MAX_STACKS
 #undef BLOOD_CURSE_COOLDOWN

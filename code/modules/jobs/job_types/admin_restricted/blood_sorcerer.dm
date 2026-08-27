@@ -57,6 +57,7 @@
 	)
 
 	spells = list(
+		/datum/action/cooldown/spell/undirected/list_target/teach_blood_magic,
 		/datum/action/cooldown/spell/status/blood_sight,
 		/datum/action/cooldown/spell/projectile/blood_steal,
 		/datum/action/cooldown/spell/projectile/blood_bolt,

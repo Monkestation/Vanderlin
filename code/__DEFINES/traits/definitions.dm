@@ -515,6 +515,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_BLOOD_MAGE "Blood Mage"
 #define TRAIT_BLOOD_SORCERER "Blood Sorcerer"
 #define TRAIT_BLOOD_STUDENT "Blood Student"
+#define TRAIT_BLOOD_MAGIC_BLOCKED "Sanguine Block"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise

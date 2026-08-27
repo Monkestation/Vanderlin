@@ -969,6 +969,10 @@
 				if(feedback)
 					caster.balloon_alert(caster, "need more vitae to cast!")
 				return FALSE
+			if(HAS_TRAIT(caster, TRAIT_BLOOD_MAGIC_BLOCKED))
+				if(feedback)
+					caster.balloon_alert(caster, "blocked from blood magic!")
+				return FALSE
 
 			return TRUE
 

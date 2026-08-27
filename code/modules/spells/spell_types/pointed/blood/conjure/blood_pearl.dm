@@ -69,7 +69,7 @@
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/human_user = user
-	if(!(HAS_TRAIT(human_user, TRAIT_VITAE_USER)))
+	if(!HAS_TRAIT(human_user, TRAIT_VITAE_USER) && !HAS_TRAIT(human_user, TRAIT_BLOOD_STUDENT))
 		to_chat(human_user, span_danger("I do not know what to do with this."))
 		return
 	var/list/options_list = list(PEARL_OPTION_DRAW)

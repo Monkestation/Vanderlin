@@ -283,7 +283,7 @@
 	if(form == FORM_BLOOD)
 		var/mob/living/carbon/user = get_mastery_user()
 
-		if(user && !HAS_TRAIT(user, TRAIT_VITAE_USER))
+		if(user && !HAS_TRAIT(user, TRAIT_VITAE_USER) && !HAS_TRAIT(user, TRAIT_BLOOD_STUDENT))
 			to_chat(user, span_bloody("I am not an adept enough blood mage and cannot wield this unholy power."))
 			return FALSE
 		if(!user && !get_form_level(FORM_BLOOD))//Blood books can get more blood points.

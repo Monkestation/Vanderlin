@@ -6471,6 +6471,8 @@
 /obj/item/reagent_containers/glass/bottle/healthpot,
 /obj/item/reagent_containers/glass/bottle/healthpot,
 /obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/bloodpot,
+/obj/item/reagent_containers/glass/bottle/bloodpot,
 /turf/open/floor/carpet,
 /area/indoors/vampire_manor)
 "MF" = (
@@ -6521,11 +6523,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"Nd" = (
-/obj/structure/mannequin/male,
-/obj/item/clothing/shirt/robe/magus,
-/turf/open/floor/wood,
-/area)
 "Ne" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/naturalstone,
@@ -7770,6 +7767,16 @@
 "UB" = (
 /obj/structure/table/wood/plain_alt,
 /obj/structure/fluff/walldeco/maidendrape,
+/obj/item/ingot/bloodsteel{
+	pixel_y = 10;
+	pixel_x = -4
+	},
+/obj/item/ingot/bloodsteel{
+	pixel_y = 5
+	},
+/obj/item/ingot/bloodsteel{
+	pixel_x = 4
+	},
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
 "UF" = (
@@ -15342,7 +15349,7 @@ Gh
 hn
 pj
 fF
-Nd
+BJ
 Gl
 BJ
 JD
