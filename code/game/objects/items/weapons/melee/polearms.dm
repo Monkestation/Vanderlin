@@ -295,6 +295,7 @@
 	force = DAMAGE_SPEARPLUS + 2
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silver
+	melt_amount = null
 	sellprice = 60
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_SILVER
@@ -398,6 +399,7 @@
 
 	gripsprite = FALSE
 	smeltresult = /obj/item/ingot/iron
+	melt_amount = null
 	throw_speed = 2
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 	item_weight = 1.5 KILOGRAMS
