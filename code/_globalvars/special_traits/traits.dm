@@ -855,7 +855,7 @@
 	allowed_jobs = list(/datum/job/lord)
 	weight = 25 //Should be fine.
 
-/datum/special_trait/thinker/on_apply(mob/living/carbon/human/character, silent)
+/datum/special_trait/chosen/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/chosen)
 	switch(character.patron?.type)
 		if(/datum/patron/divine/astrata)
