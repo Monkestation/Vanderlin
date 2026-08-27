@@ -196,7 +196,7 @@
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	sewrepair = null
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_flags = DROPDEL
 	repair_time = 15 SECONDS
 

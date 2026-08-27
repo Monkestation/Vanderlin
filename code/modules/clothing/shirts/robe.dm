@@ -20,7 +20,7 @@
 
 	armor_type = /datum/armor/minimal
 	prevent_crits = list(BCLASS_TWIST)
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 
 /obj/item/clothing/shirt/robe/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

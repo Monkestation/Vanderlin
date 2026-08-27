@@ -192,7 +192,7 @@
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage < SHOCK_STAGE_4))  // Crossed stage 4
 		// emote("freezes and goes limp.", intentional = TRUE)
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-			Immobilize(0.5 SECONDS)
+			Immobilize(1 SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage >= SHOCK_STAGE_4))
 		if(DT_PROB(3, delta_time))

@@ -30,7 +30,6 @@
 	emote_taunt = list("howls")
 	speak_emote = list("clatters")
 
-	faction = list("mimic", "hostile")
 	wander = 0
 	stat_attack = UNCONSCIOUS
 
