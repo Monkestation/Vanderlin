@@ -1,4 +1,0 @@
-author: "CheffieGithub"
-delete-after: True
-changes:
-  - bugfix: "Farm animals won't kill eachother"
