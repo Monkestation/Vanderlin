@@ -115,6 +115,8 @@
 	. = ..()
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
+	C.grant_language(/datum/language/pharynx)
+
 
 /datum/species/medicator/on_species_loss(mob/living/carbon/human/C, datum/species/new_species, pref_load)
 	. = ..()

@@ -206,6 +206,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/pestra)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, JOB_TRAIT)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			spawned.grant_language(/datum/language/pharynx)
 		if(/datum/patron/divine/eora)
 			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, JOB_TRAIT)

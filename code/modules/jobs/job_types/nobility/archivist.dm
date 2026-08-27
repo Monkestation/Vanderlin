@@ -46,7 +46,8 @@
 		/datum/language/newpsydonic,
 		/datum/language/oldpsydonic,
 		/datum/language/orcish,
-		/datum/language/deepspeak
+		/datum/language/deepspeak,
+		/datum/language/pharynx,
 	)
 
 	mind_traits = list(

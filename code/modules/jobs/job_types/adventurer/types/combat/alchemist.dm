@@ -36,6 +36,9 @@
 		TRAIT_FORAGER,
 		TRAIT_DEADNOSE
 	)
+	languages = list(
+		/datum/language/pharynx,
+	)
 
 /datum/outfit/combat/alchemist
 	name = "Alchemist (Adventurer)"

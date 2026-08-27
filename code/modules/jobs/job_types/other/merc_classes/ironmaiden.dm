@@ -33,6 +33,9 @@
 		TRAIT_DEADNOSE,
 		TRAIT_STEELHEARTED
 	)
+	languages = list(
+		/datum/language/pharynx,
+	)
 
 /datum/job/advclass/mercenary/ironmaiden/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

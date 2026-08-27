@@ -60,6 +60,9 @@
 		TRAIT_FORAGER,
 		TRAIT_EMPATH
 	)
+	languages = list(
+		/datum/language/pharynx,
+	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/clinicapprentice
 	attribute_sheet_child = /datum/attribute_holder/sheet/job/clinicapprentice/child

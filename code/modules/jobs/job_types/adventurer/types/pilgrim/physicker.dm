@@ -31,6 +31,10 @@
 		TRAIT_DEADNOSE
 	)
 
+	languages = list(
+		/datum/language/pharynx,
+	)
+
 /datum/outfit/pilgrim/physicker
 	name = "Physicker (Pilgrim)"
 	mask = /obj/item/clothing/face/phys

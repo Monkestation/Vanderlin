@@ -19,6 +19,8 @@
 		/datum/attribute/skill/labor/farming = 30,
 	)
 
+
+
 /datum/attribute_holder/sheet/job/feldsher/old
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
@@ -90,6 +92,10 @@
 
 	)
 	book_type = /obj/item/recipe_book/medical
+
+	languages = list(
+		/datum/language/pharynx,
+	)
 
 /datum/outfit/feldsher
 	shoes = /obj/item/clothing/shoes/shortboots
