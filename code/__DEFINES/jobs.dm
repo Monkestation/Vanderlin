@@ -51,6 +51,7 @@
 #define FACTION_NONE "None"
 #define FACTION_NEUTRAL	"Neutral"
 #define FACTION_HOSTILE	"Hostile"
+#define FACTION_SUMMONED "Summoned"
 
 #define FACTION_MATTHIOS "Matthios"
 #define FACTION_ISLAND "Island"
