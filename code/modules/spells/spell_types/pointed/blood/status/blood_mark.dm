@@ -22,6 +22,16 @@
 	status_effect = /datum/status_effect/debuff/blood_mark
 	self_cast_possible = FALSE
 
+/**
+ * Change this to be a spell with multiple types of mark.
+ *
+ * Curse - Current function
+ * Tag - Locate them while it lasts ? Scrying
+ * Anchor/Move - Either move to their location or have them move to you
+ * Guard - Protect from Bloodcurse ? other protection
+ * Friend - Toggled mark, add to FACTION_BLOOD
+ */
+
 /datum/action/cooldown/spell/status/blood_mark/is_valid_target(atom/cast_on)
 	. = ..()
 	if(!ishuman(cast_on))
