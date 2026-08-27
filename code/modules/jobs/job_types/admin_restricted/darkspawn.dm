@@ -116,7 +116,7 @@
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/darkspawn()
 		spawned.dna.species.organs[ORGAN_SLOT_EYES] = /obj/item/organ/eyes/night_vision/nightmare
 
-	grant_nightmare_eyes()
+	spawned.grant_nightmare_eyes()
 
 /datum/outfit/darkspawn
 	name = JOB_ADMIN_DARKSPAWN
