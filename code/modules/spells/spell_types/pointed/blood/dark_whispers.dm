@@ -40,7 +40,7 @@
 
 /datum/action/cooldown/spell/dark_whispers/cast(mob/living/cast_on)
 	. = ..()
-	message = tgui_input_text(owner, "What thought do you wish to weave to [cast_on]?", "[src]", timeout=20 SECONDS)
+	message = tgui_input_text(owner, "What thought do you wish to weave to [cast_on]?", "[src]")
 
 	if(!message)
 		reset_spell_cooldown()
