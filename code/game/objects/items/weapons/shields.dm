@@ -24,7 +24,7 @@
 	var/coverage = 90
 	parrysound = "parrywood"
 	attacked_sound = "parrywood"
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_SHIELD
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
@@ -103,7 +103,7 @@
 	desc = "A simple, emblazoned round wooden shield with leather padding. \nCan exceptionally block attacks, but is more brittle than metal ones."
 	icon_state = "woodsh"
 	coverage = 60
-	max_integrity = INTEGRITY_STANDARD - 25
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_IMPROV
 	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/shield/wood/choose_design(proc_value, mob/user)
@@ -164,7 +164,7 @@
 	coverage = 65
 	wlength = WLENGTH_NORMAL
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_IRON
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	item_weight = 4 KILOGRAMS
@@ -196,7 +196,7 @@
 	flags_1 = CONDUCT_1
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_BRONZE
 	melting_material = /datum/material/bronze
 	sellprice = 150 // A noble collector would love to get their hands on one of these
 	item_weight = 4 KILOGRAMS
@@ -222,7 +222,7 @@
 	flags_1 = CONDUCT_1
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_STEEL
 	sellprice = 30
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
@@ -278,7 +278,7 @@
 	icon_state = "psyshield"
 	wdefense = ULTMATE_PARRY + 3
 	coverage = 50
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_SILVER
 	item_weight = 5 KILOGRAMS
 
 /obj/item/weapon/shield/tower/metal/psy/Initialize(mapload)
@@ -294,7 +294,7 @@
 	wdefense = ULTMATE_PARRY
 	wbalance = HARD_TO_DODGE // small, tiny shield
 	coverage = 10
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_IRON
 
 	resistance_flags = FIRE_PROOF
 	attacked_sound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
@@ -317,7 +317,7 @@
 	desc = "A buckler decorated with gold made specifically for the Captain alongside their armor. To bring order to the lands with every blow deflected."
 	icon_state = "capbuckler"
 	sellprice = 60
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_STEEL
 	melting_material = /datum/material/steel
 	wdefense = 7
 	item_weight = 0.7 KILOGRAMS
@@ -331,7 +331,7 @@
 	coverage = 60
 	attacked_sound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
 	parrysound = list('sound/combat/parry/shield/towershield (1).ogg','sound/combat/parry/shield/towershield (2).ogg','sound/combat/parry/shield/towershield (3).ogg')
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STATIC_300
 	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/shield/heater/choose_design(proc_value, mob/user)
