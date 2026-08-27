@@ -16443,12 +16443,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep)
-"gXf" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
-/obj/item/clothing/head/peaceflower,
-/turf/open/floor/dirt/road,
-/area/indoors/town/church/crypt)
 "gXl" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
@@ -28287,18 +28281,6 @@
 /area/indoors/town/keep/gate)
 "lNj" = (
 /obj/structure/closet/dirthole/closed,
-/obj/item/clothing/head/peaceflower{
-	pixel_x = -7;
-	pixel_y = -4
-	},
-/obj/structure/flora/hotspring_rocks/small/five{
-	pixel_x = 10;
-	pixel_y = -3
-	},
-/obj/structure/flora/hotspring_rocks/small/three{
-	pixel_x = 12;
-	pixel_y = -10
-	},
 /obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt,
 /area/outdoors/town/keep)
@@ -135300,7 +135282,7 @@ uLU
 uLU
 szz
 dkp
-gXf
+aZZ
 vze
 szz
 dkp
