@@ -106,7 +106,7 @@
 	item_weight = 16 KILOGRAMS
 
 /obj/item/clothing/armor/plate/ancient/vampire
-	name = "ancient plate"
+	name = "ancient ceremonial plate"
 	desc = "A ornate, ceremonial enchanted gilbranze plate suit of considerable age."
 	icon_state = "vplate"
 
