@@ -104,6 +104,7 @@
 		/datum/language/deepspeak,
 		/datum/language/thievescant
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/admin/oracle/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

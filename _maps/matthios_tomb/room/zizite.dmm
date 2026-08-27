@@ -103,7 +103,7 @@
 "eJ" = (
 /obj/item/weapon/sword/sabre/noc,
 /obj/item/clothing/neck/psycross/zizo,
-/obj/item/clothing/shirt/robe/necromancer{
+/obj/item/clothing/shirt/robe/magus{
 	pixel_y = 2;
 	pixel_x = 8
 	},
@@ -265,9 +265,7 @@
 /turf/closed/wall/mineral/decostone/end,
 /area/under/tomb/indoors/church)
 "pB" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 2
-	},
+/obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
 "qa" = (
@@ -311,12 +309,6 @@
 /obj/item/bedsheet/pelt,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
-"sc" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 2
-	},
-/turf/open/floor/church/violet,
-/area/under/tomb/indoors/church)
 "sm" = (
 /mob/living/carbon/human/species/demihuman/base/skilled/light_gear,
 /turf/open/floor/carpet/lord/corner{
@@ -330,7 +322,7 @@
 /turf/open/openspace,
 /area/under/tomb)
 "sB" = (
-/obj/item/clothing/shirt/robe/necromancer{
+/obj/item/clothing/shirt/robe/magus{
 	pixel_y = 2;
 	pixel_x = -6
 	},
@@ -340,7 +332,7 @@
 /area/under/tomb/indoors/magic)
 "sR" = (
 /obj/item/broken_phylactery,
-/obj/item/clothing/shirt/robe/necromancer,
+/obj/item/clothing/shirt/robe/magus,
 /obj/item/rope/chain,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
@@ -380,7 +372,7 @@
 /area/under/tomb/indoors/church)
 "vc" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/clothing/shirt/robe/necromancer{
+/obj/item/clothing/shirt/robe/magus{
 	pixel_y = 8
 	},
 /turf/open/floor/church/violet,
@@ -409,9 +401,7 @@
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "xn" = (
-/obj/effect/dungeon_directional_helper/west{
-	dir = 4
-	},
+/obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/church/violet,
 /area/under/tomb)
 "xC" = (
@@ -711,7 +701,7 @@
 "QZ" = (
 /obj/item/broken_phylactery,
 /obj/item/rope/chain,
-/obj/item/clothing/shirt/robe/necromancer,
+/obj/item/clothing/shirt/robe/magus,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
 "RX" = (
@@ -1568,7 +1558,7 @@ Hw
 Hw
 OF
 JG
-GT
+JG
 JG
 OF
 Hw
@@ -1906,7 +1896,7 @@ dm
 eo
 qy
 VC
-sc
+Mw
 "}
 (14,1,2) = {"
 Hw
@@ -2216,7 +2206,7 @@ Hw
 Hw
 Cc
 JG
-xn
+JG
 JG
 Cc
 Hw

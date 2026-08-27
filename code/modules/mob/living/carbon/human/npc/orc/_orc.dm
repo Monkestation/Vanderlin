@@ -148,17 +148,7 @@
 			headdy.icon_state = "[src.dna.species.id]_head"
 	src.grant_language(/datum/language/common)
 
-	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
-	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-
-	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
-	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
-	LE.switch_side(LEFT_SIDE)
-
-	LE.Insert(src)
-	RE.Insert(src)
+	grant_nightmare_eyes()
 
 	src.underwear = "Nude"
 	if(length(quirks))
@@ -446,7 +436,7 @@
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord
 		if(3)
-			r_hand = /obj/item/weapon/whip/antique
+			r_hand = /obj/item/weapon/whip/bronze
 			l_hand = /obj/item/weapon/sword/short/iron
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord

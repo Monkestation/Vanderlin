@@ -32,8 +32,8 @@
 	current_blood = 5
 	blood_req = 0.5
 	oxygen_req = 0.5
-	nutriment_req = 0.15
-	hydration_req = 0.15
+	nutriment_req = 0.075 * RATE_OF_HUNGER_GLOBAL
+	hydration_req = 0.075 * RATE_OF_THIRST_GLOBAL
 
 	var/sight_flags = 0
 	var/see_in_dark = 8

@@ -16,8 +16,8 @@
 	max_blood_storage = 100
 	current_blood = 100
 	oxygen_req = 0.25
-	nutriment_req = 0.09
-	hydration_req = 0.03
+	nutriment_req = 0.09 * RATE_OF_HUNGER_GLOBAL
+	hydration_req = 0.03 * RATE_OF_THIRST_GLOBAL
 
 	/// How much blood we gush when torn. Multiplied by damage/maxHealth
 	var/blood_flow = ARTERIAL_BLOOD_FLOW
@@ -76,8 +76,11 @@
 /obj/item/organ/artery/handle_blood(delta_time, times_fired, in_bleedout)
 	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
 	var/failer = is_failing_without_bleedout()
-	if(failer || in_bleedout)
+	var/cpr_active = (world.time < owner?.pmup_heart_grace)
+	if((failer || in_bleedout)  && !cpr_active)
 		return
+	if(cpr_active)
+		arterial_efficiency *= 2 //sure
 	current_blood = min(current_blood + (2.5 * delta_time) * (max(1, arterial_efficiency)/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
 
 /obj/item/organ/artery/tear()

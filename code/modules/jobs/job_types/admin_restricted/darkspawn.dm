@@ -83,6 +83,7 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_SORCERER,
 		TRAIT_NOPAIN,
+		TRAIT_VITAE_USER,
 	)
 
 	languages = list(
@@ -95,6 +96,7 @@
 		/datum/language/thievescant,
 		/datum/language/undead
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/admin/darkspawn/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -114,17 +116,7 @@
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/darkspawn()
 		spawned.dna.species.organs[ORGAN_SLOT_EYES] = /obj/item/organ/eyes/night_vision/nightmare
 
-	var/list/eye_list = spawned.getorganslotlist(ORGAN_SLOT_EYES)
-	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.Remove(spawned,1)
-		QDEL_NULL(eyes)
-
-	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
-	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
-	LE.switch_side(LEFT_SIDE)
-
-	LE.Insert(spawned)
-	RE.Insert(spawned)
+	spawned.grant_nightmare_eyes()
 
 /datum/outfit/darkspawn
 	name = JOB_ADMIN_DARKSPAWN

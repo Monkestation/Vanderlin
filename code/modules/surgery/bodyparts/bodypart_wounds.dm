@@ -126,6 +126,13 @@
 	if(!bleeds)
 		return 0
 
+	var/tourniquet_mod = 1
+	if(tourniquet)
+		if(tourniquet.bleed_mod)
+			tourniquet_mod = tourniquet.bleed_mod
+		else
+			return 0
+
 	var/bleed_rate = 0
 	for(var/datum/wound/wound as anything in wounds)
 		bleed_rate += wound.bleed_rate
@@ -152,6 +159,7 @@
 	if(our_state & SURGERY_VESSELS_CLAMPED)
 		bleed_rate /= 2
 
+	bleed_rate *= tourniquet_mod
 	bleed_rate = max(round(bleed_rate, 0.1), 0)
 
 	return bleed_rate
@@ -216,6 +224,9 @@
 				wounding_type = WOUND_INTENSE_BURN
 
 	dam *= skeletonized_mod(wounding_type)
+
+	if(splinted && (wounding_type & (WOUND_BLUNT|WOUND_SLASH|WOUND_PUNCTURE)) && dam >= splint_item.break_threshold)
+		remove_splint(null, broken = TRUE)
 
 	if(wounding_type & WOUND_NONE)
 		return

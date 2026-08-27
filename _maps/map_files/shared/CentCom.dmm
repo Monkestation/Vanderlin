@@ -6523,7 +6523,7 @@
 /area/outdoors/bog/inhumen_camp)
 "Nd" = (
 /obj/structure/mannequin/male,
-/obj/item/clothing/shirt/robe/necromancer,
+/obj/item/clothing/shirt/robe/magus,
 /turf/open/floor/wood,
 /area)
 "Ne" = (

@@ -326,17 +326,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 			headdy.icon = 'icons/roguetown/mob/monster/rousman.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
 
-	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
-	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-
-	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
-	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
-	LE.switch_side(LEFT_SIDE)
-
-	LE.Insert(src)
-	RE.Insert(src)
+	grant_nightmare_eyes()
 
 	src.underwear = "Nude"
 	if(length(quirks))
