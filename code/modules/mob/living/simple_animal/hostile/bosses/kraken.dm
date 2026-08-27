@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/retaliate/swamp_kraken
-	icon = 'icons/roguetown/mob/monster/kraken.dmi'
 	name = "swamp kraken"
 	desc = "An ancient horror from the deepest swamps. Its tentacles writhe with malevolent purpose."
+	icon = 'icons/roguetown/mob/monster/kraken.dmi'
 	icon_state = "Gilbert"
 	icon_living = "Gilbert"
 	icon_dead = ""
@@ -25,7 +25,7 @@
 	aggro_vision_range = 12
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 
-	faction = list("kraken")
+	faction = list(FACTION_DEEP)
 	stat_attack = UNCONSCIOUS
 	deaggroprob = 0
 	del_on_deaggro = FALSE
@@ -208,9 +208,9 @@
 	return TRUE
 
 /mob/living/simple_animal/hostile/kraken_tentacle
-	icon = 'icons/roguetown/mob/monster/kraken.dmi'
 	name = "kraken tentacle"
 	desc = "A writhing tentacle of the swamp kraken. It moves with disturbing intelligence."
+	icon = 'icons/roguetown/mob/monster/kraken.dmi'
 	icon_state = "gilbert_lh"
 	icon_living = "gilbert_lh"
 	icon_dead = "gilbert_lh"
@@ -223,7 +223,7 @@
 	melee_damage_upper = 30
 	base_intents = list(/datum/intent/simple/claw)
 
-	faction = list("kraken")
+	faction = list(FACTION_DEEP)
 	stat_attack = UNCONSCIOUS
 
 	vision_range = 8

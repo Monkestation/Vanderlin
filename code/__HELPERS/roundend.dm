@@ -180,7 +180,7 @@
 	sortTim(all_antagonists, GLOBAL_PROC_REF(cmp_antag_category))
 
 	for(var/datum/antagonist/A in all_antagonists)
-		if(!A.show_in_roundend)
+		if(!A.show_in_roundend || A.isgoodguy)
 			continue
 		if(A.roundend_category != currrent_category)
 			if(previous_category)

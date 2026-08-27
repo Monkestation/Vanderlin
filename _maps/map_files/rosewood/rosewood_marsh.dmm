@@ -3412,10 +3412,7 @@
 /obj/item/clothing/gloves/chain/ancient{
 	name = "Zizo's Chosen Armor"
 	},
-/obj/item/clothing/gloves/chain/ancient{
-	name = "Zizo's Chosen Armor"
-	},
-/obj/item/clothing/armor/cuirass/vampire{
+/obj/item/clothing/armor/chainmail/ancient{
 	name = "Zizo's Chosen Armor"
 	},
 /obj/item/clothing/head/vampire{
