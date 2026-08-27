@@ -849,9 +849,7 @@
 
 /datum/special_trait/chosen
 	name = "The Chosen"
-	greet_text = span_notice("Physique, Endurance, Constitution. \
-	The trinity of what builds a great leader and an even greater kingdom... \
-	or whatever those nimrods were yapping about! <b>I cast FIREBALL!!!</b>")
+	greet_text = span_notice("Ruler of all I see, I am their will. <b>I AM CHOSEN</b>.")
 	req_text = "Monarch, worship The Ten or The Four"
 	allowed_patrons = ALL_MIRACLE_PATRONS
 	allowed_jobs = list(/datum/job/lord)
