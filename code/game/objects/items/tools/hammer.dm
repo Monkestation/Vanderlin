@@ -7,7 +7,7 @@
 	force = DAMAGE_HAMMER
 	usesound = list('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg')
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_HAMMER * INTEGRITY_MOD_IRON
 	sharpness = IS_BLUNT
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
@@ -214,6 +214,7 @@
 	toolspeed = 0.8
 	melt_amount = 50
 	melting_material = /datum/material/steel
+	max_integrity = INTEGRITY_HAMMER * INTEGRITY_MOD_STEEL
 
 // --------- MALLET -----------
 /obj/item/weapon/hammer/wood
@@ -225,7 +226,7 @@
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	smeltresult = /obj/item/fertilizer/ash
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_HAMMER * INTEGRITY_MOD_IMPROV * INTEGRITY_SPECIAL_MALUS
 	toolspeed = 1.2
 	no_spark = TRUE
 	item_weight = 654 GRAMS
@@ -245,7 +246,7 @@
 	icon_state = "chammer"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	force = DAMAGE_HAMMER - 2
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_HAMMER * INTEGRITY_MOD_COPPER
 	melting_material = /datum/material/copper
 	toolspeed = 1.1
 	no_spark = TRUE
@@ -257,7 +258,7 @@
 	icon_state = "stonehammer"
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	force = DAMAGE_HAMMER - 4
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_HAMMER * INTEGRITY_MOD_IMPROV * INTEGRITY_SPECIAL_BONUS
 	melting_material = /obj/item/natural/stone
 	toolspeed = 1
 	no_spark = TRUE
@@ -268,7 +269,7 @@
 	desc = "A simple rock, rounded and turned almost into a proper tool."
 	icon_state = "hammerstone"
 	force = DAMAGE_HAMMER - 6
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_HAMMER * INTEGRITY_MOD_IMPROV
 	toolspeed = 0.8
 	item_weight = 0.8 KILOGRAMS
 
@@ -278,6 +279,7 @@
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "sledgehammer"
 	force_wielded = DAMAGE_HAMMER_WIELD + 5
+	max_integrity = INTEGRITY_SLEDGEHAMMER * INTEGRITY_MOD_IRON
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(MACE_HVYSTRIKE, MACE_HVYSMASH)
 	wbalance = EASY_TO_DODGE // Heavy
@@ -307,7 +309,7 @@
 	icon_state = "warbonker"
 	force = DAMAGE_HAMMER + 5
 	force_wielded = DAMAGE_HAMMER_WIELD + 10
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_SLEDGEHAMMER * INTEGRITY_MOD_STEEL
 	melting_material = /datum/material/steel
 	toolspeed = 1.5 //it's for crushing skulls not nails
 	item_weight = 8.4 KILOGRAMS
@@ -321,7 +323,7 @@
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_STRONGEST * 1.2
+	max_integrity = INTEGRITY_SLEDGEHAMMER * INTEGRITY_MOD_KETRYL
 
 	pixel_y = -16
 	pixel_x = -16

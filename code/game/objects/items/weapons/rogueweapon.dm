@@ -20,7 +20,7 @@
 	obj_flags = CAN_BE_HIT
 	blade_dulling = DULLING_BASH
 	resistance_flags = FIRE_PROOF
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STATIC_200
 	wdefense = GOOD_PARRY
 	experimental_onhip = TRUE
 	experimental_onback = TRUE

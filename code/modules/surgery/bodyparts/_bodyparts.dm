@@ -1,3 +1,5 @@
+#define ROT_SKELETONIZE_TIME 20 MINUTES
+#define AMBIENT_ROT_RATE (INFECTION_LEVEL_THREE / (15 MINUTES))
 
 /obj/item/bodypart
 	name = "limb"
@@ -11,6 +13,8 @@
 	layer = BELOW_MOB_LAYER //so it isn't hidden behind objects when on the floor
 	germ_level = 0
 
+	///this is our total delta time spent skeletonizing
+	var/skeletonizing_rate = 0
 	var/disinfects_in
 	/// DO NOT MODIFY DIRECTLY. Use update_owner()
 	var/mob/living/carbon/owner
@@ -172,6 +176,14 @@
 	/// The last injury to have afflicted this bodypart
 	var/datum/injury/last_injury
 
+	///bleed stopper 9000, ref to our applied tourniquet
+	var/obj/item/tourniquet/tourniquet
+	///tracked length used for necrosis
+	var/tourniquet_time = 0
+	var/splinted = FALSE
+	/// ref to our splint
+	var/obj/item/splint/splint_item
+
 /obj/item/bodypart/Initialize(mapload)
 	. = ..()
 
@@ -202,7 +214,7 @@
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_loss))
 
-	update_HP()
+	update_wounds()
 
 	if(is_robotic_limb())
 		ADD_TRAIT(src, TRAIT_NOPAIN, INNATE_TRAIT)
@@ -398,6 +410,11 @@
 
 	damage_multiplier = dam_mul
 
+	if(!is_organic_limb() || !owner)
+		return
+	// Convert max_damage increase from constitution into a damage reduction multiplier
+	damage_multiplier *= (max_damage / (max_damage * max(1, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10))))
+	damage_multiplier = round(damage_multiplier, 0.001)
 
 /obj/item/bodypart/proc/kill_limb()
 	if(!can_decay())
@@ -439,6 +456,8 @@
 
 	germ_level = INFECTION_LEVEL_THREE
 	limb_flags |= BODYPART_DEAD
+	if(owner)
+		SEND_SIGNAL(owner, COMSIG_BODYPART_ROTTEN_CHANGE)
 	update_limb(!owner)
 	update_limb_efficiency()
 
@@ -447,8 +466,30 @@
 	SIGNAL_HANDLER
 
 	limb_flags &= ~BODYPART_DEAD
+	skeletonizing_rate = 0
+	if(owner)
+		SEND_SIGNAL(owner, COMSIG_BODYPART_ROTTEN_CHANGE)
 	update_limb(!owner)
 	update_limb_efficiency()
+
+/obj/item/bodypart/proc/on_death(delta_time, times_fired)
+	if(!is_organic_limb() || skeletonized || HAS_TRAIT(src, TRAIT_NO_ROT))
+		return
+	if(HAS_TRAIT(src, TRAIT_STASIS) || (owner && HAS_TRAIT(owner, TRAIT_STASIS)))
+		return
+
+	if(can_decay())
+		adjust_germ_level(AMBIENT_ROT_RATE * delta_time * 10) //dt is measured in seconds and MINUTES is measured in deci seconds so 10x is needed
+
+	if(HAS_TRAIT(src, TRAIT_ROTTEN))
+		skeletonizing_rate += delta_time * 10
+		if(!skeletonized && skeletonizing_rate >= ROT_SKELETONIZE_TIME)
+			skeletonize()
+			if(owner)
+				ADD_TRAIT(owner, TRAIT_NOBLOOD, TRAIT_GENERIC)
+				owner.change_stat(STAT_CONSTITUTION, -99)
+				owner.update_body()
+			update_icon_dropped()
 
 /// Return TRUE to get whatever mob this is in to update health.
 /obj/item/bodypart/proc/on_life(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
@@ -456,8 +497,10 @@
 		var/multiplier = 1
 		if(owner.body_position == LYING_DOWN)
 			multiplier *= pain_heal_rest_multiplier
-		if(remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE))
-			. |= BODYPART_LIFE_UPDATE_HEALTH
+
+		if(!tourniquet)
+			if(remove_pain(amount = (pain_heal_tick * multiplier * delta_time * (PAIN_SYSTEM_SPEED_MODIFIER/10)), updating_health = FALSE))
+				. |= BODYPART_LIFE_UPDATE_HEALTH
 	if(can_decay(passed_temp))
 		if(germ_level || (getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY))
 			update_germs(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness)
@@ -465,18 +508,36 @@
 	if(number_injuries)
 		update_injuries(delta_time, times_fired)
 		. |= BODYPART_LIFE_UPDATE_HEALTH
+	if(tourniquet)
+		tourniquet_time += delta_time SECONDS
+		if(tourniquet_time >= TOURNIQUET_ISCHEMIA_DELAY)
+			if(DT_PROB(TOURNIQUET_DAMAGE_PROB, delta_time))
+				add_pain(rand(2, 4))
+			if(owner && DT_PROB(1, delta_time))
+				owner.custom_pain("My [name] feels cold and distant...", 10, FALSE, src)
+		if(tourniquet_time >= TOURNIQUET_NECROSIS_DELAY && !HAS_TRAIT(src, TRAIT_ROTTEN) && !skeletonized)
+			kill_limb()
+			if(owner)
+				to_chat(owner, span_userdanger("My [name] has gone numb, dark, and still. It's dead."))
+		. |= BODYPART_LIFE_UPDATE_HEALTH
+	if(CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
+		on_death(delta_time, times_fired)
 
 /// Check if we need to run on_life()
 /obj/item/bodypart/proc/consider_processing()
 	. = FALSE
+	if(tourniquet) //this is always true, some might say a truth nuke.
+		. = TRUE
 	//else if.. else if.. so on.
-	if(pain_dam >= DAMAGE_PRECISION)
+	if(pain_dam >= 0)
 		. = TRUE
 	else if(number_injuries)
 		. = TRUE
 	else if(can_decay() && germ_level)
 		. = TRUE
 	else if(getorganslotefficiency(ORGAN_SLOT_ARTERY) < ORGAN_FAILING_EFFICIENCY)
+		. = TRUE
+	else if(HAS_TRAIT(src, TRAIT_ROTTEN))
 		. = TRUE
 	needs_processing = .
 
@@ -582,7 +643,6 @@
 			compatible_injury.open_injury(damage)
 			last_injury = compatible_injury
 			. = compatible_injury
-
 
 	// Creating NEW injury
 	if(!.)
@@ -861,7 +921,10 @@
 
 	if(bandage)
 		remove_bandage()
-
+	if(splint_item)
+		remove_splint()
+	if(tourniquet)
+		remove_tourniquet()
 	for(var/obj/item/I in embedded_objects)
 		remove_embedded_object(I)
 
@@ -879,21 +942,10 @@
 	if(lethal && owner && CAN_HAVE_BLOOD(owner))
 		owner.death()
 
-/obj/item/bodypart/proc/update_HP()
-	if(!is_organic_limb() || !owner)
-		return
-	var/old_max_damage = max_damage
-	var/new_max_damage = initial(max_damage) * max(1, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10))
-	if(new_max_damage != old_max_damage)
-		max_damage = new_max_damage
-
-
 /// Returns whether or not the bodypart can feel pain
 /obj/item/bodypart/proc/can_feel_pain()
-	/*
-	if(CHECK_BITFIELD(limb_flags, BODYPART_CUT_AWAY|BODYPART_DEAD))
+	if(CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
 		return
-	*/
 	if(HAS_TRAIT(src, TRAIT_ROTTEN))
 		return FALSE
 	if(HAS_TRAIT(src, TRAIT_NOPAIN))
@@ -980,7 +1032,7 @@
 //Cannot apply negative damage
 /// DEPRECIATED PROC: Replace with bodypart_attacked_by
 /obj/item/bodypart/proc/receive_damage(brute = 0, burn = 0, blocked = 0, updating_health = TRUE, required_status = null, flashes = TRUE)
-	update_HP()
+	update_wounds()
 	var/hit_percent = (100-blocked)/100
 	if((!brute && !burn) || hit_percent <= 0)
 		return FALSE
@@ -1040,7 +1092,7 @@
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
 /obj/item/bodypart/proc/heal_damage(brute, burn, updating_health = TRUE, forced = FALSE, required_status)
-	update_HP()
+	update_wounds()
 	if(!forced && required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
 
@@ -1092,6 +1144,7 @@
 
 //Checks disabled status thresholds
 /obj/item/bodypart/proc/update_disabled()
+	update_wounds()
 	if(!owner)
 		return
 
@@ -1102,8 +1155,12 @@
 	//yes this does mean vampires can use rotten limbs
 	if((HAS_TRAIT(src, TRAIT_ROTTEN) || skeletonized) && !(owner.mob_biotypes & MOB_UNDEAD))
 		return set_disabled(BODYPART_DISABLED_ROT)
+	if(tourniquet)
+		return set_disabled(BODYPART_DISABLED_TOURNIQUET)
 	for(var/datum/wound/ouchie as anything in wounds)
 		if(!ouchie.disabling)
+			continue
+		if(splinted && ouchie.splint_suppression)
 			continue
 		return set_disabled(BODYPART_DISABLED_WOUND)
 	if(HAS_TRAIT(owner, TRAIT_PARALYSIS) || HAS_TRAIT(src, TRAIT_PARALYSIS))
@@ -1492,6 +1549,8 @@
 		for(var/obj/item/organ/organ as anything in get_organs())
 			if(!organ.is_visible())
 				continue
+			var/list/colors = color_key_source_list_from_carbon(owner) //for 99% of mobs this ends up being quicker by a little since it saves accessing on mobs with no visible
+			organ.build_colors_for_accessory(colors)
 			var/mutable_appearance/organ_appearance = organ.get_bodypart_overlay(src)
 			if(organ_appearance)
 				. += organ_appearance
@@ -1781,12 +1840,6 @@
 			break
 	return internal_incision
 
-/obj/item/bodypart/proc/is_bandaged()
-	. = TRUE
-	for(var/datum/injury/injury in injuries)
-		if(!injury.is_bandaged())
-			return FALSE
-
 /obj/item/bodypart/proc/is_salved()
 	. = TRUE
 	for(var/datum/injury/injury in injuries)
@@ -1840,3 +1893,86 @@
 /obj/item/bodypart/proc/unbandage_limb()
 	for(var/datum/injury/injury as anything in injuries)
 		injury.unbandage_injury()
+
+/obj/item/bodypart/proc/apply_tourniquet(obj/item/tourniquet/new_tourniquet, mob/user)
+	if(tourniquet)
+		return FALSE
+	tourniquet = new_tourniquet
+	new_tourniquet.forceMove(src)
+	tourniquet_time = 0
+	if(owner)
+		owner.update_health_hud()
+	if(can_be_disabled)
+		update_disabled()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human = owner
+		human.update_damage_overlays_real()
+	return TRUE
+
+/obj/item/bodypart/proc/remove_tourniquet(mob/user, sudden = FALSE)
+	if(!tourniquet)
+		return FALSE
+	var/was_ischemic = (tourniquet_time >= TOURNIQUET_ISCHEMIA_DELAY)
+	var/obj/item/removed = tourniquet
+	tourniquet = null
+	var/turf/drop_loc = owner?.drop_location() || drop_location()
+	if(drop_loc)
+		removed.forceMove(drop_loc)
+	else
+		qdel(removed)
+
+	if(sudden && was_ischemic && owner && CAN_HAVE_BLOOD(owner))
+		owner.visible_message(span_danger("Blood sprays from [owner]'s [name] as the tourniquet comes off!"), \
+			span_userdanger("Blood sprays from my [name] as the tourniquet comes off!"))
+		owner.bleed(rand(15, 25))
+		add_pain(rand(10, 15))
+	if(can_be_disabled)
+		update_disabled()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human = owner
+		human.update_damage_overlays_real()
+	return TRUE
+
+/obj/item/bodypart/proc/apply_splint(obj/item/splint/new_splint, mob/user)
+	if(splinted)
+		return FALSE
+	splinted = TRUE
+	splint_item = new_splint
+	new_splint.forceMove(src)
+	for(var/datum/wound/wound as anything in wounds)
+		if(!wound.splint_suppression)
+			wound.passive_healing += splint_item.wound_healing
+	if(can_be_disabled)
+		update_disabled()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human = owner
+		human.update_damage_overlays_real()
+	return TRUE
+
+/obj/item/bodypart/proc/remove_splint(mob/user, broken = FALSE)
+	if(!splinted)
+		return FALSE
+	splinted = FALSE
+	var/obj/item/removed = splint_item
+	for(var/datum/wound/wound as anything in wounds)
+		if(!wound.splint_suppression)
+			wound.passive_healing -= splint_item.wound_healing
+	splint_item = null
+	if(removed)
+		var/turf/drop_loc = owner?.drop_location() || drop_location()
+		if(drop_loc)
+			removed.forceMove(drop_loc)
+		else
+			qdel(removed)
+	if(broken && owner)
+		to_chat(owner, span_userdanger("The splint on my [name] snaps!"))
+		add_pain(rand(5, 10))
+	if(can_be_disabled)
+		update_disabled()
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human = owner
+		human.update_damage_overlays_real()
+	return TRUE
+
+#undef ROT_SKELETONIZE_TIME
+#undef AMBIENT_ROT_RATE

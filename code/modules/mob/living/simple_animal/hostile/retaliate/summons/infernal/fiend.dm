@@ -1,14 +1,15 @@
-
 /mob/living/simple_animal/hostile/retaliate/infernal/fiend/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE)	//no wounding the fiend
 	return
 
 /mob/living/simple_animal/hostile/retaliate/infernal/fiend
-	icon = 'icons/mob/summonable/32x32.dmi'
 	name = "fiend"
+	icon = 'icons/mob/summonable/32x32.dmi'
 	icon_state = "fiend"
 	icon_living = "fiend"
 	icon_dead = "vvd"
-	summon_primer = "You are fiend, a large sized demon from the infernal plane. You have imps and hounds at your beck and call, able to do whatever you wished. Now you've been pulled from your home into a new world, that is decidedly lacking in fire. How you react to these events, only time can tell."
+	summon_primer = "You are fiend, a large sized demon from the infernal plane. \
+		You had imps and hounds at your beck and call, able to do whatever you wished. \
+		Now you've been pulled from your home into a new world, that is decidedly lacking in fire. How you react to these events, only time can tell."
 	tier = 4
 	gender = MALE
 	emote_hear = null
@@ -18,7 +19,7 @@
 	move_to_delay = 10
 	base_intents = list(/datum/intent/simple/bite)
 	butcher_results = list()
-	faction = list("infernal")
+	faction = list(FACTION_INFERNAL)
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 700
 	maxHealth = 700

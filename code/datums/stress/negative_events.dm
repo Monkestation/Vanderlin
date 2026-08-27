@@ -94,6 +94,11 @@
 		return FALSE
 	return TRUE
 
+/datum/stress_event/blood_mark
+	stress_change = 1
+	desc = span_bloody("I have been marked by Blood Magic!")
+	timer = 10 MINUTES
+
 /datum/stress_event/painmax
 	timer = 1 MINUTES
 	stress_change = 2

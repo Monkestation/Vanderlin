@@ -23,7 +23,7 @@
 
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/pants/maille
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 3.95 KILOGRAMS
 
@@ -38,7 +38,7 @@
 	name = "iron chain chausses"
 	desc = "Chain mail chausses made of iron rings woven together, offering protection against cuts and stabs."
 	armor_type = /datum/armor/pants/maille/iron
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 3.95 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
@@ -58,6 +58,6 @@
 	icon_state = "ichainkilt"
 	item_state = "ichainkilt"
 	armor_type = /datum/armor/pants/maille/iron
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron

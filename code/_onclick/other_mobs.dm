@@ -597,7 +597,7 @@
 	else
 		emote("jump", forced = TRUE)
 		OffBalance(1 SECONDS)
-		jadded = 20
+		jadded = 25
 		jrange = 2
 
 	if(ishuman(src))

@@ -10,6 +10,8 @@
 #define CONN_DIR_Z_UP		(1<<5)
 #define CONN_DIR_Z_DOWN		(1<<6)
 
+#define CONN_DIR_ALL_CARDINAL CONN_DIR_FORWARD | CONN_DIR_FLIP | CONN_DIR_LEFT | CONN_DIR_RIGHT
+
 //Placing behavior of rotation contraption items
 #define PLACE_TOWARDS_USER	1
 #define PLACE_ON_PIPE 2
