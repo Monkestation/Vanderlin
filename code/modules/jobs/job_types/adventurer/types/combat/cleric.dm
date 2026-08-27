@@ -89,6 +89,7 @@
 				spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10)
 			if(/datum/patron/divine/noc)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
+				ADD_TRAIT(spawned, TRAIT_LUNAR_ORDER, JOB_TRAIT)
 			if(/datum/patron/divine/pestra)
 				spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 			if(/datum/patron/divine/abyssor)
@@ -111,12 +112,12 @@
 	. = ..()
 
 	var/static/list/selectableweapon = list(
-		"Sword" = pick(list(/obj/item/weapon/sword/iron, /obj/item/weapon/sword/scimitar/messer, /obj/item/weapon/sword/sabre/scythe)),
+		"Sword" = /obj/item/weapon/sword/iron,
 		"Axe" = /obj/item/weapon/axe/iron,
-		"Mace" = pick(list(/obj/item/weapon/mace/bludgeon, /obj/item/weapon/mace/spiked, /obj/item/weapon/hammer/sledgehammer)),
+		"Mace" = /obj/item/weapon/mace/spiked,
 		"Warhammer" = /obj/item/weapon/mace/warhammer,
 		"Spear" = /obj/item/weapon/polearm/spear,
-		"Flail" = pick(list(/obj/item/weapon/flail, /obj/item/weapon/flail/militia)),
+		"Flail" = /obj/item/weapon/flail,
 		"Great flail" = /obj/item/weapon/flail/peasant,
 		"Goedendag" = /obj/item/weapon/mace/goden,
 		"Great axe" = /obj/item/weapon/polearm/halberd/bardiche/woodcutter,

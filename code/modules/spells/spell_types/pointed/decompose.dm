@@ -7,12 +7,12 @@
 	self_cast_possible = FALSE
 	spell_flags = SPELL_RITUOS
 	cast_range = 1
-	point_cost = 3
-	associated_skill = /datum/attribute/skill/magic/blood
-	attunements = list(
-		/datum/attunement/death = 0.3,
-		/datum/attunement/blood = 0.2,
-	)
+	associated_skill = /datum/attribute/skill/magic/arcane
+
+	required_form = FORM_DEATH
+	required_technique = TECHNIQUE_ALTERATION
+	heretical_spell = TRUE
+
 	invocation = "Return to rot."
 	invocation_type = INVOCATION_WHISPER
 

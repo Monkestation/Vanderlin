@@ -9,9 +9,10 @@
 	invocation = "VANISHIKA"
 	invocation_type = INVOCATION_SHOUT
 
-	attunements = list(
-		/datum/attunement/arcyne = 0.4,
-	)
+	required_form = FORM_ARCANE
+	required_technique = TECHNIQUE_ALTERATION
+	required_level = 12 //lol
+	initial_charges = 3
 
 	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt
 
@@ -61,6 +62,8 @@
 
 	if(!holder)
 		CRASH("[type] attempted do_jaunt but failed to create a jaunt holder via enter_jaunt.")
+	holder.name = cast_on.name
+	SEND_SIGNAL(cast_on, COMSIG_FOV_HIDE)
 
 	if(jaunt_out_time > 0)
 		ADD_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
@@ -179,6 +182,7 @@
 
 	REMOVE_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
 
+	SEND_SIGNAL(cast_on, COMSIG_FOV_SHOW)
 	if(final_point.density)
 		var/list/aside_turfs = get_adjacent_open_turfs(final_point)
 		if(length(aside_turfs))
@@ -211,6 +215,7 @@
 /// The dummy that holds people jaunting. Maybe one day we can replace it.
 /obj/effect/dummy/phased_mob/spell_jaunt
 	movespeed = 2 //quite slow.
+	invisibility = INVISIBILITY_LEYLINES
 	/// Whether we're currently reappearing - we can't move if so
 	var/reappearing = FALSE
 

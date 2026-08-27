@@ -267,6 +267,12 @@
 	var/datum/intent/cached_intent = user.used_intent
 	if(user.used_intent.swingdelay)
 		sleep(user.used_intent.swingdelay)
+
+	// Getting struck w/ /disrupt swingdelay type sets our swing_state to false.
+	// If we had the effect, but not the bool, we were interrupted. (Or something else went wrong.)
+	if(user.is_swinging() && !user.swing_state)
+		return
+
 	if(user.a_intent != cached_intent)
 		return
 	if(QDELETED(src) || QDELETED(M))
@@ -284,14 +290,14 @@
 		user.adjust_stamina(10)
 	var/turf/turf_before = get_turf(M)
 	SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK_POST_SWINGDELAY, M, user, src)
-	if(M.checkdefense(user.used_intent, user))
+	if(!(signal_return & COMPONENT_ITEM_NO_DEFENSE) && M.checkdefense(user.used_intent, user))
 		if(M.d_intent == INTENT_PARRY)
 			if(!M.get_active_held_item() && !M.get_inactive_held_item()) //we parried with a bracer, redirect damage
 				if(M.active_hand_index == 1)
 					user.tempatarget = BODY_ZONE_L_ARM
 				else
 					user.tempatarget = BODY_ZONE_R_ARM
-				if(M.attacked_by(src, user)) //we change intents when attacking sometimes so don't play if we do (embedding items)
+				if(M.attacked_by(src, user, signal_return)) //we change intents when attacking sometimes so don't play if we do (embedding items)
 					if(user.used_intent == cached_intent)
 						var/tempsound = user.used_intent.hitsound
 						if(tempsound)
@@ -336,7 +342,7 @@
 							"<span class='boldwarning'>I'm disarmed by [user]!</span>")
 			return
 
-	if(M.attacked_by(src, user))
+	if(M.attacked_by(src, user, signal_return))
 		if(user.used_intent == cached_intent)
 			var/tempsound = user.used_intent.hitsound
 			if(tempsound)

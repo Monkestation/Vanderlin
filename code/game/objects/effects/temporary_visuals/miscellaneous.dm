@@ -97,7 +97,7 @@
 	name = "blood"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "phase_shift2"
-	duration = 12
+	duration = 1.2 SECONDS
 
 /obj/effect/temp_visual/dir_setting/wraith/out
 	icon_state = "phase_shift"
@@ -141,7 +141,7 @@
 
 /obj/effect/temp_visual/wizard/out
 	icon_state = "liquify"
-	duration = 12
+	duration = 1.2 SECONDS
 
 /obj/effect/temp_visual/monkeyify
 	icon = 'icons/mob/mob.dmi'

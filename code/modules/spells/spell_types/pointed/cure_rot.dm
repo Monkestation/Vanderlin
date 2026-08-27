@@ -54,6 +54,9 @@
 			if(HAS_TRAIT(bodypart, TRAIT_ROTTEN))
 				has_rot = TRUE
 				break
+			if(bodypart.germ_level >= INFECTION_LEVEL_ONE*0.2)
+				has_rot = TRUE
+				break
 		for(var/obj/item/organ/organs as anything in cast_on.internal_organs)
 			if(organs.germ_level >= INFECTION_LEVEL_ONE*0.2)
 				has_rot = TRUE

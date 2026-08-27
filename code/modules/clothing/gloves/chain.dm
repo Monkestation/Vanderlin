@@ -16,7 +16,7 @@
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/gloves/maille
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	sewrepair = null
 	item_weight = 1.35 KILOGRAMS
 	smeltresult = null
@@ -38,7 +38,7 @@
 	icon_state = "icgloves"
 	desc = "Gauntlets made out of interwoven iron chains. Decent melee protection, but are better suited to stop arrows than blades."
 	armor_type = /datum/armor/gloves/maille/iron
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.35 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/iron

@@ -114,19 +114,20 @@
 /mob/living/carbon/human/Initialize()
 	add_verb(src, /mob/living/proc/lay_down)
 
+	attribute_initialize()
+
 	status_flags |= BUILDING_ORGANS
+
 	//initialize limbs first
 	create_bodyparts()
 
-	attribute_initialize() // chud shit
 	setup_human_dna()
 
 	if(dna.species)
 		set_species(dna.species.type, initial_set = TRUE)
 
-	//initialise organs
-	create_internal_organs() //most of it is done in set_species now, this is only for parent call
 	physiology = new()
+
 	status_flags &= ~BUILDING_ORGANS
 	culture = GLOB.culture_singletons[culture]
 
@@ -790,6 +791,8 @@
 
 //src is the user that will be carrying, target is the mob to be carried
 /mob/living/carbon/human/proc/can_piggyback(mob/living/carbon/target)
+	if(HAS_TRAIT(target, TRAIT_MOVE_FLYING) || HAS_TRAIT(target, TRAIT_MOVE_FLOATING))
+		return FALSE
 	return istype(target) && target.stat == CONSCIOUS
 
 /mob/living/carbon/human/proc/can_be_firemanned(mob/living/target)
@@ -798,6 +801,9 @@
 /mob/living/carbon/human/proc/fireman_carry(mob/living/carbon/target)
 	if(!can_be_firemanned(target) || incapacitated(IGNORE_GRAB))
 		to_chat(src, span_warning("I can't fireman carry [target] while [target.p_they()] [target.p_are()] standing!"))
+		return
+	if(HAS_TRAIT(src, TRAIT_MOVE_FLYING) || HAS_TRAIT(src, TRAIT_MOVE_FLOATING))
+		to_chat(src, span_warning("I can't fireman carry [target] while I am flying."))
 		return
 
 	var/carrydelay = 5 SECONDS //if you have latex you are faster at grabbing

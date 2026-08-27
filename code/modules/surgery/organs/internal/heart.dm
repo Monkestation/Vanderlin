@@ -14,8 +14,8 @@
 	current_blood = 600
 	blood_req = 5
 	oxygen_req = 5
-	nutriment_req = 3
-	hydration_req = 1.5
+	nutriment_req = 1.5 * RATE_OF_HUNGER_GLOBAL
+	hydration_req = 0.75 * RATE_OF_THIRST_GLOBAL
 	/// Have we been bypassed to avoid nasty blockages?
 	var/open = FALSE
 	/// If we're not beating that is not a good sign
@@ -99,8 +99,9 @@
 		return (..() || !beating)
 	return ..()
 
-/obj/item/organ/heart/Remove(mob/living/carbon/old_owner, special = FALSE)
+/obj/item/organ/heart/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
+
 	if(!special)
 		addtimer(CALLBACK(src, PROC_REF(stop_if_unowned)), 12 SECONDS)
 

@@ -11,8 +11,6 @@
 	desc = "Channels the spirits of ancient dwarven smiths to guide crafting."
 	button_icon_state = "ancestral_smithing"
 	cast_range = 0
-	point_cost = 7
-	attunements = list(/datum/attunement/fire, /datum/attunement/earth)
 	essences = list(/datum/thaumaturgical_essence/earth, /datum/thaumaturgical_essence/fire)
 
 /datum/action/cooldown/spell/essence/ancestral_smithing/cast(atom/cast_on)

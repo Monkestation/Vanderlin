@@ -29,7 +29,8 @@
 		TRAIT_NOENERGY,
 		TRAIT_ZJUMP,
 		TRAIT_IMMUNE_TO_FRENZY,
-		TRAIT_COVEN_RESISTANT
+		TRAIT_COVEN_RESISTANT,
+		TRAIT_SILVER_IMMUNE
 	)
 	leader_title = "Daewalker"
 	leader = /datum/clan_leader/daewalker

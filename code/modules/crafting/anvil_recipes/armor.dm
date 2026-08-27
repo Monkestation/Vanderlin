@@ -254,12 +254,6 @@
 	required_material = /obj/item/ingot/iron
 	created_item = /obj/item/clothing/armor/chainmail/iron
 
-/datum/anvil_recipe/armor/iron/hauberk
-	name = "Hauberk (+Bar)"
-	required_material = /obj/item/ingot/iron
-	additional_items = list(/obj/item/ingot/iron)
-	created_item = /obj/item/clothing/armor/chainmail/hauberk/iron
-
 /datum/anvil_recipe/armor/iron/cuirass
 	name = "Iron Cuirass"
 	required_material = /obj/item/ingot/iron
@@ -643,7 +637,7 @@
 	output_amount = 2
 
 /datum/anvil_recipe/armor/steel/hauberk
-	name = "Hauberk (+Bar)"
+	name = "Steel Hauberk (+Bar)"
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/armor/chainmail/hauberk
 	craftdiff = 3
@@ -1068,6 +1062,11 @@
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
 	created_item = /obj/item/clothing/head/helmet/visored/silver/armet
 
+/datum/anvil_recipe/armor/silver/armetowl
+	name = "Lunar Owl Armet (+Steel Bar x2)"
+	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	created_item = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
+
 /datum/anvil_recipe/armor/silver/plateleg
 	name = "Silver Plate Chausses (+Steel Bar x2)"
 	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
@@ -1096,6 +1095,11 @@
 	additional_items = list(/obj/item/ingot/silver)
 	created_item = /obj/item/clothing/shoes/boots/armor/silver
 	craftdiff = 4
+
+/datum/anvil_recipe/armor/silver/gorget
+	name = "Silver Gorget (+Steel Bar)"
+	additional_items = list(/obj/item/ingot/steel)
+	created_item = /obj/item/clothing/neck/gorget/silver
 
 // --------- BLACKSTEEL -----------
 /datum/anvil_recipe/armor/blacksteel
