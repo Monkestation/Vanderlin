@@ -48433,9 +48433,7 @@
 /turf/open/floor/grass,
 /area/outdoors/town/keep)
 "tRh" = (
-/obj/structure/curtain/bounty/dir{
-	dir = 1
-	},
+/obj/structure/curtain/bounty/dir,
 /turf/closed/wall/mineral/decorstone/window,
 /area/indoors/town/clinic_large)
 "tRs" = (
@@ -128379,7 +128377,7 @@ mFi
 hZn
 lAf
 lAf
-dcy
+mjK
 lAf
 lAf
 lAf
@@ -129591,7 +129589,7 @@ hZn
 mFi
 lAf
 lAf
-mjK
+dcy
 iAu
 lAf
 lAf
