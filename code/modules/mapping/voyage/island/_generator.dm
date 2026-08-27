@@ -647,7 +647,7 @@
 			var/chosen = pickweight(valid_fauna)
 			if(chosen)
 				var/mob/living/mob = new chosen(T)
-				mob.add_faction("islander")
+				mob.add_faction(FACTION_ISLAND)
 
 /datum/island_generator/proc/build_elevation(x, y, z, height, dist_to_water, temperature, moisture)
 	for(var/level = 1 to height)

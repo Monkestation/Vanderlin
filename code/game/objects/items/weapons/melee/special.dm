@@ -383,6 +383,18 @@
 	icon_state = "abyssorclaw"
 	item_weight = 350 GRAMS
 
+/obj/item/weapon/katar/silver
+	name = "silver katar"
+	desc = "A glimmering silver blade that sits above the users fist. Used by holy monks who otherwise prefer unarmed combat to fight the creatures of the nite."
+	icon_state = "silverkatar"
+	item_weight = 400 GRAMS
+	smeltresult = /obj/item/ingot/silver
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
+
+/obj/item/weapon/katar/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 /datum/intent/knuckles/strike
 	name = "punch"
 	blade_class = BCLASS_BLUNT
@@ -477,3 +489,44 @@
 	force = DAMAGE_KNUCKLES + 2
 	item_weight = 200 GRAMS
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+
+/obj/item/weapon/knuckles/iron
+	name = "iron knuckles"
+	desc = "A mean looking pair of iron knuckles, not that good in quality but they do the job."
+	icon_state = "ironknuckle"
+	smeltresult = /obj/item/ingot/iron
+	melting_material = null
+	force = DAMAGE_KNUCKLES - 2
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IRON
+
+/obj/item/weapon/knuckles/bronze
+	name = "bronze knuckles"
+	desc = "A mean looking pair of bronze knuckles. Mildly heavier than its steel counterpart, making it a solid defensive option, if less wieldy."
+	icon_state = "bronzeknuckle"
+	smeltresult = /obj/item/ingot/bronze
+	melting_material = null
+	force = DAMAGE_KNUCKLES - 4
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BRONZE
+
+/obj/item/weapon/knuckles/silver
+	name = "silver knuckles"
+	desc = "A simple piece of harm that has been molded from pure silver, and further studded to stop errant strikes dead in their tracks. Though ostensibly holy, these heftsome knuckleweights are \
+	more strongly associated with underground pugilistic tournaments; a solid right hook could drive more-than-enough force to blow a yeoman's jaw clean off."
+	icon_state = "silverknuckle"
+	smeltresult = /obj/item/ingot/silver
+	melting_material = null
+	force = DAMAGE_KNUCKLES + 2
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
+
+/obj/item/weapon/knuckles/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/knuckles/blacksteel
+	name = "blacksteel knuckles"
+	desc = "An exotic use for an expensive metal, punch them with wealth."
+	icon_state = "bsknuckle"
+	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = null
+	force = DAMAGE_KNUCKLES + 4
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLACKSTEEL

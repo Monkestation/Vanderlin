@@ -1,0 +1,8 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added Ancient Ceremonial Armor for Vampire Lord."
+  - image: "Added the few missing sprites for above."
+  - image: "Added sprite for Draconic Ingots."
+  - image: "Added new sprites for Gold, Bronze and Enchanted Gilbranze ingots."
+  - image: "Changed Silver ingot sprite to the blessed silver one, and changed blessed silver to a psy engraved ingot."

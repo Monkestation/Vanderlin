@@ -61,6 +61,39 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 900 GRAMS
 
+/obj/item/weapon/handclaw/steel/silver
+	name = "silver mantis claws"
+	desc = "A pair of silver claws, an extremely rare sight in and out of Ossland. Their longer blades offer a superior defence option but their added weight slows them down."
+	icon_state = "silverclaws"
+	force = DAMAGE_KATAR + 7
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
+	smeltresult = /obj/item/ingot/silver
+	item_weight = 800 GRAMS
+
+/obj/item/weapon/handclaw/steel/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/handclaw/steel/blacksteel
+	name = "blacksteel mantis claws"
+	desc = "An exquisite mimicry of a classic Osslandic weapon. Long blades offer effective defense while retaining lethal striking power."
+	icon_state = "bskatarclaw"
+	force = DAMAGE_KATAR + 9
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLACKSTEEL
+	smeltresult = /obj/item/ingot/blacksteel
+
+/obj/item/weapon/handclaw/steel/bloodsteel
+	name = "bloodsteel mantis claws"
+	desc = "A dark mimicry of a classic Osslandic weapon. Long blades offer effective defense while retaining lethal striking power."
+	icon_state = "corruptclaws"
+	force = DAMAGE_KATAR + 8
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLOODSTEEL
+	smeltresult = /obj/item/ingot/bloodsteel
+
+/obj/item/weapon/handclaw/steel/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/weapon/handclaw/gronn
 	name = "ossland beast claws"
 	desc = "A pair of uniquely reinforced iron claws forged with the addition of bone by the cleric-priests of Ossland. \
@@ -71,8 +104,7 @@
 	possible_item_intents = list(/datum/intent/claw/cut, /datum/intent/claw/lunge/gronn, /datum/intent/claw/rend)
 	wbalance = HARD_TO_DODGE
 	item_weight = 750 GRAMS
-	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_STEEL
-
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_STEEL //Not actually made of steel but special exemption.
 
 /obj/item/weapon/handclaw/getonmobprop(tag)
 	. = ..()

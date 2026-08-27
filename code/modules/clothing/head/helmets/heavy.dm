@@ -86,6 +86,7 @@
 /obj/item/clothing/head/helmet/heavy/psydonhelm
 	name ="grenzelhoftian armet"
 	desc = "Headwear commonly worn by Templars in service to the Oratorium Throni Vacui. PSYDON Endures."
+	adjustable = CAN_CADJUST
 	icon_state = "psydonarmet"
 	item_state = "psydonarmet"
 	block2add = FOV_BEHIND

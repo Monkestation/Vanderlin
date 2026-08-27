@@ -285,6 +285,43 @@
 	. = ..()							//+0 force, +100 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, TRUE, 0, FALSE, 100, 1, TRUE)
 
+/obj/item/weapon/shield/tower/metal/darksteel
+	name = "darksteel shield"
+	desc = "An interloper in causality's ever-so-fragile stream, woven from wafers to ward against those who're not yet ready to comprehend \
+	the gospel of Her disciples. Zizo sought to ward Her children from extinction, but failed; and in the throes of divine mania, She had come \
+	to realize that this world was no longer worth saving."
+	icon_state = "zizoshield"
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_DARKSTEEL
+	sellprice = 0
+	smeltresult = /obj/item/ingot/avantyne
+	melting_material = null
+	design_chosen = FALSE
+	item_weight = 4 KILOGRAMS
+
+/obj/item/weapon/shield/tower/metal/blacksteel
+	name = "blacksteel shield"
+	desc = "A magnificent kite shield of blacksteel. Be it knight-or-knave, those who have the strength to lift it shall yet stand against perdition."
+	icon_state = "blacksteelsh"
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_BLACKSTEEL
+	sellprice = 100
+	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = null
+	design_chosen = FALSE
+	item_weight = 4 KILOGRAMS
+
+/obj/item/weapon/shield/tower/metal/gold
+	name = "golden shield"
+	desc = "A resplendant kite shield, assembled from six golden plates that've been hooked together by a glimmering holy sigil. Nobility may be fragile, \
+	but - so long as its grip remains steadfast - none could ever hope to sever its weakest link."
+	icon_state = "goldshield"
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_BLACKSTEEL //Special exemption.
+	sellprice = 150
+	smeltresult = /obj/item/ingot/gold
+	melting_material = null
+	design_chosen = FALSE
+	item_weight = 6 KILOGRAMS
+
+
 /obj/item/weapon/shield/tower/buckleriron
 	name = "iron buckler"
 	desc = "A small sized iron shield, popular among mercenaries due to its light weight and ease of mobility."

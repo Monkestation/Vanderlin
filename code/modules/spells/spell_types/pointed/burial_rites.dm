@@ -21,6 +21,8 @@
 /datum/action/cooldown/spell/burial_rites/is_valid_target(atom/cast_on)
 	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/profane) || istype(cast_on, /obj/item/psydonmusicbox))
 		return TRUE
+	if(istype(cast_on, /obj/item/blood_pearl))
+		return TRUE
 	else if(!istype(cast_on, /obj/structure/closet/dirthole))
 		return FALSE
 	var/obj/structure/closet/dirthole/grave = cast_on
@@ -52,6 +54,11 @@
 		var/obj/item/psydonmusicbox/musicbox = cast_on
 		musicbox.free_souls(owner)
 		return
+	else if(istype(cast_on, /obj/item/blood_pearl))
+		var/obj/item/blood_pearl/pearl = cast_on
+		pearl.shatter(TRUE)
+		return
+
 	if(pacify_coffin(cast_on, owner))
 		if(istype(cast_on, /obj/structure/closet/dirthole))
 			var/obj/structure/closet/dirthole/grave = cast_on // from this point on we know it is a grave subtype

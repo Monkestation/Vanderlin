@@ -36,6 +36,17 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = VALUE_STEEL_HELMET
 
+/obj/item/clothing/head/helmet/ancient/vampire
+	name = "ancient ceremonial savoyard"
+	desc = "A grand savoyard of enchanted gilbranze. Inflicting terror in style."
+	icon_state = "vhelmet"
+	armor_type = /datum/armor/head/plate/good
+	smeltresult = /obj/item/ingot/vampire
+
+	armor_class = AC_MEDIUM
+	prevent_crits = ALL_CRITICAL_HITS_VAMP
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
+
 //................ Face ............... //
 
 /obj/item/clothing/face/facemask/steel/ancient
@@ -64,6 +75,16 @@
 	armor_type = /datum/armor/neck/plate
 	max_integrity = INTEGRITY_OLD_STRONG + 100
 
+/obj/item/clothing/neck/gorget/ancient/vampire
+	name = "ancient ceremonial gorget"
+	desc = "A neckguard of enchanted gilbranze. Though a vampyre needn't air to lyve, they most certainly need a spine."
+	icon_state = "vgorget"
+
+	smeltresult = /obj/item/ingot/vampire
+	armor_class = AC_MEDIUM
+	prevent_crits = ALL_CRITICAL_HITS_VAMP
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
+
 //................ Armor ............... //
 
 /obj/item/clothing/armor/cuirass/ancient
@@ -83,6 +104,17 @@
 
 	armor_type = /datum/armor/plate/good
 	item_weight = 16 KILOGRAMS
+
+/obj/item/clothing/armor/plate/ancient/vampire
+	name = "ancient ceremonial plate"
+	desc = "A ornate, ceremonial enchanted gilbranze plate suit of considerable age."
+	icon_state = "vplate"
+
+	smeltresult = /obj/item/ingot/vampire
+	armor_class = AC_MEDIUM
+	prevent_crits = ALL_CRITICAL_HITS_VAMP
+	item_weight = 10 KILOGRAMS
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 //................ Underarmor ............... //
 
@@ -104,6 +136,17 @@
 	armor_type = /datum/armor/maille/good
 	item_weight = 11 KILOGRAMS
 
+/obj/item/clothing/armor/chainmail/hauberk/ancient/vampire
+	name = "ancient ceremonial vestments"
+	desc = "An ornate aketon, woven from crimson silk and worn beneath a layer of enchanted gilbranze maille."
+	icon_state = "vhauberk"
+
+	smeltresult = /obj/item/ingot/vampire
+	armor_class = AC_MEDIUM
+	prevent_crits = ALL_CRITICAL_HITS_VAMP
+	item_weight = 9.5 KILOGRAMS
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
+
 //................ Wrists ............... //
 
 /obj/item/clothing/wrists/bracers/ancient
@@ -114,6 +157,15 @@
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 	armor_type = /datum/armor/wrist/plate/good
+
+/obj/item/clothing/wrists/bracers/ancient/vampire
+	name = "ancient ceremonial bracers"
+	desc = "Enchanted gilbranze cuffings, clasped around the wrists."
+	icon_state = "vbracers"
+	armor_class = AC_MEDIUM
+	prevent_crits = ALL_CRITICAL_HITS_VAMP
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
+	smeltresult = /obj/item/ingot/vampire
 
 //................ Gloves ............... //
 
@@ -134,6 +186,16 @@
 
 	armor_type = /datum/armor/gloves/plate/good
 	item_weight = 1.45 KILOGRAMS
+
+/obj/item/clothing/gloves/plate/ancient/vampire
+	name = "ancient ceremonial gauntlets"
+	icon_state = "Enchanted gilbranze fingerettes, meticulously forged to leave no motion unimpeded."
+	icon_state = "vgloves"
+	armor_class = AC_MEDIUM
+	prevent_crits = ALL_CRITICAL_HITS_VAMP
+	item_weight = 1.65 KILOGRAMS
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
+	smeltresult = /obj/item/ingot/vampire
 
 //................ Legs ............... //
 
@@ -162,6 +224,16 @@
 	armor_type = /datum/armor/pants/plate/good
 	item_weight = 5.5 KILOGRAMS
 
+/obj/item/clothing/pants/platelegs/ancient/vampire
+	name = "ancient ceremonial plate greaves"
+	desc = "Enchanted gilbranze tassets, meticulously shingled over silk-lined chausses."
+	icon_state = "vpants"
+	item_weight = 4.5 KILOGRAMS
+	armor_class = AC_MEDIUM
+	prevent_crits = ALL_CRITICAL_HITS_VAMP
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
+	smeltresult = /obj/item/ingot/vampire
+
 //................ Shoes ............... //
 
 /obj/item/clothing/shoes/boots/armor/ironmaille/ancient
@@ -185,3 +257,13 @@
 	armor_type = /datum/armor/boots/plate/good
 	item_weight = 2 KILOGRAMS
 
+/obj/item/clothing/shoes/boots/armor/ancient/vampire
+	name = "ancient ceremonial sabatons"
+	desc = "A set of enchanted gilbranze boots, tightly fastened with strips of dark leather."
+	icon_state = "vboots"
+	armor_class = AC_MEDIUM
+	prevent_crits = ALL_CRITICAL_HITS_VAMP
+	item_weight = 1.8 KILOGRAMS
+	sellprice = VALUE_SILVER_ITEM * 2
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
+	smeltresult = /obj/item/ingot/vampire
