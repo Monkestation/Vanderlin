@@ -185,7 +185,8 @@
 	max_blade_int = 150
 
 	slot_flags = ITEM_SLOT_BACK
-	smeltresult = /obj/item/ingot/iron
+	melt_amount = 50
+	melting_material = /datum/material/iron
 	thrown_bclass = BCLASS_STAB
 	sellprice = 22
 	item_weight = 1 KILOGRAMS
@@ -210,7 +211,7 @@
 	wbalance = GREAT_PARRY
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	sellprice = 40
 	item_weight = 1 KILOGRAMS
 
@@ -220,7 +221,7 @@
 	icon_state = "swordstaff"
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BLACKSTEEL
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 
 /obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
 	. = ..()
@@ -235,6 +236,7 @@
 	max_blade_int = 300
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	sellprice = 50
+	melt_amount = 100
 
 /obj/item/weapon/polearm/spear/silver
 	name = "silver spear"
@@ -245,7 +247,7 @@
 	wbalance = GREAT_PARRY
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_SILVER
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	sellprice = 60
 	item_weight = 1 KILOGRAMS
 
@@ -262,7 +264,7 @@
 	wbalance = GREAT_PARRY
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BLOODSTEEL
 	max_blade_int = 240
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
 	sellprice = 0
 	item_weight = 0.9 KILOGRAMS
 
@@ -293,6 +295,8 @@
 	force = DAMAGE_SPEARPLUS + 2
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silver
+	melt_amount = null
+	melting_material = null
 	sellprice = 60
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_SILVER
@@ -330,6 +334,7 @@
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = null
 	sellprice = 60
 	item_weight = 2 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL
@@ -394,9 +399,13 @@
 	wlength = WLENGTH_LONG
 
 	gripsprite = FALSE
+	smeltresult = /obj/item/ingot/iron
+	melt_amount = null
+	melting_material = null
 	throw_speed = 2
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 50, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 	item_weight = 1.5 KILOGRAMS
+	melt_amount = null
 
 /obj/item/weapon/polearm/spear/assegai/steel
 	name = "steel assegai"
@@ -829,7 +838,6 @@
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_STEEL
 
 	slot_flags = ITEM_SLOT_BACK
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -847,6 +855,18 @@
 				return list("shrink" = 0.6,"sx" = 5,"sy" = -2,"nx" = -5,"ny" = -2,"wx" = -5,"wy" = -2,"ex" = 5,"ey" = -2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 7,"sturn" = -7,"wturn" = 16,"eturn" = -22,"nflip" = 8,"sflip" = 0,"wflip" = 8,"eflip" = 0)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+/obj/item/weapon/polearm/eaglebeak/blacksteel
+	name = "blacksteel eagle's beak"
+	desc = "A magnificent polehammer of blacksteel. Purpose-made for killing plate-armored opponents, it features a maillebreaker's point and a \
+	flared macehead; excellent for piercing and shattering alloys, respectively. Wrap a length of cloth around the shaft to bear your heraldry."
+	icon_state = "bs_eaglebeak"
+	force = DAMAGE_SPEAR + 2
+	force_wielded = DAMAGE_HALBERD_WIELD + 2
+	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_BLACKSTEEL
+	melting_material = /datum/material/blacksteel
+	melt_amount = 150
+	sellprice = 90
 
 //................ Lucerne Hammer ............... //
 /obj/item/weapon/polearm/eaglebeak/lucerne
@@ -894,7 +914,7 @@
 	desc = "A spear forged of bronze. Expensive but more durable than a regular iron one."
 	icon_state = "bronzespear"
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BRONZE
 

@@ -1,5 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - balance: "Reduced the rate at which Enervating Elegy drains stamina."
-  - bugfix: "Stopped Enervating Elegy spamming stam-drain gasp emote."

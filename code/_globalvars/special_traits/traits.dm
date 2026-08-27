@@ -866,6 +866,35 @@
 
 	character.update_body()
 
+/datum/attribute_holder/sheet/job/dark_secrets
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 4,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/magic/blood = list(30, 40),
+		/datum/attribute/skill/combat/polearms = list(20, 40)
+	)
+
+/datum/special_trait/dark_secrets
+	name = "Dark Secrets"
+	greet_text = span_notice("You have a dark secret, hidden power you have concealed for most of your life. Is now the time to let it out?")
+	req_text = "Be an Apostate. Don't be Monarch."
+	allowed_patrons = list(/datum/patron/godless/autotheist, /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/godless, /datum/patron/godless/naivety)
+	weight = 15 //Should be fine.
+	restricted_jobs = list(/datum/job/lord, /datum/job/monk, /datum/job/priest, /datum/job/templar)
+
+/datum/special_trait/dark_secrets/on_apply(mob/living/carbon/human/character, silent)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/dark_secrets)
+	character.add_spell(/datum/action/cooldown/spell/status/blood_sight, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/projectile/blood_steal, silent = TRUE, mastery_spell = TRUE)
+	character.grant_language(/datum/language/sanguine)
+	character.adjust_technique_mastery_points(2)
+	character.adjust_form_mastery_points(3, specific_form = FORM_BLOOD)
+	ADD_TRAIT(character, TRAIT_BLOOD_MAGE, BE_SPECIAL_TRAIT)
+	character.hud_used?.set_bloody_bloodpool()
+	character.adjust_bloodpool()
+
 /datum/special_trait/overcompensating
 	name = "Overcompensating"
 	greet_text = span_boldwarning("I have an enormous sword on my back, I had it crafted specially for me, it left me without even a zenny, but now nobody will mention my small pintle!.")

@@ -165,7 +165,7 @@
 		slot_flags &= ~ITEM_SLOT_HIP
 		open = TRUE
 		playsound(src, 'sound/items/book_open.ogg', 100, FALSE, -1)
-		if(ismob(loc) && !HAS_TRAIT(loc, TRAIT_SORCERER))
+		if(ismob(loc) && !HAS_TRAIT(loc, TRAIT_SORCERER) && !HAS_TRAIT(loc, TRAIT_BLOOD_SORCERER))
 			SEND_SIGNAL(src, COMSIG_MASTERY_ADD_SPELLS, user)
 	else
 		slot_flags |= ITEM_SLOT_HIP

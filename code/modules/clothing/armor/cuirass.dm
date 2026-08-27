@@ -92,17 +92,6 @@
 	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 3 KILOGRAMS
 
-/obj/item/clothing/armor/cuirass/vampire
-	name = "ancient plate"
-	desc = "A ornate, ceremonial plate cuirass of considerable age."
-	icon_state = "vplate"
-
-	armor_class = AC_MEDIUM
-	armor_type = /datum/armor/plate/good
-	body_parts_covered = COVERAGE_TORSO
-	prevent_crits = ALL_CRITICAL_HITS_VAMP
-	item_weight = 6 KILOGRAMS
-
 /obj/item/clothing/armor/cuirass/fencer
 	name = "fencer's cuirass"
 	desc = "An expertly smithed form-fitting steel cuirass that is much lighter and agile, but breaks with much more ease. It's thinner, but backed with silk and leather."	// Experimental.

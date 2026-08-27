@@ -56,7 +56,7 @@
 	spell_cost = 80
 
 	spell_type = SPELL_BLOOD
-	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 	associated_skill = /datum/attribute/skill/magic/blood
 
 /datum/action/cooldown/spell/charm/vampire/do_charm(mob/living/cast_on)
