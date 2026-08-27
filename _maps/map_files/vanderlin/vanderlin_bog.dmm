@@ -7430,7 +7430,7 @@
 /obj/item/clothing/gloves/plate/zizo,
 /obj/item/clothing/shoes/boots/armor/zizo,
 /obj/item/clothing/pants/platelegs/zizo,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/shelter/bog/lich)
 "fOp" = (

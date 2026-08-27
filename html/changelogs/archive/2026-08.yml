@@ -268,3 +268,81 @@
       but most importantly: a slot machine.'
   - qol: Added a small area of safe, ambush-free basin land southeast of the town.
   - rscadd: Added a few religious shrines for the intrepid explorer.
+2026-08-22:
+  CheffieGithub:
+  - rscdel: Removed natural fog
+  - balance: Reduced duration and probability of weather
+  ModDownloading:
+  - balance: Shortsword damage increased from 16 to 22, and the Cut intent deals full
+      damage instead of 85%.
+  - balance: Sabre damage increased from 20 to 24.
+  - balance: Iron Warhammer damage increased from 20 to 22, and they have the Thrust
+      intent now like the other Warhammers.
+  - balance: Steel and Silver Warhammer damage reduced from 25 to 24.
+  - balance: Rapiers now have the Lunge intent. All forms of the Lunge intent now
+      have a short charge-up time.
+  - balance: Confessions and Accusations on people with Inquisitorial Suspicion will
+      always give a few marques, even if the target is innocent.
+  Telvayne:
+  - qol: Reduced hunger/thirst rates
+  - refactor: brought hunger and thirst variables back into operation
+  realforest2001:
+  - rscadd: Added Gold and Blacksteel quarterstaves.
+  - rscadd: Added Steel, Bronze and Blacksteel whips.
+  - image: Added sprites for above, plus butler unique whip sprite all from Azure
+      Peak.
+  - rscadd: Changed the description of Repenta En to match the new sprite.
+  - rscdel: Removed Repenta En from all mobs that had it other than Dungeoneer and
+      Gaoler.
+  - image: Added crossbow sprites from Azure Peak.
+  - image: Added sprites for more zizo and other inhumen themed weapons, for later
+      use, from Azure Peak.
+  - rscadd: Added Baotha swordstaff, unaccessible at present.
+  - rscdel: Removed an unused inhumen paladin preset based on maniac patron.
+  - rscadd: Added blacksteel swords, rapier, dagger and throwing knife.
+2026-08-23:
+  TheDoktorZ:
+  - map: A new tomb tile added.
+  realforest2001:
+  - rscadd: Added new darksteel weapons for zizo nerds.
+  ta3754859-max:
+  - bugfix: Painless battle & Flawed immortality rituals no longer nuke your stats
+2026-08-24:
+  realforest2001:
+  - rscadd: '''necromancer'' robes have been renamed to magus robes (there was already
+      a version with this name so we''re sticking with it.'
+  - rscadd: ominous hood renamed to magus hood and given a crafting recipe.
+  - rscdel: Removed the hood from a few outfits that had it but didn't fit.
+  - bugfix: Fixes a runtime with shirts in the loadout menu.
+  - bugfix: Fixes runtime with ore sight.
+  - bugfix: Fixes being able to fly while carrying people (and subsequent bug).
+2026-08-25:
+  Avalon-Proto:
+  - rscadd: Adds Blacksteel Weapons - Halberd, Axe, Double headed axe
+  - rscadd: Adds Weapons - Silver Double headed axe, Double headed steel battle axe
+  - balance: Ensures all Blacksteel weapons are very durable
+  - balance: Trade's the matron's stiletto for a Misericorde
+  realforest2001:
+  - rscadd: Added Bloodstone (ore) and Bloodsteel metal.
+  - rscadd: Added Bloodsteel weapons and crafting recipes.
+  - rscadd: Added Blood Curse, applied by holding bloodsteel/bloodstones or attacking
+      with bloodsteel weapons.
+  - rscadd: Added Bloodstone essence poison, used by the Blood Curse.
+2026-08-26:
+  dwasint:
+  - rscadd: splint which allows you to restore a limbs usability when fractured, but
+      it breaks if you take a blunt hit.
+  - rscadd: tourniquet which disables a limb but stops the bleeding, after 5 minutes
+      the limb starts suffering pain, and at 25 minutes it rots if left on.
+  - qol: There is now a 10 second grace period that drastically reduces the brain
+      damage you suffer while in crit after each CPR stage.
+  - qol: after each cpr stage a 10 second grace window is applied to arteries that
+      allow it to move blood even if the body is fully failing preventing organ rot.
+  - rscadd: limbs now rot independantly and skeletonize independantly
+  - rscadd: oozeing mass, it appears in your head when you die and can start turning
+      undead. When you are fully rotted starts turning you into a zombie. It can be
+      removed to delay zombification if you need time to remove the rot on the limbs.
+  - rscadd: zombies biting can start a living infection which slowly rots your limbs
+      until you turn into a zombie aswell (this was just broken lol)
+  realforest2001:
+  - rscdel: Removed duplicate crafting entry for blacksteel axe.

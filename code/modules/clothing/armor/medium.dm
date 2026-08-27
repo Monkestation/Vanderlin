@@ -6,7 +6,7 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/scale
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	clothing_flags = CANT_SLEEP_IN
 	prevent_crits = ALL_EXCEPT_STAB
 	abstract_type = /obj/item/clothing/armor/medium
@@ -19,7 +19,7 @@
 
 	body_parts_covered = COVERAGE_ALL_BUT_ARMS
 	prevent_crits = ALL_CRITICAL_HITS
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 7 KILOGRAMS
 
 /obj/item/clothing/armor/medium/scale/steppe
@@ -58,7 +58,7 @@
 	icon_state = "inqcoat"
 	item_state = "inqcoat"
 	sleevetype = "shirt"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	equip_delay_self = 4 SECONDS
 	blocksound = SOFTHIT

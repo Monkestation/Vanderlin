@@ -1138,7 +1138,7 @@
 		if(heal_flags & HEAL_ADMIN) //reset rot on admin revives
 			for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 				bodypart.revive_limb()
-				bodypart.germ_level = 0
+				bodypart.set_germ_level(0)
 				bodypart.skeletonized = FALSE
 				bodypart.remove_pain(bodypart.pain_dam)
 
@@ -1281,6 +1281,7 @@
 	VV_DROPDOWN_OPTION(VV_HK_MARTIAL_ART, "Give Martial Arts")
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_TRAUMA, "Give Brain Trauma")
 	VV_DROPDOWN_OPTION(VV_HK_CURE_TRAUMA, "Cure Brain Traumas")
+	VV_DROPDOWN_OPTION(VV_HK_CURE_ROT, "Cure Rot")
 	VV_DROPDOWN_OPTION(VV_HK_SHOW_RELATIONS, "Show Relations")
 
 /mob/living/carbon/vv_do_topic(list/href_list)
@@ -1455,6 +1456,8 @@
 			return FALSE
 	if(istype(loc, /turf/open/water) && body_position == LYING_DOWN)
 		return FALSE
+	if(has_status_effect(/datum/status_effect/debuff/blood_choke))
+		return FALSE
 
 /mob/living/carbon/proc/try_skin_burn(reaction_volume)
 	var/list/covered_zones = get_covered_body_zones()
@@ -1586,6 +1589,24 @@
 		old_eye.Remove(src, TRUE)
 	var/old_eye_type = eye_dna.organ_type
 	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/zombie
+	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
+	eyes.Insert(src, TRUE)
+	var/obj/item/organ/eyes/eyes_two = eye_dna.create_organ(species = dna.species)
+	eyes_two.switch_side(eyes_two.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
+	eyes_two.Insert(src, TRUE)
+	eye_dna.organ_type = old_eye_type
+
+	update_eyes() // ??? why
+
+/// grant nightmare eyes to a carbon mob.
+/mob/living/carbon/proc/grant_nightmare_eyes()
+	var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
+	if(!eye_dna)
+		return
+	for(var/obj/item/organ/old_eye in getorganslotlist(ORGAN_SLOT_EYES))
+		old_eye.Remove(src, TRUE)
+	var/old_eye_type = eye_dna.organ_type
+	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/nightmare
 	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
 	eyes.Insert(src, TRUE)
 	var/obj/item/organ/eyes/eyes_two = eye_dna.create_organ(species = dna.species)

@@ -13,6 +13,7 @@
 	grid_width = 32
 	grid_height = 96
 	item_weight = 143 GRAMS
+	max_integrity = INTEGRITY_STATIC_200
 	var/obj/item/held_item = null
 
 /obj/item/weapon/tongs/Initialize(mapload)
@@ -161,4 +162,4 @@
 	force = 3
 	smeltresult = null
 	anvilrepair = null
-	max_integrity = INTEGRITY_WORST / 5
+	max_integrity = INTEGRITY_STATIC_200 * INTEGRITY_MOD_IMPROV

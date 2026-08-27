@@ -11,6 +11,7 @@
 
 	required_form = FORM_DEATH
 	required_technique = TECHNIQUE_ALTERATION
+	heretical_spell = TRUE
 
 	invocation = "Return to rot."
 	invocation_type = INVOCATION_WHISPER
