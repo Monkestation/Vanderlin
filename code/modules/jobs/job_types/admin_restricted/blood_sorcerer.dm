@@ -68,7 +68,7 @@
 
 	var/static/list/selectablehat = list(
 		"Blood Red hood (Discreet)" = /obj/item/clothing/head/roguehood/colored/blood,
-		"Enhanced Blood Red hood (Obvious)" = /obj/item/clothing/head/roguehood/colored/blood/enhanced,
+		"Enhanced Blood Red hood (Obvious)" = /obj/item/clothing/head/roguehood/bloodweave,
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
 		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Magus hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/magus,
@@ -77,7 +77,7 @@
 
 	var/static/list/selectablerobe = list(
 		"Blood Red robes (Discreet)" = /obj/item/clothing/shirt/robe/colored/blood,
-		"Enhanced Blood Red robes (Obvious)" = /obj/item/clothing/shirt/robe/colored/blood/enhanced,
+		"Enhanced Blood Red robes (Obvious)" = /obj/item/clothing/shirt/robe/bloodweave,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Magus robes" = /obj/item/clothing/shirt/robe/magus
