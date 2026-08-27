@@ -22,7 +22,7 @@
 	attack_verb_simple = "bite"
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/mince/beef= 1)
 	pass_flags = PASSTABLE
-	faction = list("hostile")
+	faction = list(FACTION_NEUTRAL)
 	attack_sound = 'sound/blank.ogg'
 	obj_damage = 0
 	environment_smash = ENVIRONMENT_SMASH_NONE

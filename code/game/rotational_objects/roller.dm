@@ -8,12 +8,10 @@
 	layer = BELOW_OPEN_DOOR_LAYER
 	rotation_structure = TRUE
 	stress_use = 0
-	initialize_dirs = CONN_DIR_LEFT | CONN_DIR_RIGHT
+	initialize_dirs = CONN_DIR_ALL_CARDINAL
 
 	var/operating = FALSE
 	var/movedir
-
-	var/list/connected_rollers = list()
 
 /obj/structure/roller/Initialize(mapload)
 	. = ..()
@@ -27,35 +25,14 @@
 		COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON = PROC_REF(conveyable_enter)
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
+	AddComponent(/datum/component/simple_rotation, ROTATION_REQUIRE_WRENCH|ROTATION_IGNORE_ANCHORED)
 
 	return INITIALIZE_HINT_LATELOAD
-
-/obj/structure/roller/LateInitialize()
-	. = ..()
-	movedir = dir
-	set_connection_dir()
-	find_rotation_network()
-	build_roller_chain()
-
-/obj/structure/roller/set_connection_dir()
-	dpdir = turn(dir, 90) | turn(dir, -90) | movedir | REVERSE_DIR(movedir)
-
-/obj/structure/roller/Destroy()
-	for(var/obj/structure/roller/connected in connected_rollers)
-		connected.connected_rollers -= src
-	connected_rollers = list()
-
-	return ..()
 
 /obj/structure/roller/examine(mob/user)
 	. = ..()
 	. += span_notice("It moves items [dir2text(movedir)].")
 	. += span_notice("Rotation can be connected from the [get_rotation_sides_text()] sides.")
-	if(rotation_network)
-		. += span_notice("RPM: [rotations_per_minute]")
-		. += span_notice("Rollers don't consume stress from the network.")
-	. += span_notice("Use a <b>wrench</b> to rotate it.")
-	. += span_notice("Use a <b>crowbar</b> to deconstruct it.")
 
 /obj/structure/roller/proc/get_rotation_sides_text()
 	var/list/sides = list()
@@ -78,14 +55,14 @@
 		if(!istype(connector, /obj/structure/roller))
 			return FALSE
 		var/obj/structure/roller/other_roller = connector
-		if(other_roller.movedir != movedir && other_roller.movedir != REVERSE_DIR(movedir))
+		if(other_roller.movedir != movedir)
 			return FALSE
 
 	return TRUE
 
 /obj/structure/roller/setDir(newdir)
-	. = ..()
 	movedir = newdir
+	. = ..()
 	update_appearance()
 
 /obj/structure/roller/rotation_break()
@@ -104,13 +81,6 @@
 			stop_conveying(movable)
 	update_appearance()
 	return TRUE
-
-/obj/structure/roller/proc/build_roller_chain()
-	var/turf/forward_turf = get_step(src, movedir)
-	var/obj/structure/roller/forward_roller = locate(/obj/structure/roller) in forward_turf
-	if(forward_roller && (forward_roller.movedir == movedir || forward_roller.movedir == REVERSE_DIR(movedir)))
-		connected_rollers |= forward_roller
-		forward_roller.connected_rollers |= src
 
 /obj/structure/roller/proc/get_move_delay()
 	// Higher RPM = faster movement (shorter delay)
@@ -164,8 +134,6 @@
 	tool.play_tool_sound(src, 50)
 	setDir(turn(dir, 90))
 	to_chat(user, span_notice("You rotate [src]."))
-	connected_rollers = list()
-	build_roller_chain()
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/roller/update_appearance()
@@ -249,10 +217,6 @@
 	tool.play_tool_sound(src, 50)
 	setDir(turn(dir, 90))
 	to_chat(user, span_notice("You rotate [src]."))
-
-	// Rebuild connections (parent's setDir handles rotation network)
-	connected_rollers = list()
-	build_roller_chain()
 	return TRUE
 
 /obj/structure/roller/attackby(obj/item/attacking_item, mob/user, list/modifiers)

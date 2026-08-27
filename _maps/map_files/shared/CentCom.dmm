@@ -5443,7 +5443,7 @@
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/armor/medium/surcoat/heartfelt,
 /obj/item/clothing/armor/medium/surcoat,
-/obj/item/clothing/armor/cuirass/vampire,
+/obj/item/clothing/armor/plate/ancient/vampire,
 /obj/item/clothing/armor/plate/blkknight,
 /turf/open/floor/carpet,
 /area/indoors)

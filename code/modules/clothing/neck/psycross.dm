@@ -198,6 +198,14 @@
 	desc = "Nature is a body of which we are but its entrails."
 	icon_state = "dendor"
 
+/obj/item/clothing/neck/psycross/silver/divine/dendor/divine_link
+	name = "blessed amulet of Dendor"
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/neck/psycross/silver/divine/dendor/divine_link/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/divine_link)
+
 /obj/item/clothing/neck/psycross/silver/divine/abyssor
 	name = "amulet of Abyssor"
 	desc = "Oceanshaper and guardian of the seas, make them remember his name."

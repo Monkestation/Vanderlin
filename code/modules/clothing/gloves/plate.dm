@@ -19,7 +19,7 @@
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/gloves/plate
 	prevent_crits = ALL_EXCEPT_STAB
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 
 	grid_width = 64
 	grid_height = 32
@@ -33,7 +33,7 @@
 	icon_state = "igauntlets"
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/gloves/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/gloves/plate/iron/banded
 	name = "banded iron gauntlets"
@@ -52,7 +52,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/gloves/plate/bad
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 
 /obj/item/clothing/gloves/plate/blk
 	name = "blacksteel gauntlets"
@@ -67,6 +67,7 @@
 	armor_type = /datum/armor/gloves/plate/good
 	item_weight = 1.65 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 /obj/item/clothing/gloves/plate/silver
 	name = "silver gauntlets"
@@ -92,6 +93,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/gloves/plate/matthios
 	name = "gilded gauntlets"

@@ -23,7 +23,7 @@
 	desc = "Standard leather pants for hardy workers."
 	icon_state = "leathertrou"
 	armor_type = /datum/armor/pants/leather
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 0.7 KILOGRAMS
 
 /obj/item/clothing/pants/trou/leather/guard
@@ -35,17 +35,13 @@
 	desc = "Affordable armored pants for regular soldiers, they seem simple and their craftsmanship is solid, makes sure all stays in place with a plated codpiece."
 	icon_state = "splintlegs"
 	armor_type = /datum/armor/pants/maille/iron
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 1.2 KILOGRAMS
-
-/obj/item/clothing/pants/trou/leather/guard
-	uses_lord_coloring = LORD_PRIMARY
-	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/pants/trou/leather/advanced
 	name = "hardened leather chausses"
 	desc = "Sturdy, durable, flexible. The finest leather to protect your nether regions."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/pants/leather/advanced
 
@@ -80,7 +76,7 @@
 /obj/item/clothing/pants/trou/leather/masterwork
 	name = "masterwork leather chausses"
 	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/pants/leather/master
 
@@ -135,7 +131,7 @@
 	color = "#5a5a5a"
 	armor_type = /datum/armor/pants/padded
 	prevent_crits = MINOR_CRITICALS
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 
 /obj/item/clothing/pants/trou/formal
 	name = "formal trousers"

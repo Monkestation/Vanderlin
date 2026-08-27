@@ -151,4 +151,6 @@ h1.alert, h2.alert	{color: #c9c1ba;font-family: Pterra, TrueType;}
 
 .prayer 				{color: #f1d55b; font-weight: bold;}
 
+.yellow					{color: #ffe006;}
+
 </style>"}

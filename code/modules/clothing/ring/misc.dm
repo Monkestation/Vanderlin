@@ -183,7 +183,7 @@
 
 /obj/item/clothing/ring/active/nomag/activate(mob/user)
 	. = ..()
-	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE, INFINITY, ITEM_SLOT_RING)
+	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_MIND, INFINITY, ITEM_SLOT_RING)
 
 /obj/item/clothing/ring/active/nomag/demagicify()
 	. = ..()
