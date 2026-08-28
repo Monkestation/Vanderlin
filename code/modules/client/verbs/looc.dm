@@ -71,7 +71,13 @@
 	var/list/mobs = list()
 	var/muted = prefs.muted
 	mobs += src
-	var/prefix = isobserver(mob) ? "LOOC: (GHOST):" : "LOOC:"
+
+	var/prefix = "LOOC:"
+	if(isobserver(mob))
+		prefix = "LOOC: (GHOST):"
+	else if(mob.stat == DEAD)
+		prefix = "LOOC: (DEAD):"
+
 	for(var/mob/hear_mob in range(7, get_turf(mob)))
 		var/added_text
 		var/client/mob_client = hear_mob.client
