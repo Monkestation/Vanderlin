@@ -763,6 +763,13 @@
 				toxin_report = " [span_red("\[DANGER\]")]"
 			examination += "<font color = '[reagent.color]'>[reagent.name] ([floor(reagent.volume)])[toxin_report]</font>"
 
+	if(deep_examination)
+		if(has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+			examination += "ø ------------ ø"
+			examination += "[span_bloody("BLOOD CURSED")]"
+		else if(has_status_effect(/datum/status_effect/debuff/blood_mark))
+			examination += "ø ------------ ø"
+			examination += "[span_bloody("BLOOD MARKED")]"
 	examination += "ø ------------ ø</span>"
 	if(!silent)
 		to_chat(user, examination.Join("\n"))

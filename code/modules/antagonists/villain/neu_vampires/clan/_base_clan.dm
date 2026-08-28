@@ -120,6 +120,8 @@ And it also helps for the character set panel
 		// Apply vampire-specific traits
 		for (var/trait in clane_traits)
 			ADD_TRAIT(H, trait, "clan")
+		ADD_TRAIT(H, TRAIT_BLOOD_SENSE, "clan")
+		ADD_TRAIT(H, TRAIT_VITAE_USER, "clan")
 
 		// Apply vampire-specific changes
 		H.has_reflection = FALSE
@@ -277,6 +279,8 @@ And it also helps for the character set panel
 	// Remove unique Clan feature traits
 	for (var/trait in clane_traits)
 		REMOVE_TRAIT(vampire, trait, "clan")
+	REMOVE_TRAIT(vampire, TRAIT_BLOOD_SENSE, "clan")
+	REMOVE_TRAIT(vampire, TRAIT_VITAE_USER, "clan")
 
 	var/datum/component/sunlight_vulnerability/sun_comp = vampire.GetComponent(/datum/component/sunlight_vulnerability)
 	if(sun_comp)

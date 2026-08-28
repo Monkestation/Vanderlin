@@ -12,7 +12,7 @@
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST, DAGGER_CHOP)
 	max_blade_int = 150
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_IRON
 
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	gripsprite = FALSE
@@ -55,7 +55,7 @@
 	icon_state = "huntingknife"
 	force = DAMAGE_DAGGER
 	melting_material = /datum/material/steel
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_STEEL
 	melt_amount = 75
 	sellprice = 6
 	item_weight = 150 GRAMS
@@ -99,7 +99,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "iscissors"
 	possible_item_intents = list(DAGGER_THRUST, DAGGER_CUT, SCISSOR_SNIP)
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_IRON
 	melt_amount = 75
 	item_weight = 250 GRAMS
 
@@ -171,7 +171,7 @@
 	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing, more durable and a tad more deadly than their iron counterpart."
 	icon_state = "sscissors"
 	force = DAMAGE_DAGGER
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_STEEL
 	melting_material = /datum/material/steel
 	item_weight = 280 GRAMS
 
@@ -185,7 +185,6 @@
 	throwforce = DAMAGE_KNIFE + 6
 	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
-	max_integrity = INTEGRITY_POOR
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CHOP
 	w_class = WEIGHT_CLASS_NORMAL
@@ -201,21 +200,21 @@
 	force = DAMAGE_KNIFE + 3
 	throwforce = DAMAGE_KNIFE + 5
 	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP) // Its a steel cleaver, plus it lets you use it with a meathook as both cleaver to chop the animal and a knife to skin it
-	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/steel
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
 	item_weight = 250 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
 
 //................ Bronze Dagger ............... //s
 /obj/item/weapon/knife/dagger/bronze
 	name = "bronze dagger"
 	desc = "A dagger made out of bronze."
 	icon_state = "dagger_bronze"
-	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/bronze
 	sellprice = 10
 	item_weight = 180 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BRONZE
 
 //................ Iron Dagger ............... //
 /obj/item/weapon/knife/dagger
@@ -228,6 +227,7 @@
 
 	weapon_special = /datum/special_intent/triple_stab
 	item_weight = 200 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_IRON
 
 /obj/item/weapon/knife/dagger/jile
 	name = "iron jile"
@@ -242,9 +242,9 @@
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
-	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/iron
 	item_weight = 250 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
@@ -263,7 +263,7 @@
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_HARD_TO_DODGE
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
 	melting_material = /datum/material/steel
 	item_weight = 220 GRAMS
 
@@ -311,6 +311,7 @@
 	wdefense = AVERAGE_PARRY
 	melt_amount = 75
 	item_weight = 270 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
 	name = "plaguebringer sickle"
@@ -326,6 +327,7 @@
 	icon_state = "sdaggerhand"
 	sellprice = 200
 	item_weight = 220 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
 	name = "\proper apathy"
@@ -349,6 +351,7 @@
 	color = "#f78ccc"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 	item_weight = 200 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/knife/dagger/steel/baotha/Initialize(mapload)
 	. = ..()
@@ -361,7 +364,7 @@
 	desc = "A dagger made of fine silver, the bane of the undead."
 	icon_state = "sildagger"
 	max_blade_int = 160
-	max_integrity = INTEGRITY_STRONG * 0.8
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_SILVER
 	melting_material = /datum/material/silver
 	sellprice = 45
 	last_used = 0
@@ -380,8 +383,9 @@
 	wdefense = GOOD_PARRY
 	wbalance = VERY_HARD_TO_DODGE
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
+	melt_amount = 50
 	item_weight = 180 GRAMS
 
 /obj/item/weapon/knife/dagger/blacksteel/misericorde
@@ -389,7 +393,25 @@
 	desc = "A magnificent armor-piercing dagger of blacksteel. The curved handle is said to naturally improve one's aim, while locked in a \
 	lyfe-or-death struggle with plate-armored opponents."
 	icon_state = "bs_misericorde"
+	force = DAMAGE_DAGGER + 3
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
+
+//................ Bloodsteel Dagger ............... //
+/obj/item/weapon/knife/dagger/bloodsteel
+	name = "bloodsteel dagger"
+	desc = "A dagger made of refined bloodsteel."
+	icon_state = "corruptdagger"
+	wdefense = AVERAGE_PARRY
+	wbalance = VERY_HARD_TO_DODGE
+	max_blade_int = 200
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BLOODSTEEL
+	melting_material = /datum/material/bloodsteel
+	item_weight = 200 GRAMS
+	sellprice = 0
+
+/obj/item/weapon/knife/dagger/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon
@@ -414,6 +436,7 @@
 	stealthy_audio = TRUE
 	sellprice = 250
 	item_weight = 200 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/knife/dagger/steel/profane/examine(mob/user)
 	. = ..()
@@ -592,7 +615,7 @@
 	wdefense = TERRIBLE_PARRY
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	max_integrity = INTEGRITY_WORST - 70
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_IMPROV
 	max_blade_int = 50
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
@@ -606,7 +629,6 @@
 	icon = 'icons/roguetown/gems/gem_jade.dmi'
 	icon_state = "kukri_jade"
 	wdefense = AVERAGE_PARRY
-	max_integrity = INTEGRITY_WORST / 2
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 75
@@ -618,7 +640,7 @@
 	icon = 'icons/roguetown/gems/gem_opal.dmi'
 	icon_state = "knife_opal"
 	wdefense = AVERAGE_PARRY
-	max_integrity = INTEGRITY_WORST / 2
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_IMPROV * INTEGRITY_SPECIAL_MALUS
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 105
@@ -638,10 +660,10 @@
 	icon_state = "cdagger"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	max_blade_int = 100
-	max_integrity = INTEGRITY_WORST
 	melting_material = /datum/material/copper
 	sellprice = 10
 	item_weight = 180 GRAMS
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_COPPER
 
 /obj/item/weapon/knife/throwingknife
 	name = "iron tossblade"
@@ -651,7 +673,7 @@
 	throwforce = DAMAGE_DAGGER + 13
 	wdefense = MEDIOCRE_PARRY
 	throw_speed = 4
-	max_integrity = INTEGRITY_WORST - 50
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_IRON
 	icon_state = "throw_knifei"
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 20)
 	melt_amount = 50
@@ -665,7 +687,7 @@
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 10
 	throw_speed = 4
-	max_integrity = INTEGRITY_WORST - 30
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_BRONZE
 	icon_state = "throwing_bronze"
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 25, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/bronze
@@ -679,7 +701,7 @@
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 15
 	throw_speed = 4
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_STEEL
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/steel
 	sellprice = 4
@@ -692,7 +714,7 @@
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 17
 	throw_speed = 4
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_BLACKSTEEL
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/blacksteel
 	sellprice = 10
@@ -705,7 +727,7 @@
 	item_state = "bone_dagger"
 	wdefense = GOOD_PARRY
 	throw_speed = 4
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_SILVER
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)
 	sellprice = 65
 	melting_material = /datum/material/silver
@@ -721,7 +743,7 @@
 	icon_state = "rouskunai"
 	wdefense = GOOD_PARRY
 	throw_speed = 4
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_IRON
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 15)
 	sellprice = 5
 	item_weight = 80 GRAMS
@@ -731,7 +753,7 @@
 	desc = "A thin sheet of pig-iron stamped into a calling card, too thin and useless to be smelted. You've been had. From Heartfelt with love."
 	icon_state = "throwcard"
 	throw_speed = 5
-	max_integrity = INTEGRITY_WORST - 50 // It's not about how effective it is, it's about sending a message.
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_IRON // It's not about how effective it is, it's about sending a message.
 	embedding = list("embedded_pain_multiplier" = 2, "embed_chance" = 50, "embedded_fall_chance" = 5)
 	sellprice = 2
 	item_weight = 30 GRAMS

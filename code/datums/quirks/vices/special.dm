@@ -444,6 +444,7 @@
 	customization_type = QUIRK_TEXT
 	customization_label = "Why do they suspect me?"
 	customization_placeholder = "Spotted eating organs."
+	var/logged = FALSE
 
 /datum/quirk/vice/suspicion/get_desc(datum/preferences/prefs)
 	var/reason = prefs?.quirk_customizations[type]
@@ -459,6 +460,11 @@
 
 	var/mob/living/carbon/human/H = owner
 
-	GLOB.inquis_suspect_players += H.real_name
+	GLOB.inquis_suspect_players |= H.real_name
 	to_chat(H, span_boldwarning("For reasons legitimate or not, I am hunted by the inquisition in this land..."))
+
+	if(!logged && H.name)
+		log_hunted("[H.ckey] playing as [H.name] has the Inquisitorial Suspicion quirk.")
+		logged = TRUE
+
 	return ..()

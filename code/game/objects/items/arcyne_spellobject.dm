@@ -363,7 +363,7 @@
 
 /obj/item/arcyne_spellobject/proc/generate_random_spells()
 	var/datum/action/cooldown/spell/spell_type_path = pick(subtypesof(/datum/action/cooldown/spell))
-	while(IS_ABSTRACT(spell_type_path) || initial(spell_type_path.spell_tier) < min_spell_tier || initial(spell_type_path.spell_tier) > max_spell_tier || (initial(spell_type_path.spell_flags) & SPELL_UNETCHABLE) || (initial(spell_type_path.spell_flags) & SPELL_ESSENCE))
+	while(IS_ABSTRACT(spell_type_path) || initial(spell_type_path.spell_tier) < min_spell_tier || initial(spell_type_path.spell_tier) > max_spell_tier || (initial(spell_type_path.spell_flags) & SPELL_UNETCHABLE) || (initial(spell_type_path.spell_type) != SPELL_MANA))
 		spell_type_path = pick(subtypesof(/datum/action/cooldown/spell))
 
 	var/datum/spellobject_entry/E = new()

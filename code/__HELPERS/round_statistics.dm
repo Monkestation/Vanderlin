@@ -51,6 +51,7 @@
 #define STATS_MAMMONS_WITHDRAWN "mammons_withdrawn"
 #define STATS_STARTING_TREASURY "starting_treasury"
 #define STATS_FOREIGNERS "alive_foreigners"
+#define STATS_BLOODMAGIC_REVIVALS "bloodmagic_revivals"
 
 // Influence related statistics
 
@@ -69,7 +70,6 @@
 #define STATS_NOBLE_DEATHS "noble_deaths"
 #define STATS_PEOPLE_SMITTEN "smited"
 #define STATS_ASTRATA_REVIVALS "astrata_revivals"
-#define STATS_NOC_REVIVALS "noc_revivals"
 #define STATS_TAXES_COLLECTED "taxes_collected"
 #define STATS_SLURS_SPOKEN "slurs_spoken"
 
@@ -79,6 +79,7 @@
 #define STATS_ILLITERATES "illiterates"
 #define STATS_SKILLS_DREAMED "skills_dreamed"
 #define STATS_MANA_SPENT "mana_spent"
+#define STATS_NOC_REVIVALS "noc_revivals"
 
 // Necra
 #define STATS_DEATHS "deaths"
@@ -205,6 +206,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_POTIONS_BREWED = 0,
 	STATS_ASTRATA_REVIVALS = 0,
 	STATS_NOC_REVIVALS = 0,
+	STATS_BLOODMAGIC_REVIVALS = 0,
 	STATS_PLANTS_HARVESTED = 0,
 	STATS_LAWS_AND_DECREES_MADE = 0,
 	STATS_ALIVE_NOBLES = 0,

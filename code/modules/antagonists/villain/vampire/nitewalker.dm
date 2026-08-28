@@ -92,6 +92,7 @@
 	blade.grant_language(/datum/language/celestial_moon)
 	blade.grant_language(/datum/language/newpsydonic)
 	blade.grant_language(/datum/language/oldpsydonic)
+	blade.grant_language(/datum/language/sanguine)
 	blade.add_quirk(/datum/quirk/vice/addiction/godfearing)
 
 	blade.honorary_suffix = "the Nitewarden"

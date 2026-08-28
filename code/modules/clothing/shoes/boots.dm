@@ -8,7 +8,7 @@
 	sellprice = 10
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	wetable = FALSE
 	abstract_type = /obj/item/clothing/shoes/boots
 
@@ -20,7 +20,7 @@
 	icon_state = "blackboots"
 	item_state = "blackboots"
 	sewrepair = /datum/attribute/skill/craft/tanning/patching
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/armor
@@ -33,7 +33,7 @@
 	color = null
 	blocksound = PLATEHIT
 	armor_type = /datum/armor/boots/plate
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	armor_class = AC_HEAVY
 	clothing_flags = CANT_SLEEP_IN
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
@@ -77,7 +77,7 @@
 	item_state = "soldierboots"
 	desc = "Lightly armored boots made from iron offering protection against both melee and ranged attacks."
 	armor_type = /datum/armor/boots/brigandine
-	max_integrity = INTEGRITY_STRONG + 50
+	max_integrity = INTEGRITY_OLD_STRONG + 50
 	armor_class = AC_MEDIUM
 	sellprice = 20
 	item_weight = 1.4 KILOGRAMS
@@ -107,7 +107,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/boots/plate/bad
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 
 /obj/item/clothing/shoes/boots/armor/blkknight
 	name = "blacksteel boots"
@@ -119,9 +119,10 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
-	armor_type = /datum/armor/boots/plate
+	armor_type = /datum/armor/boots/plate/good
 	item_weight = 2.1 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 /obj/item/clothing/shoes/boots/leather
 	name = "leather boots"
@@ -137,7 +138,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
 	item_weight = 1.4 KILOGRAMS
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	wetable = FALSE
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BOOTS ARE INTENDED
@@ -148,7 +149,7 @@
 	desc = "These boots arent for those sitting on cushioned chairs, or prissy nobles. No, these are for the true explorer, the wilds tamer, the truth seeker. And like any good explorer, this pair of boots comes with a hidden suprise, for those trying to hide a small blade."
 	icon_state = "hunterboots"
 	item_state = "hunterboots"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/boots/leather/hunter
 	min_cold_protection_temperature = -15
@@ -168,7 +169,7 @@
 	desc = "These 'boots'- A masterfully crafted tool for any aspiring wildsmen- are for those trekking out, hunting a wild beast through miles of thick woods, and then dragging your kill back with a stoic certainty. Strong, durable, unrelenting, just like how psydon intended!"
 	icon_state = "hunterboots"
 	item_state = "hunterboots"
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/boots/leather/master
 
@@ -179,7 +180,7 @@
 /obj/item/clothing/shoes/boots/leather/advanced
 	name = "hardened leather boots"
 	desc = "Sturdy, durable, flexible. A marvel of the dark ages that exists solely to protect your toes."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/boots/leather/advanced
 	wetable = FALSE
@@ -199,7 +200,7 @@
 /obj/item/clothing/shoes/boots/leather/masterwork
 	name = "masterwork leather boots"
 	desc = "These boots are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/boots/leather/master
 	wetable = FALSE
@@ -226,14 +227,14 @@
 /obj/item/clothing/shoes/boots/furlinedboots/advanced
 	name = "hardened fur lined boots"
 	desc = "Boots lined with fur, and protected with hardened, expertly tanned leather."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/boots/leather/advanced
 
 /obj/item/clothing/shoes/boots/furlinedboots/masterwork
 	name = "masterwork fur lined boots"
 	desc = "Boots lined with thick fur, and protected with hardened, masterfully tanned leather made by only the best."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/boots/leather/master
 
@@ -294,6 +295,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	smeltresult = /obj/item/ingot/avantyne
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/shoes/boots/armor/zizo/Initialize()
 	. = ..()

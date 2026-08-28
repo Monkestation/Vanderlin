@@ -114,6 +114,21 @@
 	item_weight = 4.2 KILOGRAMS
 	indexed = TRUE
 
+/obj/item/ore/bloodstone
+	name = "bloodstone"
+	desc = "A blood red stone of uncertain origin, the precursor for bloodsteel."
+	icon_state = "orecorrupt1"
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	sellprice = 0 // No one will buy this
+	item_weight = 4.15 KILOGRAMS
+	mill_result = /obj/item/ore/dust/bloodstone
+
+/obj/item/ore/bloodstone/Initialize(mapload)
+	. = ..()
+	icon_state = "orecorrupt[rand(1,3)]"
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/ore/coal/charcoal
 	name = "charcoal"
 	icon_state = "oreada"
@@ -326,6 +341,19 @@
 	melting_material = /datum/material/blacksteel
 	item_weight = 5.2 KILOGRAMS
 
+/obj/item/ingot/bloodsteel
+	name = "bloodsteel bar"
+	desc = "A bar of cursed bloodsteel."
+	icon_state = "ingotcorrupt"
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	sellprice = M_STEEL
+	item_weight = 5 KILOGRAMS
+
+/obj/item/ingot/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/ingot/steel_slag
 	name = "steel slag"
 	desc = "Slag containing steel, the result of blooming iron and coal."
@@ -367,6 +395,14 @@
 	. = ..()
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#FF4500", "alpha" = 50, "size" = 1))
 
+/obj/item/ingot/vampire
+	name = "ancient ceremonial alloy"
+	desc = "An ingot of enchanted gilbranze, radiating with ceremonial authority. Chiseled into the surface is an intricate golden matrix; forbidden knowledge, long lost in the wake of Zizo's ascension."
+	icon_state = "ingotvampire"
+	smeltresult = /obj/item/ingot/purifiedaalloy
+	sellprice = 200
+
+
 //Anomalous Smeltings
 /obj/item/ingot/weeping
 	name = "enduring ingot"
@@ -385,7 +421,7 @@
 /obj/item/ingot/draconic
 	name = "draconic ingot"
 	desc = "A slab of obsidian, crackling with energy. Your fingers blister from the sheer heat, radiating off of its glassy surface. </br>'..no man, be-they a saint or sinner, can truly withstand such power..' </br>'..but, perhaps, you are different..' </br>'..find a way to give the remains a new life; a new vessel that may yet make the followers of evil weep..'"
-	icon_state = "ingotblacksteel"
+	icon_state = "ingotdraconic"
 	smeltresult = /obj/item/ingot/draconic
 	melting_material = /datum/material/draconic
 	color = "#70b8ff"

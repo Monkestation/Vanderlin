@@ -307,3 +307,112 @@
   - rscadd: Added new darksteel weapons for zizo nerds.
   ta3754859-max:
   - bugfix: Painless battle & Flawed immortality rituals no longer nuke your stats
+2026-08-24:
+  realforest2001:
+  - rscadd: '''necromancer'' robes have been renamed to magus robes (there was already
+      a version with this name so we''re sticking with it.'
+  - rscadd: ominous hood renamed to magus hood and given a crafting recipe.
+  - rscdel: Removed the hood from a few outfits that had it but didn't fit.
+  - bugfix: Fixes a runtime with shirts in the loadout menu.
+  - bugfix: Fixes runtime with ore sight.
+  - bugfix: Fixes being able to fly while carrying people (and subsequent bug).
+2026-08-25:
+  Avalon-Proto:
+  - rscadd: Adds Blacksteel Weapons - Halberd, Axe, Double headed axe
+  - rscadd: Adds Weapons - Silver Double headed axe, Double headed steel battle axe
+  - balance: Ensures all Blacksteel weapons are very durable
+  - balance: Trade's the matron's stiletto for a Misericorde
+  realforest2001:
+  - rscadd: Added Bloodstone (ore) and Bloodsteel metal.
+  - rscadd: Added Bloodsteel weapons and crafting recipes.
+  - rscadd: Added Blood Curse, applied by holding bloodsteel/bloodstones or attacking
+      with bloodsteel weapons.
+  - rscadd: Added Bloodstone essence poison, used by the Blood Curse.
+2026-08-26:
+  dwasint:
+  - rscadd: splint which allows you to restore a limbs usability when fractured, but
+      it breaks if you take a blunt hit.
+  - rscadd: tourniquet which disables a limb but stops the bleeding, after 5 minutes
+      the limb starts suffering pain, and at 25 minutes it rots if left on.
+  - qol: There is now a 10 second grace period that drastically reduces the brain
+      damage you suffer while in crit after each CPR stage.
+  - qol: after each cpr stage a 10 second grace window is applied to arteries that
+      allow it to move blood even if the body is fully failing preventing organ rot.
+  - rscadd: limbs now rot independantly and skeletonize independantly
+  - rscadd: oozeing mass, it appears in your head when you die and can start turning
+      undead. When you are fully rotted starts turning you into a zombie. It can be
+      removed to delay zombification if you need time to remove the rot on the limbs.
+  - rscadd: zombies biting can start a living infection which slowly rots your limbs
+      until you turn into a zombie aswell (this was just broken lol)
+  realforest2001:
+  - rscdel: Removed duplicate crafting entry for blacksteel axe.
+2026-08-27:
+  AnnoyingIncantation:
+  - code_imp: changed one line of code in heavy.dm to make the visor adjustable. Sprites
+      already integrated in game
+  Avalon-Proto:
+  - balance: Experienced Background has become Additional skill, and has been reworked
+      into Addtional Skill. It now costs 3 Points
+  CheffieGithub:
+  - bugfix: Farm animals won't kill eachother
+  PotatoTomahto:
+  - bugfix: Fixes a variety of bugs and incorrect span usage.
+  realforest2001:
+  - code_imp: Added a proc to give nightmare eyes to a target, reducing dupe code.
+  - bugfix: Fixed the immobile mobile stove.
+  - balance: Reduced the rate at which Enervating Elegy drains stamina.
+  - bugfix: Stopped Enervating Elegy spamming stam-drain gasp emote.
+  - rscadd: Added Ancient Ceremonial Armor for Vampire Lord.
+  - image: Added the few missing sprites for above.
+  - image: Added sprite for Draconic Ingots.
+  - image: Added new sprites for Gold, Bronze and Enchanted Gilbranze ingots.
+  - image: Changed Silver ingot sprite to the blessed silver one, and changed blessed
+      silver to a psy engraved ingot.
+  - rscadd: Added Iron, Silver, Bronze and Blacksteel knuckles.
+  - rscadd: Added silver katar.
+  - rscadd: Added Silver, Blacksteel and Bloodsteel hand claws.
+  - rscadd: Added Blacksteel Flamberge, Greataxe and Eagle's Beak.
+  - rscadd: Added Blacksteel and Bloodsteel flails.
+  - rscadd: Added Darksteel, Blacksteel and Gold shields.
+  - bugfix: Fixed an exploit with spears.
+  - rscadd: Added Blood Potions that restore vitae reserves over time.
+  - rscadd: Added Pestra's Diagnosis, an upgraded miracle that shows reagents.
+  - rscadd: Gave Priest the Burial Rites miracle.
+  - rscadd: Gave Briar an amulet that passively increases devotion. Does not provide
+      progress to unlocking higher miracles.
+  - rscadd: Added descriptions to some more languages.
+  - rscadd: Added Magic guidebook to a few roles missing it.
+  - rscadd: Added Royal Purple dye to triumph shop.
+  - bugfix: Fixed missing dropdown for Admin Cure Rot, and added logging to admin
+      healthscan.
+  - bugfix: Fixed some typos and removed a duplicate trouser entry.
+  - bugfix: Fixed incorrect sprite for Bloodsteel Whip.
+  - bugfix: Fixed spells appearing in spellstones that aren't arcyne spells.
+  - bugfix: Fixed names appearing in the Inquisition Suspicion list more than once.
+  - rscadd: Added some (very "criminal" and "heretical") new Blood Magic spells.
+  - rscadd: Added Hemomancy Form and locked to special traits.
+  - rscadd: Added Blood Mage Wretch class.
+  - rscadd: Added Dark Secrets triumph special.
+  - bugfix: Moved blood type spells out of normal categories as they drew upon bloodpool
+      which was not visible to most people.
+2026-08-28:
+  MissyNym:
+  - map: Moves the Merchant to the Clinic/Apothecary building, along with the Shophand
+      and Stevedores.
+  - map: Moves the Apothecary to the current Tailor's Building.
+  - map: Moves the Feldsher and apprentices to a new Clinic building behind the Apothecary,
+      near to the Graveyard.
+  - map: Moves the Tailor back to their old building, closer to their apartment.
+  - map: Condemns the Merchant's location on the docks, given their new real-estate.
+      What will become of it, I wonder?
+  copper-404:
+  - rscadd: Daftmarsh - Added a tent camp for adventurers next to the tomb entrance.
+  - map: Daftmarsh - Moved the Tomb Warden next to the Tomb.
+  - map: Daftmarsh - Revamped the Mercenary Guild to make it more pleasant and sane.
+  - map: Daftmarsh - Added more lich traveltiles.
+  realforest2001:
+  - bugfix: Fixed Rituos skeletonising the jaw and rendering speech impossible.
+  - bugfix: Fixed mana recharge sources bitfield.
+  - bugfix: Fixed an issue with teleport spells requiring a charge.
+  - rscadd: Inquisitorial Suspicion is now logged like Hunted quirk.
+  - rscadd: Bone Ward giving Hunted quirk is now logged.

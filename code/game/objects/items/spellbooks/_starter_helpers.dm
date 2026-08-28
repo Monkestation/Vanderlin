@@ -18,4 +18,6 @@
 			return list("windswept", "Its pages riffle gently even in still air.")
 		if(FORM_WATER)
 			return list("tidebound", "Condensation beads along its cover no matter how dry the room.")
+		if(FORM_BLOOD)
+			return list("blood-soaked", "The cloying smell of metal clings to the pages as endless blood seeps between them.")
 	return list(null, null)
