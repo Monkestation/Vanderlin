@@ -59,7 +59,7 @@
 		switch(spawned.patron.type)
 			if(/datum/patron/inhumen/graggar)
 				spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30)
-				ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+				ADD_TRAIT(spawned, TRAIT_AMBIDEXTROUS, TRAIT_GENERIC)
 				spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 			if(/datum/patron/inhumen/graggar_zizo)
 				spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 20)

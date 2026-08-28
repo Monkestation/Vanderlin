@@ -173,7 +173,7 @@
 
 /mob/living/carbon/human/species/dwarf/mountain/base/skilled/light_gear/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_AMBIDEXTROUS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
 
@@ -201,7 +201,7 @@
 
 /mob/living/carbon/human/species/dwarf/mountain/base/very_skilled/light_gear/after_creation()
 	..()
-	ADD_TRAIT(src, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_AMBIDEXTROUS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
 

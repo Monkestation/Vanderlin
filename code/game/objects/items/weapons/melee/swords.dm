@@ -1913,7 +1913,7 @@
 					probby -= GET_MOB_SKILL_VALUE_OLD(M, I.associated_skill) * 5
 			var/obj/item/mainhand = user.get_active_held_item()
 			var/obj/item/offhand = user.get_inactive_held_item()
-			if(HAS_TRAIT(src, TRAIT_DUALWIELDER) && istype(offhand, mainhand))
+			if(HAS_TRAIT(src, TRAIT_AMBIDEXTROUS) && istype(offhand, mainhand))
 				probby += 20	//We give notable bonus to dual-wielders who use two hooked swords.
 			if(prob(probby))
 				M.dropItemToGround(I, force = FALSE, silent = FALSE)

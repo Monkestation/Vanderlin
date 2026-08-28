@@ -167,7 +167,7 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc)
-			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, JOB_TRAIT)
+			ADD_TRAIT(spawned, TRAIT_AMBIDEXTROUS, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_LUNAR_ORDER, JOB_TRAIT)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			var/static/list/selectable = list(
@@ -204,7 +204,7 @@
 					spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/necra/flail)
 		if(/datum/patron/divine/pestra)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/pestra)
-			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, JOB_TRAIT)
+			ADD_TRAIT(spawned, TRAIT_AMBIDEXTROUS, JOB_TRAIT)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
 			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)

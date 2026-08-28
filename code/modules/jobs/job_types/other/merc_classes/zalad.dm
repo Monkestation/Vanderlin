@@ -45,7 +45,7 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_HEAVYARMOR,
-		TRAIT_DUALWIELDER
+		TRAIT_AMBIDEXTROUS
 	)
 
 /datum/job/advclass/mercenary/zalad/after_spawn(mob/living/carbon/human/spawned, client/player_client)

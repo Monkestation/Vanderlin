@@ -35,7 +35,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/steppesman
 
 	traits = list(
-		TRAIT_DUALWIELDER,
+		TRAIT_AMBIDEXTROUS,
 		TRAIT_DODGEEXPERT,
 	)
 

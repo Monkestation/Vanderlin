@@ -285,7 +285,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// trait that makes you bounce when speaking
 #define TRAIT_SHAKY_SPEECH "Shaky Speech"
 /// Allows for offhand weapon usage
-#define TRAIT_DUALWIELDER "Dual Wielder"
+#define TRAIT_AMBIDEXTROUS "Ambidextrous"
 /// Ignores body_parts_covered during the add_fingerprint() proc. Works both on the person and the item in the glove slot.
 #define TRAIT_FINGERPRINT_PASSTHROUGH "fingerprint_passthrough"
 /// The mob will automatically breach the Masquerade when seen by others, with no exceptions

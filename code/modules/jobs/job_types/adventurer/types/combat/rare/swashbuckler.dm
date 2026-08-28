@@ -40,7 +40,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/swashbuckler
 
 	traits = list(
-		TRAIT_DUALWIELDER,
+		TRAIT_AMBIDEXTROUS,
 	)
 
 /datum/outfit/swashbuckler

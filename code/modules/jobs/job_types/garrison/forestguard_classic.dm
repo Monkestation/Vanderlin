@@ -204,7 +204,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard_classic/reaver
 
 	traits = list(
-		TRAIT_DUALWIELDER,
+		TRAIT_AMBIDEXTROUS,
 		TRAIT_MEDIUMARMOR,
 		TRAIT_IGNOREDAMAGESLOWDOWN,
 		TRAIT_FORAGER,

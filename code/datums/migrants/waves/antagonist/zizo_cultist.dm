@@ -92,7 +92,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/zizo_cultist_lesser
 
-	traits = list(TRAIT_MEDIUMARMOR, TRAIT_DUALWIELDER)
+	traits = list(TRAIT_MEDIUMARMOR, TRAIT_AMBIDEXTROUS)
 	languages = list(/datum/language/undead)
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 	default_patron = /datum/patron/inhumen/zizo

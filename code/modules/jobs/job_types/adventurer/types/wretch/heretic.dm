@@ -43,7 +43,7 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
-			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_AMBIDEXTROUS, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/dendor)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 40)
@@ -55,7 +55,7 @@
 		if(/datum/patron/divine/pestra)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
 			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
-			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_AMBIDEXTROUS, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
@@ -92,7 +92,7 @@
 		if(/datum/patron/inhumen/baotha)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
 			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
-			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+			ADD_TRAIT(spawned, TRAIT_AMBIDEXTROUS, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
 			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)

@@ -31,7 +31,7 @@
 	traits = list(
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
-		TRAIT_DUALWIELDER,
+		TRAIT_AMBIDEXTROUS,
 	)
 
 /datum/job/advclass/combat/bladesinger/after_spawn(mob/living/carbon/human/spawned, client/player_client)

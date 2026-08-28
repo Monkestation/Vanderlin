@@ -113,7 +113,7 @@
 /mob/living/carbon/human/species/elf/snow/base/skilled/light_gear/after_creation()
 	..()
 	attributes.add_sheet(/datum/attribute_holder/sheet/job/generic_npc/skilled/light_gear)
-	ADD_TRAIT(src, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_AMBIDEXTROUS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 1
@@ -131,7 +131,7 @@
 /mob/living/carbon/human/species/elf/snow/base/very_skilled/light_gear/after_creation()
 	..()
 	attributes.add_sheet(/datum/attribute_holder/sheet/job/generic_npc/very_skilled/light_gear)
-	ADD_TRAIT(src, TRAIT_DUALWIELDER, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_AMBIDEXTROUS, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LIGHT_STEP, TRAIT_GENERIC)
 	ai_controller?.blackboard[BB_ARMOR_CLASS] = 1

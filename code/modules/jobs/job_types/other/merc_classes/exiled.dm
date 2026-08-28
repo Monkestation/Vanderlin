@@ -37,7 +37,7 @@
 		TRAIT_DEADNOSE,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_NOPAINSTUN,
-		TRAIT_DUALWIELDER
+		TRAIT_AMBIDEXTROUS
 	)
 
 	voicepack_m = /datum/voicepack/male/warrior

@@ -1082,7 +1082,7 @@
 		. = TRUE
 
 /mob/living/carbon/human/dual_wielding_check()
-	if(!HAS_TRAIT(src, TRAIT_DUALWIELDER))
+	if(!HAS_TRAIT(src, TRAIT_AMBIDEXTROUS))
 		return FALSE
 
 	var/main_hand = get_active_held_item()

@@ -517,7 +517,7 @@
 			I.safe_throw_at(target,I.throw_range,I.throw_speed,src, force = move_force)
 
 /mob/living/carbon/proc/get_str_arms(num)
-	if(!domhand || !num || HAS_TRAIT(src, TRAIT_DUALWIELDER))
+	if(!domhand || !num || HAS_TRAIT(src, TRAIT_AMBIDEXTROUS))
 		return GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 	var/used = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 	if(num == domhand)
