@@ -517,15 +517,13 @@
 			I.safe_throw_at(target,I.throw_range,I.throw_speed,src, force = move_force)
 
 /mob/living/carbon/proc/get_str_arms(num)
+	strength = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
 	if(!domhand || !num || HAS_TRAIT(src, TRAIT_AMBIDEXTROUS))
-		return GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
-	var/used = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)
+		return strength
 	if(num == domhand)
-		return used
+		return strength
 	else
-		used = GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH) - 1
-		if(used < 1)
-			used = 1
+		var/used = max(1, strength - 1)
 		return used
 
 /mob/living/get_status_tab_items()
