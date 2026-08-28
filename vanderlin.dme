@@ -1336,6 +1336,7 @@
 #include "code\datums\elements\appearance\update_icon_blocker.dm"
 #include "code\datums\elements\appearance\update_icon_updates_onmob.dm"
 #include "code\datums\enchantments\_base_enchantment.dm"
+#include "code\datums\enchantments\anti_theft.dm"
 #include "code\datums\enchantments\blessed_offering.dm"
 #include "code\datums\enchantments\blood_curse.dm"
 #include "code\datums\enchantments\bloodthirsty.dm"

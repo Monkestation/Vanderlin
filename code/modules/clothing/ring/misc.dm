@@ -382,8 +382,8 @@
 
 /obj/item/clothing/ring/courtagent_ring/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, INNATE_TRAIT)
-	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand and enchanted with magicks that wards away pickpockets when worn on the finger. \
+	enchant(/datum/enchantment/anti_theft)
+	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand. \
 	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
 
 /obj/item/clothing/ring/courtagent_ring/get_examine_icon(mob/user)

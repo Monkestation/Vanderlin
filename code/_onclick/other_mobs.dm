@@ -454,7 +454,7 @@
 		return
 	if(!ishuman(A))
 		return
-
+	var/mob/living/carbon/human/victim = A
 	var/mob/living/carbon/human/thief = src
 	if(thief.get_active_held_item())
 		to_chat(thief, span_warning("I can't pickpocket while my hand is full!"))
@@ -465,7 +465,10 @@
 		to_chat(thief, span_warning("What am I going to steal from there?"))
 		return
 
-	var/mob/living/carbon/human/victim = A
+	if(HAS_TRAIT(victim, TRAIT_THIEFSENSE))
+		to_chat(thief, span_warning("Trying to steal from [victim] would be a bad idea!"))
+		return
+
 	var/thief_skill_base = GET_MOB_SKILL_VALUE_OLD(thief, /datum/attribute/skill/misc/stealing)
 	var/thiefskill = thief_skill_base + (has_world_trait(/datum/world_trait/matthios_fingers) ? (is_ascendant(MATTHIOS) ? 2 : 1) : 0)
 	if(thiefskill <= 0)
@@ -532,6 +535,9 @@
 	if(HAS_TRAIT(picked, TRAIT_CANT_BE_STOLEN))
 		exp_to_gain /= 2
 		to_chat(thief, span_danger("[picked] is strapped on tight, I can't steal it!"))
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, target_skill, target_perception)
+	if(picked.has_enchantment(/datum/enchantment/anti_theft))
+		to_chat(thief, span_danger("[picked] is enchanted to prevent theft, I can't steal it!"))
 		return handle_steal_end(victim, exp_to_gain, thief_skill_base, target_skill, target_perception)
 	if(thief_skill_base < picked.pickpocket_difficulty)
 		to_chat(thief, span_danger("I am not skilled enough to steal something like [picked]!"))
