@@ -124,6 +124,8 @@
 		examine_list += span_boldred("The bloodsucker of Noc...")
 	else if(is_priest_job(user.mind?.assigned_role))
 		examine_list += SPAN_GOD_NOC("The servant of The Moon!")
+	else if(is_oracle_job(user.mind?.assigned_role))
+		examine_list += SPAN_GOD_NOC("The everwalking servant of The Prince!")
 	else if(user.mind?.has_antag_datum(/datum/antagonist/maniac))
 		examine_list += span_green("Yet another legally distinct vampire hunter!")
 
