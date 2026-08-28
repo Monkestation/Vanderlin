@@ -534,7 +534,7 @@
 			else
 				to_chat(thief, span_warning("I fumbled it!"))
 				log_combat(thief, victim, "tried to steal from ")
-		if(thief_skill_base <= target_skill)
+		if((thief_skill_base <= target_skill) || (stealroll < target_perception))
 			to_chat(victim, span_danger("Someone tried pickpocketing me!"))
 			if(thief_skill_base >= 3)
 				to_chat(thief, span_danger("[victim] probably realized I tried pickpocketing them!"))
