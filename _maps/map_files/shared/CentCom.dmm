@@ -1425,11 +1425,6 @@
 "fE" = (
 /obj/structure/table/wood/smooth,
 /obj/structure/fluff/clutter/books,
-/obj/item/paper{
-	pixel_y = -6;
-	pixel_x = 3;
-	info = Get some money for the Boss. Easier to give mammons. Also, find the source of the taffing mooing
-	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/bandit_lair)
 "fF" = (
