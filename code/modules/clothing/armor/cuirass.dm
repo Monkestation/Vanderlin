@@ -120,7 +120,7 @@
 /obj/item/clothing/armor/cuirass/fluted/ornate
 	name = "ornate fluted cuirass"
 	icon_state = "ornatecuirass"
-	desc = "A fluted cuirass with decorative engravings across it's surface. Fitting for a noble, or maybe just someone who wants to look fancy."
+	desc = "A fluted cuirass with decorative engravings across its surface. Fitting for a noble, or maybe just someone who wants to look fancy."
 
 /obj/item/clothing/armor/cuirass/fluted/iron
 	name = "iron fluted cuirass"
