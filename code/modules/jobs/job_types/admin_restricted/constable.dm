@@ -30,6 +30,7 @@
 	allowed_patrons = list(/datum/patron/divine/astrata)
 
 	outfit = /datum/outfit/admin/kingsfield_constable
+	honorary = "Constable"
 
 	give_bank_account = 30
 	knows_the_town = TRUE
