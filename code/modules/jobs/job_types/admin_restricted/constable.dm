@@ -78,7 +78,7 @@
 	beltr = /obj/item/gun/ballistic/powder/wheellock/puffer
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
-		/obj/item/rope/chain = 2,
+		/obj/item/rope/chain = 1,
 		/obj/item/clothing/neck/psycross/silver/divine/astrata/real_silver = 1,
 		/obj/item/reagent_containers/glass/bottle/aflask = 1,
 		/obj/item/ammo_holder/bullet/bullets = 1,
