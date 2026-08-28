@@ -465,35 +465,35 @@
 		to_chat(thief, span_warning("What am I going to steal from there?"))
 		return
 
+	var/thief_skill_base = GET_MOB_SKILL_VALUE_OLD(thief, /datum/attribute/skill/misc/stealing)
+	var/thief_skill_modified = thief_skill_base + (has_world_trait(/datum/world_trait/matthios_fingers) ? (is_ascendant(MATTHIOS) ? 2 : 1) : 0)
+	if(thief_skill_modified <= 0)
+		thief_skill_modified = 1
+	if(thief.rogue_sneaking)
+		thief_skill_modified += 1
+
 	if(HAS_TRAIT(victim, TRAIT_THIEFSENSE))
 		to_chat(thief, span_warning("Trying to steal from [victim] would be a bad idea!"))
-		return
+		return handle_steal_end(victim, 0, thief_skill_base, thief_skill_modified, TRUE)
 
-	var/thief_skill_base = GET_MOB_SKILL_VALUE_OLD(thief, /datum/attribute/skill/misc/stealing)
-	var/thiefskill = thief_skill_base + (has_world_trait(/datum/world_trait/matthios_fingers) ? (is_ascendant(MATTHIOS) ? 2 : 1) : 0)
-	if(thiefskill <= 0)
-		thiefskill = 1
-	if(thief.rogue_sneaking)
-		thiefskill += 1
-	var/stealroll = roll("[floor(thiefskill)]d6")
+	var/stealroll = roll("[floor(thief_skill_modified)]d6")
 	var/target_perception = GET_MOB_ATTRIBUTE_VALUE(victim, STAT_PERCEPTION)
-	var/target_skill = GET_MOB_SKILL_VALUE_OLD(victim, /datum/attribute/skill/misc/stealing)
 	var/exp_to_gain = GET_MOB_ATTRIBUTE_VALUE(thief, STAT_INTELLIGENCE) * 1.5
 
 	if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
-		to_chat(thief, span_info("Your stealing skill roll of [thiefskill]d6 is [stealroll]..."))
+		to_chat(thief, span_info("Your stealing skill roll of [thief_skill_modified]d6 is [stealroll]..."))
 
 	if(stealroll < target_perception)
 		exp_to_gain /= 2
 		to_chat(thief, span_danger("I failed to pick the pocket!")) //Critical fail, target knows you tried.
-		return handle_steal_end(victim, exp_to_gain, thief_skill_base, target_skill, target_perception, TRUE)
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified, TRUE)
 
 	//2.5 seconds for those without skill
 	//better skill shortens time, up to one second with legendary
 	if(!do_after(thief, (2.5 - (thief_skill_base * 0.25)) SECONDS, victim, progress = FALSE))
 		exp_to_gain /= 2
 		to_chat(thief, span_warning("I fumbled it!"))
-		return handle_steal_end(victim, exp_to_gain, thief_skill_base, target_skill, target_perception)
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
 
 	var/list/stealpos = list()
 	switch(thief.zone_selected)
@@ -529,26 +529,28 @@
 	if(!length(stealpos))
 		exp_to_gain /= 2
 		to_chat(thief, span_warning("I didn't find anything there. Perhaps I should look elsewhere."))
-		return handle_steal_end(victim, exp_to_gain, thief_skill_base, target_skill, target_perception)
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
 
 	var/obj/item/picked = pick(stealpos)
 	if(HAS_TRAIT(picked, TRAIT_CANT_BE_STOLEN))
 		exp_to_gain /= 2
 		to_chat(thief, span_danger("[picked] is strapped on tight, I can't steal it!"))
-		return handle_steal_end(victim, exp_to_gain, thief_skill_base, target_skill, target_perception)
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
 	if(picked.has_enchantment(/datum/enchantment/anti_theft))
 		to_chat(thief, span_danger("[picked] is enchanted to prevent theft, I can't steal it!"))
-		return handle_steal_end(victim, exp_to_gain, thief_skill_base, target_skill, target_perception)
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
 	if(thief_skill_base < picked.pickpocket_difficulty)
 		to_chat(thief, span_danger("I am not skilled enough to steal something like [picked]!"))
-		return handle_steal_end(victim, exp_to_gain, thief_skill_base, target_skill, target_perception)
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
 
 	// Success!
-	return handle_steal_end(victim, exp_to_gain, thief_skill_base, target_skill, target_perception, stolen_item = picked)
+	return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified, stolen_item = picked)
 
-/mob/living/proc/handle_steal_end(mob/living/carbon/human/victim, exp_to_gain, thief_skill, victim_skill, victim_perception, force_notice = FALSE, obj/item/stolen_item)
+/mob/living/proc/handle_steal_end(mob/living/carbon/human/victim, exp_to_gain, thief_skill, thief_mod_skill, force_notice = FALSE, obj/item/stolen_item)
 	var/final_exp_to_gain = exp_to_gain
-	var/thief_vs_perception = (thief_skill + (has_world_trait(/datum/world_trait/matthios_fingers) ? (is_ascendant(MATTHIOS) ? 2 : 1) : 0) + rogue_sneaking) * 2
+	var/thief_vs_perception = thief_mod_skill * 2
+	var/victim_skill = GET_MOB_SKILL_VALUE_OLD(victim, /datum/attribute/skill/misc/stealing)
+	var/victim_perception = GET_MOB_ATTRIBUTE_VALUE(victim, STAT_PERCEPTION)
 
 	if(stolen_item)
 		victim.dropItemToGround(stolen_item)
