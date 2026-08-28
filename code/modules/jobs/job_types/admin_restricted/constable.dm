@@ -74,12 +74,13 @@
 	gloves = /obj/item/clothing/gloves/angle/furlined/advanced
 	wrists = /obj/item/clothing/wrists/bracers/iron/concealed
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/weapon/mace/cudgel
+	beltl = /obj/item/weapon/sword/rapier
 	beltr = /obj/item/ammo_holder/bullet/bullets
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/gun/ballistic/powder/wheellock/puffer = 1,
 		/obj/item/rope/chain = 1,
+		/obj/item/weapon/mace/cudgel = 1,
 		/obj/item/clothing/neck/psycross/silver/divine/astrata/real_silver = 1,
 		/obj/item/reagent_containers/glass/bottle/aflask = 1,
 		/obj/item/flashlight/flare/torch/lantern = 1,
