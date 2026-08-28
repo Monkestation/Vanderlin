@@ -17,6 +17,7 @@
 	cooldown_time = 10 SECONDS
 	spell_cost = 0
 	spell_flags = SPELL_UNETCHABLE
+	has_visual_effects = FALSE
 	var/message
 
 /datum/action/cooldown/spell/dark_whispers/is_valid_target(atom/cast_on)

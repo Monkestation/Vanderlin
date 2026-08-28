@@ -25,6 +25,7 @@
 	choose_target_message = "Choose who to teach."
 	target_radius = 3
 	spell_flags = SPELL_UNETCHABLE
+	has_visual_effects = FALSE
 	var/list/current_students = list()
 
 /datum/action/cooldown/spell/undirected/list_target/teach_blood_magic/New(Target)

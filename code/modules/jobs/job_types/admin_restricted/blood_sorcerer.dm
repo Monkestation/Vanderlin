@@ -11,6 +11,8 @@
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/blood = 60,
 		/datum/attribute/skill/misc/medicine = 40,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/sewing/mending = 30,
 	)
 
 /datum/job/admin/blood_sorcerer
@@ -20,7 +22,7 @@
 	allowed_races = RACES_PLAYER_ALL
 	allowed_patrons = list(/datum/patron/godless/dystheist, /datum/patron/godless/autotheist, /datum/patron/godless/godless, /datum/patron/godless/defiant, /datum/patron/godless/galadros)
 	outfit = /datum/outfit/admin/blood_sorcerer
-	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
+	cmode_music = 'sound/music/cmode/antag/combat_deadlyshadows.ogg'
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	technique_points = 14
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
@@ -69,7 +71,7 @@
 
 	var/static/list/selectablehat = list(
 		"Blood Red hood (Discreet)" = /obj/item/clothing/head/roguehood/colored/blood,
-		"Enhanced Blood Red hood (Obvious)" = /obj/item/clothing/head/roguehood/bloodweave,
+		"Bloodweave hood (Obvious)" = /obj/item/clothing/head/roguehood/bloodweave,
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
 		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Magus hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/magus,
@@ -78,7 +80,7 @@
 
 	var/static/list/selectablerobe = list(
 		"Blood Red robes (Discreet)" = /obj/item/clothing/shirt/robe/colored/blood,
-		"Enhanced Blood Red robes (Obvious)" = /obj/item/clothing/shirt/robe/bloodweave,
+		"Bloodweave robes (Obvious)" = /obj/item/clothing/shirt/robe/bloodweave,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Magus robes" = /obj/item/clothing/shirt/robe/magus
@@ -109,4 +111,5 @@
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
 		/obj/item/reagent_containers/glass/bottle/strongbloodpot = 1,
 		/obj/item/storage/belt/pouch/coins/mid = 1,
+		/obj/item/needle = 1,
 	)
