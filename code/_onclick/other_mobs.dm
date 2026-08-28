@@ -534,13 +534,15 @@
 			else
 				to_chat(thief, span_warning("I fumbled it!"))
 				log_combat(thief, victim, "tried to steal from ")
-		if((thief_skill_base <= target_skill) || (stealroll < target_perception))
+		else
+			exp_to_gain /= 2
+			to_chat(thief, span_danger("I failed to pick the pocket!"))
+
+		if((thief_skill_base <= target_skill) || (stealroll < target_perception) || ((thief_skill_base * 2) <= target_perception))
 			to_chat(victim, span_danger("Someone tried pickpocketing me!"))
 			if(thief_skill_base >= 3)
 				to_chat(thief, span_danger("[victim] probably realized I tried pickpocketing them!"))
-		if(stealroll < target_perception)
-			exp_to_gain /= 2
-			to_chat(thief, span_danger("I failed to pick the pocket!"))
+
 		thief.adjust_experience(/datum/attribute/skill/misc/stealing, exp_to_gain, FALSE)
 		changeNext_move(mmb_intent.clickcd)
 
