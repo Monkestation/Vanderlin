@@ -347,7 +347,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_FLOWERFIELD_IMMUNITY = span_info("I am immune to the effects of flower fields."),
 	TRAIT_SECRET_OFFICIANT = span_love("I am able to conduct secret wedding ceremonies outside of the church. Love cannot be stopped!"),
 	TRAIT_RECOGNIZE_ADDICTS = "I can recognize alcoholics and junkies just by looking at them.",
-	TRAIT_DUALWIELDER = span_info("I am trained in the art of dual wielding."),
+	TRAIT_DUALWIELDER = span_info("I am trained in the art of dual wielding. I can strike with two weapons at once, making it harder to miss!"),
 	TRAIT_NOENERGY = span_info("I don't need rest; I won't ever feel fatigue."),
 	TRAIT_KEENEARS = span_info("I've a good pair of ears, and can tell who is speaking, even when they're out of sight. I can also hear whispers from further away."),
 	TRAIT_KEENEYES = span_info("Years of hunting and tracking have honed your sight. You're better at noticing details and spotting hidden things."),
