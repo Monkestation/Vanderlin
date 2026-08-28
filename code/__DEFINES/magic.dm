@@ -64,11 +64,17 @@
 
 // Mana source flags
 /// Absorb from leylines
-#define MANA_ALL_LEYLINES (1 << 1)
+#define MANA_ALL_LEYLINES (1 << 0)
 /// Absorb from pylons with right click
-#define MANA_ALL_PYLONS (1 << 2)
+#define MANA_ALL_PYLONS (1 << 1)
 /// Absord from souls (if visible)
-#define MANA_SOULS (1 <<3)
+#define MANA_SOULS (1 << 2)
+
+DEFINE_BITFIELD(intrinsic_recharge_sources, list(
+	"MANA_ALL_LEYLINES" = MANA_ALL_LEYLINES,
+	"MANA_ALL_PYLONS" = MANA_ALL_PYLONS,
+	"MANA_SOULS" = MANA_SOULS,
+))
 
 #define MANA_DISPERSE_EVENLY 1
 #define MANA_SEQUENTIAL 2

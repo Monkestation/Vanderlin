@@ -1,8 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Added some (very \"criminal\" and \"heretical\") new Blood Magic spells."
-  - rscadd: "Added Hemomancy Form and locked to special traits."
-  - rscadd: "Added Blood Mage Wretch class."
-  - rscadd: "Added Dark Secrets triumph special."
-  - bugfix: "Moved blood type spells out of normal categories as they drew upon bloodpool which was not visible to most people."
