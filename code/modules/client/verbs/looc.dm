@@ -66,17 +66,18 @@
 	msg = emoji_parse(msg)
 	msg = parsemarkdown_basic(msg, limited = TRUE, barebones = TRUE)
 
-	mob.log_talk("LOOC: [msg]", LOG_LOOC)
-
-	var/list/mobs = list()
-	var/muted = prefs.muted
-	mobs += src
 
 	var/prefix = "LOOC:"
 	if(isobserver(mob))
 		prefix = "LOOC: (GHOST):"
 	else if(mob.stat == DEAD)
 		prefix = "LOOC: (DEAD):"
+
+	mob.log_talk("[prefix] [msg]", LOG_LOOC)
+
+	var/list/mobs = list()
+	var/muted = prefs.muted
+	mobs += src
 
 	for(var/mob/hear_mob in range(7, get_turf(mob)))
 		var/added_text
