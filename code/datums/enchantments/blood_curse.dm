@@ -57,6 +57,8 @@
 			vitae_gain += 1
 		if(BLOOD_CURSE_AFFECTED)
 			target.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_hit)
+			target.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, poison_hit)
+			to_chat(user, span_bloody("[target] is poisoned by the blood curse."))
 			vitae_gain += 2
 
 	user.adjust_bloodpool(vitae_gain)

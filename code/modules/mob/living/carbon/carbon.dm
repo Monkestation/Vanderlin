@@ -1456,6 +1456,8 @@
 			return FALSE
 	if(istype(loc, /turf/open/water) && body_position == LYING_DOWN)
 		return FALSE
+	if(has_status_effect(/datum/status_effect/debuff/blood_choke))
+		return FALSE
 
 /mob/living/carbon/proc/try_skin_burn(reaction_volume)
 	var/list/covered_zones = get_covered_body_zones()
@@ -1587,6 +1589,24 @@
 		old_eye.Remove(src, TRUE)
 	var/old_eye_type = eye_dna.organ_type
 	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/zombie
+	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
+	eyes.Insert(src, TRUE)
+	var/obj/item/organ/eyes/eyes_two = eye_dna.create_organ(species = dna.species)
+	eyes_two.switch_side(eyes_two.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
+	eyes_two.Insert(src, TRUE)
+	eye_dna.organ_type = old_eye_type
+
+	update_eyes() // ??? why
+
+/// grant nightmare eyes to a carbon mob.
+/mob/living/carbon/proc/grant_nightmare_eyes()
+	var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
+	if(!eye_dna)
+		return
+	for(var/obj/item/organ/old_eye in getorganslotlist(ORGAN_SLOT_EYES))
+		old_eye.Remove(src, TRUE)
+	var/old_eye_type = eye_dna.organ_type
+	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/nightmare
 	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
 	eyes.Insert(src, TRUE)
 	var/obj/item/organ/eyes/eyes_two = eye_dna.create_organ(species = dna.species)

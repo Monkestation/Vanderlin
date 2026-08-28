@@ -152,3 +152,21 @@
 		limbs += dismembered
 	return limbs
 
+/datum/action/cooldown/spell/attach_bodypart/blood_magic
+	name = "Bloodstitch"
+	button_icon_state = "giants_strength"
+	sound = 'sound/gore/organ2.ogg'
+	charge_sound = 'sound/magic/chargingold.ogg'
+
+	associated_skill = /datum/attribute/skill/magic/blood
+	spell_type = SPELL_BLOOD
+	required_form = FORM_BLOOD
+	required_technique = TECHNIQUE_RESTORATION
+	heretical_spell = TRUE
+	required_level = 3
+	required_items = list()
+
+	charge_required = TRUE
+	charge_time = 2 SECONDS
+	cooldown_time = 30 SECONDS
+	spell_cost = 125

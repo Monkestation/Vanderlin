@@ -74,9 +74,6 @@
 	if(!customization_value || !ispath(customization_value, /datum/backstory))
 		return
 
-	var/datum/backstory/B = customization_value
-	var/mob/living/carbon/human/H = owner
-
 	return ..()
 
 /datum/backstory

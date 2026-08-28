@@ -1001,7 +1001,7 @@
 	)
 	craftdiff = 4
 
-/datum/repeatable_crafting_recipe/leather/standalone/furlined_gloves/advanced
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_gloves_advanced
 	name = "hardened fur-lined leather gloves"
 	output = /obj/item/clothing/gloves/angle/furlined/advanced
 	requirements = list(/obj/item/natural/hide/cured = 2,
@@ -1139,7 +1139,7 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/furlined_gloves/masterwork
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_gloves_masterwork
 	name = "masterwork fur-lined leather gloves"
 	output = /obj/item/clothing/gloves/angle/furlined/masterwork
 	attacked_atom = /obj/item/clothing/gloves/angle/furlined
@@ -1169,7 +1169,7 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/forest/masterwork
+/datum/repeatable_crafting_recipe/leather/standalone/forest_masterwork
 	name = "masterwork forrester's armor"
 	output = /obj/item/clothing/armor/leather/advanced/forrester/masterwork
 	attacked_atom = /obj/item/clothing/armor/leather/advanced/forrester
@@ -1196,7 +1196,7 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/shaman_coat/masterwork
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_coat_masterwork
 	name = "masterwork shamanic coat"
 	output = /obj/item/clothing/armor/leather/shamancoat/masterwork
 	attacked_atom = /obj/item/clothing/armor/leather/shamancoat
@@ -1233,7 +1233,7 @@
 				/obj/item/natural/fibers = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/fur_pants/masterwork
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_pants_masterwork
 	name = "masterwork fur chausses"
 	output = /obj/item/clothing/pants/trou/leather/furpants/masterwork
 	attacked_atom = /obj/item/clothing/pants/trou/leather/furpants

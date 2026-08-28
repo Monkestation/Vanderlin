@@ -65,6 +65,20 @@
 /obj/item/clothing/head/roguehood/colored/black
 	color = CLOTHING_SOOT_BLACK
 
+/obj/item/clothing/head/roguehood/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
+/obj/item/clothing/head/roguehood/colored/blood/enhanced
+	name = "bloodsteel threaded hood"
+	desc = "A seemingly plain cloth hood woven with bloodsteel threads. It radiates a sinister aura."
+	armor_type = /datum/armor/head/cloth/bloodweave
+	prevent_crits = CUT_AND_MINOR_CRITS
+	max_integrity = 250
+
+/obj/item/clothing/head/roguehood/colored/blood/enhanced/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/clothing/head/roguehood/colored/green
 	color = CLOTHING_FOREST_GREEN
 

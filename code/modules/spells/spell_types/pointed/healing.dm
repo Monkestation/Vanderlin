@@ -40,6 +40,24 @@
 
 /datum/action/cooldown/spell/healing/cast(mob/living/cast_on)
 	. = ..()
+	if(cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark))
+		cast_on.visible_message(
+			span_warning("[cast_on] recoils as their flesh is burned by blood!"),
+			span_bloody("The Blood Mark sears my flesh with a wave of pain!"),
+		)
+		cast_on.emote("scream")
+		to_chat(owner, span_danger("[cast_on] is Blood Marked! Divine healing will not reach them until the mark clears!"))
+		return
+	if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+		cast_on.visible_message(
+			span_warning("[cast_on] recoils as their flesh is burned by blood!"),
+			span_bloody("The Blood Curse sears my flesh with a wave of pain!"),
+			span_hear("I hear something dripping onto the ground..."),
+		)
+		cast_on.emote("scream")
+		to_chat(owner, span_danger("[cast_on] is Blood Cursed! Permanently marked by Blood Magic, Divine Healing will never reach them again!"))
+		new /obj/effect/decal/cleanable/blood/puddle(get_turf(cast_on), cast_on.get_blood_type().color)
+		return
 	var/datum/component/vampire_disguise/vampire_disguise = cast_on.GetComponent(/datum/component/vampire_disguise)
 	switch(healing_type)
 		if(HEALING_PROFANE)

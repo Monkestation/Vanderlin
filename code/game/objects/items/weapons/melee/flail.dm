@@ -30,6 +30,11 @@
 	weapon_special = /datum/special_intent/flail_sweep
 	item_weight = 1.5 KILOGRAMS
 
+/obj/item/weapon/flail/Initialize(mapload)
+	. = ..()
+	if(icon_state == "iflail")
+		icon_state = pick("iflail", "iflailalt")
+
 /obj/item/weapon/flail/getonmobprop(tag)
 	. = ..()
 	if(tag)
@@ -141,6 +146,34 @@
 	. = ..()
 	AddComponent(/datum/component/psyblessed, TRUE, 5, FALSE, 100, 1, TRUE)
 
+//................ Blacksteel Flail ............... //
+/obj/item/weapon/flail/blacksteel
+	name = "blacksteel flail"
+	desc = "An elegant flail of blacksteel. The heftsome weight makes it unmatched for driving back plate-armored opponents, so long as one \
+	has the stamina to swing its alloyed chains around."
+	icon_state = "bs_flail"
+	force = DAMAGE_GOOD_FLAIL + 2
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLACKSTEEL
+	minstr = 4
+	smeltresult = /obj/item/ingot/blacksteel
+	sellprice = 120
+	item_weight = 1 KILOGRAMS
+
+//................ Bloodsteel Flail ............... //
+/obj/item/weapon/flail/bloodsteel
+	name = "bloodsteel flail"
+	desc = "A heavy carved bloodstone attached to a chain of red bloodsteel, built to crush even the strongest of armors."
+	icon_state = "bs_flail"
+	force = DAMAGE_GOOD_FLAIL + 3
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLOODSTEEL
+	minstr = 5
+	smeltresult = /obj/item/ingot/bloodsteel
+	sellprice = 0
+	item_weight = 1.2 KILOGRAMS
+
+/obj/item/weapon/flail/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //................ Peasant Flail ............... // A little confusing still
 /obj/item/weapon/flail/peasant

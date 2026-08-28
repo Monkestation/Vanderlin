@@ -836,6 +836,86 @@
 	character.mana_pool.adjust_mana(100) //I don't know, they don't spawn with their full mana bar, so we give them a bit more mana at the start.
 	new /obj/item/spellbook/master/starter/arcane(get_turf(character))
 
+/datum/attribute_holder/sheet/job/chosen
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = -1,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/magic/holy = list(50, 60),
+		/datum/attribute/skill/combat/polearms = list(20, 60)
+	)
+
+/datum/special_trait/chosen
+	name = "The Chosen"
+	greet_text = span_notice("Ruler of all I see, I am their will. <b>I AM CHOSEN</b>.")
+	req_text = "Monarch, worship The Ten or The Four"
+	allowed_patrons = ALL_MIRACLE_PATRONS
+	allowed_jobs = list(/datum/job/lord)
+	weight = 25 //Should be fine.
+
+/datum/special_trait/chosen/on_apply(mob/living/carbon/human/character, silent)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/chosen)
+	switch(character.patron?.type)
+		if(/datum/patron/divine/astrata)
+			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+		if(/datum/patron/divine/eora)
+			ADD_TRAIT(character, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+			ADD_TRAIT(character, TRAIT_EMPATH, TRAIT_GENERIC)
+			REMOVE_TRAIT(character, TRAIT_VIRGIN, JOB_TRAIT)
+			character.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
+		if(/datum/patron/divine/noc)
+			var/language = pick(list("Dwarvish", "Elvish", "Hellspeak", "Zaladin", "Orcish",))
+			switch(language)
+				if("Dwarvish")
+					character.grant_language(/datum/language/dwarvish)
+					to_chat(character,span_info("I learned the tongue of the mountain dwellers."))
+				if("Elvish")
+					character.grant_language(/datum/language/elvish)
+					to_chat(character,span_info("I learned the tongue of the primordial species."))
+				if("Hellspeak")
+					character.grant_language(/datum/language/hellspeak)
+					to_chat(character,span_info("I learned the tongue of the hellspawn."))
+				if("Zaladin")
+					character.grant_language(/datum/language/zalad)
+					to_chat(character,span_info("I learned the tongue of Zaladin."))
+				if("Orcish")
+					character.grant_language(/datum/language/orcish)
+					to_chat(character,span_info("I learned the tongue of the savages in my time."))
+			character.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
+		if(/datum/patron/divine/pestra)
+			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+		if(/datum/patron/divine/dendor)
+			ADD_TRAIT(character, TRAIT_SEEDKNOW, TRAIT_GENERIC)
+			character.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
+		if(/datum/patron/divine/abyssor)
+			character.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
+		if(/datum/patron/divine/ravox)
+			character.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
+		if(/datum/patron/divine/xylix)
+			character.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
+		if(/datum/patron/divine/malum)
+			ADD_TRAIT(character, TRAIT_MALUMFIRE, TRAIT_GENERIC)
+			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+		if(/datum/patron/inhumen/graggar)
+			character.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
+		if(/datum/patron/inhumen/zizo)
+			character.grant_language(/datum/language/undead)
+			character.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
+		if(/datum/patron/inhumen/matthios)
+			character.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
+		if(/datum/patron/inhumen/baotha)
+			character.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
+
+	var/obj/item/clothing/neck/psycross/amulet = new character.patron?.associated_objects[PATRON_AMULET][1]
+	character.put_in_hand(amulet)
+	var/holder = character.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_acolyte()
+		devotion.grant_to(character)
+
 /datum/special_trait/skeleton
 	name = "Skeleton"
 	greet_text = span_boldwarning("I was... am... afflicted with a curse by a lich that left me without my flesh, but I still retained control of myself... (This is not an antagonist role, expect to be attacked unless wearing something to cover your head.)")
@@ -865,6 +945,35 @@
 	ADD_TRAIT(character, TRAIT_NOBLOOD, BE_SPECIAL_TRAIT)
 
 	character.update_body()
+
+/datum/attribute_holder/sheet/job/dark_secrets
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 4,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/magic/blood = list(30, 40),
+		/datum/attribute/skill/combat/polearms = list(20, 40)
+	)
+
+/datum/special_trait/dark_secrets
+	name = "Dark Secrets"
+	greet_text = span_notice("You have a dark secret, hidden power you have concealed for most of your life. Is now the time to let it out?")
+	req_text = "Be an Apostate. Don't be Monarch."
+	allowed_patrons = list(/datum/patron/godless/autotheist, /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/godless, /datum/patron/godless/naivety)
+	weight = 15 //Should be fine.
+	restricted_jobs = list(/datum/job/lord, /datum/job/monk, /datum/job/priest, /datum/job/templar)
+
+/datum/special_trait/dark_secrets/on_apply(mob/living/carbon/human/character, silent)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/dark_secrets)
+	character.add_spell(/datum/action/cooldown/spell/status/blood_sight, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/projectile/blood_steal, silent = TRUE, mastery_spell = TRUE)
+	character.grant_language(/datum/language/sanguine)
+	character.adjust_technique_mastery_points(2)
+	character.adjust_form_mastery_points(3, specific_form = FORM_BLOOD)
+	ADD_TRAIT(character, TRAIT_BLOOD_MAGE, BE_SPECIAL_TRAIT)
+	character.hud_used?.set_bloody_bloodpool()
+	character.adjust_bloodpool()
 
 /datum/special_trait/overcompensating
 	name = "Overcompensating"

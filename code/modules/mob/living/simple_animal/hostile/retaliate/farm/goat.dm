@@ -1,14 +1,14 @@
 /mob/living/simple_animal/hostile/retaliate/goat
-	icon = 'icons/roguetown/mob/monster/gote.dmi'
 	name = "gote"
 	desc = ""
+	icon = 'icons/roguetown/mob/monster/gote.dmi'
 	icon_state = "goat"
 	icon_living = "goat"
 	icon_dead = "goat_dead"
 	icon_gib = "goat_gib"
 
 	animal_species = /mob/living/simple_animal/hostile/retaliate/goatmale
-	faction = list("goats")
+	faction = list(FACTION_NEUTRAL)
 	gender = FEMALE
 	footstep_type = FOOTSTEP_MOB_SHOE
 	emote_see = list("shakes her head.", "chews her cud.")
@@ -137,14 +137,14 @@
 	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/goatmale
-	icon = 'icons/roguetown/mob/monster/gote.dmi'
 	name = "male gote"
+	icon = 'icons/roguetown/mob/monster/gote.dmi'
 	icon_state = "goatmale"
 	icon_living = "goatmale"
 	icon_dead = "goatmale_dead"
 	icon_gib = "goatmale_gib"
 
-	faction = list("goats")
+	faction = list(FACTION_NEUTRAL)
 	footstep_type = FOOTSTEP_MOB_SHOE
 	emote_see = list("shakes his head.", "chews his cud.")
 
