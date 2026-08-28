@@ -369,7 +369,7 @@
 /obj/item/clothing/ring/courtagent_ring
 	name = "Finger's Crown"
 	icon_state = "ring_s_agent"
-	desc = "A silver signet ring, engraved with the sigil of the Hand and enchanted with magicks that wards away pickpockets when worn on the finger. \
+	desc = "A silver signet ring, engraved with the sigil of the Hand and enchanted with magicks that make it impossible to steal when worn on the finger. \
 	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
 	examine_name = /obj/item/clothing/ring/silver::name
 	base_icon_state = "ring_s"
@@ -382,7 +382,7 @@
 
 /obj/item/clothing/ring/courtagent_ring/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, INNATE_TRAIT)
 	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand and enchanted with magicks that wards away pickpockets when worn on the finger. \
 	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
 

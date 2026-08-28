@@ -196,4 +196,4 @@
 	. = ..()
 	enchant(/datum/enchantment/life_eternal)
 	enchant(/datum/enchantment/leaping)
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, INNATE_TRAIT)
