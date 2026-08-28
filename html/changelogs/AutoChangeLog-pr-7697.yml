@@ -1,8 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - bugfix: "Fixed Rituos skeletonising the jaw and rendering speech impossible."
-  - bugfix: "Fixed mana recharge sources bitfield."
-  - bugfix: "Fixed an issue with teleport spells requiring a charge."
-  - rscadd: "Inquisitorial Suspicion is now logged like Hunted quirk."
-  - rscadd: "Bone Ward giving Hunted quirk is now logged."

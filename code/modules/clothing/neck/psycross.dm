@@ -188,6 +188,10 @@
 	desc = "Blessed be everything the light of the sun touches, for it is protected by Her grace."
 	icon_state = "astrata"
 
+/obj/item/clothing/neck/psycross/silver/divine/astrata/real_silver
+	name = "silver amulet of Astrata"
+	icon_state = "astrata_s"
+
 /obj/item/clothing/neck/psycross/silver/divine/noc
 	name = "amulet of Noc"
 	desc = "Diligence, study, pursuit of truth and wisdom. Let nothing deter you from it."

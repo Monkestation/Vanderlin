@@ -1,8 +1,0 @@
-author: "MissyNym"
-delete-after: True
-changes:
-  - map: "Moves the Merchant to the Clinic/Apothecary building, along with the Shophand and Stevedores."
-  - map: "Moves the Apothecary to the current Tailor's Building."
-  - map: "Moves the Feldsher and apprentices to a new Clinic building behind the Apothecary, near to the Graveyard."
-  - map: "Moves the Tailor back to their old building, closer to their apartment."
-  - map: "Condemns the Merchant's location on the docks, given their new real-estate. What will become of it, I wonder?"

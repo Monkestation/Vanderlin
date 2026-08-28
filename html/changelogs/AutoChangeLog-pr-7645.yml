@@ -1,7 +1,0 @@
-author: "copper-404"
-delete-after: True
-changes:
-  - rscadd: "Daftmarsh - Added a tent camp for adventurers next to the tomb entrance."
-  - map: "Daftmarsh - Moved the Tomb Warden next to the Tomb."
-  - map: "Daftmarsh - Revamped the Mercenary Guild to make it more pleasant and sane."
-  - map: "Daftmarsh - Added more lich traveltiles."
