@@ -898,6 +898,15 @@
 		if(/datum/patron/divine/malum)
 			ADD_TRAIT(character, TRAIT_MALUMFIRE, TRAIT_GENERIC)
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+		if(/datum/patron/inhumen/graggar)
+			character.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
+		if(/datum/patron/inhumen/zizo)
+			character.grant_language(/datum/language/undead)
+			character.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
+		if(/datum/patron/inhumen/matthios)
+			character.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
+		if(/datum/patron/inhumen/baotha)
+			character.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 
 	var/obj/item/clothing/neck/psycross/amulet = new character.patron?.associated_objects[PATRON_AMULET][1]
 	character.put_in_hand(amulet)
