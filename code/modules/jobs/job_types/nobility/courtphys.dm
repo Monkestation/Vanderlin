@@ -89,7 +89,8 @@
 	backl = /obj/item/storage/backpack/satchel/surgbag
 	mask = /obj/item/clothing/face/courtphysician
 	belt = /obj/item/storage/belt/leather/black
-	beltl = /obj/item/storage/keyring/physician
+	wrists = /obj/item/storage/keyring/physician
+	beltl = /obj/item/storage/fancy/ifak
 	beltr = /obj/item/weapon/sword/rapier/caneblade/courtphysician
 	ring = /obj/item/clothing/ring/feldsher_ring
 	scabbards = list(/obj/item/weapon/scabbard/cane/courtphysician)
