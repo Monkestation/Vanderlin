@@ -1,3 +1,4 @@
+/*
 GLOBAL_VAR_INIT(pocket_portal, null)
 
 /obj/structure/pocket_portal
@@ -54,3 +55,4 @@ GLOBAL_VAR_INIT(pocket_portal, null)
 		added.forceMove(get_turf(portal))
 	else if (mob)
 		mob.forceMove(get_turf(portal))
+*/
