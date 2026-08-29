@@ -3077,17 +3077,16 @@
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
 "pM" = (
-/obj/structure/window/solid,
-/obj/structure/curtain/bounty,
-/obj/structure/barricade/wooden/crude,
-/obj/structure/barricade/wooden,
-/turf/closed/basic,
-/area/indoors/bandit_lair)
+/obj/effect/decal/cobbleedge{
+	dir = 5
+	},
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "pO" = (
 /obj/structure/window/solid,
 /obj/structure/curtain/bounty,
 /obj/structure/barricade/wooden/crude,
-/turf/open/floor/tile/kitchen,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/bandit_lair)
 "pP" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
@@ -5062,6 +5061,10 @@
 	},
 /turf/open/floor/naturalstone,
 /area/broodmother_den)
+"Bc" = (
+/obj/effect/decal/cobbleedge,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "Bd" = (
 /obj/item/natural/rock,
 /turf/open/floor/dirt,
@@ -6722,7 +6725,7 @@
 /obj/structure/curtain/bounty,
 /obj/structure/barricade/wooden/crude,
 /obj/structure/barricade/wooden,
-/turf/open/floor/tile/kitchen,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/bandit_lair)
 "KP" = (
 /obj/structure/door{
@@ -9659,7 +9662,7 @@ yv
 Hj
 yv
 xt
-Ey
+uL
 lD
 yv
 yv
@@ -9805,7 +9808,7 @@ ge
 ZV
 ZV
 ZV
-xt
+yv
 so
 Ey
 ZV
@@ -9918,7 +9921,7 @@ xt
 Zy
 Ey
 Te
-Te
+IG
 cw
 Sq
 Sq
@@ -10303,7 +10306,7 @@ Zm
 Iw
 yv
 yv
-Ey
+uL
 Te
 Sq
 tW
@@ -10435,7 +10438,7 @@ yv
 yv
 Zy
 Te
-Rw
+KL
 qm
 Dz
 Dz
@@ -10695,7 +10698,7 @@ yv
 yv
 Hj
 so
-aO
+pO
 WB
 Dz
 CX
@@ -10955,7 +10958,7 @@ yv
 yv
 yv
 Te
-pM
+KL
 zV
 TZ
 pl
@@ -10988,7 +10991,7 @@ zG
 Te
 ZV
 ZV
-ZV
+Te
 ZV
 ZV
 ZV
@@ -12394,7 +12397,7 @@ da
 da
 mp
 cw
-Te
+IG
 xt
 sS
 Kr
@@ -12522,14 +12525,14 @@ Te
 Ex
 Te
 Te
-Te
+IG
 xt
 xt
 xt
 Kr
 Kr
-XR
-FZ
+Bc
+pM
 Kr
 Ks
 Ev
@@ -12658,8 +12661,8 @@ Kr
 Kr
 Qy
 Kr
-xt
-xt
+Te
+Te
 Kr
 cw
 Se
@@ -12789,7 +12792,7 @@ Kr
 xt
 xt
 xt
-xt
+Te
 Kr
 Ks
 Ev
@@ -12802,7 +12805,7 @@ re
 Fe
 Ep
 yv
-ZV
+Te
 IN
 Te
 so
@@ -12917,10 +12920,10 @@ Kr
 Kr
 xt
 xt
-xt
+Te
 Lj
 Lj
-xt
+Te
 SX
 JB
 WD
@@ -13045,12 +13048,12 @@ Kr
 Qy
 Kr
 XR
-xt
+Te
+OU
 Lj
+zG
 Lj
-Lj
-Lj
-xt
+Te
 DB
 Xk
 JB
@@ -13063,7 +13066,7 @@ AI
 yv
 yv
 ZV
-so
+Ep
 xt
 Te
 DO
@@ -13181,7 +13184,7 @@ Lj
 Lj
 Lj
 Lj
-xt
+Te
 xt
 xt
 xt
@@ -13713,11 +13716,11 @@ Fe
 ZV
 ZV
 ZV
-so
+Ep
 Ey
+Ep
 so
-so
-so
+Ep
 so
 ZV
 ZV
