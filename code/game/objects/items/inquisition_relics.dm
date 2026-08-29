@@ -1185,6 +1185,7 @@
 	. = ..()
 	soundloop = new(src, FALSE)
 	AddComponent(/datum/component/scrying/mirror)
+	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/inqarticles/bmirror/Destroy()
 	if(soundloop)
