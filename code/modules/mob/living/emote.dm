@@ -752,9 +752,9 @@
 			to_chat(E, "<span class='warning'>I feel inexplicably repelled!</span>")
 			E.cursed_freak_out()
 
-		// anti pedophile logging, doesn't log kisses to the forehead/cheek as they aren't inherently sexual
+		// anti pedophile logging
 		var/log_msg
-		if(E.age == AGE_CHILD && (H.zone_selected != BODY_ZONE_PRECISE_SKULL && H.zone_selected != BODY_ZONE_HEAD))
+		if(E.age == AGE_CHILD)
 			log_msg = "[key_name(H)][ADMIN_FLW(H)] kissed [key_name(E)] [ADMIN_FLW(E)], a CHILD!"
 			if(H.age == AGE_CHILD)
 				log_msg += " As a child."
