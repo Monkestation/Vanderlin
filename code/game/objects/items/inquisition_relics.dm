@@ -1195,7 +1195,6 @@
 /obj/item/inqarticles/bmirror/Initialize()
 	. = ..()
 	soundloop = new(src, FALSE)
-	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/inqarticles/bmirror/Destroy()
 	if(soundloop)
