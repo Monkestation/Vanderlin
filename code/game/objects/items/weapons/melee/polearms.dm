@@ -574,6 +574,7 @@
 	sellprice = 90
 	item_weight = 2.3 KILOGRAMS
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_STEEL
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/polearm/halberd/silver
 	name = "silver halberd"
@@ -844,6 +845,7 @@
 	item_weight = 2 KILOGRAMS
 
 	weapon_special = /datum/special_intent/ground_smash
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/polearm/eaglebeak/getonmobprop(tag)
 	. = ..()

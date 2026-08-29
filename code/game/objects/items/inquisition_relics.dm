@@ -77,6 +77,7 @@
 	obj_flags = CAN_BE_HIT
 	bigboy = TRUE
 	item_weight = 4 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/datum/looping_sound/psydonmusicboxsound/soundloop
 
 /obj/item/psydonmusicbox/examine(mob/user)
@@ -469,6 +470,7 @@
 	sellprice = 0
 	verb_exclaim = "blares"
 	item_weight = 80 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/cursedblood
 	var/active
 	var/full
@@ -1060,6 +1062,10 @@
 	var/worn = FALSE
 	var/bagging = FALSE
 
+/obj/item/clothing/head/inqarticles/blackbag/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/anti_theft)
+
 /obj/item/clothing/head/inqarticles/blackbag/proc/bagsound(mob/living/M)
 	if(bagging)
 		playsound(M, pick('sound/misc/blackbag.ogg','sound/misc/blackbag2.ogg','sound/misc/blackbag3.ogg','sound/misc/blackbag4.ogg','sound/misc/blackbag5.ogg'), 100, TRUE, 4)
@@ -1189,6 +1195,7 @@
 /obj/item/inqarticles/bmirror/Initialize()
 	. = ..()
 	soundloop = new(src, FALSE)
+	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/inqarticles/bmirror/Destroy()
 	if(soundloop)
