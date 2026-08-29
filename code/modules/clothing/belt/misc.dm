@@ -219,6 +219,7 @@
 	component_type = /datum/component/storage/concrete/grid/coin_pouch
 	grid_height = 64
 	grid_width = 32
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/storage/belt/pouch/medicine
 	populate_contents = list(
