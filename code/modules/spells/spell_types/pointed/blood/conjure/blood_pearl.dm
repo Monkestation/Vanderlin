@@ -134,7 +134,7 @@
 /// Crafting component for blood magic things
 /obj/item/sealed_blood_pearl
 	name = "sealed blood pearl"
-	desc = "A metallic pearl of blood."
+	desc = "A metallic pearl of blood. It glows with a crimson aura."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state = "blood_pearl"
 	dropshrink = 0.6
