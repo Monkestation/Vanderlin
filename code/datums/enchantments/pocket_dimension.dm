@@ -6,7 +6,7 @@ GLOBAL_VAR_INIT(pocket_portal, null)
 	pixel_x = -16
 	density = FALSE
 	anchored = TRUE
-	max_integrity = 10000000
+	max_integrity = INTEGRITY_UNBREAKABLE
 
 	var/list/mob_exit_point = list()
 

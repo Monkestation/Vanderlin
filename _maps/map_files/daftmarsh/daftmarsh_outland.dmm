@@ -3407,6 +3407,10 @@
 "KZ" = (
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/upper)
+"La" = (
+/obj/effect/spawner/traveltile_spawner/horizontal/inhumen,
+/turf/open/floor/cobblerock,
+/area/outdoors/bog)
 "Lb" = (
 /obj/structure/fluff/walldeco/bigpainting,
 /obj/structure/table/wood/plain,
@@ -67685,7 +67689,7 @@ SK
 "}
 (112,1,2) = {"
 SK
-fl
+La
 mp
 mp
 mp

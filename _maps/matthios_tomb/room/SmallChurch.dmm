@@ -29,7 +29,7 @@
 	base_strength = 15
 	},
 /obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/head/helmet/skullcap/cult{
+/obj/item/clothing/head/helmet/skullcap{
 	pixel_y = 10
 	},
 /obj/item/clothing/cloak/half/shadowcloak/cult,
@@ -892,7 +892,7 @@
 	base_strength = 15
 	},
 /obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/head/helmet/skullcap/cult{
+/obj/item/clothing/head/helmet/skullcap{
 	pixel_y = 10
 	},
 /obj/item/clothing/cloak/half/shadowcloak/cult,

@@ -36,7 +36,7 @@
 	cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 	allowed_patrons = list(/datum/patron/inhumen/zizo)
 
-	outfit = /datum/outfit/darkspawn
+	outfit = /datum/outfit/admin/darkspawn
 	honorary = "Lord"
 	honorary_f = "Lady"
 
@@ -81,7 +81,8 @@
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_DEADNOSE,
 		TRAIT_STEELHEARTED,
-		TRAIT_SORCERER,
+		TRAIT_BLOOD_SORCERER,
+		TRAIT_VITAE_USER,
 		TRAIT_NOPAIN,
 	)
 
@@ -95,6 +96,7 @@
 		/datum/language/thievescant,
 		/datum/language/undead
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/admin/darkspawn/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -114,19 +116,9 @@
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/darkspawn()
 		spawned.dna.species.organs[ORGAN_SLOT_EYES] = /obj/item/organ/eyes/night_vision/nightmare
 
-	var/list/eye_list = spawned.getorganslotlist(ORGAN_SLOT_EYES)
-	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.Remove(spawned,1)
-		QDEL_NULL(eyes)
+	spawned.grant_nightmare_eyes()
 
-	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
-	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
-	LE.switch_side(LEFT_SIDE)
-
-	LE.Insert(spawned)
-	RE.Insert(spawned)
-
-/datum/outfit/darkspawn
+/datum/outfit/admin/darkspawn
 	name = JOB_ADMIN_DARKSPAWN
 	pants = /obj/item/clothing/pants/trou/formal/shorts
 	shoes = /obj/item/clothing/shoes/courtphysician/female

@@ -13949,10 +13949,6 @@
 /obj/structure/bars,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/basement/thepit)
-"isR" = (
-/mob/living/simple_animal/hostile/retaliate/wolf,
-/turf/open/floor/cobble,
-/area/indoors/town/keep/basement/thepit)
 "itf" = (
 /obj/effect/spawner/map_spawner/hauntz_random,
 /turf/open/floor/cobblerock,
@@ -19468,10 +19464,6 @@
 /obj/effect/landmark/start/feldsher,
 /turf/open/floor/carpet/red,
 /area/indoors/town/clinic_large)
-"lRy" = (
-/mob/living/simple_animal/hostile/retaliate/wolf,
-/turf/open/floor/cobblerock,
-/area/indoors/town/keep/basement/thepit)
 "lRz" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/shop)
@@ -138485,7 +138477,7 @@ euU
 oFc
 oFc
 isO
-lRy
+nTy
 gcA
 nTy
 ePY
@@ -138690,7 +138682,7 @@ isO
 nTy
 nTy
 nTy
-lRy
+nTy
 nTy
 nTy
 nTy
@@ -138890,11 +138882,11 @@ oFc
 csT
 oFF
 gcA
-lRy
+nTy
 nTy
 gcA
 nTy
-isR
+gcA
 nTy
 oFF
 csT
@@ -139094,7 +139086,7 @@ isO
 nTy
 gcA
 gcA
-lRy
+nTy
 nTy
 gcA
 gcA
@@ -139293,7 +139285,7 @@ euU
 csT
 csT
 isO
-isR
+gcA
 nTy
 nTy
 dEk

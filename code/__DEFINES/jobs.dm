@@ -48,23 +48,39 @@
 	FACTION_GALLOWBAND \
 )
 
-#define FACTION_NONE		"None"
-#define FACTION_NEUTRAL		"Neutral"
-#define FACTION_HOSTILE		"Hostile"
-#define FACTION_TOWN		"Town"
-#define FACTION_FOREIGNERS  "Foreigners"
-#define FACTION_MIGRANTS  	"Migrants"
-#define FACTION_UNDEAD		"Undead"
-#define FACTION_PLANTS		"Plants"
-#define FACTION_VINES		"Vines" //Seemingly unused
-#define FACTION_CABAL		"Cabal"
-#define FACTION_RATS		"Rats"
-#define FACTION_ORCS		"Orcs"
-#define FACTION_BUMS		"Bums"
-#define FACTION_MATTHIOS	"Matthios"
-#define FACTION_VIKINGS     "Vikings"
-#define FACTION_GALLOWBAND  "Gallowband"
+#define FACTION_NONE "None"
+#define FACTION_NEUTRAL	"Neutral"
+#define FACTION_HOSTILE	"Hostile"
+#define FACTION_SUMMONED "Summoned"
+
+#define FACTION_MATTHIOS "Matthios"
+#define FACTION_ISLAND "Island"
+#define FACTION_AMBUSH "Ambush"
+#define FACTION_QUEST "Quest"
+
+#define FACTION_TOWN "Town"
+#define FACTION_FOREIGNERS "Foreigners"
+#define FACTION_MIGRANTS "Migrants"
+#define FACTION_UNDEAD "Undead"
+#define FACTION_PLANTS "Plants"
+#define FACTION_VINES "Vines" //Seemingly unused
+#define FACTION_CABAL "Cabal"
+#define FACTION_RATS "Rats"
+#define FACTION_ORCS "Orcs"
+#define FACTION_BUMS "Bums"
+#define FACTION_VIKINGS "Vikings"
+#define FACTION_GALLOWBAND "Gallowband"
 #define FACTION_INQUISITION	"Inquisition"
+#define FACTION_MEAT "Meat"
+#define FACTION_DEEP "Deep"
+#define FACTION_FAE "Fae"
+#define FACTION_SPIDERS "Spiders"
+#define FACTION_ELEMENTAL "Elemental"
+#define FACTION_ABERRANT "Aberrant"
+#define FACTION_INFERNAL "Infernal"
+#define FACTION_LEYLINE "Leyline"
+#define FACTION_OVERLORD "Overlord"
+#define FACTION_BLOOD_MAGIC	"Blood Magic"
 
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)
@@ -311,3 +327,5 @@
 #define JOB_ADMIN_LUNAR_SENTINEL "Lunar Order Sentinel"
 #define JOB_ADMIN_LUNAR_CHAMPION "Lunar Order Champion"
 #define JOB_ADMIN_DARKSPAWN "Darkspawn"
+#define JOB_ADMIN_BLOOD_SORCERER "Blood Sorcerer"
+#define JOB_ADMIN_KINGSFIELD_CONSTABLE "Kingsfield Constable"

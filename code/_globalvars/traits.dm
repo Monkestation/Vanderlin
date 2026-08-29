@@ -137,6 +137,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Noble Blooded" = TRAIT_NOBLE_BLOOD,
 		"Recognised Noble" = TRAIT_NOBLE_POWER,
 		"Empath" = TRAIT_EMPATH,
+		"Thief-Sense" = TRAIT_THIEFSENSE,
 		"Battleready" = TRAIT_BREADY,
 		"Sixth-Sense" = TRAIT_BLINDFIGHTING,
 		"Mail Training" = TRAIT_MEDIUMARMOR,
@@ -215,6 +216,10 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Close Combatant" = TRAIT_CLOSECOMBAT,
 		"Steel Hearted" = TRAIT_STEELHEARTED,
 		"Sorcerer" = TRAIT_SORCERER,
+		"Blood Mage" = TRAIT_BLOOD_MAGE,
+		"Blood Sorcerer" = TRAIT_BLOOD_SORCERER,
+		"Blood Sense" = TRAIT_BLOOD_SENSE,
+		"Vitae User" = TRAIT_VITAE_USER,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -224,7 +229,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_NO_TELEPORT" = TRAIT_NO_TELEPORT,
 		"TRAIT_WIELDED" = TRAIT_WIELDED,
 		"TRAIT_NEEDS_TWO_HANDS" = TRAIT_NEEDS_TWO_HANDS,
-		"TRAIT_HARD_TO_STEAL" = TRAIT_HARD_TO_STEAL,
+		"TRAIT_CANT_BE_STOLEN" = TRAIT_CANT_BE_STOLEN,
 	),
 	/turf = list(
 		"TRAIT_AI_AVOID_TURF" = TRAIT_AI_AVOID_TURF,
@@ -255,6 +260,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_UNDODGING = span_danger("I am unable to dodge."),
 	TRAIT_UNPARRYING = span_danger("I am unable to block and parry attacks."),
 	TRAIT_BLINDFIGHTING = span_info("I have an incredible sense of awareness, allowing me to parry even when I can't see it coming."),
+	TRAIT_THIEFSENSE = span_info("I have supreme awareness of my belongings, surely no one would try to steal from me."),
 	TRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
 	TRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
 	TRAIT_DODGEEXPERT = "I can dodge easily while only wearing light armor.",
@@ -341,7 +347,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_FLOWERFIELD_IMMUNITY = span_info("I am immune to the effects of flower fields."),
 	TRAIT_SECRET_OFFICIANT = span_love("I am able to conduct secret wedding ceremonies outside of the church. Love cannot be stopped!"),
 	TRAIT_RECOGNIZE_ADDICTS = "I can recognize alcoholics and junkies just by looking at them.",
-	TRAIT_DUALWIELDER = span_info("I am trained in the art of dual wielding."),
+	TRAIT_DUALWIELDER = span_info("I am trained in the art of dual wielding. I can strike with two weapons at once, making it harder to miss!"),
 	TRAIT_NOENERGY = span_info("I don't need rest; I won't ever feel fatigue."),
 	TRAIT_KEENEARS = span_info("I've a good pair of ears, and can tell who is speaking, even when they're out of sight. I can also hear whispers from further away."),
 	TRAIT_KEENEYES = span_info("Years of hunting and tracking have honed your sight. You're better at noticing details and spotting hidden things."),
@@ -361,6 +367,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_CLOSECOMBAT = span_info("I am trained in unarmed combat, and am able to kick with precision."),
 	TRAIT_STEELHEARTED = span_bloody("I am steel hearted. The horrors of life do not affect me."),
 	TRAIT_SORCERER = SPAN_GOD_NOC("I am a sorcerer, unable to wield magickal tomes but gifted with innate power."),
+	TRAIT_BLOOD_MAGE = span_bloody("I am a skilled blood mage, wielding the unholy power of blood magic. Woe unto those who oppose me."),
+	TRAIT_BLOOD_SORCERER = span_bloody("I am a gifted blood sorcerer, wielding innate power over blood magic. Woe unto those who oppose me. I cannot use magickal tomes."),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global
