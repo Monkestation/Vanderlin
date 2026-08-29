@@ -16,7 +16,7 @@
 	)
 
 /datum/job/admin/lunar_sentinel
-	title = JOB_ADMIN_ORACLE_GUARD
+	title = JOB_ADMIN_LUNAR_SENTINEL
 	tutorial = "You are a devoted follower of Noc. \
 	Sentinel of the Lunar Order you serve the agents of The Moon Prince. \
 	Keep safe the nite."
@@ -28,10 +28,14 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_patrons = list(/datum/patron/divine/noc)
 
-	outfit = /datum/outfit/lunar_sentinel
+	outfit = /datum/outfit/admin/lunar_sentinel
 
 	give_bank_account = 30
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+
+	jobs_i_always_know = list(JOB_MONARCH, JOB_ADMIN_ORACLE, JOB_ADMIN_LUNAR_SENTINEL, JOB_ADMIN_LUNAR_CHAMPION)
+	jobs_always_know_me = list(JOB_ADMIN_ORACLE, JOB_ADMIN_LUNAR_SENTINEL, JOB_ADMIN_LUNAR_CHAMPION)
 
 	exp_type = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
@@ -82,8 +86,8 @@
 		if("Lunar Flail")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc/flail)
 
-/datum/outfit/lunar_sentinel
-	name = JOB_ADMIN_ORACLE_GUARD
+/datum/outfit/admin/lunar_sentinel
+	name = JOB_ADMIN_LUNAR_SENTINEL
 	head = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
 	neck = /obj/item/clothing/neck/gorget/silver
 	armor = /obj/item/clothing/armor/brigandine

@@ -73,6 +73,8 @@
 			continue
 		if(item.anchored)
 			continue
+		if(item.item_flags & NO_ITEM_TELEPORT)
+			continue
 		item_list += item
 
 	for(var/obj/structure/closet/chest in range(runesize, src))

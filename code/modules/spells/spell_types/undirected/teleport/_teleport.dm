@@ -4,6 +4,7 @@
  * Teleports the caster to a turf selected by get_destinations().
  */
 /datum/action/cooldown/spell/undirected/teleport
+	charge_required = FALSE
 	/// What channel the teleport is done under.
 	var/teleport_channel = TELEPORT_CHANNEL_MAGIC
 	/// Whether we force the teleport to happen (ie, it cannot be blocked by noteleport areas or blessings or whatever)
@@ -41,6 +42,7 @@
  * to a random turf within a radius of themselves.
  */
 /datum/action/cooldown/spell/undirected/teleport/radius_turf
+	name = "Radial Teleport"
 	/// The inner radius around the caster that we can teleport to
 	var/inner_tele_radius = 1
 	/// The outer radius around the caster that we can teleport to
@@ -82,6 +84,7 @@
  * to a random turf within a selected (or random) area.
  */
 /datum/action/cooldown/spell/undirected/teleport/area_teleport
+	name = "Area Teleport"
 	force_teleport = TRUE // Forced, as the Wizard Den is noteleport and wizards couldn't escape otherwise.
 	destination_flags = TELEPORT_SPELL_SKIP_BLOCKED
 	/// The last area we chose to teleport / where we're currently teleporting to, if mid-cast

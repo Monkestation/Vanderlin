@@ -110,7 +110,7 @@
 	var/mob/living/target = hit_atom
 	to_chat(target, span_danger("My stomach hurts a lot!"))
 	target.emote("gag")
-	target.reagents?.add_reagent(/datum/reagent/organpoison, 2)
+	target.reagents?.add_reagent(/datum/reagent/poison/organ, 2)
 	playsound(target, 'sound/magic/marked.ogg', 50, TRUE)
 
 

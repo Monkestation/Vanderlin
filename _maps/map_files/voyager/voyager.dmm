@@ -1394,7 +1394,7 @@
 "iE" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/scomstone,
-/obj/item/weapon/whip/antique,
+/obj/item/weapon/whip/repenta,
 /obj/structure/carpet/purple,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church/inquisition)

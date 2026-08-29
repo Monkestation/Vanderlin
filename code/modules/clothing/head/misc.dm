@@ -99,7 +99,7 @@
 	desc = "A fuzzy helmet of fur typically worn by frontiersmen of the far steppes."
 	icon_state = "papakha"
 	sellprice = VALUE_FINE_CLOTHING
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	min_cold_protection_temperature = -20
 	item_weight = 155 GRAMS
 
@@ -187,7 +187,7 @@
 	armor_type = /datum/armor/head/padded
 	body_parts_covered = HEAD|HAIR|EARS
 	prevent_crits =  MINOR_CRITICALS
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 120 GRAMS
 
 
@@ -296,6 +296,7 @@
 
 /obj/item/clothing/head/vampire
 	name = "crown of darkness"
+	desc = "A dark crown set with bloodstones. Something is very wrong if you are unfortunate enough to see it."
 	icon_state = "vcrown"
 	body_parts_covered = null
 	slot_flags = ITEM_SLOT_HEAD
@@ -303,6 +304,10 @@
 	sellprice = 1000
 	resistance_flags = FIRE_PROOF
 	item_weight = 600 GRAMS
+
+/obj/item/clothing/head/vampire/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //................ Faceless Hood ............... //	- Faceless One
 

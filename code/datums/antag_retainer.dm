@@ -39,11 +39,11 @@
 					continue
 				if(is_in_roguetown(player))
 					var/datum/antagonist/D = player.mind.has_antag_datum(/datum/antagonist/werewolf, FALSE)
-					if(D && D.increase_votepwr)
+					if(D && D.increase_votepwr && !D.isgoodguy)
 						wwoelf++
 						continue
 					D = player.mind.has_antag_datum(/datum/antagonist/vampire/lord)
-					if(D && D.increase_votepwr)
+					if(D && D.increase_votepwr && !D.isgoodguy)
 						vampyr++
 						continue
 	if(vampyr)

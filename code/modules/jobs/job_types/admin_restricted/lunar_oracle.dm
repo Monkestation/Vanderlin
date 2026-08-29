@@ -56,12 +56,16 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_patrons = list(/datum/patron/divine/noc)
 
-	outfit = /datum/outfit/oracle
+	outfit = /datum/outfit/admin/oracle
 	honorary = "Oracle"
 
 	magic_user = TRUE
 	give_bank_account = 30
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+
+	jobs_i_always_know = list(JOB_MONARCH, JOB_ADMIN_ORACLE, JOB_ADMIN_LUNAR_SENTINEL, JOB_ADMIN_LUNAR_CHAMPION)
+	jobs_always_know_me = list(JOB_ADMIN_ORACLE, JOB_ADMIN_LUNAR_SENTINEL, JOB_ADMIN_LUNAR_CHAMPION)
 
 	exp_type = list(EXP_TYPE_CHURCH)
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC, EXP_TYPE_LEADERSHIP)
@@ -81,6 +85,8 @@
 		TRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
 		TRAIT_LUNAR_ORDER,
+		TRAIT_BLINDFIGHTING,
+		TRAIT_SORCERER,
 	)
 
 	languages = list(
@@ -98,6 +104,7 @@
 		/datum/language/deepspeak,
 		/datum/language/thievescant
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/admin/oracle/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -110,7 +117,11 @@
 		devotion.grant_to(spawned)
 	spawned.apply_status_effect(/datum/status_effect/buff/nocblessed)
 
-/datum/outfit/oracle
+	spawned.adjust_technique_mastery_points(12)
+	spawned.adjust_form_mastery_points(20)
+	spawned.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
+
+/datum/outfit/admin/oracle
 	name = JOB_ADMIN_ORACLE
 	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -120,9 +131,9 @@
 	beltr = /obj/item/storage/keyring/oracle
 	armor = /obj/item/clothing/shirt/robe/noc
 	backl = /obj/item/storage/backpack/satchel
-	cloak = /obj/item/clothing/cloak/raincloak/colored/blue
+	cloak = /obj/item/clothing/cloak/raincloak/colored/chalk
 	backpack_contents = list(
-		/obj/item/needle = 1,
+		/obj/item/needle/blessed = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1
 	)
 

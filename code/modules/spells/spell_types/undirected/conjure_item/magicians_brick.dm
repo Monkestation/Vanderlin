@@ -24,8 +24,6 @@
 		return
 	var/mob/living/L = owner
 	var/INT = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)
-	if(INT <= 10)
-		return
 	var/obj/item/brick = .
 	var/int_scaling = INT - 10
 	brick.force = (brick.force + int_scaling) * spell_magnitude_modifier
@@ -45,7 +43,7 @@
 	armor_penetration = 30 // From iron tossblade
 	wdefense = BAD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_WORST / 2 //Not for parrying
+	max_integrity = INTEGRITY_OLD_WORST / 2 //Not for parrying
 	slot_flags = ITEM_SLOT_MOUTH
 	obj_flags = null
 	w_class = WEIGHT_CLASS_TINY

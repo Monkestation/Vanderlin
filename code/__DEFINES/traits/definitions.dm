@@ -386,6 +386,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EMPATH "Empath"
 #define TRAIT_BREADY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
+#define TRAIT_THIEFSENSE "Thief-Sense"
 #define TRAIT_MEDIUMARMOR "Mail Training"
 #define TRAIT_HEAVYARMOR "Plate Training"
 #define TRAIT_DODGEEXPERT "Fast Reflexes"
@@ -469,8 +470,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_INHUMENCAMP "inhumencamp"
 #define TRAIT_GALLOWBAND "gallowband"
 #define TRAIT_INTRAINING "intraining" //allows certain roles to bypass the average skill limitation of training dummies
-#define TRAIT_STEELHEARTED "steelhearted" //no bad mood from dismembering or seeing this
-#define TRAIT_IWASREVIVED "iwasrevived" //prevents PQ gain from reviving the same person twice
+#define TRAIT_STEELHEARTED "Steel Hearted" //no bad mood from dismembering or seeing this
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
 #define TRAIT_ZIZOID_HUNTED "zizoidhunted" // Used to signal character has been marked by death by the Zizoid cult
 #define TRAIT_LEPROSY "Leprosy"
@@ -492,13 +492,26 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This mob can't have a split personality
 #define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
 #define TRAIT_VIRGIN	"virginity"
+#define TRAIT_EXPLOSION_PREVENTER "exploded"
+
+#define TRAIT_BROOD "Broodspawn"
+
 // This is for UNARMED FIGHTERS. LIMIT ITS USE TO THEM
 #define TRAIT_CLOSECOMBAT "Close Combat"
+
+// Can see blood volume and vitae value of a mob.
+#define TRAIT_BLOOD_SENSE "Blood Senses"
+// Mob uses vitae for one purpose or another.
+#define TRAIT_VITAE_USER "Vitae User"
+// Bleeding is suspended by a spell
+#define TRAIT_SUSPENDED_BLEED "Suspended Bleeding"
 
 #define TRAIT_CONJURED_SUMMON "conjured_summon"
 #define TRAIT_CONJURE_BACKLASH "conjure_backlash"
 
-#define TRAIT_SORCERER "Unattuned"
+#define TRAIT_SORCERER "Sorcerer"
+#define TRAIT_BLOOD_MAGE "Blood Mage"
+#define TRAIT_BLOOD_SORCERER "Blood Sorcerer"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise
@@ -611,7 +624,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// The items needs two hands to be carried
 #define TRAIT_NEEDS_TWO_HANDS "needstwohands"
 /// This item can't be pickpocketed
-#define TRAIT_HARD_TO_STEAL "hard_to_steal"
+#define TRAIT_CANT_BE_STOLEN "cant_be_stolen"
 
 // **** turf traits
 ///Turf slowdown will be ignored when this trait is added to a turf.

@@ -12,6 +12,7 @@
 
 	required_form = FORM_DEATH
 	required_technique = TECHNIQUE_SUMMONING
+	heretical_spell = TRUE
 
 	invocation = "Obey me."
 	invocation_type = INVOCATION_WHISPER

@@ -1700,7 +1700,7 @@
 /area/indoors/mountains/anvil/upperkeep)
 "aic" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword,
 /turf/open/floor/tile/masonic/inverted,
 /area/indoors/mountains/anvil/upperkeep)
 "aid" = (
@@ -8451,7 +8451,7 @@
 /obj/item/clothing/head/helmet/visored/zizo,
 /obj/item/clothing/gloves/plate/zizo,
 /obj/item/clothing/armor/plate/full/zizo,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /mob/living/carbon/human/species/dwarf/mountain/base/very_skilled/naked,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)

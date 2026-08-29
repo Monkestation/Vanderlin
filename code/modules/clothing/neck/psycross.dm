@@ -188,6 +188,10 @@
 	desc = "Blessed be everything the light of the sun touches, for it is protected by Her grace."
 	icon_state = "astrata"
 
+/obj/item/clothing/neck/psycross/silver/divine/astrata/real_silver
+	name = "silver amulet of Astrata"
+	icon_state = "astrata_s"
+
 /obj/item/clothing/neck/psycross/silver/divine/noc
 	name = "amulet of Noc"
 	desc = "Diligence, study, pursuit of truth and wisdom. Let nothing deter you from it."
@@ -197,6 +201,14 @@
 	name = "amulet of Dendor"
 	desc = "Nature is a body of which we are but its entrails."
 	icon_state = "dendor"
+
+/obj/item/clothing/neck/psycross/silver/divine/dendor/divine_link
+	name = "blessed amulet of Dendor"
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/neck/psycross/silver/divine/dendor/divine_link/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/divine_link)
 
 /obj/item/clothing/neck/psycross/silver/divine/abyssor
 	name = "amulet of Abyssor"

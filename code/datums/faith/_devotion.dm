@@ -185,6 +185,7 @@
 	miracles_extra += list(
 		/datum/action/cooldown/spell/undirected/touch/orison,
 		/datum/action/cooldown/spell/cure_rot,
+		/datum/action/cooldown/spell/burial_rites,
 		/datum/action/cooldown/spell/diagnose/holy,
 	)
 	devotion_class = DEVOTION_CLASS_PRIEST
@@ -202,13 +203,6 @@
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_2
 	devotion_class = DEVOTION_CLASS_TEMPLAR
-
-/datum/devotion/proc/make_absolver()
-	devotion = 100
-	max_devotion = CLERIC_REQ_3
-	progression = CLERIC_REQ_3
-	max_progression = CLERIC_REQ_3
-	devotion_class = DEVOTION_CLASS_ABSOLVER
 
 /datum/devotion/proc/make_acolyte()
 	progression = CLERIC_REQ_1

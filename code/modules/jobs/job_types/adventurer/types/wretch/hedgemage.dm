@@ -52,6 +52,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/wretch/hedgemage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

@@ -25,7 +25,7 @@
 
 /datum/job/butler
 	title = JOB_BUTLER
-	f_title = "Head Housekeeper"
+	f_title = "Housekeeper"
 	alt_titles = list("Majordomo", "Master of Staff")
 	tutorial = "You are elevated to near nobility, as you hold the distinguished position of master of the royal household staff. \
 	Your blade is a charcuterie of artisanal cheeses and meat, your armor wit and classical training. \
@@ -71,7 +71,7 @@
 	name = JOB_BUTLER
 	shoes = /obj/item/clothing/shoes/nobleboot
 	beltl = /obj/item/storage/belt/pouch/coins/mid
-	beltr = /obj/item/weapon/whip/butler
+	beltr = /obj/item/weapon/whip/bronze/butler
 	backr = /obj/item/storage/backpack/satchel
 
 	backpack_contents = list(

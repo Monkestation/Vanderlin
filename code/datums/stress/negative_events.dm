@@ -94,6 +94,11 @@
 		return FALSE
 	return TRUE
 
+/datum/stress_event/blood_mark
+	stress_change = 1
+	desc = span_bloody("I have been marked by Blood Magic!")
+	timer = 10 MINUTES
+
 /datum/stress_event/painmax
 	timer = 1 MINUTES
 	stress_change = 2
@@ -220,6 +225,11 @@
 	timer = 3 MINUTES
 	stress_change = 3
 	desc = span_phobia("IT'S THE FUCKING DAEWALKER!!")
+
+/datum/stress_event/its_the_nitewalker
+	timer = 3 MINUTES
+	stress_change = 2
+	desc = span_phobia("THE NITEWALKER ROAMS!!")
 
 /datum/stress_event/fishface
 	timer = 1 MINUTES

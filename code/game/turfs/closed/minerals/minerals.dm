@@ -138,6 +138,10 @@
 	var/turf/new_turf = ScrapeAway(null, flags)
 	GLOB.mined_resource_loc |= new_turf
 	addtimer(CALLBACK(src, PROC_REF(AfterChange)), 1, TIMER_UNIQUE)
+	return TRUE
+
+/turf/closed/mineral/bedrock/gets_drilled(mob/living/user, triggered_by_explosion, give_exp)
+	return FALSE
 
 /turf/closed/mineral/proc/apply_mining_quality(obj/item/item, mob/living/user)
 	if(!user || !istype(item, /obj/item/ore))
@@ -261,7 +265,8 @@
 	/turf/closed/mineral/cinnabar = 5,
 	/turf/closed/mineral/gold = 15,
 	/turf/closed/mineral/iron = 25,
-	/turf/closed/mineral/silver = 15
+	/turf/closed/mineral/silver = 15,
+	/turf/closed/mineral/bloodstone = 1,
 	)
 
 /turf/closed/mineral/random/low_nonval
@@ -299,7 +304,8 @@
 	mineralSpawnChanceList = list(/turf/closed/mineral/mana_crystal = 10,
 	/turf/closed/mineral/gold = 40 ,
 	/turf/closed/mineral/gemeralds = 20,
-	/turf/closed/mineral/silver = 40
+	/turf/closed/mineral/silver = 40,
+	/turf/closed/mineral/bloodstone = 7,
 	)
 
 /turf/closed/mineral/random/med_valuable
@@ -308,7 +314,8 @@
 	mineralSpawnChanceList = list(/turf/closed/mineral/mana_crystal = 10,
 	/turf/closed/mineral/gold = 40,
 	/turf/closed/mineral/gemeralds = 20,
-	/turf/closed/mineral/silver = 40
+	/turf/closed/mineral/silver = 40,
+	/turf/closed/mineral/bloodstone = 7,
 	)
 
 /turf/closed/mineral/random/high_valuable
@@ -317,7 +324,8 @@
 	mineralSpawnChanceList = list(/turf/closed/mineral/mana_crystal = 10,
 	/turf/closed/mineral/gold = 40 ,
 	/turf/closed/mineral/gemeralds = 20,
-	/turf/closed/mineral/silver = 40
+	/turf/closed/mineral/silver = 40,
+	/turf/closed/mineral/bloodstone = 7,
 	)
 
 /turf/closed/mineral/copper
@@ -383,6 +391,14 @@
 	spreadChance = 23
 	spread = 5
 
+/turf/closed/mineral/bloodstone
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
+	icon_state = MAP_SWITCH("mineral", "gem")
+	mineralType = /obj/item/ore/bloodstone
+	rockType = /obj/item/natural/rock/bloodstone
+	spreadChance = 1
+	spread = 2
+
 /obj/item/natural/rock/mana_crystal
 	mineralType = /obj/item/mana_battery/mana_crystal/standard
 
@@ -422,6 +438,7 @@
 	max_integrity = 10000000
 	damage_deflection = 99999999
 	above_floor = /turf/closed/mineral/bedrock
+	turf_flags = NO_JAUNT
 
 /turf/closed/mineral/bedrock/attackby(obj/item/I, mob/user, list/modifiers)
 	to_chat(user, span_warning("This is far too sturdy to be destroyed!"))

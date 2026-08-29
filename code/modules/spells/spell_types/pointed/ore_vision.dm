@@ -5,6 +5,7 @@
 	button_icon = 'icons/roguetown/items/gems.dmi'
 	spell_cost = 30
 	required_form = FORM_EARTH
+	charge_required = FALSE
 
 /datum/action/cooldown/spell/gem_detect/is_valid_target(atom/cast_on)
 	. = ..()

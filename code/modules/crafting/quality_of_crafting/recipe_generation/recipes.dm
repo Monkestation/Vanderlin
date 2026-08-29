@@ -768,6 +768,9 @@
 	data["type"] = "chemical_reaction"
 	data["name"] = name
 	data["category"] = "Chemistry"
+	if(length(results))
+		var/datum/reagent/first_result = results[1]
+		data["desc"] = first_result?.description
 
 	// Results: list(reagent_type_path = unit_amount)
 	var/list/result_list = list()

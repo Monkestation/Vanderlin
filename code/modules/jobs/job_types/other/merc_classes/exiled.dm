@@ -58,9 +58,9 @@
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPONS", title = "SPILL SOME BLOOD!")
 	switch(choice)
 		if("Sword & Cudgel")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 		if("Dual Axes")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, 40)
 
 /datum/outfit/mercenary/exiled
 	name = "Exiled Warrior (Mercenary)"

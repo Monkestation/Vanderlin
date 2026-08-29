@@ -42,8 +42,7 @@
 
 /datum/outfit/zizo_cultist
 	name = "Zizo's Ascendant"
-	head = /obj/item/clothing/head/helmet/skullcap/cult
-	mask = /obj/item/clothing/face/shepherd/shadowmask
+	head = /obj/item/clothing/head/helmet/visored/zizo
 	neck = /obj/item/clothing/neck/chaincoif
 	shirt = /obj/item/clothing/shirt/shadowshirt
 	armor = /obj/item/clothing/armor/plate/full/zizo
@@ -56,7 +55,7 @@
 	beltl = /obj/item/weapon/whip/spiderwhip
 	beltr = /obj/item/weapon/knife/dagger/steel/dirk
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/sword/long/greatsword/zizo
+	backr = /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser
 	scabbards = list(/obj/item/weapon/scabbard/knife)
 
 /datum/migrant_role/zizo_cultist_lesser
@@ -100,7 +99,6 @@
 
 /datum/outfit/zizo_cultist_lesser
 	name = "Ascendant Follower"
-	head = /obj/item/clothing/head/helmet/skullcap/cult
 	mask = /obj/item/clothing/face/shepherd/shadowmask
 	neck = /obj/item/clothing/neck/highcollier
 	shirt = /obj/item/clothing/armor/chainmail

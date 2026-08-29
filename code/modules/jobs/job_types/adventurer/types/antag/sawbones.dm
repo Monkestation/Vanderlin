@@ -37,7 +37,7 @@
 	)
 /datum/job/advclass/bandit/sawbones // doctor class. like the pilgrim, but more evil
 	title = "Sawbones"
-	tutorial = "It was an accident! Your patient wasn't using his second kidney, anyway. After an unfortunate 'misunderstanding' with the town and your medical practice, you know practice medicine on the run with your new associates. Business has never been better!"
+	tutorial = "It was an accident! Your patient wasn't using his second kidney, anyway. After an unfortunate 'misunderstanding' with the town and your medical practice, you now practice medicine on the run with your new associates. Business has never been better!"
 	outfit = /datum/outfit/bandit/sawbones
 	category_tags = list(CTAG_BANDIT)
 	cmode_music = 'sound/music/cmode/antag/CombatBandit3.ogg'
