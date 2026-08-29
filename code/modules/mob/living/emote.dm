@@ -756,6 +756,10 @@
 		var/log_msg
 		if(E.age == AGE_CHILD)
 			log_msg = "[key_name(H)][ADMIN_FLW(H)] kissed [key_name(E)] [ADMIN_FLW(E)], a CHILD!"
+			if(H.zone_selected == BODY_ZONE_PRECISE_SKULL)
+				log_msg += " On the FOREHEAD."
+			else if(H.zone_selected == BODY_ZONE_HEAD)
+				log_msg += " On the CHEEK."
 			if(H.age == AGE_CHILD)
 				log_msg += " As a child."
 			else
