@@ -3145,15 +3145,13 @@
 /turf/closed/wall/mineral/decostone/center,
 /area/outdoors/town/roofs)
 "cqT" = (
-/turf/open/floor/grass/mixyel,
-/area/outdoors/basin/safe)
-"crd" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Dennis"
+/obj/structure/kneestingers,
+/obj/structure/flora/grass/water,
+/obj/structure/flora/ausbushes/ppflowers,
+/turf/open/water/river{
+	dir = 8
 	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
+/area/under/cavewet)
 "crf" = (
 /obj/structure/flora/grass/water,
 /obj/structure/fluff/railing/wood{
@@ -5509,13 +5507,6 @@
 /obj/structure/window/solid,
 /turf/open/floor/wood,
 /area/indoors/town/shop)
-"ejK" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Robin"
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "ejW" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobble,
@@ -11624,13 +11615,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/basin)
-"jkx" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Gabby"
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "jlg" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
@@ -14855,13 +14839,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
-"lVa" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Alice"
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "lVk" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/water/marsh,
@@ -18886,13 +18863,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town)
-"psl" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Arthur"
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "psm" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -25891,13 +25861,6 @@
 /obj/structure/rack,
 /turf/open/floor/wood,
 /area/indoors/town)
-"vul" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Herbert"
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "vux" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -28769,13 +28732,6 @@
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/tile,
 /area/indoors/town/tavern)
-"xMT" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Galahad"
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "xMU" = (
 /obj/structure/stairs{
 	dir = 8
@@ -38986,7 +38942,7 @@ dIg
 dIg
 dIg
 dIg
-htS
+dIg
 dIg
 dIg
 dIg
@@ -39188,7 +39144,7 @@ dIg
 dIg
 dIg
 dIg
-htS
+dIg
 dIg
 dIg
 dIg
@@ -48851,9 +48807,9 @@ dIg
 uQY
 moY
 oCR
-jkx
 oCR
-xMT
+oCR
+oCR
 oCR
 moY
 nLC
@@ -49056,7 +49012,7 @@ oCR
 rPb
 rPb
 rPb
-psl
+oCR
 moY
 nLC
 sQp
@@ -49254,7 +49210,7 @@ dIg
 dIg
 uQY
 vcw
-vul
+oCR
 rPb
 rPb
 rPb
@@ -49460,7 +49416,7 @@ oCR
 rPb
 rPb
 rPb
-ejK
+oCR
 moY
 uQY
 uQY
@@ -49659,9 +49615,9 @@ htS
 uQY
 moY
 oCR
-lVa
 oCR
-crd
+oCR
+oCR
 oCR
 moY
 uQY
@@ -56957,7 +56913,7 @@ stl
 dIg
 dIg
 dIg
-htS
+dIg
 dIg
 dIg
 dIg
@@ -57159,7 +57115,7 @@ stl
 dIg
 dIg
 dIg
-htS
+dIg
 dIg
 dIg
 dIg
@@ -57361,7 +57317,7 @@ stl
 stl
 stl
 dIg
-htS
+dIg
 dIg
 dIg
 dIg
@@ -57563,7 +57519,7 @@ suW
 eOm
 stl
 dIg
-htS
+dIg
 dIg
 dIg
 dIg
@@ -57765,7 +57721,7 @@ kph
 stl
 stl
 dIg
-htS
+dIg
 dIg
 dIg
 dIg
@@ -57967,7 +57923,7 @@ stl
 stl
 stl
 dIg
-htS
+dIg
 dIg
 dIg
 dIg
@@ -58169,7 +58125,7 @@ dIg
 dIg
 dIg
 dIg
-htS
+dIg
 dIg
 dIg
 dIg
@@ -58367,11 +58323,11 @@ kWD
 bDt
 wlV
 uuR
-htS
-htS
-htS
-htS
-htS
+dIg
+dIg
+dIg
+dIg
+dIg
 dIg
 dIg
 dIg

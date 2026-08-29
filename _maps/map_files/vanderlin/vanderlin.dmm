@@ -2039,10 +2039,6 @@
 /obj/effect/mapping_helpers/access/keyset/manor/heir,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/heir/heir2)
-"aSj" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "aSm" = (
 /obj/structure/carpet/red,
 /obj/structure/table/wood/fancy/royalblack,
@@ -2191,13 +2187,6 @@
 "aWO" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/squire)
-"aWU" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Gurdin"
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "aWZ" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/blocks,
@@ -4462,13 +4451,6 @@
 "bTq" = (
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/vault)
-"bTr" = (
-/obj/effect/decal/cleanable/blood/tracks{
-	dir = 4
-	},
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "bTP" = (
 /obj/structure/door/weak/bolt{
 	dir = 4
@@ -6778,10 +6760,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks/stonered,
 /area/under/town/basement)
-"cRh" = (
-/obj/effect/decal/cleanable/blood/gibs/down,
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "cRt" = (
 /obj/structure/table/wood/plain,
 /obj/item/cooking/pan,
@@ -7029,10 +7007,6 @@
 "cUs" = (
 /turf/open/floor/wood,
 /area/indoors/town/tavern)
-"cUu" = (
-/obj/effect/decal/cleanable/blood/gibs/torso,
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "cUw" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/clean,
@@ -7285,12 +7259,6 @@
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/hexstone,
 /area/indoors/town)
-"dbk" = (
-/obj/effect/decal/cleanable/blood/tracks{
-	dir = 10
-	},
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "dbv" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/under/cave)
@@ -9416,14 +9384,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/town)
-"dXx" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Margil"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "dXB" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -11096,10 +11056,6 @@
 "eGt" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/keep/servanthead)
-"eGu" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "eGv" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "MaintenancePassage"
@@ -11971,10 +11927,6 @@
 "eWI" = (
 /turf/open/floor/wood,
 /area/outdoors/beach/boat)
-"eWO" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "eXc" = (
 /turf/closed,
 /area/outdoors/mountains)
@@ -16790,13 +16742,6 @@
 /obj/structure/flora/grass,
 /turf/closed/mineral,
 /area/under/cave)
-"hfR" = (
-/obj/effect/decal/cleanable/blood/puddle,
-/obj/effect/decal/cleanable/blood/tracks{
-	dir = 4
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "hfY" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -22488,10 +22433,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cavelava)
-"jto" = (
-/obj/effect/decal/cleanable/blood/gibs/old,
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "jts" = (
 /obj/structure/bed/wool/double,
 /obj/item/bedsheet/double_pelt,
@@ -28512,10 +28453,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/water/swamp,
 /area/under/town/sewer)
-"lQZ" = (
-/obj/effect/decal/cleanable/blood/gibs/up,
-/turf/open/floor/blocks,
-/area/under/town/basement)
+"lRj" = (
+/obj/structure/mannequin/male/female,
+/turf/open/floor/wood,
+/area/indoors/town)
 "lRk" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/bush_meagre,
@@ -30455,13 +30396,6 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood,
 /area/outdoors/town/roofs)
-"mEJ" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Lupin"
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "mEL" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/cobble/mossy,
@@ -31020,10 +30954,6 @@
 /obj/effect/mapping_helpers/access/keyset/church/grave,
 /turf/open/floor/churchrough,
 /area/under/town/sewer)
-"mQb" = (
-/obj/effect/decal/cleanable/blood/gibs/core,
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "mQg" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -32033,12 +31963,6 @@
 /obj/machinery/light/fueled/campfire,
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
-"nlc" = (
-/obj/effect/decal/cleanable/blood/tracks{
-	dir = 6
-	},
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "nlq" = (
 /obj/structure/flora/grass,
 /obj/structure/fake_machine/mail{
@@ -32975,13 +32899,14 @@
 "nKM" = (
 /turf/open/floor/wood,
 /area/indoors/town/church)
-"nKR" = (
-/obj/effect/decal/cleanable/blood/tracks{
-	dir = 9
+"nLe" = (
+/obj/structure/mirror{
+	pixel_x = -32;
+	pixel_y = 0
 	},
-/obj/machinery/light/fueled/torchholder/c,
-/turf/open/floor/cobble,
-/area/under/town/basement)
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/blocks/paving,
+/area/indoors/town/clinic_large/apothecary)
 "nLi" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 32
@@ -36866,12 +36791,6 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/church)
-"plo" = (
-/obj/effect/decal/cleanable/blood/tracks{
-	dir = 1
-	},
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "plN" = (
 /obj/item/weapon/mace/woodclub/train_sword,
 /turf/open/floor/wood,
@@ -38885,19 +38804,6 @@
 /obj/item/reagent_containers/glass/alchemical,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/magician)
-"qbB" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Aruzhan"
-	},
-/obj/effect/decal/cleanable/blood/tracks{
-	dir = 9
-	},
-/obj/machinery/light/fueled/torchholder{
-	dir = 4
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "qbR" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -45912,11 +45818,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town)
-"sOw" = (
-/obj/effect/decal/cleanable/blood/old,
-/obj/effect/decal/cleanable/blood/gibs/old,
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "sOD" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/dirt,
@@ -47710,13 +47611,6 @@
 /obj/effect/mapping_helpers/access/keyset/manor/lord/consort,
 /turf/open/floor/hexstone,
 /area/indoors/town/keep/lord_appt)
-"tDW" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Beatrix"
-	},
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "tEd" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/item/candle/yellow{
@@ -47792,13 +47686,6 @@
 "tFD" = (
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/vault)
-"tFN" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Oparlip"
-	},
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "tFT" = (
 /obj/structure/curtain/bounty/dir,
 /obj/structure/window/openclose/reinforced,
@@ -49611,14 +49498,6 @@
 /obj/structure/kneestingers,
 /turf/open/floor/naturalstone,
 /area/under/town/sewer)
-"ute" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Rowena"
-	},
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "utf" = (
 /obj/structure/table/map/vanderlin{
 	dir = 6
@@ -50626,10 +50505,6 @@
 "uPk" = (
 /turf/closed/wall/mineral/wooddark,
 /area/outdoors/town/keep)
-"uPs" = (
-/obj/effect/decal/cleanable/blood/gibs/old,
-/turf/open/floor/blocks,
-/area/under/town/basement)
 "uPt" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/stone,
@@ -52068,7 +51943,6 @@
 /area/outdoors/town)
 "vpl" = (
 /obj/effect/decal/cleanable/blood/old,
-/obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "vpo" = (
@@ -56489,14 +56363,6 @@
 	},
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
-"wSC" = (
-/mob/living/simple_animal/hostile/retaliate/wolf{
-	del_on_deaggro = 0;
-	name = "Vurrgil"
-	},
-/obj/effect/decal/cleanable/blood/gibs/body,
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "wSI" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/town)
@@ -81845,11 +81711,11 @@ xpt
 fBg
 tVX
 fYq
-sOw
-eWO
-qbB
-dbk
-wSC
+cia
+tVX
+lAU
+tVX
+fBg
 tVX
 jEQ
 itS
@@ -82049,10 +81915,10 @@ itS
 fYq
 fBg
 tVX
-bTr
+tVX
 fBg
-aSj
-jto
+tVX
+fBg
 cLd
 itS
 fBg
@@ -82249,12 +82115,12 @@ itS
 fBg
 kZG
 fYq
-ute
-cUu
-hfR
-dXx
+fBg
 tVX
-mEJ
+fBg
+fBg
+tVX
+fBg
 jEQ
 fBg
 fBg
@@ -82451,10 +82317,10 @@ tVX
 fBg
 xpt
 fYq
-nKR
-plo
-nlc
-mQb
+dMw
+tVX
+tVX
+tVX
 fBg
 eex
 grz
@@ -82653,11 +82519,11 @@ fBg
 fBg
 fBg
 fYq
-lQZ
+tVX
 cia
-eGu
+tVX
 fBg
-tFN
+tVX
 tVX
 grz
 fBg
@@ -82855,12 +82721,12 @@ tjM
 fBg
 tVX
 grz
-tDW
-cRh
-eWO
+fBg
+fBg
+tVX
 fBg
 vpl
-cRh
+fBg
 cLd
 fBg
 fBg
@@ -83057,10 +82923,10 @@ xpt
 tVX
 fBg
 jEQ
-uPs
+tVX
 tVX
 fBg
-aWU
+fBg
 fBg
 tVX
 jEQ

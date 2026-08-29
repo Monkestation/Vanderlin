@@ -416,3 +416,19 @@
   - bugfix: Fixed an issue with teleport spells requiring a charge.
   - rscadd: Inquisitorial Suspicion is now logged like Hunted quirk.
   - rscadd: Bone Ward giving Hunted quirk is now logged.
+2026-08-29:
+  AnnoyingIncantation:
+  - code_imp: moved the key ring of the CourtPhys to the wrists so an IFAK can sit
+      on the belt
+  realforest2001:
+  - rscadd: Added Kingsfield Constable preset.
+  - code_imp: Updated the logic for pickpocketing.
+  - code_imp: Changed the trait name for being impossible to steal.
+  - rscadd: Added an Anti-Theft enchantment.
+  - rscadd: Changed the description of the Finger's Crown ring to reflect above.
+  - rscadd: Added a trait that makes someone impossible to steal from.
+  - rscadd: Added an unimplemented variable for difficulty stealing something. To
+      be used in a following PR.
+  - bugfix: Traumatized quirk no longer applies to corpses.
+  - rscadd: Added The Chosen special for Monarch. Be the noble acolyte!
+  - rscadd: LOOC will now indicate if the talker is a ghost or dead.

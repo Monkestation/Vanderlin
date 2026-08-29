@@ -86,7 +86,7 @@
 				ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			if(/datum/patron/divine/ravox)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
-				spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10)
+				spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 30)
 			if(/datum/patron/divine/noc)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 				ADD_TRAIT(spawned, TRAIT_LUNAR_ORDER, JOB_TRAIT)
@@ -94,7 +94,7 @@
 				spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 			if(/datum/patron/divine/abyssor)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
-				spawned.adjust_skill_level(/datum/attribute/skill/labor/fishing, 20)
+				spawned.clamped_adjust_skill_level(/datum/attribute/skill/labor/fishing, 20, 20)
 			if(/datum/patron/divine/malum)
 				spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 			if(/datum/patron/divine/xylix)
@@ -141,7 +141,7 @@
 			weapon_skill_path = /datum/attribute/skill/combat/whipsflails
 
 	if(weapon_skill_path)
-		spawned.adjust_skill_level(weapon_skill_path, 30)
+		spawned.clamped_adjust_skill_level(weapon_skill_path, 30, 30)
 
 	switch(weaponchoice)
 		if("Great flail", "Goedendag", "Great axe")

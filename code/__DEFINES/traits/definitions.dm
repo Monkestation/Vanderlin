@@ -389,6 +389,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EMPATH "Empath"
 #define TRAIT_BREADY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
+#define TRAIT_THIEFSENSE "Thief-Sense"
 #define TRAIT_MEDIUMARMOR "Mail Training"
 #define TRAIT_HEAVYARMOR "Plate Training"
 #define TRAIT_DODGEEXPERT "Fast Reflexes"
@@ -626,7 +627,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// The items needs two hands to be carried
 #define TRAIT_NEEDS_TWO_HANDS "needstwohands"
 /// This item can't be pickpocketed
-#define TRAIT_HARD_TO_STEAL "hard_to_steal"
+#define TRAIT_CANT_BE_STOLEN "cant_be_stolen"
 
 // **** turf traits
 ///Turf slowdown will be ignored when this trait is added to a turf.
