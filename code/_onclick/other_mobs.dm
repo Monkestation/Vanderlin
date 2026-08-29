@@ -537,6 +537,7 @@
 		to_chat(thief, span_danger("[picked] is strapped on tight, I can't steal it!"))
 		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
 	if(picked.has_enchantment(/datum/enchantment/anti_theft))
+		exp_to_gain /= 2
 		to_chat(thief, span_danger("[picked] is enchanted to prevent theft, I can't steal it!"))
 		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
 	if(thief_skill_base < picked.pickpocket_difficulty)
