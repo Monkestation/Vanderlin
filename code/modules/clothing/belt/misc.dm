@@ -449,6 +449,7 @@
 		/obj/item/reagent_containers/syringe,
 	)
 	component_type = /datum/component/storage/concrete/grid/surgery_bag
+	pickpocket_difficulty = SKILL_LEVEL_MASTER
 
 /obj/item/surgeontoolspawner
 	name = "set of surgery tools"
