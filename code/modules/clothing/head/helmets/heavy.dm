@@ -17,7 +17,7 @@
 	armor_type = /datum/armor/head/plate
 	body_parts_covered = FULL_HEAD
 	prevent_crits = ALL_EXCEPT_STAB
-	max_integrity = INTEGRITY_STRONGEST // no moving parts, steel
+	max_integrity = INTEGRITY_OLD_STRONGEST // no moving parts, steel
 	abstract_type = /obj/item/clothing/head/helmet/heavy
 
 /obj/item/clothing/head/helmet/heavy/necked		// includes a coif or gorget part to cover neck. Why? So templars can wear their cross on their neck basically, also special thing for Temple
@@ -86,6 +86,7 @@
 /obj/item/clothing/head/helmet/heavy/psydonhelm
 	name ="grenzelhoftian armet"
 	desc = "Headwear commonly worn by Templars in service to the Oratorium Throni Vacui. PSYDON Endures."
+	adjustable = CAN_CADJUST
 	icon_state = "psydonarmet"
 	item_state = "psydonarmet"
 	block2add = FOV_BEHIND
@@ -103,7 +104,7 @@
 	block2add = FOV_BEHIND
 
 	armor_type = /datum/armor/head/plate/bad
-	max_integrity = INTEGRITY_STRONG //isn't the same as a steel helmet but is better than a skullcap, costs 2 bars and protects the mouth
+	max_integrity = INTEGRITY_OLD_STRONG //isn't the same as a steel helmet but is better than a skullcap, costs 2 bars and protects the mouth
 	item_weight = 3.5 KILOGRAMS
 
 //............... Rusted Barbute ............... //
@@ -118,7 +119,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/head/plate/bad
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 2.4 KILOGRAMS
 
 /obj/item/clothing/head/helmet/heavy/kabuto
@@ -210,6 +211,7 @@
 	block2add = FOV_BEHIND
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/head/helmet/heavy/zizo/volfhelm
 	name = "avantyne volf-face bascinet"
@@ -315,7 +317,7 @@
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 2.6 KILOGRAMS
 	clothing_flags = CANT_SLEEP_IN
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	block2add = FOV_BEHIND
 
 //............... Temple heavy helmets ......................//
@@ -498,7 +500,7 @@
 	desc = "A lavish hounskull which allows a crest to be mounted on top."
 	icon_state = "decorated_hounskull"
 	armor_type = /datum/armor/head/plate/good
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_CRITICAL_HITS
 	item_weight = 4.45 KILOGRAMS
 

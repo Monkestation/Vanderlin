@@ -38,6 +38,7 @@
 		/datum/language/undead,
 		/datum/language/halfling,
 		/datum/language/gronnic,
+		/datum/language/sanguine,
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)

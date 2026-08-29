@@ -15,6 +15,7 @@
 	charge_slowdown = 0.8
 	cooldown_time = 2 MINUTES
 	spell_cost = 50
+	var/need_cross = TRUE
 
 /datum/action/cooldown/spell/cure_rot/is_valid_target(atom/cast_on)
 	. = ..()
@@ -27,17 +28,13 @@
 	if(. & SPELL_CANCEL_CAST)
 		return
 
-	for(var/obj/structure/fluff/psycross/S in view(5, owner))
-		if(S)
-			break
-		to_chat(owner, span_warning("I need a holy cross."))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
-
-	if(cast_on.get_lux_status() != LUX_HAS_LUX)
-		to_chat(owner, span_warning("This filth cannot be revived by holy light!"))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
+	if(need_cross)
+		for(var/obj/structure/fluff/psycross/S in view(5, owner))
+			if(S)
+				break
+			to_chat(owner, span_warning("I need a holy cross."))
+			reset_spell_cooldown()
+			return . | SPELL_CANCEL_CAST
 
 	for(var/obj/item/bodypart/bodypart as anything in cast_on.bodyparts)
 		if(bodypart.skeletonized)
@@ -54,11 +51,29 @@
 			if(HAS_TRAIT(bodypart, TRAIT_ROTTEN))
 				has_rot = TRUE
 				break
+			if(bodypart.germ_level >= INFECTION_LEVEL_ONE*0.2)
+				has_rot = TRUE
+				break
 		for(var/obj/item/organ/organs as anything in cast_on.internal_organs)
 			if(organs.germ_level >= INFECTION_LEVEL_ONE*0.2)
 				has_rot = TRUE
 				break
 
+
+	if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic) || cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark))
+		if(!prob(33))
+			cast_on.visible_message(
+				span_warning("Divine Light struggles to burn through the Blood Curse upon [cast_on]!"),
+				span_bloody("The Blood Curse is resisting the Divine!"),
+			)
+			return FALSE
+		cast_on.remove_status_effect(/datum/status_effect/debuff/revive_bloodmagic)
+		cast_on.remove_status_effect(/datum/status_effect/debuff/blood_mark)
+		cast_on.visible_message(
+			span_warning("Divine Light burns through the Blood Curse upon [cast_on]!"),
+			span_bloody("The Blood Curse has been dispelled!"),
+		)
+		return
 
 	if(!has_rot && !was_zombie)
 		to_chat(owner, span_warning("Nothing happens."))
@@ -95,3 +110,28 @@
 				to_chat(ghost, span_warning("My funeral rites were undone!"))
 
 	cast_on.funeral = FALSE
+
+/datum/action/cooldown/spell/cure_rot/bloodmagic
+	name = "Purge Rot"
+	desc = "Purge a body of rot, deadites will perish."
+
+	associated_skill = /datum/attribute/skill/magic/blood
+	spell_type = SPELL_BLOOD
+	required_form = FORM_BLOOD
+	required_technique = TECHNIQUE_RESTORATION
+	required_level = 10
+	spell_flags = SPELL_UNETCHABLE
+	heretical_spell = TRUE
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
+
+	required_items = list()
+
+	sound = 'sound/magic/marked.ogg'
+	charge_sound = 'sound/magic/chargingold.ogg'
+
+	cast_range = 2
+	charge_time = 2 SECONDS
+	charge_slowdown = 0.8
+	cooldown_time = 2 MINUTES
+	spell_cost = 200
+	need_cross = FALSE

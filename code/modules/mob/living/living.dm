@@ -4,7 +4,7 @@
 		if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_MATTHIOS_DUNGEON)))
 			add_faction(FACTION_MATTHIOS)
 		if(SSterrain_generation.get_island_at_location(turf))
-			add_faction("islander")
+			add_faction(FACTION_ISLAND)
 	. = ..()
 	if(initial_size != RESIZE_DEFAULT_SIZE)
 		update_transform(initial_size)
