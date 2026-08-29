@@ -38,6 +38,8 @@
 
 #define ARMOR_ALL "all_damage_types"
 
+#define EDGE_PROTECTABLE_TYPES list(SLASH, STAB, PIERCE)
+
 /// Armor values that are used for damage
 #define ARMOR_LIST_DAMAGE list(BLUNT, SLASH, STAB, PIERCE)
 
@@ -173,6 +175,7 @@
 #define SHORT_CUT		 /datum/intent/sword/cut/short
 #define SWDLONG_CUT		 /datum/intent/sword/cut/long
 #define ZWEI_CUT		 /datum/intent/sword/cut/zwei
+#define ZWEI_CUT_REACH   /datum/intent/sword/cut/zwei/reach
 #define RAPIER_CUT		 /datum/intent/sword/cut/rapier
 
 #define SWORD_THRUST	 /datum/intent/sword/thrust
@@ -234,6 +237,7 @@
 #define MACE_WDSTRIKE		/datum/intent/mace/strike/wood
 #define MACE_HVYSTRIKE		/datum/intent/mace/strike/heavy
 #define SHOVEL_STRIKE		/datum/intent/mace/strike/shovel
+#define POLEHAMMER_STRIKE   /datum/intent/mace/strike/polehammer
 
 #define MACE_THRUST			/datum/intent/mace/thrust
 #define WARHM_THRUST		/datum/intent/mace/warhammer/stab
@@ -245,6 +249,8 @@
 #define FLAIL_LNGSMASH		/datum/intent/flail/strike/smash/long
 #define MATTHIOS_STRIKE		/datum/intent/flail/strike/matthiosflail
 #define MATTHIOS_SMASH		/datum/intent/flail/strike/smash/matthiosflail
+#define FLAIL_CUT			/datum/intent/flail/cut
+#define FLAIL_LNGCUT		/datum/intent/flail/cut/long
 
 #define WHIP_CRACK			/datum/intent/whip/crack
 #define WHIP_STRIKE			/datum/intent/whip
@@ -267,6 +273,11 @@
 #define KNUCKLE_SMASH		/datum/intent/knuckles/smash
 #define KATAR_CUT			/datum/intent/katar/cut
 #define KATAR_THRUST		/datum/intent/katar/thrust
+
+#define CLOSECOMBAT_PUNCH   /datum/intent/unarmed/punch/closecombat
+#define CLOSECOMBAT_JAB     /datum/intent/unarmed/punch/jab
+#define CLOSECOMBAT_SLUG    /datum/intent/unarmed/punch/slug
+#define CLOSECOMBAT_SLAM    /datum/intent/unarmed/punch/slam
 
 #define NEANT_SHOOT			/datum/intent/shoot/neant
 #define PLEX_BLINK			/datum/intent/plex_dash
@@ -319,6 +330,7 @@
 #define BCLASS_BITE			"bite"
 #define BCLASS_BURN			"charring"
 #define BCLASS_LASHING		"lashing"
+#define BCLASS_INTENSE_BURN "intense burn"
 
 //Material class (what material is striking)
 #define MCLASS_GENERIC		1

@@ -58,6 +58,6 @@
 	. = ..()
 	var/shoe_roll = prob(23)
 	if(shoe_roll)
-		shoes = /obj/item/clothing/shoes/boots
+		shoes = /obj/item/clothing/shoes/boots/darkboots
 	else if(prob(23))
 		shoes = /obj/item/clothing/shoes/boots/leather

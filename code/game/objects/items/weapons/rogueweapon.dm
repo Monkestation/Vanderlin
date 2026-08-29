@@ -20,7 +20,7 @@
 	obj_flags = CAN_BE_HIT
 	blade_dulling = DULLING_BASH
 	resistance_flags = FIRE_PROOF
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STATIC_200
 	wdefense = GOOD_PARRY
 	experimental_onhip = TRUE
 	experimental_onback = TRUE
@@ -40,11 +40,6 @@
 
 	if(weapon_special)
 		weapon_special = new weapon_special
-
-/obj/item/weapon/equipped(mob/user, slot, initial)
-	. = ..()
-	if(initial && randomize_blade_int)
-		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/Destroy(force)
 	if(istype(weapon_special))

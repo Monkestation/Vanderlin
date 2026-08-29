@@ -5,7 +5,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/redstone_structure = FALSE //If you want the structure to interact with player built redstone
 	var/redstone_id //Used for connecting mapload structures
 	var/last_redstone_power
-	var/list/redstone_attached = list()
+	var/list/redstone_attached
 
 /obj/structure/multitool_act(mob/living/user, obj/item/I)
 	if(!redstone_structure)
@@ -35,12 +35,12 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		if(src == buffer_structure)
 			to_chat(user, "You uncalibrate [src] from all its connections.")
 			for(var/obj/structure/O in redstone_attached)
-				O.redstone_attached -= src
-				redstone_attached -= O
+				LAZYREMOVE(O.redstone_attached, src)
+				LAZYREMOVE(redstone_attached, O)
 			GLOB.redstone_objs -= src
 			return
-		buffer_structure.redstone_attached |= src
-		redstone_attached |= buffer_structure
+		LAZYOR(buffer_structure.redstone_attached, src)
+		LAZYOR(redstone_attached, buffer_structure)
 		GLOB.redstone_objs |= src
 		GLOB.redstone_objs |= buffer_structure
 		to_chat(user, "You calibrate [src] to the output of [buffer_structure].")
@@ -69,8 +69,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 			if(S == src)
 				continue
 			if(S.redstone_id == redstone_id)
-				redstone_attached |= S
-				S.redstone_attached |= src
+				LAZYOR(redstone_attached, S)
+				LAZYOR(S.redstone_attached, src)
 
 /obj/structure/proc/redstone_triggered(mob/user)
 	return
@@ -92,10 +92,10 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(isliving(user))
 		var/mob/living/L = user
 		L.changeNext_move(CLICK_CD_MELEE)
-		var/used_time = HAS_TRAIT(user, TRAIT_GATEKEEPER) ? 0 : (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 1 SECONDS)
+		var/used_time = pulltime - (GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 1 SECONDS)
 		user.visible_message("<span class='warning'>[user] pulls the lever.</span>")
 		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
-		if(do_after(user, used_time))
+		if(HAS_TRAIT(user, TRAIT_GATEKEEPER) || do_after(user, used_time))
 			for(var/obj/structure/structure in redstone_attached)
 				INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
 			trigger_wire_network(user)

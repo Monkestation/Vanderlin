@@ -9,9 +9,10 @@
 	invocation = "VANISHIKA"
 	invocation_type = INVOCATION_SHOUT
 
-	attunements = list(
-		/datum/attunement/arcyne = 0.4,
-	)
+	required_form = FORM_ARCANE
+	required_technique = TECHNIQUE_ALTERATION
+	required_level = 12 //lol
+	initial_charges = 3
 
 	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt
 
@@ -61,6 +62,8 @@
 
 	if(!holder)
 		CRASH("[type] attempted do_jaunt but failed to create a jaunt holder via enter_jaunt.")
+	holder.name = cast_on.name
+	SEND_SIGNAL(cast_on, COMSIG_FOV_HIDE)
 
 	if(jaunt_out_time > 0)
 		ADD_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
@@ -179,6 +182,7 @@
 
 	REMOVE_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
 
+	SEND_SIGNAL(cast_on, COMSIG_FOV_SHOW)
 	if(final_point.density)
 		var/list/aside_turfs = get_adjacent_open_turfs(final_point)
 		if(length(aside_turfs))
@@ -211,6 +215,7 @@
 /// The dummy that holds people jaunting. Maybe one day we can replace it.
 /obj/effect/dummy/phased_mob/spell_jaunt
 	movespeed = 2 //quite slow.
+	invisibility = INVISIBILITY_LEYLINES
 	/// Whether we're currently reappearing - we can't move if so
 	var/reappearing = FALSE
 
@@ -220,3 +225,35 @@
 	. = ..()
 	if(!.)
 		return
+
+/obj/effect/dummy/phased_mob/spell_jaunt/blood
+	phased_mob_icon_state = "red_1"
+
+// BLOOD JAUNT
+
+/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/bloody_jaunt
+	name = "Bloody Jaunt"
+	desc = "This spell turns your form into blood mist, temporarily making you invisible and able to pass through walls."
+	button_icon_state = "watcher"
+	sound = 'sound/magic/enter_blood.ogg'
+	cooldown_time = 35 SECONDS
+
+	associated_skill = /datum/attribute/skill/magic/blood
+	spell_type = SPELL_BLOOD
+	required_form = FORM_BLOOD
+	required_technique = TECHNIQUE_ALTERATION
+	heretical_spell = TRUE
+	required_level = 12 //lol
+	initial_charges = 3
+
+	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt/blood
+
+	exit_jaunt_sound = 'sound/magic/enter_blood.ogg'
+	jaunt_in_type = /obj/effect/temp_visual/wizard/blood
+	jaunt_out_type = /obj/effect/temp_visual/wizard/blood/out
+	jaunt_in_time = 0.8 SECONDS
+
+/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/bloody_jaunt/do_steam_effects(turf/loc)
+	var/datum/effect_system/blood_mist_spread/mist = new()
+	mist.set_up(10, FALSE, loc)
+	mist.start()

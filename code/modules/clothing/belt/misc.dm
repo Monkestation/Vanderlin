@@ -370,7 +370,7 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/satchel/cloth/big
 
-/obj/item/storage/backpack/satchel/otavan
+/obj/item/storage/backpack/satchel/grenzel
 	name = "grenzelhoftian leather satchel"
 	examine_name = "satchel"
 	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
@@ -408,7 +408,7 @@
 
 /obj/item/storage/backpack/backpack/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/storage/backpack/backpack/artibackpack
 	name = "cooling backpack"

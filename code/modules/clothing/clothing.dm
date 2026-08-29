@@ -113,13 +113,20 @@
 /obj/item/clothing/get_inspect_entries(list/inspect_list)
 	. = ..()
 
-	if(armor)
+	if(get_armor())
 		. += "\n<u><b>DEFENSE:</b></u>\n"
 		var/list/defense_strings = list()
 		for(var/damage_key in ARMOR_LIST_DAMAGE)
 			var/rating = armor.get_rating(damage_key)
 			defense_strings += "<font color='[armor_to_color(rating)]'>[armor_to_protection_name(damage_key)] [armor_to_protection_class(rating)]</font>"
 		. += defense_strings.Join(" | ")
+
+		. += "\n<u><b>EDGE PROTECTION:</b></u>\n"
+		var/list/edge_strings = list()
+		for(var/damage_key in EDGE_PROTECTABLE_TYPES)
+			var/rating = armor.get_edge_protection(damage_key)
+			edge_strings += "<font color='[armor_to_color(rating)]'>[armor_to_protection_name(damage_key)] [rating]</font>"
+		. += edge_strings.Join(" | ")
 
 	if(length(prevent_crits))
 		. += "\n<u><b>PREVENT CRITS:</b></u>\n"

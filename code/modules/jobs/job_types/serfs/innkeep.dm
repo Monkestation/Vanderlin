@@ -24,7 +24,7 @@
 	department_flag = SERFS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_INNKEEP
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -34,6 +34,7 @@
 	outfit = /datum/outfit/innkeep
 	give_bank_account = 60
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

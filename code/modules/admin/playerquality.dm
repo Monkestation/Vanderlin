@@ -125,10 +125,10 @@
 	var/popup_window_data = "<center>[ckey]</center>"
 	popup_window_data += "<center>PQ: [get_playerquality(ckey, TRUE, TRUE)] ([get_playerquality(ckey, FALSE, TRUE)])</center>"
 
-//	dat += "<table width=100%><tr><td width=33%><div style='text-align:left'><a href='?_src_=prefs;preference=playerquality;task=menu'><b>PQ:</b></a> [get_playerquality(user.ckey, text = TRUE)]</div></td><td width=34%><center><a href='?_src_=prefs;preference=triumphs;task=menu'><b>TRIUMPHS:</b></a> [user.get_triumphs() ? "\Roman [user.get_triumphs()]" : "None"]</center></td><td width=33%></td></tr></table>"
-	popup_window_data += "<center><a href='?_src_=holder;[HrefToken()];cursemenu=[ckey]'>CURSES</a></center>"
+//	dat += "<table width=100%><tr><td width=33%><div style='text-align:left'><a href='byond://?_src_=prefs;preference=playerquality;task=menu'><b>PQ:</b></a> [get_playerquality(user.ckey, text = TRUE)]</div></td><td width=34%><center><a href='byond://?_src_=prefs;preference=triumphs;task=menu'><b>TRIUMPHS:</b></a> [user.get_triumphs() ? "\Roman [user.get_triumphs()]" : "None"]</center></td><td width=33%></td></tr></table>"
+	popup_window_data += "<center><a href='byond://?_src_=holder;[HrefToken()];cursemenu=[ckey]'>CURSES</a></center>"
 	popup_window_data += "<table width=100%><tr><td width=33%><div style='text-align:left'>"
-	popup_window_data += "Commends: <a href='?_src_=holder;[HrefToken()];readcommends=[ckey]'>[get_commends(ckey)]</a></div></td>"
+	popup_window_data += "Commends: <a href='byond://?_src_=holder;[HrefToken()];readcommends=[ckey]'>[get_commends(ckey)]</a></div></td>"
 	popup_window_data += "<td width=34%><center>ESL Points: [get_eslpoints(ckey)]</center></td>"
 	popup_window_data += "<td width=33%><div style='text-align:right'>Rounds Survived: [get_roundsplayed(ckey)]</div></td></tr></table>"
 	var/list/listy = file2list("data/player_saves/[copytext(ckey,1,2)]/[ckey]/playerquality.txt")

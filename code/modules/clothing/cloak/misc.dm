@@ -142,6 +142,9 @@
 /obj/item/clothing/cloak/half/colored/red
 	color = CLOTHING_BLOOD_RED
 
+/obj/item/clothing/cloak/half/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
 /obj/item/clothing/cloak/half/vet
 	name = "town watch cloak"
 	icon_state = "guardcloak"
@@ -415,7 +418,7 @@
 	nodismemsleeves = TRUE
 	detail_tag = null
 
-/obj/item/clothing/cloak/kazengun
+/obj/item/clothing/cloak/blackmeadow
 	name = "jinbaori"
 	desc = "A simple kind of Blackmeadow surcoat, worn here in the distant battlefields of Azuria to differentiate friend from foe."
 	icon_state = "kazenguncoat"

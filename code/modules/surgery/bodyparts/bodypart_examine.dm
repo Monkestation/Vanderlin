@@ -26,7 +26,7 @@
 				. += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 			if(WOUND_BLUNT, WOUND_LASH)
 				. += "Bandage bruises and lashes to allow them to heal."
-			if(WOUND_BURN)
+			if(WOUND_BURN, WOUND_INTENSE_BURN)
 				. += "Disinfect and salve burns to allow them to heal."
 			if("germs")
 				. += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."
@@ -37,20 +37,19 @@
 	. = ..()
 	if(owner)
 		return
+
 	var/list/head_status = list()
 	if(!brain)
 		head_status += "<span class='dead'>The brain is missing.</span>"
 
 	if(!eyes_left)
 		head_status += "<span class='warning'>The left eye is missing.</span>"
+
 	if(!eyes_right)
 		head_status += "<span class='warning'>The right eye is missing.</span>"
 
 	if(!ears)
 		head_status += "<span class='warning'>The ears are missing.</span>"
-
-	if(!tongue)
-		head_status += "<span class='warning'>The tongue is missing.</span>"
 
 	if(length(head_status))
 		. += "<B>Organs:</B>"
@@ -67,6 +66,8 @@
 				bodypart_status += "[src] is limp."
 			if(BODYPART_DISABLED_CLAMPED)
 				bodypart_status += "[src] is clamped."
+			if(BODYPART_DISABLED_TOURNIQUET)
+				bodypart_status += "[src] is starved of blood and unresponsive."
 			else
 				bodypart_status += "[src] is crippled."
 	if(has_wound(/datum/wound/fracture))
@@ -117,6 +118,19 @@
 			if(!bandage || observer_privilege)
 				for(var/datum/wound/wound as anything in wounds)
 					bodypart_status += wound.get_visible_name(user)
+
+		if(tourniquet)
+			var/usedclass = "notice"
+			if(GET_ATOM_BLOOD_DNA(tourniquet))
+				usedclass = "bloody"
+			bodypart_status += "<a href='byond://?src=[owner_ref];tourniquet=[REF(tourniquet)];tourniquet_limb=[REF(src)]' class='[usedclass]'>Tourniquet</a>"
+			if(tourniquet_time >= TOURNIQUET_ISCHEMIA_DELAY)
+				bodypart_status += "[tourniquet] seems to be causing some pain."
+			if(tourniquet_time >= TOURNIQUET_NECROSIS_DELAY * 0.8)
+				bodypart_status += "[tourniquet] has started damaging [src] and it looks like it may rot soon."
+
+		if(splinted)
+			bodypart_status += "<a href='byond://?src=[owner_ref];splint=[REF(splint_item)];splint_limb=[REF(src)]' class='notice'>Splinted</a>"
 
 		if(bandage || length(injuries))
 			bodypart_status += "<B>Injuries:</B>"
@@ -233,10 +247,7 @@
 
 	for(var/obj/item/organ/possible_artery in getorganslotlist(ORGAN_SLOT_ARTERY))
 		if(possible_artery.is_bruised())
-			if(get_cut(ignore_gauze = TRUE))
-				status += span_artery(uppertext("cut [possible_artery.name]"))
-			else
-				status += span_artery(uppertext("bruised [possible_artery.name]"))
+			status += span_artery(uppertext("[possible_artery.name]"))
 
 	if(skeletonized)
 		status += "<span class='dead'>SKELETON</span>"
@@ -274,14 +285,21 @@
 
 	if(bodypart_disabled)
 		status += "<span class='deadsay'>CRIPPLED</span>"
+	if(tourniquet)
+		var/usedclass = "notice"
+		if(GET_ATOM_BLOOD_DNA(tourniquet))
+			usedclass = "bloody"
+		status += "<a href='byond://?src=[owner_ref];tourniquet=[REF(tourniquet)];tourniquet_limb=[REF(src)]' class='[usedclass]'>TOURNIQUET</a>"
+
+	if(splinted)
+		status += "<a href='byond://?src=[owner_ref];splint=[REF(splint_item)];splint_limb=[REF(src)]' class='notice'>SPLINTED</a>"
 
 	return status
 
 /obj/item/bodypart/proc/get_injuries_desc()
 	var/list/flavor_text = list()
 	var/list/injury_descriptors = list()
-	for(var/thing in injuries)
-		var/datum/injury/injury = thing
+	for(var/datum/injury/injury as anything in injuries)
 		var/this_injury_desc = injury.get_desc()
 		if(!this_injury_desc)
 			continue

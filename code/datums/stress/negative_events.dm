@@ -94,6 +94,11 @@
 		return FALSE
 	return TRUE
 
+/datum/stress_event/blood_mark
+	stress_change = 1
+	desc = span_bloody("I have been marked by Blood Magic!")
+	timer = 10 MINUTES
+
 /datum/stress_event/painmax
 	timer = 1 MINUTES
 	stress_change = 2
@@ -220,6 +225,11 @@
 	timer = 3 MINUTES
 	stress_change = 3
 	desc = span_phobia("IT'S THE FUCKING DAEWALKER!!")
+
+/datum/stress_event/its_the_nitewalker
+	timer = 3 MINUTES
+	stress_change = 2
+	desc = span_phobia("THE NITEWALKER ROAMS!!")
 
 /datum/stress_event/fishface
 	timer = 1 MINUTES
@@ -669,11 +679,6 @@
 	stress_change = 15
 	timer = 60 SECONDS
 
-/datum/stress_event/dismembered
-	desc = "<span class='boldwarning'>AHH! I WAS USING THAT LIMB!</span>\n"
-	stress_change = 10
-	timer = 8 MINUTES
-
 /datum/stress_event/embedded
 	desc = "<span class='boldwarning'>Pull it out!</span>\n"
 	stress_change = 7
@@ -868,11 +873,6 @@
 	if(istiefling(user))
 		return 0
 	return ..()
-
-/datum/stress_event/shamanhoodlost
-	stress_change = 3
-	desc = span_boldred("I have lost my hood! My failure to protect it leaves open the defilement my future reincarnations!")
-	timer = 999 MINUTES
 
 /datum/stress_event/black_briar1
 	timer = 999 MINUTES

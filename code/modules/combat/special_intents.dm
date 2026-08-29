@@ -154,7 +154,7 @@
 		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 2.5 SECONDS)
 
 		if(victim.IsOffBalanced())
-			victim.Knockdown(2 SECONDS)
+			victim.CombatKnockdown(2 SECONDS)
 		else
 			victim.OffBalance(5 SECONDS)
 

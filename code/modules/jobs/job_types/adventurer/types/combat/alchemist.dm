@@ -33,7 +33,7 @@
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 
 	traits = list(
-    	TRAIT_FORAGER,
+		TRAIT_FORAGER,
 		TRAIT_DEADNOSE
 	)
 

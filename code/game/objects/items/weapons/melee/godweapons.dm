@@ -34,7 +34,7 @@
 	possible_item_intents = list(AXE_CUT, AXE_CHOP)
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SWORD_STRIKE)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST + 220
+	max_integrity = INTEGRITY_GOD_WEAPON
 	minstr = 12
 	resistance_flags = FIRE_PROOF
 	sellprice = 550
@@ -113,11 +113,10 @@
 	possible_item_intents = list(SPEAR_CUT)
 	gripped_intents = list(POLEARM_CHOP, WHIP_STRIKE, NEANT_SHOOT)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST + 220
-	minstr = 10
+	max_integrity = INTEGRITY_GOD_WEAPON
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FIRE_PROOF
-	dropshrink = 0.75
+
 	thrown_bclass = BCLASS_CUT
 	sellprice = 550
 	item_weight = 3 KILOGRAMS
@@ -238,7 +237,6 @@
 	slot_flags = ITEM_SLOT_BACK
 	SET_BASE_PIXEL(-16, -16)
 	bigboy = TRUE
-	dropshrink = 0.75
 	fire_sound = 'sound/combat/Ranged/turbulentafire.ogg'
 	possible_item_intents = list(/datum/intent/shoot/bow/turbulenta, /datum/intent/arc/bow/turbulenta)
 	force = 12
@@ -352,7 +350,7 @@
 	desc = "A sword of legend. If they are true, then this is the blade of Matthios himself. Rumor has it, it steals space and time."
 	possible_item_intents = list(SWORD_STRIKE, SWORD_CUT)
 	gripped_intents = list(SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST, PLEX_BLINK)
-	max_integrity = INTEGRITY_STRONGEST + 220
+	max_integrity = INTEGRITY_GOD_WEAPON
 	sellprice = 550
 	item_weight = 1.5 KILOGRAMS
 	smeltresult = null
@@ -421,6 +419,7 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrsword"
 	item_weight = 1.5 KILOGRAMS
+	max_integrity = INTEGRITY_GOD_WEAPON
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
@@ -456,6 +455,7 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
 	item_weight = 4.5 KILOGRAMS
+	max_integrity = INTEGRITY_GOD_WEAPON
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
@@ -509,6 +509,7 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrtrident"
 	item_weight = 2.5 KILOGRAMS
+	max_integrity = INTEGRITY_GOD_WEAPON
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
@@ -536,6 +537,7 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrmace"
 	item_weight = 3.5 KILOGRAMS
+	max_integrity = INTEGRITY_GOD_WEAPON
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0

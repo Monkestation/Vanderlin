@@ -42,7 +42,7 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/hedgemage/old
 
 	magic_user = TRUE
-	spell_points = 12
+	form_points = 6
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 
 	traits = list(
@@ -52,6 +52,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/wretch/hedgemage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -76,6 +77,20 @@
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "HEDGE MAGE")
 
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/adept/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/adept/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/adept/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/adept/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/adept/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/adept/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/adept/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/adept/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/adept/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 2)
+
 /datum/outfit/wretch/hedgemage
 	name = "Hedge Mage (Wretch)"
 	shoes = /obj/item/clothing/shoes/simpleshoes
@@ -87,7 +102,6 @@
 	beltl = /obj/item/reagent_containers/glass/bottle/manapot
 	r_hand = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
 	backpack_contents = list(
-		/obj/item/book/granter/spellbook/adept = 1,
 		/obj/item/chalk = 1,
 		/obj/item/rope/chain = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,

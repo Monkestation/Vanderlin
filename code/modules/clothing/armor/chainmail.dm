@@ -15,8 +15,8 @@
 	armor_type = /datum/armor/maille
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_STRONG
-	item_weight = 8.2 KILOGRAMS
+	max_integrity = INTEGRITY_OLD_STRONG
+	item_weight = 6 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
 
@@ -30,8 +30,8 @@
 
 	armor_type = /datum/armor/maille/iron
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	max_integrity = INTEGRITY_STRONG
-	item_weight = 8.2 KILOGRAMS
+	max_integrity = INTEGRITY_OLD_STRONG
+	item_weight = 6 KILOGRAMS
 
 //................ Hauberk ............... //
 /obj/item/clothing/armor/chainmail/hauberk
@@ -43,7 +43,7 @@
 	smeltresult = /obj/item/ingot/steel_slag
 
 	body_parts_covered = COVERAGE_FULL
-	item_weight = 11 KILOGRAMS
+	item_weight = 9 KILOGRAMS
 
 /obj/item/clothing/armor/chainmail/hauberk/Initialize()
 	. = ..()
@@ -72,6 +72,6 @@
 	smeltresult = /obj/item/ingot/iron
 
 	armor_type = /datum/armor/maille/iron
-	max_integrity = INTEGRITY_STRONG
-	item_weight = 11 KILOGRAMS
+	max_integrity = INTEGRITY_OLD_STRONG
+	item_weight = 9 KILOGRAMS
 

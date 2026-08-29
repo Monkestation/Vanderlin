@@ -32,7 +32,7 @@
 	tutorial = "Paladins are former noblemen and clerics who have dedicated themselves to great combat prowess. Often, they were promised redemption for past sins if they crusaded in the name of the gods."
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/paladin
-	allowed_patrons = ALL_CLERIC_PATRONS
+	allowed_patrons = ALL_TEMPLE_PATRONS
 	total_positions = 1
 	category_tags = list(CTAG_ADVENTURER)
 	roll_chance = 7
@@ -97,7 +97,7 @@
 	armor = /obj/item/clothing/armor/cuirass
 	shirt = /obj/item/clothing/armor/chainmail
 	pants = /obj/item/clothing/pants/chainlegs
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather/black
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	ring = /obj/item/clothing/ring/silver/toper

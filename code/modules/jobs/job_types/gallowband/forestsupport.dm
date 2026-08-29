@@ -26,7 +26,7 @@
 	tutorial = "Disillusioned with the Church of the Ten for whatever reason or adopted as a child, you have yet to prove yourself in the hunt. You live and work with the Gallowband. Keep them fed and their gear maintained as you learn of the Osslandic way. One dae, you will take your place in the cycle, too."
 	department_flag = GALLOWBAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_FORSUPP
@@ -42,6 +42,7 @@
 	outfit = /datum/outfit/forestsupport
 	give_bank_account = 20
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
@@ -101,7 +102,7 @@
 /datum/outfit/forestsupport
 	name = JOB_FOREST_SUPPORT
 	shirt = /obj/item/clothing/shirt/tunic/colored/black
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	head = /obj/item/clothing/head/roguehood
 	gloves = /obj/item/clothing/gloves/angle/gronn

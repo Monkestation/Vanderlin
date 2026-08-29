@@ -1,8 +1,9 @@
 /obj/item/clothing/armor/cuirass/iron/goblin
 	name = "goblin mail"
-	icon_state = "plate_armor_item"
-	item_state = "plate_armor"
+	icon_state = "plate_armor"
+	item_state = "plate_armor_item"
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
+	mob_overlay_icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	smeltresult = /obj/item/ingot/iron
 	armor_type = /datum/armor/cuirass/goblin
 	allowed_race = list(SPEC_ID_GOBLIN)
@@ -14,8 +15,8 @@
 
 /obj/item/clothing/armor/leather/goblin
 	name = "goblin leather armor"
-	icon_state = "leather_armor_item"
-	item_state = "leather_armor"
+	icon_state = "leather_armor"
+	item_state = "leather_armor_item"
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	armor_type = /datum/armor/leather/goblin
 	body_parts_covered = CHEST|GROIN|ARMS|VITALS
@@ -30,6 +31,7 @@
 	icon_state = "cloth_armor"
 	item_state = "cloth_armor"
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
+	mob_overlay_icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	allowed_race = list(SPEC_ID_GOBLIN)
 	armor_type = /datum/armor/leather/goblin/bad
 	body_parts_covered = CHEST|GROIN
@@ -38,8 +40,8 @@
 
 /obj/item/clothing/head/helmet/leather/goblin
 	name = "goblin leather helmet"
-	icon_state = "leather_helm_item"
-	item_state = "leather_helm"
+	icon_state = "leather_helm"
+	item_state = "leather_helm_item"
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
 	armor_type = /datum/armor/head/leather/goblin
 	body_parts_covered = HEAD|EARS|HAIR|EYES
@@ -49,10 +51,11 @@
 
 /obj/item/clothing/head/helmet/goblin
 	name = "goblin helmet"
-	icon_state = "plate_helm_item"
-	item_state = "plate_helm"
+	icon_state = "plate_helm"
+	item_state = "plate_helm_item"
 	smeltresult = /obj/item/ingot/iron
 	icon = 'icons/roguetown/mob/monster/goblins.dmi'
+	mob_overlay_icon = 'icons/roguetown/mob/monster/goblins_tall.dmi'
 	allowed_race = list(SPEC_ID_GOBLIN)
 	armor_type = /datum/armor/head/plate/goblin
 	body_parts_covered = HEAD|EARS|HAIR|EYES

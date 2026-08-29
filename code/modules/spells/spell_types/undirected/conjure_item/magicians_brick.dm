@@ -5,8 +5,6 @@
 	button_icon_state = "magicians_brick"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	point_cost = 1
-
 	cooldown_time = 5 SECONDS
 	spell_cost = 30
 
@@ -17,9 +15,8 @@
 	item_duration = 3 MINUTES
 	item_outline = "#6495ED"
 
-	attunements = list(
-		/datum/attunement/earth = 0.3,
-	)
+	required_form = FORM_EARTH
+	required_technique = TECHNIQUE_CREATION
 
 /datum/action/cooldown/spell/undirected/conjure_item/brick/make_item()
 	. = ..()
@@ -27,12 +24,10 @@
 		return
 	var/mob/living/L = owner
 	var/INT = GET_MOB_ATTRIBUTE_VALUE(L, STAT_INTELLIGENCE)
-	if(INT <= 10)
-		return
 	var/obj/item/brick = .
 	var/int_scaling = INT - 10
-	brick.force = (brick.force + int_scaling) * attuned_strength
-	brick.throwforce = (brick.throwforce + int_scaling * 2) * attuned_strength // 2x scaling for throwing. Let's go.
+	brick.force = (brick.force + int_scaling) * spell_magnitude_modifier
+	brick.throwforce = (brick.throwforce + int_scaling * 2) * spell_magnitude_modifier // 2x scaling for throwing. Let's go.
 	brick.name = "magician's brick +[int_scaling]"
 	return brick
 
@@ -48,7 +43,7 @@
 	armor_penetration = 30 // From iron tossblade
 	wdefense = BAD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_WORST / 2 //Not for parrying
+	max_integrity = INTEGRITY_OLD_WORST / 2 //Not for parrying
 	slot_flags = ITEM_SLOT_MOUTH
 	obj_flags = null
 	w_class = WEIGHT_CLASS_TINY

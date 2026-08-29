@@ -15,7 +15,7 @@
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS //Has shoulder guards, and nothing else to suggest leg protection
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
 	stand_speed_reduction = 1.2
 	item_weight = 9 KILOGRAMS
 
@@ -31,7 +31,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
 
 /obj/item/clothing/armor/plate/iron/banded
 	name = "banded iron armor"
@@ -79,7 +79,7 @@
 
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_FULL
-	item_weight = 17 KILOGRAMS
+	item_weight = 15 KILOGRAMS
 
 
 /obj/item/clothing/armor/plate/full/samsibsa
@@ -110,8 +110,8 @@
 	smeltresult = /obj/item/ingot/iron
 
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STRONG
-	item_weight = 17 KILOGRAMS
+	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
+	item_weight = 15 KILOGRAMS
 
 //................ Rusted Half-plate ............... //
 /obj/item/clothing/armor/plate/rust
@@ -125,7 +125,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = ARMOR_INT_CHEST_PLATE_DECREPIT
 	item_weight = 8.75 KILOGRAMS
 
 /obj/item/clothing/armor/plate/silver
@@ -144,16 +144,23 @@
 	name = "blacksteel plate"
 	desc = "A chestplate forged from blacksteel with shoulder guards, combining strength and agility."
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	armor_class = AC_MEDIUM
+	armor_class = AC_HEAVY // weighs less then regular plate so its no longer medium AC
 	icon_state = "bkarmor"
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
-	item_weight = 20.45 KILOGRAMS
+	item_weight = 8 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 6
 	stand_speed_reduction = 1.05
+
+/obj/item/clothing/armor/plate/blkknight/lordly
+	name = "lordly plate"
+	desc ="A full, master-crafted ensemble of fine blacksteel, complete with arm, leg and groin protection, and worn with a heavy, indubitably stylish, fur-lined collar of genuine saigahair to boot. The latest battle-fashion amongst the high nobility of Psydonia."
+	icon_state = "lordly"
+	body_parts_covered = COVERAGE_FULL
 
 //................ Deccorated Half-plate ............... //
 
@@ -230,6 +237,8 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 //................ Matthios Armor ...............//
 
@@ -262,7 +271,7 @@
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/plate/silver
 	smeltresult = /obj/item/ingot/silver
-	item_weight = 22 KILOGRAMS
+	item_weight = 15 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 3
 
 /obj/item/clothing/armor/plate/full/silver/Initialize(mapload)
@@ -306,11 +315,11 @@
 /datum/status_effect/buff/psydonic_endurance/on_apply()
 	. = ..()
 	if(HAS_TRAIT(owner, TRAIT_MEDIUMARMOR) && !HAS_TRAIT(owner, TRAIT_HEAVYARMOR))
-		ADD_TRAIT(owner, TRAIT_HEAVYARMOR, src)
+		ADD_TRAIT(owner, TRAIT_HEAVYARMOR, REF(src))
 
 /datum/status_effect/buff/psydonic_endurance/on_remove()
 	. = ..()
-	REMOVE_TRAIT(owner, TRAIT_HEAVYARMOR, src)
+	REMOVE_TRAIT(owner, TRAIT_HEAVYARMOR, REF(src))
 
 /atom/movable/screen/alert/status_effect/buff/psydonic_endurance
 	name = "Psydonic Endurance"

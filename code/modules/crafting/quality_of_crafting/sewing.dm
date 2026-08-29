@@ -214,9 +214,9 @@
 	requirements = list(/obj/item/natural/cloth = 2,)
 	category = "Hat"
 
-/datum/repeatable_crafting_recipe/sewing/headband_naledi
+/datum/repeatable_crafting_recipe/sewing/headband_preceptor
 	name = "headband"
-	output = /obj/item/clothing/head/headband/naledi
+	output = /obj/item/clothing/head/headband/preceptor
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	category = "Hat"
@@ -782,6 +782,15 @@
 	requirements = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/hide/cured = 4,
 				/obj/item/natural/fibers = 1)
+	craftdiff = 6
+
+/datum/repeatable_crafting_recipe/sewing/magushood
+	name = "magus hood"
+	output = /obj/item/clothing/head/helmet/skullcap/magus
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers = 1,
+				/obj/item/clothing/head/helmet/skullcap = 1,)
 	craftdiff = 6
 
 /datum/repeatable_crafting_recipe/sewing/adept_robes
@@ -1768,9 +1777,9 @@
 	craftdiff = 2
 	category = "Cloak"
 
-/datum/repeatable_crafting_recipe/sewing/holysee_vestments
+/datum/repeatable_crafting_recipe/sewing/grandmaster_vestments
 	name = "holy silver vestments"
-	output = /obj/item/clothing/cloak/holysee
+	output = /obj/item/clothing/cloak/grandmaster
 	requirements = list(
 		/obj/item/natural/cloth = 3,
 		/obj/item/ingot/silver = 1,

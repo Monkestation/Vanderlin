@@ -27,7 +27,7 @@
 	tutorial = "Once you walked these woods as its Warden, until your bones ached too much to pick up your axe. Now you guide the next generation of hunters to follow in your footsteps. Advise them well. Accept your devotion's rewards with open eyes and arms."
 	department_flag = GALLOWBAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_FORPREACH
@@ -47,6 +47,7 @@
 	outfit = /datum/outfit/forestpreacher
 	give_bank_account = 40
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
@@ -80,13 +81,13 @@
 
 /datum/outfit/forestpreacher
 	name = JOB_FOREST_PREACHER
-	armor = /obj/item/clothing/armor/leather/atgervi
+	armor = /obj/item/clothing/armor/leather/shamancoat
 	neck = /obj/item/clothing/neck/psycross/great_hunt
 	pants = /obj/item/clothing/pants/trou/leather/gronn
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	head = /obj/item/clothing/head/helmet/leather/shaman_hood
-	gloves = /obj/item/clothing/gloves/plate/atgervi
+	gloves = /obj/item/clothing/gloves/plate/beastclaws
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	backl = /obj/item/storage/backpack/satchel

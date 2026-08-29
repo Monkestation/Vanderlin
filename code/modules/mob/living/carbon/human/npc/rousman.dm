@@ -4,6 +4,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	name = "rousman"
 	icon = 'icons/roguetown/mob/monster/rousman.dmi'
 	icon_state = "rousman"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/rousman
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/rousman, /obj/item/bodypart/head/rousman, /obj/item/bodypart/l_arm/rousman,
@@ -148,8 +149,6 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	inherent_traits = list(
 		TRAIT_KNOW_ROUS_DOORS,
 		TRAIT_RESISTCOLD,
-		TRAIT_RESISTHIGHPRESSURE,
-		TRAIT_RESISTLOWPRESSURE,
 		TRAIT_RADIMMUNE,
 		TRAIT_EASYDISMEMBER,
 		TRAIT_CRITICAL_WEAKNESS,
@@ -172,6 +171,20 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1, /obj/item/natural/fur/rous = 0.5)
 	native_language = "Rous"
 	possible_ages = NORMAL_AGES_LIST
+
+	organs = list(
+		ORGAN_SLOT_BRAIN = /obj/item/organ/brain,
+		ORGAN_SLOT_SPLEEN = /obj/item/organ/spleen,
+		ORGAN_SLOT_HEART = /obj/item/organ/heart,
+		ORGAN_SLOT_LUNGS = /obj/item/organ/lungs,
+		ORGAN_SLOT_EYES = /obj/item/organ/eyes/night_vision/nightmare,
+		ORGAN_SLOT_EARS = /obj/item/organ/ears,
+		ORGAN_SLOT_TONGUE = /obj/item/organ/tongue,
+		ORGAN_SLOT_LIVER = /obj/item/organ/liver,
+		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
+		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
+		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
+	)
 
 /datum/species/rousman/random_character(mob/living/carbon/human/species/rousman/target_mob)
 	if(istype(target_mob) && target_mob.randomize_rous_name)
@@ -313,27 +326,14 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 			headdy.icon = 'icons/roguetown/mob/monster/rousman.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
 
-	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
-	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-
-	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
-	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
-	LE.switch_side(LEFT_SIDE)
-
-	LE.Insert(src)
-	RE.Insert(src)
+	grant_nightmare_eyes()
 
 	src.underwear = "Nude"
 	if(length(quirks))
 		clear_quirks()
 	update_body()
 	update_eyes()
-	faction = list(FACTION_RATS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_RATS)
 	if(!randomize_rous_name)
 		name = "rousman"
 		real_name = "rousman"
@@ -629,6 +629,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	..()
 	seer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman/seer)
 
+	seer.grant_language(/datum/language/common)
+	seer.grant_language(/datum/language/sanguine)
+
 	armor = /obj/item/clothing/shirt/robe/rousseer
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
 	r_hand = /obj/item/weapon/polearm/woodstaff/seer
@@ -638,13 +641,18 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/eyebite,
-		/datum/action/cooldown/spell/projectile/fireball,
+		/datum/action/cooldown/spell/projectile/fireball/baali,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_spell_points(17)
-	seer.generate_random_attunements(rand(4,6))
+	//! MAGIC BALANCE POINT
+	ADD_TRAIT(seer, TRAIT_BLOOD_SORCERER, INNATE_TRAIT)
+	ADD_TRAIT(seer, TRAIT_VITAE_USER, INNATE_TRAIT)
+	seer.hud_used?.set_bloody_bloodpool()
+	seer.adjust_bloodpool()
+	seer.adjust_technique_mastery_points(12)
+	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	seer.mana_pool.adjust_mana(100)
 	for(var/spell in spells)
@@ -661,8 +669,8 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	)
 	raw_attribute_list = list(
 		/datum/attribute/skill/magic/arcane = 50,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/magic/blood = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/blood = 40,
 	)
 
 /datum/outfit/npc/rousman/seer_stronger/pre_equip(mob/living/carbon/human/seer)
@@ -670,28 +678,31 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	seer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman/seer/strong)
 
 	seer.grant_language(/datum/language/common)
+	seer.grant_language(/datum/language/sanguine)
 
 	armor = /obj/item/clothing/shirt/robe/rousseer
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
 	r_hand = /obj/item/weapon/polearm/woodstaff/seer
 	belt = /obj/item/storage/belt/leather/black
-	l_pocket = /obj/item/book/granter/spellbook/expert
+	l_pocket = /obj/item/spellbook/expert/starter/earth
 
 	var/list/spells = list(
-		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
+		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/bloody_jaunt,
 		/datum/action/cooldown/spell/conjure/rous,
 		/datum/action/cooldown/spell/undirected/arcyne_eye,
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/eyebite,
-		/datum/action/cooldown/spell/projectile/fireball,
+		/datum/action/cooldown/spell/projectile/fireball/baali,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
-	seer.adjust_spell_points(17)
-	seer.generate_random_attunements(rand(4,6))
+	ADD_TRAIT(seer, TRAIT_BLOOD_SORCERER, INNATE_TRAIT)
+	ADD_TRAIT(seer, TRAIT_VITAE_USER, INNATE_TRAIT)
+	seer.adjust_technique_mastery_points(14)
+	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	seer.mana_pool.adjust_mana(100)
 	for(var/spell in spells)
-		seer.add_spell(spell)
+		seer.add_spell(spell, mastery_spell = TRUE)

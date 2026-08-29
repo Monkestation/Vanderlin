@@ -44,7 +44,7 @@
 	)
 	isgoodguy = TRUE
 	chooses_name = FALSE
-	ascended = 4
+	ascension_level = 4
 	outfit = /datum/outfit/daewalker
 	patron = /datum/patron/divine/astrata
 	innate_traits = list(
@@ -173,7 +173,7 @@
 	belt = /obj/item/storage/belt/leather/knifebelt/black/psydon
 	beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 	beltr = /obj/item/ammo_holder/bullet/bullets
-	backl = /obj/item/storage/backpack/satchel/otavan
+	backl = /obj/item/storage/backpack/satchel/grenzel
 	backr = /obj/item/weapon/scabbard/sword/noble
 	r_hand = /obj/item/weapon/sword/long/daewalker
 	backpack_contents = list(/obj/item/reagent_containers/glass/bottle/aflask = 1, /obj/item/smokebomb = 2, /obj/item/needle/blessed = 1)
@@ -193,7 +193,6 @@
 	wdefense = ULTMATE_PARRY
 	max_blade_int = 50000
 	max_integrity = 50000
-	randomize_blade_int = FALSE
 	resistance_flags = INDESTRUCTIBLE
 	sellprice = 0
 	slot_flags = 0 //scabbard only
@@ -269,7 +268,7 @@
 	color = CLOTHING_ROYAL_BLACK
 	armor_type = /datum/armor/boots/leather/daewalker
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/shoes/boots/leather/daewalker/Initialize()
@@ -280,13 +279,13 @@
 	color = CLOTHING_ROYAL_BLACK
 	armor_type = /datum/armor/pants/leather/daewalker
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/daewalker
 	armor_type = /datum/armor/wrist/leather/advanced
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	max_integrity = INTEGRITY_STANDARD + 50
+	max_integrity = INTEGRITY_OLD_STANDARD + 50
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/daewalker/Initialize()

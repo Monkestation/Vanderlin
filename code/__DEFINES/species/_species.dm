@@ -114,6 +114,7 @@
 	SPEC_ID_KOBOLD_FORMIKRAG,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_GOBLIN,\
 )
 
 /// Species not considered discriminated against in Vanderlin. Used for nobility, etc.
@@ -215,6 +216,8 @@
 	SPEC_ID_HALF_ELF,\
 	SPEC_ID_DROW,\
 	SPEC_ID_HALF_DROW,\
+	SPEC_ID_SNOW_ELF,\
+	SPEC_ID_HALF_SNOW_ELF,\
 )
 
 /// Guard Species - No Orcs or Dark Elf
@@ -318,6 +321,8 @@
 	SPEC_ID_KOBOLD,\
 	SPEC_ID_RAKSHARI,\
 	SPEC_ID_HOLLOWKIN,\
+	SPEC_ID_SNOW_ELF,\
+	SPEC_ID_HALF_SNOW_ELF,\
 )
 
 /// Species that use the base human body, adjusted or otherwise
@@ -330,6 +335,8 @@
 	SPEC_ID_HALF_ELF,\
 	SPEC_ID_DROW,\
 	SPEC_ID_HALF_DROW,\
+	SPEC_ID_SNOW_ELF,\
+	SPEC_ID_HALF_SNOW_ELF,\
 	SPEC_ID_TIEFLING,\
 	SPEC_ID_HARPY,\
 	SPEC_ID_RAKSHARI,\
@@ -337,6 +344,7 @@
 	SPEC_ID_MEDICATOR,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_ORC,\
 	SPEC_ID_ZIZOMBIE,\
 )
 

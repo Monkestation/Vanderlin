@@ -25,7 +25,8 @@
 		/datum/action/cooldown/spell/aoe/repulse/howl, \
 		/datum/action/cooldown/spell/woundlick, \
 		/datum/action/cooldown/spell/lunge, \
-		/datum/action/cooldown/spell/throw_target
+		/datum/action/cooldown/spell/throw_target, \
+		/datum/action/cooldown/keen_nose
 	)
 	COOLDOWN_DECLARE(message_cooldown)
 
@@ -195,7 +196,7 @@
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	sewrepair = null
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_flags = DROPDEL
 	repair_time = 15 SECONDS
 

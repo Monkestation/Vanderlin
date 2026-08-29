@@ -10,6 +10,10 @@
 
 	for(var/obj/item/W in M)
 		if(!M.dropItemToGround(W))
+			// I hate that this is necessary, but the code is literally just dropping or deleting everything otherwise
+			// people should be allowed to keep their fucking organs
+			if(istype(W, /obj/item/organ) || istype(W, /obj/item/bodypart))
+				continue
 			qdel(W)
 			M.regenerate_icons()
 
@@ -474,7 +478,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	var/list/job_list = list()
 	for(var/datum/job/job as anything in SSjob.joinable_occupations)
-		if(IS_ABSTRACT(job) || (job.title == "NOPE")) // Safety first.
+		if(IS_ABSTRACT(job) || (job.title == "NOPE") || (job.title == "ADMIN SPECIAL JOB")) // Safety first.
 			continue
 		job_list += job.title
 
@@ -731,6 +735,24 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggled Hub Visibility", "[GLOB.hub_visibility ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/scan_health(mob/living/carbon/target as mob)
+	set name = "Scan Health"
+	set category = "GameMaster.Gods"
+	if(!check_rights())
+		to_chat(usr, span_warning("You should not have this button. Shoo."))
+		return FALSE
+
+	if(!ishuman(target))
+		to_chat(usr, span_warning("You can only use this on human targets."))
+		return FALSE
+	var/mob/living/carbon/human/human_target = target
+	if(QDELETED(human_target))
+		return FALSE
+	human_target.check_for_injuries(mob, TRUE, FALSE, TRUE, TRUE)
+	log_admin("[key_name(usr)] admin-scanned the health of [key_name(target)]")
+	message_admins("[key_name_admin(usr)] admin-scanned the health of [key_name_admin(target)]")
+	return TRUE
+
 /client/proc/smite(mob/living/target as mob)
 	set name = "Smite"
 	set category = "GameMaster.Gods"
@@ -928,7 +950,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/list/msg = list()
 	msg += "<html><head><title>Playtime Report</title></head><body>Playtime:<BR><UL>"
 	for(var/client/C in GLOB.clients)
-		msg += "<LI> - [key_name_admin(C)]: <A href='?_src_=holder;[HrefToken()];getplaytimewindow=[REF(C.mob)]'>" + C.get_exp_living() + "</a></LI>"
+		msg += "<LI> - [key_name_admin(C)]: <A href='byond://?_src_=holder;[HrefToken()];getplaytimewindow=[REF(C.mob)]'>" + C.get_exp_living() + "</a></LI>"
 	msg += "</UL></BODY></HTML>"
 	src << browse(msg.Join(), "window=Player_playtime_check")
 
@@ -945,7 +967,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	var/list/body = list()
 	body += "<html><head><title>Playtime for [C.key]</title></head><BODY><BR>Playtime:"
 	body += C.get_exp_report()
-	body += "<A href='?_src_=holder;[HrefToken()];toggleexempt=[REF(C)]'>Toggle Exempt status</a>"
+	body += "<A href='byond://?_src_=holder;[HrefToken()];toggleexempt=[REF(C)]'>Toggle Exempt status</a>"
 	body += "</BODY></HTML>"
 	usr << browse(body.Join(), "window=playerplaytime[C.ckey];size=550x615")
 
@@ -993,7 +1015,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 				var/name = GLOB.trait_name_map[trait] || trait
 				availible_traits[name] = trait
 
-	var/chosen_trait = input("Select trait to modify", "Trait") as null|anything in sortList(availible_traits)
+	var/chosen_trait = tgui_input_list(usr, "Select trait to modify", "Trait", sortList(availible_traits))
 	if(!chosen_trait)
 		return
 	chosen_trait = availible_traits[chosen_trait]
@@ -1005,16 +1027,18 @@ Traitors and the like can also be revived with the previous role mostly intact.
 				D.AddElement(/datum/element/movetype_handler)
 			ADD_TRAIT(D, chosen_trait, source)
 		if("Remove")
-			var/specific = input("All or specific source ?", "Trait Remove/Add") as null|anything in list("All","Specific")
+			var/specific = tgui_alert(usr, "All or specific source ?", "Trait Remove/Add", list("All","Specific"))
 			if(!specific)
 				return
 			switch(specific)
 				if("All")
 					source = null
 				if("Specific")
-					source = input("Source to be removed","Trait Remove/Add") as null|anything in sortList(D._status_traits[chosen_trait])
+					source = tgui_input_list(usr, "Source to be removed","Trait Remove/Add", sortList(D._status_traits[chosen_trait]))
 					if(!source)
 						return
+				else
+					return
 			REMOVE_TRAIT(D,chosen_trait,source)
 
 /client/proc/send_bird_letter(mob/M in GLOB.player_list)

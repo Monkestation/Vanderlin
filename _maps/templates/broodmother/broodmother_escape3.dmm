@@ -1,0 +1,67 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/template_noop)
+"d" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"q" = (
+/obj/effect/mapping_helpers/virtual_z_link/broodmother_base{
+	link_height = 4;
+	link_width = 7;
+	link_id = "broodmother-escape3";
+	invisibility = 100;
+	is_above = 1
+	},
+/turf/template_noop,
+/area/template_noop)
+"Q" = (
+/obj/structure/falling_turf,
+/turf/template_noop,
+/area/template_noop)
+
+(1,1,1) = {"
+a
+a
+a
+q
+"}
+(2,1,1) = {"
+a
+Q
+Q
+a
+"}
+(3,1,1) = {"
+Q
+Q
+Q
+Q
+"}
+(4,1,1) = {"
+Q
+Q
+Q
+Q
+"}
+(5,1,1) = {"
+Q
+Q
+Q
+a
+"}
+(6,1,1) = {"
+d
+Q
+a
+a
+"}
+(7,1,1) = {"
+Q
+Q
+a
+a
+"}
