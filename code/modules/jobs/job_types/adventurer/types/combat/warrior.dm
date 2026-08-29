@@ -7,20 +7,22 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_INTELLIGENCE = -1, // Muscle brains
-		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/combat/axesmaces = 20,
-		/datum/attribute/skill/combat/whipsflails = 20,
-		/datum/attribute/skill/combat/polearms = 20,
-		/datum/attribute/skill/combat/bows = 10,
-		/datum/attribute/skill/combat/crossbows = 10,
-		/datum/attribute/skill/combat/shields = 30,
-		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/reading = 10,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/wrestling = list(20, 20),
+		/datum/attribute/skill/combat/unarmed = list(30, 30),
+		/datum/attribute/skill/combat/swords = list(20, 20),
+		/datum/attribute/skill/combat/axesmaces = list(20, 20),
+		/datum/attribute/skill/combat/whipsflails = list(20, 20),
+		/datum/attribute/skill/combat/polearms = list(20, 20),
+		/datum/attribute/skill/combat/bows = list(10, 10),
+		/datum/attribute/skill/combat/crossbows = list(10, 10),
+		/datum/attribute/skill/combat/shields = list(30, 30),
+		/datum/attribute/skill/combat/knives = list(20, 20),
 	)
 
 /datum/job/advclass/combat/sfighter
@@ -72,18 +74,18 @@
 
 	switch(weaponchoice)
 		if("Sword")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 10, 30)
 		if("Axe", "Mace", "Warhammer")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10, 30)
 		if("Spear")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 10, 30)
 			grant_shield = new /obj/item/weapon/shield/tower/buckleriron
 		if("Flail", "Great flail")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 10, 30)
 			if(weaponchoice == "Great flail")
 				grant_shield = FALSE
 		if("Goedendag", "Great axe")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10, 30)
 			grant_shield = FALSE
 
 	if(grant_shield == TRUE) // TRUE boolean, not a path
