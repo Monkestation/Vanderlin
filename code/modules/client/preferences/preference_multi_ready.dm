@@ -147,8 +147,10 @@ h2 {
 	if(!prefs.read_preference(/datum/preference/toggle/multi_char_ready))
 		dat += {"
 <div class='info-box'>
+<b>DISABLED - DISABLED - DISABLED - DISABLED</b>
 Enable multi-character ready to select multiple character slots.
 The system will try to assign you a job based on each character's preferences in priority order.
+<b>DISABLED - DISABLED - DISABLED - DISABLED</b>
 </div>
 "}
 	else
