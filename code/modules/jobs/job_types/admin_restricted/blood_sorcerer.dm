@@ -28,7 +28,7 @@
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage
+	attribute_sheet = /datum/attribute_holder/sheet/job/blood_sorcerer
 
 	magic_user = TRUE
 	knows_the_town = TRUE
@@ -70,8 +70,8 @@
 	. = ..()
 
 	var/static/list/selectablehat = list(
-		"Blood Red hood (Discreet)" = /obj/item/clothing/head/roguehood/colored/blood,
 		"Bloodweave hood (Obvious)" = /obj/item/clothing/head/roguehood/bloodweave,
+		"Blood Red hood" = /obj/item/clothing/head/roguehood/colored/blood,
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
 		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Magus hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/magus,
@@ -79,8 +79,8 @@
 	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "BLOOD SORCERER")
 
 	var/static/list/selectablerobe = list(
-		"Blood Red robes (Discreet)" = /obj/item/clothing/shirt/robe/colored/blood,
 		"Bloodweave robes (Obvious)" = /obj/item/clothing/shirt/robe/bloodweave,
+		"Blood Red robes" = /obj/item/clothing/shirt/robe/colored/blood,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Magus robes" = /obj/item/clothing/shirt/robe/magus
@@ -92,8 +92,13 @@
 	spawned.maxbloodpool += 1000
 	spawned.set_bloodpool(2500)
 
+	for(var/datum/mind/found_mind in get_minds(JOB_ADMIN_BLOOD_SORCERER))
+		owner.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Blood Mage"))
+		owner.share_identities(found_mind)
+
 /datum/outfit/admin/blood_sorcerer
-	name = "Blood Sorcerer"
+	name = JOB_ADMIN_BLOOD_SORCERER
 	pants = /obj/item/clothing/pants/trou/leather/advanced
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	neck = /obj/item/clothing/neck/gorget

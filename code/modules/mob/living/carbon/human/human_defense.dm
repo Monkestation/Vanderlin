@@ -767,7 +767,7 @@
 		if(has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
 			examination += "ø ------------ ø"
 			examination += "[span_bloody("BLOOD CURSED")]"
-		else if(has_status_effect(/datum/status_effect/debuff/blood_mark))
+		else if(has_status_effect(/datum/status_effect/debuff/blood_mark) || has_status_effect(/datum/status_effect/buff/blood_mark))
 			examination += "ø ------------ ø"
 			examination += "[span_bloody("BLOOD MARKED")]"
 	examination += "ø ------------ ø</span>"

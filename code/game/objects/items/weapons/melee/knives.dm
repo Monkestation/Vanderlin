@@ -413,6 +413,11 @@
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)
 
+/obj/item/weapon/knife/dagger/bloodsteel/relic
+	name = "orphan's dream"
+	desc = "A blade of darkened bloodsteel, the hopes and dreams of a forgotten soul..."
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon
 	name = "psydonian dagger"
