@@ -93,9 +93,9 @@
 	spawned.set_bloodpool(2500)
 
 	for(var/datum/mind/found_mind in get_minds(JOB_ADMIN_BLOOD_SORCERER))
-		owner.share_identities(found_mind)
+		spawned.mind?.share_identities(found_mind)
 	for(var/datum/mind/found_mind in get_minds("Blood Mage"))
-		owner.share_identities(found_mind)
+		spawned.mind?.share_identities(found_mind)
 
 /datum/outfit/admin/blood_sorcerer
 	name = JOB_ADMIN_BLOOD_SORCERER

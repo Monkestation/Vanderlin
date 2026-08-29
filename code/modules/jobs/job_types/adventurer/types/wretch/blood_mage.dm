@@ -92,9 +92,9 @@
 	spawned.adjust_form_mastery_points(technique_points, specific_form = FORM_BLOOD)
 
 	for(var/datum/mind/found_mind in get_minds(JOB_ADMIN_BLOOD_SORCERER))
-		owner.share_identities(found_mind)
+		spawned.mind?.share_identities(found_mind)
 	for(var/datum/mind/found_mind in get_minds("Blood Mage"))
-		owner.share_identities(found_mind)
+		spawned.mind?.share_identities(found_mind)
 
 /datum/outfit/wretch/bloodmage
 	name = "Blood Mage (Wretch)"
