@@ -74,7 +74,7 @@
 	switch(mode_status_type)
 		if(BLOOD_MARK_TYPE_CURSE)
 			status_effect = /datum/status_effect/debuff/blood_mark/curse
-			desc = "Mark a target with blood, weakening their physical traits. The Blood Mark will also prevent divine healing upon the target for its duration."
+			desc = "Mark a target with blood, weakening their physical traits. The Curse Mark will also prevent divine healing upon the target for its duration."
 		if(BLOOD_MARK_TYPE_TAG)
 			status_effect = /datum/status_effect/debuff/blood_mark/tag
 			desc = "Mark a target with blood, allowing you to track them for its duration."
@@ -120,6 +120,8 @@
 	. = ..()
 	if(!ishuman(cast_on))
 		return FALSE
+	if(cast_on == owner)
+		return FALSE
 
 	return validate_target(cast_on)
 
@@ -159,6 +161,8 @@
 /datum/status_effect/buff/blood_mark/befriend
 	id = "blood_mark_friend_buf"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_mark/friend
+	duration = STATUS_EFFECT_PERMANENT
+	tick_interval = STATUS_EFFECT_NO_TICK
 	var/activated = FALSE
 
 /datum/status_effect/buff/blood_mark/befriend/on_apply()

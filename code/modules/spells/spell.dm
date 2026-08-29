@@ -965,7 +965,10 @@
 			return TRUE
 
 		if(SPELL_BLOOD)
-			if(!caster.has_bloodpool_cost(used_cost))
+			var/final_cost = used_cost
+			if(!HAS_TRAIT(caster, TRAIT_VITAE_USER) && !HAS_TRAIT(caster, TRAIT_BLOOD_STUDENT))
+				final_cost = used_cost * 2
+			if(!caster.has_bloodpool_cost(final_cost))
 				if(feedback)
 					caster.balloon_alert(caster, "need more vitae to cast!")
 				return FALSE
