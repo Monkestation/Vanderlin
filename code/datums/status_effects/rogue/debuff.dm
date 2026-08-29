@@ -431,13 +431,13 @@
 	id = "blood_revive"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/revive_bloodmagic
 	duration = STATUS_EFFECT_PERMANENT
-	effectedstats = list(STAT_STRENGTH = -2, STAT_SPEED = -2, STAT_ENDURANCE = -2, STAT_CONSTITUTION = -2)
+	effectedstats = list(STAT_STRENGTH = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -2, STAT_SPEED = -2)
 	tick_interval = STATUS_EFFECT_NO_TICK
 
 /datum/status_effect/debuff/revive_bloodmagic/on_apply()
 	. = ..() // There can be only one.
-	if(owner.has_status_effect(/datum/status_effect/debuff/blood_mark))
-		owner.remove_status_effect(/datum/status_effect/debuff/blood_mark)
+	if(owner.has_status_effect(/datum/status_effect/debuff/blood_mark/curse))
+		owner.remove_status_effect(/datum/status_effect/debuff/blood_mark/curse)
 
 /atom/movable/screen/alert/status_effect/debuff/revive_bloodmagic
 	name = "Resurrection Curse"

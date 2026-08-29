@@ -109,6 +109,7 @@
 	current_students |= WEAKREF(apprentice)
 	RegisterSignal(apprentice, COMSIG_BLOOD_ASCENSION, PROC_REF(unlink_apprentice), apprentice, TRUE)
 	ADD_TRAIT(apprentice, TRAIT_BLOOD_STUDENT, REF(owner))
+	apprentice.add_faction(FACTION_BLOOD_MAGIC)
 
 	to_chat(apprentice, span_bloody("Your tutor will teach you the ways of Blood Magic and its limitations.\
 	<br>Heed them well for if your apprenticeship is revoked you will be marked, never able wield Blood Magic again.\
@@ -126,11 +127,12 @@
 	current_students -= apprentice.weak_reference
 	UnregisterSignal(apprentice, COMSIG_BLOOD_ASCENSION)
 	REMOVE_TRAIT(apprentice, TRAIT_BLOOD_STUDENT, REF(owner))
+	apprentice.remove_faction(FACTION_BLOOD_MAGIC)
 	if(death)
-		to_chat(apprentice, span_userdanger("The connection to my Tutor has shattered! I've lost my connection to Blood Magic!"))
+		to_chat(apprentice, span_userdanger("The connection to my Tutor has shattered! I've lost my enhanced connection to Blood Magic!"))
 		return TRUE
-	to_chat(apprentice, span_userdanger("My tutor has revoked my access to Blood Magic!"))
-	to_chat(owner, span_warning("I revoke my apprentice's access to Blood Magic."))
+	to_chat(apprentice, span_userdanger("My tutor has broken my connection to Blood Magic!"))
+	to_chat(owner, span_warning("You break your apprentice's connection to Blood Magic."))
 	ADD_TRAIT(apprentice, TRAIT_BLOOD_MAGIC_BLOCKED, REF(owner))
 	return TRUE
 
