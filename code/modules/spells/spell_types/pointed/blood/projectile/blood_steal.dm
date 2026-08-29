@@ -52,7 +52,7 @@
 	current_mode = (current_mode % length(modes)) + 1
 	apply_mode(current_mode)
 	to_chat(user, span_notice("[name]: [modes[current_mode]["name"]] mode. (Drain [vitae_drain] VTR and [blood_drain_perc]% blood for [spell_cost] Vitae)"))
-	user.balloon_alert(user, mode["name"])
+	user.balloon_alert(user, modes[current_mode]["name"])
 
 /datum/action/cooldown/spell/projectile/blood_steal/proc/update_mode_maptext(tag)
 	for(var/datum/hud/hud as anything in viewers)
