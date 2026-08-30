@@ -1919,6 +1919,7 @@
 #include "code\game\world.dm"
 #include "code\game\alternate_appearance\alternate_appearance.dm"
 #include "code\game\area\admin.dm"
+#include "code\game\area\antags.dm"
 #include "code\game\area\areas.dm"
 #include "code\game\area\dungeon.dm"
 #include "code\game\area\malums_anvil.dm"

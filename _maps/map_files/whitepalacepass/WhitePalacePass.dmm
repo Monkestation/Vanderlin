@@ -5498,7 +5498,7 @@
 	redstone_id = "Grenzshutters"
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dmw" = (
 /obj/machinery/light/fueled/wallfire/candle/lamp{
 	pixel_y = -32
@@ -14405,7 +14405,7 @@
 "iJO" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iKL" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/clean,
@@ -26373,7 +26373,7 @@
 /area/indoors/town/orphanage)
 "qhM" = (
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qhZ" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/town/clinic_large)
@@ -28851,7 +28851,7 @@
 /area/indoors/town/garrison)
 "rOP" = (
 /turf/closed/mineral/bedrock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rOT" = (
 /obj/structure/closet/crate/chest/wicker,
 /turf/open/floor/ruinedwood,
