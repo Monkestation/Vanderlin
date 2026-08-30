@@ -23,6 +23,7 @@
 	grid_height = 96
 	grid_width = 32
 	item_weight = 800 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/lordscepter/Initialize()
 	. = ..()
@@ -67,48 +68,48 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 
 
-	if(ishuman(user))
-		var/mob/living/carbon/human/HU = user
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/HU = user
 
-		if(!is_lord_job(HU.mind?.assigned_role))
-			to_chat(user, span_danger("The rod doesn't obey me."))
-			return
+	if(!is_lord_job(HU.mind?.assigned_role))
+		to_chat(user, span_danger("The rod doesn't obey me."))
+		return
 
-		if(ishuman(target))
-			var/mob/living/carbon/human/H = target
+	if(!ishuman(target))
+		return
 
-			user.visible_message(span_warning("[user] points [src] at [target].</span>"))
+	var/mob/living/carbon/human/H = target
 
-			if(H == HU)
-				return
+	user.visible_message(span_warning("[user] points [src] at [target].</span>"))
 
-			if(H.can_block_magic(MAGIC_RESISTANCE))
-				return
+	if(H == HU)
+		return
 
-			if(!(H.mind?.assigned_role.department_flag & GARRISON|NOBLEMEN))
-				return
+	if(H.can_block_magic(MAGIC_RESISTANCE))
+		return
 
-			if(!COOLDOWN_FINISHED(src, scepter))
-				to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, scepter) / 10, 1)] seconds left!"))
-				return
+	if(!COOLDOWN_FINISHED(src, scepter))
+		to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, scepter) / 10, 1)] seconds left!"))
+		return
 
-			if(istype(user.used_intent, /datum/intent/lord_electrocute))
-				HU.visible_message(span_warning("[HU] electrocutes [H] with \the [src]."))
-				user.Beam(target, icon_state = "lightning[rand(1, 12)]", time = 0.5 SECONDS) // LIGHTNING
-				playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
-				H.electrocute_act(5, src)
-				HU.log_message("has shocked [H.real_name] with the [src]!", LOG_ATTACK)
-				to_chat(H, span_danger("I'm electrocuted by the scepter!"))
-				COOLDOWN_START(src, scepter, 20 SECONDS)
-				return
+	if(istype(user.used_intent, /datum/intent/lord_electrocute))
+		HU.visible_message(span_warning("[HU] electrocutes [H] with \the [src]."))
+		user.Beam(target, icon_state = "lightning[rand(1, 12)]", time = 0.5 SECONDS) // LIGHTNING
+		playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+		H.electrocute_act(5, src)
+		HU.log_message("has shocked [H.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(H, span_danger("I'm electrocuted by the scepter!"))
+		COOLDOWN_START(src, scepter, 20 SECONDS)
+		return
 
-			if(istype(user.used_intent, /datum/intent/lord_silence))
-				HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
-				H.set_silence(20 SECONDS)
-				HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
-				to_chat(H, span_danger("I'm silenced by the scepter!"))
-				COOLDOWN_START(src, scepter, 10 SECONDS)
-				return
+	if(istype(user.used_intent, /datum/intent/lord_silence))
+		HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
+		H.set_silence(20 SECONDS)
+		HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(H, span_danger("I'm silenced by the scepter!"))
+		COOLDOWN_START(src, scepter, 10 SECONDS)
+		return
 
 //................ Staff of the Testimonium ............... //
 /obj/item/weapon/polearm/woodstaff/aries
@@ -126,6 +127,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /datum/intent/priest_smite
 	name = "smite"
@@ -157,40 +159,42 @@
 		to_chat(user, span_danger("The staff doesn't obey me."))
 		return
 
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+	if(!ishuman(target))
+		return
 
-		user.visible_message(span_warning("[user] points [src] at [target]."))
+	var/mob/living/carbon/human/H = target
 
-		if(H == HU)
-			return
+	user.visible_message(span_warning("[user] points [src] at [target]."))
 
-		if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
-			return
+	if(H == HU)
+		return
 
-		if(!(H.mind?.assigned_role.department_flag & CHURCHMEN))
-			return
+	if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
+		return
 
-		if(!COOLDOWN_FINISHED(src, staff))
-			to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
-			return
+	if(!(H.mind?.assigned_role.department_flag & CHURCHMEN))
+		return
 
-		if(istype(user.used_intent, /datum/intent/priest_smite))
-			HU.visible_message(span_warning("[HU] smites [H] with \the [src]."))
-			user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
-			playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
-			H.electrocute_act(5, src)
-			HU.log_message("has smitten [H.real_name] with the [src]!", LOG_ATTACK)
-			to_chat(H, span_danger("I'm smitten by the staff!"))
-			COOLDOWN_START(src, staff, 20 SECONDS)
-			return
+	if(!COOLDOWN_FINISHED(src, staff))
+		to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
+		return
 
-		if(istype(user.used_intent, /datum/intent/priest_silence))
-			HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
-			H.set_silence(20 SECONDS)
-			HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
-			to_chat(H, span_danger("I'm silenced by the staff!"))
-			COOLDOWN_START(src, staff, 10 SECONDS)
+	if(istype(user.used_intent, /datum/intent/priest_smite))
+		HU.visible_message(span_warning("[HU] smites [H] with \the [src]."))
+		user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
+		playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+		H.electrocute_act(5, src)
+		HU.log_message("has smitten [H.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(H, span_danger("I'm smitten by the staff!"))
+		COOLDOWN_START(src, staff, 20 SECONDS)
+		return
+
+	if(istype(user.used_intent, /datum/intent/priest_silence))
+		HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
+		H.set_silence(20 SECONDS)
+		HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(H, span_danger("I'm silenced by the staff!"))
+		COOLDOWN_START(src, staff, 10 SECONDS)
 
 /obj/item/weapon/mace/stunmace
 	name = "stunmace"

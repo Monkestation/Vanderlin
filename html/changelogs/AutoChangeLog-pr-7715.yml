@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added skill checks to stealing certain items, mainly things like bags and larger weapons."
+  - rscadd: "Added anti-theft enchantment to Grandmaster's weapons and Vampire Lord's sword."
+  - rscadd: "Stealing an item from someone's neck requires +1 skill grade than the item otherwise would, capping at Legendary."

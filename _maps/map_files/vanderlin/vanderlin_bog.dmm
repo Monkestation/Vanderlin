@@ -11014,7 +11014,7 @@
 /area/outdoors/bog/south/west)
 "jvo" = (
 /obj/structure/table/wood/fancy/black,
-/obj/item/scrying{
+/obj/item/scrying/orb{
 	pixel_x = -4;
 	pixel_y = 10
 	},

@@ -2965,7 +2965,7 @@
 /obj/structure/table/wood/reinf_long{
 	dir = 4
 	},
-/obj/item/scrying{
+/obj/item/scrying/orb{
 	pixel_x = 8;
 	pixel_y = 1
 	},

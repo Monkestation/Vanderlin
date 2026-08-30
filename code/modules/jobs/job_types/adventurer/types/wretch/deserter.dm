@@ -75,23 +75,23 @@
 	switch(weaponchoice)
 		if("Halberd")
 			grant_shield = FALSE
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 10, 40)
 		if("Longsword")
 			grant_shield = FALSE
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 10, 40)
 		if("Unarmed")
 			grant_shield = FALSE
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 40)
 		if("Great Axe")
 			grant_shield = FALSE
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10, 40)
 		if("Mace")
 			grant_shield = FALSE
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10, 40)
 		if("Sabre")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 10, 40)
 		if("Flail")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 10, 40)
 
 	if(grant_shield)
 		var/obj/item/weapon/shield/tower/metal/shield = new /obj/item/weapon/shield/tower/metal()

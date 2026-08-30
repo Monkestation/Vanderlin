@@ -170,7 +170,7 @@
 /obj/item/weapon/sword/long/silver/nitewalker/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/weapon/knife/dagger/steel/stiletto/nitewalker
 	name = "nite's sting"
@@ -182,8 +182,8 @@
 /obj/item/weapon/knife/dagger/steel/stiletto/nitewalker/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/lightning)
-	enchant(/datum/enchantment/on_hit/rewind)
 	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/clothing/ring/nitewalker
 	name = "nitewarden's ring"
@@ -196,4 +196,4 @@
 	. = ..()
 	enchant(/datum/enchantment/life_eternal)
 	enchant(/datum/enchantment/leaping)
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, INNATE_TRAIT)
+	enchant(/datum/enchantment/anti_theft)

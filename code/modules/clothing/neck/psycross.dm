@@ -8,6 +8,7 @@
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	sellprice = 10
 	experimental_onhip = TRUE
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/clothing/neck/psycross/unfinished
 	name = "unfinished amulet"
@@ -187,6 +188,10 @@
 	name = "amulet of Astrata"
 	desc = "Blessed be everything the light of the sun touches, for it is protected by Her grace."
 	icon_state = "astrata"
+
+/obj/item/clothing/neck/psycross/silver/divine/astrata/real_silver
+	name = "silver amulet of Astrata"
+	icon_state = "astrata_s"
 
 /obj/item/clothing/neck/psycross/silver/divine/noc
 	name = "amulet of Noc"
