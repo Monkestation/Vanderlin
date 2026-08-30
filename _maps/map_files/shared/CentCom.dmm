@@ -1457,8 +1457,9 @@
 /area/indoors/lich)
 "fS" = (
 /obj/structure/door{
-	lockid = "mansionvampire"
+	name = "ancient manor"
 	},
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
 "fY" = (
@@ -1569,10 +1570,10 @@
 /area/indoors)
 "gJ" = (
 /obj/structure/door/red{
-	lockid = "banditcamp";
 	name = "The Lair"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/antag/bandit,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
 "gM" = (
@@ -1600,9 +1601,9 @@
 /area/indoors/lich)
 "gU" = (
 /obj/structure/door/red{
-	lockid = "banditcamp";
 	name = "Bedroom"
 	},
+/obj/effect/mapping_helpers/access/keyset/antag/bandit,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
 "gW" = (
@@ -1679,10 +1680,10 @@
 /area)
 "ho" = (
 /obj/structure/door/red{
-	lockid = "banditcamp";
 	name = "Torture Chamber"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/antag/bandit,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
 "hq" = (
@@ -2028,6 +2029,7 @@
 /area/outdoors/bog/inhumen_camp)
 "jp" = (
 /obj/structure/door/iron/bars,
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/cobblerock,
 /area/outdoors/woods_safe)
 "jq" = (
@@ -2648,9 +2650,9 @@
 /area/indoors/lich)
 "nq" = (
 /obj/structure/door/red{
-	lockid = "banditcamp";
 	name = "Storage"
 	},
+/obj/effect/mapping_helpers/access/keyset/antag/bandit,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
 "ns" = (
@@ -3705,9 +3707,10 @@
 "tf" = (
 /obj/structure/door/viewport{
 	dir = 1;
-	lockid = "mansionvampire"
+	name = "ancient manor"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
 "tg" = (
@@ -4711,8 +4714,9 @@
 /area/indoors)
 "ze" = (
 /obj/structure/door{
-	lockid = "mansionvampire"
+	name = "ancient manor"
 	},
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/vampire_manor)
 "zf" = (
@@ -5180,10 +5184,9 @@
 /turf/open/floor/wood,
 /area)
 "BL" = (
-/obj/structure/door/iron/bars{
-	lockid = "mansionvampire"
-	},
+/obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/cobblerock,
 /area/outdoors/woods_safe)
 "BM" = (
@@ -5499,9 +5502,9 @@
 /area)
 "DW" = (
 /obj/structure/door/red{
-	lockid = "banditcamp";
 	name = "Kitchen"
 	},
+/obj/effect/mapping_helpers/access/keyset/antag/bandit,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
 "DX" = (
@@ -5927,8 +5930,9 @@
 /area/broodmother_den)
 "GQ" = (
 /obj/structure/door{
-	lockid = "mansionvampire"
+	name = "ancient manor"
 	},
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
 "GV" = (
@@ -6322,8 +6326,9 @@
 /turf/open/water/swamp,
 /area/outdoors/bog/inhumen_camp)
 "IJ" = (
+/obj/effect/mapping_helpers/access/keyset/antag/bandit,
 /obj/structure/door/red{
-	lockid = "banditcamp"
+	name = "The Lair"
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
@@ -6729,8 +6734,9 @@
 /area/indoors/bandit_lair)
 "KP" = (
 /obj/structure/door{
-	lockid = "mansionvampire"
+	name = "ancient manor"
 	},
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/metal/barograte,
 /area/indoors/vampire_manor)
 "KR" = (
@@ -6868,6 +6874,7 @@
 	name = "The Lair"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/antag/bandit,
 /turf/open/floor/cobble,
 /area/outdoors/woods_safe)
 "LR" = (
@@ -7427,8 +7434,9 @@
 /area/indoors)
 "Pq" = (
 /obj/structure/door{
-	lockid = "mansionvampire"
+	name = "ancient manor"
 	},
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
 "Pw" = (
@@ -7446,9 +7454,7 @@
 /turf/open/floor/grass/red,
 /area/outdoors/woods_safe)
 "PK" = (
-/obj/structure/door/iron/bars{
-	lockid = "mansionvampire"
-	},
+/obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
@@ -7527,8 +7533,9 @@
 /area/indoors)
 "Ql" = (
 /obj/structure/door{
-	lockid = "mansionvampire"
+	name = "ancient manor"
 	},
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/dirt,
 /area/indoors/vampire_manor)
 "Qp" = (
@@ -7630,10 +7637,10 @@
 /area/indoors/lich)
 "QN" = (
 /obj/structure/door/iron/bars{
-	lockid = "banditcamp";
 	name = "Cell"
 	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/antag/bandit,
 /turf/open/floor/dirt,
 /area/indoors/bandit_lair)
 "QO" = (
@@ -9046,10 +9053,9 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
 "Yw" = (
-/obj/structure/door/iron/bars{
-	lockid = "mansionvampire"
-	},
+/obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
 "Yx" = (
