@@ -15027,7 +15027,7 @@
 /area/indoors/town/dwarfin)
 "gmL" = (
 /obj/structure/window/solid,
-/turf/closed/basic,
+/turf/open/floor/cobble/mossy,
 /area/outdoors/town/keep)
 "gmM" = (
 /obj/structure/fluff/statue/tdummy,
