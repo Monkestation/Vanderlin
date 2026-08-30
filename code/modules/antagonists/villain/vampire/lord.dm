@@ -1,15 +1,15 @@
 #define MAX_ASCENT 4
 /datum/attribute_holder/sheet/job/vampire_lord
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/unarmed = list(40, 40)
+		/datum/attribute/skill/combat/unarmed = list(40, 40),
+		/datum/attribute/skill/combat/wrestling = list(50, 50),
+		/datum/attribute/skill/combat/swords = list(40, 40),
+		/datum/attribute/skill/combat/axesmaces = list(40, 40),
+		/datum/attribute/skill/combat/polearms = list(40, 40),
+		/datum/attribute/skill/combat/whipsflails = list(40, 40),
 	)
 	raw_attribute_list = list(
 		/datum/attribute/skill/magic/blood = 10,
-		/datum/attribute/skill/combat/wrestling = 50,
-		/datum/attribute/skill/combat/swords = 40,
-		/datum/attribute/skill/combat/axesmaces = 40,
-		/datum/attribute/skill/combat/polearms = 40,
-		/datum/attribute/skill/combat/whipsflails = 40,
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/misc/climbing = 50,
 	)

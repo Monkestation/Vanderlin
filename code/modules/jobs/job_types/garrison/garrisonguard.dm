@@ -85,31 +85,33 @@
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR MAIN AND SIDE WEAPON", title = "FOOTMAN")
 	switch(choice)
 		if("Sword")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 10, 30)
 		if("Axe", "Mace", "Warhammer")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 10, 30)
 		if("Flail")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 20, 30)
 
 /datum/attribute_holder/sheet/job/garrison/footman
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 2,
-		/datum/attribute/skill/combat/shields = 30,
-		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/combat/axesmaces = 20,
-		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/polearms = 10,
-		/datum/attribute/skill/combat/whipsflails = 10,
-		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/sneaking = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/reading = 10
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/shields = list(30, 30),
+		/datum/attribute/skill/combat/wrestling = list(30, 30),
+		/datum/attribute/skill/combat/axesmaces = list(20, 20),
+		/datum/attribute/skill/combat/swords = list(20, 20),
+		/datum/attribute/skill/combat/unarmed = list(20, 20),
+		/datum/attribute/skill/combat/polearms = list(10, 10),
+		/datum/attribute/skill/combat/whipsflails = list(10, 10),
+		/datum/attribute/skill/combat/knives = list(10, 10),
 	)
 
 /datum/outfit/guardsman/footman
@@ -157,19 +159,21 @@
 		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 2,
-		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/combat/axesmaces = 20,
-		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/shields = 10,
-		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/sneaking = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/reading = 10
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/polearms = list(30, 30),
+		/datum/attribute/skill/combat/wrestling = list(30, 30),
+		/datum/attribute/skill/combat/axesmaces = list(20, 20),
+		/datum/attribute/skill/combat/swords = list(20, 20),
+		/datum/attribute/skill/combat/unarmed = list(20, 20),
+		/datum/attribute/skill/combat/shields = list(10, 10),
+		/datum/attribute/skill/combat/knives = list(10, 10),
 	)
 
 /datum/outfit/guardsman/pikeman
@@ -215,19 +219,21 @@
 		STAT_PERCEPTION = 2,
 		STAT_ENDURANCE = 1,
 		STAT_SPEED = 2,
-		/datum/attribute/skill/combat/bows = 30,
-		/datum/attribute/skill/combat/crossbows = 30, // Because why not? If they somehow will get a crossbow, let them use it to the fullest.
-		/datum/attribute/skill/combat/knives = 30,
-		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/combat/axesmaces = 20, // Just to be able to non-lethaly detain someone using a cugel
-		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/reading = 10
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/bows = list(30, 30),
+		/datum/attribute/skill/combat/crossbows = list(30, 30), // Because why not? If they somehow will get a crossbow, let them use it to the fullest.
+		/datum/attribute/skill/combat/knives = list(30, 30),
+		/datum/attribute/skill/combat/wrestling = list(30, 30),
+		/datum/attribute/skill/combat/axesmaces = list(20, 20), // Just to be able to non-lethaly detain someone using a cugel
+		/datum/attribute/skill/combat/unarmed = list(20, 20),
+		/datum/attribute/skill/combat/swords = list(10, 10),
 	)
 
 /datum/outfit/guardsman/archer

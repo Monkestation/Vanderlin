@@ -346,3 +346,118 @@
       until you turn into a zombie aswell (this was just broken lol)
   realforest2001:
   - rscdel: Removed duplicate crafting entry for blacksteel axe.
+2026-08-27:
+  AnnoyingIncantation:
+  - code_imp: changed one line of code in heavy.dm to make the visor adjustable. Sprites
+      already integrated in game
+  Avalon-Proto:
+  - balance: Experienced Background has become Additional skill, and has been reworked
+      into Addtional Skill. It now costs 3 Points
+  CheffieGithub:
+  - bugfix: Farm animals won't kill eachother
+  PotatoTomahto:
+  - bugfix: Fixes a variety of bugs and incorrect span usage.
+  realforest2001:
+  - code_imp: Added a proc to give nightmare eyes to a target, reducing dupe code.
+  - bugfix: Fixed the immobile mobile stove.
+  - balance: Reduced the rate at which Enervating Elegy drains stamina.
+  - bugfix: Stopped Enervating Elegy spamming stam-drain gasp emote.
+  - rscadd: Added Ancient Ceremonial Armor for Vampire Lord.
+  - image: Added the few missing sprites for above.
+  - image: Added sprite for Draconic Ingots.
+  - image: Added new sprites for Gold, Bronze and Enchanted Gilbranze ingots.
+  - image: Changed Silver ingot sprite to the blessed silver one, and changed blessed
+      silver to a psy engraved ingot.
+  - rscadd: Added Iron, Silver, Bronze and Blacksteel knuckles.
+  - rscadd: Added silver katar.
+  - rscadd: Added Silver, Blacksteel and Bloodsteel hand claws.
+  - rscadd: Added Blacksteel Flamberge, Greataxe and Eagle's Beak.
+  - rscadd: Added Blacksteel and Bloodsteel flails.
+  - rscadd: Added Darksteel, Blacksteel and Gold shields.
+  - bugfix: Fixed an exploit with spears.
+  - rscadd: Added Blood Potions that restore vitae reserves over time.
+  - rscadd: Added Pestra's Diagnosis, an upgraded miracle that shows reagents.
+  - rscadd: Gave Priest the Burial Rites miracle.
+  - rscadd: Gave Briar an amulet that passively increases devotion. Does not provide
+      progress to unlocking higher miracles.
+  - rscadd: Added descriptions to some more languages.
+  - rscadd: Added Magic guidebook to a few roles missing it.
+  - rscadd: Added Royal Purple dye to triumph shop.
+  - bugfix: Fixed missing dropdown for Admin Cure Rot, and added logging to admin
+      healthscan.
+  - bugfix: Fixed some typos and removed a duplicate trouser entry.
+  - bugfix: Fixed incorrect sprite for Bloodsteel Whip.
+  - bugfix: Fixed spells appearing in spellstones that aren't arcyne spells.
+  - bugfix: Fixed names appearing in the Inquisition Suspicion list more than once.
+  - rscadd: Added some (very "criminal" and "heretical") new Blood Magic spells.
+  - rscadd: Added Hemomancy Form and locked to special traits.
+  - rscadd: Added Blood Mage Wretch class.
+  - rscadd: Added Dark Secrets triumph special.
+  - bugfix: Moved blood type spells out of normal categories as they drew upon bloodpool
+      which was not visible to most people.
+2026-08-28:
+  MissyNym:
+  - map: Moves the Merchant to the Clinic/Apothecary building, along with the Shophand
+      and Stevedores.
+  - map: Moves the Apothecary to the current Tailor's Building.
+  - map: Moves the Feldsher and apprentices to a new Clinic building behind the Apothecary,
+      near to the Graveyard.
+  - map: Moves the Tailor back to their old building, closer to their apartment.
+  - map: Condemns the Merchant's location on the docks, given their new real-estate.
+      What will become of it, I wonder?
+  copper-404:
+  - rscadd: Daftmarsh - Added a tent camp for adventurers next to the tomb entrance.
+  - map: Daftmarsh - Moved the Tomb Warden next to the Tomb.
+  - map: Daftmarsh - Revamped the Mercenary Guild to make it more pleasant and sane.
+  - map: Daftmarsh - Added more lich traveltiles.
+  realforest2001:
+  - bugfix: Fixed Rituos skeletonising the jaw and rendering speech impossible.
+  - bugfix: Fixed mana recharge sources bitfield.
+  - bugfix: Fixed an issue with teleport spells requiring a charge.
+  - rscadd: Inquisitorial Suspicion is now logged like Hunted quirk.
+  - rscadd: Bone Ward giving Hunted quirk is now logged.
+2026-08-29:
+  AnnoyingIncantation:
+  - code_imp: moved the key ring of the CourtPhys to the wrists so an IFAK can sit
+      on the belt
+  realforest2001:
+  - rscadd: Added Kingsfield Constable preset.
+  - code_imp: Updated the logic for pickpocketing.
+  - code_imp: Changed the trait name for being impossible to steal.
+  - rscadd: Added an Anti-Theft enchantment.
+  - rscadd: Changed the description of the Finger's Crown ring to reflect above.
+  - rscadd: Added a trait that makes someone impossible to steal from.
+  - rscadd: Added an unimplemented variable for difficulty stealing something. To
+      be used in a following PR.
+  - bugfix: Traumatized quirk no longer applies to corpses.
+  - rscadd: Added The Chosen special for Monarch. Be the noble acolyte!
+  - rscadd: LOOC will now indicate if the talker is a ghost or dead.
+2026-08-30:
+  Ardcrumb:
+  - map: 'added some more texture to the bandit camp visually, as well as adding some
+      minor clothing objects, like cloaks and hats, as well as a unique matthios amulet.
+
+      ## Pre-Merge Checklist
+
+      <!-- Don''t bother filling these in while creating your Pull Request, just click
+      the checkboxes after the Pull Request is opened and you are redirected to the
+      page. -->
+
+      - [x] You tested this on a local server.
+
+      - [x] This code did not runtime during testing.
+
+      - [x] You documented all of your changes.
+
+      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
+      and errors. It is important to test your code/feature/fix locally. -->'
+  ModDownloading:
+  - rscdel: Removed the volves from the pits in Vanderlin, Daftmarsh, and White Palace
+      Pass.
+  Monkeke2:
+  - bugfix: Lost Keys vice no longer makes your keys spawn in the river/moat.
+  realforest2001:
+  - bugfix: Job sub-sub selections no longer break skill levels.
+  - bugfix: NOTE - This may result in specials or quirks not applying skill increases
+      to certain subclasses.
+  - rscdel: Disables Pocket Dimension enchantment.

@@ -38,6 +38,12 @@
 	dir = 4
 	},
 /area/outdoors)
+"ag" = (
+/obj/effect/decal/cobbleedge{
+	dir = 8
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "ah" = (
 /obj/item/weapon/sword/short,
 /obj/item/weapon/sword/short,
@@ -182,6 +188,11 @@
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"aF" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass/bush_meagre,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "aG" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/reagent_containers/food/snacks/butter,
@@ -373,19 +384,15 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"bj" = (
-/obj/structure/table/wood{
-	dir = 4;
-	icon_state = "largetable"
-	},
-/obj/item/reagent_containers/glass/cup,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "bk" = (
 /obj/structure/mannequin/male/female,
 /obj/item/clothing/armor/leather/vest,
 /turf/open/floor/wood,
 /area/indoors)
+"bl" = (
+/obj/machinery/light/fueled/torchholder/r,
+/turf/open/floor/cobble,
+/area/outdoors/woods_safe)
 "bm" = (
 /turf/open/floor/tile/checker_green,
 /area/indoors)
@@ -963,10 +970,6 @@
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
-"dl" = (
-/obj/structure/chair/wood/alt,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "dm" = (
 /turf/open/floor/blocks/stonered,
 /area/indoors/vampire_manor)
@@ -974,21 +977,6 @@
 /obj/structure/fluff/statue/gargoyle/moss,
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
-"do" = (
-/obj/structure/table/wood{
-	dir = 10;
-	icon_state = "largetable"
-	},
-/obj/item/reagent_containers/glass/bowl{
-	pixel_x = 4;
-	pixel_y = 4
-	},
-/obj/item/kitchen/spoon{
-	pixel_x = 13;
-	pixel_y = 6
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "dp" = (
 /turf/open/floor/dirt,
 /area/indoors/bandit_lair)
@@ -1147,6 +1135,10 @@
 /obj/structure/bed/shit,
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
+"ea" = (
+/obj/structure/flora/driftwood,
+/turf/open/floor/sand,
+/area/outdoors/woods_safe)
 "ec" = (
 /obj/structure/chair/hotspring_bench/right{
 	pixel_y = 12
@@ -1217,6 +1209,14 @@
 /obj/structure/fluff/psycross/zizocross,
 /turf/open/floor/church,
 /area/indoors/lich)
+"eI" = (
+/obj/structure/table/wood{
+	dir = 8;
+	icon_state = "largetable"
+	},
+/obj/item/reagent_containers/glass/cup/wooden,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "eL" = (
 /obj/effect/mapping_helpers/virtual_z_link/broodmother_base{
 	link_width = 5;
@@ -1322,13 +1322,6 @@
 	},
 /turf/open/water/blood,
 /area/outdoors/bog/inhumen_camp)
-"fk" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/reagent_containers/food/snacks/bread,
-/obj/item/reagent_containers/food/snacks/bread,
-/obj/item/reagent_containers/food/snacks/bread,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "fl" = (
 /obj/structure/mannequin/male/female,
 /obj/item/clothing/armor/leather/jacket/hand,
@@ -1338,6 +1331,10 @@
 /obj/structure/bridge_stakes,
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"fn" = (
+/obj/structure/flora/tree/dead_bush,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "fp" = (
 /obj/structure/gearbox,
 /turf/open/floor/grass/yel,
@@ -1397,6 +1394,14 @@
 /obj/item/clothing/head/padded/pestra,
 /turf/open/floor/wood,
 /area)
+"fG" = (
+/obj/structure/table/wood{
+	dir = 4;
+	icon_state = "largetable"
+	},
+/obj/item/reagent_containers/food/snacks/bread,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "fI" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /obj/machinery/light/fueled/wallfire/candle/skull,
@@ -1405,10 +1410,12 @@
 "fJ" = (
 /turf/open/floor/naturalstone,
 /area/under/cavelava/acid)
-"fL" = (
-/obj/machinery/light/fueled/torchholder/l,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
+"fK" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass,
+/obj/structure/flora/grass/bush,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "fO" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/grass,
@@ -1462,6 +1469,11 @@
 /obj/effect/spawner/map_spawner/grass_low,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
+"gf" = (
+/obj/structure/table/wood/smooth,
+/obj/structure/fluff/clutter/books,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "gg" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 8
@@ -1483,15 +1495,9 @@
 /obj/item/natural/rock,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"gm" = (
-/obj/structure/table/wood{
-	dir = 6;
-	icon_state = "largetable"
-	},
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_y = 2
-	},
-/turf/open/floor/ruinedwood/turned/darker,
+"gp" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/dirt/road,
 /area/indoors/bandit_lair)
 "gt" = (
 /obj/structure/stairs/stone{
@@ -1507,6 +1513,10 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"gC" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/cobble,
+/area/outdoors/woods_safe)
 "gD" = (
 /obj/structure/bed/sleepingbag,
 /obj/item/skull{
@@ -1526,13 +1536,6 @@
 /obj/item/clothing/armor/leather/jacket/apothecary,
 /turf/open/floor/wood,
 /area/indoors)
-"gJ" = (
-/obj/structure/door/red{
-	lockid = "banditcamp"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "gM" = (
 /obj/structure/table/church{
 	dir = 1;
@@ -1549,13 +1552,43 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"gR" = (
-/obj/machinery/light/fueled/torchholder/r,
-/turf/open/floor/cobblerock,
-/area/outdoors/woods_safe)
 "gS" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/lich)
+"gT" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = -6
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = -6
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = -6
+	},
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = -6
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_y = 2
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_y = 2
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_y = 2
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_y = 2
+	},
+/obj/item/plate,
+/obj/item/plate,
+/obj/item/plate,
+/obj/item/plate,
+/obj/item/plate,
+/obj/item/plate,
+/turf/open/floor/hexstone,
+/area/indoors/bandit_lair)
 "gW" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/needle,
@@ -1586,13 +1619,6 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/carpet/lord/left,
 /area/indoors/lich)
-"hh" = (
-/obj/structure/closet/crate/chest/old_crate,
-/obj/item/grown/log/tree/small,
-/obj/item/grown/log/tree/stick,
-/obj/item/grown/log/tree/stick,
-/turf/open/floor/cobble,
-/area/indoors/bandit_lair)
 "hi" = (
 /obj/structure/chair/bench/couchablack,
 /turf/open/floor/ruinedwood/chevron,
@@ -1601,6 +1627,18 @@
 /obj/structure/fluff/walldeco/wallshield,
 /turf/closed/wall/mineral/underbrick,
 /area/overlord_lair)
+"hk" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/paper/scroll{
+	pixel_y = 11
+	},
+/obj/item/natural/feather{
+	pixel_x = -3;
+	pixel_y = 5
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "hl" = (
 /obj/effect/decal/cobbleedge{
 	dir = 5
@@ -1688,6 +1726,10 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/lich)
+"hM" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
 "hN" = (
 /obj/structure/irrigation_channel,
 /turf/open/floor/grass/yel,
@@ -1735,6 +1777,10 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobblerock,
 /area/outdoors)
+"hW" = (
+/obj/effect/spawner/map_spawner/grass_low,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "hX" = (
 /obj/structure/table/wood/fancy/red,
 /obj/item/clothing/head/helmet/orc,
@@ -1760,6 +1806,35 @@
 	},
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog/inhumen_camp)
+"ic" = (
+/obj/structure/fermentation_keg/random/beer,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
+"ig" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
+"ii" = (
+/obj/structure/fluff/statue/tdummy,
+/obj/structure/flora/grass,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
+"ij" = (
+/obj/structure/table/wood/smooth,
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach{
+	pixel_x = 7;
+	pixel_y = 7
+	},
+/obj/item/reagent_containers/food/snacks/produce/dry_westleach{
+	pixel_x = 4;
+	pixel_y = 6
+	},
+/obj/item/clothing/face/cigarette/pipe{
+	pixel_x = -5;
+	pixel_y = 10
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "ik" = (
 /obj/structure/winch{
 	redstone_id = "vamplordmanor"
@@ -1770,6 +1845,14 @@
 /obj/machinery/tanningrack,
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"im" = (
+/obj/structure/table/wood{
+	dir = 4;
+	icon_state = "largetable"
+	},
+/obj/item/reagent_containers/glass/cup,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "in" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 10
@@ -1807,11 +1890,27 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/wood,
 /area/indoors)
+"iw" = (
+/obj/machinery/light/fueled/torchholder/r,
+/obj/structure/table/wood/smooth,
+/obj/item/rope{
+	pixel_x = 6
+	},
+/obj/item/weapon/knife/scissors{
+	pixel_y = 12;
+	pixel_x = -5
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "ix" = (
 /obj/structure/bed/wool,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/church,
 /area/indoors/lich)
+"iA" = (
+/obj/structure/fluff/railing/wood,
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
 "iC" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
@@ -1934,6 +2033,10 @@
 /obj/structure/fluff/statue/knight/interior,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
+"jm" = (
+/obj/effect/decal/cleanable/food/plant_smudge,
+/turf/open/floor/tile/kitchen,
+/area/indoors/bandit_lair)
 "jn" = (
 /obj/structure/table/wood{
 	icon_state = "map3"
@@ -1960,13 +2063,27 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
-"js" = (
-/turf/closed/wall/mineral/tent,
-/area/indoors/bandit_lair)
+"ju" = (
+/obj/structure/flora/grass,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "jv" = (
 /obj/structure/fluff/wallclock,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors)
+"jy" = (
+/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/item/clothing/head/helmet/leather/tricorn{
+	pixel_x = 5;
+	pixel_y = -14
+	},
+/obj/item/clothing/head/helmet/leather/tricorn{
+	pixel_x = -1;
+	pixel_y = 0
+	},
+/obj/item/clothing/head/menacing,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/bandit_lair)
 "jA" = (
 /obj/structure/bed/inn/double,
 /turf/open/floor/carpet/purple,
@@ -2049,6 +2166,11 @@
 /obj/item/clothing/armor/plate,
 /turf/open/floor/carpet,
 /area/indoors)
+"jR" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/tentdoor,
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
 "jS" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -2057,9 +2179,14 @@
 /obj/item/reagent_containers/glass/cup/golden,
 /turf/open/floor/carpet,
 /area/indoors/vampire_manor)
-"jW" = (
-/obj/structure/bed,
-/turf/open/floor/ruinedwood/turned/darker,
+"jV" = (
+/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/item/clothing/face/shepherd/rag,
+/obj/item/clothing/face/shepherd/rag,
+/obj/item/clothing/neck/coif,
+/obj/item/clothing/cloak/shredded,
+/obj/item/clothing/cloak/shredded,
+/turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/bandit_lair)
 "jX" = (
 /obj/structure/fluff/traveltile/exit_bandit{
@@ -2071,6 +2198,13 @@
 "jZ" = (
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
+"kd" = (
+/obj/structure/door/red{
+	lockid = "banditcamp";
+	name = "Bedroom"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "ke" = (
 /obj/structure/table/wood{
 	dir = 10;
@@ -2133,20 +2267,13 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/bog/inhumen_camp)
+"kA" = (
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "kB" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plasteel/maniac,
 /area)
-"kC" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/turf/open/floor/tile/kitchen,
-/area/indoors/bandit_lair)
 "kF" = (
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/dirt/road,
@@ -2161,6 +2288,14 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors)
+"kK" = (
+/obj/structure/table/wood{
+	dir = 1;
+	icon_state = "largetable_mid"
+	},
+/obj/item/candle/skull/lit,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "kL" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/dirt,
@@ -2168,6 +2303,11 @@
 "kM" = (
 /obj/item/natural/rock,
 /turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
+"kN" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/newtree,
+/turf/open/floor/dirt,
 /area/outdoors/woods_safe)
 "kO" = (
 /obj/structure/table/wood/fancy/black,
@@ -2228,19 +2368,23 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors)
-"la" = (
-/obj/effect/landmark/start/bandit{
-	dir = 8
-	},
-/obj/structure/chair/stool,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "ld" = (
 /obj/structure/stairs/stone/church{
 	dir = 4
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/lich)
+"le" = (
+/obj/structure/table/wood{
+	dir = 5;
+	icon_state = "largetable"
+	},
+/obj/item/reagent_containers/glass/cup/skull{
+	pixel_x = -6;
+	pixel_y = 0
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "lh" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors)
@@ -2335,9 +2479,12 @@
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /turf/open/floor/church,
 /area/outdoors/bog/inhumen_camp)
-"lV" = (
-/obj/machinery/light/fueled/firebowl/standing,
-/turf/open/floor/ruinedwood/darker,
+"lW" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty,
+/obj/structure/barricade/wooden/crude,
+/obj/structure/barricade/wooden,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/bandit_lair)
 "lZ" = (
 /obj/structure/circle_protection{
@@ -2357,6 +2504,16 @@
 "md" = (
 /turf/open/floor/carpet/stellar,
 /area/indoors/lich)
+"me" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/weapon/axe/iron,
+/obj/item/weapon/sword/short{
+	pixel_y = -1;
+	pixel_x = 5
+	},
+/obj/item/weapon/sword/sabre/scythe,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "mi" = (
 /obj/structure/winch{
 	dir = 4;
@@ -2389,6 +2546,11 @@
 /obj/structure/bars,
 /turf/open/floor/dirt,
 /area/indoors/bandit_lair)
+"mq" = (
+/obj/machinery/light/fueled/torchholder/l,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/dirt/road,
+/area/indoors/bandit_lair)
 "ms" = (
 /turf/open/floor/carpet,
 /area/indoors/lich)
@@ -2402,10 +2564,6 @@
 /obj/structure/bed/wool,
 /turf/open/floor/church,
 /area/indoors/lich)
-"mv" = (
-/obj/structure/bed/hay,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "mx" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/dirt,
@@ -2419,6 +2577,23 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet/green,
 /area/indoors/lich)
+"mC" = (
+/obj/item/storage/sack{
+	pixel_y = 3;
+	pixel_x = 8
+	},
+/obj/structure/table/wood/smooth,
+/obj/item/natural/bundle/cloth{
+	amount = 3
+	},
+/obj/item/natural/bundle/curred_hide{
+	amount = 6;
+	pixel_x = -1;
+	pixel_y = 13
+	},
+/obj/item/natural/bundle/fibers/full,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "mE" = (
 /turf/open/floor/cobble/alt,
 /area/outdoors/bog/inhumen_camp)
@@ -2426,16 +2601,19 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/twig,
 /area/indoors/lich)
-"mK" = (
-/obj/item/weapon/shovel/small,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "mO" = (
 /obj/structure/table/wood{
 	icon_state = "map6"
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors)
+"mP" = (
+/obj/effect/landmark/start/bandit{
+	dir = 8
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "mQ" = (
 /obj/structure/flora/tree/evil,
 /turf/open/water/swamp,
@@ -2484,6 +2662,11 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors)
+"ne" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/cobble,
+/area/indoors/bandit_lair)
 "nf" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/lich)
@@ -2493,26 +2676,10 @@
 /obj/item/rope/chain,
 /turf/open/floor/churchrough,
 /area/indoors/lich)
-"nh" = (
-/obj/structure/rack,
-/obj/item/clothing/neck/coif,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "ni" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile,
 /area/indoors/vampire_manor)
-"nj" = (
-/obj/structure/table/wood{
-	dir = 9;
-	icon_state = "largetable"
-	},
-/obj/item/reagent_containers/glass/cup/skull{
-	pixel_x = 7;
-	pixel_y = -5
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "nl" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet,
@@ -2526,13 +2693,6 @@
 "np" = (
 /turf/open/floor/tile/checker_green,
 /area/indoors/lich)
-"ns" = (
-/obj/effect/landmark/start/bandit{
-	dir = 4
-	},
-/obj/structure/chair/stool,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "nt" = (
 /obj/structure/bridge_stakes{
 	dir = 1
@@ -2658,6 +2818,14 @@
 "ob" = (
 /turf/closed/wall/mineral/decostone,
 /area/indoors)
+"oc" = (
+/obj/effect/decal/cleanable/food/mess,
+/turf/open/floor/tile/kitchen,
+/area/indoors/bandit_lair)
+"od" = (
+/obj/item/reagent_containers/glass/bucket/wooden/alter,
+/turf/open/floor/cobble,
+/area/outdoors/woods_safe)
 "oe" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/dirt,
@@ -2666,6 +2834,18 @@
 /obj/structure/flora/tree,
 /turf/open/water/swamp,
 /area/outdoors/woods_safe)
+"oh" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/tree/burnt,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
+"oi" = (
+/obj/effect/landmark/start/bandit{
+	dir = 4
+	},
+/obj/structure/chair/stool,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "oj" = (
 /obj/structure/table/wood/plain_alt,
 /obj/structure/fluff/millstone{
@@ -2680,6 +2860,9 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/lich)
+"ok" = (
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "oo" = (
 /obj/structure/fluff/walldeco/psybanner/red{
 	icon_state = "zizobanner";
@@ -2727,6 +2910,9 @@
 /obj/structure/mannequin/male/female,
 /turf/open/floor/wood,
 /area)
+"oy" = (
+/turf/closed/wall/mineral/tent/blue,
+/area/indoors/bandit_lair)
 "oz" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/storage/belt/leather/shalal,
@@ -2788,9 +2974,6 @@
 	},
 /turf/open/floor/sand,
 /area/broodmother_den)
-"oI" = (
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "oJ" = (
 /obj/structure/flora/tree/wise,
 /turf/open/floor/dirt,
@@ -2798,6 +2981,12 @@
 "oM" = (
 /turf/open/water/clean,
 /area/indoors/vampire_manor)
+"oQ" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/cobble,
+/area/indoors/bandit_lair)
 "oR" = (
 /obj/item/clothing/head/menacing,
 /obj/structure/mannequin/male,
@@ -2826,14 +3015,13 @@
 /obj/machinery/light/fueled/firebowl/church,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
+"pb" = (
+/obj/structure/fluff/walldeco/vinez,
+/turf/closed/mineral/cold,
+/area/outdoors/woods_safe)
 "pf" = (
 /turf/open/floor/concrete,
 /area/outdoors/woods_safe)
-"pg" = (
-/obj/structure/closet/crate/chest/neu,
-/obj/item/weapon/tongs,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "ph" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/coin/copper/pile,
@@ -2862,6 +3050,11 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors)
+"po" = (
+/obj/structure/fluff/statue/tdummy,
+/obj/structure/flora/grass,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "pp" = (
 /obj/structure/fluff/railing/border{
 	pixel_y = 24
@@ -2882,10 +3075,6 @@
 	},
 /turf/open/floor/plasteel/maniac,
 /area)
-"pu" = (
-/obj/structure/grindwheel,
-/turf/open/floor/dirt/road,
-/area/indoors/bandit_lair)
 "pw" = (
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/grass/yel,
@@ -2952,6 +3141,13 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"pV" = (
+/obj/structure/door/red{
+	lockid = "banditcamp";
+	name = "Kitchen"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "pY" = (
 /obj/item/clothing/shirt/dress/gen/colored/purple,
 /obj/item/clothing/shoes/shortboots,
@@ -2985,16 +3181,6 @@
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/dirt,
 /area/indoors/vampire_manor)
-"qm" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/reagent_containers/glass/bowl{
-	pixel_y = 9;
-	pixel_x = 9
-	},
-/obj/item/kitchen/rollingpin,
-/obj/item/weapon/knife/stone,
-/turf/open/floor/cobble,
-/area/indoors/bandit_lair)
 "qn" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 1
@@ -3005,6 +3191,13 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"qq" = (
+/obj/item/paper{
+	info = "I've had enough of you cacks, so long, I left the tools and the forge, I don't care what you lot do with it, just don't try and hunt me down.      - Stonehead";
+	name = "shit stained parchment"
+	},
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
 "qr" = (
 /obj/effect/lily_petal,
 /turf/open/water/hotspring,
@@ -3032,6 +3225,10 @@
 "qA" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/bog/inhumen_camp)
+"qF" = (
+/obj/structure/flora/tree/dead_bush,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "qG" = (
 /obj/item/weapon/sword/scimitar/falchion,
 /obj/item/weapon/sword/scimitar/falchion,
@@ -3062,6 +3259,15 @@
 "qO" = (
 /turf/open/floor/cobble,
 /area/indoors)
+"qP" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/item/natural/teeth,
+/obj/structure/fluff/nest{
+	name = "patch of straw";
+	pixel_x = -16
+	},
+/turf/open/floor/hay,
+/area/indoors/bandit_lair)
 "qQ" = (
 /obj/item/clothing/shirt/dress/gen/colored/black,
 /obj/item/clothing/shirt/dress/gen/colored/black,
@@ -3090,6 +3296,12 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/bog/inhumen_camp)
+"qT" = (
+/obj/effect/decal/cobbleedge{
+	dir = 10
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "qV" = (
 /obj/structure/fluff/walldeco/bigpainting,
 /obj/structure/bookcase,
@@ -3097,6 +3309,12 @@
 /obj/item/book/tales1,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
+"qW" = (
+/obj/structure/fake_machine/mail,
+/obj/effect/decal/cleanable/debris/wood,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "qX" = (
 /obj/effect/lily_petal,
 /obj/effect/lily_petal/three{
@@ -3109,16 +3327,6 @@
 	},
 /turf/open/water/hotspring,
 /area/outdoors)
-"qZ" = (
-/obj/structure/table/wood{
-	icon_state = "largetable"
-	},
-/obj/item/paper{
-	pixel_x = -2;
-	pixel_y = 11
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "ra" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 10
@@ -3130,6 +3338,10 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
+"rh" = (
+/obj/structure/flora/grass/bush_meagre,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "ri" = (
 /obj/structure/fluff/walldeco/painting/skull{
 	pixel_y = 32
@@ -3146,17 +3358,6 @@
 /obj/item/clothing/neck/chaincoif,
 /turf/open/floor/carpet,
 /area/indoors)
-"rl" = (
-/obj/structure/closet/crate/chest/old_crate,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/obj/item/rope/chain,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
-"ro" = (
-/obj/structure/fermentation_keg/random/water,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "rq" = (
 /obj/machinery/light/fueled/torchholder/l,
 /obj/structure/stairs/stone{
@@ -3184,14 +3385,45 @@
 "rw" = (
 /turf/open/floor/dirt,
 /area/indoors/vampire_manor)
+"rz" = (
+/obj/effect/decal/cobbleedge{
+	dir = 6
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "rA" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/twig,
 /area/outdoors/bog/inhumen_camp)
+"rC" = (
+/obj/structure/table/wood{
+	icon_state = "largetable"
+	},
+/obj/item/paper{
+	pixel_x = -2;
+	pixel_y = 11
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "rD" = (
 /obj/structure/stairs/stone/church,
 /turf/open/floor/church,
 /area/indoors/lich)
+"rE" = (
+/obj/structure/table/wood{
+	dir = 10;
+	icon_state = "largetable"
+	},
+/obj/item/reagent_containers/food/snacks/bread,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
+"rF" = (
+/obj/structure/bed/hay,
+/obj/structure/bed/hay{
+	pixel_y = 17
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "rG" = (
 /obj/effect/decal/remains/saiga,
 /obj/structure/flora/grass/herb/paris{
@@ -3241,6 +3473,17 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"rW" = (
+/obj/structure/door/red{
+	lockid = "banditcamp";
+	name = "Storage"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
+"rX" = (
+/obj/structure/flora/tree/dying_bush,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "rY" = (
 /obj/item/weapon/mace/cudgel,
 /obj/structure/table/wood{
@@ -3341,6 +3584,18 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors)
+"sq" = (
+/obj/structure/table/wood{
+	dir = 1;
+	icon_state = "largetable_mid"
+	},
+/obj/item/candle/scandelabra{
+	pixel_y = -9;
+	name = "fake silver candelabra";
+	sellprice = 1
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "sr" = (
 /obj/structure/table/wood{
 	dir = 6;
@@ -3388,6 +3643,9 @@
 /obj/structure/flora/ausbushes/reedbush,
 /turf/open/water/swamp,
 /area/outdoors/bog/inhumen_camp)
+"sC" = (
+/turf/closed/mineral/bedrock/moss,
+/area/outdoors/woods_safe)
 "sE" = (
 /obj/structure/bookcase/random,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
@@ -3397,6 +3655,11 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors)
+"sJ" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/newtree,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "sL" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -3408,25 +3671,31 @@
 /obj/item/weapon/knife/copper,
 /turf/open/floor/cobble,
 /area/indoors)
-"sN" = (
-/obj/structure/table/wood{
-	dir = 1;
-	icon_state = "largetable"
+"sM" = (
+/obj/structure/door/red{
+	lockid = "banditcamp";
+	name = "The Lair"
 	},
-/obj/item/reagent_containers/glass/bowl{
-	pixel_y = -6
-	},
-/obj/item/kitchen/spoon{
-	pixel_x = 7;
-	pixel_y = -6
-	},
-/turf/open/floor/ruinedwood/darker,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
 "sP" = (
 /obj/item/clothing/shirt/robe/feld,
 /obj/structure/mannequin/male,
 /turf/open/floor/wood,
 /area/indoors)
+"sQ" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/weapon/tongs,
+/obj/item/natural/bundle/teeth,
+/obj/effect/decal/cleanable/debris/wood,
+/obj/effect/decal/cleanable/dirt/cobweb,
+/turf/open/floor/dirt/road,
+/area/indoors/bandit_lair)
+"sU" = (
+/obj/structure/flora/rock/pile,
+/turf/open/water/swamp,
+/area/outdoors/woods_safe)
 "sW" = (
 /obj/structure/rack,
 /obj/item/ammo_holder/quiver/arrows,
@@ -3447,6 +3716,20 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"td" = (
+/obj/structure/closet/crate/chest/old_crate,
+/obj/item/ore/coal,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
+"te" = (
+/obj/structure/flora/grass,
+/obj/structure/fluff/walldeco/skullspike,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "tf" = (
 /obj/structure/door/viewport{
 	dir = 1;
@@ -3494,6 +3777,18 @@
 "to" = (
 /turf/open/floor/carpet/royalblack,
 /area)
+"tp" = (
+/obj/structure/closet/crate/chest/wicker,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/turf/open/floor/tile/kitchen,
+/area/indoors/bandit_lair)
 "tq" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_x = 15;
@@ -3544,6 +3839,19 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"tJ" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/paper{
+	pixel_x = -2;
+	pixel_y = 11
+	},
+/obj/item/paper,
+/obj/item/paper{
+	pixel_y = 8;
+	pixel_x = 7
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "tL" = (
 /obj/item/clothing/armor/leather/vest,
 /obj/item/clothing/armor/leather/vest,
@@ -3585,26 +3893,27 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"tS" = (
-/obj/structure/fluff/statue/tdummy,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "tT" = (
 /obj/item/clothing/shirt/robe/merchant,
 /obj/structure/mannequin/male,
 /turf/open/floor/wood,
 /area/indoors)
-"tW" = (
-/obj/structure/fluff/millstone{
-	pixel_x = -5;
-	pixel_y = 5
+"tU" = (
+/obj/structure/table/wood/smooth,
+/obj/item/key/bandit{
+	pixel_x = 4;
+	pixel_y = -5
 	},
-/obj/structure/table/wood/plain_alt,
-/obj/item/reagent_containers/powder/flour{
-	pixel_y = 9;
-	pixel_x = 7
+/obj/item/key/bandit{
+	pixel_x = 9;
+	pixel_y = 6
 	},
-/turf/open/floor/cobble,
+/obj/item/key/bandit{
+	pixel_y = 5;
+	pixel_x = -11
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/bandit_lair)
 "tY" = (
 /obj/structure/table/wood/large/corner_new{
@@ -3628,6 +3937,18 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/lich)
+"uo" = (
+/obj/structure/fluff/millstone{
+	pixel_x = -5;
+	pixel_y = 5
+	},
+/obj/structure/table/wood/plain_alt,
+/obj/item/reagent_containers/powder/flour{
+	pixel_y = 9;
+	pixel_x = 7
+	},
+/turf/open/floor/hexstone,
+/area/indoors/bandit_lair)
 "up" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/rope/chain,
@@ -3641,11 +3962,17 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/church,
 /area/indoors/lich)
-"uy" = (
-/obj/structure/flora/tree,
-/obj/structure/flora/tree,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
+"us" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
+"uu" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty,
+/obj/structure/barricade/wooden/crude,
+/obj/structure/barricade/wooden,
+/turf/open/floor/wood,
+/area/indoors/bandit_lair)
 "uz" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/churchrough,
@@ -3668,10 +3995,6 @@
 /obj/effect/mapping_helpers/virtual_z_link/broodmother_base,
 /turf/closed/mineral,
 /area/broodmother_den)
-"uL" = (
-/obj/structure/well,
-/turf/open/floor/cobblerock,
-/area/outdoors/woods_safe)
 "uP" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/carpet,
@@ -3687,6 +4010,10 @@
 	},
 /turf/open/floor/carpet,
 /area/indoors/lich)
+"uR" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "uS" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 8
@@ -3699,11 +4026,6 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
-"uU" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/structure/chair/wood/alt,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "uW" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven{
@@ -3762,14 +4084,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors)
-"vh" = (
-/obj/structure/closet/crate/chest/neu,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/natural/feather,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "vj" = (
 /obj/structure/hotspring/border/seven,
 /turf/open/floor/dirt/road,
@@ -3804,14 +4118,11 @@
 	},
 /turf/open/floor/twig,
 /area/under/cavelava/acid)
-"vt" = (
-/obj/structure/table/wood{
-	dir = 8;
-	icon_state = "largetable"
-	},
-/obj/item/reagent_containers/glass/cup/wooden,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
+"vu" = (
+/obj/effect/spawner/map_spawner/grass_low,
+/obj/structure/flora/grass,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "vz" = (
 /obj/effect/decal/cobbleedge,
 /turf/open/floor/dirt,
@@ -3901,6 +4212,10 @@
 	},
 /turf/open/floor/plasteel/maniac,
 /area)
+"vU" = (
+/obj/effect/decal/cobbleedge,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "vV" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/chest/wicker,
@@ -3982,6 +4297,12 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/wood,
 /area/indoors)
+"wl" = (
+/obj/effect/decal/cobbleedge{
+	dir = 4
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "wn" = (
 /obj/structure/fluff/nest,
 /turf/open/floor/naturalstone,
@@ -4010,6 +4331,13 @@
 /obj/effect/landmark/start/new_player,
 /turf/open/floor/blocks,
 /area/start)
+"wG" = (
+/obj/structure/fluff/walldeco/wantedposter{
+	name = "Wall of fame";
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "wH" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/structure/chair/bench/coucha/redleft,
@@ -4034,10 +4362,19 @@
 	},
 /turf/open/floor/blocks/paving,
 /area/indoors/vampire_manor)
+"wN" = (
+/obj/structure/flora/grass/bush,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "wR" = (
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"wS" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty,
+/turf/open/floor/tile/kitchen,
+/area/indoors/bandit_lair)
 "wV" = (
 /obj/structure/fluff/statue/pillar,
 /obj/effect/decal/cobblerockedge{
@@ -4055,6 +4392,14 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors)
+"xb" = (
+/obj/structure/table/optable,
+/turf/open/floor/dirt/road,
+/area/indoors/bandit_lair)
+"xd" = (
+/obj/structure/flora/grass/bush_meagre,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "xe" = (
 /obj/structure/table/vtable/v2,
 /obj/item/coin/gold/pile,
@@ -4078,6 +4423,14 @@
 /obj/item/weapon/sword/iron,
 /turf/open/floor/grass/yel,
 /area/outdoors/bog/inhumen_camp)
+"xk" = (
+/obj/structure/closet/crate/chest/old_crate,
+/obj/item/grown/log/tree/small,
+/obj/item/grown/log/tree/stick,
+/obj/item/grown/log/tree/stick,
+/obj/item/grown/log/tree,
+/turf/open/floor/cobble,
+/area/indoors/bandit_lair)
 "xn" = (
 /obj/structure/stairs/stone/reddish{
 	dir = 8
@@ -4116,6 +4469,18 @@
 /obj/item/clothing/shirt/robe/priest,
 /turf/open/floor/wood,
 /area)
+"xE" = (
+/obj/structure/table/wood{
+	dir = 6;
+	icon_state = "largetable"
+	},
+/obj/machinery/light/fueled/oven/south,
+/obj/item/reagent_containers/food/snacks/badrecipe{
+	pixel_x = 2;
+	pixel_y = 10
+	},
+/turf/open/floor/hexstone,
+/area/indoors/bandit_lair)
 "xH" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 4
@@ -4180,6 +4545,10 @@
 /obj/structure/chair/bench/ancientlog,
 /turf/open/floor/grass,
 /area/outdoors/woods_safe)
+"yc" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "yd" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/clothing/armor/leather/jacket/apothecary{
@@ -4206,6 +4575,11 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"yi" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/tree/dying_bush,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "yj" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 8;
@@ -4221,30 +4595,9 @@
 "yn" = (
 /turf/open/floor/ruinedwood,
 /area/outdoors/bog/inhumen_camp)
-"yo" = (
-/obj/structure/rack,
-/obj/item/weapon/mace/cudgel,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
-"yq" = (
-/obj/structure/rack,
-/obj/item/weapon/knife/dagger,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "yu" = (
 /turf/closed/wall/mineral/craftstone,
 /area/overlord_lair)
-"yv" = (
-/obj/structure/closet/crate/chest/neu,
-/obj/item/clothing/face/cigarette/rollie/nicotine,
-/obj/item/clothing/face/cigarette/rollie/nicotine,
-/obj/item/clothing/face/cigarette/rollie/nicotine,
-/obj/item/clothing/face/cigarette/rollie/cannabis,
-/obj/item/clothing/face/cigarette/rollie/cannabis,
-/obj/item/clothing/face/cigarette/rollie/nicotine,
-/obj/item/clothing/face/cigarette/rollie/nicotine,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "yw" = (
 /obj/item/clothing/shirt/dress/gen/colored/blue,
 /obj/item/clothing/shoes/shortboots,
@@ -4294,15 +4647,6 @@
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /turf/open/floor/church,
 /area/indoors/lich)
-"yP" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/face/shepherd/rag,
-/obj/item/clothing/face/shepherd/rag,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
-"yR" = (
-/turf/closed/wall/mineral/wood,
-/area/indoors/bandit_lair)
 "yT" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/machinery/light/fueled/wallfire/candle/skull,
@@ -4319,6 +4663,21 @@
 	},
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
+"yW" = (
+/obj/structure/table/wood/plain_alt,
+/obj/structure/fluff/walldeco/maidendrape,
+/obj/item/ingot/bloodsteel{
+	pixel_y = 10;
+	pixel_x = -4
+	},
+/obj/item/ingot/bloodsteel{
+	pixel_y = 5
+	},
+/obj/item/ingot/bloodsteel{
+	pixel_x = 4
+	},
+/turf/open/floor/hexstone,
+/area/indoors/vampire_manor)
 "zb" = (
 /obj/structure/roguerock,
 /turf/open/water/swamp/deep,
@@ -4345,6 +4704,10 @@
 /obj/item/weapon/surgery/saw/improv,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"zh" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/hay,
+/area/indoors/bandit_lair)
 "zi" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -4354,6 +4717,15 @@
 /obj/item/clothing/head/jester,
 /turf/open/floor/wood,
 /area/indoors)
+"zk" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/bloodpot,
+/obj/item/reagent_containers/glass/bottle/bloodpot,
+/turf/open/floor/carpet,
+/area/indoors/vampire_manor)
 "zm" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/effect/landmark/start/vampireknight,
@@ -4413,6 +4785,17 @@
 /obj/item/storage/keyring,
 /turf/open/floor/carpet,
 /area/indoors)
+"zH" = (
+/obj/structure/closet/crate/chest/neu,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/natural/feather,
+/obj/effect/decal/cleanable/dirt/cobweb{
+	icon_state = "cobweb2"
+	},
+/turf/open/floor/hay,
+/area/indoors/bandit_lair)
 "zI" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -4469,6 +4852,10 @@
 /obj/item/clothing/pants/tights/colored/red,
 /turf/open/floor/wood,
 /area)
+"Aa" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/cobblerock,
+/area/indoors/bandit_lair)
 "Ab" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/fluff/railing/border{
@@ -4513,16 +4900,6 @@
 	dir = 1
 	},
 /area/overlord_lair)
-"Al" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/rope,
-/obj/item/rope,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
-"Am" = (
-/obj/item/reagent_containers/glass/bucket/wooden/alter,
-/turf/open/floor/cobblerock,
-/area/outdoors/woods_safe)
 "An" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 4
@@ -4564,6 +4941,12 @@
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/tile,
 /area/indoors)
+"AA" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass,
+/obj/structure/flora/grass/bush_meagre,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "AB" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -4593,11 +4976,6 @@
 /obj/structure/grindwheel,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
-"AI" = (
-/obj/structure/fluff/railing/tall/palisade,
-/obj/structure/fluff/railing/tall/palisade,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "AJ" = (
 /obj/structure/chair/bench/coucha/r,
 /obj/structure/fluff/wallclock/vampire,
@@ -4625,10 +5003,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile/checker_green,
 /area/indoors/lich)
-"AQ" = (
-/obj/structure/fake_machine/mail/r,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "AR" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/sand,
@@ -4694,6 +5068,11 @@
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/churchmarble,
 /area/indoors/lich)
+"Bg" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/tree/dying_bush,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "Bj" = (
 /turf/open/floor/dirt,
 /area/indoors/lich)
@@ -4789,6 +5168,11 @@
 /obj/effect/spawner/map_spawner/grass_low,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
+"BN" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/tree/dying_bush,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "BO" = (
 /obj/structure/fluff/nest{
 	name = "patch of straw"
@@ -4859,19 +5243,21 @@
 /obj/item/natural/worms/leech,
 /turf/open/water/sewer,
 /area/indoors/vampire_manor)
+"Ce" = (
+/obj/item/reagent_containers/glass/cup/skull{
+	pixel_x = 7;
+	pixel_y = -5
+	},
+/obj/structure/table/wood{
+	dir = 8;
+	icon_state = "largetable"
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "Cf" = (
 /obj/structure/water_pipe,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Ch" = (
-/obj/structure/closet/crate/chest/neu,
-/obj/item/flashlight/flare/torch/metal,
-/obj/item/flashlight/flare/torch/metal,
-/obj/item/flashlight/flare/torch/metal,
-/obj/item/flashlight/flare/torch/metal,
-/obj/item/flashlight/flare/torch/metal,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "Cn" = (
 /obj/effect/decal/cleanable/generic,
 /turf/open/floor/ruinedwood/darker,
@@ -4926,6 +5312,12 @@
 	},
 /turf/open/floor/churchrough,
 /area/indoors/lich)
+"CI" = (
+/obj/machinery/light/fueled/smelter{
+	pixel_y = 9
+	},
+/turf/open/floor/cobblerock,
+/area/indoors/bandit_lair)
 "CL" = (
 /turf/open/floor/twig,
 /area/indoors/lich)
@@ -4937,20 +5329,6 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass/red,
 /area/outdoors/woods_safe)
-"CO" = (
-/obj/item/reagent_containers/food/snacks/meat/steak,
-/obj/item/reagent_containers/food/snacks/meat/steak,
-/obj/item/reagent_containers/food/snacks/meat/salami,
-/obj/structure/closet/crate/chest{
-	base_icon_state = "woodchestalt";
-	icon_state = "woodchestalt";
-	name = "meat chest"
-	},
-/obj/item/reagent_containers/food/snacks/butter,
-/obj/item/reagent_containers/food/snacks/cheese,
-/obj/item/reagent_containers/food/snacks/cheese,
-/turf/open/floor/tile/kitchen,
-/area/indoors/bandit_lair)
 "CP" = (
 /obj/structure/vampire/scryingorb{
 	pixel_x = -16
@@ -4974,6 +5352,13 @@
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/tile/kitchen,
 /area/indoors/bandit_lair)
+"De" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/obj/structure/flora/grass,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "Df" = (
 /obj/structure/fluff/traveltile/exit_inhumen,
 /turf/open/floor/cobblerock,
@@ -4988,6 +5373,12 @@
 /obj/structure/stairs/stone,
 /turf/open/floor/naturalstone,
 /area/broodmother_den)
+"Dm" = (
+/obj/effect/landmark/events/testportal{
+	aportalloc = "bandit"
+	},
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "Dn" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 8
@@ -5042,17 +5433,21 @@
 /obj/structure/chair/bench/church/r,
 /turf/open/floor/carpet/lord/right,
 /area/indoors/lich)
-"DB" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
-/obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/turnip,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
-/obj/item/reagent_containers/food/snacks/produce/vegetable/potato,
-/turf/open/floor/tile/kitchen,
+"DC" = (
+/obj/structure/table/wood/smooth,
+/obj/item/clothing/neck/psycross/matthios{
+	sellprice = 1;
+	pixel_x = -11;
+	pixel_y = 5;
+	name = "Bandit's amulet of Matthios"
+	},
+/obj/item/clothing/neck/psycross/matthios{
+	sellprice = 1;
+	pixel_x = 3;
+	pixel_y = -4;
+	name = "Bandit's amulet of Matthios"
+	},
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/bandit_lair)
 "DF" = (
 /obj/structure/rack/shelf/notdense,
@@ -5066,6 +5461,14 @@
 /obj/structure/window/stained/zizo,
 /turf/open/floor/churchmarble,
 /area/indoors/lich)
+"DI" = (
+/turf/open/floor/hay,
+/area/indoors/bandit_lair)
+"DK" = (
+/obj/machinery/light/fueled/torchholder/c,
+/obj/machinery/light/fueled/hearth,
+/turf/open/floor/hexstone,
+/area/indoors/bandit_lair)
 "DO" = (
 /turf/open/water/clean,
 /area/outdoors/woods_safe)
@@ -5136,6 +5539,11 @@
 "Eo" = (
 /turf/open/floor/twig,
 /area/outdoors/bog/inhumen_camp)
+"Ep" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass/bush,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "Eq" = (
 /obj/structure/table/wood{
 	icon_state = "largetable"
@@ -5145,6 +5553,13 @@
 /obj/item/weapon/sword/long/judgement,
 /turf/open/floor/cobble,
 /area/indoors)
+"Er" = (
+/obj/structure/closet/crate/chest/old_crate,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/obj/item/rope/chain,
+/turf/open/floor/dirt/road,
+/area/indoors/bandit_lair)
 "Ev" = (
 /turf/open/floor/cobble,
 /area/indoors/bandit_lair)
@@ -5152,12 +5567,6 @@
 /obj/item/bin/water,
 /turf/open/floor/cobble,
 /area/indoors/bandit_lair)
-"Ey" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 1
-	},
-/turf/open/floor/dirt,
-/area/outdoors/woods_safe)
 "Ez" = (
 /obj/structure/rack/underworld,
 /turf/open/floor/grass/yel,
@@ -5199,6 +5608,12 @@
 	dir = 1
 	},
 /area/indoors/vampire_manor)
+"EK" = (
+/obj/structure/fluff/customsign{
+	name = "STAY OUT"
+	},
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "EL" = (
 /obj/structure/hotspring/border/thirteen,
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -5223,6 +5638,14 @@
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"EY" = (
+/obj/structure/door/red{
+	lockid = "banditcamp";
+	name = "Torture Chamber"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "Fa" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/structure/bookcase/random_recipes,
@@ -5263,13 +5686,6 @@
 "Fk" = (
 /turf/closed/wall/mineral/decostone/cand,
 /area/indoors/lich)
-"Fl" = (
-/obj/structure/closet/crate/chest/neu_iron,
-/obj/item/key/bandit,
-/obj/item/key/bandit,
-/obj/item/key/bandit,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "Fm" = (
 /turf/closed/wall/mineral/wooddark,
 /area)
@@ -5295,6 +5711,22 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plasteel/maniac/damaged,
 /area)
+"FC" = (
+/obj/structure/flora/newtree,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
+"FG" = (
+/obj/structure/fluff/railing/tall/palisade,
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
+"FL" = (
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/bandit_lair)
+"FM" = (
+/obj/structure/fluff/walldeco/vinez,
+/turf/closed/wall/mineral/baddaub,
+/area/indoors/bandit_lair)
 "FP" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 6
@@ -5378,6 +5810,11 @@
 /obj/item/clothing/head/roguehood/eora,
 /turf/open/floor/wood,
 /area)
+"Gi" = (
+/obj/item/natural/stone,
+/obj/structure/flora/grass,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "Gj" = (
 /obj/structure/door/window,
 /turf/open/floor/churchmarble,
@@ -5401,6 +5838,13 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors)
+"Gn" = (
+/obj/structure/fluff/walldeco/wantedposter{
+	name = "Wall of fame";
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "Gq" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -5439,6 +5883,12 @@
 	},
 /turf/open/floor/churchbrick,
 /area/overlord_lair)
+"GD" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass/bush,
+/obj/structure/flora/grass/bush_meagre,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "GE" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/armor/medium/surcoat/heartfelt,
@@ -5461,6 +5911,10 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
 /area/outdoors/bog/inhumen_camp)
+"GI" = (
+/obj/structure/flora/tree/burnt,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "GK" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
@@ -5469,13 +5923,6 @@
 /obj/structure/fluff/globe,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
-"GN" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1;
-	pixel_y = -1
-	},
-/turf/open/floor/dirt/road,
-/area/indoors/bandit_lair)
 "GP" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/closed/mineral,
@@ -5490,10 +5937,6 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/herringbone,
 /area/overlord_lair)
-"GX" = (
-/obj/effect/decal/cleanable/blood/tracks,
-/turf/open/floor/cobble,
-/area/indoors/bandit_lair)
 "GY" = (
 /obj/structure/roguerock{
 	icon_state = "rock3"
@@ -5504,6 +5947,10 @@
 /obj/structure/fluff/statue/pillar,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"Hc" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/dirt/road,
+/area/indoors/bandit_lair)
 "Hf" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /obj/structure/fluff/clock/zizoclock,
@@ -5533,12 +5980,6 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/vampire_manor)
-"Hs" = (
-/obj/structure/rack,
-/obj/item/clothing/head/helmet/leather/headscarf,
-/obj/item/clothing/head/helmet/leather/headscarf,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "Hu" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/armor/leather/hide,
@@ -5576,6 +6017,10 @@
 /obj/item/clothing/neck/psycross/gold,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
+"HA" = (
+/obj/item/weapon/shovel,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "HB" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/dirt,
@@ -5609,12 +6054,6 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/cobblerock,
 /area/broodmother_den)
-"HH" = (
-/obj/structure/rack,
-/obj/item/clothing/head/helmet/leather/hood_ominous,
-/obj/item/clothing/head/helmet/leather/hood_ominous,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "HI" = (
 /obj/structure/door/swing,
 /turf/open/floor/ruinedwood/darker,
@@ -5675,6 +6114,10 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors)
+"HY" = (
+/obj/structure/meathook,
+/turf/open/floor/dirt/road,
+/area/indoors/bandit_lair)
 "HZ" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/bog/inhumen_camp)
@@ -5729,21 +6172,25 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"Ih" = (
-/obj/structure/fermentation_keg/random/beer,
-/turf/open/floor/ruinedwood/turned/darker,
+"Ii" = (
+/obj/structure/door/iron/bars{
+	lockid = "banditcamp";
+	name = "Cell"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/dirt,
 /area/indoors/bandit_lair)
+"Ik" = (
+/obj/item/natural/stone,
+/obj/structure/flora/grass,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "Im" = (
 /obj/structure/table/wood/fancy/red,
 /obj/item/reagent_containers/glass/bottle/tiefling_wine,
 /obj/item/candle/skull/darkskull/lit,
 /turf/open/floor/carpet,
 /area/indoors/vampire_manor)
-"In" = (
-/obj/structure/rack,
-/obj/item/weapon/axe/iron,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "Io" = (
 /obj/structure/dye_bin/luxury,
 /turf/open/floor/herringbone,
@@ -5846,6 +6293,13 @@
 	},
 /turf/closed/wall/mineral/underbrick/fake_world,
 /area)
+"IL" = (
+/obj/structure/rack,
+/obj/item/weapon/axe/iron,
+/obj/item/weapon/thresher,
+/obj/item/weapon/hoe/stone,
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
 "IO" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -5993,12 +6447,6 @@
 /obj/item/reagent_containers/glass/cup/skull,
 /turf/open/floor/twig,
 /area/indoors/lich)
-"Jo" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 8
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "Jp" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/reagent_containers/powder/flour,
@@ -6043,6 +6491,10 @@
 /obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"Jz" = (
+/obj/structure/fluff/walldeco/vinez,
+/turf/closed/wall/mineral/wooddark,
+/area/indoors/bandit_lair)
 "JA" = (
 /obj/effect/lily_petal/two,
 /obj/effect/falling_sakura,
@@ -6064,6 +6516,11 @@
 /obj/structure/healingfountain,
 /turf/open/floor/concrete,
 /area/outdoors/woods_safe)
+"JI" = (
+/obj/effect/spawner/map_spawner/grass_low,
+/obj/structure/flora/newtree,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "JJ" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/yel,
@@ -6071,10 +6528,6 @@
 "JN" = (
 /turf/closed/mineral/bedrock,
 /area/overlord_lair)
-"JQ" = (
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/cobble,
-/area/indoors/bandit_lair)
 "JR" = (
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/tile,
@@ -6176,6 +6629,23 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"Kp" = (
+/obj/structure/table/wood/smooth,
+/obj/item/clothing/neck/psycross/matthios{
+	sellprice = 1;
+	pixel_x = -11;
+	pixel_y = 5;
+	name = "Bandit's amulet of Matthios"
+	},
+/obj/item/clothing/neck/psycross/matthios{
+	sellprice = 1;
+	pixel_x = 5;
+	pixel_y = -4;
+	name = "Bandit's amulet of Matthios"
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "Kq" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/tree,
@@ -6191,6 +6661,11 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/bandit_lair)
+"Kt" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/tree/dead_bush,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "Ku" = (
 /turf/closed/mineral/bedrock,
 /area/broodmother_den)
@@ -6210,6 +6685,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/outdoors/bog/inhumen_camp)
+"KF" = (
+/obj/effect/decal/cobbleedge{
+	dir = 5
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "KG" = (
 /obj/structure/door/window,
 /turf/open/floor/cobble,
@@ -6222,6 +6703,25 @@
 	},
 /turf/open/floor/tile/checker_green,
 /area/indoors/lich)
+"KK" = (
+/obj/structure/closet/crate/chest/wickertrunk,
+/obj/item/flashlight/flare/torch/metal,
+/obj/item/flashlight/flare/torch/metal{
+	pixel_x = -5
+	},
+/obj/item/flashlight/flare/torch/metal{
+	pixel_y = -2;
+	pixel_x = 4
+	},
+/obj/item/flashlight/flare/torch/metal{
+	pixel_x = 8
+	},
+/obj/item/flashlight/flare/torch/metal{
+	pixel_y = 5;
+	pixel_x = -8
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/bandit_lair)
 "KP" = (
 /obj/structure/door{
 	lockid = "mansionvampire"
@@ -6241,6 +6741,15 @@
 /obj/item/clothing/armor/plate/full,
 /turf/open/floor/carpet,
 /area/indoors)
+"KY" = (
+/obj/item/grown/log/tree/stick,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
+"Lb" = (
+/obj/machinery/light/fueled/torchholder/l,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "Le" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/face/facemask,
@@ -6255,10 +6764,8 @@
 /obj/item/clothing/face/lordmask/l,
 /turf/open/floor/carpet,
 /area/indoors)
-"Lg" = (
-/obj/effect/landmark/events/testportal{
-	aportalloc = "bandit"
-	},
+"Li" = (
+/obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
 "Lj" = (
@@ -6282,6 +6789,12 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/tile,
 /area/indoors)
+"Lr" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty,
+/obj/structure/barricade/wooden/crude,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "Ls" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -6352,19 +6865,16 @@
 /obj/item/gem/yellow,
 /turf/open/floor/carpet,
 /area/indoors)
-"LP" = (
-/obj/structure/door/weak/bolt{
-	dir = 1
-	},
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/cobblerock,
-/area/outdoors/woods_safe)
 "LR" = (
 /obj/effect/decal/cobbleedge{
 	dir = 9
 	},
 /turf/closed/wall/mineral/decostone/moss/long,
 /area/indoors/lich)
+"LS" = (
+/obj/item/natural/stone,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "LU" = (
 /obj/structure/fluff/psycross/crafted,
 /turf/open/floor/dirt,
@@ -6396,11 +6906,6 @@
 /obj/structure/chair/bench,
 /turf/open/floor/grass/yel,
 /area/outdoors/bog/inhumen_camp)
-"Mc" = (
-/obj/structure/rack,
-/obj/item/clothing/head/helmet/leather/volfhelm,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "Mf" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/volcanic,
@@ -6409,6 +6914,11 @@
 /obj/effect/spawner/map_spawner/grass_low,
 /turf/open/floor/grass,
 /area/outdoors/woods_safe)
+"Mk" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/cobble,
+/area/indoors/bandit_lair)
 "Mm" = (
 /obj/structure/fermentation_keg/beer,
 /turf/open/floor/tile,
@@ -6444,6 +6954,11 @@
 /obj/structure/fluff/walldeco/maidendrape,
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
+"Mu" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/hay,
+/area/indoors/bandit_lair)
 "Mw" = (
 /obj/structure/hotspring/border/two,
 /turf/open/floor/dirt/road,
@@ -6466,21 +6981,16 @@
 /obj/item/natural/stone,
 /turf/open/floor/grass,
 /area/outdoors/woods_safe)
-"ME" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/item/reagent_containers/glass/bottle/healthpot,
-/obj/item/reagent_containers/glass/bottle/healthpot,
-/obj/item/reagent_containers/glass/bottle/healthpot,
-/obj/item/reagent_containers/glass/bottle/bloodpot,
-/obj/item/reagent_containers/glass/bottle/bloodpot,
-/turf/open/floor/carpet,
-/area/indoors/vampire_manor)
 "MF" = (
 /obj/structure/giantfur{
 	pixel_y = -16
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
+"MG" = (
+/obj/structure/flora/grass/bush,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "MH" = (
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/dirt,
@@ -6492,11 +7002,28 @@
 /obj/item/rope,
 /turf/open/floor/church,
 /area/indoors/lich)
+"MO" = (
+/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/item/clothing/head/helmet/leather/volfhelm,
+/obj/item/clothing/head/helmet/leather/hood_ominous,
+/obj/item/clothing/head/helmet/leather/hood_ominous,
+/obj/item/clothing/cloak/raincloak,
+/obj/item/clothing/cloak/raincloak,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "MP" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile,
 /area/indoors/vampire_manor)
+"MR" = (
+/obj/structure/table/wood{
+	icon_state = "largetable";
+	dir = 10
+	},
+/obj/item/weapon/knife/cleaver,
+/turf/open/floor/hexstone,
+/area/indoors/bandit_lair)
 "MS" = (
 /obj/structure/mannequin/male,
 /obj/item/clothing/shoes/simpleshoes/buckle,
@@ -6523,10 +7050,22 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"Nb" = (
+/obj/structure/fluff/walldeco/vinez,
+/turf/closed/mineral,
+/area/outdoors/woods_safe)
 "Ne" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/naturalstone,
 /area/broodmother_den)
+"Nf" = (
+/obj/structure/door/weak/bolt{
+	dir = 1;
+	name = "The Lair"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/cobble,
+/area/outdoors/woods_safe)
 "Nh" = (
 /obj/structure/bridge_stakes{
 	dir = 8
@@ -6542,6 +7081,16 @@
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/church,
 /area/indoors/lich)
+"Nk" = (
+/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/item/clothing/head/helmet/leather/headscarf,
+/obj/item/clothing/head/helmet/leather/headscarf,
+/obj/item/clothing/face/skullmask,
+/obj/item/clothing/face/skullmask,
+/obj/effect/decal/cleanable/dirt/cobweb,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "Nl" = (
 /obj/structure/rack,
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -6624,13 +7173,6 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/red,
 /area/outdoors/woods_safe)
-"NG" = (
-/obj/structure/rack,
-/obj/item/weapon/shield/wood,
-/obj/item/weapon/shield/wood,
-/obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "NL" = (
 /obj/structure/closet/dirthole/closed,
 /obj/structure/flora/grass,
@@ -6706,15 +7248,6 @@
 /obj/structure/fluff/clodpile/dirt,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
-"On" = (
-/obj/structure/rack,
-/obj/item/cooking/pan,
-/obj/item/reagent_containers/glass/bucket/pot{
-	pixel_y = 7
-	},
-/obj/item/storage/sack,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "Op" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/needle,
@@ -6724,9 +7257,19 @@
 /obj/structure/flora/grass/herb/random,
 /turf/open/floor/grass/red,
 /area/outdoors/woods_safe)
+"Os" = (
+/obj/structure/flora/rock,
+/turf/open/water/swamp,
+/area/outdoors/woods_safe)
 "Ot" = (
 /turf/open/floor/hexstone,
 /area/indoors)
+"Ow" = (
+/obj/structure/fluff/walldeco/wantedposter{
+	name = "Wall of fame"
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "Ox" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -6742,6 +7285,10 @@
 /obj/effect/decal/cobblerockedge,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"Oz" = (
+/obj/structure/flora/newtree,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "OA" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 9;
@@ -6782,6 +7329,11 @@
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"OH" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/newtree,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "OK" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/carpet,
@@ -6789,10 +7341,43 @@
 "OL" = (
 /turf/open/floor/sand,
 /area/broodmother_den)
+"OM" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = -1
+	},
+/obj/structure/handcart{
+	dir = 4
+	},
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
 "OQ" = (
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
+"OS" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/weapon/mace/cudgel,
+/obj/item/weapon/knife/dagger{
+	pixel_y = -5;
+	pixel_x = 4
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/bandit_lair)
+"OU" = (
+/obj/structure/closet/crate/chest/wickertrunk,
+/obj/item/reagent_containers/powder/spice,
+/obj/item/clothing/face/cigarette/rollie/nicotine,
+/obj/item/clothing/face/cigarette/rollie/nicotine,
+/obj/item/clothing/face/cigarette/rollie/nicotine,
+/obj/item/clothing/face/cigarette/rollie/nicotine,
+/obj/item/clothing/face/cigarette/rollie/cannabis,
+/obj/item/clothing/face/cigarette/rollie/cannabis,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/bandit_lair)
+"OV" = (
+/turf/closed/mineral/cold,
+/area/outdoors/woods_safe)
 "OX" = (
 /obj/item/weapon/sword/long/exe,
 /obj/item/weapon/sword/long/exe,
@@ -6808,15 +7393,15 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Pc" = (
-/obj/machinery/light/fueled/torchholder/c,
-/obj/machinery/light/fueled/hearth,
-/turf/open/floor/cobble,
-/area/indoors/bandit_lair)
-"Pf" = (
-/obj/structure/rack,
-/obj/item/weapon/axe/stone,
-/turf/open/floor/dirt/road,
+"Pa" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/structure/chair/wood/alt,
+/obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/fluff/nest{
+	name = "patch of straw";
+	pixel_y = 17
+	},
+/turf/open/floor/hay,
 /area/indoors/bandit_lair)
 "Ph" = (
 /turf/open/floor/cobblerock,
@@ -6850,6 +7435,14 @@
 /obj/item/clothing/neck/bevor,
 /turf/open/floor/carpet,
 /area/indoors)
+"Pp" = (
+/obj/structure/table/wood{
+	dir = 9;
+	icon_state = "largetable"
+	},
+/obj/item/reagent_containers/glass/cup,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "Pq" = (
 /obj/structure/door{
 	lockid = "mansionvampire"
@@ -6866,6 +7459,14 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"PE" = (
+/obj/machinery/light/fueled/torchholder/c,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
+"PI" = (
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "PJ" = (
 /obj/item/natural/rock,
 /turf/open/floor/grass/red,
@@ -6877,6 +7478,9 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
 /area/indoors/vampire_manor)
+"PM" = (
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
 "PN" = (
 /obj/structure/fluff/railing/wood,
 /obj/machinery/light/fueled/torchholder/hotspring{
@@ -6885,6 +7489,13 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"PP" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/bandit{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "PT" = (
 /obj/structure/table/wood/fancy/red,
 /obj/item/clothing/armor/chainmail/iron/orc,
@@ -6905,6 +7516,12 @@
 /obj/structure/fermentation_keg,
 /turf/open/floor/tile,
 /area/indoors/vampire_manor)
+"PW" = (
+/obj/effect/decal/cobbleedge{
+	dir = 9
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "PY" = (
 /turf/open/floor/naturalstone,
 /area/broodmother_den)
@@ -6949,6 +7566,13 @@
 	},
 /turf/open/floor/dirt,
 /area/indoors/vampire_manor)
+"Qo" = (
+/obj/structure/chair/stool,
+/obj/effect/landmark/start/bandit{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "Qp" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/carafe/silver/redwine{
@@ -6976,21 +7600,10 @@
 	},
 /turf/open/floor/church,
 /area/indoors/lich)
-"Qv" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/reagent_containers/food/snacks/produce/dry_westleach{
-	pixel_x = 4;
-	pixel_y = 6
-	},
-/obj/item/reagent_containers/food/snacks/produce/dry_westleach{
-	pixel_x = 7;
-	pixel_y = 7
-	},
-/obj/item/clothing/face/cigarette/pipe{
-	pixel_x = -5;
-	pixel_y = 10
-	},
-/turf/open/floor/ruinedwood/turned/darker,
+"Qw" = (
+/obj/machinery/light/fueled/firebowl/standing,
+/obj/effect/decal/cleanable/debris/wood,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/bandit_lair)
 "Qx" = (
 /obj/structure/stairs{
@@ -7015,13 +7628,6 @@
 /obj/structure/fermentation_keg/beer,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/lich)
-"QG" = (
-/obj/structure/rack,
-/obj/item/weapon/hoe/stone,
-/obj/item/weapon/thresher,
-/obj/machinery/light/fueled/torchholder/r,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "QK" = (
 /obj/structure/fluff/railing/border{
 	layer = 2
@@ -7036,24 +7642,23 @@
 	},
 /turf/open/floor/church,
 /area/indoors/lich)
-"QN" = (
-/obj/structure/door/iron/bars{
-	lockid = "banditcamp"
-	},
-/obj/effect/mapping_helpers/access/locker,
+"QM" = (
+/obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/dirt,
-/area/indoors/bandit_lair)
+/area/outdoors/woods_safe)
 "QO" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
 	},
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/vampire_manor)
-"QR" = (
-/obj/structure/rack,
-/obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/bow/cross,
-/turf/open/floor/ruinedwood/darker,
+"QQ" = (
+/obj/structure/table/wood{
+	dir = 1;
+	icon_state = "largetable"
+	},
+/obj/item/reagent_containers/food/snacks/bread,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/bandit_lair)
 "QS" = (
 /obj/effect/decal/cobbleedge,
@@ -7076,10 +7681,6 @@
 	},
 /turf/open/floor/plasteel/maniac/damaged,
 /area)
-"QZ" = (
-/obj/structure/table/wood/plain_alt,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "Rb" = (
 /obj/structure/chair/stool,
 /obj/effect/landmark/admin,
@@ -7102,6 +7703,10 @@
 /obj/item/weapon/knife/hunting,
 /turf/open/floor/cobble,
 /area/indoors)
+"Re" = (
+/obj/structure/flora/tree/dying_bush,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "Rh" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -7148,6 +7753,13 @@
 	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/lich)
+"Rp" = (
+/obj/structure/fluff/railing/wood{
+	dir = 1;
+	pixel_y = -1
+	},
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
 "Rr" = (
 /obj/structure/chair/wood/alt{
 	dir = 4
@@ -7158,9 +7770,10 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/herringbone,
 /area/overlord_lair)
-"Rw" = (
-/obj/structure/window/solid,
-/turf/open/floor/wood,
+"Ru" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/structure/fermentation_keg/random/water,
+/turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/bandit_lair)
 "RA" = (
 /obj/structure/table/wood/reinforced,
@@ -7207,10 +7820,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile,
 /area/indoors/vampire_manor)
-"RD" = (
-/obj/item/natural/stone,
-/turf/open/floor/dirt/road,
-/area/outdoors/woods_safe)
 "RE" = (
 /obj/structure/chair/bench/ancientlog,
 /turf/open/floor/dirt,
@@ -7243,6 +7852,9 @@
 /obj/structure/table/wood/fancy/royalblue,
 /turf/open/floor/carpet,
 /area/indoors)
+"RO" = (
+/turf/closed/mineral/bedrock/cold,
+/area/outdoors/woods_safe)
 "RP" = (
 /obj/structure/table/wood/large/corner_blue{
 	dir = 9
@@ -7263,6 +7875,19 @@
 /obj/structure/fluff/statue/gargoyle/moss/candles,
 /turf/open/floor/churchrough,
 /area/indoors/lich)
+"RS" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = 9;
+	pixel_x = 9
+	},
+/obj/item/kitchen/rollingpin,
+/obj/item/reagent_containers/powder/flour{
+	pixel_y = 0;
+	pixel_x = 9
+	},
+/turf/open/floor/hexstone,
+/area/indoors/bandit_lair)
 "RT" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 6;
@@ -7297,10 +7922,6 @@
 	},
 /turf/open/floor/carpet/lord/right,
 /area/indoors/lich)
-"Se" = (
-/obj/machinery/light/fueled/smelter,
-/turf/open/floor/cobble,
-/area/indoors/bandit_lair)
 "Sg" = (
 /obj/structure/flora/grass/water,
 /obj/structure/fluff/railing/border{
@@ -7333,6 +7954,11 @@
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
+"So" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty,
+/turf/open/floor/wood,
+/area/indoors/bandit_lair)
 "Sp" = (
 /obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/shoes/boots/darkboots,
@@ -7433,6 +8059,10 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/church,
 /area/indoors/lich)
+"SE" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/dirt,
+/area/indoors/bandit_lair)
 "SG" = (
 /turf/open/floor/churchmarble,
 /area/indoors/lich)
@@ -7506,6 +8136,19 @@
 /obj/structure/fluff/statue/pillar,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/bog/inhumen_camp)
+"SV" = (
+/obj/effect/spawner/map_spawner/grass_low,
+/obj/structure/flora/tree/dying_bush,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
+"SY" = (
+/turf/closed/wall/mineral/baddaub,
+/area/indoors/bandit_lair)
+"Tc" = (
+/obj/structure/fluff/walldeco/chains,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/dirt,
+/area/indoors/bandit_lair)
 "Te" = (
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
@@ -7519,6 +8162,11 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/bog/inhumen_camp)
+"Ti" = (
+/obj/effect/spawner/map_spawner/grass_low,
+/obj/structure/flora/tree/dying_bush,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "Tk" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/storage/backpack/satchel,
@@ -7542,6 +8190,15 @@
 /obj/structure/chair/bench,
 /turf/open/floor/cobblerock,
 /area/outdoors/woods_safe)
+"Tp" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/weapon/shield/wood,
+/obj/item/weapon/shield/wood,
+/obj/effect/decal/cleanable/dirt/cobweb{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/bandit_lair)
 "Tv" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/cobblerock,
@@ -7571,6 +8228,11 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors)
+"TA" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "TB" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate,
@@ -7601,17 +8263,6 @@
 "TC" = (
 /turf/open/floor/grass/mixyel,
 /area/outdoors/bog/inhumen_camp)
-"TD" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/paper/scroll{
-	pixel_y = 11
-	},
-/obj/item/natural/feather{
-	pixel_x = -3;
-	pixel_y = 5
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "TE" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /obj/structure/table/wood/nice/decorated,
@@ -7636,6 +8287,10 @@
 /obj/item/weapon/flail,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
+"TL" = (
+/obj/structure/fluff/railing/tall/palisade,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "TM" = (
 /obj/structure/rotation_piece,
 /turf/open/floor/blocks,
@@ -7693,32 +8348,29 @@
 	dir = 4
 	},
 /area/indoors/lich)
-"TZ" = (
-/obj/structure/door/red{
-	lockid = "banditcamp"
+"TY" = (
+/obj/item/cooking/pan,
+/obj/item/reagent_containers/glass/bucket/pot{
+	pixel_y = 7
 	},
-/turf/open/floor/ruinedwood/darker,
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/hexstone,
 /area/indoors/bandit_lair)
 "Uc" = (
 /turf/open/openspace,
 /area/broodmother_den)
+"Ug" = (
+/obj/structure/window/solid,
+/obj/structure/curtain/bounty,
+/obj/structure/barricade/wooden/crude,
+/turf/open/floor/wood,
+/area/indoors/bandit_lair)
 "Uj" = (
 /turf/closed/wall/mineral/decostone/center,
 /area/indoors/lich)
-"Un" = (
-/obj/structure/table/wood{
-	dir = 6;
-	icon_state = "largetable"
-	},
-/obj/item/reagent_containers/food/snacks/meat/mince/fish{
-	pixel_y = 12;
-	pixel_x = 8
-	},
-/obj/item/reagent_containers/food/snacks/meat/mince/fish{
-	pixel_y = 3;
-	pixel_x = -12
-	},
-/obj/machinery/light/fueled/oven/south,
+"Uo" = (
+/obj/effect/decal/cleanable/blood/tracks,
+/obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/indoors/bandit_lair)
 "Up" = (
@@ -7764,27 +8416,17 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"UB" = (
-/obj/structure/table/wood/plain_alt,
-/obj/structure/fluff/walldeco/maidendrape,
-/obj/item/ingot/bloodsteel{
-	pixel_y = 10;
-	pixel_x = -4
-	},
-/obj/item/ingot/bloodsteel{
-	pixel_y = 5
-	},
-/obj/item/ingot/bloodsteel{
-	pixel_x = 4
-	},
-/turf/open/floor/hexstone,
-/area/indoors/vampire_manor)
 "UF" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 8
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/lich)
+"UH" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass/thorn_bush,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
 "UI" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/herringbone,
@@ -7808,6 +8450,17 @@
 	},
 /turf/open/floor/carpet,
 /area/indoors/vampire_manor)
+"UP" = (
+/obj/structure/flora/grass/thorn_bush,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
+"US" = (
+/obj/structure/chair/wood/alt{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "UU" = (
 /obj/item/clothing/shirt/dress/silkdress/colored/silkdressprimary,
 /obj/item/clothing/shoes/shortboots,
@@ -7869,14 +8522,6 @@
 /obj/structure/flora/ausbushes/lavendergrass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
-"Ve" = (
-/obj/structure/table/wood{
-	dir = 1;
-	icon_state = "largetable_mid"
-	},
-/obj/item/candle/skull/lit,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "Vh" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /obj/structure/flora/grass/herb/symphitum,
@@ -7894,10 +8539,9 @@
 /obj/item/reagent_containers/glass/cup/silver,
 /turf/open/floor/dirt/road,
 /area/indoors)
-"Vl" = (
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/blood/gibs,
-/turf/open/floor/cobble,
+"Vm" = (
+/obj/structure/fake_machine/scomm/l,
+/turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/bandit_lair)
 "Vq" = (
 /obj/effect/decal/cobbleedge{
@@ -7922,12 +8566,6 @@
 	},
 /turf/open/floor/carpet,
 /area/indoors/vampire_manor)
-"Vw" = (
-/obj/structure/fluff/railing/tall/palisade{
-	dir = 1
-	},
-/turf/open/floor/grass,
-/area/outdoors/woods_safe)
 "Vx" = (
 /obj/effect/decal/borderfall{
 	dir = 4
@@ -7948,6 +8586,10 @@
 "Vz" = (
 /turf/closed/splashscreen,
 /area/start)
+"VA" = (
+/obj/structure/flora/newtree,
+/turf/open/floor/grass,
+/area/outdoors/woods_safe)
 "VB" = (
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
@@ -7958,6 +8600,21 @@
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
+"VE" = (
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/steak,
+/obj/item/reagent_containers/food/snacks/meat/salami,
+/obj/structure/closet/crate/chest{
+	base_icon_state = "woodchestalt";
+	icon_state = "woodchestalt";
+	name = "meat chest"
+	},
+/obj/item/reagent_containers/food/snacks/butter,
+/obj/item/reagent_containers/food/snacks/cheese,
+/obj/item/reagent_containers/food/snacks/cheese,
+/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet,
+/turf/open/floor/tile/kitchen,
+/area/indoors/bandit_lair)
 "VF" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/coin/gold/pile,
@@ -7984,6 +8641,14 @@
 /obj/item/clothing/armor/amazon_chainkini,
 /turf/open/floor/carpet,
 /area/indoors)
+"VL" = (
+/obj/effect/decal/cobbleedge,
+/turf/open/floor/dirt/road,
+/area/outdoors/woods_safe)
+"VM" = (
+/obj/item/natural/stone,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "VO" = (
 /obj/structure/kneestingers,
 /obj/structure/fluff/railing/border{
@@ -7991,6 +8656,16 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/bog/inhumen_camp)
+"VP" = (
+/obj/structure/table/wood{
+	dir = 6;
+	icon_state = "largetable"
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_y = 2
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "VQ" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/contraption{
@@ -8000,6 +8675,10 @@
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/hexstone,
 /area/indoors/vampire_manor)
+"VT" = (
+/obj/structure/flora/tree/dying_bush,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "VW" = (
 /obj/structure/fluff/wallclock/r,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -8014,6 +8693,10 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/volcanic,
 /area/under/cavelava/acid)
+"Wa" = (
+/obj/structure/well,
+/turf/open/floor/cobble,
+/area/outdoors/woods_safe)
 "Wc" = (
 /obj/item/clothing/shirt/dress/silkdress/colored/black,
 /obj/item/clothing/shoes/shortboots,
@@ -8056,6 +8739,11 @@
 	},
 /turf/open/floor/naturalstone,
 /area/broodmother_den)
+"Wi" = (
+/obj/structure/flora/grass,
+/obj/structure/flora/grass/bush,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "Wj" = (
 /turf/open/floor/blocks,
 /area/indoors)
@@ -8113,43 +8801,12 @@
 /obj/structure/flora/grass/bush_meagre/yellow,
 /turf/open/floor/grass/yel,
 /area/outdoors/bog/inhumen_camp)
-"WB" = (
-/obj/structure/table/wood{
-	icon_state = "largetable";
-	dir = 10
-	},
-/obj/item/reagent_containers/food/snacks/veg/turnip_sliced{
-	pixel_y = 2;
-	pixel_x = -2
-	},
-/obj/item/reagent_containers/food/snacks/badrecipe{
-	pixel_y = 10;
-	pixel_x = 9
-	},
-/turf/open/floor/cobble,
-/area/indoors/bandit_lair)
 "WC" = (
 /turf/open/water/ocean,
 /area/outdoors/woods_safe)
-"WE" = (
-/obj/item/paper{
-	info = "I've had enough of you cacks, so long, I left the tools and the forge, I dont care what you lot do with it, just dont try and hunt me down.      - Stonehead";
-	name = "shit stained parchment"
-	},
-/turf/open/floor/twig,
-/area/indoors/bandit_lair)
-"WF" = (
-/obj/structure/roguetent,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/twig,
-/area/indoors/bandit_lair)
 "WG" = (
 /turf/closed/wall/mineral/decostone/long,
 /area/indoors/lich)
-"WI" = (
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/dirt/road,
-/area/indoors/bandit_lair)
 "WL" = (
 /obj/structure/mannequin/male,
 /obj/item/clothing/head/priestmask,
@@ -8201,13 +8858,6 @@
 /obj/item/weapon/sword/long/rider,
 /turf/open/floor/cobble,
 /area/indoors)
-"Xk" = (
-/obj/structure/closet/crate/chest/old_crate,
-/obj/item/ore/coal,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/turf/open/floor/dirt/road,
-/area/indoors/bandit_lair)
 "Xl" = (
 /obj/effect/lily_petal/two,
 /turf/open/water/hotspring,
@@ -8226,13 +8876,17 @@
 /obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/carpet,
 /area/indoors)
-"Xp" = (
-/obj/structure/table/wood{
-	dir = 5;
-	icon_state = "largetable"
-	},
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
+"Xo" = (
+/obj/structure/flora/newtree,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
+"Xs" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
+"Xt" = (
+/turf/closed/mineral/bedrock/warm,
+/area/outdoors/woods_safe)
 "Xv" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/carpet,
@@ -8298,6 +8952,15 @@
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
+"XO" = (
+/obj/structure/table/wood/smooth,
+/obj/item/storage/belt/pouch{
+	pixel_x = 9;
+	pixel_y = 7
+	},
+/obj/item/rope/net,
+/turf/open/floor/ruinedwood/turned/darker,
+/area/indoors/bandit_lair)
 "XQ" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/chest/wicker,
@@ -8370,6 +9033,10 @@
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/herringbone,
 /area/indoors/vampire_manor)
+"Yl" = (
+/obj/structure/flora/tree/dying_bush,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "Ym" = (
 /obj/effect/landmark/start/vampirelord,
 /turf/open/floor/carpet,
@@ -8378,40 +9045,6 @@
 /obj/structure/flora/ausbushes/reedbush,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/inhumen_camp)
-"Yq" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/reagent_containers/glass/bowl{
-	pixel_y = -6
-	},
-/obj/item/reagent_containers/glass/bowl{
-	pixel_y = -6
-	},
-/obj/item/reagent_containers/glass/bowl{
-	pixel_y = -6
-	},
-/obj/item/reagent_containers/glass/bowl{
-	pixel_y = -6
-	},
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_y = 2
-	},
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_y = 2
-	},
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_y = 2
-	},
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_y = 2
-	},
-/obj/item/plate,
-/obj/item/plate,
-/obj/item/plate,
-/obj/item/plate,
-/obj/item/plate,
-/obj/item/plate,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "Ys" = (
 /obj/structure/bed/shit,
 /turf/open/floor/dirt,
@@ -8435,6 +9068,12 @@
 /obj/item/clothing/armor/plate/orc/warlord,
 /turf/open/floor/carpet,
 /area/indoors)
+"Yy" = (
+/obj/effect/decal/cobbleedge{
+	dir = 5
+	},
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "YB" = (
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/grass/red,
@@ -8455,6 +9094,10 @@
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/dirt,
 /area/indoors/lich)
+"YG" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
 "YH" = (
 /obj/structure/table/wood/reinforced,
 /turf/open/floor/woodturned,
@@ -8502,6 +9145,17 @@
 /obj/item/plate,
 /turf/open/floor/carpet/lord/right,
 /area/indoors/lich)
+"YO" = (
+/obj/effect/spawner/map_spawner/grass_low,
+/obj/structure/flora/newtree,
+/turf/open/floor/dirt,
+/area/outdoors/woods_safe)
+"YP" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/ammo_holder/quiver/bolts,
+/obj/item/gun/ballistic/bow/cross,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/bandit_lair)
 "YS" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -8529,10 +9183,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/bog/inhumen_camp)
-"YW" = (
-/obj/machinery/light/fueled/torchholder/c,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "YX" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/armor/medium/scale,
@@ -8546,6 +9196,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"Za" = (
+/obj/structure/grindwheel,
+/turf/open/floor/twig,
+/area/indoors/bandit_lair)
 "Zb" = (
 /obj/structure/fluff/statue/shisha{
 	pixel_x = -24;
@@ -8575,11 +9229,6 @@
 /obj/effect/falling_sakura,
 /turf/open/floor/dirt/road,
 /area/outdoors)
-"Zh" = (
-/obj/structure/rack,
-/obj/item/weapon/sword/short,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/bandit_lair)
 "Zi" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/bush/wall/tall/bog,
@@ -8595,13 +9244,29 @@
 "Zm" = (
 /turf/closed/basic,
 /area)
+"Zo" = (
+/obj/structure/mirror,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/bandit_lair)
+"Zp" = (
+/turf/open/floor/cobblerock,
+/area/indoors/bandit_lair)
 "Zq" = (
 /obj/structure/roguetent/preopen,
 /turf/open/floor/dirt,
 /area/indoors/lich)
+"Zs" = (
+/obj/structure/flora/tree/burnt,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "Zt" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/inhumen_camp)
+"Zw" = (
+/obj/machinery/light/fueled/firebowl/stump,
+/obj/structure/flora/grass,
+/turf/open/floor/grass/mixyel,
+/area/outdoors/woods_safe)
 "Zx" = (
 /obj/item/reagent_containers/glass/bottle/redwine{
 	pixel_x = -8;
@@ -8617,10 +9282,6 @@
 /area/indoors/lich)
 "Zz" = (
 /turf/open/floor/grass/red,
-/area/outdoors/woods_safe)
-"ZA" = (
-/obj/structure/flora/tree,
-/turf/open/floor/grass,
 /area/outdoors/woods_safe)
 "ZG" = (
 /obj/machinery/light/fueled/torchholder/r,
@@ -8662,11 +9323,6 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/church,
 /area/indoors/lich)
-"ZV" = (
-/obj/structure/closet/crate/chest/neu,
-/obj/item/reagent_containers/powder/spice,
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/bandit_lair)
 "ZW" = (
 /turf/open/floor/church,
 /area/indoors/lich)
@@ -8800,17 +9456,17 @@ Iw
 Iw
 Iw
 Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+Xt
+Xt
+Xt
+Xt
+Xt
+Xt
+Xt
+Xt
+Xt
+Xt
+Xt
 BY
 "}
 (2,1,1) = {"
@@ -8880,57 +9536,57 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
 kY
 WC
 WC
@@ -8940,7 +9596,7 @@ eu
 eu
 WC
 WC
-Sy
+FC
 Iw
 "}
 (3,1,1) = {"
@@ -9010,57 +9666,57 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
+FC
+FC
+FC
+FC
+FC
+Li
+FC
 xt
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
+Yl
+Oz
+FC
+FC
+FC
+FC
+xt
+Yl
+kA
+SV
 Te
-ge
-Te
-Sy
-Sy
-Sy
-Sy
+FC
+FC
+FC
+FC
 so
 so
-so
-Sy
-Te
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+kA
+kA
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 WC
 WC
 SJ
@@ -9070,7 +9726,7 @@ Qy
 eu
 eu
 WC
-Sy
+FC
 Iw
 "}
 (4,1,1) = {"
@@ -9140,57 +9796,57 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
-Sy
-bz
-so
+FC
+FC
+FC
+FC
+Te
+kA
+kA
+kA
 Te
 Te
 Te
 Te
-Te
-Te
-so
-so
-so
+kA
+kA
+kA
 Te
 Te
 ge
 ge
 ge
 ge
-Te
-Te
-Te
-Sy
+Xo
+Xo
+Xo
+FC
 so
-so
-Te
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+kA
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 WC
 WC
 eu
@@ -9200,7 +9856,7 @@ Qy
 eu
 ai
 HO
-Sy
+FC
 Iw
 "}
 (5,1,1) = {"
@@ -9270,58 +9926,58 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
-Sy
-so
-so
+FC
+FC
+FC
+xt
+UP
+kA
 Te
-Te
+VT
 cw
 Sq
 Sq
 Sq
-Rw
+uu
 Sq
 Sq
 Sq
 Sq
 cw
 Sq
-Rw
+uu
 Sq
 cw
-Te
+Xo
 ge
 ge
 ge
+Xo
+Xo
+Xo
+Xo
+Xo
+YO
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 Te
-Te
-Te
-Te
-bz
-ge
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
 TU
 eu
 eu
@@ -9330,7 +9986,7 @@ Qy
 eu
 eu
 eu
-Sy
+FC
 Iw
 "}
 (6,1,1) = {"
@@ -9400,58 +10056,58 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
+FC
+FC
+FC
 Te
 Te
 Te
 so
 Te
 Sq
-Qv
-fL
-Ih
-Ih
-yv
-ro
-ZV
-lV
+tJ
+Lb
+ig
+PI
+Xe
+Vm
+PI
+Qw
 Sq
-Al
-oI
-mv
+rF
+ok
+rF
 Sq
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Te
-bz
-ge
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+Xo
+Xo
+YO
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 so
 eu
 eu
@@ -9459,8 +10115,8 @@ Qy
 Qy
 eu
 eu
-bz
-Sy
+xt
+FC
 Iw
 "}
 (7,1,1) = {"
@@ -9530,68 +10186,68 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Te
+FC
+FC
+cc
 Te
 cw
+lW
 Sq
-Sq
-Sq
+Lr
 cw
-TD
+hk
+US
 Xe
-Xe
-Xe
-Xe
-Xe
-Xe
-oI
-IJ
-Xe
-oI
-mv
+ok
+ok
+yc
+yc
+ok
+kd
+ok
+us
+DC
 Sq
-Sy
-Sy
+FC
+FC
 zf
-Sy
-Sy
-Sy
-Sy
-so
-so
-ge
-ge
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-eu
+FC
+FC
+FC
+FC
+VA
+VA
+YO
+YO
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+ea
 eu
 Qy
 Qy
+ea
 eu
-eu
-bz
-Sy
-Iw
+Xo
+FC
+sC
 "}
 (8,1,1) = {"
 yF
@@ -9660,68 +10316,68 @@ rN
 Zm
 Zm
 Iw
-Sy
-Sy
-so
+FC
+FC
+Yl
 Te
 Sq
-tW
-hm
+uo
+Dz
 CX
 Sq
-dl
+qW
 Xe
 Xe
-Xe
-ns
-ns
-ns
-oI
+PP
+oi
+oi
+oi
+us
 Sq
-YW
-oI
-mv
+PE
+us
+Kp
 Sq
 vL
 xt
 gd
-xt
-Sn
-Sy
-bz
-bz
+VT
+NU
+Te
+Xo
+Xo
+VA
+YO
+YO
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 so
-ge
-ge
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
 Te
 Te
-bz
-so
-Te
-Te
-bz
-bz
-bz
+Xo
+Xo
+Xo
 Te
 eu
 Qy
 eu
 eu
 eu
-bz
-Sy
-Iw
+Xo
+FC
+sC
 "}
 (9,1,1) = {"
 yF
@@ -9790,59 +10446,59 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-so
+FC
+FC
+UP
 Te
-Rw
-qm
+lW
+RS
 Dz
 Dz
-IJ
+pV
 Xe
 Xe
 MF
-Xe
-nj
-vt
-do
-oI
+Pp
+Ce
+eI
+rE
+us
 Sq
-Xe
-Xe
-Fl
+gf
+ok
+tU
 Sq
 xt
-mK
+HA
 xt
 xt
-Sn
+NU
 so
-Sy
-bz
-bz
-so
-ge
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-ge
-ge
-ge
+xt
+Xo
+Xo
+VA
+YO
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+YO
+YO
+YO
+Xo
 Te
-bz
-so
+Zs
 Te
 Te
+xd
 Te
-bz
 JZ
 Te
 Te
@@ -9851,7 +10507,7 @@ eu
 Te
 Te
 Hp
-Iw
+sC
 "}
 (10,1,1) = {"
 yF
@@ -9920,60 +10576,60 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
+FC
+FC
+FC
 Te
 Sq
-Pc
+DK
+oc
 Dz
-kC
-Rw
-Xe
-Xe
-Xe
-Xe
-sN
-Ve
-qZ
-oI
 Sq
-jW
-QZ
-jW
+Xe
+Xe
+Xe
+QQ
+sq
+kK
+rC
+us
+Sq
+rF
+ok
+rF
 Sq
 Ok
 gd
 UX
 xt
-Sn
-so
-Sy
-bz
-bz
-bz
+NU
+kA
+Re
 Te
-Te
-bz
-bz
-bz
-bz
-bz
-bz
-Te
-bz
-Te
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+YO
+Xo
+YO
+YO
+kA
+kA
+Yl
 ge
 Te
-ge
-ge
-so
-so
-so
-ge
 Te
-Te
-so
+rX
 so
 xt
 Te
@@ -9981,7 +10637,7 @@ Te
 Te
 Te
 Hp
-Iw
+sC
 "}
 (11,1,1) = {"
 yF
@@ -10050,23 +10706,23 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
+FC
+FC
+Li
 so
-Rw
-WB
+Lr
+MR
 Dz
-DB
+CX
 Sq
+wG
 Xe
 Xe
-Xe
-Xe
-Xp
-bj
-gm
-oI
+le
+fG
+im
+VP
+ok
 cw
 Sq
 Sq
@@ -10076,30 +10732,30 @@ Sq
 Sq
 cw
 xt
-Sn
-so
-so
-Sy
-bz
-bz
+NU
+kA
+kA
 Te
 Te
-bz
-bz
-Kn
-so
+Xo
+Xo
+Xo
+Xo
+Xo
+sJ
+VA
+Xo
+Xo
+Xo
+YO
+YO
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 Te
-bz
-Te
-ge
-ge
-Te
-Te
-bz
-bz
-bz
-bz
-bz
 ge
 ge
 ge
@@ -10111,7 +10767,7 @@ Te
 ge
 Te
 jX
-Iw
+sC
 "}
 (12,1,1) = {"
 yF
@@ -10180,59 +10836,59 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
+FC
+FC
+FC
 Te
 Sq
-Un
+xE
 Dz
-CO
+hm
 Sq
-Xe
-Xe
-Xe
-Xe
-la
-la
-la
-oI
+Ow
+ig
+PI
+Qo
+mP
+mP
+mP
+us
 Sq
-Zh
-In
-QR
-NG
-yo
-yq
+Nk
+MO
+ic
+Ru
+jV
+jy
 Sq
+ju
+NU
+Re
+kA
 xt
-Sn
 xt
-so
-xt
-Sy
-Sy
-bz
+Te
+VT
+Te
+Xo
+VA
+VA
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Te
+bB
 Te
 Te
-so
-so
-Te
-Te
-Te
-bz
-Te
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Te
-Te
-bz
 Te
 Te
 xt
@@ -10241,7 +10897,7 @@ Te
 ge
 kt
 Ia
-Iw
+sC
 "}
 (13,1,1) = {"
 yF
@@ -10310,68 +10966,68 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
+FC
+FC
+FC
 Te
-cw
-Rw
-TZ
-Rw
-cw
-Xe
-Xe
-Xe
-Xe
-Xe
-Xe
-Xe
-oI
-gJ
-Xe
-Xe
-Xe
-Xe
-Xe
-Xe
+lW
+TY
+jm
+tp
 Sq
-xt
-xt
-Jo
+Gn
+ig
+Xe
+us
+ok
+ok
+us
+us
+rW
+us
+us
+FL
+FL
+FL
+FL
+Sq
+ju
+ju
+De
 Oc
 FR
 so
 xt
-Sy
-Lj
-bz
-bz
-bz
-bz
-bz
+Te
+Bg
+Te
+Xo
+Xo
+Te
+Xo
+Xo
+Xo
+Te
+VT
+Te
+xd
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 Te
 Te
-Te
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Te
-xt
 xt
 so
 Te
 Te
 Ia
 Ia
-Iw
+sC
 "}
 (14,1,1) = {"
 yF
@@ -10440,67 +11096,67 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
+FC
+FC
+FC
 Te
-Vw
-so
-so
-Yv
 Sq
-Yq
-QG
-On
-fk
+gT
+Dz
+VE
+Sq
+ij
+iw
+XO
+mC
 VW
-AQ
+ig
 Sm
-oI
+ok
 Sq
-oI
-oI
-oI
-oI
-oI
-oI
-Rw
-xt
-Yv
-xt
+Zo
+FL
+FL
+FL
+FL
+ok
+Ug
+ju
+Zw
+ju
 Sn
 xt
-Kn
-Kn
-so
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-ge
-ge
-Sy
-Sy
-Sy
-Sy
+oh
+ju
+kA
+QM
+kA
+QM
+Te
+Te
+kA
+Te
+fn
+Te
+Te
+Te
+Te
+Te
+YO
+YO
+FC
 xt
 xt
+xt
+Te
+Te
 xt
 xt
 MH
 Kn
+rX
 so
-so
-ZA
+VA
 Iw
 "}
 (15,1,1) = {"
@@ -10570,42 +11226,42 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
-ge
-Ey
-ge
-so
+FC
+FC
 Te
+ge
+cw
+wS
+IJ
+wS
 cw
 Sq
 Sq
 Sq
-Rw
+So
 Sq
 Sq
 Sq
-gJ
+sM
 cw
-yP
-Ch
-HH
-Hs
-nh
-Mc
+Tp
+OS
+OU
+KK
+me
+YP
 Sq
-RD
-xt
-xt
+Gi
+Lj
+Lj
 Sn
 xt
 xt
-so
-Kn
-Kn
-XS
-so
+EK
+ju
+ju
+KY
+kA
 FR
 Kn
 MD
@@ -10620,7 +11276,7 @@ xt
 xt
 xt
 so
-FR
+yi
 Kn
 so
 xt
@@ -10630,7 +11286,7 @@ so
 so
 so
 xt
-xt
+FC
 Iw
 "}
 (16,1,1) = {"
@@ -10700,23 +11356,23 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
+FC
+Te
+Te
 Te
 uF
+Lj
+xt
+xt
+Te
 FR
-Qy
-xt
-xt
 FR
 FR
-FR
-xt
-xt
-xt
-xt
-Qy
+Te
+Te
+Te
+uR
+Kr
 cw
 Sq
 Sq
@@ -10725,11 +11381,11 @@ Sq
 Sq
 Sq
 cw
-xt
-xt
-xt
+Lj
+Lj
+Lj
 Sn
-Qy
+Kr
 xt
 xt
 xt
@@ -10740,7 +11396,7 @@ xt
 xt
 xt
 xt
-xt
+Te
 xt
 xt
 xt
@@ -10830,36 +11486,36 @@ UN
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
+FC
+FC
+FC
 Te
 uF
-Qy
+Kr
 FR
-Qy
-Qy
-Qy
-Qy
-Qy
-gR
-Qy
-Qy
-Qy
-Qy
-Qy
+Kr
+bl
+Te
+Kr
+VL
+bl
+Kr
+xt
+Kr
+Kr
+gC
 xt
 xt
 xt
 FR
 FR
 xt
+uR
 xt
-xt
+PW
 Qy
-Qy
-LP
-Qy
+Nf
+Kr
 Qy
 xt
 xt
@@ -10870,8 +11526,8 @@ so
 FR
 FR
 so
-so
-Kn
+kA
+ju
 Kn
 so
 so
@@ -10960,36 +11616,36 @@ Zm
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
-Te
-yR
-yR
-yR
-gJ
-yR
-da
-da
-da
-yR
-We
+FC
+FC
 xt
+Te
+cw
+SY
+FM
+EY
+cw
+da
+da
+da
+cw
+We
+Te
+KF
+Kr
 Qy
+Kr
+Kr
+Kr
 Qy
-Qy
-Qy
-Qy
-Qy
-Qy
-Qy
-Qy
-Qy
-Qy
+Kr
+Kr
+qT
+Kr
 Qy
 xt
 Sn
-Qy
+Kr
 xt
 xt
 xt
@@ -10998,7 +11654,7 @@ xt
 xt
 xt
 xt
-xt
+Te
 xt
 xt
 xt
@@ -11090,34 +11746,34 @@ Zm
 Zm
 Zm
 Iw
-Sy
-Sy
-Sy
+FC
+FC
+FC
 Te
-yR
-pg
-fL
-Xe
-yR
-GX
-Vl
+FM
+sQ
+mq
+Hc
+SY
+Uo
+oQ
 QB
 mp
 tj
-xt
-xt
+ag
+ag
+Kr
 Qy
+Kr
+VL
+VL
+xt
+KF
+Kr
 Qy
+wl
 xt
-xt
-xt
-xt
-xt
-Qy
-xt
-xt
-xt
-xt
+Te
 Sn
 xt
 xt
@@ -11126,23 +11782,23 @@ xt
 so
 so
 FR
-so
-so
-so
+kA
+kA
+kA
 FR
 Ed
 xt
-so
-so
-Kn
-FR
-Te
+VA
+VA
+sJ
+OH
+Xo
 xt
-xt
 Te
+Xo
 XS
 so
-uy
+xt
 xt
 so
 xt
@@ -11150,7 +11806,7 @@ xt
 so
 so
 Dv
-xt
+FC
 Iw
 "}
 (20,1,1) = {"
@@ -11220,67 +11876,67 @@ Zm
 Zm
 Zm
 Iw
-Sy
-Sy
+FC
+FC
 so
 Te
-yR
-oI
-oI
-Xe
-yR
-Ev
-Jb
-dp
+SY
+DI
+Hc
+Hi
+FM
+Mk
+Tc
+SE
 mp
 xt
-xt
+Kr
+Kr
+Qy
+Kr
+rz
+Te
+Te
+Dm
 xt
 Qy
-Qy
+rz
 xt
-xt
-xt
-Lg
-xt
-Qy
-xt
-xt
-xt
-xt
-Sn
-xt
+Lj
+Lj
+NU
+Te
 FR
 xt
-Kn
-MD
+te
+LS
 xt
 so
-so
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
+kA
+xt
+Te
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+Xo
+Xo
 Te
 Te
 xt
-Sy
-Sy
-Sy
-Sy
+Xo
+xt
 xt
 so
 WX
 Wp
-xt
-xt
-xt
+Te
+FC
+FC
 Iw
 "}
 (21,1,1) = {"
@@ -11350,67 +12006,67 @@ AU
 Zm
 Zm
 Iw
-Sy
-Sy
-so
-so
-yR
-uU
-oI
-Xe
-yR
+FC
+FC
+kA
+UP
+FM
+Pa
+gp
+xb
+SY
 QB
 dp
 dp
-QN
+Ii
+Kr
+Kr
 Qy
-Qy
-Qy
-Qy
-Qy
+Kr
+Kr
+xt
+Te
+Te
+Te
+xt
+Kr
 xt
 xt
-xt
-xt
-xt
-Qy
-xt
-tS
-xt
-xt
-Sn
-FR
-so
-so
-Kn
-so
+Lj
+Lj
+NU
+Lj
+kA
+kA
+ju
+kA
 XS
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
 Te
 Te
-Sy
-Sy
-Sy
-Sy
-Sy
+Te
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Te
+Te
+Te
+Xo
+Xo
 xt
 so
 so
-xt
-xt
-Ed
-Sy
+Te
+FC
+FC
+FC
 Iw
 "}
 (22,1,1) = {"
@@ -11480,67 +12136,67 @@ AU
 Zm
 Zm
 Iw
-Sy
-Sy
-so
-Kn
-yR
-oI
-oI
-rl
-yR
+FC
+FC
+rh
+ju
+SY
+qP
+Mu
+Er
+FM
 Jb
-dp
+SE
 dp
 mp
-xt
-xt
-xt
-Qy
-Qy
-Qy
-xt
-FR
-FR
-xt
-Qy
-xt
-xt
-xt
-xt
-Sn
-xt
-so
-so
-Sy
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
 Te
+xt
+KF
+Kr
+Qy
+qT
+Te
+Lj
+Lj
+Qy
+Kr
+xt
+xt
+Lj
+ju
+TL
+Te
+kA
+GI
+xt
+Te
+Te
+Te
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 so
 Kn
 Mg
 Mg
-xt
-Sy
+Te
+Te
 so
 xt
 so
 so
-so
-so
-Sy
+VA
+VA
+FC
 Iw
 "}
 (23,1,1) = {"
@@ -11610,54 +12266,54 @@ AU
 Zm
 Zm
 Iw
-Sy
-Sy
-Kn
-Te
-yR
-vh
-Xe
-QZ
-yR
-JQ
+FC
+FC
+ju
+Xo
+SY
+zH
+zh
+HY
+SY
+ne
 Lp
 dp
 mp
-RD
+VM
 xt
 xt
+Kr
 Qy
-uL
-Qy
-xt
-yR
-Pf
-Hi
-Hi
-pu
-yR
-Yv
-xt
-Sn
+Kr
+Wa
+cw
+IL
+hM
+Zp
+Za
+cw
+Xs
+Ep
+TL
+Yl
 so
-so
 xt
-Sy
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+xt
+xd
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 Kn
 Te
-Te
+xd
 so
 so
 so
@@ -11668,9 +12324,9 @@ so
 xt
 xt
 so
-ge
-BM
-Sy
+YO
+JI
+FC
 Iw
 "}
 (24,1,1) = {"
@@ -11740,68 +12396,68 @@ AU
 Zm
 Zm
 Iw
-Sy
-Sy
-ge
-Te
-yR
-yR
-yR
-yR
-yR
+FC
+FC
+Xo
+Xo
+cw
+SY
+FM
+FM
+cw
 da
 da
 mp
-yR
-FR
+cw
+VT
 xt
+PW
+Kr
 Qy
 Qy
-Am
-Qy
+od
+OM
+PM
+Ev
+Zp
+PM
+iA
+Te
+kA
+TL
+rX
+kA
+rX
 xt
-GN
-Hi
-Hi
-Hi
-Hi
-WI
-xt
-xt
-Sn
-so
-so
-so
-Sy
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 so
 Te
 Te
-Te
+bB
 so
 yb
-so
-so
-so
-so
+kA
+kA
+Yl
+Oz
 Kn
 Kn
 xt
 Te
-xt
+FC
 iQ
 iQ
-Iw
+RO
 "}
 (25,1,1) = {"
 yF
@@ -11870,68 +12526,68 @@ AU
 Zm
 Zm
 Iw
-Sy
-Sy
-ge
+FC
+FC
+Xo
 Te
-FR
-FR
+Lj
+Kt
+Te
+Te
+YG
+Te
+Te
+VT
 xt
 xt
 xt
-xt
-FR
-FR
-xt
-xt
-xt
-Qy
-xt
-xt
-xt
-xt
+Kr
+Kr
+vU
+Yy
+Kr
 Ks
 Ev
-Ev
-Hi
-Hi
-WI
-xt
-xt
+Zp
+hM
+Aa
+iA
+Te
+rh
 Sn
-so
-Sy
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-Lj
+VA
+FC
+Xo
+Te
+Te
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+kN
 LU
 Te
+bB
 Te
-Te
 so
 so
-Mg
-Mg
-so
-bz
+hW
+hW
+kA
+Xo
 iQ
 Bp
 Te
 Te
 Te
-iQ
-iQ
-iQ
-Iw
+Nb
+OV
+OV
+RO
 "}
 (26,1,1) = {"
 yF
@@ -12000,68 +12656,68 @@ yF
 Zm
 Zm
 Iw
-Sy
-Sy
-ge
+FC
+Yl
+kA
 Te
 qs
 qs
 kM
-FR
-RD
-xt
-xt
-xt
-xt
+ju
+VM
+Te
+Te
+Te
+PW
+Kr
+Kr
 Qy
-Qy
-Qy
-xt
-xt
-xt
-FR
-yR
-Se
+Kr
+Te
+Te
+Kr
+cw
+CI
 Ev
-Hi
+Ev
 Ew
-yR
-xt
-xt
-Sn
+cw
+Wi
+TA
+TL
+VA
+FC
+Xo
+VT
+Te
+Xo
+Xo
+kA
 so
-Sy
-bz
-bz
-bz
-bz
-bz
+Xo
+Xo
+Xo
+Xo
+Xo
+Te
 so
-so
-bz
-bz
-bz
-bz
-bz
-bz
-so
-so
-so
-Mg
-Mg
-Mg
-so
-Mg
-bz
+kA
+kA
+hW
+hW
+Ti
+kA
+hW
+Xo
 iQ
 Te
 Te
 Te
 Ee
-iQ
-iQ
-iQ
-Iw
+pb
+OV
+OV
+RO
 "}
 (27,1,1) = {"
 yF
@@ -12130,68 +12786,68 @@ yF
 Zm
 Zm
 Iw
-Sy
-Sy
+FC
 Te
+qF
+Os
 qs
 qs
 qs
-qs
-FR
-FR
-xt
-xt
-xt
+Lj
+ju
+Te
+Te
+Te
+Kr
 Qy
-Qy
+Kr
 xt
 xt
-Yv
-FR
-FR
 xt
+Te
+Kr
 Ks
 Ev
 Ev
-Hi
+PM
 ht
 oV
-xt
-xt
-Sn
-so
-Sy
-bz
-bz
-bz
-so
-so
-Mg
-Mg
-so
-bz
-bz
-bz
-bz
-bz
-bz
+Lj
+Ep
+TL
+VA
+FC
 Te
+xd
 Te
 so
-Mg
 so
-so
-bz
-bz
+hW
+hW
+kA
+VT
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+kA
+hW
+VA
+VA
+Xo
+Xo
 iQ
 Ee
 Ee
 Ee
 Ee
-iQ
-iQ
-iQ
-Iw
+pb
+OV
+OV
+RO
 "}
 (28,1,1) = {"
 yF
@@ -12260,39 +12916,39 @@ yF
 Zm
 Zm
 Iw
-Sy
-Sy
+FC
+Te
 so
 qs
 qs
 mQ
+sU
 qs
 qs
-qs
-FR
+Te
+Kr
+Kr
+Kr
+Kr
 xt
 xt
-Qy
-xt
-xt
-xt
-FR
-xt
-Sy
-xt
-GN
-Hi
-Hi
-Hi
+Te
+Lj
+Lj
+Te
+Rp
+PM
+Aa
+Zp
 nN
 oV
-xt
-RD
-Sn
-xt
-Sy
-bz
-bz
+Lj
+Ik
+TL
+FC
+FC
+Xo
+Te
 so
 Te
 bz
@@ -12300,28 +12956,28 @@ xt
 BM
 Mg
 so
-bz
-bz
-bz
-bz
-Te
-Te
-Te
-bz
-Kq
-bz
-so
-bz
-iQ
-iQ
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+VA
+Xo
+OV
+OV
 Ee
 Ee
 Ee
 Ee
 Ee
-iQ
-iQ
-Iw
+pb
+OV
+RO
 "}
 (29,1,1) = {"
 yF
@@ -12390,8 +13046,8 @@ AU
 Zm
 Zm
 Iw
-Sy
-ge
+FC
+Te
 so
 qs
 qs
@@ -12399,50 +13055,50 @@ qs
 qs
 qs
 qs
-xt
-xt
+Kr
+Kr
 Qy
-Qy
-xt
-FR
-FR
-xt
-Sy
-Sy
-FR
-yR
-Xk
-Hi
-Hi
-hh
-yR
-xt
-BM
-AI
-xt
-Sy
-bz
-so
+Kr
+VL
+Te
+Wi
+Lj
+Bg
+Lj
+Te
+Jz
+td
+PM
+PM
+xk
+Jz
+Te
+vu
+FG
+FC
+FC
+Xo
+VA
 xt
 Te
 DO
 DO
 Te
 BM
+kA
+Yl
+Xo
+Xo
+Xo
+Xo
 so
-so
-bz
-bz
-Te
-Te
-so
-bz
-bz
-bz
-bz
-bz
-bz
-iQ
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+OV
 sY
 Ee
 Ee
@@ -12450,8 +13106,8 @@ Ee
 Ee
 Ee
 iJ
-iQ
-Iw
+OV
+RO
 "}
 (30,1,1) = {"
 yF
@@ -12520,39 +13176,39 @@ AU
 Zm
 Zm
 Iw
-Sy
-ge
+FC
+xd
 qs
 qs
 qs
 qs
 nG
-Qy
-Qy
-Qy
-Qy
-Qy
-xt
-FR
-BM
+Kr
+Kr
+Kr
 Te
-uy
-Sy
-uy
-FR
+Kr
+rz
+xt
+Te
+Lj
+Lj
+Lj
+Lj
+Lj
+Te
 xt
 xt
 xt
 xt
 xt
 xt
-xt
-BM
-Sn
-xt
-Sy
-bz
-so
+hW
+TL
+FC
+FC
+Xo
+kA
 xt
 DO
 DO
@@ -12560,19 +13216,19 @@ DO
 DO
 Te
 so
+Yl
 so
+Xo
+Xo
+Xo
 so
-Te
-Te
-Te
-so
-bz
-bz
-bz
-bz
-bz
-bz
-iQ
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+OV
 Ee
 Ee
 Ee
@@ -12580,8 +13236,8 @@ Ee
 Ee
 DO
 DO
-iQ
-Iw
+OV
+RO
 "}
 (31,1,1) = {"
 yF
@@ -12650,26 +13306,26 @@ AU
 AU
 Zm
 Iw
-Sy
+FC
 Bd
 qs
 qs
 mQ
 qs
 qs
+sU
 qs
-qs
-xt
-xt
-xt
-BM
-BM
-Sy
-Sy
-Sy
-uy
-uy
-xt
+Te
+Te
+Te
+Te
+Lj
+Lj
+Lj
+Ep
+ju
+Lj
+Lj
 xt
 xt
 xt
@@ -12677,12 +13333,12 @@ xt
 FR
 xt
 so
-BM
-Sn
-xt
-Sy
-so
-so
+hW
+TL
+FC
+FC
+VA
+kA
 Te
 DO
 DO
@@ -12690,19 +13346,19 @@ DO
 xt
 bz
 so
-so
+kA
 so
 Mg
-Te
+Xo
+VA
 so
-so
-bz
-bz
-bz
-bz
-bz
-bz
-iQ
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+OV
 iJ
 Ee
 Ee
@@ -12710,8 +13366,8 @@ Ee
 DO
 DO
 DO
-iQ
-Iw
+OV
+RO
 "}
 (32,1,1) = {"
 yF
@@ -12780,8 +13436,8 @@ nH
 AU
 AU
 Iw
-Sy
-so
+FC
+UP
 Te
 qs
 qs
@@ -12789,59 +13445,59 @@ qs
 qs
 qs
 FR
-FR
-xt
-FR
-BM
-xt
-Sy
-Sy
-Sy
-uy
-xt
-FR
-xt
-yR
-WF
-yR
+Lj
 Te
-Te
+Lj
+Bg
+ju
+ju
+Ep
+ju
+ju
+Ep
+ju
+yi
+cw
+jR
+cw
+Lj
+Lj
 Kn
-so
-Sn
-xt
-Sy
-so
+Yl
+TL
+FC
+FC
+VA
 so
 bz
 Te
 DO
 xt
 xt
+GI
 so
 so
-so
-bz
+Xo
 so
 Mg
 Mg
-so
-bz
-bz
-bz
-bz
-bz
-bz
-iQ
-iQ
+rX
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+OV
+OV
 Ee
 Ee
 Ee
 Ee
 DO
 DO
-iQ
-Iw
+OV
+RO
 "}
 (33,1,1) = {"
 yF
@@ -12910,59 +13566,59 @@ nH
 bp
 AU
 Iw
-Sy
-so
-ge
-ge
-ge
+FC
+Yl
+kA
 Te
 Te
+Te
+qF
 FR
-BM
-BM
-BM
-FR
-so
-so
-xt
-Sy
-Sy
-Sy
-BM
-xt
-FR
-js
-WE
-js
+Te
 Lj
-Te
-Kn
-so
-Sn
-Sy
-bz
-so
-so
-so
+Wi
+Lj
+Ep
+ju
+po
+Lj
+ii
+ju
+ii
+Ep
+ju
+oy
+qq
+oy
+Lj
+ju
+ju
+MG
+TL
+FC
+Xo
+VA
+kA
+kA
 xt
 Te
 Sy
 so
 so
 Te
-Te
+Xo
 ge
 Mg
 Mg
 so
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 zf
 Sj
 Kr
@@ -12970,8 +13626,8 @@ Ee
 Ee
 Ee
 DO
-iQ
-Iw
+OV
+RO
 "}
 (34,1,1) = {"
 yF
@@ -13040,59 +13696,59 @@ hN
 bp
 AU
 Iw
-Sy
-bz
-so
+FC
+wN
+kA
+kA
+VT
 Te
-ge
-ge
 Lj
 Lj
-kM
-FR
-BM
-so
-so
-BM
-FR
-so
-so
-so
+Bd
+Lj
+Lj
+aF
 Kn
-BM
-FR
-js
+UP
+AA
+aF
+ju
+BN
+fK
+ju
+UH
+oy
 EC
-js
+oy
 Te
-Lj
-bz
+GD
+Yl
+kA
+TL
+Xo
+Xo
+Xo
+VA
+kA
+VA
 so
-NU
-Te
-Te
-Te
+VA
 so
+Xo
+Xo
+Xo
+Xo
 so
-so
-so
-so
-so
-Te
-Te
-Te
-Te
-so
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
-bz
+cc
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
+Xo
 zf
 zf
 Kr
@@ -13100,8 +13756,8 @@ Kr
 Kr
 Ee
 sY
-iQ
-Iw
+OV
+RO
 "}
 (35,1,1) = {"
 yF
@@ -13170,60 +13826,60 @@ nH
 nH
 AU
 Iw
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
-Sy
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
+FC
 zf
 pz
 pz
@@ -13231,7 +13887,7 @@ pz
 pz
 zf
 zf
-Iw
+RO
 "}
 (36,1,1) = {"
 yF
@@ -13352,16 +14008,16 @@ Iw
 Iw
 Iw
 Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
-Iw
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
+RO
 "}
 (37,1,1) = {"
 yF
@@ -14485,7 +15141,7 @@ Zm
 Zm
 Iw
 yE
-UB
+yW
 Vu
 cV
 bP
@@ -17353,7 +18009,7 @@ Iw
 yE
 UO
 xI
-ME
+zk
 yE
 yE
 bV
