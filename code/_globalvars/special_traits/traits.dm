@@ -971,9 +971,10 @@
 	character.grant_language(/datum/language/sanguine)
 	character.adjust_technique_mastery_points(2)
 	character.adjust_form_mastery_points(3, specific_form = FORM_BLOOD)
-	ADD_TRAIT(character, TRAIT_BLOOD_MAGE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_BLOOD_STUDENT, BE_SPECIAL_TRAIT)
 	character.hud_used?.set_bloody_bloodpool()
 	character.adjust_bloodpool()
+	to_chat(character, span_bloody("I have available innate spellpoints."))
 
 /datum/special_trait/overcompensating
 	name = "Overcompensating"

@@ -115,6 +115,8 @@
 	<br>Heed them well for if your apprenticeship is revoked you will be marked, never able wield Blood Magic again.\
 	<br>It may be possible for you to break the chains of your apprenticeship with sufficient work and strength..."))
 
+	to_chat(apprentice, span_bloody("You have innate powers to unlock. Speak with your tutor for greater information."))
+
 	apprentice.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_student)
 
 	apprentice.add_spell(/datum/action/cooldown/spell/status/blood_sight, mastery_spell = TRUE)
