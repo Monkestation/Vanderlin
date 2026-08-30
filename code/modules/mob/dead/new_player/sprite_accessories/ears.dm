@@ -358,6 +358,20 @@
 	specuse = list(SPEC_ID_ELF, SPEC_ID_TIEFLING) //tiebs use these
 	color_key_defaults = list(KEY_SKIN_COLOR)
 
+/datum/sprite_accessory/ears/elfwww
+	icon = 'icons/roguetown/mob/bodies/attachments.dmi'
+	name = "ElfWWW"
+	icon_state = "elfwww"
+	specuse = list(SPEC_ID_ELF, SPEC_ID_TIEFLING) //tiebs use these
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
+/datum/sprite_accessory/ears/elfttw
+	icon = 'icons/roguetown/mob/bodies/attachments.dmi'
+	name = "ElfTTW"
+	icon_state = "elfttw"
+	specuse = list(SPEC_ID_ELF, SPEC_ID_TIEFLING) //tiebs use these
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
 /datum/sprite_accessory/ears/elfh //halfelfs are humens techincally
 	icon = 'icons/roguetown/mob/bodies/attachments.dmi'
 	name = "ElfH"
