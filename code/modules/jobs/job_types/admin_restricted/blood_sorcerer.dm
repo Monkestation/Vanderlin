@@ -30,6 +30,9 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/blood_sorcerer
 
+	antag_job = TRUE
+	antag_role = /datum/antagonist/blood_mage/sorcerer
+
 	magic_user = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = FALSE

@@ -2570,6 +2570,7 @@
 #include "code\modules\antagonists\villain\aspirant.dm"
 #include "code\modules\antagonists\villain\assassin.dm"
 #include "code\modules\antagonists\villain\bandit.dm"
+#include "code\modules\antagonists\villain\blood_mage.dm"
 #include "code\modules\antagonists\villain\choosename.dm"
 #include "code\modules\antagonists\villain\peasantrebel.dm"
 #include "code\modules\antagonists\villain\wretch.dm"

@@ -32,6 +32,9 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage
 
+	antag_job = TRUE
+	antag_role = /datum/antagonist/blood_mage
+
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_BLOOD_MAGE,

@@ -117,6 +117,7 @@
 
 	to_chat(apprentice, span_bloody("You have innate powers to unlock. Speak with your tutor for greater information."))
 
+	apprentice.mind.add_antag_datum(/datum/antagonist/blood_mage/student)
 	apprentice.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_student)
 
 	apprentice.add_spell(/datum/action/cooldown/spell/status/blood_sight, mastery_spell = TRUE)

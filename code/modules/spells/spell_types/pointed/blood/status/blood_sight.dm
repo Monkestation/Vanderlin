@@ -23,7 +23,7 @@
 	id = "blood_sight_buff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_sight
 	effectedstats = list(STAT_PERCEPTION = 2)
-	duration = 5 MINUTES
+	duration = 7.5 MINUTES
 
 /datum/status_effect/buff/blood_sight/on_apply()
 	. = ..()
