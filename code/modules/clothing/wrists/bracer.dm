@@ -181,7 +181,7 @@
 	armor_class = AC_LIGHT
 	armor_type = /datum/armor/wrist/maille/ironbriar
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	blocksound = PLATEHIT
 	resistance_flags = FIRE_PROOF
 	max_integrity = 400
