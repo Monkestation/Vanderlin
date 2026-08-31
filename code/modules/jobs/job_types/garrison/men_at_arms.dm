@@ -57,8 +57,9 @@
 	var/static/list/selectablehelmets = list(
 		"Royal Slitted Kettle Helmet" = /obj/item/clothing/head/helmet/kettle/slit/atarms,
 		"Slitted Kettle Helmet" = /obj/item/clothing/head/helmet/kettle/slit,
-		"Steel Sallet" = /obj/item/clothing/head/helmet/sallet,
 		"Kettle Helmet"	= /obj/item/clothing/head/helmet/kettle,
+		"Steel Sallet" = /obj/item/clothing/head/helmet/sallet,
+		"Nasal Helmet" = /obj/item/clothing/head/helmet/nasal,
 	)
 
 	spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = JOB_MAN_AT_ARMS)
