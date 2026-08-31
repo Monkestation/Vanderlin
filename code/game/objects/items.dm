@@ -300,6 +300,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	/// This thing can be used to unlock locks
 	var/can_unlock = TRUE
 
+	/// Required pickpocket skill (old style) to steal.
+	var/pickpocket_difficulty = NONE
+
 	///do we block the offhand while wielding
 	var/wield_block = TRUE
 	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works

@@ -133,7 +133,7 @@
 	armor_class = AC_LIGHT
 	armor_type = /datum/armor/neck/leather
 	body_parts_covered = NECK|HAIR|EARS|HEAD
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	prevent_crits = CUT_AND_MINOR_CRITS
 	item_weight = 850 GRAMS
 
@@ -162,7 +162,7 @@
 
 /obj/item/clothing/neck/coif/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/coif/cloth
 	name = "padded coif"
@@ -207,7 +207,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 
 	armor_type = /datum/armor/neck/leather
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 	item_weight = 275 GRAMS
 
@@ -229,7 +229,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 
 	armor_type = /datum/armor/neck/leather
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 
 /obj/item/clothing/neck/bellcollar/Initialize()
@@ -278,7 +278,7 @@
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/neck/maille
 	body_parts_covered = NECK|HAIR|EARS|HEAD
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
 	item_weight = 1 KILOGRAMS
@@ -310,7 +310,7 @@
 
 /obj/item/clothing/neck/chaincoif/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/chaincoif/iron
 	icon_state = "ichaincoif"
@@ -322,7 +322,7 @@
 	melt_amount = 100
 
 	armor_type = /datum/armor/neck/maille/iron
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/neck/gorget/copper
 	name = "neck protector"
@@ -332,7 +332,7 @@
 
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/neck/leather/good
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 
 
 //..................................................................................................................................
@@ -361,7 +361,7 @@
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/neck/plate
 	body_parts_covered = NECK|EARS|MOUTH|NOSE
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_STAB
 
 	material_category = ARMOR_MAT_PLATE
@@ -369,7 +369,7 @@
 
 /obj/item/clothing/neck/bevor/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/bevor/bronze
 	name = "bronze gorgette"
@@ -386,7 +386,7 @@
 	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/neck/gorget
 	name = "gorget"
@@ -406,7 +406,7 @@
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/neck/plate/bad
 	body_parts_covered = NECK
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_STAB
 
 	material_category = ARMOR_MAT_PLATE
@@ -414,7 +414,7 @@
 
 /obj/item/clothing/neck/gorget/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/gorget/blackmeadow
 	name = "blackmeadow gorget"
@@ -600,7 +600,7 @@
 	blocksound = CHAINHIT
 	smeltresult = null
 	clothing_flags = CANT_SLEEP_IN
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
 	material_category = ARMOR_MAT_CHAINMAIL
@@ -629,7 +629,7 @@
 
 /obj/item/clothing/neck/highcollier/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/highcollier/iron
 	name = "iron high collier"
@@ -637,7 +637,7 @@
 	icon_state = "ihigh_collier"
 	body_parts_covered = NECK|MOUTH
 	armor_type = /datum/armor/neck/maille/iron
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	smeltresult = /obj/item/ingot/iron
 	melt_amount = 100
 	melting_material = /datum/material/iron

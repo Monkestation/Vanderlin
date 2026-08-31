@@ -37,6 +37,7 @@ type SpellEntry = {
   canUnlearn: boolean;
   icon: string;
   iconState: string;
+  heretical: boolean;
 };
 
 type SpellBookData = {
@@ -129,7 +130,11 @@ const SpellCard = (props: {
           <SpellSprite icon={spell.icon} iconState={spell.iconState} />
         </Stack.Item>
         <Stack.Item grow>
-          <Box bold>{spell.name}</Box>
+          {spell.heretical ? (
+          <Box bold color="red">{spell.name} {spell.heretical && "(FORBIDDEN)"}</Box>
+          ) :
+          (<Box bold>{spell.name}</Box>
+          )}
           <Box color="label" fontSize="0.9em">
             {spell.desc}
           </Box>
@@ -429,7 +434,7 @@ export const SpellBook = () => {
   const [page, setPage] = useState<'learn' | 'stats'>('learn');
 
   return (
-    <Window width={780} height={640} title="Spellcraft">
+    <Window width={890} height={640} title="Spellcraft">
       <Window.Content scrollable={false}>
         <Stack vertical fill>
           <Stack.Item>

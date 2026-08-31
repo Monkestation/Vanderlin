@@ -333,7 +333,7 @@
 	// Move keys to random nearby location
 	var/list/nearby_turfs = list()
 	for(var/turf/T in range(20, H))
-		if(T.density)
+		if(T.density || isgroundlessturf(T))
 			continue
 		nearby_turfs += T
 

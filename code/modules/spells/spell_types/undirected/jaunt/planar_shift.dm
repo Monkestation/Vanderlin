@@ -18,6 +18,8 @@
 	var/list/exit_point_list
 	/// The shifted mob
 	var/obj/effect/dummy/phased_mob/spell_jaunt/holder_mob
+	/// Blood magic?
+	var/blood = FALSE
 
 
 /datum/action/cooldown/spell/undirected/planar_shift/can_cast_spell(feedback = TRUE)
@@ -45,7 +47,13 @@
 	return ..() | SPELL_NO_FEEDBACK // Don't do the feedback until after we're shifted
 
 /datum/action/cooldown/spell/undirected/planar_shift/proc/enter_shift(mob/living/cast_on, turf/loc_override)
-	holder_mob = new /obj/effect/dummy/phased_mob/spell_jaunt(loc_override || get_turf(cast_on), cast_on)
+	var/mob_path = /obj/effect/dummy/phased_mob/spell_jaunt
+	var/exit_path = /obj/effect/temp_visual/wizard/out
+	if(blood)
+		mob_path = /obj/effect/dummy/phased_mob/spell_jaunt/blood
+		exit_path = /obj/effect/temp_visual/wizard/blood/out
+
+	holder_mob = new mob_path(loc_override || get_turf(cast_on), cast_on)
 	RegisterSignal(holder_mob, COMSIG_MOB_EJECTED_FROM_JAUNT, PROC_REF(on_shift_exit))
 	spell_requirements |= SPELL_CASTABLE_WHILE_PHASED
 	cast_on.add_traits(list(TRAIT_MAGICALLY_PHASED, TRAIT_RUNECHAT_HIDDEN, TRAIT_WEATHER_IMMUNE), REF(src))
@@ -59,7 +67,7 @@
 	SEND_SIGNAL(cast_on, COMSIG_MOB_ENTER_JAUNT, src, holder_mob)
 
 	var/turf/cast_turf = get_turf(holder_mob)
-	new /obj/effect/temp_visual/wizard/out(cast_turf, cast_on.dir)
+	new exit_path(cast_turf, cast_on.dir)
 	cast_on.ExtinguishMob()
 	do_steam_effects(cast_turf)
 	return
@@ -135,7 +143,7 @@
 	holder_mob.forceMove(found_exit)
 	do_steam_effects(found_exit)
 	holder_mob.reappearing = TRUE
-	playsound(found_exit, 'sound/magic/ethereal_exit.ogg', 50, TRUE)
+	playsound(found_exit, blood ? 'sound/magic/enter_blood.ogg' : 'sound/magic/ethereal_exit.ogg', 50, TRUE)
 
 	ADD_TRAIT(cast_on, TRAIT_IMMOBILIZED, REF(src))
 	addtimer(CALLBACK(src, PROC_REF(do_shift_in), cast_on, found_exit), 2 SECONDS)
@@ -147,8 +155,11 @@
 /datum/action/cooldown/spell/undirected/planar_shift/proc/do_shift_in(mob/living/cast_on, turf/final_point)
 	if(QDELETED(cast_on) || QDELETED(holder_mob) || QDELETED(src))
 		return
+	var/shift_path = /obj/effect/temp_visual/wizard
+	if(blood)
+		shift_path = /obj/effect/temp_visual/wizard/blood
 
-	new /obj/effect/temp_visual/wizard(final_point, holder_mob.dir)
+	new shift_path(final_point, holder_mob.dir)
 	cast_on.setDir(holder_mob.dir)
 
 	addtimer(CALLBACK(src, PROC_REF(end_shift), cast_on, holder_mob, final_point), 0.5 SECONDS)
@@ -198,6 +209,11 @@
 
 /// Does some steam effects from the shift at passed loc.
 /datum/action/cooldown/spell/undirected/planar_shift/proc/do_steam_effects(turf/loc)
+	if(blood)
+		var/datum/effect_system/blood_mist_spread/mist = new()
+		mist.set_up(10, FALSE, loc)
+		mist.start()
+		return
 	var/datum/effect_system/steam_spread/steam = new()
 	steam.set_up(10, FALSE, loc)
 	steam.start()
@@ -217,3 +233,9 @@
 	shifter.remove_traits(list(TRAIT_MAGICALLY_PHASED, TRAIT_RUNECHAT_HIDDEN, TRAIT_WEATHER_IMMUNE), REF(src))
 	// This needs to happen at the end, after all the traits and stuff is handled
 	SEND_SIGNAL(shifter, COMSIG_MOB_AFTER_EXIT_JAUNT, src)
+
+/datum/action/cooldown/spell/undirected/planar_shift/bloodmagic
+	name = "Blood Plane"
+	button_icon_state = "watcher"
+	sound = 'sound/magic/enter_blood.ogg'
+	blood = TRUE

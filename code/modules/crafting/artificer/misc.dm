@@ -527,6 +527,11 @@
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/divine/astrata
 
+/datum/artificer_recipe/psycross/astrata_silver
+	name = "Silvered Astrata Psycross"
+	required_item = /obj/item/ingot/silver
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/astrata/real_silver
+
 /datum/artificer_recipe/psycross/dendor
 	name = "Dendor Psycross"
 	required_item = /obj/item/ingot/silver

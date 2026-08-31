@@ -5,7 +5,7 @@
 	sellprice = VALUE_STEEL_SMALL_ITEM
 	smeltresult = /obj/item/ingot/iron
 	body_parts_covered = COVERAGE_NASAL
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 2.3 KILOGRAMS
 
 //................ Gallowglass ............... //
@@ -16,7 +16,7 @@
 	icon_state = "gallowglass"
 	sellprice = VALUE_STEEL_SMALL_ITEM
 	smeltresult = /obj/item/ingot/steel_slag
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 2.5 KILOGRAMS
 
 //................ Coppergate ............... //
@@ -27,7 +27,7 @@
 	sellprice = VALUE_STEEL_SMALL_ITEM
 	smeltresult = /obj/item/ingot/steel_slag
 	body_parts_covered = COVERAGE_NASAL
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 3.12 KILOGRAMS
 
 //................ Decorative Coppergate ............... //
@@ -38,7 +38,7 @@
 	sellprice = VALUE_STEEL_SMALL_ITEM+BONUS_VALUE_MODEST
 	smeltresult = /obj/item/ingot/steel_slag
 	body_parts_covered = COVERAGE_NASAL
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 3.12 KILOGRAMS
 
 //................ Skull Cap ............... //
@@ -50,7 +50,7 @@
 	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 75
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.5 KILOGRAMS
 
 //............... Grenzelhoft Plume Hat ............... // - worn over a skullcap
@@ -108,7 +108,7 @@
 	worn_y_dimension = 64
 	flags_inv = HIDEEARS
 	sellprice = VALUE_CHEAP_STEEL_HELMET
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	smeltresult = null
 	melting_material = /datum/material/steel
 	melt_amount = 50
@@ -134,7 +134,7 @@
 	item_state = "ikettle"
 	sellprice = VALUE_CHEAP_IRON_HELMET
 	armor_type = /datum/armor/head/scale
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.5 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/iron
@@ -167,7 +167,7 @@
 	item_state = "islitkettle"
 	sellprice = VALUE_CHEAP_IRON_HELMET
 	armor_type = /datum/armor/head/scale
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.8 KILOGRAMS
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
@@ -192,7 +192,7 @@
 	armor_type = /datum/armor/head/scale
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	body_parts_covered = COVERAGE_HEAD
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.4 KILOGRAMS
 
 //................ Copper Lamellar Cap ............... //
@@ -207,7 +207,7 @@
 	armor_type = /datum/armor/head/padded/good
 	body_parts_covered = COVERAGE_HEAD
 	prevent_crits = ONLY_VITAL_ORGANS
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 3.25 KILOGRAMS
 
 //............... Battle Nun ........................... (unique kit for the role, iron coif mechanically.)
@@ -256,7 +256,7 @@
 	sellprice = VALUE_STEEL_HELMET
 	armor_type = /datum/armor/head/plate
 	body_parts_covered = COVERAGE_HEAD
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 2.5 KILOGRAMS
 
 /obj/item/clothing/head/helmet/sallet/beastskull
@@ -264,13 +264,13 @@
 	desc = "The skull of a horned beast, carved and fashioned into a helmet. An steel skull cap has been inserted on the inside."
 	icon_state = "marauder_head"
 	body_parts_covered = HEAD|EARS|HAIR
-	max_integrity = INTEGRITY_STRONG + 50
+	max_integrity = INTEGRITY_OLD_STRONG + 50
 	smeltresult = /obj/item/ingot/steel_slag
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	worn_x_dimension = 64
 	worn_y_dimension = 64
 	bloody_icon = 'icons/effects/blood64x64.dmi'
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 3.5 KILOGRAMS
 
 /obj/item/clothing/head/helmet/sallet/iron
@@ -281,7 +281,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET
 	armor_type = /datum/armor/head/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 2.5 KILOGRAMS
 
 /obj/item/clothing/head/helmet/sallet/iron/banded
@@ -328,7 +328,7 @@
 	sellprice = VALUE_STEEL_HELMET
 
 	body_parts_covered = COVERAGE_HEAD
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 3.25 KILOGRAMS
 
 /obj/item/clothing/head/helmet/bascinet/steppe
@@ -357,7 +357,7 @@
 	sellprice = VALUE_STEEL_HELMET+BONUS_VALUE_TINY
 	armor_type = /datum/armor/head/plate
 	body_parts_covered = FULL_HEAD
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_CRITICAL_HITS
 	abstract_type = /obj/item/clothing/head/helmet/visored
 	var/raise_state = "_raised"
@@ -403,6 +403,7 @@
 	armor_type = /datum/armor/head/plate/good
 	item_weight = 6.4 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 //............... Visored Sallet ............... //
 /obj/item/clothing/head/helmet/visored/sallet
@@ -420,7 +421,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_HELMET+BONUS_VALUE_TINY
 	armor_type = /datum/armor/head/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 //............... Bellow Sallet ............... //
 /obj/item/clothing/head/helmet/visored/bellow
@@ -506,7 +507,7 @@
 	sellprice = VALUE_IRON_HELMET+BONUS_VALUE_TINY
 
 	armor_type = /datum/armor/head/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 
 /obj/item/clothing/head/helmet/visored/gold
@@ -575,7 +576,7 @@
 	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
 	body_parts_covered = COVERAGE_HEAD
 	flags_inv = HIDEEARS|HIDEHAIR
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
@@ -598,7 +599,7 @@
 	body_parts_covered = COVERAGE_HEAD_NOSE
 	flags_inv = HIDEEARS|HIDEHAIR
 	block2add = FOV_BEHIND
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
@@ -623,7 +624,7 @@
 	body_parts_covered = COVERAGE_HEAD_NOSE
 	flags_inv = HIDEEARS|HIDEHAIR
 	block2add = FOV_BEHIND
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
@@ -641,7 +642,7 @@
 	body_parts_covered = COVERAGE_HEAD_NOSE
 	flags_inv = HIDEEARS|HIDEHAIR
 	block2add = FOV_BEHIND
-	max_integrity = INTEGRITY_STRONG//slighly more integrity
+	max_integrity = INTEGRITY_OLD_STRONG//slighly more integrity
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
@@ -678,6 +679,7 @@
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	smeltresult = /obj/item/ingot/avantyne
 	item_weight = 3.7 KILOGRAMS
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 //................. Silver Bascinet .............. //
 
@@ -742,6 +744,7 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	item_weight = 4.5 KILOGRAMS
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 /obj/item/clothing/head/helmet/blacksteel/psythorns
 	name = "crown of psydonian thorns"

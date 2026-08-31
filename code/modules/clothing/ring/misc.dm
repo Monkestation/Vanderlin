@@ -173,6 +173,7 @@
 	cdtime = 10 MINUTES
 	activetime = 30 SECONDS
 	sellprice = 100
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/ring/active/nomag/update_icon_state()
 	. = ..()
@@ -183,7 +184,7 @@
 
 /obj/item/clothing/ring/active/nomag/activate(mob/user)
 	. = ..()
-	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE, INFINITY, ITEM_SLOT_RING)
+	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_MIND, INFINITY, ITEM_SLOT_RING)
 
 /obj/item/clothing/ring/active/nomag/demagicify()
 	. = ..()
@@ -347,6 +348,7 @@
 	icon_state = "ring_feldsher"
 	desc = "A hallowed copper ring, ritualistically forged by Pestran clergymen upon the graduation of a feldsher. \
 	\n This ring is proof of Pestra's blessing, in turn allowing the feldsher to extract and manipulate Lux so long as they follow Her teachings"
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 // ................... The Apothecary's ring .......................
 
@@ -354,6 +356,7 @@
 	name = "apothecary's ring"
 	icon_state = "ring_apothecary"
 	desc = "" // the description is handled upon examine.
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 
 /obj/item/clothing/ring/apothecary_ring/examine(mob/user)
@@ -369,7 +372,7 @@
 /obj/item/clothing/ring/courtagent_ring
 	name = "Finger's Crown"
 	icon_state = "ring_s_agent"
-	desc = "A silver signet ring, engraved with the sigil of the Hand and enchanted with magicks that wards away pickpockets when worn on the finger. \
+	desc = "A silver signet ring, engraved with the sigil of the Hand and enchanted with magicks that make it impossible to steal when worn on the finger. \
 	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
 	examine_name = /obj/item/clothing/ring/silver::name
 	base_icon_state = "ring_s"
@@ -382,8 +385,8 @@
 
 /obj/item/clothing/ring/courtagent_ring/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, INNATE_TRAIT)
-	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand and enchanted with magicks that wards away pickpockets when worn on the finger. \
+	enchant(/datum/enchantment/anti_theft)
+	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand. \
 	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
 
 /obj/item/clothing/ring/courtagent_ring/get_examine_icon(mob/user)

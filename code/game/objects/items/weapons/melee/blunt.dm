@@ -13,7 +13,7 @@
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(MACE_STRIKE, DAZE_BASH)
 	gripped_intents = list(MACE_STRIKE, MACE_SMASH, DAZE_BASH)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IRON
 
 	item_state = "mace_greyscale"
 	lefthand_file = 'icons/mob/inhands/weapons/melee_lefthand.dmi'
@@ -87,6 +87,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
 	melt_amount = 0
+	max_integrity = INTEGRITY_STATIC_200
 
 /obj/item/weapon/mace/cane/noble
 	name = "fancy cane"
@@ -213,6 +214,7 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	sellprice = 100
 	item_weight = 1.8 KILOGRAMS
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL
 
 //................ Steel mace ............... //	Better wbalance and wdefense
 /obj/item/weapon/mace/steel
@@ -223,7 +225,7 @@
 	force_wielded = DAMAGE_MACE_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
@@ -240,7 +242,7 @@
 	icon_state = "rungu_steel"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	wdefense = AVERAGE_PARRY //Due to costing less bars
-	max_integrity = INTEGRITY_STRONGEST * 0.75
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_MALUS
 	melt_amount = 100
 	sellprice = 30
 	item_weight = 1.4 KILOGRAMS
@@ -261,6 +263,7 @@
 	icon_state = "barmace"
 	force = DAMAGE_MACE + 3
 	force_wielded = DAMAGE_MACE_WIELD + 3
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_STEEL
 
 //................ Spiked club ............... //
 /obj/item/weapon/mace/spiked
@@ -268,7 +271,6 @@
 	icon_state = "spikedmace"
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 1
-	max_integrity = INTEGRITY_STANDARD
 	melt_amount = 150
 	item_weight = 1.7 KILOGRAMS
 
@@ -278,7 +280,6 @@
 	icon_state = "spiked_club_old"
 	force = DAMAGE_MACE + 2
 	force_wielded = DAMAGE_MACE_WIELD + 3
-	max_integrity = INTEGRITY_STRONG
 	item_weight = 1.8 KILOGRAMS
 
 
@@ -289,7 +290,7 @@
 	icon_state = "bs_mace"
 	force = DAMAGE_MACE + 4
 	force_wielded = DAMAGE_MACE_WIELD + 2
-	max_integrity = INTEGRITY_BLACKSTEEL
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLACKSTEEL
 	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 150
@@ -302,7 +303,7 @@
 	icon_state = "bs_barmace"
 	force = DAMAGE_MACE + 6
 	force_wielded = DAMAGE_MACE_WIELD + 4
-	max_integrity = INTEGRITY_BLACKSTEEL
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_BLACKSTEEL
 
 //................ Iron Bludgeon ............... // Less damage, more accurate, similar to a cudgel
 /obj/item/weapon/mace/bludgeon
@@ -335,7 +336,7 @@
 	force = DAMAGE_CLUB + 1
 	force_wielded = DAMAGE_CLUB_WIELD + 1
 	wdefense = MEDIOCRE_PARRY
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_COPPER
 	smeltresult = /obj/item/ingot/copper
 	sellprice = 10
 	item_weight = 900 GRAMS
@@ -351,7 +352,7 @@
 	wdefense = MEDIOCRE_PARRY
 	possible_item_intents = list(MACE_WDSTRIKE)
 	gripped_intents = list(MACE_WDSTRIKE, MACE_WOODSMASH)
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IMPROV
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	smeltresult = /obj/item/fertilizer/ash
@@ -376,7 +377,7 @@
 	wdefense = MEDIOCRE_PARRY
 	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IMPROV * INTEGRITY_SPECIAL_BONUS
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	smeltresult = /obj/item/fertilizer/ash
@@ -401,7 +402,7 @@
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyflangedmace"
 	wdefense = AVERAGE_PARRY
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silverblessed
 	item_weight = 600 GRAMS
@@ -416,7 +417,7 @@
 	desc = "A ceremonial rungu carved out of a clam shell. Not intended for combat. It's used in various Sea and Coastal Elven rituals and ceremonies."
 	icon = 'icons/roguetown/gems/gem_shell.dmi'
 	icon_state = "rungu_shell"
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IMPROV
 	sellprice = 35
 	item_weight = 300 GRAMS
 	smeltresult = null
@@ -443,7 +444,6 @@
 	force_wielded = DAMAGE_CLUB - 7
 	wdefense = ULTMATE_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_STANDARD
 	associated_skill = /datum/attribute/skill/combat/swords
 	metalizer_result = /obj/item/weapon/sword/iron
 	item_weight = 400 GRAMS
@@ -478,7 +478,7 @@
 	gripped_intents = list(MACE_HVYSMASH, MACE_THRUST)
 	sharpness = IS_SHARP
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IRON
 
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
@@ -513,7 +513,7 @@
 	force = DAMAGE_MACE - 5
 	force_wielded = DAMAGE_HEAVYCLUB_WIELD + 5
 	gripped_intents = list(MACE_HVYSMASH, MACE_HVYSTRIKE)
-	max_integrity = INTEGRITY_STRONGEST * 1.2
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_KETRYL * INTEGRITY_SPECIAL_BONUS
 	item_weight = 2.5 KILOGRAMS
 
 //................ Grand mace ............... //
@@ -524,7 +524,7 @@
 	gripped_intents = list(MACE_HVYSMASH) // It's a 2h flanged mace, not a goedendag.
 	wbalance = DODGE_CHANCE_NORMAL
 	sharpness = IS_BLUNT
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_STEEL
 
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/steel_slag
@@ -549,7 +549,7 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psymace"
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_SILVER
 
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silverblessed
@@ -581,7 +581,7 @@
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "shillelagh"
 	gripped_intents = list(MACE_WOODSMASH)
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STATIC_200
 
 	SET_BASE_PIXEL(0, 0)
 	bigboy = FALSE
@@ -614,6 +614,7 @@
 	wlength = WLENGTH_GREAT
 	swingsound = BLUNTWOOSH_HUGE
 	item_weight = 4 KILOGRAMS
+	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_KETRYL
 
 /obj/item/weapon/mace/goden/steel/warhammer/getonmobprop(tag)
 	. = ..()
@@ -635,7 +636,7 @@
 	force = DAMAGE_CLUB - 5
 	force_wielded = DAMAGE_CLUB_WIELD
 	slowdown = 1
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_COPPER
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	smeltresult = /obj/item/ingot/copper
@@ -653,6 +654,7 @@
 	gripped_intents = null
 	force_wielded = null
 	item_weight = 2 KILOGRAMS
+	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_IRON
 
 /obj/item/weapon/mace/warhammer/getonmobprop(tag)
 	if(tag)
@@ -676,6 +678,7 @@
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	item_weight = 2.2 KILOGRAMS
+	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/mace/warhammer/silver
 	name = "silver warhammer"
@@ -684,7 +687,7 @@
 	force = DAMAGE_MACE_WIELD - 1
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_SILVER
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
@@ -700,7 +703,7 @@
 	desc = "A magnificent warhammer of blacksteel. Ornamental, resplendant, and - above all else - lethal; the ideal sidearm for a knight."
 	icon_state = "bs_hammer"
 	force = DAMAGE_MACE_WIELD + 6
-	max_integrity = INTEGRITY_BLACKSTEEL
+	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_BLACKSTEEL
 	smeltresult = /obj/item/ingot/blacksteel
 	melting_material = /datum/material/blacksteel
 	melt_amount = 200
@@ -719,6 +722,7 @@
 	max_blade_int = 150
 	sharpness = IS_SHARP
 	item_weight = 1.3 KILOGRAMS
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_IRON
 
 /obj/item/weapon/mace/elvenclub/steel
 	name = "steel elven war club"
@@ -729,22 +733,22 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_blade_int = 250
-	max_integrity = INTEGRITY_STRONGEST
 	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
 	item_weight = 1.5 KILOGRAMS
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/mace/elvenclub/bronze
 	name = "bronze elven war club"
 	desc = "A bronze one-handed war club with a sharp end. It's been long favoured by the Elves of Heartfelt, despite its foreign origins."
 	icon_state = "elvenclub_bronze"
-	max_integrity = INTEGRITY_STANDARD
 	smeltresult = /obj/item/ingot/bronze
 	melting_material = /datum/material/bronze
 	melt_amount = 100
 	item_weight = 1.4 KILOGRAMS
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_BRONZE
 
 /obj/item/weapon/mace/elvenclub/silver
 	name = "regal elven war club"
@@ -755,12 +759,12 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST * 0.8
 	item_weight = 1.4 KILOGRAMS
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 150
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/mace/elvenclub/silver/Initialize(mapload)
 	. = ..()
@@ -775,7 +779,7 @@
 	force_wielded = DAMAGE_MACE_WIELD
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
@@ -792,6 +796,7 @@
 	icon_state = "silvermace"
 	force = DAMAGE_MACE + 2
 	force_wielded = DAMAGE_MACE_WIELD + 2
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/mace/rungu/silver
 	name = "silver rungu"
@@ -800,7 +805,7 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
@@ -817,7 +822,7 @@
 	desc = "A luxurious silver mace that's been reinforced and embellished with gold. It's considerably heavier compared to other maces."
 	force = DAMAGE_MACE + 2
 	wbalance = DODGE_CHANCE_NORMAL
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL
 	melting_material = /datum/material/silver
 	sellprice = 150 // It's silver and gold.
 	item_weight = 1.8 KILOGRAMS
@@ -834,7 +839,7 @@
 	desc = "A spiked bronze mace. A weapon thats seen a revival in use amidst the cataclysm in Heartfelt."
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 1 //Spiked
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BRONZE
 	sellprice = 25
 	item_weight = 1.5 KILOGRAMS
 	smeltresult = /obj/item/ingot/bronze

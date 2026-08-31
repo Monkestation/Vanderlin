@@ -48816,7 +48816,7 @@
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
 "vNk" = (
-/obj/structure/nocdevice,
+/obj/structure/scrying/nocdevice,
 /obj/structure/carpet/blue,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/magician)
