@@ -41,6 +41,7 @@
 	abstract_type = /obj/item/clothing/armor
 
 	material_category = ARMOR_MAT_PLATE
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/armor/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file, dummy_block = FALSE)
 	. = ..()

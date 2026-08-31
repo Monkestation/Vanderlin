@@ -173,6 +173,7 @@
 	cdtime = 10 MINUTES
 	activetime = 30 SECONDS
 	sellprice = 100
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/ring/active/nomag/update_icon_state()
 	. = ..()
@@ -347,6 +348,7 @@
 	icon_state = "ring_feldsher"
 	desc = "A hallowed copper ring, ritualistically forged by Pestran clergymen upon the graduation of a feldsher. \
 	\n This ring is proof of Pestra's blessing, in turn allowing the feldsher to extract and manipulate Lux so long as they follow Her teachings"
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 // ................... The Apothecary's ring .......................
 
@@ -354,6 +356,7 @@
 	name = "apothecary's ring"
 	icon_state = "ring_apothecary"
 	desc = "" // the description is handled upon examine.
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 
 /obj/item/clothing/ring/apothecary_ring/examine(mob/user)

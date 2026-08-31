@@ -19,6 +19,7 @@
 	salvage_result = /obj/item/natural/cloth
 	dyeable = TRUE
 	anvilrepair = null
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 	var/modifies_speech = FALSE
 	var/mask_adjusted = 0

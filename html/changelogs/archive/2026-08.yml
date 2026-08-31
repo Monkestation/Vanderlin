@@ -461,3 +461,24 @@
   - bugfix: NOTE - This may result in specials or quirks not applying skill increases
       to certain subclasses.
   - rscdel: Disables Pocket Dimension enchantment.
+2026-08-31:
+  realforest2001:
+  - rscadd: Added skill checks to stealing certain items, mainly things like bags
+      and larger weapons.
+  - rscadd: Added anti-theft enchantment to Grandmaster's weapons and Vampire Lord's
+      sword.
+  - rscadd: Stealing an item from someone's neck requires +1 skill grade than the
+      item otherwise would, capping at Legendary.
+  - refactor: Refactors how scrying is attached to objects.
+  - rscadd: You can now still hear your personal surroundings and speak to people
+      around you whilst scrying.
+  - rscdel: Black Mirror no longer asks if you want to locate the person who's blood
+      it contains.
+  - rscadd: Scrying Orb can now only be used by people with Arcyne magic skill.
+  - rscadd: NOC Device no longer requires the target to be alive. You still need to
+      know them.
+  - rscadd: Bog Witch now spawns with an Eye of the Hunt, a scrying eye that is patron
+      locked to the Proven Hunt.
+  - rscdel: Temporarily disables the free-form spying eye the Vampire Lord gets.
+  - rscadd: Added access helpers for Bandit, Vampire and Lich Lairs. Lich unimplemented.
+  - bugfix: Bandits now actually get their keys, spawned in their belt.

@@ -472,8 +472,8 @@
 	if(thief.rogue_sneaking)
 		thief_skill_modified += 1
 
-	if(HAS_TRAIT(victim, TRAIT_THIEFSENSE))
-		to_chat(thief, span_warning("Trying to steal from [victim] would be a bad idea!"))
+	if(HAS_TRAIT(victim, TRAIT_THIEFSENSE) && !victim.stat)
+		to_chat(thief, span_warning("[victim] is too aware of their belongings, I can't steal from them while they're awake!"))
 		return handle_steal_end(victim, 0, thief_skill_base, thief_skill_modified, TRUE)
 
 	var/stealroll = roll("[floor(thief_skill_modified)]d6")
@@ -532,6 +532,10 @@
 		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
 
 	var/obj/item/picked = pick(stealpos)
+	var/final_difficulty = picked.pickpocket_difficulty
+	if(thief.zone_selected == BODY_ZONE_PRECISE_NECK)
+		final_difficulty = max(final_difficulty + 1, SKILL_RANK_LEGENDARY)
+
 	if(HAS_TRAIT(picked, TRAIT_CANT_BE_STOLEN))
 		exp_to_gain /= 2
 		to_chat(thief, span_danger("[picked] is strapped on tight, I can't steal it!"))
@@ -540,7 +544,7 @@
 		exp_to_gain /= 2
 		to_chat(thief, span_danger("[picked] is enchanted to prevent theft, I can't steal it!"))
 		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
-	if(thief_skill_base < picked.pickpocket_difficulty)
+	if(thief_skill_base < final_difficulty)
 		to_chat(thief, span_danger("I am not skilled enough to steal something like [picked]!"))
 		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
 
