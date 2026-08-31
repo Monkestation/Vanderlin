@@ -838,8 +838,8 @@
 	icon_state = "elven_barbute_full"
 	item_state = "elven_barbute_full"
 	flags_inv = HIDEEARS|HIDEHAIR
-	max_integrity = INTEGRITY_STRONGEST
-	armor =ARMOR_PLATE
+	max_integrity = INTEGRITY_OLD_STRONGEST
+	armor_type = /datum/armor/head/plate
 	body_parts_covered = COVERAGE_HEAD_NOSE
 	item_weight = 2.7 KILOGRAMS
 	smeltresult = /obj/item/ingot/steel
