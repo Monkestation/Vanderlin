@@ -432,3 +432,53 @@
   - bugfix: Traumatized quirk no longer applies to corpses.
   - rscadd: Added The Chosen special for Monarch. Be the noble acolyte!
   - rscadd: LOOC will now indicate if the talker is a ghost or dead.
+2026-08-30:
+  Ardcrumb:
+  - map: 'added some more texture to the bandit camp visually, as well as adding some
+      minor clothing objects, like cloaks and hats, as well as a unique matthios amulet.
+
+      ## Pre-Merge Checklist
+
+      <!-- Don''t bother filling these in while creating your Pull Request, just click
+      the checkboxes after the Pull Request is opened and you are redirected to the
+      page. -->
+
+      - [x] You tested this on a local server.
+
+      - [x] This code did not runtime during testing.
+
+      - [x] You documented all of your changes.
+
+      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
+      and errors. It is important to test your code/feature/fix locally. -->'
+  ModDownloading:
+  - rscdel: Removed the volves from the pits in Vanderlin, Daftmarsh, and White Palace
+      Pass.
+  Monkeke2:
+  - bugfix: Lost Keys vice no longer makes your keys spawn in the river/moat.
+  realforest2001:
+  - bugfix: Job sub-sub selections no longer break skill levels.
+  - bugfix: NOTE - This may result in specials or quirks not applying skill increases
+      to certain subclasses.
+  - rscdel: Disables Pocket Dimension enchantment.
+2026-08-31:
+  realforest2001:
+  - rscadd: Added skill checks to stealing certain items, mainly things like bags
+      and larger weapons.
+  - rscadd: Added anti-theft enchantment to Grandmaster's weapons and Vampire Lord's
+      sword.
+  - rscadd: Stealing an item from someone's neck requires +1 skill grade than the
+      item otherwise would, capping at Legendary.
+  - refactor: Refactors how scrying is attached to objects.
+  - rscadd: You can now still hear your personal surroundings and speak to people
+      around you whilst scrying.
+  - rscdel: Black Mirror no longer asks if you want to locate the person who's blood
+      it contains.
+  - rscadd: Scrying Orb can now only be used by people with Arcyne magic skill.
+  - rscadd: NOC Device no longer requires the target to be alive. You still need to
+      know them.
+  - rscadd: Bog Witch now spawns with an Eye of the Hunt, a scrying eye that is patron
+      locked to the Proven Hunt.
+  - rscdel: Temporarily disables the free-form spying eye the Vampire Lord gets.
+  - rscadd: Added access helpers for Bandit, Vampire and Lich Lairs. Lich unimplemented.
+  - bugfix: Bandits now actually get their keys, spawned in their belt.

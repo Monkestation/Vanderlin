@@ -8,6 +8,7 @@
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	sellprice = 10
 	experimental_onhip = TRUE
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/clothing/neck/psycross/unfinished
 	name = "unfinished amulet"

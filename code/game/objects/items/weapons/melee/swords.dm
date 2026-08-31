@@ -945,6 +945,7 @@
 	gripped_intents = list(SWORD_CUT, SWDLONG_CHOP, SWORD_STRIKE, SWORD_CLEAVE)
 	max_blade_int = 300
 	item_weight = 1.8 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 //................ Heirloom Sword ............... //
 /obj/item/weapon/sword/long/heirloom
@@ -971,6 +972,7 @@
 	static_price = TRUE
 	last_used = 0
 	item_weight = 1.4 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/sword/long/judgement/Initialize(mapload)
 	. = ..()
@@ -1010,6 +1012,7 @@
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
+	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/weapon/sword/long/vlord/getonmobprop(tag)
 	. = ..()
@@ -1085,6 +1088,7 @@
 	force = DAMAGE_SWORD + 2
 	item_weight = 1.5 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/sword/long/blacksteel
 	name = "blacksteel longsword"
@@ -1179,6 +1183,7 @@
 	weapon_special = /datum/special_intent/greatsword_swing
 	item_weight = 2.5 KILOGRAMS
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_STEEL
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/sword/long/greatsword/getonmobprop(tag)
 	. = ..()
@@ -1555,6 +1560,7 @@
 	gripped_intents = list(SWORD_CUT, SWDLONG_CHOP, SWORD_STRIKE, SWORD_CLEAVE)
 	slot_flags = ITEM_SLOT_BACK
 	item_weight = 3.5 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/sword/long/exe/getonmobprop(tag)
 	. = ..()

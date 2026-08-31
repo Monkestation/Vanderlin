@@ -11,6 +11,7 @@
 	grid_width = 32
 	grid_height = 64
 	item_weight = 274 GRAMS
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 	var/datum_to_spread = /datum/effect_system/smoke_spread
 
 /obj/item/smokebomb/attack_self(mob/user, list/modifiers)
@@ -49,6 +50,7 @@
 	desc = "A sacred relic carried by Brother Maynard."
 	icon = 'icons/obj/holy_grenade.dmi'
 	icon_state = "holy_grenade"
+	pickpocket_difficulty = SKILL_RANK_LEGENDARY
 	var/fuze = 25
 	var/primed = FALSE
 

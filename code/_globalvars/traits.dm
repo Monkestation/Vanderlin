@@ -260,7 +260,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_UNDODGING = span_danger("I am unable to dodge."),
 	TRAIT_UNPARRYING = span_danger("I am unable to block and parry attacks."),
 	TRAIT_BLINDFIGHTING = span_info("I have an incredible sense of awareness, allowing me to parry even when I can't see it coming."),
-	TRAIT_THIEFSENSE = span_info("I have supreme awareness of my belongings, surely no one would try to steal from me."),
+	TRAIT_THIEFSENSE = span_info("I have supreme awareness of my belongings, stealing from me would be impossible."),
 	TRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
 	TRAIT_HEAVYARMOR = "I can move freely in heavy armor.",
 	TRAIT_DODGEEXPERT = "I can dodge easily while only wearing light armor.",

@@ -448,6 +448,7 @@
 	var/safe_damage_wielded = 30
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/weapon/greataxe/steel/grandmaster
 	name = "divine greataxe"
@@ -490,6 +491,7 @@
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)
 
 /datum/intent/polearm/cut/martyr
 	item_damage_type = "fire"
@@ -522,6 +524,7 @@
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)
 
 /datum/intent/mace/strike/martyr
 	item_damage_type = "fire"
@@ -550,3 +553,4 @@
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)

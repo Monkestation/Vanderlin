@@ -33,6 +33,7 @@
 	grid_width = 32
 	item_weight = 200 GRAMS
 	tool_behaviour = TOOL_KNIFE
+	pickpocket_difficulty = SKILL_RANK_APPRENTICE
 
 /obj/item/weapon/knife/Initialize()
 	. = ..()
@@ -328,6 +329,7 @@
 	sellprice = 200
 	item_weight = 220 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
 	name = "\proper apathy"
@@ -352,6 +354,7 @@
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 	item_weight = 200 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/knife/dagger/steel/baotha/Initialize(mapload)
 	. = ..()
@@ -437,6 +440,7 @@
 	sellprice = 250
 	item_weight = 200 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_MASTER
 
 /obj/item/weapon/knife/dagger/steel/profane/examine(mob/user)
 	. = ..()

@@ -285,3 +285,18 @@
 /obj/effect/mapping_helpers/access/keyset/other/bogwitch
 	accesses = list(ACCESS_BOGWITCH)
 	difficulty = LOCK_MASTER
+
+
+/obj/effect/mapping_helpers/access/keyset/antag
+	color = "#990000"
+
+/obj/effect/mapping_helpers/access/keyset/antag/bandit
+	accesses = list(ACCESS_BANDIT)
+
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor
+	accesses = list(ACCESS_VAMPIRE)
+	difficulty = LOCK_MASTER
+
+/obj/effect/mapping_helpers/access/keyset/antag/lich
+	accesses = list(ACCESS_LICH)
+	difficulty = LOCK_MASTER

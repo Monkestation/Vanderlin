@@ -37,6 +37,7 @@
 	armor_type = /datum/armor/pants/maille/iron
 	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 1.2 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/pants/trou/leather/advanced
 	name = "hardened leather chausses"
