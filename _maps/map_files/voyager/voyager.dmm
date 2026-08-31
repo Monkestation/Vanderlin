@@ -1394,7 +1394,7 @@
 "iE" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/scomstone,
-/obj/item/weapon/whip/antique,
+/obj/item/weapon/whip/repenta,
 /obj/structure/carpet/purple,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church/inquisition)
@@ -2090,7 +2090,7 @@
 /area/ship/middeck)
 "nT" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/scrying,
+/obj/item/scrying/orb,
 /obj/structure/fluff/wallclock,
 /turf/open/floor/ruinedwood/two,
 /area/ship/nobledeck)

@@ -7430,7 +7430,7 @@
 /obj/item/clothing/gloves/plate/zizo,
 /obj/item/clothing/shoes/boots/armor/zizo,
 /obj/item/clothing/pants/platelegs/zizo,
-/obj/item/weapon/sword/long/greatsword/zizo,
+/obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/shelter/bog/lich)
 "fOp" = (
@@ -11014,7 +11014,7 @@
 /area/outdoors/bog/south/west)
 "jvo" = (
 /obj/structure/table/wood/fancy/black,
-/obj/item/scrying{
+/obj/item/scrying/orb{
 	pixel_x = -4;
 	pixel_y = 10
 	},

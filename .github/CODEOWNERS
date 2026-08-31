@@ -6,16 +6,10 @@
 
 # MAINTAINERS
 
-# aberrantQuesrist
-
-/icons/ @aberrantQuesrist
-/_maps/map_files/daftmarsh.dmm @aberrantQuesrist
-/_maps/map_files/vanderlin.dmm @aberrantQuesrist
-
 # Draggeru
 
 /_maps/* @MissyNym
 
-# Lore
+# Icons
 
-/strings/rt/Lore_Primer.txt @aberrantQuesrist @tired-wired
+/icons/ @Blumengama
