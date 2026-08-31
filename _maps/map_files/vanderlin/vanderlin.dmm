@@ -1140,7 +1140,7 @@
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 4
 	},
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "ayx" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/dirt/road,
@@ -3523,7 +3523,7 @@
 "bxl" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/dirt/road,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "bxp" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 4
@@ -9497,7 +9497,7 @@
 /area/indoors/town/keep/magician)
 "dVQ" = (
 /turf/closed/wall/mineral/wooddark/end,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "dVR" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -12703,7 +12703,7 @@
 	pixel_x = 32
 	},
 /turf/open/floor/cobble/mossy,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "fiB" = (
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/blocks,
@@ -12799,7 +12799,7 @@
 /area/under/town/sewer)
 "fkl" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "fkm" = (
 /obj/structure/fluff/railing/tall{
 	dir = 1
@@ -13524,6 +13524,9 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/town)
+"fCv" = (
+/turf/open/floor/cobble/mossy,
+/area/outdoors/town/keep/forge)
 "fCF" = (
 /obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
@@ -14260,7 +14263,7 @@
 	name = "patch of straw"
 	},
 /turf/open/floor/twig,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "fSs" = (
 /obj/structure/door/window{
 	name = "Feast Hall"
@@ -14282,7 +14285,7 @@
 "fSC" = (
 /obj/structure/door/swing,
 /turf/open/floor/twig,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "fSD" = (
 /turf/open/floor/blocks/paving,
 /area/indoors/town)
@@ -15028,7 +15031,7 @@
 "gmL" = (
 /obj/structure/window/solid,
 /turf/open/floor/cobble/mossy,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "gmM" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/dirt/road,
@@ -18522,7 +18525,7 @@
 	name = "patch of straw"
 	},
 /turf/open/floor/hay,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "hIm" = (
 /obj/structure/fluff/nest{
 	name = "patch of straw"
@@ -18548,7 +18551,7 @@
 "hIJ" = (
 /obj/structure/pottery_lathe,
 /turf/open/floor/dirt/road,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "hJi" = (
 /obj/structure/flora/grass/bush_meagre,
 /obj/structure/flora/ausbushes/brflowers,
@@ -24266,7 +24269,7 @@
 	dir = 4
 	},
 /turf/open/floor/blocks,
-/area/indoors/town/keep/passages)
+/area/indoors/town/keep/passages/thirdfloor)
 "jUk" = (
 /obj/effect/decal/borderfall{
 	dir = 1
@@ -24706,7 +24709,7 @@
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 1
 	},
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "keb" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/blocks,
@@ -24908,6 +24911,10 @@
 	},
 /turf/open/floor/concrete,
 /area/outdoors/town)
+"khx" = (
+/obj/structure/flora/grass,
+/turf/open/floor/grass,
+/area/outdoors/town/keep/forge)
 "khz" = (
 /obj/effect/mapping_helpers/access/keyset/church/general,
 /obj/effect/mapping_helpers/access/locker,
@@ -25551,7 +25558,7 @@
 /area/under/town/sewer)
 "ktX" = (
 /turf/open/floor/hay,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "kue" = (
 /obj/structure/door/iron/bars{
 	name = "Cell Door"
@@ -25817,7 +25824,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/grass,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "kAs" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/broom,
@@ -26953,7 +26960,7 @@
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 8
 	},
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "kYn" = (
 /obj/structure/fake_machine/scomm{
 	pixel_y = -32
@@ -27226,7 +27233,7 @@
 	name = "patch of straw"
 	},
 /turf/open/floor/twig,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "lcA" = (
 /obj/structure/toilet,
 /turf/open/floor/tile/bath/pool{
@@ -27319,7 +27326,7 @@
 "len" = (
 /obj/machinery/light/fueled/smelter,
 /turf/open/floor/dirt/road,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "ley" = (
 /obj/structure/stairs{
 	dir = 4
@@ -28831,10 +28838,10 @@
 /area/indoors/town/keep/halls)
 "lKE" = (
 /turf/closed/wall/mineral/decowood,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "lKM" = (
 /turf/closed/wall/mineral/wooddark/window,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "lKO" = (
 /obj/structure/chair/stool/bar{
 	pixel_x = 12;
@@ -30061,7 +30068,7 @@
 "mhu" = (
 /obj/item/bin/water,
 /turf/open/floor/dirt,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "mhM" = (
 /obj/machinery/light/fueled/wallfire/candle/lamp{
 	pixel_y = 0;
@@ -30841,7 +30848,7 @@
 	},
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "myA" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -30932,7 +30939,7 @@
 "mAz" = (
 /mob/living/simple_animal/hostile/retaliate/honse/male/tame/saddled,
 /turf/open/floor/hay,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "mAD" = (
 /obj/effect/landmark/events/haunts,
 /turf/open/floor/blocks/stonered/tiny,
@@ -33568,7 +33575,7 @@
 	pixel_y = -3
 	},
 /turf/open/floor/cobble/mossy,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "nHi" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -34040,7 +34047,7 @@
 	pixel_y = -5
 	},
 /turf/open/floor/dirt/road,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "nRk" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/dirt/road,
@@ -36253,7 +36260,7 @@
 	dir = 4
 	},
 /turf/open/floor/hay,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "oHO" = (
 /obj/structure/bars,
 /turf/open/water/sewer,
@@ -36734,7 +36741,7 @@
 /area/under/dungeon)
 "oRQ" = (
 /turf/closed/wall/mineral/wooddark/vertical,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "oRU" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/carpet/stellar,
@@ -36766,7 +36773,7 @@
 /obj/item/clothing/barding/honse,
 /obj/item/clothing/barding,
 /turf/open/floor/twig,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "oSH" = (
 /obj/structure/table/wood/counter/end{
 	dir = 4
@@ -37819,6 +37826,9 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/twig,
 /area/under/town/basement)
+"poU" = (
+/turf/closed/wall/mineral/stonebrick,
+/area/outdoors/town/keep/forge)
 "ppA" = (
 /obj/structure/flora/newleaf,
 /obj/structure/flora/newbranch/leafless,
@@ -40186,7 +40196,7 @@
 	},
 /obj/machinery/light/fueled/forge,
 /turf/open/floor/cobble/mossy,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "qkZ" = (
 /obj/item/natural/rock/gemerald,
 /turf/open/water/clean,
@@ -41272,7 +41282,7 @@
 	name = "Royal Shitbeast"
 	},
 /turf/open/floor/hay,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "qHB" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -41794,7 +41804,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/grass,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "qRg" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/powder/salt,
@@ -43824,7 +43834,7 @@
 /obj/machinery/anvil/crafted,
 /obj/item/weapon/knife/dagger,
 /turf/open/floor/cobble/mossy,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "rDP" = (
 /turf/open/floor/twig,
 /area/indoors/soilsons)
@@ -44893,7 +44903,7 @@
 	redstone_id = "courtagent"
 	},
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "saV" = (
 /obj/structure/chair/wood/alt/chair3{
 	dir = 4
@@ -45050,7 +45060,7 @@
 	redstone_id = "courtagent"
 	},
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "sde" = (
 /obj/structure/flora/newtree,
 /turf/open/floor/grass,
@@ -46106,6 +46116,10 @@
 "syS" = (
 /turf/open/floor/tile,
 /area/indoors/town/church/inquisition)
+"syY" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/dirt/road,
+/area/outdoors/town/keep/forge)
 "sze" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/carpet/red,
@@ -47701,7 +47715,7 @@
 	dir = 8
 	},
 /turf/open/floor/twig,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "tfB" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/blocks/stonered,
@@ -48064,7 +48078,7 @@
 	pixel_y = 32
 	},
 /turf/open/floor/cobble/mossy,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/forge)
 "tng" = (
 /obj/structure/fluff/steamvent,
 /turf/open/floor/metal,
@@ -50324,7 +50338,7 @@
 	dir = 4
 	},
 /turf/open/floor/hay,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "ukl" = (
 /obj/structure/stairs/stone/reddish,
 /turf/open/floor/dirt/road,
@@ -51770,7 +51784,7 @@
 /area/indoors/town/keep/garrison)
 "uPk" = (
 /turf/closed/wall/mineral/wooddark,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "uPt" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/stone,
@@ -53273,7 +53287,7 @@
 "vpH" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/twig,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "vpM" = (
 /obj/structure/closet/crate/chest/neu_iron/corpse,
 /obj/structure/fluff/walldeco/church/line{
@@ -57215,6 +57229,9 @@
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
+"wJE" = (
+/turf/open/floor/dirt/road,
+/area/outdoors/town/keep/forge)
 "wJF" = (
 /obj/structure/bookcase/random,
 /obj/item/book/law,
@@ -61008,7 +61025,7 @@
 /area/indoors/town/shop)
 "yed" = (
 /turf/open/floor/blocks,
-/area/indoors/town/keep/passages)
+/area/indoors/town/keep/passages/thirdfloor)
 "yev" = (
 /obj/structure/rack,
 /obj/item/fishingrod{
@@ -61123,7 +61140,7 @@
 /area/indoors/town/dwarfin)
 "ygL" = (
 /turf/open/floor/twig,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 "ygQ" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -61394,7 +61411,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/twig,
-/area/outdoors/town/keep)
+/area/outdoors/town/keep/stable)
 
 (1,1,1) = {"
 lat
@@ -128492,9 +128509,9 @@ qjR
 dBZ
 lKE
 len
-nHm
-eqL
-nuA
+fCv
+khx
+poU
 qpU
 xTl
 xTl
@@ -128694,7 +128711,7 @@ eqL
 sGY
 lKE
 qkU
-nHm
+fCv
 bxl
 hIJ
 xTl
@@ -128896,9 +128913,9 @@ oFz
 oho
 gmL
 rDO
-nHm
-nHm
-xQs
+fCv
+fCv
+syY
 xTl
 xTl
 qqu
@@ -129098,9 +129115,9 @@ pXi
 eqL
 gmL
 mhu
-nHm
-nHm
-nHm
+fCv
+fCv
+fCv
 eqL
 lYY
 iGc
@@ -129300,7 +129317,7 @@ qFx
 xKB
 lKE
 tmZ
-xTl
+wJE
 nHf
 fiv
 lpz
@@ -129504,7 +129521,7 @@ lKE
 myx
 qQY
 kAq
-nuA
+poU
 fGb
 oFz
 fGb
