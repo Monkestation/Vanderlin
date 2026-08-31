@@ -562,6 +562,13 @@
 	sellprice = 90
 	item_weight = 2.3 KILOGRAMS
 
+/obj/item/weapon/polearm/halberd/elvenglaive
+	name = "elven glaive"
+	desc = "A lightweight glaive crafted by elven smiths, designed to favor elegance and dexterity over brute strength."
+	icon_state = "glaive"
+	item_weight = 2.5 KILOGRAMS
+	gripsprite = FALSE
+
 /obj/item/weapon/polearm/halberd/silver
 	name = "silver halberd"
 	desc = "A halberd forged from silver, laying low the beasts of the nite."

@@ -787,6 +787,16 @@
 	additional_items = list(/obj/item/ingot/steel)
 	created_item = /obj/item/clothing/barding/honse/chain
 
+/datum/anvil_recipe/armor/steel/elvenbarbute
+	name = "Elven Barbute"
+	required_material = /obj/item/ingot/steel
+	created_item = /obj/item/clothing/head/helmet/elfbarbute
+
+/datum/anvil_recipe/armor/steel/elvenbarbutewinged
+	name = "Winged Elven Barbute"
+	required_material = /obj/item/ingot/steel
+	created_item = /obj/item/clothing/head/helmet/elfbarbute/winged
+
 /*
 /datum/anvil_recipe/armor/steel/warden_helm
 	name = "Warden Helmet (+Bar)"
