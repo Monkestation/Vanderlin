@@ -328,3 +328,4 @@
 #define JOB_ADMIN_LUNAR_CHAMPION "Lunar Order Champion"
 #define JOB_ADMIN_DARKSPAWN "Darkspawn"
 #define JOB_ADMIN_BLOOD_SORCERER "Blood Sorcerer"
+#define JOB_ADMIN_KINGSFIELD_CONSTABLE "Kingsfield Constable"

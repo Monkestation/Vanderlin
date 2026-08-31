@@ -497,6 +497,7 @@
 
 	weapon_special = /datum/special_intent/axe_swing
 	item_weight = 4 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/greataxe/getonmobprop(tag)
 	. = ..()

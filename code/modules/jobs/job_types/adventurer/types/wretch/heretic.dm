@@ -39,67 +39,67 @@
 
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/dendor)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 		if(/datum/patron/divine/necra)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 		if(/datum/patron/divine/pestra)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 40, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20, 20)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/ravox)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/malum)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 		if(/datum/patron/divine/abyssor)
-			spawned.adjust_skill_level(/datum/attribute/skill/labor/fishing, 10)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/labor/fishing, 10, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/xylix)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/inhumen/graggar)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40)
 			ADD_TRAIT(spawned, TRAIT_STRONGBITE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 			ADD_TRAIT(spawned, TRAIT_STRONGBITE, TRAIT_GENERIC)
 		if(/datum/patron/inhumen/graggar_zizo)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 		if(/datum/patron/inhumen/zizo)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 			spawned.grant_language(/datum/language/undead)
 		if(/datum/patron/inhumen/matthios)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
 		if(/datum/patron/inhumen/baotha)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 40, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20, 20)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 			spawned.grant_language(/datum/language/newpsydonic)
 		else
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 
 	if(!spawned.has_language(/datum/language/celestial) && (spawned.patron?.type in ALL_TEMPLE_PATRONS))

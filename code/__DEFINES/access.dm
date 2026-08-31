@@ -105,6 +105,11 @@
 // Other
 #define ACCESS_BOGWITCH "bogwitch"
 
+// Antags
+#define ACCESS_BANDIT "banditcamp"
+#define ACCESS_VAMPIRE "mansionvampire"
+#define ACCESS_LICH "lichlair"
+
 // Lock Strength
 #define LOCK_LEGENDARY 1
 #define LOCK_MASTER 2

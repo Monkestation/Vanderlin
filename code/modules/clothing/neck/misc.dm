@@ -162,7 +162,7 @@
 
 /obj/item/clothing/neck/coif/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/coif/cloth
 	name = "padded coif"
@@ -310,7 +310,7 @@
 
 /obj/item/clothing/neck/chaincoif/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/chaincoif/iron
 	icon_state = "ichaincoif"
@@ -369,7 +369,7 @@
 
 /obj/item/clothing/neck/bevor/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/bevor/bronze
 	name = "bronze gorgette"
@@ -414,7 +414,7 @@
 
 /obj/item/clothing/neck/gorget/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/gorget/blackmeadow
 	name = "blackmeadow gorget"
@@ -629,7 +629,7 @@
 
 /obj/item/clothing/neck/highcollier/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/highcollier/iron
 	name = "iron high collier"

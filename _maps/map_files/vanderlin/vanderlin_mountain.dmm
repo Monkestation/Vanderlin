@@ -13724,7 +13724,7 @@
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
 "rOq" = (
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_y = 11;
 	pixel_x = -7;
 	name = " defunct Magical Artillery device"

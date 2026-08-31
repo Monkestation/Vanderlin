@@ -3,13 +3,15 @@
 		STAT_INTELLIGENCE = 2,
 		STAT_SPEED = 1,
 		/datum/attribute/skill/misc/reading = 30,
-		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/alchemy = 10,
 		/datum/attribute/skill/labor/mathematics = 50,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/knives = list(20, 20),
 	)
 
 /datum/job/advclass/pilgrim/rare/merchant
@@ -38,16 +40,16 @@
 	switch(merchant_type)
 		if("FOOD")
 			outfit = /datum/outfit/pilgrim/merchant/food
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/cooking, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/cooking, 20, 30)
 		if("HEAL")
 			outfit = /datum/outfit/pilgrim/merchant/heal
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20, 30)
 		if("SILK")
 			outfit = /datum/outfit/pilgrim/merchant/silk
-			spawned.adjust_skill_level(/datum/attribute/skill/misc/sewing, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/misc/sewing, 20, 40)
 		if("GEMS")
 			outfit = /datum/outfit/pilgrim/merchant/gem
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/blacksmithing, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/blacksmithing, 10, 10)
 
 /datum/outfit/pilgrim/merchant
 	name = "Travelling Merchant (Pilgrim)"
