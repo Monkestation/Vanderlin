@@ -1345,6 +1345,7 @@
 #include "code\datums\enchantments\brairs_curse.dm"
 #include "code\datums\enchantments\cleanliness.dm"
 #include "code\datums\enchantments\comforting_embrace.dm"
+#include "code\datums\enchantments\curse_guard.dm"
 #include "code\datums\enchantments\cursed_offering.dm"
 #include "code\datums\enchantments\dimensional_shrink.dm"
 #include "code\datums\enchantments\divine_link.dm"

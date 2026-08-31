@@ -32,7 +32,7 @@
 	spell_cost = 200
 	spell_flags = SPELL_UNETCHABLE
 	status_effect = /datum/status_effect/debuff/blood_mark/curse
-	self_cast_possible = FALSE
+	self_cast_possible = TRUE
 
 	var/mode_index = 1
 	var/mode_status_type
@@ -120,15 +120,14 @@
 	. = ..()
 	if(!ishuman(cast_on))
 		return FALSE
-	if(cast_on == owner)
-		return FALSE
 
 	return validate_target(cast_on)
 
 /datum/action/cooldown/spell/status/blood_mark/proc/validate_target(mob/living/carbon/human/target)
 	if(HAS_TRAIT(target, TRAIT_VITAE_USER))
-		to_chat(owner, span_bloody("I cannot mark another Blood Mage!"))
+		to_chat(owner, span_bloody("I cannot mark another master of Vitae!"))
 		return FALSE
+	var/can_self_cast = FALSE
 
 	switch(mode_status_type)
 		if(BLOOD_MARK_TYPE_CURSE)
@@ -141,8 +140,20 @@
 			if(target.has_status_effect(/datum/status_effect/debuff/blood_mark/curse))
 				to_chat(owner, span_bloody("[target] already bears a Curse Blood Mark!"))
 				return FALSE
+		if(BLOOD_MARK_TYPE_TAG)
+			return FALSE
+		if(BLOOD_MARK_TYPE_SHIELD)
+			can_self_cast = TRUE
+		if(BLOOD_MARK_TYPE_BEFRIEND)
+			if(target.cleric)
+				to_chat(owner, span_bloody("[target] is in service to their god, they cannot be trusted!"))
+				return FALSE
+		if(BLOOD_MARK_TYPE_MOVE)
+			return FALSE
 
-
+	if(!can_self_cast && (target == owner))
+		to_chat(owner, span_bloody("You cannot place that mark upon yourself!"))
+		return FALSE
 	return TRUE
 
 // ##########################################################################################
@@ -182,6 +193,7 @@
 
 // ##########################################################################################
 /datum/status_effect/buff/blood_mark/curse_shield
+	duration = 15 MINUTES
 	id = "blood_mark_shield_buf"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/blood_mark/shield
 
