@@ -749,6 +749,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(QDELETED(human_target))
 		return FALSE
 	human_target.check_for_injuries(mob, TRUE, FALSE, TRUE, TRUE)
+	log_admin("[key_name(usr)] admin-scanned the health of [key_name(target)]")
+	message_admins("[key_name_admin(usr)] admin-scanned the health of [key_name_admin(target)]")
 	return TRUE
 
 /client/proc/smite(mob/living/target as mob)

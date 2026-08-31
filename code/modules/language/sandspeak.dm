@@ -1,6 +1,6 @@
 /datum/language/celestial
 	name = "Celestial"
-	desc = ""
+	desc = "The language of the divine, primarily used by the Church of the Ten."
 	speech_verb = "says"
 	ask_verb = "asks"
 	exclaim_verb = "yells"
@@ -15,6 +15,11 @@
 	default_priority = 80
 	icon_state = "celestial"
 	spans = list(SPAN_CELESTIAL)
+
+	mutual_understanding = list(
+		/datum/language/celestial_moon = 33,
+	)
+
 	syllables = list(
 		"ak",
 		"al",
@@ -80,7 +85,7 @@
 
 /datum/language/celestial_moon
 	name = "Lunaris"
-	desc = ""
+	desc = "A language based upon Celestial, used by members of the Lunar Order."
 	speech_verb = "says"
 	ask_verb = "asks"
 	exclaim_verb = "yells"
@@ -95,6 +100,11 @@
 	default_priority = 80
 	icon_state = "lunar"
 	spans = list(SPAN_CELESTIAL)
+
+	mutual_understanding = list(
+		/datum/language/celestial = 33,
+	)
+
 	syllables = list(
 		"ak",
 		"al",

@@ -25,6 +25,12 @@
 /obj/item/reagent_containers/glass/bottle/strongstampot
 	list_reagents = list(/datum/reagent/medicine/strongstam = 75)
 
+/obj/item/reagent_containers/glass/bottle/bloodpot
+	list_reagents = list(/datum/reagent/medicine/bloodpot = 75)
+
+/obj/item/reagent_containers/glass/bottle/strongbloodpot
+	list_reagents = list(/datum/reagent/medicine/strongbloodpot = 75)
+
 /obj/item/reagent_containers/glass/bottle/poison
 	list_reagents = list(/datum/reagent/poison/berry = 15)
 

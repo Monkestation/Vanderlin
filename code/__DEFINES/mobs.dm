@@ -79,6 +79,7 @@
 #define BODYPART_DISABLED_WOUND 3 //bone fracture
 #define BODYPART_DISABLED_ROT 4 //limb is rotten oh nooo
 #define BODYPART_DISABLED_CLAMPED 5 //limb is clamped by a hemostat or speculum
+#define BODYPART_DISABLED_TOURNIQUET 6
 
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
 

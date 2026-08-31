@@ -23,6 +23,7 @@
 	grid_height = 96
 	grid_width = 32
 	item_weight = 800 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/lordscepter/Initialize()
 	. = ..()
@@ -67,48 +68,48 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 
 
-	if(ishuman(user))
-		var/mob/living/carbon/human/HU = user
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/HU = user
 
-		if(!is_lord_job(HU.mind?.assigned_role))
-			to_chat(user, span_danger("The rod doesn't obey me."))
-			return
+	if(!is_lord_job(HU.mind?.assigned_role))
+		to_chat(user, span_danger("The rod doesn't obey me."))
+		return
 
-		if(ishuman(target))
-			var/mob/living/carbon/human/H = target
+	if(!ishuman(target))
+		return
 
-			user.visible_message(span_warning("[user] points [src] at [target].</span>"))
+	var/mob/living/carbon/human/H = target
 
-			if(H == HU)
-				return
+	user.visible_message(span_warning("[user] points [src] at [target].</span>"))
 
-			if(H.can_block_magic(MAGIC_RESISTANCE))
-				return
+	if(H == HU)
+		return
 
-			if(!(H.mind?.assigned_role.department_flag & GARRISON|NOBLEMEN))
-				return
+	if(H.can_block_magic(MAGIC_RESISTANCE))
+		return
 
-			if(!COOLDOWN_FINISHED(src, scepter))
-				to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, scepter) / 10, 1)] seconds left!"))
-				return
+	if(!COOLDOWN_FINISHED(src, scepter))
+		to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, scepter) / 10, 1)] seconds left!"))
+		return
 
-			if(istype(user.used_intent, /datum/intent/lord_electrocute))
-				HU.visible_message(span_warning("[HU] electrocutes [H] with \the [src]."))
-				user.Beam(target, icon_state = "lightning[rand(1, 12)]", time = 0.5 SECONDS) // LIGHTNING
-				playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
-				H.electrocute_act(5, src)
-				HU.log_message("has shocked [H.real_name] with the [src]!", LOG_ATTACK)
-				to_chat(H, span_danger("I'm electrocuted by the scepter!"))
-				COOLDOWN_START(src, scepter, 20 SECONDS)
-				return
+	if(istype(user.used_intent, /datum/intent/lord_electrocute))
+		HU.visible_message(span_warning("[HU] electrocutes [H] with \the [src]."))
+		user.Beam(target, icon_state = "lightning[rand(1, 12)]", time = 0.5 SECONDS) // LIGHTNING
+		playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+		H.electrocute_act(5, src)
+		HU.log_message("has shocked [H.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(H, span_danger("I'm electrocuted by the scepter!"))
+		COOLDOWN_START(src, scepter, 20 SECONDS)
+		return
 
-			if(istype(user.used_intent, /datum/intent/lord_silence))
-				HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
-				H.set_silence(20 SECONDS)
-				HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
-				to_chat(H, span_danger("I'm silenced by the scepter!"))
-				COOLDOWN_START(src, scepter, 10 SECONDS)
-				return
+	if(istype(user.used_intent, /datum/intent/lord_silence))
+		HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
+		H.set_silence(20 SECONDS)
+		HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(H, span_danger("I'm silenced by the scepter!"))
+		COOLDOWN_START(src, scepter, 10 SECONDS)
+		return
 
 //................ Staff of the Testimonium ............... //
 /obj/item/weapon/polearm/woodstaff/aries
@@ -126,6 +127,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /datum/intent/priest_smite
 	name = "smite"
@@ -157,40 +159,42 @@
 		to_chat(user, span_danger("The staff doesn't obey me."))
 		return
 
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+	if(!ishuman(target))
+		return
 
-		user.visible_message(span_warning("[user] points [src] at [target]."))
+	var/mob/living/carbon/human/H = target
 
-		if(H == HU)
-			return
+	user.visible_message(span_warning("[user] points [src] at [target]."))
 
-		if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
-			return
+	if(H == HU)
+		return
 
-		if(!(H.mind?.assigned_role.department_flag & CHURCHMEN))
-			return
+	if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
+		return
 
-		if(!COOLDOWN_FINISHED(src, staff))
-			to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
-			return
+	if(!(H.mind?.assigned_role.department_flag & CHURCHMEN))
+		return
 
-		if(istype(user.used_intent, /datum/intent/priest_smite))
-			HU.visible_message(span_warning("[HU] smites [H] with \the [src]."))
-			user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
-			playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
-			H.electrocute_act(5, src)
-			HU.log_message("has smitten [H.real_name] with the [src]!", LOG_ATTACK)
-			to_chat(H, span_danger("I'm smitten by the staff!"))
-			COOLDOWN_START(src, staff, 20 SECONDS)
-			return
+	if(!COOLDOWN_FINISHED(src, staff))
+		to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
+		return
 
-		if(istype(user.used_intent, /datum/intent/priest_silence))
-			HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
-			H.set_silence(20 SECONDS)
-			HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
-			to_chat(H, span_danger("I'm silenced by the staff!"))
-			COOLDOWN_START(src, staff, 10 SECONDS)
+	if(istype(user.used_intent, /datum/intent/priest_smite))
+		HU.visible_message(span_warning("[HU] smites [H] with \the [src]."))
+		user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
+		playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+		H.electrocute_act(5, src)
+		HU.log_message("has smitten [H.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(H, span_danger("I'm smitten by the staff!"))
+		COOLDOWN_START(src, staff, 20 SECONDS)
+		return
+
+	if(istype(user.used_intent, /datum/intent/priest_silence))
+		HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
+		H.set_silence(20 SECONDS)
+		HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(H, span_danger("I'm silenced by the staff!"))
+		COOLDOWN_START(src, staff, 10 SECONDS)
 
 /obj/item/weapon/mace/stunmace
 	name = "stunmace"
@@ -337,7 +341,7 @@
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(KATAR_CUT, KATAR_THRUST)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_STEEL
 
 	gripsprite = FALSE
 	w_class = WEIGHT_CLASS_SMALL
@@ -357,6 +361,7 @@
 	icon_state = "psykatar"
 	item_weight = 400 GRAMS
 	smeltresult = /obj/item/ingot/silverblessed
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
 	. = ..()						//+3 force, +50 int, +1 def, make silver
@@ -365,6 +370,7 @@
 /obj/item/weapon/katar/psydon/relic
 	name = "\proper anguish"
 	desc = "An exotic weapon unfamiliar to Grenzelhoft, but taken and given blessings to fit in the Armoury of Psydon. May its blows cause naught but anguish to those who dare raise up arms against you."
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/katar/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -380,6 +386,18 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "abyssorclaw"
 	item_weight = 350 GRAMS
+
+/obj/item/weapon/katar/silver
+	name = "silver katar"
+	desc = "A glimmering silver blade that sits above the users fist. Used by holy monks who otherwise prefer unarmed combat to fight the creatures of the nite."
+	icon_state = "silverkatar"
+	item_weight = 400 GRAMS
+	smeltresult = /obj/item/ingot/silver
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
+
+/obj/item/weapon/katar/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /datum/intent/knuckles/strike
 	name = "punch"
@@ -414,7 +432,7 @@
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(KNUCKLE_STRIKE, KNUCKLE_SMASH)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL
 
 	gripsprite = FALSE
 	w_class = WEIGHT_CLASS_SMALL
@@ -448,6 +466,7 @@
 	icon_state = "psyknuckle"
 	item_weight = 200 GRAMS
 	melting_material = /datum/material/silver
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/knuckles/psydon/Initialize(mapload)
 	. = ..()							//+3 force, +50 int, +1 def, make silver
@@ -456,6 +475,7 @@
 /obj/item/weapon/knuckles/psydon/relic
 	name = "\proper confidence"
 	desc = "Silver knuckles, fashioned in the iconography of Psydon. May your strikes be confident and true, and done in His name."
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/knuckles/psydon/relic/Initialize(mapload)
 	. = ..()							//+5 force, +100 int, +1 def, make silver
@@ -472,3 +492,45 @@
 	icon_state = "eoraknuckle"
 	force = DAMAGE_KNUCKLES + 2
 	item_weight = 200 GRAMS
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+
+/obj/item/weapon/knuckles/iron
+	name = "iron knuckles"
+	desc = "A mean looking pair of iron knuckles, not that good in quality but they do the job."
+	icon_state = "ironknuckle"
+	smeltresult = /obj/item/ingot/iron
+	melting_material = null
+	force = DAMAGE_KNUCKLES - 2
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IRON
+
+/obj/item/weapon/knuckles/bronze
+	name = "bronze knuckles"
+	desc = "A mean looking pair of bronze knuckles. Mildly heavier than its steel counterpart, making it a solid defensive option, if less wieldy."
+	icon_state = "bronzeknuckle"
+	smeltresult = /obj/item/ingot/bronze
+	melting_material = null
+	force = DAMAGE_KNUCKLES - 4
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BRONZE
+
+/obj/item/weapon/knuckles/silver
+	name = "silver knuckles"
+	desc = "A simple piece of harm that has been molded from pure silver, and further studded to stop errant strikes dead in their tracks. Though ostensibly holy, these heftsome knuckleweights are \
+	more strongly associated with underground pugilistic tournaments; a solid right hook could drive more-than-enough force to blow a yeoman's jaw clean off."
+	icon_state = "silverknuckle"
+	smeltresult = /obj/item/ingot/silver
+	melting_material = null
+	force = DAMAGE_KNUCKLES + 2
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
+
+/obj/item/weapon/knuckles/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/knuckles/blacksteel
+	name = "blacksteel knuckles"
+	desc = "An exotic use for an expensive metal, punch them with wealth."
+	icon_state = "bsknuckle"
+	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = null
+	force = DAMAGE_KNUCKLES + 4
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLACKSTEEL

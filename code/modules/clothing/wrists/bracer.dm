@@ -13,7 +13,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.2 KILOGRAMS
 
 /obj/item/clothing/wrists/bracers/preceptor
@@ -41,7 +41,7 @@
 	item_state = "ibracers"
 	armor_type = /datum/armor/wrist/maille
 	armor_class = AC_MEDIUM
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/wrists/bracers/iron/concealed
 	name = "concealed iron plate vambraces"
@@ -56,7 +56,7 @@
 	item_state = "jackchain"
 
 	armor_type = /datum/armor/wrist/maille
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = CUT_AND_MINOR_CRITS
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = /datum/material/steel
@@ -70,7 +70,7 @@
 
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/wrist/maille
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = CUT_AND_MINOR_CRITS
 	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
@@ -96,7 +96,7 @@
 	salvage_amount = 1
 	dyeable = TRUE
 	salvage_result = null
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 650 GRAMS
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BRACERS ARE INTENDED
@@ -108,14 +108,14 @@
 	desc = "Hardened leather braces that will keep your wrists safe from bludgeoning."
 	armor_type = /datum/armor/wrist/leather/advanced
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
-	max_integrity = INTEGRITY_STANDARD + 50
+	max_integrity = INTEGRITY_OLD_STANDARD + 50
 
 /obj/item/clothing/wrists/bracers/leather/masterwork
 	name = "masterwork leather bracers"
 	desc = "These bracers are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
 	armor_type = /datum/armor/wrist/leather/master
 	prevent_crits = ALL_EXCEPT_STAB
-	max_integrity = INTEGRITY_STANDARD + 100
+	max_integrity = INTEGRITY_OLD_STANDARD + 100
 
 /obj/item/clothing/wrists/bracers/leather/masterwork/Initialize()
 	. = ..()
@@ -130,7 +130,7 @@
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 	AddComponent(/datum/component/storage/concrete/scabbard/knife)
 
 /obj/item/clothing/wrists/bracers/psythorns

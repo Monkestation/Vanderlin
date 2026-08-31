@@ -1,0 +1,6 @@
+author: "Monkeke2"
+delete-after: True
+changes:
+  - rscadd: "Added mercenary statue and mercenary ring."
+  - rscdel: "Removed mentions of gaffer from mercenary spawn text."
+  - map: "Added the mercenary statues to Vanderlin, Daftmarsh and WPP."

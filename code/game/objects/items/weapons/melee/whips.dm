@@ -25,6 +25,7 @@
 	sellprice = 30
 	grid_width = 32
 	grid_height = 64
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_LEATHER
 
 	weapon_special = /datum/special_intent/whip_coil
 	item_weight = 500 GRAMS
@@ -46,9 +47,10 @@
 	force = DAMAGE_WHIP + 4
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/steel
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	sellprice = 50
 	item_weight = 600 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 //................ Bronze Whip ............... //
 /obj/item/weapon/whip/bronze
@@ -58,12 +60,15 @@
 	force = DAMAGE_WHIP + 1
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/bronze
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BRONZE
 
 //................ Butler Whip ............... //
 /obj/item/weapon/whip/bronze/butler
 	name = "crown's will"
 	desc = "A pale corded whip with a bronze handle and tip, intended more as a ceremonial piece than a weapon it can still strike with deadly precision."
 	icon_state = "whip_butler"
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BRONZE * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 //................ Steel Whip ............... //
 /obj/item/weapon/whip/steel
@@ -73,7 +78,7 @@
 	force = DAMAGE_WHIP + 3
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/steel
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_STEEL
 
 //................ Silver Whip ............... //
 /obj/item/weapon/whip/silver
@@ -83,7 +88,7 @@
 	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silver
-	max_integrity = INTEGRITY_STRONG * 0.8
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_SILVER
 	item_weight = 550 GRAMS
 
 /obj/item/weapon/whip/silver/Initialize(mapload)
@@ -99,7 +104,7 @@
 	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silverblessed
-	max_integrity = INTEGRITY_STRONG * 0.8
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_SILVER
 	item_weight = 550 GRAMS
 
 /obj/item/weapon/whip/psydon/Initialize(mapload)
@@ -111,6 +116,7 @@
 	desc = "Holding this blessed silver evokes memories of the grand cathedrals, testaments to humanity’s faith. There, upon the ceiling, was painted a scene-most-beautiful: of Psydon, robed, in battle against the archdevils. Bring daelight to the faithful."
 	icon_state = "psywhip"
 	item_weight = 550 GRAMS
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/whip/psydon/relic/Initialize(mapload)
 	. = ..()					// Pre-blessed, +5 force, +100 INT, +2 Def, Silver.
@@ -124,21 +130,22 @@
 	force = DAMAGE_WHIP + 4
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/blacksteel
-	max_integrity = INTEGRITY_BLACKSTEEL
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BLACKSTEEL
 
 //................ Bloodsteel Whip ............... //
 /obj/item/weapon/whip/bloodsteel
 	name = "bloodsteel whip"
 	desc = "A whip with a bloodsteel handle, core and tip."
-	icon_state = "whip_steel"
+	icon_state = "whip_corrupt"
 	force = DAMAGE_WHIP + 3
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/bloodsteel
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BLOODSTEEL
 
 /obj/item/weapon/whip/bloodsteel/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)
+
 //................ Caning Stick.................//
 /obj/item/weapon/whip/cane
 	name = "caning stick"
@@ -191,6 +198,8 @@
 	icon_state = "spiderwhip"
 	force = DAMAGE_WHIP + 3
 	item_weight = 500 GRAMS
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BLACKSTEEL
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 //................ Chain Whip ............... //
 /obj/item/weapon/whip/chain
@@ -215,6 +224,7 @@
 	force = DAMAGE_WHIP + 4
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	item_weight = 500 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"
@@ -236,7 +246,7 @@
 	can_parry = TRUE
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, WHIP_CUT)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_STEEL
 
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	resistance_flags = FIRE_PROOF
@@ -250,7 +260,7 @@
 	icon_state = "urumi_iron"
 	force = DAMAGE_WHIP
 	max_blade_int = 150
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_IRON
 	smeltresult = /obj/item/ingot/iron
 	item_weight = 850 GRAMS
 
@@ -259,7 +269,7 @@
 	icon_state = "urumi_bronze"
 	force = DAMAGE_WHIP
 	max_blade_int = 100
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_BRONZE
 	smeltresult = /obj/item/ingot/bronze
 	item_weight = 800 GRAMS
 
@@ -268,7 +278,7 @@
 	icon_state = "urumi_silver"
 	force = DAMAGE_WHIP + 1
 	max_blade_int = 160
-	max_integrity = INTEGRITY_STRONG * 0.8
+	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_SILVER
 	smeltresult = /obj/item/ingot/silver
 	item_weight = 750 GRAMS
 

@@ -20,7 +20,7 @@
 	obj_flags = CAN_BE_HIT
 	blade_dulling = DULLING_BASH
 	resistance_flags = FIRE_PROOF
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STATIC_200
 	wdefense = GOOD_PARRY
 	experimental_onhip = TRUE
 	experimental_onback = TRUE
@@ -30,6 +30,7 @@
 		"embedded_fall_chance" = 0,
 	)
 	istrainable = TRUE // You can train weapon skills on a dummy with these.
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 	var/axe_cut = 0
 	var/datum/special_intent/weapon_special
 
