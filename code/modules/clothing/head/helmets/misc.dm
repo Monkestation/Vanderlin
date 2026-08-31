@@ -786,7 +786,7 @@
 	item_state = "ironthorns"
 	armor_type = /datum/armor/head/maille/iron/ironbriar
 	armor_class = AC_LIGHT
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST)
 	blocksound = PLATEHIT
 	resistance_flags = FIRE_PROOF
