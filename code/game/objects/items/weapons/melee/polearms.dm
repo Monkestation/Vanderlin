@@ -54,6 +54,7 @@
 	sharpness = IS_BLUNT
 	sellprice = 5
 	item_weight = 1 KILOGRAMS
+	weapon_special = /datum/special_intent/quarterstaff_sweep
 
 /obj/item/weapon/polearm/woodstaff/getonmobprop(tag)
 	. = ..()
