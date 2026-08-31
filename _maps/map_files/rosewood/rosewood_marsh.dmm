@@ -3,7 +3,7 @@
 /obj/structure/window,
 /obj/structure/curtain/bounty,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ab" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -38,7 +38,7 @@
 "ag" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ah" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
@@ -71,7 +71,7 @@
 	pixel_y = 16
 	},
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "aj" = (
 /obj/effect/decal/shadow_floor{
 	dir = 6
@@ -83,7 +83,7 @@
 /area/outdoors/bog)
 "am" = (
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "an" = (
 /turf/open/floor/rooftop/green,
 /area/outdoors/bog)
@@ -107,7 +107,7 @@
 /area/indoors/mountains)
 "aq" = (
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ar" = (
 /obj/effect/decal/cleanable/food/mess,
 /turf/open/floor/dirt,
@@ -115,7 +115,7 @@
 "au" = (
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ax" = (
 /obj/item/weapon/hoe/copper,
 /turf/open/floor/dirt/road,
@@ -127,7 +127,7 @@
 "aA" = (
 /obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "aB" = (
 /obj/structure/door/weak,
 /turf/open/floor/naturalstone,
@@ -135,7 +135,7 @@
 "aD" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "aI" = (
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/naturalstone,
@@ -149,7 +149,7 @@
 "aL" = (
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "aN" = (
 /turf/open/floor/cobblerock,
 /area/indoors/shelter/bog/witch)
@@ -169,14 +169,14 @@
 "aR" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "aT" = (
 /obj/structure/fluff/railing/border{
 	dir = 9;
 	icon_state = "border"
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "aU" = (
 /obj/item/clothing/neck/psycross/gold{
 	pixel_x = -7;
@@ -188,7 +188,7 @@
 	},
 /obj/item/clothing/neck/psycross/silver/divine/pestra,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "aV" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass/cold,
@@ -214,7 +214,7 @@
 	icon_state = "stairs"
 	},
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bb" = (
 /obj/structure/hotspring/border/three,
 /turf/open/floor/cobblerock/alt,
@@ -223,11 +223,11 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup/wooden/crafted,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bd" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bf" = (
 /obj/structure/spider/stickyweb{
 	dir = 4
@@ -266,15 +266,15 @@
 	},
 /obj/item/natural/wood/plank,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bs" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bt" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bu" = (
 /obj/structure/bed/hay,
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -289,10 +289,10 @@
 	faction = list("Undead")
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bz" = (
 /turf/open/water/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bA" = (
 /obj/machinery/light/fueled/wallfire/candle/l{
 	pixel_x = 0;
@@ -322,7 +322,7 @@
 "bI" = (
 /obj/structure/flora/tree,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bJ" = (
 /obj/structure/trap/saw_blades,
 /turf/open/floor/churchrough,
@@ -338,7 +338,7 @@
 "bR" = (
 /obj/structure/bed/shit,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bU" = (
 /obj/effect/decal/cleanable/sigil{
 	icon_state = "zizocircle";
@@ -347,7 +347,7 @@
 	pixel_y = 10
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "bW" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -380,26 +380,26 @@
 "ch" = (
 /obj/structure/window/stained/zizo,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cm" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/bodypart/r_arm/prosthetic/wood,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cp" = (
 /obj/structure/table/wood/plain,
 /obj/structure/fluff/millstone,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cr" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ct" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cu" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/dirt,
@@ -419,7 +419,7 @@
 	dir = 6
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cz" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/effect/mapping_helpers/access/keyset/other/bogwitch,
@@ -449,11 +449,11 @@
 /obj/effect/waterfall,
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cI" = (
 /mob/living/carbon/human/species/zizombie/npc/peasant,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cJ" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/cup/silver,
@@ -464,13 +464,13 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cL" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cM" = (
 /obj/item/chair/stool,
 /turf/open/floor/dirt,
@@ -506,12 +506,12 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "cZ" = (
 /obj/structure/door/iron/bars/cell,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "db" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -524,7 +524,7 @@
 "dd" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "de" = (
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/grass/cold,
@@ -535,16 +535,16 @@
 	},
 /obj/structure/flora/hotspring_rocks/small,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dh" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "di" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dj" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -573,7 +573,7 @@
 "dn" = (
 /obj/machinery/light/fueled/hearth,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dq" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/naturalstone,
@@ -585,7 +585,7 @@
 "ds" = (
 /obj/structure/chair/bench/church/mid,
 /turf/open/floor/churchbrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dw" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -622,14 +622,14 @@
 /turf/open/floor/rooftop/green{
 	dir = 1
 	},
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dD" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/ruinedwood,
 /area/indoors/cave)
 "dE" = (
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dG" = (
 /turf/closed/wall/mineral/stonebrick/reddish,
 /area/indoors/cave)
@@ -647,12 +647,12 @@
 "dL" = (
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dM" = (
 /obj/structure/forcefield/strong,
 /obj/structure/forcefield/strong,
 /turf/closed/wall/mineral/stonebrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dO" = (
 /obj/effect/decal/cleanable/food/egg_smudge,
 /turf/open/floor/ruinedwood/darker,
@@ -672,14 +672,14 @@
 /obj/structure/table/wood/plain,
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dS" = (
 /obj/structure/fluff/walldeco/painting/queen{
 	pixel_x = 31;
 	pixel_y = 0
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dT" = (
 /obj/effect/decal/cleanable/sigil{
 	icon_state = "zizocircle";
@@ -688,19 +688,19 @@
 	pixel_y = 16
 	},
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dV" = (
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dX" = (
 /obj/structure/stairs,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dZ" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eb" = (
 /obj/structure/table/wood/plain,
 /obj/item/statue/gold/loot,
@@ -747,7 +747,7 @@
 "ej" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ek" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/copper{
@@ -764,12 +764,12 @@
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "em" = (
 /turf/open/floor/rooftop/green{
 	dir = 4
 	},
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "en" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/dirt,
@@ -783,7 +783,7 @@
 "eq" = (
 /obj/item/cooking/pan,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "er" = (
 /obj/item/chair/stool,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -792,22 +792,22 @@
 "ev" = (
 /obj/structure/fluff/statue/knight/r,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ew" = (
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ex" = (
 /turf/open/floor/cobblerock,
 /area/outdoors/bog)
 "ey" = (
 /obj/structure/door/fancy,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eA" = (
 /mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eB" = (
 /obj/structure/fluff/psycross/zizocross,
 /obj/effect/temp_visual/curse{
@@ -816,7 +816,7 @@
 	pixel_y = 17
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eC" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobble,
@@ -824,11 +824,11 @@
 "eE" = (
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eF" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eK" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32;
@@ -839,10 +839,10 @@
 "eL" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eN" = (
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eQ" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -869,23 +869,23 @@
 "eU" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eW" = (
 /obj/structure/innocent_bush,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "eX" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fa" = (
 /obj/structure/fluff/walldeco/painting/seraphina{
 	pixel_y = 32
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fc" = (
 /obj/structure/dungeon_entry,
 /turf/closed/mineral/bedrock/cold,
@@ -927,11 +927,11 @@
 "fj" = (
 /obj/effect/decal/cleanable/vomit/old,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fl" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fn" = (
 /obj/structure/table/wood/plain_alt,
 /obj/effect/spawner/map_spawner/loot/potion_poisons{
@@ -947,11 +947,11 @@
 	pixel_y = 5
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fp" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fr" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven/west,
@@ -966,7 +966,7 @@
 	},
 /obj/structure/fluff/psycross/zizocross,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ft" = (
 /obj/structure/fluff/nest,
 /obj/effect/spawner/map_spawner/loot/armor,
@@ -989,11 +989,11 @@
 "fw" = (
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fx" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fz" = (
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/naturalstone,
@@ -1005,13 +1005,13 @@
 "fB" = (
 /obj/structure/curtain/bounty,
 /turf/closed/wall/window,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fC" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fD" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4;
@@ -1019,7 +1019,7 @@
 	},
 /obj/item/natural/glass/shard,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fG" = (
 /obj/structure/spider/cocoon,
 /turf/open/floor/ruinedwood,
@@ -1029,7 +1029,7 @@
 	dir = 4
 	},
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "fI" = (
 /obj/structure/spider/nest/constructed,
 /turf/open/floor/dirt,
@@ -1075,7 +1075,7 @@
 	faction = list("Undead")
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ga" = (
 /turf/open/floor/rooftop/green{
 	dir = 4
@@ -1084,7 +1084,7 @@
 "gc" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ge" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb{
@@ -1112,11 +1112,11 @@
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gm" = (
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gn" = (
 /obj/structure/chair/wood/alt,
 /turf/open/floor/ruinedwood,
@@ -1151,7 +1151,7 @@
 	pixel_y = 7
 	},
 /turf/open/floor/churchbrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gu" = (
 /obj/structure/bed/wool,
 /obj/item/bedsheet/pelt,
@@ -1187,12 +1187,12 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/fishingrod/abyssor_trident,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gD" = (
 /obj/structure/bookcase,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gE" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -1222,7 +1222,7 @@
 /obj/structure/bed/hay,
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gK" = (
 /obj/structure/bed/wool,
 /turf/open/floor/ruinedwood/darker,
@@ -1249,7 +1249,7 @@
 "gN" = (
 /obj/structure/table/wood/reinf_long,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gO" = (
 /obj/structure/statue/bone/rib{
 	dir = 8
@@ -1263,7 +1263,7 @@
 	faction = list("Undead")
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gQ" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood,
@@ -1279,11 +1279,11 @@
 "gT" = (
 /obj/item/natural/glass/shard,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gU" = (
 /obj/structure/fluff/statue/knight/r,
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gW" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/stronghealthpot{
@@ -1307,7 +1307,7 @@
 	pixel_y = 5
 	},
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "gY" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -1316,11 +1316,11 @@
 /area/indoors/mountains)
 "gZ" = (
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hb" = (
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hc" = (
 /obj/item/chair/wood,
 /obj/effect/decal/cleanable/sigil{
@@ -1328,7 +1328,7 @@
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hd" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/effect/spawner/map_spawner/loot/medium,
@@ -1338,7 +1338,7 @@
 /area/indoors/mountains)
 "he" = (
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hg" = (
 /obj/effect/decal/shadow_floor{
 	dir = 1
@@ -1353,7 +1353,7 @@
 "hi" = (
 /obj/structure/fermentation_keg/distiller,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hj" = (
 /obj/structure/well/climb_down,
 /turf/open/floor/grass/cold,
@@ -1383,7 +1383,7 @@
 /obj/structure/hotspring/border,
 /obj/machinery/light/fueled/torchholder/hotspring/standing,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ho" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -1399,7 +1399,7 @@
 	dir = 8
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hr" = (
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
@@ -1407,21 +1407,21 @@
 /area/outdoors/bog)
 "ht" = (
 /turf/closed/mineral/random/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hv" = (
 /obj/item/candle/skull/darkskull/lit{
 	pixel_x = -3;
 	pixel_y = 10
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hw" = (
 /obj/structure/table/wood/counter/end{
 	dir = 4
 	},
 /obj/item/reagent_containers/glass/cup/wooden/crafted,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hx" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/church,
@@ -1439,7 +1439,7 @@
 "hC" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hD" = (
 /obj/structure/flora/hotspring_rocks,
 /turf/open/water/hotspring,
@@ -1447,7 +1447,7 @@
 "hE" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hG" = (
 /obj/structure/chair/stool,
 /obj/effect/landmark/start/bogwitch{
@@ -1458,11 +1458,11 @@
 "hH" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hJ" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hL" = (
 /obj/effect/decal/cleanable/food/mess,
 /turf/open/floor/ruinedwood/darker,
@@ -1473,14 +1473,14 @@
 	aportalid = "vanderlin-bog_town-bog"
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hQ" = (
 /obj/structure/fluff/traveltile{
 	aportalid = "vanderlin-bog_town-bog";
 	aportalgoesto = "vanderlin-bog_town-town"
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hR" = (
 /obj/structure/fluff/psycross/zizocross,
 /obj/effect/temp_visual/curse{
@@ -1489,7 +1489,7 @@
 	pixel_y = 17
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hS" = (
 /obj/effect/decal/borderfall{
 	dir = 8
@@ -1505,16 +1505,16 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hW" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "hY" = (
 /obj/structure/table/optable,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ia" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -1534,7 +1534,7 @@
 /obj/structure/rack/shelf/big,
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ih" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt,
@@ -1558,13 +1558,13 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "im" = (
 /mob/living/simple_animal/hostile/retaliate/infernal/hellhound{
 	faction = list("Undead")
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "in" = (
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
@@ -1591,7 +1591,7 @@
 	icon_state = "stairs"
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ir" = (
 /obj/effect/landmark/start/bogwitch{
 	dir = 1
@@ -1602,7 +1602,7 @@
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "it" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb{
@@ -1622,13 +1622,13 @@
 "ix" = (
 /obj/structure/bookcase,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iA" = (
 /obj/structure/table/wood/counter{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iC" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/ruinedwood/darker,
@@ -1642,22 +1642,22 @@
 	pixel_y = 0
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iH" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iK" = (
 /obj/structure/table/stone_small,
 /obj/item/weapon/surgery/hammer,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iM" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iO" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/churchbrick,
@@ -1677,7 +1677,7 @@
 "iU" = (
 /obj/structure/bed/mediocre,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iW" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -1694,7 +1694,7 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/weapon/surgery/scalpel,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iY" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/clothing/shirt/dress/silkdress/colored/random,
@@ -1709,18 +1709,18 @@
 	},
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ja" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
 	icon_state = "border"
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jb" = (
 /obj/structure/flora/hotspring_rocks/small,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jc" = (
 /obj/structure/spider/nest/constructed,
 /turf/open/floor/grass/cold,
@@ -1728,7 +1728,7 @@
 "jd" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "je" = (
 /obj/effect/landmark/hammer/dev_text,
 /turf/open/floor/dirt,
@@ -1752,7 +1752,7 @@
 	pixel_y = 14
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ji" = (
 /obj/structure/hotspring/border/twelve,
 /turf/open/floor/cobblerock/alt,
@@ -1760,7 +1760,7 @@
 "jk" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jl" = (
 /obj/effect/decal/shadow_floor{
 	dir = 10
@@ -1774,14 +1774,14 @@
 /obj/structure/door,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jq" = (
 /obj/structure/table/wood/plain,
 /obj/structure/spider/stickyweb{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "js" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/zizo,
@@ -1798,7 +1798,7 @@
 	health = 500
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jt" = (
 /turf/open/floor/church/rust,
 /area/indoors/shelter/bog/witch)
@@ -1818,7 +1818,7 @@
 "jz" = (
 /obj/structure/forcefield/strong,
 /turf/closed,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jB" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/remains/human,
@@ -1828,7 +1828,7 @@
 "jC" = (
 /obj/structure/flora/tree,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jD" = (
 /obj/structure/rack/shelf/biggest,
 /obj/effect/spawner/map_spawner/loot/armor,
@@ -1847,7 +1847,7 @@
 	redstone_id = "Marsh2"
 	},
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jL" = (
 /obj/item/clothing/neck/psycross/silver,
 /obj/effect/decal/remains/human,
@@ -1855,10 +1855,10 @@
 /area/outdoors/bog)
 "jO" = (
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jP" = (
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jU" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/naturalstone,
@@ -1875,7 +1875,7 @@
 /obj/structure/bookcase,
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "jY" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -1889,17 +1889,17 @@
 "kc" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "kd" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ke" = (
 /obj/structure/stairs/stone{
 	dir = 4
 	},
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "kk" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb{
@@ -1911,7 +1911,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/wine/sourwine,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "kn" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -1933,7 +1933,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/tiefling_wine,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "kw" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -1960,11 +1960,11 @@
 	pixel_y = -32
 	},
 /turf/open/water/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "kE" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "kG" = (
 /turf/closed/indestructible/roguewindow,
 /area/indoors/shelter/bog/witch)
@@ -1978,7 +1978,7 @@
 "kJ" = (
 /obj/structure/forcefield,
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "kL" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -1992,7 +1992,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "kP" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/clothing/armor/leather/hide/orc,
@@ -2005,7 +2005,7 @@
 "kS" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "kX" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb{
@@ -2024,14 +2024,14 @@
 "le" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lf" = (
 /obj/structure/fluff/statue/knight,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lh" = (
 /turf/open/water/swamp,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "li" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -2044,12 +2044,12 @@
 /obj/item/weapon/hoe,
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lk" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ln" = (
 /obj/structure/bookcase,
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -2058,11 +2058,11 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lo" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lr" = (
 /obj/structure/trap/wall_projectile/fireball,
 /turf/open/floor/church,
@@ -2072,7 +2072,7 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lt" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -2089,7 +2089,7 @@
 /area/outdoors/bog)
 "lu" = (
 /turf/open/floor/tile/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lv" = (
 /obj/structure/door/swing,
 /turf/open/floor/tile/kitchen,
@@ -2106,15 +2106,15 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lB" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lC" = (
 /obj/structure/ladder,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lE" = (
 /obj/effect/decal/cleanable/food/mess/soup,
 /turf/open/floor/dirt,
@@ -2145,7 +2145,7 @@
 /obj/structure/table/wood/crafted,
 /obj/item/statue/silver,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "lN" = (
 /obj/structure/stairs/stone,
 /obj/structure/fluff/railing/wood{
@@ -2177,7 +2177,7 @@
 /area/outdoors/bog)
 "lZ" = (
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ma" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/carafe/teapot/clay{
@@ -2209,10 +2209,10 @@
 "mc" = (
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "me" = (
 /turf/open/floor/rooftop/green,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mf" = (
 /obj/structure/hotspring/border,
 /turf/open/floor/cobblerock/alt,
@@ -2225,14 +2225,14 @@
 "mh" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mi" = (
 /obj/effect/decal/shadow_floor{
 	dir = 1
 	},
 /obj/effect/decal/shadow_floor,
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mk" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -1
@@ -2254,18 +2254,18 @@
 	desc = "I have nearly obtained what we need for our lord's arrival. Soon he shall sink this place into a hellish landscape in the name of our god ZIZO!"
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mn" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/natural/glass/shard,
 /obj/item/reagent_containers/glass/bottle/wine,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mp" = (
 /obj/structure/table/wood/crafted,
 /obj/item/rope/chain,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mq" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/dirt,
@@ -2275,7 +2275,7 @@
 	faction = list("Undead")
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mv" = (
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood/darker,
@@ -2330,7 +2330,7 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mP" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/ruinedwood/darker,
@@ -2373,10 +2373,10 @@
 "mX" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mY" = (
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "mZ" = (
 /obj/effect/decal/shadow_floor{
 	dir = 10
@@ -2387,14 +2387,14 @@
 /obj/structure/fluff/railing/border,
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nb" = (
 /turf/closed/indestructible/wooddark/mast,
 /area/indoors/mountains)
 "nd" = (
 /obj/structure/chair/stool,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ne" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -2414,14 +2414,14 @@
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nj" = (
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nk" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nm" = (
 /obj/effect/decal/shadow_floor{
 	dir = 6
@@ -2434,7 +2434,7 @@
 	pixel_y = 2
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "no" = (
 /obj/structure/stairs{
 	icon_state = "stairs";
@@ -2454,7 +2454,7 @@
 	pixel_y = 32
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nq" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/rooftop/green,
@@ -2463,7 +2463,7 @@
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nu" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/churchmarble,
@@ -2491,7 +2491,7 @@
 "nz" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nB" = (
 /obj/structure/stairs{
 	dir = 4;
@@ -2518,7 +2518,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nD" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -2529,7 +2529,7 @@
 "nE" = (
 /obj/structure/toilet,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nF" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/churchrough,
@@ -2538,7 +2538,7 @@
 /obj/machinery/light/fueled/oven/east,
 /obj/item/reagent_containers/food/snacks/rotten/breadslice,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nI" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/naturalstone,
@@ -2555,13 +2555,13 @@
 	dir = 9
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nP" = (
 /obj/effect/decal/shadow_floor{
 	dir = 8
 	},
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nS" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -2576,11 +2576,11 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/bodypart/l_arm/prosthetic/iron,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nU" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "nV" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -2610,11 +2610,11 @@
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "oc" = (
 /obj/item/perfume/random,
 /turf/open/floor/tile/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "od" = (
 /turf/closed/wall/mineral/wooddark/window,
 /area/indoors/mountains)
@@ -2623,11 +2623,11 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "of" = (
 /obj/structure/stairs,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "og" = (
 /obj/structure/chair/stool,
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -2639,7 +2639,7 @@
 /obj/item/clothing/shoes/nobleboot/thighboots,
 /obj/item/clothing/shirt/tunic/noblecoat,
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "oj" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/ruinedwood/darker,
@@ -2650,7 +2650,7 @@
 	pixel_y = -5
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ol" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -2678,11 +2678,11 @@
 /obj/effect/decal/cleanable/blood,
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "oz" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "oA" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/grass/cold,
@@ -2728,7 +2728,7 @@
 	aportalgoesto = "vanderlin-bog_town-town"
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "oS" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/grass/cold,
@@ -2737,13 +2737,13 @@
 /obj/effect/decal/cleanable/blood,
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "oV" = (
 /mob/living/simple_animal/hostile/retaliate/infernal/watcher{
 	faction = list("Undead")
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "oX" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 4
@@ -2759,15 +2759,15 @@
 "pc" = (
 /obj/structure/bookcase,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pd" = (
 /obj/item/reagent_containers/glass/bottle/strongpoison,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pe" = (
 /obj/item/natural/glass/shard,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pf" = (
 /obj/structure/stairs{
 	dir = 4;
@@ -2783,11 +2783,11 @@
 	redstone_id = "Marsh3"
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ph" = (
 /obj/structure/bookcase/random/archive,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pi" = (
 /mob/living/simple_animal/hostile/retaliate/troll/cave/ambush,
 /turf/open/floor/twig,
@@ -2795,7 +2795,7 @@
 "pk" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pn" = (
 /obj/structure/fluff/nest,
 /turf/open/floor/ruinedwood/darker,
@@ -2880,17 +2880,17 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pK" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pL" = (
 /obj/structure/lever/hidden{
 	redstone_id = "Marsh1"
 	},
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pM" = (
 /obj/structure/table/wood/plain,
 /obj/structure/fluff/millstone,
@@ -2926,7 +2926,7 @@
 	pixel_y = 2
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pU" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -2938,7 +2938,7 @@
 	pixel_y = 32
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "pZ" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/naturalstone,
@@ -2956,7 +2956,7 @@
 /area/outdoors/bog)
 "qe" = (
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qf" = (
 /obj/structure/fluff/nest,
 /turf/open/floor/dirt,
@@ -2965,18 +2965,18 @@
 /obj/structure/table/wood/reinf_long{
 	dir = 4
 	},
-/obj/item/scrying{
+/obj/item/scrying/orb{
 	pixel_x = 8;
 	pixel_y = 1
 	},
 /obj/item/natural/abyssalflame,
 /turf/open/floor/churchbrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qj" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qk" = (
 /obj/structure/door/stone,
 /turf/open/floor/church,
@@ -2984,7 +2984,7 @@
 "qm" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qp" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/cooked/sausage/wiener,
@@ -3000,7 +3000,7 @@
 /area/outdoors/bog)
 "qr" = (
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qt" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/mountains)
@@ -3016,11 +3016,11 @@
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qC" = (
 /obj/item/natural/glass/shard,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qD" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/dirt,
@@ -3043,12 +3043,12 @@
 "qK" = (
 /obj/structure/spider/cocoon,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qO" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qR" = (
 /obj/structure/fluff/nest,
 /mob/living/simple_animal/hostile/retaliate/troll/axe,
@@ -3065,7 +3065,7 @@
 "qY" = (
 /obj/structure/door,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qZ" = (
 /obj/structure/fluff/psycross/zizocross,
 /obj/structure/fluff/railing/border,
@@ -3075,7 +3075,7 @@
 	pixel_y = 17
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ra" = (
 /obj/structure/flora/hotspring_rocks/small/two,
 /turf/open/water/hotspring,
@@ -3088,7 +3088,7 @@
 /obj/structure/bed/inn,
 /obj/item/bedsheet/fabric,
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rf" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/twig,
@@ -3143,10 +3143,10 @@
 /obj/effect/waterfall,
 /obj/structure/flora/grass/water,
 /turf/open/water/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rq" = (
 /turf/open/floor/churchbrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rr" = (
 /obj/machinery/light/fueled/firebowl/blackfire,
 /obj/structure/fluff/railing/wood{
@@ -3164,7 +3164,7 @@
 "rt" = (
 /obj/structure/chair/wood/alt/chair_noble/red,
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ru" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass/cold,
@@ -3206,7 +3206,7 @@
 	dir = 1
 	},
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rF" = (
 /obj/structure/spider/stickyweb{
 	dir = 4
@@ -3221,18 +3221,18 @@
 "rI" = (
 /obj/item/chair/stool,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rJ" = (
 /obj/structure/window,
 /obj/structure/forcefield,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rL" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rO" = (
 /obj/structure/table/wood/plain,
 /obj/item/dice/d6{
@@ -3248,12 +3248,12 @@
 	pixel_y = 7
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rP" = (
 /obj/structure/stairs/stone,
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rS" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -3271,7 +3271,7 @@
 "rU" = (
 /obj/structure/chair/wood/alt,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rW" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood,
@@ -3279,11 +3279,11 @@
 "rX" = (
 /obj/structure/table/wood/counter,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rY" = (
 /obj/effect/landmark/hammer/dev_text,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sb" = (
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood,
@@ -3293,7 +3293,7 @@
 	dir = 4
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "se" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/water/swamp,
@@ -3306,11 +3306,11 @@
 /obj/item/clothing/shirt/dress/silkdress/colored/random,
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sj" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sl" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/dirt,
@@ -3326,7 +3326,7 @@
 	pixel_y = 32
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "so" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/zizo,
@@ -3343,7 +3343,7 @@
 	health = 500
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sp" = (
 /obj/effect/landmark/quest_spawner/hard,
 /turf/open/floor/grass/cold,
@@ -3391,15 +3391,15 @@
 	faction = list("Undead")
 	},
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sK" = (
 /obj/structure/door/fancy,
 /turf/open/floor/tile/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sL" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sN" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/shelter/bog/witch)
@@ -3429,7 +3429,7 @@
 /obj/item/gem/green,
 /obj/item/clothing/ring/silver,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sS" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -3439,11 +3439,11 @@
 	pixel_y = 1
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sT" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sW" = (
 /obj/machinery/light/fueled/campfire,
 /turf/open/floor/dirt,
@@ -3451,7 +3451,7 @@
 "sX" = (
 /obj/structure/hotspring/border/eight,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "sY" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/cup/golden{
@@ -3469,11 +3469,11 @@
 /obj/effect/spawner/map_spawner/loot,
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "td" = (
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tf" = (
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
@@ -3485,7 +3485,7 @@
 	},
 /obj/item/clothing/head/helmet/ironpot,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "th" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/cobblerock/alt,
@@ -3494,7 +3494,7 @@
 /obj/effect/decal/cleanable/blood,
 /obj/structure/bookcase,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tj" = (
 /turf/closed/indestructible/wooddark/hull,
 /area/indoors/mountains)
@@ -3516,7 +3516,7 @@
 	pixel_y = 0
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tn" = (
 /turf/open/floor/churchrough/rust,
 /area/indoors/shelter/bog/witch)
@@ -3529,7 +3529,7 @@
 	dir = 8
 	},
 /turf/open/water/swamp,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tu" = (
 /obj/effect/decal/shadow_floor,
 /obj/machinery/light/fueled/firebowl/blackfire,
@@ -3573,7 +3573,7 @@
 /obj/effect/decal/cleanable/blood/old,
 /obj/item/weapon/surgery/bonesetter,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tF" = (
 /obj/item/bodypart/r_arm/prosthetic/bronze,
 /turf/open/floor/ruinedwood/darker,
@@ -3584,25 +3584,25 @@
 /area/indoors/cave)
 "tH" = (
 /turf/closed/wall/mineral/stonebrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tI" = (
 /obj/structure/table/wood/plain_alt,
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tK" = (
 /obj/item/natural/rock,
 /obj/item/natural/glass/shard,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tL" = (
 /obj/item/natural/wood/plank,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tM" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tN" = (
 /turf/open/floor/grass/cold,
 /area/indoors/mountains)
@@ -3630,7 +3630,7 @@
 /obj/structure/fluff/clock/zizoclock,
 /obj/structure/flora/hotspring_rocks/small,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "tU" = (
 /obj/structure/hotspring/border/eight,
 /turf/open/floor/cobblerock/alt,
@@ -3656,13 +3656,13 @@
 	},
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ua" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = 31
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ub" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/storage/belt/leather/plaquesilver,
@@ -3673,7 +3673,7 @@
 "uc" = (
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ud" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -3690,14 +3690,14 @@
 "uf" = (
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "uj" = (
 /obj/structure/table/wood/counter/end{
 	dir = 6
 	},
 /obj/item/bodypart/r_arm/prosthetic/wood,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "uk" = (
 /turf/closed/wall/mineral/wooddark,
 /area/outdoors/bog)
@@ -3740,12 +3740,12 @@
 	pixel_y = 0
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "uo" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "up" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -3758,7 +3758,7 @@
 	dir = 5
 	},
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ut" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/head/helmet/heavy/zizo,
@@ -3775,7 +3775,7 @@
 	health = 500
 	},
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "uv" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/cooked/sausage/wiener,
@@ -3787,10 +3787,10 @@
 	dir = 8
 	},
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ux" = (
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "uy" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb{
@@ -3805,7 +3805,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/whitewine,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "uB" = (
 /obj/structure/fluff/railing/border{
 	dir = 9;
@@ -3817,14 +3817,14 @@
 	desc = "A horrible book that contains untold power. This book is currently in use to darken this area in the void."
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "uC" = (
 /turf/open/floor/churchbrick,
 /area/outdoors/bog)
 "uD" = (
 /obj/structure/flora/tree/underworld,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "uL" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/mountains)
@@ -3843,7 +3843,7 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "uQ" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1;
@@ -3886,7 +3886,7 @@
 "uY" = (
 /obj/structure/forcefield/strong,
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vb" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/ruinedwood,
@@ -3933,13 +3933,13 @@
 "vm" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vn" = (
 /mob/living/simple_animal/hostile/retaliate/infernal/imp{
 	faction = list("Undead")
 	},
 /turf/open/floor/tile/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vo" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/ruinedwood/darker,
@@ -3952,11 +3952,11 @@
 /obj/structure/table/wood/counter,
 /obj/item/reagent_containers/food/snacks/bread/raisin/poison,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vr" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vs" = (
 /obj/item/clothing/pants/webs,
 /turf/open/floor/naturalstone,
@@ -3988,7 +3988,7 @@
 "vB" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vC" = (
 /obj/structure/bed/hay,
 /obj/structure/spider/stickyweb{
@@ -3999,13 +3999,13 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vD" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vG" = (
 /obj/item/chair/stool,
 /turf/open/floor/naturalstone,
@@ -4044,7 +4044,7 @@
 /obj/effect/spawner/map_spawner/loot/food,
 /obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vQ" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /obj/effect/spawner/map_spawner/loot/armor,
@@ -4059,7 +4059,7 @@
 /obj/structure/spider/stickyweb/solo,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vU" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/shelter/bog/witch)
@@ -4073,7 +4073,7 @@
 	pixel_y = 18
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "vY" = (
 /turf/open/floor/cobble,
 /area/outdoors/bog/witch)
@@ -4083,11 +4083,11 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wc" = (
 /obj/structure/bed/hay,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wd" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/cleanable/sigil{
@@ -4095,7 +4095,7 @@
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wf" = (
 /obj/structure/fluff/nest,
 /turf/open/floor/grass/cold,
@@ -4105,17 +4105,17 @@
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wh" = (
 /obj/effect/decal/shadow_floor{
 	dir = 9
 	},
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wi" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wj" = (
 /obj/structure/innocent_bush,
 /turf/open/floor/cobble,
@@ -4130,7 +4130,7 @@
 "wn" = (
 /obj/effect/decal/cleanable/vomit/old,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wo" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -4169,11 +4169,11 @@
 	faction = list("Undead")
 	},
 /turf/open/water/swamp/deep,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ww" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wx" = (
 /obj/structure/fluff/walldeco/church/line,
 /obj/structure/fluff/walldeco/church/line{
@@ -4199,27 +4199,27 @@
 	desc = "I have nearly obtained what we need for our lord's arrival. Soon he shall sink this place into a hellish landscape in the name of our god ZIZO!"
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wD" = (
 /mob/living/simple_animal/hostile/retaliate/infernal/imp{
 	faction = list("Undead")
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wE" = (
 /obj/structure/chair/bench/throne,
 /obj/effect/temp_visual/curse{
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wF" = (
 /turf/open/water/hotspring,
 /area/outdoors/bog)
 "wG" = (
 /obj/structure/hotspring/border/twelve,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wH" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -4229,7 +4229,7 @@
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wI" = (
 /obj/effect/decal/cleanable/blood/gibs/down,
 /obj/effect/decal/cleanable/blood,
@@ -4238,7 +4238,7 @@
 "wJ" = (
 /obj/structure/bars,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wM" = (
 /obj/structure/closet/dirthole/grave,
 /obj/effect/spawner/map_spawner/loot/weapon,
@@ -4252,7 +4252,7 @@
 /obj/structure/bed/hay,
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wP" = (
 /turf/closed/wall/mineral/wood,
 /area/indoors/mountains)
@@ -4270,21 +4270,21 @@
 "wT" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wV" = (
 /turf/closed/mineral/random/cold,
 /area/indoors/mountains)
 "wW" = (
 /obj/structure/mirror/fancy,
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wX" = (
 /obj/structure/fluff/walldeco/painting{
 	pixel_x = 31;
 	pixel_y = 0
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "wY" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/glass/cup/silver{
@@ -4309,11 +4309,11 @@
 /obj/item/natural/obsidian,
 /obj/item/natural/obsidian,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xb" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xc" = (
 /obj/effect/decal/carpet/kover_darkred{
 	dir = 8;
@@ -4321,14 +4321,14 @@
 	pixel_y = 16
 	},
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xd" = (
 /turf/closed/mineral/bedrock/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xe" = (
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xg" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
@@ -4337,7 +4337,7 @@
 	dir = 8
 	},
 /turf/closed/wall/mineral/wood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xj" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -4353,16 +4353,16 @@
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xo" = (
 /obj/effect/temp_visual/cult,
 /obj/structure/flora/hotspring_rocks/small,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xp" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xr" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/shelter/bog/witch)
@@ -4371,7 +4371,7 @@
 	pixel_x = -32
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xt" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/grass/cold,
@@ -4379,18 +4379,18 @@
 "xv" = (
 /obj/structure/wild_plant/nospread/manabloom,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xx" = (
 /obj/structure/fluff/statue/small{
 	pixel_x = -18;
 	pixel_y = 54
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xy" = (
 /obj/effect/decal/shadow_floor,
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xz" = (
 /obj/effect/decal/shadow_floor{
 	dir = 4
@@ -4403,11 +4403,11 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xC" = (
 /obj/structure/hotspring/border/four,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xE" = (
 /obj/structure/table/wood/plain,
 /obj/item/clothing/ring/gold,
@@ -4436,7 +4436,7 @@
 	},
 /obj/item/clothing/ring/gold,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xI" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -4452,7 +4452,7 @@
 /obj/structure/bars,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xR" = (
 /obj/structure/bridge_stakes{
 	dir = 8
@@ -4478,7 +4478,7 @@
 	pixel_y = 17
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "xV" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/cooked/sausage/wiener,
@@ -4510,14 +4510,14 @@
 	dir = 1
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ye" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/mountains)
 "yg" = (
 /obj/structure/door/fancy,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "yi" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/grass/cold,
@@ -4546,7 +4546,7 @@
 	health = 500
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "yp" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -4587,7 +4587,7 @@
 "yw" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "yA" = (
 /obj/structure/door,
 /turf/open/floor/ruinedwood/darker,
@@ -4595,7 +4595,7 @@
 "yC" = (
 /obj/structure/table/wood/fancy,
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "yD" = (
 /obj/structure/door/weak,
 /turf/open/floor/ruinedwood/darker,
@@ -4603,7 +4603,7 @@
 "yF" = (
 /obj/structure/chair/wood/alt/chair_noble,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "yI" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -4616,7 +4616,7 @@
 "yK" = (
 /obj/item/bodypart/l_arm/prosthetic/wood,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "yL" = (
 /obj/structure/rack/underworld,
 /obj/effect/spawner/map_spawner/loot/weapon,
@@ -4643,7 +4643,7 @@
 	pixel_y = 7
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "yQ" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/church/rust,
@@ -4668,7 +4668,7 @@
 /obj/structure/closet/crate/drawer,
 /obj/item/clothing/ring/gold/ravox,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "yY" = (
 /obj/item/clothing/neck/psycross/silver{
 	pixel_x = -9;
@@ -4681,7 +4681,7 @@
 /obj/item/clothing/neck/psycross/silver/divine/necra,
 /obj/effect/decal/remains/human,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "yZ" = (
 /obj/structure/bookcase/random{
 	pixel_y = 25;
@@ -4697,11 +4697,11 @@
 "zb" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/water/swamp/deep,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zd" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ze" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -4714,11 +4714,11 @@
 	dir = 10
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zg" = (
 /obj/structure/fluff/statue/knight,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zh" = (
 /obj/item/reagent_containers/glass/bottle,
 /obj/item/reagent_containers/glass/bottle,
@@ -4748,11 +4748,11 @@
 "zn" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zr" = (
 /obj/item/chair/stool,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zs" = (
 /obj/structure/table/stone_small,
 /obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
@@ -4764,7 +4764,7 @@
 /obj/item/reagent_containers/food/snacks/rotten/breadslice,
 /obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zv" = (
 /obj/item/candle/yellow/lit/infinite,
 /turf/open/floor/ruinedwood/darker,
@@ -4779,11 +4779,11 @@
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zB" = (
 /obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zE" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/recipe_book/alchemy,
@@ -4812,7 +4812,7 @@
 "zI" = (
 /obj/item/chair/fancy,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zJ" = (
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/grass/cold,
@@ -4824,11 +4824,11 @@
 "zL" = (
 /obj/structure/door/fancy,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zM" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zN" = (
 /obj/structure/bridge,
 /turf/open/openspace,
@@ -4856,7 +4856,7 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zW" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup/golden,
@@ -4886,13 +4886,13 @@
 	pixel_y = -8
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zX" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = -32
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zY" = (
 /obj/structure/table/vtable/v2,
 /obj/item/paper/scroll,
@@ -4909,11 +4909,11 @@
 	pixel_y = 11
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "zZ" = (
 /obj/structure/ladder,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Aa" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -4934,15 +4934,15 @@
 	dir = 1
 	},
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ag" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Aj" = (
 /obj/structure/window/stained/zizo,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ak" = (
 /obj/structure/fluff/psycross/zizocross,
 /obj/effect/temp_visual/curse{
@@ -4951,13 +4951,13 @@
 	pixel_y = 17
 	},
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "An" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 1
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ao" = (
 /obj/structure/stairs/stone,
 /obj/structure/fluff/railing/wood{
@@ -5026,7 +5026,7 @@
 "AC" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "AD" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/remains/human,
@@ -5042,11 +5042,11 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "AG" = (
 /obj/item/natural/rock,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "AJ" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -5055,12 +5055,12 @@
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "AK" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "AL" = (
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/ruinedwood/darker,
@@ -5085,7 +5085,7 @@
 "AU" = (
 /mob/living/carbon/human/species/zizombie/npc/grenzel,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "AW" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/ruinedwood/darker,
@@ -5112,7 +5112,7 @@
 	pixel_y = 13
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Bb" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/cheese_wedge/aged,
@@ -5141,16 +5141,16 @@
 	icon_state = "churchslate"
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Bh" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Bj" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Bk" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
@@ -5172,7 +5172,7 @@
 "Bp" = (
 /obj/structure/bookcase,
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Bq" = (
 /obj/structure/flora/grass/bush_meagre/bog,
 /turf/open/floor/grass/cold,
@@ -5192,7 +5192,7 @@
 /area/indoors/mountains)
 "Bv" = (
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "By" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/reagent_containers/food/snacks/cheesebun,
@@ -5232,7 +5232,7 @@
 	icon_state = "border"
 	},
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "BH" = (
 /obj/structure/trap/poison,
 /turf/open/floor/church,
@@ -5240,17 +5240,17 @@
 "BJ" = (
 /obj/structure/bed/shit,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "BK" = (
 /obj/item/natural/bundle/cloth,
 /turf/open/floor/tile/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "BL" = (
 /obj/structure/table/stone_small,
 /obj/item/bodypart/head/orc,
 /obj/item/organ/eyes/night_vision/nightmare,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "BN" = (
 /obj/structure/fluff/nest,
 /obj/effect/decal/cleanable/food/mess/soup,
@@ -5263,7 +5263,7 @@
 "BP" = (
 /mob/living/carbon/human/species/zizombie/npc/peasant,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "BR" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
@@ -5273,7 +5273,7 @@
 "BS" = (
 /obj/structure/chair/bench/church/r,
 /turf/open/floor/churchbrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "BU" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -5282,12 +5282,12 @@
 	dir = 4
 	},
 /turf/closed/wall/mineral/wood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "BW" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "BX" = (
 /obj/structure/bridge_stakes{
 	dir = 1
@@ -5309,7 +5309,7 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Cb" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/cobble,
@@ -5337,12 +5337,12 @@
 "Cf" = (
 /obj/item/bodypart/r_leg/prosthetic/wood,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Cj" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Cm" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/essence_vial,
@@ -5371,15 +5371,15 @@
 	dir = 4
 	},
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Cp" = (
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Cr" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Cs" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 4
@@ -5388,7 +5388,7 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ct" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 1
@@ -5397,7 +5397,7 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Cu" = (
 /obj/structure/bed/hay,
 /turf/open/floor/dirt,
@@ -5413,11 +5413,11 @@
 	dir = 4
 	},
 /turf/closed/wall/mineral/wood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CA" = (
 /mob/living/simple_animal/hostile/retaliate/infernal/hellhound,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CB" = (
 /mob/living/carbon/human/species/orc/warrior,
 /obj/effect/decal/cleanable/blood,
@@ -5427,23 +5427,23 @@
 /obj/structure/forcefield/strong,
 /obj/structure/forcefield/strong,
 /turf/closed,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CG" = (
 /obj/item/candle/skull/darkskull/lit{
 	pixel_x = 6;
 	pixel_y = 3
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CH" = (
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CJ" = (
 /obj/machinery/light/fueled/oven/east,
 /obj/machinery/light/fueled/hearth,
 /obj/item/cooking/pan,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CM" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/clothing/head/helmet/leather/orc,
@@ -5459,26 +5459,26 @@
 	faction = list("Undead")
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CR" = (
 /obj/structure/flora/tree/evil,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CS" = (
 /obj/item/instrument/vocals,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CT" = (
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 1
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CU" = (
 /turf/open/floor/rooftop/green{
 	dir = 8
 	},
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CV" = (
 /obj/structure/chair/hotspring_bench{
 	dir = 8
@@ -5491,16 +5491,16 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CX" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CY" = (
 /obj/item/clothing/ring/silver/calm,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "CZ" = (
 /obj/item/chair/stool,
 /turf/open/floor/ruinedwood,
@@ -5525,7 +5525,7 @@
 "Df" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Dg" = (
 /obj/item/bodypart/l_arm/prosthetic/steel,
 /turf/open/floor/ruinedwood,
@@ -5535,7 +5535,7 @@
 	dir = 1
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Di" = (
 /obj/structure/closet/crate/chest/gold,
 /obj/item/gem/onyxa,
@@ -5551,7 +5551,7 @@
 /obj/item/ingot/silver,
 /obj/item/ingot/silver,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Dj" = (
 /obj/structure/stairs{
 	icon_state = "stairs";
@@ -5567,7 +5567,7 @@
 	dir = 5
 	},
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Dn" = (
 /obj/effect/decal/shadow_floor,
 /turf/closed/wall/mineral/wooddark/horizontal,
@@ -5585,17 +5585,17 @@
 	dir = 8
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ds" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Du" = (
 /obj/effect/temp_visual/curse{
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Dv" = (
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/essence/combiner,
@@ -5615,18 +5615,18 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Dz" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/naturalstone,
 /area/outdoors/bog)
 "DA" = (
 /turf/open/water/hotspring,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "DB" = (
 /obj/item/reagent_containers/glass/cup/wooden/crafted,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "DC" = (
 /obj/structure/table/stone_small,
 /obj/effect/spawner/map_spawner/loot/medium,
@@ -5638,7 +5638,7 @@
 	dir = 6
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "DF" = (
 /obj/structure/soil,
 /obj/structure/wild_plant/nospread/swampweed,
@@ -5652,7 +5652,7 @@
 /obj/effect/decal/cleanable/blood,
 /obj/structure/bookcase,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "DK" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/rotten/breadslice{
@@ -5676,7 +5676,7 @@
 	},
 /obj/item/reagent_containers/food/snacks/rotten/breadslice,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "DQ" = (
 /obj/structure/spider/cocoon,
 /turf/open/floor/ruinedwood/darker,
@@ -5684,18 +5684,18 @@
 "DS" = (
 /mob/living/carbon/human/species/zizombie/npc/peasant,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "DT" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "DU" = (
 /obj/effect/decal/shadow_floor{
 	dir = 4
 	},
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "DV" = (
 /obj/structure/closet/crate/chest/crafted,
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -5709,11 +5709,11 @@
 "DX" = (
 /obj/structure/lootable_structure/fish_barrel,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "DZ" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Eb" = (
 /obj/structure/rack/shelf/biggest,
 /obj/effect/spawner/map_spawner/loot/armor,
@@ -5728,7 +5728,7 @@
 "Eh" = (
 /obj/structure/bookcase,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ei" = (
 /turf/open/floor/metal/barograte,
 /area/outdoors/bog)
@@ -5743,11 +5743,11 @@
 	dir = 4
 	},
 /turf/open/water/swamp,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ep" = (
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Eq" = (
 /obj/structure/trap/wall_projectile/fireball,
 /turf/open/floor/churchrough,
@@ -5767,7 +5767,7 @@
 	pixel_x = 32
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ev" = (
 /obj/structure/bed/inn,
 /mob/living/simple_animal/hostile/retaliate/infernal/hellhound{
@@ -5800,13 +5800,13 @@
 	},
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ED" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "EF" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
@@ -5819,11 +5819,11 @@
 	dir = 1
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "EI" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "EJ" = (
 /obj/structure/toilet{
 	name = "what do we have here"
@@ -5851,7 +5851,7 @@
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/zybcake_cooked,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "EN" = (
 /obj/structure/stairs/stone,
 /obj/structure/fluff/railing/wood{
@@ -5865,7 +5865,7 @@
 	},
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "EQ" = (
 /turf/open/water/swamp,
 /area/indoors/cave)
@@ -5874,13 +5874,13 @@
 	dir = 1
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "EU" = (
 /obj/effect/mapping_helpers/secret_door_creator{
 	redstone_id = "Marsh2"
 	},
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "EV" = (
 /obj/structure/table/vtable/v2,
 /obj/item/paper,
@@ -5914,7 +5914,7 @@
 	},
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Fj" = (
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/grass/cold,
@@ -5925,18 +5925,18 @@
 /area/indoors/mountains)
 "Fn" = (
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Fr" = (
 /obj/effect/temp_visual/curse{
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Fu" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Fv" = (
 /obj/item/chair/stool,
 /turf/open/floor/dirt,
@@ -5946,7 +5946,7 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "FC" = (
 /obj/structure/chair/stool,
 /turf/open/floor/dirt,
@@ -5954,11 +5954,11 @@
 "FD" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "FE" = (
 /obj/structure/table/stone_small,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "FG" = (
 /obj/structure/fluff/traveltile{
 	aportalid = "rosewood-forest-bog_cave";
@@ -5973,7 +5973,7 @@
 "FI" = (
 /obj/structure/bookcase,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "FK" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -5986,7 +5986,7 @@
 	icon_state = "border"
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "FO" = (
 /obj/structure/flora/tree/evil,
 /turf/open/floor/grass/cold,
@@ -6006,13 +6006,13 @@
 	dir = 8
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "FS" = (
 /obj/structure/fluff/walldeco/painting/skull{
 	pixel_x = -32
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "FT" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood,
@@ -6022,7 +6022,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "FV" = (
 /obj/structure/statue/bone/rib,
 /turf/open/water/swamp/deep,
@@ -6060,7 +6060,7 @@
 "Ge" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Gf" = (
 /mob/living/simple_animal/hostile/retaliate/voiddragon{
 	name = "Dekseer the Dracolich";
@@ -6069,11 +6069,11 @@
 	maxHealth = 3500
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Gg" = (
 /obj/structure/statue/bone/rib,
 /turf/open/water/swamp/deep,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Gh" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/perfume/random,
@@ -6082,18 +6082,18 @@
 /obj/item/clothing/shoes/nobleboot,
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Gi" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/weapon/surgery/saw,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Gj" = (
 /obj/effect/temp_visual/curse{
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Gl" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/tile/kitchen,
@@ -6106,7 +6106,7 @@
 /obj/machinery/light/fueled/oven/east,
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Go" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/shelter/bog/witch)
@@ -6118,7 +6118,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/weapon/knife/cleaver,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Gr" = (
 /obj/structure/bed/hay,
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -6143,7 +6143,7 @@
 	},
 /obj/effect/decal/shadow_floor,
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Gv" = (
 /mob/living/simple_animal/hostile/retaliate/spider/mutated,
 /turf/open/floor/ruinedwood/darker,
@@ -6160,7 +6160,7 @@
 /obj/structure/barricade/wooden/crude,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "GC" = (
 /obj/structure/chair/stool,
 /turf/open/floor/twig,
@@ -6178,7 +6178,7 @@
 "GF" = (
 /obj/item/natural/rock,
 /turf/open/floor/churchbrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "GG" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -6224,7 +6224,7 @@
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "GS" = (
 /turf/open/floor/cobble,
 /area/outdoors/bog)
@@ -6239,7 +6239,7 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "GW" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood,
@@ -6247,11 +6247,11 @@
 "GX" = (
 /obj/structure/door/fancy,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "GY" = (
 /obj/item/reagent_containers/food/snacks/rotten/breadslice,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "GZ" = (
 /obj/effect/decal/borderfall{
 	dir = 4
@@ -6274,19 +6274,19 @@
 	health = 500
 	},
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Hc" = (
 /mob/living/simple_animal/hostile/retaliate/infernal/imp{
 	faction = list("Undead")
 	},
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "He" = (
 /obj/structure/door/stone{
 	name = "Ominous Door"
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Hf" = (
 /obj/machinery/artificer_table,
 /obj/item/storage/backpack/backpack/artibackpack,
@@ -6300,11 +6300,11 @@
 "Hi" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Hj" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Hl" = (
 /obj/structure/closet/dirthole/grave,
 /turf/open/floor/dirt,
@@ -6315,7 +6315,7 @@
 "Ho" = (
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Hp" = (
 /obj/structure/table/wood/plain,
 /obj/item/clothing/head/helmet/leather/orc{
@@ -6331,7 +6331,7 @@
 "Hr" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/tile/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Hs" = (
 /obj/structure/bridge_stakes{
 	dir = 8
@@ -6341,7 +6341,7 @@
 "Ht" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Hu" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/witch)
@@ -6349,7 +6349,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/organ/eyes/night_vision/mushroom,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Hy" = (
 /obj/structure/table/wood/plain,
 /obj/item/clothing/neck/elfears,
@@ -6365,7 +6365,7 @@
 	icon_state = "chair2"
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "HE" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/darker,
@@ -6374,18 +6374,18 @@
 /obj/structure/door,
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "HG" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 1
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "HI" = (
 /obj/structure/fluff/statue/knight,
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "HK" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/darker,
@@ -6405,20 +6405,20 @@
 "HP" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "HQ" = (
 /obj/structure/fluff/walldeco/painting/crown{
 	pixel_y = -32
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "HR" = (
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/shelter/bog/witch)
 "HU" = (
 /obj/structure/window,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "HV" = (
 /obj/structure/door/stone,
 /turf/open/floor/church,
@@ -6427,7 +6427,7 @@
 /obj/structure/fermentation_keg/random/beer,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "HZ" = (
 /obj/structure/flora/tree/evil,
 /turf/open/floor/dirt,
@@ -6450,21 +6450,21 @@
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ig" = (
 /obj/structure/flora/grass/bush_meagre/bog,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ii" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Il" = (
 /obj/structure/door,
 /obj/structure/spider/stickyweb/solo,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Im" = (
 /mob/living/carbon/human/species/rousman/ambush,
 /turf/open/floor/dirt,
@@ -6474,7 +6474,7 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Iq" = (
 /turf/open/floor/tile/kitchen,
 /area/indoors/mountains)
@@ -6489,13 +6489,13 @@
 "It" = (
 /obj/structure/table/wood/counter,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Iv" = (
 /mob/living/simple_animal/hostile/retaliate/poltergeist{
 	faction = list("Undead")
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Iw" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/closet/crate/chest/old_crate,
@@ -6514,7 +6514,7 @@
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "IC" = (
 /turf/closed/mineral/bedrock/cold,
 /area/outdoors/bog)
@@ -6523,29 +6523,29 @@
 	faction = list("Undead")
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "IE" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 1
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "IF" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "IH" = (
 /obj/structure/table/wood/crafted,
 /obj/item/bodypart/r_arm/prosthetic/wood,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "IJ" = (
 /obj/structure/stairs{
 	dir = 4;
 	icon_state = "stairs"
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "IK" = (
 /turf/closed/wall/mineral/tent,
 /area/outdoors/bog)
@@ -6557,16 +6557,16 @@
 "IN" = (
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "IR" = (
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "IS" = (
 /obj/structure/barricade/wooden,
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "IT" = (
 /mob/living/simple_animal/hostile/retaliate/spider,
 /obj/effect/spawner/map_spawner/loot,
@@ -6590,11 +6590,11 @@
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ja" = (
 /obj/structure/door/fancy,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Jc" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /obj/item/clothing/cloak/raincloak/colored/random,
@@ -6602,19 +6602,19 @@
 /obj/item/clothing/cloak/raincloak/colored/random,
 /obj/item/perfume/random,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Jd" = (
 /obj/structure/table/wood/plain,
 /obj/item/book/random_book/myths,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Jh" = (
 /turf/closed/indestructible/wooddark/hull,
 /area/outdoors/bog)
 "Ji" = (
 /obj/structure/forcefield/strong,
 /turf/closed/mineral/bedrock/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Jj" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/twig,
@@ -6626,7 +6626,7 @@
 "Jl" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Jm" = (
 /obj/structure/table/wood/plain,
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted,
@@ -6672,7 +6672,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Jz" = (
 /obj/structure/fluff/railing/border{
 	dir = 9
@@ -6683,11 +6683,11 @@
 /obj/structure/window,
 /obj/structure/forcefield/strong,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JC" = (
 /obj/structure/hotspring/border/three,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JD" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -6706,7 +6706,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/natural/glass/shard,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JH" = (
 /obj/structure/table/wood/fancy,
 /obj/item/reagent_containers/glass/cup/silver{
@@ -6718,7 +6718,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JI" = (
 /obj/structure/flora/tree,
 /turf/open/floor/grass/cold,
@@ -6732,20 +6732,20 @@
 "JL" = (
 /obj/effect/decal/cleanable/vomit,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JM" = (
 /obj/structure/statue/bone/rib{
 	dir = 8
 	},
 /turf/open/water/swamp/deep,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JQ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JR" = (
 /obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/ruinedwood,
@@ -6755,7 +6755,7 @@
 	pixel_y = 32
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JT" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -6769,7 +6769,7 @@
 "JU" = (
 /obj/effect/landmark/hammer/dev_text,
 /turf/closed/wall/mineral/stonebrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JV" = (
 /turf/open/floor/volcanic,
 /area/indoors/cave)
@@ -6778,7 +6778,7 @@
 	dir = 1
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "JX" = (
 /obj/structure/bed/hay,
 /turf/open/floor/grass/cold,
@@ -6796,7 +6796,7 @@
 "Kb" = (
 /obj/structure/flora/hotspring_rocks/small,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Kc" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/grass/cold,
@@ -6809,11 +6809,11 @@
 	pixel_y = 17
 	},
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Kf" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Kg" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/church,
@@ -6821,7 +6821,7 @@
 "Kh" = (
 /obj/structure/bookcase/random/myths,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ki" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/rope/chain,
@@ -6839,18 +6839,18 @@
 "Kl" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Km" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Kn" = (
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ko" = (
 /obj/structure/door,
 /turf/open/floor/ruinedwood/darker,
@@ -6879,7 +6879,7 @@
 "Kx" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "KA" = (
 /obj/structure/window,
 /turf/open/floor/ruinedwood/darker,
@@ -6888,7 +6888,7 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "KD" = (
 /obj/structure/spider/cocoon,
 /obj/effect/spawner/map_spawner/loot/weapon,
@@ -6898,7 +6898,7 @@
 /obj/structure/fluff/statue/knight,
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "KG" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -6913,7 +6913,7 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "KI" = (
 /obj/structure/fluff/nest,
 /mob/living/carbon/human/species/goblin/npc/ambush,
@@ -6944,7 +6944,7 @@
 "KN" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "KO" = (
 /mob/living/carbon/human/species/orc/warrior,
 /turf/open/floor/dirt,
@@ -6981,7 +6981,7 @@
 "Le" = (
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Lf" = (
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/twig,
@@ -6997,7 +6997,7 @@
 /obj/item/rope/chain,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Lk" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -7008,7 +7008,7 @@
 "Lq" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Lv" = (
 /turf/open/floor/grass/cold,
 /area/outdoors/bog/witch)
@@ -7017,7 +7017,7 @@
 	dir = 1
 	},
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Lx" = (
 /turf/open/floor/church,
 /area/indoors/cave)
@@ -7034,7 +7034,7 @@
 	pixel_y = -33
 	},
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "LG" = (
 /obj/machinery/essence/research_matrix,
 /turf/open/floor/ruinedwood/turned/alt,
@@ -7047,7 +7047,7 @@
 "LJ" = (
 /obj/structure/flora/grass/bush_meagre/bog,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "LL" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/ruinedwood,
@@ -7055,7 +7055,7 @@
 "LM" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "LN" = (
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/bog)
@@ -7071,7 +7071,7 @@
 "LQ" = (
 /obj/structure/flora/tree/evil,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "LS" = (
 /obj/structure/chair/stool,
 /turf/open/floor/ruinedwood/darker,
@@ -7092,7 +7092,7 @@
 /obj/structure/forcefield/strong,
 /obj/structure/forcefield/strong,
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ma" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -7109,7 +7109,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Mb" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -7124,7 +7124,7 @@
 	},
 /obj/item/bodypart/l_arm/prosthetic/iron,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Me" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -7140,12 +7140,12 @@
 "Mi" = (
 /obj/structure/wild_plant/nospread/poppy,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Mk" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Mm" = (
 /obj/structure/table/wood/plain,
 /obj/effect/spawner/map_spawner/loot,
@@ -7154,7 +7154,7 @@
 "Mn" = (
 /obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Mo" = (
 /turf/closed/wall/mineral/tent,
 /area/indoors/mountains)
@@ -7175,7 +7175,7 @@
 "Ms" = (
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Mt" = (
 /obj/structure/bed/hay,
 /mob/living/carbon/human/species/orc/marauder,
@@ -7193,7 +7193,7 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Mx" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -7204,12 +7204,12 @@
 "My" = (
 /obj/item/natural/glass/shard,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "MD" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ME" = (
 /obj/item/clothing/neck/psycross/gold{
 	pixel_x = 5;
@@ -7226,11 +7226,11 @@
 	},
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "MG" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "MI" = (
 /obj/item/candle/yellow/lit/infinite,
 /turf/open/floor/dirt,
@@ -7239,7 +7239,7 @@
 /obj/structure/bookcase/random,
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "MM" = (
 /obj/structure/stairs/stone,
 /obj/structure/fluff/railing/wood{
@@ -7247,7 +7247,7 @@
 	icon_state = "woodrailing"
 	},
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "MN" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/clothing/face/facemask/goldmask,
@@ -7256,7 +7256,7 @@
 "MO" = (
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "MP" = (
 /obj/effect/decal/carpet/square/black{
 	pixel_x = 0;
@@ -7284,7 +7284,7 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/water/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "MU" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/remains/human,
@@ -7298,12 +7298,12 @@
 "MW" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "MZ" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/remains/human,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Nc" = (
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/essence/reservoir,
@@ -7322,11 +7322,11 @@
 /obj/structure/stairs/stone,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Nm" = (
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Np" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb{
@@ -7366,7 +7366,7 @@
 	pixel_y = 31
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Nz" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/ruinedwood/darker,
@@ -7374,7 +7374,7 @@
 "NA" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "NC" = (
 /turf/open/openspace,
 /area/outdoors/bog/witch)
@@ -7413,14 +7413,14 @@
 "NK" = (
 /obj/structure/flora/tree/underworld,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "NN" = (
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "NP" = (
 /obj/structure/bars,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "NR" = (
 /obj/structure/flora/tree/evil,
 /turf/open/floor/grass/cold,
@@ -7443,11 +7443,11 @@
 	dir = 4
 	},
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Oa" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ob" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1;
@@ -7464,7 +7464,7 @@
 	desc = "I have nearly obtained what we need for our lord's arrival. Soon he shall sink this place into a hellish landscape in the name of our god ZIZO!"
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Oe" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -7482,7 +7482,7 @@
 	dir = 1
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Oj" = (
 /obj/machinery/light/fueled/wallfire/candle/l{
 	pixel_x = 0;
@@ -7496,20 +7496,20 @@
 	icon_state = "churchslate"
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Om" = (
 /obj/structure/fluff/railing/border,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "On" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Oo" = (
 /obj/effect/decal/remains/human,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Oq" = (
 /obj/effect/decal/remains/bigrat,
 /turf/open/floor/dirt,
@@ -7533,19 +7533,19 @@
 /obj/structure/table/stone_small,
 /obj/item/scrying/eye,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ox" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Oz" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "OB" = (
 /obj/structure/door/red,
 /obj/effect/mapping_helpers/access/locker,
@@ -7568,7 +7568,7 @@
 "OF" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/water/swamp,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "OG" = (
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/rooftop/green,
@@ -7577,7 +7577,7 @@
 /obj/structure/table/wood/plain,
 /obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "OJ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -7615,12 +7615,12 @@
 	pixel_y = -9
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "OO" = (
 /obj/effect/decal/remains/human,
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "OQ" = (
 /obj/structure/fluff/walldeco/vinez/blue{
 	pixel_x = 20;
@@ -7643,12 +7643,12 @@
 "OT" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "OV" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "OY" = (
 /turf/open/water/river/dirt,
 /area/outdoors/bog)
@@ -7657,7 +7657,7 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Pa" = (
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/grass/cold,
@@ -7671,32 +7671,32 @@
 /obj/item/natural/glass/shard,
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Pf" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4;
 	icon_state = "churchslate"
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Pg" = (
 /mob/living/carbon/human/species/zizombie/npc/peasant,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Pj" = (
 /obj/structure/spider/stickyweb{
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Pk" = (
 /obj/structure/bookcase,
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Pl" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Pq" = (
 /obj/effect/decal/shadow_floor{
 	dir = 8
@@ -7714,7 +7714,7 @@
 "Px" = (
 /obj/structure/toilet,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PB" = (
 /turf/open/floor/dirt,
 /area/indoors/shelter/bog/witch)
@@ -7723,7 +7723,7 @@
 	redstone_id = "Marsh3"
 	},
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PD" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
@@ -7731,7 +7731,7 @@
 "PE" = (
 /obj/structure/forcefield/strong,
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PF" = (
 /obj/structure/fluff/psycross/zizocross{
 	pixel_x = 0;
@@ -7743,14 +7743,14 @@
 	pixel_y = 17
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PG" = (
 /obj/effect/decal/cleanable/sigil{
 	icon_state = "zizocircle";
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PI" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/dirt,
@@ -7765,7 +7765,7 @@
 "PK" = (
 /mob/living/carbon/human/species/zizombie/npc/peasant,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PL" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/church,
@@ -7778,7 +7778,7 @@
 /obj/structure/door/iron/bars/cell,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PP" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/outdoors/bog)
@@ -7787,24 +7787,24 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PS" = (
 /obj/structure/door,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PT" = (
 /obj/structure/flora/tree/underworld,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PU" = (
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PV" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PW" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
@@ -7813,11 +7813,11 @@
 "PY" = (
 /obj/item/natural/rock,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "PZ" = (
 /obj/structure/table/stone_small,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Qa" = (
 /obj/structure/bars/bent,
 /obj/structure/table/wood/counter{
@@ -7832,21 +7832,21 @@
 "Qc" = (
 /obj/structure/window,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Qg" = (
 /obj/machinery/light/fueled/firebowl/blackfire,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Qk" = (
 /obj/structure/table/wood/counter,
 /obj/item/reagent_containers/food/snacks/bread,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ql" = (
 /obj/structure/fluff/railing/border,
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Qn" = (
 /obj/structure/closet/crate/coffin,
 /obj/effect/decal/remains/human,
@@ -7861,7 +7861,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/bodypart/head/goblin,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Qr" = (
 /obj/effect/decal/carpet/kover_black{
 	pixel_x = 17;
@@ -7878,7 +7878,7 @@
 "Qu" = (
 /obj/structure/bookcase/random/archive,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Qw" = (
 /obj/structure/bed/hay,
 /turf/open/floor/twig,
@@ -7886,15 +7886,15 @@
 "Qy" = (
 /obj/structure/fermentation_keg/distiller,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "QA" = (
 /obj/structure/hotspring/border/two,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "QB" = (
 /obj/structure/stairs,
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "QC" = (
 /obj/structure/fluff/statue/zizo{
 	pixel_x = 1;
@@ -7910,7 +7910,7 @@
 	name = "Zizo's Eye"
 	},
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "QE" = (
 /obj/item/bin/water,
 /turf/open/floor/ruinedwood/darker,
@@ -7918,7 +7918,7 @@
 "QK" = (
 /obj/structure/fermentation_keg,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "QL" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/fluff/railing/border{
@@ -7929,7 +7929,7 @@
 	dir = 6
 	},
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "QQ" = (
 /obj/effect/decal/shadow_floor{
 	dir = 4
@@ -7939,7 +7939,7 @@
 "QS" = (
 /obj/structure/bookcase,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "QT" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -7951,7 +7951,7 @@
 	dir = 8
 	},
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "QV" = (
 /obj/structure/statue/bone/skull,
 /turf/open/water/swamp/deep,
@@ -7962,7 +7962,7 @@
 	},
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "QY" = (
 /obj/structure/rack,
 /obj/item/weapon/mace/warhammer/steel,
@@ -8000,7 +8000,7 @@
 	faction = list("Undead")
 	},
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Re" = (
 /obj/structure/pillory/reinforced,
 /turf/open/floor/dirt,
@@ -8008,7 +8008,7 @@
 "Rf" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Rg" = (
 /obj/structure/warningbell{
 	pixel_x = -33;
@@ -8028,7 +8028,7 @@
 "Rn" = (
 /obj/structure/forcefield/strong,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Rq" = (
 /obj/structure/trap/fire,
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
@@ -8045,7 +8045,7 @@
 	dir = 8
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Rv" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/church,
@@ -8053,17 +8053,17 @@
 "Rw" = (
 /obj/structure/hotspring/border/seven,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Rz" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "RB" = (
 /obj/effect/mapping_helpers/secret_door_creator{
 	redstone_id = "Marsh1"
 	},
 /turf/closed/wall/mineral/stonebrick/reddish,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "RD" = (
 /obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/grass/cold,
@@ -8072,21 +8072,21 @@
 /obj/structure/rack/shelf/big,
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "RM" = (
 /obj/structure/bonepile,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "RN" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "RS" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "RU" = (
 /turf/open/floor/grass/hell,
 /area/indoors/cave)
@@ -8100,7 +8100,7 @@
 	dir = 8
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Sa" = (
 /obj/effect/decal/cleanable/blood{
 	pixel_x = 2;
@@ -8117,7 +8117,7 @@
 	},
 /obj/item/clothing/neck/psycross/silver/divine/abyssor,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Sb" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1;
@@ -8135,7 +8135,7 @@
 	dir = 1
 	},
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Sd" = (
 /obj/structure/table/wood/plain,
 /obj/item/plate/copper{
@@ -8160,7 +8160,7 @@
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Sl" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/darker,
@@ -8176,7 +8176,7 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Sw" = (
 /obj/structure/stairs/stone,
 /obj/structure/fluff/railing/wood{
@@ -8190,13 +8190,13 @@
 	faction = list("Undead")
 	},
 /turf/open/water/hotspring,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Sz" = (
 /obj/effect/decal/shadow_floor{
 	dir = 8
 	},
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "SA" = (
 /obj/item/ingot/gold,
 /obj/item/ingot/gold,
@@ -8208,18 +8208,18 @@
 /obj/item/clothing/ring/silver/blortz,
 /obj/item/gem/yellow,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "SB" = (
 /obj/machinery/light/fueled/wallfire/big_fireplace{
 	pixel_x = -16;
 	pixel_y = 32
 	},
 /turf/open/floor/tile/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "SC" = (
 /obj/structure/lootable_structure/fish_barrel,
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "SD" = (
 /turf/open/floor/twig,
 /area/indoors/mountains)
@@ -8227,7 +8227,7 @@
 /obj/structure/table/wood/fancy,
 /obj/item/book/abyssor,
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "SG" = (
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/cooked/griddledog,
@@ -8240,7 +8240,7 @@
 "SH" = (
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "SJ" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/mountains)
@@ -8248,13 +8248,13 @@
 /obj/structure/fermentation_keg,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "SL" = (
 /obj/structure/stairs{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "SO" = (
 /obj/structure/trap/wall_projectile,
 /turf/open/floor/church,
@@ -8276,7 +8276,7 @@
 	pixel_y = 32
 	},
 /turf/open/water/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Tc" = (
 /obj/structure/bars/bent,
 /obj/structure/table/wood/counter{
@@ -8308,12 +8308,12 @@
 /obj/structure/hotspring/border/eight,
 /obj/item/natural/cloth,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Tk" = (
 /obj/structure/table/church/m,
 /obj/item/clothing/face/facemask/goldmask,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Tl" = (
 /mob/living/simple_animal/hostile/retaliate/troll/quiet,
 /turf/open/floor/volcanic,
@@ -8322,7 +8322,7 @@
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Tn" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
@@ -8340,7 +8340,7 @@
 "Tq" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Tr" = (
 /obj/structure/bridge{
 	dir = 8
@@ -8363,7 +8363,7 @@
 /obj/item/clothing/gloves/plate/zizo,
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Tu" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -8395,15 +8395,15 @@
 	},
 /obj/item/natural/cloth,
 /turf/open/floor/tile/bath,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TA" = (
 /obj/structure/forcefield/strong,
 /turf/closed/wall/mineral/stonebrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TB" = (
 /obj/effect/landmark/hammer/dev_text,
 /turf/closed/mineral/bedrock/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TC" = (
 /turf/open/water/river/dirt{
 	dir = 1
@@ -8412,7 +8412,7 @@
 "TD" = (
 /obj/structure/window/stained/zizo,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TE" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/outdoors/bog)
@@ -8441,10 +8441,10 @@
 	pixel_y = 12
 	},
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TH" = (
 /turf/open/water/swamp/deep,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TI" = (
 /obj/structure/table/wood/crafted,
 /obj/item/bodypart/r_leg/prosthetic/steel,
@@ -8463,12 +8463,12 @@
 /obj/structure/bookcase/random,
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TS" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/bodypart/chest,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TU" = (
 /obj/effect/decal/carpet/kover_darkred{
 	dir = 8;
@@ -8476,28 +8476,28 @@
 	pixel_y = 16
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TV" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TW" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TX" = (
 /obj/structure/stairs/stone{
 	dir = 1
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "TZ" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ua" = (
 /turf/open/openspace,
 /area/indoors/shelter/bog/witch)
@@ -8510,7 +8510,7 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ud" = (
 /obj/structure/mirror,
 /turf/open/floor/ruinedwood/darker,
@@ -8540,13 +8540,13 @@
 	pixel_y = 16
 	},
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Uj" = (
 /obj/structure/chair/wood{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Uk" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -8565,7 +8565,7 @@
 	pixel_y = 16
 	},
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Un" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -8575,19 +8575,19 @@
 "Uo" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Up" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Uq" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Us" = (
 /obj/structure/bars,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Uu" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /obj/effect/spawner/map_spawner/loot/common,
@@ -8613,7 +8613,7 @@
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot/copper,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "UC" = (
 /obj/structure/rack/underworld,
 /obj/item/weapon/pick/steel,
@@ -8630,7 +8630,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "UG" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -8657,7 +8657,7 @@
 "UN" = (
 /obj/effect/decal/cleanable/vomit/old,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "UO" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -8673,7 +8673,7 @@
 	dir = 8
 	},
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "US" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt,
@@ -8685,7 +8685,7 @@
 "UW" = (
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "UY" = (
 /obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/dirt,
@@ -8697,11 +8697,11 @@
 	},
 /obj/item/chair/fancy,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Vb" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Vc" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -8737,11 +8737,11 @@
 	dir = 6
 	},
 /turf/open/openspace,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Vj" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Vk" = (
 /obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/food/snacks/fish/clownfish,
@@ -8767,14 +8767,14 @@
 "Vn" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Vp" = (
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Vq" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Vr" = (
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/essence/harvester,
@@ -8835,11 +8835,11 @@
 /obj/structure/chair/bench/church,
 /obj/item/natural/wood/plank,
 /turf/open/floor/churchbrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VF" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/swamp/deep,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VG" = (
 /obj/structure/chair/wood/alt/chair_noble/purple{
 	dir = 1
@@ -8848,7 +8848,7 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VH" = (
 /obj/item/paper,
 /obj/item/paper,
@@ -8866,14 +8866,14 @@
 "VI" = (
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VJ" = (
 /obj/structure/chair/wood/alt/chair_noble/red,
 /obj/effect/temp_visual/curse{
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VL" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/twig,
@@ -8882,23 +8882,23 @@
 /obj/structure/table/church,
 /obj/item/statue/gold,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VO" = (
 /obj/structure/bonepile,
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VQ" = (
 /obj/structure/curtain/bounty,
 /obj/structure/forcefield/strong,
 /turf/closed/wall/window,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VR" = (
 /obj/machinery/light/fueled/wallfire/big_fireplace{
 	pixel_x = -17;
 	pixel_y = 32
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VT" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb,
@@ -8915,7 +8915,7 @@
 /area/indoors/cave)
 "VV" = (
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "VW" = (
 /obj/effect/decal/shadow_floor{
 	dir = 4
@@ -8934,7 +8934,7 @@
 "VY" = (
 /obj/structure/bridge_stakes,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Wa" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -1
@@ -8950,7 +8950,7 @@
 	dir = 5
 	},
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Wf" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/cave)
@@ -8964,18 +8964,18 @@
 "Wi" = (
 /mob/living/simple_animal/hostile/retaliate/shade,
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Wj" = (
 /obj/structure/chair/bench/church,
 /turf/open/floor/churchbrick,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Wm" = (
 /turf/open/openspace,
 /area/indoors/cave)
 "Wn" = (
 /obj/item/natural/glass/shard,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Wo" = (
 /obj/structure/bridge_stakes{
 	dir = 8
@@ -8995,12 +8995,12 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/herringbone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Wv" = (
 /obj/structure/table/wood/plain,
 /obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/tile/kitchen,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ww" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -9011,7 +9011,7 @@
 "Wx" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Wy" = (
 /obj/structure/chair/stool/crafted,
 /turf/open/floor/ruinedwood/darker,
@@ -9024,7 +9024,7 @@
 /obj/structure/fluff/walldeco/church/line,
 /obj/item/natural/wood/plank,
 /turf/open/floor/churchrough/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "WB" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp/deep,
@@ -9035,11 +9035,11 @@
 	},
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "WG" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "WI" = (
 /obj/structure/soil,
 /turf/open/floor/dirt,
@@ -9056,7 +9056,7 @@
 "WN" = (
 /obj/structure/flora/tree/evil,
 /turf/open/water/blood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "WQ" = (
 /obj/structure/fluff/statue/psy{
 	pixel_x = -32;
@@ -9078,7 +9078,7 @@
 "WR" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "WS" = (
 /obj/item/chair/stool,
 /turf/open/floor/naturalstone,
@@ -9096,7 +9096,7 @@
 "Xa" = (
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Xb" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1;
@@ -9108,7 +9108,7 @@
 /obj/structure/hotspring/border/six,
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Xd" = (
 /obj/structure/curtain/bounty,
 /turf/closed/wall/window,
@@ -9150,11 +9150,11 @@
 /obj/structure/closet/crate/drawer,
 /obj/item/recipe_book/arcyne,
 /turf/open/floor/ruinedwood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Xq" = (
 /mob/living/simple_animal/hostile/retaliate/blood,
 /turf/open/floor/tile/masonic/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Xr" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -9188,7 +9188,7 @@
 "Xy" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Xz" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/grass/cold,
@@ -9198,7 +9198,7 @@
 	dir = 8
 	},
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "XB" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -9225,7 +9225,7 @@
 "XO" = (
 /obj/structure/chair/stool,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "XP" = (
 /obj/effect/decal/carpet/kover_purple,
 /turf/open/floor/ruinedwood/turned/alt,
@@ -9261,11 +9261,11 @@
 	name = "Shadow of the Past"
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "XZ" = (
 /obj/structure/fluff/railing/tall/palisade,
 /turf/closed/wall/mineral/wood,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ya" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/bodypart/r_leg/prosthetic/steel,
@@ -9283,7 +9283,7 @@
 /obj/structure/fluff/railing/border,
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/carpet/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Ye" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
@@ -9300,18 +9300,18 @@
 "Yj" = (
 /obj/structure/bars,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Yk" = (
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/cobblerock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Yl" = (
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/bog)
 "Ym" = (
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Yo" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood,
@@ -9322,7 +9322,7 @@
 	},
 /obj/item/bin/water,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Yt" = (
 /obj/structure/table/church{
 	dir = 1;
@@ -9335,7 +9335,7 @@
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Yv" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood,
@@ -9343,7 +9343,7 @@
 "Yw" = (
 /obj/item/natural/cloth,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Yx" = (
 /obj/structure/flora/hotspring_rocks/small/four,
 /turf/open/water/hotspring,
@@ -9354,12 +9354,12 @@
 	dir = 4
 	},
 /turf/open/floor/naturalstone,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YE" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle,
 /turf/open/floor/tile,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YF" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -1
@@ -9369,7 +9369,7 @@
 "YH" = (
 /obj/structure/innocent_bush,
 /turf/open/floor/grass/cold,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YJ" = (
 /obj/structure/chair/stool,
 /obj/effect/landmark/start/bogwitch{
@@ -9380,10 +9380,10 @@
 "YK" = (
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YL" = (
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YN" = (
 /obj/effect/decal/shadow_floor,
 /turf/closed/wall/mineral/wooddark,
@@ -9391,14 +9391,14 @@
 "YP" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YQ" = (
 /obj/structure/stairs,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/mountains)
 "YR" = (
 /turf/open/floor/dirt,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YS" = (
 /obj/effect/decal/carpet/kover_darkred{
 	dir = 8;
@@ -9410,11 +9410,11 @@
 	pixel_y = 0
 	},
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YT" = (
 /obj/structure/statue/bone/rib,
 /turf/open/water/swamp,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YV" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/churchrough,
@@ -9422,7 +9422,7 @@
 "YW" = (
 /obj/item/chair/fancy,
 /turf/open/floor/ruinedwood/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YX" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -9430,7 +9430,7 @@
 	},
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/spiral,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "YZ" = (
 /obj/structure/well/climb_up,
 /turf/open/floor/naturalstone,
@@ -9446,7 +9446,7 @@
 /area/indoors/cave)
 "Zd" = (
 /turf/closed,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Zg" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/ruinedwood,
@@ -9454,19 +9454,19 @@
 "Zh" = (
 /obj/machinery/light/fueled/firebowl/church/unholyfire,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Zj" = (
 /obj/structure/curtain/bounty,
 /obj/structure/forcefield/strong,
 /turf/closed/indestructible/roguewindow,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Zl" = (
 /obj/machinery/light/fueled/wallfire/big_fireplace{
 	pixel_x = -32;
 	pixel_y = 32
 	},
 /turf/open/floor/carpet/royalblack,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Zm" = (
 /obj/structure/spider/stickyweb,
 /obj/structure/spider/stickyweb{
@@ -9502,7 +9502,7 @@
 	},
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
 /turf/open/floor/church/purple,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "Zv" = (
 /obj/effect/decal/remains/cabbit,
 /turf/open/floor/ruinedwood/darker,
@@ -9511,14 +9511,14 @@
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ZA" = (
 /turf/open/floor/tile/masonic/inverted,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ZB" = (
 /obj/item/chair/chair3,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ZE" = (
 /obj/structure/table/optable,
 /turf/open/floor/ruinedwood/darker,
@@ -9530,7 +9530,7 @@
 	pixel_y = 16
 	},
 /turf/open/floor/tile/masonic/single,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ZI" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/spider/stickyweb,
@@ -9585,13 +9585,13 @@
 /obj/effect/decal/cleanable/blood/gibs/core,
 /obj/effect/decal/remains/human,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "ZY" = (
 /obj/structure/table/wood/reinforced_alt{
 	dir = 4
 	},
 /turf/open/floor/carpet/red,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 
 (1,1,1) = {"
 Gy

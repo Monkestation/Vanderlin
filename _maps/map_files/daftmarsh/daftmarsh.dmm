@@ -3167,6 +3167,13 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/outdoors/town)
+"crT" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/obj/structure/mercstatue,
+/turf/open/floor/twig,
+/area/outdoors/town)
 "cso" = (
 /turf/open/floor/grass/yel,
 /area/outdoors/exposed/church)
@@ -9503,6 +9510,10 @@
 	},
 /turf/closed/wall/mineral/stone/moss,
 /area/under/town/basement)
+"hCH" = (
+/obj/structure/mercstatue,
+/turf/open/floor/grass,
+/area/outdoors/town/keep)
 "hCR" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -127037,7 +127048,7 @@ xuJ
 oQv
 iHi
 dcH
-bYV
+crT
 ffK
 lfe
 owc
@@ -130632,7 +130643,7 @@ eUn
 ttL
 ttL
 iiV
-vVc
+hCH
 tea
 tea
 tea

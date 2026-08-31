@@ -32,6 +32,7 @@
 	light_outer_range = 3
 	light_color = LIGHT_COLOR_ORANGE
 	light_power = 0.5
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 	// If we can do the muzzle flash
 	var/can_muzzle_flash = FALSE
 	/// Muzzle Flash Duration

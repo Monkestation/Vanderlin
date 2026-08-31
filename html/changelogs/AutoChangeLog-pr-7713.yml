@@ -1,5 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - bugfix: "Job sub-sub selections no longer break skill levels."
-  - bugfix: "NOTE - This may result in specials or quirks not applying skill increases to certain subclasses."

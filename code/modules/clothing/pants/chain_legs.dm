@@ -28,6 +28,7 @@
 	item_weight = 3.95 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/pants/chainlegs/Initialize()
 	. = ..()

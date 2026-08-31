@@ -46,7 +46,7 @@
 	gloves = /obj/item/clothing/gloves/plate/rust
 	pants = /obj/item/clothing/pants/platelegs/rust
 	shoes = /obj/item/clothing/shoes/boots/armor/light/rust
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/bandit
 	beltr = /obj/item/weapon/sword/long
 	backr = /obj/item/storage/backpack/satchel/black
 	backl = /obj/item/weapon/shield/tower/metal

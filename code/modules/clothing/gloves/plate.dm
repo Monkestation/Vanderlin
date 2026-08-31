@@ -26,6 +26,7 @@
 	item_weight = 1.65 KILOGRAMS
 
 	material_category = ARMOR_MAT_PLATE
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/gloves/plate/iron
 	name = "iron plate gauntlets"
