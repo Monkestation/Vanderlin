@@ -3,6 +3,7 @@ import { useBackend } from 'tgui/backend';
 import {
   Box,
   Button,
+  Collapsible,
   DmIcon,
   Icon,
   Section,
@@ -348,6 +349,18 @@ const LearnPage = (props: {
       </Stack.Item>
 
       <Stack.Item grow style={{ minHeight: 0 }}>
+        {activeForm === "Death" && (
+        <Collapsible title="Warning">
+          The use of Death Magic is frowned upon by The Divine Patheon, you should expect great scrutiny when wielding it. <br></br>
+          Certain spells within this form are heretical under The Ten and if recognised may lead to excommunication or execution. <br></br>
+        </Collapsible>
+        )}
+        {activeForm === "Hemomancy" && (
+        <Collapsible title="Warning">
+          The use of Hemomancy is considered heresy by The Divine Pantheon, and is frowned upon even by The Four. <br></br>
+          Attempting to use Hemomancy without the proper instruction will be inefficient and potentially dangerous.
+        </Collapsible>
+        )}
         <Stack fill>
           <Stack.Item grow={3} style={{ minHeight: 0 }}>
             <Section title="Techniques" fill>
@@ -434,7 +447,7 @@ export const SpellBook = () => {
   const [page, setPage] = useState<'learn' | 'stats'>('learn');
 
   return (
-    <Window width={890} height={640} title="Spellcraft">
+    <Window width={900} height={800} title="Spellcraft">
       <Window.Content scrollable={false}>
         <Stack vertical fill>
           <Stack.Item>
@@ -455,7 +468,7 @@ export const SpellBook = () => {
                 </Stack>
               }
             >
-              <Tabs>
+              <Tabs m="0px">
                 <Tabs.Tab selected={page === 'learn'} onClick={() => setPage('learn')}>
                   <Icon name="book-open" mr={1} />
                   Learn
