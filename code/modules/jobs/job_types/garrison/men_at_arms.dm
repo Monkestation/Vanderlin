@@ -58,6 +58,7 @@
 		"Royal Slitted Kettle Helmet" = /obj/item/clothing/head/helmet/kettle/slit/atarms,
 		"Slitted Kettle Helmet" = /obj/item/clothing/head/helmet/kettle/slit,
 		"Kettle Helmet"	= /obj/item/clothing/head/helmet/kettle,
+		"Morion Helmet" = /obj/item/clothing/head/helmet/morion,
 		"Steel Sallet" = /obj/item/clothing/head/helmet/sallet,
 		"Nasal Helmet" = /obj/item/clothing/head/helmet/nasal,
 	)

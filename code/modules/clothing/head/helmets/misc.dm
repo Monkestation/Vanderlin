@@ -115,6 +115,22 @@
 	body_parts_covered = COVERAGE_HEAD
 	item_weight = 1.5 KILOGRAMS
 
+	//................ Morion Helmet ............... //
+/obj/item/clothing/head/helmet/morion
+	name = "morion helmet"
+	desc = "A stylized helmet typically worn by pikemen and halberdiers."
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
+	icon_state = "morion"
+	flags_inv = HIDEEARS
+	sellprice = VALUE_CHEAP_STEEL_HELMET
+	max_integrity = INTEGRITY_OLD_STRONGEST
+	smeltresult = null
+	melting_material = /datum/material/steel
+	melt_amount = 50
+	body_parts_covered = COVERAGE_HEAD
+	item_weight = 1.5 KILOGRAMS
+
+
 /obj/item/clothing/head/helmet/kettle/jingasa
 	name = "jingasa"
 	desc = "A steel-reinforced conical hat with a decorative rim of fabric. It protects the head and ears as much as it shields the eyes from the sun."
