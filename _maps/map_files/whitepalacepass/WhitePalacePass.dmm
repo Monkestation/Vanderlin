@@ -3301,6 +3301,10 @@
 /obj/item/flashlight/flare/torch/lantern/voidlamptern,
 /turf/open/floor/metal/barograte,
 /area/under/town/basement)
+"bSF" = (
+/obj/structure/fluff/traveltile/oracle_cave,
+/turf/open/floor/snow/patchy,
+/area/outdoors/town)
 "bSK" = (
 /obj/structure/window,
 /turf/open/floor/ruinedwood,
@@ -7309,6 +7313,10 @@
 "enh" = (
 /turf/closed/wall/mineral/craftstone,
 /area/under/cave)
+"enz" = (
+/obj/structure/fluff/traveltile/oracle_cave,
+/turf/open/floor/snow,
+/area/outdoors/town)
 "eof" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/natural/bundle/cloth{
@@ -84414,9 +84422,9 @@ nJJ
 nJJ
 ulG
 aZv
-aZv
-rjc
-rjc
+enz
+bSF
+bSF
 kKb
 nJJ
 nJJ

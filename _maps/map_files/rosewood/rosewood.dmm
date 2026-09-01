@@ -19892,6 +19892,10 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
+"jAK" = (
+/obj/structure/fluff/traveltile/oracle_cave,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "jAM" = (
 /turf/open/floor/grass/cold,
 /area/indoors/town/theatre)
@@ -117248,7 +117252,7 @@ qJl
 qJl
 phG
 phG
-phG
+jAK
 qJl
 qJl
 qJl
@@ -117450,7 +117454,7 @@ qJl
 qJl
 qJl
 phG
-phG
+jAK
 qJl
 qJl
 qJl
@@ -117652,7 +117656,7 @@ qJl
 qJl
 qJl
 phG
-mvN
+jAK
 qJl
 qJl
 qJl
@@ -118660,7 +118664,7 @@ qJl
 qJl
 qJl
 phG
-phG
+mvN
 qJl
 qJl
 qJl

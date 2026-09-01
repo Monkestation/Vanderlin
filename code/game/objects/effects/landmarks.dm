@@ -597,3 +597,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 
 /obj/effect/landmark/death_arena/second
 	name = "Death arena spawn 2"
+
+
+//Admin job landmarks
+/obj/effect/landmark/start/lunar_oracle
+	name = "Lunar Oracle"
+	jobs_to_spawn = list(JOB_ADMIN_ORACLE)
+
+/obj/effect/landmark/start/late/lunar_oracle
+	name = "Lunar Oracle"
+	jobs_to_spawn = list(JOB_ADMIN_ORACLE)
