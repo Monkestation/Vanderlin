@@ -184,6 +184,7 @@
 		return
 
 	var/pass = FALSE
+	var/area/target_area = get_area(human_target)
 	if(istype(target_area, /area/indoors/town/church) || istype(target_area, /area/outdoors/exposed/church))
 		pass = TRUE
 	else if(human_target.mind?.assigned_role.department_flag & CHURCHMEN)
