@@ -12,6 +12,30 @@
 	var/static/list/sender_cooldowns = list()
 	var/static/list/pending_direct_responses = list()
 	var/static/response_id_counter = 0
+	var/next_announce = 0
+
+/obj/structure/mercstatue/Initialize(mapload)
+	. = ..()
+	next_announce = world.time + rand(1 MINUTES, 2 MINUTES)
+	START_PROCESSING(SSroguemachine, src)
+
+/obj/structure/mercstatue/Destroy(force)
+	STOP_PROCESSING(SSroguemachine, src)
+	return ..()
+
+/obj/structure/mercstatue/process()
+	if(world.time < next_announce)
+		return
+	next_announce = world.time + rand(0.1 MINUTES, 0.5 MINUTES)
+	if(!length(GLOB.available_mercenaries))
+		return
+	var/mob/living/carbon/human/merc = pick(GLOB.available_mercenaries)
+	if(QDELETED(merc))
+		return
+	if(merc.job)
+		say("[merc.real_name], [merc.job], is currently available for hire!")
+	else
+		say("[merc.real_name] is currently available for hire!")
 
 /obj/structure/mercstatue/attack_hand(mob/living/carbon/human/user)
 	use(user)
@@ -49,7 +73,7 @@
 			mercring = new /obj/item/mercenary_ring(src)
 			mercring.add_mercenary(user)
 			user.put_in_hands(mercring)
-			if(user.mercdesc && (user.mercdesc != ""))
+			if(istext(user.mercdesc) && length(user.mercdesc))
 				return
 			user.mercdesc = stripped_input(user, "Write a description which will be shown to potential employers.", "Description", "", message_char_limit)
 			return
@@ -133,9 +157,15 @@
 		. += span_notice("These mercenaries are currently available:")
 		for(var/mob/living/carbon/human/merc in GLOB.available_mercenaries)
 			if(merc.job)
-				. += "[merc.real_name], [merc.job]: [merc.mercdesc]"
+				if(istext(merc.mercdesc) && length(merc.mercdesc))
+					. += "[merc.real_name], [merc.job]: [merc.mercdesc]"
+				else
+					. += "[merc.real_name], [merc.job]"
 			else
-				. += "[merc.real_name]: [merc.mercdesc]"
+				if(istext(merc.mercdesc) && length(merc.mercdesc))
+					. += "[merc.real_name]: [merc.mercdesc]"
+				else
+					. += "[merc.real_name]"
 		return
 	else
 		. += span_notice("No mercenaries are currently available.")
