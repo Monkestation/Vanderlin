@@ -35,7 +35,7 @@
 	if(firer.blood_volume < (blood_adjustment + BLOOD_VOLUME_SURVIVE))
 		to_chat(firer, span_bloody("I do not have enough blood for a transfusion."))
 		return
-	if(target.blood_volume >= BLOOD_VOLUME_MAXIMUM)
+	if(target.blood_volume >= BLOOD_VOLUME_SAFE_MAXIMUM)
 		to_chat(firer, span_bloody("[target] does not require a blood transfusion."))
 		return
 	firer.adjust_blood_volume(-blood_adjustment)
