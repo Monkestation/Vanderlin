@@ -1,0 +1,8 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added a log to conjuring items."
+  - rscadd: "Added an examine artefact for Oracle looking at Nitewarden."
+  - rscadd: "Changed invocation for Numbing Senses to not use the Baothan miracle words."
+  - rscadd: "Added Blood and Death magic warnings in the spellbook UI."
+  - balance: "Nerfed learnable Ethereal Jaunt by increasing cooldown. Does not apply to Court Mage's innate spell."
