@@ -28,7 +28,7 @@
 		//disabling previous enchantments processing, till we reach the final item, that will be processed.
 		//More enchanted items = higher healing power
 		for(var/obj/item/clothing/gear in user.get_all_gear())
-			if(gear && gear != i && gear.has_enchantment(/datum/enchantment/life_eternal))
+			if(gear != i && gear.has_enchantment(/datum/enchantment/life_eternal))
 				enchantment = gear.get_enchantment(/datum/enchantment/life_eternal)
 				STOP_PROCESSING(SSobj, enchantment)
 				healing_power += 1
