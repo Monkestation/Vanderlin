@@ -38,7 +38,7 @@
 		return
 	if(world.time < next_announce)
 		return
-	next_announce = world.time + rand(0.1 MINUTES, 0.2 MINUTES)
+	next_announce = world.time + rand(2 MINUTES, 4 MINUTES)
 	if(!length(GLOB.available_mercenaries))
 		return
 	var/mob/living/carbon/human/merc = pick(GLOB.available_mercenaries)
