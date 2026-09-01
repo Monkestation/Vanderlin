@@ -32,7 +32,7 @@
 				enchantment = gear.get_enchantment(/datum/enchantment/life_eternal)
 				STOP_PROCESSING(SSobj, enchantment)
 				healing_power += 1
-			else if(gear && gear == i)
+			else if(gear == i)
 				START_PROCESSING(SSobj, src)
 				continue
 	else
@@ -44,7 +44,7 @@
 	STOP_PROCESSING(SSobj, src)
 	src.healing_power = 1
 	for(var/obj/item/clothing/gear in user.get_all_gear())
-		if(gear && gear.has_enchantment(/datum/enchantment/life_eternal))
+		if(gear.has_enchantment(/datum/enchantment/life_eternal))
 			enchanted_items += 1
 			enchantment = gear.get_enchantment(/datum/enchantment/life_eternal)
 	if(enchanted_items != 0)
