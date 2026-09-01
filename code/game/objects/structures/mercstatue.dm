@@ -13,6 +13,7 @@
 	var/static/list/pending_direct_responses = list()
 	var/static/response_id_counter = 0
 	var/next_announce = 0
+	var/muted = FALSE
 
 /obj/structure/mercstatue/Initialize(mapload)
 	. = ..()
@@ -23,10 +24,21 @@
 	STOP_PROCESSING(SSroguemachine, src)
 	return ..()
 
+/obj/structure/mercstatue/AltClick(mob/user, list/modifiers)
+	. = ..()
+	if(!ishuman(user) || !user.client)
+		return
+	if(!Adjacent(user))
+		return
+	muted = !muted
+	user.balloon_alert(user, muted ? "muted" : "unmuted")
+
 /obj/structure/mercstatue/process()
+	if(muted)
+		return
 	if(world.time < next_announce)
 		return
-	next_announce = world.time + rand(2 MINUTES, 4 MINUTES)
+	next_announce = world.time + rand(0.1 MINUTES, 0.2 MINUTES)
 	if(!length(GLOB.available_mercenaries))
 		return
 	var/mob/living/carbon/human/merc = pick(GLOB.available_mercenaries)
@@ -152,7 +164,7 @@
 
 /obj/structure/mercstatue/examine(mob/user)
 	. = ..()
-
+	. = span_notice("Alt-click to toggle mercenary announcement")
 	if(GLOB.available_mercenaries)
 		. += span_notice("These mercenaries are currently available:")
 		for(var/mob/living/carbon/human/merc in GLOB.available_mercenaries)
@@ -169,3 +181,8 @@
 		return
 	else
 		. += span_notice("No mercenaries are currently available.")
+
+
+/obj/structure/mercstatue/wall
+	density = FALSE
+	SET_BASE_PIXEL(0, 35)

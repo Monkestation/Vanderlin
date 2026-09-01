@@ -22486,6 +22486,7 @@
 	layer = 2.7;
 	pixel_y = 7
 	},
+/obj/structure/mercstatue,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/town)
 "jun" = (
@@ -25380,12 +25381,9 @@
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
 "kCm" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 4
-	},
 /obj/structure/mercstatue,
-/turf/open/floor/dirt/road,
-/area/outdoors/town)
+/turf/open/floor/cobblerock,
+/area/outdoors/town/keep)
 "kCM" = (
 /obj/effect/landmark/start/vagrant,
 /turf/open/floor/dirt,
@@ -28475,10 +28473,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/water/swamp,
 /area/under/town/sewer)
-"lRj" = (
-/obj/structure/mannequin/male/female,
-/turf/open/floor/wood,
-/area/indoors/town)
 "lRk" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/bush_meagre,
@@ -32922,13 +32916,9 @@
 /turf/open/floor/wood,
 /area/indoors/town/church)
 "nLe" = (
-/obj/structure/mirror{
-	pixel_x = -32;
-	pixel_y = 0
-	},
-/obj/structure/table/wood/plain_alt,
-/turf/open/floor/blocks/paving,
-/area/indoors/town/clinic_large/apothecary)
+/obj/structure/mercstatue/wall,
+/turf/open/floor/cobblerock,
+/area/outdoors/town)
 "nLi" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 32
@@ -113513,7 +113503,7 @@ mFi
 mFi
 kwJ
 eIh
-mFi
+nLe
 mFi
 qFx
 eIh
@@ -113714,7 +113704,7 @@ oWd
 mFi
 kwJ
 mFi
-kCm
+cJK
 kwJ
 eYe
 xRO
@@ -123788,7 +123778,7 @@ fep
 fep
 aNf
 aNf
-fep
+kCm
 nuA
 qse
 aNf
