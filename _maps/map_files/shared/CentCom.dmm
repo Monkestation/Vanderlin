@@ -7536,8 +7536,9 @@
 /turf/open/floor/grass/red,
 /area/outdoors/antag/vampire_manor)
 "PK" = (
-/obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
+/obj/structure/door/iron/bars/cell,
 /turf/open/floor/blocks,
 /area/indoors/antag/vampire_manor)
 "PM" = (
@@ -7721,11 +7722,9 @@
 /turf/open/floor/church,
 /area/indoors/antag/lich)
 "QN" = (
-/obj/structure/door/iron/bars{
-	name = "Cell"
-	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/antag/bandit,
+/obj/structure/door/iron/bars/cell,
 /turf/open/floor/dirt,
 /area/indoors/antag/bandit_lair)
 "QO" = (
