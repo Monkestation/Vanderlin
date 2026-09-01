@@ -145,6 +145,9 @@
 		if(BLOOD_MARK_TYPE_SHIELD)
 			can_self_cast = TRUE
 		if(BLOOD_MARK_TYPE_BEFRIEND)
+			if(!target.mind)
+				to_chat(owner, span_bloody("[target] has no independent thought!"))
+				return FALSE
 			if(target.cleric)
 				to_chat(owner, span_bloody("[target] is in service to their god, they cannot be trusted!"))
 				return FALSE

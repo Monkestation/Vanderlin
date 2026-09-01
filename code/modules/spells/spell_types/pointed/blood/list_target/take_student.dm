@@ -46,6 +46,8 @@
 		for(var/mob/living/carbon/human/nearby_human in oview(target_radius, center))
 			if(nearby_human == owner)
 				continue
+			if(!nearby_human.mind)
+				continue
 			if(HAS_TRAIT(nearby_human, TRAIT_INQUISITION) || nearby_human.cleric || nearby_human.stat)
 				continue
 			if(HAS_TRAIT(nearby_human, TRAIT_VITAE_USER) || HAS_TRAIT(nearby_human, TRAIT_BLOOD_MAGIC_BLOCKED) || HAS_TRAIT(nearby_human, TRAIT_BLOOD_STUDENT))
