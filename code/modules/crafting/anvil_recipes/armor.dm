@@ -707,7 +707,7 @@
 	output_amount = 2
 
 /datum/anvil_recipe/armor/steel/helmetmorion
-	name = "Morion"
+	name = "x2 Morion"
 	created_item = /obj/item/clothing/head/helmet/morion
 	output_amount = 2
 
