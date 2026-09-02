@@ -542,6 +542,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DIVINE_SERVANT "Divine Servant"
 #define TRAIT_DIVINE_CONVERT "Divine Convert"
 #define TRAIT_LUNAR_ORDER "Member of the Lunar Order"
+#define TRAIT_DREAM_CAVE "Access to the Dream Cave"
 
 // Inhumen patron trait bonuses
 #define TRAIT_ORGAN_EATER "Blessing of Graggar"//Can eat organs (duh.) and raw meat

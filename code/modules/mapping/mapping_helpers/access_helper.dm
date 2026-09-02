@@ -300,3 +300,7 @@
 /obj/effect/mapping_helpers/access/keyset/antag/lich
 	accesses = list(ACCESS_LICH)
 	difficulty = LOCK_MASTER
+
+/obj/effect/mapping_helpers/access/keyset/admin/oracle
+	accesses = list(ACCESS_DREAM_CAVE)
+	difficulty = LOCK_MASTER

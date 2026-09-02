@@ -64,52 +64,63 @@
 /obj/item/weapon/lordscepter/afterattack(atom/target, mob/user, flag)
 	. = ..()
 	if(get_dist(user, target) > 7)
-		return
+		return FALSE
 	user.changeNext_move(CLICK_CD_MELEE)
 
 
 	if(!ishuman(user))
-		return
-	var/mob/living/carbon/human/HU = user
+		return FALSE
+	var/mob/living/carbon/human/human_user = user
 
-	if(!is_lord_job(HU.mind?.assigned_role))
+	if(!is_lord_job(human_user.mind?.assigned_role))
 		to_chat(user, span_danger("The rod doesn't obey me."))
-		return
+		return FALSE
 
 	if(!ishuman(target))
-		return
+		return FALSE
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/carbon/human/human_target = target
 
-	user.visible_message(span_warning("[user] points [src] at [target].</span>"))
+	user.visible_message(span_warning("[human_user] points [src] at [human_target].</span>"))
 
-	if(H == HU)
-		return
+	if(human_target == human_user)
+		return FALSE
 
-	if(H.can_block_magic(MAGIC_RESISTANCE))
-		return
+	if(human_target.can_block_magic(MAGIC_RESISTANCE))
+		return FALSE
+
+	var/pass = FALSE
+	var/area/target_area = get_area(human_target)
+	if(istype(target_area, /area/indoors/town/keep) || istype(target_area, /area/outdoors/town/keep))
+		pass = TRUE
+	else if(human_target.has_faction(SUB_FACTION_KEEP))
+		pass = TRUE
+
+	if(!pass)
+		to_chat(human_user, span_warning("You cannot use [src] against [human_target]"))
+		return FALSE
 
 	if(!COOLDOWN_FINISHED(src, scepter))
 		to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, scepter) / 10, 1)] seconds left!"))
-		return
+		return FALSE
 
 	if(istype(user.used_intent, /datum/intent/lord_electrocute))
-		HU.visible_message(span_warning("[HU] electrocutes [H] with \the [src]."))
+		human_user.visible_message(span_warning("[human_user] electrocutes [human_target] with \the [src]."))
 		user.Beam(target, icon_state = "lightning[rand(1, 12)]", time = 0.5 SECONDS) // LIGHTNING
 		playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
-		H.electrocute_act(5, src)
-		HU.log_message("has shocked [H.real_name] with the [src]!", LOG_ATTACK)
-		to_chat(H, span_danger("I'm electrocuted by the scepter!"))
-		COOLDOWN_START(src, scepter, 20 SECONDS)
-		return
+		human_target.electrocute_act(5, src)
+		human_user.log_message("has shocked [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm electrocuted by the scepter!"))
+		COOLDOWN_START(src, scepter, 30 SECONDS)
+		return TRUE
 
 	if(istype(user.used_intent, /datum/intent/lord_silence))
-		HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
-		H.set_silence(20 SECONDS)
-		HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
-		to_chat(H, span_danger("I'm silenced by the scepter!"))
+		human_user.visible_message(span_warning("[human_user] silences [human_target] with \the [src]."))
+		human_target.set_silence(20 SECONDS)
+		human_user.log_message("has silenced [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm silenced by the scepter!"))
 		COOLDOWN_START(src, scepter, 10 SECONDS)
-		return
+		return TRUE
 
 //................ Staff of the Testimonium ............... //
 /obj/item/weapon/polearm/woodstaff/aries
@@ -153,47 +164,55 @@
 	if(!ishuman(user))
 		return
 
-	var/mob/living/carbon/human/HU = user
+	var/mob/living/carbon/human/human_user = user
 
-	if(!is_priest_job(HU.mind?.assigned_role))
+	if(!is_priest_job(human_user.mind?.assigned_role))
 		to_chat(user, span_danger("The staff doesn't obey me."))
 		return
 
 	if(!ishuman(target))
 		return
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/carbon/human/human_target = target
 
-	user.visible_message(span_warning("[user] points [src] at [target]."))
+	user.visible_message(span_warning("[human_user] points [src] at [human_target]."))
 
-	if(H == HU)
+	if(human_target == human_user)
 		return
 
-	if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
+	if(human_target.can_block_magic(MAGIC_RESISTANCE_HOLY))
 		return
 
-	if(!(H.mind?.assigned_role.department_flag & CHURCHMEN))
-		return
+	var/pass = FALSE
+	var/area/target_area = get_area(human_target)
+	if(istype(target_area, /area/indoors/town/church) || istype(target_area, /area/outdoors/exposed/church))
+		pass = TRUE
+	else if(human_target.mind?.assigned_role.department_flag & CHURCHMEN)
+		pass = TRUE
+
+	if(!pass)
+		to_chat(human_user, span_warning("You cannot use [src] against [human_target]"))
+		return FALSE
 
 	if(!COOLDOWN_FINISHED(src, staff))
 		to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
 		return
 
 	if(istype(user.used_intent, /datum/intent/priest_smite))
-		HU.visible_message(span_warning("[HU] smites [H] with \the [src]."))
+		human_user.visible_message(span_warning("[human_user] smites [human_target] with \the [src]."))
 		user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
 		playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
-		H.electrocute_act(5, src)
-		HU.log_message("has smitten [H.real_name] with the [src]!", LOG_ATTACK)
-		to_chat(H, span_danger("I'm smitten by the staff!"))
-		COOLDOWN_START(src, staff, 20 SECONDS)
+		human_target.electrocute_act(5, src)
+		human_user.log_message("has smitten [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm smitten by the staff!"))
+		COOLDOWN_START(src, staff, 30 SECONDS)
 		return
 
 	if(istype(user.used_intent, /datum/intent/priest_silence))
-		HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
-		H.set_silence(20 SECONDS)
-		HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
-		to_chat(H, span_danger("I'm silenced by the staff!"))
+		human_user.visible_message(span_warning("[human_user] silences [human_target] with \the [src]."))
+		human_target.set_silence(20 SECONDS)
+		human_user.log_message("has silenced [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm silenced by the staff!"))
 		COOLDOWN_START(src, staff, 10 SECONDS)
 
 /obj/item/weapon/mace/stunmace
