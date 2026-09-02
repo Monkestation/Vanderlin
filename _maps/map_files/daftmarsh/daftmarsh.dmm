@@ -13963,6 +13963,9 @@
 /obj/structure/table/wood/plain_alt,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/magician)
+"lcs" = (
+/turf/open/floor/grass,
+/area/under/cave)
 "lcL" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -27943,6 +27946,10 @@
 	},
 /turf/open/openspace,
 /area/outdoors/town/roofs)
+"xcP" = (
+/obj/structure/fluff/traveltile/oracle_cave,
+/turf/open/floor/dirt,
+/area/under/cave)
 "xdg" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/sword/rapier/dec,
@@ -139778,8 +139785,8 @@ bJI
 bJI
 qkx
 qkx
-ftQ
-ftQ
+qfU
+qfU
 ftQ
 ftQ
 hQz
@@ -139979,9 +139986,9 @@ bJI
 bJI
 kpb
 ovC
-ftQ
-ftQ
-hQz
+lcs
+lcs
+qfU
 ftQ
 ftQ
 ftQ
@@ -140180,10 +140187,10 @@ gPm
 uSD
 bJI
 bJI
-ftQ
-ftQ
-ftQ
-ftQ
+qfU
+lcs
+lcs
+qfU
 ftQ
 ftQ
 hQz
@@ -140382,10 +140389,10 @@ qTg
 rNd
 bJI
 ftQ
-ftQ
-hQz
-ftQ
-ftQ
+qfU
+qfU
+qfU
+lcs
 hQz
 hQz
 ftQ
@@ -140584,9 +140591,9 @@ pVd
 kpb
 ftQ
 ftQ
-ftQ
-hQz
-hQz
+lcs
+xcP
+xcP
 hQz
 ftQ
 ftQ
@@ -140786,7 +140793,7 @@ fTY
 ftQ
 ftQ
 ftQ
-ftQ
+qfU
 ftQ
 hQz
 ftQ

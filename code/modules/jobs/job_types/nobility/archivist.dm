@@ -7,7 +7,7 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = 19 //lol?
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -59,7 +59,7 @@
 	)
 
 /datum/job/advclass/archivist
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 
 /datum/attribute_holder/sheet/job/chronicler
 	raw_attribute_list = list(

@@ -7,7 +7,7 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ROYALKNIGHT
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	outfit = /datum/outfit/royalknight
 	total_positions = 2
 	spawn_positions = 2
@@ -92,7 +92,7 @@
 	inherit_parent_title = TRUE
 	should_reset_stats = FALSE
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 
 /datum/job/advclass/royalknight/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
