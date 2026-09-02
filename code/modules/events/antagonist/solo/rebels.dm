@@ -11,7 +11,7 @@
 
 	roundstart = TRUE
 	antag_flag = ROLE_PREBEL
-	shared_occurence_type = SHARED_HIGH_THREAT
+	//shared_occurence_type = SHARED_HIGH_THREAT
 
 	base_antags = 1
 	maximum_antags = 4
@@ -36,12 +36,15 @@
 		/datum/job/adept,
 		/datum/job/men_at_arms,
 		/datum/job/gatemaster,
-		/datum/job/forestwarden,
 		/datum/job/royalknight,
 		/datum/job/gmtemplar,
 		/datum/job/templar,
+		/datum/job/forestwarden,
+		/datum/job/forestenforcer,
+		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
+		/datum/job/admin,
 	)
 
 /datum/round_event_control/antagonist/solo/rebel/valid_for_map()

@@ -36,7 +36,7 @@
 		if(mapload) { \
 			var/turf/spawn_turf = get_turf(src); \
 			var/fixed_type = trim_directional_helper_suffix(type); \
-			if(is_station_level(spawn_turf?.z || 0)) { \
+			if(is_town_level(spawn_turf?.z || 0)) { \
 				var/datum/required_item/existing_value = GLOB.required_map_items[fixed_type]; \
 				if(isnull(existing_value)) { \
 					var/datum/required_item/new_value = new(fixed_type, min, max); \

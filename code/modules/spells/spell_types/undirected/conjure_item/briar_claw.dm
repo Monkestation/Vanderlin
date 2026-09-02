@@ -16,10 +16,6 @@
 	refresh_count = 0
 	delete_old = TRUE
 	item_outline = "#1bab68"
-	attunements = list(
-		/datum/attunement/blood = 0.3,
-		/datum/attunement/earth = 0.7
-	)
 
 /datum/action/cooldown/spell/undirected/conjure_item/briar_claw/can_cast_spell(feedback)
 	. = ..()
@@ -27,7 +23,7 @@
 		return
 	if(!iscarbon(owner))
 		if(feedback)
-			owner.balloon_alert(owner, "Only mortals may use the briar claw!")
+			owner.balloon_alert(owner, "only mortals may use the briar claw!")
 		return FALSE
 
 /datum/action/cooldown/spell/undirected/conjure_item/briar_claw/before_cast(atom/cast_on)
@@ -51,7 +47,7 @@
 	wdefense = MEDIOCRE_PARRY
 	armor_penetration = 7
 	max_blade_int = 700
-	max_integrity = INTEGRITY_STRONGEST + 200
+	max_integrity = INTEGRITY_OLD_STRONGEST + 200
 
 /obj/item/weapon/briar_claw/Initialize()
 	. = ..()

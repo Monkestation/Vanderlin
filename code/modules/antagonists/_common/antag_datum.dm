@@ -79,7 +79,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 /// This handles the application of special abilities
 /datum/antagonist/proc/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/M = mob_override || owner.current
-	for(var/trait as anything in innate_traits)
+	for(var/trait in innate_traits)
 		ADD_TRAIT(M, trait, "[type]")
 
 /// This handles the removal of special abilities
@@ -87,7 +87,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	var/mob/living/M = mob_override || owner.current
 	if(!istype(M))
 		return
-	for(var/trait as anything in innate_traits)
+	for(var/trait in innate_traits)
 		REMOVE_TRAIT(M, trait, "[type]")
 
 /// Adds the specified antag hud to the player. Usually called in an antag datum file
@@ -114,10 +114,13 @@ GLOBAL_LIST_EMPTY(antagonists)
 /datum/antagonist/proc/create_team(datum/team/team)
 	return
 
-//Proc called when the datum is given to a mind.
+///Called by the add_antag_datum() mind proc after the instanced datum is added to the mind's antag_datums list.
 /datum/antagonist/proc/on_gain()
-	if(!owner?.current)
-		return
+	SHOULD_CALL_PARENT(TRUE)
+	if(!owner)
+		CRASH("[src] ran on_gain() without a mind")
+	if(!owner.current)
+		CRASH("[src] ran on_gain() on a mind without a mob")
 	if(!silent)
 		greet()
 	apply_innate_effects()
@@ -130,7 +133,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	if(is_banned(owner.current) && replace_banned)
 		replace_banned_player()
 		return
-	if(owner.current.client?.holder && (CONFIG_GET(flag/auto_deadmin_antagonists) || owner.current.client.prefs?.toggles & DEADMIN_ANTAGONIST))
+	if(owner.current.client?.holder && (CONFIG_GET(flag/auto_deadmin_antagonists) || owner.current.client.prefs?.read_preference(/datum/preference/bitwise/toggles) & DEADMIN_ANTAGONIST))
 		owner.current.client.holder.auto_deadmin()
 	if(allow_preference_switching && owner.current.client?.prefs?.path)
 		switch_prefs(owner.current)
@@ -155,9 +158,14 @@ GLOBAL_LIST_EMPTY(antagonists)
 		owner.current.key = C.key
 
 /datum/antagonist/proc/on_removal()
+	SHOULD_CALL_PARENT(TRUE)
+	if(!owner)
+		CRASH("Antag datum with no owner.")
+
 	remove_innate_effects()
 	clear_antag_stress()
 	remove_antag_hud(antag_hud_type, antag_hud_name)
+
 	if(owner)
 		LAZYREMOVE(owner.antag_datums, src)
 		if(owner.current)
@@ -168,9 +176,14 @@ GLOBAL_LIST_EMPTY(antagonists)
 				human_user.add_quirk(/datum/quirk/vice/pacifist)
 			if(!silent)
 				farewell()
+
 	var/datum/team/team = get_team()
 	if(team)
 		team.remove_member(owner)
+
+	if(owner.current)
+		SEND_SIGNAL(owner.current, COMSIG_MOB_ANTAGONIST_REMOVED, src)
+
 	qdel(src)
 
 /datum/antagonist/proc/greet()

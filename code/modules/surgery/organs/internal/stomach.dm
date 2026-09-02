@@ -8,15 +8,13 @@
 	attack_verb = list("gored", "squished", "slapped", "digested")
 	desc = ""
 
-	healing_factor = STANDARD_ORGAN_HEALING
-
 	organ_volume = 1
 	max_blood_storage = 20
 	current_blood = 20
-	blood_req = 4
+	blood_req = 2
 	oxygen_req = 4
-	nutriment_req = 2
-	hydration_req = 1.5
+	nutriment_req = 0.75 * RATE_OF_HUNGER_GLOBAL
+	hydration_req = 0.6 * RATE_OF_THIRST_GLOBAL
 
 	low_threshold_passed = "<span class='info'>My stomach flashes with pain before subsiding. Food doesn't seem like a good idea right now.</span>"
 	high_threshold_passed = "<span class='warning'>My stomach flares up with constant pain. I can hardly stomach the idea of food right now!</span>"
@@ -40,12 +38,11 @@
 	else if(damage >= low_threshold)
 		examine_list += span_notice("<b>[owner]</b> looks a little peaky.")
 
-/obj/item/organ/stomach/Remove(mob/living/carbon/M, special = 0)
-	var/mob/living/carbon/human/H = owner
-	if(istype(H))
-		H.clear_alert("disgust")
-		H.remove_stress(/datum/stress_event/disgust)
-	..()
+/obj/item/organ/stomach/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+	. = ..()
+
+	organ_owner.clear_alert("disgust")
+	organ_owner.remove_stress(/datum/stress_event/disgust)
 
 /obj/item/organ/stomach/fly
 	name = "insectoid stomach"
@@ -65,17 +62,21 @@
 		QDEL_NULL(spit)
 	return ..()
 
-/obj/item/organ/stomach/acid_spit/Insert(mob/living/carbon/M, special, drop_if_replaced, new_zone = null)
+/obj/item/organ/stomach/acid_spit/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
+
 	if(QDELETED(spit))
 		spit = new(src)
-	spit.Grant(M)
 
-/obj/item/organ/stomach/acid_spit/Remove(mob/living/carbon/M, special, drop_if_replaced)
+	spit.Grant(organ_owner)
+
+/obj/item/organ/stomach/acid_spit/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
+
 	if(QDELETED(spit))
 		return
-	spit.Remove(M)
+
+	spit.Remove(organ_owner)
 
 /obj/item/organ/guts // relatively unimportant, just fluff :)
 	name = "guts"
@@ -85,8 +86,7 @@
 	slot = ORGAN_SLOT_GUTS
 	attack_verb = list("gored", "squished", "slapped", "digested")
 	desc = ""
-
-	healing_factor = STANDARD_ORGAN_HEALING
+	organ_efficiency = list(ORGAN_SLOT_GUTS = 100)
 	low_threshold_passed = "<span class='info'>My guts flashes with pain before subsiding.</span>"
 	high_threshold_passed = "<span class='warning'>My guts flares up with constant pain.</span>"
 	high_threshold_cleared = "<span class='info'>The pain in my guts die down for now.</span>"

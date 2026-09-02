@@ -50,6 +50,7 @@
 	name = "Fisher (Pilgrim)"
 	neck = /obj/item/storage/belt/pouch/coins/poor
 	head = /obj/item/clothing/head/fisherhat
+	armor = /obj/item/clothing/armor/gambeson/light/striped
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/fishingrod/fisher
 	belt = /obj/item/storage/belt/leather
@@ -62,7 +63,6 @@
 		pants = /obj/item/clothing/pants/tights/colored/random
 		shirt = pick(/obj/item/clothing/shirt/undershirt/colored/random, /obj/item/clothing/shirt/shortshirt/colored/random)
 		shoes = pick(/obj/item/clothing/shoes/simpleshoes, /obj/item/clothing/shoes/boots/leather)
-		armor = /obj/item/clothing/armor/gambeson/light/striped
 		backpack_contents = list(
 			/obj/item/weapon/knife/villager = 1,
 			/obj/item/natural/worms = 1,
@@ -71,7 +71,6 @@
 		)
 	else
 		shirt = /obj/item/clothing/shirt/dress/gen/colored/random
-		armor = /obj/item/clothing/armor/gambeson/light/striped
 		shoes = /obj/item/clothing/shoes/boots/leather
 		backpack_contents = list(
 			/obj/item/weapon/knife/hunting = 1,

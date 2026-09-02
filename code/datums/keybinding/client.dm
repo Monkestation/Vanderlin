@@ -10,7 +10,7 @@
 	full_name = "Admin Help"
 	description = "Ask an admin for help."
 
-/datum/keybinding/client/admin_help/down(client/user)
+/datum/keybinding/client/admin_help/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.get_adminhelp()
 	return TRUE

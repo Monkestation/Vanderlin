@@ -66,8 +66,9 @@
 /area/under/tomb/wilds)
 "jY" = (
 /obj/effect/spawner/map_spawner/loot/common,
-/obj/structure/closet/dirthole/closed/loot,
-/turf/open/floor/grass,
+/obj/structure/closet/dirthole/closed,
+/obj/effect/mapping_helpers/structure/grave_spawner/t2,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "kl" = (
 /obj/structure/flora/grass,

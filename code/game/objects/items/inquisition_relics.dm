@@ -26,39 +26,40 @@
 	name = "Reliquary Key"
 	desc = "The single use key with which to unleash woe. Choose wisely."
 
-/obj/structure/reliquarybox/attackby(obj/item/W, mob/user, list/modifiers)
-	if(ishuman(user))
-		if(istype(W, /obj/item/key/psydonkey))
-			if(opened)
-				to_chat(user, span_info("The reliquary box has already been opened..."))
-				return
-			qdel(W)
-			to_chat(user, span_info("The reliquary lock takes my key as it opens, I take a moment to ponder what power was delivered to us..."))
-			playsound(src, 'sound/foley/doors/woodlock.ogg', 60)
-			to_chat(user,)
-			var/relics = list("Melancholic Crankbox - Antimagic", "Daybreak - Silver Whip", "Sanctum - Silver Halberd", "Crusade - Silver Greatsword", "Censer of Penitence")
-			var/relicchoice = input(user, "Choose your tool", "RELICS") as anything in relics
-			var/obj/choice
-			switch(relicchoice)
-				if("Melancholic Crankbox - Antimagic")
-					choice = /obj/item/psydonmusicbox
-				if("Daybreak - Silver Whip")
-					choice = /obj/item/weapon/whip/psydon/relic
-				if("Sanctum - Silver Halberd")
-					choice = /obj/item/weapon/polearm/halberd/psydon/relic
-					user.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40, TRUE)	//We make sure the weapon is usable by the Inquisitor.
-				if("Crusade - Silver Greatsword")
-					choice = /obj/item/weapon/sword/long/greatsword/psydon
-					user.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40, TRUE)		//Ditto.
-				if("Censer of Penitence")
-					choice = /obj/item/flashlight/flare/torch/lantern/psycenser
-			to_chat(user, span_info("I have chosen the relic, may HE guide my hand."))
-			var/obj/structure/closet/crate/chest/inqreliquary/realchest = new /obj/structure/closet/crate/chest/inqreliquary(get_turf(src))
-			realchest.populate_contents()
-			choice = new choice(realchest)
-			qdel(src)
+/obj/structure/reliquarybox/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/key/psydonkey))
+		return NONE
 
+	if(opened)
+		to_chat(user, span_info("The reliquary box has already been opened..."))
+		return ITEM_INTERACT_BLOCKING
 
+	qdel(tool)
+	to_chat(user, span_info("The reliquary lock takes my key as it opens, I take a moment to ponder what power was delivered to us..."))
+	playsound(src, 'sound/foley/doors/woodlock.ogg', 60)
+	to_chat(user,)
+	var/relics = list("Melancholic Crankbox - Antimagic", "Daybreak - Silver Whip", "Sanctum - Silver Halberd", "Crusade - Silver Greatsword", "Censer of Penitence")
+	var/relicchoice = tgui_input_list(user, "Choose your tool", "RELICS", relics)
+	var/obj/choice
+	switch(relicchoice)
+		if("Melancholic Crankbox - Antimagic")
+			choice = /obj/item/psydonmusicbox
+		if("Daybreak - Silver Whip")
+			choice = /obj/item/weapon/whip/psydon/relic
+		if("Sanctum - Silver Halberd")
+			choice = /obj/item/weapon/polearm/halberd/psydon/relic
+			user.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40, TRUE)	//We make sure the weapon is usable by the Inquisitor.
+		if("Crusade - Silver Greatsword")
+			choice = /obj/item/weapon/sword/long/greatsword/psydon
+			user.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40, TRUE)		//Ditto.
+		if("Censer of Penitence")
+			choice = /obj/item/flashlight/flare/torch/lantern/psycenser
+	to_chat(user, span_info("I have chosen the relic, may HE guide my hand."))
+	var/obj/structure/closet/crate/chest/inqreliquary/realchest = new /obj/structure/closet/crate/chest/inqreliquary(get_turf(src))
+	realchest.populate_contents()
+	choice = new choice(realchest)
+	qdel(src)
+	return ITEM_INTERACT_SUCCESS
 
 // Soul Churner - Music box which applies magic resistance to Inquisition members, greatly mood debuffs everyone not a Psydon worshipper.
 /obj/item/psydonmusicbox
@@ -76,6 +77,7 @@
 	obj_flags = CAN_BE_HIT
 	bigboy = TRUE
 	item_weight = 4 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/datum/looping_sound/psydonmusicboxsound/soundloop
 
 /obj/item/psydonmusicbox/examine(mob/user)
@@ -132,6 +134,39 @@
 		switch(tag)
 			if("gen")
 				return list("shrink" = 0.6,"sx" = -1,"sy" = 0,"nx" = 11,"ny" = 1,"wx" = 0,"wy" = 1,"ex" = 4,"ey" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 15,"sturn" = 0,"wturn" = 0,"eturn" = 39,"nflip" = 8,"sflip" = 0,"wflip" = 0,"eflip" = 8)
+
+/// Called by burial_rites, gives some fluff messages before deleting the box.
+/obj/item/psydonmusicbox/proc/free_souls(mob/living/savior)
+	var/list/soul_lines = list(
+		SPAN_GOD_ASTRATA("Her light once more... thank you..."),
+		SPAN_GOD_ASTRATA("Warmth at last..."),
+		SPAN_GOD_NOC("I can see them... the stars..."),
+		SPAN_GOD_NECRA("Finally... peace..."),
+		SPAN_GOD_NECRA("You have done a noble service kin..."),
+		SPAN_GOD_NECRA("I will make sure to inform the Undermaiden of your service..."),
+		SPAN_GOD_ABYSSOR("May the sea treat you well..."),
+		SPAN_GOD_RAVOX("Freedom at last! May justice be done for what I have suffered..."),
+		SPAN_GOD_PESTRA("The suffering has ended..."),
+		SPAN_GOD_EORA("Peace at last! May you find love stranger..."),
+		SPAN_GOD_DENDOR("THOSE GRENZEL SCUM SHALL PAY FOR WHAT THEY HAVE DONE!"),
+		SPAN_GOD_XYLIX("Finally! That audience was getting boring anyways..."),
+		SPAN_GOD_MALUM("I have been freed! I must find my apprentice..."),
+		SPAN_GOD_MALUM("May Malum curse the creator of that cursed craft... thank you..."),
+		SPAN_GOD_MATTHIOS("Thanks pal, I owe you one..."),
+		SPAN_GOD_ZIZO("Thanks IDIOT! Time to cause some chaos~"),
+		SPAN_GOD_GRAGGAR("I WILL TEAR THOSE GRENZELS LIMB FROM LIMB!"),
+		SPAN_GOD_BAOTHA("What a horrid experience... I need a drink..."),
+		SPAN_GOD_PSYDON("Don't expect thanks from me, servant of the betrayer...")
+	)
+
+	savior.visible_message(span_info("As \the [src] crumbles to dust, you can see a few faint lights float away and fade out."), span_info("As \the [src] crumbles, you can faintly see fourteen souls slowly drift out and fade into the air. One of them utters a few words before joining the rest..."), vision_distance = COMBAT_MESSAGE_RANGE)
+
+	sleep(1 SECONDS)
+	to_chat(savior, pick(soul_lines))
+
+	savior.add_stress(/datum/stress_event/soulchurnerdestroyed)
+	qdel(src)
+
 
 /atom/movable/screen/alert/status_effect/buff/cranking_soulchurner
 	name = "Cranking Soulchurner"
@@ -435,6 +470,7 @@
 	sellprice = 0
 	verb_exclaim = "blares"
 	item_weight = 80 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/cursedblood
 	var/active
 	var/full
@@ -571,19 +607,18 @@
 	if(active && working && !full)
 		if(do_after(user, 20, M))
 			M.flash_fullscreen("redflash3")
-			if(!HAS_TRAIT(M, TRAIT_NOPAIN) || !HAS_TRAIT(M, TRAIT_NOPAINSTUN))
+			if(M.can_feel_pain())
 				if(prob(15))
-					M.emote("whimper", forced = TRUE)
+					M.emote("whimper")
 				else if(prob(15))
-					M.emote("painmoan", forced = TRUE)
+					M.emote("painmoan")
 			desc = initial(desc)
 			subject = WEAKREF(M)
 			desc += span_notice(" It contains the blood of [M.real_name]!")
 			visible_message(span_warning("[src] draws from [M]!"))
 			playsound(M, 'sound/combat/hits/bladed/genstab (1).ogg', 30, FALSE, -1)
 			timestaken++
-			M.adjust_bloodvolume(-30)
-			M.handle_blood()
+			M.adjust_blood_volume(-30)
 			if(M.mind)
 				if(M.mind.has_antag_datum(/datum/antagonist/werewolf, FALSE))
 					cursedblood = 3
@@ -595,35 +630,43 @@
 					cursedblood = 2
 				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lord, FALSE))
 					cursedblood = 3
-				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
+				if(M.mind.has_antag_datum(/datum/antagonist/vampire/lord/daewalker) || M.mind.has_antag_datum(/datum/antagonist/vampire/lord/nitewalker))
 					cursedblood = 5 //hoo mama
 			update_appearance(UPDATE_ICON_STATE)
 			takeblood(M, user)
 		else
 			working = FALSE
 
-/obj/item/inqarticles/indexer/attack(mob/living/M, mob/living/user, list/modifiers)
-	. = ..()
-	if(HAS_TRAIT(user, TRAIT_INQUISITION))
+/obj/item/inqarticles/indexer/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
+
+	if(!HAS_TRAIT(user, TRAIT_INQUISITION))
 		to_chat(user, span_warning("I don't know how to use this."))
+		return ITEM_INTERACT_BLOCKING
+
 	if(!active)
 		to_chat(user, span_warning("It's not primed."))
-		return
-	if(HAS_TRAIT(M, TRAIT_BLOODLOSS_IMMUNE))
-		to_chat(user, span_warning("They don't have any blood to sample."))
-		return
-	if(iscarbon(M))
-		var/mob/living/carbon/C = M
-		if(NOBLOOD in C.dna.species.species_traits)
-			to_chat(user, span_warning("They don't have any blood to sample."))
-			return
+		return ITEM_INTERACT_BLOCKING
+
 	if(full)
 		to_chat(user, span_warning("It's full."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	visible_message(span_warning("[user] goes to jab [M] with [src]!"))
-	if(do_after(user, 2 SECONDS, M))
-		takeblood(M, user)
+	var/mob/living/L = interacting_with
+
+	if(!CAN_HAVE_BLOOD(L) || !L.get_blood_volume())
+		to_chat(user, span_warning("[L] has no blood to sample."))
+		return ITEM_INTERACT_BLOCKING
+
+	visible_message(span_warning("[user] goes to jab [L] with [src]!"))
+
+	if(!do_after(user, 2 SECONDS, L))
+		return ITEM_INTERACT_BLOCKING
+
+	takeblood(L, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/inqarticles/tallowpot
 	name = "tallowpot"
@@ -811,6 +854,10 @@
 	desc = "Used to wrap around the target."
 	no_attack = TRUE
 
+/obj/item/inqarticles/garrote/Destroy()
+	reset_garrote()
+	. = ..()
+
 /obj/item/inqarticles/garrote/atom_break(damage_flag, silent)
 	. = ..()
 	if(!ismob(loc))
@@ -857,7 +904,7 @@
 	var/mob/living/garrote_victim = victim?.resolve()
 	if(garrote_victim)
 		REMOVE_TRAIT(garrote_victim, TRAIT_MUTE, "garroteCordage")
-	UnregisterSignal(garrote_victim, list(COMSIG_LIVING_RESIST_GRAB, COMSIG_QDELETING))
+	UnregisterSignal(garrote_victim, list(COMSIG_LIVING_RESIST_GRAB, COMSIG_QDELETING, COMSIG_CARBON_ATTEMPT_BREATHE))
 	victim = null
 
 	var/mob/living/last_garrote_user = lastuser?.resolve()
@@ -955,6 +1002,7 @@
 	ADD_TRAIT(target, TRAIT_MUTE, "garroteCordage")
 	RegisterSignal(target, COMSIG_LIVING_RESIST_GRAB, PROC_REF(on_victim_resist))
 	RegisterSignal(target, COMSIG_QDELETING, PROC_REF(reset_garrote))
+	RegisterSignal(target, COMSIG_CARBON_ATTEMPT_BREATHE, PROC_REF(block_breath))
 	RegisterSignal(user, COMSIG_ATOM_NO_LONGER_PULLING, PROC_REF(reset_garrote))
 	victim = WEAKREF(target)
 	lastuser = WEAKREF(user)
@@ -971,6 +1019,9 @@
 			take_damage(max_integrity * 0.05)
 		else
 			take_damage(max_integrity * 0.1)
+
+/obj/item/inqarticles/garrote/proc/block_breath(datum/source)
+	return BREATHE_SKIP_BREATH
 
 /obj/item/inqarticles/garrote/razor // To yische, who said not to give this out constantly, I respectfully disagree when it comes to assassin
 	name = "profane razor" // It's very not non lethal now.  Strangle your prey with glee
@@ -993,12 +1044,12 @@
 	blocksound = SOFTHIT
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
-	armor = ARMOR_BLACKBAG
+	armor_type = /datum/armor/blackbag
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_PIERCE, BCLASS_CHOP, BCLASS_LASHING, BCLASS_STAB)
 	unequip_delay_self = 45
 	equip_delay_other = 360 SECONDS // No getting around it. Cheater. LEFT CLICK THEM!!!
 	equip_delay_self = 360 SECONDS
-	max_integrity = 10000 // No breaking it. NO CHEAP FRAGS.
+	max_integrity = INTEGRITY_UNBREAKABLE // No breaking it. NO CHEAP FRAGS.
 	strip_delay = 10
 	slot_flags = ITEM_SLOT_HEAD
 	body_parts_covered = FULL_HEAD
@@ -1011,11 +1062,13 @@
 	var/worn = FALSE
 	var/bagging = FALSE
 
+/obj/item/clothing/head/inqarticles/blackbag/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/anti_theft)
+
 /obj/item/clothing/head/inqarticles/blackbag/proc/bagsound(mob/living/M)
 	if(bagging)
 		playsound(M, pick('sound/misc/blackbag.ogg','sound/misc/blackbag2.ogg','sound/misc/blackbag3.ogg','sound/misc/blackbag4.ogg','sound/misc/blackbag5.ogg'), 100, TRUE, 4)
-	else
-		return
 
 /obj/item/clothing/head/inqarticles/blackbag/proc/bagcheck(mob/living/M)
 	var/timer = 10
@@ -1024,53 +1077,39 @@
 		if(bagging)
 			addtimer(CALLBACK(src, PROC_REF(bagsound), M), timer)
 
-/obj/item/clothing/head/inqarticles/blackbag/attack(mob/living/target, mob/living/user, list/modifiers)
-	. = ..()
-	if(!iscarbon(target))
-		return
-	if(HAS_TRAIT(target, TRAIT_BAGGED))
+/obj/item/clothing/head/inqarticles/blackbag/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!iscarbon(interacting_with))
+		return NONE
+
+	var/mob/living/carbon/M = interacting_with
+
+	if(HAS_TRAIT(M, TRAIT_BAGGED))
 		to_chat(user, span_warning("They've already been bagged."))
-		return
-	var/obj/item/headgear = target.get_item_by_slot(ITEM_SLOT_HEAD)
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/headgear = M.get_item_by_slot(ITEM_SLOT_HEAD)
+
 	var/trained = FALSE
 	var/timetobag = 8 SECONDS
 	if(HAS_TRAIT(user, TRAIT_BLACKBAGGER))
 		trained = TRUE
 		timetobag = 4 SECONDS
-	user.visible_message(span_danger("[user] goes to [trained ? "expertly" : "clumsily"] black bag [target]!"))
-	/*
-	if(HAS_TRAIT(target, TRAIT_GRABIMMUNE))
-		user.visible_message(span_danger("[target] slips past [user]'s attempt to black bag them!"))
-		playsound(target, pick('sound/misc/blackbag.ogg','sound/misc/blackbag2.ogg','sound/misc/blackbag3.ogg','sound/misc/blackbag4.ogg','sound/misc/blackbag5.ogg'), 100, TRUE, 4)
-		return
-	*/
-	if(!target.stat)
-		/* if(HAS_TRAIT(user, TRAIT_BLACKBAGGER) && !M.cmode) It was too much to handle. Too cold to hold.
-			bagging = TRUE
-			bagsound(target)
-			headgear.doStrip(user, target)
-			target.equip_to_slot(src, SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
-			bagging = FALSE
-		else*/
-		bagging = TRUE
-		bagcheck(target)
-		if(do_after(user, timetobag, target))
-			bagging = FALSE
-			if(headgear)
-				headgear.doStrip(user, target)
-			target.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
-		else
-			bagging = FALSE
+
+	user.visible_message(span_danger("[user] goes to [trained ? "expertly" : "clumsily"] black bag [M]!"))
+
+	if(M.stat)
+		timetobag /= 2
+
+	bagging = TRUE
+	bagcheck(M)
+	if(do_after(user, timetobag, M))
+		bagging = FALSE
+		headgear?.doStrip(user, M)
+		M.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
 	else
-		bagging = TRUE
-		bagcheck(target)
-		if(do_after(user, timetobag / 2, target))
-			bagging = FALSE
-			if(headgear)
-				headgear.doStrip(user, target)
-			target.equip_to_slot(src, ITEM_SLOT_HEAD) // Has to be unsafe otherwise it won't work on unconscious people. Ugh.
-		else
-			bagging = FALSE
+		bagging = FALSE
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/head/inqarticles/blackbag/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -1091,7 +1130,6 @@
 		REMOVE_TRAIT(user, TRAIT_BAGGED, TRAIT_GENERIC)
 		playsound(user, pick('sound/misc/blackunbag.ogg'), 100, TRUE, 4)
 		user.emote("gasp", forced = TRUE)
-		return
 
 /obj/item/clothing/head/inqarticles/blackbag/getonmobprop(tag)
 	. = ..()
@@ -1147,24 +1185,17 @@
 	var/usesleft = 3
 	var/active = FALSE
 	var/broken = FALSE
-	/// Target name
-	var/datum/weakref/fixation
-	/// One with the bleed in the mirror
-	var/datum/weakref/feeder
-	var/atom/movable/screen/alert/blackmirror/effect
 	var/datum/looping_sound/blackmirror/soundloop
 
 /obj/item/inqarticles/bmirror/Initialize()
 	. = ..()
 	soundloop = new(src, FALSE)
+	AddComponent(/datum/component/scrying/mirror)
+	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/inqarticles/bmirror/Destroy()
 	if(soundloop)
 		QDEL_NULL(soundloop)
-	if(effect)
-		QDEL_NULL(effect)
-	fixation = null
-	feeder = null
 	return ..()
 
 /obj/item/inqarticles/bmirror/examine(mob/user)
@@ -1179,13 +1210,6 @@
 	active = FALSE
 	fedblood = FALSE
 	openstate = "bloody"
-	feeder = null
-	var/mob/living/fixated = fixation?.resolve()
-	if(fixated)
-		fixated.clear_alert("blackmirror", TRUE)
-		fixated.playsound_local(src, 'sound/items/blackeye.ogg', 40, FALSE)
-	effect = null
-	fixation = null
 	usesleft--
 	soundloop.stop()
 	visible_message(span_info("[src] clouds itself with a chilling fog."))
@@ -1232,89 +1256,31 @@
 		to_chat(user, span_warning("It looks like it needs blood to work properly."))
 		return
 
-	if(!active)
-		var/mob/living/carbon/human/target = fixation?.resolve()
-		var/input
-		if(!target)
-			input = "FIXATION" //skips through the tgui alert if target isn't set
-		else
-			input = tgui_alert(user, "THE MIRROR IS FIXATED ON [uppertext(target.real_name)]. WILL YOU REVEAL YOUR GAZE?", "THE PRICE IS PAID", list("STALK BLOOD", "FIXATION"))
-		if(!input || QDELETED(user) || QDELETED(src))
-			return
-		if(input == "FIXATION")
-			var/name = html_decode(browser_input_text(user, "WHO DO YOU SEEK?", "THE PRICE IS PAID"))
-			if(!name)
-				return
-			for(var/mob/living/carbon/human/HL as anything in GLOB.player_list)
-				if(lowertext(HL.real_name) == lowertext(name))
-					fixation = WEAKREF(HL)
-					target = HL
-					playsound(src, 'sound/items/blackmirror_no.ogg', 100, FALSE)
-					to_chat(user, span_warning("[src] makes a grating sound."))
-					return
-			to_chat(user, span_warning("The mirror makes no sound... It could not locate a person of such name."))
-			return
-		active = TRUE
-		openstate = "active"
-		update_appearance(UPDATE_ICON_STATE)
-		soundloop.start()
+	//add_client_colour(/datum/client_colour/nocshaded)
+	var/datum/component/scrying/mirror/scry_comp = GetComponent(/datum/component/scrying/mirror)
+	scry_comp.activate(user)
 
-		effect = target.throw_alert("blackmirror", /atom/movable/screen/alert/blackmirror, override = TRUE)
-		effect.source = src
+/obj/item/inqarticles/bmirror/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isliving(interacting_with))
+		return NONE
 
-		target.playsound_local(target, 'sound/items/blackeye_warn.ogg', 100, FALSE)
-
-		playsound(src, 'sound/items/blackmirror_active.ogg', 100, FALSE)
-		addtimer(CALLBACK(src, PROC_REF(donefixating)), 2 MINUTES, TIMER_UNIQUE)
-
-		message_admins("SCRYING: [user.real_name] ([user.ckey]) has fixated on [target.real_name] ([target.ckey]) via black mirror.")
-		log_game("SCRYING: [user.real_name] ([user.ckey]) has fixated on [target.real_name] ([target.ckey]) via black mirror.")
-		return
-
-	var/datum/weakref/lookat = fixation ? fixation : feeder
-	var/mob/living/target = lookat?.resolve()
-	if(!target)
-		to_chat(user, span_notice("The mirror remains clear..."))
-		return
-
-	playsound(src, 'sound/items/blackmirror_use.ogg', 100, FALSE)
-
-	if(target.real_name == user.real_name) //prevents bugging the timer through looking at yourself
-		to_chat(user, span_danger("I see my reflection in the mirror... It is quite distorted, but what am I trying to achieve?"))
-		return
-
-	ADD_TRAIT(user, TRAIT_NOSSDINDICATOR, "blackmirror")
-
-	var/mob/dead/observer/screye/blackmirror/S = user.scry_ghost()
-	if(!S)
-		return
-	S.ManualFollow(target)
-	S.add_client_colour(/datum/client_colour/nocshaded)
-	user.visible_message(span_warning("[user] stares into [src], their eyes glazing over..."))
-
-	addtimer(CALLBACK(S, TYPE_PROC_REF(/mob/dead/observer, reenter_corpse)), 4 SECONDS)
-	addtimer(CALLBACK(user, GLOBAL_PROC_REF(playsound), user, 'sound/items/blackeye.ogg', 100, FALSE), 4 SECONDS)
-	addtimer(TRAIT_CALLBACK_REMOVE(user, TRAIT_NOSSDINDICATOR, "blackmirror"), 4 SECONDS)
-
-/obj/item/inqarticles/bmirror/attack(mob/living/carbon/human/attacked, mob/living/carbon/human/user, list/modifiers)
-	if(!istype(attacked) || !istype(user))
-		return ..()
+	var/mob/living/attacked = interacting_with
 
 	if(!opened)
 		to_chat(user, span_warning("I need to open it first."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	if(feeder)
+	if(fedblood)
 		to_chat(user, span_warning("It's already been fed."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	if(broken)
 		to_chat(user, span_warning("It's broken."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	if(bloody)
 		to_chat(user, span_warning("The mirror is fogged over. I need to clean it with cloth before reuse."))
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	var/time_taken = 3 SECONDS
 
@@ -1324,16 +1290,18 @@
 		user.visible_message(span_notice("[user] goes to press [attacked] with [src]'s needle."))
 		time_taken *= 2
 
-	if(do_after(user, time_taken, attacked))
-		playsound(src, 'sound/items/blackmirror_needle.ogg', 95, FALSE, 3)
-		attacked.flash_fullscreen("redflash3")
-		attacked.adjustBruteLoss(40, damage_type = BCLASS_PIERCE)
-		attacked.adjust_bloodpool(-240)
-		attacked.handle_blood()
-		feeder = WEAKREF(attacked)
-		openstate = "bloody"
-		fedblood = TRUE
-		update_appearance(UPDATE_ICON_STATE)
+	if(!do_after(user, time_taken, attacked))
+		return ITEM_INTERACT_BLOCKING
+
+	playsound(src, 'sound/items/blackmirror_needle.ogg', 95, FALSE, 3)
+	attacked.flash_fullscreen("redflash3")
+	attacked.adjustBruteLoss(40, damage_type = BCLASS_PIERCE, can_crit = FALSE)
+	attacked.adjust_bloodpool(-240)
+	openstate = "bloody"
+	fedblood = TRUE
+	update_appearance(UPDATE_ICON_STATE)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/inqarticles/bmirror/attackby(obj/item/I, mob/user, list/modifiers)
 	. = ..()
@@ -1354,31 +1322,17 @@
 /obj/item/inqarticles/bmirror/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	openorshut(user)
+
 /obj/item/inqarticles/bmirror/proc/openorshut(mob/user)
 	if(active)
 		to_chat(user, span_warning("I cannot close the mirror while it's active."))
 		return
 
-	var/mob/living/fixated = fixation?.resolve()
+	opened = !opened
 	if(opened)
-		if(fixated)
-			fixated.clear_alert("blackmirror", TRUE)
-			fixated.playsound_local(src, 'sound/items/blackeye.ogg', 40, FALSE)
-		else if(effect)
-			QDEL_NULL(effect)
+		playsound(src, 'sound/items/blackmirror_open.ogg', 100, FALSE)
+	else
 		playsound(src, 'sound/items/blackmirror_shut.ogg', 100, FALSE)
-		opened = FALSE
-		update_appearance(UPDATE_ICON_STATE)
-		return
-
-	playsound(src, 'sound/items/blackmirror_open.ogg', 100, FALSE)
-
-	if(fixated)
-		fixated.playsound_local(src, 'sound/items/blackeye_warn.ogg', 100, FALSE)
-		effect = fixated.throw_alert("blackmirror", /atom/movable/screen/alert/blackmirror, override = TRUE)
-		effect.source = src
-
-	opened = TRUE
 	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/inqarticles/bmirror/update_icon_state()
@@ -1394,35 +1348,39 @@
 	desc = "LOOK AT ME. I SEE YOU."
 	icon_state = "blackeye"
 	var/obj/item/inqarticles/bmirror/source
+	var/mob/scry_eye/looking_eye
+
+/atom/movable/screen/alert/blackmirror/Click()
+	var/mob/living/user = usr
+	if(!istype(user))
+		return
+	var/input = tgui_alert(user, "YOU FEEL AN UNFAMILIAR GAZE. WILL YOU STARE BACK AT THE ABYSS?", "PRESENCE WATCHING OVER", list("NO", "LOOK BACK"))
+	if(input != "LOOK BACK")
+		return
+
+	looking_eye = new
+	looking_eye.user_mob = user
+	looking_eye.orbit(source)
+	user.reset_perspective(looking_eye)
+	user.Immobilize(4 SECONDS)
+	user.overlay_fullscreen("scrying", /atom/movable/screen/backhudl/obscured)
+	playsound(user, 'sound/items/blackmirror_use.ogg', 100, FALSE)
+	addtimer(CALLBACK(src, PROC_REF(remove_eye)), 4 SECONDS)
+
+	user.visible_message(span_warning("[user] looks inward as their eyes glaze over..."))
 
 /atom/movable/screen/alert/blackmirror/Destroy()
+	remove_eye()
 	source = null
 	return ..()
 
-/atom/movable/screen/alert/blackmirror/Click()
-	var/mob/living/L = usr
-	if(!istype(L))
-		return
-	var/mob/living/target = null
-	var/input = tgui_alert(L, "YOU FEEL UNFAMILIAR GAZE. WILL YOU STARE BACK AT ABYSS?", "PRESENCE WATCHING OVER", list("TRACE BLOOD", "LOOK BACK"))
-	if(input == "TRACE BLOOD")
-		target = source.feeder?.resolve()
-	else if(input == "LOOK BACK")
-		target = source
-	playsound(L, 'sound/items/blackmirror_use.ogg', 100, FALSE)
-	ADD_TRAIT(L, TRAIT_NOSSDINDICATOR, "blackmirror")
-	if(!target)
-		return
-	var/mob/dead/observer/screye/blackmirror/S = L.scry_ghost()
-	if(!S)
-		return
-	S.ManualFollow(target)
-	S.add_client_colour(/datum/client_colour/nocshaded)
-	L.visible_message(span_warning("[L] looks inward as their eyes glaze over..."))
-
-	addtimer(CALLBACK(S, TYPE_PROC_REF(/mob/dead/observer, reenter_corpse)), 4 SECONDS)
-	addtimer(CALLBACK(L, GLOBAL_PROC_REF(playsound), L, 'sound/items/blackeye.ogg', 100, FALSE), 4 SECONDS)
-	addtimer(TRAIT_CALLBACK_REMOVE(L, TRAIT_NOSSDINDICATOR, "blackmirror"), 4 SECONDS)
+/atom/movable/screen/alert/blackmirror/proc/remove_eye()
+	if(mob_viewer)
+		mob_viewer.reset_perspective(mob_viewer)
+		mob_viewer.clear_fullscreen("scrying")
+		playsound(mob_viewer, 'sound/items/blackeye.ogg', 100, FALSE)
+	QDEL_NULL(looking_eye)
+	mob_viewer = null
 
 // FINISH THIS AT YOUR LEISURE. I'M JUST LEAVING IT HERE UNIMPLEMENTED. IT'S INTENDED TO WORK AS A COMBINATION OF THE NOC FAR-SIGHT AND THE NOCSHADES. HAVE FUN! - YISCHE
 /obj/item/inqarticles/spyglass

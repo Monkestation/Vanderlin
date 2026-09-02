@@ -44,6 +44,16 @@
 	screen_max_rows = 2
 	screen_max_columns = 1
 
+/datum/component/storage/concrete/hollow_book
+	max_items = 1
+	max_w_class = WEIGHT_CLASS_BULKY
+	quickdraw = TRUE
+	allow_look_inside = FALSE
+
+/datum/component/storage/concrete/hollow_book/New(datum/P, ...)
+	. = ..()
+	set_holdable(list(/obj/item/gun/ballistic/powder/wheellock/puffer))
+
 /datum/component/storage/concrete/grid/keyring
 	screen_max_rows = 2
 	screen_max_columns = 5
@@ -83,10 +93,20 @@
 /datum/component/storage/concrete/grid/cloak/lord
 	max_w_class = WEIGHT_CLASS_BULKY
 
+/datum/component/storage/concrete/grid/crusader_helm
+	max_w_class = WEIGHT_CLASS_BULKY
+	screen_max_rows = 2
+	screen_max_columns = 2
+
 /datum/component/storage/concrete/grid/mailmaster
 	max_w_class = WEIGHT_CLASS_HUGE
 	screen_max_rows = 10
 	screen_max_columns = 10
+
+/datum/component/storage/concrete/grid/bandolier
+	max_w_class = WEIGHT_CLASS_NORMAL
+	screen_max_rows = 4
+	screen_max_columns = 2
 
 /datum/component/storage/concrete/grid/mailmaster/show_to(mob/M)
 	. = ..()
@@ -216,6 +236,24 @@
 	allow_quick_empty = TRUE
 	allow_dump_out = TRUE
 	insert_preposition = "in"
+
+/datum/component/storage/concrete/grid/orebag
+	max_w_class = WEIGHT_CLASS_NORMAL
+	screen_max_rows = 4
+	screen_max_columns = 5
+	click_gather = TRUE
+	collection_mode = COLLECT_EVERYTHING
+	dump_time = 0
+	allow_quick_gather = TRUE
+	allow_quick_empty = TRUE
+	allow_dump_out = TRUE
+	insert_preposition = "in"
+
+/datum/component/storage/concrete/grid/orebag/New(datum/P, ...)
+	. = ..()
+	set_holdable(
+		typecacheof(list(/obj/item/ore, /obj/item/gem, /obj/item/reagent_containers/powder/salt, /obj/item/mana_battery/mana_crystal/standard))
+		)
 
 /datum/component/storage/concrete/grid/crucible
 	screen_max_rows = 5
@@ -375,7 +413,10 @@
 			/obj/item/reagent_containers/syringe,
 			/obj/item/reagent_containers/pill,
 			/obj/item/storage/fancy/pilltin,
-			/obj/item/candle/yellow
+			/obj/item/candle/yellow,
+			/obj/item/reagent_containers/glass,
+			/obj/item/natural/bundle/fibers,
+			/obj/item/natural/fibers
 			)
 		)
 	)

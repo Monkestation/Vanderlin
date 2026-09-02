@@ -97,7 +97,7 @@
 	name = "blood"
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "phase_shift2"
-	duration = 12
+	duration = 1.2 SECONDS
 
 /obj/effect/temp_visual/dir_setting/wraith/out
 	icon_state = "phase_shift"
@@ -141,7 +141,18 @@
 
 /obj/effect/temp_visual/wizard/out
 	icon_state = "liquify"
-	duration = 12
+	duration = 1.2 SECONDS
+
+/obj/effect/temp_visual/wizard/blood
+	name = "blood"
+	icon_state = "uncloak"
+	duration = 7
+	color = "#580808"
+
+/obj/effect/temp_visual/wizard/blood/out
+	icon_state = "cloak"
+	duration = 8
+	color = "#580808"
 
 /obj/effect/temp_visual/monkeyify
 	icon = 'icons/mob/mob.dmi'
@@ -354,7 +365,7 @@
 /obj/effect/temp_visual/love_heart/invisible/Initialize(mapload, mob/seer)
 	. = ..()
 	var/image/I = image(icon = 'icons/effects/effects.dmi', icon_state = "heart", layer = ABOVE_MOB_LAYER, loc = src)
-	add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/People, "heart", I, seer)
+	add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/people, "heart", I, NONE, seer)
 	I.alpha = 255
 	I.appearance_flags = RESET_ALPHA
 	animate(I, alpha = 0, time = duration)

@@ -10,10 +10,10 @@
 	organ_volume = 0.5
 	max_blood_storage = 5
 	current_blood = 5
-	blood_req = 1
+	blood_req = 0.5
 	oxygen_req = 0.5
-	nutriment_req = 0.3
-	hydration_req = 0.6
+	nutriment_req = 0.15 * RATE_OF_HUNGER_GLOBAL
+	hydration_req = 0.3 * RATE_OF_THIRST_GLOBAL
 
 	var/list/languages_possible
 	var/say_mod = null
@@ -27,6 +27,7 @@
 		/datum/language/newpsydonic,
 		/datum/language/zalad,
 		/datum/language/celestial,
+		/datum/language/celestial_moon,
 		/datum/language/hellspeak,
 		/datum/language/beast,
 		/datum/language/kobold,
@@ -37,6 +38,7 @@
 		/datum/language/undead,
 		/datum/language/halfling,
 		/datum/language/gronnic,
+		/datum/language/sanguine,
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)
@@ -44,23 +46,30 @@
 	languages_possible = languages_possible_base
 
 /obj/item/organ/tongue/proc/handle_speech(datum/source, list/speech_args)
+	return
 
-/obj/item/organ/tongue/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE, new_zone = null)
+/obj/item/organ/tongue/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-	if(say_mod && M.dna && M.dna.species)
-		M.dna.species.say_mod = say_mod
-	if (modifies_speech)
-		RegisterSignal(M, COMSIG_MOB_SAY, PROC_REF(handle_speech))
-	M.UnregisterSignal(M, COMSIG_MOB_SAY)
-	for(var/datum/wound/facial/tongue/tongue_wound in M.get_wounds())
+
+	if(say_mod && organ_owner.dna?.species)
+		organ_owner.dna.species.say_mod = say_mod
+
+	if(modifies_speech)
+		RegisterSignal(organ_owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+
+	organ_owner.UnregisterSignal(organ_owner, COMSIG_MOB_SAY)
+
+	for(var/datum/wound/facial/tongue/tongue_wound in organ_owner.get_wounds())
 		qdel(tongue_wound)
 
-/obj/item/organ/tongue/Remove(mob/living/carbon/M, special = FALSE, drop_if_replaced = TRUE)
+/obj/item/organ/tongue/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-	if(say_mod && M.dna && M.dna.species)
-		M.dna.species.say_mod = initial(M.dna.species.say_mod)
-	UnregisterSignal(M, COMSIG_MOB_SAY, PROC_REF(handle_speech))
-	M.RegisterSignal(M, COMSIG_MOB_SAY, TYPE_PROC_REF(/mob/living/carbon, handle_tongueless_speech))
+
+	if(say_mod && organ_owner.dna.species)
+		organ_owner.dna.species.say_mod = initial(organ_owner.dna.species.say_mod)
+
+	UnregisterSignal(organ_owner, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+	organ_owner.RegisterSignal(organ_owner, COMSIG_MOB_SAY, TYPE_PROC_REF(/mob/living/carbon, handle_tongueless_speech))
 
 /obj/item/organ/tongue/could_speak_in_language(datum/language/dt)
 	return is_type_in_typecache(dt, languages_possible)
@@ -161,7 +170,7 @@
 /obj/item/organ/tongue/robot
 	name = "robotic voicebox"
 	desc = ""
-	status = ORGAN_ROBOTIC
+	organ_flags = ORGAN_ROBOTIC
 	icon_state = "tonguerobot"
 	say_mod = "states"
 	attack_verb = list("beeped", "booped")

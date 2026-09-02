@@ -35,6 +35,12 @@
 		/datum/sprite_accessory/detail/tattoo_lips,
 		/datum/sprite_accessory/detail/tattoo_eye_r,
 		/datum/sprite_accessory/detail/tattoo_eye_l,
+		/datum/sprite_accessory/detail/warpaint_blue_stripes,
+		/datum/sprite_accessory/detail/warpaint_red_stripes,
+		/datum/sprite_accessory/detail/warpaint_green_stripes,
+		/datum/sprite_accessory/detail/warpaint_purple_stripes,
+		/datum/sprite_accessory/detail/warpaint_black_stripes,
+		/datum/sprite_accessory/detail/eyebags
 	)
 
 /datum/customizer/bodypart_feature/accessory
@@ -43,10 +49,15 @@
 	allows_disabling = TRUE
 	default_disabled = TRUE
 
-/datum/customizer/bodypart_feature/accessory/is_allowed(datum/preferences/prefs)
+/datum/customizer/bodypart_feature/accessory/is_allowed(mob/living/carbon/human/human)
 	. = ..()
-	if(prefs.age == AGE_CHILD)
-		return FALSE
+	if(istype(human))//shitcode but fuck man
+		if(human.age == AGE_CHILD)
+			return FALSE
+	else
+		var/datum/preferences/pref = human
+		if(pref.read_preference(/datum/preference/choiced/age) == AGE_CHILD)
+			return FALSE
 
 /datum/customizer_choice/bodypart_feature/accessory
 	name = "Accessory"
@@ -61,6 +72,8 @@
 		/datum/sprite_accessory/accessories/chokere,
 		/datum/sprite_accessory/accessories/eyepierce,
 		/datum/sprite_accessory/accessories/eyepierce/alt,
+		/datum/sprite_accessory/accessories/earrings/hoop,
+		/datum/sprite_accessory/accessories/earrings/hoop/sil,
 	)
 
 /datum/customizer/bodypart_feature/accessory/rakshari

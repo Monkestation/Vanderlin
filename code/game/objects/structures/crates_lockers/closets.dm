@@ -9,7 +9,7 @@
 	drag_slowdown = 1.5		// Same as a prone mob
 	max_integrity = 200
 	integrity_failure = 0.25
-	armor = list("blunt" = 20, "slash" = 20, "stab" = 20,  "piercing" = 10, "fire" = 70, "acid" = 60)
+	armor_type = /datum/armor/closet
 
 	var/icon_door = null
 	var/icon_door_override = FALSE //override to have open overlay use icon different to its base's
@@ -218,12 +218,15 @@
 	if(!obj_broken)
 		bust_open()
 
-/obj/structure/closet/attackby(obj/item/I, mob/user, list/modifiers)
+/obj/structure/closet/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user in src)
-		return TRUE
-	if(tool_interact(I, user))
-		return TRUE
-	return ..()
+		return ITEM_INTERACT_BLOCKING
+
+	if(user.cmode)
+		return NONE
+
+	if(tool_interact(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/structure/closet/proc/tool_interact(obj/item/I, mob/user)//returns TRUE if attackBy call shouldnt be continued (because tool was used/closet was of wrong type), FALSE if otherwise
 	. = FALSE
@@ -355,14 +358,3 @@
 	INVOKE_ASYNC(src, PROC_REF(open))
 
 #undef LOCKER_FULL
-
-/// Proc that searches inside an atom, specifically for sanctified coffins.
-/obj/structure/closet/proc/check_double_consecration(obj/structure/closet/dirthole/closed/grave_to_consecrate, mob/user)
-	var/double_consecrated = FALSE
-	if(!grave_to_consecrate)
-		return FALSE
-// If the grave contains a sanctified casket, mark the tomb as doubly-sanctified. This will make anyone trying to graverob regret it.
-	for(var/obj/structure/closet/crate/coffin/coffin in grave_to_consecrate.contents)
-		if (coffin.consecrated)
-			double_consecrated = TRUE
-	return double_consecrated

@@ -26,6 +26,21 @@
 	craftdiff = 0
 	subtypes_allowed = TRUE
 
+/datum/repeatable_crafting_recipe/zigarsmoke
+	name = "zigar"
+	output = /obj/item/clothing/face/cigarette/rollie/nicotine/zigar
+	starting_atom = /obj/item/reagent_containers/food/snacks/produce/dry_westleach
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/dry_westleach = 1,
+		/obj/item/alch/tobaccodust = 1
+	)
+	attacked_atom = /obj/item/alch/tobaccodust
+	allow_inverse_start = TRUE
+
+	craft_time = 10 SECONDS
+	crafting_message = "starts rolling up a strong zigar"
+	craftdiff = 3
+
 /datum/repeatable_crafting_recipe/canvas
 	name = "canvas"
 	output = /obj/item/canvas

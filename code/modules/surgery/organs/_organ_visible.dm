@@ -93,7 +93,7 @@
  * owner_species - species, needed to return the mutant slot as true or false. stomach set to null means it shouldn't have one.
  * owner_mob - for more specific checks, like nightmares.
  */
-/obj/item/organ/proc/get_availability(datum/species/owner_species)
+/obj/item/organ/proc/get_availability(datum/species/owner_species, mob/living/carbon/owner_mob)
 	return slot in owner_species.organs
 
 /// Sets an accessory type and optionally colors too.
@@ -118,6 +118,8 @@
 		if(!owner)
 			return
 		source_key_list = color_key_source_list_from_carbon(owner)
+	if(isbodypart(loc) && HAS_TRAIT(loc, TRAIT_ROTTEN))
+		source_key_list[KEY_SKIN_COLOR] = SKIN_COLOR_ROT
 	accessory_colors = accessory.get_default_colors(source_key_list)
 	accessory_colors = accessory.validate_color_keys_for_owner(owner, accessory_colors)
 	update_accessory_colors()
@@ -137,3 +139,51 @@
 
 /obj/item/organ/proc/update_accessory_colors()
 	return
+
+/**
+ * copy_organ
+ *
+ * Creates a new instance of this organ's type and copies over everything
+ * that affects how it looks (icon, accessory, bodypart overlay vars, side,
+ * and any chimeric organ overlays), without carrying over ownership, damage,
+ * germs, or blood state.
+ *
+ * Arguments:
+ * * copy_damage - if TRUE, also copies over damage/germ_level/current_blood.
+ *   Defaults to FALSE since this proc is meant for visual duplication.
+ */
+/obj/item/organ/proc/copy_organ(copy_damage = FALSE)
+	var/obj/item/organ/copy = new type()
+
+	// Base appearance
+	copy.icon = icon
+	copy.icon_state = icon_state
+	copy.color = color
+	copy.name = name
+	copy.desc = desc
+
+	// Sidedness (affects update_transform's mirroring)
+	copy.side = side
+	copy.unique_side_sprite = unique_side_sprite
+
+	// Bodypart overlay appearance
+	copy.bodypart_icon = bodypart_icon
+	copy.bodypart_icon_state = bodypart_icon_state
+	copy.bodypart_layer = bodypart_layer
+	copy.bodypart_emissive_blocker = bodypart_emissive_blocker
+	copy.use_mob_sprite_as_obj_sprite = use_mob_sprite_as_obj_sprite
+
+	// Sprite accessory (and its colors)
+	if(accessory_type)
+		copy.set_accessory_type(accessory_type, accessory_colors)
+
+	if(copy_damage)
+		copy.damage = damage
+		copy.germ_level = germ_level
+		copy.current_blood = current_blood
+		copy.organ_flags = organ_flags
+
+	copy.update_transform()
+	copy.update_appearance(UPDATE_OVERLAYS)
+
+	return copy

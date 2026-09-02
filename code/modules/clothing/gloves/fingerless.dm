@@ -7,8 +7,8 @@
 	blade_dulling = DULLING_BASHCHOP
 	resistance_flags = FLAMMABLE // Made of leather
 
-	armor = ARMOR_MINIMAL
-	max_integrity = INTEGRITY_POOR
+	armor_type = /datum/armor/minimal
+	max_integrity = INTEGRITY_OLD_POOR
 	clothing_traits = list(TRAIT_FINGERPRINT_PASSTHROUGH)
 	item_weight = 50 GRAMS
 

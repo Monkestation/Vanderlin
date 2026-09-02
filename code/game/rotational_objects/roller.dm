@@ -8,12 +8,10 @@
 	layer = BELOW_OPEN_DOOR_LAYER
 	rotation_structure = TRUE
 	stress_use = 0
-	initialize_dirs = CONN_DIR_LEFT | CONN_DIR_RIGHT | CONN_DIR_FORWARD | CONN_DIR_FLIP
+	initialize_dirs = CONN_DIR_ALL_CARDINAL
 
 	var/operating = FALSE
 	var/movedir
-
-	var/list/connected_rollers = list()
 
 /obj/structure/roller/Initialize(mapload)
 	. = ..()
@@ -22,35 +20,19 @@
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_TURF_IGNORE_SLOWDOWN)))
 
 	var/static/list/loc_connections = list(
-		COMSIG_ATOM_ENTERED = PROC_REF(on_entered),
-		COMSIG_ATOM_EXIT = PROC_REF(roller_exit),
+		COMSIG_ATOM_EXITED = PROC_REF(conveyable_exit),
+		COMSIG_ATOM_ENTERED = PROC_REF(conveyable_enter),
+		COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON = PROC_REF(conveyable_enter)
 	)
 	AddElement(/datum/element/connect_loc, loc_connections)
+	AddComponent(/datum/component/simple_rotation, ROTATION_REQUIRE_WRENCH|ROTATION_IGNORE_ANCHORED)
 
 	return INITIALIZE_HINT_LATELOAD
-
-/obj/structure/roller/LateInitialize()
-	. = ..()
-	set_connection_dir()
-	find_rotation_network()
-	build_roller_chain()
-
-/obj/structure/roller/Destroy()
-	for(var/obj/structure/roller/connected in connected_rollers)
-		connected.connected_rollers -= src
-	connected_rollers = list()
-
-	return ..()
 
 /obj/structure/roller/examine(mob/user)
 	. = ..()
 	. += span_notice("It moves items [dir2text(movedir)].")
 	. += span_notice("Rotation can be connected from the [get_rotation_sides_text()] sides.")
-	if(rotation_network)
-		. += span_notice("RPM: [rotations_per_minute]")
-		. += span_notice("Rollers don't consume stress from the network.")
-	. += span_notice("Use a <b>wrench</b> to rotate it.")
-	. += span_notice("Use a <b>crowbar</b> to deconstruct it.")
 
 /obj/structure/roller/proc/get_rotation_sides_text()
 	var/list/sides = list()
@@ -73,14 +55,14 @@
 		if(!istype(connector, /obj/structure/roller))
 			return FALSE
 		var/obj/structure/roller/other_roller = connector
-		if(other_roller.movedir != movedir && other_roller.movedir != REVERSE_DIR(movedir))
+		if(other_roller.movedir != movedir)
 			return FALSE
 
 	return TRUE
 
 /obj/structure/roller/setDir(newdir)
-	. = ..()
 	movedir = newdir
+	. = ..()
 	update_appearance()
 
 /obj/structure/roller/rotation_break()
@@ -92,52 +74,26 @@
 /obj/structure/roller/set_rotations_per_minute(rpm)
 	if(rotations_per_minute == rpm)
 		return FALSE
-
-	rotations_per_minute = rpm
-
-	if(rpm > 0)
-		operating = TRUE
-	else
-		operating = FALSE
+	rotations_per_minute = min(rpm, 32)
+	operating = rotations_per_minute > 0
+	if(!operating)
 		for(var/atom/movable/movable in loc)
 			stop_conveying(movable)
-
 	update_appearance()
-	propagate_rotation()
 	return TRUE
-
-/obj/structure/roller/proc/propagate_rotation()
-	for(var/obj/structure/roller/connected in connected_rollers)
-		if(connected.rotations_per_minute != rotations_per_minute)
-			connected.set_rotations_per_minute(rotations_per_minute)
-
-/obj/structure/roller/proc/build_roller_chain()
-	var/turf/forward_turf = get_step(src, movedir)
-	var/obj/structure/roller/forward_roller = locate(/obj/structure/roller) in forward_turf
-
-	if(forward_roller && (forward_roller.movedir == movedir || forward_roller.movedir == REVERSE_DIR(movedir)))
-		connected_rollers |= forward_roller
-		forward_roller.connected_rollers |= src
 
 /obj/structure/roller/proc/get_move_delay()
 	// Higher RPM = faster movement (shorter delay)
 	// At 16 RPM: 1 second, at 32 RPM: 0.5 seconds, at 64 RPM: 0.25 seconds
 	return max(1, (10 / (rotations_per_minute / 16))) // Returns deciseconds
 
-/obj/structure/roller/proc/on_entered(datum/source, atom/movable/entering_atom)
+/obj/structure/roller/proc/conveyable_enter(datum/source, atom/movable/entering_atom)
 	SIGNAL_HANDLER
+	if(entering_atom.loc != loc) // If we are not on the same turf (order of operations memes) go to hell
+		return
 
 	if(!operating || !rotations_per_minute)
-		return
-
-	if(!ismovable(entering_atom))
-		return
-
-	var/static/list/unconveyables = typecacheof(list(/obj/effect, /mob/dead))
-	if(is_type_in_typecache(entering_atom, unconveyables))
-		return
-
-	if(entering_atom.anchored || entering_atom == src)
+		stop_conveying(entering_atom)
 		return
 
 	start_conveying(entering_atom)
@@ -152,6 +108,9 @@
 		existing_loop.delay = get_move_delay()
 		return
 
+	var/static/list/unconveyables = typecacheof(list(/obj/effect, /mob/dead))
+	if(!istype(moving) || is_type_in_typecache(moving, unconveyables) || moving.anchored || moving == src)
+		return
 	moving.AddComponent(/datum/component/convey, movedir, get_move_delay())
 
 /obj/structure/roller/proc/stop_conveying(atom/movable/thing)
@@ -159,26 +118,23 @@
 		return
 	SSmove_manager.stop_looping(thing, SSconveyors)
 
-/obj/structure/roller/proc/roller_exit(datum/source, atom/movable/exiting_atom, direction)
+/obj/structure/roller/proc/conveyable_exit(datum/source, atom/convayable, direction)
 	SIGNAL_HANDLER
 
-	if(!ismovable(exiting_atom))
+	if(!ismovable(convayable))
 		return
 
 	var/obj/structure/roller/next_roller = locate(/obj/structure/roller) in get_step(src, direction)
 
 	// Stop conveying if no operating roller in exit direction
-	if(!next_roller || !next_roller.operating)
-		stop_conveying(exiting_atom)
+	if(convayable.z != z || !next_roller || !next_roller.operating || !isturf(convayable.loc))  //If you've entered something on us, stop moving
+		stop_conveying(convayable)
 
 /obj/structure/roller/wrench_act(mob/living/user, obj/item/tool)
 	tool.play_tool_sound(src, 50)
 	setDir(turn(dir, 90))
 	to_chat(user, span_notice("You rotate [src]."))
-
-	connected_rollers = list()
-	build_roller_chain()
-	return TRUE
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/roller/update_appearance()
 	. = ..()
@@ -261,10 +217,6 @@
 	tool.play_tool_sound(src, 50)
 	setDir(turn(dir, 90))
 	to_chat(user, span_notice("You rotate [src]."))
-
-	// Rebuild connections (parent's setDir handles rotation network)
-	connected_rollers = list()
-	build_roller_chain()
 	return TRUE
 
 /obj/structure/roller/attackby(obj/item/attacking_item, mob/user, list/modifiers)
@@ -311,23 +263,22 @@
 	. += span_notice("Attack items to add them to the sorting list.")
 	. += span_notice("Alt-Click to reset the sorting list.")
 
-/obj/item/roller_sorter_lister/afterattack(atom/target, mob/user, proximity_flag, list/modifiers)
-	if(target == src || !proximity_flag)
-		return ..()
+/obj/item/roller_sorter_lister/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!ismovable(interacting_with))
+		return NONE
 
-	if(!ismovable(target))
-		return ..()
-
-	if(is_type_in_list(target, current_sort))
-		to_chat(user, span_warning("[target] is already in the sorting list!"))
-		return
+	if(is_type_in_list(interacting_with, current_sort))
+		to_chat(user, span_warning("[interacting_with] is already in the sorting list!"))
+		return ITEM_INTERACT_BLOCKING
 
 	if(length(current_sort) >= max_items)
 		to_chat(user, span_warning("The sorting list is full!"))
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	current_sort += target.type
-	to_chat(user, span_notice("[target] has been added to the sorting list."))
+	current_sort += interacting_with.type
+	to_chat(user, span_notice("[interacting_with] has been added to the sorting list."))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/roller_sorter_lister/AltClick(mob/user, list/modifiers)
 	. = ..()

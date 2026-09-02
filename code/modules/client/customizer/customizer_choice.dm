@@ -58,10 +58,10 @@
 /datum/customizer_choice/proc/on_randomize_entry(datum/customizer_entry/entry, datum/preferences/prefs)
 	return
 
-/datum/customizer_choice/proc/get_random_accessory(datum/customizer_entry/entry, datum/preferences/prefs)
+/datum/customizer_choice/proc/get_random_accessory(datum/customizer_entry/entry, mob/living/carbon/human/human)
 	return
 
-/datum/customizer_choice/proc/get_random_color(datum/customizer_entry/entry, datum/preferences/prefs, accessory_type)
+/datum/customizer_choice/proc/get_random_color(datum/customizer_entry/entry, mob/living/carbon/human/human, accessory_type)
 	return
 
 /datum/customizer_choice/proc/show_pref_choices(datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
@@ -80,9 +80,9 @@
 		var/dropdown_button
 
 		if(length(sprite_accessories) > 1)
-			accessory_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=choose_acc'"
-			arrows_string = "<a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=prev' style='font-size:16px; padding:0 5px;'><</a><a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=next' style='font-size:16px; padding:0 5px;'>></a>"
-			dropdown_button = "<a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_dropdown' style='font-size:12px; padding:0 5px;'>View All</a>"
+			accessory_link = "href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=choose_acc'"
+			arrows_string = "<a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=prev' style='font-size:16px; padding:0 5px;'><</a><a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=rotate;rotate=next' style='font-size:16px; padding:0 5px;'>></a>"
+			dropdown_button = "<a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_dropdown' style='font-size:12px; padding:0 5px;'>View All</a>"
 		else
 			accessory_link = "class='linkOff'"
 			arrows_string = "<a class='linkOff' style='font-size:16px; padding:0 5px;'><</a><a class='linkOff' style='font-size:16px; padding:0 5px;'>></a>"
@@ -114,7 +114,7 @@
 				var/border_style = is_selected ? "border:2px solid #4a9eff;" : "border:1px solid #333;"
 				grid_index++
 
-				dat += "<a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=select_acc;acc_type=[acc_type]' style='text-decoration:none;'>"
+				dat += "<a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=select_acc;acc_type=[acc_type]' style='text-decoration:none;'>"
 				dat += "<div id='grid_container_[grid_index]' style='background-color:#0a0a0a; padding:5px; border-radius:3px; [border_style] text-align:center; cursor:pointer;'>"
 				dat += "<img id='grid_preview_[grid_index]' src='\ref[initial(acc.icon)]?state=[initial(acc.icon_state)]' style='display:block; margin:0 auto;'/>"
 				dat += "<div style='font-size:10px; margin-top:3px; color:[is_selected ? "#4a9eff" : "#ffffff"];'>[acc.name]</div>"
@@ -146,11 +146,11 @@
 			dat += "</div>"
 
 		if(allows_accessory_color_customization)
-			dat += "<br><a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=reset_colors'>Reset colors</a>"
+			dat += "<br><a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=reset_colors'>Reset colors</a>"
 			var/list/color_list = color_string_to_list(entry.accessory_colors)
 			for(var/index in 1 to accessory.color_keys)
 				var/named_index = (accessory.color_keys == 1) ? accessory.color_key_name : accessory.color_key_names[index]
-				dat += "<br>[named_index]: <a href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=acc_color;color_index=[index]''><span class='color_holder_box' style='background-color:[color_list[index]]'></span></a>"
+				dat += "<br>[named_index]: <a href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=acc_color;color_index=[index]''><span class='color_holder_box' style='background-color:[color_list[index]]'></span></a>"
 
 /datum/customizer_choice/proc/handle_topic(mob/user, list/href_list, datum/preferences/prefs, datum/customizer_entry/entry, customizer_type)
 	switch(href_list["customizer_task"])
@@ -175,7 +175,7 @@
 			for(var/choice_type in sprite_accessories)
 				var/datum/sprite_accessory/accessory = SPRITE_ACCESSORY(choice_type)
 				choice_list[accessory.name] = choice_type
-			var/chosen_input = browser_input_list(user, "Choose your [lowertext(name)] appearance:", "Character Preference", choice_list)
+			var/chosen_input = browser_input_list(user, "Choose your [LOWER_TEXT(name)] appearance:", "Character Preference", choice_list)
 			if(!chosen_input)
 				return
 			var/choice_type = choice_list[chosen_input]

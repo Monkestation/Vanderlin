@@ -1,8 +1,3 @@
-/datum/attribute_holder/sheet/job/
-	raw_attribute_list = list(
-
-	)
-
 /datum/attribute_holder/sheet/job/brigand
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
@@ -10,12 +5,12 @@
 		STAT_CONSTITUTION = 2,
 		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/polearms = 20,
-		/datum/attribute/skill/combat/axesmaces = 30,
+		/datum/attribute/skill/combat/axesmaces = 35,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/whipsflails = 35,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/combat/crossbows = 20,
@@ -53,12 +48,12 @@
 
 /datum/outfit/bandit/brigand
 	name = "Brigand (Bandit)"
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/bandit
 	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backr = /obj/item/storage/backpack/satchel
-	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1)
+	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/clothing/face/shepherd/rag = 1)
 	mask = /obj/item/clothing/face/facemask/steel
 	neck = /obj/item/clothing/neck/chaincoif/iron
 	head = /obj/item/clothing/head/helmet/leather/volfhelm

@@ -94,6 +94,7 @@
 	color = "#64916E"
 	metabolization_rate = 0.5 * REAGENTS_METABOLISM
 	toxpwr = 0
+	price_per_unit = 3
 
 /datum/reagent/toxin/fentanyl/on_mob_life(mob/living/carbon/M, efficiency)
 	M.adjustOrganLoss(ORGAN_SLOT_BRAIN, 3*REM * efficiency, 150)
@@ -192,6 +193,7 @@
 	color = "#6eb9e4"
 	taste_description = "flowers"
 	metabolization_rate = 0.1 //this shit will kill you
+	price_per_unit = 1.1
 
 /datum/reagent/toxin/manabloom_juice/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -456,6 +458,27 @@
 		else
 			exposed_mob.adjustBruteLoss(reac_volume * 3, 0)
 
+/datum/reagent/poison/bloodstone_essence
+	name = "Bloodstone Essence"
+	description = "A vile blood poison born of bloodstones, whilst rendered inert during the forging process this essence corrupts and kills those who touch raw bloodstone. It is unknown how those who forge bloodsteel weapons live long enough to do so."
+	reagent_state = LIQUID
+	color = "#8B0000"
+	random_reagent_color = FALSE
+	taste_description = "bittersweet blood"
+	scent_description = "cloying blood and sweetness"
+	harmful = TRUE
+	metabolization_rate = 0.4 * REAGENTS_METABOLISM
+
+/datum/reagent/poison/bloodstone_essence/on_mob_life(mob/living/carbon/M, efficiency)
+	if(HAS_TRAIT(M, TRAIT_VITAE_USER))
+		M.remove_reagent(/datum/reagent/poison/bloodstone_essence, volume)
+		return
+	M.adjustOxyLoss(3 * efficiency, 0)
+	M.adjustToxLoss(2 * REM * efficiency, 0)
+	if(current_cycle > 6)
+		M.adjust_dizzy(3 SECONDS * efficiency)
+	. = ..()
+
 /datum/reagent/poison/rotwater
 	name = "Rotwater"
 	description = "Contaminated water drawn from a corpse-pit. Drinking it introduces rapidly multiplying bacteria into the bloodstream. It poisons slowly at first, then accelerates the infection compounds upon itself over time."
@@ -484,7 +507,7 @@
 			if(!length(carbon.all_injuries))
 				return
 			for(var/datum/injury/injury as anything in carbon.all_injuries)
-				if(injury.damage_type == WOUND_DIVINE)
+				if(!injury.can_heal())
 					continue
 				injury.adjust_germ_level(reac_volume * 4)
 

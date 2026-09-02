@@ -3,7 +3,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 /proc/init_primordial_wounds()
 	var/list/primordial_wounds = list()
-	for(var/wound_type in typesof(/datum/wound))
+	for(var/datum/wound/wound_type as anything in typesof(/datum/wound))
+		if(IS_ABSTRACT(wound_type))
+			continue
 		primordial_wounds[wound_type] = new wound_type()
 	return primordial_wounds
 
@@ -44,7 +46,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 
 	/// How many "health points" this wound has, AKA how hard it is to heal
 	var/whp = 60
-	/// How much this wound bleeds
+	/// How much this wound bleeds. Remember this is multiplied by delta_time
 	var/bleed_rate = 0
 	/// Some wounds clot over time, reducing bleeding - This is the rate at which they do so
 	var/clotting_rate = 0.01
@@ -127,7 +129,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	///list of viable zones for this
 	var/list/viable_zones = ALL_BODYPARTS
 
-	/// These are effectively try_crit moved onto the wound
+	/**
+	 * These are effectively try_crit moved onto the wound
+	 * */
 
 	/// Minimum damage required to attempt this wound
 	var/min_damage = 5
@@ -148,8 +152,11 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	///how much we divide our calculated damage by for odds
 	var/damage_divisor = 6
 
+	var/required_bodypart_status
+	///do we get suppressed by a splint
+	var/splint_suppression = FALSE
+
 /datum/wound/Destroy(force)
-	. = ..()
 	if(bodypart_owner)
 		remove_from_bodypart()
 	else if(owner)
@@ -159,6 +166,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		werewolf_infection_timer = null
 	bodypart_owner = null
 	owner = null
+	return ..()
 
 /// Description of this wound returned to the player when a bodypart is examined and such
 /datum/wound/proc/get_visible_name(mob/user)
@@ -179,7 +187,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!bodypart_owner || !length(organ_efficiency_reduction))
 		return
 
-	for(var/organ_slot as anything in organ_efficiency_reduction)
+	for(var/organ_slot in organ_efficiency_reduction)
 		var/obj/item/organ/organ = bodypart_owner.getorganslot(organ_slot)
 		organ?.apply_efficiency_modification(organ_efficiency_reduction[organ_slot], organ_slot, src)
 
@@ -187,7 +195,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!bodypart_owner || !length(organ_efficiency_reduction))
 		return
 
-	for(var/organ_slot as anything in organ_efficiency_reduction)
+	for(var/organ_slot in organ_efficiency_reduction)
 		var/obj/item/organ/organ = bodypart_owner.getorganslot(organ_slot)
 		organ?.remove_efficiency_modification(organ_slot, src)
 
@@ -210,20 +218,16 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		final_message = "<span class='crit'><b>Critical hit!</b> [final_message]</span>"
 	return final_message
 
-/datum/wound/proc/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, zone_precise, list/modifiers)
+/datum/wound/proc/get_crit_prob(bclass, dam, damage_dividend, mob/living/user, obj/item/bodypart/affected, list/modifiers)
 	if(!can_roll)
 		return 0
 	if(!(bclass in associated_bclasses))
 		return 0
 	if(dam < min_damage)
 		return 0
-	if(deprecise_zone(zone_precise) != affected.body_zone)
-		return 0 // we are in a weird place
 	if(damage_dividend < min_damage_dividend)
 		if(!(brittle_bonus && HAS_TRAIT(affected, TRAIT_BRITTLE))) // brittle skips the dividend gate
 			return 0
-	if(length(viable_zones) && !(zone_precise in viable_zones) && viable_zones != ALL_BODYPARTS)
-		return 0
 
 	var/used = base_prob_weight + (modifiers?[CRIT_MOD_CHANCE] || 0)
 	var/calc_dam = dam
@@ -250,8 +254,9 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		return 'sound/combat/CriticalHit.ogg'
 	return pick(sound_effect)
 
-/// Returns whether or not this wound can be applied to a given bodypart
-/datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected)
+/// Returns whether or not this wound can be applied to a given bodypart.
+/// Setting zone_precise will check whether its in viable_zones and if it matches limb body_zone
+/datum/wound/proc/can_apply_to_bodypart(obj/item/bodypart/affected, zone_precise, damage_bclass)
 	if(bodypart_owner || owner || QDELETED(affected) || QDELETED(affected.owner))
 		return FALSE
 	if(!ignore_bloody && !isnull(bleed_rate) && !affected.can_bloody_wound())
@@ -259,6 +264,12 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	for(var/datum/wound/other_wound as anything in affected.wounds)
 		if(!can_stack_with(other_wound))
 			return FALSE
+	if(required_bodypart_status && affected.status != required_bodypart_status)
+		return
+	if(zone_precise && length(viable_zones) && !(zone_precise in viable_zones))
+		return FALSE
+	if(zone_precise && deprecise_zone(zone_precise) != affected.body_zone)
+		return FALSE // we are in a weird place
 	return TRUE
 
 /// Returns whether or not this wound can be applied while this other wound is present
@@ -295,7 +306,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /// Effects when a wound is gained on a bodypart
 /datum/wound/proc/on_bodypart_gain(obj/item/bodypart/affected)
 	if(bleed_rate && affected.bandage)
-		affected.bandage_expire() //new bleeding wounds always expire bandages, fuck you
+		affected.bandage_expire(silent = (affected.bandage.bandage_health <= 0)) //new bleeding wounds always expire bandages, fuck you
 	if(disabling && affected.can_be_disabled)
 		affected.update_disabled()
 
@@ -321,7 +332,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(disabling && affected.can_be_disabled)
 		affected.update_disabled()
 
-/// Returns whether or not this wound can be applied to a given mob
+/// Returns whether or not this wound can be applied to a given mob with TRAIT_SIMPLE_WOUNDS
 /datum/wound/proc/can_apply_to_mob(mob/living/affected)
 	if(bodypart_owner || owner || QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
@@ -330,7 +341,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 			return FALSE
 	return TRUE
 
-/// Adds this wound to a given mob
+/// Adds this wound to a given mob with TRAIT_SIMPLE_WOUNDS
 /datum/wound/proc/apply_to_mob(mob/living/affected, silent = FALSE, crit_message = FALSE)
 	if(QDELETED(affected) || !HAS_TRAIT(affected, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
@@ -363,6 +374,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 		werewolf_infect_attempt()
 	if(mortal && HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
+	affected.adjustPainLoss(woundpain)
+	SEND_SIGNAL(affected, COMSIG_LIVING_WOUND_GAINED, src)
 
 /// Removes this wound from a given, simpler than adding to a bodypart - No extra effects
 /datum/wound/proc/remove_from_mob()
@@ -483,7 +496,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	passive_healing = max(passive_healing, 1)
 	if(mob_overlay != old_overlay)
 		owner?.update_damage_overlays()
-	record_round_statistic(STATS_WOUNDS_SEWED)
+	record_round_statistic(STATS_WOUNDS_FIXED)
 	return TRUE
 
 /// Checks if this wound has a special infection (zombie or werewolf)
@@ -503,6 +516,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(!isnull(clotting_threshold) && bleed_rate > clotting_threshold)
 		bleed_rate = clotting_threshold
 	heal_wound(40)
+	record_round_statistic(STATS_WOUNDS_FIXED)
 	return TRUE
 
 /// Checks if this wound is sewn

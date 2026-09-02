@@ -12,9 +12,8 @@
  * Use enter_jaunt() and exit_jaunt() as wrappers.
  */
 /datum/action/cooldown/spell/undirected/jaunt
-	school = SCHOOL_TRANSMUTATION
-
 	invocation_type = INVOCATION_NONE
+	spell_flags = SPELL_UNETCHABLE
 
 	charge_required = FALSE
 

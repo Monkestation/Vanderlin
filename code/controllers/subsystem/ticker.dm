@@ -126,7 +126,7 @@ SUBSYSTEM_DEF(ticker)
 	var/use_rare_music = prob(1)
 
 	for(var/S in provisional_title_music)
-		var/lower = lowertext(S)
+		var/lower = LOWER_TEXT(S)
 		var/list/L = splittext(lower,"+")
 		switch(L.len)
 			if(3) //rare+MAP+sound.ogg or MAP+rare.sound.ogg -- Rare Map-specific sounds
@@ -150,7 +150,7 @@ SUBSYSTEM_DEF(ticker)
 	for(var/S in music)
 		var/list/L = splittext(S,".")
 		if(L.len >= 2)
-			var/ext = lowertext(L[L.len]) //pick the real extension, no 'honk.ogg.exe' nonsense here
+			var/ext = LOWER_TEXT(L[L.len]) //pick the real extension, no 'honk.ogg.exe' nonsense here
 			if(byond_sound_formats[ext])
 				continue
 		music -= S
@@ -248,7 +248,7 @@ SUBSYSTEM_DEF(ticker)
 	//Get ALL town jobs
 	var/list/town_jobs = list()
 	for(var/datum/job/J as anything in SSjob.joinable_occupations)
-		if (J.faction == FACTION_TOWN)
+		if(FACTION_TOWN in J.factions)
 			town_jobs += J.title
 
 	//Now find players who readied with HIGH preference on those town jobs
@@ -292,18 +292,20 @@ SUBSYSTEM_DEF(ticker)
 	required_jobs = list()
 	readied_jobs = list(JOB_MONARCH)
 #endif
-	for(var/V in required_jobs)
+	for(var/needed_job in required_jobs)
 		for(var/mob/dead/new_player/player in GLOB.player_list)
 			if(!player || !player.client)
 				stack_trace("somehow [player] doesn't have a client, wtf?")
 				continue
-			if(player.client.prefs.job_preferences[V] == JP_HIGH)
+			if(player.client.prefs.job_preferences[needed_job] == JP_HIGH)
 				if(player.ready == PLAYER_READY_TO_PLAY)
-					if(player.client.prefs.lastclass == V)
-						if(player.IsJobUnavailable(V) != JOB_AVAILABLE)
-							to_chat(player, span_warning("You cannot be [V] and thus are not considered."))
+					if(player.client.prefs.lastclass == needed_job)//This makes no sense, but I need to sleep so I'll have to come back to it in the morning
+						var/job_status = player.IsJobUnavailable(needed_job)
+						if(job_status != JOB_AVAILABLE)
+							to_chat(player, span_warning("You cannot be [needed_job] and thus are not considered."))
+							message_admins("JOB ERROR: [key_name(player)] is unable to be [needed_job], Error [job_status]!")
 							continue
-					readied_jobs.Add(V)
+					readied_jobs.Add(needed_job)
 
 	if(CONFIG_GET(flag/ruler_required) && !vote_started)
 		if(pre_vote > 4 && !voting)
@@ -352,6 +354,10 @@ SUBSYSTEM_DEF(ticker)
 	log_game("GAME SETUP: equip characters success")
 	transfer_characters()	//transfer keys to the new mobs
 	log_game("GAME SETUP: transfer characters success")
+	SSrelations.run_rival_matchmaking()
+	log_game("GAME SETUP: rival matchmaking success")
+	SSrelations.spread_gossip()
+	log_game("GAME SETUP: gossip spreading success")
 
 	for(var/datum/callback/cb as anything in round_start_events)
 		cb.InvokeAsync()
@@ -370,6 +376,7 @@ SUBSYSTEM_DEF(ticker)
 	INVOKE_ASYNC(SSdbcore, TYPE_PROC_REF(/datum/controller/subsystem/dbcore, SetRoundStart))
 
 	message_admins(span_boldnotice("Welcome to [SSmapping.config.map_name]!"))
+	addtimer(CALLBACK(src, PROC_REF(revoke_antag_perms)), 3 MINUTES)
 
 	for(var/client/C in GLOB.clients)
 		if(!C?.mob)
@@ -398,7 +405,7 @@ SUBSYSTEM_DEF(ticker)
 */
 
 	PostSetup()
-	INVOKE_ASYNC(world, TYPE_PROC_REF(/world, flush_byond_tracy))
+
 	log_game("GAME SETUP: postsetup success")
 
 	return TRUE
@@ -469,13 +476,14 @@ SUBSYSTEM_DEF(ticker)
 
 	job_change_locked = FALSE
 
-	SStriumphs.fire_on_PostSetup()
 	for(var/obj/effect/landmark/start/S as anything in GLOB.roundstart_landmarks)
 		if(!istype(S))//we can not runtime here. not in this important of a proc.
 			stack_trace("[S] [S.type] found in roundstart landmarks list, which isn't a start landmark!")
+
 	for(var/obj/effect/landmark/start/S as anything in GLOB.latejoin_landmarks)
 		if(!istype(S))//we can not runtime here. not in this important of a proc.
 			stack_trace("[S] [S.type] found in latejoin landmarks list, which isn't a latejoin landmark!")
+
 	SSgamemode.refresh_alive_stats(first_post_roundstart_check = TRUE)
 
 //These callbacks will fire after roundstart key transfer
@@ -527,15 +535,18 @@ SUBSYSTEM_DEF(ticker)
 	var/list/livings = list()
 	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		var/mob/living = player.transfer_character()
-		if(living)
-			qdel(player)
-			ADD_TRAIT(living, TRAIT_NO_TRANSFORM, SS_TICKER_TRAIT)
-			livings += living
-			GLOB.character_ckey_list[living.real_name] = living.ckey
-		if(ishuman(living))
-			try_apply_character_post_equipment(living)
+		if(!living)
+			continue
 
-	if(livings.len)
+		qdel(player)
+		ADD_TRAIT(living, TRAIT_NO_TRANSFORM, SS_TICKER_TRAIT)
+		livings += living
+		GLOB.character_ckey_list[living.real_name] = living.ckey
+
+		if(ishuman(living))
+			try_apply_character_post_equipment(living, living.client)
+
+	if(length(livings))
 		addtimer(CALLBACK(src, PROC_REF(release_characters), livings), 30, TIMER_CLIENT_TIME)
 
 /datum/controller/subsystem/ticker/proc/release_characters(list/livings)
@@ -738,6 +749,10 @@ SUBSYSTEM_DEF(ticker)
 	update_everything_flag_in_db()
 
 	text2file(login_music, "data/last_round_lobby_music.txt")
+
+/datum/controller/subsystem/ticker/proc/revoke_antag_perms()
+	GLOB.midround_antag_permission = FALSE
+	message_admins("ANTAGS: Global Midround Antag Rolling now DISABLED. Antagonists will now roll according to their own settings.")
 
 #undef ROUND_START_MUSIC_LIST
 #undef SS_TICKER_TRAIT

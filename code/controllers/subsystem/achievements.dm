@@ -11,6 +11,12 @@ SUBSYSTEM_DEF(achievements)
 	var/list/datum/award/awards = list()
 
 /datum/controller/subsystem/achievements/Initialize(timeofday)
+	setup()
+	return ..()
+
+/datum/controller/subsystem/achievements/proc/setup()
+	if(length(awards))
+		return
 	// Instantiate all award singletons
 	for(var/T in subtypesof(/datum/award/achievement))
 		var/datum/award/A = new T
@@ -33,7 +39,6 @@ SUBSYSTEM_DEF(achievements)
 		if(C.player_details?.achievements && !C.player_details.achievements.initialized)
 			C.player_details.achievements.InitializeData()
 
-	return ..()
 
 /datum/controller/subsystem/achievements/Shutdown()
 	force_save_all()

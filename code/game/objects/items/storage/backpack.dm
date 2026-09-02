@@ -18,6 +18,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = NONE
 	max_integrity = 300
+	childcore = TRUE
 
 	sewrepair = /datum/attribute/skill/craft/tanning/patching
 	dyeable = TRUE
@@ -26,3 +27,4 @@
 	salvage_result = /obj/item/natural/hide/cured
 
 	item_weight = 1.8 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT

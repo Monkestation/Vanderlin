@@ -77,8 +77,6 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 	var/list/data = list()
 	data["book_name"] = name
 	data["book_desc"] = desc
-	ensure_snack_mill_reverse()
-	build_obtained_from_reverse()
 	data["recipes"] = get_cached_book_recipes(type, FALSE)
 	data["linked_recipes"] = get_cached_linked_recipes(type)
 	return data
@@ -541,8 +539,8 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 
 	types = list(
 		/datum/book_entry/grimoire,
-		/datum/book_entry/attunement,
 		/datum/book_entry/mana_sources,
+		/datum/spellcraft_contribution,
 		/datum/arcyne_crafting_recipe,
 		/datum/repeatable_crafting_recipe/arcyne,
 		/datum/blueprint_recipe/arcyne,
@@ -613,10 +611,12 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/datum/book_entry/organ_surgery,
 		/datum/book_entry/lobotomy,
 		/datum/book_entry/pestran_chimeric,
+		/datum/repeatable_crafting_recipe/survival/tourniquet,
+		/datum/repeatable_crafting_recipe/survival/splint,
 		/datum/chimeric_table,
 		/datum/chimeric_node,
 		/datum/wound,
-		/datum/surgery,
+		/datum/surgery_operation,
 		/obj/item/organ/heart,
 		/obj/item/organ/spleen,
 		/obj/item/organ/stomach,
@@ -628,4 +628,21 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/obj/item/organ/brain,
 		/obj/item/organ/tongue,
 		/obj/item/organ/appendix,
+	)
+
+/obj/item/recipe_book/gravemaking
+	name = "The Gravetender's Guide: Burials, Exhumations, and Unwanted Guests"
+	desc = "Penned by Chem and Terry Ditchdigger."
+	icon_state ="book6_0"
+	base_icon_state = "book6"
+
+	types = list(
+		/datum/book_entry/undertaker_manual,
+		/datum/anvil_recipe/tools/gold/headstone_astrata,
+		/datum/anvil_recipe/tools/iron/gravefence_iron,
+		/datum/anvil_recipe/tools/iron/headstone_malum,
+		/datum/repeatable_crafting_recipe/gravemaking,
+		/datum/container_craft/pan/fat_render,
+		/datum/repeatable_crafting_recipe/tallow/red
+
 	)

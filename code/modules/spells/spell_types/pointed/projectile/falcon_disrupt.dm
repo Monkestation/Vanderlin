@@ -9,7 +9,6 @@
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
-	attunements = list(/datum/attunement/earth = 0.5)
 	charge_time = 1 SECONDS
 	charge_drain = 1
 	charge_slowdown = 0.7
@@ -32,7 +31,7 @@
 	if(!send_item)
 		return ..()
 
-	if(!length(owner.mind?.known_people))
+	if(!length(owner.mind?.relations))
 		to_chat(owner, span_warning("The falcon is confused... You know no one to send this item to."))
 		return FALSE
 	var/recipient = browser_input_text(owner, "Whose name shall the falcon seek?", "THE WINGS")

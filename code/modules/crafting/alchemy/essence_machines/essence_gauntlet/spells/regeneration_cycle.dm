@@ -3,8 +3,6 @@
 	desc = "Establishes a cycle of continuous healing over time."
 	button_icon_state = "regeneratelimb"
 	cast_range = 1
-	point_cost = 8
-	attunements = list(/datum/attunement/light, /datum/attunement/life)
 	essences = list(/datum/thaumaturgical_essence/cycle, /datum/thaumaturgical_essence/life)
 
 /datum/action/cooldown/spell/essence/regeneration_cycle/cast(atom/cast_on)
@@ -31,7 +29,16 @@
 	var/mob/living/carbon/carbon = owner
 	if(!iscarbon(owner))
 		return
-	for(var/datum/injury/injury as anything in carbon.all_injuries)
-		if(injury.damage_type == WOUND_DIVINE)
-			continue
-		injury.heal_damage(0.1)
+
+	carbon.adjustBruteLoss(-0.1, FALSE)
+	carbon.adjustFireLoss(-0.1, TRUE)
+
+/datum/action/cooldown/spell/essence/regeneration_cycle/spell
+	name = "Rejuvenation Cycle"
+	charge_required = TRUE
+	charge_time = 2 SECONDS
+	spell_cost = 80
+	spell_type = SPELL_MANA
+
+	required_form = FORM_LIFE
+	required_technique = TECHNIQUE_RESTORATION

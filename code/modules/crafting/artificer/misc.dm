@@ -307,6 +307,14 @@
 	craftdiff = 2
 	created_amount = 4
 
+/datum/artificer_recipe/ammo/lead_pellet
+	name = "Pellet shots 4x"
+	hammers_per_item = 4
+	created_item = /obj/item/ammo_casing/caseless/pelletshot
+	required_item = /obj/item/ingot/tin
+	craftdiff = 2
+	created_amount = 4
+
 /datum/artificer_recipe/ammo/bolts
 	name = "Crossbow Bolts 5x (+1 Iron)"
 	required_item = /obj/item/natural/wood/plank
@@ -494,6 +502,21 @@
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/divine
 
+/datum/artificer_recipe/psycross/matthios
+	name = "Matthios Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/matthios
+
+/datum/artificer_recipe/psycross/graggar
+	name = "Graggar Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/graggar
+
+/datum/artificer_recipe/psycross/baotha
+	name = "Baotha Psycross"
+	required_item = /obj/item/ingot/gold
+	created_item = /obj/item/clothing/neck/psycross/baotha
+
 /datum/artificer_recipe/psycross/noc
 	name = "Noc Psycross"
 	required_item = /obj/item/ingot/silver
@@ -503,6 +526,11 @@
 	name = "Astrata Psycross"
 	required_item = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/neck/psycross/silver/divine/astrata
+
+/datum/artificer_recipe/psycross/astrata_silver
+	name = "Silvered Astrata Psycross"
+	required_item = /obj/item/ingot/silver
+	created_item = /obj/item/clothing/neck/psycross/silver/divine/astrata/real_silver
 
 /datum/artificer_recipe/psycross/dendor
 	name = "Dendor Psycross"

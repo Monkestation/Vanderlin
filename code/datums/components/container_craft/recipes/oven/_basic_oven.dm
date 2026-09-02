@@ -89,7 +89,7 @@
 
 /datum/container_craft/oven/roastbird
 	name = "Roast Bird"
-	wildcard_requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry = 1)
+	requirements = list(/obj/item/reagent_containers/food/snacks/meat/poultry = 1)
 	output = /obj/item/reagent_containers/food/snacks/cooked/roastchicken
 	cooked_smell = /datum/pollutant/food/fried_chicken
 	used_skill = /datum/attribute/skill/craft/cooking/grilling

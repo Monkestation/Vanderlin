@@ -2,5 +2,12 @@
     "map_name": "underworld",
     "map_path": "map_files/shared",
     "map_file": "underworld.dmm",
-    "traits": [{"Up": true}, {"Down": true}]
+    "traits": [
+        {
+            "Up": true
+        },
+        {
+            "Down": true
+        }
+    ]
 }

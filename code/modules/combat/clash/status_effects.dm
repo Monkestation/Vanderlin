@@ -13,7 +13,6 @@
 		COMSIG_MOB_KICKED, // getting kicked
 		SIGNAL_ADDTRAIT(TRAIT_KNOCKEDOUT),
 		SIGNAL_ADDTRAIT(TRAIT_INCAPACITATED),
-		SIGNAL_ADDTRAIT(TRAIT_IMMOBILIZED),
 		SIGNAL_ADDTRAIT(TRAIT_FLOORED),
 		SIGNAL_ADDTRAIT(TRAIT_PACIFISM),
 	)
@@ -27,9 +26,13 @@
 
 /datum/status_effect/buff/clash/on_creation(mob/living/new_owner, duration_override, ...)
 	. = ..()
-
+	// Defending signals
 	RegisterSignal(new_owner, COMSIG_ATOM_ATTACKBY, PROC_REF(attacked_item))
 	RegisterSignal(new_owner, COMSIG_ATOM_ATTACK_HAND, PROC_REF(attacked_hand))
+
+	// Outward attacking signals, to make sure we aren't cheesing
+	RegisterSignal(new_owner, COMSIG_MOB_ITEM_ATTACK, PROC_REF(attacking_item))
+	RegisterSignal(new_owner, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, PROC_REF(attacking_hand))
 
 	RegisterSignals(new_owner, interrupt_signals, PROC_REF(cancel_clash))
 	RegisterSignals(new_owner, punishmment_signals, PROC_REF(cancel_punish_clash))
@@ -50,8 +53,12 @@
 		clash_overlay = null
 		return
 
-	UnregisterSignal(owner, COMSIG_MOB_ITEM_ATTACK)
-	UnregisterSignal(owner, COMSIG_ATOM_ATTACK_HAND)
+	UnregisterSignal(owner, list(
+		COMSIG_ATOM_ATTACKBY,
+		COMSIG_ATOM_ATTACK_HAND,
+		COMSIG_MOB_ITEM_ATTACK,
+		COMSIG_HUMAN_MELEE_UNARMED_ATTACK,
+	))
 
 	UnregisterSignal(owner, interrupt_signals)
 	UnregisterSignal(owner, punishmment_signals)
@@ -68,6 +75,7 @@
 	if(!owner.get_active_held_item() || owner.is_blind())
 		owner.bad_guard()
 
+/// Proc for getting attacked with an item "victim" is the owner
 /datum/status_effect/buff/clash/proc/attacked_item(mob/living/victim, obj/item/weapon, mob/living/assailant, list/modifiers)
 	SIGNAL_HANDLER
 
@@ -77,39 +85,53 @@
 	if(!weapon)
 		return
 
-	// Attacker has Guard / Clash active, and is hitting us who doesn't. Cheesing a 'free' hit with a defensive buff is a no-no. You get punished.
-	if(assailant.has_status_effect(/datum/status_effect/buff/clash) && !victim.has_status_effect(/datum/status_effect/buff/clash))
-		assailant.bad_guard(span_suicide("I tried to strike while focused on defense whole! It drains me!"), cheesy = TRUE)
-		return
+	if(victim.process_clash(assailant))
+		return COMPONENT_NO_AFTERATTACK
 
-	// var/weapon_range = victim.used_intent?.reach
-	// if(get_dist(victim, assailant) > weapon_range)
-	// 	cancel_clash() // If we are getting stabbed by a spear, we can't clash unless we can match
-	// 	return
-
-	if(victim.dir == REVERSE_DIR(get_dir(victim, assailant)))
-		cancel_clash() // Attacked from behind
-		return
-
-	victim.process_clash(assailant)
-
-	return COMPONENT_NO_ATTACK
-
+/// Proc for getting attacked with hands "victim" is the owner
 /datum/status_effect/buff/clash/proc/attacked_hand(mob/living/victim, mob/living/assailant)
 	SIGNAL_HANDLER
 
-	// Attacker has Guard / Clash active, and is hitting us who doesn't. Cheesing a 'free' hit with a defensive buff is a no-no. You get punished.
-	if(assailant.has_status_effect(/datum/status_effect/buff/clash) && !victim.has_status_effect(/datum/status_effect/buff/clash))
+	if(QDELETED(src) || !owner)
+		return
+
+	if(victim.process_clash(assailant))
+		return COMPONENT_CANCEL_ATTACK_CHAIN
+
+/// Proc for attacking with an item "assailant" is the owner
+/datum/status_effect/buff/clash/proc/attacking_item(mob/living/assailant, mob/living/victim, obj/item/weapon)
+	SIGNAL_HANDLER
+
+	if(QDELETED(src) || !owner)
+		return
+
+	if(!weapon)
+		return
+
+	// We have Guard / Clash active, and are hitting someone who doesn't. Cheesing a 'free' hit with a defensive buff is a no-no. You get punished.
+	if(!victim.has_status_effect(/datum/status_effect/buff/clash))
 		assailant.bad_guard(span_suicide("I tried to strike while focused on defense whole! It drains me!"), cheesy = TRUE)
+		return COMPONENT_CANCEL_ATTACK_CHAIN
+
+/// Proc for attacking with hands "assailant" is the owner
+/datum/status_effect/buff/clash/proc/attacking_hand(mob/living/assailant, atom/target, proximity_flag, list/modifiers)
+	SIGNAL_HANDLER
+
+	if(QDELETED(src) || !owner)
 		return
 
-	if(victim.dir == REVERSE_DIR(get_dir(victim, assailant)))
-		cancel_clash() // Attacked from behind
+	if(!proximity_flag)
 		return
 
-	victim.process_clash(assailant)
+	if(!isliving(target))
+		return
 
-	return COMPONENT_CANCEL_ATTACK_CHAIN
+	var/mob/living/victim = target
+
+	// We have Guard / Clash active, and are hitting someone who doesn't. Cheesing a 'free' hit with a defensive buff is a no-no. You get punished.
+	if(!victim.has_status_effect(/datum/status_effect/buff/clash))
+		assailant.bad_guard(span_suicide("I tried to strike while focused on defense whole! It drains me!"), cheesy = TRUE)
+		return COMPONENT_CANCEL_ATTACK_CHAIN
 
 /datum/status_effect/buff/clash/proc/cancel_clash()
 	SIGNAL_HANDLER

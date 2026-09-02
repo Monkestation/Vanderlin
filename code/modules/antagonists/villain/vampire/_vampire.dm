@@ -32,18 +32,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	else if(incoming_clan)
 		default_clan = incoming_clan
 
-/datum/antagonist/vampire/examine_target(mob/examiner, mob/living/carbon/examined, list/P, list/examine_contents)
-	. = ..()
-	if(!istype(examined))
-		return
-	if(NOBLOOD in examined.dna?.species?.species_traits)
-		return
-	var/vitae = 0
-	var/datum/blood_type/BT = examined.get_blood_type()
-	if(istype(BT) && BT.vitae)
-		vitae = round(examined.blood_volume * BT.vitae)
-	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(examined.blood_volume)] ([vitae] VT)"))
-
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"
 	antag_hud_type = ANTAG_HUD_VAMPIRE
@@ -53,9 +41,15 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	default_clan = /datum/clan/caitiff
 
 /datum/antagonist/vampire/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+	if(!isliving(examiner))
+		return
+	var/mob/living/the_examiner = examiner
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
 		examiner.add_stress(/datum/stress_event/its_the_fucking_daewalker)
 		return span_phobia("THE DIABLERIST OF THE SUN QUEEN!!")
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker) && !istype(the_examiner?.clan, /datum/clan/nitewalker))
+		examiner.add_stress(/datum/stress_event/its_the_nitewalker)
+		return span_phobia("THE DIABLERIST OF THE MOON PRINCE!!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Kaine's firstborn!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lords_spawn))
@@ -77,9 +71,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
-		vampdude.hud_used?.shutdown_bloodpool()
-		vampdude.hud_used?.initialize_bloodpool()
-		vampdude.hud_used?.bloodpool.set_fill_color("#510000")
+		vampdude.hud_used?.set_bloody_bloodpool()
+		vampdude.grant_language(/datum/language/sanguine)
 
 		if(forced)
 			vampdude.set_clan_direct(forcing_clan)

@@ -2,38 +2,49 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 4,
+		STAT_PERCEPTION = 1,
 		STAT_CONSTITUTION = -1,
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 50,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/labor/farming = 30,
 	)
 
 /datum/attribute_holder/sheet/job/courtphys/old
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
-		STAT_INTELLIGENCE = 4,
+		STAT_INTELLIGENCE = 5,
+		STAT_PERCEPTION = 1,
 		STAT_CONSTITUTION = -1,
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 60,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/labor/farming = 30,
 	)
 /datum/job/courtphys
 	title = JOB_COURT_PHYSICIAN
+	alt_titles = list("Court Chirurgian")
 	tutorial = "One fateful evening at a royal banquet, your steady hand and sharp eye saved the royal bloodline. \
 	Now, you serve as the trusted healer of the crown, a living symbol of Pestra's favor. \
 	Your duty is clear: keep the monarch alive, no matter the cost."
 	department_flag = NOBLEMEN
 	display_order = JDO_PHYSICIAN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -42,6 +53,8 @@
 	outfit = /datum/outfit/courtphys/male
 	outfit_female = /datum/outfit/courtphys/female
 	give_bank_account = 100
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 	spells = list(/datum/action/cooldown/spell/diagnose)
 	job_bitflag = BITFLAG_ROYALTY
@@ -51,6 +64,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/courtphys
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/courtphys/old
+	tennite_triumph_exclusive = TRUE
 
 	honorary = "Lord"
 	honorary_f = "Lady"
@@ -59,19 +73,15 @@
 		TRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
 		TRAIT_DEADNOSE,
-		TRAIT_LEGENDARY_ALCHEMIST
+		TRAIT_LEGENDARY_ALCHEMIST,
+		TRAIT_NOBLE_BLOOD,
+		TRAIT_NOBLE_POWER,
+		TRAIT_VIRGIN,
 	)
 	book_type = /obj/item/recipe_book/medical
 
 /datum/job/courtphys/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.virginity = TRUE
-
-	if(spawned.dna?.species?.id != SPEC_ID_MEDICATOR)
-		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, JOB_TRAIT)
-		ADD_TRAIT(spawned, TRAIT_NOBLE_POWER, JOB_TRAIT)
-	else
-		spawned.honorary = null
 
 /datum/outfit/courtphys
 	name = "Court Physician Base"
@@ -79,7 +89,8 @@
 	backl = /obj/item/storage/backpack/satchel/surgbag
 	mask = /obj/item/clothing/face/courtphysician
 	belt = /obj/item/storage/belt/leather/black
-	beltl = /obj/item/storage/keyring/physician
+	wrists = /obj/item/storage/keyring/physician
+	beltl = /obj/item/storage/fancy/ifak
 	beltr = /obj/item/weapon/sword/rapier/caneblade/courtphysician
 	ring = /obj/item/clothing/ring/feldsher_ring
 	scabbards = list(/obj/item/weapon/scabbard/cane/courtphysician)

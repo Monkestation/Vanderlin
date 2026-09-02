@@ -14,9 +14,9 @@
 	smeltresult = null
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/gloves/maille
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	sewrepair = null
 	item_weight = 1.35 KILOGRAMS
 	smeltresult = null
@@ -24,9 +24,11 @@
 	melt_amount = 50
 
 	material_category = ARMOR_MAT_CHAINMAIL
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/gloves/chain/psydon
 	name = "grenzelhoftian chain gauntlets"
+	examine_name = "chain gauntlets"
 	icon_state = "psydongloveschain"
 	item_state = "psydongloveschains"
 	melting_material = /datum/material/silver
@@ -36,8 +38,8 @@
 	name = "iron chain gauntlets"
 	icon_state = "icgloves"
 	desc = "Gauntlets made out of interwoven iron chains. Decent melee protection, but are better suited to stop arrows than blades."
-	armor = ARMOR_MAILLE_IRON
-	max_integrity = INTEGRITY_STRONG
+	armor_type = /datum/armor/gloves/maille/iron
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.35 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/iron

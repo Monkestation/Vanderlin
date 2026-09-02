@@ -35,7 +35,7 @@
 			continue
 		if(length(invalid_ctags & CHECKS.category_tags) && !length(parent_job?.advclass_cat_rolls & CHECKS.category_tags))
 			continue
-		if(!CHECKS.check_requirements(spawned))
+		if(!CHECKS.check_requirements(spawned, TRUE))
 			continue
 		possible_classes += CHECKS
 

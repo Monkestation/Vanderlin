@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 2,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/labor/fishing = 30,
@@ -45,7 +45,7 @@
 	beltl = /obj/item/weapon/sword/sabre/cutlass
 	beltr = /obj/item/weapon/knife/dagger
 	scabbards = list(/obj/item/weapon/scabbard/sword, /obj/item/weapon/scabbard/knife)
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/adventurer/corsair/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()

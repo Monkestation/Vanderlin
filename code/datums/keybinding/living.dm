@@ -11,7 +11,7 @@
 	full_name = "Swap to left hand"
 	description = ""
 
-/datum/keybinding/living/swap_left/down(client/user)
+/datum/keybinding/living/swap_left/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	if(!isliving(M))
@@ -32,7 +32,7 @@
 	full_name = "Swap to right hand"
 	description = ""
 
-/datum/keybinding/living/swap_right/down(client/user)
+/datum/keybinding/living/swap_right/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	if(!isliving(M))
@@ -54,7 +54,7 @@
 	full_name = "Swap hands"
 	description = ""
 
-/datum/keybinding/living/swap_hands/down(client/user)
+/datum/keybinding/living/swap_hands/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	if(!isliving(M))
@@ -71,7 +71,7 @@
 	full_name = "Activate in-hand"
 	description = "Uses whatever item you have in-hand"
 
-/datum/keybinding/living/activate_inhand/down(client/user)
+/datum/keybinding/living/activate_inhand/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	if(!isliving(M))
@@ -88,7 +88,7 @@
 	full_name = "Drop Item"
 	description = ""
 
-/datum/keybinding/living/drop_item/down(client/user)
+/datum/keybinding/living/drop_item/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	if(!isliving(M))
@@ -106,7 +106,7 @@
 	full_name = "Sprint"
 	description = "Sprinting can be dangerous to your health if you aren't careful."
 
-/datum/keybinding/living/sprint/down(client/user)
+/datum/keybinding/living/sprint/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	if(!isliving(M))
@@ -123,7 +123,7 @@
 	full_name = "Sneak"
 	description = "Press this hotkey to sneak around, which has many uses."
 
-/datum/keybinding/living/sneak/down(client/user)
+/datum/keybinding/living/sneak/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/M = user.mob
 	if(!isliving(M))
@@ -141,7 +141,7 @@
 	full_name = "Yield"
 	description = "Yield to your enemy, which may save your life or end it quicker."
 
-/datum/keybinding/living/submit/down(client/user)
+/datum/keybinding/living/submit/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	if(!isliving(user))
 		return
@@ -157,7 +157,7 @@
 	full_name = "Cancel/Resist"
 	description = "Stop an action such as a charged attack or spam this to resist against a grab."
 
-/datum/keybinding/living/resist/down(client/user)
+/datum/keybinding/living/resist/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/L = user.mob
 	if(!istype(L))
@@ -172,7 +172,7 @@
 	full_name = "Combat Mode"
 	description = "Initiates combat mode. Enables certain RMB intents. Allows to dodge and parry."
 
-/datum/keybinding/living/defendtoggle/down(client/user)
+/datum/keybinding/living/defendtoggle/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/L = user.mob
 	if(!isliving(L))
@@ -185,7 +185,7 @@
 	full_name = "Dodge/Parry"
 	description = "Change between dodging and parrying."
 
-/datum/keybinding/living/dodgeparry/down(client/user)
+/datum/keybinding/living/dodgeparry/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/L = user.mob
 	if(!istype(L))
@@ -202,7 +202,7 @@
 	description = "Toggle between standing and laying on the floor."
 	var/lastrest = 0
 
-/datum/keybinding/living/restd/down(client/user)
+/datum/keybinding/living/restd/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/L = user.mob
 	if(!istype(L))
@@ -221,7 +221,7 @@
 	description = "Stand up from a prone position."
 	var/lastrest = 0
 
-/datum/keybinding/living/standu/down(client/user)
+/datum/keybinding/living/standu/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/L = user.mob
 	if(!istype(L))
@@ -240,7 +240,7 @@
 	description = "Lay down on the floor."
 	var/lastrest = 0
 
-/datum/keybinding/living/rest/down(client/user)
+/datum/keybinding/living/rest/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/L = user.mob
 	if(!istype(L))
@@ -259,7 +259,7 @@
 	description = "Look at what's above you, if you are under an open space."
 	var/lastrest = 0
 
-/datum/keybinding/living/lookup/down(client/user)
+/datum/keybinding/living/lookup/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	var/mob/living/L = user.mob
 	if(!lastrest || world.time > lastrest + 15)
@@ -275,13 +275,13 @@
 	full_name = "Pixel-Shift"
 	description = "Use this to pixel shift"
 
-/datum/keybinding/living/pixelshift/down(client/user)
+/datum/keybinding/living/pixelshift/down(client/user, turf/target, mousepos_x, mousepos_y)
 	. = ..()
 	user.mob.AddComponent(/datum/component/pixel_shift)
 	SEND_SIGNAL(user.mob, COMSIG_KB_LIVING_PIXEL_SHIFT_DOWN)
 
 
-/datum/keybinding/living/pixelshift/up(client/user)
+/datum/keybinding/living/pixelshift/up(client/user, turf/target)
 	. = ..()
 	SEND_SIGNAL(user.mob, COMSIG_KB_LIVING_ITEM_PIXEL_SHIFT_UP)
 

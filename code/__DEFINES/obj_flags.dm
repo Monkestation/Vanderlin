@@ -41,6 +41,7 @@
 #define ITEM_ONLY_BREAK 		(1<<15)
 #define HIGH_VALUE (1<<16)
 #define OBTAINED_DATA (1<<17)
+#define NO_ITEM_TELEPORT (1<<18)
 
 // Flags for the clothing_flags var on /obj/item/clothing
 
@@ -69,3 +70,5 @@
 #define INCLUDE_POCKETS (1<<0)
 #define INCLUDE_ACCESSORIES (1<<1)
 #define INCLUDE_HELD (1<<2)
+/// Include items that are not "real" items, such as hand items
+#define INCLUDE_ABSTRACT (1<<4)

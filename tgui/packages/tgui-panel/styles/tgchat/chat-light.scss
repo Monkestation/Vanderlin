@@ -305,6 +305,10 @@ em {
   font-weight: bold;
 }
 
+.looc {
+  color: hsl(210, 50%, 60%)
+}
+
 .adminobserverooc {
   color: hsl(195, 100%, 40%);
   font-weight: bold;
@@ -893,6 +897,10 @@ h2.alert {
 
 .silver{
   color: hsl(0, 7%, 26%);
+}
+
+.yellow{
+  color: hsl(45, 100%, 35%);
 }
 
 .briar{
@@ -1615,6 +1623,32 @@ $border-width-px: $border-width * 1px;
 
 	50% {
 		color: hsl(339.1, 65.3%, 32.8%);
+	}
+
+	75% {
+		color: hsl(339.2, 61%, 24.1%);
+	}
+
+	100% {
+		color: hsl(338.8, 52.2%, 32%);
+	}
+}
+/* ##### END ##### */
+
+/* ##### GRAGGAZO ##### */
+.god_graggazo {
+  color: hsl(125.9, 49.1%, 32.4%);
+  font-weight: bold;
+  animation: graggazo_flicker 1s infinite;
+}
+
+@keyframes graggazo_flicker {
+	25% {
+		color: hsl(125.9, 49.1%, 32.4%);
+	}
+
+	50% {
+		color: hsl(125.9, 52.9%, 34.1%);
 	}
 
 	75% {

@@ -25,7 +25,12 @@
 	if(List && List.len)
 		return pick(List)
 
-
+/proc/sanitize_float(number, min=0, max=1, accuracy=1, default=0)
+	if(isnum(number))
+		number = round(number, accuracy)
+		if(round(min, accuracy) <= number && number <= round(max, accuracy))
+			return number
+	return default
 
 //more specialised stuff
 /proc/sanitize_gender(gender,neuter=0,plural=1, default="male")

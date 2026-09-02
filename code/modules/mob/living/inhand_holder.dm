@@ -76,7 +76,7 @@
 			qdel(src)
 		return FALSE
 	if(organ_stored)
-		if(!organ_stored.get_cut())
+		if(!organ_stored.get_cut(ignore_gauze = TRUE))
 			if(!do_after(held_mob, 15 SECONDS, loc))
 				return
 			organ_stored.owner.emote("scream")

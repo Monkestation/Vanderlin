@@ -118,7 +118,8 @@
 	// I'm only interested in if the pass is unobstructed, not if the mob will actually make it
 	if(!climber.can_z_move(UP, get_turf(src), checking, z_move_flags = ZMOVE_ALLOW_BUCKLED))
 		return
-	var/turf/target = GET_TURF_ABOVE_DIAGONAL(src, dir|UP)
+	var/turf/turf = get_turf(src)
+	var/turf/target = GET_TURF_ABOVE_DIAGONAL(turf, dir|UP)
 	if(istype(target) && !climber.can_z_move(DOWN, target, z_move_flags = ZMOVE_FALL_FLAGS)) //Don't throw them into a tile that will just dump them back down.
 		climber.zMove(target = target, z_move_flags = ZMOVE_STAIRS_FLAGS)
 		/// Moves anything that's being dragged by src or anything buckled to it to the stairs turf.
@@ -257,7 +258,7 @@
 	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
 	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
 	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[initial(name)]", 1)
 
 	dir = dirin
 	var/turf/partner = get_step(src, turn(dir, 180))
@@ -276,7 +277,7 @@
 	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
 	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
 	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[initial(name)]", 1)
 
 	dir = dirin
 	var/turf/partner = get_step(src, turn(dir, 180))
@@ -295,14 +296,20 @@
 	return get_target_loc(dirmove) || get_step(src, dirmove) // just normal movement if we failed to find a matching stair
 
 /// Get the turf above/below us corresponding to the direction we're moving on the stairs.
+/// Why do we have both? well virtual bounds can be finnicky and instead of trusting event staff to always get it right this fixes it
 /obj/structure/stairs/proc/get_target_loc(dirmove)
 	var/turf/newtarg
+	var/turf/offset_turf = get_step(src, dirmove)
 	if(dirmove == dir)
 		// the optimization macro here is beacuse this can be called in pathfinding
 		// and therefore can be quite expensive
-		newtarg = GET_TURF_ABOVE_DIAGONAL(get_turf(src), UP|dirmove)
+		newtarg = GET_TURF_ABOVE(offset_turf)
+		if(!newtarg)
+			newtarg = GET_TURF_ABOVE_DIAGONAL(get_turf(src), UP|dirmove)
 	else if(dirmove == REVERSE_DIR(dir))
-		newtarg = GET_TURF_BELOW_DIAGONAL(get_turf(src), DOWN|dirmove)
+		newtarg = GET_TURF_BELOW(offset_turf)
+		if(!newtarg)
+			newtarg = GET_TURF_BELOW_DIAGONAL(get_turf(src), DOWN|dirmove)
 	if(!newtarg)
 		return // nowhere to move to???
 	for(var/obj/structure/stairs/partner in newtarg)

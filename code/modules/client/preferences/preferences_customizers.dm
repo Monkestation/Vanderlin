@@ -6,7 +6,7 @@
 	/// Check if we have any customizer entries that don't match.
 	for(var/datum/customizer_entry/entry as anything in customizer_entries)
 		var/validated = FALSE
-		for(var/customizer_type as anything in customizers)
+		for(var/customizer_type in customizers)
 			if(customizer_type != entry.customizer_type)
 				continue
 			var/datum/customizer/customizer = CUSTOMIZER(customizer_type)
@@ -22,7 +22,7 @@
 			customizer_entries -= entry
 
 	/// Check if we have any missing customizer entries
-	for(var/customizer_type as anything in customizers)
+	for(var/customizer_type in customizers)
 		var/found = FALSE
 		for(var/datum/customizer_entry/entry as anything in customizer_entries)
 			if(entry.customizer_type != customizer_type)
@@ -62,10 +62,10 @@
 		var/customizer_link
 
 		if(entry.disabled)
-			customizer_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_missing'"
+			customizer_link = "href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_missing'"
 		else
 			if(customizer.allows_disabling)
-				customizer_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_missing' class='linkOn'"
+				customizer_link = "href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=toggle_missing' class='linkOn'"
 			else
 				customizer_link = ""
 
@@ -74,7 +74,7 @@
 		if(!entry.disabled)
 			var/choice_link
 			if(length(customizer.customizer_choices) > 1)
-				choice_link = "href='?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=change_choice'"
+				choice_link = "href='byond://?_src_=prefs;task=change_customizer;customizer=[customizer_type];customizer_task=change_choice'"
 			else
 				choice_link = "class='linkOff'"
 			if(length(customizer.customizer_choices) > 1)
@@ -154,7 +154,7 @@
 			for(var/choice_type in customizer.customizer_choices)
 				var/datum/customizer_choice/iter_choice = CUSTOMIZER_CHOICE(choice_type)
 				choice_list[iter_choice.name] = choice_type
-			var/chosen_input = input(user, "Choose your [lowertext(customizer.name)]:", "Character Preference")  as null|anything in choice_list
+			var/chosen_input = input(user, "Choose your [LOWER_TEXT(customizer.name)]:", "Character Preference")  as null|anything in choice_list
 			if(!chosen_input)
 				return
 			var/choice_type = choice_list[chosen_input]

@@ -133,7 +133,7 @@
 							/obj/item/natural/stone = 8,
 							/obj/item/natural/rock = 4,
 							/obj/item/grown/log/tree/stick = 8,
-							/obj/structure/closet/dirthole/closed/loot= 1,
+							/obj/structure/closet/dirthole/closed = 1,
 							/obj/item/restraints/legcuffs/beartrap/armed/camouflage=0.5)
 	allowed_areas = list(/area/outdoors/wilderness,
 							/area/outdoors/woods_safe)

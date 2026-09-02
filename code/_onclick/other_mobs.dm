@@ -33,7 +33,8 @@
 	if(SEND_SIGNAL(src, COMSIG_HUMAN_EARLY_UNARMED_ATTACK, A, proximity_flag) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
 
-	SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity_flag, modifiers)
+	if(SEND_SIGNAL(src, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, A, proximity_flag, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return TRUE
 
 	var/rmb_stam_penalty = 1
 	if(istype(rmb_intent, /datum/rmb_intent/strong) || istype(rmb_intent, /datum/rmb_intent/swift))
@@ -50,7 +51,7 @@
 		if(L.checkmiss(src))
 			return TRUE
 
-		if(!L.checkdefense(used_intent, src))
+		if(has_status_effect(/datum/status_effect/buff/empowered_strike) || !L.checkdefense(used_intent, src))
 			if(LAZYACCESS(modifiers, RIGHT_CLICK))
 				if(L.attack_hand_secondary(src, modifiers) != SECONDARY_ATTACK_CALL_NORMAL)
 					return TRUE
@@ -86,12 +87,16 @@
 
 	A.attack_hand(src, modifiers)
 
-/mob/living/attack_hand_secondary(mob/user, list/modifiers)
+/mob/living/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+	if(.)
 		return
 
-	user.changeNext_move(CLICK_CD_MELEE)
+	if(user.cmode || !istype(user.rmb_intent, /datum/rmb_intent/weak))
+		return
+
+	if(user.perform_surgery(src, IMPLEMENT_HAND, LAZYACCESS(modifiers, RIGHT_CLICK)))
+		return TRUE
 
 /mob/living/carbon/human/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -99,24 +104,56 @@
 		return
 
 	if(user.cmode)
+		return SECONDARY_ATTACK_CALL_NORMAL // Punch
+
+	if(!ishuman(user) || user == src)
 		return
 
-	if(ishuman(user) && user != src)
-		. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-		if(length(user.return_apprentices()) >= user.return_max_apprentices())
+	if(istype(user.rmb_intent, /datum/rmb_intent/weak))
+		var/zones = list(
+			BODY_ZONE_PRECISE_NECK,
+			BODY_ZONE_L_ARM,
+			BODY_ZONE_R_ARM,
+			BODY_ZONE_PRECISE_L_HAND,
+			BODY_ZONE_PRECISE_R_HAND,
+		)
+		if(user.zone_selected in zones)
+			check_pulse(user)
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ..()
+
+	if(!mind)
+		return
+
+	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	if(length(user.return_apprentices()) >= user.return_max_apprentices())
+		to_chat(user, span_notice("I have too many apprentices."))
+		return
+
+	if(is_apprentice())
+		to_chat(user, span_notice("[p_they(TRUE)] are under the tutelage of someone else."))
+		return
+
+	var/datum/job/my_job = mind?.assigned_role
+	if(istype(my_job))
+		if(!my_job.can_be_apprentice)
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
-		if(is_apprentice())
+
+		if(my_job.parent_job && !my_job.parent_job.can_be_apprentice)
+			to_chat(user, span_notice("[p_they(TRUE)] cannot be tutored."))
 			return
-		var/datum/job/my_job = mind?.assigned_role
-		if(!(my_job?.can_be_apprentice || my_job?.parent_job?.can_be_apprentice))
-			return
-		var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
-		if(choice != CHOICE_CONFIRM)
-			return
-		if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
-			return
-		to_chat(user, span_notice("You offer apprenticeship to [src]."))
-		user.make_apprentice(src)
+
+	var/choice = tgui_alert(user, "Offer [src] apprenticeship?", "NOC'S WISDOM", DEFAULT_INPUT_CONFIRMATIONS, timeout = 10 SECONDS)
+	if(choice != CHOICE_CONFIRM)
+		return
+
+	if(QDELETED(user) || QDELETED(src) || !Adjacent(user))
+		return
+
+	to_chat(user, span_notice("I offer apprenticeship to [src]."))
+	user.make_apprentice(src)
 
 /atom/proc/onkick(mob/user)
 	return
@@ -136,7 +173,8 @@
 /// Returns true to cancel further attacks doesn't call
 /atom/proc/onbite(mob/living/user)
 	. = FALSE
-	if(!istype(user))
+	var/sig_return = SEND_SIGNAL(src, COMSIG_ATOM_BITTEN, user)
+	if(sig_return || !istype(user))
 		return TRUE
 
 /mob/living/onbite(mob/living/user)
@@ -192,7 +230,7 @@
 		var/used_limb = src.find_used_grab_limb(user, accurate = TRUE)
 		B.name = "[src]'s [parse_zone(used_limb)]"
 		var/obj/item/bodypart/BP = get_bodypart(check_zone(used_limb))
-		BP.grabbedby += B
+		LAZYADD(BP.grabbedby, B)
 		B.grabbed = src
 		B.grabbee = user // don't use set_grabber() since bites aren't actually pulls
 		B.limb_grabbed = BP
@@ -225,7 +263,7 @@
 				open_wound.werewolf_infect_attempt()
 				if(prob(30))
 					H.werewolf_feed(src)
-		if(user.mind.has_antag_datum(/datum/antagonist/zombie) && !src.mind.has_antag_datum(/datum/antagonist/zombie))
+		if(IS_DEADITE(user) && !IS_DEADITE(src))
 			INVOKE_ASYNC(src, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
 
 
@@ -342,9 +380,9 @@
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND_SECONDARY, user, modifiers) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	if(user.cmode)
-		if(user.rmb_intent?.special_attack(user, src))
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(user.cmode && user.rmb_intent?.special_attack(user, src))
+		user.changeNext_move(CLICK_CD_MELEE)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 	return SECONDARY_ATTACK_CALL_NORMAL
 
@@ -394,8 +432,7 @@
 		return ui_interact(user)
 	return FALSE
 
-
-/mob/living/carbon/human/RangedAttack(atom/A, list/modifiers)
+/mob/living/carbon/human/ranged_attack(atom/A, list/modifiers)
 	. = ..()
 	if(gloves)
 		var/obj/item/clothing/gloves/G = gloves
@@ -415,97 +452,136 @@
 		return
 	if(A == src)
 		return
-	if(ishuman(A))
-		var/mob/living/carbon/human/thief = src
-		var/mob/living/carbon/human/victim = A
-		var/thiefskill = GET_MOB_SKILL_VALUE_OLD(thief, /datum/attribute/skill/misc/stealing) + (has_world_trait(/datum/world_trait/matthios_fingers) ? (is_ascendant(MATTHIOS) ? 2 : 1) : 0)
-		var/thief_skill_base = GET_MOB_SKILL_VALUE_OLD(thief, /datum/attribute/skill/misc/stealing)
-		if(thiefskill <= 0)
-			thiefskill = 1
-		if(thief.rogue_sneaking)
-			thiefskill += 1
-		var/stealroll = roll("[floor(thiefskill)]d6")
-		var/target_perception = GET_MOB_ATTRIBUTE_VALUE(victim, STAT_PERCEPTION)
-		var/target_skill = GET_MOB_SKILL_VALUE_OLD(victim, /datum/attribute/skill/misc/stealing)
-		var/exp_to_gain = GET_MOB_ATTRIBUTE_VALUE(thief, STAT_INTELLIGENCE) * 1.5
-		var/list/stealablezones = list(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)
-		var/list/stealpos = list()
-		if(client?.prefs.showrolls)
-			to_chat(thief, span_info("Your stealing skill roll of [thiefskill]d6 is [stealroll]..."))
-		if(stealroll >= target_perception)
-			if(thief.get_active_held_item())
-				to_chat(thief, span_warning("I can't pickpocket while my hand is full!"))
-				return
-			if(!(zone_selected in stealablezones))
-				to_chat(thief, span_warning("What am I going to steal from there?"))
-				return
-			//2.5 seconds for those without skill
-			//better skill shortens time, up to one second with legendary
-			if(do_after(thief, (2.5 - (thief_skill_base * 0.25)) SECONDS, victim, progress = FALSE))
-				switch(thief.zone_selected)
-					if(BODY_ZONE_CHEST)
-						if (victim.get_item_by_slot(ITEM_SLOT_BACK_L))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BACK_L))
-						if (victim.get_item_by_slot(ITEM_SLOT_BACK_R))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BACK_R))
-					if(BODY_ZONE_L_ARM)
-						if (victim.get_item_by_slot(ITEM_SLOT_BACK_L))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BACK_L))
-					if(BODY_ZONE_R_ARM)
-						if (victim.get_item_by_slot(ITEM_SLOT_BACK_R))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BACK_R))
-					if(BODY_ZONE_PRECISE_NECK)
-						if (victim.get_item_by_slot(ITEM_SLOT_NECK))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_NECK))
-					if(BODY_ZONE_PRECISE_GROIN)
-						if (victim.get_item_by_slot(ITEM_SLOT_BELT_R))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BELT_R))
-						if (victim.get_item_by_slot(ITEM_SLOT_BELT_L))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BELT_L))
-					if(BODY_ZONE_L_ARM)
-						if (victim.get_item_by_slot(ITEM_SLOT_BELT_L))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BELT_L))
-					if(BODY_ZONE_R_ARM)
-						if (victim.get_item_by_slot(ITEM_SLOT_BELT_R))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BELT_R))
-					if(BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)
-						if (victim.get_item_by_slot(ITEM_SLOT_RING))
-							stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_RING))
-				if(length(stealpos) > 0)
-					var/obj/item/picked = pick(stealpos)
-					if(HAS_TRAIT(picked, TRAIT_HARD_TO_STEAL))
-						to_chat(thief, span_danger("[picked] is strapped on tight, I can't steal it!"))
-						return
+	if(!ishuman(A))
+		return
+	var/mob/living/carbon/human/victim = A
+	var/mob/living/carbon/human/thief = src
+	if(thief.get_active_held_item())
+		to_chat(thief, span_warning("I can't pickpocket while my hand is full!"))
+		return
 
-					victim.dropItemToGround(picked)
-					put_in_active_hand(picked)
-					to_chat(thief, span_green("I stole [picked]!"))
-					log_combat(thief, victim, "stole [picked] from ")
-					exp_to_gain += thief.get_learning_boon(/datum/attribute/skill/misc/stealing) * 5
-					if(victim.client && victim.stat != DEAD)
-						SEND_SIGNAL(thief, COMSIG_ITEM_STOLEN, victim)
-						record_featured_stat(FEATURED_STATS_THIEVES, thief)
-						record_featured_stat(FEATURED_STATS_CRIMINALS, thief)
-						record_round_statistic(STATS_ITEMS_PICKPOCKETED)
-						SEND_SIGNAL(src, COMSIG_PICKPOCKET_SUCCESS)
-					if(has_quirk(/datum/quirk/vice/kleptomaniac))
-						sate_addiction(/datum/quirk/vice/kleptomaniac)
-				else
-					exp_to_gain /= 2
-					to_chat(thief, span_warning("I didn't find anything there. Perhaps I should look elsewhere."))
-					log_combat(thief, victim, "tried to steal from ")
-			else
-				to_chat(thief, span_warning("I fumbled it!"))
-				log_combat(thief, victim, "tried to steal from ")
-		if(thief_skill_base <= target_skill)
-			to_chat(victim, span_danger("Someone tried pickpocketing me!"))
-			if(thief_skill_base >= 3)
-				to_chat(thief, span_danger("[victim] probably realized I tried pickpocketing them!"))
-		if(stealroll < target_perception)
-			exp_to_gain /= 2
-			to_chat(thief, span_danger("I failed to pick the pocket!"))
-		thief.adjust_experience(/datum/attribute/skill/misc/stealing, exp_to_gain, FALSE)
-		changeNext_move(mmb_intent.clickcd)
+	var/list/stealablezones = list(BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)
+	if(!(zone_selected in stealablezones))
+		to_chat(thief, span_warning("What am I going to steal from there?"))
+		return
+
+	var/thief_skill_base = GET_MOB_SKILL_VALUE_OLD(thief, /datum/attribute/skill/misc/stealing)
+	var/thief_skill_modified = thief_skill_base + (has_world_trait(/datum/world_trait/matthios_fingers) ? (is_ascendant(MATTHIOS) ? 2 : 1) : 0)
+	if(thief_skill_modified <= 0)
+		thief_skill_modified = 1
+	if(thief.rogue_sneaking)
+		thief_skill_modified += 1
+
+	if(HAS_TRAIT(victim, TRAIT_THIEFSENSE) && !victim.stat)
+		to_chat(thief, span_warning("[victim] is too aware of their belongings, I can't steal from them while they're awake!"))
+		return handle_steal_end(victim, 0, thief_skill_base, thief_skill_modified, TRUE)
+
+	var/stealroll = roll("[floor(thief_skill_modified)]d6")
+	var/target_perception = GET_MOB_ATTRIBUTE_VALUE(victim, STAT_PERCEPTION)
+	var/exp_to_gain = GET_MOB_ATTRIBUTE_VALUE(thief, STAT_INTELLIGENCE) * 1.5
+
+	if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
+		to_chat(thief, span_info("Your stealing skill roll of [thief_skill_modified]d6 is [stealroll]..."))
+
+	if(stealroll < target_perception)
+		exp_to_gain /= 2
+		to_chat(thief, span_danger("I failed to pick the pocket!")) //Critical fail, target knows you tried.
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified, TRUE)
+
+	//2.5 seconds for those without skill
+	//better skill shortens time, up to one second with legendary
+	if(!do_after(thief, (2.5 - (thief_skill_base * 0.25)) SECONDS, victim, progress = FALSE))
+		exp_to_gain /= 2
+		to_chat(thief, span_warning("I fumbled it!"))
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
+
+	var/list/stealpos = list()
+	switch(thief.zone_selected)
+		if(BODY_ZONE_CHEST)
+			if (victim.get_item_by_slot(ITEM_SLOT_BACK_L))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BACK_L))
+			if (victim.get_item_by_slot(ITEM_SLOT_BACK_R))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BACK_R))
+		if(BODY_ZONE_L_ARM)
+			if (victim.get_item_by_slot(ITEM_SLOT_BACK_L))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BACK_L))
+		if(BODY_ZONE_R_ARM)
+			if (victim.get_item_by_slot(ITEM_SLOT_BACK_R))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BACK_R))
+		if(BODY_ZONE_PRECISE_NECK)
+			if (victim.get_item_by_slot(ITEM_SLOT_NECK))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_NECK))
+		if(BODY_ZONE_PRECISE_GROIN)
+			if (victim.get_item_by_slot(ITEM_SLOT_BELT_R))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BELT_R))
+			if (victim.get_item_by_slot(ITEM_SLOT_BELT_L))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BELT_L))
+		if(BODY_ZONE_L_LEG)
+			if (victim.get_item_by_slot(ITEM_SLOT_BELT_L))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BELT_L))
+		if(BODY_ZONE_R_LEG)
+			if (victim.get_item_by_slot(ITEM_SLOT_BELT_R))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_BELT_R))
+		if(BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND)
+			if (victim.get_item_by_slot(ITEM_SLOT_RING))
+				stealpos.Add(victim.get_item_by_slot(ITEM_SLOT_RING))
+
+	if(!length(stealpos))
+		exp_to_gain /= 2
+		to_chat(thief, span_warning("I didn't find anything there. Perhaps I should look elsewhere."))
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
+
+	var/obj/item/picked = pick(stealpos)
+	var/final_difficulty = picked.pickpocket_difficulty
+	if(thief.zone_selected == BODY_ZONE_PRECISE_NECK)
+		final_difficulty = max(final_difficulty + 1, SKILL_RANK_LEGENDARY)
+
+	if(HAS_TRAIT(picked, TRAIT_CANT_BE_STOLEN))
+		exp_to_gain /= 2
+		to_chat(thief, span_danger("[picked] is strapped on tight, I can't steal it!"))
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
+	if(picked.has_enchantment(/datum/enchantment/anti_theft))
+		exp_to_gain /= 2
+		to_chat(thief, span_danger("[picked] is enchanted to prevent theft, I can't steal it!"))
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
+	if(thief_skill_base < final_difficulty)
+		to_chat(thief, span_danger("I am not skilled enough to steal something like [picked]!"))
+		return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified)
+
+	// Success!
+	return handle_steal_end(victim, exp_to_gain, thief_skill_base, thief_skill_modified, stolen_item = picked)
+
+/mob/living/proc/handle_steal_end(mob/living/carbon/human/victim, exp_to_gain, thief_skill, thief_mod_skill, force_notice = FALSE, obj/item/stolen_item)
+	var/final_exp_to_gain = exp_to_gain
+	var/thief_vs_perception = thief_mod_skill * 2
+	var/victim_skill = GET_MOB_SKILL_VALUE_OLD(victim, /datum/attribute/skill/misc/stealing)
+	var/victim_perception = GET_MOB_ATTRIBUTE_VALUE(victim, STAT_PERCEPTION)
+
+	if(stolen_item)
+		victim.dropItemToGround(stolen_item)
+		put_in_active_hand(stolen_item)
+		to_chat(src, span_green("I stole [stolen_item]!"))
+		log_combat(src, victim, "stole [stolen_item] from ")
+		final_exp_to_gain += get_learning_boon(/datum/attribute/skill/misc/stealing) * 5
+		if(victim.client && victim.stat != DEAD)
+			SEND_SIGNAL(src, COMSIG_ITEM_STOLEN, victim)
+			record_featured_stat(FEATURED_STATS_THIEVES, src)
+			record_featured_stat(FEATURED_STATS_CRIMINALS, src)
+			record_round_statistic(STATS_ITEMS_PICKPOCKETED)
+			SEND_SIGNAL(src, COMSIG_PICKPOCKET_SUCCESS)
+		if(has_quirk(/datum/quirk/vice/addiction/kleptomaniac))
+			sate_addiction(/datum/quirk/vice/addiction/kleptomaniac)
+	else
+		log_combat(src, victim, "tried to steal from ")
+
+	if(force_notice || (thief_skill <= victim_skill) || (thief_vs_perception <= victim_perception))
+		to_chat(victim, span_danger("Someone tried pickpocketing me!"))
+		if(thief_skill >= 3)
+			to_chat(src, span_danger("[victim] probably realized I tried pickpocketing them!"))
+
+	adjust_experience(/datum/attribute/skill/misc/stealing, final_exp_to_gain, FALSE)
+	changeNext_move(mmb_intent.clickcd)
+	return TRUE
 
 /mob/living/proc/jump_action(atom/A)
 	if(HAS_TRAIT(src, TRAIT_IMMERSED))
@@ -560,12 +636,12 @@
 	else
 		emote("jump", forced = TRUE)
 		OffBalance(1 SECONDS)
-		jadded = 20
+		jadded = 25
 		jrange = 2
 
 	if(ishuman(src))
 		var/mob/living/carbon/human/H = src
-		jadded += H.getPainLoss() / 50
+		jadded += H.getShockStage() / 50
 		if(H.encumbrance >= ENCUMBRANCE_HEAVY)
 			jadded += 50
 			jrange = 1
@@ -576,52 +652,56 @@
 #define FLIP_DIRECTION_CLOCKWISE 1
 #define FLIP_DIRECTION_ANTICLOCKWISE 0
 
-/mob/living/proc/jump_action_resolve(atom/A, jadded, jrange, jextra)
-	var/do_a_flip
+/**
+ * Jump resolve
+ * Args
+ * * target - target atom we are jumping towards
+ * * stamina_cost - amount of stamina we need / we take when we jump
+ * * range - amount of tiles to throw
+ * * extra_tile - when the jump has ended, throw another tile
+ */
+/mob/living/proc/jump_action_resolve(atom/target, stamina_cost, range, extra_tile)
+	var/do_a_flip = FALSE
 	var/flip_direction = FLIP_DIRECTION_CLOCKWISE
 	var/prev_pixel_z = pixel_z
 	var/prev_transform = transform
-	if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 4 || HAS_TRAIT(src, TRAIT_FLIP_JUMP))
+
+	if(HAS_TRAIT(src, TRAIT_FLIP_JUMP) || GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 4)
 		do_a_flip = TRUE
 		if((dir & SOUTH) || (dir & WEST))
 			flip_direction = FLIP_DIRECTION_ANTICLOCKWISE
 
-	// ensures the floating animation doesn't mess with our animation
-	if(movement_type & (MOVETYPES_FLOATING_ANIMATION))
-		ADD_TRAIT(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT)
-		addtimer(TRAIT_CALLBACK_REMOVE(src, TRAIT_NO_FLOATING_ANIM, UPDATE_TRANSFORM_TRAIT), 0.3 SECONDS, TIMER_UNIQUE|TIMER_OVERRIDE)
-
-	if(adjust_stamina(min(jadded,100)))
-		if(do_a_flip)
-			var/flip_angle = flip_direction ? 120 : -120
-			animate(src, pixel_z = pixel_z + 6, transform = turn(transform, flip_angle), time = 1)
-			animate(transform = turn(transform, flip_angle), time=1)
-			animate(pixel_z = prev_pixel_z, transform = turn(transform, flip_angle), time=1)
-			animate(transform = prev_transform, time = 0)
-		else
-			animate(src, pixel_z = pixel_z + 6, time = 1)
-			animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time=2)
-			animate(transform = prev_transform, time = 0)
-
-		if(jextra)
-			throw_at(A, jrange, 1, src, spin = FALSE)
-			while(src.throwing)
-				sleep(1)
-			throw_at(get_step(src, src.dir), 1, 1, src, spin = FALSE)
-		else
-			throw_at(A, jrange, 1, src, spin = FALSE)
-			while(src.throwing)
-				sleep(1)
-		if(isopenturf(src.loc))
-			var/turf/open/T = src.loc
-			if(T.landsound)
-				playsound(T, T.landsound, 100, FALSE)
-			T.Entered(src)
-	else
-		animate(src, pixel_z = pixel_z + 6, time = 1)
-		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time=2)
+	if(!adjust_stamina(min(stamina_cost, 100)))
+		animate(src, pixel_z = pixel_z + 6, time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time = 0.2 SECONDS)
 		animate(transform = prev_transform, time = 0)
-		throw_at(A, 1, 1, src, spin = FALSE)
+		throw_at(target, 1, 1, spin = FALSE)
+		return
+
+	if(do_a_flip)
+		var/flip_angle = flip_direction ? 120 : -120
+		animate(src, pixel_z = pixel_z + 6, transform = turn(transform, flip_angle), time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+		animate(transform = turn(transform, flip_angle), time = 0.1 SECONDS)
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, flip_angle), time = 0.1 SECONDS)
+		animate(transform = prev_transform, time = 0)
+	else
+		animate(src, pixel_z = pixel_z + 6, time = 0.1 SECONDS, flags = ANIMATION_PARALLEL)
+		animate(pixel_z = prev_pixel_z, transform = turn(transform, pick(-12, 0, 12)), time = 0.2 SECONDS)
+		animate(transform = prev_transform, time = 0)
+
+	throw_at(target, range, 1, spin = FALSE, callback = CALLBACK(src, PROC_REF(jump_ended), extra_tile))
+
+/mob/living/proc/jump_ended(extra_tile)
+	if(QDELETED(src) || isopenspace(loc))
+		return
+
+	if(isopenturf(loc))
+		var/turf/open/open_turf = loc
+		if(open_turf.landsound)
+			playsound(open_turf, open_turf.landsound, 100, FALSE)
+
+	if(extra_tile)
+		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, throw_at), get_step(src, dir), 1, 1, null, FALSE), 0.1 SECONDS)
 
 #undef FLIP_DIRECTION_CLOCKWISE
 #undef FLIP_DIRECTION_ANTICLOCKWISE
@@ -651,35 +731,6 @@
 
 /atom/proc/attack_animal(mob/user)
 	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_ANIMAL, user)
-
-/*
-	Monkeys
-*/
-/mob/living/carbon/monkey/UnarmedAttack(atom/A, proximity_flag, list/modifiers, atom/source)
-	if(HAS_TRAIT(src, TRAIT_HANDS_BLOCKED))
-		if(a_intent != INTENT_HARM || is_muzzled())
-			return
-		if(!iscarbon(A))
-			return
-		var/mob/living/carbon/victim = A
-		var/obj/item/bodypart/affecting = null
-		if(ishuman(victim))
-			var/mob/living/carbon/human/human_victim = victim
-			affecting = human_victim.get_bodypart(pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG))
-		var/armor = victim.run_armor_check(affecting, "melee")
-		if(prob(25))
-			victim.visible_message("<span class='danger'>[src]'s bite misses [victim]!</span>",
-				"<span class='danger'>You avoid [src]'s bite!</span>", "<span class='hear'>You hear jaws snapping shut!</span>", COMBAT_MESSAGE_RANGE, src)
-			to_chat(src, "<span class='danger'>Your bite misses [victim]!</span>")
-			return
-		victim.apply_damage(rand(1, 3), BRUTE, affecting, armor)
-		victim.visible_message("<span class='danger'>[name] bites [victim]!</span>",
-			"<span class='userdanger'>[name] bites you!</span>", "<span class='hear'>You hear a chomp!</span>", COMBAT_MESSAGE_RANGE, name)
-		to_chat(name, "<span class='danger'>You bite [victim]!</span>")
-		if(armor >= 2)
-			return
-		return
-	A.attack_paw(src)
 
 /atom/proc/attack_paw(mob/user)
 	if(SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_PAW, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
