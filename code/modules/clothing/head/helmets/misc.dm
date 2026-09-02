@@ -10,7 +10,7 @@
 
 /obj/item/clothing/head/helmet/nasal/iron
 	name = "iron nasal helmet"
-	desc = "A iron nasal helmet, usually worn by the guards of any somewhat respectable fief."
+	desc = "An iron nasal helmet, usually worn by the guards of any somewhat respectable fief."
 	icon_state = "ironnasal"
 	sellprice = VALUE_CHEAP_IRON_HELMET
 	smeltresult = /obj/item/ingot/iron
