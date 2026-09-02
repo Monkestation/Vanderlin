@@ -706,6 +706,11 @@
 	created_item = /obj/item/clothing/head/helmet/kettle
 	output_amount = 2
 
+/datum/anvil_recipe/armor/steel/helmetmorion
+	name = "x2 Morion"
+	created_item = /obj/item/clothing/head/helmet/morion
+	output_amount = 2
+
 /datum/anvil_recipe/armor/steel/helmetslitkettle
 	name = "Slitted Kettle Helmet"
 	created_item = /obj/item/clothing/head/helmet/kettle/slit
