@@ -9,7 +9,7 @@
 	item_weight = 2.3 KILOGRAMS
 
 /obj/item/clothing/head/helmet/nasal/iron
-	name = "nasal helmet"
+	name = "iron nasal helmet"
 	desc = "A iron nasal helmet, usually worn by the guards of any somewhat respectable fief."
 	icon_state = "ironnasal"
 	sellprice = VALUE_CHEAP_IRON_HELMET
