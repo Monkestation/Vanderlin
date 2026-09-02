@@ -158,7 +158,7 @@
 
 /area/indoors/mountains/anvil/vault
 	name = "malum's anvil upper dwarven keep vault"
-	icon_state = "upperkeepvaultmalum"
+	icon_state = "vaultmalum"
 	first_time_text = "MALUM'S VAULT"
 	background_track = 'sound/music/area/indoor.ogg'
 	background_track_dusk = null
