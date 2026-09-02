@@ -59,6 +59,7 @@
 #define FACTION_QUEST "Quest"
 
 #define FACTION_TOWN "Town"
+#define SUB_FACTION_KEEP "Keep"
 #define FACTION_FOREIGNERS "Foreigners"
 #define FACTION_MIGRANTS "Migrants"
 #define FACTION_UNDEAD "Undead"

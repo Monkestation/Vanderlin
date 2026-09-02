@@ -1,0 +1,5 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added Curse Guard enchantment which protects Vampires from silver. Only applies to gloves and when silver objects are held in hands."
+  - rscadd: "Silver is now a looping effect. After the initial application from picking it up or wearing it, it will begin to pulse damage every 15 seconds until you take it off/drop it. This is to stop vampires and other affect entities being able to endure the initial damage and then keep wearing silver."
