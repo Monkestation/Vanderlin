@@ -11427,8 +11427,7 @@
 /turf/open/floor/grass,
 /area/outdoors/exposed/church)
 "eME" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady";
+/obj/structure/fluff/statue/necra{
 	pixel_x = 15;
 	pixel_y = 9
 	},
@@ -21539,9 +21538,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/basin)
 "jbP" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church/graveyard)
 "jbQ" = (
@@ -24813,9 +24810,7 @@
 /area/under/town/basement)
 "kre" = (
 /obj/structure/flora/grass,
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/grass/yel,
 /area/outdoors/exposed/church/graveyard)
 "kri" = (
@@ -37890,8 +37885,7 @@
 /turf/closed/wall/mineral/pipe,
 /area/indoors/town/smithy)
 "pKQ" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady";
+/obj/structure/fluff/statue/necra{
 	pixel_x = 14;
 	pixel_y = 19
 	},
@@ -48368,9 +48362,7 @@
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/keep/magician)
 "tSh" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/church/graveyard)
 "tSi" = (
