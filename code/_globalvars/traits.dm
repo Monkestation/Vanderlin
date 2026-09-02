@@ -210,6 +210,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Graceless" = TRAIT_UNPARRYING,
 		"Agent of the Court" = TRAIT_COURTAGENT,
 		"Know Gallowband Secrets" = TRAIT_GALLOWBAND_SECRETS,
+		"Member of Gallowband" = TRAIT_GALLOWBAND,
 		"Virgin" = TRAIT_VIRGIN,
 		"Gatekeeper" = TRAIT_GATEKEEPER,
 		"Member of the Lunar Order" = TRAIT_LUNAR_ORDER,
