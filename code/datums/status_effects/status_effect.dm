@@ -79,20 +79,22 @@
 			A?.attached_effect = src //so the alert can reference us, if it needs to
 			linked_alert = A //so we can reference the alert, if we need to
 
-	if(duration != STATUS_EFFECT_PERMANENT || tick_interval != STATUS_EFFECT_NO_TICK) //don't process if we don't care
-		switch(processing_speed)
-			if(STATUS_EFFECT_FAST_PROCESS)
-				if(tick_interval == STATUS_EFFECT_NO_TICK)
-					START_PROCESSING(SSprocessing, src)
-				else
-					START_PROCESSING(SSfastprocess, src)
-			if(STATUS_EFFECT_NORMAL_PROCESS)
-				START_PROCESSING(SSprocessing, src)
+	if((duration == STATUS_EFFECT_PERMANENT) && (tick_interval == STATUS_EFFECT_NO_TICK)) //don't process if we don't care
+		return TRUE
 
+	switch(processing_speed)
+		if(STATUS_EFFECT_FAST_PROCESS)
+			if(tick_interval == STATUS_EFFECT_NO_TICK)
+				START_PROCESSING(SSprocessing, src)
+			else
+				START_PROCESSING(SSfastprocess, src)
+		if(STATUS_EFFECT_NORMAL_PROCESS)
+			START_PROCESSING(SSprocessing, src)
 	return TRUE
 
 /datum/status_effect/Destroy()
 	STOP_PROCESSING(SSfastprocess, src)
+	STOP_PROCESSING(SSprocessing, src)
 	if(owner)
 		linked_alert = null
 		owner.clear_alert(id)
@@ -112,17 +114,17 @@
 		qdel(src)
 		return
 
-	if (duration != STATUS_EFFECT_PERMANENT)
+	if(duration != STATUS_EFFECT_PERMANENT)
 		duration = max(0, duration - (seconds_per_tick SECONDS)) // doing it first means its more up to date for ticks to read
 
-	if (tick_interval != STATUS_EFFECT_NO_TICK)
+	if(tick_interval != STATUS_EFFECT_NO_TICK)
 		time_until_next_tick = max(0, time_until_next_tick - (seconds_per_tick SECONDS)) // same here
 
-	if(tick_interval == STATUS_EFFECT_AUTO_TICK)
-		tick(seconds_per_tick)
-	else if(tick_interval != STATUS_EFFECT_NO_TICK && time_until_next_tick <= 0)
-		time_until_next_tick = tick_interval // same here as well
-		tick(tick_interval * 0.1)
+		if(tick_interval == STATUS_EFFECT_AUTO_TICK)
+			tick(seconds_per_tick)
+		else if(time_until_next_tick <= 0)
+			time_until_next_tick = tick_interval // same here as well
+			tick(tick_interval * 0.1)
 
 	if(QDELING(src))
 		return // tick deleted us, no need to continue
