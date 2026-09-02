@@ -220,49 +220,57 @@
 		var/hit_zone = user.zone_selected
 		apply_generic_weapon_damage(user, parent, victim, parent.force * 1.3, BLUNT, hit_zone, BCLASS_BLUNT)
 		user.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)
-	..()
 
 #define GREAT_OUTER_DELAY 0.7 SECONDS
 
 /datum/special_intent/polearm_backstep
-	name = "Backstep"
+	name = "Polearm Backstep"
 	desc = "A defensive used to quickly gain distance, shoving back any pursuer backwards, slowing and exposing them. Always targets the chest."
 	tile_coordinates = list(
 		list(0,-1), list(1,-1), list(-1,-1)
 		)
 	post_icon_state = "sweep_fx"
 	pre_icon_state = "fx_trap_long"
-	sfx_post_delay = 'sound/combat/rend_hit.ogg'
-	sfx_pre_delay = 'sound/combat/polearm_woosh.ogg'
+	post_sound = 'sound/combat/rend_hit.ogg'
+	pre_sound = 'sound/combat/polearm_woosh.ogg'
 	respect_adjacency = FALSE
 	respect_dir = TRUE
-	delay = 0.5 SECONDS
+	attack_delay = 0.5 SECONDS
 	cooldown = 15 SECONDS
-	stamcost = 15	//Stamina cost
-	var/dam = 30
-	var/slow_dur = 5
+	stamina_cost = 15	//Stamina cost
 	var/min_dist = 3
-	var/backstep_dist = 1
-	var/push_dist = 1
-	var/pushdir
+	var/push_dir
 
-/datum/special_intent/polearm_backstep/process_attack()
+/datum/special_intent/polearm_backstep/after_creation(mob/living/user, obj/item/parent, list/turfs)
 	. = ..()
-	var/throwtarget = get_edge_target_turf(howner, get_dir(howner, get_step_away(howner, get_step(get_turf(howner), howner.dir))))
-	pushdir = howner.dir
-	howner.safe_throw_at(throwtarget, backstep_dist, 1, howner, force = MOVE_FORCE_EXTREMELY_STRONG)
 
-/datum/special_intent/polearm_backstep/apply_hit(turf/T)
-	. = ..()
-	if(get_dist(howner, T) <= min_dist)
-		for(var/mob/living/L in get_hearers_in_view(0, T))
-			if(L != howner)
+	var/turf/throw_target = get_edge_target_turf(user, get_dir(user, get_step_away(user, get_step(get_turf(user), user.dir))))
+	push_dir = user.dir
+	user.safe_throw_at(throw_target, 1, 1, user, force = MOVE_FORCE_EXTREMELY_STRONG)
 
-				L.Slowdown(slow_dur)
-				var/throwtarget = get_edge_target_turf(howner, pushdir)
-				apply_generic_weapon_damage(L, dam, "blunt", BODY_ZONE_CHEST, bclass = BCLASS_BLUNT, no_pen = TRUE)
-				L.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)
-				L.safe_throw_at(throwtarget, push_dist, 1, howner, force = MOVE_FORCE_EXTREMELY_STRONG)
+	if(user.z != starting_loc.z)
+		return FALSE // we got thrown off a cliff or something
+
+	if(user.body_position != STANDING_UP)
+		return FALSE // we got thrown at a wall and fell over :(
+
+/datum/special_intent/polearm_backstep/apply_hit(mob/living/user, obj/item/parent, turf/target)
+	if(get_dist(user, target) > min_dist)
+		return
+
+	for(var/mob/living/victim in target)
+		if(victim == user)
+			continue
+		if(victim.body_position == LYING_DOWN)
+			continue
+
+		victim.Slowdown(5)
+
+		var/turf/throw_target = get_edge_target_turf(user, push_dir)
+		victim.safe_throw_at(throw_target, 1, 1, user, force = MOVE_FORCE_EXTREMELY_STRONG)
+		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 4.5 SECONDS)
+
+		apply_generic_weapon_damage(user, parent, victim, parent.force, BLUNT, BODY_ZONE_CHEST, BCLASS_BLUNT)
 
 /datum/special_intent/greatsword_swing
 	name = "Great Swing"
