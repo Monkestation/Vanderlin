@@ -48,7 +48,7 @@ SUBSYSTEM_DEF(crediticons)
 	GLOB.credits_icons[thename] = list()
 	var/icon/rendered_icon = get_flat_human_icon(null, job, preferences, DUMMY_HUMAN_SLOT_MANIFEST, list(SOUTH))
 	if(rendered_icon)
-		var/icon/female_s = icon("icon"='icons/mob/clothing/under/masking_helpers.dmi', "icon_state"="credits")
+		var/icon/female_s = icon("icon"='icons/mob/clothing/masking_helpers.dmi', "icon_state"="credits")
 		rendered_icon.Blend(female_s, ICON_MULTIPLY)
 		rendered_icon.Scale(96,96)
 		GLOB.credits_icons[thename]["icon"] = rendered_icon
