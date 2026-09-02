@@ -2014,3 +2014,11 @@
 	name = "honse caparison"
 	output =/obj/item/caparison/honse
 
+/datum/repeatable_crafting_recipe/sewing/repairkitcloth
+	name = "sewing kit"
+	output = /obj/item/repair_kit/cloth
+	requirements = list(
+		/obj/item/natural/cloth = 4,
+		/obj/item/natural/hide/cured = 2,
+		)
+	craftdiff = SKILL_RANK_EXPERT

@@ -1018,7 +1018,7 @@
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/ship/shipbrig)
 "gs" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/armor/leather,
 /obj/item/clothing/armor/leather,
 /obj/item/clothing/gloves/leather,
@@ -3871,7 +3871,7 @@
 /turf/open/openspace,
 /area/ship/topdeck)
 "zB" = (
-/obj/structure/closet/crate/crafted_closet/crafted{
+/obj/structure/closet/crate/crafted_closet{
 	anchored = 1
 	},
 /obj/item/natural/bundle/cloth{
@@ -3969,7 +3969,7 @@
 /turf/open/floor/carpet/lord/left,
 /area/ship/nobledeck)
 "Ac" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/armor/leather/jacket/sea{
 	pixel_y = -6
 	},
@@ -5856,7 +5856,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
 "Nk" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/natural/bundle/cloth{
 	amount = 3;
 	pixel_y = -7
