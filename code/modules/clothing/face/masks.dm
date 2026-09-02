@@ -31,12 +31,12 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/iron
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
 	block2add = FOV_BEHIND
-	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
+	slot_flags = ITEM_SLOT_MASK
 	experimental_onhip = TRUE
 	sewrepair = null
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
@@ -54,7 +54,7 @@
 	desc = "A fashionable nose chain with two rings."
 	max_integrity = 100
 	blocksound = FALSE
-	armor = FALSE
+	armor_type = /datum/armor/none
 	prevent_crits = FALSE
 	flags_inv = FALSE
 	body_parts_covered = FACE
@@ -65,6 +65,7 @@
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
 	item_weight = 65 GRAMS
+	melting_material = /datum/material/gold
 
 /obj/item/clothing/face/facemask/silvernosechain
 	name = "silver nosechain"
@@ -72,7 +73,7 @@
 	desc = "A fashionable nose chain with two rings."
 	max_integrity = 100
 	blocksound = FALSE
-	armor = FALSE
+	armor_type = /datum/armor/none
 	prevent_crits = FALSE
 	flags_inv = FALSE
 	body_parts_covered = FACE
@@ -83,6 +84,7 @@
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
 	item_weight = 45 GRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/face/facemask/silvernosechain/Initialize()
 	. = ..()
@@ -94,7 +96,7 @@
 	desc = "A veil made out of golden chains."
 	max_integrity = 100
 	blocksound = FALSE
-	armor = FALSE
+	armor_type = /datum/armor/none
 	prevent_crits = FALSE
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -105,6 +107,7 @@
 	clothing_flags = FALSE
 	sellprice = VALUE_GOLD_ITEM
 	item_weight = 1.2 KILOGRAMS
+	melting_material = /datum/material/gold
 
 /obj/item/clothing/face/facemask/silverveil
 	name = "silver face veil"
@@ -112,7 +115,7 @@
 	desc = "A veil made out of silver chains."
 	max_integrity = 100
 	blocksound = FALSE
-	armor = FALSE
+	armor_type = /datum/armor/none
 	prevent_crits = FALSE
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -123,6 +126,7 @@
 	clothing_flags = FALSE
 	sellprice = VALUE_SILVER_ITEM
 	item_weight = 1.05 KILOGRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/face/facemask/silverveil/Initialize()
 	. = ..()
@@ -136,7 +140,7 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/iron
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -157,7 +161,7 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/iron
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	flags_inv = HIDEFACE | HIDEFACIALHAIR | HIDEHAIR
 	body_parts_covered = FACE
@@ -178,7 +182,7 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/iron
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -199,7 +203,7 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/iron
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -220,7 +224,7 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/iron
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -241,7 +245,7 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/iron
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -262,7 +266,7 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/iron
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -283,7 +287,7 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 80, "slash" = 80, "stab" = 80,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/iron
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_TWIST, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_STAB)
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
@@ -328,7 +332,7 @@
 /obj/item/clothing/face/facemask/steel
 	name = "steel mask"
 	icon_state = "smask"
-	armor = list("blunt" = 100, "slash" = 100, "stab" = 100,  "piercing" = 80, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/steel
 	desc = "A knightly steel mask that both conceals and protects the face. Usually paired with a bascinet."
 	max_integrity = 300
 	smeltresult = /obj/item/ingot/steel_slag
@@ -345,12 +349,50 @@
 	icon_state = "steppemask_snout"
 	desc = "A steel mask shaped like a beast's face, worn by steppe riders to intimidate their enemies."
 
+/obj/item/clothing/face/facemask/steel/blackmeadow
+	name = "soldier's half-mask"
+	desc = "\"The first lesson of war is that it would be better to live in peace.\""
+	block2add = null
+	armor_type = /datum/armor/mask/metal // because it's only half
+	icon_state = "kazengunmouthguard"
+	item_state = "kazengunmouthguard"
+
+/obj/item/clothing/face/facemask/steel/blackmeadow/full
+	name = "ogre mask"
+	desc = "\"The second lesson: Rich men have dreams. Poor men die to make them come true.\""
+	icon_state = "kazengunfaceguard"
+	item_state = "kazengunfaceguard"
+
+/obj/item/clothing/face/facemask/steel/graggar
+	name = "vicious jawmask"
+	desc = "Shattered jaws, chipped teeth, sunken metal - fit for a skull of the same. It snarls in mimicry of the Sinistar's visage."
+	icon_state = "graggarplatemask_heavy"
+	block2add = null
+	body_parts_covered = MOUTH|NOSE
+	flags_inv = HIDEFACE
+
+/obj/item/clothing/face/facemask/bronze
+	name = "bronze mask"
+	desc = "Glimmering bronze, curved to veil its wearer's face from both judgement and harm."
+	armor_class = AC_LIGHT
+	icon_state = "bronzemask"
+	item_state = "bronzemask"
+	max_integrity = 150
+	melting_material = /datum/material/bronze
+	melt_amount = 75
+
+/obj/item/clothing/face/facemask/bronze/classic
+	name = "bronze death mask"
+	icon_state = "bronzemask_legacy"
+	item_state = "bronzemask_legacy"
+	desc = "Glimmering bronze, meticuliusly shaped to mimic the guise of another. One of civilization's oldest superstitions is the belief that donning such masks would impart a sliver of the mimicked facebearer's power unto its wearer."
+
 /obj/item/clothing/face/facemask/silver
 	name = "silver mask"
 	icon = 'icons/roguetown/clothing/special/adept.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/adept.dmi'
 	icon_state = "silvermask"
-	armor = list("blunt" = 100, "slash" = 100, "stab" = 100,  "piercing" = 85, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/silver
 	desc = "A custom-made silver penance mask, created especially for the Adepts of the Inquisitorial Lodge."
 	max_integrity = 300
 	smeltresult = /obj/item/ingot/silver
@@ -490,7 +532,7 @@
 	blocksound = PLATEHIT
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	armor = list("blunt" = 50, "slash" = 50, "stab" = 50,  "piercing" = 50, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/metal/bad
 	flags_inv = HIDEFACE
 	body_parts_covered = FACE
 	block2add = FOV_BEHIND
@@ -516,7 +558,7 @@
 	slot_flags = ITEM_SLOT_MASK
 	experimental_onhip = TRUE
 
-	armor = ARMOR_WEAK
+	armor_type = /datum/armor/weak
 	prevent_crits = CUT_AND_MINOR_CRITS
 	item_weight = 356 GRAMS
 
@@ -528,7 +570,7 @@
 	break_sound = 'sound/foley/breaksound.ogg'
 	drop_sound = 'sound/foley/dropsound/gen_drop.ogg'
 	resistance_flags = FIRE_PROOF
-	armor = list("blunt" = 10, "slash" = 40, "stab" = 40,  "piercing" = 8, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/mask/skull
 	prevent_crits = CUT_AND_MINOR_CRITS
 	prevent_crits = null
 	flags_inv = HIDEFACE
@@ -545,6 +587,7 @@
 	max_integrity = 150
 	sellprice = 100
 	smeltresult = /obj/item/ingot/gold
+	melting_material = /datum/material/gold
 	item_weight = 2.8 KILOGRAMS
 
 /obj/item/clothing/face/operavisage
@@ -562,3 +605,33 @@
 	resistance_flags = FLAMMABLE
 	item_weight = 356 GRAMS
 
+/obj/item/clothing/face/xylixmask
+	name = "jester mask"
+	item_state = "xylixmask"
+	icon_state = "xylixmask"
+	desc = "A ceramic mask, forever stuck with the joyful smile its patron god favors. While it will shatter easily from blows, its smug countenance shall taunt its foes."
+	max_integrity = 50
+	armor_type = /datum/armor/none
+	flags_inv = HIDEFACE
+	body_parts_covered = FACE
+	block2add = FOV_BEHIND
+	slot_flags = ITEM_SLOT_MASK|ITEM_SLOT_HIP
+	smeltresult = null
+	sellprice = 0
+
+/obj/item/clothing/face/xylixmask/weathered
+	name = "weathered mask"
+	item_state = "xylix_weathered"
+	icon_state = "xylix_weathered"
+	desc = "An ancient ceramic face. It looks weathered, the sort molded by Xylixian worshippers of many yils past. Even when cast aside, it feels like the hardened clay has never left your hands. As if it always finds a way back into your palms."
+	// No armor anyways
+	max_integrity = 200
+	// Not messing with jester mask, but again, it has no armor. many other masks also don't block vision.
+	block2add = FOV_DEFAULT
+
+/obj/item/clothing/face/faceveil
+	name = "simple veil"
+	icon_state = "faceveil"
+	desc = "A remarkably plain veil meant to conceal ones face... if you wore this, a gust of wind would be all it takes to reveal your identity."
+	grid_width = 32
+	grid_height = 32

@@ -1,5 +1,5 @@
 /obj/item/clothing/head/padded	// slightly armored subtype for convenience
-	armor = ARMOR_MINIMAL
+	armor_type = /datum/armor/minimal
 	prevent_crits = MINOR_CRITICALS
 	abstract_type = /obj/item/clothing/head/padded
 
@@ -49,15 +49,15 @@
 /obj/item/clothing/head/headband/colored/red
 	color = CLOTHING_BLOOD_RED
 
-/obj/item/clothing/head/headband/naledi
-	name = "sojourner's headband"
+/obj/item/clothing/head/headband/preceptor
+	name = "preceptor's headband"
 	desc = "A traditional monk's headband, for those disciples who prefer the sweat out of their eyes."
 	icon_state = "headband"
 	color = "#48443b"
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
 	dyeable = TRUE
 	resistance_flags = FIRE_PROOF
-	armor = ARMOR_HEAD_PSYDON //Higher-tier protection for pugilist-centric classes. Fits the 'glass cannon' style, and prevents instant death through a glancing headshot on the intended archetype.
+	armor_type = /datum/armor/head/headband/psydon //Higher-tier protection for pugilist-centric classes. Fits the 'glass cannon' style, and prevents instant death through a glancing headshot on the intended archetype.
 	blade_dulling = DULLING_BASHCHOP
 	body_parts_covered = HEAD|HAIR|EARS
 	max_integrity = ARMOR_INT_SIDE_STEEL //High leather-tier protection and critical resistances, steel-tier integrity. Integrity boost encourages hand-to-hand parrying. Weaker than the Psydonic Thorns.
@@ -99,7 +99,7 @@
 	desc = "A fuzzy helmet of fur typically worn by frontiersmen of the far steppes."
 	icon_state = "papakha"
 	sellprice = VALUE_FINE_CLOTHING
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	min_cold_protection_temperature = -20
 	item_weight = 155 GRAMS
 
@@ -117,7 +117,7 @@
 	slot_flags = ITEM_SLOT_HEAD
 	dynamic_hair_suffix = ""
 	max_integrity = 100
-	armor = list("blunt" = 16, "slash" = 19, "stab" = 15,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/antler
 	prevent_crits = list(BCLASS_TWIST)
 	anvilrepair = null
 	sewrepair = /datum/attribute/skill/craft/tanning/patching
@@ -136,7 +136,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	worn_x_dimension = 64
 	worn_y_dimension = 64
-	armor = list("blunt" = 60, "slash" = 40, "stab" = 45,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/leather/saiga
 	flags_inv = HIDEEARS|HIDEFACE
 	flags_cover = HEADCOVERSEYES
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES
@@ -154,7 +154,7 @@
 	. = ..()
 	to_chat(user, span_warning ("The thorns prick me."))
 	var/obj/item/bodypart/arm = user.get_active_hand()
-	arm?.bodypart_attacked_by(BCLASS_CUT, 7)
+	arm?.bodypart_attacked_by(BCLASS_CUT, 7, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
 
 //................ Hennin ............... //
 /obj/item/clothing/head/hennin
@@ -184,10 +184,10 @@
 	icon_state = "armingcap"
 	flags_inv = HIDEEARS
 
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/head/padded
 	body_parts_covered = HEAD|HAIR|EARS
 	prevent_crits =  MINOR_CRITICALS
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 120 GRAMS
 
 
@@ -228,15 +228,6 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	tint = TINT_BLIND
 	item_weight = 55 GRAMS
-
-/obj/item/clothing/head/sack/equipped(mob/living/carbon/human/user, slot)
-	. = ..()
-	if(slot & ITEM_SLOT_HEAD)
-		user.become_blind("blindfold_[REF(src)]")
-
-/obj/item/clothing/head/sack/dropped(mob/living/carbon/human/user)
-	..()
-	user.cure_blind("blindfold_[REF(src)]")
 
 /obj/item/clothing/head/sack/attack(mob/living/target, mob/living/user, list/modifiers)
 	if(target.get_item_by_slot(ITEM_SLOT_HEAD))
@@ -291,6 +282,12 @@
 /obj/item/clothing/head/headdress/alt
 	icon_state = "headdressalt"
 
+/obj/item/clothing/head/dancer_headdress // egyptian
+	name = "dancer's headdress"
+	desc = ""
+	icon_state = "headdress_dance"
+	item_weight = 77 GRAMS
+
 /obj/item/clothing/head/armingcap/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
@@ -299,6 +296,7 @@
 
 /obj/item/clothing/head/vampire
 	name = "crown of darkness"
+	desc = "A dark crown set with bloodstones. Something is very wrong if you are unfortunate enough to see it."
 	icon_state = "vcrown"
 	body_parts_covered = null
 	slot_flags = ITEM_SLOT_HEAD
@@ -306,6 +304,10 @@
 	sellprice = 1000
 	resistance_flags = FIRE_PROOF
 	item_weight = 600 GRAMS
+
+/obj/item/clothing/head/vampire/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //................ Faceless Hood ............... //	- Faceless One
 
@@ -361,7 +363,6 @@
 	name = "coifed helmet"
 	desc = "Many find the design of this helmet unusual, but it protects the neck well and is easy to see out of."
 	icon_state = "lakkarihelm"
-	armor = ARMOR_PLATE
 	flags_inv = HIDEEARS|HIDEHAIR
 	body_parts_covered = HEAD_NECK
 	prevent_crits = ALL_EXCEPT_BLUNT
@@ -382,7 +383,7 @@
 	body_parts_covered = NECK | HEAD | HAIR
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	armor = list("blunt" = 70, "slash" = 70, "stab" = 50, "piercing" = 30, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/psydon_hood
 	dynamic_hair_suffix = ""
 	edelay_type = 1
 	adjustable = CAN_CADJUST
@@ -418,6 +419,7 @@
 
 /obj/item/clothing/head/roguehood/psydon/confessor
 	name = "confessional hood"
+	examine_name = "hood"
 	desc = "A loose-fitting piece of leatherwear that can be tightened on the move. Keeps rain, blood, and the tears of the sullied away."
 	icon_state = "confessorhood"
 	item_state = "confessorhood"
@@ -425,10 +427,35 @@
 	body_parts_covered = NECK | HEAD | HAIR
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	armor = list("blunt" = 70, "slash" = 70, "stab" = 50, "piercing" = 30, "fire" = 0, "acid" = 0)
 	dynamic_hair_suffix = ""
 	edelay_type = 1
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	max_integrity = 200
 	item_weight = 145 GRAMS
+
+/obj/item/clothing/head/archercap
+	name = "archer's cap"
+	desc = "For the merry men."
+	icon_state = "archercap"
+
+/obj/item/clothing/head/fedora
+	name = "archeologist's hat"
+	desc = "A strangely-shaped hat with dust caked onto its aged leather."
+	icon_state = "curator"
+	item_state = "curator"
+	sewrepair = TRUE
+	salvage_result = /obj/item/natural/hide/cured
+
+/obj/item/clothing/head/leather/inqhat/gravehat
+	name = "gravetender's hat"
+	desc = "A fine leather slouch fitted with a hidden steel skull cap. It serves as a reminder that Necra's grasp is never too far."
+	icon_state = "gravehat"
+	item_state = "gravehat"
+
+/obj/item/clothing/head/explorerhat
+	name = "explorer's hat"
+	desc = "How many secrets can I uncover this week?"
+	icon_state = "explorerhat"
+	item_state = "explorerhat"
+	sewrepair = TRUE

@@ -95,7 +95,7 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 
 	if (!ui_style)
 		// will fall back to the default if any of these are null
-		ui_style = ui_style2icon(owner.client && owner.client.prefs && owner.client.prefs.UI_style)
+		ui_style = ui_style2icon(owner.client && owner.client.prefs && owner.client.prefs.read_preference(/datum/preference/choiced/UI_style))
 
 	reads = new(null, src)
 	textr = new(null, src)
@@ -388,6 +388,11 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 
 /datum/hud/proc/update_locked_slots()
 	return
+
+/datum/hud/proc/set_bloody_bloodpool()
+	shutdown_bloodpool()
+	initialize_bloodpool()
+	bloodpool.set_fill_color("#510000")
 
 /datum/hud/proc/initialize_bloodpool()
 	bloodpool = new /atom/movable/screen/bloodpool(null, src)

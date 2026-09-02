@@ -49,10 +49,6 @@
 	sound = 'sound/magic/PSY.ogg'
 	charge_sound = 'sound/magic/chargingold.ogg'
 
-	attunements = list(
-		/datum/attunement/blood = 0.5,
-	)
-
 	charge_time = 3 SECONDS
 	charge_drain = 1
 	charge_slowdown = 1.3
@@ -60,7 +56,7 @@
 	spell_cost = 80
 
 	spell_type = SPELL_BLOOD
-	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 	associated_skill = /datum/attribute/skill/magic/blood
 
 /datum/action/cooldown/spell/charm/vampire/do_charm(mob/living/cast_on)

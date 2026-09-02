@@ -7,6 +7,7 @@ export const DetailChemicalReaction = ({
   r, lookup, pickerMap, allRecipes, essenceIndex, nav,
 }: NavProps) => (
   <>
+    {r.desc && <Box className="RecipeBook__desc" dangerouslySetInnerHTML={{ __html: r.desc }} />}
     {!!r.is_cold_recipe && (
       <WarnFlag color="#88ccff">
         Cold recipe — react BELOW {r.required_temp ? `${r.required_temp - 273.15}C` : 'required temp'}

@@ -1,7 +1,7 @@
 /datum/job/rousman
 	title = "Rousman"
 	job_flags = JOB_EQUIP_RANK
-	faction = FACTION_TOWN
+	factions = list(FACTION_HOSTILE)
 	total_positions = 0
 	spawn_positions = 0
 	allowed_races = RACES_PLAYER_ALL
@@ -10,7 +10,8 @@
 	give_bank_account = FALSE
 
 	traits = list(
-		TRAIT_HEAVYARMOR
+		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 
 /datum/job/rousman/after_spawn(mob/living/carbon/human/spawned, client/player_client)

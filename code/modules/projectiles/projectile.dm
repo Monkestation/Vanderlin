@@ -78,6 +78,7 @@
 	var/ricochets_max = 2
 	var/ricochet_chance = 30
 	var/force_hit = FALSE //If the object being hit can pass ths damage on to something else, it should not do it for this bullet.
+	var/splatter_chance = 33
 
 	//Hitscan
 	var/hitscan = FALSE		//Whether this is hitscan. If it is, speed is basically ignored.
@@ -150,6 +151,14 @@
 	///projectile crit reduce chance since more dmg increases the crit chance it can get absurdly high, 0 for nothing.
 	var/reduce_crit_chance = 0
 
+	/// Min tile distance for full damage/AP.
+	var/min_range = 0
+	/// Max tile distance for full damage/AP.
+	var/max_range = 0
+	/// Falloff factor for damage. Multiplicative.
+	var/dam_falloff_factor = 1
+	var/suppress_effects_past_range = FALSE
+
 /obj/projectile/proc/handle_drop()
 	return
 
@@ -215,6 +224,22 @@
 /obj/projectile/proc/on_range() //if we want there to be effects when they reach the end of their range
 	qdel(src)
 
+/obj/projectile/proc/out_of_effective_range()
+	return suppress_effects_past_range && max_range && check_range(get_turf(src))
+
+/obj/projectile/proc/check_range(turf/T)
+	if(!starting)
+		return FALSE
+	if(!istype(T))
+		T = get_turf(src)
+	if(!istype(T))
+		return FALSE
+	if(T.z != starting.z)
+		return FALSE
+	var/distance = get_dist(T, starting)
+	if((min_range && distance < min_range) || (max_range && distance > max_range))
+		return TRUE
+
 //to get the correct limb (if any) for the projectile hit message
 /mob/living/proc/check_limb_hit(hit_zone)
 	if(has_limbs)
@@ -272,13 +297,14 @@
 	var/mob/living/L = target
 
 	if(blocked != 100) // not completely blocked
-		if(damage && L.blood_volume && damage_type == BRUTE)
+		if(damage && L.get_blood_volume() && damage_type == BRUTE)
 			var/splatter_dir = dir
 			if(starting)
 				splatter_dir = get_dir(starting, target_loca)
 			new /obj/effect/temp_visual/dir_setting/bloodsplatter(target_loca, splatter_dir, L.get_blood_type())
-			if(prob(33))
+			if(prob(splatter_chance))
 				L.add_splatter_floor(target_loca)
+				L.add_splatter_wall(force = 2, spill_amount = 2, splatter_direction = splatter_dir) //Projectiles hurt and spray blood everywhere behind and around of course.
 
 	if(impact_effect_type && !hitscan)
 		new impact_effect_type(target_loca, hitx, hity)
@@ -382,6 +408,8 @@
 	// 2.
 	LAZYSET(impacted, target, TRUE) //hash lookup > in for performance in hit-checking
 	// 3.
+	if(damage && check_range(T))
+		damage = round(damage * dam_falloff_factor)
 	var/mode = prehit_pierce(target)
 	if(mode == PROJECTILE_DELETE_WITHOUT_HITTING)
 		qdel(src)

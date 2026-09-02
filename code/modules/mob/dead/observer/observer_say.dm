@@ -5,7 +5,7 @@
 /mob/dead/observer/get_message_mods(message, list/mods)
 	var/key = message[1]
 	if((key in GLOB.department_radio_prefixes) && length(message) > length(key) + 1 && !mods[RADIO_EXTENSION])
-		mods[RADIO_KEY] = lowertext(message[1 + length(key)])
+		mods[RADIO_KEY] = LOWER_TEXT(message[1 + length(key)])
 		mods[RADIO_EXTENSION] = GLOB.department_radio_keys[mods[RADIO_KEY]]
 	return message
 
@@ -29,18 +29,6 @@
 
 	. = say_dead(message)
 
-/mob/dead/observer/rogue/arcaneeye/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
-	return
-
-/mob/dead/observer/rogue/arcaneeye/say_dead(message)
-	return
-
-/mob/dead/observer/screye/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
-	return
-
-/mob/dead/observer/screye/say_dead(message)
-	return
-
 /mob/dead/observer/profane/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	if (!message)
 		return
@@ -62,7 +50,7 @@
 	var/atom/movable/to_follow = speaker
 	var/link = FOLLOW_LINK(src, to_follow)
 	if(client?.prefs)
-		if(!(client?.prefs.toggles_maptext & DISABLE_RUNECHAT) && (client.prefs.see_chat_non_mob || ismob(speaker)))
+		if(!(client?.prefs.read_preference(/datum/preference/bitwise/toggles_maptext) & DISABLE_RUNECHAT) && (client.prefs.read_preference(/datum/preference/toggle/see_chat_non_mob) || ismob(speaker)))
 			create_chat_message(speaker, message_language, raw_message, spans)
 	// Recompose the message, because it's scrambled by default
 	message = compose_message(speaker, message_language, raw_message, radio_freq, spans, message_mods)

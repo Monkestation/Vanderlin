@@ -49,7 +49,7 @@
 	outfit = /datum/outfit/adventurer/cleric
 	category_tags = list(CTAG_ADVENTURER)
 	total_positions = 4
-	allowed_patrons = ALL_CLERIC_PATRONS
+	allowed_patrons = ALL_TEMPLE_PATRONS
 
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_CLERIC)
 
@@ -58,6 +58,7 @@
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
+		TRAIT_VIRGIN,
 	)
 
 	languages = list(/datum/language/celestial)
@@ -68,8 +69,6 @@
 	. = ..()
 	if(spawned.age == AGE_OLD)
 		ADD_TRAIT(spawned, TRAIT_STEELHEARTED, TRAIT_GENERIC)
-
-	spawned.virginity = TRUE
 
 	if(spawned.patron)
 		switch(spawned.patron.type)
@@ -83,18 +82,19 @@
 				ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 			if(/datum/patron/divine/eora)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
-				spawned.virginity = FALSE
+				REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 				ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			if(/datum/patron/divine/ravox)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
-				spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10)
+				spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 30)
 			if(/datum/patron/divine/noc)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
+				ADD_TRAIT(spawned, TRAIT_LUNAR_ORDER, JOB_TRAIT)
 			if(/datum/patron/divine/pestra)
 				spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 			if(/datum/patron/divine/abyssor)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
-				spawned.adjust_skill_level(/datum/attribute/skill/labor/fishing, 20)
+				spawned.clamped_adjust_skill_level(/datum/attribute/skill/labor/fishing, 20, 20)
 			if(/datum/patron/divine/malum)
 				spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 			if(/datum/patron/divine/xylix)
@@ -112,11 +112,12 @@
 	. = ..()
 
 	var/static/list/selectableweapon = list(
-		"Sword" = pick(list(/obj/item/weapon/sword/iron, /obj/item/weapon/sword/scimitar/messer, /obj/item/weapon/sword/sabre/scythe)),
+		"Sword" = /obj/item/weapon/sword/iron,
 		"Axe" = /obj/item/weapon/axe/iron,
-		"Mace" = pick(list(/obj/item/weapon/mace/bludgeon, /obj/item/weapon/mace/warhammer, /obj/item/weapon/mace/spiked, /obj/item/weapon/hammer/sledgehammer)),
+		"Mace" = /obj/item/weapon/mace/spiked,
+		"Warhammer" = /obj/item/weapon/mace/warhammer,
 		"Spear" = /obj/item/weapon/polearm/spear,
-		"Flail" = pick(list(/obj/item/weapon/flail, /obj/item/weapon/flail/militia)),
+		"Flail" = /obj/item/weapon/flail,
 		"Great flail" = /obj/item/weapon/flail/peasant,
 		"Goedendag" = /obj/item/weapon/mace/goden,
 		"Great axe" = /obj/item/weapon/polearm/halberd/bardiche/woodcutter,
@@ -132,7 +133,7 @@
 	switch(weaponchoice)
 		if("Sword")
 			weapon_skill_path = /datum/attribute/skill/combat/swords
-		if("Axe", "Mace", "Goedendag", "Great axe")
+		if("Axe", "Mace", "Goedendag", "Great axe", "Warhammer")
 			weapon_skill_path = /datum/attribute/skill/combat/axesmaces
 		if("Spear")
 			weapon_skill_path = /datum/attribute/skill/combat/polearms
@@ -140,7 +141,7 @@
 			weapon_skill_path = /datum/attribute/skill/combat/whipsflails
 
 	if(weapon_skill_path)
-		spawned.adjust_skill_level(weapon_skill_path, 30)
+		spawned.clamped_adjust_skill_level(weapon_skill_path, 30, 30)
 
 	switch(weaponchoice)
 		if("Great flail", "Goedendag", "Great axe")
@@ -159,17 +160,14 @@
 
 /datum/outfit/adventurer/cleric
 	name = "Cleric (Adventurer)"
-	head = /obj/item/clothing/head/helmet/skullcap
-	armor = /obj/item/clothing/armor/chainmail/iron
 	shirt = /obj/item/clothing/armor/gambeson
 	gloves = /obj/item/clothing/gloves/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots/leather
-	neck = /obj/item/clothing/neck/chaincoif/iron
 	belt = /obj/item/storage/belt/leather/adventurer
-	backl = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/tabard/crusader
 	wrists = /obj/item/clothing/neck/psycross/silver
+	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1, /obj/item/reagent_containers/food/snacks/hardtack = 1)
 
 /datum/outfit/adventurer/cleric/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -177,7 +175,6 @@
 	head = pick(/obj/item/clothing/head/helmet/skullcap, /obj/item/clothing/head/helmet/sallet/iron, /obj/item/clothing/head/helmet/leather/headscarf)
 	armor = pick(/obj/item/clothing/armor/chainmail/iron, /obj/item/clothing/armor/leather/splint, /obj/item/clothing/armor/cuirass/iron, /obj/item/clothing/armor/brigandine/light)
 	neck = pick(/obj/item/clothing/neck/chaincoif/iron, /obj/item/clothing/neck/gorget, /obj/item/clothing/neck/highcollier/iron, /obj/item/clothing/neck/coif/cloth, /obj/item/clothing/neck/coif)
-	backl = pick(/obj/item/storage/backpack/satchel, /obj/item/storage/backpack/satchel/cloth)
 
 	if(equipped_human.patron)
 		switch(equipped_human.patron.type)

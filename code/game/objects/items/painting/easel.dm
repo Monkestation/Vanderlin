@@ -15,19 +15,19 @@
 	anchored = FALSE
 
 //Adding canvases
-/obj/structure/easel/attackby(obj/item/I, mob/user, list/modifiers)
-	if(istype(I, /obj/item/canvas))
-		var/obj/item/canvas/C = I
-		user.dropItemToGround(C)
-		painting = C
-		painting.pixel_x = painting.base_pixel_x
-		painting.pixel_y = painting.base_pixel_y + painting.easel_offset
-		C.forceMove(get_turf(src))
-		C.layer = layer+0.1
-		user.visible_message("<span class='notice'>[user] puts \the [C] on \the [src].</span>","<span class='notice'>I place \the [C] on \the [src].</span>")
-	else
-		return ..()
+/obj/structure/easel/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/canvas))
+		return NONE
 
+	var/obj/item/canvas/C = tool
+	user.dropItemToGround(C)
+	painting = C
+	painting.pixel_x = painting.base_pixel_x
+	painting.pixel_y = painting.base_pixel_y + painting.easel_offset
+	C.forceMove(get_turf(src))
+	C.layer = layer+0.1
+	user.visible_message("<span class='notice'>[user] puts \the [C] on \the [src].</span>","<span class='notice'>I place \the [C] on \the [src].</span>")
+	return ITEM_INTERACT_SUCCESS
 
 //Stick to the easel like glue
 /obj/structure/easel/Move()

@@ -19,3 +19,23 @@
 	grid_width = 64
 	grid_height = 64
 	item_weight = 350 GRAMS
+
+	/// Does it have internal storage? If so it will create a component below.
+	var/has_storage = FALSE
+	/// Similar function to pocket_storage_component_path but rather than always loading it's conditional.
+	var/datum/component/storage/storage_component_path = /datum/component/storage/concrete/grid/cloak
+
+/obj/item/clothing/cloak/Initialize(mapload, ...)
+	. = ..()
+	if(has_storage && storage_component_path)
+		AddComponent(storage_component_path)
+
+/obj/item/clothing/cloak/dropped(mob/living/carbon/human/user)
+	..()
+	if(QDELETED(src))
+		return
+	var/datum/component/storage/storage_comp = GetComponent(/datum/component/storage)
+	if(storage_comp)
+		var/list/things = storage_comp.contents()
+		for(var/obj/item/I in things)
+			storage_comp.remove_from_storage(I, get_turf(src))

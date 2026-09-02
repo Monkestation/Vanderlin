@@ -100,7 +100,7 @@
 	icon_state = "grass"
 	name = "grass tile loot spawner"
 	probby = 75
-	spawned = list(/obj/structure/flora/grass/bush_meagre = 10, /obj/structure/flora/grass = 60, /obj/item/natural/stone = 8, /obj/item/natural/rock = 7, /obj/item/grown/log/tree/stick = 3, /obj/structure/closet/dirthole/closed/loot=0.1)
+	spawned = list(/obj/structure/flora/grass/bush_meagre = 10, /obj/structure/flora/grass = 60, /obj/item/natural/stone = 8, /obj/item/natural/rock = 7, /obj/item/grown/log/tree/stick = 3, /obj/structure/closet/dirthole/closed=0.1)
 
 /obj/effect/spawner/map_spawner/grass_low
 	icon_state = "grass"

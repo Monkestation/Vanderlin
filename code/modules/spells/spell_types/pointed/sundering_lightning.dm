@@ -4,11 +4,9 @@
 	button_icon_state = "sundering"
 	sound = 'sound/weather/rain/thunder_1.ogg'
 
-	point_cost = 8
 	cast_range = 4
-	attunements = list(
-		/datum/attunement/electric = 0.9
-	)
+	required_form = FORM_LIGHTNING
+	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "Lightning strikes more than twice!"
 	invocation_type = INVOCATION_SHOUT
@@ -35,4 +33,4 @@
 		if(dist > last_dist)
 			last_dist = dist
 			sleep(2 + min(4 - last_dist, 12) * 0.5)
-		new /obj/effect/temp_visual/target/lightning(T)
+		new /obj/effect/temp_visual/target/lightning/sundering(T)

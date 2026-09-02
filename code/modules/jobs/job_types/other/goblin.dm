@@ -1,7 +1,7 @@
 /datum/job/goblin
 	title = "Goblin"
 	job_flags = JOB_EQUIP_RANK
-	faction = FACTION_TOWN
+	factions = list(FACTION_HOSTILE)
 	total_positions = 0
 	spawn_positions = 0
 	allowed_races = RACES_PLAYER_ALL
@@ -21,7 +21,7 @@
 		spawned.mind.special_role = "goblin"
 		spawned.mind.current.job = null
 
-	spawned.set_faction(FACTION_ORCS)
+	spawned.set_faction(list(FACTION_ORCS))
 	spawned.name = "goblin"
 	spawned.real_name = "goblin"
 

@@ -223,7 +223,7 @@
 			breakdown_assembly(assembly)
 			return
 		if(!prob(prob2craft))
-			if(user.client?.prefs.showrolls)
+			if(user.client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 				to_chat(user, "<span class='danger'>I've failed to complete \the [name]. (Success chance: [prob2craft]%)</span>")
 			else
 				to_chat(user, "<span class='danger'>I've failed to complete \the [name].</span>")

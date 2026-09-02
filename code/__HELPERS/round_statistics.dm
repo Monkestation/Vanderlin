@@ -9,6 +9,7 @@
 #define STATS_ALIVE_HALFLINGS "alive_halflings"
 #define STATS_VAMPIRES "vampires"
 #define STATS_ALIVE_GARRISON "alive_garrison"
+#define STATS_ALIVE_GALLOWBAND "alive_gallowband"
 #define STATS_ALIVE_CLERGY "alive_clergy"
 #define STATS_ALIVE_TRADESMEN "alive_tradesmen"
 #define STATS_MONARCH_PATRON "monarch_patron"
@@ -50,6 +51,7 @@
 #define STATS_MAMMONS_WITHDRAWN "mammons_withdrawn"
 #define STATS_STARTING_TREASURY "starting_treasury"
 #define STATS_FOREIGNERS "alive_foreigners"
+#define STATS_BLOODMAGIC_REVIVALS "bloodmagic_revivals"
 
 // Influence related statistics
 
@@ -77,6 +79,7 @@
 #define STATS_ILLITERATES "illiterates"
 #define STATS_SKILLS_DREAMED "skills_dreamed"
 #define STATS_MANA_SPENT "mana_spent"
+#define STATS_NOC_REVIVALS "noc_revivals"
 
 // Necra
 #define STATS_DEATHS "deaths"
@@ -89,7 +92,7 @@
 
 // Pestra
 #define STATS_POTIONS_BREWED "potions_brewed"
-#define STATS_WOUNDS_SEWED "wounds_sewed"
+#define STATS_WOUNDS_FIXED "wounds_fixed"
 #define STATS_ANIMALS_BRED "animals_bred"
 #define STATS_FOOD_ROTTED "food_rotted"
 #define STATS_LUX_REVIVALS "lux_revivals"
@@ -202,6 +205,8 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_GRAVES_CONSECRATED = 0,
 	STATS_POTIONS_BREWED = 0,
 	STATS_ASTRATA_REVIVALS = 0,
+	STATS_NOC_REVIVALS = 0,
+	STATS_BLOODMAGIC_REVIVALS = 0,
 	STATS_PLANTS_HARVESTED = 0,
 	STATS_LAWS_AND_DECREES_MADE = 0,
 	STATS_ALIVE_NOBLES = 0,
@@ -212,7 +217,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_GRAVES_ROBBED = 0,
 	STATS_DEADITES_KILLED = 0,
 	STATS_VAMPIRES_KILLED = 0,
-	STATS_WOUNDS_SEWED = 0,
+	STATS_WOUNDS_FIXED = 0,
 	STATS_SOULS_REINCARNATED = 0,
 	STATS_ANIMALS_BRED = 0,
 	STATS_WEREVOLVES = 0,
@@ -322,6 +327,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_STARTING_TREASURY = 0,
 	STATS_HUNTED_PEOPLE = 0,
 	STATS_FOREIGNERS = 0,
+	STATS_CPR_REVIVALS = 0,
 ))
 
 GLOBAL_LIST_EMPTY(patron_follower_counts)

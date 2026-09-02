@@ -94,7 +94,7 @@
 /obj/item/weapon/knife/cleaver,
 /obj/item/clothing/cloak/apron/cook,
 /obj/item/clothing/head/sack,
-/obj/item/weapon/polearm/spear/stone/copper,
+/obj/item/weapon/polearm/spear/javelin,
 /obj/item/clothing/armor/leather/vest/colored/butcher,
 /turf/open/floor/tile/checker,
 /area/under/tomb/indoors)

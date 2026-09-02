@@ -210,6 +210,13 @@
 /obj/structure/bars/chainlink
 	icon_state = "chainlink"
 
+/obj/structure/bars/wood
+	icon_state = "wooden_barrier"
+	name = "wooden barrier"
+	desc = "Decorative wooden barrier made to keep things in or out."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	attacked_sound = list("sound/combat/hits/onmetal/mwoodimpact (1).ogg", "sound/combat/hits/onmetal/woodimpact (2).ogg")
+
 /obj/structure/bars/alt
 	icon_state = "bars_alt"
 	plane = GAME_PLANE
@@ -249,6 +256,10 @@
 	else
 		icon_state = "passage0"
 		density = TRUE
+
+/obj/structure/bars/passage/open
+	icon_state = "passage1"
+	density = FALSE
 
 /obj/structure/bars/passage/shutter
 	icon_state = "shutter0"
@@ -317,6 +328,12 @@
 		icon_state = "floorgrille"
 		obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
+
+/obj/structure/bars/wooden_arch
+	name = "decorative wooden arch"
+	desc = "A wooden decorative arch intended to complement a table or worktop while preventing intrusion."
+	icon_state = "wooden_barrier"
+	attacked_sound = list("sound/combat/hits/onwood/woodimpact (1).ogg", "sound/combat/hits/onwood/woodimpact (2).ogg")
 
 /obj/structure/plank
 	name = "plank"
@@ -411,17 +428,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(try_fetch_special_item(user))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/clock/examine(mob/user)
 	. = ..()
@@ -665,17 +673,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(user.mind && isliving(user))
-		if(user.mind.special_items && user.mind.special_items.len)
-			var/item = browser_input_list(user, "What will I take?", "STASH", user.mind.special_items)
-			if(item)
-				if(user.Adjacent(src))
-					if(user.mind.special_items[item])
-						var/path2item = user.mind.special_items[item]
-						user.mind.special_items -= item
-						var/obj/item/I = new path2item(user.loc)
-						user.put_in_hands(I)
-			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	if(try_fetch_special_item(user))
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/structure/fluff/statue/CanPass(atom/movable/mover, turf/target)
 	. = ..()
@@ -716,6 +715,28 @@
 	desc = "Astrata, the Sun Queen, reigns over light, order, and conquest. She is worshipped and feared in equal measure."
 	icon = 'icons/roguetown/misc/tallandwide.dmi'
 	icon_state = "astrata"
+	max_integrity = 100 // You wanted descructible statues, you'll get them.
+	deconstructible = FALSE
+	density = TRUE
+	blade_dulling = DULLING_BASH
+	SET_BASE_PIXEL(-16, 0)
+
+/obj/structure/fluff/statue/noc
+	name = "statue of Noc"
+	desc = "Noc, the Moon Prince, reigns over magic. Scholars bow to their command of the weave."
+	icon = 'icons/roguetown/misc/tallandwide.dmi'
+	icon_state = "noc"
+	max_integrity = 100 // You wanted descructible statues, you'll get them.
+	deconstructible = FALSE
+	density = TRUE
+	blade_dulling = DULLING_BASH
+	SET_BASE_PIXEL(-16, 0)
+
+/obj/structure/fluff/statue/noc/tall
+	name = "standing statue of Noc"
+	desc = "Noc, the Moon Prince, reigns over magic. Scholars bow to their command of the weave."
+	icon = 'icons/roguetown/misc/64x128.dmi'
+	icon_state = "noc"
 	max_integrity = 100 // You wanted descructible statues, you'll get them.
 	deconstructible = FALSE
 	density = TRUE
@@ -829,6 +850,62 @@
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "telescope"
 	density = TRUE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/shrub/red
+	name = "potted shrub"
+	desc = "A stone pot with a red autumnal shrub there-in."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "pottedshrub_red"
+	density = TRUE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/shrub/tundra
+	name = "potted shrub"
+	desc = "A stone pot with a cold tundra shrub there-in."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "pottedshrub_tundra"
+	density = TRUE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/books
+	name = "stack of books & inkpot"
+	desc = "A few stacks of books with a pot of ink & quill waiting for inspiration."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "clutter_books"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/teapot
+	name = "teapot & cups"
+	desc = "A teapot & accompanying cups on a mat."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "clutter_teapot"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/moonrug
+	name = "moon rug"
+	desc = "A decorative rug depicting the phases of the moon."
+	icon = 'icons/roguetown/misc/96x96.dmi'
+	icon_state = "moonrug"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/fibermat/square
+	name = "square fiber mat"
+	desc = "A rustic mat woven from fiber."
+	icon = 'icons/roguetown/misc/64x64.dmi'
+	icon_state = "fibermat"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/fibermat/round
+	icon = 'icons/roguetown/misc/structure.dmi'
+	name = "round fiber mat"
+	desc = "A rustic mat woven from fiber."
+	icon_state = "fibermat_round"
+	density = FALSE
 	anchored = FALSE
 
 /obj/structure/fluff/telescope/attack_hand(mob/user)
@@ -1012,7 +1089,7 @@
 	..()
 
 /obj/structure/fluff/statue/evil
-	name = "idol"
+	name = "Matthios Idol"
 	desc = "A statue built to the robber-god, Matthios. The visage resembles nobody in particular. It is said that he grants the wishes of those pagan bandits (free folk) who feed him money."
 	icon_state = "evilidol"
 	icon = 'icons/roguetown/misc/structure.dmi'
@@ -1027,7 +1104,7 @@
 			if(istype(W, /obj/item/reagent_containers/lux))
 				B.contrib += 120
 				record_round_statistic(STATS_SHRINE_VALUE, 120)
-			else if(istype(W, /obj/item/coin) || istype(W, /obj/item/gem) || istype(W, /obj/item/reagent_containers/glass/cup/silver) || istype(W, /obj/item/reagent_containers/glass/cup/golden) || istype(W, /obj/item/reagent_containers/glass/carafe) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/statue))
+			else if(istype(W, /obj/item/coin) || (istype(W, /obj/item/gem) && !istype(W, /obj/item/gem/amethyst)) || istype(W, /obj/item/reagent_containers/glass/cup/silver) || istype(W, /obj/item/reagent_containers/glass/cup/golden) || istype(W, /obj/item/reagent_containers/glass/carafe) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/statue))
 				if(!istype(W, /obj/item/coin))
 					B.contrib += (W.get_real_price() / 2) // sell jewelry and other fineries, though at a lesser price compared to fencing them first
 					record_round_statistic(STATS_SHRINE_VALUE, (W.get_real_price() / 2))
@@ -1082,6 +1159,13 @@
 	else
 		playsound(src,'sound/items/matidol2.ogg', 50, TRUE)
 
+/obj/structure/fluff/statue/graggar
+	name = "Graggar Idol"
+	desc = "An ugly and crude stone statue in imitation of Graggar, bestial God of murder and cannibalism. The empty eye sockets seem to follow you."
+	icon_state = "graggaraltar"
+	icon = 'icons/roguetown/misc/tallstructure.dmi'
+
+
 /obj/structure/fluff/psycross
 	name = "pantheon cross"
 	desc = "A towering monument to the Ten. Marriages are performed under its shadow."
@@ -1102,7 +1186,10 @@
 	dir = NORTH
 	buckle_requires_restraints = 1
 	buckle_prevents_pull = 1
+	/// Divine or Inhumen
 	var/divine = TRUE
+	/// If you can walk through it as if it doesn't exist. This is a hand-holdy var.
+	var/pass_all_dir = FALSE
 
 /obj/structure/fluff/psycross/Initialize()
 	. = ..()
@@ -1125,13 +1212,15 @@
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
 	. = ..()
+	if(pass_all_dir)
+		return TRUE
 	if(get_dir(loc, mover) == dir)
-		return
+		return FALSE
 	return TRUE
 
 /obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(direction == dir)
+	if(!pass_all_dir && (direction == dir))
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -1215,10 +1304,13 @@
 	. = ..()
 	if(!istype(user))
 		return
+
 	if(!divine)
 		return
+
 	if(!HAS_TRAIT(user, TRAIT_DIVINE_CENTRIST) || (HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && !(user.job == JOB_CHURCHLING)))
 		return
+
 	if(user?.patron.type != /datum/patron/divine/centrist)
 		return
 
@@ -1227,18 +1319,24 @@
 	if(pick_one != "Yes")
 		return
 
-	var/datum/patron/new_patron = GLOB.patrons_by_name[tgui_input_list(user, "Choose your new Patron.", "Pick a Patron", TEMPLE_PATRON_NAMES)]
-	if(!istype(new_patron, /datum/patron) || !(new_patron.type in ALL_TEMPLE_PATRONS))
+	var/patron_name = tgui_input_list(user, "Choose your new Patron.", "Pick a Patron", TEMPLE_PATRON_NAMES)
+	if(!patron_name || QDELETED(src) || QDELETED(user))
 		return
 
-	var/confirm = tgui_alert(user, "Your new Patron is [new_patron]. Is this correct?", "Confirm choice", list("Yes", "No"))
+	var/patron_type = GLOB.patrons_by_name[patron_name]
+
+	var/datum/patron/real_patron = GLOB.patron_list[patron_type]
+	if(!real_patron)
+		return
+
+	var/confirm = tgui_alert(user, "Your new Patron is [real_patron]. Is this correct?", "Confirm choice", list("Yes", "No"))
 	if(confirm != "Yes")
 		return
 
 	ADD_TRAIT(user, TRAIT_DIVINE_CONVERT, DEVOTION_TRAIT)
-	user.set_patron(new_patron)
-	to_chat(user, "<span class='god_[lowertext(new_patron.name)]'>You have devoted yourself to [new_patron]!</span>")
-	log_game("PATRON: [key_name(user)] changed their patron from [old_patron.name] to [new_patron]")
+	user.set_patron(real_patron)
+	to_chat(user, "<span class='god_[LOWER_TEXT(real_patron.name)]'>You have devoted yourself to [real_patron]!</span>")
+	log_game("PATRON: [key_name(user)] changed their patron from [old_patron.name] to [real_patron]")
 	visible_message("A bright light flashes out from [src] as it channels divine focus.")
 	AOE_flash(user, range = 5)
 	playsound(src, 'sound/magic/bless.ogg', 50, TRUE)
@@ -1336,7 +1434,7 @@
 		var/is_title = FALSE
 		if(second_last_index)
 			var/second_last_word = copytext(groom.real_name, second_last_index + 1, groom_name_index)
-			if((lowertext(second_last_word) == "the" || lowertext(second_last_word) == "of") && last_word)
+			if((LOWER_TEXT(second_last_word) == "the" || LOWER_TEXT(second_last_word) == "of") && last_word)
 				is_title = TRUE
 
 		if(is_title)
@@ -1363,7 +1461,7 @@
 		var/is_title_bride = FALSE
 		if(second_last_index_bride)
 			var/second_last_word_bride = copytext(bride.real_name, second_last_index_bride + 1, bride_name_index)
-			if((lowertext(second_last_word_bride) == "the" || lowertext(second_last_word_bride) == "of") && last_word_bride)
+			if((LOWER_TEXT(second_last_word_bride) == "the" || LOWER_TEXT(second_last_word_bride) == "of") && last_word_bride)
 				is_title_bride = TRUE
 
 		if(!is_title_bride && !findtext(bride.real_name, " the ") && !findtext(bride.real_name, " of "))
@@ -1443,18 +1541,6 @@
 		living_user.add_stress(/datum/stress_event/painful_reminder)
 		. += " Never forget those we have lost."
 
-/obj/structure/fluff/statue/shisha
-	name = "shisha pipe"
-	desc = "A traditional shisha pipe, this one is broken."
-	icon = 'icons/roguetown/misc/64x64.dmi'
-	icon_state = "zbuski"
-	density = FALSE
-	anchored = TRUE
-	layer = ABOVE_MOB_LAYER
-	plane = GAME_PLANE_UPPER
-	blade_dulling = DULLING_BASH
-	max_integrity = 300
-
 /obj/structure/fluff/statue/gaffer
 	name = "Subdued Statue"
 	desc = "It sleeps eternally."
@@ -1511,3 +1597,4 @@
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
 	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
 	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))
+

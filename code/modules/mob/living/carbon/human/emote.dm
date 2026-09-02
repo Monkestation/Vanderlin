@@ -23,7 +23,7 @@
 
 /datum/emote/living/carbon/human/cry/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(. && user.mind)
+	if(user.mind)
 		record_featured_stat(FEATURED_STATS_CRYBABIES, user)
 
 /datum/emote/living/carbon/human/eyebrow
@@ -33,7 +33,7 @@
 
 /mob/living/carbon/human/verb/emote_eyebrow()
 	set name = "Raise Eyebrow"
-	set category = "Emotes.Silent"
+	set category = "Emotes.Actions"
 
 	emote("eyebrow", intentional = TRUE)
 
@@ -111,8 +111,6 @@
 
 /datum/emote/living/carbon/human/wag/run_emote(mob/user, params, type_override, intentional, targeted)
 	. = ..()
-	if(!.)
-		return
 	var/mob/living/carbon/human/H = user
 	if(!istype(H) || !H.dna || !H.dna.species || !H.dna.species.can_wag_tail(H))
 		return

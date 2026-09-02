@@ -17,34 +17,36 @@
 	metabolization_rate = 0.25 * REAGENTS_METABOLISM
 	overdose_threshold = 35
 
-/datum/reagent/medicine/atropine/on_mob_metabolize(mob/living/L)
+/datum/reagent/medicine/atropine/on_mob_metabolize(mob/living/affected_mob)
 	. = ..()
-	if(!iscarbon(L))
+	if(!iscarbon(affected_mob))
 		return
-	var/mob/living/carbon/C = L
-	var/numbing = min(50, CEILING(C.getShock(TRUE)/2, 1))
-	C.add_chem_effect(CE_BLOODRESTORE, 1, "[type]")
-	C.add_chem_effect(CE_PAINKILLER, numbing, "[type]")
-	C.add_chem_effect(CE_STABLE, 1, "[type]")
-	if(C.undergoing_cardiac_arrest() || C.undergoing_nervous_system_failure())
-		C.add_chem_effect(CE_ORGAN_REGEN, 1, "[type]")
+	var/mob/living/carbon/carbon_mob = affected_mob
+	var/numbing = min(50, CEILING(carbon_mob.getShock(FALSE)/2, 1))
+	carbon_mob.add_chem_effect(CE_PAINKILLER, numbing, "[type]")
+	carbon_mob.add_chem_effect(CE_STABLE, 1, "[type]")
+	carbon_mob.add_chem_effect(CE_ORGAN_REGEN, 1, "[type]")
+	carbon_mob.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
+	carbon_mob.add_chem_effect(CE_OXYGENATED, 1, "[type]")
 
-/datum/reagent/medicine/atropine/on_mob_end_metabolize(mob/living/L)
+/datum/reagent/medicine/atropine/on_mob_end_metabolize(mob/living/affected_mob)
 	. = ..()
-	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
-	L.remove_chem_effect(CE_ORGAN_REGEN, "[type] ")
-	L.remove_chem_effect(CE_PAINKILLER, "[type]")
-	L.remove_chem_effect(CE_TOXIN, "[type]")
-	L.remove_chem_effect(CE_BLOCKAGE, "[type]")
-	L.remove_chem_effect(CE_STABLE, "[type]")
+	affected_mob.remove_chem_effect(CE_PAINKILLER, "[type]")
+	affected_mob.remove_chem_effect(CE_STABLE, "[type]")
+	affected_mob.remove_chem_effect(CE_ORGAN_REGEN, "[type] ")
+	affected_mob.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
+	affected_mob.remove_chem_effect(CE_OXYGENATED, "[type]")
 
 /datum/reagent/medicine/atropine/on_mob_life(mob/living/carbon/affected_mob, efficiency)
-	if(affected_mob.health <= affected_mob.crit_threshold)
+	if(HAS_TRAIT(affected_mob, TRAIT_CRITICAL_CONDITION))
 		affected_mob.adjustToxLoss(-2 * REM * efficiency , FALSE)
 		affected_mob.adjustBruteLoss(-2* REM * efficiency, FALSE)
 		affected_mob.adjustFireLoss(-2 * REM * efficiency, FALSE)
 		affected_mob.adjustOxyLoss(-5 * REM * efficiency, FALSE)
 		. = TRUE
+	var/obj/item/organ/lungs/affected_lungs = affected_mob.getorganslot(ORGAN_SLOT_LUNGS)
+	if(affected_lungs)
+		affected_mob.losebreath = 0
 	if(prob(10))
 		affected_mob.set_dizzy(10 SECONDS * efficiency)
 		affected_mob.adjust_jitter(10 SECONDS * efficiency)
@@ -89,9 +91,7 @@
 		M.adjustBruteLoss(-1 * REM * efficiency, 0)
 		M.adjustFireLoss(-1 * REM * efficiency, 0)
 		M.adjustToxLoss(-0.5 * efficiency, 0)
-		var/list/wCount = M.get_wounds()
-		if(wCount.len > 0)
-			M.heal_wounds(1 * efficiency)
+		M.heal_wounds(1 * efficiency)
 	. = ..()
 
 /datum/reagent/medicine/soulweave_distillate
@@ -140,10 +140,10 @@
 	. = ..()
 	L.remove_chem_effect(CE_PAINKILLER, "[type]")
 
-/datum/reagent/medicine/coldvein_compress/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
-		if(injury.damage_type == WOUND_BURN)
-			injury.heal_damage(2)
+/datum/reagent/medicine/coldvein_compress/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	if(affected_bodypart.heal_damage(0, 2 * REM, required_status = BODYPART_ORGANIC))
+		affected_mob.update_damage_overlays()
+	return ..()
 
 /datum/reagent/medicine/coldvein_compress/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -162,16 +162,13 @@
 /datum/reagent/medicine/ichor_of_mending/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
 		M.adjustBruteLoss(-3.5 * REM * efficiency, 0)
-		var/list/wCount = M.get_wounds()
-		if(wCount.len > 0)
-			M.heal_wounds(4 * efficiency)
+		M.heal_wounds(4 * efficiency)
 	. = ..()
 
-/datum/reagent/medicine/ichor_of_mending/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
-		if(injury.damage_type == WOUND_DIVINE || injury.damage_type == WOUND_BURN)
-			continue
-		injury.heal_damage(2)
+/datum/reagent/medicine/ichor_of_mending/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	if(affected_bodypart.heal_damage(3.5 * REM, 0, required_status = BODYPART_ORGANIC))
+		affected_mob.update_damage_overlays()
+	return ..()
 
 /datum/reagent/medicine/ashbinders_salve
 	name = "Ashbinder's Salve"
@@ -187,13 +184,18 @@
 		M.adjustFireLoss(-4 * REM * efficiency, 0)
 	. = ..()
 
-/datum/reagent/medicine/ashbinders_salve/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
-		if(injury.damage_type != WOUND_BURN)
+/datum/reagent/medicine/ashbinders_salve/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
+		if(!injury.can_heal())
 			continue
-		injury.heal_damage(3)
+		if(!(injury.damage_type & FIRE_WOUND_TYPES))
+			continue
 		injury.adjust_germ_level(-10)
-	BP.disinfect_limb(30 SECONDS)
+		injury.heal_damage(3)
+	if(affected_bodypart.post_damage_change())
+		affected_mob.update_damage_overlays()
+	affected_bodypart.disinfect_limb(30 SECONDS)
+	return ..()
 
 /datum/reagent/medicine/vitalroot_draught
 	name = "Vitalroot Draught"
@@ -253,11 +255,12 @@
 	scent_description = "stagnant bog"
 	metabolization_rate = REAGENTS_METABOLISM * 0.5
 
-/datum/reagent/medicine/mirewort_compress/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/medicine/mirewort_compress/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(-20)
-	BP.disinfect_limb(3 MINUTES)
-	BP.adjust_germ_level(-25)
+	affected_bodypart.disinfect_limb(3 MINUTES)
+	affected_bodypart.adjust_germ_level(-25)
+	return ..()
 
 /datum/reagent/medicine/mirewort_compress/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -273,13 +276,16 @@
 	scent_description = "resinous amber"
 	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/medicine/woundwrack_oil/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
-		if(injury.damage_type == WOUND_DIVINE)
+/datum/reagent/medicine/woundwrack_oil/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
+		if(!injury.can_heal())
 			continue
-		injury.heal_damage(2)
 		injury.salve_injury()
-	BP.adjust_germ_level(-10)
+		injury.heal_damage(2)
+	if(affected_bodypart.post_damage_change())
+		affected_mob.update_damage_overlays()
+	affected_bodypart.adjust_germ_level(-10)
+	return ..()
 
 /datum/reagent/medicine/woundwrack_oil/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -340,9 +346,7 @@
 	if(volume > 0.99)
 		M.adjustBruteLoss(-2.5 * REM * efficiency, 0)
 		M.adjustFireLoss(-2.5 * REM * efficiency, 0)
-		var/list/wCount = M.get_wounds()
-		if(wCount.len > 0)
-			M.heal_wounds(5 * efficiency)
+		M.heal_wounds(5 * efficiency)
 	. = ..()
 
 /datum/reagent/medicine/marrowbrew
@@ -405,13 +409,16 @@
 	scent_description = "dust and old herbs"
 	metabolization_rate = REAGENTS_METABOLISM
 
-/datum/reagent/medicine/witchknit_paste/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in BP.injuries)
-		if(injury.damage_type == WOUND_DIVINE)
+/datum/reagent/medicine/witchknit_paste/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
+		if(!injury.can_heal())
 			continue
-		injury.heal_damage(1.5)
 		injury.salve_injury()
-	BP.adjust_germ_level(-15)
+		injury.heal_damage(1.5)
+	if(affected_bodypart.post_damage_change())
+		affected_mob.update_damage_overlays()
+	affected_bodypart.adjust_germ_level(-15)
+	return ..()
 
 /datum/reagent/medicine/witchknit_paste/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.99)
@@ -456,9 +463,7 @@
 	if(volume > 0.99)
 		M.adjustBruteLoss(-2 * REM * efficiency, 0)
 		M.adjustCloneLoss(-1.5 * REM * efficiency, 0)
-		var/list/wCount = M.get_wounds()
-		if(wCount.len > 0)
-			M.heal_wounds(2 * efficiency)
+		M.heal_wounds(2 * efficiency)
 	. = ..()
 
 /datum/reagent/medicine/sunpetal_decoction

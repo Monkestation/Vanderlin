@@ -6,7 +6,7 @@
 		STAT_INTELLIGENCE = 1,
 		STAT_SPEED = 1,
 		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 37, // experiment, they will be strongest skill wise. might go down later, idk.
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
@@ -46,8 +46,8 @@
 	gloves = /obj/item/clothing/gloves/plate/rust
 	pants = /obj/item/clothing/pants/platelegs/rust
 	shoes = /obj/item/clothing/shoes/boots/armor/light/rust
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/bandit
 	beltr = /obj/item/weapon/sword/long
 	backr = /obj/item/storage/backpack/satchel/black
 	backl = /obj/item/weapon/shield/tower/metal
-	backpack_contents = list(/obj/item/weapon/knife/dagger = 1)
+	backpack_contents = list(/obj/item/weapon/knife/dagger = 1, /obj/item/clothing/face/shepherd/rag = 1)

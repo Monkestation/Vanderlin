@@ -53,8 +53,6 @@
 	var/tier = 1
 	/// Return value of the last ritual's on_finished_recipe
 	var/ritual_result
-	/// Atoms within runesize of the rune, populated at invoke time
-	var/list/atom/movable/atoms_in_range
 	/// The runeritual datum instantiated for the current invocation
 	var/datum/runerituals/pickritual
 	/// Atoms selected to satisfy the ritual's ingredient requirements
@@ -63,6 +61,8 @@
 	var/associated_ritual = null
 	/// If TRUE, every item with attunement_values on the rune is pulled into selected_atoms
 	var/takes_all_items = FALSE
+	///are we glowing?
+	var/glowing = FALSE
 
 /obj/effect/decal/cleanable/ritual_rune/Initialize(mapload, set_keyword)
 	. = ..()
@@ -160,8 +160,8 @@
 	rune_in_use = FALSE
 
 	// Gather all movable, visible, non-abstract atoms in range.
-	atoms_in_range = list()
-	for(var/atom/movable/close_atom as anything in range(runesize, src))
+	var/list/atoms_in_range = list()
+	for(var/atom/movable/close_atom in range(runesize, src))
 		if(isitem(close_atom))
 			var/obj/item/close_item = close_atom
 			if(close_item.item_flags & ABSTRACT)
@@ -196,6 +196,8 @@
 		if(takes_all_items && isitem(nearby) && length(nearby:attunement_values))
 			selected_atoms |= nearby
 
+	atoms_in_range = list() //no longer needed
+
 	// Report any unfulfilled requirements.
 	var/list/missing = list()
 	for(var/req_type in requirements)
@@ -205,7 +207,7 @@
 		var/label
 		if(islist(req_type))
 			var/list/options = list()
-			for(var/possible as anything in req_type)
+			for(var/possible in req_type)
 				options += pickritual.parse_required_item(possible)
 			label = "[count] [english_list(options, and_text = "or")]"
 		else

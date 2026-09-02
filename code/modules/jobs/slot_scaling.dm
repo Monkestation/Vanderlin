@@ -2,7 +2,7 @@
 	var/count = 0
 	for(var/mob/living/carbon/human/H in GLOB.human_list)
 		if(H.mind && H.client)
-			if(H.mind.assigned_role?.faction == "Town")
+			if(H.mind.assigned_role?.factions == "Town")
 				count++
 	return count
 
@@ -13,3 +13,9 @@
 
 /proc/adventurer_slot_formula(playercount)
 	return job_slot_formula(playercount,7,2,3,14)
+
+/proc/gallowband_slot_formula(playercount)
+	return job_slot_formula(playercount, 15, 0, 1, 3)
+
+/proc/gallowslave_slot_formula(playercount)
+	return job_slot_formula(playercount, 30, 0, 1, 3)

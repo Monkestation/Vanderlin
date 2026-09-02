@@ -97,7 +97,7 @@
 	/// How many ticks this mob has been over reating
 	var/overeatduration = 0		// How long this guy is overeating //Carbon
 
-	var/uses_random_stats = TRUE
+	var/uses_random_stats = FALSE
 	/// Skill holder
 	var/datum/attribute_holder/attributes = /datum/attribute_holder
 	/// Extra effort that can be spent on efforts
@@ -244,7 +244,9 @@
 	var/list/attack_grunts = null
 	var/list/takedamage_grunts = null
 
+	/// ONLY USED FOR INITIALIZING, DO NOT CHECK OR MODIFY DIRECTLY. USE TRAIT_UNPARRYING
 	var/canparry = FALSE
+	/// ONLY USED FOR INITIALIZING, DO NOT CHECK OR MODIFY DIRECTLY. USE TRAIT_UNDODGING
 	var/candodge = FALSE
 
 	var/dodge_sound = 'sound/combat/dodge.ogg'

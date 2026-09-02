@@ -9,7 +9,7 @@ SUBSYSTEM_DEF(cellauto)
 	var/list/currentrun = list()
 
 /datum/controller/subsystem/cellauto/stat_entry(msg)
-	msg = "C: [length(GLOB.cellauto_cells)]"
+	msg = "C:[length(GLOB.cellauto_cells)]"
 	return ..()
 
 /datum/controller/subsystem/cellauto/fire(resumed = FALSE)

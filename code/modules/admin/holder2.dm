@@ -221,6 +221,8 @@ you will have to do something like if(client.rights & R_ADMIN) myself.
 /datum/admins/proc/get_message_prefix()
 	if(CONFIG_GET(flag/asay_simple_titles))
 		return rank?.name
+	if(ckey(rank.name) in GLOB.admin_categories[ADMIN_CATEGORY_LEADERSHIP])
+		return "LEADERSHIP"
 	if(ckey(rank.name) in GLOB.admin_categories[ADMIN_CATEGORY_ADMIN])
 		return "ADMIN"
 	if(ckey(rank.name) in GLOB.admin_categories[ADMIN_CATEGORY_MAINT])

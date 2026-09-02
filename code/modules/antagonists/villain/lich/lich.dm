@@ -46,7 +46,7 @@
 		TRAIT_NOPAIN,
 		TRAIT_TOXIMMUNE,
 		TRAIT_STEELHEARTED,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_INHUMENCAMP,
 		TRAIT_NOMOOD,
 		TRAIT_NOLIMBDISABLE,
@@ -55,13 +55,15 @@
 		TRAIT_SEEPRICES,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
 		TRAIT_DEATHSIGHT,
+		TRAIT_NO_ORGAN_PROCESS,
 	)
 
 	var/list/spells = list(
 		/datum/action/cooldown/spell/projectile/fireball,
-		/datum/action/cooldown/spell/projectile/blood_bolt,
+		/datum/action/cooldown/spell/projectile/blood_bolt/arcyne,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/undirected/arcyne_eye,
@@ -97,6 +99,7 @@
 	var/mob/living/lich_mob = owner.current
 	lich_mob.remove_spells(source = src)
 	UnregisterSignal(lich_mob, COMSIG_LIVING_DEATH)
+	return ..()
 
 /datum/antagonist/lich/greet()
 	. = ..()
@@ -121,26 +124,30 @@
 	L.mana_pool.set_intrinsic_recharge(MANA_SOULS)
 	L.mana_pool.ethereal_recharge_rate += 0.2
 
-	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
-	if(prob(10))
-		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
-	L.set_faction(FACTION_UNDEAD)
-	if(length(L.quirks))
-		L.clear_quirks()
+	ADD_TRAIT(L, TRAIT_NOBLOOD, TRAIT_GENERIC)
+
+	L.set_faction(list(FACTION_UNDEAD))
 	L.mob_biotypes |= MOB_UNDEAD
-	L.dna.species.species_traits |= NOBLOOD
-	L.grant_undead_eyes()
+	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
 	L.skeletonize(FALSE)
+	L.grant_undead_eyes()
+
 	L.equipOutfit(/datum/outfit/lich)
 	L.set_patron(/datum/patron/inhumen/zizo)
 
+	L.cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
+	if(prob(10))
+		L.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
+	if(length(L.quirks))
+		L.clear_quirks()
+
 /datum/outfit/lich/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/helmet/skullcap/cult
+	head = /obj/item/clothing/head/helmet/skullcap/magus
 	pants = /obj/item/clothing/pants/chainlegs
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/chaincoif
-	armor = /obj/item/clothing/shirt/robe/necromancer
+	armor = /obj/item/clothing/shirt/robe/magus
 	shirt = /obj/item/clothing/shirt/tunic/colored
 	wrists = /obj/item/clothing/wrists/bracers
 	gloves = /obj/item/clothing/gloves/chain
@@ -149,16 +156,21 @@
 	beltr = /obj/item/reagent_containers/glass/bottle/manapot
 	beltl = /obj/item/weapon/knife/dagger/steel
 	r_hand = /obj/item/weapon/polearm/woodstaff
+	backpack_contents = list(
+		/obj/item/spellbook/expert/starter/death = 1
+	)
 
 	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lich)
 
-	H.adjust_spell_points(17) //Same as CM - Until they receive their spellbook.
+	H.adjust_technique_mastery_points(12)
+	H.adjust_form_mastery_points(20)
+	H.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_DEATH = 2))
 	H.grant_language(/datum/language/undead)
 	if(H.dna?.species)
 		H.dna.species.native_language = "Zizo Chant"
 		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	H.dna.species.soundpack_m = new /datum/voicepack/lich()
-	H.ambushable = FALSE
+	ADD_TRAIT(H, TRAIT_NOAMBUSH, JOB_TRAIT)
 
 	addtimer(CALLBACK(H, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), ROLE_LICH), 5 SECONDS)
 
@@ -232,7 +244,7 @@
 
 	lich_mob.skeletonize(FALSE)
 
-	lich_mob.set_faction(FACTION_UNDEAD)
+	lich_mob.set_faction(list(FACTION_UNDEAD))
 	if(length(lich_mob.quirks))
 		lich_mob.clear_quirks()
 	lich_mob.mob_biotypes |= MOB_UNDEAD
@@ -242,8 +254,8 @@
 /obj/item/phylactery
 	name = "phylactery"
 	desc = "Looks like it is filled with some intense power."
-	icon = 'icons/obj/wizard.dmi'
-	icon_state = "soulstone"
+	icon = 'icons/roguetown/items/gems.dmi'
+	icon_state = "necro_crystal"
 	item_state = "electronic"
 	lefthand_file = 'icons/mob/inhands/misc/devices_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/misc/devices_righthand.dmi'

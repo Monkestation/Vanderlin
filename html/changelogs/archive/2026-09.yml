@@ -1,0 +1,33 @@
+2026-09-01:
+  Monkeke2:
+  - rscadd: Added mercenary statue and mercenary ring.
+  - rscdel: Removed mentions of gaffer from mercenary spawn text.
+  - map: Added the mercenary statues to Vanderlin, Daftmarsh and WPP.
+  Snack-Max:
+  - rscadd: Added Helmet selections for Men at Arms
+2026-09-02:
+  GalaxyBird:
+  - qol: Feldsher and Clinic apprentice can now work with prosthetics.
+  realforest2001:
+  - bugfix: Vampire Manor cell door can be unlocked again.
+  - map: Mapped in the Oracle's Dream Cave and travel tiles.
+  - bugfix: Miracles now affect Inquisition if they're undead.
+  - rscadd: Adds missing Dream Cave room.
+  - rscadd: Master's Rod now works on anyone within the Keep 'subfaction' (Garrison,
+      Court roles etc.).
+  - bugfix: Master's Rod can no longer just hit everyone everywhere.
+  - rscadd: Master's Rod will work on ANYONE when inside Keep Grounds.
+  - rscadd: Staff of Aries will work on ANYONE when inside Church Grounds.
+  - balance: Electrocute intent on both rods now has 30s cooldown instead of 20s.
+  - rscadd: Added Curse Guard enchantment which protects Vampires from silver. Only
+      applies to gloves and when silver objects are held in hands.
+  - rscadd: Silver is now a looping effect. After the initial application from picking
+      it up or wearing it, it will begin to pulse damage every 15 seconds until you
+      take it off/drop it. This is to stop vampires and other affect entities being
+      able to endure the initial damage and then keep wearing silver.
+  - rscadd: Added a log to conjuring items.
+  - rscadd: Added an examine artefact for Oracle looking at Nitewarden.
+  - rscadd: Changed invocation for Numbing Senses to not use the Baothan miracle words.
+  - rscadd: Added Blood and Death magic warnings in the spellbook UI.
+  - balance: Nerfed learnable Ethereal Jaunt by increasing cooldown. Does not apply
+      to Court Mage's innate spell.

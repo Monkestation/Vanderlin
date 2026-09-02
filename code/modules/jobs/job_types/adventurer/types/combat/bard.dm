@@ -73,7 +73,7 @@
 /datum/outfit/adventurer/bard
 	name = "Bard (Adventurer)"
 	head = /obj/item/clothing/head/bardhat
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/armor/gambeson/light // very, very shitty armor
 	belt = /obj/item/storage/belt/leather

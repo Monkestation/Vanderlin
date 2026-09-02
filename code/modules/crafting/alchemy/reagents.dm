@@ -8,19 +8,20 @@
 	scent_description = "metal"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
+	liver_chemical = FALSE
+	price_per_unit = 0.5
 
-/datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in bodypart.injuries)
-		if(injury.damage_type == WOUND_DIVINE)
-			continue
-		injury.heal_damage(1)
+/datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	if(affected_bodypart.heal_damage(1 * REM, 1 * REM, TRUE, required_status = BODYPART_ORGANIC))
+		affected_mob.update_damage_overlays()
+	return ..()
 
-/datum/reagent/medicine/healthpot/healthpot/on_mob_metabolize(mob/living/L)
+/datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BLOODRESTORE, 5, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 3, "[type]")
 	L.add_chem_effect(CE_STABLE, 1, "[type]")
 
-/datum/reagent/medicine/healthpot/healthpot/on_mob_end_metabolize(mob/living/L)
+/datum/reagent/medicine/healthpot/on_mob_end_metabolize(mob/living/L)
 	. = ..()
 	L.remove_chem_effect(CE_BLOODRESTORE, "[type]")
 	L.remove_chem_effect(CE_STABLE, "[type]")
@@ -28,15 +29,14 @@
 /datum/reagent/medicine/healthpot/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/healthpot, 2) //No overhealing.
-	var/list/wCount = M.get_wounds()
-	if(wCount.len > 0)
-		M.heal_wounds(3 * efficiency) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
+	M.adjust_blood_volume(6 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
+	M.heal_wounds(3 * efficiency) //at a motabalism of .5 U a tick this translates to 120WHP healing with 20 U Most wounds are unsewn 15-100. This is powerful on single wounds but rapidly weakens at multi wounds.
 	if(volume > 0.99)
-		M.adjustBruteLoss(-1.75*REM * efficiency, 0)
-		M.adjustFireLoss(-1.75*REM * efficiency, 0)
-		M.adjustOxyLoss(-1.25 * efficiency, 0)
-		M.adjustCloneLoss(-1.75*REM * efficiency, 0)
-	..()
+		M.adjustOxyLoss(-1.25 * efficiency, FALSE)
+		M.adjustCloneLoss(-1.25 * REM * efficiency, FALSE)
+		M.adjustBruteLoss(-1.75*REM * efficiency, FALSE, required_status = BODYPART_ORGANIC)
+		M.adjustFireLoss(-1.75*REM * efficiency, TRUE, required_status = BODYPART_ORGANIC)
+	. = ..()
 
 /datum/reagent/medicine/stronghealth
 	name = "Strong Health Potion"
@@ -45,18 +45,17 @@
 	taste_description = "rich lifeblood"
 	scent_description = "metal"
 	metabolization_rate = REAGENTS_METABOLISM * 2
+	liver_chemical = FALSE
+	price_per_unit = 3
 
-/datum/reagent/medicine/healthpot/on_bodypart_absorb(obj/item/bodypart/bodypart, mob/living/carbon/M, amount_to_transfer)
-	for(var/datum/injury/injury in bodypart.injuries)
-		if(injury.damage_type == WOUND_DIVINE)
-			continue
-		injury.heal_damage(2)
-	for(var/datum/wound/wound in bodypart.wounds)
-		wound.heal_wound(2)
+/datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	if(affected_bodypart.heal_damage(3 * REM, 3 * REM, TRUE, required_status = BODYPART_ORGANIC))
+		affected_mob.update_damage_overlays()
+	return ..()
 
 /datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
-	L.add_chem_effect(CE_BLOODRESTORE, 30, "[type]")
+	L.add_chem_effect(CE_BLOODRESTORE, 5, "[type]")
 	L.add_chem_effect(CE_STABLE, 1, "[type]")
 	L.add_chem_effect(CE_BRAIN_REGEN, 1, "[type]")
 
@@ -69,14 +68,14 @@
 /datum/reagent/medicine/stronghealth/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume >= 60)
 		M.remove_reagent(/datum/reagent/medicine/stronghealth, 2) //No overhealing.
+	M.adjust_blood_volume(10 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
 	M.heal_wounds(6 * efficiency) //at a motabalism of .5 U a tick this translates to 240WHP healing with 20 U Most wounds are unsewn 15-100.
 	if(volume > 0.99)
-		M.adjustBruteLoss(-7*REM * efficiency, 0)
-		M.adjustFireLoss(-7*REM * efficiency, 0)
-		M.adjustOxyLoss(-5 * efficiency, 0)
-		M.adjustCloneLoss(-7*REM * efficiency, 0)
-	..()
-	. = 1
+		M.adjustOxyLoss(-5 * efficiency, FALSE)
+		M.adjustCloneLoss(-5 * REM * efficiency, FALSE)
+		M.adjustBruteLoss(-7*REM * efficiency, FALSE, required_status = BODYPART_ORGANIC)
+		M.adjustFireLoss(-7*REM * efficiency, TRUE, required_status = BODYPART_ORGANIC)
+	. = ..()
 
 /datum/reagent/medicine/rosawater
 	name = "Rosa Water"
@@ -143,16 +142,17 @@
 	scent_description = "dry air"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
+	price_per_unit = 0.5
 
 /datum/reagent/medicine/manapot/on_mob_life(mob/living/carbon/M, efficiency)
-	M.mana_pool.adjust_mana(4 * efficiency)
+	M.safe_adjust_personal_mana(24 * efficiency)
 	..()
 
 /datum/reagent/medicine/manapot/weak
 	name = "Weak Mana Potion"
 
 /datum/reagent/medicine/manapot/weak/on_mob_life(mob/living/carbon/M, efficiency)
-	M.mana_pool.adjust_mana(2 * efficiency)
+	M.safe_adjust_personal_mana(12 * efficiency)
 	..()
 
 /datum/reagent/medicine/strongmana
@@ -162,9 +162,10 @@
 	taste_description = "raw power"
 	scent_description = "dry air"
 	metabolization_rate = REAGENTS_METABOLISM * 3
+	price_per_unit = 3
 
 /datum/reagent/medicine/strongmana/on_mob_life(mob/living/carbon/M, efficiency)
-	M.mana_pool.adjust_mana(8 * efficiency)
+	M.safe_adjust_personal_mana(48 * efficiency)
 	..()
 
 
@@ -177,6 +178,7 @@
 	scent_description = "grass"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
+	price_per_unit = 0.5
 
 /datum/reagent/medicine/stampot/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
@@ -190,10 +192,49 @@
 	taste_description = "sparkly static"
 	scent_description = "grass"
 	metabolization_rate = REAGENTS_METABOLISM * 3
+	price_per_unit = 3
 
 /datum/reagent/medicine/strongstam/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		M.adjust_stamina(-6 * efficiency, internal_regen = FALSE)
+	..()
+
+/datum/reagent/medicine/bloodpot
+	name = "Blood Potion"
+	description = "Gradually regenerates Vitae."
+	reagent_state = LIQUID
+	color = COLOR_BLOOD
+	taste_description = "sickly iron"
+	scent_description = "sickly iron"
+	metabolization_rate = REAGENTS_METABOLISM
+	alpha = 173
+	price_per_unit = 1.5
+	random_reagent_color = FALSE
+
+/datum/reagent/medicine/bloodpot/on_mob_life(mob/living/carbon/M, efficiency)
+	if(volume >= 60)
+		M.remove_reagent(/datum/reagent/medicine/bloodpot, 2)
+	M.adjust_blood_volume(6 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
+	M.adjust_bloodpool(10 * efficiency)
+	..()
+
+/datum/reagent/medicine/strongbloodpot
+	name = "Strong Blood Potion"
+	description = "Regenerates Vitae."
+	reagent_state = LIQUID
+	color = COLOR_MAROON
+	taste_description = "sickly iron"
+	scent_description = "sickly iron"
+	metabolization_rate = REAGENTS_METABOLISM
+	alpha = 173
+	price_per_unit = 3
+	random_reagent_color = FALSE
+
+/datum/reagent/medicine/strongbloodpot/on_mob_life(mob/living/carbon/M, efficiency)
+	if(volume >= 60)
+		M.remove_reagent(/datum/reagent/medicine/strongbloodpot, 2)
+	M.adjust_blood_volume(12 * efficiency, maximum = BLOOD_VOLUME_NORMAL)
+	M.adjust_bloodpool(15 * efficiency)
 	..()
 
 /datum/reagent/medicine/antidote
@@ -220,11 +261,12 @@
 	scent_description = "saiga droppings"
 	metabolization_rate = REAGENTS_METABOLISM * 3
 
-/datum/reagent/medicine/diseasecure/on_bodypart_absorb(obj/item/bodypart/BP, mob/living/carbon/M, amount_to_transfer)
-	BP.disinfect_limb(20 MINUTES)
-	for(var/datum/injury/injury in BP.injuries)
+/datum/reagent/medicine/diseasecure/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
+	affected_bodypart.disinfect_limb(20 MINUTES)
+	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(-30)
-	BP.adjust_germ_level(-30)
+	affected_bodypart.adjust_germ_level(-30)
+	return ..()
 
 /datum/reagent/medicine/diseasecure/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -352,7 +394,7 @@ still is dangerous. Toxloss of 3 at metabolism 0.1 puts you in dying early stage
 A dose of ingested potion is defined as 5u, projectile deliver at most 2u, you already do damage with projectile, a bolt can only feasible hold a tiny amount of poison, so much easier to deliver than ingested and so on.
 If you want to expand on poisons theres tons of fun effects TG chemistry has that could be added, randomzied damage values for more unpredictable poison, add trait based resists instead of the clunky race check etc.*/
 
-/datum/reagent/berrypoison	// Weaker poison, balanced to make you wish for death and incapacitate but not kill
+/datum/reagent/poison/berry	// Weaker poison, balanced to make you wish for death and incapacitate but not kill
 	name = "Berry Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -364,7 +406,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	var/naus = 3
 	var/tox = 2
 
-/datum/reagent/berrypoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/poison/berry/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.09)
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.add_nausea((tox/3) * efficiency)
@@ -374,7 +416,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 			M.adjustToxLoss(tox * efficiency)
 	return ..()
 
-/datum/reagent/berrypoison/shroom
+/datum/reagent/poison/berry/shroom
 	name = "Mushroom Poison"
 	color = "#5647e0"
 	taste_description = "acidity"
@@ -383,7 +425,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	tox = 2.5
 
 
-/datum/reagent/strongpoison		// Strong poison, meant to be somewhat difficult to produce using alchemy or spawned with select antags. Designed to kill in one full dose (5u) better drink antidote fast
+/datum/reagent/poison/doom		// Strong poison, meant to be somewhat difficult to produce using alchemy or spawned with select antags. Designed to kill in one full dose (5u) better drink antidote fast
 	name = "Doom Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -393,7 +435,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	scent_description = "charcoal"
 	metabolization_rate = REAGENTS_SLOW_METABOLISM
 
-/datum/reagent/strongpoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/poison/doom/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.09)
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.add_nausea(1 * efficiency)
@@ -403,7 +445,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 			M.adjustToxLoss(4.5 * efficiency) // just enough so 5u will kill you dead with no help
 	return ..()
 
-/datum/reagent/organpoison
+/datum/reagent/poison/organ
 	name = "Organ Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -414,7 +456,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	metabolization_rate = REAGENTS_SLOW_METABOLISM
 	var/list/cannibalism_pool = ALL_RACES_LIST
 
-/datum/reagent/organpoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/poison/organ/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!(M.dna?.species?.id in cannibalism_pool))
 		return ..()
 	if(HAS_TRAIT(M, TRAIT_NOHUNGER))
@@ -436,7 +478,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					if(prob(30))
 						to_chat(graggar_lover, span_bloody("More... More..."))
 					var/obj/item/bodypart/bp = graggar_lover.get_bodypart()
-					bp?.add_pain(10 * efficiency)
+					bp?.add_pain(SHOCK_STAGE_1 * efficiency)
 					bp?.bodypart_attacked_by(BCLASS_BLUNT, 12 * efficiency, null, BODY_ZONE_CHEST, crit_message = FALSE, modifiers = list(CRIT_MOD_CHANCE = -10))
 					M.do_jitter_animation(100 * efficiency)
 				if(60)
@@ -459,7 +501,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					graggar_lover.real_name = dna_cache.real_name
 					graggar_lover.bloody_hands++
 					graggar_lover.update_inv_gloves()
-					playsound(get_turf(graggar_lover), pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
+					playsound(graggar_lover, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 100, FALSE, 3)
 					graggar_lover.spawn_gibs(TRUE)
 					graggar_lover.emote("agony")
 					graggar_lover.visible_message(span_danger("[graggar_lover]'s skin bursts!"), span_userdanger("MY SKIN BURSTS!!"))
@@ -479,15 +521,15 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	set_patron(/datum/patron/inhumen/graggar)
 	to_chat(src, SPAN_GOD_GRAGGAR("The Beast's teeth close around your heart! Devour! Conquer! Graggar!"))
 
-/datum/reagent/organpoison/human
+/datum/reagent/poison/organ/human
 	name = "Humen Organ Poison"
 	cannibalism_pool = SPECIES_CANNIBAL_MEN
 
-/datum/reagent/organpoison/kobold
+/datum/reagent/poison/organ/kobold
 	name = "Kobold Organ Poison"
 	cannibalism_pool = SPECIES_CANNIBALISM_KOBOLD
 
-/datum/reagent/stampoison
+/datum/reagent/poison/stamina
 	name = "Stamina Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -497,7 +539,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	scent_description = "dust"
 	metabolization_rate = REAGENTS_SLOW_METABOLISM * 3
 
-/datum/reagent/stampoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/poison/stamina/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.adjust_stamina(0.75 * efficiency)
@@ -505,7 +547,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 			M.adjust_stamina(2.25 * efficiency) //Slowly leech stamina
 	return ..()
 
-/datum/reagent/strongstampoison
+/datum/reagent/poison/stamina_strong
 	name = "Strong Stamina Poison"
 	description = ""
 	reagent_state = LIQUID
@@ -515,7 +557,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	scent_description = "freezing dust"
 	metabolization_rate = REAGENTS_SLOW_METABOLISM * 9
 
-/datum/reagent/strongstampoison/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/poison/stamina_strong/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.adjust_stamina(4.5 * efficiency)
@@ -527,7 +569,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 //THIS SHOULDN'T BE SPAWNABLE, LEAVE IT CRAFT ONLY
 //If you do think this should be spawnable, make it spawn in INCREDIBLY small amounts
 //reminder this is incredibly potent, the poison to out poison anyone, this the shit that killed Psydon
-/datum/reagent/dreaddeath
+/datum/reagent/poison/dreaddeath
 	name = "Dread Death"
 	description = "A terribly potent poison."
 	reagent_state = LIQUID
@@ -537,7 +579,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	scent_description = "nothing"
 	metabolization_rate = REAGENTS_SLOW_METABOLISM * 5
 
-/datum/reagent/dreaddeath/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/poison/dreaddeath/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M,TRAIT_NOSTAMINA))
 		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
 			M.adjust_stamina(5 * efficiency)
@@ -553,7 +595,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 		M.adjustOxyLoss(2 * efficiency)
 	return ..()
 
-/datum/reagent/killersice
+/datum/reagent/poison/killersice
 	name = "Killer's Ice"
 	description = ""
 	reagent_state = LIQUID
@@ -562,12 +604,12 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	scent_description = "freezing dust"
 	metabolization_rate = REAGENTS_SLOW_METABOLISM
 
-/datum/reagent/killersice/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/poison/killersice/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
 		M.adjustToxLoss(5 * efficiency)
 	return ..()
 
-/datum/reagent/drowsbane
+/datum/reagent/poison/drowsbane
 	name = "Drowsbane"
 	description = ""
 	reagent_state = LIQUID
@@ -578,13 +620,13 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	var/tox = 1
 	var/oxy = 5
 
-/datum/reagent/drowsbane/on_mob_life(mob/living/carbon/M, efficiency)
+/datum/reagent/poison/drowsbane/on_mob_life(mob/living/carbon/M, efficiency)
 	if(volume > 0.09)
 		if(istiefling(M))
 			M.adjustBruteLoss(-1*REM * efficiency)
 			M.adjustFireLoss(-1*REM * efficiency)
 			if(volume >= 25)
-				M.remove_reagent(/datum/reagent/drowsbane, 5 * efficiency) //Incase you eat like, five drowsbane clusters to get infinite healing.
+				M.remove_reagent(/datum/reagent/poison/drowsbane, 5 * efficiency) //Incase you eat like, five drowsbane clusters to get infinite healing.
 			if(prob(10))
 				to_chat(M, span_notice("Something inside me burns, it's rejuvenating!"))
 		if(isdarkelf(M) || ishalfdrow(M))

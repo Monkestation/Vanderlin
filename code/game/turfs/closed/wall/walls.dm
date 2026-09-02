@@ -182,7 +182,7 @@
 	icon_state = "wood"
 	opacity = FALSE
 	max_integrity = 550
-	pass_flags_self = PASSTABLE|PASSGRILLE
+	pass_flags_self = PASSGRILLE
 
 /turf/closed/wall/mineral/wood/window/Initialize()
 	. = ..()
@@ -212,6 +212,71 @@
 /turf/closed/wall/mineral/tent/OnCrafted(dirin, mob/user)
 	dir = dirin
 	return ..()
+
+/turf/closed/wall/mineral/tent/blue
+	icon_state = "tent_blue"
+	name = "blue tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/cyan
+	icon_state = "tent_cyan"
+	name = "cyan tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/brown
+	icon_state = "tent_brown"
+	name = "brown tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/green
+	icon_state = "tent_green"
+	name = "green tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/purple
+	icon_state = "tent_purple"
+	name = "purple tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/red
+	icon_state = "tent_red"
+	name = "red tent wall"
+	desc = "A colourful tent wall."
+
+/turf/closed/wall/mineral/tent/reddeco
+	icon_state = "tent_red_deco"
+	name = "decorated red tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/purpledeco
+	icon_state = "tent_purple_deco"
+	name = "decorated purple tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/greendeco
+	icon_state = "tent_green_deco"
+	name = "decorated green tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/browndeco
+	icon_state = "tent_brown_deco"
+	name = "decorated brown tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/cyandeco
+	icon_state = "tent_cyan_deco"
+	name = "decorated cyan tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/bluedeco
+	icon_state = "tent_blue_deco"
+	name = "decorated blue tent wall"
+	desc = "A colourful tent wall embossed with gold."
+
+/turf/closed/wall/mineral/tent/noc
+	icon_state = "tent_noc"
+	name = "decorated navy tent wall"
+	desc = "A colourful tent wall embossed with silver, popular amongst Noccites."
 
 /turf/closed/wall/mineral/wooddark
 	name = "dark wood wall"
@@ -255,14 +320,14 @@
 	icon_state = "subwindow"
 	opacity = FALSE
 	explosion_block = 1
-	pass_flags_self = PASSTABLE|PASSGRILLE
+	pass_flags_self = PASSGRILLE
 
 /turf/closed/wall/mineral/wooddark/window/OnCrafted(dirin, mob/user)
 	SHOULD_CALL_PARENT(FALSE)
 	SEND_SIGNAL(user, COMSIG_ITEM_CRAFTED, user, type)
 	record_featured_stat(FEATURED_STATS_CRAFTERS, user)
 	record_featured_object_stat(FEATURED_STATS_CRAFTED_ITEMS, name)
-	add_abstract_elastic_data(ELASCAT_CRAFTING, "[name]", 1)
+	add_abstract_elastic_data(ELASCAT_CRAFTING, "[initial(name)]", 1)
 	return
 
 /turf/closed/wall/mineral/roofwall
@@ -517,3 +582,27 @@
 	climbdiff = 1
 	damage_deflection = 20
 	hardness = 10
+
+/turf/closed/wall/mineral/baddaub
+	name = "daub wall"
+	desc = "An old wattle and daub wall. It's not in the best shape."
+	icon = 'icons/turf/walls.dmi'
+	icon_state = "badplaster"
+	blade_dulling = DULLING_BASHCHOP
+	max_integrity = 700
+	break_sound = 'sound/combat/hits/onwood/destroywalldoor.ogg'
+	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
+//	sheet_type = /obj/item/grown/log/tree/lumber
+	above_floor = /turf/open/floor/ruinedwood
+	baseturfs = /turf/open/floor/ruinedwood
+	neighborlay = "dirtedge"
+	climbdiff = 3
+	explosion_block = 4
+	hardness = 7
+
+	burn_power = 100
+	spread_chance = 1.8
+
+/turf/closed/wall/mineral/baddaub/Initialize()
+	. = ..()
+	dir = pick(GLOB.cardinals)

@@ -90,6 +90,9 @@
 
 /datum/job/monk
 	title = JOB_ACOLYTE
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Brother")
+	alt_honorary_female = list("Sister")
 	tutorial = "Chores, exercise, prayer... and more chores. \
 	You are a humble acolyte at the temple in Vanderlin, \
 	not yet a trained guardian or an ordained priest. \
@@ -97,16 +100,18 @@
 	department_flag = CHURCHMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MONK
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONHERETICAL
-	allowed_patrons = ALL_TEMPLE_PATRONS
+	allowed_patrons = ALL_ACOLYTE_PATRONS
 
 	outfit = /datum/outfit/monk
 	give_bank_account = TRUE
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	job_bitflag = BITFLAG_CHURCH
 
 	exp_types_granted = list(EXP_TYPE_CHURCH, EXP_TYPE_CLERIC)
@@ -115,22 +120,18 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/acolyte/old
 
 	languages = list(/datum/language/celestial)
+	traits = list(TRAIT_VIRGIN)
 
 /datum/job/monk/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	spawned.virginity = TRUE
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-		if(/datum/patron/divine/necra)
-			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
-			ADD_TRAIT(spawned, TRAIT_DEADNOSE, TRAIT_GENERIC)
-			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
-			spawned.virginity = FALSE
+			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/acolyte/patron/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/noc)
@@ -196,6 +197,7 @@
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	beltl = /obj/item/key/church
 	backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
+	backr = /obj/item/storage/backpack/satchel/cloth
 	backpack_contents = list(
 		/obj/item/needle = 1
 	)
@@ -209,17 +211,6 @@
 			wrists = /obj/item/clothing/wrists/wrappings
 			shoes = /obj/item/clothing/shoes/sandals
 			armor = /obj/item/clothing/shirt/robe/astrata
-		if(/datum/patron/divine/necra)
-			head = /obj/item/clothing/head/padded/deathshroud
-			neck = /obj/item/clothing/neck/psycross/silver/divine/necra
-			shoes = /obj/item/clothing/shoes/boots
-			pants = /obj/item/clothing/pants/trou/leather/mourning
-			armor = /obj/item/clothing/shirt/robe/necra
-			backpack_contents = list(/obj/item/inqarticles/tallowpot, /obj/item/reagent_containers/food/snacks/tallow/red) // Needed for coffin sanctification, they get enough for one, the rest they must source themselves.
-			if(equipped_human.age == AGE_OLD)
-				l_hand = /obj/item/weapon/mace/cane/necran
-			else
-				backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
 		if(/datum/patron/divine/eora)
 			mask = /obj/item/clothing/face/operavisage
 			neck = /obj/item/clothing/neck/psycross/silver/divine/eora
@@ -245,29 +236,31 @@
 		if(/datum/patron/divine/abyssor)
 			head = /obj/item/clothing/head/padded/abyssor
 			neck = /obj/item/clothing/neck/psycross/silver/divine/abyssor
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			armor = /obj/item/clothing/shirt/robe/abyssor
 		if(/datum/patron/divine/ravox)
 			head = /obj/item/clothing/head/helmet/leather/headscarf
 			neck = /obj/item/clothing/neck/psycross/silver/divine/ravox
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			shirt = /obj/item/clothing/armor/gambeson/light
 			armor = /obj/item/clothing/armor/leather
 			cloak = /obj/item/clothing/cloak/stabard/templar/ravox
 		if(/datum/patron/divine/xylix)
 			head = /obj/item/clothing/head/roguehood/colored/random
 			neck = /obj/item/clothing/neck/psycross/silver/divine/xylix
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			armor = /obj/item/clothing/shirt/robe/colored/purple
 		if(/datum/patron/divine/malum)
-			head = /obj/item/clothing/head/headband/colored/red
+			head = /obj/item/clothing/head/padded/malumhood
 			neck = /obj/item/clothing/neck/psycross/silver/divine/malum
-			shoes = /obj/item/clothing/shoes/boots
-			armor = /obj/item/clothing/shirt/robe/colored/red
+			gloves = /obj/item/clothing/gloves/leather
+			belt = /obj/item/storage/belt/leather
+			shoes = /obj/item/clothing/shoes/boots/leather
+			armor = /obj/item/clothing/shirt/robe/malum
 			backl = /obj/item/weapon/polearm/woodstaff/quarterstaff
 			backpack_contents += /obj/item/weapon/hammer/iron
 		else
 			head = /obj/item/clothing/head/roguehood/colored/random
 			neck = /obj/item/clothing/neck/psycross/silver
-			shoes = /obj/item/clothing/shoes/boots
+			shoes = /obj/item/clothing/shoes/boots/darkboots
 			armor = /obj/item/clothing/shirt/robe/colored/plain

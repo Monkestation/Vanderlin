@@ -1,6 +1,9 @@
 /mob/living/carbon/human/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	var/armorval = 0
 	var/organnum = 0
+	//!once phys mods are in change this
+	if(has_status_effect(/datum/status_effect/buff/iron_skin))
+		damage *= 0.75
 
 	if(def_zone)
 		return checkarmor(def_zone, type, damage, armor_penetration, blade_dulling, simulate)
@@ -8,57 +11,112 @@
 
 	//If you don't specify a bodypart, it checks ALL my bodyparts for protection, and averages out the values
 	for(var/obj/item/bodypart/BP as anything in bodyparts)
-		armorval += checkarmor(BP, type, damage, armor_penetration, simulate)
+		var/list/bp_result = checkarmor(BP, type, damage, armor_penetration, simulate)
+		armorval += bp_result[ARMOR_BLOCK]
 		organnum++
-	return (armorval/max(organnum, 1))
+	return list(ARMOR_BLOCK = (armorval / max(organnum, 1)), "converted_type" = type)
 
 
 /mob/living/carbon/human/proc/checkarmor(def_zone, d_type, damage, armor_penetration, blade_dulling, simulate=FALSE)
 	if(!d_type)
-		return 0
+		return list(ARMOR_BLOCK = 0, ARMOR_BLUNT_DMG = 0, ARMOR_TYPE_DMG = damage)
 	if(isbodypart(def_zone))
 		var/obj/item/bodypart/CBP = def_zone
 		def_zone = CBP.body_zone
 		if(def_zone == BODY_ZONE_PRECISE_MOUTH)
 			def_zone = BODY_ZONE_HEAD
+
 	var/protection = 0
+	var/edge_protection = 0
 	var/obj/item/clothing/used
 	var/list/body_parts = list(skin_armor, head, wear_mask, wear_wrists, gloves, wear_neck, cloak, wear_armor, wear_shirt, shoes, wear_pants, backr, backl, belt, wear_ring)
+
 	for(var/bp in body_parts)
 		if(!bp)
 			continue
-		if(bp && istype(bp , /obj/item/clothing))
+		if(bp && istype(bp, /obj/item/clothing))
 			var/obj/item/clothing/C = bp
 			if(zone2covered(def_zone, C.body_parts_covered))
 				if(C.uses_integrity)
 					if(C.get_integrity() <= 0)
 						continue
-				var/val = C.armor.getRating(d_type)
-				// The code below finally fixes the targetting order of armor > shirt > flesh. - Foxtrot (#gundamtanaka)
-				var/obj/item/armorworn = src.get_item_by_slot(ITEM_SLOT_ARMOR) // The armor we're wearing
-				var/obj/item/shirtworn = src.get_item_by_slot(ITEM_SLOT_SHIRT) // The shirt we're wearing
-				var/armor_protection = 0 // We are going to check if the armor protects more than the shirt.
-				if(bp == armorworn && (armorworn.uses_integrity && armorworn.get_integrity() > 0) && zone2covered(def_zone, armorworn.body_parts_covered)) // If the targeted bodypart has an armor...
-					if(val > 0) // ...and it's an actual armor with armor values...
+				var/datum/armor/C_armor = C.get_armor()
+				var/val = C_armor.get_rating(d_type)
+				var/obj/item/armorworn = src.get_item_by_slot(ITEM_SLOT_ARMOR)
+				var/obj/item/shirtworn = src.get_item_by_slot(ITEM_SLOT_SHIRT)
+				var/armor_protection = 0
+				if(bp == armorworn && (armorworn.uses_integrity && armorworn.get_integrity() > 0) && zone2covered(def_zone, armorworn.body_parts_covered))
+					if(val > 0)
 						if(val > protection)
 							protection = val
 							armor_protection = val
-							used = armorworn // ...force us to use it above all!
-				// If we don't have armor equipped or the one we have is broken...
+							edge_protection = C_armor.get_edge_protection(d_type)
+							used = armorworn
 				else if(bp == shirtworn)
-					if(val > 0) // ...and it's not just a linen shirt...
+					if(val > 0)
 						if(val > protection && val > armor_protection)
 							protection = val
+							edge_protection = C_armor.get_edge_protection(d_type)
 							if(skin_armor)
 								used = skin_armor
 							else
-								used = shirtworn //  ...skip straight to the shirt slot, and target it!
-				// Otherwise, proceed with normal assignment of bodypart protected by armor that isn't armor or shirt
+								used = shirtworn
 				else if(!istype(bp, wear_armor) && !istype(bp, wear_shirt))
 					if(val > 0)
 						if(val > protection)
 							protection = val
+							edge_protection = C_armor.get_edge_protection(d_type)
 							used = C
+
+	//drill into the next-best covering layer, as long as the layer we just hit allows it and the attack has enough AP to get through it
+	var/list/damaged_layers = list()
+	if(used)
+		damaged_layers += used
+
+	var/obj/item/clothing/current_layer = used
+	var/current_protection = protection
+	var/current_edge_protection = edge_protection
+
+	/*
+	 * If armor types supports layering, and damage pierces the current max protection we can go a layer below to add into it
+	 *
+	 * Per iteration:
+	 *   Scans 'body_parts' for the next valid, intact, and un-broken layer covering 'def_zone'.
+	 *   Selects the eligible piece with the highest armor rating for 'd_type'.
+	 *   Scales protection and edge protection using a diminishing stack formula (LAYERED_ARMOR_STACK_BONUS).
+	 *   Adds the new layer to 'damaged_layers' so it absorbs damage during execution so it can break aswell.
+	 */
+
+	while(current_layer && current_layer.get_armor().layered_defense && armor_penetration + damage > current_protection)
+		var/obj/item/clothing/next_layer
+		var/next_val = 0
+		var/next_ep = 0
+		for(var/bp in body_parts)
+			if(!bp || (bp in damaged_layers))
+				continue
+			if(!istype(bp, /obj/item/clothing))
+				continue
+			var/obj/item/clothing/C2 = bp
+			if(!zone2covered(def_zone, C2.body_parts_covered))
+				continue
+			if(C2.uses_integrity && C2.get_integrity() <= 0)
+				continue
+			var/datum/armor/C2_armor = C2.get_armor()
+			var/val2 = C2_armor.get_rating(d_type)
+			if(val2 >= next_val)
+				next_val = val2
+				next_ep = C2_armor.get_edge_protection(d_type)
+				next_layer = C2
+
+		if(!next_layer)
+			break
+
+		damaged_layers += next_layer
+		current_protection = min(100, current_protection + (next_val * LAYERED_ARMOR_STACK_BONUS) * (100 - current_protection) / 100)
+		current_edge_protection = min(100, current_edge_protection + (next_ep * LAYERED_ARMOR_STACK_BONUS) * (100 - current_edge_protection) / 100)
+		protection = current_protection
+		edge_protection = current_edge_protection
+		current_layer = next_layer
 
 	var/obj/item/clothing/cloak/boiler/steam_boiler = get_item_by_slot(ITEM_SLOT_BACK_R) || get_item_by_slot(ITEM_SLOT_BACK_L)
 	if(!istype(steam_boiler))
@@ -67,17 +125,33 @@
 	var/boiler_damage = damage / 5
 
 	if(!simulate)
-		if(used)
-			if(used.blocksound)
-				playsound(src, get_armor_sound(used.blocksound, blade_dulling), 100)
-			used.take_damage(damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
+		for(var/obj/item/clothing/layer_item as anything in damaged_layers)
+			if(layer_item.blocksound)
+				playsound(src, get_armor_sound(layer_item.blocksound, blade_dulling), 100)
+			layer_item.take_damage(damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
 
 		if(steam_boiler && def_zone == BODY_ZONE_CHEST)
 			steam_boiler.take_damage(boiler_damage, damage_flag = d_type, sound_effect = FALSE, armor_penetration = 100)
 
 	if(physiology)
-		protection += physiology.armor.getRating(d_type)
-	return protection
+		protection += physiology.armor.get_rating(d_type)
+
+	//EP math here, basically how much converts into ep from your original penetration
+	var/effective_protection = max(0, protection - armor_penetration)
+	var/remaining = max(0, damage - effective_protection)
+
+	var/blunt_dmg = 0
+	var/typed_dmg = 0
+
+	if(remaining <= 0 || !edge_protection || !(d_type in list("slash", "stab", "piercing")))
+		// no EP relevant (blunt attacks, or nothing got through DR anyway)
+		typed_dmg = remaining
+	else
+		blunt_dmg = min(remaining, edge_protection) // EP untouched by armor_penetration as thats specifically for armor. Perhaps we add an ep_pen?
+		typed_dmg = max(0, remaining - edge_protection)
+
+	return list(ARMOR_BLOCK = protection, ARMOR_BLUNT_DMG = blunt_dmg, ARMOR_TYPE_DMG = typed_dmg)
+
 
 /// Return the armor that blocks the crit
 /mob/living/carbon/human/proc/check_crit_armor(def_zone, d_type)
@@ -242,7 +316,7 @@
 	. = ..()
 
 
-/mob/living/carbon/human/attacked_by(obj/item/I, mob/living/user)
+/mob/living/carbon/human/attacked_by(obj/item/I, mob/living/user, signal)
 	if(!I || !user)
 		return 0
 
@@ -268,7 +342,7 @@
 	SSblackbox.record_feedback("tally", "zone_targeted", 1, useder)
 
 	// the attacked_by code varies among species
-	return dna.species.spec_attacked_by(I, user, affecting, used_intent, src, useder, accurate)
+	return dna.species.spec_attacked_by(I, user, affecting, used_intent, src, useder, accurate, signal)
 
 /mob/living/carbon/human/attack_hand(mob/user)
 	. = ..()
@@ -279,7 +353,7 @@
 		var/mob/living/carbon/human/H = user
 		dna.species.spec_attack_hand(H, src)
 
-/mob/living/carbon/human/attack_paw(mob/living/carbon/monkey/M)
+/mob/living/carbon/human/attack_paw(mob/living/carbon/M)
 	var/dam_zone = pick(BODY_ZONE_CHEST, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
 	var/obj/item/bodypart/affecting = get_bodypart(ran_zone(dam_zone))
 	if(!affecting)
@@ -355,7 +429,7 @@
 		if(nodmg)
 			return FALSE
 
-/mob/living/carbon/human/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
+/mob/living/carbon/human/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range, burns)
 	if(HAS_TRAIT(src, TRAIT_BOMBIMMUNE))
 		return
 
@@ -372,7 +446,7 @@
 	var/dmgmod = round(rand(0.5, 1.5), 0.1)
 	var/bomb_armor = 0
 
-	if(fdist)
+	if(fdist && burns)
 		var/stacks = ((fdist - fodist) * 2)
 		fire_act(stacks)
 
@@ -402,6 +476,10 @@
 			if(bomb_armor)
 				brute_loss = (10 * (2 - round(bomb_armor*0.01, 0.05)) * ldist) - ((10 * (2 - round(bomb_armor*0.01, 0.05))) * fodist)
 				damage_clothes(max(brute_loss - bomb_armor, 0), BRUTE, "blunt")
+	if(!burns)
+		brute_loss += burn_loss
+		burn_loss = 0
+
 	take_overall_damage(brute_loss,burn_loss, damage_type = BCLASS_BLUNT)
 
 	//attempt to dismember bodyparts
@@ -585,12 +663,10 @@
 
 	return ..()
 
-/mob/living/carbon/human/proc/check_for_injuries(mob/user = src, advanced = FALSE, silent = FALSE, additional = FALSE)
+/mob/living/carbon/human/proc/check_for_injuries(mob/user = src, advanced = FALSE, silent = FALSE, additional = FALSE, show_reagents = FALSE)
 	var/list/examination = list("<span class='info'>ø ------------ ø")
 	var/m1
 	var/deep_examination = advanced
-	if(!deep_examination)
-		deep_examination = HAS_TRAIT(user, TRAIT_EMPATH)
 	if(user == src)
 		m1 = "I am"
 		examination += "<span class='notice'>Let's see how I am doing.</span>"
@@ -611,15 +687,16 @@
 	else
 		examination += "<span class='dead'>[m1] dead.</span>"
 
-	switch(blood_volume)
-		if(-INFINITY to BLOOD_VOLUME_SURVIVE)
-			examination += "<span class='artery'><B>[m1] extremely anemic.</B></span>"
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
-			examination += "<span class='artery'><B>[m1] very anemic.</B></span>"
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
-			examination += "<span class='artery'>[m1] anemic.</span>"
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
-			examination += "<span class='artery'>[m1] a little anemic.</span>"
+	if(CAN_HAVE_BLOOD(src))
+		switch(get_blood_volume())
+			if(-INFINITY to BLOOD_VOLUME_SURVIVE)
+				examination += "<span class='artery'><B>[m1] extremely anemic.</B></span>"
+			if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+				examination += "<span class='artery'><B>[m1] very anemic.</B></span>"
+			if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+				examination += "<span class='artery'>[m1] anemic.</span>"
+			if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+				examination += "<span class='artery'>[m1] a little anemic.</span>"
 
 	if(HAS_TRAIT(src, TRAIT_PARALYSIS))
 		if(HAS_TRAIT(src, TRAIT_NO_BITE))
@@ -651,11 +728,11 @@
 		var/list/mechanics_result = list()
 		for(var/wound_type in all_untreated)
 			switch(wound_type)
-				if(WOUND_SLASH, WOUND_PIERCE, WOUND_BITE)
+				if(WOUND_SLASH, WOUND_PUNCTURE, WOUND_BITE)
 					mechanics_result += "Suture or bandage cuts, bites, or punctures to allow them to heal."
 				if(WOUND_BLUNT, WOUND_LASH)
 					mechanics_result += "Bandage bruises and lashes to allow them to heal."
-				if(WOUND_BURN)
+				if(WOUND_BURN, WOUND_INTENSE_BURN)
 					mechanics_result += "Disinfect and salve burns to allow them to heal."
 				if("germs")
 					mechanics_result += "Infected injuries can be disinfected by covering them in beer or other disinfectent soaked bandages."
@@ -677,6 +754,22 @@
 	if(additional)
 		examination += span_info(span_green("[getToxLoss()] TOXIN"))
 		examination += span_info(span_blue("[getOxyLoss()] OXYGEN"))
+
+	if(show_reagents && length(reagents.reagent_list))
+		examination += "ø ------------ ø"
+		for(var/datum/reagent/reagent in reagents.reagent_list)
+			var/toxin_report = ""
+			if(istype(reagent, /datum/reagent/toxin) || istype(reagent, /datum/reagent/poison))
+				toxin_report = " [span_red("\[DANGER\]")]"
+			examination += "<font color = '[reagent.color]'>[reagent.name] ([floor(reagent.volume)])[toxin_report]</font>"
+
+	if(deep_examination)
+		if(has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+			examination += "ø ------------ ø"
+			examination += "[span_bloody("BLOOD CURSED")]"
+		else if(has_status_effect(/datum/status_effect/debuff/blood_mark))
+			examination += "ø ------------ ø"
+			examination += "[span_bloody("BLOOD MARKED")]"
 	examination += "ø ------------ ø</span>"
 	if(!silent)
 		to_chat(user, examination.Join("\n"))
@@ -772,3 +865,8 @@
 			if(C.body_parts_covered & def_zone.body_part)
 				covering_part += C
 	return covering_part
+
+/mob/living/carbon/human/getShock(painkiller_included)
+	. = ..()
+	if(dna?.species)
+		return . * dna?.species.pain_mod

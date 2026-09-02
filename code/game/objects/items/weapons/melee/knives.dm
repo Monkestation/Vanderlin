@@ -12,11 +12,10 @@
 	wlength = WLENGTH_SHORT
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST, DAGGER_CHOP)
 	max_blade_int = 150
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_IRON
 
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_MOUTH
 	gripsprite = FALSE
-	dropshrink = 0.8
 	thrown_bclass = BCLASS_CUT
 	w_class = WEIGHT_CLASS_SMALL
 	parrysound = list('sound/combat/parry/bladed/bladedsmall (1).ogg','sound/combat/parry/bladed/bladedsmall (2).ogg','sound/combat/parry/bladed/bladedsmall (3).ogg')
@@ -33,6 +32,8 @@
 	grid_height = 64
 	grid_width = 32
 	item_weight = 200 GRAMS
+	tool_behaviour = TOOL_KNIFE
+	pickpocket_difficulty = SKILL_RANK_APPRENTICE
 
 /obj/item/weapon/knife/Initialize()
 	. = ..()
@@ -55,7 +56,7 @@
 	icon_state = "huntingknife"
 	force = DAMAGE_DAGGER
 	melting_material = /datum/material/steel
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_STEEL
 	melt_amount = 75
 	sellprice = 6
 	item_weight = 150 GRAMS
@@ -99,7 +100,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	icon_state = "iscissors"
 	possible_item_intents = list(DAGGER_THRUST, DAGGER_CUT, SCISSOR_SNIP)
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_IRON
 	melt_amount = 75
 	item_weight = 250 GRAMS
 
@@ -115,44 +116,63 @@
 	releasedrain = 0
 	blade_class = BCLASS_PUNCH
 
-/obj/item/weapon/knife/scissors/pre_attack(atom/A, mob/living/user, list/modifiers)
-	if(user.used_intent.type == /datum/intent/snip && isitem(A))
-		var/obj/item/item = A
-		if(item.sewrepair && item.salvage_result) // We can only salvage objects which can be sewn!
-			. = TRUE
-			var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, item.sewrepair)
-			var/salvage_time = (7 SECONDS - (skill_level * 10))
-			if(!do_after(user, salvage_time, A))
-				return
-			if(item.fiber_salvage) //We're getting fiber as base if fiber is present on the item
-				new /obj/item/natural/fibers(get_turf(item))
-			if(istype(item, /obj/item/storage))
-				var/obj/item/storage/bag = item
-				bag.emptyStorage()
-			var/probability = max(0, 50 - (skill_level * 10))
-			if(prob(probability)) // We are dumb and we failed!
-				to_chat(user, span_warning("I ruined some of the materials due to my lack of skill..."))
-				playsound(item, 'sound/foley/cloth_rip.ogg', 50, TRUE)
-				qdel(item)
-				user.mind.add_sleep_experience(item.sewrepair, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //Getting exp for failing
-				return //We are returning early if the skill check fails!
-			item.salvage_amount -= item.torn_sleeve_number
-			for(var/i = 1; i <= item.salvage_amount; i++) // We are spawning salvage result for the salvage amount minus the torn sleves!
-				var/obj/item/Sr = new item.salvage_result(get_turf(item))
-				Sr.color = item.color
-			user.visible_message(span_notice("[user] salvages [item] into usable materials."))
-			playsound(item, 'sound/items/flint.ogg', 100, TRUE) //In my mind this sound was more fitting for a scissor
-			qdel(item)
-			user.mind.add_sleep_experience(item.sewrepair, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))) //We're getting experience for salvaging!
-			return
-	return ..()
+/obj/item/weapon/knife/scissors/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!isitem(interacting_with))
+		return NONE
+
+	if(!isturf(interacting_with.loc))
+		return NONE
+
+	if(!istype(user.used_intent, /datum/intent/snip))
+		return NONE
+
+	var/obj/item/item = interacting_with
+
+	if(!item.sewrepair || !item.salvage_result) // We can only salvage objects which can be sewn!
+		return NONE
+
+	var/skill_level = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/misc/sewing)
+
+	var/salvage_time = (7 SECONDS - (skill_level * 10))
+	if(!do_after(user, salvage_time, item))
+		return ITEM_INTERACT_BLOCKING
+
+	if(item.fiber_salvage) //We're getting fiber as base if fiber is present on the item
+		new /obj/item/natural/fibers(get_turf(item))
+
+	if(istype(item, /obj/item/storage))
+		var/obj/item/storage/bag = item
+		bag.emptyStorage()
+
+	var/probability = max(0, 50 - (skill_level * 10))
+	if(prob(probability))
+		to_chat(user, span_warning("I ruined some of the materials due to my lack of skill..."))
+		playsound(item, 'sound/foley/cloth_rip.ogg', 50, TRUE)
+		qdel(item)
+		user.mind.add_sleep_experience(item.sewrepair, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)) //Getting exp for failing
+		return ITEM_INTERACT_SUCCESS
+
+	item.salvage_amount -= item.torn_sleeve_number
+	for(var/i in 1 to item.salvage_amount)
+		var/obj/item/Sr = new item.salvage_result(get_turf(item))
+		Sr.color = item.color
+
+	user.visible_message(span_notice("[user] salvages [item] into usable materials."))
+	playsound(item, 'sound/items/flint.ogg', 100, TRUE) //In my mind this sound was more fitting for a scissor
+	qdel(item)
+	user.mind.add_sleep_experience(item.sewrepair, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/weapon/knife/scissors/steel
 	name = "steel scissors"
 	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing, more durable and a tad more deadly than their iron counterpart."
 	icon_state = "sscissors"
 	force = DAMAGE_DAGGER
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_STEEL
 	melting_material = /datum/material/steel
 	item_weight = 280 GRAMS
 
@@ -160,24 +180,17 @@
 /obj/item/weapon/knife/cleaver
 	name = "cleaver"
 	desc = "A chef's tool turned armament, cleave off cumbersome flesh with rudimentary ease."
-	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
-	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 	icon_state = "cleav"
-	item_state = "cleav"
 	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP)
-	throwforce = DAMAGE_KNIFE + 5
-	experimental_inhand = FALSE
-	experimental_onhip = FALSE
-	experimental_onback = FALSE
+	force = DAMAGE_KNIFE + 1
+	throwforce = DAMAGE_KNIFE + 6
 	parrysound = list('sound/combat/parry/bladed/bladedmedium (1).ogg','sound/combat/parry/bladed/bladedmedium (2).ogg','sound/combat/parry/bladed/bladedmedium (3).ogg')
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
-	max_integrity = INTEGRITY_POOR
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CHOP
 	w_class = WEIGHT_CLASS_NORMAL
 	melt_amount = 75
 	wbalance = DODGE_CHANCE_NORMAL // Except this one, too huge and used to chop
-	dropshrink = 0.9
 	item_weight = 350 GRAMS
 
 //................ Hack-Knife ............... //
@@ -185,32 +198,24 @@
 	name = "hack-knife"
 	desc = "A short blade that even the weakest of hands can aspire to do harm with."
 	icon_state = "combatknife"
-	throwforce = DAMAGE_KNIFE + 6
-	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
-	max_integrity = INTEGRITY_STANDARD
+	force = DAMAGE_KNIFE + 3
+	throwforce = DAMAGE_KNIFE + 5
+	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP) // Its a steel cleaver, plus it lets you use it with a meathook as both cleaver to chop the animal and a knife to skin it
 	melting_material = /datum/material/steel
 	wbalance = HARD_TO_DODGE
 	sellprice = 15
 	item_weight = 250 GRAMS
-
-/obj/item/weapon/knife/cleaver/combat/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.5,"sx" = -10,"sy" = 0,"nx" = 13,"ny" = 2,"wx" = -8,"wy" = 2,"ex" = 5,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 21,"sturn" = -18,"wturn" = -18,"eturn" = 21,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-			if("onbelt")
-				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
 
 //................ Bronze Dagger ............... //s
 /obj/item/weapon/knife/dagger/bronze
 	name = "bronze dagger"
 	desc = "A dagger made out of bronze."
 	icon_state = "dagger_bronze"
-	max_integrity = INTEGRITY_POOR
 	melting_material = /datum/material/bronze
 	sellprice = 10
 	item_weight = 180 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BRONZE
 
 //................ Iron Dagger ............... //
 /obj/item/weapon/knife/dagger
@@ -223,13 +228,13 @@
 
 	weapon_special = /datum/special_intent/triple_stab
 	item_weight = 200 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_IRON
 
 /obj/item/weapon/knife/dagger/jile
 	name = "iron jile"
 	desc = "A curved iron dagger from the fallen east."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_iron"
-	dropshrink = 1.0
 	item_weight = 200 GRAMS
 
 /obj/item/weapon/knife/hunting/kukri/iron
@@ -238,9 +243,9 @@
 	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
-	max_integrity = INTEGRITY_STANDARD
 	melting_material = /datum/material/iron
 	item_weight = 250 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
@@ -249,7 +254,6 @@
 	icon_state = "njora_iron"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	sellprice = 12
-	dropshrink = 1.0
 	item_weight = 220 GRAMS
 
 //................ Steel Dagger ............... //
@@ -260,7 +264,7 @@
 	wdefense = AVERAGE_PARRY
 	wbalance = VERY_HARD_TO_DODGE
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
 	melting_material = /datum/material/steel
 	item_weight = 220 GRAMS
 
@@ -270,7 +274,6 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "jile_steel"
 	sellprice = 20
-	dropshrink = 1.0
 	item_weight = 220 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/njora
@@ -281,7 +284,6 @@
 	wbalance = HARD_TO_DODGE
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	sellprice = 20
-	dropshrink = 1.0
 	item_weight = 240 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/special
@@ -310,6 +312,7 @@
 	wdefense = AVERAGE_PARRY
 	melt_amount = 75
 	item_weight = 270 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
 	name = "plaguebringer sickle"
@@ -325,10 +328,12 @@
 	icon_state = "sdaggerhand"
 	sellprice = 200
 	item_weight = 220 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
 	name = "\proper apathy"
-	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact"
+	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact."
 	wdefense = GOOD_PARRY
 	icon_state = "spdaggerhand"
 	item_weight = 220 GRAMS
@@ -341,14 +346,17 @@
 	icon_state = "spiderdagger"
 	item_weight = 200 GRAMS
 
-/obj/item/weapon/knife/dagger/steel/dirk/baotha //this is a placeholder weapon until they actually receive a proper baothan weapon
+/obj/item/weapon/knife/dagger/steel/baotha
 	name = "laced dagger"
 	desc = "Whispers of bliss seep deeper than the blade."
+	icon_state = "baothadagger"
 	color = "#f78ccc"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 	item_weight = 200 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
-/obj/item/weapon/knife/dagger/steel/dirk/baotha/Initialize(mapload)
+/obj/item/weapon/knife/dagger/steel/baotha/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/baothagift)
 
@@ -359,7 +367,7 @@
 	desc = "A dagger made of fine silver, the bane of the undead."
 	icon_state = "sildagger"
 	max_blade_int = 160
-	max_integrity = INTEGRITY_STRONG * 0.8
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_SILVER
 	melting_material = /datum/material/silver
 	sellprice = 45
 	last_used = 0
@@ -368,6 +376,45 @@
 /obj/item/weapon/knife/dagger/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+//................ Blacksteel Dagger ............... //
+/obj/item/weapon/knife/dagger/blacksteel
+	name = "blacksteel dagger"
+	desc = "A magnificent dagger of blacksteel. The epitome of elegance, without the woes that such weapons traditionally inherit."
+	icon_state = "bs_dagger"
+	force = DAMAGE_DAGGER + 2
+	wdefense = GOOD_PARRY
+	wbalance = VERY_HARD_TO_DODGE
+	max_blade_int = 240
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BLACKSTEEL
+	melting_material = /datum/material/blacksteel
+	melt_amount = 50
+	item_weight = 180 GRAMS
+
+/obj/item/weapon/knife/dagger/blacksteel/misericorde
+	name = "blacksteel misericorde"
+	desc = "A magnificent armor-piercing dagger of blacksteel. The curved handle is said to naturally improve one's aim, while locked in a \
+	lyfe-or-death struggle with plate-armored opponents."
+	icon_state = "bs_misericorde"
+	force = DAMAGE_DAGGER + 3
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
+
+//................ Bloodsteel Dagger ............... //
+/obj/item/weapon/knife/dagger/bloodsteel
+	name = "bloodsteel dagger"
+	desc = "A dagger made of refined bloodsteel."
+	icon_state = "corruptdagger"
+	wdefense = AVERAGE_PARRY
+	wbalance = VERY_HARD_TO_DODGE
+	max_blade_int = 200
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BLOODSTEEL
+	melting_material = /datum/material/bloodsteel
+	item_weight = 200 GRAMS
+	sellprice = 0
+
+/obj/item/weapon/knife/dagger/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon
@@ -392,6 +439,8 @@
 	stealthy_audio = TRUE
 	sellprice = 250
 	item_weight = 200 GRAMS
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_MASTER
 
 /obj/item/weapon/knife/dagger/steel/profane/examine(mob/user)
 	. = ..()
@@ -447,7 +496,7 @@
 	. = ..()
 	if(!ishuman(target))
 		return
-	if(target.stat == DEAD || (target.health < target.crit_threshold)) // Trigger soul steal or identity theft if the target is either dead or in crit
+	if(target.stat == DEAD || HAS_TRAIT(target, TRAIT_CRITICAL_CONDITION)) // Trigger soul steal or identity theft if the target is either dead or in crit
 		if(istype(user.used_intent, /datum/intent/peculate))
 			if(!ishuman(user)) // carbons don't have all features of a human
 				to_chat(user, span_danger("You can't do that!"))
@@ -489,6 +538,7 @@
 			var/mob/living/carbon/human/human_user = user
 
 			human_user.copy_physical_features(target)
+			human_user.copy_visible_organs(target)
 			to_chat(user, span_purple("I take on a new face.."))
 			ADD_TRAIT(target, TRAIT_DISFIGURED, TRAIT_GENERIC)
 
@@ -569,7 +619,7 @@
 	wdefense = TERRIBLE_PARRY
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	max_integrity = INTEGRITY_WORST - 70
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_IMPROV
 	max_blade_int = 50
 	smeltresult = /obj/item/fertilizer/ash
 	melting_material = null
@@ -583,7 +633,6 @@
 	icon = 'icons/roguetown/gems/gem_jade.dmi'
 	icon_state = "kukri_jade"
 	wdefense = AVERAGE_PARRY
-	max_integrity = INTEGRITY_WORST / 2
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 75
@@ -595,7 +644,7 @@
 	icon = 'icons/roguetown/gems/gem_opal.dmi'
 	icon_state = "knife_opal"
 	wdefense = AVERAGE_PARRY
-	max_integrity = INTEGRITY_WORST / 2
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_IMPROV * INTEGRITY_SPECIAL_MALUS
 	max_blade_int = 35
 	resistance_flags = FIRE_PROOF | ACID_PROOF
 	sellprice = 105
@@ -615,20 +664,20 @@
 	icon_state = "cdagger"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	max_blade_int = 100
-	max_integrity = INTEGRITY_WORST
 	melting_material = /datum/material/copper
 	sellprice = 10
 	item_weight = 180 GRAMS
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_COPPER
 
 /obj/item/weapon/knife/throwingknife
 	name = "iron tossblade"
 	desc = ""
-	item_state = "bone_dagger"
+	icon_state = "throw_knifei"
 	force = DAMAGE_DAGGER
 	throwforce = DAMAGE_DAGGER + 13
 	wdefense = MEDIOCRE_PARRY
 	throw_speed = 4
-	max_integrity = INTEGRITY_WORST - 50
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_IRON
 	icon_state = "throw_knifei"
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 20)
 	melt_amount = 50
@@ -642,7 +691,7 @@
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 10
 	throw_speed = 4
-	max_integrity = INTEGRITY_WORST - 30
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_BRONZE
 	icon_state = "throwing_bronze"
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 25, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/bronze
@@ -654,21 +703,35 @@
 	desc = ""
 	icon_state = "throw_knifes"
 	item_state = "bone_dagger"
+	throwforce = DAMAGE_DAGGER + 15
 	throw_speed = 4
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_STEEL
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/steel
 	sellprice = 4
 	item_weight = 85 GRAMS
 
+/obj/item/weapon/knife/throwingknife/blacksteel
+	name = "blacksteel tossblade"
+	desc = ""
+	icon_state = "throw_knifebs"
+	item_state = "bone_dagger"
+	throwforce = DAMAGE_DAGGER + 17
+	throw_speed = 4
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_BLACKSTEEL
+	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
+	melting_material = /datum/material/blacksteel
+	sellprice = 10
+	item_weight = 85 GRAMS
+
 /obj/item/weapon/knife/throwingknife/psydon
 	name = "psydonian tossblade"
 	desc = "An unconventional method of delivering silver to a heretic; but one PSYDON smiles at, all the same. Doubles as an 'actual' knife in a pinch."
-	icon_state = "throw_knifes"
+	icon_state = "throw_knifep"
 	item_state = "bone_dagger"
 	wdefense = GOOD_PARRY
 	throw_speed = 4
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_SILVER
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)
 	sellprice = 65
 	melting_material = /datum/material/silver
@@ -684,7 +747,7 @@
 	icon_state = "rouskunai"
 	wdefense = GOOD_PARRY
 	throw_speed = 4
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_IRON
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 30, "embedded_fall_chance" = 15)
 	sellprice = 5
 	item_weight = 80 GRAMS
@@ -694,7 +757,7 @@
 	desc = "A thin sheet of pig-iron stamped into a calling card, too thin and useless to be smelted. You've been had. From Heartfelt with love."
 	icon_state = "throwcard"
 	throw_speed = 5
-	max_integrity = INTEGRITY_WORST - 50 // It's not about how effective it is, it's about sending a message.
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_IRON // It's not about how effective it is, it's about sending a message.
 	embedding = list("embedded_pain_multiplier" = 2, "embed_chance" = 50, "embedded_fall_chance" = 5)
 	sellprice = 2
 	item_weight = 30 GRAMS

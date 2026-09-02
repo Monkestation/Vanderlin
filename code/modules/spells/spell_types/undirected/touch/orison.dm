@@ -16,13 +16,13 @@
 
 /datum/intent/orison/touch
 	reach = 7
-	name = "touch"
-	icon_state = "intouch"
+	name = "voice"
+	icon_state = "invoice"
 
 /datum/intent/orison/light
 	reach = 1
-	name = "use"
-	icon_state = "inuse"
+	name = "light"
+	icon_state = "inlight"
 
 /datum/action/cooldown/spell/undirected/touch/orison
 	name = "Orison"
@@ -32,7 +32,6 @@
 
 	spell_type = SPELL_MIRACLE
 	associated_skill = /datum/attribute/skill/magic/holy
-	school = SCHOOL_TRANSMUTATION
 
 	cooldown_time = 3 MINUTES
 

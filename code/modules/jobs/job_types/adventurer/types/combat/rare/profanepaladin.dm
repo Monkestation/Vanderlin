@@ -35,6 +35,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 	)
 
@@ -69,14 +70,12 @@
 
 /datum/outfit/adventurer/profanepaladin
 	name = "Profane Paladin (Adventurer)"
-
 	shirt = /obj/item/clothing/armor/chainmail
 	belt = /obj/item/storage/belt/leather/steel
 	beltl = /obj/item/storage/belt/pouch/coins/mid
 	ring = /obj/item/clothing/ring/silver/toper
 	neck = /obj/item/clothing/neck/chaincoif
 	backl = /obj/item/weapon/sword/long/judgement/evil
-
 	head = /obj/item/clothing/head/helmet/heavy/bucket
 	armor = /obj/item/clothing/armor/plate
 	gloves = /obj/item/clothing/gloves/plate
@@ -93,14 +92,6 @@
 			pants = /obj/item/clothing/pants/platelegs/graggar
 			shoes = /obj/item/clothing/shoes/boots/armor/graggar
 			cloak = /obj/item/clothing/cloak/graggar
-		if(/datum/patron/inhumen/graggar_zizo)
-			head = /obj/item/clothing/head/helmet/heavy/graggar
-			armor = /obj/item/clothing/armor/plate/full/graggar
-			gloves = /obj/item/clothing/gloves/plate/graggar
-			pants = /obj/item/clothing/pants/platelegs/graggar
-			shoes = /obj/item/clothing/shoes/boots/armor/graggar
-			cloak = /obj/item/clothing/cloak/graggar
-			H.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 		if(/datum/patron/inhumen/zizo)
 			head = /obj/item/clothing/head/helmet/visored/zizo
 			armor = /obj/item/clothing/armor/plate/full/zizo

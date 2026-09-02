@@ -8,6 +8,8 @@
 	spell_type = SPELL_RAGE
 	associated_skill = null
 
+	required_form = null
+
 	invocation_type = INVOCATION_NONE
 	aoe_radius = 5
 

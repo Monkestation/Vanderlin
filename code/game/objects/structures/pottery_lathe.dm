@@ -9,7 +9,7 @@
 
 /obj/item/natural/clay/set_material_information()
 	. = ..()
-	name = "[lowertext(initial(main_material.name))] clay lump"
+	name = "[LOWER_TEXT(initial(main_material.name))] clay lump"
 
 /obj/structure/pottery_lathe
 	name = "potter's lathe"
@@ -20,7 +20,7 @@
 	anchored = TRUE
 
 	rotation_structure = TRUE
-	initialize_dirs = CONN_DIR_FORWARD | CONN_DIR_FLIP | CONN_DIR_LEFT | CONN_DIR_RIGHT
+	initialize_dirs = CONN_DIR_ALL_CARDINAL
 
 	var/obj/item/natural/clay/stored_clay
 	var/datum/pottery_recipe/in_progress

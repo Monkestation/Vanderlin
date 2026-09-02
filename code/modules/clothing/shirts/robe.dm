@@ -18,9 +18,9 @@
 		ITEM_SLOT_SHIRT,
 	)
 
-	armor = ARMOR_MINIMAL
+	armor_type = /datum/armor/minimal
 	prevent_crits = list(BCLASS_TWIST)
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 
 /obj/item/clothing/shirt/robe/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -34,7 +34,7 @@
 /obj/item/clothing/shirt/robe/colored/black
 	color = CLOTHING_DARK_INK
 
-/obj/item/clothing/shirt/robe/colored/red//placeholder for malum & xylix acolyte robes
+/obj/item/clothing/shirt/robe/colored/red
 	color = CLOTHING_WINESTAIN_RED
 
 /obj/item/clothing/shirt/robe/colored/purple
@@ -71,15 +71,6 @@
 	icon_state = "nocrobe"
 	sleeved = null
 
-//someone should make sure the necromancer robe gets dwarf and child sprites
-/obj/item/clothing/shirt/robe/necromancer
-	name = "necromancer robes"
-	desc = "Eerie black garb of death."
-	icon_state = "warlock"
-	allowed_ages = ALL_AGES_LIST
-	allowed_race = SPECIES_BASE_BODY
-	sleeved = null
-
 /obj/item/clothing/shirt/robe/dendor
 	name = "briar robe"
 	desc = "Nature nurtures us and we, in turn, will nurture it back in the end."
@@ -99,6 +90,11 @@
 	name = "mourning robe"
 	desc = "Black robes which cover the body not unlike those in depictions of the Carriageman himself."
 	icon_state = "necrarobe"
+
+/obj/item/clothing/shirt/robe/malum
+	name = "malumite robe"
+	desc = "Holy-duty work robes with an attached apron and rolled up sleeves, for those who toil endlessly."
+	icon_state = "malumrobe"
 
 /obj/item/clothing/shirt/robe/priest
 	name = "solar vestments"
@@ -126,29 +122,40 @@
 	color = pick(CLOTHING_BERRY_BLUE, CLOTHING_SPRING_GREEN, CLOTHING_TARAXACUM_YELLOW, CLOTHING_WINESTAIN_RED)
 	. = ..()
 
+/obj/item/clothing/shirt/robe/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
+/obj/item/clothing/shirt/robe/colored/blood/enhanced
+	name = "bloodsteel threaded robe"
+	desc = "A seemingly plain robe woven with bloodsteel threads. It radiates a sinister aura."
+	armor_type = /datum/armor/robe/bloodweave
+	prevent_crits = CUT_AND_MINOR_CRITS
+	max_integrity = 250
+
+/obj/item/clothing/shirt/robe/colored/blood/enhanced/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/clothing/shirt/robe/wizard
 	name = "wizard's robe"
 	desc = "What wizard's ensemble would be complete without robes?"
 	icon_state = "wizardrobes"
-	sellprice = 100
 
 /obj/item/clothing/shirt/robe/magus
-	name = "magus's robe"
-	desc = "A dark padded robe worn by only the most mysterious of mages, the magi."
+	name = "magus robe"
+	desc = "A dark padded robe gilded with golden thread. Worn by only the most mysterious of mages, the magi."
 	icon_state = "warlock"
-	allowed_sex = list(MALE)
 	allowed_race = SPECIES_BASE_BODY
-	sellprice = 70
 
-	armor = list("blunt" = 40, "slash" = 40, "stab" = 40,  "piercing" = 15, "fire" = 0, "acid" = 0)
-	prevent_crits = list(BCLASS_CUT, BCLASS_TWIST)
+	armor_type = /datum/armor/robe/magus
+	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = 200
+	sleeved = null
 
 /obj/item/clothing/shirt/robe/merchant
 	name = "guilder jacket"
 	desc = "A fancy jacket common with members of the Mercator Guild."
 	icon_state = "merrobe"
-	sellprice = 30
 
 /obj/item/clothing/shirt/robe/nun
 	name = "nun habit"
@@ -189,7 +196,6 @@
 	flags_inv = HIDEBOOB
 	allowed_race = SPECIES_BASE_BODY
 	color = null
-	sellprice = 100
 
 /obj/item/clothing/shirt/robe/newmage
 	name = "mage robe"
@@ -203,7 +209,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/shirts.dmi'
 	sleeved = 'icons/roguetown/clothing/onmob/shirts.dmi'
 	toggle_icon_state = TRUE
-	armor = ARMOR_PADDED_BAD
+	armor_type = /datum/armor/robe/mage
 	max_integrity = 200
 	color = null
 	hoodtype = /obj/item/clothing/head/hooded/magehood
@@ -398,3 +404,36 @@
 	sleeved = null
 	sleevetype = null
 	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/shirt/robe/bared
+	name = "bared robe"
+	desc = "A robe of basic cloth, it's chest bared open to expose what lay underneath."
+	icon_state = "openrobe"
+	item_state = "openrobe"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	color = CLOTHING_WHITE
+
+/obj/item/clothing/shirt/robe/shepherdvest
+	name = "shepherd vest"
+	desc = "A vest of basic cloth, it's chest bared open to expose what lay underneath."
+	icon_state = "shepherdvest"
+	item_state = "shepherdvest"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	color = CLOTHING_WHITE
+
+/obj/item/clothing/shirt/robe/hag //Not a boon item, but nonetheless something they have
+	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_SHIRT|ITEM_SLOT_CLOAK
+	name = "wyrd robe"
+	desc = "A robe with an ancient design, unknown to tailors and sewers here."
+	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
+	icon_state = "hag"
+	icon = 'icons/roguetown/clothing/armor.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/armor.dmi'
+	sleeved = 'icons/roguetown/clothing/onmob/helpers/sleeves_armor.dmi'
+	boobed = TRUE
+	color = null
+	r_sleeve_status = SLEEVE_NORMAL
+	l_sleeve_status = SLEEVE_NORMAL
+
