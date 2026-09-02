@@ -10,6 +10,8 @@
  * Work on tome crafting stuff
  * Work on other blood magic crafting related things.
  * ? rituals
+ * Rite of Broken Chains - release from apprenticeship
+ * Rite of Mastery - Allow to take apprentices
  *
  * Sort out what blood magic spells vampires might get - WIP
  * Add Blood Magic relic weapon(s) ? summoning spell - WIP
