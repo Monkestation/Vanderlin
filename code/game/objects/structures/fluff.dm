@@ -649,7 +649,6 @@
 	name = "statue"
 	desc = ""
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
-	icon_state = "bstatue"
 	density = TRUE
 	anchored = TRUE
 	layer = ABOVE_MOB_LAYER

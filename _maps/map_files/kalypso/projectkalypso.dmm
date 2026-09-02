@@ -1802,7 +1802,7 @@
 /turf/closed/wall/mineral/stone/moss,
 /area/outdoors)
 "iW" = (
-/obj/structure/fluff/statue,
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/blocks/platform,
 /area/outdoors)
 "iX" = (

@@ -22719,7 +22719,7 @@
 /area/outdoors/town)
 "nPO" = (
 /obj/structure/table/stone_small,
-/obj/structure/fluff/statue{
+/obj/structure/fluff/statue/necra{
 	pixel_y = 16
 	},
 /turf/open/floor/blocks,
@@ -38688,8 +38688,8 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/feast)
 "ymd" = (
-/obj/structure/fluff/statue{
-	pixel_y = 9
+/obj/structure/fluff/statue/necra{
+	pixel_y = 8
 	},
 /turf/open/water/clean,
 /area/indoors/town/merc_guild)
