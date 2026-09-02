@@ -10,7 +10,7 @@
 
 	armor_type = /datum/armor/gloves/padded/bad
 	prevent_crits = CUT_AND_MINOR_CRITS
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	salvage_result = null
 	item_weight = 300 GRAMS
 
@@ -24,14 +24,14 @@
 /obj/item/clothing/gloves/leather/advanced
 	name = "hardened leather gloves"
 	desc = "Sturdy, durable, flexible. A marvel of the dark ages that exists solely to protect your fingers."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/gloves/leather/advanced
 
 /obj/item/clothing/gloves/leather/masterwork
 	name = "masterwork leather gloves"
 	desc = "These gloves are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/gloves/leather/master
 
@@ -89,7 +89,7 @@
 	resistance_flags = FLAMMABLE // Made of leather
 	armor_type = /datum/armor/gloves/leather
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	salvage_result = /obj/item/natural/fur
 	item_weight = 500 GRAMS
 

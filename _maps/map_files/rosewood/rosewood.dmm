@@ -5238,7 +5238,7 @@
 /turf/open/floor/cobble,
 /area/outdoors/town/keep)
 "cwu" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/mace/woodclub,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/orphanage)
@@ -17155,7 +17155,7 @@
 /area/indoors/town)
 "ihW" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/noble_manor/blue)
 "iip" = (
@@ -19892,6 +19892,10 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
+"jAK" = (
+/obj/structure/fluff/traveltile/oracle_cave,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "jAM" = (
 /turf/open/floor/grass/cold,
 /area/indoors/town/theatre)
@@ -22969,7 +22973,7 @@
 /turf/open/floor/carpet/green,
 /area/indoors/villagegarrison)
 "kXF" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -29922,7 +29926,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_x = -5;
 	pixel_y = 6
 	},
@@ -32434,7 +32438,7 @@
 /turf/open/floor/tile/bath,
 /area/indoors/town/keep/basement/bath)
 "pua" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -34233,7 +34237,7 @@
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep)
 "quN" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/noble_manor/blue)
 "quW" = (
@@ -46110,7 +46114,7 @@
 /turf/open/floor/snow/patchy,
 /area/outdoors/town)
 "wdz" = (
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_x = -3
 	},
 /turf/open/floor/wood,
@@ -117248,7 +117252,7 @@ qJl
 qJl
 phG
 phG
-phG
+jAK
 qJl
 qJl
 qJl
@@ -117450,7 +117454,7 @@ qJl
 qJl
 qJl
 phG
-phG
+jAK
 qJl
 qJl
 qJl
@@ -117652,7 +117656,7 @@ qJl
 qJl
 qJl
 phG
-mvN
+jAK
 qJl
 qJl
 qJl
@@ -118660,7 +118664,7 @@ qJl
 qJl
 qJl
 phG
-phG
+mvN
 qJl
 qJl
 qJl

@@ -1018,7 +1018,7 @@
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/ship/shipbrig)
 "gs" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/armor/leather,
 /obj/item/clothing/armor/leather,
 /obj/item/clothing/gloves/leather,
@@ -1394,7 +1394,7 @@
 "iE" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/scomstone,
-/obj/item/weapon/whip/antique,
+/obj/item/weapon/whip/repenta,
 /obj/structure/carpet/purple,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/church/inquisition)
@@ -2090,7 +2090,7 @@
 /area/ship/middeck)
 "nT" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/scrying,
+/obj/item/scrying/orb,
 /obj/structure/fluff/wallclock,
 /turf/open/floor/ruinedwood/two,
 /area/ship/nobledeck)
@@ -3871,7 +3871,7 @@
 /turf/open/openspace,
 /area/ship/topdeck)
 "zB" = (
-/obj/structure/closet/crate/crafted_closet/crafted{
+/obj/structure/closet/crate/crafted_closet{
 	anchored = 1
 	},
 /obj/item/natural/bundle/cloth{
@@ -3969,7 +3969,7 @@
 /turf/open/floor/carpet/lord/left,
 /area/ship/nobledeck)
 "Ac" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/armor/leather/jacket/sea{
 	pixel_y = -6
 	},
@@ -5856,7 +5856,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/ship/topdeck)
 "Nk" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/natural/bundle/cloth{
 	amount = 3;
 	pixel_y = -7

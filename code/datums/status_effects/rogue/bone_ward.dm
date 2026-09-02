@@ -71,6 +71,7 @@
 		quirk.desc = "Your actions have made you a target. You will be hunted and have assassination attempts made against you without any escalation."
 		quirk.customization_value = "Responsible for the death of someone protected with a Bone Ward."
 		to_chat(target, span_warningbig("My actions did not go unnoticed, I am being hunted..."))
+		log_hunted("[key_name(target)] playing as [target] was marked to be hunted by a Bone Ward.")
 
 // ##########################################################################################
 

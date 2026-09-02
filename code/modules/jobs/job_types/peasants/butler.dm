@@ -35,7 +35,7 @@
 	department_flag = SERFS
 	display_order = JDO_BUTLER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -71,7 +71,7 @@
 	name = JOB_BUTLER
 	shoes = /obj/item/clothing/shoes/nobleboot
 	beltl = /obj/item/storage/belt/pouch/coins/mid
-	beltr = /obj/item/weapon/whip/butler
+	beltr = /obj/item/weapon/whip/bronze/butler
 	backr = /obj/item/storage/backpack/satchel
 
 	backpack_contents = list(

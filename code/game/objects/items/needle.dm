@@ -224,7 +224,7 @@
 	var/perception_mod = 1 - 0.5 * (GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_PERCEPTION) - ATTRIBUTE_MIDDLING)/(ATTRIBUTE_MAX - SKILL_MIDDLING)
 	var/doctor_mod = 1 - 0.9 * (doctor_skill - SKILL_MIDDLING)/(SKILL_MAX - SKILL_MIDDLING)
 	// First try to fix arteries
-	if(affecting.get_cut() && affecting.is_artery_torn())
+	if(affecting.is_artery_torn())
 		var/time = 5 SECONDS
 		time *= perception_mod * doctor_mod
 		playsound(patient, 'sound/foley/sewflesh.ogg', 100, TRUE, -2)

@@ -66,6 +66,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/bandit/roguemage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -112,7 +113,7 @@
 	shoes = /obj/item/clothing/shoes/simpleshoes
 	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/shirt/shortshirt
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/bandit
 	beltr = /obj/item/reagent_containers/glass/bottle/manapot
 	backr = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/needle/thorn = 1, /obj/item/natural/cloth = 1, /obj/item/clothing/face/spectacles/sglasses, /obj/item/chalk = 1,  /obj/item/clothing/face/shepherd/rag = 1)

@@ -12,8 +12,8 @@
 	current_blood = 5
 	blood_req = 0.5
 	oxygen_req = 0.5
-	nutriment_req = 0.3
-	hydration_req = 0.6
+	nutriment_req = 0.15
+	hydration_req = 0.3
 
 	var/list/languages_possible
 	var/say_mod = null
@@ -38,6 +38,7 @@
 		/datum/language/undead,
 		/datum/language/halfling,
 		/datum/language/gronnic,
+		/datum/language/sanguine,
 	))
 
 /obj/item/organ/tongue/Initialize(mapload)

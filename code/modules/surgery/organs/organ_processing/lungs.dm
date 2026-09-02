@@ -201,7 +201,7 @@
 			to_chat(breather, span_warning("My breath comes out in heavy puffs of vapor."))
 
 	if(prob(breath_effect_prob) && !breather.is_mouth_covered())
-		emit_breath_particle(/particles/fog/breath)
+		emit_breath_particle(breather, /particles/fog/breath)
 
 /obj/item/organ/lungs/proc/emit_breath_particle(mob/living/carbon/human/breather, particle_type)
 	ASSERT(ispath(particle_type, /particles))

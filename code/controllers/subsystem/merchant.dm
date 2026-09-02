@@ -140,11 +140,9 @@ SUBSYSTEM_DEF(merchant)
 		if(output)
 			var/list/all_requirements = list()
 			if(recipe.required_material)
-				all_requirements[recipe.required_material] = recipe.num_of_materials
-
-			if(length(recipe.additional_items))
-				for(var/item in recipe.additional_items)
-					all_requirements[item] = 1
+				all_requirements[recipe.required_material] = 1
+			for(var/item in recipe.additional_items)
+				all_requirements[item] += recipe.additional_items[item]
 
 			var/cost = calculate_component_cost(all_requirements)
 			recipe_base_values[output] = cost + (recipe.craftdiff * 10)
@@ -159,11 +157,10 @@ SUBSYSTEM_DEF(merchant)
 		if(output)
 			var/list/all_requirements = list()
 			if(recipe.required_item)
-				all_requirements[recipe.required_item] = 1
+				all_requirements[recipe.required_item]++
 
-			if(length(recipe.additional_items))
-				for(var/item in recipe.additional_items)
-					all_requirements[item] = 1
+			for(var/item in recipe.additional_items)
+				all_requirements[item] += recipe.additional_items[item]
 
 			var/cost = calculate_component_cost(all_requirements)
 			recipe_base_values[output] = cost + (recipe.craftdiff * 10)

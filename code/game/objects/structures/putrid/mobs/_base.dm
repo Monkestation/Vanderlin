@@ -6,7 +6,7 @@
 	icon_state = "base"
 	icon_living = "base"
 	icon_dead = "base_dead"
-	faction = list("meat")
+	faction = list(FACTION_MEAT)
 
 	health = VOLF_HEALTH
 	maxHealth = VOLF_HEALTH
