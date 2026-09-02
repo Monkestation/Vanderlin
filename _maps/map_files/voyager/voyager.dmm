@@ -1084,6 +1084,7 @@
 	pixel_y = -4
 	},
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/item/repair_kit/metal/empty,
 /turf/open/floor/blocks/newstone/alt,
 /area/ship/middeck)
 "gM" = (
@@ -7674,16 +7675,17 @@
 /turf/open/floor/wood,
 /area/indoors/town/church)
 "Yo" = (
+/obj/structure/rack/shelf/biggest,
+/obj/item/natural/bundle/cloth{
+	amount = 8;
+	pixel_y = 5
+	},
 /obj/item/natural/bundle/curred_hide{
 	amount = 6;
 	pixel_x = -1;
 	pixel_y = -6
 	},
-/obj/item/natural/bundle/cloth{
-	amount = 8;
-	pixel_y = 5
-	},
-/obj/structure/rack/shelf/biggest,
+/obj/item/repair_kit/cloth/empty,
 /turf/open/floor/ruinedwood/chevron,
 /area/ship/middeck)
 "Yp" = (

@@ -1,0 +1,6 @@
+author: "MissyNym"
+delete-after: True
+changes:
+  - map: "Adds bordered lord carpets to the Vanderlin inn in place of the current ones."
+  - map: "Adds an empty armor repair kit to all blacksmiths for all maps."
+  - map: "Adds an empty cloth repair kit to all tailors for all maps."

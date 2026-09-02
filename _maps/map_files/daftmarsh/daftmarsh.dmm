@@ -5282,15 +5282,16 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/obj/item/flint,
+/obj/structure/table/wood/reinforced_alter,
+/obj/item/repair_kit/metal/empty,
 /obj/item/flint{
 	pixel_x = 8
 	},
+/obj/item/flint,
 /obj/item/flint{
 	pixel_x = -5;
 	pixel_y = 6
 	},
-/obj/structure/table/wood/reinforced_alter,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/smithy)
 "eaE" = (
@@ -20002,6 +20003,7 @@
 "qpG" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/rack/shelf/biggest,
+/obj/item/repair_kit/cloth/empty,
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town)
 "qpU" = (
