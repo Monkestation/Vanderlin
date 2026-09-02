@@ -9,10 +9,6 @@
 	invocation = "VANISHIKA"
 	invocation_type = INVOCATION_SHOUT
 
-	required_form = FORM_ARCANE
-	required_technique = TECHNIQUE_ALTERATION
-	required_level = 12 //lol
-	initial_charges = 3
 
 	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt
 
@@ -29,6 +25,14 @@
 	var/obj/effect/jaunt_out_type = /obj/effect/temp_visual/wizard/out
 	/// List of valid exit points
 	var/list/exit_point_list
+
+/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/lesser
+	name = "Lesser Ethereal Jaunt"
+	cooldown_time = 95 SECONDS
+	required_form = FORM_ARCANE
+	required_technique = TECHNIQUE_ALTERATION
+	required_level = 12 //lol
+	initial_charges = 3
 
 /datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/enter_jaunt(mob/living/jaunter, turf/loc_override)
 	. = ..()

@@ -316,6 +316,19 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/admin_test)
+"ba" = (
+/obj/structure/fluff/testportal{
+	layer = 4.2;
+	aportalloc = "Dreamcave";
+	alpha = 25
+	},
+/obj/effect/decal/cleanable/ritual_rune/arcyne/wallgreater{
+	mouse_opacity = 0;
+	icon_state = "portal";
+	color = "#69b6e9"
+	},
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave)
 "bb" = (
 /obj/structure/table/wood{
 	icon_state = "map2"
@@ -1009,6 +1022,14 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/antag/vampire_manor)
+"dr" = (
+/obj/machinery/essence/infuser{
+	pixel_y = 6
+	},
+/obj/structure/table/wood/reinforced_alt,
+/obj/machinery/light/fueled/torchholder/metal_torch/west,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "ds" = (
 /mob/living/simple_animal/hostile/retaliate/cow,
 /turf/open/floor/dirt,
@@ -1156,12 +1177,24 @@
 /obj/structure/bed/shit,
 /turf/open/floor/blocks,
 /area/indoors/antag/vampire_manor)
+"dZ" = (
+/obj/machinery/essence/reservoir{
+	pixel_y = 10
+	},
+/obj/structure/table/wood/reinforced_alt,
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "ec" = (
 /obj/structure/chair/hotspring_bench/right{
 	pixel_y = 12
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/admin_test)
+"ed" = (
+/obj/structure/fluff/statue/noc/tall,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "ee" = (
 /obj/item/weapon/pitchfork,
 /obj/item/weapon/pitchfork,
@@ -1174,6 +1207,12 @@
 "eh" = (
 /turf/closed/wall/mineral/decostone/moss/long,
 /area/indoors/antag/lich)
+"ei" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = 32
+	},
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave/starchamber)
 "ep" = (
 /obj/structure/fluff/walldeco/wallshield,
 /turf/closed/wall/mineral/craftstone,
@@ -1318,6 +1357,9 @@
 /obj/item/clothing/head/helmet/kettle,
 /turf/open/floor/carpet,
 /area/indoors/admin_test)
+"ff" = (
+/turf/open/dungeon_trap,
+/area/indoors/town/church/dreamcave)
 "fg" = (
 /obj/effect/decal/cobbleedge,
 /turf/open/floor/dirt/road,
@@ -1420,6 +1462,12 @@
 "fy" = (
 /turf/open/floor/carpet,
 /area/indoors/admin_test)
+"fz" = (
+/obj/structure/bars/passage{
+	redstone_id = "dreamcave2"
+	},
+/turf/open/floor/tile/masonic/full,
+/area/indoors/town/church/dreamcave)
 "fA" = (
 /obj/structure/flora/grass/thorn_bush,
 /obj/structure/flora/grass,
@@ -1453,11 +1501,24 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/dirt/road,
 /area/indoors/antag/bandit_lair)
+"fM" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/natural/feather/infernal,
+/obj/item/natural/feather{
+	pixel_y = 4
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "fO" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors/admin_test)
+"fP" = (
+/obj/structure/fake_machine/scomm,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "fR" = (
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/ruinedwood/darker,
@@ -1564,6 +1625,10 @@
 	},
 /turf/open/floor/twig,
 /area/indoors/antag/lich)
+"gE" = (
+/obj/structure/carpet/blue,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "gH" = (
 /obj/effect/decal/cobbleedge{
 	dir = 8
@@ -1647,6 +1712,14 @@
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/sand,
 /area/broodmother_den)
+"hd" = (
+/obj/structure/scrying/nocdevice,
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "hf" = (
 /obj/effect/spawner/map_spawner/grass_low,
 /obj/structure/flora/grass,
@@ -1713,6 +1786,9 @@
 /obj/item/weapon/tongs,
 /turf/open/floor/cobble,
 /area/indoors/antag/bandit_lair)
+"hu" = (
+/turf/open/floor/cobblerock,
+/area/indoors/town/church/dreamcave)
 "hx" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 1
@@ -1746,6 +1822,12 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/admin_test)
+"hF" = (
+/obj/structure/bars/passage{
+	redstone_id = "dreamcave2"
+	},
+/turf/open/floor/tile/masonic/full/inverted,
+/area/indoors/town/church/dreamcave)
 "hG" = (
 /obj/structure/bars,
 /turf/open/floor/blocks,
@@ -1816,6 +1898,12 @@
 /obj/item/weapon/mace/stunmace,
 /turf/open/floor/cobble,
 /area/indoors/admin_test)
+"hT" = (
+/obj/structure/fake_machine/mail/l{
+	mailtag = "Lunar Oracle"
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "hV" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/cobblerock,
@@ -1850,6 +1938,10 @@
 /obj/structure/curtain/bounty,
 /turf/open/floor/wood,
 /area/indoors/antag/bandit_lair)
+"ih" = (
+/obj/structure/fluff/traveltile/exit_oracle_cave,
+/turf/open/floor/dirt,
+/area/indoors/town/church/dreamcave)
 "ik" = (
 /obj/structure/winch{
 	redstone_id = "vamplordmanor"
@@ -1874,6 +1966,19 @@
 /obj/item/clothing/head/hatfur,
 /turf/open/floor/herringbone,
 /area/indoors/antag/vampire_manor)
+"iq" = (
+/obj/structure/fluff/testportal{
+	layer = 4.2;
+	aportalloc = "Dreamcave";
+	alpha = 25
+	},
+/obj/effect/decal/cleanable/ritual_rune/arcyne/wallgreater{
+	mouse_opacity = 0;
+	icon_state = "portal";
+	color = "#69b6e9"
+	},
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave/starchamber)
 "ir" = (
 /obj/structure/kneestingers,
 /obj/structure/fluff/railing/border{
@@ -1890,6 +1995,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet/lord/center,
 /area/indoors/antag/lich)
+"it" = (
+/obj/structure/fluff/moonrug,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "iu" = (
 /turf/open/floor/wood,
 /area/indoors/admin_test)
@@ -1902,6 +2011,9 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/church,
 /area/indoors/antag/lich)
+"iA" = (
+/turf/closed/wall/mineral/underbrick,
+/area/indoors/town/church/dreamcave)
 "iC" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
@@ -2117,6 +2229,27 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
+"jK" = (
+/obj/structure/closet/keyrack{
+	pixel_y = 0;
+	pixel_x = -32
+	},
+/obj/effect/mapping_helpers/access/keyset{
+	difficulty = 1;
+	accesses = list("Dreamcave");
+	color = "#dcec4b";
+	name = "dreamcave"
+	},
+/obj/item/storage/keyring,
+/obj/item/storage/keyring,
+/obj/item/key/lunar_oracle,
+/obj/item/key/lunar_oracle,
+/obj/item/key/lunar_oracle,
+/obj/item/key/lunar_oracle,
+/obj/item/key/lunar_oracle,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "jL" = (
 /obj/structure/flora/sakura{
 	pixel_y = -13
@@ -2244,6 +2377,16 @@
 /obj/structure/well,
 /turf/open/floor/cobble,
 /area/outdoors/antag/bandit_lair)
+"kE" = (
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 4
+	},
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "kF" = (
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/dirt/road,
@@ -2473,6 +2616,21 @@
 "md" = (
 /turf/open/floor/carpet/stellar,
 /area/indoors/antag/lich)
+"me" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/dungeon_trap,
+/area/indoors/town/church/dreamcave)
+"mh" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/obj/item/paper,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "mi" = (
 /obj/structure/winch{
 	dir = 4;
@@ -2613,6 +2771,13 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors/admin_test)
+"nc" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/machinery/essence/harvester{
+	pixel_y = 6
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "nd" = (
 /obj/item/weapon/shovel,
 /obj/item/weapon/shovel,
@@ -2623,6 +2788,10 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/admin_test)
+"ne" = (
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "nf" = (
 /turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/antag/lich)
@@ -2661,6 +2830,16 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/carpet,
 /area/indoors/antag/vampire_manor)
+"nm" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_x = 32
+	},
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "nn" = (
 /obj/effect/decal/cobbleedge{
 	dir = 4
@@ -2718,6 +2897,12 @@
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/twig,
 /area/indoors/antag/lich)
+"nE" = (
+/obj/structure/bars/passage{
+	redstone_id = "dreamcave1"
+	},
+/turf/open/floor/tile/masonic/full,
+/area/indoors/town/church/dreamcave)
 "nG" = (
 /obj/structure/fluff/statue/evil,
 /obj/machinery/light/fueled/firebowl/standing/blue,
@@ -2793,6 +2978,12 @@
 /obj/item/clothing/armor/gambeson/arming,
 /turf/open/floor/carpet,
 /area/indoors/admin_test)
+"nU" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "nV" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 9
@@ -2835,6 +3026,16 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/antag/lich)
+"on" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = 32
+	},
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "oo" = (
 /obj/structure/fluff/walldeco/psybanner/red{
 	icon_state = "zizobanner";
@@ -3077,6 +3278,19 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/woods_safe)
+"pA" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/paper,
+/obj/item/paper,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
+"pB" = (
+/obj/machinery/essence/reservoir{
+	pixel_y = 10
+	},
+/obj/structure/table/wood/reinforced_alt,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "pC" = (
 /obj/item/natural/stone,
 /turf/open/floor/grass/mixyel,
@@ -3114,6 +3328,11 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/antag/bandit_lair)
+"pN" = (
+/obj/structure/carpet/blue,
+/obj/machinery/light/fueled/cauldron,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "pO" = (
 /obj/structure/window/solid,
 /obj/structure/curtain/bounty,
@@ -3146,6 +3365,10 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors/admin_test)
+"pX" = (
+/obj/structure/fluff/statue/noc,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "pY" = (
 /obj/item/clothing/shirt/dress/gen/colored/purple,
 /obj/item/clothing/shoes/shortboots,
@@ -3188,6 +3411,13 @@
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/dirt,
 /area/indoors/antag/vampire_manor)
+"qk" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = -32
+	},
+/obj/structure/table/wood/fancy/purple,
+/turf/open/floor/tile/masonic/full,
+/area/indoors/town/church/dreamcave)
 "qm" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/bowl{
@@ -3222,6 +3452,10 @@
 /obj/structure/door/swing,
 /turf/open/floor/carpet/lord/right,
 /area/indoors/antag/lich)
+"qw" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/dungeon_trap,
+/area/indoors/town/church/dreamcave)
 "qx" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -3231,6 +3465,23 @@
 /obj/item/skull,
 /turf/open/floor/carpet/red,
 /area/indoors/antag/lich)
+"qy" = (
+/obj/structure/fluff/psycross{
+	alpha = 0;
+	mouse_opacity = 0;
+	density = 0;
+	name = "invisible pantheon cross";
+	pass_all_dir = 1
+	},
+/obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/max{
+	mouse_opacity = 0
+	},
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "qz" = (
 /obj/structure/throne/statues,
 /turf/open/floor/churchbrick,
@@ -3300,6 +3551,12 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/antag/lich)
+"qT" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_x = 32
+	},
+/turf/open/dungeon_trap,
+/area/indoors/town/church/dreamcave)
 "qU" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobble,
@@ -3399,6 +3656,13 @@
 /obj/item/clothing/neck/chaincoif,
 /turf/open/floor/carpet,
 /area/indoors/admin_test)
+"rk" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = -32
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "rl" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/rope/chain,
@@ -3507,6 +3771,22 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/admin_test)
+"rU" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_x = -32
+	},
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
+"rW" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/obj/item/paper/scroll/dream_cave_map,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "rY" = (
 /obj/item/weapon/mace/cudgel,
 /obj/structure/table/wood{
@@ -3640,6 +3920,10 @@
 /obj/structure/fluff/walldeco/maidendrape,
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
+"sw" = (
+/obj/item/bin/water,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "sx" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/churchbrick,
@@ -3718,6 +4002,12 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/antag/bandit_lair)
+"sV" = (
+/obj/structure/noticeboard{
+	pixel_x = 32
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "sW" = (
 /obj/structure/rack,
 /obj/item/ammo_holder/quiver/arrows,
@@ -3738,6 +4028,9 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
+"td" = (
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "tf" = (
 /obj/structure/door/viewport{
 	dir = 1;
@@ -3895,6 +4188,9 @@
 /obj/structure/flora/tree/burnt,
 /turf/open/floor/grass,
 /area/outdoors/woods_safe)
+"tV" = (
+/turf/closed/wall/mineral/underbrick,
+/area/indoors/town/church/dreamcave/starchamber)
 "tW" = (
 /obj/structure/fluff/millstone{
 	pixel_x = -5;
@@ -3929,10 +4225,23 @@
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/antag/lich)
+"ul" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/needle,
+/obj/structure/rack/shelf/big{
+	pixel_y = 45;
+	base_pixel_y = 45
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "um" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/hay,
 /area/indoors/antag/bandit_lair)
+"uo" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "up" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/rope/chain,
@@ -3994,6 +4303,10 @@
 /obj/structure/flora/tree/dying_bush,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/woods_safe)
+"uO" = (
+/obj/structure/bearpelt,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "uP" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/carpet,
@@ -4031,6 +4344,33 @@
 	},
 /turf/open/floor/hay,
 /area/indoors/antag/bandit_lair)
+"uV" = (
+/obj/item/essence_vial{
+	pixel_x = -5;
+	pixel_y = 15
+	},
+/obj/item/essence_vial{
+	pixel_y = 6;
+	pixel_x = -1
+	},
+/obj/item/essence_vial{
+	pixel_y = 11;
+	pixel_x = 8
+	},
+/obj/item/essence_vial{
+	pixel_x = 7;
+	pixel_y = 3
+	},
+/obj/item/essence_vial{
+	pixel_x = -10;
+	pixel_y = 2
+	},
+/obj/item/essence_vial{
+	pixel_y = -4
+	},
+/obj/structure/table/wood/reinforced_alt,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "uW" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven{
@@ -4142,6 +4482,10 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/antag/bandit_lair)
+"vu" = (
+/obj/structure/table/wood/fancy/purple,
+/turf/open/floor/tile/masonic/full/inverted,
+/area/indoors/town/church/dreamcave)
 "vz" = (
 /obj/effect/decal/cobbleedge,
 /turf/open/floor/dirt,
@@ -4295,6 +4639,10 @@
 	},
 /turf/open/floor/church,
 /area/indoors/antag/lich)
+"vZ" = (
+/obj/structure/table/wood/reinforced_alt,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "wb" = (
 /obj/structure/gate/bars/preopen{
 	redstone_id = "vamplordthrone"
@@ -4316,6 +4664,14 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/antag/lich)
+"wj" = (
+/obj/structure/lever/hidden{
+	hidden_dc = 30;
+	accessor_trait = "Member of the Lunar Order";
+	redstone_id = "dreamcave1"
+	},
+/turf/closed/wall/mineral/underbrick,
+/area/indoors/town/church/dreamcave)
 "wk" = (
 /obj/item/clothing/shirt/undershirt,
 /obj/item/clothing/shirt/undershirt,
@@ -4346,6 +4702,14 @@
 /obj/structure/fluff/nest,
 /turf/open/floor/naturalstone,
 /area/broodmother_den)
+"wp" = (
+/obj/structure/fluff/statue/noc/tall,
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "ws" = (
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
@@ -4411,6 +4775,19 @@
 /obj/effect/decal/cobbleedge/alt,
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
+"wU" = (
+/obj/structure/door/viewport{
+	name = "Dream Cave"
+	},
+/obj/effect/mapping_helpers/access/keyset{
+	difficulty = 1;
+	accesses = list("Dreamcave");
+	color = "#dcec4b";
+	name = "dreamcave"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile/masonic/full,
+/area/indoors/town/church/dreamcave)
 "wV" = (
 /obj/structure/fluff/statue/pillar,
 /obj/effect/decal/cobblerockedge{
@@ -4563,6 +4940,12 @@
 /obj/structure/flora/tree/dying_bush,
 /turf/open/floor/dirt/road,
 /area/outdoors/antag/bandit_lair)
+"xT" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/dungeon_trap,
+/area/indoors/town/church/dreamcave)
 "xU" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /obj/structure/fluff/walldeco/psybanner/red{
@@ -4884,6 +5267,12 @@
 "zK" = (
 /turf/open/floor/carpet/green,
 /area/indoors/antag/lich)
+"zM" = (
+/obj/structure/table/wood/fancy/royalblue,
+/obj/structure/carpet/blue,
+/obj/machinery/essence/enchantment_altar,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "zP" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/dirt,
@@ -4892,6 +5281,14 @@
 /obj/structure/flora/tree/evil,
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
+"zT" = (
+/obj/structure/fake_machine/scomm{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "zV" = (
 /obj/item/cooking/pan,
 /obj/item/reagent_containers/glass/bucket/pot{
@@ -4908,6 +5305,20 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/admin_test)
+"zX" = (
+/obj/structure/door/viewport{
+	name = "Focus Chamber";
+	dir = 8
+	},
+/obj/effect/mapping_helpers/access/keyset{
+	difficulty = 1;
+	accesses = list("Dreamcave");
+	color = "#dcec4b";
+	name = "dreamcave"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "zY" = (
 /obj/structure/mannequin/male,
 /obj/item/clothing/shoes/simpleshoes/buckle,
@@ -5037,6 +5448,10 @@
 /obj/item/clothing/armor/leather/vest/colored/butcher,
 /turf/open/floor/wood,
 /area/indoors/admin_test)
+"AG" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave/starchamber)
 "AH" = (
 /obj/structure/grindwheel,
 /turf/open/floor/hexstone,
@@ -5143,6 +5558,12 @@
 /obj/machinery/light/fueled/wallfire/candle/skull,
 /turf/open/floor/churchmarble,
 /area/indoors/antag/lich)
+"Bh" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = -32
+	},
+/turf/open/dungeon_trap,
+/area/indoors/town/church/dreamcave)
 "Bj" = (
 /turf/open/floor/dirt,
 /area/indoors/antag/lich)
@@ -5191,6 +5612,16 @@
 /obj/item/kitchen/rollingpin,
 /turf/open/floor/tile/checker_green,
 /area/indoors/admin_test)
+"By" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "Bz" = (
 /obj/structure/bars,
 /turf/open/water/clean,
@@ -5525,6 +5956,10 @@
 /obj/structure/window/stained/zizo,
 /turf/open/floor/churchmarble,
 /area/indoors/antag/lich)
+"DI" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave/starchamber)
 "DO" = (
 /turf/open/water/clean,
 /area/outdoors/woods_safe)
@@ -5690,10 +6125,22 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/admin_test)
+"EQ" = (
+/turf/open/floor/dirt,
+/area/indoors/town/church/dreamcave)
 "ES" = (
 /obj/effect/falling_sakura,
 /turf/open/water/hotspring,
 /area/outdoors/admin_test)
+"ET" = (
+/obj/structure/bars/passage{
+	redstone_id = "dreamcave1"
+	},
+/obj/structure/fluff/walldeco/moon{
+	pixel_x = -32
+	},
+/turf/open/floor/tile/masonic/full/inverted,
+/area/indoors/town/church/dreamcave)
 "EU" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -5707,6 +6154,12 @@
 /obj/structure/table/wood/treestump/burnt,
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
+"EY" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = 32
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "Fa" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/structure/bookcase/random_recipes,
@@ -5789,10 +6242,38 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/tile/masonic,
 /area/overlord_lair)
+"Fy" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_x = -32
+	},
+/turf/open/dungeon_trap,
+/area/indoors/town/church/dreamcave)
 "Fz" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plasteel/maniac/damaged,
 /area)
+"FB" = (
+/obj/structure/fluff/psycross{
+	alpha = 0;
+	mouse_opacity = 0;
+	density = 0;
+	name = "invisible pantheon cross";
+	pass_all_dir = 1
+	},
+/obj/effect/decal/cleanable/ritual_rune/arcyne/wallgreater{
+	mouse_opacity = 0
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
+"FE" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/needle,
+/obj/structure/rack/shelf,
+/obj/item/carvedgem/onyxa/cutgem{
+	pixel_y = 38
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "FP" = (
 /obj/effect/decal/cobbleedge/alt{
 	dir = 6
@@ -5924,6 +6405,13 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
+"Gv" = (
+/obj/structure/chair/bench/couch/left{
+	dir = 8
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Gz" = (
 /obj/effect/landmark/vteleportsending,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -6020,6 +6508,14 @@
 /obj/structure/fluff/statue/pillar,
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
+"Hd" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/reagent_containers/glass/bottle/water,
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = 32
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "Hf" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /obj/structure/fluff/clock/zizoclock,
@@ -6109,6 +6605,19 @@
 /obj/item/clothing/neck/psycross/gold,
 /turf/open/floor/herringbone,
 /area/indoors/antag/vampire_manor)
+"HA" = (
+/obj/structure/door/viewport{
+	name = "Oracle Residence"
+	},
+/obj/effect/mapping_helpers/access/keyset{
+	difficulty = 1;
+	accesses = list("Dreamcave");
+	color = "#dcec4b";
+	name = "dreamcave"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "HB" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/dirt,
@@ -6182,6 +6691,12 @@
 /obj/structure/flora/rock/pile,
 /turf/open/floor/sand,
 /area/outdoors/woods_safe)
+"HQ" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "HR" = (
 /obj/structure/fluff/railing/border{
 	dir = 4;
@@ -6213,6 +6728,9 @@
 	},
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/admin_test)
+"HY" = (
+/turf/open/floor/tile/masonic/full,
+/area/indoors/town/church/dreamcave)
 "HZ" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/antag/lich)
@@ -6377,6 +6895,11 @@
 	},
 /turf/open/floor/grass/yel,
 /area/outdoors/antag/lich)
+"IE" = (
+/obj/structure/table/wood/fancy/royalblue,
+/obj/structure/carpet/blue,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "IF" = (
 /turf/closed/mineral/cold,
 /area/outdoors/woods_safe)
@@ -6485,6 +7008,12 @@
 /obj/structure/fluff/statue/gargoyle/candles,
 /turf/open/floor/herringbone,
 /area/overlord_lair)
+"Ja" = (
+/obj/structure/bookcase/random/legends{
+	color = "#7D9BAE"
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Jb" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/dirt,
@@ -6553,6 +7082,13 @@
 /obj/item/reagent_containers/glass/cup/skull,
 /turf/open/floor/twig,
 /area/indoors/antag/lich)
+"Jn" = (
+/obj/machinery/essence/splitter{
+	pixel_y = 6
+	},
+/obj/structure/table/wood/reinforced_alt,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Jo" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 8
@@ -6632,10 +7168,18 @@
 /obj/structure/healingfountain,
 /turf/open/floor/concrete,
 /area/outdoors/antag/vampire_manor)
+"JG" = (
+/obj/structure/fluff/walldeco/moon,
+/turf/closed/wall/mineral/underbrick,
+/area/indoors/town/church/dreamcave)
 "JJ" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/yel,
 /area/outdoors/admin_test)
+"JL" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/dungeon_trap,
+/area/indoors/town/church/dreamcave)
 "JN" = (
 /turf/closed/mineral/bedrock,
 /area/overlord_lair)
@@ -6671,6 +7215,9 @@
 /obj/item/reagent_containers/glass/bucket/pot,
 /turf/open/floor/tile/checker_green,
 /area/indoors/admin_test)
+"JW" = (
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave/starchamber)
 "JX" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -6732,6 +7279,18 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/naturalstone,
 /area/outdoors/antag/lich)
+"Kl" = (
+/obj/structure/table/wood/reinforced_alter,
+/obj/item/arcyne_spellobject/spellstone/random,
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = 32
+	},
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "Kn" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
@@ -6791,6 +7350,25 @@
 	},
 /turf/open/floor/tile/checker_green,
 /area/indoors/antag/lich)
+"KI" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/structure/rack/shelf,
+/obj/item/carvedgem/shell/cutgem{
+	pixel_y = 38
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
+"KK" = (
+/obj/item/reagent_containers/glass/mortar{
+	pixel_y = 6
+	},
+/obj/item/pestle{
+	pixel_y = 6
+	},
+/obj/structure/table/wood/reinforced_alt,
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "KL" = (
 /obj/structure/window/solid,
 /obj/structure/curtain/bounty,
@@ -6823,6 +7401,14 @@
 /obj/item/clothing/armor/plate/full,
 /turf/open/floor/carpet,
 /area/indoors/admin_test)
+"Lc" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "Le" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/face/facemask,
@@ -6948,6 +7534,12 @@
 	},
 /turf/closed/wall/mineral/decostone/moss/long,
 /area/indoors/antag/lich)
+"LS" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_x = -32
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "LU" = (
 /obj/structure/fluff/psycross/crafted,
 /turf/open/floor/dirt,
@@ -6971,6 +7563,10 @@
 /obj/item/reagent_containers/food/snacks/cheese,
 /turf/open/floor/tile,
 /area/indoors/antag/vampire_manor)
+"Ma" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave/starchamber)
 "Mb" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 6;
@@ -7022,6 +7618,20 @@
 /obj/item/reagent_containers/glass/bucket/pot/copper,
 /turf/open/floor/blocks,
 /area/indoors/admin_test)
+"Mp" = (
+/obj/structure/door/viewport{
+	name = "Dream Cave";
+	dir = 8
+	},
+/obj/effect/mapping_helpers/access/keyset{
+	difficulty = 1;
+	accesses = list("Dreamcave");
+	color = "#dcec4b";
+	name = "dreamcave"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Mq" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/thorn_bush,
@@ -7041,6 +7651,13 @@
 /obj/structure/fluff/walldeco/maidendrape,
 /turf/open/floor/dirt,
 /area/outdoors/antag/vampire_manor)
+"Mu" = (
+/obj/structure/door/arcyne/bolt/caster{
+	omni_bolt = 1;
+	name = "Star Chamber"
+	},
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave/starchamber)
 "Mw" = (
 /obj/structure/hotspring/border/two,
 /turf/open/floor/dirt/road,
@@ -7087,6 +7704,19 @@
 /obj/item/rope,
 /turf/open/floor/church,
 /area/indoors/antag/lich)
+"MN" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
+"MO" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/natural/bundle/cloth/bandage/full,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "MP" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -7126,6 +7756,9 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
+"Na" = (
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Nd" = (
 /obj/structure/fluff/walldeco/wantedposter{
 	name = "Wall of fame";
@@ -7152,6 +7785,10 @@
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/church,
 /area/indoors/antag/lich)
+"Nj" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "Nl" = (
 /obj/structure/rack,
 /obj/item/reagent_containers/glass/bucket/wooden,
@@ -7161,6 +7798,9 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/antag/vampire_manor)
+"Nm" = (
+/turf/open/floor/dirt/road,
+/area/indoors/town/church/dreamcave)
 "No" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
@@ -7175,6 +7815,15 @@
 /obj/item/coin/silver/pile,
 /turf/open/floor/carpet,
 /area/indoors/admin_test)
+"Ns" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/paper/scroll,
+/obj/item/paper/scroll,
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = -32
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Nt" = (
 /obj/machinery/anvil,
 /obj/item/weapon/hammer/iron,
@@ -7243,6 +7892,21 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/antag/bandit_lair)
+"NI" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
+"NJ" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/structure/fluff/walldeco/painting/moon{
+	pixel_y = 32;
+	layer = 2.6
+	},
+/obj/machinery/essence/reservoir{
+	pixel_y = 10
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "NK" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/baddaub,
@@ -7257,6 +7921,19 @@
 /obj/machinery/light/fueled/oven/south,
 /turf/open/floor/tile/checker_green,
 /area/indoors/admin_test)
+"NP" = (
+/obj/structure/door/viewport{
+	name = "Dream Archive"
+	},
+/obj/effect/mapping_helpers/access/keyset{
+	difficulty = 1;
+	accesses = list("Dreamcave");
+	color = "#dcec4b";
+	name = "dreamcave"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "NQ" = (
 /obj/effect/decal/remains/mole,
 /obj/structure/flora/grass/herb/urtica{
@@ -7281,6 +7958,12 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/carpet/lord/left,
 /area/indoors/antag/lich)
+"NY" = (
+/obj/structure/chair/bench/couch/right{
+	dir = 8
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Oc" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade{
@@ -7299,6 +7982,15 @@
 /obj/item/gun/ballistic/bow/cross,
 /turf/open/floor/hexstone,
 /area/indoors/antag/vampire_manor)
+"Of" = (
+/obj/structure/bars/passage{
+	redstone_id = "dreamcave1"
+	},
+/obj/structure/fluff/walldeco/moon{
+	pixel_x = 32
+	},
+/turf/open/floor/tile/masonic/full/inverted,
+/area/indoors/town/church/dreamcave)
 "Og" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/cloak/raincloak/furcloak,
@@ -7351,6 +8043,10 @@
 /obj/item/rope/net,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/antag/bandit_lair)
+"Oo" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "Op" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/needle,
@@ -7438,6 +8134,9 @@
 /obj/structure/flora/grass/bush,
 /turf/open/floor/dirt,
 /area/outdoors/antag/bandit_lair)
+"OV" = (
+/turf/closed/mineral/bedrock,
+/area/indoors/town/church/dreamcave)
 "OX" = (
 /obj/item/weapon/sword/long/exe,
 /obj/item/weapon/sword/long/exe,
@@ -7536,8 +8235,9 @@
 /turf/open/floor/grass/red,
 /area/outdoors/antag/vampire_manor)
 "PK" = (
-/obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
+/obj/structure/door/iron/bars/cell,
 /turf/open/floor/blocks,
 /area/indoors/antag/vampire_manor)
 "PM" = (
@@ -7575,6 +8275,13 @@
 /obj/structure/fermentation_keg,
 /turf/open/floor/tile,
 /area/indoors/antag/vampire_manor)
+"PX" = (
+/obj/structure/carpet/blue,
+/obj/effect/landmark/start/late/lunar_oracle{
+	dir = 4
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "PY" = (
 /turf/open/floor/naturalstone,
 /area/broodmother_den)
@@ -7602,6 +8309,15 @@
 /obj/item/storage/belt/pouch,
 /turf/open/floor/carpet,
 /area/indoors/admin_test)
+"Qe" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/paper/scroll,
+/obj/item/natural/feather,
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Qh" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "We are looking into adding living thralls for vamps, as support classes. This is dedicating space for them"
@@ -7686,6 +8402,14 @@
 /obj/structure/fermentation_keg/beer,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/antag/lich)
+"QE" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/machinery/essence/reservoir{
+	pixel_y = 10
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "QG" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/structure/table/wood/smooth,
@@ -7721,11 +8445,9 @@
 /turf/open/floor/church,
 /area/indoors/antag/lich)
 "QN" = (
-/obj/structure/door/iron/bars{
-	name = "Cell"
-	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/antag/bandit,
+/obj/structure/door/iron/bars/cell,
 /turf/open/floor/dirt,
 /area/indoors/antag/bandit_lair)
 "QO" = (
@@ -7836,6 +8558,12 @@
 	},
 /turf/open/floor/woodturned,
 /area/indoors/admin_test)
+"Rs" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = -32
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "Rt" = (
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/herringbone,
@@ -8158,6 +8886,13 @@
 /obj/item/reagent_containers/glass/bowl/iron,
 /turf/open/floor/churchmarble,
 /area/indoors/antag/lich)
+"SO" = (
+/obj/structure/carpet/blue,
+/obj/effect/landmark/start/lunar_oracle{
+	dir = 8
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "SP" = (
 /obj/item/clothing/gloves/rare/elfplate,
 /obj/item/clothing/shoes/boots/rare/elfplate,
@@ -8205,6 +8940,15 @@
 /obj/structure/fluff/statue/pillar,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/antag/lich)
+"SW" = (
+/obj/structure/table/wood/reinforced_alter,
+/obj/item/arcyne_spellobject/spellstone/random,
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "SX" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -8212,6 +8956,9 @@
 	},
 /turf/open/floor/twig,
 /area/indoors/antag/bandit_lair)
+"SY" = (
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave)
 "Te" = (
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
@@ -8248,6 +8995,13 @@
 /obj/structure/chair/bench,
 /turf/open/floor/cobblerock,
 /area/outdoors/antag/vampire_manor)
+"To" = (
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "Tv" = (
 /obj/machinery/light/fueled/torchholder/c,
 /turf/open/floor/cobblerock,
@@ -8387,6 +9141,14 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/antag/lich)
+"TS" = (
+/obj/structure/fake_machine/scomm{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/structure/closet/crate/drawer,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "TU" = (
 /obj/structure/flora/rock/pile,
 /turf/open/floor/grass,
@@ -8407,6 +9169,15 @@
 	dir = 4
 	},
 /area/indoors/antag/lich)
+"TY" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/structure/mirror{
+	pixel_y = 0;
+	pixel_x = -32
+	},
+/obj/item/scrying/orb/miracle,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "TZ" = (
 /obj/effect/decal/cleanable/food/plant_smudge,
 /turf/open/floor/tile/kitchen,
@@ -8414,6 +9185,9 @@
 "Uc" = (
 /turf/open/openspace,
 /area/broodmother_den)
+"Ud" = (
+/turf/open/floor/tile/masonic/full/inverted,
+/area/indoors/town/church/dreamcave)
 "Uf" = (
 /turf/closed/mineral/bedrock,
 /area/outdoors/antag/bandit_lair)
@@ -8490,6 +9264,12 @@
 /obj/structure/fluff/walldeco/maidendrape,
 /turf/open/floor/hexstone,
 /area/indoors/antag/vampire_manor)
+"UD" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/item/paper/scroll,
+/obj/item/natural/feather,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "UE" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/tree/dying_bush,
@@ -8524,6 +9304,16 @@
 	},
 /turf/open/floor/carpet,
 /area/indoors/antag/vampire_manor)
+"US" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = -32
+	},
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "UU" = (
 /obj/item/clothing/shirt/dress/silkdress/colored/silkdressprimary,
 /obj/item/clothing/shoes/shortboots,
@@ -8620,12 +9410,27 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
 /area/indoors/antag/bandit_lair)
+"Vm" = (
+/obj/structure/table/wood/reinforced_alt,
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = 32
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Vq" = (
 /obj/effect/decal/cobbleedge{
 	dir = 9
 	},
 /turf/closed/wall/mineral/decostone/long,
 /area/indoors/antag/lich)
+"Vr" = (
+/obj/structure/lever/hidden{
+	hidden_dc = 30;
+	accessor_trait = "Member of the Lunar Order";
+	redstone_id = "dreamcave2"
+	},
+/turf/closed/wall/mineral/underbrick,
+/area/indoors/town/church/dreamcave)
 "Vt" = (
 /obj/structure/vampire/necromanticbook{
 	pixel_x = -16;
@@ -8784,6 +9589,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/broodmother_den)
+"Wi" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = -32
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Wj" = (
 /turf/open/floor/blocks,
 /area/indoors/admin_test)
@@ -8879,6 +9690,10 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/twig,
 /area/indoors/antag/bandit_lair)
+"WK" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/tile/masonic/full/inverted,
+/area/indoors/town/church/dreamcave)
 "WL" = (
 /obj/structure/mannequin/male,
 /obj/item/clothing/head/priestmask,
@@ -8895,6 +9710,32 @@
 /obj/item/clothing/head/padded/briarthorns,
 /turf/open/floor/wood,
 /area/indoors/admin_test)
+"WR" = (
+/obj/item/essence_vial{
+	pixel_x = -8;
+	pixel_y = 21
+	},
+/obj/item/essence_vial{
+	pixel_y = 15
+	},
+/obj/item/essence_vial{
+	pixel_y = 22;
+	pixel_x = 8
+	},
+/obj/item/essence_vial{
+	pixel_x = -8;
+	pixel_y = 9
+	},
+/obj/item/essence_vial{
+	pixel_x = 9;
+	pixel_y = 11
+	},
+/obj/item/essence_vial{
+	pixel_y = 3
+	},
+/obj/structure/table/wood/reinforced_alt,
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "WS" = (
 /turf/open/floor/underworld/space/sparkle_quiet/fake_world,
 /area)
@@ -8947,6 +9788,18 @@
 /obj/effect/lily_petal/two,
 /turf/open/water/hotspring,
 /area/outdoors/admin_test)
+"Xm" = (
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 8
+	},
+/obj/effect/landmark/start/late/lunar_oracle{
+	dir = 8
+	},
+/obj/effect/landmark/start/lunar_oracle{
+	dir = 8
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "Xn" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/clothing/shoes/nobleboot,
@@ -9070,6 +9923,15 @@
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/grass,
 /area/outdoors/woods_safe)
+"XT" = (
+/obj/structure/bed/inn/double,
+/obj/item/bedsheet/fabric_double,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
+"XV" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/tile/masonic/full/inverted,
+/area/indoors/town/church/dreamcave)
 "XW" = (
 /obj/structure/table/wood/fancy/red,
 /obj/item/clothing/face/jademask,
@@ -9194,6 +10056,11 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/admin_test)
+"YD" = (
+/obj/item/bin/water,
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "YE" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
@@ -9242,6 +10109,14 @@
 /obj/structure/bed/fake_world,
 /turf/open/floor/plasteel/maniac,
 /area)
+"YM" = (
+/obj/structure/lever/hidden{
+	hidden_dc = 30;
+	accessor_trait = "Member of the Lunar Order";
+	redstone_id = "dreamcave3"
+	},
+/turf/closed/wall/mineral/underbrick,
+/area/indoors/town/church/dreamcave)
 "YN" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 1;
@@ -9295,6 +10170,14 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/antag/lich)
+"Za" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/underworld/space{
+	slowdown = 5;
+	desc = "The shifting stars, yet at your feet.";
+	name = "starfield"
+	},
+/area/indoors/town/church/dreamcave/starchamber)
 "Zb" = (
 /obj/structure/fluff/statue/shisha{
 	pixel_x = -24;
@@ -9352,6 +10235,12 @@
 "Zm" = (
 /turf/closed/basic,
 /area)
+"Zp" = (
+/obj/effect/landmark/start/late/lunar_oracle{
+	dir = 1
+	},
+/turf/open/floor/tile/masonic/moonbw,
+/area/indoors/town/church/dreamcave)
 "Zq" = (
 /obj/structure/roguetent/preopen,
 /turf/open/floor/dirt,
@@ -9383,6 +10272,12 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt/road,
 /area/outdoors/antag/bandit_lair)
+"ZD" = (
+/obj/structure/bars/passage{
+	redstone_id = "dreamcave3"
+	},
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave)
 "ZG" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/carpet,
@@ -12962,15 +13857,15 @@ yF
 yF
 yF
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
 yF
 yF
 yF
@@ -13092,15 +13987,15 @@ yF
 yF
 yF
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+WS
+WS
+WS
+WS
+WS
+WS
+WS
+bX
 yF
 yF
 yF
@@ -13222,15 +14117,15 @@ yF
 yF
 yF
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+WS
+WS
+WS
+WS
+WS
+WS
+WS
+bX
 yF
 yF
 yF
@@ -13352,15 +14247,15 @@ yF
 yF
 yF
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+WS
+WS
+WS
+WS
+WS
+WS
+WS
+bX
 yF
 yF
 yF
@@ -13482,15 +14377,15 @@ yF
 yF
 yF
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+WS
+WS
+WS
+WS
+WS
+WS
+WS
+bX
 yF
 yF
 yF
@@ -13612,22 +14507,22 @@ yF
 yF
 yF
 yF
-yF
-yF
-yF
 bX
-bX
-bX
-bX
-bX
-bX
-bX
-bX
+WS
+WS
+WS
+WS
+WS
+WS
+WS
 bX
 yF
 yF
 yF
 yF
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -13743,21 +14638,21 @@ yF
 yF
 yF
 yF
-yF
-yF
-bX
-WS
-WS
-WS
-WS
-WS
-WS
-WS
-bX
-yF
-yF
-yF
-yF
+YI
+YI
+YI
+RU
+YI
+YI
+YI
+YI
+YI
+YI
+YI
+YI
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -13870,24 +14765,24 @@ jW
 (35,1,1) = {"
 yF
 yF
-yF
-yF
-yF
-yF
-yF
-bX
-WS
-WS
-WS
-WS
-WS
-WS
-WS
-bX
-yF
-yF
-yF
-yF
+YI
+YI
+YI
+YI
+QY
+Sr
+Sr
+kB
+AV
+YI
+Fz
+Fz
+ps
+kB
+YI
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -14000,24 +14895,24 @@ jW
 (36,1,1) = {"
 yF
 yF
-yF
-yF
-yF
-yF
-yF
-bX
-WS
-WS
-WS
-WS
-WS
-WS
-WS
-bX
-yF
-yF
-yF
-yF
+YI
+vS
+Fz
+ji
+kB
+kB
+Sr
+kB
+AV
+jG
+kB
+kB
+Fz
+Fz
+IK
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -14130,24 +15025,24 @@ jW
 (37,1,1) = {"
 yF
 yF
-yF
-yF
-yF
-yF
-yF
-bX
-WS
-WS
-WS
-WS
-WS
-WS
-WS
-bX
-yF
-yF
-yF
-yF
+YI
+kB
+Fz
+YI
+Sr
+kB
+RI
+Sr
+AV
+YI
+vT
+Fz
+kB
+kB
+YI
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -14260,24 +15155,24 @@ Yu
 (38,1,1) = {"
 yF
 yF
-yF
-yF
-yF
-yF
-yF
-bX
-WS
-WS
-WS
-WS
-WS
-WS
-WS
-bX
-yF
-yF
-yF
-yF
+YI
+Fz
+vT
+YI
+AV
+kB
+Fz
+kB
+kB
+YI
+YI
+YI
+YI
+YI
+YI
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -14390,24 +15285,24 @@ Yu
 (39,1,1) = {"
 yF
 yF
+YI
+YI
+YI
+YI
+Sr
+YL
+Sr
+AC
+Sr
+YI
 yF
 yF
 yF
 yF
 yF
-yF
-YI
-YI
-YI
-RU
-YI
-YI
-YI
-YI
-YI
-YI
-YI
-YI
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -14527,17 +15422,17 @@ YI
 YI
 YI
 YI
-QY
-Sr
-Sr
-kB
-AV
 YI
-Fz
-Fz
-ps
-kB
 YI
+YI
+yF
+yF
+yF
+yF
+yF
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -14653,21 +15548,21 @@ yF
 yF
 yF
 yF
-YI
-vS
-Fz
-ji
-kB
-kB
-Sr
-kB
-AV
-jG
-kB
-kB
-Fz
-Fz
-IK
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -14783,21 +15678,21 @@ yF
 yF
 yF
 yF
-YI
-kB
-Fz
-YI
-Sr
-kB
-RI
-Sr
-AV
-YI
-vT
-Fz
-kB
-kB
-YI
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
 yF
 yF
 yF
@@ -14913,27 +15808,27 @@ yF
 yF
 yF
 yF
-YI
-Fz
-vT
-YI
-AV
-kB
-Fz
-kB
-kB
-YI
-YI
-YI
-YI
-YI
-YI
-yF
-yF
-yF
-yF
-yF
-yF
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
 Zm
 Zm
 aw
@@ -15043,27 +15938,27 @@ yF
 yF
 yF
 yF
-YI
-YI
-YI
-YI
-Sr
-YL
-Sr
-AC
-Sr
-YI
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+Zm
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+Zm
+Zm
+Zm
+Zm
 Zm
 Zm
 aw
@@ -15169,31 +16064,31 @@ Yu
 "}
 (45,1,1) = {"
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-YI
-YI
-YI
-YI
-YI
-YI
-YI
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+Zm
+Zm
+Zm
+Zm
+Zm
+bX
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+bX
+Zm
+Zm
+Zm
+Zm
 Zm
 Zm
 aw
@@ -15299,31 +16194,31 @@ Yu
 "}
 (46,1,1) = {"
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+Zm
+Zm
+Zm
+Zm
+Zm
+bX
+tV
+SW
+To
+To
+Lc
+rU
+To
+Lc
+To
+rU
+Lc
+To
+To
+tV
+bX
+Zm
+Zm
+Zm
+Zm
 Zm
 Zm
 aw
@@ -15428,32 +16323,32 @@ eK
 Yu
 "}
 (47,1,1) = {"
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+tV
+Kl
+To
+wp
+To
+To
+To
+To
+To
+To
+To
+wp
+To
+tV
+bX
+Zm
+Zm
+Zm
+Zm
 Zm
 Zm
 vI
@@ -15558,30 +16453,30 @@ eK
 Yu
 "}
 (48,1,1) = {"
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+SW
+To
+To
+To
+To
+To
+To
+To
+To
+To
+To
+By
+tV
+bX
+Zm
+Zm
 Zm
 Zm
 Zm
@@ -15688,30 +16583,30 @@ eK
 Yu
 "}
 (49,1,1) = {"
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+tV
+JW
+JW
+Ma
+JW
+JW
+tV
+tV
+Za
+To
+To
+To
+To
+To
+To
+To
+To
+To
+US
+tV
+bX
+Zm
+Zm
 Zm
 Zm
 Zm
@@ -15818,30 +16713,30 @@ eK
 Yu
 "}
 (50,1,1) = {"
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+tV
+ei
+JW
+JW
+JW
+JW
+tV
+on
+To
+To
+To
+To
+To
+To
+To
+To
+To
+To
+To
+tV
+bX
+Zm
+Zm
 Zm
 Zm
 Zm
@@ -15948,30 +16843,30 @@ eK
 Yu
 "}
 (51,1,1) = {"
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+tV
+AG
+JW
+iq
+JW
+JW
+Mu
+To
+To
+To
+To
+To
+To
+qy
+To
+To
+To
+To
+By
+tV
+bX
+Zm
+Zm
 Zm
 Zm
 Zm
@@ -16078,30 +16973,30 @@ eK
 Yu
 "}
 (52,1,1) = {"
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+tV
+ei
+JW
+JW
+JW
+JW
+tV
+on
+To
+To
+To
+To
+To
+To
+To
+To
+To
+To
+To
+tV
+bX
+Zm
+Zm
 Zm
 Zm
 Zm
@@ -16208,28 +17103,28 @@ eK
 Yu
 "}
 (53,1,1) = {"
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+tV
+JW
+JW
+DI
+JW
+JW
+tV
+tV
+Za
+To
+To
+To
+To
+To
+To
+To
+To
+To
+US
+tV
+bX
 Zm
 Zm
 Zm
@@ -16338,28 +17233,28 @@ eK
 Yu
 "}
 (54,1,1) = {"
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+tV
+tV
+tV
+tV
+tV
+tV
+tV
+SW
+To
+To
+To
+To
+To
+To
+To
+To
+To
+To
+By
+tV
+bX
 Zm
 Zm
 Zm
@@ -16468,28 +17363,28 @@ eK
 Yu
 "}
 (55,1,1) = {"
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+bX
+bX
+bX
+bX
+bX
+bX
+bX
+tV
+Kl
+To
+wp
+To
+To
+To
+To
+To
+To
+To
+wp
+To
+tV
+bX
 Zm
 Zm
 Zm
@@ -16599,27 +17494,27 @@ Yu
 "}
 (56,1,1) = {"
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+Zm
+Zm
+Zm
+Zm
+Zm
+bX
+tV
+SW
+To
+To
+MN
+nm
+To
+To
+To
+nm
+MN
+To
+To
+tV
+bX
 Zm
 Zm
 Zm
@@ -16729,27 +17624,27 @@ Yu
 "}
 (57,1,1) = {"
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+Zm
+Zm
+Zm
+Zm
+Zm
+bX
+tV
+tV
+tV
+tV
+tV
+tV
+To
+kE
+To
+tV
+tV
+tV
+tV
+tV
+bX
 Zm
 Zm
 Zm
@@ -16859,27 +17754,27 @@ Yu
 "}
 (58,1,1) = {"
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+Zm
+Zm
+Zm
+Zm
+Zm
+bX
+bX
+bX
+bX
+bX
+bX
+tV
+To
+hd
+To
+tV
+bX
+bX
+bX
+bX
+bX
 Zm
 Zm
 Zm
@@ -16989,26 +17884,26 @@ Yu
 "}
 (59,1,1) = {"
 yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
-yF
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+Zm
+bX
+tV
+To
+MN
+To
+tV
+bX
+Zm
+Zm
+Zm
 yF
 Zm
 Zm
@@ -17129,13 +18024,13 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
+bX
+tV
+tV
+tV
+tV
+tV
+bX
 Zm
 Zm
 Zm
@@ -21603,24 +22498,24 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-NW
-NW
-NW
-NW
-NW
-NW
-NW
-NW
-NW
-NW
-NW
-Zm
-Zm
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
 Zm
 Zm
 HZ
@@ -21727,32 +22622,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+yF
+yF
+OV
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+OV
+yF
+yF
 HZ
 Ae
 mX
@@ -21857,32 +22752,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+yF
+yF
+OV
+iA
+pX
+td
+LS
+Nj
+LS
+td
+td
+iA
+Ja
+Na
+pA
+fM
+vZ
+Ns
+iA
+OV
+yF
+yF
 HZ
 Ae
 mX
@@ -21987,32 +22882,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+td
+td
+td
+td
+td
+td
+td
+iA
+Ja
+Na
+Na
+Na
+Na
+mh
+iA
+OV
+yF
+yF
 HZ
 ZP
 VB
@@ -22117,32 +23012,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+EY
+td
+td
+td
+td
+td
+td
+NP
+Na
+Na
+Na
+uO
+Na
+Qe
+iA
+OV
+yF
+yF
 HZ
 ZP
 ZP
@@ -22247,32 +23142,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+Oo
+td
+td
+FB
+td
+td
+HQ
+iA
+Ja
+Na
+Na
+Na
+Na
+vZ
+iA
+OV
+yF
+yF
 HZ
 ZP
 ZP
@@ -22377,32 +23272,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+EY
+td
+td
+td
+td
+td
+Rs
+iA
+Ja
+Na
+Gv
+NY
+Na
+rk
+iA
+OV
+yF
+yF
 HZ
 Ae
 lq
@@ -22507,32 +23402,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+td
+td
+td
+td
+td
+td
+td
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+OV
+yF
+yF
 HZ
 Ae
 wK
@@ -22637,32 +23532,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+fP
+td
+td
+td
+td
+td
+td
+iA
+Hd
+TY
+rW
+jK
+hT
+iA
+OV
+OV
+yF
+yF
 HZ
 Ae
 II
@@ -22767,32 +23662,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+YD
+td
+td
+td
+td
+td
+HQ
+iA
+UD
+Xm
+td
+it
+td
+iA
+OV
+yF
+yF
+yF
 HZ
 Ae
 VB
@@ -22897,32 +23792,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+FE
+td
+td
+td
+td
+td
+td
+HA
+td
+td
+td
+td
+Rs
+iA
+OV
+yF
+yF
+yF
 HZ
 Ae
 jJ
@@ -23027,32 +23922,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+ul
+td
+td
+td
+td
+td
+td
+iA
+ne
+td
+uo
+TS
+XT
+iA
+OV
+OV
+OV
+OV
 HZ
 Ae
 GZ
@@ -23157,32 +24052,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+OV
+OV
+iA
+KI
+MO
+MO
+uo
+td
+sV
+td
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
 HZ
 Ae
 VB
@@ -23287,32 +24182,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+zX
+iA
+iA
+iA
+ff
+ff
+ff
+JL
+Fy
+JL
+ff
+ff
+ff
+iA
 HZ
 Ae
 GZ
@@ -23417,32 +24312,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+ed
+uV
+WR
+KK
+sw
+NI
+Na
+Na
+Wi
+iA
+ff
+ff
+ff
+ff
+ff
+ff
+ff
+ff
+ff
+iA
 HZ
 Ae
 VB
@@ -23547,32 +24442,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+Jn
+Na
+Na
+Na
+Na
+Na
+Na
+Na
+Na
+iA
+ff
+ff
+SY
+SY
+SY
+SY
+SY
+ff
+ff
+iA
 HZ
 Ae
 GZ
@@ -23677,32 +24572,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+QE
+Na
+gE
+gE
+PX
+gE
+gE
+gE
+nU
+YM
+me
+ff
+SY
+SY
+SY
+SY
+SY
+ff
+xT
+iA
 HZ
 Ae
 jJ
@@ -23807,32 +24702,32 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+NJ
+Zp
+gE
+IE
+zM
+IE
+pN
+gE
+Na
+ZD
+SY
+SY
+SY
+SY
+ba
+SY
+SY
+ff
+Bh
+iA
 HZ
 Ae
 sB
@@ -23934,35 +24829,35 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
+OV
+OV
+OV
+OV
 yF
 yF
 yF
-yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+QE
+Na
+gE
+gE
+SO
+gE
+gE
+gE
+nU
+YM
+me
+ff
+SY
+SY
+SY
+SY
+SY
+ff
+xT
+iA
 HZ
 Ae
 VB
@@ -24062,37 +24957,37 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
+OV
+OV
+OV
+hu
+hu
+OV
+OV
 yF
 yF
-yF
-yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+iA
+nc
+Na
+Na
+Na
+Na
+Na
+Na
+Na
+Na
+iA
+ff
+ff
+SY
+SY
+SY
+SY
+SY
+ff
+ff
+iA
 HZ
 Ae
 VB
@@ -24192,37 +25087,37 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-yF
-yF
-yF
-yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+EQ
+hu
+Nm
+EQ
+EQ
+OV
+OV
+OV
+OV
+iA
+Vm
+pB
+dr
+dZ
+Na
+zT
+Na
+Na
+Wi
+iA
+ff
+ff
+ff
+ff
+ff
+ff
+ff
+ff
+ff
+iA
 HZ
 Ae
 lq
@@ -24321,38 +25216,38 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-yF
-yF
-yF
-yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+OV
+EQ
+EQ
+Nm
+EQ
+wj
+iA
+iA
+wj
+iA
+iA
+iA
+Vr
+iA
+iA
+iA
+Vr
+Mp
+iA
+iA
+iA
+ff
+ff
+ff
+qw
+qT
+qw
+ff
+ff
+ff
+iA
 HZ
 Ae
 lq
@@ -24451,38 +25346,38 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-yF
-yF
-yF
-yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+ih
+hu
+hu
+Nm
+hu
+XV
+ET
+Ud
+XV
+Ud
+JG
+Ud
+XV
+Ud
+hF
+Ud
+XV
+Ud
+Ud
+vu
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
+iA
 HZ
 Ae
 lq
@@ -24581,38 +25476,38 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-yF
-yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-yF
-yF
-yF
-yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
+OV
+ih
+hu
+hu
+hu
+hu
+HY
+nE
+HY
+HY
+HY
+wU
+HY
+HY
+HY
+fz
+HY
+HY
+HY
+HY
+qk
+iA
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
 HZ
 Ae
 lq
@@ -24711,38 +25606,38 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
+OV
+ih
+EQ
+hu
+hu
+hu
+WK
+Of
+Ud
+WK
+Ud
+JG
+Ud
+WK
+Ud
+hF
+Ud
+WK
+Ud
+Ud
+vu
+iA
+OV
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
-yF
-Zm
-Zm
-Zm
-Zm
 HZ
 Ae
 lq
@@ -24841,38 +25736,38 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
+OV
+OV
+EQ
+Nm
+EQ
+hu
+wj
+iA
+iA
+wj
+iA
+iA
+iA
+Vr
+iA
+iA
+iA
+Vr
+iA
+iA
+iA
+iA
+OV
 yF
 yF
 yF
 yF
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
 yF
 yF
 yF
 yF
 yF
-yF
-Zm
-Zm
-Zm
-Zm
 HZ
 Ae
 lq
@@ -24972,28 +25867,28 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-yF
-yF
-yF
-yF
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-yF
+OV
+EQ
+Nm
+EQ
+EQ
+Nm
+hu
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
+OV
 yF
 yF
 yF
@@ -25102,20 +25997,20 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
+OV
+OV
+hu
+hu
+EQ
+OV
+OV
+OV
 Zm
 Zm
 yF
 yF
 yF
-yF
+Zm
 Zm
 Zm
 Zm
@@ -25232,12 +26127,12 @@ Zm
 Zm
 Zm
 Zm
-Zm
-Zm
-Zm
-Zm
-Zm
-Zm
+OV
+OV
+OV
+OV
+OV
+OV
 Zm
 Zm
 Zm

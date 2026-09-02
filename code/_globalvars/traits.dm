@@ -213,6 +213,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Virgin" = TRAIT_VIRGIN,
 		"Gatekeeper" = TRAIT_GATEKEEPER,
 		"Member of the Lunar Order" = TRAIT_LUNAR_ORDER,
+		"Dream Cave Access" = TRAIT_DREAM_CAVE,
 		"Close Combatant" = TRAIT_CLOSECOMBAT,
 		"Steel Hearted" = TRAIT_STEELHEARTED,
 		"Sorcerer" = TRAIT_SORCERER,

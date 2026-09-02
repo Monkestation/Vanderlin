@@ -1,4 +1,4 @@
-#define AFFECTED_VLORD 1
+#define AFFECTED_WEAK 1
 #define AFFECTED 2
 #define SILVER_BANE_MAX_STACKS 6
 #define SILVER_BANE_COOLDOWN (3 SECONDS)
@@ -11,6 +11,7 @@
 		/datum/thaumaturgical_essence/light = 15
 	)
 	var/list/last_used = list()
+	var/active_item = FALSE
 
 /datum/enchantment/silver/register_triggers(atom/item)
 	. = ..()
@@ -20,6 +21,13 @@
 	//RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	registered_signals += COMSIG_ITEM_EQUIPPED
 	RegisterSignal(item, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
+	registered_signals += COMSIG_ITEM_DROPPED
+	RegisterSignal(item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+
+/datum/enchantment/silver/proc/on_drop(obj/item/i, mob/living/user)
+	if(active_item)
+		active_item = FALSE
+	STOP_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/silver/proc/affected_by_bane(mob/target)
 	if(!ishuman(target) || !target.mind)
@@ -30,7 +38,7 @@
 	var/datum/antagonist/werewolf/wolf_datum = IS_WEREWOLF(target)
 	if(istype(vamp_datum, /datum/antagonist/vampire/lord))
 		var/datum/antagonist/vampire/lord/lord_datum = vamp_datum
-		return lord_datum.ascension_resistance() == 1 ? UNAFFECTED : AFFECTED_VLORD
+		return lord_datum.ascension_resistance() == 1 ? UNAFFECTED : AFFECTED_WEAK
 	if(!vamp_datum && !wolf_datum)
 		return UNAFFECTED
 	if(wolf_datum?.transformed || vamp_datum)
@@ -42,7 +50,7 @@
 		return
 	if(!ishuman(target))
 		return
-	if(world.time < (src.last_used[source] + SILVER_BANE_COOLDOWN))
+	if(world.time < (src.last_used["ON-HIT"] + SILVER_BANE_COOLDOWN))
 		return
 	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
 		return
@@ -62,30 +70,36 @@
 	target.adjust_divine_fire_stacks(1)
 	target.IgniteMob()
 
-	if(vamp_datum && affected != AFFECTED_VLORD)
+	if(vamp_datum && affected != AFFECTED_WEAK)
 		if(SEND_SIGNAL(target, COMSIG_DISGUISE_STATUS))
 			target.visible_message("<font color='white'>[target]'s curse manifests!</font>", ignored_mobs = list(target))
 
-	last_used[source] = world.time
+	last_used["ON-HIT"] = world.time
 	return
 
 /datum/enchantment/silver/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
-	var/affected = affected_by_bane(user)
-	if(!affected)
-		return
-	to_chat(user, span_userdanger("I have held my BANE!"))
-	user.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
-	if(affected != AFFECTED_VLORD)
-		user.adjustFireLoss(25)
-		user.fire_act(1, 10)
+	apply_bane(i, user, FALSE)
 
 /datum/enchantment/silver/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
+	apply_bane(i, user, FALSE)
+
+/datum/enchantment/silver/proc/apply_bane(obj/item/i, mob/living/carbon/human/user, pulse)
+	if(pulse && (world.time < (last_used["PULSE"] + 15 SECONDS)))
+		return
 	var/affected = affected_by_bane(user)
 	if(!affected)
 		return
-	to_chat(user, span_userdanger("I have held my BANE!"))
+
+	if(check_curse_guard(i, user))
+		affected = AFFECTED_WEAK
+
+	last_used["PULSE"] = world.time
+	if(pulse)
+		to_chat(user, span_userdanger("[enchanted_item] continues to affect me!"))
+	else
+		to_chat(user, span_userdanger("I have held my BANE!"))
 	user.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
-	if(affected != AFFECTED_VLORD)
+	if(affected != AFFECTED_WEAK)
 		user.adjustFireLoss(25)
 		user.fire_act(1, 10)
 
@@ -95,14 +109,26 @@
 		return FALSE
 	to_chat(user, span_userdanger("They wear my BANE!"))
 	user.apply_status_effect(/datum/status_effect/debuff/silver_bane, null, affected)
-	if(affected != AFFECTED_VLORD)
+	if(affected != AFFECTED_WEAK)
 		user.Paralyze(1 SECONDS)
 	return TRUE
+
+/datum/enchantment/silver/process(delta_time)
+	if(!enchanted_item)
+		STOP_PROCESSING(SSenchantment, src)
+		return
+	if(!active_item)
+		return
+	var/mob/living/carbon/human/victim = enchanted_item.loc
+	if(!ishuman(victim))
+		active_item = FALSE
+		return
+	apply_bane(enchanted_item, victim, TRUE)
 
 /datum/status_effect/debuff/silver_bane
 	id = "silver_bane"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/silver_bane
-	duration = 15 SECONDS
+	duration = 17 SECONDS
 	tick_interval = -1 // No ticking needed
 	effectedstats = list(STAT_STRENGTH = -2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -2, STAT_SPEED = -2, STAT_FORTUNE = -2)
 	var/stacks = 0
@@ -157,7 +183,7 @@
 	is_stunned = TRUE
 	to_chat(owner, span_userdanger("The silver's curse overwhelms me!"))
 
-	if(affected_type == AFFECTED_VLORD)
+	if(affected_type == AFFECTED_WEAK)
 		// Vampire lords get lighter punishment
 		owner.Knockdown(30)
 		owner.Stun(15)
@@ -191,6 +217,6 @@
 		desc = span_warning("I am cursed by silver. [SILVER_BANE_MAX_STACKS - stacks] more contact[SILVER_BANE_MAX_STACKS - stacks == 1 ? "" : "s"] will overwhelm me!")
 
 #undef AFFECTED
-#undef AFFECTED_VLORD
+#undef AFFECTED_WEAK
 #undef SILVER_BANE_MAX_STACKS
 #undef SILVER_BANE_COOLDOWN

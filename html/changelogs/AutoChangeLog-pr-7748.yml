@@ -1,0 +1,5 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Vampire Manor cell door can be unlocked again."
+  - map: "Mapped in the Oracle's Dream Cave and travel tiles."

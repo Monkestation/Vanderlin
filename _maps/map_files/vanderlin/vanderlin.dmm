@@ -6395,12 +6395,6 @@
 "cJs" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep)
-"cJK" = (
-/obj/machinery/light/fueled/torchholder{
-	dir = 4
-	},
-/turf/open/floor/dirt/road,
-/area/outdoors/town)
 "cJO" = (
 /obj/structure/chair/bench/church/mid{
 	dir = 1
@@ -28476,9 +28470,9 @@
 /turf/open/water/swamp,
 /area/under/town/sewer)
 "lRj" = (
-/obj/structure/mannequin/male/female,
-/turf/open/floor/wood,
-/area/indoors/town)
+/obj/structure/fluff/traveltile/oracle_cave,
+/turf/open/floor/dirt,
+/area/under/cavewet)
 "lRk" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/bush_meagre,
@@ -32921,14 +32915,6 @@
 "nKM" = (
 /turf/open/floor/wood,
 /area/indoors/town/church)
-"nLe" = (
-/obj/structure/mirror{
-	pixel_x = -32;
-	pixel_y = 0
-	},
-/obj/structure/table/wood/plain_alt,
-/turf/open/floor/blocks/paving,
-/area/indoors/town/clinic_large/apothecary)
 "nLi" = (
 /obj/machinery/light/fueled/torchholder{
 	pixel_y = 32
@@ -111116,7 +111102,7 @@ okz
 tDy
 lHY
 lHY
-okz
+lRj
 qFx
 qFx
 qFx
@@ -111318,7 +111304,7 @@ okz
 lHY
 tDy
 lHY
-okz
+lRj
 qFx
 qFx
 qFx
@@ -111520,7 +111506,7 @@ okz
 lHY
 lHY
 lHY
-okz
+lRj
 qFx
 qFx
 qFx
