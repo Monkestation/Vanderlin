@@ -1530,6 +1530,10 @@
 /obj/effect/mapping_helpers/access/keyset/antag/vampire_manor,
 /turf/open/floor/blocks,
 /area/indoors/antag/vampire_manor)
+"fW" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/water/clean,
+/area/indoors/town/church/dreamcave)
 "fY" = (
 /obj/item/reagent_containers/glass/bucket/wooden/alter,
 /turf/open/floor/cobble,
@@ -2234,12 +2238,6 @@
 	pixel_y = 0;
 	pixel_x = -32
 	},
-/obj/effect/mapping_helpers/access/keyset{
-	difficulty = 1;
-	accesses = list("Dreamcave");
-	color = "#dcec4b";
-	name = "dreamcave"
-	},
 /obj/item/storage/keyring,
 /obj/item/storage/keyring,
 /obj/item/key/lunar_oracle,
@@ -2248,6 +2246,9 @@
 /obj/item/key/lunar_oracle,
 /obj/item/key/lunar_oracle,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/admin/oracle{
+	color = "#dcec4b"
+	},
 /turf/open/floor/tile/masonic/moondark,
 /area/indoors/town/church/dreamcave)
 "jL" = (
@@ -2897,6 +2898,9 @@
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/twig,
 /area/indoors/antag/lich)
+"nD" = (
+/turf/open/floor/naturalstone,
+/area/indoors/town/church/dreamcave)
 "nE" = (
 /obj/structure/bars/passage{
 	redstone_id = "dreamcave1"
@@ -3848,6 +3852,16 @@
 /obj/item/natural/chaff/oat,
 /turf/open/floor/blocks,
 /area/indoors/admin_test)
+"sh" = (
+/obj/structure/door/viewport{
+	name = "Mana Fountain";
+	dir = 1
+	},
+/obj/effect/mapping_helpers/access/keyset/admin/oracle{
+	color = "#dcec4b"
+	},
+/turf/open/floor/tile/masonic/moondark,
+/area/indoors/town/church/dreamcave)
 "si" = (
 /obj/structure/door/swing,
 /turf/open/floor/churchmarble,
@@ -4665,9 +4679,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/antag/lich)
 "wj" = (
-/obj/structure/lever/hidden{
-	hidden_dc = 30;
-	accessor_trait = "Member of the Lunar Order";
+/obj/structure/lever/hidden/dreamcave{
 	redstone_id = "dreamcave1"
 	},
 /turf/closed/wall/mineral/underbrick,
@@ -4719,6 +4731,10 @@
 /obj/structure/meathook,
 /turf/open/floor/dirt/road,
 /area/indoors/antag/bandit_lair)
+"ww" = (
+/obj/structure/well/fountain/mana,
+/turf/open/floor/naturalstone,
+/area/indoors/town/church/dreamcave)
 "wx" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /obj/structure/flora/grass,
@@ -4779,13 +4795,10 @@
 /obj/structure/door/viewport{
 	name = "Dream Cave"
 	},
-/obj/effect/mapping_helpers/access/keyset{
-	difficulty = 1;
-	accesses = list("Dreamcave");
-	color = "#dcec4b";
-	name = "dreamcave"
-	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/admin/oracle{
+	color = "#dcec4b"
+	},
 /turf/open/floor/tile/masonic/full,
 /area/indoors/town/church/dreamcave)
 "wV" = (
@@ -5165,6 +5178,10 @@
 /obj/item/clothing/head/jester,
 /turf/open/floor/wood,
 /area/indoors/admin_test)
+"zj" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/water/clean,
+/area/indoors/town/church/dreamcave)
 "zm" = (
 /obj/machinery/light/fueled/torchholder/c,
 /obj/effect/landmark/start/vampireknight,
@@ -5310,13 +5327,10 @@
 	name = "Focus Chamber";
 	dir = 8
 	},
-/obj/effect/mapping_helpers/access/keyset{
-	difficulty = 1;
-	accesses = list("Dreamcave");
-	color = "#dcec4b";
-	name = "dreamcave"
-	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/admin/oracle{
+	color = "#dcec4b"
+	},
 /turf/open/floor/tile/masonic/moonbw,
 /area/indoors/town/church/dreamcave)
 "zY" = (
@@ -6609,13 +6623,10 @@
 /obj/structure/door/viewport{
 	name = "Oracle Residence"
 	},
-/obj/effect/mapping_helpers/access/keyset{
-	difficulty = 1;
-	accesses = list("Dreamcave");
-	color = "#dcec4b";
-	name = "dreamcave"
-	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/admin/oracle{
+	color = "#dcec4b"
+	},
 /turf/open/floor/tile/masonic/moondark,
 /area/indoors/town/church/dreamcave)
 "HB" = (
@@ -7623,13 +7634,10 @@
 	name = "Dream Cave";
 	dir = 8
 	},
-/obj/effect/mapping_helpers/access/keyset{
-	difficulty = 1;
-	accesses = list("Dreamcave");
-	color = "#dcec4b";
-	name = "dreamcave"
-	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/admin/oracle{
+	color = "#dcec4b"
+	},
 /turf/open/floor/tile/masonic/moonbw,
 /area/indoors/town/church/dreamcave)
 "Mq" = (
@@ -7925,13 +7933,10 @@
 /obj/structure/door/viewport{
 	name = "Dream Archive"
 	},
-/obj/effect/mapping_helpers/access/keyset{
-	difficulty = 1;
-	accesses = list("Dreamcave");
-	color = "#dcec4b";
-	name = "dreamcave"
-	},
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/admin/oracle{
+	color = "#dcec4b"
+	},
 /turf/open/floor/tile/masonic/moonbw,
 /area/indoors/town/church/dreamcave)
 "NQ" = (
@@ -8873,6 +8878,10 @@
 /obj/structure/flora/starfish,
 /turf/open/floor/sand,
 /area/outdoors/woods_safe)
+"SK" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/water/clean,
+/area/indoors/town/church/dreamcave)
 "SL" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -9424,9 +9433,7 @@
 /turf/closed/wall/mineral/decostone/long,
 /area/indoors/antag/lich)
 "Vr" = (
-/obj/structure/lever/hidden{
-	hidden_dc = 30;
-	accessor_trait = "Member of the Lunar Order";
+/obj/structure/lever/hidden/dreamcave{
 	redstone_id = "dreamcave2"
 	},
 /turf/closed/wall/mineral/underbrick,
@@ -10110,10 +10117,9 @@
 /turf/open/floor/plasteel/maniac,
 /area)
 "YM" = (
-/obj/structure/lever/hidden{
-	hidden_dc = 30;
-	accessor_trait = "Member of the Lunar Order";
-	redstone_id = "dreamcave3"
+/obj/structure/lever/hidden/dreamcave{
+	redstone_id = "dreamcave3";
+	hidden_dc = 30
 	},
 /turf/closed/wall/mineral/underbrick,
 /area/indoors/town/church/dreamcave)
@@ -10126,6 +10132,9 @@
 /obj/item/plate,
 /turf/open/floor/carpet/lord/right,
 /area/indoors/antag/lich)
+"YO" = (
+/turf/open/water/clean,
+/area/indoors/town/church/dreamcave)
 "YS" = (
 /obj/structure/table/wood{
 	dir = 4;
@@ -22882,12 +22891,12 @@ Zm
 Zm
 Zm
 Zm
-yF
-yF
-yF
-yF
-yF
-yF
+OV
+OV
+OV
+OV
+OV
+OV
 OV
 iA
 td
@@ -23012,12 +23021,12 @@ Zm
 Zm
 Zm
 Zm
-yF
-yF
-yF
-yF
-yF
-yF
+OV
+OV
+OV
+YO
+zj
+nD
 OV
 iA
 EY
@@ -23142,13 +23151,13 @@ Zm
 Zm
 Zm
 Zm
-yF
-yF
-yF
-yF
-yF
-yF
 OV
+OV
+YO
+YO
+nD
+nD
+nD
 iA
 Oo
 td
@@ -23272,13 +23281,13 @@ Zm
 Zm
 Zm
 Zm
-yF
-yF
-yF
-yF
-yF
-yF
 OV
+YO
+YO
+nD
+nD
+nD
+nD
 iA
 EY
 td
@@ -23402,14 +23411,14 @@ Zm
 Zm
 Zm
 Zm
-yF
-yF
-yF
-yF
-yF
-yF
 OV
-iA
+SK
+YO
+nD
+ww
+nD
+nD
+sh
 td
 td
 td
@@ -23532,13 +23541,13 @@ Zm
 Zm
 Zm
 Zm
-yF
-yF
-yF
-yF
-yF
-yF
 OV
+YO
+YO
+nD
+nD
+nD
+nD
 iA
 fP
 td
@@ -23662,13 +23671,13 @@ Zm
 Zm
 Zm
 Zm
-yF
-yF
-yF
-yF
-yF
-yF
 OV
+OV
+YO
+YO
+nD
+nD
+nD
 iA
 YD
 td
@@ -23792,12 +23801,12 @@ Zm
 Zm
 Zm
 Zm
-yF
-yF
-yF
-yF
-yF
-yF
+OV
+OV
+OV
+YO
+fW
+nD
 OV
 iA
 FE
@@ -23922,12 +23931,12 @@ Zm
 Zm
 Zm
 Zm
-yF
-yF
-yF
-yF
-yF
-yF
+OV
+OV
+OV
+OV
+OV
+OV
 OV
 iA
 ul

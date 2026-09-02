@@ -172,4 +172,4 @@
 	name = "dream key"
 	desc = "A mysterious key to an even more mysterious place..."
 	icon_state = "ekey"
-	lockids = list("Dreamcave")
+	lockids = list(ACCESS_DREAM_CAVE)
