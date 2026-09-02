@@ -23,7 +23,7 @@
 	tutorial = "Honor is a dead man's virtue. Lure those foolish enough to fight you into a trap, and all it will take from there is a slit to the throat or a arrow to the heart."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/adventurer/trapper
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatRogue.ogg'
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 
