@@ -137,15 +137,11 @@
 
 /datum/species/dwarf/dworc/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
-	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/orcish)
-	C.grant_language(/datum/language/dwarvish)
 
 /datum/species/dwarf/dworc/after_creation(mob/living/carbon/C)
 	..()
 	C.grant_language(/datum/language/orcish)
-	C.grant_language(/datum/language/dwarvish)
 	to_chat(C, span_info("I can speak Orcish with ,o before my speech."))
 	if(ishuman(C)) //Horcs are STINKY
 		var/mob/living/carbon/human/stinky_horc = C
@@ -153,12 +149,8 @@
 
 /datum/species/dwarf/dworc/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/orcish)
-	C.remove_language(/datum/language/dwarvish)
 
-/datum/species/dwarf/dworc/qualifies_for_rank(rank, list/features)
-	return TRUE
 
 /datum/species/dwarf/dworc/get_skin_list() //same colors as half-orcs, renamed to be goblin-like
 	return list(
