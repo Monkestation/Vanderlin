@@ -28,7 +28,7 @@
 	customizer_choices = list(/datum/customizer_choice/organ/ears/halforc)
 	allows_disabling = FALSE
 
-/datum/customizer_choice/organ/ears/halforc
+/datum/customizer_choice/organ/ears/halforc //rerun
 	name = "Half-Orc Ears"
 	organ_type = /obj/item/organ/ears/elf
 	sprite_accessories = list(
