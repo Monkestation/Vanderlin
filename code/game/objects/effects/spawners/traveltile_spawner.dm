@@ -199,5 +199,5 @@
 	aportalid = "city_oracle"
 	aportalgoesto = "oracle_city"
 	required_trait = TRAIT_DREAM_CAVE
-	can_gain_with_sight = TRUE
+	can_gain_with_sight = FALSE
 	check_other_side = TRUE
