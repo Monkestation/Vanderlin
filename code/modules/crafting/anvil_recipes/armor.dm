@@ -435,10 +435,10 @@
 
 /datum/anvil_recipe/armor/iron/ironbriar
 	name = "Crown of Iron Thorns"
-	created_item = /obj/item/clothing/head/helmet/blacksteel/ironbriar
+	created_item = /obj/item/clothing/head/helmet/ironbriar
 	craftdiff = 2
 
-/datum/anvil_recipe/armor/iron/ironbriar
+/datum/anvil_recipe/armor/iron/wrists/bracers/ironbriar
 	name = "Dendorian Thorns"
 	created_item = /obj/item/clothing/wrists/bracers/ironbriar
 	craftdiff = 2

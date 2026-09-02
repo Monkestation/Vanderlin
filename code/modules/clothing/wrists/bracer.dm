@@ -201,7 +201,7 @@
 	. = ..()
 	user.visible_message(span_warning("[user] starts to reshape the [src]."))
 	if(do_after(user, 4 SECONDS))
-		var/obj/item/clothing/head/helmet/blacksteel/ironbriar/P = new /obj/item/clothing/head/helmet/blacksteel/ironbriar(get_turf(src.loc))
+		var/obj/item/clothing/head/helmet/ironbriar/P = new /obj/item/clothing/head/helmet/ironbriar(get_turf(src.loc))
 		if(user.is_holding(src))
 			user.dropItemToGround(src)
 			user.put_in_hands(P)
