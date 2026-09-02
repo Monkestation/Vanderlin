@@ -1,0 +1,8 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Master's Rod now works on anyone within the Keep 'subfaction' (Garrison, Court roles etc.)."
+  - bugfix: "Master's Rod can no longer just hit everyone everywhere."
+  - rscadd: "Master's Rod will work on ANYONE when inside Keep Grounds."
+  - rscadd: "Staff of Aries will work on ANYONE when inside Church Grounds."
+  - balance: "Electrocute intent on both rods now has 30s cooldown instead of 20s."

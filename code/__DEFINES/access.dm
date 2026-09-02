@@ -104,6 +104,7 @@
 
 // Other
 #define ACCESS_BOGWITCH "bogwitch"
+#define ACCESS_DREAM_CAVE "Dreamcave"
 
 // Antags
 #define ACCESS_BANDIT "banditcamp"
