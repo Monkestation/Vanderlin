@@ -30,9 +30,6 @@
 /obj/effect/quest_spawn/HasProximity(mob/nearby)
 	if(!contained_atom)
 		return
-	if(QDELETED(contained_atom))
-		contained_atom = null
-		return
 
 	if(!istype(nearby))
 		return
