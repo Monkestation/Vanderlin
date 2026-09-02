@@ -8918,6 +8918,7 @@
 /obj/structure/table/wood/reinf_long{
 	dir = 4
 	},
+/obj/item/repair_kit/cloth/empty,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/shop)
 "fig" = (
@@ -28382,11 +28383,10 @@
 /area/under/cave)
 "rAw" = (
 /obj/structure/table/wood/reinforced,
-/obj/item/flint,
-/obj/item/flint,
 /obj/structure/fake_machine/mail{
 	mailtag = "Smithy"
 	},
+/obj/item/repair_kit/metal/empty,
 /turf/open/floor/hexstone,
 /area/indoors/town/smithy)
 "rAG" = (
@@ -31249,6 +31249,13 @@
 /obj/item/weapon/hammer/iron,
 /obj/item/weapon/tongs,
 /obj/item/weapon/tongs,
+/obj/item/flint{
+	pixel_x = -8
+	},
+/obj/item/flint{
+	pixel_x = -7;
+	pixel_y = 8
+	},
 /turf/open/floor/hexstone,
 /area/indoors/town/smithy)
 "tsB" = (

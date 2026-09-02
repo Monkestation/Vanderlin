@@ -20213,7 +20213,7 @@
 /obj/effect/mapping_helpers/access/keyset/town/inn_room{
 	room_id = "roomhunt"
 	},
-/turf/open/floor/carpet/purple,
+/turf/open/floor/carpet/red,
 /area/indoors/town/tavern)
 "iwe" = (
 /turf/open/floor/naturalstone,
@@ -20883,7 +20883,7 @@
 /obj/structure/door{
 	name = "town bell"
 	},
-/turf/open/floor/carpet/purple,
+/turf/open/floor/carpet/lord/left,
 /area/indoors/town/tavern)
 "iIU" = (
 /obj/structure/ladder,
@@ -37596,7 +37596,7 @@
 	pixel_y = -23;
 	name = "inn bell"
 	},
-/turf/open/floor/carpet/purple,
+/turf/open/floor/carpet/lord/left,
 /area/indoors/town/tavern)
 "pxK" = (
 /obj/structure/window/solid,
@@ -37627,6 +37627,13 @@
 	},
 /turf/open/floor/dirt/road,
 /area/under/cave)
+"pyP" = (
+/obj/effect/mapping_helpers/access/keyset/town/elder,
+/obj/structure/door{
+	name = "town bell"
+	},
+/turf/open/floor/carpet/lord/right,
+/area/indoors/town/tavern)
 "pzl" = (
 /obj/machinery/light/fueled/chand,
 /turf/open/openspace,
@@ -48845,7 +48852,7 @@
 	pixel_x = -12;
 	pixel_y = 16
 	},
-/turf/open/floor/carpet/purple,
+/turf/open/floor/carpet/red,
 /area/indoors/town/tavern)
 "tVO" = (
 /obj/structure/fake_machine/scomm/r{
@@ -244756,7 +244763,7 @@ dkq
 dkq
 tVL
 ivU
-txg
+aTq
 txg
 txg
 hfK
@@ -244956,9 +244963,9 @@ hxT
 dkq
 dkq
 dkq
-ahf
+bdc
 ivU
-twD
+tTX
 twD
 kqW
 baR
@@ -246165,10 +246172,10 @@ nRI
 nRI
 lsd
 uZk
-ahf
+aTq
 pxe
-ahf
-ahf
+txg
+txg
 iIM
 txg
 txg
@@ -246367,11 +246374,11 @@ nRI
 nRI
 lsd
 uZk
-ahf
-ahf
-ahf
-ahf
-iIM
+tTX
+twD
+twD
+twD
+pyP
 twD
 twD
 kqW
@@ -247584,7 +247591,7 @@ dkq
 cxy
 ahf
 lcj
-txg
+aTq
 txg
 szk
 roo
@@ -247786,7 +247793,7 @@ dkq
 dkq
 ahf
 lcj
-twD
+tTX
 xNx
 twD
 kqW

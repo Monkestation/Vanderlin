@@ -10135,6 +10135,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/storage/backpack/backpack,
 /obj/item/flashlight/flare/torch/lantern,
+/obj/item/repair_kit/metal/empty,
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "eJe" = (
@@ -32423,6 +32424,7 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
+/obj/item/repair_kit/cloth/empty,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/shop)
 "oHw" = (
