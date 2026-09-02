@@ -43,19 +43,6 @@
 		/datum/sprite_accessory/ears/goblin_small,
 		)
 
-/datum/customizer/organ/ears/goblin //unused
-	customizer_choices = list(/datum/customizer_choice/organ/ears/goblin)
-	allows_disabling = FALSE
-
-/datum/customizer_choice/organ/ears/goblin
-	name = "Goblin Ears"
-	organ_type = /obj/item/organ/ears/goblin
-	sprite_accessories = list(
-		/datum/sprite_accessory/ears/goblin,
-		/datum/sprite_accessory/ears/goblin_alt,
-		/datum/sprite_accessory/ears/goblin_small,
-		)
-
 /datum/customizer/organ/ears/tiefling
 	customizer_choices = list(/datum/customizer_choice/organ/ears/tiefling)
 	allows_disabling = FALSE
