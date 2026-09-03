@@ -175,7 +175,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 			continue
 		if(HAS_TRAIT(HL, TRAIT_ASSASSIN))
 			assassin_found = TRUE
-			var/obj/item/weapon/knife/dagger/steel/profane/dagger = locate() in HL.get_all_gear()
+			var/obj/item/weapon/knife/dagger/steel/inhumen/profane/dagger = locate() in HL.get_all_gear()
 			if(dagger)
 				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [paper_name]!\"</span>")
 	if(!target || !assassin_found)

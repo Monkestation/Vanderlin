@@ -281,7 +281,7 @@
 /area/under/tomb/indoors/church)
 "qj" = (
 /obj/structure/closet/crate/crafted_closet/steward,
-/obj/item/weapon/knife/dagger/steel/profane,
+/obj/item/weapon/knife/dagger/steel/inhumen/profane,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "qy" = (

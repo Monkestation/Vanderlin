@@ -5795,10 +5795,10 @@
 /turf/open/floor/herringbone,
 /area/indoors/antag/vampire_manor)
 "Cw" = (
-/obj/item/weapon/knife/dagger/steel/profane,
-/obj/item/weapon/knife/dagger/steel/profane,
-/obj/item/weapon/knife/dagger/steel/profane,
-/obj/item/weapon/knife/dagger/steel/profane,
+/obj/item/weapon/knife/dagger/steel/inhumen/profane,
+/obj/item/weapon/knife/dagger/steel/inhumen/profane,
+/obj/item/weapon/knife/dagger/steel/inhumen/profane,
+/obj/item/weapon/knife/dagger/steel/inhumen/profane,
 /obj/structure/table/wood{
 	dir = 9;
 	icon_state = "largetable"
