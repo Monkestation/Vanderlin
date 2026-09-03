@@ -31,3 +31,30 @@
   - rscadd: Added Blood and Death magic warnings in the spellbook UI.
   - balance: Nerfed learnable Ethereal Jaunt by increasing cooldown. Does not apply
       to Court Mage's innate spell.
+2026-09-03:
+  MissyNym:
+  - map: Adds bordered lord carpets to the Vanderlin inn in place of the current ones.
+  - map: Adds an empty armor repair kit to all blacksmiths for all maps.
+  - map: Adds an empty cloth repair kit to all tailors for all maps.
+  - map: Tweaks to Malum's Anvil
+  ModDownloading:
+  - balance: Old Serjeant-at-Arms get the normal +6 statline instead of a unique +15
+      one.
+  Ordosian:
+  - rscdel: Removed OLD Icons from base SS13 and unused Icon files.
+  - code_imp: Adjusted file paths
+  PotatoTomahto:
+  - rscadd: metal and cloth repair kits
+  - balance: blacksmithing and smelting tweaks
+  - rscadd: A patron curse for Malum.
+  - rscadd: New Tennite headstone options.
+  - rscadd: Repair kits, which can be refilled with materials to fix weapons/armor
+      on the go!
+  - balance: Smithing and metallury quality calculations adjustments
+  - balance: Crates, chests, and most other containers sell for more.
+  - code_imp: get_reagent is now has_reagent.
+  realforest2001:
+  - bugfix: Torture now correctly sates Sadism.
+  - rscadd: Added special attack to quarterstaff.
+  - rscadd: Added a log for plastic surgery.
+  - rscadd: Added a special attack to spears/quarterstaff.

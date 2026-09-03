@@ -1792,7 +1792,7 @@
 /area/indoors/mountains/anvil/upperkeep)
 "aiG" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/clothing/gloves/plate/zizo,
+/obj/item/clothing/gloves/plate/inhumen/zizo,
 /turf/open/floor/tile/masonic/inverted,
 /area/indoors/mountains/anvil/upperkeep)
 "aiH" = (
@@ -5496,7 +5496,7 @@
 /area/indoors/mountains/anvil/upperkeep)
 "aAk" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/clothing/gloves/plate/zizo,
+/obj/item/clothing/gloves/plate/inhumen/zizo,
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
 "aAl" = (
@@ -8446,11 +8446,11 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/clothing/neck/psycross/zizo,
-/obj/item/clothing/pants/platelegs/zizo,
-/obj/item/clothing/shoes/boots/armor/zizo,
+/obj/item/clothing/pants/platelegs/inhumen/zizo/alt,
+/obj/item/clothing/shoes/boots/armor/inhumen/zizo,
 /obj/item/clothing/head/helmet/visored/zizo,
-/obj/item/clothing/gloves/plate/zizo,
-/obj/item/clothing/armor/plate/full/zizo,
+/obj/item/clothing/gloves/plate/inhumen/zizo,
+/obj/item/clothing/armor/plate/full/inhumen/zizo/alt,
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /mob/living/carbon/human/species/dwarf/mountain/base/very_skilled/naked,
 /turf/open/floor/herringbone,

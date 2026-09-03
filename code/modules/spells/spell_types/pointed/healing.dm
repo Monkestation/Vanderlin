@@ -10,7 +10,7 @@
 	charge_sound = 'sound/magic/holycharging.ogg'
 
 	cast_range = 6
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine)
@@ -303,6 +303,7 @@
 
 /datum/action/cooldown/spell/healing/profane
 	name = "Corrupt Lesser Miracle"
+	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	required_items = null
 	healing_type = HEALING_PROFANE
@@ -336,6 +337,7 @@
 
 /datum/action/cooldown/spell/healing/greater/profane
 	name = "Corrupt Miracle"
+	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	required_items = null
 	stun_undead = FALSE

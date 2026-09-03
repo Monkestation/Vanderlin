@@ -30,7 +30,7 @@
 	button_icon_state = "thaumaturgy"
 	can_cast_on_self = TRUE
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	associated_skill = /datum/attribute/skill/magic/holy
 
 	cooldown_time = 3 MINUTES
@@ -39,6 +39,11 @@
 	draw_message = "I calm my mind and prepare to draw upon an orison."
 	drop_message = "I return my mind to the now."
 	charges = 6
+
+/datum/action/cooldown/spell/undirected/touch/orison/unholy
+	name = "Dark Orison"
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 
 /datum/action/cooldown/spell/undirected/touch/orison/can_cast_spell(feedback)
 	. = ..()

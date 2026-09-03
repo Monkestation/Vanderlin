@@ -34,7 +34,7 @@
 	)
 	outfit = /datum/outfit/swashbuckler
 	total_positions = 1
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	roll_chance = 7
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/swashbuckler

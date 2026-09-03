@@ -34,7 +34,7 @@
 	outfit = /datum/outfit/adventurer/qatil
 	total_positions = 1
 	roll_chance = 10
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/qatil

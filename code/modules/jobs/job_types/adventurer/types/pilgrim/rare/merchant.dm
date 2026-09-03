@@ -86,10 +86,10 @@
 
 /datum/outfit/pilgrim/merchant/heal
 	backpack_contents = list(
-		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
-		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
-		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
-		/obj/item/reagent_containers/glass/bottle/manapot = 1,
+		/obj/item/reagent_containers/glass/bottle/healthpot/labelled = 1,
+		/obj/item/reagent_containers/glass/bottle/healthpot/labelled = 1,
+		/obj/item/reagent_containers/glass/bottle/healthpot/labelled = 1,
+		/obj/item/reagent_containers/glass/bottle/manapot/labelled = 1,
 		/obj/item/flint = 1,
 		/obj/item/weapon/knife/dagger = 1
 	)

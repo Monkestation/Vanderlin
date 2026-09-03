@@ -125,15 +125,16 @@ DEFINE_BITFIELD(antimagic_flags, list(
 /// Use stamina, all spells use stamina but this makes it the only cost and at full price instead of half
 #define SPELL_STAMINA 2
 /// Miracle, uses devotion and thus requires a devotion holder
-#define SPELL_MIRACLE 3
+#define SPELL_DIVINE_MIRACLE 3
+#define SPELL_UNHOLY_MIRACLE 4
 /// Cast with the essence gauntlet, using essence vials
-#define SPELL_ESSENCE 4
+#define SPELL_ESSENCE 5
 /// Cast using your bloodpool
-#define SPELL_BLOOD 5
+#define SPELL_BLOOD 6
 ///this is a "miracle" granted by "psydon's" inquisition
-#define SPELL_PSYDONIC_MIRACLE 6
+#define SPELL_PSYDONIC_MIRACLE 7
 ///this is a spell that uses rage to cast
-#define SPELL_RAGE 7
+#define SPELL_RAGE 8
 
 
 // Generic Bitflags for spells

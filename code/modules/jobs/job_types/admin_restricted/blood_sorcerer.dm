@@ -116,7 +116,7 @@
 	backr = /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
 	r_hand = /obj/item/weapon/knife/dagger/bloodsteel
 	backpack_contents = list(
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 		/obj/item/reagent_containers/glass/bottle/strongbloodpot = 1,
 		/obj/item/storage/belt/pouch/coins/mid = 1,
 		/obj/item/needle = 1,

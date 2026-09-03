@@ -30,7 +30,7 @@
 	ass.set_patron(/datum/patron/inhumen/graggar, TRUE)
 	ass.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 40, 40)
 	ass.clamped_adjust_skill_level(/datum/attribute/skill/misc/sneaking, 50, 50)
-	var/yea = /obj/item/weapon/knife/dagger/steel/profane
+	var/yea = /obj/item/weapon/knife/dagger/steel/inhumen/profane
 	var/wah = /obj/item/inqarticles/garrote/razor
 	var/gah = /obj/item/lockpick
 	owner.special_items["Profane Dagger"] = yea // Assigned assassins can get their special dagger from right clicking certain objects.
@@ -55,7 +55,7 @@
 /datum/antagonist/assassin/roundend_report()
 	var/traitorwin = FALSE
 	for(var/obj/item/I in owner.current) // Check to see if the Assassin has their profane dagger on them, and then check the souls contained therein.
-		if(istype(I, /obj/item/weapon/knife/dagger/steel/profane))
+		if(istype(I, /obj/item/weapon/knife/dagger/steel/inhumen/profane))
 			for(var/mob/dead/observer/profane/A in I) // Each trapped soul is announced to the server
 				if(A)
 					to_chat(world, "The [A.name] has been stolen for Graggar by [owner.name].<span class='greentext'>DAMNATION!</span>")
@@ -79,6 +79,6 @@
 		return
 	if(examined.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(src, TRAIT_ZIZOID_HUNTED))
 		for(var/obj/item/I in examiner.get_all_gear())
-			if(istype(I, /obj/item/weapon/knife/dagger/steel/profane))
+			if(istype(I, /obj/item/weapon/knife/dagger/steel/inhumen/profane))
 				LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, "profane dagger whispers, [span_danger("\"That's [examined.real_name]! Strike their heart!\"")]")
 				break

@@ -83,34 +83,42 @@
 
 //............... Evil Pants ............... //
 
-/obj/item/clothing/pants/platelegs/zizo
+/obj/item/clothing/pants/platelegs/inhumen
+	name = "BASE INHUMEN LEGS"
+	abstract_type = /obj/item/clothing/pants/platelegs/inhumen
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizocloth"
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
+
+/obj/item/clothing/pants/platelegs/inhumen/zizo
 	name = "darksteel garments"
 	desc = "Leg garments worn by true anointed of the Dame of Progress. In Her name."
 	icon_state = "zizocloth"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	smeltresult = /obj/item/ingot/avantyne
-	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
-/obj/item/clothing/pants/platelegs/matthios
+/obj/item/clothing/pants/platelegs/inhumen/zizo/alt
+	name = "darksteel plate skirt"
+	desc = "Ribbed darksteel plates with a dark cloth skirt attached. Serve in Her name."
+	icon_state = "zizoplatelegs_med"
+
+/obj/item/clothing/pants/platelegs/inhumen/matthios
 	name = "gilded leggings"
 	desc = "Plate leggings. perfect for sprinting away after a theft of mammon, or life."
 	icon_state = "matthioslegs"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
 
-/obj/item/clothing/pants/platelegs/graggar
+/obj/item/clothing/pants/platelegs/inhumen/graggar
 	name = "vicious leggings"
 	desc = "A sinister pair of plate chausses that have born witness many violent atrocities."
 	icon_state = "graggarplatelegs"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
+
+/obj/item/clothing/pants/platelegs/inhumen/baotha
+	name = "saccharine garments"
+	desc = "Leg garments worn by those who see the truth of freedom through addiction."
+	icon_state = "baothaskirt"
 
 //.............. Silver Platelegs .................//
 
