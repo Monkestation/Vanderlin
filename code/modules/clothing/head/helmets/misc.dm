@@ -298,7 +298,7 @@
 
 
 //................ Elf Sallet ............... //
-/obj/item/clothing/head/helmet/sallet/elven	// blackoak merc helmet
+/obj/item/clothing/head/helmet/sallet/elven	// redwood merc helmet
 	desc = "A steel helmet with a thin gold plating designed for Elven woodland guardians."
 	icon_state = "bascinet_novisor"
 	color = COLOR_ASSEMBLY_GOLD
