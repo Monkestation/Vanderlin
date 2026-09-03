@@ -217,6 +217,7 @@
 	data += "<font color='#c0c25f'><span class='bold'>Halflings:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_HALFLINGS]]<br>"
 	data += "<div style='height: 17.5px;'>&nbsp;</div>"
 	data += "<font color='#228B22'><span class='bold'>Half-Orcs:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_HALF_ORCS]]<br>"
+	data += "<font color='#518651'><span class='bold'>Dwarf-Orcs:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_DWARF_ORCS]]<br>"
 	data += "<font color='#CD853F'><span class='bold'>Kobolds:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_KOBOLDS]]<br>"
 	data += "<font color='#DC143C'><span class='bold'>Tieflings:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_TIEFLINGS]]<br>"
 	data += "<font color='#FFD700'><span class='bold'>Rakshari:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_RAKSHARI]]<br>"

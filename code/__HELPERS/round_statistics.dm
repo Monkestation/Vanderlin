@@ -7,6 +7,7 @@
 #define STATS_ALIVE_AASIMAR "alive_aasimar"
 #define STATS_ALIVE_HOLLOWKINS "alive_hollowkins"
 #define STATS_ALIVE_HALFLINGS "alive_halflings"
+#define STATS_ALIVE_DWARF_ORCS "alive_dwarforcs"
 #define STATS_VAMPIRES "vampires"
 #define STATS_ALIVE_GARRISON "alive_garrison"
 #define STATS_ALIVE_GALLOWBAND "alive_gallowband"
@@ -266,6 +267,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_ALIVE_TRITONS = 0,
 	STATS_ALIVE_MEDICATORS = 0,
 	STATS_ALIVE_HALFLINGS = 0,
+	STATS_ALIVE_DWARF_ORCS = 0,
 	STATS_PEOPLE_DROWNED = 0,
 	STATS_MANA_SPENT = 0,
 	STATS_WATER_CONSUMED  = 0,
