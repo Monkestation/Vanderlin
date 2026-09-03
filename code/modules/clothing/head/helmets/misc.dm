@@ -53,6 +53,42 @@
 	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.5 KILOGRAMS
 
+//............... Thorn Crown .............. //
+/obj/item/clothing/head/helmet/ironbriar
+	name = "crown of iron thorns"
+	desc = "Thorns fashioned from cold, lasting iron. Woven and interlinked, fashioned to be worn upon the head. Rarely seen, worn by few of the more combative worshippers of Dendor."
+	body_parts_covered = HAIR | HEAD
+	icon_state = "ironthorns"
+	item_state = "ironthorns"
+	armor_type = /datum/armor/head/maille/iron/ironbriar
+	armor_class = AC_LIGHT
+	max_integrity = INTEGRITY_OLD_STRONG
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST)
+	blocksound = PLATEHIT
+	resistance_flags = FIRE_PROOF
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	sewrepair = null
+	icon = 'icons/roguetown/clothing/wrists.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
+	alternate_worn_layer  = 8.9
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
+	item_weight = 2.5 KILOGRAMS
+
+/obj/item/clothing/head/helmet/ironbriar/attack_self(mob/living/user)
+	. = ..()
+	user.visible_message(span_warning("[user] starts to reshape the [src]."))
+	if(do_after(user, 4 SECONDS))
+		var/obj/item/clothing/wrists/bracers/ironbriar/P = new /obj/item/clothing/wrists/bracers/ironbriar(get_turf(src.loc))
+		if(user.is_holding(src))
+			user.dropItemToGround(src)
+			user.put_in_hands(P)
+		var/obj/item/bodypart/arm = user.get_active_hand()
+		arm?.bodypart_attacked_by(BCLASS_CUT, 25, modifiers = list(CRIT_MOD_CHANCE = CANT_CRIT))
+		qdel(src)
+	else
+		user.visible_message(span_warning("[user] stops reshaping [src]."))
+		return
+
 //............... Grenzelhoft Plume Hat ............... // - worn over a skullcap
 /obj/item/clothing/head/helmet/skullcap/grenzelhoft
 	name = "grenzelhoft plume hat"

@@ -293,12 +293,13 @@
 	if(spell_requirements & (SPELL_REQUIRES_NO_ANTIMAGIC|SPELL_REQUIRES_WIZARD_GARB))
 		RegisterSignal(owner, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(update_status_on_signal))
 
-	if(spell_type == SPELL_MANA)
-		RegisterSignal(owner, COMSIG_LIVING_MANA_CHANGED, PROC_REF(update_status_on_signal))
-	if(spell_type == SPELL_MIRACLE)
-		RegisterSignal(owner, COMSIG_LIVING_DEVOTION_CHANGED, PROC_REF(update_status_on_signal))
-	if(spell_type == SPELL_RAGE)
-		RegisterSignal(owner, COMSIG_RAGE_CHANGED, PROC_REF(update_status_on_signal))
+	switch(spell_type)
+		if(SPELL_MANA)
+			RegisterSignal(owner, COMSIG_LIVING_MANA_CHANGED, PROC_REF(update_status_on_signal))
+		if(SPELL_DIVINE_MIRACLE, SPELL_UNHOLY_MIRACLE)
+			RegisterSignal(owner, COMSIG_LIVING_DEVOTION_CHANGED, PROC_REF(update_status_on_signal))
+		if(SPELL_RAGE)
+			RegisterSignal(owner, COMSIG_RAGE_CHANGED, PROC_REF(update_status_on_signal))
 
 	RegisterSignals(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
 
@@ -499,10 +500,17 @@
 			owner.balloon_alert(owner, "can't focus on casting...")
 		return FALSE
 
-	if(HAS_TRAIT(owner, TRAIT_NOC_CURSE))
-		if(feedback)
-			owner.balloon_alert(owner, "my magicka has left me...")
-		return FALSE
+	switch(spell_type)
+		if(SPELL_MANA)
+			if(HAS_TRAIT(owner, TRAIT_NOC_CURSE))
+				if(feedback)
+					owner.balloon_alert(owner, "my magicka has left me...")
+				return FALSE
+		if(SPELL_DIVINE_MIRACLE)
+			if(!HAS_TRAIT(owner, TRAIT_FANATICAL) && (owner.real_name in GLOB.excommunicated_players))
+				if(feedback)
+					owner.balloon_alert(owner, "excommunicated!")
+				return FALSE
 
 	for(var/datum/action/cooldown/spell/spell in owner.actions)
 		if(spell == src)
@@ -672,7 +680,7 @@
 			owner.balloon_alert(owner, "too far away!")
 			return sig_return | SPELL_CANCEL_CAST
 
-		if((spell_type == SPELL_MIRACLE) && HAS_TRAIT(cast_on, TRAIT_ATHEISM_CURSE))
+		if(((spell_type == SPELL_DIVINE_MIRACLE) || (spell_type == SPELL_UNHOLY_MIRACLE)) && HAS_TRAIT(cast_on, TRAIT_ATHEISM_CURSE))
 			if(isliving(cast_on))
 				var/mob/living/L = cast_on
 				L.visible_message(
@@ -684,7 +692,7 @@
 
 		if(ishuman(cast_on))
 			var/mob/living/carbon/human/human_target
-			if((spell_type == SPELL_MIRACLE) && HAS_TRAIT(cast_on, TRAIT_SILVER_BLESSED) && !(spell_flags & SPELL_PSYDON) && !(human_target.mob_biotypes & MOB_UNDEAD))
+			if(((spell_type == SPELL_DIVINE_MIRACLE) || (spell_type == SPELL_UNHOLY_MIRACLE)) && HAS_TRAIT(cast_on, TRAIT_SILVER_BLESSED) && !(spell_flags & SPELL_PSYDON) && !(human_target.mob_biotypes & MOB_UNDEAD))
 				cast_on.visible_message(span_info("[cast_on] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
 				playsound(cast_on, 'sound/magic/PSY.ogg', 100, FALSE, -1)
 				owner.playsound_local(owner, 'sound/magic/PSY.ogg', 100, FALSE, -1)
@@ -974,7 +982,7 @@
 
 			return TRUE
 
-		if(SPELL_MIRACLE)
+		if(SPELL_DIVINE_MIRACLE, SPELL_UNHOLY_MIRACLE)
 			var/mob/living/carbon/human/human_caster = caster
 			if(!istype(human_caster) || !human_caster.cleric?.check_devotion(spell_cost))
 				if(feedback)
@@ -1053,7 +1061,7 @@
 			var/mob/living/caster = owner
 			caster.consume_mana(used_cost)
 
-		if(SPELL_MIRACLE)
+		if(SPELL_DIVINE_MIRACLE, SPELL_UNHOLY_MIRACLE)
 			var/mob/living/carbon/human/H = owner
 			if(!istype(H))
 				return
