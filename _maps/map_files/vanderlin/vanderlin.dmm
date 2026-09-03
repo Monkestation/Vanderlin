@@ -11228,7 +11228,6 @@
 	pixel_y = -32
 	},
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/structure/closet/crate/chest/crate,
 /obj/item/candle/yellow,
 /obj/item/candle/yellow{
 	pixel_x = -3;
@@ -11242,6 +11241,7 @@
 	pixel_x = 4;
 	pixel_y = -4
 	},
+/obj/structure/closet/crate/chest/wickertrunk/blue,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/library)
 "eFy" = (
@@ -14533,7 +14533,7 @@
 /area/under/cavelava)
 "fUJ" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/structure/bookcase/random/apocrypha,
+/obj/structure/bookcase/fancy/random/apocrypha,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/library)
 "fUN" = (
@@ -17699,7 +17699,7 @@
 /area/under/town/basement)
 "hnB" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/structure/bookcase/random/eoratica,
+/obj/structure/bookcase/fancy/random/eoratica,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/library)
 "hnI" = (
@@ -45293,16 +45293,16 @@
 /obj/item/natural/feather{
 	pixel_x = 7
 	},
+/obj/item/natural/feather{
+	pixel_x = 7
+	},
+/obj/item/natural/feather{
+	pixel_x = 7
+	},
+/obj/item/natural/feather{
+	pixel_x = 7
+	},
 /obj/structure/closet/crate/chest/crate,
-/obj/item/natural/feather{
-	pixel_x = 7
-	},
-/obj/item/natural/feather{
-	pixel_x = 7
-	},
-/obj/item/natural/feather{
-	pixel_x = 7
-	},
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/library)
 "rYf" = (
@@ -47975,7 +47975,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/garrison)
 "sXA" = (
-/obj/structure/bookcase/random/legends,
+/obj/structure/bookcase/fancy/random/legends,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/archivist)
 "sXP" = (
@@ -61029,7 +61029,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/town)
 "xZH" = (
-/obj/structure/bookcase/random/apocrypha,
+/obj/structure/bookcase/fancy/random/apocrypha,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/library)
 "xZL" = (
