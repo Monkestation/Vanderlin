@@ -47,7 +47,7 @@
 	possible_ages = NORMAL_AGES_LIST
 	changesource_flags = WABBAJACK
 
-	limbs_icon_m = 'icons/roguetown/mob/bodies/m/goblin_male.dmi'
+	limbs_icon_m = 'icons/roguetown/mob/bodies/m/md.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/goblin_female.dmi'
 
 	custom_id = "dwarf"
@@ -57,23 +57,24 @@
 	soundpack_f = /datum/voicepack/female/dwarf
 
 	offset_features_m = list(
-		OFFSET_RING = list(0,0),\
+		OFFSET_RING = list(0,-4),\
 		OFFSET_GLOVES = list(0,0),\
 		OFFSET_WRISTS = list(0,0),\
-		OFFSET_HANDS = list(0,-3),\
+		OFFSET_HANDS = list(0,-4),\
 		OFFSET_CLOAK = list(0,0),\
 		OFFSET_FACEMASK = list(0,-4),\
 		OFFSET_HEAD = list(0,-4),\
 		OFFSET_FACE = list(0,-4),\
 		OFFSET_BELT = list(0,0),\
-		OFFSET_BACK = list(0,-4),\
-		OFFSET_NECK = list(0,-4),\
-		OFFSET_MOUTH = list(0,-4),\
+		OFFSET_BACK = list(0,-5),\
+		OFFSET_NECK = list(0,-5),\
+		OFFSET_MOUTH = list(0,-5),\
 		OFFSET_PANTS = list(0,0),\
 		OFFSET_SHIRT = list(0,0),\
 		OFFSET_ARMOR = list(0,0),\
-		OFFSET_UNDIES = list(0,-4),\
+		OFFSET_UNDIES = list(0,-4)\
 	)
+
 
 	offset_features_f = list(
 		OFFSET_RING = list(0,-4),\
