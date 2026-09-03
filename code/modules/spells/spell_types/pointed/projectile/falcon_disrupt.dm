@@ -5,7 +5,7 @@
 	sound = 'sound/vo/mobs/bird/birdfly.ogg'
 	invocation = "The Treefather commands thee, TO FLY!"
 	invocation_type = INVOCATION_SHOUT
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
