@@ -2139,6 +2139,7 @@
 #include "code\game\objects\items\plate.dm"
 #include "code\game\objects\items\pouring_mould.dm"
 #include "code\game\objects\items\quicksilver.dm"
+#include "code\game\objects\items\repair_kits.dm"
 #include "code\game\objects\items\ropechainbola.dm"
 #include "code\game\objects\items\scrolls.dm"
 #include "code\game\objects\items\scrying.dm"

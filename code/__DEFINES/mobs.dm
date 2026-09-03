@@ -316,10 +316,6 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-/// Global rate of hunger for all mobs; used to tinker with hunger rates, default is 1, 0.5 would be half, etc.
-#define HUNGER_FACTOR 1
-/// Global rate of thirst for all mobs; used to tinker with thirst rates, default is 1, 0.5 would be half, etc
-#define THIRST_FACTOR 1
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.

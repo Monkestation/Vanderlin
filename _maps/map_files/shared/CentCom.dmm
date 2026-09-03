@@ -5028,7 +5028,7 @@
 /turf/open/floor/ruinedwood,
 /area/outdoors/antag/lich)
 "yo" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/face/shepherd/rag,
 /obj/item/clothing/face/shepherd/rag,
 /obj/item/clothing/neck/coif,
@@ -5037,7 +5037,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/antag/bandit_lair)
 "yq" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/head/helmet/leather/tricorn{
 	pixel_x = 5;
 	pixel_y = -14
@@ -6813,7 +6813,7 @@
 /turf/open/floor/carpet,
 /area/indoors/antag/vampire_manor)
 "In" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/head/helmet/leather/volfhelm,
 /obj/item/clothing/head/helmet/leather/hood_ominous,
 /obj/item/clothing/head/helmet/leather/hood_ominous,
@@ -10217,7 +10217,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/admin_test)
 "Zh" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/head/helmet/leather/headscarf,
 /obj/item/clothing/head/helmet/leather/headscarf,
 /obj/item/clothing/face/skullmask,

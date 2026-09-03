@@ -1,0 +1,11 @@
+author: "PotatoTomahto"
+delete-after: True
+changes:
+  - rscadd: "metal and cloth repair kits"
+  - balance: "blacksmithing and smelting tweaks"
+  - rscadd: "A patron curse for Malum."
+  - rscadd: "New Tennite headstone options."
+  - rscadd: "Repair kits, which can be refilled with materials to fix weapons/armor on the go!"
+  - balance: "Smithing and metallury quality calculations adjustments"
+  - balance: "Crates, chests, and most other containers sell for more."
+  - code_imp: "get_reagent is now has_reagent."

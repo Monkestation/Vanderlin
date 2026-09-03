@@ -5238,7 +5238,7 @@
 /turf/open/floor/cobble,
 /area/outdoors/town/keep)
 "cwu" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/mace/woodclub,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/orphanage)
@@ -17155,7 +17155,7 @@
 /area/indoors/town)
 "ihW" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/noble_manor/blue)
 "iip" = (
@@ -22973,7 +22973,7 @@
 /turf/open/floor/carpet/green,
 /area/indoors/villagegarrison)
 "kXF" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -32438,7 +32438,7 @@
 /turf/open/floor/tile/bath,
 /area/indoors/town/keep/basement/bath)
 "pua" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -34237,7 +34237,7 @@
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep)
 "quN" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/noble_manor/blue)
 "quW" = (

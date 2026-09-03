@@ -16,7 +16,8 @@
 	/datum/curse/necra,\
 	/datum/curse/xylix,\
 	/datum/curse/pestra,\
-	/datum/curse/eora\
+	/datum/curse/eora,\
+	/datum/curse/malum\
 )
 
 #define INHUMEN_CURSES list(\
