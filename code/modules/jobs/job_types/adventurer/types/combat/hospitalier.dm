@@ -26,7 +26,7 @@
 	to keep you safe, you have set out on a journey to aid others."
 	outfit = /datum/outfit/adventurer/hospitalier
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 	attribute_sheet = /datum/attribute_holder/sheet/job/hospitalier
 

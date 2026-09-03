@@ -6340,8 +6340,7 @@
 /turf/open/floor/rooftop/green,
 /area/outdoors/mountains)
 "cSa" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady";
+/obj/structure/fluff/statue/necra{
 	pixel_x = 14;
 	pixel_y = 19
 	},
@@ -6718,9 +6717,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/red)
 "daO" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church/graveyard)
 "daT" = (
@@ -15922,8 +15919,7 @@
 /turf/open/openspace,
 /area/outdoors/river)
 "hxL" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady";
+/obj/structure/fluff/statue/necra{
 	pixel_x = 15;
 	pixel_y = 9
 	},
@@ -31065,9 +31061,7 @@
 /turf/open/floor/twig,
 /area/under/cave)
 "ohn" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/church/graveyard)
 "oho" = (
@@ -36981,9 +36975,7 @@
 /area/outdoors/town)
 "qJT" = (
 /obj/structure/flora/grass,
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/grass/yel,
 /area/outdoors/exposed/church/graveyard)
 "qJY" = (

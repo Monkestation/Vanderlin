@@ -99,6 +99,7 @@
 			break
 
 	if(!found_target)
+		to_chat(user, span_warning("I cannot find anyone by that name."))
 		return
 
 	if(HAS_TRAIT(found_target, TRAIT_ANTISCRYING))
@@ -205,6 +206,10 @@
 				continue
 			stored_target = human_target
 			break
+
+	if(!stored_target)
+		to_chat(user, span_warning("I cannot find anyone of that name."))
+		return
 
 	held_user = user
 	if(HAS_TRAIT(stored_target, TRAIT_ANTISCRYING))

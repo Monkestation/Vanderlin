@@ -3595,9 +3595,7 @@
 /turf/open/floor/churchbrick,
 /area/indoors/dungeon)
 "uQ" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/cobblerock,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "uR" = (

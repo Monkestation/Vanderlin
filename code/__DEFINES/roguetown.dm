@@ -137,6 +137,10 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_PURITAN "CAT_PURITAN"
 #define CTAG_ORPHAN "CAT_ORPHAN" // For Orphan subclasses
 
+// Special use for Vampire Spawn, applied alongside normal tags for adventurer/pilgrim classes that can also be vampires
+#define CTAG_VAMP_ADVENTURE "CTAG_VAMP_ADVENTURE"
+#define CTAG_VAMP_PILGRIM "CTAG_VAMP_PILGRIM"
+
 /*--------------------\
 | ARMOR BASIC CONCEPT |
 \--------------------*/

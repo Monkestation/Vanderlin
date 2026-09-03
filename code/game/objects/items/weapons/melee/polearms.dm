@@ -54,6 +54,7 @@
 	sharpness = IS_BLUNT
 	sellprice = 5
 	item_weight = 1 KILOGRAMS
+	weapon_special = /datum/special_intent/quarterstaff_sweep
 
 /obj/item/weapon/polearm/woodstaff/getonmobprop(tag)
 	. = ..()
@@ -191,6 +192,7 @@
 	sellprice = 22
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_IRON
+	weapon_special = /datum/special_intent/polearm_backstep
 
 /obj/item/weapon/polearm/spear/getonmobprop(tag)
 	. = ..()
@@ -575,6 +577,7 @@
 	item_weight = 2.3 KILOGRAMS
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_STEEL
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	weapon_special = /datum/special_intent/polearm_backstep
 
 /obj/item/weapon/polearm/halberd/silver
 	name = "silver halberd"
