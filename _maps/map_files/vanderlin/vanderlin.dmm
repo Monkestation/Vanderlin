@@ -20073,6 +20073,7 @@
 /area/outdoors/town)
 "ikZ" = (
 /obj/structure/pottery_lathe,
+/obj/item/natural/clay,
 /turf/open/floor/dirt/road,
 /area/outdoors/town/keep/forge)
 "ila" = (
