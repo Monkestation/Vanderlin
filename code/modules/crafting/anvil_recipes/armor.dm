@@ -408,6 +408,16 @@
 	name = "Light Plate Boots"
 	created_item = /obj/item/clothing/shoes/boots/armor/light
 
+/datum/anvil_recipe/armor/iron/ironbriar
+	name = "Crown of Iron Thorns"
+	created_item = /obj/item/clothing/head/helmet/ironbriar
+	craftdiff = 2
+
+/datum/anvil_recipe/armor/iron/wrists/bracers/ironbriar
+	name = "Dendorian Thorns"
+	created_item = /obj/item/clothing/wrists/bracers/ironbriar
+	craftdiff = 2
+
 /datum/anvil_recipe/armor/iron/town_watch_helmet
 	name = "Town Watchmen helmet"
 	created_item = /obj/item/clothing/head/helmet/watchmen

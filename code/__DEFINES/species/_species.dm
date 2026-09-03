@@ -23,6 +23,10 @@
 
 #define SPEC_ID_ORC	"orc"
 #define SPEC_ID_GOBLIN	"goblin"
+#define SPEC_ID_GOBLIN_HELL	"goblin_hell"
+#define SPEC_ID_GOBLIN_CAVE	"goblin_cave"
+#define SPEC_ID_GOBLIN_SEA	"goblin_sea"
+#define SPEC_ID_GOBLIN_MOON	"goblin_moon"
 #define SPEC_ID_ROUSMAN	"rousman"
 #define SPEC_ID_ZIZOMBIE "zizombie"
 
@@ -371,4 +375,18 @@
 
 #define SPECIES_CANNIBALISM_KOBOLD list(\
 	SPEC_ID_KOBOLD,\
+)
+//Used in aiming, yes it's awful how I used each and every species but I made it use normal id instead id_override
+#define SPECIES_SHORTIES list(\
+	SPEC_ID_DWARF,\
+	SPEC_ID_HALFLING,\
+	SPEC_ID_KOBOLD,\
+	SPEC_ID_ROUSMAN,\
+	SPEC_ID_GOBLIN,\
+	SPEC_ID_GOBLIN_HELL,\
+	SPEC_ID_GOBLIN_CAVE,\
+	SPEC_ID_GOBLIN_SEA,\
+	SPEC_ID_GOBLIN_MOON,\
+	SPEC_ID_KOBOLD_FORMIKRAG,\
+	SPEC_ID_DWARF_SUBTERRAN,\
 )
