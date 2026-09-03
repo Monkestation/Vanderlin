@@ -198,7 +198,11 @@
 
 //............... Zizo Frog Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/inhumen
+	name = "BASE INHUMEN HELMET"
+	abstract_type = /obj/item/clothing/head/helmet/heavy/inhumen
+	misc_flags = CRAFTING_TEST_EXCLUDE
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizofrogmouth"
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	armor_type = /datum/armor/head/plate
 	prevent_crits = ALL_CRITICAL_HITS

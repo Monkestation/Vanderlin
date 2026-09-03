@@ -229,9 +229,11 @@
 
 //................ Zizo Armor ...............//
 /obj/item/clothing/armor/plate/full/inhumen
+	name = "BASE INHUMEN ARMOR"
 	abstract_type = /obj/item/clothing/armor/plate/full/inhumen
 	misc_flags = CRAFTING_TEST_EXCLUDE
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizoplate"
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this

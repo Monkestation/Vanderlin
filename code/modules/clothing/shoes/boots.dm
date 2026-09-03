@@ -285,9 +285,11 @@
 
 //............... Evil Boots ............... //
 /obj/item/clothing/shoes/boots/armor/inhumen
+	name = "BASE INHUMEN BOOTS"
 	abstract_type = /obj/item/clothing/shoes/boots/armor/inhumen
 	misc_flags = CRAFTING_TEST_EXCLUDE
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizoboots"
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
