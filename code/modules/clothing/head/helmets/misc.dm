@@ -775,7 +775,7 @@
 	flags_cover = HEADCOVERSEYES | HEADCOVERSMOUTH
 	armor_type = /datum/armor/head/plate/blacksteel
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST, BCLASS_PICK)
-	block2add = FOV_RIGHT|FOV_LEFT
+	block2add = FOV_BEHIND
 	max_integrity = 425
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel

@@ -982,7 +982,7 @@
 				r_hand = /obj/item/weapon/polearm/woodstaff
 				head = /obj/item/clothing/head/roguehood/colored/mage
 				armor = /obj/item/clothing/shirt/robe/colored/mage
-				beltl = /obj/item/reagent_containers/glass/bottle/manapot
+				beltl = /obj/item/reagent_containers/glass/bottle/manapot/labelled
 
 			if("Sword2")
 				beltl = /obj/item/weapon/sword/short/iron

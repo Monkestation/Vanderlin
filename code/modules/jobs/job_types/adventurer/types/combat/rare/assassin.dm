@@ -478,7 +478,7 @@
 	pack_backpack_contents = list(
 		/obj/item/recipe_book/cooking = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
-		/obj/item/weapon/knife/dagger/steel/profane = 1,
+		/obj/item/weapon/knife/dagger/steel/inhumen/profane = 1,
 		/obj/item/lockpick = 1,
 	)
 
@@ -539,7 +539,7 @@
 
 	pack_backpack_contents = list(
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
-		/obj/item/weapon/knife/dagger/steel/profane = 1,
+		/obj/item/weapon/knife/dagger/steel/inhumen/profane = 1,
 		/obj/item/lockpick = 1,
 		/obj/item/storage/fancy/cigarettes/zig = 1,
 		/obj/item/flint = 1,

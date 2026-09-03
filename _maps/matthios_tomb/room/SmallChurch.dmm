@@ -949,7 +949,7 @@
 /area/under/tomb)
 "KS" = (
 /obj/structure/table/wood/fancy/black,
-/obj/item/weapon/knife/dagger/steel/profane,
+/obj/item/weapon/knife/dagger/steel/inhumen/profane,
 /obj/effect/decal/cleanable/sigil,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/tomb/indoors/church)

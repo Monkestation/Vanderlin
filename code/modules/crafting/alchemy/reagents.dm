@@ -14,7 +14,7 @@
 /datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	if(affected_bodypart.heal_damage(1 * REM, 1 * REM, TRUE, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
-	return ..()
+	return FALSE
 
 /datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -51,7 +51,7 @@
 /datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	if(affected_bodypart.heal_damage(3 * REM, 3 * REM, TRUE, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
-	return ..()
+	return FALSE
 
 /datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -266,7 +266,7 @@
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(-30)
 	affected_bodypart.adjust_germ_level(-30)
-	return ..()
+	return FALSE
 
 /datum/reagent/medicine/diseasecure/on_mob_metabolize(mob/living/L)
 	. = ..()

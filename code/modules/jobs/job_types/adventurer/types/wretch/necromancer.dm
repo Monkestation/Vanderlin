@@ -94,7 +94,7 @@
 		/obj/item/spellbook/expert/starter/death = 1,
 		/obj/item/chalk = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1
 	)

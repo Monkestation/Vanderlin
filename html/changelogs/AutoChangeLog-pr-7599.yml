@@ -1,0 +1,6 @@
+author: "Jmih"
+delete-after: True
+changes:
+  - bugfix: "Life eternal enchantment works properly now, and healing scales with each item that have this enchantment"
+  - bugfix: "Enchanter can take off item with \"binding runes\" now"
+  - bugfix: "STR potion brewing gives 25 units instead of 5, like any other buff potion"

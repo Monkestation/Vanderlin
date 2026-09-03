@@ -1,7 +1,7 @@
 /mob/living
 	see_invisible = SEE_INVISIBLE_LIVING
 	sight = 0
-	see_in_dark = 8
+	see_in_dark = SEE_IN_DARK_DEFAULT_EYES
 	hud_possible = list(ANTAG_HUD)
 
 	///Tracks the scale of the mob transformation matrix in relation to its identity. Use update_transform(resize) to change it.

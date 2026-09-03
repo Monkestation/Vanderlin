@@ -19,7 +19,7 @@
 	spell_cost = 15
 
 /datum/action/cooldown/spell/burial_rites/is_valid_target(atom/cast_on)
-	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/profane) || istype(cast_on, /obj/item/psydonmusicbox))
+	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/inhumen/profane) || istype(cast_on, /obj/item/psydonmusicbox))
 		return TRUE
 	if(istype(cast_on, /obj/item/blood_pearl))
 		return TRUE
@@ -46,8 +46,8 @@
 
 /datum/action/cooldown/spell/burial_rites/cast(obj/cast_on)
 	. = ..()
-	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/profane))
-		var/obj/item/weapon/knife/dagger/steel/profane/profane = cast_on
+	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/inhumen/profane))
+		var/obj/item/weapon/knife/dagger/steel/inhumen/profane/profane = cast_on
 		owner.adjust_triumphs(profane.release_profane_souls(owner)) // Every soul saved earns you a big fat triumph.
 		return
 	else if(istype(cast_on, /obj/item/psydonmusicbox))
