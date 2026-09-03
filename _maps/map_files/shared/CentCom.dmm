@@ -2792,6 +2792,9 @@
 /area/indoors/admin_test)
 "ne" = (
 /obj/structure/rack/shelf/biggest,
+/obj/item/reagent_containers/glass/bottle/healthpot/labelled,
+/obj/item/reagent_containers/glass/bottle/manapot/labelled,
+/obj/item/reagent_containers/glass/bottle/manapot/labelled,
 /turf/open/floor/tile/masonic/moondark,
 /area/indoors/town/church/dreamcave)
 "nf" = (
@@ -7710,9 +7713,12 @@
 /area/outdoors/woods_safe)
 "ME" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/item/reagent_containers/glass/bottle/healthpot,
-/obj/item/reagent_containers/glass/bottle/healthpot,
-/obj/item/reagent_containers/glass/bottle/healthpot,
+/obj/item/reagent_containers/glass/bottle/healthpot/labelled,
+/obj/item/reagent_containers/glass/bottle/healthpot/labelled,
+/obj/item/reagent_containers/glass/bottle/healthpot/labelled,
+/obj/item/reagent_containers/glass/bottle/bloodpot/labelled,
+/obj/item/reagent_containers/glass/bottle/bloodpot/labelled,
+/obj/item/reagent_containers/glass/bottle/bloodpot/labelled,
 /turf/open/floor/carpet,
 /area/indoors/antag/vampire_manor)
 "MF" = (
