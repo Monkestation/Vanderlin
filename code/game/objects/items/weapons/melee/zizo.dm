@@ -1,8 +1,7 @@
-/obj/item/weapon/knife/dagger/steel/zizo_dagger
+/obj/item/weapon/knife/dagger/steel/inhumen/zizo_dagger
 	name = "darksteel dagger"
 	desc = "A vile dagger made of darksteel."
 	icon_state = "zizodagger"
-	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	melting_material = /datum/material/avantyne
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_DARKSTEEL
 
