@@ -10,6 +10,7 @@
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
@@ -98,6 +99,7 @@
 			gloves = /obj/item/clothing/gloves/plate/inhumen/zizo
 			pants = /obj/item/clothing/pants/platelegs/inhumen/zizo
 			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/zizo
+			backl = /obj/item/weapon/sword/long/zizo_longsword
 		if(/datum/patron/inhumen/matthios)
 			head = /obj/item/clothing/head/helmet/heavy/inhumen/matthios
 			armor = /obj/item/clothing/armor/plate/full/inhumen/matthios
@@ -105,9 +107,10 @@
 			pants = /obj/item/clothing/pants/platelegs/inhumen/matthios
 			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/matthios
 		if(/datum/patron/inhumen/baotha)
-			head = /obj/item/clothing/head/helmet/heavy/inhumen/baotha
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/baotha_alt
 			mask = /obj/item/clothing/face/spectacles/sglasses
-			armor = /obj/item/clothing/armor/plate
-			gloves = /obj/item/clothing/gloves/plate
-			pants = /obj/item/clothing/pants/platelegs
-			shoes = /obj/item/clothing/shoes/boots/armor
+			armor = /obj/item/clothing/armor/plate/full/inhumen/baotha
+			gloves = /obj/item/clothing/gloves/plate/inhumen/baotha
+			pants = /obj/item/clothing/pants/platelegs/inhumen/baotha
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/baotha
+			backl = /obj/item/weapon/polearm/spear/steel/baotha
