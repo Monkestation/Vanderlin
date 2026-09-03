@@ -4580,8 +4580,8 @@
 /obj/structure/door{
 	name = "guard's barracks"
 	},
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile,
 /area/indoors/town/keep/garrison)
 "bUO" = (
@@ -36263,8 +36263,8 @@
 /obj/structure/door{
 	name = "guard's barracks"
 	},
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/servant/garrison,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/keep/garrison)
 "oBm" = (
@@ -47446,8 +47446,8 @@
 /obj/structure/door/iron/bars{
 	name = "Spare Equipment"
 	},
-/obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile,
 /area/indoors/town/keep/garrison)
 "sMs" = (
@@ -61632,8 +61632,11 @@
 /turf/closed/wall/mineral/wooddark/end,
 /area/indoors/town/noble_manor/yellow)
 "ylQ" = (
-/obj/effect/mapping_helpers/access/locker,
+/obj/structure/door{
+	name = "guard's barracks"
+	},
 /obj/effect/mapping_helpers/access/keyset/manor/servant/garrison,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/garrison)
 "ylS" = (
