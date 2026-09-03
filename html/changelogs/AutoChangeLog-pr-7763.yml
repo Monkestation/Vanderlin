@@ -1,0 +1,7 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Fixes scrying people that don't exist not informing you when it fails."
+  - bugfix: "Fixed Vampire Spawn selecting silver loaded presets."
+  - bugfix: "Fixed obelisk beams remaining after death."
+  - rscadd: "Added a specific subtype for necra statues."

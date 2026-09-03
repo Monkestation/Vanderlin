@@ -33,6 +33,7 @@
 /datum/action/cooldown/spell/painkiller/spell
 	name = "Numb Senses"
 	desc = "Numbs a targets senses lowering the pain they recieve."
+	invocation = "Through the arcyne, you shall have peace."
 	spell_type = SPELL_MANA
 	spell_cost = 20
 	required_form = FORM_AIR

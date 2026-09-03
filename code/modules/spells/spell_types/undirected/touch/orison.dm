@@ -180,7 +180,7 @@
 	if(user && associated_skill)
 		var/skill_level = GET_MOB_SKILL_VALUE(user, associated_skill)
 		if(skill_level <= SKILL_LEVEL_EXPERT)
-			adjust_experience(user, associated_skill, base_xp)
+			user.adjust_experience(associated_skill, base_xp)
 
 /datum/action/cooldown/spell/undirected/touch/orison/lesser
 	name = "Lesser Orison"
