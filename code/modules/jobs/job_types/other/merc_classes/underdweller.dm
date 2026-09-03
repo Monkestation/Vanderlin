@@ -56,7 +56,7 @@
 	spawned.merctype = 3
 
 	// Species-specific adjustments
-	if(spawned.dna?.species?.id == SPEC_ID_DWARF || equipped_human.dna?.species?.id == SPEC_ID_DWARF_ORC)
+	if(spawned.dna?.species?.id == SPEC_ID_DWARF || spawned.dna?.species?.id == SPEC_ID_DWARF_ORC)
 		spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/underdweller/dwarf)
 	else
