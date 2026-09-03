@@ -33103,10 +33103,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town/roofs)
 "nGP" = (
-/obj/structure/fake_machine/drugmachine{
-	pixel_x = -32;
-	density = 0
-	},
+/obj/structure/fake_machine/scomm/l,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/clinic_large/apothecary)
 "nGV" = (
@@ -45157,7 +45154,10 @@
 /turf/open/floor/wood,
 /area/indoors/town/clinic_large)
 "ssR" = (
-/obj/structure/fake_machine/scomm,
+/obj/structure/fake_machine/drugmachine{
+	density = 0;
+	pixel_y = 32
+	},
 /turf/open/floor/twig,
 /area/indoors/town/clinic_large/apothecary)
 "ssT" = (
