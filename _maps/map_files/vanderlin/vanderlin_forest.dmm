@@ -5939,7 +5939,7 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
 "HI" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/pants/trou/leather/gronn,
 /obj/item/clothing/armor/leather/shamancoat,
 /obj/item/clothing/gloves/plate/beastclaws,
@@ -6437,7 +6437,7 @@
 /turf/open/floor/naturalstone,
 /area/under/cave)
 "Kz" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/wood,
 /area/indoors/wilderness/gallowband/ship)
 "KA" = (
@@ -9036,7 +9036,7 @@
 /turf/open/floor/cobble,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
 "Zk" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/wilderness/gallowband/garrison)
 "Zl" = (

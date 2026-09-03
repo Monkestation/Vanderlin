@@ -415,7 +415,7 @@
 "abG" = (
 /obj/structure/bars,
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "abH" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobble,
@@ -1117,7 +1117,7 @@
 /turf/open/floor/carpet/lord/corner{
 	dir = 8
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "afl" = (
 /obj/item/natural/rock/silver,
 /turf/open/floor/dirt,
@@ -1723,7 +1723,7 @@
 "aim" = (
 /obj/structure/bars,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "ain" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -2855,7 +2855,7 @@
 	name = "Malum's Vault. Seven relics for seven whitebeards."
 	},
 /turf/open/floor/carpet/lord/center,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "anM" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cobblerock,
@@ -3221,7 +3221,7 @@
 "apI" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/carpet/lord/corner,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "apJ" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -3468,7 +3468,7 @@
 "ara" = (
 /obj/structure/carpet/red,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "arb" = (
 /obj/structure/stairs/stone{
 	dir = 8
@@ -5014,7 +5014,7 @@
 	pixel_y = 14
 	},
 /turf/open/floor/carpet/lord/center,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "ayj" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 1
@@ -5857,7 +5857,7 @@
 	pixel_y = 14
 	},
 /turf/open/floor/carpet/lord/center,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aBJ" = (
 /obj/structure/table/wood/crafted,
 /obj/item/natural/bundle/bone,
@@ -6005,7 +6005,7 @@
 "aCv" = (
 /obj/effect/decal/carpet,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aCw" = (
 /obj/structure/table/wood/large/corner_new{
 	dir = 4
@@ -6233,7 +6233,7 @@
 	pixel_y = 12
 	},
 /turf/open/floor/carpet/lord/center,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aDx" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/ore/coal,
@@ -6823,7 +6823,7 @@
 "aGE" = (
 /obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aGG" = (
 /obj/structure/fluff/traveltile{
 	aportalgoesto = "vanderlin-bog_mountain-bog";
@@ -7894,7 +7894,7 @@
 "aLY" = (
 /obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aLZ" = (
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/plasteel/maniac/damaged,
@@ -8382,7 +8382,7 @@
 /obj/effect/decal/cleanable/sigil,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aOp" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/tile/masonic{
@@ -8674,7 +8674,7 @@
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/coin/gold/pile,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aPP" = (
 /obj/structure/fluff/railing/stonehedge{
 	dir = 4
@@ -9516,7 +9516,7 @@
 "aTP" = (
 /obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aTR" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -9957,7 +9957,7 @@
 	name = "Malum's Vault"
 	},
 /turf/open/floor/cobble,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aWb" = (
 /obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/herringbone,
@@ -10573,7 +10573,7 @@
 "aYN" = (
 /obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "aYO" = (
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/cobblerock/alt,
@@ -10981,7 +10981,7 @@
 	pixel_x = -3
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "ccT" = (
 /obj/item/bin/water,
 /turf/open/floor/herringbone,
@@ -11084,6 +11084,11 @@
 /obj/item/gun/ballistic/bow/cross/slur,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
+"cyw" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/clothing/ring/gold/toper,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "cAc" = (
 /turf/open/floor/metal,
 /area/under/mountains/anvil/upper)
@@ -11339,7 +11344,7 @@
 	desc = "A wardrobe, inscribed with the symbol of the Platinum Clan. Fine clothes lay within."
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "dBh" = (
 /obj/structure/chair/stool/bar,
 /obj/effect/decal/cleanable/debris/stone,
@@ -11612,6 +11617,11 @@
 /obj/structure/table/wood/counter/end,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
+"eKS" = (
+/obj/effect/decal/cleanable/sigil/E,
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "eMM" = (
 /obj/structure/closet/dirthole/closed,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -11735,7 +11745,12 @@
 	pixel_x = 2
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
+"fNw" = (
+/turf/open/floor/carpet/lord/corner{
+	dir = 4
+	},
+/area/indoors/mountains/anvil/vault)
 "fPC" = (
 /obj/structure/table/wood/large/corner_new,
 /obj/item/plate/clay,
@@ -11883,7 +11898,7 @@
 	max_integrity = 200
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "gIH" = (
 /obj/structure/table/wood/counter/end,
 /obj/item/clothing/face/spectacles,
@@ -11915,7 +11930,7 @@
 	pixel_y = 12
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "gNy" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 9
@@ -12052,6 +12067,11 @@
 	},
 /turf/open/openspace,
 /area/indoors/town/clocktower)
+"hpW" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/clothing/ring/gold/gemerald,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "hqY" = (
 /obj/structure/chair/bench/church/r,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -12076,7 +12096,10 @@
 	sellprice = 144
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
+"hya" = (
+/turf/closed/mineral/bedrock/cold,
+/area/indoors/mountains/anvil/vault)
 "hBu" = (
 /turf/closed/mineral/random/cold/high,
 /area/outdoors/mountains/anvil/peak)
@@ -12151,7 +12174,7 @@
 	pixel_x = 3
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "hPR" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood/gibs/core,
@@ -12168,6 +12191,13 @@
 /obj/machinery/light/fueled/firebowl/stumpg,
 /turf/open/floor/cobblerock/snow,
 /area/under/mountains/anvil/upper)
+"hZw" = (
+/turf/open/floor/carpet/lord/left,
+/area/indoors/mountains/anvil/vault)
+"hZE" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/carpet/lord/left,
+/area/indoors/mountains/anvil/vault)
 "iai" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood/gibs/limb,
@@ -12245,6 +12275,11 @@
 /obj/effect/mapping_helpers/structure/grave_spawner/t3/_tennite,
 /turf/open/floor/dirt,
 /area/indoors/mountains/anvil/keep)
+"itM" = (
+/obj/effect/decal/cleanable/sigil/N,
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/cobblerock/alt,
+/area/indoors/mountains/anvil/vault)
 "iwn" = (
 /obj/structure/carpet/cyan,
 /obj/structure/chair/stool/bar,
@@ -12318,7 +12353,7 @@
 	desc = "A bottle with the House Stoutenson cork-seal. The glass is etched with the symbol of the Aurum clan. A well-respected rival, yet to come out on top."
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "iYl" = (
 /obj/structure/water_pipe,
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -12358,7 +12393,7 @@
 	pixel_y = 11
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "jjR" = (
 /obj/structure/fluff/walldeco/skullspike,
 /turf/open/floor/cobblerock/snow,
@@ -12382,7 +12417,7 @@
 	desc = "A bottle with the Dwarven Federation Trade Alliance cork-seal. The glass is etched with the symbol of the Aurum clan."
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "jrw" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 8;
@@ -12473,7 +12508,7 @@
 	pixel_y = 11
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "jSj" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -12495,7 +12530,7 @@
 	},
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "kdV" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 8;
@@ -12533,6 +12568,12 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/anvil/snowyforest)
+"kiz" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "kjS" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/gem/amethyst,
@@ -12545,7 +12586,7 @@
 	pixel_y = -5
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "klz" = (
 /obj/structure/flora/grass/bush_meagre/tundra,
 /turf/open/floor/dirt,
@@ -12558,7 +12599,7 @@
 	desc = "A bottle with the Dwarven Federation Trade Alliance cork-seal. The glass is etched with the symbol of the Aurum clan."
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "krG" = (
 /obj/structure/chair/bench/church/r,
 /turf/open/floor/carpet/lord/right,
@@ -12666,6 +12707,12 @@
 	},
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
+"leu" = (
+/obj/effect/decal/carpet{
+	dir = 4
+	},
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "lhW" = (
 /obj/structure/flora/grass/tundra,
 /turf/open/floor/dirt,
@@ -12781,6 +12828,11 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/openspace,
 /area/outdoors/mountains/anvil/peak)
+"lYs" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/clothing/ring/gold/saffira,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "lZF" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/reagent_containers/powder/blastpowder,
@@ -12789,7 +12841,7 @@
 /obj/item/reagent_containers/powder/blastpowder,
 /obj/item/reagent_containers/powder/blastpowder,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "mmA" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/grass/cold,
@@ -12873,10 +12925,15 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/snowyforest)
+"mAL" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/clothing/ring/gold/dorpel,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "mBJ" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "mCm" = (
 /obj/item/bin/water,
 /obj/structure/mirror/fancy,
@@ -12906,6 +12963,9 @@
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
+"mGZ" = (
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "mHZ" = (
 /turf/open/floor/tile,
 /area/under/mountains/anvil/upper)
@@ -12920,13 +12980,18 @@
 	pixel_y = 8
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "mOc" = (
 /obj/structure/chair/bench/church/mid,
 /mob/living/carbon/human/species/skeleton/npc/easy,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"mOX" = (
+/turf/open/floor/carpet/lord/right{
+	dir = 1
+	},
+/area/indoors/mountains/anvil/vault)
 "mPt" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4
@@ -13010,6 +13075,9 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"nly" = (
+/turf/open/floor/cobblerock,
+/area/indoors/mountains/anvil/vault)
 "noB" = (
 /obj/structure/flora/grass/bush_meagre/tundra,
 /turf/open/floor/snow/patchy,
@@ -13067,7 +13135,7 @@
 	desc = "A personal device heralding the new era of machine and steam. Dwarven artificers both prize and fear this device for its broad musical range, which notably have made it an object of great value to Baothans' newfound 'Star-Song' rituals. This one somehow outshines the rest- the audio quality is just a bit sharper, the sheen brighter. The symbol of the Brass Clan is stamped on the centerpiece."
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "nOD" = (
 /obj/structure/chair/bench/throne/stone,
 /turf/open/floor/blocks/newstone,
@@ -13144,6 +13212,9 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"oip" = (
+/turf/open/floor/carpet/lord/center,
+/area/indoors/mountains/anvil/vault)
 "ojN" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/twig,
@@ -13161,6 +13232,11 @@
 /obj/structure/flora/grass/tundra,
 /turf/open/floor/snow/patchy,
 /area/under/mountains/anvil/upper)
+"ols" = (
+/obj/structure/closet/crate/chest/neu_fancy,
+/obj/item/clothing/ring/gold/blortz,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "oob" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -13177,7 +13253,7 @@
 /turf/open/floor/carpet/lord/corrner_inner{
 	dir = 4
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "owu" = (
 /obj/structure/fluff/railing/tall/stone,
 /obj/item/bin/water,
@@ -13435,7 +13511,7 @@
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/clothing/ring/gold/rontz,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "pUQ" = (
 /obj/machinery/anvil,
 /turf/open/floor/herringbone,
@@ -13452,7 +13528,7 @@
 /turf/open/floor/carpet/lord/corrner_inner{
 	dir = 1
 	},
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "qge" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -13528,7 +13604,7 @@
 	name = "Malum's Vault"
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "qyf" = (
 /obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/debris/stone,
@@ -13603,10 +13679,19 @@
 /obj/structure/vertical_gearbox,
 /turf/open/floor/herringbone,
 /area/indoors/town/clocktower)
+"qXg" = (
+/obj/effect/decal/cleanable/sigil/SE,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "qYf" = (
 /obj/structure/table/wood/large/corner_new,
 /turf/open/floor/tile/masonic/single,
 /area/indoors/mountains/anvil/upperkeep)
+"qZn" = (
+/obj/effect/decal/cleanable/sigil/NE,
+/obj/effect/decal/cleanable/debris/stone,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "rbJ" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /turf/open/floor/cobble,
@@ -13634,6 +13719,10 @@
 	},
 /turf/open/floor/naturalstone,
 /area/outdoors/mountains/anvil/snowyforest)
+"rhL" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "riw" = (
 /obj/structure/chair/bench/church,
 /turf/open/floor/tile/masonic{
@@ -13661,7 +13750,13 @@
 /obj/item/fuse/parchment,
 /obj/item/fuse/parchment,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
+"rtV" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/carpet/lord/right{
+	dir = 1
+	},
+/area/indoors/mountains/anvil/vault)
 "rzt" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie,
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
@@ -13741,7 +13836,7 @@
 "rSh" = (
 /obj/structure/fluff/walldeco/wallshield,
 /turf/closed/wall/mineral/decorstone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "rUq" = (
 /obj/structure/closet/dirthole/closed,
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -13793,7 +13888,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "spb" = (
 /obj/structure/bridge_stakes{
 	dir = 8
@@ -13889,7 +13984,7 @@
 	pixel_x = -3
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "sMs" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 10
@@ -13919,13 +14014,13 @@
 	pixel_y = 9
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "sQZ" = (
 /obj/effect/decal/carpet{
 	dir = 1
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "sSV" = (
 /obj/structure/chair/bench/church/mid,
 /mob/living/carbon/human/species/skeleton/npc/easy,
@@ -13961,7 +14056,7 @@
 /obj/projectile/bullet/reusable/cannonball,
 /obj/projectile/bullet/reusable/cannonball,
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "sWJ" = (
 /obj/structure/chair/stool/bar,
 /turf/open/floor/cobble,
@@ -13992,7 +14087,7 @@
 	pixel_y = -6
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "tjv" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/dirt,
@@ -14153,6 +14248,9 @@
 /obj/item/clothing/shoes/shortboots,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"ufn" = (
+/turf/open/floor/carpet/lord/right,
+/area/indoors/mountains/anvil/vault)
 "uhq" = (
 /turf/open/water/clean,
 /area/indoors/mountains/anvil/keep)
@@ -14228,7 +14326,7 @@
 "uuP" = (
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /turf/open/floor/carpet/lord/center,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "uwA" = (
 /obj/structure/mirror/fancy{
 	pixel_x = 31;
@@ -14254,6 +14352,10 @@
 /obj/structure/stairs/stone,
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
+"uBv" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/carpet/lord/right,
+/area/indoors/mountains/anvil/vault)
 "uBX" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/cobble,
@@ -14292,7 +14394,7 @@
 	sellprice = 90
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "uQj" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 4
@@ -14361,7 +14463,7 @@
 	desc = "A brass plate is riveted into the body of the cannon, indicating a year that has been wiped away and the symbol of the Blackpowder Clan. Whenever this cannon was, it far predates most modern examples. A prototype, maybe...?"
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "vgb" = (
 /obj/structure/water_pipe,
 /obj/effect/decal/cleanable/dirt,
@@ -14481,6 +14583,12 @@
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/cobblerock,
 /area/outdoors/mountains/anvil/peak)
+"vII" = (
+/obj/effect/decal/carpet{
+	dir = 8
+	},
+/turf/open/floor/herringbone,
+/area/indoors/mountains/anvil/vault)
 "vKH" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 1
@@ -14522,6 +14630,9 @@
 /mob/living/carbon/human/species/skeleton/npc/mediumspread,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
+"vNU" = (
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/mountains/anvil/vault)
 "vQX" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cobblerock,
@@ -14617,7 +14728,7 @@
 	pixel_y = -5
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "wnQ" = (
 /obj/structure/fluff/psycross/zizocross,
 /turf/open/floor/blocks/newstone,
@@ -14634,7 +14745,7 @@
 	pixel_y = 8
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "wuE" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
@@ -14688,13 +14799,18 @@
 	pixel_y = 10
 	},
 /turf/open/floor/herringbone,
-/area/indoors/mountains/anvil/upperkeep)
+/area/indoors/mountains/anvil/vault)
 "wWZ" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/tile/masonic{
 	dir = 1
 	},
 /area/indoors/mountains/anvil/upperkeep)
+"wXf" = (
+/turf/open/floor/carpet/lord/left{
+	dir = 1
+	},
+/area/indoors/mountains/anvil/vault)
 "wYG" = (
 /obj/structure/water_pipe,
 /turf/open/floor/metal,
@@ -14761,6 +14877,11 @@
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/peak)
+"xOW" = (
+/turf/open/floor/carpet/lord/corner{
+	dir = 1
+	},
+/area/indoors/mountains/anvil/vault)
 "xPu" = (
 /obj/structure/chair/stool,
 /turf/open/floor/twig,
@@ -106431,23 +106552,23 @@ akR
 akR
 akR
 akR
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aHM
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+hya
 akR
 akR
 akR
@@ -106626,30 +106747,30 @@ akR
 akR
 akR
 akR
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aHM
-aRk
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+hya
+vNU
 aPO
-aet
+mGZ
 jie
-aet
+mGZ
 aPO
-aRk
-aHM
+vNU
+hya
 akR
 akR
 akR
@@ -106828,30 +106949,30 @@ akR
 akR
 akR
 akR
-aHM
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
+hya
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
 aPO
-aet
+mGZ
 jQm
-aet
+mGZ
 aPO
-aRk
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aHM
+vNU
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+hya
 akR
 akR
 akR
@@ -107030,30 +107151,30 @@ akR
 akR
 akR
 akR
-aHM
-aRk
+hya
+vNU
 aPO
-aet
+mGZ
 gNo
-aet
+mGZ
 aPO
-aRk
-aRk
+vNU
+vNU
 sVW
-aet
-aet
-aet
-aet
-aRk
-aHM
-aRk
-aIZ
-aet
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+hya
+vNU
+rhL
+mGZ
 uPz
 ara
-aIz
-aRk
-aHM
+kiz
+vNU
+hya
 akR
 akR
 akR
@@ -107232,30 +107353,30 @@ akR
 akR
 akR
 akR
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aRk
-aIZ
-aet
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
+rhL
+mGZ
 vfx
 ara
-aIz
-aRk
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aHM
+kiz
+vNU
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+hya
 akR
 akR
 akR
@@ -107434,31 +107555,31 @@ akR
 akR
 akR
 akR
-aHM
-aRk
-aIZ
-aet
+hya
+vNU
+rhL
+mGZ
 nJS
 ara
-aIz
-aRk
-aRk
+kiz
+vNU
+vNU
 rnC
-aet
-aet
-aet
-aet
-aRk
-aRk
-aRk
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
+vNU
 ccD
-aet
-ahE
-aet
-aVj
-aRk
-aHM
-aHM
+mGZ
+leu
+mGZ
+ols
+vNU
+hya
+hya
 akR
 akR
 akR
@@ -107629,38 +107750,38 @@ brK
 brK
 aMt
 aMt
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aRk
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
 tio
-aet
+mGZ
 lZF
-aet
-aet
-aet
-aet
-aRk
-aRk
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
 aim
 qxr
 aim
-aRk
-aRk
-aRk
-aHM
+vNU
+vNU
+vNU
+hya
 akR
 akR
 akR
@@ -107831,38 +107952,38 @@ brK
 brK
 aMt
 akR
-aHM
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
+hya
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
 sKT
-aet
-aet
-aet
+mGZ
+mGZ
+mGZ
 pUz
-aRk
-aRk
-aRk
-aRk
-aRk
-aVE
-aet
-ahE
-aet
-aRk
+vNU
+vNU
+vNU
+vNU
+vNU
+lYs
+mGZ
+leu
+mGZ
+vNU
 rSh
-amF
-aqd
-aqd
+xOW
+hZw
+hZw
 apI
-aet
-aRk
-aHM
+mGZ
+vNU
+hya
 akR
 akR
 akR
@@ -108033,38 +108154,38 @@ brK
 brK
 aMt
 akR
-aHM
-aRk
+hya
+vNU
 aPO
-aet
+mGZ
 jmL
 mBJ
-aet
+mGZ
 hOW
-aRk
-aRk
-aet
-ahE
-aet
-aRk
-aRk
-aHM
-aHM
-aHM
-aRk
-aRk
+vNU
+vNU
+mGZ
+leu
+mGZ
+vNU
+vNU
+hya
+hya
+hya
+vNU
+vNU
 aim
 qxr
 aim
-aRk
-aRk
-aUW
-aAg
-aAg
-aeF
-aet
-aRk
-aHM
+vNU
+vNU
+rtV
+oip
+oip
+wXf
+mGZ
+vNU
+hya
 akR
 akR
 akR
@@ -108235,41 +108356,41 @@ brK
 brK
 aMt
 akR
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aet
-aRk
-aRk
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
 aim
 qxr
 aim
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
 mNo
-aet
-aet
-aet
-aet
-aet
-aVq
-aAg
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+mOX
+oip
 aBI
-aeF
-aIz
-aRk
-aRk
-aRk
-aRk
-aRk
+wXf
+kiz
+vNU
+vNU
+vNU
+vNU
+vNU
 aRk
 aRk
 aRk
@@ -108437,38 +108558,38 @@ brK
 brK
 aMt
 akR
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aet
-aet
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
 aim
-amF
-aqd
-aqd
-ale
-aqd
-aqd
-aqd
-aqd
-aqd
-aqd
-aqd
-aqd
-aqd
-aqd
-aqd
+xOW
+hZw
+hZw
+hZE
+hZw
+hZw
+hZw
+hZw
+hZw
+hZw
+hZw
+hZw
+hZw
+hZw
+hZw
 qbq
-aAg
+oip
 aDw
-aeF
-aet
+wXf
+mGZ
 abG
-amF
+xOW
 aTP
 aGE
 aLY
@@ -108639,39 +108760,39 @@ brK
 brK
 aMt
 akR
-aHM
-aRk
+hya
+vNU
 wrt
-aet
+mGZ
 iXk
 ara
-aet
-aet
+mGZ
+mGZ
 sQZ
 qxr
-aVq
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
-aAg
+mOX
+oip
+oip
+oip
+oip
+oip
+oip
+oip
+oip
+oip
+oip
+oip
+oip
+oip
+oip
+oip
 uuP
 anL
-aeF
+wXf
 aCv
 aWa
-auo
-aez
+nly
+itM
 aOo
 aYN
 awo
@@ -108841,41 +108962,41 @@ brK
 brK
 aMt
 akR
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aet
-aet
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
 aim
-aMW
-aIV
-aIV
-aeq
-aIV
-aIV
-aIV
-aIV
-aIV
-aIV
-aIV
-aIV
-aIV
-aIV
-aIV
+fNw
+ufn
+ufn
+uBv
+ufn
+ufn
+ufn
+ufn
+ufn
+ufn
+ufn
+ufn
+ufn
+ufn
+ufn
 ouq
-aAg
+oip
 aDw
-aeF
-aet
+wXf
+mGZ
 abG
-aMW
-asY
-ari
-aWb
+fNw
+qZn
+eKS
+qXg
 aEC
 aBr
 aHs
@@ -109043,41 +109164,41 @@ aMt
 aMt
 aMt
 akR
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aet
-aRk
-aRk
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
 aim
 qxr
 aim
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
 mNo
-aet
-aet
-aet
-aet
-aet
-aVq
-aAg
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+mOX
+oip
 ayi
-aeF
-aIz
-aRk
-aRk
-aRk
-aRk
-aRk
+wXf
+kiz
+vNU
+vNU
+vNU
+vNU
+vNU
 aUt
 aBr
 aRk
@@ -109245,38 +109366,38 @@ akR
 akR
 akR
 akR
-aHM
-aRk
+hya
+vNU
 aPO
-aet
+mGZ
 kqB
 mBJ
-aet
-akW
-aRk
-aRk
-aet
-aLS
-aet
-aRk
-aRk
-aHM
-aHM
-aHM
-aRk
-aRk
+mGZ
+cyw
+vNU
+vNU
+mGZ
+vII
+mGZ
+vNU
+vNU
+hya
+hya
+hya
+vNU
+vNU
 aim
 kdJ
 aim
-aRk
-aRk
-aUW
-aAg
-aAg
-aeF
-aet
-aRk
-aHM
+vNU
+vNU
+rtV
+oip
+oip
+wXf
+mGZ
+vNU
+hya
 akR
 akR
 akR
@@ -109447,38 +109568,38 @@ akR
 akR
 akR
 akR
-aHM
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
+hya
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
 whV
-aet
-aet
-aet
-aAB
-aRk
-aRk
-aRk
-aRk
-aRk
-aTs
-aet
-aLS
-aet
-aRk
+mGZ
+mGZ
+mGZ
+hpW
+vNU
+vNU
+vNU
+vNU
+vNU
+mAL
+mGZ
+vII
+mGZ
+vNU
 rSh
-aMW
-aIV
-aIV
+fNw
+ufn
+ufn
 afj
-aet
-aRk
-aHM
+mGZ
+vNU
+hya
 akR
 akR
 akR
@@ -109649,38 +109770,38 @@ akR
 akR
 akR
 akR
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aRk
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
 fLO
-aet
-aet
-aet
-aet
-aet
-aet
-aRk
-aRk
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
 aim
 qxr
 aim
-aRk
-aRk
-aRk
-aHM
+vNU
+vNU
+vNU
+hya
 akR
 akR
 akR
@@ -109858,30 +109979,30 @@ akR
 akR
 akR
 akR
-aHM
-aRk
-aIZ
-aet
+hya
+vNU
+rhL
+mGZ
 gIj
 ara
-aIz
-aRk
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aRk
-aRk
+kiz
+vNU
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
+vNU
 kjS
-aet
-aLS
-aet
-aVE
-aRk
-aHM
+mGZ
+vII
+mGZ
+lYs
+vNU
+hya
 akR
 akR
 akR
@@ -110060,30 +110181,30 @@ akR
 akR
 akR
 akR
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aRk
-aIZ
-aet
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+vNU
+rhL
+mGZ
 dzT
 ara
-aIz
-aRk
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aHM
+kiz
+vNU
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+hya
 akR
 akR
 akR
@@ -110262,30 +110383,30 @@ akR
 akR
 akR
 akR
-aHM
-aRk
+hya
+vNU
 aPO
-aet
+mGZ
 skX
-aet
+mGZ
 aPO
-aRk
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aHM
-aRk
-aIZ
-aet
+vNU
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+hya
+vNU
+rhL
+mGZ
 hxu
 ara
-aIz
-aRk
-aHM
+kiz
+vNU
+hya
 akR
 akR
 akR
@@ -110464,30 +110585,30 @@ akR
 akR
 akR
 akR
-aHM
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
+hya
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
 aPO
-aet
+mGZ
 wQj
-aet
+mGZ
 aPO
-aRk
-aHM
-aRk
-aet
-aet
-aet
-aet
-aet
-aRk
-aHM
+vNU
+hya
+vNU
+mGZ
+mGZ
+mGZ
+mGZ
+mGZ
+vNU
+hya
 akR
 akR
 akR
@@ -110666,30 +110787,30 @@ akR
 akR
 akR
 akR
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aHM
-aRk
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+hya
+vNU
 aPO
-aet
+mGZ
 sPZ
-aet
+mGZ
 aPO
-aRk
-aHM
+vNU
+hya
 akR
 akR
 akR
@@ -110876,22 +110997,22 @@ akR
 akR
 akR
 akR
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aRk
-aHM
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+vNU
+hya
 akR
 akR
 akR
@@ -111086,14 +111207,14 @@ akR
 akR
 akR
 akR
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
-aHM
+hya
+hya
+hya
+hya
+hya
+hya
+hya
+hya
 akR
 akR
 akR

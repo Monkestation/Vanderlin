@@ -14,8 +14,8 @@
 	current_blood = 25
 	blood_req = 2
 	oxygen_req = 4
-	nutriment_req = 0.6 * RATE_OF_HUNGER_GLOBAL
-	hydration_req = 0.6 * RATE_OF_THIRST_GLOBAL
+	nutriment_req = 0.6
+	hydration_req = 0.6
 
 	var/alcohol_tolerance = ALCOHOL_RATE        //affects how much damage the liver takes from alcohol
 	var/toxTolerance = LIVER_DEFAULT_TOX_TOLERANCE  //maximum amount of toxins the liver can just shrug off

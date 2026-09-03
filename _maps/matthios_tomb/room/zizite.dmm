@@ -139,7 +139,7 @@
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/church)
 "gW" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/gem/amber,
 /obj/item/gem/amber,
 /obj/item/gem/amber,

@@ -4,10 +4,10 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/build_special_traits()
 	. = list()
-	for(var/datum/special_trait/type as anything in typesof(/datum/special_trait))
-		if(IS_ABSTRACT(type))
+	for(var/datum/special_trait/trait_type as anything in typesof(/datum/special_trait))
+		if(IS_ABSTRACT(trait_type))
 			continue
-		.[type] = new type()
+		.[trait_type] = new trait_type()
 	return .
 
 /proc/roll_random_special(client/player)
