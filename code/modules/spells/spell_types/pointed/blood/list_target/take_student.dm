@@ -27,6 +27,7 @@
 	spell_flags = SPELL_UNETCHABLE
 	has_visual_effects = FALSE
 	var/list/current_students = list()
+	var/max_students = 2
 
 /datum/action/cooldown/spell/undirected/list_target/teach_blood_magic/New(Target)
 	. = ..()
@@ -61,6 +62,10 @@
 	return things
 
 /datum/action/cooldown/spell/undirected/list_target/teach_blood_magic/PreActivate(atom/caster)
+	if(length(current_students) >= max_students)
+		caster.balloon_alert(caster, "at maximum students!")
+		return FALSE
+
 	var/list/list_targets = get_list_targets(caster, target_radius)
 	if(!length(list_targets))
 		caster.balloon_alert(caster, "no valid targets!")

@@ -1,7 +1,7 @@
 #define BLOOD_CURSE_PULSE 15 SECONDS
 #define BLOOD_CURSE_DURATION BLOOD_CURSE_PULSE + 2 SECONDS
 
-#define BLOOD_CURSE_BENEFIT 0
+#define BLOOD_CURSE_HARMLESS 0
 #define BLOOD_CURSE_STUDENT 1
 #define BLOOD_CURSE_WEAKENED 2
 #define BLOOD_CURSE_GLOVED 3
@@ -46,8 +46,8 @@
 	STOP_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/bloodcurse/proc/get_curse_effect(mob/living/carbon/human/target)
-	if(HAS_TRAIT(target, TRAIT_VITAE_USER))
-		return BLOOD_CURSE_BENEFIT
+	if(HAS_TRAIT(target, TRAIT_VITAE_USER) || target.has_status_effect(/datum/status_effect/buff/blood_mark/curse_shield))
+		return BLOOD_CURSE_HARMLESS
 	if(HAS_TRAIT(target, TRAIT_BLOOD_STUDENT))
 		return BLOOD_CURSE_STUDENT
 	if(!ishuman(target))
@@ -273,7 +273,7 @@
 	icon_state = "bloodcurse"
 
 
-#undef BLOOD_CURSE_BENEFIT
+#undef BLOOD_CURSE_HARMLESS
 #undef BLOOD_CURSE_STUDENT
 #undef BLOOD_CURSE_WEAKENED
 #undef BLOOD_CURSE_GLOVED

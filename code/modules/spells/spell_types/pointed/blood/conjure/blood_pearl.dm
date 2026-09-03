@@ -20,7 +20,7 @@
 	invocation_type = INVOCATION_WHISPER
 
 	charge_required = FALSE
-	cooldown_time = 5 MINUTES
+	cooldown_time = 30 SECONDS
 	spell_cost = 600
 	spell_flags = SPELL_UNETCHABLE
 

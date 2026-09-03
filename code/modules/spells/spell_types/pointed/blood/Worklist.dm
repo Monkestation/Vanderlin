@@ -17,5 +17,5 @@
  * Add Blood Magic relic weapon(s) ? summoning spell - WIP
  * Look at possible summoning spells
  *
- * Make it so Silver/Blood Curse don't stop applying if you wait it out. So long as you hold them they should apply their effects.
+ * Make it so Silver/Blood Curse don't stop applying if you wait it out. So long as you hold them they should apply their effects. - DONE
  */
