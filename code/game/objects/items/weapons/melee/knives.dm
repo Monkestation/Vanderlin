@@ -373,6 +373,13 @@
 	desc = "Wealth with function."
 	icon_state = "matthiosknife"
 
+/obj/item/weapon/knife/dagger/steel/inhumen/zizo
+	name = "darksteel dagger"
+	desc = "A vile dagger made of darksteel."
+	icon_state = "zizodagger"
+	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_DARKSTEEL
+
 //................ Silver Dagger ............... //
 /obj/item/weapon/knife/dagger/silver
 	name = "silver dagger"
