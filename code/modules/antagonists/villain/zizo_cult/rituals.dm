@@ -322,15 +322,15 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	S.set_up(1, 1, center)
 	S.start()
 
-	new /obj/item/clothing/armor/plate/full/zizo(center)
+	new /obj/item/clothing/armor/plate/full/inhumen/zizo(center)
 
-	new /obj/item/clothing/pants/platelegs/zizo(center)
+	new /obj/item/clothing/pants/platelegs/inhumen/zizo(center)
 
-	new /obj/item/clothing/shoes/boots/armor/zizo(center)
+	new /obj/item/clothing/shoes/boots/armor/inhumen/zizo(center)
 
-	new /obj/item/clothing/head/helmet/heavy/zizo(center)
+	new /obj/item/clothing/head/helmet/heavy/inhumen/zizo(center)
 
-	new /obj/item/clothing/gloves/plate/zizo(center)
+	new /obj/item/clothing/gloves/plate/inhumen/zizo(center)
 
 	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 

@@ -192,50 +192,50 @@
 			cloak = /obj/item/clothing/cloak/stabard/templar/xylix
 			beltl = /obj/item/weapon/whip/xylix
 		if(/datum/patron/inhumen/graggar)
-			head = /obj/item/clothing/head/helmet/heavy/graggar
-			armor = /obj/item/clothing/armor/plate/full/graggar
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/graggar
+			armor = /obj/item/clothing/armor/plate/full/inhumen/graggar
 			neck = /obj/item/clothing/neck/gorget
-			gloves = /obj/item/clothing/gloves/plate/graggar
-			pants = /obj/item/clothing/pants/platelegs/graggar
-			shoes = /obj/item/clothing/shoes/boots/armor/graggar
+			gloves = /obj/item/clothing/gloves/plate/inhumen/graggar
+			pants = /obj/item/clothing/pants/platelegs/inhumen/graggar
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 			backr = /obj/item/weapon/greataxe/steel/doublehead/graggar
 		if(/datum/patron/inhumen/graggar_zizo)
-			head = /obj/item/clothing/head/helmet/heavy/graggar
-			armor = /obj/item/clothing/armor/plate/full/graggar
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/graggar
+			armor = /obj/item/clothing/armor/plate/full/inhumen/graggar
 			neck = /obj/item/clothing/neck/gorget
-			gloves = /obj/item/clothing/gloves/plate/graggar
-			pants = /obj/item/clothing/pants/platelegs/graggar
-			shoes = /obj/item/clothing/shoes/boots/armor/graggar
+			gloves = /obj/item/clothing/gloves/plate/inhumen/graggar
+			pants = /obj/item/clothing/pants/platelegs/inhumen/graggar
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 			backr = /obj/item/weapon/greataxe/steel/doublehead/graggar
 		if(/datum/patron/inhumen/zizo)
 			head = /obj/item/clothing/head/helmet/visored/zizo
-			armor = /obj/item/clothing/armor/plate/full/zizo
+			armor = /obj/item/clothing/armor/plate/full/inhumen/zizo
 			neck = /obj/item/clothing/neck/gorget
-			gloves = /obj/item/clothing/gloves/plate/zizo
-			pants = /obj/item/clothing/pants/platelegs/zizo
-			shoes = /obj/item/clothing/shoes/boots/armor/zizo
+			gloves = /obj/item/clothing/gloves/plate/inhumen/zizo
+			pants = /obj/item/clothing/pants/platelegs/inhumen/zizo
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/zizo
 			var/zizo_sword = pick(/obj/item/weapon/sword/long/zizo_longsword, /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser, /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword)
 			backr = zizo_sword
 		if(/datum/patron/inhumen/matthios)
-			head = /obj/item/clothing/head/helmet/heavy/matthios
-			armor = /obj/item/clothing/armor/plate/full/matthios
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/matthios
+			armor = /obj/item/clothing/armor/plate/full/inhumen/matthios
 			neck = /obj/item/clothing/neck/gorget
-			gloves = /obj/item/clothing/gloves/plate/matthios
-			pants = /obj/item/clothing/pants/platelegs/matthios
-			shoes = /obj/item/clothing/shoes/boots/armor/matthios
+			gloves = /obj/item/clothing/gloves/plate/inhumen/matthios
+			pants = /obj/item/clothing/pants/platelegs/inhumen/matthios
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/matthios
 			backr = /obj/item/weapon/flail/peasantwarflail/matthios
 		if(/datum/patron/inhumen/baotha)
-			head = /obj/item/clothing/head/helmet/heavy/baotha
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/baotha
 			mask = /obj/item/clothing/face/spectacles/sglasses
 			neck = /obj/item/clothing/neck/gorget
 			armor = /obj/item/clothing/armor/plate
 			gloves = /obj/item/clothing/gloves/plate
 			pants = /obj/item/clothing/pants/platelegs
 			shoes = /obj/item/clothing/shoes/boots/armor
-			beltr = /obj/item/weapon/knife/dagger/steel/baotha
-			beltl = /obj/item/weapon/knife/dagger/steel/baotha
+			beltr = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
+			beltl = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
 			wrists = /obj/item/clothing/neck/psycross/gold
 			armor = /obj/item/clothing/armor/cuirass/fluted

@@ -980,45 +980,45 @@
 /datum/anvil_recipe/armor/steel/matthios_plate_pants
 	name = "Matthiosan Plate Chausses"
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/pants/platelegs/matthios
+	created_item = /obj/item/clothing/pants/platelegs/inhumen/matthios
 	craftdiff = 6
 
 /datum/anvil_recipe/armor/steel/graggarite_plate_pants
 	name = "Graggarite Plate Chausses"
 	additional_items = list(/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/pants/platelegs/graggar
+	created_item = /obj/item/clothing/pants/platelegs/inhumen/graggar
 	craftdiff = 6
 
 /datum/anvil_recipe/armor/steel/matthios_plate
 	name = "Matthiosan Plate Armor"
 	additional_items = list(/obj/item/ingot/steel,/obj/item/ingot/steel,/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/armor/plate/full/matthios
+	created_item = /obj/item/clothing/armor/plate/full/inhumen/matthios
 	craftdiff = 6
 
 /datum/anvil_recipe/armor/steel/graggar_plate
 	name = "Graggarite Plate Armor"
 	additional_items = list(/obj/item/ingot/steel,/obj/item/ingot/steel,/obj/item/ingot/steel)
-	created_item = /obj/item/clothing/armor/plate/full/graggar
+	created_item = /obj/item/clothing/armor/plate/full/inhumen/graggar
 	craftdiff = 6
 
 /datum/anvil_recipe/armor/steel/matthios_plate_gauntlets
 	name = "Matthiosan Plate Gauntlets"
-	created_item = /obj/item/clothing/gloves/plate/matthios
+	created_item = /obj/item/clothing/gloves/plate/inhumen/matthios
 	craftdiff = 6
 
 /datum/anvil_recipe/armor/steel/graggar_plate_gauntlets
 	name = "Graggarite Plate Gauntlets"
-	created_item = /obj/item/clothing/gloves/plate/graggar
+	created_item = /obj/item/clothing/gloves/plate/inhumen/graggar
 	craftdiff = 6
 
 /datum/anvil_recipe/armor/steel/matthios_plate_boots
 	name = "Matthiosan Plate Boots"
-	created_item = /obj/item/clothing/shoes/boots/armor/matthios
+	created_item = /obj/item/clothing/shoes/boots/armor/inhumen/matthios
 	craftdiff = 6
 
 /datum/anvil_recipe/armor/steel/graggar_plate_boots
 	name = "Graggarite Plate Boots"
-	created_item = /obj/item/clothing/shoes/boots/armor/graggar
+	created_item = /obj/item/clothing/shoes/boots/armor/inhumen/graggar
 	craftdiff = 6
 
 */
@@ -1104,7 +1104,7 @@
 /datum/anvil_recipe/armor/blacksteel/zizo_plate_chest
 	name = "Darksteel Plate Armor"
 	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/armor/plate/full/zizo
+	created_item = /obj/item/clothing/armor/plate/full/inhumen/zizo
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/elven_plate_chest
@@ -1130,7 +1130,7 @@
 /datum/anvil_recipe/armor/blacksteel/zizo_plate_pants
 	name = "Darksteel Plate Chausses"
 	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/pants/platelegs/zizo
+	created_item = /obj/item/clothing/pants/platelegs/inhumen/zizo
 	craftdiff = 5
 */
 
@@ -1148,7 +1148,7 @@
 /*
 /datum/anvil_recipe/armor/blacksteel/zizo_plate_gloves
 	name = "Darksteel Plate Gauntlets"
-	created_item = /obj/item/clothing/gloves/plate/zizo
+	created_item = /obj/item/clothing/gloves/plate/inhumen/zizo
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/elven_plate_gloves
@@ -1180,7 +1180,7 @@
 
 /datum/anvil_recipe/armor/blacksteel/zizo_plate_boots
 	name = "Darksteel Plate Boots"
-	created_item = /obj/item/clothing/shoes/boots/armor/zizo
+	created_item = /obj/item/clothing/shoes/boots/armor/inhumen/zizo
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/zizo_helm_visor
@@ -1192,19 +1192,19 @@
 /datum/anvil_recipe/armor/blacksteel/zizo_helm
 	name = "Darksteel Frog Helm"
 	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/helmet/heavy/zizo
+	created_item = /obj/item/clothing/head/helmet/heavy/inhumen/zizo
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/matthios_helm
 	name = "Gilded Visage"
 	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/helmet/heavy/matthios
+	created_item = /obj/item/clothing/head/helmet/heavy/inhumen/matthios
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/graggar_helm
 	name = "Vicious Helmet"
 	additional_items = list(/obj/item/ingot/blacksteel)
-	created_item = /obj/item/clothing/head/helmet/heavy/graggar
+	created_item = /obj/item/clothing/head/helmet/heavy/inhumen/graggar
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/elven_helm

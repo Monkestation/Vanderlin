@@ -86,26 +86,26 @@
 	. = ..()
 	switch(H.patron?.type)
 		if(/datum/patron/inhumen/graggar)
-			head = /obj/item/clothing/head/helmet/heavy/graggar
-			armor = /obj/item/clothing/armor/plate/full/graggar
-			gloves = /obj/item/clothing/gloves/plate/graggar
-			pants = /obj/item/clothing/pants/platelegs/graggar
-			shoes = /obj/item/clothing/shoes/boots/armor/graggar
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/graggar
+			armor = /obj/item/clothing/armor/plate/full/inhumen/graggar
+			gloves = /obj/item/clothing/gloves/plate/inhumen/graggar
+			pants = /obj/item/clothing/pants/platelegs/inhumen/graggar
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 		if(/datum/patron/inhumen/zizo)
 			head = /obj/item/clothing/head/helmet/visored/zizo
-			armor = /obj/item/clothing/armor/plate/full/zizo
-			gloves = /obj/item/clothing/gloves/plate/zizo
-			pants = /obj/item/clothing/pants/platelegs/zizo
-			shoes = /obj/item/clothing/shoes/boots/armor/zizo
+			armor = /obj/item/clothing/armor/plate/full/inhumen/zizo
+			gloves = /obj/item/clothing/gloves/plate/inhumen/zizo
+			pants = /obj/item/clothing/pants/platelegs/inhumen/zizo
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/zizo
 		if(/datum/patron/inhumen/matthios)
-			head = /obj/item/clothing/head/helmet/heavy/matthios
-			armor = /obj/item/clothing/armor/plate/full/matthios
-			gloves = /obj/item/clothing/gloves/plate/matthios
-			pants = /obj/item/clothing/pants/platelegs/matthios
-			shoes = /obj/item/clothing/shoes/boots/armor/matthios
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/matthios
+			armor = /obj/item/clothing/armor/plate/full/inhumen/matthios
+			gloves = /obj/item/clothing/gloves/plate/inhumen/matthios
+			pants = /obj/item/clothing/pants/platelegs/inhumen/matthios
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/matthios
 		if(/datum/patron/inhumen/baotha)
-			head = /obj/item/clothing/head/helmet/heavy/baotha
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/baotha
 			mask = /obj/item/clothing/face/spectacles/sglasses
 			armor = /obj/item/clothing/armor/plate
 			gloves = /obj/item/clothing/gloves/plate
