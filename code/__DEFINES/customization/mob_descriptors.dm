@@ -42,10 +42,10 @@ GLOBAL_LIST_INIT(mob_descriptors, build_descriptor_types())
 
 /proc/build_descriptor_types()
 	. = list()
-	for(var/datum/mob_descriptor/type as anything in typesof(/datum/mob_descriptor))
-		if(IS_ABSTRACT(type))
+	for(var/datum/mob_descriptor/descriptor_type as anything in typesof(/datum/mob_descriptor))
+		if(IS_ABSTRACT(descriptor_type))
 			continue
-		.[type] = new type()
+		.[descriptor_type] = new descriptor_type()
 	return .
 
 #define DESCRIPTOR_CHOICE(choice_type) GLOB.descriptor_choices[choice_type]
@@ -53,8 +53,8 @@ GLOBAL_LIST_INIT(descriptor_choices, build_descriptor_choices())
 
 /proc/build_descriptor_choices()
 	. = list()
-	for(var/datum/descriptor_choice/type as anything in typesof(/datum/descriptor_choice))
-		if(IS_ABSTRACT(type))
+	for(var/datum/descriptor_choice/choice_type as anything in typesof(/datum/descriptor_choice))
+		if(IS_ABSTRACT(choice_type))
 			continue
-		.[type] = new type()
+		.[choice_type] = new choice_type()
 	return .

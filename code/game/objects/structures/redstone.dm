@@ -183,6 +183,11 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	hidden_dc = 16
 	accessor_trait = TRAIT_KNOW_ROUS_DOORS
 
+/obj/structure/lever/hidden/dreamcave
+	hidden_dc = 18
+	accessor_trait = TRAIT_LUNAR_ORDER
+
+
 /obj/structure/repeater
 	name = "repeater"
 	desc = "Repeats a signal a set amount of times into an adjacently linked machine when activated by a signal. Looks suspiciously like a barrel."

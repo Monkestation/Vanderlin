@@ -78,7 +78,6 @@
 			if(mercring)
 				qdel(mercring)
 		return
-
 	if(ishuman(user) && user.mind && istype(user.mind.assigned_role, /datum/job/advclass/mercenary))
 		if(tgui_alert(user, "Do you want to register as an available mercenary for the mercenary statue?", "MERCENARY", DEFAULT_INPUT_CHOICES, 20 SECONDS) == CHOICE_YES)
 			GLOB.available_mercenaries += user
@@ -164,8 +163,8 @@
 
 /obj/structure/mercstatue/examine(mob/user)
 	. = ..()
-	. = span_notice("Alt-click to toggle mercenary announcement")
-	if(GLOB.available_mercenaries)
+	. += span_notice("Alt-click to toggle mercenary announcement")
+	if(length(GLOB.available_mercenaries))
 		. += span_notice("These mercenaries are currently available:")
 		for(var/mob/living/carbon/human/merc in GLOB.available_mercenaries)
 			if(merc.job)
@@ -178,8 +177,22 @@
 					. += "[merc.real_name]: [merc.mercdesc]"
 				else
 					. += "[merc.real_name]"
-		return
-	else
+
+	if(length(GLOB.contracted_mercenaries))
+		. += span_notice("These mercenaries are currently contracted and may be available later:")
+		for(var/mob/living/carbon/human/merc in GLOB.contracted_mercenaries)
+			if(merc.job)
+				if(istext(merc.mercdesc) && length(merc.mercdesc))
+					. += "[merc.real_name], [merc.job]: [merc.mercdesc]"
+				else
+					. += "[merc.real_name], [merc.job]"
+			else
+				if(istext(merc.mercdesc) && length(merc.mercdesc))
+					. += "[merc.real_name]: [merc.mercdesc]"
+				else
+					. += "[merc.real_name]"
+
+	if(!length(GLOB.contracted_mercenaries) && !length(GLOB.available_mercenaries))
 		. += span_notice("No mercenaries are currently available.")
 
 
