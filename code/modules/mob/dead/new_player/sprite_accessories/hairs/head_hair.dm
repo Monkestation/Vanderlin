@@ -135,7 +135,7 @@
 	name = "Boss"
 	icon_state = "boss" // original name bodicker
 	gender = MALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 	under_layer = TRUE
 
 /datum/sprite_accessory/hair/head/bowlcut
@@ -292,7 +292,7 @@
 	name = "Miner"
 	icon_state = "miner"
 	gender = MALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/head/nobility_human
 	name = "Nobility"
@@ -540,13 +540,13 @@
 	name = "Gnomish"
 	icon_state = "gnomish_f" // original name bun_grandma
 	gender = FEMALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/head/hearth_f
 	name = "Hearth"
 	icon_state = "hearth_f" // original name ponytail_fox
 	gender = FEMALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/head/homely
 	name = "Homely"
@@ -582,7 +582,7 @@
 	name = "Majestiq"
 	icon_state = "majestic_dwarf"
 	gender = FEMALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/head/majestic_f
 	name = "Majestic"

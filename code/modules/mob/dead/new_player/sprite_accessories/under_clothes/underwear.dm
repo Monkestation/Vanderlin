@@ -18,7 +18,7 @@
 	name = "Undiesd"
 	icon_state = "male_dwarf"
 	gender = MALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/underwear/male_half
 	name = "Undies Half"
