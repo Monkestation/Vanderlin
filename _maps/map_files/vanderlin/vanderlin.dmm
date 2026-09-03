@@ -6094,7 +6094,9 @@
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/noble_manor/red)
 "cEX" = (
-/obj/structure/stairs/fancy/r,
+/obj/structure/stairs/stone{
+	dir = 1
+	},
 /turf/open/floor/carpet/lord/right,
 /area/under/town/basement)
 "cEZ" = (
@@ -9619,7 +9621,9 @@
 	dir = 10;
 	pixel_y = 24
 	},
-/obj/structure/stairs/fancy/l,
+/obj/structure/stairs/stone{
+	dir = 1
+	},
 /turf/open/floor/carpet/lord/left,
 /area/indoors/town/tavern)
 "ecY" = (
@@ -46418,7 +46422,9 @@
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "sRi" = (
-/obj/structure/stairs/fancy/r,
+/obj/structure/stairs/stone{
+	dir = 1
+	},
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/tavern)
 "sRw" = (
@@ -59383,7 +59389,9 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large/apothecary)
 "xZw" = (
-/obj/structure/stairs/fancy/l,
+/obj/structure/stairs/stone{
+	dir = 1
+	},
 /turf/open/floor/carpet/lord/left,
 /area/under/town/basement)
 "xZy" = (
