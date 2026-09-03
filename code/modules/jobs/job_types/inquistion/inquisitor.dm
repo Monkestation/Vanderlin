@@ -87,7 +87,7 @@
 
 /mob/living/carbon/human/proc/torture_victim()
 	set name = "Extract Confession"
-	set category = "RoleUnique.Inquisition"
+	set category = "RoleUnique.Shared"
 
 	var/obj/item/grabbing/I = get_active_held_item()
 	var/mob/living/carbon/human/H
@@ -138,6 +138,8 @@
 		say(pick(torture_lines), spans = list("torture"))
 		H.emote("painscream")
 		H.confession_time("antag", src)
+		if(has_quirk(/datum/quirk/vice/addiction/sadist))
+			sate_addiction(/datum/quirk/vice/addiction/sadist)
 
 /mob/living/carbon/human/proc/faith_test()
 	set name = "Test Faith"

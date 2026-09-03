@@ -1,53 +1,46 @@
 /datum/quality_calculator/brewing
 	name = "Brewing Quality"
-
 	quality_descriptors = alist(
-		-1 = list(
+		COOK_QUALITY_TERRIBLE = list(
 			"brew_prefix" = list("spoiled", "rancid", "failed", "putrid", "foul"),
 			"description" = list(
 				"This brew has gone terribly wrong.",
 				"The smell alone is enough to make you gag.",
 				"This is barely recognizable as alcohol.",
 				"Something went horribly wrong in the brewing process.",
-				"This might actually be poisonous."
-			),
-			"price_modifier" = 0.2
-		),
-		0 = list(
-			"brew_prefix" = "",
-			"description" = "",
-			"price_modifier" = 0.8
-		),
-		1 = list(
-			"brew_prefix" = list("weak", "watery", "poor", "substandard"),
-			"description" = list(
-				"This brew appears poorly made with an unpleasant aroma.",
-				"The color is off and it smells strange.",
-				"This tastes like it was made by someone who doesn't know what they're doing."
 			),
 			"price_modifier" = 0.6
 		),
-		2 = list(
-			"brew_prefix" = "",
+		COOK_QUALITY_POOR = list(
+			"brew_prefix" = list("cheap", "low-quality"),
+			"description" = "Tastes like piss.",
+			"price_modifier" = 0.8
+		),
+		COOK_QUALITY_NORMAL = list(
 			"description" = "This appears to be a standard quality brew.",
 			"price_modifier" = 1.0
 		),
-		3 = list(
-			"brew_prefix" = list("fine", "quality", "well-crafted", "premium"),
+		COOK_QUALITY_NICE = list(
+			"brew_prefix" = "fine",
+			"description" = list(
+				"This shows the skill of an experienced brewer."
+			),
+			"price_modifier" = 1.2
+		),
+		COOK_QUALITY_GOOD = list(
+			"brew_prefix" = list("quality", "well-crafted", "premium"),
 			"description" = list(
 				"This brew has an excellent aroma and rich color.",
 				"The craftsmanship is evident in every sip.",
-				"This shows the skill of an experienced brewer."
 			),
 			"price_modifier" = 1.4
 		),
-		4 = list(
+		COOK_QUALITY_VERYGOOD = list(
 			"brew_prefix" = list("masterful", "exquisite", "artisan", "legendary", "perfect"),
 			"description" = list(
 				"This is a masterfully crafted brew with perfect clarity and an intoxicating bouquet.",
 				"This represents the pinnacle of brewing artistry.",
-				"This brew is so perfect it belongs in a museum.",
-				"The gods themselves would be jealous of this brew."
+				"This brew is so perfect it belongs in a vault.",
 			),
 			"price_modifier" = 2.0
 		)
@@ -95,7 +88,7 @@
 	var/brew_prefix = quality_data["brew_prefix"]
 	if(islist(brew_prefix))
 		brew_prefix = pick(brew_prefix)
-	if(brew_prefix && brew_prefix != "")
+	if(brew_prefix)
 		// Insert the prefix before "bottle of"
 		var/bottle_pos = findtext(bottle.name, " bottle of ")
 		if(bottle_pos)
@@ -106,4 +99,4 @@
 /datum/quality_calculator/brewing/track_item_creation(obj/item/target, final_quality)
 	// Track masterworks if enabled (quality 4)
 	if(final_quality >= COOK_QUALITY_VERYGOOD)
-		record_round_statistic(STATS_MASTERWORKS_FORGED, 1) // TODO! Make this an actual unique brewing type
+		record_round_statistic(STATS_MASTERWORKS_PRODUCED, 1) // TODO! Make this an actual unique brewing type

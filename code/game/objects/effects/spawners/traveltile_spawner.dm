@@ -188,3 +188,16 @@
 	can_gain_with_sight = FALSE
 	can_gain_by_walking = FALSE
 	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/exit_oracle_cave
+	name = "To the Town"
+	aportalid = "oracle_city"
+	aportalgoesto = "city_oracle"
+
+/obj/structure/fluff/traveltile/oracle_cave
+	name = "To the Dream Cave"
+	aportalid = "city_oracle"
+	aportalgoesto = "oracle_city"
+	required_trait = TRAIT_DREAM_CAVE
+	can_gain_with_sight = TRUE
+	check_other_side = TRUE

@@ -1,0 +1,5 @@
+author: "Ordosian"
+delete-after: True
+changes:
+  - rscdel: "Removed OLD Icons from base SS13 and unused Icon files."
+  - code_imp: "Adjusted file paths"

@@ -8,7 +8,7 @@
 	But someday you'll have to grow up, and that will be the day your carelessness will cost you more than a few mammons."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_PRINCE
@@ -55,7 +55,7 @@
 	allowed_races = RACES_PLAYER_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE)
 	exp_types_granted = list(EXP_TYPE_NOBLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 
 /datum/attribute_holder/sheet/job/heir/daring
 	raw_attribute_list = list(

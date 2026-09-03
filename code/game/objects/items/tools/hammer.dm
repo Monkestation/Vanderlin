@@ -54,7 +54,7 @@
 			to_chat(user, span_warning("There is nothing to further repair on [attacked_prosthetic]."))
 			return ITEM_INTERACT_BLOCKING
 
-		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_prosthetic.anvilrepair) <= 0)
+		if(GET_MOB_SKILL_VALUE_OLD(user, attacked_prosthetic.anvilrepair) <= SKILL_LEVEL_NOVICE)
 			if(prob(30))
 				repair_percent = 0.01
 			else
@@ -65,7 +65,7 @@
 		playsound(src,'sound/items/bsmith3.ogg', 100, FALSE)
 
 		if(repair_percent)
-			var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
+			var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 0.5
 			attacked_prosthetic.repair_damage(attacked_prosthetic.max_integrity * repair_percent)
 			attacked_prosthetic.brute_dam = max(attacked_prosthetic.brute_dam - 10, 0)
 			attacked_prosthetic.burn_dam = max(attacked_prosthetic.burn_dam - 10, 0)
@@ -133,7 +133,7 @@
 		else if(repair_percent)
 			user.visible_message(span_info("[user] repairs [attacked_item]!"))
 
-		var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
+		var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 0.5
 		if(!repair_percent)
 			amt2raise *= 0.25
 		blacksmith_mind.add_sleep_experience(attacked_item.anvilrepair, amt2raise)
@@ -150,7 +150,7 @@
 			to_chat(user, span_warning("I don't know how to repair this.."))
 			return ITEM_INTERACT_BLOCKING
 
-		var/amt2raise = floor(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.25)
+		var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 0.5
 		repair_percent *= GET_MOB_SKILL_VALUE_OLD(user, attacked_structure.hammer_repair)
 
 		attacked_structure.repair_damage(attacked_structure.max_integrity * repair_percent)
