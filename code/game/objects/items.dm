@@ -690,6 +690,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/mob/living/carbon/C = user
 		if(!C.can_touch_burning(src))
 			to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
+			return FALSE
 
 	if(resistance_flags & ON_FIRE)
 		var/can_handle_hot = FALSE

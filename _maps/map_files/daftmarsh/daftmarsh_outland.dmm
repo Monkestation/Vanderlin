@@ -3648,7 +3648,7 @@
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "MX" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/twig,
 /area/indoors)
 "MZ" = (
@@ -4838,7 +4838,7 @@
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/lower)
 "Zy" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/woodturned/nosmooth,
 /area/indoors)
 "Zz" = (

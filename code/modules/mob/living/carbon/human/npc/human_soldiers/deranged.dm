@@ -162,12 +162,12 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 /datum/outfit/job/quest_miniboss/matthios/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 
-	armor = /obj/item/clothing/armor/plate/full/matthios
-	pants = /obj/item/clothing/pants/platelegs/matthios
-	shoes = /obj/item/clothing/shoes/boots/armor/matthios
+	armor = /obj/item/clothing/armor/plate/full/inhumen/matthios
+	pants = /obj/item/clothing/pants/platelegs/inhumen/matthios
+	shoes = /obj/item/clothing/shoes/boots/armor/inhumen/matthios
 	wrists = /obj/item/clothing/wrists/bracers
-	gloves = /obj/item/clothing/gloves/plate/matthios
-	head = /obj/item/clothing/head/helmet/heavy/matthios
+	gloves = /obj/item/clothing/gloves/plate/inhumen/matthios
+	head = /obj/item/clothing/head/helmet/heavy/inhumen/matthios
 	neck = /obj/item/clothing/neck/gorget
 	r_hand = /obj/item/weapon/flail/peasantwarflail/matthios
 	mask = /obj/item/clothing/face/facemask/steel
@@ -175,12 +175,12 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 /datum/outfit/job/quest_miniboss/zizo/pre_equip(mob/living/carbon/human/H)
 	. = ..()
 
-	armor = /obj/item/clothing/armor/plate/full/zizo
-	pants = /obj/item/clothing/pants/platelegs/zizo
-	shoes = /obj/item/clothing/shoes/boots/armor/zizo
+	armor = /obj/item/clothing/armor/plate/full/inhumen/zizo
+	pants = /obj/item/clothing/pants/platelegs/inhumen/zizo
+	shoes = /obj/item/clothing/shoes/boots/armor/inhumen/zizo
 	wrists = /obj/item/clothing/wrists/bracers
-	gloves = /obj/item/clothing/gloves/plate/zizo
-	head = /obj/item/clothing/head/helmet/heavy/zizo
+	gloves = /obj/item/clothing/gloves/plate/inhumen/zizo
+	head = /obj/item/clothing/head/helmet/heavy/inhumen/zizo
 	neck = /obj/item/clothing/neck/gorget
 	r_hand = /obj/item/weapon/sword/long
 	mask = /obj/item/clothing/face/facemask/steel
@@ -189,11 +189,11 @@ GLOBAL_LIST_INIT(hedgeknight_aggro, file2list("strings/rt/hedgeknightaggrolines.
 	. = ..()
 
 	armor = /obj/item/clothing/armor/plate/fluted/ornate
-	pants = /obj/item/clothing/pants/platelegs/graggar
-	shoes = /obj/item/clothing/shoes/boots/armor/graggar
-	gloves = /obj/item/clothing/gloves/plate/graggar
+	pants = /obj/item/clothing/pants/platelegs/inhumen/graggar
+	shoes = /obj/item/clothing/shoes/boots/armor/inhumen/graggar
+	gloves = /obj/item/clothing/gloves/plate/inhumen/graggar
 	wrists = /obj/item/clothing/wrists/bracers
-	head = /obj/item/clothing/head/helmet/heavy/graggar
+	head = /obj/item/clothing/head/helmet/heavy/inhumen/graggar
 	neck = /obj/item/clothing/neck/gorget
 	r_hand = /obj/item/weapon/greataxe/steel/doublehead/graggar
 	mask = /obj/item/clothing/face/facemask/steel

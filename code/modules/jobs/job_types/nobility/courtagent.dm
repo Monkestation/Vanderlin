@@ -7,7 +7,7 @@
 	Garrison and Court members know who you are."
 	department_flag = NOBLEMEN
 	job_flags = (JOB_EQUIP_RANK | JOB_SHOW_IN_CREDITS | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 3
 	spawn_positions = 3
 	bypass_lastclass = TRUE
@@ -60,7 +60,7 @@
 
 /datum/job/advclass/courtagent
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_COMBAT)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 
 /datum/job/advclass/courtagent/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -277,7 +277,7 @@
 	beltl = /obj/item/storage/magebag/poor
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
-		/obj/item/reagent_containers/glass/bottle/manapot = 1,
+		/obj/item/reagent_containers/glass/bottle/manapot/labelled = 1,
 		/obj/item/chalk = 1,
 		/obj/item/speaker/agent = 1,
 		/obj/item/listeningdevice/agent = 2

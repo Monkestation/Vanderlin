@@ -16,7 +16,8 @@
 	/datum/curse/necra,\
 	/datum/curse/xylix,\
 	/datum/curse/pestra,\
-	/datum/curse/eora\
+	/datum/curse/eora,\
+	/datum/curse/malum\
 )
 
 #define INHUMEN_CURSES list(\
@@ -135,6 +136,10 @@ GLOBAL_LIST_EMPTY(job_respawn_delays)
 #define CTAG_INQUISITION "CAT_INQUISITION" // For Orthodoxist subclasses
 #define CTAG_PURITAN "CAT_PURITAN"
 #define CTAG_ORPHAN "CAT_ORPHAN" // For Orphan subclasses
+
+// Special use for Vampire Spawn, applied alongside normal tags for adventurer/pilgrim classes that can also be vampires
+#define CTAG_VAMP_ADVENTURE "CTAG_VAMP_ADVENTURE"
+#define CTAG_VAMP_PILGRIM "CTAG_VAMP_PILGRIM"
 
 /*--------------------\
 | ARMOR BASIC CONCEPT |

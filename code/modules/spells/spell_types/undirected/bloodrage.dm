@@ -5,8 +5,8 @@
 	sound = 'sound/magic/bloodrage.ogg'
 
 	has_visual_effects = FALSE
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "I AM GRAGGAR'S RAGE MADE MANIFEST!!"
 	invocation_type = INVOCATION_SHOUT

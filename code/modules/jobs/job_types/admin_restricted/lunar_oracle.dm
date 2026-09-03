@@ -82,6 +82,7 @@
 
 	traits = list(
 		TRAIT_DREAM_WATCHER,
+		TRAIT_DREAM_CAVE,
 		TRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
 		TRAIT_LUNAR_ORDER,
@@ -171,4 +172,4 @@
 	name = "dream key"
 	desc = "A mysterious key to an even more mysterious place..."
 	icon_state = "ekey"
-	lockids = list("Dreamcave")
+	lockids = list(ACCESS_DREAM_CAVE)

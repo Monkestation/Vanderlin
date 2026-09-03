@@ -24,7 +24,7 @@
 	allowed_races = list(SPEC_ID_DWARF)
 	outfit = /datum/outfit/longbeard
 	total_positions = 1
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	roll_chance = 6
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 

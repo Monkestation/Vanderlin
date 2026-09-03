@@ -9,27 +9,59 @@
 	list_reagents = list(/datum/reagent/medicine/healthpot = 75)
 	flags_ai_inventory = AI_ITEM_HEALING_DRINK | AI_ITEM_DRINK
 
+/obj/item/reagent_containers/glass/bottle/healthpot/labelled
+	auto_label_name = "lifeblood"
+	auto_label_desc = "Gradually regenerates all types of damage."
+
 /obj/item/reagent_containers/glass/bottle/stronghealthpot
 	list_reagents = list(/datum/reagent/medicine/stronghealth = 75)
 	flags_ai_inventory = AI_ITEM_HEALING_DRINK | AI_ITEM_DRINK
 
+/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled
+	auto_label_name = "strong lifeblood"
+	auto_label_desc = "Quickly regenerates all types of damage."
+
 /obj/item/reagent_containers/glass/bottle/manapot
 	list_reagents = list(/datum/reagent/medicine/manapot = 75)
+
+/obj/item/reagent_containers/glass/bottle/manapot/labelled
+	auto_label_name = "mana potion"
+	auto_label_desc = "Gradually regenerates mana."
 
 /obj/item/reagent_containers/glass/bottle/strongmanapot
 	list_reagents = list(/datum/reagent/medicine/strongmana = 75)
 
+/obj/item/reagent_containers/glass/bottle/strongmanapot/labelled
+	auto_label_name = "strong mana potion"
+	auto_label_desc = "Rapidly regenerates mana."
+
 /obj/item/reagent_containers/glass/bottle/stampot
 	list_reagents = list(/datum/reagent/medicine/stampot = 75)
+
+/obj/item/reagent_containers/glass/bottle/stampot/labelled
+	auto_label_name = "stamina potion"
+	auto_label_desc = "Gradually regenerates stamina."
 
 /obj/item/reagent_containers/glass/bottle/strongstampot
 	list_reagents = list(/datum/reagent/medicine/strongstam = 75)
 
+/obj/item/reagent_containers/glass/bottle/strongstampot/labelled
+	auto_label_name = "strong stamina potion"
+	auto_label_desc = "Rapidly regenerates stamina."
+
 /obj/item/reagent_containers/glass/bottle/bloodpot
 	list_reagents = list(/datum/reagent/medicine/bloodpot = 75)
 
+/obj/item/reagent_containers/glass/bottle/bloodpot/labelled
+	auto_label_name = "blood potion"
+	auto_label_desc = "Gradually regenerates vitae."
+
 /obj/item/reagent_containers/glass/bottle/strongbloodpot
 	list_reagents = list(/datum/reagent/medicine/strongbloodpot = 75)
+
+/obj/item/reagent_containers/glass/bottle/strongbloodpot/labelled
+	auto_label_name = "strong blood potion"
+	auto_label_desc = "Regenerates vitae."
 
 /obj/item/reagent_containers/glass/bottle/poison
 	list_reagents = list(/datum/reagent/poison/berry = 15)

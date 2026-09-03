@@ -6,7 +6,7 @@
 	charge_sound = 'sound/magic/holycharging.ogg'
 
 	cast_range = 1
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver)
@@ -36,11 +36,12 @@
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
 
-	for(var/obj/item/bodypart/bodypart as anything in cast_on.bodyparts)
-		if(bodypart.skeletonized)
-			to_chat(owner, span_warning("They are too far gone."))
-			reset_spell_cooldown()
-			return . | SPELL_CANCEL_CAST
+	var/obj/item/bodypart/chest = cast_on.get_bodypart(BODY_ZONE_CHEST)
+	var/obj/item/bodypart/head = cast_on.get_bodypart(BODY_ZONE_HEAD)
+	if(chest.skeletonized || head.skeletonized)
+		to_chat(owner, span_warning("They are too far gone."))
+		reset_spell_cooldown()
+		return . | SPELL_CANCEL_CAST
 
 /datum/action/cooldown/spell/cure_rot/cast(mob/living/carbon/human/cast_on)
 	. = ..()

@@ -12,8 +12,8 @@
 	current_blood = 5
 	blood_req = 0.5
 	oxygen_req = 0.5
-	nutriment_req = 0.15 * RATE_OF_HUNGER_GLOBAL
-	hydration_req = 0.3 * RATE_OF_THIRST_GLOBAL
+	nutriment_req = 0.15
+	hydration_req = 0.3
 
 	var/list/languages_possible
 	var/say_mod = null

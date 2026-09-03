@@ -28,7 +28,7 @@
 	tutorial = "A wandering thief, capable of breaking in and out of just about any secure location, and born to meet the sharp end of the guillotine. Just remember, murder is the mark of an amateur."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/adventurer/rogue
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatRogue.ogg'
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_THIEF)
 

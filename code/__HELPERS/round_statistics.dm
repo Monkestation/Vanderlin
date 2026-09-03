@@ -124,7 +124,7 @@
 #define STATS_CRUEL_PRANKS "cruel_pranks"
 
 // Malum
-#define STATS_MASTERWORKS_FORGED "masterworks_forged"
+#define STATS_MASTERWORKS_PRODUCED "masterworks_forged"
 #define STATS_ROCKS_MINED "ores_mined"
 #define STATS_CRAFT_SKILLS "craft_skills"
 #define STATS_BEARDS_SHAVED "beards_shaved"
@@ -197,7 +197,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_PRAYERS_MADE = 0,
 	STATS_FISH_CAUGHT = 0,
 	STATS_ITEMS_PICKPOCKETED = 0,
-	STATS_MASTERWORKS_FORGED = 0,
+	STATS_MASTERWORKS_PRODUCED = 0,
 	STATS_TAXES_COLLECTED = 0,
 	STATS_ORGANS_EATEN = 0,
 	STATS_KISSES_MADE = 0,

@@ -23,7 +23,7 @@
 	tutorial = "Wandering tinkerers from the Blackpowder clan that specialize in the production of explosives."
 	allowed_races = list(SPEC_ID_DWARF)
 	outfit = /datum/outfit/adventurer/dbomb
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/dbomb
 

@@ -35,6 +35,7 @@
 		/turf/closed/sea_fog,
 		/turf/template_noop,
 		/turf/closed/wall/mineral/underbrick/fake_world,
+		/turf/closed/wall/mineral/underbrick/moonstone,
 		/turf/closed/wall/mineral,
 		/turf/closed/wall/mineral/stonebrick/reddish,
 		/turf/closed/wall/mineral/decostone/cand/reddish,

@@ -284,56 +284,53 @@
 	enchant(/datum/enchantment/silver)
 
 //............... Evil Boots ............... //
+/obj/item/clothing/shoes/boots/armor/inhumen
+	name = "BASE INHUMEN BOOTS"
+	abstract_type = /obj/item/clothing/shoes/boots/armor/inhumen
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizoboots"
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 
-/obj/item/clothing/shoes/boots/armor/zizo
+/obj/item/clothing/shoes/boots/armor/inhumen/Initialize()
+	. = ..()
+	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
+
+/obj/item/clothing/shoes/boots/armor/inhumen/zizo
 	name = "darksteel boots"
 	desc = "Plate boots. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizoboots"
 	item_state = "zizoboots"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	smeltresult = /obj/item/ingot/avantyne
-	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
-/obj/item/clothing/shoes/boots/armor/zizo/Initialize()
-	. = ..()
-	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
-
-/obj/item/clothing/shoes/boots/armor/matthios
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios
 	name = "gilded boots"
 	desc = "Plate boots. A door kicked in, treasures to behold inside."
 	icon_state = "matthiosboots"
 	item_state = "matthiosboots"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
-
-/obj/item/clothing/shoes/boots/armor/matthios/Initialize()
-	. = ..()
-	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
 
 // variant with no armor, just drip.
-/obj/item/clothing/shoes/boots/armor/matthios/lord
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios/lord
 	name = "lordly boots"
 	desc = "Boots terribly befitting of that of a tyrannical lord. Has a fake metal veneer to strike fear into the hearts of peasants."
 	armor_type = /datum/armor/none
 
-/obj/item/clothing/shoes/boots/armor/graggar
+/obj/item/clothing/shoes/boots/armor/inhumen/graggar
 	name = "vicious boots"
 	desc = "A menacing pair of plate boots, caked in blood and brain matter. Known for crushing skulls."
 	icon_state = "graggarplateboots"
 	item_state = "graggarplateboots"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
 
-/obj/item/clothing/shoes/boots/armor/graggar/Initialize()
-	. = ..()
-	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
+/obj/item/clothing/shoes/boots/armor/inhumen/baotha
+	name = "saccharine boots"
+	desc = "A tantalizing pair of plate boots, you almost feel like you can't take them off..."
+	icon_state = "baothaboots"
+	item_state = "baothaboots"
+	smeltresult = /obj/item/ingot/component/baotha
+
 
 //.............. Gronn Boots .................//
 
