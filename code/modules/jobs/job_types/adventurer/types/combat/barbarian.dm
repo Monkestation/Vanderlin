@@ -31,7 +31,7 @@
 		SPEC_ID_TIEFLING,\
 	)
 	outfit = /datum/outfit/adventurer/barbarian
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/barbarian

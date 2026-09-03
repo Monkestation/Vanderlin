@@ -5879,8 +5879,7 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
 "cLV" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady";
+/obj/structure/fluff/statue/necra{
 	pixel_x = 15;
 	pixel_y = 9
 	},

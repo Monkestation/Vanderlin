@@ -23,7 +23,7 @@
 	you in the back, and wait for an opportune moment to stab them in theirs. Make a fine practice far away from the eyes of \
 	your competition, lest you find yourself dead and floating downstream."
 	outfit = /datum/outfit/chirurgeon
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	attribute_sheet = /datum/attribute_holder/sheet/job/chirurgeon
 
