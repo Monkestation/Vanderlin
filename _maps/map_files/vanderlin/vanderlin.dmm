@@ -161,8 +161,7 @@
 /turf/open/floor/carpet/green,
 /area/indoors/town/adv_guild)
 "adU" = (
-/obj/structure/fluff/clutter/shrub/red,
-/obj/structure/fluff/wallclock/r,
+/obj/structure/fluff/clock,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/heir/heir1)
 "aej" = (
@@ -1738,7 +1737,11 @@
 /obj/item/clothing/neck/gorget,
 /obj/item/clothing/neck/chaincoif/iron,
 /obj/item/clothing/neck/bevor/iron,
-/obj/item/weapon/knife/dagger,
+/obj/item/clothing/armor/cuirass,
+/obj/item/weapon/knife/dagger/steel,
+/obj/structure/fluff/walldeco/customflag{
+	pixel_y = 32
+	},
 /turf/open/floor/tile,
 /area/indoors/town/keep/garrison)
 "aOE" = (
@@ -2297,8 +2300,6 @@
 /area/under/town/sewer)
 "bbb" = (
 /obj/structure/closet/crate/chest,
-/obj/item/caparison/astrata,
-/obj/item/caparison,
 /turf/open/floor/twig,
 /area/outdoors/town/keep/stable)
 "bbf" = (
@@ -2769,7 +2770,6 @@
 /obj/structure/mannequin/male,
 /obj/item/clothing/armor/leather/splint,
 /obj/item/clothing/head/helmet/kettle,
-/obj/item/clothing/cloak/stabard/jupon/guard,
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)
 "bkq" = (
@@ -3137,6 +3137,13 @@
 	},
 /turf/open/floor/tile,
 /area/indoors/town/keep/courtagent)
+"bsr" = (
+/obj/structure/bars,
+/obj/structure/curtain/bounty/dir{
+	dir = 8
+	},
+/turf/open/floor/blocks,
+/area/indoors/town/cell)
 "bst" = (
 /turf/open/openspace,
 /area/outdoors/exposed/cell)
@@ -3593,7 +3600,6 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/tavern)
 "bDh" = (
-/obj/item/clothing/cloak/stabard/guard,
 /obj/item/clothing/pants/trou/leather/splint,
 /obj/structure/mannequin/male,
 /obj/item/clothing/armor/cuirass/fluted/iron,
@@ -16897,10 +16903,6 @@
 /obj/item/servant_bell/lord,
 /turf/open/floor/hexstone,
 /area/indoors/town/keep/phys)
-"gUM" = (
-/obj/item/weapon/knife/dagger,
-/turf/closed/wall/mineral/decorstone,
-/area/indoors/town/keep/garrison)
 "gUO" = (
 /obj/structure/window/solid,
 /obj/structure/curtain/purplecurtain/dir{
@@ -18558,25 +18560,43 @@
 	},
 /area/indoors/town/keep/halls)
 "hDS" = (
-/obj/item/clothing/cloak/stabard/jupon/guard,
-/obj/item/clothing/cloak/stabard/jupon/guard,
-/obj/item/clothing/cloak/tabard/knight/guard{
-	pixel_x = -6;
-	pixel_y = 2
-	},
-/obj/item/clothing/cloak/tabard/knight/guard{
-	pixel_x = -6;
-	pixel_y = 2
-	},
-/obj/item/clothing/cloak/stabard/guard{
-	pixel_x = 8;
-	pixel_y = -6
-	},
-/obj/item/clothing/cloak/stabard/guard{
-	pixel_x = 8;
-	pixel_y = -6
-	},
 /obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/cloak/tabard/knight/guard{
+	pixel_x = -6;
+	pixel_y = 2
+	},
+/obj/item/clothing/cloak/tabard/knight/guard{
+	pixel_x = -6;
+	pixel_y = 2
+	},
+/obj/item/clothing/cloak/tabard/knight/guard{
+	pixel_x = -6;
+	pixel_y = 2
+	},
+/obj/item/clothing/cloak/tabard/knight/guard{
+	pixel_x = -6;
+	pixel_y = 2
+	},
+/obj/item/clothing/cloak/stabard/guard{
+	pixel_x = 8;
+	pixel_y = -6
+	},
+/obj/item/clothing/cloak/stabard/guard{
+	pixel_x = 8;
+	pixel_y = -6
+	},
+/obj/item/clothing/cloak/stabard/guard{
+	pixel_x = 8;
+	pixel_y = -6
+	},
+/obj/item/clothing/cloak/stabard/guard{
+	pixel_x = 8;
+	pixel_y = -6
+	},
+/obj/item/clothing/cloak/stabard/jupon/guard,
+/obj/item/clothing/cloak/stabard/jupon/guard,
+/obj/item/clothing/cloak/stabard/jupon/guard,
+/obj/item/clothing/cloak/stabard/jupon/guard,
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)
 "hDU" = (
@@ -19167,6 +19187,12 @@
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/adv_guild)
+"hRz" = (
+/obj/structure/fluff/clutter/shrub/red{
+	pixel_x = 2
+	},
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/keep/heir/heir2)
 "hRQ" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -19496,6 +19522,12 @@
 	},
 /turf/closed/wall/mineral/stone,
 /area/indoors/town)
+"hXI" = (
+/obj/structure/chair/wood/alt/chair_noble{
+	dir = 4
+	},
+/turf/open/floor/cobble,
+/area/indoors/town/cell)
 "hXJ" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/openspace,
@@ -20308,6 +20340,7 @@
 /area/indoors/town/cell)
 "iqp" = (
 /obj/structure/toilet,
+/obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/woodturned,
 /area/indoors/town/cell)
 "iqr" = (
@@ -21671,10 +21704,8 @@
 "iQM" = (
 /obj/item/clothing/shoes/boots/leather/advanced/watch,
 /obj/item/clothing/shoes/boots/leather/advanced/watch,
-/obj/item/clothing/shoes/boots/leather/advanced/watch,
 /obj/item/clothing/pants/trou/leather/guard,
 /obj/item/clothing/pants/trou/leather/guard,
-/obj/item/clothing/shirt/tunic/colored/tunicprimary,
 /obj/item/clothing/shirt/tunic/colored/tunicprimary,
 /obj/item/clothing/shirt/tunic/colored/tunicprimary,
 /obj/structure/closet/crate/crafted_closet,
@@ -24828,10 +24859,6 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/wood,
 /area/indoors/town/clinic_large)
-"kcs" = (
-/obj/structure/lootable_structure/grain_barrel,
-/turf/open/floor/blocks,
-/area/indoors/town/keep/passages/basement)
 "kct" = (
 /turf/closed/wall/mineral/stone/window,
 /area/outdoors/exposed/shop)
@@ -28557,7 +28584,6 @@
 	},
 /area/indoors/town/keep/halls/w)
 "lzK" = (
-/obj/effect/decal/cleanable/blood/old,
 /obj/structure/bookcase/random,
 /obj/item/book/manners,
 /obj/item/book/bibble,
@@ -30335,7 +30361,10 @@
 "mhP" = (
 /obj/structure/table/wood/reinforced_alter,
 /obj/item/textbook/novice/mathematics,
-/obj/item/natural/feather,
+/obj/item/natural/feather{
+	pixel_x = 1;
+	pixel_y = 10
+	},
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/vault)
 "mhX" = (
@@ -32388,11 +32417,10 @@
 /area/indoors/town/noble_manor/yellow)
 "mZq" = (
 /obj/machinery/light/fueled/wallfire/candle,
-/obj/item/clothing/armor/gambeson/heavy,
 /obj/structure/mannequin/male,
-/obj/item/clothing/armor/cuirass,
-/obj/item/clothing/head/helmet/skullcap,
 /obj/item/clothing/pants/trou/leather/splint,
+/obj/item/clothing/armor/gambeson/heavy,
+/obj/item/clothing/head/helmet/skullcap,
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)
 "mZr" = (
@@ -35960,6 +35988,12 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/wood,
 /area/indoors/town)
+"owf" = (
+/obj/structure/fluff/clutter/shrub/red{
+	pixel_x = 2
+	},
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/keep/heir/heir1)
 "owi" = (
 /obj/structure/bars/grille,
 /obj/structure/closet/crate/chest/neu_iron,
@@ -36803,9 +36837,6 @@
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "oLV" = (
-/obj/structure/fluff/walldeco/customflag{
-	pixel_y = 32
-	},
 /turf/open/floor/carpet/lord/corner{
 	dir = 1
 	},
@@ -39303,7 +39334,10 @@
 /area/under/town/basement)
 "pNe" = (
 /obj/structure/bed/inn,
-/obj/item/bedsheet/wool,
+/obj/item/bedsheet/pelt,
+/obj/structure/fluff/walldeco/customflag{
+	pixel_y = 32
+	},
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/cell)
 "pNg" = (
@@ -40566,8 +40600,8 @@
 /obj/structure/door{
 	name = "guard's barracks"
 	},
-/obj/effect/mapping_helpers/access/keyset/manor/servant/garrison,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /turf/open/floor/tile,
 /area/indoors/town/keep/garrison)
 "qkz" = (
@@ -42654,10 +42688,6 @@
 "qWS" = (
 /obj/structure/closet/crate/chest/wickertrunk/red,
 /obj/item/fishing/hook/iron,
-/obj/item/fishing/hook/iron,
-/obj/item/fishing/lure/meat,
-/obj/item/fishing/lure/meat,
-/obj/item/fishing/lure/meat,
 /turf/open/floor/concrete,
 /area/indoors/town/keep/basement)
 "qWX" = (
@@ -47292,8 +47322,7 @@
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
 "sKP" = (
-/obj/structure/fluff/clutter/shrub/red,
-/obj/structure/fluff/wallclock/r,
+/obj/structure/fluff/clock,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/heir/heir2)
 "sKV" = (
@@ -51609,7 +51638,6 @@
 /area/outdoors/town)
 "uCw" = (
 /obj/machinery/light/fueled/wallfire/candle,
-/obj/item/clothing/cloak/tabard/knight/guard,
 /obj/item/clothing/armor/chainmail/hauberk/iron,
 /obj/structure/mannequin/male,
 /obj/item/clothing/head/helmet/kettle/slit/atarms,
@@ -59193,11 +59221,8 @@
 /turf/open/floor/woodturned,
 /area/under/cave)
 "xmY" = (
-/obj/structure/door{
-	name = "guard's barracks"
-	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/manor/atarms,
+/obj/effect/mapping_helpers/access/keyset/manor/servant/garrison,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/garrison)
 "xnb" = (
@@ -75418,7 +75443,7 @@ aKz
 aKz
 aKz
 aKz
-kcs
+ctB
 ctB
 oxz
 jrF
@@ -75998,7 +76023,7 @@ iqp
 lzK
 peE
 vvX
-bCK
+hXI
 nhL
 bIO
 qFx
@@ -76601,7 +76626,7 @@ dID
 qFx
 kxM
 kxM
-bIO
+bsr
 bIO
 bIO
 iqo
@@ -122263,7 +122288,7 @@ alb
 ciS
 cRG
 han
-gUM
+rPe
 dKW
 dqc
 dqc
@@ -162870,13 +162895,13 @@ qiQ
 skt
 oMX
 oMX
-oMX
+owf
 qAX
 sji
 pDS
 uHq
 uHq
-uHq
+hRz
 qAX
 niN
 niN
