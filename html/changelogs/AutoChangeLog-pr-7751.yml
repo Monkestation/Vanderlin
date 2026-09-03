@@ -1,5 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - bugfix: "Miracles now affect Inquisition if they're undead."
-  - rscadd: "Adds missing Dream Cave room."

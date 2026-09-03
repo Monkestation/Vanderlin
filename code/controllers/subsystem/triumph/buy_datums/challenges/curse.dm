@@ -13,6 +13,7 @@
 		/datum/patron/divine/xylix = /datum/curse/xylix,
 		/datum/patron/divine/pestra = /datum/curse/pestra,
 		/datum/patron/divine/eora = /datum/curse/eora,
+		/datum/patron/divine/malum = /datum/curse/malum,
 		/datum/patron/inhumen/zizo = /datum/curse/zizo/minor,
 		/datum/patron/inhumen/matthios = /datum/curse/matthios,
 		/datum/patron/inhumen/baotha = /datum/curse/baotha,

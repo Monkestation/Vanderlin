@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added special attack to quarterstaff."
+  - rscadd: "Added a log for plastic surgery."
+  - rscadd: "Added a special attack to spears/quarterstaff."
