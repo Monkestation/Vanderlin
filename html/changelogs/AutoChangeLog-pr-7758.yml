@@ -1,5 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - balance: "Slightly tweaked some nightvision values."
-  - code_imp: "Changed relevant define names to fit."

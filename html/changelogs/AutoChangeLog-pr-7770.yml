@@ -1,9 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Added baothan armor."
-  - rscadd: "Gave Baothan Paladin the laced swordstaff."
-  - rscadd: "Added knives for matthios and graggar."
-  - rscadd: "Changed the sprite for profane dagger."
-  - image: "Added sprites for above, and moved some other bits around."
-  - code_imp: "Repathed the patron armors for the inhumen gods."

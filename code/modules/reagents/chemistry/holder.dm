@@ -382,6 +382,24 @@
 		if(HAS_TRAIT(C, TRAIT_CRACKHEAD))
 			can_overdose = FALSE
 	var/need_mob_update = 0
+
+	if(C && C.stat == DEAD)
+		for(var/datum/reagent/R as anything in cached_reagents)
+			if(QDELETED(R.holder))
+				continue
+			if(R.dead_life)
+				need_mob_update += R.on_mob_life(C, efficiency * 0.01)
+			else
+				R.on_mob_dead(C, efficiency ? efficiency : 100)
+		if(need_mob_update)
+			if(health_update)
+				C.updatehealth()
+				C.update_stamina()
+			else
+				. |= ORGAN_PROCESS_UPDATE_HEALTH
+		update_total()
+		return .
+
 	for(var/datum/reagent/R as anything in cached_reagents)
 		if(QDELETED(R.holder))
 			continue

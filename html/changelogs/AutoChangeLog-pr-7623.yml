@@ -1,6 +1,0 @@
-author: "ta3754859-max"
-delete-after: True
-changes:
-  - rscadd: "Readds species height diffrences when it comes to weapon aiming. Dwarfs, halflings, kobolds and kids can hit someone's foot easily but they are unable to aim head (as long as their enemy is taller than them or falls to the floor)"
-  - rscadd: "NPC goblins and rousmen also respect this"
-  - rscadd: "You can now kick children & dwarfs in the head."

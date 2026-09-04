@@ -58,3 +58,50 @@
   - rscadd: Added special attack to quarterstaff.
   - rscadd: Added a log for plastic surgery.
   - rscadd: Added a special attack to spears/quarterstaff.
+2026-09-04:
+  Archeonan:
+  - rscadd: God hoods for clerics
+  - rscdel: No more RNG on cleric armor
+  - balance: New default set for cleric, iron hauberk + coif
+  Jmih:
+  - bugfix: Life eternal enchantment works properly now, and healing scales with each
+      item that have this enchantment
+  - bugfix: Enchanter can take off item with "binding runes" now
+  - bugfix: STR potion brewing gives 25 units instead of 5, like any other buff potion
+  MissyNym:
+  - map: Swaps the apothecary's SCOM and PURITY machines.
+  ModDownloading:
+  - balance: The Blacksteel Great Helm no longer has a 90-degree vision cone.
+  - balance: Low Perception no longer causes a vision cone penalty.
+  Monkeke2:
+  - rscadd: Mercenary statue announces a random mercenary every 2-4 minutes
+  - bugfix: Mercenary statue no longer shows "/list" on examine
+  Spitegremlin:
+  - rscadd: Added new head piece and bracer, iron thorn crown and denderian iron thorns
+  - image: added new sprites for the head piece and arm piece I added
+  realforest2001:
+  - balance: Slightly tweaked some nightvision values.
+  - code_imp: Changed relevant define names to fit.
+  - bugfix: Fixes scrying people that don't exist not informing you when it fails.
+  - bugfix: Fixed Vampire Spawn selecting silver loaded presets.
+  - bugfix: Fixed obelisk beams remaining after death.
+  - rscadd: Added a specific subtype for necra statues.
+  - bugfix: Fixed required processing on status effects.
+  - code_imp: Added some extra logic preventing miracle use if excommunicated.
+  - rscadd: Added deadbolt-able subtypes for most wooden doors.
+  - rscadd: Added labelled versions of Mana, Blood and Stamina potions and Lifeblood.
+  - map: Added guest quarters to Oracle's dream cave, and changed the carpets.
+  - rscadd: Added baothan armor.
+  - rscadd: Gave Baothan Paladin the laced swordstaff.
+  - rscadd: Added knives for matthios and graggar.
+  - rscadd: Changed the sprite for profane dagger.
+  - image: Added sprites for above, and moved some other bits around.
+  - code_imp: Repathed the patron armors for the inhumen gods.
+  - rscadd: Cure Rot spell now only fails if the head or chest are skeletal, rather
+      than a lone arm.
+  ta3754859-max:
+  - rscadd: Readds species height diffrences when it comes to weapon aiming. Dwarfs,
+      halflings, kobolds and kids can hit someone's foot easily but they are unable
+      to aim head (as long as their enemy is taller than them or falls to the floor)
+  - rscadd: NPC goblins and rousmen also respect this
+  - rscadd: You can now kick children & dwarfs in the head.
