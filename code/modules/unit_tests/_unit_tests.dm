@@ -66,6 +66,7 @@
 
 // BEGIN_INCLUDE
 #include "anchored_mobs.dm"
+#include "clothing_icons_exist.dm"
 #include "component_tests.dm"
 #include "connect_loc.dm"
 #include "container_collision.dm"
