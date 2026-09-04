@@ -38,6 +38,7 @@
 		SPEC_ID_ELF,\
 		SPEC_ID_DROW,\
 		SPEC_ID_HALF_ORC,\
+		SPEC_ID_DWARF_ORC,\
 		SPEC_ID_TIEFLING,\
 	)
 	allowed_ages = list(AGE_ADULT, AGE_CHILD)
