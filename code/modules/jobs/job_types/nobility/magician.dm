@@ -105,7 +105,12 @@
 	if(istype(spawned.patron, /datum/patron/inhumen/zizo))
 		spawned.grant_language(/datum/language/undead)
 
-	if(spawned.gender == MALE && spawned.dna?.species  && spawned.dna.species.id != SPEC_ID_MEDICATOR)
+	var/list/voiceless_species = list(
+		SPEC_ID_MEDICATOR,
+		SPEC_ID_KOBOLD,
+		SPEC_ID_KOBOLD_FORMIKRAG
+	)
+	if(spawned.gender == MALE && spawned.dna?.species && !(spawned.dna.species.id in voiceless_species))
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 
 /datum/job/magician/on_roundstart(mob/living/spawned, client/player_client)
