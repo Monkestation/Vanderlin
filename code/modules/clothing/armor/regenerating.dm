@@ -60,6 +60,9 @@
 
 /obj/item/clothing/armor/regenerating/skin
 	name = "regenerating skin"
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "barriershimmer"
+	color = "#ada588"
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 
@@ -108,10 +111,12 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	max_integrity = 300
 	repair_time = 20 SECONDS
+	color = "#3d583d"
 
 /obj/item/clothing/armor/regenerating/skin/disciple/sunlord
 	name = "The golden tan"
 	desc = "The sun's powerful light has infused my skin with an armor-like denseness."
+	color = "#e4c145"
 
 /obj/item/clothing/armor/regenerating/skin/easttats/tribal
 	name = "Tribal Tattoos"

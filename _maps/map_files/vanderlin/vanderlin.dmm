@@ -22697,6 +22697,7 @@
 	layer = 2.7;
 	pixel_y = 7
 	},
+/obj/structure/mercstatue,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/outdoors/town)
 "jun" = (
@@ -31440,6 +31441,10 @@
 /obj/structure/carpet/red,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large)
+"mUU" = (
+/obj/structure/mercstatue/wall,
+/turf/open/floor/cobblerock,
+/area/outdoors/town)
 "mUY" = (
 /turf/open/floor/tile/bath,
 /area/indoors/town/keep/magician)
@@ -34600,6 +34605,10 @@
 	},
 /turf/open/floor/twig,
 /area/indoors/town/shop)
+"omE" = (
+/obj/structure/mercstatue,
+/turf/open/floor/cobblerock,
+/area/outdoors/town/keep)
 "omG" = (
 /obj/structure/table/wood{
 	icon_state = "longtable"
@@ -50662,7 +50671,6 @@
 /obj/machinery/light/fueled/torchholder{
 	dir = 4
 	},
-/obj/structure/mercstatue,
 /turf/open/floor/dirt/road,
 /area/outdoors/town)
 "uJI" = (
@@ -113658,7 +113666,7 @@ mFi
 mFi
 kwJ
 eIh
-mFi
+mUU
 mFi
 qFx
 eIh
@@ -123933,7 +123941,7 @@ fep
 fep
 aNf
 aNf
-fep
+omE
 nuA
 qse
 aNf

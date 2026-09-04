@@ -720,7 +720,7 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "Ci" = (
-/obj/structure/fluff/statue,
+/obj/structure/fluff/statue/necra,
 /obj/item/candle/yellow/lit/infinite{
 	pixel_x = 10;
 	pixel_y = 10

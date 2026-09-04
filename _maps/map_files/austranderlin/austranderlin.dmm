@@ -4290,7 +4290,7 @@
 /turf/open/floor/hexstone,
 /area/indoors/town/clocktower)
 "bYu" = (
-/obj/structure/fluff/statue,
+/obj/structure/fluff/statue/necra,
 /obj/machinery/light/fueled/torchholder,
 /turf/open/floor/blocks,
 /area/outdoors/town)

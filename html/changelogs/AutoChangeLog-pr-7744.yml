@@ -1,4 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Cure Rot spell now only fails if the head or chest are skeletal, rather than a lone arm."

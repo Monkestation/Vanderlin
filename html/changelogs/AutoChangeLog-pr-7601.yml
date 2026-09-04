@@ -1,6 +1,0 @@
-author: "Archeonan"
-delete-after: True
-changes:
-  - rscadd: "God hoods for clerics"
-  - rscdel: "No more RNG on cleric armor"
-  - balance: "New default set for cleric, iron hauberk + coif"

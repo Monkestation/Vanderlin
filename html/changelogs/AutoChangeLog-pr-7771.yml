@@ -1,6 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Added deadbolt-able subtypes for most wooden doors."
-  - rscadd: "Added labelled versions of Mana, Blood and Stamina potions and Lifeblood."
-  - map: "Added guest quarters to Oracle's dream cave, and changed the carpets."

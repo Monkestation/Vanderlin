@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Fixed missing sleeves for leathercoat greyscale."
+  - bugfix: "Fixed abstract statues appearing in the tomb."
+  - rscadd: "Skin armor (Disciple skin etc.) now has a placeholder sprite in the inventory so it is obvious at a glance something is in the slot."
