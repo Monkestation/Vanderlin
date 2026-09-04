@@ -1784,11 +1784,11 @@
 /area/indoors/antag/lich)
 "js" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/head/helmet/heavy/zizo,
-/obj/item/clothing/pants/platelegs/zizo,
-/obj/item/clothing/armor/plate/full/zizo,
-/obj/item/clothing/shoes/boots/armor/zizo,
-/obj/item/clothing/gloves/plate/zizo,
+/obj/item/clothing/head/helmet/heavy/inhumen/zizo,
+/obj/item/clothing/pants/platelegs/inhumen/zizo,
+/obj/item/clothing/armor/plate/full/inhumen/zizo,
+/obj/item/clothing/shoes/boots/armor/inhumen/zizo,
+/obj/item/clothing/gloves/plate/inhumen/zizo,
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
@@ -3329,11 +3329,11 @@
 /area/indoors/antag/lich)
 "so" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/head/helmet/heavy/zizo,
-/obj/item/clothing/pants/platelegs/zizo,
-/obj/item/clothing/armor/plate/full/zizo,
-/obj/item/clothing/shoes/boots/armor/zizo,
-/obj/item/clothing/gloves/plate/zizo,
+/obj/item/clothing/head/helmet/heavy/inhumen/zizo,
+/obj/item/clothing/pants/platelegs/inhumen/zizo,
+/obj/item/clothing/armor/plate/full/inhumen/zizo,
+/obj/item/clothing/shoes/boots/armor/inhumen/zizo,
+/obj/item/clothing/gloves/plate/inhumen/zizo,
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
@@ -3761,11 +3761,11 @@
 /area/indoors/antag/lich)
 "ut" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/head/helmet/heavy/zizo,
-/obj/item/clothing/pants/platelegs/zizo,
-/obj/item/clothing/armor/plate/full/zizo,
-/obj/item/clothing/shoes/boots/armor/zizo,
-/obj/item/clothing/gloves/plate/zizo,
+/obj/item/clothing/head/helmet/heavy/inhumen/zizo,
+/obj/item/clothing/pants/platelegs/inhumen/zizo,
+/obj/item/clothing/armor/plate/full/inhumen/zizo,
+/obj/item/clothing/shoes/boots/armor/inhumen/zizo,
+/obj/item/clothing/gloves/plate/inhumen/zizo,
 /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
@@ -4532,11 +4532,11 @@
 /area/outdoors/bog)
 "yo" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/head/helmet/heavy/zizo,
-/obj/item/clothing/pants/platelegs/zizo,
-/obj/item/clothing/armor/plate/full/zizo,
-/obj/item/clothing/shoes/boots/armor/zizo,
-/obj/item/clothing/gloves/plate/zizo,
+/obj/item/clothing/head/helmet/heavy/inhumen/zizo,
+/obj/item/clothing/pants/platelegs/inhumen/zizo,
+/obj/item/clothing/armor/plate/full/inhumen/zizo,
+/obj/item/clothing/shoes/boots/armor/inhumen/zizo,
+/obj/item/clothing/gloves/plate/inhumen/zizo,
 /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
@@ -6260,11 +6260,11 @@
 /area/outdoors/bog)
 "Hb" = (
 /obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/head/helmet/heavy/zizo,
-/obj/item/clothing/pants/platelegs/zizo,
-/obj/item/clothing/armor/plate/full/zizo,
-/obj/item/clothing/shoes/boots/armor/zizo,
-/obj/item/clothing/gloves/plate/zizo,
+/obj/item/clothing/head/helmet/heavy/inhumen/zizo,
+/obj/item/clothing/pants/platelegs/inhumen/zizo,
+/obj/item/clothing/armor/plate/full/inhumen/zizo,
+/obj/item/clothing/shoes/boots/armor/inhumen/zizo,
+/obj/item/clothing/gloves/plate/inhumen/zizo,
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /mob/living/carbon/human/species/zizombie/npc{
 	candodge = 0;
@@ -8356,11 +8356,11 @@
 	maxHealth = 500;
 	health = 500
 	},
-/obj/item/clothing/head/helmet/heavy/zizo,
-/obj/item/clothing/pants/platelegs/zizo,
-/obj/item/clothing/armor/plate/full/zizo,
-/obj/item/clothing/shoes/boots/armor/zizo,
-/obj/item/clothing/gloves/plate/zizo,
+/obj/item/clothing/head/helmet/heavy/inhumen/zizo,
+/obj/item/clothing/pants/platelegs/inhumen/zizo,
+/obj/item/clothing/armor/plate/full/inhumen/zizo,
+/obj/item/clothing/shoes/boots/armor/inhumen/zizo,
+/obj/item/clothing/gloves/plate/inhumen/zizo,
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser,
 /turf/open/floor/cobblerock,
 /area/indoors/antag/lich)

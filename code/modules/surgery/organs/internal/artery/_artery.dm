@@ -16,8 +16,8 @@
 	max_blood_storage = 100
 	current_blood = 100
 	oxygen_req = 0.25
-	nutriment_req = 0.09 * RATE_OF_HUNGER_GLOBAL
-	hydration_req = 0.03 * RATE_OF_THIRST_GLOBAL
+	nutriment_req = 0.09
+	hydration_req = 0.03
 
 	/// How much blood we gush when torn. Multiplied by damage/maxHealth
 	var/blood_flow = ARTERIAL_BLOOD_FLOW

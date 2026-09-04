@@ -2184,7 +2184,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/yellow)
 "bmW" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/cloak/matron,
 /obj/item/clothing/pants/trou/beltpants,
 /obj/item/clothing/shirt/undershirt/colored/black,
@@ -6731,7 +6731,7 @@
 /turf/open/floor/tile/checker,
 /area/indoors/town/keep/kitchen)
 "dWv" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/nobleboot,
 /obj/item/clothing/head/courtierhat,
 /obj/item/clothing/head/chaperon/colored,
@@ -8918,6 +8918,7 @@
 /obj/structure/table/wood/reinf_long{
 	dir = 4
 	},
+/obj/item/repair_kit/cloth/empty,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/shop)
 "fig" = (
@@ -9242,7 +9243,7 @@
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/noble_manor/yellow)
 "fsw" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/nobleboot,
 /obj/item/clothing/head/courtierhat,
 /obj/item/clothing/shirt/tunic/noblecoat,
@@ -22670,7 +22671,7 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "nPa" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/armor/gambeson,
 /obj/item/clothing/armor/gambeson,
 /turf/open/floor/wood,
@@ -22719,7 +22720,7 @@
 /area/outdoors/town)
 "nPO" = (
 /obj/structure/table/stone_small,
-/obj/structure/fluff/statue{
+/obj/structure/fluff/statue/necra{
 	pixel_y = 16
 	},
 /turf/open/floor/blocks,
@@ -27553,9 +27554,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
 "rae" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/cobble,
 /area/indoors/town/church)
 "raw" = (
@@ -28382,11 +28381,10 @@
 /area/under/cave)
 "rAw" = (
 /obj/structure/table/wood/reinforced,
-/obj/item/flint,
-/obj/item/flint,
 /obj/structure/fake_machine/mail{
 	mailtag = "Smithy"
 	},
+/obj/item/repair_kit/metal/empty,
 /turf/open/floor/hexstone,
 /area/indoors/town/smithy)
 "rAG" = (
@@ -29459,7 +29457,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/soilsons)
 "slH" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/shoes/boots/leather,
@@ -31249,6 +31247,13 @@
 /obj/item/weapon/hammer/iron,
 /obj/item/weapon/tongs,
 /obj/item/weapon/tongs,
+/obj/item/flint{
+	pixel_x = -8
+	},
+/obj/item/flint{
+	pixel_x = -7;
+	pixel_y = 8
+	},
 /turf/open/floor/hexstone,
 /area/indoors/town/smithy)
 "tsB" = (
@@ -36956,7 +36961,7 @@
 /obj/item/clothing/head/hatfur,
 /obj/item/clothing/armor/basiceast/crafteast,
 /obj/item/clothing/pants/trou/shadowpants,
-/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios/lord,
 /obj/item/clothing/head/hatfur,
 /obj/item/clothing/shoes/boots/furlinedanklets,
 /obj/item/clothing/shoes/boots/furlinedboots,
@@ -38690,8 +38695,8 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/feast)
 "ymd" = (
-/obj/structure/fluff/statue{
-	pixel_y = 9
+/obj/structure/fluff/statue/necra{
+	pixel_y = 8
 	},
 /turf/open/water/clean,
 /area/indoors/town/merc_guild)

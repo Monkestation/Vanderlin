@@ -5,8 +5,8 @@
 	sound = 'sound/misc/stings/generic.ogg'
 	charge_sound = 'sound/magic/vlightning.ogg'
 
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "Oblino!"
 	invocation_type = INVOCATION_SHOUT
@@ -22,7 +22,7 @@
 	name = "Profane Rupture"
 
 	spell_type = SPELL_MANA
-	antimagic_flags = MAGIC_RESISTANCE_MIND
+	antimagic_flags = MAGIC_RESISTANCE
 
 	required_form = FORM_DEATH
 	required_technique = TECHNIQUE_DESTRUCTION

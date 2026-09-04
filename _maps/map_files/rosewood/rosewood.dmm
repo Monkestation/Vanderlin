@@ -5238,7 +5238,7 @@
 /turf/open/floor/cobble,
 /area/outdoors/town/keep)
 "cwu" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/mace/woodclub,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/orphanage)
@@ -5879,8 +5879,7 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
 "cLV" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady";
+/obj/structure/fluff/statue/necra{
 	pixel_x = 15;
 	pixel_y = 9
 	},
@@ -11592,7 +11591,7 @@
 /obj/item/clothing/head/hatfur,
 /obj/item/clothing/armor/basiceast/crafteast,
 /obj/item/clothing/pants/trou/shadowpants,
-/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios/lord,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep)
@@ -17155,7 +17154,7 @@
 /area/indoors/town)
 "ihW" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/noble_manor/blue)
 "iip" = (
@@ -22973,7 +22972,7 @@
 /turf/open/floor/carpet/green,
 /area/indoors/villagegarrison)
 "kXF" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -32438,7 +32437,7 @@
 /turf/open/floor/tile/bath,
 /area/indoors/town/keep/basement/bath)
 "pua" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -34237,7 +34236,7 @@
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep)
 "quN" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/noble_manor/blue)
 "quW" = (

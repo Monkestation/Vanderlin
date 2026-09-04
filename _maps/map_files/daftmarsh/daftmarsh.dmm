@@ -2748,7 +2748,7 @@
 /area/indoors/town)
 "cac" = (
 /obj/machinery/light/fueled/wallfire/candle,
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/garrison)
 "cag" = (
@@ -5187,7 +5187,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
 "dXz" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/broom,
 /obj/item/natural/cloth,
 /obj/item/natural/cloth,
@@ -5282,15 +5282,16 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/obj/item/flint,
+/obj/structure/table/wood/reinforced_alter,
+/obj/item/repair_kit/metal/empty,
 /obj/item/flint{
 	pixel_x = 8
 	},
+/obj/item/flint,
 /obj/item/flint{
 	pixel_x = -5;
 	pixel_y = 6
 	},
-/obj/structure/table/wood/reinforced_alter,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/smithy)
 "eaE" = (
@@ -5584,7 +5585,7 @@
 /turf/open/floor/wood,
 /area/indoors/town/shop)
 "elT" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile,
 /area/indoors/town/keep/knight)
@@ -10938,7 +10939,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/smithy)
 "iKR" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/structure/fluff/railing/border{
 	dir = 8
 	},
@@ -11182,9 +11183,7 @@
 /turf/open/floor/tile,
 /area/indoors/town/keep/knight)
 "iWe" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/blocks,
 /area/outdoors/exposed/church/graveyard)
 "iWp" = (
@@ -11422,7 +11421,7 @@
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
 "jdb" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/tavern)
 "jdA" = (
@@ -12069,7 +12068,7 @@
 	},
 /area/indoors/soilsons)
 "jCu" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
@@ -12588,7 +12587,7 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)
 "kbX" = (
@@ -20002,6 +20001,7 @@
 "qpG" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/rack/shelf/biggest,
+/obj/item/repair_kit/cloth/empty,
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town)
 "qpU" = (
@@ -20898,7 +20898,7 @@
 /obj/item/clothing/shirt/undershirt/sailor,
 /obj/item/clothing/shirt/undershirt/sailor,
 /obj/item/clothing/shirt/undershirt/sailor,
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/wood,
 /area/indoors/town/shop)
 "reY" = (
@@ -20952,7 +20952,7 @@
 /turf/open/floor/carpet,
 /area/indoors/town/keep)
 "rgr" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/tile,
 /area/indoors/town/keep/knight)
 "rgz" = (
@@ -26569,7 +26569,7 @@
 	},
 /area/outdoors/town/roofs)
 "vWZ" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/mace/woodclub,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/spiral,
@@ -27064,7 +27064,7 @@
 /turf/open/floor/wood,
 /area/indoors/town/shop)
 "wsC" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/cloak/apron/cook,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/tavern)
@@ -28003,7 +28003,7 @@
 /obj/item/clothing/head/hatfur,
 /obj/item/clothing/armor/basiceast/crafteast,
 /obj/item/clothing/pants/trou/shadowpants,
-/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios/lord,
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/tile/bfloorz,
 /area/indoors/town/keep/lord_appt)
@@ -28740,7 +28740,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church/graveyard)
 "xMx" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/broom,
 /obj/item/natural/cloth,
 /obj/item/natural/cloth,

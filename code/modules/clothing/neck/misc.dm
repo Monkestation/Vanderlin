@@ -270,9 +270,7 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
-	smeltresult = null
-	melting_material = /datum/material/steel
-	melt_amount = 100
+	smeltresult = /obj/item/ingot/steel_slag
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_MEDIUM
@@ -318,8 +316,6 @@
 	desc = "A chain coif made of interwoven iron rings. Affordable protection against arrows and blades, \
 			but should be used as padding rather than relied upon as armor."
 	smeltresult = /obj/item/ingot/iron
-	melting_material = /datum/material/iron
-	melt_amount = 100
 
 	armor_type = /datum/armor/neck/maille/iron
 	max_integrity = INTEGRITY_OLD_STRONG
@@ -347,10 +343,8 @@
 	desc = "A piece of steel plate armor meant to protect the throat and neck of its wearer against decapitation, extending the protection of armor plates."
 	icon_state = "bevor"
 	flags_inv = HIDEFACIALHAIR
+	melting_material = /datum/material/steel
 	melt_amount = 75
-	melting_material = /datum/material/steel
-	melt_amount = 100
-	melting_material = /datum/material/steel
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
@@ -375,7 +369,6 @@
 	name = "bronze gorgette"
 	desc = "A jutting slab of bronze, traditionally mounted atop a panoplic assembly to veil the neck from precise strikes. </br>To tip the chin up while grounded is an ancient gesture; one which willingly beckons for the 'gift of mercy'."
 	icon_state = "bbevor"
-	melt_amount = 75
 	melting_material = /datum/material/bronze
 
 /obj/item/clothing/neck/bevor/iron
@@ -526,8 +519,7 @@
 	desc = "A series of resplendant golden plates designed to protect the neck, traditionally worn atop a jacket or cuirass. The holy sigil between its buckled halves promises to carry the flame of its wearer, no matter what strike's poised its way."
 	icon_state = "goldgorget"
 	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
-	melting_material = /datum/material/gold
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/gold
 	grid_height = 96
 	grid_width = 96
 	sellprice = 200
@@ -598,7 +590,7 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
-	smeltresult = null
+	smeltresult = /obj/item/ingot/steel_slag
 	clothing_flags = CANT_SLEEP_IN
 	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
@@ -639,8 +631,6 @@
 	armor_type = /datum/armor/neck/maille/iron
 	max_integrity = INTEGRITY_OLD_STRONG
 	smeltresult = /obj/item/ingot/iron
-	melt_amount = 100
-	melting_material = /datum/material/iron
 
 /obj/item/clothing/neck/highcollier/iron/renegadecollar
 	icon_state = "renegadecollar"

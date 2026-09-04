@@ -171,3 +171,43 @@
 	else
 		user.visible_message(span_warning("[user] stops reshaping [src]."))
 		return
+
+/obj/item/clothing/wrists/bracers/ironbriar
+	name = "dendorian iron thorns"
+	desc = "Thorns fashioned from cold, lasting iron. Woven and interlinked, fashioned to be wrapped around the wrists. Rarely seen, worn by few of the more combative worshippers of Dendor."
+	body_parts_covered = ARMS
+	icon_state = "ironthorns"
+	item_state = "ironthorns"
+	armor_class = AC_LIGHT
+	armor_type = /datum/armor/wrist/maille/ironbriar
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_SMASH, BCLASS_TWIST)
+	max_integrity = INTEGRITY_OLD_STRONG
+	blocksound = PLATEHIT
+	resistance_flags = FIRE_PROOF
+	max_integrity = 400
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	sewrepair = null
+	alternate_worn_layer = WRISTS_LAYER
+	item_weight = 2.5 KILOGRAMS
+
+/obj/item/clothing/wrists/bracers/ironbriar/equipped(mob/user, slot)
+	. = ..()
+	user.update_inv_wrists()
+	user.update_inv_gloves()
+	user.update_inv_armor()
+	user.update_inv_shirt()
+
+/obj/item/clothing/wrists/bracers/ironbriar/attack_self(mob/living/user)
+	. = ..()
+	user.visible_message(span_warning("[user] starts to reshape the [src]."))
+	if(do_after(user, 4 SECONDS))
+		var/obj/item/clothing/head/helmet/ironbriar/P = new /obj/item/clothing/head/helmet/ironbriar(get_turf(src.loc))
+		if(user.is_holding(src))
+			user.dropItemToGround(src)
+			user.put_in_hands(P)
+		var/obj/item/bodypart/arm = user.get_active_hand()
+		arm?.bodypart_attacked_by(BCLASS_CUT, 25)
+		qdel(src)
+	else
+		user.visible_message(span_warning("[user] stops reshaping [src]."))
+		return

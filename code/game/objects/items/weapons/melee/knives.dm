@@ -346,20 +346,39 @@
 	icon_state = "spiderdagger"
 	item_weight = 200 GRAMS
 
-/obj/item/weapon/knife/dagger/steel/baotha
-	name = "laced dagger"
-	desc = "Whispers of bliss seep deeper than the blade."
-	icon_state = "baothadagger"
-	color = "#f78ccc"
+//................ Inhumen daggers ............... //
+/obj/item/weapon/knife/dagger/steel/inhumen
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 	item_weight = 200 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	sellprice = 0 // Super evil dagger, nobody wants this
 
-/obj/item/weapon/knife/dagger/steel/baotha/Initialize(mapload)
+/obj/item/weapon/knife/dagger/steel/inhumen/baotha
+	name = "laced dagger"
+	desc = "Whispers of bliss seep deeper than the blade."
+	icon_state = "baothadagger"
+
+/obj/item/weapon/knife/dagger/steel/inhumen/baotha/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/baothagift)
 
+/obj/item/weapon/knife/dagger/steel/inhumen/graggar
+	name = "vicious dagger"
+	desc = "A chipped and serrated blade designed with only one purpose. Blood."
+	icon_state = "graggardagger"
+
+/obj/item/weapon/knife/dagger/steel/inhumen/matthios
+	name = "gilded knife"
+	desc = "Wealth with function."
+	icon_state = "matthiosknife"
+
+/obj/item/weapon/knife/dagger/steel/inhumen/zizo
+	name = "darksteel dagger"
+	desc = "A vile dagger made of darksteel."
+	icon_state = "zizodagger"
+	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_DARKSTEEL
 
 //................ Silver Dagger ............... //
 /obj/item/weapon/knife/dagger/silver
@@ -426,33 +445,32 @@
 	item_weight = 210 GRAMS
 
 //................ Profane Dagger ............... //
-/obj/item/weapon/knife/dagger/steel/profane
-	// name = "profane dagger"
-	// desc = "A profane dagger made of cursed black steel. Whispers emanate from the gem on its hilt."
+/obj/item/weapon/knife/dagger/steel/inhumen/profane
+	name = "profane dagger"
+	desc = "A profane dagger made of cursed steel. Whispers emanate from the embedded gems."
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST, FACE_STEAL)
 	max_blade_int = 300
-	icon_state = "pdagger"
+	icon_state = "graggarpdagger"
 	melting_material = null
 	melt_amount = 0
 	embedding = list("embed_chance" = 0) // Embedding the cursed dagger has the potential to cause duping issues. Keep it like this unless you want to do a lot of bug hunting.
 	resistance_flags = INDESTRUCTIBLE
 	stealthy_audio = TRUE
-	sellprice = 250
 	item_weight = 200 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	pickpocket_difficulty = SKILL_RANK_MASTER
 
-/obj/item/weapon/knife/dagger/steel/profane/examine(mob/user)
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/examine(mob/user)
 	. = ..()
 	if(HAS_TRAIT(user, TRAIT_ASSASSIN))
 		. += "profane dagger whispers, \"[span_danger("Here we are!")]\""
 
-/obj/item/weapon/knife/dagger/steel/profane/get_examine_icon(mob/user)
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/get_examine_icon(mob/user)
 	if(isobserver(user) || HAS_TRAIT(user, TRAIT_ASSASSIN) || get_dist(user, src) < 1)
 		return ..()
 	return ma2html(mutable_appearance(icon, "sdagger"), user)
 
-/obj/item/weapon/knife/dagger/steel/profane/pickup(mob/living/M)
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/pickup(mob/living/M)
 	. = ..()
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
@@ -483,7 +501,7 @@
 //			H.visible_message("profane dagger whispers, \"[message]\"")
 			to_chat(M, "profane dagger whispers, \"[message]\"")
 
-/obj/item/weapon/knife/dagger/steel/profane/pre_attack(mob/living/carbon/human/target, mob/living/user, list/modifiers)
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/pre_attack(mob/living/carbon/human/target, mob/living/user, list/modifiers)
 	if(!istype(target))
 		return FALSE
 	if(target.has_quirk(/datum/quirk/vice/hunted) || HAS_TRAIT(target, TRAIT_ZIZOID_HUNTED)) // Check to see if the dagger will do 20 damage or 14
@@ -492,7 +510,7 @@
 		force = DAMAGE_DAGGER + 2
 	return FALSE
 
-/obj/item/weapon/knife/dagger/steel/profane/afterattack(mob/living/carbon/human/target, mob/living/user, proximity_flag, list/modifiers)
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/afterattack(mob/living/carbon/human/target, mob/living/user, proximity_flag, list/modifiers)
 	. = ..()
 	if(!ishuman(target))
 		return
@@ -563,7 +581,7 @@
 				user.adjust_triumphs(1)
 				init_profane_soul(target, user) //If they are still in their body, send them to the dagger!
 
-/obj/item/weapon/knife/dagger/steel/profane/proc/init_profane_soul(mob/living/carbon/human/victim, mob/user)
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/proc/init_profane_soul(mob/living/carbon/human/victim, mob/user)
 	record_featured_stat(FEATURED_STATS_CRIMINALS, user)
 	record_round_statistic(STATS_ASSASSINATIONS)
 
@@ -584,7 +602,7 @@
 	blade_int = max_blade_int // Stealing a soul successfully sharpens the blade.
 	repair_damage(max_integrity) // And fixes the dagger. No blacksmith required!
 
-/obj/item/weapon/knife/dagger/steel/profane/proc/get_profane_ghost(mob/living/carbon/human/target, mob/user)
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/proc/get_profane_ghost(mob/living/carbon/human/target, mob/user)
 	var/mob/dead/observer/chosen_ghost
 	var/mob/living/carbon/spirit/underworld_spirit = target.get_spirit() //Check if a soul has already gone to the underworld
 	if(underworld_spirit) // If they are in the underworld, pull them back to the real world and make them a normal ghost. Necra can't save you now!
@@ -599,7 +617,7 @@
 	qdel(chosen_ghost) // Get rid of that ghost!
 	return TRUE
 
-/obj/item/weapon/knife/dagger/steel/profane/proc/release_profane_souls() // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/proc/release_profane_souls() // For ways to release the souls trapped within a profane dagger, such as a Necrite burial rite. Returns the number of freed souls.
 	var/freed_souls = 0
 	for(var/mob/living/simple_animal/shade/shade in contents) // for every trapped soul in the dagger, whether they have left the game or not
 		to_chat(shade, "<b>I have been freed from my vile prison, I await Necra's cold grasp. Salvation!</b>")

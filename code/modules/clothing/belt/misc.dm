@@ -30,7 +30,7 @@
 
 	populate_contents = list(
 		/obj/item/reagent_containers/glass/bottle/poison,
-		/obj/item/weapon/knife/dagger/steel/profane,
+		/obj/item/weapon/knife/dagger/steel/inhumen/profane,
 		/obj/item/lockpick,
 	)
 
