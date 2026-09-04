@@ -364,6 +364,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_COIN_ILLITERATE = span_info("I care little for the concept of coins and prefer to barter via other means."),
 	TRAIT_LUCKY_COOK = span_info("Xylix smiles upon my cooking, I often end up with impossible amounts of extra goods..."),
 	TRAIT_ABOMINATION = span_info("I am an abomination, others will recognise me for what I am"),
+	TRAIT_CULTURAL_KNOWLEDGE = span_info("I intimately understand cultures other than my own and may consult their viewpoint when examining certain items."),
 	TRAIT_COURTAGENT = span_info("I am an Agent of the Court, employed by the Hand. I am able to recognise my colleagues"),
 	TRAIT_GATEKEEPER = span_info("I am well practiced in the art of swiftly opening and sealing the gates, alongside levers and switches."),
 	TRAIT_CLOSECOMBAT = span_info("I am trained in unarmed combat, and am able to kick with precision."),

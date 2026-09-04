@@ -46,7 +46,8 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/merchant
 
 	traits = list(
-		TRAIT_SEEPRICES
+		TRAIT_SEEPRICES,
+		TRAIT_CULTURAL_KNOWLEDGE // cultural osmosis, potentially travelled across the world, definitely spoke with people who have.
 	)
 
 /datum/outfit/merchant
