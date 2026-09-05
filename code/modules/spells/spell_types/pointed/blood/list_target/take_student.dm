@@ -138,6 +138,7 @@
 	UnregisterSignal(apprentice, COMSIG_BLOOD_ASCENSION)
 	REMOVE_TRAIT(apprentice, TRAIT_BLOOD_STUDENT, REF(owner))
 	apprentice.remove_faction(FACTION_BLOOD_MAGIC)
+	apprentice.mind.remove_antag_datum(/datum/antagonist/blood_mage/student)
 	if(death)
 		to_chat(apprentice, span_userdanger("The connection to my Tutor has shattered! I've lost my enhanced connection to Blood Magic!"))
 		return TRUE
