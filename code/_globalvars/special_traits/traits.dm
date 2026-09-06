@@ -393,8 +393,8 @@
 /datum/special_trait/mastercraftsmen
 	name = "Master Craftsman"
 	greet_text = "In my youth, I've decided I'd get a grasp on every trade, and pursued the 10 arts of the craft."
-	req_text = "Middle-aged or Old"
-	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
+	req_text = "Middle-aged, Old, Or Immortal"
+	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	weight = 100
 
 /datum/special_trait/mastercraftsmen/on_apply(mob/living/carbon/human/character)
@@ -439,6 +439,7 @@
 	ADD_TRAIT(character, TRAIT_MALUMFIRE, "[type]")
 	ADD_TRAIT(character, TRAIT_SLEEPIMMUNE, "[type]") // can't learn any new skills
 	ADD_TRAIT(character, TRAIT_NOENERGY, "[type]")
+	ADD_TRAIT(character, TRAIT_NOHUNGER, "[type]")
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/burdened_one)
 	character.cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'  // has a burdened vibe to it
 
@@ -1017,26 +1018,31 @@
 	ADD_TRAIT(character, TRAIT_STINKY, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_DEADNOSE, BE_SPECIAL_TRAIT)
 
-/datum/special_trait/keenears
-	name = "Keen Ears"
-	greet_text = span_notice("People always did get mad at me for accidentally eavesdropping.")
+/datum/special_trait/keensenses
+	name = "Keen Senses"
+	greet_text = span_notice("My eyes and ears are sharp as razors.")
 	weight = 50
 
-/datum/special_trait/keenears/on_apply(mob/living/carbon/human/character, silent)
+/datum/special_trait/keensenses/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_KEENEARS, "[type]")
+	ADD_TRAIT(character, TRAIT_KEENEYES, "[type]")
 
 /datum/special_trait/bestial
 	name = "Bestial"
 	greet_text = span_notice("I am blessed by Dendor I feel closer to beasts than men, I can whisper in their tongue.")
 	weight = 50
-	req_text = "Worship Dendor and be an acolyte"
-	allowed_jobs = list(/datum/job/monk)
+	req_text = "Worship Dendor"
 	allowed_patrons = list(/datum/patron/divine/dendor)
 
 /datum/special_trait/bestial/on_apply(mob/living/carbon/human/character, silent)
 	character.grant_language(/datum/language/beast)
 	character.add_spell(/datum/action/cooldown/spell/undirected/howl/call_of_the_moon, silent = TRUE)
 	ADD_TRAIT(character, TRAIT_NASTY_EATER, "[type]") // eat the raw meat
+	var/holder = character.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_acolyte()
+		devotion.grant_to(character)
 
 /datum/attribute_holder/sheet/job/glutton
 	raw_attribute_list = list(
@@ -1258,3 +1264,64 @@
 
 /datum/special_trait/godocrime/on_apply(mob/living/carbon/human/character, silent)
 	character.add_spell(/datum/action/cooldown/spell/undirected/conjure_item/puffer, silent = TRUE)
+
+/datum/special_trait/glassbones
+	name = "Glass Bones"
+	greet_text = span_notice("I have a rare condition that makes my bones brittle and fragile.")
+	weight = 50
+
+/datum/special_trait/glassbones/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_HOLLOWBONES, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_CRITICAL_WEAKNESS, BE_SPECIAL_TRAIT)
+
+/datum/special_trait/doaflip
+	name = "Do a Flip"
+	greet_text = span_notice("I compulsively flip every time I jump")
+	weight = 80
+
+/datum/special_trait/doaflip/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_FLIP_JUMP, BE_SPECIAL_TRAIT)
+
+/datum/special_trait/fish
+	name = "Blessings of Abyssor"
+	greet_text = span_notice("Abyssor gives me stregnth to swim like his chosen Triton.")
+	allowed_patrons = list(/datum/patron/divine/abyssor)
+	weight = 75
+
+/datum/attribute_holder/sheet/job/fish
+	raw_attribute_list = list(
+		STAT_SPEED = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 60,
+	)
+
+/datum/special_trait/fish/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_SWIMMER, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_NODROWN, BE_SPECIAL_TRAIT)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/fish)
+
+/datum/special_trait/thenerve
+	name = "Nerve Stapled"
+	greet_text = span_notice("In a bout of strange experimentation, my body was rendered fully painless. A blessing, or a curse?")
+	weight = 30
+
+/datum/special_trait/thenerve/on_apply(mob/living/carbon/human/character, silent)
+	ADD_TRAIT(character, TRAIT_NOPAIN, BE_SPECIAL_TRAIT)
+
+/datum/special_trait/beanpole
+	name = "Beanpole"
+	greet_text = span_notice("I am very tall and lanky, and I have a hard time fitting into tight spaces.")
+	weight = 50
+
+/datum/attribute_holder/sheet/job/beanpole
+	raw_attribute_list = list(
+		STAT_STRENGTH = -2,
+		STAT_CONSTITUTION = -2,
+		STAT_SPEED = 2,
+	)
+
+/datum/special_trait/beanpole/on_apply(mob/living/carbon/human/character, silent)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/beanpole)
+	character.transform = character.transform.Scale(0.9, 1.2)
+	character.update_transform()
