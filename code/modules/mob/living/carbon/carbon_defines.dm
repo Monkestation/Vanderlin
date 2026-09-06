@@ -20,6 +20,8 @@
 
 	/// Pulse can't be handled on an organ-by-organ basis, since we can have multiple hearts
 	var/pulse = PULSE_NORM
+	///highest pain stage we've recently triggered
+	var/highest_shock_stage_triggered = 0
 	/// Used to handle the heartbeat sounds
 	var/heartbeat_sound = BEAT_NONE
 	/// How long effectively a pump lasts
