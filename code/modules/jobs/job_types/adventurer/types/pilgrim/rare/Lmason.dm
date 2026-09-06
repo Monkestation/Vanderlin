@@ -4,7 +4,7 @@
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 2,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/labor/mining = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,

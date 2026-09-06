@@ -1,10 +1,16 @@
 /datum/attribute_holder/sheet/job/merchant
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 2,
-		STAT_PERCEPTION = 1,
+		STAT_PERCEPTION = 2,
+		STAT_SPEED = 1,
 		STAT_STRENGTH = -1,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/knives = 10,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/stealing = 60,
