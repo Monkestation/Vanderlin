@@ -84,6 +84,7 @@
 	var/static/list/selectablerobe = list(
 		"Bloodweave robes (Obvious)" = /obj/item/clothing/shirt/robe/bloodweave,
 		"Blood Red robes" = /obj/item/clothing/shirt/robe/colored/blood,
+		"Blood Red coat" = /obj/item/clothing/armor/leather/jacket/leathercoat/colored/blood,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Magus robes" = /obj/item/clothing/shirt/robe/magus
@@ -106,7 +107,6 @@
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	neck = /obj/item/clothing/neck/gorget
 	cloak = /obj/item/clothing/cloak/half/colored/blood
-	shirt = /obj/item/clothing/shirt/tunic/colored
 	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
 	gloves = /obj/item/clothing/gloves/leather/advanced
 	ring = /obj/item/clothing/ring/gold/rontz
