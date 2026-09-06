@@ -41,6 +41,7 @@
 		/datum/action/cooldown/spell/diagnose,
 		/datum/action/cooldown/spell/undirected/conjure_item/poison_bomb
 	)
+	book_type = /obj/item/recipe_book/medical
 
 
 /datum/outfit/wretch/plaguebearer

@@ -105,3 +105,18 @@
       to aim head (as long as their enemy is taller than them or falls to the floor)
   - rscadd: NPC goblins and rousmen also respect this
   - rscadd: You can now kick children & dwarfs in the head.
+2026-09-05:
+  Monkeke2:
+  - bugfix: Skullmets no longer despawn if you cancel skull selection
+  SSensum13:
+  - balance: harpies now have +5 climbing skill bonus to compensate their low STR
+      that is governing for that skill.
+  realforest2001:
+  - bugfix: Fixed missing sleeves for leathercoat greyscale.
+  - bugfix: Fixed abstract statues appearing in the tomb.
+  - rscadd: Skin armor (Disciple skin etc.) now has a placeholder sprite in the inventory
+      so it is obvious at a glance something is in the slot.
+  - code_imp: Makes Parry calculations a little easier to read.
+2026-09-06:
+  Karl Johansson:
+  - bugfix: Decompose and Raise Undead are functioning spells again.

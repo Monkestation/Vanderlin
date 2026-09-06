@@ -1,4 +1,0 @@
-author: "Monkeke2"
-delete-after: True
-changes:
-  - bugfix: "Skullmets no longer despawn if you cancel skull selection"

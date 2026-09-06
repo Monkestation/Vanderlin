@@ -33,10 +33,11 @@
 	conjured_mobs -= summoned
 
 /datum/action/cooldown/spell/raise_undead/proc/register_minion(mob/living/minion, mob/living/user)
-	var/mob/living/last = conjured_mobs[length(conjured_mobs)]
-	if(!QDELETED(last))
-		qdel(last)
-	conjured_mobs.len--
+	if(length(conjured_mobs))
+		var/mob/living/last = conjured_mobs[length(conjured_mobs)]
+		if(!QDELETED(last))
+			qdel(last)
+		conjured_mobs.len--
 
 	conjured_mobs += minion
 	RegisterSignal(minion, COMSIG_QDELETING, PROC_REF(remove_conjure))
@@ -110,8 +111,9 @@
 	clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 30, TRUE)
 	clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 30, TRUE)
 
-	mind.current.job = null
-	mind.add_antag_datum(/datum/antagonist/skeleton)
+	if(mind)
+		mind.current.job = null
+		mind.add_antag_datum(/datum/antagonist/skeleton)
 
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()
 	dna.species.soundpack_f = new /datum/voicepack/skeleton()
