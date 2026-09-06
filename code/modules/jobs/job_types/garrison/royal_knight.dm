@@ -135,7 +135,7 @@
 
 /datum/outfit/royalknight
 	name = "Royal Knight Base"
-	neck = /obj/item/clothing/neck/chaincoif
+	neck = /obj/item/clothing/neck/gorget
 	pants = /obj/item/clothing/pants/platelegs
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
 	shirt = /obj/item/clothing/armor/gambeson/arming
