@@ -30,6 +30,7 @@
 		TRAIT_EMPATH,
 		TRAIT_DEADNOSE
 	)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/outfit/pilgrim/physicker
 	name = "Physicker (Pilgrim)"

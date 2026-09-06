@@ -60,6 +60,7 @@
 	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	selection_color = "#a33096"
 	languages = list(/datum/language/gronnic)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/job/bogwitch/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
