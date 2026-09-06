@@ -143,6 +143,17 @@
 	icon_state = "liquify"
 	duration = 1.2 SECONDS
 
+/obj/effect/temp_visual/wizard/blood
+	name = "blood"
+	icon_state = "uncloak"
+	duration = 7
+	color = "#580808"
+
+/obj/effect/temp_visual/wizard/blood/out
+	icon_state = "cloak"
+	duration = 8
+	color = "#580808"
+
 /obj/effect/temp_visual/monkeyify
 	icon = 'icons/mob/mob.dmi'
 	icon_state = "h2monkey"

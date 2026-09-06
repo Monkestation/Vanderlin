@@ -16,16 +16,16 @@
 	return
 
 /mob/living/simple_animal/hostile/retaliate/voidstoneobelisk
-	icon = 'icons/mob/summonable/32x32.dmi'
 	name = "voidstone obelisk"
 	desc = "A construct from another age. It is marked by glowing sigils, and its material seems to absorb magic!"
+	icon = 'icons/mob/summonable/32x32.dmi'
 	icon_state = "obelisk-combined"
 	icon_living = "obelisk-combined"
 	icon_dead = "obelisk-combined"
 	summon_primer = "You are ancient. A construct built in an age before men, a time of dragons. Your builders don't seem to be around anymore, and time has past with you in standby. How you respond, is up to you."
 	tier = 3
 
-	faction = list("aberrant")
+	faction = list(FACTION_ABERRANT)
 	emote_hear = null
 	emote_see = null
 	speed = 5
@@ -82,6 +82,7 @@
 	item_damage_type = "blunt"
 
 /mob/living/simple_animal/hostile/retaliate/voidstoneobelisk/death(gibbed)
+	QDEL_NULL(beam)
 	var/turf/deathspot = get_turf(src)
 	new /obj/item/natural/voidstone(deathspot)
 	new /obj/item/natural/artifact(deathspot)
@@ -123,6 +124,9 @@
 
 /obj/effect/obeliskbeam/process()
 	var/atom/ignore = creator?.resolve()
+	if(!ignore)
+		qdel(src)
+		return
 	for(var/mob/living/hit_mob in get_turf(src))
 		if(hit_mob == ignore)
 			continue

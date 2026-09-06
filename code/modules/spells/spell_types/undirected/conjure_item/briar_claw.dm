@@ -4,7 +4,7 @@
 	button_icon_state = "dendor"
 	invocation = "Beast-Lord, lend me the claws of a volf."
 	invocation_type = INVOCATION_WHISPER
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
@@ -47,7 +47,7 @@
 	wdefense = MEDIOCRE_PARRY
 	armor_penetration = 7
 	max_blade_int = 700
-	max_integrity = INTEGRITY_STRONGEST + 200
+	max_integrity = INTEGRITY_OLD_STRONGEST + 200
 
 /obj/item/weapon/briar_claw/Initialize()
 	. = ..()

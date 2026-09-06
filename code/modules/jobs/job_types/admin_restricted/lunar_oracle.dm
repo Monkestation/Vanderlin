@@ -56,7 +56,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_patrons = list(/datum/patron/divine/noc)
 
-	outfit = /datum/outfit/oracle
+	outfit = /datum/outfit/admin/oracle
 	honorary = "Oracle"
 
 	magic_user = TRUE
@@ -82,6 +82,7 @@
 
 	traits = list(
 		TRAIT_DREAM_WATCHER,
+		TRAIT_DREAM_CAVE,
 		TRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
 		TRAIT_LUNAR_ORDER,
@@ -104,6 +105,7 @@
 		/datum/language/deepspeak,
 		/datum/language/thievescant
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/admin/oracle/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -120,7 +122,7 @@
 	spawned.adjust_form_mastery_points(20)
 	spawned.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 
-/datum/outfit/oracle
+/datum/outfit/admin/oracle
 	name = JOB_ADMIN_ORACLE
 	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -132,7 +134,7 @@
 	backl = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/raincloak/colored/chalk
 	backpack_contents = list(
-		/obj/item/needle = 1,
+		/obj/item/needle/blessed = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1
 	)
 
@@ -170,4 +172,4 @@
 	name = "dream key"
 	desc = "A mysterious key to an even more mysterious place..."
 	icon_state = "ekey"
-	lockids = list("Dreamcave")
+	lockids = list(ACCESS_DREAM_CAVE)

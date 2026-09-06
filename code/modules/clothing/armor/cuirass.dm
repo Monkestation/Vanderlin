@@ -13,7 +13,7 @@
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 6 KILOGRAMS
 
 //................ Grenzelhoft Cuirass ............... //
@@ -53,7 +53,7 @@
 
 	armor_type = /datum/armor/plate/bad
 	body_parts_covered = COVERAGE_VEST
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 5 KILOGRAMS
 
 //................ Rusted Breastplate ............... //
@@ -67,7 +67,7 @@
 	item_state = "rustcuriass"
 	sellprice = VALUE_IRON_ARMOR/2
 
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 
 //................ Scourge Breastplate ............... //
 /obj/item/clothing/armor/cuirass/iron/shadowplate
@@ -89,19 +89,8 @@
 	armor_type = /datum/armor/plate/bad
 	body_parts_covered = CHEST
 	prevent_crits = ONLY_VITAL_ORGANS
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 3 KILOGRAMS
-
-/obj/item/clothing/armor/cuirass/vampire
-	name = "ancient plate"
-	desc = "A ornate, ceremonial plate cuirass of considerable age."
-	icon_state = "vplate"
-
-	armor_class = AC_MEDIUM
-	armor_type = /datum/armor/plate/good
-	body_parts_covered = COVERAGE_TORSO
-	prevent_crits = ALL_CRITICAL_HITS_VAMP
-	item_weight = 6 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/fencer
 	name = "fencer's cuirass"
@@ -125,7 +114,7 @@
 	desc = "A sturdy steel cuirass with tassets. Supposedly protective, though maybe not against crossbow bolts."
 
 	body_parts_covered = CHEST | VITALS | LEGS
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 6.5 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/fluted/iron
@@ -138,7 +127,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 6.5 KILOGRAMS
 
 

@@ -17,7 +17,7 @@
 
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/gloves/plate/good
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_CRITICAL_HITS
 	abstract_type = /obj/item/clothing/gloves/rare
 

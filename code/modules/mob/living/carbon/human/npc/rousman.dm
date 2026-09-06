@@ -326,17 +326,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 			headdy.icon = 'icons/roguetown/mob/monster/rousman.dmi'
 			headdy.icon_state = "[src.dna.species.id]_head"
 
-	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
-	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-
-	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
-	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
-	LE.switch_side(LEFT_SIDE)
-
-	LE.Insert(src)
-	RE.Insert(src)
+	grant_nightmare_eyes()
 
 	src.underwear = "Nude"
 	if(length(quirks))
@@ -639,6 +629,9 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	..()
 	seer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman/seer)
 
+	seer.grant_language(/datum/language/common)
+	seer.grant_language(/datum/language/sanguine)
+
 	armor = /obj/item/clothing/shirt/robe/rousseer
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
 	r_hand = /obj/item/weapon/polearm/woodstaff/seer
@@ -648,13 +641,16 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/eyebite,
-		/datum/action/cooldown/spell/projectile/fireball,
+		/datum/action/cooldown/spell/projectile/fireball/baali,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
 	//! MAGIC BALANCE POINT
-	ADD_TRAIT(seer, TRAIT_SORCERER, INNATE_TRAIT)
+	ADD_TRAIT(seer, TRAIT_BLOOD_SORCERER, INNATE_TRAIT)
+	ADD_TRAIT(seer, TRAIT_VITAE_USER, INNATE_TRAIT)
+	seer.hud_used?.set_bloody_bloodpool()
+	seer.adjust_bloodpool()
 	seer.adjust_technique_mastery_points(12)
 	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
@@ -673,8 +669,8 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	)
 	raw_attribute_list = list(
 		/datum/attribute/skill/magic/arcane = 50,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/magic/blood = 20,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/magic/blood = 40,
 	)
 
 /datum/outfit/npc/rousman/seer_stronger/pre_equip(mob/living/carbon/human/seer)
@@ -682,6 +678,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	seer.attributes?.add_sheet(/datum/attribute_holder/sheet/job/rousman/seer/strong)
 
 	seer.grant_language(/datum/language/common)
+	seer.grant_language(/datum/language/sanguine)
 
 	armor = /obj/item/clothing/shirt/robe/rousseer
 	head = /obj/item/clothing/head/roguehood/rousman/rousseer
@@ -690,17 +687,19 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	l_pocket = /obj/item/spellbook/expert/starter/earth
 
 	var/list/spells = list(
-		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt,
+		/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/bloody_jaunt,
 		/datum/action/cooldown/spell/conjure/rous,
 		/datum/action/cooldown/spell/undirected/arcyne_eye,
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/eyebite,
-		/datum/action/cooldown/spell/projectile/fireball,
+		/datum/action/cooldown/spell/projectile/fireball/baali,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 		/datum/action/cooldown/spell/sundering_lightning,
 	)
 
+	ADD_TRAIT(seer, TRAIT_BLOOD_SORCERER, INNATE_TRAIT)
+	ADD_TRAIT(seer, TRAIT_VITAE_USER, INNATE_TRAIT)
 	seer.adjust_technique_mastery_points(14)
 	seer.adjust_form_mastery_points(20)
 	seer.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)

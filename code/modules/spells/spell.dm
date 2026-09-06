@@ -203,6 +203,8 @@
 	var/spell_impact_intensity = SPELL_IMPACT_LOW
 	/// Override color for the impact effect. If null, uses light_color.
 	var/spell_impact_color
+	/// If this spell is considered heretical or not. Used to display in the spellbook.
+	var/heretical_spell = FALSE
 
 
 
@@ -291,12 +293,13 @@
 	if(spell_requirements & (SPELL_REQUIRES_NO_ANTIMAGIC|SPELL_REQUIRES_WIZARD_GARB))
 		RegisterSignal(owner, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(update_status_on_signal))
 
-	if(spell_type == SPELL_MANA)
-		RegisterSignal(owner, COMSIG_LIVING_MANA_CHANGED, PROC_REF(update_status_on_signal))
-	if(spell_type == SPELL_MIRACLE)
-		RegisterSignal(owner, COMSIG_LIVING_DEVOTION_CHANGED, PROC_REF(update_status_on_signal))
-	if(spell_type == SPELL_RAGE)
-		RegisterSignal(owner, COMSIG_RAGE_CHANGED, PROC_REF(update_status_on_signal))
+	switch(spell_type)
+		if(SPELL_MANA)
+			RegisterSignal(owner, COMSIG_LIVING_MANA_CHANGED, PROC_REF(update_status_on_signal))
+		if(SPELL_DIVINE_MIRACLE, SPELL_UNHOLY_MIRACLE)
+			RegisterSignal(owner, COMSIG_LIVING_DEVOTION_CHANGED, PROC_REF(update_status_on_signal))
+		if(SPELL_RAGE)
+			RegisterSignal(owner, COMSIG_RAGE_CHANGED, PROC_REF(update_status_on_signal))
 
 	RegisterSignals(owner, list(COMSIG_MOB_ENTER_JAUNT, COMSIG_MOB_AFTER_EXIT_JAUNT), PROC_REF(update_status_on_signal))
 
@@ -497,10 +500,17 @@
 			owner.balloon_alert(owner, "can't focus on casting...")
 		return FALSE
 
-	if(HAS_TRAIT(owner, TRAIT_NOC_CURSE))
-		if(feedback)
-			owner.balloon_alert(owner, "my magicka has left me...")
-		return FALSE
+	switch(spell_type)
+		if(SPELL_MANA)
+			if(HAS_TRAIT(owner, TRAIT_NOC_CURSE))
+				if(feedback)
+					owner.balloon_alert(owner, "my magicka has left me...")
+				return FALSE
+		if(SPELL_DIVINE_MIRACLE)
+			if(!HAS_TRAIT(owner, TRAIT_FANATICAL) && (owner.real_name in GLOB.excommunicated_players))
+				if(feedback)
+					owner.balloon_alert(owner, "excommunicated!")
+				return FALSE
 
 	for(var/datum/action/cooldown/spell/spell in owner.actions)
 		if(spell == src)
@@ -670,7 +680,7 @@
 			owner.balloon_alert(owner, "too far away!")
 			return sig_return | SPELL_CANCEL_CAST
 
-		if((spell_type == SPELL_MIRACLE) && HAS_TRAIT(cast_on, TRAIT_ATHEISM_CURSE))
+		if(((spell_type == SPELL_DIVINE_MIRACLE) || (spell_type == SPELL_UNHOLY_MIRACLE)) && HAS_TRAIT(cast_on, TRAIT_ATHEISM_CURSE))
 			if(isliving(cast_on))
 				var/mob/living/L = cast_on
 				L.visible_message(
@@ -680,11 +690,13 @@
 				L.cursed_freak_out()
 			return sig_return | SPELL_CANCEL_CAST
 
-		if((spell_type == SPELL_MIRACLE) && HAS_TRAIT(cast_on, TRAIT_SILVER_BLESSED) && !(spell_flags & SPELL_PSYDON))
-			cast_on.visible_message(span_info("[cast_on] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
-			playsound(cast_on, 'sound/magic/PSY.ogg', 100, FALSE, -1)
-			owner.playsound_local(owner, 'sound/magic/PSY.ogg', 100, FALSE, -1)
-			return sig_return | SPELL_CANCEL_CAST
+		if(ishuman(cast_on))
+			var/mob/living/carbon/human/human_target
+			if(((spell_type == SPELL_DIVINE_MIRACLE) || (spell_type == SPELL_UNHOLY_MIRACLE)) && HAS_TRAIT(cast_on, TRAIT_SILVER_BLESSED) && !(spell_flags & SPELL_PSYDON) && !(human_target.mob_biotypes & MOB_UNDEAD))
+				cast_on.visible_message(span_info("[cast_on] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
+				playsound(cast_on, 'sound/magic/PSY.ogg', 100, FALSE, -1)
+				owner.playsound_local(owner, 'sound/magic/PSY.ogg', 100, FALSE, -1)
+				return sig_return | SPELL_CANCEL_CAST
 
 	if(charge_required && !click_to_activate)
 		// Otherwise we use a simple do_after
@@ -943,21 +955,21 @@
 	if(used_cost <= 0)
 		return TRUE
 
-	if(!HAS_TRAIT(owner, TRAIT_NOSTAMINA))
-		var/not_stamina_spell = (spell_type != SPELL_STAMINA)
-		if(!caster.check_stamina(used_cost / (1 + not_stamina_spell)))
-			if(feedback)
-				owner.balloon_alert(owner, "not enough stamina to cast!")
-			return FALSE
-
-	if(spell_type == NONE || spell_type == SPELL_STAMINA)
-		return TRUE
-
 	switch(spell_type)
+		if(NONE, SPELL_STAMINA)
+			if(HAS_TRAIT(caster, TRAIT_NOSTAMINA))
+				return TRUE
+			var/not_stamina_spell = (spell_type != SPELL_STAMINA)
+			if(!caster.check_stamina(used_cost / (1 + not_stamina_spell)))
+				if(feedback)
+					caster.balloon_alert(caster, "not enough stamina to cast!")
+				return FALSE
+			return TRUE
+
 		if(SPELL_MANA)
 			if(!caster.has_mana_available(used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "not enough mana to cast!")
+					caster.balloon_alert(caster, "not enough mana to cast!")
 				return FALSE
 
 			return TRUE
@@ -965,25 +977,25 @@
 		if(SPELL_BLOOD)
 			if(!caster.has_bloodpool_cost(used_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "need more blood to cast!")
+					caster.balloon_alert(caster, "need more vitae to cast!")
 				return FALSE
 
 			return TRUE
 
-		if(SPELL_MIRACLE)
-			var/mob/living/carbon/human/H = caster
-			if(!istype(H) || !H.cleric?.check_devotion(spell_cost))
+		if(SPELL_DIVINE_MIRACLE, SPELL_UNHOLY_MIRACLE)
+			var/mob/living/carbon/human/human_caster = caster
+			if(!istype(human_caster) || !human_caster.cleric?.check_devotion(spell_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "devotion too weak!")
+					human_caster.balloon_alert(human_caster, "devotion too weak!")
 				return FALSE
 
 			return TRUE
 
 		if(SPELL_RAGE)
-			var/mob/living/carbon/human/H = caster
-			if(!istype(H) || !H.rage_datum?.check_rage(spell_cost))
+			var/mob/living/carbon/human/human_caster = caster
+			if(!istype(human_caster) || !human_caster.rage_datum?.check_rage(spell_cost))
 				if(feedback)
-					owner.balloon_alert(owner, "not enough Rage!")
+					human_caster.balloon_alert(human_caster, "not enough Rage!")
 				return FALSE
 
 			return TRUE
@@ -1049,7 +1061,7 @@
 			var/mob/living/caster = owner
 			caster.consume_mana(used_cost)
 
-		if(SPELL_MIRACLE)
+		if(SPELL_DIVINE_MIRACLE, SPELL_UNHOLY_MIRACLE)
 			var/mob/living/carbon/human/H = owner
 			if(!istype(H))
 				return

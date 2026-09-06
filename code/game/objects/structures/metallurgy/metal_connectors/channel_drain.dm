@@ -70,7 +70,7 @@
 /obj/structure/channel_connector/drain/proc/drain_into_mould(obj/structure/metal_channel/channel)
 	if(!target_mould || !channel?.group_reagents)
 		return
-	var/datum/reagent/molten_metal/channel_metal = channel.group_reagents.get_reagent(/datum/reagent/molten_metal)
+	var/datum/reagent/molten_metal/channel_metal = channel.group_reagents.has_reagent(/datum/reagent/molten_metal)
 	if(!channel_metal)
 		return
 	// Determine what metal to drain
@@ -126,7 +126,7 @@
 
 	var/obj/structure/metal_channel/input = connected_channels[TEXT_NORTH]
 	if(target_mould && input?.group_reagents?.total_volume > 0)
-		var/datum/reagent/molten_metal/metal = input.group_reagents.get_reagent(/datum/reagent/molten_metal)
+		var/datum/reagent/molten_metal/metal = input.group_reagents.has_reagent(/datum/reagent/molten_metal)
 		var/datum/material/largest = metal?.largest_metal
 		if(largest)
 			. += mutable_appearance(

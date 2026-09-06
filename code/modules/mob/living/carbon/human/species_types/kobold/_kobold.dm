@@ -50,7 +50,7 @@
 	default_color = "FFFFFF"
 
 	species_traits = list(NO_UNDERWEAR)
-	inherent_traits = list(TRAIT_TINY, TRAIT_DARKVISION)
+	inherent_traits = list(TRAIT_TINY)
 
 	statsheet_male = /datum/attribute_holder/sheet/job/species/kobold
 

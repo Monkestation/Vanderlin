@@ -64,11 +64,17 @@
 
 // Mana source flags
 /// Absorb from leylines
-#define MANA_ALL_LEYLINES (1 << 1)
+#define MANA_ALL_LEYLINES (1 << 0)
 /// Absorb from pylons with right click
-#define MANA_ALL_PYLONS (1 << 2)
+#define MANA_ALL_PYLONS (1 << 1)
 /// Absord from souls (if visible)
-#define MANA_SOULS (1 <<3)
+#define MANA_SOULS (1 << 2)
+
+DEFINE_BITFIELD(intrinsic_recharge_sources, list(
+	"MANA_ALL_LEYLINES" = MANA_ALL_LEYLINES,
+	"MANA_ALL_PYLONS" = MANA_ALL_PYLONS,
+	"MANA_SOULS" = MANA_SOULS,
+))
 
 #define MANA_DISPERSE_EVENLY 1
 #define MANA_SEQUENTIAL 2
@@ -100,13 +106,17 @@
 #define MAGIC_RESISTANCE_MIND (1 << 1)
 /// Holy magic resistance that blocks miracles
 #define MAGIC_RESISTANCE_HOLY (1 << 2)
-/// Holy magic resistance that blocks unholy magic (revenant, cult, vampire, voice of god)
+/// Holy magic resistance that blocks unholy magic (revenant, cult, voice of god)
 #define MAGIC_RESISTANCE_UNHOLY (1 << 3)
+/// Magic resistance that blocks vampiric magic and blood spells.
+#define MAGIC_RESISTANCE_BLOOD (1 << 4)
 
 DEFINE_BITFIELD(antimagic_flags, list(
 	"MAGIC_RESISTANCE" = MAGIC_RESISTANCE,
 	"MAGIC_RESISTANCE_HOLY" = MAGIC_RESISTANCE_HOLY,
 	"MAGIC_RESISTANCE_MIND" = MAGIC_RESISTANCE_MIND,
+	"MAGIC_RESISTANCE_UNHOLY" = MAGIC_RESISTANCE_UNHOLY,
+	"MAGIC_RESISTANCE_BLOOD" = MAGIC_RESISTANCE_BLOOD,
 ))
 
 // Spell types
@@ -115,16 +125,16 @@ DEFINE_BITFIELD(antimagic_flags, list(
 /// Use stamina, all spells use stamina but this makes it the only cost and at full price instead of half
 #define SPELL_STAMINA 2
 /// Miracle, uses devotion and thus requires a devotion holder
-#define SPELL_MIRACLE 3
-
-/// Casted with the essence gauntlet, using essence vials
-#define SPELL_ESSENCE 4
-/// Casted using your bloodpool
-#define SPELL_BLOOD 5
+#define SPELL_DIVINE_MIRACLE 3
+#define SPELL_UNHOLY_MIRACLE 4
+/// Cast with the essence gauntlet, using essence vials
+#define SPELL_ESSENCE 5
+/// Cast using your bloodpool
+#define SPELL_BLOOD 6
 ///this is a "miracle" granted by "psydon's" inquisition
-#define SPELL_PSYDONIC_MIRACLE 6
+#define SPELL_PSYDONIC_MIRACLE 7
 ///this is a spell that uses rage to cast
-#define SPELL_RAGE 7
+#define SPELL_RAGE 8
 
 
 // Generic Bitflags for spells
@@ -227,6 +237,7 @@ DEFINE_BITFIELD(spell_requirements, list(
 #define FORM_LIFE "Life"
 #define FORM_AIR "Aeromancy"
 #define FORM_WATER "Hydromancy"
+#define FORM_BLOOD "Hemomancy"
 
 #define MASTERY_RANK_NOVICE 0
 #define MASTERY_RANK_ADEPT 2
@@ -249,7 +260,8 @@ GLOBAL_LIST_INIT(form_colors, list(
 	FORM_DEATH = "#800080",
 	FORM_EARTH = "#8B4513",
 	FORM_AIR = "#C0C0C0",
-	FORM_ARCANE = "#9932CC"
+	FORM_ARCANE = "#9932CC",
+	FORM_BLOOD = COLOR_BLOOD_MAGIC
 ))
 
 GLOBAL_LIST_INIT(all_techniques, list(
@@ -272,6 +284,7 @@ GLOBAL_LIST_INIT(all_forms, list(
 	FORM_DEATH,
 	FORM_AIR,
 	FORM_WATER,
+	FORM_BLOOD,
 ))
 
 #define CHARGETIME_POKE 0.5 SECONDS // Staple poke spells

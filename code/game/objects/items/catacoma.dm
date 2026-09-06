@@ -4,6 +4,7 @@
 	base_icon_state = "ledger"
 	title = "Catatoma"
 	special_book = TRUE
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/list/cart = list() // Key: pack datum -> Value: Quantity
 
 /obj/item/book/secret/ledger/fence

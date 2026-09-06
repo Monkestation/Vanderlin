@@ -2184,7 +2184,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/yellow)
 "bmW" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/cloak/matron,
 /obj/item/clothing/pants/trou/beltpants,
 /obj/item/clothing/shirt/undershirt/colored/black,
@@ -3301,6 +3301,10 @@
 /obj/item/flashlight/flare/torch/lantern/voidlamptern,
 /turf/open/floor/metal/barograte,
 /area/under/town/basement)
+"bSF" = (
+/obj/structure/fluff/traveltile/oracle_cave,
+/turf/open/floor/snow/patchy,
+/area/outdoors/town)
 "bSK" = (
 /obj/structure/window,
 /turf/open/floor/ruinedwood,
@@ -5498,7 +5502,7 @@
 	redstone_id = "Grenzshutters"
 	},
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "dmw" = (
 /obj/machinery/light/fueled/wallfire/candle/lamp{
 	pixel_y = -32
@@ -6727,7 +6731,7 @@
 /turf/open/floor/tile/checker,
 /area/indoors/town/keep/kitchen)
 "dWv" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/nobleboot,
 /obj/item/clothing/head/courtierhat,
 /obj/item/clothing/head/chaperon/colored,
@@ -7309,6 +7313,10 @@
 "enh" = (
 /turf/closed/wall/mineral/craftstone,
 /area/under/cave)
+"enz" = (
+/obj/structure/fluff/traveltile/oracle_cave,
+/turf/open/floor/snow,
+/area/outdoors/town)
 "eof" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/natural/bundle/cloth{
@@ -8910,6 +8918,7 @@
 /obj/structure/table/wood/reinf_long{
 	dir = 4
 	},
+/obj/item/repair_kit/cloth/empty,
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/shop)
 "fig" = (
@@ -9234,7 +9243,7 @@
 /turf/open/floor/wood/nosmooth,
 /area/indoors/town/noble_manor/yellow)
 "fsw" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/nobleboot,
 /obj/item/clothing/head/courtierhat,
 /obj/item/clothing/shirt/tunic/noblecoat,
@@ -13949,10 +13958,6 @@
 /obj/structure/bars,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/basement/thepit)
-"isR" = (
-/mob/living/simple_animal/hostile/retaliate/wolf,
-/turf/open/floor/cobble,
-/area/indoors/town/keep/basement/thepit)
 "itf" = (
 /obj/effect/spawner/map_spawner/hauntz_random,
 /turf/open/floor/cobblerock,
@@ -14409,7 +14414,7 @@
 "iJO" = (
 /obj/machinery/light/fueled/firebowl/stumpb,
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "iKL" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/clean,
@@ -14563,6 +14568,10 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/l,
 /turf/open/floor/dirt,
 /area/under/cavewet)
+"iNM" = (
+/obj/structure/mercstatue,
+/turf/open/floor/cobble,
+/area/indoors/town/merc_guild)
 "iNV" = (
 /obj/structure/soil/mushmound,
 /obj/machinery/light/fueled/wallfire/candle/lamp,
@@ -19150,7 +19159,7 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "lHr" = (
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_x = -3
 	},
 /turf/open/floor/wood,
@@ -19468,10 +19477,6 @@
 /obj/effect/landmark/start/feldsher,
 /turf/open/floor/carpet/red,
 /area/indoors/town/clinic_large)
-"lRy" = (
-/mob/living/simple_animal/hostile/retaliate/wolf,
-/turf/open/floor/cobblerock,
-/area/indoors/town/keep/basement/thepit)
 "lRz" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/shop)
@@ -22666,7 +22671,7 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "nPa" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/armor/gambeson,
 /obj/item/clothing/armor/gambeson,
 /turf/open/floor/wood,
@@ -22715,7 +22720,7 @@
 /area/outdoors/town)
 "nPO" = (
 /obj/structure/table/stone_small,
-/obj/structure/fluff/statue{
+/obj/structure/fluff/statue/necra{
 	pixel_y = 16
 	},
 /turf/open/floor/blocks,
@@ -26381,7 +26386,7 @@
 /area/indoors/town/orphanage)
 "qhM" = (
 /turf/open/floor/cobble,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "qhZ" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/town/clinic_large)
@@ -27549,9 +27554,7 @@
 /turf/open/floor/ruinedwood,
 /area/indoors/town)
 "rae" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/cobble,
 /area/indoors/town/church)
 "raw" = (
@@ -28378,11 +28381,10 @@
 /area/under/cave)
 "rAw" = (
 /obj/structure/table/wood/reinforced,
-/obj/item/flint,
-/obj/item/flint,
 /obj/structure/fake_machine/mail{
 	mailtag = "Smithy"
 	},
+/obj/item/repair_kit/metal/empty,
 /turf/open/floor/hexstone,
 /area/indoors/town/smithy)
 "rAG" = (
@@ -28859,7 +28861,7 @@
 /area/indoors/town/garrison)
 "rOP" = (
 /turf/closed/mineral/bedrock,
-/area/indoors/lich)
+/area/indoors/antag/lich)
 "rOT" = (
 /obj/structure/closet/crate/chest/wicker,
 /turf/open/floor/ruinedwood,
@@ -29455,7 +29457,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/soilsons)
 "slH" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/shoes/boots/leather,
@@ -31245,6 +31247,13 @@
 /obj/item/weapon/hammer/iron,
 /obj/item/weapon/tongs,
 /obj/item/weapon/tongs,
+/obj/item/flint{
+	pixel_x = -8
+	},
+/obj/item/flint{
+	pixel_x = -7;
+	pixel_y = 8
+	},
 /turf/open/floor/hexstone,
 /area/indoors/town/smithy)
 "tsB" = (
@@ -36952,7 +36961,7 @@
 /obj/item/clothing/head/hatfur,
 /obj/item/clothing/armor/basiceast/crafteast,
 /obj/item/clothing/pants/trou/shadowpants,
-/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios/lord,
 /obj/item/clothing/head/hatfur,
 /obj/item/clothing/shoes/boots/furlinedanklets,
 /obj/item/clothing/shoes/boots/furlinedboots,
@@ -38430,6 +38439,10 @@
 /obj/item/natural/melded/t5,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/town/basement)
+"ybs" = (
+/obj/structure/mercstatue,
+/turf/open/floor/grass/cold,
+/area/outdoors/town/keep)
 "ybJ" = (
 /obj/structure/bars,
 /turf/open/floor/cobblerock,
@@ -38682,8 +38695,8 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep/feast)
 "ymd" = (
-/obj/structure/fluff/statue{
-	pixel_y = 9
+/obj/structure/fluff/statue/necra{
+	pixel_y = 8
 	},
 /turf/open/water/clean,
 /area/indoors/town/merc_guild)
@@ -59990,7 +60003,7 @@ qPf
 jxh
 vhP
 vhP
-vhP
+iNM
 gBj
 tnl
 dIH
@@ -84414,9 +84427,9 @@ nJJ
 nJJ
 ulG
 aZv
-aZv
-rjc
-rjc
+enz
+bSF
+bSF
 kKb
 nJJ
 nJJ
@@ -138485,7 +138498,7 @@ euU
 oFc
 oFc
 isO
-lRy
+nTy
 gcA
 nTy
 ePY
@@ -138690,7 +138703,7 @@ isO
 nTy
 nTy
 nTy
-lRy
+nTy
 nTy
 nTy
 nTy
@@ -138890,11 +138903,11 @@ oFc
 csT
 oFF
 gcA
-lRy
+nTy
 nTy
 gcA
 nTy
-isR
+gcA
 nTy
 oFF
 csT
@@ -139094,7 +139107,7 @@ isO
 nTy
 gcA
 gcA
-lRy
+nTy
 nTy
 gcA
 gcA
@@ -139293,7 +139306,7 @@ euU
 csT
 csT
 isO
-isR
+gcA
 nTy
 nTy
 dEk
@@ -180521,7 +180534,7 @@ aYU
 ewa
 aYU
 ewa
-tck
+ybs
 tck
 gLm
 rZA
