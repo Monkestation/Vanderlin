@@ -2232,7 +2232,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/antag/lich)
 "jK" = (
-/obj/closet/keyrack{
+/obj/structure/keyrack{
 	pixel_x = -32
 	},
 /obj/item/storage/keyring,
