@@ -14,7 +14,7 @@ GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each ind
 		return FALSE
 	if(stat >= UNCONSCIOUS)
 		return FALSE
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return FALSE
 	if(!MOBTIMER_FINISHED(src, MT_AMBUSHLAST, 5 MINUTES))
 		return FALSE

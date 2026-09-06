@@ -100,7 +100,7 @@
 	adjustBruteLoss(diff, updating_health, forced, required_bodytype, damage_type)
 
 /mob/living/carbon/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_status, damage_type = WOUND_INTERNAL_BRUISE, can_crit = FALSE)
-	if(!forced && (status_flags & GODMODE))
+	if(!forced && HAS_TRAIT(src, TRAIT_GODMODE))
 		return FALSE
 	if(amount > 0)
 		take_overall_damage(amount, 0, updating_health, required_status, damage_type = damage_type, no_crit = can_crit)
@@ -116,7 +116,7 @@
 	adjustFireLoss(diff, updating_health, forced, required_bodytype)
 
 /mob/living/carbon/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, required_status, intense)
-	if(!forced && (status_flags & GODMODE))
+	if(!forced && HAS_TRAIT(src, TRAIT_GODMODE))
 		return FALSE
 	if(amount > 0)
 		take_overall_damage(0, amount, updating_health, required_status, damage_type = (intense ? BCLASS_INTENSE_BURN : null))
@@ -167,7 +167,7 @@
  */
 /mob/living/carbon/adjustOrganLoss(slot, amount, maximum)
 	var/obj/item/organ/O = getorganslot(slot)
-	if(O && !(status_flags & GODMODE))
+	if(O && !HAS_TRAIT(src, TRAIT_GODMODE))
 		O.applyOrganDamage(amount, maximum)
 
 /** setOrganLoss
@@ -178,7 +178,7 @@
  */
 /mob/living/carbon/setOrganLoss(slot, amount)
 	var/obj/item/organ/O = getorganslot(slot)
-	if(O && !(status_flags & GODMODE))
+	if(O && !HAS_TRAIT(src, TRAIT_GODMODE))
 		O.setOrganDamage(amount)
 
 /** getOrganLoss
@@ -198,7 +198,7 @@
 	return amount
 
 /mob/living/carbon/adjustPainLoss(amount, updating_health = TRUE, forced = FALSE, required_status = null)
-	if(!forced && (status_flags & GODMODE))
+	if(!forced && HAS_TRAIT(src, TRAIT_GODMODE))
 		return 0
 	var/list/obj/item/bodypart/parts = get_painable_bodyparts(adding_pain = (amount > 0 ? TRUE : FALSE))
 	if(!length(parts))
@@ -408,7 +408,7 @@
 // damage MANY bodyparts, in random order
 /mob/living/carbon/take_overall_damage(brute = 0, burn = 0, updating_health = TRUE, required_status = BODYPART_ORGANIC, damage_type, no_crit = FALSE)
 	. = FALSE
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return	//godmode
 
 	// treat negative args as positive

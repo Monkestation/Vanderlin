@@ -16,8 +16,7 @@
 	if(isliving(mob_to_summon))
 		return mob_to_summon
 	var/mob/living/simple_animal/summoned = new mob_to_summon(loc)
-	ADD_TRAIT(summoned, TRAIT_PACIFISM, MAGIC_TRAIT)
-	summoned.status_flags += GODMODE
+	summoned.add_traits(list(TRAIT_PACIFISM, TRAIT_GODMODE), MAGIC_TRAIT)
 	summoned.binded = TRUE
 	summoned.SetParalyzed(90 SECONDS)
 	REMOVE_TRAIT(summoned, TRAIT_UNDODGING, MAGIC_TRAIT)

@@ -2434,7 +2434,7 @@
 			H.add_stress(/datum/stress_event/on_fire)
 
 /datum/species/proc/CanIgniteMob(mob/living/carbon/human/H)
-	if(H.status_flags & GODMODE)
+	if(HAS_TRAIT(H, TRAIT_GODMODE))
 		return FALSE
 	if(H.divine_fire_stacks > 0) // tieflings can't say no to astrata
 		return TRUE

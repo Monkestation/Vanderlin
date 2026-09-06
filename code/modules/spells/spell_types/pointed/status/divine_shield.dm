@@ -57,18 +57,14 @@
 	target.add_overlay(shielded)
 	target.AddElement(/datum/element/relay_attackers)
 	RegisterSignal(target, COMSIG_ATOM_WAS_ATTACKED, PROC_REF(upon_attacked))
-	if(target.status_flags & GODMODE)
-		return
-	changed_godmode = TRUE
-	target.status_flags |= GODMODE
+	ADD_TRAIT(target, TRAIT_GODMODE, TRAIT_STATUS_EFFECT(id))
 
 /datum/status_effect/buff/divine_shield/on_remove()
 	var/mob/living/target = owner
 	target.cut_overlay(shielded)
 	target.RemoveElement(/datum/element/relay_attackers)
 	UnregisterSignal(target, COMSIG_ATOM_WAS_ATTACKED)
-	if(changed_godmode)
-		owner.status_flags &= ~GODMODE
+	REMOVE_TRAIT(src, TRAIT_GODMODE, TRAIT_STATUS_EFFECT(id))
 	return ..()
 
 /datum/status_effect/buff/divine_shield/proc/upon_attacked(mob/living/attacked, mob/living/carbon/human/attacker, damage)
