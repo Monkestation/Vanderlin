@@ -61,3 +61,7 @@
 /obj/item/spellbook/adept/starter/water
 	themed_form = FORM_WATER
 	designlist = list("steel")
+
+/obj/item/spellbook/adept/starter/blood
+	themed_form = FORM_BLOOD
+	designlist = list("blood")

@@ -354,9 +354,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Given to a mob that can throw to make them not able to throw
 #define TRAIT_NO_THROWING "no_throwing"
-
-/// Hides the SSD indicator. Used with scrying.
-#define TRAIT_NOSSDINDICATOR "nossdindicator"
 /// Instant grabs on someone else.
 #define TRAIT_NOSTRUGGLE "nostruggle"
 /// Black-bagged. More snowflaking.
@@ -389,6 +386,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EMPATH "Empath"
 #define TRAIT_BREADY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
+#define TRAIT_THIEFSENSE "Thief-Sense"
 #define TRAIT_MEDIUMARMOR "Mail Training"
 #define TRAIT_HEAVYARMOR "Plate Training"
 #define TRAIT_DODGEEXPERT "Fast Reflexes"
@@ -472,7 +470,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_INHUMENCAMP "inhumencamp"
 #define TRAIT_GALLOWBAND "gallowband"
 #define TRAIT_INTRAINING "intraining" //allows certain roles to bypass the average skill limitation of training dummies
-#define TRAIT_STEELHEARTED "steelhearted" //no bad mood from dismembering or seeing this
+#define TRAIT_STEELHEARTED "Steel Hearted" //no bad mood from dismembering or seeing this
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
 #define TRAIT_ZIZOID_HUNTED "zizoidhunted" // Used to signal character has been marked by death by the Zizoid cult
 #define TRAIT_LEPROSY "Leprosy"
@@ -501,10 +499,19 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // This is for UNARMED FIGHTERS. LIMIT ITS USE TO THEM
 #define TRAIT_CLOSECOMBAT "Close Combat"
 
+// Can see blood volume and vitae value of a mob.
+#define TRAIT_BLOOD_SENSE "Blood Senses"
+// Mob uses vitae for one purpose or another.
+#define TRAIT_VITAE_USER "Vitae User"
+// Bleeding is suspended by a spell
+#define TRAIT_SUSPENDED_BLEED "Suspended Bleeding"
+
 #define TRAIT_CONJURED_SUMMON "conjured_summon"
 #define TRAIT_CONJURE_BACKLASH "conjure_backlash"
 
-#define TRAIT_SORCERER "Unattuned"
+#define TRAIT_SORCERER "Sorcerer"
+#define TRAIT_BLOOD_MAGE "Blood Mage"
+#define TRAIT_BLOOD_SORCERER "Blood Sorcerer"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise
@@ -535,6 +542,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DIVINE_SERVANT "Divine Servant"
 #define TRAIT_DIVINE_CONVERT "Divine Convert"
 #define TRAIT_LUNAR_ORDER "Member of the Lunar Order"
+#define TRAIT_DREAM_CAVE "Access to the Dream Cave"
 
 // Inhumen patron trait bonuses
 #define TRAIT_ORGAN_EATER "Blessing of Graggar"//Can eat organs (duh.) and raw meat
@@ -558,6 +566,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_XYLIX_CURSE "Xylix's Curse"
 #define TRAIT_PESTRA_CURSE "Pestra's Curse"
 #define TRAIT_EORA_CURSE "Eora's Curse"
+#define TRAIT_MALUM_CURSE "Malum's Curse"
 #define TRAIT_ZIZO_CURSE "Zizo's Curse"
 #define TRAIT_GRAGGAR_CURSE "Graggar's Curse"
 #define TRAIT_MATTHIOS_CURSE "Matthios' Curse"
@@ -616,7 +625,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// The items needs two hands to be carried
 #define TRAIT_NEEDS_TWO_HANDS "needstwohands"
 /// This item can't be pickpocketed
-#define TRAIT_HARD_TO_STEAL "hard_to_steal"
+#define TRAIT_CANT_BE_STOLEN "cant_be_stolen"
 
 // **** turf traits
 ///Turf slowdown will be ignored when this trait is added to a turf.

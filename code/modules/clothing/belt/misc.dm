@@ -33,19 +33,16 @@
 	new /obj/item/lockpick(src)
 
 //Bandit's belt starts with a simple needle and a key to their hideout.
-
 /obj/item/storage/belt/leather/bandit/populate_contents()
 	new /obj/item/needle/thorn(src)
 	new /obj/item/key/bandit(src)
 
 //Adventurer's belt start with a needle, cloth and just that, good luck buddy
-
 /obj/item/storage/belt/leather/adventurer/populate_contents()
 	new /obj/item/needle/thorn(src)
 	new /obj/item/natural/cloth(src)
 
 //Garrison's belt starts with a simple needle, and a key to their hideout.
-
 /obj/item/storage/belt/leather/fgarrison/populate_contents()
 	new /obj/item/needle/thorn(src)
 	new /obj/item/key/forrestgarrison(src)
@@ -204,6 +201,7 @@
 	storage_type = /datum/storage/coin_pouch
 	grid_height = 64
 	grid_width = 32
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/storage/belt/pouch/medicine/populate_contents()
 	new /obj/item/needle(src)
@@ -360,7 +358,7 @@
 
 /obj/item/storage/backpack/backpack/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/storage/backpack/backpack/artibackpack
 	name = "cooling backpack"
@@ -386,6 +384,7 @@
 	icon_state = "doctorbag"
 	attack_verb = list("beats", "bludgeons")
 	storage_type = /datum/storage/surgery_bag
+	pickpocket_difficulty = SKILL_LEVEL_MASTER
 
 /obj/item/storage/backpack/satchel/surgbag/populate_contents()
 	new /obj/item/weapon/surgery/scalpel(src)

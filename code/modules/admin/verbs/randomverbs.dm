@@ -749,6 +749,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if(QDELETED(human_target))
 		return FALSE
 	human_target.check_for_injuries(mob, TRUE, FALSE, TRUE, TRUE)
+	log_admin("[key_name(usr)] admin-scanned the health of [key_name(target)]")
+	message_admins("[key_name_admin(usr)] admin-scanned the health of [key_name_admin(target)]")
 	return TRUE
 
 /client/proc/smite(mob/living/target as mob)
@@ -837,7 +839,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			for (var/mob/living/carbon in GLOB.carbon_list) // Admin smite, just tell all assassins whether they have their knife or not
 				if (HAS_TRAIT(carbon, TRAIT_ASSASSIN) && !(carbon.stat == DEAD)) //Check if they are an assassin and alive
 					// for(var/obj/item/I in carbon) // Checks to see if the assassin has their dagger on them. If so, the dagger will let them know of a new target.
-					// 	if(istype(I, /obj/item/weapon/knife/dagger/steel/profane)) // Checks to see if the assassin has their dagger on them.
+					// 	if(istype(I, /obj/item/weapon/knife/dagger/steel/inhumen/profane)) // Checks to see if the assassin has their dagger on them.
 					to_chat(carbon, "<span class='danger'>\"The Dark Sun Graggar himself has ordered us to punish [target.real_name] for their transgressions!\"</span>")
 			to_chat(target.mind, "<span class='danger'>My hair stands on end. Has someone just said my name? I should watch my back.</span>")
 		if(ADMIN_PUNISHMENT_MEATPIE)

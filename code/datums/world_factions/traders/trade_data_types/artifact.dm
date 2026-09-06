@@ -6,7 +6,7 @@
 /datum/outfit/artifact
 	head = /obj/item/clothing/head/leather/duelhat
 	mask = /obj/item/clothing/face/facemask/steel/harlequin
-	armor = /obj/item/clothing/armor/plate/full/matthios
+	armor = /obj/item/clothing/armor/plate/full/inhumen/matthios
 	cloak = /obj/item/clothing/cloak/graggar
 	shirt = /obj/item/clothing/shirt/undershirt/artificer
 	shoes = /obj/item/clothing/shoes/nobleboot/duelboots
@@ -21,7 +21,6 @@
 	custom_items = list(
 		/obj/item/weapon/flail/peasantwarflail/matthios = list(1, PRICE_SUBGOD_ARTIFACT, 1),
 		/obj/item/weapon/sword/long/martyr = list(1, PRICE_SUBGOD_ARTIFACT, 1),
-		/obj/item/weapon/greataxe/dreamscape = list(1, PRICE_SUBGOD_ARTIFACT, 1),
 		/obj/item/weapon/greataxe/steel/doublehead/graggar = list(1, PRICE_SUBGOD_ARTIFACT, 1),
 		/obj/item/weapon/polearm/woodstaff/psydonian = list(1, PRICE_BOSS_ARTIFACT, 1),
 		/obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast = list(1, PRICE_GOD_ARTIFACT, 1),

@@ -68,20 +68,22 @@
 	placed_type = parent_type
 
 /obj/item/rotation_contraption/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(istype(interacting_with, /obj/item/rotation_contraption))
-		if(!can_stack)
-			return
+	if(isitem(interacting_with))
+		if(istype(interacting_with, /obj/item/rotation_contraption))
+			if(!can_stack)
+				return
 
-		var/obj/item/rotation_contraption/rotator = interacting_with
-		if(placed_type != rotator.placed_type)
-			return
+			var/obj/item/rotation_contraption/rotator = interacting_with
+			if(placed_type != rotator.placed_type)
+				return
 
-		in_stack += rotator.in_stack
-		balloon_alert(user, "stacked!")
-		update_appearance(UPDATE_NAME)
-		qdel(rotator)
+			in_stack += rotator.in_stack
+			balloon_alert(user, "stacked!")
+			update_appearance(UPDATE_NAME)
+			qdel(rotator)
 
-		return ITEM_INTERACT_SUCCESS
+			return ITEM_INTERACT_SUCCESS
+		return ..()
 
 	var/turf/T = get_turf(interacting_with)
 
@@ -103,7 +105,8 @@
 			return ITEM_INTERACT_BLOCKING
 
 	visible_message("[user] starts placing down [src].", "You start to place [src].")
-	if(!do_after(user, 1.2 SECONDS - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering), T))
+	var/delay = max(1 SECONDS - GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/engineering), 0)
+	if(!do_after(user, delay, T))
 		return ITEM_INTERACT_BLOCKING
 
 	var/obj/structure/structure = new placed_type(T)

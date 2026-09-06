@@ -52,6 +52,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/wretch/hedgemage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -103,7 +104,7 @@
 	backpack_contents = list(
 		/obj/item/chalk = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1
 	)

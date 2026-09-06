@@ -119,5 +119,5 @@
 	gloves = /obj/item/clothing/gloves/leather
 	neck = /obj/item/clothing/neck/psycross/great_hunt
 	backpack_contents = list(
-		/obj/item/scrying = 1
+		/obj/item/scrying/eye/bogwitch = 1
 	)

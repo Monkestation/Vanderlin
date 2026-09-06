@@ -42,16 +42,15 @@
 
 /datum/outfit/zizo_cultist
 	name = "Zizo's Ascendant"
-	head = /obj/item/clothing/head/helmet/skullcap/cult
-	mask = /obj/item/clothing/face/shepherd/shadowmask
+	head = /obj/item/clothing/head/helmet/visored/zizo
 	neck = /obj/item/clothing/neck/chaincoif
 	shirt = /obj/item/clothing/shirt/shadowshirt
-	armor = /obj/item/clothing/armor/plate/full/zizo
+	armor = /obj/item/clothing/armor/plate/full/inhumen/zizo
 	cloak = /obj/item/clothing/cloak/half/shadowcloak/cult
 	wrists = /obj/item/clothing/neck/psycross/zizo
-	gloves = /obj/item/clothing/gloves/plate/zizo
-	pants = /obj/item/clothing/pants/platelegs/zizo
-	shoes = /obj/item/clothing/shoes/boots/armor/zizo
+	gloves = /obj/item/clothing/gloves/plate/inhumen/zizo
+	pants = /obj/item/clothing/pants/platelegs/inhumen/zizo
+	shoes = /obj/item/clothing/shoes/boots/armor/inhumen/zizo
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/whip/spiderwhip
 	beltr = /obj/item/weapon/knife/dagger/steel/dirk
@@ -100,7 +99,6 @@
 
 /datum/outfit/zizo_cultist_lesser
 	name = "Ascendant Follower"
-	head = /obj/item/clothing/head/helmet/skullcap/cult
 	mask = /obj/item/clothing/face/shepherd/shadowmask
 	neck = /obj/item/clothing/neck/highcollier
 	shirt = /obj/item/clothing/armor/chainmail

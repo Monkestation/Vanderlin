@@ -26,7 +26,7 @@
 	tutorial = "A nomad from the far steppes of the Crimsonlands, you and your saigas have journeyed far to reach these lands."
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/pilgrim/nomad
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/nomad

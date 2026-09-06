@@ -11,6 +11,7 @@
 
 	required_form = FORM_DEATH
 	required_technique = TECHNIQUE_ALTERATION
+	heretical_spell = TRUE
 
 	invocation = "Return to rot."
 	invocation_type = INVOCATION_WHISPER
@@ -24,7 +25,7 @@
 	. = ..()
 	if(!.)
 		return FALSE
-	return isitem(cast_on) || isliving(target)
+	return isitem(cast_on) || isliving(cast_on)
 
 /datum/action/cooldown/spell/decompose/cast(atom/cast_on)
 	. = ..()
@@ -49,4 +50,8 @@
 		injury.adjust_germ_level(250)
 
 	if(target.stat == DEAD)
-		target.zombie_check() //why is this called zombie check when it makes you a zombie...
+		var/datum/antagonist/zombie/zombie_datum = target.zombie_check()
+		if(!zombie_datum)
+			zombie_datum = new /datum/antagonist/zombie()
+		zombie_datum.transform_zombie(target)
+		zombie_datum.wake_zombie(target)

@@ -18,6 +18,7 @@
 	storage_type = /datum/storage/sack
 	right_click_remove = TRUE
 	item_weight = 150 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/storage/sack/examine(mob/user)
 	. = ..()

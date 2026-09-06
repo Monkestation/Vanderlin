@@ -6,3 +6,4 @@
 #define COMSIG_CHIMERIC_ORGAN_TRIGGER "chimeric_organ_trigger"
 
 #define COMSIG_BODYPART_WOUND_REMOVED "bodypart_wound_removed"
+#define COMSIG_BODYPART_ROTTEN_CHANGE "bodypart_rot_change"

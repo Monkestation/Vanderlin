@@ -31,7 +31,7 @@
 		SPEC_ID_TIEFLING,\
 	)
 	outfit = /datum/outfit/adventurer/barbarian
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/barbarian
@@ -62,12 +62,12 @@
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "SPILL SOME BLOOD!")
 	switch(choice)
 		if("Claymore")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 30)
 		if("Greataxe", "Goedendag", "Dual Axes")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 20, 30)
 		if("WHO NEEDS A WEAPON?")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5, 35)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/wrestling, 10, 30)
 			spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
 			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 

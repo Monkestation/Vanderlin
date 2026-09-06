@@ -23,7 +23,7 @@
 	button_icon_state = "lightning"
 	sound = 'sound/foley/jumpland/waterland.ogg'
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/abyssor)
@@ -53,7 +53,7 @@
 	possible_item_intents = list(SPEAR_THRUST, ROD_AUTO, ROD_CAST)
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, POLEARM_BASH)
 	max_blade_int = 50
-	max_integrity = INTEGRITY_WORST / 2 // not meant for long-term combat
+	max_integrity = INTEGRITY_OLD_WORST / 2 // not meant for long-term combat
 
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64

@@ -2607,6 +2607,10 @@
 /obj/machinery/light/fueled/oven/west,
 /turf/open/floor/twig,
 /area/indoors/wilderness)
+"pl" = (
+/obj/structure/fluff/statue/necra,
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness/safe/gallowband_fort)
 "pp" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -3594,12 +3598,6 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/churchbrick,
 /area/indoors/dungeon)
-"uQ" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/safe/gallowband_fort)
 "uR" = (
 /obj/structure/closet/crate/drawer,
 /obj/item/storage/belt/pouch/coins/mid,
@@ -4849,6 +4847,15 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"Ch" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/pants/trou/leather/gronn,
+/obj/item/clothing/armor/leather/shamancoat,
+/obj/item/clothing/gloves/plate/beastclaws,
+/obj/item/clothing/neck/psycross/great_hunt,
+/obj/item/clothing/head/helmet/leather/shaman_hood,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband)
 "Ci" = (
 /turf/closed/wall/mineral/tent{
 	dir = 4
@@ -4928,16 +4935,6 @@
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
-"CJ" = (
-/obj/structure/keyrack,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
-/obj/item/key/forrestgarrison,
-/obj/item/key/forrestgarrison,
-/obj/item/key/forrestgarrison,
-/obj/item/key/forrestgarrison,
-/obj/effect/mapping_helpers/access/locker,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/wilderness/gallowband/garrison)
 "CN" = (
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/herringbone,
@@ -4951,6 +4948,16 @@
 "CP" = (
 /turf/open/floor/sandstone_tile/six,
 /area/indoors/dungeon)
+"CR" = (
+/obj/structure/keyrack,
+/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/item/key/forrestgarrison,
+/obj/item/key/forrestgarrison,
+/obj/item/key/forrestgarrison,
+/obj/item/key/forrestgarrison,
+/obj/effect/mapping_helpers/access/locker,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "CT" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/volcanic,
@@ -5938,15 +5945,6 @@
 /obj/structure/flora/grass/maneater/real,
 /turf/open/floor/grass,
 /area/outdoors/wilderness)
-"HI" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
-/obj/item/clothing/pants/trou/leather/gronn,
-/obj/item/clothing/armor/leather/shamancoat,
-/obj/item/clothing/gloves/plate/beastclaws,
-/obj/item/clothing/neck/psycross/great_hunt,
-/obj/item/clothing/head/helmet/leather/shaman_hood,
-/turf/open/floor/ruinedwood/darker,
-/area/indoors/wilderness/gallowband)
 "HK" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone/moss,
@@ -6436,10 +6434,6 @@
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"Kz" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
-/turf/open/floor/wood,
-/area/indoors/wilderness/gallowband/ship)
 "KA" = (
 /turf/open/openspace,
 /area/indoors/wilderness/gallowband/garrison)
@@ -7363,6 +7357,10 @@
 "PO" = (
 /turf/open/floor/sand,
 /area/under/cave)
+"PP" = (
+/obj/structure/closet/crate/crafted_closet,
+/turf/open/floor/wood,
+/area/indoors/wilderness/gallowband/ship)
 "PQ" = (
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/herringbone,
@@ -8336,6 +8334,10 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/marsh,
 /area/outdoors/wilderness)
+"Vt" = (
+/obj/structure/closet/crate/crafted_closet,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "Vu" = (
 /obj/effect/decal/borderfall{
 	dir = 1;
@@ -9035,10 +9037,6 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
-"Zk" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
-/turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/wilderness/gallowband/garrison)
 "Zl" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /obj/effect/decal/cleanable/dirt,
@@ -12250,9 +12248,9 @@ sG
 GP
 cO
 sG
-Kz
+PP
 ei
-Kz
+PP
 GH
 Ib
 GP
@@ -16489,7 +16487,7 @@ YM
 pg
 pg
 Se
-uQ
+pl
 qL
 Iz
 Iz
@@ -17297,7 +17295,7 @@ qg
 pg
 pg
 Se
-uQ
+pl
 qL
 Iz
 Iz
@@ -55288,7 +55286,7 @@ JD
 JD
 JD
 tu
-HI
+Ch
 wo
 Rx
 QJ
@@ -57684,7 +57682,7 @@ Mi
 fk
 KW
 Lq
-Zk
+Vt
 EO
 xF
 iU
@@ -57884,7 +57882,7 @@ Mi
 Mi
 yS
 yS
-CJ
+CR
 Gw
 KW
 KW

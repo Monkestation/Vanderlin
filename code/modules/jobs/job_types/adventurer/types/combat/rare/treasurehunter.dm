@@ -27,7 +27,7 @@
 	necrotic flesh off of that trinket you found."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/adventurer/gravedigger
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/gravedigger

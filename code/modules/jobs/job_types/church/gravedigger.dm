@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/magic/holy = 30,
-		/datum/attribute/skill/craft/masonry = 30, //Crafting grave decorations
+		/datum/attribute/skill/craft/masonry = 20, //Crafting grave decorations
 		/datum/attribute/skill/labor/mathematics = 20
 	)
 
@@ -74,7 +74,7 @@
 	armor = /obj/item/clothing/shirt/robe/necra
 	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/weapon/hammer/iron
+	beltl = /obj/item/weapon/hammer/wood
 	beltr = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/weapon/shovel/necran
 	backr = /obj/item/storage/backpack/satchel/cloth

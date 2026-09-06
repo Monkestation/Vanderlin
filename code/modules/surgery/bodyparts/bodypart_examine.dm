@@ -66,6 +66,8 @@
 				bodypart_status += "[src] is limp."
 			if(BODYPART_DISABLED_CLAMPED)
 				bodypart_status += "[src] is clamped."
+			if(BODYPART_DISABLED_TOURNIQUET)
+				bodypart_status += "[src] is starved of blood and unresponsive."
 			else
 				bodypart_status += "[src] is crippled."
 	if(has_wound(/datum/wound/fracture))
@@ -116,6 +118,19 @@
 			if(!bandage || observer_privilege)
 				for(var/datum/wound/wound as anything in wounds)
 					bodypart_status += wound.get_visible_name(user)
+
+		if(tourniquet)
+			var/usedclass = "notice"
+			if(GET_ATOM_BLOOD_DNA(tourniquet))
+				usedclass = "bloody"
+			bodypart_status += "<a href='byond://?src=[owner_ref];tourniquet=[REF(tourniquet)];tourniquet_limb=[REF(src)]' class='[usedclass]'>Tourniquet</a>"
+			if(tourniquet_time >= TOURNIQUET_ISCHEMIA_DELAY)
+				bodypart_status += "[tourniquet] seems to be causing some pain."
+			if(tourniquet_time >= TOURNIQUET_NECROSIS_DELAY * 0.8)
+				bodypart_status += "[tourniquet] has started damaging [src] and it looks like it may rot soon."
+
+		if(splinted)
+			bodypart_status += "<a href='byond://?src=[owner_ref];splint=[REF(splint_item)];splint_limb=[REF(src)]' class='notice'>Splinted</a>"
 
 		if(bandage || length(injuries))
 			bodypart_status += "<B>Injuries:</B>"
@@ -232,10 +247,7 @@
 
 	for(var/obj/item/organ/possible_artery in getorganslotlist(ORGAN_SLOT_ARTERY))
 		if(possible_artery.is_bruised())
-			if(get_cut(ignore_gauze = TRUE))
-				status += span_artery(uppertext("cut [possible_artery.name]"))
-			else
-				status += span_artery(uppertext("bruised [possible_artery.name]"))
+			status += span_artery(uppertext("[possible_artery.name]"))
 
 	if(skeletonized)
 		status += "<span class='dead'>SKELETON</span>"
@@ -273,6 +285,14 @@
 
 	if(bodypart_disabled)
 		status += "<span class='deadsay'>CRIPPLED</span>"
+	if(tourniquet)
+		var/usedclass = "notice"
+		if(GET_ATOM_BLOOD_DNA(tourniquet))
+			usedclass = "bloody"
+		status += "<a href='byond://?src=[owner_ref];tourniquet=[REF(tourniquet)];tourniquet_limb=[REF(src)]' class='[usedclass]'>TOURNIQUET</a>"
+
+	if(splinted)
+		status += "<a href='byond://?src=[owner_ref];splint=[REF(splint_item)];splint_limb=[REF(src)]' class='notice'>SPLINTED</a>"
 
 	return status
 

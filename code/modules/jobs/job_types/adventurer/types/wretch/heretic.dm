@@ -39,67 +39,67 @@
 
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 		if(/datum/patron/divine/noc)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 		if(/datum/patron/divine/dendor)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 		if(/datum/patron/divine/necra)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 			ADD_TRAIT(spawned, TRAIT_GRAVEROBBER, TRAIT_GENERIC)
 		if(/datum/patron/divine/pestra)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 40, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20, 20)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/ravox)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 		if(/datum/patron/divine/malum)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 		if(/datum/patron/divine/abyssor)
-			spawned.adjust_skill_level(/datum/attribute/skill/labor/fishing, 10)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/labor/fishing, 10, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
 		if(/datum/patron/divine/xylix)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
 		if(/datum/patron/inhumen/graggar)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40)
 			ADD_TRAIT(spawned, TRAIT_STRONGBITE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 			ADD_TRAIT(spawned, TRAIT_STRONGBITE, TRAIT_GENERIC)
 		if(/datum/patron/inhumen/graggar_zizo)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
 		if(/datum/patron/inhumen/zizo)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
 			spawned.grant_language(/datum/language/undead)
 		if(/datum/patron/inhumen/matthios)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/whipsflails, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
 		if(/datum/patron/inhumen/baotha)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 40, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20, 20)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 			spawned.grant_language(/datum/language/newpsydonic)
 		else
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 40, 40)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 
 	if(!spawned.has_language(/datum/language/celestial) && (spawned.patron?.type in ALL_TEMPLE_PATRONS))
@@ -127,7 +127,7 @@
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 	)
 	belt = /obj/item/storage/belt/leather/black
 	ring = /obj/item/clothing/ring/silver
@@ -192,50 +192,50 @@
 			cloak = /obj/item/clothing/cloak/stabard/templar/xylix
 			beltl = /obj/item/weapon/whip/xylix
 		if(/datum/patron/inhumen/graggar)
-			head = /obj/item/clothing/head/helmet/heavy/graggar
-			armor = /obj/item/clothing/armor/plate/full/graggar
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/graggar
+			armor = /obj/item/clothing/armor/plate/full/inhumen/graggar
 			neck = /obj/item/clothing/neck/gorget
-			gloves = /obj/item/clothing/gloves/plate/graggar
-			pants = /obj/item/clothing/pants/platelegs/graggar
-			shoes = /obj/item/clothing/shoes/boots/armor/graggar
+			gloves = /obj/item/clothing/gloves/plate/inhumen/graggar
+			pants = /obj/item/clothing/pants/platelegs/inhumen/graggar
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 			backr = /obj/item/weapon/greataxe/steel/doublehead/graggar
 		if(/datum/patron/inhumen/graggar_zizo)
-			head = /obj/item/clothing/head/helmet/heavy/graggar
-			armor = /obj/item/clothing/armor/plate/full/graggar
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/graggar
+			armor = /obj/item/clothing/armor/plate/full/inhumen/graggar
 			neck = /obj/item/clothing/neck/gorget
-			gloves = /obj/item/clothing/gloves/plate/graggar
-			pants = /obj/item/clothing/pants/platelegs/graggar
-			shoes = /obj/item/clothing/shoes/boots/armor/graggar
+			gloves = /obj/item/clothing/gloves/plate/inhumen/graggar
+			pants = /obj/item/clothing/pants/platelegs/inhumen/graggar
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/graggar
 			cloak = /obj/item/clothing/cloak/graggar
 			backr = /obj/item/weapon/greataxe/steel/doublehead/graggar
 		if(/datum/patron/inhumen/zizo)
 			head = /obj/item/clothing/head/helmet/visored/zizo
-			armor = /obj/item/clothing/armor/plate/full/zizo
+			armor = /obj/item/clothing/armor/plate/full/inhumen/zizo
 			neck = /obj/item/clothing/neck/gorget
-			gloves = /obj/item/clothing/gloves/plate/zizo
-			pants = /obj/item/clothing/pants/platelegs/zizo
-			shoes = /obj/item/clothing/shoes/boots/armor/zizo
+			gloves = /obj/item/clothing/gloves/plate/inhumen/zizo
+			pants = /obj/item/clothing/pants/platelegs/inhumen/zizo
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/zizo
 			var/zizo_sword = pick(/obj/item/weapon/sword/long/zizo_longsword, /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser, /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword)
 			backr = zizo_sword
 		if(/datum/patron/inhumen/matthios)
-			head = /obj/item/clothing/head/helmet/heavy/matthios
-			armor = /obj/item/clothing/armor/plate/full/matthios
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/matthios
+			armor = /obj/item/clothing/armor/plate/full/inhumen/matthios
 			neck = /obj/item/clothing/neck/gorget
-			gloves = /obj/item/clothing/gloves/plate/matthios
-			pants = /obj/item/clothing/pants/platelegs/matthios
-			shoes = /obj/item/clothing/shoes/boots/armor/matthios
+			gloves = /obj/item/clothing/gloves/plate/inhumen/matthios
+			pants = /obj/item/clothing/pants/platelegs/inhumen/matthios
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/matthios
 			backr = /obj/item/weapon/flail/peasantwarflail/matthios
 		if(/datum/patron/inhumen/baotha)
-			head = /obj/item/clothing/head/helmet/heavy/baotha
+			head = /obj/item/clothing/head/helmet/heavy/inhumen/baotha
 			mask = /obj/item/clothing/face/spectacles/sglasses
 			neck = /obj/item/clothing/neck/gorget
 			armor = /obj/item/clothing/armor/plate
 			gloves = /obj/item/clothing/gloves/plate
 			pants = /obj/item/clothing/pants/platelegs
 			shoes = /obj/item/clothing/shoes/boots/armor
-			beltr = /obj/item/weapon/knife/dagger/steel/baotha
-			beltl = /obj/item/weapon/knife/dagger/steel/baotha
+			beltr = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
+			beltl = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
 			wrists = /obj/item/clothing/neck/psycross/gold
 			armor = /obj/item/clothing/armor/cuirass/fluted

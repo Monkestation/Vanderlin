@@ -22,8 +22,6 @@
 	var/clean_speed = 0.4 SECONDS
 	var/volume = 9
 
-	// Effectiveness when used as a bandage, how much it'll lower the bloodloss, bloodloss will get multiplied by this.
-	var/bandage_effectiveness = 0 // EXPERIMENTAL CHANGE: BANDAGES STOP ALL BLEEDING
 	///how long it will take to bandage something with this
 	var/bandage_speed = 7 SECONDS
 	///How much you can bleed into the bandage until it needs to be changed
@@ -158,7 +156,6 @@
 				user.visible_message(span_small("[user] soaks \the [src] in \the [T]."), span_small("I soak \the [src] in \the [T]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
 				bandage_health = initial(bandage_health)
-				bandage_effectiveness = initial(bandage_effectiveness)
 		else
 			var/datum/liquid_group/lg = T.liquids?.liquid_group
 			if(!lg)
@@ -188,7 +185,6 @@
 			user.visible_message(span_small("[user] wrings out \the [src] in \the [O]."), span_small("I wring out \the [src] in \the [O]."), vision_distance = 2)
 			playsound(O, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
 			bandage_health = initial(bandage_health)
-			bandage_effectiveness = initial(bandage_effectiveness)
 	else if(isturf(target))
 		var/turf/T = target
 		if(istype(T, /turf/open/water))
@@ -203,7 +199,6 @@
 				user.visible_message(span_small("[user] wrings out \the [src]."), span_small("I wring out \the [src]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
 				bandage_health = initial(bandage_health)
-				bandage_effectiveness = initial(bandage_effectiveness)
 
 	update_appearance(UPDATE_OVERLAYS)
 
@@ -222,7 +217,7 @@
 		return FALSE
 
 	if(affecting.bandage)
-		to_chat(user, "<span class='warning'>There is already a bandage.</span>")
+		to_chat(user, span_warning("There is already a bandage."))
 		return FALSE
 
 	var/used_time = bandage_speed * (1 - (GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/misc/medicine) * 0.15))

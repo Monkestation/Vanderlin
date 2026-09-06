@@ -165,7 +165,7 @@ Keep them reasonable to make
 /datum/alch_cauldron_recipe/str_potion
 	recipe_name = "Strength of Troll Muscles"
 	smells_like = "sour vomit"
-	output_reagents = list(/datum/reagent/buff/strength = 5)
+	output_reagents = list(/datum/reagent/buff/strength = 25)
 	required_essences = list(
 		/datum/thaumaturgical_essence/earth = 18,
 		/datum/thaumaturgical_essence/order = 9,

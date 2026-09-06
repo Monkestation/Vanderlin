@@ -192,7 +192,7 @@
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage < SHOCK_STAGE_4))  // Crossed stage 4
 		// emote("freezes and goes limp.", intentional = TRUE)
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
-			Immobilize(0.5 SECONDS)
+			Immobilize(1 SECONDS)
 
 	if((shock_stage >= SHOCK_STAGE_4) && (previous_shock_stage >= SHOCK_STAGE_4))
 		if(DT_PROB(3, delta_time))
@@ -231,7 +231,8 @@
 
 	if((shock_stage >= SHOCK_STAGE_7) && (previous_shock_stage >= SHOCK_STAGE_7))
 		if(DT_PROB(5, delta_time))
-			Paralyze(5 SECONDS)
+			if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
+				Paralyze(5 SECONDS)
 			endorphinate(TRUE)
 
 	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage < SHOCK_STAGE_8)) // Crossed stage 8
@@ -241,7 +242,7 @@
 		//Death is near...
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Unconscious(5 SECONDS)
-			endorphinate(TRUE)
+		endorphinate(TRUE)
 
 	if((shock_stage >= SHOCK_STAGE_8) && (previous_shock_stage >= SHOCK_STAGE_8))
 		//How the fuck are we still alive?
@@ -251,4 +252,4 @@
 			//death_rattle()
 		if(!HAS_TRAIT(src, TRAIT_NOPAINSTUN))
 			Unconscious(10 SECONDS)
-			endorphinate(TRUE)
+		endorphinate(TRUE)

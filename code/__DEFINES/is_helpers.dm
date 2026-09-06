@@ -114,6 +114,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 
 #define isrogueobserver(A) (istype(A, /mob/dead/observer/rogue))
 
+#define isscryeye(A) (istype(A, /mob/scry_eye))
+
 #define isdead(A) (istype(A, /mob/dead))
 
 #define isnewplayer(A) (istype(A, /mob/dead/new_player))
@@ -190,6 +192,7 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 // Garrison
 // Church
 	#define is_priest_job(job_type) (istype(job_type, /datum/job/priest))
+	#define is_oracle_job(job_type) (istype(job_type, /datum/job/admin/oracle))
 	#define is_monk_job(job_type) (istype(job_type, /datum/job/monk))
 	#define is_inquisitor_job(job_type) (istype(job_type, /datum/job/inquisitor))
 	#define is_adept_job(job_type) (istype(job_type, /datum/job/adept))

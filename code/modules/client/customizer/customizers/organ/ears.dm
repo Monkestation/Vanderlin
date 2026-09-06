@@ -14,7 +14,11 @@
 	organ_type = /obj/item/organ/ears/elf
 	sprite_accessories = list(
 		/datum/sprite_accessory/ears/elf,
-		/datum/sprite_accessory/ears/elfw)
+		/datum/sprite_accessory/ears/elfw,
+		/datum/sprite_accessory/ears/elftw,
+		/datum/sprite_accessory/ears/elfww,
+		/datum/sprite_accessory/ears/elfwww,
+		/datum/sprite_accessory/ears/elfttw)
 
 /datum/customizer/organ/ears/elf
 	customizer_choices = list(/datum/customizer_choice/organ/ears/elf)
@@ -30,6 +34,10 @@
 	sprite_accessories = list(
 		/datum/sprite_accessory/ears/elf,
 		/datum/sprite_accessory/ears/elfw,
+		/datum/sprite_accessory/ears/elftw,
+		/datum/sprite_accessory/ears/elfww,
+		/datum/sprite_accessory/ears/elfwww,
+		/datum/sprite_accessory/ears/elfttw
 		)
 
 /datum/customizer/organ/ears/tiefling
@@ -42,6 +50,10 @@
 	sprite_accessories = list(
 		/datum/sprite_accessory/ears/elf,
 		/datum/sprite_accessory/ears/elfw,
+		/datum/sprite_accessory/ears/elftw,
+		/datum/sprite_accessory/ears/elfww,
+		/datum/sprite_accessory/ears/elfwww,
+		/datum/sprite_accessory/ears/elfttw
 		)
 
 /datum/customizer/organ/ears/anthro

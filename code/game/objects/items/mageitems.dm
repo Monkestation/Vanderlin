@@ -11,6 +11,7 @@
 	storage_type = /datum/storage/magebag
 	right_click_remove = TRUE
 	item_weight = 150 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/storage/magebag/examine(mob/user)
 	. = ..()
@@ -130,7 +131,7 @@
 
 /obj/item/weapon/knife/dagger/silver/arcyne/Initialize()
 	. = ..()
-	filter(type="drop_shadow", x=0, y=0, size=2, offset=1, color=rgb(128, 0, 128, 1))
+	filter(type="drop_shadow", x=0, y=0, size=2, offset=1, color=rgb(128, 0, 128, 98))
 
 /obj/item/weapon/knife/dagger/silver/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!istype(tool, /obj/item/ore/cinnabar))

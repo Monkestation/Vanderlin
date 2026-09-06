@@ -110,7 +110,7 @@
 	icon_gib = "piggie_dead"
 
 	animal_species = /mob/living/simple_animal/hostile/retaliate/trufflepig
-	faction = list("goats")
+	faction = list(FACTION_NEUTRAL)
 	footstep_type = FOOTSTEP_MOB_SHOE
 	emote_see = list("eyes the surroundings.", "flicks its ears.")
 	deathsound = 'sound/vo/mobs/pig/hangry.ogg'
