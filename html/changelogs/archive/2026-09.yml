@@ -117,3 +117,6 @@
   - rscadd: Skin armor (Disciple skin etc.) now has a placeholder sprite in the inventory
       so it is obvious at a glance something is in the slot.
   - code_imp: Makes Parry calculations a little easier to read.
+2026-09-06:
+  Karl Johansson:
+  - bugfix: Decompose and Raise Undead are functioning spells again.

@@ -1,4 +1,0 @@
-author: "Karl Johansson"
-delete-after: True
-changes:
-  - bugfix: "Decompose and Raise Undead are functioning spells again."
