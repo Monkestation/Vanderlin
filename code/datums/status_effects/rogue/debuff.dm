@@ -3,95 +3,167 @@
 
 ///////////////////////////
 
-/datum/status_effect/debuff/hungryt1
+/datum/status_effect/debuff/hungry
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
+	var/datum/stress_event/stress_to_apply
+
+/datum/status_effect/debuff/hungry/on_apply()
+	. = ..()
+	if(stress_to_apply && iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		C.add_stress(stress_to_apply)
+
+/datum/status_effect/debuff/hungry/on_remove()
+	. = ..()
+	if(stress_to_apply && iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		C.remove_stress(stress_to_apply)
+
+/**
+ * T1 - No debuff
+ */
+/datum/status_effect/debuff/hungry/t1
 	id = "hungryt1"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt1
-	effectedstats = list(STAT_SPEED = -1, STAT_STRENGTH = -1, STAT_CONSTITUTION = -1, STAT_ENDURANCE = -1)
-	duration = 10 SECONDS
-	tick_interval = STATUS_EFFECT_NO_TICK
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt1
-	name = "Peckish, stomach growling"
-	desc = "<span class='warning'>I am getting hungry.</span>\n"
+	name = "Peckish"
+	desc = span_warning("I could use a bite.</span>\n")
 	icon_state = "hunger1"
 
-/datum/status_effect/debuff/hungryt1/on_apply()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.add_stress(/datum/stress_event/peckish)
-
-/datum/status_effect/debuff/hungryt1/on_remove()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.remove_stress(/datum/stress_event/peckish)
-
-/datum/status_effect/debuff/hungryt2
+/**
+ * T2
+ */
+/datum/status_effect/debuff/hungry/t2
 	id = "hungryt2"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt2
-	effectedstats = list(STAT_SPEED = -4, STAT_STRENGTH = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -1)
-	duration = 10 SECONDS
-	tick_interval = STATUS_EFFECT_NO_TICK
+	effectedstats = list(STAT_SPEED = -1, STAT_STRENGTH = -1, STAT_CONSTITUTION = -1, STAT_ENDURANCE = -1)
+	stress_to_apply = /datum/stress_event/peckish
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt2
 	name = "Hungry, need food"
-	desc = "<span class='warning'>My stomach hurts, I need food.</span>\n"
+	desc = span_warning("I am hungry.</span>\n")
 	icon_state = "hunger2"
 
-/datum/status_effect/debuff/hungryt2/on_apply()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.add_stress(/datum/stress_event/hungry)
-
-/datum/status_effect/debuff/hungryt2/on_remove()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.remove_stress(/datum/stress_event/hungry)
-
-/datum/status_effect/debuff/hungryt3
+/**
+ * T3
+ */
+/datum/status_effect/debuff/hungry/t3
 	id = "hungryt3"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt3
-	effectedstats = list(STAT_SPEED = -6, STAT_STRENGTH = -6, STAT_CONSTITUTION = -6, STAT_ENDURANCE = -6)
-	duration = 10 SECONDS
-	tick_interval = STATUS_EFFECT_NO_TICK
+	effectedstats = list(STAT_SPEED = -4, STAT_STRENGTH = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -1)
+	stress_to_apply = /datum/stress_event/hungry
 
 /atom/movable/screen/alert/status_effect/debuff/hungryt3
-	name = "STARVING"
-	desc = "<span class='boldwarning'>I AM STARVING!</span>\n"
+	name = "Stomach growling"
+	desc = span_warning("My stomach hurts, I need food.\n")
 	icon_state = "hunger3"
 
-/datum/status_effect/debuff/hungryt3/on_apply()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.add_stress(/datum/stress_event/starving)
-
-/datum/status_effect/debuff/hungryt3/on_remove()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.remove_stress(/datum/stress_event/starving)
-
-/datum/status_effect/debuff/hungryt4
+/**
+ * T4
+ */
+/datum/status_effect/debuff/hungry/t4
 	id = "hungryt4"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/hungryt4
-	duration = 10 SECONDS
+	effectedstats = list(STAT_SPEED = -6, STAT_STRENGTH = -6, STAT_CONSTITUTION = -6, STAT_ENDURANCE = -6)
+	stress_to_apply = /datum/stress_event/starving
 
-//Used only when starvation damage is enabled
 /atom/movable/screen/alert/status_effect/debuff/hungryt4
-	name = "Dying of Starvation"
-	desc = "<span class='boldwarning'>I am dying of starvation! I need to find food, quick!</span>\n"
+	name = "STARVING"
+	desc = span_boldwarning("I AM STARVING!</span>\n")
 	icon_state = "hunger4"
 
-/datum/status_effect/debuff/hungryt4/tick()
+/datum/status_effect/debuff/hungry/t4/on_apply()
+	. = ..()
+	if(CONFIG_GET(flag/starvation_death))
+		tick_interval = 1 SECONDS
+
+/datum/status_effect/debuff/hungry/t4/tick()
 	owner.adjustToxLoss(CONFIG_GET(number/starvation_damage_per_tick), forced = TRUE)
 
-/datum/status_effect/debuff/hungryt4/on_apply()
+////////////////////
+
+/datum/status_effect/debuff/thirsty
+	duration = 10 SECONDS
+	tick_interval = STATUS_EFFECT_NO_TICK
+	var/stress_to_apply
+
+/datum/status_effect/debuff/thirsty/on_apply()
 	. = ..()
-	to_chat(owner, "<span class='danger'>I am starving to death! I need to eat something before it's too late!</span>")
+	if(stress_to_apply && iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		C.add_stress(stress_to_apply)
+
+/datum/status_effect/debuff/thirsty/on_remove()
+	. = ..()
+	if(stress_to_apply && iscarbon(owner))
+		var/mob/living/carbon/C = owner
+		C.remove_stress(stress_to_apply)
+
+/**
+ * T1 - No debuff
+ */
+/datum/status_effect/debuff/thirsty/t1
+	id = "thirsty1"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt1
+
+/atom/movable/screen/alert/status_effect/debuff/thirstyt1
+	name = "Getting thirsty"
+	desc = span_warning("I could use a drink.\n")
+	icon_state = "thirst1"
+
+/**
+ * T2
+ */
+/datum/status_effect/debuff/thirsty/t2
+	id = "thirsty2"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt2
+	effectedstats = list(STAT_ENDURANCE = -1, STAT_SPEED = -1)
+	stress_to_apply = /datum/stress_event/drym
+
+/atom/movable/screen/alert/status_effect/debuff/thirstyt2
+	name = "Thirsty"
+	desc = span_warning("My mouth feels dry and dehydrated.\n")
+	icon_state = "thirst1"
+
+/**
+ * T3
+ */
+/datum/status_effect/debuff/thirsty/t3
+	id = "thirsty3"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt3
+	effectedstats = list(STAT_SPEED = -4, STAT_ENDURANCE = -4)
+	stress_to_apply = /datum/stress_event/thirst
+
+/atom/movable/screen/alert/status_effect/debuff/thirstyt3
+	name = "Extremly thirsty"
+	desc = span_warning("If I don't drink something soon, my mouth will be sand.\n")
+	icon_state = "thirst3"
+
+/**
+ * T4
+ */
+/datum/status_effect/debuff/thirsty/t4
+	id = "thirsty4"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt4
+	effectedstats = list(STAT_STRENGTH = -6, STAT_SPEED = -6, STAT_ENDURANCE = -6)
+	stress_to_apply = /datum/stress_event/parched
+
+/atom/movable/screen/alert/status_effect/debuff/thirstyt4
+	name = "Extreme Dehydration"
+	desc = span_boldwarning("I AM DYING OF THIRST!\n")
+	icon_state = "thirst3"
+
+/datum/status_effect/debuff/thirsty/t4/on_apply()
+	. = ..()
+	if(CONFIG_GET(flag/starvation_death))
+		tick_interval = 1 SECONDS
+
+/datum/status_effect/debuff/thirsty/t4/tick(seconds_between_ticks)
+	owner.adjustToxLoss(CONFIG_GET(number/dehydration_damage_per_tick) * seconds_between_ticks, forced = TRUE)
+
+/////////
 
 /datum/status_effect/debuff/wiz
 	id = "wiz"
@@ -104,101 +176,6 @@
 	name = "Fading Power"
 	desc = "My magical power wanes..."
 	icon_state = "hunger3"
-////////////////////
-
-
-/datum/status_effect/debuff/thirstyt1
-	id = "thirsty1"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt1
-	effectedstats = list(STAT_ENDURANCE = -1, STAT_SPEED = -1)
-	duration = 10 SECONDS
-	tick_interval = STATUS_EFFECT_NO_TICK
-
-/atom/movable/screen/alert/status_effect/debuff/thirstyt1
-	name = "Getting thirsty"
-	desc = "<span class='warning'>I could use a drink.</span>\n"
-	icon_state = "thirst1"
-
-
-/datum/status_effect/debuff/thirstyt1/on_apply()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.add_stress(/datum/stress_event/drym)
-
-/datum/status_effect/debuff/thirstyt1/on_remove()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.remove_stress(/datum/stress_event/drym)
-
-/datum/status_effect/debuff/thirstyt2
-	id = "thirsty2"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt2
-	effectedstats = list(STAT_SPEED = -4, STAT_ENDURANCE = -4)
-	duration = 10 SECONDS
-	tick_interval = STATUS_EFFECT_NO_TICK
-
-/atom/movable/screen/alert/status_effect/debuff/thirstyt2
-	name = "Extremly thirsty"
-	desc = "<span class='warning'>If I don't drink something soon, my mouth will be sand.</span>\n"
-	icon_state = "thirst2"
-
-/datum/status_effect/debuff/thirstyt2/on_apply()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.add_stress(/datum/stress_event/thirst)
-
-/datum/status_effect/debuff/thirstyt2/on_remove()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.remove_stress(/datum/stress_event/thirst)
-
-/datum/status_effect/debuff/thirstyt3
-	id = "thirsty3"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt3
-	effectedstats = list(STAT_STRENGTH = -6, STAT_SPEED = -6, STAT_ENDURANCE = -6)
-	duration = 10 SECONDS
-	tick_interval = STATUS_EFFECT_NO_TICK
-
-/atom/movable/screen/alert/status_effect/debuff/thirstyt3
-	name = "Extreme Dehydration"
-	desc = "<span class='boldwarning'>I AM DYING OF THIRST!</span>\n"
-	icon_state = "thirst3"
-
-/datum/status_effect/debuff/thirstyt3/on_apply()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.add_stress(/datum/stress_event/parched)
-
-/datum/status_effect/debuff/thirstyt3/on_remove()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.remove_stress(/datum/stress_event/parched)
-
-/datum/status_effect/debuff/thirstyt4
-	id = "thirstyt4"
-	alert_type = /atom/movable/screen/alert/status_effect/debuff/thirstyt4
-	duration = 10 SECONDS
-
-//Used only when starvation damage is enabled
-/atom/movable/screen/alert/status_effect/debuff/thirstyt4
-	name = "Dying of Thirst"
-	desc = "<span class='boldwarning'>I am dying of thirst! I need to find water, quick!</span>\n"
-	icon_state = "thirst4"
-
-/datum/status_effect/debuff/thirstyt4/tick()
-	owner.adjustToxLoss(CONFIG_GET(number/dehydration_damage_per_tick), forced = TRUE)
-
-/datum/status_effect/debuff/thirstyt4/on_apply()
-	. = ..()
-	to_chat(owner, "<span class='danger'>I am dying of thirst! I need to find water before it's too late!</span>")
-
-/////////
 
 /datum/status_effect/debuff/uncookedfood
 	id = "uncookedfood"

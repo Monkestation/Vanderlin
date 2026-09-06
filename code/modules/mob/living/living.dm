@@ -1102,8 +1102,8 @@
 		setShockStage(0, FALSE, TRUE)
 
 	if(heal_flags & HEAL_ESSENTIALS)
-		set_nutrition(NUTRITION_LEVEL_FED + 50)
-		set_hydration(HYDRATION_LEVEL_HYDRATED + 50)
+		set_nutrition(NUTRITION_LEVEL_FED)
+		set_hydration(HYDRATION_LEVEL_HYDRATED)
 
 	set_disgust(0)
 	cure_husk()

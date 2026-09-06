@@ -35,8 +35,8 @@
 	current_blood = 100
 	blood_req = 2.5
 	oxygen_req = 6
-	nutriment_req = 1.5
-	hydration_req = 0.75
+	nutriment_req = 0.03
+	hydration_req = 0.03
 	self_healing_effect = CE_BRAIN_REGEN
 	self_heal_thresholds = list()
 
