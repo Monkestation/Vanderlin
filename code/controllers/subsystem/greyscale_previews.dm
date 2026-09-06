@@ -11,9 +11,10 @@ SUBSYSTEM_DEF(greyscale_previews)
 /datum/controller/subsystem/greyscale_previews/Initialize()
 #ifndef UNIT_TESTS // We want this to run during unit tests regardless of the config
 	if(!CONFIG_GET(flag/generate_assets_in_init))
-		return
+		return ..()
 #endif
 	ExportMapPreviews()
+	return ..()
 
 /datum/controller/subsystem/greyscale_previews/proc/ExportMapPreviews()
 	// Put subtypes before their parent or the parent file will take all the generated icons
