@@ -29,7 +29,7 @@
 /obj/item/storage/belt/leather/assassin/populate_contents()
 	. = ..()
 	new /obj/item/reagent_containers/glass/bottle/poison(src)
-	new /obj/item/weapon/knife/dagger/steel/profane(src)
+	new /obj/item/weapon/knife/dagger/steel/inhumen/profane(src)
 	new /obj/item/lockpick(src)
 
 //Bandit's belt starts with a simple needle and a key to their hideout.
