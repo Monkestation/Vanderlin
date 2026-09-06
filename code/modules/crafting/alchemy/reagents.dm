@@ -223,8 +223,8 @@
 	description = "Regenerates Vitae."
 	reagent_state = LIQUID
 	color = COLOR_MAROON
-	taste_description = "sickly iron"
-	scent_description = "sickly iron"
+	taste_description = "decay and sickly iron"
+	scent_description = "decay and sickly iron"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
 	price_per_unit = 3

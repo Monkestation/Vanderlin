@@ -13,6 +13,8 @@
 		/datum/attribute/skill/magic/blood = 40,
 		/datum/attribute/skill/magic/arcane = 20, // Needed for book crafting and basic survivability.
 		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/sewing/mending = 20,
 	)
 
 /datum/job/advclass/wretch/bloodmage
@@ -21,13 +23,17 @@
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/wretch/bloodmage
-	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
+	cmode_music = 'sound/music/cmode/antag/combat_deadlyshadows.ogg'
 	total_positions = 1
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	technique_points = 4 // This is mirrored by their form points manually, due to minimal technique-less spells. Do not increase either beyond 4.
 	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
+	magic_user = TRUE
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage
+
+	antag_job = TRUE
+	antag_role = /datum/antagonist/blood_mage
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -88,6 +94,11 @@
 	spawned.adjust_bloodpool()
 	spawned.adjust_form_mastery_points(technique_points, specific_form = FORM_BLOOD)
 
+	for(var/datum/mind/found_mind in get_minds(JOB_ADMIN_BLOOD_SORCERER))
+		spawned.mind?.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Blood Mage"))
+		spawned.mind?.share_identities(found_mind)
+
 /datum/outfit/wretch/bloodmage
 	name = "Blood Mage (Wretch)"
 	pants = /obj/item/clothing/pants/chainlegs
@@ -107,5 +118,6 @@
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1,
-		/obj/item/weapon/knife/dagger/bloodsteel = 1
+		/obj/item/weapon/knife/dagger/bloodsteel = 1,
+		/obj/item/needle = 1,
 	)

@@ -164,6 +164,10 @@
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)
 
+/obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel/relic
+	name = "\proper remorse"
+	desc = "An ancient bloodsteel staff once wielded by the first mortal Blood Mage. You will learn remorse, and it will hurt."
+
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."

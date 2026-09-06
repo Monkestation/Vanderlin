@@ -94,6 +94,11 @@
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)
 
+/obj/item/weapon/handclaw/steel/bloodsteel/relic
+	name = "\proper regret"
+	desc = "The claws of regret sink into all who are unprepared for dark ventures..."
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+
 /obj/item/weapon/handclaw/gronn
 	name = "ossland beast claws"
 	desc = "A pair of uniquely reinforced iron claws forged with the addition of bone by the cleric-priests of Ossland. \

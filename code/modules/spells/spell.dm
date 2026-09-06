@@ -511,6 +511,11 @@
 				if(feedback)
 					owner.balloon_alert(owner, "excommunicated!")
 				return FALSE
+		if(SPELL_BLOOD)
+			if(HAS_TRAIT(owner, TRAIT_BLOOD_MAGIC_BLOCKED))
+				if(feedback)
+					owner.balloon_alert(owner, "blocked from blood magic!")
+				return FALSE
 
 	for(var/datum/action/cooldown/spell/spell in owner.actions)
 		if(spell == src)
@@ -975,7 +980,10 @@
 			return TRUE
 
 		if(SPELL_BLOOD)
-			if(!caster.has_bloodpool_cost(used_cost))
+			var/final_cost = used_cost
+			if(!HAS_TRAIT(caster, TRAIT_VITAE_USER) && !HAS_TRAIT(caster, TRAIT_BLOOD_STUDENT))
+				final_cost = used_cost * 2
+			if(!caster.has_bloodpool_cost(final_cost))
 				if(feedback)
 					caster.balloon_alert(caster, "need more vitae to cast!")
 				return FALSE

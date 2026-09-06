@@ -88,6 +88,8 @@
 					fxtype = /obj/effect/temp_visual/bedrockore
 				if(/turf/closed/mineral/mana_crystal, /turf/closed/mineral/mana_crystal/cold)
 					fxtype = /obj/effect/temp_visual/magicore
+				if(/turf/closed/mineral/bloodstone)
+					fxtype = /obj/effect/temp_visual/bloodore
 			if(fxtype)
 				new fxtype(get_turf(T))
 	for(var/obj/item/natural/rock/boulder in get_hear(range, origin))	// We detect boulders and their contents, too.
@@ -102,6 +104,8 @@
 					fxtype = /obj/effect/temp_visual/gemqualityore
 				if(/obj/item/natural/rock/mana_crystal)
 					fxtype = /obj/effect/temp_visual/magicore
+				if(/obj/item/natural/rock/bloodstone)
+					fxtype = /obj/effect/temp_visual/bloodore
 			if(fxtype)
 				new fxtype(get_turf(boulder))
 
@@ -165,6 +169,17 @@
 	desc = "I feel some energy pulsating from that wall..."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "emppulse"
+	dir = NORTH
+	randomdir = FALSE
+	duration = 1 SECONDS
+	layer = 18
+
+/obj/effect/temp_visual/bloodore
+	name = "bloody ore"
+	desc = "I feel dark energy pulsating from the rock..."
+	icon = 'icons/effects/effects.dmi'
+	icon_state = "blip"
+	color = COLOR_BLOOD_MAGIC
 	dir = NORTH
 	randomdir = FALSE
 	duration = 1 SECONDS

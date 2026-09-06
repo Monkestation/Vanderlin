@@ -16,6 +16,7 @@ GLOBAL_LIST_INIT(huds, list(
 	ANTAG_HUD_WEREWOLF = new/datum/atom_hud/antag(),
 	ANTAG_HUD_ZIZOID = new/datum/atom_hud/antag(),
 	ANTAG_HUD_BANDIT = new/datum/atom_hud/antag(),
+	ANTAG_HUD_BLOOD_MAGE = new/datum/atom_hud/antag(),
 	))
 
 /datum/atom_hud

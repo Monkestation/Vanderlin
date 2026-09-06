@@ -1,5 +1,6 @@
 #define PEARL_OPTION_DRAW "DRAW"
 #define PEARL_OPTION_FEED "FEED"
+#define PEARL_OPTION_SEAL "SEAL"
 
 /datum/action/cooldown/spell/blood_pearl
 	name = "Create Blood Pearl"
@@ -19,7 +20,7 @@
 	invocation_type = INVOCATION_WHISPER
 
 	charge_required = FALSE
-	cooldown_time = 5 MINUTES
+	cooldown_time = 30 SECONDS
 	spell_cost = 600
 	spell_flags = SPELL_UNETCHABLE
 
@@ -68,12 +69,14 @@
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/human_user = user
-	if(!(HAS_TRAIT(human_user, TRAIT_VITAE_USER)))
+	if(!HAS_TRAIT(human_user, TRAIT_VITAE_USER) && !HAS_TRAIT(human_user, TRAIT_BLOOD_STUDENT))
 		to_chat(human_user, span_danger("I do not know what to do with this."))
 		return
 	var/list/options_list = list(PEARL_OPTION_DRAW)
 	if(vitae_amount < max_vitae)
 		options_list += PEARL_OPTION_FEED
+	else
+		options_list += PEARL_OPTION_SEAL
 	var/choice = tgui_alert(human_user, "What do you wish to do with this blood pearl?", "CHOOSE", options_list)
 	if(!human_user.is_holding(src))
 		return
@@ -90,6 +93,12 @@
 			blood_change_amount = tgui_input_number(human_user, "How much vitae do you want to feed into the pearl?", "Feed Vitae", 0, human_user.bloodpool)
 			missing_vitae = max_vitae - vitae_amount
 			blood_change_amount = min(missing_vitae, blood_change_amount)
+		if(PEARL_OPTION_SEAL)
+			qdel(src)
+			var/obj/item/sealed_blood_pearl/sealed = new(user.drop_location())
+			user.put_in_hands(sealed)
+			playsound(user, 'sound/magic/cosmic_expansion.ogg', 100, TRUE)
+			return
 		else
 			return
 
@@ -120,5 +129,30 @@
 	playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
 	qdel(src)
 
+
+
+/// Crafting component for blood magic things
+/obj/item/sealed_blood_pearl
+	name = "sealed blood pearl"
+	desc = "A metallic pearl of blood. It glows with a crimson aura."
+	icon = 'icons/roguetown/items/misc.dmi'
+	icon_state = "blood_pearl"
+	dropshrink = 0.6
+	gripped_intents = null
+	possible_item_intents = list(INTENT_GENERIC)
+	force = 10
+	throwforce = 10
+	alpha = 255
+	w_class = WEIGHT_CLASS_SMALL
+	experimental_inhand = FALSE
+	grid_width = 32
+	grid_height = 32
+	item_weight = 120 GRAMS
+
+/obj/item/sealed_blood_pearl/Initialize(mapload)
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=1, offset=2, color=COLOR_BLOOD_MAGIC)//maybe use different colour
+
 #undef PEARL_OPTION_DRAW
 #undef PEARL_OPTION_FEED
+#undef PEARL_OPTION_SEAL
