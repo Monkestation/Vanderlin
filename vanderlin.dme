@@ -3913,6 +3913,7 @@
 #include "code\modules\mob\living\carbon\human\species_types\automatons\voicelines.dm"
 #include "code\modules\mob\living\carbon\human\species_types\demihumans\_demihuman.dm"
 #include "code\modules\mob\living\carbon\human\species_types\dwarf\_dwarf.dm"
+#include "code\modules\mob\living\carbon\human\species_types\dwarf\dworc.dm"
 #include "code\modules\mob\living\carbon\human\species_types\dwarf\mountain.dm"
 #include "code\modules\mob\living\carbon\human\species_types\dwarf\subterra.dm"
 #include "code\modules\mob\living\carbon\human\species_types\elf\_elf.dm"

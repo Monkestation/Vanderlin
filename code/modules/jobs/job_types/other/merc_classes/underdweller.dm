@@ -39,6 +39,7 @@
 		SPEC_ID_DROW,\
 		SPEC_ID_HALF_DROW,\
 		SPEC_ID_KOBOLD,\
+		SPEC_ID_DWARF_ORC,\
 	)
 	outfit = /datum/outfit/mercenary/underdweller
 	category_tags = list(CTAG_MERCENARY)
@@ -55,7 +56,7 @@
 	spawned.merctype = 3
 
 	// Species-specific adjustments
-	if(spawned.dna?.species?.id == SPEC_ID_DWARF)
+	if(spawned.dna?.species?.id == SPEC_ID_DWARF || spawned.dna?.species?.id == SPEC_ID_DWARF_ORC)
 		spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 		spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/underdweller/dwarf)
 	else
@@ -87,7 +88,7 @@
 	shirt = shirt_type
 
 	// Species-specific equipment (visual equipment)
-	if(equipped_human.dna?.species?.id == SPEC_ID_DWARF)
+	if(equipped_human.dna?.species?.id == SPEC_ID_DWARF || equipped_human.dna?.species?.id == SPEC_ID_DWARF_ORC)
 		head = /obj/item/clothing/head/helmet/leather/minershelm
 		beltl = /obj/item/weapon/pick/paxe // Dorfs get a pick as their primary weapon and axes/maces to use it
 		backr = /obj/item/weapon/shield/wood

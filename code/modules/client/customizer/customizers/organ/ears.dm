@@ -37,7 +37,10 @@
 		/datum/sprite_accessory/ears/elftw,
 		/datum/sprite_accessory/ears/elfww,
 		/datum/sprite_accessory/ears/elfwww,
-		/datum/sprite_accessory/ears/elfttw
+		/datum/sprite_accessory/ears/elfttw,
+		/datum/sprite_accessory/ears/goblin,
+		/datum/sprite_accessory/ears/goblin_alt,
+		/datum/sprite_accessory/ears/goblin_small,
 		)
 
 /datum/customizer/organ/ears/tiefling
