@@ -376,6 +376,21 @@
 #define SPECIES_CANNIBALISM_KOBOLD list(\
 	SPEC_ID_KOBOLD,\
 )
+///this is a list of all species we pick from when randomizing a species we use paths because we hard set right on init
+#define NPC_RACES_TYPES list(\
+	/datum/species/human/northern,\
+	/datum/species/human/halfelf,\
+	/datum/species/elf/snow,\
+	/datum/species/elf/dark,\
+	/datum/species/dwarf/mountain,\
+	/datum/species/tieberian,\
+	/datum/species/demihuman,\
+	/datum/species/halforc,\
+	/datum/species/kobold,\
+	/datum/species/triton,\
+	/datum/species/medicator,\
+)
+  
 //Used in aiming, yes it's awful how I used each and every species but I made it use normal id instead id_override
 #define SPECIES_SHORTIES list(\
 	SPEC_ID_DWARF,\

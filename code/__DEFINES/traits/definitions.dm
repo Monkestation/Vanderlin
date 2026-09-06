@@ -611,6 +611,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_ORGAN_OPERATED_ON "organ_operated_on"
 
 // **** item traits
+///are we twirling or in some way messing with an inhand
+#define TRAIT_TWIRLING "twirlin"
 /// Can't drop
 #define TRAIT_NODROP "nodrop"
 /// Can't be embedded

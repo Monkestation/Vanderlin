@@ -319,13 +319,22 @@
 				slot_title = " on [P[THEIR]] left side"
 			if(ITEM_SLOT_BELT_R)
 				slot_title = " on [P[THEIR]] right side"
-		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [I.get_examine_string(user, FALSE, TRUE)][slot_title]."
+		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [get_item_examine_label(I, user, I.get_examine_string(user, FALSE, TRUE))][slot_title]."
 	for(var/obj/item/I in held_items)
 		if(I.item_flags & ABSTRACT)
 			continue
 		var/wielding = I.is_wielded()
-		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [I.get_examine_string(user, FALSE, TRUE)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
+		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [get_item_examine_label(I, user, I.get_examine_string(user, FALSE, TRUE))] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
 
+/mob/living/proc/get_item_examine_label(obj/item/I, mob/living/user, item_examine_string)
+	if(isnull(item_examine_string))
+		item_examine_string = I.get_examine_string(user)
+	var/list/examine_highlight_status = I.get_examine_highlight_status()
+	if(length(examine_highlight_status))
+		var/datum/examine_highlight/highlight_type = examine_highlight_status[1]
+		var/heresy_examine_tooltip = I.get_examine_highlight_description(examine_highlight_status) + "<br>" + highlight_type.explanation
+		item_examine_string = span_tooltip_dangerous_html(heresy_examine_tooltip, I.get_examine_highlight_labeled_string(highlight_type, item_examine_string))
+	return item_examine_string
 
 /// Things that are physical but do not need to see your face to establish.
 /// Since these tend to vary in location items must be added to the list manually.

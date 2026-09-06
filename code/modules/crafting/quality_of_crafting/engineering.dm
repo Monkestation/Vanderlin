@@ -90,6 +90,20 @@
 	output = /obj/item/rotation_contraption/vertical
 	craft_time = 5 SECONDS
 
+/datum/repeatable_crafting_recipe/engineering/clutch
+	name = "clutch"
+	requirements = list(
+		/obj/item/grown/log/tree/small= 1,
+		/obj/item/natural/wood/plank = 2,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/grown/log/tree/small
+	starting_atom = /obj/item/weapon/knife
+	output = /obj/item/rotation_contraption/clutch
+	craft_time = 5 SECONDS
+
 /datum/repeatable_crafting_recipe/engineering/rails
 	name = "minecart rails"
 	requirements = list(
@@ -217,6 +231,183 @@
 	starting_atom = /obj/item/weapon/hammer
 	output = /obj/item/rotation_contraption/sprinkler
 	output_amount = 2
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/pneumatic_tube
+	name = "pneumatic tube"
+	requirements = list(
+		/obj/item/ingot/tin = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to hammer"), span_notice("start to hammer"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ingot/tin
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/pneumatic_tube
+	output_amount = 16
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/pneumatic_gearbox
+	name = "pneumatic gearbox"
+	requirements = list(
+		/obj/item/ingot/tin = 1,
+		/obj/item/grown/log/tree/small= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to hammer"), span_notice("start to hammer"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ingot/tin
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/pneumatic_gearbox
+	output_amount = 1
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/redstone_dust
+	name = "redstone dust"
+	requirements = list(
+		/obj/item/ore/dust/copper = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to pulverize"), span_notice("start to pulverize"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ore/dust/copper
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/redstone_dust
+	output_amount = 24
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/redstone_repeater
+	name = "redstone repeater"
+	requirements = list(
+		/obj/item/ore/dust/copper = 1,
+		/obj/item/natural/stoneblock = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to pulverize"), span_notice("start to pulverize"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ore/dust/copper
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/redstone_repeater
+	output_amount = 4
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/redstone_comparator
+	name = "redstone comparator"
+	requirements = list(
+		/obj/item/ore/dust/copper = 1,
+		/obj/item/natural/stoneblock = 1,
+		/obj/item/grown/log/tree/stick = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to pulverize"), span_notice("start to pulverize"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ore/dust/copper
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/redstone_comparator
+	output_amount = 2
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/redstone_observer
+	name = "redstone observer"
+	requirements = list(
+		/obj/item/ore/dust/copper = 1,
+		/obj/item/natural/stoneblock = 1,
+		/obj/item/ingot/tin = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to pulverize"), span_notice("start to pulverize"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ore/dust/copper
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/redstone_observer
+	output_amount = 2
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/redstone_torch
+	name = "redstone torch"
+	requirements = list(
+		/obj/item/ore/dust/copper = 1,
+		/obj/item/grown/log/tree/stick = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to pulverize"), span_notice("start to pulverize"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ore/dust/copper
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/redstone_torch
+	output_amount = 8
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/large_drill
+	name = "large drill"
+	requirements = list(
+		/obj/item/ingot/steel = 3,
+		/obj/item/ingot/bronze = 6,
+		/obj/item/grown/log/tree/small= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to hammer"), span_notice("start to hammer"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ingot/bronze
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/drill
+	output_amount = 1
+	craft_time = 9 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/pneumatic_intake
+	name = "pneumatic intake"
+	requirements = list(
+		/obj/item/ingot/tin = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to hammer"), span_notice("start to hammer"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ingot/tin
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/rotation_contraption/pneumatic_intake
+	output_amount = 2
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/pneumatic_sorter
+	name = "pneumatic sorter"
+	requirements = list(
+		/obj/item/ingot/tin = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to hammer"), span_notice("start to hammer"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ingot/tin
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/pneumatic_sorter
+	output_amount = 1
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/pneumatic_puller
+	name = "pneumatic puller module"
+	requirements = list(
+		/obj/item/ingot/tin = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to hammer"), span_notice("start to hammer"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ingot/tin
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/pneumatic_puller
+	output_amount = 1
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/engineering/pneumatic_redstone
+	name = "pneumatic lock module"
+	requirements = list(
+		/obj/item/ingot/tin = 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/hammer = list(span_notice("starts to hammer"), span_notice("start to hammer"), 'sound/items/bsmith2.ogg'),
+	)
+	attacked_atom = /obj/item/ingot/tin
+	starting_atom = /obj/item/weapon/hammer
+	output = /obj/item/pneumatic_lock
+	output_amount = 1
 	craft_time = 5 SECONDS
 
 /datum/repeatable_crafting_recipe/engineering/pressurizer

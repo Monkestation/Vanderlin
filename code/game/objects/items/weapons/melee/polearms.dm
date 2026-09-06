@@ -194,6 +194,10 @@
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_IRON
 	weapon_special = /datum/special_intent/polearm_backstep
 
+/obj/item/weapon/polearm/spear/Initialize(mapload)
+	. = ..()
+	AddComponent(/datum/component/twirlable)
+
 /obj/item/weapon/polearm/spear/getonmobprop(tag)
 	. = ..()
 	if(tag)

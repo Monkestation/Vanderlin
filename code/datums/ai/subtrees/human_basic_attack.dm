@@ -1,11 +1,12 @@
-#define HUMAN_NPC_BASE_JUKE_CHANCE              15
-#define HUMAN_NPC_JUKE_MIN_SPD                  10
-#define HUMAN_NPC_JUKE_PER_OVERSPD              5
-#define HUMAN_NPC_WEAKPOINT_SCAN_CHANCE         20
-#define HUMAN_NPC_WEAKPOINT_CACHE_DURATION      (6 SECONDS)
-#define HUMAN_NPC_WEAPON_SPECIAL_CHANCE         35
-#define HUMAN_NPC_INTENT_SWITCH_CHANCE          25  // chance per attack to start a new intent sequence
-#define HUMAN_NPC_RMB_ATTEMPT_CHANCE			25
+#define HUMAN_NPC_BASE_JUKE_CHANCE 15
+#define HUMAN_NPC_JUKE_MIN_SPD 10
+#define HUMAN_NPC_JUKE_PER_OVERSPD 5
+#define HUMAN_NPC_WEAKPOINT_SCAN_CHANCE 20
+#define HUMAN_NPC_WEAKPOINT_CACHE_DURATION (6 SECONDS)
+#define HUMAN_NPC_WEAPON_SPECIAL_CHANCE 35
+#define HUMAN_NPC_INTENT_SWITCH_CHANCE 25 // chance per attack to start a new intent sequence
+#define HUMAN_NPC_RMB_ATTEMPT_CHANCE 25
+#define HUMAN_NPC_DEADITE_BITE_CHANCE 45 // chance per attack for a deadite to bite instead of swing
 
 
 //Note alot of this is just adapted from old code so its probably not the best
@@ -25,17 +26,20 @@
 	var/mob/living/carbon/human/pawn = controller.pawn
 	var/atom/target = controller.blackboard[target_key]
 
-	var/obj/item/held_item = pawn.get_active_held_item()
-	if((!isweapon(held_item)))
-		pawn.swap_hand()
-		for(var/slot in list(ITEM_SLOT_BACK, ITEM_SLOT_HIP, ITEM_SLOT_BELT_L, ITEM_SLOT_BACK_L, ITEM_SLOT_BACK_R, ITEM_SLOT_BELT_R))
-			if(!pawn.get_item_by_slot(slot))
-				if(pawn.equip_to_slot_if_possible(held_item, slot, disable_warning = TRUE))
-					break
+	if(!IS_DEADITE(pawn))
+		var/obj/item/held_item = pawn.get_active_held_item()
+		if((!isweapon(held_item)))
+			pawn.swap_hand()
+			for(var/slot in list(ITEM_SLOT_BACK, ITEM_SLOT_HIP, ITEM_SLOT_BELT_L, ITEM_SLOT_BACK_L, ITEM_SLOT_BACK_R, ITEM_SLOT_BELT_R))
+				if(!pawn.get_item_by_slot(slot))
+					if(pawn.equip_to_slot_if_possible(held_item, slot, disable_warning = TRUE))
+						break
 
 	var/list/possible_intents = list()
 	for(var/datum/intent/intent as anything in pawn.possible_a_intents)
 		if(istype(intent, /datum/intent/unarmed/help) || istype(intent, /datum/intent/unarmed/shove) || istype(intent, /datum/intent/unarmed/grab))
+			continue
+		if(IS_DEADITE(pawn) && !istype(intent, /datum/intent/unarmed/claw))
 			continue
 		possible_intents |= intent
 	if(length(possible_intents))
@@ -51,13 +55,14 @@
 	var/atom/target = controller.blackboard[target_key]
 	var/datum/targetting_datum/td = controller.blackboard[targetting_datum_key]
 
-	var/obj/item/weapon/held_weapon = pawn.get_active_held_item()
-	if(!held_weapon)
-		for(var/obj/item/weapon/candidate in range(1, pawn))
-			if(!isturf(candidate.loc))
-				continue
-			pawn.put_in_active_hand(candidate)
-			break
+	if(!IS_DEADITE(pawn))
+		var/obj/item/weapon/held_weapon = pawn.get_active_held_item()
+		if(!held_weapon)
+			for(var/obj/item/weapon/candidate in range(1, pawn))
+				if(!isturf(candidate.loc))
+					continue
+				pawn.put_in_active_hand(candidate)
+				break
 
 	if(!td.can_attack(pawn, target))
 		finish_action(controller, FALSE, target_key)
@@ -78,6 +83,9 @@
 		return
 
 	if(_try_weapon_special(controller))
+		return
+
+	if(IS_DEADITE(pawn) && _try_bite_attack(controller, pawn, target))
 		return
 
 	_update_combat_intent(controller, pawn, target)
@@ -126,12 +134,12 @@
 
 	var/list/weighted = list(
 		/datum/rmb_intent/strong = 45,
-		/datum/rmb_intent/swift  = 40,
-		/datum/rmb_intent/feint  = 15,
+		/datum/rmb_intent/swift = 40,
+		/datum/rmb_intent/feint = 15,
 	)
 
 	if(pawn.stamina > pawn.maximum_stamina * 0.6)
-		weighted[/datum/rmb_intent/strong] = 0  // force swift when tired
+		weighted[/datum/rmb_intent/strong] = 0 // force swift when tired
 	else if(pawn.stamina > pawn.maximum_stamina * 0.4)
 		weighted[/datum/rmb_intent/strong] -= 20
 		weighted[/datum/rmb_intent/swift] += 20
@@ -185,6 +193,45 @@
 		pawn.aimheight_change(pick(rand(1, 4), rand(5, 8), rand(9, 11)))
 		return
 	pawn.aimheight_change(pick(rand(5, 8), rand(9, 11), rand(12, 19)))
+
+/// Deadites occasionally bite instead of swinging their weapon/claws.
+/datum/ai_behavior/basic_melee_attack/human_npc/proc/_try_bite_attack(datum/ai_controller/controller, mob/living/carbon/human/pawn, mob/living/target)
+	if(!prob(HUMAN_NPC_DEADITE_BITE_CHANCE))
+		return FALSE
+	if(pawn.next_move > world.time)
+		return FALSE
+	if(!target.Adjacent(pawn))
+		return FALSE
+	if(pawn.incapacitated(IGNORE_GRAB))
+		return FALSE
+	if(pawn.stat != CONSCIOUS)
+		return FALSE
+	if(pawn.is_mouth_covered())
+		return FALSE
+	if(HAS_TRAIT(pawn, TRAIT_NO_BITE))
+		return FALSE
+	if(iscarbon(pawn))
+		var/mob/living/carbon/carbon_pawn = pawn
+		if(carbon_pawn.mouth)
+			return FALSE
+
+	pawn.face_atom(target)
+	pawn.changeNext_move(CLICK_CD_FAST)
+	pawn.bite(target)
+
+	var/obj/item/grabbing/bite/bite_grab = pawn.get_item_by_slot(ITEM_SLOT_MOUTH)
+	if(istype(bite_grab) && bite_grab.grabbed == target)
+		// bitelimb() normally expects a second, later player click, but fuck that noise.
+		// we need to adjust the next_move because of this.
+		pawn.next_move = world.time - 1
+		bite_grab.bitelimb(pawn)
+		qdel(bite_grab)
+
+	if(pawn.next_click < world.time)
+		pawn.next_click = world.time + (CLICK_CD_FAST * (1 + rand(0.2, 0.4)))
+		SEND_SIGNAL(pawn, COMSIG_MOB_BREAK_SNEAK)
+
+	return TRUE
 
 /datum/ai_behavior/basic_melee_attack/human_npc/proc/_try_weapon_special(datum/ai_controller/controller)
 	var/mob/living/carbon/human/pawn = controller.pawn
@@ -240,9 +287,9 @@
 	var/skill_level = skill_type ? floor(GET_MOB_SKILL_VALUE_OLD(pawn, skill_type)) : SKILL_RANK_NONE
 	var/armor_rating = bclass ? bclass_to_armor_rating(bclass) : "blunt"
 
-	var/list/wounded  = list()
-	var/list/exposed  = list()
-	var/list/soft     = list() // armored but below meaningful resistance for our damage type
+	var/list/wounded = list()
+	var/list/exposed = list()
+	var/list/soft = list() // armored but below meaningful resistance for our damage type
 
 	for(var/obj/item/bodypart/part in htarget.bodyparts)
 		if(!part)
@@ -433,3 +480,4 @@
 #undef HUMAN_NPC_WEAPON_SPECIAL_CHANCE
 #undef HUMAN_NPC_INTENT_SWITCH_CHANCE
 #undef HUMAN_NPC_RMB_ATTEMPT_CHANCE
+#undef HUMAN_NPC_DEADITE_BITE_CHANCE

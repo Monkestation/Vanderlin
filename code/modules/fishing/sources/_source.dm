@@ -79,6 +79,8 @@ GLOBAL_LIST_INIT(specific_fish_icons, generate_specific_fish_icons())
 
 	/// Pool of generated fish instances for this roll (fish instance -> original path)
 	var/list/obj/item/reagent_containers/food/snacks/fish/generated_fish_pool
+	/// Fish instances that have been chosen as an active challenge's reward but not yet dispensed
+	var/list/obj/item/reagent_containers/food/snacks/fish/reserved_fish_pool
 
 /datum/fish_source/New()
 	if(!SSfishing.initialized && associated_safe_turfs) //This is only needed during world init
@@ -247,7 +249,11 @@ GLOBAL_LIST_INIT(specific_fish_icons, generate_specific_fish_icons())
 
 /// Returns a fish instance or another special value which we use for dispensing a reward later.
 /datum/fish_source/proc/roll_reward(obj/item/fishingrod/rod, mob/fisherman, atom/location)
-	return pickweight(get_modified_fish_table(rod, fisherman, location)) || FISHING_DUD
+	var/result = pickweight(get_modified_fish_table(rod, fisherman, location)) || FISHING_DUD
+	if(isfish(result) && generated_fish_pool?[result])
+		LAZYSET(reserved_fish_pool, result, generated_fish_pool[result])
+		generated_fish_pool -= result
+	return result
 
 /// Version of roll_reward() that blacklists objects that shouldn't be caught by ai-controlled mobs.
 /datum/fish_source/proc/roll_mindless_reward(obj/item/fishingrod/rod, mob/fisherman, atom/location)
@@ -275,12 +281,22 @@ GLOBAL_LIST_INIT(specific_fish_icons, generate_specific_fish_icons())
 	SHOULD_CALL_PARENT(TRUE)
 	UnregisterSignal(user, COMSIG_MOB_COMPLETE_FISHING)
 	if(!success)
-		cleanup_generated_fish() // Clean up fish pool on failure
+		release_reserved(challenge.reward_path) // qdels + removes it from reserved_fish_pool if it's one of ours
+		cleanup_generated_fish() // still fine to clear the scratch/preview pool
 		return
 	var/atom/movable/reward = dispense_reward(challenge.reward_path, user, challenge.location, challenge.used_rod)
 	SEND_SIGNAL(challenge.used_rod, COMSIG_FISHING_ROD_CAUGHT_FISH, reward, user)
 	challenge.used_rod.on_reward_caught(reward, user)
 	cleanup_generated_fish() // Clean up remaining fish pool after dispensing
+
+/// Releases a fish instance that was reserved as a challenge reward but never dispensed (e.g. challenge lost/interrupted).
+/datum/fish_source/proc/release_reserved(reward)
+	if(!isfish(reward) || !reserved_fish_pool?[reward])
+		return // wasn't a reserved instance from this source (dud, path, non-fish reward, etc.) - nothing to do
+	var/obj/item/reagent_containers/food/snacks/fish/fish = reward
+	reserved_fish_pool -= fish
+	if(!QDELETED(fish))
+		qdel(fish)
 
 /// Gives out the reward if possible
 /datum/fish_source/proc/dispense_reward(reward_path, mob/fisherman, atom/fishing_spot, obj/item/fishingrod/rod)
@@ -335,10 +351,10 @@ GLOBAL_LIST_INIT(specific_fish_icons, generate_specific_fish_icons())
 		return
 
 	// If it's one of our generated fish instances, move it to the world
-	if(isfish(reward_path) && generated_fish_pool?[reward_path])
+	if(isfish(reward_path) && (generated_fish_pool?[reward_path] || reserved_fish_pool?[reward_path]))
 		var/obj/item/reagent_containers/food/snacks/fish/fish = reward_path
-		// Remove from pool so it doesn't get cleaned up
 		generated_fish_pool -= fish
+		reserved_fish_pool -= fish
 		fish.forceMove(spawn_location)
 		return fish
 

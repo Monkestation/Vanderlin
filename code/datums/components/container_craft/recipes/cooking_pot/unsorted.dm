@@ -88,3 +88,25 @@
 	crafting_time = 50 SECONDS
 	pollute_amount = 100
 	water_conversion = 0.6
+
+/datum/container_craft/cooking/rice
+	name = "Cooked Rice"
+	water_conversion = 0
+	created_reagent = null
+	crafting_time = 50 SECONDS
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/ricewet = 1,
+	)
+	output = /obj/item/reagent_containers/food/snacks/rice_cooked
+
+/datum/container_craft/cooking/soaked_rice
+	name = "Washed Rice"
+	water_conversion = 0
+	required_chem_temp = 0
+	created_reagent = null
+	reagent_consume_mod = 0
+	craft_verb = "soaking "
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/grain/rice = 1,
+	)
+	output = /obj/item/reagent_containers/food/snacks/ricewet

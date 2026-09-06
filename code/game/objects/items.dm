@@ -25,6 +25,10 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	//Forced mob worn layer instead of the standard preferred ssize.
 	var/alternate_worn_layer
 
+	///this is our highlight information
+	var/datum/examine_highlight/examine_highlight_type
+	var/examine_highlight_desc
+
 	//Dimensions of the icon file used when this item is worn, eg: hats.dmi
 	//eg: 32x32 sprite, 64x64 sprite, etc.
 	//allows inhands/worn sprites to be of any size, but still centered on a mob properly
@@ -1636,6 +1640,14 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/examine(mob/user)
 	. = ..()
+	var/list/examine_highlight_status = get_examine_highlight_status()
+	if(length(examine_highlight_status))
+		var/datum/examine_highlight/highlight_type = examine_highlight_status[1]
+		var/examine_desc = get_examine_highlight_description(examine_highlight_status, itis = TRUE, allcaps = FALSE)
+		var/examine_tooltip = highlight_type.explanation
+
+		. += span_info(span_tooltip_dangerous_html(examine_tooltip, examine_desc))
+
 	if(currecipe)
 		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
 	if(!get_precursor_data(src))
@@ -1659,6 +1671,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				if(1 to 4)
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
+
 
 /**
  * Returns the atom(either itself or an internal module) that will interact/attack the target on behalf of us
@@ -1811,3 +1824,58 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 		target.remove_enchantment(path)
 		message_admins(span_notice("[key_name_admin(usr)] has removed [path] enchantment from [target]."))
+
+/// Called when this item is offered to another mob, before the default offer message/effect happens.
+/// Return TRUE if this proc fully handled the offer (e.g. played its own messages/sounds),
+/// which will suppress the default "offers item with an outstretched hand" message.
+/// Return FALSE to let the default offer behavior play out.
+/obj/item/proc/on_offer(mob/living/offerer, mob/living/offered_to)
+	return FALSE
+
+/obj/item/proc/get_examine_highlight_status()
+	if(!examine_highlight_type)
+		return null
+	if(istype(examine_highlight_type))
+		return list(examine_highlight_type, examine_highlight_desc)
+	return list(GLOB.examine_highlights[examine_highlight_type], examine_highlight_desc)
+
+/obj/item/proc/get_examine_highlight_description(list/examine_highlight_status, itis = FALSE, allcaps = TRUE)
+	if(!examine_highlight_status)
+		return null
+
+	var/datum/examine_highlight/highlight_type = examine_highlight_status[1]
+	var/heresy_desc = examine_highlight_status[2]
+	if(!highlight_type || !heresy_desc)
+		return null
+
+	var/adjective = highlight_type.adjective
+	var/highlight_itis = "[itis ? highlight_type.leader : ""]<b>[adjective]</b>"
+
+	return get_examine_highlight_labeled_string(highlight_type, "[allcaps ? uppertext(highlight_itis) : highlight_itis]: [allcaps ? uppertext(heresy_desc) : heresy_desc]")
+
+/obj/item/proc/get_examine_highlight_labeled_string(datum/examine_highlight/highlight_type, label_string)
+	if(!highlight_type || !label_string)
+		return null
+
+	var/highlight_color = highlight_type.color
+	var/highlight_symbol = highlight_type.symbol
+
+	return "<span style='color: [highlight_color];'>[highlight_symbol] [label_string] [highlight_symbol]</span>"
+
+/obj/item/proc/set_custom_examine_highlight(adjective, leader, explanation, color, symbol, desc)
+	var/datum/examine_highlight/custom/H = examine_highlight_type
+	if(!istype(H))
+		H = new /datum/examine_highlight/custom()
+	H.adjective = adjective
+	H.leader = leader
+	H.explanation = explanation
+	H.color = color
+	H.symbol = symbol
+	examine_highlight_type = H
+	examine_highlight_desc = desc
+
+/obj/item/proc/clear_custom_examine_highlight()
+	if(istype(examine_highlight_type, /datum/examine_highlight/custom))
+		qdel(examine_highlight_type)
+	examine_highlight_type = initial(examine_highlight_type)
+	examine_highlight_desc = initial(examine_highlight_desc)

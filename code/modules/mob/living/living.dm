@@ -3137,7 +3137,7 @@
 	reset_technique_mastery_points(silent)
 	reset_form_mastery_points(silent)
 
-/mob/living/proc/offer_item(mob/living/offered_to, obj/offered_item)
+/mob/living/proc/offer_item(mob/living/offered_to, obj/item/offered_item)
 	if(isnull(offered_to) || isnull(offered_item))
 		stack_trace("no offered_to or offered_item in offer_item()")
 		return FALSE
@@ -3155,7 +3155,7 @@
 	if(stealthy)
 		to_chat(src, span_notice("I secretly offer [offered_item] to [offered_to]."))
 		to_chat(offered_to, span_notice("[offered_to] secretly offers [offered_item] to me..."))
-	else
+	else if(!offered_item.on_offer(src, offered_to))
 		visible_message(
 			span_notice("[src] offers [offered_item] to [offered_to] with an outstretched hand."), \
 			span_notice("I offer [offered_item] to [offered_to] with an outstretched hand."), \

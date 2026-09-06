@@ -113,7 +113,6 @@
 	var/old_stacks = stacks
 	stacks = min(stacks + amount, max_stacks)
 	COOLDOWN_START(src, last_stack_time, MOMENTUM_DECAY_DELAY)
-	last_stack_time = world.time
 	if(stacks == old_stacks)
 		return
 	owner.balloon_alert(owner, UNLINT("M: [stacks]/[max_stacks]"))

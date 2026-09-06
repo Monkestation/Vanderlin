@@ -352,6 +352,21 @@
 	faretype = FARE_NEUTRAL
 	tastes = list("bread" = 1)
 	item_weight = 80 GRAMS
+	mill_result = /obj/item/reagent_containers/food/snacks/toastcrumbs
+
+/obj/item/reagent_containers/food/snacks/toastcrumbs
+	name = "toast crumbs"
+	desc = "Perfect for adding some crunch to deep-fried food."
+	icon = 'icons/obj/food/raw/raw_deep_fried.dmi'
+	icon_state = "toastcrumbs"
+	slices_num = 0
+	list_reagents = list(/datum/reagent/consumable/nutriment = 6)
+	w_class = WEIGHT_CLASS_TINY
+	tastes = list("crunch" = 1)
+	item_weight = 40 GRAMS
+	foodtype = GRAIN
+	bitesize = 1
+	rotprocess = SHELFLIFE_DECENT
 
 /obj/item/reagent_containers/food/snacks/stale_bread
 	name = "stale bread"

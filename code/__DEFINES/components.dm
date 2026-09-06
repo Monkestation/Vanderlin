@@ -43,6 +43,12 @@
 #define COMSIG_STORAGE_CLOSED "storage_close"
 #define COMSIG_STORAGE_REMOVED "storage_item_removed"
 #define COMSIG_STORAGE_ADDED "storage_item_added"
+/// Sent from /datum/component/storage/concrete when an item is successfully inserted. (item)
+#define COMSIG_STORAGE_TURF_INSERTED "storage_item_inserted"
+/// Sent from /datum/component/storage/concrete when an item is successfully removed fired from the turf.
+#define COMSIG_STORAGE_TURF_REMOVED "storage_item_removed"
+//this is sent when an item is added through non player means but should be treated as a player
+#define COMSIG_ATOM_PSEUDO_INSERT "storage_pseudo_insert"
 
 // ~storage component
 ///from base of datum/component/storage/can_user_take(): (mob/user)

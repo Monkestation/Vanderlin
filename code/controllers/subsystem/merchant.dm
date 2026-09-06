@@ -442,7 +442,7 @@ SUBSYSTEM_DEF(merchant)
 	var/turf/spawn_turf = pick(boat_spaces)
 	if(!spawn_turf)
 		return
-	var/obj/structure/closet/crate/chest/merchant/delivery_chest = new(spawn_turf)
+	var/obj/structure/closet/crate/chest/shippingcrate/merchant/delivery_chest = new(spawn_turf)
 	delivery_chest.name = "[LOWER_TEXT(category)] delivery chest"
 	register_lift_cargo(delivery_chest)
 	var/manifest_contents = "<h2>[category] Supply Division</h2><hr><b>Contained Cargo Manifest:</b><ul>"

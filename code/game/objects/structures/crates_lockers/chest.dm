@@ -117,7 +117,10 @@
 	open_sound = 'sound/foley/doors/windowup.ogg'
 	open_sound = 'sound/foley/doors/windowup.ogg'
 	close_sound = 'sound/foley/doors/shittyclose.ogg'
-	sellprice = 0
+	sellprice = 1
+
+/obj/structure/closet/crate/chest/shippingcrate/merchant
+	lock = /datum/lock/key/merchant
 
 /obj/structure/closet/crate/chest/wicker/random_soilson/populate_contents()
 	for(var/i = 1 to rand(5, 8))

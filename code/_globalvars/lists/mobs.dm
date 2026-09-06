@@ -66,6 +66,7 @@ GLOBAL_LIST_INIT(dangerous_turfs, typecacheof(list(
 	/turf/open/lava,
 	/turf/open/openspace,
 	/turf/open/water/acid,
+	/turf/open/water/river
 	)))
 
 /proc/update_config_movespeed_type_lookup(update_mobs = TRUE)

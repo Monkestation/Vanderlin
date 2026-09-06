@@ -4,6 +4,7 @@
 
 /datum/ai_behavior/wave_attack_point/setup(datum/ai_controller/controller, target_key)
 	. = ..()
+	controller.change_ai_movement_type(/datum/ai_movement/hybrid_pathing/wave_defense)
 	controller.set_movement_target(type, controller.blackboard[target_key])
 	return TRUE
 
@@ -12,8 +13,9 @@
 	var/atom/target_point = controller.blackboard[target_key]
 	var/datum/wave_defense_coordinator/coordinator = controller.blackboard[BB_WAVE_COORDINATOR]
 
-	var/atom/destructible = locate_destructible_near(controller, controller.pawn)
+	var/atom/destructible = locate_destructible_near(controller, controller.pawn, WAVE_DEFENSE_POINT_RADIUS, target_point)
 	if(destructible)
+		controller.change_ai_movement_type(/datum/ai_movement/hybrid_pathing)
 		if(isliving(destructible))
 			feed_threat(controller, destructible)
 		else
@@ -31,14 +33,24 @@
 		aggro_comp.add_threat_to_mob(target, 3)
 	controller.set_blackboard_key(BB_HIGHEST_THREAT_MOB, target)
 
-/datum/ai_behavior/wave_attack_point/proc/locate_destructible_near(datum/ai_controller/controller, atom/point, radius = WAVE_DEFENSE_POINT_RADIUS)
-	var/atom/movable/pawn = controller.pawn
-	for(var/atom/movable/thing in view(radius, point))
+/datum/ai_behavior/wave_attack_point/proc/locate_destructible_near(datum/ai_controller/controller, atom/point, radius = WAVE_DEFENSE_POINT_RADIUS, atom/target_point)
+	if(get_dist(controller.pawn, target_point) > 15)
+		return
+	if(point)
+		var/atom/movable/pawn = controller.pawn
+		for(var/atom/movable/thing in view(radius, point))
+			if(istype(thing, /obj/structure/flora/newtree))
+				continue
+			if(thing.density && !ismob(thing))
+				return thing
+		for(var/mob/living/enemy in oview(radius, point))
+			if(!pawn.faction_check_atom(enemy))
+				return enemy
+	for(var/atom/movable/thing in view(radius, target_point))
+		if(istype(thing, /obj/structure/flora/newtree))
+			continue
 		if(thing.density && !ismob(thing))
 			return thing
-	for(var/mob/living/enemy in oview(radius, point))
-		if(!pawn.faction_check_atom(enemy))
-			return enemy
 	return null
 
 /datum/ai_behavior/wave_attack_point/finish_action(datum/ai_controller/controller, succeeded, target_key)
@@ -52,6 +64,7 @@
 
 /datum/ai_behavior/wave_occupy_point/setup(datum/ai_controller/controller, target_key)
 	. = ..()
+	controller.change_ai_movement_type(/datum/ai_movement/hybrid_pathing/wave_defense)
 	controller.set_movement_target(type, controller.blackboard[target_key])
 	return TRUE
 
