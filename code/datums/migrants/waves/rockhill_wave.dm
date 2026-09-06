@@ -300,7 +300,6 @@
 /datum/migrant_wave/rockhill_wave
 	name = "The Mayor's Visit"
 	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
-	downgrade_wave = /datum/migrant_wave/rockhill_wave_down
 	max_spawns = 1
 	weight = 30
 	roles = list(
@@ -308,29 +307,5 @@
 		/datum/migrant_role/rockhill_knight = 1,
 		/datum/migrant_role/rockhill/sergeant_at_arms = 1,
 		/datum/migrant_role/footman_guard = 4
-	)
-	greet_text = "The Mayor has it, something must be discussed with the rulers of Vanderlin which is why we're on our way over there."
-
-/datum/migrant_wave/rockhill_wave_down
-	name = "The Mayor's Visit"
-	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
-	downgrade_wave = /datum/migrant_wave/rockhill_wave_down_one
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/rockhill/mayor = 1,
-		/datum/migrant_role/rockhill_knight = 1,
-		/datum/migrant_role/rockhill/sergeant_at_arms = 1,
-		/datum/migrant_role/footman_guard = 2
-	)
-	greet_text = "The Mayor has it, something must be discussed with the rulers of Vanderlin which is why we're on our way over there."
-
-/datum/migrant_wave/rockhill_wave_down_one
-	name = "The Mayor's visit"
-	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/rockhill/mayor = 1,
-		/datum/migrant_role/rockhill_knight = 1,
-		/datum/migrant_role/footman_guard = 2
 	)
 	greet_text = "The Mayor has it, something must be discussed with the rulers of Vanderlin which is why we're on our way over there."

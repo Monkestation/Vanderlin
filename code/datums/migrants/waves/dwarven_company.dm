@@ -238,35 +238,11 @@
 	name = "Dwarven Expedition"
 	max_spawns = 4
 	shared_wave_type = /datum/migrant_wave/dwarven_company
-	downgrade_wave = /datum/migrant_wave/dwarven_company_down
 	weight = 15
 	roles = list(
 		/datum/migrant_role/dwarven_company/captain = 1,
 		/datum/migrant_role/dwarven_company/weaponsmith = 2,
 		/datum/migrant_role/dwarven_company/armorsmith = 2
-	)
-	greet_text = "The way to Matthios's tomb is opened. Malum has called for all dwarves bold enough to go in, and we shall answer."
-
-/datum/migrant_wave/dwarven_company_down
-	name = "Dwarven Expedition"
-	max_spawns = 4
-	shared_wave_type = /datum/migrant_wave/dwarven_company
-	downgrade_wave = /datum/migrant_wave/dwarven_company_down_one
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/dwarven_company/captain = 1,
-		/datum/migrant_role/dwarven_company/armorsmith = 1,
-		/datum/migrant_role/dwarven_company/weaponsmith = 1
-	)
-	greet_text = "The way to Matthios's tomb is opened. Malum has called for all dwarves bold enough to go in, and we shall answer."
-
-/datum/migrant_wave/dwarven_company_down_one
-	name = "Dwarven Expedition"
-	max_spawns = 4
-	shared_wave_type = /datum/migrant_wave/dwarven_company
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/dwarven_company/captain = 1,
 	)
 	greet_text = "The way to Matthios's tomb is opened. Malum has called for all dwarves bold enough to go in, and we shall answer."
 
