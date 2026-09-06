@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Fixed Formikrag Kobold access to gallowband."
+  - bugfix: "Fixed Kobold voices being overwritten by court wiz."
+  - rscadd: "Added medical guidebook to medicine focused roles that were missing it."
