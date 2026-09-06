@@ -231,7 +231,7 @@
 /obj/item/clothing/pants/trou/leather/splint,
 /obj/structure/mannequin/male,
 /obj/item/clothing/armor/cuirass/fluted/iron,
-/obj/item/clothing/head/helmet/kettle/slit/atarms,
+/obj/item/clothing/head/helmet/sallet,
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)
 "aeM" = (
@@ -11363,16 +11363,22 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/tavern)
 "eJC" = (
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_x = 2;
+/obj/structure/closet/crate/chest/crafted,
+/obj/item/reagent_containers/food/snacks/hardtack{
+	pixel_y = -3;
+	pixel_x = 3
+	},
+/obj/item/reagent_containers/food/snacks/hardtack{
+	pixel_x = -1;
+	pixel_y = 4
+	},
+/obj/item/reagent_containers/food/snacks/hardtack{
+	pixel_x = 7;
 	pixel_y = 3
 	},
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_x = 1;
-	pixel_y = -6
-	},
-/obj/item/reagent_containers/glass/bowl{
-	pixel_y = 2
+/obj/item/reagent_containers/food/snacks/hardtack{
+	pixel_x = 4;
+	pixel_y = 9
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/keep/garrison)
@@ -11900,15 +11906,7 @@
 	pixel_x = 8;
 	pixel_y = -4
 	},
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_x = 2;
-	pixel_y = 3
-	},
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/reagent_containers/glass/cup/wooden{
-	pixel_x = 1;
-	pixel_y = -6
-	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/garrison)
 "eTH" = (
@@ -20567,10 +20565,19 @@
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
 	},
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
-/obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /obj/structure/closet/crate/chest/crafted,
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = 2;
+	pixel_y = 3
+	},
+/obj/item/reagent_containers/glass/cup/wooden{
+	pixel_x = 1;
+	pixel_y = -6
+	},
+/obj/item/reagent_containers/glass/bowl/iron,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
+/obj/item/reagent_containers/food/snacks/produce/grain/oat,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/keep/garrison)
 "ivU" = (
@@ -40248,24 +40255,6 @@
 	pixel_y = 45;
 	pixel_x = 5
 	},
-/obj/item/reagent_containers/food/snacks/hardtack{
-	pixel_x = 4;
-	pixel_y = 9
-	},
-/obj/item/reagent_containers/food/snacks/hardtack{
-	pixel_x = 7;
-	pixel_y = 3
-	},
-/obj/item/reagent_containers/food/snacks/hardtack{
-	pixel_x = -1;
-	pixel_y = 4
-	},
-/obj/item/reagent_containers/food/snacks/hardtack{
-	pixel_y = -3;
-	pixel_x = 3
-	},
-/obj/structure/closet/crate/chest/crafted,
-/obj/effect/decal/cleanable/food/flour,
 /obj/item/reagent_containers/glass/bottle/water{
 	pixel_y = 45;
 	pixel_x = 5
