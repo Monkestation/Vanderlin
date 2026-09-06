@@ -817,13 +817,13 @@
 
 	if (spend_resources())
 		if((vitae_cost > 0) && (duration_length > 10 SECONDS)) // No spam please
-			to_chat(owner, span_warning("[src] consumes your blood to stay active."))
+			to_chat(owner, span_warning("[src] consumes your vitae to stay active."))
 		grant_usage_xp(target, TRUE)
 		if (!duration_override)
 			do_duration(target)
 		on_refresh(target)
 	else
-		to_chat(owner, span_warning("You don't have enough blood to keep [src] active!"))
+		to_chat(owner, span_warning("You don't have enough vitae to keep [src] active!"))
 		try_deactivate(target)
 
 /**
