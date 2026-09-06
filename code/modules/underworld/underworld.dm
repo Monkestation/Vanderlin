@@ -190,7 +190,7 @@
 	..()
 	icon_state = "soultoken"
 
-/obj/item/underworld/coin/dropped(mob/user)
+/obj/item/underworld/coin/dropped(mob/user, silent)
 	..()
 	icon_state = "soultoken_floor"
 

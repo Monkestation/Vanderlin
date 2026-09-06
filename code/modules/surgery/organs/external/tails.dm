@@ -4,6 +4,7 @@
 	desc = "A severed tail. What did you cut this off of?"
 	icon_state = "tail-lizard"
 	visible_organ = TRUE
+	organ_flags = parent_type::organ_flags | ORGAN_EXTERNAL
 	zone = BODY_ZONE_PRECISE_GROIN
 	slot = ORGAN_SLOT_TAIL
 	organ_efficiency = list(ORGAN_SLOT_TAIL = 100)

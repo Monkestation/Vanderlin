@@ -24,8 +24,10 @@
 	. = ..()
 	var/list/total_list = list()
 	for(var/obj/item/item in target.contents)
-		if(istype(item, /obj/item/storage))
-			total_list |= item.contents
+		if(item.item_flags & ABSTRACT)
+			continue
+		if(item.atom_storage)
+			total_list |= item.atom_storage.return_inv(recursive = FALSE)
 		total_list |= item
 	to_chat(owner, "<span class='purple'>Your fae senses reach out to detect what they're carrying...</span>")
 	for(var/obj/item/item in total_list)

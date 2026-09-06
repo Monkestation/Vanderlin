@@ -25,7 +25,7 @@
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 	no_effect = TRUE
 
-/obj/item/clothing/wall_grab/dropped(mob/living/carbon/human/user)
+/obj/item/clothing/wall_grab/dropped(mob/living/carbon/human/user, silent)
 	. = ..()
 	if(QDELETED(src))
 		return

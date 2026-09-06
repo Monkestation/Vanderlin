@@ -10,7 +10,7 @@
 	if(slot & ITEM_SLOT_GLOVES)
 		refresh_combos(user)
 
-/obj/item/clothing/gloves/essence_gauntlet/dropped(mob/user)
+/obj/item/clothing/gloves/essence_gauntlet/dropped(mob/user, silent)
 	. = ..()
 	clear_combos(user)
 

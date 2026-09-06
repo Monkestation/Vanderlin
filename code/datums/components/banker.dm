@@ -30,7 +30,7 @@
 	///Contains information of the banker
 	var/datum/banker_data/banker_data
 
-	///Per-player storage containers for this round (ckey -> storage component)
+	///Per-player storage containers for this round (ckey -> storage datum)
 	var/list/player_storage_containers = list()
 
 	///Available character upgrades
@@ -76,9 +76,12 @@
 	UnregisterSignal(parent, COMSIG_ATOM_ATTACK_HAND)
 	// Clean up storage containers
 	for(var/ckey in player_storage_containers)
-		var/datum/component/storage/storage_comp = player_storage_containers[ckey]
-		if(storage_comp)
-			qdel(storage_comp.parent) // Delete the storage object
+		var/datum/storage/storage_dautm = player_storage_containers[ckey]
+		if(storage_dautm)
+			qdel(storage_dautm) // Delete the storage object
+		player_storage_containers -= src
+
+	player_storage_containers = null
 
 /datum/component/banker/proc/on_source_clicked(atom/source, mob/living/carbon/customer)
 	var/dist = get_dist(source, customer)
@@ -211,14 +214,14 @@
 		return
 
 	var/mob/living/banker = parent
-	var/datum/component/storage/storage_comp = get_or_create_player_storage(customer)
+	var/datum/storage/storage = get_or_create_player_storage(customer)
 
-	if(!storage_comp)
+	if(!storage)
 		banker.say("I'm having trouble accessing your storage right now.")
 		return
 
 	banker.say("Here's your personal storage for this round.")
-	storage_comp.show_to(customer)
+	storage.open_storage(customer)
 
 /**
  * Get or create a storage container for a specific player
@@ -230,8 +233,8 @@
 
 	// Check if storage already exists
 	if(player_storage_containers[player_ckey])
-		var/datum/component/storage/existing_storage = player_storage_containers[player_ckey]
-		if(existing_storage && !QDELETED(existing_storage.parent))
+		var/datum/storage/existing_storage = player_storage_containers[player_ckey]
+		if(QDELETED(existing_storage))
 			return existing_storage
 
 	// Create new storage container
@@ -239,14 +242,15 @@
 	new_storage.name = "[customer.real_name]'s Banking Storage"
 	new_storage.desc = "A secure storage container managed by the bank for [customer.real_name]. Only accessible this round."
 
-	// Set up the storage component
-	var/datum/component/storage/concrete/grid/banking/storage_comp = new_storage.GetComponent(/datum/component/storage)
-	if(!storage_comp)
+	// Set up the storage datum
+	var/datum/storage/storage = new_storage.atom_storage
+	if(!storage)
 		// If no component exists, add one
-		storage_comp = new_storage.AddComponent(/datum/component/storage/concrete/grid/banking)
+		storage = new_storage.create_storage(type = /datum/storage/banking)
 
-	player_storage_containers[player_ckey] = storage_comp
-	return storage_comp
+	player_storage_containers[player_ckey] = storage
+
+	return storage
 
 /**
  * Show current balances (only persistent now)
@@ -528,13 +532,18 @@
 
 ///Returns if the banker is conscious and its combat mode is disabled.
 /datum/component/banker/proc/can_bank(mob/customer)
+	if(QDELETED(parent))
+		return FALSE
+
 	var/mob/living/banker = parent
 	if(banker.cmode)
-		to_chat(customer, "[banker] is in combat!")
+		customer.balloon_alert(customer, "[banker] is in combat!")
 		return FALSE
+
 	if(IS_DEAD_OR_INCAP(banker))
-		to_chat(customer, "[banker] is indisposed!")
+		customer.balloon_alert(customer, "[banker] is in indisposed!")
 		return FALSE
+
 	return TRUE
 
 // Storage item and component definitions
@@ -542,18 +551,14 @@
 	name = "banking storage"
 	desc = "A secure storage container managed by the bank."
 	w_class = WEIGHT_CLASS_BULKY
-	component_type = /datum/component/storage/concrete/grid/banking
+	storage_type = /datum/storage/banking
 
-/datum/component/storage/concrete/grid/banking
-	max_w_class = WEIGHT_CLASS_NORMAL
+/datum/storage/banking
 	screen_max_rows = 5
 	screen_max_columns = 4
-	click_gather = TRUE
-	collection_mode = COLLECT_EVERYTHING
-	dump_time = 0
 	allow_quick_gather = TRUE
 	allow_quick_empty = TRUE
-	allow_dump_out = TRUE
+	collection_mode = COLLECT_EVERYTHING
 	insert_preposition = "in"
 
 // Banker data datum (updated phrases)

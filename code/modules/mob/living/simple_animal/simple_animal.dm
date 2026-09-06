@@ -512,10 +512,10 @@ GLOBAL_VAR_INIT(farm_animals, FALSE)
 				to_chat(user, span_info("I [caparison_over_barding ? "adjust [ccaparison] to cover [bbarding]" : "adjust [ccaparison] to be under [bbarding]"]."))
 				update_appearance()
 			if("Look through the saddle bags")
-				var/datum/component/storage/saddle_storage = ssaddle.GetComponent(/datum/component/storage)
+				var/datum/storage/saddle_storage = ssaddle.atom_storage
 				var/access_time = (user in buckled_mobs) ? 10 : 30
 				if (do_after(user, access_time, target = src))
-					saddle_storage.show_to(user)
+					saddle_storage.open_storage(user)
 	else if(bbarding && ccaparison)
 		caparison_over_barding = !caparison_over_barding
 		to_chat(user, span_info("I [caparison_over_barding ? "adjust [ccaparison] to cover [bbarding]" : "adjust [ccaparison] to be under [bbarding]"]."))

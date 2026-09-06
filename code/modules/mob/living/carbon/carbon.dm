@@ -4,7 +4,6 @@
 	update_organ_requirements()
 	update_limb_efficiencies()
 	update_body() //to update the carbon's new bodyparts appearance
-	LoadComponent(/datum/component/storage/concrete/organ)
 	GLOB.carbon_list += src
 
 /mob/living/carbon/Destroy()

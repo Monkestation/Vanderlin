@@ -453,8 +453,14 @@
 	// temperature_change = 40
 	var/heat_time = 100
 	var/obj/item/attachment = null
-	var/obj/item/reagent_containers/food/snacks/food = null
-	var/rawegg = FALSE
+
+/obj/machinery/light/fueled/hearth/Destroy()
+	if(attachment)
+		attachment.forceMove(get_turf(src))
+		attachment = null
+	if(soundloop)
+		QDEL_NULL(soundloop)
+	return ..()
 
 /obj/machinery/light/fueled/hearth/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(attachment)
@@ -478,14 +484,7 @@
 		return
 
 	if(attachment && over == usr && over.CanReach(src))
-		SEND_SIGNAL(attachment, COMSIG_TRY_STORAGE_SHOW, over, TRUE)
-
-//////////////////////////////////
-
-/obj/machinery/light/fueled/hearth/fire_act(added, maxstacks)
-	. = ..()
-	if(food)
-		playsound(src, 'sound/misc/frying.ogg', 80, FALSE, extrarange = 2)
+		attachment.atom_storage.open_storage(over)
 
 /obj/machinery/light/fueled/hearth/update_overlays()
 	. = ..()
@@ -495,12 +494,6 @@
 		var/obj/item/I = attachment
 		I.pixel_x = I.base_pixel_x
 		I.pixel_y = I.base_pixel_y
-		. += new /mutable_appearance(I)
-		if(!food)
-			return
-		I = food
-		I.pixel_x = I.pixel_x
-		I.pixel_y = I.pixel_y
 		. += new /mutable_appearance(I)
 
 /obj/machinery/light/fueled/hearth/attack_hand(mob/user)
@@ -512,22 +505,30 @@
 		if(!user.put_in_active_hand(attachment))
 			attachment.forceMove(user.loc)
 		attachment = null
-		update_appearance(UPDATE_ICON_STATE | UPDATE_OVERLAYS)
-	else
-		if(on)
-			var/mob/living/carbon/human/H = user
-			if(istype(H))
-				H.visible_message("<span class='info'>[H] warms \his hand over the embers.</span>")
-				if(do_after(H, 5 SECONDS, src))
-					H.adjust_bodytemperature(10)
-			return TRUE
+		update_appearance(UPDATE_ICON)
+	else if(on)
+		var/mob/living/carbon/human/H = user
+		if(istype(H))
+			H.visible_message("<span class='info'>[H] warms \his hand over the embers.</span>")
+			if(do_after(H, 5 SECONDS, src))
+				H.adjust_bodytemperature(10)
+		return TRUE
 
+/obj/machinery/light/fueled/hearth/attack_hand_secondary(mob/user, params)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+		return
+
+	if(attachment)
+		if(attachment.atom_storage.open_storage(user))
+			return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/machinery/light/fueled/hearth/process()
 	if(isopenturf(loc))
 		var/turf/open/O = loc
 		if(IS_WET_OPEN_TURF(O))
 			extinguish()
+			return PROCESS_KILL
 	if(on)
 		if(initial(fueluse) > 0)
 			if(fueluse > 0)

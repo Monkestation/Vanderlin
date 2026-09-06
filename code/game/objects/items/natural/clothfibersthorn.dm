@@ -132,9 +132,15 @@
 	icon2step = 6
 	items_per_increase = 7
 
-/obj/item/natural/bundle/fibers/full/Initialize()
-	amount = maxamount
+/obj/item/natural/bundle/fibers/half/Initialize(mapload, ...)
 	. = ..()
+	amount = floor(maxamount / 2)
+	update_bundle()
+
+/obj/item/natural/bundle/fibers/full/Initialize(mapload, ...)
+	. = ..()
+	amount = maxamount
+	update_bundle()
 
 /obj/item/natural/bundle/fibers/sinew
 	name = "sinew fiber bundle"

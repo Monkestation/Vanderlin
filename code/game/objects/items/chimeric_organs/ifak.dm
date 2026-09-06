@@ -5,21 +5,21 @@
 	icon = 'icons/obj/medical.dmi'
 	icon_state = "ifak"
 	w_class = WEIGHT_CLASS_NORMAL // So you can put stuff like bottles and Vials into it
-	component_type = /datum/component/storage/concrete/grid/ifak
+	storage_type = /datum/storage/ifak
 	throwforce = 1
 	slot_flags = ITEM_SLOT_HIP
-	populate_contents = list(
-		/obj/item/reagent_containers/syringe,
-		/obj/item/natural/cloth/bandage,
-		/obj/item/natural/cloth/bandage,
-		/obj/item/natural/bundle/fibers/full,
-		/obj/item/storage/fancy/pilltin/sate,
-		/obj/item/storage/fancy/pilltin/devour,
-		/obj/item/candle/yellow,
-		/obj/item/needle,
-	)
 	item_weight = 740 GRAMS
 	contents_tag = "item"
+
+/obj/item/storage/fancy/ifak/populate_contents()
+	new /obj/item/reagent_containers/syringe(src)
+	new /obj/item/natural/cloth/bandage(src)
+	new /obj/item/natural/cloth/bandage(src)
+	new /obj/item/natural/bundle/fibers/full(src)
+	new /obj/item/storage/fancy/pilltin/sate(src)
+	new /obj/item/storage/fancy/pilltin/devour(src)
+	new /obj/item/candle/yellow(src)
+	new /obj/item/needle(src)
 
 /obj/item/storage/fancy/ifak/update_icon_state()
 	. = ..()

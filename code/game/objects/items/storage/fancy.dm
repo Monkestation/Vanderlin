@@ -26,11 +26,6 @@
 	/// Whether the container is open or not
 	var/is_open = FALSE
 
-/obj/item/storage/fancy/populate_contents()
-	if(!spawn_type)
-		return ..()
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_FILL_TYPE, spawn_type)
-
 /obj/item/storage/fancy/update_icon_state()
 	. = ..()
 	icon_state = "[base_icon_state][is_open ? contents.len : null]"
@@ -45,6 +40,13 @@
 		. += "There is one [contents_tag] left."
 	else
 		. += "There are [contents.len <= 0 ? "no" : "[contents.len]"] [contents_tag]s left."
+
+/obj/item/storage/fancy/populate_contents()
+	if(!spawn_type)
+		return
+	while(!atom_storage.grid_full())
+		if(!atom_storage.attempt_insert(new spawn_type(), override = TRUE))
+			break
 
 /obj/item/storage/fancy/attack_self(mob/user, list/modifiers)
 	. = ..()
@@ -77,9 +79,8 @@
 
 /obj/item/storage/fancy/egg_box/Initialize(mapload, ...)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 12
-	STR.set_holdable(list(/obj/item/reagent_containers/food/snacks/egg))
+	atom_storage.max_slots = 12
+	atom_storage.set_holdable(list(/obj/item/reagent_containers/food/snacks/egg))
 
 /*
  * Candle Box
@@ -100,8 +101,7 @@
 
 /obj/item/storage/fancy/candle_box/Initialize(mapload, ...)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.max_items = 5
+	atom_storage.max_slots = 5
 
 /obj/item/storage/fancy/candle_box/attack_self(mob_user)
 	return
@@ -125,8 +125,7 @@
 
 /obj/item/storage/fancy/cigarettes/Initialize(mapload, ...)
 	. = ..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	STR.set_holdable(list(/obj/item/clothing/face/cigarette, /obj/item/lighter))
+	atom_storage.set_holdable(list(/obj/item/clothing/face/cigarette, /obj/item/lighter))
 
 /obj/item/storage/fancy/cigarettes/examine(mob/user)
 	. = ..()
@@ -139,7 +138,7 @@
 	if(!cig)
 		to_chat(user, "<span class='notice'>There are no [contents_tag]s left in the pack.</span>")
 		return
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE, cig, user)
+	atom_storage.remove_single(user, cig, get_turf(user))
 	user.put_in_hands(cig)
 	contents -= cig
 	to_chat(user, "<span class='notice'>You take \a [cig] out of the pack.</span>")
@@ -184,8 +183,9 @@
 	if(target != user || !length(contents) || target.mouth)
 		return ITEM_INTERACT_BLOCKING
 
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_TAKE, cig, target)
+	atom_storage.remove_single(user, cig, get_turf(target))
 	target.equip_to_slot_if_possible(cig, ITEM_SLOT_MOUTH)
+
 	contents -= cig
 	to_chat(user, "<span class='notice'>You take \a [cig] out of the pack.</span>")
 
@@ -198,7 +198,7 @@
 	base_icon_state = "zig"
 	contents_tag = "zig"
 	spawn_type = /obj/item/clothing/face/cigarette/rollie/nicotine
-	component_type = /datum/component/storage/concrete/grid/zigbox
+	storage_type = /datum/storage/zigbox
 	item_weight = 32 GRAMS
 
 /obj/item/storage/fancy/cigarettes/zig/empty
@@ -211,7 +211,7 @@
 	base_icon_state = "tinzig"
 	contents_tag = "zig"
 	spawn_type = /obj/item/clothing/face/cigarette/rollie/nicotine/zigar
-	component_type = /datum/component/storage/concrete/grid/zigbox
+	storage_type = /datum/storage/zigbox
 	item_weight = 84 GRAMS
 
 /obj/item/storage/fancy/cigarettes/tinzig/empty

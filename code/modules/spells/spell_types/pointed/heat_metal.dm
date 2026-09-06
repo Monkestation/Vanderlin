@@ -51,7 +51,7 @@
 		var/mob/holding_mob = target_loc
 		holding_mob.put_in_hands(itemtospawn)
 	else
-		SEND_SIGNAL(target_loc, COMSIG_TRY_STORAGE_INSERT, itemtospawn, null, TRUE, FALSE)
+		target_loc.atom_storage?.attempt_insert(itemtospawn, override = TRUE)
 	var/datum/effect_system/spark_spread/sparks = new()
 	sparks.set_up(1, 1, target.loc)
 	sparks.start()

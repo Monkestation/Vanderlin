@@ -199,7 +199,7 @@
 /obj/proc/hide(h)
 	return
 
-/obj/get_dumping_location(datum/component/storage/source,mob/user)
+/obj/get_dumping_location()
 	return get_turf(src)
 
 /obj/proc/CanAStarPass(ID, to_dir, requester)
@@ -294,3 +294,14 @@
 // Should move all contained objects to it's location.
 /obj/proc/dump_contents()
 	CRASH("Unimplemented.")
+
+/// Flip grid width and height, returns TRUE if it does that or FALSE of they are equal
+/obj/item/proc/flip_grid_storage_dimensions()
+	if(grid_width == grid_height)
+		return FALSE
+
+	var/old_width = grid_width
+	grid_width = grid_height
+	grid_height = old_width
+
+	return TRUE

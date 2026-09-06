@@ -41,7 +41,7 @@
 
 /datum/looping_sound/frying
 	mid_sounds = 'sound/misc/frying.ogg'
-	mid_length = 3 SECONDS
+	mid_length = 4 SECONDS
 	volume = 50
 	falloff_exponent = SOUND_FALLOFF_EXPONENT / 2
 	vary = TRUE

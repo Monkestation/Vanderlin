@@ -154,15 +154,15 @@
 
 /obj/item/bodypart/proc/get_chronic_status(mob/user, advanced = FALSE)
 	var/list/chronic_types = list()
-	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_FRACTURE))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_CHRONIC_FRACTURE))
 		chronic_types += "poorly healed fracture"
-	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_ARTHRITIS))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_CHRONIC_ARTHRITIS))
 		chronic_types += "chronic arthritis"
-	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_MIGRAINE))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_CHRONIC_MIGRAINE))
 		chronic_types += "chronic migraines"
-	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_SCAR))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_CHRONIC_SCAR))
 		chronic_types += "permanent scarring"
-	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_NERVE_DAMAGE))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_CHRONIC_NERVE_DAMAGE))
 		chronic_types += "nerve damage"
 	return chronic_types
 

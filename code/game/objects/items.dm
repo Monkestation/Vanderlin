@@ -748,13 +748,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(!(interaction_flags_item & INTERACT_ITEM_ATTACK_HAND_PICKUP))		//See if we're supposed to auto pickup.
 		return
 
-	if(stored_in)
-		if(SEND_SIGNAL(stored_in, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
-			return
-	else
-		if(SEND_SIGNAL(loc, COMSIG_STORAGE_BLOCK_USER_TAKE, src, user, TRUE))
-			return
-
 	if(!ontable() && isturf(loc))
 		if(stored_in)
 			if(!do_after(user, 3 DECISECONDS, stored_in))
@@ -770,12 +763,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		//We want the pickup animation to play even if we're moving the item between movables. Unless the mob is not located on a turf.
 		if(isturf(user.loc))
 			storage_turf = get_turf(loc)
-		if(stored_in)
-			if(!SEND_SIGNAL(stored_in, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
-				return
-		else
-			if(!SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user, TRUE))
-				return
+		if(!loc.atom_storage.remove_single(user, src, get_turf(user)))
+			return
+
 	if(QDELETED(src)) //moving it out of the storage destroyed it.
 		return
 
@@ -819,13 +809,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 /obj/item/attack_paw(mob/user)
 	if(!user)
 		return
+
 	if(anchored)
 		return
 
-	SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, user.loc, TRUE)
-
 	if(throwing)
 		throwing.finalize(FALSE)
+
 	if(loc == user)
 		if(!user.temporarilyRemoveItemFromInventory(src))
 			return
@@ -862,7 +852,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	if(item_flags & DROPDEL)
 		qdel(src)
-		return
+		return FALSE
+
 	pixel_x = base_pixel_x
 	pixel_y = base_pixel_y
 	if(isturf(loc))
@@ -870,6 +861,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			var/oldy = pixel_y
 			pixel_y += 5
 			animate(src, pixel_y = oldy, time = 0.5)
+
 	item_flags &= ~IN_INVENTORY
 	SEND_SIGNAL(src, COMSIG_ITEM_DROPPED,user)
 	SEND_SIGNAL(user, COMSIG_MOB_DROPITEM,src)
@@ -879,6 +871,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	user.update_equipment_speed_mods()
 	update_transform()
 	update_appearance(UPDATE_OVERLAYS)
+
+	return TRUE
 
 // called just as an item is picked up (loc is not yet changed)
 /obj/item/proc/pickup(mob/user)
@@ -902,12 +896,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/proc/get_carry_weight(atom/carrier)
 	. = item_weight
-	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
-	if(storage)
-		var/modifier = 1
-		if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
-			modifier = 0.5
-		. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
+	var/datum/storage/storage = atom_storage
+	if(!storage)
+		return
+	var/modifier = 1
+	if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
+		modifier = 0.5
+	. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
 
 /obj/item/clothing/get_carry_weight(atom/carrier)
 	switch(armor_class)
@@ -926,12 +921,13 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		else
 			. = item_weight
 
-	var/datum/component/storage/storage = GetComponent(/datum/component/storage)
-	if(storage)
-		var/modifier = 1
-		if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
-			modifier = 0.5
-		. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
+	var/datum/storage/storage = atom_storage
+	if(!storage)
+		return
+	var/modifier = 1
+	if(carrier && HAS_TRAIT(carrier, TRAIT_AMAZING_BACK))
+		modifier = 0.5
+	. += storage.get_carry_weight(carrier) * carry_multiplier * modifier
 
 // called after an item is placed in an equipment slot
 // user is mob that equipped it
@@ -940,6 +936,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 // Initial is used to indicate whether or not this is the initial equipment (job datums etc) or just a player doing it
 /obj/item/proc/equipped(mob/user, slot, initial = FALSE)
 	SHOULD_CALL_PARENT(TRUE)
+
 	SEND_SIGNAL(src, COMSIG_ITEM_EQUIPPED, user, slot)
 	SEND_SIGNAL(user, COMSIG_MOB_EQUIPPED_ITEM, src, slot)
 
@@ -947,7 +944,12 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	for(var/datum/action/action as anything in actions)
 		give_item_action(action, user, slot)
 
+	if(atom_storage && atom_storage == user.active_storage)
+		if(atom_storage.equipped_access_flags)
+			atom_storage.hide_contents(user)
+
 	item_flags |= IN_INVENTORY
+
 	if(!initial)
 		if(equip_sound && (slot_flags & slot))
 			if(user.m_intent != MOVE_INTENT_SNEAK) // Sneaky sheathing/equipping
@@ -956,6 +958,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			if(user.is_holding(src))
 				if(user.m_intent != MOVE_INTENT_SNEAK) // Don't play a sound if we're sneaking, for assassination purposes.
 					playsound(src, pickup_sound, PICKUP_SOUND_VOLUME, ignore_walls = FALSE)
+
 	user.update_equipment_speed_mods()
 	update_transform()
 	update_appearance(UPDATE_OVERLAYS)
@@ -1132,12 +1135,22 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		pixel_x = base_pixel_x + rand(-8,8)
 		pixel_y = base_pixel_y + rand(-8,8)
 
-
-/obj/item/proc/remove_item_from_storage(atom/newLoc) //please use this if you're going to snowflake an item out of a obj/item/storage
+/// Takes the location to move the item to, and optionally the mob doing the removing
+/// If no mob is provided, we'll pass in the location, assuming it is a mob
+/// Please use this if you're going to snowflake an item out of a obj/item/storage
+/obj/item/proc/remove_item_from_storage(atom/newLoc, mob/removing)
 	if(!newLoc)
 		return FALSE
-	if(SEND_SIGNAL(loc, COMSIG_CONTAINS_STORAGE))
-		return SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_TAKE, src, newLoc, TRUE)
+
+	if(!removing)
+		if(ismob(newLoc))
+			removing = newLoc
+		else
+			stack_trace("Tried to remove an item and place it into [newLoc] without implicitly or explicitly passing in a mob doing the removing")
+			return
+
+	if(loc.atom_storage)
+		return loc.atom_storage.remove_single(removing, src, newLoc, silent = TRUE)
 	return FALSE
 
 /obj/item/proc/get_belt_overlay() //Returns the icon used for overlaying the object on a belt

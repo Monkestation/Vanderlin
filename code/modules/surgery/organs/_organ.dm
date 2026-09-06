@@ -127,15 +127,22 @@
 	START_PROCESSING(SSobj, src)
 
 /obj/item/organ/Destroy()
-	if(bodypart_owner && !owner && !QDELETED(bodypart_owner))
-		bodypart_remove(bodypart_owner)
+	if(bodypart_owner && !owner)
+		if(QDELETED(bodypart_owner))
+			bodypart_owner = null
+		else
+			bodypart_remove(bodypart_owner)
 	else if(owner)
-		// The special flag is important, because otherwise mobs can die
-		// while undergoing transformation into different mobs.
-		Remove(owner, special = TRUE)
+		if(QDESTROYING(owner))
+			// The mob is being deleted, don't update the mob
+			Remove(owner, special=TRUE)
+		else
+			Remove(owner)
 	else
 		STOP_PROCESSING(SSobj, src)
+
 	LAZYNULL(organ_efficiency_modification)
+
 	return ..()
 
 /obj/item/organ/vv_edit_var(var_name, var_value)
@@ -712,12 +719,12 @@
 /obj/item/organ/proc/on_destroy_fixed()
 	return
 
-/obj/item/organ/on_enter_storage(datum/component/storage/concrete/S)
+/obj/item/organ/on_enter_storage(datum/storage/atom_storage)
 	. = ..()
 	if(recursive_loc_check(src, /obj/item/storage/backpack/backpack/artibackpack))
 		organ_flags |= ORGAN_FROZEN
 
-/obj/item/organ/on_exit_storage(datum/component/storage/concrete/S)
+/obj/item/organ/on_exit_storage(datum/storage/atom_storage)
 	. = ..()
 	if(!recursive_loc_check(src, /obj/item/storage/backpack/backpack/artibackpack))
 		organ_flags &= ~ORGAN_FROZEN

@@ -15,7 +15,7 @@
 	obj_flags = CAN_BE_HIT
 	resistance_flags = NONE
 
-/obj/item/reagent_containers/glass/bucket/dropped(mob/user)
+/obj/item/reagent_containers/glass/bucket/dropped(mob/user, silent)
 	. = ..()
 	reagents.flags = initial(reagent_flags)
 
@@ -62,7 +62,7 @@
 
 /obj/item/reagent_containers/glass/bucket/wooden/Initialize(mapload, vol)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/bucket)
+	create_storage(type = /datum/storage/bucket)
 
 /obj/item/reagent_containers/glass/bucket/wooden/alter // just new look, trying it on for size
 	icon = 'icons/roguetown/items/cooking.dmi'
@@ -97,7 +97,8 @@
 			if(!IS_ABSTRACT(recipe))
 				recipe_list += recipe
 
-	AddComponent(/datum/component/storage/concrete/grid/food/cooking/pot)
+	create_storage(type = /datum/storage/cooking/pot)
+
 	if(length(recipe_list))
 		AddComponent(/datum/component/container_craft, recipe_list, TRUE)
 

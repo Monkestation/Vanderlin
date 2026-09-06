@@ -182,17 +182,26 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 	late = TRUE
 
 /obj/effect/mapping_helpers/access/LateInitialize()
-	var/static/list/valid = list(
+	// We support one thing in the turf currently so this is priority
+	// with highest priority first
+	var/static/list/lock_priority = list(
 		/obj/structure/door, \
 		/obj/structure/closet, \
 		/obj/structure/fake_machine/vendor, \
 	)
 
-	// Get the first thing we find starting with doors and closets
-	for(var/thing in valid)
+	// Get the first thing we find
+	for(var/thing in lock_priority)
 		var/obj/found = locate(thing) in loc
 		if(found)
 			payload(found)
+			qdel(src)
+			return
+
+	// OR get the first thing with a lock in the turf
+	for(var/obj/thing in get_turf(src))
+		if(thing.lock_check(TRUE))
+			payload(thing)
 			qdel(src)
 			return
 
@@ -200,7 +209,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 	qdel(src)
 
 /obj/effect/mapping_helpers/access/proc/payload(obj/payload)
-	return
+	stack_trace("access helper ([type]) does not override payload!")
 
 /obj/effect/mapping_helpers/access/locker
 	name = "access lock helper"

@@ -182,9 +182,10 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 	if(tool.type in selected_recipe?.needed_crops)
 		produce_list |= tool
 
-	if(istype(tool, /obj/item/storage))
-		produce_list |= tool.contents
-		storage_list |= tool.contents
+	if(tool.atom_storage)
+		var/list/obj/item/items = tool.atom_storage.return_inv()
+		produce_list |= items
+		storage_list |= items
 
 	if(!length(produce_list) && !length(storage_list))
 		return NONE
@@ -225,7 +226,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 
 			if(G in storage_list)
 				dumps = TRUE
-				SEND_SIGNAL(G.loc, COMSIG_TRY_STORAGE_TAKE, G, get_turf(src), TRUE)
+
 			qdel(G)
 
 	for(var/obj/item/item in produce_list)
@@ -260,7 +261,7 @@ GLOBAL_LIST_EMPTY(custom_fermentation_recipes)
 
 			if(item in storage_list)
 				dumps = TRUE
-				SEND_SIGNAL(item.loc, COMSIG_TRY_STORAGE_TAKE, item, get_turf(src), TRUE)
+
 			qdel(item)
 
 	if(dumps)

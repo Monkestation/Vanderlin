@@ -1,7 +1,10 @@
 /obj/item/clothing/cloak/templar
-	var/overarmor = TRUE
 	has_storage = TRUE
+	var/overarmor = TRUE
 
+/obj/item/clothing/cloak/templar/dropped(mob/user, silent)
+	. = ..()
+	atom_storage?.remove_all(get_turf(src))
 
 /obj/item/clothing/cloak/templar/astratan
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'

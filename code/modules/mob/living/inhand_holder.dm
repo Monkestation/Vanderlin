@@ -18,7 +18,7 @@
 	var/destroying = FALSE
 	var/obj/item/bodypart/organ_stored
 
-/obj/item/mob_holder/dropped(mob/user)
+/obj/item/mob_holder/dropped(mob/user, silent)
 	. = ..()
 	if(isturf(loc))
 		qdel(src)

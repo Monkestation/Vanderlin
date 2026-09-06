@@ -32,11 +32,11 @@
 
 /datum/ai_planning_subtree/mug/proc/_find_muggable_item(datum/component/ai_inventory_manager/inv, mob/living/target)
 	for(var/obj/item/held in target.contents)
-		if(!held)
+		if(QDELETED(held) || held.item_flags & ABSTRACT)
 			continue
-		var/datum/component/storage/STR = held.GetComponent(/datum/component/storage)
-		if(STR)
-			for(var/obj/item/held_inside in held.contents)
+		var/datum/storage/storage = held.atom_storage
+		if(storage)
+			for(var/obj/item/held_inside in storage.return_inv(FALSE))
 				if(!(held_inside.flags_ai_inventory & mug_want_category))
 					continue
 				return held_inside
@@ -82,14 +82,14 @@
 	if(offered == wanted)
 		var/datum/component/ai_inventory_manager/inv = controller.get_inventory()
 		if(inv)
-			var/slot_flag = inv.find_space_for(wanted)
+			var/slot_flag = inv.find_space_for(offered)
 			if(slot_flag)
 				var/obj/item/container = inv.container_refs[slot_flag]
-				var/datum/component/storage/STR = container?.GetComponent(/datum/component/storage)
-				if(STR)
-					pawn.accept_offered_item(target, wanted, FALSE)
-					STR.handle_item_insertion(wanted, prevent_warning = TRUE, user = pawn)
-					inv._classify_item(wanted, slot_flag)
+				var/datum/storage/storage = container.atom_storage
+				if(storage)
+					pawn.accept_offered_item(target, offered, FALSE)
+					storage.attempt_insert(offered, controller.pawn)
+					inv._classify_item(offered, slot_flag)
 					finish_action(controller, TRUE, target_key, item_key)
 					return
 

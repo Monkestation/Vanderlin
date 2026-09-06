@@ -133,12 +133,10 @@
 			update_inv_back()
 		if(ITEM_SLOT_BACKPACK)
 			not_handled = TRUE
-			if(backr)
-				if(SEND_SIGNAL(backr, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE, !initial)) // If inital is true, item is from job datum and should be silent
-					not_handled = FALSE
-			if(backl && not_handled)
-				if(SEND_SIGNAL(backl, COMSIG_TRY_STORAGE_INSERT, equipping, src, TRUE, !initial)) // If inital is true, item is from job datum and should be silent
-					not_handled = FALSE
+			if(backr?.atom_storage?.attempt_insert(equipping, src, override = initial, messages = !initial))
+				not_handled = FALSE
+			else if(backl?.atom_storage?.attempt_insert(equipping, src, override = initial, messages = !initial))
+				not_handled = FALSE
 		else
 			not_handled = TRUE
 
@@ -215,9 +213,9 @@
 	var/i = 0
 	while(i < length(processing_list))
 		var/atom/A = processing_list[++i]
-		var/datum/component/storage/STR = A.GetComponent(/datum/component/storage)
-		if(STR)
-			processing_list += STR.return_inv(TRUE)
+		if(A.atom_storage)
+			processing_list += A.atom_storage.return_inv()
+
 	return processing_list
 
 /mob/living/carbon/proc/get_most_expensive()
@@ -227,6 +225,7 @@
 		if(atom.sellprice > price)
 			most_expensive = atom
 			price = atom.sellprice
+
 	return most_expensive
 
 ///Returns a list of all body_zones covered by clothing

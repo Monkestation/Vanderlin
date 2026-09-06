@@ -83,7 +83,7 @@
 		if(attached_accessory.above_suit)
 			H.update_inv_wear_suit()
 
-/obj/item/clothing/pants/dropped(mob/user)
+/obj/item/clothing/pants/dropped(mob/user, silent)
 	if(attached_accessory)
 		attached_accessory.on_uniform_dropped(src, user)
 		if(ishuman(user))

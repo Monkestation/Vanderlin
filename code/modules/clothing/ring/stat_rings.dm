@@ -28,7 +28,7 @@
 		user.attributes?.add_attribute_modifier(/datum/attribute_modifier/statgemerald)
 	return
 
-/obj/item/clothing/ring/statgemerald/dropped(mob/living/user)
+/obj/item/clothing/ring/statgemerald/dropped(mob/living/user, silent)
 	..()
 	if(active_item)
 		to_chat(user, span_green("'..but without an end to the journey, what would become of lyfe's meaning?'"))
@@ -61,7 +61,7 @@
 		user.attributes?.add_attribute_modifier(/datum/attribute_modifier/statonyx)
 	return
 
-/obj/item/clothing/ring/statonyx/dropped(mob/living/user)
+/obj/item/clothing/ring/statonyx/dropped(mob/living/user, silent)
 	..()
 	if(active_item)
 		to_chat(user, span_purple("'..but if you don't stand for those who cannot, who will?'"))
@@ -94,7 +94,7 @@
 		user.attributes?.add_attribute_modifier(/datum/attribute_modifier/statamythortz)
 	return
 
-/obj/item/clothing/ring/statamythortz/dropped(mob/living/user)
+/obj/item/clothing/ring/statamythortz/dropped(mob/living/user, silent)
 	..()
 	if(active_item)
 		to_chat(user, span_rose("'..but if we root ourselves in the thoughtless, how else will we progress?'"))
@@ -126,7 +126,7 @@
 		user.attributes?.add_attribute_modifier(/datum/attribute_modifier/statrontz)
 	return
 
-/obj/item/clothing/ring/statrontz/dropped(mob/living/user)
+/obj/item/clothing/ring/statrontz/dropped(mob/living/user, silent)
 	..()
 	if(active_item)
 		to_chat(user, span_red("'..but without violence, what would stop evil from triumphing?'"))
@@ -170,7 +170,7 @@
 		user.add_chem_effect(CE_ENERGETIC, 5, "[type]")
 	return
 
-/obj/item/clothing/ring/statdorpel/dropped(mob/living/user)
+/obj/item/clothing/ring/statdorpel/dropped(mob/living/user, silent)
 	..()
 	if(active_item)
 		to_chat(user, span_blue("'..I know that kindness exists, for I am kind..' </br>'..I know hope exists, for I have hope..' </br>'..and I know love exists, for I love.'"))
@@ -208,7 +208,7 @@
 		update_icon()
 	return
 
-/obj/item/clothing/ring/dragon_ring/dropped(mob/living/user)
+/obj/item/clothing/ring/dragon_ring/dropped(mob/living/user, silent)
 	..()
 	if(active_item)
 		to_chat(user, span_suicide("A chilling sensation courses through my body, and the ring's heat remains oh-so-alluring.. </br>..yet, one must wonder.. could such fiery strength withstand a forge's heat?"))

@@ -14,10 +14,9 @@
 	experimental_inhand = FALSE
 	dropshrink = 0.7
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
-	component_type = /datum/component/storage/concrete/grid/keyring
+	storage_type = /datum/storage/keyring
 	item_weight = 50 GRAMS
-	var/list/keys = list() //Used to generate starting keys on initialization, check contents instead for actual keys
-	var/list/combined_access
+
 	slot_equipment_priority = list(
 		ITEM_SLOT_NECK,
 		ITEM_SLOT_WRISTS,
@@ -25,6 +24,8 @@
 		ITEM_SLOT_MOUTH,
 	)
 
+	var/list/keys = list() //Used to generate starting keys on initialization, check contents instead for actual keys
+	var/list/combined_access
 
 /obj/item/storage/keyring/Initialize()
 	. = ..()
@@ -34,7 +35,7 @@
 		stack_trace("Keyring [src] has too many keys and the list will get cut short!")
 	for(var/X in keys)
 		var/obj/item/key/new_key = new X(loc)
-		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, new_key, null, TRUE, FALSE))
+		if(!atom_storage.attempt_insert(new_key, override = TRUE))
 			qdel(new_key)
 		LAZYREMOVE(keys, X)
 
@@ -118,99 +119,119 @@
 	w_class = WEIGHT_CLASS_TINY
 	dropshrink = 0
 	throwforce = 0
-	var/list/picks = list()
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_NECK|ITEM_SLOT_MOUTH|ITEM_SLOT_WRISTS
 	experimental_inhand = FALSE
 	dropshrink = 0.7
 	item_weight = 40 GRAMS
-	var/how_many_lockpicks = 9
+	var/max_picks = 9
+	var/spawn_picks = 0
 
 /obj/item/lockpickring/Initialize()
 	. = ..()
-	if(picks.len)
-		for(var/X in picks)
-			addtoring(new X())
-			picks -= X
+	for(var/i in 1 to spawn_picks)
+		new /obj/item/lockpick(src)
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/lockpickring/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
 			if("gen")
-				return list("shrink" = 0.4,
-"sx" = -6,
-"sy" = -3,
-"nx" = 13,
-"ny" = -3,
-"wx" = -2,
-"wy" = -3,
-"ex" = 4,
-"ey" = -5,
-"northabove" = 0,
-"southabove" = 1,
-"eastabove" = 1,
-"westabove" = 0,
-"nturn" = 15,
-"sturn" = 0,
-"wturn" = 0,
-"eturn" = 39,
-"nflip" = 8,
-"sflip" = 0,
-"wflip" = 0,
-"eflip" = 8)
+				return list(
+					"shrink" = 0.4,
+					"sx" = -6,
+					"sy" = -3,
+					"nx" = 13,
+					"ny" = -3,
+					"wx" = -2,
+					"wy" = -3,
+					"ex" = 4,
+					"ey" = -5,
+					"northabove" = 0,
+					"southabove" = 1,
+					"eastabove" = 1,
+					"westabove" = 0,
+					"nturn" = 15,
+					"sturn" = 0,
+					"wturn" = 0,
+					"eturn" = 39,
+					"nflip" = 8,
+					"sflip" = 0,
+					"wflip" = 0,
+					"eflip" = 8,
+				)
 			if("onbelt")
-				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+				return list(
+					"shrink" = 0.3,
+					"sx" = -2,
+					"sy" = -5,
+					"nx" = 4,
+					"ny" = -5,
+					"wx" = 0,
+					"wy" = -5,
+					"ex" = 2,
+					"ey" = -5,
+					"nturn" = 0,
+					"sturn" = 0,
+					"wturn" = 0,
+					"eturn" = 0,
+					"nflip" = 0,
+					"sflip" = 0,
+					"wflip" = 0,
+					"eflip" = 0,
+					"northabove" = 0,
+					"southabove" = 1,
+					"eastabove" = 1,
+					"westabove" = 0
+				)
 
-/obj/item/lockpickring/proc/addtoring(obj/item/I)
-	if(!I || !istype(I))
-		return 0
-	I.loc = src
-	picks += I
-	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
+/obj/item/lockpickring/examine(mob/user)
+	. = ..()
+	. += span_info("\Roman[length(contents)] lockpick\s.")
 
-/obj/item/lockpickring/proc/removefromring(mob/user)
-	if(!picks.len)
-		return
-	var/obj/item/lockpick/K = picks[picks.len]
-	picks -= K
-	K.loc = user.loc
-	update_appearance(UPDATE_ICON_STATE | UPDATE_DESC)
-	return K
+/obj/item/lockpickring/Entered(atom/movable/arrived, atom/old_loc, list/atom/old_locs)
+	. = ..()
+	update_appearance(UPDATE_ICON_STATE)
+
+/obj/item/lockpickring/Exited(atom/movable/gone, direction)
+	. = ..()
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/lockpickring/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(istype(tool, /obj/item/lockpick))
-		if(length(picks) >= how_many_lockpicks)
-			to_chat(user, span_warning("Too many lockpicks."))
-			return
-		user.dropItemToGround(tool)
-		addtoring(tool)
-		return ITEM_INTERACT_SUCCESS
+	if(!istype(tool, /obj/item/lockpick))
+		return NONE
+
+	if(length(contents) >= max_picks)
+		user.balloon_alert(user, "too many picks!")
+		return ITEM_INTERACT_BLOCKING
+
+	if(!user.temporarilyRemoveItemFromInventory(tool))
+		return ITEM_INTERACT_BLOCKING
+
+	tool.forceMove(src)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/lockpickring/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	if(length(picks))
-		to_chat(user, span_notice("I steal a pick off the ring."))
-		var/obj/item/lockpick/K = removefromring(user)
-		user.put_in_active_hand(K)
-	else
-		to_chat(user, span_notice("No picks."))
+
+	if(!length(contents))
+		user.balloon_alert(user, "no picks!")
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+	var/obj/item/lockpick/K = locate() in contents
+	if(!user.put_in_hands(K))
+		user.balloon_alert(user, "hands full!")
+
 	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/lockpickring/update_icon_state()
 	icon_state = "pickring[clamp(length(contents), 0, 3)]"
 	return ..()
 
-/obj/item/lockpickring/update_desc()
-	if(!length(contents))
-		desc = initial(desc)
-		return
-	desc = span_info("\Roman[length(contents)] lockpick\s.")
-	return ..()
-
 /obj/item/lockpickring/mundane
-	picks = list(/obj/item/lockpick, /obj/item/lockpick, /obj/item/lockpick)
+	spawn_picks = 3
 
 /obj/item/storage/keyring/captain
 	keys = list(/obj/item/key/captain, /obj/item/key/dungeon, /obj/item/key/garrison, /obj/item/key/lieutenant, /obj/item/key/forrestgarrison, /obj/item/key/atarms, /obj/item/key/gatehouse, /obj/item/key/manor, /obj/item/key/guest)

@@ -160,9 +160,9 @@
 	salvage_amount = 2
 	item_weight = 2 KILOGRAMS
 
-/obj/item/clothing/shoes/boots/hunter/apply_components()
+/obj/item/clothing/shoes/boots/hunter/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/boots)
+	create_storage(type = /datum/storage/no_interface/boots)
 
 /obj/item/clothing/shoes/boots/hunter/masterwork
 	name = "masterwork hunting boots"

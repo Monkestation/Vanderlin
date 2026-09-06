@@ -263,12 +263,9 @@
 		else
 			grid_width += 32
 		dimension = !dimension
-	if(item_flags & IN_STORAGE)
-		var/obj/item/location = loc
-		var/datum/component/storage/storage = location.GetComponent(/datum/component/storage)
 
-		storage.update_item(src)
-		storage.orient2hud()
+	if(item_flags & IN_STORAGE)
+		loc.atom_storage?.refresh_views()
 
 /obj/item/natural/clod
 	name = "generic clod"

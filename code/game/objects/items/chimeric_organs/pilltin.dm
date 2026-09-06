@@ -7,7 +7,7 @@
 	throwforce = 1
 	slot_flags = null
 	contents_tag = null
-	component_type = /datum/component/storage/concrete/grid/pilltin
+	storage_type = /datum/storage/pilltin
 	item_weight = 55 GRAMS
 
 /obj/item/storage/fancy/pilltin/update_icon_state()

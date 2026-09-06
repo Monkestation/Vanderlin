@@ -2,6 +2,7 @@
 	name = "wings"
 	desc = "A pair of wings. Those may or may not allow you to fly... or at the very least flap."
 	visible_organ = TRUE
+	organ_flags = parent_type::organ_flags | ORGAN_EXTERNAL
 	zone = BODY_ZONE_CHEST
 	slot = ORGAN_SLOT_WINGS
 	organ_efficiency = list(ORGAN_SLOT_WINGS = 100)

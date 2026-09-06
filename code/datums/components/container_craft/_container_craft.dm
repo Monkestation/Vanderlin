@@ -19,6 +19,13 @@
 	if(!length(recipes))
 		return COMPONENT_INCOMPATIBLE
 
+	if(!isatom(parent))
+		return COMPONENT_INCOMPATIBLE
+
+	var/atom/atom_parent = parent
+	if(!atom_parent.atom_storage)
+		return COMPONENT_INCOMPATIBLE
+
 	viable_recipe_types = list()
 	fallback_recipe_types = list()
 
@@ -37,6 +44,7 @@
 	on_craft_start = start
 	on_craft_failed = fail
 	on_craft_finished = success
+
 	RegisterSignal(parent, COMSIG_STORAGE_CLOSED, PROC_REF(async_start))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(async_start))
 	if(temperature_listener && isatom(parent))
@@ -54,22 +62,24 @@
  * Attempt to craft all possible recipes - try normal priority first, then fallbacks
  */
 /datum/component/container_craft/proc/attempt_crafts(datum/source, mob/user)
-	var/list/stored_items = list()
-	var/obj/item/host = parent
-	if(!length(host.contents))
+	var/atom/atom_parent = parent
+
+	var/list/obj/item/storage_contents = atom_parent.atom_storage.return_inv()
+	if(!length(storage_contents))
 		return
 
 	if(!istype(user))
-		user = get_mob_by_ckey(host.fingerprintslast)
+		user = get_mob_by_ckey(atom_parent.fingerprintslast)
 
+	var/list/stored_items = list()
 	// Build list of all items in container by type
-	for(var/obj/item/item in host.contents)
+	for(var/obj/item/item as anything in storage_contents)
 		stored_items |= item.type
 		stored_items[item.type]++
 
 	// Subtract items already reserved by active crafts in this container
 	for(var/datum/container_craft_operation/op in GLOB.active_container_crafts)
-		if(op.crafter != host)
+		if(op.crafter != atom_parent)
 			continue
 
 		// op.stored_items is now a list of item references, convert to type counts
@@ -88,7 +98,7 @@
 		if(!singleton)
 			continue
 		// Try to start the craft
-		if(singleton.try_craft(host, stored_items.Copy(), user, on_craft_start, on_craft_failed))
+		if(singleton.try_craft(atom_parent, stored_items.Copy(), user, on_craft_start, on_craft_failed))
 			return  // Success! Stop here
 
 	// If no normal priority recipes worked, try fallback recipes
@@ -97,5 +107,5 @@
 		if(!singleton)
 			continue
 		// Try to start the craft
-		if(singleton.try_craft(host, stored_items.Copy(), user, on_craft_start, on_craft_failed))
+		if(singleton.try_craft(atom_parent, stored_items.Copy(), user, on_craft_start, on_craft_failed))
 			return  // Success! Stop here

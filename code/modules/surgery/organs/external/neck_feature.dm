@@ -2,6 +2,7 @@
 	abstract_type = /obj/item/organ/neck_feature
 	name = "neck feature"
 	visible_organ = TRUE
+	organ_flags = parent_type::organ_flags | ORGAN_EXTERNAL
 
 	zone = BODY_ZONE_PRECISE_NECK
 	slot = ORGAN_SLOT_NECK_FEATURE

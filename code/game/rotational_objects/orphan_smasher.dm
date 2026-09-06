@@ -229,7 +229,8 @@
 	for(var/atom/listed_atom in bin.contents)
 		if(listed_atom.type in material_copy)
 			material_copy[listed_atom.type]--
-			SEND_SIGNAL(bin, COMSIG_TRY_STORAGE_TAKE, listed_atom, get_turf(src), TRUE)
+			bin.atom_storage.attempt_remove(listed_atom, get_turf(src), TRUE)
+
 			qdel(listed_atom)
 
 			if(material_copy[listed_atom.type] <= 0)
@@ -239,7 +240,7 @@
 	for(var/i in 1 to current.output_amount)
 		new_atom = new current.created_item(get_turf(bin))
 		new_atom.update_integrity(new_atom.max_integrity, update_atom = FALSE)
-		SEND_SIGNAL(bin, COMSIG_TRY_STORAGE_INSERT, new_atom, null, TRUE, TRUE)
+		bin.atom_storage.attempt_insert(new_atom, override = TRUE)
 
 	visible_message(span_notice("[new_atom] falls into the hopper of [src]."))
 	anvil_recipes_to_craft -= current
@@ -323,7 +324,7 @@
 
 /obj/structure/material_bin/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/anvil_bin)
+	create_storage(type = /datum/storage/anvil_bin)
 
 /obj/structure/material_bin/Destroy()
 	parent = null
@@ -343,7 +344,7 @@
 		return
 	opened = !opened
 	update_appearance(UPDATE_ICON_STATE)
-	SEND_SIGNAL(src, COMSIG_TRY_STORAGE_HIDE_ALL)
+	atom_storage.close_all()
 
 #undef STEP_FIDDLE
 #undef STEP_LEVER

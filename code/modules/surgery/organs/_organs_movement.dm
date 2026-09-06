@@ -106,6 +106,8 @@
 
 	organ_owner.update_organ_requirements()
 
+	STOP_PROCESSING(SSobj, src)
+
 /// Insert an organ into a limb, assume the limb as always detached and include no owner operations here (except the get_bodypart helper here I guess)
 /// Give EITHER a limb OR a limb owner
 /obj/item/organ/proc/bodypart_insert(obj/item/bodypart/bodypart, mob/living/carbon/limb_owner, movement_flags)
@@ -141,8 +143,6 @@
 
 	if(organ_flags & ORGAN_LIMB_SUPPORTER)
 		limb.update_limb_efficiency()
-
-	STOP_PROCESSING(SSobj, src)
 
 /*
  * Remove the organ from the select mob.
@@ -234,12 +234,12 @@
 		limb.update_limb_efficiency()
 
 /// In space station videogame, nothing is sacred. If somehow an organ is removed unexpectedly, handle it properly
-/obj/item/organ/proc/forced_removal()
+/obj/item/organ/proc/forced_removal(datum/source, atom/old_loc, ...)
 	SIGNAL_HANDLER
 
 	if(owner)
 		Remove(owner)
 	else if(bodypart_owner)
-		bodypart_remove(limb_owner = owner)
+		bodypart_remove(bodypart_owner)
 	else
 		stack_trace("Force removed an already removed organ!")

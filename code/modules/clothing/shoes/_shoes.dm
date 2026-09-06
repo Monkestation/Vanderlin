@@ -81,7 +81,7 @@
 	user.pixel_y -= offset
 	worn_y_dimension = world.icon_size
 
-/obj/item/clothing/shoes/dropped(mob/user)
+/obj/item/clothing/shoes/dropped(mob/user, silent)
 	if(offset && equipped_before_drop)
 		restore_offsets(user)
 	. = ..()

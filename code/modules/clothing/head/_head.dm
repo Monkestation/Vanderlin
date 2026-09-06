@@ -52,7 +52,7 @@
 	else
 		flags_inv = initial(flags_inv)
 
-/obj/item/clothing/head/dropped(mob/user)
+/obj/item/clothing/head/dropped(mob/user, silent)
 	. = ..()
 	user.update_fov_angles()
 	flags_inv = initial(flags_inv)

@@ -41,9 +41,14 @@
 	actions_types = list(/datum/action/item_action/organ_action/use/harpy_sing)
 	var/obj/item/instrument/vocals/harpy_vocals/vocals
 
-/obj/item/organ/vocal_cords/harpy/Initialize()
+/obj/item/organ/vocal_cords/harpy/Initialize(mapload)
 	. = ..()
 	vocals = new(src)  //okay, i think it'll be tied to the organ
+
+/obj/item/organ/vocal_cords/harpy/Destroy(force)
+	if(!QDELETED(vocals))
+		QDEL_NULL(vocals)
+	return ..()
 
 /obj/item/organ/vocal_cords/harpy/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()

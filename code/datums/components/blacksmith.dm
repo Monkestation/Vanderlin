@@ -241,18 +241,15 @@ Can accept both a type path, and an instance of a datum. Type path has priority.
 	if(!spend_buyer_offhand_money(customer, total_cost))
 		trader.say(trader_data.return_trader_phrase(NO_CASH_PHRASE))
 		return
+
 	for(var/obj/item/ore/ore as anything in smeltable_ores)
 		var/obj/item/ingot/new_ingot = new ore.smeltresult(get_turf(ore))
-		if(ore in active_item?.contents)
-			SEND_SIGNAL(ore.loc, COMSIG_TRY_STORAGE_TAKE, ore, get_turf(ore), TRUE)
-			SEND_SIGNAL(active_item, COMSIG_TRY_STORAGE_INSERT, new_ingot, null, TRUE, FALSE)
-		else if(ore in inactive_item?.contents)
-			SEND_SIGNAL(ore.loc, COMSIG_TRY_STORAGE_TAKE, ore, get_turf(ore), TRUE)
-			SEND_SIGNAL(inactive_item, COMSIG_TRY_STORAGE_INSERT, new_ingot, null, TRUE, FALSE)
+		if((ore in active_item?.contents) || (ore in inactive_item?.contents))
+			ore.loc.atom_storage.attempt_remove(ore, get_turf(ore), TRUE)
+			active_item.atom_storage.attempt_insert(new_ingot, null, TRUE)
 		else
 			customer.put_in_active_hand(new_ingot)
 		qdel(ore)
-
 
 /datum/component/blacksmith/proc/repair(mob/living/carbon/customer)
 	var/mob/living/trader = parent

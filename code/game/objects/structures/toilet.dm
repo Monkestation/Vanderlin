@@ -5,33 +5,25 @@
 	icon_state = "toilet"
 	density = FALSE
 	anchored = TRUE
-	//var/buildstacktype
-	//var/buildstackamount = 1
 
-/obj/structure/toilet/Initialize()
+/obj/structure/toilet/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/toilet)
+	create_storage(type = /datum/storage/no_interface/toilet)
 
-/obj/structure/toilet/attack_hand(mob/living/user)
+/obj/structure/toilet/attack_hand(mob/living/user, list/modifiers)
 	. = ..()
 	if(.)
 		return
 
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage/concrete/toilet)
-	var/list/things = STR.contents()
-	if(!length(things))
+	if(!length(atom_storage?.return_inv(recursive = FALSE)))
 		to_chat(user, span_notice("The toilet is empty."))
 		return
-	var/obj/item/I = pick(things)
-	STR.remove_from_storage(I, get_turf(user))
+
+	var/obj/item/I = atom_storage.remove_single_random(user, get_turf(user))
+	if(!I)
+		return
 	user.put_in_hands(I)
 	to_chat(user, span_notice("I find [I] in the toilet."))
-
-/* /obj/structure/toilet/deconstruct()
-	if(!(flags_1 & NODECONSTRUCT_1))
-		if(buildstacktype)
-			new buildstacktype(loc,buildstackamount)
-	..() */
 
 /// Toilet that spawns containing a random amount of what you'd expect
 /obj/structure/toilet/filled
@@ -42,12 +34,10 @@
 		/obj/item/coin/gold = 1
 		)
 
-/obj/structure/toilet/filled/Initialize()
+/obj/structure/toilet/filled/Initialize(mapload)
 	. = ..()
-	var/numitems = rand(0,5)
-	if(numitems)
-		for(var/i in 1 to numitems)
-			var/obj/item/pickeditem = pickweight(spawn_list)
-			var/obj/item/spawnitem = new pickeditem(get_turf(src))
-			if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, spawnitem))
-				qdel(spawnitem)
+	for(var/i in 1 to rand(0, 5))
+		var/obj/item/pickeditem = pickweight(spawn_list)
+		var/obj/item/spawnitem = new pickeditem(get_turf(src))
+		if(!atom_storage?.attempt_insert(spawnitem, override = TRUE))
+			qdel(spawnitem)

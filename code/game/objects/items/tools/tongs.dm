@@ -119,7 +119,7 @@
 	. = ..()
 	place_item_to_atom(get_turf(src), user)
 
-/obj/item/weapon/tongs/dropped(mob/user)
+/obj/item/weapon/tongs/dropped(mob/user, silent)
 	. = ..()
 	place_item_to_atom(get_turf(src), user)
 

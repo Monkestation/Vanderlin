@@ -23,8 +23,8 @@
 	var/fingerprint
 	var/status = BODYPART_ORGANIC
 
-	///Random flags that describe this bodypart
-	var/bodypart_flags
+	/// General bodypart flags, such as - is it necrotic, does it leave stumps behind, etc
+	var/bodypart_flags = BODYPART_HAS_ARTERY
 	var/static_icon = FALSE
 	var/body_zone //BODY_ZONE_CHEST, BODY_ZONE_L_ARM, etc , used for def_zone
 	var/aux_zone // used for hands
@@ -139,9 +139,6 @@
 	/// artery organ base type
 	var/artery_type = /obj/item/organ/artery
 
-	/// General bodypart flags, such as - is it necrotic, does it leave stumps behind, etc
-	var/limb_flags = BODYPART_HAS_ARTERY
-
 	var/biological_state = BIO_STANDARD_JOINTED
 
 	/// What state is the bodypart in for determining surgery availability
@@ -175,6 +172,8 @@
 	var/list/datum/injury/injuries
 	/// The last injury to have afflicted this bodypart
 	var/datum/injury/last_injury
+	/// Storage type, probably organ storage
+	var/datum/storage/storage_type = null
 
 	///bleed stopper 9000, ref to our applied tourniquet
 	var/obj/item/tourniquet/tourniquet
@@ -186,8 +185,6 @@
 
 /obj/item/bodypart/Initialize(mapload)
 	. = ..()
-
-	create_base_organs()
 
 	if(isnull(max_pain_damage))
 		max_pain_damage = max_damage * 1.5
@@ -210,6 +207,11 @@
 
 	if(innate_state)
 		add_surgical_state(innate_state)
+
+	if(storage_type)
+		create_storage(type = storage_type)
+
+	create_base_organs()
 
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_loss))
@@ -239,7 +241,7 @@
 
 	last_injury = null
 
-	for(var/atom/movable/movable in contents)
+	for(var/atom/movable/movable as anything in contents)
 		qdel(movable)
 
 	if(bandage)
@@ -281,10 +283,10 @@
 	return (status == BODYPART_ROBOTIC)
 
 /obj/item/bodypart/proc/is_dead()
-	return (limb_flags & BODYPART_DEAD)
+	return (bodypart_flags & BODYPART_DEAD)
 
 /obj/item/bodypart/proc/is_deformed()
-	return (limb_flags & BODYPART_DEFORMED)
+	return (bodypart_flags & BODYPART_DEFORMED)
 
 /obj/item/bodypart/proc/remove_chronic()
 	if(owner)
@@ -293,17 +295,17 @@
 ///you might wonder why this isn't in life? this saves a metric ton of time since its situational as hell
 /obj/item/bodypart/proc/update_chronic()
 	if(owner)
-		if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_FRACTURE|BODYPART_CHRONIC_ARTHRITIS|BODYPART_CHRONIC_MIGRAINE))
+		if(CHECK_BITFIELD(bodypart_flags, BODYPART_CHRONIC_FRACTURE|BODYPART_CHRONIC_ARTHRITIS|BODYPART_CHRONIC_MIGRAINE))
 			RegisterSignal(owner, COMSIG_LIVING_LIFE, PROC_REF(on_owner_life), override = TRUE)
 	update_wounds()
 	update_pain_coeff()
 
 /obj/item/bodypart/proc/on_owner_life()
-	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_FRACTURE))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_CHRONIC_FRACTURE))
 		on_chronic_fracture_life()
-	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_ARTHRITIS))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_CHRONIC_ARTHRITIS))
 		on_arthritis_life()
-	if(CHECK_BITFIELD(limb_flags, BODYPART_CHRONIC_MIGRAINE))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_CHRONIC_MIGRAINE))
 		on_migraine_life()
 
 /obj/item/bodypart/proc/on_chronic_fracture_life()
@@ -350,7 +352,7 @@
 
 /obj/item/bodypart/proc/update_pain_coeff()
 	var/pain_power = initial(pain_damage_coeff)
-	if(BODYPART_CHRONIC_NERVE_DAMAGE in limb_flags)
+	if(BODYPART_CHRONIC_NERVE_DAMAGE in bodypart_flags)
 		pain_power += 0.25
 	pain_damage_coeff = pain_power
 
@@ -359,7 +361,7 @@
 	if(isreagentcontainer(loc))
 		return FALSE /// preserving ah.
 	check_cold(passed_temp)
-	if(CHECK_BITFIELD(limb_flags, BODYPART_FROZEN|BODYPART_DEAD|BODYPART_NO_INFECTION))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_FROZEN|BODYPART_DEAD|BODYPART_NO_INFECTION))
 		return FALSE
 	return TRUE
 
@@ -382,14 +384,14 @@
 
 	// Shouldn't happen but just in case
 	if(isnull(local_temp))
-		return (limb_flags & BODYPART_FROZEN)
+		return (bodypart_flags & BODYPART_FROZEN)
 	//you get some leeway...
 	if(local_temp < 15)
-		limb_flags |= BODYPART_FROZEN
-		return (limb_flags & BODYPART_FROZEN)
+		bodypart_flags |= BODYPART_FROZEN
+		return (bodypart_flags & BODYPART_FROZEN)
 
-	limb_flags &= ~BODYPART_FROZEN
-	return (limb_flags & BODYPART_FROZEN)
+	bodypart_flags &= ~BODYPART_FROZEN
+	return (bodypart_flags & BODYPART_FROZEN)
 
 /**
  * update_wounds() is called whenever a wound is gained or lost on this bodypart, as well as if there's a change of some kind on a bone wound possibly changing disabled status
@@ -402,7 +404,7 @@
 /obj/item/bodypart/proc/update_wounds(replaced = FALSE)
 	var/dam_mul = initial(damage_multiplier)
 
-	if(BODYPART_CHRONIC_SCAR in limb_flags)
+	if(BODYPART_CHRONIC_SCAR in bodypart_flags)
 		dam_mul += 0.20
 	// we can (normally) only have one wound per type, but remember there's multiple types (smites like :B:loodless can generate multiple cuts on a limb)
 	for(var/datum/wound/iter_wound as anything in wounds)
@@ -444,7 +446,7 @@
 /// Adding/removing germs
 /obj/item/bodypart/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
 	. = ..()
-	if(germ_level >= INFECTION_LEVEL_THREE && !CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
+	if(germ_level >= INFECTION_LEVEL_THREE && !CHECK_BITFIELD(bodypart_flags, BODYPART_DEAD))
 		kill_limb()
 		if(owner && owner.stat < DEAD)
 			to_chat(owner, span_userdanger("I can't feel my [name] anymore..."))
@@ -455,7 +457,8 @@
 	SIGNAL_HANDLER
 
 	germ_level = INFECTION_LEVEL_THREE
-	limb_flags |= BODYPART_DEAD
+	bodypart_flags |= BODYPART_DEAD
+
 	if(owner)
 		SEND_SIGNAL(owner, COMSIG_BODYPART_ROTTEN_CHANGE)
 	update_limb(!owner)
@@ -465,10 +468,11 @@
 /obj/item/bodypart/proc/on_rotten_trait_loss(obj/item/bodypart/source)
 	SIGNAL_HANDLER
 
-	limb_flags &= ~BODYPART_DEAD
+	bodypart_flags &= ~BODYPART_DEAD
 	skeletonizing_rate = 0
 	if(owner)
 		SEND_SIGNAL(owner, COMSIG_BODYPART_ROTTEN_CHANGE)
+
 	update_limb(!owner)
 	update_limb_efficiency()
 
@@ -520,7 +524,7 @@
 			if(owner)
 				to_chat(owner, span_userdanger("My [name] has gone numb, dark, and still. It's dead."))
 		. |= BODYPART_LIFE_UPDATE_HEALTH
-	if(CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_DEAD))
 		on_death(delta_time, times_fired)
 
 /// Check if we need to run on_life()
@@ -836,7 +840,7 @@
 			adjust_germ_level(-SANITIZATION_LYING * delta_time)
 
 /obj/item/bodypart/proc/create_base_organs()
-	if(CHECK_BITFIELD(limb_flags, BODYPART_HAS_ARTERY))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_HAS_ARTERY))
 		create_artery()
 
 /obj/item/bodypart/attack(mob/living/carbon/C, mob/user, list/modifiers)
@@ -944,7 +948,7 @@
 
 /// Returns whether or not the bodypart can feel pain
 /obj/item/bodypart/proc/can_feel_pain()
-	if(CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
+	if(CHECK_BITFIELD(bodypart_flags, BODYPART_DEAD))
 		return
 	if(HAS_TRAIT(src, TRAIT_ROTTEN))
 		return FALSE
@@ -1677,12 +1681,15 @@
 /obj/item/bodypart/proc/get_cavity_volume()
 	. = 0
 	for(var/obj/item/organ/organ as anything in get_organs())
+		// External organs do not count
+		if(organ.organ_flags & ORGAN_EXTERNAL)
+			continue
 		. += organ.organ_volume
 	for(var/obj/item/item as anything in cavity_items)
 		. += item.w_class
 
 /obj/item/bodypart/proc/artery_needed()
-	return CHECK_BITFIELD(limb_flags, BODYPART_HAS_ARTERY)
+	return CHECK_BITFIELD(bodypart_flags, BODYPART_HAS_ARTERY)
 
 /obj/item/bodypart/proc/no_artery()
 	return (!getorganslot(ORGAN_SLOT_ARTERY))

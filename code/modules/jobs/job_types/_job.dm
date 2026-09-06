@@ -1107,23 +1107,18 @@
 		place_spellbook(spawned, path)
 
 /datum/job/proc/place_spellbook(mob/living/carbon/human/spawned, path)
-	var/obj/item/new_item = new path(spawned)
+	var/obj/item/new_item = new path(get_turf(spawned))
 
-	var/obj/item/container = spawned.get_item_by_slot(ITEM_SLOT_BACK_L)
-	if(!container || !attempt_insert_with_flipping(container, new_item, null, TRUE, TRUE))
-		container = spawned.get_item_by_slot(ITEM_SLOT_BACK_R)
-		if(!container || !attempt_insert_with_flipping(container, new_item, null, TRUE, TRUE))
-			new_item.item_flags &= ~IN_STORAGE
-			if(!spawned.put_in_hands(new_item))
-				container = spawned.get_item_by_slot(ITEM_SLOT_BELT)
-				if(!container || !attempt_insert_with_flipping(container, new_item, null, TRUE, TRUE))
-					new_item.forceMove(get_turf(spawned))
-					message_admins("[spawned] had a granted spellbook ([path]) with no room to store: [new_item]")
+	var/handled = FALSE
+	for(var/slot in STORAGE_SLOT_PRIORITY)
+		var/obj/item/storage = spawned.get_item_by_slot(slot)
+		if(!storage)
+			continue
+		if(storage.atom_storage?.attempt_insert(new_item, override = TRUE, messages = FALSE))
+			handled = TRUE
+			break
 
-/datum/job/proc/attempt_insert_with_flipping(obj/item/storage_item, obj/item/object_to_insert, mob/living/carbon/human/H, silent, force)
-	var/success = FALSE
-	success = SEND_SIGNAL(storage_item, COMSIG_TRY_STORAGE_INSERT, object_to_insert, H, silent, force)
-	if(!success)
-		object_to_insert.inventory_flip()
-		success = SEND_SIGNAL(storage_item, COMSIG_TRY_STORAGE_INSERT, object_to_insert, H, silent, force)
-	return success
+	if(!handled)
+		if(spawned.put_in_hands(new_item))
+			return
+		message_admins("[spawned] had a granted spellboo with no room to store!")

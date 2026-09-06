@@ -73,9 +73,9 @@
 	boobed = TRUE
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	flags_inv = HIDEBOOB
-	var/overarmor = TRUE
 	sellprice = 300
 	has_storage = TRUE
+	var/overarmor = TRUE
 
 /obj/item/clothing/cloak/grandmaster/MiddleClick(mob/user)
 	overarmor = !overarmor

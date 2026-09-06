@@ -92,7 +92,6 @@
 	bundletype = /obj/item/natural/bundle/teeth/fang
 	fang_bonus = 0.25
 
-
 /obj/item/natural/teeth/proc/do_knock_out_animation(shrink_time = 5)
 	var/old_transform = matrix(transform)
 	transform = transform.Scale(2, 2)
@@ -113,6 +112,11 @@
 	bleeds = FALSE
 
 	artery_type = ARTERY_MOUTH
+
+	storage_type = /datum/storage/organ/mouth
+
+	max_cavity_volume = WEIGHT_CLASS_SMALL + 2
+	max_cavity_item_size = WEIGHT_CLASS_SMALL
 
 	/// Maximum amount of teeth this limb can hae
 	var/max_teeth = 32

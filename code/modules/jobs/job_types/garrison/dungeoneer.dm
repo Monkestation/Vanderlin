@@ -90,13 +90,13 @@
 /obj/item/storage/fancy/ifak/prisonerkit
 	name = "prisoner patch kit"
 	desc = "A small medical kit for cleaning up prisoners after a torture session. Contains a few bandages, a small bottle of disinfectant, and a few other items."
-	populate_contents = list(
-	    /obj/item/natural/bundle/cloth/bandage/full,
-	    /obj/item/natural/bundle/cloth/bandage/full,
-		/obj/item/natural/bundle/fibers/full,
-		/obj/item/needle,
-		/obj/item/reagent_containers/glass/bottle/vial/healthpot,
-		/obj/item/reagent_containers/glass/bottle/vial/healthpot,
-		/obj/item/reagent_containers/glass/bottle/diseasecure,
-	)
 	contents_tag = "items"
+
+/obj/item/storage/fancy/ifak/prisonerkit/populate_contents()
+	new /obj/item/natural/bundle/cloth/bandage/full(src)
+	new /obj/item/natural/bundle/cloth/bandage/full(src)
+	new /obj/item/natural/bundle/fibers/full(src)
+	new /obj/item/needle(src)
+	new /obj/item/reagent_containers/glass/bottle/vial/healthpot(src)
+	new /obj/item/reagent_containers/glass/bottle/vial/healthpot(src)
+	new /obj/item/reagent_containers/glass/bottle/diseasecure(src)

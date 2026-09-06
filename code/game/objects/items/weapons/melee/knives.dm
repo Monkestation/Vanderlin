@@ -143,9 +143,8 @@
 	if(item.fiber_salvage) //We're getting fiber as base if fiber is present on the item
 		new /obj/item/natural/fibers(get_turf(item))
 
-	if(istype(item, /obj/item/storage))
-		var/obj/item/storage/bag = item
-		bag.emptyStorage()
+	if(interacting_with.atom_storage)
+		interacting_with.atom_storage.remove_all(get_turf(src))
 
 	var/probability = max(0, 50 - (skill_level * 10))
 	if(prob(probability))

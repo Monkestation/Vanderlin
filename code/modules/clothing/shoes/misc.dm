@@ -12,9 +12,9 @@
 	salvage_amount = 1
 	wetable = FALSE
 
-/obj/item/clothing/shoes/nobleboot/apply_components()
+/obj/item/clothing/shoes/nobleboot/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/boots)
+	create_storage(type = /datum/storage/no_interface/boots)
 
 /obj/item/clothing/shoes/nobleboot/thighboots
 	name = "thigh boots"

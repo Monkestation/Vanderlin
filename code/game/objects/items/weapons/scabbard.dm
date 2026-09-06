@@ -41,9 +41,9 @@
 	grid_height = 64
 	item_weight = 80 GRAMS
 
-/obj/item/weapon/scabbard/knife/apply_components()
+/obj/item/weapon/scabbard/knife/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/scabbard/knife)
+	create_storage(type = /datum/storage/no_interface/scabbard/knife)
 
 /obj/item/weapon/scabbard/knife/getonmobprop(tag)
 	..()
@@ -85,9 +85,9 @@
 	sellprice = 10
 	item_weight = 300 GRAMS
 
-/obj/item/weapon/scabbard/sword/apply_components()
+/obj/item/weapon/scabbard/sword/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/scabbard/sword)
+	create_storage(type = /datum/storage/no_interface/scabbard/sword)
 
 /obj/item/weapon/scabbard/sword/getonmobprop(tag)
 	. = ..()
@@ -107,6 +107,10 @@
 	icon_state = "nscabbard"
 	sellprice = 50
 	item_weight = 350 GRAMS
+
+/obj/item/weapon/scabbard/sword/noble/daewalker/Initialize(mapload)
+	. = ..()
+	create_storage(type = /datum/storage/no_interface/scabbard/daewalker)
 
 /obj/item/weapon/scabbard/sword/royal
 	name = "gold decorated scabbard"
@@ -130,6 +134,14 @@
 	associated_skill = /datum/attribute/skill/combat/swords
 	item_weight = 500 GRAMS
 
+/obj/item/weapon/scabbard/cane/Initialize(mapload)
+	. = ..()
+	create_storage(type = /datum/storage/no_interface/scabbard/sword) // ???
+
+/obj/item/weapon/scabbard/cane/apply_components()
+	. = ..()
+	AddElement(/datum/element/walking_stick)
+
 /obj/item/weapon/scabbard/cane/courtphysician
 	name = "fancy cane"
 	desc = "A decorated cane bearing the visage of a vulture."
@@ -139,11 +151,6 @@
 	name = "fancy cane"
 	desc = "A decorated silver cane bearing a rontz at the top."
 	icon_state = "staffsheath"
-
-/obj/item/weapon/scabbard/cane/apply_components()
-	. = ..()
-	AddComponent(/datum/component/storage/concrete/scabbard/sword)
-	AddElement(/datum/element/walking_stick)
 
 /obj/item/weapon/scabbard/cane/getonmobprop(tag)
 	. = ..()
@@ -218,9 +225,9 @@
 	sellprice = 10
 	item_weight = 400 GRAMS
 
-/obj/item/weapon/scabbard/blackmeadow/apply_components()
+/obj/item/weapon/scabbard/blackmeadow/Initialize(mapload)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/scabbard/blackmeadow)
+	create_storage(type = /datum/storage/no_interface/scabbard/blackmeadow)
 
 /obj/item/weapon/scabbard/blackmeadow/steel
 	name = "hwang scabbard"

@@ -180,16 +180,13 @@
 	desc = "A heavy leather jacket with wooden buttons, favored by workers who can afford it."
 
 	body_parts_covered = COVERAGE_SHIRT
-	item_weight = 1.5 KILOGRAMS
-	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
 
-/obj/item/clothing/armor/leather/jacket/dropped(mob/living/carbon/human/user)
-	..()
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
-	if(STR)
-		var/list/things = STR.contents()
-		for(var/obj/item/I in things)
-			STR.remove_from_storage(I, get_turf(src))
+	item_weight = 1.5 KILOGRAMS
+	pocket_storage_path = /datum/storage/cloak
+
+/obj/item/clothing/armor/leather/jacket/dropped(mob/user, silent)
+	. = ..()
+	atom_storage?.remove_all(get_turf(src))
 
 /obj/item/clothing/armor/leather/jacket/artijacket
 	name = "artificer jacket"
@@ -401,7 +398,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT, BCLASS_CHOP, BCLASS_SMASH)
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 	sellprice = 20
-	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
+	pocket_storage_path = /datum/storage/cloak
 
 /obj/item/clothing/armor/leather/jerkin/belted/long
 	icon_state = "roguearmor_coat"
@@ -419,7 +416,7 @@
 	icon_state = "gronnleatherarmor"
 	item_state = "gronnleatherarmor"
 	armor_type = /datum/armor/leather/gronn
-	pocket_storage_component_path = /datum/component/storage/concrete/grid/cloak
+	pocket_storage_path = /datum/storage/cloak
 
 /obj/item/clothing/armor/leather/fencer
 	name = "fencer's jacket"

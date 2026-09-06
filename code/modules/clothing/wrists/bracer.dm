@@ -131,7 +131,7 @@
 /obj/item/clothing/wrists/bracers/leather/scabbard/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
-	AddComponent(/datum/component/storage/concrete/scabbard/knife)
+	create_storage(type = /datum/storage/no_interface/scabbard/knife)
 
 /obj/item/clothing/wrists/bracers/psythorns
 	name = "psydonian thorns"

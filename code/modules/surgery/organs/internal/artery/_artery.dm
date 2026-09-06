@@ -6,7 +6,7 @@
 	sellprice = 1
 	dropshrink = 0.5
 
-	organ_flags = ORGAN_LIMB_SUPPORTER|ORGAN_INDESTRUCTIBLE|ORGAN_NO_VIOLENT_DAMAGE
+	organ_flags = parent_type::organ_flags | ORGAN_LIMB_SUPPORTER | ORGAN_INDESTRUCTIBLE | ORGAN_NO_VIOLENT_DAMAGE
 	organ_efficiency = list(ORGAN_SLOT_ARTERY = 100)
 	needs_processing = TRUE
 

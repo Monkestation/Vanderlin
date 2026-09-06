@@ -106,7 +106,7 @@
 
 /obj/item/clothing/head/wizhat/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/kobold_storage)
+	create_storage(type = /datum/storage/kobold_storage)
 
 //random wizhat
 /obj/item/clothing/head/wizhat/random
@@ -220,4 +220,4 @@
 
 /obj/item/clothing/head/gnomecap/Initialize()
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/coin_pouch)
+	create_storage(type = /datum/storage/coin_pouch)

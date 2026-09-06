@@ -54,7 +54,7 @@
 	/// Trait modification, lazylist of traits to add/take away, on equipment/drop in the correct slot
 	var/list/clothing_traits
 
-	var/pocket_storage_component_path
+	var/pocket_storage_path = null
 
 	//These allow head/mask items to dynamically alter the user's hair
 	// and facial hair, checking hair_extensions.dmi and facialhair_extensions.dmi
@@ -82,10 +82,11 @@
 	/// Defines for damage sounds, see [_DEFINES/clothing] and [pick_damage_sound]
 	var/material_category = ARMOR_MAT_FABRIC
 
-/obj/item/clothing/Initialize()
+/obj/item/clothing/Initialize(mapload)
 	. = ..()
-	if(ispath(pocket_storage_component_path))
-		LoadComponent(pocket_storage_component_path)
+	if(ispath(pocket_storage_path))
+		create_storage(type = pocket_storage_path)
+
 	if(length(prevent_crits) || armor_class)
 		has_inspect_verb = TRUE
 
@@ -95,7 +96,7 @@
 	if(wetable)
 		wet = new(src)
 
-/obj/item/clothing/Destroy()
+/obj/item/clothing/Destroy(force)
 	user_vars_remembered = null //Oh god somebody put REFERENCES in here? not to worry, we'll clean it up
 	if(hoodtype)
 		QDEL_NULL(hood)
@@ -287,7 +288,7 @@
 /obj/item/clothing/proc/step_action() //this was made to rewrite clown shoes squeaking
 	SEND_SIGNAL(src, COMSIG_CLOTHING_STEP_ACTION)
 
-/obj/item/clothing/dropped(mob/living/user)
+/obj/item/clothing/dropped(mob/living/user, silent)
 	..()
 	for(var/trait in clothing_traits)
 		REMOVE_CLOTHING_TRAIT(user, trait)
@@ -330,10 +331,12 @@
 
 	take_damage(10, BURN, "fire")
 
-/obj/item/clothing/dropped(mob/user)
-	..()
+/obj/item/clothing/dropped(mob/user, silent)
+	. = ..()
+
 	if(!istype(user))
 		return
+
 	if(LAZYLEN(user_vars_remembered))
 		for(var/variable in user_vars_remembered)
 			if(variable in user.vars)

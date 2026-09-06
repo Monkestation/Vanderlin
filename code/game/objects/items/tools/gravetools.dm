@@ -23,7 +23,6 @@
 	slot_flags = ITEM_SLOT_BACK
 	swingsound = list('sound/combat/wooshes/blunt/shovel_swing.ogg','sound/combat/wooshes/blunt/shovel_swing2.ogg')
 	drop_sound = 'sound/foley/dropsound/shovel_drop.ogg'
-	var/obj/item/natural/clod/dirt/heldclod
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	associated_skill = /datum/attribute/skill/combat/polearms
@@ -32,12 +31,14 @@
 	grid_height = 96
 	item_weight = 1.54 KILOGRAMS
 
+	var/obj/item/natural/clod/dirt/heldclod
+
 /obj/item/weapon/shovel/Destroy()
 	if(heldclod)
 		QDEL_NULL(heldclod)
 	return ..()
 
-/obj/item/weapon/shovel/dropped(mob/user)
+/obj/item/weapon/shovel/dropped(mob/user, silent)
 	. = ..()
 	if(heldclod && isturf(loc))
 		heldclod.forceMove(loc)

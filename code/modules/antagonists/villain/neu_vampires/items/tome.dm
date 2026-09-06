@@ -171,7 +171,7 @@ GLOBAL_LIST_INIT(arcane_tomes, list())
 	if(user.clan && state == TOME_OPEN)
 		usr << browse(tome_text(), "window=arcanetome;size=900x600")
 
-/obj/item/tome/dropped(mob/user)
+/obj/item/tome/dropped(mob/user, silent)
 	.=..()
 	usr << browse(null, "window=arcanetome")
 

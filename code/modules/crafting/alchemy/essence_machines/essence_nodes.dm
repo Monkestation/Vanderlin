@@ -266,7 +266,7 @@ GLOBAL_LIST_EMPTY(essence_nodes)
 				to_chat(holder, span_warning("Carrying the essence node is exhausting you!"))
 		last_stamina_drain = world.time
 
-/obj/item/essence_node_portable/dropped(mob/user)
+/obj/item/essence_node_portable/dropped(mob/user, silent)
 	. = ..()
 	if(user)
 		user.remove_movespeed_modifier(MOVESPEED_ID_CARRYING_ESSENCE)

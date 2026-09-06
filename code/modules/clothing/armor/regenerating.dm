@@ -88,7 +88,7 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NODROP, CURSED_ITEM_TRAIT)
 
-/obj/item/clothing/armor/regenerating/skin/dropped(mob/living/carbon/human/user)
+/obj/item/clothing/armor/regenerating/skin/dropped(mob/living/carbon/human/user, silent)
 	..()
 	if(QDELETED(src))
 		return

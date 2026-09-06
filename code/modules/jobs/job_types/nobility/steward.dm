@@ -94,11 +94,9 @@
 			scabbard_choice = new /obj/item/weapon/scabbard/cane(spawned)
 
 	if(scabbard_choice && weapon_choice)
-		if(SEND_SIGNAL(scabbard_choice, COMSIG_TRY_STORAGE_INSERT, weapon_choice, null, TRUE, FALSE))
-			spawned.equip_to_slot_or_del(scabbard_choice, ITEM_SLOT_BELT_L, TRUE)
-		else
+		if(!scabbard_choice.atom_storage.attempt_insert(weapon_choice, spawned, override = TRUE, messages = FALSE))
 			spawned.put_in_hands(weapon_choice)
-			spawned.equip_to_slot_or_del(scabbard_choice, ITEM_SLOT_BELT_L, TRUE)
+		spawned.equip_to_slot_or_del(scabbard_choice, ITEM_SLOT_BELT_L, TRUE)
 
 /datum/outfit/steward
 	name = JOB_STEWARD

@@ -23,18 +23,20 @@
 
 	container_refs = alist()
 
-	RegisterSignal(parent, COMSIG_MOB_EQUIPPED_ITEM,   PROC_REF(on_equip))
+	RegisterSignal(parent, COMSIG_MOB_EQUIPPED_ITEM, PROC_REF(on_equip))
 	RegisterSignal(parent, COMSIG_MOB_UNEQUIPPED_ITEM, PROC_REF(on_unequip))
-	RegisterSignal(parent, COMSIG_MOB_DROPITEM,        PROC_REF(on_drop))
+	RegisterSignal(parent, COMSIG_MOB_DROPITEM, PROC_REF(on_drop))
 
 	full_reappraise()
 
 /datum/component/ai_inventory_manager/Destroy()
 	for(var/slot in container_refs)
 		UnregisterSignal(container_refs[slot], COMSIG_QDELETING)
+
 	for(var/cat in inventory_map)
 		for(var/obj/item/it as anything in inventory_map[cat])
 			UnregisterSignal(it, COMSIG_QDELETING)
+
 	container_refs = null
 	inventory_map = null
 	return ..()
@@ -42,6 +44,7 @@
 /datum/component/ai_inventory_manager/proc/_build_slot_flag_list()
 	if(all_slot_flags)
 		return
+
 	all_slot_flags = alist()
 	for(var/i in 0 to SLOTS_AMT - 1)
 		var/flag = (1 << i)
@@ -49,7 +52,7 @@
 			all_slot_flags += flag
 
 /datum/component/ai_inventory_manager/proc/full_reappraise()
-	var/mob/living/carbon/human/H = parent
+	var/mob/living/carbon/human/managing = parent
 
 	for(var/slot in container_refs)
 		UnregisterSignal(container_refs[slot], COMSIG_QDELETING)
@@ -60,64 +63,72 @@
 		inventory_map[cat] = list()
 
 	for(var/slot_flag in all_slot_flags)
-		var/obj/item/candidate = H.get_item_by_slot(slot_flag)
+		var/obj/item/candidate = managing.get_item_by_slot(slot_flag)
 		if(!candidate)
 			continue
 		_try_register_container(slot_flag, candidate)
-		if(!candidate.GetComponent(/datum/component/storage))
+		if(!candidate.atom_storage)
 			_classify_item(candidate, slot_flag)
 
 	for(var/slot_flag in container_refs)
 		var/obj/item/container = container_refs[slot_flag]
-		var/datum/component/storage/STR = container.GetComponent(/datum/component/storage)
-		if(STR)
-			_appraise_storage(STR, slot_flag)
+		var/datum/storage/storage = container.atom_storage
+		if(storage)
+			_appraise_storage(storage, slot_flag)
 
 /// Scan inside a single storage component and classify contents
-/datum/component/ai_inventory_manager/proc/_appraise_storage(datum/component/storage/STR, slot_flag)
-	for(var/obj/item/it in STR.contents())
-		_classify_item(it, slot_flag)
+/datum/component/ai_inventory_manager/proc/_appraise_storage(datum/storage/storage, slot_flag)
+	for(var/obj/item/item in storage.return_inv(FALSE))
+		_classify_item(item, slot_flag)
 
 /// Register a container slot and watch it for deletion
 /datum/component/ai_inventory_manager/proc/_try_register_container(slot_flag, obj/item/candidate)
-	if(!candidate.GetComponent(/datum/component/storage))
+	if(!candidate.atom_storage)
 		return
+
 	container_refs[slot_flag] = candidate
+
 	RegisterSignal(candidate, COMSIG_QDELETING, PROC_REF(on_container_delete), override = TRUE)
-	RegisterSignal(candidate, COMSIG_STORAGE_ADDED, PROC_REF(on_storage_added), override = TRUE)
+	RegisterSignal(candidate, COMSIG_STORAGE_STORED_ITEM, PROC_REF(on_storage_added), override = TRUE)
 
 /datum/component/ai_inventory_manager/proc/on_storage_added(datum/source, obj/item/inserted)
 	SIGNAL_HANDLER
+
 	for(var/slot_flag in container_refs)
 		if(container_refs[slot_flag] == source)
 			_classify_item(inserted, slot_flag)
 			return
 
 /// Classify a single item into all matching categories
-/datum/component/ai_inventory_manager/proc/_classify_item(obj/item/it, slot_flag)
-	RegisterSignal(it, COMSIG_QDELETING, PROC_REF(on_item_delete), override = TRUE)
+/datum/component/ai_inventory_manager/proc/_classify_item(obj/item/item, slot_flag)
+	RegisterSignal(item, COMSIG_QDELETING, PROC_REF(on_item_delete), override = TRUE)
 
 	for(var/ai_flag in GLOB.ai_item_flags)
-		if(ai_flag & it.flags_ai_inventory)
-			inventory_map[ai_flag][it] = slot_flag
+		if(ai_flag & item.flags_ai_inventory)
+			inventory_map[ai_flag][item] = slot_flag
 
 /datum/component/ai_inventory_manager/proc/on_equip(datum/source, obj/item/equipment, slot)
 	SIGNAL_HANDLER
+
 	if(!(slot & AI_INVENTORY_WATCHED_SLOTS))
 		return
+
 	// Partial rescan: just this slot
 	_purge_slot(slot)
 	_try_register_container(slot, equipment)
-	if(equipment.GetComponent(/datum/component/storage))
-		var/datum/component/storage/STR = equipment.GetComponent(/datum/component/storage)
-		_appraise_storage(STR, slot)
+
+	var/datum/storage/storage = equipment.atom_storage
+	if(storage)
+		_appraise_storage(storage, slot)
 	else
 		_classify_item(equipment, slot)
 
 /datum/component/ai_inventory_manager/proc/on_unequip(datum/source, obj/item/equipment, slot)
 	SIGNAL_HANDLER
+
 	if(!(slot & AI_INVENTORY_WATCHED_SLOTS))
 		return
+
 	_purge_slot(slot)
 	if(slot in container_refs)
 		UnregisterSignal(container_refs[slot], COMSIG_QDELETING)
@@ -125,15 +136,18 @@
 
 /datum/component/ai_inventory_manager/proc/on_drop(datum/source, obj/item/dropped)
 	SIGNAL_HANDLER
+
 	_remove_item(dropped)
 
 /datum/component/ai_inventory_manager/proc/on_item_delete(datum/source, force)
 	SIGNAL_HANDLER
+
 	UnregisterSignal(source, COMSIG_QDELETING)
 	_remove_item(source)
 
 /datum/component/ai_inventory_manager/proc/on_container_delete(datum/source, force)
 	SIGNAL_HANDLER
+
 	for(var/slot_flag in container_refs)
 		if(container_refs[slot_flag] == source)
 			_purge_slot(slot_flag)
@@ -142,73 +156,80 @@
 
 /// Remove all inventory_map entries for a given slot bitflag
 /datum/component/ai_inventory_manager/proc/_purge_slot(slot_flag)
-	for(var/cat in inventory_map)
-		for(var/obj/item/it as anything in inventory_map[cat])
-			if(inventory_map[cat][it] == slot_flag)
-				UnregisterSignal(it, COMSIG_QDELETING)
-				inventory_map[cat] -= it
+	for(var/category in inventory_map)
+		for(var/obj/item/item as anything in inventory_map[category])
+			if(inventory_map[category][item] == slot_flag)
+				UnregisterSignal(item, COMSIG_QDELETING)
+				inventory_map[category] -= item
 
-/datum/component/ai_inventory_manager/proc/_remove_item(obj/item/it)
-	UnregisterSignal(it, COMSIG_QDELETING)
-	for(var/cat in inventory_map)
-		if(it in inventory_map[cat])
-			inventory_map[cat] -= it
+/datum/component/ai_inventory_manager/proc/_remove_item(obj/item/item)
+	UnregisterSignal(item, COMSIG_QDELETING)
+
+	for(var/category in inventory_map)
+		if(item in inventory_map[category])
+			inventory_map[category] -= item
 
 /datum/component/ai_inventory_manager/proc/get_item(category)
 	RETURN_TYPE(/obj/item)
-	var/list/cat = inventory_map[category]
-	if(!length(cat))
+	var/list/items = inventory_map[category]
+
+	if(!length(items))
 		return null
-	return cat[1]
 
-/datum/component/ai_inventory_manager/proc/get_item_slot(obj/item/it, category)
-	return inventory_map[category]?[it]
+	return items[1]
 
-/datum/component/ai_inventory_manager/proc/find_space_for(obj/item/it)
+/datum/component/ai_inventory_manager/proc/get_item_slot(obj/item/item, category)
+	return inventory_map[category]?[item]
+
+/datum/component/ai_inventory_manager/proc/find_space_for(obj/item/to_stow)
 	for(var/slot_flag in container_refs)
 		var/obj/item/container = container_refs[slot_flag]
-		var/datum/component/storage/STR = container?.GetComponent(/datum/component/storage)
-		if(STR?.can_be_inserted(it, stop_messages = TRUE))
+		var/datum/storage/storage = container.atom_storage
+		if(storage.can_insert(to_stow, messages = FALSE))
 			return slot_flag
 	return 0
 
-/datum/component/ai_inventory_manager/proc/draw_item(obj/item/it, category)
-	var/mob/living/carbon/human/H = parent
+/datum/component/ai_inventory_manager/proc/draw_item(obj/item/drawn_item, category)
+	var/mob/living/carbon/human/managing = parent
 
-	cached_active_hand = H.get_active_held_item()
-	cached_inactive_hand = H.get_inactive_held_item()
+	cached_active_hand = managing.get_active_held_item()
+	cached_inactive_hand = managing.get_inactive_held_item()
 
 	if(istype(cached_active_hand, /obj/item/offhand))
 		var/datum/component/two_handed/twohanded = cached_inactive_hand.GetComponent(/datum/component/two_handed)
-		twohanded.unwield(H)
+		twohanded.unwield(managing)
 		cached_active_hand = null
+
 	if(istype(cached_inactive_hand, /obj/item/offhand))
 		var/datum/component/two_handed/twohanded = cached_active_hand.GetComponent(/datum/component/two_handed)
-		twohanded.unwield(H)
+		twohanded.unwield(managing)
 		cached_inactive_hand = null
 
 	if(!_make_hand_free())
 		return FALSE
 
-	var/slot_flag = get_item_slot(it, category)
+	var/slot_flag = get_item_slot(drawn_item, category)
 	if(!slot_flag)
 		return FALSE
+
 	var/obj/item/container = container_refs[slot_flag]
 	if(!container)
 		return FALSE
-	var/datum/component/storage/STR = container.GetComponent(/datum/component/storage)
-	if(!STR)
+
+	var/datum/storage/storage = container.atom_storage
+	if(!storage)
 		return FALSE
-	STR.remove_from_storage(it, H)
-	return H.put_in_active_hand(it)
+	storage.attempt_remove(drawn_item, get_turf(managing))
+
+	return managing.put_in_active_hand(drawn_item)
 
 /datum/component/ai_inventory_manager/proc/restore_hands()
 	if(!cached_active_hand && !cached_inactive_hand)
 		return
-	var/mob/living/carbon/human/H = parent
+	var/mob/living/carbon/human/managing = parent
 
-	var/obj/item/active   = H.get_active_held_item()
-	var/obj/item/inactive = H.get_inactive_held_item()
+	var/obj/item/active   = managing.get_active_held_item()
+	var/obj/item/inactive = managing.get_inactive_held_item()
 
 	// Snapshot and clear FIRST to prevent reentrant calls from re-running
 	var/obj/item/want_active = cached_active_hand
@@ -218,71 +239,70 @@
 
 	if(active && active != want_active && active != want_inactive)
 		if(!stow_item(active))
-			H.dropItemToGround(active)
+			managing.dropItemToGround(active)
 
 	if(inactive && inactive != want_active && inactive != want_inactive)
 		if(!stow_item(inactive))
-			H.dropItemToGround(inactive)
+			managing.dropItemToGround(inactive)
 
-	if(want_active && !H.get_active_held_item())
-		H.put_in_active_hand(want_active)
+	if(want_active && !managing.get_active_held_item())
+		managing.put_in_active_hand(want_active)
 
-	if(want_inactive && !H.get_inactive_held_item())
-		H.swap_hand()
-		H.put_in_active_hand(want_inactive)
-		H.swap_hand()
+	if(want_inactive && !managing.get_inactive_held_item())
+		managing.swap_hand()
+		managing.put_in_active_hand(want_inactive)
+		managing.swap_hand()
 
 /datum/component/ai_inventory_manager/proc/_make_hand_free()
-	var/mob/living/carbon/human/H = parent
-	if(!H.get_active_held_item())
+	var/mob/living/carbon/human/managing = parent
+	if(!managing.get_active_held_item())
 		return TRUE
-	H.swap_hand()
-	if(!H.get_active_held_item())
+	managing.swap_hand()
+	if(!managing.get_active_held_item())
 		return TRUE
-	var/obj/item/blocking = H.get_active_held_item()
+	var/obj/item/blocking = managing.get_active_held_item()
 	if(stow_item(blocking))
 		return TRUE
-	H.dropItemToGround(blocking)
+	managing.dropItemToGround(blocking)
 	return TRUE
 
-/datum/component/ai_inventory_manager/proc/stow_item(obj/item/it)
-	var/mob/living/carbon/human/H = parent
-	if(it.loc != H)
+/datum/component/ai_inventory_manager/proc/stow_item(obj/item/stowed)
+	var/mob/living/carbon/human/managing = parent
+	if(stowed.loc != managing)
 		return FALSE
-	var/slot_flag = find_space_for(it)
+	var/slot_flag = find_space_for(stowed)
 	if(!slot_flag)
 		return FALSE
 	var/obj/item/container = container_refs[slot_flag]
-	var/datum/component/storage/STR = container.GetComponent(/datum/component/storage)
-	STR.handle_item_insertion(it, prevent_warning = TRUE, user = H)
-	_classify_item(it, slot_flag)
+	var/datum/storage/storage = container.atom_storage
+	if(storage.attempt_insert(stowed, managing))
+		_classify_item(stowed, slot_flag)
 	return TRUE
 
 /// Remove an empty container from inventory tracking and drop it on the ground
 /datum/component/ai_inventory_manager/proc/drop_empty_container(obj/item/reagent_containers/container)
-	var/mob/living/carbon/human/H = parent
+	var/mob/living/carbon/human/managing = parent
 	_remove_item(container)
 
-	// If it's in storage, pull it out and drop it
-	if(container.loc != H)
-		for(var/slot_flag in container_refs)
-			var/obj/item/storage_item = container_refs[slot_flag]
-			var/datum/component/storage/STR = storage_item?.GetComponent(/datum/component/storage)
-			if(!STR)
-				continue
-			if(container in STR.contents())
-				STR.remove_from_storage(container, H)
-				break
+	if(container.loc == managing)
+		managing.dropItemToGround(container)
+		return
 
-	if(container.loc == H)
-		H.dropItemToGround(container)
+	for(var/slot_flag in container_refs)
+		var/obj/item/storage_item = container_refs[slot_flag]
+		var/datum/storage/storage = storage_item.atom_storage
+		if(!storage)
+			continue
+		if(container in storage.return_inv(FALSE))
+			storage.attempt_remove(container, get_turf(managing))
+			break
 
 /// Returns the actual usable item (may differ from what's in inventory_map)
-/datum/component/ai_inventory_manager/proc/draw_usable_item(obj/item/it, category)
-	var/mob/living/carbon/human/H = parent
+/datum/component/ai_inventory_manager/proc/draw_usable_item(obj/item/drawn_item, category)
+	var/mob/living/carbon/human/managing = parent
 
-	if(istype(it, /obj/item/natural/bundle))
-		var/obj/item/natural/bundle/bundle = it
+	if(istype(drawn_item, /obj/item/natural/bundle))
+		var/obj/item/natural/bundle/bundle = drawn_item
 
 		if(!bundle.stacktype || bundle.amount <= 0)
 			return null
@@ -291,10 +311,10 @@
 		if(!_make_hand_free())
 			return null
 
-		var/turf/T = get_turf(H)
+		var/turf/T = get_turf(managing)
 		var/obj/item/extracted = new bundle.stacktype(T)
 
-		if(!H.put_in_active_hand(extracted))
+		if(!managing.put_in_active_hand(extracted))
 			qdel(extracted)
 			return null
 
@@ -303,15 +323,14 @@
 			var/slot_flag = null
 			for(var/sf in container_refs)
 				var/obj/slot = container_refs[sf]
-				var/datum/component/storage/STR = slot?.GetComponent(/datum/component/storage)
-				if(STR && (bundle in STR.contents()))
+				var/datum/storage/storage = slot.atom_storage
+				if(storage && storage.return_inv(FALSE))
 					slot_flag = sf
 					break
 			if(slot_flag)
 				var/obj/item = container_refs[slot_flag]
-				var/datum/component/storage/STR = item?.GetComponent(/datum/component/storage)
-				STR?.remove_from_storage(bundle, H)
-				H.dropItemToGround(bundle)
+				var/datum/storage/storage = item.atom_storage
+				storage?.attempt_remove(bundle, get_turf(managing))
 			qdel(bundle)
 		else
 			bundle.amount--
@@ -319,6 +338,7 @@
 
 		return extracted
 
-	if(!draw_item(it, category))
+	if(!draw_item(drawn_item, category))
 		return null
-	return it
+
+	return drawn_item

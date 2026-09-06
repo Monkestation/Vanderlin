@@ -22,7 +22,6 @@
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
-
 /obj/item/clothing/cloak/forrestercloak
 	name = "forrester's cloak"
 	desc = "A cloak worn by the forest guards."

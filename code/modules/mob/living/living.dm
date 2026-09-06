@@ -946,10 +946,10 @@
 //Recursive function to find everything a mob is holding. Really shitty proc tbh, you should use get_all_gear for carbons.
 /mob/living/get_contents()
 	var/list/ret = list()
-	ret |= contents						//add our contents
-	for(var/i in ret.Copy())			//iterate storage objects
-		var/atom/A = i
-		SEND_SIGNAL(A, COMSIG_TRY_STORAGE_RETURN_INVENTORY, ret)
+	ret |= contents //add our contents
+	for(var/atom/A as anything in ret.Copy()) //iterate storage objects
+		ret |= A.atom_storage?.return_inv(ret)
+
 	return ret
 
 // Living mobs use can_inject() to make sure that the mob is not syringe-proof in general.
@@ -1233,9 +1233,25 @@
 		else if(isliving(pulling)) // EXPERIMENTAL: Set pulled person offsets when puller moves
 			set_pull_offsets(pulling, grab_state)
 
-//	if(active_storage && !(CanReach(active_storage.parent,view_only = TRUE)))
+	// Kinda sorry for this but oh well
 	if(active_storage)
-		active_storage.close(src)
+		var/datum/storage/active = active_storage
+		var/move_close = FALSE
+		if(active?.closure_flags & STORAGE_CLOSE_MOVEMENT)
+			move_close = TRUE
+		else if(isitem(active.parent) && active.closure_flags & STORAGE_CLOSE_MOVEMENT_WORN)
+			var/obj/item/parent_item = active.parent
+			var/inside_inventory = parent_item.item_flags & IN_INVENTORY
+			var/in_hands = !!(locate(parent_item) in held_items)
+			if(inside_inventory && !in_hands)
+				move_close = TRUE
+		if(move_close)
+			active.hide_contents(src)
+		else // Check we can reach still
+			var/storage_is_important_recurisve = (active.parent in important_recursive_contents?[RECURSIVE_CONTENTS_ACTIVE_STORAGE])
+			var/can_reach_active_storage = CanReach(active.parent, view_only = TRUE)
+			if(!storage_is_important_recurisve && !can_reach_active_storage)
+				active.hide_contents(src)
 
 	if(body_position == LYING_DOWN && !buckled && prob(getBruteLoss() * (200/max(maxHealth, 1))))
 		makeTrail(newloc, T, old_direction)
@@ -1890,7 +1906,7 @@
 /mob/living/can_hold_items(obj/item/I)
 	return ..() && usable_hands
 
-/mob/living/can_perform_action(atom/movable/target, action_bitflags)
+/mob/living/can_perform_action(atom/target, action_bitflags)
 	if(!istype(target))
 		CRASH("Missing target arg for can_perform_action")
 
@@ -1900,12 +1916,6 @@
 	if(!(mobility_flags & MOBILITY_UI) && !(action_bitflags & ALLOW_RESTING))
 		to_chat(src, span_warning("You can't do that right now!"))
 		return FALSE
-
-	// // NEED_HANDS is already checked by MOBILITY_UI for humans so this is for silicons
-	// if((action_bitflags & NEED_HANDS))
-	// 	if(!can_hold_items(isitem(target) ? target : null)) // almost redundant if it weren't for mobs
-	// 		to_chat(src, span_warning("You don't have the physical ability to do this!"))
-	// 		return FALSE
 
 	if(!Adjacent(target) && (target.loc != src))
 		if((action_bitflags & FORBID_TELEKINESIS_REACH))
@@ -2226,55 +2236,61 @@
 /mob/living/MouseDrop(mob/over)
 	. = ..()
 	var/mob/living/user = usr
+
+	if(!istype(over) || !istype(user))
+		return
+
+	if(!over.Adjacent(src) || (user != src) || !can_perform_action(over))
+		return
+
 	if(HAS_TRAIT(src, TRAIT_TINY) && isturf(over.loc))
 		if(stat == DEAD || !Adjacent(over))
 			return
+
 		if(incapacitated())
 			return
-		//if(!step(src,get_dir(src,over)))
-		//	to_chat(src, span_warning("You can't climb into [over] whilst it's there."))
-		//	return
+
 		for(var/obj/item/grabbing/G in grabbedby)
 			if(G.grab_state >= GRAB_AGGRESSIVE)
 				return
-		var/datum/component/storage = over.GetComponent(/datum/component/storage)
-		if(storage && !istype(storage, /datum/component/storage/concrete/organ))
+
+		var/datum/storage/storage = over.atom_storage
+		if(storage && !istype(storage, /datum/storage/organ))
 			var/obj/item/mob_holder/holder = new(get_turf(src), src)
 			visible_message(span_warning("[src] starts to climb into [over]."), span_warning("You start to climb into [over]."))
 			if(do_after(src, 1.2 SECONDS, over))
 				if(over.loc == src)
 					return
-				if(!SEND_SIGNAL(over, COMSIG_TRY_STORAGE_INSERT, holder, null, TRUE, TRUE))
+				if(!storage.attempt_insert(holder, over, override = TRUE))
 					qdel(holder)
 
 	if(HAS_TRAIT(src, TRAIT_TINY) && ismob(over) && over != src)
 		if(stat == DEAD || !Adjacent(over))
 			return
+
 		if(incapacitated())
 			return
+
 		for(var/obj/item/grabbing/G in grabbedby)
 			if(G.grab_state >= GRAB_AGGRESSIVE)
 				return
+
 		var/list/pickable_items = list()
 		for(var/obj/item/item in over.get_all_contents())
-			var/datum/component/storage = item.GetComponent(/datum/component/storage)
-			if(storage)
+			if(item.atom_storage)
 				pickable_items |= item
-		var/obj/item/picked = input(src, "What bag do you want to crawl into?") as null|anything in pickable_items
+
+		var/obj/item/picked = browser_input_list(src, "What bag do you want to crawl into?", items = pickable_items)
 		if(!picked)
 			return
+
 		var/obj/item/mob_holder/holder = new(get_turf(src), src)
 		visible_message(span_warning("[src] starts to climb into [picked] on [over]."), span_warning("You start to climb into [picked] on [over]."))
 		if(do_after(src, 3 SECONDS, over))
 			if(picked.loc == src)
 				return
-			if(!SEND_SIGNAL(picked, COMSIG_TRY_STORAGE_INSERT, holder, null, TRUE, TRUE))
+			if(!picked.atom_storage.attempt_insert(holder, src, override = TRUE))
 				qdel(holder)
-
-	if(!istype(over) || !istype(user))
-		return
-	if(!over.Adjacent(src) || (user != src) || !can_perform_action(over))
-		return
 
 /mob/living/MouseDrop_T(atom/dropping, atom/user)
 	var/mob/living/U = user

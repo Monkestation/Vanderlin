@@ -13,7 +13,7 @@
 		if(HAS_TRAIT(test_item, TRAIT_NODROP))
 			continue
 
-		var/inserted = SEND_SIGNAL(test_crucible, COMSIG_TRY_STORAGE_INSERT, test_item, null, TRUE, FALSE)
+		var/inserted = test_crucible.atom_storage.attempt_insert(test_item, override = TRUE)
 		if(!inserted)
 			TEST_FAIL("[item_type] with melting_material [initial(item_type.melting_material)] failed to insert into crucible")
 			qdel(test_item)
@@ -25,7 +25,7 @@
 			continue
 
 		var/turf/drop_loc = get_turf(test_crucible)
-		SEND_SIGNAL(test_crucible, COMSIG_TRY_STORAGE_TAKE, test_item, drop_loc, TRUE)
+		test_crucible.atom_storage.attempt_remove(test_item, drop_loc, TRUE)
 
 		if(test_item in test_crucible.contents)
 			TEST_FAIL("[item_type] was still in crucible contents after removal")

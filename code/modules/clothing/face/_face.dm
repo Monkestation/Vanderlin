@@ -41,7 +41,7 @@
 		UnregisterSignal(user, COMSIG_MOB_SAY)
 	user.update_fov_angles()
 
-/obj/item/clothing/face/dropped(mob/user)
+/obj/item/clothing/face/dropped(mob/user, silent)
 	. = ..()
 	UnregisterSignal(user, COMSIG_MOB_SAY)
 	user.update_fov_angles()

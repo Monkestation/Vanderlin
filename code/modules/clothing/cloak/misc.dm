@@ -370,7 +370,7 @@
 
 /obj/item/clothing/cloak/bandolier/Initialize(mapload, ...)
 	. = ..()
-	AddComponent(/datum/component/storage/concrete/grid/bandolier)
+	create_storage(type = /datum/storage/bandolier)
 
 /obj/item/clothing/cloak/scaledcloak
 	name = "scaled cloak"

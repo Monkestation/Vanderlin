@@ -29,29 +29,41 @@ GLOBAL_VAR_INIT(pocket_portal, null)
 	enchantment_name = "Pocket Dimension"
 	examine_text = "An alternative space exists in here."
 
-	should_process = TRUE
 	essence_recipe = list(
 		/datum/thaumaturgical_essence/magic = 50,
 	)
+
 	var/static/obj/structure/pocket_portal/portal
 
+/datum/enchantment/pocket_dimension/can_enchant(atom/item)
+	var/datum/storage/atom_storage = item.atom_storage
+	if(!atom_storage)
+		return FALSE
+	return !item.atom_storage.no_interface
 
 /datum/enchantment/pocket_dimension/register_triggers(atom/item)
 	. = ..()
 	if(!portal)
 		portal = GLOB.pocket_portal
-	registered_signals += COMSIG_STORAGE_ADDED
-	RegisterSignal(item, COMSIG_STORAGE_ADDED, PROC_REF(warp))
+	registered_signals += COMSIG_STORAGE_STORED_ITEM
+	RegisterSignal(item, COMSIG_STORAGE_STORED_ITEM, PROC_REF(warp))
 	portal?.mob_exit_point += item
 
-/datum/enchantment/pocket_dimension/proc/warp(atom/source, obj/item/added)
+/datum/enchantment/pocket_dimension/proc/warp(datum/storage/source, obj/item/added, mob/user)
+	SIGNAL_HANDLER
+
+	if(!portal)
+		return
+
 	var/mob/mob
 	if(istype(added, /obj/item/mob_holder))
 		var/obj/item/mob_holder/holder = added
 		mob = holder.held_mob
-	SEND_SIGNAL(enchanted_item, COMSIG_TRY_STORAGE_TAKE, added, get_turf(portal), TRUE)
+
+	enchanted_item.atom_storage.attempt_remove(added, get_turf(portal), silent = TRUE)
+
 	if(!QDELETED(added))
 		added.forceMove(get_turf(portal))
-	else if (mob)
+	else if(mob)
 		mob.forceMove(get_turf(portal))
 */

@@ -78,7 +78,7 @@
 		var/reserved = 0
 		var/is_wildcard = (requirement_path in wildcard_paths)
 
-		for(var/obj/item/item in crafter.contents)
+		for(var/obj/item/item in crafter.atom_storage.return_inv())
 			if(reserved >= needed)
 				break
 

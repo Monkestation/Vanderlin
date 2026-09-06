@@ -1,4 +1,4 @@
-/proc/add_mammons_to_atom(mob/target, mammons_to_add)
+/proc/add_mammons_to_atom(atom/target, mammons_to_add)
 	if(!target || mammons_to_add <= 0)
 		return FALSE
 
@@ -40,7 +40,8 @@
 		var/obj/item/coin/new_coin = new coin_type_to_create(get_turf(target), coins_to_create)
 
 		if(ismob(target))
-			target.put_in_hands(new_coin)
+			var/mob/mob_taraget
+			mob_taraget.put_in_hands(new_coin)
 		else
 			new_coin.forceMove(target)
 
@@ -49,7 +50,7 @@
 	return mammons_to_add - remaining_mammons // Return actual amount added
 
 // Remove mammons from an atom by modifying/deleting coins
-/proc/remove_mammons_from_atom(atom/movable/target, mammons_to_remove)
+/proc/remove_mammons_from_atom(atom/target, mammons_to_remove)
 	if(!target || mammons_to_remove <= 0)
 		return 0
 
@@ -105,7 +106,7 @@
 	return total_removed
 
 // Helper function for recursive mammon removal
-/proc/remove_mammons_from_atom_recursive(atom/movable/target, mammons_to_remove)
+/proc/remove_mammons_from_atom_recursive(atom/target, mammons_to_remove)
 	if(!target || mammons_to_remove <= 0)
 		return 0
 

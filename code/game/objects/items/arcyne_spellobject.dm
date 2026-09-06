@@ -74,7 +74,7 @@
 		return
 	grant_all_spells(user)
 
-/obj/item/arcyne_spellobject/dropped(mob/user)
+/obj/item/arcyne_spellobject/dropped(mob/user, silent)
 	. = ..()
 	if(spellobject_flags & SPELLOBJECT_HIJACK_CLICK)
 		return

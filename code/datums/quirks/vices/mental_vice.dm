@@ -369,7 +369,7 @@
 		var/affected_parts = min(rand(1, 3), joint_parts.len)
 		for(var/i = 1 to affected_parts)
 			var/obj/item/bodypart/BP = pick_n_take(joint_parts)
-			BP.limb_flags |= BODYPART_CHRONIC_ARTHRITIS
+			BP.bodypart_flags |= BODYPART_CHRONIC_ARTHRITIS
 			BP.update_chronic()
 
 	to_chat(H, span_warning("Your joints feel stiff and painful - a reminder of your chronic arthritis."))
@@ -385,7 +385,7 @@
 		return
 	var/mob/living/carbon/human/H = owner
 	var/obj/item/bodypart/BP = H.get_bodypart(BODY_ZONE_CHEST)
-	BP?.limb_flags |= pick(BODYPART_CHRONIC_FRACTURE, BODYPART_CHRONIC_SCAR)
+	BP?.bodypart_flags |= pick(BODYPART_CHRONIC_FRACTURE, BODYPART_CHRONIC_SCAR)
 	BP?.update_chronic()
 	to_chat(H, span_warning("Your lower back aches with familiar, persistent pain."))
 	return ..()
@@ -410,7 +410,7 @@
 			var/list/remove_one = list(BODYPART_CHRONIC_FRACTURE, BODYPART_CHRONIC_SCAR, BODYPART_CHRONIC_NERVE_DAMAGE)
 			pick_n_take(remove_one)
 			for(var/i in remove_one)
-				wounded.limb_flags |= i
+				wounded.bodypart_flags |= i
 			wounded.update_chronic()
 			var/wound_location = wounded.name
 			var/wound_desc = pick("shrapnel wound", "arrow wound", "deep scar", "poorly healed fracture")

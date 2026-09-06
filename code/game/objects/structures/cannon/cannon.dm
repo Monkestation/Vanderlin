@@ -22,7 +22,7 @@
 	. = ..()
 	reagents = new()
 	reagents.flags = TRANSPARENT
-	AddComponent(/datum/component/storage/concrete/grid/cannon)
+	create_storage(type = /datum/storage/cannon)
 
 /obj/structure/cannon/after_being_moved_by_pull(atom/movable/puller)
 	setDir(REVERSE_DIR(puller.dir))
@@ -58,7 +58,6 @@
 	playsound(src, 'sound/foley/tinnitus.ogg', 60, FALSE, -6)
 	playsound(src, 'sound/combat/Ranged/muskshoot.ogg', 60, FALSE, SOUND_EXTRA_RANGE_CANNON)
 	new /obj/effect/particle_effect/smoke/chem/transparent(get_turf(src))
-	var/datum/component/storage/STR = GetComponent(/datum/component/storage) // don't @ me
 
 	for(var/mob/living/seer in view(7, src))
 		shake_camera(seer, max(1, round(blastpowder_amount / 20), max(1, round(blastpowder_amount / 10))))
@@ -76,7 +75,7 @@
 		seer.throw_at(target_turf)
 
 	for(var/atom/movable/loaded_thing as anything in contents)
-		STR.remove_from_storage(loaded_thing, turf_to_shoot_from)
+		atom_storage?.attempt_remove(loaded_thing, turf_to_shoot_from)
 		var/target = get_ranged_target_turf(src, dir, blast_range)
 		if(isammo(loaded_thing))
 			if(blastpowder_amount < 15)

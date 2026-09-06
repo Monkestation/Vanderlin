@@ -65,11 +65,11 @@
 
 /datum/ai_planning_subtree/loot/proc/_find_lootable_item_on_body(datum/component/ai_inventory_manager/inv, mob/living/pawn, mob/living/corpse, list/blacklist)
 	for(var/obj/item/held in corpse.contents)
-		if(!held)
+		if(QDELETED(held) || held.item_flags & ABSTRACT)
 			continue
-		var/datum/component/storage/STR = held.GetComponent(/datum/component/storage)
-		if(STR)
-			for(var/obj/item/held_inside in held.contents)
+		var/datum/storage/storage = held.atom_storage
+		if(storage)
+			for(var/obj/item/held_inside in storage.return_inv(FALSE))
 				if(_is_blacklisted(blacklist, held_inside))
 					continue
 				if(!_item_is_wanted(inv, pawn, held_inside))
@@ -131,12 +131,12 @@
 		return
 
 	var/obj/item/container = inv.container_refs[slot_flag]
-	var/datum/component/storage/STR = container?.GetComponent(/datum/component/storage)
-	if(!STR)
+	var/datum/storage/storage = container.atom_storage
+	if(!storage)
 		finish_action(controller, FALSE, target_key)
 		return
 
-	STR.handle_item_insertion(target, prevent_warning = TRUE, user = pawn)
+	storage.attempt_insert(target, pawn)
 	finish_action(controller, TRUE, target_key)
 
 /datum/ai_behavior/loot_pick_up/finish_action(datum/ai_controller/controller, succeeded, target_key)
@@ -205,13 +205,13 @@
 		return
 
 	var/obj/item/container = inv.container_refs[slot_flag]
-	var/datum/component/storage/STR = container?.GetComponent(/datum/component/storage)
-	if(!STR)
+	var/datum/storage/storage = container.atom_storage
+	if(!storage)
 		finish_action(controller, FALSE, body_key, item_key)
 		return
 
 	if(target_item.doStrip(pawn, body))
-		STR.handle_item_insertion(target_item, prevent_warning = TRUE, user = pawn)
+		storage.attempt_insert(target_item, pawn)
 		finish_action(controller, TRUE, body_key, item_key)
 	else
 		controller.add_blackboard_key_lazylist(BB_LOOT_BLACKLIST, target_item)

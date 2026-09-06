@@ -346,7 +346,7 @@
 	icon_state = "soul_core"
 	resistance_flags = FIRE_PROOF
 	zone = BODY_ZONE_CHEST // this means decaps are non-lethal, how quaint
-	organ_flags = ORGAN_ROBOTIC|ORGAN_VITAL
+	organ_flags = ORGAN_ROBOTIC | ORGAN_VITAL
 	food_type = null
 
 /obj/item/organ/heart/automaton
