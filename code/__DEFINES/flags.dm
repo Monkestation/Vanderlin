@@ -19,6 +19,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 // for /datum/var/datum_flags
 #define DF_USE_TAG				(1<<0)
 #define DF_VAR_EDITED			(1<<1)
+// TODO remove all of this replace with DF_IS_PROCESSING
 #define PROCESSING_DEFAULT		(1<<2)
 #define PROCESSING_FAST			(1<<3)
 #define PROCESSING_WEATHER		(1<<4)
@@ -29,6 +30,7 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define PROCESSING_LIGHTING		(1<<9)
 #define PROCESSING_LOBBY	(1<<10)
 #define PROCESSING_DAMOVERLAYS	(1<<11)
+#define PROCESSING_GREYSCALE (1<<12)
 
 //FLAGS BITMASK
 
