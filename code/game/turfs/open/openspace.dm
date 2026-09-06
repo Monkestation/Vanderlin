@@ -14,6 +14,8 @@
 	smoothing_list = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_CLOSED_WALL
 	neighborlay_self = "staticedge"
 
+	pathing_pass_method = TURF_PATHING_PASS_PROC
+
 /turf/open/openspace/Initialize() // handle plane and layer here so that they don't cover other obs/turfs in Dream Maker
 	. = ..()
 	RegisterSignal(src, COMSIG_ATOM_AFTER_SUCCESSFUL_INITIALIZED_ON, PROC_REF(on_atom_created))
@@ -56,6 +58,12 @@
 	if(QDELETED(movable) || movable.loc != src)
 		return
 	zFall(movable)
+
+/turf/open/openspace/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
+	var/atom/movable/our_movable = pass_info.requester_ref.resolve()
+	if(!our_movable)
+		return
+	return can_cross_safely(our_movable)
 
 /turf/open/openspace/can_cross_safely(atom/movable/crossing)
 	return HAS_TRAIT(crossing, TRAIT_MOVE_FLYING) || !crossing.can_z_move(DOWN, src, z_move_flags = ZMOVE_FALL_FLAGS)

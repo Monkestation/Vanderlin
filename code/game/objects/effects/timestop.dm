@@ -205,7 +205,7 @@
 /datum/proximity_monitor/advanced/timestop/proc/freeze_mob(mob/living/victim)
 	frozen_mobs += victim
 	victim.apply_status_effect(/datum/status_effect/time_stopped)
-	SSmove_manager.stop_looping(victim) //stops them mid pathing even if they're stunimmune //This is really dumb
+	GLOB.move_manager.stop_looping(victim) //stops them mid pathing even if they're stunimmune //This is really dumb
 
 /datum/proximity_monitor/advanced/timestop/proc/unfreeze_mob(mob/living/victim)
 	victim.remove_status_effect(/datum/status_effect/time_stopped)

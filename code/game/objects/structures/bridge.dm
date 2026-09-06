@@ -8,6 +8,7 @@
 	max_integrity = 100
 	layer = ABOVE_OPEN_TURF_LAYER
 	obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
+	can_astar_pass = CANASTARPASS_ALWAYS_PROC
 	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg')
 
 	/// Remember initial sprite
@@ -76,7 +77,7 @@
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
-/obj/structure/bridge/CanAStarPass(ID, to_dir, requester)
+/obj/structure/bridge/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
 	if(to_dir != dir && to_dir != REVERSE_DIR(dir))
 		return FALSE
 	return TRUE

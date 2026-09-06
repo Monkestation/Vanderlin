@@ -102,7 +102,7 @@
 	if(QDELETED(moving))
 		return
 
-	var/datum/move_loop/move/existing_loop = SSmove_manager.processing_on(moving, SSconveyors)
+	var/datum/move_loop/move/existing_loop = GLOB.move_manager.processing_on(moving, SSconveyors)
 	if(existing_loop)
 		existing_loop.direction = movedir
 		existing_loop.delay = get_move_delay()
@@ -116,7 +116,7 @@
 /obj/structure/roller/proc/stop_conveying(atom/movable/thing)
 	if(!ismovable(thing))
 		return
-	SSmove_manager.stop_looping(thing, SSconveyors)
+	GLOB.move_manager.stop_looping(thing, SSconveyors)
 
 /obj/structure/roller/proc/conveyable_exit(datum/source, atom/convayable, direction)
 	SIGNAL_HANDLER

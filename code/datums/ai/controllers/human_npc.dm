@@ -2,7 +2,8 @@
 /datum/ai_controller/human_npc
 	movement_delay = 0.5 SECONDS
 	max_target_distance = 13
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
+
 	blackboard = list(
 		BB_WEAPON_TYPE = /obj/item/weapon,
 		BB_ARMOR_CLASS = 2,
@@ -51,7 +52,7 @@
 	. = ..()
 	var/mob/living/living_pawn = new_pawn
 	RegisterSignal(new_pawn, COMSIG_MOB_MOVESPEED_UPDATED, PROC_REF(update_movespeed))
-	movement_delay = living_pawn.cached_multiplicative_slowdown
+	movement_delay = living_pawn.cached_multiplicative_slowdown || 1
 	new_pawn.AddComponent(/datum/component/ai_inventory_manager)
 	new_pawn.AddElement(/datum/element/interrupt_on_damage)
 	new_pawn.AddComponent(/datum/component/combat_vocalizer)
@@ -64,4 +65,4 @@
 
 /datum/ai_controller/human_npc/proc/update_movespeed(mob/living/pawn)
 	SIGNAL_HANDLER
-	movement_delay = pawn.cached_multiplicative_slowdown
+	movement_delay = pawn.cached_multiplicative_slowdown || 1

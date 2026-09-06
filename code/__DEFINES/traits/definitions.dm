@@ -628,12 +628,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This item can't be pickpocketed
 #define TRAIT_CANT_BE_STOLEN "cant_be_stolen"
 
-// **** turf traits
-///Turf slowdown will be ignored when this trait is added to a turf.
-#define TRAIT_TURF_IGNORE_SLOWDOWN "turf_ignore_slowdown"
+// ************* turf traits
+/// Turf trait for when a turf is transparent
+#define TRAIT_Z_TRANSPARENT "turf_z_transparent"
 /// Turf is one that ai mobs will generally avoid pathing through
 /// Doesn't need to be applied to any turfs that override can_cross_safely
-#define TRAIT_AI_AVOID_TURF "warning_turf"
+#define TRAIT_AI_AVOID_TURF "ai_avoid_turf"
+///Turf slowdown will be ignored when this trait is added to a turf.
+#define TRAIT_TURF_IGNORE_SLOWDOWN "turf_ignore_slowdown"
 
 // ************* Debug traits
 /// This object has sound debugging tools attached to it

@@ -1,7 +1,7 @@
 /datum/ai_controller/troll
 	movement_delay = 0.7 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items()
@@ -25,7 +25,7 @@
 /datum/ai_controller/bog_troll
 	movement_delay = 0.7 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items()
@@ -47,7 +47,7 @@
 /datum/ai_controller/troll/cave
 	movement_delay = 0.7 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items()
@@ -72,7 +72,7 @@
 /datum/ai_controller/troll/ambush
 	movement_delay = 0.7 SECONDS
 
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items()
@@ -106,7 +106,7 @@
 
 /datum/ai_controller/troll/sea
 	movement_delay = 0.7 SECONDS
-	ai_movement = /datum/ai_movement/hybrid_pathing
+	ai_movement = /datum/ai_movement/basic_avoidance/adaptive
 	blackboard = list(
 		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items()
 	)
