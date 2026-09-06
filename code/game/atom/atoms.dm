@@ -66,6 +66,12 @@
 	///overlays managed by update_overlays() to prevent removing overlays that weren't added by the same proc
 	var/list/managed_overlays
 
+#if defined(UNIT_TESTS)
+	/// Tracks the icon_state used for mapping preview icons before greyscale setup
+	/// for unit testing.
+	var/icon_state_map = null
+#endif
+
 	///Cooldown tick timer for buckle messages
 	var/buckle_message_cooldown = 0
 	///Last fingerprints to touch this atom

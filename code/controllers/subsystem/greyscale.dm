@@ -4,10 +4,11 @@
 /// IconForge also does not support the color matrix layer type or the 'or' blend_mode, however both are currently unused.
 #define USE_RUSTG_ICONFORGE_GAGS
 
-SUBSYSTEM_DEF(greyscale)
+PROCESSING_SUBSYSTEM_DEF(greyscale)
 	name = "Greyscale"
 	flags = SS_NO_FIRE
 	init_order = INIT_ORDER_GREYSCALE
+	processing_flag = PROCESSING_GREYSCALE
 
 	var/list/datum/greyscale_config/configurations = list()
 	var/list/datum/greyscale_layer/layer_types = list()
@@ -16,7 +17,7 @@ SUBSYSTEM_DEF(greyscale)
 	var/list/gags_cache = list()
 #endif
 
-/datum/controller/subsystem/greyscale/Initialize(start_timeofday)
+/datum/controller/subsystem/processing/greyscale/Initialize(start_timeofday)
 	for(var/datum/greyscale_layer/fake_type as anything in subtypesof(/datum/greyscale_layer))
 		layer_types[initial(fake_type.layer_type)] = fake_type
 
@@ -48,7 +49,7 @@ SUBSYSTEM_DEF(greyscale)
 	return ..()
 
 #ifdef USE_RUSTG_ICONFORGE_GAGS
-/datum/controller/subsystem/greyscale/proc/jobs_completed(list/job_ids)
+/datum/controller/subsystem/processing/greyscale/proc/jobs_completed(list/job_ids)
 	for(var/job in job_ids)
 		var/result = rustg_iconforge_check(job)
 		if(result == RUSTG_JOB_NO_RESULTS_YET)
@@ -59,11 +60,11 @@ SUBSYSTEM_DEF(greyscale)
 	return TRUE
 #endif
 
-/datum/controller/subsystem/greyscale/proc/RefreshConfigsFromFile()
+/datum/controller/subsystem/processing/greyscale/proc/RefreshConfigsFromFile()
 	for(var/i in configurations)
 		configurations[i].Refresh(TRUE)
 
-/datum/controller/subsystem/greyscale/proc/GetColoredIconByType(type, list/colors)
+/datum/controller/subsystem/processing/greyscale/proc/GetColoredIconByType(type, list/colors)
 	if(!ispath(type, /datum/greyscale_config))
 		CRASH("An invalid greyscale configuration was given to `GetColoredIconByType()`: [type]")
 	if(!initialized)
@@ -91,7 +92,7 @@ SUBSYSTEM_DEF(greyscale)
 	return configurations[type].Generate(colors)
 #endif
 
-/datum/controller/subsystem/greyscale/proc/GetColoredIconByTypeUniversalIcon(type, list/colors, target_icon_state)
+/datum/controller/subsystem/processing/greyscale/proc/GetColoredIconByTypeUniversalIcon(type, list/colors, target_icon_state)
 	if(!ispath(type, /datum/greyscale_config))
 		CRASH("An invalid greyscale configuration was given to `GetColoredIconByTypeUniversalIcon()`: [type]")
 	type = "[type]"
@@ -101,7 +102,7 @@ SUBSYSTEM_DEF(greyscale)
 		CRASH("Invalid colors were given to `GetColoredIconByTypeUniversalIcon()`: [colors]")
 	return configurations[type].GenerateUniversalIcon(colors, target_icon_state)
 
-/datum/controller/subsystem/greyscale/proc/ParseColorString(color_string)
+/datum/controller/subsystem/processing/greyscale/proc/ParseColorString(color_string)
 	. = list()
 	var/list/split_colors = splittext(color_string, "#")
 	for(var/color in 2 to length(split_colors))

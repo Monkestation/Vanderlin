@@ -510,3 +510,6 @@
 /datum/config_entry/flag/forbid_all_profiling
 
 /datum/config_entry/flag/forbid_admin_profiling
+
+/datum/config_entry/flag/generate_assets_in_init
+	default = FALSE
