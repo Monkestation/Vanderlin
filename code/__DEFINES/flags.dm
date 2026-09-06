@@ -36,17 +36,24 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 
 /// This flag is what recursive_hear_check() uses to determine wether to add an item to the hearer list or not.
 #define HEAR_1						(1<<3)
+/// If a turf can be made dirty at roundstart. This is also used in areas.
+#define CAN_BE_DIRTY_1				(1<<2)
+/// If blood cultists can draw runes or build structures on this turf
+#define CULT_PERMITTED_1			(1<<3)
 /// Projectiels will check ricochet on things impacted that have this.
 #define CHECK_RICOCHET_1			(1<<4)
 /// conducts electricity (metal etc.)
 #define CONDUCT_1					(1<<5)
+/// Blocks lava rivers being generated on the turf
+#define NO_LAVA_GEN_1				(1<<6)
 /// item has priority to check when entering or leaving
 #define ON_BORDER_1					(1<<8)
 /// Prevent clicking things below it on the same turf eg. doors/ fulltile windows
 #define PREVENT_CLICK_UNDER_1		(1<<9)
-#define HOLOGRAM_1					(1<<10)
-/// TESLA_IGNORE grants immunity from being targeted by tesla-style electricity
-#define TESLA_IGNORE_1				(1<<11)
+/// Blocks ruins spawning on the turf
+#define NO_RUINS_1					(1<<10)
+/// If a turf can be damaged when attacked by items
+#define CAN_BE_ATTACKED_1			(1<<11)
 ///Whether /atom/Initialize() has already run for the object
 #define INITIALIZED_1				(1<<12)
 /// was this spawned by an admin? used for stat tracking stuff.
@@ -57,19 +64,8 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define IS_SPINNING_1 (1<<15)
 /// Is this atom on top of another atom, and as such has click priority?
 #define IS_ONTOP_1 (1<<16)
-/// Are we in the overlay queue
-#define OVERLAY_QUEUED_1 (1<<17)
-
-/// If a turf can be made dirty at roundstart. This is also used in areas.
-#define CAN_BE_DIRTY_1				(1<<2)
-/// If blood cultists can draw runes or build structures on this turf
-#define CULT_PERMITTED_1			(1<<3)
-/// Blocks lava rivers being generated on the turf
-#define NO_LAVA_GEN_1				(1<<6)
-/// Blocks ruins spawning on the turf
-#define NO_RUINS_1					(1<<10)
-/// If a turf can be damaged when attacked by items
-#define CAN_BE_ATTACKED_1			(1<<11)
+/// This atom does not need to generate its own preview icon for GAGS
+#define NO_NEW_GAGS_PREVIEW_1 (1<<17)
 
 /*
 	These defines are used specifically with the atom/pass_flags bitmask

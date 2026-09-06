@@ -1,6 +1,9 @@
 GLOBAL_VAR(lordprimary)
 GLOBAL_VAR(lordsecondary)
 
+#define DEFAULT_LORD_PRIMARY "#8f3636"
+#define DEFAULT_LORD_SECONDARY "#865c9c"
+
 // Both can be used on structures
 /// Uses lordprimary as the main color
 #define LORD_PRIMARY (1<<0)
