@@ -3550,6 +3550,7 @@
 #include "code\modules\jobs\job_types\nobility\courtagent\ninja.dm"
 #include "code\modules\jobs\job_types\nobility\courtagent\protector.dm"
 #include "code\modules\jobs\job_types\nobility\courtagent\quack.dm"
+#include "code\modules\jobs\job_types\nobility\courtagent\surefire.dm"
 #include "code\modules\jobs\job_types\other\deathknight.dm"
 #include "code\modules\jobs\job_types\other\goblin.dm"
 #include "code\modules\jobs\job_types\other\mercenary.dm"

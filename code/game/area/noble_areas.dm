@@ -8,10 +8,12 @@
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/manorgarri
+	var/keep_autoname = TRUE
 
 /area/indoors/town/keep/Initialize()
 	. = ..()
-	first_time_text = "THE KEEP OF [uppertext(SSmapping.config.map_name)]"
+	if(keep_autoname)
+		first_time_text = "THE KEEP OF [uppertext(SSmapping.config.map_name)]"
 
 /area/indoors/town/keep/thewall
 	name = "Keep Wall"
@@ -21,10 +23,12 @@
 	name = "Keep Grounds"
 	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "manor_out"
+	var/keep_autoname = TRUE
 
 /area/outdoors/town/keep/Initialize()
 	. = ..()
-	first_time_text = "[uppertext(SSmapping.config.map_name)] KEEP GROUNDS"
+	if(keep_autoname)
+		first_time_text = "[uppertext(SSmapping.config.map_name)] KEEP GROUNDS"
 
 /area/outdoors/town/keep/roof
 	name = "Keep Roof"
@@ -63,6 +67,7 @@
 
 /area/indoors/town/keep/courtagent/prison
 	name = "Court Agent's Prison"
+	keep_autoname = FALSE
 	first_time_text = "THE PRISON THAT NEVER EXISTED"
 
 /area/indoors/town/keep/passages

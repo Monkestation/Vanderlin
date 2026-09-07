@@ -72,3 +72,16 @@
 		"Gold Ring" = /obj/item/clothing/ring/courtagent_ring/gold,
 	)
 	spawned.select_equippable(player_client, rings, message = "Choose Your Ring", title = "COURT AGENT")
+
+/datum/attribute_holder/sheet/job/courtagent
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/unarmed = list(20, 20),
+		/datum/attribute/skill/combat/wrestling = list(20, 20),
+		/datum/attribute/skill/combat/knives = list(20, 20),
+		/datum/attribute/skill/misc/athletics = list(30, 30),
+		/datum/attribute/skill/misc/swimming = list(20, 20),
+		/datum/attribute/skill/misc/sneaking = list(30, 30),
+		/datum/attribute/skill/misc/climbing = list(30, 30),
+		/datum/attribute/skill/misc/lockpicking = list(30, 30),
+		/datum/attribute/skill/misc/stealing = list(30, 30),
+	)

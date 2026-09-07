@@ -166,7 +166,7 @@
 					should_update = TRUE
 
 		if("honorific")
-			var/list/honorifics = list("Lord", "Lady", "Sir", "Dame", "Ritter", "Ritterin", "Count", "Countess", "Emir", "Clear honorific")
+			var/list/honorifics = list("Lord", "Lady", "Sir", "Dame", "Ritter", "Ritterin", "Count", "Countess", "Emir", "Dr", "Clear honorific")
 			var/chosen_honorific = browser_input_list(user, "Select False Honorific", "HONORIFICS", honorifics)
 
 			if(chosen_honorific == "Clear honorific")
@@ -182,6 +182,7 @@
 			jobs += GLOB.peasant_positions
 			jobs += GLOB.apprentices_positions
 			jobs += GLOB.allmig_positions
+			jobs += /datum/job/advclass/pilgrim/physicker::title
 			jobs -= list(
 				/datum/job/royalknight::title,
 				/datum/job/lieutenant::title,
@@ -193,7 +194,7 @@
 			jobs += "Cancel"
 
 			var/cover_job = tgui_input_list(user, "Select Cover Job", "COVER JOB", jobs)
-			if(cover_job == "Cancel")
+			if(!cover_job || cover_job == "Cancel")
 				return
 			H.job = cover_job
 			H.mind?.set_assigned_role(cover_job)
