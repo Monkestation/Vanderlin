@@ -703,6 +703,12 @@
 	flags_ai_inventory = AI_ITEM_THROWING
 	item_weight = 80 GRAMS
 
+/obj/item/weapon/knife/throwingknife/eastern
+	name = "eastern iron tossblade"
+	icon_state = "easttossblade"
+	throwforce = DAMAGE_DAGGER + 15
+	wdefense = TERRIBLE_PARRY
+
 /obj/item/weapon/knife/throwingknife/bronze
 	name = "bronze tossblade"
 	desc = "A tossblade forged from bronze. It's not as reliable compared to other tossblades, but it's much cheaper to make."
@@ -728,6 +734,12 @@
 	melting_material = /datum/material/steel
 	sellprice = 4
 	item_weight = 85 GRAMS
+
+/obj/item/weapon/knife/throwingknife/steel/eastern
+	name = "eastern steel tossblade"
+	icon_state = "seasttossblade"
+	throwforce = DAMAGE_DAGGER + 17
+	wdefense = TERRIBLE_PARRY
 
 /obj/item/weapon/knife/throwingknife/blacksteel
 	name = "blacksteel tossblade"
