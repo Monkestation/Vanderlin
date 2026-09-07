@@ -133,6 +133,9 @@
 	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 	AddComponent(/datum/component/storage/concrete/scabbard/knife)
 
+/obj/item/clothing/wrists/bracers/leather/scabbard/stiletto
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
 /obj/item/clothing/wrists/bracers/leather/scabbard/stiletto/Initialize()
 	. = ..()
 	new /obj/item/weapon/knife/dagger/steel/stiletto(src)
