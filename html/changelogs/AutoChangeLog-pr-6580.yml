@@ -1,0 +1,6 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - rscadd: "Playable half-orc half-dwarf species"
+  - rscadd: "Goblin ear sprites to half-orcs & dworcs"
+  - rscadd: "Consuming manflesh as a dwarf/halfling turns you into a dworc"
