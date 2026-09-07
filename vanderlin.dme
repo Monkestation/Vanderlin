@@ -3547,6 +3547,7 @@
 #include "code\modules\jobs\job_types\nobility\courtagent\bruiser.dm"
 #include "code\modules\jobs\job_types\nobility\courtagent\hitman.dm"
 #include "code\modules\jobs\job_types\nobility\courtagent\mystic_spy.dm"
+#include "code\modules\jobs\job_types\nobility\courtagent\ninja.dm"
 #include "code\modules\jobs\job_types\nobility\courtagent\protector.dm"
 #include "code\modules\jobs\job_types\nobility\courtagent\quack.dm"
 #include "code\modules\jobs\job_types\other\deathknight.dm"
