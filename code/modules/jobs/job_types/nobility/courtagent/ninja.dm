@@ -32,6 +32,10 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/courtagent/ninja
 
+	spells = list(
+		/datum/action/cooldown/spell/undirected/conjure_item/smoke_bomb
+	)
+
 	traits = list(
 		TRAIT_BREADY,
 		TRAIT_BLINDFIGHTING,

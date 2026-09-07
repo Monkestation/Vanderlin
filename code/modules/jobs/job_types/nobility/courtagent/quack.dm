@@ -7,7 +7,6 @@
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/misc/sewing = 20,
-		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/craft/alchemy = 20,
 		/datum/attribute/skill/labor/mathematics = 20,
 		/datum/attribute/skill/misc/climbing = 20,
@@ -18,6 +17,9 @@
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
+	)
+	attribute_variance = list(
+		/datum/attribute/skill/misc/medicine = list(30, 40),
 	)
 
 /datum/job/advclass/courtagent/quack

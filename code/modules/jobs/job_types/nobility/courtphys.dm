@@ -15,6 +15,7 @@
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/labor/mathematics = 30,
 		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/craft/engineering = 20,
 	)
 
 /datum/attribute_holder/sheet/job/courtphys/old
@@ -34,6 +35,7 @@
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/labor/mathematics = 30,
 		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/craft/engineering = 20,
 	)
 /datum/job/courtphys
 	title = JOB_COURT_PHYSICIAN
