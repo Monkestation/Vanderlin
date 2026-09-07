@@ -61,6 +61,10 @@
 	background_track_dusk = null
 	background_track_night = null
 
+/area/indoors/town/keep/courtagent/prison
+	name = "Court Agent's Prison"
+	first_time_text = "THE PRISON THAT NEVER EXISTED"
+
 /area/indoors/town/keep/passages
 	name = "Keep Passages"
 	icon_state = "passage"
