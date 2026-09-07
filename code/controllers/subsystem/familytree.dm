@@ -93,7 +93,10 @@ SUBSYSTEM_DEF(familytree)
 		for(var/datum/family_member/member in house.members)
 			if(member.person?.real_name == person.setparent)
 				return FAMILY_MEMBER_CHILD
-
+	if(person.setsibling)
+		for(var/datum/family_member/member in house.members)
+			if(member.person?.real_name == person.setsibling)
+				return FAMILY_MEMBER_SIBLING
 	if(person.setchild)
 		for(var/datum/family_member/member in house.members)
 			if(member.person?.real_name == person.setchild)
@@ -261,6 +264,17 @@ SUBSYSTEM_DEF(familytree)
 				continue
 			for(var/datum/family_member/member in house.members)
 				if(member.person?.real_name == H.setchild)
+					chosen_house = house
+					break
+			if(chosen_house)
+				break
+
+	if(H.setsibling)
+		for(var/datum/heritage/house in active + seed)
+			if(!HousePassesFilters(H, house))
+				continue
+			for(var/datum/family_member/member in house.members)
+				if(member.person?.real_name == H.setsibling)
 					chosen_house = house
 					break
 			if(chosen_house)
