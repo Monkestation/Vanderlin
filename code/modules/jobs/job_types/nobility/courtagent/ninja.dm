@@ -21,7 +21,7 @@
 	)
 
 /datum/job/advclass/courtagent/ninja
-	title = "Eastern Assassin"
+	title = "Far Eastern Assassin"
 	tutorial = "You are one of the Hand's loyal Agents. \
 	Hailing from the far eastern lands you were cast out from your home due to your flexible morality. \
 	Now for steady pay, you aid the Hand and the Court in matters that the public had best not know about. \
@@ -45,7 +45,9 @@
 	cmode_music = 'sound/music/cmode/Combat_Weird.ogg'
 
 /datum/outfit/courtagent/ninja
-	name = "Eastern Assassin (Court Agent)"
+	name = "Far Eastern Assassin (Court Agent)"
+	head = /obj/item/clothing/head/roguehood/monk/colored/black
+	mask = /obj/item/clothing/face/shepherd/clothmask/colored/black
 	shirt = /obj/item/clothing/armor/regenerating/skin/easttats
 	belt = /obj/item/storage/belt/leather/knifebelt/black/east_steel
 	backr = /obj/item/storage/backpack/satchel/black

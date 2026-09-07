@@ -6471,7 +6471,7 @@
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	redstone_id = "ServantRoomPassage"
 	},
-/turf/closed/wall/mineral/craftstone,
+/turf/closed/wall/mineral/stone,
 /area/indoors/town/cell)
 "cHH" = (
 /obj/structure/fluff/telescope,

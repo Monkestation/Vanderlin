@@ -55,6 +55,9 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	armor = /obj/item/clothing/shirt/robe/colored/black
 	wrists = /obj/item/clothing/wrists/bracers/leather
+	belt = /obj/item/storage/belt/leather/black/courtagent
+	pants = /obj/item/clothing/pants/trou/leather
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backr = /obj/item/storage/backpack/satchel/black
 	backl = /obj/item/weapon/polearm/woodstaff
 	backpack_contents = list(

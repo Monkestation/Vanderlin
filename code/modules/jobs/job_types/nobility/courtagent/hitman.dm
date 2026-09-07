@@ -51,6 +51,9 @@
 	armor = /obj/item/clothing/armor/leather/splint
 	gloves = /obj/item/clothing/gloves/fingerless
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard/stiletto
+	belt = /obj/item/storage/belt/leather/black/courtagent
+	pants = /obj/item/clothing/pants/trou/leather
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,

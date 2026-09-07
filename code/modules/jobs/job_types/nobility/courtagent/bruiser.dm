@@ -44,6 +44,9 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	armor = /obj/item/clothing/armor/leather/splint
 	backr = /obj/item/storage/backpack/satchel/black
+	belt = /obj/item/storage/belt/leather/black/courtagent
+	pants = /obj/item/clothing/pants/trou/leather
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1
 	)

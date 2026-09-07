@@ -37,10 +37,10 @@
 	pants = /obj/item/clothing/pants/grenzelpants
 	shoes = /obj/item/clothing/shoes/rare/grenzelhoft
 	gloves = /obj/item/clothing/gloves/angle/grenzel
-	belt = /obj/item/storage/belt/leather/mercenary
 	shirt = /obj/item/clothing/shirt/grenzelhoft
 	backl = /obj/item/storage/backpack/satchel/black
 	backr = /obj/item/weapon/axe/steel
+	belt = /obj/item/storage/belt/leather/black/courtagent
 	beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 	beltr = /obj/item/ammo_holder/bullet/bullets
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft

@@ -73,6 +73,9 @@
 	neck = /obj/item/clothing/neck/gorget
 	cloak = /obj/item/clothing/cloak/raincloak/colored/black
 	wrists = /obj/item/clothing/wrists/bracers/leather
+	belt = /obj/item/storage/belt/leather/black/courtagent
+	pants = /obj/item/clothing/pants/trou/leather
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1
