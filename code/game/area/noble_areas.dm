@@ -30,6 +30,14 @@
 	name = "Keep Roof"
 	icon_state = "manor_roof"
 
+/area/outdoors/town/keep/stable
+	name = "Keep Stables"
+	icon_state = "manor_stable"
+
+/area/outdoors/town/keep/forge
+	name = "Royal Forge"
+	icon_state = "manor_forge"
+
 /area/indoors/town/keep/throne
 	name = "Throne Room"
 	icon_state = "throne"
@@ -73,6 +81,10 @@
 /area/indoors/town/keep/passages/secondfloor
 	name = "Keep Passages (Second Floor)"
 	icon_state = "passage_second"
+
+/area/indoors/town/keep/passages/thirdfloor
+	name = "Keep Passages (Third Floor)"
+	icon_state = "passage_third"
 
 /area/indoors/town/keep/phys
 	name = "Court Physician's Office"
@@ -131,7 +143,7 @@
 	icon_state = "servant_head"
 
 /area/indoors/town/keep/library
-	name = "Keep Libray"
+	name = "Keep Library"
 	icon_state = "library"
 
 /area/indoors/town/keep/archivist
