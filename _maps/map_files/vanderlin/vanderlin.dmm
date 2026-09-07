@@ -1319,6 +1319,12 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
+"aGd" = (
+/obj/structure/lever/hidden/keep{
+	redstone_id = "ServantRoomPassage"
+	},
+/turf/closed/wall/mineral/stone,
+/area/indoors/town/cell)
 "aGv" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/carpet/red,
@@ -6461,6 +6467,12 @@
 	},
 /turf/open/floor/cobble,
 /area/under/town/basement)
+"cHE" = (
+/obj/effect/mapping_helpers/secret_door_creator/keep{
+	redstone_id = "ServantRoomPassage"
+	},
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/cell)
 "cHH" = (
 /obj/structure/fluff/telescope,
 /turf/open/floor/ruinedwood/darker,
@@ -75835,10 +75847,10 @@ kxM
 bIO
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
+qhF
+qhF
+jnU
+jnU
 qFx
 qFx
 qFx
@@ -76035,11 +76047,11 @@ bIO
 bIO
 kxM
 kxM
-qFx
-qFx
-qhF
-qhF
 jnU
+jnU
+jnU
+lDL
+meT
 jnU
 iJu
 iJu
@@ -76234,13 +76246,13 @@ vvX
 uFL
 nhL
 bIO
-qFx
-qFx
-qFx
-qFx
-qFx
-jnU
-lDL
+meT
+meT
+meT
+meT
+meT
+meT
+meT
 meT
 meT
 meT
@@ -76436,8 +76448,8 @@ gHC
 nhL
 ocF
 bIO
-qFx
-qFx
+meT
+qhF
 eGt
 eGt
 eGt
@@ -76638,8 +76650,8 @@ vvX
 nhL
 qzt
 bIO
-qFx
-qFx
+meT
+qhF
 eGt
 uKu
 cWQ
@@ -76840,8 +76852,8 @@ bIO
 iqo
 qzt
 kxM
-qFx
-qFx
+meT
+qhF
 dro
 bxL
 mDt
@@ -77041,9 +77053,9 @@ izC
 vvX
 nhL
 hCF
-bIO
-qFx
-qFx
+cHE
+meT
+qhF
 xCr
 pAH
 rWS
@@ -77243,9 +77255,9 @@ smp
 xSB
 bCK
 jfT
-kxM
-qFx
-qFx
+aGd
+meT
+qhF
 xCr
 eGt
 dro
@@ -116236,13 +116248,13 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+iwU
+iwU
+iwU
+iwU
+iwU
+iwU
+iwU
 qFx
 qFx
 qFx
@@ -116439,11 +116451,11 @@ qFx
 qFx
 qFx
 iwU
-iwU
-iwU
-iwU
-iwU
-iwU
+hrY
+mWk
+mWk
+mWk
+mWk
 iwU
 qFx
 qFx
@@ -116641,10 +116653,10 @@ qFx
 qFx
 qFx
 iwU
-hrY
-mWk
-mWk
-mWk
+iwU
+iwU
+iwU
+wyN
 mWk
 iwU
 vAr
@@ -116842,11 +116854,11 @@ qFx
 qFx
 qFx
 qFx
+qFx
+qFx
+qFx
+qFx
 iwU
-iwU
-iwU
-iwU
-wyN
 mWk
 thH
 thH
