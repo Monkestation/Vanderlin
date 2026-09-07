@@ -113,9 +113,7 @@
 /turf/open/floor/dirt/road,
 /area/indoors/wilderness/gallowband)
 "aJ" = (
-/obj/effect/decal/woodpath{
-	dir = 2
-	},
+/obj/effect/decal/woodpath,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
 "aK" = (
@@ -143,11 +141,6 @@
 /obj/structure/kneestingers,
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness/safe)
-"aQ" = (
-/turf/open/water/river/dirt{
-	dir = 2
-	},
-/area/outdoors/wilderness)
 "aR" = (
 /obj/structure/lootable_structure/mining_cache,
 /turf/open/floor/cobblerock,
@@ -158,8 +151,7 @@
 	},
 /obj/effect/decal/borderfall{
 	dir = 1;
-	pixel_x = 16;
-	pixel_y = 0
+	pixel_x = 16
 	},
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -241,8 +233,7 @@
 	dir = 8
 	},
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/open/floor/wood,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -1300,9 +1291,7 @@
 /area/indoors/wilderness/tavern)
 "hA" = (
 /obj/structure/bridge_stakes,
-/obj/effect/decal/woodpath{
-	dir = 2
-	},
+/obj/effect/decal/woodpath,
 /turf/open/floor/sand,
 /area/outdoors/wilderness)
 "hB" = (
@@ -1596,8 +1585,7 @@
 /area/indoors/wilderness/gallowband/garrison)
 "jb" = (
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -2014,8 +2002,7 @@
 /area/indoors/dungeon)
 "lr" = (
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/open/floor/wood,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -2456,9 +2443,7 @@
 	},
 /area/outdoors/wilderness/safe)
 "om" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 2
-	},
+/turf/closed/wall/mineral/wooddark/end,
 /area/indoors/wilderness/gallowband/garrison/gatehouse)
 "on" = (
 /turf/open/floor/cobblerock,
@@ -3197,8 +3182,7 @@
 /area/indoors/dungeon)
 "sA" = (
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/wood,
@@ -3487,8 +3471,7 @@
 /area/indoors/dungeon)
 "un" = (
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -4009,8 +3992,7 @@
 "xh" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -4708,8 +4690,7 @@
 /area/indoors/wilderness/gallowband)
 "Bs" = (
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -4719,9 +4700,7 @@
 /turf/open/floor/wood,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "Bt" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 2
-	},
+/turf/closed/wall/mineral/wooddark/end,
 /area/indoors/wilderness/gallowband)
 "Bw" = (
 /obj/structure/bed/hay,
@@ -5262,8 +5241,7 @@
 /area/outdoors/wilderness)
 "Eu" = (
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/structure/fluff/railing/wood,
 /obj/structure/chair/stool,
@@ -5419,7 +5397,6 @@
 "Fv" = (
 /mob/living/carbon/human/species/human{
 	health = 0;
-	blood_volume = 0;
 	bloodpool = 0;
 	maxHealth = 0;
 	maxbloodpool = 0
@@ -5462,8 +5439,7 @@
 /area/outdoors/wilderness/safe/gallowband_fort)
 "FC" = (
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -6065,9 +6041,7 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/dungeon)
 "Ir" = (
-/obj/effect/decal/woodpath{
-	dir = 2
-	},
+/obj/effect/decal/woodpath,
 /obj/structure/bridge_stakes{
 	dir = 1
 	},
@@ -6213,8 +6187,7 @@
 	pixel_y = 8
 	},
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -7768,8 +7741,7 @@
 /area/under/cave)
 "Sr" = (
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -8337,8 +8309,7 @@
 "Vu" = (
 /obj/effect/decal/borderfall{
 	dir = 1;
-	pixel_x = 16;
-	pixel_y = 0
+	pixel_x = 16
 	},
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -8611,8 +8582,7 @@
 /obj/item/reagent_containers/food/snacks/hardtack{
 	pixel_x = 5;
 	name = "dusty hardtack";
-	desc = "Very, very hard and dry. This one is probably older than the Veteran.";
-	pixel_y = 0
+	desc = "Very, very hard and dry. This one is probably older than the Veteran."
 	},
 /obj/item/reagent_containers/food/snacks/hardtack{
 	pixel_x = -7;
@@ -9095,8 +9065,7 @@
 /area/indoors/wilderness/gallowband/ship)
 "ZH" = (
 /obj/structure/fluff/railing/wood{
-	dir = 4;
-	pixel_y = 0
+	dir = 4
 	},
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
@@ -20012,7 +19981,7 @@ kw
 Sw
 fq
 Lx
-aQ
+Lx
 Oq
 zC
 Fw
