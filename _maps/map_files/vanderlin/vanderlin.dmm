@@ -16755,7 +16755,6 @@
 /turf/open/floor/grass,
 /area/outdoors/town/keep)
 "gTM" = (
-/obj/structure/fluff/clutter/shrub/red,
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/tile/masonic{
 	dir = 4
@@ -18011,6 +18010,16 @@
 /obj/item/needle,
 /turf/open/floor/dirt,
 /area/indoors/town/church/inquisition)
+"hvZ" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_x = 32;
+	pixel_y = 0
+	},
+/obj/structure/fluff/clutter/shrub/red{
+	pixel_x = 2
+	},
+/turf/open/floor/tile/masonic,
+/area/indoors/town/keep/halls/e)
 "hwd" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	dir = 9
@@ -20501,7 +20510,7 @@
 /obj/effect/mapping_helpers/access/keyset/manor/general,
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/door/window,
-/turf/open/floor/tile,
+/turf/open/floor/tile/masonic/full/inverted,
 /area/indoors/town/keep/halls/s)
 "iuZ" = (
 /obj/structure/closet/crate/crafted_closet,
@@ -47158,7 +47167,7 @@
 	name = "Baths"
 	},
 /obj/effect/mapping_helpers/access/keyset/manor/general,
-/turf/open/floor/blocks/newstone,
+/turf/open/floor/blocks,
 /area/indoors/town/keep/basement/bath)
 "sFh" = (
 /obj/effect/decal/cleanable/dyes,
@@ -126166,7 +126175,7 @@ nCz
 hIp
 nCz
 hIp
-nCz
+hvZ
 sSc
 mWk
 kUf
