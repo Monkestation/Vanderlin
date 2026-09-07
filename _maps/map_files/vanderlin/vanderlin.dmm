@@ -755,6 +755,10 @@
 /obj/item/key/atarms,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
 /obj/effect/mapping_helpers/access/locker,
+/obj/item/key/gatehouse,
+/obj/item/key/gatehouse,
+/obj/item/key/gatehouse,
+/obj/item/key/gatehouse,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/garrison)
 "arc" = (
@@ -29143,7 +29147,12 @@
 /obj/item/key/heir,
 /obj/item/key/heir,
 /obj/item/key/butler,
-/obj/effect/mapping_helpers/access/keyset/manor/lord/consort,
+/obj/effect/mapping_helpers/access/keyset/manor/lord/consort{
+	level = 1
+	},
+/obj/item/key/courtphys,
+/obj/item/key/hand,
+/obj/item/key/archivist,
 /turf/open/floor/tile/masonic{
 	dir = 4
 	},
@@ -31783,6 +31792,7 @@
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
 "ncm" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
 /turf/open/floor/church/gold,
 /area/indoors/town/church)
 "ncu" = (
@@ -57091,6 +57101,13 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/concrete,
 /area/under/town/basement)
+"xbn" = (
+/obj/structure/lever/hidden{
+	redstone_id = "CuckC";
+	hidden_dc = 8
+	},
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/town/church/chapel)
 "xbq" = (
 /turf/open/water/bath,
 /area/indoors/town/keep/magician)
@@ -215866,7 +215883,7 @@ lCa
 nok
 dDP
 hTX
-jCo
+xbn
 jCo
 jCo
 jCo
