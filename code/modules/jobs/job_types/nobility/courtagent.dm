@@ -33,7 +33,8 @@
 
 	mind_traits = list(
 		TRAIT_KNOW_COURTAGENT_DOORS,
-		TRAIT_KNOWCOURTAGENTS
+		TRAIT_KNOWCOURTAGENTS,
+		TRAIT_KNOWBANDITS
 	)
 	traits = list(
 		TRAIT_COURTAGENT,
@@ -113,7 +114,7 @@
 	)
 
 /datum/outfit/courtagent/bruiser
-	name = "Bruiser"
+	name = "Bruiser (Court Agent)"
 	cloak = /obj/item/clothing/cloak/raincloak
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	armor = /obj/item/clothing/armor/leather/splint
@@ -186,12 +187,12 @@
 	)
 
 /datum/outfit/courtagent/hitman
-	name = "Hitman"
+	name = "Hitman (Court Agent)"
 	cloak = /obj/item/clothing/cloak/raincloak
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
 	armor = /obj/item/clothing/armor/leather/splint
 	gloves = /obj/item/clothing/gloves/fingerless
-	wrists = /obj/item/clothing/wrists/bracers/leather
+	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard/stiletto
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1
@@ -266,7 +267,7 @@
 	spawned.adjust_technique_mastery_points(5)
 
 /datum/outfit/courtagent/mystic
-	name = "Mystic Spy"
+	name = "Mystic Spy (Court Agent)"
 	head = /obj/item/clothing/head/roguehood/colored/black
 	gloves = /obj/item/clothing/gloves/fingerless
 	shirt = /obj/item/clothing/shirt/undershirt/colored/black
@@ -350,6 +351,7 @@
 	)
 
 /datum/outfit/courtagent/protector
+	name = "Protector (Court Agent)"
 	head = /obj/item/clothing/head/helmet/leather/headscarf
 	gloves = /obj/item/clothing/gloves/leather
 	shirt = /obj/item/clothing/armor/gambeson/light/colored/black
@@ -393,3 +395,68 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/protector/whipsflails)
 		if("Whip")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/courtagent/protector/whipsflails)
+
+
+/datum/attribute_holder/sheet/job/courtagent/quack
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 2,
+		STAT_PERCEPTION = 1,
+		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/misc/sewing = 20,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/alchemy = 20,
+		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/craft/engineering = 20,
+		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/lockpicking = 30,
+		/datum/attribute/skill/misc/stealing = 30,
+	)
+
+/datum/job/advclass/courtagent/quack
+	title = "Quack"
+	tutorial = "You are one of the Hand's loyal Agents. \
+	Sometimes your colleagues go a little too far trying to get answers and the Court Physician probably shouldn't know about it. \
+	That's where you come in. Skilled in medicine and equipped for the worst, you keep the servants of the Hand alive, and their enemies <i>alive enough</i>."
+	outfit = /datum/outfit/courtagent/quack
+	category_tags = list(CTAG_COURTAGENT)
+
+	attribute_sheet = /datum/attribute_holder/sheet/job/courtagent/quack
+	traits = list(
+		TRAIT_EMPATH,
+		TRAIT_DEADNOSE
+	)
+
+	spells = list(
+		/datum/action/cooldown/spell/diagnose
+	)
+	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
+	book_type = /obj/item/recipe_book/medical
+	allowed_races = list(SPEC_ID_MEDICATOR)
+
+/datum/outfit/courtagent/quack
+	name = "Quack (Court Agent)"
+	head = /obj/item/clothing/head/roguehood/phys
+	mask = /obj/item/clothing/face/phys
+	shoes = /obj/item/clothing/shoes/boots/leather
+	shirt = /obj/item/clothing/shirt/undershirt/colored/black
+	backl = /obj/item/storage/backpack/satchel/surgbag
+	backr = /obj/item/storage/backpack/satchel/black
+	pants = /obj/item/clothing/pants/tights/colored/random
+	gloves = /obj/item/clothing/gloves/leather/phys
+	armor = /obj/item/clothing/shirt/robe/phys
+	neck = /obj/item/clothing/neck/phys
+	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard/stiletto
+	belt = /obj/item/storage/belt/leather/rope
+	beltl = /obj/item/storage/fancy/ifak
+
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/reagent_containers/glass/bottle/healthpot/labelled = 2,
+	)
