@@ -68,5 +68,6 @@
 		gloves = /obj/item/clothing/gloves/eastgloves2
 		shoes = /obj/item/clothing/shoes/boots/darkboots
 	else
+		pants = /obj/item/clothing/pants/tights/colored/black
 		armor = /obj/item/clothing/armor/basiceast/captainrobe
 		shoes = /obj/item/clothing/shoes/rumaclan
