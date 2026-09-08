@@ -1129,13 +1129,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/blocks/paving,
 /area/indoors/antag/vampire_manor)
-"dP" = (
-/obj/machinery/light/fueled/torchholder/l,
-/obj/structure/fluff/railing/border{
-	pixel_y = -7
-	},
-/turf/open/floor/ruinedwood/chevron,
-/area/indoors/admin_test)
 "dQ" = (
 /obj/structure/table/church{
 	dir = 1
@@ -2396,10 +2389,6 @@
 "kG" = (
 /turf/open/floor/dirt,
 /area/broodmother_den)
-"kH" = (
-/obj/structure/chair/bench/coucha/redright,
-/turf/open/floor/hexstone,
-/area/indoors/admin_test)
 "kK" = (
 /obj/effect/decal/cobbleedge{
 	dir = 4
@@ -2718,6 +2707,18 @@
 /obj/item/weapon/shovel,
 /turf/open/floor/dirt/road,
 /area/outdoors/antag/bandit_lair)
+"mL" = (
+/obj/structure/table/wood/plain_alt,
+/obj/item/reagent_containers/glass/bowl{
+	pixel_y = 9;
+	pixel_x = 9
+	},
+/obj/item/kitchen/rollingpin,
+/obj/item/reagent_containers/powder/flour{
+	pixel_x = 9
+	},
+/turf/open/floor/hexstone,
+/area/indoors/antag/bandit_lair)
 "mO" = (
 /obj/structure/table/wood{
 	icon_state = "map6"
@@ -3419,25 +3420,6 @@
 /obj/effect/decal/cleanable/blood/gibs/down,
 /turf/open/floor/dirt,
 /area/indoors/antag/vampire_manor)
-"qk" = (
-/obj/structure/fluff/walldeco/moon{
-	pixel_y = -32
-	},
-/obj/structure/table/wood/fancy/purple,
-/turf/open/floor/tile/masonic/inverted,
-/area/indoors/town/church/dreamcave)
-"qm" = (
-/obj/structure/table/wood/plain_alt,
-/obj/item/reagent_containers/glass/bowl{
-	pixel_y = 9;
-	pixel_x = 9
-	},
-/obj/item/kitchen/rollingpin,
-/obj/item/reagent_containers/powder/flour{
-	pixel_x = 9
-	},
-/turf/open/floor/hexstone,
-/area/indoors/antag/bandit_lair)
 "qn" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 1
@@ -3615,6 +3597,13 @@
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass/mixyel,
 /area/outdoors/antag/bandit_lair)
+"rf" = (
+/obj/machinery/light/fueled/torchholder/l,
+/obj/structure/fluff/railing/border{
+	pixel_y = -7
+	},
+/turf/open/floor/ruinedwood/chevron,
+/area/indoors/admin_test)
 "rh" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/reagent_containers/glass/bowl{
@@ -3983,13 +3972,6 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/carpet,
 /area/indoors/antag/lich)
-"sI" = (
-/obj/machinery/light/fueled/torchholder/r,
-/obj/structure/fluff/railing/border{
-	pixel_y = -7
-	},
-/turf/open/floor/ruinedwood/chevron,
-/area/indoors/admin_test)
 "sL" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -4101,6 +4083,16 @@
 "to" = (
 /turf/open/floor/carpet/royalblack,
 /area/indoors/admin_test)
+"tp" = (
+/obj/structure/table/wood{
+	dir = 5;
+	icon_state = "largetable"
+	},
+/obj/item/reagent_containers/glass/cup/skull{
+	pixel_x = -6
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/antag/bandit_lair)
 "tq" = (
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
 	pixel_x = 15;
@@ -4321,6 +4313,18 @@
 /obj/effect/mapping_helpers/virtual_z_link/broodmother_base,
 /turf/closed/mineral,
 /area/broodmother_den)
+"uK" = (
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/head/helmet/leather/tricorn{
+	pixel_x = 5;
+	pixel_y = -14
+	},
+/obj/item/clothing/head/helmet/leather/tricorn{
+	pixel_x = -1
+	},
+/obj/item/clothing/head/menacing,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/antag/bandit_lair)
 "uL" = (
 /obj/structure/flora/tree/dying_bush,
 /turf/open/floor/grass/mixyel,
@@ -4504,10 +4508,6 @@
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/antag/bandit_lair)
-"vu" = (
-/obj/structure/table/wood/fancy/purple,
-/turf/open/floor/tile/masonic/inverted,
-/area/indoors/town/church/dreamcave)
 "vz" = (
 /obj/effect/decal/cobbleedge,
 /turf/open/floor/dirt,
@@ -4598,16 +4598,6 @@
 	},
 /turf/open/floor/twig,
 /area/under/cavelava/acid)
-"vR" = (
-/obj/structure/table/wood{
-	dir = 5;
-	icon_state = "largetable"
-	},
-/obj/item/reagent_containers/glass/cup/skull{
-	pixel_x = -6
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/antag/bandit_lair)
 "vS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/fake_world,
@@ -5043,18 +5033,6 @@
 /obj/item/clothing/neck/coif,
 /obj/item/clothing/cloak/shredded,
 /obj/item/clothing/cloak/shredded,
-/turf/open/floor/ruinedwood/spiralfade,
-/area/indoors/antag/bandit_lair)
-"yq" = (
-/obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/head/helmet/leather/tricorn{
-	pixel_x = 5;
-	pixel_y = -14
-	},
-/obj/item/clothing/head/helmet/leather/tricorn{
-	pixel_x = -1
-	},
-/obj/item/clothing/head/menacing,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/antag/bandit_lair)
 "yu" = (
@@ -6061,6 +6039,10 @@
 	},
 /turf/open/floor/naturalstone,
 /area/indoors/antag/lich)
+"Em" = (
+/obj/structure/fluff/walldeco/moon,
+/turf/closed/wall/mineral/underbrick/moonstone,
+/area/indoors/town/church/dreamcave)
 "Eo" = (
 /turf/open/floor/twig,
 /area/outdoors/antag/lich)
@@ -7195,10 +7177,6 @@
 /obj/structure/healingfountain,
 /turf/open/floor/concrete,
 /area/outdoors/antag/vampire_manor)
-"JG" = (
-/obj/structure/fluff/walldeco/moon,
-/turf/open/floor/tile/masonic/inverted,
-/area/indoors/town/church/dreamcave)
 "JJ" = (
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/grass/yel,
@@ -7366,6 +7344,19 @@
 	},
 /turf/open/floor/naturalstone,
 /area/outdoors/antag/lich)
+"KF" = (
+/obj/structure/table/wood/fancy/purple,
+/obj/item/clothing/neck/psycross/divine/noc,
+/obj/item/clothing/neck/psycross/divine/noc{
+	pixel_x = 22;
+	pixel_y = -4
+	},
+/obj/item/clothing/neck/psycross/divine/noc{
+	pixel_y = 12;
+	pixel_x = 8
+	},
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave)
 "KG" = (
 /obj/structure/door/window,
 /turf/open/floor/cobble,
@@ -7465,12 +7456,6 @@
 /obj/machinery/light/fueled/wallfire/candle/skull/r,
 /turf/open/floor/churchbrick,
 /area/overlord_lair)
-"Ln" = (
-/obj/structure/fluff/railing/border{
-	pixel_y = -7
-	},
-/turf/open/floor/ruinedwood/chevron,
-/area/indoors/admin_test)
 "Lo" = (
 /obj/item/clothing/head/helmet/leather/inquisitor,
 /obj/structure/mannequin/male,
@@ -7995,6 +7980,14 @@
 	},
 /turf/open/floor/tile/masonic/moonbw,
 /area/indoors/town/church/dreamcave)
+"Oa" = (
+/obj/structure/fluff/walldeco/moon{
+	pixel_y = -32
+	},
+/obj/structure/table/wood/fancy/purple,
+/obj/item/coin/silver/pile,
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave)
 "Oc" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade{
@@ -8410,6 +8403,10 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/antag/bandit_lair)
+"Qw" = (
+/obj/structure/chair/bench/coucha/redright,
+/turf/open/floor/hexstone,
+/area/indoors/admin_test)
 "Qx" = (
 /obj/structure/stairs{
 	dir = 8
@@ -9580,6 +9577,12 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/volcanic,
 /area/under/cavelava/acid)
+"Wb" = (
+/obj/structure/fluff/railing/border{
+	pixel_y = -7
+	},
+/turf/open/floor/ruinedwood/chevron,
+/area/indoors/admin_test)
 "Wc" = (
 /obj/item/clothing/shirt/dress/silkdress/colored/black,
 /obj/item/clothing/shoes/shortboots,
@@ -9791,6 +9794,13 @@
 "WZ" = (
 /turf/open/floor/metal/barograte,
 /area/outdoors/antag/lich)
+"Xc" = (
+/obj/machinery/light/fueled/torchholder/r,
+/obj/structure/fluff/railing/border{
+	pixel_y = -7
+	},
+/turf/open/floor/ruinedwood/chevron,
+/area/indoors/admin_test)
 "Xd" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/machinery/light/fueled/firebowl/stump,
@@ -9922,6 +9932,11 @@
 	},
 /turf/open/floor/grass/mixyel,
 /area/outdoors/antag/lich)
+"XL" = (
+/obj/structure/table/wood/fancy/purple,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave)
 "XN" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/dirt/road,
@@ -11494,7 +11509,7 @@ ZB
 Zy
 Qj
 KL
-qm
+mL
 Dz
 Dz
 DW
@@ -11761,7 +11776,7 @@ Sq
 Nd
 Xe
 Xe
-vR
+tp
 Xp
 bj
 gm
@@ -11902,7 +11917,7 @@ In
 QR
 NG
 yo
-yq
+uK
 Sq
 Es
 NU
@@ -16802,8 +16817,8 @@ eU
 eU
 eU
 eU
-dP
-kH
+rf
+Qw
 Ot
 Zb
 Ot
@@ -16932,7 +16947,7 @@ eU
 BW
 BW
 eU
-Ln
+Wb
 Ot
 Ot
 Ot
@@ -17062,7 +17077,7 @@ eU
 HX
 aK
 Fg
-Ln
+Wb
 rM
 rM
 ak
@@ -17452,7 +17467,7 @@ eU
 mO
 jn
 Fg
-Ln
+Wb
 rM
 ao
 rM
@@ -17582,7 +17597,7 @@ eU
 hD
 hD
 eU
-Ln
+Wb
 rM
 bt
 rM
@@ -17712,7 +17727,7 @@ eU
 eU
 eU
 eU
-sI
+Xc
 rM
 rM
 rM
@@ -25397,7 +25412,7 @@ ET
 SY
 XV
 SY
-JG
+Em
 SY
 XV
 SY
@@ -25406,7 +25421,7 @@ SY
 XV
 SY
 SY
-vu
+KF
 iA
 iA
 iA
@@ -25536,7 +25551,7 @@ SY
 SY
 SY
 SY
-qk
+Oa
 iA
 OV
 OV
@@ -25657,7 +25672,7 @@ Of
 SY
 WK
 SY
-JG
+Em
 SY
 WK
 SY
@@ -25666,7 +25681,7 @@ SY
 WK
 SY
 SY
-vu
+XL
 iA
 OV
 OV
@@ -25925,7 +25940,7 @@ Na
 iA
 td
 td
-td
+Nj
 iA
 IL
 Na

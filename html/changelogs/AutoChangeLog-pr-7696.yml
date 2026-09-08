@@ -1,0 +1,15 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added Bloodstone ore and rocks to Ore Sight."
+  - rscadd: "Curse Guard enchantment now protects from being poisoned by Blood Cursed items held in hand."
+  - rscadd: "Blood Curse now applies effects on a loop, no longer being dangerous only the first time it is held."
+  - rscadd: "Blood Sorcerer can now take apprentices and teach them Blood Magic."
+  - rscadd: "Dark Secrets be special trait now only provides partial protection from Blood Curse."
+  - rscadd: "Blood Mark spell can now be used to protect from Blood Curse (Shift-G to change modes)."
+  - rscadd: "Blood Pearls can now be sealed once full of Vitae, and become a crafting component."
+  - bugfix: "Fixed a bug with Create Blood Poison."
+  - rscadd: "Changed the invocation for blood bolt, and projectile name for the non-blood-blood bolt."
+  - rscadd: "Using Dark Whispers now tells you in chat what you said to someone for reference."
+  - rscadd: "Made using Blood Magic spells without formal training use more Vitae than it otherwise would."
+  - rscadd: "Added initial framework for Blood Magic apprenticeship.\n:cl:\n<!-- Both :cl:'s are required for the changelog to work! You can put your name to the right of the first :cl: if you want to overwrite your GitHub username as author ingame. -->\n<!-- You can use multiple of the same prefix (they're only used for the icon ingame) and delete the unneeded ones. Despite some of the tags, changelogs should generally represent how a player might be affected by the changes rather than a summary of the PR's contents. -->\n## Pre-Merge Checklist\n<!-- Don't bother filling these in while creating your Pull Request, just click the checkboxes after the Pull Request is opened and you are redirected to the page. -->\n- [ ] You tested this on a local server.\n- [X] This code did not runtime during testing.\n- [X] You documented all of your changes.\n<!-- Neither the compiler nor workflow checks are perfect at detecting runtimes and errors. It is important to test your code/feature/fix locally. -->"

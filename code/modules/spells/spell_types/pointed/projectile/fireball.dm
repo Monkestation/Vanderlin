@@ -50,7 +50,7 @@
 	desc = "Shoot out an immense ball of fire that explodes on impact."
 	button_icon_state = "fireball_greater"
 
-	required_level = 3
+	required_level = 8
 
 	charge_time = 4 SECONDS
 	charge_drain = 2

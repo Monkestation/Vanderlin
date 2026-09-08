@@ -21,6 +21,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
 	antag_flags = FLAG_ANTAG_CAP_TEAM
+	innate_traits = list(TRAIT_BLOOD_SENSE, TRAIT_VITAE_USER)
 
 /datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()

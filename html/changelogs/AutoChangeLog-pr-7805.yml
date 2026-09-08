@@ -1,0 +1,4 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - image: "Changed the screen alert icon for blood mark and bloodsight"
