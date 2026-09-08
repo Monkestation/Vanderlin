@@ -74,6 +74,7 @@
 /obj/item/weapon/scabbard/knife/hidden
 	name = "concealed knife sheath"
 	desc = "A slim sheath made of leather designed to be strapped to the inside of one's wrist, meant to host surprises of smaller sizes."
+	slot_flags = ITEM_SLOT_WRISTS
 
 /obj/item/weapon/scabbard/knife/hidden/Initialize()
 	. = ..()
