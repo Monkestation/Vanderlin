@@ -144,6 +144,12 @@
 	use_mob_sprite_as_obj_sprite = FALSE
 	accessory_type = /datum/sprite_accessory/ears/elf
 
+/obj/item/organ/ears/goblin
+	name = "goblin ears"
+	icon_state = "ear_pointed"
+	use_mob_sprite_as_obj_sprite = FALSE
+	accessory_type = /datum/sprite_accessory/ears/goblin
+
 /obj/item/organ/ears/tiefling
 	name = "tiefling ears"
 	icon_state = "ear_pointed"

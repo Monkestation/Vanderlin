@@ -1495,6 +1495,7 @@ SUBSYSTEM_DEF(gamemode)
 		STATS_ALIVE_HALF_ELVES,
 		STATS_ALIVE_HALF_DROWS,
 		STATS_ALIVE_HALF_ORCS,
+		STATS_ALIVE_DWARF_ORCS,
 		STATS_ALIVE_KOBOLDS,
 		STATS_ALIVE_RAKSHARI,
 		STATS_ALIVE_AASIMAR,
@@ -1659,6 +1660,8 @@ SUBSYSTEM_DEF(gamemode)
 				record_round_statistic(STATS_ALIVE_MEDICATORS)
 			if(ishalfling(human_mob))
 				record_round_statistic(STATS_ALIVE_HALFLINGS)
+			if(isdwarforc(human_mob))
+				record_round_statistic(STATS_ALIVE_DWARF_ORCS)
 
 			// Chronicle statistics
 

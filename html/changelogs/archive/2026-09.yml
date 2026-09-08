@@ -126,3 +126,21 @@
   - bugfix: Fixed Kobold voices being overwritten by court wiz.
   - rscadd: Added medical guidebook to medicine focused roles that were missing it.
   - rscadd: Added a greyscale leather coat to triumph shop for dye purposes.
+2026-09-08:
+  TheDoktorZ:
+  - map: royal gardens and palace shifted & decoration tweaked
+  - map: contents & layout of the vault & keep armory changed
+  - map: added royal forge & second mount
+  realforest2001:
+  - rscadd: Added Hand, Court Physician and Archivist keys to the Lord's Apartment
+      key cabinet.
+  - rscadd: Added clinic keys to steward cabinet.
+  - rscadd: Added apothecary key to steward cabinet.
+  - rscdel: Removed Manor, gatehouse and man-at-arms keys from the steward cabinet
+      as they're kept elsewhere in the keep.
+  - map: Map sanity for variables and makes sure everything is saved as TGM
+  ta3754859-max:
+  - bugfix: Short-people now get proper aim zones when targeting another person
+  - rscadd: Playable half-orc half-dwarf species
+  - rscadd: Goblin ear sprites to half-orcs & dworcs
+  - rscadd: Consuming manflesh as a dwarf/halfling turns you into a dworc

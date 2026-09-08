@@ -44,3 +44,5 @@
 		/datum/sprite_accessory/snout/thin_beak/hookbeak,
 		/datum/sprite_accessory/snout/thin_beak/hookbeakbig,
 	)
+
+
