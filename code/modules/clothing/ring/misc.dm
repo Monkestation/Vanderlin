@@ -358,7 +358,6 @@
 	desc = "" // the description is handled upon examine.
 	pickpocket_difficulty = SKILL_RANK_EXPERT
 
-
 /obj/item/clothing/ring/apothecary_ring/examine(mob/user)
 	. = ..()
 	if(is_apothecary_job(user.mind.assigned_role))
@@ -369,6 +368,8 @@
 		. += "An uncomfortably heavy ring of thaumic iron. Specifically made for apothecaries upon graduation. \n \
 		This gives them the right to both extract and manipulate lux, so long as they follow Pestra's teachings."
 
+// ................... The Court Agent's ring .......................
+
 /obj/item/clothing/ring/courtagent_ring
 	name = "Finger's Crown"
 	icon_state = "ring_s_agent"
@@ -378,6 +379,7 @@
 	base_icon_state = "ring_s"
 	abstract_type = /obj/item/clothing/ring/courtagent_ring
 	var/metal_adjective = "silver"
+	var/mob/living/carbon/user_mob
 
 /obj/item/clothing/ring/courtagent_ring/silver/Initialize()
 	. = ..()
@@ -393,6 +395,65 @@
 	if(isobserver(user) || HAS_TRAIT(user, TRAIT_COURTAGENT) || get_dist(user, src) < 1)
 		return ..()
 	return ma2html(mutable_appearance(icon, base_icon_state), user)
+
+/obj/item/clothing/ring/courtagent_ring/equipped(mob/living/carbon/user, slot)
+	. = ..()
+	if(!ishuman(user) || !HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
+		return
+	if(slot & ITEM_SLOT_RING)
+		user_mob = user
+		GLOB.agent_rings += src
+	else
+		user_mob = null
+		GLOB.agent_rings -= src
+
+/obj/item/clothing/ring/courtagent_ring/dropped(mob/user)
+	. = ..()
+	user_mob = null
+	GLOB.agent_rings -= src
+
+/obj/item/clothing/ring/courtagent_ring/Destroy()
+	. = ..()
+	user_mob = null
+	GLOB.agent_rings -= src
+
+/obj/item/clothing/ring/courtagent_ring/MiddleClick(mob/user, list/modifiers)
+	if(.)
+		return
+	user.changeNext_move(CLICK_CD_MELEE)
+	if(!length(GLOB.agent_rings))
+		return
+	var/list/possible_targets = list("EVERYONE")
+	for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
+		if(ring.user_mob == user)
+			continue
+		possible_targets += ring.user_mob.real_name
+
+	var/chosen_target = tgui_input_list(user, "Who do you wish to contact?", "Contact Target", possible_targets, timeout = 20 SECONDS)
+	if(!chosen_target)
+		return
+	var/message = tgui_input_text(user, "What do you want to say?", "Message", timeout = 60 SECONDS)
+	if(!message)
+		return
+
+	if(chosen_target == "EVERYONE")
+		for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
+			if(ring.user_mob == user)
+				continue
+			ring.receive_message(message, user)
+		return
+
+	for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
+		if(ring.user_mob.real_name != chosen_target)
+			continue
+		ring.receive_message(message, user)
+		return
+
+/obj/item/clothing/ring/courtagent_ring/proc/receive_message(message, mob/living/carbon/user)
+	if(!user_mob)
+		return
+	to_chat(user_mob, span_notice("Agent Message received from [user.real_name]: '[span_blue(message)]'"))
+	user_mob.playsound_local(user_mob, 'sound/misc/mail.ogg', 100, FALSE, -1)
 
 /obj/item/clothing/ring/courtagent_ring/gold
 	icon_state = "ring_g_agent"
