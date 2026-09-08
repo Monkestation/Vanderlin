@@ -459,17 +459,10 @@
 		return "[desc]<br><br><b>Reason:</b> [reason]"
 	return "[desc]<br><br><b>Reason:</b> General heretical conduct."
 
-/datum/quirk/vice/suspicion/on_spawn()
-	if(!owner || !ishuman(owner))
+/datum/quirk/vice/suspicion/on_life(mob/living/user)
+	if(!ishuman(user))
 		return
-
-	var/mob/living/carbon/human/H = owner
-
-	GLOB.inquis_suspect_players |= H.real_name
-	to_chat(H, span_boldwarning("For reasons legitimate or not, I am hunted by the inquisition in this land..."))
-
+	var/mob/living/carbon/human/H = user
 	if(!logged && H.name)
 		log_hunted("[H.ckey] playing as [H.name] has the Inquisitorial Suspicion quirk.")
 		logged = TRUE
-
-	return ..()
