@@ -395,9 +395,11 @@
 	for(var/slot in SLOT_DISPLAY_PRIORITY)
 		if(obscured_slots & slot)
 			continue
-		var/obj/item/I = get_item_by_slot(slot)
-		if(I)
-			items[I] = slot
+		var/obj/item/the_item = get_item_by_slot(slot)
+		if(the_item)
+			if(HAS_TRAIT(the_item, TRAIT_CONCEALED_ITEM))
+				continue
+			items[the_item] = slot
 	return items
 
 /obj/item/proc/equip_to_best_slot(mob/M)

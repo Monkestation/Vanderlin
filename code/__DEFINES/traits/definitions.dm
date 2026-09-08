@@ -628,6 +628,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NEEDS_TWO_HANDS "needstwohands"
 /// This item can't be pickpocketed
 #define TRAIT_CANT_BE_STOLEN "cant_be_stolen"
+/// This item does not show on examine
+#define TRAIT_CONCEALED_ITEM "concealed_item"
 
 // **** turf traits
 ///Turf slowdown will be ignored when this trait is added to a turf.

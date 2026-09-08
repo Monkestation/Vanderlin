@@ -71,6 +71,20 @@
 	sellprice = 100
 	item_weight = 120 GRAMS
 
+/obj/item/weapon/scabbard/knife/hidden
+	name = "concealed knife sheath"
+	desc = "A slim sheath made of leather designed to be strapped to the inside of one's wrist, meant to host surprises of smaller sizes."
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/weapon/scabbard/knife/hidden/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_CONCEALED_ITEM, TRAIT_GENERIC)
+
+/obj/item/weapon/scabbard/knife/hidden/stiletto/Initialize()
+	. = ..()
+	new /obj/item/weapon/knife/dagger/steel/stiletto(src)
+	update_appearance(UPDATE_ICON_STATE)
+
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
 	desc = "A scabbard designed to hold a sword. The natural conclusion for those wishing to carry longblades."

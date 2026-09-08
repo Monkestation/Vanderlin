@@ -55,7 +55,7 @@
 	gloves = /obj/item/clothing/gloves/leather/phys
 	armor = /obj/item/clothing/shirt/robe/phys
 	neck = /obj/item/clothing/neck/phys
-	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard/stiletto
+	wrists = /obj/item/weapon/scabbard/knife/hidden/stiletto
 	belt = /obj/item/storage/belt/leather/black/courtagent
 	beltl = /obj/item/storage/fancy/ifak
 
