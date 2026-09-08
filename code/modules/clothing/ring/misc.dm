@@ -443,7 +443,7 @@
 	var/chosen_target = tgui_input_list(user, "Who do you wish to contact?", "Contact Target", possible_targets, timeout = 20 SECONDS)
 	if(!chosen_target)
 		return
-	var/message = tgui_input_text(user, "What do you want to say?", "Message", timeout = 60 SECONDS)
+	var/message = tgui_input_text(user, "What do you want to say?", "Message", encode = FALSE, timeout = 60 SECONDS)
 	if(!message)
 		return
 
