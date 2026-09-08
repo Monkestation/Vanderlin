@@ -396,6 +396,11 @@
 		return ..()
 	return ma2html(mutable_appearance(icon, base_icon_state), user)
 
+/obj/item/clothing/ring/courtagent_ring/get_mechanics_examine(mob/user)
+	. = ..()
+	if(HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
+		. += span_info("You can send messages to other agents by middle-clicking the ring while it is worn.")
+
 /obj/item/clothing/ring/courtagent_ring/equipped(mob/living/carbon/user, slot)
 	. = ..()
 	if(!ishuman(user) || !HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
@@ -420,6 +425,12 @@
 /obj/item/clothing/ring/courtagent_ring/MiddleClick(mob/user, list/modifiers)
 	if(.)
 		return
+	if(!HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
+		return
+	if(src != user.get_item_by_slot(ITEM_SLOT_RING))
+		to_chat(user, span_warning("You cannot use the message function when not wearing the ring!"))
+		return
+
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(!length(GLOB.agent_rings))
 		return
