@@ -58,6 +58,7 @@
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
+		/obj/item/reagent_containers/glass/bottle/stampoison = 1,
 	)
 
 /datum/job/advclass/courtagent/hitman/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
