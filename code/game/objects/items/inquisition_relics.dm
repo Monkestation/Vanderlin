@@ -954,6 +954,8 @@
 			user.visible_message(span_danger("[target] slips past [user]'s attempt to [src] them!"))
 			return
 		*/
+		if(target.cmode && !do_after(user, 3 SECONDS, target))
+			return
 		// THROAT TARGET RESTRICTION. HEAVILY REQUESTED.
 		if(user.zone_selected != "neck")
 			to_chat(user, span_warning("I need to wrap it around their throat."))
