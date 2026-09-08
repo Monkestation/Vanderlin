@@ -384,7 +384,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOBLE_BLOOD	"Noble Blooded"
 #define TRAIT_NOBLE_POWER	"Noble Authority"
 #define TRAIT_EMPATH "Empath"
-#define TRAIT_BREADY "Battleready"
+#define TRAIT_BATTLE_READY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
 #define TRAIT_THIEFSENSE "Thief-Sense"
 #define TRAIT_MEDIUMARMOR "Mail Training"

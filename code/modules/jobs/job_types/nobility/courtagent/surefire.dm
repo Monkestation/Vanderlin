@@ -44,7 +44,7 @@
 	beltl = /obj/item/gun/ballistic/powder/wheellock/puffer
 	beltr = /obj/item/ammo_holder/bullet/bullets
 	head = /obj/item/clothing/head/helmet/skullcap/grenzelhoft
-	armor = /obj/item/clothing/armor/cuirass/grenzelhoft //bad stats so they cna keep the strong armor
+	armor = /obj/item/clothing/armor/cuirass/grenzelhoft
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/reagent_containers/glass/bottle/aflask,

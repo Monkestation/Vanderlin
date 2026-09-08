@@ -3,8 +3,7 @@
 	tutorial = "Whether acquired by merit, shrewd negotiation or fulfilled bounties, \
 	you have found yourself under the underhanded employ of the Hand. \
 	Fulfill desires and whims of the court that they would rather not be publicly known. \
-	Your position is anything but secure, and any mistake can leave you disowned and charged like the petty criminal you are. \
-	Garrison and Court members know who you are."
+	Your position is anything but secure, and any mistake can leave you disowned and charged like the petty criminal you are."
 	department_flag = NOBLEMEN
 	job_flags = (JOB_EQUIP_RANK | JOB_SHOW_IN_CREDITS | JOB_NEW_PLAYER_JOINABLE)
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
@@ -71,14 +70,14 @@
 	spawned.select_equippable(player_client, rings, message = "Choose Your Ring", title = "COURT AGENT")
 
 /datum/attribute_holder/sheet/job/courtagent
-	clamped_adjustment = list(
-		/datum/attribute/skill/combat/unarmed = list(20, 20),
-		/datum/attribute/skill/combat/wrestling = list(20, 20),
-		/datum/attribute/skill/combat/knives = list(20, 20),
-		/datum/attribute/skill/misc/athletics = list(30, 30),
-		/datum/attribute/skill/misc/swimming = list(20, 20),
-		/datum/attribute/skill/misc/sneaking = list(30, 30),
-		/datum/attribute/skill/misc/climbing = list(30, 30),
-		/datum/attribute/skill/misc/lockpicking = list(30, 30),
-		/datum/attribute/skill/misc/stealing = list(30, 30),
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/sneaking = 30,
+		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/lockpicking = 30,
+		/datum/attribute/skill/misc/stealing = 30,
 	)

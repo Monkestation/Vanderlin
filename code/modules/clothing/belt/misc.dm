@@ -97,6 +97,12 @@
 	icon_state = "shalal"
 	sellprice = 5
 
+/obj/item/storage/belt/leather/shalal/courtagent
+	populate_contents = list(
+		/obj/item/storage/keyring/courtagent,
+		/obj/item/lockpickring/mundane,
+	)
+
 /obj/item/storage/belt/leather/black
 	name = "black belt"
 	icon_state = "blackbelt"

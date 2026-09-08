@@ -27,7 +27,7 @@
 	Now for steady pay, you aid the Hand and the Court in matters that the public had best not know about. \
 	Your targets are picked out, and you execute without question, as you always have done."
 	outfit = /datum/outfit/courtagent/ninja
-	allowed_races = list(SPEC_ID_ELF, SPEC_ID_HUMEN, SPEC_ID_HALF_ELF)
+	allowed_races = list(SPEC_ID_ELF, SPEC_ID_HUMEN, SPEC_ID_HALF_ELF, SPEC_ID_DROW, SPEC_ID_HALF_DROW)
 	category_tags = list(CTAG_COURTAGENT)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/courtagent/ninja
@@ -37,9 +37,10 @@
 	)
 
 	traits = list(
-		TRAIT_BREADY,
+		TRAIT_BATTLE_READY,
 		TRAIT_BLINDFIGHTING,
-		TRAIT_EXPERT_PARRY
+		TRAIT_EXPERT_PARRY,
+		TRAIT_UNDODGING
 	)
 	total_positions = 1
 	cmode_music = 'sound/music/cmode/Combat_Weird.ogg'
@@ -50,12 +51,14 @@
 	mask = /obj/item/clothing/face/shepherd/clothmask/colored/black
 	shirt = /obj/item/clothing/armor/regenerating/skin/easttats
 	belt = /obj/item/storage/belt/leather/knifebelt/black/east_steel
+	beltl = /obj/item/weapon/sword/katana/mulyeog
+	beltr = /obj/item/weapon/knife/dagger/steel/tanto
+	scabbards = list(/obj/item/weapon/scabbard/blackmeadow, /obj/item/weapon/scabbard/blackmeadow_dagger)
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/storage/keyring/courtagent = 1,
 		/obj/item/lockpickring/mundane = 1,
-		/obj/item/weapon/knife/dagger/steel = 1,
 	)
 
 /datum/outfit/courtagent/ninja/pre_equip(mob/living/carbon/human/H)
@@ -67,10 +70,3 @@
 	else
 		armor = /obj/item/clothing/armor/basiceast/captainrobe
 		shoes = /obj/item/clothing/shoes/rumaclan
-
-/datum/outfit/courtagent/ninja/post_equip(mob/living/carbon/human/H, visuals_only)
-	. = ..()
-	var/obj/item/weapon/sword/katana/mulyeog/blade = new(get_turf(src))
-	H.equip_to_appropriate_slot(blade)
-	var/obj/item/weapon/scabbard/blackmeadow/scabbard = new(get_turf(src))
-	H.equip_to_appropriate_slot(scabbard)

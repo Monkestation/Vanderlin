@@ -290,6 +290,11 @@
 	icon_state = "sdaggeralt"
 	desc = "A dagger of refined steel, and even more refined appearance."
 
+/obj/item/weapon/knife/dagger/steel/tanto
+	name = "steel tanto"
+	desc = "A dagger made of refined steel in a design from the far east."
+	icon_state = "eastdagger"
+
 /obj/item/weapon/knife/dagger/steel/royal
 	name = "decorated dagger"
 	icon_state = "gsdagger"
