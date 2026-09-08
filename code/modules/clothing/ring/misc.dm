@@ -447,6 +447,7 @@
 	if(!message)
 		return
 
+	user.whisper(message)
 	if(chosen_target == "EVERYONE")
 		for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
 			if(ring.user_mob == user)

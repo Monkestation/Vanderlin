@@ -46,6 +46,8 @@
 	outfit = /datum/outfit/nitewalker
 	patron = /datum/patron/divine/noc
 	innate_traits = list(
+		TRAIT_BLOOD_SENSE,
+		TRAIT_VITAE_USER,
 		TRAIT_HARDDISMEMBER,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_BLINDFIGHTING,

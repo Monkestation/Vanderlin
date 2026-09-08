@@ -20,7 +20,7 @@
 	)
 
 /datum/job/advclass/courtagent/dunewalker
-	title = "Dunewalker"
+	title = "Zalad Dunewalker"
 	tutorial = "You are one of the Hand's loyal Agents. \
 	Hailing from Zalad lands you are a master thief and unseen killer. \
 	In service to the Hand of Vanderlin following an unfortunate incident with an Emir back home, \
@@ -64,7 +64,7 @@
 			species.accent_language = species.get_accent(species.native_language)
 
 /datum/outfit/courtagent/dunewalker
-	name = "Dunewalker (Court Agent)"
+	name = "Zalad Dunewalker (Court Agent)"
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/shalal
 	gloves = /obj/item/clothing/gloves/angle
