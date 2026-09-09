@@ -32,7 +32,8 @@
 	)
 
 /datum/antagonist/vampire/lord/nitewalker
-	name = "The Nitewalker"
+	name = "The Nitewarden"
+	antag_hud_type = ANTAG_HUD_NITEWARDEN
 	confess_lines = list(
 		"HE KNOWS ALL!!",
 		"SILVER STILL STALKS THE NITE!!",
@@ -64,6 +65,19 @@
 	clan_selected = TRUE
 	default_clan = /datum/clan/nitewalker
 	allow_preference_switching = FALSE
+
+/datum/antagonist/vampire/nitewarden
+	name = "Niteguard"
+	antag_hud_type = ANTAG_HUD_NITEWARDEN
+	isgoodguy = TRUE
+	roundend_category = "Nitewardens"
+	antagpanel_category = "Nitewarden"
+	antag_memory = "Protect those who walk the nite.\n\
+		The dark creachers are always present.\n\
+		Serve The Moon or the dae will break you."
+	antag_flags = FLAG_FAKE_ANTAG
+	clan_selected = TRUE
+	default_clan = /datum/clan/nitewalker
 
 /datum/antagonist/vampire/lord/nitewalker/on_gain()
 	var/mob/living/carbon/human/blade = owner.current
