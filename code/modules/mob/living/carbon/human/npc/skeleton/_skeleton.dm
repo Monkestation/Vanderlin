@@ -18,7 +18,7 @@
 	cmode_music = 'sound/music/cmode/antag/combatskeleton.ogg'
 	var/should_have_aggro = TRUE
 	headprice = 7
-	mob_biotypes = MOB_HUMANOID|MOB_ORGANIC|MOB_UNDEAD
+	mob_biotypes = MOB_UNDEAD
 
 /mob/living/carbon/human/species/skeleton/npc/no_equipment
 	skel_outfit = null
@@ -44,8 +44,6 @@
 	name = "skeleton"
 	real_name = "skeleton"
 	underwear = "Nude"
-	mob_biotypes = MOB_UNDEAD
-	add_faction(FACTION_UNDEAD)
 	if(length(quirks))
 		clear_quirks()
 	if(dna?.species)
@@ -72,6 +70,8 @@
 		TRAIT_NOBLOOD)
 		, SPECIES_TRAIT)
 	skeletonize(FALSE)
+	mob_biotypes = MOB_UNDEAD
+	add_faction(FACTION_UNDEAD)
 	if(skel_outfit)
 		var/datum/outfit/OU = new skel_outfit
 		if(OU)
