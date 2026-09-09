@@ -55,6 +55,8 @@
 		return span_boldnotice("A student of Blood Magic.")
 	if(istype(examined_datum, /datum/antagonist/blood_mage/mage))
 		return span_boldnotice("An established Blood Mage.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/occult))
+		return span_boldnotice("Someone who found forbidden knowledge...")
 
 /datum/antagonist/blood_mage/student
 	name = "Blood Magic Apprentice"
@@ -74,6 +76,7 @@
 	antag_hud_name = null
 	antag_hud_type = null
 	increase_votepwr = FALSE
+	isgoodguy = TRUE
 
 /datum/antagonist/blood_mage/occult/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	return
