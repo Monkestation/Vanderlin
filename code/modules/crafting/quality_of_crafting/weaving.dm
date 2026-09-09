@@ -819,3 +819,13 @@
 /datum/repeatable_crafting_recipe/sewing/weaving/rosahat/two
 	name = "courtly cloak"
 	output = /obj/item/clothing/cloak/rosa/two
+
+/datum/repeatable_crafting_recipe/sewing/weaving/rosamask
+	name = "ivory mask"
+	output = /obj/item/clothing/face/rosa
+	requirements = list(/obj/item/natural/silk = 2,
+				/obj/item/natural/cloth = 1,
+				/obj/item/alch/herb/rosa = 1
+	)
+	craftdiff = 5
+	category = "Mask"
