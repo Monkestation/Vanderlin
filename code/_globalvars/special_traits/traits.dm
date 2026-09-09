@@ -963,6 +963,7 @@
 	allowed_patrons = list(/datum/patron/godless/autotheist, /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/godless, /datum/patron/godless/naivety)
 	weight = 15 //Should be fine.
 	restricted_jobs = list(/datum/job/lord, /datum/job/monk, /datum/job/priest, /datum/job/templar)
+	restricted_traits = list(TRAIT_BLOOD_MAGE, TRAIT_BLOOD_SORCERER, TRAIT_BLOOD_STUDENT, TRAIT_VITAE_USER)
 
 /datum/special_trait/dark_secrets/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/dark_secrets)
