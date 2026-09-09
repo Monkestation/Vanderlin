@@ -427,6 +427,8 @@
 		return
 	if(!HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
 		return
+	if(user.stat)
+		return
 	if(src != user.get_item_by_slot(ITEM_SLOT_RING))
 		to_chat(user, span_warning("You cannot use the message function when not wearing the ring!"))
 		return
