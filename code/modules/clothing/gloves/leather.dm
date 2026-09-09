@@ -116,3 +116,47 @@
 	desc = "Lightweight leather gloves designed for fencers, they'll hopefully protect your fingers from stray blows."
 	icon_state = "fencergloves"
 	armor_type = /datum/armor/gloves/leather/fencer
+
+/obj/item/clothing/gloves/leather/rosa
+	name = "ivory gloves"
+	desc = "Finely crafted gloves from Wintermare, typically worn by their nobility."
+	icon_state = "rosagloves1"
+	icon = 'icons/roguetown/clothing/special/rosewood.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+
+/obj/item/clothing/gloves/leather/rosa/two
+	name = "scarlet gloves"
+	icon_state = "rosagloves2"
+
+/obj/item/clothing/gloves/leather/rosa/three
+	name = "velvet gloves"
+	icon_state = "rosagloves3"
+
+/obj/item/clothing/gloves/leather/rosa/four
+	name = "obsidian gloves"
+	icon_state = "rosagloves4"
+
+/obj/item/clothing/gloves/leather/rosa/five
+	name = "sable gloves"
+	icon_state = "rosagloves5"
+
+/obj/item/clothing/gloves/leather/rosa/six
+	name = "maroon gloves"
+	icon_state = "rosagloves6"
+
+/obj/item/clothing/gloves/leather/rosa/seven
+	name = "regal gloves"
+	icon_state = "rosagloves7"
+
+/obj/item/clothing/gloves/leather/rosa/eight
+	name = "courtly gloves"
+	icon_state = "rosagloves8"
+
+/obj/item/clothing/gloves/leather/rosa/nine
+	name = "royal gloves"
+	icon_state = "rosagloves9"
+
+/obj/item/clothing/gloves/leather/rosa/ten
+	name = "stately gloves"
+	icon_state = "rosagloves10"
