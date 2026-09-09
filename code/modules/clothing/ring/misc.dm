@@ -453,6 +453,10 @@
 	if(!message)
 		return
 
+	if(!user.can_speak_vocal())
+		to_chat(user, span_warning("You cannot communicate with your ring whilst unable to speak!"))
+		return
+
 	user.whisper(message)
 
 	log_game("COURT AGENT: [key_name(user)] sent a court-agent ring message. '[message]'")
