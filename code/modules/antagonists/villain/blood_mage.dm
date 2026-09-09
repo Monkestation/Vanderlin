@@ -7,10 +7,20 @@
 	increase_votepwr = TRUE
 	antag_hud_type = ANTAG_HUD_BLOOD_MAGE
 	antag_hud_name = "bloodmage"
+	confess_lines = list(
+		"BLOOD IS POWER!",
+		"YOUR VITAE IS MINE!",
+		"LIFE AND DEATH IS IN MY HANDS!",
+	)
 
 /datum/antagonist/blood_mage/sorcerer
 	name = "Blood Sorcerer"
 	antag_hud_name = "bloodsorc"
+	confess_lines = list(
+		"THE POWER OF THE ANCIENTS!",
+		"NO GOD CAN CLAIM MY POWER!",
+		"BLOOD IS MY LEGACY!",
+	)
 
 /datum/antagonist/blood_mage/student
 	name = "Blood Magic Apprentice"
