@@ -1,4 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - map: "Map sanity for variables and makes sure everything is saved as TGM"

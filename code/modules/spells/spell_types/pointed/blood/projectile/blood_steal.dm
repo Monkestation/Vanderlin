@@ -52,6 +52,7 @@
 	current_mode = (current_mode % length(modes)) + 1
 	apply_mode(current_mode)
 	to_chat(user, span_notice("[name]: [modes[current_mode]["name"]] mode. (Drain [vitae_drain] VTR and [blood_drain_perc]% blood for [spell_cost] Vitae)"))
+	user.balloon_alert(user, modes[current_mode]["name"])
 
 /datum/action/cooldown/spell/projectile/blood_steal/proc/update_mode_maptext(tag)
 	for(var/datum/hud/hud as anything in viewers)
@@ -76,9 +77,11 @@
 	var/did_something = FALSE
 
 	var/blood_adjustment = target.default_blood_volume * (blood_drain_perc/100)
-	var/safe_to_take_blood = (firer.blood_volume == (BLOOD_VOLUME_SAFE_MAXIMUM - blood_adjustment))
+	var/safe_to_take_blood = (firer.blood_volume <= (BLOOD_VOLUME_SAFE_MAXIMUM - blood_adjustment))
 
-	if(safe_to_take_blood && (target.blood_volume > (blood_adjustment + BLOOD_VOLUME_SURVIVE)))
+	if(!safe_to_take_blood)
+		to_chat(firer, span_bloody("It is not safe for you to have any more blood in your body."))
+	else if(target.blood_volume > (blood_adjustment + BLOOD_VOLUME_SURVIVE))
 		target.adjust_blood_volume(-blood_adjustment)
 		firer.adjust_blood_volume(blood_adjustment)
 		to_chat(firer, span_bloody("You replenish your own blood from [target]."))
@@ -91,7 +94,7 @@
 		target.adjust_bloodpool(-true_drain)
 		firer.adjust_bloodpool(true_drain)
 		to_chat(firer, span_bloody("You drain [true_drain] VTR from [target]."))
-		if(HAS_TRAIT(target, TRAIT_VITAE_USER) || HAS_TRAIT(target, TRAIT_BLOOD_SENSE))
+		if(HAS_TRAIT(target, TRAIT_VITAE_USER) || HAS_TRAIT(target, TRAIT_BLOOD_SENSE) || HAS_TRAIT(target, TRAIT_BLOOD_STUDENT))
 			to_chat(target, span_bloody("[firer] has drained some of your Vitae!"))
 	else
 		to_chat(firer, span_bloody("[target] does not have any Vitae to steal!"))

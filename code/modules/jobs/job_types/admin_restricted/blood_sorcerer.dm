@@ -11,6 +11,8 @@
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/blood = 60,
 		/datum/attribute/skill/misc/medicine = 40,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/sewing/mending = 30,
 	)
 
 /datum/job/admin/blood_sorcerer
@@ -20,13 +22,16 @@
 	allowed_races = RACES_PLAYER_ALL
 	allowed_patrons = list(/datum/patron/godless/dystheist, /datum/patron/godless/autotheist, /datum/patron/godless/godless, /datum/patron/godless/defiant, /datum/patron/godless/galadros)
 	outfit = /datum/outfit/admin/blood_sorcerer
-	cmode_music = 'sound/music/cmode/antag/CombatLich.ogg'
+	cmode_music = 'sound/music/cmode/antag/combat_deadlyshadows.ogg'
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	technique_points = 14
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage
+	attribute_sheet = /datum/attribute_holder/sheet/job/blood_sorcerer
+
+	antag_job = TRUE
+	antag_role = /datum/antagonist/blood_mage/sorcerer
 
 	magic_user = TRUE
 	knows_the_town = TRUE
@@ -57,6 +62,7 @@
 	)
 
 	spells = list(
+		/datum/action/cooldown/spell/undirected/list_target/teach_blood_magic,
 		/datum/action/cooldown/spell/status/blood_sight,
 		/datum/action/cooldown/spell/projectile/blood_steal,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
@@ -67,8 +73,8 @@
 	. = ..()
 
 	var/static/list/selectablehat = list(
-		"Blood Red hood (Discreet)" = /obj/item/clothing/head/roguehood/colored/blood,
-		"Enhanced Blood Red hood (Obvious)" = /obj/item/clothing/head/roguehood/colored/blood/enhanced,
+		"Bloodweave hood (Obvious)" = /obj/item/clothing/head/roguehood/bloodweave,
+		"Blood Red hood" = /obj/item/clothing/head/roguehood/colored/blood,
 		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
 		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
 		"Magus hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/magus,
@@ -76,8 +82,9 @@
 	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "BLOOD SORCERER")
 
 	var/static/list/selectablerobe = list(
-		"Blood Red robes (Discreet)" = /obj/item/clothing/shirt/robe/colored/blood,
-		"Enhanced Blood Red robes (Obvious)" = /obj/item/clothing/shirt/robe/colored/blood/enhanced,
+		"Bloodweave robes (Obvious)" = /obj/item/clothing/shirt/robe/bloodweave,
+		"Blood Red robes" = /obj/item/clothing/shirt/robe/colored/blood,
+		"Blood Red coat" = /obj/item/clothing/armor/leather/jacket/leathercoat/colored/blood,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
 		"Magus robes" = /obj/item/clothing/shirt/robe/magus
@@ -89,13 +96,17 @@
 	spawned.maxbloodpool += 1000
 	spawned.set_bloodpool(2500)
 
+	for(var/datum/mind/found_mind in get_minds(JOB_ADMIN_BLOOD_SORCERER))
+		spawned.mind?.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Blood Mage"))
+		spawned.mind?.share_identities(found_mind)
+
 /datum/outfit/admin/blood_sorcerer
-	name = "Blood Sorcerer"
+	name = JOB_ADMIN_BLOOD_SORCERER
 	pants = /obj/item/clothing/pants/trou/leather/advanced
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	neck = /obj/item/clothing/neck/gorget
 	cloak = /obj/item/clothing/cloak/half/colored/blood
-	shirt = /obj/item/clothing/shirt/tunic/colored
 	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
 	gloves = /obj/item/clothing/gloves/leather/advanced
 	ring = /obj/item/clothing/ring/gold/rontz
@@ -108,4 +119,5 @@
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 		/obj/item/reagent_containers/glass/bottle/strongbloodpot = 1,
 		/obj/item/storage/belt/pouch/coins/mid = 1,
+		/obj/item/needle = 1,
 	)
