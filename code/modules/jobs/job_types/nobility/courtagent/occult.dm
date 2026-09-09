@@ -47,6 +47,8 @@
 		/datum/action/cooldown/spell/blood_poison,
 	)
 	book_type = /obj/item/recipe_book/arcyne
+	antag_job = TRUE
+	antag_role = /datum/antagonist/blood_mage/occult
 
 /datum/job/advclass/courtagent/occult/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
