@@ -422,10 +422,10 @@
 	user_mob = null
 	GLOB.agent_rings -= src
 
-/obj/item/clothing/ring/courtagent_ring/MiddleClick(mob/user, list/modifiers)
+/obj/item/clothing/ring/courtagent_ring/MiddleClick(mob/living/carbon/user, list/modifiers)
 	if(.)
 		return
-	if(!HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
+	if(!isliving(user) || !HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
 		return
 	if(user.stat)
 		return
