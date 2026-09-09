@@ -39,7 +39,7 @@
 	var/blood_restored = blood_restoration
 
 	cast_on.visible_message(span_info("[cast_on]'s blood reacts to strange forces!"), span_notice("My blood feels like its boiling and pulsing!"))
-	if((cast_on != owner) && (cast_on.mind?.has_antag_datum(/datum/antagonist/vampire) || HAS_TRAIT(cast_on, TRAIT_BLOOD_MAGE) || HAS_TRAIT(cast_on, TRAIT_BLOOD_SORCERER)))
+	if((cast_on != owner) && HAS_TRAIT(cast_on, TRAIT_VITAE_USER) && !HAS_TRAIT(cast_on, TRAIT_BLOOD_STUDENT))
 		to_chat(owner, span_bloody("My blood mending is stronger upon a master of Vitae!"))
 		amount_healed *= 2
 		blood_restored *= 1.5

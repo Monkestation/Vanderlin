@@ -1,7 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Added Hand, Court Physician and Archivist keys to the Lord's Apartment key cabinet."
-  - rscadd: "Added clinic keys to steward cabinet."
-  - rscadd: "Added apothecary key to steward cabinet."
-  - rscdel: "Removed Manor, gatehouse and man-at-arms keys from the steward cabinet as they're kept elsewhere in the keep."

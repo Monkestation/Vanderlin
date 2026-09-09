@@ -1611,6 +1611,11 @@
 	},
 /turf/open/floor/carpet,
 /area/overlord_lair)
+"gu" = (
+/obj/structure/table/wood/fancy/purple,
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/turf/open/floor/tile/masonic/inverted,
+/area/indoors/town/church/dreamcave)
 "gx" = (
 /turf/closed/wall/mineral/decowood,
 /area)
@@ -3424,6 +3429,7 @@
 	pixel_y = -32
 	},
 /obj/structure/table/wood/fancy/purple,
+/obj/item/coin/silver/pile,
 /turf/open/floor/tile/masonic/inverted,
 /area/indoors/town/church/dreamcave)
 "qm" = (
@@ -4504,6 +4510,15 @@
 /area/indoors/antag/bandit_lair)
 "vu" = (
 /obj/structure/table/wood/fancy/purple,
+/obj/item/clothing/neck/psycross/divine/noc,
+/obj/item/clothing/neck/psycross/divine/noc{
+	pixel_x = 22;
+	pixel_y = -4
+	},
+/obj/item/clothing/neck/psycross/divine/noc{
+	pixel_y = 12;
+	pixel_x = 8
+	},
 /turf/open/floor/tile/masonic/inverted,
 /area/indoors/town/church/dreamcave)
 "vz" = (
@@ -7203,7 +7218,7 @@
 /area/outdoors/antag/vampire_manor)
 "JG" = (
 /obj/structure/fluff/walldeco/moon,
-/turf/open/floor/tile/masonic/inverted,
+/turf/closed/wall/mineral/underbrick/moonstone,
 /area/indoors/town/church/dreamcave)
 "JJ" = (
 /obj/structure/flora/ausbushes/ppflowers,
@@ -25672,7 +25687,7 @@ SY
 WK
 SY
 SY
-vu
+gu
 iA
 OV
 OV
@@ -25931,7 +25946,7 @@ Na
 iA
 td
 td
-td
+Nj
 iA
 IL
 Na

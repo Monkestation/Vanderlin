@@ -126,3 +126,72 @@
   - bugfix: Fixed Kobold voices being overwritten by court wiz.
   - rscadd: Added medical guidebook to medicine focused roles that were missing it.
   - rscadd: Added a greyscale leather coat to triumph shop for dye purposes.
+2026-09-08:
+  TheDoktorZ:
+  - map: royal gardens and palace shifted & decoration tweaked
+  - map: contents & layout of the vault & keep armory changed
+  - map: added royal forge & second mount
+  realforest2001:
+  - rscadd: Added Hand, Court Physician and Archivist keys to the Lord's Apartment
+      key cabinet.
+  - rscadd: Added clinic keys to steward cabinet.
+  - rscadd: Added apothecary key to steward cabinet.
+  - rscdel: Removed Manor, gatehouse and man-at-arms keys from the steward cabinet
+      as they're kept elsewhere in the keep.
+  - map: Map sanity for variables and makes sure everything is saved as TGM
+  ta3754859-max:
+  - bugfix: Short-people now get proper aim zones when targeting another person
+  - rscadd: Playable half-orc half-dwarf species
+  - rscadd: Goblin ear sprites to half-orcs & dworcs
+  - rscadd: Consuming manflesh as a dwarf/halfling turns you into a dworc
+2026-09-09:
+  realforest2001:
+  - rscadd: Added Bloodstone ore and rocks to Ore Sight.
+  - rscadd: Curse Guard enchantment now protects from being poisoned by Blood Cursed
+      items held in hand.
+  - rscadd: Blood Curse now applies effects on a loop, no longer being dangerous only
+      the first time it is held.
+  - rscadd: Blood Sorcerer can now take apprentices and teach them Blood Magic.
+  - rscadd: Dark Secrets be special trait now only provides partial protection from
+      Blood Curse.
+  - rscadd: Blood Mark spell can now be used to protect from Blood Curse (Shift-G
+      to change modes).
+  - rscadd: Blood Pearls can now be sealed once full of Vitae, and become a crafting
+      component.
+  - bugfix: Fixed a bug with Create Blood Poison.
+  - rscadd: Changed the invocation for blood bolt, and projectile name for the non-blood-blood
+      bolt.
+  - rscadd: Using Dark Whispers now tells you in chat what you said to someone for
+      reference.
+  - rscadd: Made using Blood Magic spells without formal training use more Vitae than
+      it otherwise would.
+  - rscadd: 'Added initial framework for Blood Magic apprenticeship.
+
+      :cl:
+
+      <!-- Both :cl:''s are required for the changelog to work! You can put your name
+      to the right of the first :cl: if you want to overwrite your GitHub username
+      as author ingame. -->
+
+      <!-- You can use multiple of the same prefix (they''re only used for the icon
+      ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
+      generally represent how a player might be affected by the changes rather than
+      a summary of the PR''s contents. -->
+
+      ## Pre-Merge Checklist
+
+      <!-- Don''t bother filling these in while creating your Pull Request, just click
+      the checkboxes after the Pull Request is opened and you are redirected to the
+      page. -->
+
+      - [ ] You tested this on a local server.
+
+      - [X] This code did not runtime during testing.
+
+      - [X] You documented all of your changes.
+
+      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
+      and errors. It is important to test your code/feature/fix locally. -->'
+  - image: Changed the screen alert icon for blood mark and bloodsight
+  - balance: Meteor Storm and Greater Fireball now require higher levels of fire form
+      to unlock.
