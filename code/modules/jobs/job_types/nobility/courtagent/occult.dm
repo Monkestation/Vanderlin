@@ -61,11 +61,11 @@
 	beltr = /obj/item/weapon/whip/steel
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/boots/darkboots
-	backr = /obj/item/storage/backpack/satchel
-	backl = /obj/item/weapon/polearm/woodstaff
+	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/mid = 1,
 		/obj/item/reagent_containers/glass/bottle/bloodpot = 1,
 		/obj/item/book/magicaltheory = 1,
 		/obj/item/recipe_book/arcyne = 1,
+		/obj/item/key/archive = 1,
 	)
