@@ -29,7 +29,7 @@
 	outfit = /datum/outfit/courtagent/crimson_blade
 	cmode_music = 'sound/music/cmode/adventurer/combat_vaquero.ogg'
 	total_positions = 1
-	roll_chance = 25
+	roll_chance = 100
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/courtagent/crimson_blade
 
