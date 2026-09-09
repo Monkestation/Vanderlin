@@ -54,3 +54,4 @@
 	beltl = /obj/item/weapon/sword/rapier
 	backl = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/storage/belt/pouch/coins/mid
+	scabbards = list(/obj/item/weapon/scabbard/sword)
