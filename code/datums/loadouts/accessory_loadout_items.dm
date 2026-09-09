@@ -77,42 +77,42 @@
 
 /datum/loadout_item/blacksteel_emerald
 	name = "Gemerald Ring of Blacksteel"
-	item_path = /obj/item/clothing/ring/emeraldbs
+	item_path = /obj/item/clothing/ring/emeraldbs/loadout
 	ui_category = "Accessories"
 	triumph_cost_permanent = 300
 	loadout_flags = LOADOUT_FLAG_NO_RENT
 
 /datum/loadout_item/blacksteel_ruby
 	name = "Rontz Ring of Blacksteel"
-	item_path = /obj/item/clothing/ring/rubybs
+	item_path = /obj/item/clothing/ring/rubybs/loadout
 	ui_category = "Accessories"
 	triumph_cost_permanent = 300
 	loadout_flags = LOADOUT_FLAG_NO_RENT
 
 /datum/loadout_item/blacksteel_topaz
 	name = "Toper Ring of Blacksteel"
-	item_path = /obj/item/clothing/ring/topazbs
+	item_path = /obj/item/clothing/ring/topazbs/loadout
 	ui_category = "Accessories"
 	triumph_cost_permanent = 300
 	loadout_flags = LOADOUT_FLAG_NO_RENT
 
 /datum/loadout_item/blacksteel_quartz
 	name = "Blortz Ring of Blacksteel"
-	item_path = /obj/item/clothing/ring/quartzbs
+	item_path = /obj/item/clothing/ring/quartzbs/loadout
 	ui_category = "Accessories"
 	triumph_cost_permanent = 300
 	loadout_flags = LOADOUT_FLAG_NO_RENT
 
 /datum/loadout_item/blacksteel_sapphire
 	name = "Saffira Ring of Blacksteel"
-	item_path = /obj/item/clothing/ring/sapphirebs
+	item_path = /obj/item/clothing/ring/sapphirebs/loadout
 	ui_category = "Accessories"
 	triumph_cost_permanent = 300
 	loadout_flags = LOADOUT_FLAG_NO_RENT
 
 /datum/loadout_item/blacksteel_diamond
 	name = "Dorpel Ring of Blacksteel"
-	item_path = /obj/item/clothing/ring/diamondbs
+	item_path = /obj/item/clothing/ring/diamondbs/loadout
 	ui_category = "Accessories"
 	triumph_cost_permanent = 300
 	loadout_flags = LOADOUT_FLAG_NO_RENT
