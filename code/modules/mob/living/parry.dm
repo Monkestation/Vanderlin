@@ -111,7 +111,7 @@
 			if(defender_dualwielding)
 				text += " Dual wield cancels out."
 			else
-				text += " Disadvantage! (score: [max(5, parry_score - 10)])"
+				text += " Disadvantage! (score: [max(5, parry_score - 10)]/100)"
 		to_chat(src, span_info("[text]"))
 
 	//disadvantage from attacker dual wielding lowers score by 2 if unmatched
