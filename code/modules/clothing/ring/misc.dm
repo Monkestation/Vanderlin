@@ -432,6 +432,10 @@
 	if(src != user.get_item_by_slot(ITEM_SLOT_RING))
 		to_chat(user, span_warning("You cannot use the message function when not wearing the ring!"))
 		return
+	/// Backup warning just in case it doesn't link, only happens if it is given in an outfit directly (sometimes).
+	if(!(src in GLOB.agent_rings))
+		to_chat(user, span_warning("[src] is not linked to other rings, take it off and try again!"))
+		return
 
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(!length(GLOB.agent_rings))
@@ -450,6 +454,8 @@
 		return
 
 	user.whisper(message)
+
+	log_game("COURT AGENT: [key_name(user)] sent a court-agent ring message. '[message]'")
 	if(chosen_target == "EVERYONE")
 		for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
 			if(ring.user_mob == user)
@@ -468,6 +474,7 @@
 		return
 	to_chat(user_mob, span_notice("Agent Message received from [user.real_name]: '[span_blue(message)]'"))
 	user_mob.playsound_local(user_mob, 'sound/misc/mail.ogg', 100, FALSE, -1)
+	log_game("COURT AGENT: [key_name(user_mob)] received a court-agent ring message from [key_name(user)].")
 
 /obj/item/clothing/ring/courtagent_ring/gold
 	icon_state = "ring_g_agent"

@@ -191,8 +191,8 @@
 
 /obj/item/clothing/ring/nitewalker
 	name = "nitewarden's ring"
-	icon_state = "bs_ring_ruby"
-	desc = "A ring of blacksteel with a shimmering rontz set within. It thrums with unseen power."
+	icon_state = "s_newring_ruby"
+	desc = "A ring of silver with a shimmering rontz set within. It thrums with unseen power."
 	sellprice = 500
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
