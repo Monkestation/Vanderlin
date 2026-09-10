@@ -16,7 +16,11 @@
 	cooldown_time = 2 MINUTES
 	spell_cost = 100
 
+	var/needs_cross = TRUE
+	/// How far away from a psycross one can be to cast this. Needs LOS.
+	var/max_cross_distance = 5
 	var/obj/structure/fluff/psycross/target_cross
+	var/luxless_allowed = FALSE
 
 /datum/action/cooldown/spell/revive/Destroy()
 	target_cross = null
@@ -39,7 +43,7 @@
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
 
-		if(cast_on.get_lux_status() != LUX_HAS_LUX)
+		if(!luxless_allowed && (cast_on.get_lux_status() != LUX_HAS_LUX))
 			to_chat(owner, span_warning("This filth cannot be revived by holy light!"))
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
@@ -56,18 +60,19 @@
 			return . | SPELL_CANCEL_CAST
 
 		if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
-			to_chat(owner, span_danger("[cast_on] is Blood Cursed! Permanently marked by Blood Magic, Divine Healing will never reach them again!"))
+			to_chat(owner, span_danger("[cast_on] is Blood Cursed! Marked by Blood Magic, Divine Healing is unable to reach them!"))
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
 
-	for(var/obj/structure/fluff/psycross/S in view(5, owner))
-		target_cross = S
-		break
+	if(needs_cross)
+		for(var/obj/structure/fluff/psycross/S in view(max_cross_distance, owner))
+			target_cross = S
+			break
 
-	if(!target_cross)
-		to_chat(owner, span_warning("I need a holy cross."))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
+		if(!target_cross)
+			to_chat(owner, span_warning("I need a holy cross."))
+			reset_spell_cooldown()
+			return . | SPELL_CANCEL_CAST
 
 /datum/action/cooldown/spell/revive/cast(mob/living/carbon/human/cast_on)
 	. = ..()
@@ -125,9 +130,11 @@
 	cooldown_time = 2 MINUTES
 	spell_cost = 100
 
+	var/needs_cross = TRUE
 	/// How far away from a psycross one can be to cast this. Needs LOS.
 	var/max_cross_distance = 5
 	var/obj/structure/fluff/psycross/target_cross
+	var/luxless_allowed = FALSE
 
 /datum/action/cooldown/spell/revive_noc/Destroy()
 	target_cross = null
@@ -161,7 +168,7 @@
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
 
-		if(cast_on.get_lux_status() != LUX_HAS_LUX)
+		if(!luxless_allowed && (cast_on.get_lux_status() != LUX_HAS_LUX))
 			to_chat(owner, span_warning("This filth cannot be revived by moonlight!"))
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
@@ -177,14 +184,20 @@
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
 
-	for(var/obj/structure/fluff/psycross/S in view(max_cross_distance, owner))
-		target_cross = S
-		break
+		if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+			to_chat(owner, span_danger("[cast_on] is Blood Cursed! Permanently marked by Blood Magic, Divine Healing will never reach them again!"))
+			reset_spell_cooldown()
+			return . | SPELL_CANCEL_CAST
 
-	if(!target_cross)
-		to_chat(owner, span_warning("I need a holy cross."))
-		reset_spell_cooldown()
-		return . | SPELL_CANCEL_CAST
+	if(needs_cross)
+		for(var/obj/structure/fluff/psycross/S in view(max_cross_distance, owner))
+			target_cross = S
+			break
+
+		if(!target_cross)
+			to_chat(owner, span_warning("I need a holy cross."))
+			reset_spell_cooldown()
+			return . | SPELL_CANCEL_CAST
 
 /datum/action/cooldown/spell/revive_noc/cast(mob/living/carbon/human/cast_on)
 	. = ..()
