@@ -99,7 +99,7 @@
 	var/defender_dualwielding = dual_wielding_check()
 
 	//balance caps
-	parry_score = clamp(parry_score, 5, 95)
+	parry_score = clamp(parry_score, 10, 95)
 
 	// Show roll info to defender
 	if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
