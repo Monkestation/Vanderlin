@@ -1457,7 +1457,7 @@
 // wintermare shoes
 
 /datum/repeatable_crafting_recipe/leather/rosashoes
-	name = "ivory gloves"
+	name = "ivory shoes"
 	requirements = list(
 		/obj/item/natural/hide/cured = 1,
 		/obj/item/natural/silk = 2
