@@ -45,6 +45,8 @@
 	bypass_lastclass = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/noble
 	advclass_cat_rolls = list(CTAG_MINOR_NOBLE = 20)

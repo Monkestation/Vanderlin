@@ -24,6 +24,8 @@
 	give_bank_account = 30
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	starting_wage = 30
 
 	job_bitflag = BITFLAG_GARRISON

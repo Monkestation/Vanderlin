@@ -27,6 +27,7 @@
 	with fire at your fingertips and racing across your blade you bring a burning death to the enemies of your master."
 	allowed_races = list(SPEC_ID_TIEFLING)
 	outfit = /datum/outfit/courtagent/crimson_blade
+	category_tags = list(CTAG_COURTAGENT)
 	cmode_music = 'sound/music/cmode/adventurer/combat_vaquero.ogg'
 	total_positions = 1
 	roll_chance = 100
