@@ -44,7 +44,7 @@
 	department_flag = NOBLEMEN
 	display_order = JDO_PHYSICIAN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -55,6 +55,8 @@
 	give_bank_account = 100
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 	spells = list(/datum/action/cooldown/spell/diagnose)
 	job_bitflag = BITFLAG_ROYALTY
@@ -89,7 +91,8 @@
 	backl = /obj/item/storage/backpack/satchel/surgbag
 	mask = /obj/item/clothing/face/courtphysician
 	belt = /obj/item/storage/belt/leather/black
-	beltl = /obj/item/storage/keyring/physician
+	wrists = /obj/item/storage/keyring/physician
+	beltl = /obj/item/storage/fancy/ifak
 	beltr = /obj/item/weapon/sword/rapier/caneblade/courtphysician
 	ring = /obj/item/clothing/ring/feldsher_ring
 	scabbards = list(/obj/item/weapon/scabbard/cane/courtphysician)

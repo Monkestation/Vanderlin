@@ -54,6 +54,7 @@
 	sharpness = IS_BLUNT
 	sellprice = 5
 	item_weight = 1 KILOGRAMS
+	weapon_special = /datum/special_intent/quarterstaff_sweep
 
 /obj/item/weapon/polearm/woodstaff/getonmobprop(tag)
 	. = ..()
@@ -163,6 +164,10 @@
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)
 
+/obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel/relic
+	name = "\proper remorse"
+	desc = "An ancient bloodsteel staff once wielded by the first mortal Blood Mage. You will learn remorse, and it will hurt."
+
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
 	desc = "A staff used by the rousman seers, mainly to protect themselves."
@@ -191,6 +196,7 @@
 	sellprice = 22
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_IRON
+	weapon_special = /datum/special_intent/polearm_backstep
 
 /obj/item/weapon/polearm/spear/getonmobprop(tag)
 	. = ..()
@@ -574,6 +580,15 @@
 	sellprice = 90
 	item_weight = 2.3 KILOGRAMS
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_STEEL
+	pickpocket_difficulty = SKILL_RANK_EXPERT
+	weapon_special = /datum/special_intent/polearm_backstep
+
+/obj/item/weapon/polearm/halberd/elvenglaive
+	name = "elven glaive"
+	desc = "A lightweight glaive crafted by elven smiths, designed to favor elegance and dexterity over brute strength."
+	icon_state = "glaive"
+	item_weight = 2.5 KILOGRAMS
+	gripsprite = FALSE
 
 /obj/item/weapon/polearm/halberd/silver
 	name = "silver halberd"
@@ -844,6 +859,7 @@
 	item_weight = 2 KILOGRAMS
 
 	weapon_special = /datum/special_intent/ground_smash
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/polearm/eaglebeak/getonmobprop(tag)
 	. = ..()

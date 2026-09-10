@@ -6,7 +6,7 @@
 	charge_sound = 'sound/magic/holycharging.ogg'
 
 	cast_range = 1
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/astrata)
@@ -52,6 +52,11 @@
 
 		if(HAS_TRAIT(cast_on, TRAIT_NECRA_CURSE))
 			to_chat(owner, span_warning("Necra holds tight to this one."))
+			reset_spell_cooldown()
+			return . | SPELL_CANCEL_CAST
+
+		if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+			to_chat(owner, span_danger("[cast_on] is Blood Cursed! Permanently marked by Blood Magic, Divine Healing will never reach them again!"))
 			reset_spell_cooldown()
 			return . | SPELL_CANCEL_CAST
 
@@ -110,7 +115,7 @@
 	charge_sound = 'sound/magic/holycharging.ogg'
 
 	cast_range = 1
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/noc)

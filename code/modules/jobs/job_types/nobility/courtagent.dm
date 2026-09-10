@@ -7,15 +7,15 @@
 	Garrison and Court members know who you are."
 	department_flag = NOBLEMEN
 	job_flags = (JOB_EQUIP_RANK | JOB_SHOW_IN_CREDITS | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 3
 	spawn_positions = 3
 	bypass_lastclass = TRUE
 
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	jobs_i_always_know = list(JOB_MONARCH, JOB_HAND, JOB_COURT_AGENT)
-	jobs_always_know_me = list(JOB_MONARCH, JOB_HAND, JOB_COURT_AGENT)
+	jobs_i_always_know = KNOW_COURT_AGENT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
@@ -60,7 +60,7 @@
 
 /datum/job/advclass/courtagent
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_COMBAT)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 
 /datum/job/advclass/courtagent/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -277,7 +277,7 @@
 	beltl = /obj/item/storage/magebag/poor
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
-		/obj/item/reagent_containers/glass/bottle/manapot = 1,
+		/obj/item/reagent_containers/glass/bottle/manapot/labelled = 1,
 		/obj/item/chalk = 1,
 		/obj/item/speaker/agent = 1,
 		/obj/item/listeningdevice/agent = 2

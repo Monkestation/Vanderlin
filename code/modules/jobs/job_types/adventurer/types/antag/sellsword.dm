@@ -55,7 +55,7 @@
 
 /datum/outfit/bandit/sellsword
 	name = "Sellsword (Bandit)"
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/bandit
 	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/armor/gambeson
 	shoes = /obj/item/clothing/shoes/boots/darkboots

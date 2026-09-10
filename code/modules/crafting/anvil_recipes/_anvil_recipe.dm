@@ -17,8 +17,9 @@
 	var/output_amount = 1
 	/// Difficulty of craft. Affects difficulty of minigame and amount of minigames.
 	var/craftdiff = 0
-	/// List of the object(s) we need to complete this recipe.
+	/// Typepaths of additional items consumed associated with how many are needed
 	var/list/additional_items
+	var/progress_multiplier = 1
 	/// What item we need to add to proceed to the next step. Draws from the list on var/additional_items.
 	var/obj/item/needed_item
 	/// 0 to 100%, percentage of completion on this step of crafting (or overall if no extra items required)
@@ -38,14 +39,14 @@
 /datum/anvil_recipe/New(datum/P, ...)
 	parent = P
 	if(parent)
+		if(length(additional_items))
+			for(var/thing in additional_items)
+				progress_multiplier += additional_items[thing]
 		process_parent(parent)
 	. = ..()
 
 /datum/anvil_recipe/Destroy(force, ...)
-	LAZYNULL(additional_items)
 	parent = null
-	required_material = null
-	created_item = null
 	return ..()
 
 /datum/anvil_recipe/proc/process_parent(parent)
@@ -77,31 +78,34 @@
 	var/progress_to_add = 100
 	switch(craftdiff)
 		if(0)
-			progress_to_add /= 2
+			progress_to_add /= 3
 		if(1)
-			progress_to_add /= 2
+			progress_to_add /= 3
 		if(2)
-			progress_to_add /= 3
+			progress_to_add /= 4
 		if(3)
-			progress_to_add /= 3
+			progress_to_add /= 4
 		if(4)
-			progress_to_add /= 4
-		if(5)
-			progress_to_add /= 4
-		if(6)
 			progress_to_add /= 5
+		if(5)
+			progress_to_add /= 5
+		if(6)
+			progress_to_add /= 6
 	// Progress scales based on additional_items to prevent multi-item recipes from taking too long
-	progress_to_add *= LAZYLEN(additional_items)+1
+	progress_to_add *= progress_multiplier
 	if(quality_score < MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
 		progress /= 2
 	progress += progress_to_add
 
 	if(progress >= 100)
 		if(length(additional_items))
-			needed_item = pick_n_take(additional_items)
+			needed_item = pick(additional_items)
+			additional_items[needed_item]--
+			if(additional_items[needed_item] <= 0)
+				additional_items -= needed_item
 			to_chat(user, span_notice("Now it's time to add \a [needed_item.name]."))
 			user.balloon_alert(user, "add \a [needed_item.name]!")
-			progress = 0
+			progress = progress % 100
 		else
 			to_chat(user, span_info("It's ready."))
 

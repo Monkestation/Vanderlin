@@ -2319,19 +2319,19 @@
 			// Mild heat stress - slight stamina drain
 			if(!H.temp_debuff_level || H.temp_debuff_level < 1)
 				H.temp_debuff_level = 1
-				H.adjust_hydration(-HUNGER_FACTOR * 0.5)
+				H.adjust_hydration(-H.total_nutriment_req * 0.5)
 		if(2)
 			H.throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/hot)
 			// Moderate heat stress - stamina drain + slight slowdown
 			if(!H.temp_debuff_level || H.temp_debuff_level < 2)
 				H.temp_debuff_level = 2
-				H.adjust_hydration(-HUNGER_FACTOR)
+				H.adjust_hydration(-H.total_nutriment_req)
 		if(3)
 			H.throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/hot)
 			// Severe heat stress - major stamina drain + significant slowdown
 			if(!H.temp_debuff_level || H.temp_debuff_level < 3)
 				H.temp_debuff_level = 3
-				H.adjust_hydration(-HUNGER_FACTOR * 2)
+				H.adjust_hydration(-H.total_nutriment_req * 2)
 
 /datum/species/proc/apply_cold_debuffs(mob/living/carbon/human/H, level, cold_deficit)
 	switch(level)

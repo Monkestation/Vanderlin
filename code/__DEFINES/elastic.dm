@@ -54,6 +54,7 @@
 	/* Medical */
 		#define ELASDATA_ANASTASIS_REVIVE "anastasis"
 		#define ELASDATA_LUNAR_ANASTASIS_REVIVE "lunar_anastasis"
+		#define ELASDATA_BLOODMAGIC_REVIVE "bloodmagic_anastasis"
 		#define ELASDATA_CPR_REVIVE "cpr"
 		#define ELASDATA_ABSOLVE_REVIVE "absolve"
 		#define ELASDATA_ULTIMATE_REVIVE "ultimate_sacrifice"

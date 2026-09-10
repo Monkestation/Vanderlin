@@ -227,10 +227,15 @@ DEFINE_BITFIELD(organ_flags, list(
 /// Normally 50% of the default blood volume (230cl)
 #define DEFAULT_TOTAL_BLOOD_REQ	BLOOD_VOLUME_NORMAL * 0.33
 #define DEFAULT_TOTAL_OXYGEN_REQ 50
-#define RATE_OF_HUNGER_GLOBAL HUNGER_FACTOR
-#define RATE_OF_THIRST_GLOBAL THIRST_FACTOR
-#define DEFAULT_TOTAL_NUTRIMENT_REQ	0.2
-#define DEFAULT_TOTAL_HYDRATION_REQ 0.2
+/// Base factor at which mob nutrition decreases
+#define DEFAULT_TOTAL_NUTRIMENT_REQ	0.05
+/// Base Factor at which mob hydration decreases
+#define DEFAULT_TOTAL_HYDRATION_REQ 0.05
+
+/// Global rate of hunger for all mobs; used to tinker with hunger rates, default is 1, 0.5 would be half, etc.
+GLOBAL_VAR_INIT(hunger_rate_mod, 1)
+/// Global rate of thirst for all mobs; used to tinker with thirst rates, default is 1, 0.5 would be half, etc
+GLOBAL_VAR_INIT(thirst_rate_mod, 1)
 
 // ~simple list of organs that come in pairs
 #define PAIRED_ORGAN_SLOTS list(ORGAN_SLOT_EYES, ORGAN_SLOT_EARS, ORGAN_SLOT_HORNS)

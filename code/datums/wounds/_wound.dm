@@ -306,7 +306,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /// Effects when a wound is gained on a bodypart
 /datum/wound/proc/on_bodypart_gain(obj/item/bodypart/affected)
 	if(bleed_rate && affected.bandage)
-		affected.bandage_expire() //new bleeding wounds always expire bandages, fuck you
+		affected.bandage_expire(silent = (affected.bandage.bandage_health <= 0)) //new bleeding wounds always expire bandages, fuck you
 	if(disabling && affected.can_be_disabled)
 		affected.update_disabled()
 

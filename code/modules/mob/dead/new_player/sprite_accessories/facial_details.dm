@@ -124,3 +124,27 @@
 /datum/sprite_accessory/detail/tattoo_eye_l
 	name = "Tattoo (l Eye)"
 	icon_state = "tattoo_eye_l"
+
+/datum/sprite_accessory/detail/warpaint_blue_stripes
+	name = "Striped Warpaint (Blue)"
+	icon_state = "warpaint_blue_stripes"
+
+/datum/sprite_accessory/detail/warpaint_red_stripes
+	name = "Striped Warpaint (Red)"
+	icon_state = "warpaint_red_stripes"
+
+/datum/sprite_accessory/detail/warpaint_green_stripes
+	name = "Striped Warpaint (Green)"
+	icon_state = "warpaint_green_stripes"
+
+/datum/sprite_accessory/detail/warpaint_purple_stripes
+	name = "Striped Warpaint (Purple)"
+	icon_state = "warpaint_purple_stripes"
+
+/datum/sprite_accessory/detail/warpaint_black_stripes
+	name = "Striped Warpaint (Black)"
+	icon_state = "warpaint_black_stripes"
+
+/datum/sprite_accessory/detail/eyebags
+	name = "Baggy Eyes"
+	icon_state = "eyebags"

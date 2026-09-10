@@ -15,6 +15,7 @@
 
 	grid_width = 64
 	grid_height = 32
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 	/// Maximum number of distinct spell slots
 	var/max_spells = 3
 	/// Minimum accepted spell tier

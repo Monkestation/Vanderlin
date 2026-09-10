@@ -11,7 +11,7 @@
 	current_blood = 10
 	blood_req = 1
 	oxygen_req = 2.5
-	nutriment_req = 0.75 * RATE_OF_HUNGER_GLOBAL
+	nutriment_req = 0.75
 
 	var/list/spans = null
 

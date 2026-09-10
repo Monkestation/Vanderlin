@@ -1,4 +1,0 @@
-author: "AnnoyingIncantation"
-delete-after: True
-changes:
-  - code_imp: "changed one line of code in heavy.dm to make the visor adjustable. Sprites already integrated in game"

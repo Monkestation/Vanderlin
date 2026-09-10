@@ -33,6 +33,8 @@
 	list("", "", "")\
 )
 
+#define CARGO_CRATE_VALUE 5
+
 #define SUPPLY_PRICE_FLOOR_MULT 0.5 // never cheaper than half of baseline
 #define SUPPLY_PRICE_CEILING_MULT 3.0 // never pricier than 3x baseline
 

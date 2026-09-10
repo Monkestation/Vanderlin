@@ -1296,7 +1296,7 @@
 /obj/item/clothing/gloves/chain/ancient,
 /obj/item/clothing/head/vampire,
 /obj/item/clothing/gloves/chain/ancient,
-/obj/item/clothing/armor/cuirass/vampire,
+/obj/item/clothing/armor/plate/ancient/vampire,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /obj/item/weapon/sword/khopesh,
 /obj/item/weapon/sword/sabre/shalal,

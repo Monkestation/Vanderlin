@@ -1183,7 +1183,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/structure/fluff/statue,
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors/church)
 "xT" = (

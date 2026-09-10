@@ -13,7 +13,7 @@
 	Sway these nonbelievers to the right path!"
 	allowed_races = RACES_PLAYER_GRENZ
 	outfit = /datum/outfit/pilgrim/preacher
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	total_positions = 1
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)

@@ -369,11 +369,16 @@
 
 /obj/item/clothing/armor/leather/jacket/leathercoat/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
+	icon_state = "leathercoat_greyscale"
 
 /obj/item/clothing/armor/leather/jacket/leathercoat/colored/wretchrenegade
 	name = "renegade's coat"
 	desc = "An insulated leather coat with capelets. It protects you well from the elements, a useful thing for those who like to wait in ambush."
 	color = CLOTHING_ASH_GREY
+	icon_state = "renegadecoat"
+
+/obj/item/clothing/armor/leather/jacket/leathercoat/colored/blood
+	color = COLOR_BLOOD_MAGIC
 
 /obj/item/clothing/armor/leather/studded/psyaltrist
 	name = "cuir-bouilli armor"

@@ -66,11 +66,19 @@
 	msg = emoji_parse(msg)
 	msg = parsemarkdown_basic(msg, limited = TRUE, barebones = TRUE)
 
-	mob.log_talk("LOOC: [msg]", LOG_LOOC)
+
+	var/prefix = "LOOC:"
+	if(isobserver(mob))
+		prefix = "LOOC: (GHOST):"
+	else if(mob.stat == DEAD)
+		prefix = "LOOC: (DEAD):"
+
+	mob.log_talk("[prefix] [msg]", LOG_LOOC)
 
 	var/list/mobs = list()
 	var/muted = prefs.muted
 	mobs += src
+
 	for(var/mob/hear_mob in range(7, get_turf(mob)))
 		var/added_text
 		var/client/mob_client = hear_mob.client
@@ -81,9 +89,9 @@
 			added_text += " ([mob.ckey]) <A href='byond://?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>\[MUTE\]</font></a>"
 
 		if(mob_client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_OOC)
-			to_chat(mob_client, "[span_looc("<b><span class='prefix'>LOOC:</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b>")]")
+			to_chat(mob_client, "[span_looc("<b><span class='prefix'>[prefix]</span> <EM>[src.mob.name][added_text]:</EM> <span class='message'>[msg]</span></b>")]")
 
 	for(var/client/admin_client in GLOB.admins)
 		if(admin_client in mobs)
 			continue
-		to_chat(admin_client, "[span_looc("<b><span class='prefix'>(R)LOOC:</span> <EM>[src.mob.name] ([mob.ckey]) <A href='byond://?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>MUTE</font></a>:</EM> <span class='message'>[msg]</span></b>")]")
+		to_chat(admin_client, "[span_looc("<b><span class='prefix'>(R)[prefix]</span> <EM>[src.mob.name] ([mob.ckey]) <A href='byond://?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_LOOC]'><font color='[(muted & MUTE_LOOC)?"red":"blue"]'>MUTE</font></a>:</EM> <span class='message'>[msg]</span></b>")]")

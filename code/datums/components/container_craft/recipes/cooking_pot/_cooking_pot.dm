@@ -124,7 +124,7 @@
 
 /datum/container_craft/cooking/after_craft(atom/created_output, obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
 	. = ..()
-	var/datum/reagent/found_product = crafter.reagents.get_reagent(created_reagent)
+	var/datum/reagent/found_product = crafter.reagents.has_reagent(created_reagent)
 	if(!found_product)
 		return
 
@@ -150,43 +150,6 @@
 		found_product.taste_description += extra_taste
 		LAZYADDASSOC(found_product.data, "custom_name", found_product.name)
 		LAZYADDASSOC(found_product.data, "custom_tastes", found_product.taste_description)
-
-	// Optionally modify reagent properties based on quality
-	apply_quality_effects_to_reagent(found_product)
-
-/**
- * Applies quality-based effects to the created reagent
- *
- * @param datum/reagent/reagent The reagent to modify
- */
-/datum/container_craft/cooking/proc/apply_quality_effects_to_reagent(datum/reagent/reagent)
-	if(!reagent)
-		return
-
-	var/reagent_quality = reagent.get_recipe_quality()
-	/*
-	// Modify reagent properties based on quality
-	switch(reagent.recipe_quality)
-		if(1) // Poor quality
-			reagent.metabolization_rate *= 1.2 // Metabolizes faster (less effective)
-
-		if(2) // Standard quality
-			EMPTY_BLOCK_GUARD // No modifications - baseline
-
-		if(3) // High quality
-			// High quality is more effective
-			reagent.metabolization_rate *= 0.9 // Metabolizes slower (more effective)
-
-		if(4) // Premium quality
-			// Premium quality is much more effective
-			reagent.metabolization_rate *= 0.75 // Metabolizes much slower (very effective)
-	*/
-	// Update description to reflect quality
-
-	// GLOB.food_quality_description[quality]
-	var/quality_desc = GLOB.food_quality_description[reagent_quality]
-	if(quality_desc && !findtext(reagent.description, quality_desc))
-		reagent.description += " The [LOWER_TEXT(reagent.name)] is of [quality_desc] quality."
 
 /datum/container_craft/cooking/extra_html()
 	var/html

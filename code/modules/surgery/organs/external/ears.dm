@@ -16,8 +16,8 @@
 	current_blood = 2.5
 	blood_req = 0.25
 	oxygen_req = 0.5
-	nutriment_req = 0.075 * RATE_OF_HUNGER_GLOBAL
-	hydration_req = 0.075 * RATE_OF_THIRST_GLOBAL
+	nutriment_req = 0.075
+	hydration_req = 0.075
 
 	low_threshold_passed = span_info("My ears begin to resonate with an internal ring sometimes.")
 	now_failing = span_warning("I am unable to hear at all!")
@@ -143,6 +143,12 @@
 	icon_state = "ear_pointed"
 	use_mob_sprite_as_obj_sprite = FALSE
 	accessory_type = /datum/sprite_accessory/ears/elf
+
+/obj/item/organ/ears/goblin
+	name = "goblin ears"
+	icon_state = "ear_pointed"
+	use_mob_sprite_as_obj_sprite = FALSE
+	accessory_type = /datum/sprite_accessory/ears/goblin
 
 /obj/item/organ/ears/tiefling
 	name = "tiefling ears"

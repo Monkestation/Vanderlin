@@ -3,6 +3,8 @@
 	mob_types = list(/mob/living/carbon/human)
 
 /datum/organ_process/spleen/needs_process(mob/living/carbon/owner)
+	if(owner.get_chem_effect(CE_BLOODRESTORE) > 0)
+		return TRUE
 	return (..() && !HAS_TRAIT(owner, TRAIT_NOHUNGER) && CAN_HAVE_BLOOD(owner))
 
 /datum/organ_process/spleen/handle_process(mob/living/carbon/owner, delta_time, times_fired)

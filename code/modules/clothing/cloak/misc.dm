@@ -142,6 +142,9 @@
 /obj/item/clothing/cloak/half/colored/red
 	color = CLOTHING_BLOOD_RED
 
+/obj/item/clothing/cloak/half/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
 /obj/item/clothing/cloak/half/vet
 	name = "town watch cloak"
 	icon_state = "guardcloak"

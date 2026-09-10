@@ -5447,7 +5447,7 @@
 /area/under/mountains/anvil/upper)
 "Rn" = (
 /obj/structure/table/vtable/v2,
-/obj/item/scrying,
+/obj/item/scrying/orb,
 /turf/open/floor/carpet/royalblack,
 /area/under/mountains/anvil/dungeon)
 "Rp" = (

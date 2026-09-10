@@ -389,6 +389,11 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 /datum/hud/proc/update_locked_slots()
 	return
 
+/datum/hud/proc/set_bloody_bloodpool()
+	shutdown_bloodpool()
+	initialize_bloodpool()
+	bloodpool.set_fill_color("#510000")
+
 /datum/hud/proc/initialize_bloodpool()
 	bloodpool = new /atom/movable/screen/bloodpool(null, src)
 	infodisplay += bloodpool

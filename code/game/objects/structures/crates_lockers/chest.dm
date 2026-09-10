@@ -7,7 +7,7 @@
 	drag_slowdown = 2
 	open_sound = 'sound/misc/chestopen.ogg'
 	close_sound = 'sound/misc/chestclose.ogg'
-	sellprice = 1 // crate recycling program
+	sellprice = CARGO_CRATE_VALUE // crate recycling program
 	max_integrity = 200
 	blade_dulling = DULLING_BASHCHOP
 	mob_storage_capacity = 1
@@ -175,10 +175,6 @@
 	name = "handcrafted chest"
 	icon_state = "chest_neu"
 	base_icon_state = "chest_neu"
-	sellprice = 6
-
-/obj/structure/closet/crate/crafted_closet/crafted
-	sellprice = 6
 
 //a chest with a corpse in it
 /obj/structure/closet/crate/chest/neu_iron/corpse/populate_contents()

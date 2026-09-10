@@ -50,6 +50,7 @@
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	sellprice = 50
 	item_weight = 600 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 //................ Bronze Whip ............... //
 /obj/item/weapon/whip/bronze
@@ -67,6 +68,7 @@
 	desc = "A pale corded whip with a bronze handle and tip, intended more as a ceremonial piece than a weapon it can still strike with deadly precision."
 	icon_state = "whip_butler"
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BRONZE * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 //................ Steel Whip ............... //
 /obj/item/weapon/whip/steel
@@ -197,6 +199,7 @@
 	force = DAMAGE_WHIP + 3
 	item_weight = 500 GRAMS
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BLACKSTEEL
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 //................ Chain Whip ............... //
 /obj/item/weapon/whip/chain
@@ -221,6 +224,7 @@
 	force = DAMAGE_WHIP + 4
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	item_weight = 500 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"

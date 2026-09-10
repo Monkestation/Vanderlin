@@ -16,8 +16,8 @@
 	max_blood_storage = 100
 	current_blood = 100
 	oxygen_req = 0.25
-	nutriment_req = 0.09 * RATE_OF_HUNGER_GLOBAL
-	hydration_req = 0.03 * RATE_OF_THIRST_GLOBAL
+	nutriment_req = 0.09
+	hydration_req = 0.03
 
 	/// How much blood we gush when torn. Multiplied by damage/maxHealth
 	var/blood_flow = ARTERIAL_BLOOD_FLOW
@@ -50,8 +50,6 @@
 	var/obj/item/bodypart/limb = owner.get_bodypart(current_zone)
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_mod *= grab.bleed_suppressing
-	if(limb.bandage)
-		bleed_mod *= limb.bandage.bandage_effectiveness
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		if(human_owner.physiology)
@@ -67,6 +65,8 @@
 			bleed_mod *= 1.5
 	var/final_bleed_rate = CEILING(blood_flow * bleed_mod * delta_time, 0.1)
 	if(final_bleed_rate <= 0)
+		return
+	if(limb.bandage && limb.try_bandage_expire(final_bleed_rate))
 		return
 	if(COOLDOWN_FINISHED(src, next_squirt))
 		squirt(final_bleed_rate)
@@ -124,10 +124,10 @@
 			break
 
 	var/unrestricted_flow = TRUE
-	if(LAZYLEN(limb.grabbedby) || limb.bandage)
+	if(LAZYLEN(limb.grabbedby))
 		unrestricted_flow = FALSE
 	if(unrestricted_flow || force)
-		if(open_wound && (owner.get_blood_circulation() >= amount) || force)
+		if((open_wound && (owner.get_blood_circulation() >= amount)) || force)
 			playsound(owner, squirt_sound, 75, 0)
 			owner.bleed(amount)
 			//owner.do_arterygush()

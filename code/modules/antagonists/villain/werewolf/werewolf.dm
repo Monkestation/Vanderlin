@@ -188,7 +188,7 @@
 	slot_flags = null
 	name = "werevolf's skin"
 	desc = ""
-	icon_state = null
+	color = "#3f3b2c"
 	body_parts_covered = FULL_BODY
 	resistance_flags = FIRE_PROOF
 	armor_type = /datum/armor/brigandine

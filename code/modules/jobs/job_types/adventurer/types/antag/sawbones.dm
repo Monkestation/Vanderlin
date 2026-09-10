@@ -53,6 +53,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/diagnose
 	)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/outfit/bandit/sawbones
 	name = "Sawbones (Bandit)"
@@ -60,7 +61,7 @@
 	head = /obj/item/clothing/head/tophat
 	armor = /obj/item/clothing/armor/leather/vest
 	shirt = /obj/item/clothing/shirt/shortshirt
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/bandit
 	beltr = /obj/item/weapon/knife/cleaver
 	pants = /obj/item/clothing/pants/trou
 	shoes = /obj/item/clothing/shoes/simpleshoes

@@ -102,7 +102,7 @@
 		return FALSE
 
 	var/skill_value = GET_MOB_SKILL_VALUE(user, working_material.anvilrepair)
-	if(skill_value <= 0)
+	if(skill_value < SKILL_RANK_NOVICE)
 		to_chat(user, span_warning("You don't know enough about this craft to restore [working_material]."))
 		return FALSE
 
@@ -120,10 +120,10 @@
 		return FALSE
 
 	if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
-		to_chat(item, span_warning("[working_material] needs to be heated first to be mended!"))
+		to_chat(user, span_warning("[working_material] needs to be heated first to be mended!"))
 		return FALSE
 	if(!HAS_TRAIT(item, TRAIT_NEEDS_QUENCH))
-		to_chat(item, span_warning("[item] needs to be heated first to be used as mending material!"))
+		to_chat(user, span_warning("[item] needs to be heated first to be used as mending material!"))
 		return FALSE
 
 	var/restores_done = working_material.integrity_restores
@@ -175,7 +175,7 @@
 
 	if(quality_score >= MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
 		var/recipe_skill = recipe.appro_skill
-		var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 1.5 // It would be impossible to level up otherwise
+		var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 1.6 // It would be impossible to level up otherwise
 		amt2raise *= user.get_learning_boon(recipe_skill)
 		if(HAS_TRAIT(user, TRAIT_MALUMFIRE) || GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
 			user.mind.add_sleep_experience(recipe_skill, amt2raise, FALSE)
@@ -229,7 +229,7 @@
 	if(!working_material || !HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH) || working_material.currecipe)
 		return
 
-	var/list/valid_types = list()
+	var/list/valid_recipes = list()
 	for(var/datum/anvil_recipe/recipe_instance as anything in GLOB.anvil_recipes)
 		var/datum/recipe_type = recipe_instance.type // necessary typecasting of type for macro
 		if(IS_ABSTRACT(recipe_type))
@@ -240,31 +240,28 @@
 			continue
 
 		var/recipe_category = recipe_instance.category
-		if(!valid_types[recipe_category])
-			valid_types[recipe_category] = list()
-		valid_types[recipe_category] += recipe_instance
+		if(!valid_recipes[recipe_category])
+			valid_recipes[recipe_category] = list()
+		valid_recipes[recipe_category] += recipe_instance
 
-	if(!length(valid_types))
+	if(!length(valid_recipes))
 		return
 
 	var/category_choice
-	if(length(valid_types) == 1)
-		category_choice = valid_types[1]
+	if(length(valid_recipes) == 1)
+		category_choice = valid_recipes[1]
 	else
-		category_choice = browser_input_list(user, "Choose a category", "Anvil", valid_types)
+		category_choice = browser_input_list(user, "Choose a category", "Anvil", valid_recipes)
 	if(!category_choice)
 		return
 
-	var/list/chosen_category = valid_types[category_choice]
+	var/list/chosen_category = valid_recipes[category_choice]
 	if(!length(chosen_category))
 		return
 
 	var/list/final_recipe_list = list()
 	for(var/datum/anvil_recipe/recipe_instance as anything in chosen_category)
-		var/modified_name = "[recipe_instance.name]"
-		if(recipe_instance.output_amount > 1)
-			modified_name += " ([recipe_instance.output_amount]x)"
-		final_recipe_list["[modified_name] \[[uppertext(SSskills.level_names_plain[recipe_instance.craftdiff])]\]"] = recipe_instance
+		final_recipe_list[GLOB.anvil_recipe_description[recipe_instance.type]] = recipe_instance
 
 	var/datum/chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortList(final_recipe_list))
 

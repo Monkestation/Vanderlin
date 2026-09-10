@@ -67,9 +67,6 @@
 	if(!istype(ghost))
 		return
 
-	if(istype(ghost, /mob/dead/observer/rogue/arcaneeye))
-		return
-
 	if(ghost.isinhell)
 		return
 

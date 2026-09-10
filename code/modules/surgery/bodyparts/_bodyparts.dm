@@ -214,7 +214,7 @@
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_ROTTEN), PROC_REF(on_rotten_trait_loss))
 
-	update_HP()
+	update_wounds()
 
 	if(is_robotic_limb())
 		ADD_TRAIT(src, TRAIT_NOPAIN, INNATE_TRAIT)
@@ -410,6 +410,11 @@
 
 	damage_multiplier = dam_mul
 
+	if(!is_organic_limb() || !owner)
+		return
+	// Convert max_damage increase from constitution into a damage reduction multiplier
+	damage_multiplier *= (max_damage / (max_damage * max(1, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10))))
+	damage_multiplier = round(damage_multiplier, 0.001)
 
 /obj/item/bodypart/proc/kill_limb()
 	if(!can_decay())
@@ -524,7 +529,7 @@
 	if(tourniquet) //this is always true, some might say a truth nuke.
 		. = TRUE
 	//else if.. else if.. so on.
-	else if(pain_dam >= DAMAGE_PRECISION)
+	if(pain_dam >= 0)
 		. = TRUE
 	else if(number_injuries)
 		. = TRUE
@@ -638,7 +643,6 @@
 			compatible_injury.open_injury(damage)
 			last_injury = compatible_injury
 			. = compatible_injury
-
 
 	// Creating NEW injury
 	if(!.)
@@ -938,15 +942,6 @@
 	if(lethal && owner && CAN_HAVE_BLOOD(owner))
 		owner.death()
 
-/obj/item/bodypart/proc/update_HP()
-	if(!is_organic_limb() || !owner)
-		return
-	var/old_max_damage = max_damage
-	var/new_max_damage = initial(max_damage) * max(1, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10))
-	if(new_max_damage != old_max_damage)
-		max_damage = new_max_damage
-
-
 /// Returns whether or not the bodypart can feel pain
 /obj/item/bodypart/proc/can_feel_pain()
 	if(CHECK_BITFIELD(limb_flags, BODYPART_DEAD))
@@ -1037,7 +1032,7 @@
 //Cannot apply negative damage
 /// DEPRECIATED PROC: Replace with bodypart_attacked_by
 /obj/item/bodypart/proc/receive_damage(brute = 0, burn = 0, blocked = 0, updating_health = TRUE, required_status = null, flashes = TRUE)
-	update_HP()
+	update_wounds()
 	var/hit_percent = (100-blocked)/100
 	if((!brute && !burn) || hit_percent <= 0)
 		return FALSE
@@ -1097,7 +1092,7 @@
 //Damage cannot go below zero.
 //Cannot remove negative damage (i.e. apply damage)
 /obj/item/bodypart/proc/heal_damage(brute, burn, updating_health = TRUE, forced = FALSE, required_status)
-	update_HP()
+	update_wounds()
 	if(!forced && required_status && (status != required_status)) //So we can only heal certain kinds of limbs, ie robotic vs organic.
 		return
 
@@ -1149,6 +1144,7 @@
 
 //Checks disabled status thresholds
 /obj/item/bodypart/proc/update_disabled()
+	update_wounds()
 	if(!owner)
 		return
 
@@ -1843,12 +1839,6 @@
 			internal_incision = slash
 			break
 	return internal_incision
-
-/obj/item/bodypart/proc/is_bandaged()
-	. = TRUE
-	for(var/datum/injury/injury in injuries)
-		if(!injury.is_bandaged())
-			return FALSE
 
 /obj/item/bodypart/proc/is_salved()
 	. = TRUE

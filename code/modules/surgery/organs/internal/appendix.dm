@@ -19,8 +19,8 @@
 	current_blood = 2.5
 	blood_req = 0.25
 	oxygen_req = 0.25
-	nutriment_req = 0.175 * RATE_OF_HUNGER_GLOBAL
-	hydration_req = 0.1 * RATE_OF_THIRST_GLOBAL
+	nutriment_req = 0.175
+	hydration_req = 0.1
 
 	var/inflamation_stage = 0
 

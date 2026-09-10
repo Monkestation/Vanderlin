@@ -470,7 +470,7 @@
 	metabolization_rate = 0.4 * REAGENTS_METABOLISM
 
 /datum/reagent/poison/bloodstone_essence/on_mob_life(mob/living/carbon/M, efficiency)
-	if(HAS_TRAIT(M, TRAIT_VITAE_USER))
+	if(HAS_TRAIT(M, TRAIT_VITAE_USER) || HAS_TRAIT(M, TRAIT_BLOOD_STUDENT))
 		M.remove_reagent(/datum/reagent/poison/bloodstone_essence, volume)
 		return
 	M.adjustOxyLoss(3 * efficiency, 0)

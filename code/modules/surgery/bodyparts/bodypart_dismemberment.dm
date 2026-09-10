@@ -157,9 +157,9 @@
 	return TRUE
 
 /obj/item/bodypart/head/dismember(dam_type, bclass, mob/living/user, zone_precise, forced)
-	. = ..()
-	if(HAS_TRAIT(owner, TRAIT_NODECAPITATE))
+	if(owner && HAS_TRAIT(owner, TRAIT_NODECAPITATE))
 		return FALSE
+	. = ..()
 
 	if(owner?.client)
 		add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_DECAPITATIONS, 1)

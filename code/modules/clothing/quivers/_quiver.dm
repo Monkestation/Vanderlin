@@ -12,6 +12,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
 	item_weight = 750 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	/// Max amount of ammo to hold
 	var/max_storage
 	/// Instances of ammo this contains

@@ -12,8 +12,7 @@
 /datum/organ_process/liver/handle_process(mob/living/carbon/owner, delta_time, times_fired)
 	var/liver_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_LIVER)
 	if(owner.stat == DEAD)
-		for(var/datum/reagent/R as anything in owner.reagents.reagent_list)
-			R.on_mob_dead(owner, delta_time)
+		. |= owner.reagents.metabolize(owner, can_overdose = TRUE, efficiency = liver_efficiency ? liver_efficiency : 100, health_update = FALSE)
 		return TRUE
 
 	var/obj/item/organ/liver/liver = owner.getorganslot(ORGAN_SLOT_LIVER)

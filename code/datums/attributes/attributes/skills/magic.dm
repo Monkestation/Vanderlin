@@ -14,8 +14,8 @@
 	)
 
 /datum/attribute/skill/magic/blood
-	name = "Blood Sorcery"
-	desc = "Represents your character's ability to perform blood magic. The higher your skill in Blood Sorcery, the more powerful your blood magic will be."
+	name = "Blood Magic"
+	desc = "Represents your character's ability to perform blood magic. The higher your skill in Blood Magic, the more powerful your blood magic will be."
 	governing_attribute = STAT_CONSTITUTION
 	default_attributes = list(
 		STAT_CONSTITUTION = -8,

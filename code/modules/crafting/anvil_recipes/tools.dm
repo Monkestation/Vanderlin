@@ -44,23 +44,23 @@
 ///////////////////////////////////////////////
 
 /datum/anvil_recipe/tools/copper/hoe
-	name = "Copper Hoe (+Stick x2)"
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	name = "Copper Hoe"
+	additional_items = list(/obj/item/grown/log/tree/stick = 2)
 	created_item = /obj/item/weapon/hoe/copper
 
 /datum/anvil_recipe/tools/copper/sickle
-	name = "Copper Sickle (+Stick)"
+	name = "Copper Sickle"
 	additional_items = list(/obj/item/grown/log/tree/stick)
 	created_item = /obj/item/weapon/sickle/copper
 
 /datum/anvil_recipe/tools/copper/pitchfork
-	name = "Copper Pitchfork (+Stick x2)"
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	name = "Copper Pitchfork"
+	additional_items = list(/obj/item/grown/log/tree/stick = 2)
 	created_item = /obj/item/weapon/pitchfork/copper
 
 /datum/anvil_recipe/tools/copper/pick
-	name = "Copper Pick (+Stick)"
-	additional_items = list(/obj/item/grown/log/tree/stick)
+	name = "Copper Pick"
+	additional_items = list(/obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/pick/copper
 
 /datum/anvil_recipe/tools/copper/lamptern
@@ -68,8 +68,8 @@
 	created_item = /obj/item/flashlight/flare/torch/lantern/copper
 
 /datum/anvil_recipe/tools/copper/hammer
-	name = "Copper Hammer (+Stick)"
-	additional_items = list(/obj/item/grown/log/tree/stick)
+	name = "Copper Hammer"
+	additional_items = list(/obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/hammer/copper
 
 /datum/anvil_recipe/tools/copper/pote
@@ -162,13 +162,13 @@
 	output_amount = 2
 
 /datum/anvil_recipe/tools/iron/hammer
-	name = "Hammer (+Stick)"
-	additional_items = list(/obj/item/grown/log/tree/stick)
+	name = "Hammer"
+	additional_items = list(/obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/hammer/iron
 
 /datum/anvil_recipe/tools/iron/hoe
-	name = "Hoe (+Stick x2)"
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	name = "Hoe"
+	additional_items = list(/obj/item/grown/log/tree/stick = 2)
 	created_item = /obj/item/weapon/hoe
 
 /datum/anvil_recipe/tools/iron/mantrap
@@ -182,13 +182,13 @@
 	craftdiff = 0
 
 /datum/anvil_recipe/tools/iron/pick
-	name = "Pick (+Stick)"
-	additional_items = list(/obj/item/grown/log/tree/stick)
+	name = "Pick"
+	additional_items = list(/obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/pick
 
 /datum/anvil_recipe/tools/iron/pitchfork
-	name = "Pitchfork (+Stick x2)"
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	name = "Pitchfork"
+	additional_items = list(/obj/item/grown/log/tree/stick = 2)
 	created_item = /obj/item/weapon/pitchfork
 
 /datum/anvil_recipe/tools/iron/sewingneedle
@@ -197,13 +197,13 @@
 	output_amount = 3 // They can be refilled with fiber now
 
 /datum/anvil_recipe/tools/iron/shovel
-	name = "Shovel (+Stick x2)"
-	additional_items = list(/obj/item/grown/log/tree/stick,/obj/item/grown/log/tree/stick)
+	name = "Shovel"
+	additional_items = list(/obj/item/grown/log/tree/stick = 2)
 	created_item = /obj/item/weapon/shovel
 
 /datum/anvil_recipe/tools/iron/sickle
-	name = "Sickle (+Stick)"
-	additional_items = list(/obj/item/grown/log/tree/stick)
+	name = "Sickle"
+	additional_items = list(/obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/sickle
 
 /datum/anvil_recipe/tools/iron/tongs
@@ -211,8 +211,8 @@
 	created_item = /obj/item/weapon/tongs
 
 /datum/anvil_recipe/tools/iron/torch
-	name = "Iron Torches (+Coal)"
-	additional_items = list(/obj/item/ore/coal)
+	name = "Iron Torches"
+	additional_items = list(/obj/item/ore/coal = 1)
 	created_item = /obj/item/flashlight/flare/torch/metal
 	output_amount = 5
 	craftdiff = 0
@@ -223,8 +223,8 @@
 	craftdiff = 1
 
 /datum/anvil_recipe/tools/iron/headhook
-	name = "Iron Headhook (+Fibers x2)"
-	additional_items = list(/obj/item/natural/fibers, /obj/item/natural/fibers)
+	name = "Iron Headhook"
+	additional_items = list(/obj/item/natural/fibers = 2)
 	created_item = /obj/item/storage/hip/headhook
 	craftdiff = 3
 
@@ -243,7 +243,7 @@
 	output_amount = 2
 
 /datum/anvil_recipe/tools/iron/cups
-	name = "Metal Cups"
+	name = "Metal Cups (iron)"
 	created_item = /obj/item/reagent_containers/glass/cup
 	output_amount = 3
 	craftdiff = 0
@@ -264,8 +264,8 @@
 	craftdiff = 0
 
 /datum/anvil_recipe/tools/iron/surgerytools
-	name = "Set of Surgery Tools (+Bar)"
-	additional_items = list(/obj/item/ingot/iron)
+	name = "Set of Surgery Tools"
+	additional_items = list(/obj/item/ingot/iron = 1)
 	created_item = /obj/item/surgeontoolspawner
 
 /datum/anvil_recipe/tools/iron/gravefence_iron
@@ -274,8 +274,8 @@
 	category = "Gravefences"
 
 /datum/anvil_recipe/tools/iron/headstone_malum
-	name = "Malumite Headstone (+Stone Blocks x2)"
-	additional_items = list(/obj/item/natural/stoneblock, /obj/item/natural/stoneblock)
+	name = "Malumite Headstone"
+	additional_items = list(/obj/item/natural/stoneblock = 2)
 	created_item = /obj/item/gravedecor/headstone/malum
 	category = "Headstones"
 
@@ -304,8 +304,8 @@
 	created_item = /obj/item/weapon/knife/scissors/steel
 
 /datum/anvil_recipe/tools/steel/pick
-	name = "Steel Pick (+Stick)"
-	additional_items = list(/obj/item/grown/log/tree/stick)
+	name = "Steel Pick"
+	additional_items = list(/obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/pick/steel
 
 /datum/anvil_recipe/tools/steel/gobletsteel
@@ -318,6 +318,13 @@
 	name = "Steel Chisel"
 	created_item = /obj/item/weapon/chisel
 	craftdiff = 1
+
+/datum/anvil_recipe/tools/steel/metalrepairkit
+	name = "Metal Repair Kit"
+	additional_items = list(/obj/item/ingot/steel = 1, /obj/item/ingot/iron = 1)
+	created_item = /obj/item/repair_kit/metal/half
+	output_amount = 2
+	craftdiff = SKILL_RANK_EXPERT
 
 // --------- SILVER -----------
 
@@ -391,7 +398,7 @@
 /datum/anvil_recipe/tools/casting/crucible
 	name = "Crucible"
 	required_material = /obj/item/ingot/steel
-	additional_items = list(/obj/item/ingot/steel)
+	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/storage/crucible
 
 /datum/anvil_recipe/tools/casting/ingot_mould

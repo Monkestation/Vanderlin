@@ -71,6 +71,7 @@
 	abstract_type = /datum/culture/species/half_orc
 	species = list(
 		SPEC_ID_HALF_ORC,
+		SPEC_ID_DWARF_ORC,
 	)
 	accent = ACCENT_HORC
 

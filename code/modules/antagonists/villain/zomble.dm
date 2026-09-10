@@ -183,7 +183,8 @@
 	zombie.mob_biotypes |= MOB_UNDEAD
 	zombie.add_faction(FACTION_UNDEAD)
 	zombie.remove_faction(list(FACTION_TOWN, FACTION_NEUTRAL))
-	zombie.mind.special_role = name
+	if(zombie.mind)
+		zombie.mind.special_role = name
 
 	zombie.base_intents = list(INTENT_DISARM, INTENT_GRAB, INTENT_HARM, /datum/intent/unarmed/claw)
 	zombie.update_a_intents()

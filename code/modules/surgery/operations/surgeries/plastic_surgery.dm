@@ -88,6 +88,7 @@
 
 	var/oldname = limb.owner.real_name
 	limb.owner.real_name = operation_args[OPERATION_NEW_NAME]
+	log_game("[key_name(surgeon)] used plastic surgery to rename [limb.owner.ckey] from [oldname] to [operation_args[OPERATION_NEW_NAME]].")
 
 	display_results(
 		surgeon,

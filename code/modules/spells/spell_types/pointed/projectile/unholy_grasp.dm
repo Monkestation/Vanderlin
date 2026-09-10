@@ -5,8 +5,8 @@
 	sound = 'sound/misc/stings/generic.ogg'
 	charge_sound = 'sound/magic/charging_lightning.ogg'
 
-	spell_type = SPELL_MIRACLE //it does count as one, funnily enough.
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE //it does count as one, funnily enough.
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 
 	invocation_type = INVOCATION_EMOTE

@@ -24,6 +24,7 @@
 	melt_amount = 50
 
 	material_category = ARMOR_MAT_CHAINMAIL
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/gloves/chain/psydon
 	name = "grenzelhoftian chain gauntlets"

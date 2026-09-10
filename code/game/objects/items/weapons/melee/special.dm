@@ -23,6 +23,7 @@
 	grid_height = 96
 	grid_width = 32
 	item_weight = 800 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/lordscepter/Initialize()
 	. = ..()
@@ -63,52 +64,63 @@
 /obj/item/weapon/lordscepter/afterattack(atom/target, mob/user, flag)
 	. = ..()
 	if(get_dist(user, target) > 7)
-		return
+		return FALSE
 	user.changeNext_move(CLICK_CD_MELEE)
 
 
-	if(ishuman(user))
-		var/mob/living/carbon/human/HU = user
+	if(!ishuman(user))
+		return FALSE
+	var/mob/living/carbon/human/human_user = user
 
-		if(!is_lord_job(HU.mind?.assigned_role))
-			to_chat(user, span_danger("The rod doesn't obey me."))
-			return
+	if(!is_lord_job(human_user.mind?.assigned_role))
+		to_chat(user, span_danger("The rod doesn't obey me."))
+		return FALSE
 
-		if(ishuman(target))
-			var/mob/living/carbon/human/H = target
+	if(!ishuman(target))
+		return FALSE
 
-			user.visible_message(span_warning("[user] points [src] at [target].</span>"))
+	var/mob/living/carbon/human/human_target = target
 
-			if(H == HU)
-				return
+	user.visible_message(span_warning("[human_user] points [src] at [human_target].</span>"))
 
-			if(H.can_block_magic(MAGIC_RESISTANCE))
-				return
+	if(human_target == human_user)
+		return FALSE
 
-			if(!(H.mind?.assigned_role.department_flag & GARRISON|NOBLEMEN))
-				return
+	if(human_target.can_block_magic(MAGIC_RESISTANCE))
+		return FALSE
 
-			if(!COOLDOWN_FINISHED(src, scepter))
-				to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, scepter) / 10, 1)] seconds left!"))
-				return
+	var/pass = FALSE
+	var/area/target_area = get_area(human_target)
+	if(istype(target_area, /area/indoors/town/keep) || istype(target_area, /area/outdoors/town/keep))
+		pass = TRUE
+	else if(human_target.has_faction(SUB_FACTION_KEEP))
+		pass = TRUE
 
-			if(istype(user.used_intent, /datum/intent/lord_electrocute))
-				HU.visible_message(span_warning("[HU] electrocutes [H] with \the [src]."))
-				user.Beam(target, icon_state = "lightning[rand(1, 12)]", time = 0.5 SECONDS) // LIGHTNING
-				playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
-				H.electrocute_act(5, src)
-				HU.log_message("has shocked [H.real_name] with the [src]!", LOG_ATTACK)
-				to_chat(H, span_danger("I'm electrocuted by the scepter!"))
-				COOLDOWN_START(src, scepter, 20 SECONDS)
-				return
+	if(!pass)
+		to_chat(human_user, span_warning("You cannot use [src] against [human_target]"))
+		return FALSE
 
-			if(istype(user.used_intent, /datum/intent/lord_silence))
-				HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
-				H.set_silence(20 SECONDS)
-				HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
-				to_chat(H, span_danger("I'm silenced by the scepter!"))
-				COOLDOWN_START(src, scepter, 10 SECONDS)
-				return
+	if(!COOLDOWN_FINISHED(src, scepter))
+		to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, scepter) / 10, 1)] seconds left!"))
+		return FALSE
+
+	if(istype(user.used_intent, /datum/intent/lord_electrocute))
+		human_user.visible_message(span_warning("[human_user] electrocutes [human_target] with \the [src]."))
+		user.Beam(target, icon_state = "lightning[rand(1, 12)]", time = 0.5 SECONDS) // LIGHTNING
+		playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+		human_target.electrocute_act(5, src)
+		human_user.log_message("has shocked [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm electrocuted by the scepter!"))
+		COOLDOWN_START(src, scepter, 30 SECONDS)
+		return TRUE
+
+	if(istype(user.used_intent, /datum/intent/lord_silence))
+		human_user.visible_message(span_warning("[human_user] silences [human_target] with \the [src]."))
+		human_target.set_silence(20 SECONDS)
+		human_user.log_message("has silenced [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm silenced by the scepter!"))
+		COOLDOWN_START(src, scepter, 10 SECONDS)
+		return TRUE
 
 //................ Staff of the Testimonium ............... //
 /obj/item/weapon/polearm/woodstaff/aries
@@ -126,6 +138,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /datum/intent/priest_smite
 	name = "smite"
@@ -151,46 +164,56 @@
 	if(!ishuman(user))
 		return
 
-	var/mob/living/carbon/human/HU = user
+	var/mob/living/carbon/human/human_user = user
 
-	if(!is_priest_job(HU.mind?.assigned_role))
+	if(!is_priest_job(human_user.mind?.assigned_role))
 		to_chat(user, span_danger("The staff doesn't obey me."))
 		return
 
-	if(ishuman(target))
-		var/mob/living/carbon/human/H = target
+	if(!ishuman(target))
+		return
 
-		user.visible_message(span_warning("[user] points [src] at [target]."))
+	var/mob/living/carbon/human/human_target = target
 
-		if(H == HU)
-			return
+	user.visible_message(span_warning("[human_user] points [src] at [human_target]."))
 
-		if(H.can_block_magic(MAGIC_RESISTANCE_HOLY))
-			return
+	if(human_target == human_user)
+		return
 
-		if(!(H.mind?.assigned_role.department_flag & CHURCHMEN))
-			return
+	if(human_target.can_block_magic(MAGIC_RESISTANCE_HOLY))
+		return
 
-		if(!COOLDOWN_FINISHED(src, staff))
-			to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
-			return
+	var/pass = FALSE
+	var/area/target_area = get_area(human_target)
+	if(istype(target_area, /area/indoors/town/church) || istype(target_area, /area/outdoors/exposed/church))
+		pass = TRUE
+	else if(human_target.mind?.assigned_role.department_flag & CHURCHMEN)
+		pass = TRUE
 
-		if(istype(user.used_intent, /datum/intent/priest_smite))
-			HU.visible_message(span_warning("[HU] smites [H] with \the [src]."))
-			user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
-			playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
-			H.electrocute_act(5, src)
-			HU.log_message("has smitten [H.real_name] with the [src]!", LOG_ATTACK)
-			to_chat(H, span_danger("I'm smitten by the staff!"))
-			COOLDOWN_START(src, staff, 20 SECONDS)
-			return
+	if(!pass)
+		to_chat(human_user, span_warning("You cannot use [src] against [human_target]"))
+		return FALSE
 
-		if(istype(user.used_intent, /datum/intent/priest_silence))
-			HU.visible_message(span_warning("[HU] silences [H] with \the [src]."))
-			H.set_silence(20 SECONDS)
-			HU.log_message("has silenced [H.real_name] with the [src]!", LOG_ATTACK)
-			to_chat(H, span_danger("I'm silenced by the staff!"))
-			COOLDOWN_START(src, staff, 10 SECONDS)
+	if(!COOLDOWN_FINISHED(src, staff))
+		to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
+		return
+
+	if(istype(user.used_intent, /datum/intent/priest_smite))
+		human_user.visible_message(span_warning("[human_user] smites [human_target] with \the [src]."))
+		user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
+		playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+		human_target.electrocute_act(5, src)
+		human_user.log_message("has smitten [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm smitten by the staff!"))
+		COOLDOWN_START(src, staff, 30 SECONDS)
+		return
+
+	if(istype(user.used_intent, /datum/intent/priest_silence))
+		human_user.visible_message(span_warning("[human_user] silences [human_target] with \the [src]."))
+		human_target.set_silence(20 SECONDS)
+		human_user.log_message("has silenced [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm silenced by the staff!"))
+		COOLDOWN_START(src, staff, 10 SECONDS)
 
 /obj/item/weapon/mace/stunmace
 	name = "stunmace"

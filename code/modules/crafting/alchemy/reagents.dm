@@ -14,7 +14,7 @@
 /datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	if(affected_bodypart.heal_damage(1 * REM, 1 * REM, TRUE, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
-	return ..()
+	return FALSE
 
 /datum/reagent/medicine/healthpot/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -51,7 +51,7 @@
 /datum/reagent/medicine/healthpot/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	if(affected_bodypart.heal_damage(3 * REM, 3 * REM, TRUE, required_status = BODYPART_ORGANIC))
 		affected_mob.update_damage_overlays()
-	return ..()
+	return FALSE
 
 /datum/reagent/medicine/stronghealth/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -223,8 +223,8 @@
 	description = "Regenerates Vitae."
 	reagent_state = LIQUID
 	color = COLOR_MAROON
-	taste_description = "sickly iron"
-	scent_description = "sickly iron"
+	taste_description = "decay and sickly iron"
+	scent_description = "decay and sickly iron"
 	metabolization_rate = REAGENTS_METABOLISM
 	alpha = 173
 	price_per_unit = 3
@@ -266,7 +266,7 @@
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(-30)
 	affected_bodypart.adjust_germ_level(-30)
-	return ..()
+	return FALSE
 
 /datum/reagent/medicine/diseasecure/on_mob_metabolize(mob/living/L)
 	. = ..()
@@ -464,7 +464,7 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 	if(!HAS_TRAIT(M, TRAIT_NASTY_EATER) && !HAS_TRAIT(M, TRAIT_ORGAN_EATER))
 		M.add_nausea(10 * (1 - GET_MOB_ATTRIBUTE_VALUE(M, STAT_CONSTITUTION) / 20) * efficiency)
 		M.adjustToxLoss(0.5 * efficiency)
-	if(ishuman(M) && !ishalforc(M))
+	if(ishuman(M) && !ishalforc(M) && !isdwarforc(M))
 		var/mob/living/carbon/human/graggar_lover = M
 		var/obj/item/organ/heart/H = graggar_lover.getorganslot(ORGAN_SLOT_HEART)
 		if(istype(H))
@@ -489,12 +489,14 @@ If you want to expand on poisons theres tons of fun effects TG chemistry has tha
 					var/datum/dna/dna_cache = new()
 					graggar_lover.dna.copy_dna(dna_cache)
 					var/species = /datum/species/halforc
+					if(isdwarf(graggar_lover) || ishalfling(graggar_lover))
+						species = /datum/species/dwarf/dworc
 					//if(ishalforc(M)) // when this works it can be used
 					//	species = /datum/species/orc
-					//else if(iskobold(M))
-					//	species = /datum/species/goblin
+					// else if(iskobold(M))
+					// 	species = /datum/species/goblin
 					graggar_lover.set_species(species)
-					if(ishalforc(graggar_lover))
+					if(ishalforc(graggar_lover) || isdwarforc(graggar_lover))
 						dna_cache.transfer_identity(graggar_lover, FALSE)
 					graggar_lover.real_name = dna_cache.real_name
 					graggar_lover.bloody_hands++

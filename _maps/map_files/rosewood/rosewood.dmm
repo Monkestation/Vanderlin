@@ -2843,9 +2843,7 @@
 /turf/open/floor/tile,
 /area/indoors/town/garrison)
 "buA" = (
-/obj/structure/stairs{
-	pixel_y = 0
-	},
+/obj/structure/stairs,
 /obj/structure/fluff/railing/wood{
 	dir = 8;
 	pixel_y = -1
@@ -3168,8 +3166,7 @@
 /area/indoors/town)
 "bCs" = (
 /obj/structure/chair/bench{
-	dir = 1;
-	pixel_y = 0
+	dir = 1
 	},
 /turf/open/floor/grass/cold,
 /area/outdoors/town)
@@ -3759,9 +3756,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
 "bQT" = (
-/obj/structure/fluff/railing/border{
-	dir = 2
-	},
+/obj/structure/fluff/railing/border,
 /turf/open/floor/church,
 /area/indoors/town/clinic_large)
 "bQU" = (
@@ -3798,7 +3793,6 @@
 	pixel_y = -2;
 	desc = "A Merchant will visit this location";
 	name = "Traveling Merchant's Stall";
-	dir = 2;
 	pixel_x = -32
 	},
 /turf/open/floor/cobble,
@@ -4212,12 +4206,6 @@
 /obj/item/grown/log/tree/stick,
 /turf/open/floor/hexstone,
 /area/indoors/town)
-"cas" = (
-/obj/structure/stairs{
-	pixel_y = 0
-	},
-/turf/open/floor/ruinedwood/turned/darker,
-/area/indoors/town/theatre)
 "caD" = (
 /obj/structure/closet/crate/chest,
 /turf/open/floor/ruinedwood/darker,
@@ -4785,7 +4773,6 @@
 /obj/structure/fluff/signage{
 	pixel_y = -6;
 	pixel_x = 11;
-	dir = 2;
 	name = "Clinic and Apothecary - North"
 	},
 /turf/open/floor/snow,
@@ -5238,7 +5225,7 @@
 /turf/open/floor/cobble,
 /area/outdoors/town/keep)
 "cwu" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/mace/woodclub,
 /turf/open/floor/tile/masonic/spiral,
 /area/indoors/town/orphanage)
@@ -5331,9 +5318,7 @@
 /turf/open/floor/cobble,
 /area/indoors/town/keep/basement)
 "czg" = (
-/obj/structure/stairs{
-	pixel_y = 0
-	},
+/obj/structure/stairs,
 /turf/open/floor/carpet,
 /area/indoors/town/theatre)
 "czk" = (
@@ -5879,8 +5864,7 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
 "cLV" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady";
+/obj/structure/fluff/statue/necra{
 	pixel_x = 15;
 	pixel_y = 9
 	},
@@ -7552,7 +7536,6 @@
 	dir = 1
 	},
 /obj/effect/decal/carpet/kover_purple{
-	pixel_x = 0;
 	pixel_y = -3
 	},
 /turf/open/floor/church,
@@ -8060,7 +8043,6 @@
 	dir = 5
 	},
 /obj/item/reagent_containers/glass/cup/wooden{
-	pixel_y = 0;
 	pixel_x = 1
 	},
 /turf/open/floor/churchmarble,
@@ -8491,12 +8473,6 @@
 "dZF" = (
 /turf/open/floor/woodturned,
 /area/indoors/town/keep/gate)
-"dZK" = (
-/obj/structure/stairs{
-	pixel_y = 0
-	},
-/turf/open/floor/wood,
-/area/outdoors/town)
 "dZL" = (
 /obj/structure/chair/bench/couchablack/r,
 /turf/open/floor/ruinedwood/spiral,
@@ -8785,7 +8761,6 @@
 "egy" = (
 /obj/structure/fluff/walldeco/customflag{
 	name = "rosewood flag";
-	pixel_x = 0;
 	pixel_y = 27
 	},
 /obj/structure/fluff/railing/border{
@@ -9511,7 +9486,6 @@
 /obj/item/reagent_containers/food/snacks/produce/manabloom,
 /obj/structure/hotspring/border/two,
 /obj/structure/hotspring/border/three{
-	pixel_y = 0;
 	pixel_x = 18
 	},
 /turf/open/floor/cobblerock/alt,
@@ -10039,7 +10013,6 @@
 "eLG" = (
 /obj/structure/fluff/walldeco/customflag{
 	name = "rosewood flag";
-	pixel_x = 0;
 	pixel_y = 27
 	},
 /obj/structure/fluff/railing/border{
@@ -10920,7 +10893,6 @@
 	pixel_y = 2
 	},
 /obj/item/reagent_containers/glass/cup/teacup/fancy{
-	pixel_x = 0;
 	pixel_y = 11
 	},
 /obj/item/reagent_containers/glass/cup/teacup/fancy{
@@ -11256,7 +11228,6 @@
 	pixel_y = 21
 	},
 /obj/structure/fluff/signage{
-	dir = 2;
 	name = "Shopping District - South East";
 	pixel_x = 2;
 	pixel_y = 10
@@ -11592,7 +11563,7 @@
 /obj/item/clothing/head/hatfur,
 /obj/item/clothing/armor/basiceast/crafteast,
 /obj/item/clothing/pants/trou/shadowpants,
-/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios/lord,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep)
@@ -12099,7 +12070,6 @@
 /obj/structure/chair/wood/alt/chair_noble/purple,
 /obj/effect/landmark/start/courtagent,
 /obj/effect/decal/carpet/kover_purple{
-	pixel_x = 0;
 	pixel_y = 6
 	},
 /turf/open/floor/church,
@@ -12201,7 +12171,6 @@
 "fOt" = (
 /obj/structure/table/wood/crafted,
 /obj/item/candle/yellow/lit{
-	pixel_y = 0;
 	pixel_x = -3
 	},
 /turf/open/floor/ruinedwood/spiral,
@@ -12585,7 +12554,6 @@
 	},
 /obj/effect/decal/borderfall{
 	dir = 1;
-	pixel_y = 0;
 	pixel_x = -9
 	},
 /obj/effect/decal/shadow_floor,
@@ -13456,7 +13424,6 @@
 "grz" = (
 /obj/structure/bars/pipe{
 	dir = 6;
-	pixel_y = 0;
 	pixel_x = 13
 	},
 /turf/open/floor/rooftop{
@@ -14946,9 +14913,7 @@
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town)
 "het" = (
-/obj/structure/fluff/railing/border{
-	dir = 2
-	},
+/obj/structure/fluff/railing/border,
 /turf/open/floor/churchmarble,
 /area/indoors/town/clinic_large)
 "hew" = (
@@ -15091,7 +15056,6 @@
 	},
 /obj/structure/fluff/railing/border{
 	dir = 8;
-	pixel_y = 0;
 	pixel_x = -2
 	},
 /obj/structure/fluff/railing/border{
@@ -15330,9 +15294,7 @@
 /turf/open/floor/ruinedwood/chevron,
 /area/indoors/town/orphanage)
 "hlv" = (
-/obj/effect/decal/cobblerockedge/alt{
-	dir = 2
-	},
+/obj/effect/decal/cobblerockedge/alt,
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "hlB" = (
@@ -17155,7 +17117,7 @@
 /area/indoors/town)
 "ihW" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/noble_manor/blue)
 "iip" = (
@@ -17526,8 +17488,7 @@
 "irG" = (
 /obj/effect/decal/carpet/square{
 	pixel_y = -7;
-	pixel_x = 32;
-	dir = 2
+	pixel_x = 32
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town)
@@ -18767,9 +18728,7 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/dwarfin)
 "iXK" = (
-/obj/structure/table/wood/reinf_long{
-	dir = 2
-	},
+/obj/structure/table/wood/reinf_long,
 /turf/open/floor/tile,
 /area/indoors/town/clinic_large)
 "iXM" = (
@@ -18872,8 +18831,7 @@
 	pixel_y = -7
 	},
 /obj/item/lipstick/purple{
-	pixel_x = -1;
-	pixel_y = 0
+	pixel_x = -1
 	},
 /obj/item/lipstick/jade{
 	pixel_x = 7;
@@ -19892,6 +19850,10 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
+"jAK" = (
+/obj/structure/fluff/traveltile/oracle_cave,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "jAM" = (
 /turf/open/floor/grass/cold,
 /area/indoors/town/theatre)
@@ -20453,7 +20415,6 @@
 /obj/structure/fluff/railing/border{
 	dir = 9;
 	pixel_x = -1;
-	pixel_y = 0;
 	density = 0
 	},
 /obj/item/storage/fancy/pilltin,
@@ -22265,7 +22226,6 @@
 	},
 /obj/effect/decal/borderfall{
 	dir = 1;
-	pixel_y = 0;
 	pixel_x = 7
 	},
 /obj/effect/decal/shadow_floor{
@@ -22969,7 +22929,7 @@
 /turf/open/floor/carpet/green,
 /area/indoors/villagegarrison)
 "kXF" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -24909,10 +24869,7 @@
 /turf/open/floor/blocks,
 /area/indoors/town/keep/basement)
 "lZd" = (
-/obj/structure/chair/bench{
-	dir = 2;
-	pixel_y = 0
-	},
+/obj/structure/chair/bench,
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "lZD" = (
@@ -27290,7 +27247,6 @@
 "nfI" = (
 /obj/structure/bars/pipe{
 	dir = 6;
-	pixel_y = 0;
 	pixel_x = 13
 	},
 /turf/open/floor/rooftop,
@@ -27385,8 +27341,6 @@
 "nin" = (
 /obj/structure/fluff/railing/border{
 	dir = 9;
-	pixel_x = 0;
-	pixel_y = 0;
 	density = 0
 	},
 /turf/open/floor/blocks/stonered,
@@ -27868,9 +27822,7 @@
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep)
 "ntl" = (
-/obj/structure/stairs{
-	pixel_y = 0
-	},
+/obj/structure/stairs,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
 "ntv" = (
@@ -29094,10 +29046,7 @@
 /turf/open/floor/dirt,
 /area/indoors/town/clinic_large)
 "nUJ" = (
-/obj/structure/chair/bench{
-	dir = 2;
-	pixel_y = 0
-	},
+/obj/structure/chair/bench,
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "nUR" = (
@@ -29374,7 +29323,6 @@
 "obt" = (
 /obj/structure/rack/shelf,
 /obj/item/carvedgem/opal/crab{
-	pixel_x = 0;
 	pixel_y = 41
 	},
 /obj/item/carvedgem/opal/duck{
@@ -29895,12 +29843,10 @@
 /obj/structure/rack/shelf/notdense,
 /obj/machinery/light/fueled/smelter,
 /obj/item/mould/ingot{
-	pixel_y = 30;
-	pixel_x = 0
+	pixel_y = 30
 	},
 /obj/item/mould/ingot{
-	pixel_y = 37;
-	pixel_x = 0
+	pixel_y = 37
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/dwarfin)
@@ -29922,7 +29868,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 6
 	},
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_x = -5;
 	pixel_y = 6
 	},
@@ -30114,8 +30060,6 @@
 /obj/structure/rack,
 /obj/structure/fluff/railing/border{
 	dir = 5;
-	pixel_x = 0;
-	pixel_y = 0;
 	density = 0
 	},
 /turf/open/floor/blocks/stonered/tiny,
@@ -30468,7 +30412,6 @@
 "oyn" = (
 /obj/structure/table/wood/counter,
 /obj/item/candle/yellow/lit/infinite{
-	pixel_x = 0;
 	pixel_y = -2
 	},
 /obj/item/candle/yellow/lit/infinite{
@@ -30764,7 +30707,6 @@
 	dir = 8
 	},
 /obj/structure/fluff/signage{
-	dir = 2;
 	name = "Shopping District - South East";
 	pixel_x = 2;
 	pixel_y = 10
@@ -30899,8 +30841,7 @@
 /area/indoors/town)
 "oKl" = (
 /obj/structure/fluff/walldeco/painting{
-	pixel_y = -30;
-	pixel_x = 0
+	pixel_y = -30
 	},
 /turf/open/floor/carpet/purple,
 /area/indoors/town/noble_manor/red)
@@ -32229,13 +32170,11 @@
 /obj/structure/fluff/walldeco/vinez/blue,
 /obj/structure/fluff/signage{
 	pixel_y = 16;
-	dir = 2;
 	name = "Upper Theater and Classroom - Above";
 	pixel_x = -25
 	},
 /obj/structure/fluff/signage{
 	pixel_y = 6;
-	dir = 2;
 	name = "Veteran and Elder Penthouse - Ahove";
 	pixel_x = -20
 	},
@@ -32434,7 +32373,7 @@
 /turf/open/floor/tile/bath,
 /area/indoors/town/keep/basement/bath)
 "pua" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
@@ -34233,7 +34172,7 @@
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep)
 "quN" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/noble_manor/blue)
 "quW" = (
@@ -34581,7 +34520,6 @@
 /area/under/town/basement)
 "qCl" = (
 /obj/effect/decal/carpet/kover_black{
-	pixel_x = 0;
 	pixel_y = 30
 	},
 /turf/open/floor/carpet/lord/center,
@@ -34838,7 +34776,6 @@
 /obj/structure/fluff/signage{
 	pixel_y = -3;
 	pixel_x = 10;
-	dir = 2;
 	name = "Apartments - South"
 	},
 /turf/open/floor/snow/patchy,
@@ -38891,9 +38828,7 @@
 	dir = 4;
 	pixel_x = 1
 	},
-/obj/structure/stairs{
-	pixel_y = 0
-	},
+/obj/structure/stairs,
 /turf/open/floor/wood,
 /area/outdoors/town)
 "sFM" = (
@@ -39038,8 +38973,7 @@
 /area/outdoors/town)
 "sIB" = (
 /obj/structure/fake_machine/atm{
-	pixel_x = -1;
-	pixel_y = 32
+	pixel_x = -1
 	},
 /turf/open/floor/cobble,
 /area/outdoors/town)
@@ -40457,9 +40391,7 @@
 /turf/open/floor/cobblerock,
 /area/indoors/town/tavern)
 "toR" = (
-/obj/structure/easel{
-	pixel_y = 0
-	},
+/obj/structure/easel,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
@@ -41067,9 +40999,7 @@
 	dir = 8;
 	pixel_y = -1
 	},
-/obj/structure/stairs{
-	pixel_y = 0
-	},
+/obj/structure/stairs,
 /turf/open/floor/wood,
 /area/outdoors/town)
 "tDh" = (
@@ -41847,8 +41777,7 @@
 	dir = 1
 	},
 /obj/structure/flora/astrata{
-	pixel_x = 32;
-	pixel_y = 0
+	pixel_x = 32
 	},
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/inquisition)
@@ -42161,7 +42090,6 @@
 	},
 /obj/structure/fluff/railing/border{
 	dir = 4;
-	pixel_y = 0;
 	pixel_x = 2
 	},
 /obj/structure/fluff/railing/border{
@@ -44205,7 +44133,6 @@
 /area/indoors/town/bath)
 "vjl" = (
 /obj/effect/decal/carpet/square{
-	pixel_x = 0;
 	pixel_y = -13
 	},
 /turf/open/floor/cobble,
@@ -45053,7 +44980,6 @@
 /area/indoors/town/keep/hand)
 "vEC" = (
 /obj/effect/decal/carpet/square/black{
-	pixel_x = 0;
 	pixel_y = -7
 	},
 /turf/open/floor/herringbone,
@@ -46110,7 +46036,7 @@
 /turf/open/floor/snow/patchy,
 /area/outdoors/town)
 "wdz" = (
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_x = -3
 	},
 /turf/open/floor/wood,
@@ -46272,7 +46198,6 @@
 /area/indoors/town)
 "wgQ" = (
 /obj/structure/fluff/walldeco/med3{
-	pixel_y = 0;
 	pixel_x = 32
 	},
 /obj/structure/bed/mediocre,
@@ -47819,7 +47744,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/table/wood/reinf_long,
 /obj/item/reagent_containers/glass/cup/teacup/fancy{
-	pixel_x = 0;
 	pixel_y = 11
 	},
 /obj/item/reagent_containers/glass/cup/teacup/fancy{
@@ -48074,7 +47998,6 @@
 	dir = 1
 	},
 /obj/effect/decal/carpet/kover_black{
-	pixel_x = 0;
 	pixel_y = -17
 	},
 /turf/open/floor/churchmarble,
@@ -49395,7 +49318,6 @@
 	name = "Keep - North"
 	},
 /obj/structure/fluff/signage{
-	dir = 2;
 	pixel_y = -6;
 	name = "Docks and Apartments - East"
 	},
@@ -49862,9 +49784,7 @@
 	},
 /area/under/town/basement)
 "xXQ" = (
-/obj/structure/stairs{
-	pixel_y = 0
-	},
+/obj/structure/stairs,
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
 "xXY" = (
@@ -104245,7 +104165,7 @@ axO
 axO
 axO
 axO
-cas
+eBU
 hgw
 nWA
 qMy
@@ -104447,7 +104367,7 @@ axO
 axO
 axO
 axO
-cas
+eBU
 gQX
 sjy
 uzH
@@ -106265,7 +106185,7 @@ axO
 axO
 axO
 axO
-cas
+eBU
 paA
 sjy
 gQX
@@ -106467,7 +106387,7 @@ axO
 axO
 axO
 axO
-cas
+eBU
 paA
 ylp
 gto
@@ -117248,7 +117168,7 @@ qJl
 qJl
 phG
 phG
-phG
+jAK
 qJl
 qJl
 qJl
@@ -117450,7 +117370,7 @@ qJl
 qJl
 qJl
 phG
-phG
+jAK
 qJl
 qJl
 qJl
@@ -117652,7 +117572,7 @@ qJl
 qJl
 qJl
 phG
-mvN
+jAK
 qJl
 qJl
 qJl
@@ -118660,7 +118580,7 @@ qJl
 qJl
 qJl
 phG
-phG
+mvN
 qJl
 qJl
 qJl
@@ -141001,7 +140921,7 @@ qUk
 qUk
 tDg
 mQu
-dZK
+nnk
 dif
 oPE
 dif
@@ -141203,7 +141123,7 @@ qUk
 qUk
 sFL
 dif
-dZK
+nnk
 dif
 dif
 dif
