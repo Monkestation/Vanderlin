@@ -4,19 +4,27 @@
 #define PAIN_EMOTE_COOLDOWN 60 SECONDS
 
 // ~shock stages
-#define SHOCK_STAGE_1 20
-#define SHOCK_STAGE_2 40
-#define SHOCK_STAGE_3 60
-#define SHOCK_STAGE_4 80 // "Softcrit"
-#define SHOCK_STAGE_5 95
-#define SHOCK_STAGE_6 110
-#define SHOCK_STAGE_7 130 // "Hardcrit"
+#define SHOCK_STAGE_1 10
+#define SHOCK_STAGE_2 30
+#define SHOCK_STAGE_3 40
+#define SHOCK_STAGE_4 60 // "Softcrit"
+#define SHOCK_STAGE_5 80
+#define SHOCK_STAGE_6 120 // "Hardcrit"
+#define SHOCK_STAGE_7 150
 #define SHOCK_STAGE_8 200
 #define SHOCK_STAGE_MAX SHOCK_STAGE_8
 
+#define SHOCK_STAGE_HYSTERESIS 5
+/// Weight decay per rank when stacking limb pain into shock (0.5 = each subsequent limb counts half as much as the last)
+#define SHOCK_STACK_DECAY 0.7
+/// Weight used with no stack limbs
+#define SHOCK_USELESS_DECAY 0.3
+/// How many limbs we bother weighting before the tail becomes negligible (6 covers arms/legs/chest/head)
+#define SHOCK_STACK_MAX_LIMBS 6
+
 // ~shock modifiers
-#define SHOCK_MOD_BRUTE 0.5
-#define SHOCK_MOD_BURN 0.75
+#define SHOCK_MOD_BRUTE 0.7
+#define SHOCK_MOD_BURN 0.8
 #define SHOCK_MOD_TOXIN 1
 #define SHOCK_MOD_CLONE 1.25
 
@@ -34,10 +42,13 @@
 #define PAIN_NO_SPEAK 250
 
 /// Divisor used in pain calculations, since carbon pain is a flat amount and spread across bodyparts
-#define PAINKILLER_DIVISOR 1.5
+#define PAINKILLER_DIVISOR 3
 
 /// Use this to keep the speed of pain-related systems consistent across the board
-#define PAIN_SYSTEM_SPEED_MODIFIER 10
+#define PAIN_SYSTEM_SPEED_MODIFIER 2
+
+/// Recovery moves shock_stage toward traumatic_shock this much slower than growth does, at baseline endurance
+#define SHOCK_RECOVERY_COEFF 0.4
 
 /// Cooldown before resetting the injury penalty
 #define SHOCK_PENALTY_COOLDOWN_DURATION 5 SECONDS

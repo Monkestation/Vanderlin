@@ -262,8 +262,9 @@
 
 /datum/job/proc/setup_known_people(mob/living/carbon/human/spawned)
 	for(var/job in jobs_always_know_me)
-		jobs_i_know += job
 		jobs_that_know_me += job
+	for(var/job in jobs_i_always_know)
+		jobs_i_know += job
 
 	if(knows_the_town)
 		for(var/X in GLOB.peasant_positions)

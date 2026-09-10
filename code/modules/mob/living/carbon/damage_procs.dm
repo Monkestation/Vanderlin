@@ -316,16 +316,43 @@
 	return TRUE
 
 /mob/living/carbon/can_feel_pain()
-	return !HAS_TRAIT(src, TRAIT_NOPAIN) && !IsUnconscious()
+	return !HAS_TRAIT(src, TRAIT_NOPAIN)
 
 /mob/living/carbon/getShock(painkiller_included = TRUE)
 	if(!can_feel_pain())
 		return 0
 
-	var/shock = 0
-	shock += SHOCK_MOD_CLONE * getCloneLoss()
+	var/list/fractions = list()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-		shock += bodypart.get_shock(painkiller_included)
+		if(!bodypart.max_pain_damage)
+			continue
+		var/frac = bodypart.get_shock(painkiller_included) / (bodypart.max_pain_damage * 0.7)
+		fractions += clamp(frac, 0, 1.3) // allow slight overshoot per-limb, but bounded
+
+	sortTim(fractions, GLOBAL_PROC_REF(cmp_numeric_dsc)) // worst limb first
+
+	var/weighted_sum = 0
+	var/max_weighted_sum = 0
+	var/weight = 1
+	for(var/i in 1 to length(fractions))
+		weighted_sum += fractions[i] * weight
+		max_weighted_sum += weight
+		if(fractions[1] <= 0)
+			weight *= SHOCK_USELESS_DECAY
+		else
+			weight *= SHOCK_STACK_DECAY
+
+	// pad max_weighted_sum out to a consistent limb count so losing limbs
+	// doesn't change what "fully wounded on every remaining limb" maps to
+	var/remaining_weight = weight
+	for(var/i in length(fractions)+1 to SHOCK_STACK_MAX_LIMBS)
+		max_weighted_sum += remaining_weight
+		remaining_weight *= SHOCK_STACK_DECAY
+
+	var/shock = max_weighted_sum ? (weighted_sum / max_weighted_sum) * SHOCK_STAGE_MAX : 0
+
+	// clone loss stays additive on top, uncapped by design (separate hurt channel)
+	shock += SHOCK_MOD_CLONE * getCloneLoss()
 
 	return max(0, shock)
 

@@ -101,6 +101,8 @@
 	var/probability = (nuforce * (total_dam / affecting.max_damage) - 5) //More weight given to total damage accumulated on the limb
 	if(affecting.body_zone == BODY_ZONE_HEAD) //Decapitations are harder to pull off in general
 		probability *= 0.5
+	if(user?.zone_selected in list(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS))
+		probability = 0
 	var/hard_dismember = HAS_TRAIT(affecting, TRAIT_HARDDISMEMBER)
 	var/easy_dismember = HAS_TRAIT(affecting, TRAIT_ROTTEN) || affecting.skeletonized || HAS_TRAIT(affecting, TRAIT_EASYDISMEMBER)
 	if(affecting.owner)
