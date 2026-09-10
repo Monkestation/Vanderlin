@@ -1517,33 +1517,12 @@
 
 /datum/repeatable_crafting_recipe/leather/rosacoat/two
 	name = "courtly coat"
-	requirements = list(
-		/obj/item/natural/hide/cured = 4,
-		/obj/item/natural/silk = 2,
-		/obj/item/alch/herb/rosa = 1
-	)
 	output = /obj/item/clothing/armor/leather/jacket/rosa/two
-	craftdiff = 5
-	category = "Armor"
 
 /datum/repeatable_crafting_recipe/leather/rosacoat/three
 	name = "royal coat"
-	requirements = list(
-		/obj/item/natural/hide/cured = 4,
-		/obj/item/natural/silk = 2,
-		/obj/item/alch/herb/rosa = 1
-	)
 	output = /obj/item/clothing/armor/leather/jacket/rosa/three
-	craftdiff = 5
-	category = "Armor"
 
 /datum/repeatable_crafting_recipe/leather/rosacoat/four
 	name = "stately coat"
-	requirements = list(
-		/obj/item/natural/hide/cured = 4,
-		/obj/item/natural/silk = 2,
-		/obj/item/alch/herb/rosa = 1
-	)
 	output = /obj/item/clothing/armor/leather/jacket/rosa/four
-	craftdiff = 5
-	category = "Armor"
