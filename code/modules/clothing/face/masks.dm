@@ -635,10 +635,3 @@
 	desc = "A remarkably plain veil meant to conceal ones face... if you wore this, a gust of wind would be all it takes to reveal your identity."
 	grid_width = 32
 	grid_height = 32
-
-/obj/item/clothing/face/rosa
-	name = "ivory mask"
-	desc = "A finely crafted mask from Wintermare, typically worn by their nobility."
-	icon_state = "rosamask1"
-	icon = 'icons/roguetown/clothing/special/rosewood.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
