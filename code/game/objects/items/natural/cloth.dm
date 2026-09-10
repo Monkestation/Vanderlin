@@ -184,7 +184,6 @@
 			reagents.trans_to(O, reagents.total_volume, 1, transfered_by = user)
 			user.visible_message(span_small("[user] wrings out \the [src] in \the [O]."), span_small("I wring out \the [src] in \the [O]."), vision_distance = 2)
 			playsound(O, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
-			bandage_health = initial(bandage_health)
 	else if(isturf(target))
 		var/turf/T = target
 		if(istype(T, /turf/open/water))
@@ -198,8 +197,8 @@
 				reagents.clear_reagents()
 				user.visible_message(span_small("[user] wrings out \the [src]."), span_small("I wring out \the [src]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
-				bandage_health = initial(bandage_health)
 
+	bandage_health = initial(bandage_health)
 	update_appearance(UPDATE_OVERLAYS)
 
 	return TRUE
