@@ -16,6 +16,7 @@
 	cooldown_time = 2 MINUTES
 	spell_cost = 50
 	var/need_cross = TRUE
+	var/breaks_blood_curse = TRUE
 
 /datum/action/cooldown/spell/cure_rot/is_valid_target(atom/cast_on)
 	. = ..()
@@ -60,21 +61,21 @@
 				has_rot = TRUE
 				break
 
-
-	if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic) || cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark))
-		if(!prob(33))
+	if(breaks_blood_curse)
+		if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic) || cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark))
+			if(!prob(33))
+				cast_on.visible_message(
+					span_warning("Divine Light struggles to burn through the Blood Curse upon [cast_on]!"),
+					span_bloody("The Blood Curse is resisting the Divine!"),
+				)
+				return FALSE
+			cast_on.remove_status_effect(/datum/status_effect/debuff/revive_bloodmagic)
+			cast_on.remove_status_effect(/datum/status_effect/debuff/blood_mark)
 			cast_on.visible_message(
-				span_warning("Divine Light struggles to burn through the Blood Curse upon [cast_on]!"),
-				span_bloody("The Blood Curse is resisting the Divine!"),
+				span_warning("Divine Light burns through the Blood Curse upon [cast_on]!"),
+				span_bloody("The Blood Curse has been dispelled!"),
 			)
-			return FALSE
-		cast_on.remove_status_effect(/datum/status_effect/debuff/revive_bloodmagic)
-		cast_on.remove_status_effect(/datum/status_effect/debuff/blood_mark)
-		cast_on.visible_message(
-			span_warning("Divine Light burns through the Blood Curse upon [cast_on]!"),
-			span_bloody("The Blood Curse has been dispelled!"),
-		)
-		return
+			return
 
 	if(!has_rot && !was_zombie)
 		to_chat(owner, span_warning("Nothing happens."))
@@ -135,4 +136,6 @@
 	charge_slowdown = 0.8
 	cooldown_time = 2 MINUTES
 	spell_cost = 200
+
 	need_cross = FALSE
+	breaks_blood_curse = FALSE
