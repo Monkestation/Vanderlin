@@ -97,6 +97,11 @@ SUBSYSTEM_DEF(familytree)
 		for(var/datum/family_member/member in house.members)
 			if(member.person?.real_name == person.setchild)
 				return FAMILY_MEMBER_PARENT
+	if(person.setsibling)
+		for(var/datum/family_member/member in house.members)
+			if(member.person?.real_name == person.setsibling)
+				if(CanBeSiblings(member.person.age, person.age))
+					return FAMILY_MEMBER_SIBLING
 
 	// Fall through to age-based logic
 	if(person.age == AGE_CHILD)
