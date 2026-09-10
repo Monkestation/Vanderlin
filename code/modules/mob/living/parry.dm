@@ -220,13 +220,14 @@
 		defender_skill = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/combat/unarmed)
 
 	var/attacker_type = /datum/attribute/skill/combat/unarmed
-	if(attacker.mind)
-		var/obj/item/weapon/attacking_weapon = attacker_intent.get_master_item()
-		if(attacking_weapon)
-			attacker_skill = GET_MOB_SKILL_VALUE(attacker, attacking_weapon.associated_skill)
-			attacker_type = attacking_weapon.associated_skill
-		else
-			attacker_skill = GET_MOB_SKILL_VALUE(attacker, /datum/attribute/skill/combat/unarmed)
+	//requested by balancetainers
+	//if(attacker.mind)
+	var/obj/item/weapon/attacking_weapon = attacker_intent.get_master_item()
+	if(attacking_weapon)
+		attacker_skill = GET_MOB_SKILL_VALUE(attacker, attacking_weapon.associated_skill)
+		attacker_type = attacking_weapon.associated_skill
+	else
+		attacker_skill = GET_MOB_SKILL_VALUE(attacker, /datum/attribute/skill/combat/unarmed)
 
 	return list(
 		"defender_skill" = defender_skill,
