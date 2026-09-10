@@ -333,7 +333,17 @@ SUBSYSTEM_DEF(familytree)
 
 	var/species = H.dna.species.type
 
-	for(var/datum/heritage/house in families)
+	var/datum/heritage/sibling_house
+	if(H.setsibling)
+		for(var/datum/heritage/house in families)
+			for(var/datum/family_member/member in house.members)
+				if(member.person?.real_name == H.setsibling)
+					sibling_house = house
+					break
+			if(sibling_house)
+				break
+
+	for(var/datum/heritage/house in list(sibling_house) + families)
 		if(house.dominant_species != species)
 			continue
 
