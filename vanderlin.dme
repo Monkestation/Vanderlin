@@ -3439,6 +3439,7 @@
 #include "code\modules\jobs\job_types\adventurer\types\combat\rare\hoplite.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\rare\longbeard.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\rare\monsterhunter.dm"
+#include "code\modules\jobs\job_types\adventurer\types\combat\rare\occult_librarian.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\rare\paladin.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\rare\profanepaladin.dm"
 #include "code\modules\jobs\job_types\adventurer\types\combat\rare\qatil.dm"

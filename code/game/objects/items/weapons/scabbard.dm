@@ -85,6 +85,11 @@
 	new /obj/item/weapon/knife/dagger/steel/stiletto(src)
 	update_appearance(UPDATE_ICON_STATE)
 
+/obj/item/weapon/scabbard/knife/hidden/steel_dagger/Initialize()
+	. = ..()
+	new /obj/item/weapon/knife/dagger/steel(src)
+	update_appearance(UPDATE_ICON_STATE)
+
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
 	desc = "A scabbard designed to hold a sword. The natural conclusion for those wishing to carry longblades."
