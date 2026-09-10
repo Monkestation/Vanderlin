@@ -66,7 +66,7 @@
 
 	var/skill_type = weapon_parry ? parrying_weapon.associated_skill : /datum/attribute/skill/combat/unarmed
 
-	// wdefense variable on parrying_weapon * 2
+	// wdefense variable on parrying_weapon * 5
 	var/parry_modifier = parry_data["weapon_defense_flat"] * 5
 	// decreases defense for knife/fists if fighting against normal weapons
 	if((skill_type == /datum/attribute/skill/combat/unarmed || skill_type == /datum/attribute/skill/combat/knives) && (skill_data["attacker_type"] != /datum/attribute/skill/combat/knives && skill_data["attacker_type"] != /datum/attribute/skill/combat/unarmed))
@@ -91,7 +91,7 @@
 		// take the difference in speed stat * 2 from parry modifier.
 		if(attacking_weapon?.wbalance > 0 && GET_MOB_ATTRIBUTE_VALUE(attacker, STAT_SPEED) > GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED))
 			var/speed_delta = GET_MOB_ATTRIBUTE_VALUE(attacker, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)
-			parry_modifier -= speed_delta * 2
+			parry_modifier -= speed_delta * 5
 
 	var/parry_score = get_parrying_score(skill_type, parry_modifier - attacker_skill)
 
@@ -111,7 +111,7 @@
 				text += " Disadvantage! (score: [max(5, parry_score - 10)]/100)"
 		to_chat(src, span_info("[text]"))
 
-	//disadvantage from attacker dual wielding lowers score by 2 if unmatched
+	//disadvantage from attacker dual wielding lowers score by 10 if unmatched
 	var/effective_score = parry_score
 	if(attacker_dualwielding && !defender_dualwielding)
 		effective_score = max(5, parry_score - 10)
