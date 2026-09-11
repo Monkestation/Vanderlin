@@ -988,12 +988,4 @@ GLOBAL_LIST_INIT(duplicate_forbidden_vars,list(
 
 		N.update_appearance()
 
-	if(holoitem)
-		O.flags_1 |= HOLOGRAM_1
-		for(var/atom/thing in O)
-			thing.flags_1 |= HOLOGRAM_1
-		if(ismachinery(O))
-			var/obj/machinery/M = O
-			for(var/atom/contained_atom in M.component_parts)
-				contained_atom.flags_1 |= HOLOGRAM_1
 	return O

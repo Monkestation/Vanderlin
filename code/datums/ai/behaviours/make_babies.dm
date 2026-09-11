@@ -43,7 +43,7 @@
 			if(SEND_SIGNAL(other_animal, COMSIG_MOB_RETURN_HUNGER) < 25)
 				continue
 
-		if(other.gender != living_pawn.gender && !(other.flags_1 & HOLOGRAM_1)) //Better safe than sorry ;_;
+		if(other.gender != living_pawn.gender) //Better safe than sorry ;_;
 			controller.set_blackboard_key(target_key, other)
 			finish_action(controller, TRUE)
 			return
