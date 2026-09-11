@@ -116,3 +116,18 @@
 /atom/movable/screen/alert/status_effect/buff/alch/fortunepot
 	name = "Fortune"
 
+/datum/status_effect/debuff/alch/pain
+	id = "painpot"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/alch/pain
+	effectedstats = list(STATKEY_END = -5)
+
+/atom/movable/screen/alert/status_effect/debuff/alch/pain
+	name = "SUFFERING"
+
+/datum/status_effect/debuff/alch/cards
+	id = "gamble"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/alch/cards
+	effectedstats = list(STATKEY_FORTUNE = -5) //Is this absurd? Yes. Don't drink concentrated hell/devil extract next time.
+
+/atom/movable/screen/alert/status_effect/debuff/alch/cards
+	name = "Bad luck!"

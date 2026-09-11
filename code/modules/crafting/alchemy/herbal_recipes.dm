@@ -574,6 +574,132 @@
 		T.pollute_turf(/datum/pollutant/rot, 16 * efficiency)
 	. = ..()
 
+//special poisons
+
+/datum/reagent/poison/herbal/tranq
+	name = "Liquid Tranquility"
+	description = "A weaponized sleeping draught designed to knock the consumer unconcious."
+	reagent_state = LIQUID
+	color = "#4a3c5f"
+	metabolization_rate = 0.8
+	overdose_threshold = 20
+	taste_description = "exhaustion and bitter herbs" // inspired by xylazine
+	var/sleep_power = 120 SECONDS
+
+/datum/reagent/poison/herbal/tranq/on_mob_metabolize(mob/living/M)
+	. = ..()
+	M.add_stress(/datum/stress_event/herbal_calm)
+
+/datum/reagent/poison/herbal/tranq/on_mob_life(mob/living/L)
+	. = ..()
+	L.adjust_drowsiness_up_to(30 SECONDS, sleep_power)
+	L.adjust_stamina(10)
+
+/datum/reagent/poison/herbal/tranq/overdose_start(mob/living/M)
+	. = ..()
+	M.Unconscious(20 SECONDS)
+		
+/datum/reagent/poison/erratique
+	name = "Erratique"
+	description = "A specially crafted neurotoxin which targets perception and rational thought. Effectively causes temporary insanity."
+	color = "#ffffff"
+	metabolization_rate = 0.1 
+	taste_description = "bitter thoughts"
+
+/datum/reagent/poison/herbal/erratique/on_mob_add(mob/living/L)
+	. = ..()
+	to_chat(L, span_notice("You suddenly feel DEEPLY WRONG! Hey, Whats that over there?! "))
+	ADD_TRAIT(L, TRAIT_ZIZO_CURSE, "[type]")   // effectively just BZ, aka IRL war chemical which makes you go insane.
+
+/datum/reagent/poison/herbal/erratique/on_mob_delete(mob/living/L)
+	. = ..()
+	REMOVE_TRAIT(L, TRAIT_ZIZO_CURSE, "[type]")
+
+/datum/reagent/poison/herbal/ghoulpowder
+	name = "Astuce"
+	description = "A strong neurotoxin that slows metabolism to a death-like state."
+	color = "#1b8600" 
+	metabolization_rate = 0.1
+	overdose_threshold = 10
+	taste_description = "fleeing life"
+
+/datum/reagent/poison/herbal/ghoulpowder/on_mob_life(mob/living/carbon/M, efficiency)
+	. = ..()
+	M.adjustToxLoss(0.1)
+	if(prob(20))
+		M.set_eye_blur_if_lower(10 SECONDS)
+		M.set_confusion_if_lower(0.5 SECONDS)
+	
+	return TRUE
+
+/datum/reagent/poison/herbal/ghoulpowder/on_mob_end_metabolize(mob/living/M)
+	. = ..()
+	REMOVE_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
+	REMOVE_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
+
+/datum/reagent/poison/herbal/ghoulpowder/overdose_start(mob/living/M)
+	. = ..()
+	ADD_TRAIT(M, TRAIT_FAKEDEATH, "[type]")
+	ADD_TRAIT(M, TRAIT_DEATHCOMA, "[type]")
+
+/datum/reagent/poison/herbal/pain
+	name = "Souffrance"
+	description = "Diluted neurotoxin designed to flay the nerves alive without causing harm. Very good for torture and interrogation."
+	reagent_state = LIQUID
+	color = "#8b0000"
+	metabolization_rate = 0.5
+	taste_description = "deceptive sweetness, followed by burning"
+
+/datum/reagent/poison/herbal/pain/on_mob_metabolize(mob/living/M)
+	. = ..()
+	M.apply_status_effect(/datum/status_effect/debuff/alch/pain)
+	M.add_stress(/datum/stress_event/souffrance)
+
+/datum/reagent/poison/gamble
+	name = "Desgracia"   //The debuff to end all debuffs. 
+	description = "Concentrated demonic essence which purges luck from the consumer."
+	reagent_state = LIQUID
+	color = "#8b0000"
+	metabolization_rate = 0.5
+	taste_description = "misfortune"
+
+/datum/reagent/poison/gamble/on_mob_metabolize(mob/living/M)
+	. = ..()
+	M.apply_status_effect(/datum/status_effect/debuff/alch/cards)
+	M.add_stress(/datum/stress_event/gambling)
+
+/datum/reagent/poison/tear
+	name = "Sunder Toxin"   //makes it easier to dismember people, really is not all that usefull
+	description = "Toxin used by orc raiding bands to weaken enemies for battle. Not very harmfull on it's own, but corrodes joints to limbs."
+	color = "#9c5aa5"
+	metabolization_rate = 0.7
+	taste_description = "you just bit your cheek"
+
+/datum/reagent/poison/tear/on_mob_add(mob/living/L)
+	. = ..()
+	to_chat(L, span_notice("You suddenly feel loose at the joints!"))
+	ADD_TRAIT(L, TRAIT_EASYDISMEMBER, "[type]")
+
+/datum/reagent/poison/tear/on_mob_delete(mob/living/L)
+	. = ..()
+	REMOVE_TRAIT(L, TRAIT_EASYDISMEMBER, "[type]")
+
+/datum/reagent/poison/kingsbane
+	name = "Kingsbane"  //more of a joke poison, just messes with nobles and money
+	description = "A poison used by cultists of matthios, causing the afflicted to be disgusted by money. Some say this is only the dilute version, with the real, potent one capable of ruining ones mind."
+	color = "#ffb300"
+	metabolization_rate = 0.01
+	taste_description = "cold gold"
+
+/datum/reagent/poison/kingsbane/on_mob_add(mob/living/L)
+	. = ..()
+	to_chat(L, span_notice("You suddenly become itchy at the thought of coins!"))
+	ADD_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
+
+/datum/reagent/poison/kingsbane/on_mob_delete(mob/living/L)
+	. = ..()
+	REMOVE_TRAIT(L, TRAIT_MATTHIOS_CURSE, "[type]")
+
 // Magical Enhancement
 
 /datum/reagent/buff/herbal/moonwater_elixir
@@ -679,6 +805,7 @@
 	M.remove_chem_effect(CE_OXYGENATED, "[type]")
 	M.remove_chem_effect(CE_STABLE, "[type]")
 
+
 /datum/reagent/medicine/herbal/purification_draught/on_mob_life(mob/living/carbon/M, efficiency)
 	M.adjustToxLoss(-2)
 	//lower debuff durations
@@ -719,7 +846,17 @@
 	stress_change = -3
 	timer = 15 MINUTES
 
+/datum/stress_event/souffrance
+	desc = "I FEEL DEEPLY WRONG, EVERYTHING ITCHES!!!"
+	stress_change = 10
+	timer = 10 MINUTES
+
 /datum/stress_event/battle_stim
 	desc = "I feel ready for battle!"
 	stress_change = -2
+	timer = 10 MINUTES
+
+/datum/stress_event/gambling
+	desc = "I feel like my chances of making it big have decreased..."
+	stress_change = 1
 	timer = 10 MINUTES
