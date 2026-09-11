@@ -340,6 +340,7 @@
  *
  * Argument(s):
  * * Optional - include_flags, (see obj.flags.dm) describes which optional things to include or not (pockets, accessories, held items)
+ * * Optional - ignore_skin, whether the returned list ignores /obj/item/clothing/armor/regenerating/skin
  */
 
 /mob/living/proc/get_equipped_items(include_flags = NONE, ignore_skin = FALSE)
