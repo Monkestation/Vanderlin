@@ -1604,18 +1604,21 @@
 
 /obj/item/reagent_containers/food/snacks/grenzelbun
 	name = "grenzelbun"
-	desc = "The classic wiener in a bun, a staple food of Grenzelhoft cuisine."
+	desc = "The classic wiener in a bun, a staple food of Grenzelhoft cuisine." // handled upon examine
 	icon_state = "grenzbun"
 	base_icon_state = "grenzbun"
 	bitesize = 5
 	w_class = WEIGHT_CLASS_NORMAL
-
 	nutrition = (RAWMEAT_NUTRITION + SMALLDOUGH_NUTRITION) * COOK_MOD
 	rotprocess = SHELFLIFE_EXTREME
 	foodtype = GRAIN | MEAT
 	faretype = FARE_NEUTRAL
 	tastes = list("savory sausage" = 1, "bread" = 1)
 	item_weight = 180 GRAMS
+	culture_description = list("Grenzelhoft" = "Shameless cultural appropriation in the form of a bun. \
+			Any true resident of the Black Empire knows sausages go best with mashed tatoes",
+			"Rockhill" = "Close yet quite far from a propper, tasty pie.")
+
 
 /obj/item/reagent_containers/food/snacks/grenzelbun_cocaumole
 	name = "grenzelbun with cocaumole"

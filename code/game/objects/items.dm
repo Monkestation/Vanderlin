@@ -310,6 +310,12 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	///if this is set we add the spell modifier component with these stats
 	var/datum/spellcraft_contribution/item/spell_modifier
 
+	/// Optional lore description for the item, a list linking a human mob's culture.name var alongside a string.
+	///	If the human mob has the prerequisite culture, they will see the corresponding string.
+	///For instance, to make two descriptions, one for vanderlin, one for grenzelhoft you'd have :
+	///list("Vanderlin" = "This is a vanderlinian description.", "Grenzelhoft" = "this is a grenzelhoftian description",)
+	var/list/culture_description = list("culture_name" = "text",)
+
 /obj/item/Initialize(mapload)
 	if (attack_verb)
 		attack_verb = typelist("attack_verb", attack_verb)
@@ -1638,6 +1644,23 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	. = ..()
 	if(currecipe)
 		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
+	/// Check for item culture descriptions.
+	if (ishuman(user) && length(culture_description)) // make sure the mob has a culture to avoid unecessary controls.
+		var/mob/living/carbon/human/humanexaminer = user
+		if(HAS_TRAIT(humanexaminer, TRAIT_CULTURAL_KNOWLEDGE))
+			for(var/entry in culture_description)
+				var/culture_desc = culture_description[entry]
+				var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are culturally knowledgeable.", entry)]</summary>"
+				str += culture_desc
+				str += "</details>"
+				. += span_info(str)
+		else if(culture_description[humanexaminer.culture.name])
+			var/datum/culture/examiner_culture = humanexaminer.culture
+			var/str = "<details><summary><b>ANAMNESIS:</b> [span_tooltip("You are from [examiner_culture.name]", examiner_culture.name)]</summary>"
+			str += culture_description[examiner_culture.name]
+			str += "</details>"
+			. += span_info(str)
+
 	if(!get_precursor_data(src))
 		return
 	var/alch_skill = user.attributes ? GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/craft/alchemy) : 60

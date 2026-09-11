@@ -55,6 +55,7 @@
 		TRAIT_PSYDONITE,
 		TRAIT_FOREIGNER,
 		TRAIT_RECOGNIZED,
+		TRAIT_CULTURAL_KNOWLEDGE, // travelled far and wide and is experienced.
 	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/inspector

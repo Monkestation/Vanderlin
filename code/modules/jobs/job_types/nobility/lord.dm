@@ -104,6 +104,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		TRAIT_NOSEGRAB,
 		TRAIT_HEAVYARMOR,
 		TRAIT_MEDIUMARMOR,
+		TRAIT_CULTURAL_KNOWLEDGE,
 	)
 
 	voicepack_m = /datum/voicepack/male/evil

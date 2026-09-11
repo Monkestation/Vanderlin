@@ -55,6 +55,7 @@
 		TRAIT_DUALWIELDER,
 		TRAIT_FOREIGNER,
 		TRAIT_RECOGNIZED,
+		TRAIT_CULTURAL_KNOWLEDGE, // travelled far and wide and is experienced.
 		TRAIT_CLOSECOMBAT,
 	)
 
