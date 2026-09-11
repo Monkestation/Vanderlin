@@ -56599,15 +56599,6 @@
 /obj/structure/flora/ausbushes/ppflowers,
 /turf/open/floor/dirt/road,
 /area/outdoors/town/keep)
-"wiY" = (
-/obj/effect/mapping_helpers/access/keyset/manor/courtagent,
-/obj/effect/mapping_helpers/access/locker,
-/obj/structure/door/viewport{
-	dir = 8;
-	name = "Court Agent Hideout"
-	},
-/turf/open/floor/tile,
-/area/indoors/town/keep/courtagent/prison)
 "wja" = (
 /obj/effect/decal/cleanable/blood/footprints{
 	dir = 8
@@ -90814,7 +90805,7 @@ sEI
 nbM
 nbM
 nbM
-wiY
+nbM
 nbM
 nbM
 nbM
