@@ -176,7 +176,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
 
 /obj/structure/lever/hidden/courtagent
-	hidden_dc = 14
+	hidden_dc = 16
 	accessor_trait = TRAIT_KNOW_COURTAGENT_DOORS
 
 /obj/structure/lever/hidden/rous
