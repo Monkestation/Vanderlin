@@ -21,19 +21,9 @@
 
 	smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ
 
-
 	max_integrity = 50
 	resistance_flags = CAN_BE_HIT
 	is_full = TRUE
-
-
-/obj/structure/meatvine/heavy/CanPass(atom/movable/mover, turf/target)
-	. = ..()
-	return FALSE
-
-/obj/structure/meatvine/heavy/CanAStarPass(ID, to_dir, requester)
-	return FALSE
-
 
 /obj/structure/meatvine/lair
 	icon_state = "lair_1"

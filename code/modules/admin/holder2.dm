@@ -71,7 +71,6 @@ GLOBAL_PROTECT(href_token)
 		message_admins("[key_name_admin(usr)][msg]")
 		log_admin("[key_name(usr)][msg]")
 		return QDEL_HINT_LETMELIVE
-	QDEL_NULL(path_debug)
 	. = ..()
 
 /datum/admins/proc/activate()
@@ -99,7 +98,6 @@ GLOBAL_PROTECT(href_token)
 	if ((C = owner) || (C = GLOB.directory[target]))
 		disassociate()
 		add_verb(C, /client/proc/readmin)
-	QDEL_NULL(path_debug)
 	C?.native_say?.refresh_channels()
 
 /datum/admins/proc/associate(client/C)

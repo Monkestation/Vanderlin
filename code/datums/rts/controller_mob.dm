@@ -215,21 +215,21 @@
 		number_img.plane = ABOVE_LIGHTING_PLANE + 0.1
 		target_mob.controller_mind.patrol_visual_images += number_img
 
-	if(length(target_mob.controller_mind.patrol_points) >= 2)
-		var/obj/pathfind_guy/temp_pathfinder = new()
+	// if(length(target_mob.controller_mind.patrol_points) >= 2)
+	// 	var/obj/pathfind_guy/temp_pathfinder = new()
 
-		for(var/i in 1 to length(target_mob.controller_mind.patrol_points))
-			var/turf/current_point = target_mob.controller_mind.patrol_points[i]
-			var/turf/next_point = target_mob.controller_mind.patrol_points[(i % length(target_mob.controller_mind.patrol_points)) + 1] // Loop back to start
+	// 	for(var/i in 1 to length(target_mob.controller_mind.patrol_points))
+	// 		var/turf/current_point = target_mob.controller_mind.patrol_points[i]
+	// 		var/turf/next_point = target_mob.controller_mind.patrol_points[(i % length(target_mob.controller_mind.patrol_points)) + 1] // Loop back to start
 
-			temp_pathfinder.forceMove(current_point)
-			var/list/turf/path = get_path_to(temp_pathfinder, next_point, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 250, 250, 1)
-			if(length(path))
-				target_mob.controller_mind.patrol_visual_images += render_patrol_path(path, target_mob.controller_mind.patrol_setup_active ? "#FFA500" : "#4CAF50")
+	// 		temp_pathfinder.forceMove(current_point)
+	// 		var/list/turf/path = astar_path_to(temp_pathfinder, next_point, max_steps = 150)
+	// 		if(length(path))
+	// 			target_mob.controller_mind.patrol_visual_images += render_patrol_path(path, target_mob.controller_mind.patrol_setup_active ? "#FFA500" : "#4CAF50")
 
-		// Clean up the temporary pathfinder
-		temp_pathfinder.moveToNullspace()
-		qdel(temp_pathfinder)
+	// 	// Clean up the temporary pathfinder
+	// 	temp_pathfinder.moveToNullspace()
+	// 	qdel(temp_pathfinder)
 
 	// Add to client view
 	client.images += target_mob.controller_mind.patrol_visual_images
@@ -510,7 +510,7 @@
 
 			for(var/datum/queued_workorder/workorder in in_progress_workorders)
 				if(workorder.arg_1)
-					if(!length(get_path_to(mob, workorder.arg_1, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 32 + 1, 250,1)))
+					if(!length(astar_path_to(mob, workorder.arg_1, max_steps = 100)))
 						continue
 				mob.controller_mind.set_current_task(workorder.work_path, workorder.arg_1, workorder.arg_2, workorder.arg_3, workorder.arg_4)
 				in_progress_workorders -= workorder

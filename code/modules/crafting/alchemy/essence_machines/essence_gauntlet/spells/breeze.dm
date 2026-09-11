@@ -21,7 +21,7 @@
 
 	for(var/obj/item/I in target_turf)
 		if(I.w_class <= WEIGHT_CLASS_SMALL && prob(50))
-			SSmove_manager.move_rand(I, timeout = 3 SECONDS)
+			GLOB.move_manager.move_rand(I, timeout = 3 SECONDS)
 
 /datum/action/cooldown/spell/essence/breeze/spell
 	name = "Breeze"

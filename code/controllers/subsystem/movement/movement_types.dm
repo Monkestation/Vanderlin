@@ -11,7 +11,7 @@
 	var/datum/extra_info
 	///The thing we're moving about
 	var/atom/movable/moving
-	///Defines how different move loops override each other. Lower numbers beat higher numbers
+	///Defines how different move loops override each other. Higher numbers beat lower numbers
 	var/priority = MOVEMENT_DEFAULT_PRIORITY
 	///Bitfield of different things that affect how a loop operates
 	var/flags
@@ -20,7 +20,13 @@
 	///Delay between each move in deci-seconds
 	var/delay = 1
 	///The next time we should process
+	///Used primarially as a hint to be reasoned about by our [controller], and as the id of our bucket
 	var/timer = 0
+	///The time we are CURRENTLY queued for processing
+	///Do not modify this directly
+	var/queued_time = -1
+	/// Status bitfield for what state the move loop is currently in
+	var/status = NONE
 
 /datum/move_loop/New(datum/movement_packet/owner, datum/controller/subsystem/movement/controller, atom/moving, priority, flags, datum/extra_info)
 	src.owner = owner
@@ -32,32 +38,6 @@
 	src.priority = priority
 	src.flags = flags
 
-/datum/move_loop/proc/setup(delay = 1, timeout = INFINITY)
-	if(!ismovable(moving) || !owner)
-		return FALSE
-
-	src.delay = max(delay, world.tick_lag) //Please...
-	src.lifetime = timeout
-	return TRUE
-
-/datum/move_loop/proc/start_loop()
-	SHOULD_CALL_PARENT(TRUE)
-	SEND_SIGNAL(src, COMSIG_MOVELOOP_START)
-	//If this is our first time starting to move with this loop
-	//And we're meant to start instantly
-	if(!timer && flags & MOVEMENT_LOOP_START_FAST)
-		timer = world.time
-		return
-	timer = world.time + delay
-
-/datum/move_loop/proc/stop_loop()
-	SHOULD_CALL_PARENT(TRUE)
-	SEND_SIGNAL(src, COMSIG_MOVELOOP_STOP)
-
-/datum/move_loop/proc/info_deleted(datum/source)
-	SIGNAL_HANDLER
-	extra_info = null
-
 /datum/move_loop/Destroy()
 	if(owner)
 		owner.remove_loop(controller, src)
@@ -67,10 +47,65 @@
 	extra_info = null
 	return ..()
 
-///Exists as a helper so outside code can modify delay while also modifying timer
+/datum/move_loop/proc/setup(delay = 1, timeout = INFINITY)
+	if(!ismovable(moving) || !owner)
+		return FALSE
+
+	src.delay = max(delay, world.tick_lag) //Please...
+	src.lifetime = timeout
+	return TRUE
+
+///check if this exact moveloop datum already exists (in terms of vars) so we can avoid creating a new one to overwrite the old duplicate
+/datum/move_loop/proc/compare_loops(datum/move_loop/loop_type, priority, flags, extra_info, delay = 1, timeout = INFINITY)
+	SHOULD_CALL_PARENT(TRUE)
+
+	if(loop_type == type && priority == src.priority && flags == src.flags && delay == src.delay && timeout == lifetime)
+		return TRUE
+
+	return FALSE
+
+///Called when a loop is starting by a movement subsystem
+/datum/move_loop/proc/loop_started()
+	SHOULD_CALL_PARENT(TRUE)
+
+	SEND_SIGNAL(src, COMSIG_MOVELOOP_START)
+	status |= MOVELOOP_STATUS_RUNNING
+	//If this is our first time starting to move with this loop
+	//And we're meant to start instantly
+	if(!timer && flags & MOVEMENT_LOOP_START_FAST)
+		timer = world.time
+		return
+
+	timer = world.time + delay
+
+///Called when a loop is stopped, doesn't stop the loop itself
+/datum/move_loop/proc/loop_stopped()
+	SHOULD_CALL_PARENT(TRUE)
+
+	status &= ~MOVELOOP_STATUS_RUNNING
+	SEND_SIGNAL(src, COMSIG_MOVELOOP_STOP)
+
+/datum/move_loop/proc/info_deleted(datum/source)
+	SIGNAL_HANDLER
+
+	extra_info = null
+
+///Exists as a helper so outside code can modify delay in a sane way
 /datum/move_loop/proc/set_delay(new_delay)
 	delay =  max(new_delay, world.tick_lag)
 	timer = world.time + delay
+
+///Pauses the move loop for some passed in period
+///This functionally means shifting its timer up, and clearing it from its current bucket
+/datum/move_loop/proc/pause_for(time)
+	if(!controller || !(status & MOVELOOP_STATUS_RUNNING)) //No controller or not running? go away
+		return
+	//Dequeue us from our current bucket
+	controller.dequeue_loop(src)
+	//Offset our timer
+	timer = world.time + time
+	//Now requeue us with our new target start time
+	controller.queue_loop(src)
 
 /datum/move_loop/process()
 	var/old_delay = delay //The signal can sometimes change delay
@@ -85,6 +120,7 @@
 		return
 
 	var/visual_delay = controller.visual_delay
+
 	var/old_dir = moving.dir
 	var/old_loc = moving.loc
 
@@ -111,8 +147,26 @@
 /datum/move_loop/proc/move()
 	return MOVELOOP_FAILURE
 
+///Pause our loop untill restarted with resume_loop()
+/datum/move_loop/proc/pause_loop()
+	if(!controller || !(status & MOVELOOP_STATUS_RUNNING) || (status & MOVELOOP_STATUS_PAUSED)) //we dead
+		return
+
+	//Dequeue us from our current bucket
+	controller.dequeue_loop(src)
+	status |= MOVELOOP_STATUS_PAUSED
+
+///Resume our loop after being paused by pause_loop()
+/datum/move_loop/proc/resume_loop()
+	if(!controller || (status & MOVELOOP_STATUS_RUNNING|MOVELOOP_STATUS_PAUSED) != (MOVELOOP_STATUS_RUNNING|MOVELOOP_STATUS_PAUSED))
+		return
+
+	timer = world.time
+	controller.queue_loop(src)
+	status &= ~MOVELOOP_STATUS_PAUSED
+
 ///Removes the atom from some movement subsystem. Defaults to SSmovement
-/datum/controller/subsystem/move_manager/proc/stop_looping(atom/movable/moving, datum/controller/subsystem/movement/subsystem = SSmovement)
+/datum/move_manager/proc/stop_looping(atom/movable/moving, datum/controller/subsystem/movement/subsystem = SSmovement)
 	var/datum/movement_packet/our_info = moving.move_packet
 	if(!our_info)
 		return FALSE
@@ -133,7 +187,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/move(moving, direction, delay, timeout, subsystem, priority, flags, datum/extra_info, datum/move_loop/move_loop_type = /datum/move_loop/move)
+/datum/move_manager/proc/move(moving, direction, delay, timeout, subsystem, priority, flags, datum/extra_info, datum/move_loop/move_loop_type = /datum/move_loop/move)
 	return add_to_loop(moving, subsystem, move_loop_type, priority, flags, extra_info, delay, timeout, direction)
 
 ///Replacement for walk()
@@ -146,11 +200,17 @@
 		return
 	direction = dir
 
+
+/datum/move_loop/move/compare_loops(datum/move_loop/loop_type, priority, flags, extra_info, delay, timeout, dir)
+	if(..() && direction == dir)
+		return TRUE
+	return FALSE
+
 /datum/move_loop/move/move()
 	var/atom/old_loc = moving.loc
 	moving.Move(get_step(moving, direction), direction, FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 	// We cannot rely on the return value of Move(), we care about teleports and it doesn't
-	// Moving also can be null on occasion, if the move deleted it and therefor us
+	// Moving also can be null on occasion, if the move deleted it and therefore us
 	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /**
@@ -168,7 +228,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/move_to_dir(moving, direction, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/move_to_dir(moving, direction, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	return add_to_loop(moving, subsystem, /datum/move_loop/move/move_to, priority, flags, extra_info, delay, timeout, direction)
 
 /datum/move_loop/move/move_to
@@ -176,8 +236,7 @@
 /datum/move_loop/move/move_to/move()
 	var/atom/old_loc = moving.loc
 	step_to(moving, get_step(moving, direction))
-	return old_loc != moving.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
-
+	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
 
 /**
  * Like move(), but we don't care about collision at all
@@ -194,7 +253,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/force_move_dir(moving, direction, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/force_move_dir(moving, direction, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	return add_to_loop(moving, subsystem, /datum/move_loop/move/force, priority, flags, extra_info, delay, timeout, direction)
 
 /datum/move_loop/move/force
@@ -222,6 +281,12 @@
 	if(!isturf(target))
 		RegisterSignal(target, COMSIG_QDELETING, PROC_REF(handle_no_target)) //Don't do this for turfs, because we don't care
 
+
+/datum/move_loop/has_target/compare_loops(datum/move_loop/loop_type, priority, flags, extra_info, delay, timeout, atom/chasing)
+	if(..() && chasing == target)
+		return TRUE
+	return FALSE
+
 /datum/move_loop/has_target/Destroy()
 	target = null
 	return ..()
@@ -229,7 +294,6 @@
 /datum/move_loop/has_target/proc/handle_no_target()
 	SIGNAL_HANDLER
 	qdel(src)
-
 
 /**
  * Used for force-move loops, similar to move_towards_legacy() but not quite the same
@@ -246,7 +310,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/force_move(moving, chasing, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/force_move(moving, chasing, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	return add_to_loop(moving, subsystem, /datum/move_loop/has_target/force_move, priority, flags, extra_info, delay, timeout, chasing)
 
 ///Used for force-move loops
@@ -266,6 +330,11 @@
 	if(!.)
 		return
 	distance = dist
+
+/datum/move_loop/has_target/dist_bound/compare_loops(datum/move_loop/loop_type, priority, flags, extra_info, delay, timeout, atom/chasing, dist = 0)
+	if(..() && distance == dist)
+		return TRUE
+	return FALSE
 
 ///Returns FALSE if the movement should pause, TRUE otherwise
 /datum/move_loop/has_target/dist_bound/proc/check_dist()
@@ -293,7 +362,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/move_to(moving, chasing, min_dist, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/move_to(moving, chasing, min_dist, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	return add_to_loop(moving, subsystem, /datum/move_loop/has_target/dist_bound/move_to, priority, flags, extra_info, delay, timeout, chasing, min_dist)
 
 ///Wrapper around walk_to()
@@ -327,7 +396,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/move_away(moving, chasing, max_dist, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/move_away(moving, chasing, max_dist, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	return add_to_loop(moving, subsystem, /datum/move_loop/has_target/dist_bound/move_away, priority, flags, extra_info, delay, timeout, chasing, max_dist)
 
 ///Wrapper around walk_away()
@@ -361,7 +430,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/move_towards(moving, chasing, delay, home, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/move_towards(moving, chasing, delay, home, timeout, subsystem, priority, flags, datum/extra_info)
 	return add_to_loop(moving, subsystem, /datum/move_loop/has_target/move_towards, priority, flags, extra_info, delay, timeout, chasing, home)
 
 /**
@@ -380,7 +449,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/home_onto(moving, chasing, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/home_onto(moving, chasing, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	return move_towards(moving, chasing, delay, TRUE, timeout, subsystem, priority, flags, extra_info)
 
 ///Used as a alternative to walk_towards
@@ -411,6 +480,11 @@
 			RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(update_slope)) //If it can move, update your slope when it does
 		RegisterSignal(moving, COMSIG_MOVABLE_MOVED, PROC_REF(handle_move))
 	update_slope()
+
+/datum/move_loop/has_target/move_towards/compare_loops(datum/move_loop/loop_type, priority, flags, extra_info, delay, timeout, atom/chasing, home = FALSE)
+	if(..() && home == src.home)
+		return TRUE
+	return FALSE
 
 /datum/move_loop/has_target/move_towards/Destroy()
 	if(home)
@@ -511,7 +585,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/move_towards_legacy(moving, chasing, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/move_towards_legacy(moving, chasing, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	return add_to_loop(moving, subsystem, /datum/move_loop/has_target/move_towards_budget, priority, flags, extra_info, delay, timeout, chasing)
 
 ///The actual implementation of walk_towards()
@@ -522,7 +596,6 @@
 	var/atom/old_loc = moving.loc
 	moving.Move(target_turf, get_dir(moving, target_turf), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
 	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
-
 /**
  * Helper proc for the move_rand datum
  *
@@ -538,7 +611,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/move_rand(moving, directions, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/move_rand(moving, directions, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	if(!directions)
 		directions = GLOB.alldirs
 	return add_to_loop(moving, subsystem, /datum/move_loop/move_rand, priority, flags, extra_info, delay, timeout, directions)
@@ -559,9 +632,14 @@
 		return
 	potential_directions = directions
 
+/datum/move_loop/move_rand/compare_loops(datum/move_loop/loop_type, priority, flags, extra_info, delay, timeout, list/directions)
+	if(..() && (length(potential_directions | directions) == length(potential_directions))) //i guess this could be useful if actually it really has yet to move
+		return TRUE
+	return FALSE
+
 /datum/move_loop/move_rand/move()
 	var/list/potential_dirs = potential_directions.Copy()
-	while(potential_dirs.len)
+	while(length(potential_dirs))
 		var/testdir = pick(potential_dirs)
 		var/turf/moving_towards = get_step(moving, testdir)
 		var/atom/old_loc = moving.loc
@@ -585,7 +663,7 @@
  * flags - Set of bitflags that effect move loop behavior in some way. Check _DEFINES/movement.dm
  *
 **/
-/datum/controller/subsystem/move_manager/proc/move_to_rand(moving, delay, timeout, subsystem, priority, flags, datum/extra_info)
+/datum/move_manager/proc/move_to_rand(moving, delay, timeout, subsystem, priority, flags, datum/extra_info)
 	return add_to_loop(moving, subsystem, /datum/move_loop/move_to_rand, priority, flags, extra_info, delay, timeout)
 
 ///Wrapper around step_rand
@@ -595,57 +673,4 @@
 	var/atom/old_loc = moving.loc
 	var/turf/next = get_step_rand(moving)
 	moving.Move(next, get_dir(moving, next), FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
-	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE
-
-/datum/move_loop/minecart
-	var/direction
-	var/aerial_distance
-	var/aerial_velocity
-
-/datum/move_loop/minecart/setup(delay, timeout, dir)
-	. = ..()
-	if(!.)
-		return
-	direction = dir
-
-/datum/move_loop/minecart/Destroy()
-	if(!QDELETED(moving) && istype(moving, /obj/structure/closet/crate/miningcar))
-		var/turf/moving_turf = get_turf(moving)
-		if(istype(moving_turf, /turf/open/openspace))
-			var/obj/structure/closet/crate/miningcar/minecart = moving
-			minecart.handle_aerial_fall(freefall = TRUE)
-	. = ..()
-
-/datum/move_loop/minecart/process()
-	. = ..()
-	if(QDELETED(src) || QDELETED(moving))
-		return
-	var/turf/moving_turf = get_turf(moving)
-	if(istype(moving_turf, /turf/open/openspace))
-		aerial_velocity += (delay / 10) * 9.8
-		aerial_distance += aerial_velocity * (delay / 10)
-		if(aerial_distance >= 1)
-			aerial_distance -= 1
-			if(istype(moving, /obj/structure/closet/crate/miningcar))
-				var/obj/structure/closet/crate/miningcar/minecart = moving
-				minecart.handle_aerial_fall()
-	else
-		aerial_distance = 0
-		aerial_velocity = 0
-
-/datum/move_loop/minecart/move()
-	var/atom/old_loc = moving.loc
-	var/turf/new_loc = get_step(moving, direction)
-	if(locate(/obj/structure/minecart_rail) in old_loc)
-		if(istype(new_loc, /turf/open/openspace))
-			var/turf/below_turf = GET_TURF_BELOW(new_loc)
-			if(locate(/obj/structure/minecart_rail) in below_turf)
-				new_loc = below_turf
-		else if(!(locate(/obj/structure/minecart_rail) in new_loc))
-			var/turf/above_turf = GET_TURF_ABOVE(new_loc)
-			if(locate(/obj/structure/minecart_rail) in above_turf)
-				new_loc = above_turf
-
-	moving.Move(new_loc, direction, FALSE, !(flags & MOVEMENT_LOOP_NO_DIR_UPDATE))
-	// We cannot rely on the return value of Move(), we care about teleports and it doesn't
 	return old_loc != moving?.loc ? MOVELOOP_SUCCESS : MOVELOOP_FAILURE

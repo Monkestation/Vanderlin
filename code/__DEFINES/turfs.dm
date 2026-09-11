@@ -59,6 +59,13 @@
 /// Turf is currently queued in GLOB.SUNLIGHT_QUEUE_CORNER and should not be re-queued to avoid duplicates
 #define TURF_SUNLIGHT_QUEUED (1<<5)
 
+/// Turf will be passable if density is 0
+#define TURF_PATHING_PASS_DENSITY 0
+/// Turf will be passable depending on [CanAStarPass] return value
+#define TURF_PATHING_PASS_PROC 1
+/// Turf is never passable
+#define TURF_PATHING_PASS_NO 2
+
 //water_height defines
 #define WATER_HEIGHT_ANKLE 1
 #define WATER_HEIGHT_SHALLOW 2
