@@ -106,12 +106,11 @@
 /obj/item/clothing/armor/regenerating/skin/easttats
 	name = "bouhoi bujeog tattoos"
 	desc = "A mystic style of tattoos used to honor the kin that fell generations ago, a sign of companionship and secretive brotherhood. These are styled into the shape of clouds, created by a mystical ink which shifts and moves in ripples like a pond to harden where your skin is struck. Its movement causes you to shudder."
-	icon_state = "easttats"
+	color = "#383837"
 	armor_type = /datum/armor/skin/easttats
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	max_integrity = 300
 	repair_time = 20 SECONDS
-	color = "#3d583d"
 
 /obj/item/clothing/armor/regenerating/skin/disciple/sunlord
 	name = "The golden tan"
@@ -121,3 +120,4 @@
 /obj/item/clothing/armor/regenerating/skin/easttats/tribal
 	name = "Tribal Tattoos"
 	desc = "Detailed tribal tattoos carved upon half-orc warriors to inspire courage within those who bear them, always on proud display to the world."
+	color = "#3d583d"

@@ -46,6 +46,8 @@
 	outfit = /datum/outfit/nitewalker
 	patron = /datum/patron/divine/noc
 	innate_traits = list(
+		TRAIT_BLOOD_SENSE,
+		TRAIT_VITAE_USER,
 		TRAIT_HARDDISMEMBER,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_BLINDFIGHTING,
@@ -189,8 +191,8 @@
 
 /obj/item/clothing/ring/nitewalker
 	name = "nitewarden's ring"
-	icon_state = "bs_ring_ruby"
-	desc = "A ring of blacksteel with a shimmering rontz set within. It thrums with unseen power."
+	icon_state = "s_newring_ruby"
+	desc = "A ring of silver with a shimmering rontz set within. It thrums with unseen power."
 	sellprice = 500
 	misc_flags = CRAFTING_TEST_EXCLUDE
 

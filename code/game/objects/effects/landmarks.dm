@@ -320,6 +320,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = JOB_COURT_AGENT
 	jobs_to_spawn = list(JOB_COURT_AGENT)
 
+/obj/effect/landmark/start/late/courtagent
+	name = JOB_COURT_AGENT
+	jobs_to_spawn = list(JOB_COURT_AGENT)
+
 /obj/effect/landmark/start/fisher
 	name = JOB_FISHER
 	jobs_to_spawn = list(JOB_FISHER)

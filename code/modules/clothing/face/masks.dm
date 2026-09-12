@@ -316,6 +316,12 @@
 /obj/item/clothing/face/facemask/prisoner
 	clothing_flags = NONE //they're used to this being stuck on their face
 
+/obj/item/clothing/face/shepherd/clothmask/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/face/shepherd/clothmask/colored/black
+	color = CLOTHING_SOOT_BLACK
+
 /obj/item/clothing/face/facemask/prisoner/Initialize()
 	. = ..()
 	name = "cursed mask"

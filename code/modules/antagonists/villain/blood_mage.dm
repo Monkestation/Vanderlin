@@ -24,3 +24,8 @@
 			the_name = H.real_name
 			to_chat(world, "[the_name] was a [name].")
 	return
+
+/datum/antagonist/blood_mage/occult
+	name = "Occult Librarian"
+	antag_hud_name = null
+	antag_hud_type = null

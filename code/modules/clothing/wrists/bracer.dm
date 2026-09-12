@@ -133,6 +133,14 @@
 	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 	AddComponent(/datum/component/storage/concrete/scabbard/knife)
 
+/obj/item/clothing/wrists/bracers/leather/scabbard/stiletto
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/wrists/bracers/leather/scabbard/stiletto/Initialize()
+	. = ..()
+	new /obj/item/weapon/knife/dagger/steel/stiletto(src)
+	update_appearance(UPDATE_ICON_STATE)
+
 /obj/item/clothing/wrists/bracers/psythorns
 	name = "psydonian thorns"
 	desc = "Thorns fashioned from pliable yet durable blacksteel - woven and interlinked, fashioned to be wrapped around the wrists."

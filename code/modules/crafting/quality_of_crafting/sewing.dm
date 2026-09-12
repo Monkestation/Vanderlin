@@ -394,6 +394,13 @@
 	craftdiff = 1
 	category = "Hat"
 
+/datum/repeatable_crafting_recipe/sewing/roguehood_monk
+	name = "cloth hood (alt)"
+	requirements = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1,)
+	output = /obj/item/clothing/head/roguehood/monk
+	craftdiff = 1
+	category = "Hat"
+
 /datum/repeatable_crafting_recipe/sewing/articap
 	name = "artificer cap"
 	requirements = list(/obj/item/natural/cloth = 1, /obj/item/natural/fibers = 1,)

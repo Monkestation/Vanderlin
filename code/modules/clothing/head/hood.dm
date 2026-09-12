@@ -246,3 +246,12 @@
 	detail_tag = "_detail"
 	color = CLOTHING_MAGE_BLUE
 	detail_color = CLOTHING_WHITE
+
+/obj/item/clothing/head/roguehood/monk
+	icon_state = "monkhood"
+
+/obj/item/clothing/head/roguehood/monk/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/head/roguehood/monk/colored/black
+	color = CLOTHING_SOOT_BLACK

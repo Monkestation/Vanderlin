@@ -97,6 +97,12 @@
 	icon_state = "shalal"
 	sellprice = 5
 
+/obj/item/storage/belt/leather/shalal/courtagent
+	populate_contents = list(
+		/obj/item/storage/keyring/courtagent,
+		/obj/item/lockpickring/mundane,
+	)
+
 /obj/item/storage/belt/leather/black
 	name = "black belt"
 	icon_state = "blackbelt"
@@ -563,6 +569,20 @@
 	. = ..()
 	for(var/i in 1 to max_storage)
 		var/obj/item/weapon/knife/throwingknife/steel/A = new(loc)
+		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
+			qdel(A)
+
+/obj/item/storage/belt/leather/knifebelt/black/east_iron/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/weapon/knife/throwingknife/eastern/A = new(loc)
+		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
+			qdel(A)
+
+/obj/item/storage/belt/leather/knifebelt/black/east_steel/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/weapon/knife/throwingknife/steel/eastern/A = new(loc)
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
 			qdel(A)
 

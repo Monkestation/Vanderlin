@@ -40,7 +40,10 @@
 		. += "[icon_state]_uncorked"
 
 /obj/item/reagent_containers/glass/bottle/waterskin/milk // Filled subtype used by the cheesemaker
-	list_reagents = list(/datum/reagent/consumable/milk = 64)
+	list_reagents = list(/datum/reagent/consumable/milk = 60)
+
+/obj/item/reagent_containers/glass/bottle/waterskin/water
+	list_reagents = list(/datum/reagent/water = 60)
 
 /obj/item/reagent_containers/glass/bottle/waterskin/purifier
 	name = "purifying waterskin"

@@ -30,6 +30,9 @@
 /obj/item/clothing/cloak/raincloak/colored/purple
 	color = CLOTHING_PLUM_PURPLE
 
+/obj/item/clothing/cloak/raincloak/colored/black
+	color = CLOTHING_ROYAL_BLACK
+
 /obj/item/clothing/cloak/raincloak/colored/mortus
 	name = "funeral cloak"
 	desc = "You're always shrouded by death."

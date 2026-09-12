@@ -40,7 +40,8 @@
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS,
 		TRAIT_KNOW_COURTAGENT_DOORS,
-		TRAIT_KNOWCOURTAGENTS
+		TRAIT_KNOWCOURTAGENTS,
+		TRAIT_KNOWBANDITS
 	)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -56,8 +57,6 @@
 	name = JOB_HAND
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/storage/keyring/hand
-	ring = /obj/item/clothing/ring/courtagent_ring/blacksteel
-
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -67,6 +66,17 @@
 		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(agent_callback), spawned))
 	else
 		agent_callback(spawned)
+
+/datum/job/hand/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/rings = list(
+		"Blacksteel Ring" = /obj/item/clothing/ring/courtagent_ring/blacksteel,
+		"Bronze Ring" = /obj/item/clothing/ring/courtagent_ring/bronze,
+		"Silver Ring" = /obj/item/clothing/ring/courtagent_ring/silver,
+		"Gold Ring" = /obj/item/clothing/ring/courtagent_ring/gold,
+	)
+	spawned.select_equippable(player_client, rings, message = "Choose Your Ring", title = "HAND")
 
 /datum/job/hand/proc/agent_callback(mob/living/carbon/human/H)
 	addtimer(CALLBACK(src, PROC_REF(know_agents), H), 6 SECONDS)

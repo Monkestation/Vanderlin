@@ -1,5 +1,5 @@
 
-/mob/living/carbon/human/get_equipped_items(include_flags = NONE)
+/mob/living/carbon/human/get_equipped_items(include_flags = NONE, ignore_skin = FALSE)
 	var/list/items = ..()
 	// if(!(include_flags & INCLUDE_POCKETS))
 	// 	items -= list(l_store, r_store, s_store)

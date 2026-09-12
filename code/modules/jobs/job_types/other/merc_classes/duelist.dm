@@ -28,7 +28,8 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/duelist
 
 	traits = list(
-		TRAIT_DODGEEXPERT
+		TRAIT_DODGEEXPERT,
+		TRAIT_EXPERT_PARRY
 	)
 
 /datum/job/advclass/mercenary/duelist/after_spawn(mob/living/carbon/human/spawned, client/player_client)

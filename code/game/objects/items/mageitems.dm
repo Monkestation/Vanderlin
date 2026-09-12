@@ -153,7 +153,7 @@
 
 /obj/item/weapon/knife/dagger/silver/arcyne/Initialize()
 	. = ..()
-	filter(type="drop_shadow", x=0, y=0, size=1, offset=1, color="#800080")
+	filter(type="drop_shadow", x=0, y=0, size=1, offset=2, color="#800080")
 
 /obj/item/weapon/knife/dagger/silver/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!istype(tool, /obj/item/ore/cinnabar))
