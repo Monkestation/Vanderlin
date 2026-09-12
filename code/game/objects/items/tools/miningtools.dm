@@ -1,6 +1,7 @@
 /obj/item/weapon/pick
 	force = DAMAGE_PICK
 	force_wielded = DAMAGE_PICK_WIELD
+	max_integrity = 450
 	possible_item_intents = list(PICK_INTENT)
 	gripped_intents = list(PICK_INTENT)
 	name = "pick"
@@ -38,6 +39,7 @@
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	force = DAMAGE_PICK - 3
 	force_wielded = DAMAGE_PICK_WIELD - 3
+	max_integrity = 350
 	toolspeed = 3
 	pickmult = 0.8 // Worse pick
 	associated_skill = /datum/attribute/skill/combat/axesmaces
@@ -51,7 +53,7 @@
 	icon_state = "steelpick"
 	force = DAMAGE_PICK + 3
 	force_wielded = DAMAGE_PICK_WIELD +3
-	max_integrity = INTEGRITY_STRONGEST + 100
+	max_integrity = 600
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	pickmult = 1.2
@@ -63,7 +65,7 @@
 	force = DAMAGE_PICK - 6
 	force_wielded = DAMAGE_PICK_WIELD - 6
 	gripped_intents = list(PICK_INTENT)
-	max_integrity = INTEGRITY_STANDARD + 50
+	max_integrity = 250
 	anvilrepair = null
 	melting_material = null
 	pickmult = 0.7 // Worse pick
@@ -78,6 +80,7 @@
 	righthand_file = 'icons/mob/inhands/weapons/hammers_righthand.dmi'
 	item_state = "drill"
 	possible_item_intents = list(MACE_SMASH)
+	max_integrity = 700
 	gripped_intents = list(/datum/intent/drill)
 	experimental_inhand = FALSE
 	experimental_onback = FALSE

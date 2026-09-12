@@ -54,7 +54,7 @@
 
 	drink_amt = min(victim.get_blood_volume(), drink_amt)
 	if(ingest)
-		drink_amt = victim.transfer_blood_impurities(reagents, drink_amt, 1.5, src)
+		drink_amt = victim.transfer_blood_impurities(reagents, drink_amt, 1.5)
 	if(used_vitae > 0)
 		var/datum/blood_type/victim_blood = victim.get_blood_type()
 		var/list/blood_data = victim_blood?.get_blood_data(victim)

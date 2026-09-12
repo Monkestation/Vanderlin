@@ -66,6 +66,9 @@
 	if(!prefs?.parent)
 		return FALSE
 
+	if(prefs.parent.is_donator())
+		return TRUE
+
 	return prefs.parent.has_triumph_buy(TRIUMPH_BUY_SUBTERRAN_DWARF)
 
 /datum/species/dwarf/mountain/subterra/get_skin_list()

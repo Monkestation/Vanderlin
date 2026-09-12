@@ -38,10 +38,13 @@
 		SPEC_ID_ELF,\
 		SPEC_ID_DROW,\
 		SPEC_ID_HALF_ORC,\
+		SPEC_ID_DWARF_ORC,\
 		SPEC_ID_TIEFLING,\
 	)
 	allowed_ages = list(AGE_ADULT, AGE_CHILD)
 	total_positions = 1
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	outfit = /datum/outfit/wretch/reject
 

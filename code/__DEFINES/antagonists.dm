@@ -6,3 +6,5 @@
 #define FLAG_ANTAG_CAP_TEAM				(1 << 2)
 
 #define IS_DEADITE(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/zombie))
+
+GLOBAL_VAR_INIT(midround_antag_permission, TRUE)

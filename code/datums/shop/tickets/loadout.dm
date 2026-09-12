@@ -22,10 +22,11 @@
 	if(!item)
 		to_chat(user, span_warning("That loadout item no longer exists."))
 		return FALSE
-	if(loadout_item_path in user.prefs.owned_loadout_items)
+	if("[loadout_item_path]" in user.prefs.owned_loadout_items)
 		to_chat(user, span_warning("You already own that loadout item."))
 		return FALSE
-	user.prefs.owned_loadout_items += loadout_item_path
+	user.prefs.owned_loadout_items += "[loadout_item_path]"
+	user.prefs.save_preferences()
 	to_chat(user, span_notice("Ticket used! Permanently unlocked: <b>[item.name]</b>!"))
 	return TRUE
 

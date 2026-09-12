@@ -36,8 +36,8 @@
 	M.forceMove(get_turf(src))
 	return ..()
 
-/obj/machinery/artificer_table/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(istype(I, /obj/item/weapon/hammer))
+/obj/machinery/artificer_table/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/weapon/hammer))
 		var/mob/living/carbon/human/buckled = locate() in buckled_mobs
 		if(buckled)
 			if(SEND_SIGNAL(buckled, COMSIG_AUGMENT_GET_STABILITY))
@@ -47,14 +47,14 @@
 				if(do_after(user, 5 SECONDS, target = buckled))
 					SEND_SIGNAL(buckled, COMSIG_AUGMENT_REPAIR, repair_amount, user)
 					user.mind?.add_sleep_experience(/datum/attribute/skill/craft/engineering, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE))
-			return
-		var/obj/item/weapon/hammer/H = I
+			return ITEM_INTERACT_SUCCESS
+		var/obj/item/weapon/hammer/H = tool
 		user.changeNext_move(CLICK_CD_RAPID)
 		if(!material)
-			return
+			return NONE
 		if(!material.artrecipe)
 			if(!choose_recipe(user))
-				return
+				return ITEM_INTERACT_BLOCKING
 		if(material.artrecipe.hammered || material.artrecipe.progress == 100)
 			playsound(src,'sound/combat/hits/onmetal/sheet (2).ogg', 100, TRUE)
 			shake_camera(user, 1, 1)
@@ -64,7 +64,7 @@
 			S.set_up(1, 1, front)
 			S.start()
 		var/skill = GET_MOB_SKILL_VALUE_OLD(user, material.artrecipe.appro_skill)
-		if(material.artrecipe.progress == 100)
+		if(material.artrecipe.progress >= 100)
 			for(var/i in 1 to material.artrecipe.created_amount)
 				var/atom/new_atom = new material.artrecipe.created_item(get_turf(src))
 				new_atom.update_integrity(new_atom.max_integrity, update_atom = FALSE)
@@ -75,7 +75,7 @@
 			qdel(material)
 			material = null
 			update_appearance(UPDATE_OVERLAYS)
-			return
+			return ITEM_INTERACT_SUCCESS
 		if(skill < material.artrecipe.craftdiff)
 			if(prob(max(0, 25 - user.goodluck(2) - (skill * 2))))
 				to_chat(user, span_warning("Ah yes, my incompetence bears fruit."))
@@ -83,23 +83,21 @@
 				user.mind.add_sleep_experience(material.artrecipe.appro_skill, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * material.artrecipe.craftdiff * 0.25))
 				qdel(material)
 				material = null
-				return
+				return ITEM_INTERACT_SUCCESS
 		if(!material.artrecipe.hammered)
 			playsound(src, pick('sound/combat/hits/onwood/fence_hit1.ogg', 'sound/combat/hits/onwood/fence_hit2.ogg', 'sound/combat/hits/onwood/fence_hit3.ogg'), 100, FALSE)
-			material.artrecipe.advance(I, user)
-			return
-	else if(!material && !(I.item_flags & (ABSTRACT|DROPDEL)))
-		I.forceMove(src)
-		material = I
+			material.artrecipe.advance(tool, user)
+			return ITEM_INTERACT_SUCCESS
+	else if(!material && !(tool.item_flags & (ABSTRACT|DROPDEL)))
+		tool.forceMove(src)
+		material = tool
 		update_appearance(UPDATE_OVERLAYS)
-		return
+		return ITEM_INTERACT_SUCCESS
 
-	if(material && material.artrecipe && material.artrecipe.hammered && istype(I, material.artrecipe.needed_item))
-		material.artrecipe.item_added(I, user)
-		qdel(I)
-		return
-
-	..()
+	if(material && material.artrecipe && material.artrecipe.hammered && istype(tool, material.artrecipe.needed_item))
+		material.artrecipe.item_added(tool, user)
+		qdel(tool)
+		return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/artificer_table/proc/choose_recipe(user)
 	if(!material)

@@ -1,6 +1,11 @@
 /mob/living/Login()
-	login_fade()
-	..()
+	. = ..()
+
+	if(!client)
+		return FALSE
+
+	START_PROCESSING(SSclient_mobs, src)
+
 	//Mind updates
 	sync_mind()
 	mind.show_memory(src, FALSE)
@@ -8,30 +13,15 @@
 	update_a_intents()
 	update_damage_hud()
 	update_health_hud()
-//	update_tod_hud()
 	update_spd()
-
-//	if (client && (stat == DEAD))
-//		client.ghostize()
 
 	var/turf/T = get_turf(src)
 	if (isturf(T))
+		update_z(null)
 		update_z(T.z)
 
 	if(!funeral_login())
 		log_game("[key_name(src)] on login: had an issue with funeral-checking logic.")
-
-/mob/living/proc/login_fade()
-	set waitfor = FALSE
-	if(!client)
-		return
-	var/atom/movable/screen/F = new /atom/movable/screen/fullscreen/fade()
-	client.screen += F
-	sleep(40)
-	if(!client)
-		return
-	client.screen -= F
-	do_time_change()
 
 // Handles players on login about death-related procs and notifications. Essentially a failsafe for client logouts/transfers. Called on /mob/living/Login().
 /mob/living/proc/funeral_login()

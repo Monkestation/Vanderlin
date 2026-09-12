@@ -119,31 +119,60 @@
 	return TRUE
 
 /// Returns the total bleed rate on this bodypart
-/obj/item/bodypart/proc/get_bleed_rate(ignore_is_bleeding = FALSE)
+/obj/item/bodypart/proc/get_bleed_rate()
 	if(!CAN_HAVE_BLOOD(owner))
 		return 0
 	if(!bleeds)
 		return 0
+
 	var/bleed_rate = 0
-	for(var/datum/wound/wound as anything in wounds)
-		bleed_rate += wound.bleed_rate
 
+	// Bleed sources with their own math or ignore bandages
 	for(var/datum/injury/injury as anything in injuries)
-		bleed_rate += injury.get_bleed_rate(ignore_is_bleeding)
-
+		bleed_rate += injury.get_bleed_rate()
 	for(var/obj/item/embedded as anything in embedded_objects)
 		if(!embedded.embedding.embedded_bloodloss)
 			continue
 		bleed_rate += embedded.embedding.embedded_bloodloss
-	if(!ignore_is_bleeding && bandage)
-		bleed_rate *= bandage?.bandage_effectiveness
-	for(var/obj/item/grabbing/grab in grabbedby)
-		bleed_rate *= grab.bleed_suppressing
-	bleed_rate = max(round(bleed_rate, 0.1), 0)
-	switch(burn_dam/max_damage) // backup bleed rate if you max out on burn damage
-		if(0.9 to INFINITY)
-			bleed_rate += BLEED_DAMAGE_RATIO / 5
-	return bleed_rate
+
+	var/bleed_multiplier = get_bleed_multiplier()
+
+	// Anything below this block will be completely stopped by bandage
+	if(bandage?.bandage_health)
+		return round(bleed_rate * bleed_multiplier, 0.1)
+
+	for(var/datum/wound/wound as anything in wounds)
+		bleed_rate += wound.bleed_rate
+	// backup bleed rate if you max out on burn damage
+	if((burn_dam / max_damage) >= 0.9)
+		bleed_rate += BLEED_DAMAGE_RATIO / 10
+
+	return round(bleed_rate * bleed_multiplier, 0.1)
+
+/// Get the bleed rate of all sources that are to be absorbed by a bandage
+/obj/item/bodypart/proc/get_bandaged_bleed_rate()
+	for(var/datum/injury/injury as anything in injuries)
+		if(!injury.is_bandaged())
+			continue
+		. += injury.get_bleed_rate(TRUE)
+	for(var/datum/wound/wound as anything in wounds)
+		. += wound.bleed_rate
+	// backup bleed rate if you max out on burn damage
+	if((burn_dam / max_damage) >= 0.9)
+		. += BLEED_DAMAGE_RATIO / 10
+	. *= get_bleed_multiplier()
+
+/obj/item/bodypart/proc/get_bleed_multiplier()
+	. = 1
+	if(tourniquet)
+		if(tourniquet.bleed_mod)
+			. *= tourniquet.bleed_mod
+		else
+			return 0
+	if(return_surgical_state() & SURGERY_VESSELS_CLAMPED)
+		. *= 0.5
+	for(var/obj/item/grabbing/grab as anything in grabbedby)
+		. *= grab.bleed_suppressing
 
 /obj/item/bodypart/proc/skeletonized_mod(bclass)
 	if(!skeletonized)
@@ -201,8 +230,13 @@
 				wounding_type = WOUND_BURN
 			if(BCLASS_LASHING)
 				wounding_type = WOUND_LASH
+			if(BCLASS_INTENSE_BURN)
+				wounding_type = WOUND_INTENSE_BURN
 
 	dam *= skeletonized_mod(wounding_type)
+
+	if(splinted && (wounding_type & (WOUND_BLUNT|WOUND_SLASH|WOUND_PUNCTURE)) && dam >= splint_item.break_threshold)
+		remove_splint(null, broken = TRUE)
 
 	if(wounding_type & WOUND_NONE)
 		return
@@ -221,7 +255,19 @@
 		//stack_trace("spec_attacked_by failed to create injury with [dam] damage and [wounding_type] wounding type!")
 
 	if(incoming_germ && injury)
-		injury.adjust_germ_level(incoming_germ * 0.1)
+		//Divide it by 3 to be reasonable
+		incoming_germ = CEILING(incoming_germ/3, 1)
+
+		//If the patient has antibiotics, kill germs by an amount equal to 10x the antibiotic force
+		//e.g. nalixidic acid has 35 force, thus would decrease germs here by 350
+		var/antibiotics = owner?.get_antibiotics()
+		incoming_germ = max(0, incoming_germ - (antibiotics * 10))
+
+		//This amount is not meaningful enough to cause an infection
+		if(incoming_germ < incoming_germ/2)
+			return
+
+		injury.adjust_germ_level(incoming_germ * 0.5)
 
 	/*
 	for(var/datum/wound/iter_wound as anything in wounds)
@@ -376,54 +422,40 @@
 	. = TRUE
 	bandage = new_bandage
 	new_bandage.forceMove(src)
-	if(!new_bandage.bandage_health)
+	if(new_bandage.bandage_health <= 0)
+		bandage_expire()
 		return
 	bandage_limb()
 
-/obj/item/bodypart/proc/try_bandage_expire()
+/**
+ * Depletes the bandage's health based on bleed_rate. Returns TRUE if the bandage stops the bleeding.
+ * bleed_rate - The amount removed from the bandage's health
+ */
+/obj/item/bodypart/proc/try_bandage_expire(bleed_rate)
+	if(!owner || !istype(bandage))
+		return FALSE
+
+	if(get_incision(ignore_gauze = TRUE))
+		owner.transfer_blood_to(bandage, bleed_rate * 0.1)
+
+	if(bandage.bandage_health <= 0)
+		return FALSE
+
+	bandage.bandage_health = max(bandage.bandage_health - bleed_rate, 0)
+	if(bandage.bandage_health <= 0)
+		bandage_expire()
+		return FALSE
+	return TRUE
+
+/obj/item/bodypart/proc/bandage_expire(silent)
 	if(!bandage)
-		return FALSE
-	var/bleed_rate = get_bleed_rate(TRUE)
-	if(!bleed_rate)
-		return FALSE
-
-	var/bandage_health = 1
-	if(istype(bandage, /obj/item/natural/cloth))
-		var/obj/item/natural/cloth/cloth = bandage
-
-		if(cloth.reagents && cloth.reagents.total_volume > 0)
-			if(owner && owner.reagents)
-				for(var/datum/reagent/reagent in cloth.reagents.reagent_list)
-					if(istype(reagent, /datum/reagent/blood))
-						continue
-					var/amount_to_transfer = min(reagent.volume, reagent.metabolization_rate)
-					if(amount_to_transfer > 0)
-						if(reagent.on_bodypart_absorb(owner, src, amount_to_transfer))
-							cloth.reagents.trans_id_to(owner, reagent.type, amount_to_transfer)
-						else
-							cloth.reagents.remove_reagent(reagent.type, amount_to_transfer)
-
-		if(owner)
-			owner.transfer_blood_to(cloth, bleed_rate * 0.1)
-
-		cloth.bandage_health -= bleed_rate
-		bandage_health = cloth.bandage_health
-
-	if(bandage_health <= 0)
-		return bandage_expire()
-	return FALSE
-
-/obj/item/bodypart/proc/bandage_expire()
-	if(!owner)
-		return FALSE
-	if(!bandage)
-		return FALSE
+		return
 	bandage.bandage_health = 0
-	bandage.bandage_effectiveness = 1
 	unbandage_limb()
-	if(owner.stat < UNCONSCIOUS)
-		to_chat(owner, span_warning("Blood soaks through the bandage on my [name]."))
-	return bandage.add_mob_blood(owner)
+	if(!silent && owner?.stat < UNCONSCIOUS)
+		to_chat(owner, span_userdanger("Blood soaks through the bandage on my [name]."))
+		bandage.add_mob_blood(owner)
+	return FALSE
 
 /obj/item/bodypart/proc/remove_bandage()
 	if(!bandage)
@@ -459,47 +491,3 @@
 	if(owner)
 		update_disabled()
 	return TRUE
-
-/// Returns surgery flags applicable to this bodypart
-/obj/item/bodypart/proc/get_surgery_flags()
-	var/returned_flags = NONE
-	if(can_bloody_wound())
-		returned_flags |= SURGERY_BLOODY
-
-	if(get_incision())
-		returned_flags |= SURGERY_INCISED
-
-	var/static/list/retracting_behaviors = list(
-		TOOL_RETRACTOR,
-		TOOL_CROWBAR,
-		TOOL_IMPROVISED_RETRACTOR,
-	)
-	var/static/list/clamping_behaviors = list(
-		TOOL_HEMOSTAT,
-		TOOL_WIRECUTTER,
-		TOOL_IMPROVISED_HEMOSTAT,
-	)
-	for(var/obj/item/embedded as anything in embedded_objects)
-		if((embedded.tool_behaviour in retracting_behaviors) || embedded.embedding?.retract_limbs)
-			returned_flags |= SURGERY_RETRACTED
-		if((embedded.tool_behaviour in clamping_behaviors) || embedded.embedding?.clamp_limbs)
-			returned_flags |= SURGERY_CLAMPED
-	if(has_wound(/datum/wound/dislocation))
-		returned_flags |= SURGERY_DISLOCATED
-	if(has_wound(/datum/wound/fracture))
-		returned_flags |= SURGERY_BROKEN
-	if(skeletonized)
-		returned_flags |= SURGERY_INCISED //ehh... we have access to whatever organ is there
-	return returned_flags
-
-/obj/item/bodypart/proc/is_retracted()
-	var/static/list/retracting_behaviors = list(
-		TOOL_RETRACTOR,
-		TOOL_CROWBAR,
-		TOOL_IMPROVISED_RETRACTOR,
-	)
-
-	for(var/obj/item/embedded as anything in embedded_objects)
-		if((embedded.tool_behaviour in retracting_behaviors) || embedded.embedding?.retract_limbs)
-			return TRUE
-	return FALSE

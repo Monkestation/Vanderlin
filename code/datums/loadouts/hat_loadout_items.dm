@@ -165,3 +165,9 @@
 	ui_category = "Hats"
 
 	triumph_cost_permanent = 75
+
+/datum/loadout_item/peel_pin
+	name = "Peel Pin"
+	item_path = /obj/item/clothing/head/peel_pin
+	ui_category = "Hats"
+	loadout_flags = LOADOUT_FLAG_GIVEAWAY_ONLY

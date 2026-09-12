@@ -32,7 +32,7 @@
 			maxaudience = 6
 			maxsongs = 4
 	audience |= H // Bard is always in their own audience
-	H.verbs += list(/mob/living/carbon/human/proc/explain_bard, /mob/living/carbon/human/proc/clear_audience)
+	add_verb(H, list(/mob/living/carbon/human/proc/explain_bard, /mob/living/carbon/human/proc/checkaudience, /mob/living/carbon/human/proc/clear_audience))
 
 /mob/living/carbon/human/proc/in_audience(mob/living/carbon/human/audiencee)
 	if(!src.inspiration)
@@ -52,7 +52,7 @@
 	if(src.has_status_effect(/datum/status_effect/buff/playing_melody) || src.has_status_effect(/datum/status_effect/buff/playing_dirge))
 		return
 	inspiration.audience = list(src)
-
+	to_chat(src, span_notice("My audience was cleared."))
 	return TRUE
 
 /mob/living/carbon/human/proc/toggleaudience(mob/living/carbon/human/target)
@@ -82,11 +82,15 @@
 	if(!inspiration)
 		return FALSE
 	var/text = ""
+	var/insert_separator = FALSE
 	for(var/mob/living/carbon/human/folks in inspiration.audience)
-		text += "[folks.real_name], "
+		if(insert_separator)
+			text += ", "
+		text += "[folks.real_name]"
+		insert_separator = TRUE
 	if(!text)
 		return
-	to_chat(src, "My audience members are: [text]")
+	to_chat(src, "My audience members are: [text].")
 	return TRUE
 
 /mob/living/carbon/human/proc/explain_bard()

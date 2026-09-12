@@ -189,7 +189,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/mapping_helpers/no_lava)
 	)
 
 	// Get the first thing we find starting with doors and closets
-	for(var/thing as anything in valid)
+	for(var/thing in valid)
 		var/obj/found = locate(thing) in loc
 		if(found)
 			payload(found)

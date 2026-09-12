@@ -249,11 +249,11 @@
 		for(var/i = 1 to split)
 			contents += "<tr>"
 			contents += "<td style='width: 50%; text-align: center;'>\
-				<a href='?src=[REF(src)];changecat=[unlocked_cats[i]]'>[unlocked_cats[i]]</a>\
+				<a href='byond://?src=[REF(src)];changecat=[unlocked_cats[i]]'>[unlocked_cats[i]]</a>\
 				</td>"
 			if(i + split <= unlocked_cats.len)
 				contents += "<td style='width: 50%; text-align: center;'>\
-					<a href='?src=[REF(src)];changecat=[unlocked_cats[i+split]]'>[unlocked_cats[i+split]]</a>\
+					<a href='byond://?src=[REF(src)];changecat=[unlocked_cats[i+split]]'>[unlocked_cats[i+split]]</a>\
 					</td>"
 			else
 				contents += "<td></td>"
@@ -261,7 +261,7 @@
 		contents += "</table>"
 	else
 		contents += "<center>[current_cat]<BR></center>"
-		contents += "<center><a href='?src=[REF(src)];changecat=0'>\[RETURN\]</a><BR><BR></center>"
+		contents += "<center><a href='byond://?src=[REF(src)];changecat=0'>\[RETURN\]</a><BR><BR></center>"
 		var/list/pax = list()
 		for(var/pack in SSmerchant.supply_packs)
 			var/datum/supply_pack/picked_pack = SSmerchant.supply_packs[pack]

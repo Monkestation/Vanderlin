@@ -22,7 +22,7 @@
 	break_sound = 'sound/foley/breaksound.ogg'
 
 	slot_flags = ITEM_SLOT_ARMOR
-	armor = ARMOR_MINIMAL
+	armor_type = /datum/armor/minimal
 	experimental_onhip = TRUE // does this do anything on armor I wonder?
 	body_parts_covered = CHEST
 
@@ -41,6 +41,7 @@
 	abstract_type = /obj/item/clothing/armor
 
 	material_category = ARMOR_MAT_PLATE
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/armor/worn_overlays(mutable_appearance/standing, isinhands = FALSE, icon_file, dummy_block = FALSE)
 	. = ..()

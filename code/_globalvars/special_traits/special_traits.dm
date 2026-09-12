@@ -4,10 +4,10 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 
 /proc/build_special_traits()
 	. = list()
-	for(var/datum/special_trait/type as anything in typesof(/datum/special_trait))
-		if(IS_ABSTRACT(type))
+	for(var/datum/special_trait/trait_type as anything in typesof(/datum/special_trait))
+		if(IS_ABSTRACT(trait_type))
 			continue
-		.[type] = new type()
+		.[trait_type] = new trait_type()
 	return .
 
 /proc/roll_random_special(client/player)
@@ -48,6 +48,10 @@ GLOBAL_LIST_INIT(special_traits, build_special_traits())
 		player = character.client
 	apply_prefs_special(character, player)
 	apply_voicepacks(character, player)
+
+	// These need to get updated for traits
+	for(var/datum/atom_hud/alternate_appearance/basic/traits/alt_hud in GLOB.active_alternate_appearances)
+		alt_hud.apply_to_new_mob(character)
 
 /proc/apply_prefs_special(mob/living/carbon/human/character, client/player)
 	if(!player)

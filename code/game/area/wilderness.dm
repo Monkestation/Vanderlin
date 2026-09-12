@@ -51,13 +51,13 @@
 	name = "indoors - wilderness"
 	icon = 'icons/turf/areas/forest.dmi'
 	icon_state = "indoorwild"
+	droning_index = DRONING_INDOORS
+	droning_index_night = DRONING_INDOORS
 
 /area/indoors/wilderness/tavern
 	name = "fermented cackleberry"
 	icon_state = "tavern"
 	first_time_text = "The Fermented Cackleberry"
-	droning_index = DRONING_INDOORS
-	droning_index_night = DRONING_INDOORS
 	background_track = "sound/blank.ogg"
 	background_track_dusk = "sound/blank.ogg"
 	background_track_night = "sound/blank.ogg"
@@ -91,6 +91,13 @@
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/magiciantower
 
+/area/indoors/wilderness/saint_crypt
+	name = "Saint's Rest"
+	icon_state = "saint_crypt"
+	ambient_index = AMBIENCE_DUNGEON
+	ambient_index_night = AMBIENCE_DUNGEON
+	background_track = 'sound/music/area/churchnight.ogg'
+	first_time_text = "SAINT'S REST"
 
 /area/outdoors/wilderness/safe
 	ambush_mobs = null

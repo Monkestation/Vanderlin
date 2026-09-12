@@ -436,28 +436,28 @@
 				selectedPosition = positionRef;
 
 				// Trigger server-side selection update
-				window.location.href = '?src=[REF(src)];action=select_position;position_id=' + positionRef;
+				window.location.href='byond://?src=[REF(src)];action=select_position;position_id=' + positionRef;
 			}
 		}
 
 		function createNewPosition() {
-			window.location.href = '?src=[REF(src)];action=create_position';
+			window.location.href='byond://?src=[REF(src)];action=create_position';
 		}
 
 		function editPosition(positionRef) {
-			window.location.href = '?src=[REF(src)];action=edit_position;position_id=' + positionRef;
+			window.location.href='byond://?src=[REF(src)];action=edit_position;position_id=' + positionRef;
 		}
 		function assignMember(positionRef) {
-			window.location.href = '?src=[REF(src)];action=assign_member;position_id=' + positionRef;
+			window.location.href='byond://?src=[REF(src)];action=assign_member;position_id=' + positionRef;
 		}
 
 		function toggleAssignPermission(positionRef) {
-			window.location.href = '?src=[REF(src)];action=toggle_assign_permission;position_id=' + positionRef;
+			window.location.href='byond://?src=[REF(src)];action=toggle_assign_permission;position_id=' + positionRef;
 		}
 
 		function removePosition(positionRef) {
 			if(confirm('Are you sure you want to remove this position?')) {
-				window.location.href = '?src=[REF(src)];action=remove_position;position_id=' + positionRef;
+				window.location.href='byond://?src=[REF(src)];action=remove_position;position_id=' + positionRef;
 			}
 		}
 

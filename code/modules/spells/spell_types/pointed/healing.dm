@@ -10,7 +10,7 @@
 	charge_sound = 'sound/magic/holycharging.ogg'
 
 	cast_range = 6
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine)
@@ -24,7 +24,7 @@
 	/// Wound healing modifier
 	var/wound_modifier = 0.25
 	/// Blood healing amount
-	var/blood_restoration = BLOOD_VOLUME_SURVIVE / 6
+	var/blood_restoration = BLOOD_VOLUME_SURVIVE / 15
 	/// Stuns undead
 	var/stun_undead = FALSE
 	/// What kind of healing is it?
@@ -40,6 +40,24 @@
 
 /datum/action/cooldown/spell/healing/cast(mob/living/cast_on)
 	. = ..()
+	if(cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark))
+		cast_on.visible_message(
+			span_warning("[cast_on] recoils as their flesh is burned by blood!"),
+			span_bloody("The Blood Mark sears my flesh with a wave of pain!"),
+		)
+		cast_on.emote("scream")
+		to_chat(owner, span_danger("[cast_on] is Blood Marked! Divine healing will not reach them until the mark clears!"))
+		return
+	if(cast_on.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+		cast_on.visible_message(
+			span_warning("[cast_on] recoils as their flesh is burned by blood!"),
+			span_bloody("The Blood Curse sears my flesh with a wave of pain!"),
+			span_hear("I hear something dripping onto the ground..."),
+		)
+		cast_on.emote("scream")
+		to_chat(owner, span_danger("[cast_on] is Blood Cursed! Permanently marked by Blood Magic, Divine Healing will never reach them again!"))
+		new /obj/effect/decal/cleanable/blood/puddle(get_turf(cast_on), cast_on.get_blood_type().color)
+		return
 	var/datum/component/vampire_disguise/vampire_disguise = cast_on.GetComponent(/datum/component/vampire_disguise)
 	switch(healing_type)
 		if(HEALING_PROFANE)
@@ -272,20 +290,20 @@
 	if(affecting.heal_damage(brute = amount_healed, burn = amount_healed))
 		C.update_damage_overlays()
 
-	for(var/obj/item/organ/possible_organ in affecting.getorganslotlist(ORGAN_SLOT_ARTERY))
-		possible_organ.applyOrganDamage(-amount_healed * wound_modifier	)
-	for(var/obj/item/organ/possible_organ in affecting.getorganlist(/obj/item/organ))
+	for(var/obj/item/organ/possible_organ as anything in affecting.getorganlist(/obj/item/organ))
+		if(ORGAN_SLOT_ARTERY in possible_organ.organ_efficiency)
+			possible_organ.applyOrganDamage(-amount_healed * wound_modifier)
+			continue
 		if(possible_organ.scarred_below(40))
-			to_chat(owner, span_danger("[cast_on]'s \the [possible_organ] is too scarred for my powers."))
 			continue
 		if(possible_organ.organ_flags & ORGAN_DESTROYED)
 			possible_organ.organ_flags &= ~ORGAN_DESTROYED //I am having pity on people here at this point I won't force you to get new organs unless they fully necrose.
 			possible_organ.scar_organ(20, 40)
-		if(possible_organ.damage > possible_organ.medium_threshold)
-			possible_organ.applyOrganDamage(-amount_healed * wound_modifier)
+		possible_organ.applyOrganDamage(-amount_healed * wound_modifier)
 
 /datum/action/cooldown/spell/healing/profane
 	name = "Corrupt Lesser Miracle"
+	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	required_items = null
 	healing_type = HEALING_PROFANE
@@ -313,8 +331,13 @@
 	stun_undead = TRUE
 	patron_restrictive = TRUE
 
+/datum/action/cooldown/spell/healing/greater/noc
+	name = "Lunar Miracle"
+	button_icon_state = "noc"
+
 /datum/action/cooldown/spell/healing/greater/profane
 	name = "Corrupt Miracle"
+	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	required_items = null
 	stun_undead = FALSE

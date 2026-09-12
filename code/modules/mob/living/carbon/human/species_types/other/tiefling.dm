@@ -11,7 +11,6 @@
 	raw_attribute_list = list(
 		STAT_PERCEPTION = 2,
 		STAT_INTELLIGENCE = 1,
-		STAT_CONSTITUTION = -1,
 		STAT_SPEED = 1,
 		STAT_FORTUNE = -1
 	)
@@ -143,7 +142,6 @@
 	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/hellspeak)
-	C.AddComponent(/datum/component/malaguero, 2, 1, 30 SECONDS)
 
 /datum/species/tieberian/after_creation(mob/living/carbon/C)
 	. = ..()
@@ -153,7 +151,6 @@
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/hellspeak)
-	qdel(C.GetComponent(/datum/component/malaguero))
 
 /datum/species/tieberian/qualifies_for_rank(rank, list/features)
 	return TRUE

@@ -2,7 +2,7 @@
 	icon_state = "warrior"
 	icon_living = "warrior"
 	icon_dead = "warrior_dead"
-	icon = 'icons/obj/cellular/putrid_large.dmi'
+	icon = 'icons/obj/cellular/putrid_big.dmi'
 
 	possible_evolutions = list()
 

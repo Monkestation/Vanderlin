@@ -1,7 +1,8 @@
 GLOBAL_LIST_EMPTY(outlawed_players)
 GLOBAL_LIST_EMPTY(lord_decrees)
 GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
-GLOBAL_LIST_EMPTY(roundstart_court_agents)
+GLOBAL_LIST_EMPTY(court_agents)
+GLOBAL_LIST_EMPTY(ex_court_agents)
 
 #define MODE_NONE "None"
 #define MODE_MAKE_ANNOUNCEMENT "Make Announcement"
@@ -13,7 +14,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 /proc/initialize_laws_of_the_land()
 	var/list/laws = strings("laws_of_the_land.json", "lawsets")
 	var/list/lawsets_weighted = list()
-	for(var/lawset_name as anything in laws)
+	for(var/lawset_name in laws)
 		var/list/lawset = laws[lawset_name]
 		lawsets_weighted[lawset_name] = lawset["weight"]
 	var/chosen_lawset = pickweight(lawsets_weighted)
@@ -114,7 +115,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 /// Check if the mob has the crown
 /obj/structure/fake_machine/titan/proc/has_crown(mob/living/carbon/human/checked_mob)
-	if(!checked_mob.head || !istype(checked_mob.head, /obj/item/clothing/head/crown/serpcrown))
+	if(!(checked_mob.head == SSroguemachine.crown) && !(checked_mob.wear_mask == SSroguemachine.crown))
 		say("You need the crown!")
 		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
 		return FALSE
@@ -240,7 +241,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 				say("[crown_holder.real_name] holds the crown!")
 				playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 				return
-			if(crown_holder.head == crown)
+			if((crown_holder.head == crown) || (crown_holder.wear_mask == crown))
 				say("[crown_holder.real_name] wears the crown!")
 				playsound(src, 'sound/misc/machinetalk.ogg', 100, FALSE, -1)
 				return
@@ -450,7 +451,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 		/datum/job/churchling::title,
 	)
 	var/list/possible_positions = list()
-	for(var/j_title as anything in unfiltered_positions)
+	for(var/j_title in unfiltered_positions)
 		var/datum/job/pos = SSjob.GetJob(j_title)
 		if(pos.total_positions != 0 && pos.spawn_positions != 0)
 			possible_positions += j_title
@@ -468,6 +469,7 @@ GLOBAL_LIST_EMPTY(roundstart_court_agents)
 
 	victim.job = new_pos
 	victim.mind?.set_assigned_role(new_pos)
+	victim.mind?.update_alt_title(new_pos)
 	if(ishuman(victim))
 		var/mob/living/carbon/human/human = victim
 		if(!HAS_TRAIT(human, TRAIT_RECRUITED) && HAS_TRAIT(human, TRAIT_FOREIGNER))

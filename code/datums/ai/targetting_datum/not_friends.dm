@@ -12,22 +12,21 @@
 	if(attack_closed_turf && isclosedturf(target))
 		return TRUE
 
-	if (ismob(target))
+	if(ismob(target))
 		var/mob/mob_target = target
 		if (mob_target.stat > attack_until_past_stat)
 			return FALSE
 
-	if (living_mob.see_invisible < target.invisibility)
-		return FALSE
-	if (!isturf(target.loc)) // z check will always fail if target is in a mech
-		return FALSE
-	if (!living_mob.ai_controller) // How did you get here?
+	if(living_mob.see_invisible < target.invisibility)
 		return FALSE
 
-	if((living_mob in SSmatthios_mobs.matthios_mobs) && (target in SSmatthios_mobs.matthios_mobs))
+	if(!isturf(target.loc)) // z check will always fail if target is in a mech
 		return FALSE
 
-	if (!(target in living_mob.ai_controller.blackboard[BB_FRIENDS_LIST]))
+	if(!living_mob.ai_controller) // How did you get here?
+		return FALSE
+
+	if(!(target in living_mob.ai_controller.blackboard[BB_FRIENDS_LIST]))
 		// We don't have any friends, anything's fair game
 		// OR This is not our friend, fire at will
 		return TRUE

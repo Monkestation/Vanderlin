@@ -164,7 +164,8 @@
 		var/turf/target = GET_TURF_ABOVE(src)
 		// EXPERIMENTAL: Allow climbing up through railings to replicate old behavior. Revisit when refactoring CanPass.
 		if(target.is_blocked_turf(exclude_mobs = TRUE, ignore_atoms = list(/obj/structure/fluff/railing), type_list = TRUE))
-			target = GET_TURF_ABOVE(user)
+			var/turf/turf = get_turf(user)
+			target = GET_TURF_ABOVE(turf)
 		if(target.zPassOut(DOWN) || target.is_blocked_turf(exclude_mobs = TRUE, ignore_atoms = list(/obj/structure/fluff/railing), type_list = TRUE))
 			to_chat(user, span_warning("I can't climb here."))
 			return

@@ -6,7 +6,7 @@ GLOBAL_VAR_INIT(pocket_portal, null)
 	pixel_x = -16
 	density = FALSE
 	anchored = TRUE
-	max_integrity = 10000000
+	max_integrity = INTEGRITY_UNBREAKABLE
 
 	var/list/mob_exit_point = list()
 
@@ -24,7 +24,7 @@ GLOBAL_VAR_INIT(pocket_portal, null)
 	if(!output || QDELETED(output))
 		return
 	user.forceMove(get_turf(output))
-
+/*
 /datum/enchantment/pocket_dimension
 	enchantment_name = "Pocket Dimension"
 	examine_text = "An alternative space exists in here."
@@ -54,3 +54,4 @@ GLOBAL_VAR_INIT(pocket_portal, null)
 		added.forceMove(get_turf(portal))
 	else if (mob)
 		mob.forceMove(get_turf(portal))
+*/

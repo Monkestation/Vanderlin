@@ -45,13 +45,13 @@ GLOBAL_VAR_INIT(hsboxspawn, TRUE)
 		for(var/T in hrefs)
 			var/href = hrefs[T]
 			if(href)
-				hsbinfo += "- <a href='?[REF(src)];hsb=[hrefs[T]]'>[T]</a><br>"
+				hsbinfo += "- <a href='byond://?[REF(src)];hsb=[hrefs[T]]'>[T]</a><br>"
 			else
 				hsbinfo += "<br><b>[T]</b><br>"
 		hsbinfo += "<hr>"
-		hsbinfo += "- <a href='?[REF(src)];hsb=hsbcloth'>Spawn Clothing...</a><br>"
-		hsbinfo += "- <a href='?[REF(src)];hsb=hsbreag'>Spawn Reagent Container...</a><br>"
-		hsbinfo += "- <a href='?[REF(src)];hsb=hsbobj'>Spawn Other Item...</a><br><br>"
+		hsbinfo += "- <a href='byond://?[REF(src)];hsb=hsbcloth'>Spawn Clothing...</a><br>"
+		hsbinfo += "- <a href='byond://?[REF(src)];hsb=hsbreag'>Spawn Reagent Container...</a><br>"
+		hsbinfo += "- <a href='byond://?[REF(src)];hsb=hsbobj'>Spawn Other Item...</a><br><br>"
 
 	usr << browse(hsbinfo, "window=hsbpanel")
 
@@ -97,7 +97,7 @@ GLOBAL_VAR_INIT(hsboxspawn, TRUE)
 				if(!GLOB.hsboxspawn) return
 
 				if(!clothinfo)
-					clothinfo = "<b>Clothing</b> <a href='?[REF(src)];hsb=hsbreag'>(Reagent Containers)</a> <a href='?[REF(src)];hsb=hsbobj'>(Other Items)</a><hr><br>"
+					clothinfo = "<b>Clothing</b> <a href='byond://?[REF(src)];hsb=hsbreag'>(Reagent Containers)</a> <a href='byond://?[REF(src)];hsb=hsbobj'>(Other Items)</a><hr><br>"
 					var/list/all_items = subtypesof(/obj/item/clothing)
 					for(var/typekey in spawn_forbidden)
 						all_items -= typesof(typekey)
@@ -111,7 +111,7 @@ GLOBAL_VAR_INIT(hsboxspawn, TRUE)
 				if(!GLOB.hsboxspawn) return
 
 				if(!reaginfo)
-					reaginfo = "<b>Reagent Containers</b> <a href='?[REF(src)];hsb=hsbcloth'>(Clothing)</a> <a href='?[REF(src)];hsb=hsbobj'>(Other Items)</a><hr><br>"
+					reaginfo = "<b>Reagent Containers</b> <a href='byond://?[REF(src)];hsb=hsbcloth'>(Clothing)</a> <a href='byond://?[REF(src)];hsb=hsbobj'>(Other Items)</a><hr><br>"
 					var/list/all_items = subtypesof(/obj/item/reagent_containers)
 					for(var/typekey in spawn_forbidden)
 						all_items -= typesof(typekey)
@@ -125,7 +125,7 @@ GLOBAL_VAR_INIT(hsboxspawn, TRUE)
 				if(!GLOB.hsboxspawn) return
 
 				if(!objinfo)
-					objinfo = "<b>Other Items</b> <a href='?[REF(src)];hsb=hsbcloth'>(Clothing)</a> <a href='?[REF(src)];hsb=hsbreag'>(Reagent Containers)</a><hr><br>"
+					objinfo = "<b>Other Items</b> <a href='byond://?[REF(src)];hsb=hsbcloth'>(Clothing)</a> <a href='byond://?[REF(src)];hsb=hsbreag'>(Reagent Containers)</a><hr><br>"
 					var/list/all_items = subtypesof(/obj/item/) - typesof(/obj/item/clothing) - typesof(/obj/item/reagent_containers)
 					for(var/typekey in spawn_forbidden)
 						all_items -= typesof(typekey)

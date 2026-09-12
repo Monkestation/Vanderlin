@@ -134,7 +134,7 @@
 /atom/movable/lighting_object/ex_act(severity)
 	return 0
 
-/atom/movable/lighting_object/onTransitZ()
+/atom/movable/lighting_object/onTransitZ(turf/old_turf, turf/new_turf)
 	return
 
 // Override here to prevent things accidentally moving around overlays.

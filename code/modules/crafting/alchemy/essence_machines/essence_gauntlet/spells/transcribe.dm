@@ -19,9 +19,7 @@
 	desc = "A magic piece of paper transcribes whats happening around."
 	button_icon_state = "transcribe"
 	cast_range = 1
-	point_cost = 4
 	cooldown_time = 3 MINUTES
-	attunements = list(/datum/attunement/polymorph)
 	essences = list(/datum/thaumaturgical_essence/order, /datum/thaumaturgical_essence/light)
 	var/item_type = /obj/item/paper/magictranscription
 
@@ -60,7 +58,7 @@
 			body { background-image:url('book.png');background-repeat: repeat; }</style></head><body scroll=yes>"}
 		dat += info
 		dat += "<br>"
-		dat += "<a href='?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
+		dat += "<a href='byond://?src=[REF(src)];close=1' style='position:absolute;right:50px'>Close</a>"
 		dat += "</body></html>"
 		user << browse(dat, "window=reading;size=500x400;can_close=1;can_minimize=0;can_maximize=0;can_resize=1;titlebar=0;border=0")
 		onclose(user, "reading", src)
@@ -204,3 +202,10 @@
 		. += span_notice("It contains [storedinfo.len] recorded speech\s ([mins]m [secs]s of magic remaining).")
 	else
 		. += span_notice("It's blank and ready to record.")
+
+/datum/action/cooldown/spell/essence/transcribe/spell
+	name = "Arcane Transcription"
+	spell_cost = 20
+	spell_type = SPELL_MANA
+
+	required_form = FORM_ARCANE

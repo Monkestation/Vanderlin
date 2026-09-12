@@ -10,6 +10,7 @@
 #define BODY_ZONE_PRECISE_EARS		"ears"
 #define BODY_ZONE_PRECISE_R_EYE		"r_eye"
 #define BODY_ZONE_PRECISE_L_EYE		"l_eye"
+#define BODY_ZONES_EYES list(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
 #define BODY_ZONE_PRECISE_NOSE		"nose"
 #define BODY_ZONE_PRECISE_MOUTH		"mouth"
 #define BODY_ZONE_PRECISE_NECK		"neck"
@@ -34,6 +35,26 @@
 	BODY_ZONE_R_ARM, BODY_ZONE_L_ARM, \
 	BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT, \
 	BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, \
+)
+
+#define ALL_BODY_ZONES list(BODY_ZONE_HEAD, BODY_ZONE_CHEST, BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+#define LIMB_ZONES list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+#define ARM_ZONES list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM)
+#define LEG_ZONES list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+#define ALL_PRECISE_ZONES list(\
+	BODY_ZONE_PRECISE_SKULL,\
+	BODY_ZONE_PRECISE_EARS,\
+	BODY_ZONE_PRECISE_L_EYE,\
+	BODY_ZONE_PRECISE_R_EYE,\
+	BODY_ZONE_PRECISE_NOSE,\
+	BODY_ZONE_PRECISE_MOUTH,\
+	BODY_ZONE_PRECISE_NECK,\
+	BODY_ZONE_PRECISE_STOMACH,\
+	BODY_ZONE_PRECISE_GROIN,\
+	BODY_ZONE_PRECISE_L_HAND,\
+	BODY_ZONE_PRECISE_R_HAND,\
+	BODY_ZONE_PRECISE_L_FOOT,\
+	BODY_ZONE_PRECISE_R_FOOT,\
 )
 
 #define GENERIC_FRACTURE_BODYPARTS list(\
@@ -70,6 +91,7 @@
 #define ORGAN_SLOT_ANTENNAS "antennas"
 #define ORGAN_SLOT_WINGS "wings"
 #define ORGAN_SLOT_SNOUT "snout"
+#define ORGAN_SLOT_ZOMBIE "zombie_organ"
 
 #define ORGAN_SLOT_NECK_FEATURE "neck_feature"
 #define ORGAN_SLOT_HEAD_FEATURE "head_feature"
@@ -81,14 +103,6 @@
 #define BODYPART_FEATURE_ACCESSORY "accessory"
 #define BODYPART_FEATURE_FACE_DETAIL "facedetail"
 #define BODYPART_FEATURE_BRAND "brand"
-
-//flags for requirements for a surgery step
-#define SURGERY_BLOODY (1<<0)
-#define SURGERY_INCISED (1<<1)
-#define SURGERY_RETRACTED (1<<2)
-#define SURGERY_CLAMPED	(1<<3)
-#define SURGERY_DISLOCATED (1<<4)
-#define SURGERY_BROKEN (1<<5)
 
 // ~flags for the limb_flags var on /obj/item/bodypart
 /// Can suffer artery wounds
@@ -113,29 +127,33 @@
 ///this is for bodyparts that are bone covered
 #define BODYPART_BONE_ENCASED (1<<12)
 
-//flags for the organ_flags var on /obj/item/organ
-/// Synthetic organs, or cybernetic organs. Reacts to EMPs and don't deteriorate or heal
-#define ORGAN_SYNTHETIC			(1<<0)
+// Flags for the organ_flags var on /obj/item/organ
+/// Organic organs, the default.
+#define ORGAN_ORGANIC (1<<0)
+/// Synthetic organs, or cybernetic organs. Don't deteriorate or heal
+#define ORGAN_ROBOTIC (1<<1)
 /// Frozen organs, don't deteriorate
-#define ORGAN_FROZEN			(1<<1)
+#define ORGAN_FROZEN (1<<3)
 /// Failing organs perform damaging effects until replaced or fixed
-#define ORGAN_FAILING			(1<<2)
+#define ORGAN_FAILING (1<<4)
 /// Was this organ implanted/inserted/etc, if true will not be removed during species change.
-#define ORGAN_EXTERNAL			(1<<3)
+#define ORGAN_EXTERNAL (1<<5)
 /// Currently only the brain - Removal of this organ immediately kills you
-#define ORGAN_VITAL				(1<<4)
+#define ORGAN_VITAL (1<<6)
 /// Destroyed organs don't function and cannot be repaired, needs a transplant
-#define ORGAN_DESTROYED (1<<5)
+#define ORGAN_DESTROYED	(1<<7)
 /// Not only is the organ failing, it is completely septic and spreading germs around
-#define ORGAN_NECROTIC (1<<6)
+#define ORGAN_NECROTIC (1<<8)
 /// Organ has been cut away from the owner and can be safely removed during surgery
-#define ORGAN_CUT_AWAY (1<<7)
+#define ORGAN_CUT_AWAY (1<<9)
 /// Organ should update limb efficiency when damaged or healed
-#define ORGAN_LIMB_SUPPORTER (1<<8)
+#define ORGAN_LIMB_SUPPORTER (1<<10)
 /// Organ shouldn't be counted in /obj/item/bodypart/proc/damage_internal_organs()
-#define ORGAN_NO_VIOLENT_DAMAGE (1<<9)
+#define ORGAN_NO_VIOLENT_DAMAGE (1<<11)
 /// Organ cannot ever become destroyed beyond repair
-#define ORGAN_INDESTRUCTIBLE (1<<10)
+#define ORGAN_INDESTRUCTIBLE (1<<12)
+/// Organ cannot be removed through normal means
+#define ORGAN_UNREMOVABLE (1<<13)
 
 DEFINE_BITFIELD(organ_flags, list(
 	"ORGAN_DESTROYED" = ORGAN_DESTROYED,
@@ -195,10 +213,10 @@ DEFINE_BITFIELD(organ_flags, list(
 #define MAX_ORGAN_DECAY_INFECTION 0.5
 
 
-// ~efficiency defines
+// ~efficiency defines. Keep parity with organ damage thresholds
 #define ORGAN_OPTIMAL_EFFICIENCY 100
-#define ORGAN_BRUISED_EFFICIENCY 50
-#define ORGAN_FAILING_EFFICIENCY 20
+#define ORGAN_BRUISED_EFFICIENCY ORGAN_OPTIMAL_EFFICIENCY * 0.8
+#define ORGAN_FAILING_EFFICIENCY ORGAN_OPTIMAL_EFFICIENCY * 0.2
 #define ORGAN_DESTROYED_EFFICIENCY 0
 
 // ~organ failure defines
@@ -209,8 +227,15 @@ DEFINE_BITFIELD(organ_flags, list(
 /// Normally 50% of the default blood volume (230cl)
 #define DEFAULT_TOTAL_BLOOD_REQ	BLOOD_VOLUME_NORMAL * 0.33
 #define DEFAULT_TOTAL_OXYGEN_REQ 50
-#define DEFAULT_TOTAL_NUTRIMENT_REQ	HUNGER_FACTOR
-#define DEFAULT_TOTAL_HYDRATION_REQ THIRST_FACTOR
+/// Base factor at which mob nutrition decreases
+#define DEFAULT_TOTAL_NUTRIMENT_REQ	0.05
+/// Base Factor at which mob hydration decreases
+#define DEFAULT_TOTAL_HYDRATION_REQ 0.05
+
+/// Global rate of hunger for all mobs; used to tinker with hunger rates, default is 1, 0.5 would be half, etc.
+GLOBAL_VAR_INIT(hunger_rate_mod, 1)
+/// Global rate of thirst for all mobs; used to tinker with thirst rates, default is 1, 0.5 would be half, etc
+GLOBAL_VAR_INIT(thirst_rate_mod, 1)
 
 // ~simple list of organs that come in pairs
 #define PAIRED_ORGAN_SLOTS list(ORGAN_SLOT_EYES, ORGAN_SLOT_EARS, ORGAN_SLOT_HORNS)
@@ -238,6 +263,9 @@ DEFINE_BITFIELD(organ_flags, list(
 #define GERM_LEVEL_FILTHY 500
 #define GERM_LEVEL_SMASHPLAYER 750
 
+/// Maximum germ level you can reach by standing still.
+#define GERM_LEVEL_AMBIENT 250
+
 /// Exposure to blood germ level per unit
 #define GERM_PER_UNIT_BLOOD 2
 
@@ -258,11 +286,11 @@ DEFINE_BITFIELD(organ_flags, list(
 /// We need to take at least this much brainloss gained at once to roll for brain traumas, any less it won't roll
 #define TRAUMA_ROLL_THRESHOLD 5
 /// Brainloss caused by mildly low blood oxygenation
-#define BRAIN_DAMAGE_LOW_OXYGENATION 1.5
+#define BRAIN_DAMAGE_LOW_OXYGENATION 1
 /// Brainloss caused by lower than low blood oxygenation
-#define BRAIN_DAMAGE_LOWER_OXYGENATION 3
+#define BRAIN_DAMAGE_LOWER_OXYGENATION 2.5
 /// Brainloss caused by a complete lack of oxygen flow
-#define BRAIN_DAMAGE_LOWEST_OXYGENATION 4.5
+#define BRAIN_DAMAGE_LOWEST_OXYGENATION 4
 
 // ~pulse levels, very simplified.
 #define PULSE_NONE 0   // So !M.pulse checks would be possible.
@@ -282,7 +310,7 @@ DEFINE_BITFIELD(organ_flags, list(
 #define CPR_CHEST "cardio"
 
 // ~arteries
-#define ARTERIAL_BLOOD_FLOW 20
+#define ARTERIAL_BLOOD_FLOW 9
 
 #define ARTERY_HEAD /obj/item/organ/artery/head
 #define ARTERY_MOUTH /obj/item/organ/artery/mouth
@@ -323,10 +351,12 @@ DEFINE_BITFIELD(organ_flags, list(
 #define WOUND_INTERNAL_BRUISE	(1<<11)
 ///wounds coming from divine sources
 #define WOUND_DIVINE	(1<<12)
+///wounds caused by insanely hot things like lava
+#define WOUND_INTENSE_BURN (1<<13)
 
 #define SEWABLE_WOUND_TYPES	(WOUND_SLASH|WOUND_PUNCTURE|WOUND_BITE|WOUND_LASH)
 #define BRUTE_WOUND_TYPES	(SEWABLE_WOUND_TYPES|WOUND_BLUNT|WOUND_INTERNAL_BRUISE)
-#define FIRE_WOUND_TYPES	(WOUND_BURN)
+#define FIRE_WOUND_TYPES	(WOUND_BURN|WOUND_INTENSE_BURN)
 #define CUT_WOUND_TYPES		(WOUND_SLASH|WOUND_PUNCTURE|WOUND_BITE)
 
 // ~injury flags
@@ -366,3 +396,19 @@ DEFINE_BITFIELD(organ_flags, list(
 
 /// Injuries bleed at (bleed_rate / BLEED_DAMAGE_RATIO) per tick
 #define BLEED_DAMAGE_RATIO 25
+
+// /obj/item/bodypart on_mob_life() retval flag
+#define BODYPART_LIFE_UPDATE_HEALTH (1<<0)
+// /datum/organ_process/handle_process retval flag
+#define ORGAN_PROCESS_UPDATE_HEALTH (1<<1) // why is this like so? cause
+// /mob/living/carbon/handle_shock() retval flag
+#define SHOCK_PROCESS_UPDATE_HEALTH (1<<0)
+
+#define TOURNIQUET_LIMBS list(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM, BODY_ZONE_L_LEG, BODY_ZONE_R_LEG)
+#define TOURNIQUET_ISCHEMIA_DELAY (5 MINUTES)  // pain starts accumulating past this
+#define TOURNIQUET_NECROSIS_DELAY (25 MINUTES) // limb dies past this
+#define TOURNIQUET_DAMAGE_PROB 4
+#define SPLINT_BREAK_THRESHOLD 8 // brute damage in one hit that snaps a splint
+
+#define PUMP_HEART_GRACE_WINDOW (10 SECONDS) // must land another compression within this window to keep mitigation active
+#define PUMP_HEART_BRAIN_DAMAGE_MITIGATION 0.15 // multiplier on damage probability while grace is active

@@ -201,7 +201,7 @@
 /mob/living/proc/getFireLoss()
 	return fireloss
 
-/mob/living/proc/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/proc/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, intense = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	fireloss = CLAMP((fireloss + (amount * CONFIG_GET(number/damage_multiplier))), 0, maxHealth * 2)
@@ -247,6 +247,8 @@
 /mob/living/proc/getOrganLoss(slot)
 	return
 
+/mob/living/proc/get_stamina_loss()
+	return stamina
 
 /mob/living/proc/getPainLoss()
 	return painloss
@@ -273,21 +275,26 @@
 /mob/living/proc/getShockStage()
 	return shock_stage
 
-/mob/living/proc/adjustShockStage(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/proc/adjustShockStage(amount, updating_health = TRUE, forced = FALSE, deferred = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return
-	. = shock_stage
+	var/old = shock_stage
 	shock_stage = clamp((shock_stage + (amount * CONFIG_GET(number/damage_multiplier))), 0, SHOCK_STAGE_MAX)
-	if(updating_health)
-		updatehealth()
+	if(updating_health && old != shock_stage)
+		if(deferred)
+			. |= SHOCK_PROCESS_UPDATE_HEALTH
+		else
+			updatehealth()
 
-/mob/living/proc/setShockStage(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/proc/setShockStage(amount, updating_health = TRUE, forced = FALSE, deferred = FALSE)
 	if(!forced && status_flags & GODMODE)
 		return
-	. = painloss
 	shock_stage = amount
 	if(updating_health)
-		updatehealth()
+		if(deferred)
+			. |= SHOCK_PROCESS_UPDATE_HEALTH
+		else
+			updatehealth()
 
 // heal ONE external organ, organ gets randomly selected from damaged ones.
 /mob/living/proc/heal_bodypart_damage(brute = 0, burn = 0, updating_health = TRUE, required_status)
@@ -336,6 +343,13 @@
  * @return TRUE if defense successful, FALSE otherwise
  */
 /mob/living/proc/checkdefense(datum/intent/intenty, mob/living/user)
+	// We check for a disruptable swingdelay first.
+	var/datum/status_effect/swingdelay/disrupt/SW = has_status_effect(/datum/status_effect/swingdelay/disrupt)
+	if(SW && !SW.is_disrupted())
+		SW.attacked()
+		swing_state = FALSE
+		return FALSE
+
 	if(!cmode || stat || (HAS_TRAIT(src, TRAIT_UNPARRYING) && HAS_TRAIT(src, TRAIT_UNDODGING)) || user == src || HAS_TRAIT(src, TRAIT_IMMOBILIZED))
 		return FALSE
 	if(client && used_intent && client.charging && used_intent.tranged && !used_intent.tshield)

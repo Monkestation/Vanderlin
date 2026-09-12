@@ -24,6 +24,16 @@
 	artery_type = list(ARTERY_CHEST, ARTERY_HEART)
 	limb_flags = BODYPART_HAS_ARTERY | BODYPART_BONE_ENCASED
 
+/obj/item/bodypart/chest/forced_removal(dismembered, special, move_to_floor)
+	var/mob/living/carbon/old_owner = owner
+	..(special = TRUE) //special because we're self destructing
+
+	//If someones chest is teleported away, they die pretty hard
+	if(!old_owner)
+		return
+	message_admins("[ADMIN_LOOKUPFLW(old_owner)] was gibbed after their chest teleport to [ADMIN_VERBOSEJMP(loc)].")
+	old_owner.gib()
+
 /obj/item/bodypart/chest/set_disabled(new_disabled)
 	. = ..()
 	if(!.)

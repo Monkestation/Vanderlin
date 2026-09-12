@@ -27,56 +27,6 @@
 		if(HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
 			. += span_warning("[working_material] is too hot to touch.")
 
-/obj/machinery/anvil/attack_hand_secondary(mob/user, list/modifiers)
-	if(working_material && !smithing)
-		return working_material.attack_hand_secondary(user, modifiers)
-	return ..()
-
-/obj/machinery/anvil/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
-	if(smithing)
-		to_chat(user, span_warning("[src] is currently being worked on!"))
-		return TRUE
-
-	// TODO: REWRITE TONGS INTERACTIONS USING interact_with_atom()
-	var/actual_attacking_item = attacking_item
-	var/obj/item/weapon/tongs/tongs_used
-	if(istype(attacking_item, /obj/item/weapon/tongs))
-		tongs_used = attacking_item
-		if(tongs_used.held_item)
-			actual_attacking_item = tongs_used.held_item
-
-	if(try_place_item(actual_attacking_item, user))
-		return TRUE
-
-	if(working_material)
-		if(istype(attacking_item, /obj/item/weapon/hammer))
-			. = TRUE
-			user.changeNext_move(CLICK_CD_MELEE)
-			if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
-				if(working_material.currecipe)
-					to_chat(user, span_warning("[working_material] has gone too cold to continue working on it."))
-					return
-				else
-					return working_material.attackby(attacking_item, user, modifiers)
-
-			if(!working_material.currecipe)
-				if(!choose_recipe(user))
-					return working_material.attackby(attacking_item, user, modifiers)
-			if(!working_material.currecipe.is_recipe_available(user))
-				return
-			// Start the minigame instead of direct hammering
-			start_minigame(user, attacking_item)
-			return
-
-		if(try_restore_material(actual_attacking_item, user))
-			return TRUE
-
-		if(tongs_used && !tongs_used.held_item)
-			tongs_used.set_held_item(working_material)
-			return TRUE
-
-	. = ..()
-
 /obj/machinery/anvil/attack_hand(mob/living/user, list/modifiers)
 	if(smithing)
 		to_chat(user, span_warning("[src] is currently being worked on!"))
@@ -84,6 +34,51 @@
 	if(working_material)
 		return working_material.attack_hand(user, modifiers)
 	return ..()
+
+/obj/machinery/anvil/attack_hand_secondary(mob/user, list/modifiers)
+	if(working_material && !smithing)
+		return working_material.attack_hand_secondary(user, modifiers)
+	return ..()
+
+/obj/machinery/anvil/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(smithing)
+		to_chat(user, span_warning("[src] is currently being worked on!"))
+		return ITEM_INTERACT_BLOCKING
+
+	var/obj/item/actual_attacking_item = tool
+	var/obj/item/weapon/tongs/tongs_used
+	if(istype(tool, /obj/item/weapon/tongs))
+		tongs_used = tool
+		if(tongs_used.held_item)
+			actual_attacking_item = tongs_used.held_item
+
+	if(try_place_item(actual_attacking_item, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(working_material)
+		if(istype(tool, /obj/item/weapon/hammer))
+			user.changeNext_move(CLICK_CD_MELEE)
+			if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
+				if(working_material.currecipe)
+					to_chat(user, span_warning("[working_material] has gone too cold to continue working on it."))
+					return ITEM_INTERACT_BLOCKING
+				return tool.interact_with_atom(working_material, user, modifiers)
+
+			if(!working_material.currecipe)
+				if(!choose_recipe(user))
+					return ITEM_INTERACT_BLOCKING
+			if(!working_material.currecipe.is_recipe_available(user))
+				return ITEM_INTERACT_BLOCKING
+			// Start the minigame instead of direct hammering
+			start_minigame(user, tool)
+			return ITEM_INTERACT_SUCCESS
+
+		if(try_restore_material(actual_attacking_item, user))
+			return ITEM_INTERACT_SUCCESS
+
+		if(tongs_used && !tongs_used.held_item)
+			tongs_used.set_held_item(working_material)
+			return ITEM_INTERACT_SUCCESS
 
 /obj/machinery/anvil/proc/try_place_item(obj/item/item, mob/living/user)
 	if(working_material?.currecipe?.item_added(item, user))
@@ -107,7 +102,7 @@
 		return FALSE
 
 	var/skill_value = GET_MOB_SKILL_VALUE(user, working_material.anvilrepair)
-	if(skill_value <= 0)
+	if(skill_value < SKILL_RANK_NOVICE)
 		to_chat(user, span_warning("You don't know enough about this craft to restore [working_material]."))
 		return FALSE
 
@@ -118,15 +113,17 @@
 	else if(working_material.smeltresult)
 		if(istype(working_material.smeltresult, /obj/item/ingot))
 			expected_ingot_type = working_material.smeltresult
+			if(istype(expected_ingot_type, /obj/item/ingot/steel_slag))
+				expected_ingot_type = /obj/item/ingot/steel
 	if(!expected_ingot_type || !istype(item, expected_ingot_type))
 		to_chat(user, span_warning("This isn't the right material to restore [working_material]."))
 		return FALSE
 
 	if(!HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
-		to_chat(item, span_warning("[working_material] needs to be heated first to be mended!"))
+		to_chat(user, span_warning("[working_material] needs to be heated first to be mended!"))
 		return FALSE
 	if(!HAS_TRAIT(item, TRAIT_NEEDS_QUENCH))
-		to_chat(item, span_warning("[item] needs to be heated first to be used as mending material!"))
+		to_chat(user, span_warning("[item] needs to be heated first to be used as mending material!"))
 		return FALSE
 
 	var/restores_done = working_material.integrity_restores
@@ -178,7 +175,7 @@
 
 	if(quality_score >= MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
 		var/recipe_skill = recipe.appro_skill
-		var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 1.5 // It would be impossible to level up otherwise
+		var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 1.6 // It would be impossible to level up otherwise
 		amt2raise *= user.get_learning_boon(recipe_skill)
 		if(HAS_TRAIT(user, TRAIT_MALUMFIRE) || GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)// Sanity, no expert blacksmith has lower skill than 3, for if admins manually add the trait or blacksmith vampire thralls
 			user.mind.add_sleep_experience(recipe_skill, amt2raise, FALSE)
@@ -232,7 +229,7 @@
 	if(!working_material || !HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH) || working_material.currecipe)
 		return
 
-	var/list/valid_types = list()
+	var/list/valid_recipes = list()
 	for(var/datum/anvil_recipe/recipe_instance as anything in GLOB.anvil_recipes)
 		var/datum/recipe_type = recipe_instance.type // necessary typecasting of type for macro
 		if(IS_ABSTRACT(recipe_type))
@@ -243,31 +240,28 @@
 			continue
 
 		var/recipe_category = recipe_instance.category
-		if(!valid_types[recipe_category])
-			valid_types[recipe_category] = list()
-		valid_types[recipe_category] += recipe_instance
+		if(!valid_recipes[recipe_category])
+			valid_recipes[recipe_category] = list()
+		valid_recipes[recipe_category] += recipe_instance
 
-	if(!length(valid_types))
+	if(!length(valid_recipes))
 		return
 
 	var/category_choice
-	if(length(valid_types) == 1)
-		category_choice = valid_types[1]
+	if(length(valid_recipes) == 1)
+		category_choice = valid_recipes[1]
 	else
-		category_choice = browser_input_list(user, "Choose a category", "Anvil", valid_types)
+		category_choice = browser_input_list(user, "Choose a category", "Anvil", valid_recipes)
 	if(!category_choice)
 		return
 
-	var/list/chosen_category = valid_types[category_choice]
+	var/list/chosen_category = valid_recipes[category_choice]
 	if(!length(chosen_category))
 		return
 
 	var/list/final_recipe_list = list()
 	for(var/datum/anvil_recipe/recipe_instance as anything in chosen_category)
-		var/modified_name = "[recipe_instance.name]"
-		if(recipe_instance.output_amount > 1)
-			modified_name += " ([recipe_instance.output_amount]x)"
-		final_recipe_list["[modified_name] \[[uppertext(SSskills.level_names_plain[recipe_instance.craftdiff])]\]"] = recipe_instance
+		final_recipe_list[GLOB.anvil_recipe_description[recipe_instance.type]] = recipe_instance
 
 	var/datum/chosen_recipe = browser_input_list(user, "Choose what to start working on:", "Anvil", sortList(final_recipe_list))
 

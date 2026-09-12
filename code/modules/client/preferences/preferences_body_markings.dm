@@ -111,7 +111,7 @@
 
 /datum/preferences/proc/print_body_markings_page()
 	var/list/dat = list()
-	dat += "Use a <b>markings preset</b>: <a href='?_src_=prefs;preference=use_preset;task=change_marking'>Choose</a>  | <a href='?_src_=prefs;preference=reset_all_colors;task=change_marking'>Reset marking colors</a>"
+	dat += "Use a <b>markings preset</b>: <a href='byond://?_src_=prefs;preference=use_preset;task=change_marking'>Choose</a>  | <a href='byond://?_src_=prefs;preference=reset_all_colors;task=change_marking'>Reset marking colors</a>"
 	dat += "<table width='100%'>"
 	dat += "<td valign='top' width='50%'>"
 	var/iterated_markings = 0
@@ -151,18 +151,18 @@
 				var/color_line = " "
 				var/current_index = LAZYFIND(body_markings[zone], key)
 				var/color = body_markings[zone][key]
-				color_line = "<a href='?_src_=prefs;name=[key];key=[zone];preference=reset_color;task=change_marking'>R</a>"
-				color_line += "<a href='?_src_=prefs;name=[key];key=[zone];preference=change_color;task=change_marking'><span class='color_holder_box' style='background-color:["#[color]"]'></span></a>"
+				color_line = "<a href='byond://?_src_=prefs;name=[key];key=[zone];preference=reset_color;task=change_marking'>R</a>"
+				color_line += "<a href='byond://?_src_=prefs;name=[key];key=[zone];preference=change_color;task=change_marking'><span class='color_holder_box' style='background-color:["#[color]"]'></span></a>"
 				if(current_index < length(body_markings[zone]))
-					can_move_down = "<a href='?_src_=prefs;name=[key];key=[zone];preference=marking_move_down;task=change_marking'>Down</a>"
+					can_move_down = "<a href='byond://?_src_=prefs;name=[key];key=[zone];preference=marking_move_down;task=change_marking'>Down</a>"
 				if(current_index > 1)
-					can_move_up = "<a href='?_src_=prefs;name=[key];key=[zone];preference=marking_move_up;task=change_marking'>Up</a>"
+					can_move_up = "<a href='byond://?_src_=prefs;name=[key];key=[zone];preference=marking_move_up;task=change_marking'>Up</a>"
 				dat += "<tr style='vertical-align:top;'>"
 				dat += "<td>[can_move_up]</td>"
 				dat += "<td>[can_move_down]</td>"
-				dat += "<td><a href='?_src_=prefs;name=[key];key=[zone];preference=change_marking;task=change_marking'>[key]</a></td>"
+				dat += "<td><a href='byond://?_src_=prefs;name=[key];key=[zone];preference=change_marking;task=change_marking'>[key]</a></td>"
 				dat += "<td>[color_line]</td>"
-				dat += "<td><a href='?_src_=prefs;name=[key];key=[zone];preference=remove_marking;task=change_marking'>Remove</a></td>"
+				dat += "<td><a href='byond://?_src_=prefs;name=[key];key=[zone];preference=remove_marking;task=change_marking'>Remove</a></td>"
 				dat += "</tr>"
 
 		if(!(body_markings[zone]) || body_markings[zone].len < MAXIMUM_MARKINGS_PER_LIMB)
@@ -171,7 +171,7 @@
 			dat += "<td> </td>"
 			dat += "<td> </td>"
 			dat += "<td> </td>"
-			dat += "<td><a href='?_src_=prefs;key=[zone];preference=add_marking;task=change_marking'>Add</a></td>"
+			dat += "<td><a href='byond://?_src_=prefs;key=[zone];preference=add_marking;task=change_marking'>Add</a></td>"
 			dat += "</tr>"
 
 		dat += "</table>"

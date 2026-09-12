@@ -83,14 +83,20 @@
 #define COMSIG_MOB_ITEM_AFTERATTACK "mob_item_afterattack"
 /// from base of obj/item/attack_qdeleted(): (atom/target, mob/user, proxiumity_flag, click_parameters)
 #define COMSIG_MOB_ITEM_ATTACK_QDELETED "mob_item_attack_qdeleted"
-/// from base of mob/RangedAttack(): (atom/A, params)
+/// from base of mob/ranged_attack(): (atom/A, params)
 #define COMSIG_MOB_ATTACK_RANGED "mob_attack_ranged"
-/// from base of /datum/component/ranged_attacks/proc/async_fire_ranged_attack: (mob/living/simple_animal/firer, atom/target, list/modifiers)
+/// from base of mob/ranged_attack_secondary(): (atom/target, modifiers)
+#define COMSIG_MOB_ATTACK_RANGED_SECONDARY "mob_attack_ranged_secondary"
+/// from base of /datum/component/ranged_attacks/proc/async_fire_ranged_attack(): (mob/living/simple_animal/firer, atom/target, list/modifiers)
 #define COMSIG_MOB_POSTATTACK_RANGED "mob_postattack_ranged"
 /// from base of /mob/throw_item(): (atom/target)
 #define COMSIG_MOB_THROW "mob_throw"
 /// from base of /mob/verb/examinate(): (atom/target)
 #define COMSIG_MOB_EXAMINATE "mob_examinate"
+///from /mob/living/handle_eye_contact(): (mob/living/other_mob)
+#define COMSIG_MOB_EYECONTACT "mob_eyecontact"
+	/// return this if you want to block printing this message to this person, if you want to print your own (does not affect the other person's message)
+	#define COMSIG_BLOCK_EYECONTACT (1<<0)
 /// from base of mob/living/carbon/examine(): (mob/user, mob/target, list/pronouns, list/examine_strings)
 #define COMSIG_MOB_EXAMINATE_CARBON "mob_examinte_carbon"
 /// from base of /mob/update_sight(): ()
@@ -157,3 +163,15 @@
 #define COMSIG_MOB_MOUSE_ENTERED "user_mouse_entered"
 
 #define COMSIG_MOB_WASHED_MESS "mob_mess_cleaned"
+
+#define COMSIG_MOB_CARGO_DOCKED "mob_cargo_docked"
+
+// signals for use by mob spawners
+/// called when a spawner spawns a mob
+#define COMSIG_SPAWNER_SPAWNED "spawner_spawned"
+
+/// Called when a spawner spawns a mob in a turf peel, but we need to use the default case.
+#define COMSIG_SPAWNER_SPAWNED_DEFAULT "spawner_spawned_default"
+
+/// called when a ghost clicks a spawner role: (mob/living)
+#define COMSIG_GHOSTROLE_SPAWNED "ghostrole_spawned"

@@ -13,10 +13,10 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
-	armor = list("blunt" = 100, "slash" = 100, "stab" = 100,  "piercing" = 100, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/boots/plate/elf
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 30
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	abstract_type = /obj/item/clothing/shoes/boots/rare
 
 	material_category = ARMOR_MAT_PLATE

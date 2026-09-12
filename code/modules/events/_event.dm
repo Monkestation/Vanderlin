@@ -9,6 +9,8 @@
 									//0 here does NOT disable the event, it just makes it extremely unlikely
 
 	var/earliest_start = 10 MINUTES	//The earliest world.time that an event can start (round-duration in deciseconds) default: 10 mins
+	/// The latest world.time that an event can start
+	var/latest_start = INFINITY
 	var/min_players = 0				//The minimum amount of alive, non-AFK human players on server required to start the event.
 
 	/// How many times this event has occured
@@ -52,7 +54,7 @@
 	/// List of the shared occurence types.
 	var/list/shared_occurences = list()
 	/// Whether a roundstart event can happen post roundstart. Very important for events which override job assignments.
-	var/can_run_post_roundstart = TRUE
+	var/can_run_post_roundstart = FALSE
 	/// If set then the type or list of types of storytellers we are restricted to being trigged by
 	var/list/allowed_storytellers
 	/// List of storytellers that will pick only their dedicated and general events in some cases, like when they are ascendant
@@ -101,6 +103,10 @@
 		if(string)
 			string += ", "
 		string +="Too Soon"
+	if(latest_start < max(world.time - SSticker.round_start_time, 0))
+		if(string)
+			string += ", "
+		string += "Too Late"
 	if(players_amt < min_players)
 		if(string)
 			string += ", "
@@ -127,6 +133,8 @@
 	if(get_occurences() >= max_occurrences)
 		return FALSE
 	if(earliest_start > max(world.time - SSticker.round_start_time, 0))
+		return FALSE
+	if(latest_start < max(world.time - SSticker.round_start_time, 0))
 		return FALSE
 
 	if(wizardevent != SSevents.wizardmode)

@@ -80,13 +80,13 @@
 
 	update_appearance(UPDATE_ICON_STATE)
 
-/obj/item/gun/ballistic/bow/cross/attackby(obj/item/A, mob/user, list/modifiers)
-	if(!istype(A, /obj/item/ammo_box) && !istype(A, /obj/item/ammo_casing))
-		return
+/obj/item/gun/ballistic/bow/cross/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/ammo_box) && !istype(tool, /obj/item/ammo_casing))
+		return NONE
 
 	if(!string_pulled)
 		balloon_alert(user, "draw it first!")
-		return
+		return ITEM_INTERACT_BLOCKING
 
 	return ..()
 

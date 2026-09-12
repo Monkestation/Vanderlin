@@ -6,11 +6,31 @@
 	"monarch_title": "Count",
 	"monarch_title_f": "Countess",
 	"traits": [
-		{"Up": true, "Turf Weather Effects": true},
-		{"Up": true, "Down": true, "Turf Weather Effects": true},
-		{"Up": true, "Down": true, "Turf Weather Effects": true, "Leylines": true},
-		{"Up": true, "Down": true, "Turf Weather Effects": true},
-		{"Down": true, "Turf Weather Effects": true}
+		{
+			"Up": true,
+			"Turf Weather Effects": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true
+		},
+		{
+			"Down": true,
+			"Turf Weather Effects": true
+		}
 	],
 	"other_z": [
 		"map_files/daftmarsh/daftmarsh_outland"

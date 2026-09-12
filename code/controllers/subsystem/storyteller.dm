@@ -1298,7 +1298,7 @@ SUBSYSTEM_DEF(gamemode)
 
 /datum/controller/subsystem/gamemode/proc/store_roundend_data()
 	var/congealed_string = ""
-	for(var/event_name as anything in triggered_round_events)
+	for(var/event_name in triggered_round_events)
 		congealed_string += event_name
 		congealed_string += ","
 	text2file(congealed_string, "data/last_round_events.txt")
@@ -1313,7 +1313,7 @@ SUBSYSTEM_DEF(gamemode)
 
 	if(!length(last_round_events))
 		return
-	for(var/event_name as anything in last_round_events)
+	for(var/event_name in last_round_events)
 		for(var/datum/round_event_control/listed as anything in control)
 			if(listed.name != event_name)
 				continue
@@ -1495,6 +1495,7 @@ SUBSYSTEM_DEF(gamemode)
 		STATS_ALIVE_HALF_ELVES,
 		STATS_ALIVE_HALF_DROWS,
 		STATS_ALIVE_HALF_ORCS,
+		STATS_ALIVE_DWARF_ORCS,
 		STATS_ALIVE_KOBOLDS,
 		STATS_ALIVE_RAKSHARI,
 		STATS_ALIVE_AASIMAR,
@@ -1592,25 +1593,27 @@ SUBSYSTEM_DEF(gamemode)
 					record_featured_object_stat(FEATURED_STATS_FLAWS, charflaw.name)
 			if(human_mob.is_noble())
 				record_round_statistic(STATS_ALIVE_NOBLES)
-			if(human_mob.mind.assigned_role.title in GLOB.garrison_positions)
-				record_round_statistic(STATS_ALIVE_GARRISON)
-			if(human_mob.mind.assigned_role.title in GLOB.gallowband_positions)
-				record_round_statistic(STATS_ALIVE_GALLOWBAND)
-			if((human_mob.mind.assigned_role.title in GLOB.church_positions) || (human_mob.mind.assigned_role.title in GLOB.inquisition_positions))
-				record_round_statistic(STATS_ALIVE_CLERGY)
-			if((human_mob.mind.assigned_role.title in GLOB.serf_positions) || (human_mob.mind.assigned_role.title in GLOB.peasant_positions) || (human_mob.mind.assigned_role.title in GLOB.company_positions))
-				record_round_statistic(STATS_ALIVE_TRADESMEN)
+			if(human_mob.mind.assigned_role)
+				var/role_title = human_mob.mind.assigned_role.title
+				if(role_title in GLOB.garrison_positions)
+					record_round_statistic(STATS_ALIVE_GARRISON)
+				if(role_title in GLOB.gallowband_positions)
+					record_round_statistic(STATS_ALIVE_GALLOWBAND)
+				if((role_title in GLOB.church_positions) || (human_mob.mind.assigned_role.title in GLOB.inquisition_positions))
+					record_round_statistic(STATS_ALIVE_CLERGY)
+				if((role_title in GLOB.serf_positions) || (role_title in GLOB.peasant_positions) || (role_title in GLOB.company_positions))
+					record_round_statistic(STATS_ALIVE_TRADESMEN)
 			if(!human_mob.is_literate() && !roundstart && !first_post_roundstart_check)
 				record_round_statistic(STATS_ILLITERATES)
 			if(HAS_TRAIT(human_mob, TRAIT_FOREIGNER))
 				record_round_statistic(STATS_FOREIGNERS)
 			if(human_mob.has_quirk(/datum/quirk/vice/clingy))
 				record_round_statistic(STATS_CLINGY_PEOPLE)
-			if(human_mob.has_quirk(/datum/quirk/vice/alcoholic))
+			if(human_mob.has_quirk(/datum/quirk/vice/addiction/alcoholic))
 				record_round_statistic(STATS_ALCOHOLICS)
-			if(human_mob.has_quirk(/datum/quirk/vice/junkie))
+			if(human_mob.has_quirk(/datum/quirk/vice/addiction/junkie))
 				record_round_statistic(STATS_JUNKIES)
-			if(human_mob.has_quirk(/datum/quirk/vice/kleptomaniac))
+			if(human_mob.has_quirk(/datum/quirk/vice/addiction/kleptomaniac))
 				record_round_statistic(STATS_KLEPTOMANIACS)
 			if(human_mob.has_quirk(/datum/quirk/vice/greedy))
 				record_round_statistic(STATS_GREEDY_PEOPLE)
@@ -1619,8 +1622,7 @@ SUBSYSTEM_DEF(gamemode)
 			if(HAS_TRAIT_NOT_FROM(human_mob, TRAIT_PACIFISM, "hugbox"))
 				record_round_statistic(STATS_PACIFISTS)
 			if(human_mob.family_datum && human_mob.family_member_datum)
-				var/datum/family_member/member = human_mob.family_member_datum
-				if(member.children.len > 0)
+				if(human_mob.family_member_datum.has_children())
 					record_round_statistic(STATS_PARENTS)
 				if(human_mob.IsWedded())
 					record_round_statistic(STATS_MARRIED)
@@ -1658,6 +1660,8 @@ SUBSYSTEM_DEF(gamemode)
 				record_round_statistic(STATS_ALIVE_MEDICATORS)
 			if(ishalfling(human_mob))
 				record_round_statistic(STATS_ALIVE_HALFLINGS)
+			if(isdwarforc(human_mob))
+				record_round_statistic(STATS_ALIVE_DWARF_ORCS)
 
 			// Chronicle statistics
 

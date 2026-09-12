@@ -9,7 +9,7 @@
 	department_flag = NOBLEMEN
 	display_order = JDO_HAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/grant_title)
@@ -18,6 +18,12 @@
 	outfit = /datum/outfit/hand
 	advclass_cat_rolls = list(CTAG_HAND = 20)
 	give_bank_account = 120
+
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_AGENT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
+
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE, EXP_TYPE_LIVING)
@@ -29,9 +35,12 @@
 
 	honorary = "Lord"
 	honorary_f = "Lady"
+	tennite_triumph_exclusive = TRUE
 
 	mind_traits = list(
-		TRAIT_KNOW_KEEP_DOORS
+		TRAIT_KNOW_KEEP_DOORS,
+		TRAIT_KNOW_COURTAGENT_DOORS,
+		TRAIT_KNOWCOURTAGENTS
 	)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -41,10 +50,13 @@
 		/mob/living/carbon/human/proc/torture_victim
 	)
 
+	languages = list(/datum/language/thievescant)
+
 /datum/outfit/hand
 	name = JOB_HAND
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/storage/keyring/hand
+	ring = /obj/item/clothing/ring/courtagent_ring/blacksteel
 
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
@@ -60,16 +72,16 @@
 	addtimer(CALLBACK(src, PROC_REF(know_agents), H), 6 SECONDS)
 
 /datum/job/hand/proc/know_agents(mob/living/carbon/human/H)
-	if(!GLOB.roundstart_court_agents.len)
+	if(!length(GLOB.court_agents))
 		to_chat(H, span_notice("You began the week with no agents."))
 	else
 		to_chat(H, span_notice("We began the week with these agents:"))
-		for(var/name in GLOB.roundstart_court_agents)
+		for(var/name in GLOB.court_agents)
 			to_chat(H, span_notice(name))
-			H.mind.cached_frumentarii[name] = TRUE
 
 /datum/job/advclass/hand
-	exp_types_granted = list(EXP_TYPE_NOBLE)
+	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 
 /datum/attribute_holder/sheet/job/hand
 	raw_attribute_list = list(
@@ -80,7 +92,7 @@
 		/datum/attribute/skill/combat/crossbows = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/swords = 45,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/lockpicking = 20,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -97,13 +109,13 @@
 	outfit = /datum/outfit/hand/handclassic
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/hand
 	honorary = "General"
 
 	traits = list(
-		TRAIT_HEAVYARMOR
+		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 
 /datum/outfit/hand/handclassic
@@ -112,7 +124,7 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
-		/obj/item/paper/scroll/frumentarii/roundstart = 1
+		/obj/item/frumentarii = 1
 	)
 	armor = /obj/item/clothing/armor/leather/jacket/handjacket
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -133,7 +145,7 @@
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/combat/knives = 40,
+		/datum/attribute/skill/combat/knives = 45,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 60,
 		/datum/attribute/skill/misc/athletics = 30,
@@ -151,7 +163,6 @@
 	outfit = /datum/outfit/hand/spymaster
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/CombatSpymaster.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/spymaster
 	honorary = "Spymaster"
@@ -172,10 +183,10 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
 	beltl = /obj/item/weapon/knife/dagger/steel/hand/parry
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backpack_contents = list(
 		/obj/item/lockpickring/mundane = 1,
-		/obj/item/paper/scroll/frumentarii/roundstart = 1,
+		/obj/item/frumentarii = 1,
 		/obj/item/weapon/knife/dagger/steel/hand = 1,
 	)
 
@@ -195,7 +206,7 @@
 		STAT_INTELLIGENCE = 4,
 		STAT_PERCEPTION = 4,
 		/datum/attribute/skill/combat/crossbows = 30,
-		/datum/attribute/skill/combat/firearms = 40,
+		/datum/attribute/skill/combat/firearms = 45,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -216,7 +227,7 @@
 		STAT_SPEED = -1,
 		STAT_STRENGTH = -1,
 		/datum/attribute/skill/combat/crossbows = 30,
-		/datum/attribute/skill/combat/firearms = 40,
+		/datum/attribute/skill/combat/firearms = 45,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -238,7 +249,6 @@
 	outfit = /datum/outfit/hand/advisor
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/advisor
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/advisor/old
@@ -250,12 +260,12 @@
 	backr = /obj/item/storage/backpack/satchel/black
 	armor = /obj/item/clothing/armor/gambeson/hand
 	pants = /obj/item/clothing/pants/tights/colored/black
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	beltl = /obj/item/weapon/sword/rapier/caneblade/hand
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
-		/obj/item/paper/scroll/frumentarii/roundstart = 1,
+		/obj/item/frumentarii = 1,
 		/obj/item/storage/belt/hollow_book
 	)
 	scabbards = list(/obj/item/weapon/scabbard/cane/hand)
@@ -268,8 +278,8 @@
 		STAT_ENDURANCE = 3,
 		STAT_PERCEPTION = 3,
 		STAT_SPEED = 2,
-		/datum/attribute/skill/combat/crossbows = 30,
-		/datum/attribute/skill/combat/bows = 40,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/bows = 45,
 		/datum/attribute/skill/combat/firearms = 20,
 		/datum/attribute/skill/combat/unarmed = 35,
 		/datum/attribute/skill/combat/swords = 20,
@@ -299,7 +309,7 @@
 		STAT_CONSTITUTION = 2,
 		STAT_SPEED = -1,
 		STAT_STRENGTH = -1,
-		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/crossbows = 45,
 		/datum/attribute/skill/combat/bows = 50,
 		/datum/attribute/skill/combat/firearms = 20,
 		/datum/attribute/skill/combat/unarmed = 40,
@@ -325,14 +335,13 @@
 /datum/job/advclass/hand/huntsmaster
 	title = "Huntsmaster"
 	tutorial = " A hunter of the crown, you have tracked more living beings through the Wild than you can remember; \
-    a loyal hound by your side, a powerful saiga underneath. You've learnt the rules of the hunt are no different from the court, just simpifed, primal. \
-    The strong survive, the weak die. So, loose your bow over these lands, and let no man, no beast, and no demons think themselves safe from your arrows. \
-    Your agents by your side, you will rid this town of ruffians, rooting out would-be's like one does with a lowly cabbit. \
-    Let the world remember you, the Huntsmaster, as a true slayer of beast, monster, and man."
+	a loyal hound by your side, a powerful saiga underneath. You've learnt the rules of the hunt are no different from the court, just simpifed, primal. \
+	The strong survive, the weak die. So, loose your bow over these lands, and let no man, no beast, and no demons think themselves safe from your arrows. \
+	Your agents by your side, you will rid this town of ruffians, rooting out would-be's like one does with a lowly cabbit. \
+	Let the world remember you, the Huntsmaster, as a true slayer of beast, monster, and man."
 	outfit = /datum/outfit/hand/huntsmaster
 	category_tags = list(CTAG_HAND)
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
-	exp_types_granted  = list(EXP_TYPE_NOBLE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/huntsmaster
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/huntsmaster/old
@@ -359,7 +368,7 @@
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/reagent_containers/glass/bottle/poison = 1,
-		/obj/item/paper/scroll/frumentarii/roundstart = 1,
+		/obj/item/frumentarii = 1,
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,
 		/obj/item/flashlight/flare/torch/lantern/bronzelamptern = 1,

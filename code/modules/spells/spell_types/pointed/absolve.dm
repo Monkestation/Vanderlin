@@ -2,7 +2,7 @@
 /datum/action/cooldown/spell/psydonabsolve
 	name = "ABSOLVE"
 	spell_type = SPELL_PSYDONIC_MIRACLE
-	spell_flags = SPELL_PSYDON
+	spell_flags = SPELL_PSYDON|SPELL_UNETCHABLE
 	spell_cost = 160
 	charge_time = 1
 	cast_range = 1
@@ -55,7 +55,6 @@
 			H.adjust_jitter(100 SECONDS)
 			H.update_body()
 			GLOB.vanderlin_round_stats[STATS_LUX_REVIVALS]++
-			ADD_TRAIT(H, TRAIT_IWASREVIVED, "[type]")
 			H.apply_status_effect(/datum/status_effect/buff/psyvived)
 			user.apply_status_effect(/datum/status_effect/buff/psyvived)
 			H.visible_message(span_notice("[H] is ABSOLVED!"), span_green("I awake from the void."))

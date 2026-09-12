@@ -214,9 +214,9 @@
 	requirements = list(/obj/item/natural/cloth = 2,)
 	category = "Hat"
 
-/datum/repeatable_crafting_recipe/sewing/headband_naledi
+/datum/repeatable_crafting_recipe/sewing/headband_preceptor
 	name = "headband"
-	output = /obj/item/clothing/head/headband/naledi
+	output = /obj/item/clothing/head/headband/preceptor
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	category = "Hat"
@@ -782,6 +782,15 @@
 	requirements = list(/obj/item/natural/cloth = 3,
 				/obj/item/natural/hide/cured = 4,
 				/obj/item/natural/fibers = 1)
+	craftdiff = 6
+
+/datum/repeatable_crafting_recipe/sewing/magushood
+	name = "magus hood"
+	output = /obj/item/clothing/head/helmet/skullcap/magus
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers = 1,
+				/obj/item/clothing/head/helmet/skullcap = 1,)
 	craftdiff = 6
 
 /datum/repeatable_crafting_recipe/sewing/adept_robes
@@ -1685,6 +1694,37 @@
 	craftdiff = 1
 	category = "Tabard"
 
+// Cadwyn Order Tabards
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_astrata
+	name = "bright tabard"
+	output = /obj/item/clothing/cloak/cadwyn/astrata
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_necra
+	name = "dark cloak"
+	output = /obj/item/clothing/cloak/cadwyn/necra
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
+/datum/repeatable_crafting_recipe/sewing/cadwyn_cloak_ravox
+	name = "tattered surcoat"
+	output = /obj/item/clothing/cloak/cadwyn/ravox
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 1
+	category = "Tabard"
+
 // Detailed Tabards
 /datum/repeatable_crafting_recipe/sewing/eora_tabard
 	name = "eora tabard"
@@ -1737,9 +1777,9 @@
 	craftdiff = 2
 	category = "Cloak"
 
-/datum/repeatable_crafting_recipe/sewing/holysee_vestments
+/datum/repeatable_crafting_recipe/sewing/grandmaster_vestments
 	name = "holy silver vestments"
-	output = /obj/item/clothing/cloak/holysee
+	output = /obj/item/clothing/cloak/grandmaster
 	requirements = list(
 		/obj/item/natural/cloth = 3,
 		/obj/item/ingot/silver = 1,
@@ -1974,3 +2014,11 @@
 	name = "honse caparison"
 	output =/obj/item/caparison/honse
 
+/datum/repeatable_crafting_recipe/sewing/repairkitcloth
+	name = "sewing kit"
+	output = /obj/item/repair_kit/cloth
+	requirements = list(
+		/obj/item/natural/cloth = 4,
+		/obj/item/natural/hide/cured = 2,
+		)
+	craftdiff = SKILL_RANK_EXPERT

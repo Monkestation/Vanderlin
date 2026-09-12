@@ -1,22 +1,6 @@
-#define MANA_POOL_REPLACE_ALL_ATTUNEMENTS (1<<2)
-
-/* DESIGN NOTES
-* This exists because mana will eventually have attunemenents and alignments that will incresae their efficiency in being used
-* on spells/by people with corresponding attunements/alignments, vice versa for conflicting.
-*
-*/
-
 /// An abstract representation of collections of mana, as it's impossible to represent each individual mana unit
 /datum/mana_pool
 	var/atom/movable/parent = null
-
-	// As attunements on mana is actually a tangible thing, and not just a preference, mana attunements should never go below zero.
-	/// A abstract representation of the attunements of [amount]. This is just an abstraction of the overall bias of all stored mana - in reality, every unit of mana has its own attunement.
-	var/list/datum/attunement/attunements
-	///this is a list of the intensity of negative attunements, basically since we can't go negative
-	///this acts as a way for us to get negative effects without modifying all other attunement procs
-	///these are ONLY negative
-	var/list/datum/attunement/negative_attunements
 
 	// In vols
 	/// The absolute maximum [amount] we can hold. Under no circumstances should [amount] ever exceed this value.
@@ -51,8 +35,6 @@
 
 	/// The natural regen rate, detached from transferrals. Mana generated via this comes from nothing.
 	var/ethereal_recharge_rate = 0
-	/// If we have an ethereal recharge rate,i ths is the attunement set that will be given to the generated mana.
-	var/list/datum/attunement/attunements_to_generate = list()
 
 	/// The mana pool types we will try to discharge excess mana (from exponential decay) into. Uses defines from magic_charge_bitflags.dm.
 	var/discharge_destinations = MANA_ALL_LEYLINES | MANA_ALL_PYLONS
@@ -73,6 +55,12 @@
 
 	var/next_message = 0
 
+	VAR_PRIVATE/is_processing = FALSE
+
+	/// Tracks this mana pool owner's technique/form investment, unspent points, and unlocked spells.
+	/// Lazily created - use get_mastery() rather than referencing this directly.
+	var/datum/spell_mastery/mastery
+
 /datum/mana_pool/New(atom/parent = null)
 	. = ..()
 	donation_budget_this_tick = max_donation_rate_per_second
@@ -83,10 +71,6 @@
 	START_PROCESSING(SSmagic, src)
 
 /datum/mana_pool/Destroy(force)
-	attunements = null
-	attunements_to_generate = null
-	negative_attunements = null
-
 	transfer_rates = null
 	transfer_caps = null
 	transferring_to = null
@@ -107,6 +91,35 @@
 	parent = null
 
 	return ..()
+
+/datum/mana_pool/proc/needs_processing()
+	if(ethereal_recharge_rate != 0 && amount < get_safe_softcap())
+		return TRUE
+	if(intrinsic_recharge_sources && amount < get_softcap())
+		return TRUE
+	if(length(transferring_to))
+		return TRUE
+	if(amount > get_softcap())
+		return TRUE
+	return FALSE
+
+/datum/mana_pool/proc/get_mastery()
+	RETURN_TYPE(/datum/spell_mastery)
+	if(!mastery)
+		mastery = new(src)
+		if(isliving(parent))
+			add_verb(parent, list(/mob/living/proc/open_spellbook))
+			ADD_TRAIT(parent, TRAIT_HASMAGIC, INNATE_TRAIT)
+	return mastery
+
+/datum/mana_pool/proc/update_processing_state()
+	var/should_process = needs_processing()
+	if(should_process && !is_processing)
+		is_processing = TRUE
+		START_PROCESSING(SSmagic, src)
+	else if(!should_process && is_processing)
+		is_processing = FALSE
+		STOP_PROCESSING(SSmagic, src)
 
 /datum/mana_pool/proc/set_parent(atom/parent)
 	src.parent = parent
@@ -146,50 +159,6 @@
 
 	status_tab += "Mana Count: [general_amount_estimate]"
 
-/datum/mana_pool/proc/generate_initial_attunements()
-	RETURN_TYPE(/list/datum/attunement)
-
-	return GLOB.default_attunements.Copy()
-
-/datum/mana_pool/proc/set_attunements(datum/patron/incoming_patron)
-	if(!length(attunements))
-		attunements = generate_initial_attunements()
-
-	for(var/datum/attunement/listed as anything in attunements)
-		var/datum/attunement/created = new listed
-		if(incoming_patron.type in created.alignments)
-			attunements[listed] += created.alignments[incoming_patron.type]
-
-/datum/mana_pool/proc/remove_attunements(datum/patron/incoming_patron)
-	if(!length(attunements))
-		return
-
-	for(var/datum/attunement/listed as anything in attunements)
-		var/datum/attunement/created = new listed
-		if(incoming_patron.type in created.alignments)
-			attunements[listed] -= created.alignments[incoming_patron.type]
-
-/datum/mana_pool/proc/adjust_attunement(datum/attunement/attunement_type, amount)
-	if(!length(attunements))
-		attunements = generate_initial_attunements()
-	if(!length(negative_attunements))
-		negative_attunements = generate_initial_attunements()
-
-	if(negative_attunements[attunement_type] < 0 && amount > 0)
-		var/attunement_left = amount + negative_attunements[attunement_type]
-		if(!attunement_left)
-			negative_attunements[attunement_type] += amount
-			return
-		amount = attunement_left
-
-	var/actual_value = attunements[attunement_type] + amount
-	attunements[attunement_type] = max(0, attunements[attunement_type] + amount)
-
-	if(actual_value < 0)
-		negative_attunements[attunement_type] += amount
-
-
-
 // order of operations is as follows:
 // 1. we recharge
 // 2. we transfer mana
@@ -199,8 +168,8 @@
 	donation_budget_this_tick = (max_donation_rate_per_second)
 
 	if (ethereal_recharge_rate != 0 && (amount < get_safe_softcap()))
-		adjust_mana(ethereal_recharge_rate, attunements_to_generate)
-	if((intrinsic_recharge_sources & MANA_ALL_LEYLINES) && amount < get_safe_softcap())
+		adjust_mana(ethereal_recharge_rate)
+	if((intrinsic_recharge_sources & MANA_ALL_LEYLINES) && amount < get_softcap())
 		var/list/leylines = list()
 		for(var/obj/effect/ebeam/beam in range(3, get_turf(parent)))
 			if(!beam.owner.mana_pool)
@@ -215,7 +184,7 @@
 		if(length(leylines))
 			for(var/datum/mana_pool/leyline/leyline as anything in leylines)
 				var/sane_distance = leylines[leyline] + 1
-				leyline.transfer_specific_mana(src, (leyline.get_transfer_rate_for(src) / sane_distance) * 0.1)
+				leyline.transfer_specific_mana(src, (leyline.get_transfer_rate_for(src) / sane_distance) * 0.1, safe = TRUE)
 
 	if((intrinsic_recharge_sources & MANA_ALL_PYLONS) && amount < get_softcap())
 		var/list/pylons = list()
@@ -302,14 +271,16 @@
 							break
 
 		adjust_mana(exponential_decay) //just to be safe, in case we have any left over or didnt have a discharge destination
-		if(amount > get_softcap())
+		if(amount > (get_safe_softcap()-30))
 			if(world.time > next_message)
 				next_message = world.time + 1.5 MINUTES
 				to_chat(parent, span_boldwarning("I am feeling tingly all over."))
 
 /// Perform a "natural" transfer where we use the default transfer rate, capped by the usual math
 /datum/mana_pool/proc/transfer_mana_to(datum/mana_pool/target_pool)
-	return transfer_specific_mana(target_pool, get_transfer_rate_for(target_pool))
+	. = transfer_specific_mana(target_pool, get_transfer_rate_for(target_pool))
+	update_processing_state()
+	return .
 
 /// Returns the amount of mana we want to give in a given tick
 /datum/mana_pool/proc/get_transfer_rate_for(datum/mana_pool/target_pool)
@@ -320,16 +291,20 @@
 	var/cached_cap = transfer_caps[target_pool]
 	return (cached_cap || (transfer_default_softcap ? target_pool.get_softcap() : target_pool.maximum_mana_capacity))
 
-/datum/mana_pool/proc/transfer_specific_mana(datum/mana_pool/other_pool, amount_to_transfer, decrement_budget = TRUE)
+/datum/mana_pool/proc/transfer_specific_mana(datum/mana_pool/other_pool, amount_to_transfer, decrement_budget = TRUE, safe = FALSE)
 	// ensure we dont give more than we hold and dont give more than they CAN hold
-	var/adjusted_amount = min(min(amount_to_transfer, amount), (other_pool.maximum_mana_capacity - other_pool.amount))
-	// ^^^^ TODO THIS ISNT THA TGOOD I DONT LIKE IT we should instead have remainders returned on adjust mana and plug it into the OTHER adjust mana
+	var/adjusted_amount = min(amount_to_transfer, amount, other_pool.maximum_mana_capacity - other_pool.amount)
 
-	if (decrement_budget)
+	if(safe && !length(other_pool.decay_prevention))
+		var/safe_ceiling = min(other_pool.get_softcap(), other_pool.parent?.mana_overload_threshold - 50)
+		var/headroom = safe_ceiling - other_pool.amount
+		adjusted_amount = max(0, min(adjusted_amount, headroom))
+
+	if(decrement_budget)
 		donation_budget_this_tick -= amount_to_transfer
 
 	adjust_mana(-adjusted_amount)
-	return other_pool.adjust_mana(adjusted_amount, attunements)
+	return other_pool.adjust_mana(adjusted_amount)
 
 /datum/mana_pool/proc/start_transfer(datum/mana_pool/target_pool, force_process = FALSE)
 
@@ -364,6 +339,7 @@
 
 	UnregisterSignal(target_pool, COMSIG_QDELETING)
 
+	update_processing_state()
 	return MANA_POOL_TRANSFER_STOP
 
 /datum/mana_pool/proc/incoming_transfer_start(datum/mana_pool/donator)
@@ -372,18 +348,18 @@
 /datum/mana_pool/proc/incoming_transfer_end(datum/mana_pool/donator)
 	transferring_from -= donator
 
-// TODO BIG FUCKING WARNING THIS EQUATION DOSENT WORK AT ALL
-// Should be fine as long as nothing actually has any attunements
-/// The proc used to modify the mana composition of a mana pool. Should modify attunements in proportion to the ratio
-/// between the current amount of mana we have and the mana coming in/being removed, as well as the attunements.
-/// Mana pools in general will eventually be refactored to be lists of individual mana pieces with unchanging attunements,
-/// so this is not permanent.
+/// The proc used to modify the mana composition of a mana pool.
 /// Returns how much of "amount" was used.
-/datum/mana_pool/proc/adjust_mana(amount, list/incoming_attunements)
+/datum/mana_pool/proc/adjust_mana(amount, safe = FALSE)
 	if (amount == 0)
 		return amount
 
-	var/result = clamp(src.amount + amount, 0, maximum_mana_capacity)
+	var/result = 0
+	if(!safe)
+		result = clamp(src.amount + amount, 0, maximum_mana_capacity)
+	else
+		result = clamp(src.amount + amount, 0, get_safe_softcap())
+
 	. = result - src.amount // Return the amount that was used
 	src.amount = result
 	if(parent && ismob(parent))
@@ -398,6 +374,7 @@
 			hud_used.mana.icon_state = "mana[filled]"
 	if(parent)
 		SEND_SIGNAL(parent, COMSIG_MANA_POOL_ADJUSTED, result - src.amount)
+	update_processing_state()
 
 ///this takes a string and adds it to our halters creates the list if it doesn't exist
 /datum/mana_pool/proc/halt_mana_disperse(string)
@@ -411,18 +388,6 @@
 		return
 	decay_prevention -= string
 
-/// Returns an adjusted amount of "effective" mana, affected by the attunements.
-/// Will always return a minimum of zero and a maximum of the total amount of mana we can give multiplied by the mults.
-///TODO The math here sucks and is practically always full mana usage now
-/datum/mana_pool/proc/get_attuned_amount(list/datum/attunement/incoming_attunements, atom/caster, amount_to_adjust = src.amount)
-	var/mult = get_overall_attunement_mults(incoming_attunements, caster)
-
-	return clamp(SAFE_DIVIDE(amount_to_adjust, mult), 0, amount)
-
-/// Returns the combined attunement mults of all entries in the argument.
-/datum/mana_pool/proc/get_overall_attunement_mults(list/attunements, atom/caster)
-	return get_total_attunement_mult(src.attunements, attunements, caster)
-
 /datum/mana_pool/proc/can_transfer(datum/mana_pool/target_pool)
 	SHOULD_BE_PURE(TRUE)
 
@@ -432,6 +397,7 @@
 	var/old_flags = intrinsic_recharge_sources
 	intrinsic_recharge_sources |= new_bitflags
 	update_intrinsic_recharge(old_flags)
+	update_processing_state()
 
 /datum/mana_pool/proc/update_intrinsic_recharge(previous_recharge_sources = NONE)
 	if (intrinsic_recharge_sources & MANA_ALL_LEYLINES)
@@ -454,13 +420,7 @@
 
 /datum/mana_pool/proc/set_natural_recharge(new_value)
 	ethereal_recharge_rate = new_value
-	if ((ethereal_recharge_rate > 0) && isnull(attunements_to_generate))
-		attunements_to_generate = get_default_attunements_to_generate()
-
-/datum/mana_pool/proc/get_default_attunements_to_generate()
-	RETURN_TYPE(/list/datum/attunement)
-
-	return GLOB.default_attunements.Copy()
+	update_processing_state()
 
 /datum/mana_pool/proc/set_max_mana(new_max, change_amount = FALSE, change_softcap = TRUE)
 	var/percent = get_percent_to_max() //originally this was a duplicate redefinition- see change_amount
@@ -485,7 +445,7 @@
 			filled = clamp(filled, 0, 120)
 			hud_used.mana.icon_state = "mana[filled]"
 		holder.mana_overload_threshold = maximum_mana_capacity * 0.9
-
+	update_processing_state()
 
 /datum/mana_pool/proc/get_percent_to_max()
 	SHOULD_BE_PURE(TRUE)
@@ -510,7 +470,7 @@
 	var/softcap = get_softcap()
 	if(ismob(parent))
 		var/mob/holder = parent
-		return min(softcap, holder.mana_overload_threshold-10)
+		return min(softcap, holder.mana_overload_threshold-50)
 	else
 		return softcap
 
@@ -529,5 +489,3 @@
 				parent.visible_message(span_danger("[parent] collapses as they vomit blood from the recoil."), span_danger("I feel my organs being ripped apart!"))
 				parent:vomit(1, blood = TRUE, stun = FALSE)
 		parent:apply_damage(backlash_intensity, BRUTE, BODY_ZONE_CHEST)
-
-#undef MANA_POOL_REPLACE_ALL_ATTUNEMENTS

@@ -19,12 +19,12 @@
 
 /datum/component/udder/RegisterWithParent()
 	RegisterSignal(parent, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
-	RegisterSignal(parent, COMSIG_ATOM_ATTACKBY, PROC_REF(on_attackby))
+	RegisterSignal(parent, COMSIG_ATOM_ITEM_INTERACTION, PROC_REF(on_item_interaction))
 
 /datum/component/udder/UnregisterFromParent()
 	QDEL_NULL(udder)
 	on_milk_callback = null
-	UnregisterSignal(parent, list(COMSIG_ATOM_EXAMINE, COMSIG_ATOM_ATTACKBY))
+	UnregisterSignal(parent, list(COMSIG_ATOM_EXAMINE, COMSIG_ATOM_ITEM_INTERACTION))
 
 ///signal called on parent being examined
 /datum/component/udder/proc/on_examine(datum/source, mob/user, list/examine_list)
@@ -44,15 +44,27 @@
 			examine_list += span_notice("[parent]'s [udder.name] is round and full.")
 
 ///signal called on parent being attacked with an item
-/datum/component/udder/proc/on_attackby(datum/source, obj/item/milking_tool, mob/user, list/modifiers)
+/datum/component/udder/proc/on_item_interaction(datum/source, mob/living/user, obj/item/milking_tool, list/modifiers)
 	SIGNAL_HANDLER
 
+	if(user.cmode)
+		return NONE
+
+	if(!istype(milking_tool, /obj/item/reagent_containers/glass))
+		return NONE
+
+	if(!istype(user.used_intent, INTENT_FILL))
+		return NONE
+
 	var/mob/living/milked = parent
-	if(milked.stat == CONSCIOUS && istype(milking_tool, /obj/item/reagent_containers/glass) && user.used_intent?.type == INTENT_FILL)
-		udder.milk(milking_tool, user)
-		if(on_milk_callback)
-			on_milk_callback.InvokeAsync(udder.reagents.total_volume, udder.reagents.maximum_volume)
-		return COMPONENT_NO_AFTERATTACK
+	if(milked.stat != CONSCIOUS)
+		return ITEM_INTERACT_BLOCKING
+
+	udder.milk(milking_tool, user)
+	if(on_milk_callback)
+		on_milk_callback.InvokeAsync(udder.reagents.total_volume, udder.reagents.maximum_volume)
+
+	return ITEM_INTERACT_SUCCESS
 
 //................. UDDER .......................//
 /**
@@ -77,6 +89,13 @@
 	var/require_consume_timer = 2 MINUTES
 	COOLDOWN_DECLARE(require_consume_cooldown)
 
+/obj/item/udder/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	UnregisterSignal(udder_mob, list(COMSIG_HOSTILE_ATTACKINGTARGET, COMSIG_MOB_FEED))
+	udder_mob = null
+	on_generate_callback = null
+	return ..()
+
 /obj/item/udder/proc/add_features(parent, callback, reagent = /datum/reagent/consumable/milk)
 	udder_mob = parent
 	on_generate_callback = callback
@@ -86,7 +105,7 @@
 	if(isnull(require_consume_type))
 		return
 	RegisterSignal(udder_mob, COMSIG_HOSTILE_ATTACKINGTARGET, PROC_REF(on_mob_consume))
-	RegisterSignal(udder_mob, COMSIG_ATOM_ATTACKBY, PROC_REF(on_mob_feed))
+	RegisterSignal(udder_mob, COMSIG_MOB_FEED, PROC_REF(on_mob_feed))
 
 /obj/item/udder/proc/on_mob_consume(datum/source, atom/feed)
 	SIGNAL_HANDLER
@@ -96,26 +115,21 @@
 	INVOKE_ASYNC(src, PROC_REF(handle_consumption), feed)
 	return
 
-/obj/item/udder/proc/on_mob_feed(datum/source, atom/used_item, mob/living/user)
+/obj/item/udder/proc/on_mob_feed(datum/source, obj/item/feed, amount, mob/living/user)
 	SIGNAL_HANDLER
 
-	if(!istype(used_item, require_consume_type))
-		return
-	INVOKE_ASYNC(src, PROC_REF(handle_consumption), used_item, user)
-	return COMPONENT_NO_AFTERATTACK
+	if(!istype(feed, require_consume_type))
+		return NONE
+
+	INVOKE_ASYNC(src, PROC_REF(handle_consumption), feed, user)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/udder/proc/handle_consumption(atom/movable/food, mob/user)
 	var/cooldown_time = require_consume_timer
 	if(HAS_TRAIT(udder_mob, TRAIT_ANIMAL_PRODUCTIVE))
 		cooldown_time *= 0.25
 	COOLDOWN_START(src, require_consume_cooldown, cooldown_time)
-
-/obj/item/udder/Destroy()
-	. = ..()
-	STOP_PROCESSING(SSobj, src)
-	UnregisterSignal(udder_mob, list(COMSIG_HOSTILE_ATTACKINGTARGET, COMSIG_ATOM_ATTACKBY))
-	udder_mob = null
-	on_generate_callback = null
 
 /obj/item/udder/process()
 	if(isanimal(udder_mob))

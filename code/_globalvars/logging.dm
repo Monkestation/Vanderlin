@@ -34,7 +34,7 @@ DECLARE_LOG(perf_log, DONT_START_LOG) // Declared here but name is set in time_t
 DECLARE_LOG(query_debug_log, DONT_START_LOG)
 DECLARE_LOG(signals_log, DONT_START_LOG)
 DECLARE_LOG(tgui_log, START_LOG)
-#ifdef REFERENCE_DOING_IT_LIVE
+#if defined(REFERENCE_TRACKING_LOG_APART)
 DECLARE_LOG_NAMED(harddel_log, "harddels", START_LOG)
 #endif
 #if defined(UNIT_TESTS) || defined(SPACEMAN_DMM)

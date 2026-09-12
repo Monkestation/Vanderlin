@@ -76,15 +76,26 @@
 	LAZYADDASSOCLIST(., EXAMINE_SECT_NAME, span_larger("[get_examine_string(user, TRUE)]."))
 	// Our face
 	var/can_see_face = IsAdminGhost(user) || is_human_part_visible(src, HIDEFACE)
-	LAZYADDASSOC(., EXAMINE_SECT_FACE+0.5, can_see_face ? get_examine_face(user, P, .) : get_examine_noface(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_FACE, can_see_face ? get_examine_face(user, P, .) : get_examine_noface(user, P, .))
 	// Our gear
-	LAZYADDASSOC(., EXAMINE_SECT_GEAR+0.5, get_examine_gear(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_GEAR, get_examine_gear(user, P, .))
 	/// Our physical aspects
-	LAZYADDASSOC(., EXAMINE_SECT_BODY+0.5, get_examine_body(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_BODY, get_examine_body(user, P, .))
 	/// Warnings
-	LAZYADDASSOC(., EXAMINE_SECT_WARNING+0.5, get_examine_warnings(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_WARNING, get_examine_warnings(user, P, .))
 	/// Our health
-	LAZYADDASSOC(., EXAMINE_SECT_HEALTH+0.5, get_examine_health(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_HEALTH, get_examine_health(user, P, .))
+
+	if(ishuman(user) && iscarbon(src) && CAN_HAVE_BLOOD(src))
+		var/mob/living/carbon/human/human_user = user
+		if(HAS_TRAIT(human_user, TRAIT_BLOOD_SENSE))
+			var/cached_blood_volume = get_blood_volume()
+			var/vitae = 0
+			var/datum/blood_type/BT = get_blood_type()
+			if(istype(BT) && BT.vitae)
+				vitae = round(cached_blood_volume * BT.vitae)
+			LAZYADDASSOCLIST(., EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
+			LAZYADDASSOCLIST(., EXAMINE_SECT_PREGEAR, span_bloody("Vitae Reserves: [round(bloodpool)]/[maxbloodpool] VTR"))
 
 	// Antag stuff. This throws itself wherever it feels like.
 	for(var/datum/antagonist/antag_datum in user.mind?.antag_datums)
@@ -168,12 +179,10 @@
 			. += span_boldred(mind?.special_role == ROLE_BANDIT ? "BANDIT!" : "OUTLAW!")
 
 		// Court Agents
-		var/list/known_frumentarii = user.mind?.cached_frumentarii
-		if(name in known_frumentarii)
-			if(known_frumentarii[name])
-				. += span_smallgreen("[P[THEYRE]] an agent of the court.")
-			else
-				. += span_redtextsmall("[P[THEYRE]] an ex-agent of the court.")
+		if(HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS) && (real_name in GLOB.court_agents))
+			. += span_smallgreen ("An Agent of the Court.")
+		else if(HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS) && (real_name in GLOB.ex_court_agents))
+			. += span_redtextsmall ("An Ex-Agent of the Court.")
 
 		// Faceless
 		if(HAS_TRAIT(src, TRAIT_FACELESS))
@@ -196,8 +205,11 @@
 			. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
 
 		// The disgusing inquistion section
-		if(HAS_MIND_TRAIT(user, TRAIT_INQUISITION) && (real_name in GLOB.inquis_suspect_players))
-			. += span_userdanger("SUSPECTED OF HERESY...")
+		if(HAS_TRAIT(user, TRAIT_INQUISITION))
+			if(real_name in GLOB.inquis_suspect_players)
+				. += span_userdanger("SUSPECTED OF HERESY...")
+			if(has_status_effect(/datum/status_effect/debuff/blood_mark/curse) || has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
+				. += span_bloody("Marked by Blood Magic!")
 
 		var/they_pur = HAS_TRAIT(user, TRAIT_PURITAN)
 		var/they_inquis = HAS_TRAIT(user, TRAIT_INQUISITION)
@@ -444,9 +456,9 @@
 	var/fire_str
 	if(on_fire)
 		fire_str = span_boldwarning("on fire!")
-		if(L?.has_quirk(/datum/quirk/vice/pyromaniac)) // living only
+		if(L?.has_quirk(/datum/quirk/vice/addiction/pyromaniac)) // living only
 			fire_str += span_boldred(" IT'S BEAUTIFUL!")
-			L.sate_addiction(/datum/quirk/vice/pyromaniac)
+			L.sate_addiction(/datum/quirk/vice/addiction/pyromaniac)
 	else if(fire_stacks + divine_fire_stacks > 0)
 		fire_str += "covered in something flammable."
 	else if(fire_stacks < 0 && !on_fire)

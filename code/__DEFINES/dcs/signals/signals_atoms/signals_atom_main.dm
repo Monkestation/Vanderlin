@@ -73,7 +73,7 @@
 	#define COMPONENT_CANCEL_ATTACK_CHAIN (1<<0)
 	///Skips the specific attack step, continuing for the next one to happen.
 	#define COMPONENT_SKIP_ATTACK (1<<1)
-
+	#define COMPONENT_ITEM_NO_DEFENSE (1<<2)
 #define COMSIG_ATOM_GET_RESISTANCE "atom_get_resistance"
 #define COMSIG_ATOM_GET_MAX_RESISTANCE "atom_get_max_resistance"
 #define COMSIG_ATOM_GET_STATUS_MOD "atom_get_status_mod"
@@ -97,14 +97,6 @@
 #define COMSIG_ATOM_SMOOTHED_ICON "atom_smooth_icon"
 /// from base of atom/Bumped(): (/atom/movable)
 #define COMSIG_ATOM_BUMPED "atom_bumped"
-/// from base of atom/ex_act(): (severity, target)
-#define COMSIG_ATOM_EX_ACT "atom_ex_act"
-/// from base of atom/fire_act(): (added, maxstacks)
-#define COMSIG_ATOM_FIRE_ACT "atom_fire_act"
-/// from base of atom/bullet_act(): (/obj/projectile, def_zone)
-#define COMSIG_ATOM_BULLET_ACT "atom_bullet_act"
-/// from base of atom/acid_act(): (acidpwr, acid_volume)
-#define COMSIG_ATOM_ACID_ACT "atom_acid_act"
 /// from base of atom/setDir(): (old_dir, new_dir)
 #define COMSIG_ATOM_DIR_CHANGE "atom_dir_change"
 /// from base of atom/setDir(): (old_dir, new_dir). Called after the direction changes.
@@ -155,6 +147,10 @@
 	#define EXAMINE_POSITION_BEFORE 2
 	//End positions
 	#define COMPONENT_EXNAME_CHANGED 1
+///from base of atom/examine_more(): (/mob, examine_list)
+#define COMSIG_ATOM_EXAMINE_MORE "atom_examine_more"
+/// from atom/examine_more(): (/atom/examining, examine_list)
+#define COMSIG_MOB_EXAMINING_MORE "mob_examining_more"
 
 /// from base of ClickOn: (atom/clicked_atom, params)
 #define COMSIG_ATOM_CLICKEDON "atom_clickedon"

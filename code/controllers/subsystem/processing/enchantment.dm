@@ -7,7 +7,7 @@ PROCESSING_SUBSYSTEM_DEF(enchantment)
 
 /datum/controller/subsystem/processing/enchantment/Initialize()
 	. = ..()
-	for(var/enchantment_path as anything in subtypesof(/datum/enchantment))
+	for(var/enchantment_path in subtypesof(/datum/enchantment))
 		var/datum/enchantment/e = new enchantment_path
 		enchantment_types[enchantment_path] = e
 		if(e.should_process)

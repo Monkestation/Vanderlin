@@ -13,6 +13,9 @@
 	var/papameat_vines_per_papameat = 100
 	var/list/obj/structure/meatvine/papameat/papameats = list()
 
+	// how much evolution progress is given to everything every process
+	var/passive_evolution_gains = 0
+
 	// Organic matter feeding system
 	var/organic_matter = 0
 	var/organic_matter_max = 2000
@@ -62,6 +65,8 @@
 
 	var/list/mobs = list()
 
+	var/list/wraps = list()
+
 /obj/effect/meatvine_controller/Initialize(mapload, ...)
 	. = ..()
 	if(!isfloorturf(loc))
@@ -76,6 +81,19 @@
 
 	// Register with subsystem instead of SSfastprocess
 	START_PROCESSING(SSobj, src)
+
+/obj/effect/meatvine_controller/proc/adjust_global_evolution_progress(amount)
+	passive_evolution_gains += amount
+
+/obj/effect/meatvine_controller/proc/add_wrap(obj/structure/mob_wrap/wrap)
+	for(var/mob/living/mob in wrap.contents)
+		RegisterSignal(wrap, COMSIG_QDELETING, PROC_REF(remove_wrap))
+		wraps += wrap
+		break
+
+/obj/effect/meatvine_controller/proc/remove_wrap(atom/wrap)
+	UnregisterSignal(wrap, COMSIG_QDELETING)
+	wraps -= wrap
 
 /obj/effect/meatvine_controller/proc/die()
 	isdying = TRUE
@@ -317,6 +335,9 @@
 				attempt_wall_generation()
 
 	update_wall_segments()
+
+	for(var/mob/living/simple_animal/hostile/retaliate/meatvine/vine in mobs)
+		vine.gain_evolution_progress(passive_evolution_gains)
 
 	if(wall_generation_cooldown > 0)
 		wall_generation_cooldown--

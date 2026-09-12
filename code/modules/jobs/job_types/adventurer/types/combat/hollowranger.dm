@@ -51,7 +51,7 @@
 	mask = /obj/item/clothing/face/shepherd/rag
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shirt = /obj/item/clothing/shirt/tunic/colored/black
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	backr = /obj/item/gun/ballistic/bow/short
 	backl = /obj/item/storage/backpack/satchel

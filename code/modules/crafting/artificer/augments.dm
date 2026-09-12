@@ -32,185 +32,185 @@
 /datum/artificer_recipe/augments/strength_servo
 	name = "Hydraulic Strength Servo"
 	created_augment = /datum/augment/stats/strength_servo
-	additional_items = list(/obj/item/gear/metal/steel)
+	additional_items = list(/obj/item/gear/metal/steel = 1)
 
 /datum/artificer_recipe/augments/perception_lens
 	name = "Enhanced Optical Array"
 	created_augment = /datum/augment/stats/perception_lens
-	additional_items = list(/obj/item/natural/glass)
+	additional_items = list(/obj/item/natural/glass = 1)
 
 /datum/artificer_recipe/augments/processing_core
 	name = "Overclocked Logic Engine"
 	created_augment = /datum/augment/stats/processing_core
-	additional_items = list(/obj/item/mana_battery/mana_crystal/standard)
+	additional_items = list(/obj/item/mana_battery/mana_crystal/standard = 1)
 
 /datum/artificer_recipe/augments/processing_core
 	name = "Suspension Rig"
 	created_augment = /datum/augment/stats/suspension_rig
-	additional_items = list(/obj/item/ingot/steel)
+	additional_items = list(/obj/item/ingot/steel = 1)
 
 /datum/artificer_recipe/augments/pressure_tank
 	name = "Extended Capacity Pressure Tank"
 	created_augment = /datum/augment/stats/pressure_tank
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /datum/artificer_recipe/augments/mobility_actuator
 	name = "High-Efficiency Actuators"
 	created_augment = /datum/augment/stats/mobility_actuator
-	additional_items = list(/obj/item/gear/metal/bronze)
+	additional_items = list(/obj/item/gear/metal/bronze = 1)
 
 /datum/artificer_recipe/augments/sensor_dampener
 	name = "Sensor Dampener"
 	created_augment = /datum/augment/stats/sensor_dampener
-	additional_items = list(/obj/item/ingot/copper)
+	additional_items = list(/obj/item/ingot/copper = 1)
 
 /datum/artificer_recipe/augments/power_limiter
 	name = "Power Limiter"
 	created_augment = /datum/augment/stats/power_limiter
-	additional_items = list(/obj/item/ingot/copper)
+	additional_items = list(/obj/item/ingot/copper = 1)
 
 /datum/artificer_recipe/augments/lightweight_frame
 	name = "Lightweight Chassis"
 	created_augment = /datum/augment/stats/lightweight_frame
-	additional_items = list(/obj/item/ingot/tin)
+	additional_items = list(/obj/item/ingot/tin = 1)
 
 /datum/artificer_recipe/augments/efficiency_mode
 	name = "Power Conservation Mode"
 	created_augment = /datum/augment/stats/efficiency_mode
-	additional_items = list(/obj/item/ingot/iron)
+	additional_items = list(/obj/item/ingot/iron = 1)
 
 /datum/artificer_recipe/augments/servo_governor
 	name = "Movement Limiter"
 	created_augment = /datum/augment/stats/servo_governor
-	additional_items = list(/obj/item/gear/wood)
+	additional_items = list(/obj/item/gear/wood = 1)
 
 /datum/artificer_recipe/augments/balanced_matrix
 	name = "Stabilizing Matrix"
 	created_augment = /datum/augment/stats/balanced_matrix
-	additional_items = list(/obj/item/ingot/silver)
+	additional_items = list(/obj/item/ingot/silver = 1)
 
 /datum/artificer_recipe/augments/balanced_matrix
 	name = "Core Stabilizer"
 	created_augment = /datum/augment/stats/core_stabilizer
-	additional_items = list(/obj/item/ingot/thaumic)
+	additional_items = list(/obj/item/ingot/thaumic = 1)
 
 /* 	.....SKILLS..... */
 
 /datum/artificer_recipe/augments/combat_matrix
 	name = "Combat Analysis Matrix"
 	created_augment = /datum/augment/skill/combat_matrix
-	additional_items = list(/obj/item/ingot/silver)
+	additional_items = list(/obj/item/ingot/silver = 1)
 
 /datum/artificer_recipe/augments/blade_processor
 	name = "Blade Trajectory Processor"
 	created_augment = /datum/augment/skill/blade_processor
-	additional_items = list(/obj/item/ingot/silver)
+	additional_items = list(/obj/item/ingot/silver = 1)
 
 /datum/artificer_recipe/augments/whip_servo
 	name = "Whip Articulation Servo"
 	created_augment = /datum/augment/skill/whip_servo
-	additional_items = list(/obj/item/ingot/silver)
+	additional_items = list(/obj/item/ingot/silver = 1)
 
 /datum/artificer_recipe/augments/polearm_stabilizer
 	name = "Polearm Stability Enhancer"
 	created_augment = /datum/augment/skill/polearm_stabilizer
-	additional_items = list(/obj/item/ingot/silver)
+	additional_items = list(/obj/item/ingot/silver = 1)
 
 /datum/artificer_recipe/augments/shield_actuator
 	name = "Shield Response Actuator"
 	created_augment = /datum/augment/skill/shield_actuator
-	additional_items = list(/obj/item/ingot/silver)
+	additional_items = list(/obj/item/ingot/silver = 1)
 
 /datum/artificer_recipe/augments/crossbow_targeting
 	name = "Crossbow Targeting System"
 	created_augment = /datum/augment/skill/crossbow_targeting
-	additional_items = list(/obj/item/ingot/silver)
+	additional_items = list(/obj/item/ingot/silver = 1)
 
 /datum/artificer_recipe/augments/bow_stabilizer
 	name = "Bow Draw Stabilizer"
 	created_augment = /datum/augment/skill/bow_stabilizer
-	additional_items = list(/obj/item/ingot/silver)
+	additional_items = list(/obj/item/ingot/silver = 1)
 
 /datum/artificer_recipe/augments/cooking_guide
 	name = "Culinary Guide"
 	created_augment = /datum/augment/skill/cooking_guide
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /datum/artificer_recipe/augments/smithing_optimizer
 	name = "Smithing Precision Optimizer"
 	created_augment = /datum/augment/skill/smithing_optimizer
-	additional_items = list(/obj/item/ingot/iron)
+	additional_items = list(/obj/item/ingot/iron = 1)
 
 /datum/artificer_recipe/augments/weaponcraft_matrix
 	name = "Weapon Fabrication Matrix"
 	created_augment = /datum/augment/skill/weaponcraft_matrix
-	additional_items = list(/obj/item/ingot/iron)
+	additional_items = list(/obj/item/ingot/iron = 1)
 
 /datum/artificer_recipe/augments/armorcraft_matrix
 	name = "Armor Fabrication Matrix"
 	created_augment = /datum/augment/skill/armorcraft_matrix
-	additional_items = list(/obj/item/ingot/iron)
+	additional_items = list(/obj/item/ingot/iron = 1)
 
 /datum/artificer_recipe/augments/carpentry_guide
 	name = "Carpentry Guidance System"
 	created_augment = /datum/augment/skill/carpentry_guide
-	additional_items = list(/obj/item/ingot/iron)
+	additional_items = list(/obj/item/ingot/iron = 1)
 
 /datum/artificer_recipe/augments/masonry_analyzer
 	name = "Masonry Structural Analyzer"
 	created_augment = /datum/augment/skill/masonry_analyzer
-	additional_items = list(/obj/item/ingot/iron)
+	additional_items = list(/obj/item/ingot/iron = 1)
 
 /datum/artificer_recipe/augments/engineering_core
 	name = "Advanced Engineering Core"
 	created_augment = /datum/augment/skill/engineering_core
-	additional_items = list(/obj/item/ingot/gold)
+	additional_items = list(/obj/item/ingot/gold = 1)
 
 /datum/artificer_recipe/augments/alchemy_database
 	name = "Alchemical Database"
 	created_augment = /datum/augment/skill/alchemy_database
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 // Skill augments - Labor skills
 /datum/artificer_recipe/augments/mining_efficiency
 	name = "Mining Efficiency Module"
 	created_augment = /datum/augment/skill/mining_efficiency
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /datum/artificer_recipe/augments/farming_analyzer
 	name = "Agricultural Analysis System"
 	created_augment = /datum/augment/skill/farming_analyzer
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /datum/artificer_recipe/augments/butchering_guide
 	name = "Butchering Precision Guide"
 	created_augment = /datum/augment/skill/butchering_guide
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /datum/artificer_recipe/augments/lumberjack_optimizer
 	name = "Lumber Harvesting Optimizer"
 	created_augment = /datum/augment/skill/lumberjack_optimizer
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /datum/artificer_recipe/augments/medicine_database
 	name = "Medical Knowledge Database"
 	created_augment = /datum/augment/skill/medicine_database
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /datum/artificer_recipe/augments/lockpick_analyzer
 	name = "Lock Mechanism Analyzer"
 	created_augment = /datum/augment/skill/lockpick_analyzer
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /datum/artificer_recipe/augments/climbing_optimizer
 	name = "Climbing Optimization Module"
 	created_augment = /datum/augment/skill/climbing_optimizer
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /datum/artificer_recipe/augments/stealth_dampener
 	name = "Acoustic Dampening System"
 	created_augment = /datum/augment/skill/stealth_dampener
-	additional_items = list(/obj/item/ingot/bronze)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 
 /* 	.....SPECIAL..... */
 

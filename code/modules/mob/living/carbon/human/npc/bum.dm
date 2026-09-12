@@ -3,7 +3,7 @@ GLOBAL_LIST_INIT(bum_aggro, file2list('strings/rt/bumaggrolines.txt'))
 
 /mob/living/carbon/human/species/human/northern/bum
 	ai_controller = /datum/ai_controller/human_bum
-	faction = list(FACTION_BUMS, FACTION_TOWN)
+	faction = list(FACTION_BUMS)
 	ambushable = FALSE
 	dodgetime = 30
 	flee_in_pain = TRUE
@@ -20,7 +20,6 @@ GLOBAL_LIST_INIT(bum_aggro, file2list('strings/rt/bumaggrolines.txt'))
 
 /mob/living/carbon/human/species/human/northern/bum/Initialize()
 	. = ..()
-	set_species(/datum/species/human/northern)
 	AddComponent(/datum/component/ai_aggro_system)
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 

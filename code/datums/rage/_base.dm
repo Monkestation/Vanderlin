@@ -45,7 +45,7 @@
 	RegisterSignal(holder_mob, COMSIG_QDELETING, PROC_REF(remove_holder))
 	holder_mob.rage_datum = src
 
-	for(var/trait as anything in traits)
+	for(var/trait in traits)
 		ADD_TRAIT(holder_mob, trait, RAGE_TRAIT)
 	for(var/datum/action/ability as anything in abilities_extra)
 		grant_ability(ability, permanent = TRUE)
@@ -66,7 +66,7 @@
 			holder_mob.remove_spell(ability)
 		active_abilities.Cut()
 		holder_mob.remove_spells(source = src)
-		for(var/trait as anything in traits)
+		for(var/trait in traits)
 			REMOVE_TRAIT(holder_mob, trait, RAGE_TRAIT)
 	holder_mob = null
 

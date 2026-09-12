@@ -115,11 +115,11 @@
 		return
 	adjustFireLoss(diff, updating_health, forced, required_bodytype)
 
-/mob/living/carbon/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, required_status)
+/mob/living/carbon/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, required_status, intense)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	if(amount > 0)
-		take_overall_damage(0, amount, updating_health, required_status)
+		take_overall_damage(0, amount, updating_health, required_status, damage_type = (intense ? BCLASS_INTENSE_BURN : null))
 	else
 		heal_overall_damage(0, abs(amount), required_status ? required_status : BODYPART_ORGANIC, updating_health)
 	return amount
@@ -142,8 +142,12 @@
 	if(. <= 75)
 		if(getOxyLoss() > 75)
 			ADD_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+
 	else if(getOxyLoss() <= 75)
 		REMOVE_TRAIT(src, TRAIT_KNOCKEDOUT, OXYLOSS_TRAIT)
+
+	var/obj/item/organ/brain = getorganslot(ORGAN_SLOT_BRAIN)
+	brain?.consider_processing()
 
 /mob/living/carbon/setOxyLoss(amount, updating_health = TRUE, forced = FALSE)
 	. = ..()
@@ -318,10 +322,37 @@
 	if(!can_feel_pain())
 		return 0
 
-	var/shock = 0
-	shock += SHOCK_MOD_CLONE * getCloneLoss()
+	var/list/fractions = list()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-		shock += bodypart.get_shock(painkiller_included)
+		if(!bodypart.max_pain_damage)
+			continue
+		var/frac = bodypart.get_shock(painkiller_included) / (bodypart.max_pain_damage * 0.7)
+		fractions += clamp(frac, 0, 1.3) // allow slight overshoot per-limb, but bounded
+
+	sortTim(fractions, GLOBAL_PROC_REF(cmp_numeric_dsc)) // worst limb first
+
+	var/weighted_sum = 0
+	var/max_weighted_sum = 0
+	var/weight = 1
+	for(var/i in 1 to length(fractions))
+		weighted_sum += fractions[i] * weight
+		max_weighted_sum += weight
+		if(fractions[1] <= 0)
+			weight *= SHOCK_USELESS_DECAY
+		else
+			weight *= SHOCK_STACK_DECAY
+
+	// pad max_weighted_sum out to a consistent limb count so losing limbs
+	// doesn't change what "fully wounded on every remaining limb" maps to
+	var/remaining_weight = weight
+	for(var/i in length(fractions)+1 to SHOCK_STACK_MAX_LIMBS)
+		max_weighted_sum += remaining_weight
+		remaining_weight *= SHOCK_STACK_DECAY
+
+	var/shock = max_weighted_sum ? (weighted_sum / max_weighted_sum) * SHOCK_STAGE_MAX : 0
+
+	// clone loss stays additive on top, uncapped by design (separate hurt channel)
+	shock += SHOCK_MOD_CLONE * getCloneLoss()
 
 	return max(0, shock)
 
@@ -427,7 +458,7 @@
 			damage_type = WOUND_INTERNAL_BRUISE
 
 		if(damage_type || burn)
-			if(burn)
+			if(burn && (damage_type != BCLASS_INTENSE_BURN))
 				damage_type = BCLASS_BURN
 			update = TRUE
 			var/list/mods = list()

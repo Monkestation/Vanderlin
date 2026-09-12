@@ -4,6 +4,7 @@
 	typepath = /datum/round_event/eora_matchmaking
 	weight = 8
 	earliest_start = 15 MINUTES
+	latest_start = 1 HOURS
 	max_occurrences = 1
 	min_players = 30
 	dedicated_storytellers = list(/datum/storyteller/eora)
@@ -30,10 +31,8 @@
 			continue
 
 		// Exclude parents using new family system
-		if(human_mob.family_member_datum)
-			var/datum/family_member/member = human_mob.family_member_datum
-			if(member.children.len > 0)
-				continue
+		if(human_mob.family_member_datum?.has_children())
+			continue
 
 		// Add to appropriate gender list
 		if(human_mob.gender == MALE)

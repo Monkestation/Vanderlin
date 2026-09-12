@@ -4,7 +4,7 @@
 	var/recipe_name = ""
 	var/smells_like = "nothing"
 	var/list/output_reagents = list()
-	var/list/output_items = list()
+	var/list/output_items
 	var/list/required_essences = list()
 
 /datum/alch_cauldron_recipe/proc/matches_essences(list/available_essences)
@@ -38,7 +38,7 @@ Keep them reasonable to make
 /datum/alch_cauldron_recipe/berrypoison
 	recipe_name = "Berry Poison"
 	smells_like = "charcoal"
-	output_reagents = list(/datum/reagent/berrypoison = 25)
+	output_reagents = list(/datum/reagent/poison/berry = 25)
 	required_essences = list(
 		/datum/thaumaturgical_essence/water = 9,
 		/datum/thaumaturgical_essence/poison = 5,
@@ -47,7 +47,7 @@ Keep them reasonable to make
 /datum/alch_cauldron_recipe/stam_poison
 	recipe_name = "Stamina Poison"
 	smells_like = "kicked up dust"
-	output_reagents = list(/datum/reagent/stampoison = 25)
+	output_reagents = list(/datum/reagent/poison/stamina = 25)
 	required_essences = list(
 		/datum/thaumaturgical_essence/air = 9,
 		/datum/thaumaturgical_essence/poison = 5,
@@ -94,7 +94,7 @@ Keep them reasonable to make
 /datum/alch_cauldron_recipe/doompoison
 	recipe_name = "Doom Poison"
 	smells_like = "charcoal"
-	output_reagents = list(/datum/reagent/strongpoison = 25)
+	output_reagents = list(/datum/reagent/poison/doom = 25)
 	required_essences = list(
 		/datum/thaumaturgical_essence/void = 12,
 		/datum/thaumaturgical_essence/poison = 21,
@@ -103,7 +103,7 @@ Keep them reasonable to make
 /datum/alch_cauldron_recipe/big_stam_poison
 	recipe_name = "Strong Stamina Poison"
 	smells_like = "stagnant cold air"
-	output_reagents = list(/datum/reagent/strongstampoison = 25)
+	output_reagents = list(/datum/reagent/poison/stamina_strong = 25)
 	required_essences = list(
 		/datum/thaumaturgical_essence/frost = 12,
 		/datum/thaumaturgical_essence/poison = 21,
@@ -153,7 +153,7 @@ Keep them reasonable to make
 /datum/alch_cauldron_recipe/dread_death
 	recipe_name = "Dread Death"
 	smells_like = "cold fire"
-	output_reagents = list(/datum/reagent/dreaddeath = 25)
+	output_reagents = list(/datum/reagent/poison/dreaddeath = 25)
 	required_essences = list(
 		/datum/thaumaturgical_essence/frost = 9,
 		/datum/thaumaturgical_essence/life = 9,
@@ -165,7 +165,7 @@ Keep them reasonable to make
 /datum/alch_cauldron_recipe/str_potion
 	recipe_name = "Strength of Troll Muscles"
 	smells_like = "sour vomit"
-	output_reagents = list(/datum/reagent/buff/strength = 5)
+	output_reagents = list(/datum/reagent/buff/strength = 25)
 	required_essences = list(
 		/datum/thaumaturgical_essence/earth = 18,
 		/datum/thaumaturgical_essence/order = 9,
@@ -562,4 +562,23 @@ Keep them reasonable to make
 		/datum/thaumaturgical_essence/water = 9,
 		/datum/thaumaturgical_essence/crystal = 9,
 		/datum/thaumaturgical_essence/chaos = 5,
+	)
+
+/datum/alch_cauldron_recipe/blood_potion
+	recipe_name = "Blood Potion"
+	smells_like = "sickly iron"
+	output_reagents = list(/datum/reagent/medicine/bloodpot = 25)
+	required_essences = list(
+		/datum/thaumaturgical_essence/chaos = 9,
+		/datum/thaumaturgical_essence/life = 5
+	)
+/datum/alch_cauldron_recipe/big_blood_potion
+	recipe_name = "Strong Blood Potion"
+	smells_like = "decay and sickly iron"
+	output_reagents = list(/datum/reagent/medicine/strongbloodpot = 25)
+	required_essences = list(
+		/datum/thaumaturgical_essence/chaos = 9,
+		/datum/thaumaturgical_essence/life = 5,
+		/datum/thaumaturgical_essence/cycle = 9,
+		/datum/thaumaturgical_essence/death = 1,
 	)

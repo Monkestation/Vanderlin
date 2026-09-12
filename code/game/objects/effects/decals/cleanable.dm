@@ -21,17 +21,14 @@
 				if (replace_decal(C))
 					return INITIALIZE_HINT_QDEL
 
-
-//	addtimer(CALLBACK(src, TYPE_PROC_REF(/datum, AddComponent), /datum/component/beauty, beauty), 0)
-
 	var/turf/T = get_turf(src)
-	if(T && is_station_level(T.z))
+	if(T && is_town_level(T.z))
 		SSblackbox.record_feedback("tally", "station_mess_created", 1, name)
 		SSobjectivequests.increase_value(/datum/objective_quest_driver/mess, 1)
 
 /obj/effect/decal/cleanable/Destroy()
 	var/turf/T = get_turf(src)
-	if(T && is_station_level(T.z))
+	if(T && is_town_level(T.z))
 		SSblackbox.record_feedback("tally", "station_mess_destroyed", 1, name)
 		SSobjectivequests.decrease_value(/datum/objective_quest_driver/mess, 1)
 	return ..()

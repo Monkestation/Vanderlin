@@ -80,7 +80,7 @@
 			return
 		var/userskill = GET_MOB_SKILL_VALUE_OLD(user, teachable_skills[skill])
 		if(userskill <= 1)
-			to_chat(user, span_warning("You aren't skilled enough to write a textbook about [lowertext(skill)]!"))
+			to_chat(user, span_warning("You aren't skilled enough to write a textbook about [LOWER_TEXT(skill)]!"))
 			return
 		var/list/possible_skill_levels = list()
 		var/list/skill_names = list("Novice", "Apprentice", "Journeyman", "Expert", "Master", "Legend")
@@ -97,11 +97,11 @@
 			return
 		if(!user.CanReach(src))
 			return
-		to_chat(user, span_notice("You begin writing in [src] concepts about [lowertext(skill)] of [lowertext(level_name)] difficulty."))
+		to_chat(user, span_notice("You begin writing in [src] concepts about [LOWER_TEXT(skill)] of [LOWER_TEXT(level_name)] difficulty."))
 		playsound(src, 'sound/items/write.ogg', 50, FALSE, ignore_walls = FALSE)
 		skilltoteach = teachable_skills[skill]
 		if(do_after(user, 10 SECONDS, src))
-			skill_name = lowertext(level_name)
+			skill_name = LOWER_TEXT(level_name)
 			maxskill = possible_skill_levels[level_name]
 			minskill = maxskill - 1
 			update_appearance(UPDATE_DESC | UPDATE_NAME)

@@ -2,7 +2,7 @@
  * This is the proc that handles the order of an item_attack.
  *
  * The order of procs called is:
- * * [/atom/proc/tool_act] on the target. If it returns TRUE, the chain will be stopped.
+ * * [/atom/proc/tool_act] on the target. If it returns ITEM_INTERACT_SUCCESS or ITEM_INTERACT_BLOCKING, the chain will be stopped.
  * * [/obj/item/proc/pre_attack] on src. If this returns TRUE, the chain will be stopped.
  * * [/atom/proc/attackby] on the target. If it returns TRUE, the chain will be stopped.
  * * [/obj/item/proc/afterattack]. The return value does not matter.
@@ -26,10 +26,18 @@
 			to_chat(user, span_warning("...What?"))
 			return TRUE
 
+	//Proxy replaces src cause it returns an atom that will attack the target on our behalf
+	var/obj/item/source_atom = get_proxy_attacker_for(target, user)
+	if(source_atom != src) //if we are someone else then call that attack chain else we can proceed with the usual stuff
+		return source_atom.melee_attack_chain(user, target, modifiers)
+
 	var/is_right_clicking = LAZYACCESS(modifiers, RIGHT_CLICK)
 
-	if(tool_behaviour && target.tool_act(user, src, tool_behaviour))
+	var/item_interact_result = target.base_item_interaction(user, src, modifiers)
+	if(item_interact_result & ITEM_INTERACT_SUCCESS)
 		return TRUE
+	if(item_interact_result & ITEM_INTERACT_BLOCKING)
+		return FALSE
 
 	var/pre_attack_result
 	if(is_right_clicking)
@@ -169,14 +177,14 @@
 
 	return SECONDARY_ATTACK_CALL_NORMAL
 
-/obj/attackby(obj/item/I, mob/living/user, list/modifiers)
-	if(!user.cmode)
-		if(user.try_recipes(src, I, user))
-			user.changeNext_move(CLICK_CD_FAST)
-			return TRUE
-	if(I.obj_flags_ignore)
-		return I.attack_atom(src, user)
-	return ..() || ((obj_flags & CAN_BE_HIT) && I.attack_atom(src, user))
+/obj/attackby(obj/item/attacking_item, mob/user, list/modifiers)
+	if(..())
+		return TRUE
+
+	if(!attacking_item.obj_flags_ignore && !(obj_flags & CAN_BE_HIT))
+		return FALSE
+
+	return attacking_item.attack_atom(src, user, modifiers)
 
 /turf/attackby(obj/item/I, mob/living/user, list/modifiers)
 	if(liquids && I.heat)
@@ -226,35 +234,6 @@
 
 		return result
 
-	if(weapon.item_flags & ABSTRACT)
-		return
-
-	. = SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-
-	if(src == user)
-		if(offered_item_ref)
-			cancel_offering_item()
-		else
-			to_chat(user, span_warning("I can't offer myself an item!"))
-		return
-
-	var/obj/offered_item
-	if(user.offered_item_ref)
-		offered_item = user.offered_item_ref.resolve()
-		if(offered_item == weapon)
-			user.cancel_offering_item()
-			return
-		else
-			to_chat(user, span_notice("I'm already offering [offered_item]!"))
-			return
-
-	offered_item = user.get_active_held_item()
-
-	if(HAS_TRAIT(offered_item, TRAIT_NODROP))
-		to_chat(user, span_warning("I can't offer this."))
-		return
-	user.offer_item(src, offered_item)
-
 /**
  * Called from [/mob/living/proc/attackby]
  *
@@ -293,6 +272,12 @@
 	var/datum/intent/cached_intent = user.used_intent
 	if(user.used_intent.swingdelay)
 		sleep(user.used_intent.swingdelay)
+
+	// Getting struck w/ /disrupt swingdelay type sets our swing_state to false.
+	// If we had the effect, but not the bool, we were interrupted. (Or something else went wrong.)
+	if(user.is_swinging() && !user.swing_state)
+		return
+
 	if(user.a_intent != cached_intent)
 		return
 	if(QDELETED(src) || QDELETED(M))
@@ -310,14 +295,14 @@
 		user.adjust_stamina(10)
 	var/turf/turf_before = get_turf(M)
 	SEND_SIGNAL(user, COMSIG_MOB_ITEM_ATTACK_POST_SWINGDELAY, M, user, src)
-	if(M.checkdefense(user.used_intent, user))
+	if(!(signal_return & COMPONENT_ITEM_NO_DEFENSE) && M.checkdefense(user.used_intent, user))
 		if(M.d_intent == INTENT_PARRY)
 			if(!M.get_active_held_item() && !M.get_inactive_held_item()) //we parried with a bracer, redirect damage
 				if(M.active_hand_index == 1)
 					user.tempatarget = BODY_ZONE_L_ARM
 				else
 					user.tempatarget = BODY_ZONE_R_ARM
-				if(M.attacked_by(src, user)) //we change intents when attacking sometimes so don't play if we do (embedding items)
+				if(M.attacked_by(src, user, signal_return)) //we change intents when attacking sometimes so don't play if we do (embedding items)
 					if(user.used_intent == cached_intent)
 						var/tempsound = user.used_intent.hitsound
 						if(tempsound)
@@ -362,7 +347,7 @@
 							"<span class='boldwarning'>I'm disarmed by [user]!</span>")
 			return
 
-	if(M.attacked_by(src, user))
+	if(M.attacked_by(src, user, signal_return))
 		if(user.used_intent == cached_intent)
 			var/tempsound = user.used_intent.hitsound
 			if(tempsound)
@@ -389,8 +374,10 @@
 /obj/item/proc/attack_atom(atom/attacked_atom, mob/living/user)
 	if(SEND_SIGNAL(src, COMSIG_ITEM_ATTACK_OBJ, attacked_atom, user) & COMPONENT_CANCEL_ATTACK_CHAIN)
 		return TRUE
+
 	if(item_flags & NOBLUDGEON)
-		return TRUE
+		return FALSE
+
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(attacked_atom.attacked_by(src, user) && !isopenturf(attacked_atom)) // this check is due to attack animations in /obj/item/proc/afterattack()
 		user.do_attack_animation(attacked_atom, used_item = src, used_intent = user.used_intent)
@@ -717,6 +704,7 @@
 	send_item_attack_message(I, user, hitlim)
 	next_attack_msg.Cut()
 	I.do_special_attack_effect(user, null, null, src, null)
+	return TRUE
 
 
 /mob/living/simple_animal/getarmor(def_zone, type, damage, armor_penetration, blade_dulling, peeldivisor, intdamfactor = 1, used_weapon)
@@ -729,7 +717,7 @@
 			armorval += max(0, natural - armor_penetration)
 
 	if(bbarding && !bbarding.obj_broken)
-		armorval = bbarding.armor.getRating(type)
+		armorval = bbarding.get_armor().get_rating(type)
 		var/intdamage = damage
 		if(type != "blunt")
 			if((damage + armor_penetration) > armorval)

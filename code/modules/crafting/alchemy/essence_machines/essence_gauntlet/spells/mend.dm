@@ -3,8 +3,6 @@
 	desc = "Repairs minor damage to simple objects."
 	button_icon_state = "mending"
 	cast_range = 1
-	attunements = list(/datum/attunement/earth)
-	point_cost = 3
 	essences = list(/datum/thaumaturgical_essence/earth)
 
 	var/repair_percent = 0.08
@@ -64,3 +62,12 @@
 	else
 		to_chat(user, span_warning("My concentration breaks! I could not repair [I]."))
 	return FALSE
+
+/datum/action/cooldown/spell/essence/mend/spell
+	name = "Lesser Mend"
+	spell_cost = 40
+	spell_type = SPELL_MANA
+	cooldown_time = 3 MINUTES
+
+	required_form = FORM_EARTH
+	required_technique = TECHNIQUE_RESTORATION

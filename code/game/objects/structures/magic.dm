@@ -14,7 +14,7 @@
 	if(depleted)
 		to_chat(user, "<span class='notice'>The salt circle has been damaged...</span>")
 		return
-	if(H.virginity)
+	if(HAS_TRAIT(H, TRAIT_VIRGIN))
 		playsound(user, 'sound/magic/timestop.ogg', 100, TRUE, -1)
 		new wall_type(get_step(src, EAST),user)
 		new wall_type(get_step(src, WEST),user)

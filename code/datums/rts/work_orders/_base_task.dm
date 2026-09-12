@@ -31,7 +31,7 @@
 
 /datum/work_order/proc/get_work_speed_modifier(datum/worker_mind/mind)
 	var/modifier = 1
-	for(var/slot as anything in mind.worker_gear)
+	for(var/slot in mind.worker_gear)
 		if(!mind.has_gear_in_slot(slot))
 			continue
 		var/datum/worker_gear/gear = mind.get_gear_in_slot(slot)
@@ -49,7 +49,7 @@
 
 /datum/work_order/proc/get_stamina_cost_modifier(datum/worker_mind/mind)
 	var/modifier = 1
-	for(var/slot as anything in mind.worker_gear)
+	for(var/slot in mind.worker_gear)
 		if(!mind.has_gear_in_slot(slot))
 			continue
 		var/datum/worker_gear/gear = mind.get_gear_in_slot(slot)

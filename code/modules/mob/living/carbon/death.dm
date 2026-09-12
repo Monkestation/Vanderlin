@@ -14,6 +14,20 @@
 	for(var/datum/brain_trauma/BT as anything in get_traumas())
 		BT.on_death()
 
+/mob/living/carbon/attempt_infect(force = FALSE, bite = FALSE)
+	if(!force && has_world_trait(/datum/world_trait/necra_requiem))
+		return
+	if(!(bite || force) && (stat > DEAD))
+		return
+	var/obj/item/organ/zombie_infection/organ = getorganslot(ORGAN_SLOT_ZOMBIE)
+	if(organ)
+		return
+	organ = new(get_turf(src))
+	if(bite)
+		organ.converts_living = TRUE
+		organ.revive_time = 1 MINUTES
+	organ.Insert(src)
+
 /mob/living/carbon/dust(just_ash, drop_items, force)
 	if(drop_items)
 		var/turf/T = get_turf(src)
@@ -32,9 +46,9 @@
 /mob/living/carbon/gib(no_brain, no_organs, no_bodyparts, safe_gib = FALSE)
 	if(safe_gib) // If you want to keep all the mob's items and not have them deleted
 		for(var/obj/item/W in src)
-			dropItemToGround(W)
-			if(prob(50))
-				step(W, pick(GLOB.alldirs))
+			if(dropItemToGround(W))
+				if(prob(50))
+					step(W, pick(GLOB.alldirs))
 	var/atom/Tsec = drop_location()
 	for(var/mob/M in src)
 		M.forceMove(Tsec)

@@ -66,16 +66,24 @@
 	if(!nearest_papameat)
 		return
 
-	// Find corpses
-	for(var/mob/living/corpse in view(10, our_mob))
-		if(corpse == our_mob)
-			continue
-		if(corpse.stat != DEAD)
-			continue
-		if(corpse.buckled)
-			continue // Already being dragged
+	// Check for wrapped victims first, worth more than a loose corpse
+	var/obj/structure/mob_wrap/nearest_wrap = null
+	var/wrap_min_dist = INFINITY
 
-		controller.set_blackboard_key(BB_CORPSE_TO_FEED, corpse)
+	for(var/obj/structure/mob_wrap/W in our_mob.master.wraps)
+		if(QDELETED(W))
+			continue
+		if(!length(W.contents))
+			continue // empty wrap, nothing to feed
+		var/dist = get_dist(our_mob, W)
+		if(dist > 30)
+			continue
+		if(dist < wrap_min_dist)
+			wrap_min_dist = dist
+			nearest_wrap = W
+
+	if(nearest_wrap)
+		controller.set_blackboard_key(BB_CORPSE_TO_FEED, nearest_wrap)
 		controller.set_blackboard_key(BB_PAPAMEAT_TARGET, nearest_papameat)
 		controller.queue_behavior(/datum/ai_behavior/papameat_feed_corpse, BB_CORPSE_TO_FEED)
 		return SUBTREE_RETURN_FINISH_PLANNING

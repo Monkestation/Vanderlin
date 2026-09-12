@@ -50,13 +50,11 @@
 /datum/antagonist/prebel/can_be_owned(datum/mind/new_owner)
 	. = ..()
 	if(.)
-		if(new_owner.assigned_role.title in GLOB.noble_positions)
+		if(new_owner.assigned_role.title in GLOB.noble_courthand_positions)
 			return FALSE
 		if(new_owner.assigned_role.title in GLOB.garrison_no_rebellion)
 			return FALSE
 		if(new_owner.unconvertable)
-			return FALSE
-		if(new_owner.current && HAS_TRAIT(new_owner.current, TRAIT_MINDSHIELD))
 			return FALSE
 
 
@@ -106,7 +104,7 @@
 		return FALSE
 	if(!can_be_owned(candidate.mind))
 		return FALSE
-	if(candidate.mind.assigned_role.title in GLOB.noble_positions)
+	if(candidate.mind.assigned_role.title in GLOB.noble_courthand_positions)
 		return FALSE
 	if(candidate.mind.assigned_role.title in GLOB.garrison_no_rebellion)
 		return FALSE

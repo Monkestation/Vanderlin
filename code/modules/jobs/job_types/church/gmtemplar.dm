@@ -19,13 +19,16 @@
 
 /datum/job/gmtemplar
 	title = JOB_GRANDMASTER_TEMPLAR
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Brother")
+	alt_honorary_female = list("Sister")
 	tutorial = "At the upper echelon of the Templaric order sit the Grandmasters, five who sit in the Head in Kingsfield, and one appointed to each sanctified Tennite Church across the realm.\
 	They are masters of Ravox's arts and beholden to no will except Justice and Astrata, the latter of which they know the overbearing presence of all too well. \
 	Despite her cruel authority, the Ravoxian Grandmasters of the Order dare not rise up against the Astratan priests and their sect of guardians at the Head of the Order, lest they be excommunicated."
 	department_flag = CHURCHMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_GMTEMPLAR
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -36,7 +39,9 @@
 	allowed_patrons = list(/datum/patron/divine/ravox)
 
 	outfit = /datum/outfit/gmtemplar
-	give_bank_account = 0
+	give_bank_account = 10
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	job_bitflag = BITFLAG_CHURCH
 
@@ -52,6 +57,7 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)

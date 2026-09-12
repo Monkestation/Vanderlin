@@ -137,10 +137,10 @@ h2 {
 	// Toggle section
 	dat += {"<div class='toggle-section'>"}
 	if(prefs.read_preference(/datum/preference/toggle/multi_char_ready))
-		dat += {"<a href='?src=[REF(src)];toggle_multi=1' class='toggle-btn toggle-on'>ENABLED</a>"}
+		dat += {"<a href='byond://?src=[REF(src)];toggle_multi=1' class='toggle-btn toggle-on'>ENABLED</a>"}
 		dat += {"<span>Ready up with multiple characters</span>"}
 	else
-		dat += {"<a href='?src=[REF(src)];toggle_multi=1' class='toggle-btn toggle-off'>DISABLED</a>"}
+		dat += {"<a href='byond://?src=[REF(src)];toggle_multi=1' class='toggle-btn toggle-off'>DISABLED</a>"}
 		dat += {"<span>Using single character mode</span>"}
 	dat += {"</div>"}
 
@@ -175,10 +175,10 @@ The system will try to assign you a job based on each character's preferences in
 				dat += {"</div>"}
 				dat += {"<div class='slot-actions'>"}
 				if(priority > 1)
-					dat += {"<a href='?src=[REF(src)];move_up=[slot]' title='Move Up'>Up</a>"}
+					dat += {"<a href='byond://?src=[REF(src)];move_up=[slot]' title='Move Up'>Up</a>"}
 				if(priority < length(prefs.multi_ready_slots))
-					dat += {"<a href='?src=[REF(src)];move_down=[slot]' title='Move Down'>Down</a>"}
-				dat += {"<a href='?src=[REF(src)];remove_slot=[slot]' title='Remove'>Remove</a>"}
+					dat += {"<a href='byond://?src=[REF(src)];move_down=[slot]' title='Move Down'>Down</a>"}
+				dat += {"<a href='byond://?src=[REF(src)];remove_slot=[slot]' title='Remove'>Remove</a>"}
 				dat += {"</div>"}
 				dat += {"</div>"}
 				priority++
@@ -205,7 +205,7 @@ The system will try to assign you a job based on each character's preferences in
 			dat += {"<div class='slot-name'>"}
 			dat += {"<b>[name]</b> <span style='color:#888;'>([species])</span>"}
 			dat += {"</div>"}
-			dat += {"<a href='?src=[REF(src)];add_slot=[slot]' class='add-btn'>+ Add</a>"}
+			dat += {"<a href='byond://?src=[REF(src)];add_slot=[slot]' class='add-btn'>+ Add</a>"}
 			dat += {"</div>"}
 
 		if(!has_available)

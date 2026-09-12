@@ -114,26 +114,28 @@
 	. = ..()
 	icon_state = "[base_icon_state][cocked ? "_cocked" : ""][!isnull(ramrod) ? "_ramrod" : ""]"
 
-/obj/item/gun/ballistic/powder/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
-	. = ..()
-	if(istype(attacking_item, /obj/item/ramrod))
-		do_ram(attacking_item, user)
-		return
+/obj/item/gun/ballistic/powder/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(istype(tool, /obj/item/ramrod))
+		do_ram(tool, user)
+		return ITEM_INTERACT_SUCCESS
 
-	if(isreagentcontainer(attacking_item))
+	if(isreagentcontainer(tool))
 		if(reagents.holder_full())
 			balloon_alert(user, "full!")
-			return
-		var/obj/item/reagent_containers/container = attacking_item
+			return ITEM_INTERACT_BLOCKING
+		var/obj/item/reagent_containers/container = tool
 		if(!container.reagents?.total_volume)
 			balloon_alert(user, "empty!")
-			return
+			return ITEM_INTERACT_BLOCKING
 		var/transfer_amount = container.amount_per_transfer_from_this
 		// The unskilled can fill it but will over/under fill
 		if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/firearms) < 10)
 			transfer_amount += rand(-2, 5)
 		playsound(src, 'sound/foley/gunpowder_fill.ogg', 80)
 		container.reagents.trans_to(src, transfer_amount)
+		return ITEM_INTERACT_SUCCESS
+
+	return ..()
 
 /obj/item/gun/ballistic/powder/proc/do_ram(obj/item/ramrod/rod, mob/living/user)
 	if(!istype(rod))
@@ -163,22 +165,18 @@
 	playsound(src, 'sound/foley/nockarrow.ogg', 100, FALSE)
 	bullet_rammed = TRUE
 
-/obj/item/gun/ballistic/powder/attackby_secondary(obj/item/attacking_item, mob/living/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-
-	if(!istype(attacking_item, /obj/item/ramrod))
-		return
+/obj/item/gun/ballistic/powder/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/ramrod))
+		return NONE
 
 	if(!isnull(ramrod))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ITEM_INTERACT_BLOCKING
 
-	if(user.transferItemToLoc(attacking_item, src))
-		ramrod = attacking_item
+	if(user.transferItemToLoc(tool, src))
+		ramrod = tool
 		update_appearance(UPDATE_ICON)
 
-	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/gun/ballistic/powder/attack_self(mob/living/user, list/modifiers)
 	if(bullet_rammed) // If you rammed it down you have to fire

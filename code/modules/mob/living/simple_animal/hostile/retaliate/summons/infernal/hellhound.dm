@@ -1,11 +1,13 @@
 
 /mob/living/simple_animal/hostile/retaliate/infernal/hellhound
-	icon = 'icons/mob/summonable/32x32.dmi'
 	name = "hell hound"
+	icon = 'icons/mob/summonable/32x32.dmi'
 	icon_state = "hellhound"
 	icon_living = "hellhound"
 	icon_dead = "vvd"
-	summon_primer = "You are a hellhound, a moderate sized canine made of heat and flame. You spend time in the infernal plane hunting and incinerating things to your hearts content. Now you've been pulled from your home into a new world, that is decidedly lacking in fire. How you react to these events, only time can tell."
+	summon_primer = "You are a hellhound, a moderate sized canine made of heat and flame. \
+		You spend time in the infernal plane hunting and incinerating things to your hearts content. \
+		Now you've been pulled from your home into a new world, that is decidedly lacking in fire. How you react to these events, only time can tell."
 	tier = 2
 	gender = MALE
 	emote_hear = null
@@ -15,7 +17,7 @@
 	move_to_delay = 3
 	base_intents = list(/datum/intent/simple/bite)
 	butcher_results = list()
-	faction = list("infernal")
+	faction = list(FACTION_INFERNAL)
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 170
 	maxHealth = 170

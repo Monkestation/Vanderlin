@@ -28,7 +28,7 @@
 
 /datum/action/cooldown/spell/charm/eoran
 	name = "Eoran Charm"
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/eora)
@@ -49,10 +49,6 @@
 	sound = 'sound/magic/PSY.ogg'
 	charge_sound = 'sound/magic/chargingold.ogg'
 
-	attunements = list(
-		/datum/attunement/blood = 0.5,
-	)
-
 	charge_time = 3 SECONDS
 	charge_drain = 1
 	charge_slowdown = 1.3
@@ -60,7 +56,7 @@
 	spell_cost = 80
 
 	spell_type = SPELL_BLOOD
-	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
+	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 	associated_skill = /datum/attribute/skill/magic/blood
 
 /datum/action/cooldown/spell/charm/vampire/do_charm(mob/living/cast_on)

@@ -35,3 +35,6 @@
 /obj/effect/projectile/tracer/bloodsteal
 	name = "blood steal"
 	icon_state = "hcult"
+
+/obj/effect/projectile/tracer/wormhole
+	icon_state = "wormhole_g"

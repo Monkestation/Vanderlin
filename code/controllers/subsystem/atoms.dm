@@ -20,6 +20,7 @@ SUBSYSTEM_DEF(atoms)
 	initialized = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
 	initialized = INITIALIZATION_INNEW_REGULAR
+	///this is done because it needs to be instanced after atoms are loaded world side
 	GLOB.obtained_from_reverse = build_obtained_from_reverse()
 	return ..()
 

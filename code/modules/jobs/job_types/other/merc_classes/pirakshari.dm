@@ -5,9 +5,9 @@
 		STAT_SPEED = 1,
 		STAT_ENDURANCE = 1,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/swords = 33,
 		/datum/attribute/skill/combat/crossbows = 20,
-		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/bows = 33,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/labor/taming = 20,
@@ -27,7 +27,7 @@
 	total_positions = 3
 	category_tags = list(CTAG_MERCENARY)
 
-	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander4.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/desert_pirate
 

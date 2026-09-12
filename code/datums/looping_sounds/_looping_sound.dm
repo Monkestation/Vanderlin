@@ -284,6 +284,9 @@ GLOBAL_LIST_EMPTY(created_sound_groups)
 /// A simple proc to change who our parent is set to, also handling registering and unregistering the QDELETING signals on the parent.
 /datum/looping_sound/proc/set_parent(new_parent)
 	if(parent)
+		if(ismob(parent))
+			var/mob/mob_parent = parent
+			mob_parent.client?.played_loops -= src
 		UnregisterSignal(parent, COMSIG_QDELETING)
 	parent = new_parent
 	if(parent)

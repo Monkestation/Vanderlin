@@ -60,7 +60,7 @@
 	to ceaselessly toil in dedication to Malum."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/blacksmith
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	apprentice_name = "Blacksmith Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 

@@ -1,13 +1,12 @@
 /datum/action/cooldown/spell/mend_item
 	name = "Mend Item"
 	desc = "Use arcyne energy to mend an item."
-	point_cost = 1
 	sound = 'sound/magic/whiteflame.ogg'
 	self_cast_possible = FALSE
 	spell_flags = SPELL_RITUOS
-	attunements = list(
-		/datum/attunement/life = 1.2
-	)
+
+	required_form = FORM_LIFE
+	required_technique = TECHNIQUE_ALTERATION
 
 	charge_time = 3 SECONDS
 	cooldown_time = 30 SECONDS

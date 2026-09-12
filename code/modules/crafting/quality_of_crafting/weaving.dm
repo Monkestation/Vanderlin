@@ -251,6 +251,22 @@
 	craftdiff = 3
 	category = "Cloak"
 
+/datum/repeatable_crafting_recipe/sewing/weaving/guardpants
+	name = "watchmen pantaloons"
+	output = /obj/item/clothing/pants/guard
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 3
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/sewing/weaving/guardshirt
+	name = "watchmen garb"
+	output = /obj/item/clothing/shirt/guard
+	requirements = list(/obj/item/natural/cloth = 3,
+				/obj/item/natural/fibers = 2)
+	craftdiff = 3
+	category = "Armor"
+
 /* craftdif of 4 = EXPERT */
 
 /datum/repeatable_crafting_recipe/sewing/weaving/shadowcloak

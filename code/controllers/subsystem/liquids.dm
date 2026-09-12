@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(liquids)
 
 
 /datum/controller/subsystem/liquids/stat_entry(msg)
-	msg += "AG:[length(active_groups)]|BT:[length(burning_turfs)]|EQ:[length(evaporation_queue)]]"
+	msg = "AG:[length(active_groups)]|BT:[length(burning_turfs)]|EQ:[length(evaporation_queue)]]"
 	return ..()
 
 /datum/controller/subsystem/liquids/fire(resumed)

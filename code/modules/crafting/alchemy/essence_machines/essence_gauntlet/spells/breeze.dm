@@ -5,7 +5,6 @@
 	button_icon_state = "breeze"
 	//sound = 'sound/magic/whiff.ogg'
 	cast_range = 3
-	attunements = list(/datum/attunement/aeromancy = 0.2)
 	essences = list(/datum/thaumaturgical_essence/air)
 
 /datum/action/cooldown/spell/essence/breeze/cast(atom/cast_on)
@@ -22,4 +21,11 @@
 
 	for(var/obj/item/I in target_turf)
 		if(I.w_class <= WEIGHT_CLASS_SMALL && prob(50))
-			SSmove_manager.move_rand(I)
+			SSmove_manager.move_rand(I, timeout = 3 SECONDS)
+
+/datum/action/cooldown/spell/essence/breeze/spell
+	name = "Breeze"
+	spell_cost = 15
+	spell_type = SPELL_MANA
+
+	required_form = FORM_AIR

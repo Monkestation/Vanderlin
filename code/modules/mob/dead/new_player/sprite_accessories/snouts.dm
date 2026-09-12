@@ -497,3 +497,5 @@
 /datum/sprite_accessory/snout/thin_beak/hookbeakbig
 	name = "Hook Beak Big"
 	icon_state = "hookbeakbig"
+
+

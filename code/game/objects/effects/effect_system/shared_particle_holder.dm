@@ -41,36 +41,47 @@ GLOBAL_LIST_EMPTY(shared_particles)
  * custom_key can be used to create a new pool of already existing particle type in case you're planning to edit holder's color or properties
  * pool_size controls how many particle holders per type are created. Any objects over this cap will pick an existing holder from the pool
  */
-/atom/movable/proc/add_shared_particles(particle_type, custom_key = null, particle_flags = NONE, pool_size = 3, time)
+/atom/proc/add_shared_particles(particle_type, custom_key = null, particle_flags = NONE, pool_size = 3, time)
 	var/particle_key = custom_key || "[particle_type]"
-	if (!GLOB.shared_particles[particle_key])
+	if(!GLOB.shared_particles[particle_key])
 		GLOB.shared_particles[particle_key] = list(list(new /obj/effect/abstract/shared_particle_holder(null, particle_type, particle_flags)), 1)
-		vis_contents += GLOB.shared_particles[particle_key][SHARED_PARTICLE_HOLDER_INDEX][1]
-		return GLOB.shared_particles[particle_key][SHARED_PARTICLE_HOLDER_INDEX][1]
+		var/obj/effect/abstract/shared_particle_holder/particle_holder = GLOB.shared_particles[particle_key][SHARED_PARTICLE_HOLDER_INDEX][1]
+		return set_shared_particles(particle_holder, particle_key, time, increment = FALSE)
 
+	var/atom/movable/play_pretend = src
 	var/list/type_holders = GLOB.shared_particles[particle_key][SHARED_PARTICLE_HOLDER_INDEX]
-	for (var/obj/effect/abstract/shared_particle_holder/particle_holder as anything in type_holders)
-		if (particle_holder in vis_contents)
+	for(var/obj/effect/abstract/shared_particle_holder/particle_holder as anything in type_holders)
+		if(particle_holder in play_pretend.vis_contents)
 			return particle_holder
 
-	if (length(type_holders) < pool_size)
+	if(length(type_holders) < pool_size)
 		var/obj/effect/abstract/shared_particle_holder/new_holder = new(null, particle_type, particle_flags)
 		type_holders += new_holder
-		vis_contents += new_holder
-		GLOB.shared_particles[particle_key][SHARED_PARTICLE_USER_NUM_INDEX] += 1
-		return new_holder
+		return set_shared_particles(new_holder, particle_key, time)
 
-	var/obj/effect/abstract/shared_particle_holder/particle_holder = pick(type_holders)
-	vis_contents += particle_holder
-	GLOB.shared_particles[particle_key][SHARED_PARTICLE_USER_NUM_INDEX] += 1
+	return set_shared_particles(pick(type_holders), particle_key, time)
+
+/atom/proc/set_shared_particles(obj/effect/abstract/shared_particle_holder/particle_holder, particle_key, time, increment = TRUE)
+	if(!istype(particle_holder))
+		return
+
+	var/atom/movable/play_pretend = src
+	play_pretend.vis_contents += particle_holder
+	if(increment)
+		GLOB.shared_particles[particle_key][SHARED_PARTICLE_USER_NUM_INDEX] += 1
+
 	if(time > 0)
 		addtimer(CALLBACK(src, PROC_REF(remove_shared_particles), particle_key), time)
+
 	return particle_holder
+
+/area/add_shared_particles(particle_type, custom_key = null, particle_flags = NONE, pool_size = 3)
+	CRASH("add_shared_particles was called on an area [src] ([type]) trying to add [particle_type]! Only turfs and movables support shared particles.")
 
 /* Removes shared particles from object's vis_contents and disposes of it if nothing uses that type/key of particle
  * particle_key can be either a type (if no custom_key was passed) or said custom_key
  */
-/atom/movable/proc/remove_shared_particles(particle_key, delete_on_empty = TRUE)
+/atom/proc/remove_shared_particles(particle_key, delete_on_empty = TRUE)
 	if(QDELETED(src))
 		return
 
@@ -83,18 +94,22 @@ GLOBAL_LIST_EMPTY(shared_particles)
 	if (!GLOB.shared_particles[particle_key])
 		return
 
+	var/atom/movable/play_pretend = src
 	var/list/type_holders = GLOB.shared_particles[particle_key][SHARED_PARTICLE_HOLDER_INDEX]
 	for (var/obj/effect/abstract/shared_particle_holder/particle_holder as anything in type_holders)
-		if (!(particle_holder in vis_contents))
+		if (!(particle_holder in play_pretend.vis_contents))
 			continue
 
-		vis_contents -= particle_holder
+		play_pretend.vis_contents -= particle_holder
 		GLOB.shared_particles[particle_key][SHARED_PARTICLE_USER_NUM_INDEX] -= 1
 
 		if (delete_on_empty && GLOB.shared_particles[particle_key][SHARED_PARTICLE_USER_NUM_INDEX] <= 0)
 			QDEL_LIST(type_holders)
 			GLOB.shared_particles -= particle_key
 		return
+
+/area/remove_shared_particles(particle_key, delete_on_empty = TRUE)
+	CRASH("remove_shared_particles was called on an area [src] ([type]) trying to add [particle_key]! Only turfs and movables support shared particles.")
 
 #undef SHARED_PARTICLE_HOLDER_INDEX
 #undef SHARED_PARTICLE_USER_NUM_INDEX

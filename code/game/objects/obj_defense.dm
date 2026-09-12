@@ -14,7 +14,7 @@
 	if(!QDELETED(src) && AM.throwforce > 5)
 		take_damage(AM.throwforce*0.1, BRUTE, damage_type, 1, get_dir(src, AM))
 
-/obj/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
+/obj/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range, burns)
 	if(resistance_flags & INDESTRUCTIBLE)
 		return
 	..() //contents explosion
@@ -37,7 +37,7 @@
 
 	take_damage(brute_loss, BRUTE, "blunt", 0)
 
-	if(fdist && !QDELETED(src))
+	if(fdist && !QDELETED(src) && burns)
 		var/stacks = ((fdist - fodist) * 2)
 		fire_act(stacks)
 
@@ -143,8 +143,8 @@ GLOBAL_DATUM_INIT(acid_overlay, /mutable_appearance, mutable_appearance('icons/e
 	if(resistance_flags & ON_FIRE)
 		SSfire_burning.processing -= src
 	for(var/mob/living/carbon/human/H in view(2, src))
-		if(H.has_quirk(/datum/quirk/vice/pyromaniac))
-			H.sate_addiction(/datum/quirk/vice/pyromaniac)
+		if(H.has_quirk(/datum/quirk/vice/addiction/pyromaniac))
+			H.sate_addiction(/datum/quirk/vice/addiction/pyromaniac)
 	deconstruct(FALSE)
 
 ///Called when the obj is no longer on fire.

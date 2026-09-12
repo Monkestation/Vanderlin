@@ -13,7 +13,7 @@
 /datum/mob_descriptor/New()
 	. = ..()
 	if(!describe)
-		describe = lowertext(name)
+		describe = LOWER_TEXT(name)
 	if(prefix)
 		pre_string = "[prefix] "
 	if(suffix)

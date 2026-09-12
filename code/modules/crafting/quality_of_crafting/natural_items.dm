@@ -20,6 +20,30 @@
 	skillcraft = /datum/attribute/skill/misc/sewing
 	output = /obj/item/natural/cloth
 
+/datum/repeatable_crafting_recipe/survival/splint
+	name = "improvised splint"
+	requirements = list(
+		/obj/item/natural/cloth = 2,
+		/obj/item/grown/log/tree/stick = 1,
+	)
+
+	starting_atom = /obj/item/natural/cloth
+	attacked_atom = /obj/item/grown/log/tree/stick
+	allow_inverse_start = TRUE
+	output = /obj/item/splint
+
+/datum/repeatable_crafting_recipe/survival/tourniquet
+	name = "improvised tourniquet"
+	requirements = list(
+		/obj/item/natural/cloth = 1,
+		/obj/item/grown/log/tree/stick = 1,
+	)
+
+	starting_atom = /obj/item/natural/cloth
+	attacked_atom = /obj/item/grown/log/tree/stick
+	allow_inverse_start = TRUE
+	output = /obj/item/tourniquet
+
 /datum/repeatable_crafting_recipe/survival/thorn_needle
 	name = "thorn needle"
 	requirements = list(
@@ -225,6 +249,37 @@
 	starting_atom = /obj/item/natural/stone
 	attacked_atom = /obj/item/natural/stone
 	output = /obj/item/reagent_containers/glass/bucket/pot
+
+/datum/repeatable_crafting_recipe/survival/stone_hammer
+	name = "stone hammer"
+	requirements = list(
+		/obj/item/natural/stone = 2,
+		/obj/item/grown/log/tree/stick = 1,
+	)
+
+	starting_atom = /obj/item/natural/stone
+	attacked_atom = /obj/item/grown/log/tree/stick
+	output = /obj/item/weapon/hammer/stone
+
+/datum/repeatable_crafting_recipe/survival/stone_hammer/rock
+	name = "hammerstone"
+	requirements = list(
+		/obj/item/natural/stone = 2,
+	)
+
+	starting_atom = /obj/item/natural/stone
+	attacked_atom = /obj/item/natural/stone
+	output = /obj/item/weapon/hammer/stone/rock
+
+/datum/repeatable_crafting_recipe/survival/stone_chisel
+	name = "flint chisel"
+	requirements = list(
+		/obj/item/natural/stone = 2,
+	)
+
+	starting_atom = /obj/item/natural/stone
+	attacked_atom = /obj/item/natural/stone
+	output = /obj/item/weapon/chisel/stone
 
 /datum/repeatable_crafting_recipe/survival/flint
 	name = "flint"

@@ -29,31 +29,43 @@
  * antimagic bitflags: (see code/__DEFINES/magic.dm)
  * * MAGIC_RESISTANCE - Default magic resistance that blocks normal magic (wizard, spells, staffs)
  * * MAGIC_RESISTANCE_MIND - Tinfoil hat magic resistance that blocks mental magic (telepathy, abductors, jelly people)
- * * MAGIC_RESISTANCE_HOLY - Holy magic resistance that blocks unholy magic (revenant, cult, vampire, voice of god)
+ * * MAGIC_RESISTANCE_HOLY - Holy magic resistance that blocks miracles
+ * * MAGIC_RESISTANCE_UNHOLY - Holy magic resistance that blocks unholy magic (revenant, cult, voice of god)
+ * * MAGIC_RESISTANCE_BLOOD - Magic resistance that blocks vampiric magic and blood spells.
 **/
 /datum/component/anti_magic/Initialize(
 		antimagic_flags = MAGIC_RESISTANCE,
 		charges = INFINITY,
 		inventory_flags = ~ITEM_SLOT_BACKPACK, // items in a backpack won't activate, anywhere else is fine
 		datum/callback/drain_antimagic,
-		datum/callback/expiration
+		datum/callback/expiration,
 	)
+	//damn race condition
+	src.antimagic_flags = antimagic_flags
+	src.charges = charges
+	src.inventory_flags = inventory_flags
+	src.drain_antimagic = drain_antimagic
+	src.expiration = expiration
 
 	if(isitem(parent))
-		RegisterSignal(parent, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
-		RegisterSignal(parent, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+		var/obj/item/parent_item = parent
+		RegisterSignal(parent_item, COMSIG_ITEM_EQUIPPED, PROC_REF(on_equip))
+		RegisterSignal(parent_item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
+
+		// incase it's already equipped, we gotta run the proc
+		if(isclothing(parent) && ishuman(parent_item.loc))
+			var/mob/living/carbon/human/wearer = parent_item.loc
+			var/obj/item/clothing/clothes = parent
+
+			if(clothes == wearer.get_item_by_slot(inventory_flags))
+				on_equip(wearer, wearer, clothes.slot_flags)
+
 	else if(ismob(parent))
 		RegisterSignal(parent, COMSIG_MOB_RECEIVE_MAGIC, PROC_REF(block_receiving_magic), override = TRUE)
 		RegisterSignal(parent, COMSIG_MOB_RESTRICT_MAGIC, PROC_REF(restrict_casting_magic), override = TRUE)
 		to_chat(parent, span_warning("Magic seems to flee from you. You are immune to spells but are unable to cast magic."))
 	else
 		return COMPONENT_INCOMPATIBLE
-
-	src.antimagic_flags = antimagic_flags
-	src.charges = charges
-	src.inventory_flags = inventory_flags
-	src.drain_antimagic = drain_antimagic
-	src.expiration = expiration
 
 /datum/component/anti_magic/Destroy(force)
 	QDEL_NULL(drain_antimagic)
@@ -117,10 +129,22 @@
 				span_userdanger("A feeling of warmth washes over [self_subject] as rays of light surround your body and protect you!"),
 			)
 
+		else if(casted_magic_flags & antimagic_flags & MAGIC_RESISTANCE_UNHOLY)
+			user.visible_message(
+				span_warning("[user] becomes difficult to see as [visible_subject] emits a halo of darkness!"),
+				span_userdanger("A feeling of sickness washes over [self_subject] as shifting shadows surround your body and protect you!"),
+			)
+
 		else if(casted_magic_flags & antimagic_flags & MAGIC_RESISTANCE_MIND)
 			user.visible_message(
 				span_warning("[user]'s forehead shines as [visible_subject] repulses magic from their mind!"),
 				span_userdanger("A feeling of cold splashes on [self_subject] as your forehead reflects magic from your mind!"),
+			)
+
+		else if(casted_magic_flags & antimagic_flags & MAGIC_RESISTANCE_BLOOD)
+			user.visible_message(
+				span_warning("[user]'s veins stand out clearly as [visible_subject] resists the influence of blood magic!"),
+				span_userdanger("A feeling of intense heat rises within [self_subject] as your blood resists dark influences!"),
 			)
 
 		//user.mob_light(_range = 2, _color = antimagic_color, _duration = 5 SECONDS)

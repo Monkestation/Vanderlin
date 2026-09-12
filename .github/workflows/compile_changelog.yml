@@ -49,8 +49,8 @@ jobs:
       - name: Commit
         if: steps.value_holder.outputs.ACTIONS_ENABLED
         run: |
-          git config --local user.email "224467185+VANDERLIN-MONARCH@users.noreply.github.com"
-          git config --local user.name "VANDERLIN-MONARCH"
+          git config --local user.email "224467185+VanderlinMonarch@users.noreply.github.com"
+          git config --local user.name "VanderlinMonarch"
           git pull origin main
           git add html/changelogs
           git commit -m "Automatic changelog compile [ci skip]" -a || true

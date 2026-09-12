@@ -42,7 +42,7 @@
 		. += "The heater is off and cold."
 
 	if(internal_reagents?.total_volume)
-		var/datum/reagent/molten_metal/metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
+		var/datum/reagent/molten_metal/metal = internal_reagents.has_reagent(/datum/reagent/molten_metal)
 		if(metal)
 			for(var/datum/material/material as anything in metal.data)
 				if(!ispath(material))
@@ -100,7 +100,7 @@
 
 	var/obj/structure/metal_channel/input = connected_channels[TEXT_WEST]
 	if(input?.group_reagents?.total_volume > 0)
-		var/datum/reagent/molten_metal/input_metal = input.group_reagents.get_reagent(/datum/reagent/molten_metal)
+		var/datum/reagent/molten_metal/input_metal = input.group_reagents.has_reagent(/datum/reagent/molten_metal)
 		if(input_metal && internal_reagents.total_volume + transfer_amount <= internal_reagents.maximum_volume)
 			var/transferred = min(transfer_amount, input_metal.volume)
 			input.group_reagents.trans_to(internal_reagents, transferred, preserve_data = TRUE)
@@ -110,7 +110,7 @@
 
 	var/obj/structure/metal_channel/output = connected_channels[TEXT_EAST]
 	if(output && internal_reagents.total_volume > 0)
-		var/datum/reagent/molten_metal/internal_metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
+		var/datum/reagent/molten_metal/internal_metal = internal_reagents.has_reagent(/datum/reagent/molten_metal)
 		if(internal_metal)
 			var/to_transfer = min(transfer_amount, internal_metal.volume)
 			internal_reagents.trans_to(output.group_reagents, to_transfer, preserve_data = TRUE)
@@ -127,7 +127,7 @@
 		. += emissive_appearance(icon, "heater_flame", alpha = 200)
 
 	if(internal_reagents?.total_volume > 0)
-		var/datum/reagent/molten_metal/metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
+		var/datum/reagent/molten_metal/metal = internal_reagents.has_reagent(/datum/reagent/molten_metal)
 		var/datum/material/largest = metal?.largest_metal
 		if(largest)
 			. += mutable_appearance(

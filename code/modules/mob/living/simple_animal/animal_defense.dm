@@ -210,7 +210,7 @@
 		apply_damage(damage, damagetype, null, getarmor(null, armorcheck))
 		return TRUE
 
-/mob/living/simple_animal/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
+/mob/living/simple_animal/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range, burns)
 	..()
 	if (!severity)
 		return
@@ -223,7 +223,7 @@
 	var/burn_loss = 0
 	var/dmgmod = round(rand(0.5, 1.5), 0.1)
 
-	if(fdist)
+	if(fdist && burns)
 		var/stacks = ((fdist - fodist) * 2)
 		fire_act(stacks)
 

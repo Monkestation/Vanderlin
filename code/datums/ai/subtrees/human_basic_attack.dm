@@ -180,6 +180,10 @@
 	if(HAS_TRAIT(target, TRAIT_BLOODLOSS_IMMUNE) || !CAN_HAVE_BLOOD(target))
 		pawn.aimheight_change(rand(12, 19))
 		return
+	var/mob/living/carbon/human/attacked = target
+	if((pawn.dna?.species.id in SPECIES_SHORTIES) && !((attacked.dna?.species.id in SPECIES_SHORTIES) || attacked.age == AGE_CHILD || HAS_TRAIT(attacked, TRAIT_TINY))) // should still aim head against dwarfs or younglings
+		pawn.aimheight_change(pick(rand(1, 4), rand(5, 8), rand(9, 11)))
+		return
 	pawn.aimheight_change(pick(rand(5, 8), rand(9, 11), rand(12, 19)))
 
 /datum/ai_behavior/basic_melee_attack/human_npc/proc/_try_weapon_special(datum/ai_controller/controller)
@@ -250,13 +254,13 @@
 				wounded += part.body_zone
 
 		var/obj/item/worn = htarget.get_item_by_slot(part.body_zone)
-		if(!worn?.armor)
+		if(!worn?.get_armor())
 			exposed += part.body_zone
 			continue
 
 		// Basic+ fighters read armor and seek soft coverage for their damage type
 		if(skill_level >= SKILL_RANK_NOVICE)
-			var/rating = worn.armor.getRating(armor_rating)
+			var/rating = worn.get_armor().get_rating(armor_rating)
 			if(rating < 25)
 				soft += part.body_zone
 		// Unskilled fighters just notice bare skin
@@ -279,9 +283,9 @@
 			if(!part)
 				continue
 			var/obj/item/worn = htarget.get_item_by_slot(part.body_zone)
-			if(!worn?.armor)
+			if(!worn?.get_armor())
 				continue
-			var/rating = worn.armor.getRating(armor_rating)
+			var/rating = worn.get_armor().get_rating(armor_rating)
 			if(rating < lowest_rating)
 				lowest_rating = rating
 				lowest_zone = part.body_zone

@@ -2,7 +2,7 @@
 	id = "Zombification"
 	attribute_list = list(
 		STAT_STRENGTH = 2,
-		STAT_SPEED = -9,
+		STAT_SPEED = -3,
 		STAT_PERCEPTION = -5,
 		STAT_INTELLIGENCE = -9,
 		STAT_CONSTITUTION = 5,
@@ -29,7 +29,7 @@
 		TRAIT_NOBREATH,
 		TRAIT_TOXIMMUNE,
 		TRAIT_CHUNKYFINGERS,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_SHOCKIMMUNE,
 		TRAIT_SPELLBLOCK,
 		TRAIT_BLOODLOSS_IMMUNE,
@@ -183,7 +183,8 @@
 	zombie.mob_biotypes |= MOB_UNDEAD
 	zombie.add_faction(FACTION_UNDEAD)
 	zombie.remove_faction(list(FACTION_TOWN, FACTION_NEUTRAL))
-	zombie.mind.special_role = name
+	if(zombie.mind)
+		zombie.mind.special_role = name
 
 	zombie.base_intents = list(INTENT_DISARM, INTENT_GRAB, INTENT_HARM, /datum/intent/unarmed/claw)
 	zombie.update_a_intents()
@@ -226,6 +227,7 @@
 	zombie.cut_overlay(rotflies)
 	zombie.attributes?.remove_attribute_modifier(/datum/attribute_modifier/zombie)
 	zombie.remove_client_colour(/datum/client_colour/monochrome)
+	QDEL_NULL(zombie.ai_controller)
 
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		zombie_part.revive_limb()
@@ -297,19 +299,17 @@
  * This occurs when one zombie infects a living human, going into instadeath from here is kind of shit and confusing
  * We instead just transform at the end
  */
-/mob/living/carbon/human/proc/zombie_infect_attempt()
-	if(!prob(7))
-		return
-	if(stat >= DEAD) //do shit the natural way i guess
+/mob/living/carbon/proc/zombie_infect_attempt()
+	if(!prob(14))
 		return
 	to_chat(src, "<span class='danger'>I feel horrible... REALLY horrible after that...</span>")
 	if(get_blood_volume())
 		MOBTIMER_SET(src, MT_PUKE)
 		vomit(1, blood = TRUE, stun = FALSE)
-	addtimer(CALLBACK(src, PROC_REF(wake_zombie)), 1 MINUTES)
+	attempt_infect(bite = TRUE)
 	return TRUE
 
-/mob/living/carbon/human/proc/wake_zombie()
+/mob/living/carbon/proc/wake_zombie()
 	flash_fullscreen("redflash3")
 	to_chat(src, "<span class='danger'>It hurts... Is this really the end for me?</span>")
 	emote("scream") // heres your warning to others bro

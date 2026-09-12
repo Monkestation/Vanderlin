@@ -28,7 +28,7 @@
 
 /obj/item/mould/set_material_information()
 	. = ..()
-	name = lowertext("[initial(main_material.name)] [initial(name)]")
+	name = LOWER_TEXT("[initial(main_material.name)] [initial(name)]")
 
 /obj/item/mould/examine(mob/user)
 	. = ..()
@@ -47,24 +47,27 @@
 		examine_list += "[src] requires [UNIT_FORM_STRING(required_metal_amount)] of Molten Metal to form.</font>"
 	return examine_list
 
-/obj/item/mould/attackby(obj/item/attacking_item, mob/living/user, list/modifiers)
-	. = ..()
-	interact_with_atom(attacking_item, user, modifiers)
-	return TRUE
+/obj/item/mould/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
 
-/obj/item/mould/proc/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(!istype(interacting_with, /obj/item/storage/crucible))
-		return
+	if(istype(tool, /obj/item/weapon/tongs))
+		var/obj/item/weapon/tongs/tongs = tool
+		tool = tongs.held_item
 
-	try_filling(interacting_with, user)
-	return TRUE
+	if(!istype(tool, /obj/item/storage/crucible))
+		return NONE
 
-/obj/item/mould/proc/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
-	if(cooling)
-		return
-	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)
-	if(!metal)
-		return
+	if(try_filling(user, tool))
+		user.changeNext_move(CLICK_CD_FAST)
+		return ITEM_INTERACT_SUCCESS
+
+	return ITEM_INTERACT_BLOCKING
+
+/obj/item/mould/proc/try_filling(mob/living/user, obj/item/storage/crucible)
+	var/datum/reagent/molten_metal/metal = crucible.reagents.has_reagent(/datum/reagent/molten_metal)
+	if(!metal || cooling)
+		return FALSE
 
 	if(!filling_metal)
 		var/list/names = list()
@@ -79,9 +82,10 @@
 		if(length(names) == 1)
 			choice = names[1]
 		else
-			choice = input(user, "What metal to pour?", crucible) in names
+			choice = browser_input_list(user, "What metal to pour?", items = names)
 			if(!choice)
-				return
+				return FALSE
+
 		for(var/datum/material/material as anything in metal.data)
 			if(!ispath(material))
 				continue
@@ -90,10 +94,9 @@
 			filling_metal = material
 			break
 
-	if(cooling)
-		return
 	if(!filling_metal || !(filling_metal in metal.data))
 		return
+
 	var/metal_amount = metal.data[filling_metal]
 	if(metal_amount > required_metal_amount - fufilled_metal)
 		metal_amount = required_metal_amount - fufilled_metal
@@ -107,6 +110,7 @@
 	metal.data[filling_metal] -= metal_amount
 	if(!metal.data[filling_metal])
 		metal.data -= filling_metal
+
 	crucible.reagents.remove_reagent(/datum/reagent/molten_metal, metal_amount)
 	if(!QDELETED(metal))
 		metal.find_largest_metal()
@@ -135,6 +139,8 @@
 
 	icon_state = "[base_icon_state]_mould"
 	fill_icon_state = "[base_icon_state]_filling"
+
+	return TRUE
 
 /obj/item/mould/update_overlays()
 	. = ..()
@@ -250,23 +256,29 @@
 			examine_list += span_info("Needs [metal_examine.Join(", ")]")
 
 		var/list/item_examine = list()
-		for(var/atom/thing as anything in additional_items)
-			item_examine += "[thing.name]"
+		for(var/atom/path as anything in additional_items)
+			item_examine += "[path.name] [additional_items[path]]x"
 		if(length(item_examine))
 			examine_list += span_info("Needs [item_examine.Join(", ")]")
 	return examine_list
 
-/obj/item/mould/customizable/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+/obj/item/mould/customizable/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.cmode)
-		return
+		return NONE
 
 	if(!moulded_recipe)
-		set_recipe(interacting_with, user)
-	else if(istype(interacting_with, /obj/item/storage/crucible))
-		try_filling(interacting_with, user)
+		set_recipe(tool, user)
 	else
-		try_adding(interacting_with, user)
-	return TRUE
+		if(istype(tool, /obj/item/weapon/tongs))
+			var/obj/item/weapon/tongs/tongs = tool
+			if(tongs.held_item)
+				tool = tongs.held_item
+
+		if(istype(tool, /obj/item/storage/crucible))
+			try_filling(tool, user)
+		else
+			try_adding(tool, user)
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/mould/customizable/proc/set_recipe(obj/item/attacking_item, mob/living/user)
 	if(moulded_recipe)
@@ -301,7 +313,7 @@
 	else
 		base_icon_state = "plate"
 
-	name = lowertext("[moulded_recipe.name] mould")
+	name = LOWER_TEXT("[moulded_recipe.name] mould")
 	desc = "Hollowed out and ready to accept liquid metal for casting."
 	update_appearance(UPDATE_ICON_STATE)
 	find_recipe_requirements()
@@ -321,7 +333,7 @@
 	if(material && !ispath(material, /datum/material/coke))
 		metals_needed[material] += melty
 	else
-		additional_items += item_of_interest
+		additional_items[item_of_interest]++
 
 	for(var/obj/item/item_path as anything in moulded_recipe.additional_items)
 		material = initial(item_path.melting_material)
@@ -331,9 +343,9 @@
 			material = initial(ingot.melting_material)
 			melty = 100
 		if(material && !ispath(material, /datum/material/coke))
-			metals_needed[material] += melty
+			metals_needed[material] += melty * moulded_recipe.additional_items[item_path]
 		else
-			additional_items += item_path
+			additional_items[item_path] += moulded_recipe.additional_items[item_path]
 
 	var/biggest_metal
 	var/highest = 0
@@ -349,7 +361,7 @@
 /obj/item/mould/customizable/try_filling(obj/item/storage/crucible/crucible, mob/living/user)
 	if(cooling)
 		return
-	var/datum/reagent/molten_metal/metal = crucible.reagents.get_reagent(/datum/reagent/molten_metal)
+	var/datum/reagent/molten_metal/metal = crucible.reagents.has_reagent(/datum/reagent/molten_metal)
 	if(!metal)
 		return
 
@@ -380,14 +392,17 @@
 	update_appearance(UPDATE_OVERLAYS)
 	check_start_conditions(user)
 
-/obj/item/mould/customizable/proc/try_adding(atom/interacting_with, mob/living/user)
+/obj/item/mould/customizable/proc/try_adding(atom/tool, mob/living/user)
 	if(cooling)
 		return
 
-	if(interacting_with.type in additional_items)
-		additional_items -= interacting_with.type
-		to_chat(user, span_notice("I add [interacting_with] to [src]."))
-		qdel(interacting_with)
+	var/item_type = tool.type
+	if(item_type in additional_items)
+		additional_items[item_type]--
+		if(additional_items[item_type] <= 0)
+			additional_items -= item_type
+		to_chat(user, span_notice("I add [tool] to [src]."))
+		qdel(tool)
 
 	check_start_conditions(user)
 
@@ -415,5 +430,6 @@
 	moulded_recipe.accumulated_quality = MINIMUM_ANVIL_MINIGAME_SCORE
 	moulded_recipe.material_quality = SMELTERY_QUALITY_NORMAL
 	moulded_recipe.skill_quality = 3.5
-	moulded_recipe.handle_creation(get_turf(src))
+	moulded_recipe.craftdiff = 0
+	moulded_recipe.handle_creation(get_turf(src)) // Always create regular quality outputs
 	return ..()

@@ -2,7 +2,7 @@
 	icon_state = "spawnlord"
 	icon_living = "spawnlord"
 	icon_dead = "spawnlord_dead"
-	icon = 'icons/obj/cellular/wide_putrid.dmi'
+	icon = 'icons/obj/cellular/putrid_small.dmi'
 
 	possible_evolutions = list()
 

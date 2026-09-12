@@ -2,6 +2,7 @@
 	icon_state = "constructor"
 	icon_living = "constructor"
 	icon_dead = "constructor_dead"
+	icon = 'icons/obj/cellular/putrid_small.dmi'
 
 	possible_evolutions = list(
 		/mob/living/simple_animal/hostile/retaliate/meatvine/broodmother,

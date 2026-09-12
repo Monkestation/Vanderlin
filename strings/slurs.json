@@ -28,15 +28,26 @@
 			"sharp ear",
 			"dagger ear",
 			"dagger head",
-			"cursed blood",
-			"zizo cursed",
-			"zizo dominated",
 			"spider kisser",
 			"dirt elf",
 			"dirt elves",
 			"shroom sniffer",
 			"cave dweller",
 			"mushroom stain",
+			"underscum"
+		],
+		"Snow Elf": [
+			"knife ear",
+			"pointy ear",
+			"sharp ear",
+			"dagger ear",
+			"dagger head",
+			"cursed blood",
+			"zizo cursed",
+			"zizo dominated",
+			"spider kisser",
+			"shroom sniffer",
+			"cave dweller",
 			"underscum",
 			"zizospawn"
 		],
@@ -47,6 +58,12 @@
 			"halfie"
 		],
 		"Half-Drow": [
+			"mutt",
+			"mongrel",
+			"half breed",
+			"halfie"
+		],
+		"Half-Snow Elf": [
 			"mutt",
 			"mongrel",
 			"half breed",

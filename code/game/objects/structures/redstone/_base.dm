@@ -248,7 +248,8 @@
 
 			// 2. Check Vertical Walls (Multi-Z)
 			// If I am dust, check the turf BELOW me. Is it a wall?
-			var/turf/turf_below = GET_TURF_BELOW(current.loc)
+			var/turf/current_loc = current.loc
+			var/turf/turf_below = GET_TURF_BELOW(current_loc)
 			if(turf_below && isclosedturf(turf_below))
 				// Look for sources on the LOWER Z-level pointing at this wall
 				for(var/check_dir in GLOB.cardinals)
@@ -261,7 +262,7 @@
 								to_check += potential_source
 
 			// If I am dust, check the turf ABOVE me. Is it a wall? (Rare, but possible)
-			var/turf/turf_above = GET_TURF_ABOVE(current.loc)
+			var/turf/turf_above = GET_TURF_ABOVE(current_loc)
 			if(turf_above && isclosedturf(turf_above))
 				for(var/check_dir in GLOB.cardinals)
 					var/turf/source_turf = get_step(turf_above, check_dir)

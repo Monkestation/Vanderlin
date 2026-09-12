@@ -28,6 +28,8 @@ PROCESSING_SUBSYSTEM_DEF(fishing)
 	var/list/spawned_fish = list()
 	var/list/fish_subtypes = sortTim(subtypesof(/obj/item/reagent_containers/food/snacks/fish), GLOBAL_PROC_REF(cmp_init_name_asc))
 	for(var/obj/item/reagent_containers/food/snacks/fish/fish_type as anything in fish_subtypes)
+		if(IS_ABSTRACT(fish_type))
+			continue
 		var/list/fish_dimensions = get_icon_dimensions(fish_type::icon)
 		var/icon/fish_icon = icon(fish_type::icon, fish_type::icon_state, frame = 1, moving = FALSE)
 		cached_fish_icons[fish_type] = icon2base64(fish_icon)

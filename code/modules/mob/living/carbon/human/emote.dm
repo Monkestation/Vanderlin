@@ -33,7 +33,7 @@
 
 /mob/living/carbon/human/verb/emote_eyebrow()
 	set name = "Raise Eyebrow"
-	set category = "Emotes.Silent"
+	set category = "Emotes.Actions"
 
 	emote("eyebrow", intentional = TRUE)
 

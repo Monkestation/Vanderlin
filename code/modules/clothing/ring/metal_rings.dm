@@ -24,11 +24,27 @@
 	icon_state = "ring_duel"
 	sellprice = 10
 
+/obj/item/clothing/ring/bronze
+	name = "bronze ring"
+	icon_state = "ring_b"
+	desc = "A ring of plain bronze."
+	sellprice = 60
+
+/obj/item/clothing/ring/blacksteel
+	name = "blacksteel ring"
+	icon_state = "ring_bs"
+	desc = "A myhtical blacksteel ring."
+	sellprice = 150
+
 /obj/item/clothing/ring/emeraldbs
 	name = "gemerald ring of blacksteel"
 	icon_state = "bs_ring_emerald"
 	desc = "A mythical blacksteel ring with a polished Gemerald set into it."
 	sellprice = 295
+
+/obj/item/clothing/ring/emeraldbs/loadout
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	sellprice = 0
 
 /obj/item/clothing/ring/rubybs
 	name = "rontz ring of blacksteel"
@@ -36,11 +52,19 @@
 	desc = "A mythical blacksteel ring with a polished Rontz set into it."
 	sellprice = 355
 
+/obj/item/clothing/ring/rubybs/loadout
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	sellprice = 0
+
 /obj/item/clothing/ring/topazbs
 	name = "toper ring of blacksteel"
 	icon_state = "bs_ring_topaz"
 	desc = "A mythical blacksteel ring with a polished Toper set into it."
 	sellprice = 380
+
+/obj/item/clothing/ring/topazbs/loadout
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	sellprice = 0
 
 /obj/item/clothing/ring/quartzbs
 	name = "blortz ring of blacksteel"
@@ -48,14 +72,26 @@
 	desc = "A mythical blacksteel ring with a polished Blortz set into it."
 	sellprice = 345
 
+/obj/item/clothing/ring/quartzbs/loadout
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	sellprice = 0
+
 /obj/item/clothing/ring/sapphirebs
 	name = "saffira ring of blacksteel"
 	icon_state = "bs_ring_sapphire"
 	desc = "A mythical blacksteel ring with a polished Saffira set into it."
 	sellprice = 300
 
+/obj/item/clothing/ring/sapphirebs/loadout
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	sellprice = 0
+
 /obj/item/clothing/ring/diamondbs
 	name = "dorpel ring of blacksteel"
 	icon_state = "bs_ring_diamond"
 	desc = "A mythical blacksteel ring with a polished Dorpel set into it."
-	sellprice = 370
+	sellprice = 400
+
+/obj/item/clothing/ring/diamondbs/loadout
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	sellprice = 0

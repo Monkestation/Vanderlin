@@ -11,8 +11,8 @@ PROCESSING_SUBSYSTEM_DEF(roguemachine)
 	var/hermailermaster
 	var/list/death_queue = list()
 	var/last_death_report
-	var/obj/item/crown
-	var/obj/item/key
+	var/obj/item/clothing/head/crown/serpcrown/crown
+	var/obj/item/key/lord/key
 	var/obj/structure/fake_machine/hailer/hailer
 
 /datum/controller/subsystem/processing/roguemachine/fire(resumed = 0)

@@ -100,7 +100,7 @@
 	var/delete_from_stop_pull
 
 /atom/movable //reference to all obj/item/grabbing
-	var/list/grabbedby = list()
+	var/list/grabbedby
 
 /obj/item/grabbing/process()
 	if(valid_check())
@@ -183,11 +183,11 @@
 	STOP_PROCESSING(SSfastprocess, src)
 	if(isobj(grabbed))
 		var/obj/I = grabbed
-		I.grabbedby -= src
+		LAZYREMOVE(I.grabbedby, src)
 	if(ismob(grabbed))
 		UnregisterSignal(grabbed, COMSIG_ATOM_PRE_DIR_CHANGE)
 		var/mob/M = grabbed
-		M.grabbedby -= src
+		LAZYREMOVE(M.grabbedby, src)
 		if(iscarbon(M) && sublimb_grabbed)
 			var/mob/living/carbon/carbonmob = M
 			var/obj/item/bodypart/part = carbonmob.get_bodypart(sublimb_grabbed)
@@ -196,7 +196,7 @@
 			// In this case, grabbed will be the mob, and sublimb_grabbed will be the weapon, rather than a bodypart
 			// This means we should skip any further processing for the bodypart
 			if(part)
-				part.grabbedby -= src
+				LAZYREMOVE(part.grabbedby, src)
 				part = null
 				sublimb_grabbed = null
 
@@ -743,7 +743,6 @@
 		else
 			drinklimb(C)
 	return 1
-
 /obj/item/grabbing/bite/proc/bitelimb(mob/living/user) //implies limb_grabbed and sublimb are things
 	if(!user.Adjacent(grabbed))
 		qdel(src)
@@ -752,53 +751,72 @@
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	var/mob/living/carbon/C = grabbed
-	var/armor_block = C.run_armor_check(sublimb_grabbed, "stab")
+
 	var/obj/item/bodypart/mouth/jaw = iscarbon(user) ? user.get_bodypart(BODY_ZONE_PRECISE_MOUTH) : null
 	var/damage = jaw ? jaw.get_bite_damage(user) : user.get_punch_dmg() * (HAS_TRAIT(user, TRAIT_STRONGBITE) ? 2 : 1)
 	if(HAS_TRAIT(user, TRAIT_STRONGBITE))
 		damage = damage*2
+
+	var/list/split = list()
+	C.run_armor_check(sublimb_grabbed, "stab", damage = damage, split_output = split)
+
 	user.do_attack_animation(C, ATTACK_EFFECT_BITE, used_item = FALSE)
 	C.next_attack_msg.Cut()
-	var/real_damage = C.apply_damage(damage, BRUTE, limb_grabbed, armor_block)
+
+	var/typed_actual = 0
+	var/blunt_actual = 0
+	if(split[DAMAGE_TYPED] > 0)
+		typed_actual = C.apply_damage(split[DAMAGE_TYPED], limb_grabbed, 0)
+	if(split[DAMAGE_BLUNT] > 0)
+		blunt_actual = C.apply_damage(split[DAMAGE_BLUNT], BRUTE, limb_grabbed, 0, can_crit = FALSE)
+
+	var/real_damage = typed_actual + blunt_actual
+
 	if(real_damage)
 		playsound(C, "smallslash", 100, FALSE, -1)
-		var/datum/wound/caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, real_damage, user, sublimb_grabbed, crit_message = TRUE, pre_applied = TRUE, organ_bonus = CANT_ORGAN)
-		if(user.mind)
-			//TODO: Werewolf Signal
-			var/datum/antagonist/werewolf/werewolf_antag = user.mind.has_antag_datum(/datum/antagonist/werewolf)
-			if(werewolf_antag && werewolf_antag.transformed)
-				var/mob/living/carbon/human/human = user
-				if(istype(caused_wound))
-					caused_wound?.werewolf_infect_attempt()
-				if(prob(30))
-					human.werewolf_feed(C)
+		var/datum/wound/caused_wound
+		if(typed_actual > 0)
+			caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, typed_actual, user, sublimb_grabbed, crit_message = TRUE, pre_applied = TRUE, organ_bonus = CANT_ORGAN)
+		if(blunt_actual > 0)
+			limb_grabbed.bodypart_attacked_by(BCLASS_BLUNT, blunt_actual, user, sublimb_grabbed, crit_message = (typed_actual <= 0), pre_applied = TRUE, organ_bonus = CANT_ORGAN)
 
-			// TODO: Zombie Signal
-			if(IS_DEADITE(user))
-				var/mob/living/carbon/human/H = C
-				if(istype(H))
-					INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
-				if(C.stat)
-					if(istype(limb_grabbed, /obj/item/bodypart/head))
-						var/obj/item/bodypart/head/HE = limb_grabbed
-						if(HE.brain)
-							QDEL_NULL(HE.brain)
-							C.visible_message(span_danger("[user] consumes [C]'s brain!"), \
-								span_userdanger("[user] consumes my brain!"), span_hear("I hear a sickening sound of chewing!"), COMBAT_MESSAGE_RANGE, user)
-							to_chat(user, span_boldnotice("Braaaaaains!"))
-							if(!MOBTIMER_EXISTS(user, MT_ZOMBIETRIUMPH))
-								user.adjust_triumphs(1)
-								MOBTIMER_SET(user, MT_ZOMBIETRIUMPH)
-							playsound(C, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
-							if(C.client)
-								record_round_statistic(STATS_LIMBS_BITTEN)
-							return
-		if(HAS_TRAIT(user, TRAIT_POISONBITE))
-			if(C.reagents)
-				var/poison = GET_MOB_ATTRIBUTE_VALUE(user, STAT_CONSTITUTION)/2 //more peak species level, more poison
-				C.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
-				C.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
-				to_chat(user, span_warning("Your fangs inject venom into [C]!"))
+		if(typed_actual > 0)
+			if(user.mind)
+				//TODO: Werewolf Signal
+				var/datum/antagonist/werewolf/werewolf_antag = user.mind.has_antag_datum(/datum/antagonist/werewolf)
+				if(werewolf_antag && werewolf_antag.transformed)
+					var/mob/living/carbon/human/human = user
+					if(istype(caused_wound))
+						caused_wound?.werewolf_infect_attempt()
+					if(prob(30))
+						human.werewolf_feed(C)
+
+				// TODO: Zombie Signal
+				if(IS_DEADITE(user))
+					var/mob/living/carbon/human/H = C
+					if(istype(H))
+						INVOKE_ASYNC(H, TYPE_PROC_REF(/mob/living/carbon/human, zombie_infect_attempt))
+					if(C.stat)
+						if(istype(limb_grabbed, /obj/item/bodypart/head))
+							var/obj/item/bodypart/head/HE = limb_grabbed
+							if(HE.brain)
+								QDEL_NULL(HE.brain)
+								C.visible_message(span_danger("[user] consumes [C]'s brain!"), \
+									span_userdanger("[user] consumes my brain!"), span_hear("I hear a sickening sound of chewing!"), COMBAT_MESSAGE_RANGE, user)
+								to_chat(user, span_boldnotice("Braaaaaains!"))
+								if(!MOBTIMER_EXISTS(user, MT_ZOMBIETRIUMPH))
+									user.adjust_triumphs(1)
+									MOBTIMER_SET(user, MT_ZOMBIETRIUMPH)
+								playsound(C, 'sound/combat/fracture/headcrush (2).ogg', 100, FALSE, -1)
+								if(C.client)
+									record_round_statistic(STATS_LIMBS_BITTEN)
+								return
+			if(HAS_TRAIT(user, TRAIT_POISONBITE))
+				if(C.reagents)
+					var/poison = GET_MOB_ATTRIBUTE_VALUE(user, STAT_CONSTITUTION)/2
+					C.reagents.add_reagent(/datum/reagent/toxin/venom, poison/2)
+					C.reagents.add_reagent(/datum/reagent/medicine/soporpot, poison)
+					to_chat(user, span_warning("Your fangs inject venom into [C]!"))
 	else
 		C.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 	C.visible_message(span_danger("[user] bites [C]'s [parse_zone(sublimb_grabbed)]![C.next_attack_msg.Join()]"), \
@@ -817,6 +835,12 @@
 	if(world.time <= user.next_move)
 		return
 	if(world.time < last_drink + 2 SECONDS)
+		return
+	var/mob/living/carbon/human/grabbed_human
+	if(ishuman(grabbed))
+		grabbed_human = grabbed
+	if(grabbed_human.check_crit_armor(slot2body_zone(sublimb_grabbed), BCLASS_BITE))
+		to_chat(user, span_warning("I can't drink their blood through armor!"))
 		return
 	if(!limb_grabbed.get_bleed_rate())
 		to_chat(user, span_warning("Sigh. It's not bleeding."))

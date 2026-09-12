@@ -420,6 +420,19 @@ GLOBAL_LIST_EMPTY(secret_door_managers)
 	memory_name = "thieves' guild's"
 	vips = list(/datum/job/matron)
 
+/obj/effect/mapping_helpers/secret_door_creator/courtagent_hideout
+	name = "Court Agent's Hideout Secret Door Creator"
+	color = "#036bfc"
+	override_floor = FALSE
+	hidden_dc = 14
+	use_phrases = TRUE
+	lang = list(/datum/language/common)
+
+	manager_id = "court agent"
+	accessor_trait = TRAIT_KNOW_COURTAGENT_DOORS
+	memory_name = "court agent's"
+	vips = list(/datum/job/hand, /datum/job/courtagent)
+
 
 /obj/effect/mapping_helpers/secret_door_creator/rous
 	name = "Rous Secret Door Creator"

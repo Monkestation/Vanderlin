@@ -53,7 +53,8 @@
 				if(!structure.try_network_merge(src))
 					rotation_break()
 			else
-				if(!structure.try_connect(src))
+				var/result = structure.try_connect(src)
+				if(result == FALSE)
 					rotation_break()
 
 	if(!rotation_network)
@@ -93,54 +94,6 @@
 		animate(icon_state = "3", time = frame_stage)
 		animate(icon_state = "2", time = frame_stage)
 		animate(icon_state = "1", time = frame_stage)
-
-/obj/structure/rotation_piece/cog/find_and_propagate(list/checked, first = FALSE)
-	if(!length(checked))
-		checked = list()
-	checked |= src
-
-	for(var/direction in GLOB.cardinals)
-		var/turf/step_back = get_step(src, direction)
-		if(!step_back)
-			continue
-		for(var/obj/structure/structure in step_back.contents)
-			if(structure in checked)
-				continue
-			if(!(direction & dpdir))  // not in dpdir, check for cog structures
-				if(!istype(structure, /obj/structure/rotation_piece/cog) && !istype(structure, /obj/structure/water_pump))
-					continue
-			else if(!(REVERSE_DIR(direction) & structure.dpdir))
-				continue
-			if(!(structure in rotation_network.connected))
-				continue
-			propagate_rotation_change(structure, checked, TRUE)
-	if(first && rotation_network)
-		rotation_network.update_animation_effect()
-
-/obj/structure/rotation_piece/cog/propagate_rotation_change(obj/structure/connector, list/checked, first = FALSE)
-	if(!length(checked))
-		checked = list()
-	checked |= src
-
-	var/direction = get_dir(src, connector)
-	if(direction != dir && direction != REVERSE_DIR(dir))
-		if(istype(connector, /obj/structure/rotation_piece/cog))
-			connector.rotation_direction = REVERSE_DIR(rotation_direction)
-			connector.set_rotations_per_minute(get_speed_mod(connector))
-		if(istype(connector, /obj/structure/water_pump))
-			connector.rotation_direction = REVERSE_DIR(rotation_direction)
-			connector.set_rotations_per_minute(rotations_per_minute)
-	else
-		if(connector.stress_generator && connector.rotation_direction && rotation_direction && (connector.rotation_direction != rotation_direction))
-			rotation_break()
-			return
-		connector.rotation_direction = rotation_direction
-		if(!connector.stress_generator)
-			connector.set_rotations_per_minute(rotations_per_minute)
-
-	connector.find_and_propagate(checked, FALSE)
-	if(first)
-		rotation_network.update_animation_effect()
 
 /obj/structure/rotation_piece/cog/proc/get_speed_mod(obj/structure/connector)
 	var/obj/structure/rotation_piece/cog = connector

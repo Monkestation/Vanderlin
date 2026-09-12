@@ -67,6 +67,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	/// Base quality for newly created reagents of this type
 	var/base_recipe_quality = COOK_QUALITY_NORMAL
 	var/dead_head = TRUE
+	///if we can process in a dead mob as if we were alive
+	var/dead_life = FALSE
 	///if we are false we don't apply the liver efficiency to our metabolization
 	var/liver_chemical = TRUE
 	/// Boiling point in Kelvin. Used by chem_separator to determine distillation order.
@@ -75,6 +77,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	var/list/metabolized_traits
 	/// A list of traits to apply while the reagent is in a mob.
 	var/list/added_traits
+	/// Our price per ligaue in mammons
+	var/price_per_unit = 0
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
 	. = ..()
@@ -125,12 +129,10 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 				record_round_statistic(STATS_ALCOHOL_CONSUMED, adjusted_metabolization_rate)
 			if(istype(src, /datum/reagent/water))
 				record_round_statistic(STATS_WATER_CONSUMED, adjusted_metabolization_rate)
-	return TRUE
 
 /datum/reagent/proc/on_transfer(atom/A, method=TOUCH, trans_volume) //Called after a reagent is transfered
 	if(iscarbon(A))
 		SEND_SIGNAL(A, COMSIG_CARBON_REAGENT_ADD, src, trans_volume, method)
-	return
 
 /datum/reagent/proc/set_quality(new_quality)
 	LAZYSET(data, "quality", new_quality)

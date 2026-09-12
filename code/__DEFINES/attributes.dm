@@ -1,6 +1,6 @@
 #define GET_ATTRIBUTE_DATUM(path) GLOB.all_attributes[path]
-#define GET_MOB_ATTRIBUTE_VALUE_RAW(mob, attribute_path) mob.attributes?.raw_attribute_list[attribute_path]
-#define GET_MOB_ATTRIBUTE_VALUE(mob, attribute_path) mob.attributes?.attribute_list[attribute_path]
+#define GET_MOB_ATTRIBUTE_VALUE_RAW(mob, attribute_path) (LAZYACCESS(mob.attributes?.raw_attribute_list, attribute_path))
+#define GET_MOB_ATTRIBUTE_VALUE(mob, attribute_path) (LAZYACCESS(mob.attributes?.attribute_list, attribute_path))
 #define GET_MOB_SKILL_VALUE_RAW(mob, skill_path) mob.attributes?.return_raw_effective_skill(skill_path)
 #define GET_MOB_SKILL_VALUE(mob, skill_path) mob.attributes?.return_effective_skill(skill_path)
 #define GET_MOB_SKILL_VALUE_RAW_OLD(mob, skill_path) mob.attributes?.return_raw_effective_skill(skill_path) * 0.1
@@ -12,7 +12,7 @@
 #define STAT /datum/attribute/stat
 
 // ~attribute/stat values
-#define ATTRIBUTE_MIN -100 ///lmao get fucked
+#define ATTRIBUTE_MIN -100 //lmao get fucked
 #define ATTRIBUTE_MAX 100
 
 #define ATTRIBUTE_MIDDLING 10

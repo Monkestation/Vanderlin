@@ -11,7 +11,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	department_flag = OUTSIDERS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_NEW_PLAYER_JOINABLE | JOB_EQUIP_RANK)
 	display_order = JDO_ADVENTURER
-	faction = FACTION_FOREIGNERS
+	factions = list(FACTION_FOREIGNERS)
 	total_positions = 14
 	spawn_positions = 14
 	bypass_lastclass = TRUE
@@ -35,6 +35,7 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT)
 	spawn_with_torch = TRUE
 	department_flag = OUTSIDERS
+	factions = list(FACTION_FOREIGNERS)
 
 /datum/job/adventurer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

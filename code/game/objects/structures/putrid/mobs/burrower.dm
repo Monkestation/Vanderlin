@@ -1,7 +1,8 @@
 /mob/living/simple_animal/hostile/retaliate/meatvine/burrower
-	icon_state = "bloodling_stage_5"
-	icon_living = "bloodling_stage_5"
-	icon_dead = "bloodling_stage_5_dead"
+	icon_state = "burrower"
+	icon_living = "burrower"
+	icon_dead = "burrower_dead"
+	icon = 'icons/obj/cellular/putrid_small.dmi'
 
 	possible_evolutions = list()
 

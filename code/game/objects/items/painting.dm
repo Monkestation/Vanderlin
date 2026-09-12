@@ -11,18 +11,19 @@
 	item_weight = 1.5 KILOGRAMS
 	var/deployed_structure = /obj/structure/fluff/walldeco/painting
 
-/obj/item/painting/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isclosedturf(attacked_atom))
-		return ..()
+/obj/item/painting/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!isclosedturf(interacting_with))
+		return NONE
 
-	var/direction = get_dir(attacked_atom,user)
+	var/direction = get_dir(interacting_with, user)
 	if(!(direction in GLOB.cardinals))
-		return ..()
+		return NONE
 
-	. = TRUE
+	if(!do_after(user, 3 SECONDS, interacting_with))
+		return ITEM_INTERACT_BLOCKING
+
 	to_chat(user, span_warning("I place [src] on the wall."))
-	if(!do_after(user, 3 SECONDS, attacked_atom))
-		return
+
 	var/obj/structure/S = new deployed_structure(user.loc)
 	switch(direction)
 		if(NORTH)
@@ -33,7 +34,10 @@
 			S.pixel_x = S.base_pixel_x + 32
 		if(EAST)
 			S.pixel_x = S.base_pixel_x - 32
+
 	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/fluff/walldeco/painting
 	name = "painting"
@@ -112,3 +116,25 @@
 	desc = "A painting of a kingly crown resting on a book."
 	icon_state = "crownpainting_deployed"
 	stolen_painting = /obj/item/painting/crown
+
+/obj/item/painting/moon
+	icon_state = "moonpainting"
+	desc = "A painting of a moonlit nite on the broken coast."
+	sellprice = 40
+	deployed_structure = /obj/structure/fluff/walldeco/painting/moon
+
+/obj/structure/fluff/walldeco/painting/moon
+	desc = "A painting of a moonlit nite on the broken coast."
+	icon_state = "moonpainting_deployed"
+	stolen_painting = /obj/item/painting/moon
+
+/obj/item/painting/flower
+	icon_state = "flowerpainting"
+	desc = "A painting of a lamptern lit vase of flowers."
+	sellprice = 40
+	deployed_structure = /obj/structure/fluff/walldeco/painting/flower
+
+/obj/structure/fluff/walldeco/painting/flower
+	desc = "A painting of a lamptern lit vase of flowers."
+	icon_state = "flowerpainting_deployed"
+	stolen_painting = /obj/item/painting/flower

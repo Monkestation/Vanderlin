@@ -1,7 +1,7 @@
 SUBSYSTEM_DEF(regionthreat)
 	name = "Regional Threat"
 	wait = 5 MINUTES
-	flags = SS_KEEP_TIMING | SS_BACKGROUND
+	flags = SS_KEEP_TIMING
 	runlevels = RUNLEVEL_GAME
 	var/list/threat_regions = list()
 	COOLDOWN_DECLARE(harlequinn_spawn_cooldown)

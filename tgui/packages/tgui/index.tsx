@@ -26,7 +26,12 @@ function setupApp() {
   window.__augmentStack__ = createStackAugmentor();
 
   setupGlobalEvents();
-  setupHotKeys();
+  setupHotKeys({
+    keyUpVerb: 'KeyUp',
+    keyDownVerb: 'KeyDown',
+    // In the future you could send a winget here to get mousepos/size from the map here if it's necessary
+    verbParamsFn: (verb, key) => `${verb} "${key}" 0 0 0 0`,
+  });
   captureExternalLinks();
 
   Byond.subscribe((type, payload) => bus.dispatch({ type, payload }));

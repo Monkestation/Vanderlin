@@ -1,8 +1,8 @@
 /datum/objective/personal/build_zizo_shrine
-	name = "Construct Profane Shrines"
+	name = "Construct  Inverted Crosses"
 	category = "Zizo's Chosen"
 	triumph_count = 2
-	immediate_effects = list("Gained an ability to construct profane shrines")
+	immediate_effects = list("Gained an ability to construct inverted crosses")
 	rewards = list("2 Triumphs", "Zizo grows stronger", "Zizo blesses you (+2 Fortune)")
 	var/target_type = /obj/structure/fluff/psycross/zizocross
 	var/target_count = 2
@@ -11,7 +11,6 @@
 /datum/objective/personal/build_zizo_shrine/on_creation()
 	. = ..()
 	if(owner?.current)
-		owner.current.mind.teach_crafting_recipe(/datum/blueprint_recipe/zizo/shrine)
 		RegisterSignal(owner.current, COMSIG_ITEM_CRAFTED, PROC_REF(on_item_crafted))
 	update_explanation_text()
 
@@ -27,14 +26,14 @@
 
 	current_count++
 	if(current_count < target_count)
-		to_chat(owner.current, span_notice("You have built [current_count] out of [target_count] profane shrines."))
+		to_chat(owner.current, span_notice("You have built [current_count] out of [target_count] inverted crosses."))
 		return
 
 	complete_objective()
 
 /datum/objective/personal/build_zizo_shrine/complete_objective()
 	. = ..()
-	to_chat(owner.current, span_greentext("You have built all the required profane shrines, completing Zizo's objective!"))
+	to_chat(owner.current, span_greentext("You have built all the required inverted crosses, completing Zizo's objective!"))
 	adjust_storyteller_influence(ZIZO, 20)
 	UnregisterSignal(owner.current, COMSIG_ITEM_CRAFTED)
 
@@ -43,5 +42,5 @@
 	owner.current.adjust_stat_modifier(STATMOD_ZIZO_BLESSING, list(STAT_FORTUNE = 2))
 
 /datum/objective/personal/build_zizo_shrine/update_explanation_text()
-	explanation_text = "Construct [target_count] profane shrine[target_count > 1 ? "s" : ""] to spread Zizo's corruption!"
+	explanation_text = "Construct [target_count] inverted cross[target_count > 1 ? "s" : ""] to spread Zizo's corruption!"
 

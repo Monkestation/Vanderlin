@@ -5,7 +5,8 @@
 	self_cast_possible = FALSE
 	has_visual_effects = FALSE
 
-	antimagic_flags = NONE
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	charge_required = FALSE
 	cooldown_time = 30 SECONDS
 

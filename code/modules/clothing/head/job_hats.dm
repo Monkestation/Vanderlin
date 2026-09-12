@@ -198,7 +198,7 @@
 	AddComponent(
 		/datum/component/equipment_stress/job_specific, \
 		/datum/stress_event/maidband, \
-		list(TRAIT_VILLAIN = null, TRAIT_NOBLE_BLOOD = /datum/stress_event/maidband/noble), \
+		list(TRAIT_VILLAIN = null, TRAIT_COURTAGENT = null, TRAIT_NOBLE_BLOOD = /datum/stress_event/maidband/noble), \
 		immune_jobs = list(/datum/job/prince, /datum/job/squire, /datum/job/advclass/pilgrim/noble, /datum/job/advclass/pilgrim/rare/zaladin, /datum/job/advclass/pilgrim/rare/grenzelhoft, /datum/job/advclass/pilgrim/rare/merchant), \
 		immune_departments = (NOBLEMEN | GARRISON | OUTSIDERS | COMPANY), \
 		department_exceptions = list(/datum/job/advclass/pilgrim, /datum/job/grabber), \
@@ -213,7 +213,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/32x48/head.dmi'
 	worn_x_dimension = 32
 	worn_y_dimension = 32
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	allowed_race = list(SPEC_ID_HALFLING, SPEC_ID_DWARF)  //Something malicious is brewing
 	min_cold_protection_temperature = -20
 	item_weight = 95 GRAMS

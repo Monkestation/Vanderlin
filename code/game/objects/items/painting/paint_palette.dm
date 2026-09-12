@@ -39,7 +39,7 @@
 	update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/paint_palette/proc/remove_color(mob/user)
-	var/remove_color = input(user, "Choose a color to remove") as anything in colors
+	var/remove_color = tgui_input_list(user, "Choose a color to remove", colors)
 	if(!remove_color)
 		return
 	colors -= remove_color

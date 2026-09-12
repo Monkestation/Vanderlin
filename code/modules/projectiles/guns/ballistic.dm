@@ -310,41 +310,35 @@
 /obj/item/gun/ballistic/can_shoot(mob/living/user)
 	return chambered
 
-/obj/item/gun/ballistic/attackby(obj/item/A, mob/user, list/modifiers)
-	. = ..()
-	if(.)
-		return
-	if(!internal_magazine && istype(A, /obj/item/ammo_box/magazine))
+/obj/item/gun/ballistic/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!internal_magazine && istype(tool, /obj/item/ammo_box/magazine))
 		if(!magazine)
-			insert_magazine(user, A)
-			return
+			insert_magazine(user, tool)
+			return ITEM_INTERACT_SUCCESS
 
 		if(tac_reloads)
-			eject_magazine(user, FALSE, A)
-			return
+			eject_magazine(user, FALSE, tool)
+			return ITEM_INTERACT_SUCCESS
 
 		balloon_alert(user, "already loaded!")
-		return
+		return ITEM_INTERACT_SUCCESS
 
-	if(isammocasing(A) || istype(A, /obj/item/ammo_box))
+	if(isammocasing(tool) || istype(tool, /obj/item/ammo_box))
 		if(bolt_type == BOLT_TYPE_NO_BOLT || internal_magazine)
 			if(chambered && !chambered.loaded_projectile)
 				chambered.forceMove(drop_location())
 				if(length(magazine?.stored_ammo) && chambered != magazine.stored_ammo[1])
 					magazine.stored_ammo -= chambered
 				chambered = null
-			var/num_loaded = magazine.try_load(user, A, silent = TRUE)
+			var/num_loaded = magazine.try_load(user, tool, silent = TRUE)
 			if(num_loaded)
 				balloon_alert(user, "[num_loaded] [cartridge_wording]\s loaded")
 				playsound(src, load_sound, load_sound_volume, load_sound_vary)
 				if (chambered == null && bolt_type == BOLT_TYPE_NO_BOLT)
 					chamber_round()
-				A.update_appearance()
+				tool.update_appearance()
 				update_appearance()
-			return
-
-	user.update_inv_hands()
-	return FALSE
+			return ITEM_INTERACT_SUCCESS
 
 /obj/item/gun/ballistic/AltClick(mob/user, list/modifiers)
 	if (unique_reskin && !current_skin && user.can_perform_action(src, FORBID_TELEKINESIS_REACH))

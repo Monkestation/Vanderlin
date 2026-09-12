@@ -22,8 +22,8 @@
 /obj/structure/coral_formation
 	name = "living coral"
 	desc = "A sharp formation of living coral that pulses with an eerie light."
-	icon = 'icons/obj/coral.dmi'  // Replace with appropriate icon
-	icon_state = "coral"  // Replace with appropriate icon_state
+	icon = 'icons/obj/coral.dmi'  // !TODO Replace with a better icon
+	icon_state = "coral"
 	density = TRUE
 	anchored = TRUE
 	var/health = 150
@@ -71,7 +71,7 @@
 /obj/structure/coral_formation/small
 	name = "small coral growth"
 	desc = "A small formation of sharp coral."
-	icon_state = "coral_small"  // Would need a new sprite
+	icon_state = "coral_small"  //! TODO Replace with a better icon
 	health = 50
 	max_health = 50
 	damage_on_contact = 5

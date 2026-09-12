@@ -1,0 +1,121 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/closed/wall/mineral/stonebrick,
+/area/indoors/town/merc_guild)
+"c" = (
+/obj/item/bedsheet/fabric,
+/obj/structure/bed/inn,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"e" = (
+/obj/structure/fluff/walldeco/vinez,
+/turf/closed/wall/mineral/stonebrick,
+/area/indoors/town/merc_guild)
+"k" = (
+/obj/structure/fluff/walldeco/vinez,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/merc_guild)
+"q" = (
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/merc_guild)
+"v" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/merc_guild)
+"w" = (
+/obj/structure/chair/wood/alt/fancy,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"x" = (
+/obj/structure/door/violet{
+	name = "Mercenary Apartment 2";
+	lockid = "merc2"
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"C" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"G" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/key/apartments/merc2,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"J" = (
+/obj/structure/table/wood,
+/obj/item/flashlight/flare/torch/lantern,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"L" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"M" = (
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"Q" = (
+/obj/machinery/light/fueled/oven{
+	pixel_y = 31
+	},
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+"R" = (
+/obj/structure/closet/crate/drawer,
+/turf/open/floor/carpet/green,
+/area/indoors/town/merc_guild)
+
+(1,1,1) = {"
+a
+q
+q
+q
+q
+q
+a
+"}
+(2,1,1) = {"
+q
+G
+M
+L
+w
+J
+e
+"}
+(3,1,1) = {"
+q
+M
+M
+M
+M
+M
+q
+"}
+(4,1,1) = {"
+q
+Q
+M
+M
+M
+R
+q
+"}
+(5,1,1) = {"
+q
+M
+M
+C
+M
+c
+k
+"}
+(6,1,1) = {"
+a
+x
+v
+q
+q
+a
+a
+"}

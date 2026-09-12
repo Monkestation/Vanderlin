@@ -5,7 +5,7 @@
 	sound = 'sound/items/dig_shovel.ogg'
 	invocation = "Treefather, whisper life into this herb."
 	invocation_type = INVOCATION_WHISPER
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
@@ -16,10 +16,6 @@
 	charge_slowdown = 1.2
 	summon_radius = 0
 	self_cast_possible = FALSE
-	attunements = list(
-		/datum/attunement/arcyne = 0.3,
-		/datum/attunement/life = 0.7
-	)
 
 	var/datum/weakref/gardener_ref
 	var/static/list/garden_fae = list(

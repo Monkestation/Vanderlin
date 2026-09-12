@@ -53,14 +53,14 @@
 	if(!loaded_projectile)
 		loaded_projectile = new projectile_type(src, src)
 
-/obj/item/ammo_casing/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!istype(I, /obj/item/ammo_box))
-		return ..()
+/obj/item/ammo_casing/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/ammo_box))
+		return NONE
 
 	if(!isturf(loc))
-		return
+		return NONE
 
-	var/obj/item/ammo_box/box = I
+	var/obj/item/ammo_box/box = tool
 
 	var/boolets = 0
 	for(var/obj/item/ammo_casing/bullet in loc)
@@ -76,6 +76,8 @@
 		to_chat(user, span_notice("I collect [boolets] shell\s. [box] now contains [length(box.stored_ammo)] shell\s."))
 	else
 		to_chat(user, span_warning("I fail to collect anything!"))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/ammo_casing/throw_impact(atom/hit_atom, datum/thrownthing/throwingdatum)
 	bounce_away(FALSE, NONE)

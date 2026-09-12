@@ -49,6 +49,7 @@ type LoadoutEntry = {
   no_rent: BooleanLike;
   no_equip: BooleanLike;
   patreon_locked: BooleanLike;
+  giveaway_only: BooleanLike;
   donator_free: BooleanLike;
 };
 
@@ -343,6 +344,7 @@ const LoadoutItemRow = ({
   const noRent = !!item.no_rent;
   const noEquip = !!item.no_equip;
   const patreonLock = !!item.patreon_locked;
+  const giveawayLocked = !!item.giveaway_only;
   const isDonatorFree = !!donator && !!item.donator_free;
 
   return (
@@ -364,6 +366,11 @@ const LoadoutItemRow = ({
             Patreon exclusive
           </Box>
         )}
+         {giveawayLocked && !owned && (
+          <Box color="purple" fontSize="0.8em">
+            Giveaway exclusive
+          </Box>
+        )}
         {awardLocked && (
           <Box color="bad" fontSize="0.8em">
             Achievement locked
@@ -374,7 +381,7 @@ const LoadoutItemRow = ({
             {noEquip ? 'Claimed' : 'Owned'}
           </Box>
         )}
-        {!awardLocked && !patreonLock && !owned && rented && (
+        {!awardLocked && !patreonLock && !giveawayLocked && !owned && rented && (
           <Box color="average" fontSize="0.8em">
             Rented this round
           </Box>
@@ -406,6 +413,7 @@ const LoadoutItemRow = ({
           !rented &&
           !awardLocked &&
           !patreonLock &&
+          !giveawayLocked &&
           !noRent &&
           !noEquip && (
             <Button
@@ -437,7 +445,7 @@ const LoadoutItemRow = ({
               {isDonatorFree ? 'Remove' : 'Cancel'}
             </Button>
           )}
-          {!owned && !awardLocked && !patreonLock && item.cost_permanent > 0 && (
+          {!owned && !awardLocked && !patreonLock  && !giveawayLocked && item.cost_permanent > 0 && (
             <Button
               icon="lock-open"
               color={canPerm ? 'good' : 'bad'}
@@ -455,6 +463,7 @@ const LoadoutItemRow = ({
           {!owned &&
             !awardLocked &&
             !patreonLock &&
+            !giveawayLocked &&
             item.cost_permanent === 0 &&
             !rented &&
             free && (

@@ -72,15 +72,16 @@
 			client.screen -= screens[category]
 
 /mob/proc/reload_fullscreen()
-	if(client)
-		var/atom/movable/screen/fullscreen/screen
-		for(var/category in screens)
-			screen = screens[category]
-			if(screen.should_show_to(src))
-				screen.update_for_view(client.view)
-				client.screen |= screen
-			else
-				client.screen -= screen
+	if(!client)
+		return
+
+	for(var/atom/movable/screen/fullscreen/screen as anything in screens)
+		screen = screens[screen]
+		if(screen.should_show_to(src))
+			screen.update_for_view(client.view)
+			client.screen |= screen
+		else
+			client.screen -= screen
 
 /atom/movable/screen/fullscreen
 	icon = 'icons/mob/screen_full.dmi'

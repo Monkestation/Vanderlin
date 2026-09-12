@@ -161,13 +161,15 @@
 	var/list/modifiers = params2list(params)
 	if(modifiers["middle"])
 		var/mob/M = usr
-		for(var/datum/recipe as anything in M.mind?.learned_recipes)
-			book.types |= recipe.type
+
 		var/datum/job/job = SSjob.GetJob(M.job)
 		if(job && !book)
 			book = new job.book_type(null)
 		else if(QDELETED(book))
 			book = new(null)
+
+		for(var/datum/recipe as anything in M.mind?.learned_recipes)
+			book.types |= recipe.type
 
 		book.ui_interact(usr)
 		return
@@ -358,12 +360,18 @@
 	icon_state = "act_drop"
 	plane = HUD_PLANE
 
-/atom/movable/screen/drop/Click()
-	if(ismob(usr))
-		var/mob/M = usr
-		M.playsound_local(M, 'sound/misc/click.ogg', 100)
-	if(usr.stat == CONSCIOUS)
-		usr.dropItemToGround(usr.get_active_held_item(), silent = FALSE)
+/atom/movable/screen/drop/Click(location, control, params)
+	if(!isliving(usr))
+		return
+
+	var/mob/living/L = usr
+
+	if(L.incapacitated(IGNORE_GRAB))
+		return
+
+	L.playsound_local(L, 'sound/misc/click.ogg', 100)
+
+	L.dropItemToGround(L.get_active_held_item(), silent = FALSE)
 
 /atom/movable/screen/act_intent
 	name = "intent"
@@ -915,10 +923,12 @@
 
 /atom/movable/screen/throw_catch/update_icon_state()
 	. = ..()
-	if(!ismob(usr))
+
+	if(!hud || !hud.mymob || !isliving(hud.mymob))
 		return
-	var/mob/M = usr
-	if(M.get_active_held_item())
+
+	var/mob/living/living_hud_owner = hud.mymob
+	if(living_hud_owner.get_active_held_item())
 		icon_state = "throw[throwy]"
 	else
 		icon_state = "catch[throwy]"
@@ -1416,7 +1426,7 @@
 		if(LAZYACCESS(modifiers, RIGHT_CLICK))
 			if(!user_mob.mind)
 				return
-			if(length(user_mob.mind.known_people))
+			if(length(user_mob.mind.relations))
 				user_mob.mind.display_known_people(user_mob)
 			else
 				to_chat(user_mob, "<span class='warning'>I don't know anyone.</span>")
@@ -1800,25 +1810,6 @@
 	icon_state = "mana100"
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = mana_loc
-
-/atom/movable/screen/mana/extra_info(mob/user)
-	var/info = ""
-	for(var/datum/attunement/attunement as anything in user?.mana_pool.attunements)
-		var/value = user.mana_pool.attunements[attunement]
-		if(!value)
-			continue
-
-		switch(value)
-			if(0.01 to 0.4)
-				info += "<br> Minor [initial(attunement.name)] Attunment"
-			if(0.41 to 0.7)
-				info += "<br> Moderate [initial(attunement.name)] Attunment"
-			if(0.71 to 1.2)
-				info += "<br> Major [initial(attunement.name)] Attunment"
-			if(1.21 to INFINITY)
-				info += "<br> Apex [initial(attunement.name)] Attunment"
-
-	return info
 
 /atom/movable/screen/vis_holder
 	icon = ""

@@ -9,8 +9,8 @@
 
 /datum/attribute_holder/sheet/job/species/halfdrow
 	raw_attribute_list = list(
-		STAT_PERCEPTION = 1,
-		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
 		STAT_SPEED = 1,
 	)
 
@@ -123,7 +123,6 @@
 
 /datum/species/human/halfdrow/get_skin_list()
 	return sortList(list(
-		"Zizo-Cursed" = SKIN_COLOR_ICECAP, // - (Pale)
 		"Parasite-Taineted" = SKIN_COLOUR_PARASITE_TAINTED, // - (Light purple)
 		"Mushroom-Minded" = SKIN_COLOR_MUSHROOM_MINDED, // - (Mid purple)
 		"Cave-Attuned" = SKIN_COLOR_CAVE_ATTUNED, // - (Deep purple)
@@ -176,9 +175,6 @@
 	if(!(C.accent in GLOB.accent_list))
 		C.dna.species.native_language = C.accent
 	C.dna.species.accent_language = C.dna.species.get_accent(C.dna.species.native_language, 2)
-
-	if(C.skin_tone == SKIN_COLOR_ICECAP)
-		exotic_bloodtype = /datum/blood_type/human/cursed_elf
 
 	C.grant_language(/datum/language/elvish)
 	to_chat(C, "<span class='info'>I can speak Elvish with ,e before my speech.</span>")

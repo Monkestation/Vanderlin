@@ -1,7 +1,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/infernal/watcher
-	icon = 'icons/mob/summonable/32x32.dmi'
 	name = "infernal watcher"
+	icon = 'icons/mob/summonable/32x32.dmi'
 	icon_state = "watcher"
 	icon_living = "watcher"
 	summon_primer = "You are an infernal watcher, a creature of lava and rock. You have watched over the chaos of the infernal plane long enough that it has been pointless to keep count."
@@ -15,7 +15,7 @@
 	move_to_delay = 5
 	base_intents = list(/datum/intent/simple/bite)
 	butcher_results = list()
-	faction = list("infernal")
+	faction = list(FACTION_INFERNAL)
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 600
 	maxHealth = 600

@@ -23,7 +23,7 @@
 	if (!source.ai_controller)
 		return
 
-	var/paine = source.getPainLoss()
+	var/paine = source.getShockStage()
 	if (source.ai_controller.blackboard[BB_BASIC_MOB_FLEEING])
 		if(paine > ((GET_MOB_ATTRIBUTE_VALUE(source, STAT_ENDURANCE) * 10)*0.9))
 			return

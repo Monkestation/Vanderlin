@@ -8,7 +8,7 @@
 
 /datum/reagent/miasmagas/on_mob_life(mob/living/carbon/M, efficiency)
 	if(!HAS_TRAIT(M, TRAIT_DEADNOSE))
-		if(M.has_quirk(/datum/quirk/vice/maniac))
+		if(M.has_quirk(/datum/quirk/vice/addiction/sadist))
 			M.add_stress(/datum/stress_event/miasmagasmaniac)
 		else
 			M.add_nausea(3 * efficiency)

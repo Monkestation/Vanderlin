@@ -55,7 +55,7 @@ GLOBAL_LIST_EMPTY(voice_names)
 		for(var/client/admin in (GLOB.admins - client))
 			if(!(admin.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_PRAYER))
 				continue
-			var/added_text = span_notice("(<A href='?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_MEDITATE]'><span class='adminsay'>MUTE</span></a>)")
+			var/added_text = span_notice("(<A href='byond://?_src_=holder;[HrefToken()];mute=[ckey];mute_type=[MUTE_MEDITATE]'><span class='adminsay'>MUTE</span></a>)")
 			var/answer_button = span_notice("(<a href='byond://?src=[admin];schizohelp=[REF(ticket)];'>ANSWER</a>)")
 			to_chat(admin,  mentor_block("[message_admins] [added_text] [answer_button]"))
 		COOLDOWN_START(src, schizohelp_cooldown, 1 MINUTES)

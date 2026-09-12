@@ -3,10 +3,8 @@
 	desc = "Shoots a beam of frost out, slowing anyone hit by it."
 	button_icon_state = "rayoffrost"
 
-	point_cost = 3
-	attunements = list(
-		/datum/attunement/ice = 0.6,
-	)
+	required_form = FORM_ICE
+	required_technique = TECHNIQUE_DESTRUCTION
 
 	charge_time = 2.5 SECONDS
 	charge_drain = 1
@@ -60,7 +58,7 @@
 		qdel(active)
 		return
 
-	var/strength = clamp(attuned_strength * extra_modifer, 0.5, 2)
+	var/strength = clamp(spell_magnitude_modifier * extra_modifer, 0.5, 2)
 
 	victim.adjustFireLoss(round(20 * strength))
 	victim.apply_status_effect(/datum/status_effect/debuff/frostbite, null, strength)

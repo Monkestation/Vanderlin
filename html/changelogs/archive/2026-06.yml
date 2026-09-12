@@ -266,3 +266,16 @@
   - rscadd: Fighters and Clerics now always spawn with regular satchels
   Sulaboy:
   - qol: You can now alt click "The Book" to select an Event/God to read aloud about.
+2026-06-30:
+  Ben10083:
+  - rscadd: Adds random player created paintings to archivist chamber in Vanderlin
+  - qol: Praise Zizo verb changed from an emote to a forced say (You now actually
+      praise Zizo)
+  - refactor: say proc now allows you to force a message in a certain language
+  - bugfix: Fixes minor chat weirdness involving improper use of say proc
+  Snack-Max:
+  - rscadd: New Bellow Sallet
+  Somniworld:
+  - rscadd: The inquisition gets 2 new sets of clothing in their Hermes. These are
+      disguise sets of clothing allowing you to blend in better, don''t expect something
+      too crazy however.

@@ -15,6 +15,6 @@ PROCESSING_SUBSYSTEM_DEF(ai_movement)
 
 /datum/controller/subsystem/processing/ai_movement/proc/SetupAIMovementInstances()
 	movement_types = list()
-	for(var/key as anything in subtypesof(/datum/ai_movement))
+	for(var/key in subtypesof(/datum/ai_movement))
 		var/datum/ai_movement/ai_movement = new key
 		movement_types[key] = ai_movement

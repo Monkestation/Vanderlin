@@ -96,14 +96,18 @@
 
 
 /obj/item/reagent_containers/food/snacks/crow/attackby(obj/item/I, mob/user, list/modifiers)
-	if(!dead)
-		if(isliving(user) && isturf(loc))
-			var/mob/living/L = user
-			if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
-				..()
-			else
-				to_chat(user, "<span class='warning'>[src] gets away!</span>")
-				playsound(src, 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)
-				qdel(src)
-				return
-	..()
+	if(dead)
+		return ..()
+
+	if(!isliving(user))
+		return
+
+	var/mob/living/L = user
+	if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_SPEED) * 2))
+		return ..()
+
+	if(isturf(loc))
+		dir = pick(GLOB.cardinals)
+		step(src, dir)
+		to_chat(user, "<span class='warning'>[src] gets away!</span>")
+		playsound(src, 'sound/vo/mobs/bird/birdfly.ogg', 100, TRUE, -1)

@@ -9,7 +9,9 @@
 //Force mob to rest, does NOT do stamina damage.
 //It's really not recommended to use this proc to give feedback, hence why silent is defaulting to true.
 /mob/living/carbon/KnockToFloor(knockdown_amt = 1, ignore_canknockdown = FALSE, silent = TRUE)
-	if(!silent && (body_position != LYING_DOWN))
+	if((body_position == LYING_DOWN))
+		return
+	if(!silent)
 		to_chat(src, span_warning("I am knocked to the floor!"))
 	Knockdown(knockdown_amt, ignore_canknockdown)
 
@@ -353,7 +355,8 @@
 	return FALSE
 
 /mob/living/IsSleeping() //If we're asleep
-	return has_status_effect(STATUS_EFFECT_SLEEPING)
+	if(!HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
+		return has_status_effect(STATUS_EFFECT_SLEEPING)
 
 /mob/living/proc/AmountSleeping() //How many deciseconds remain in our sleep
 	var/datum/status_effect/incapacitating/sleeping/S = IsSleeping()

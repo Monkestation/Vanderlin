@@ -30,7 +30,7 @@
 	tutorial = "You are the Warden's right hand, having hunted by their side for decades. Keep the younger upstarts in line. Ensure they follow the ways of the Hunt. One day, you will die, bones buried beside your Warden, and your strength will go to the next to pick up your maul."
 	department_flag = GALLOWBAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_FORFORCER
@@ -39,7 +39,7 @@
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT, EXP_TYPE_LEADERSHIP)
@@ -49,6 +49,8 @@
 
 	outfit = /datum/outfit/forestenforcer
 	give_bank_account = 40
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
@@ -57,9 +59,12 @@
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
-		TRAIT_FORAGER
+		TRAIT_MEDIUMARMOR,
+		TRAIT_FORAGER,
+		TRAIT_GALLOWBAND
 	)
 
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
 
 /datum/job/forestenforcer/after_spawn(mob/living/carbon/human/spawned, client/player_client)

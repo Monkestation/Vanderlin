@@ -77,7 +77,7 @@
 /turf/open/floor/blocks/paving/vert,
 /area/under/tomb/sewer)
 "G" = (
-/obj/item/weapon/whip/antique,
+/obj/item/weapon/whip/bronze,
 /obj/structure/fluff/wallclock/vampire,
 /turf/open/floor/hexstone,
 /area/under/tomb/cave)

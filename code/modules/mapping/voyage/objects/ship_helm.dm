@@ -368,21 +368,21 @@
 						[target_island && !controlled_ship.docked_island ? "<div class='info-row'><span class='info-label'>Destination:</span><span class='info-value'>[target_island.island_name]</span></div>" : ""]
 						[target_island && !controlled_ship.docked_island ? "<div class='info-row'><span class='info-label'>ETA:</span><span class='info-value'>[get_eta_text()]</span></div>" : ""]
 						[controlled_ship.docked_island ? "<div style='margin-top: 10px;'><a class='btn' href='javascript:void(0)' onclick='confirmUndock()' style='width: 100%'>UNDOCK</a></div>" : ""]
-						[target_island && !controlled_ship.docked_island ? "<div style='margin-top: 10px;'><a class='btn' href='?src=[REF(src)];cancel_navigation=1' style='width: 100%'>CANCEL AUTO-NAV</a></div>" : ""]
+						[target_island && !controlled_ship.docked_island ? "<div style='margin-top: 10px;'><a class='btn' href='byond://?src=[REF(src)];cancel_navigation=1' style='width: 100%'>CANCEL AUTO-NAV</a></div>" : ""]
 					</div>
 
 					<div class='section'>
 						<div class='section-title'>SHIP CONTROL</div>
 						<div class='controls'>
-							<a class='btn' href='?src=[REF(src)];set_direction=[NORTHWEST]'>NW</a>
-							<a class='btn' href='?src=[REF(src)];set_direction=[NORTH]'>N</a>
-							<a class='btn' href='?src=[REF(src)];set_direction=[NORTHEAST]'>NE</a>
-							<a class='btn' href='?src=[REF(src)];set_direction=[WEST]'>W</a>
-							<a class='btn btn-center' href='?src=[REF(src)];stop=1'>STOP</a>
-							<a class='btn' href='?src=[REF(src)];set_direction=[EAST]'>E</a>
-							<a class='btn' href='?src=[REF(src)];set_direction=[SOUTHWEST]'>SW</a>
-							<a class='btn' href='?src=[REF(src)];set_direction=[SOUTH]'>S</a>
-							<a class='btn' href='?src=[REF(src)];set_direction=[SOUTHEAST]'>SE</a>
+							<a class='btn' href='byond://?src=[REF(src)];set_direction=[NORTHWEST]'>NW</a>
+							<a class='btn' href='byond://?src=[REF(src)];set_direction=[NORTH]'>N</a>
+							<a class='btn' href='byond://?src=[REF(src)];set_direction=[NORTHEAST]'>NE</a>
+							<a class='btn' href='byond://?src=[REF(src)];set_direction=[WEST]'>W</a>
+							<a class='btn btn-center' href='byond://?src=[REF(src)];stop=1'>STOP</a>
+							<a class='btn' href='byond://?src=[REF(src)];set_direction=[EAST]'>E</a>
+							<a class='btn' href='byond://?src=[REF(src)];set_direction=[SOUTHWEST]'>SW</a>
+							<a class='btn' href='byond://?src=[REF(src)];set_direction=[SOUTH]'>S</a>
+							<a class='btn' href='byond://?src=[REF(src)];set_direction=[SOUTHEAST]'>SE</a>
 						</div>
 						<div class='info-row'>
 							<span class='info-label'>Speed:</span>
@@ -391,8 +391,8 @@
 						<div class='speed-bar'>
 							<div class='speed-fill' style='width: [sailing_speed]%'></div>
 						</div>
-						<a class='btn' href='?src=[REF(src)];adjust_speed=10' style='width: 46%; display: inline-block'>SPEED +</a>
-						<a class='btn' href='?src=[REF(src)];adjust_speed=-10' style='width: 46%; display: inline-block; float: right'>SPEED -</a>
+						<a class='btn' href='byond://?src=[REF(src)];adjust_speed=10' style='width: 46%; display: inline-block'>SPEED +</a>
+						<a class='btn' href='byond://?src=[REF(src)];adjust_speed=-10' style='width: 46%; display: inline-block; float: right'>SPEED -</a>
 					</div>
 
 					<div class='section'>
@@ -410,7 +410,7 @@
 					<div id='undockMessage'></div>
 					<div class='modal-buttons'>
 						<a class='btn' href='javascript:void(0)' onclick='closeUndockModal()'>CANCEL</a>
-						<a class='btn' href='?src=[REF(src)];undock=1&confirm=1' style='color: #ae3636;'>UNDOCK ANYWAY</a>
+						<a class='btn' href='byond://?src=[REF(src)];undock=1&confirm=1' style='color: #ae3636;'>UNDOCK ANYWAY</a>
 					</div>
 				</div>
 			</div>
@@ -426,7 +426,7 @@
 							'<p style=\"color: #d09000;\">Undocking will leave them stranded. Are you sure?</p>';
 						document.getElementById('undockModal').style.display = 'block';
 					} else {
-						window.location.href = '?src=[REF(src)];undock=1&confirm=1';
+						window.location.href='byond://?src=[REF(src)];undock=1&confirm=1';
 					}
 				}
 
@@ -602,7 +602,7 @@
 				tooltip += "  - [M.real_name]\\n"
 
 		dat += {"<div class='island-item [is_docked ? "docked-island" : ""] [is_target ? "island-item-target" : ""] [!can_dock && !is_docked ? "island-item-cooldown" : ""]'
-			[!is_docked && can_dock ? "onclick=\"window.location.href='?src=[REF(src)];navigate_to=[island.island_id]'\"" : ""]
+			[!is_docked && can_dock ? "onclick=\"window.location.href='byond://?src=[REF(src)];navigate_to=[island.island_id]'\"" : ""]
 			title='[tooltip]'>
 			<div>
 				<strong class='difficulty-[island.difficulty]'>[island.island_name]</strong>

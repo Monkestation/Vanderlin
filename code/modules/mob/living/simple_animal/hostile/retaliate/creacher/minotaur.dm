@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/minotaur
-	icon = 'icons/mob/newminotaur.dmi'
 	name = "Minotaur"
+	icon = 'icons/mob/newminotaur.dmi'
 	icon_state = "MinotaurMale"
 	icon_living = "MinotaurMale"
 	icon_dead = "MinotaurMale_dead"
@@ -14,7 +14,6 @@
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 10,
 						/obj/item/natural/hide = 10, /obj/item/natural/bundle/bone/full = 2,
 						/obj/item/reagent_containers/food/snacks/meat/ribs = 3)
-	faction = list("caves")
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 1500
 	maxHealth = 1500
@@ -195,9 +194,6 @@
 		return
 
 	for(var/mob/living/L in get_turf(src))
-		if(L.has_faction("caves"))
-			continue
-
 		L.adjustFireLoss(damage_per_tick)
 
 		if(!warned && prob(50))

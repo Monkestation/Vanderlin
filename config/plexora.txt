@@ -3,3 +3,6 @@
 
 # The base URL for the Plexora instance.
 PLEXORA_URL http://127.0.0.1:1330
+
+## Identifier for plexora
+#PLEXORA_SERVER_ID ABCD1234

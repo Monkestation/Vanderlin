@@ -39,9 +39,9 @@
 
 /datum/component/storage/concrete/scabbard/sword/New(list/raw_args)
 	. = ..()
-	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword, /obj/item/weapon/sword/long/daewalker))
+	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword, /obj/item/weapon/sword/long/daewalker, /obj/item/weapon/sword/long/silver/nitewalker))
 
-/datum/component/storage/concrete/scabbard/kazengun/New(list/raw_args)
+/datum/component/storage/concrete/scabbard/blackmeadow/New(list/raw_args)
 	. = ..()
 	set_holdable(list(/obj/item/weapon/sword/katana))
 
@@ -88,7 +88,7 @@
 		return
 
 	if(!istype(I, /obj/item/weapon/knife) && isatom(parent))
-		var/obj/item/clothing/shoes/boots = parent
+		var/obj/item/clothing/shoes/boots/boots = parent
 		if(ishuman(boots?.loc))
 			var/mob/living/carbon/human/uncomfy = boots.loc
 			if(uncomfy.shoes != parent)

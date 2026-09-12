@@ -15,6 +15,9 @@
 	var/setting_display_name = "Setting"
 	/// Example text appended to the prompt
 	var/example_text = null
+	///are we are a role? if so we show in job menu
+	var/is_role = TRUE
+
 
 /datum/preference/list_type/role_setting/is_valid(value, datum/preferences/prefs)
 	if (!islist(value))

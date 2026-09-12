@@ -81,11 +81,11 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/holy_pilgrim
 	exp_types_granted = list(EXP_TYPE_CLERIC)
 	languages = list(/datum/language/celestial)
+	traits = list(TRAIT_VIRGIN)
 
 /datum/job/advclass/pilgrim/holy_pilgrim/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	spawned.virginity = TRUE
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
@@ -96,7 +96,7 @@
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
-			spawned.virginity = FALSE
+			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/holy_pilgrim/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/noc)

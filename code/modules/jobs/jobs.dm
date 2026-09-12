@@ -24,10 +24,10 @@ GLOBAL_LIST_INIT(noble_courthand_positions, list(
 	/datum/job/archivist::title,
 	/datum/job/courtphys::title,
 	/datum/job/minor_noble::title,
-	/datum/job/adventurer/courtagent::title,
+	/datum/job/courtagent::title,
 	/datum/job/sunlord::title,
 ))
-GLOBAL_PROTECT(noble_positions)
+GLOBAL_PROTECT(noble_courthand_positions)
 
 GLOBAL_LIST_INIT(garrison_positions, list(
 	/datum/job/royalknight::title,
@@ -160,11 +160,21 @@ GLOBAL_LIST_INIT(test_positions, list(
 	"Tester",
 	))
 
+GLOBAL_LIST_INIT(admin_special_positions, list(
+	/datum/job/admin/oracle::title,
+	/datum/job/admin/lunar_sentinel::title,
+	/datum/job/admin/lunar_champion::title,
+	/datum/job/admin/darkspawn::title,
+	/datum/job/admin/blood_sorcerer::title,
+	/datum/job/admin/kingsfield_constable::title,
+))
+GLOBAL_PROTECT(admin_special_positions)
+
 GLOBAL_LIST_EMPTY(job_assignment_order)
 
 /proc/get_job_assignment_order()
 	var/list/sorting_order = list()
-	sorting_order += GLOB.noble_positions
+	sorting_order += GLOB.noble_courthand_positions
 	sorting_order += GLOB.garrison_positions
 	sorting_order += GLOB.gallowband_positions
 	sorting_order += GLOB.church_positions
@@ -175,6 +185,7 @@ GLOBAL_LIST_EMPTY(job_assignment_order)
 	sorting_order += GLOB.apprentices_positions
 	sorting_order += GLOB.allmig_positions
 	sorting_order += GLOB.youngfolk_positions
+	sorting_order += GLOB.admin_special_positions
 	return sorting_order
 
 GLOBAL_LIST_INIT(exp_specialmap, list(

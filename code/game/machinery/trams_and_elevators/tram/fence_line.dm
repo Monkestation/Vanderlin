@@ -25,6 +25,7 @@
 /obj/effect/landmark/tram/queued_path/fence_map_enter/tram_reached_travel_point(datum/source, datum/lift_master/tram/tram)
 	held_tram = tram
 	SSmerchant.fence_docked = TRUE
+	tram.set_travelling(FALSE)
 
 /obj/effect/landmark/tram/queued_path/fence_map_enter/proc/dispatch_cargo(datum/source, datum/lift_master/tram/tram)
 	if(!held_tram)
@@ -62,6 +63,7 @@
 
 /obj/effect/landmark/tram/queued_path/fence_stop/tram_reached_travel_point(datum/source, datum/lift_master/tram/tram)
 	RegisterSignal(tram, COMSIG_TRAM_EMPTY, PROC_REF(send_fence_boat))
+	tram.set_travelling(FALSE)
 
 /obj/effect/landmark/tram/queued_path/fence_stop/proc/send_fence_boat(datum/lift_master/tram/tram)
 	UnregisterSignal(tram, COMSIG_TRAM_EMPTY)
@@ -86,4 +88,5 @@
 	tram.try_sell_items()
 	tram.try_process_order()
 	tram.hide_tram()
+	tram.set_travelling(FALSE)
 	. = ..()

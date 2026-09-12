@@ -126,11 +126,10 @@
  * If visuals_only is true, you can omit any work that doesn't visually appear on the character sprite
  */
 /datum/outfit/proc/pre_equip(mob/living/carbon/human/H, visuals_only = FALSE)
-	//to be overridden for customization depending on client prefs,species etc
-	return
+	SHOULD_NOT_SLEEP(TRUE)
 
 /datum/outfit/proc/map_override(mob/living/carbon/human/H, visuals_only = FALSE)
-	return
+	SHOULD_NOT_SLEEP(TRUE)
 
 /**
  * Called after the equip proc has finished
@@ -144,8 +143,7 @@
  * If visuals_only is true, you can omit any work that doesn't visually appear on the character sprite
  */
 /datum/outfit/proc/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)
-	//to be overridden for toggling internals, id binding, access etc
-	return
+	SHOULD_NOT_SLEEP(TRUE)
 
 /**
  * Equips all defined types and paths to the mob passed in
@@ -156,6 +154,8 @@
  * If visuals_only is true, you can omit any work that doesn't visually appear on the character sprite
  */
 /datum/outfit/proc/equip(mob/living/carbon/human/H, visuals_only = FALSE)
+	SHOULD_NOT_SLEEP(TRUE)
+
 	pre_equip(H, visuals_only)
 	map_override(H, visuals_only)
 

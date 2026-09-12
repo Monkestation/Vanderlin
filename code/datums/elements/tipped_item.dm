@@ -10,6 +10,7 @@
 	. = ..()
 	if(!ismovableatom(target))
 		return ELEMENT_INCOMPATIBLE
+
 	max_reagents = _max_reagents
 	dip_amount = _dip_amount
 	inject_amount = _inject_amount
@@ -17,37 +18,41 @@
 	show_examine = _show_examine
 	if(!target.reagents)
 		target.create_reagents(max_reagents)
+
 	RegisterSignal(target, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
-	RegisterSignal(target, COMSIG_ITEM_ATTACK_OBJ, PROC_REF(check_dip))
-	RegisterSignal(target, COMSIG_ITEM_PRE_ATTACK, PROC_REF(check_dip))
+	RegisterSignal(target, COMSIG_ITEM_INTERACTING_WITH_ATOM, PROC_REF(check_dip))
 	RegisterSignal(target, COMSIG_ITEM_SPEC_ATTACKEDBY, PROC_REF(try_inject))
 
 /datum/element/tipped_item/Detach(datum/source)
 	. = ..()
-	UnregisterSignal(source, list(COMSIG_ATOM_EXAMINE, COMSIG_ITEM_ATTACK_OBJ, COMSIG_ITEM_PRE_ATTACK, COMSIG_ITEM_SPEC_ATTACKEDBY))
+	UnregisterSignal(source, list(COMSIG_ATOM_EXAMINE, COMSIG_ITEM_INTERACTING_WITH_ATOM, COMSIG_ITEM_SPEC_ATTACKEDBY))
 
-/datum/element/tipped_item/proc/check_dip(obj/item/dipper, obj/item/reagent_containers/attacked_container, mob/living/attacker, list/modifiers)
+/datum/element/tipped_item/proc/check_dip(obj/item/dipper, mob/living/attacker, obj/item/reagent_containers/attacked_container, list/modifiers)
 	SIGNAL_HANDLER
 
 	if(QDELETED(attacked_container) || !istype(attacked_container))
-		return
+		return NONE
+
 	if(attacker.cmode)
-		return
-	if(!attacked_container.reagents)
-		return
-	if(!attacked_container.reagents.total_volume)
-		return
+		return NONE
+
+	if(!attacked_container.reagents?.total_volume)
+		return NONE
+
 	if(!(attacked_container.reagents.flags & DRAINABLE))
-		return
+		return NONE
+
 	if(dipper.reagents.total_volume == dipper.reagents.maximum_volume)
-		return
+		return ITEM_INTERACT_BLOCKING
 
-	INVOKE_ASYNC(src, PROC_REF(start_dipping), dipper, attacked_container, attacker)
-	return COMPONENT_NO_ATTACK | COMPONENT_CANCEL_ATTACK_CHAIN
+	INVOKE_ASYNC(src, PROC_REF(start_dipping), dipper, attacker, attacked_container)
 
-/datum/element/tipped_item/proc/start_dipping(obj/item/dipper, obj/item/reagent_containers/attacked_container, mob/living/attacker, params)
+	return ITEM_INTERACT_SUCCESS
+
+/datum/element/tipped_item/proc/start_dipping(obj/item/dipper, mob/living/attacker, obj/item/reagent_containers/attacked_container, list/modifiers)
 	if(!do_after(attacker, 2 SECONDS, attacked_container))
 		return
+
 	attacked_container.reagents.trans_to(dipper, dip_amount, transfered_by = attacker)
 	attacker.visible_message(span_danger("[attacker] dips [dipper] in [attacked_container]!"), "You dip [dipper] in [attacked_container]!", vision_distance = 2)
 

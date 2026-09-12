@@ -84,3 +84,6 @@
 
 /// from base of obj/item/reagent_containers/food/snacks/attack(): (mob/living/eater, mob/feeder)
 #define COMSIG_FOOD_EATEN "food_eaten"
+
+#define COMSIG_SECURE_SPOT_ACTIVATED "secure_spot_activated"
+#define COMSIG_SECURE_SPOT_DEACTIVATED "secure_spot_deactivated"

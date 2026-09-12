@@ -71,6 +71,7 @@
 	item_chair = /obj/item/chair/wood
 	anchored = FALSE
 
+//Stool
 /obj/structure/chair/stool
 	name = "stool"
 	desc = ""
@@ -181,6 +182,7 @@
 	. = ..()
 	if(!proximity)
 		return
+
 	if(prob(break_chance))
 		user.visible_message("<span class='warning'>[src] is smashed to pieces!</span>")
 		if(iscarbon(target))

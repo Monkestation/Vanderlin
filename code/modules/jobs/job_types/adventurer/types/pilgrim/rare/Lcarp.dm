@@ -27,7 +27,7 @@
 	As a master carpenter, you transform trees into anything from furniture to entire fortifications."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/mastercarpenter
-	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	category_tags = list(CTAG_PILGRIM)
 	total_positions = 1
 	roll_chance = 0
 	apprentice_name = "Carpenter Apprentice"

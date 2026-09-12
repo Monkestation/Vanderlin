@@ -4,10 +4,8 @@
 	button_icon_state = "darkvision"
 	can_cast_on_self = TRUE
 
-	point_cost = 2
-	attunements = list(
-		/datum/attunement/light = 0.6,
-	)
+
+	required_form = FORM_DEATH
 	spell_flags = SPELL_RITUOS
 	cooldown_time = 6 MINUTES
 
@@ -17,7 +15,7 @@
 	charges = 3
 
 /datum/action/cooldown/spell/undirected/touch/darkvision/adjust_hand_charges()
-	charges += FLOOR(attuned_strength * 1.5, 1)
+	charges += FLOOR(spell_magnitude_modifier * 1.5, 1)
 
 /datum/action/cooldown/spell/undirected/touch/darkvision/is_valid_target(atom/cast_on)
 	. = ..()
@@ -30,7 +28,7 @@
 	if(!do_after(caster, 5 SECONDS, victim))
 		return FALSE
 
-	var/duration_increase = attuned_strength * 2 MINUTES
+	var/duration_increase = spell_magnitude_modifier * 2 MINUTES
 
 	if(victim != caster)
 		caster.visible_message("[caster] draws a glyph in the air and touches [victim] with an arcyne focus.")

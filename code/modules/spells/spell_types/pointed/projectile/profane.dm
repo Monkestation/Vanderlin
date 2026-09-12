@@ -5,16 +5,11 @@
 	sound = 'sound/misc/stings/generic.ogg'
 	charge_sound = 'sound/magic/vlightning.ogg'
 
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "Oblino!"
 	invocation_type = INVOCATION_SHOUT
-
-	attunements = list(
-		/datum/attunement/death = 0.3,
-		/datum/attunement/blood = 0.3,
-	)
 
 	charge_drain = 1
 	charge_time = 2 SECONDS
@@ -22,6 +17,15 @@
 	cooldown_time = 10 SECONDS
 	spell_cost = 35
 	projectile_type = /obj/projectile/magic/profane
+
+/datum/action/cooldown/spell/projectile/profane/spell
+	name = "Profane Rupture"
+
+	spell_type = SPELL_MANA
+	antimagic_flags = MAGIC_RESISTANCE
+
+	required_form = FORM_DEATH
+	required_technique = TECHNIQUE_DESTRUCTION
 
 /datum/action/cooldown/spell/projectile/profane/before_cast(mob/living/cast_on)
 	. = ..()

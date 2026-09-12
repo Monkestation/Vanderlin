@@ -271,6 +271,19 @@
 	icon_state = "sherwoods"
 	SET_BASE_PIXEL(-16, 32)
 
+/obj/structure/fluff/walldeco/bigpainting/rainuponthevalley
+	name = "painting"
+	desc = "A painting of rolling rain clouds descending on a valley."
+	icon = 'icons/roguetown/misc/64x64.dmi'
+	icon_state = "rain_upon_the_valley"
+
+/obj/structure/fluff/walldeco/bigpainting/relic
+	name = "painting"
+	desc = "A painting of an old blade, said to be of great importance to Vanderlin, depicted shattered upon red velvet."
+	icon = 'icons/roguetown/misc/64x64.dmi'
+	icon_state = "relicpainting"
+	SET_BASE_PIXEL(16, 0)
+
 /obj/structure/fluff/walldeco/bigpainting/lake
 	icon_state = "lake"
 
@@ -332,7 +345,6 @@
 
 /obj/structure/fluff/walldeco/skullspike // for ground really
 	icon_state = "skullspike"
-	plane = -1
 	layer = ABOVE_MOB_LAYER
 	SET_BASE_PIXEL(8, 24)
 
@@ -340,7 +352,6 @@
 /obj/structure/fluff/walldeco/sign/saiga
 	name = "The Drunken Saiga"
 	icon_state = "shopsign_inn_saiga_right"
-	plane = -1
 	SET_BASE_PIXEL(3, 16)
 
 /obj/structure/fluff/walldeco/sign/saiga/left
@@ -361,7 +372,6 @@
 /obj/structure/fluff/walldeco/sign/weaponsmithsign
 	name = "weaponsmith shop sign"
 	icon_state = "shopsign_weaponsmith_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/weaponsmithsign/left
@@ -371,7 +381,6 @@
 /obj/structure/fluff/walldeco/sign/armorsmithsign
 	name = "armorsmith shop sign"
 	icon_state = "shopsign_armorsmith_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/armorsmithsign/left
@@ -381,7 +390,6 @@
 /obj/structure/fluff/walldeco/sign/merchantsign
 	name = "merchant shop sign"
 	icon_state = "shopsign_merchant_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/merchantsign/left
@@ -391,7 +399,6 @@
 /obj/structure/fluff/walldeco/sign/apothecarysign
 	name = "apothecary sign"
 	icon_state = "shopsign_apothecary_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/apothecarysign/left
@@ -400,7 +407,6 @@
 /obj/structure/fluff/walldeco/sign/tailorsign
 	name = "tailor sign"
 	icon_state = "shopsign_tailor_right"
-	plane = -1
 	SET_BASE_PIXEL(0, 16)
 
 /obj/structure/fluff/walldeco/sign/tailorsign/left

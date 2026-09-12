@@ -138,13 +138,19 @@
 	swingdelay = 1
 	item_damage_type = "slash"
 
+/datum/intent/sword/cut/zwei/reach
+	name = "cut"
+	damfactor = 1
+	reach = 2
+	swingdelay = 1
+	item_damage_type = "slash"
+
 /datum/intent/sword/cut/rapier
 	damfactor = 0.8
 	item_damage_type = "slash"
 
 /datum/intent/sword/cut/short
 	clickcd = 10
-	damfactor = 0.85
 	item_damage_type = "slash"
 
 /datum/intent/sword/cut/guts
@@ -181,6 +187,8 @@
 	hitsound = list('sound/combat/hits/bladed/genstab (1).ogg', 'sound/combat/hits/bladed/genstab (2).ogg', 'sound/combat/hits/bladed/genstab (3).ogg')
 	reach = 2
 	misscost = 10
+	chargetime = 2
+	chargedrain = 1
 	penfactor = AP_SWORD_THRUST+30 //50 total
 	clickcd = 18
 	acc_bonus = 15
@@ -213,3 +221,17 @@
 	chargedrain = 1
 	misscost = 18
 	charging_slowdown = 1
+
+/datum/intent/sword/chop/cleave
+	name = "cleave"
+	icon_state = "incleave"
+	attack_verb = list("cleaves", "slices")
+	animname = "cut"
+	damfactor = 3
+	penfactor = AP_SWORD_CHOP + 5
+	acc_bonus = -50 // Only good if target is on the ground
+	chargetime = 5 SECONDS
+	chargedrain = 2
+	no_early_release = TRUE
+	misscost = 50
+	swingdelay = 3

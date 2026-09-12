@@ -116,7 +116,7 @@
 ///Common checks to make sure we can trigger the trap.
 /// True == Yep we good.
 /obj/structure/trap/proc/trap_check(mob/living/victim)
-	if(istype(get_area(loc), /area/overlord_lair) && (victim.has_faction("overlord")))
+	if(istype(get_area(loc), /area/overlord_lair) && (victim.has_faction(FACTION_OVERLORD)))
 		return FALSE
 	if(last_trigger + time_between_triggers > world.time)
 		return FALSE
@@ -195,7 +195,7 @@
 /obj/structure/trap/poison/trigger_step_on(mob/living/victim)
 	..()
 	to_chat(victim,span_danger("I feel a slight prick from beneath me!"))
-	victim.reagents?.add_reagent(/datum/reagent/berrypoison,2.5)
+	victim.reagents?.add_reagent(/datum/reagent/poison/berry,2.5)
 	post_triggered()
 
 /obj/structure/trap/bomb

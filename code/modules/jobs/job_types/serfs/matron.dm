@@ -50,7 +50,7 @@
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MATRON
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -62,6 +62,8 @@
 
 	outfit = /datum/outfit/matron
 	give_bank_account = 35
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	can_have_apprentices = TRUE
 	cmode_music = 'sound/music/cmode/nobility/CombatSpymaster.ogg'
 	honorary = "Miss"
@@ -109,7 +111,7 @@
 	cloak = /obj/item/clothing/cloak/matron
 
 	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/stiletto = 1,
+		/obj/item/weapon/knife/dagger/blacksteel/misericorde = 1,
 		/obj/item/key/matron = 1
 	)
 

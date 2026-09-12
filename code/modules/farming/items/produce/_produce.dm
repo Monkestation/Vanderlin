@@ -52,28 +52,42 @@
 				visible_message("<span class='warning'>[H] crushes [src] underfoot.</span>")
 				qdel(src)
 
-/obj/item/reagent_containers/food/snacks/produce/attackby(obj/item/weapon, mob/user, list/modifiers)
-	if(weapon && isturf(loc))
-		var/turf/location = get_turf(src)
-		if(seed && (user.used_intent.blade_class == BCLASS_BLUNT) && (!user.used_intent.noaa))
-			playsound(src,'sound/items/seedextract.ogg', 100, FALSE)
-			if(prob(5))
-				user.visible_message("<span class='info'>[user] fails to extract the seeds.</span>")
-				qdel(src)
-				return
-			user.visible_message("<span class='info'>[user] extracts the seeds.</span>")
-			new seed(location, source_genetics)
-			if(prob(90))
-				new seed(location, source_genetics)
-			if(prob(23))
-				new seed(location, source_genetics)
-			if(prob(6))
-				new seed(location, source_genetics)
-			qdel(src)
-			return
-		else
-			return ..()
-	..()
+/obj/item/reagent_containers/food/snacks/produce/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(user.cmode)
+		return NONE
+
+	if(!isturf(loc))
+		return NONE
+
+	if(user.used_intent.blade_class != BCLASS_BLUNT || user.used_intent.noaa)
+		return ..()
+
+	playsound(src, 'sound/items/seedextract.ogg', 100, FALSE)
+
+	user.changeNext_move(CLICK_CD_FAST)
+
+	if(prob(5))
+		user.visible_message("<span class='info'>[user] fails to extract the seeds.</span>")
+		seed = null
+		qdel(src)
+		return ITEM_INTERACT_BLOCKING
+
+	user.visible_message("<span class='info'>[user] extracts the seeds.</span>")
+
+	var/turf/location = get_turf(src)
+
+	new seed(location, source_genetics)
+	if(prob(90))
+		new seed(location, source_genetics)
+	if(prob(23))
+		new seed(location, source_genetics)
+	if(prob(6))
+		new seed(location, source_genetics)
+
+	seed = null
+	qdel(src)
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat
 	seed = /obj/item/neuFarm/seed/wheat
@@ -282,8 +296,8 @@
 
 /obj/item/reagent_containers/food/snacks/produce/fruit/jacksberry/poison
 	seed = /obj/item/neuFarm/seed/poison_berries
-	list_reagents = list(/datum/reagent/berrypoison = 5)
-	grind_results = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
+	grind_results = list(/datum/reagent/poison/berry = 5)
 	color_index = "bad"
 	poisonous = TRUE
 
@@ -308,7 +322,7 @@
 	bitesize_mod = 1
 	foodtype = VEGETABLES
 	nutrition = SNACK_WORST
-	list_reagents = list(/datum/reagent/berrypoison = 1)
+	list_reagents = list(/datum/reagent/poison/berry = 1)
 	tastes = list("sweet" = 1,"bitterness" = 1)
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = SHELFLIFE_LONG
@@ -343,7 +357,7 @@
 	foodtype = VEGETABLES
 	tastes = list("sweet" = 1,"bitterness" = 1)
 	nutrition = SNACK_WORST
-	list_reagents = list(/datum/reagent/drug/nicotine = 2, /datum/reagent/berrypoison = 2)
+	list_reagents = list(/datum/reagent/drug/nicotine = 2, /datum/reagent/poison/berry = 2)
 	grind_results = list(/datum/reagent/drug/nicotine = 5)
 	eat_effect = /datum/status_effect/debuff/badmeal
 	rotprocess = SHELFLIFE_LONG
@@ -762,7 +776,7 @@
 	throw_speed = 1
 	throw_range = 3
 	nutrition = 0
-	list_reagents = list(/datum/reagent/berrypoison/shroom = 5)
+	list_reagents = list(/datum/reagent/poison/berry/shroom = 5)
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_EXTREME
 	eat_effect = /datum/status_effect/debuff/badmeal
@@ -837,8 +851,8 @@
 	throw_range = 3
 	dropshrink = 0.8
 	rotprocess = SHELFLIFE_DECENT
-	list_reagents = list(/datum/reagent/drowsbane = 5)
-	grind_results = list(/datum/reagent/drowsbane = 5)
+	list_reagents = list(/datum/reagent/poison/drowsbane = 5)
+	grind_results = list(/datum/reagent/poison/drowsbane = 5)
 	item_weight = 10 GRAMS
 
 /* /obj/item/reagent_containers/food/snacks/produce/mushroom/chanterelle // Removing for now to expand upon later

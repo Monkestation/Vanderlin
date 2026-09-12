@@ -19,7 +19,7 @@
 		STAT_INTELLIGENCE = -1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/axesmaces = 20,
-		/datum/attribute/skill/combat/whipsflails = 30,
+		/datum/attribute/skill/combat/whipsflails = 33,
 		/datum/attribute/skill/combat/shields = 30,
 	)
 
@@ -31,7 +31,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/lockpicking = 30,
-		/datum/attribute/skill/combat/bows = 30,
+		/datum/attribute/skill/combat/bows = 33,
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/misc/sewing = 10,
@@ -47,6 +47,7 @@
 	allowed_races = list(SPEC_ID_DROW)
 	outfit = /datum/outfit/mercenary/anthrax
 	category_tags = list(CTAG_MERCENARY)
+	allowed_patrons = list(/datum/patron/divine/ravox)
 	total_positions = 5
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 
@@ -78,7 +79,7 @@
 
 /datum/outfit/mercenary/anthrax
 	name = "Anthrax (Mercenary)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather/mercenary/black
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backl = /obj/item/storage/backpack/satchel

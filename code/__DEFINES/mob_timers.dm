@@ -47,3 +47,6 @@
 	// I've separated then here for clarity's sake.
 
 	#define MT_PAINSTUN "painstun"
+
+#define LIGHTNING_ADAPTATION_COOLDOWN 15 SECONDS
+#define MT_LIGHTNING_ADAPTATION "lightning_adaptation"

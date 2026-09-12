@@ -22,8 +22,8 @@
 		to_chat(src, "Nowhere to jump to!")
 		return
 	usr.forceMove(T)
-	log_admin("[key_name(usr)] jumped to [AREACOORD(A)]")
-	message_admins("[key_name_admin(usr)] jumped to [AREACOORD(A)]")
+	log_admin("[key_name(usr)] jumped to [AREACOORD(T)]")
+	message_admins("[key_name_admin(usr)] jumped to [AREACOORD(T)]")
 	SSblackbox.record_feedback("tally", "admin_verb", 1, "Jump To Area") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /client/proc/jumptoturf(turf/T in world)

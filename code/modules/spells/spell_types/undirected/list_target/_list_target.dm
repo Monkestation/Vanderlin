@@ -20,7 +20,7 @@
 /datum/action/cooldown/spell/undirected/list_target/PreActivate(atom/caster)
 	var/list/list_targets = get_list_targets(caster, target_radius)
 	if(!length(list_targets))
-		caster.balloon_alert(caster, "No valid targets!")
+		caster.balloon_alert(caster, "no valid targets!")
 		return FALSE
 
 	var/atom/chosen = browser_input_list(caster, choose_target_message, name, sortList(list_targets))
@@ -28,7 +28,7 @@
 		return FALSE
 
 	if(get_dist(chosen, caster) > target_radius)
-		caster.balloon_alert(caster, "Too far!")
+		caster.balloon_alert(caster, "too far!")
 		return FALSE
 
 	return Activate(chosen)

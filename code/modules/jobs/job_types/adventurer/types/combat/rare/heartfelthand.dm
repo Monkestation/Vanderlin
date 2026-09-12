@@ -33,6 +33,7 @@
 	traits = list(
 		TRAIT_SEEPRICES,
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 	)
 
 /datum/outfit/adventurer/heartfelthand

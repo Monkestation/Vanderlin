@@ -35,7 +35,7 @@
 			continue
 		if(!child.family_datum && (child.job == JOB_ORPHAN && istype(child.mind?.assigned_role, /datum/job/orphan)))
 			orphans++
-		else if(!child.family_datum || !length(child.family_member_datum?.parents))
+		else if(!child.family_datum || !child.family_member_datum?.has_parents())
 			potential_orphans++
 
 	if(recipient_found && (orphans + potential_orphans) >= 2)
@@ -62,7 +62,7 @@
 			continue
 		if(!child.family_datum && (child.job == JOB_ORPHAN && istype(child.mind?.assigned_role, /datum/job/orphan)))
 			orphans++
-		else if(!child.family_datum || !length(child.family_member_datum?.parents))
+		else if(!child.family_datum || !child.family_member_datum?.has_parents())
 			potential_orphans++
 
 	if(!length(valid_targets) || (orphans + potential_orphans) < 2)

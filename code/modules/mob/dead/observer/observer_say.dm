@@ -5,7 +5,7 @@
 /mob/dead/observer/get_message_mods(message, list/mods)
 	var/key = message[1]
 	if((key in GLOB.department_radio_prefixes) && length(message) > length(key) + 1 && !mods[RADIO_EXTENSION])
-		mods[RADIO_KEY] = lowertext(message[1 + length(key)])
+		mods[RADIO_KEY] = LOWER_TEXT(message[1 + length(key)])
 		mods[RADIO_EXTENSION] = GLOB.department_radio_keys[mods[RADIO_KEY]]
 	return message
 
@@ -28,18 +28,6 @@
 		return
 
 	. = say_dead(message)
-
-/mob/dead/observer/rogue/arcaneeye/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
-	return
-
-/mob/dead/observer/rogue/arcaneeye/say_dead(message)
-	return
-
-/mob/dead/observer/screye/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
-	return
-
-/mob/dead/observer/screye/say_dead(message)
-	return
 
 /mob/dead/observer/profane/say(message, bubble_type, list/spans = list(), sanitize = TRUE, datum/language/language = null, ignore_spam = FALSE, forced = null)
 	if (!message)

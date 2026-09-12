@@ -7,3 +7,6 @@
 	if(!findtext(str_val, GLOB.is_http_protocol))
 		return FALSE
 	return ..()
+
+// The current server ID as defined in the plexora config
+/datum/config_entry/string/plexora_server_id

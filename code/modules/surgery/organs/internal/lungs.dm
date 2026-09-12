@@ -18,8 +18,8 @@
 	current_blood = 25
 	blood_req = 2
 	oxygen_req = 4
-	nutriment_req = 1.2
-	hydration_req = 1.2
+	nutriment_req = 0.6
+	hydration_req = 0.6
 
 	high_threshold_passed = "<span class='warning'>I feel some sort of constriction around my chest as my breathing becomes shallow and rapid.</span>"
 	now_fixed = "<span class='warning'>My lungs seem to once again be able to hold air.</span>"
@@ -27,7 +27,7 @@
 
 	food_type = /obj/item/reagent_containers/food/snacks/meat/organ/lungs
 
-/obj/item/organ/lungs/applyOrganDamage(d, maximum)
+/obj/item/organ/lungs/applyOrganDamage(damage_amount, maximum)
 	. = ..()
 	if(!.)
 		return
@@ -36,7 +36,7 @@
 		failed = FALSE
 		return
 
-	if(is_failing() && owner?.stat == CONSCIOUS)
+	if(is_failing() && (owner?.stat == CONSCIOUS) && !HAS_TRAIT(owner, TRAIT_NOBREATH))
 		owner.visible_message(span_danger("[owner] grabs [owner.p_their()] throat, struggling for breath!"), span_userdanger("You suddenly feel like you can't breathe!"))
 		failed = TRUE
 
@@ -85,13 +85,3 @@
 /obj/item/organ/lungs/regenerate_organ()
 	. = ..()
 	failed = FALSE
-
-/obj/item/organ/lungs/plasmaman
-	name = "plasma filter"
-	desc = ""
-	icon_state = "lungs-plasma"
-
-
-/obj/item/organ/lungs/slime
-	name = "vacuole"
-	desc = ""

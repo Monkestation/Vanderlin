@@ -258,7 +258,7 @@
 /obj/structure/closet/crate/chest/wicker,
 /obj/effect/spawner/map_spawner/loot,
 /obj/effect/spawner/map_spawner/loot,
-/obj/item/clothing/shoes/boots,
+/obj/item/clothing/shoes/boots/darkboots,
 /turf/open/floor/dirt,
 /area/under/tomb/indoors)
 "Ie" = (

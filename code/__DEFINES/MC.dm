@@ -116,3 +116,11 @@
 }\
 /datum/controller/subsystem/ai_controllers/##X/fire() {..() /*just so it shows up on the profiler*/} \
 /datum/controller/subsystem/ai_controllers/##X
+
+#define MOBS_SUBSYSTEM_DEF(X) GLOBAL_REAL(SS##X, /datum/controller/subsystem/mobs/##X);\
+/datum/controller/subsystem/mobs/##X/New(){\
+	NEW_SS_GLOBAL(SS##X);\
+	PreInit();\
+}\
+/datum/controller/subsystem/mobs/##X/fire() {..() /*just so it shows up on the profiler*/} \
+/datum/controller/subsystem/mobs/##X

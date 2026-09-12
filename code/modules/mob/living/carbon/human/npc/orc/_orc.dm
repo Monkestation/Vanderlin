@@ -2,6 +2,7 @@
 	name = "orc"
 	icon = 'icons/roguetown/mob/monster/orc.dmi'
 	icon_state = "orc"
+	faction = list(FACTION_HOSTILE)
 	race = /datum/species/orc
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest/orc, /obj/item/bodypart/head/orc, /obj/item/bodypart/l_arm/orc,
@@ -147,112 +148,19 @@
 			headdy.icon_state = "[src.dna.species.id]_head"
 	src.grant_language(/datum/language/common)
 
-	var/list/eye_list = getorganslotlist(ORGAN_SLOT_EYES)
-	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.Remove(src,1)
-		QDEL_NULL(eyes)
-
-	var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
-	var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
-	LE.switch_side(LEFT_SIDE)
-
-	LE.Insert(src)
-	RE.Insert(src)
+	grant_nightmare_eyes()
 
 	src.underwear = "Nude"
 	if(length(quirks))
 		clear_quirks()
 	update_eyes()
-	faction = list(FACTION_ORCS)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_ORCS)
 	name = "orc"
 	real_name = "orc"
 	add_traits(list(TRAIT_HEAVYARMOR, TRAIT_NOMOOD, TRAIT_NOHUNGER, TRAIT_CRITICAL_WEAKNESS), SPECIES_TRAIT)
 
-/datum/species/orc
-	name = "orc"
-	id = SPEC_ID_ORC
-	species_traits = list(NO_UNDERWEAR)
-	inherent_traits = list(TRAIT_RESISTCOLD,TRAIT_RESISTHIGHPRESSURE,TRAIT_RESISTLOWPRESSURE,TRAIT_RADIMMUNE,TRAIT_CRITICAL_WEAKNESS, TRAIT_NASTY_EATER, TRAIT_LEECHIMMUNE, TRAIT_INHUMENCAMP)
-	nojumpsuit = 1
-	sexes = 1
-	damage_overlay_type = ""
-	changesource_flags = WABBAJACK
-	var/raceicon = "orc"
-	exotic_bloodtype = /datum/blood_type/human/corrupted/orc
-	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)
-
-/datum/species/orc/update_damage_overlays(mob/living/carbon/human/H)
-	return
-
-/datum/species/orc/regenerate_icons(mob/living/carbon/human/H)
-	H.icon_state = ""
-	if(HAS_TRAIT(H, TRAIT_NO_TRANSFORM))
-		return 1
-	H.update_inv_hands()
-	H.update_inv_handcuffed()
-	H.update_inv_legcuffed()
-	H.update_fire()
-	H.update_body()
-	var/mob/living/carbon/human/species/orc/G = H
-	G.update_wearable()
-	H.update_transform()
-	return TRUE
-
-/datum/component/rot/corpse/orc/process()
-	var/amt2add = 10
-	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
-	if(last_process)
-		amt2add = ((world.time - last_process)/10) * amt2add
-	last_process = world.time
-	amount += amt2add
-	if(has_world_trait(/datum/world_trait/pestra_mercy))
-		amount -= (is_ascendant(PESTRA) ? 2.5 : 5) * time_elapsed
-
-	var/mob/living/carbon/C = parent
-	if(!C)
-		qdel(src)
-		return
-	if(C.stat != DEAD)
-		qdel(src)
-		return
-	var/should_update = FALSE
-	if(amount > 20 MINUTES)
-		for(var/obj/item/bodypart/B in C.bodyparts)
-			if(!B.skeletonized)
-				B.skeletonized = TRUE
-				should_update = TRUE
-	else if(amount > 12 MINUTES)
-		for(var/obj/item/bodypart/B in C.bodyparts)
-			if(!HAS_TRAIT(B, TRAIT_ROTTEN))
-				B.kill_limb()
-				should_update = TRUE
-			if(HAS_TRAIT(B, TRAIT_ROTTEN) && amount < 16 MINUTES && !C.has_faction(FACTION_MATTHIOS))
-				var/turf/open/T = C.loc
-				if(istype(T))
-					T.pollute_turf(/datum/pollutant/rot, 4)
-	if(should_update)
-		if(amount > 20 MINUTES)
-			C.update_body()
-			qdel(src)
-			return
-		else if(amount > 12 MINUTES)
-			C.update_body()
-
-/datum/attribute_holder/sheet/job/orc_npc/ambush
-	raw_attribute_list = list(
-		STAT_STRENGTH = 3,
-		STAT_SPEED = 2,
-		STAT_CONSTITUTION = 3,
-		STAT_ENDURANCE = 3,
-		STAT_INTELLIGENCE = -9,
-	)
-
 /datum/outfit/npc/orc/ambush/pre_equip(mob/living/carbon/human/H)
 	..()
-	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/orc_npc/ambush)
 	var/loadout = rand(1,5)
 	switch(loadout)
 		if(1)
@@ -342,11 +250,7 @@
 
 /datum/attribute_holder/sheet/job/orc_npc/tribal
 	raw_attribute_list = list(
-		STAT_STRENGTH = 3,
-		STAT_SPEED = 3,
-		STAT_CONSTITUTION = 3,
-		STAT_ENDURANCE = 3,
-		STAT_INTELLIGENCE = -9,
+		STAT_SPEED = 1,
 	)
 
 /datum/outfit/npc/orc/tribal/pre_equip(mob/living/carbon/human/H)
@@ -393,11 +297,8 @@
 
 /datum/attribute_holder/sheet/job/orc_npc/warrior
 	raw_attribute_list = list(
-		STAT_STRENGTH = 3,
-		STAT_SPEED = 3,
-		STAT_CONSTITUTION = 4,
-		STAT_ENDURANCE = 4,
-		STAT_INTELLIGENCE = -9,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
 	)
 
 /datum/outfit/npc/orc/warrior/pre_equip(mob/living/carbon/human/H)
@@ -463,11 +364,7 @@
 
 /datum/attribute_holder/sheet/job/orc_npc/marauder_mob
 	raw_attribute_list = list(
-		STAT_STRENGTH = 2,
-		STAT_SPEED = 2,
-		STAT_CONSTITUTION = 3,
-		STAT_ENDURANCE = 3,
-		STAT_INTELLIGENCE = -9,
+		STAT_STRENGTH = 1,
 	)
 
 /datum/outfit/npc/orc/marauder/pre_equip(mob/living/carbon/human/H)
@@ -519,11 +416,10 @@
 
 /datum/attribute_holder/sheet/job/orc_npc/warlord_mob
 	raw_attribute_list = list(
-		STAT_STRENGTH = 4,
-		STAT_SPEED = 4,
-		STAT_CONSTITUTION = 4,
-		STAT_ENDURANCE = 4,
-		STAT_INTELLIGENCE = -9,
+		STAT_STRENGTH = 1,
+		STAT_SPEED = 2,
+		STAT_CONSTITUTION = 1,
+		STAT_ENDURANCE = 1,
 	)
 
 /datum/outfit/npc/orc/warlord/pre_equip(mob/living/carbon/human/H)
@@ -540,7 +436,7 @@
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord
 		if(3)
-			r_hand = /obj/item/weapon/whip/antique
+			r_hand = /obj/item/weapon/whip/bronze
 			l_hand = /obj/item/weapon/sword/short/iron
 			armor = /obj/item/clothing/armor/plate/orc/warlord
 			head = /obj/item/clothing/head/helmet/orc/warlord

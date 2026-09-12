@@ -16,7 +16,7 @@ GLOBAL_VAR_INIT(nya_catmodder_go, FALSE)
 
 /mob/living/simple_animal/hostile/retaliate/honse/equestria
 	generate_genetics = FALSE
-	icon = 'icons/mrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrow.dmi'
+	icon = 'icons/events/mrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrowmrow.dmi'
 	start_tamed = TRUE
 	indexed = FALSE
 	pixel_x = 0

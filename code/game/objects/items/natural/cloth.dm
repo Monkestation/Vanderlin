@@ -22,8 +22,6 @@
 	var/clean_speed = 0.4 SECONDS
 	var/volume = 9
 
-	// Effectiveness when used as a bandage, how much it'll lower the bloodloss, bloodloss will get multiplied by this.
-	var/bandage_effectiveness = 0 // EXPERIMENTAL CHANGE: BANDAGES STOP ALL BLEEDING
 	///how long it will take to bandage something with this
 	var/bandage_speed = 7 SECONDS
 	///How much you can bleed into the bandage until it needs to be changed
@@ -107,18 +105,20 @@
 	..()
 	user.cure_blind("blindfold_[REF(src)]")
 
+/obj/item/natural/cloth/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(ishuman(interacting_with))
+		if(bandage(interacting_with, user))
+			return ITEM_INTERACT_SUCCESS
+		return ITEM_INTERACT_BLOCKING
 
-// CLEANING
+	var/datum/intent/used = user.used_intent
+	if(istype(used, INTENT_SOAK) && soak_cloth(interacting_with, user))
+		return ITEM_INTERACT_SUCCESS
 
-/obj/item/natural/cloth/attack_atom(obj/O, mob/living/user)
-	switch(user.used_intent.type)
-		if(INTENT_SOAK)
-			soak_cloth(O, user)
-			return TRUE
-		if(INTENT_WRING)
-			wring_cloth(O, user)
-			return TRUE
-	return ..()
+	if(istype(used, INTENT_WRING) && wring_cloth(interacting_with, user))
+		return ITEM_INTERACT_SUCCESS
+
+	return NONE
 
 /obj/item/natural/cloth/attack_self(mob/user, list/modifiers)
 	wring_cloth(user.loc, user)
@@ -135,14 +135,14 @@
 /obj/item/natural/cloth/proc/soak_cloth(atom/target, mob/living/user)
 	if(reagents.total_volume == reagents.maximum_volume)
 		to_chat(user, span_warning("\The [src] is already soaked."))
-		return
+		return FALSE
 	if(isobj(target))
 		var/obj/O = target
 		if(!O.reagents || !O.is_open_container())
-			return
+			return FALSE
 		if(O.reagents.total_volume == 0)
 			to_chat(user, span_warning("It's empty."))
-			return
+			return FALSE
 		if(do_after(user, clean_speed, O))
 			O.reagents.trans_to(src, reagents.maximum_volume, 1, transfered_by = user)
 			user.visible_message(span_small("[user] soaks \the [src] in \the [O]."), span_small("I soak \the [src] in \the [O]."), vision_distance = 2)
@@ -156,35 +156,34 @@
 				user.visible_message(span_small("[user] soaks \the [src] in \the [T]."), span_small("I soak \the [src] in \the [T]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
 				bandage_health = initial(bandage_health)
-				bandage_effectiveness = initial(bandage_effectiveness)
 		else
 			var/datum/liquid_group/lg = T.liquids?.liquid_group
 			if(!lg)
 				to_chat(user, span_warning("Nothing there to soak."))
-				return
+				return FALSE
 			if(do_after(user, clean_speed * 2, T))
 				lg.transfer_to_atom(null, reagents.maximum_volume, src)
 				user.visible_message(span_small("[user] soaks \the [src]."), span_small("I soak \the [src]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
-	update_appearance()
+
+	update_appearance(UPDATE_OVERLAYS)
+	return TRUE
 
 /obj/item/natural/cloth/proc/wring_cloth(atom/target, mob/living/user)
 	if(reagents.total_volume == 0)
 		to_chat(user, span_warning("Nothing to wring out."))
-		return
+		return FALSE
 	if(isobj(target))
 		var/obj/O = target
 		if(!O.reagents || !O.is_open_container())
-			return
+			return FALSE
 		if(O.reagents.total_volume == O.reagents.maximum_volume)
 			to_chat(user, span_warning("It's full."))
-			return
+			return FALSE
 		if(do_after(user, clean_speed * 2.5, O))
 			reagents.trans_to(O, reagents.total_volume, 1, transfered_by = user)
 			user.visible_message(span_small("[user] wrings out \the [src] in \the [O]."), span_small("I wring out \the [src] in \the [O]."), vision_distance = 2)
 			playsound(O, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
-			bandage_health = initial(bandage_health)
-			bandage_effectiveness = initial(bandage_effectiveness)
 	else if(isturf(target))
 		var/turf/T = target
 		if(istype(T, /turf/open/water))
@@ -198,34 +197,38 @@
 				reagents.clear_reagents()
 				user.visible_message(span_small("[user] wrings out \the [src]."), span_small("I wring out \the [src]."), vision_distance = 2)
 				playsound(T, pick('sound/foley/waterwash (1).ogg','sound/foley/waterwash (2).ogg'), 25, FALSE)
-				bandage_health = initial(bandage_health)
-				bandage_effectiveness = initial(bandage_effectiveness)
 
-	update_appearance()
+	bandage_health = initial(bandage_health)
+	update_appearance(UPDATE_OVERLAYS)
 
-// BANDAGING
-/obj/item/natural/cloth/attack(mob/living/M, mob/user, list/modifiers)
-	bandage(M, user)
+	return TRUE
 
 /obj/item/natural/cloth/proc/bandage(mob/living/M, mob/user)
 	if(!M.can_inject(user, TRUE))
-		return
+		return FALSE
+
 	if(!ishuman(M))
-		return
+		return FALSE
+
 	var/mob/living/carbon/human/H = M
 	var/obj/item/bodypart/affecting = H.get_bodypart(check_zone(user.zone_selected))
 	if(!affecting)
-		return
+		return FALSE
+
 	if(affecting.bandage)
-		to_chat(user, "<span class='warning'>There is already a bandage.</span>")
-		return
+		to_chat(user, span_warning("There is already a bandage."))
+		return FALSE
+
 	var/used_time = bandage_speed * (1 - (GET_MOB_SKILL_VALUE_OLD(H, /datum/attribute/skill/misc/medicine) * 0.15))
 	playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 	if(!do_after(user, used_time, M))
-		return
+		return FALSE
+
+	if(!user.temporarilyRemoveItemFromInventory(src))
+		return FALSE
+
 	playsound(src, 'sound/foley/bandage.ogg', 100, FALSE)
 
-	user.dropItemToGround(src)
 	affecting.try_bandage(src)
 	H.update_damage_overlays()
 
@@ -234,6 +237,7 @@
 	else
 		user.visible_message(span_notice("[user] bandages [M]'s [affecting.name]."), span_notice("I bandage [M]'s [affecting.name]."))
 
+	return TRUE
 
 /obj/item/natural/cloth/update_overlays()
 	. = ..()

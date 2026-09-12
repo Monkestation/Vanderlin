@@ -4,10 +4,7 @@
 	sound = 'sound/magic/whiteflame.ogg'
 	self_cast_possible = FALSE
 
-	point_cost = 1
-	attunements = list(
-		/datum/attunement/dark = 0.5,
-	)
+	required_form = FORM_DEATH
 
 	invocation = "Suffer."
 	invocation_type = INVOCATION_SHOUT

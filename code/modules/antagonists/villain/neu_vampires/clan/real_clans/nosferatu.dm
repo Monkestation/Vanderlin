@@ -11,7 +11,7 @@
 		/datum/action/cooldown/spell/undirected/shapeshift/rat_vampire,
 		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
 	)
-	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_NOSTAMINA)
+	lord_traits = list(TRAIT_HEAVYARMOR, TRAIT_MEDIUMARMOR, TRAIT_NOSTAMINA)
 	lord_title = "Nosferatu"
 
 
@@ -38,7 +38,7 @@
 		TRAIT_NOBREATH,
 		TRAIT_NOPAIN,
 		TRAIT_STEELHEARTED,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_VAMPMANSION,
 		TRAIT_VAMP_DREAMS,
 		TRAIT_NOAMBUSH,
@@ -59,7 +59,7 @@
 
 	if(is_vampire)
 		var/obj/item/organ/eyes/night_vision/NV = new()
-		NV.Insert(H, TRUE, FALSE)
+		NV.Insert(H, TRUE, movement_flags = DELETE_IF_REPLACED)
 		H.ventcrawler = VENTCRAWLER_ALWAYS //I don't think this does anything because we have no vents
 
 /datum/clan/nosferatu/apply_clan_components(mob/living/carbon/human/H)

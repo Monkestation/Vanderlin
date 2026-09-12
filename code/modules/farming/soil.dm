@@ -86,7 +86,7 @@
 	if(!produce_ready)
 		return
 	apply_farming_fatigue(user, 4)
-	add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2)
+	user.add_sleep_experience(/datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2)
 
 	return_nutrients_to_soil()
 	var/farming_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
@@ -117,6 +117,8 @@
 	to_chat(user, span_notice(feedback))
 	yield_produce(modifier)
 	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
+
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_PLANT_HARVESTED, src, user, drop_location())
 
 /obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
@@ -241,14 +243,14 @@
 			apply_farming_fatigue(user, 20)
 			to_chat(user, span_notice("I rip out the weeds."))
 			deweed()
-			add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
+			user.add_sleep_experience(/datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 			SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		apply_farming_fatigue(user, 10)
 		to_chat(user, span_notice("I rip out the weeds with the [attacking_item]"))
 		deweed()
-		add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
+		user.add_sleep_experience(/datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 		SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	return FALSE
@@ -286,7 +288,7 @@
 			to_chat(user, span_notice("I remove the crop."))
 			playsound(src,'sound/items/seed.ogg', 100, FALSE)
 			uproot()
-			add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
+			user.add_sleep_experience(/datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 		return
 	. = ..()
 
@@ -298,34 +300,35 @@
 	if(try_handle_deweed(null, user, null))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-/obj/structure/soil/attackby_secondary(obj/item/weapon, mob/user, list/modifiers)
-	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
-		return
-	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_deweed(weapon, user, null))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
-	if(try_handle_flatten(weapon, user, null))
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+/obj/structure/soil/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(try_handle_seed_planting(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
-/obj/structure/soil/attackby(obj/item/attacking_item, mob/user, list/modifiers)
-	user.changeNext_move(CLICK_CD_FAST)
-	if(try_handle_seed_planting(attacking_item, user))
-		return
-	if(try_handle_uprooting(attacking_item, user))
-		return
-	if(try_handle_tilling(attacking_item, user))
-		return
-	if(try_handle_watering(attacking_item, user))
-		return
-	if(try_handle_harvest(attacking_item, user))
-		return
-	if(try_handle_fertilizing(attacking_item, user))
-		return
-	for(var/obj/item/bagged_item in attacking_item.contents)
+	if(try_handle_uprooting(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_tilling(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_watering(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_harvest(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_fertilizing(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	for(var/obj/item/bagged_item in tool.contents)
 		if(try_handle_fertilizing(bagged_item, user))
-			return
-	return ..()
+			return ITEM_INTERACT_SUCCESS
+
+/obj/structure/soil/item_interaction_secondary(mob/living/user, obj/item/tool, list/modifiers)
+	if(try_handle_deweed(tool, user))
+		return ITEM_INTERACT_SUCCESS
+
+	if(try_handle_flatten(tool, user))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/structure/soil/proc/on_stepped(mob/living/stepper)
 	if(!plant)
@@ -1003,7 +1006,7 @@
 	// Nutrient deficiency affects plant health only if nutrients are required but unavailable
 	var/any_nutrients_needed = (nitrogen_needed > 0 || phosphorus_needed > 0 || potassium_needed > 0)
 	if(any_nutrients_needed && limiting_factor < 0.1)
-		adjust_plant_health(-dt * NUTRIENT_DEFICIENCY_DAMAGE_RATE)
+		actual_growth_time *= 0.75
 
 	return add_growth(actual_growth_time)
 

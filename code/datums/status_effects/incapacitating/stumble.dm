@@ -1,6 +1,7 @@
 //STUMBLE
 /datum/status_effect/incapacitating/stumble
 	id = "stumble"
+	tick_interval = STATUS_EFFECT_NO_TICK
 	var/didknockdown = FALSE
 
 /datum/status_effect/incapacitating/stumble/on_apply()

@@ -29,17 +29,13 @@
 	pack_message = "Choose your past"
 	outfit = /datum/outfit/bloodsucker
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodsucker
-	traits = list(
-		TRAIT_NOPAINSTUN,
-		TRAIT_DODGEEXPERT
-	)
 	cmode_music = 'sound/music/cmode/antag/CombatBeest.ogg'
 
 /datum/job/advclass/wretch/bloodsucker/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(spawned.mind)
-		spawned.set_clan(/datum/clan/caitiff, TRUE)
-		spawned.give_coven(/datum/coven/potence)
+		var/datum/antagonist/vampire/new_antag = new /datum/antagonist/vampire/outcast(/datum/clan/caitiff, TRUE)
+		spawned.mind.add_antag_datum(new_antag)
 
 /datum/outfit/bloodsucker
 	head = /obj/item/clothing/head/articap
@@ -50,7 +46,7 @@
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/weapon/knife/cleaver/combat
 	beltr = /obj/item/storage/belt/pouch/coins/mid
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backl = /obj/item/storage/backpack/satchel/black
 	backpack_contents = list(
 		/obj/item/clothing/face/shepherd/rag = 1

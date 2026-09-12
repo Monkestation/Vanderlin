@@ -48,9 +48,12 @@
 		return FALSE
 
 	var/list/modifiers = params2list(params)
-	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
+	if(LAZYACCESS(modifiers, ALT_CLICKED))
 		var/datum/hud/our_hud = usr.hud_used
 		our_hud.position_action(src, SCRN_OBJ_DEFAULT)
+		return TRUE
+	if(LAZYACCESS(modifiers, SHIFT_CLICKED))
+		examine_ui(usr)
 		return TRUE
 	if(usr.next_click > world.time)
 		return
@@ -60,6 +63,16 @@
 		trigger_flags |= TRIGGER_SECONDARY_ACTION
 	linked_action.Trigger(trigger_flags = trigger_flags)
 	return TRUE
+
+/atom/movable/screen/movable/action_button/examine_ui(mob/user)
+	var/list/inspec = list("----------------------")
+	inspec += "<br>[span_notice("<span class='notice'><b>[linked_action.name]</b>")]</span>"
+	if(linked_action.desc)
+		inspec += "<br>[linked_action.desc]"
+	inspec += "[extra_info(user)]"
+
+	inspec += "<br>----------------------"
+	to_chat(user, "[inspec.Join()]")
 
 // Entered and Exited won't fire while you're dragging something, because you're still "holding" it
 // Very much byond logic, but I want nice behavior, so we fake it with drag

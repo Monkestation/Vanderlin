@@ -4,7 +4,7 @@
 
 /datum/component/martyr_weapon
 	/// Areas in which activation is allowed
-	var/list/allowed_areas = list(/area/indoors/town/church/chapel)
+	var/list/allowed_areas = list(/area/indoors/town/church/chapel, /area/indoors/town/church, /area/outdoors/exposed/church, /area/outdoors/exposed/church/graveyard, /area/indoors/town/church/crypt)
 	/// Patrons which are allowed to hold
 	var/list/allowed_patrons = list(/datum/patron/divine/ravox)
 	/// Jobs which are allowed to hold
@@ -238,7 +238,7 @@
 /// Real activation because we have input
 /datum/component/martyr_weapon/proc/take_oath(mob/living/user)
 	var/area/A = get_area(user)
-	if(!length(allowed_areas) || allowed_areas[A])
+	if(!length(allowed_areas) || allowed_areas[A.type])
 		var/string = "You are within holy grounds. Do you wish to call your god to aid in its defense? (You will live if the duration ends within the Church.)"
 		if(tgui_alert(user, string, "OATH", DEFAULT_INPUT_CONFIRMATIONS) != CHOICE_CONFIRM)
 			return

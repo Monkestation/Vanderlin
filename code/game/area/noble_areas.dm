@@ -13,6 +13,10 @@
 	. = ..()
 	first_time_text = "THE KEEP OF [uppertext(SSmapping.config.map_name)]"
 
+/area/indoors/town/keep/thewall
+	name = "Keep Wall"
+	icon_state = "wall"
+
 /area/outdoors/town/keep
 	name = "Keep Grounds"
 	icon = 'icons/turf/areas/manor.dmi'
@@ -22,6 +26,17 @@
 	. = ..()
 	first_time_text = "[uppertext(SSmapping.config.map_name)] KEEP GROUNDS"
 
+/area/outdoors/town/keep/roof
+	name = "Keep Roof"
+	icon_state = "manor_roof"
+
+/area/outdoors/town/keep/stable
+	name = "Keep Stables"
+	icon_state = "manor_stable"
+
+/area/outdoors/town/keep/forge
+	name = "Royal Forge"
+	icon_state = "manor_forge"
 
 /area/indoors/town/keep/throne
 	name = "Throne Room"
@@ -38,6 +53,38 @@
 /area/indoors/town/keep/hand
 	name = "Hand's Room"
 	icon_state = "hand"
+
+/area/indoors/town/keep/courtagent
+	name = "Court Agent's Hideout"
+	icon_state = "court agent"
+	background_track = 'sound/music/area/manorgarri.ogg'
+	background_track_dusk = null
+	background_track_night = null
+
+/area/indoors/town/keep/passages
+	name = "Keep Passages"
+	icon_state = "passage"
+
+/area/indoors/town/keep/passages/basement
+	name = "Keep Passages (Basement)"
+	icon_state = "passage_base"
+	converted_type = /area/outdoors/exposed
+
+/area/indoors/town/keep/passages/groundfloor
+	name = "Keep Passages (Ground)"
+	icon_state = "passage_ground"
+
+/area/indoors/town/keep/passages/firstfloor
+	name = "Keep Passages (First Floor)"
+	icon_state = "passage_first"
+
+/area/indoors/town/keep/passages/secondfloor
+	name = "Keep Passages (Second Floor)"
+	icon_state = "passage_second"
+
+/area/indoors/town/keep/passages/thirdfloor
+	name = "Keep Passages (Third Floor)"
+	icon_state = "passage_third"
 
 /area/indoors/town/keep/phys
 	name = "Court Physician's Office"
@@ -96,7 +143,7 @@
 	icon_state = "servant_head"
 
 /area/indoors/town/keep/library
-	name = "Keep Libray"
+	name = "Keep Library"
 	icon_state = "library"
 
 /area/indoors/town/keep/archivist
@@ -126,6 +173,10 @@
 /area/indoors/town/keep/guest/guest2
 	name = "Keep Guest Room 2"
 	icon_state = "guest2"
+
+/area/indoors/town/keep/guest/guest3
+	name = "Keep Guest Room 3"
+	icon_state = "guest3"
 
 /area/indoors/town/keep/guest/meeting
 	name = "Keep Meeting Room"
@@ -161,6 +212,31 @@
 	background_track = 'sound/music/area/manorgarri.ogg'
 	background_track_dusk = null
 	background_track_night = 'sound/music/area/deliverer.ogg'
+
+/area/indoors/town/keep/basement
+	name = "Keep Basement"
+	icon_state = "manor_basement"
+	converted_type = /area/outdoors/exposed
+
+/area/indoors/town/keep/basement/royalknight
+	name = "Royal Guard Storage"
+	icon_state = "manor_knightstore"
+
+/area/indoors/town/keep/basement/thepit
+	name = "Execution Pit"
+	icon_state = "manor_pit"
+
+/area/indoors/town/keep/basement/wine
+	name = "Royal Wine Cellar"
+	icon_state = "manor_wine"
+
+/area/indoors/town/keep/basement/ale
+	name = "Royal Ale Cellar"
+	icon_state = "manor_ale"
+
+/area/indoors/town/keep/basement/bath
+	name = "Royal Baths"
+	icon_state = "manor_bath"
 
 /area/outdoors/exposed/manorgarri
 	icon_state = "manorgarri"

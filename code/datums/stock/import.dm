@@ -42,7 +42,7 @@
 	new /obj/item/clothing/cloak/half/guard(src)
 	new /obj/item/clothing/armor/gambeson(src)
 	new	/obj/item/clothing/pants/trou/leather/guard(src)
-	new /obj/item/clothing/shoes/boots(src)
+	new /obj/item/clothing/shoes/boots/darkboots(src)
 	new /obj/item/clothing/neck/gorget(src)
 	new /obj/item/weapon/mace/cudgel(src)
 
@@ -59,7 +59,7 @@
 	new /obj/item/clothing/cloak/stabard/guard(src)
 	new /obj/item/clothing/armor/chainmail(src)
 	new /obj/item/clothing/pants/trou/leather/guard(src)
-	new /obj/item/clothing/shoes/boots(src)
+	new /obj/item/clothing/shoes/boots/darkboots(src)
 	new /obj/item/weapon/knife/dagger/steel(src)
 	new /obj/item/weapon/polearm/spear/billhook(src)
 

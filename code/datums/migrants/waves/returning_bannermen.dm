@@ -25,30 +25,6 @@
 		/datum/attribute/skill/misc/riding = 30,
 	)
 
-/datum/attribute_holder/sheet/job/migrant/serjeant_at_arms/old
-	raw_attribute_list = list(
-		STAT_STRENGTH = 5,
-		STAT_INTELLIGENCE = 4,
-		STAT_ENDURANCE = 4,
-		STAT_SPEED = 1,
-		STAT_PERCEPTION = 1,
-		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/combat/bows = 30,
-		/datum/attribute/skill/combat/crossbows = 30,
-		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/combat/swords = 30,
-		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/combat/whipsflails = 30,
-		/datum/attribute/skill/combat/knives = 30,
-		/datum/attribute/skill/combat/shields = 30,
-		/datum/attribute/skill/misc/swimming = 20,
-		/datum/attribute/skill/misc/climbing = 20,
-		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/misc/riding = 30,
-	)
-
 /datum/job/migrant/serjeant_at_arms
 	title = "Serjeant-at-Arms"
 	tutorial = "You were a part of an expedition sent by the Monarch to Kingsfield, you and those under your command have returned upon fulfilling your task."
@@ -58,10 +34,10 @@
 	is_foreigner = FALSE
 	exp_types_granted  = list(EXP_TYPE_COMBAT)
 	attribute_sheet = /datum/attribute_holder/sheet/job/migrant/serjeant_at_arms
-	attribute_sheet_old = /datum/attribute_holder/sheet/job/migrant/serjeant_at_arms/old
 
 	traits = list(
 		TRAIT_HEAVYARMOR,
+		TRAIT_MEDIUMARMOR,
 		TRAIT_STEELHEARTED,
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
@@ -80,7 +56,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/guardsecond
 	armor = /obj/item/clothing/armor/medium/scale
 	neck = /obj/item/clothing/neck/gorget
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/sword/arming
 	beltl = /obj/item/storage/keyring/guard
@@ -141,7 +117,7 @@
 	backr = /obj/item/gun/ballistic/bow
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/merc
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/guard
 	beltr = /obj/item/ammo_holder/quiver/arrows
@@ -207,7 +183,7 @@
 	backr = /obj/item/gun/ballistic/bow/cross
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/merc
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/guard
 	beltr = /obj/item/ammo_holder/quiver/bolts
@@ -277,7 +253,7 @@
 	beltl = /obj/item/weapon/mace
 	pants = /obj/item/clothing/pants/trou/leather
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 
 /datum/migrant_role/pikeman_bannerman
@@ -331,17 +307,18 @@
 	beltr = /obj/item/weapon/sword/scimitar/messer
 	pants = /obj/item/clothing/pants/trou/leather
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 
-/datum/outfit/pikeman_bannerman/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/job/migrant/pikeman_bannerman/on_roundstart(mob/living/carbon/human/equipped_human, client/player_client)
 	. = ..()
-	var/weapontype = pickweight(list("Spear" = 6, "Bardiche" = 4))
-	switch(weapontype)
+	var/static/list/weapons = list("Spear", "Bardiche")
+	var/weapon_choice = browser_input_list(equipped_human, "CHOOSE YOUR WEAPON.", "FOR THE CROWN.", weapons)
+	switch(weapon_choice)
 		if("Spear")
-			backr = /obj/item/weapon/polearm/spear
+			equipped_human.equip_to_slot_or_del(new /obj/item/weapon/polearm/spear, ITEM_SLOT_BACK_R, TRUE)
 		if("Bardiche")
-			backr = /obj/item/weapon/polearm/halberd/bardiche
+			equipped_human.equip_to_slot_or_del(new /obj/item/weapon/polearm/halberd/bardiche, ITEM_SLOT_BACK_R, TRUE)
 
 /datum/migrant_wave/returning_bannermen
 	name = "The Bannermen's Return"

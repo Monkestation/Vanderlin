@@ -17,23 +17,24 @@
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/gloves/plate
 	prevent_crits = ALL_EXCEPT_STAB
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 
 	grid_width = 64
 	grid_height = 32
 	item_weight = 1.65 KILOGRAMS
 
 	material_category = ARMOR_MAT_PLATE
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/gloves/plate/iron
 	name = "iron plate gauntlets"
 	desc = "Plated gauntlets made out of iron. Offers good protection against melee attacks."
 	icon_state = "igauntlets"
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
-	max_integrity = INTEGRITY_STRONG
+	armor_type = /datum/armor/gloves/plate/bad
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/gloves/plate/iron/banded
 	name = "banded iron gauntlets"
@@ -51,8 +52,8 @@
 	item_state = "rustgloves"
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
-	armor = ARMOR_PLATE_BAD
-	max_integrity = INTEGRITY_STANDARD
+	armor_type = /datum/armor/gloves/plate/bad
+	max_integrity = INTEGRITY_OLD_STANDARD
 
 /obj/item/clothing/gloves/plate/blk
 	name = "blacksteel gauntlets"
@@ -64,15 +65,16 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
-	armor = ARMOR_PLATE_GOOD
+	armor_type = /datum/armor/gloves/plate/good
 	item_weight = 1.65 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 /obj/item/clothing/gloves/plate/silver
 	name = "silver gauntlets"
 	desc = "Finely forged gauntlets made out of silver."
 	icon_state = "silvergloves"
-	armor = ARMOR_PLATE_SILVER
+	armor_type = /datum/armor/gloves/plate/silver
 	smeltresult = /obj/item/ingot/silver
 	item_weight = 2.94 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
@@ -82,41 +84,45 @@
 	enchant(/datum/enchantment/silver)
 
 	//............... Evil Gloves ............... //
+/obj/item/clothing/gloves/plate/inhumen
+	name = "BASE INHUMEN GAUNTLETS"
+	abstract_type = /obj/item/clothing/gloves/plate/inhumen
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizogauntlets"
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 
-/obj/item/clothing/gloves/plate/zizo
+/obj/item/clothing/gloves/plate/inhumen/zizo
 	name = "darksteel gauntlets"
 	desc = "darksteel plate gauntlets. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizogauntlets"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
-/obj/item/clothing/gloves/plate/matthios
+/obj/item/clothing/gloves/plate/inhumen/matthios
 	name = "gilded gauntlets"
 	desc = "Shimmering plate gauntlets. Many riches have been taken with these, and just as many lives."
 	icon_state = "matthiosgloves"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
 
-/obj/item/clothing/gloves/plate/graggar
+/obj/item/clothing/gloves/plate/inhumen/graggar
 	name = "vicious gauntlets"
 	desc = "Plate gauntlets that reek of death. Many lives have been taken with these."
 	icon_state = "graggarplategloves"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
 
-/obj/item/clothing/gloves/plate/graggar/heavy
+/obj/item/clothing/gloves/plate/inhumen/graggar/heavy
 	name = "vicious plated gauntlets"
 	desc = "Steel plated gauntlets overlaid by an ornamental imagery of fractured bone and entrails. The violet smears; a tether to the life that once was - and now, a stinging reminder of what could've been."
 	icon_state = "graggarplategloves_heavy"
 	sleeved = 'icons/roguetown/clothing/onmob/gloves.dmi'
 	icon = 'icons/roguetown/clothing/gloves.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gloves.dmi'
+
+/obj/item/clothing/gloves/plate/inhumen/baotha
+	name = "saccharine gauntlets"
+	desc = "Tantalizing plate gauntlets, you almost feel like you can't take them off..."
+	icon_state = "baothagloves"
 
 //............... Gronnic gloves ............... //
 /obj/item/clothing/gloves/plate/iron/gronn
@@ -143,3 +149,9 @@
 		return
 	detail_color = GLOB.noble_dyes[choice]
 	update_appearance(UPDATE_ICON)
+
+//............... Cadwyn gloves ............... //
+/obj/item/clothing/gloves/plate/cadwyn
+	name = "cadwyn gauntlets"
+	desc = "Metal gauntlets wrapped in the chains the Order is named for. Let no bite or claw reach you."
+	icon_state = "cadwyngauntlets"

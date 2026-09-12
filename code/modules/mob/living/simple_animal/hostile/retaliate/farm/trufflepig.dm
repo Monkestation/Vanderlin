@@ -65,8 +65,8 @@
 			. += span_notice("This truffle looks safe to eat.")
 
 /obj/item/reagent_containers/food/snacks/truffles/toxic
-	list_reagents = list(/datum/reagent/berrypoison/shroom = 4)
-	grind_results = list(/datum/reagent/berrypoison/shroom = 8)
+	list_reagents = list(/datum/reagent/poison/berry/shroom = 4)
+	grind_results = list(/datum/reagent/poison/berry/shroom = 8)
 	poisonous = TRUE
 
 /obj/item/reagent_containers/food/snacks/cooked/truffle
@@ -110,7 +110,7 @@
 	icon_gib = "piggie_dead"
 
 	animal_species = /mob/living/simple_animal/hostile/retaliate/trufflepig
-	faction = list("goats")
+	faction = list(FACTION_NEUTRAL)
 	footstep_type = FOOTSTEP_MOB_SHOE
 	emote_see = list("eyes the surroundings.", "flicks its ears.")
 	deathsound = 'sound/vo/mobs/pig/hangry.ogg'

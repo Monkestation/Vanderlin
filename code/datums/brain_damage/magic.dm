@@ -9,8 +9,8 @@
 	name = "Lumiphobia"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I feel a craving for darkness.</span>"
-	lose_text = "<span class='notice'>Light no longer bothers you.</span>"
+	gain_text = span_warning("I feel a craving for darkness.")
+	lose_text = span_notice("Light no longer bothers you.")
 	var/next_damage_warning = 0
 
 /datum/brain_trauma/magic/lumiphobia/on_life()
@@ -20,7 +20,7 @@
 		var/light_amount = T.get_lumcount()
 		if(light_amount > SHADOW_SPECIES_LIGHT_THRESHOLD) //if there's enough light, start dying
 			if(world.time > next_damage_warning)
-				to_chat(owner, "<span class='warning'><b>The light burns you!</b></span>")
+				to_chat(owner, span_warning("<b>The light burns you!</b>"))
 				next_damage_warning = world.time + 100 //Avoid spamming
 			owner.take_overall_damage(0,3)
 
@@ -28,8 +28,8 @@
 	name = "Poltergeist"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I feel a hateful presence close to you.</span>"
-	lose_text = "<span class='notice'>I feel the hateful presence fade away.</span>"
+	gain_text = span_warning("I feel a hateful presence close to you.")
+	lose_text = span_notice("I feel the hateful presence fade away.")
 
 /datum/brain_trauma/magic/poltergeist/on_life()
 	..()
@@ -49,8 +49,8 @@
 	name = "Athaumasia"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='notice'>I realize that magic cannot be real.</span>"
-	lose_text = "<span class='notice'>I realize that magic might be real.</span>"
+	gain_text = span_notice("I realize that magic cannot be real.")
+	lose_text = span_notice("I realize that magic might be real.")
 
 /datum/brain_trauma/magic/antimagic/on_gain()
 	ADD_TRAIT(owner, TRAIT_ANTIMAGIC, TRAUMA_TRAIT)

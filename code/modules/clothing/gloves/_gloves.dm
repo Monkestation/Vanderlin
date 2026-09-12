@@ -24,7 +24,7 @@
 	resistance_flags = FIRE_PROOF
 
 	attack_verb = list("challenged")
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 
 	strip_delay = 2 SECONDS
 	equip_delay_other = 4 SECONDS

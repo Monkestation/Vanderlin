@@ -26,6 +26,7 @@
 	for(var/i = 1 to amount)
 		new /obj/item/book/playerbook(src)
 
+
 /obj/structure/bookcase/random/apocrypha
 	name = "bookcase (Apocrypha & Grimoires)"
 	category = "Apocrypha & Grimoires"
@@ -50,6 +51,62 @@
 	name = "bookcase (Random)"
 	category = "Eoratica"
 	desc = "This is an improper bookcase. Please exit the game and inform your local mapper where this is and to replace it."
+
+/obj/structure/bookcase/fancy/random
+	var/category = null
+	var/book_count = 10
+	anchored = TRUE
+	state = 2
+	based = "a"
+
+/obj/structure/bookcase/fancy/random/Initialize(mapload)
+	. = ..()
+	based = pick("a","b","c","d","e","f","g","h")
+	state = 2
+	anchored = TRUE
+	book_count = rand(5,10) // Set book_count between 5 and 10
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/structure/bookcase/fancy/random/LateInitialize()
+	create_random_books(book_count)
+	update_appearance(UPDATE_ICON_STATE)
+	return ..()
+
+/obj/structure/bookcase/fancy/random/proc/create_random_books(amount = 2)
+	. = list()
+	if (!isnum(amount) || amount < 1)
+		return
+
+	for(var/i = 1 to amount)
+		new /obj/item/book/playerbook(src)
+
+
+
+/obj/structure/bookcase/fancy/random/apocrypha
+	name = "fancy bookcase (Apocrypha & Grimoires)"
+	category = "Apocrypha & Grimoires"
+
+/obj/structure/bookcase/fancy/random/myths
+	name = "fancy bookcase (Myths & Tales)"
+	category = "Myths & Tales"
+
+/obj/structure/bookcase/fancy/random/legends
+	name = "fancy bookcase (Legends & Accounts)"
+	category = "Legends & Accounts"
+
+/obj/structure/bookcase/fancy/random/thesis
+	name = "fancy bookcase (Thesis)"
+	category = "Thesis"
+
+/obj/structure/bookcase/fancy/random/eoratica
+	name = "fancy bookcase (Eoratica)"
+	category = "Eoratica"
+
+/obj/structure/bookcase/fancy/random/archive // Deprecated subtype, used in the old code. Swap these out for one of the types above whenever possible.
+	name = "fancy bookcase (Random)"
+	category = "Eoratica"
+	desc = "This is an improper bookcase. Please exit the game and inform your local mapper where this is and to replace it."
+
 
 /obj/item/book/random_book
 	var/book_category = null

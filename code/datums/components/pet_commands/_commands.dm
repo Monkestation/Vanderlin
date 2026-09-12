@@ -96,7 +96,7 @@
  * if check_verbosity is true, skip the match if there spoken_text is way longer than the match
  */
 /datum/pet_command/proc/find_command_in_text(spoken_text, check_verbosity = FALSE)
-	for (var/command as anything in speech_commands)
+	for (var/command in speech_commands)
 		if (!findtext(spoken_text, command))
 			continue
 		if(check_verbosity && length(spoken_text) > length(command) + MAX_NAME_LEN)

@@ -84,13 +84,15 @@ GLOBAL_LIST_INIT(quirk_registry, init_quirk_registry())
 	var/customization_placeholder = "Enter text..."
 
 	/// List of allowed ages (empty = all allowed)
-	var/list/allowed_ages = list()
+	var/list/allowed_ages
 	/// List of blocked ages
-	var/list/blocked_ages = list()
+	var/list/blocked_ages
 	/// List of allowed species (empty = all allowed)
-	var/list/allowed_species = list()
+	var/list/allowed_species
 	/// List of blocked species
-	var/list/blocked_species = list()
+	var/list/blocked_species
+	/// List of traits to add
+	var/list/traits_to_add
 
 /datum/quirk/New(mob/living/new_owner, custom_value = null)
 	. = ..()
@@ -126,10 +128,16 @@ GLOBAL_LIST_INIT(quirk_registry, init_quirk_registry())
 
 /// Called when the quirk is applied to a character
 /datum/quirk/proc/on_spawn()
+	SHOULD_CALL_PARENT(TRUE)
+	if(length(traits_to_add))
+		owner.add_traits(traits_to_add, "[type]")
 	return
 
 /// Called when the quirk is removed
 /datum/quirk/proc/on_remove()
+	SHOULD_CALL_PARENT(TRUE)
+	if(!QDELETED(owner))
+		REMOVE_TRAITS_IN(owner, "[type]")
 	return
 
 /// Called when you are examined
@@ -163,13 +171,13 @@ GLOBAL_LIST_INIT(quirk_registry, init_quirk_registry())
 	// Check age restrictions
 	if(length(allowed_ages) && !(prefs.read_preference(/datum/preference/choiced/age) in allowed_ages))
 		return FALSE
-	if(prefs.read_preference(/datum/preference/choiced/age) in blocked_ages)
+	if(length(blocked_ages) && (prefs.read_preference(/datum/preference/choiced/age) in blocked_ages))
 		return FALSE
 
 	// Check species restrictions
 	if(length(allowed_species) && !is_type_in_list(prefs.pref_species, allowed_species))
 		return FALSE
-	if(is_type_in_list(prefs.pref_species, blocked_species))
+	if(length(blocked_species) && is_type_in_list(prefs.pref_species, blocked_species))
 		return FALSE
 
 	return TRUE

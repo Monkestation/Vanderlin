@@ -30,9 +30,9 @@
 	}
 
 /**
-  * The shadow cone's mask and visual images holder which can't locate inside the mob,
-  * lest they inherit the mob opacity and cause a lot of hindrance
-  */
+ * The shadow cone's mask and visual images holder which can't locate inside the mob,
+ * lest they inherit the mob opacity and cause a lot of hindrance
+ */
 /atom/movable/screen/fov_holder
 	name = "field of vision holder"
 	icon = 'icons/hud/fov_15x15.dmi'
@@ -97,9 +97,9 @@
 			addtimer(CALLBACK(GLOBAL_PROC, GLOBAL_PROC_REF(remove_image_from_clients), fov_image, clients_shown), time)
 
 /**
-  * Field of Vision component. Does totally what you probably think it does,
-  * ergo preventing players from seeing what's behind them.
-  */
+ * Field of Vision component. Does totally what you probably think it does,
+ * ergo preventing players from seeing what's behind them.
+ */
 /datum/component/field_of_vision
 	can_transfer = TRUE
 	/// Our screen object
@@ -197,9 +197,9 @@
 	UnregisterSignal(source, COMSIG_ATOM_UPDATE_APPEARANCE)
 
 /**
-  * Generates the holder and images (if not generated yet) and adds them to client.images.
-  * Run when the component is registered to a player mob, or upon login.
-  */
+ * Generates the holder and images (if not generated yet) and adds them to client.images.
+ * Run when the component is registered to a player mob, or upon login.
+ */
 /datum/component/field_of_vision/proc/generate_fov_holder(mob/living/source, shadow_angle = FOV_90_DEGREES, angle = 0, register = TRUE, delete_holder = FALSE)
 	if(fov_holder && delete_holder)
 		current_fov_size = list(15, 15)
@@ -270,9 +270,9 @@
 	fov_holder.transform = visual_shadow.transform = shadow_mask.transform = shadow_mask.transform.Turn(fov_holder.transform, simple_degrees)
 
 /**
-  * Resizes the shadow to match the current screen size.
-  * Run when the client view size is changed, or if the player has a viewsize different than "15x15" on login/comp registration.
-  */
+ * Resizes the shadow to match the current screen size.
+ * Run when the client view size is changed, or if the player has a viewsize different than "15x15" on login/comp registration.
+ */
 /datum/component/field_of_vision/proc/resize_fov(list/old_view, list/new_view)
 	//Edges are still of the same length.
 	if(old_view ~= new_view)
@@ -464,9 +464,9 @@
 		resize_fov(old_view, view)
 
 /**
-  * Called when the owner mob moves around. Used to keep shadow located right behind us,
-  * As well as modify the owner mask to match the topmost item.
-  */
+ * Called when the owner mob moves around. Used to keep shadow located right behind us,
+ * As well as modify the owner mask to match the topmost item.
+ */
 /datum/component/field_of_vision/proc/on_mob_moved(mob/living/source, atom/oldloc, dir, forced)
 	SIGNAL_HANDLER
 
@@ -507,12 +507,12 @@
 #undef UNREGISTER_NESTED_LOCS
 
 /**
-  * Byond doc is not entirely correct on the integrated arctan() proc.
-  * When both x and y are negative, the output is also negative, cycling clockwise instead of counter-clockwise.
-  * That's also why I am extensively using the SIMPLIFY_DEGREES macro here.
-  *
-  * Overall this is the main macro that calculates wheter a target is within the shadow cone angle or not.
-  */
+ * Byond doc is not entirely correct on the integrated arctan() proc.
+ * When both x and y are negative, the output is also negative, cycling clockwise instead of counter-clockwise.
+ * That's also why I am extensively using the SIMPLIFY_DEGREES macro here.
+ *
+ * Overall this is the main macro that calculates wheter a target is within the shadow cone angle or not.
+ */
 #define FOV_ANGLE_CHECK(mob, target, zero_x_y_statement, success_statement) \
 	var/turf/T1 = get_turf(target);\
 	var/turf/T2 = get_turf(mob);\

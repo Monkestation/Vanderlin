@@ -7,7 +7,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gloves.dmi'
 	icon_state = "clothwraps"
 	item_state = "clothwraps"
-	armor = ARMOR_GLOVES_LEATHER
+	armor_type = /datum/armor/gloves/leather
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT)
 	max_integrity = 50
 	resistance_flags = FIRE_PROOF

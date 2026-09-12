@@ -1,13 +1,12 @@
 /mob/living/simple_animal/hostile/retaliate/gator
-	icon = 'icons/mob/gator.dmi'
 	name = "gator"
 	desc = "Vicious and patient creachers; tales have been told of passersby being grabbed and dragged underwater, never to be seen again."
+	icon = 'icons/mob/gator.dmi'
 	icon_state = "gator"
 	icon_living = "gator"
 	icon_dead = "gator-dead"
 	SET_BASE_PIXEL(-32, 1)
 
-	faction = list("gators")
 	move_to_delay = 12
 	vision_range = 5
 	aggro_vision_range = 5

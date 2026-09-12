@@ -276,7 +276,7 @@
 	dat += "<span class='stat-label'>Boons:</span> <span class='stat-value [boon_count >= MAX_BOONS ? "at-limit" : ""]'>[boon_count]/[MAX_BOONS]</span>"
 	dat += "</div>"
 	dat += "<div class='quirk-actions'>"
-	dat += "<a href='?src=\ref[src];quirk_clear=1' class='action-button clear-button'>Clear All</a>"
+	dat += "<a href='byond://?src=\ref[src];quirk_clear=1' class='action-button clear-button'>Clear All</a>"
 	dat += "</div>"
 	dat += "</div>"
 

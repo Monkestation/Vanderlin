@@ -6,7 +6,8 @@
 #define COMSIG_MOVABLE_POST_THROW "movable_post_throw"			//from base of atom/movable/throw_at(): (datum/thrownthing, spin)
 ///from base of datum/thrownthing/finalize(): (obj/thrown_object, datum/thrownthing) used for when a throw is finished
 #define COMSIG_MOVABLE_THROW_LANDED "movable_throw_landed"
-#define COMSIG_MOVABLE_Z_CHANGED "movable_ztransit" 			//from base of atom/movable/onTransitZ(): (old_z, new_z)
+///from base of atom/movable/onTransitZ(): (turf/old_turf, turf/new_turf)
+#define COMSIG_MOVABLE_Z_CHANGED "movable_ztransit"
 /// from /atom/movable/can_z_move(): (turf/start, turf/destination)
 #define COMSIG_CAN_Z_MOVE "movable_can_z_move"
 	/// Return to block z movement

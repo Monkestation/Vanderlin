@@ -131,9 +131,9 @@
 	smeltresult = /obj/item/fertilizer/ash
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/neck/leather
 	body_parts_covered = NECK|HAIR|EARS|HEAD
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	prevent_crits = CUT_AND_MINOR_CRITS
 	item_weight = 850 GRAMS
 
@@ -162,7 +162,7 @@
 
 /obj/item/clothing/neck/coif/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/coif/cloth
 	name = "padded coif"
@@ -175,7 +175,7 @@
 	toggle_icon_state = TRUE
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/neck/padded
 	body_parts_covered = NECK|HAIR|EARS|HEAD
 	prevent_crits = MINOR_CRITICALS
 	item_weight = 250 GRAMS
@@ -206,8 +206,8 @@
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
 
-	armor = ARMOR_LEATHER
-	max_integrity = INTEGRITY_WORST
+	armor_type = /datum/armor/neck/leather
+	max_integrity = INTEGRITY_OLD_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 	item_weight = 275 GRAMS
 
@@ -228,8 +228,8 @@
 	resistance_flags = FLAMMABLE
 	smeltresult = /obj/item/fertilizer/ash
 
-	armor = ARMOR_LEATHER
-	max_integrity = INTEGRITY_WORST
+	armor_type = /datum/armor/neck/leather
+	max_integrity = INTEGRITY_OLD_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 
 /obj/item/clothing/neck/bellcollar/Initialize()
@@ -270,15 +270,13 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
-	smeltresult = null
-	melting_material = /datum/material/steel
-	melt_amount = 100
+	smeltresult = /obj/item/ingot/steel_slag
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/neck/maille
 	body_parts_covered = NECK|HAIR|EARS|HEAD
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
 	item_weight = 1 KILOGRAMS
@@ -310,7 +308,7 @@
 
 /obj/item/clothing/neck/chaincoif/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/chaincoif/iron
 	icon_state = "ichaincoif"
@@ -318,11 +316,9 @@
 	desc = "A chain coif made of interwoven iron rings. Affordable protection against arrows and blades, \
 			but should be used as padding rather than relied upon as armor."
 	smeltresult = /obj/item/ingot/iron
-	melting_material = /datum/material/iron
-	melt_amount = 100
 
-	armor = ARMOR_MAILLE_IRON
-	max_integrity = INTEGRITY_STRONG
+	armor_type = /datum/armor/neck/maille/iron
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/neck/gorget/copper
 	name = "neck protector"
@@ -331,8 +327,8 @@
 	smeltresult = /obj/item/ingot/copper
 
 	armor_class = AC_MEDIUM
-	armor = ARMOR_LEATHER_GOOD
-	max_integrity = INTEGRITY_POOR
+	armor_type = /datum/armor/neck/leather/good
+	max_integrity = INTEGRITY_OLD_POOR
 
 
 //..................................................................................................................................
@@ -347,10 +343,8 @@
 	desc = "A piece of steel plate armor meant to protect the throat and neck of its wearer against decapitation, extending the protection of armor plates."
 	icon_state = "bevor"
 	flags_inv = HIDEFACIALHAIR
+	melting_material = /datum/material/steel
 	melt_amount = 75
-	melting_material = /datum/material/steel
-	melt_amount = 100
-	melting_material = /datum/material/steel
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
@@ -359,9 +353,9 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE
+	armor_type = /datum/armor/neck/plate
 	body_parts_covered = NECK|EARS|MOUTH|NOSE
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_STAB
 
 	material_category = ARMOR_MAT_PLATE
@@ -369,13 +363,12 @@
 
 /obj/item/clothing/neck/bevor/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/bevor/bronze
 	name = "bronze gorgette"
 	desc = "A jutting slab of bronze, traditionally mounted atop a panoplic assembly to veil the neck from precise strikes. </br>To tip the chin up while grounded is an ancient gesture; one which willingly beckons for the 'gift of mercy'."
 	icon_state = "bbevor"
-	melt_amount = 75
 	melting_material = /datum/material/bronze
 
 /obj/item/clothing/neck/bevor/iron
@@ -385,8 +378,8 @@
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 
-	armor = ARMOR_PLATE_BAD
-	max_integrity = INTEGRITY_STRONG
+	armor_type = /datum/armor/plate/bad
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/neck/gorget
 	name = "gorget"
@@ -404,9 +397,9 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
-	armor = ARMOR_PLATE_BAD
+	armor_type = /datum/armor/neck/plate/bad
 	body_parts_covered = NECK
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_STAB
 
 	material_category = ARMOR_MAT_PLATE
@@ -414,9 +407,9 @@
 
 /obj/item/clothing/neck/gorget/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
-/obj/item/clothing/neck/gorget/kazengun
+/obj/item/clothing/neck/gorget/blackmeadow
 	name = "blackmeadow gorget"
 	desc = "A series of interlocking rings of metal set around the throat. Used by the kouken of Blackmeadow for precisely the same reason as the knights of Psydonia."
 	icon_state = "kazengunneckguard"
@@ -462,10 +455,9 @@
 	. = ..()
 	is_in_neck_slot = FALSE
 
-/obj/item/clothing/neck/gorget/explosive/attackby(obj/item/interacted_item, mob/living/user, params)
-	. = ..()
-	if(!istype(interacted_item, /obj/item/collar_detonator))
-		return
+/obj/item/clothing/neck/gorget/explosive/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
+	if(!istype(tool, /obj/item/collar_detonator))
+		return NONE
 
 	if(!collar_unlocked)
 		collar_unlocked = TRUE
@@ -473,6 +465,7 @@
 	else
 		to_chat(user, "Collar is already unlocked!")
 
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/gorget/explosive/proc/tries_to_unequip(datum/source, force, atom/newloc, no_move, invdrop, silent)
 	SIGNAL_HANDLER
@@ -526,8 +519,7 @@
 	desc = "A series of resplendant golden plates designed to protect the neck, traditionally worn atop a jacket or cuirass. The holy sigil between its buckled halves promises to carry the flame of its wearer, no matter what strike's poised its way."
 	icon_state = "goldgorget"
 	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
-	melting_material = /datum/material/gold
-	melt_amount = 75
+	smeltresult = /obj/item/ingot/gold
 	grid_height = 96
 	grid_width = 96
 	sellprice = 200
@@ -535,6 +527,15 @@
 /obj/item/clothing/neck/gorget/gold/king
 	name = "royal golden gorget"
 	sellprice = 300
+
+/obj/item/clothing/neck/gorget/silver
+	name = "silver gorget"
+	desc = "A sparkling set of plates designed to protect the neck, traditionally worn atop a jacket or cuirass. They seem to shine with moonlight, even in the darkness."
+	icon_state = "sgorget"
+
+/obj/item/clothing/neck/gorget/silver/Initialize()
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/collar_detonator
 	name = "collar detonator"
@@ -550,24 +551,27 @@
 	grid_height = 32
 	grid_width = 32
 
-/obj/item/collar_detonator/afterattack(atom/target, mob/living/user, proximity_flag, list/modifiers)
-	. = ..()
-	if(!iscarbon(target))
-		return
+/obj/item/collar_detonator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
+	if(!iscarbon(interacting_with))
+		return NONE
 
-	var/mob/living/carbon/to_bomb = target
+	var/mob/living/carbon/to_bomb = interacting_with
+
 	var/obj/item/clothing/neck/gorget/explosive/collar = to_bomb.get_item_by_slot(ITEM_SLOT_NECK)
+
 	if(istype(collar))
 		collar.prepare_to_go_boom()
 	else
 		to_chat(user, span_notice("Target is not wearing a collar of servitude!"))
+
+	return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/gorget/hoplite // Better than an iron gorget, not quite as good as a steel bevor
 	name = "bronze gorget"
 	desc = "A heavy collar of great age, meant to protect the neck."
 	icon_state = "aasimarneck"
 	smeltresult = /obj/item/ingot/bronze
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/neck/maille/good
 
 /obj/item/clothing/neck/highcollier
 	name = "high collier"
@@ -578,7 +582,7 @@
 	body_parts_covered = NECK|MOUTH|EARS
 	slot_flags = ITEM_SLOT_NECK
 	flags_inv = HIDEFACE|HIDEFACIALHAIR
-	armor = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/neck/maille/good
 	resistance_flags = FIRE_PROOF
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
@@ -586,9 +590,9 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
-	smeltresult = null
+	smeltresult = /obj/item/ingot/steel_slag
 	clothing_flags = CANT_SLEEP_IN
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
 	material_category = ARMOR_MAT_CHAINMAIL
@@ -617,18 +621,16 @@
 
 /obj/item/clothing/neck/highcollier/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/highcollier/iron
 	name = "iron high collier"
 	desc = "A thicker piece of chain neck protection made from iron, though, this one only covers the neck and mouth when pulled up."
 	icon_state = "ihigh_collier"
 	body_parts_covered = NECK|MOUTH
-	armor = ARMOR_MAILLE_IRON
-	max_integrity = INTEGRITY_STRONG
+	armor_type = /datum/armor/neck/maille/iron
+	max_integrity = INTEGRITY_OLD_STRONG
 	smeltresult = /obj/item/ingot/iron
-	melt_amount = 100
-	melting_material = /datum/material/iron
 
 /obj/item/clothing/neck/highcollier/iron/renegadecollar
 	icon_state = "renegadecollar"
@@ -659,25 +661,35 @@
 	icon_state = "horus"
 	//dropshrink = 0.75
 	resistance_flags = FIRE_PROOF
-	sellprice = 30
+	sellprice = 75
 
 /obj/item/clothing/neck/mercator/examine()
 	. = ..()
-	. += span_info("Click on a turf or an item to see how much it is worth.")
+	. += span_notice("Click on a turf or an item to see how much it is worth.")
 
-/obj/item/clothing/neck/mercator/afterattack(atom/A, mob/user, list/modifiers)
-	. = ..()
+/obj/item/clothing/neck/mercator/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	var/total_sellprice = 0
-	if(isturf(A))
-		for(var/obj/item/I in A.contents)
-			total_sellprice += I.sellprice
+
+	if(isturf(interacting_with))
+		visible_message("[user] peers at the items on the [interacting_with] through their amulet.")
+
+		for(var/obj/item/assessed_item in interacting_with)
+			total_sellprice += assessed_item.sellprice
+
 		to_chat(user, span_notice("Everything on the ground is worth [total_sellprice] mammons."))
-	else if(istype(A, /obj/item))
-		var/obj/item/I = A
-		total_sellprice += I.sellprice
-		for(var/obj/item/item in I.contents)
+		return ITEM_INTERACT_SUCCESS
+
+	else if(istype(interacting_with, /obj/item))
+		visible_message("[user] peers at the [interacting_with] through their amulet.")
+
+		var/obj/item/assessed_item = interacting_with
+		total_sellprice += assessed_item.sellprice
+
+		for(var/obj/item/item in assessed_item.contents)
 			total_sellprice += item.sellprice
+
 		to_chat(user, span_notice("The item and its contents are worth [total_sellprice] mammons."))
+		return ITEM_INTERACT_SUCCESS
 
 /obj/item/clothing/neck/shalal
 	name = "desert rider medal"

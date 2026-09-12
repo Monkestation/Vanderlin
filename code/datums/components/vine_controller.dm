@@ -27,7 +27,7 @@
 	event?.announce_to_ghosts(SV)
 	START_PROCESSING(SSprocessing, src)
 	vine_mutations_list = list()
-	init_subtypes(/datum/vine_mutation/, vine_mutations_list)
+	init_subtypes(/datum/vine_mutation, vine_mutations_list)
 	if(potency != null)
 		mutativeness = potency / 10
 

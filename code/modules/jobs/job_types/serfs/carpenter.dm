@@ -25,12 +25,13 @@
 
 /datum/job/carpenter
 	title = JOB_CARPENTER
+	alt_titles = list("Woodsman", "Lumberjack")
 	tutorial = "Others may regard your work as crude and demeaning, but you understand deep in your soul the beauty of woodchopping. \
 	For it is by your axe that the great trees of forests are felled, and it is by your hands from which the shining beacon of civilization is built."
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CARPENTER
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 6
 	spawn_positions = 4
 	bypass_lastclass = TRUE
@@ -38,6 +39,8 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/carpenter
 	give_bank_account = 8
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 
 	job_bitflag = BITFLAG_CONSTRUCTOR

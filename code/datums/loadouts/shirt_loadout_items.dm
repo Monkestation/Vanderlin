@@ -13,13 +13,6 @@
 
 	triumph_cost_permanent = 25
 
-/datum/loadout_item/longshirt
-	name = "Shirt"
-	item_path = /obj/item/clothing/shirt
-	ui_category = "Shirts"
-
-	triumph_cost_permanent = 0
-
 /datum/loadout_item/shortshirt
 	name = "Short-sleeved Shirt"
 	item_path = /obj/item/clothing/shirt/shortshirt

@@ -42,17 +42,17 @@
 				desc = "A small ration pack containing a [food.name]."
 				icon_state = "ration_small"
 				dropshrink = 1
-			update_icon()
 
 /obj/item/ration/attack_self(mob/user)
 	. = ..()
-	if(food)
-		if(do_after(user, 2 SECONDS, target = src))
-			to_chat(user, span_notice("You unwrap [food] from the ration wrapper."))
-			playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
-			var/obj/item/reagent_containers/food/snacks/F = food
-			user.put_in_hands(F)
-			F.update_icon()
-			F.rotprocess = initial(F.rotprocess)
-			food = null
-			qdel(src) // No reusing wrapper
+	if(!food)
+		return
+
+	if(do_after(user, 2 SECONDS, target = src))
+		to_chat(user, span_notice("You unwrap [food] from the ration wrapper."))
+		playsound(get_turf(user), 'sound/foley/dropsound/food_drop.ogg', 40, TRUE, -1)
+		var/obj/item/reagent_containers/food/snacks/F = food
+		user.put_in_hands(F)
+		F.rotprocess = initial(F.rotprocess)
+		food = null
+		qdel(src) // No reusing wrapper

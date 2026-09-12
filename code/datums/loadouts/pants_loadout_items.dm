@@ -40,9 +40,9 @@
 
 	triumph_cost_permanent = 75
 
-/datum/loadout_item/kazengunpants
+/datum/loadout_item/blackmeadowpants
 	name = "Gamebson Trousers"
-	item_path = /obj/item/clothing/pants/trou/leather/kazengun
+	item_path = /obj/item/clothing/pants/trou/leather/blackmeadow
 	ui_category = "Pants"
 
 	triumph_cost_permanent = 150

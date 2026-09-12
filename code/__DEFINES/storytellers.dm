@@ -229,6 +229,5 @@
 #define DEVOTION_CLASS_GRANDMASTER "Grandmaster"
 #define DEVOTION_CLASS_TEMPLAR "Templar"
 #define DEVOTION_CLASS_ACOLYTE "Acolyte"
-#define DEVOTION_CLASS_ABSOLVER "Absolver"
 #define DEVOTION_CLASS_CLERIC "Cleric"
 #define DEVOTION_CLASS_CHURCHLING "Churchling"

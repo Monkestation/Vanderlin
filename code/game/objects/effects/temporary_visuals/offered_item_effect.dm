@@ -28,7 +28,7 @@
 		var/image/I = image(icon, src, icon_state)
 		I.override = TRUE
 		icon = null
-		add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/People, "offer", I, list(offerer, offered_to))
+		add_alt_appearance(/datum/atom_hud/alternate_appearance/basic/people, "offer", I, NONE, list(offerer, offered_to))
 
 	RegisterSignal(offerer, COMSIG_MOVABLE_MOVED, PROC_REF(someone_moved))
 	RegisterSignal(offered_to, COMSIG_MOVABLE_MOVED, PROC_REF(someone_moved))

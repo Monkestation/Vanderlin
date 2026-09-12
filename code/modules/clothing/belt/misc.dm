@@ -30,7 +30,7 @@
 
 	populate_contents = list(
 		/obj/item/reagent_containers/glass/bottle/poison,
-		/obj/item/weapon/knife/dagger/steel/profane,
+		/obj/item/weapon/knife/dagger/steel/inhumen/profane,
 		/obj/item/lockpick,
 	)
 
@@ -66,6 +66,12 @@
 		/obj/item/storage/keyring/guard,
 	)
 
+/obj/item/storage/belt/leather/lieutenant //they get their keys + dagger there
+	populate_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special,
+		/obj/item/storage/keyring/lieutenant,
+	)
+
 /obj/item/storage/belt/leather/mercenary
 	populate_contents = list(
 		/obj/item/natural/cloth/bandage,
@@ -95,6 +101,13 @@
 	name = "black belt"
 	icon_state = "blackbelt"
 	sellprice = 10
+
+/obj/item/storage/belt/leather/black/courtagent
+	populate_contents = list(
+		/obj/item/storage/keyring/courtagent,
+		/obj/item/weapon/knife/dagger/steel,
+		/obj/item/lockpickring/mundane,
+	)
 
 /obj/item/storage/belt/leather/plaquesilver
 	name = "plaque belt"
@@ -206,6 +219,7 @@
 	component_type = /datum/component/storage/concrete/grid/coin_pouch
 	grid_height = 64
 	grid_width = 32
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/storage/belt/pouch/medicine
 	populate_contents = list(
@@ -357,7 +371,7 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/satchel/cloth/big
 
-/obj/item/storage/backpack/satchel/otavan
+/obj/item/storage/backpack/satchel/grenzel
 	name = "grenzelhoftian leather satchel"
 	examine_name = "satchel"
 	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
@@ -395,7 +409,7 @@
 
 /obj/item/storage/backpack/backpack/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/storage/backpack/backpack/artibackpack
 	name = "cooling backpack"
@@ -435,6 +449,7 @@
 		/obj/item/reagent_containers/syringe,
 	)
 	component_type = /datum/component/storage/concrete/grid/surgery_bag
+	pickpocket_difficulty = SKILL_LEVEL_MASTER
 
 /obj/item/surgeontoolspawner
 	name = "set of surgery tools"
@@ -487,26 +502,6 @@
 	dyeable = TRUE
 	component_type = /datum/component/storage/concrete/grid/belt/knife_belt
 	empty_when_dropped = FALSE
-
-/obj/item/storage/belt/leather/knifebelt/attack_atom(atom/attacked_atom, mob/living/user)
-	if(!isturf(attacked_atom))
-		return ..()
-
-	. = TRUE
-	if(length(contents) >= max_storage)
-		to_chat(user, span_warning("Your [src.name] is full!"))
-		return
-	var/turf/T = attacked_atom
-	to_chat(user, span_notice("You begin to gather the ammunition..."))
-	for(var/obj/item/weapon/knife/throwingknife/knife in T.contents)
-		if(do_after(user, 5 DECISECONDS))
-			if(!eat_knife(knife))
-				break
-
-/obj/item/storage/belt/leather/knifebelt/proc/eat_knife(obj/A)
-	if(A.type in typesof(/obj/item/weapon/knife/throwingknife))
-		if(length(contents) < max_storage)
-			return SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, FALSE)
 
 /obj/item/storage/belt/leather/knifebelt/attackby(obj/A, mob/living/user, list/modifiers)
 	if(A.type in typesof(/obj/item/weapon/knife/throwingknife))

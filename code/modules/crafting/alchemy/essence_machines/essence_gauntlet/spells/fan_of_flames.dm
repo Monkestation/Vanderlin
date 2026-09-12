@@ -1,12 +1,9 @@
 /datum/action/cooldown/spell/essence/fan_of_flames
 	name = "Fan of Flames"
 	desc = "Unleash a spreading fan of slow-moving flame projectiles."
-	school = "evocation"
 	button_icon_state = "sacredflame"
 	spell_cost = 4
 	cooldown_time = 45 SECONDS
-	point_cost = 4
-	attunements = list(/datum/attunement/fire, /datum/attunement/aeromancy)
 	essences = list(/datum/thaumaturgical_essence/fire, /datum/thaumaturgical_essence/air)
 	click_to_activate = TRUE
 	/// Projectile type to fire
@@ -44,8 +41,18 @@
 	name = "flame bolt"
 	icon = 'icons/obj/projectiles.dmi'
 	icon_state = "blastwave"
-	damage = 5
+	damage = 2
 	damage_type = BURN
-	speed = 1 SECONDS
+	speed = 0.8 SECONDS
 	homing = FALSE
-	range = 3
+	range = 4
+
+/datum/action/cooldown/spell/essence/fan_of_flames/spell
+	name = "Greater Fan of Flames"
+	charge_required = TRUE
+	charge_time = 0.3 SECONDS
+	spell_cost = 35
+	spell_type = SPELL_MANA
+
+	required_form = FORM_FIRE
+	required_technique = TECHNIQUE_DESTRUCTION

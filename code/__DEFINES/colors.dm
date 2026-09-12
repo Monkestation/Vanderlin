@@ -1,5 +1,6 @@
 // This is eventually for wjohn to add more color standardization stuff like I keep asking him >:(
 #define COLOR_BLOOD "#c80000"
+#define COLOR_BLOOD_MAGIC "#681818"
 
 #define COLOR_INPUT_DISABLED "#000000"
 #define COLOR_INPUT_ENABLED "#231d1d"
@@ -117,6 +118,7 @@
 #define CLOTHING_WET "#afafaf"
 
 #define GLOW_COLOR_BARDIC "#E8837C" // Warm rose, for bardic songs and cadences
+#define GLOW_COLOR_ICE "#87CEEB" // Cyan
 
 #define CM_COLOR_SAT_MIN 0.6
 #define CM_COLOR_SAT_MAX 0.7

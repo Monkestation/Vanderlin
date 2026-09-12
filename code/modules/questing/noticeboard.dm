@@ -150,6 +150,8 @@
 		return
 
 	var/mob/living/carbon/human/user = ui.user
+	if(!istype(user))
+		return
 
 	switch(action)
 
@@ -525,11 +527,11 @@
 
 /obj/structure/notice_board/proc/search_item_types(query)
 	var/list/results = list()
-	query = lowertext(query)
+	query = LOWER_TEXT(query)
 	for(var/obj/item/item_type as anything in subtypesof(/obj/item))
 		if(IS_ABSTRACT(item_type))
 			continue
-		var/iname = lowertext(initial(item_type.name))
+		var/iname = LOWER_TEXT(initial(item_type.name))
 		if(findtext(iname, query))
 			var/display = "[initial(item_type.name)] ([item_type])"
 			results[display] = item_type

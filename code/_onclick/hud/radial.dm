@@ -18,6 +18,7 @@ GLOBAL_LIST_EMPTY(radial_menus)
 
 /atom/movable/screen/radial/slice
 	icon_state = "radial_slice"
+	layer = RADIAL_BACKGROUND_LAYER
 	var/choice
 	var/next_page = FALSE
 	var/tooltips = FALSE

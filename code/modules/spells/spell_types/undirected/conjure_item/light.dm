@@ -4,7 +4,6 @@
 	button_icon_state = "light"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	point_cost = 1
 
 	cooldown_time = 30 SECONDS
 	spell_cost = 50
@@ -16,9 +15,7 @@
 	item_type = /obj/item/flashlight/flare/light
 	item_duration = null
 
-	attunements = list(
-		/datum/attunement/light = 0.3,
-	)
+	required_form = FORM_FIRE
 
 /datum/action/cooldown/spell/undirected/conjure_item/light/make_item()
 	var/obj/item = ..()
@@ -108,12 +105,14 @@
 	. = ..()
 	if(!proximity)
 		return
-	if(on)
-		if(prob(50) || (user.used_intent.type == /datum/intent/use))
-			if(ismob(A))
-				A.spark_act()
-			else
-				A.fire_act(3,3)
+
+	if(!on)
+		return
+
+	if(ismob(A))
+		A.spark_act()
+	else
+		A.fire_act(3,3)
 
 /obj/item/flashlight/flare/light/spark_act()
 	fire_act()

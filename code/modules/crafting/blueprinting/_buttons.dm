@@ -8,6 +8,10 @@
 	. = ..()
 	bd = blueprint_datum
 
+/atom/movable/screen/blueprint/Destroy(force)
+	. = ..()
+	bd = null
+
 /atom/movable/screen/blueprint/recipe
 	name = "Recipes"
 	icon_state = "buildmode_basic"

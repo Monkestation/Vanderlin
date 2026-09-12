@@ -4,7 +4,7 @@
 	button_icon_state = "curse2"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/eora)
@@ -32,7 +32,7 @@
 		var/mob/living/L = target
 		L.OffBalance(50)
 		L.visible_message(span_info("A purple haze shrouds [target]!"), span_notice("I feel incredibly drunk..."))
-		L.reagents.add_reagent(/datum/reagent/berrypoison, 1)
+		L.reagents.add_reagent(/datum/reagent/poison/berry, 1)
 		L.apply_status_effect(/datum/status_effect/debuff/eoradrunk)
 		L.set_eye_blur_if_lower(40 SECONDS)
 
@@ -72,7 +72,7 @@
 	if(isliving(AM))
 		var/mob/living/L = AM
 		L.OffBalance(50)
-		L.reagents.add_reagent(/datum/reagent/berrypoison, 1)
+		L.reagents.add_reagent(/datum/reagent/poison/berry, 1)
 		L.apply_status_effect(/datum/status_effect/debuff/eoradrunk)
 		L.visible_message(span_info("A purple haze shrouds [L]!"), span_notice("I feel incredibly drunk..."))
 		L.set_eye_blur_if_lower(40 SECONDS)

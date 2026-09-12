@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/retaliate/swamp_kraken
-	icon = 'icons/roguetown/mob/monster/kraken.dmi'
 	name = "swamp kraken"
 	desc = "An ancient horror from the deepest swamps. Its tentacles writhe with malevolent purpose."
+	icon = 'icons/roguetown/mob/monster/kraken.dmi'
 	icon_state = "Gilbert"
 	icon_living = "Gilbert"
 	icon_dead = ""
@@ -25,7 +25,7 @@
 	aggro_vision_range = 12
 	environment_smash = ENVIRONMENT_SMASH_STRUCTURES
 
-	faction = list("kraken")
+	faction = list(FACTION_DEEP)
 	stat_attack = UNCONSCIOUS
 	deaggroprob = 0
 	del_on_deaggro = FALSE
@@ -208,9 +208,9 @@
 	return TRUE
 
 /mob/living/simple_animal/hostile/kraken_tentacle
-	icon = 'icons/roguetown/mob/monster/kraken.dmi'
 	name = "kraken tentacle"
 	desc = "A writhing tentacle of the swamp kraken. It moves with disturbing intelligence."
+	icon = 'icons/roguetown/mob/monster/kraken.dmi'
 	icon_state = "gilbert_lh"
 	icon_living = "gilbert_lh"
 	icon_dead = "gilbert_lh"
@@ -223,7 +223,7 @@
 	melee_damage_upper = 30
 	base_intents = list(/datum/intent/simple/claw)
 
-	faction = list("kraken")
+	faction = list(FACTION_DEEP)
 	stat_attack = UNCONSCIOUS
 
 	vision_range = 8
@@ -322,39 +322,39 @@
 	ai_controller.set_blackboard_key(BB_TARGETED_ACTION, spit)
 
 /datum/action/cooldown/mob_cooldown/tentacle_spit_acid
-    name = "Acid Spit"
-    button_icon = 'icons/effects/effects.dmi'
-    button_icon_state = "acid"
-    desc = "Spit corrosive acid at a target."
-    cooldown_time = 8 SECONDS
-    var/projectile_type = /obj/projectile/tentacle_acid
+	name = "Acid Spit"
+	button_icon = 'icons/effects/effects.dmi'
+	button_icon_state = "acid"
+	desc = "Spit corrosive acid at a target."
+	cooldown_time = 8 SECONDS
+	var/projectile_type = /obj/projectile/tentacle_acid
 
 /datum/action/cooldown/mob_cooldown/tentacle_spit_acid/Activate(atom/target)
-    if(!isliving(target))
-        return FALSE
+	if(!isliving(target))
+		return FALSE
 
-    var/turf/start_turf = get_turf(owner)
-    if(!start_turf)
-        return FALSE
+	var/turf/start_turf = get_turf(owner)
+	if(!start_turf)
+		return FALSE
 
-    owner.visible_message(span_boldwarning("[owner] spits a glob of acid at [target]!"))
+	owner.visible_message(span_boldwarning("[owner] spits a glob of acid at [target]!"))
 
-    var/obj/projectile/tentacle_acid/proj = new projectile_type(start_turf)
-    proj.firer = owner
-    proj.fired_from = start_turf
-    proj.preparePixelProjectile(target, owner)
-    proj.fire()
+	var/obj/projectile/tentacle_acid/proj = new projectile_type(start_turf)
+	proj.firer = owner
+	proj.fired_from = start_turf
+	proj.preparePixelProjectile(target, owner)
+	proj.fire()
 
-    StartCooldown()
-    return TRUE
+	StartCooldown()
+	return TRUE
 
 /obj/projectile/tentacle_acid
-    name = "acid glob"
-    icon_state = "acid_splash"
-    damage = 20
-    damage_type = BURN
-    range = 6
-    speed = 2
+	name = "acid glob"
+	icon_state = "acid_splash"
+	damage = 20
+	damage_type = BURN
+	range = 6
+	speed = 2
 
 /obj/effect/temp_visual/tentacle_emergence
 	icon = 'icons/effects/effects.dmi'

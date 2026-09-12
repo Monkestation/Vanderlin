@@ -47,9 +47,14 @@
 		#define ELASDATA_QUEST_TAXES "quest_taxes"
 		#define ELASDATA_QUEST_CREATED "quests_created"
 		#define ELASDATA_QUEST_STALE "quests_stale"
+		#define ELASDATA_BOUNTIES_COMPLETED "bounties_completed"
+		#define ELASDATA_BOUNTIES_REROLLED "bounties_rerolled"
+		#define ELASDATA_BOUNTIES_GENERATED "bounties_generated"
 
 	/* Medical */
 		#define ELASDATA_ANASTASIS_REVIVE "anastasis"
+		#define ELASDATA_LUNAR_ANASTASIS_REVIVE "lunar_anastasis"
+		#define ELASDATA_BLOODMAGIC_REVIVE "bloodmagic_anastasis"
 		#define ELASDATA_CPR_REVIVE "cpr"
 		#define ELASDATA_ABSOLVE_REVIVE "absolve"
 		#define ELASDATA_ULTIMATE_REVIVE "ultimate_sacrifice"

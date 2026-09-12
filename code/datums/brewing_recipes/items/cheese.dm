@@ -16,7 +16,7 @@
 		for(var/i in 1 to (brewed_item_count * number_of_repeats))
 			new brewed_item(get_turf(source))
 
-/datum/brewing_recipe/cheese/after_finish_attackby(mob/user, obj/item/attacked_item, atom/source)
+/datum/brewing_recipe/cheese/after_finish_interact(mob/user, obj/item/attacked_item, atom/source)
 	if(!istype(attacked_item, /obj/item/natural/cloth))
 		return FALSE
 

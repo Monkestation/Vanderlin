@@ -65,6 +65,9 @@
 /obj/item/clothing/head/roguehood/colored/black
 	color = CLOTHING_SOOT_BLACK
 
+/obj/item/clothing/head/roguehood/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
 /obj/item/clothing/head/roguehood/colored/green
 	color = CLOTHING_FOREST_GREEN
 
@@ -109,6 +112,20 @@
 		var/mob/living/carbon/H = user
 		H.update_inv_head()
 
+//............... Blood Magic Hood ............... //
+/obj/item/clothing/head/roguehood/bloodweave
+	name = "bloodweave hood"
+	desc = "A seemingly plain cloth hood woven with bloodsteel threads. It radiates a sinister aura."
+	armor_type = /datum/armor/head/cloth/bloodweave
+	prevent_crits = CUT_AND_MINOR_CRITS
+	max_integrity = 250
+	color = COLOR_BLOOD_MAGIC
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/head/roguehood/bloodweave/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 //............... Feldshers Hood ............... //
 /obj/item/clothing/head/roguehood/feld
 	name = "feldsher's hood"
@@ -139,7 +156,7 @@
 	icon = 'icons/roguetown/clothing/head.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi' //Overrides slot icon behavior
 	body_parts_covered = NECK
-	armor = ARMOR_PADDED_BAD
+	armor_type = /datum/armor/head/padded/bad
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
 	max_integrity = 100
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
@@ -178,25 +195,25 @@
 	icon_state = "leatherhood"
 	item_state = "leatherhood"
 	prevent_crits = MINOR_CRITICALS
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/leather
 	blocksound = SOFTUNDERHIT
 	item_weight = 145 GRAMS
 
 /obj/item/clothing/head/roguehood/leather/advanced
 	name = "hardened leather hood"
 	desc = "A simple if foreboding hood made out of expertly treated leather. Worn more by those venturing out into the wilds, rather than street thugs and honest yeoman."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
-	armor = list("blunt" = 70, "slash" = 60, "stab" = 35, "piercing" = 25, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/leather/advanced
 
 /obj/item/clothing/head/roguehood/leather/masterwork
 	name = "masterwork leather hood"
 	desc = "A simple if foreboding hood made out of masterfully treated and tanned leather. Worn by veteran hunters and adventurers venturing out into the wilds, this hood will keep out most anything, besides death, and fire."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	prevent_crits = ALL_EXCEPT_STAB
-	armor = list("blunt" = 100, "slash" = 70, "stab" = 45, "piercing" = 15, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/head/leather/master
 
 /obj/item/clothing/head/roguehood/leather/masterwork/Initialize()
 	. = ..()
@@ -211,7 +228,7 @@
 	slot_flags = ITEM_SLOT_HEAD
 	flags_inv = HIDEEARS|HIDEHAIR
 	blocksound = SOFTHIT
-	armor = ARMOR_LEATHER
+	armor_type = /datum/armor/leather
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 	dynamic_hair_suffix = ""
 	edelay_type = 1

@@ -29,6 +29,7 @@
 		// return FALSE
 		key_emotes = GLOB.emote_list["me"]
 		param = original_act
+
 	var/silenced = FALSE
 	for(var/datum/emote/emote in key_emotes)
 		if(!emote.check_cooldown(src, intentional))
@@ -43,8 +44,10 @@
 		SEND_SIGNAL(src, COMSIG_MOB_EMOTE, emote, act, type_override, message, intentional)
 		SEND_SIGNAL(src, COMSIG_MOB_EMOTED(emote.key))
 		return TRUE
+
 	if(intentional && !silenced && !force_silence)
 		to_chat(src, span_notice("Unusable emote '[act]'. Say *help for a list."))
+
 	return FALSE
 
 /**
@@ -125,7 +128,7 @@
 
 /mob/living/carbon/human/verb/emote_spin()
 	set name = "Spin"
-	set category = "Emotes.Silent"
+	set category = "Emotes.Actions"
 	emote("spin", intentional = TRUE)
 
 /datum/emote/spin/can_run_emote(mob/living/carbon/user, status_check = TRUE , intentional)

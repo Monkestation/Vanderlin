@@ -138,7 +138,7 @@
 /datum/container_craft/pan/egg/proc/on_start_recipe(atom/crafter, initiator, highest_multiplier)
 	var/list/stored_items = crafter.contents
 	playsound(crafter, 'sound/foley/eggbreak.ogg', 100, TRUE, -1)
-	crafter.visible_message("The [lowertext(name)] starts to cook.")
+	crafter.visible_message("The [LOWER_TEXT(name)] starts to cook.")
 	var/count = 0
 	for(var/obj/item/reagent_containers/food/snacks/egg/egg in stored_items)
 		if(count >= highest_multiplier)

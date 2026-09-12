@@ -49,10 +49,10 @@
 		LEGENDARY: 		between 100 and 150
 	PICKED NUMBER GETS DIVIDED BY SMELTING_DENOMINATOR.
 	*/
-	var/skill_factor = (rand(skill_quality*15 + 10, max(30, skill_quality*25)) / SMELTING_DENOMINATOR)
-	var/material_factor = (material_quality - SMELTERY_QUALITY_SPOIL) * 0.5
+	var/skill_factor = rand(skill_quality * 15 + 10, max(30, skill_quality * 25))
+	var/material_factor = (material_quality - SMELTERY_QUALITY_SPOIL) * 10
 
-	var/final_quality = floor(material_factor + skill_factor)
+	var/final_quality = (skill_factor + material_factor) / SMELTING_DENOMINATOR
 
 	return clamp(final_quality, SMELTERY_QUALITY_SPOIL, SMELTERY_QUALITY_EXCELLENT)
 
@@ -69,4 +69,4 @@
 
 /datum/quality_calculator/metallurgy/track_item_creation(obj/item/target, final_quality)
 	if(final_quality >= SMELTERY_QUALITY_EXCELLENT)
-		record_round_statistic(STATS_MASTERWORKS_FORGED, 1)
+		record_round_statistic(STATS_MASTERWORKS_PRODUCED, 1)

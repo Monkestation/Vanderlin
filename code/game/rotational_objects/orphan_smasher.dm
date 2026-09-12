@@ -216,12 +216,9 @@
 
 	var/list/materials = list()
 
-	materials |= first.required_material
 	materials[first.required_material]++
-
 	for(var/atom/atom_path as anything in first.additional_items)
-		materials |= atom_path
-		materials[atom_path]++
+		materials[atom_path] += first.additional_items[atom_path]
 
 	current = first
 	current_requirements = materials

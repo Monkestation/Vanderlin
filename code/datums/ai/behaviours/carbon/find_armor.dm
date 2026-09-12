@@ -6,7 +6,7 @@
 
 
 	var/list/armor = list()
-	for(var/obj/item/clothing/local_candidate as anything in oview(search_range, controller.pawn))
+	for(var/obj/item/clothing/local_candidate in oview(search_range, controller.pawn))
 		if(!istype(local_candidate, /obj/item/clothing))
 			continue
 		var/obj/item/clothing/clothing = local_candidate

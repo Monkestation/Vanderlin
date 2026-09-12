@@ -16,6 +16,7 @@
 #define ANTAG_HUD_WEREWOLF "antag_hud_werewolf"
 #define ANTAG_HUD_ZIZOID "antag_hud_zizoid"
 #define ANTAG_HUD_BANDIT "antag_hud_bandit"
+#define ANTAG_HUD_BLOOD_MAGE "antag_hud_bloodmage"
 
 // Notification action types
 #define NOTIFY_JUMP "jump"
@@ -23,4 +24,4 @@
 #define NOTIFY_ORBIT "orbit"
 
 /// cooldown for being shown the images for any particular data hud
-#define ADD_HUD_TO_COOLDOWN 20
+#define ADD_HUD_TO_COOLDOWN 2 SECONDS

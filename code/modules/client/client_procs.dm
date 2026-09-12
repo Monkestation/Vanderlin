@@ -115,18 +115,6 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		asset_cache_preload_data(href_list["asset_cache_preload_data"])
 		return
 
-	// Keypress passthrough
-	if(href_list["__keydown"])
-		var/keycode = browser_keycode_to_byond(href_list["__keydown"])
-		if(keycode)
-			keyDown(keycode)
-		return
-	if(href_list["__keyup"])
-		var/keycode = browser_keycode_to_byond(href_list["__keyup"])
-		if(keycode)
-			keyUp(keycode)
-		return
-
 	// ANSWER SCHIZOHELP
 	if(href_list["schizohelp"])
 		var/datum/schizohelp/schizo = locate(href_list["schizohelp"])
@@ -705,8 +693,7 @@ GLOBAL_LIST_EMPTY(respawncounts)
 		tooltips = new /datum/tooltip(src)
 
 	var/list/topmenus = GLOB.menulist[/datum/verbs/menu]
-	for(var/thing in topmenus)
-		var/datum/verbs/menu/topmenu = thing
+	for(var/datum/verbs/menu/topmenu as anything in topmenus)
 		var/topmenuname = "[topmenu]"
 		if(topmenuname == "[topmenu.type]")
 			var/list/tree = splittext(topmenuname, "/")
@@ -1401,9 +1388,10 @@ GLOBAL_LIST_EMPTY(respawncounts)
 	show_round_stats(pick_assoc(GLOB.featured_stats))
 
 /client/proc/preload_music()
-	if(SSsounds.initialized == TRUE)
-		for(var/sound_path as anything in SSsounds.all_music_sounds)
+	if(SSsounds.initialized == TRUE && !cached_sounds)
+		for(var/sound_path in SSsounds.all_music_sounds)
 			src << load_resource(sound_path, -1)
+		cached_sounds = TRUE
 
 /client/proc/is_donator()
 	if(patreon?.has_access(ACCESS_ASSISTANT_RANK))

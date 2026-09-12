@@ -25,18 +25,6 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 		popup.open(FALSE)
 		return
 
-	if(href_list["view_descriptors"] && (isobserver(usr) || usr.can_perform_action(src, NEED_LIGHT)))
-		if(!ismob(usr))
-			return
-		var/obscure_name
-		if(name == "Unknown" || name == "Unknown Man" || name == "Unknown Woman")
-			obscure_name = TRUE
-		if(isobserver(usr))
-			obscure_name = FALSE
-		var/list/lines = build_cool_description(get_mob_descriptors(obscure_name, usr), src)
-		to_chat(usr, span_info("[lines.Join("\n")]"))
-		return
-
 	if(href_list["inspect_limb"] && (isobserver(usr) || usr.can_perform_action(src, FORBID_TELEKINESIS_REACH)))
 		var/list/msg = list()
 		var/mob/user = usr
@@ -88,6 +76,26 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 				usr.visible_message(span_notice("[usr] rips [subject] out of [usr.p_their()] [L.name]!"), span_notice("I successfully remove [subject] from my [L.name]."))
 			else
 				usr.visible_message(span_notice("[usr] rips [subject] out of [src]'s [L.name]!"), span_notice("I successfully remove [subject] from [src]'s [L.name]."))
+
+	if(href_list["tourniquet"] && usr.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		var/obj/item/bodypart/L = locate(href_list["tourniquet_limb"]) in bodyparts
+		if(!L)
+			return
+		var/obj/item/I = L.tourniquet
+		if(!I)
+			return
+		var/mob/living/carbon/human/human = usr
+		human.do_remove_tourniquet(L)
+
+	if(href_list["splint"] && usr.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		var/obj/item/bodypart/L = locate(href_list["splint_limb"]) in bodyparts
+		if(!L)
+			return
+		var/obj/item/I = L.splint_item
+		if(!I)
+			return
+		var/mob/living/carbon/human/human = usr
+		human.do_remove_splint(L)
 
 	if(href_list["bandage"] && usr.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		var/obj/item/bodypart/L = locate(href_list["bandaged_limb"]) in bodyparts

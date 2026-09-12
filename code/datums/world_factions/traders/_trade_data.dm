@@ -1,5 +1,7 @@
 ///Used to contain the traders initial wares, and speech
 /datum/trader_data
+	///our world faction
+	var/datum/world_faction/active_faction
 	var/name = "Generic"
 	///The item that marks the shopkeeper will sit on
 	var/shop_spot_type =  /obj/structure/chair/stool
@@ -81,6 +83,9 @@
 		),
 	)
 
+/datum/trader_data/Destroy(force)
+	. = ..()
+	active_faction = null
 /**
  * Depending on the passed parameter/override, returns a randomly picked string out of a list
  *

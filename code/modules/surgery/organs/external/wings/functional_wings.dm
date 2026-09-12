@@ -24,16 +24,20 @@
 	deltimer(flight_timer)
 	return ..()
 
-/obj/item/organ/wings/flight/Insert(mob/living/carbon/M, special, drop_if_replaced, new_zone = null)
+/obj/item/organ/wings/flight/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-	if(length(flight_for_species) && !(M.dna?.species.id in flight_for_species))
+
+	if(length(flight_for_species) && !(organ_owner.dna?.species.id in flight_for_species))
 		return
+
 	if(QDELETED(fly))
 		fly = new(src)
-	fly.Grant(M)
 
-/obj/item/organ/wings/flight/Remove(mob/living/carbon/organ_owner, special, drop_if_replaced)
+	fly.Grant(organ_owner)
+
+/obj/item/organ/wings/flight/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
+
 	fly?.Remove(organ_owner)
 	if(wings_open)
 		stop_flying(organ_owner, drop_flyer = TRUE)
