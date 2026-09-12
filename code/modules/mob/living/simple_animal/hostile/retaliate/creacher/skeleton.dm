@@ -42,6 +42,10 @@
 	. = ..()
 	AddComponent(/datum/component/ai_aggro_system)
 
+/mob/living/simple_animal/hostile/skeleton/spectral
+	name = "Spectral Skeleton"
+	desc = "A spectral skeleton formed from arcyne magic."
+
 /mob/living/simple_animal/hostile/skeleton/axe
 	name = "Skeleton"
 	desc = ""
@@ -51,6 +55,10 @@
 	icon_living = "skeleton_axe"
 	icon_dead = ""
 	loot = list(/obj/item/alch/bone,	/obj/item/alch/bone, /obj/item/alch/bone,	/obj/item/weapon/polearm/halberd/bardiche/woodcutter, /obj/item/skull)
+
+/mob/living/simple_animal/hostile/skeleton/axe/spectral
+	name = "Spectral Skeleton"
+	desc = "A spectral skeleton formed from arcyne magic."
 
 /mob/living/simple_animal/hostile/skeleton/spear
 	name = "Skeleton"
@@ -63,6 +71,10 @@
 	attack_sound = 'sound/foley/pierce.ogg'
 	loot = list(/obj/item/alch/bone,	/obj/item/alch/bone, /obj/item/alch/bone,	/obj/item/weapon/polearm/spear, /obj/item/skull)
 
+/mob/living/simple_animal/hostile/skeleton/spear/spectral
+	name = "Spectral Skeleton"
+	desc = "A spectral skeleton formed from arcyne magic."
+
 /mob/living/simple_animal/hostile/skeleton/guard
 	name = "Skeleton"
 	desc = ""
@@ -74,6 +86,10 @@
 	loot = list(/obj/item/alch/bone,	/obj/item/alch/bone, /obj/item/alch/bone,	/obj/item/weapon/sword/iron, /obj/item/skull)
 	maxHealth = 200
 	health = 200
+
+/mob/living/simple_animal/hostile/skeleton/guard/spectral
+	name = "Spectral Skeleton"
+	desc = "A spectral skeleton formed from arcyne magic."
 
 /mob/living/simple_animal/hostile/skeleton/bow
 	name = "Skeleton"
@@ -100,6 +116,10 @@
 	)
 
 	ai_controller = /datum/ai_controller/orc_ranged
+
+/mob/living/simple_animal/hostile/skeleton/bow/spectral
+	name = "Spectral Skeleton"
+	desc = "A spectral skeleton formed from arcyne magic."
 
 /mob/living/simple_animal/hostile/skeleton/get_sound(input)
 	switch(input)

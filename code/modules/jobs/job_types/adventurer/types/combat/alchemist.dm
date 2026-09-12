@@ -29,7 +29,7 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/combat/alchemist
 	attribute_sheet = /datum/attribute_holder/sheet/job/alchemist_adventurer
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 
 	traits = list(

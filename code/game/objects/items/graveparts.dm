@@ -107,16 +107,17 @@
 	sourceitem = /obj/item/grown/log/tree/stick
 	decorationquality = 1
 
-/obj/item/gravedecor/headstone/obelisk
-	name = "headstone obelisk"
-	desc = "A tall headstone with iron inlay, so your works are never forgotten."
-	icon_state = "headstone_obelisk"
+/obj/item/gravedecor/headstone/hunt
+	name = "skull headstone"
+	desc = "A rare piece to find in civilized lands. Despite its crude construction, there are some who find it prestigious."
+	icon_state = "headstone_hunt"
 	dropshrink = 0.8
-	decorationquality = 3
+	decorationquality = 1
+	patrons = list(/datum/patron/alternate/great_hunt, /datum/patron/alternate/great_hunt/proven)
 
 /obj/item/gravedecor/headstone/psydon
 	name = "psydonic headstone"
-	desc = "A psycross shaped headstone, may be considered heretical by some, but to disturb the graves it lies upon even more so."
+	desc = "A psycross-shaped headstone. To disturb the resting place of the slain is a grave heresy."
 	icon_state = "headstone_psydon"
 	dropshrink = 0.8
 	decorationquality = 2
@@ -127,12 +128,12 @@
 	desc = "The golden cross of Astrata, nothing less for the Sun Tyrant."
 	icon_state = "headstone_astrata"
 	dropshrink = 0.8
-	decorationquality = 3
+	decorationquality = 2
 	patrons = list(/datum/patron/divine/astrata)
 
 /obj/item/gravedecor/headstone/pestra
 	name = "pestran headstone"
-	desc = "Any grave this is on is practically begging to be robbed. Maybe that's the intent."
+	desc = "Pestran doctrine might not condemn graverobbing, but maybe you should leave this one alone."
 	icon_state = "headstone_pestra"
 	dropshrink = 0.8
 	decorationquality = 2
@@ -140,61 +141,60 @@
 
 /obj/item/gravedecor/headstone/abyssor
 	name = "abyssorite headstone"
-	desc = "Not a common sight, most corpses are lost to his briny embrace before they can see land."
+	desc = "Most Abyssorites are lost to the briny embrace of the ocean before their corpses ever touch land."
 	icon_state = "headstone_abyssor"
 	dropshrink = 0.8
 	decorationquality = 2
 	patrons = list(/datum/patron/divine/abyssor)
 
-/obj/item/gravedecor/headstone/hunt
-	name = "skull headstone"
-	desc = "An uncommon sight in these lands, though it can barely be called a headstone, it is prestigious for those who earn it."
-	icon_state = "headstone_hunt"
-	dropshrink = 0.8
-	decorationquality = 1
-	patrons = list(/datum/patron/alternate/great_hunt, /datum/patron/alternate/great_hunt/proven)
-
 /obj/item/gravedecor/headstone/necra
 	name = "necran headstone"
-	desc = "This one's time is up. Perhaps they never had any. Does it really matter?"
+	desc = "This one's time is up. Perhaps they never had any. Did it ever really matter?"
 	icon_state = "headstone_necra"
 	dropshrink = 0.8
 	decorationquality = 2
 	patrons = list(/datum/patron/divine/necra)
 
+/obj/item/gravedecor/headstone/eora
+	name = "eoran headstone"
+	desc = "Made for those TRULY dearly departed."
+	icon_state = "headstone_eora"
+	dropshrink = 0.8
+	decorationquality = 2
+	patrons = list(/datum/patron/divine/eora)
+
+/obj/item/gravedecor/headstone/obelisk
+	name = "headstone obelisk"
+	desc = "A tall headstone with iron inlay, so that the dead might not be forgotten."
+	icon_state = "headstone_obelisk"
+	dropshrink = 0.8
+	decorationquality = 3
+
 /obj/item/gravedecor/headstone/malum
 	name = "malumite headstone"
-	desc = "It's a toil to even install this."
+	desc = "It's a toil to even install this, but the hard work is always worth it."
 	icon_state = "headstone_malum"
 	dropshrink = 0.8
 	decorationquality = 3
 	patrons = list(/datum/patron/divine/malum)
 
-/obj/item/gravedecor/headstone/eora
-	name = "eoran headstone"
-	desc = "Made for those TRULY dear departed."
-	icon_state = "headstone_eora"
-	dropshrink = 0.8
-	decorationquality = 3
-	patrons = list(/datum/patron/divine/eora)
-
 /obj/item/gravedecor/gravefence
 	name = "crude gravefence"
-	desc = "A crude fence made of unshaped pebbles, made to deliniate a grave (somewhat) exactly."
+	desc = "A crude fence of unshaped pebbles that roughly delineate a grave."
 	icon_state = "gravefence_stone"
 	dropshrink = 0.8
 	decorationquality = 1
 
 /obj/item/gravedecor/gravefence/block
 	name = "chiseled gravefence"
-	desc = "A gravefence of blocks to be embedded in the earth, made to deliniate a grave exactly."
+	desc = "These chiseled stones are arranged to outline the border of a grave."
 	icon_state = "gravefence_block"
 	dropshrink = 0.8
 	decorationquality = 2
 
 /obj/item/gravedecor/gravefence/iron
 	name = "iron gravefence"
-	desc = "A wrought iron grave fence. Ominous."
+	desc = "A wrought iron grave fence that is used to enclose a grave. Ominous."
 	icon_state = "gravefence_iron"
 	dropshrink = 0.8
 	decorationquality = 3

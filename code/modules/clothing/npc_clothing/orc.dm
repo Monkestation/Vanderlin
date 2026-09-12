@@ -10,7 +10,7 @@
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/padded/good
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 
 /obj/item/clothing/armor/plate/orc/warlord
 	name = "warlord armor"
@@ -30,7 +30,7 @@
 	armor_type = /datum/armor/maille/orc
 	body_parts_covered = CHEST|GROIN|ARMS|LEGS|VITALS
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 
 /obj/item/clothing/head/helmet/orc
 	name = "Orc Marauder Helmet"

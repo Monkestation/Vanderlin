@@ -31,6 +31,9 @@
 	log_directed_talk(owner, cast_on, message, LOG_SAY, name)
 
 	to_chat(owner, "I pluck the strings of [cast_on]'s mind!")
+	handle_message(cast_on)
+
+/datum/action/cooldown/spell/undirected/list_target/encode_thoughts/proc/handle_message(mob/living/cast_on)
 	cast_on.playsound_local(cast_on, sound, 100, TRUE)
 	to_chat(cast_on, "Your mind thinks to itself: </span><font color=#7246ff>\"[message]...\"</font>")
 

@@ -72,7 +72,7 @@
 			. += "<font color=[initial(material.color)]> [atom.name] </font> - [FLOOR((melting_pot[atom] / atom.melt_amount) * 100, 1)]% Melted"
 
 	if(internal_reagents?.total_volume)
-		var/datum/reagent/molten_metal/metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
+		var/datum/reagent/molten_metal/metal = internal_reagents.has_reagent(/datum/reagent/molten_metal)
 		if(metal)
 			for(var/datum/material/material as anything in metal.data)
 				if(!ispath(material))
@@ -155,7 +155,7 @@
 	// Output molten metal to connected channel
 	var/obj/structure/metal_channel/output = connected_channels[TEXT_SOUTH]
 	if(output && internal_reagents.total_volume > 0)
-		var/datum/reagent/molten_metal/internal_metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
+		var/datum/reagent/molten_metal/internal_metal = internal_reagents.has_reagent(/datum/reagent/molten_metal)
 		if(internal_metal)
 			var/to_transfer = min(output_rate, internal_metal.volume)
 			internal_reagents.trans_to(output.group_reagents, to_transfer, preserve_data = TRUE)
@@ -209,7 +209,7 @@
 			appearance_flags = (RESET_COLOR | KEEP_APART),
 		)
 
-		var/datum/reagent/molten_metal/metal = internal_reagents.get_reagent(/datum/reagent/molten_metal)
+		var/datum/reagent/molten_metal/metal = internal_reagents.has_reagent(/datum/reagent/molten_metal)
 		var/datum/material/largest = metal?.largest_metal
 
 		if(initial(largest?.show_as_filling) && internal_reagents.chem_temp > initial(largest.melting_point))

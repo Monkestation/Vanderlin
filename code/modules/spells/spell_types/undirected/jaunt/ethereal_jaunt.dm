@@ -9,10 +9,6 @@
 	invocation = "VANISHIKA"
 	invocation_type = INVOCATION_SHOUT
 
-	required_form = FORM_ARCANE
-	required_technique = TECHNIQUE_ALTERATION
-	required_level = 12 //lol
-	initial_charges = 3
 
 	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt
 
@@ -29,6 +25,14 @@
 	var/obj/effect/jaunt_out_type = /obj/effect/temp_visual/wizard/out
 	/// List of valid exit points
 	var/list/exit_point_list
+
+/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/lesser
+	name = "Lesser Ethereal Jaunt"
+	cooldown_time = 95 SECONDS
+	required_form = FORM_ARCANE
+	required_technique = TECHNIQUE_ALTERATION
+	required_level = 12 //lol
+	initial_charges = 3
 
 /datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/enter_jaunt(mob/living/jaunter, turf/loc_override)
 	. = ..()
@@ -225,3 +229,35 @@
 	. = ..()
 	if(!.)
 		return
+
+/obj/effect/dummy/phased_mob/spell_jaunt/blood
+	phased_mob_icon_state = "red_1"
+
+// BLOOD JAUNT
+
+/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/bloody_jaunt
+	name = "Bloody Jaunt"
+	desc = "This spell turns your form into blood mist, temporarily making you invisible and able to pass through walls."
+	button_icon_state = "watcher"
+	sound = 'sound/magic/enter_blood.ogg'
+	cooldown_time = 35 SECONDS
+
+	associated_skill = /datum/attribute/skill/magic/blood
+	spell_type = SPELL_BLOOD
+	required_form = FORM_BLOOD
+	required_technique = TECHNIQUE_ALTERATION
+	heretical_spell = TRUE
+	required_level = 12 //lol
+	initial_charges = 3
+
+	jaunt_type = /obj/effect/dummy/phased_mob/spell_jaunt/blood
+
+	exit_jaunt_sound = 'sound/magic/enter_blood.ogg'
+	jaunt_in_type = /obj/effect/temp_visual/wizard/blood
+	jaunt_out_type = /obj/effect/temp_visual/wizard/blood/out
+	jaunt_in_time = 0.8 SECONDS
+
+/datum/action/cooldown/spell/undirected/jaunt/ethereal_jaunt/bloody_jaunt/do_steam_effects(turf/loc)
+	var/datum/effect_system/blood_mist_spread/mist = new()
+	mist.set_up(10, FALSE, loc)
+	mist.start()

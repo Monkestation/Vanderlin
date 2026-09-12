@@ -1,8 +1,8 @@
 
 /mob/living/simple_animal/hostile/retaliate/cow
-	icon = 'icons/roguetown/mob/monster/cow.dmi'
 	name = "moo-beast"
 	desc = "The grail of many farmers. Commonfolk associate the motherly sow with Eora, and the raging bull with Ravox."
+	icon = 'icons/roguetown/mob/monster/cow.dmi'
 	icon_state = "cow"
 	icon_living = "cow"
 	icon_dead = "cow_dead"
@@ -10,7 +10,7 @@
 	indexed = TRUE
 
 	animal_species = /mob/living/simple_animal/hostile/retaliate/bull
-	faction = list("cows")
+	faction = list(FACTION_NEUTRAL)
 	gender = FEMALE
 	footstep_type = FOOTSTEP_MOB_SHOE
 	emote_hear = list("brays.")
@@ -131,15 +131,15 @@
 	ai_controller.set_blackboard_key(BB_BASIC_MOB_TIPPER, tipper)
 
 /mob/living/simple_animal/hostile/retaliate/bull
-	icon = 'icons/roguetown/mob/monster/cow.dmi'
 	name = "moo-beast bull"
 	desc = "Rambunctious as the war-saint himself, a depiction of the moo-beast bull looms on the standard of the Valorian city-state called Andalvia."
+	icon = 'icons/roguetown/mob/monster/cow.dmi'
 	icon_state = "bull"
 	icon_living = "bull"
 	icon_dead = "bull_dead"
 	icon_gib = "bull_gib"
 
-	faction = list("cows")
+	faction = list(FACTION_NEUTRAL)
 	footstep_type = FOOTSTEP_MOB_SHOE
 	emote_hear = list("chews.")
 	emote_see = list("shakes his head.", "chews his cud.")

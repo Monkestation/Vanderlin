@@ -13,6 +13,7 @@
 	item_weight = 60 GRAMS
 	abstract_type = /obj/item/clothing/ring
 	wetable = FALSE
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/clothing/ring/proc/can_identify(user)
 	return IsAdminGhost(user) || get_dist(user, src) < 2

@@ -276,7 +276,6 @@
 	plane = GAME_PLANE_UPPER
 	cookonme = FALSE
 	temperature_change = 0
-	fog_parter_effect = null
 	var/shows_empty = TRUE
 
 /obj/machinery/light/fueled/torchholder/c

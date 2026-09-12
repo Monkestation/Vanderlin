@@ -154,6 +154,8 @@
 #define span_nicegreen(str) ("<span class='nicegreen'>" + str + "</span>")
 #define span_boldnicegreen(str) ("<span class='bold nicegreen'>" + str + "</span>")
 
+// Colors
+#define span_yellow(str) ("<span class='yellow'>" + str + "</span>")
 
 /// Wrapper used to allow easy tracking of prayers within a chat tab.
 #define SPAN_PRAYER_WRAPPER(str) ("<span class='prayer'>" + str + "</span>")

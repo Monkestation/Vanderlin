@@ -3407,6 +3407,10 @@
 "KZ" = (
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/upper)
+"La" = (
+/obj/effect/spawner/traveltile_spawner/horizontal/inhumen,
+/turf/open/floor/cobblerock,
+/area/outdoors/bog)
 "Lb" = (
 /obj/structure/fluff/walldeco/bigpainting,
 /obj/structure/table/wood/plain,
@@ -3644,7 +3648,7 @@
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "MX" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/twig,
 /area/indoors)
 "MZ" = (
@@ -4834,7 +4838,7 @@
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/lower)
 "Zy" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/woodturned/nosmooth,
 /area/indoors)
 "Zz" = (
@@ -67685,7 +67689,7 @@ SK
 "}
 (112,1,2) = {"
 SK
-fl
+La
 mp
 mp
 mp

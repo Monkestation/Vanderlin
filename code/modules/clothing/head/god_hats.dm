@@ -72,7 +72,7 @@
 	body_parts_covered = FACE | NECK
 	hooded_body_parts_covered = HEAD_EXCEPT_MOUTH
 
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 250 GRAMS
 
 /obj/item/clothing/head/roguehood/astrata

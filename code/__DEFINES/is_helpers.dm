@@ -75,6 +75,7 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define ishumannorthern(A) (is_species(A, /datum/species/human/northern))
 #define isdwarfmountain(A) (is_species(A, /datum/species/dwarf/mountain))
 #define isdwarfjarosite(A) (is_species(A, /datum/species/dwarf/jarosite))
+#define isdwarforc(A) (is_species(A, /datum/species/dwarf/dworc))
 #define isdarkelf(A) (is_species(A, /datum/species/elf/dark))
 #define issnowelf(A) (is_species(A, /datum/species/elf/snow))
 #define ishalfelf(A) (is_species(A, /datum/species/human/halfelf))
@@ -113,6 +114,8 @@ GLOBAL_LIST_INIT(turfs_without_ground, typecacheof(list(
 #define isobserver(A) (istype(A, /mob/dead/observer))
 
 #define isrogueobserver(A) (istype(A, /mob/dead/observer/rogue))
+
+#define isscryeye(A) (istype(A, /mob/scry_eye))
 
 #define isdead(A) (istype(A, /mob/dead))
 
@@ -190,6 +193,7 @@ GLOBAL_LIST_INIT(RATS_DONT_EAT, typecacheof(list(
 // Garrison
 // Church
 	#define is_priest_job(job_type) (istype(job_type, /datum/job/priest))
+	#define is_oracle_job(job_type) (istype(job_type, /datum/job/admin/oracle))
 	#define is_monk_job(job_type) (istype(job_type, /datum/job/monk))
 	#define is_inquisitor_job(job_type) (istype(job_type, /datum/job/inquisitor))
 	#define is_adept_job(job_type) (istype(job_type, /datum/job/adept))

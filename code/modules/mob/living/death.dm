@@ -121,6 +121,7 @@ GLOBAL_LIST_EMPTY(last_words)
 
 	if(!gibbed && !QDELETED(src) && !HAS_TRAIT(src, TRAIT_NO_ROT) && rot_type)
 		LoadComponent(rot_type)
+		attempt_infect()
 
 	set_typing_indicator(FALSE)
 
@@ -136,6 +137,9 @@ GLOBAL_LIST_EMPTY(last_words)
 					to_chat(player, span_warning("Veiled whispers herald the Undermaiden's gaze in my mind's eye as it turns towards [locale] for but a brief, singular moment."))
 
 	return TRUE
+
+/mob/living/proc/attempt_infect()
+	return
 
 /mob/living/proc/prepare_deathsight_message()
 	var/area_of_death = LOWER_TEXT(get_area_name(src))

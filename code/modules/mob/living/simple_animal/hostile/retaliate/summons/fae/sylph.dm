@@ -2,8 +2,8 @@
 	return
 
 /mob/living/simple_animal/hostile/retaliate/fae/sylph
-	icon = 'icons/mob/summonable/32x32.dmi'
 	name = "sylph"
+	icon = 'icons/mob/summonable/32x32.dmi'
 	icon_state = "sylph"
 	icon_living = "sylph"
 	icon_dead = "vvd"
@@ -16,7 +16,7 @@
 	move_to_delay = 3
 	base_intents = list(/datum/intent/simple/bite)
 	butcher_results = list()
-	faction = list("fae")
+	faction = list(FACTION_FAE)
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 700
 	maxHealth = 700

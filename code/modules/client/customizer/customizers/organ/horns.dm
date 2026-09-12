@@ -163,6 +163,8 @@
 
 /datum/customizer_choice/organ/horns/tiefling
 	name = "Horns"
+	allows_accessory_color_customization = TRUE
+	var/hair_color = "#FFFFFF"
 	organ_type = /obj/item/organ/horns
 	sprite_accessories = list(
 		/datum/sprite_accessory/horns/tiefling,

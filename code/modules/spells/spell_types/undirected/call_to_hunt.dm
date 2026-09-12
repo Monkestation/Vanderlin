@@ -4,7 +4,7 @@
 	button_icon_state = "dendor"
 	sound = 'sound/magic/timestop.ogg'
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "FOR THE HUNT!"

@@ -7,6 +7,7 @@
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/alchemy = 20,
 		/datum/attribute/skill/misc/medicine = 30
 	)
@@ -19,6 +20,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/craft/alchemy = 20,
 		/datum/attribute/skill/misc/medicine = 35

@@ -52,7 +52,7 @@
 	force = DAMAGE_CLUB - 1
 	force_wielded = DAMAGE_CLUB_WIELD - 1
 	throwforce = DAMAGE_CLUB / 2
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_STATIC_200
 	associated_skill = /datum/attribute/skill/combat/axesmaces
 	throw_speed = 1
 	throw_range = 7

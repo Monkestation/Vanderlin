@@ -59,7 +59,7 @@
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/brigandine
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 8 KILOGRAMS
 	stand_speed_reduction = 1.15
@@ -121,7 +121,7 @@
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/plate/bad
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 	uses_lord_coloring = LORD_PRIMARY
 	stand_speed_reduction = 1.15
@@ -142,7 +142,7 @@
 	// add armor plate bad from defines
 	stand_speed_reduction = 1.05
 
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/armor/brigandine/light
 	name = "lightweight brigandine"

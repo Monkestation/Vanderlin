@@ -373,7 +373,12 @@
 		/datum/sprite_accessory/hair/head/muzzy,
 		/datum/sprite_accessory/hair/head/baothan,
 		/datum/sprite_accessory/hair/head/scabbard,
-		/datum/sprite_accessory/hair/head/dreamer
+		/datum/sprite_accessory/hair/head/dreamer,
+		/datum/sprite_accessory/hair/head/fir,
+		/datum/sprite_accessory/hair/head/shopkeep,
+		/datum/sprite_accessory/hair/head/the_talker,
+		/datum/sprite_accessory/hair/head/lone_wolfcut,
+		/datum/sprite_accessory/hair/head/innocent_curls
 		)
 
 /datum/customizer/bodypart_feature/hair/head/humanoid/triton

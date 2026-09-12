@@ -15,6 +15,7 @@
 	desc = "A gemerald ring, glimmering with verdant brilliance. The closer your hand drifts to it, the stronger that the wind howls."
 	icon_state = "g_newring_emerald"
 	sellprice = 222
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/active_item
 
 /obj/item/clothing/ring/statgemerald/equipped(mob/living/user, slot)
@@ -47,6 +48,7 @@
 	desc = "An onyx ring, shining with violet determination. The closer your hand drifts to it, the faster your heart pounds."
 	icon_state = "g_newring_quartz"
 	sellprice = 222
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/active_item
 
 /obj/item/clothing/ring/statonyx/equipped(mob/living/user, slot)
@@ -79,6 +81,7 @@
 	desc = "A saffira ring, crackling with azuric fascination. The closer your hand drifts to it, the clearer your mind becomes."
 	icon_state = "g_newring_sapphire"
 	sellprice = 222
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/active_item
 
 /obj/item/clothing/ring/statamythortz/equipped(mob/living/user, slot)
@@ -110,6 +113,7 @@
 	desc = "A rontz ring, radiating with crimson authority. The closer your hand drifts to it, the tighter your knuckles curl."
 	icon_state = "g_newring_ruby"
 	sellprice = 222
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/active_item
 
 /obj/item/clothing/ring/statrontz/equipped(mob/living/user, slot)
@@ -148,6 +152,7 @@
 	icon_state = "newmulticolor"
 	smeltresult = /obj/item/riddleofsteel
 	sellprice = 777
+	pickpocket_difficulty = SKILL_RANK_MASTER
 	var/active_item
 
 /obj/item/clothing/ring/statdorpel/Initialize(mapload)
@@ -189,6 +194,7 @@
 	melting_material = /datum/material/draconic
 	melt_amount = 100
 	sellprice = 666
+	pickpocket_difficulty = SKILL_RANK_MASTER
 	var/active_item
 
 /obj/item/clothing/ring/dragon_ring/equipped(mob/living/user, slot)

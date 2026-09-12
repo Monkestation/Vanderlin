@@ -50,8 +50,6 @@
 	var/obj/item/bodypart/limb = owner.get_bodypart(current_zone)
 	for(var/obj/item/grabbing/grab in grabbedby)
 		bleed_mod *= grab.bleed_suppressing
-	if(limb.bandage)
-		bleed_mod *= limb.bandage.bandage_effectiveness
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
 		if(human_owner.physiology)
@@ -68,6 +66,8 @@
 	var/final_bleed_rate = CEILING(blood_flow * bleed_mod * delta_time, 0.1)
 	if(final_bleed_rate <= 0)
 		return
+	if(limb.bandage && limb.try_bandage_expire(final_bleed_rate))
+		return
 	if(COOLDOWN_FINISHED(src, next_squirt))
 		squirt(final_bleed_rate)
 	else
@@ -76,8 +76,11 @@
 /obj/item/organ/artery/handle_blood(delta_time, times_fired, in_bleedout)
 	var/arterial_efficiency = get_slot_efficiency(ORGAN_SLOT_ARTERY)
 	var/failer = is_failing_without_bleedout()
-	if(failer || in_bleedout)
+	var/cpr_active = (world.time < owner?.pmup_heart_grace)
+	if((failer || in_bleedout)  && !cpr_active)
 		return
+	if(cpr_active)
+		arterial_efficiency *= 2 //sure
 	current_blood = min(current_blood + (2.5 * delta_time) * (max(1, arterial_efficiency)/ORGAN_OPTIMAL_EFFICIENCY), max_blood_storage)
 
 /obj/item/organ/artery/tear()
@@ -121,10 +124,10 @@
 			break
 
 	var/unrestricted_flow = TRUE
-	if(LAZYLEN(limb.grabbedby) || limb.bandage)
+	if(LAZYLEN(limb.grabbedby))
 		unrestricted_flow = FALSE
 	if(unrestricted_flow || force)
-		if(open_wound && (owner.get_blood_circulation() >= amount) || force)
+		if((open_wound && (owner.get_blood_circulation() >= amount)) || force)
 			playsound(owner, squirt_sound, 75, 0)
 			owner.bleed(amount)
 			//owner.do_arterygush()

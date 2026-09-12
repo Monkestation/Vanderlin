@@ -13,7 +13,6 @@
 
 /datum/clan/abyss/on_gain(mob/living/carbon/human/H, is_vampire = TRUE)
 	. = ..()
-	H.add_faction("Abyss")
 	H.AddElement(/datum/element/holy_weakness)
 
 /datum/clan/abyss/get_downside_string()

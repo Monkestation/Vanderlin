@@ -7,12 +7,12 @@
 	attacked_sound = "parrywood"
 	sharpness = IS_BLUNT
 	wdefense = BAD_PARRY
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_STATIC_200
 	possible_item_intents = list(SHIELD_BASH)
 
 /obj/item/weapon/scabbard/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /*
 	GENERIC SCABBARDS
@@ -214,7 +214,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/attribute/skill/craft/carpentry
 	associated_skill = /datum/attribute/skill/combat/shields
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STATIC_300
 	sellprice = 10
 	item_weight = 400 GRAMS
 
@@ -227,7 +227,7 @@
 	desc = "A cloud-patterned scabbard with a cloth sash. Used for blocking."
 	icon_state = "kazscab_steel"
 	item_state = "kazscab_steel"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STATIC_400
 	item_weight = 450 GRAMS
 
 /obj/item/weapon/scabbard/blackmeadow/gold
@@ -235,5 +235,4 @@
 	desc = "An ornate, wooden scabbard with a sash. Great for parrying."
 	icon_state = "kazscab_gold"
 	item_state = "kazscab_gold"
-	max_integrity = INTEGRITY_STRONGEST
 	item_weight = 500 GRAMS

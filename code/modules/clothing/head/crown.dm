@@ -6,6 +6,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	abstract_type = /obj/item/clothing/head/crown
 	item_weight = 2.23 KILOGRAMS //the weight of the crown or something thematic
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/head/crown/circlet
 	name = "golden circlet"

@@ -198,7 +198,79 @@
 		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)
 		apply_generic_weapon_damage(user, parent, victim, parent.force * 1.5, STAB, BODY_ZONE_CHEST, BCLASS_STAB)
 
+/datum/special_intent/quarterstaff_sweep
+	name = "Quarterstaff Sweep"
+	desc = "Sweep a five-tile frontal arc, knocking foes back and leaving them vulnerable. Aims for the targeted zone."
+	tile_coordinates = list(list(-1,-1), list(1,-1), list(-1,0), list(0,0), list(1,0))
+	pre_icon_state = "warning"
+	post_icon_state = "sweep_fx"
+	post_sound = 'sound/combat/wooshes/blunt/wooshmed (1).ogg'
+	attack_delay = 0.6 SECONDS
+	cooldown = 15 SECONDS
+	stamina_cost = 20
+
+/datum/special_intent/quarterstaff_sweep/apply_hit(mob/living/user, obj/item/parent, turf/target)
+	for(var/mob/living/victim in target)
+		if(victim == user)
+			continue
+		if(victim.body_position == LYING_DOWN)
+			continue
+		var/turf/throw_target = get_edge_target_turf(user, get_dir(user, get_step_away(victim, user)))
+		victim.safe_throw_at(throw_target, rand(1, 2), 1, user, force = MOVE_FORCE_STRONG)
+		var/hit_zone = user.zone_selected
+		apply_generic_weapon_damage(user, parent, victim, parent.force * 1.3, BLUNT, hit_zone, BCLASS_BLUNT)
+		user.apply_status_effect(/datum/status_effect/debuff/exposed, 3 SECONDS)
+
 #define GREAT_OUTER_DELAY 0.7 SECONDS
+
+/datum/special_intent/polearm_backstep
+	name = "Polearm Backstep"
+	desc = "A defensive used to quickly gain distance, shoving back any pursuer backwards, slowing and exposing them. Always targets the chest."
+	tile_coordinates = list(
+		list(0,-1), list(1,-1), list(-1,-1)
+		)
+	post_icon_state = "sweep_fx"
+	pre_icon_state = "fx_trap_long"
+	post_sound = 'sound/combat/rend_hit.ogg'
+	pre_sound = 'sound/combat/polearm_woosh.ogg'
+	respect_adjacency = FALSE
+	respect_dir = TRUE
+	attack_delay = 0.5 SECONDS
+	cooldown = 15 SECONDS
+	stamina_cost = 15	//Stamina cost
+	var/min_dist = 3
+	var/push_dir
+
+/datum/special_intent/polearm_backstep/after_creation(mob/living/user, obj/item/parent, list/turfs)
+	. = ..()
+
+	var/turf/throw_target = get_edge_target_turf(user, get_dir(user, get_step_away(user, get_step(get_turf(user), user.dir))))
+	push_dir = user.dir
+	user.safe_throw_at(throw_target, 1, 1, user, force = MOVE_FORCE_EXTREMELY_STRONG)
+
+	if(user.z != starting_loc.z)
+		return FALSE // we got thrown off a cliff or something
+
+	if(user.body_position != STANDING_UP)
+		return FALSE // we got thrown at a wall and fell over :(
+
+/datum/special_intent/polearm_backstep/apply_hit(mob/living/user, obj/item/parent, turf/target)
+	if(get_dist(user, target) > min_dist)
+		return
+
+	for(var/mob/living/victim in target)
+		if(victim == user)
+			continue
+		if(victim.body_position == LYING_DOWN)
+			continue
+
+		victim.Slowdown(5)
+
+		var/turf/throw_target = get_edge_target_turf(user, push_dir)
+		victim.safe_throw_at(throw_target, 1, 1, user, force = MOVE_FORCE_EXTREMELY_STRONG)
+		victim.apply_status_effect(/datum/status_effect/debuff/exposed, 4.5 SECONDS)
+
+		apply_generic_weapon_damage(user, parent, victim, parent.force, BLUNT, BODY_ZONE_CHEST, BCLASS_BLUNT)
 
 /datum/special_intent/greatsword_swing
 	name = "Great Swing"

@@ -70,8 +70,8 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "FOR THE BOSS.")
 	switch(weapon_choice)
 		if("Barehands")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 5)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/wrestling, 5, 35)
 			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 			spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
 

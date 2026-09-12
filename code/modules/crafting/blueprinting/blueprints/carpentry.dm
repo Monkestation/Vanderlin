@@ -240,7 +240,7 @@
 /datum/blueprint_recipe/carpentry/closet
 	name = "closet"
 	desc = "A wooden storage closet."
-	result_type = /obj/structure/closet/crate/crafted_closet/crafted
+	result_type = /obj/structure/closet/crate/crafted_closet
 	required_materials = list(
 		/obj/item/grown/log/tree/small = 2,
 		/obj/item/natural/wood/plank = 1

@@ -13,7 +13,9 @@
 	var/animname = "strike"
 	var/blade_class = BCLASS_BLUNT
 	var/list/hitsound = list('sound/combat/hits/blunt/bluntsmall (1).ogg', 'sound/combat/hits/blunt/bluntsmall (2).ogg')
+	/// Whether the target can parry this action.
 	var/canparry = TRUE
+	/// Whether the target can dodge this action.
 	var/candodge = TRUE
 	var/iparrybonus = 0
 	var/idodgebonus = 0

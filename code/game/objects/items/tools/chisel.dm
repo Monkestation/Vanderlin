@@ -9,7 +9,7 @@
 	throwforce = DAMAGE_KNIFE - 8
 	possible_item_intents = list(/datum/intent/chisel, /datum/intent/stab)
 	max_blade_int = 50
-	max_integrity = INTEGRITY_POOR - 10
+	max_integrity = INTEGRITY_STATIC_200 * INTEGRITY_MOD_STEEL
 	sharpness = IS_SHARP
 
 	experimental_inhand = TRUE
@@ -44,19 +44,20 @@
 	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	toolspeed = 1.1
+	max_integrity = INTEGRITY_STATIC_200 * INTEGRITY_MOD_IRON
 
 /obj/item/weapon/chisel/stone
 	name = "flint chisel"
 	icon_state = "stonechisel"
-	icon = 'icons/roguetown/weapons/tools.dmi'
 	smeltresult = /obj/item/natural/stone
 	toolspeed = 1
+	max_integrity = INTEGRITY_STATIC_200 * INTEGRITY_MOD_IMPROV
 
 /obj/item/weapon/chisel/bronze
 	name = "bronze chisel"
 	icon_state = "bchisel"
-	icon = 'icons/roguetown/weapons/tools.dmi'
 	smeltresult = /obj/item/ingot/bronze
 	melting_material = /datum/material/bronze
 	toolspeed = 1.2
 	item_weight = 245 GRAMS
+	max_integrity = INTEGRITY_STATIC_200 * INTEGRITY_MOD_BRONZE

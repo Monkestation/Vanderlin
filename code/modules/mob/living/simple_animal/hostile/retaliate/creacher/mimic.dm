@@ -30,7 +30,6 @@
 	emote_taunt = list("howls")
 	speak_emote = list("clatters")
 
-	faction = list("mimic", "hostile")
 	wander = 0
 	stat_attack = UNCONSCIOUS
 
@@ -52,7 +51,7 @@
 		for(var/obj/item/I in loc)
 			I.forceMove(src)
 	icon_state = "mimic"
-	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY|MAGIC_RESISTANCE_MIND , null, null)
+	AddComponent(/datum/component/anti_magic, MAGIC_RESISTANCE|MAGIC_RESISTANCE_HOLY|MAGIC_RESISTANCE_MIND|MAGIC_RESISTANCE_UNHOLY|MAGIC_RESISTANCE_BLOOD , null, null)
 
 /mob/living/simple_animal/hostile/retaliate/mimic/death()
 	icon_state = "[initial(icon_state)]dead"

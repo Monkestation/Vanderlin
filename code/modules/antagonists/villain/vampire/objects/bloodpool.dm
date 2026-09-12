@@ -387,6 +387,25 @@
 	new /obj/item/clothing/shoes/boots/armor/ancient(T)
 	creation_point.visible_message(span_notice("A complete set of armor materializes from the crimson crucible."))
 
+/datum/vampire_project/ceremonial_crafting
+	display_name = "Ancient Ceremonial Plate"
+	description = "Craft a complete set of ceremonial vampiric armor from crystallized blood."
+	total_cost = VAMPCOST_TWO
+	completion_sound = 'sound/misc/vcraft.ogg'
+
+/datum/vampire_project/armor_crafting/on_complete(atom/movable/creation_point)
+	var/turf/T = get_turf(bloodpool)
+	new /obj/item/clothing/head/helmet/ancient/vampire(T)
+	new /obj/item/clothing/face/facemask/steel/ancient(T)
+	new /obj/item/clothing/neck/gorget/ancient/vampire(T)
+	new /obj/item/clothing/armor/plate/ancient/vampire(T)
+	new /obj/item/clothing/armor/chainmail/hauberk/ancient/vampire(T)
+	new /obj/item/clothing/wrists/bracers/ancient/vampire(T)
+	new /obj/item/clothing/gloves/plate/ancient/vampire(T)
+	new /obj/item/clothing/pants/platelegs/ancient/vampire(T)
+	new /obj/item/clothing/shoes/boots/armor/ancient/vampire(T)
+	creation_point.visible_message(span_notice("A complete set of armor materializes from the crimson crucible."))
+
 
 #undef VAMPCOST_ONE
 #undef VAMPCOST_TWO

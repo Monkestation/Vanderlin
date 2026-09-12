@@ -29,7 +29,7 @@
 	tier = 5
 	speak_emote = list("roars")
 	base_intents = list(/datum/intent/unarmed/dragonclaw)
-	faction = list("aberrant")
+	faction = list(FACTION_ABERRANT)
 	melee_damage_lower = 40
 	melee_damage_upper = 40
 	retreat_distance = 0

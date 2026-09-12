@@ -756,6 +756,10 @@
 		var/log_msg
 		if(E.age == AGE_CHILD)
 			log_msg = "[key_name(H)][ADMIN_FLW(H)] kissed [key_name(E)] [ADMIN_FLW(E)], a CHILD!"
+			if(H.zone_selected == BODY_ZONE_PRECISE_SKULL)
+				log_msg += " On the FOREHEAD."
+			else if(H.zone_selected == BODY_ZONE_HEAD)
+				log_msg += " On the CHEEK."
 			if(H.age == AGE_CHILD)
 				log_msg += " As a child."
 			else
@@ -769,17 +773,23 @@
 			if(H.pulling == target)
 				do_change = TRUE
 		if(do_change)
-			if(H.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-				message_param = "kisses %t deeply."
-			else if(H.zone_selected == BODY_ZONE_PRECISE_EARS)
-				message_param = "kisses %t on the ear."
-				if(E.dna.species?.id == "elf")
-					if(!E.cmode)
-						to_chat(target, span_love("It tickles..."))
-			else if(H.zone_selected == BODY_ZONE_PRECISE_R_EYE || H.zone_selected == BODY_ZONE_PRECISE_L_EYE)
-				message_param = "kisses %t on the brow."
-			else
-				message_param = "kisses %t on \the [parse_zone(H.zone_selected)]."
+			switch(H.zone_selected)
+				if(BODY_ZONE_PRECISE_MOUTH)
+					message_param = "kisses %t deeply."
+				if(BODY_ZONE_PRECISE_EARS)
+					message_param = "kisses %t on the ear."
+					if(E.dna?.species.id in RACES_PLAYER_ELF_ALL)
+						if(!E.cmode)
+							E.flash_fullscreen("whiteflash")
+							to_chat(target, span_love("It tickles..."))
+				if(BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE)
+					message_param = "kisses %t on the brow."
+				if(BODY_ZONE_PRECISE_SKULL)
+					message_param = "kisses %t on the forehead."
+				if(BODY_ZONE_HEAD)
+					message_param = "kisses %t on the cheek."
+				else
+					message_param = "kisses %t on \the [parse_zone(H.zone_selected)]."
 	playsound(target, pick('sound/vo/kiss (1).ogg','sound/vo/kiss (2).ogg'), 100, FALSE, -1)
 	if(user.mind)
 		record_round_statistic(STATS_KISSES_MADE)
@@ -1102,9 +1112,13 @@
 	. = ..()
 	if(!user || !target)
 		return
+	var/mob/living/carbon/human/U
+	if(ishuman(user))
+		U = user
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
-		H.flash_fullscreen("redflash3")
+		if(!U || U.zone_selected != BODY_ZONE_PRECISE_GROIN)
+			H.flash_fullscreen("redflash3")
 		H.AdjustSleeping(-50)
 		playsound(target, pick('sound/foley/slap (1).ogg','sound/foley/slap (2).ogg'), 50, FALSE, -1)
 

@@ -46,7 +46,7 @@
 	)
 
 /datum/outfit/job/human/species/human/northern/militia/pre_equip(mob/living/carbon/human/H)
-	if(H.has_faction("viking"))
+	if(H.has_faction(FACTION_VIKINGS))
 		cloak = /obj/item/clothing/cloak/stabard/mercenary
 	else
 		cloak = /obj/item/clothing/cloak/stabard/guard
@@ -122,4 +122,4 @@
 	wander = FALSE
 
 /mob/living/carbon/human/species/human/northern/militia/deserter // Bad deserter, trash mob
-	faction = list("viking", "station")
+	faction = list(FACTION_VIKINGS)

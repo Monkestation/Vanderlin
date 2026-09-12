@@ -45,6 +45,7 @@
 		/datum/action/cooldown/spell/gravemark,
 		/datum/action/cooldown/spell/control_undead
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/wretch/necromancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -59,19 +60,19 @@
 	. = ..()
 
 	var/static/list/selectablehat = list(
+		"Magus hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/magus,
+		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
+		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
+		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
 		"Witch hat" = /obj/item/clothing/head/wizhat/witch,
 		"Random Wizard hat" = /obj/item/clothing/head/wizhat/random,
-		"Generic Wizard hat" = /obj/item/clothing/head/wizhat/gen,
-		"Mage hood" = /obj/item/clothing/head/roguehood/colored/mage,
-		"Black hood" = /obj/item/clothing/head/roguehood/colored/black,
-		"Ominous hood (skullcap)" = /obj/item/clothing/head/helmet/skullcap/cult,
 	)
 	spawned.select_equippable(player_client, selectablehat, message = "Choose your hat of choice", title = "NECROMANCER")
 
 	var/static/list/selectablerobe = list(
+		"Magus robes" = /obj/item/clothing/shirt/robe/magus,
 		"Black robes" = /obj/item/clothing/shirt/robe/colored/black,
 		"Mage robes" = /obj/item/clothing/shirt/robe/colored/mage,
-		"Necromancer robes" = /obj/item/clothing/shirt/robe/necromancer
 	)
 	spawned.select_equippable(player_client, selectablerobe, message = "Choose your robe of choice", title = "NECROMANCER")
 
@@ -93,7 +94,7 @@
 		/obj/item/spellbook/expert/starter/death = 1,
 		/obj/item/chalk = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1
 	)

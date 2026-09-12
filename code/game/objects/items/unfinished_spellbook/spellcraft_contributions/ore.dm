@@ -37,6 +37,11 @@
 	form_points = list(FORM_FIRE = 1)
 	form_magnitude_modifications = list(FORM_ARCANE = 0.1)
 
+/datum/spellcraft_contribution/ore_bloodstone
+	atom_path = /obj/item/ore/bloodstone
+	form_points = list(FORM_BLOOD = 1)
+	form_magnitude_modifications = list(FORM_BLOOD = 0.1)
+
 /datum/spellcraft_contribution/ore_dust_gold
 	atom_path = /obj/item/ore/dust/gold
 	form_cost_multipliers = list(FORM_ARCANE = 0.95)
@@ -62,6 +67,10 @@
 	form_cost_multipliers = list(FORM_AIR = 0.95)
 	form_cast_speed_multipliers = list(FORM_AIR = 1.05)
 
+/datum/spellcraft_contribution/ore_dust_bloodstone
+	atom_path = /obj/item/ore/dust/bloodstone
+	form_cost_multipliers = list(FORM_BLOOD = 0.95)
+	form_cast_speed_multipliers = list(FORM_BLOOD = 1.05)
 
 /datum/spellcraft_contribution/ingot_gold
 	atom_path = /obj/item/ingot/gold
@@ -211,3 +220,8 @@
 	form_points = list(FORM_ARCANE = 2)
 	form_magnitude_modifications = list(FORM_WATER = 0.1)
 	technique_points = list(TECHNIQUE_ILLUSION = 1)
+
+/datum/spellcraft_contribution/ingot_bloodsteel
+	atom_path = /obj/item/ingot/bloodsteel
+	form_points = list(FORM_BLOOD = 2)
+	form_magnitude_modifications = list(FORM_BLOOD = 0.1)

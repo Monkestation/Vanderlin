@@ -12,7 +12,7 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(FLAIL_THRESH, MACE_STRIKE)
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
@@ -144,7 +144,7 @@
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	sharpness = IS_SHARP
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CUT
@@ -211,7 +211,7 @@
 	associated_skill = /datum/attribute/skill/combat/polearms
 
 	wlength = 66
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 912 GRAMS
 
 /obj/item/weapon/hoe/Initialize()
@@ -343,7 +343,7 @@
 	force_wielded = DAMAGE_STAFF_WIELD - 10
 	smeltresult = null
 	anvilrepair = null
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 	item_weight = 742 GRAMS
 
 /*------------\
@@ -377,7 +377,7 @@
 	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/attribute/skill/combat/polearms
 	thrown_bclass = BCLASS_STAB
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 1.91 KILOGRAMS
 
 	var/list/forked = list()

@@ -1,8 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - balance: "Shortsword damage increased from 16 to 22, and the Cut intent deals full damage instead of 85%."
-  - balance: "Sabre damage increased from 20 to 24."
-  - balance: "Iron Warhammer damage increased from 20 to 22, and they have the Thrust intent now like the other Warhammers."
-  - balance: "Steel and Silver Warhammer damage reduced from 25 to 24."
-  - balance: "Rapiers now have the Lunge intent. All forms of the Lunge intent now have a short charge-up time."

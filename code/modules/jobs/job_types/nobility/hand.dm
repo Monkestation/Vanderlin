@@ -9,7 +9,7 @@
 	department_flag = NOBLEMEN
 	display_order = JDO_HAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/grant_title)
@@ -21,7 +21,8 @@
 
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	jobs_always_know_me = list(JOB_COURT_AGENT)
+	jobs_i_always_know = KNOW_COURT_AGENT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY
@@ -80,7 +81,7 @@
 
 /datum/job/advclass/hand
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 
 /datum/attribute_holder/sheet/job/hand
 	raw_attribute_list = list(

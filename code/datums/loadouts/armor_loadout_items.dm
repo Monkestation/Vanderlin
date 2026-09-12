@@ -11,3 +11,10 @@
 	ui_category = "Armor"
 
 	triumph_cost_permanent = 150
+
+/datum/loadout_item/leathercoat_greyscale
+	name = "Colorable Leathercoat"
+	item_path = /obj/item/clothing/armor/leather/jacket/leathercoat/colored
+	ui_category = "Armor"
+
+	triumph_cost_permanent = 150

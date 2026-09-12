@@ -143,7 +143,7 @@
 		fatigue_used = 0 // we do this after we've actually changed fatigue because we're hard-capping the raises this gives to Expert
 
 	if(fatigue_used > 0)
-		adjust_experience(owner, associated_skill, fatigue_used)
+		owner.adjust_experience(associated_skill, fatigue_used)
 
 /obj/item/melee/touch_attack/prestidigitation
 	name = "\improper prestidigitating touch"

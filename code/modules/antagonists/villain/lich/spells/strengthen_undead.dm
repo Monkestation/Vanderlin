@@ -7,6 +7,7 @@
 	required_form = FORM_DEATH
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 2
+	heretical_spell = TRUE
 
 	charge_required = FALSE
 	cooldown_time = 15 SECONDS

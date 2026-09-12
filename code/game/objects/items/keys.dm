@@ -896,11 +896,11 @@
 /obj/item/key/vampire
 	desc = "This key is awfully pink and weirdly shaped."
 	icon_state = "vampkey"
-	lockids = list("mansionvampire")
+	lockids = list(ACCESS_VAMPIRE)
 
 /obj/item/key/bandit
 	icon_state = "mazekey"
-	lockids = list("banditcamp")
+	lockids = list(ACCESS_BANDIT)
 
 
 ////// MINOR NOBLES

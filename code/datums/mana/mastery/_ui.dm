@@ -111,6 +111,7 @@
 			"canUnlearn" = is_unlocked, // any unlocked spell can be unlearned
 			"icon" = "[initial(spell_path.button_icon)]",
 			"iconState" = initial(spell_path.button_icon_state),
+			"heretical" = initial(spell_path.heretical_spell),
 		))
 	data["spells"] = spell_data
 	return data

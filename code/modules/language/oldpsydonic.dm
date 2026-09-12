@@ -1,6 +1,6 @@
 /datum/language/oldpsydonic
 	name = "Old Psydonic"
-	desc = ""
+	desc = "A nearly forgotten tongue now practiced almost exclusively by the Order of the Empty Throne."
 	icon_state = "psydon"
 	spans = list(SPAN_PSYDON_OLD)
 	speech_verb = "states"

@@ -14,7 +14,6 @@
 	see_in_dark = 6
 	move_to_delay = 5
 	base_intents = list(/datum/intent/simple/claw)
-	faction = list("poltergeist")
 	mob_biotypes = MOB_UNDEAD
 	health = 80//Low health because it's impossible to be hit as is. Use Churn Undead to get rid of a haunting.
 	maxHealth = 80

@@ -3,6 +3,7 @@
 	desc = "A glimmering weddingband of silver, ornately decorated with the engravings of a lover's name."
 	icon_state = "s_ring_wedding"
 	sellprice = 3	//You don't get to smelt this down or sell it. No free mams for a loadout item.
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/choicename = FALSE
 	var/choicedesc = FALSE
 

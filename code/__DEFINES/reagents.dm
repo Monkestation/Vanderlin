@@ -38,10 +38,14 @@
 /// Used for direct snorting of reagents
 #define SNORT (1<<5)
 
-///The smallest amount of volume allowed - prevents tiny numbers
-#define CHEMICAL_VOLUME_MINIMUM 0.001
+///The minimum volume of reagents than can be operated on.
+#define CHEMICAL_QUANTISATION_LEVEL 0.0001
+///Sanity check limit to clamp chems to sane amounts and prevent rounding errors during transfer.
+#define CHEMICAL_VOLUME_ROUNDING 0.01
 ///The maximum temperature a reagent holder can attain
 #define CHEMICAL_MAXIMUM_TEMPERATURE 99999
+/// the default temperature at which chemicals are added to reagent holders at
+#define DEFAULT_REAGENT_TEMPERATURE T20C
 
 #define MIMEDRINK_SILENCE_DURATION 30  //ends up being 60 seconds given 1 tick every 2 seconds
 //used by chem masters and pill presses

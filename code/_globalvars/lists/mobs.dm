@@ -34,6 +34,9 @@ GLOBAL_LIST_EMPTY(spidermobs)				//all sentient spider mobs
 GLOBAL_LIST_EMPTY(bots_list)
 GLOBAL_LIST_EMPTY(aiEyes)
 
+GLOBAL_LIST_EMPTY(available_mercenaries)
+GLOBAL_LIST_EMPTY(contracted_mercenaries)
+
 GLOBAL_LIST_EMPTY(language_datum_instances)
 GLOBAL_LIST_EMPTY(all_languages)
 

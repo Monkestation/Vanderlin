@@ -20,8 +20,8 @@
 
 
 /mob/living/simple_animal/hostile/retaliate/fae/dryad	//Make this cause giant vine tangled messes
-	icon = 'icons/mob/summonable/32x64.dmi'
 	name = "dryad"
+	icon = 'icons/mob/summonable/32x64.dmi'
 	icon_state = "dryad"
 	icon_living = "dryad"
 	icon_dead = "vvd"
@@ -35,7 +35,7 @@
 	move_to_delay = 12
 	base_intents = list(/datum/intent/simple/elementalt2_unarmed)
 	butcher_results = list()
-	faction = list("fae", FACTION_PLANTS)
+	faction = list(FACTION_FAE, FACTION_PLANTS)
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 650
 	maxHealth = 650

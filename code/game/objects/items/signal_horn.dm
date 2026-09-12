@@ -9,6 +9,7 @@
 	grid_height = 32
 	grid_width = 64
 	COOLDOWN_DECLARE(sound_horn)
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/signal_horn/attack_self(mob/living/user, list/modifiers)
 	. = ..()

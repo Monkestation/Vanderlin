@@ -265,7 +265,8 @@
 	/turf/closed/mineral/cinnabar = 5,
 	/turf/closed/mineral/gold = 15,
 	/turf/closed/mineral/iron = 25,
-	/turf/closed/mineral/silver = 15
+	/turf/closed/mineral/silver = 15,
+	/turf/closed/mineral/bloodstone = 1,
 	)
 
 /turf/closed/mineral/random/low_nonval
@@ -303,7 +304,8 @@
 	mineralSpawnChanceList = list(/turf/closed/mineral/mana_crystal = 10,
 	/turf/closed/mineral/gold = 40 ,
 	/turf/closed/mineral/gemeralds = 20,
-	/turf/closed/mineral/silver = 40
+	/turf/closed/mineral/silver = 40,
+	/turf/closed/mineral/bloodstone = 7,
 	)
 
 /turf/closed/mineral/random/med_valuable
@@ -312,7 +314,8 @@
 	mineralSpawnChanceList = list(/turf/closed/mineral/mana_crystal = 10,
 	/turf/closed/mineral/gold = 40,
 	/turf/closed/mineral/gemeralds = 20,
-	/turf/closed/mineral/silver = 40
+	/turf/closed/mineral/silver = 40,
+	/turf/closed/mineral/bloodstone = 7,
 	)
 
 /turf/closed/mineral/random/high_valuable
@@ -321,7 +324,8 @@
 	mineralSpawnChanceList = list(/turf/closed/mineral/mana_crystal = 10,
 	/turf/closed/mineral/gold = 40 ,
 	/turf/closed/mineral/gemeralds = 20,
-	/turf/closed/mineral/silver = 40
+	/turf/closed/mineral/silver = 40,
+	/turf/closed/mineral/bloodstone = 7,
 	)
 
 /turf/closed/mineral/copper
@@ -386,6 +390,14 @@
 	rockType = /obj/item/natural/rock/mana_crystal
 	spreadChance = 23
 	spread = 5
+
+/turf/closed/mineral/bloodstone
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral.dmi', 'icons/turf/mining/mining.dmi')
+	icon_state = MAP_SWITCH("mineral", "gem")
+	mineralType = /obj/item/ore/bloodstone
+	rockType = /obj/item/natural/rock/bloodstone
+	spreadChance = 1
+	spread = 2
 
 /obj/item/natural/rock/mana_crystal
 	mineralType = /obj/item/mana_battery/mana_crystal/standard

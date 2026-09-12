@@ -791,6 +791,8 @@
 
 //src is the user that will be carrying, target is the mob to be carried
 /mob/living/carbon/human/proc/can_piggyback(mob/living/carbon/target)
+	if(HAS_TRAIT(target, TRAIT_MOVE_FLYING) || HAS_TRAIT(target, TRAIT_MOVE_FLOATING))
+		return FALSE
 	return istype(target) && target.stat == CONSCIOUS
 
 /mob/living/carbon/human/proc/can_be_firemanned(mob/living/target)
@@ -799,6 +801,9 @@
 /mob/living/carbon/human/proc/fireman_carry(mob/living/carbon/target)
 	if(!can_be_firemanned(target) || incapacitated(IGNORE_GRAB))
 		to_chat(src, span_warning("I can't fireman carry [target] while [target.p_they()] [target.p_are()] standing!"))
+		return
+	if(HAS_TRAIT(src, TRAIT_MOVE_FLYING) || HAS_TRAIT(src, TRAIT_MOVE_FLOATING))
+		to_chat(src, span_warning("I can't fireman carry [target] while I am flying."))
 		return
 
 	var/carrydelay = 5 SECONDS //if you have latex you are faster at grabbing

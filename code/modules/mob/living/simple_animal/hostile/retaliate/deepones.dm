@@ -32,12 +32,9 @@
 	defprob = 50
 	defdrain = 20
 	speak_emote = list("burbles")
-	faction = list("deepone")
+	faction = list(FACTION_DEEP)
 	footstep_type = FOOTSTEP_MOB_BAREFOOT
 	animal_type = /datum/blood_type/human/triton
-
-
-
 	ai_controller = /datum/ai_controller/deepone
 
 /mob/living/simple_animal/hostile/deepone/Initialize()
@@ -127,4 +124,4 @@
 	add_filter("elite_glow", 2, outline_filter(1, "#3366FF"))
 
 /mob/living/simple_animal/hostile/deepone/elite/boss
-	faction = list("deepone")
+	faction = list(FACTION_DEEP)

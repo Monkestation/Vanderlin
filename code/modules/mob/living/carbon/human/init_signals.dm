@@ -3,6 +3,8 @@
 
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NO_SPLIT_PERSONALITY), PROC_REF(on_no_split_personality_trait_gain))
 
+	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_MOVE_FLYING), PROC_REF(on_flight_gain))
+
 	//Traits that register add and remove
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_NOBLOOD), PROC_REF(on_noblood_trait_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_NOBLOOD), PROC_REF(on_noblood_trait_loss))
@@ -12,6 +14,17 @@
 
 	RegisterSignal(src, SIGNAL_ADDTRAIT(TRAIT_PSYDONIAN_GRIT), PROC_REF(on_psydonian_gain))
 	RegisterSignal(src, SIGNAL_REMOVETRAIT(TRAIT_PSYDONIAN_GRIT), PROC_REF(on_psydonian_lose))
+
+
+/**
+ * On gain of TRAIT_MOVE_FLYING
+ *
+ * Will make the flying person drop anything (mainly anyONE) they're pulling.
+ */
+/mob/living/carbon/proc/on_flight_gain(datum/source)
+	SIGNAL_HANDLER
+	stop_pulling()
+
 
 /**
  * On gain of TRAIT_NOBLOOD

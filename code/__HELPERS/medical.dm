@@ -90,4 +90,6 @@
 			return "vocal cords"
 		if(ORGAN_SLOT_TAIL)
 			return "tail"
+		if(ORGAN_SLOT_ZOMBIE)
+			return "black ooze"
 	return slot

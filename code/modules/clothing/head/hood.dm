@@ -65,6 +65,9 @@
 /obj/item/clothing/head/roguehood/colored/black
 	color = CLOTHING_SOOT_BLACK
 
+/obj/item/clothing/head/roguehood/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
 /obj/item/clothing/head/roguehood/colored/green
 	color = CLOTHING_FOREST_GREEN
 
@@ -108,6 +111,20 @@
 	if(iscarbon(user))
 		var/mob/living/carbon/H = user
 		H.update_inv_head()
+
+//............... Blood Magic Hood ............... //
+/obj/item/clothing/head/roguehood/bloodweave
+	name = "bloodweave hood"
+	desc = "A seemingly plain cloth hood woven with bloodsteel threads. It radiates a sinister aura."
+	armor_type = /datum/armor/head/cloth/bloodweave
+	prevent_crits = CUT_AND_MINOR_CRITS
+	max_integrity = 250
+	color = COLOR_BLOOD_MAGIC
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/head/roguehood/bloodweave/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //............... Feldshers Hood ............... //
 /obj/item/clothing/head/roguehood/feld
@@ -185,7 +202,7 @@
 /obj/item/clothing/head/roguehood/leather/advanced
 	name = "hardened leather hood"
 	desc = "A simple if foreboding hood made out of expertly treated leather. Worn more by those venturing out into the wilds, rather than street thugs and honest yeoman."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/head/leather/advanced
@@ -193,7 +210,7 @@
 /obj/item/clothing/head/roguehood/leather/masterwork
 	name = "masterwork leather hood"
 	desc = "A simple if foreboding hood made out of masterfully treated and tanned leather. Worn by veteran hunters and adventurers venturing out into the wilds, this hood will keep out most anything, besides death, and fire."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/head/leather/master

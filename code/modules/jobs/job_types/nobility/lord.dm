@@ -58,7 +58,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_LORD
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 0
 	spawn_positions = 1
 	spells = list(
@@ -72,7 +72,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	jobs_always_know_me = list(JOB_COURT_AGENT)
+	jobs_i_always_know = KNOW_COURT_AGENT_LIST
 
 	selection_color = "#7851A9"
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
@@ -215,7 +215,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 /datum/job/exlord //just used to change the lords title
 	title = "Ex-Monarch"
 	department_flag = NOBLEMEN
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_LORD

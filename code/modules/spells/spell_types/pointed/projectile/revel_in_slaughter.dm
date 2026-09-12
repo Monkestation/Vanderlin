@@ -4,8 +4,8 @@
 	button_icon_state = "bloodsteal"
 	sound = 'sound/magic/antimagic.ogg'
 
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 
 	projectile_type = /obj/projectile/magic/revel_in_slaughter

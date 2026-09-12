@@ -516,7 +516,7 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/under/tomb/indoors/rest)
 "Ax" = (
-/obj/structure/fluff/statue,
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/grass/eora,
 /area/under/tomb/indoors/rest)
 "AD" = (

@@ -19,7 +19,7 @@
 	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR) // not RACES_PLAYER_GRENZ because dwarves don't have a sprite for this armor
 	outfit = /datum/outfit/swordmaster
 	total_positions = 1
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
 	honorary = "Ritter"
 	honorary_f = "Ritterin"

@@ -50,3 +50,10 @@
 	form_points = list(FORM_WATER = 3)
 	form_magnitude_modifications = list(FORM_ARCANE = 0.15)
 	technique_points = list(TECHNIQUE_SUMMONING = 2, TECHNIQUE_ILLUSION = 1)
+
+/datum/spellcraft_contribution/blood_pearl
+	atom_path = /obj/item/sealed_blood_pearl
+	form_points = list(FORM_BLOOD = 1)
+	form_magnitude_modifications = list(FORM_BLOOD = 0.15)
+	technique_points = list(TECHNIQUE_RESTORATION = 1)
+	technique_magnitude_modifications = list(TECHNIQUE_RESTORATION = 0.1)

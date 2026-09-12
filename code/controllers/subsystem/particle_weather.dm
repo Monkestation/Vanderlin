@@ -42,20 +42,13 @@ SUBSYSTEM_DEF(ParticleWeather)
 
 //This has been mangled - currently only supports 1 weather effect serverwide so I can finish this
 /datum/controller/subsystem/ParticleWeather/Initialize(start_timeofday)
-	for(var/datum/particle_weather/W as anything in subtypesof(/datum/particle_weather))
-		var/probability = initial(W.probability)
-		var/target_trait = initial(W.target_trait)
-
-		// any weather with a probability set may occur at random
-		if (probability && (target_trait in GLOB.vanderlin_weather)) //TODO VANDERLIN: Map trait this.
-			LAZYINITLIST(elligble_weather)
-			elligble_weather[W] = probability
-
+	// TODO config this
 	switch(SSmapping.config.map_name)
 		if("Rosewood")
 			selected_forecast = new /datum/forecast/rosewood()
 		else
 			selected_forecast = new /datum/forecast/vanderlin()
+
 	selected_forecast.set_ambient_temperature(SSnightshift.current_tod ? SSnightshift.current_tod : settod())
 	return ..()
 

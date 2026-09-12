@@ -25,7 +25,7 @@ GLOBAL_LIST_EMPTY(broodmother_eggs)
 	icon = 'icons/mob/creacher/trolls/broodmother.dmi'
 	icon_state = "broodmother"
 	gender = FEMALE
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+	lighting_alpha = LIGHTING_PLANE_ALPHA_PERFECT_DARKVISION
 	SET_BASE_PIXEL(-38, -8)
 	hud_type = /datum/hud/broodmother
 	icon_dead = "broodmother_dead"

@@ -12,6 +12,9 @@
 	item_weight = 547 GRAMS
 	grid_height = 64
 	grid_width = 32
+
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
+
 	/// The mob who owns and originally bound this tome
 	var/mob/living/owner = null
 	/// Up to two additional mobs allowed to read this tome
@@ -165,7 +168,7 @@
 		slot_flags &= ~ITEM_SLOT_HIP
 		open = TRUE
 		playsound(src, 'sound/items/book_open.ogg', 100, FALSE, -1)
-		if(ismob(loc) && !HAS_TRAIT(loc, TRAIT_SORCERER))
+		if(ismob(loc) && !HAS_TRAIT(loc, TRAIT_SORCERER) && !HAS_TRAIT(loc, TRAIT_BLOOD_SORCERER))
 			SEND_SIGNAL(src, COMSIG_MASTERY_ADD_SPELLS, user)
 	else
 		slot_flags |= ITEM_SLOT_HIP
@@ -268,9 +271,11 @@
 	desc = "A crackling, glowing book, filled with advanced arcyne runes and symbols that hurt the mind to stare at. A true master of the arcyne has left their mark behind."
 	bookquality = 8
 	sellprice = 250
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/spellbook/legendary
 	name = "legendary tome of the arcyne"
 	desc = "An incredible book that gives off glowing arcyne motes, it is filled with runes and arcyne theories that is hard for even masters of arcyne to understand. The arcyne script glows and practically whispers from the page..."
 	bookquality = 12
 	sellprice = 400
+	pickpocket_difficulty = SKILL_RANK_MASTER

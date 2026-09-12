@@ -17,6 +17,7 @@
 	experimental_onback = FALSE
 	component_type = /datum/component/storage/concrete/grid/sack
 	item_weight = 150 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/storage/sack/examine(mob/user)
 	. = ..()

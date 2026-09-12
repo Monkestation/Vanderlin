@@ -2,6 +2,7 @@
 #define SPEC_ID_HUMEN "human"
 #define SPEC_ID_DWARF "dwarf"
 #define SPEC_ID_DWARF_SUBTERRAN "dwarf_subterran"
+#define SPEC_ID_DWARF_ORC "dwarf_orc"
 #define SPEC_ID_AASIMAR "aasimar"
 #define SPEC_ID_ELF "elf"
 #define SPEC_ID_HALF_ELF "halfelf"
@@ -23,6 +24,10 @@
 
 #define SPEC_ID_ORC	"orc"
 #define SPEC_ID_GOBLIN	"goblin"
+#define SPEC_ID_GOBLIN_HELL	"goblin_hell"
+#define SPEC_ID_GOBLIN_CAVE	"goblin_cave"
+#define SPEC_ID_GOBLIN_SEA	"goblin_sea"
+#define SPEC_ID_GOBLIN_MOON	"goblin_moon"
 #define SPEC_ID_ROUSMAN	"rousman"
 #define SPEC_ID_ZIZOMBIE "zizombie"
 
@@ -49,6 +54,7 @@
 	SPEC_ID_HALF_ORC,\
 	SPEC_ID_ORC,\
 	SPEC_ID_GOBLIN,\
+	SPEC_ID_DWARF_ORC,\
 	SPEC_ID_ROUSMAN,\
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\
@@ -73,6 +79,7 @@
 	SPEC_ID_ORC,\
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\
+	SPEC_ID_DWARF_ORC,\
 )
 
 /// Species where males get underwear, identical to above, elves handled seperately
@@ -89,6 +96,7 @@
 	SPEC_ID_ORC,\
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\
+	SPEC_ID_DWARF_ORC,\
 )
 
 // ============ USING NAME
@@ -114,6 +122,7 @@
 	SPEC_ID_KOBOLD_FORMIKRAG,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_DWARF_ORC,\
 	SPEC_ID_GOBLIN,\
 )
 
@@ -147,6 +156,7 @@
 	SPEC_ID_HUMEN,\
 	SPEC_ID_DWARF,\
 	SPEC_ID_DWARF_SUBTERRAN,\
+	SPEC_ID_DWARF_ORC,\
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
@@ -238,6 +248,7 @@
 	SPEC_ID_MEDICATOR,\
 	SPEC_ID_HOLLOWKIN,\
 	SPEC_ID_HALF_ORC,\
+	SPEC_ID_DWARF_ORC,\
 )
 
 /// Vanderlin monarch
@@ -321,6 +332,7 @@
 	SPEC_ID_KOBOLD,\
 	SPEC_ID_RAKSHARI,\
 	SPEC_ID_HOLLOWKIN,\
+	SPEC_ID_DWARF_ORC,\
 	SPEC_ID_SNOW_ELF,\
 	SPEC_ID_HALF_SNOW_ELF,\
 )
@@ -353,6 +365,7 @@
 #define SPECIES_CANNIBAL_MEN list(\
 	SPEC_ID_HUMEN,\
 	SPEC_ID_DWARF,\
+	SPEC_ID_DWARF_ORC,\
 	SPEC_ID_AASIMAR,\
 	SPEC_ID_ELF,\
 	SPEC_ID_HALF_ELF,\
@@ -371,4 +384,19 @@
 
 #define SPECIES_CANNIBALISM_KOBOLD list(\
 	SPEC_ID_KOBOLD,\
+)
+//Used in aiming, yes it's awful how I used each and every species but I made it use normal id instead id_override
+#define SPECIES_SHORTIES list(\
+	SPEC_ID_DWARF,\
+	SPEC_ID_HALFLING,\
+	SPEC_ID_KOBOLD,\
+	SPEC_ID_ROUSMAN,\
+	SPEC_ID_GOBLIN,\
+	SPEC_ID_GOBLIN_HELL,\
+	SPEC_ID_GOBLIN_CAVE,\
+	SPEC_ID_GOBLIN_SEA,\
+	SPEC_ID_GOBLIN_MOON,\
+	SPEC_ID_KOBOLD_FORMIKRAG,\
+	SPEC_ID_DWARF_SUBTERRAN,\
+	SPEC_ID_DWARF_ORC,\
 )

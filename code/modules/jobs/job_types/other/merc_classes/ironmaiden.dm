@@ -33,6 +33,7 @@
 		TRAIT_DEADNOSE,
 		TRAIT_STEELHEARTED
 	)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/job/advclass/mercenary/ironmaiden/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

@@ -115,6 +115,10 @@
 	name = "Ivory Silk"
 	color_hex = "#f8f4e3"
 
+/datum/loadout_item/dye_color/royal/royal_purple
+	name = "Royal Purple"
+	color_hex = CLOTHING_ROYAL_PURPLE
+
 /datum/loadout_item/dye_color/mage
 	abstract_type = /datum/loadout_item/dye_color/mage
 	triumph_cost_permanent = 200

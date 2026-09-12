@@ -108,7 +108,7 @@
 	backpack_contents = list(
 		/obj/item/lockpick = 1,
 		/obj/item/grapplinghook = 1,
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 	)
 
 /datum/job/advclass/wretch/antiquarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)

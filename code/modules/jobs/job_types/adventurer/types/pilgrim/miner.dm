@@ -25,7 +25,7 @@
 				who will ever know what they'll find beneath?"
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/miner
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	apprentice_name = "Miner Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 

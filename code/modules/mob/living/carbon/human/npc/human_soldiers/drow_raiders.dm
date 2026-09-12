@@ -79,7 +79,7 @@ GLOBAL_LIST_INIT(drowraider_aggro, file2list("strings/rt/drowaggrolines.txt"))
 	else
 		real_name = pick(file2list("strings/rt/names/elf/elfdm.txt"))
 
-	add_faction("spider_lowers")
+	add_faction(FACTION_SPIDERS)
 
 	update_body()
 

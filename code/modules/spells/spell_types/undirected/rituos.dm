@@ -4,8 +4,8 @@
 	button_icon_state = "createlight"
 	sound = 'sound/magic/timestop.ogg'
 
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	invocation_type = INVOCATION_NONE
 
@@ -98,7 +98,7 @@
 	granted_spell = WEAKREF(spell)
 
 /datum/action/cooldown/spell/undirected/rituos/proc/get_unskeletonized_bodyparts(mob/living/carbon/caster)
-	var/static/list/excluded_bodypart_types = list(/obj/item/bodypart/head, /obj/item/bodypart/chest)
+	var/static/list/excluded_bodypart_types = list(/obj/item/bodypart/head, /obj/item/bodypart/mouth, /obj/item/bodypart/chest)
 
 	var/list/possible_parts = list()
 	for(var/obj/item/bodypart/BP in caster.bodyparts)

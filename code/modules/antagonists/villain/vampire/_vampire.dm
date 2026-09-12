@@ -21,6 +21,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
 	antag_flags = FLAG_ANTAG_CAP_TEAM
+	innate_traits = list(TRAIT_BLOOD_SENSE, TRAIT_VITAE_USER)
 
 /datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()
@@ -31,19 +32,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		forcing_clan = incoming_clan
 	else if(incoming_clan)
 		default_clan = incoming_clan
-
-/datum/antagonist/vampire/examine_target(mob/examiner, mob/living/carbon/examined, list/P, list/examine_contents)
-	. = ..()
-	if(!istype(examined))
-		return
-	if(!CAN_HAVE_BLOOD(examined))
-		return
-	var/cached_blood_volume = examined.get_blood_volume()
-	var/vitae = 0
-	var/datum/blood_type/BT = examined.get_blood_type()
-	if(istype(BT) && BT.vitae)
-		vitae = round(cached_blood_volume * BT.vitae)
-	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
 
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"
@@ -84,9 +72,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
-		vampdude.hud_used?.shutdown_bloodpool()
-		vampdude.hud_used?.initialize_bloodpool()
-		vampdude.hud_used?.bloodpool.set_fill_color("#510000")
+		vampdude.hud_used?.set_bloody_bloodpool()
+		vampdude.grant_language(/datum/language/sanguine)
 
 		if(forced)
 			vampdude.set_clan_direct(forcing_clan)

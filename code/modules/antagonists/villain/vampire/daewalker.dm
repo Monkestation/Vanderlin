@@ -268,7 +268,7 @@
 	color = CLOTHING_ROYAL_BLACK
 	armor_type = /datum/armor/boots/leather/daewalker
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/shoes/boots/leather/daewalker/Initialize()
@@ -279,13 +279,13 @@
 	color = CLOTHING_ROYAL_BLACK
 	armor_type = /datum/armor/pants/leather/daewalker
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/daewalker
 	armor_type = /datum/armor/wrist/leather/advanced
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
-	max_integrity = INTEGRITY_STANDARD + 50
+	max_integrity = INTEGRITY_OLD_STANDARD + 50
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/daewalker/Initialize()

@@ -23,6 +23,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	component_type = /datum/component/storage/concrete/grid/belt
 	item_weight = 250 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/storage/belt/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] begins belting [user.p_them()]self with \the [src]! It looks like [user.p_theyre()] trying to commit suicide!</span>")

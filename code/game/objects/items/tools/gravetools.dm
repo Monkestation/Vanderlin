@@ -17,7 +17,7 @@
 
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STATIC_300
 	sharpness = IS_SHARP
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK

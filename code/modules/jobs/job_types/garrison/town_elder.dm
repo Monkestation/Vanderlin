@@ -392,7 +392,6 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/noc)
-			spawned.adjust_skill_level(/datum/attribute/skill/labor/mathematics, 20)
 			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1,))
 			switch(language)
 				if("Dwarvish")
@@ -441,10 +440,6 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/malum)
 			ADD_TRAIT(spawned, TRAIT_MALUMFIRE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skill_level(/datum/attribute/skill/magic/holy, 20)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STAT_ENDURANCE, 1)
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)

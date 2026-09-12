@@ -1,0 +1,1 @@
+/obj/structure/closet/crate/crafted_closet/crafted : /obj/structure/closet/crate/crafted_closet{@OLD}

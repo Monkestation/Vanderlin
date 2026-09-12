@@ -32,7 +32,7 @@
 	title = "Mage"
 	tutorial = "A wandering graduate of the many colleges of magick across Psydonia, you search for a job to put your degree to use. And they say school was hard..."
 	outfit = /datum/outfit/adventurer/mage
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	total_positions = 4
 	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
@@ -95,7 +95,7 @@
 	belt = /obj/item/storage/belt/leather/rope
 	backr = /obj/item/storage/backpack/satchel
 	beltr = /obj/item/storage/magebag/poor
-	beltl = /obj/item/reagent_containers/glass/bottle/manapot
+	beltl = /obj/item/reagent_containers/glass/bottle/manapot/labelled
 	r_hand = /obj/item/weapon/polearm/woodstaff
 	backpack_contents = list(
 		/obj/item/chalk = 1,

@@ -611,6 +611,8 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/datum/book_entry/organ_surgery,
 		/datum/book_entry/lobotomy,
 		/datum/book_entry/pestran_chimeric,
+		/datum/repeatable_crafting_recipe/survival/tourniquet,
+		/datum/repeatable_crafting_recipe/survival/splint,
 		/datum/chimeric_table,
 		/datum/chimeric_node,
 		/datum/wound,

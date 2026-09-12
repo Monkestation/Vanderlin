@@ -12,7 +12,7 @@
 	var/spawn_time = 300 //30 seconds default
 	var/mob_types = list(/mob/living/simple_animal/hostile/retaliate/bigrat)
 	var/spawn_text = "emerges from"
-	faction = list("hostile")
+	faction = list(FACTION_HOSTILE)
 	var/spawner_type = /datum/component/spawner
 	var/wait = FALSE
 

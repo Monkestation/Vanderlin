@@ -19,7 +19,7 @@
 	craftdiff = 2
 
 /datum/anvil_recipe/valuables/gold_mask_left
-	name = "Golden Half Mask (Left)"
+	name = "Golden Half Mask"
 	required_material = /obj/item/ingot/gold
 	created_item = /obj/item/clothing/face/lordmask/l
 	craftdiff = 2
@@ -66,23 +66,23 @@
 	created_item = /obj/item/statue/silver
 
 /datum/anvil_recipe/valuables/silver/volf
-	name = "Silver Volf Bust (+Silver Bar)"
-	additional_items = list(/obj/item/ingot/silver)
+	name = "Silver Volf Bust"
+	additional_items = list(/obj/item/ingot/silver = 1)
 	created_item = /obj/item/statue/silver/volf
 
 /datum/anvil_recipe/valuables/silver/urn
-	name = "Silver Urn (+Silver Bar)"
-	additional_items = list(/obj/item/ingot/silver)
+	name = "Silver Urn"
+	additional_items = list(/obj/item/ingot/silver = 1)
 	created_item = /obj/item/statue/silver/urn
 
 /datum/anvil_recipe/valuables/silver/vasefancy
-	name = "Fancy Silver Vase (+Silver Bar)"
-	additional_items = list(/obj/item/ingot/silver)
+	name = "Fancy Silver Vase"
+	additional_items = list(/obj/item/ingot/silver = 1)
 	created_item = /obj/item/statue/silver/vasefancy
 
 /datum/anvil_recipe/valuables/silver/finger
-	name = "Silver Middle Finger (+2 Silver Bar)"
-	additional_items = list(/obj/item/ingot/silver/, /obj/item/ingot/silver)
+	name = "Silver Middle Finger"
+	additional_items = list(/obj/item/ingot/silver = 2)
 	created_item = /obj/item/statue/silver/finger
 
 /datum/anvil_recipe/valuables/silver/bust
@@ -162,37 +162,37 @@
 
 /datum/anvil_recipe/valuables/silver/dorpels
 	name = "Silver Dorpel Ring"
-	additional_items = list(/obj/item/gem/diamond)
+	additional_items = list(/obj/item/gem/diamond = 1)
 	created_item = /obj/item/clothing/ring/silver/dorpel
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/silver/blortzs
 	name = "Silver Blortz Ring"
-	additional_items = list(/obj/item/gem/blue)
+	additional_items = list(/obj/item/gem/blue = 1)
 	created_item = /obj/item/clothing/ring/silver/blortz
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/silver/saffiras
 	name = "Silver Saffira Ring"
-	additional_items = list(/obj/item/gem/violet)
+	additional_items = list(/obj/item/gem/violet = 1)
 	created_item = /obj/item/clothing/ring/silver/saffira
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/silver/gemeralds
 	name = "Silver Gemerald Ring"
-	additional_items = list(/obj/item/gem/green)
+	additional_items = list(/obj/item/gem/green = 1)
 	created_item = /obj/item/clothing/ring/silver/gemerald
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/silver/topers
 	name = "Silver Toper Ring"
-	additional_items = list(/obj/item/gem/yellow)
+	additional_items = list(/obj/item/gem/yellow = 1)
 	created_item = /obj/item/clothing/ring/silver/toper
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/silver/rontzs
 	name = "Silver Rontz Ring"
-	additional_items = list(/obj/item/gem/red)
+	additional_items = list(/obj/item/gem/red = 1)
 	created_item = /obj/item/clothing/ring/silver/rontz
 	craftdiff = 4
 
@@ -213,37 +213,37 @@
 
 /datum/anvil_recipe/valuables/blacksteel/dorpels
 	name = "Blacksteel Dorpel Ring"
-	additional_items = list(/obj/item/gem/diamond)
+	additional_items = list(/obj/item/gem/diamond = 1)
 	created_item = /obj/item/clothing/ring/diamondbs
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/blacksteel/blortzs
 	name = "Blacksteel Blortz Ring"
-	additional_items = list(/obj/item/gem/blue)
+	additional_items = list(/obj/item/gem/blue = 1)
 	created_item = /obj/item/clothing/ring/quartzbs
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/blacksteel/saffiras
 	name = "Blacksteel Saffira Ring"
-	additional_items = list(/obj/item/gem/violet)
+	additional_items = list(/obj/item/gem/violet = 1)
 	created_item = /obj/item/clothing/ring/sapphirebs
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/blacksteel/gemeralds
 	name = "Blacksteel Gemerald Ring"
-	additional_items = list(/obj/item/gem/green)
+	additional_items = list(/obj/item/gem/green = 1)
 	created_item = /obj/item/clothing/ring/emeraldbs
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/blacksteel/topers
 	name = "Blacksteel Toper Ring"
-	additional_items = list(/obj/item/gem/yellow)
+	additional_items = list(/obj/item/gem/yellow = 1)
 	created_item = /obj/item/clothing/ring/topazbs
 	craftdiff = 4
 
 /datum/anvil_recipe/valuables/blacksteel/rontzs
 	name = "Blacksteel Rontz Ring"
-	additional_items = list(/obj/item/gem/red)
+	additional_items = list(/obj/item/gem/red = 1)
 	created_item = /obj/item/clothing/ring/rubybs
 	craftdiff = 4
 
@@ -264,23 +264,23 @@
 	created_item = /obj/item/statue/gold/bust
 
 /datum/anvil_recipe/valuables/gold/finger
-	name = "Golden Middle Finger (2+ Gold Bars)"
-	additional_items = list(/obj/item/ingot/gold/, /obj/item/ingot/gold)
+	name = "Golden Middle Finger"
+	additional_items = list(/obj/item/ingot/gold = 2)
 	created_item = /obj/item/statue/gold/finger
 
 /datum/anvil_recipe/valuables/gold/volf
-	name = "Golden Volf Bust (+ Gold Bar)"
-	additional_items = list(/obj/item/ingot/gold)
+	name = "Golden Volf Bust"
+	additional_items = list(/obj/item/ingot/gold = 1)
 	created_item = /obj/item/statue/gold/volf
 
 /datum/anvil_recipe/valuables/gold/urn
-	name = "Gold Urn (+ Gold Bar)"
-	additional_items = list(/obj/item/ingot/gold)
+	name = "Gold Urn"
+	additional_items = list(/obj/item/ingot/gold = 1)
 	created_item = /obj/item/statue/gold/urn
 
 /datum/anvil_recipe/valuables/gold/vasefancy
-	name = "Fancy Gold Vase (+ Gold Bar)"
-	additional_items = list(/obj/item/ingot/gold)
+	name = "Fancy Gold Vase"
+	additional_items = list(/obj/item/ingot/gold = 1)
 	created_item = /obj/item/statue/gold/vasefancy
 
 /datum/anvil_recipe/valuables/gold/vase
@@ -361,37 +361,37 @@
 
 /datum/anvil_recipe/valuables/gold/dorpel
 	name = "Golden Dorpel Ring"
-	additional_items = list(/obj/item/gem/diamond)
+	additional_items = list(/obj/item/gem/diamond = 1)
 	created_item = /obj/item/clothing/ring/gold/dorpel
 	craftdiff = 5
 
 /datum/anvil_recipe/valuables/gold/blortz
 	name = "Golden Blortz Ring"
-	additional_items = list(/obj/item/gem/blue)
+	additional_items = list(/obj/item/gem/blue = 1)
 	created_item = /obj/item/clothing/ring/gold/blortz
 	craftdiff = 5
 
 /datum/anvil_recipe/valuables/gold/saffira
 	name = "Golden Saffira Ring"
-	additional_items = list(/obj/item/gem/violet)
+	additional_items = list(/obj/item/gem/violet = 1)
 	created_item = /obj/item/clothing/ring/gold/saffira
 	craftdiff = 5
 
 /datum/anvil_recipe/valuables/gold/gemerald
 	name = "Golden Gemerald Ring"
-	additional_items = list(/obj/item/gem/green)
+	additional_items = list(/obj/item/gem/green = 1)
 	created_item = /obj/item/clothing/ring/gold/gemerald
 	craftdiff = 5
 
 /datum/anvil_recipe/valuables/gold/toper
 	name = "Golden Toper Ring"
-	additional_items = list(/obj/item/gem/yellow)
+	additional_items = list(/obj/item/gem/yellow = 1)
 	created_item = /obj/item/clothing/ring/gold/toper
 	craftdiff = 5
 
 /datum/anvil_recipe/valuables/gold/rontz
 	name = "Golden Rontz Ring"
-	additional_items = list(/obj/item/gem/red)
+	additional_items = list(/obj/item/gem/red = 1)
 	created_item = /obj/item/clothing/ring/gold/rontz
 	craftdiff = 5
 
@@ -446,18 +446,18 @@
 	created_item = /obj/item/statue/bronze/bust
 
 /datum/anvil_recipe/valuables/bronze/volf
-	name = "Bronze Volf Bust (+ Bronze Bar)"
-	additional_items = list(/obj/item/ingot/bronze)
+	name = "Bronze Volf Bust"
+	additional_items = list(/obj/item/ingot/bronze = 1)
 	created_item = /obj/item/statue/bronze/volf
 
 /datum/anvil_recipe/valuables/bronze/urn
-	name = "Bronze Urn (+ Bronze Bar)"
-	additional_items = list(/obj/item/ingot/bronze)
+	name = "Bronze Urn"
+	additional_items = list(/obj/item/ingot/bronze = 1)
 	created_item = /obj/item/statue/bronze/urn
 
 /datum/anvil_recipe/valuables/bronze/vasefancy
-	name = "Fancy Bronze Vase (+ Bronze Bar)"
-	additional_items = list(/obj/item/ingot/bronze)
+	name = "Fancy Bronze Vase"
+	additional_items = list(/obj/item/ingot/bronze = 1)
 	created_item = /obj/item/statue/bronze/vasefancy
 
 /datum/anvil_recipe/valuables/bronze/vase
@@ -501,25 +501,25 @@
 	output_amount = 2
 
 /datum/anvil_recipe/valuables/weddingrings
-	name = "Weddingbands, Silver (x2)"
+	name = "Weddingbands, Silver"
 	required_material = /obj/item/ingot/silver
 	created_item = /obj/item/clothing/ring/band
 	output_amount = 2
 
 /datum/anvil_recipe/valuables/weddingringg
-	name = "Weddingbands, Gold (x2)"
+	name = "Weddingbands, Gold"
 	required_material = /obj/item/ingot/gold
 	created_item = /obj/item/clothing/ring/band/gold
 	output_amount = 2
 
 /datum/anvil_recipe/valuables/weddingringb
-	name = "Weddingbands, Bronze (x2)"
+	name = "Weddingbands, Bronze"
 	required_material = /obj/item/ingot/bronze
 	created_item = /obj/item/clothing/ring/band/bronze
 	output_amount = 2
 
 /datum/anvil_recipe/valuables/weddingringp
-	name = "Weddingbands, Ancient (x2)"
+	name = "Weddingbands, Ancient"
 	required_material = /obj/item/ingot/purifiedaalloy
 	created_item = /obj/item/clothing/ring/band/paalloy
 	output_amount = 2

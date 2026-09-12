@@ -151,3 +151,7 @@
 		total_hydration_req += (organ.hydration_req/100)
 	if(HAS_TRAIT(src, TRAIT_NORMALIZED_BLOOD))
 		total_blood_req = DEFAULT_TOTAL_BLOOD_REQ
+
+	total_nutriment_req *= GLOB.hunger_rate_mod
+	total_hydration_req *= GLOB.thirst_rate_mod
+

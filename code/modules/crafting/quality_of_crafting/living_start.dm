@@ -36,6 +36,10 @@
 		if(!SShousing.check_access(key))
 			return FALSE
 
+	if(HAS_TRAIT(src, TRAIT_MALUM_CURSE))
+		to_chat(src, span_boldred("My cursed hands tremble as I fail to piece the materials together!"))
+		return
+
 	if(isitem(attacked_atom) && attacked_atom.in_progress_slapcraft)
 		return attacked_atom.in_progress_slapcraft.try_process_item(starting_atom, src)
 

@@ -25,7 +25,7 @@
 
 	prevent_crits = MINOR_CRITICALS
 	armor_type = /datum/armor/neck/leather/good
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 
 /obj/item/clothing/neck/keffiyeh/AdjustClothes(mob/user)
 	if(loc == user)

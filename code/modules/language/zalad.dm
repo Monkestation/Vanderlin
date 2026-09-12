@@ -1,6 +1,6 @@
 /datum/language/zalad
 	name = "Zalad"
-	desc = ""
+	desc = "The language of the Zaladin Dynasty, a common tongue for trade discussions."
 	icon_state = "zalad"
 	spans = list(SPAN_ZALAD)
 	speech_verb = "states"

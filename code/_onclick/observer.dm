@@ -18,9 +18,6 @@
 /mob/dead/observer/profane/DblClickOn(atom/clicked_atom, params) // Souls trapped by the dagger should not be jumping around.
 	return
 
-/mob/dead/observer/rogue/arcaneeye/DblClickOn(atom/clicked_atom, params)
-	return
-
 /mob/dead/observer/ClickOn(atom/clicked_atom, params)
 	var/list/modifiers = params2list(params)
 

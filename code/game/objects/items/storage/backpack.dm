@@ -27,3 +27,4 @@
 	salvage_result = /obj/item/natural/hide/cured
 
 	item_weight = 1.8 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT

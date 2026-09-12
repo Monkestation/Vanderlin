@@ -2,7 +2,7 @@
 	name = "grudgebearer dwarven helm"
 	desc = "A hardy dwarven helmet. It lets one's dwarvenly beard to poke out."
 	body_parts_covered = HEAD|MOUTH|NOSE|EYES|EARS|NECK	//This specifically omits hair so you could hang your beard out of the helm
-	allowed_race = list(SPEC_ID_DWARF)
+	allowed_race = list(SPEC_ID_DWARF, SPEC_ID_DWARF_ORC)
 	icon = 'icons/roguetown/clothing/special/race_armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/race_armor.dmi'
 	icon_state = "dwarfhead"

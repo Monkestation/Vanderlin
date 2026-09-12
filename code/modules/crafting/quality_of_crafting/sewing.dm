@@ -784,6 +784,15 @@
 				/obj/item/natural/fibers = 1)
 	craftdiff = 6
 
+/datum/repeatable_crafting_recipe/sewing/magushood
+	name = "magus hood"
+	output = /obj/item/clothing/head/helmet/skullcap/magus
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers = 1,
+				/obj/item/clothing/head/helmet/skullcap = 1,)
+	craftdiff = 6
+
 /datum/repeatable_crafting_recipe/sewing/adept_robes
 	name = "adept robes"
 	output = /obj/item/clothing/shirt/robe/newmage/adept
@@ -2005,3 +2014,11 @@
 	name = "honse caparison"
 	output =/obj/item/caparison/honse
 
+/datum/repeatable_crafting_recipe/sewing/repairkitcloth
+	name = "sewing kit"
+	output = /obj/item/repair_kit/cloth
+	requirements = list(
+		/obj/item/natural/cloth = 4,
+		/obj/item/natural/hide/cured = 2,
+		)
+	craftdiff = SKILL_RANK_EXPERT
