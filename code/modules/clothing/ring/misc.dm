@@ -377,6 +377,7 @@
 	examine_name = /obj/item/clothing/ring/silver::name
 	base_icon_state = "ring_s"
 	abstract_type = /obj/item/clothing/ring/courtagent_ring
+	examine_highlight_type = /datum/examine_highlight/court_agent
 	var/metal_adjective = "silver"
 
 /obj/item/clothing/ring/courtagent_ring/silver/Initialize()

@@ -1,4 +1,3 @@
-
 /obj/structure/minecart_rail
 	name = "cart rail"
 	desc = "Carries carts along the track."
@@ -14,6 +13,9 @@
 	initialize_dirs = CONN_DIR_LEFT | CONN_DIR_RIGHT
 
 	var/secondary_direction
+
+	var/has_lock_module = FALSE
+	var/locked = FALSE
 
 	var/static/list/directions = list(
 		"Downwards Left Turn" = SOUTHWEST,
@@ -93,11 +95,22 @@
 
 /obj/structure/minecart_rail/redstone_triggered(mob/user)
 	. = ..()
+	if(has_lock_module)
+		locked = !locked
+		update_animation_effect()
+		if(!locked)
+			launch_stationary_cart()
 	if(!secondary_direction)
 		return
 	var/last_direction = secondary_direction
 	secondary_direction = dir
 	setDir(last_direction)
+
+/obj/structure/minecart_rail/proc/launch_stationary_cart()
+	if(!rotations_per_minute)
+		return
+	for(var/obj/structure/closet/crate/miningcar/cart in loc)
+		cart.launch_from_rail(src)
 
 /obj/structure/minecart_rail/multitool_act_secondary(mob/living/user, obj/item/tool)
 	rotate_direction(user)
@@ -124,6 +137,10 @@
 		icon_state = "track_shaft"
 	else
 		icon_state = "track"
+	if(locked)
+		color = COLOR_BLOOD
+	else
+		color = null
 
 /obj/structure/minecart_rail/find_rotation_network()
 	if(ISDIAGONALDIR(dir))
@@ -176,7 +193,9 @@
 		. += span_smallnotice("When activated, this rail will switch to [dir2text(secondary_direction)].")
 
 /obj/structure/minecart_rail/proc/rail_examine()
-	return span_notice("Connect this rail to shafts to give momentum to carts that pass over.")
+	. = span_notice("Connect this rail to shafts to give momentum to carts that pass over.")
+	if(has_lock_module)
+		. += span_notice("A pneumatic lock module is attached. Currently [locked ? "locked" : "unlocked"].")
 
 /obj/structure/minecart_rail/set_connection_dir()
 	if(ISDIAGONALDIR(dir))

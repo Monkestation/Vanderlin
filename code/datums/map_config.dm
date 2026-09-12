@@ -31,6 +31,9 @@
 	/// List of unit tests that are skipped when running this map
 	var/list/skipped_tests
 
+	///this is like traits but on a global scale and can support in round stuff
+	var/list/world_traits
+
 	var/custom_area_sound = null
 	var/list/other_z
 	var/delve = 0
@@ -126,6 +129,11 @@
 		log_world("map_config traits is not a list!")
 		return
 
+	world_traits = json["world_traits"]
+	if(!islist(world_traits) && !isnull(world_traits))
+		log_world("world_traits traits is not a list!")
+		return
+
 	var/temp = json["space_ruin_levels"]
 	if (isnum(temp))
 		space_ruin_levels = temp
@@ -182,6 +190,10 @@
 	defaulted = FALSE
 	return TRUE
 #undef CHECK_EXISTS
+
+/datum/map_config/proc/post_load()
+	for(var/item in world_traits)
+		SSmapping.add_world_trait(text2path(item), -1)
 
 /datum/map_config/proc/GetFullMapPaths()
 	if (istext(map_file))

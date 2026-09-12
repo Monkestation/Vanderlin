@@ -39,6 +39,7 @@
 	on_craft_finished = success
 	RegisterSignal(parent, COMSIG_STORAGE_CLOSED, PROC_REF(async_start))
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, PROC_REF(async_start))
+	RegisterSignal(parent, COMSIG_ATOM_PSEUDO_INSERT, PROC_REF(async_start))
 	if(temperature_listener && isatom(parent))
 		var/atom/parent_atom = parent
 		RegisterSignal(parent_atom.reagents, COMSIG_REAGENTS_TEMP_CHANGE, PROC_REF(async_start))

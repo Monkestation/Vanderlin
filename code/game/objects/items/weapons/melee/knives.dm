@@ -114,7 +114,7 @@
 	misscost = 0
 	no_attack = TRUE
 	releasedrain = 0
-	blade_class = BCLASS_PUNCH
+	blade_class = BCLASS_BLUNT
 
 /obj/item/weapon/knife/scissors/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(user.cmode)

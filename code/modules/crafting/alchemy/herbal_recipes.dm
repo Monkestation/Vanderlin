@@ -89,6 +89,7 @@
 	if(affected_bodypart.post_damage_change())
 		affected_mob.update_damage_overlays()
 	affected_bodypart.disinfect_limb(20 SECONDS)
+	affected_bodypart.adjust_germ_level(-3)
 	return FALSE
 
 // Weak Mana/Stamina Potions (based on hypericum/benedictus/mentha)

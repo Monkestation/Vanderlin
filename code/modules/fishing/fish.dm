@@ -301,6 +301,8 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	return ITEM_INTERACT_SUCCESS
 
 /obj/item/reagent_containers/food/snacks/fish/proc/released(atom/location, mob/living/user)
+	if(!location)
+		return
 	playsound(location, 'sound/effects/splash.ogg', 50)
 	SEND_SIGNAL(location, COMSIG_FISH_RELEASED_INTO, src, user)
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_FISH_RELEASED, src)
@@ -774,7 +776,7 @@ GLOBAL_LIST_INIT(fish_compatible_fluid_types, list(
 	if(HAS_TRAIT(src, TRAIT_FISH_STASIS) || status != FISH_ALIVE)
 		return
 	do_fish_process(seconds_per_tick)
-	if(loc && !HAS_TRAIT(loc, TRAIT_CATCH_AND_RELEASE))
+	if(!loc || !isturf(loc) || !HAS_TRAIT(loc, TRAIT_CATCH_AND_RELEASE))
 		time_passed_on_safe_turf = 0 SECONDS
 		return
 	time_passed_on_safe_turf += seconds_per_tick SECONDS

@@ -25,6 +25,8 @@
 		var/turf/step_turf = get_step(living_pawn, move_dir)
 		if(is_type_in_typecache(step_turf, GLOB.dangerous_turfs))
 			return
+		if(istype(step_turf, /turf/open/water))
+			return
 		living_pawn.Move(step_turf, move_dir)
 
 	if(prob(8))

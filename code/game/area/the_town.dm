@@ -140,6 +140,15 @@
 	name = "dock warehouse import"
 	icon_state = "warehouse"
 
+/area/indoors/town/warehouse/metal
+	name = "metal storage"
+
+/area/indoors/town/warehouse/food
+	name = "food storage"
+
+/area/indoors/town/warehouse/generic
+	name = "stockhouse"
+
 /area/indoors/town/warehouse/can_craft_here()
 	return FALSE
 

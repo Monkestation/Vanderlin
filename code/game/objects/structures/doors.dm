@@ -18,6 +18,7 @@
 	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg', 'sound/combat/hits/onwood/woodimpact (2).ogg')
 	lock = /datum/lock/key
 	can_add_lock = TRUE
+	clawable = FALSE
 
 	var/omni_bolt = FALSE
 

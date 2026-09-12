@@ -1,11 +1,27 @@
 GLOBAL_LIST_EMPTY(redstone_objs)
 
-
 /obj/structure
-	var/redstone_structure = FALSE //If you want the structure to interact with player built redstone
-	var/redstone_id //Used for connecting mapload structures
-	var/last_redstone_power
+	var/redstone_structure = FALSE // If TRUE, interacts with redstone wire & wireless signals
+	var/redstone_id // Used for connecting wireless mapload structures
+	var/last_redstone_power = 0 // Tracks last turf redstone power for edge-triggered signals
 	var/list/redstone_attached
+
+/obj/structure/Initialize(mapload)
+	. = ..()
+	if(redstone_id)
+		update_redstone_id(redstone_id)
+
+/obj/structure/Destroy()
+	if(redstone_id || length(redstone_attached))
+		GLOB.redstone_objs -= src
+		for(var/obj/structure/S as anything in redstone_attached)
+			LAZYREMOVE(S.redstone_attached, src)
+		redstone_attached = null
+	return ..()
+
+/// Returns the signal power (0-15) this structure outputs to redstone wire on its turf.
+/obj/structure/proc/get_redstone_output()
+	return 0
 
 /obj/structure/multitool_act(mob/living/user, obj/item/I)
 	if(!redstone_structure)
@@ -30,6 +46,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/turf/front = get_turf(src)
 	S.set_up(1, 1, front)
 	S.start()
+
 	if(isstructure(multitool.buffer))
 		var/obj/structure/buffer_structure = multitool.buffer
 		if(src == buffer_structure)
@@ -47,8 +64,8 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	else
 		to_chat(user, "You store the internal schematics of [src] on [multitool].")
 		multitool.set_buffer(src)
-	multitool.charge_deduction(src, user, 1)
 
+	multitool.charge_deduction(src, user, 1)
 	return ITEM_INTERACT_SUCCESS
 
 /obj/structure/vv_edit_var(var_name, var_value)
@@ -57,7 +74,6 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 			update_redstone_id(var_value)
 			datum_flags |= DF_VAR_EDITED
 			return TRUE
-
 	return ..()
 
 /obj/structure/proc/update_redstone_id(new_id)
@@ -83,10 +99,17 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	density = FALSE
 	anchored = TRUE
 	max_integrity = 3000
-	// reduced by 1 second for each strength point
 	var/pulltime = 10 SECONDS
 	redstone_structure = TRUE
 	var/toggled = FALSE
+
+/obj/structure/lever/get_redstone_output()
+	return toggled ? 15 : 0
+
+/obj/structure/lever/trigger_wire_network()
+	var/turf/T = get_turf(src)
+	if(T)
+		SSredstone.mark_area_dirty(T)
 
 /obj/structure/lever/attack_hand(mob/user)
 	if(isliving(user))
@@ -96,12 +119,12 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		user.visible_message("<span class='warning'>[user] pulls the lever.</span>")
 		user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
 		if(HAS_TRAIT(user, TRAIT_GATEKEEPER) || do_after(user, used_time))
-			for(var/obj/structure/structure in redstone_attached)
-				INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
-			trigger_wire_network(user)
 			toggled = !toggled
 			icon_state = "leverfloor[toggled]"
 			playsound(src, 'sound/foley/lever.ogg', 100, extrarange = 3)
+			for(var/obj/structure/structure in redstone_attached)
+				INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
+			trigger_wire_network()
 
 /obj/structure/lever/onkick(mob/user)
 	if(isliving(user))
@@ -111,12 +134,12 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		user.log_message("kicked the lever with redstone id \"[redstone_id]\"", LOG_GAME)
 		playsound(src, 'sound/combat/hits/onwood/woodimpact (1).ogg', 100)
 		if(prob(GET_MOB_ATTRIBUTE_VALUE(L, STAT_STRENGTH) * 4))
-			for(var/obj/structure/structure in redstone_attached)
-				INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
-			trigger_wire_network(user)
 			toggled = !toggled
 			icon_state = "leverfloor[toggled]"
 			playsound(src, 'sound/foley/lever.ogg', 100, extrarange = 3)
+			for(var/obj/structure/structure in redstone_attached)
+				INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
+			trigger_wire_network()
 
 /obj/structure/lever/wall
 	icon_state = "leverwall0"
@@ -133,9 +156,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	name = "hidden lever"
 	desc = "If you can see this... how?"
 	icon = null
-	//the perception DC to use this
 	var/hidden_dc = 10
-	//ignore the DC's with a trait
 	var/accessor_trait
 
 /obj/structure/lever/hidden/proc/feel_button(mob/living/user, ignore_dc = FALSE)
@@ -145,17 +166,17 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	if(!(accessor_trait && HAS_CHARACTER_TRAIT(user, accessor_trait)))
 		var/bonuses = (HAS_TRAIT(user, TRAIT_THIEVESGUILD) || HAS_TRAIT(user, TRAIT_ASSASSIN)) ? 2 : 0
 		if(GET_MOB_ATTRIBUTE_VALUE(L, STAT_PERCEPTION) + bonuses < hidden_dc)
-			return // nothing here!
+			return
 	L.changeNext_move(CLICK_CD_MELEE)
 	user.visible_message(span_danger("[user] presses a hidden button."), span_notice("I push a hidden button."))
 	user.log_message("pulled the lever with redstone id \"[redstone_id]\"", LOG_GAME)
-	for(var/obj/structure/structure in redstone_attached)
-		INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
-	trigger_wire_network(user)
 	toggled = !toggled
 	playsound(src, 'sound/foley/lever.ogg', 50)
+	for(var/obj/structure/structure in redstone_attached)
+		INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), user)
+	trigger_wire_network()
 
-/obj/structure/lever/hidden/onkick(mob/user) // nice try
+/obj/structure/lever/hidden/onkick(mob/user)
 	return FALSE
 
 /obj/structure/lever/hidden/IsObscured()
@@ -187,19 +208,67 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	hidden_dc = 18
 	accessor_trait = TRAIT_LUNAR_ORDER
 
+/obj/structure/pressure_plate
+	name = "pressure plate"
+	desc = "Be careful. Stepping on this could either mean a bomb exploding or a door closing on you."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "pressureplate"
+	max_integrity = 45
+	density = FALSE
+	anchored = TRUE
+	redstone_structure = TRUE
+	var/list/atom/movable/pressing = list()
+
+/obj/structure/pressure_plate/get_redstone_output()
+	return length(pressing) ? 15 : 0
+
+/obj/structure/pressure_plate/Crossed(atom/movable/AM)
+	. = ..()
+	if(!anchored)
+		return
+	if(isliving(AM))
+		var/mob/living/L = AM
+		to_chat(L, "<span class='info'>I feel something click beneath me.</span>")
+		AM.log_message("has activated a pressure plate", LOG_GAME)
+		playsound(src, 'sound/misc/pressurepad_down.ogg', 65, extrarange = 2)
+		pressing |= AM
+		triggerplate(AM)
+	else if(isstructure(AM))
+		var/obj/structure/structure = AM
+		if(structure.w_class >= WEIGHT_CLASS_BULKY)
+			playsound(src, 'sound/misc/pressurepad_down.ogg', 65, extrarange = 2)
+			pressing |= AM
+			triggerplate(AM)
+
+/obj/structure/pressure_plate/Uncrossed(atom/movable/AM)
+	. = ..()
+	if(!anchored)
+		return
+	pressing -= AM
+	if(!length(pressing))
+		playsound(src, 'sound/misc/pressurepad_up.ogg', 65, extrarange = 2)
+		triggerplate(AM)
+
+/obj/structure/pressure_plate/proc/triggerplate(atom/movable/AM)
+	var/turf/T = get_turf(src)
+	if(T)
+		SSredstone.mark_area_dirty(T)
+	for(var/obj/structure/structure in redstone_attached)
+		INVOKE_ASYNC(structure, PROC_REF(redstone_triggered), AM)
+
 
 /obj/structure/repeater
 	name = "repeater"
 	desc = "Repeats a signal a set amount of times into an adjacently linked machine when activated by a signal. Looks suspiciously like a barrel."
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "repeater"
-	w_class = WEIGHT_CLASS_HUGE // mechanical stuff is usually pretty heavy.
+	w_class = WEIGHT_CLASS_HUGE
 	max_integrity = 5
 	density = TRUE
 	anchored = TRUE
 	redstone_structure = TRUE
-	var/mode = 1 // 1 means repeat 5 times, 2 means random, 0 means indefinite but has chance to explode, 3 means indefinite no chance to explode
-	var/obj/structure/linked_thing // because redstone code is weird
+	var/mode = 1
+	var/obj/structure/linked_thing
 
 /obj/structure/repeater/Initialize(mapload, ...)
 	. = ..()
@@ -278,64 +347,18 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 		INVOKE_ASYNC(linked_thing, PROC_REF(redstone_triggered), user)
 		sleep(5)
 
-/obj/structure/pressure_plate
-	name = "pressure plate"
-	desc = "Be careful. Stepping on this could either mean a bomb exploding or a door closing on you."
-	icon = 'icons/roguetown/misc/structure.dmi'
-	icon_state = "pressureplate"
-	max_integrity = 45 // so it gets destroyed when used to explode a bomb
-	density = FALSE
-	anchored = TRUE
-	redstone_structure = TRUE
-
-/obj/structure/pressure_plate/Crossed(atom/movable/AM)
-	. = ..()
-	if(!anchored)
-		return
-	if(isliving(AM))
-		var/mob/living/L = AM
-		to_chat(L, "<span class='info'>I feel something click beneath me.</span>")
-		AM.log_message("has activated a pressure plate", LOG_GAME)
-		playsound(src, 'sound/misc/pressurepad_down.ogg', 65, extrarange = 2)
-	if(isstructure(AM))
-		var/obj/structure/structure = AM
-		if(structure.w_class >= WEIGHT_CLASS_BULKY)
-			playsound(src, 'sound/misc/pressurepad_down.ogg', 65, extrarange = 2)
-			triggerplate()
-			trigger_wire_network(AM)
-
-/obj/structure/pressure_plate/Uncrossed(atom/movable/AM)
-	. = ..()
-	if(!anchored)
-		return
-	if(isliving(AM))
-		triggerplate()
-		trigger_wire_network(AM)
-
-/obj/structure/pressure_plate/proc/triggerplate()
-	playsound(src, 'sound/misc/pressurepad_up.ogg', 65, extrarange = 2)
-	for(var/obj/structure/structure in redstone_attached)
-		INVOKE_ASYNC(structure, PROC_REF(redstone_triggered))
-
-/obj/structure/pressure_plate/attack_hand(mob/user)
-	. = ..()
-	if(user.used_intent.type == INTENT_HARM)
-		playsound(src, 'sound/combat/hits/punch/punch (1).ogg', 100, FALSE, -1)
-		triggerplate()
-		anchored = !anchored
-
 /obj/structure/activator
 	name = "activator"
 	desc = "A strange structure with an opening for an item on the top with an arrow etched into it pointing to where it is possibly aiming."
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "activator"
-	max_integrity = 45 // so it gets destroyed when used to explode a bomb
-	w_class = WEIGHT_CLASS_HUGE // mechanical stuff is usually pretty heavy.
+	max_integrity = 45
+	w_class = WEIGHT_CLASS_HUGE
 	density = TRUE
 	anchored = TRUE
 	redstone_structure = TRUE
 	var/obj/item/containment
-	var/obj/item/ammo_holder/ammo // used if the contained item is a bow or crossbow
+	var/obj/item/ammo_holder/ammo
 
 /obj/structure/activator/Initialize(mapload, ...)
 	. = ..()
@@ -401,7 +424,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 			for(var/obj/item/ammo_casing/BT in ammo.ammo_list)
 				if(istype(BT, gun_ammo))
 					ammo.ammo_list -= BT
-					BT.fire_casing(get_step(src, dir), null, null, null, null, pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_CHEST), 0,  src)
+					BT.fire_casing(get_step(src, dir), null, null, null, null, pick(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_CHEST), 0, src)
 					ammo.contents -= BT
 					ammo.update_appearance()
 					break

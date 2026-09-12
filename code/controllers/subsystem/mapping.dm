@@ -60,6 +60,7 @@ SUBSYSTEM_DEF(mapping)
 	config = load_map_config("kalypso")
 	log_world("FORCE_RANDOM_WORLD_GEN enabled - loading Kalypso only for random world generation")
 #endif
+	config.post_load()
 
 #ifndef FORCE_RANDOM_WORLD_GEN
 	// After assigning a config datum to var/config, we check which map adjustment fits the current config

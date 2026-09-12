@@ -50,6 +50,27 @@
 
 	return TRUE
 
+/obj/item/reagent_containers/glass/on_offer(mob/living/offerer, mob/living/offered_to)
+	if(!reagents || reagents.maximum_volume <= 0)
+		return FALSE
+
+	var/obj/item/reagent_containers/glass/offered_item_other = offered_to.offered_item_ref?.resolve()
+	if(isnull(offered_item_other) || !istype(offered_item_other) || !offered_item_other.reagents || offered_item_other.reagents.maximum_volume <= 0)
+		return FALSE
+
+	playsound(offerer, reagents.maximum_volume > 50 ? 'sound/misc/clink_drink_big.ogg' : 'sound/misc/clink_drink.ogg', 100, TRUE)
+	addtimer(CALLBACK(offerer, TYPE_PROC_REF(/mob/living, stop_offering_item)), 0.6 SECONDS)
+	addtimer(CALLBACK(offered_to, TYPE_PROC_REF(/mob/living, stop_offering_item)), 0.6 SECONDS)
+
+	offerer.visible_message(
+		span_notice("[offerer] clinks [src] with [offered_to]!"), \
+		span_notice("I clink [src] with [offered_to]!"), \
+		vision_distance = COMBAT_MESSAGE_RANGE, \
+		ignored_mobs = list(offered_to)
+	)
+	to_chat(offered_to, span_notice("[offerer] clinks [src] with me!"))
+	return TRUE
+
 /datum/intent/fill
 	name = "fill"
 	icon_state = "infill"

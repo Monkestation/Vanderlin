@@ -148,6 +148,23 @@
 	obtained_from = list(list("Threshing ears of sunreed", /obj/item/natural/chaff/sunreed))
 	item_weight = 20 GRAMS
 
+/obj/item/reagent_containers/food/snacks/produce/grain/rice
+	seed = /obj/item/neuFarm/seed/rice
+	name = "dry rice"
+	desc = "Should probably be rehydrated."
+	icon_state = "rice"
+	faretype = FARE_IMPOVERISHED
+	gender = PLURAL
+	filling_color = "#cfcfcf"
+	bitesize_mod = 2
+	tastes = list("chipping a tooth" = 1)
+	grind_results = list(/datum/reagent/flour = 10)
+	dropshrink = 0.9
+	mill_result = null
+	item_flags = OBTAINED_DATA
+	obtained_from = list(list("Threshing stalks of rice", /obj/item/natural/chaff/rice))
+	item_weight = 20 GRAMS
+
 // ^ PSA: next time you want to do this, make and run an updatepaths migration in tools/UpdatePaths
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple
 	seed = /obj/item/neuFarm/seed/apple

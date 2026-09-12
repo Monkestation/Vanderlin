@@ -27,6 +27,8 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 
 	var/list/requirements
 	var/list/reagent_requirements
+	///do we consume reagents?
+	var/reagent_consume_mod = 1
 	///this needs a comment, basically if this is set we check for any of these in the path say /obj/item/sword, it will use /obj/item/sword/wooden
 	var/list/wildcard_requirements
 
@@ -204,7 +206,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 				var/datum/reagent/reagent_found = crafter.reagents.has_reagent(reagent, reagent_requirements[reagent], check_subtypes = subtype_reagents_allowed)
 				if(!reagent_found)
 					return FALSE
-				passed_reagents[reagent_found.type] = reagent_requirements[reagent]
+				passed_reagents[reagent_found.type] = reagent_requirements[reagent] * reagent_consume_mod
 
 		if(length(requirements))
 			for(var/item_type in requirements)
@@ -283,7 +285,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 					potential_optionals += list(list(
 						"type" = "reagent",
 						"reagent" = opt_reagent,
-						"amount" = optional_reagent_requirements[opt_reagent]
+						"amount" = optional_reagent_requirements[opt_reagent] * reagent_consume_mod
 					))
 
 		// Apply the cap and process the optionals
