@@ -67,12 +67,12 @@
 	var/skill_type = weapon_parry ? parrying_weapon.associated_skill : /datum/attribute/skill/combat/unarmed
 
 	// wdefense variable on parrying_weapon * 5
-	var/parry_modifier = parry_data["weapon_defense_flat"] * 5
+	var/parry_modifier = parry_data["weapon_defense_flat"] * 4
 	// decreases defense for knife/fists if fighting against normal weapons
 	if((skill_type == /datum/attribute/skill/combat/unarmed || skill_type == /datum/attribute/skill/combat/knives) && (skill_data["attacker_type"] != /datum/attribute/skill/combat/knives && skill_data["attacker_type"] != /datum/attribute/skill/combat/unarmed))
 		parry_modifier -= 25
 	// Defender's combat intent modifier
-	parry_modifier += rmb_intent?.def_bonus
+	parry_modifier += rmb_intent?.def_bonus/2
 
 	// Attacker special bonuses
 	if(attacker.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/guidance))
