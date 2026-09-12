@@ -1,20 +1,20 @@
 /datum/attribute_holder/sheet/job/pilgrim/blacksmith
 	attribute_variance = list(
-		/datum/attribute/skill/misc/swimming = list(0, 10),
 		/datum/attribute/skill/craft/crafting = list(10, 20),
 		/datum/attribute/skill/craft/masonry = list(10, 20),
 		/datum/attribute/skill/craft/carpentry = list(10, 20)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_ENDURANCE = 1,
+		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/engineering = 30,
 		/datum/attribute/skill/craft/traps = 20,
@@ -28,21 +28,21 @@
 
 /datum/attribute_holder/sheet/job/pilgrim/blacksmith/old
 	attribute_variance = list(
-		/datum/attribute/skill/misc/swimming = list(0, 10),
 		/datum/attribute/skill/craft/crafting = list(10, 20),
 		/datum/attribute/skill/craft/masonry = list(10, 20),
 		/datum/attribute/skill/craft/carpentry = list(10, 20)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_ENDURANCE = 1,
+		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/engineering = 30,
 		/datum/attribute/skill/craft/traps = 20,

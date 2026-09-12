@@ -1,10 +1,13 @@
 /datum/attribute_holder/sheet/job/innkeep
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_ENDURANCE = 1,
-		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/combat/wrestling = 20,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/misc/reading = 20,
 		/datum/attribute/skill/craft/cooking = 30,
 		/datum/attribute/skill/misc/medicine = 10,

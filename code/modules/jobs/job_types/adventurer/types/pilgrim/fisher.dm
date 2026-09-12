@@ -5,12 +5,15 @@
 	)
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 2,
+		STAT_FORTUNE = 1,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/fishing = 40,
 		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 	)
@@ -23,12 +26,15 @@
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 1,
 		STAT_PERCEPTION = 1,
+		STAT_FORTUNE = 1,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/fishing = 50,
 		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 	)
