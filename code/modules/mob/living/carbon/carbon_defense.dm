@@ -11,7 +11,7 @@
 		. += wear_mask.flash_protect
 
 /mob/living/carbon/sound_damage(damage, deafen)
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return
 	var/obj/item/organ/ears/ears = getorganslot(ORGAN_SLOT_EARS)
 	if(QDELETED(ears))

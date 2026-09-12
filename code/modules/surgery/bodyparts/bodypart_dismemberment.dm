@@ -29,7 +29,7 @@
 		if(zone_precise != BODY_ZONE_PRECISE_NECK)
 			return FALSE
 
-	if(C.status_flags & GODMODE)
+	if(HAS_TRAIT(C, TRAIT_GODMODE))
 		return FALSE
 
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))

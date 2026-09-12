@@ -50,7 +50,7 @@
 	if(COOLDOWN_TIMELEFT(src, activity_cooldown) > munch_time)
 		return
 	for(var/mob/living/L as anything in buckled_mobs)
-		if(L.status_flags & GODMODE)
+		if(HAS_TRAIT(L, TRAIT_GODMODE))
 			continue
 		L.flash_fullscreen("redflash3")
 		visible_message(span_danger("[src] starts to rip apart [L]!"))
@@ -134,11 +134,9 @@
 		return
 	if(isliving(AM))
 		var/mob/living/L = AM
-		if(HAS_TRAIT(L, TRAIT_MANEATER_IMMUNITY))
+		if(HAS_TRAIT(L, TRAIT_MANEATER_IMMUNITY) || HAS_TRAIT(L, TRAIT_GODMODE))
 			return
 		if(COOLDOWN_FINISHED(src, activity_cooldown) && L.m_intent == MOVE_INTENT_SNEAK)
-			return
-		if(L.status_flags & GODMODE)
 			return
 		if(L.buckled)
 			return // Something else is buckling them, maybe another maneater even

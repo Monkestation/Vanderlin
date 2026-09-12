@@ -463,12 +463,13 @@
 
 					if((diceroll >= DICE_SUCCESS) || (!attributes && prob(35)))
 						looping = FALSE
+						set_heartattack(FALSE)
+						target.emote("breathgasp")
+						target.adjust_jitter(100 SECONDS)
 						if(target.revive())
 							target.grab_ghost(TRUE)
 							target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
-											span_userdanger("My muscles spasm as i am brought back to life!"))
-							target.emote("breathgasp")
-							target.adjust_jitter(100 SECONDS)
+											span_userdanger("My muscles spasm as I am brought back to life!"))
 							add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
 							target.apply_status_effect(/datum/status_effect/debuff/revive)
 							record_round_statistic(STATS_CPR_REVIVALS, 1)
@@ -477,8 +478,6 @@
 							 * Aiming for points (0, 15) (30, 10) (50, 5)
 							 */
 							they_heart.applyOrganDamage(15 * (NUM_E ** (-0.022 * medical_skill)), they_heart.high_threshold)
-						else
-							to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
 	while (looping)
 
 /mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
@@ -1125,7 +1124,7 @@
 
 //OVERRIDE IGNORING PARENT RETURN VALUE
 /mob/living/carbon/human/updatehealth(amount)
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return
 	var/total_burn	= 0
 //	var/total_brute	= 0
