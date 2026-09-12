@@ -88,9 +88,8 @@ GLOBAL_VAR_INIT(mobids, 1)
 	prepare_huds()
 	for(var/datum/atom_hud/alternate_appearance/alt_hud as anything in GLOB.active_alternate_appearances)
 		alt_hud.apply_to_new_mob(src)
-	set_nutrition(NUTRITION_LEVEL_WELL_FED)
-	set_hydration(HYDRATION_LEVEL_HYDRATED)
 	attribute_initialize()
+	set_nutrition(rand(NUTRITION_LEVEL_START_MIN, NUTRITION_LEVEL_START_MAX))
 	. = ..()
 	initialize_actionspeed()
 	update_config_movespeed()
@@ -1233,14 +1232,14 @@ GLOBAL_VAR_INIT(mobids, 1)
 
 /mob/proc/adjust_hydration(change, forced)
 	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
-		hydration = HYDRATION_LEVEL_HYDRATED
+		hydration = HYDRATION_LEVEL_WELL_HYDRATED
 		return
 
 	hydration = clamp(hydration + change, 0, HYDRATION_LEVEL_FULL)
 
 /mob/proc/set_hydration(set_to, forced)
 	if(HAS_TRAIT(src, TRAIT_NOHUNGER) && !forced)
-		hydration = HYDRATION_LEVEL_HYDRATED
+		hydration = HYDRATION_LEVEL_WELL_HYDRATED
 		return
 
 	hydration = clamp(set_to, 0, HYDRATION_LEVEL_FULL)

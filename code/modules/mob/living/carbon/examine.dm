@@ -602,7 +602,7 @@
 			. += span_tinywarning("[P[THEY]] look[pl] [nutrition_msg].")
 		var/hydration_msg
 		switch(hydration)
-			if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
+			if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_HYDRATED)
 				hydration_msg = "like [P[THEIR]] mouth is dry"
 			if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
 				hydration_msg = "thirsty"
