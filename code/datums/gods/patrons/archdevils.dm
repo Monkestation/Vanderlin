@@ -20,7 +20,7 @@
 	worshippers = "Depraved Researchers, Corrupted Aasimar"
 	sins = "Failure, Bad Planning"
 	boons = "Keen sight to develop your strategy."
-	added_traits = list(TRAIT_IDENTIFY_DEVIL_MARKS, TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABRAXAS, TRAIT_KEENEYES)
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABRAXAS, TRAIT_KEENEYES)
 
 	confess_lines = list(
 		"THE DARK KING RULES!",
@@ -36,7 +36,7 @@
 	worshippers = "Nihilists, Apocalyptists, Vandalists, Pyromaniacs."
 	sins = "Extinguishing Fire, Building Structures, Empathy"
 	boons = "Able to touch hot objects."
-	added_traits = list(TRAIT_IDENTIFY_DEVIL_MARKS, TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABADDON, TRAIT_RESISTHEAT)
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABADDON, TRAIT_RESISTHEAT)
 
 	confess_lines = list(
 		"EVERYTHING WILL BURN!",
@@ -52,7 +52,7 @@
 	worshippers = "Vampires, Blood Mages, The Gullible."
 	sins = "Self-Sacrifice, Charity"
 	boons = "Darkness hides your limits. Resistance to Blood Curse. Access to roles with blood magic."
-	added_traits = list(TRAIT_IDENTIFY_DEVIL_MARKS, TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_MEPHISTOPHELES, TRAIT_DECEIVING_MEEKNESS)
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_MEPHISTOPHELES, TRAIT_DECEIVING_MEEKNESS)
 
 	confess_lines = list(
 		"THE SHADOWS WILL CLAIM YOU!",
@@ -68,7 +68,7 @@
 	worshippers = "The Insane, The Deranged, Lost Mariners."
 	sins = "Sanity, Logic, Free Will."
 	boons = "Breathe in the void of Leviathan's depths."
-	added_traits = list(TRAIT_IDENTIFY_DEVIL_MARKS, TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_LEVIATHAN, TRAIT_NODROWN)
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_LEVIATHAN, TRAIT_NODROWN)
 
 	confess_lines = list(
 		"HER COILS WILL PROTECT ME!",

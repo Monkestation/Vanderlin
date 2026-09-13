@@ -36,17 +36,28 @@
 	for(var/datum/quirk/Q in quirks)
 		Q.on_examined(user, P, .)
 
-	if(ishuman(user) && HAS_TRAIT(user, TRAIT_IDENTIFY_DEVIL_MARKS) && Adjacent(user))
-		var/can_see_hands = IsAdminGhost(user) || is_human_part_visible(src, HIDEHANDS)
+	if(user == src)
+		return
+	var/trait_list = list(
+		TRAIT_INQUISITION,
+		TRAIT_IDENTIFY_DEVIL_MARKS,
+		TRAIT_DEVIL_MARKED_ABRAXAS,
+		TRAIT_DEVIL_MARKED_ABADDON,
+		TRAIT_DEVIL_MARKED_MEPHISTOPHELES,
+		TRAIT_DEVIL_MARKED_LEVIATHAN
+	)
+
+	if(HAS_ANY_OF_TRAITS(user, trait_list))
+		var/can_see_hands = IsAdminGhost(user) || (Adjacent(user) && is_human_part_visible(src, HIDEHANDS))
 		if(can_see_hands)
 			if(HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABRAXAS))
-				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Abraxas!"))
+				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Abraxas upon their palm!"))
 			if(HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABADDON))
-				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Abaddon!"))
+				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Abaddon upon their palm!"))
 			if(HAS_TRAIT(src, TRAIT_DEVIL_MARKED_MEPHISTOPHELES))
-				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Mephistopheles!"))
+				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Mephistopheles upon their palm!"))
 			if(HAS_TRAIT(src, TRAIT_DEVIL_MARKED_LEVIATHAN))
-				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Leviathan!"))
+				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Leviathan upon their palm!"))
 
 
 /mob/living/carbon/human/get_examine_face(mob/user, list/P, list/examine_list)
