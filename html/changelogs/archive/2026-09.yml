@@ -222,3 +222,16 @@
       can work on luxless.
   - balance: Garrotte now requires 3 seconds to grab a target if they're in combat
       mode. Does not apply to users trained in Apprehension Techniques.
+2026-09-13:
+  Carol-J:
+  - rscadd: Added Dark Elves to Zalad-associated species
+  SSensum13:
+  - bugfix: Fixed absolver's bloodpool regeneration.
+  TheDoktorZ:
+  - qol: Keys for Triumph-class Heirs
+  - balance: Gave the Royal Knight a dagger
+  - bugfix: Duplicate equipment from MAA & Squire gone
+  - bugfix: Axeman-At-Arms has their gambeson
+  voidwytch:
+  - rscadd: Added ten sets of Wintermare nobility clothes and their respective crafting
+      recipes
