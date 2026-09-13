@@ -224,6 +224,11 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Blood Sense" = TRAIT_BLOOD_SENSE,
 		"Vitae User" = TRAIT_VITAE_USER,
 		"Sanguine Block" = TRAIT_BLOOD_MAGIC_BLOCKED,
+		"Devil's Rejection" = TRAIT_DEVILS_REJECTION,
+		"Devil's Mark - Abraxas" = TRAIT_DEVIL_MARKED_ABRAXAS,
+		"Devil's Mark - Abaddon" = TRAIT_DEVIL_MARKED_ABADDON,
+		"Devil's Mark - Mephistopheles" = TRAIT_DEVIL_MARKED_MEPHISTOPHELES,
+		"Devil's Mark - Leviathan" = TRAIT_DEVIL_MARKED_LEVIATHAN,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -375,6 +380,10 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_BLOOD_SORCERER = span_bloody("I am a gifted blood sorcerer, wielding innate power over blood magic. Woe unto those who oppose me. I cannot use magickal tomes."),
 	TRAIT_BLOOD_STUDENT = span_bloody("I am a student of blood magic."),
 	TRAIT_BLOOD_MAGIC_BLOCKED = span_bloody("I am permanently blocked from using blood magic!"),
+	TRAIT_DEVIL_MARKED_ABRAXAS = SPAN_GOD_ARCHDEVILS("My soul is marked by Abraxas"),
+	TRAIT_DEVIL_MARKED_ABADDON = SPAN_GOD_ARCHDEVILS("My soul is marked by Abaddon"),
+	TRAIT_DEVIL_MARKED_MEPHISTOPHELES = SPAN_GOD_ARCHDEVILS("My soul is marked by Mephistopheles"),
+	TRAIT_DEVIL_MARKED_LEVIATHAN = SPAN_GOD_ARCHDEVILS("My soul is marked by Leviathan"),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

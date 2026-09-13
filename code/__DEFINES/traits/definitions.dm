@@ -553,7 +553,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MATTHIOS_EYES	"Eyes of Matthios" //Examine to see the most expensive item someone has
 
 // Archdevil patron traits
-#define TRAIT_DEVILS_REJECTION "Devil's Rejection" //The Archdevils reject the influence of the gods. No miracle healing.
+/// No miracle healing, the Archdevils reject the influence of the so called gods. This is a major balance point for Devil worship.
+#define TRAIT_DEVILS_REJECTION "Devil's Rejection"
+#define TRAIT_DEVIL_MARKED_ABRAXAS "Devil Marked - Abraxas"
+#define TRAIT_DEVIL_MARKED_ABADDON "Devil Marked - Abaddon"
+#define TRAIT_DEVIL_MARKED_MEPHISTOPHELES "Devil Marked - Mephistopheles"
+#define TRAIT_DEVIL_MARKED_LEVIATHAN "Devil Marked - Leviathan"
 
 // Other Patron Trait Bonuses
 #define TRAIT_MANEATER_IMMUNITY "Blessing of The Hunt" //Cannot be grabbed by maneaters.

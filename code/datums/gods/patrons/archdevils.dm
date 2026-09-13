@@ -1,6 +1,7 @@
 /datum/patron/archdevil
 	abstract_type = /datum/patron/archdevil
 	associated_faith = /datum/faith/archdevil
+	drawbacks = "No 'god' can offer miraculous assistance."
 
 /datum/patron/archdevil/can_pray(mob/living/follower)
 	// Redefined this entire proc just to tell you:
@@ -18,8 +19,8 @@
 	flaws = "Arrogance, Hunger for Power"
 	worshippers = "Depraved Researchers, Corrupted Aasimar"
 	sins = "Failure, Bad Planning"
-	boons = "None."
-	added_traits = list(TRAIT_DEVILS_REJECTION)
+	boons = "Keen sight to develop your strategy."
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABRAXAS, TRAIT_KEENEYES)
 
 	confess_lines = list(
 		"THE DARK KING RULES!",
@@ -34,8 +35,8 @@
 	flaws = "Unrestrained Destruction"
 	worshippers = "Nihilists, Apocalyptists, Vandalists, Pyromaniacs."
 	sins = "Extinguishing Fire, Building Structures, Empathy"
-	boons = "None."
-	added_traits = list(TRAIT_DEVILS_REJECTION)
+	boons = "Able to touch hot objects."
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABADDON, TRAIT_RESISTHEAT)
 
 	confess_lines = list(
 		"EVERYTHING WILL BURN!",
@@ -50,8 +51,8 @@
 	flaws = "Manipulative, Untrustworthy, Unpredictable"
 	worshippers = "Vampires, Blood Mages, The Gullible."
 	sins = "Self-Sacrifice, Charity"
-	boons = "None."
-	added_traits = list(TRAIT_DEVILS_REJECTION)
+	boons = "Darkness hides your limits. Resistance to Blood Curse. Access to roles with blood magic."
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_MEPHISTOPHELES, TRAIT_DECEIVING_MEEKNESS)
 
 	confess_lines = list(
 		"THE SHADOWS WILL CLAIM YOU!",
@@ -65,9 +66,9 @@
 	desc = "It is unclear where her body ends or starts, and any who dare gaze through the navy depths of the hells' seas of ink, and onto her swirling masses are driven insane. Sailors lost at sea swear they hear her voice singing alongside Abyssor's own, reciting tales of the very oceans turning to blood and swallowing them whole into an endless maw."
 	flaws = "Unstable, Delusional, Erratic"
 	worshippers = "The Insane, The Deranged, Lost Mariners."
-	sins = ""
-	boons = "None."
-	added_traits = list(TRAIT_DEVILS_REJECTION)
+	sins = "Sanity, Logic, Free Will."
+	boons = "Breathe in the void of Leviathan's depths."
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_LEVIATHAN, TRAIT_NODROWN)
 
 	confess_lines = list(
 		"HER COILS WILL PROTECT ME!",

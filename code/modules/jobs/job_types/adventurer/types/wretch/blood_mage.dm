@@ -29,6 +29,7 @@
 	technique_points = 4 // This is mirrored by their form points manually, due to minimal technique-less spells. Do not increase either beyond 4.
 	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
 	magic_user = TRUE
+	allowed_patrons = list(/datum/patron/archdevil/mephistopheles)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage
 
