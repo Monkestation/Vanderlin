@@ -559,6 +559,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DEVIL_MARKED_ABADDON "Devil Marked - Abaddon"
 #define TRAIT_DEVIL_MARKED_MEPHISTOPHELES "Devil Marked - Mephistopheles"
 #define TRAIT_DEVIL_MARKED_LEVIATHAN "Devil Marked - Leviathan"
+#define TRAIT_IDENTIFY_DEVIL_MARKS "Occult Identification"
 
 // Other Patron Trait Bonuses
 #define TRAIT_MANEATER_IMMUNITY "Blessing of The Hunt" //Cannot be grabbed by maneaters.

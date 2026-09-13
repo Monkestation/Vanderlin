@@ -229,6 +229,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Devil's Mark - Abaddon" = TRAIT_DEVIL_MARKED_ABADDON,
 		"Devil's Mark - Mephistopheles" = TRAIT_DEVIL_MARKED_MEPHISTOPHELES,
 		"Devil's Mark - Leviathan" = TRAIT_DEVIL_MARKED_LEVIATHAN,
+		"Occult Identification" = TRAIT_IDENTIFY_DEVIL_MARKS,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -384,6 +385,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_DEVIL_MARKED_ABADDON = SPAN_GOD_ARCHDEVILS("My soul is marked by Abaddon"),
 	TRAIT_DEVIL_MARKED_MEPHISTOPHELES = SPAN_GOD_ARCHDEVILS("My soul is marked by Mephistopheles"),
 	TRAIT_DEVIL_MARKED_LEVIATHAN = SPAN_GOD_ARCHDEVILS("My soul is marked by Leviathan"),
+	TRAIT_IDENTIFY_DEVIL_MARKS = span_info("I know how to identify the marks of the Archdevils."),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

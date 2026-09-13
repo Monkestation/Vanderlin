@@ -58,6 +58,7 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER,
 		TRAIT_VIRGIN,
+		TRAIT_IDENTIFY_DEVIL_MARKS,
 	)
 
 /datum/job/advclass/archivist

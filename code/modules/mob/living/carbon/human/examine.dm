@@ -36,6 +36,18 @@
 	for(var/datum/quirk/Q in quirks)
 		Q.on_examined(user, P, .)
 
+	if(ishuman(user) && HAS_TRAIT(user, TRAIT_IDENTIFY_DEVIL_MARKS) && Adjacent(user))
+		var/can_see_hands = IsAdminGhost(user) || is_human_part_visible(src, HIDEHANDS)
+		if(can_see_hands)
+			if(HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABRAXAS))
+				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Abraxas!"))
+			if(HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABADDON))
+				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Abaddon!"))
+			if(HAS_TRAIT(src, TRAIT_DEVIL_MARKED_MEPHISTOPHELES))
+				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Mephistopheles!"))
+			if(HAS_TRAIT(src, TRAIT_DEVIL_MARKED_LEVIATHAN))
+				LAZYADDASSOCLIST(., EXAMINE_SECT_WARNING, SPAN_GOD_ARCHDEVILS("I recognize the mark of Leviathan!"))
+
 
 /mob/living/carbon/human/get_examine_face(mob/user, list/P, list/examine_list)
 	var/self_inspect = user == src
