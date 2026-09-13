@@ -66,7 +66,7 @@
 
 	var/skill_type = weapon_parry ? parrying_weapon.associated_skill : /datum/attribute/skill/combat/unarmed
 
-	// wdefense variable on parrying_weapon * 5
+	// wdefense variable on parrying_weapon * 4
 	var/parry_modifier = parry_data["weapon_defense_flat"] * 4
 	// decreases defense for knife/fists if fighting against normal weapons
 	if((skill_type == /datum/attribute/skill/combat/unarmed || skill_type == /datum/attribute/skill/combat/knives) && (skill_data["attacker_type"] != /datum/attribute/skill/combat/knives && skill_data["attacker_type"] != /datum/attribute/skill/combat/unarmed))
@@ -98,9 +98,11 @@
 	var/attacker_dualwielding = attacker.dual_wielding_check()
 	var/defender_dualwielding = dual_wielding_check()
 
-	//balance caps
-	parry_score = clamp(parry_score, 10, 95)
-
+	//balance caps, npcs are weaker
+	if(src.mind)
+		parry_score = clamp(parry_score, 10, 95)
+	else
+		parry_score = clamp(parry_score, 0, 80)
 	// Show roll info to defender
 	if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
 		var/text = "Roll to parry... (score: [parry_score]/100)"
