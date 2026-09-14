@@ -133,20 +133,9 @@
 	name = "The Knightly Journey"
 	max_spawns = 1
 	shared_wave_type = /datum/migrant_wave/knight
-	downgrade_wave = /datum/migrant_wave/knight_down
 	weight = 10
 	roles = list(
 		/datum/migrant_role/itinerant_knight = 1,
 		/datum/migrant_role/itinerant_squire = 1,
 	)
 	greet_text = "The weight of Psydon's cross is heavy, the vows you have undertaken heavier, a Knight and their squire have taken to the road to fulfill them."
-
-/datum/migrant_wave/knight_down
-	name = "The Knightly Journey"
-	max_spawns = 1
-	shared_wave_type = /datum/migrant_wave/knight
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/itinerant_knight = 1,
-	)
-	greet_text = "The weight of Psydon's cross is heavy, the vows you have undertaken heavier, a Knight has taken to the road to fulfill them."
