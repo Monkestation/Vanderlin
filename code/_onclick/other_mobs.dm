@@ -584,7 +584,7 @@
 	return TRUE
 
 /mob/living/proc/jump_action(atom/A)
-	if(HAS_TRAIT(src, TRAIT_IMMERSED))
+	if(HAS_TRAIT(src, TRAIT_IMMERSED) && !HAS_TRAIT(src, TRAIT_SWIMMER))
 		to_chat(src, span_warning("I can't jump while floating."))
 		return
 

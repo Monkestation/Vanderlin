@@ -367,7 +367,7 @@
 	var/current_direction = movedir || dir
 	var/speed = current_speed
 	if(HAS_TRAIT(moving, TRAIT_SWIMMER)) // more time to swim against the current
-		speed *= 2
+		speed *= 5
 	if(moving_loop)
 		moving_loop.direction = current_direction
 		moving_loop.delay = speed
