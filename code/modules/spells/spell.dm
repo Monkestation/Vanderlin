@@ -695,19 +695,26 @@
 				L.cursed_freak_out()
 			return sig_return | SPELL_CANCEL_CAST
 
+		var/is_dead = (human_target.stat == DEAD)
 		if(ishuman(cast_on))
 			var/mob/living/carbon/human/human_target
 			if(((spell_type == SPELL_DIVINE_MIRACLE) || (spell_type == SPELL_UNHOLY_MIRACLE)) && HAS_TRAIT(human_target, TRAIT_SILVER_BLESSED) && !(spell_flags & SPELL_PSYDON) && !(human_target.mob_biotypes & MOB_UNDEAD))
-				human_target.visible_message(span_info("[human_target] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
+				human_target.visible_message(is_dead ? span_info("[human_target] lies motionless as the miracle dissipates.") : span_info("[human_target] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
 				playsound(human_target, 'sound/magic/PSY.ogg', 100, FALSE, -1)
 				owner.playsound_local(owner, 'sound/magic/PSY.ogg', 100, FALSE, -1)
 				return sig_return | SPELL_CANCEL_CAST
 
-			if((spell_flags & SPELL_DEVIL_BLOCKED) && HAS_TRAIT(human_target, TRAIT_DEVILS_REJECTION) && !(human_target.mob_biotypes & MOB_UNDEAD))
-				human_target.visible_message(span_info("[human_target] stirs for a moment, the miracle dissipates."), span_warning("Hellfire flares within you, only to dissipate as quickly as it started."))
-				playsound(human_target, 'sound/magic/soulsteal.ogg', 100, FALSE, -1)
-				owner.playsound_local(owner, 'sound/magic/soulsteal.ogg', 100, FALSE, -1)
-				return sig_return | SPELL_CANCEL_CAST
+			if(spell_flags & SPELL_DEVIL_BLOCKED)
+				if(HAS_TRAIT(human_target, TRAIT_DEVILS_REJECTION) && !(human_target.mob_biotypes & MOB_UNDEAD))
+					human_target.visible_message(is_dead ? span_info("[human_target] lies motionless as the miracle dissipates.") : span_info("[human_target] stirs for a moment, the miracle dissipates."), span_warning("Hellfire flares within you, only to dissipate as quickly as it started."))
+					playsound(human_target, 'sound/magic/soulsteal.ogg', 100, FALSE, -1)
+					owner.playsound_local(owner, 'sound/magic/soulsteal.ogg', 100, FALSE, -1)
+					return sig_return | SPELL_CANCEL_CAST
+				if(human_target.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic) || human_target.has_status_effect(/datum/status_effect/debuff/blood_mark/curse))
+					human_target.visible_message(is_dead ? span_info("[human_target] lies motionless as the miracle dissipates.") : span_info("[human_target] stirs for a moment, the miracle dissipates."), span_warning("Your blood burns as divine energies are repelled."))
+					playsound(human_target, 'sound/magic/PSY.ogg', 100, FALSE, -1)
+					owner.playsound_local(owner, 'sound/magic/PSY.ogg', 100, FALSE, -1)
+					return sig_return | SPELL_CANCEL_CAST
 
 
 	if(charge_required && !click_to_activate)

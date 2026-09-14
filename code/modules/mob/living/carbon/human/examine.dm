@@ -39,7 +39,6 @@
 	if(user == src)
 		return
 	var/trait_list = list(
-		TRAIT_INQUISITION,
 		TRAIT_IDENTIFY_DEVIL_MARKS,
 		TRAIT_DEVIL_MARKED_ABRAXAS,
 		TRAIT_DEVIL_MARKED_ABADDON,
