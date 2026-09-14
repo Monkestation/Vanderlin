@@ -1,11 +1,12 @@
 /datum/antagonist/blood_mage
-	name = "Blood Mage"
+	name = "Blood Mages Base"
 	antagpanel_category = "Blood Mages"
 	roundend_category = "Blood Mages"
 	show_name_in_check_antagonists = TRUE
 	antag_hud_type = ANTAG_HUD_BLOOD_MAGE
 
 /datum/antagonist/blood_mage/mage
+	name = "Blood Mage"
 	antag_hud_name = "bloodmage"
 	confess_lines = list(
 		"BLOOD IS POWER!",
