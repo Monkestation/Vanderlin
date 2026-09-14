@@ -283,7 +283,7 @@
 /datum/status_effect/debuff/blood_curse_lesser
 	id = "blood_curse_lesser"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/blood_curse_lesser
-	duration = 15 SECONDS
+	duration = BLOOD_CURSE_DURATION
 	tick_interval = -1 // No ticking needed
 	effectedstats = list(STAT_STRENGTH = -1, STAT_CONSTITUTION = -1, STAT_ENDURANCE = -1, STAT_SPEED = -1)
 

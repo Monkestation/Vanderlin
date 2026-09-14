@@ -42,7 +42,6 @@
 /datum/outfit/watchman
 	name = "Men-at-arms Base"
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shirt = /obj/item/clothing/shirt/tunic/colored/tunicprimary
 	neck = /obj/item/clothing/neck/bevor
 	gloves = /obj/item/clothing/gloves/leather/advanced
 	wrists = /obj/item/clothing/wrists/bracers/leather
@@ -50,9 +49,7 @@
 	shoes = /obj/item/clothing/shoes/boots/leather/advanced/watch
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/manorguard
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
+
 /datum/job/men_at_arms/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
 
@@ -115,9 +112,13 @@
 /datum/outfit/watchman/pikeman
 	name = "Pikeman Men-At-Arms"
 	armor = /obj/item/clothing/armor/chainmail/hauberk
+	shirt = /obj/item/clothing/shirt/tunic/colored/tunicprimary
 	beltr = /obj/item/weapon/sword/arming
 	backr = /obj/item/weapon/polearm/spear/billhook
 	backl = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1
+	)
 	scabbards = list(/obj/item/weapon/scabbard/sword)
 
 /datum/attribute_holder/sheet/job/menatarms/axeman
@@ -162,6 +163,9 @@
 	shirt = /obj/item/clothing/armor/gambeson/heavy
 	gloves = /obj/item/clothing/gloves/chain
 	backl = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1
+	)
 	backr = /obj/item/weapon/greataxe/steel
 
 /datum/attribute_holder/sheet/job/menatarms/ranger
@@ -200,7 +204,12 @@
 /datum/outfit/watchman/ranger
 	name = "Archer Men-At-Arms"
 	armor = /obj/item/clothing/armor/leather/splint
+	shirt = /obj/item/clothing/shirt/tunic/colored/tunicprimary
 	beltr = /obj/item/weapon/mace/cudgel
+	backl = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1
+	)
 
 /datum/job/advclass/menatarms/watchman_ranger/on_roundstart(mob/living/carbon/human/equipped_human, client/player_client)
 	. = ..()
@@ -251,7 +260,11 @@
 /datum/outfit/watchman/swordsman
 	name = "Swordsman Men-At-Arms"
 	armor = /obj/item/clothing/armor/chainmail/hauberk
+	shirt = /obj/item/clothing/shirt/tunic/colored/tunicprimary
 	beltr = /obj/item/weapon/sword/arming
 	backr = /obj/item/weapon/shield/heater
 	backl = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1
+	)
 	scabbards = list(/obj/item/weapon/scabbard/sword)

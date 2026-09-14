@@ -175,6 +175,15 @@
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)
 
+/obj/item/weapon/flail/bloodsteel/relic
+	name = "\proper heart of Mephistopheles"
+	desc = "The heart of darkness, empowered by the progenitor of Kaine."
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+
+/obj/item/weapon/flail/bloodsteel/relic/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/vampiric)
+
 //................ Peasant Flail ............... // A little confusing still
 /obj/item/weapon/flail/peasant
 	name = "peasant flail"

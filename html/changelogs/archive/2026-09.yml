@@ -198,3 +198,40 @@
 2026-09-10:
   realforest2001:
   - bugfix: Fixed bandages getting stuck with blood.
+2026-09-11:
+  Archeonan:
+  - rscadd: Smithable Ornate Fluted Cuirass
+  Avalon-Proto:
+  - qol: Swimmer Trait has been made stronger, and allows you to jump from the water
+      now
+  ModDownloading:
+  - rscadd: Black Oak Guardian has been reworked into Redwood Mercenary (credit to
+      Archeon).
+  Monkeke2:
+  - balance: Decapitations dont happen if you target the eyes/nose/ears
+  realforest2001:
+  - balance: Loadout items are no longer free money.
+  - bugfix: Court roles should now always know eachother.
+  ta3754859-max:
+  - qol: Emotes now give proper runechat message over your character head
+  - rscadd: Kiss while aiming the skull is a forehead kiss, kiss while aiming head
+      is a cheek kiss
+2026-09-12:
+  realforest2001:
+  - code_imp: Added check variables for revive / cure rot miracles, such as whether
+      can work on luxless.
+  - balance: Garrotte now requires 3 seconds to grab a target if they're in combat
+      mode. Does not apply to users trained in Apprehension Techniques.
+2026-09-13:
+  Carol-J:
+  - rscadd: Added Dark Elves to Zalad-associated species
+  SSensum13:
+  - bugfix: Fixed absolver's bloodpool regeneration.
+  TheDoktorZ:
+  - qol: Keys for Triumph-class Heirs
+  - balance: Gave the Royal Knight a dagger
+  - bugfix: Duplicate equipment from MAA & Squire gone
+  - bugfix: Axeman-At-Arms has their gambeson
+  voidwytch:
+  - rscadd: Added ten sets of Wintermare nobility clothes and their respective crafting
+      recipes

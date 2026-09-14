@@ -367,3 +367,48 @@
 	desc = "Lightweight leather boots designed for fencing, they'll help keep your balance perfect in combat."
 	icon_state = "freiboots"
 	item_state = "freiboots"
+
+
+/obj/item/clothing/shoes/boots/rosa
+	name = "ivory shoes"
+	desc = "Finely crafted shoes from Wintermare, typically worn by their nobility."
+	icon_state = "rosashoes1"
+	icon = 'icons/roguetown/clothing/special/rosewood.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+
+/obj/item/clothing/shoes/boots/rosa/two
+	name = "scarlet shoes"
+	icon_state = "rosashoes2"
+
+/obj/item/clothing/shoes/boots/rosa/three
+	name = "velvet shoes"
+	icon_state = "rosashoes3"
+
+/obj/item/clothing/shoes/boots/rosa/four
+	name = "obsidian shoes"
+	icon_state = "rosashoes4"
+
+/obj/item/clothing/shoes/boots/rosa/five
+	name = "sable shoes"
+	icon_state = "rosashoes5"
+
+/obj/item/clothing/shoes/boots/rosa/six
+	name = "maroon shoes"
+	icon_state = "rosashoes6"
+
+/obj/item/clothing/shoes/boots/rosa/seven
+	name = "regal shoes"
+	icon_state = "rosashoes7"
+
+/obj/item/clothing/shoes/boots/rosa/eight
+	name = "courtly shoes"
+	icon_state = "rosashoes8"
+
+/obj/item/clothing/shoes/boots/rosa/nine
+	name = "royal shoes"
+	icon_state = "rosashoes9"
+
+/obj/item/clothing/shoes/boots/rosa/ten
+	name = "stately shoes"
+	icon_state = "rosashoes10"
