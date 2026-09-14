@@ -89,7 +89,7 @@
 	cloak = /obj/item/clothing/cloak/psydontabard
 	backr = /obj/item/weapon/shield/tower/metal
 	gloves = /obj/item/clothing/gloves/chain/psydon
-	neck = /obj/item/clothing/neck/chaincoif
+	neck = /obj/item/clothing/neck/gorget
 	pants = /obj/item/clothing/pants/chainlegs
 	backl = /obj/item/storage/backpack/satchel/grenzel
 	shirt = /obj/item/clothing/armor/gambeson/heavy/inq

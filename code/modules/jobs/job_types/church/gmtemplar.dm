@@ -103,7 +103,7 @@
 
 /datum/outfit/gmtemplar
 	name = JOB_GRANDMASTER_TEMPLAR
-	neck = /obj/item/clothing/neck/chaincoif
+	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/plate/full/silver
 	shirt = /obj/item/clothing/armor/chainmail
 	pants = /obj/item/clothing/pants/platelegs/silver
