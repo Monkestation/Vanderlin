@@ -961,6 +961,7 @@
 	greet_text = span_notice("You have a dark secret, hidden power you have concealed for most of your life. Is now the time to let it out?")
 	req_text = "Worship Mephistopheles."
 	allowed_patrons = list(/datum/patron/archdevil/mephistopheles)
+	restricted_traits = list(TRAIT_BLOOD_MAGE, TRAIT_BLOOD_SORCERER, TRAIT_BLOOD_STUDENT, TRAIT_VITAE_USER)
 	weight = 15 //Should be fine.
 
 /datum/special_trait/dark_secrets/on_apply(mob/living/carbon/human/character, silent)
