@@ -362,7 +362,7 @@
 /obj/item/clothing/ring/apothecary_ring/examine(mob/user)
 	. = ..()
 	if(is_apothecary_job(user.mind.assigned_role))
-		. += span_info("A hefty bloody made out of thaumic iron, proof of my successful graduation. \
+		. += span_info("A hefty bloody ring made out of thaumic iron, proof of my successful graduation. \
 		It doesn't get any easier to wear with time, but at least it proves I'm a confirmed alchemist \
 		and can legally manipulate lux, so long as I follow Pestra's teachings.")
 	else
