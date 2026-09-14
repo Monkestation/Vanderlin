@@ -592,7 +592,7 @@
 	var/effective_efficiency = LAZYACCESS(organ_efficiency, slot)
 	if(isnull(effective_efficiency))
 		return effective_efficiency
-	var/static/list/no_bleedout_organs = list(ORGAN_SLOT_ARTERY)
+	var/static/list/no_bleedout_organs = list(ORGAN_SLOT_ARTERY, ORGAN_SLOT_SPLEEN, ORGAN_SLOT_LIVER, ORGAN_SLOT_STOMACH)
 	if(slot in no_bleedout_organs)
 		if(is_failing_without_bleedout())
 			return 0

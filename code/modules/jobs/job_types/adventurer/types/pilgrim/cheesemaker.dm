@@ -21,7 +21,7 @@
 	This is your duty, this is your call."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/cheesemaker
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	apprentice_name = "Cheesemaker Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 

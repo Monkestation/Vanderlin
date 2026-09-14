@@ -19,7 +19,7 @@
 	tutorial = "A wandering searaider, a Vikingr from the Elven Clans of Kaledon. You are locked in a fierce rivalry with your other kin, those sea elves, those coastal elves, you hate whichever one is not you. You will see them die. Abyssor's bounty is what you seek, and you shall have it."
 	allowed_races = RACES_PLAYER_ELF
 	outfit = /datum/outfit/adventurer/vikingr
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 	total_positions = 0 //Kaledon isn't in
 	attribute_sheet = /datum/attribute_holder/sheet/job/vikingr

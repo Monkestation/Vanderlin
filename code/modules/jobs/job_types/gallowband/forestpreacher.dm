@@ -36,7 +36,7 @@
 
 	allowed_ages = list(AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
 	exp_type = list(EXP_TYPE_CHURCH)
 	exp_types_granted = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_CHURCH)

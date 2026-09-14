@@ -49,7 +49,7 @@
 				or the boons of Dendor for their meat to sell, or consume."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/hunter
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	apprentice_name = "Hunter Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 

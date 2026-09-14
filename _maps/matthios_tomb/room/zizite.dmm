@@ -86,7 +86,7 @@
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
 "dH" = (
-/obj/item/clothing/pants/platelegs/zizo,
+/obj/item/clothing/pants/platelegs/inhumen/zizo,
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
 "el" = (
@@ -281,7 +281,7 @@
 /area/under/tomb/indoors/church)
 "qj" = (
 /obj/structure/closet/crate/crafted_closet/steward,
-/obj/item/weapon/knife/dagger/steel/profane,
+/obj/item/weapon/knife/dagger/steel/inhumen/profane,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "qy" = (

@@ -228,39 +228,47 @@
 
 
 //................ Zizo Armor ...............//
+/obj/item/clothing/armor/plate/full/inhumen
+	name = "BASE INHUMEN ARMOR"
+	abstract_type = /obj/item/clothing/armor/plate/full/inhumen
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizoplate"
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 
-/obj/item/clothing/armor/plate/full/zizo
+/obj/item/clothing/armor/plate/full/inhumen/zizo
 	name = "darksteel fullplate"
 	desc = "Full plate. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizoplate"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	melting_material = /datum/material/avantyne
 	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
+/obj/item/clothing/armor/plate/full/inhumen/zizo/alt
+	name = "ribbed darksteel fullplate"
+	icon_state = "zizoplatechest_med"
+
 //................ Matthios Armor ...............//
 
-/obj/item/clothing/armor/plate/full/matthios
+/obj/item/clothing/armor/plate/full/inhumen/matthios
 	name = "gilded fullplate"
 	desc = "Full plate. Tales told of men in armor such as this stealing many riches, or lives."
 	icon_state = "matthiosarmor"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
 
 //.............. Graggar Armor .................//
 
-/obj/item/clothing/armor/plate/full/graggar
+/obj/item/clothing/armor/plate/full/inhumen/graggar
 	name = "vicious full-plate"
 	desc = "A sinister set full plate. Untold violence stirs from within."
 	icon_state = "graggarplate"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
+
+//.............. Baotha Armor .................//
+
+/obj/item/clothing/armor/plate/full/inhumen/baotha
+	name = "saccharine full-plate"
+	desc = "A tantalizing set full plate, you almost feel like you can't take them off.."
+	icon_state = "baothaplate"
 
 //.............. Silver Armor .................//
 

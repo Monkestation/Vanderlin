@@ -69,7 +69,7 @@
 		/area/indoors/town/keep/magician = list(
 			/obj/item/spellbook,
 			/obj/item/gem/yellow,
-			/obj/item/reagent_containers/glass/bottle/manapot,
+			/obj/item/reagent_containers/glass/bottle/manapot/labelled,
 		),
 	)
 

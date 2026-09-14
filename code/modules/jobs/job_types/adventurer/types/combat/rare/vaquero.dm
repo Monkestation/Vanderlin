@@ -28,7 +28,7 @@
 	allowed_races = list(SPEC_ID_TIEFLING)
 	outfit = /datum/outfit/vaquero
 	cmode_music = 'sound/music/cmode/adventurer/combat_vaquero.ogg'
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	total_positions = 1
 	roll_chance = 7
 

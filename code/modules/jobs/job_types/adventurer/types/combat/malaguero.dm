@@ -26,7 +26,7 @@
 
 	traits = list(TRAIT_MEDIUMARMOR)
 	languages = list(/datum/language/newpsydonic)
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	total_positions = 2
 
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'

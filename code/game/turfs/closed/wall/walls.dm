@@ -526,6 +526,10 @@
 	to_be_destroyed = FALSE
 	return src
 
+/turf/closed/wall/mineral/underbrick/moonstone
+	name = "moonstone wall"
+	desc = "The work of wisdom beyond all understanding."
+
 /turf/closed/wall/mineral/abyssal
 	name = "abyssal wall"
 	icon = 'icons/delver/abyss_walls.dmi'

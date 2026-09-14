@@ -12,6 +12,42 @@
 	var/static/list/sender_cooldowns = list()
 	var/static/list/pending_direct_responses = list()
 	var/static/response_id_counter = 0
+	var/next_announce = 0
+	var/muted = FALSE
+
+/obj/structure/mercstatue/Initialize(mapload)
+	. = ..()
+	next_announce = world.time + rand(1 MINUTES, 2 MINUTES)
+	START_PROCESSING(SSroguemachine, src)
+
+/obj/structure/mercstatue/Destroy(force)
+	STOP_PROCESSING(SSroguemachine, src)
+	return ..()
+
+/obj/structure/mercstatue/AltClick(mob/user, list/modifiers)
+	. = ..()
+	if(!ishuman(user) || !user.client)
+		return
+	if(!Adjacent(user))
+		return
+	muted = !muted
+	user.balloon_alert(user, muted ? "muted" : "unmuted")
+
+/obj/structure/mercstatue/process()
+	if(muted)
+		return
+	if(world.time < next_announce)
+		return
+	next_announce = world.time + rand(2 MINUTES, 4 MINUTES)
+	if(!length(GLOB.available_mercenaries))
+		return
+	var/mob/living/carbon/human/merc = pick(GLOB.available_mercenaries)
+	if(QDELETED(merc))
+		return
+	if(merc.job)
+		say("[merc.real_name], [merc.job], is currently available for hire!")
+	else
+		say("[merc.real_name] is currently available for hire!")
 
 /obj/structure/mercstatue/attack_hand(mob/living/carbon/human/user)
 	use(user)
@@ -42,14 +78,13 @@
 			if(mercring)
 				qdel(mercring)
 		return
-
 	if(ishuman(user) && user.mind && istype(user.mind.assigned_role, /datum/job/advclass/mercenary))
 		if(tgui_alert(user, "Do you want to register as an available mercenary for the mercenary statue?", "MERCENARY", DEFAULT_INPUT_CHOICES, 20 SECONDS) == CHOICE_YES)
 			GLOB.available_mercenaries += user
 			mercring = new /obj/item/mercenary_ring(src)
 			mercring.add_mercenary(user)
 			user.put_in_hands(mercring)
-			if(user.mercdesc && (user.mercdesc != ""))
+			if(istext(user.mercdesc) && length(user.mercdesc))
 				return
 			user.mercdesc = stripped_input(user, "Write a description which will be shown to potential employers.", "Description", "", message_char_limit)
 			return
@@ -128,14 +163,39 @@
 
 /obj/structure/mercstatue/examine(mob/user)
 	. = ..()
-
-	if(GLOB.available_mercenaries)
+	. += span_notice("Alt-click to toggle mercenary announcement")
+	if(length(GLOB.available_mercenaries))
 		. += span_notice("These mercenaries are currently available:")
 		for(var/mob/living/carbon/human/merc in GLOB.available_mercenaries)
 			if(merc.job)
-				. += "[merc.real_name], [merc.job]: [merc.mercdesc]"
+				if(istext(merc.mercdesc) && length(merc.mercdesc))
+					. += "[merc.real_name], [merc.job]: [merc.mercdesc]"
+				else
+					. += "[merc.real_name], [merc.job]"
 			else
-				. += "[merc.real_name]: [merc.mercdesc]"
-		return
-	else
+				if(istext(merc.mercdesc) && length(merc.mercdesc))
+					. += "[merc.real_name]: [merc.mercdesc]"
+				else
+					. += "[merc.real_name]"
+
+	if(length(GLOB.contracted_mercenaries))
+		. += span_notice("These mercenaries are currently contracted and may be available later:")
+		for(var/mob/living/carbon/human/merc in GLOB.contracted_mercenaries)
+			if(merc.job)
+				if(istext(merc.mercdesc) && length(merc.mercdesc))
+					. += "[merc.real_name], [merc.job]: [merc.mercdesc]"
+				else
+					. += "[merc.real_name], [merc.job]"
+			else
+				if(istext(merc.mercdesc) && length(merc.mercdesc))
+					. += "[merc.real_name]: [merc.mercdesc]"
+				else
+					. += "[merc.real_name]"
+
+	if(!length(GLOB.contracted_mercenaries) && !length(GLOB.available_mercenaries))
 		. += span_notice("No mercenaries are currently available.")
+
+
+/obj/structure/mercstatue/wall
+	density = FALSE
+	SET_BASE_PIXEL(0, 35)

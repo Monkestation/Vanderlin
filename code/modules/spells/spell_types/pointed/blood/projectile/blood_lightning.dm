@@ -13,7 +13,7 @@
 	heretical_spell = TRUE
 	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 
-	invocation = "Blood Bolt!!"
+	invocation = "Caedis telum!!"
 	invocation_type = INVOCATION_SHOUT
 
 	charge_time = 3 SECONDS
@@ -29,6 +29,7 @@
 	desc = "A weaker mimicry of a darker spell, launch a bolt of blood infused with lightning."
 	required_level = 4
 
+	invocation = "Blood Bolt!!"
 	spell_type = SPELL_MANA
 	required_form = FORM_WATER
 	spell_flags = SPELL_RITUOS
@@ -55,4 +56,5 @@
 		L.electrocute_act(1, src)
 
 /obj/projectile/magic/bloodlightning/lesser
+	name = "lesser blood bolt"
 	damage = 35

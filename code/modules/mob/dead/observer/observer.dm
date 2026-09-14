@@ -19,7 +19,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 	density = FALSE
 	see_invisible = SEE_INVISIBLE_OBSERVER
 	see_in_dark = 100
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
+	lighting_alpha = LIGHTING_PLANE_ALPHA_PERFECT_DARKVISION
 	invisibility = INVISIBILITY_OBSERVER
 	hud_type = /datum/hud/ghost
 	movement_type = GROUND | FLYING
@@ -722,11 +722,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		return
 	switch(lighting_alpha)
 		if (LIGHTING_PLANE_ALPHA_VISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
-		if (LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
-		if (LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_INVISIBLE
+			lighting_alpha = LIGHTING_NV_EYES_TIER_1
+		if (LIGHTING_NV_EYES_TIER_1)
+			lighting_alpha = LIGHTING_NV_EYES_TIER_2
+		if (LIGHTING_NV_EYES_TIER_2)
+			lighting_alpha = LIGHTING_NV_EYES_TIER_3
 		else
 			lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
 

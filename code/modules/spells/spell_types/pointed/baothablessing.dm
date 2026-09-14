@@ -5,8 +5,8 @@
 	sound = 'sound/magic/heal.ogg'
 	charge_sound = 'sound/magic/holycharging.ogg'
 
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "Receive Boatha's Gift."
 	invocation_type = INVOCATION_WHISPER

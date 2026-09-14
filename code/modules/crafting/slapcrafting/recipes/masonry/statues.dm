@@ -71,7 +71,7 @@
 	craftdiff = 3
 
 /datum/slapcraft_recipe/masonry/structure/statue/bstatue
-	name = "hooded statue"
+	name = "necra statue"
 	steps = list(
 		/datum/slapcraft_step/structure/carving_block,
 		/datum/slapcraft_step/use_item/masonry/chisel,
@@ -79,7 +79,7 @@
 		/datum/slapcraft_step/use_item/masonry/hammer/second,
 		/datum/slapcraft_step/use_item/masonry/chisel/second,
 		)
-	result_type = /obj/structure/fluff/statue
+	result_type = /obj/structure/fluff/statue/necra
 	craftdiff = 3
 
 /datum/slapcraft_recipe/masonry/structure/statue/small

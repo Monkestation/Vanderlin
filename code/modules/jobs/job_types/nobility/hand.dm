@@ -21,7 +21,8 @@
 
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	jobs_always_know_me = list(JOB_COURT_AGENT)
+	jobs_i_always_know = KNOW_COURT_AGENT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 
 	noble_income = 22
 	job_bitflag = BITFLAG_ROYALTY

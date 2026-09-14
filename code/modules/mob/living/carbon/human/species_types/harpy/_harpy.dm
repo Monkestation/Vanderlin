@@ -5,7 +5,8 @@
 
 /datum/attribute_holder/sheet/job/species/harpy
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/music = 10
+		/datum/attribute/skill/misc/music = 10,
+		/datum/attribute/skill/misc/climbing = 5 
 	)
 
 /datum/attribute_holder/sheet/job/species/harpy/stats

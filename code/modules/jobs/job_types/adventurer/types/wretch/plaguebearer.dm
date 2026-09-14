@@ -41,6 +41,7 @@
 		/datum/action/cooldown/spell/diagnose,
 		/datum/action/cooldown/spell/undirected/conjure_item/poison_bomb
 	)
+	book_type = /obj/item/recipe_book/medical
 
 
 /datum/outfit/wretch/plaguebearer
@@ -64,5 +65,5 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/rope/chain = 1,
 		/obj/item/flint = 1,
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 	)

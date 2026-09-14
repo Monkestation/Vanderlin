@@ -39,14 +39,14 @@
 
 /datum/special_trait/nightvision
 	name = "Night Vision"
-	greet_text = span_notice("I can easily see in the dark.")
+	greet_text = span_notice("I can see as clear as any elf in the dark.")
 	weight = 100
 
 /datum/special_trait/nightvision/on_apply(mob/living/carbon/human/character, silent)
 	var/list/eye_list = character.getorganslotlist(ORGAN_SLOT_EYES)
 	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.see_in_dark = 3
-		eyes.lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
+		eyes.see_in_dark = SEE_IN_DARK_ELVEN_EYES
+		eyes.lighting_alpha = LIGHTING_PLANE_ALPHA_ELVEN_EYES
 		character.update_sight()
 
 /datum/special_trait/thickskin
@@ -971,9 +971,10 @@
 	character.grant_language(/datum/language/sanguine)
 	character.adjust_technique_mastery_points(2)
 	character.adjust_form_mastery_points(3, specific_form = FORM_BLOOD)
-	ADD_TRAIT(character, TRAIT_BLOOD_MAGE, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character, TRAIT_BLOOD_STUDENT, BE_SPECIAL_TRAIT)
 	character.hud_used?.set_bloody_bloodpool()
 	character.adjust_bloodpool()
+	to_chat(character, span_bloody("I have available innate spellpoints."))
 
 /datum/special_trait/overcompensating
 	name = "Overcompensating"

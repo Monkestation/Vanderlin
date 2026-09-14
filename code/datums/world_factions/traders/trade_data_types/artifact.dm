@@ -6,7 +6,7 @@
 /datum/outfit/artifact
 	head = /obj/item/clothing/head/leather/duelhat
 	mask = /obj/item/clothing/face/facemask/steel/harlequin
-	armor = /obj/item/clothing/armor/plate/full/matthios
+	armor = /obj/item/clothing/armor/plate/full/inhumen/matthios
 	cloak = /obj/item/clothing/cloak/graggar
 	shirt = /obj/item/clothing/shirt/undershirt/artificer
 	shoes = /obj/item/clothing/shoes/nobleboot/duelboots

@@ -82,6 +82,7 @@
 	item_damage_type = "blunt"
 
 /mob/living/simple_animal/hostile/retaliate/voidstoneobelisk/death(gibbed)
+	QDEL_NULL(beam)
 	var/turf/deathspot = get_turf(src)
 	new /obj/item/natural/voidstone(deathspot)
 	new /obj/item/natural/artifact(deathspot)
@@ -123,6 +124,9 @@
 
 /obj/effect/obeliskbeam/process()
 	var/atom/ignore = creator?.resolve()
+	if(!ignore)
+		qdel(src)
+		return
 	for(var/mob/living/hit_mob in get_turf(src))
 		if(hit_mob == ignore)
 			continue

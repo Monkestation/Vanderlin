@@ -36,7 +36,7 @@
 	hydration_req = 0.075
 
 	var/sight_flags = 0
-	var/see_in_dark = 8
+	var/see_in_dark = SEE_IN_DARK_DEFAULT_EYES
 	/// How much innate tint these eyes have
 	var/tint = 0
 	var/eye_icon_state = "eye-right"
@@ -176,8 +176,8 @@
 /obj/item/organ/eyes/night_vision
 	name = "shadow eye"
 	desc = ""
-	see_in_dark = 8
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
+	see_in_dark = SEE_IN_DARK_DARKVISION
+	lighting_alpha = LIGHTING_PLANE_ALPHA_DARKVISION
 	actions_types = list(/datum/action/item_action/organ_action/use)
 	var/night_vision = TRUE
 
@@ -189,11 +189,11 @@
 	sight_flags = initial(sight_flags)
 	switch(lighting_alpha)
 		if (LIGHTING_PLANE_ALPHA_VISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
-		if (LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
-		if (LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_INVISIBLE
+			lighting_alpha = LIGHTING_NV_EYES_TIER_1
+		if (LIGHTING_NV_EYES_TIER_1)
+			lighting_alpha = LIGHTING_NV_EYES_TIER_2
+		if (LIGHTING_NV_EYES_TIER_2)
+			lighting_alpha = LIGHTING_NV_EYES_TIER_3
 		else
 			lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
 			sight_flags &= ~SEE_BLACKNESS
@@ -246,16 +246,16 @@
 /obj/item/organ/eyes/elf
 	name = "elf eye"
 	desc = ""
-	see_in_dark = 4
-	lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
+	see_in_dark = SEE_IN_DARK_ELVEN_EYES
+	lighting_alpha = LIGHTING_PLANE_ALPHA_ELVEN_EYES
 
 /obj/item/organ/eyes/elf/left
 	zone = BODY_ZONE_PRECISE_L_EYE
 	side = LEFT_SIDE
 
 /obj/item/organ/eyes/elf/less
-	see_in_dark = 3
-	lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
+	see_in_dark = SEE_IN_DARK_HALF_ELVEN_EYES
+	lighting_alpha = LIGHTING_PLANE_ALPHA_HALF_ELVEN_EYES
 
 /obj/item/organ/eyes/elf/less/left
 	zone = BODY_ZONE_PRECISE_L_EYE
@@ -264,8 +264,8 @@
 /obj/item/organ/eyes/kobold
 	name = "slitted eye"
 	accessory_type = /datum/sprite_accessory/eyes/humanoid/kobold
-	see_in_dark = 3
-	lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
+	see_in_dark = SEE_IN_DARK_DARKVISION
+	lighting_alpha = LIGHTING_PLANE_ALPHA_DARKVISION
 
 /obj/item/organ/eyes/kobold/left
 	zone = BODY_ZONE_PRECISE_L_EYE

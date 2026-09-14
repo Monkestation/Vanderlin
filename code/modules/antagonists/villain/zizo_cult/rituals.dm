@@ -175,7 +175,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 			continue
 		if(HAS_TRAIT(HL, TRAIT_ASSASSIN))
 			assassin_found = TRUE
-			var/obj/item/weapon/knife/dagger/steel/profane/dagger = locate() in HL.get_all_gear()
+			var/obj/item/weapon/knife/dagger/steel/inhumen/profane/dagger = locate() in HL.get_all_gear()
 			if(dagger)
 				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [paper_name]!\"</span>")
 	if(!target || !assassin_found)
@@ -322,15 +322,15 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	S.set_up(1, 1, center)
 	S.start()
 
-	new /obj/item/clothing/armor/plate/full/zizo(center)
+	new /obj/item/clothing/armor/plate/full/inhumen/zizo(center)
 
-	new /obj/item/clothing/pants/platelegs/zizo(center)
+	new /obj/item/clothing/pants/platelegs/inhumen/zizo(center)
 
-	new /obj/item/clothing/shoes/boots/armor/zizo(center)
+	new /obj/item/clothing/shoes/boots/armor/inhumen/zizo(center)
 
-	new /obj/item/clothing/head/helmet/heavy/zizo(center)
+	new /obj/item/clothing/head/helmet/heavy/inhumen/zizo(center)
 
-	new /obj/item/clothing/gloves/plate/zizo(center)
+	new /obj/item/clothing/gloves/plate/inhumen/zizo(center)
 
 	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 

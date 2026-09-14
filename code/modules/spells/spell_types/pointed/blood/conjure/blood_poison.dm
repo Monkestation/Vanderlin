@@ -13,7 +13,7 @@
 	check_flags = AB_CHECK_CONSCIOUS
 
 	invocation_type = INVOCATION_WHISPER
-	invocation = "Sanguis nota"
+	invocation = "Caedis cicuta"
 
 	charge_required = FALSE
 	cooldown_time = 3 MINUTES
@@ -37,7 +37,7 @@
 
 	if(isreagentcontainer(cast_on))
 		var/obj/item/reagent_containers/container = cast_on
-		if(container.reagents.maximum_volume >= container.reagents.total_volume)
+		if(container.reagents.maximum_volume <= container.reagents.total_volume)
 			to_chat(owner, span_warning("[container] is already full!"))
 			return FALSE
 		return TRUE

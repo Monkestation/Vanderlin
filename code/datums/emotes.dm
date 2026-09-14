@@ -43,8 +43,6 @@
 	var/runechat_msg = null
 
 /datum/emote/New()
-	if(!runechat_msg)
-		runechat_msg = strip_punctuation(message)
 	if (ispath(mob_type_allowed_typecache))
 		switch (mob_type_allowed_typecache)
 			if (/mob)
@@ -86,6 +84,7 @@
 	if(!msg && nomsg == FALSE)
 		return
 
+	var/msg_for_runechat = msg
 	if(!nomsg)
 		user.log_message(msg, LOG_EMOTE)
 		msg = "<b>[user]</b> " + msg
@@ -114,7 +113,7 @@
 				M.show_message(msg)
 		var/runechat_msg_to_use = null
 		if(show_runechat && !(emote_type & EMOTE_AUDIBLE))
-			runechat_msg_to_use = runechat_msg ? runechat_msg : raw_msg
+			runechat_msg_to_use = runechat_msg ? runechat_msg : msg_for_runechat
 		if(emote_type & EMOTE_AUDIBLE)
 			user.audible_message(msg, runechat_message = runechat_msg_to_use)
 		else

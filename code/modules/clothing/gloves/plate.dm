@@ -84,43 +84,45 @@
 	enchant(/datum/enchantment/silver)
 
 	//............... Evil Gloves ............... //
+/obj/item/clothing/gloves/plate/inhumen
+	name = "BASE INHUMEN GAUNTLETS"
+	abstract_type = /obj/item/clothing/gloves/plate/inhumen
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizogauntlets"
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 
-/obj/item/clothing/gloves/plate/zizo
+/obj/item/clothing/gloves/plate/inhumen/zizo
 	name = "darksteel gauntlets"
 	desc = "darksteel plate gauntlets. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizogauntlets"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
 	melting_material = /datum/material/avantyne
 	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
-/obj/item/clothing/gloves/plate/matthios
+/obj/item/clothing/gloves/plate/inhumen/matthios
 	name = "gilded gauntlets"
 	desc = "Shimmering plate gauntlets. Many riches have been taken with these, and just as many lives."
 	icon_state = "matthiosgloves"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
 
-/obj/item/clothing/gloves/plate/graggar
+/obj/item/clothing/gloves/plate/inhumen/graggar
 	name = "vicious gauntlets"
 	desc = "Plate gauntlets that reek of death. Many lives have been taken with these."
 	icon_state = "graggarplategloves"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
 
-/obj/item/clothing/gloves/plate/graggar/heavy
+/obj/item/clothing/gloves/plate/inhumen/graggar/heavy
 	name = "vicious plated gauntlets"
 	desc = "Steel plated gauntlets overlaid by an ornamental imagery of fractured bone and entrails. The violet smears; a tether to the life that once was - and now, a stinging reminder of what could've been."
 	icon_state = "graggarplategloves_heavy"
 	sleeved = 'icons/roguetown/clothing/onmob/gloves.dmi'
 	icon = 'icons/roguetown/clothing/gloves.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/gloves.dmi'
+
+/obj/item/clothing/gloves/plate/inhumen/baotha
+	name = "saccharine gauntlets"
+	desc = "Tantalizing plate gauntlets, you almost feel like you can't take them off..."
+	icon_state = "baothagloves"
 
 //............... Gronnic gloves ............... //
 /obj/item/clothing/gloves/plate/iron/gronn
