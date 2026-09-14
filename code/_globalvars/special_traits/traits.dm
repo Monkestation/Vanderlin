@@ -973,7 +973,7 @@
 	ADD_TRAIT(character, TRAIT_BLOOD_STUDENT, BE_SPECIAL_TRAIT)
 	character.hud_used?.set_bloody_bloodpool()
 	character.adjust_bloodpool()
-	to_chat(character, span_bloody("I have available innate spellpoints."))
+	to_chat(character, SPAN_GOD_ARCHDEVILS("I have available innate spellpoints."))
 
 /datum/special_trait/overcompensating
 	name = "Overcompensating"
