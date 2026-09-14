@@ -605,6 +605,14 @@
 	craftdiff = 2
 	category = "Cloak"
 
+/datum/repeatable_crafting_recipe/sewing/shortcoat
+	name = "short surcoat"
+	output = /obj/item/clothing/cloak/stabard/shortcoat
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 2
+	category = "Cloak"
+
 /datum/repeatable_crafting_recipe/sewing/jupon_cloak
 	name = "jupon"
 	output = /obj/item/clothing/cloak/stabard/jupon
@@ -946,7 +954,7 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/knight_tabard
-	name = "knight's tabbard"
+	name = "knight's tabard"
 	output = /obj/item/clothing/cloak/tabard/knight
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
@@ -954,7 +962,7 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/guard_tabard
-	name = "garrison tabbard"
+	name = "guard tabard"
 	output = /obj/item/clothing/cloak/tabard/knight/guard
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
@@ -962,14 +970,14 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/crusader_tabard_alt
-	name = "crusader tabbard (alt)"
+	name = "crusader tabard (alt)"
 	output = /obj/item/clothing/cloak/tabard/crusader/tief
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
 	craftdiff = 3
 	category = "Cloak"
 
-/datum/repeatable_crafting_recipe/sewing/psydon_tabbard
+/datum/repeatable_crafting_recipe/sewing/psydon_tabard
 	name = "psydonic tababrd"
 	output = /obj/item/clothing/cloak/tabard/adept
 	requirements = list(/obj/item/natural/cloth = 2,
@@ -978,7 +986,7 @@
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/sewing/guard_surcoat
-	name = "garrison surcoat"
+	name = "guard surcoat"
 	output = /obj/item/clothing/cloak/stabard/guard
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
@@ -1321,8 +1329,17 @@
 	craftdiff = 4
 	category = "Hat"
 
+/datum/repeatable_crafting_recipe/sewing/shortcoat_guard
+	name = "guard short surcoat"
+	output = /obj/item/clothing/cloak/stabard/shortcoat/guard
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 4
+	category = "Cloak"
+
+
 /datum/repeatable_crafting_recipe/sewing/jupon_guard
-	name = "guard's jupon"
+	name = "guard jupon"
 	output = /obj/item/clothing/cloak/stabard/jupon/guard
 	requirements = list(/obj/item/natural/cloth = 2,
 				/obj/item/natural/fibers = 1)
