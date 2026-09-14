@@ -435,3 +435,24 @@
 	detail_color = "#c08955"
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/leather/advanced
+
+/obj/item/clothing/armor/leather/jacket/rosa
+	name = "regal coat"
+	desc = "A finely crafted coat from Wintermare, typically worn by their nobility."
+	icon_state = "rosacoat7"
+	icon = 'icons/roguetown/clothing/special/rosewood.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+	boobed = FALSE
+
+/obj/item/clothing/armor/leather/jacket/rosa/two
+	name = "courtly coat"
+	icon_state = "rosacoat8"
+
+/obj/item/clothing/armor/leather/jacket/rosa/three
+	name = "royal coat"
+	icon_state = "rosacoat9"
+
+/obj/item/clothing/armor/leather/jacket/rosa/four
+	name = "stately coat"
+	icon_state = "rosacoat10"
