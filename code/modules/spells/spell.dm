@@ -695,9 +695,9 @@
 				L.cursed_freak_out()
 			return sig_return | SPELL_CANCEL_CAST
 
-		var/is_dead = (human_target.stat == DEAD)
 		if(ishuman(cast_on))
 			var/mob/living/carbon/human/human_target
+			var/is_dead = (human_target.stat == DEAD)
 			if(((spell_type == SPELL_DIVINE_MIRACLE) || (spell_type == SPELL_UNHOLY_MIRACLE)) && HAS_TRAIT(human_target, TRAIT_SILVER_BLESSED) && !(spell_flags & SPELL_PSYDON) && !(human_target.mob_biotypes & MOB_UNDEAD))
 				human_target.visible_message(is_dead ? span_info("[human_target] lies motionless as the miracle dissipates.") : span_info("[human_target] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
 				playsound(human_target, 'sound/magic/PSY.ogg', 100, FALSE, -1)
@@ -997,6 +997,8 @@
 			var/final_cost = used_cost
 			if(!HAS_TRAIT(caster, TRAIT_VITAE_USER) && !HAS_TRAIT(caster, TRAIT_BLOOD_STUDENT))
 				final_cost = used_cost * 2
+			if(HAS_TRAIT(caster, TRAIT_DEVIL_MARKED_MEPHISTOPHELES))
+				final_cost = used_cost * 0.9
 			if(!caster.has_bloodpool_cost(final_cost))
 				if(feedback)
 					caster.balloon_alert(caster, "need more vitae to cast!")

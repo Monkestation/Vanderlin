@@ -19,8 +19,8 @@
 	flaws = "Arrogance, Hunger for Power"
 	worshippers = "Depraved Researchers, Corrupted Aasimar"
 	sins = "Failure, Bad Planning"
-	boons = "Keen sight to develop your strategy."
-	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABRAXAS, TRAIT_KEENEYES)
+	boons = "Access to roles with blood magic. Keen sight and hearing to develop your strategy."
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABRAXAS)
 
 	confess_lines = list(
 		"THE DARK KING RULES!",
@@ -35,8 +35,8 @@
 	flaws = "Unrestrained Destruction"
 	worshippers = "Nihilists, Apocalyptists, Vandalists, Pyromaniacs."
 	sins = "Extinguishing Fire, Building Structures, Empathy"
-	boons = "Able to touch hot objects."
-	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABADDON, TRAIT_RESISTHEAT)
+	boons = "Access to roles with blood magic. Able to touch hot objects."
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABADDON)
 
 	confess_lines = list(
 		"EVERYTHING WILL BURN!",
@@ -51,8 +51,8 @@
 	flaws = "Manipulative, Untrustworthy, Unpredictable"
 	worshippers = "Vampires, Blood Mages, The Gullible."
 	sins = "Self-Sacrifice, Charity"
-	boons = "Darkness hides your limits. Resistance to Blood Curse. Access to roles with blood magic."
-	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_MEPHISTOPHELES, TRAIT_DECEIVING_MEEKNESS)
+	boons = "Access to roles with blood magic. Resistance to Blood Curse. Blood magic is cheaper to cast."
+	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_MEPHISTOPHELES)
 
 	confess_lines = list(
 		"THE SHADOWS WILL CLAIM YOU!",
@@ -67,7 +67,7 @@
 	flaws = "Unstable, Delusional, Erratic"
 	worshippers = "The Insane, The Deranged, Lost Mariners."
 	sins = "Sanity, Logic, Free Will."
-	boons = "Breathe in the void of Leviathan's depths."
+	boons = "Access to roles with blood magic. Breathe in the void of Leviathan's depths."
 	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_LEVIATHAN, TRAIT_NODROWN)
 
 	confess_lines = list(
