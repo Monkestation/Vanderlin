@@ -380,6 +380,8 @@
 	abstract_type = /obj/item/clothing/ring/courtagent_ring
 	var/metal_adjective = "silver"
 	var/mob/living/carbon/user_mob
+	COOLDOWN_DECLARE(transmit_cooldown)
+	var/transmit_cooldown_duration = 30 SECONDS
 
 /obj/item/clothing/ring/courtagent_ring/silver/Initialize()
 	. = ..()
@@ -427,14 +429,31 @@
 		return
 	if(!isliving(user) || !HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
 		return
-	if(user.stat)
+
+	if(HAS_ANY_OF_TRAITS(user, list(
+		TRAIT_KNOCKEDOUT,
+		TRAIT_IMMOBILIZED,
+		TRAIT_FLOORED,
+		TRAIT_HANDS_BLOCKED,
+		TRAIT_RESTRAINED,
+		TRAIT_INCAPACITATED,
+		TRAIT_MUTE,
+	)) || user.stat)
+		to_chat(user, span_warning("You cannot use your ring in this state!"))
 		return
+
 	if(src != user.get_item_by_slot(ITEM_SLOT_RING))
 		to_chat(user, span_warning("You cannot use the message function when not wearing the ring!"))
 		return
 	/// Backup warning just in case it doesn't link, only happens if it is given in an outfit directly (sometimes).
 	if(!(src in GLOB.agent_rings))
 		to_chat(user, span_warning("[src] is not linked to other rings, take it off and try again!"))
+		return
+	if(!COOLDOWN_FINISHED(src, transmit_cooldown))
+		to_chat(user, span_warning("It is too soon to send another message! You need to wait [COOLDOWN_TIMELEFT(src, transmit_cooldown)/10]s!"))
+		return
+	if(!user.can_speak_vocal())
+		to_chat(user, span_warning("You cannot communicate with your ring whilst unable to speak!"))
 		return
 
 	user.changeNext_move(CLICK_CD_MELEE)
@@ -449,17 +468,14 @@
 	var/chosen_target = tgui_input_list(user, "Who do you wish to contact?", "Contact Target", possible_targets, timeout = 20 SECONDS)
 	if(!chosen_target)
 		return
-	var/message = tgui_input_text(user, "What do you want to say?", "Message", encode = FALSE, timeout = 60 SECONDS)
+	var/message = tgui_input_text(user, "What do you want to say?", "Message to [chosen_target]", encode = FALSE, timeout = 60 SECONDS)
 	if(!message)
-		return
-
-	if(!user.can_speak_vocal())
-		to_chat(user, span_warning("You cannot communicate with your ring whilst unable to speak!"))
 		return
 
 	user.whisper(message)
 
 	log_game("COURT AGENT: [key_name(user)] sent a court-agent ring message. '[message]'")
+	COOLDOWN_START(src, transmit_cooldown, transmit_cooldown_duration)
 	if(chosen_target == "EVERYONE")
 		for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
 			if(ring.user_mob == user)
