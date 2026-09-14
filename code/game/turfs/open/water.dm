@@ -356,14 +356,14 @@
 	if(conveyable.loc != src) // If we are not on the same turf (order of operations memes) go to hell
 		return
 	if(!river_current)
-		SSmove_manager.stop_looping(conveyable, SSconveyors)
+		GLOB.move_manager.stop_looping(conveyable, SSconveyors)
 		return
 	start_conveying(conveyable)
 
 /turf/open/water/proc/start_conveying(atom/movable/moving)
 	if(QDELETED(moving))
 		return
-	var/datum/move_loop/move/moving_loop = SSmove_manager.processing_on(moving, SSconveyors)
+	var/datum/move_loop/move/moving_loop = GLOB.move_manager.processing_on(moving, SSconveyors)
 	var/current_direction = movedir || dir
 	var/speed = current_speed
 	if(HAS_TRAIT(moving, TRAIT_SWIMMER)) // more time to swim against the current
@@ -385,12 +385,12 @@
 /turf/open/water/proc/conveyable_exit(atom/conveyable, direction)
 	var/turf/next_turf = get_step(src, direction)
 	if(conveyable.z != z || !iswaterturf(next_turf) || !isturf(conveyable.loc)) //If you've entered something on us, stop moving
-		SSmove_manager.stop_looping(conveyable, SSconveyors)
+		GLOB.move_manager.stop_looping(conveyable, SSconveyors)
 
 /turf/open/water/proc/stop_conveying(atom/movable/thing)
 	if(!ismovable(thing))
 		return
-	SSmove_manager.stop_looping(thing, SSconveyors)
+	GLOB.move_manager.stop_looping(thing, SSconveyors)
 
 /turf/open/water/examine(mob/user)
 	. = ..()

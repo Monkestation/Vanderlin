@@ -142,7 +142,7 @@
 		return
 
 	if (beam_icon && beam_icon_state)
-		var/list/true_path = get_path_to(parent, get_turf(owner), TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 33, 250, 1)
+		var/list/true_path = astar_path_to(parent, get_turf(owner), max_steps = 100)
 		true_path |= list(get_turf(owner))
 		redraw_beams(true_path)
 
@@ -162,7 +162,7 @@
 	current_path_tick += 1
 	var/our_path_tick = current_path_tick
 
-	var/list/path = get_path_to(parent, get_turf(owner), TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), mintargetdist = distance)
+	var/list/path = astar_path_to(parent, get_turf(owner), max_steps = distance, mintargetdist = distance)
 
 	if (last_completed_path_tick > our_path_tick)
 		return
