@@ -1091,7 +1091,7 @@
 	total_influence += (followers * 20)
 
 	var/patron_monarch = GLOB.vanderlin_round_stats[STATS_MONARCH_PATRON] == patron_name ? TRUE : FALSE
-	data += "[get_patron_adjective(patron_name)] monarch: [patron_monarch ? "YES" : "NO"] ([get_colored_influence_value((patron_monarch ? 500 : -250))])<br>"
+	dynamic_content += "[get_patron_adjective(patron_name)] monarch: [patron_monarch ? "YES" : "NO"] ([get_colored_influence_value((patron_monarch ? 500 : -250))])<br>"
 	total_influence += (patron_monarch ? 500 : -250)
 
 	/*
