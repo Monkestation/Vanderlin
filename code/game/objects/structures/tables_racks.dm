@@ -218,6 +218,34 @@
 /obj/structure/table/wood/crafted
 	icon_state = "tablewood1"
 
+/obj/structure/table/wood/crafted/brown
+    icon = 'icons/roguetown/misc/tables.dmi'
+    icon_state = "tablewood_brown"
+
+/obj/structure/table/wood/crafted/beige
+    icon = 'icons/roguetown/misc/tables.dmi'
+    icon_state = "tablewood_beige"
+
+/obj/structure/table/wood/crafted/red
+    icon = 'icons/roguetown/misc/tables.dmi'
+    icon_state = "tablewood_red"
+
+/obj/structure/table/wood/crafted/blue
+    icon = 'icons/roguetown/misc/tables.dmi'
+    icon_state = "tablewood_blue"
+
+/obj/structure/table/wood/crafted/green
+    icon = 'icons/roguetown/misc/tables.dmi'
+    icon_state = "tablewood_green"
+
+/obj/structure/table/wood/crafted/purple
+    icon = 'icons/roguetown/misc/tables.dmi'
+    icon_state = "tablewood_purple"
+
+/obj/structure/table/wood/crafted/round
+    icon = 'icons/roguetown/misc/tables.dmi'
+    icon_state = "tablewood_round"
+
 /obj/structure/table/church
 	name = "stone table"
 	icon = 'icons/roguetown/misc/tables.dmi'
@@ -379,6 +407,11 @@
 /obj/structure/table/wood/fancy/royalblue
 	icon = MAP_SWITCH('icons/obj/smooth_structures/fancy_table_royalblue.dmi', 'icons/obj/structures.dmi')
 	icon_state = "fancy_table_royalblue"
+
+/obj/structure/table/wood/fancy/navy
+	icon = MAP_SWITCH('icons/obj/smooth_structures/fancy_table_navy.dmi', 'icons/obj/structures.dmi')
+	icon_state = "fancy_table_navy"
+	smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ
 
 /obj/structure/table/wood/smooth
 	name = "wooden table"

@@ -872,6 +872,9 @@
 /turf/open/floor/tile/masonic/moonbw
 	icon_state = "moontile_bw"
 
+/turf/open/floor/tile/masonic/sun
+    icon_state = "suntile"
+
 /turf/open/floor/tile/masonic/full
 	icon_state = "masonicfull_white"
 
