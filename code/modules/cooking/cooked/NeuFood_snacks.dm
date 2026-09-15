@@ -356,6 +356,20 @@
 	foodtype = MEAT
 	item_weight = 250 GRAMS
 
+
+/obj/item/reagent_containers/food/snacks/cooked/frybird/fried
+	name = "tender frybird"
+	desc = "A deep-fried frybird, coated in toastcrumbs and ready to eat."
+	icon = 'icons/obj/food/cooked/cooked_deep_fried.dmi'
+	icon_state = "chickentender"
+	faretype = FARE_LAVISH
+	foodtype = MEAT | GRAIN
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_CHUNKY * 2)
+	bitesize = 5 // If you go through all of the efforts to make this it should have big portion
+	tastes = list("crunchy toastcrumbs" = 1, "tender chicken" = 1)
+	eat_effect = /datum/status_effect/buff/foodbuff/tier2
+	rotprocess = SHELFLIFE_DECENT
+
 /obj/item/reagent_containers/food/snacks/cooked/frybird_tatos
 	name = "frybird and tatos"
 	desc = "Poultry scorched to a perfect delicious crisp. Some warm tatos accompany it."

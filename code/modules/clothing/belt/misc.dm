@@ -393,6 +393,35 @@
 /obj/item/storage/backpack/satchel/black
 	color = CLOTHING_SOOT_BLACK
 
+/obj/item/storage/backpack/satchel/deadite_hunter/populate_contents()
+	for(var/i in 1 to rand(2, 10))
+		var/obj/item/type = pickweight(list(
+			/obj/item/natural/fur/volf = 1,
+			/obj/item/natural/fur/direbear = 1,
+			/obj/item/natural/fur/fox = 1,
+			/obj/item/natural/fur/raccoon = 1,
+			/obj/item/natural/fur/bobcat = 1,
+			/obj/item/reagent_containers/food/snacks/meat/steak = 6,
+			/obj/item/natural/hide = 3,
+		))
+		new type(src)
+
+/obj/item/storage/backpack/satchel/cloth/undead_miner/populate_contents()
+	. = ..()
+	for(var/i in 1 to rand(3, 5))
+		var/obj/item/ore/ore_type = pickweight(list(
+			/obj/item/ore/gold = 7,
+			/obj/item/ore/silver = 7,
+			/obj/item/ore/iron = 4,
+			/obj/item/ore/coal = 5,
+			/obj/item/ore/copper = 8,
+			/obj/item/ore/tin = 10,
+			/obj/item/ore/cinnabar = 3,
+			/obj/item/gem = 1
+		))
+
+		new ore_type(src)
+
 /obj/item/storage/backpack/backpack
 	name = "backpack"
 	desc = "A bulky backpack worn on the back which can store many items."

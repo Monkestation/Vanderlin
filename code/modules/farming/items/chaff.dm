@@ -88,9 +88,8 @@
 	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/sunreed
 	item_weight = 150 GRAMS
 
-/*
 /obj/item/natural/chaff/rice
 	name = "rice stalks"
 	icon_state = "ricechaff"
-	foodextracted = /obj/item/reagent_containers/food/snacks/produce/rice
-*/
+	foodextracted = /obj/item/reagent_containers/food/snacks/produce/grain/rice
+

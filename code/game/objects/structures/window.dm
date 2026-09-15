@@ -18,6 +18,7 @@
 	attacked_sound = 'sound/combat/hits/onglass/glasshit.ogg'
 	break_sound = "glassbreak"
 	destroy_sound = 'sound/combat/hits/onwood/destroywalldoor.ogg'
+	clawable = FALSE
 
 	var/lockdir = 0
 
@@ -219,7 +220,7 @@
 		return
 	if(obj_broken)
 		return
-	if( user.used_intent.type == /datum/intent/unarmed/claw )
+	if( user.used_intent.type == /datum/intent/unarmed/claw)
 		to_chat(user, "<span class='warning'>[user] smashes the window!!</span>")
 		atom_break()
 		return

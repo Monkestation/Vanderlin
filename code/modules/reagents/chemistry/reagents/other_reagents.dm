@@ -377,3 +377,10 @@
 
 /datum/reagent/devour/overdose_process(mob/living/M)
 	. = ..()
+
+/datum/reagent/consumable/tallow
+	name = "Tallow"
+	description = "Oil made from rendering animal fat. Used for deep frying."
+	nutriment_factor = 20
+	color = "#A6987B" // rgb: 48, 32, 0
+	taste_description = "rendered fat"

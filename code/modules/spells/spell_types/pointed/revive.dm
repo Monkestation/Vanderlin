@@ -65,6 +65,8 @@
 			return . | SPELL_CANCEL_CAST
 
 	if(needs_cross)
+		if(has_world_trait(/datum/world_trait/wyrmwood))
+			return .
 		for(var/obj/structure/fluff/psycross/S in view(max_cross_distance, owner))
 			target_cross = S
 			break
@@ -76,10 +78,11 @@
 
 /datum/action/cooldown/spell/revive/cast(mob/living/carbon/human/cast_on)
 	. = ..()
-	if(QDELETED(target_cross))
-		return
-	target_cross.AOE_flash(owner, 7)
-	target_cross = null
+	if(!has_world_trait(/datum/world_trait/wyrmwood))
+		if(QDELETED(target_cross))
+			return
+		target_cross.AOE_flash(owner, 7)
+		target_cross = null
 	if(cast_on.mob_biotypes & MOB_UNDEAD)
 		if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
 			cast_on.visible_message(span_warning("[cast_on] overpowers being unmade!"), span_greentext("I overpower being unmade!"))
@@ -190,6 +193,8 @@
 			return . | SPELL_CANCEL_CAST
 
 	if(needs_cross)
+		if(has_world_trait(/datum/world_trait/wyrmwood))
+			return .
 		for(var/obj/structure/fluff/psycross/S in view(max_cross_distance, owner))
 			target_cross = S
 			break
@@ -201,10 +206,11 @@
 
 /datum/action/cooldown/spell/revive_noc/cast(mob/living/carbon/human/cast_on)
 	. = ..()
-	if(QDELETED(target_cross))
-		return
-	target_cross.AOE_flash(owner, 7)
-	target_cross = null
+	if(!has_world_trait(/datum/world_trait/wyrmwood))
+		if(QDELETED(target_cross))
+			return
+		target_cross.AOE_flash(owner, 7)
+		target_cross = null
 	if(cast_on.mob_biotypes & MOB_UNDEAD)
 		if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
 			cast_on.visible_message(span_warning("[cast_on] overpowers being unmade!"), span_greentext("I overpower being unmade!"))
