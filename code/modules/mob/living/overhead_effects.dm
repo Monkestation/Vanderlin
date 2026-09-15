@@ -106,4 +106,4 @@
 	COOLDOWN_START(src, stress_indicator, 8 SECONDS)
 
 /mob/living/carbon/proc/is_empath()
-	return HAS_TRAIT(src, TRAIT_EMPATH)
+	return HAS_TRAIT(src, TRAIT_EMPATH) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_LEVIATHAN)

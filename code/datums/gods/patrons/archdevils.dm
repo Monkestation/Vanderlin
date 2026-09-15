@@ -37,6 +37,7 @@
 	sins = "Extinguishing Fire, Building Structures, Empathy"
 	boons = "Access to roles with blood magic. Able to touch hot objects."
 	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABADDON)
+	added_verbs = list(/mob/living/carbon/human/proc/hellspark)
 
 	confess_lines = list(
 		"EVERYTHING WILL BURN!",
@@ -67,7 +68,7 @@
 	flaws = "Unstable, Delusional, Erratic"
 	worshippers = "The Insane, The Deranged, Lost Mariners."
 	sins = "Sanity, Logic, Free Will."
-	boons = "Access to roles with blood magic. Breathe in the void of Leviathan's depths."
+	boons = "Access to roles with blood magic. Breathe in the void of Leviathan's depths. Sense stress and insanity."
 	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_LEVIATHAN, TRAIT_NODROWN)
 
 	confess_lines = list(
@@ -75,3 +76,26 @@
 		"SHE IS ENDLESS!",
 		"CAN YOU HEAR HER SING?"
 	)
+
+/mob/living/carbon/human/proc/hellspark()
+	set name = "Conjure Spark"
+	set category = "RoleUnique.Devil"
+	if(incapacitated(IGNORE_GRAB) || stat >= UNCONSCIOUS)
+		to_chat(usr, span_warning("You cannot do this in your current state."))
+		return
+
+	var/main_hand = get_active_held_item()
+	var/off_hand = get_inactive_held_item()
+
+	if(istype(main_hand, /obj/item/flint/abaddon_hand))
+		to_chat(usr, SPAN_GOD_ARCHDEVILS("I will no longer spark hellfire."))
+		qdel(main_hand)
+		return
+	if(istype(off_hand, /obj/item/flint/abaddon_hand))
+		to_chat(usr, SPAN_GOD_ARCHDEVILS("I will no longer spark hellfire."))
+		qdel(off_hand)
+		return
+
+	to_chat(usr, SPAN_GOD_ARCHDEVILS("I prepare to conjure a spark of hellfire."))
+	var/obj/item/flint/abaddon_hand/spark = new(src)
+	put_in_hands(spark, del_on_fail = TRUE)
