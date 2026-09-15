@@ -445,10 +445,7 @@
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
 "ri" = (
-/obj/effect/landmark/hammer/dev_text{
-	name = transitionzone
-	},
-/turf/open/floor/naturalstone,
+/turf/closed/mineral/random/cold/high,
 /area/under/cave)
 "ru" = (
 /obj/effect/decal/cleanable/dirt/dust,
@@ -790,6 +787,9 @@
 /obj/structure/flora/grass/tundra,
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
+"Du" = (
+/turf/closed/mineral/bloodstone,
+/area/under/cave)
 "Dy" = (
 /obj/structure/wild_plant/nospread/poppy,
 /turf/open/floor/snow/patchy,
@@ -26847,7 +26847,7 @@ zN
 zN
 zN
 zN
-ri
+Gr
 zN
 zN
 WD
@@ -40175,7 +40175,7 @@ zN
 An
 zN
 CA
-Ko
+Du
 Ko
 Ko
 Ko
@@ -40379,7 +40379,7 @@ kU
 cp
 Ko
 Ko
-Ko
+Du
 GM
 Ko
 Ko
@@ -40580,11 +40580,11 @@ zN
 hq
 lY
 cp
+Du
 Ko
 Ko
 Ko
-Ko
-Ko
+Du
 Ko
 GM
 Ko
@@ -40782,8 +40782,8 @@ JJ
 Cn
 mE
 XD
-Ko
-Ko
+Du
+Du
 Ko
 Ko
 Ko
@@ -40984,9 +40984,9 @@ hq
 hq
 mE
 HR
-Ko
-Ko
-Ko
+Du
+Du
+Du
 Ko
 Ko
 Ko
@@ -41186,11 +41186,11 @@ zN
 hq
 aB
 ez
-Ko
+Du
 GM
 Ko
 Ko
-Ko
+Du
 Ko
 Ko
 Ko
@@ -84879,7 +84879,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -85081,6 +85081,8 @@ Ko
 hT
 hT
 Ko
+ri
+ri
 hT
 hT
 hT
@@ -85088,19 +85090,17 @@ hT
 hT
 hT
 hT
+ri
+ri
+ri
+ri
+ri
 hT
 hT
 hT
 hT
 hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
+ri
 hT
 hT
 hT
@@ -85285,24 +85285,24 @@ hT
 hT
 hT
 hT
+ri
+ri
+ri
+ri
+ri
+ri
+ri
+ri
 hT
 hT
 hT
+ri
+ri
 hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
-hT
+ri
+ri
+ri
+ri
 hT
 hT
 hT
@@ -85499,12 +85499,12 @@ hT
 hT
 hT
 hT
+ri
+ri
 hT
-hT
-hT
-hT
-hT
-hT
+ri
+ri
+ri
 hT
 hT
 hT
@@ -85702,9 +85702,9 @@ hT
 hT
 hT
 hT
-hT
-hT
-hT
+ri
+ri
+ri
 hT
 hT
 hT
@@ -86300,10 +86300,10 @@ hT
 Ko
 Ko
 Ko
-Ko
-Ko
-Ko
-Ko
+ri
+ri
+ri
+ri
 Ko
 hT
 hT
@@ -86499,10 +86499,10 @@ Ko
 hT
 hT
 hT
-Ko
-Ko
-Ko
-Ko
+ri
+ri
+ri
+ri
 Ko
 qp
 qp
@@ -87318,7 +87318,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -87519,8 +87519,8 @@ hT
 hT
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -87719,9 +87719,9 @@ hT
 hT
 hT
 hT
-hT
-hT
-hT
+ri
+ri
+ri
 hT
 hT
 hT
@@ -87919,9 +87919,9 @@ hT
 hT
 hT
 hT
-hT
-hT
-hT
+ri
+ri
+ri
 hT
 hT
 hT
@@ -88119,8 +88119,8 @@ hT
 hT
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -88320,7 +88320,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -88520,8 +88520,8 @@ hT
 hT
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -88720,8 +88720,8 @@ hT
 hT
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -90739,7 +90739,7 @@ qp
 Ko
 Ko
 hT
-hT
+ri
 hT
 hT
 hT
@@ -90940,8 +90940,8 @@ Ko
 qp
 Ko
 Ko
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -91142,8 +91142,8 @@ Ko
 qp
 Ko
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -91344,8 +91344,8 @@ Ko
 Ko
 Ko
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -91546,8 +91546,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -91748,8 +91748,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 Ko
@@ -91949,7 +91949,7 @@ Ko
 Ko
 Ko
 hT
-hT
+ri
 hT
 hT
 hT
@@ -92151,7 +92151,7 @@ Ko
 Ko
 hT
 hT
-hT
+ri
 hT
 hT
 Ko
@@ -92353,7 +92353,7 @@ Ko
 Ko
 hT
 hT
-hT
+ri
 hT
 hT
 Ko
@@ -92555,7 +92555,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 Ko
@@ -92756,8 +92756,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 Ko
@@ -92958,8 +92958,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 Ko
@@ -93160,8 +93160,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 Ko
@@ -93362,8 +93362,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 Ko
@@ -93564,8 +93564,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 Ko
@@ -93766,8 +93766,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 Ko
@@ -93968,8 +93968,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 Ko
@@ -94171,7 +94171,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -96395,7 +96395,7 @@ Ko
 Ko
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -96597,7 +96597,7 @@ Ko
 Ko
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -96799,7 +96799,7 @@ Ko
 Ko
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -97000,8 +97000,8 @@ qp
 Ko
 Ko
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -97202,7 +97202,7 @@ qp
 Ko
 Ko
 hT
-hT
+ri
 hT
 hT
 hT
@@ -97404,7 +97404,7 @@ qp
 Ko
 Ko
 hT
-hT
+ri
 hT
 hT
 hT
@@ -97606,8 +97606,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -97808,8 +97808,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -98010,8 +98010,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -98212,8 +98212,8 @@ Ko
 hT
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -98414,8 +98414,8 @@ Ko
 hT
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -98616,7 +98616,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -98818,7 +98818,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -103668,7 +103668,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 TL
@@ -103870,7 +103870,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 TL
@@ -104072,7 +104072,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 TL
@@ -104273,8 +104273,8 @@ hT
 hT
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 TL
@@ -104475,7 +104475,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -104677,8 +104677,8 @@ hT
 hT
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 pT
@@ -104880,7 +104880,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 IZ
@@ -105082,7 +105082,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 Wh
@@ -105284,7 +105284,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 lf
@@ -105486,7 +105486,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 Wh
@@ -105687,8 +105687,8 @@ Ko
 hT
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 lf
@@ -105889,7 +105889,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -106091,7 +106091,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -106293,7 +106293,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -106495,7 +106495,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 AH
@@ -106697,7 +106697,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 AH
@@ -106899,7 +106899,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 AH
@@ -107101,7 +107101,7 @@ qp
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 AH
@@ -107303,7 +107303,7 @@ qp
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 AH
@@ -107505,7 +107505,7 @@ qp
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 AH
@@ -107706,7 +107706,7 @@ qp
 qp
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -107908,7 +107908,7 @@ qp
 Ko
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -109121,7 +109121,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 Ko
@@ -109323,7 +109323,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 Ko
@@ -109525,7 +109525,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 Ko
@@ -109727,7 +109727,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 Ko
@@ -109928,7 +109928,7 @@ Ko
 Ko
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -110130,7 +110130,7 @@ Ko
 Ko
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -110332,7 +110332,7 @@ Ko
 Ko
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -110534,8 +110534,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -110737,7 +110737,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 Ko
@@ -110940,7 +110940,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
@@ -111142,7 +111142,7 @@ hT
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 Ko
@@ -111342,9 +111342,9 @@ Ko
 Ko
 hT
 hT
+ri
 hT
-hT
-hT
+ri
 hT
 hT
 Ko
@@ -111544,8 +111544,8 @@ Ko
 Ko
 hT
 hT
-hT
-hT
+ri
+ri
 hT
 hT
 hT
@@ -111747,7 +111747,7 @@ Ko
 hT
 hT
 hT
-hT
+ri
 hT
 hT
 hT
