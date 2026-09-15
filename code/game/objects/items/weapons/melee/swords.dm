@@ -998,6 +998,7 @@
 	desc = "A horrid sword with a silvered grip, a jeweled hilt and a honed blade; a design unfit for a true paladin."
 	color = CLOTHING_SOOT_BLACK
 	item_weight = 1.4 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious
 
 /obj/item/weapon/sword/long/vlord // this sprite is a one handed sword, not a longsword.
 	icon_state = "vlord"
@@ -1008,6 +1009,7 @@
 	static_price = TRUE
 	item_weight = 1.6 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming
 
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
 	. = ..()
