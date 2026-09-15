@@ -102,17 +102,6 @@
 				if(success)
 					changefood(/obj/item/reagent_containers/food/snacks/tallow/red, user)
 
-// -------------- SPIDER HONEY -----------------
-/obj/item/reagent_containers/food/snacks/spiderhoney
-	name = "spider honey"
-	icon_state = "spiderhoney"
-	bitesize = 3
-	nutrition = HONEY_NUTRITION
-	w_class = WEIGHT_CLASS_TINY
-	foodtype = SUGAR | RAW
-	tastes = list("sweetness and spiderwebs" = 1)
-	faretype = FARE_FINE
-
 // -------------- TIEFLING SUGAR -----------------
 /obj/item/reagent_containers/food/snacks/tiefsugar
 	name = "Tiefling Sugar"
@@ -313,7 +302,7 @@
 		qdel(M)
 
 /obj/item/reagent_containers/food/snacks/raisins/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 // -------------- STRAWBERRY -----------------
 
@@ -423,7 +412,7 @@
 
 /*	............   Churning butter   ................ */
 /obj/item/reagent_containers/glass/bucket/wooden/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(istype(tool, /obj/item/kitchen/spoon))
+	if(tool.tool_behaviour == TOOL_SPOON)
 		long_cooktime = (200 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*22))
 		if(!reagents.has_reagent(/datum/reagent/consumable/milk/salted, 15) && !reagents.has_reagent(/datum/reagent/consumable/milk/salted_gote, 15))
 			to_chat(user, span_warning("Not enough salted milk."))

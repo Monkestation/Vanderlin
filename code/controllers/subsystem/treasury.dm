@@ -44,6 +44,8 @@ SUBSYSTEM_DEF(treasury)
 	var/multiple_item_penalty = 0.7
 	var/interest_rate = 0.15
 	var/next_treasury_check = 0
+	var/list/job_wages = list() // job title -> current daily wage
+	var/next_wage_payout = 0
 	var/list/log_entries = list()
 	var/list/vault_accounting = list() //used for the vault count, cleared every fire()
 
@@ -52,6 +54,7 @@ SUBSYSTEM_DEF(treasury)
 	treasury_value = rand(800,1200)
 	force_set_round_statistic(STATS_STARTING_TREASURY, treasury_value)
 	queens_tax = pick(0.09, 0.15, 0.21, 0.30)
+	initialize_job_wages()
 
 	//For the merchants import and export.
 	for(var/path in subtypesof(/datum/stock/bounty))
@@ -66,6 +69,44 @@ SUBSYSTEM_DEF(treasury)
 		var/datum/D = new path
 		stockpile_datums += D
 	return ..()
+
+/datum/controller/subsystem/treasury/proc/initialize_job_wages()
+	for(var/datum/job/J in SSjob.joinable_occupations)
+		if(!J.starting_wage)
+			continue
+		job_wages[J.title] = J.starting_wage
+
+/datum/controller/subsystem/treasury/proc/set_job_wage(job_title, amount)
+	if(!job_title)
+		return FALSE
+	job_wages[job_title] = max(0, amount)
+	return TRUE
+
+/*
+* Pays every human whose current job has a nonzero
+* wage set. Runs off treasury_value directly, same as
+* distribute_estate_incomes(). Logged per-category so
+* the steward can see where the money went at a glance.
+*/
+/datum/controller/subsystem/treasury/proc/pay_daily_wages()
+	var/list/category_totals = list()
+	for(var/mob/living/carbon/human/H in SStreasury.bank_accounts) //this might be better then bank accounts?
+		if(!H.mind || !H.job)
+			continue
+		var/wage = job_wages[H.job]
+		if(!wage)
+			continue
+		give_money_account(wage, H, "Daily Wage")
+		var/cat = get_job_category(H.job)
+		category_totals[cat] += wage
+
+	for(var/cat in category_totals)
+		log_to_steward("Paid [category_totals[cat]] total in daily wages to [cat]")
+
+/datum/controller/subsystem/treasury/proc/check_time_of_day(tod)
+	if(tod != "dawn")
+		return
+	pay_daily_wages()
 
 /datum/controller/subsystem/treasury/fire(resumed = 0)
 	if(world.time > next_treasury_check)

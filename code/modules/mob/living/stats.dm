@@ -45,7 +45,6 @@
 		return FALSE
 	if(patron && !ispath(patron))
 		patron.on_remove(src)
-		mana_pool?.remove_attunements(patron)
 
 	var/mob/living/carbon/human/devout
 	var/stored_cleric_class
@@ -57,7 +56,6 @@
 
 	patron = new_patron
 	patron.on_gain(src)
-	mana_pool?.set_attunements(patron)
 	if(devout && stored_cleric_class)
 		var/holder = devout.patron?.devotion_holder
 		if(holder)
@@ -71,8 +69,6 @@
 					devotion.make_templar()
 				if(DEVOTION_CLASS_ACOLYTE)
 					devotion.make_acolyte()
-				if(DEVOTION_CLASS_ABSOLVER)
-					devotion.make_absolver()
 				if(DEVOTION_CLASS_CLERIC)
 					devotion.make_cleric()
 				if(DEVOTION_CLASS_CHURCHLING)
@@ -206,7 +202,7 @@
  * Adjusts an existing named stat modifier, adding delta values on top.
  * If no modifier for this source exists yet, creates one.
  *
- * This way of stats adjustment should be somewhat temporary (effects, clothing, etc), 
+ * This way of stats adjustment should be somewhat temporary (effects, clothing, etc),
  * and it has much stronger impact on skills.
  *
  * Arguments:

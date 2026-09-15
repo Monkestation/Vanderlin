@@ -99,6 +99,11 @@
 	if(next_move > world.time) // in the year 2000...
 		return
 
+	if(isliving(src))
+		var/mob/living/clicker = src
+		if(clicker.is_swinging())
+			return
+
 	if(LAZYACCESS(modifiers, RIGHT_CLICK))
 		if(LAZYACCESS(modifiers, SHIFT_CLICKED))
 			ShiftRightClickOn(clicked_atom, modifiers)

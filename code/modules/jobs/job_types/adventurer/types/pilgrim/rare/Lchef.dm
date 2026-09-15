@@ -39,7 +39,7 @@
 	outfit = /datum/outfit/pilgrim/masterchef
 	total_positions = 1
 	roll_chance = 0
-	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	category_tags = list(CTAG_PILGRIM)
 	apprentice_name = "Chef Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE

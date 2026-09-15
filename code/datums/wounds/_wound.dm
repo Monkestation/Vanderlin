@@ -153,6 +153,8 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	var/damage_divisor = 6
 
 	var/required_bodypart_status
+	///do we get suppressed by a splint
+	var/splint_suppression = FALSE
 
 /datum/wound/Destroy(force)
 	if(bodypart_owner)
@@ -304,7 +306,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 /// Effects when a wound is gained on a bodypart
 /datum/wound/proc/on_bodypart_gain(obj/item/bodypart/affected)
 	if(bleed_rate && affected.bandage)
-		affected.bandage_expire() //new bleeding wounds always expire bandages, fuck you
+		affected.bandage_expire(silent = (affected.bandage.bandage_health <= 0)) //new bleeding wounds always expire bandages, fuck you
 	if(disabling && affected.can_be_disabled)
 		affected.update_disabled()
 
@@ -373,6 +375,7 @@ GLOBAL_LIST_INIT(primordial_wounds, init_primordial_wounds())
 	if(mortal && HAS_TRAIT(affected, TRAIT_CRITICAL_WEAKNESS))
 		affected.death()
 	affected.adjustPainLoss(woundpain)
+	SEND_SIGNAL(affected, COMSIG_LIVING_WOUND_GAINED, src)
 
 /// Removes this wound from a given, simpler than adding to a bodypart - No extra effects
 /datum/wound/proc/remove_from_mob()

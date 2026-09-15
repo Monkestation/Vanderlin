@@ -35,6 +35,12 @@
 	emote_type = EMOTE_AUDIBLE
 	vary = TRUE
 
+/datum/emote/living/carbon/clap/once
+	key = "claponce"
+	key_third_person = "clapsonce"
+	message = "claps once..."
+	vary = FALSE
+
 /datum/emote/living/carbon/clap/get_sound(mob/living/user)
 	if(ishuman(user))
 		if(!user.get_bodypart(BODY_ZONE_L_ARM) || !user.get_bodypart(BODY_ZONE_R_ARM))

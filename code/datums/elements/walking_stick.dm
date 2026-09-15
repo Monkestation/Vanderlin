@@ -6,6 +6,7 @@
 		return ELEMENT_INCOMPATIBLE
 
 	RegisterSignals(target, list(COMSIG_ITEM_EQUIPPED, COMSIG_ITEM_DROPPED), PROC_REF(equippedChanged))
+	target.AddComponent(/datum/component/fracture_support) //standalone because we have % to work with
 
 /datum/element/walking_stick/Detach(datum/source, ...)
 	. = ..()
@@ -16,6 +17,7 @@
 			var/mob/living/living_mob = atom_source.loc
 			REMOVE_TRAIT(living_mob, TRAIT_NO_LEG_AID, REF(src))
 			living_mob.update_limbless_locomotion()
+	qdel(source.GetComponent(/datum/component/fracture_support))
 
 /datum/element/walking_stick/proc/equippedChanged(datum/source, mob/living/user, slot)
 	if(!istype(user))

@@ -279,7 +279,6 @@
 	if(istype(O))
 		if(!(O in contents()))
 			var/mob/living/carbon/carbon_parent = parent
-			O.forceMove(bodypart_affected)
 			O.Insert(carbon_parent, new_zone = user.zone_selected)
 			update_insides()
 	else
@@ -350,7 +349,6 @@
 		if(!CHECK_BITFIELD(O.organ_flags, ORGAN_CUT_AWAY))
 			O.applyOrganDamage(rand(10, 20))
 		O.stored_in = null
-		O.Remove(O.owner, FALSE)
 		O.organ_flags |= ORGAN_CUT_AWAY
 		refresh_mob_views()
 		playsound(O, pick(rustle_sound), 50, 1, -5)

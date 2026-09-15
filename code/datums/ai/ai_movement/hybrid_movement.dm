@@ -152,31 +152,27 @@
 
 				// Move to the next step in the path
 				if(next_step.z != movable_pawn.z)
-					// Don't teleport across Z-levels - check if there's a valid transition
+					//check if there's a valid transition
 					var/can_transition = FALSE
 
-					// Check for stairs going up
-					if(next_step.z > movable_pawn.z)
-						for(var/obj/structure/stairs/S in current_turf.contents)
-							var/turf/above = GET_TURF_ABOVE(current_turf)
-							if(above)
-								var/turf/dest = get_step(above, S.dir)
-								if(dest == next_step)
-									can_transition = TRUE
-									break
-
-					// Check for stairs going down or falling
-					else if(next_step.z < movable_pawn.z)
-						var/turf/below = GET_TURF_BELOW(current_turf)
-						if(below == next_step)
+					// Look for stairs at our current position
+					var/obj/structure/stairs/S = locate(/obj/structure/stairs) in current_turf
+					if(S)
+						// Check if the next step is the target going UP or DOWN the stairs
+						if(S.get_target_loc(S.dir) == next_step || S.get_target_loc(REVERSE_DIR(S.dir)) == next_step)
 							can_transition = TRUE
-						else
-							// Check if there are stairs leading down at current position
-							for(var/obj/structure/stairs/S in current_turf.contents)
-								var/turf/dest = get_step(below, turn(S.dir, 180))
-								if(dest == next_step)
-									can_transition = TRUE
-									break
+					else
+						// Fallback for falling / moving down into open space without stairs
+						if(next_step.z < movable_pawn.z && GET_TURF_BELOW(current_turf) == next_step)
+							can_transition = TRUE
+
+					// Only move if we can legitimately transition, otherwise regenerate path
+					if(can_transition)
+						movable_pawn.Move(next_step)
+					else
+						// Can't reach next step legitimately, need new path
+						generate_path = TRUE
+						controller.clear_blackboard_key(future_path_blackboard_key)
 
 					// Only move if we can legitimately transition, otherwise regenerate path
 					if(can_transition)

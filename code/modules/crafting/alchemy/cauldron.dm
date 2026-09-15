@@ -347,7 +347,7 @@
 						scaled_reagents[reagent] = found_recipe.output_reagents[reagent] * batch_count
 					src.reagents.add_reagent_list(scaled_reagents)
 
-				if(found_recipe.output_items.len)
+				if(length(found_recipe.output_items))
 					for(var/itempath in found_recipe.output_items)
 						for(var/i = 1 to batch_count)
 							new itempath(get_turf(src))

@@ -39,7 +39,7 @@
 			var/datum/material/material = atom.melting_material
 			var/total_amount = atom.melt_amount || 100
 			. += "<font color=[initial(material.color)]> [atom.name] </font> - [FLOOR((melting_pot[atom] / total_amount) * 100, 1)]% Melted"
-	var/datum/reagent/molten_metal/metal = reagents.get_reagent(/datum/reagent/molten_metal)
+	var/datum/reagent/molten_metal/metal = reagents.has_reagent(/datum/reagent/molten_metal)
 	if(!metal)
 		return
 	for(var/datum/material/material as anything in metal.data)
@@ -112,7 +112,7 @@
 		alpha = used_alpha,
 		appearance_flags = (RESET_COLOR | KEEP_APART),
 	)
-	var/datum/reagent/molten_metal/metal = reagents.get_reagent(/datum/reagent/molten_metal)
+	var/datum/reagent/molten_metal/metal = reagents.has_reagent(/datum/reagent/molten_metal)
 	var/datum/material/largest = metal?.largest_metal
 
 	if(initial(largest?.show_as_filling) && reagents.chem_temp > initial(largest.melting_point))

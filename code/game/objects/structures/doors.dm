@@ -21,6 +21,8 @@
 
 	var/omni_bolt = FALSE
 
+	var/smashable = TRUE
+
 	/// Can people riding go through without falling off their mount
 	var/ridethrough = FALSE
 	/// If TRUE when bumped open we callback close
@@ -420,14 +422,34 @@
 /obj/structure/door/green
 	icon_state = "wcg"
 
+/obj/structure/door/green/bolt
+	icon_state = MAP_SWITCH("wcg", "wcgdir")
+	has_bolt = TRUE
+	lock = /datum/lock
+
 /obj/structure/door/red
 	icon_state = "wcr"
+
+/obj/structure/door/red/bolt
+	icon_state = MAP_SWITCH("wcr", "wcrdir")
+	has_bolt = TRUE
+	lock = /datum/lock
 
 /obj/structure/door/violet
 	icon_state = "wcv"
 
+/obj/structure/door/violet/bolt
+	icon_state = MAP_SWITCH("wcv", "wcvdir")
+	has_bolt = TRUE
+	lock = /datum/lock
+
 /obj/structure/door/fancy
 	icon_state = "fancy_wood"
+
+/obj/structure/door/fancy/bolt
+	icon_state = MAP_SWITCH("fancy_wood", "fancy_wooddir")
+	has_bolt = TRUE
+	lock = /datum/lock
 
 /obj/structure/door/window
 	icon_state = "woodwindow"

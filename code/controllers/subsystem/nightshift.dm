@@ -47,6 +47,7 @@ SUBSYSTEM_DEF(nightshift)
 		SSParticleWeather.selected_forecast.set_ambient_temperature(curtod)
 		current_tod = GLOB.tod
 		update_nightshift()
+		SStreasury.check_time_of_day(curtod)
 
 /datum/controller/subsystem/nightshift/proc/update_nightshift()
 	set waitfor = FALSE

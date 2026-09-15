@@ -1,7 +1,9 @@
-/turf/var/virtual_above
-/turf/var/virtual_below
+/turf/var/turf/virtual_above
+/turf/var/turf/virtual_below
 
 GLOBAL_LIST_EMPTY(virtual_z_links)
+
+GLOBAL_LIST_EMPTY(virtual_region_index)
 
 /// Returns the turf above, checking virtual links before real Z.
 /turf/proc/get_virtual_above()
@@ -101,6 +103,21 @@ GLOBAL_LIST_EMPTY(virtual_z_links)
 /proc/link_region(turf/below_bottom_left, turf/above_bottom_left, width, height)
 	if(!below_bottom_left || !above_bottom_left)
 		CRASH("link_region: null corner turf passed")
+
+	var/datum/virtual_region_link/L = new(
+		below_bottom_left.z, above_bottom_left.z,
+		below_bottom_left.x, below_bottom_left.y,
+		below_bottom_left.x + width - 1, below_bottom_left.y + height - 1,
+		above_bottom_left.x, above_bottom_left.y
+	)
+	if(!("[below_bottom_left.z]" in GLOB.virtual_region_index))
+		GLOB.virtual_region_index["[below_bottom_left.z]"] = list()
+	if(!("[above_bottom_left.z]" in GLOB.virtual_region_index))
+		GLOB.virtual_region_index["[above_bottom_left.z]"] = list()
+
+	LAZYOR(GLOB.virtual_region_index["[below_bottom_left.z]"], L)
+	LAZYOR(GLOB.virtual_region_index["[above_bottom_left.z]"], L)
+
 	for(var/x in 0 to width - 1)
 		for(var/y in 0 to height - 1)
 			var/turf/below = locate(below_bottom_left.x + x, below_bottom_left.y + y, below_bottom_left.z)
@@ -116,3 +133,34 @@ GLOBAL_LIST_EMPTY(virtual_z_links)
 			var/turf/T = locate(bottom_left.x + x, bottom_left.y + y, bottom_left.z)
 			if(T)
 				T.unlink_virtual_z()
+
+/datum/virtual_region_link
+	var/z_below
+	var/z_above
+	var/x1
+	var/y1
+	var/x2
+	var/y2
+	var/offset_x
+	var/offset_y
+
+/datum/virtual_region_link/New(z_below, z_above, x1, y1, x2, y2, above_x1, above_y1)
+	. = ..()
+	src.z_below = z_below
+	src.z_above = z_above
+	src.x1 = x1
+	src.y1 = y1
+	src.x2 = x2
+	src.y2 = y2
+	offset_x = above_x1 - x1
+	offset_y = above_y1 - y1
+
+/datum/virtual_region_link/proc/contains_below(px, py)
+	return px >= x1 && px <= x2 && py >= y1 && py <= y2
+
+/datum/virtual_region_link/proc/contains_above(px, py)
+	var/ax1 = x1 + offset_x
+	var/ay1 = y1 + offset_y
+	var/ax2 = x2 + offset_x
+	var/ay2 = y2 + offset_y
+	return px >= ax1 && px <= ax2 && py >= ay1 && py <= ay2

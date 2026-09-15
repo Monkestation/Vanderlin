@@ -56,6 +56,9 @@ GLOBAL_LIST_EMPTY(armor_item_usage)
 			"acid" = armor.get_rating(ACID),
 			"magic" = armor.get_rating(MAGIC),
 			"wound" = armor.get_rating(WOUND),
+			"slash_ep" = armor.get_edge_protection(SLASH),
+			"stab_ep" = armor.get_edge_protection(STAB),
+			"piercing_ep" = armor.get_edge_protection(PIERCE),
 		))
 
 	data["armors"] = armor_list

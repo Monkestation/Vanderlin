@@ -210,6 +210,13 @@
 /obj/structure/bars/chainlink
 	icon_state = "chainlink"
 
+/obj/structure/bars/wood
+	icon_state = "wooden_barrier"
+	name = "wooden barrier"
+	desc = "Decorative wooden barrier made to keep things in or out."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	attacked_sound = list("sound/combat/hits/onmetal/mwoodimpact (1).ogg", "sound/combat/hits/onmetal/woodimpact (2).ogg")
+
 /obj/structure/bars/alt
 	icon_state = "bars_alt"
 	plane = GAME_PLANE
@@ -321,6 +328,12 @@
 		icon_state = "floorgrille"
 		obj_flags = CAN_BE_HIT | BLOCK_Z_OUT_DOWN | BLOCK_Z_IN_UP
 		AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
+
+/obj/structure/bars/wooden_arch
+	name = "decorative wooden arch"
+	desc = "A wooden decorative arch intended to complement a table or worktop while preventing intrusion."
+	icon_state = "wooden_barrier"
+	attacked_sound = list("sound/combat/hits/onwood/woodimpact (1).ogg", "sound/combat/hits/onwood/woodimpact (2).ogg")
 
 /obj/structure/plank
 	name = "plank"
@@ -636,7 +649,6 @@
 	name = "statue"
 	desc = ""
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
-	icon_state = "bstatue"
 	density = TRUE
 	anchored = TRUE
 	layer = ABOVE_MOB_LAYER
@@ -644,6 +656,7 @@
 	blade_dulling = DULLING_BASH
 	max_integrity = 300
 	dir = SOUTH
+	abstract_type = /obj/structure/fluff/statue
 
 /obj/structure/fluff/statue/Initialize()
 	. = ..()
@@ -675,6 +688,10 @@
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
+/obj/structure/fluff/statue/necra
+	name = "The Veiled Lady"
+	icon_state = "bstatue"
+
 /obj/structure/fluff/statue/gargoyle
 	icon_state = "gargoyle"
 
@@ -702,6 +719,28 @@
 	desc = "Astrata, the Sun Queen, reigns over light, order, and conquest. She is worshipped and feared in equal measure."
 	icon = 'icons/roguetown/misc/tallandwide.dmi'
 	icon_state = "astrata"
+	max_integrity = 100 // You wanted descructible statues, you'll get them.
+	deconstructible = FALSE
+	density = TRUE
+	blade_dulling = DULLING_BASH
+	SET_BASE_PIXEL(-16, 0)
+
+/obj/structure/fluff/statue/noc
+	name = "statue of Noc"
+	desc = "Noc, the Moon Prince, reigns over magic. Scholars bow to their command of the weave."
+	icon = 'icons/roguetown/misc/tallandwide.dmi'
+	icon_state = "noc"
+	max_integrity = 100 // You wanted descructible statues, you'll get them.
+	deconstructible = FALSE
+	density = TRUE
+	blade_dulling = DULLING_BASH
+	SET_BASE_PIXEL(-16, 0)
+
+/obj/structure/fluff/statue/noc/tall
+	name = "standing statue of Noc"
+	desc = "Noc, the Moon Prince, reigns over magic. Scholars bow to their command of the weave."
+	icon = 'icons/roguetown/misc/64x128.dmi'
+	icon_state = "noc"
 	max_integrity = 100 // You wanted descructible statues, you'll get them.
 	deconstructible = FALSE
 	density = TRUE
@@ -815,6 +854,62 @@
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "telescope"
 	density = TRUE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/shrub/red
+	name = "potted shrub"
+	desc = "A stone pot with a red autumnal shrub there-in."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "pottedshrub_red"
+	density = TRUE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/shrub/tundra
+	name = "potted shrub"
+	desc = "A stone pot with a cold tundra shrub there-in."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "pottedshrub_tundra"
+	density = TRUE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/books
+	name = "stack of books & inkpot"
+	desc = "A few stacks of books with a pot of ink & quill waiting for inspiration."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "clutter_books"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/teapot
+	name = "teapot & cups"
+	desc = "A teapot & accompanying cups on a mat."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "clutter_teapot"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/moonrug
+	name = "moon rug"
+	desc = "A decorative rug depicting the phases of the moon."
+	icon = 'icons/roguetown/misc/96x96.dmi'
+	icon_state = "moonrug"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/fibermat/square
+	name = "square fiber mat"
+	desc = "A rustic mat woven from fiber."
+	icon = 'icons/roguetown/misc/64x64.dmi'
+	icon_state = "fibermat"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/fibermat/round
+	icon = 'icons/roguetown/misc/structure.dmi'
+	name = "round fiber mat"
+	desc = "A rustic mat woven from fiber."
+	icon_state = "fibermat_round"
+	density = FALSE
 	anchored = FALSE
 
 /obj/structure/fluff/telescope/attack_hand(mob/user)
@@ -1095,7 +1190,10 @@
 	dir = NORTH
 	buckle_requires_restraints = 1
 	buckle_prevents_pull = 1
+	/// Divine or Inhumen
 	var/divine = TRUE
+	/// If you can walk through it as if it doesn't exist. This is a hand-holdy var.
+	var/pass_all_dir = FALSE
 
 /obj/structure/fluff/psycross/Initialize()
 	. = ..()
@@ -1118,13 +1216,15 @@
 
 /obj/structure/fluff/psycross/CanPass(atom/movable/mover, turf/target)
 	. = ..()
+	if(pass_all_dir)
+		return TRUE
 	if(get_dir(loc, mover) == dir)
-		return
+		return FALSE
 	return TRUE
 
 /obj/structure/fluff/psycross/proc/on_exit(datum/source, atom/movable/leaving, direction)
 	SIGNAL_HANDLER
-	if(direction == dir)
+	if(!pass_all_dir && (direction == dir))
 		leaving.Bump(src)
 		return COMPONENT_ATOM_BLOCK_EXIT
 
@@ -1501,3 +1601,4 @@
 	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
 	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
 	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))
+

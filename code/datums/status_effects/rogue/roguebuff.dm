@@ -1020,3 +1020,19 @@
 /atom/movable/screen/alert/status_effect/buff/free_feet
 	name = "Foot Freedom"
 	desc = "Not wearing shoes allows me to move more freely."
+
+/atom/movable/screen/alert/status_effect/buff/campfire_stamina
+	name = "Warm Rest"
+	desc = "It is nice and warm, I'm recovering my energy."
+	icon_state = "campfire"
+
+
+/datum/status_effect/buff/campfire_stamina
+	id = "stamina_campfire"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/campfire_stamina
+	duration = 5 SECONDS
+
+/datum/status_effect/buff/campfire_stamina/tick()
+	if(owner.cmode)
+		return
+	owner.adjust_energy(5)

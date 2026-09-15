@@ -4,14 +4,15 @@
 	button_icon_state = "phantomear"
 	self_cast_possible = TRUE
 
-	point_cost = 2
-
 	has_visual_effects = FALSE
 	charge_required = FALSE
 	cooldown_time = 2 MINUTES
 	spell_cost = 60
 	spell_flags = SPELL_RITUOS
 	invocation = "Lend me thine ear."
+
+	required_form = FORM_WATER
+
 	invocation_type = INVOCATION_WHISPER
 
 	summon_type = list(/obj/item/phantom_ear)

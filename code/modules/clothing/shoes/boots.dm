@@ -1,8 +1,6 @@
 /obj/item/clothing/shoes/boots
-	name = "dark boots"
-	//dropshrink = 0.75
-	color = "#d5c2aa"
-	desc = "Boots made out of darker materials. Offers light protection against melee attacks."
+	name = "boots"
+	desc = "Boots."
 	gender = PLURAL
 	icon_state = "blackboots"
 	item_state = "blackboots"
@@ -10,7 +8,19 @@
 	sellprice = 10
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
+	wetable = FALSE
+	abstract_type = /obj/item/clothing/shoes/boots
+
+/obj/item/clothing/shoes/boots/darkboots
+	name = "dark boots"
+	//dropshrink = 0.75
+	color = "#d5c2aa"
+	desc = "Boots made out of darker materials. Offers light protection against melee attacks."
+	icon_state = "blackboots"
+	item_state = "blackboots"
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	max_integrity = INTEGRITY_OLD_STANDARD
 	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/armor
@@ -23,7 +33,7 @@
 	color = null
 	blocksound = PLATEHIT
 	armor_type = /datum/armor/boots/plate
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	armor_class = AC_HEAVY
 	clothing_flags = CANT_SLEEP_IN
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
@@ -67,7 +77,7 @@
 	item_state = "soldierboots"
 	desc = "Lightly armored boots made from iron offering protection against both melee and ranged attacks."
 	armor_type = /datum/armor/boots/brigandine
-	max_integrity = INTEGRITY_STRONG + 50
+	max_integrity = INTEGRITY_OLD_STRONG + 50
 	armor_class = AC_MEDIUM
 	sellprice = 20
 	item_weight = 1.4 KILOGRAMS
@@ -97,7 +107,7 @@
 	smeltresult = /obj/item/ingot/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/boots/plate/bad
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 
 /obj/item/clothing/shoes/boots/armor/blkknight
 	name = "blacksteel boots"
@@ -109,9 +119,10 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
-	armor_type = /datum/armor/boots/plate
+	armor_type = /datum/armor/boots/plate/good
 	item_weight = 2.1 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
+	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
 /obj/item/clothing/shoes/boots/leather
 	name = "leather boots"
@@ -127,7 +138,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	salvage_amount = 1
 	item_weight = 1.4 KILOGRAMS
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	wetable = FALSE
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BOOTS ARE INTENDED
@@ -138,7 +149,7 @@
 	desc = "These boots arent for those sitting on cushioned chairs, or prissy nobles. No, these are for the true explorer, the wilds tamer, the truth seeker. And like any good explorer, this pair of boots comes with a hidden suprise, for those trying to hide a small blade."
 	icon_state = "hunterboots"
 	item_state = "hunterboots"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/boots/leather/hunter
 	min_cold_protection_temperature = -15
@@ -158,7 +169,7 @@
 	desc = "These 'boots'- A masterfully crafted tool for any aspiring wildsmen- are for those trekking out, hunting a wild beast through miles of thick woods, and then dragging your kill back with a stoic certainty. Strong, durable, unrelenting, just like how psydon intended!"
 	icon_state = "hunterboots"
 	item_state = "hunterboots"
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/boots/leather/master
 
@@ -169,7 +180,7 @@
 /obj/item/clothing/shoes/boots/leather/advanced
 	name = "hardened leather boots"
 	desc = "Sturdy, durable, flexible. A marvel of the dark ages that exists solely to protect your toes."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/boots/leather/advanced
 	wetable = FALSE
@@ -189,7 +200,7 @@
 /obj/item/clothing/shoes/boots/leather/masterwork
 	name = "masterwork leather boots"
 	desc = "These boots are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/boots/leather/master
 	wetable = FALSE
@@ -216,14 +227,14 @@
 /obj/item/clothing/shoes/boots/furlinedboots/advanced
 	name = "hardened fur lined boots"
 	desc = "Boots lined with fur, and protected with hardened, expertly tanned leather."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/boots/leather/advanced
 
 /obj/item/clothing/shoes/boots/furlinedboots/masterwork
 	name = "masterwork fur lined boots"
 	desc = "Boots lined with thick fur, and protected with hardened, masterfully tanned leather made by only the best."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/boots/leather/master
 
@@ -273,54 +284,53 @@
 	enchant(/datum/enchantment/silver)
 
 //............... Evil Boots ............... //
+/obj/item/clothing/shoes/boots/armor/inhumen
+	name = "BASE INHUMEN BOOTS"
+	abstract_type = /obj/item/clothing/shoes/boots/armor/inhumen
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizoboots"
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
+	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 
-/obj/item/clothing/shoes/boots/armor/zizo
+/obj/item/clothing/shoes/boots/armor/inhumen/Initialize()
+	. = ..()
+	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
+
+/obj/item/clothing/shoes/boots/armor/inhumen/zizo
 	name = "darksteel boots"
 	desc = "Plate boots. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizoboots"
 	item_state = "zizoboots"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	smeltresult = /obj/item/ingot/avantyne
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
-/obj/item/clothing/shoes/boots/armor/zizo/Initialize()
-	. = ..()
-	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
-
-/obj/item/clothing/shoes/boots/armor/matthios
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios
 	name = "gilded boots"
 	desc = "Plate boots. A door kicked in, treasures to behold inside."
 	icon_state = "matthiosboots"
 	item_state = "matthiosboots"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
-
-/obj/item/clothing/shoes/boots/armor/matthios/Initialize()
-	. = ..()
-	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
 
 // variant with no armor, just drip.
-/obj/item/clothing/shoes/boots/armor/matthios/lord
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios/lord
 	name = "lordly boots"
 	desc = "Boots terribly befitting of that of a tyrannical lord. Has a fake metal veneer to strike fear into the hearts of peasants."
 	armor_type = /datum/armor/none
 
-/obj/item/clothing/shoes/boots/armor/graggar
+/obj/item/clothing/shoes/boots/armor/inhumen/graggar
 	name = "vicious boots"
 	desc = "A menacing pair of plate boots, caked in blood and brain matter. Known for crushing skulls."
 	icon_state = "graggarplateboots"
 	item_state = "graggarplateboots"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
 
-/obj/item/clothing/shoes/boots/armor/graggar/Initialize()
-	. = ..()
-	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
+/obj/item/clothing/shoes/boots/armor/inhumen/baotha
+	name = "saccharine boots"
+	desc = "A tantalizing pair of plate boots, you almost feel like you can't take them off..."
+	icon_state = "baothaboots"
+	item_state = "baothaboots"
+	smeltresult = /obj/item/ingot/component/baotha
+
 
 //.............. Gronn Boots .................//
 
@@ -357,3 +367,48 @@
 	desc = "Lightweight leather boots designed for fencing, they'll help keep your balance perfect in combat."
 	icon_state = "freiboots"
 	item_state = "freiboots"
+
+
+/obj/item/clothing/shoes/boots/rosa
+	name = "ivory shoes"
+	desc = "Finely crafted shoes from Wintermare, typically worn by their nobility."
+	icon_state = "rosashoes1"
+	icon = 'icons/roguetown/clothing/special/rosewood.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+
+/obj/item/clothing/shoes/boots/rosa/two
+	name = "scarlet shoes"
+	icon_state = "rosashoes2"
+
+/obj/item/clothing/shoes/boots/rosa/three
+	name = "velvet shoes"
+	icon_state = "rosashoes3"
+
+/obj/item/clothing/shoes/boots/rosa/four
+	name = "obsidian shoes"
+	icon_state = "rosashoes4"
+
+/obj/item/clothing/shoes/boots/rosa/five
+	name = "sable shoes"
+	icon_state = "rosashoes5"
+
+/obj/item/clothing/shoes/boots/rosa/six
+	name = "maroon shoes"
+	icon_state = "rosashoes6"
+
+/obj/item/clothing/shoes/boots/rosa/seven
+	name = "regal shoes"
+	icon_state = "rosashoes7"
+
+/obj/item/clothing/shoes/boots/rosa/eight
+	name = "courtly shoes"
+	icon_state = "rosashoes8"
+
+/obj/item/clothing/shoes/boots/rosa/nine
+	name = "royal shoes"
+	icon_state = "rosashoes9"
+
+/obj/item/clothing/shoes/boots/rosa/ten
+	name = "stately shoes"
+	icon_state = "rosashoes10"

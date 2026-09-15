@@ -4,7 +4,6 @@
  * Create a single item, attaching [/datum/component/conjured_item]
  */
 /datum/action/cooldown/spell/undirected/conjure_item
-	school = SCHOOL_CONJURATION
 	invocation_type = INVOCATION_NONE
 	charge_required = FALSE
 
@@ -56,6 +55,7 @@
 		CRASH("[type] tried to create an item, but failed. It's item type is [item_type].")
 
 	cast_on.put_in_hands(created, del_on_fail = TRUE)
+	log_game("[key_name(owner)] used a spell to conjure '[item_type]'.")
 	return ..()
 
 /// Instantiates the item we're conjuring and returns it.

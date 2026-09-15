@@ -367,7 +367,7 @@
 	var/current_direction = movedir || dir
 	var/speed = current_speed
 	if(HAS_TRAIT(moving, TRAIT_SWIMMER)) // more time to swim against the current
-		speed *= 2
+		speed *= 5
 	if(moving_loop)
 		moving_loop.direction = current_direction
 		moving_loop.delay = speed
@@ -885,6 +885,19 @@
 	set_relationships_on_init = FALSE
 	fishing_datum = /datum/fish_source/river
 	river_current = TRUE
+
+
+/turf/open/water/river/flow
+	icon_state = "rockwd2"
+
+/turf/open/water/river/flow/west
+	dir = WEST
+
+/turf/open/water/river/flow/east
+	dir = EAST
+
+/turf/open/water/river/flow/north
+	dir = NORTH
 
 /turf/open/water/river/get_heuristic_slowdown(mob/traverser, travel_dir)
 	. = ..()

@@ -16,7 +16,7 @@
 	armor_type = /datum/armor/boots/plate/elf
 	clothing_flags = CANT_SLEEP_IN
 	sellprice = 30
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	abstract_type = /obj/item/clothing/shoes/boots/rare
 
 	material_category = ARMOR_MAT_PLATE

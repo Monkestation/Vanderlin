@@ -31,4 +31,6 @@
 /// Called from the base of '/obj/item/bodypart/proc/drop_limb(special)' ()
 #define COMSIG_CARBON_DISMEMBER "mob_drop_limb"
 	#define COMPONENT_CANCEL_DISMEMBER (1<<0) //cancel the drop limb
-/// from /mob/say_dead(): (mob/speaker, message)
+
+/// Called from bodypart changing owner, which could be on attach or detachment. Either argument can be null. (mob/living/carbon/new_owner, mob/living/carbon/old_owner)
+#define COMSIG_BODYPART_CHANGED_OWNER "bodypart_changed_owner"

@@ -179,14 +179,6 @@
 	add_random_deserter_beltr_stuff(H)
 
 /mob/living/carbon/human/species/human/northern/bog_deserters/better_gear
-	faction = list("viking", "station")
-	ambushable = FALSE
-	cmode = 1
-	setparrytime = 30
-	flee_in_pain = TRUE
-	a_intent = INTENT_HELP
-	d_intent = INTENT_PARRY
-	possible_mmb_intents = list(INTENT_BITE, INTENT_JUMP, INTENT_KICK)
 	headprice = 20
 
 /mob/living/carbon/human/species/human/northern/bog_deserters/better_gear/ambush

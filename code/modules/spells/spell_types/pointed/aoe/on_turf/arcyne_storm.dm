@@ -3,8 +3,6 @@
 	desc = "Conjure ripples of force into existence over a large area, injuring any who enter."
 	button_icon_state = "hierophant"
 
-	point_cost = 8
-
 	charge_time = 4 SECONDS
 	charge_drain = 1
 	cooldown_time = 50 SECONDS
@@ -12,9 +10,8 @@
 
 	aoe_radius = 4
 
-	attunements = list(
-		/datum/attunement/arcyne = 1.2
-	)
+	required_form = FORM_ARCANE
+	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "BE TORN APART!!!"
 	invocation_type = INVOCATION_SHOUT
@@ -27,7 +24,7 @@
 	new /obj/effect/temp_visual/arcyne_storm(victim)
 	playsound(victim, "genslash", 40, TRUE)
 	for(var/mob/living/L in victim.contents)
-		L.adjustBruteLoss(round(7 * attuned_strength), damage_type = BCLASS_CUT)
+		L.adjustBruteLoss(round(7 * spell_magnitude_modifier), damage_type = BCLASS_CUT)
 		to_chat(L, span_userdanger("I'm cut by an arcyne force!"))
 
 /obj/effect/temp_visual/arcyne_storm

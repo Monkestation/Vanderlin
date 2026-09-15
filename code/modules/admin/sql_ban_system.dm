@@ -275,9 +275,60 @@
 			while(query_get_banned_roles.NextRow())
 				banned_from += query_get_banned_roles.item[1]
 			qdel(query_get_banned_roles)
+
+		var/list/role_categories = list(
+			"Noblemen" = GLOB.noble_courthand_positions,
+			"Garrison" = GLOB.garrison_positions,
+			"Church" = GLOB.church_positions,
+			"Inquisition" = GLOB.inquisition_positions,
+			"Serfs" = GLOB.serf_positions,
+			"Peasants" = GLOB.peasant_positions,
+			"Apprentices" = GLOB.apprentices_positions,
+			"Youngfolk" = GLOB.youngfolk_positions,
+			"Company" = GLOB.company_positions,
+			"Outsiders" = GLOB.allmig_positions,
+			"Gallowband" = GLOB.gallowband_positions,
+		)
+
+		// Build a flat lookup of every role title that's already in a category,
+		// so we can figure out what's missing.
+		var/list/categorized_roles = list()
+		for(var/category in role_categories)
+			for(var/role_title in role_categories[category])
+				categorized_roles[role_title] = TRUE
+
+		// Catch anything not in a named category so it's never silently unbannable.
+		var/list/uncategorized = list()
+		for(var/datum/job/job_type as anything in SSjob.all_occupations)
+			var/title = job_type.title
+			if(title == "NOPE")
+				continue
+			if(istype(job_type, /datum/job/advclass))
+				continue
+			if(title && !(title in categorized_roles))
+				uncategorized += title
+		if(uncategorized.len)
+			role_categories["Other"] = uncategorized
+
+		for(var/category in role_categories)
+			var/list/roles = role_categories[category]
+			if(!roles || !roles.len)
+				continue
+			var/category_class = "cat_[replacetext(LOWER_TEXT(category), " ", "_")]"
+			output += "<div class='category'>"
+			output += "<label class='inputlabel checkbox'><b>[category]</b>"
+			output += "<input type='checkbox' id='[category_class]_head' name='[category_class]' value='1' onclick='toggle_checkboxes(this)'>"
+			output += "<div class='inputbox'></div></label>"
+			output += "<div class='rolelist'>"
+			for(var/role_two in roles)
+				var/role_id = "role_[replacetext(LOWER_TEXT(role_two), " ", "_")]"
+				output += "<label class='inputlabel checkbox'>[role_two]"
+				output += "<input type='checkbox' id='[role_id]' class='[category_class]' name='[role_two]' value='1'[(role_two in banned_from) ? " checked" : ""]>"
+				output += "<div class='inputbox'></div></label>"
+			output += "</div>"
+			output += "</div>"
 		output += "</div></div>"
-		output += "</div>"
-	output += "</form>"
+	output += "</div>"
 	panel.set_content(jointext(output, ""))
 	panel.open()
 
@@ -380,7 +431,7 @@
 			if("server")
 				roles_to_ban += "Server"
 			if("role")
-				href_list.Remove("Command", "Security", "Engineering", "Medical", "Science", "Supply", "Silicon", "Abstract", "Service", "Ghost and Other Roles", "Antagonist Positions") //remove the role banner hidden input values
+				href_list.Remove("cat_noblemen", "cat_garrison", "cat_church", "cat_inquisition", "cat_serfs", "cat_peasants", "cat_apprentices", "cat_youngfolk", "cat_company", "cat_outsiders", "cat_gallowband", "cat_other") //remove the role category header hidden input values
 				if(href_list[href_list.len] == "roleban_delimiter")
 					error_state += "Role ban was selected but no roles to ban were selected."
 				else

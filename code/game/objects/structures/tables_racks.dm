@@ -380,6 +380,12 @@
 	icon = MAP_SWITCH('icons/obj/smooth_structures/fancy_table_royalblue.dmi', 'icons/obj/structures.dmi')
 	icon_state = "fancy_table_royalblue"
 
+/obj/structure/table/wood/smooth
+	name = "wooden table"
+	icon = MAP_SWITCH('icons/obj/smooth_structures/tablewood_smooth.dmi', 'icons/obj/structures.dmi')
+	icon_state = "tablewood_smooth"
+	smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ
+
 /*	..................   More tables   ................... */
 /obj/structure/table/wood/reinf_long
 	icon_state = "tablewood_reinf"

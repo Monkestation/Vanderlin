@@ -32,7 +32,7 @@
 /datum/job/tomb_warden
 	title = JOB_TOMB_WARDEN
 	department_flag = SERFS
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	total_positions = 1
 	spawn_positions = 1
@@ -52,6 +52,7 @@
 	outfit = /datum/outfit/tomb_warden
 	give_bank_account = 20
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	bypass_lastclass = TRUE
 	selection_color = "#3b150e"
 
@@ -118,7 +119,7 @@
 	wrists = /obj/item/storage/keyring/tombwarden
 	armor = /obj/item/clothing/armor/leather/jerkin/belted/long
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
 	head = /obj/item/clothing/head/roguehood/leather
 	r_hand = /obj/item/weapon/mace/cane

@@ -18,6 +18,7 @@
  * (generally) inadvisable unless you know what you're doing
  */
 /datum/action/cooldown/spell/undirected/touch
+	abstract_type = /datum/action/cooldown/spell/undirected/touch
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_HANDS_BLOCKED
 	charge_required = FALSE
 	has_visual_effects = FALSE

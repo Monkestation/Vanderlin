@@ -92,87 +92,71 @@
 			else
 				return list(/datum/intent/grab/move, /datum/intent/grab/choke, /datum/intent/grab/hostage)
 
-/obj/item/bodypart/head/Destroy()
-	QDEL_NULL(brainmob) //order is sensitive, see warning in handle_atom_del() below
-	QDEL_NULL(brain)
-	QDEL_NULL(eyes_left)
-	QDEL_NULL(eyes_right)
-	QDEL_NULL(ears)
-	QDEL_NULL(tongue)
-	return ..()
-
-/obj/item/bodypart/head/handle_atom_del(atom/A)
-	if(A == brain)
+/obj/item/bodypart/head/Exited(atom/movable/gone, direction)
+	if(gone == brain)
 		brain = null
 		update_icon_dropped()
 		if(!QDELETED(brainmob)) //this shouldn't happen without badminnery.
 			message_admins("Brainmob: ([ADMIN_LOOKUPFLW(brainmob)]) was left stranded in [src] at [ADMIN_VERBOSEJMP(src)] without a brain!")
-			log_game("Brainmob: ([key_name(brainmob)]) was left stranded in [src] at [AREACOORD(src)] without a brain!")
-	if(A == brainmob)
+			brainmob.log_message(", brainmob, was left stranded in [src] without a brain", LOG_GAME)
+
+	if(gone == brainmob)
 		brainmob = null
-	if(A == eyes_left)
+
+	if(gone == eyes_left)
 		eyes_left = null
 		update_icon_dropped()
-	if(A == eyes_right)
+
+	if(gone == eyes_right)
 		eyes_right = null
 		update_icon_dropped()
-	if(A == ears)
+
+	if(gone == ears)
 		ears = null
-	if(A == tongue)
+
+	if(gone == tongue)
 		tongue = null
+
 	return ..()
 
 /obj/item/bodypart/head/drop_organs(mob/user, violent_removal)
-	var/turf/T = get_turf(src)
-	if(status != BODYPART_ROBOTIC)
-		playsound(T, 'sound/blank.ogg', 50, TRUE, -1)
-	for(var/obj/item/I in src)
-		if(I == brain)
-			if(user)
-				user.visible_message("<span class='warning'>[user] saws [src] open and pulls out a brain!</span>", "<span class='notice'>I saw [src] open and pull out a brain.</span>")
-			if(brainmob)
-				brainmob.forceMove(brain)
-				brain.brainmob = brainmob
-				brainmob = null
-			if(violent_removal && prob(rand(80, 100))) //ghetto surgery can damage the brain.
-				to_chat(user, "<span class='warning'>[brain] was damaged in the process!</span>")
-				brain.setOrganDamage(brain.maxHealth)
-			brain.forceMove(T)
-			brain = null
-			update_icon_dropped()
-		else
-			I.forceMove(T)
-	eyes_right = null
-	eyes_left = null
-	ears = null
-	tongue = null
+	if(user)
+		user.visible_message(span_warning("[user] saws [src] open and pulls out a brain!"), span_notice("You saw [src] open and pull out a brain."))
+
+	if(brain && violent_removal && prob(90)) //ghetto surgery can damage the brain.
+		to_chat(user, span_warning("[brain] was damaged in the process!"))
+		brain.setOrganDamage(brain.maxHealth)
+
+	update_limb()
 	sellprice = 0
+	return ..()
 
-/obj/item/bodypart/head/update_limb(dropping_limb, mob/living/carbon/source)
-	var/mob/living/carbon/C
-	if(source)
-		C = source
-	else
-		C = owner
+/obj/item/bodypart/head/update_limb(dropping_limb)
+	if(!owner)
+		return
 
-	real_name = C.real_name
-	if(HAS_TRAIT(C, TRAIT_HUSK))
+	// There should technically to be an ishuman(owner) check here, but it is absent because no basetype carbons use bodyparts
+	// No, xenos don't actually use bodyparts. Don't ask.
+	var/mob/living/carbon/human/human_owner = owner
+
+	real_name = human_owner.real_name
+	if(HAS_TRAIT(human_owner, TRAIT_HUSK))
 		real_name = "Unknown"
 		lip_style = null
 
 	else if(!animal_origin)
-		var/mob/living/carbon/human/H = C
-		if(!H.dna || !H.dna.species)
+		if(!human_owner?.dna?.species)
 			return ..()
-		var/datum/species/S = H.dna.species
+		var/datum/species/S = human_owner.dna.species
 		// lipstick
-		if(H.lip_style && (LIPS in S.species_traits))
-			lip_style = H.lip_style
-			lip_color = H.lip_color
+		if(human_owner.lip_style && (LIPS in S.species_traits))
+			lip_style = human_owner.lip_style
+			lip_color = human_owner.lip_color
 		else
 			lip_style = null
 			lip_color = "white"
-	..()
+
+	return ..()
 
 /obj/item/bodypart/head/update_icon_dropped()
 	var/list/standing = get_limb_icon(1)

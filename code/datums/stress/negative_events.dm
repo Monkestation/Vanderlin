@@ -221,6 +221,11 @@
 	stress_change = 3
 	desc = span_phobia("IT'S THE FUCKING DAEWALKER!!")
 
+/datum/stress_event/its_the_nitewalker
+	timer = 3 MINUTES
+	stress_change = 2
+	desc = span_phobia("THE NITEWALKER ROAMS!!")
+
 /datum/stress_event/fishface
 	timer = 1 MINUTES
 	stress_change = 1
@@ -668,11 +673,6 @@
 	desc = "<span class='boldwarning'>I can't even end it all!</span>\n"
 	stress_change = 15
 	timer = 60 SECONDS
-
-/datum/stress_event/dismembered
-	desc = "<span class='boldwarning'>AHH! I WAS USING THAT LIMB!</span>\n"
-	stress_change = 10
-	timer = 8 MINUTES
 
 /datum/stress_event/embedded
 	desc = "<span class='boldwarning'>Pull it out!</span>\n"

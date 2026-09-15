@@ -9,5 +9,5 @@
 	cooldown_time = 0
 
 /datum/enchantment/on_hit/baothagift/apply_attack_effects(obj/item/source, mob/living/carbon/human/attacked, mob/living/carbon/attacker, actual_damage)
-	attacked.reagents.add_reagent(pick(/datum/reagent/ozium, /datum/reagent/druqks, /datum/reagent/berrypoison, /datum/reagent/stampoison, /datum/reagent/toxin/fyritiusnectar), 0.5)
+	attacked.reagents.add_reagent(pick(/datum/reagent/ozium, /datum/reagent/druqks, /datum/reagent/poison/berry, /datum/reagent/poison/stamina, /datum/reagent/toxin/fyritiusnectar), 0.5)
 	to_chat(attacked, span_warning("You feel something entering your system!"))

@@ -6,6 +6,14 @@
 	fire = 0
 	acid = 0
 
+/datum/armor/head/maille/iron/ironbriar
+	blunt = 50
+	slash = 45
+	stab = 40
+	piercing = 35
+	fire = 0
+	acid = 0
+
 /datum/armor/head/maille
 	blunt = 45
 	slash = 55

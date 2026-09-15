@@ -55,7 +55,7 @@
 	if(stat != DEAD)
 		return 1
 
-/mob/living/carbon/DeadLife()
+/mob/living/carbon/DeadLife(delta_time = SSMOBS_DT, times_fired)
 	set invisibility = 0
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -68,6 +68,7 @@
 	handle_embedded_objects()
 
 	check_cremation()
+	handle_bodyparts_death(delta_time, times_fired)
 
 /mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
 	return
@@ -85,6 +86,10 @@
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		if(bodypart.needs_processing)
 			. |= bodypart.on_life(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+
+/mob/living/carbon/proc/handle_bodyparts_death(delta_time, times_fired)
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		. |= bodypart.on_death(delta_time, times_fired)
 
 /mob/living/carbon/proc/handle_organs(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically
@@ -282,9 +287,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 					adjust_blood_volume(-10)
 				if(limb.cremation_progress >= 50)
 					if(limb.status == BODYPART_ORGANIC) //Non-organic limbs don't burn
-						limb.skeletonize()
 						should_update_body = TRUE
-						limb.drop_limb()
 						limb.visible_message("<span class='warning'>[src]'s [limb.name] crumbles into ash!</span>")
 						qdel(limb)
 					else
@@ -298,9 +301,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			head.cremation_progress += rand(1,4)
 			if(head.cremation_progress >= 50)
 				if(head.status == BODYPART_ORGANIC) //Non-organic limbs don't burn
-					head.skeletonize()
 					should_update_body = TRUE
-					head.drop_limb()
 					head.visible_message("<span class='warning'>[src]'s head crumbles into ash!</span>")
 					qdel(head)
 				else

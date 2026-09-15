@@ -18,6 +18,9 @@
 #define TOOL_IMPROVISED_RETRACTOR "improvised_retractor"
 #define TOOL_IMPROVISED_HEMOSTAT "improvised_hemostat"
 #define TOOL_IMPROVISED_SAW	"improvsaw"
+#define TOOL_SPOON "spoon"
+#define TOOL_FORK "fork"
+#define TOOL_KNIFE "knife"
 
 // If delay between the start and the end of tool operation is less than MIN_TOOL_SOUND_DELAY,
 // tool sound is only played when op is started. If not, it's played twice.

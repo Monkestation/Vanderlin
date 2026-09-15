@@ -10,6 +10,7 @@
 	throw_range = 7
 	resistance_flags = FLAMMABLE
 	item_weight = 65 GRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/teleportation_scroll/apprentice
 	name = "lesser scroll of teleportation"

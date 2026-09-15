@@ -198,7 +198,7 @@
 		var/mob/living/burn_living = burn_target
 		burn_living.adjust_fire_stacks(lava_firestacks)
 		burn_living.IgniteMob()
-		burn_living.adjustFireLoss(lava_damage)
+		burn_living.adjustFireLoss(lava_damage, intense = TRUE)
 		if(burn_living.health <= 0)
 			burn_living.dust(drop_items = TRUE)
 		return TRUE

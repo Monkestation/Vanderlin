@@ -346,6 +346,27 @@
 	specuse = list(SPEC_ID_TIEFLING)
 	color_key_defaults = list(KEY_SKIN_COLOR)
 
+/datum/sprite_accessory/tail/tiefling/heart
+	icon = 'icons/roguetown/mob/bodies/attachments.dmi'
+	name = "TieftailHeart"
+	icon_state = "tieftailheart"
+	specuse = list(SPEC_ID_TIEFLING)
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
+/datum/sprite_accessory/tail/tiefling/drake
+	icon = 'icons/roguetown/mob/bodies/attachments.dmi'
+	name = "TieftailDrake"
+	icon_state = "tieftaildrake"
+	specuse = list(SPEC_ID_TIEFLING)
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
+/datum/sprite_accessory/tail/tiefling/spear
+	icon = 'icons/roguetown/mob/bodies/attachments.dmi'
+	name = "TieftailSpear"
+	icon_state = "tieftailspear"
+	specuse = list(SPEC_ID_TIEFLING)
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
 /datum/sprite_accessory/tail/triton
 	name = "Triton Bell"
 	icon = 'icons/mob/sprite_accessory/tails/triton.dmi'

@@ -164,7 +164,7 @@
 /mob/living/proc/vampire_detected(value, forced = FALSE)
 	if(value <= 0)
 		return
-	if(!clan || istype(clan, /datum/clan/daewalker))
+	if(!clan || istype(clan, /datum/clan/daewalker) || istype(clan, /datum/clan/nitewalker))
 		return
 	if(CheckZoneCoven(src))
 		return

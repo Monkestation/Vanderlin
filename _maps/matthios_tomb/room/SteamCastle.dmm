@@ -700,7 +700,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 5
 	},
-/obj/structure/nocdevice{
+/obj/structure/scrying/nocdevice{
 	pixel_x = -7;
 	pixel_y = 0
 	},

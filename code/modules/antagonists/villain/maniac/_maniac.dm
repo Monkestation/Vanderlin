@@ -45,6 +45,7 @@
 		TRAIT_NOENERGY,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_STRONG_GRABBER,
+		TRAIT_CLOSECOMBAT,
 	)
 	/// Traits that only get applied in the final sequence
 	var/static/list/final_traits = list(
@@ -167,7 +168,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 	if(owner.current)
 		UnregisterSignal(owner.current, COMSIG_EMOTE_PRAY)
 		if(!silent)
-			to_chat(owner.current,span_danger("I am no longer a MANIAC!"))
+			to_chat(owner.current,SPAN_GOD_GRAGGAZO("I am no longer a MANIAC!"))
 		if(ishuman(owner.current))
 			var/mob/living/carbon/human/dreamer = owner.current
 			var/datum/physiology/phy = dreamer.physiology
@@ -256,7 +257,7 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 	if(GLOB.maniac_highlander) // another Maniac has TRIUMPHED before we could
 		if(src.owner && src.owner.current)
 			var/straggler = src.owner.current
-			to_chat(straggler, span_danger("IT'S NO USE! I CAN'T WAKE UP!"))
+			to_chat(straggler, SPAN_GOD_GRAGGAZO("IT'S NO USE! I CAN'T WAKE UP!"))
 		return
 	GLOB.maniac_highlander = 1
 	STOP_PROCESSING(SSobj, src)
@@ -299,21 +300,21 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 		trey_liam.SetSleeping(25 SECONDS)
 		trey_liam.add_stress(/datum/stress_event/maniac_woke_up)
 		sleep(1.5 SECONDS)
-		to_chat(trey_liam, span_userdanger("<span class='reallybig'>... WHERE AM I? ...</span>"))
+		to_chat(trey_liam, SPAN_GOD_GRAGGAZO("<span class='reallybig'>... WHERE AM I? ...</span>"))
 		sleep(1.5 SECONDS)
 		var/static/list/slop_lore = list(
-			span_userdanger("... Rockhill? Vanderlin? No ... They don't exist ..."),
-			span_userdanger("... My name is Trey. Trey Liam, Scientific Overseer ..."),
-			span_userdanger("... I'm on the Aeon, a self sustaining ship, used to preserve what remains of humanity ..."),
-			span_userdanger("... Launched into the stars, preserving their memories ... Their personalities ..."),
-			span_userdanger("... Keeps them alive in vessels, oblivious to the catastrophe ..."),
-			span_userdanger("... There is no hope left. Only the program lets me live through the avatars ..."),
-			span_userdanger("... What have I done?! ..."),
+			SPAN_GOD_GRAGGAZO("... Rockhill? Vanderlin? No ... They don't exist ..."),
+			SPAN_GOD_GRAGGAZO("... My name is Trey. Trey Liam, Scientific Overseer ..."),
+			SPAN_GOD_GRAGGAZO("... I'm on the Aeon, a self sustaining ship, used to preserve what remains of humanity ..."),
+			SPAN_GOD_GRAGGAZO("... Launched into the stars, preserving their memories ... Their personalities ..."),
+			SPAN_GOD_GRAGGAZO("... Keeps them alive in vessels, oblivious to the catastrophe ..."),
+			SPAN_GOD_GRAGGAZO("... There is no hope left. Only the program lets me live through the avatars ..."),
+			SPAN_GOD_GRAGGAZO("... What have I done?! ..."),
 		)
 		for(var/slop in slop_lore)
 			to_chat(trey_liam, slop)
 			sleep(3 SECONDS)
-		to_chat(trey_liam, span_big(span_userdanger("I have to go back, I have to go back, I have to go back to Vanderlin.")))
+		to_chat(trey_liam, span_big(SPAN_GOD_GRAGGAZO("I have to go back, I have to go back, I have to go back to Vanderlin.")))
 	else
 		INVOKE_ASYNC(src, GLOBAL_PROC_REF(cant_wake_up), dreamer)
 		cull_competitors(dreamer)
@@ -326,11 +327,11 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 		return
 	ADD_TRAIT(target, TRAIT_SHAKY_SPEECH, TRAIT_GENERIC)
 	target.Knockdown(10 SECONDS)
-	to_chat(target, span_userdanger("<span class='reallybig'>I CAN'T WAKE UP.</span>"))
+	to_chat(target, SPAN_GOD_GRAGGAZO("<span class='reallybig'>I CAN'T WAKE UP.</span>"))
 	target.say("I CAN'T WAKE UP!", spans = list("reallybig"), ignore_spam = TRUE)
 	sleep(2 SECONDS)
 	for(var/i in 1 to 10)
-		to_chat(target, span_userdanger("<span class='reallybig'>ICANTWAKEUP</span>"))
+		to_chat(target, SPAN_GOD_GRAGGAZO("<span class='reallybig'>ICANTWAKEUP</span>"))
 		target.say("ICANTWAKEUP!!", spans = list("reallybig"), ignore_spam = TRUE)
 		sleep(0.5 SECONDS)
 	var/obj/item/organ/brain/brain = target.getorganslot(ORGAN_SLOT_BRAIN)
@@ -360,9 +361,9 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			REMOVE_TRAIT(C, TRAIT_SCHIZO_AMBIENCE, "/datum/antagonist/maniac")
 			C.log_message("was culled by the TRIUMPH of Maniac [key_name(victor)].", LOG_GAME)
 			sleep(1 SECONDS)
-			to_chat(C, span_userdanger("What?! No, no, this can't be!"))
+			to_chat(C, SPAN_GOD_GRAGGAZO("What?! No, no, this can't be!"))
 			sleep(2 SECONDS)
-			to_chat(C, span_userdanger("How can I be TOO LATE-"))
+			to_chat(C, SPAN_GOD_GRAGGAZO("How can I be TOO LATE-"))
 			sleep(1 SECONDS)
 			INVOKE_ASYNC(src, GLOBAL_PROC_REF(cant_wake_up), C)
 			QDEL_LIST(competitor.wonders_made)

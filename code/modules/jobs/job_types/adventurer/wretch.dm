@@ -5,7 +5,7 @@
 	job_flags = JOB_SHOW_IN_CREDITS
 	category_tags = list(CTAG_WRETCH)
 	spawn_with_torch = TRUE
-	faction = FACTION_NEUTRAL
+	factions = list(FACTION_NEUTRAL)
 	department_flag = OUTSIDERS
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/antag/combat_bandit2.ogg'

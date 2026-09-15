@@ -42,7 +42,7 @@
 	icon_state = "incleave"
 	penfactor = AP_GREATAXE_CHOP + 10
 	clickcd = 30
-	chargetime = 5
+	chargetime = 5 SECONDS
 	swingdelay = 2.5
 	damfactor = 2
 	misscost = 80

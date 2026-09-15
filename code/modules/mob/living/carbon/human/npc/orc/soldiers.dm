@@ -1,10 +1,10 @@
 /datum/attribute_holder/sheet/job/orc_npc/footsoldier
 	raw_attribute_list = list(
-		STAT_STRENGTH     = 1,
-		STAT_SPEED        = -2,
-		STAT_CONSTITUTION = 1,
-		STAT_ENDURANCE    = 1,
-		STAT_INTELLIGENCE = -6, // Very dumb
+		STAT_STRENGTH = -2,
+		STAT_SPEED = -4,
+		STAT_CONSTITUTION = -2,
+		STAT_ENDURANCE = -2,
+		STAT_INTELLIGENCE = 3, // Very dumb
 		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -17,10 +17,10 @@
 
 /datum/attribute_holder/sheet/job/orc_npc/marauder
 	raw_attribute_list = list(
-		STAT_STRENGTH = 2,
-		STAT_SPEED = -2,
-		STAT_CONSTITUTION = 2,
-		STAT_INTELLIGENCE = -6,
+		STAT_STRENGTH = -1,
+		STAT_SPEED = -4,
+		STAT_CONSTITUTION = -1,
+		STAT_INTELLIGENCE = 3,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
@@ -35,10 +35,8 @@
 
 /datum/attribute_holder/sheet/job/orc_npc/berserker
 	raw_attribute_list = list(
-		STAT_STRENGTH     = 3,
-		STAT_CONSTITUTION = 2,
-		STAT_ENDURANCE    = 2,
-		STAT_INTELLIGENCE = -9, // Minmax department
+		STAT_CONSTITUTION = -1,
+		STAT_ENDURANCE = -1,
 		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/labor/mining = 30,
@@ -51,10 +49,9 @@
 
 /datum/attribute_holder/sheet/job/orc_npc/elite
 	raw_attribute_list = list(
-		STAT_STRENGTH     = 4,
-		STAT_CONSTITUTION = 2,
-		STAT_ENDURANCE    = 2,
-		STAT_INTELLIGENCE = -9,
+		STAT_STRENGTH = -1,
+		STAT_CONSTITUTION = -1,
+		STAT_ENDURANCE = -1,
 		/datum/attribute/skill/combat/polearms = 40,
 		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/axesmaces = 40,

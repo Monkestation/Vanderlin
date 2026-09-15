@@ -150,6 +150,8 @@
 		return
 
 	var/mob/living/carbon/human/user = ui.user
+	if(!istype(user))
+		return
 
 	switch(action)
 

@@ -18,14 +18,14 @@
 /obj/item/clothing/armor/leather/shamancoat/advanced
 	name = "hardened shaman's coat"
 	desc = "A thick, furred protective coat, often made by hand expertly from a beast killed in the bearer's hunt."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/leather/advanced
 
 /obj/item/clothing/armor/leather/shamancoat/masterwork
 	name = "masterwork shaman's coat"
 	desc = "This coat was masterfully hand crafted with Dendor's blessing, and interwined with the fur and hide of beasts of the true, untamed wilds, often made by hand masterfully from a dangerous beast killed in the bearer's many hunts."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/leather/master
 
@@ -43,14 +43,14 @@
 /obj/item/clothing/pants/trou/leather/furpants/advanced
 	name = "hardened fur chausses"
 	desc = "Expertly made thick fur pants made to endure the coldest winds, offering a measure of protection from fang and claw of beast or men alike."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	armor_type = /datum/armor/pants/leather/advanced
 
 /obj/item/clothing/pants/trou/leather/furpants/masterwork
 	name = "masterwork fur chausses"
 	desc = "Masterfully made thick fur pants made to endure extreme winter winds, offering a reliable amount of protection from fang, and claw of beast or men alike."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	armor_type = /datum/armor/pants/leather/master
 
@@ -70,14 +70,14 @@
 	desc = "Thick, well padded gloves made for the harshest of climates, and wildest- and most dangeress- of beasts encountered in the untamed lands."
 	icon_state = "atgervi_raider_gloves"
 	item_state = "atgervi_raider_gloves"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	armor_type = /datum/armor/gloves/leather/advanced
 
 /obj/item/clothing/gloves/angle/furlined/masterwork
 	name = "masterwork fur-lined leather gloves"
 	desc = "Thick, masterfully padded gloves made for the harshest, most extreme of climates, and wildest- and most dangeress- of beasts encountered in the untamed lands."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST, BCLASS_CHOP)
 	armor_type = /datum/armor/gloves/leather/master
 

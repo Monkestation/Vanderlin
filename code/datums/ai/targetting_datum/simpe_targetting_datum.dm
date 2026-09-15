@@ -60,3 +60,21 @@
 		if(target.mind?.has_antag_datum(/datum/antagonist/zizocultist))
 			return FALSE
 	. = ..()
+
+
+GLOBAL_DATUM_INIT(conjured_targetting, /datum/targetting_datum/basic/conjured, new)
+
+/datum/targetting_datum/basic/conjured
+
+/datum/targetting_datum/basic/conjured/can_attack(mob/living/living_mob, atom/the_target)
+	. = ..()
+	if(!.)
+		return FALSE
+	var/datum/component/conjured_minion/comp = living_mob.GetComponent(/datum/component/conjured_minion)
+	if(!comp)
+		return TRUE
+	var/mob/living/summoner = comp.summoner_ref?.resolve()
+	if(!summoner || summoner.z != living_mob.z)
+		return TRUE
+	if(get_dist(the_target, summoner) > comp.leash_range + 1)
+		return FALSE

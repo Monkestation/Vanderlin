@@ -80,6 +80,30 @@
 	supports_directions = TRUE
 	craftdiff = 0
 
+/datum/blueprint_recipe/masonry/noc
+	name = "statue of Noc"
+	desc = "Noc, the Moon Prince, reigns over magic. Scholars bow to their command of the weave."
+	required_materials = list(
+		/obj/item/ingot/silver = 1,
+		/obj/item/natural/stone = 2
+	)
+	result_type = /obj/structure/fluff/statue/noc
+	construct_tool = /obj/item/weapon/hammer
+	skillcraft = /datum/attribute/skill/craft/crafting
+	craftdiff = 3
+
+/datum/blueprint_recipe/masonry/noc/tall
+	name = "standing statue of Noc"
+	desc = "Noc, the Moon Prince, reigns over magic. Scholars bow to their command of the weave."
+	required_materials = list(
+		/obj/item/ingot/silver = 1,
+		/obj/item/natural/stone = 2
+	)
+	result_type = /obj/structure/fluff/statue/noc/tall
+	construct_tool = /obj/item/weapon/hammer
+	skillcraft = /datum/attribute/skill/craft/crafting
+	craftdiff = 3
+
 /datum/blueprint_recipe/masonry/cauldron
 	name = "cauldron"
 	desc = "A large iron cauldron for brewing and cooking."
@@ -96,7 +120,9 @@
 	name = "stone stairs (down)"
 	desc = "Durable stone stairs leading downward."
 	result_type = /obj/structure/stairs/stone/d
-	required_materials = list(/obj/item/natural/stone = 2)
+	required_materials = list(
+		/obj/item/natural/stone = 2
+	)
 	supports_directions = TRUE
 	craftdiff = 1
 

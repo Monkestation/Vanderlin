@@ -26,7 +26,7 @@
 	There is nothing in this world that you can't build, your creed and hardwork has revealed all the secrets of the stone."
 	allowed_races = list(SPEC_ID_DWARF)
 	outfit = /datum/outfit/pilgrim/grandmastermason
-	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	category_tags = list(CTAG_PILGRIM)
 	total_positions = 1
 	roll_chance = 0
 	apprentice_name = "Mason Apprentice"

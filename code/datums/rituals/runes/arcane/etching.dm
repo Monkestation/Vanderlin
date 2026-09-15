@@ -67,7 +67,7 @@
 	// Build eligible spell list, exclude essence and already-temporary spells
 	var/list/eligible = list()
 	for(var/datum/action/cooldown/spell/S in user.actions)
-		if(S.spell_type == SPELL_ESSENCE)
+		if(S.spell_type != SPELL_MANA)
 			continue
 		if(S.spell_flags & SPELL_TEMPORARY)
 			continue

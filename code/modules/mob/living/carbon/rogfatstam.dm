@@ -36,26 +36,19 @@
 	stamina = clamp(stamina, 0, maximum_stamina)
 
 /mob/living/carbon/proc/update_endurance_stamina_modifier()
-	var/endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE)
+	var/endurance = GET_MOB_ATTRIBUTE_VALUE(src, STAT_ENDURANCE) - ATTRIBUTE_MIDDLING
+	var/athletics = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/athletics) / 10
 
-	var/athletics = 0
-	if(mind)
-		athletics = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/misc/athletics) / 10
+	var/endurance_factor = endurance * 5
+	var/athletics_factor = athletics * 5
 
-	var/base = endurance * 15
-	var/bonus = athletics * 5
+	var/stamina_modification = endurance_factor + athletics_factor
 
-	bonus = min(bonus, 50)
-
-	var/total_stamina = max(base + bonus, 10)
-
-	var/stamina_modification = total_stamina - base_max_stamina
-
-	var/desc = span_info("Stamina.")
-	if(total_stamina > base_max_stamina)
-		desc = span_green("High stamina.")
-	else if(total_stamina < base_max_stamina)
-		desc = span_alert("Low stamina.")
+	var/desc = span_info("No Stamina Change")
+	if(stamina_modification > 0)
+		desc = span_green("Improved Stamina")
+	else if(stamina_modification < 0)
+		desc = span_alert("Reduced Stamina")
 
 	add_or_update_variable_stamina_modifier(
 		/datum/stamina_modifier/endurance,

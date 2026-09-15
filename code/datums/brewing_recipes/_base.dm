@@ -2,7 +2,7 @@
 	abstract_type = /datum/brewing_recipe
 	var/name = "Alcohols"
 	var/category = "Alcohols"
-	///the type path of the reagent
+	///the type path of the reagent. CAN BE NULL
 	var/datum/reagent/reagent_to_brew = /datum/reagent/consumable/ethanol
 	///What reagent needs to be in the keg for this recipe to show up as an option?
 	var/datum/reagent/pre_reqs
@@ -18,18 +18,17 @@
 	var/sell_value = 0
 	///amount of brewed creations used when either canning or bottling. this is for liquids
 	var/brewed_amount = 1
-	///each bottle or canning gives how this much reagents. used with brewed_amount
+	///each bottle or canning contains this much reagents. used with brewed_amount
 	var/per_brew_amount = 50
 	///helpful hints
 	var/helpful_hints
-	///if we have a secondary name some do if you want to hide the ugly info
-	var/secondary_name
 	///typepath of our output if set we also make this item. this is for nonliquids
 	var/atom/brewed_item
 	///amount of brewed items. this is used with brewed_item
 	var/brewed_item_count = 1
 	///the reagent we get at different age times
 	var/list/age_times = list()
+	var/age_start_time
 	///the heat we need to be kept at
 	var/heat_required
 	///The verb (gerund) that is displayed when starting the recipe
@@ -42,29 +41,32 @@
 /datum/brewing_recipe/proc/after_finish_interact(mob/living/user, obj/item/attacked_item, atom/source)
 	if(!istype(attacked_item, /obj/item/bottle_kit))
 		return FALSE
-	var/name_to_use = secondary_name ? secondary_name : name
+	var/name_to_use = get_display_name()
 	user.visible_message(span_info("[user] begins bottling [LOWER_TEXT(name_to_use)]."))
 	if(!do_after(user, 5 SECONDS, source))
 		return FALSE
 	return TRUE
 
-/datum/brewing_recipe/proc/create_items(mob/user, obj/item/attacked_item, atom/source, number_of_repeats)
-	var/obj/structure/fermentation_keg/source_keg = source
+/datum/brewing_recipe/proc/get_display_name(lowertext = TRUE)
+	return lowertext ? LOWER_TEXT(name) : name
+
+/datum/brewing_recipe/proc/create_items(mob/user, obj/item/attacked_item, obj/structure/fermentation_keg/source_keg, number_of_repeats)
 	var/obj/item/bottle_kit/bottle_kit = attacked_item
-	var/bottle_name = secondary_name ? "[LOWER_TEXT(secondary_name)]" : "[LOWER_TEXT(name)]"
 
 	// Calculate quality for the brewed reagents using the improved system
 	var/calculated_quality = calculate_brewing_quality(user, source_keg)
+	var/datum/reagent/reagent_to_bottle = get_aged_product(source_keg.age_start_time)
+	var/bottle_name = LOWER_TEXT(reagent_to_bottle.name)
 
 	for(var/i in 1 to (brewed_amount * number_of_repeats))
-		var/obj/item/reagent_containers/glass/bottle/brewing_bottle/bottle_made = new /obj/item/reagent_containers/glass/bottle/brewing_bottle(get_turf(source))
+		var/obj/item/reagent_containers/glass/bottle/brewing_bottle/bottle_made = new /obj/item/reagent_containers/glass/bottle/brewing_bottle(get_turf(source_keg))
 		bottle_made.icon_state = "[bottle_kit.glass_colour]"
 		bottle_made.name = "brewer's bottle of [bottle_name]"
 		bottle_made.desc = "A bottle of locally-brewed [SSmapping.config.map_name] [bottle_name]."
 
 		// Add reagent with quality
 		var/list/quality_data = list("quality" = calculated_quality)
-		bottle_made.reagents.add_reagent(reagent_to_brew, per_brew_amount, quality_data)
+		bottle_made.reagents.add_reagent(reagent_to_bottle, per_brew_amount, quality_data)
 
 		// Apply quality effects using the quality calculator
 		apply_brewing_quality_effects(bottle_made, user, source_keg, calculated_quality)
@@ -81,14 +83,12 @@
  */
 /datum/brewing_recipe/proc/apply_brewing_quality_effects(obj/item/bottle, mob/user, obj/structure/fermentation_keg/keg, quality)
 	// Get brewing skill for the quality calculator
-	var/brewing_skill = 0
-	if(user.mind)
-		brewing_skill = GET_MOB_SKILL_VALUE_OLD(user, brewing_skill) + user.get_inspirational_bonus() || 0
+	var/actual_brewing_skill = GET_MOB_SKILL_VALUE_OLD(user, brewing_skill) + user.get_inspirational_bonus() || 0
 
 	// Create quality calculator with the calculated quality
 	var/datum/quality_calculator/brewing/brew_calc = new(
 		mat_qual = quality,
-		skill_qual = brewing_skill,
+		skill_qual = actual_brewing_skill,
 		components = 1,
 		fresh = 0, // Freshness already factored into quality calculation
 		recipe_mod = quality_modifier
@@ -162,5 +162,17 @@
 	var/final_quality = brew_calc.calculate_final_quality()
 	qdel(brew_calc)
 
-	return CLAMP(final_quality, COOK_QUALITY_NORMAL, COOK_QUALITY_VERYGOOD)
+	return final_quality
 
+/// Return path of the aged reagent based on age_start_time
+/datum/brewing_recipe/proc/get_aged_product(age_start_time)
+	var/datum/reagent/new_brewed_reagent = reagent_to_brew
+	if(!length(age_times))
+		return new_brewed_reagent
+	var/time = world.time - age_start_time
+	var/oldest_brew_age = 0
+	for(var/path in age_times)
+		if(time > age_times[path] && age_times[path] >= oldest_brew_age)
+			new_brewed_reagent = path
+			oldest_brew_age = age_times[path]
+	return new_brewed_reagent

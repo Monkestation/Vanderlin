@@ -9,7 +9,7 @@
 
 	body_parts_covered = GROIN|LEGS
 	resistance_flags = FLAMMABLE
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 	prevent_crits = list(BCLASS_LASHING)
 	permeability_coefficient = 0.9
 	slot_flags = ITEM_SLOT_PANTS

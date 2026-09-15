@@ -1,6 +1,6 @@
 /mob/living/simple_animal/hostile/retaliate/fae/sprite
-	icon = 'icons/mob/summonable/32x32.dmi'
 	name = "sprite"
+	icon = 'icons/mob/summonable/32x32.dmi'
 	icon_state = "sprite"
 	icon_living = "sprite"
 	icon_dead = "vvd"
@@ -14,7 +14,7 @@
 	move_to_delay = 3
 	base_intents = list(/datum/intent/unarmed/claw)
 	butcher_results = list()
-	faction = list("fae")
+	faction = list(FACTION_FAE)
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 50
 	maxHealth = 50

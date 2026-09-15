@@ -31,7 +31,7 @@ SUBSYSTEM_DEF(job)
 /datum/controller/subsystem/job/proc/SetupOccupations()
 	all_occupations = list()
 	joinable_occupations = list()
-	var/list/all_jobs = subtypesof(/datum/job)
+	var/list/all_jobs = sortList(subtypesof(/datum/job), GLOBAL_PROC_REF(cmp_typepaths_asc))
 	if(!length(all_jobs))
 		to_chat(world, span_boldannounce("Error setting up jobs, no job datums found."))
 		to_chat(world, span_boldannounce("You should start panicking."))
@@ -663,6 +663,7 @@ SUBSYSTEM_DEF(job)
 	SEND_SIGNAL(equipping, COMSIG_HUMAN_JOB_RECEIVED, job)
 
 	equipping.mind?.set_assigned_role(job)
+	equipping.set_faction(job.factions)
 	job.pre_outfit_equip(equipping, player_client) // sigh
 	equipping.on_job_equipping(job)
 	addtimer(CALLBACK(job, TYPE_PROC_REF(/datum/job, greet), equipping), 5 SECONDS) //TODO: REFACTOR OUT

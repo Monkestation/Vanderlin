@@ -55,7 +55,13 @@
 		TRAIT_DUALWIELDER,
 		TRAIT_FOREIGNER,
 		TRAIT_RECOGNIZED,
+		TRAIT_CLOSECOMBAT,
 	)
+
+	spells = list(
+		/datum/action/innate/clench_fists
+	)
+
 /datum/job/advclass/puritan/preceptor/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	GLOB.inquisition.add_member_to_position(spawned, GLOB.inquisition.benetarus, 100)
@@ -92,5 +98,5 @@
 	gloves = /obj/item/clothing/gloves/bandages/pugilist
 	neck = /obj/item/clothing/neck/psycross/gold
 	wrists = /obj/item/clothing/wrists/bracers/preceptor
-	ring = /obj/item/clothing/ring/signet
+	ring = /obj/item/clothing/ring/signet/psy/g
 

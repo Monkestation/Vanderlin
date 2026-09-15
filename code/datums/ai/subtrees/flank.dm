@@ -66,8 +66,9 @@
 	var/cached_angle = controller.blackboard[BB_HUMAN_NPC_FLANK_ANGLE]
 	var/turf/flank_turf = controller.blackboard[BB_HUMAN_NPC_FLANK_TARGET]
 
-	// Recalculate if our angle has shifted more than 30 degrees or we have no turf
-	if(isnull(cached_angle) || abs(cached_angle - my_angle) > 30 || QDELETED(flank_turf))
+	var/angle_diff = abs(cached_angle - my_angle)
+	angle_diff = min(angle_diff, 360 - angle_diff)
+	if(isnull(cached_angle) || angle_diff > 30 || QDELETED(flank_turf))
 		var/fx = round(target_turf.x + FLANK_RADIUS * cos(my_angle))
 		var/fy = round(target_turf.y + FLANK_RADIUS * sin(my_angle))
 		flank_turf = locate(clamp(fx, 1, world.maxx), clamp(fy, 1, world.maxy), target_turf.z)
@@ -81,13 +82,11 @@
 		controller.set_blackboard_key(BB_HUMAN_NPC_FLANK_TARGET, flank_turf)
 
 	if(get_dist(pawn, flank_turf) <= FLANK_ENGAGE_DIST)
-		// We're in position. Occasionally fire an attack, otherwise just hold.
 		if(prob(FLANK_ATTACK_CHANCE))
 			controller.clear_blackboard_key(BB_HUMAN_NPC_FLANK_TARGET)
-			return
-		// Hold position, face target, look threatening
+			controller.clear_blackboard_key(BB_HUMAN_NPC_FLANK_ANGLE)
 		pawn.face_atom(target)
-		return SUBTREE_RETURN_FINISH_PLANNING
+		return
 	controller.queue_behavior(/datum/ai_behavior/human_npc_move_to_flank, BB_HUMAN_NPC_FLANK_TARGET, BB_BASIC_MOB_CURRENT_TARGET)
 	return SUBTREE_RETURN_FINISH_PLANNING
 

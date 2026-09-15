@@ -49,6 +49,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/manage_paintings,
 	/client/proc/ShowAllFamilies,
 	/datum/admins/proc/anoint_priest,
+	/client/proc/scan_health,
 	)
 GLOBAL_LIST_INIT(admin_verbs_admin, world.AVerbsAdmin())
 GLOBAL_PROTECT(admin_verbs_admin)
@@ -130,6 +131,7 @@ GLOBAL_PROTECT(admin_verbs_admin)
 	/client/proc/resetasaycolor,
 	/client/proc/set_personal_admin_ooc_color,
 	/client/proc/reset_personal_admin_ooc_color,
+	/client/proc/lobbyooc,
 	/client/proc/set_ghost_sprite,
 	/client/proc/set_ui_theme,
 	/client/proc/toggleadminhelpsound,

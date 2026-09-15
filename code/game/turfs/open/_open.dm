@@ -116,8 +116,6 @@
 		C.Knockdown(knockdown_amount)
 		C.Paralyze(paralyze_amount)
 		C.stop_pulling()
-	else
-		C.Knockdown(1)
 
 	if(buckled_obj)
 		buckled_obj.unbuckle_mob(C)

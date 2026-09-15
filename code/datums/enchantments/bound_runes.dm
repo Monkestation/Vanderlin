@@ -1,4 +1,3 @@
-
 /datum/enchantment/binding_runes
 	enchantment_name = "Binding Runes"
 	examine_text = "Strange engravings cover this, it would be unwise to put it on."
@@ -26,5 +25,5 @@
 	var/atom/real_enchanter = enchanter.resolve()
 	if(!real_enchanter)
 		return COMPONENT_ITEM_BLOCK_UNEQUIP
-	if(source != real_enchanter)
+	if(usr != real_enchanter)
 		return COMPONENT_ITEM_BLOCK_UNEQUIP

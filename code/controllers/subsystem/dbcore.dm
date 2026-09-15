@@ -239,6 +239,10 @@ SUBSYSTEM_DEF(dbcore)
 	last_error = error
 
 /datum/controller/subsystem/dbcore/proc/NewQuery(sql_query, arguments, db)
+	if(IsAdminAdvancedProcCall())
+		log_admin_private("ERROR: Advanced admin proc call led to sql query: [sql_query]. Query has been blocked")
+		message_admins("ERROR: Advanced admin proc call led to sql query. Query has been blocked")
+		return FALSE
 	if(!db)
 		return new /datum/DBQuery(connection, sql_query, arguments)
 	else

@@ -77,6 +77,26 @@ GLOBAL_VAR_INIT(year_integer, text2num(year)) // = 2013???
 			else
 				usr.visible_message(span_notice("[usr] rips [subject] out of [src]'s [L.name]!"), span_notice("I successfully remove [subject] from [src]'s [L.name]."))
 
+	if(href_list["tourniquet"] && usr.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		var/obj/item/bodypart/L = locate(href_list["tourniquet_limb"]) in bodyparts
+		if(!L)
+			return
+		var/obj/item/I = L.tourniquet
+		if(!I)
+			return
+		var/mob/living/carbon/human/human = usr
+		human.do_remove_tourniquet(L)
+
+	if(href_list["splint"] && usr.can_perform_action(src, FORBID_TELEKINESIS_REACH))
+		var/obj/item/bodypart/L = locate(href_list["splint_limb"]) in bodyparts
+		if(!L)
+			return
+		var/obj/item/I = L.splint_item
+		if(!I)
+			return
+		var/mob/living/carbon/human/human = usr
+		human.do_remove_splint(L)
+
 	if(href_list["bandage"] && usr.can_perform_action(src, FORBID_TELEKINESIS_REACH))
 		var/obj/item/bodypart/L = locate(href_list["bandaged_limb"]) in bodyparts
 		if(!L)

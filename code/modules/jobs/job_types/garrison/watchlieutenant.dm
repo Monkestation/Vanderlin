@@ -58,7 +58,7 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CITYWATCHMEN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -68,12 +68,14 @@
 	outfit = /datum/outfit/lieutenant
 	give_bank_account = 50
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatGarrison.ogg'
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted  = list(EXP_TYPE_COMBAT, EXP_TYPE_GARRISON, EXP_TYPE_LEADERSHIP)
 	exp_requirements = list(EXP_TYPE_GARRISON = 900)
 	honorary = "Lieutenant"
 	job_bitflag = BITFLAG_GARRISON
+	starting_wage = 35
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/lieutenant
 

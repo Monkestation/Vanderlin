@@ -126,11 +126,13 @@
 	. = ..()
 	C.grant_language(/datum/language/celestial)
 	to_chat(C, "<span class='info'>I can speak Celestial with ,c before my speech.</span>")
+	C.add_spell(/datum/action/cooldown/spell/undirected/eternal_vigilance)
 
 /datum/species/aasimar/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/celestial)
+	C.remove_spell(/datum/action/cooldown/spell/undirected/eternal_vigilance)
 
 /datum/species/aasimar/qualifies_for_rank(rank, list/features)
 	return TRUE

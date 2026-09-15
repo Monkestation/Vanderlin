@@ -5,13 +5,12 @@
 	You're just some average poor bastard who thinks they'll be something someday."
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_FOREIGNERS
+	factions = list(FACTION_FOREIGNERS)
 	total_positions = 0
 	spawn_positions = 0
 	banned_leprosy = FALSE
 	bypass_lastclass = TRUE
 
-	advclass_cat_rolls = list(CTAG_TOWNER = 20)
 	allowed_races = RACES_PLAYER_ALL
 	can_be_apprentice = TRUE
 
@@ -20,20 +19,21 @@
 
 	give_bank_account = TRUE
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
-/datum/job/villager/after_spawn(mob/living/carbon/spawned, client/player_client)
-	..()
+/datum/job/villager/setup_known_people()
+	for(var/job in jobs_always_know_me)
+		jobs_i_know |= job
+		jobs_that_know_me |= job
 
-/datum/job/villager/New()
-	. = ..()
 	for(var/X in GLOB.peasant_positions)
-		peopleiknow += X
-		peopleknowme += X
+		jobs_i_know |= X
+		jobs_that_know_me |= X
 	for(var/X in GLOB.serf_positions)
-		peopleiknow += X
+		jobs_i_know |= X
 	for(var/X in GLOB.church_positions)
-		peopleiknow += X
+		jobs_i_know |= X
 	for(var/X in GLOB.garrison_positions)
-		peopleiknow += X
+		jobs_i_know |= X
 	for(var/X in GLOB.noble_positions)
-		peopleiknow += X
+		jobs_i_know |= X

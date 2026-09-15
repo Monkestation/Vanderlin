@@ -317,6 +317,16 @@
 	result_type = /turf/open/floor/tile/masonic/spiral
 	craftdiff = 3
 
+/datum/blueprint_recipe/floor/masonic/moondark
+	name = "Dark Moon Masonic Tile"
+	result_type = /turf/open/floor/tile/masonic/moondark
+	craftdiff = 3
+
+/datum/blueprint_recipe/floor/masonic/moonbw
+	name = "Black and White Moon Masonic Tile"
+	result_type = /turf/open/floor/tile/masonic/moonbw
+	craftdiff = 3
+
 /datum/blueprint_recipe/floor/masonic/full
 	name = "Masonic White Tile"
 	result_type = /turf/open/floor/tile/masonic/full

@@ -21,7 +21,7 @@
 	department_flag = YOUNGFOLK
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_INNKEEP_CHILD
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -29,6 +29,7 @@
 	allowed_ages = list(AGE_CHILD)
 	allowed_races = RACES_PLAYER_ALL
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	outfit = /datum/outfit/innkeep_son
 	can_have_apprentices = FALSE

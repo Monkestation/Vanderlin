@@ -73,14 +73,11 @@ export const RecipeBook = (props: any, context: any) => {
   };
 
   return (
-    <Window title={book_name} width={820} height={600}>
+    <Window title={book_name} width={820} height={640}>
       <Window.Content>
         <Box style={{ position: 'relative', width: '100%', height: '568px', display: 'flex' }}>
           <Sidebar recipes={recipes} lookup={recipeLookup} selectedRecipe={selectedRecipe} onSelect={handleSelect} />
-          <Box style={{ flex: 1, height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', background: `
-              radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px),
-              radial-gradient(rgba(0,0,0,0.02) 2px, transparent 2px),
-              linear-gradient(to bottom, #efe2c1, #ddcda7)`, backgroundSize: '4px 4px, 8px 8px, 100% 100%',}}>
+          <Box style={{ flex: 1, height: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', background: 'var(--rb-bg)' }}>
             {selectedRecipe ? (
               <RecipeDetail
                 recipe={selectedRecipe}

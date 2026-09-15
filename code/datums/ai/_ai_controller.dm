@@ -284,6 +284,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 /datum/ai_controller/proc/should_idle()
 	if(!can_idle || isnull(our_cells))
 		return FALSE
+	if(current_movement_target && isliving(current_movement_target))
+		return FALSE
 	for(var/datum/spatial_grid_cell/grid as anything in our_cells.member_cells)
 		if(locate(/mob/living) in grid.client_contents)
 			return FALSE
@@ -454,7 +456,6 @@ have ways of interacting with a specific atom and control it. They posses a blac
 			stack_trace("[pawn]'s current movement target is not an atom, rather a [current_movement_target.type]! Did you accidentally set it to a weakref?")
 			CancelActions()
 			return
-
 		if(get_dist_3d(pawn, current_movement_target) > max_target_distance) //The distance is out of range
 			CancelActions()
 			return

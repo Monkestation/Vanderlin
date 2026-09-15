@@ -353,16 +353,6 @@
 /obj/item/weapon/tongs,
 /turf/open/floor/cobble,
 /area/indoors)
-"ba" = (
-/obj/structure/table/wood{
-	icon_state = "tablewood2";
-	dir = 10
-	},
-/obj/item/clothing/head/helmet,
-/obj/item/clothing/head/helmet,
-/obj/item/clothing/head/helmet,
-/turf/open/floor/carpet,
-/area/indoors)
 "bb" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood2";
@@ -405,18 +395,6 @@
 	},
 /obj/item/clothing/ring/active/nomag,
 /obj/item/clothing/ring/active/nomag,
-/turf/open/floor/carpet,
-/area/indoors)
-"bh" = (
-/obj/structure/table/wood{
-	icon_state = "tablewood2";
-	dir = 10
-	},
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
-/obj/item/clothing/shoes/boots,
 /turf/open/floor/carpet,
 /area/indoors)
 "bi" = (
@@ -1445,6 +1423,12 @@
 /obj/structure/closet/crate/miningcar,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"kc" = (
+/obj/structure/stairs/stone{
+	dir = 1
+	},
+/turf/open/floor/church/gold,
+/area/indoors/town/keep)
 "ki" = (
 /obj/structure/rotation_piece/cog{
 	dir = 4
@@ -1626,6 +1610,18 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep)
+"oM" = (
+/obj/structure/table/wood{
+	icon_state = "tablewood2";
+	dir = 10
+	},
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/obj/item/clothing/shoes/boots/darkboots,
+/turf/open/floor/carpet,
+/area/indoors)
 "oZ" = (
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/church/gold,
@@ -1675,6 +1671,16 @@
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
 /area/outdoors)
+"qg" = (
+/obj/structure/table/wood{
+	icon_state = "tablewood2";
+	dir = 10
+	},
+/obj/item/clothing/head/helmet/kettle,
+/obj/item/clothing/head/helmet/kettle,
+/obj/item/clothing/head/helmet/kettle,
+/turf/open/floor/carpet,
+/area/indoors)
 "qi" = (
 /obj/structure/hotspring/border/five,
 /turf/open/floor/dirt/road,
@@ -2120,6 +2126,10 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
+"yH" = (
+/obj/effect/mapping_helpers/broodmother_entry,
+/turf/closed/mineral/bedrock,
+/area/outdoors)
 "yM" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = 11
@@ -21578,7 +21588,7 @@ Zv
 Zv
 Zv
 Zv
-Zv
+kc
 zg
 Wr
 Wr
@@ -21840,7 +21850,7 @@ lR
 Wr
 ai
 Wr
-at
+yH
 as
 as
 as
@@ -74534,7 +74544,7 @@ aK
 aN
 aR
 aW
-ba
+qg
 bf
 bi
 bl
@@ -76077,7 +76087,7 @@ aP
 aS
 aY
 bc
-bh
+oM
 bk
 aD
 ax

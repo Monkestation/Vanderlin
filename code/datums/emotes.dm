@@ -43,8 +43,6 @@
 	var/runechat_msg = null
 
 /datum/emote/New()
-	if(!runechat_msg)
-		runechat_msg = strip_punctuation(message)
 	if (ispath(mob_type_allowed_typecache))
 		switch (mob_type_allowed_typecache)
 			if (/mob)
@@ -86,6 +84,7 @@
 	if(!msg && nomsg == FALSE)
 		return
 
+	var/msg_for_runechat = msg
 	if(!nomsg)
 		user.log_message(msg, LOG_EMOTE)
 		msg = "<b>[user]</b> " + msg
@@ -114,7 +113,7 @@
 				M.show_message(msg)
 		var/runechat_msg_to_use = null
 		if(show_runechat && !(emote_type & EMOTE_AUDIBLE))
-			runechat_msg_to_use = runechat_msg ? runechat_msg : raw_msg
+			runechat_msg_to_use = runechat_msg ? runechat_msg : msg_for_runechat
 		if(emote_type & EMOTE_AUDIBLE)
 			user.audible_message(msg, runechat_message = runechat_msg_to_use)
 		else
@@ -294,11 +293,13 @@
 	if(emote_type & EMOTE_AUDIBLE && !hands_use_check)
 		if(HAS_TRAIT(user, TRAIT_MUTE))
 			return FALSE
-		if(ishuman(user))
-			var/mob/living/carbon/human/loud_mouth = user
-			if(!loud_mouth.getorganslot(ORGAN_SLOT_TONGUE))
-				return FALSE
+		if(iscarbon(user))
+			var/mob/living/carbon/loud_mouth = user
+			if(!HAS_TRAIT(loud_mouth, TRAIT_NO_ORGAN_PROCESS) && loud_mouth.dna?.species?.organs[ORGAN_SLOT_TONGUE]) // we dont need a tongue to speak
+				if(!loud_mouth.getorganslot(ORGAN_SLOT_TONGUE))
+					return FALSE
 
 	if(only_forced_audio && intentional)
 		return FALSE
+
 	return TRUE

@@ -201,7 +201,7 @@
 /mob/living/proc/getFireLoss()
 	return fireloss
 
-/mob/living/proc/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE)
+/mob/living/proc/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, intense = FALSE)
 	if(!forced && (status_flags & GODMODE))
 		return FALSE
 	fireloss = CLAMP((fireloss + (amount * CONFIG_GET(number/damage_multiplier))), 0, maxHealth * 2)
@@ -343,6 +343,13 @@
  * @return TRUE if defense successful, FALSE otherwise
  */
 /mob/living/proc/checkdefense(datum/intent/intenty, mob/living/user)
+	// We check for a disruptable swingdelay first.
+	var/datum/status_effect/swingdelay/disrupt/SW = has_status_effect(/datum/status_effect/swingdelay/disrupt)
+	if(SW && !SW.is_disrupted())
+		SW.attacked()
+		swing_state = FALSE
+		return FALSE
+
 	if(!cmode || stat || (HAS_TRAIT(src, TRAIT_UNPARRYING) && HAS_TRAIT(src, TRAIT_UNDODGING)) || user == src || HAS_TRAIT(src, TRAIT_IMMOBILIZED))
 		return FALSE
 	if(client && used_intent && client.charging && used_intent.tranged && !used_intent.tshield)

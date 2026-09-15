@@ -14,18 +14,17 @@
 	H.accent = value
 
 /datum/preference/choiced/selected_accent/handle_link(datum/preferences/prefs, mob/user)
-	var/list/available = list()
-	available["Species Accent"] = ACCENT_DEFAULT
+	var/list/available = list(ACCENT_DEFAULT)
 
 	if(length(prefs.pref_species.multiple_accents))
 		for(var/accent_name in prefs.pref_species.multiple_accents)
-			available[accent_name] = prefs.pref_species.multiple_accents[accent_name]
+			available |= accent_name
 
 	var/culture_type = prefs.read_preference(/datum/preference/choiced/culture)
 	if(culture_type)
 		var/datum/culture/culture_datum = GLOB.culture_singletons[culture_type]
 		if(culture_datum && culture_datum.accent)
-			available["[culture_datum.name] Accent"] = culture_datum.accent
+			available |= culture_datum.accent
 
 	if(length(available) > 1)
 		prefs.change_accent = TRUE
@@ -39,12 +38,12 @@
 	var/accent
 	if(prefs.donator)
 		for(var/accent_name in GLOB.accent_list)
-			available[accent_name] = GLOB.accent_list[accent_name]
+			available |= accent_name
 		accent = browser_input_list(user, "CHOOSE YOUR HERO'S ACCENT", "VOICE OF THE WORLD", available, prefs.read_preference(/datum/preference/choiced/selected_accent))
 		if(accent)
-			prefs.write_preference(/datum/preference/choiced/selected_accent, available[accent])
+			prefs.write_preference(/datum/preference/choiced/selected_accent, accent)
 	else if(prefs.change_accent)
 		accent = browser_input_list(user, "CHOOSE YOUR HERO'S ACCENT", "VOICE OF THE WORLD", available, prefs.read_preference(/datum/preference/choiced/selected_accent))
 		if(accent)
-			prefs.write_preference(/datum/preference/choiced/selected_accent, available[accent])
+			prefs.write_preference(/datum/preference/choiced/selected_accent, accent)
 

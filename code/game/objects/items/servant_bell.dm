@@ -64,6 +64,7 @@
 		return ITEM_INTERACT_BLOCKING
 
 	var/mob/living/carbon/human/H = interacting_with
+
 	if(!H.mind)
 		return ITEM_INTERACT_BLOCKING
 
@@ -243,3 +244,4 @@
 	name = "Servant Bell"
 	desc = "I've been summoned by the bell."
 	icon_state = "servant_bell"
+

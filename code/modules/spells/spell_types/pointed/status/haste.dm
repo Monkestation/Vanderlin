@@ -2,13 +2,9 @@
 	name = "Haste"
 	desc = "Cause a target to be magically hastened."
 	button_icon_state = "haste"
-	point_cost = 2
 	sound = 'sound/magic/haste.ogg'
 
-	attunements = list(
-		/datum/attunement/aeromancy = 0.5,
-	)
-	school = SCHOOL_TRANSMUTATION
+	required_form = FORM_EARTH
 
 	charge_time = 2 SECONDS
 	charge_slowdown = 0.3

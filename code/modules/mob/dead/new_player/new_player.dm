@@ -325,6 +325,8 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 			return "Your account is not old enough for [jobtitle]."
 		if(JOB_UNAVAILABLE_LASTCLASS)
 			return "You have played [jobtitle] recently."
+		if(JOB_UNAVAILABLE_WHITELIST)
+			return "[jobtitle] is whitelisted."
 		if(JOB_UNAVAILABLE_JOB_COOLDOWN)
 			if(usr.ckey in GLOB.job_respawn_delays)
 				var/next_respawn_time = GLOB.job_respawn_delays[usr.ckey]
@@ -416,7 +418,10 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 		return JOB_UNAVAILABLE_LASTCLASS
 
 	if((job.job_flags & JOB_REQUIRE_WHITELIST) && !client?.is_whitelisted(initial(job.title)))
-		return JOB_UNAVAILABLE_GENERIC
+		return JOB_UNAVAILABLE_WHITELIST
+
+	if(length(job.whitelisted_ckeys) && !(ckey in job.whitelisted_ckeys))
+		return JOB_UNAVAILABLE_WHITELIST
 
 	return JOB_AVAILABLE
 
@@ -503,6 +508,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 		GLOB.youngfolk_positions,
 		GLOB.allmig_positions,
 		GLOB.inquisition_positions,
+		GLOB.admin_special_positions,
 	)
 
 	for(var/list/category in omegalist)
@@ -547,6 +553,8 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 					cat_name = "Outsiders"
 				if (INQUISITION)
 					cat_name = "Inquisition"
+				if (ADMIN_SPECIAL)
+					cat_name = "SPECIAL"
 
 			dat += "<fieldset style='width: 185px; border: 2px solid [cat_color]; display: inline'>"
 			dat += "<legend align='center' style='font-weight: bold; color: [cat_color]'>[cat_name]</legend>"

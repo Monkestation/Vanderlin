@@ -5,10 +5,7 @@
 	sound = 'sound/magic/gravity.ogg'
 	self_cast_possible = FALSE
 	spell_flags = SPELL_RITUOS
-	point_cost = 2
-	attunements = list(
-		/datum/attunement/dark = 0.6,
-	)
+	required_form = FORM_AIR
 
 	//https://www.youtube.com/watch?v=MfK3Ygb7Jzk
 	invocation = "Fall."

@@ -210,7 +210,7 @@
 	nutrition = BERRYPIE_NUTRITION * COOK_MOD * SLICED_MOD
 
 /obj/item/reagent_containers/food/snacks/pieslice/good/berry/poison
-	list_reagents = list(/datum/reagent/berrypoison = 3)
+	list_reagents = list(/datum/reagent/poison/berry = 3)
 
 /obj/item/reagent_containers/food/snacks/pieslice/good/blackberry
 	icon_state = "blackberrypie_slice"
@@ -302,7 +302,7 @@
 	nutrition = BERRYPIE_NUTRITION * COOK_MOD
 
 /obj/item/reagent_containers/food/snacks/pie/cooked/berry/poison
-	list_reagents = list(/datum/reagent/berrypoison = 12)
+	list_reagents = list(/datum/reagent/poison/berry = 12)
 
 /obj/item/reagent_containers/food/snacks/pie/cooked/berry/good
 	eat_effect = /datum/status_effect/buff/foodbuff

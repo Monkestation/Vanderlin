@@ -486,7 +486,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		var/id = href_list["chosen_job_edit"]
 		var/datum/job/custom_job/J = GLOB.custom_jobs[id]
 		if(J)
-			J.faction = href_list["new_faction"]
+			J.factions = list(href_list["new_faction"])
 			edit_job(usr, J)
 	else if(href_list["update_job_outfit"])
 		var/id = href_list["chosen_job_edit"]
@@ -880,7 +880,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 	var/list/dat = list("<html><body>")
 	dat += "<h2>Job Title: [J.title]</h2>"
 	dat += "<b>Tutorial</b><br><pre style='white-space:pre-wrap;'>[J.tutorial]</pre>"
-	dat += "<h3>Faction:</h3> [J.faction]<br>"
+	dat += "<h3>Faction:</h3> [J.factions[1]]<br>"
 	dat += "<h3>Outfit:</h3> [J.outfit]<br>"
 	dat += "<h3>Custom Combat Song:</h3>"
 	if(J.cmode_music)
@@ -1241,7 +1241,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 
 	J.title = href_list["job_title"]
 	J.tutorial = href_list["job_tutorial"]
-	J.faction = href_list["job_faction"]
+	J.factions = list(href_list["job_faction"])
 
 
 	var/antag_enabled = text2num(href_list["job_enabled_antag"])
@@ -1383,7 +1383,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 				var new_faction = this.value;
 				window.location.href = \"byond://?src=[REF(src)];[HrefToken()];update_job_faction=1;chosen_job_edit=[J.id];new_faction=\" + encodeURIComponent(new_faction);
 			'>
-				[generate_options(factions_list, J.faction)]
+				[generate_options(factions_list, J.factions[1])]
 			</select>
 		</td></tr>
 		<tr><th>Outfit:</th>

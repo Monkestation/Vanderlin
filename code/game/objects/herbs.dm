@@ -37,7 +37,7 @@
 		user.changeNext_move(CLICK_CD_MELEE)
 		playsound(src, "plantcross", 80, FALSE, -1)
 		if(do_after(L, rand(3,5) DECISECONDS ,src))
-			if(!looty.len)
+			if(!LAZYLEN(looty))
 				return
 			if(prob(50))
 				var/obj/item/B = pick_n_take(looty)
@@ -57,7 +57,7 @@
 	if(!(can_replenish || forced))
 		return
 	if(herbtype)
-		looty += herbtype
+		LAZYADD(looty, herbtype)
 	harvested = FALSE
 	remove_filter("picked")
 	GLOB.harvested_herbs -= src

@@ -6,6 +6,9 @@
 	spell_cost = 25
 	cast_range = 4
 	charge_required = FALSE
+	heretical_spell = TRUE
+
+	required_form = FORM_DEATH
 
 /datum/action/cooldown/spell/gravemark/is_valid_target(atom/cast_on)
 	. = ..()

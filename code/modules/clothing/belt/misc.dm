@@ -30,7 +30,7 @@
 
 	populate_contents = list(
 		/obj/item/reagent_containers/glass/bottle/poison,
-		/obj/item/weapon/knife/dagger/steel/profane,
+		/obj/item/weapon/knife/dagger/steel/inhumen/profane,
 		/obj/item/lockpick,
 	)
 
@@ -219,6 +219,7 @@
 	component_type = /datum/component/storage/concrete/grid/coin_pouch
 	grid_height = 64
 	grid_width = 32
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/storage/belt/pouch/medicine
 	populate_contents = list(
@@ -408,7 +409,7 @@
 
 /obj/item/storage/backpack/backpack/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/storage/backpack/backpack/artibackpack
 	name = "cooling backpack"
@@ -448,6 +449,7 @@
 		/obj/item/reagent_containers/syringe,
 	)
 	component_type = /datum/component/storage/concrete/grid/surgery_bag
+	pickpocket_difficulty = SKILL_LEVEL_MASTER
 
 /obj/item/surgeontoolspawner
 	name = "set of surgery tools"

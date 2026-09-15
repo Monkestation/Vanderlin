@@ -12,7 +12,6 @@ abstract types are automatically excluded.
 		/obj/item/clothing/head/peaceflower, // spawns naturally
 		/obj/item/clothing/head/corruptflower, // spawns naturally
 		/obj/item/clothing/face/facemask/steel/harlequin, // antag only
-		/obj/item/clothing/shirt/robe/necromancer, // antag
 		/obj/item/clothing/shirt/robe/priest, // unattainable
 		/obj/item/clothing/head/padded/deathface, // ???
 		/obj/item/clothing/head/roguehood/priest, // unattainable
@@ -22,10 +21,8 @@ abstract types are automatically excluded.
 		/obj/item/clothing/face/phys/plaguebearer, //Plague Only
 		/obj/item/clothing/ring/feldsher_ring, // uncraftable
 		/obj/item/clothing/ring/apothecary_ring, // uncraftable
-		/obj/item/clothing/ring/courtagent_ring, //uncraftable
 		/obj/item/clothing/head/maniac,
 		/obj/item/clothing/cloak/half/shadowcloak/cult, // cultist item
-		/obj/item/clothing/head/helmet/skullcap/cult, // cultist item
 		/obj/item/clothing/head/helmet/leather/saiga, // idk what kind of recipe to make this
 		/obj/item/clothing/neck/mana_star, // todo?
 		/obj/item/clothing/neck/gorget/explosive, // Inq shop only
@@ -158,6 +155,7 @@ abstract types are automatically excluded.
 		/obj/item/clothing/shirt/robe/kimono, //these are mob holders only
 		/obj/item/clothing/armor/regenerating, ///uh no
 		/obj/item/clothing/head/inqarticles, //inqports
+		/obj/item/clothing/ring/courtagent_ring, //uncraftable
 	)
 
 	/// excludes paths that are subtypes of these types and only subtypes

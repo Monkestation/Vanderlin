@@ -24,7 +24,7 @@
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MERCHANT
 	is_quest_giver = TRUE
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -34,6 +34,7 @@
 	outfit = /datum/outfit/merchant
 	give_bank_account = 200
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	exp_type = list(EXP_TYPE_LIVING, EXP_TYPE_MERCHANT_COMPANY)
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
 	exp_requirements = list(

@@ -5,7 +5,7 @@
 	department_flag = OUTSIDERS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_PILGRIM
-	faction = FACTION_FOREIGNERS
+	factions = list(FACTION_FOREIGNERS)
 	total_positions = 20
 	spawn_positions = 20
 	banned_leprosy = FALSE
@@ -30,6 +30,7 @@
 	category_tags = list(CTAG_PILGRIM)
 	spawn_with_torch = TRUE
 	department_flag = OUTSIDERS
+	factions = list(FACTION_FOREIGNERS)
 
 /datum/job/advclass/pilgrim/rare
 	abstract_type = /datum/job/advclass/pilgrim/rare

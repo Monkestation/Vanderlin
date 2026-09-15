@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added forest cloak and forest snow cloak to loadout options."
+  - rscadd: "Added a hood to loadout options."
+  - bugfix: "Fixed pearl necklaces from loadout being free money."

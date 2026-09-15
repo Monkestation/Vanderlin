@@ -5,17 +5,18 @@
 	footstep_type = FOOTSTEP_MOB_METAL
 	job = "Automaton"
 	pronouns = IT_ITS
-	bodyparts = list(/obj/item/bodypart/chest/automaton, /obj/item/bodypart/head/automaton, /obj/item/bodypart/l_arm/automaton,
-					/obj/item/bodypart/r_arm/automaton, /obj/item/bodypart/r_leg/automaton, /obj/item/bodypart/l_leg/automaton)
+	bodyparts = list(
+		/obj/item/bodypart/chest/automaton,
+		/obj/item/bodypart/head/automaton,
+		/obj/item/bodypart/l_arm/automaton,
+		/obj/item/bodypart/r_arm/automaton,
+		/obj/item/bodypart/r_leg/automaton,
+		/obj/item/bodypart/l_leg/automaton,
+		/obj/item/bodypart/mouth, // fuk it they don't get spawned anyways
+	)
 	uses_random_stats = FALSE
 	culture = /datum/culture/universal/heartfelt
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
-
-/mob/living/carbon/human/species/automaton/LateInitialize()
-	. = ..()
-	skin_tone = "FFFFFF"
-	update_body()
-	update_body_parts()
 
 /mob/living/carbon/human/species/automaton/vessel/LateInitialize()
 	. = ..()

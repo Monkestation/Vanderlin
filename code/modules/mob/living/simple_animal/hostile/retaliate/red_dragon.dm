@@ -5,19 +5,18 @@
 /mob/living/simple_animal/hostile/retaliate/voiddragon/red	//subtype for dragon-kobold event, requested by Mario
 	name = "red dragon"
 	desc = "An ancient creature from a bygone age. Now would be a good time to run."
+	icon_state = "dragon_red"
+	icon_living = "dragon_red"
+	icon_dead = "dragon_red_dead_redemption"
 	health = 2500
 	maxHealth = 2500
 	attack_verb_continuous = "gouges"
 	attack_verb_simple = "gouge"
 	attack_sound = 'sound/misc/demon_attack1.ogg'
-	icon_state = "dragon_red"
-	icon_living = "dragon_red"
-	icon_dead = "dragon_red_dead_redemption"
 	speak_emote = list("roars")
 	emote_hear = null
 	emote_see = null
 	base_intents = list(/datum/intent/unarmed/dragonclaw)
-	faction = list("kobold")
 	melee_damage_lower = 40
 	melee_damage_upper = 40
 	retreat_distance = 0
@@ -35,6 +34,5 @@
 /mob/living/simple_animal/hostile/retaliate/voiddragon/red/tsere
 	name = "Tsere the Insurmountable"
 	desc = "Her scales shimmer in the blue light, her form is death, her gaze is wisdom, her wings cut all. This is Tsere... The Insurmountable."
-	faction = list("aberrant")
 	health = 4000
 	maxHealth = 4000

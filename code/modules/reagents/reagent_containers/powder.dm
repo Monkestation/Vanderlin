@@ -80,7 +80,7 @@
 		C.visible_message(span_danger("[user] attempts to force [C] to inhale [src]."), \
 						span_danger("[user] attempts to force me to inhale [src]!"))
 		if(C.cmode)
-			if(!CH.grabbedby)
+			if(!length(CH.grabbedby))
 				to_chat(user, span_info("[C.p_they(TRUE)] steals [C.p_their()] face from it."))
 				return ITEM_INTERACT_BLOCKING
 		if(!do_after(user, 1 SECONDS, M))

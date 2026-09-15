@@ -32,14 +32,14 @@
 	current_blood = 5
 	blood_req = 0.5
 	oxygen_req = 0.5
-	nutriment_req = 0.15
-	hydration_req = 0.15
+	nutriment_req = 0.075
+	hydration_req = 0.075
 
 	var/sight_flags = 0
-	var/see_in_dark = 8
+	var/see_in_dark = SEE_IN_DARK_DEFAULT_EYES
 	/// How much innate tint these eyes have
 	var/tint = 0
-	var/eye_icon_state = "eye"
+	var/eye_icon_state = "eye-right"
 	var/flash_protect = FLASH_PROTECTION_NONE
 	var/see_invisible = SEE_INVISIBLE_LIVING
 	var/lighting_alpha
@@ -80,10 +80,10 @@
 	side = new_side
 	if(side == RIGHT_SIDE)
 		zone = BODY_ZONE_PRECISE_R_EYE
-		eye_icon_state = "[initial(eye_icon_state)]-right"
+		eye_icon_state = "eye-right"
 	else
 		zone = BODY_ZONE_PRECISE_L_EYE
-		eye_icon_state = "[initial(eye_icon_state)]-left"
+		eye_icon_state = "eye-left"
 	if(!owner)
 		current_zone = zone
 	update_appearance()
@@ -99,51 +99,50 @@
 	else
 		eyes_dna.second_color = eye_color
 
-/obj/item/organ/eyes/Insert(mob/living/carbon/M, special = FALSE, drop_if_replaced = FALSE, initialising, new_zone = null)
+/obj/item/organ/eyes/on_mob_insert(mob/living/carbon/organ_owner, special, movement_flags)
 	. = ..()
-
-	var/new_side = (current_zone == BODY_ZONE_PRECISE_L_EYE ? LEFT_SIDE : (current_zone == BODY_ZONE_PRECISE_R_EYE ? RIGHT_SIDE : side))
-	switch_side(new_side)
 
 	// Place this eye in the correct slot of the owner's eye_organs list
 	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
-	M.eye_organs.len = max(length(M.eye_organs), sight_index)
-	M.eye_organs[sight_index] = src
+	organ_owner.eye_organs.len = max(length(organ_owner.eye_organs), sight_index)
+	organ_owner.eye_organs[sight_index] = src
 
 	if(!(owner.status_flags & BUILDING_ORGANS))
 		if(ishuman(owner))
 			var/mob/living/carbon/human/HMN = owner
 			HMN.regenerate_icons()
 
-	M.update_eyes()
-	M.update_tint()
-	owner.update_sight()
-	if(M.has_dna() && ishuman(M))
-		M.dna.species.handle_body(M)
-	if(M.hud_used)
-		var/atom/movable/screen/eye_intent/eyet = locate() in M.hud_used.static_inventory
+	organ_owner.update_eyes()
+	organ_owner.update_tint()
+	organ_owner.update_sight()
+
+	if(organ_owner.has_dna())
+		organ_owner.dna.species.handle_body(organ_owner)
+
+	if(organ_owner.hud_used)
+		var/atom/movable/screen/eye_intent/eyet = locate() in organ_owner.hud_used.static_inventory
 		eyet?.update_appearance(UPDATE_OVERLAYS)
+
+/obj/item/organ/eyes/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+	. = ..()
+
+	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
+	organ_owner.eye_organs[sight_index] = null
+
+	organ_owner.update_eyes()
+	organ_owner.update_sight()
+	organ_owner.update_tint()
+
+	if(ishuman(organ_owner))
+		var/mob/living/carbon/human/HMN = organ_owner
+		HMN.regenerate_icons()
+
+	if(organ_owner.has_dna())
+		organ_owner.dna.species.handle_body(organ_owner)
 
 /obj/item/organ/eyes/handle_attaching_item(obj/item/tool, mob/living/user, params)
 	. = ..()
 	owner.update_eyes()
-
-/obj/item/organ/eyes/Remove(mob/living/carbon/M, special = 0)
-	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
-
-	. = ..()
-
-	M.eye_organs[sight_index] = null
-	M.update_eyes()
-	M.update_sight()
-	M.update_tint()
-
-	if(ishuman(M))
-		var/mob/living/carbon/human/HMN = M
-		HMN.regenerate_icons()
-
-	if(M.has_dna() && ishuman(M))
-		M.dna.species.handle_body(M)
 
 /obj/item/organ/eyes/applyOrganDamage(amount, maximum = maxHealth)
 	. = ..()
@@ -177,8 +176,8 @@
 /obj/item/organ/eyes/night_vision
 	name = "shadow eye"
 	desc = ""
-	see_in_dark = 8
-	lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
+	see_in_dark = SEE_IN_DARK_DARKVISION
+	lighting_alpha = LIGHTING_PLANE_ALPHA_DARKVISION
 	actions_types = list(/datum/action/item_action/organ_action/use)
 	var/night_vision = TRUE
 
@@ -190,11 +189,11 @@
 	sight_flags = initial(sight_flags)
 	switch(lighting_alpha)
 		if (LIGHTING_PLANE_ALPHA_VISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE
-		if (LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE
-		if (LIGHTING_PLANE_ALPHA_MOSTLY_INVISIBLE)
-			lighting_alpha = LIGHTING_PLANE_ALPHA_INVISIBLE
+			lighting_alpha = LIGHTING_NV_EYES_TIER_1
+		if (LIGHTING_NV_EYES_TIER_1)
+			lighting_alpha = LIGHTING_NV_EYES_TIER_2
+		if (LIGHTING_NV_EYES_TIER_2)
+			lighting_alpha = LIGHTING_NV_EYES_TIER_3
 		else
 			lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
 			sight_flags &= ~SEE_BLACKNESS
@@ -247,16 +246,16 @@
 /obj/item/organ/eyes/elf
 	name = "elf eye"
 	desc = ""
-	see_in_dark = 4
-	lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
+	see_in_dark = SEE_IN_DARK_ELVEN_EYES
+	lighting_alpha = LIGHTING_PLANE_ALPHA_ELVEN_EYES
 
 /obj/item/organ/eyes/elf/left
 	zone = BODY_ZONE_PRECISE_L_EYE
 	side = LEFT_SIDE
 
 /obj/item/organ/eyes/elf/less
-	see_in_dark = 3
-	lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
+	see_in_dark = SEE_IN_DARK_HALF_ELVEN_EYES
+	lighting_alpha = LIGHTING_PLANE_ALPHA_HALF_ELVEN_EYES
 
 /obj/item/organ/eyes/elf/less/left
 	zone = BODY_ZONE_PRECISE_L_EYE
@@ -265,8 +264,8 @@
 /obj/item/organ/eyes/kobold
 	name = "slitted eye"
 	accessory_type = /datum/sprite_accessory/eyes/humanoid/kobold
-	see_in_dark = 3
-	lighting_alpha = LIGHTING_PLANE_ALPHA_LESSER_NV_TRAIT
+	see_in_dark = SEE_IN_DARK_DARKVISION
+	lighting_alpha = LIGHTING_PLANE_ALPHA_DARKVISION
 
 /obj/item/organ/eyes/kobold/left
 	zone = BODY_ZONE_PRECISE_L_EYE

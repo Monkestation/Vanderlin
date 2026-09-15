@@ -32,14 +32,14 @@
 
 /obj/item/ammo_casing/caseless/arrow/poison/Initialize(mapload, ...)
 	. = ..()
-	reagents.add_reagent(/datum/reagent/berrypoison, 2)
+	reagents.add_reagent(/datum/reagent/poison/berry, 2)
 
 /obj/item/ammo_casing/caseless/arrow/poison/potent
 	desc = "An arrow with its tip coated in a potent poison."
 
 /obj/item/ammo_casing/caseless/arrow/poison/potent/Initialize(mapload, ...)
 	. = ..()
-	reagents.add_reagent(/datum/reagent/strongpoison, 2)
+	reagents.add_reagent(/datum/reagent/poison/doom, 2)
 
 /obj/projectile/bullet/reusable/arrow/spiced
 	name = "spiced arrow"

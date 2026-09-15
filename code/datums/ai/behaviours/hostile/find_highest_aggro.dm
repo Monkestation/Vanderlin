@@ -1,4 +1,5 @@
 /datum/ai_behavior/find_aggro_targets
+	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
 	action_cooldown = 1 SECONDS
 
 /datum/ai_behavior/find_aggro_targets/get_cooldown(datum/ai_controller/cooldown_for)
@@ -238,6 +239,19 @@
 		pawn.say(pick(GLOB.species_hostile))
 
 /datum/ai_behavior/find_aggro_targets/species_hostile/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
+	. = ..()
+	var/mob/living/pawn = controller.pawn
+	if(pawn)
+		pawn.cmode = FALSE
+
+/datum/ai_behavior/find_aggro_targets/guardsman/finish_action(datum/ai_controller/controller, succeeded, ...)
+	. = ..()
+	if(succeeded)
+		var/mob/living/pawn = controller.pawn
+		pawn.emote("rage")
+		pawn.say("For [SSmapping.config.map_name]!")
+
+/datum/ai_behavior/find_aggro_targets/guardsman/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
 	. = ..()
 	var/mob/living/pawn = controller.pawn
 	if(pawn)

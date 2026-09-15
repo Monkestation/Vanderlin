@@ -105,6 +105,11 @@
 	description = "I am unable to show any kind of affection or love, whether intimate or platonic."
 	trait = TRAIT_EORA_CURSE
 
+/datum/curse/malum
+	name = "Curse of Malum"
+	description = "I am forsaken by the Maker. My hands tremble when performing hands-on labor."
+	trait = TRAIT_MALUM_CURSE
+
 //////////////////////
 /// INHUMEN CURSES ///
 //////////////////////
@@ -164,13 +169,18 @@
 	. = ..()
 	hallucinations = null
 
+/datum/attribute_holder/sheet/xylix_curse
+	raw_attribute_list = list(
+		STAT_FORTUNE = -10,
+	)
+
 /datum/curse/xylix/on_gain(mob/living/carbon/human/owner)
 	. = ..()
-	GET_MOB_ATTRIBUTE_VALUE(owner, STAT_FORTUNE) -= 10
+	owner.attributes?.add_sheet(/datum/attribute_holder/sheet/xylix_curse)
 
 /datum/curse/xylix/on_loss(mob/living/carbon/human/owner)
 	. = ..()
-	GET_MOB_ATTRIBUTE_VALUE(owner, STAT_FORTUNE) += 10
+	owner.attributes.subtract_sheet(/datum/attribute_holder/sheet/xylix_curse)
 
 //////////////////////
 ///    ON LIFE     ///

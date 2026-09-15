@@ -39,9 +39,9 @@
 	var/new_duration = duration ? duration : initial(status_effect.duration)
 	if(duration_scaling)
 		if(duration_modification)
-			new_duration += duration_modification * attuned_strength
+			new_duration += duration_modification * spell_magnitude_modifier
 		else
-			new_duration *= attuned_strength
+			new_duration *= spell_magnitude_modifier
 	var/list/status_args = list(
 		status_effect,
 		new_duration,

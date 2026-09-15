@@ -329,6 +329,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 // Cigarette brands.
 
 /obj/item/clothing/face/cigarette/rollie
+	abstract_type = /obj/item/clothing/face/cigarette/rollie
 	name = "zig"
 	desc = ""
 	icon_state = "spliffoff"
@@ -341,7 +342,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	chem_volume = 60
 	list_reagents = null
 	muteinmouth = FALSE
-	abstract_type = /obj/item/clothing/face/cigarette/rollie
 
 /obj/item/clothing/face/cigarette/rollie/Initialize()
 	. = ..()
