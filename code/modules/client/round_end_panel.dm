@@ -972,7 +972,7 @@
 
 	// Inhumen Gods Section
 
-	data += "<div style='text-align: center; font-size: 1.3em; color: #AA0000; margin: 20px 0 10px 0;'><b>INHUMEN GODS</b></div>"
+	data += "<div style='text-align: center; font-size: 1.3em; color: #661239; margin: 20px 0 10px 0;'><b>INHUMEN GODS</b></div>"
 	data += "<div style='border-top: 3px solid #404040; margin: 0 auto 30px; width: 91.5%;'></div>"
 
 	data += "<div style='width: 91.5%; margin: 0 auto;'>"
@@ -991,6 +991,29 @@
 	data += god_ui_block("ZIZO", "#661239", "#ed9da3", /datum/storyteller/zizo, debug)
 
 	data += "</div></div>"
+
+
+	// Archdevil Section
+	data += "<div style='text-align: center; font-size: 1.3em; color: #AA0000; margin: 20px 0 10px 0;'><b>ARCHDEVILS</b></div>"
+	data += "<div style='border-top: 3px solid #404040; margin: 0 auto 30px; width: 91.5%;'></div>"
+
+	data += "<div style='width: 91.5%; margin: 0 auto;'>"
+	data += "<div style='display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 1fr; gap: 20px; margin-bottom: 20px;'>"
+
+	// Abraxas
+	data += direct_god_ui_block("ABRAXAS", "#680404", "#d32a35", /datum/patron/archdevil/abraxas, debug)
+
+	// Abaddon
+	data += direct_god_ui_block("ABADDON", "#680404", "#d32a35", /datum/patron/archdevil/abaddon, debug)
+
+	// Mephistopheles
+	data += direct_god_ui_block("MEPHISTOPHELES", "#680404", "#d32a35", /datum/patron/archdevil/mephistopheles, debug)
+
+	// Leviathan
+	data += direct_god_ui_block("LEVIATHAN", "#680404", "#d32a35", /datum/patron/archdevil/leviathan, debug)
+
+	data += "</div></div>"
+
 
 	mob << browse(null, "window=vanderlin_round_end")
 	var/datum/browser/popup = new(mob, "vanderlin_influences", "<center>Gods' Influences</center>", 1325, 875)
@@ -1046,6 +1069,39 @@
 			<div style='border-top:1px solid #444; padding-top:6px;'>
 				<div>Total Influence: [get_colored_influence_value(total_influence)]</div>
 				[bonus_display]
+			</div>
+		</div>
+	</div>
+	"}
+
+
+/// UI block to format information about non-storyteller god and their influences
+/proc/direct_god_ui_block(name, bg_color, title_color, datum/patron/patron, debug = FALSE)
+	var/total_influence = 0
+	var/datum/patron/initialized_patron = GLOB.patron_list[patron]
+	if(!initialized_patron)
+		return
+
+	var/dynamic_content = ""
+	var/followers = GLOB.patron_follower_counts[initialized_patron.name] || 0
+
+	dynamic_content += "Number of followers: [followers] ([get_colored_influence_value(followers * 20)])<br>"
+
+	/*
+	for(var/stat in initialized_storyteller.influence_factors)
+		var/list/stat_data = initialized_storyteller.influence_factors[stat]
+		var/stat_value = GLOB.vanderlin_round_stats[stat] || 0
+
+		dynamic_content += "[stat_data["name"]] [round(stat_value)] ([get_colored_influence_value(SSgamemode.calculate_specific_influence(storyteller, stat))])<br>"
+	*/
+
+	return {"
+	<div style='border:6px solid [bg_color]; background:[bg_color]; border-radius:6px; height:100%';>
+		<div style='font-weight:bold; font-size:1.2em; padding:8px; color:[title_color]'>[name]</div>
+		<div style='padding:8px; background:#111; border-radius:0 0 4px 4px;'>
+			<div style='margin-bottom:8px;'>[dynamic_content]</div>
+			<div style='border-top:1px solid #444; padding-top:6px;'>
+				<div>Total Influence: [get_colored_influence_value(total_influence)]</div>
 			</div>
 		</div>
 	</div>
