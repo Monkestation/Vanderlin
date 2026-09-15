@@ -11,4 +11,5 @@
 #include "..\..\_maps\map_files\daftmarsh\map_adjustment_daftmarsh.dm"
 #include "..\..\_maps\map_files\whitepalacepass\map_adjustment_whitepalacepass.dm"
 #include "..\..\_maps\map_files\vanderlin\map_adjustment_vanderlin.dm"
+#include "..\..\_maps\map_files\valdero\map_adjustment_valdero.dm"
 #include "..\..\_maps\map_files\voyager\map_adjustment_voyager.dm"
