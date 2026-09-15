@@ -284,11 +284,6 @@
 /obj/structure/wild_plant/nospread/poppy,
 /turf/open/floor/grass/red,
 /area/outdoors/wilderness)
-"kV" = (
-/obj/structure/flora/grass,
-/obj/structure/flora/grass,
-/turf/closed/basic,
-/area/outdoors/wilderness)
 "kY" = (
 /turf/open/water/river{
 	dir = 4
@@ -303,10 +298,6 @@
 /mob/living/simple_animal/hostile/retaliate/saiga,
 /turf/open/floor/grass/red,
 /area/outdoors/wilderness)
-"lI" = (
-/obj/structure/fluff/traveltile,
-/turf/open/floor/snow,
-/area/under/cave)
 "lJ" = (
 /obj/structure/flora/grass/bush,
 /obj/structure/flora/grass/pyroclasticflowers,
@@ -507,9 +498,9 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
 "sY" = (
-/obj/structure/fluff/traveltile,
-/turf/open/floor/naturalstone,
-/area/under/cave)
+/obj/item/natural/stone,
+/turf/closed/basic,
+/area/outdoors/wilderness)
 "ta" = (
 /obj/structure/flora/grass/maneater,
 /obj/structure/flora/grass,
@@ -1178,10 +1169,6 @@
 "Ws" = (
 /obj/item/natural/stone,
 /turf/open/floor/grass/red,
-/area/outdoors/wilderness)
-"WU" = (
-/obj/structure/flora/grass,
-/turf/closed/basic,
 /area/outdoors/wilderness)
 "WZ" = (
 /obj/structure/flora/rock,
@@ -16813,7 +16800,7 @@ SW
 Pw
 KL
 KL
-KL
+Um
 "}
 (78,1,1) = {"
 nG
@@ -17015,7 +17002,7 @@ OG
 OG
 si
 KL
-KL
+Um
 "}
 (79,1,1) = {"
 nG
@@ -17217,7 +17204,7 @@ OG
 Ws
 si
 si
-KL
+Um
 "}
 (80,1,1) = {"
 nG
@@ -17419,7 +17406,7 @@ OG
 OG
 OG
 si
-KL
+Um
 "}
 (81,1,1) = {"
 nG
@@ -17621,7 +17608,7 @@ OG
 OG
 OG
 si
-KL
+Um
 "}
 (82,1,1) = {"
 nG
@@ -17823,7 +17810,7 @@ OG
 OG
 si
 si
-vq
+sY
 "}
 (83,1,1) = {"
 nG
@@ -18025,7 +18012,7 @@ KL
 Sj
 KL
 KL
-KL
+Um
 "}
 (84,1,1) = {"
 nG
@@ -18227,7 +18214,7 @@ wi
 wi
 wi
 wi
-wi
+Um
 "}
 (85,1,1) = {"
 nG
@@ -22671,7 +22658,7 @@ SW
 OG
 OG
 OG
-WU
+Um
 "}
 (107,1,1) = {"
 KL
@@ -29135,7 +29122,7 @@ TP
 TP
 TP
 MS
-WU
+Um
 "}
 (139,1,1) = {"
 nG
@@ -29337,7 +29324,7 @@ bO
 nr
 TP
 MS
-kV
+Um
 "}
 (140,1,1) = {"
 nG
@@ -33175,7 +33162,7 @@ TP
 TP
 TP
 TP
-WU
+Um
 "}
 (159,1,1) = {"
 nG
@@ -34589,7 +34576,7 @@ TP
 TP
 TP
 TP
-WU
+Um
 "}
 (166,1,1) = {"
 nG
@@ -36205,7 +36192,7 @@ TP
 TP
 bO
 TP
-WU
+Um
 "}
 (174,1,1) = {"
 nG
@@ -38228,7 +38215,7 @@ TP
 Um
 "}
 (184,1,1) = {"
-sY
+Nc
 Nc
 Nc
 YV
@@ -38430,7 +38417,7 @@ TP
 Um
 "}
 (185,1,1) = {"
-sY
+Nc
 Bh
 Nc
 YV
@@ -38632,7 +38619,7 @@ TP
 Um
 "}
 (186,1,1) = {"
-sY
+Nc
 Nc
 Nc
 YV
@@ -41529,14 +41516,9 @@ Um
 Um
 Um
 Um
-WU
 Um
-WU
-WU
 Um
 Um
-WU
-WU
 Um
 Um
 Um
@@ -41595,13 +41577,10 @@ Um
 Um
 Um
 Um
-WU
 Um
 Um
-WU
 Um
 Um
-WU
 Um
 Um
 Um
@@ -41612,15 +41591,12 @@ Um
 Um
 Um
 Um
-WU
-WU
 Um
 Um
 Um
 Um
 Um
 Um
-WU
 Um
 Um
 Um
@@ -41655,7 +41631,18 @@ Um
 Um
 Um
 Um
-WU
+Um
+Um
+Um
+Um
+Um
+Um
+Um
+Um
+Um
+Um
+Um
+Um
 Um
 Um
 Um
@@ -122667,7 +122654,7 @@ nG
 nG
 "}
 (2,1,4) = {"
-lI
+iV
 iV
 YV
 YV
@@ -122869,7 +122856,7 @@ mz
 nG
 "}
 (3,1,4) = {"
-lI
+iV
 iV
 GZ
 YV
@@ -123071,7 +123058,7 @@ mz
 nG
 "}
 (4,1,4) = {"
-lI
+iV
 iV
 iV
 GZ

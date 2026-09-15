@@ -497,10 +497,6 @@
 "sE" = (
 /turf/open/water/clean,
 /area/outdoors/mountains/anvil/snowyforest)
-"sP" = (
-/obj/structure/fluff/traveltile,
-/turf/open/floor/grass/cold,
-/area/under/cave)
 "tb" = (
 /obj/structure/flora/grass/thorn_bush,
 /obj/structure/flora/newtree/scorched,
@@ -562,10 +558,6 @@
 /mob/living/simple_animal/hostile/retaliate/gator,
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/south/west)
-"uD" = (
-/obj/structure/fluff/traveltile,
-/turf/open/floor/sand,
-/area/outdoors/mountains/anvil/snowyforest)
 "uE" = (
 /obj/structure/flora/tree/burnt,
 /obj/structure/flora/grass/water/reeds,
@@ -985,7 +977,6 @@
 /obj/effect/landmark/hammer/dev_text{
 	name = "transition zone"
 	},
-/obj/structure/fluff/traveltile,
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/peak)
 "IL" = (
@@ -1288,7 +1279,6 @@
 /obj/effect/landmark/hammer/dev_text{
 	name = "transition zone"
 	},
-/obj/structure/fluff/traveltile,
 /turf/open/floor/sand,
 /area/outdoors/mountains/anvil/snowyforest)
 "ST" = (
@@ -1413,10 +1403,6 @@
 "YA" = (
 /obj/structure/flora/newtree/snow,
 /turf/open/floor/dirt,
-/area/outdoors/mountains/anvil/peak)
-"YI" = (
-/obj/structure/fluff/traveltile,
-/turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/peak)
 "YK" = (
 /turf/open/floor/dirt/road,
@@ -22463,7 +22449,7 @@ ka
 ka
 ka
 ka
-uD
+ka
 "}
 (105,1,1) = {"
 VU
@@ -22867,7 +22853,7 @@ Pp
 Pp
 Pp
 Pp
-sP
+ER
 "}
 (107,1,1) = {"
 VU
@@ -123264,7 +123250,7 @@ Yf
 Tx
 Tx
 Tx
-YI
+Tx
 "}
 (4,1,4) = {"
 VU
@@ -123870,7 +123856,7 @@ Yf
 Yf
 Tx
 Tx
-YI
+Tx
 "}
 (7,1,4) = {"
 VU
