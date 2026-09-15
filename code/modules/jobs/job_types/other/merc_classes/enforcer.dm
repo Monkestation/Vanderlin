@@ -32,7 +32,7 @@
 
 	traits = list(
 		TRAIT_NOPAINSTUN,
-		TRAIT_BREADY,
+		TRAIT_BATTLE_READY,
 		TRAIT_BLINDFIGHTING,
 		TRAIT_UNDODGING, //They can't dodge at all. This also mean that if they don't have anything to parry with, they're done.
 	)
