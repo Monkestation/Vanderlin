@@ -39,7 +39,7 @@
 
 	allowed_races = RACES_PLAYER_NO_KOBOLD
 	allowed_ages = list(AGE_OLD, AGE_IMMORTAL)
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	tutorial = "Eat. Train. Sleep. Eat. Train. Sleep.\n\n\
 		My daes of adventuring are long past. Mine was a name that none could avoid. I built up a guild from plank and nail, but now my daes are spent raising up fools who may eclipse me, or more likely perish.\n\

@@ -16,7 +16,7 @@
 	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NO_KOBOLD
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	outfit = /datum/outfit/watchman
 	advclass_cat_rolls = list(CTAG_MENATARMS = 20)
