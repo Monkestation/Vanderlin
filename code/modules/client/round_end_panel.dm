@@ -1082,10 +1082,17 @@
 	if(!initialized_patron)
 		return
 
+	var/patron_name = initialized_patron.name
+
 	var/dynamic_content = ""
-	var/followers = GLOB.patron_follower_counts[initialized_patron.name] || 0
+	var/followers = GLOB.patron_follower_counts[patron_name] || 0
 
 	dynamic_content += "Number of followers: [followers] ([get_colored_influence_value(followers * 20)])<br>"
+	total_influence += (followers * 20)
+
+	var/patron_monarch = GLOB.vanderlin_round_stats[STATS_MONARCH_PATRON] == patron_name ? TRUE : FALSE
+	data += "[get_patron_adjective(patron_name)] monarch: [patron_monarch ? "YES" : "NO"] ([get_colored_influence_value((patron_monarch ? 500 : -250))])<br>"
+	total_influence += (patron_monarch ? 500 : -250)
 
 	/*
 	for(var/stat in initialized_storyteller.influence_factors)
@@ -1106,6 +1113,47 @@
 		</div>
 	</div>
 	"}
+
+/proc/get_patron_adjective(patron_name)
+	switch(patron_name)
+		if(ASTRATA)
+			return "Astratan"
+		if(NOC)
+			return "Noccite"
+		if(MALUM)
+			return "Malumite"
+		if(DENDOR)
+			return "Dendorite"
+		if(RAVOX)
+			return "Ravoxian"
+		if(EORA)
+			return "Eoran"
+		if(NECRA)
+			return "Necran"
+		if(ABYSSOR)
+			return "Abyssorite"
+		if(PESTRA)
+			return "Pestran"
+		if(XYLIX)
+			return "Xylixian"
+		if(ZIZO)
+			return "Zizite"
+		if(GRAGGAR)
+			return "Graggarite"
+		if(MATTHIOS)
+			return "Matthiosan"
+		if(BAOTHA)
+			return "Baothan"
+		if(PSYDON)
+			return "Psydonite"
+		if(ABRAXAS)
+			return "Abraxan"
+		if(ABADDON)
+			return "Abaddonian"
+		if(MEPHISTOPHELES)
+			return "Mephistophean"
+		if(LEVIATHAN)
+			return "Leviathanite"
 
 /// Colors resulting number depending on its value, with the operator attached
 /proc/get_colored_influence_value(num)

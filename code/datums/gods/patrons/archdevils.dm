@@ -13,7 +13,7 @@
 	return FALSE
 
 /datum/patron/archdevil/abraxas
-	name = "Abraxas"
+	name = ABRAXAS
 	domain = "King of the Hells and Archdevil of Wisdom."
 	desc = "Abraxas led the attack against Psydon. He is the mastermind, the strategist of the depths. Claimed Baotha to be his own spawn, though her public rejection left populations globally confused. It is only a matter of time before he strikes the surface once more."
 	flaws = "Arrogance, Hunger for Power"
@@ -29,7 +29,7 @@
 	)
 
 /datum/patron/archdevil/abaddon
-	name = "Abaddon"
+	name = ABADDON
 	domain = "Archdevil of destruction."
 	desc = "Said to consume the spirits of all without souls. It is he where connotations of devils with hellfire and brimstone spawn. Abaddon's influence leads to wanton death and devastation, wherever it may fester. He leaves nothing standing in his wake."
 	flaws = "Unrestrained Destruction"
@@ -46,7 +46,7 @@
 	)
 
 /datum/patron/archdevil/mephistopheles
-	name = "Mephistopheles"
+	name = MEPHISTOPHELES
 	domain = "Archdevil of darkness and trickery."
 	desc = "A shapeshifting fiend whose deals always go South. He struck Psydon with his tainted blade, leaving the festering wound which led to The Creator's fall. Mephistopheles twisted the first vampires, Psydon's cursed, into the blood-sucking monsters known today."
 	flaws = "Manipulative, Untrustworthy, Unpredictable"
@@ -62,7 +62,7 @@
 	)
 
 /datum/patron/archdevil/leviathan
-	name = "Leviathan"
+	name = LEVIATHAN
 	domain = "Archdevil of the Void and Madness, the great eel of shadow."
 	desc = "It is unclear where her body ends or starts, and any who dare gaze through the navy depths of the hells' seas of ink, and onto her swirling masses are driven insane. Sailors lost at sea swear they hear her voice singing alongside Abyssor's own, reciting tales of the very oceans turning to blood and swallowing them whole into an endless maw."
 	flaws = "Unstable, Delusional, Erratic"
