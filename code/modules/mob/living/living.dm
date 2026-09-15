@@ -2607,7 +2607,7 @@
 	var/looktime = 5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) * 2)
 	if(has_quirk(/datum/quirk/boon/keen_eye))
 		looktime *= 0.25
-	if(HAS_TRAIT(src, TRAIT_KEENEYES))
+	if(HAS_TRAIT(src, TRAIT_KEENEYES) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABRAXAS))
 		looktime *= 0.25
 	if(do_after(src, looktime))
 		// var/huhsneak

@@ -18,6 +18,8 @@ GLOBAL_LIST_EMPTY(prayers)
 	var/sins = "Codersocks"
 	/// What boons the god may offer
 	var/boons = "Code errors"
+	/// Any drawbacks to worship
+	var/drawbacks = null
 	/// Allows prayer without amulet or cross in church areas
 	var/church_prayer = FALSE
 	/// Message that shows if you can't pray.

@@ -20,7 +20,7 @@
 	tutorial = "Dark and ancient power runs through your veins, one of the last mortal bastions of Blood Magic. Even the children of Kaine respect your power."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
-	allowed_patrons = list(/datum/patron/godless/dystheist, /datum/patron/godless/autotheist, /datum/patron/godless/godless, /datum/patron/godless/defiant, /datum/patron/godless/galadros)
+	allowed_patrons = list(/datum/patron/archdevil/mephistopheles)
 	outfit = /datum/outfit/admin/blood_sorcerer
 	cmode_music = 'sound/music/cmode/antag/combat_deadlyshadows.ogg'
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)

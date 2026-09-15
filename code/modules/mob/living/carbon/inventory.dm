@@ -111,6 +111,8 @@
 				return
 			gloves = equipping
 			update_inv_gloves()
+			if(equipping.flags_inv & HIDERING)
+				update_inv_ring()
 		if(ITEM_SLOT_SHOES)
 			if(shoes)
 				return

@@ -2169,7 +2169,7 @@
 /datum/species/proc/handle_temperature_effects(mob/living/carbon/human/H)
 	var/debuff_level = 0
 	// Heat damage and effects
-	if(H.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT && !HAS_TRAIT(H, TRAIT_RESISTHEAT))
+	if(H.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT && !HAS_TRAIT(H, TRAIT_RESISTHEAT) && !HAS_TRAIT(H, TRAIT_DEVIL_MARKED_ABADDON))
 		remove_cold_stress(H)
 
 		var/heat_excess = H.bodytemperature - BODYTEMP_HEAT_DAMAGE_LIMIT
