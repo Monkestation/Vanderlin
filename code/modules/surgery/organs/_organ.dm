@@ -95,9 +95,9 @@
 	var/blood_req = 0
 	/// Determines lung oxygen restoration and suffocation amount
 	var/oxygen_req = 0
-	/// Controls passive nutriment loss. Units are nutriment_req/100 per second
+	/// Controls passive nutriment loss. Units are nutriment_req per second
 	var/nutriment_req = 0
-	/// Controls passive hydration loss. Units are nutriment_req/100 per second
+	/// Controls passive hydration loss. Units are nutriment_req per second
 	var/hydration_req = 0
 
 	/// The space we occupy inside a limb - unaffected by w_class for balance reasons
@@ -521,8 +521,8 @@
 		return
 	applyOrganDamage(-healing_amount, damage) // pass curent damage incase we are over cap
 	//this doesn't seem very right at all...
-	owner.adjust_nutrition(-nutriment_req/200 * delta_time)
-	owner.adjust_hydration(-hydration_req/200 * delta_time)
+	owner.adjust_nutrition(-nutriment_req * 0.5 * delta_time)
+	owner.adjust_hydration(-hydration_req * 0.5 * delta_time)
 
 /** organ_failure
  * generic proc for handling dying organs

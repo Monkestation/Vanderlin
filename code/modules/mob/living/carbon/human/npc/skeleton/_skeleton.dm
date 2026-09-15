@@ -2,13 +2,12 @@
 	name = "skeleton"
 	icon = 'icons/roguetown/mob/monster/skeletons.dmi'
 	icon_state = MAP_SWITCH("", "skeleton")
-	faction = list(FACTION_HOSTILE)
+	faction = list(FACTION_HOSTILE, FACTION_UNDEAD)
 	race = /datum/species/human/northern
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest, /obj/item/bodypart/head, /obj/item/bodypart/l_arm,
 					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg, /obj/item/bodypart/mouth)
-	faction = list(FACTION_UNDEAD)
-	var/skel_outfit = /datum/outfit/npc/skeleton
+	mob_biotypes = MOB_UNDEAD
 	ambushable = FALSE
 	rot_type = null
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
@@ -16,11 +15,10 @@
 	possible_mmb_intents = list(INTENT_STEAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE)
 	stand_attempts = 4
 	cmode_music = 'sound/music/cmode/antag/combatskeleton.ogg'
-	var/should_have_aggro = TRUE
 	headprice = 7
 
-/mob/living/carbon/human/species/skeleton/npc/no_equipment
-	skel_outfit = null
+	var/skel_outfit = /datum/outfit/npc/skeleton
+	var/should_have_aggro = TRUE
 
 /mob/living/carbon/human/species/skeleton/no_equipment
 	skel_outfit = null
@@ -32,6 +30,9 @@
 	wander = TRUE
 	attack_speed = -10
 
+/mob/living/carbon/human/species/skeleton/npc/no_equipment
+	skel_outfit = null
+
 /mob/living/carbon/human/species/skeleton/Initialize()
 	. = ..()
 	if(ai_controller && should_have_aggro)
@@ -42,7 +43,6 @@
 	..()
 	name = "skeleton"
 	real_name = "skeleton"
-	underwear = "Nude"
 	mob_biotypes = MOB_UNDEAD
 	add_faction(FACTION_UNDEAD)
 	if(length(quirks))
@@ -55,8 +55,9 @@
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/skeletons.dmi'
 			headdy.icon_state = "skull"
-	grant_undead_eyes()
+	underwear = "Nude"
 	update_body()
+	grant_undead_eyes()
 	add_traits(list(TRAIT_NOMOOD, \
 		TRAIT_NOHUNGER, \
 		TRAIT_NOBREATH, \
