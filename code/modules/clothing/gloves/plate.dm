@@ -15,7 +15,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
-
+	flags_inv = HIDEHANDS
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/gloves/plate
 	prevent_crits = ALL_EXCEPT_STAB
