@@ -38,7 +38,6 @@
 	roll_chance = 50
 
 	spells = list(
-		/datum/action/cooldown/spell/dark_whispers,
 		/datum/action/cooldown/spell/status/blood_sight,
 		/datum/action/cooldown/spell/projectile/blood_steal,
 		/datum/action/cooldown/spell/diagnose/blood,
