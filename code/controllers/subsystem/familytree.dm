@@ -93,11 +93,15 @@ SUBSYSTEM_DEF(familytree)
 		for(var/datum/family_member/member in house.members)
 			if(member.person?.real_name == person.setparent)
 				return FAMILY_MEMBER_CHILD
-
 	if(person.setchild)
 		for(var/datum/family_member/member in house.members)
 			if(member.person?.real_name == person.setchild)
 				return FAMILY_MEMBER_PARENT
+	if(person.setsibling)
+		for(var/datum/family_member/member in house.members)
+			if(member.person?.real_name == person.setsibling)
+				if(CanBeSiblings(member.person.age, person.age))
+					return FAMILY_MEMBER_SIBLING
 
 	// Fall through to age-based logic
 	if(person.age == AGE_CHILD)
@@ -266,6 +270,17 @@ SUBSYSTEM_DEF(familytree)
 			if(chosen_house)
 				break
 
+	if(H.setsibling)
+		for(var/datum/heritage/house in active + seed)
+			if(!HousePassesFilters(H, house))
+				continue
+			for(var/datum/family_member/member in house.members)
+				if(member.person?.real_name == H.setsibling)
+					chosen_house = house
+					break
+			if(chosen_house)
+				break
+
 	if(!chosen_house && is_young && H.setparent)
 		for(var/datum/heritage/house in active + seed)
 			if(!HousePassesFilters(H, house))
@@ -323,7 +338,17 @@ SUBSYSTEM_DEF(familytree)
 
 	var/species = H.dna.species.type
 
-	for(var/datum/heritage/house in families)
+	var/datum/heritage/sibling_house
+	if(H.setsibling)
+		for(var/datum/heritage/house in families)
+			for(var/datum/family_member/member in house.members)
+				if(member.person?.real_name == H.setsibling)
+					sibling_house = house
+					break
+			if(sibling_house)
+				break
+
+	for(var/datum/heritage/house in list(sibling_house) + families)
 		if(house.dominant_species != species)
 			continue
 
@@ -435,6 +460,25 @@ SUBSYSTEM_DEF(familytree)
 		if(FAMILY_MEMBER_CHILD)   PlaceAsChild(house, person, adopted)
 		if(FAMILY_MEMBER_SIBLING) PlaceAsSibling(house, person, adopted)
 		if(FAMILY_MEMBER_PARENT)  PlaceAsParent(house, person)
+
+	if(person.setsibling)
+		LinkSibling(house, person)
+
+/datum/controller/subsystem/familytree/proc/LinkSibling(datum/heritage/house, mob/living/carbon/human/person)
+	if(!house || !person?.mind || !person.setsibling)
+		return
+
+	for(var/datum/family_member/member in house.members)
+		if(!member.person?.mind || member.person == person)
+			continue
+		if(member.person.real_name != person.setsibling)
+			continue
+		if(!CanBeSiblings(member.person.age, person.age))
+			return
+
+		link_family(person.mind, member.person.mind, FAMILY_MEMBER_SIBLING, /datum/relation/family)
+		link_family(member.person.mind, person.mind, FAMILY_MEMBER_SIBLING, /datum/relation/family)
+		return
 
 // Adds person as a child of the eldest eligible parents in the house.
 /datum/controller/subsystem/familytree/proc/PlaceAsChild(datum/heritage/house, mob/living/carbon/human/person, adopted)

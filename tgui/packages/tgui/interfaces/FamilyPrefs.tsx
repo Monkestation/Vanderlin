@@ -24,6 +24,7 @@ type FamilyPrefsData = {
   family_mode: string;
   setspouse: string;
   setchild: string;
+  setsibling: string;
   setparent: string;
   was_divorced: boolean;
   gender_choice: string;
@@ -209,6 +210,27 @@ const BondsTab = () => {
                       icon="times"
                       compact
                       onClick={() => act('clear_setparent')}
+                    />
+                  )}
+                </Flex>
+              </LabeledList.Item>
+              <LabeledList.Item label="Designated Sibling">
+                <Flex align="center" gap={1}>
+                  <Box flex={1} italic={!data.setsibling}>
+                    {data.setsibling || 'No target name set'}
+                  </Box>
+                  <Button
+                    icon="pen"
+                    compact
+                    onClick={() => act('edit_setsibling')}
+                  >
+                    Edit
+                  </Button>
+                  {data.setsibling && (
+                    <Button
+                      icon="times"
+                      compact
+                      onClick={() => act('clear_setsibling')}
                     />
                   )}
                 </Flex>
