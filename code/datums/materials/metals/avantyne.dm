@@ -7,3 +7,4 @@
 	solid_form = /obj/item/ingot/avantyne
 	melting_point = 1866
 	value_modiifer = 0
+	material_examine_hint = /datum/examine_highlight/heresy_alarming/darksteel

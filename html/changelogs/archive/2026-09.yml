@@ -235,3 +235,7 @@
   voidwytch:
   - rscadd: Added ten sets of Wintermare nobility clothes and their respective crafting
       recipes
+2026-09-15:
+  realforest2001:
+  - rscadd: Miscellaneous fixes and tweaks to Blood Magic related things.
+  - bugfix: Fixed Bloodstone Ore missing in cold/environment specific rocks.
