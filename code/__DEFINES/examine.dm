@@ -39,6 +39,7 @@
 #define COLOR_VIBE_FOE "#c43535"
 #define COLOR_VIBE_CROWN "#ffdc7c"
 #define COLOR_VIBE_GOLGATHA "#94f8ff"
+#define COLOR_VIBE_BRIAR "#6b3a4a"
 
 // Heresy severity symbols
 #define EXAMINEHIGHLIGHT_SYMBOL_HERESYSEVERITY_SUSPICIOUS "!!"

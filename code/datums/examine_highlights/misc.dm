@@ -20,3 +20,9 @@
 	color = COLOR_VIBE_CROWN
 	adjective = "Divine"
 	explanation = "<b>This is an item of Divine importance!</b>"
+
+/datum/examine_highlight/blackbriar
+	color = COLOR_VIBE_BRIAR
+	adjective = "Black Briar"
+	leader = ""
+	explanation = "<b>This is an item connected to the feared Black Briar Plague. Handle with EXTREME caution.</b>"
