@@ -234,7 +234,7 @@
 		return
 	if(!istype(user))
 		return
-	if(user.status_flags & GODMODE)
+	if(HAS_TRAIT(user, TRAIT_GODMODE))
 		return
 	if(user.mind?.has_antag_datum(/datum/antagonist/vampire/lord/daewalker))
 		return
