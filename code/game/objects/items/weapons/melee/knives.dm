@@ -353,6 +353,7 @@
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
 	sellprice = 0 // Super evil dagger, nobody wants this
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming
 
 /obj/item/weapon/knife/dagger/steel/inhumen/baotha
 	name = "laced dagger"

@@ -39,6 +39,7 @@
 
 /obj/item/scrying/orb/miracle
 	name = "divine scrying orb"
+	examine_highlight_type = /datum/examine_highlight/divine
 
 /obj/item/scrying/orb/miracle/pass_scrying_checks(mob/living/user)
 	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/holy) < 1)
@@ -76,6 +77,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 50
 	item_weight = 50 GRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_veryodd
 
 /obj/item/scrying/flame/add_scry_comp()
 	AddComponent(/datum/component/scrying, 10 SECONDS, 50 SECONDS, TRUE, FALSE, "I look into NAME_HERE but only see dark fire. Maybe I should wait.", 17, 13)

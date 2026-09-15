@@ -237,6 +237,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming
 
 /obj/item/clothing/armor/plate/full/inhumen/zizo
 	name = "darksteel fullplate"

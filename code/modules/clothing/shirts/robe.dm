@@ -101,6 +101,7 @@
 	desc = "Holy vestments sanctified by divine hands. Caution is advised if not a faithful."
 	icon_state = "priestrobe"
 	dropshrink = 0.8
+	examine_highlight_type = /datum/examine_highlight/divine
 
 /obj/item/clothing/shirt/robe/priest/pickup(mob/living/user)
 	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
@@ -133,6 +134,7 @@
 	max_integrity = 250
 	color = COLOR_BLOOD_MAGIC
 	misc_flags = CRAFTING_TEST_EXCLUDE
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodsteel
 
 /obj/item/clothing/shirt/robe/bloodweave/Initialize(mapload)
 	. = ..()

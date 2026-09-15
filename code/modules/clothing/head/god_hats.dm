@@ -109,6 +109,7 @@
 	armor_type = /datum/armor/weak
 	body_parts_covered = FULL_HEAD | NECK
 	prevent_crits = MINOR_CRITICALS
+	examine_highlight_type = /datum/examine_highlight/divine
 
 /obj/item/clothing/head/roguehood/priest/AdjustClothes(mob/user)
 	if(loc == user)
@@ -153,6 +154,7 @@
 	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
 	resistance_flags = FIRE_PROOF
 	item_weight = 135 GRAMS
+	examine_highlight_type = /datum/examine_highlight/divine
 
 /obj/item/clothing/head/priestmask/pickup(mob/living/user)
 	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))

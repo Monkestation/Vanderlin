@@ -208,6 +208,7 @@
 	prevent_crits = ALL_CRITICAL_HITS
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 	block2add = FOV_BEHIND
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming
 
 /obj/item/clothing/head/helmet/heavy/inhumen/zizo
 	name = "darksteel frog helmet"

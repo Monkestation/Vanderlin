@@ -160,6 +160,7 @@
 	resistance_flags = FIRE_PROOF
 	armor_type = /datum/armor/cursedrosa
 	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
+	examine_highlight_type = /datum/examine_highlight/blackbriar
 
 /obj/item/ore/cursedrosa/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -475,6 +476,7 @@
 	icon_state = "component_blood"
 	smeltresult = /obj/item/gem/blood_diamond //Ensures that it can be reused for any Glut-specific ritual, should one find this in its crystalline form.
 	sellprice = 33
+	examine_highlight_type = /datum/examine_highlight/heresy_veryodd
 
 /obj/item/ingot/component/glutcrystal/examine(mob/user)
 	. = ..()
