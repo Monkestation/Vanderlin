@@ -696,7 +696,7 @@
 			return sig_return | SPELL_CANCEL_CAST
 
 		if(ishuman(cast_on))
-			var/mob/living/carbon/human/human_target
+			var/mob/living/carbon/human/human_target = cast_on
 			var/is_dead = (human_target.stat == DEAD)
 			if(((spell_type == SPELL_DIVINE_MIRACLE) || (spell_type == SPELL_UNHOLY_MIRACLE)) && HAS_TRAIT(human_target, TRAIT_SILVER_BLESSED) && !(spell_flags & SPELL_PSYDON) && !(human_target.mob_biotypes & MOB_UNDEAD))
 				human_target.visible_message(is_dead ? span_info("[human_target] lies motionless as the miracle dissipates.") : span_info("[human_target] stirs for a moment, the miracle dissipates."), span_notice("A dull warmth swells in your heart, only to fade as quickly as it arrived."))
