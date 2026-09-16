@@ -14,7 +14,6 @@
 	STOP_PROCESSING(SSobj, src)
 
 /datum/component/bloodpool_regen/process(delta_time)
-	. = ..()
 	var/mob/living/carbon/human/human = parent
 	if(human.bloodpool < human.maxbloodpool)
 		human.adjust_bloodpool(regen_rate)
