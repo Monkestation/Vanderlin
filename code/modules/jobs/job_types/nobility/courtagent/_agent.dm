@@ -47,11 +47,6 @@
 
 	languages = list(/datum/language/thievescant)
 
-/datum/job/courtagent/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	if(ishuman(spawned))
-		GLOB.court_agents += spawned.real_name
-	return ..()
-
 /datum/outfit/courtagent
 	abstract_type = /datum/outfit/courtagent
 	name = "Court Agent Base"
@@ -69,6 +64,7 @@
 		"Gold Ring" = /obj/item/clothing/ring/courtagent_ring/gold,
 	)
 	spawned.select_equippable(player_client, rings, message = "Choose Your Ring", title = "COURT AGENT")
+	GLOB.court_agents += spawned.real_name
 
 /datum/attribute_holder/sheet/job/courtagent
 	raw_attribute_list = list(

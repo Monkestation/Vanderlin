@@ -33,7 +33,7 @@
 	)
 	languages = list(/datum/language/sanguine)
 	total_positions = 1
-	roll_chance = 10
+	roll_chance = 30
 
 	spells = list(
 		/datum/action/cooldown/spell/dark_whispers,

@@ -71,10 +71,10 @@
 	. = ..()
 
 	var/static/list/rings = list(
-		"Blacksteel Ring" = /obj/item/clothing/ring/courtagent_ring/blacksteel,
-		"Bronze Ring" = /obj/item/clothing/ring/courtagent_ring/bronze,
-		"Silver Ring" = /obj/item/clothing/ring/courtagent_ring/silver,
-		"Gold Ring" = /obj/item/clothing/ring/courtagent_ring/gold,
+		"Blacksteel Ring" = /obj/item/clothing/ring/courtagent_ring/blacksteel/hand,
+		"Bronze Ring" = /obj/item/clothing/ring/courtagent_ring/bronze/hand,
+		"Silver Ring" = /obj/item/clothing/ring/courtagent_ring/silver/hand,
+		"Gold Ring" = /obj/item/clothing/ring/courtagent_ring/gold/hand,
 	)
 	spawned.select_equippable(player_client, rings, message = "Choose Your Ring", title = "HAND")
 

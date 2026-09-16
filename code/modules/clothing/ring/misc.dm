@@ -382,16 +382,23 @@
 	var/mob/living/carbon/user_mob
 	COOLDOWN_DECLARE(transmit_cooldown)
 	var/transmit_cooldown_duration = 30 SECONDS
+	var/hand_ring = FALSE
 
 /obj/item/clothing/ring/courtagent_ring/silver/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/clothing/ring/courtagent_ring/silver/hand
+	hand_ring = TRUE
+
 /obj/item/clothing/ring/courtagent_ring/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/anti_theft)
-	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand. \
-	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
+	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand."
+	if(!hand_ring)
+		desc += " \nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
+	else
+		name = "Hand's Signet Ring"
 
 /obj/item/clothing/ring/courtagent_ring/get_examine_icon(mob/user)
 	if(isobserver(user) || HAS_TRAIT(user, TRAIT_COURTAGENT) || get_dist(user, src) < 1)
@@ -401,7 +408,7 @@
 /obj/item/clothing/ring/courtagent_ring/get_mechanics_examine(mob/user)
 	. = ..()
 	if(HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
-		. += span_info("You can send messages to other agents by middle-clicking the ring while it is worn.")
+		. += span_info("You can send messages to other agents by middle-clicking the ring while it is worn. The cooldown is [transmit_cooldown_duration / 10]s, and is halved when using direct communication.")
 
 /obj/item/clothing/ring/courtagent_ring/equipped(mob/living/carbon/user, slot)
 	. = ..()
@@ -475,24 +482,25 @@
 	user.whisper(message)
 
 	log_game("COURT AGENT: [key_name(user)] sent a court-agent ring message. '[message]'")
-	COOLDOWN_START(src, transmit_cooldown, transmit_cooldown_duration)
 	if(chosen_target == "EVERYONE")
+		COOLDOWN_START(src, transmit_cooldown, transmit_cooldown_duration)
 		for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
 			if(ring.user_mob == user)
 				continue
-			ring.receive_message(message, user)
+			ring.receive_message(message, user, FALSE, hand_ring)
 		return
 
+	COOLDOWN_START(src, transmit_cooldown, transmit_cooldown_duration / 2)
 	for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
 		if(ring.user_mob.real_name != chosen_target)
 			continue
-		ring.receive_message(message, user)
+		ring.receive_message(message, user, TRUE, hand_ring)
 		return
 
-/obj/item/clothing/ring/courtagent_ring/proc/receive_message(message, mob/living/carbon/user)
+/obj/item/clothing/ring/courtagent_ring/proc/receive_message(message, mob/living/carbon/user, broadcast = TRUE, is_hand = FALSE)
 	if(!user_mob)
 		return
-	to_chat(user_mob, span_notice("Agent Message received from [user.real_name]: '[span_blue(message)]'"))
+	to_chat(user_mob, span_notice("[broadcast ? "Global" : "Direct"] [is_hand ? "Hand's Instruction" : "Agent Message"] received from [user.real_name]: '[span_blue(message)]'"))
 	user_mob.playsound_local(user_mob, 'sound/misc/mail.ogg', 100, FALSE, -1)
 	log_game("COURT AGENT: [key_name(user_mob)] received a court-agent ring message from [key_name(user)].")
 
@@ -502,14 +510,23 @@
 	base_icon_state = "ring_g"
 	metal_adjective = "golden"
 
+/obj/item/clothing/ring/courtagent_ring/gold/hand
+	hand_ring = TRUE
+
 /obj/item/clothing/ring/courtagent_ring/blacksteel
 	icon_state = "ring_bs_agent"
 	examine_name = /obj/item/clothing/ring/blacksteel::name
 	base_icon_state = "ring_bs"
 	metal_adjective = "blacksteel"
 
+/obj/item/clothing/ring/courtagent_ring/blacksteel/hand
+	hand_ring = TRUE
+
 /obj/item/clothing/ring/courtagent_ring/bronze
 	icon_state = "ring_b_agent"
 	examine_name = /obj/item/clothing/ring/bronze::name
 	base_icon_state = "ring_b"
 	metal_adjective = "bronze"
+
+/obj/item/clothing/ring/courtagent_ring/bronze/hand
+	hand_ring = TRUE

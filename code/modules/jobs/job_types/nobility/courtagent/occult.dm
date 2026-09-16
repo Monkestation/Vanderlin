@@ -36,7 +36,6 @@
 	)
 	languages = list(/datum/language/sanguine)
 	total_positions = 1
-	roll_chance = 50
 
 	spells = list(
 		/datum/action/cooldown/spell/status/blood_sight,

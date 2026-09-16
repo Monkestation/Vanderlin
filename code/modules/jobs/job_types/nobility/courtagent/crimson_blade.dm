@@ -6,7 +6,7 @@
 		STAT_STRENGTH = -1,
 		STAT_CONSTITUTION = -1,
 		STAT_INTELLIGENCE = -1,
-		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/knives = 20,
