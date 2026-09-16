@@ -17,7 +17,7 @@
 
 /datum/job/admin/blood_sorcerer
 	title = JOB_ADMIN_BLOOD_SORCERER
-	tutorial = "You have been ostracized and hunted by society for your use of forbidden Blood Magic."
+	tutorial = "Dark and ancient power runs through your veins, one of the last mortal bastions of Blood Magic. Even the children of Kaine respect your power."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
 	allowed_patrons = list(/datum/patron/godless/dystheist, /datum/patron/godless/autotheist, /datum/patron/godless/godless, /datum/patron/godless/defiant, /datum/patron/godless/galadros)

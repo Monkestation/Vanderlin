@@ -27,3 +27,27 @@
 // used for weird cases with variable honorary titles to determine their position
 #define HONORARY_PREFIX 0
 #define HONORARY_SUFFIX 1
+
+// Heresy severity colors
+#define COLOR_HERESYSEVERITY_ALARMING "#c43535"
+#define COLOR_HERESYSEVERITY_SUSPICIOUS "#c49337"
+#define COLOR_HERESYSEVERITY_ODD "#c564c5"
+#define COLOR_HERESYSEVERITY_VERYODD "#c564c5"
+
+//Other Colors
+#define COLOR_VIBE_FRIEND "#6476c5"
+#define COLOR_VIBE_FOE "#c43535"
+#define COLOR_VIBE_CROWN "#ffdc7c"
+#define COLOR_VIBE_GOLGATHA "#94f8ff"
+
+// Heresy severity symbols
+#define EXAMINEHIGHLIGHT_SYMBOL_HERESYSEVERITY_SUSPICIOUS "!"
+#define EXAMINEHIGHLIGHT_SYMBOL_HERESYSEVERITY_VERYODD "!"
+/// Zcross unicode in HTML form
+#define EXAMINEHIGHLIGHT_SYMBOL_HERESYSEVERITY_ALARMING "&#x16E3;"
+#define EXAMINEHIGHLIGHT_SYMBOL_HERESYSEVERITY_ODD "?"
+
+#define SYMBOL_VIBE_FRIEND "&#x26E8;"
+#define SYMBOL_VIBE_FOE "&#x2694;"
+#define SYMBOL_VIBE_CROWN "&#x2654;"
+#define SYMBOL_VIBE_GOLGATHA "&#5833;"
