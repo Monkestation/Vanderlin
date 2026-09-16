@@ -12,7 +12,7 @@
 		/datum/attribute/skill/craft/tanning = 20,
 		/datum/attribute/skill/craft/carpentry = 30,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/magic/druidic = 30,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/reading = 30,
