@@ -340,14 +340,17 @@
  *
  * Argument(s):
  * * Optional - include_flags, (see obj.flags.dm) describes which optional things to include or not (pockets, accessories, held items)
+ * * Optional - ignore_skin, whether the returned list ignores /obj/item/clothing/armor/regenerating/skin
  */
 
-/mob/living/proc/get_equipped_items(include_flags = NONE)
+/mob/living/proc/get_equipped_items(include_flags = NONE, ignore_skin = FALSE)
 	var/list/items = list()
 	for(var/obj/item/item_contents in contents)
 		if(item_contents.item_flags & IN_INVENTORY)
 			if(!(include_flags & INCLUDE_ABSTRACT) && (item_contents.item_flags & ABSTRACT)) //not really flavoured as items
 				continue
+			if(ignore_skin && istype(item_contents, /obj/item/clothing/armor/regenerating/skin))
+				return
 			items += item_contents
 	if (!(include_flags & INCLUDE_HELD))
 		items -= held_items
@@ -395,9 +398,11 @@
 	for(var/slot in SLOT_DISPLAY_PRIORITY)
 		if(obscured_slots & slot)
 			continue
-		var/obj/item/I = get_item_by_slot(slot)
-		if(I)
-			items[I] = slot
+		var/obj/item/the_item = get_item_by_slot(slot)
+		if(the_item)
+			if(HAS_TRAIT(the_item, TRAIT_CONCEALED_ITEM))
+				continue
+			items[the_item] = slot
 	return items
 
 /obj/item/proc/equip_to_best_slot(mob/M)

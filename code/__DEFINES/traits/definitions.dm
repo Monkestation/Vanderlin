@@ -384,7 +384,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOBLE_BLOOD	"Noble Blooded"
 #define TRAIT_NOBLE_POWER	"Noble Authority"
 #define TRAIT_EMPATH "Empath"
-#define TRAIT_BREADY "Battleready"
+#define TRAIT_BATTLE_READY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
 #define TRAIT_THIEFSENSE "Thief-Sense"
 #define TRAIT_MEDIUMARMOR "Mail Training"
@@ -392,6 +392,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_DODGEEXPERT "Fast Reflexes"
 #define TRAIT_UNDODGING	"Inflexible"
 #define TRAIT_UNPARRYING "Graceless"
+#define TRAIT_EXPERT_PARRY "Parry Expert"
 #define TRAIT_DECEIVING_MEEKNESS "Deceiving Meekness"
 #define TRAIT_VILLAIN "Villain"
 #define TRAIT_CRITICAL_RESISTANCE "Critical Resistance"
@@ -629,6 +630,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NEEDS_TWO_HANDS "needstwohands"
 /// This item can't be pickpocketed
 #define TRAIT_CANT_BE_STOLEN "cant_be_stolen"
+/// This item does not show on examine
+#define TRAIT_CONCEALED_ITEM "concealed_item"
 
 // **** turf traits
 ///Turf slowdown will be ignored when this trait is added to a turf.
