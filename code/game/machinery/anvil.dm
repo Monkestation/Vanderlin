@@ -27,6 +27,10 @@
 		if(HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
 			. += span_warning("[working_material] is too hot to touch.")
 
+/obj/machinery/anvil/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Alt-click with a hammer in hand to use the anvil's minigame for better quality.")
+
 /obj/machinery/anvil/attack_hand(mob/living/user, list/modifiers)
 	if(smithing)
 		to_chat(user, span_warning("[src] is currently being worked on!"))
