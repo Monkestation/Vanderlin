@@ -20,7 +20,7 @@
 	adjective = "ODD"
 	explanation = "<span style='color: #c564c5;'><b>An odd expression of faith...</b></font><br>It is not openly deemed heretical by Tennite and Psydonite faith. However, that does not stop it from being seen as unusual. I am likely to be given odd looks if I am seen with it and not much more, but more guarded (or paranoid) Tennites and Psydonites may not be so charitable."
 	color = COLOR_HERESYSEVERITY_ODD
-	symbol = EXAMINEHIGHLIGHT_SYMBOL_HERESYSEVERITY_SUSPICIOUS
+	symbol = EXAMINEHIGHLIGHT_SYMBOL_HERESYSEVERITY_ODD
 
 /datum/examine_highlight/heresy_alarming/darksteel
 	item_examine_desc = "Steel made using the dark magics of Zizo, Crafted in Ritual from the screaming flesh of the living and dead in unnatural conjunction!"
