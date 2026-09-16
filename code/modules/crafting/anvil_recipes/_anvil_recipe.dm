@@ -30,6 +30,12 @@
 	var/skill_quality
 	/// Increased each time the minigame is played. Used to average accumulated_quality and skill_quality.
 	var/numberofhits = 0
+	/// How many good hits we got on the metal. Not used with the minigame.
+	var/numberofbreakthroughs = 0
+	/// Set to FALSE if minigame was used.
+	var/used_simple_hit
+	/// Amount of times the bar got hit with simplehits. Not used with the minigame.
+	var/simple_hit_amount
 	/// The item that the recipe currently applies to
 	var/datum/parent
 	var/rotations_required = 1
@@ -66,7 +72,7 @@
 	return TRUE
 
 // Keep this simple, we can do the math and randomization in quality_manager
-/datum/anvil_recipe/proc/advance(mob/user, quality_score = 0)
+/datum/anvil_recipe/proc/advance(mob/user, quality_score = 0, simple_hit)
 	if(!can_advance(user))
 		return FALSE
 
@@ -91,9 +97,14 @@
 			progress_to_add /= 5
 		if(6)
 			progress_to_add /= 6
+
+	if(simple_hit)
+		progress_to_add /= 2 // to account for the fact that it is easier and the minigame takes a while
+		simple_hit_amount++
+
 	// Progress scales based on additional_items to prevent multi-item recipes from taking too long
 	progress_to_add *= progress_multiplier
-	if(quality_score < MINIMUM_ANVIL_MINIGAME_SCORE) // Did you even try?
+	if(quality_score < MINIMUM_ANVIL_MINIGAME_SCORE && !simple_hit) // Did you even try?
 		progress /= 2
 	progress += progress_to_add
 
@@ -131,7 +142,10 @@
 		components = num_of_materials,
 		perf_qual = accumulated_quality,
 		diff_mod = craftdiff,
-		mini_play = numberofhits
+		mini_play = numberofhits,
+		simple_used = used_simple_hit,
+		simple_amount = simple_hit_amount,
+		simple_perf = numberofbreakthroughs
 	)
 
 	for(var/i in 1 to output_amount)
