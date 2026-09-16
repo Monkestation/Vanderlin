@@ -30,13 +30,21 @@
 	/datum/curse/matthios,\
 	/datum/curse/baotha\
 )
+
+#define ARCHDEVIL_CURSES list(\
+	/datum/curse/mephistopheles,\
+	/datum/curse/leviathan\
+)
+
 #define SPECIAL_CURSES list(\
 	/datum/curse/atheism\
 )
+
 #define ALL_CURSES list(\
 	SPECIAL_CURSES,\
 	TEN_CURSES,\
-	INHUMEN_CURSES\
+	INHUMEN_CURSES,\
+	ARCHDEVIL_CURSES\
 )
 
 #define PLATEHIT "plate"
