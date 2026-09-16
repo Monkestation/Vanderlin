@@ -33,7 +33,6 @@
 		to_chat(cast_on, span_userdanger("You're magically weighed down, but your strength resists!"))
 	else if(GET_MOB_ATTRIBUTE_VALUE(cast_on, STAT_STRENGTH) >= strength_level_disarm)
 		cast_on.Knockdown(3 SECONDS, prevent_drop = TRUE)
-		cast_on.Immobilize(3 SECONDS)
 		cast_on.adjustBruteLoss(20, damage_type = BCLASS_BLUNT)
 		to_chat(cast_on, span_userdanger("You're magically weighed down and hit the ground!"))
 	else
