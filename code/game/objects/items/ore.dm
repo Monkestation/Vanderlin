@@ -123,6 +123,7 @@
 	sellprice = 0 // No one will buy this
 	item_weight = 4.15 KILOGRAMS
 	mill_result = /obj/item/ore/dust/bloodstone
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
 
 /obj/item/ore/bloodstone/Initialize(mapload)
 	. = ..()

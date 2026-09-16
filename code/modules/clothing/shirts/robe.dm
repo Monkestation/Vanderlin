@@ -134,7 +134,7 @@
 	max_integrity = 250
 	color = COLOR_BLOOD_MAGIC
 	misc_flags = CRAFTING_TEST_EXCLUDE
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodsteel
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
 
 /obj/item/clothing/shirt/robe/bloodweave/Initialize(mapload)
 	. = ..()
