@@ -46,7 +46,7 @@
 		TRAIT_DEVIL_MARKED_LEVIATHAN
 	)
 
-	if(HAS_ANY_OF_TRAITS(user, trait_list))
+	if(HAS_ANY_OF_TRAITS(user, trait_list) || IsAdminGhost(user))
 		var/can_see_hands = IsAdminGhost(user) || (Adjacent(user) && is_human_part_visible(src, HIDEHANDS))
 		if(can_see_hands)
 			if(HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABRAXAS))
