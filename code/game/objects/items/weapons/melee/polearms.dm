@@ -230,7 +230,7 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 /obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
 	. = ..()

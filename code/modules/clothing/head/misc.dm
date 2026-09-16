@@ -304,7 +304,7 @@
 	sellprice = 1000
 	resistance_flags = FIRE_PROOF
 	item_weight = 600 GRAMS
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/vampire
 
 /obj/item/clothing/head/vampire/Initialize(mapload)
 	. = ..()

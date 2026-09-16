@@ -358,12 +358,12 @@
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
 	sellprice = 0 // Super evil dagger, nobody wants this
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming
 
 /obj/item/weapon/knife/dagger/steel/inhumen/baotha
 	name = "laced dagger"
 	desc = "Whispers of bliss seep deeper than the blade."
 	icon_state = "baothadagger"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 /obj/item/weapon/knife/dagger/steel/inhumen/baotha/Initialize(mapload)
 	. = ..()
@@ -373,11 +373,13 @@
 	name = "vicious dagger"
 	desc = "A chipped and serrated blade designed with only one purpose. Blood."
 	icon_state = "graggardagger"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/weapon/knife/dagger/steel/inhumen/matthios
 	name = "gilded knife"
 	desc = "Wealth with function."
 	icon_state = "matthiosknife"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 /obj/item/weapon/knife/dagger/steel/inhumen/zizo
 	name = "darksteel dagger"
@@ -385,6 +387,7 @@
 	icon_state = "zizodagger"
 	melting_material = /datum/material/avantyne
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_DARKSTEEL
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/darksteel
 
 //................ Silver Dagger ............... //
 /obj/item/weapon/knife/dagger/silver

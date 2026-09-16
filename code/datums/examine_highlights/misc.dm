@@ -14,6 +14,9 @@
 /datum/examine_highlight/royal_court/crown
 	item_examine_desc = "<b>Heavy the Crown is, and ever shall it be.</b>"
 
+/datum/examine_highlight/royal_court/rod
+	item_examine_desc = "A symbold of the Crown's Power."
+
 /datum/examine_highlight/divine
 	color = COLOR_VIBE_CROWN
 	adjective = "Divine"

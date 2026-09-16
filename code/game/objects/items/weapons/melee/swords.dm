@@ -1010,7 +1010,7 @@
 	static_price = TRUE
 	item_weight = 1.6 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/vampire
 
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
 	. = ..()

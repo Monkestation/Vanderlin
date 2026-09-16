@@ -208,7 +208,6 @@
 	prevent_crits = ALL_CRITICAL_HITS
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 	block2add = FOV_BEHIND
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming
 
 /obj/item/clothing/head/helmet/heavy/inhumen/zizo
 	name = "darksteel frog helmet"
@@ -255,6 +254,7 @@
 	bloody_icon_state = "helmetblood_big"
 	worn_x_dimension = 64
 	worn_y_dimension = 64
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 //............... Graggar Helmet ............... //
 
@@ -264,6 +264,7 @@
 	icon_state = "graggarplatehelm"
 	flags_cover = HEADCOVERSEYES
 	item_weight = 4.5 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/clothing/head/helmet/heavy/inhumen/graggar/skull
 	name = "vicious skullhelm"
@@ -290,6 +291,7 @@
 	bloody_icon_state = "helmetblood_big"
 	item_weight = 4.5 KILOGRAMS
 	smeltresult = /obj/item/ingot/component/baotha
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 /obj/item/clothing/head/helmet/heavy/inhumen/baotha_alt
 	name = "saccharine sallet"
@@ -297,6 +299,7 @@
 	icon_state = "baothahelm"
 	item_weight = 4.5 KILOGRAMS
 	smeltresult = /obj/item/ingot/component/baotha
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 //............... Spangenhelm ............... //
 /obj/item/clothing/head/helmet/heavy/viking

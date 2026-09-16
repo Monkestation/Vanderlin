@@ -268,4 +268,4 @@
 	melt_amount = 150
 	sellprice = 250
 	item_weight = 4 KILOGRAMS
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios

@@ -92,7 +92,6 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming
 
 /obj/item/clothing/pants/platelegs/inhumen/zizo
 	name = "darksteel garments"
@@ -110,16 +109,19 @@
 	name = "gilded leggings"
 	desc = "Plate leggings. perfect for sprinting away after a theft of mammon, or life."
 	icon_state = "matthioslegs"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 /obj/item/clothing/pants/platelegs/inhumen/graggar
 	name = "vicious leggings"
 	desc = "A sinister pair of plate chausses that have born witness many violent atrocities."
 	icon_state = "graggarplatelegs"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/clothing/pants/platelegs/inhumen/baotha
 	name = "saccharine garments"
 	desc = "Leg garments worn by those who see the truth of freedom through addiction."
 	icon_state = "baothaskirt"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 //.............. Silver Platelegs .................//
 

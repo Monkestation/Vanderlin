@@ -24,7 +24,7 @@
 	grid_width = 32
 	item_weight = 800 GRAMS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
-	examine_highlight_type = /datum/examine_highlight/royal_court
+	examine_highlight_type = /datum/examine_highlight/royal_court/rod
 
 /obj/item/weapon/lordscepter/Initialize()
 	. = ..()

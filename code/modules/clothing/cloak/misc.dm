@@ -280,7 +280,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
 	sellprice = 0 // See above comment
-	examine_highlight_type = /datum/examine_highlight/heresy_suspicious
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/graggar
 
 /obj/item/clothing/cloak/graggar/heavy
 	name = "vicious halfcloak"
