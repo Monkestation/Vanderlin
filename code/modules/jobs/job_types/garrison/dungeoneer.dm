@@ -40,7 +40,7 @@
 	starting_wage = 30
 
 	allowed_races = RACES_PLAYER_NONEXOTIC
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	outfit = /datum/outfit/dungeoneer
 	give_bank_account = 50

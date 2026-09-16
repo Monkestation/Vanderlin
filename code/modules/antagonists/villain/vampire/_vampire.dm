@@ -60,9 +60,11 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	if(istype(examined_datum, /datum/antagonist/vampire/outcast))
 		return span_boldnotice("An outcast child of Kaine.")
 	if(istype(examined_datum, /datum/antagonist/zombie))
-		return span_boldnotice("Another deadite.")
+		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
-		return span_boldnotice("Another deadite.")
+		return span_boldnotice("A deadite.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/sorcerer))
+		return span_boldnotice("A formidable Blood Sorcerer.")
 
 /datum/antagonist/vampire/on_gain()
 	SSmapping.retainer.vampires |= owner

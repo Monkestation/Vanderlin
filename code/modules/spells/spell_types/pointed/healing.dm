@@ -40,7 +40,7 @@
 
 /datum/action/cooldown/spell/healing/cast(mob/living/cast_on)
 	. = ..()
-	if(cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark))
+	if(cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark/curse))
 		cast_on.visible_message(
 			span_warning("[cast_on] recoils as their flesh is burned by blood!"),
 			span_bloody("The Blood Mark sears my flesh with a wave of pain!"),

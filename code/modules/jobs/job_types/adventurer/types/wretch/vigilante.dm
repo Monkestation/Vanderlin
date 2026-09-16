@@ -88,7 +88,7 @@
 	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/armor/gambeson/heavy/colored/dark
 	head = /obj/item/clothing/head/leather/inqhat/vigilante
-	armor = /obj/item/clothing/armor/leather/jacket/leathercoat/colored/wretchrenegade
+	armor = /obj/item/clothing/armor/leather/jacket/leathercoat/renegade
 	backr = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/knifebelt/black/iron
 	gloves = /obj/item/clothing/gloves/leather/advanced

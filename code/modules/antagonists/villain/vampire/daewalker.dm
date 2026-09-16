@@ -48,6 +48,8 @@
 	outfit = /datum/outfit/daewalker
 	patron = /datum/patron/divine/astrata
 	innate_traits = list(
+		TRAIT_BLOOD_SENSE,
+		TRAIT_VITAE_USER,
 		TRAIT_SILVER_BLESSED,
 		TRAIT_HARDDISMEMBER,
 		TRAIT_CRITICAL_RESISTANCE,
