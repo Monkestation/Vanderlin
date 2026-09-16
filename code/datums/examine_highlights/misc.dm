@@ -12,9 +12,7 @@
 	item_examine_desc = "Contains the symbol of the Hands Court Agents."
 
 /datum/examine_highlight/royal_court/crown
-	item_examine_desc = "<b>Heavy the Crown is, and ever shall it be.</b><br>Such symbols are not lightly bestowed, for they signify authority exercised beneath Astrata's eternal light. \
-	This is a recognized mark of divine sovereignty, symbolizing the sacred right to rule granted by the Sun-Tyrant to the chosen bloodline. \
-	Subjects should regard its bearer with reverence, recognizing a station and authority very few can claim."
+	item_examine_desc = "<b>Heavy the Crown is, and ever shall it be.</b>"
 
 /datum/examine_highlight/divine
 	color = COLOR_VIBE_CROWN
@@ -26,3 +24,8 @@
 	adjective = "Black Briar"
 	leader = ""
 	explanation = "<b>This is an item connected to the feared Black Briar Plague. Handle with EXTREME caution.</b>"
+
+/datum/examine_highlight/psydonite_relic
+	color = COLOR_SILVER
+	adjective = "Relic"
+	explanation = "<b>This is a treasured relic of Psydonic Faith.</b>"

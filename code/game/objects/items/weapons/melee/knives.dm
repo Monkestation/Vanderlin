@@ -440,6 +440,7 @@
 	name = "orphan's dream"
 	desc = "A blade of darkened bloodsteel, the hopes and dreams of a forgotten soul..."
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic/relic
 
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon

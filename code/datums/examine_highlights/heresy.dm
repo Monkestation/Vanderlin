@@ -25,10 +25,12 @@
 /datum/examine_highlight/heresy_alarming/darksteel
 	item_examine_desc = "Steel made using the dark magics of Zizo, Crafted in Ritual from the screaming flesh of the living and dead in unnatural conjunction!"
 
-
 /datum/examine_highlight/heresy_suspicious/bloodmagic
 	item_examine_desc = "The cursed embodiment of dark and ancient powers."
 
 /datum/examine_highlight/heresy_alarming/bloodmagic
 	item_examine_desc = "The cursed embodiment of dark and ancient powers."
 	symbol = EXAMINEHIGHLIGHT_SYMBOL_HERESYSEVERITY_SUSPICIOUS
+
+/datum/examine_highlight/heresy_alarming/bloodmagic/relic
+	item_examine_desc = "A dark relic of ancient powers, no good can come of seeing this."

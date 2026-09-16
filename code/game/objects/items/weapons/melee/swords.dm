@@ -670,6 +670,7 @@
 	desc = "A rapier as swift as the inquisitors of the Ordo Venatari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
 	item_weight = 700 GRAMS
 	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/rapier/dec
 	name = "decorated rapier"
@@ -1128,6 +1129,7 @@
 	desc = "A balanced silver blade, favoured by both the Ordo Benetarus and the Ordo Venetari. May it carve a path through the Unholy, in honour and rememberance of Psydon's sacrifice."
 	item_weight = 1.5 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/long/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -1240,6 +1242,7 @@
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWDLONG_CHOP)
 	item_weight = 2.5 KILOGRAMS
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/long/greatsword/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -1261,6 +1264,7 @@
 	item_weight = 2.5 KILOGRAMS
 	smeltresult = /obj/item/ingot/silverblessed
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/long/broadsword/psy/getonmobprop(tag)
 	. = ..()
