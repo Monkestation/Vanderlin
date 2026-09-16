@@ -140,7 +140,7 @@
 	melting_material = null
 	melt_amount = 0
 	pickpocket_difficulty = SKILL_RANK_EXPERT
-	examine_highlight_type = /datum/examine_highlight/divine
+	examine_highlight_type = /datum/examine_highlight/divine/priest
 
 /datum/intent/priest_smite
 	name = "smite"

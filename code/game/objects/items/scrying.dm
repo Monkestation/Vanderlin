@@ -39,7 +39,7 @@
 
 /obj/item/scrying/orb/miracle
 	name = "divine scrying orb"
-	examine_highlight_type = /datum/examine_highlight/divine
+	examine_highlight_type = /datum/examine_highlight/divine/scrying
 
 /obj/item/scrying/orb/miracle/pass_scrying_checks(mob/living/user)
 	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/holy) < 1)
