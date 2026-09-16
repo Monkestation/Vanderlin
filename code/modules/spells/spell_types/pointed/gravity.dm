@@ -31,7 +31,7 @@
 		cast_on.adjustBruteLoss(15, damage_type = BCLASS_BLUNT)
 		to_chat(cast_on, span_userdanger("You're magically weighed down, but your strength resists!"))
 	else
-		cast_on.Knockdown(3 SECONDS)
+		cast_on.Knockdown(3 SECONDS, prevent_drop = TRUE)
 		cast_on.Immobilize(3 SECONDS)
 		cast_on.adjustBruteLoss(30, damage_type = BCLASS_BLUNT)
 		to_chat(cast_on, span_userdanger("You're magically weighed down and hit the ground!"))
