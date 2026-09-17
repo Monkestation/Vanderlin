@@ -316,6 +316,7 @@
 
 	base_healing = 35
 	wound_modifier = 0.35
+	associated_skill = /datum/attribute/skill/magic/druidic
 
 /datum/action/cooldown/spell/healing/greater
 	name = "Miracle"

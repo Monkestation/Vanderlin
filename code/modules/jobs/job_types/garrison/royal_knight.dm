@@ -16,7 +16,7 @@
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	starting_wage = 40
 
 	advclass_cat_rolls = list(CTAG_ROYALKNIGHT = 20)

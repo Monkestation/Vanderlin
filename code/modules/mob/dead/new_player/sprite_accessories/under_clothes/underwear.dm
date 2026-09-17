@@ -12,7 +12,7 @@
 	name = "Undiese"
 	icon_state = "male_elf"
 	gender = MALE
-	specuse = list(SPEC_ID_ELF, SPEC_ID_DROW)
+	specuse = list(SPEC_ID_ELF, SPEC_ID_DROW, SPEC_ID_SNOW_ELF, SPEC_ID_HALF_SNOW_ELF)
 
 /datum/sprite_accessory/underwear/regmd
 	name = "Undiesd"

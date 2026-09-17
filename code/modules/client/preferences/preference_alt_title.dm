@@ -5,9 +5,10 @@
 /// Returns lock info for a job as plain data, or FALSE if not locked.
 /// list("code" = short identifier, "label" = short display label, "detail" = list of plain-text lines)
 /datum/preferences/proc/get_job_lock_data(datum/job/job, mob/user)
-	var/player_species = user.client.prefs.pref_species.id_override || user.client.prefs.pref_species.id
+	var/player_species = user.client.prefs.pref_species.id
+	var/used_player_species = user.client.prefs.pref_species.id_override || player_species
 	var/fails_allowed = length(job.allowed_races) && !job.prefs_species_check(src)
-	var/fails_blacklist = length(job.blacklisted_species) && (player_species in job.blacklisted_species)
+	var/fails_blacklist = length(job.blacklisted_species) && ((used_player_species in job.blacklisted_species) || (player_species in job.blacklisted_species))
 
 	if(length(job.whitelisted_ckeys) && !(user.ckey in job.whitelisted_ckeys))
 		return list(
