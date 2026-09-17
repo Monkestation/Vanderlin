@@ -168,6 +168,7 @@
 	name = "\proper remorse"
 	desc = "An ancient bloodsteel staff once wielded by the first mortal Blood Mage. You will learn remorse, and it will hurt."
 	max_integrity = INTEGRITY_QUARTERSTAFF * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic/relic
 
 /obj/item/weapon/polearm/woodstaff/seer
 	name = "staff of the rous seer"
@@ -229,6 +230,7 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 /obj/item/weapon/polearm/spear/steel/baotha/Initialize(mapload)
 	. = ..()
@@ -631,6 +633,7 @@
 	name = "\proper vanguard"
 	desc = "The forefront of fallen power and knowledge. The dark vanguard is coming..."
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic/relic
 
 /obj/item/weapon/polearm/halberd/getonmobprop(tag)
 	. = ..()
@@ -695,6 +698,7 @@
 	icon_state = "psyhalberd"
 	item_weight = 3.5 KILOGRAMS
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/polearm/halberd/psydon/relic/Initialize(mapload)
 	. = ..()

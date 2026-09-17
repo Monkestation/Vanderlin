@@ -363,6 +363,7 @@
 	name = "laced dagger"
 	desc = "Whispers of bliss seep deeper than the blade."
 	icon_state = "baothadagger"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 /obj/item/weapon/knife/dagger/steel/inhumen/baotha/Initialize(mapload)
 	. = ..()
@@ -372,11 +373,13 @@
 	name = "vicious dagger"
 	desc = "A chipped and serrated blade designed with only one purpose. Blood."
 	icon_state = "graggardagger"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/weapon/knife/dagger/steel/inhumen/matthios
 	name = "gilded knife"
 	desc = "Wealth with function."
 	icon_state = "matthiosknife"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 /obj/item/weapon/knife/dagger/steel/inhumen/zizo
 	name = "darksteel dagger"
@@ -384,6 +387,7 @@
 	icon_state = "zizodagger"
 	melting_material = /datum/material/avantyne
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_DARKSTEEL
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/darksteel
 
 //................ Silver Dagger ............... //
 /obj/item/weapon/knife/dagger/silver
@@ -444,6 +448,7 @@
 	name = "orphan's dream"
 	desc = "A blade of darkened bloodsteel, the hopes and dreams of a forgotten soul..."
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic/relic
 
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon

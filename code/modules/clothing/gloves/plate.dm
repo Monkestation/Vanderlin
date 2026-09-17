@@ -105,11 +105,13 @@
 	name = "gilded gauntlets"
 	desc = "Shimmering plate gauntlets. Many riches have been taken with these, and just as many lives."
 	icon_state = "matthiosgloves"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 /obj/item/clothing/gloves/plate/inhumen/graggar
 	name = "vicious gauntlets"
 	desc = "Plate gauntlets that reek of death. Many lives have been taken with these."
 	icon_state = "graggarplategloves"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/clothing/gloves/plate/inhumen/graggar/heavy
 	name = "vicious plated gauntlets"
@@ -123,6 +125,7 @@
 	name = "saccharine gauntlets"
 	desc = "Tantalizing plate gauntlets, you almost feel like you can't take them off..."
 	icon_state = "baothagloves"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 //............... Gronnic gloves ............... //
 /obj/item/clothing/gloves/plate/iron/gronn

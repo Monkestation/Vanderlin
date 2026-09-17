@@ -7,4 +7,4 @@
 	solid_form = /obj/item/ingot/bloodsteel
 	melting_point = 1866
 	value_modiifer = 0.7 //People aren't fond of it
-	material_examine_hint = /datum/examine_highlight/heresy_alarming/bloodsteel
+	material_examine_hint = /datum/examine_highlight/heresy_alarming/bloodmagic

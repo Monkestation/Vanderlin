@@ -1,0 +1,9 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - balance: "Adjusted duration of Enervating Elegy's status effect."
+  - bugfix: "Fixed unreachable code in create_wave."
+  - rscdel: "Deleted the Check Devotion verb as made redundant by Devotion being displayed on Stat tab."
+  - rscadd: "Court Agent and Wretches no longer appear in the actors list from lobby."
+  - map: "Fixed some parts of the Vanderlin Keep moat that got stuck on rocks."
+  - bugfix: "Fixed spell-granting scrolls breaking if you right click them."
