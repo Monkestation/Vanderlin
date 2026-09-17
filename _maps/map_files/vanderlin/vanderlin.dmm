@@ -6766,7 +6766,7 @@
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	floor_turf = /turf/open/floor/ruinedwood/spiral;
 	override_floor = 1;
-	redstone_id = 614
+	redstone_id = "HeirRoom2"
 	},
 /turf/closed/wall/mineral/wood,
 /area/indoors/town/keep/heir/heir2)
@@ -7035,7 +7035,7 @@
 /area/outdoors/town)
 "cSu" = (
 /obj/structure/lever/hidden/keep{
-	redstone_id = 614
+	redstone_id = "HeirRoom1"
 	},
 /turf/closed/wall/mineral/wood,
 /area/indoors/town/keep/heir/heir1)
@@ -9660,7 +9660,7 @@
 /area/outdoors/town)
 "dWE" = (
 /obj/structure/lever/hidden/keep{
-	redstone_id = 614
+	redstone_id = "HeirRoom2"
 	},
 /turf/closed/wall/mineral/wood,
 /area/indoors/town/keep/heir/heir2)
@@ -22745,6 +22745,10 @@
 	},
 /turf/open/floor/dirt,
 /area/indoors/town/church)
+"jik" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/blocks,
+/area/indoors/town/keep/passages/basement)
 "jiw" = (
 /obj/effect/decal/cobblerockedge/alt{
 	dir = 6
@@ -24659,7 +24663,7 @@
 /area/indoors/dungeon)
 "jSK" = (
 /obj/structure/door{
-	name = "Clock Tower"
+	name = "Walls"
 	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/atarms,
@@ -29045,6 +29049,12 @@
 /obj/structure/bars,
 /turf/open/water/river/under,
 /area/indoors/town/church)
+"lFf" = (
+/obj/machinery/light/fueled/torchholder{
+	pixel_y = 32
+	},
+/turf/open/floor/blocks,
+/area/indoors/town/keep/passages/basement)
 "lFg" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/clothing/cloak/raincloak,
@@ -29641,6 +29651,10 @@
 /obj/structure/plasticflaps,
 /turf/open/water/sewer,
 /area/under/town/sewer)
+"lQj" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/blocks,
+/area/indoors/town/keep/basement)
 "lQw" = (
 /obj/structure/stairs/stone{
 	dir = 1
@@ -31387,6 +31401,10 @@
 	},
 /turf/open/openspace,
 /area/outdoors/town)
+"myC" = (
+/obj/structure/fluff/walldeco/vinez/red,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/keep/passages/basement)
 "myF" = (
 /obj/structure/water_pipe{
 	name = "keep line"
@@ -32292,6 +32310,10 @@
 /obj/item/broom,
 /turf/open/floor/wood,
 /area/indoors/town/keep/servant)
+"mPF" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/blocks,
+/area/indoors/town/keep/passages/basement)
 "mPL" = (
 /obj/structure/kneestingers,
 /turf/open/floor/cobblerock,
@@ -37314,6 +37336,12 @@
 /obj/structure/window/stained/yellow,
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
+"oRf" = (
+/obj/structure/lever/hidden/keep{
+	redstone_id = "BasementPassage"
+	},
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/keep/basement)
 "oRg" = (
 /obj/structure/window/stained/yellow,
 /turf/open/floor/ruinedwood/alt,
@@ -38410,6 +38438,12 @@
 	},
 /turf/open/openspace,
 /area/indoors/town)
+"pkG" = (
+/obj/structure/lever/hidden/keep{
+	redstone_id = "BasementPassage"
+	},
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/keep/passages/basement)
 "pkP" = (
 /obj/structure/stairs{
 	dir = 4
@@ -52522,6 +52556,12 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/theatre)
+"uJl" = (
+/obj/effect/mapping_helpers/secret_door_creator/keep{
+	redstone_id = "BasementPassage"
+	},
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/keep/basement)
 "uJo" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -57890,7 +57930,7 @@
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	floor_turf = /turf/open/floor/ruinedwood/spiral;
 	override_floor = 1;
-	redstone_id = 614
+	redstone_id = "HeirRoom1"
 	},
 /turf/closed/wall/mineral/wood,
 /area/indoors/town/keep/heir/heir1)
@@ -77643,7 +77683,7 @@ xSB
 bCK
 jfT
 aGd
-meT
+lFf
 qhF
 xCr
 eGt
@@ -78666,7 +78706,7 @@ nYi
 vnd
 cjK
 vVv
-meT
+mPF
 iJu
 unl
 unl
@@ -79882,13 +79922,13 @@ oFC
 xGq
 meT
 jnU
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+jnU
+jnU
+jnU
+qhF
+qhF
+qhF
+qhF
 qFx
 qFx
 qFx
@@ -80083,14 +80123,14 @@ qhx
 ipO
 xGq
 meT
+meT
+meT
+meT
+meT
+meT
+meT
+meT
 qhF
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
 qFx
 qFx
 qFx
@@ -80286,13 +80326,13 @@ pPS
 rnH
 meT
 iJu
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+qhF
+qhF
+qhF
+jnU
+jnU
+meT
+jnU
 qFx
 qFx
 qFx
@@ -80492,9 +80532,9 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
+qhF
+meT
+jnU
 qFx
 qFx
 unl
@@ -80687,16 +80727,16 @@ mAm
 khI
 xGq
 meT
-meT
+jik
 meT
 qhF
 qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
+qhF
+meT
+jnU
 qFx
 qFx
 unl
@@ -80896,9 +80936,9 @@ uPi
 dBy
 lXv
 qFx
-qFx
-qFx
-vuv
+qhF
+meT
+myC
 vuv
 qFx
 unl
@@ -81098,9 +81138,9 @@ xDo
 lOz
 lXv
 qFx
-qFx
-qFx
-qFx
+jnU
+meT
+qhF
 vuv
 vuv
 xOs
@@ -81300,11 +81340,11 @@ xEQ
 uRF
 lXv
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+jnU
+meT
+jnU
+jnU
+qhF
 qFx
 hES
 tgT
@@ -81502,11 +81542,11 @@ fMR
 byk
 lXv
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+qhF
+meT
+meT
+meT
+qhF
 qFx
 hES
 kMW
@@ -81704,11 +81744,11 @@ fMR
 bnt
 lXv
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
+qhF
+jnU
+jnU
+meT
+qhF
 qFx
 hBB
 vwf
@@ -81908,9 +81948,9 @@ lXv
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
+jnU
+meT
+jnU
 hES
 hBB
 ewI
@@ -82110,8 +82150,8 @@ uPi
 qFx
 qFx
 qFx
-qFx
-qFx
+qhF
+meT
 tgT
 hES
 xSW
@@ -82312,8 +82352,8 @@ uPi
 qFx
 qFx
 qFx
-qFx
-qFx
+qhF
+meT
 tgT
 pgc
 vwf
@@ -82514,8 +82554,8 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
+qhF
+meT
 tgT
 oXU
 vwf
@@ -82716,8 +82756,8 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
+pkG
+mPF
 hES
 tgT
 uFG
@@ -82918,8 +82958,8 @@ sDU
 bgA
 bgA
 bgA
-sDU
-sDU
+oRf
+uJl
 hBB
 fSy
 hBB
@@ -83120,7 +83160,7 @@ kZq
 wxY
 ufv
 kZq
-wxY
+lQj
 wxY
 gWb
 bBH
@@ -83900,7 +83940,7 @@ qFx
 sDU
 fZF
 fZF
-fYq
+sDU
 vtL
 bng
 gPr
@@ -84708,7 +84748,7 @@ qFx
 cIe
 fZF
 fZF
-jEQ
+cBr
 vtL
 sGG
 gPr
