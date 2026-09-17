@@ -77,7 +77,7 @@
 	w_class = WEIGHT_CLASS_SMALL
 	sellprice = 50
 	item_weight = 50 GRAMS
-	examine_highlight_type = /datum/examine_highlight/heresy_veryodd
+	examine_highlight_type = /datum/examine_highlight/heresy_veryodd/scrying
 
 /obj/item/scrying/flame/add_scry_comp()
 	AddComponent(/datum/component/scrying, 10 SECONDS, 50 SECONDS, TRUE, FALSE, "I look into NAME_HERE but only see dark fire. Maybe I should wait.", 17, 13)

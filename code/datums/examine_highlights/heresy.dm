@@ -39,6 +39,8 @@
 	item_examine_desc = "Steel made using the dark magics of Zizo, Crafted in Ritual from the screaming flesh of the living and dead in unnatural conjunction!"
 
 //##########################################################
+/datum/examine_highlight/heresy_veryodd/glut
+	item_examine_desc = "Your blood flees your flesh to avoid the touch of this gem."
 
 /datum/examine_highlight/heresy_suspicious/graggar
 	item_examine_desc = "An item of worship and faith to the Dark Sinistar."
@@ -63,6 +65,8 @@
 	item_examine_desc = "An item of worship and faith to the Master Thief."
 
 //##########################################################
+/datum/examine_highlight/heresy_veryodd/scrying
+	item_examine_desc = "Shifting darkness lies within the heart of fire..."
 
 /datum/examine_highlight/heresy_suspicious/bloodmagic
 	item_examine_desc = "The cursed embodiment of dark and ancient powers."

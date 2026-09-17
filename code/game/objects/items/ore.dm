@@ -477,7 +477,7 @@
 	icon_state = "component_blood"
 	smeltresult = /obj/item/gem/blood_diamond //Ensures that it can be reused for any Glut-specific ritual, should one find this in its crystalline form.
 	sellprice = 33
-	examine_highlight_type = /datum/examine_highlight/heresy_veryodd
+	examine_highlight_type = /datum/examine_highlight/heresy_veryodd/glut
 
 /obj/item/ingot/component/glutcrystal/examine(mob/user)
 	. = ..()
