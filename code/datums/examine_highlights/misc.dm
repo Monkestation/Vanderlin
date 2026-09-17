@@ -26,7 +26,7 @@
 	item_examine_desc = "The ensemble of an annointed Priest of Astrata."
 
 /datum/examine_highlight/divine/scrying
-	item_examine_desc = "Blessed by the Moon Prince, this Scrying Orb can only be handled by the faithful."
+	item_examine_desc = "Blessed by the Moon Prince this Scrying Orb can only be handled by the faithful."
 
 /datum/examine_highlight/psydonite_relic
 	color = COLOR_SILVER
