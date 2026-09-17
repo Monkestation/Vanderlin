@@ -104,14 +104,14 @@
 
 	triumph_cost_permanent = 125
 
-/datum/loadout_item/slitted_dress
+/datum/loadout_item/ornate_tunic
 	name = "Ornate Tunic"
 	item_path = /obj/item/clothing/shirt/ornate/tunic
 	ui_category = "Shirts"
 
 	triumph_cost_permanent = 125
 
-/datum/loadout_item/slitted_dress
+/datum/loadout_item/ornate_dress
 	name = "Ornate Dress"
 	item_path = /obj/item/clothing/shirt/ornate/dress
 	ui_category = "Shirts"
