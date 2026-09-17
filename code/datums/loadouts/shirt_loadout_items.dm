@@ -104,6 +104,20 @@
 
 	triumph_cost_permanent = 125
 
+/datum/loadout_item/slitted_dress
+	name = "Ornate Tunic"
+	item_path = /obj/item/clothing/shirt/ornate/tunic
+	ui_category = "Shirts"
+
+	triumph_cost_permanent = 125
+
+/datum/loadout_item/slitted_dress
+	name = "Ornate Dress"
+	item_path = /obj/item/clothing/shirt/ornate/dress
+	ui_category = "Shirts"
+
+	triumph_cost_permanent = 125
+
 /datum/loadout_item/velvetdress
 	name = "Velvet Dress"
 	item_path = /obj/item/clothing/shirt/dress/velvetdress
