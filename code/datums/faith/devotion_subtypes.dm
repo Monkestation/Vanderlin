@@ -266,6 +266,7 @@
 
 /datum/devotion/archdevil
 	devotion_color = COLOR_BLOOD
+	devotion_title = "Favor"
 
 /datum/devotion/archdevil/grant_to(mob/living/carbon/human/holder)
 	if(!holder)
@@ -282,7 +283,6 @@
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
 		grant_miracle(miracle)
-	//add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
 	check_progression()
 	initialize_tasks()
 

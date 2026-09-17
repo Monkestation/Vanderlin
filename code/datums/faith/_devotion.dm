@@ -7,6 +7,8 @@
 	var/devotion = 0
 	/// How much devotion the `holder_mob` can have
 	var/max_devotion = 1000
+	/// Override title for devotion
+	var/devotion_title = "Devotion"
 	/// Progress on reaching next tier, granting access to new miracles
 	var/progression = 0
 	/// How far the `holder_mob` can progress, use defines at `code\__DEFINES\faith.dm`
@@ -110,8 +112,8 @@
 	. += devotion
 	devotion = clamp(devotion += amount, 0, max_devotion)
 	. -= devotion
-	holder_mob?.hud_used?.bloodpool?.name = "Devotion: [devotion]"
-	holder_mob?.hud_used?.bloodpool?.desc = "Devotion: [devotion]/[max_devotion]"
+	holder_mob?.hud_used?.bloodpool?.name = "[devotion_title]: [devotion]"
+	holder_mob?.hud_used?.bloodpool?.desc = "[devotion_title]: [devotion]/[max_devotion]"
 	if(devotion <= 0)
 		holder_mob?.hud_used?.bloodpool?.set_value(0, 1 SECONDS)
 	else

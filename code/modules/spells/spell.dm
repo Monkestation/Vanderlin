@@ -706,12 +706,12 @@
 
 			if(spell_flags & SPELL_DEVIL_BLOCKED)
 				if(HAS_TRAIT(human_target, TRAIT_DEVILS_REJECTION) && !(human_target.mob_biotypes & MOB_UNDEAD))
-					human_target.visible_message(is_dead ? span_info("[human_target] lies motionless as the miracle dissipates.") : span_info("[human_target] stirs for a moment, the miracle dissipates."), span_warning("Hellfire flares within you, only to dissipate as quickly as it started."))
+					to_chat(human_target, span_warning("Hellfire flares within you, only to dissipate as quickly as it started."))
 					playsound(human_target, 'sound/magic/soulsteal.ogg', 100, FALSE, -1)
 					owner.playsound_local(owner, 'sound/magic/soulsteal.ogg', 100, FALSE, -1)
 					return sig_return | SPELL_CANCEL_CAST
-				if(human_target.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic) || human_target.has_status_effect(/datum/status_effect/debuff/blood_mark/curse))
-					human_target.visible_message(is_dead ? span_info("[human_target] lies motionless as the miracle dissipates.") : span_info("[human_target] stirs for a moment, the miracle dissipates."), span_warning("Your blood burns as divine energies are repelled."))
+				if((human_target.has_status_effect(/datum/status_effect/debuff/revive_bloodmagic) || human_target.has_status_effect(/datum/status_effect/debuff/blood_mark/curse)) && !(human_target.mob_biotypes & MOB_UNDEAD))
+					to_chat(human_target, span_warning("Your blood burns as divine energies are repelled."))
 					playsound(human_target, 'sound/magic/PSY.ogg', 100, FALSE, -1)
 					owner.playsound_local(owner, 'sound/magic/PSY.ogg', 100, FALSE, -1)
 					return sig_return | SPELL_CANCEL_CAST
