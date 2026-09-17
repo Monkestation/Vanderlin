@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - map: "Vault is no longer jauntable."
+  - map: "Fixed heir secret passage on Vanderlin being linked."
+  - rscdel: "Removed Skeleton Be-Special."
