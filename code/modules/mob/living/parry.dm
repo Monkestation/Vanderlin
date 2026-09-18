@@ -75,7 +75,7 @@
 	parry_modifier += rmb_intent?.def_bonus/2
 
 	if(HAS_TRAIT(src, TRAIT_EXPERT_PARRY))
-		parry_modifier += 2
+		parry_modifier += 10
 
 	// Attacker special bonuses
 	if(attacker.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/guidance))
