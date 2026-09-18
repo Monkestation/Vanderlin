@@ -138,7 +138,7 @@
 		our_debuffer.adjust_bloodpool(floored_damage)
 
 	status_victim.adjust_blood_volume(-floored_damage)
-	our_debuffer.adjust_stamina(floored_damage)
+	our_debuffer.adjust_stamina(-floored_damage)
 	status_victim.adjust_blood_volume(floored_damage, maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 
 	if(!transfer_beam)
