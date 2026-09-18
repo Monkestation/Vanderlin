@@ -217,11 +217,21 @@
 	desc = "An amulet made of white pearls, usually worn by fishers or sailors."
 	sellprice = 80
 
+/obj/item/clothing/neck/psycross/pearl/loadout
+	sellprice = 0
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	desc = "An amulet made of white pearls, usually worn by fishers or sailors. It feels a little lighter than it should..."
+
 /obj/item/clothing/neck/psycross/bpearl
 	name = "blue pearl amulet"
 	icon_state = "bpearlcross"
 	desc = "An amulet made of rare blue pearls, usually worn by priests and worshippers of Abyssor, or as lucky charms for captains of ships."
 	sellprice = 220
+
+/obj/item/clothing/neck/psycross/bpearl/loadout
+	sellprice = 0
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	desc = "An amulet made of rare blue pearls, usually worn by priests and worshippers of Abyssor, or as lucky charms for captains of ships. It feels a little lighter than it should..."
 
 /obj/item/clothing/neck/psycross/shell
 	name = "oyster shell necklace"

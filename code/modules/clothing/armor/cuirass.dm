@@ -117,6 +117,11 @@
 	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 6.5 KILOGRAMS
 
+/obj/item/clothing/armor/cuirass/fluted/ornate
+	name = "ornate fluted cuirass"
+	icon_state = "ornatecuirass"
+	desc = "A fluted cuirass with decorative engravings across its surface. Fitting for a noble, or maybe just someone who wants to look fancy."
+
 /obj/item/clothing/armor/cuirass/fluted/iron
 	name = "iron fluted cuirass"
 	desc = "Relatively sturdy iron cuirass with tassets. Supposedly protective, though maybe not against crossbow bolts."

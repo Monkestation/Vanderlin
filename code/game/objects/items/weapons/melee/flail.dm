@@ -141,6 +141,7 @@
 	icon_state = "psymorningstar"
 	item_weight = 1.5 KILOGRAMS
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/flail/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -174,6 +175,16 @@
 /obj/item/weapon/flail/bloodsteel/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)
+
+/obj/item/weapon/flail/bloodsteel/relic
+	name = "\proper heart of Mephistopheles"
+	desc = "The heart of darkness, empowered by the progenitor of Kaine."
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic/relic
+
+/obj/item/weapon/flail/bloodsteel/relic/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/vampiric)
 
 //................ Peasant Flail ............... // A little confusing still
 /obj/item/weapon/flail/peasant
@@ -257,3 +268,4 @@
 	melt_amount = 150
 	sellprice = 250
 	item_weight = 4 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios

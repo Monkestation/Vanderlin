@@ -1988,7 +1988,7 @@ GLOBAL_LIST_EMPTY(custom_outfits) //Admin created outfits
 		for(var/client/C in CW.candidates)
 			if(!C || !C.mob || !isdead(C.mob))
 				continue
-				to_chat(C, span_notice("The amount of player(s) didn't reach the minimum amount needed to deploy the wave."))
+			to_chat(C, span_notice("The amount of player(s) didn't reach the minimum amount needed to deploy the wave."))
 		CW.candidates = list()
 		CW.spawn_landmark = null
 		return

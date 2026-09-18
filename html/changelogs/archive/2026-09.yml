@@ -195,3 +195,92 @@
   - image: Changed the screen alert icon for blood mark and bloodsight
   - balance: Meteor Storm and Greater Fireball now require higher levels of fire form
       to unlock.
+2026-09-10:
+  realforest2001:
+  - bugfix: Fixed bandages getting stuck with blood.
+2026-09-11:
+  Archeonan:
+  - rscadd: Smithable Ornate Fluted Cuirass
+  Avalon-Proto:
+  - qol: Swimmer Trait has been made stronger, and allows you to jump from the water
+      now
+  ModDownloading:
+  - rscadd: Black Oak Guardian has been reworked into Redwood Mercenary (credit to
+      Archeon).
+  Monkeke2:
+  - balance: Decapitations dont happen if you target the eyes/nose/ears
+  realforest2001:
+  - balance: Loadout items are no longer free money.
+  - bugfix: Court roles should now always know eachother.
+  ta3754859-max:
+  - qol: Emotes now give proper runechat message over your character head
+  - rscadd: Kiss while aiming the skull is a forehead kiss, kiss while aiming head
+      is a cheek kiss
+2026-09-12:
+  realforest2001:
+  - code_imp: Added check variables for revive / cure rot miracles, such as whether
+      can work on luxless.
+  - balance: Garrotte now requires 3 seconds to grab a target if they're in combat
+      mode. Does not apply to users trained in Apprehension Techniques.
+2026-09-13:
+  Carol-J:
+  - rscadd: Added Dark Elves to Zalad-associated species
+  SSensum13:
+  - bugfix: Fixed absolver's bloodpool regeneration.
+  TheDoktorZ:
+  - qol: Keys for Triumph-class Heirs
+  - balance: Gave the Royal Knight a dagger
+  - bugfix: Duplicate equipment from MAA & Squire gone
+  - bugfix: Axeman-At-Arms has their gambeson
+  voidwytch:
+  - rscadd: Added ten sets of Wintermare nobility clothes and their respective crafting
+      recipes
+2026-09-15:
+  realforest2001:
+  - rscadd: Miscellaneous fixes and tweaks to Blood Magic related things.
+  - bugfix: Fixed Bloodstone Ore missing in cold/environment specific rocks.
+2026-09-16:
+  dwasint:
+  - rscadd: Added examine highlights system.
+  realforest2001:
+  - rscadd: Added forest cloak and forest snow cloak to loadout options.
+  - rscadd: Added a hood to loadout options.
+  - bugfix: Fixed pearl necklaces from loadout being free money.
+  - bugfix: Repulse spell will no longer fuck up everything in the game.
+2026-09-17:
+  realforest2001:
+  - rscadd: Half snow elves can be more things. Added half snow elf and snow elf to
+      more direct blacklists.
+  - rscadd: Added the ability for the Finger's Crown to send messages to other holders.
+      Only functions with people who know court agent identities. (Monarch, Hand and
+      agents)
+  - rscadd: Added the Quack subclass for Court Agent, locked to Medicator.
+  - rscadd: Added the Far Eastern Assassin subclass for Court Agent, locked to Human,
+      Elf, Drow and Half-Elf/Drow.
+  - rscadd: Added the Dunewalker subclass for Court Agent, locked to Zaladin relevant
+      races.
+  - rscadd: Added the Grenzelhoft Surefire subclass for Court Agent, locked to Grenzelhoft
+      relevant races.
+  - rscadd: Added Crimson Blade subclass for Court Agent and Adventurer, locked to
+      Tiefling. Rare spawn for Adventurer.
+  - rscadd: Added Occult Librarian subclass for Court Agent, locked to Apostatsy.
+      Medium-Rare spawn for Adventurer.
+  - rscadd: Added a trait for items not appearing on examine list.
+  - rscadd: Added a knife sheathe with the above.
+  - map: Remapped the Court Agent hideout.
+  - bugfix: Bathing with integrated skin armor now works properly.
+2026-09-18:
+  realforest2001:
+  - rscadd: Added more heretical examine highlights.
+  - rscadd: Added some non-heretical examine highlights.
+  - balance: Adjusted duration of Enervating Elegy's status effect.
+  - bugfix: Fixed unreachable code in create_wave.
+  - rscdel: Deleted the Check Devotion verb as made redundant by Devotion being displayed
+      on Stat tab.
+  - rscadd: Court Agent and Wretches no longer appear in the actors list from lobby.
+  - map: Fixed some parts of the Vanderlin Keep moat that got stuck on rocks.
+  - bugfix: Fixed spell-granting scrolls breaking if you right click them.
+  - map: Vault is no longer jauntable.
+  - map: Fixed heir secret passage on Vanderlin being linked.
+  - rscdel: Removed Skeleton Be-Special.
+  - bugfix: You now require arcyne skill to invoke magic runes.

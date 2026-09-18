@@ -34,7 +34,7 @@
 
 	defprob = 50
 	dodgetime = 40
-
+	dendor_taming_chance = DENDOR_TAME_PROB_NONE
 	footstep_type = FOOTSTEP_MOB_HEAVY
 
 	butcher_results = list(
