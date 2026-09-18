@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/aoe/blood_harvest
 	name = "Blood Harvest"
-	desc = "Ravage all around you and claim their blood."
+	desc = "Ravage all those around you and claim their blood."
 	button_icon_state = "vicissitude"
 	sound = 'sound/magic/invoke_general.ogg'
 	charge_sound = 'sound/magic/chargingold.ogg'
@@ -15,14 +15,14 @@
 
 	click_to_activate = FALSE
 	charge_required = FALSE
-	cooldown_time = 3 MINUTES
+	cooldown_time = 45 SECONDS
 	spell_cost = 500
 
 	aoe_radius = 7
 
 /datum/action/cooldown/spell/aoe/blood_harvest/feedback(had_targets)
 	if(!had_targets)
-		to_chat(owner, SPAN_GOD_ARCHDEVILS("There are no valid targets to reave."))
+		to_chat(owner, span_warning("There are no valid targets to reave."))
 		return
 	owner.visible_message(
 		SPAN_GOD_ARCHDEVILS("A crimson glow suddenly erupts in [owner]'s eyes as dark powers take hold!"),
@@ -30,14 +30,11 @@
 	)
 
 /datum/action/cooldown/spell/aoe/blood_harvest/is_valid_target(atom/cast_on)
-	if(!iscarbon(cast_on))
-		return FALSE
-	var/mob/living/carbon/target = cast_on
-	if(HAS_ANY_OF_TRAITS(target, list(TRAIT_NOBLOOD, TRAIT_DEVILS_REJECTION)))
-		return FALSE
-	return TRUE
+	return iscarbon(cast_on)
 
 /datum/action/cooldown/spell/aoe/blood_harvest/cast_on_thing_in_aoe(mob/living/victim, atom/caster)
+	if(HAS_ANY_OF_TRAITS(target, list(TRAIT_NOBLOOD, TRAIT_DEVILS_REJECTION)))
+		return
 	if(victim.stat == DEAD)
 		return
 	if(victim.has_status_effect(/datum/status_effect/buff/blood_mark/befriend))
@@ -45,6 +42,26 @@
 	if(victim.has_faction(FACTION_BLOOD_MAGIC))
 		return
 	victim.apply_status_effect(/datum/status_effect/debuff/blood_harvest, null, owner, clamp(round(GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)), 1 , 3))
+
+/datum/action/cooldown/spell/aoe/blood_harvest/invocation(mob/living/invoker)
+	//lists can be sent by reference, a string would be sent by value
+	var/list/invocation_list = list(invocation, invocation_type)
+	SEND_SIGNAL(invoker, COMSIG_MOB_PRE_INVOCATION, src, invocation_list)
+	var/used_invocation_message = invocation_list[INVOCATION_MESSAGE]
+	var/used_invocation_type = invocation_list[INVOCATION_TYPE]
+
+	switch(used_invocation_type)
+		if(INVOCATION_SHOUT)
+			invoker.say(used_invocation_message, spans = list("god_archdevil"), forced = "spell ([src])")
+
+		if(INVOCATION_WHISPER)
+			invoker.whisper(used_invocation_message, spans = list("god_archdevil"), forced = "spell ([src])")
+
+		if(INVOCATION_EMOTE)
+			invoker.visible_message(
+				capitalize(replace_pronouns(replacetext(used_invocation_message, "%CASTER", invoker.name), invoker)),
+				capitalize(replace_pronouns(replacetext(invocation_self_message, "%CASTER", invoker.name), invoker)),
+			)
 
 /atom/movable/screen/alert/status_effect/debuff/blood_harvest
 	name = "Blood Harvest"
@@ -55,7 +72,7 @@
 /datum/status_effect/debuff/blood_harvest
 	id = "blood_harvest"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/blood_harvest
-	duration = 40 SECONDS
+	duration = 10 SECONDS
 	examine_text = "<b>SUBJECTPRONOUN writhes as their blood seeks freedom!</b>"
 	effectedstats = list(STAT_CONSTITUTION = -2)
 	status_type = STATUS_EFFECT_REFRESH
@@ -121,7 +138,8 @@
 		our_debuffer.adjust_bloodpool(floored_damage)
 
 	status_victim.adjust_blood_volume(-floored_damage)
-
+	our_debuffer.adjust_stamina(floored_damage)
+	status_victim.adjust_blood_volume(floored_damage, maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 
 	if(!transfer_beam)
 		transfer_beam = our_debuffer.Beam(status_victim, icon_state = "drain_life", time = INFINITY)

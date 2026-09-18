@@ -61,6 +61,7 @@
 /datum/action/cooldown/spell/status/blood_mark/herald
 	name = "Blood Branding"
 	modes = list(BLOOD_MARK_HERALD)
+	learnable = FALSE
 
 /datum/action/cooldown/spell/status/blood_mark/proc/empower()
 	modes = empowered_modes

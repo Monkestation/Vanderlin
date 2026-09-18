@@ -33,10 +33,13 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_HEAVYARMOR,
-		TRAIT_BLOOD_MAGE,
+		TRAIT_BLOOD_SORCERER,
 		TRAIT_VITAE_USER,
+		TRAIT_BLOOD_SENSE,
 		TRAIT_DEADNOSE,
 		TRAIT_STEELHEARTED,
+		TRAIT_BATTLE_READY,
+		TRAIT_NOPAINSTUN,
 	)
 
 	languages = list(
@@ -51,7 +54,7 @@
 	)
 	book_type = /obj/item/recipe_book/arcyne
 
-/datum/job/advclass/wretch/bloodmage/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/wretch/blood_herald/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
 	spawned.hud_used?.set_bloody_bloodpool()
@@ -85,6 +88,8 @@
 
 
 /obj/item/clothing/head/helmet/visored/blkknight/bloodsteel
+	name = "bloodsteel helmet"
+	desc = "A helmet born of blood and despair."
 	color = "#ff6066"
 	smeltresult = /obj/item/ingot/bloodsteel
 	sellprice = 0
@@ -95,6 +100,8 @@
 	enchant(/datum/enchantment/bloodcurse)
 
 /obj/item/clothing/armor/plate/blkknight/bloodsteel
+	name = "bloodsteel plate"
+	desc = "A chestplate born of blood and despair."
 	color = "#ff6066"
 	smeltresult = /obj/item/ingot/bloodsteel
 	sellprice = 0
@@ -105,6 +112,8 @@
 	enchant(/datum/enchantment/bloodcurse)
 
 /obj/item/clothing/shoes/boots/armor/blkknight/bloodsteel
+	name = "bloodsteel boots"
+	desc = "Plate boots born of blood and despair."
 	color = "#ff6066"
 	smeltresult = /obj/item/ingot/bloodsteel
 	sellprice = 0
@@ -115,6 +124,8 @@
 	enchant(/datum/enchantment/bloodcurse)
 
 /obj/item/clothing/gloves/plate/blk/bloodsteel
+	name = "bloodsteel gauntlets"
+	desc = "Gauntlets born of blood and despair."
 	color = "#ff6066"
 	smeltresult = /obj/item/ingot/bloodsteel
 	sellprice = 0
@@ -125,6 +136,8 @@
 	enchant(/datum/enchantment/bloodcurse)
 
 /obj/item/clothing/pants/platelegs/blk/bloodsteel
+	name = "bloodsteel greaves"
+	desc = "Greaves born of blood and despair."
 	color = "#ff6066"
 	smeltresult = /obj/item/ingot/bloodsteel
 	sellprice = 0
