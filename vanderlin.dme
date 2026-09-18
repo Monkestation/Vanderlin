@@ -1465,6 +1465,7 @@
 #include "code\datums\liquids\liquid_group.dm"
 #include "code\datums\liquids\liquid_status_effect.dm"
 #include "code\datums\loadouts\_base_loadout_item.dm"
+#include "code\datums\loadouts\_special_award_items.dm"
 #include "code\datums\loadouts\accessory_loadout_items.dm"
 #include "code\datums\loadouts\armor_loadout_items.dm"
 #include "code\datums\loadouts\cloak_loadout_items.dm"

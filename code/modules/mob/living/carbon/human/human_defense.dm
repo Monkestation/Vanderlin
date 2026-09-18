@@ -647,6 +647,12 @@
 		return
 
 	if(src == M)
+		if(has_status_effect(/datum/status_effect/debuff/blood_choke/herald))
+			to_chat(src, span_bloody("I attempt to free myself from the grip of blood magic."))
+			if(do_after(src, 3.5 SECONDS, src))
+				to_chat(src, span_bloody("I successfully escape death's grasp!"))
+				remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
+			return
 		if(has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
 			to_chat(src, "<span class='notice'>I attempt to remove the durathread strand from around my neck.</span>")
 			if(do_after(src, 3.5 SECONDS, src))

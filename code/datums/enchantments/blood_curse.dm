@@ -68,7 +68,7 @@
 		return
 
 	var/curse_effect = get_curse_effect(source, target)
-	if(!curse_effect || !(get_curse_effect(source, user) <= BLOOD_CURSE_STUDENT))
+	if(!curse_effect || !(get_curse_effect(source, user) <= BLOOD_CURSE_RELIGION))
 		return
 	var/vitae_gain = 1
 

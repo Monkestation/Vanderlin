@@ -23,7 +23,7 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/wretch/blood_herald
 	cmode_music = 'sound/music/cmode/antag/combat_deadlyshadows.ogg'
-	total_positions = 1
+	total_positions = 0
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
 	allowed_patrons = list(/datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/leviathan)
@@ -50,6 +50,7 @@
 		/datum/action/cooldown/spell/status/blood_sight/herald,
 		/datum/action/cooldown/spell/blood_healing/herald,
 		/datum/action/cooldown/spell/status/blood_mark/herald,
+		/datum/action/cooldown/spell/status/blood_choke/herald,
 		/datum/action/cooldown/spell/aoe/blood_harvest,
 	)
 	book_type = /obj/item/recipe_book/arcyne
