@@ -212,7 +212,9 @@
 
 /datum/coven_power/quietus/baals_caress/activate(obj/item/weapon/target)
 	. = ..()
-	target.AddElement(/datum/element/one_time_poison, list(/datum/reagent/poison/doom = 2))
+	if(!target.reagents)
+		target.AddElement(/datum/element/tipped_item)
+	target.reagents.add_reagent(/datum/reagent/poison/doom, 2)
 
 /datum/coven_power/quietus/taste_of_death
 	name = "Taste of Death"
