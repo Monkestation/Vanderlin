@@ -265,7 +265,7 @@
 // Archdevils
 
 /datum/devotion/archdevil
-	devotion_color = COLOR_BLOOD
+	devotion_color = "#510000"
 	devotion_title = "Favor"
 
 /datum/devotion/archdevil/grant_to(mob/living/carbon/human/holder)

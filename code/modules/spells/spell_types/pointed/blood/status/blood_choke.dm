@@ -26,6 +26,8 @@
 	if(!ishuman(cast_on))
 		return FALSE
 	var/mob/living/carbon/human/target = cast_on
+	if(HAS_TRAIT(target, TRAIT_NOBREATH))
+		return FALSE
 	if(target.has_status_effect(/datum/status_effect/debuff/blood_choke))
 		to_chat(owner, span_bloody("[cast_on] is already choking!"))
 		return FALSE
@@ -36,7 +38,7 @@
 	duration = 20 SECONDS
 	tick_interval = 2 SECONDS
 	var/damage_cooldown
-	var/damage_per_tick = 5
+	var/damage_per_tick = 10
 
 /datum/status_effect/debuff/blood_choke/on_apply()
 	. = ..()

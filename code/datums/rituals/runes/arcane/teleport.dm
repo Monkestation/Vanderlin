@@ -116,7 +116,7 @@
 		if(isnull(pylon.mana_pool) || pylon.mana_pool.amount < cost)
 			continue
 		pylon.mana_pool.adjust_mana(-cost)
-		here.Beam(pylon, icon_state = "drain_life", time = 1 SECONDS, override_target_pixel_y = 32)
+		here.Beam(pylon, icon_state = "drain_mana", time = 1 SECONDS, override_target_pixel_y = 32)
 		return TRUE
 
 	if(!QDELETED(user) && user.stat == CONSCIOUS)
