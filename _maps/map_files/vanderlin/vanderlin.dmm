@@ -8602,8 +8602,6 @@
 /obj/item/clothing/pants/guard,
 /obj/item/clothing/shirt/guard,
 /obj/item/clothing/shoes/boots/leather,
-/obj/item/clothing/armor/cuirass/iron,
-/obj/item/clothing/head/helmet/watchmen,
 /turf/open/floor/herringbone,
 /area/indoors/town/garrison)
 "dyt" = (
