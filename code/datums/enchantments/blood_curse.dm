@@ -67,8 +67,8 @@
 	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
 		return
 
-	var/curse_effect = get_curse_effect(source, target)
-	if(!curse_effect || !(get_curse_effect(source, user) <= BLOOD_CURSE_RELIGION))
+	var/curse_effect = get_curse_effect(target)
+	if(!curse_effect || !(get_curse_effect(user) <= BLOOD_CURSE_RELIGION))
 		return
 	var/vitae_gain = 1
 

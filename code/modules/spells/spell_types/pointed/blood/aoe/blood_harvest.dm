@@ -16,7 +16,7 @@
 	click_to_activate = FALSE
 	charge_required = FALSE
 	cooldown_time = 45 SECONDS
-	spell_cost = 500
+	spell_cost = 300
 
 	aoe_radius = 7
 

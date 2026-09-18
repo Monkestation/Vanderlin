@@ -14,6 +14,8 @@
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/magic/blood = 40,
+		/datum/attribute/skill/craft/armor_repair = 30,
+		/datum/attribute/skill/craft/weapon_repair = 30,
 	)
 
 /datum/job/advclass/wretch/blood_herald
@@ -79,10 +81,11 @@
 	belt = /obj/item/storage/belt/leather/black
 	backl = /obj/item/storage/backpack/satchel/black
 	backr = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
-	beltr = /obj/item/reagent_containers/glass/bottle/strongbloodpot/labelled
 	beltl = /obj/item/weapon/knife/dagger/bloodsteel
 	backpack_contents = list(
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
+		/obj/item/reagent_containers/glass/bottle/strongbloodpot/labelled = 1,
+		/obj/item/weapon/hammer/steel = 1,
 		/obj/item/storage/belt/pouch/coins/mid = 1,
 		/obj/item/needle = 1,
 	)
