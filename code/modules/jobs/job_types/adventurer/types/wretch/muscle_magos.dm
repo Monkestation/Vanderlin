@@ -23,15 +23,14 @@
 	tutorial = "A warrior who has dabbled in the arts of magic, you blend martial arts and spellcraft to earn your keep."
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/combat/muscle_magos
-	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	total_positions = 2
 	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
-	form_points = 7
-	technique_points = 2
+	form_points = 5
+	technique_points = 1
 
 	traits = list(
 		TRAIT_SORCERER,
@@ -54,7 +53,7 @@
 
 /datum/job/advclass/combat/muscle_magos/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.adjust_technique_mastery_points(3, FALSE, TECHNIQUE_IMBUE)
+	spawned.adjust_technique_mastery_points(2, FALSE, TECHNIQUE_IMBUE)
 	spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
 
 /datum/outfit/combat/muscle_magos

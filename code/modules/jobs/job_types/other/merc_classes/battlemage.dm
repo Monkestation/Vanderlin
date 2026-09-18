@@ -52,8 +52,8 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
-	form_points = 7
-	technique_points = 2
+	form_points = 3
+	technique_points = 1
 
 	traits = list(
 		TRAIT_SORCERER,
@@ -72,7 +72,7 @@
 /datum/job/advclass/mercenary/battlemage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.merctype = 9
-	spawned.adjust_technique_mastery_points(3, FALSE, TECHNIQUE_IMBUE)
+	spawned.adjust_technique_mastery_points(2, FALSE, TECHNIQUE_IMBUE)
 
 	var/obj/item/clothing/armor/brigandine/color_armor = new(get_turf(equipped_human))
 	var/static/list/specials = list("Swords", "Polearms", "Maces", "Freeform")
