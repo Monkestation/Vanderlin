@@ -133,12 +133,11 @@
 
 	if(status_victim.bloodpool)
 		status_victim.adjust_bloodpool(-vitae_amount)
-		our_debuffer.adjust_bloodpool(vitae_amount)
-	else
-		our_debuffer.adjust_bloodpool(floored_damage)
+	our_debuffer.adjust_bloodpool(vitae_amount)
 
 	status_victim.adjust_blood_volume(-floored_damage)
 	our_debuffer.adjust_stamina(-floored_damage)
+	our_debuffer.adjust_energy(-floored_damage)
 	status_victim.adjust_blood_volume(floored_damage, maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 
 	if(!transfer_beam)
