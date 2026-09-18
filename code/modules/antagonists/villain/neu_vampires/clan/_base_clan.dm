@@ -96,8 +96,8 @@ And it also helps for the character set panel
 	var/unwanted_blood = (blood_types & blood_disgust)
 
 
-	if(drinker.mind?.has_antag_datum(/datum/antagonist/ghoul)) //thrall drinking
-		if(!(blood_types & BLOOD_PREFERENCE_KIN) && !wanted_blood) //shares drinking habits with their master's clan
+	if(length(drinker.covens) == 1) //thrall drinking
+		if(!(blood_types & BLOOD_PREFERENCE_KIN) && !wanted_blood) //shares drinking habits with their master
 			to_chat(drinker, span_userdanger("THIS BLOOD DOESN'T SATIATE ME! I NEED SOME OF MY MASTER'S BLOOD!"))
 			vitae *= 0.1
 			return vitae
