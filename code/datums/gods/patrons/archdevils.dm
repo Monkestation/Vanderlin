@@ -10,7 +10,20 @@
 	return TRUE
 
 /datum/patron/archdevil/hear_prayer(mob/living/follower, message)
-	return FALSE
+	if(!follower || !message)
+		return FALSE
+	var/prayer = SANITIZE_HEAR_MESSAGE(message)
+
+	if(length(profane_words))
+		for(var/profanity in profane_words)
+			if(findtext(prayer, profanity))
+				punish_prayer(follower)
+				return FALSE
+
+	if(length(prayer) <= 15)
+		to_chat(follower, span_danger("My prayer was kinda short..."))
+		return FALSE
+	return TRUE
 
 /datum/patron/archdevil/abraxas
 	name = ABRAXAS
