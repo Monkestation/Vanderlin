@@ -5,18 +5,45 @@
 		STAT_ENDURANCE = 2,
 		STAT_INTELLIGENCE = 2,
 		STAT_PERCEPTION = 1,
-		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/combat/swords = 40,
-		/datum/attribute/skill/combat/whipsflails = 30,
+
+		/datum/attribute/skill/combat/swords = 20,
+		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/magic/blood = 40,
 		/datum/attribute/skill/craft/armor_repair = 30,
 		/datum/attribute/skill/craft/weapon_repair = 30,
 	)
+
+/datum/attribute_holder/sheet/job/blood_herald/sword
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(40, 40)
+	)
+
+/datum/attribute_holder/sheet/job/blood_herald/polearm
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/polearms = list(40, 40)
+	)
+
+/datum/attribute_holder/sheet/job/blood_herald/claws
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/unarmed = list(40, 40)
+	)
+
+/datum/attribute_holder/sheet/job/blood_herald/whip
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/whipsflails = list(40, 40)
+	)
+
 
 /datum/job/advclass/wretch/blood_herald
 	title = "Blood Herald"
@@ -68,6 +95,36 @@
 		spawned.mind?.share_identities(found_mind)
 	for(var/datum/mind/found_mind in get_minds("Blood Mage"))
 		spawned.mind?.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Blood Herald"))
+		spawned.mind?.share_identities(found_mind)
+
+
+	var/static/list/weapons = list(
+		"Broadsword" = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel,
+		"Rapier" = /obj/item/weapon/sword/rapier/bloodsteel,
+		"Spear" = /obj/item/weapon/polearm/spear/bloodsteel,
+		"Halberd" = /obj/item/weapon/polearm/halberd/bloodsteel,
+		"Whip" = /obj/item/weapon/whip/bloodsteel,
+		"Handclaws" = /obj/item/weapon/handclaw/steel/bloodsteel,
+	)
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose Your Specialisation", title = "BLOOD HERALD")
+	if(!weapon_choice)
+		return
+	switch(weapon_choice)
+		if("Broadsword")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
+		if("Rapier")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
+		if("Spear")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/polearm)
+		if("Halberd")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/polearm)
+		if("Whip")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/whip)
+		if("Handclaws")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/claws)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/handclaw/steel/bloodsteel, ITEM_SLOT_BELT_L, TRUE)
+
 
 /datum/outfit/wretch/blood_herald
 	name = "Blood Herald (Wretch)"

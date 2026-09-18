@@ -100,6 +100,8 @@
 		spawned.mind?.share_identities(found_mind)
 	for(var/datum/mind/found_mind in get_minds("Blood Mage"))
 		spawned.mind?.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Blood Herald"))
+		spawned.mind?.share_identities(found_mind)
 
 /datum/outfit/admin/blood_sorcerer
 	name = JOB_ADMIN_BLOOD_SORCERER
