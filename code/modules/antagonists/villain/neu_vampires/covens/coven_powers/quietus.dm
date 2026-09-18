@@ -67,7 +67,11 @@
 			proximity_field.add_affected_mob(target)
 
 /datum/coven_power/quietus/silence_of_death/proc/should_affect_target(mob/living/carbon/human/target)
-	if(target == owner || target.clan_position?.is_subordinate_to(owner.clan_position) || target.clan_position?.is_superior_to(owner.clan_position))
+	if(target == owner)
+		return FALSE
+	if(target.clan_position?.is_subordinate_to(owner.clan_position))
+		return FALSE
+	if(target.clan_position?.is_superior_to(owner.clan_position))
 		return FALSE
 	return TRUE
 
@@ -145,11 +149,14 @@
 	cooldown_length = 5 SECONDS
 	violates_masquerade = TRUE
 
-/datum/coven_power/quietus/scorpions_touch/activate()
+/datum/coven_power/quietus/scorpions_touch/can_activate()
+	. = ..()
 	if(owner.get_active_held_item())
 		to_chat(owner, span_danger("Your main hand is busy!"))
 		owner.adjust_bloodpool(vitae_cost)
 		return
+
+/datum/coven_power/quietus/scorpions_touch/activate()
 	. = ..()
 	owner.put_in_active_hand(new /obj/item/melee/touch_attack/quietus(owner))
 
@@ -236,13 +243,12 @@
 		to_chat(owner, "You don't seem to have last attacked soul earlier...")
 		owner.adjust_bloodpool(vitae_cost)
 		return
+	. = ..()
 	for(var/atom/I in lastattacker.get_equipped_items())
 		var/datum/enchantment/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/silver)
 		if(ench)
 			to_chat(owner, span_danger("Silver dispells the curse! They are protected for now."))
 			return
-
-	. = ..()
 
 	lastattacker.adjust_stamina(-80)
 	lastattacker.fire_act(6, 6)
