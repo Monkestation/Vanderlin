@@ -92,7 +92,8 @@
 	name = "bloodsteel helmet"
 	desc = "A helmet born of blood and despair."
 	color = "#ff6066"
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 200
 	sellprice = 0
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic
 
@@ -104,7 +105,8 @@
 	name = "bloodsteel plate"
 	desc = "A chestplate born of blood and despair."
 	color = "#ff6066"
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 300
 	sellprice = 0
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic
 
@@ -116,7 +118,8 @@
 	name = "bloodsteel boots"
 	desc = "Plate boots born of blood and despair."
 	color = "#ff6066"
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
 	sellprice = 0
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic
 
@@ -128,7 +131,8 @@
 	name = "bloodsteel gauntlets"
 	desc = "Gauntlets born of blood and despair."
 	color = "#ff6066"
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
 	sellprice = 0
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic
 
@@ -140,7 +144,8 @@
 	name = "bloodsteel greaves"
 	desc = "Greaves born of blood and despair."
 	color = "#ff6066"
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 200
 	sellprice = 0
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic
 

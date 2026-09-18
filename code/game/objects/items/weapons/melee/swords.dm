@@ -132,7 +132,8 @@
 	force = DAMAGE_SHORTSWORD + 2
 	sellprice = 0
 	item_weight = 600 GRAMS
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
 	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BLOODSTEEL
 
 /obj/item/weapon/sword/short/ida //Worse thrust but more damage for cutting.
@@ -205,7 +206,8 @@
 	force_wielded = DAMAGE_SWORD_WIELD + 2
 	max_blade_int = 240
 	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BLOODSTEEL
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
 	sellprice = 0
 	item_weight = 1 KILOGRAMS
 
@@ -763,7 +765,8 @@
 	desc = "A narrow length of shimmering bloodsteel, a flashing streak of red leaving pools of blood in its wake."
 	icon_state = "corruptrapier"
 	force = DAMAGE_SWORD + 2
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
 	item_weight = 600 GRAMS
 	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_BLOODSTEEL
 
@@ -1458,7 +1461,8 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
 	max_blade_int = 240
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_BLOODSTEEL
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 200
 	sellprice = 0
 	item_weight = 2.5 KILOGRAMS
 
