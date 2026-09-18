@@ -19,7 +19,7 @@
 	title = "Wanderer"
 	tutorial = "You are a member of the Merry Band, a humble guild of wanderers who have united under one common desire. Wandering for the sake of experiencing the beauty and diversity of Faience to the fullest extent. As the motto of the Merry Band goes, \"Make every step count and may your journeys be full of wonder\"."
 	total_positions = 5
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	outfit = /datum/outfit/pilgrim/wanderingpilgrim
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/wanderer
@@ -40,7 +40,7 @@
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/weapon/knife/dagger
-	neck = /obj/item/clothing/neck/shellamulet // was previously silver but then i realized, "wait if a vampire lord spawns as a wanderer they immediately get frenzied"
+	neck = /obj/item/clothing/neck/shellamulet
 	backr = /obj/item/weapon/polearm/woodstaff/quarterstaff
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/storage/belt/pouch/coins/poor = 1, /obj/item/reagent_containers/food/snacks/hardtack = 1)

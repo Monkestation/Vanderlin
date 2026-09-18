@@ -12,7 +12,6 @@
 	plane = GAME_PLANE_UPPER
 	cookonme = FALSE
 	temperature_change = 10
-	fog_parter_effect = null
 	var/permanent
 
 /obj/machinery/light/fueled/lanternpost/fixed

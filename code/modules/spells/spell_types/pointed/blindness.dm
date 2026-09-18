@@ -4,9 +4,8 @@
 	button_icon_state = "blindness"
 	sound = 'sound/magic/churn.ogg'
 
-	attunements = list(
-		/datum/attunement/arcyne = 0.1
-	)
+	required_form = FORM_ARCANE
+	required_technique = TECHNIQUE_ILLUSION
 
 	invocation = "darkness envelop them."
 	invocation_type = INVOCATION_WHISPER
@@ -30,8 +29,9 @@
 /datum/action/cooldown/spell/blindness/miracle
 	name = "Noc's Blindness"
 	charge_sound = 'sound/magic/holycharging.ogg'
+	required_form = null
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/noc)

@@ -92,6 +92,32 @@
 	C.rog_intent_change(4)
 	return TRUE
 
+
+/datum/keybinding/carbon/toggle_arc_mode
+	hotkey_keys = list("ShiftG")
+	name = "toggle_arc_mode"
+	full_name = "Toggle Spell Alt Mode"
+	description = "Toggle alt mode on the currently active spell - arc mode for projectiles, ward type cycling, etc."
+	category = CATEGORY_CARBON
+
+/datum/keybinding/carbon/toggle_arc_mode/down(client/user)
+	. = ..()
+	if(!ishuman(user.mob))
+		return FALSE
+	var/mob/living/carbon/human/H = user.mob
+
+	// Check new V2 spell system first
+	var/datum/action/cooldown/spell/projectile/v2_spell = H.click_intercept
+	if(istype(v2_spell))
+		v2_spell.toggle_arc_mode(H)
+		return TRUE
+
+	// Check for generic alt mode (ward cycling, etc.)
+	var/datum/action/cooldown/spell/v2_generic = H.click_intercept
+	if(istype(v2_generic) && v2_generic.toggle_alt_mode(H))
+		return TRUE
+
+
 //****** Quad Intents ******
 
 /datum/keybinding/carbon/give_intent

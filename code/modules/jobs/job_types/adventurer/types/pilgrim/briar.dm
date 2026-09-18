@@ -87,7 +87,7 @@
 	name = "Briar (Pilgrim)"
 	belt = /obj/item/storage/belt/leather/rope
 	mask = /obj/item/clothing/face/druid
-	neck = /obj/item/clothing/neck/psycross/silver/divine/dendor
+	neck = /obj/item/clothing/neck/psycross/silver/divine/dendor/divine_link
 	shirt = /obj/item/clothing/armor/leather/vest
 	armor = /obj/item/clothing/shirt/robe/dendor
 	wrists = /obj/item/clothing/wrists/bracers/leather

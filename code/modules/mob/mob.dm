@@ -1344,3 +1344,14 @@ GLOBAL_VAR_INIT(mobids, 1)
 /mob/get_examine_name(mob/user, use_article=FALSE)
 	return use_article && article ? "[article] <EM>[real_name]</EM>" : "\a <EM>[real_name]</EM>"
 
+/mob/proc/adjust_form_mastery_points(points, used_points = FALSE, specific_form = null)
+	return
+
+/mob/proc/adjust_technique_mastery_points(points, used_points = FALSE, specific_technique = null)
+	return
+
+/mob/proc/reset_form_mastery_points(silent = TRUE)
+	return
+
+/mob/proc/reset_technique_mastery_points(silent = TRUE)
+	return

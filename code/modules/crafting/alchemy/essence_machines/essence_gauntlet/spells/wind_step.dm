@@ -3,9 +3,7 @@
 	desc = "Allows rapid movement by riding currents of air."
 	button_icon_state = "haste"
 	cast_range = 0
-	point_cost = 6
 	has_visual_effects = FALSE
-	attunements = list(/datum/attunement/aeromancy, /datum/attunement/aeromancy)
 	essences = list(/datum/thaumaturgical_essence/motion, /datum/thaumaturgical_essence/air)
 
 /datum/action/cooldown/spell/essence/wind_step/cast(atom/cast_on)

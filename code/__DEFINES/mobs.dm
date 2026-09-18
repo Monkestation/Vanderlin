@@ -79,6 +79,7 @@
 #define BODYPART_DISABLED_WOUND 3 //bone fracture
 #define BODYPART_DISABLED_ROT 4 //limb is rotten oh nooo
 #define BODYPART_DISABLED_CLAMPED 5 //limb is clamped by a hemostat or speculum
+#define BODYPART_DISABLED_TOURNIQUET 6
 
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
 
@@ -276,7 +277,8 @@
 #define SHOCK_ILLUSION (1 << 2)
 ///The shock doesn't stun.
 #define SHOCK_NOSTUN (1 << 3)
-
+///we only show a visual
+#define SHOCK_VISUAL_ONLY (1<<4)
 #define INCORPOREAL_MOVE_BASIC 1
 #define INCORPOREAL_MOVE_SHADOW 2 // leaves a trail of shadows
 #define INCORPOREAL_MOVE_JAUNT 3 // is blocked by holy water/salt
@@ -314,10 +316,6 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-/// Base factor at which mob nutrition decreases
-#define HUNGER_FACTOR		0.2
-/// Base Factor at which mob hydration decreases
-#define THIRST_FACTOR 0.05
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.

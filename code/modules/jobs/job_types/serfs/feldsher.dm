@@ -15,6 +15,7 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 50,
+		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/labor/farming = 30,
 	)
@@ -33,6 +34,7 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 60,
+		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/labor/farming = 30,
 	)
@@ -49,7 +51,7 @@
 	department_flag = SERFS
 	display_order = JDO_FELDSHER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -73,6 +75,7 @@
 	outfit = /datum/outfit/feldsher
 	give_bank_account = 100
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 
 	spells = list(

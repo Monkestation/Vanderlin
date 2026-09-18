@@ -220,6 +220,10 @@
 					if(!throwable_mob.buckled)
 						var/obj/item/grabbing/other_grab = offhand ? get_active_held_item() : get_inactive_held_item()
 						if(grab_state < GRAB_AGGRESSIVE)
+							if(HAS_TRAIT(throwable_mob, TRAIT_BIGGUY))
+								return
+							if(!HAS_TRAIT(src,TRAIT_BIGGUY))
+								return
 							stop_pulling(pulling_broke_free = TRUE)
 							return
 						stop_pulling(pulling_broke_free = TRUE)
@@ -747,20 +751,20 @@
 			if(A.update_remote_sight(src))
 				return
 	if(HAS_TRAIT(src, TRAIT_BESTIALSENSE))
-		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_DARKVISION)
-		see_in_dark = max(see_in_dark, 4)
+		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_BESTIALSENSE)
+		see_in_dark = max(see_in_dark, SEE_IN_DARK_HALF_ELVEN_EYES)
 	if(HAS_TRAIT(src, TRAIT_DARKVISION))
-		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE)
-		see_in_dark = max(see_in_dark, 6)
+		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_DARKVISION)
+		see_in_dark = max(see_in_dark, SEE_IN_DARK_DARKVISION)
 	if(HAS_TRAIT(src, TRAIT_THERMAL_VISION))
 		sight |= (SEE_MOBS)
-		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_MOSTLY_VISIBLE)
+		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_DARKVISION)
 	if(HAS_TRAIT(src, TRAIT_XRAY_VISION))
 		sight |= (SEE_TURFS|SEE_MOBS|SEE_OBJS)
-		see_in_dark = max(see_in_dark, 8)
+		see_in_dark = max(see_in_dark, SEE_IN_DARK_XRAY_VISION)
 	if(HAS_TRAIT(src, TRAIT_NOCSHADES))
 		lighting_alpha = min(lighting_alpha, LIGHTING_PLANE_ALPHA_NOCSHADES)
-		see_in_dark = max(see_in_dark, 12)
+		see_in_dark = max(see_in_dark, SEE_IN_DARK_NOC_SHADES)
 		add_client_colour(/datum/client_colour/nocshaded)
 		overlay_fullscreen("inqvision", /atom/movable/screen/fullscreen/inqvision)
 	else
@@ -828,14 +832,10 @@
 	if(H.wear_mask?.block2add)
 		fovangle |= H.wear_mask.block2add
 
-	if(GET_MOB_ATTRIBUTE_VALUE(H, STAT_PERCEPTION) < 5)
-		fovangle |= FOV_LEFT
+	if(HAS_TRAIT(src, TRAIT_CYCLOPS_LEFT))
 		fovangle |= FOV_RIGHT
-	else
-		if(HAS_TRAIT(src, TRAIT_CYCLOPS_LEFT))
-			fovangle |= FOV_RIGHT
-		if(HAS_TRAIT(src, TRAIT_CYCLOPS_RIGHT))
-			fovangle |= FOV_LEFT
+	if(HAS_TRAIT(src, TRAIT_CYCLOPS_RIGHT))
+		fovangle |= FOV_LEFT
 
 	var/datum/component/field_of_vision/fov = GetComponent(/datum/component/field_of_vision)
 	if(!fov)
@@ -1065,9 +1065,9 @@
 	if(CONFIG_GET(flag/near_death_experience))
 		if(. > HEALTH_THRESHOLD_NEARDEATH)
 			if(health <= HEALTH_THRESHOLD_NEARDEATH && !HAS_TRAIT(src, TRAIT_NODEATH))
-				ADD_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
+				ADD_TRAIT(src, TRAIT_GHOSTEARS, "near-death")
 		else if(health > HEALTH_THRESHOLD_NEARDEATH)
-			REMOVE_TRAIT(src, TRAIT_SIXTHSENSE, "near-death")
+			REMOVE_TRAIT(src, TRAIT_GHOSTEARS, "near-death")
 
 /mob/living/carbon/update_stat()
 	if(status_flags & GODMODE)
@@ -1134,7 +1134,7 @@
 		if(heal_flags & HEAL_ADMIN) //reset rot on admin revives
 			for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 				bodypart.revive_limb()
-				bodypart.germ_level = 0
+				bodypart.set_germ_level(0)
 				bodypart.skeletonized = FALSE
 				bodypart.remove_pain(bodypart.pain_dam)
 
@@ -1277,6 +1277,7 @@
 	VV_DROPDOWN_OPTION(VV_HK_MARTIAL_ART, "Give Martial Arts")
 	VV_DROPDOWN_OPTION(VV_HK_GIVE_TRAUMA, "Give Brain Trauma")
 	VV_DROPDOWN_OPTION(VV_HK_CURE_TRAUMA, "Cure Brain Traumas")
+	VV_DROPDOWN_OPTION(VV_HK_CURE_ROT, "Cure Rot")
 	VV_DROPDOWN_OPTION(VV_HK_SHOW_RELATIONS, "Show Relations")
 
 /mob/living/carbon/vv_do_topic(list/href_list)
@@ -1366,6 +1367,47 @@
 		cure_all_traumas(TRAUMA_RESILIENCE_ABSOLUTE)
 		log_admin("[key_name(usr)] has cured all traumas from [key_name(src)].")
 		message_admins("<span class='notice'>[key_name_admin(usr)] has cured all traumas from [key_name_admin(src)].</span>")
+	if(href_list[VV_HK_CURE_ROT])
+		if(!check_rights(NONE))
+			return
+		var/was_zombie = IS_DEADITE(src)
+		var/has_rot = FALSE
+		if(!was_zombie)
+			for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+				if(HAS_TRAIT(bodypart, TRAIT_ROTTEN))
+					has_rot = TRUE
+					break
+				if(bodypart.germ_level >= INFECTION_LEVEL_ONE*0.2)
+					has_rot = TRUE
+					break
+			for(var/obj/item/organ/organs as anything in internal_organs)
+				if(organs.germ_level >= INFECTION_LEVEL_ONE*0.2)
+					has_rot = TRUE
+					break
+		if(!has_rot && !was_zombie)
+			to_chat(usr, span_warning("No rot to remove."))
+			return FALSE
+
+		if(was_zombie)
+			mind?.remove_antag_datum(/datum/antagonist/zombie)
+			death()
+		var/datum/component/rot/rot = GetComponent(/datum/component/rot)
+		if(rot)
+			rot.amount = 0
+		for(var/obj/item/bodypart/rotty in bodyparts)
+			rotty.revive_limb(FALSE)
+			rotty.germ_level = 0
+			rotty.update_limb()
+			if(rotty.can_be_disabled)
+				rotty.update_disabled()
+		for(var/obj/item/organ/organs as anything in internal_organs)
+			if(organs.germ_level >= INFECTION_LEVEL_ONE*0.2)
+				organs.set_germ_level(INFECTION_LEVEL_ONE*0.2)
+		update_body_parts(TRUE)
+		visible_message("<span class='notice'>The rot leaves [src]'s body!</span>", "<span class='green'>I feel the rot leave my body!</span>")
+		log_admin("[key_name(usr)] has cured the rot of [key_name(src)] using admin powers.[was_zombie ? " they were a Deadite at the time of cure." : ""]")
+		message_admins("[key_name_admin(usr)] has cured the rot of [key_name_admin(src)] using admin powers.[was_zombie ? " they were a Deadite at the time of cure." : ""]")
+
 	if(href_list[VV_HK_SHOW_RELATIONS])
 		if(!check_rights(NONE))
 			return
@@ -1374,14 +1416,6 @@
 
 /mob/living/carbon/can_resist()
 	return bodyparts.len > 2 && ..()
-
-/mob/living/carbon/proc/hypnosis_vulnerable()
-	if(HAS_TRAIT(src, TRAIT_MINDSHIELD))
-		return FALSE
-	if(IsSleeping())
-		return TRUE
-	if(HAS_TRAIT(src, TRAIT_DUMB))
-		return TRUE
 
 /// Modifies the handcuffed value if a different value is passed, returning FALSE otherwise. The variable should only be changed through this proc.
 /mob/living/carbon/proc/set_handcuffed(new_value)
@@ -1417,6 +1451,8 @@
 		if(grab.sublimb_grabbed == BODY_ZONE_PRECISE_MOUTH)
 			return FALSE
 	if(istype(loc, /turf/open/water) && body_position == LYING_DOWN)
+		return FALSE
+	if(has_status_effect(/datum/status_effect/debuff/blood_choke))
 		return FALSE
 
 /mob/living/carbon/proc/try_skin_burn(reaction_volume)
@@ -1539,6 +1575,7 @@
 		B.skeletonize(lethal)
 	update_body_parts()
 	REMOVE_TRAIT(src, TRAIT_DEAF, NO_EARS)
+	mob_biotypes |= MOB_UNDEAD
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()
@@ -1549,6 +1586,24 @@
 		old_eye.Remove(src, TRUE)
 	var/old_eye_type = eye_dna.organ_type
 	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/zombie
+	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
+	eyes.Insert(src, TRUE)
+	var/obj/item/organ/eyes/eyes_two = eye_dna.create_organ(species = dna.species)
+	eyes_two.switch_side(eyes_two.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
+	eyes_two.Insert(src, TRUE)
+	eye_dna.organ_type = old_eye_type
+
+	update_eyes() // ??? why
+
+/// grant nightmare eyes to a carbon mob.
+/mob/living/carbon/proc/grant_nightmare_eyes()
+	var/datum/organ_dna/eyes/eye_dna = dna?.organ_dna[ORGAN_SLOT_EYES]
+	if(!eye_dna)
+		return
+	for(var/obj/item/organ/old_eye in getorganslotlist(ORGAN_SLOT_EYES))
+		old_eye.Remove(src, TRUE)
+	var/old_eye_type = eye_dna.organ_type
+	eye_dna.organ_type = /obj/item/organ/eyes/night_vision/nightmare
 	var/obj/item/organ/eyes/eyes = eye_dna.create_organ(species = dna.species)
 	eyes.Insert(src, TRUE)
 	var/obj/item/organ/eyes/eyes_two = eye_dna.create_organ(species = dna.species)

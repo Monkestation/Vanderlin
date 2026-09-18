@@ -35,3 +35,5 @@
 
 /// The monarch set lord colors, update all things that use it (primary, secondary)
 #define COMSIG_LORD_COLORS_SET "mob_set_lord"
+
+#define COMSIG_GLOB_ADMINS_RELOADED "admins_reloaded"

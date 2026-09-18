@@ -63,7 +63,7 @@
 		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	for(var/datum/action/miracle as anything in miracles_extra)
 		grant_miracle(miracle)
-	add_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
+	add_verb(holder_mob, /mob/living/carbon/human/proc/clericpray)
 	check_progression()
 	initialize_tasks()
 
@@ -96,7 +96,7 @@
 	if(holder_mob)
 		holder_mob.cleric = null
 		holder_mob.remove_spells(source = src)
-		remove_verb(holder_mob, list(/mob/living/carbon/human/proc/devotionreport, /mob/living/carbon/human/proc/clericpray))
+		remove_verb(holder_mob, /mob/living/carbon/human/proc/clericpray)
 		for(var/trait in traits)
 			REMOVE_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
 	holder_mob = null
@@ -185,6 +185,7 @@
 	miracles_extra += list(
 		/datum/action/cooldown/spell/undirected/touch/orison,
 		/datum/action/cooldown/spell/cure_rot,
+		/datum/action/cooldown/spell/burial_rites,
 		/datum/action/cooldown/spell/diagnose/holy,
 	)
 	devotion_class = DEVOTION_CLASS_PRIEST
@@ -202,13 +203,6 @@
 	progression = CLERIC_REQ_1
 	max_progression = CLERIC_REQ_2
 	devotion_class = DEVOTION_CLASS_TEMPLAR
-
-/datum/devotion/proc/make_absolver()
-	devotion = 100
-	max_devotion = CLERIC_REQ_3
-	progression = CLERIC_REQ_3
-	max_progression = CLERIC_REQ_3
-	devotion_class = DEVOTION_CLASS_ABSOLVER
 
 /datum/devotion/proc/make_acolyte()
 	progression = CLERIC_REQ_1
@@ -236,14 +230,11 @@
 	)
 	devotion_class = DEVOTION_CLASS_CHURCHLING
 
-/mob/living/carbon/human/proc/devotionreport()
-	set name = "Check Devotion"
-	set category = "RoleUnique.Divine"
+/datum/devotion/proc/make_oracle()
+	make_acolyte()
 
-	if(!ishuman(src))
-		return
-	var/datum/devotion/C = src.cleric
-	to_chat(src,"My devotion is [C.devotion].")
+/datum/devotion/proc/make_lunar_champion()
+	make_templar()
 
 // Generation Procs
 

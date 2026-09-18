@@ -3,8 +3,8 @@
 	desc = "Call upon your patron to heal the wounds of yourself or others by sacrificing an item's value as healing."
 	button_icon_state = "transact"
 
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 
 	cast_range = 4

@@ -1,5 +1,4 @@
 #define BASE_NUMBER_NOTES 5
-#define EASY_DIFFICULTY_THRESHOLD 3
 #define CLICK_TIME_WINDOW 0.2 SECONDS
 
 /datum/anvil_challenge
@@ -12,7 +11,7 @@
 	var/atom/movable/screen/anvil_hud/anvil_hud
 	var/datum/anvil_recipe/selected_recipe
 	var/obj/machinery/anvil/host_anvil
-	/// Scale from 1 to 7. Higher difficulty results in faster notes and harder-to-click notes
+	/// Higher difficulty results in faster notes and harder-to-click notes
 	var/difficulty = 1
 	/// Scale from 0 to 100 based on accuracy.
 	var/success = 100
@@ -33,10 +32,9 @@
 	notes_left = BASE_NUMBER_NOTES + recipe_difficulty
 	total_notes = notes_left
 
-	// If skill level matches recipe difficulty, minigame by default should only contain easy notes
-	difficulty = clamp(ceil(recipe_difficulty - GET_MOB_SKILL_VALUE_OLD(user, selected_recipe.appro_skill) + EASY_DIFFICULTY_THRESHOLD + difficulty_modifier), 1, 7)
-	if(isdwarf(user) && difficulty > 1)
-		difficulty--
+	difficulty = clamp(ceil(recipe_difficulty), 1, 7)
+	if(isdwarf(user))
+		difficulty = max(1, difficulty--)
 
 	generate_anvil_beats(TRUE)
 
@@ -232,10 +230,7 @@
 	var/timer
 
 /atom/movable/screen/hud_note/proc/generate_click_type(difficulty)
-	difficulty = min(7, difficulty)
-
-	switch(rand(1,difficulty))
-		// EASY NOTES
+	switch(rand(1, difficulty))
 		if(1)
 			click_requirements = list(LEFT_CLICK)
 			icon_state = "note"
@@ -243,21 +238,28 @@
 			click_requirements = list(RIGHT_CLICK)
 			icon_state = "note-right"
 		if(3)
+			if(prob(50))
+				click_requirements = list(LEFT_CLICK, ALT_CLICKED)
+				icon_state = "note-alt"
+			else
+				click_requirements = list(RIGHT_CLICK, ALT_CLICKED)
+				icon_state = "note-right-alt"
+		if(4)
 			click_requirements = list(MIDDLE_CLICK)
 			icon_state = "note-middle"
-		// HARD NOTES
-		if(4)
-			click_requirements = list(LEFT_CLICK, ALT_CLICKED)
-			icon_state = "note-alt"
 		if(5)
-			click_requirements = list(RIGHT_CLICK, ALT_CLICKED)
-			icon_state = "note-right-alt"
+			click_requirements = list(MIDDLE_CLICK, ALT_CLICKED)
+			icon_state = "note-middle-alt"
 		if(6)
-			click_requirements = list(LEFT_CLICK, CTRL_CLICKED)
-			icon_state = "note-ctrl"
+			if(prob(50))
+				click_requirements = list(LEFT_CLICK, CTRL_CLICKED)
+				icon_state = "note-ctrl"
+			else
+				click_requirements = list(RIGHT_CLICK, CTRL_CLICKED)
+				icon_state = "note-right-ctrl"
 		if(7)
-			click_requirements = list(RIGHT_CLICK, CTRL_CLICKED)
-			icon_state = "note-right-ctrl"
+			click_requirements = list(MIDDLE_CLICK, CTRL_CLICKED)
+			icon_state = "note-middle-ctrl"
 
 /atom/movable/screen/hud_note/proc/check_click(list/click_modifiers)
 	var/list/copied_checks = click_requirements
@@ -272,4 +274,3 @@
 
 #undef CLICK_TIME_WINDOW
 #undef BASE_NUMBER_NOTES
-#undef EASY_DIFFICULTY_THRESHOLD

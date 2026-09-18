@@ -1811,25 +1811,6 @@
 	icon = 'icons/mob/rogueheat.dmi'
 	screen_loc = mana_loc
 
-/atom/movable/screen/mana/extra_info(mob/user)
-	var/info = ""
-	for(var/datum/attunement/attunement as anything in user?.mana_pool.attunements)
-		var/value = user.mana_pool.attunements[attunement]
-		if(!value)
-			continue
-
-		switch(value)
-			if(0.01 to 0.4)
-				info += "<br> Minor [initial(attunement.name)] Attunment"
-			if(0.41 to 0.7)
-				info += "<br> Moderate [initial(attunement.name)] Attunment"
-			if(0.71 to 1.2)
-				info += "<br> Major [initial(attunement.name)] Attunment"
-			if(1.21 to INFINITY)
-				info += "<br> Apex [initial(attunement.name)] Attunment"
-
-	return info
-
 /atom/movable/screen/vis_holder
 	icon = ""
 	invisibility = INVISIBILITY_MAXIMUM

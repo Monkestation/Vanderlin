@@ -25,7 +25,7 @@
 
 /datum/job/butler
 	title = JOB_BUTLER
-	f_title = "Head Housekeeper"
+	f_title = "Housekeeper"
 	alt_titles = list("Majordomo", "Master of Staff")
 	tutorial = "You are elevated to near nobility, as you hold the distinguished position of master of the royal household staff. \
 	Your blade is a charcuterie of artisanal cheeses and meat, your armor wit and classical training. \
@@ -35,7 +35,7 @@
 	department_flag = SERFS
 	display_order = JDO_BUTLER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
 	bypass_lastclass = TRUE
@@ -47,6 +47,9 @@
 	outfit = /datum/outfit/butler
 	give_bank_account = 30 // Along with the pouch, enough to purchase some ingredients from the farm and give hard working servants a silver here and there. Still need the assistance of the crown's coffers to do anything significant
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
 	exp_type = list(EXP_TYPE_LIVING)
@@ -70,7 +73,7 @@
 	name = JOB_BUTLER
 	shoes = /obj/item/clothing/shoes/nobleboot
 	beltl = /obj/item/storage/belt/pouch/coins/mid
-	beltr = /obj/item/weapon/whip/butler
+	beltr = /obj/item/weapon/whip/bronze/butler
 	backr = /obj/item/storage/backpack/satchel
 
 	backpack_contents = list(

@@ -991,7 +991,7 @@
 
 /// Attempts to put the tool back in the user's hand as well as a product
 /datum/repeatable_crafting_recipe/proc/move_products(list/products, mob/user)
-	var/list/copied_tool_usage = tool_usage.Copy()
+	var/list/copied_tool_usage = tool_usage?.Copy()
 
 	for(var/turf/listed_turf in range(1, user))
 		for(var/obj/item in listed_turf.contents)

@@ -7,25 +7,26 @@
 
 
 	spawning = 0
-	width                  = 800  // I think this is supposed to be in pixels, but it doesn't match bounds, so idk - 800x800 seems to prevent particle-less edges
-	height                 = 800
-	count                  = 3000 // 3000 particles
+	width = 800  // I think this is supposed to be in pixels, but it doesn't match bounds, so idk - 800x800 seems to prevent particle-less edges
+	height = 800
+	count = 3000 // 3000 particles
 	//Set bounds to rough screensize + some extra on the side and top movement for "wind"
-	bound1                 = list(-500,-256,-10)
-	bound2                 = list(500,500,10)
-	lifespan               = 285   // live for 30s max (fadein + lifespan + fade)
-	fade                   = 10    // 1s fade out
-	fadein				   = 5     // 0.5s fade in
+	bound1 = list(-500, -256, -10)
+	bound2 = list(500,500,10)
+	lifespan = 285   // live for 30s max (fadein + lifespan + fade)
+	fade = 10    // 1s fade out
+	fadein = 5     // 0.5s fade in
 
 	//Obnoxiously 3D -- INCREASE Z level to make them further away
-	transform			   = list( 1, 0, 0,  0  ,
-								   0, 1, 0,  0  ,
-								   0, 0, 1, 1/4, //Get twice as Small every 4 Z
-								   0, 0, 0,  1  )
+	transform = list(
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0.25, //Get twice as Small every 4 Z
+		0, 0, 0, 1
+	)
 
 //Animate particle effect to a severity
 /particles/weather/proc/animateSeverity(severityMod)
-
 	//If we have no severity, just stop spawning
 	if(!severityMod)
 		spawning = 0
@@ -76,11 +77,10 @@
 	//Our particle effect to display - min/max severity effects its wind and count
 	var/particles/weather/particleEffectType = /particles/weather/rain
 
-
 	/// See above - this is the lowest possible duration
-	var/weather_duration_lower = 7 MINUTES
+	var/weather_duration_lower = 4 MINUTES
 	/// See above - this is the highest possible duration
-	var/weather_duration_upper = 20 MINUTES
+	var/weather_duration_upper = 10 MINUTES
 
 	// Keep this between 1 and 100
 	// Gentle rain shouldn't use the max rain wind speed, nor should a storm be a gentle breeze
@@ -93,8 +93,6 @@
 	var/severitySteps = 5
 	/// Used by mobs to prevent them from being affected by the weather
 	var/immunity_type = TRAIT_WEATHER_IMMUNE
-	/// Weight amongst other eligible weather. If zero, will never happen randomly.
-	var/probability = 0
 
 	/// The map weather type to target
 	var/target_trait = PARTICLEWEATHER_RAIN

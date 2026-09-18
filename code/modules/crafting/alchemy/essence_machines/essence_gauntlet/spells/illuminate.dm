@@ -4,8 +4,6 @@
 	button_icon_state = "light"
 	//sound = 'sound/magic/staff_healing.ogg'
 	cast_range = 0
-	attunements = list(/datum/attunement/light)
-	point_cost = 1
 	essences = list(/datum/thaumaturgical_essence/light)
 
 /datum/action/cooldown/spell/essence/illuminate/cast(atom/cast_on)

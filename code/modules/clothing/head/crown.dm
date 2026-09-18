@@ -6,6 +6,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	abstract_type = /obj/item/clothing/head/crown
 	item_weight = 2.23 KILOGRAMS //the weight of the crown or something thematic
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/head/crown/circlet
 	name = "golden circlet"
@@ -111,6 +112,7 @@
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	sellprice = VALUE_EXTREME
 	resistance_flags = FIRE_PROOF|ACID_PROOF|LAVA_PROOF|UNACIDABLE|INDESTRUCTIBLE
+	examine_highlight_type = /datum/examine_highlight/royal_court/crown
 
 /obj/item/clothing/head/crown/serpcrown/Initialize()
 	. = ..()
@@ -157,9 +159,10 @@
 /obj/item/clothing/head/crown/circlet/vision/equipped(mob/user, slot)
 	. = ..()
 	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_THERMAL_VISION,"thermal_vision")
+		ADD_TRAIT(user, TRAIT_THERMAL_VISION, "mysical_circlet")
 	else
-		REMOVE_TRAIT(user, TRAIT_THERMAL_VISION,"thermal_vision")
+		REMOVE_TRAIT(user, TRAIT_THERMAL_VISION, "mysical_circlet")
+	user.update_sight()
 
 //............... Nosleep Circlet ............... //
 /obj/item/clothing/head/crown/circlet/sleepless

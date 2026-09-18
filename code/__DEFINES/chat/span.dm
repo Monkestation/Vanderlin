@@ -154,6 +154,8 @@
 #define span_nicegreen(str) ("<span class='nicegreen'>" + str + "</span>")
 #define span_boldnicegreen(str) ("<span class='bold nicegreen'>" + str + "</span>")
 
+// Colors
+#define span_yellow(str) ("<span class='yellow'>" + str + "</span>")
 
 /// Wrapper used to allow easy tracking of prayers within a chat tab.
 #define SPAN_PRAYER_WRAPPER(str) ("<span class='prayer'>" + str + "</span>")
@@ -195,3 +197,7 @@
 
 /// No italics
 #define conditional_tooltip_alt(normal_text, tooltip_text, condition) (condition ? span_tooltip_alt(tooltip_text, normal_text) : normal_text)
+
+/// Displays a tooltip. Accepts HTML. For the love of all that is holy, ensure input is trusted.
+/// * SPAN_LINKIFY doesn't work here.
+#define span_tooltip_dangerous_html(tip, str) ("<span data-component=\"TooltipHTML\" data-html=\"[replacetext(tip, "\"", "'")]\" class=\"tooltip\">[str]</span>")

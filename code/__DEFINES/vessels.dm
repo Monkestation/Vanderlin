@@ -1,0 +1,6 @@
+#define PUTRID_VESSEL_ID "Putrid"
+#define BROODMOTHER_VESSEL_ID "Broodmother"
+#define BROODSPAWN_GOBLIN_VESSEL_ID "Broodspawn Goblin"
+#define BROODSPAWN_ORC_VESSEL_ID "Broodspawn Orc"
+#define BROODSPAWN_TROLL_VESSEL_ID "Broodspawn Troll"
+#define HARLEQUINN_VESSEL_ID "Harlequinn"

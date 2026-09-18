@@ -447,6 +447,11 @@
 	stress_change = -5
 	desc = SPAN_GOD_XYLIX("Oh frabjous dae, calooh callay! The Silver-Tongue's guffaw keeps my troubles at bay!")
 
+/datum/stress_event/campfire
+	desc = span_green("The warmth of the fire is comforting.")
+	stress_change = -1
+	timer = 5 SECONDS
+
 /datum/stress_event/soulchurnerdestroyed
 	timer = 10 MINUTES
 	stress_change = -5

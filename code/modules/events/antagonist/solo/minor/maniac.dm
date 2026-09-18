@@ -1,3 +1,4 @@
+/*
 /datum/round_event_control/antagonist/solo/maniac
 	name = "Maniacs"
 	tags = list(
@@ -34,6 +35,7 @@
 		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
+		/datum/job/admin,
 	)
 
 
@@ -107,3 +109,4 @@
 		weighted_list -= M
 		final_candidates += M
 	return final_candidates
+*/

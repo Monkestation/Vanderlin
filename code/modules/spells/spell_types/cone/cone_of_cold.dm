@@ -2,7 +2,6 @@
 	name = "Cone of Cold"
 	desc = "Shoots out a freezing cone in front of you."
 
-	school = SCHOOL_EVOCATION
 	cooldown_time = 30 SECONDS
 	cooldown_reduction_per_rank = 4 SECONDS
 
@@ -12,10 +11,10 @@
 	cone_levels = 4
 	respect_density = TRUE
 	delay_between_level = 0.05 SECONDS
-	point_cost = 3
-	attunements = list(
-		/datum/attunement/ice = 0.3,
-	)
+
+	required_form = FORM_ICE
+	required_level = 2
+
 	button_icon_state = "frostbolt"
 	charge_time = 2 SECONDS
 	charge_drain = 1

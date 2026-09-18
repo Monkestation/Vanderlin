@@ -25,6 +25,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	//Forced mob worn layer instead of the standard preferred ssize.
 	var/alternate_worn_layer
 
+	///this is our highlight information
+	var/datum/examine_highlight/examine_highlight_type
+
 	//Dimensions of the icon file used when this item is worn, eg: hats.dmi
 	//eg: 32x32 sprite, 64x64 sprite, etc.
 	//allows inhands/worn sprites to be of any size, but still centered on a mob properly
@@ -300,14 +303,22 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	/// This thing can be used to unlock locks
 	var/can_unlock = TRUE
 
+	/// Required pickpocket skill (old style) to steal.
+	var/pickpocket_difficulty = NONE
+
 	///do we block the offhand while wielding
 	var/wield_block = TRUE
 	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
 	var/toggle_state
+	///if this is set we add the spell modifier component with these stats
+	var/datum/spellcraft_contribution/item/spell_modifier
 
 /obj/item/Initialize(mapload)
 	if (attack_verb)
 		attack_verb = typelist("attack_verb", attack_verb)
+
+	if(melting_material && !examine_highlight_type)
+		examine_highlight_type = initial(melting_material.material_examine_hint)
 
 	if(experimental_inhand)
 		var/props2gen = list("gen")
@@ -322,6 +333,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				getmoboverlay(i,prop,behind=FALSE,mirrored=TRUE)
 				getmoboverlay(i,prop,behind=TRUE,mirrored=TRUE)
 
+	if(spell_modifier)
+		apply_spell_modifiers()
 	if(experimental_onhip)
 		if(slot_flags & ITEM_SLOT_BELT)
 			var/i = "onbelt"
@@ -371,11 +384,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		max_blade_int = 0
 		blade_int = 0
 
-	//Randomizes blade sharpness on initialize to between 60-100%
 	if(max_blade_int && !blade_int)
 		blade_int = max_blade_int
-		if(randomize_blade_int)
-			blade_int += rand(-(max_blade_int * 0.4), 0)
 
 	if(!pixel_x && !pixel_y && !bigboy)
 		pixel_x = rand(-5,5)
@@ -686,6 +696,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/mob/living/carbon/C = user
 		if(!C.can_touch_burning(src))
 			to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
+			return FALSE
 
 	if(resistance_flags & ON_FIRE)
 		var/can_handle_hot = FALSE
@@ -1350,6 +1361,24 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 	return TRUE
 
+/obj/item/proc/apply_spell_modifiers()
+	var/datum/spellcraft_contribution/contribution = GLOB.spellcraft_items[spell_modifier]
+
+	if(!contribution)
+		return
+
+	if(contribution.is_empty())
+		return
+
+	AddComponent(/datum/component/spell_modifier, \
+		contribution.form_cost_multipliers, \
+		contribution.form_cast_speed_multipliers, \
+		contribution.form_magnitude_modifications, \
+		contribution.technique_cost_multipliers, \
+		contribution.technique_cast_speed_multipliers, \
+		contribution.technique_magnitude_modifications \
+	)
+
 // Called before use_tool if there is a delay, or by use_tool if there isn't.
 // Only ever used by welding tools and stacks, so it's not added on any other use_tool checks.
 /obj/item/proc/tool_start_check(mob/living/user, amount=0)
@@ -1613,6 +1642,14 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/examine(mob/user)
 	. = ..()
+	var/list/examine_highlight_status = get_examine_highlight_status(user)
+	if(length(examine_highlight_status))
+		var/datum/examine_highlight/highlight_type = examine_highlight_status[1]
+		var/examine_desc = get_examine_highlight_description(examine_highlight_status, itis = TRUE, allcaps = FALSE)
+		var/examine_tooltip = highlight_type.explanation
+
+		. += span_info(span_tooltip_dangerous_html(examine_tooltip, examine_desc))
+
 	if(currecipe)
 		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
 	if(!get_precursor_data(src))
@@ -1740,3 +1777,110 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		data["sources"] = sources
 
 	return data
+
+
+/obj/item/vv_get_dropdown()
+	. = ..()
+	VV_DROPDOWN_OPTION("", "---")
+	VV_DROPDOWN_OPTION(VV_HK_ADDENCHANT, "Add Enchantment")
+	VV_DROPDOWN_OPTION(VV_HK_REMOVEENCHANT, "Remove Enchantment")
+
+/obj/item/vv_do_topic(list/href_list)
+	if(!(. = ..()))
+		return
+	var/obj/item/target = src
+	if(href_list[VV_HK_ADDENCHANT])
+		if(!check_rights(NONE))
+			return
+
+		var/list/enchantment_subtypes = sortList(subtypesof(/datum/enchantment), GLOBAL_PROC_REF(cmp_typepaths_asc))
+		var/result = tgui_input_list(usr, "Choose an Enchantment to add", "Add Enchantment", enchantment_subtypes)
+		if(isnull(result))
+			return
+		if(!usr)
+			return
+
+		if(QDELETED(src))
+			to_chat(usr, "That thing doesn't exist anymore!")
+			return
+
+		target.enchant(result)
+		log_admin("[key_name(usr)] has added [result] to [key_name(target)].")
+		message_admins(span_notice("[key_name_admin(usr)] has added [result] enchantment to [key_name_admin(target)]."))
+
+	if(href_list[VV_HK_REMOVEENCHANT])
+		if(!check_rights(NONE))
+			return
+
+		var/list/enchantments = target.enchantments.Copy()
+
+		var/path = tgui_input_list(usr, "Choose an enchantment to remove.", "Remove Enchantment", enchantments)
+		if(isnull(path))
+			return
+		if(!usr)
+			return
+		if(QDELETED(src))
+			to_chat(usr, "That thing doesn't exist anymore!")
+			return
+
+		target.remove_enchantment(path)
+		message_admins(span_notice("[key_name_admin(usr)] has removed [path] enchantment from [target]."))
+
+/// Called when this item is offered to another mob, before the default offer message/effect happens.
+/// Return TRUE if this proc fully handled the offer (e.g. played its own messages/sounds),
+/// which will suppress the default "offers item with an outstretched hand" message.
+/// Return FALSE to let the default offer behavior play out.
+/obj/item/proc/on_offer(mob/living/offerer, mob/living/offered_to)
+	return FALSE
+
+/obj/item/proc/get_examine_highlight_status(mob/user)
+	if(!examine_highlight_type)
+		return null
+	if(istype(examine_highlight_type))
+		return list(examine_highlight_type, examine_highlight_type.item_examine_desc)
+	var/datum/examine_highlight/examine_type = GLOB.examine_highlights[examine_highlight_type]
+	if(!isobserver(user) && examine_type.required_trait && !HAS_TRAIT(user, examine_type.required_trait))
+		return null
+	if(!isobserver(user) && examine_type.required_mind_trait && !HAS_MIND_TRAIT(user, examine_type.required_mind_trait))
+		return null
+	return list(GLOB.examine_highlights[examine_highlight_type], examine_type.item_examine_desc)
+
+/obj/item/proc/get_examine_highlight_description(list/examine_highlight_status, itis = FALSE, allcaps = TRUE)
+	if(!examine_highlight_status)
+		return null
+
+	var/datum/examine_highlight/highlight_type = examine_highlight_status[1]
+	var/heresy_desc = examine_highlight_status[2]
+	if(!highlight_type || !heresy_desc)
+		return null
+
+	var/adjective = highlight_type.adjective
+	var/highlight_itis = "[itis ? highlight_type.leader : ""]<b>[adjective]</b>"
+
+	return get_examine_highlight_labeled_string(highlight_type, "[allcaps ? uppertext(highlight_itis) : highlight_itis]: [allcaps ? uppertext(heresy_desc) : heresy_desc]")
+
+/obj/item/proc/get_examine_highlight_labeled_string(datum/examine_highlight/highlight_type, label_string)
+	if(!highlight_type || !label_string)
+		return null
+
+	var/highlight_color = highlight_type.color
+	var/highlight_symbol = highlight_type.symbol
+
+	return "<span style='color: [highlight_color];'>[highlight_symbol] [label_string] [highlight_symbol]</span>"
+
+/obj/item/proc/set_custom_examine_highlight(adjective, leader, explanation, color, symbol, desc)
+	var/datum/examine_highlight/custom/H = examine_highlight_type
+	if(!istype(H))
+		H = new /datum/examine_highlight/custom()
+	H.adjective = adjective
+	H.leader = leader
+	H.explanation = explanation
+	H.color = color
+	H.symbol = symbol
+	H.item_examine_desc = desc
+	examine_highlight_type = H
+
+/obj/item/proc/clear_custom_examine_highlight()
+	if(istype(examine_highlight_type, /datum/examine_highlight/custom))
+		qdel(examine_highlight_type)
+	examine_highlight_type = initial(examine_highlight_type)

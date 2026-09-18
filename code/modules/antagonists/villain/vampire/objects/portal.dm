@@ -98,6 +98,7 @@
 	desc = "Ominous looking necklace, origin of the tooth is impossible to tell. It seems to react to touch..?"
 	icon_state = "bloodtooth"
 	icon = 'icons/roguetown/clothing/neck.dmi'
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
 	var/uses = 6
 	var/can_local_portal = TRUE
 

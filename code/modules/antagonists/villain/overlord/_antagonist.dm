@@ -42,7 +42,7 @@
 
 	var/list/spells = list(
 		/datum/action/cooldown/spell/projectile/fireball,
-		/datum/action/cooldown/spell/projectile/blood_bolt,
+		/datum/action/cooldown/spell/projectile/blood_bolt/arcyne,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/undirected/arcyne_eye,
@@ -177,7 +177,7 @@
 	owner.transfer_to(overlord_mob, TRUE)
 
 	overlord_mob.skeletonize(FALSE)
-	overlord_mob.add_faction(list(FACTION_UNDEAD, "overlord"))
+	overlord_mob.add_faction(list(FACTION_UNDEAD, FACTION_OVERLORD))
 	if(length(overlord_mob.quirks))
 		overlord_mob.clear_quirks()
 	overlord_mob.mob_biotypes |= MOB_UNDEAD

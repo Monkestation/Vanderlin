@@ -478,7 +478,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	var/list/job_list = list()
 	for(var/datum/job/job as anything in SSjob.joinable_occupations)
-		if(IS_ABSTRACT(job) || (job.title == "NOPE")) // Safety first.
+		if(IS_ABSTRACT(job) || (job.title == "NOPE") || (job.title == "ADMIN SPECIAL JOB")) // Safety first.
 			continue
 		job_list += job.title
 
@@ -735,6 +735,24 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggled Hub Visibility", "[GLOB.hub_visibility ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/scan_health(mob/living/carbon/target as mob)
+	set name = "Scan Health"
+	set category = "GameMaster.Gods"
+	if(!check_rights())
+		to_chat(usr, span_warning("You should not have this button. Shoo."))
+		return FALSE
+
+	if(!ishuman(target))
+		to_chat(usr, span_warning("You can only use this on human targets."))
+		return FALSE
+	var/mob/living/carbon/human/human_target = target
+	if(QDELETED(human_target))
+		return FALSE
+	human_target.check_for_injuries(mob, TRUE, FALSE, TRUE, TRUE)
+	log_admin("[key_name(usr)] admin-scanned the health of [key_name(target)]")
+	message_admins("[key_name_admin(usr)] admin-scanned the health of [key_name_admin(target)]")
+	return TRUE
+
 /client/proc/smite(mob/living/target as mob)
 	set name = "Smite"
 	set category = "GameMaster.Gods"
@@ -821,7 +839,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			for (var/mob/living/carbon in GLOB.carbon_list) // Admin smite, just tell all assassins whether they have their knife or not
 				if (HAS_TRAIT(carbon, TRAIT_ASSASSIN) && !(carbon.stat == DEAD)) //Check if they are an assassin and alive
 					// for(var/obj/item/I in carbon) // Checks to see if the assassin has their dagger on them. If so, the dagger will let them know of a new target.
-					// 	if(istype(I, /obj/item/weapon/knife/dagger/steel/profane)) // Checks to see if the assassin has their dagger on them.
+					// 	if(istype(I, /obj/item/weapon/knife/dagger/steel/inhumen/profane)) // Checks to see if the assassin has their dagger on them.
 					to_chat(carbon, "<span class='danger'>\"The Dark Sun Graggar himself has ordered us to punish [target.real_name] for their transgressions!\"</span>")
 			to_chat(target.mind, "<span class='danger'>My hair stands on end. Has someone just said my name? I should watch my back.</span>")
 		if(ADMIN_PUNISHMENT_MEATPIE)
@@ -997,7 +1015,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 				var/name = GLOB.trait_name_map[trait] || trait
 				availible_traits[name] = trait
 
-	var/chosen_trait = input("Select trait to modify", "Trait") as null|anything in sortList(availible_traits)
+	var/chosen_trait = tgui_input_list(usr, "Select trait to modify", "Trait", sortList(availible_traits))
 	if(!chosen_trait)
 		return
 	chosen_trait = availible_traits[chosen_trait]
@@ -1009,16 +1027,18 @@ Traitors and the like can also be revived with the previous role mostly intact.
 				D.AddElement(/datum/element/movetype_handler)
 			ADD_TRAIT(D, chosen_trait, source)
 		if("Remove")
-			var/specific = input("All or specific source ?", "Trait Remove/Add") as null|anything in list("All","Specific")
+			var/specific = tgui_alert(usr, "All or specific source ?", "Trait Remove/Add", list("All","Specific"))
 			if(!specific)
 				return
 			switch(specific)
 				if("All")
 					source = null
 				if("Specific")
-					source = input("Source to be removed","Trait Remove/Add") as null|anything in sortList(D._status_traits[chosen_trait])
+					source = tgui_input_list(usr, "Source to be removed","Trait Remove/Add", sortList(D._status_traits[chosen_trait]))
 					if(!source)
 						return
+				else
+					return
 			REMOVE_TRAIT(D,chosen_trait,source)
 
 /client/proc/send_bird_letter(mob/M in GLOB.player_list)

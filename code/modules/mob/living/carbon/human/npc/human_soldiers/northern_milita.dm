@@ -21,7 +21,7 @@
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LEECHIMMUNE, INNATE_TRAIT)
-	ADD_TRAIT(src, TRAIT_BREADY, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_BATTLE_READY, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/job/human/species/human/northern/militia)
 	var/obj/item/organ/eyes/organ_eyes = getorgan(/obj/item/organ/eyes)
@@ -46,7 +46,7 @@
 	)
 
 /datum/outfit/job/human/species/human/northern/militia/pre_equip(mob/living/carbon/human/H)
-	if(H.has_faction("viking"))
+	if(H.has_faction(FACTION_VIKINGS))
 		cloak = /obj/item/clothing/cloak/stabard/mercenary
 	else
 		cloak = /obj/item/clothing/cloak/stabard/guard
@@ -122,4 +122,4 @@
 	wander = FALSE
 
 /mob/living/carbon/human/species/human/northern/militia/deserter // Bad deserter, trash mob
-	faction = list("viking", "station")
+	faction = list(FACTION_VIKINGS)

@@ -51,15 +51,9 @@
 /obj/item/gem/on_consume(mob/living/eater)
 	. = ..()
 	eater.extra_mob_weight += get_carry_weight(eater)
-	if(attuned)
-		//eater.adjust_spell_points(0.5)
-		eater.mana_pool.adjust_attunement(attuned, 0.1)
 
 /obj/item/gem/on_anti_consume(mob/living/eater)
 	eater.extra_mob_weight -= get_carry_weight(eater)
-	if(attuned)
-		//eater.adjust_spell_points(0.5)
-		eater.mana_pool.adjust_attunement(attuned, -0.1)
 
 ///This is a switch incase anyone would like to add more...
 /obj/item/gem/update_icon_state()
@@ -176,6 +170,7 @@
 	desc = "Something about this gem just doesn't sit right with you. Holding it makes the blood leave your fingertips."
 	smeltresult = /obj/item/ingot/component/glutcrystal
 	dropshrink = 1
+	examine_highlight_type = /datum/examine_highlight/heresy_veryodd/glut
 
 /obj/item/gem/blood_diamond/examine(mob/user)
 	. = ..()

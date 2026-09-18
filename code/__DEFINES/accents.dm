@@ -6,7 +6,7 @@
 #define ACCENT_TIEFLING "Tiefling Accent"
 #define ACCENT_HORC "Half-Orc Accent"
 #define ACCENT_TRITON "Triton Accent"
-#define ACCENT_GRENZ "Grenzelhoft Acccent"
+#define ACCENT_GRENZ "Grenzelhoft Accent"
 #define ACCENT_PIRATE "Pirate Accent"
 #define ACCENT_MIDDLE_SPEAK "Middle Speak (Old Half-Orc)"
 #define ACCENT_ZALAD "Zalad Accent"

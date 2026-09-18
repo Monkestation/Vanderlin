@@ -21,6 +21,9 @@ GLOBAL_LIST_INIT(armor_by_type, generate_armor_type_cache())
 	CRASH("Attempted to get an armor type that did not exist! '[armor_type]'")
 
 /datum/armor
+	/// If TRUE, damage that penetrates this armor's rating for a given attack also strikes whatever the next-best covering layer underneath is.
+	///! THIS IS DISABLED FOR NOW PENDING AN ARMOR REFACTOR (it won't do much of anything with how high armor values are now)
+	var/layered_defense = FALSE
 	///this is really just a helper variable but like don't ever set it, used by the comparision index
 	var/armor_class = ARMOR_CLASS_NONE
 	/// better defined as area pressure melee
@@ -39,6 +42,12 @@ GLOBAL_LIST_INIT(armor_by_type, generate_armor_type_cache())
 	VAR_PROTECTED/magic
 	/// protection against internal wounding, basically padding for blunt hits
 	VAR_PROTECTED/wound
+
+	/// Edge Protection: extra buffer beyond DR that doesn't block damage, but converts it to blunt
+	/// instead of letting the edged/piercing type through. Only relevant for slash/stab/piercing.
+	VAR_PROTECTED/slash_ep
+	VAR_PROTECTED/stab_ep
+	VAR_PROTECTED/piercing_ep
 
 /datum/armor/Destroy(force)
 	if(!force && tag)
@@ -89,6 +98,15 @@ GLOBAL_LIST_INIT(armor_by_type, generate_armor_type_cache())
 
 /datum/armor/immune/generate_new_with_modifiers(list/modifiers)
 	return src
+
+/datum/armor/proc/get_edge_protection(d_type)
+	if(!(d_type in EDGE_PROTECTABLE_TYPES))
+		return 0
+	var/key = "[d_type]_ep"
+	return vars[key]
+
+/datum/armor/immune/get_edge_protection(d_type)
+	return 100
 
 /// Generate a brand new armor datum with the multiplier given, if ARMOR_ALL is specified only that modifer is used
 /datum/armor/proc/generate_new_with_multipliers(list/multipliers)

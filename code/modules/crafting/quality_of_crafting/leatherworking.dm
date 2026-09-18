@@ -587,7 +587,7 @@
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/cloth = 1
 	)
-	output = /obj/item/clothing/shoes/boots
+	output = /obj/item/clothing/shoes/boots/darkboots
 	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/leather/ridingboots
@@ -1001,7 +1001,7 @@
 	)
 	craftdiff = 4
 
-/datum/repeatable_crafting_recipe/leather/standalone/furlined_gloves/advanced
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_gloves_advanced
 	name = "hardened fur-lined leather gloves"
 	output = /obj/item/clothing/gloves/angle/furlined/advanced
 	requirements = list(/obj/item/natural/hide/cured = 2,
@@ -1139,7 +1139,7 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/furlined_gloves/masterwork
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_gloves_masterwork
 	name = "masterwork fur-lined leather gloves"
 	output = /obj/item/clothing/gloves/angle/furlined/masterwork
 	attacked_atom = /obj/item/clothing/gloves/angle/furlined
@@ -1169,7 +1169,7 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/forest/masterwork
+/datum/repeatable_crafting_recipe/leather/standalone/forest_masterwork
 	name = "masterwork forrester's armor"
 	output = /obj/item/clothing/armor/leather/advanced/forrester/masterwork
 	attacked_atom = /obj/item/clothing/armor/leather/advanced/forrester
@@ -1196,7 +1196,7 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/shaman_coat/masterwork
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_coat_masterwork
 	name = "masterwork shamanic coat"
 	output = /obj/item/clothing/armor/leather/shamancoat/masterwork
 	attacked_atom = /obj/item/clothing/armor/leather/shamancoat
@@ -1233,7 +1233,7 @@
 				/obj/item/natural/fibers = 1)
 	craftdiff = 5
 
-/datum/repeatable_crafting_recipe/leather/standalone/fur_pants/masterwork
+/datum/repeatable_crafting_recipe/leather/standalone/atgervi_pants_masterwork
 	name = "masterwork fur chausses"
 	output = /obj/item/clothing/pants/trou/leather/furpants/masterwork
 	attacked_atom = /obj/item/clothing/pants/trou/leather/furpants
@@ -1405,3 +1405,124 @@
 	output = /obj/item/clothing/shoes/courtphysician/female
 	craftdiff = 3
 	category = "Shoes"
+
+// wintermare gloves
+
+/datum/repeatable_crafting_recipe/leather/rosagloves
+	name = "ivory gloves"
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/silk = 2
+	)
+	output = /obj/item/clothing/gloves/leather/rosa
+	craftdiff = 5
+	category = "Gloves"
+
+/datum/repeatable_crafting_recipe/leather/rosagloves/two
+	name = "scarlet gloves"
+	output = /obj/item/clothing/gloves/leather/rosa/two
+
+/datum/repeatable_crafting_recipe/leather/rosagloves/three
+	name = "velvet gloves"
+	output = /obj/item/clothing/gloves/leather/rosa/three
+
+/datum/repeatable_crafting_recipe/leather/rosagloves/four
+	name = "obsidian gloves"
+	output = /obj/item/clothing/gloves/leather/rosa/four
+
+/datum/repeatable_crafting_recipe/leather/rosagloves/five
+	name = "sable gloves"
+	output = /obj/item/clothing/gloves/leather/rosa/five
+
+/datum/repeatable_crafting_recipe/leather/rosagloves/six
+	name = "maroon gloves"
+	output = /obj/item/clothing/gloves/leather/rosa/six
+
+/datum/repeatable_crafting_recipe/leather/rosagloves/seven
+	name = "regal gloves"
+	output = /obj/item/clothing/gloves/leather/rosa/seven
+
+/datum/repeatable_crafting_recipe/leather/rosagloves/eight
+	name = "courtly gloves"
+	output = /obj/item/clothing/gloves/leather/rosa/eight
+
+/datum/repeatable_crafting_recipe/leather/rosagloves/nine
+	name = "royal gloves"
+	output = /obj/item/clothing/gloves/leather/rosa/nine
+
+/datum/repeatable_crafting_recipe/leather/rosagloves/ten
+	name = "stately gloves"
+	output = /obj/item/clothing/gloves/leather/rosa/ten
+
+// wintermare shoes
+
+/datum/repeatable_crafting_recipe/leather/rosashoes
+	name = "ivory shoes"
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/silk = 2
+	)
+	output = /obj/item/clothing/shoes/boots/rosa
+	craftdiff = 5
+	category = "Shoes"
+
+/datum/repeatable_crafting_recipe/leather/rosashoes/two
+	name = "scarlet shoes"
+	output = /obj/item/clothing/shoes/boots/rosa/two
+
+/datum/repeatable_crafting_recipe/leather/rosashoes/three
+	name = "velvet shoes"
+	output = /obj/item/clothing/shoes/boots/rosa/three
+
+/datum/repeatable_crafting_recipe/leather/rosashoes/four
+	name = "obsidian shoes"
+	output = /obj/item/clothing/shoes/boots/rosa/four
+
+/datum/repeatable_crafting_recipe/leather/rosashoes/five
+	name = "sable shoes"
+	output = /obj/item/clothing/shoes/boots/rosa/five
+
+/datum/repeatable_crafting_recipe/leather/rosashoes/six
+	name = "maroon shoes"
+	output = /obj/item/clothing/shoes/boots/rosa/six
+
+/datum/repeatable_crafting_recipe/leather/rosashoes/seven
+	name = "regal shoes"
+	output = /obj/item/clothing/shoes/boots/rosa/seven
+
+/datum/repeatable_crafting_recipe/leather/rosashoes/eight
+	name = "courtly shoes"
+	output = /obj/item/clothing/shoes/boots/rosa/eight
+
+/datum/repeatable_crafting_recipe/leather/rosashoes/nine
+	name = "royal shoes"
+	output = /obj/item/clothing/shoes/boots/rosa/nine
+
+/datum/repeatable_crafting_recipe/leather/rosashoes/ten
+	name = "stately shoes"
+	output = /obj/item/clothing/shoes/boots/rosa/ten
+
+// wintermare coats
+
+/datum/repeatable_crafting_recipe/leather/rosacoat
+	name = "regal coat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 4,
+		/obj/item/natural/silk = 2,
+		/obj/item/alch/herb/rosa = 1
+	)
+	output = /obj/item/clothing/armor/leather/jacket/rosa
+	craftdiff = 5
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/rosacoat/two
+	name = "courtly coat"
+	output = /obj/item/clothing/armor/leather/jacket/rosa/two
+
+/datum/repeatable_crafting_recipe/leather/rosacoat/three
+	name = "royal coat"
+	output = /obj/item/clothing/armor/leather/jacket/rosa/three
+
+/datum/repeatable_crafting_recipe/leather/rosacoat/four
+	name = "stately coat"
+	output = /obj/item/clothing/armor/leather/jacket/rosa/four

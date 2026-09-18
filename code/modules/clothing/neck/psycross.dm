@@ -8,6 +8,7 @@
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	sellprice = 10
 	experimental_onhip = TRUE
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/clothing/neck/psycross/unfinished
 	name = "unfinished amulet"
@@ -75,6 +76,7 @@
 	icon_state = "bone_amulet"
 	desc = "An amulet made of parched bones and animal sinews, a common representation of faith used in Ossland."
 	sellprice = 30
+	examine_highlight_type = /datum/examine_highlight/heresy_odd/great_hunt
 
 // INHUMEN PSYCROSSES
 
@@ -85,6 +87,7 @@
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	sellprice = 0
 	experimental_onhip = TRUE
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/zizo
 
 /obj/item/clothing/neck/psycross/zizo/wood
 	name = "wooden amulet of Zizo"
@@ -97,6 +100,7 @@
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	smeltresult = null
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/matthios
 
 /obj/item/clothing/neck/psycross/matthios/wood
 	name = "wooden amulet of Matthios"
@@ -108,6 +112,7 @@
 	icon_state = "graggar"
 	resistance_flags = FIRE_PROOF
 	smeltresult = null
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/graggar
 
 /obj/item/clothing/neck/psycross/graggar/wood
 	name = "wooden amulet of Graggar"
@@ -120,6 +125,7 @@
 	resistance_flags = FIRE_PROOF
 	slot_flags = ITEM_SLOT_NECK|ITEM_SLOT_HIP|ITEM_SLOT_WRISTS
 	smeltresult = null
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/baotha
 
 /obj/item/clothing/neck/psycross/baotha/wood
 	name = "wooden amulet of Baotha"
@@ -188,6 +194,10 @@
 	desc = "Blessed be everything the light of the sun touches, for it is protected by Her grace."
 	icon_state = "astrata"
 
+/obj/item/clothing/neck/psycross/silver/divine/astrata/real_silver
+	name = "silver amulet of Astrata"
+	icon_state = "astrata_s"
+
 /obj/item/clothing/neck/psycross/silver/divine/noc
 	name = "amulet of Noc"
 	desc = "Diligence, study, pursuit of truth and wisdom. Let nothing deter you from it."
@@ -197,6 +207,14 @@
 	name = "amulet of Dendor"
 	desc = "Nature is a body of which we are but its entrails."
 	icon_state = "dendor"
+
+/obj/item/clothing/neck/psycross/silver/divine/dendor/divine_link
+	name = "blessed amulet of Dendor"
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/neck/psycross/silver/divine/dendor/divine_link/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/divine_link)
 
 /obj/item/clothing/neck/psycross/silver/divine/abyssor
 	name = "amulet of Abyssor"

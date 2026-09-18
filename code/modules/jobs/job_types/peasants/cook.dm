@@ -36,7 +36,7 @@
 	You've spent more nites than you can count cutting meat and vegetables until your fingers are bloody and raw, but it's honest work."
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
 	bypass_lastclass = TRUE
@@ -47,6 +47,7 @@
 	display_order = JDO_COOK
 	give_bank_account = 8
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 	can_be_apprentice = TRUE
 

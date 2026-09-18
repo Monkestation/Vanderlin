@@ -6,10 +6,10 @@
 	has_visual_effects = FALSE
 
 	cast_range = 1
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
-	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/necra)
+	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/necra, /obj/item/clothing/neck/psycross/silver/divine/astrata)
 
 	invocation = "Undermaiden grant thee passage forth and spare the trials of the forgotten."
 	invocation_type = INVOCATION_WHISPER
@@ -19,7 +19,9 @@
 	spell_cost = 15
 
 /datum/action/cooldown/spell/burial_rites/is_valid_target(atom/cast_on)
-	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/profane) || istype(cast_on, /obj/item/psydonmusicbox))
+	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/inhumen/profane) || istype(cast_on, /obj/item/psydonmusicbox))
+		return TRUE
+	if(istype(cast_on, /obj/item/blood_pearl))
 		return TRUE
 	else if(!istype(cast_on, /obj/structure/closet/dirthole))
 		return FALSE
@@ -44,14 +46,19 @@
 
 /datum/action/cooldown/spell/burial_rites/cast(obj/cast_on)
 	. = ..()
-	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/profane))
-		var/obj/item/weapon/knife/dagger/steel/profane/profane = cast_on
+	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/inhumen/profane))
+		var/obj/item/weapon/knife/dagger/steel/inhumen/profane/profane = cast_on
 		owner.adjust_triumphs(profane.release_profane_souls(owner)) // Every soul saved earns you a big fat triumph.
 		return
 	else if(istype(cast_on, /obj/item/psydonmusicbox))
 		var/obj/item/psydonmusicbox/musicbox = cast_on
 		musicbox.free_souls(owner)
 		return
+	else if(istype(cast_on, /obj/item/blood_pearl))
+		var/obj/item/blood_pearl/pearl = cast_on
+		pearl.shatter(TRUE)
+		return
+
 	if(pacify_coffin(cast_on, owner))
 		if(istype(cast_on, /obj/structure/closet/dirthole))
 			var/obj/structure/closet/dirthole/grave = cast_on // from this point on we know it is a grave subtype

@@ -104,6 +104,12 @@
 
 // Other
 #define ACCESS_BOGWITCH "bogwitch"
+#define ACCESS_DREAM_CAVE "Dreamcave"
+
+// Antags
+#define ACCESS_BANDIT "banditcamp"
+#define ACCESS_VAMPIRE "mansionvampire"
+#define ACCESS_LICH "lichlair"
 
 // Lock Strength
 #define LOCK_LEGENDARY 1

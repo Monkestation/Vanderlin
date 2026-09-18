@@ -5,10 +5,7 @@
 	sound = 'sound/magic/gravity.ogg'
 	self_cast_possible = FALSE
 	spell_flags = SPELL_RITUOS
-	point_cost = 2
-	attunements = list(
-		/datum/attunement/dark = 0.6,
-	)
+	required_form = FORM_AIR
 
 	//https://www.youtube.com/watch?v=MfK3Ygb7Jzk
 	invocation = "Fall."
@@ -19,6 +16,7 @@
 	spell_cost = 35
 	/// Min strength to resist spell.
 	var/strength_level = 13
+	var/strength_level_disarm = 8
 
 /datum/action/cooldown/spell/gravity/is_valid_target(atom/cast_on)
 	. = ..()
@@ -33,11 +31,15 @@
 		cast_on.OffBalance(3 SECONDS)
 		cast_on.adjustBruteLoss(15, damage_type = BCLASS_BLUNT)
 		to_chat(cast_on, span_userdanger("You're magically weighed down, but your strength resists!"))
+	else if(GET_MOB_ATTRIBUTE_VALUE(cast_on, STAT_STRENGTH) >= strength_level_disarm)
+		cast_on.Knockdown(3 SECONDS, prevent_drop = TRUE)
+		cast_on.adjustBruteLoss(20, damage_type = BCLASS_BLUNT)
+		to_chat(cast_on, span_userdanger("You're magically weighed down and hit the ground!"))
 	else
 		cast_on.Knockdown(3 SECONDS)
 		cast_on.Immobilize(3 SECONDS)
 		cast_on.adjustBruteLoss(30, damage_type = BCLASS_BLUNT)
-		to_chat(cast_on, span_userdanger("You're magically weighed down and hit the ground!"))
+		to_chat(cast_on, span_userdanger("You're magically weighed down and hit the ground, disarming you!"))
 
 /obj/effect/temp_visual/gravity
 	name = "gravity magic"

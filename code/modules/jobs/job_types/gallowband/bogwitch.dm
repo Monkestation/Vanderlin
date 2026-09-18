@@ -9,7 +9,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/magic/druidic = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/reading = 30,
@@ -23,7 +23,7 @@
 	department_flag = OUTSIDERS
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_BOGWITCH
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
 	bypass_lastclass = TRUE
@@ -60,6 +60,7 @@
 	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	selection_color = "#a33096"
 	languages = list(/datum/language/gronnic)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/job/bogwitch/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -80,13 +81,13 @@
 		if("Path of Bone")//Plus to Surgery
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, 1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, -1, TRUE)
-			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/druidic, -1, TRUE)
 		if("Path of Nature")//Plus to Alchemy
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, 1, TRUE)
-			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/druidic, -1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, -1, TRUE)
-		if("Path of The Hunt")//Plus to Miracles
-			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, 1, TRUE)
+		if("Path of The Hunt")//Plus to Druid Magic
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/druidic, 1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, -1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, -1, TRUE)
 
@@ -119,5 +120,5 @@
 	gloves = /obj/item/clothing/gloves/leather
 	neck = /obj/item/clothing/neck/psycross/great_hunt
 	backpack_contents = list(
-		/obj/item/scrying = 1
+		/obj/item/scrying/eye/bogwitch = 1
 	)

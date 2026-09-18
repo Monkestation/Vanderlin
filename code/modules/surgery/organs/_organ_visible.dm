@@ -118,6 +118,8 @@
 		if(!owner)
 			return
 		source_key_list = color_key_source_list_from_carbon(owner)
+	if(isbodypart(loc) && HAS_TRAIT(loc, TRAIT_ROTTEN))
+		source_key_list[KEY_SKIN_COLOR] = SKIN_COLOR_ROT
 	accessory_colors = accessory.get_default_colors(source_key_list)
 	accessory_colors = accessory.validate_color_keys_for_owner(owner, accessory_colors)
 	update_accessory_colors()

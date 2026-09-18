@@ -32,7 +32,7 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_DUNGEONEER
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
 	can_have_apprentices = TRUE
@@ -40,11 +40,14 @@
 	starting_wage = 30
 
 	allowed_races = RACES_PLAYER_NONEXOTIC
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	outfit = /datum/outfit/dungeoneer
 	give_bank_account = 50
 	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	cmode_music = 'sound/music/cmode/nobility/CombatDungeoneer.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
@@ -83,7 +86,7 @@
 	beltr = /obj/item/storage/fancy/ifak/prisonerkit
 	beltl = /obj/item/storage/belt/pouch/coins/poor
 	backr = /obj/item/storage/backpack/satchel	// lack of satchel requires dealing with the merchant to correct, which requires entering town; not ideal. N.
-	backpack_contents = list(/obj/item/clothing/head/menacing, /obj/item/storage/keyring/dungeoneer, /obj/item/weapon/knuckles, /obj/item/weapon/whip/antique)
+	backpack_contents = list(/obj/item/clothing/head/menacing, /obj/item/storage/keyring/dungeoneer, /obj/item/weapon/knuckles, /obj/item/weapon/whip/repenta)
 
 
 /obj/item/storage/fancy/ifak/prisonerkit

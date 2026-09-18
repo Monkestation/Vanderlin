@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 		"12" = 5000,
 		"16" = 500,
 		"20" = 200,
-		"24" = 10
+		"24" = 20
 	)
 	var/leyline_amount = text2num(pickweight(leyline_amount_list))
 	return leyline_amount
@@ -30,7 +30,6 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 /// The lines of latent energy that run under the universe. Available to all people in the game. Should be high capacity, but slow to recharge.
 /datum/mana_pool/leyline
 	var/datum/leyline_variable/leyline_intensity/intensity
-	var/list/datum/leyline_variable/attunement_theme/themes
 
 	maximum_mana_capacity = LEYLINE_BASE_CAPACITY
 
@@ -46,7 +45,6 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 
 /datum/mana_pool/leyline/Destroy(force)
 	QDEL_NULL(intensity)
-	QDEL_LIST(themes)
 	if(current_beam)
 		QDEL_NULL(current_beam)
 
@@ -58,10 +56,6 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 	GLOB.all_leylines += src
 
 	intensity = generate_initial_intensity()
-	themes = generate_initial_themes()
-
-	for (var/datum/leyline_variable/attunement_theme/theme as anything in themes)
-		theme.adjust_attunements(attunements_to_generate)
 
 	maximum_mana_capacity *= (intensity.overall_mult)
 	softcap = maximum_mana_capacity
@@ -75,17 +69,9 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 
 	return ..()
 
-/datum/mana_pool/leyline/generate_initial_attunements()
-	return attunements_to_generate.Copy()
-
 /datum/mana_pool/leyline/proc/generate_initial_intensity()
 	var/picked_intensity = pickweight(GLOB.leyline_intensities)
 	return new picked_intensity
-
-/datum/mana_pool/leyline/proc/generate_initial_themes()
-	var/list/datum/leyline_variable/attunement_theme/themes = get_random_attunement_themes()
-
-	return themes
 
 /// GETTERS / SETTERS
 
@@ -157,10 +143,8 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 	var/list/data = generate_start_and_end(z_level)
 	var/turf/starting = data[1]
 	var/turf/ending = data[2]
-	var/datum/leyline_variable/attunement_theme/theme
 
-	if(length(themes))
-		theme = themes[1]
+	var/form = pick(GLOB.all_forms)
 
 	current_beam = starting.Beam(
 		ending,
@@ -168,7 +152,7 @@ GLOBAL_LIST_EMPTY_TYPED(all_leylines, /datum/mana_pool/leyline)
 		time = INFINITY,
 		beam_type = /obj/effect/ebeam/leyline,
 		max_distance = world.maxx,
-		beam_color = theme?.beam_color,
+		beam_color = GLOB.form_colors[form],
 		beam_layer = UPPER_LEYLINE_LAYER,
 		beam_plane = LEYLINE_PLANE,
 		invisibility = INVISIBILITY_LEYLINES,

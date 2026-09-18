@@ -15,7 +15,7 @@
 	)
 /datum/species/medicator
 	name = "Medicator"
-	id = "medicator"
+	id = SPEC_ID_MEDICATOR
 	changesource_flags = WABBAJACK
 
 	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1)

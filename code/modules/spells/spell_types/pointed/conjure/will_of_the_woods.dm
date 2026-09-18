@@ -5,9 +5,9 @@
 	sound = 'sound/magic/timestop.ogg'
 	self_cast_possible = FALSE
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/attribute/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/druidic
 	invocation = "Fear the wrath of the woods!!!"
 	invocation_type = INVOCATION_SHOUT
 

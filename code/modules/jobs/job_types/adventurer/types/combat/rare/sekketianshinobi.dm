@@ -56,7 +56,7 @@
 	gloves = /obj/item/clothing/gloves/angle
 	shirt = /obj/item/clothing/armor/gambeson/heavy/colored/dark
 	pants = /obj/item/clothing/pants/trou/shadowpants
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/weapon/mace/rungu
 	beltl = /obj/item/storage/belt/pouch //broke as hell!

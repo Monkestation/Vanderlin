@@ -36,12 +36,8 @@
 	. = ..()
 
 /datum/component/rot/corpse/process()
-	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT)) // No rot
+	if(HAS_TRAIT(parent, TRAIT_STASIS) || HAS_TRAIT(parent, TRAIT_NO_ROT))
 		return
-	var/time_elapsed = last_process ? (world.time - last_process)/10 : 1
-	..()
-	if(has_world_trait(/datum/world_trait/pestra_mercy))
-		amount -= (is_ascendant(PESTRA) ? 2.5 : 5) * time_elapsed
 
 	var/mob/living/carbon/C = parent
 	var/is_zombie = IS_DEADITE(C)
@@ -52,53 +48,21 @@
 		qdel(src)
 		return
 
-	if(!is_zombie && amount > 2 MINUTES)
-		if(!has_world_trait(/datum/world_trait/necra_requiem) && (!is_in_roguetown(C) || has_world_trait(/datum/world_trait/zizo_defilement)))
-			if(istype(C.loc, /obj/structure/closet/dirthole) || istype(C.loc, /obj/structure/closet/crate/coffin))
-				if(amount > 3 MINUTES)
-					C.zombie_check()
-			else
-				C.zombie_check()
-
 	var/findonerotten = FALSE
-	var/shouldupdate = FALSE
-	for(var/obj/item/bodypart/B in C.bodyparts)
-		if(!B.skeletonized && B.is_organic_limb())
-			if(!HAS_TRAIT(B, TRAIT_ROTTEN))
-				if(amount > 25 MINUTES)
-					B.kill_limb()
-					findonerotten = TRUE
-					shouldupdate = TRUE
-					C.change_stat(STAT_CONSTITUTION, -8)
-			else
-				if(amount > 45 MINUTES)
-					if(!is_zombie)
-						B.skeletonize()
-						ADD_TRAIT(C, TRAIT_NOBLOOD, TRAIT_GENERIC)
-						C.change_stat(STAT_CONSTITUTION, -99)
-						shouldupdate = TRUE
-				else
-					findonerotten = TRUE
+	for(var/obj/item/bodypart/B as anything in C.bodyparts)
+		if(!B.skeletonized && B.is_organic_limb() && HAS_TRAIT(B, TRAIT_ROTTEN))
+			findonerotten = TRUE
+			break
+
 	if(findonerotten)
 		var/turf/open/T = C.loc
-		if(istype(T) && amount < 16 MINUTES && !C.has_faction(FACTION_MATTHIOS))
+		if(istype(T) && !C.has_faction(FACTION_MATTHIOS))
 			T.pollute_turf(/datum/pollutant/rot, 9)
-			if(soundloop && soundloop.stopped && !is_zombie)
-				soundloop.start()
-		else
-			if(soundloop && !soundloop.stopped)
-				soundloop.stop()
+		if(soundloop && soundloop.stopped && !is_zombie)
+			soundloop.start()
 	else
 		if(soundloop && !soundloop.stopped)
 			soundloop.stop()
-	if(shouldupdate)
-		if(findonerotten)
-			if(ishuman(C))
-				var/mob/living/carbon/human/H = C
-				H.skin_tone = "878f79" //elf ears
-			if(soundloop && soundloop.stopped && !is_zombie)
-				soundloop.start()
-		C.update_body()
 
 /datum/component/rot/simple
 	rot_amount_per_process = 5

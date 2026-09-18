@@ -52,7 +52,7 @@
 			F.adjustHealth(-heal_amount)
 			if(prob(30))
 				new /obj/effect/temp_visual/heal(get_turf(F))
-		else if(!L.has_faction("deepone"))
+		else if(!L.has_faction(FACTION_DEEP))
 			// Slow down players/non-deep ones
 			L.add_movespeed_modifier(MOVESPEED_ID_FISH_BOSS, multiplicative_slowdown = 2)
 
@@ -73,7 +73,7 @@
 		return
 
 	var/mob/living/L = AM
-	if(L.has_faction("deepone"))
+	if(L.has_faction(FACTION_DEEP))
 		return
 
 	L.remove_movespeed_modifier(MOVESPEED_ID_FISH_BOSS)

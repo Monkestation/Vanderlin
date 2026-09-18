@@ -3,8 +3,6 @@
 	desc = "Reveals the presence of toxins or poisons in nearby objects."
 	button_icon_state = "detect_poison"
 	cast_range = 2
-	point_cost = 2
-	attunements = list(/datum/attunement/life)
 	essences = list(/datum/thaumaturgical_essence/poison)
 
 /datum/action/cooldown/spell/essence/detect_poison/cast(atom/cast_on)
@@ -16,12 +14,12 @@
 
 	var/found_poison = FALSE
 	for(var/obj/item/I in range(1, target_turf))
-		if(I.reagents && I.reagents.has_reagent(/datum/reagent/toxin))
+		if(I.reagents && I.reagents.has_reagent(/datum/reagent/toxin, check_subtypes = TRUE))
 			I.visible_message(span_warning("[I] glows with a sickly light!"))
 			new /obj/effect/temp_visual/solosnake(get_turf(I))
 			found_poison = TRUE
 			continue
-		if(I.reagents && I.reagents.has_reagent(/datum/reagent/poison))
+		if(I.reagents && I.reagents.has_reagent(/datum/reagent/poison, check_subtypes = TRUE))
 			I.visible_message(span_warning("[I] glows with a sickly light!"))
 			new /obj/effect/temp_visual/solosnake(get_turf(I))
 			found_poison = TRUE
@@ -35,3 +33,12 @@
 	icon_state = "solosnake"
 	duration = 2 SECONDS
 	layer = EFFECTS_LAYER
+
+/datum/action/cooldown/spell/essence/detect_poison/spell
+	name = "Detect Toxin"
+	charge_required = TRUE
+	charge_time = 2 SECONDS
+	spell_cost = 10
+	spell_type = SPELL_MANA
+
+	required_form = FORM_LIFE

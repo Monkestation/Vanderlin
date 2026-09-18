@@ -30,6 +30,9 @@
 /obj/item/clothing/cloak/raincloak/colored/purple
 	color = CLOTHING_PLUM_PURPLE
 
+/obj/item/clothing/cloak/raincloak/colored/black
+	color = CLOTHING_ROYAL_BLACK
+
 /obj/item/clothing/cloak/raincloak/colored/mortus
 	name = "funeral cloak"
 	desc = "You're always shrouded by death."
@@ -43,6 +46,9 @@
 
 /obj/item/clothing/cloak/raincloak/colored/blue
 	color = CLOTHING_SKY_BLUE
+
+/obj/item/clothing/cloak/raincloak/colored/chalk
+	color = CLOTHING_CHALK_WHITE
 
 /obj/item/clothing/cloak/raincloak/colored/random/Initialize()
 	color = pick(CLOTHING_BLOOD_RED, CLOTHING_PLUM_PURPLE, CLOTHING_SOOT_BLACK, CLOTHING_BARK_BROWN, CLOTHING_FOREST_GREEN, CLOTHING_SKY_BLUE)

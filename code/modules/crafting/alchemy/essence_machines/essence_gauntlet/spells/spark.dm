@@ -4,7 +4,6 @@
 	button_icon_state = "spark"
 	sound = 'sound/magic/fireball.ogg'
 	cast_range = 1
-	attunements = list(/datum/attunement/fire)
 	essences = list(/datum/thaumaturgical_essence/fire)
 
 /datum/action/cooldown/spell/essence/spark/cast(atom/cast_on)
@@ -28,3 +27,10 @@
 			if(!T.on)
 				T.fuel += 5 MINUTES
 				T.fire_act()
+
+/datum/action/cooldown/spell/essence/spark/spell
+	name = "Lesser Spark"
+	spell_cost = 10
+	spell_type = SPELL_MANA
+
+	required_form = FORM_FIRE

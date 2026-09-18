@@ -7,7 +7,7 @@
 		output.add_line("ERROR: No host to bind to.")
 		return
 
-	var/datum/action/cooldown/spell/conjure/familiar/spell = new
+	var/datum/action/cooldown/spell/conjure_summon/familiar/spell = new
 	spell.cast(starter)
 	qdel(starter)
 	var/mob/living/simple_animal/hostile/retaliate/wolf/familiar/pet = locate(/mob/living/simple_animal/hostile/retaliate/wolf/familiar) in get_turf(starter)

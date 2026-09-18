@@ -69,3 +69,29 @@ export const ItemRow = (props: {
     </Box>
   );
 };
+
+export const SpellcraftRow = (props: {
+  name: string;
+  color?: string;
+  path?: string;
+  lookup: Map<string, Recipe>;
+  pickerMap: Map<string, Recipe[]>;
+  allRecipes: Recipe[];
+  essenceIndex?: Map<string, Recipe[]>;
+  onNavigate: (r: Recipe) => void;
+}) => {
+  const { name, color, path, lookup, pickerMap, allRecipes, essenceIndex, onNavigate } = props;
+  return (
+    <Box className="RecipeBook__item-row" style={{ color: color || 'inherit' }}>
+      <RecipeLink
+        name={name}
+        path={path}
+        lookup={lookup}
+        pickerMap={pickerMap}
+        allRecipes={allRecipes}
+        essenceIndex={essenceIndex}
+        onNavigate={onNavigate}
+      />
+    </Box>
+  );
+};

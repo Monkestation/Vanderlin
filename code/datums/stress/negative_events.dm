@@ -221,6 +221,11 @@
 	stress_change = 3
 	desc = span_phobia("IT'S THE FUCKING DAEWALKER!!")
 
+/datum/stress_event/its_the_nitewalker
+	timer = 3 MINUTES
+	stress_change = 2
+	desc = span_phobia("THE NITEWALKER ROAMS!!")
+
 /datum/stress_event/fishface
 	timer = 1 MINUTES
 	stress_change = 1

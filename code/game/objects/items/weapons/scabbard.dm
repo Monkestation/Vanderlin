@@ -7,13 +7,12 @@
 	attacked_sound = "parrywood"
 	sharpness = IS_BLUNT
 	wdefense = BAD_PARRY
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_STATIC_200
 	possible_item_intents = list(SHIELD_BASH)
-	randomize_blade_int = FALSE
 
 /obj/item/weapon/scabbard/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /*
 	GENERIC SCABBARDS
@@ -71,6 +70,25 @@
 	icon_state = "rsheath"
 	sellprice = 100
 	item_weight = 120 GRAMS
+
+/obj/item/weapon/scabbard/knife/hidden
+	name = "concealed knife sheath"
+	desc = "A slim sheath made of leather designed to be strapped to the inside of one's wrist, meant to host surprises of smaller sizes."
+	slot_flags = ITEM_SLOT_WRISTS
+
+/obj/item/weapon/scabbard/knife/hidden/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_CONCEALED_ITEM, TRAIT_GENERIC)
+
+/obj/item/weapon/scabbard/knife/hidden/stiletto/Initialize()
+	. = ..()
+	new /obj/item/weapon/knife/dagger/steel/stiletto(src)
+	update_appearance(UPDATE_ICON_STATE)
+
+/obj/item/weapon/scabbard/knife/hidden/steel_dagger/Initialize()
+	. = ..()
+	new /obj/item/weapon/knife/dagger/steel(src)
+	update_appearance(UPDATE_ICON_STATE)
 
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
@@ -215,7 +233,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/attribute/skill/craft/carpentry
 	associated_skill = /datum/attribute/skill/combat/shields
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STATIC_300
 	sellprice = 10
 	item_weight = 400 GRAMS
 
@@ -228,7 +246,7 @@
 	desc = "A cloud-patterned scabbard with a cloth sash. Used for blocking."
 	icon_state = "kazscab_steel"
 	item_state = "kazscab_steel"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STATIC_400
 	item_weight = 450 GRAMS
 
 /obj/item/weapon/scabbard/blackmeadow/gold
@@ -236,5 +254,33 @@
 	desc = "An ornate, wooden scabbard with a sash. Great for parrying."
 	icon_state = "kazscab_gold"
 	item_state = "kazscab_gold"
-	max_integrity = INTEGRITY_STRONGEST
 	item_weight = 500 GRAMS
+
+/obj/item/weapon/scabbard/blackmeadow_dagger
+	name = "simple eastern knife sheathe"
+	desc = "A simple sheathe of eastern style, designed to hold a tanto knife."
+	icon_state = "kazscabdagger"
+	item_state = "kazscabdagger"
+	force = DAMAGE_KNIFE - 7
+	throwforce = DAMAGE_KNIFE - 7
+	wdefense = MEDIOCRE_PARRY
+	wbalance = HARD_TO_DODGE
+	wlength = WLENGTH_SHORT
+	w_class = WEIGHT_CLASS_SMALL
+	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK|ITEM_SLOT_WRISTS|ITEM_SLOT_NECK
+	associated_skill = /datum/attribute/skill/combat/knives
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_amount = 1
+	salvage_result = /obj/item/natural/hide/cured
+	dyeable = TRUE
+	sellprice = 10
+	experimental_onback = FALSE
+	experimental_onhip = FALSE
+
+	grid_width = 32
+	grid_height = 64
+	item_weight = 80 GRAMS
+
+/obj/item/weapon/scabbard/blackmeadow_dagger/apply_components()
+	. = ..()
+	AddComponent(/datum/component/storage/concrete/scabbard/blackmeadow_dagger)

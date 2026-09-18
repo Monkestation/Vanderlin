@@ -1,6 +1,4 @@
 /datum/action/cooldown/spell/conjure
-	school = SCHOOL_CONJURATION
-
 	/// A list of types that will be created on summon.
 	/// The type is picked from this list, not all provided are guaranteed.
 	var/list/summon_type = list()

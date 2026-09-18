@@ -1003,3 +1003,10 @@
 
 	animate(my_client, pixel_x = oldx + mpx, pixel_y = oldy + mpy, time = duration, flags = ANIMATION_RELATIVE)
 	animate(pixel_x = oldx, pixel_y = oldy, time = backtime_duration, easing = BACK_EASING)
+
+
+/mob/living/proc/is_swinging(disrupt_only = FALSE)
+	if(!disrupt_only)
+		return (has_status_effect(/datum/status_effect/swingdelay) || has_status_effect(/datum/status_effect/swingdelay/disrupt))
+	else
+		return (has_status_effect(/datum/status_effect/swingdelay/disrupt))

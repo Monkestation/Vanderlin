@@ -128,38 +128,37 @@
 		available += vial.essence_amount
 	return available >= amount
 
-/// Consumes essence, splitting cost evenly across matching attunements when multiple are required.
+/// Consumes essence, splitting cost evenly across matching essence types when multiple are required.
 /// Returns TRUE on success.
-/obj/item/clothing/gloves/essence_gauntlet/proc/consume_essence(amount, list/attunements = null)
-	if(!can_consume_essence(amount, attunements))
+/obj/item/clothing/gloves/essence_gauntlet/proc/consume_essence(amount, list/essences = null)
+	if(!can_consume_essence(amount, essences))
 		return FALSE
 
-	// Build a list of eligible vials grouped by attunement type
-	var/list/vials_by_attunement = list()
+	// Build a list of eligible vials grouped by essence type
+	var/list/vials_by_type = list()
 	for(var/obj/item/essence_vial/vial in stored_vials)
 		if(!vial.contained_essence || vial.essence_amount <= 0)
 			continue
-		var/att = vial.contained_essence.attunement
-		if(attunements && !(att in attunements))
+		var/ess_type = vial.contained_essence.type
+		if(essences && !(ess_type in essences))
 			continue
-		if(!vials_by_attunement[att])
-			vials_by_attunement[att] = list()
-		vials_by_attunement[att] += vial
+		if(!vials_by_type[ess_type])
+			vials_by_type[ess_type] = list()
+		vials_by_type[ess_type] += vial
 
-	// Split cost as evenly as possible across attunement groups
-	var/list/att_types = vials_by_attunement
-	var/num_groups = length(att_types)
+	// Split cost as evenly as possible across essence type groups
+	var/num_groups = length(vials_by_type)
 	var/remaining = amount
 
 	if(num_groups > 1)
 		// First pass: try to take an even share from each group
 		var/share = CEILING(amount / num_groups, 1)
-		for(var/att in att_types)
+		for(var/ess_type in vials_by_type)
 			if(remaining <= 0)
 				break
 			var/to_draw = min(share, remaining)
 			var/drawn_from_group = 0
-			for(var/obj/item/essence_vial/vial in att_types[att])
+			for(var/obj/item/essence_vial/vial in vials_by_type[ess_type])
 				if(to_draw <= 0)
 					break
 				var/drawn = min(vial.essence_amount, to_draw)
@@ -172,10 +171,10 @@
 			remaining -= drawn_from_group
 
 	if(remaining > 0)
-		for(var/att in att_types)
+		for(var/ess_type in vials_by_type)
 			if(remaining <= 0)
 				break
-			for(var/obj/item/essence_vial/vial in att_types[att])
+			for(var/obj/item/essence_vial/vial in vials_by_type[ess_type])
 				if(remaining <= 0)
 					break
 				if(!vial.contained_essence || vial.essence_amount <= 0)

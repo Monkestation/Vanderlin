@@ -18,14 +18,28 @@
 	if(get_dist(src, assailant) > weapon_range)
 		return FALSE
 
-	if(!their_item)	//The opponent is trying to rawdog us with their bare hands while we have Guard up. We get a free attack on their active hand.
+	if(!their_item) //The opponent is trying to rawdog us with their bare hands while we have Guard up. We get a free attack on their active hand.
 		var/obj/item/bodypart/affecting = assailant.get_bodypart("[(assailant.active_hand_index % 2 == 0) ? "r" : "l" ]_arm")
 		var/force = get_complex_damage(our_item, src)
-		var/armor_block = assailant.run_armor_check(BODY_ZONE_PRECISE_L_HAND, used_intent.item_damage_type, armor_penetration = used_intent.penfactor, damage = force)
-		var/real_damage = assailant.apply_damage(force, our_item.damtype, affecting, armor_block)
+
+		var/list/split = list()
+		assailant.run_armor_check(BODY_ZONE_PRECISE_L_HAND, used_intent.item_damage_type, armor_penetration = used_intent.penfactor, damage = force, split_output = split)
+
+		var/typed_actual = 0
+		var/blunt_actual = 0
+		if(split[DAMAGE_TYPED] > 0)
+			typed_actual = assailant.apply_damage(split[DAMAGE_TYPED], our_item.damtype, affecting, 0)
+		if(split[DAMAGE_BLUNT] > 0)
+			blunt_actual = assailant.apply_damage(split[DAMAGE_BLUNT], BRUTE, affecting, 0, can_crit = FALSE)
+
+		var/real_damage = typed_actual + blunt_actual
+
 		if(real_damage)
 			visible_message(span_suicide("[src] gores [assailant]'s hands with \the [our_item]!"))
-			affecting?.bodypart_attacked_by(used_intent.blade_class, real_damage, assailant, crit_message = TRUE, incoming_germ = our_item.germ_level, pre_applied = TRUE)
+			if(typed_actual > 0)
+				affecting?.bodypart_attacked_by(used_intent.blade_class, typed_actual, assailant, crit_message = TRUE, incoming_germ = our_item.germ_level, pre_applied = TRUE)
+			if(blunt_actual > 0)
+				affecting?.bodypart_attacked_by(BCLASS_BLUNT, blunt_actual, assailant, crit_message = (typed_actual <= 0), incoming_germ = our_item.germ_level, pre_applied = TRUE)
 		else
 			visible_message(span_suicide("[src] clashes into [assailant]'s hands with \the [our_item]!"))
 

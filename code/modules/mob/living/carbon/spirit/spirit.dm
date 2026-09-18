@@ -51,6 +51,7 @@
 	name = first_part + " " + second_part
 	GLOB.spirit_list += src
 
+	attribute_initialize()
 	//initialize limbs
 	create_bodyparts()
 	create_internal_organs()

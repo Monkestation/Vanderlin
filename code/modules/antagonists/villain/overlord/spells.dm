@@ -6,10 +6,6 @@
 	spell_requirements = NONE
 	charge_time = 2 SECONDS
 
-	attunements = list(
-		/datum/attunement/death = 0.2,
-	)
-
 /datum/action/cooldown/spell/remove_enchantment/can_cast_spell(feedback)
 	. = ..()
 	if(!.)
@@ -89,10 +85,6 @@
 	charge_time = 2 SECONDS
 	spell_requirements = NONE
 
-	attunements = list(
-		/datum/attunement/death = 0.2,
-	)
-
 /datum/action/cooldown/spell/undirected/enter_overseer_mode/can_cast_spell(feedback)
 	. = ..()
 	if(!.)
@@ -147,10 +139,6 @@
 	charge_time = 2 SECONDS
 	spell_requirements = NONE
 
-	attunements = list(
-		/datum/attunement/death = 0.2,
-	)
-
 	cast_range = 1
 
 /datum/action/cooldown/spell/remove_enchantment/can_cast_spell(feedback)
@@ -194,10 +182,6 @@
 	charge_time = 10 SECONDS
 	spell_requirements = NONE
 	spell_cost = 100
-
-	attunements = list(
-		/datum/attunement/death = 0.2,
-	)
 
 /datum/action/cooldown/spell/undirected/summon_worker/before_cast(atom/cast_on)
 	. = ..()

@@ -1,7 +1,7 @@
 /datum/quirk/boon/backstory
-	name = "Experienced Background"
-	desc = "You had a previous career before becoming an adventurer. You've retained skills from that time, but it left its mark on you. (OOC NOTE; COMBAT SKILLS ARE CLAMPED AT AVERAGE FROM THIS, THIS IS YOUR PAST.)"
-	point_value = -2
+	name = "Additional Skill"
+	desc = "During your youth, you dabbled in other skills, and still carry some of that ability today. (OOC NOTE; COMBAT SKILLS ARE CLAMPED AT AVERAGE FROM THIS, THIS IS YOUR PAST.)"
+	point_value = -3
 	customization_label = "Choose Background"
 	customization_options = list()
 	var/static/list/backstories
@@ -31,8 +31,6 @@
 	if(!B)
 		return base_desc
 	var/datum/attribute/skill/granted_skill = initial(B.granted_skill)
-	var/stat_penalty = initial(B.stat_penalty)
-	var/stat_reduction = initial(B.stat_reduction)
 	var/skill_amount = initial(B.amount)
 	var/skill_clamp = initial(B.clamp)
 
@@ -42,26 +40,6 @@
 	// Add skill grant information
 	if(granted_skill)
 		base_desc += "<br><b>Grants:</b> +[skill_amount] [initial(granted_skill.name)] (MAX: [skill_clamp])"
-
-	// Add stat penalty information
-	if(stat_penalty && stat_reduction > 0)
-		var/stat_name = ""
-		switch(stat_penalty)
-			if(STAT_STRENGTH)
-				stat_name = "Strength"
-			if(STAT_PERCEPTION)
-				stat_name = "Perception"
-			if(STAT_INTELLIGENCE)
-				stat_name = "Intelligence"
-			if(STAT_CONSTITUTION)
-				stat_name = "Constitution"
-			if(STAT_ENDURANCE)
-				stat_name = "Endurance"
-			if(STAT_SPEED)
-				stat_name = "Speed"
-
-		if(stat_name)
-			base_desc += "<br><b>Penalty:</b> -[stat_reduction] [stat_name]"
 
 	return base_desc
 
@@ -78,18 +56,14 @@
 		return
 
 	if(!customization_value || !ispath(customization_value, /datum/backstory))
-		customization_value = /datum/backstory/combat/soldier
+		customization_value = /datum/backstory/combat/sword
 
 	var/datum/backstory/B = customization_value
 	var/mob/living/carbon/human/H = owner
 
 	if(initial(B.granted_skill))
 		H.clamped_adjust_skill_level(initial(B.granted_skill), B.amount, initial(B.clamp), TRUE)
-		H.adjust_skill_exp_multiplier(initial(B.granted_skill), initial(B.xp_multiplier))
 
-	// Apply stat penalty
-	if(initial(B.stat_penalty) && initial(B.stat_reduction) > 0)
-		H.adjust_stat_modifier(STATMOD_QUIRK, list(initial(B.stat_penalty) = -initial(B.stat_reduction)))
 
 	to_chat(H, span_notice("Your experience as [LOWER_TEXT(initial(B.name))] has shaped who you are today."))
 
@@ -100,13 +74,6 @@
 	if(!customization_value || !ispath(customization_value, /datum/backstory))
 		return
 
-	var/datum/backstory/B = customization_value
-	var/mob/living/carbon/human/H = owner
-
-	if(initial(B.stat_penalty) && initial(B.stat_reduction) > 0)
-		H.adjust_stat_modifier(STATMOD_QUIRK, list(initial(B.stat_penalty) = initial(B.stat_reduction)))
-
-	H.adjust_skill_exp_multiplier(initial(B.granted_skill), -initial(B.xp_multiplier))
 	return ..()
 
 /datum/backstory
@@ -116,16 +83,10 @@
 	var/desc = "A background."
 	/// The skill this backstory grants
 	var/datum/attribute/skill/granted_skill
-	/// The stat this backstory penalizes
-	var/stat_penalty
-	/// How much to reduce the stat
-	var/stat_reduction = 1
 	///ammount we give
 	var/amount = 10
 	///what we clamp to
 	var/clamp = 60
-	///how much of an xp multiplier we add
-	var/xp_multiplier = 0.2
 
 	/// List of allowed ages (empty = all allowed)
 	var/list/allowed_ages
@@ -160,85 +121,71 @@
 	desc = "A combat-focused background."
 	amount = 20
 	clamp = 20
-	xp_multiplier = 0.1
 
-/datum/backstory/combat/soldier
-	name = "Former Soldier"
-	desc = "You served in the military, learning discipline and swordsmanship."
+/datum/backstory/combat/sword
+	name = "Novice Swordsman"
+	desc = "You dabbled in swordplay while you were younger."
 	granted_skill = /datum/attribute/skill/combat/swords
-	stat_penalty = STAT_INTELLIGENCE
 
-/datum/backstory/combat/guard
-	name = "Retired Guard"
-	desc = "You stood watch for years, mastering the spear and halberd."
+/datum/backstory/combat/spear
+	name = "Peasant Spearman"
+	desc = "You spent much of your youth warding off wolves and goblins with a spear."
 	granted_skill = /datum/attribute/skill/combat/polearms
-	stat_penalty = STAT_SPEED
 
-/datum/backstory/combat/mercenary
-	name = "Ex-Mercenary"
-	desc = "You fought for coin, wielding axe and mace with brutal efficiency."
+/datum/backstory/combat/clubber
+	name = "Chicken Clubber"
+	desc = "You were often made to butcher the chickens for dinner, with axe or club to slay the animal."
 	granted_skill = /datum/attribute/skill/combat/axesmaces
-	stat_penalty = STAT_PERCEPTION
 
 /datum/backstory/combat/brawler
-	name = "Street Fighter"
-	desc = "You brawled to survive in the gutters and alleys."
+	name = "Basic Brawler"
+	desc = "When money was tight you took part in fistfights to earn your keep."
 	granted_skill = /datum/attribute/skill/combat/unarmed
-	stat_penalty = STAT_CONSTITUTION
 
-/datum/backstory/combat/archer
-	name = "Former Archer"
-	desc = "You were a skilled bowman, whether in war or the hunt."
+/datum/backstory/combat/hunter
+	name = "Dabbling Hunter"
+	desc = "You aren't the best with a bow, but it is enough to feed you."
 	granted_skill = /datum/attribute/skill/combat/bows
-	stat_penalty = STAT_STRENGTH
 
-/datum/backstory/combat/assassin
-	name = "Reformed Assassin"
-	desc = "You killed for hire, a blade in the dark."
+/datum/backstory/combat/knifetricks
+	name = "Knifetrick Enthusiast"
+	desc = "You loved doing all sorts of tricks with knives, hands and arms nicked and scarred."
 	granted_skill = /datum/attribute/skill/combat/knives
-	stat_penalty = STAT_ENDURANCE
 
-/datum/backstory/combat/crossbowman
-	name = "Former Crossbowman"
-	desc = "You served as a crossbowman, learning patience and precision."
+/datum/backstory/combat/guardian
+	name = "Livestock Guardian"
+	desc = "When volves, vernard, and other predators threatened your animals, they often met a bolt."
 	granted_skill = /datum/attribute/skill/combat/crossbows
-	stat_penalty = STAT_SPEED
 
 /datum/backstory/combat/wrestler
-	name = "Pit Fighter"
-	desc = "You wrestled for sport and survival in fighting pits."
+	name = "Moo-Beast Wrestler"
+	desc = "Often when you grew up, you enjoyed wrestling with the bulls, now you can apply it to people too."
 	granted_skill = /datum/attribute/skill/combat/wrestling
-	stat_penalty = STAT_INTELLIGENCE
 
-/datum/backstory/combat/whipmaster
-	name = "Former Slaver"
-	desc = "You wielded whip and flail in a dark past you've left behind."
+/datum/backstory/combat/thresher
+	name = "Grain Thresher"
+	desc = "Threshing grain translates well to cracking whips and swinging flails."
 	granted_skill = /datum/attribute/skill/combat/whipsflails
-	stat_penalty = STAT_CONSTITUTION
 
 /datum/backstory/combat/shieldbearer
 	name = "Shield Bearer"
 	desc = "You defended others with shield and determination."
 	granted_skill = /datum/attribute/skill/combat/shields
-	stat_penalty = STAT_SPEED
 
 /datum/backstory/combat/gunner
-	name = "Former Gunner"
-	desc = "You served with firearms, a dangerous and loud profession."
+	name = "Gun Enthusiast"
+	desc = "A mercenary travelled by, and showed you a puffer, and you have been obsessed with them ever since."
 	granted_skill = /datum/attribute/skill/combat/firearms
-	stat_penalty = STAT_PERCEPTION
 
-/datum/backstory/combat/athlete // under "combat" so they get clamped as well
-	name = "Former Athlete"
-	desc = "You competed in games, testing strength and endurance."
+/datum/backstory/combat/courier // under "combat" so they get clamped as well
+	name = "Woodland Courier"
+	desc = "You ran messages through the forests, zipping past goblins and more. "
 	granted_skill = /datum/attribute/skill/misc/athletics
-	stat_penalty = STAT_INTELLIGENCE
 
 /datum/backstory/combat/acrobat
-	name = "Retired Acrobat"
-	desc = "You performed daring feats, climbing and leaping."
+	name = "Wild Acrobat"
+	desc = "You spent as much time in the trees as on the ground, climbing and swinging through the branches."
 	granted_skill = /datum/attribute/skill/misc/climbing
-	stat_penalty = STAT_INTELLIGENCE
 
 /datum/backstory/craft
 	abstract_type = /datum/backstory/craft
@@ -246,193 +193,158 @@
 
 /datum/backstory/craft/blacksmith
 	name = "Apprentice Blacksmith"
-	desc = "You worked the forge, shaping metal with hammer and anvil."
+	desc = "You worked the forge, learning to shape metal with hammer and anvil."
 	granted_skill = /datum/attribute/skill/craft/blacksmithing
-	stat_penalty = STAT_INTELLIGENCE
 
 /datum/backstory/craft/weaponsmith
 	name = "Journeyman Weaponsmith"
 	desc = "You crafted weapons, from simple daggers to mighty blades."
 	granted_skill = /datum/attribute/skill/craft/weaponsmithing
-	stat_penalty = STAT_SPEED
 
 /datum/backstory/craft/armorer
 	name = "Former Armorer"
 	desc = "You made armor, protecting warriors with your craft."
 	granted_skill = /datum/attribute/skill/craft/armorsmithing
-	stat_penalty = STAT_PERCEPTION
 
-/datum/backstory/craft/carpenter
-	name = "Retired Carpenter"
-	desc = "You worked with wood, building homes and furniture."
+/datum/backstory/craft/carver
+	name = "Hobby Carver"
+	desc = "You have always enjoyed shaping wood by hand and blade."
 	granted_skill = /datum/attribute/skill/craft/carpentry
-	stat_penalty = STAT_INTELLIGENCE
 
 /datum/backstory/craft/mason
-	name = "Ex-Mason"
-	desc = "You shaped stone, building walls and monuments."
+	name = "Simple Stoneworker"
+	desc = "You learned to chisel and shape stone, making all sorts of carvings."
 	granted_skill = /datum/attribute/skill/craft/masonry
-	stat_penalty = STAT_SPEED
 
 /datum/backstory/craft/cook
-	name = "Former Cook"
-	desc = "You prepared meals, from simple stews to elaborate feasts."
+	name = "Common Cook"
+	desc = "You always have enjoyed cooking, and still remember the basics."
 	granted_skill = /datum/attribute/skill/craft/cooking
-	stat_penalty = STAT_STRENGTH
 
 /datum/backstory/craft/alchemist
 	name = "Apprentice Alchemist"
 	desc = "You mixed potions and studied strange reagents."
 	granted_skill = /datum/attribute/skill/craft/alchemy
-	stat_penalty = STAT_ENDURANCE
 
 /datum/backstory/craft/engineer
-	name = "Failed Engineer"
-	desc = "You built machines and contraptions, though not all worked."
+	name = "Studied Engineer"
+	desc = "While you couldn't build complex machines, you still know how to fix them, and make gears."
 	granted_skill = /datum/attribute/skill/craft/engineering
-	stat_penalty = STAT_CONSTITUTION
 
-/datum/backstory/craft/tailor
-	name = "Former Tailor"
-	desc = "You sewed garments for nobles and commoners alike."
+/datum/backstory/craft/stitcher
+	name = "Simple Stitcher"
+	desc = "You learned to sew at a young age, and still remember some needlework."
 	granted_skill = /datum/attribute/skill/misc/sewing
-	stat_penalty = STAT_STRENGTH
 
 /datum/backstory/craft/tanner
-	name = "Ex-Tanner"
+	name = "Leatherworker"
 	desc = "You worked with leather, turning hides into useful goods."
 	granted_skill = /datum/attribute/skill/craft/tanning
-	stat_penalty = STAT_INTELLIGENCE
 
 /datum/backstory/craft/trapper
-	name = "Former Trapper"
-	desc = "You laid traps for beasts and sometimes men."
+	name = "Mantrap Maker"
+	desc = "You learned to lay traps for game, using wits and bait."
 	granted_skill = /datum/attribute/skill/craft/traps
-	stat_penalty = STAT_SPEED
 
 /datum/backstory/craft/smelter
 	name = "Apprentice Smelter"
 	desc = "You worked the furnace, turning ore into metal."
 	granted_skill = /datum/attribute/skill/craft/smelting
-	stat_penalty = STAT_PERCEPTION
 
 /datum/backstory/craft/bombmaker
 	name = "Powder Maker"
 	desc = "You crafted explosives, a dangerous trade."
 	granted_skill = /datum/attribute/skill/craft/bombs
-	stat_penalty = STAT_ENDURANCE
 
 /datum/backstory/craft/general
 	name = "Jack of All Trades"
 	desc = "You dabbled in many crafts, master of none."
 	granted_skill = /datum/attribute/skill/craft/crafting
-	stat_penalty = STAT_CONSTITUTION
 
 /datum/backstory/labor
 	abstract_type = /datum/backstory/labor
 	desc = "A labor-focused background."
 
 /datum/backstory/labor/miner
-	name = "Ex-Miner"
-	desc = "You worked in the mines, digging for ore and gems."
+	name = "Minor Miner"
+	desc = "You helped your family dig and excavate a new cellar, and some of the skills stuck with you."
 	granted_skill = /datum/attribute/skill/labor/mining
-	stat_penalty = STAT_PERCEPTION
 
 /datum/backstory/labor/farmer
-	name = "Former Farmer"
-	desc = "You tilled the land and knew the seasons well."
+	name = "Family Farmer"
+	desc = "You tilled the land and grew simple foods for your home."
 	granted_skill = /datum/attribute/skill/labor/farming
-	stat_penalty = STAT_SPEED
 
 /datum/backstory/labor/fisher
-	name = "Retired Fisher"
-	desc = "You fished the waters, patient and persistent."
+	name = "Leisure Time Fisher"
+	desc = "You fished the waters, getting away from the daily grind and enjoying the peace of the water."
 	granted_skill = /datum/attribute/skill/labor/fishing
-	stat_penalty = STAT_STRENGTH
 
 /datum/backstory/labor/butcher
-	name = "Former Butcher"
-	desc = "You prepared meat, skilled with knife and cleaver."
+	name = "Basic Butcher"
+	desc = "You were  often set to work cleaning the carcasses of the animals, your hands still remember the feeling."
 	granted_skill = /datum/attribute/skill/labor/butchering
-	stat_penalty = STAT_INTELLIGENCE
 
 /datum/backstory/labor/lumberjack
-	name = "Ex-Lumberjack"
-	desc = "You felled trees and split logs with ease."
+	name = "Learned Lumberjack"
+	desc = "You helped split wood and chop trees around winter, for fuel and construction."
 	granted_skill = /datum/attribute/skill/labor/lumberjacking
-	stat_penalty = STAT_PERCEPTION
 
 /datum/backstory/labor/tamer
-	name = "Beast Tamer"
-	desc = "You trained animals, from horses to more exotic beasts."
+	name = "Rous Whisperer"
+	desc = "Your first pet was a rous, which you befriended with cheese. Your family always said you had a way with animals."
 	granted_skill = /datum/attribute/skill/labor/taming
-	stat_penalty = STAT_STRENGTH
 
 /datum/backstory/misc
 	abstract_type = /datum/backstory/misc
 	desc = "A miscellaneous background."
 
-/datum/backstory/misc/thief
-	name = "Former Thief"
-	desc = "You picked pockets and stole to survive."
+/datum/backstory/misc/pickpocket
+	name = "Pickpocketing"
+	desc = "You have always had sticky fingers."
 	granted_skill = /datum/attribute/skill/misc/stealing
-	stat_penalty = STAT_STRENGTH
 
-/datum/backstory/misc/spy
-	name = "Ex-Spy"
-	desc = "You moved in shadows, gathering secrets."
+/datum/backstory/misc/sneaky
+	name = "Light-footed Listener"
+	desc = "You had a tendency to creep around and enjoy going unseen."
 	granted_skill = /datum/attribute/skill/misc/sneaking
-	stat_penalty = STAT_ENDURANCE
 
 /datum/backstory/misc/locksmith
-	name = "Former Locksmith"
-	desc = "You worked with locks, both making and picking them."
+	name = "Latent Locksmith"
+	desc = "You've always had a knack for locks and keys, and learned to pick them for fun."
 	granted_skill = /datum/attribute/skill/misc/lockpicking
-	stat_penalty = STAT_CONSTITUTION
 
 /datum/backstory/misc/bard
 	name = "Tavern Bard"
-	desc = "You played for crowds, earning coin and applause."
+	desc = "You have always had a passion for music, and learned to play a few instruments."
 	granted_skill = /datum/attribute/skill/misc/music
-	stat_penalty = STAT_STRENGTH
 
 /datum/backstory/misc/medic
-	name = "Field Medic"
-	desc = "You treated the wounded on battlefields and in clinics."
+	name = "Doctor's Assistant"
+	desc = "Your home town's feldsher often recruited you to help with basic medical care, and you learned a few things."
 	granted_skill = /datum/attribute/skill/misc/medicine
-	stat_penalty = STAT_SPEED
 
 /datum/backstory/misc/rider
 	name = "Horse Trainer"
-	desc = "You rode and trained mounts for nobles and soldiers."
+	desc = "You helped raise saiga, and learned to ride too."
 	granted_skill = /datum/attribute/skill/misc/riding
-	stat_penalty = STAT_INTELLIGENCE
 
-/datum/backstory/misc/scribe
-	name = "Scribe's Apprentice"
-	desc = "You studied letters and copied manuscripts."
+/datum/backstory/misc/literacy
+	name = "Basic Literacy"
+	desc = "You spent time learning to read and write as a child."
 	granted_skill = /datum/attribute/skill/misc/reading
-	stat_penalty = STAT_ENDURANCE
 
 /datum/backstory/misc/swimmer
-	name = "Former Swimmer"
-	desc = "You swam the rivers and knew the waters well."
+	name = "Summer Swimmer"
+	desc = "You enjoyed swimming often to cool off come the hot days of the summer."
 	granted_skill = /datum/attribute/skill/misc/swimming
-	stat_penalty = STAT_STRENGTH
 
 /datum/backstory/misc/merchant
-	name = "Merchant's Assistant"
-	desc = "You counted coin and learned the art of numbers."
+	name = "Marketplace Assistant"
+	desc = "You helped handle the coin from your family's ventures, and still have a good handle on math."
 	granted_skill = /datum/attribute/skill/labor/mathematics
-	stat_penalty = STAT_CONSTITUTION
 
 /datum/backstory/magic
 	abstract_type = /datum/backstory/magic
 	desc = "A magical background."
-	stat_reduction = 0
-	clamp = 20
 
-/datum/backstory/magic/acolyte
-	name = "Former Acolyte"
-	desc = "You studied in a temple, learning divine miracles."
-	granted_skill = /datum/attribute/skill/magic/holy

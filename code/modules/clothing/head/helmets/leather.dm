@@ -17,7 +17,7 @@
 	armor_type = /datum/armor/head/leather/bad
 	body_parts_covered = HEAD|HAIR|EARS|NOSE
 	prevent_crits = CUT_AND_MINOR_CRITS
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
 	item_weight = 1.6 KILOGRAMS
@@ -30,7 +30,7 @@
 /obj/item/clothing/head/helmet/leather/advanced
 	name = "hardened leather helmet"
 	desc = "Sturdy, durable, flexible. A comfortable and reliable hood made of hardened leather."
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/head/leather/advanced
@@ -38,7 +38,7 @@
 /obj/item/clothing/head/helmet/leather/masterwork
 	name = "masterwork leather helmet"
 	desc = "This helmet is a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_STRONG + 100
+	max_integrity = INTEGRITY_OLD_STRONG + 100
 	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/head/leather/master
@@ -56,7 +56,7 @@
 	armor_type = /datum/armor/head/padded/bad
 	body_parts_covered = HEAD|HAIR
 	prevent_crits =  MINOR_CRITICALS
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	clothing_flags = NONE
 	item_weight = 125 GRAMS
 

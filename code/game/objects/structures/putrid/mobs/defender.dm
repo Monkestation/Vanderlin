@@ -2,7 +2,7 @@
 	icon_state = "defender"
 	icon_living = "defender"
 	icon_dead = "defender_dead"
-	icon = 'icons/obj/cellular/wide_putrid.dmi'
+	icon = 'icons/obj/cellular/putrid_small.dmi'
 
 	possible_evolutions = list(
 		/mob/living/simple_animal/hostile/retaliate/meatvine/goliath,

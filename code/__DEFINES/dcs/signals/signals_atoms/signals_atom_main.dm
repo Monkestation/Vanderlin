@@ -73,7 +73,7 @@
 	#define COMPONENT_CANCEL_ATTACK_CHAIN (1<<0)
 	///Skips the specific attack step, continuing for the next one to happen.
 	#define COMPONENT_SKIP_ATTACK (1<<1)
-
+	#define COMPONENT_ITEM_NO_DEFENSE (1<<2)
 #define COMSIG_ATOM_GET_RESISTANCE "atom_get_resistance"
 #define COMSIG_ATOM_GET_MAX_RESISTANCE "atom_get_max_resistance"
 #define COMSIG_ATOM_GET_STATUS_MOD "atom_get_status_mod"

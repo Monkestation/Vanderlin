@@ -21,14 +21,14 @@
 
 /datum/loadout_item/pearlcross
 	name = "Pearl Cross"
-	item_path = /obj/item/clothing/neck/psycross/pearl
+	item_path = /obj/item/clothing/neck/psycross/pearl/loadout
 	ui_category = "Neck"
 
 	triumph_cost_permanent = 50
 
 /datum/loadout_item/bpearl
 	name = "Blue Pearl Cross"
-	item_path = /obj/item/clothing/neck/psycross/bpearl
+	item_path = /obj/item/clothing/neck/psycross/bpearl/loadout
 	ui_category = "Neck"
 
 	triumph_cost_permanent = 50
@@ -102,6 +102,13 @@
 	ui_category = "Neck"
 
 	triumph_cost_permanent = 5
+
+/datum/loadout_item/psydon_cross_gold
+	name = "Golden Psycross"
+	item_path = /obj/item/clothing/neck/psycross/gold
+	ui_category = "Neck"
+
+	triumph_cost_permanent = 150
 
 /datum/loadout_item/psydon_cross
 	name = "Silver Psycross"

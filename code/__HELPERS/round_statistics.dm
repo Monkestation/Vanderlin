@@ -7,6 +7,7 @@
 #define STATS_ALIVE_AASIMAR "alive_aasimar"
 #define STATS_ALIVE_HOLLOWKINS "alive_hollowkins"
 #define STATS_ALIVE_HALFLINGS "alive_halflings"
+#define STATS_ALIVE_DWARF_ORCS "alive_dwarforcs"
 #define STATS_VAMPIRES "vampires"
 #define STATS_ALIVE_GARRISON "alive_garrison"
 #define STATS_ALIVE_GALLOWBAND "alive_gallowband"
@@ -51,6 +52,7 @@
 #define STATS_MAMMONS_WITHDRAWN "mammons_withdrawn"
 #define STATS_STARTING_TREASURY "starting_treasury"
 #define STATS_FOREIGNERS "alive_foreigners"
+#define STATS_BLOODMAGIC_REVIVALS "bloodmagic_revivals"
 
 // Influence related statistics
 
@@ -78,6 +80,7 @@
 #define STATS_ILLITERATES "illiterates"
 #define STATS_SKILLS_DREAMED "skills_dreamed"
 #define STATS_MANA_SPENT "mana_spent"
+#define STATS_NOC_REVIVALS "noc_revivals"
 
 // Necra
 #define STATS_DEATHS "deaths"
@@ -122,7 +125,7 @@
 #define STATS_CRUEL_PRANKS "cruel_pranks"
 
 // Malum
-#define STATS_MASTERWORKS_FORGED "masterworks_forged"
+#define STATS_MASTERWORKS_PRODUCED "masterworks_forged"
 #define STATS_ROCKS_MINED "ores_mined"
 #define STATS_CRAFT_SKILLS "craft_skills"
 #define STATS_BEARDS_SHAVED "beards_shaved"
@@ -195,7 +198,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_PRAYERS_MADE = 0,
 	STATS_FISH_CAUGHT = 0,
 	STATS_ITEMS_PICKPOCKETED = 0,
-	STATS_MASTERWORKS_FORGED = 0,
+	STATS_MASTERWORKS_PRODUCED = 0,
 	STATS_TAXES_COLLECTED = 0,
 	STATS_ORGANS_EATEN = 0,
 	STATS_KISSES_MADE = 0,
@@ -203,6 +206,8 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_GRAVES_CONSECRATED = 0,
 	STATS_POTIONS_BREWED = 0,
 	STATS_ASTRATA_REVIVALS = 0,
+	STATS_NOC_REVIVALS = 0,
+	STATS_BLOODMAGIC_REVIVALS = 0,
 	STATS_PLANTS_HARVESTED = 0,
 	STATS_LAWS_AND_DECREES_MADE = 0,
 	STATS_ALIVE_NOBLES = 0,
@@ -262,6 +267,7 @@ GLOBAL_LIST_INIT(vanderlin_round_stats, list(
 	STATS_ALIVE_TRITONS = 0,
 	STATS_ALIVE_MEDICATORS = 0,
 	STATS_ALIVE_HALFLINGS = 0,
+	STATS_ALIVE_DWARF_ORCS = 0,
 	STATS_PEOPLE_DROWNED = 0,
 	STATS_MANA_SPENT = 0,
 	STATS_WATER_CONSUMED  = 0,

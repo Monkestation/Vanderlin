@@ -10,10 +10,6 @@
 	charge_required = FALSE
 	experience_modifier = 0
 
-	attunements = list(
-		/datum/attunement/light = 0.3,
-	)
-
 	var/bird_called = FALSE
 	var/obj/item/reagent_containers/food/snacks/messenger_bird/owned_bird = null
 

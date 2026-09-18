@@ -3,9 +3,6 @@
 	desc = "This spell throws everything around the user away."
 	button_icon_state = "repulse"
 
-	point_cost = 3
-
-	school = SCHOOL_EVOCATION
 	invocation = "GITTAH WEIGH"
 	invocation_type = INVOCATION_SHOUT
 	aoe_radius = 2
@@ -18,9 +15,8 @@
 	charge_drain = 1
 	charge_slowdown = 0.7
 
-	attunements = list(
-		/datum/attunement/aeromancy = 0.4,
-	)
+	required_form = FORM_AIR
+	required_technique = TECHNIQUE_CREATION
 
 	/// The minimum throw range of the replusion
 	var/min_throw = 3
@@ -32,7 +28,11 @@
 	var/repulse_force = MOVE_FORCE_EXTREMELY_STRONG
 
 /datum/action/cooldown/spell/aoe/repulse/is_valid_target(atom/cast_on)
-	return ismovable(cast_on)
+	if(ismob(cast_on))
+		return TRUE
+	if(isobj(cast_on))
+		var/obj/object = cast_on
+		return !object.anchored
 
 /datum/action/cooldown/spell/aoe/repulse/cast_on_thing_in_aoe(atom/movable/victim, atom/caster)
 	if(ismob(victim))
@@ -76,7 +76,7 @@
 	desc = "Throw back attackers with a sweep of your tail."
 	button_icon_state = "tailsweep"
 
-	point_cost = 0
+	required_form = null
 
 	sound = 'sound/misc/tail_swing.ogg'
 	spell_flags = NONE

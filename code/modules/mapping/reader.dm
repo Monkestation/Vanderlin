@@ -952,6 +952,8 @@ GLOBAL_LIST_EMPTY(map_model_default)
 			for(var/atom/turf_atom as anything in crds.GetAllTurfStrictContents())
 				if(isobserver(turf_atom))
 					continue
+				if(istype(turf_atom, /obj/effect/ebeam))
+					continue
 				qdel(turf_atom, force = TRUE)
 
 		// Note: we make the assertion that the last path WILL be a turf. if it isn't, this will fail.

@@ -3,8 +3,6 @@
 	desc = "Draw upon the leylines themselves to reveal secrets of fate itself."
 	button_icon_state = "readomen"
 	cast_range = 3
-	point_cost = 7
-	attunements = list(/datum/attunement/fire)
 	essences = list(/datum/thaumaturgical_essence/chaos)
 
 /datum/action/cooldown/spell/essence/read_omen/cast(mob/living/cast_on)

@@ -12,7 +12,7 @@
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_type = /datum/armor/head/plate/bad
-	max_integrity = INTEGRITY_POOR //Looked like it was defaulting to integrity_worst from head.dm which gave some helmets the same durability has hats.
+	max_integrity = INTEGRITY_OLD_POOR //Looked like it was defaulting to INTEGRITY_OLD_WORST from head.dm which gave some helmets the same durability has hats.
 	body_parts_covered = COVERAGE_SKULL
 	prevent_crits = ALL_EXCEPT_STAB
 

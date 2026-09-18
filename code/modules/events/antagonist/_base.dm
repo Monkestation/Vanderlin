@@ -17,7 +17,7 @@
 	var/list/secondary_events = list(
 		/datum/round_event_control/antagonist/solo/wretch = 1.5,
 		/datum/round_event_control/antagonist/solo/aspirant = 1,
-		/datum/round_event_control/antagonist/solo/maniac = 1,
+		///datum/round_event_control/antagonist/solo/maniac = 1,
 	)
 	var/secondary_prob = 0
 

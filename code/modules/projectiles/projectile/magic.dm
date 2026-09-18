@@ -7,16 +7,32 @@
 	armor_penetration = 100
 	pass_flags = PASSTABLE | PASSGRILLE
 	flag = "magic"
+
+	dam_falloff_factor = 0.5
+	suppress_effects_past_range = TRUE
+	max_range = 7
+
 	/// determines what type of antimagic can block the spell projectile
 	var/antimagic_flags = MAGIC_RESISTANCE
 	/// determines the drain cost on the antimagic item
 	var/antimagic_charge_cost = 1
+	/// Impact visual intensity. SPELL_IMPACT_NONE / SPELL_IMPACT_LOW / SPELL_IMPACT_MEDIUM / SPELL_IMPACT_HIGH
+	var/spell_impact_intensity = SPELL_IMPACT_LOW
+	/// Override color for the impact effect. If null, uses light_color.
+	var/spell_impact_color
 
 /obj/projectile/magic/prehit_pierce(mob/living/target)
 	. = ..()
 	if(istype(target) && target.can_block_magic(antimagic_flags, antimagic_charge_cost))
 		visible_message(span_warning("[src] fizzles on contact with [target]!"))
 		return PROJECTILE_DELETE_WITHOUT_HITTING
+
+
+/obj/projectile/magic/on_hit(atom/target, blocked = FALSE)
+	. = ..()
+	if(spell_impact_intensity > SPELL_IMPACT_NONE)
+		var/impact_color = spell_impact_color || light_color || "#FFFFFF"
+		new /obj/effect/temp_visual/spell_impact(get_turf(target), impact_color, spell_impact_intensity)
 
 /obj/projectile/magic/death
 	name = "bolt of death"

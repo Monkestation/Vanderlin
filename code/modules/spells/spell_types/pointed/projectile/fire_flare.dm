@@ -5,11 +5,6 @@
 	sound = 'sound/magic/whiteflame.ogg'
 	charge_sound = 'sound/magic/charging_fire.ogg'
 
-	point_cost = 3
-	attunements = list(
-		/datum/attunement/fire = 0.3,
-	)
-
 	charge_time = 2 SECONDS
 	charge_drain = 1
 	charge_slowdown = 0.7
@@ -18,10 +13,12 @@
 	spell_flags = SPELL_RITUOS
 	projectile_type = /obj/projectile/magic/aoe/fireball/flare
 
+	required_form = FORM_FIRE
+
 /datum/action/cooldown/spell/projectile/fire_flare/ready_projectile(obj/projectile/magic/aoe/fireball/to_fire, atom/target, mob/user, iteration)
 	. = ..()
-	to_fire.damage *= attuned_strength
-	to_fire.exp_flash *= attuned_strength
+	to_fire.damage *= spell_magnitude_modifier
+	to_fire.exp_flash *= spell_magnitude_modifier
 
 /obj/projectile/magic/aoe/fireball/flare
 	name = "spitfire"
@@ -30,3 +27,14 @@
 	exp_flash = 1
 	exp_fire = 0
 	speed = 2.5
+
+/datum/action/cooldown/spell/projectile/fire_flare/crimson_blade
+	name = "Fire Burst"
+	desc = "Shoot out a low-powered ball of fire that shines brightly on impact, potentially blinding a target."
+
+	cooldown_time = 45 SECONDS
+	spell_cost = 40
+	spell_type = SPELL_STAMINA
+	spell_flags = SPELL_UNETCHABLE
+	required_form = null
+	associated_skill = /datum/attribute/skill/misc/athletics

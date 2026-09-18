@@ -8,7 +8,6 @@
  */
 /datum/action/cooldown/spell/undirected/shapeshift
 	button_icon_state = "shapeshift"
-	school = SCHOOL_TRANSMUTATION
 	cooldown_time = 10 SECONDS
 	charge_required = FALSE
 	spell_flags = SPELL_UNETCHABLE

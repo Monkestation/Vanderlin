@@ -1,7 +1,7 @@
 
 /mob/living/simple_animal/hostile/retaliate/infernal/imp
-	icon = 'icons/mob/summonable/32x32.dmi'
 	name = "infernal imp"
+	icon = 'icons/mob/summonable/32x32.dmi'
 	icon_state = "imp"
 	icon_living = "imp"
 	icon_dead = "vvd"
@@ -13,7 +13,7 @@
 	move_to_delay = 3
 	base_intents = list(/datum/intent/unarmed/claw)
 	butcher_results = list()
-	faction = list("infernal")
+	faction = list(FACTION_INFERNAL)
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	health = 70
 	maxHealth = 70

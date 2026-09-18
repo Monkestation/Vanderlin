@@ -36,6 +36,8 @@
 	strong_intent_bonus = TRUE
 	brittle_bonus = TRUE
 
+	splint_suppression = TRUE
+
 	/// Whether or not we can be surgically set
 	var/can_set = TRUE
 	/// If we have been set

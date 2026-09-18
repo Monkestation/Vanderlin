@@ -2,7 +2,7 @@
 	var/count = 0
 	for(var/mob/living/carbon/human/H in GLOB.human_list)
 		if(H.mind && H.client)
-			if(H.mind.assigned_role?.faction == "Town")
+			if(H.mind.assigned_role?.factions == "Town")
 				count++
 	return count
 

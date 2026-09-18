@@ -9,11 +9,7 @@
 	button_icon_state = "prestidigitation"
 	can_cast_on_self = TRUE
 
-	point_cost = 1
-	school = SCHOOL_TRANSMUTATION
-	attunements = list(
-		/datum/attunement/arcyne = 0.2,
-	)
+	required_form = FORM_ARCANE
 
 	cooldown_time = 1 MINUTES
 
@@ -147,7 +143,7 @@
 		fatigue_used = 0 // we do this after we've actually changed fatigue because we're hard-capping the raises this gives to Expert
 
 	if(fatigue_used > 0)
-		adjust_experience(owner, associated_skill, fatigue_used)
+		owner.adjust_experience(associated_skill, fatigue_used)
 
 /obj/item/melee/touch_attack/prestidigitation
 	name = "\improper prestidigitating touch"

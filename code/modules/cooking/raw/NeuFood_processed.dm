@@ -102,17 +102,6 @@
 				if(success)
 					changefood(/obj/item/reagent_containers/food/snacks/tallow/red, user)
 
-// -------------- SPIDER HONEY -----------------
-/obj/item/reagent_containers/food/snacks/spiderhoney
-	name = "spider honey"
-	icon_state = "spiderhoney"
-	bitesize = 3
-	nutrition = HONEY_NUTRITION
-	w_class = WEIGHT_CLASS_TINY
-	foodtype = SUGAR | RAW
-	tastes = list("sweetness and spiderwebs" = 1)
-	faretype = FARE_FINE
-
 // -------------- TIEFLING SUGAR -----------------
 /obj/item/reagent_containers/food/snacks/tiefsugar
 	name = "Tiefling Sugar"
@@ -313,7 +302,7 @@
 		qdel(M)
 
 /obj/item/reagent_containers/food/snacks/raisins/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 // -------------- STRAWBERRY -----------------
 

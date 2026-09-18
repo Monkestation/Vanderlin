@@ -105,6 +105,11 @@
 	description = "I am unable to show any kind of affection or love, whether intimate or platonic."
 	trait = TRAIT_EORA_CURSE
 
+/datum/curse/malum
+	name = "Curse of Malum"
+	description = "I am forsaken by the Maker. My hands tremble when performing hands-on labor."
+	trait = TRAIT_MALUM_CURSE
+
 //////////////////////
 /// INHUMEN CURSES ///
 //////////////////////

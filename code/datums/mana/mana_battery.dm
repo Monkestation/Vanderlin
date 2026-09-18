@@ -152,11 +152,11 @@
 	has_initial_mana_pool = TRUE
 	icon = 'icons/obj/crystals.dmi'
 	icon_state = "amulet"
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/neck/mana_star/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/mana_regeneration)
-	enchant(/datum/enchantment/mana_capacity)
 
 /obj/item/clothing/neck/mana_star/get_initial_mana_pool_type()
 	return /datum/mana_pool/mana_star

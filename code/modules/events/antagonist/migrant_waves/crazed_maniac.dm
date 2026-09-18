@@ -1,3 +1,4 @@
+/*
 /datum/round_event_control/antagonist/migrant_wave/maniac
 	name = "Crazed Adventurer"
 	wave_type = /datum/migrant_wave/maniac
@@ -18,3 +19,4 @@
 	if(GLOB.maniac_highlander) // Has a Maniac already TRIUMPHED?
 		return FALSE
 	. = ..()
+*/

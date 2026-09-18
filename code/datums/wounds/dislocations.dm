@@ -11,6 +11,7 @@
 	sound_effect = "fracturedry"
 	whp = 40
 	woundpain = 20
+	splint_suppression = TRUE
 	mob_overlay = ""
 	sewn_overlay = ""
 	can_sew = FALSE

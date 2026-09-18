@@ -14,8 +14,8 @@
 	)
 
 /datum/attribute/skill/magic/blood
-	name = "Blood Sorcery"
-	desc = "Represents your character's ability to perform blood magic. The higher your skill in Blood Sorcery, the more powerful your blood magic will be."
+	name = "Blood Magic"
+	desc = "Represents your character's ability to perform blood magic. The higher your skill in Blood Magic, the more powerful your blood magic will be."
 	governing_attribute = STAT_CONSTITUTION
 	default_attributes = list(
 		STAT_CONSTITUTION = -8,
@@ -34,14 +34,6 @@
 	dreams = list(
 		"...you look up to your captors, smiling through broken teeth. the cackling brings a kick to your ribs... you spit a broken tooth out of your mouth, and mutter under your breath... you hear gurgling as a baptism of blue fire spews from his open mouth..."
 	)
-
-/datum/attribute/skill/magic/arcane/on_level_change(mob/owner, new_level, old_level)
-	var/old_tier = floor(old_level / 10)
-	var/new_tier = floor(new_level / 10)
-	if(new_tier > old_tier)
-		owner?.adjust_spell_points(new_tier - old_tier)
-	else if(new_tier < old_tier)
-		owner?.adjust_spell_points(new_tier - old_tier) // negative delta = remove points
 
 /datum/attribute/skill/magic/druidic
 	name = "Druidic Trickery"

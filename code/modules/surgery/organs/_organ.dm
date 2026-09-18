@@ -202,10 +202,15 @@
 	for(var/slot in organ_efficiency)
 		if(organ_efficiency[slot] <= cap)
 			continue
+		if(side != NO_SIDE)
+			cap *= 0.5
+			amount *= 0.5
 		organ_efficiency[slot] = max(cap, organ_efficiency[slot] - amount)
 
 /obj/item/organ/proc/scarred_below(value)
 	for(var/slot in organ_efficiency)
+		if(side != NO_SIDE)
+			value *= 0.5
 		if(organ_efficiency[slot] <= value)
 			return TRUE
 	return FALSE
@@ -587,7 +592,7 @@
 	var/effective_efficiency = LAZYACCESS(organ_efficiency, slot)
 	if(isnull(effective_efficiency))
 		return effective_efficiency
-	var/static/list/no_bleedout_organs = list(ORGAN_SLOT_ARTERY)
+	var/static/list/no_bleedout_organs = list(ORGAN_SLOT_ARTERY, ORGAN_SLOT_SPLEEN, ORGAN_SLOT_LIVER, ORGAN_SLOT_STOMACH)
 	if(slot in no_bleedout_organs)
 		if(is_failing_without_bleedout())
 			return 0

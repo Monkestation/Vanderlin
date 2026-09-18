@@ -3,8 +3,6 @@
 	desc = "Grants the ethereal grace and agility of the ancient elves."
 	button_icon_state = "conjinstrum"
 	cast_range = 0
-	point_cost = 6
-	attunements = list(/datum/attunement/life, /datum/attunement/light)
 	essences = list(/datum/thaumaturgical_essence/life, /datum/thaumaturgical_essence/light)
 
 /datum/action/cooldown/spell/essence/elven_grace/cast(atom/cast_on)

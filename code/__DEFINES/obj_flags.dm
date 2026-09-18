@@ -41,6 +41,7 @@
 #define ITEM_ONLY_BREAK 		(1<<15)
 #define HIGH_VALUE (1<<16)
 #define OBTAINED_DATA (1<<17)
+#define NO_ITEM_TELEPORT (1<<18)
 
 // Flags for the clothing_flags var on /obj/item/clothing
 

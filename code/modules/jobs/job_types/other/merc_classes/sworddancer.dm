@@ -65,7 +65,7 @@
 /datum/outfit/mercenary/sworddancer
 	name = "Sword Dancer (Mercenary)"
 	head = /obj/item/clothing/head/bardhat
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/shirt/tunic/noblecoat
 	gloves = /obj/item/clothing/gloves/fingerless

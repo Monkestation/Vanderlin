@@ -22,7 +22,7 @@
 	tutorial = "An Emir hailing from Deshret, here on business for the Mercator's Guild."
 	allowed_races = RACES_PLAYER_ZALADIN
 	outfit = /datum/outfit/pilgrim/zalad
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	total_positions = 1
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 	is_recognized = TRUE

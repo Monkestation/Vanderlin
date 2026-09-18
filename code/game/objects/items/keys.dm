@@ -120,6 +120,7 @@
 	desc = "The Lord's key."
 	icon_state = "bosskey"
 	lockids = list(ACCESS_LORD)
+	examine_highlight_type = /datum/examine_highlight/royal_court
 
 /obj/item/key/lord/Initialize()
 	. = ..()
@@ -896,11 +897,11 @@
 /obj/item/key/vampire
 	desc = "This key is awfully pink and weirdly shaped."
 	icon_state = "vampkey"
-	lockids = list("mansionvampire")
+	lockids = list(ACCESS_VAMPIRE)
 
 /obj/item/key/bandit
 	icon_state = "mazekey"
-	lockids = list("banditcamp")
+	lockids = list(ACCESS_BANDIT)
 
 
 ////// MINOR NOBLES

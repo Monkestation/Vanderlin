@@ -7,7 +7,7 @@
 	drag_slowdown = 2
 	open_sound = 'sound/misc/chestopen.ogg'
 	close_sound = 'sound/misc/chestclose.ogg'
-	sellprice = 1 // crate recycling program
+	sellprice = CARGO_CRATE_VALUE // crate recycling program
 	max_integrity = 200
 	blade_dulling = DULLING_BASHCHOP
 	mob_storage_capacity = 1
@@ -69,6 +69,36 @@
 	anchored = 1
 	max_integrity = 2000
 
+/obj/structure/closet/crate/chest/wickertrunk
+	name = "wicker trunk"
+	desc = "Fibers interwoven to make a somewhat sturdy trunk."
+	base_icon_state = "wickertrunk"
+	icon_state = "wickertrunk"
+	open_sound = 'sound/items/book_open.ogg'
+	open_sound = 'sound/items/book_close.ogg'
+	close_sound = 'sound/items/book_close.ogg'
+	sellprice = 0
+
+/obj/structure/closet/crate/chest/wickertrunk/blue
+	name = "decorated wicker trunk"
+	desc = "A somewhat sturdy wicker trunk covered in a linen throw rug, quaint."
+	base_icon_state = "bluewickertrunk"
+	icon_state = "bluewickertrunk"
+	open_sound = 'sound/items/book_open.ogg'
+	open_sound = 'sound/items/book_close.ogg'
+	close_sound = 'sound/items/book_close.ogg'
+	sellprice = 0
+
+/obj/structure/closet/crate/chest/wickertrunk/red
+	name = "decorated wicker trunk"
+	desc = "A somewhat sturdy wicker trunk covered in a linen throw rug, quaint."
+	base_icon_state = "redwickertrunk"
+	icon_state = "redwickertrunk"
+	open_sound = 'sound/items/book_open.ogg'
+	open_sound = 'sound/items/book_close.ogg'
+	close_sound = 'sound/items/book_close.ogg'
+	sellprice = 0
+
 /obj/structure/closet/crate/chest/wicker
 	name = "wicker basket"
 	desc = "Fibers interwoven to make a cheap storage bin."
@@ -77,6 +107,16 @@
 	open_sound = 'sound/items/book_open.ogg'
 	open_sound = 'sound/items/book_close.ogg'
 	close_sound = 'sound/items/book_close.ogg'
+	sellprice = 0
+
+/obj/structure/closet/crate/chest/shippingcrate
+	name = "shipping crate"
+	desc = "A sturdy wooden crate held together with bronze nails."
+	base_icon_state = "shippingcrate"
+	icon_state = "shippingcrate"
+	open_sound = 'sound/foley/doors/windowup.ogg'
+	open_sound = 'sound/foley/doors/windowup.ogg'
+	close_sound = 'sound/foley/doors/shittyclose.ogg'
 	sellprice = 0
 
 /obj/structure/closet/crate/chest/wicker/random_soilson/populate_contents()
@@ -135,10 +175,6 @@
 	name = "handcrafted chest"
 	icon_state = "chest_neu"
 	base_icon_state = "chest_neu"
-	sellprice = 6
-
-/obj/structure/closet/crate/crafted_closet/crafted
-	sellprice = 6
 
 //a chest with a corpse in it
 /obj/structure/closet/crate/chest/neu_iron/corpse/populate_contents()

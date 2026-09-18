@@ -49,7 +49,7 @@
 	shirt = /obj/item/clothing/armor/gambeson
 	pants = /obj/item/clothing/pants/trou/leather
 	cloak = /obj/item/clothing/cloak/stabard
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 
 /// Dead Townsman
@@ -94,7 +94,7 @@
 //// Dead Noble
 /datum/outfit/grave/t3/noble
 	name = "Noble (grave)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	shirt = /obj/item/clothing/shirt/dress/silkdress/colored/random
 	backl = /obj/item/storage/backpack/satchel
 	neck = /obj/item/storage/belt/pouch/coins/rich

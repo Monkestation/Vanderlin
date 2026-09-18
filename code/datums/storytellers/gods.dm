@@ -60,6 +60,7 @@
 		),
 		"Set 4" = list(
 			STATS_SKILLS_DREAMED = list("name" = "Skills dreamed:", "points" = 0.265, "capacity" = 80),
+			STATS_NOC_REVIVALS = list("name" = "Holy revivals:", "points" = 6.25, "capacity" = 75),
 		),
 		"Set 5" = list(
 			STATS_MANA_SPENT = list("name" = "Mana spent:", "points" = 0.010, "capacity" = 90),
@@ -292,7 +293,7 @@
 
 	influence_sets = list(
 		"Set 1" = list(
-			STATS_MASTERWORKS_FORGED = list("name" = "Masterworks forged:", "points" = 4.75, "capacity" = 70),
+			STATS_MASTERWORKS_PRODUCED = list("name" = "Masterworks produced:", "points" = 4.75, "capacity" = 70),
 		),
 		"Set 2" = list(
 			STATS_ROCKS_MINED = list("name" = "Rocks mined:", "points" = 0.25, "capacity" = 90),

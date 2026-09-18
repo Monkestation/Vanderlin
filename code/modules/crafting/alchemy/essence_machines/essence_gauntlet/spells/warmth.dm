@@ -3,8 +3,6 @@
 	desc = "Provides resistance to cold and warms the body."
 	button_icon_state = "warmth"
 	cast_range = 1
-	point_cost = 3
-	attunements = list(/datum/attunement/fire)
 	essences = list(/datum/thaumaturgical_essence/fire)
 
 /datum/action/cooldown/spell/essence/warmth/cast(atom/cast_on)
@@ -35,3 +33,12 @@
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_RESISTCOLD, TRAIT_STATUS_EFFECT(id))
 	to_chat(owner, span_notice("The magical warmth fades away."))
+
+/datum/action/cooldown/spell/essence/warmth/spell
+	name = "Lesser Warmth"
+	charge_required = TRUE
+	charge_time = 1 SECONDS
+	spell_cost = 40
+	spell_type = SPELL_MANA
+
+	required_form = FORM_FIRE

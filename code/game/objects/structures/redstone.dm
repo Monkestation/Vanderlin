@@ -176,12 +176,17 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	accessor_trait = TRAIT_KNOW_THIEF_DOORS
 
 /obj/structure/lever/hidden/courtagent
-	hidden_dc = 14
+	hidden_dc = 16
 	accessor_trait = TRAIT_KNOW_COURTAGENT_DOORS
 
 /obj/structure/lever/hidden/rous
 	hidden_dc = 16
 	accessor_trait = TRAIT_KNOW_ROUS_DOORS
+
+/obj/structure/lever/hidden/dreamcave
+	hidden_dc = 18
+	accessor_trait = TRAIT_LUNAR_ORDER
+
 
 /obj/structure/repeater
 	name = "repeater"

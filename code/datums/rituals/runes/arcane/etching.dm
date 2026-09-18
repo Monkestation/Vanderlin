@@ -57,7 +57,7 @@
 	return ITEM_INTERACT_SUCCESS
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/focus_etch/proc/try_invoke(mob/living/user)
-	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
+	if(GET_MOB_ATTRIBUTE_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
 		to_chat(user, span_warning("You aren't able to invoke these symbols."))
 		return
 	if(rune_in_use)
@@ -67,7 +67,7 @@
 	// Build eligible spell list, exclude essence and already-temporary spells
 	var/list/eligible = list()
 	for(var/datum/action/cooldown/spell/S in user.actions)
-		if(S.spell_type == SPELL_ESSENCE)
+		if(S.spell_type != SPELL_MANA)
 			continue
 		if(S.spell_flags & SPELL_TEMPORARY)
 			continue
