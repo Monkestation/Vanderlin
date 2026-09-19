@@ -17,6 +17,7 @@
 #define ANTAG_HUD_ZIZOID "antag_hud_zizoid"
 #define ANTAG_HUD_BANDIT "antag_hud_bandit"
 #define ANTAG_HUD_BLOOD_MAGE "antag_hud_bloodmage"
+#define ANTAG_HUD_NITEWARDEN "antag_hud_nitewarden"
 
 // Notification action types
 #define NOTIFY_JUMP "jump"

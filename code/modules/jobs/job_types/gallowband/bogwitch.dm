@@ -9,7 +9,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/magic/druidic = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/reading = 30,
@@ -81,13 +81,13 @@
 		if("Path of Bone")//Plus to Surgery
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, 1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, -1, TRUE)
-			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/druidic, -1, TRUE)
 		if("Path of Nature")//Plus to Alchemy
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, 1, TRUE)
-			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/druidic, -1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, -1, TRUE)
-		if("Path of The Hunt")//Plus to Miracles
-			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, 1, TRUE)
+		if("Path of The Hunt")//Plus to Druid Magic
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/druidic, 1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, -1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, -1, TRUE)
 

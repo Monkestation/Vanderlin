@@ -112,6 +112,7 @@
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	sellprice = VALUE_EXTREME
 	resistance_flags = FIRE_PROOF|ACID_PROOF|LAVA_PROOF|UNACIDABLE|INDESTRUCTIBLE
+	examine_highlight_type = /datum/examine_highlight/royal_court/crown
 
 /obj/item/clothing/head/crown/serpcrown/Initialize()
 	. = ..()

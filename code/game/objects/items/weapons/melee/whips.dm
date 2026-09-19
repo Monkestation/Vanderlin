@@ -117,6 +117,7 @@
 	icon_state = "psywhip"
 	item_weight = 550 GRAMS
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/whip/psydon/relic/Initialize(mapload)
 	. = ..()					// Pre-blessed, +5 force, +100 INT, +2 Def, Silver.
