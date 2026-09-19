@@ -574,6 +574,7 @@
 	sellprice = 0 // Graggarite axe, nobody wants this
 	item_weight = 2 KILOGRAMS
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming
 
 /obj/item/weapon/greataxe/blacksteel
 	name = "blacksteel greataxe"

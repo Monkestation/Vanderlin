@@ -21,7 +21,7 @@
 	title = "Longbeard"
 	tutorial = "You've earned your place as one of the old grumblers, a pinnacle of tradition, justice, and willpower. You've come to establish order in these lands, and with your hammer of grudges you'll see it through."
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
-	allowed_races = list(SPEC_ID_DWARF)
+	allowed_races = list(SPEC_ID_DWARF, SPEC_ID_DWARF_ORC)
 	outfit = /datum/outfit/longbeard
 	total_positions = 1
 	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)

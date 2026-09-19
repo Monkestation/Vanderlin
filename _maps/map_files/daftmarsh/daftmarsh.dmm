@@ -802,8 +802,7 @@
 "aGE" = (
 /obj/machinery/light/fueled/lanternpost/fixed{
 	dir = 1;
-	pixel_x = 3;
-	pixel_y = 0
+	pixel_x = 3
 	},
 /turf/open/floor/blocks,
 /area/outdoors/town)
@@ -2090,12 +2089,10 @@
 	pixel_y = -7
 	},
 /obj/item/lockpickring/mundane{
-	pixel_x = 1;
-	pixel_y = 0
+	pixel_x = 1
 	},
 /obj/item/lockpickring/mundane{
-	pixel_x = 1;
-	pixel_y = 0
+	pixel_x = 1
 	},
 /turf/open/floor/tile,
 /area/indoors/town/keep/courtagent)
@@ -2265,8 +2262,7 @@
 	pixel_y = -1
 	},
 /obj/item/flashlight/flare/torch/metal{
-	pixel_x = -12;
-	pixel_y = 0
+	pixel_x = -12
 	},
 /obj/item/flashlight/flare/torch/metal{
 	pixel_x = -8;
@@ -2932,8 +2928,7 @@
 /obj/effect/mapping_helpers/access/keyset/town/smith,
 /obj/structure/bridge_stakes{
 	dir = 8;
-	pixel_x = -9;
-	pixel_y = 0
+	pixel_x = -9
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/dwarfin)
@@ -3049,8 +3044,7 @@
 /area/outdoors/town/roofs)
 "cog" = (
 /obj/structure/closet/keyrack{
-	pixel_y = -32;
-	pixel_x = 0
+	pixel_y = -32
 	},
 /obj/effect/mapping_helpers/access/keyset/manor/courtagent,
 /obj/effect/mapping_helpers/access/locker,
@@ -5055,8 +5049,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/bridge_stakes{
 	dir = 4;
-	pixel_x = 8;
-	pixel_y = 0
+	pixel_x = 8
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/smithy)
@@ -7860,8 +7853,7 @@
 /obj/effect/mapping_helpers/access/keyset/town/smith,
 /obj/structure/bridge_stakes{
 	dir = 8;
-	pixel_x = -10;
-	pixel_y = 0
+	pixel_x = -10
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/dwarfin)
@@ -11079,7 +11071,6 @@
 	pixel_y = 13
 	},
 /obj/item/plate/silver{
-	pixel_x = 0;
 	pixel_y = 13
 	},
 /obj/item/plate/silver{
@@ -13097,8 +13088,7 @@
 /area/outdoors/town)
 "kvp" = (
 /obj/effect/decal/carpet/kover_black{
-	pixel_x = 16;
-	pixel_y = 0
+	pixel_x = 16
 	},
 /turf/open/floor/carpet/stellar,
 /area/indoors/town/shop)
@@ -13223,7 +13213,6 @@
 /area/indoors/town/orphanage)
 "kyg" = (
 /obj/effect/decal/carpet/square{
-	pixel_x = 0;
 	pixel_y = 11
 	},
 /turf/open/floor/tile/brownbrick,
@@ -14667,8 +14656,7 @@
 "lNR" = (
 /obj/effect/landmark/start/merchant,
 /obj/effect/decal/carpet/kover_black{
-	pixel_x = -12;
-	pixel_y = 0
+	pixel_x = -12
 	},
 /turf/open/floor/carpet/stellar,
 /area/indoors/town/shop)
@@ -15934,7 +15922,6 @@
 "mJX" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/fluff/big_chain{
-	pixel_y = 0;
 	pixel_x = 10
 	},
 /turf/open/floor/metal/barograte/open,
@@ -16917,8 +16904,7 @@
 	},
 /obj/item/servant_bell,
 /obj/item/servant_bell{
-	pixel_x = 7;
-	pixel_y = 0
+	pixel_x = 7
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/keep/servanthead)
@@ -18788,7 +18774,6 @@
 	},
 /obj/item/plate/gold,
 /obj/item/servant_bell/lord{
-	pixel_x = 0;
 	pixel_y = 19
 	},
 /obj/item/servant_bell/lord{
@@ -21634,8 +21619,7 @@
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/item/bouquet/calendula{
-	pixel_x = 9;
-	pixel_y = 0
+	pixel_x = 9
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/town)
@@ -22704,7 +22688,6 @@
 "sFV" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/fluff/big_chain{
-	pixel_y = 0;
 	pixel_x = -10
 	},
 /turf/open/floor/metal/barograte/open,
@@ -22799,8 +22782,7 @@
 	dir = 8
 	},
 /obj/item/natural/feather{
-	pixel_x = 3;
-	pixel_y = 0
+	pixel_x = 3
 	},
 /obj/item/needle{
 	pixel_x = -8;
@@ -22814,8 +22796,7 @@
 	dir = 1
 	},
 /obj/item/weapon/knife/scissors/steel{
-	pixel_x = -4;
-	pixel_y = 0
+	pixel_x = -4
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town)
@@ -23578,8 +23559,7 @@
 	pixel_y = -15
 	},
 /obj/structure/fluff/walldeco/gear/small{
-	pixel_x = -17;
-	pixel_y = 0
+	pixel_x = -17
 	},
 /turf/open/openspace,
 /area/indoors/town/clocktower)

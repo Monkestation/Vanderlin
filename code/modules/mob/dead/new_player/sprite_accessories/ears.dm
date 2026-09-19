@@ -298,8 +298,20 @@
 
 /datum/sprite_accessory/ears/goblin
 	name = "Goblin"
-	icon = 'icons/mob/sprite_accessory/halforc.dmi'
+	icon = 'icons/mob/sprite_accessory/ears/goblin/ears_goblin.dmi'
 	icon_state = "goblin"
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
+/datum/sprite_accessory/ears/goblin_alt
+	name = "Goblin Alt"
+	icon = 'icons/mob/sprite_accessory/ears/goblin/ears_goblinalt.dmi'
+	icon_state = "goblinalt"
+	color_key_defaults = list(KEY_SKIN_COLOR)
+
+/datum/sprite_accessory/ears/goblin_small
+	name = "Goblin Small"
+	icon = 'icons/mob/sprite_accessory/ears/goblin/ears_goblinsmall.dmi'
+	icon_state = "goblinsmall"
 	color_key_defaults = list(KEY_SKIN_COLOR)
 
 /datum/sprite_accessory/ears/big

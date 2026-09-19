@@ -21,7 +21,7 @@
 /datum/job/advclass/combat/dbomb
 	title = "Dwarven Bombardier"
 	tutorial = "Wandering tinkerers from the Blackpowder clan that specialize in the production of explosives."
-	allowed_races = list(SPEC_ID_DWARF)
+	allowed_races = list(SPEC_ID_DWARF, SPEC_ID_DWARF_ORC)
 	outfit = /datum/outfit/adventurer/dbomb
 	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 

@@ -82,7 +82,7 @@
 		"Flail" = /obj/item/weapon/flail/militia, \
 		"Warhammer" = /obj/item/weapon/mace/warhammer, \
 	)
-	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR MAIN AND SIDE WEAPON", title = "FOOTMAN")
+	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR MAIN WEAPON", title = "FOOTMAN")
 	switch(choice)
 		if("Sword")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 10, 30)

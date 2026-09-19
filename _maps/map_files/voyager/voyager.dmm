@@ -3360,7 +3360,6 @@
 	pixel_y = 40
 	},
 /obj/item/burial_shroud{
-	pixel_x = 0;
 	pixel_y = 40
 	},
 /obj/item/burial_shroud{

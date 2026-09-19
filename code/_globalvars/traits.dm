@@ -138,7 +138,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Recognised Noble" = TRAIT_NOBLE_POWER,
 		"Empath" = TRAIT_EMPATH,
 		"Thief-Sense" = TRAIT_THIEFSENSE,
-		"Battleready" = TRAIT_BREADY,
+		"Battleready" = TRAIT_BATTLE_READY,
 		"Sixth-Sense" = TRAIT_BLINDFIGHTING,
 		"Mail Training" = TRAIT_MEDIUMARMOR,
 		"Plate Training" = TRAIT_HEAVYARMOR,
@@ -208,6 +208,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Member of the Oratorium Throni Vacui" = TRAIT_INQUISITION,
 		"Inflexible" = TRAIT_UNDODGING,
 		"Graceless" = TRAIT_UNPARRYING,
+		"Expert Parry" = TRAIT_EXPERT_PARRY,
 		"Agent of the Court" = TRAIT_COURTAGENT,
 		"Know Gallowband Secrets" = TRAIT_GALLOWBAND_SECRETS,
 		"Member of Gallowband" = TRAIT_GALLOWBAND,
@@ -220,8 +221,10 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Sorcerer" = TRAIT_SORCERER,
 		"Blood Mage" = TRAIT_BLOOD_MAGE,
 		"Blood Sorcerer" = TRAIT_BLOOD_SORCERER,
+		"Blood Student" = TRAIT_BLOOD_STUDENT,
 		"Blood Sense" = TRAIT_BLOOD_SENSE,
 		"Vitae User" = TRAIT_VITAE_USER,
+		"Sanguine Block" = TRAIT_BLOOD_MAGIC_BLOCKED,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -232,6 +235,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"TRAIT_WIELDED" = TRAIT_WIELDED,
 		"TRAIT_NEEDS_TWO_HANDS" = TRAIT_NEEDS_TWO_HANDS,
 		"TRAIT_CANT_BE_STOLEN" = TRAIT_CANT_BE_STOLEN,
+		"TRAIT_CONCEALED_ITEM" = TRAIT_CONCEALED_ITEM,
 	),
 	/turf = list(
 		"TRAIT_AI_AVOID_TURF" = TRAIT_AI_AVOID_TURF,
@@ -258,9 +262,10 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_NOBLE_BLOOD = span_blue("I'm of noble blood."),
 	TRAIT_NOBLE_POWER = span_blue("I am recognised by the crown as a noble."),
 	TRAIT_EMPATH = "I can notice when people are stressed.",
-	TRAIT_BREADY = "Defensive stance does not passively fatigue me.",
+	TRAIT_BATTLE_READY = "Defensive stance does not passively fatigue me.",
 	TRAIT_UNDODGING = span_danger("I am unable to dodge."),
 	TRAIT_UNPARRYING = span_danger("I am unable to block and parry attacks."),
+	TRAIT_EXPERT_PARRY = span_info("I am an expert at parrying oncoming attacks."),
 	TRAIT_BLINDFIGHTING = span_info("I have an incredible sense of awareness, allowing me to parry even when I can't see it coming."),
 	TRAIT_THIEFSENSE = span_info("I have supreme awareness of my belongings, stealing from me would be impossible."),
 	TRAIT_MEDIUMARMOR = "I can move freely in medium armor.",
@@ -371,6 +376,8 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_SORCERER = SPAN_GOD_NOC("I am a sorcerer, unable to wield magickal tomes but gifted with innate power."),
 	TRAIT_BLOOD_MAGE = span_bloody("I am a skilled blood mage, wielding the unholy power of blood magic. Woe unto those who oppose me."),
 	TRAIT_BLOOD_SORCERER = span_bloody("I am a gifted blood sorcerer, wielding innate power over blood magic. Woe unto those who oppose me. I cannot use magickal tomes."),
+	TRAIT_BLOOD_STUDENT = span_bloody("I am a student of blood magic."),
+	TRAIT_BLOOD_MAGIC_BLOCKED = span_bloody("I am permanently blocked from using blood magic!"),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

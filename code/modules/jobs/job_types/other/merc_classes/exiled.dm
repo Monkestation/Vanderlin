@@ -24,7 +24,7 @@
 /datum/job/advclass/mercenary/exiled
 	title = "Exiled Warrior"
 	tutorial = "A barbarian - you're a brute, and you're a long way from home. You took more of a liking to the blade than your elders wanted - in truth, they did not have to even deliberate to banish you. You will drown in ale, and your enemies in blood."
-	allowed_races = list(SPEC_ID_HALF_ORC)
+	allowed_races = list(SPEC_ID_HALF_ORC, SPEC_ID_DWARF_ORC)
 	outfit = /datum/outfit/mercenary/exiled
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 5

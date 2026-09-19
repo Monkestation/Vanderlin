@@ -68,17 +68,6 @@
 /obj/item/clothing/head/roguehood/colored/blood
 	color = COLOR_BLOOD_MAGIC
 
-/obj/item/clothing/head/roguehood/colored/blood/enhanced
-	name = "bloodsteel threaded hood"
-	desc = "A seemingly plain cloth hood woven with bloodsteel threads. It radiates a sinister aura."
-	armor_type = /datum/armor/head/cloth/bloodweave
-	prevent_crits = CUT_AND_MINOR_CRITS
-	max_integrity = 250
-
-/obj/item/clothing/head/roguehood/colored/blood/enhanced/Initialize(mapload)
-	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
-
 /obj/item/clothing/head/roguehood/colored/green
 	color = CLOTHING_FOREST_GREEN
 
@@ -122,6 +111,21 @@
 	if(iscarbon(user))
 		var/mob/living/carbon/H = user
 		H.update_inv_head()
+
+//............... Blood Magic Hood ............... //
+/obj/item/clothing/head/roguehood/bloodweave
+	name = "bloodweave hood"
+	desc = "A seemingly plain cloth hood woven with bloodsteel threads. It radiates a sinister aura."
+	armor_type = /datum/armor/head/cloth/bloodweave
+	prevent_crits = CUT_AND_MINOR_CRITS
+	max_integrity = 250
+	color = COLOR_BLOOD_MAGIC
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
+
+/obj/item/clothing/head/roguehood/bloodweave/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //............... Feldshers Hood ............... //
 /obj/item/clothing/head/roguehood/feld
@@ -243,3 +247,12 @@
 	detail_tag = "_detail"
 	color = CLOTHING_MAGE_BLUE
 	detail_color = CLOTHING_WHITE
+
+/obj/item/clothing/head/roguehood/monk
+	icon_state = "monkhood"
+
+/obj/item/clothing/head/roguehood/monk/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/head/roguehood/monk/colored/black
+	color = CLOTHING_SOOT_BLACK

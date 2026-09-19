@@ -28,6 +28,7 @@
 		SPEC_ID_HALF_DROW,\
 		SPEC_ID_DWARF,\
 		SPEC_ID_HALF_ORC,\
+		SPEC_ID_DWARF_ORC,\
 		SPEC_ID_TIEFLING,\
 	)
 	outfit = /datum/outfit/adventurer/barbarian

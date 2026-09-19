@@ -53,6 +53,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/diagnose
 	)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/outfit/bandit/sawbones
 	name = "Sawbones (Bandit)"

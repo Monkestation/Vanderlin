@@ -101,6 +101,7 @@
 	desc = "Holy vestments sanctified by divine hands. Caution is advised if not a faithful."
 	icon_state = "priestrobe"
 	dropshrink = 0.8
+	examine_highlight_type = /datum/examine_highlight/divine/priest
 
 /obj/item/clothing/shirt/robe/priest/pickup(mob/living/user)
 	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
@@ -125,14 +126,17 @@
 /obj/item/clothing/shirt/robe/colored/blood
 	color = COLOR_BLOOD_MAGIC
 
-/obj/item/clothing/shirt/robe/colored/blood/enhanced
-	name = "bloodsteel threaded robe"
+/obj/item/clothing/shirt/robe/bloodweave
+	name = "bloodweave robe"
 	desc = "A seemingly plain robe woven with bloodsteel threads. It radiates a sinister aura."
 	armor_type = /datum/armor/robe/bloodweave
 	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = 250
+	color = COLOR_BLOOD_MAGIC
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
 
-/obj/item/clothing/shirt/robe/colored/blood/enhanced/Initialize(mapload)
+/obj/item/clothing/shirt/robe/bloodweave/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)
 
