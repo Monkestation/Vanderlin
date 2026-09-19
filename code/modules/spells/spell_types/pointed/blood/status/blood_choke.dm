@@ -26,6 +26,8 @@
 	if(!ishuman(cast_on))
 		return FALSE
 	var/mob/living/carbon/human/target = cast_on
+	if(HAS_TRAIT(target, TRAIT_NOBREATH))
+		return FALSE
 	if(target.has_status_effect(/datum/status_effect/debuff/blood_choke))
 		to_chat(owner, span_bloody("[cast_on] is already choking!"))
 		return FALSE
@@ -36,7 +38,7 @@
 	duration = 20 SECONDS
 	tick_interval = 2 SECONDS
 	var/damage_cooldown
-	var/damage_per_tick = 5
+	var/damage_per_tick = 10
 
 /datum/status_effect/debuff/blood_choke/on_apply()
 	. = ..()
@@ -59,3 +61,34 @@
 	desc = span_bloody("My throat fills with blood! I cannot breathe!")
 	icon_state = "stressinsane"
 	alert_group = ALERT_DEBUFF
+
+// ##########################################################################################
+
+/datum/status_effect/debuff/blood_choke/herald
+	id = "blood_choke_deb"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/herald_grip
+	duration = 3 MINUTES
+	tick_interval = 2 SECONDS
+	damage_per_tick = 10
+
+/atom/movable/screen/alert/status_effect/debuff/herald_grip
+	name = "Blood Grasp"
+	desc = span_bloody("I am being throttled by dark magicks, I need to free myself!")
+	icon_state = "stressinsane"
+	alert_group = ALERT_DEBUFF
+
+/atom/movable/screen/alert/status_effect/debuff/herald_grip/Click(location, control, params)
+	. = ..()
+	to_chat(src, span_bloody("I attempt to free myself from the grip of blood magic."))
+	if(do_after(mob_viewer, 3.5 SECONDS, mob_viewer))
+		if(isliving(mob_viewer))
+			var/mob/living/living_user = mob_viewer
+			to_chat(living_user, span_bloody("I successfully escape death's grasp!"))
+			living_user.remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
+
+/datum/action/cooldown/spell/status/blood_choke/herald
+	name = "Herald's Grasp"
+	learnable = FALSE
+	status_effect = /datum/status_effect/debuff/blood_choke/herald
+	cooldown_time = 2 MINUTES
+	spell_cost = 300

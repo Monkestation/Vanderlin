@@ -553,10 +553,20 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CABAL "Of the Cabal" //Zizo cultists recognize each other too
 #define TRAIT_MATTHIOS_EYES	"Eyes of Matthios" //Examine to see the most expensive item someone has
 
+// Archdevil patron traits
+/// No miracle healing, the Archdevils reject the influence of the so called gods. This is a major balance point for Devil worship.
+#define TRAIT_DEVILS_REJECTION "Devil's Rejection"
+#define TRAIT_DEVIL_MARKED_ABRAXAS "Devil Marked - Abraxas"
+#define TRAIT_DEVIL_MARKED_ABADDON "Devil Marked - Abaddon"
+#define TRAIT_DEVIL_MARKED_MEPHISTOPHELES "Devil Marked - Mephistopheles"
+#define TRAIT_DEVIL_MARKED_LEVIATHAN "Devil Marked - Leviathan"
+#define TRAIT_IDENTIFY_DEVIL_MARKS "Occult Identification"
+
 // Other Patron Trait Bonuses
 #define TRAIT_MANEATER_IMMUNITY "Blessing of The Hunt" //Cannot be grabbed by maneaters.
 /// Target can't be grabbed by tanglers
 #define TRAIT_ENTANGLER_IMMUNITY "Vinewalker"
+
 
 // PATRON CURSE TRAITS
 #define TRAIT_CURSE "Curse" //source

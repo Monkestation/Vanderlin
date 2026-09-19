@@ -275,6 +275,7 @@
 
 //GOLEM GANG
 
+//forest don't forget to look into this
 //OTHER DEBUFFS
 /datum/status_effect/strandling //get it, strand as in durathread strand + strangling = strandling hahahahahahahahahahhahahaha i want to die
 	id = "strandling"

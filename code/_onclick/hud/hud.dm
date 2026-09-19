@@ -393,6 +393,7 @@ GLOBAL_LIST_INIT(available_ui_styles, sortList(list(
 	shutdown_bloodpool()
 	initialize_bloodpool()
 	bloodpool.set_fill_color("#510000")
+	bloodpool.name = "Vitae Reserves"
 
 /datum/hud/proc/initialize_bloodpool()
 	bloodpool = new /atom/movable/screen/bloodpool(null, src)

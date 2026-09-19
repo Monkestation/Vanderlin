@@ -237,7 +237,7 @@
 				disgust_msg = span_necrosis("[P[THEY]] look[pl] really disgusted.")
 			if(DISGUST_LEVEL_DISGUSTED to INFINITY)
 				disgust_msg = span_necrosis(html_tag("B", "[P[THEY]] look[pl] extremely disgusted."))
-		if(disgust_msg && HAS_TRAIT(user, TRAIT_EMPATH) || disgust >= DISGUST_LEVEL_DISGUSTED)
+		if(disgust_msg && (HAS_TRAIT(user, TRAIT_EMPATH) || HAS_TRAIT(user, TRAIT_DEVIL_MARKED_LEVIATHAN)) || disgust >= DISGUST_LEVEL_DISGUSTED)
 			. += disgust_msg
 
 		// Stress
@@ -253,7 +253,7 @@
 				stress_msg = span_tinywarning("[P[THEY]] look[pl] stressed.")
 			if(STRESS_NEUTRAL to STRESS_BAD)
 				stress_msg = span_tinynotice("[P[THEY]] look[pl] a little stressed.")
-		if(stress_msg && HAS_TRAIT(user, TRAIT_EMPATH) || stress >= STRESS_INSANE)
+		if(stress_msg && (HAS_TRAIT(user, TRAIT_EMPATH) || HAS_TRAIT(user, TRAIT_DEVIL_MARKED_LEVIATHAN)) || stress >= STRESS_INSANE)
 			. += stress_msg
 
 		//Drunkenness

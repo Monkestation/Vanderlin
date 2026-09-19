@@ -158,7 +158,7 @@
 		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
 		. += "DETECTIONS: [detections]"
 	if(cleric)
-		. += "Devotion: [round(cleric.devotion)]/[cleric.max_devotion]"
+		. += "[cleric.devotion_title]: [round(cleric.devotion)]/[cleric.max_devotion]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)

@@ -44,3 +44,14 @@
 	desc = span_bloody("I have been granted blood sight.")
 	icon_state = "bloodsight"
 	alert_group = ALERT_BUFF
+
+
+/datum/action/cooldown/spell/status/blood_sight/herald
+	name = "Herald's Senses"
+	learnable = FALSE
+
+/datum/action/cooldown/spell/status/blood_sight/herald/is_valid_target(atom/cast_on)
+	. = ..()
+	if(cast_on != owner)
+		to_chat(owner, SPAN_GOD_ARCHDEVILS("This can only be used upon yourself!"))
+		return FALSE

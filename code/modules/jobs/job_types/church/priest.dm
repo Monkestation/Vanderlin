@@ -88,7 +88,7 @@
 
 	languages = list(/datum/language/celestial)
 	can_have_apprentices = FALSE
-	traits = list(TRAIT_VIRGIN)
+	traits = list(TRAIT_VIRGIN, TRAIT_IDENTIFY_DEVIL_MARKS)
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

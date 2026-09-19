@@ -116,7 +116,7 @@
 		if(!length(mana_pools))
 			return
 
-	var/datum/beam/transfer_beam = user.Beam(src, icon_state = "drain_life", time = INFINITY, override_target_pixel_y = 32)
+	var/datum/beam/transfer_beam = user.Beam(src, icon_state = "drain_mana", time = INFINITY, override_target_pixel_y = 32)
 
 	while(TRUE)
 		if(!do_after(user, 3 SECONDS, target = src) || !user.client)

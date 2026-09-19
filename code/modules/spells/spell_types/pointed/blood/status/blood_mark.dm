@@ -3,12 +3,14 @@
 #define BLOOD_MARK_TYPE_SHIELD "shield"
 #define BLOOD_MARK_TYPE_BEFRIEND "befriend"
 #define BLOOD_MARK_TYPE_MOVE "move"
+#define BLOOD_MARK_TYPE_HERALD "herald"
 
 #define BLOOD_MARK_CURSE list("name" = "Curse", "tag" = "C", "status_type" = BLOOD_MARK_TYPE_CURSE, "cooldown" = 3 MINUTES)
 #define BLOOD_MARK_TAG list("name" = "Tag", "tag" = "T", "status_type" = BLOOD_MARK_TYPE_TAG, "cooldown" = 1.5 MINUTES)
 #define BLOOD_MARK_SHIELD list("name" = "Curse Shield", "tag" = "S", "status_type" = BLOOD_MARK_TYPE_SHIELD, "cooldown" = 1.5 MINUTES)
 #define BLOOD_MARK_BEFRIEND list("name" = "Befriend", "tag" = "F", "status_type" = BLOOD_MARK_TYPE_BEFRIEND, "cooldown" = 1 MINUTES)
 #define BLOOD_MARK_MOVE list("name" = "Blood Shift", "tag" = "M", "status_type" = BLOOD_MARK_TYPE_MOVE, "cooldown" = 5 MINUTES)
+#define BLOOD_MARK_HERALD list("name" = "Herald's Brand", "tag" = "H", "status_type" = BLOOD_MARK_TYPE_HERALD, "cooldown" = 7.5 MINUTES)
 
 /datum/action/cooldown/spell/status/blood_mark
 	name = "Blood Mark"
@@ -36,25 +38,30 @@
 
 	var/mode_index = 1
 	var/mode_status_type
-	var/static/list/modes = list(
+	var/list/modes = list(
 		BLOOD_MARK_CURSE,
 		//BLOOD_MARK_TAG,
 		BLOOD_MARK_SHIELD,
 	)
 
-	var/static/list/weaker_modes = list(
+	var/list/weaker_modes = list(
 		BLOOD_MARK_CURSE,
 		//BLOOD_MARK_TAG,
 		BLOOD_MARK_SHIELD,
 	)
 
-	var/static/list/empowered_modes = list(
+	var/list/empowered_modes = list(
 		BLOOD_MARK_CURSE,
 		//BLOOD_MARK_TAG,
 		BLOOD_MARK_SHIELD,
 		BLOOD_MARK_BEFRIEND,
 		//BLOOD_MARK_MOVE
 	)
+
+/datum/action/cooldown/spell/status/blood_mark/herald
+	name = "Blood Branding"
+	modes = list(BLOOD_MARK_HERALD)
+	learnable = FALSE
 
 /datum/action/cooldown/spell/status/blood_mark/proc/empower()
 	modes = empowered_modes
@@ -87,6 +94,9 @@
 		if(BLOOD_MARK_TYPE_MOVE)
 			status_effect = /datum/status_effect/debuff/blood_mark
 			desc = "Mark a target with blood, allowing you to transport yourself to them, or summon them to you."
+		if(BLOOD_MARK_TYPE_HERALD)
+			status_effect = /datum/status_effect/debuff/blood_mark/herald
+			desc = "Brand a target with the Herald's Mark, a promise of suffering to come."
 
 	update_mode_maptext(mode["tag"])
 
@@ -127,6 +137,10 @@
 	if(HAS_TRAIT(target, TRAIT_VITAE_USER))
 		to_chat(owner, span_bloody("I cannot mark another master of Vitae!"))
 		return FALSE
+	if(target.stat == DEAD)
+		to_chat(owner, span_bloody("I cannot mark the dead!"))
+		return FALSE
+
 	var/can_self_cast = FALSE
 
 	switch(mode_status_type)
@@ -140,10 +154,16 @@
 			if(target.has_status_effect(/datum/status_effect/debuff/blood_mark/curse))
 				to_chat(owner, span_bloody("[target] already bears a Curse Blood Mark!"))
 				return FALSE
+			if(target.has_status_effect(/datum/status_effect/debuff/blood_mark/herald))
+				to_chat(owner, span_bloody("[target] already bears the Herald's Brand!"))
+				return FALSE
 		if(BLOOD_MARK_TYPE_TAG)
 			return FALSE
 		if(BLOOD_MARK_TYPE_SHIELD)
 			can_self_cast = TRUE
+			if(target.has_status_effect(/datum/status_effect/debuff/blood_mark/herald))
+				to_chat(owner, span_bloody("[target] cannot be shielded, they bear the Herald's Brand!"))
+				return FALSE
 		if(BLOOD_MARK_TYPE_BEFRIEND)
 			if(!target.mind)
 				to_chat(owner, span_bloody("[target] has no independent thought!"))
@@ -153,6 +173,10 @@
 				return FALSE
 		if(BLOOD_MARK_TYPE_MOVE)
 			return FALSE
+		if(BLOOD_MARK_TYPE_HERALD)
+			if(target.has_status_effect(/datum/status_effect/debuff/blood_mark/herald))
+				to_chat(owner, span_bloody("[target] is already branded with your mark!"))
+				return FALSE
 
 	if(!can_self_cast && (target == owner))
 		to_chat(owner, span_bloody("You cannot place that mark upon yourself!"))
@@ -244,17 +268,37 @@
 	desc = span_bloody("I am being tracked with Blood Magic!")
 	icon_state = "blackeye"
 
+// ##########################################################################################
 
+/datum/status_effect/debuff/blood_mark/herald
+	id = "blood_mark_herald_deb"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/blood_mark/herald
+	effectedstats = list(STAT_SPEED = -3, STAT_STRENGTH = -2, STAT_CONSTITUTION = -1)
+	duration = 10 MINUTES
 
+/datum/status_effect/debuff/blood_mark/herald/on_apply()
+	. = ..()
+	owner.add_stress(/datum/stress_event/herald_mark)
 
+/datum/stress_event/herald_mark
+	stress_change = 4
+	desc = span_bloody("Darkness, shadow, the cataclysm... they are coming!")
+	timer = 10 MINUTES
+
+/atom/movable/screen/alert/status_effect/debuff/blood_mark/herald
+	name = "Herald's Brand"
+	desc = span_bloody("I have been branded with a Blood Mark!")
+	icon_state = "dream_mark"
 
 #undef BLOOD_MARK_TYPE_CURSE
 #undef BLOOD_MARK_TYPE_TAG
 #undef BLOOD_MARK_TYPE_SHIELD
 #undef BLOOD_MARK_TYPE_BEFRIEND
 #undef BLOOD_MARK_TYPE_MOVE
+#undef BLOOD_MARK_TYPE_HERALD
 #undef BLOOD_MARK_CURSE
 #undef BLOOD_MARK_TAG
 #undef BLOOD_MARK_SHIELD
 #undef BLOOD_MARK_BEFRIEND
 #undef BLOOD_MARK_MOVE
+#undef BLOOD_MARK_HERALD

@@ -5,9 +5,12 @@
 #define ALL_PROFANE_PATRONS 	list(/datum/patron/inhumen/graggar, /datum/patron/inhumen/zizo, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
 #define ALL_ICONOCLAST_PATRONS  list(/datum/patron/psydon, /datum/patron/psydon/extremist, /datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/necra, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora, /datum/patron/inhumen/graggar, /datum/patron/inhumen/zizo, /datum/patron/inhumen/matthios, /datum/patron/inhumen/baotha)
 #define ALL_ACOLYTE_PATRONS		list(/datum/patron/divine/astrata, /datum/patron/divine/noc, /datum/patron/divine/dendor, /datum/patron/divine/abyssor, /datum/patron/divine/ravox, /datum/patron/divine/xylix, /datum/patron/divine/pestra, /datum/patron/divine/malum, /datum/patron/divine/eora) //No Necra because she has gravetenders
+#define ALL_ARCHDEVIL_PATRONS	list(/datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/leviathan)
+
 
 #define COLORFUL_PATRONS		list("Psydon", "Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora", "Graggar", "Zizo", "Matthios", "Baotha", "The Great Hunt", "The Black Briar", "Graggazo")
 #define TEMPLE_PATRON_NAMES		list("Astrata", "Noc", "Dendor", "Abyssor", "Necra", "Ravox", "Xylix", "Pestra", "Malum", "Eora")
+#define ARCHDEVIL_PATRON_NAMES	list("Abraxas", "Abaddon", "Mephistopheles", "Leviathan")
 
 #define TEN_CURSES list(\
 	/datum/curse/astrata,\
@@ -27,13 +30,21 @@
 	/datum/curse/matthios,\
 	/datum/curse/baotha\
 )
+
+#define ARCHDEVIL_CURSES list(\
+	/datum/curse/mephistopheles,\
+	/datum/curse/leviathan\
+)
+
 #define SPECIAL_CURSES list(\
 	/datum/curse/atheism\
 )
+
 #define ALL_CURSES list(\
 	SPECIAL_CURSES,\
 	TEN_CURSES,\
-	INHUMEN_CURSES\
+	INHUMEN_CURSES,\
+	ARCHDEVIL_CURSES\
 )
 
 #define PLATEHIT "plate"

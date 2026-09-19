@@ -148,6 +148,19 @@
 	trait = TRAIT_BAOTHA_CURSE
 
 //////////////////////
+/// ARCHDEVIL CURSES ///
+//////////////////////
+/datum/curse/mephistopheles
+	name = "Mephistopheles' Curse"
+	description = "I am incapable of wielding Blood Magic."
+	trait = TRAIT_BLOOD_MAGIC_BLOCKED
+
+/datum/curse/leviathan
+	name = "Leviathan's Curse"
+	description = "The abyss is pressing in... I hear it..."
+	trait = TRAIT_SCHIZO_AMBIENCE
+
+//////////////////////
 /// ON GAIN / LOSS ///
 //////////////////////
 /datum/curse/atheism/on_gain(mob/living/carbon/human/owner)

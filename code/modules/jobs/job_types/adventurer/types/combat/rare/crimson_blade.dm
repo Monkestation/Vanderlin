@@ -22,13 +22,13 @@
 	Forced to bear the weight of your cursed bloodline you have a deeper connection to your infernal heritage, \
 	with fire at your fingertips and racing across your blade you bring a burning death to all dishonorable filth."
 	allowed_races = list(SPEC_ID_TIEFLING)
-	outfit = /datum/outfit/courtagent/crimson_blade
+	outfit = /datum/outfit/crimson_blade
 	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/combat_vaquero.ogg'
 	total_positions = 1
 	roll_chance = 7
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/courtagent/crimson_blade
+	attribute_sheet = /datum/attribute_holder/sheet/job/crimson_blade
 
 	spells = list(
 		/datum/action/cooldown/spell/projectile/fire_flare/crimson_blade,

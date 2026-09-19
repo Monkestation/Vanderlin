@@ -541,7 +541,7 @@
 			if(!(target.dna?.species.id in RACES_PLAYER_ALL))
 				to_chat(user, span_warning("I can't steal this face!"))
 				return
-			var/datum/beam/transfer_beam = user.Beam(target, icon_state = "drain_life", time = 6 SECONDS)
+			var/datum/beam/transfer_beam = user.Beam(target, icon_state = "drain_mana", time = 6 SECONDS)
 
 			playsound(
 				user,

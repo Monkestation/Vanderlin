@@ -1679,7 +1679,7 @@
 	if((burning_atom == src) || (burning_atom.loc == src))
 		return TRUE
 
-	if(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS))
+	if(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABADDON))
 		return TRUE
 
 	if(gloves?.max_heat_protection_temperature >= 360)
