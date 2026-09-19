@@ -1,5 +1,5 @@
 #define ROT_SKELETONIZE_TIME 20 MINUTES
-#define AMBIENT_ROT_RATE (INFECTION_LEVEL_THREE / (15 MINUTES))
+#define AMBIENT_ROT_RATE (INFECTION_LEVEL_THREE / (10 MINUTES))
 
 /obj/item/bodypart
 	name = "limb"
@@ -384,7 +384,7 @@
 	if(isnull(local_temp))
 		return (limb_flags & BODYPART_FROZEN)
 	//you get some leeway...
-	if(local_temp < 15)
+	if(local_temp < 5)
 		limb_flags |= BODYPART_FROZEN
 		return (limb_flags & BODYPART_FROZEN)
 
@@ -416,7 +416,7 @@
 	damage_multiplier *= (max_damage / (max_damage * max(1, (GET_MOB_ATTRIBUTE_VALUE(owner, STAT_CONSTITUTION) / 10))))
 	damage_multiplier = round(damage_multiplier, 0.001)
 
-/obj/item/bodypart/proc/kill_limb()
+/obj/item/bodypart/proc/kill_limb(batched = FALSE)
 	if(!can_decay())
 		return
 
@@ -427,8 +427,10 @@
 	if(was_rotten)
 		return
 
-	owner?.update_body()
 	update_icon_dropped()
+	if(batched)
+		return
+	owner?.update_body()
 
 /obj/item/bodypart/proc/revive_limb(update_icon = FALSE)
 	REMOVE_TRAIT(src, TRAIT_ROTTEN, GERM_LEVEL_TRAIT)
@@ -762,6 +764,8 @@
 	// Being properly oxygenated
 	if(!artery_needed() || (arterial_efficiency >= ORGAN_FAILING_EFFICIENCY))
 		if(germ_level > 0 && (germ_level < INFECTION_LEVEL_ONE/2) && DT_PROB(immunity*0.3, delta_time))
+			if(owner?.getorganslot(ORGAN_SLOT_ZOMBIE))
+				return // we prevent decay
 			adjust_germ_level(-0.5 * delta_time)
 			return
 	// Dry gangrene

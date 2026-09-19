@@ -98,8 +98,6 @@
 				send_pressure = round(send_pressure, 1)
 			pipe_turf.add_liquid(add_reagent, send_pressure)
 
-
-
 /obj/structure/water_vent/return_rotation_chat()
 	var/datum/reagent/reagent = input.carrying_reagent
 	return "Input Pressure: [input ? input.water_pressure : "0"]\n\

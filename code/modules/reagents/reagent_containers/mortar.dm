@@ -1,3 +1,34 @@
+/datum/component/storage/concrete/grid/mortar
+	screen_max_rows = 3
+	screen_max_columns = 4
+	max_w_class = WEIGHT_CLASS_NORMAL
+
+/datum/component/storage/concrete/grid/mortar/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, list/modifiers, storage_click)
+	if(istype(storing, /obj/item/pestle))
+		if(!stop_messages && user)
+			to_chat(user, span_warning("[storing] is a tool, not something to grind!"))
+		return FALSE
+
+	var/can_grind = FALSE
+	for(var/datum/alch_grind_recipe/grindRec in GLOB.alch_grind_recipes)
+		if(grindRec.picky)
+			if(storing.type == grindRec.valid_input)
+				can_grind = TRUE
+				break
+		else if(istype(storing, grindRec.valid_input))
+			can_grind = TRUE
+			break
+
+	if(!can_grind && (length(storing.juice_results) || length(storing.grind_results) || storing.reagents?.total_volume))
+		can_grind = TRUE
+
+	if(!can_grind)
+		if(!stop_messages && user)
+			to_chat(user, span_warning("[storing] can't be ground or processed!"))
+		return FALSE
+
+	return ..()
+
 /obj/item/pestle
 	name = "pestle"
 	desc = ""
@@ -22,29 +53,20 @@
 	grid_width = 64
 	dropshrink = 0.9
 	soaker = FALSE
-	var/list/obj/item/to_grind = list()
-	// total w_class units allowed
+	// total w_class units allowed, mirrors the old max_grind_capacity
 	var/max_grind_capacity = 13
 
-/obj/item/reagent_containers/glass/mortar/Destroy()
-	for(var/obj/item/I in to_grind)
-		if(!QDELETED(I))
-			I.forceMove(get_turf(src))
-	to_grind = null
-	return ..()
-
-/obj/item/reagent_containers/glass/mortar/Exited(atom/movable/gone, direction)
+/obj/item/reagent_containers/glass/mortar/Initialize(mapload)
 	. = ..()
-	if(gone in to_grind)
-		to_grind -= gone
+	AddComponent(/datum/component/storage/concrete/grid/mortar)
 
 /obj/item/reagent_containers/glass/mortar/examine(mob/user)
 	. = ..()
-	if(!length(to_grind))
+	if(!length(contents))
 		return
 
 	. += span_info("It contains:")
-	for(var/obj/item/thing in to_grind)
+	for(var/obj/item/thing in contents)
 		. += span_info("[thing.name]")
 
 /obj/item/reagent_containers/glass/mortar/get_mechanics_examine(mob/user)
@@ -52,14 +74,14 @@
 	. += span_notice("Right clicking with an empty hand will remove all items inside the mortar.")
 
 /obj/item/reagent_containers/glass/mortar/attack_hand_secondary(mob/user, list/modifiers)
-	if(!length(to_grind))
+	if(!length(contents))
 		return ..()
 
 	balloon_alert(user, "removing items...")
 	if(!do_after(user, (grind_load() / 2) SECONDS, src))
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
-	for(var/obj/item/I as anything in to_grind)
+	for(var/obj/item/I as anything in contents)
 		I.forceMove(get_turf(user))
 
 	balloon_alert(user, "items removed.")
@@ -70,18 +92,10 @@
 	if(user.cmode)
 		return NONE
 
-	if(!istype(tool, /obj/item/pestle)) // Make this storage based
-		if((grind_load() + tool.w_class) > max_grind_capacity)
-			balloon_alert(user, "full!")
-			return ITEM_INTERACT_BLOCKING
-		if(!user.transferItemToLoc(tool, src))
-			balloon_alert(user, "stuck!")
-			return ITEM_INTERACT_BLOCKING
-		balloon_alert(user, "added [tool].")
-		to_grind += tool
-		return ITEM_INTERACT_SUCCESS
+	if(!istype(tool, /obj/item/pestle))
+		return NONE
 
-	if(!length(to_grind))
+	if(!length(contents))
 		if(user.try_recipes(src, tool))
 			user.changeNext_move(CLICK_CD_FAST)
 			return ITEM_INTERACT_SUCCESS
@@ -89,7 +103,7 @@
 		return ITEM_INTERACT_BLOCKING
 
 	var/list/recipes = list()
-	for(var/obj/item/grinding as anything in to_grind)
+	for(var/obj/item/grinding in contents)
 		var/datum/alch_grind_recipe/found_recipe = find_recipe(grinding)
 		if(!found_recipe)
 			balloon_alert(user, "can't grind!")
@@ -117,7 +131,7 @@
 			bonus_modifier = 2
 
 	var/did_flash = FALSE
-	for(var/obj/item/grinding as anything in to_grind)
+	for(var/obj/item/grinding as anything in contents)
 		var/datum/alch_grind_recipe/foundrecipe = recipes[grinding]
 		for(var/output in foundrecipe.valid_outputs)
 			for(var/i in 1 to foundrecipe.valid_outputs[output])
@@ -133,7 +147,6 @@
 		if(!did_flash && (istype(grinding, /obj/item/ore) || istype(grinding, /obj/item/ingot)))
 			did_flash = TRUE
 
-		to_grind -= grinding
 		qdel(grinding)
 
 	if(did_flash)
@@ -150,7 +163,7 @@
 	if(!istype(tool, /obj/item/pestle))
 		return ..()
 
-	if(!length(to_grind))
+	if(!length(contents))
 		balloon_alert(user, "nothing to grid!")
 		return ITEM_INTERACT_BLOCKING
 
@@ -163,7 +176,7 @@
 	if(!do_after(user, grind_time, src))
 		return ITEM_INTERACT_BLOCKING
 
-	for(var/obj/item/grinding as anything in to_grind)
+	for(var/obj/item/grinding as anything in contents)
 		if(length(grinding.juice_results))
 			grinding.on_juice()
 			reagents.add_reagent_list(grinding.juice_results)
@@ -182,7 +195,7 @@
 
 /obj/item/reagent_containers/glass/mortar/proc/grind_load()
 	var/total = 0
-	for(var/obj/item/I in to_grind)
+	for(var/obj/item/I in contents)
 		total += I.w_class
 	return total
 

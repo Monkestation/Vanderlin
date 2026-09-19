@@ -1,5 +1,5 @@
 /datum/ai_behavior/find_aggro_targets
-	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION
+	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION | AI_BEHAVIOR_EXECUTE_ALONGSIDE
 	action_cooldown = 1 SECONDS
 
 /datum/ai_behavior/find_aggro_targets/get_cooldown(datum/ai_controller/cooldown_for)
@@ -60,6 +60,9 @@
 		return
 
 	// Clear target key since we don't have a valid target
+	var/atom/real_target = controller.blackboard[target_key]
+	if(isstructure(real_target))
+		return
 	controller.clear_blackboard_key(target_key)
 
 	// If we're using a field rn, just don't do anything

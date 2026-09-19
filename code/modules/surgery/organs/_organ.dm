@@ -367,7 +367,7 @@
 	if(isnull(local_temp))
 		return (organ_flags & ORGAN_FROZEN)
 	//you get some leeway...
-	if(local_temp < 15)
+	if(local_temp < 5)
 		organ_flags |= ORGAN_FROZEN
 		return (organ_flags & ORGAN_FROZEN)
 

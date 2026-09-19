@@ -122,6 +122,9 @@
 /obj/item/neuFarm/seed/sunreed
 	plant_def_type = /datum/plant_def/sunreed
 
+/obj/item/neuFarm/seed/rice
+	plant_def_type = /datum/plant_def/rice
+
 /obj/item/neuFarm/seed/manabloom
 	plant_def_type = /datum/plant_def/manabloom
 	color = "#a3cbec"

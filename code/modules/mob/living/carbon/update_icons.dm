@@ -75,6 +75,8 @@
 							observers = null
 							break
 
+		if(HAS_TRAIT(I, TRAIT_TWIRLING))
+			continue
 		var/mutable_appearance/inhand_overlay
 		var/mutable_appearance/behindhand_overlay
 		if(I.experimental_inhand && !hide_experimental)
