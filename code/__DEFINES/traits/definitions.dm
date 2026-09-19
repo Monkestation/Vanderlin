@@ -347,6 +347,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_AI_MOVEMENT_HALTED "ai_movement_halted"
 ///do we have arcyne momentum
 #define TRAIT_ARCYNE_MOMENTUM "arcyne_momentum"
+///blood magic version of momentum binding, but doesn't have momentum mechanics
+#define TRAIT_BLOOD_BIND "blood_bind"
 
 /// Trait given to a living mob and any observer mobs that stem from them if they suicide.
 /// For clarity, this trait should always be associated/tied to a reference to the mob that suicided- not anything else.

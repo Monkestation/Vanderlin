@@ -82,6 +82,8 @@
 	var/base_tick = 0.5
 	var/intensity = 1
 	var/range = 10
+	var/can_heal_damage = FALSE
+	var/heal_damage_amount = 0.5
 	var/datum/beam/transfer_beam
 
 /datum/status_effect/debuff/blood_harvest/on_creation(mob/living/new_owner, duration_override, mob/living/caster, potency)
@@ -97,7 +99,7 @@
 
 /datum/status_effect/debuff/blood_harvest/on_remove()
 	. = ..()
-	to_chat(owner, span_notice("I've escaped the reaving!"))
+	to_chat(owner, span_notice("I've escaped the blood harvest!"))
 	owner.remove_filter("filter_blood_harvest")
 	qdel(transfer_beam)
 
@@ -138,6 +140,7 @@
 	status_victim.adjust_blood_volume(-floored_damage)
 	our_debuffer.adjust_stamina(-floored_damage)
 	our_debuffer.adjust_energy(-floored_damage)
+	our_debuffer.heal_overall_damage(heal_damage_amount, heal_damage_amount)
 	status_victim.adjust_blood_volume(floored_damage, maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 
 	if(!transfer_beam)

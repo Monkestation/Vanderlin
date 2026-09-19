@@ -89,6 +89,7 @@
 /datum/action/cooldown/spell/status/blood_choke/herald
 	name = "Herald's Grasp"
 	learnable = FALSE
+	invocation = "I will take the air from your lungs!!"
 	status_effect = /datum/status_effect/debuff/blood_choke/herald
 	cooldown_time = 2 MINUTES
 	spell_cost = 300

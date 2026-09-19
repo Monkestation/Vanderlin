@@ -101,9 +101,9 @@
 	cooldown_time = 15 SECONDS
 	spell_cost = 100
 	base_healing = 20
-	wound_modifier = 0.8
+	wound_modifier = 1
 
-	invocation_type = INVOCATION_WHISPER
+	invocation_type = INVOCATION_SHOUT
 	invocation = "I am their Herald, I will not fall!"
 
 /datum/action/cooldown/spell/blood_healing/herald/is_valid_target(atom/cast_on)

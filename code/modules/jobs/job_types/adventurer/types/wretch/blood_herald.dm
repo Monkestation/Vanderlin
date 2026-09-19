@@ -1,6 +1,6 @@
 /datum/attribute_holder/sheet/job/blood_herald
 	raw_attribute_list = list(
-		STAT_STRENGTH = 3,
+		STAT_STRENGTH = 5,
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 2,
 		STAT_INTELLIGENCE = 2,
@@ -69,6 +69,8 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_BATTLE_READY,
 		TRAIT_NOPAINSTUN,
+		TRAIT_CRITICAL_RESISTANCE,
+		TRAIT_THIEFSENSE,
 	)
 
 	languages = list(
@@ -77,6 +79,8 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/status/blood_sight/herald,
+		/datum/action/cooldown/spell/blood_bind,
+		/datum/action/cooldown/spell/recall_weapon/blood,
 		/datum/action/cooldown/spell/blood_healing/herald,
 		/datum/action/cooldown/spell/status/blood_mark/herald,
 		/datum/action/cooldown/spell/status/blood_choke/herald,
@@ -90,6 +94,8 @@
 	spawned.hud_used?.set_bloody_bloodpool()
 	spawned.maxbloodpool += 1000
 	spawned.set_bloodpool(2500)
+
+	spawned.AddComponent(/datum/component/violent_death)
 
 	for(var/datum/mind/found_mind in get_minds(JOB_ADMIN_BLOOD_SORCERER))
 		spawned.mind?.share_identities(found_mind)
@@ -123,7 +129,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/whip)
 		if("Handclaws")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/claws)
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/handclaw/steel/bloodsteel, ITEM_SLOT_BELT_L, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/handclaw/steel/bloodsteel, ITEM_SLOT_BELT_R, TRUE)
 
 
 /datum/outfit/wretch/blood_herald
@@ -137,7 +143,6 @@
 	ring = /obj/item/clothing/ring/rubybs
 	belt = /obj/item/storage/belt/leather/black
 	backl = /obj/item/storage/backpack/satchel/black
-	backr = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
 	beltl = /obj/item/weapon/knife/dagger/bloodsteel
 	backpack_contents = list(
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,

@@ -21,6 +21,7 @@
 
 	spell_impact_intensity = SPELL_IMPACT_NONE
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
+	var/status_to_check = /datum/status_effect/buff/arcyne_momentum
 
 /datum/action/cooldown/spell/recall_weapon/cast(atom/cast_on)
 	. = ..()
@@ -28,7 +29,7 @@
 	if(!istype(H))
 		return FALSE
 
-	var/datum/status_effect/buff/arcyne_momentum/M = H.has_status_effect(/datum/status_effect/buff/arcyne_momentum)
+	var/datum/status_effect/buff/arcyne_momentum/M = H.has_status_effect(status_to_check)
 	var/obj/item/bound_weapon = M?.bound_weapon
 
 	if(!bound_weapon || QDELETED(bound_weapon))
@@ -53,7 +54,9 @@
 		return FALSE
 
 	playsound(weapon_turf, 'sound/magic/blink.ogg', 30, TRUE)
-	weapon_turf.visible_message(span_notice("[bound_weapon] vanishes in a flash of arcyne light."))
+
+	var/blood = required_form == FORM_BLOOD
+	weapon_turf.visible_message(span_notice("[bound_weapon] vanishes in a flash of [blood ? "bloody" : "arcyne"] light."))
 
 	if(!H.put_in_hands(bound_weapon))
 		bound_weapon.forceMove(get_turf(H))
@@ -64,3 +67,23 @@
 	playsound(get_turf(H), 'sound/magic/blink.ogg', 40, TRUE)
 	H.visible_message(span_notice("[bound_weapon] materializes in [H]'s hand."))
 	return TRUE
+
+/datum/action/cooldown/spell/recall_weapon/blood
+	name = "Recall Blood Weapon"
+	desc = "Recall your bound weapon to your hand from a nearby pool of blood."
+
+	required_form = FORM_BLOOD
+	required_technique = TECHNIQUE_IMBUE
+
+	spell_cost = 100
+
+	invocation = "Return to me!"
+	invocation_type = INVOCATION_SHOUT
+
+/datum/action/cooldown/spell/recall_weapon/blood/before_cast(atom/cast_on)
+	. = ..()
+	for(var/turf/turf in range(3, owner))
+		if(locate(/obj/effect/decal/cleanable/blood) in turf.contents)
+			return .
+	to_chat(owner, span_warning("There is no blood to draw the weapon from."))
+	return . | SPELL_CANCEL_CAST

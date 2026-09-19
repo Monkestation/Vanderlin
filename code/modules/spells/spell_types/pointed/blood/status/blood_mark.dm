@@ -62,6 +62,8 @@
 	name = "Blood Branding"
 	modes = list(BLOOD_MARK_HERALD)
 	learnable = FALSE
+	invocation_type = INVOCATION_SHOUT
+	invocation = "The end is coming for you!"
 
 /datum/action/cooldown/spell/status/blood_mark/proc/empower()
 	modes = empowered_modes

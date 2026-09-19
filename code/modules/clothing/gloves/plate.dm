@@ -65,7 +65,7 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
-	armor_type = /datum/armor/gloves/plate/good
+	armor_type = /datum/armor/gloves/plate/blacksteel
 	item_weight = 1.65 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 	max_integrity = INTEGRITY_OLD_BLACKSTEEL

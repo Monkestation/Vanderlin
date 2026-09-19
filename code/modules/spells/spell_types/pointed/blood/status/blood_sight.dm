@@ -49,6 +49,7 @@
 /datum/action/cooldown/spell/status/blood_sight/herald
 	name = "Herald's Senses"
 	learnable = FALSE
+	invocation = "Shadows, grant me sight!"
 
 /datum/action/cooldown/spell/status/blood_sight/herald/is_valid_target(atom/cast_on)
 	. = ..()
