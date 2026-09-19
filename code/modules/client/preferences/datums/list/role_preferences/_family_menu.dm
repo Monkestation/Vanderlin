@@ -24,6 +24,7 @@
 	var/family_mode = prefs.read_preference(/datum/preference/choiced/family_mode) || FAMILY_NONE
 	var/setspouse = prefs.read_preference(/datum/preference/text/setspouse) || ""
 	var/setchild  = prefs.read_preference(/datum/preference/text/setchild)  || ""
+	var/setsibling = prefs.read_preference(/datum/preference/text/setsibling) || ""
 	var/setparent = prefs.read_preference(/datum/preference/text/setparent) || ""
 	var/was_divorced = prefs.read_preference(/datum/preference/toggle/was_divorced) || FALSE
 	var/gender_pref = prefs.read_preference(/datum/preference/choiced/gender_choice) || ANY_GENDER
@@ -77,6 +78,7 @@
 		"family_mode" = family_mode,
 		"setspouse" = setspouse,
 		"setchild"  = setchild,
+		"setsibling" = setsibling,
 		"setparent" = setparent,
 		"was_divorced" = was_divorced,
 		"wants_adoption" = wants_adoption,
@@ -232,4 +234,20 @@
 			prefs.write_preference(/datum/preference/text/setparent, "")
 			return TRUE
 
+		if("edit_setsibling")
+			var/new_name = tgui_input_text(
+				owner,
+				"Enter the exact character name of your designated sibling, or leave blank to clear.",
+				"Designated Sibling",
+				prefs.read_preference(/datum/preference/text/setsibling),
+				MAX_NAME_LEN,
+			)
+			if(new_name == null)
+				return FALSE
+			prefs.write_preference(/datum/preference/text/setsibling, length(new_name) ? new_name : "")
+			return TRUE
+
+		if("clear_setsibling")
+			prefs.write_preference(/datum/preference/text/setsibling, "")
+			return TRUE
 	return FALSE
