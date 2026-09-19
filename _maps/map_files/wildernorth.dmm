@@ -127,9 +127,6 @@
 /obj/item/reagent_containers/powder/salt,
 /turf/open/floor/naturalstone,
 /area/outdoors/mountains/anvil/snowyforest)
-"eT" = (
-/turf/closed/basic,
-/area/outdoors/bog/south/west)
 "fO" = (
 /turf/open/water/river,
 /area/outdoors/mountains/anvil/snowyforest)
@@ -15577,7 +15574,7 @@ Wa
 Qz
 jL
 jL
-jL
+Qz
 Qz
 Qz
 Wa
@@ -15778,7 +15775,7 @@ rD
 Wa
 Wa
 XV
-eT
+Wa
 Qz
 Qz
 Qz
