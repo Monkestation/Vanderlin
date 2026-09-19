@@ -46,7 +46,7 @@
 	/// Ideally a mulitple of 5 so you can actually hit it with containers
 	var/powder_required = 5
 	/// Delay before firing after pulling trigger (Find a way to move this up and not sleep)
-	var/trigger_delay = 0.5 SECONDS
+	var/trigger_delay = 0.2 SECONDS
 	// Currently there is no "matchlock" or similar weapons, change this var if that happens
 	/// If the striker is cocked into the firing position
 	var/cocked = FALSE
