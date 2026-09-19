@@ -72,6 +72,7 @@
 	name = "Recall Blood Weapon"
 	desc = "Recall your bound weapon to your hand from a nearby pool of blood."
 
+	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_IMBUE
 

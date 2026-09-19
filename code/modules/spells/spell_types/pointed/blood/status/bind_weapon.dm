@@ -10,11 +10,12 @@
 	click_to_activate = FALSE
 	self_cast_possible = TRUE
 
+	spell_type = SPELL_BLOOD
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_IMBUE
 	spell_cost = 100
 
-	invocation = "Vinculum Arcanum."
+	invocation = "Vinculum Caedis."
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = FALSE
