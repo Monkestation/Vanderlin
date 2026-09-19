@@ -135,6 +135,7 @@
 /datum/outfit/wretch/blood_herald
 	name = "Blood Herald (Wretch)"
 	head = /obj/item/clothing/head/helmet/visored/blkknight/bloodsteel
+	neck = /obj/item/clothing/neck/chaincoif/bloodsteel
 	armor = /obj/item/clothing/armor/plate/blkknight/bloodsteel
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/plate/blk/bloodsteel
@@ -215,5 +216,19 @@
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic
 
 /obj/item/clothing/pants/platelegs/blk/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
+/obj/item/clothing/neck/chaincoif/bloodsteel
+	name = "bloodsteel chain coif"
+	desc = "A coif made of interwoven bloodsteel rings, made to protect against arrows and blades. \
+			Generally used as padding, but serviceable enough on its own."
+	color = "#ff6066"
+	armor_type = /datum/armor/neck/maille/bloodsteel
+	smeltresult = null
+	melt_amount = 100
+	melting_material = /datum/material/bloodsteel
+
+/obj/item/clothing/neck/chaincoif/bloodsteel/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/bloodcurse)

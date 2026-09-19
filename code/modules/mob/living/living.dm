@@ -1325,6 +1325,14 @@
 		stop_attack(FALSE)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_RESIST, src)
+
+	if(has_status_effect(/datum/status_effect/debuff/blood_choke/herald))
+		to_chat(src, span_bloody("I attempt to free myself from the grip of blood magic."))
+		if(do_after(src, 3.5 SECONDS, src))
+			to_chat(src, span_bloody("I successfully escape death's grasp!"))
+			remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
+		return
+
 	//resisting grabs (as if it helps anyone...)
 	if(!HAS_TRAIT(src, TRAIT_RESTRAINED) && pulledby)
 		log_combat(src, pulledby, "resisted grab")

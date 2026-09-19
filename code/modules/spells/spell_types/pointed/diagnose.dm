@@ -28,7 +28,6 @@
 	cast_range = 4
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/holy
 
 	cooldown_time = 5 SECONDS

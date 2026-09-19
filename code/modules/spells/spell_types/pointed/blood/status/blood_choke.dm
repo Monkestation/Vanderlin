@@ -65,15 +65,15 @@
 // ##########################################################################################
 
 /datum/status_effect/debuff/blood_choke/herald
-	id = "blood_choke_deb"
+	id = "blood_choke_herald_deb"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/herald_grip
 	duration = 3 MINUTES
 	tick_interval = 2 SECONDS
-	damage_per_tick = 10
+	damage_per_tick = 3
 
 /atom/movable/screen/alert/status_effect/debuff/herald_grip
 	name = "Blood Grasp"
-	desc = span_bloody("I am being throttled by dark magicks, I need to free myself!")
+	desc = span_bloody("I am being throttled by dark magicks, I need to free myself!<br>CLICK TO RESIST!")
 	icon_state = "stressinsane"
 	alert_group = ALERT_DEBUFF
 
@@ -93,3 +93,11 @@
 	status_effect = /datum/status_effect/debuff/blood_choke/herald
 	cooldown_time = 2 MINUTES
 	spell_cost = 300
+
+/datum/action/cooldown/spell/status/blood_choke/herald/cast(mob/living/cast_on)
+	. = ..()
+	if(!isliving(cast_on))
+		return
+
+	var/mob/living/carbon/target = cast_on
+	to_chat(target, span_userdanger("I am being choked by Blood Magic, I must RESIST!"))

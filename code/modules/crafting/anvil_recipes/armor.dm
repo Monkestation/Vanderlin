@@ -1241,6 +1241,10 @@
 	craftdiff = 6 // this is the good stuff
 	abstract_type = /datum/anvil_recipe/armor/bloodsteel
 
+/datum/anvil_recipe/armor/bloodsteel/chaincoif
+	name = "Bloodsteel Chain Coif"
+	created_item = /obj/item/clothing/neck/chaincoif/bloodsteel
+
 /datum/anvil_recipe/armor/bloodsteel/platechest
 	name = "Bloodsteel Plate Armor"
 	additional_items = list(/obj/item/ingot/bloodsteel = 3)
