@@ -534,7 +534,7 @@
 	var/obj/item/picked = pick(stealpos)
 	var/final_difficulty = picked.pickpocket_difficulty
 	if(thief.zone_selected == BODY_ZONE_PRECISE_NECK)
-		final_difficulty = max(final_difficulty + 1, SKILL_RANK_LEGENDARY)
+		final_difficulty = min(final_difficulty + 1, SKILL_RANK_LEGENDARY)
 
 	if(HAS_TRAIT(picked, TRAIT_CANT_BE_STOLEN))
 		exp_to_gain /= 2
@@ -584,7 +584,7 @@
 	return TRUE
 
 /mob/living/proc/jump_action(atom/A)
-	if(HAS_TRAIT(src, TRAIT_IMMERSED))
+	if(HAS_TRAIT(src, TRAIT_IMMERSED) && !HAS_TRAIT(src, TRAIT_SWIMMER))
 		to_chat(src, span_warning("I can't jump while floating."))
 		return
 

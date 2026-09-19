@@ -670,6 +670,7 @@
 	desc = "A rapier as swift as the inquisitors of the Ordo Venatari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
 	item_weight = 700 GRAMS
 	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/rapier/dec
 	name = "decorated rapier"
@@ -998,6 +999,7 @@
 	desc = "A horrid sword with a silvered grip, a jeweled hilt and a honed blade; a design unfit for a true paladin."
 	color = CLOTHING_SOOT_BLACK
 	item_weight = 1.4 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious
 
 /obj/item/weapon/sword/long/vlord // this sprite is a one handed sword, not a longsword.
 	icon_state = "vlord"
@@ -1008,6 +1010,7 @@
 	static_price = TRUE
 	item_weight = 1.6 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/vampire
 
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
 	. = ..()
@@ -1126,6 +1129,7 @@
 	desc = "A balanced silver blade, favoured by both the Ordo Benetarus and the Ordo Venetari. May it carve a path through the Unholy, in honour and rememberance of Psydon's sacrifice."
 	item_weight = 1.5 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/long/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -1238,6 +1242,7 @@
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWDLONG_CHOP)
 	item_weight = 2.5 KILOGRAMS
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/long/greatsword/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -1259,6 +1264,7 @@
 	item_weight = 2.5 KILOGRAMS
 	smeltresult = /obj/item/ingot/silverblessed
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/long/broadsword/psy/getonmobprop(tag)
 	. = ..()
@@ -1794,7 +1800,7 @@
 
 /obj/item/weapon/sword/katana/mulyeog/rumacaptain
 	name = "samjeongdo"
-	desc = "A gold-stained with cloud patterns on the groove. One of a kind."
+	desc = "A gold-stained blade with cloud patterns on the groove. One of a kind."
 	icon_state = "eastsword3"
 	force = DAMAGE_SWORD + 3
 	wdefense = GREAT_PARRY

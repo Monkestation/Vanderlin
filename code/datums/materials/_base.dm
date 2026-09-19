@@ -21,3 +21,5 @@
 	var/list/traits = list()
 	///how hard our material is
 	var/hardness
+	///if this is set when this material exists on something this examine type is applied onto it
+	var/material_examine_hint
