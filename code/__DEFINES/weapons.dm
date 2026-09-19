@@ -69,6 +69,7 @@
 #define GOOD_PARRY 3
 #define GREAT_PARRY 4
 #define ULTMATE_PARRY 5
+#define SHIELD_PARRY 8
 
 //wbalance defines
 #define VERY_EASY_TO_DODGE -2
