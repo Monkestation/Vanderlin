@@ -1,28 +1,35 @@
-/datum/Heap
+/datum/heap
 	var/list/L
 	var/cmp
 
-/datum/Heap/New(compare)
+/datum/heap/New(compare)
 	L = new()
 	cmp = compare
 
-/datum/Heap/proc/IsEmpty()
-	return !L.len
+/datum/heap/Destroy(force, ...)
+	for(var/i in L) // because this is before the list helpers are loaded
+		qdel(i)
+	L = null
+	return ..()
 
-/datum/Heap/proc/Insert(atom/A)
+/datum/heap/proc/is_empty()
+	return !length(L)
+
+/datum/heap/proc/insert(atom/A)
 	L[++L.len] = A
-	Swim(length(L))
+	swim(length(L))
 
-/datum/Heap/proc/Pop()
-	if(!L.len)
-		return null
+/datum/heap/proc/pop()
+	if(!length(L))
+		return 0
 	. = L[1]
-	L[1] = L[L.len]
-	L.Cut(L.len)
-	if(L.len)
-		Sink(1)
 
-/datum/Heap/proc/Swim(index)
+	L[1] = L[length(L)]
+	L.Cut(length(L))
+	if(length(L))
+		sink(1)
+
+/datum/heap/proc/swim(index)
 	while(index > 1)
 		var/parent = round(index * 0.5)
 		if(call(cmp)(L[index], L[parent]) <= 0)
@@ -30,36 +37,35 @@
 		L.Swap(index, parent)
 		index = parent
 
-/datum/Heap/proc/Sink(index)
-	var/length = L.len
-	var/max_iterations = length
+//Get a node down to its right position in the heap
+/datum/heap/proc/sink(index)
+	var/g_child = get_greater_child(index)
 
-	while(max_iterations > 0)
-		var/left_child = index * 2
-		var/right_child = index * 2 + 1
-		var/largest = index
+	while(g_child > 0 && (call(cmp)(L[index],L[g_child]) < 0))
+		L.Swap(index,g_child)
+		index = g_child
+		g_child = get_greater_child(index)
 
-		if(left_child <= length && call(cmp)(L[left_child], L[largest]) > 0)
-			largest = left_child
+//Returns the greater (relative to the comparison proc) of a node children
+//or 0 if there's no child
+/datum/heap/proc/get_greater_child(index)
+	if(index * 2 > length(L))
+		return 0
 
-		if(right_child <= length && call(cmp)(L[right_child], L[largest]) > 0)
-			largest = right_child
+	if(index * 2 + 1 > length(L))
+		return index * 2
 
-		if(largest == index)
-			break
+	if(call(cmp)(L[index * 2],L[index * 2 + 1]) < 0)
+		return index * 2 + 1
+	else
+		return index * 2
 
-		L.Swap(index, largest)
-		index = largest
-		max_iterations--
-
-	if(max_iterations <= 0)
-		stack_trace("Potential infinite loop in Heap Sink method")
-
-/datum/Heap/proc/ReSort(atom/A)
+//Replaces a given node so it verify the heap condition
+/datum/heap/proc/resort(A)
 	var/index = L.Find(A)
-	if(index)
-		Swim(index)
-		Sink(index)
 
-/datum/Heap/proc/List()
+	swim(index)
+	sink(index)
+
+/datum/heap/proc/List()
 	return L.Copy()
