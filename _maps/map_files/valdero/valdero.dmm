@@ -13410,9 +13410,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/farm)
 "YW" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/church/graveyard)
 "YX" = (
