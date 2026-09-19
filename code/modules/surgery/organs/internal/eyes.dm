@@ -32,8 +32,8 @@
 	current_blood = 5
 	blood_req = 0.5
 	oxygen_req = 0.5
-	nutriment_req = 0.075
-	hydration_req = 0.075
+	nutriment_req = 0.002
+	hydration_req = 0.002
 
 	var/sight_flags = 0
 	var/see_in_dark = SEE_IN_DARK_DEFAULT_EYES
