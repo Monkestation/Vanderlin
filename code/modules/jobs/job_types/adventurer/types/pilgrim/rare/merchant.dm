@@ -1,8 +1,11 @@
 /datum/attribute_holder/sheet/job/pilgrim/merchant
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 2,
-		STAT_SPEED = 1,
+		STAT_SPEED = 2,
 		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/cooking = 10,
@@ -12,6 +15,8 @@
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/knives = list(20, 20),
+		/datum/attribute/skill/combat/wrestling = list(20, 20),
+		/datum/attribute/skill/combat/unarmed = list(10, 10),
 	)
 
 /datum/job/advclass/pilgrim/rare/merchant

@@ -2,15 +2,17 @@
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 2,
 		STAT_PERCEPTION = 2,
+		STAT_FORTUNE = 2,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/misc/swimming = 50,
 		/datum/attribute/skill/craft/cooking = 30,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/fishing = 50,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/reading = 10
 	)
 
@@ -18,15 +20,17 @@
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 2,
 		STAT_PERCEPTION = 2,
+		STAT_FORTUNE = 2,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/misc/swimming = 50,
 		/datum/attribute/skill/craft/cooking = 30,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/fishing = 60,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/combat/polearms = 10
 	)
