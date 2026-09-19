@@ -57,10 +57,12 @@
 #define BE_SPECIAL_TRAIT "be-special"
 /// trait associated with triumph buys
 #define TRIUMPH_TRAIT "triumph"
-/// trait assoicated with quirks
+/// trait associated with quirks
 #define QUIRK_TRAIT "quirk"
-/// trait assoicated with personal objectives
+/// trait associated with personal objectives
 #define OBJECTIVE_TRAIT "objective"
+/// trait associated with spawn protection
+#define HUGBOX_TRAIT	"hugbox"
 
 // unique trait sources, still defines
 #define TRAIT_BESTIALSENSE "bestial-sense"
