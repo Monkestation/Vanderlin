@@ -13,7 +13,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/grant_title)
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ROYALTY
 	outfit = /datum/outfit/hand
 	advclass_cat_rolls = list(CTAG_HAND = 20)

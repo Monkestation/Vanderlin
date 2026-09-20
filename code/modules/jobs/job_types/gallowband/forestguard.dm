@@ -7,7 +7,6 @@
 	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = ALL_AGES_LIST

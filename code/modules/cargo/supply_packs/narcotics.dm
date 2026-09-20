@@ -30,6 +30,11 @@
 	cost = 12
 	contains = /obj/item/reagent_containers/powder/ozium
 
+/datum/supply_pack/narcotics/spider
+	name = "Venom Gland"
+	cost = 50
+	contains = /obj/item/reagent_containers/spidervenom_inert
+
 /datum/supply_pack/narcotics/moondust
 	name = "Moon Dust"
 	cost = 30

@@ -37,7 +37,6 @@
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_FORWARDEN
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)

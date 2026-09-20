@@ -10,7 +10,6 @@
 	allowed_ages = list(AGE_CHILD)
 	total_positions = 12
 	spawn_positions = 12
-	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'

@@ -284,3 +284,6 @@
   - map: Fixed heir secret passage on Vanderlin being linked.
   - rscdel: Removed Skeleton Be-Special.
   - bugfix: You now require arcyne skill to invoke magic runes.
+2026-09-20:
+  SpeedofDeath118:
+  - rscadd: Added the ornate tunic and ornate dress to the Loadout menu.

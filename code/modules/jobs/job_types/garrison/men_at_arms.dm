@@ -13,7 +13,6 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 4
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NO_KOBOLD
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)

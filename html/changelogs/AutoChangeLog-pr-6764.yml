@@ -1,0 +1,5 @@
+author: "Gatsby229"
+delete-after: True
+changes:
+  - rscadd: "Added several neurotoxins."
+  - rscadd: "Added god/lux based poisons, each with strong effects."

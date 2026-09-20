@@ -324,7 +324,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 		if(JOB_UNAVAILABLE_ACCOUNTAGE)
 			return "Your account is not old enough for [jobtitle]."
 		if(JOB_UNAVAILABLE_LASTCLASS)
-			return "You have played [jobtitle] recently."
+			return "You have played [jobtitle] too recently."
 		if(JOB_UNAVAILABLE_WHITELIST)
 			return "[jobtitle] is whitelisted."
 		if(JOB_UNAVAILABLE_JOB_COOLDOWN)
@@ -414,7 +414,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	if(length(job.allowed_ages) && !(player_prefs.read_preference(/datum/preference/choiced/age) in job.allowed_ages))
 		return JOB_UNAVAILABLE_AGE
 
-	if((player_prefs.lastclass == job.title) && !job.bypass_lastclass)
+	if((player_prefs.lastclass == job.title) && job.block_sequential_rounds)
 		return JOB_UNAVAILABLE_LASTCLASS
 
 	if((job.job_flags & JOB_REQUIRE_WHITELIST) && !client?.is_whitelisted(initial(job.title)))

@@ -1,0 +1,5 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscdel: "Disables Grandmaster Templar"
+  - code_imp: "Renamed a variable for whether you can play a job back-to-back rounds."
