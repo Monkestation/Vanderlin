@@ -240,7 +240,7 @@
 	name = "City Watch Archer"
 	shirt = /obj/item/clothing/armor/gambeson/heavy/colored/brown
 	pants = /obj/item/clothing/pants/trou
-	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
+	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
 	shoes = /obj/item/clothing/shoes/boots/leather
 	head = /obj/item/clothing/head/helmet/watchmen
 	neck = /obj/item/clothing/neck/highcollier/iron

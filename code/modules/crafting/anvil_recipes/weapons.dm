@@ -36,7 +36,7 @@
 /datum/anvil_recipe/weapons/copper/caxe
 	name = "Copper Hatchet"
 	additional_items = list(/obj/item/ingot/copper = 1)
-	created_item = /obj/item/weapon/axe/copper
+	created_item = /obj/item/weapon/axe/hatchet/copper
 
 /datum/anvil_recipe/weapons/copper/cbludgeon
 	name = "Copper Bludgeon"

@@ -181,7 +181,7 @@
 			var/obj/item/weapon/sword/short/iron/P = new()
 			equipped_human.put_in_hands(P, forced = TRUE)
 		if (2)
-			var/obj/item/weapon/axe/copper/P = new()
+			var/obj/item/weapon/axe/hatchet/copper/P = new()
 			equipped_human.put_in_hands(P, forced = TRUE)
 		if (3)
 			var/obj/item/weapon/mace/P = new()

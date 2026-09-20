@@ -3188,7 +3188,7 @@
 /obj/structure/table/wood/counter{
 	dir = 1
 	},
-/obj/item/weapon/axe/copper{
+/obj/item/weapon/axe/hatchet/copper{
 	pixel_y = 1;
 	pixel_x = 1
 	},
@@ -8096,10 +8096,10 @@
 /area/indoors/town/church/inquisition)
 "aNe" = (
 /obj/structure/rack,
-/obj/item/weapon/axe/copper{
+/obj/item/weapon/axe/hatchet/copper{
 	pixel_y = -9
 	},
-/obj/item/weapon/axe/copper{
+/obj/item/weapon/axe/hatchet/copper{
 	pixel_y = 1;
 	pixel_x = 1
 	},
@@ -9530,8 +9530,8 @@
 /area/indoors/mountains/anvil/upperkeep)
 "aTU" = (
 /obj/structure/rack,
-/obj/item/weapon/axe/copper,
-/obj/item/weapon/axe/copper{
+/obj/item/weapon/axe/hatchet/copper,
+/obj/item/weapon/axe/hatchet/copper{
 	pixel_y = -9
 	},
 /turf/open/floor/cobble,
@@ -9624,7 +9624,7 @@
 /area/indoors/mountains/anvil/keep)
 "aUn" = (
 /obj/structure/rack,
-/obj/item/weapon/axe/copper,
+/obj/item/weapon/axe/hatchet/copper,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aUo" = (
