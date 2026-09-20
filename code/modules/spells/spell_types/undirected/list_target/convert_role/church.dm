@@ -15,7 +15,13 @@
 		return
 
 	if(cast_on.patron.type in ALL_PROFANE_PATRONS)
-		to_chat(owner, span_danger("The Ten glare upon you in fury. CHILD, [cast_on.real_name] serves the Inhumen, do not disgrace Our name."))
+		to_chat(owner, span_danger("The Ten glare upon you in fury. CHILD, [cast_on.real_name] serves the Inhumen, do not disgrace Our name!"))
+		living_owner.adjust_divine_fire_stacks(50) // Half of the damage that you get if you say a profane word, hurts alot.
+		living_owner.IgniteMob()
+		return // Stop the recruitment entirely
+
+	if(cast_on.patron.type in ALL_ARCHDEVIL_PATRONS)
+		to_chat(owner, span_danger("The Ten glare upon you in fury. CHILD, [cast_on.real_name] serves the Archdevils, do not disgrace Our name!"))
 		living_owner.adjust_divine_fire_stacks(50) // Half of the damage that you get if you say a profane word, hurts alot.
 		living_owner.IgniteMob()
 		return // Stop the recruitment entirely
