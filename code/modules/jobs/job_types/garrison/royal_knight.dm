@@ -16,7 +16,7 @@
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	starting_wage = 40
 
 	advclass_cat_rolls = list(CTAG_ROYALKNIGHT = 20)
@@ -142,9 +142,12 @@
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	wrists = /obj/item/storage/keyring/manorguard
+	backl = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1
+	)
 	belt = /obj/item/storage/belt/leather/steel
 	beltr = /obj/item/weapon/sword/arming
-	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
 
 /datum/outfit/royalknight/post_equip(mob/living/carbon/human/H, visuals_only = FALSE)

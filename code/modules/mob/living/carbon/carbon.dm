@@ -1575,6 +1575,7 @@
 		B.skeletonize(lethal)
 	update_body_parts()
 	REMOVE_TRAIT(src, TRAIT_DEAF, NO_EARS)
+	mob_biotypes |= MOB_UNDEAD
 
 /// grant undead eyes to a carbon mob.
 /mob/living/carbon/proc/grant_undead_eyes()

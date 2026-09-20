@@ -3,6 +3,7 @@ GLOBAL_LIST_EMPTY(lord_decrees)
 GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 GLOBAL_LIST_EMPTY(court_agents)
 GLOBAL_LIST_EMPTY(ex_court_agents)
+GLOBAL_LIST_EMPTY(agent_rings)
 
 #define MODE_NONE "None"
 #define MODE_MAKE_ANNOUNCEMENT "Make Announcement"

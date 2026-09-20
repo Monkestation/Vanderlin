@@ -24,6 +24,7 @@
 	grid_width = 32
 	item_weight = 800 GRAMS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	examine_highlight_type = /datum/examine_highlight/royal_court/rod
 
 /obj/item/weapon/lordscepter/Initialize()
 	. = ..()
@@ -139,6 +140,7 @@
 	melting_material = null
 	melt_amount = 0
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	examine_highlight_type = /datum/examine_highlight/divine/priest
 
 /datum/intent/priest_smite
 	name = "smite"
@@ -390,6 +392,7 @@
 	name = "\proper anguish"
 	desc = "An exotic weapon unfamiliar to Grenzelhoft, but taken and given blessings to fit in the Armoury of Psydon. May its blows cause naught but anguish to those who dare raise up arms against you."
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/katar/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -495,6 +498,7 @@
 	name = "\proper confidence"
 	desc = "Silver knuckles, fashioned in the iconography of Psydon. May your strikes be confident and true, and done in His name."
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/knuckles/psydon/relic/Initialize(mapload)
 	. = ..()							//+5 force, +100 int, +1 def, make silver

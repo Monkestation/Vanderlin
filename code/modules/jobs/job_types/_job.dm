@@ -237,7 +237,9 @@
 	var/static/list/actors_list_blacklist = list(
 		/datum/job/adventurer,
 		/datum/job/pilgrim,
+		/datum/job/courtagent,
 		/datum/job/skeleton/zizoid,
+		/datum/job/advclass/wretch,
 	)
 
 	/// List of whitelisted ckeys. This is protected from varedits and should not be renamed.
@@ -448,12 +450,15 @@
 		spawned.cmode_music = cmode_music
 
 	var/type_check
+	var/parent_type_check
 	if(parent_job)
 		type_check = parent_job.type
+		parent_type_check = parent_job.parent_type
 		used_title = parent_job.get_informed_title(spawned)
 	else
 		type_check = type
-	if(!(type_check in actors_list_blacklist)) //don't show these.
+		parent_type_check = parent_type
+	if(!(type_check in actors_list_blacklist) && !(parent_type_check in actors_list_blacklist)) //don't show these.
 		GLOB.actors_list[spawned.mobid] = "[spawned.real_name] as [used_title]<BR>"
 
 	if(forced_flaw)
@@ -1078,12 +1083,7 @@
 
 	if(species.id == SPEC_ID_SNOW_ELF)
 		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
-		if(!tested || !(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | YOUNGFOLK)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
-			return FALSE
-
-	if(species.id == SPEC_ID_HALF_SNOW_ELF)
-		var/datum/job/tested = parent_job ? SSjob.GetJobType(parent_job) : src
-		if(!tested || !(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | APPRENTICES | YOUNGFOLK)) || tested.title == JOB_BUTLER || tested.title == JOB_TOMB_WARDEN || tested.title == JOB_MATRON)
+		if(!tested || !(tested.department_flag & (OUTSIDERS | PEASANTS | SERFS | YOUNGFOLK)))
 			return FALSE
 
 	return TRUE

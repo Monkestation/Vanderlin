@@ -74,6 +74,9 @@
 	// Defender's combat intent modifier
 	parry_modifier += rmb_intent?.def_bonus
 
+	if(HAS_TRAIT(src, TRAIT_EXPERT_PARRY))
+		parry_modifier += 2
+
 	// Attacker special bonuses
 	if(attacker.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/guidance))
 		parry_modifier -= 10
