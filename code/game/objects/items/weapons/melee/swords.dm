@@ -1465,6 +1465,7 @@
 	melt_amount = 200
 	sellprice = 0
 	item_weight = 2.5 KILOGRAMS
+	alt_intents = list()
 
 /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel/Initialize(mapload)
 	. = ..()

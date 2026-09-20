@@ -20,6 +20,10 @@
 
 	aoe_radius = 7
 
+	var/effect_range = 10
+	var/can_heal_damage = FALSE
+	var/heal_damage_amount = 0.5
+
 /datum/action/cooldown/spell/aoe/blood_harvest/feedback(had_targets)
 	if(!had_targets)
 		to_chat(owner, span_warning("There are no valid targets to reave."))
@@ -41,7 +45,7 @@
 		return
 	if(victim.has_faction(FACTION_BLOOD_MAGIC))
 		return
-	victim.apply_status_effect(/datum/status_effect/debuff/blood_harvest, null, owner, clamp(round(GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)), 1 , 3))
+	victim.apply_status_effect(/datum/status_effect/debuff/blood_harvest, null, owner, clamp(round(GET_MOB_SKILL_VALUE_OLD(owner, associated_skill)), 1 , 3), effect_range, can_heal_damage, heal_damage_amount)
 
 /datum/action/cooldown/spell/aoe/blood_harvest/invocation(mob/living/invoker)
 	//lists can be sent by reference, a string would be sent by value
@@ -86,8 +90,11 @@
 	var/heal_damage_amount = 0.5
 	var/datum/beam/transfer_beam
 
-/datum/status_effect/debuff/blood_harvest/on_creation(mob/living/new_owner, duration_override, mob/living/caster, potency)
+/datum/status_effect/debuff/blood_harvest/on_creation(mob/living/new_owner, duration_override, mob/living/caster, potency, effect_range, if_heal_damage, heal_damage_amt)
 	intensity = potency
+	range = effect_range
+	can_heal_damage = if_heal_damage
+	heal_damage_amount = heal_damage_amt
 	if(caster)
 		debuffer = WEAKREF(caster)
 	return ..()
@@ -139,7 +146,7 @@
 
 	status_victim.adjust_blood_volume(-floored_damage)
 	our_debuffer.adjust_stamina(-floored_damage)
-	our_debuffer.adjust_energy(-floored_damage)
+	our_debuffer.adjust_energy(floored_damage)
 	our_debuffer.heal_overall_damage(heal_damage_amount, heal_damage_amount)
 	status_victim.adjust_blood_volume(floored_damage, maximum = BLOOD_VOLUME_SAFE_MAXIMUM)
 
