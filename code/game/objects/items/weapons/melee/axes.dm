@@ -387,8 +387,9 @@
 	force = DAMAGE_AXE
 	force_wielded = 0
 	gripped_intents = null
-	alt_intents = list(DAZE_BASH, MACE_STRIKE, MACE_SMASH)//Has a hammer on the back of it, can be used to smash things
+	alt_intents = list(MACE_STRIKE, MACE_SMASH)//Has a hammer on the back of it, can be used to smash things
 	throwforce = DAMAGE_AXE_WIELD
+	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 200
@@ -399,6 +400,9 @@
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	sellprice = 25
 	item_weight = 1000 GRAMS
+
+	throw_speed = 3
+	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 60, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
 /obj/item/weapon/axe/hatchet/getonmobprop(tag)
 	. = ..()
@@ -425,6 +429,10 @@
 	melting_material = /datum/material/copper
 	sellprice = 15
 	item_weight = 700 GRAMS
+
+	throw_speed = 2
+	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 40, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+
 
 /obj/item/weapon/axe/hatchet/copper/getonmobprop(tag)
 	. = ..()
