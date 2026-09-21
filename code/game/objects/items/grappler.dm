@@ -172,10 +172,6 @@ Reel teleports the attached atom to the grabbed turf.
 					else if(!W.climbable)
 						success = FALSE
 						return success
-				for(var/obj/structure/fluff/railing/F in cont)
-					if(F)
-						success = TRUE
-						return success
 			else
 				success = FALSE
 				return success
