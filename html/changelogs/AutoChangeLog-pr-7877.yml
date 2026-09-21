@@ -1,0 +1,5 @@
+author: "SamuraiSpork"
+delete-after: True
+changes:
+  - balance: "Reduced cost of Blessed Bullion in Marque shop"
+  - code_imp: "Edited name of \"Extra Funding\" to 400 mammons instead of 80 silvers."
