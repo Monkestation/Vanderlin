@@ -335,7 +335,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	return "Error: Unknown job availability."
 
 //used for latejoining
-/mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE)
+/mob/dead/new_player/proc/IsJobUnavailable(rank, latejoin = FALSE, ignore_slots = FALSE)
 	if(QDELETED(src))
 		return JOB_UNAVAILABLE_GENERIC
 
@@ -374,7 +374,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 		if(world.time < GLOB.job_respawn_delays[ckey])
 			return JOB_UNAVAILABLE_JOB_COOLDOWN
 
-	if((job.current_positions >= job.total_positions) && job.total_positions != -1)
+	if(!ignore_slots && (job.current_positions >= job.total_positions) && job.total_positions != -1)
 		return JOB_UNAVAILABLE_SLOTFULL
 
 	if(is_banned_from(ckey, rank))
