@@ -21,6 +21,8 @@
 		#include "map_files/vanderlin/vanderlin.dmm"
 		#include "map_files/voyager/voyager.dmm"
 		#include "map_files/whitepalacepass/WhitePalacePass.dmm"
+		#include "map_files/wilder/wildernorth.dmm
+		#include "map_files/wilder/wildermiddletest.dmm
 	#endif
 	#ifdef ALL_TEMPLATES
 		#include "templates.dm"
