@@ -81,6 +81,7 @@
 	invocation = "Return to me!"
 	invocation_type = INVOCATION_SHOUT
 	status_to_check = /datum/status_effect/buff/blood_bound
+	associated_skill = /datum/attribute/skill/magic/blood
 
 /datum/action/cooldown/spell/recall_weapon/blood/before_cast(atom/cast_on)
 	. = ..()

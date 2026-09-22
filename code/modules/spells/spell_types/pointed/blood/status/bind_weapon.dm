@@ -14,6 +14,7 @@
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_IMBUE
 	spell_cost = 100
+	associated_skill = /datum/attribute/skill/magic/blood
 
 	invocation = "Vinculum Caedis."
 	invocation_type = INVOCATION_SHOUT
