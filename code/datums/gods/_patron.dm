@@ -37,6 +37,8 @@ GLOBAL_LIST_EMPTY(prayers)
 
 	///our traits thats applied by set_patron and removed when changed
 	var/list/added_traits
+	///languages granted by patronage
+	var/list/added_languages
 
 	///verbs applied by set_patron and removed when changed
 	var/list/added_verbs
@@ -62,12 +64,16 @@ GLOBAL_LIST_EMPTY(prayers)
 	return TRUE
 
 /datum/patron/proc/on_gain(mob/living/pious)
-	if(HAS_TRAIT(pious, TRAIT_DIVINE_CONVERT))
+	if(HAS_TRAIT(pious, TRAIT_CHANGED_PATRON))
 		return
 	for(var/trait in added_traits)
 		ADD_TRAIT(pious, trait, "[type]")
 	for(var/verb in added_verbs)
 		add_verb(pious, verb)
+	for(var/datum/language/to_learn as anything in added_languages)
+		if(!pious.has_language(to_learn))
+			pious.grant_language(to_learn)
+			ADD_TRAIT(pious, TRAIT_PATRON_LANGUAGE, to_learn)
 	if(pious.mind)
 		pious.mind.teach_crafting_recipe(added_blueprints)
 	else
@@ -80,6 +86,12 @@ GLOBAL_LIST_EMPTY(prayers)
 /datum/patron/proc/on_remove(mob/living/pious)
 	for(var/trait in added_traits)
 		REMOVE_TRAIT(pious, trait, "[type]")
+	//We forget the language only if patron is changed without conversion mechanics.
+	if(!HAS_TRAIT(pious, TRAIT_CHANGED_PATRON))
+		for(var/datum/language/to_forget as anything in added_languages)
+			if(HAS_TRAIT_FROM(pious, TRAIT_PATRON_LANGUAGE, to_forget))
+				pious.remove_language(to_forget)
+				REMOVE_TRAIT(pious, TRAIT_PATRON_LANGUAGE, to_forget)
 	for(var/verb in added_verbs)
 		remove_verb(pious, verb)
 	if(pious.mind)

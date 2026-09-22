@@ -2,6 +2,7 @@
 	abstract_type = /datum/patron/archdevil
 	associated_faith = /datum/faith/archdevil
 	drawbacks = "No 'god' can offer miraculous assistance."
+	added_languages = list(/datum/language/hellspeak)
 
 /datum/patron/archdevil/can_pray(mob/living/follower)
 	// Redefined this entire proc just to tell you:

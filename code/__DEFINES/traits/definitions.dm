@@ -528,6 +528,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RECOGNIZED "Recognized" // Given to famous migrants, pilgrims and adventurers, enable their title.
 #define TRAIT_FANATICAL "Fanatical" //Trait used for fanatical mobs who can bypass the excommunication(not the curses though.)
 
+
+#define TRAIT_CHANGED_PATRON "Changed Patron"
+#define TRAIT_PATRON_LANGUAGE "Patron Language"
+
 // Divine patron trait bonuses:
 #define TRAIT_SOUL_EXAMINE "Blessing of Necra"  //can check bodies to see if they have departed
 #define TRAIT_ROT_EATER "Blessing of Pestra" //can eat rotten food
@@ -545,7 +549,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SILVER_BLESSED "Silver Blessed"
 #define TRAIT_DIVINE_CENTRIST "Divine Centrist"
 #define TRAIT_DIVINE_SERVANT "Divine Servant"
-#define TRAIT_DIVINE_CONVERT "Divine Convert"
 #define TRAIT_LUNAR_ORDER "Member of the Lunar Order"
 #define TRAIT_DREAM_CAVE "Access to the Dream Cave"
 
