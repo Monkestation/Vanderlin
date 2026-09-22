@@ -296,3 +296,9 @@
   realforest2001:
   - rscdel: Disables Grandmaster Templar
   - code_imp: Renamed a variable for whether you can play a job back-to-back rounds.
+2026-09-22:
+  SamuraiSpork:
+  - balance: Reduced cost of Blessed Bullion in Marque shop
+  - code_imp: Edited name of "Extra Funding" to 400 mammons instead of 80 silvers.
+  realforest2001:
+  - bugfix: Heretic monarchs without the triumph no longer break roundstart.
