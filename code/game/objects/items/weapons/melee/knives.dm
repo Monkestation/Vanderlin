@@ -474,6 +474,7 @@
 	item_weight = 200 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	pickpocket_difficulty = SKILL_RANK_MASTER
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/weapon/knife/dagger/steel/inhumen/profane/examine(mob/user)
 	. = ..()
