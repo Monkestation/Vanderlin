@@ -720,6 +720,13 @@
 "AH" = (
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/snowyforest)
+"AR" = (
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth2-wildermid2_north";
+	aportalgoesto = "wildernorth2-wildermid2_mid"
+	},
+/turf/open/floor/grass/cold,
+/area/under/cave)
 "Bz" = (
 /obj/structure/flora/newtree/snow,
 /obj/structure/flora/newtree/snow,
@@ -794,6 +801,13 @@
 "DE" = (
 /obj/effect/decal/remains/cabbit,
 /turf/open/floor/naturalstone,
+/area/under/cave)
+"DH" = (
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth3-wildermid3_north";
+	aportalgoesto = "wildernorth3-wildermid3_mid"
+	},
+/turf/open/floor/grass/cold,
 /area/under/cave)
 "DM" = (
 /obj/effect/decal/cleanable/blood/old,
@@ -903,6 +917,9 @@
 /obj/effect/landmark/quest_spawner/medium,
 /turf/open/floor/dirt,
 /area/outdoors/bog/south/west)
+"GJ" = (
+/turf/closed/mineral/bedrock/cold,
+/area/outdoors/mountains/anvil/peak)
 "GM" = (
 /turf/closed/mineral/salt/cold,
 /area/under/cave)
@@ -971,8 +988,9 @@
 /turf/open/water/swamp/deep,
 /area/outdoors/bog/south/west)
 "IH" = (
-/obj/effect/landmark/hammer/dev_text{
-	name = "transition zone"
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth1-wildermid1_north";
+	aportalgoesto = "wildernorth1-wildermid1_mid"
 	},
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/peak)
@@ -1153,6 +1171,13 @@
 /obj/structure/flora/grass/tundra,
 /turf/open/floor/grass/cold,
 /area/outdoors/mountains/anvil/snowyforest)
+"OD" = (
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth2-wildermid2_north";
+	aportalgoesto = "wildernorth2-wildermid2_mid"
+	},
+/turf/open/floor/sand,
+/area/outdoors/mountains/anvil/snowyforest)
 "OE" = (
 /mob/living/simple_animal/hostile/retaliate/fox,
 /turf/open/floor/snow,
@@ -1212,6 +1237,10 @@
 "QV" = (
 /obj/effect/landmark/hammer/dev_text{
 	name = "transition zone"
+	},
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth3-wildermid3_north";
+	aportalgoesto = "wildernorth3-wildermid3_mid"
 	},
 /turf/open/floor/grass/cold,
 /area/under/cave)
@@ -1276,8 +1305,22 @@
 /obj/effect/landmark/hammer/dev_text{
 	name = "transition zone"
 	},
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth2-wildermid2_north";
+	aportalgoesto = "wildernorth2-wildermid2_mid"
+	},
 /turf/open/floor/sand,
 /area/outdoors/mountains/anvil/snowyforest)
+"SO" = (
+/obj/effect/landmark/hammer/dev_text{
+	name = "transition zone"
+	},
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth1-wildermid1_north";
+	aportalgoesto = "wildernorth1-wildermid1_mid"
+	},
+/turf/open/floor/snow/patchy,
+/area/outdoors/mountains/anvil/peak)
 "ST" = (
 /mob/living/simple_animal/hostile/retaliate/wolf,
 /turf/open/floor/naturalstone,
@@ -22446,7 +22489,7 @@ ka
 ka
 ka
 ka
-ka
+OD
 "}
 (105,1,1) = {"
 VU
@@ -22850,7 +22893,7 @@ Pp
 Pp
 Pp
 Pp
-ER
+AR
 "}
 (107,1,1) = {"
 VU
@@ -38606,7 +38649,7 @@ Pp
 Pp
 Pp
 Pp
-ER
+DH
 "}
 (185,1,1) = {"
 VU
@@ -39010,7 +39053,7 @@ Wh
 Pp
 Pp
 Pp
-ER
+DH
 "}
 (187,1,1) = {"
 VU
@@ -123245,9 +123288,9 @@ Yf
 Yf
 Yf
 Tx
-Tx
-Tx
-Tx
+RB
+RB
+GJ
 "}
 (4,1,4) = {"
 VU
@@ -123651,7 +123694,7 @@ Yf
 Yf
 Tx
 Tx
-IH
+SO
 "}
 (6,1,4) = {"
 VU
@@ -123853,7 +123896,7 @@ Yf
 Yf
 Tx
 Tx
-Tx
+IH
 "}
 (7,1,4) = {"
 VU

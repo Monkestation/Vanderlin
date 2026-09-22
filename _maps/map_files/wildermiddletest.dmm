@@ -511,6 +511,13 @@
 /obj/item/natural/stone,
 /turf/open/water/river,
 /area/outdoors/river)
+"tn" = (
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth2-wildermid2_mid";
+	aportalgoesto = "wildernorth2-wildermid2_north"
+	},
+/turf/open/floor/sand,
+/area/outdoors/wilderness)
 "tM" = (
 /obj/structure/flora/grass,
 /turf/closed/mineral/random/low_nonval,
@@ -640,6 +647,13 @@
 "yA" = (
 /obj/item/natural/stone,
 /turf/open/floor/grass/mixyel,
+/area/outdoors/wilderness)
+"yB" = (
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth2-wildermid2_mid";
+	aportalgoesto = "wildernorth2-wildermid2_north"
+	},
+/turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "yI" = (
 /obj/structure/flora/grass,
@@ -942,6 +956,13 @@
 /obj/structure/flora/grass/herb/random,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
+"Lj" = (
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth3-wildermid3_mid";
+	aportalgoesto = "wildernorth3-wildermid3_north"
+	},
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "LL" = (
 /obj/structure/flora/grass/bush_meagre,
 /obj/structure/flora/grass/bush_meagre,
@@ -1037,6 +1058,13 @@
 /obj/structure/flora/grass/herb/random,
 /turf/open/floor/grass/red,
 /area/outdoors/wilderness)
+"PD" = (
+/obj/structure/fluff/traveltile{
+	aportalid = "wildernorth1-wildermid1_mid";
+	aportalgoesto = "wildernorth1-wildermid1_north"
+	},
+/turf/open/floor/snow,
+/area/under/cave)
 "Qx" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass,
@@ -22055,7 +22083,7 @@ OG
 Um
 "}
 (104,1,1) = {"
-wi
+tn
 wi
 wi
 wi
@@ -22257,7 +22285,7 @@ OG
 Um
 "}
 (105,1,1) = {"
-wi
+tn
 KL
 KL
 KL
@@ -22459,7 +22487,7 @@ OG
 Um
 "}
 (106,1,1) = {"
-KL
+yB
 KL
 KL
 KL
@@ -22661,8 +22689,8 @@ OG
 Um
 "}
 (107,1,1) = {"
-KL
-KL
+qa
+nN
 mz
 mz
 mz
@@ -38215,7 +38243,7 @@ TP
 Um
 "}
 (184,1,1) = {"
-Nc
+Lj
 Nc
 Nc
 YV
@@ -38417,7 +38445,7 @@ TP
 Um
 "}
 (185,1,1) = {"
-Nc
+Lj
 Bh
 Nc
 YV
@@ -38619,7 +38647,7 @@ TP
 Um
 "}
 (186,1,1) = {"
-Nc
+Lj
 Nc
 Nc
 YV
@@ -122654,7 +122682,7 @@ nG
 nG
 "}
 (2,1,4) = {"
-iV
+PD
 iV
 YV
 YV
@@ -122856,7 +122884,7 @@ mz
 nG
 "}
 (3,1,4) = {"
-iV
+PD
 iV
 GZ
 YV
@@ -123058,7 +123086,7 @@ mz
 nG
 "}
 (4,1,4) = {"
-iV
+PD
 iV
 iV
 GZ
