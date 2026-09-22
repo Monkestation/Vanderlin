@@ -15,6 +15,7 @@
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/labor/mathematics = 30,
 		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/craft/engineering = 20,
 	)
 
 /datum/attribute_holder/sheet/job/courtphys/old
@@ -34,6 +35,7 @@
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/labor/mathematics = 30,
 		/datum/attribute/skill/labor/farming = 30,
+		/datum/attribute/skill/craft/engineering = 20,
 	)
 /datum/job/courtphys
 	title = JOB_COURT_PHYSICIAN
@@ -49,7 +51,7 @@
 	spawn_positions = 1
 	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_NONHERETICAL
-	blacklisted_species = list(SPEC_ID_TRITON, SPEC_ID_HARPY)
+	blacklisted_species = list(SPEC_ID_TRITON, SPEC_ID_HARPY, SPEC_ID_SNOW_ELF, SPEC_ID_HALF_SNOW_ELF)
 	outfit = /datum/outfit/courtphys/male
 	outfit_female = /datum/outfit/courtphys/female
 	give_bank_account = 100

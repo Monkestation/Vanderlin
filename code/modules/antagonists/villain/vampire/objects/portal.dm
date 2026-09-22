@@ -125,6 +125,7 @@
 	name = "Gate Amulet"
 	icon_state = "bloodtooth"
 	icon = 'icons/roguetown/clothing/neck.dmi'
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
 	var/uses = 3
 	var/can_local_portal = FALSE
 

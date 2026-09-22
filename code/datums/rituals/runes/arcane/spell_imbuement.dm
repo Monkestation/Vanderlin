@@ -66,7 +66,7 @@
 		return ITEM_INTERACT_SUCCESS
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/spellobject_imbue/proc/try_invoke(mob/living/user)
-	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
+	if(GET_MOB_ATTRIBUTE_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
 		to_chat(user, span_warning("You aren't able to invoke these symbols."))
 		return
 	if(rune_in_use)

@@ -112,6 +112,7 @@
 	w_class = WEIGHT_CLASS_TINY
 	throw_speed = 1
 	throw_range = 3
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/baotha
 
 /obj/item/clothing/head/corruptflower/equipped(mob/living/carbon/human/user, slot)
 	. = ..()

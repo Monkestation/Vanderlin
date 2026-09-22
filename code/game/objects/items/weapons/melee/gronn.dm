@@ -98,6 +98,7 @@
 	name = "\proper regret"
 	desc = "The claws of regret sink into all who are unprepared for dark ventures..."
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic/relic
 
 /obj/item/weapon/handclaw/gronn
 	name = "ossland beast claws"

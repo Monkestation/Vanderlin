@@ -21,6 +21,7 @@
 		TRAIT_DODGEEXPERT,
 		TRAIT_STEELHEARTED,
 		TRAIT_STRONG_GRABBER,
+		TRAIT_BLACKBAGGER,
 	)
 
 /datum/antagonist/assassin/on_gain()

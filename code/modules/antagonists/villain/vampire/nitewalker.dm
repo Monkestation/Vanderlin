@@ -32,7 +32,8 @@
 	)
 
 /datum/antagonist/vampire/lord/nitewalker
-	name = "The Nitewalker"
+	name = "The Nitewarden"
+	antag_hud_type = ANTAG_HUD_NITEWARDEN
 	confess_lines = list(
 		"HE KNOWS ALL!!",
 		"SILVER STILL STALKS THE NITE!!",
@@ -46,6 +47,8 @@
 	outfit = /datum/outfit/nitewalker
 	patron = /datum/patron/divine/noc
 	innate_traits = list(
+		TRAIT_BLOOD_SENSE,
+		TRAIT_VITAE_USER,
 		TRAIT_HARDDISMEMBER,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_BLINDFIGHTING,
@@ -64,6 +67,19 @@
 	clan_selected = TRUE
 	default_clan = /datum/clan/nitewalker
 	allow_preference_switching = FALSE
+
+/datum/antagonist/vampire/nitewarden
+	name = "Niteguard"
+	antag_hud_type = ANTAG_HUD_NITEWARDEN
+	isgoodguy = TRUE
+	roundend_category = "Nitewardens"
+	antagpanel_category = "Nitewarden"
+	antag_memory = "Protect those who walk the nite.\n\
+		The dark creachers are always present.\n\
+		Serve The Moon or the dae will break you."
+	antag_flags = FLAG_FAKE_ANTAG
+	clan_selected = TRUE
+	default_clan = /datum/clan/nitewalker
 
 /datum/antagonist/vampire/lord/nitewalker/on_gain()
 	var/mob/living/carbon/human/blade = owner.current
@@ -189,8 +205,8 @@
 
 /obj/item/clothing/ring/nitewalker
 	name = "nitewarden's ring"
-	icon_state = "bs_ring_ruby"
-	desc = "A ring of blacksteel with a shimmering rontz set within. It thrums with unseen power."
+	icon_state = "s_newring_ruby"
+	desc = "A ring of silver with a shimmering rontz set within. It thrums with unseen power."
 	sellprice = 500
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
