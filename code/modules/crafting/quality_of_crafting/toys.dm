@@ -56,3 +56,16 @@
 	name = "Wooden Crown"
 	output = /obj/item/clothing/head/crown/wooden
 	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/crafting/stickd
+	name = "Stick Doll"
+	output = /obj/item/child_toy/stickd
+	requirements = list(
+		/obj/item/grown/log/tree/stick = 3,
+		/obj/item/natural/fibers = 2
+	)
+	attacked_atom = /obj/item/grown/log/tree/stick
+	starting_atom = /obj/item/natural/fibers
+	allow_inverse_start = TRUE
+	craft_time = 5 SECONDS
+	craftdiff = 0
