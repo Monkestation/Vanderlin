@@ -42,16 +42,17 @@
 /datum/outfit/watchman
 	name = "Men-at-arms Base"
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	shirt = /obj/item/clothing/shirt/tunic/colored/tunicprimary
-	neck = /obj/item/clothing/neck/bevor
-	gloves = /obj/item/clothing/gloves/leather/advanced
+	armor = /obj/item/clothing/armor/brigandine/light
+	shirt = /obj/item/clothing/shirt/gambeson
+	neck = /obj/item/clothing/neck/gorget
+	gloves = /obj/item/clothing/gloves/chain/iron
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	pants = /obj/item/clothing/pants/trou/leather/splint
 	shoes = /obj/item/clothing/shoes/boots/leather/advanced/watch
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/storage/keyring/manorguard
 	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
+		/obj/item/weapon/knife/dagger/steel/special = 1,
+		/obj/item/storage/keyring/manorguard = 1
 	)
 /datum/job/men_at_arms/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
@@ -76,98 +77,85 @@
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 
-/datum/attribute_holder/sheet/job/menatarms/pikeman
+/datum/attribute_holder/sheet/job/menatarms/footman
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
-		STAT_PERCEPTION = -1,
-		STAT_ENDURANCE = 1,
+		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 1,
-		STAT_SPEED = 1,
-		/datum/attribute/skill/combat/polearms = 33,
+		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
-		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/wrestling = 35,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 10,
-		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/athletics = 35,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10
 	)
 
-/datum/job/advclass/menatarms/watchman_pikeman
-	title = "Pikeman Men-At-Arms"
+/datum/job/advclass/menatarms/watchman_footman
+	title = "Footman Men-At-Arms"
 	tutorial = "You once warded the town, beating the poor and killing the senseless. \
 	Now you get to stare at them in the eyes, watching as they bleed, \
 	exanguinated personally by one of the Monarch's best. \
 	You are poor, and your belly is yet full."
-	outfit = /datum/outfit/watchman/pikeman
 	category_tags = list(CTAG_MENATARMS)
-
-	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/pikeman
-
+	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/footman
 	traits = list(
 		TRAIT_MEDIUMARMOR
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 
-/datum/outfit/watchman/pikeman
-	name = "Pikeman Men-At-Arms"
-	armor = /obj/item/clothing/armor/chainmail/hauberk
-	beltr = /obj/item/weapon/sword/arming
-	backr = /obj/item/weapon/polearm/spear/billhook
-	backl = /obj/item/storage/backpack/satchel
-	scabbards = list(/obj/item/weapon/scabbard/sword)
-
-/datum/attribute_holder/sheet/job/menatarms/axeman
-	raw_attribute_list = list(
-		STAT_ENDURANCE = 2,
-		STAT_STRENGTH = 2,
-		STAT_CONSTITUTION = 1,
-		STAT_SPEED = -1,
-		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/axesmaces = 33,
-		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/swimming = 20,
-		/datum/attribute/skill/misc/climbing = 10,
-		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/labor/lumberjacking = 10
+/datum/job/advclass/menatarms/watchman_footman/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+	var/static/list/weapons = list(
+		"Iron Warhammer & Shield" = list(/obj/item/weapon/mace/warhammer, /obj/item/weapon/shield/tower/metal),
+		"Steel Shortsword & Shield" = list(/obj/item/weapon/sword/short, /obj/item/weapon/shield/tower/metal),
+		"Billhook & Iron Shortsword" = list(/obj/item/weapon/polearm/spear/billhook, /obj/item/weapon/sword/short/iron),
+		"Halberd" = /obj/item/weapon/polearm/halberd,
+		"Greataxe" = /obj/item/weapon/greataxe,
+		"Eagle's Beak" = /obj/item/weapon/polearm/eaglebeak,
 	)
 
-/datum/job/advclass/menatarms/watchman_axeman
-	title = "Axeman Men-At-Arms"
-	tutorial = "You once warded the town, beating the poor and killing the senseless. \
-	Now you charge straight ahead, those infront cannot stop the weight of your axe- \
-	exanguinated personally by one of the Monarch's best. \
-	You are poor, and your belly is yet full."
-	outfit = /datum/outfit/watchman/axeman
-	category_tags = list(CTAG_MENATARMS)
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title = "TAKE UP ARMS.")
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/axeman
+	switch(weapon_choice)
+		if("Steel Shortsword & Shield" || "Billhook & Iron Shortsword")
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+		if("Iron Warhammer & Shield" || "Greataxe")
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 33, 33)
+		if("Billhook & Iron Shortsword" || "Halberd" || "Eagle's Beak")
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
+		if("Iron Warhammer & Shield" || "Steel Shortsword & Shield")
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/shields, 33, 33)
 
-	traits = list(
-		TRAIT_HEAVYARMOR,
-		TRAIT_MEDIUMARMOR,
-	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
+	var/armors = list("Brigandine Set", "Chainmail Set", "Cuirass Set")
+	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARMOR.", "EQUIP YOURSELF.", armors)
 
-/datum/outfit/watchman/axeman
-	name = "Axeman Men-At-Arms"
-	armor = /obj/item/clothing/armor/brigandine
-	shirt = /obj/item/clothing/armor/gambeson/heavy
-	gloves = /obj/item/clothing/gloves/chain
-	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/greataxe/steel
+	switch(armor_choice)
+		//Brigandine Set doesn't need a case, it's the default armor anyway!
+		if("Chainmail Set")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/medium/scale, ITEM_SLOT_ARMOR, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/chainmail/iron, ITEM_SLOT_SHIRT, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/chainlegs, ITEM_SLOT_PANTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/leather, ITEM_SLOT_WRISTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/chain, ITEM_SLOT_GLOVES, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/neck/chaincoif, ITEM_SLOT_NECK, TRUE)
+		if("Cuirass Set")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/cuirass, ITEM_SLOT_ARMOR, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson/arming, ITEM_SLOT_SHIRT, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/chainlegs/iron, ITEM_SLOT_PANTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers, ITEM_SLOT_WRISTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/chain, ITEM_SLOT_GLOVES, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/neck/bevor, ITEM_SLOT_NECK, TRUE)
 
 /datum/attribute_holder/sheet/job/menatarms/ranger
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
 		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 1,
 		STAT_SPEED = 1,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/knives = 20,
@@ -199,8 +187,7 @@
 
 /datum/outfit/watchman/ranger
 	name = "Archer Men-At-Arms"
-	armor = /obj/item/clothing/armor/leather/splint
-	beltr = /obj/item/weapon/mace/cudgel
+	backl = /obj/item/storage/backpack/satchel
 
 /datum/job/advclass/menatarms/watchman_ranger/on_roundstart(mob/living/carbon/human/equipped_human, client/player_client)
 	. = ..()
@@ -209,49 +196,17 @@
 	switch(weapon_choice)
 		if("Bow")
 			equipped_human.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/long, ITEM_SLOT_BACK_L, TRUE)
-			equipped_human.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BACK_R, TRUE)
+			equipped_human.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
 		if("Crossbow")
 			equipped_human.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross, ITEM_SLOT_BACK_L, TRUE)
-			equipped_human.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BACK_R, TRUE)
+			equipped_human.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 
-/datum/attribute_holder/sheet/job/menatarms/swordsman
-	raw_attribute_list = list(
-		STAT_STRENGTH = 2,
-		STAT_ENDURANCE = 1,
-		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/combat/swords = 33,
-		/datum/attribute/skill/combat/shields = 33,
-		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/axesmaces = 20,
-		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/swimming = 20,
-		/datum/attribute/skill/misc/climbing = 10,
-		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/craft/crafting = 10
-	)
-
-/datum/job/advclass/menatarms/watchman_swordsman
-	title = "Swordsman Men-At-Arms"
-	tutorial = "You once warded the town, beating the poor and killing the senseless. \
-	Now you get to stare at them in the eyes, watching as they bleed, \
-	exanguinated personally by one of the Monarch's best. \
-	You are poor, and your belly is yet full."
-	outfit = /datum/outfit/watchman/swordsman
-	category_tags = list(CTAG_MENATARMS)
-
-	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/swordsman
-
-	traits = list(
-		TRAIT_MEDIUMARMOR
-	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
-
-/datum/outfit/watchman/swordsman
-	name = "Swordsman Men-At-Arms"
-	armor = /obj/item/clothing/armor/chainmail/hauberk
-	beltr = /obj/item/weapon/sword/arming
-	backr = /obj/item/weapon/shield/heater
-	backl = /obj/item/storage/backpack/satchel
-	scabbards = list(/obj/item/weapon/scabbard/sword)
+	var/static/list/sidearms = list("Stiletto", "Iron Shortsword", "Cudgel")
+	var/sidearm_choice = browser_input_list(equipped_human, "CHOOSE YOUR SIDEARM.", "BE VIGILANT.", sidearms)
+	switch(sidearm_choice)
+		if("Stiletto")
+			equipped_human.equip_to_slot_or_del(new /obj/item/weapon/knife/dagger/steel/stiletto, ITEM_SLOT_BELT_L, TRUE)
+		if("Iron Shortsword")
+			equipped_human.equip_to_slot_or_del(new /obj/item/weapon/sword/short/iron, ITEM_SLOT_BELT_L, TRUE)
+		if("Cudgel")
+			equipped_human.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
