@@ -85,7 +85,7 @@
 
 	// Situational penalties
 	if(body_position == LYING_DOWN)
-		parry_modifier -= 10
+		parry_modifier -= 20
 
 	// Speed penalty for fast weapons still applies
 	if(attacker.mind)
