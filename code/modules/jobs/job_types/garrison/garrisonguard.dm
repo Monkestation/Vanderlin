@@ -9,7 +9,6 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 8
 	spawn_positions = 8
-	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL

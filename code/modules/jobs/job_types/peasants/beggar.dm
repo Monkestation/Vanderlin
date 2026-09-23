@@ -29,7 +29,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 15
 	spawn_positions = 15
-	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 	knows_the_town = TRUE
 	known_by_the_town = FALSE

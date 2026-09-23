@@ -208,6 +208,81 @@
 
 // Complex Multi-Herb Recipes
 
+// Special Poisons
+/datum/container_craft/cooking/herbal_tea/tranq
+	name = "Liquid tranquility"
+	created_reagent = /datum/reagent/poison/herbal/tranq
+	water_conversion = 1
+	reagent_requirements = list(
+		/datum/reagent/medicine/herbal/valeriana_draught = 20,
+	)
+	requirements = list(
+		/obj/item/alch/herb/paris = 1,
+		/obj/item/alch/herb/valeriana = 1,
+		/obj/item/alch/herb/mentha = 1
+	)
+	output_amount = 20 // Small amount of sleepy juice
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The brew smells of oblivion and bitterness..."
+
+/datum/container_craft/cooking/herbal_tea/weak_paralytic
+	name = "Paralytic preblend"
+	created_reagent = /datum/reagent/toxin/spidervenom_inert
+	water_conversion = 1
+	requirements = list(
+		/obj/item/reagent_containers/spidervenom_inert = 1,
+	)
+	output_amount = 20 // doesnt actually do anything, needed as a pre requisite
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of potential and hatred"
+
+/datum/container_craft/cooking/herbal_tea/paralytic
+	name = "Impuissance paralytic"
+	created_reagent = /datum/reagent/toxin/spidervenom_paralytic
+	water_conversion = 1
+	reagent_requirements = list(
+	/datum/reagent/toxin/spidervenom_inert = 10,
+	)
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/mushroom/drowsbane = 1,
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of helplessness and suffering..."
+
+/datum/container_craft/cooking/herbal_tea/pain
+	name = "Souffrance interrogation agent"
+	created_reagent = /datum/reagent/poison/herbal/pain
+	water_conversion = 1
+	reagent_requirements = list(
+	/datum/reagent/toxin/spidervenom_inert = 10,
+	)
+	requirements = list(
+		/obj/item/alch/herb/salvia = 2,
+		/obj/item/alch/herb/euphorbia = 1,
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+	complete_message = "The fumes from the pot smell of sweetness and deception..."
+
+/datum/container_craft/cooking/herbal_tea/ghoulpowder
+	name = "Astuce paralytic"
+	created_reagent = /datum/reagent/poison/herbal/ghoulpowder
+	water_conversion = 1
+	reagent_requirements = list(
+		/datum/reagent/toxin/spidervenom_inert = 10,
+	)
+	requirements = list(
+		/obj/item/alch/herb/calendula = 1,
+	)
+	output_amount = 20 
+	crafting_time = 15 SECONDS
+	finished_smell = /datum/pollutant/food/bitter
+
 // Herbalist's Panacea (multiple healing herbs)
 /datum/container_craft/cooking/herbal_tea/herbalist_panacea
 	name = "Herbalist's Panacea"

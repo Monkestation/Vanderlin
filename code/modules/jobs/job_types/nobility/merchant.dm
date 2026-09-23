@@ -27,7 +27,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 	selection_color = "#192bc2"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	allowed_races = RACES_PLAYER_ALL

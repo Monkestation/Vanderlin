@@ -124,6 +124,7 @@
 		// Narcotics/Trade goods
 		/datum/supply_pack/narcotics/sigs,
 		/datum/supply_pack/narcotics/zigbox,
+		/datum/supply_pack/narcotics/spider,
 		/datum/supply_pack/narcotics/soap
 	)
 	rare_pool = list(
