@@ -32,7 +32,7 @@
 		return FALSE
 
 	var/obj/item/weapon = H.get_active_held_item()
-	if(!weapon)
+	if(!istype(weapon))
 		// Empty hands - unbind current weapon if one exists
 		var/datum/status_effect/buff/blood_bound/unbind_M = H.has_status_effect(/datum/status_effect/buff/blood_bound)
 		if(unbind_M?.bound_weapon && !QDELETED(unbind_M.bound_weapon))
