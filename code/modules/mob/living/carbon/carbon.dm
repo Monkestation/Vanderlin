@@ -1674,7 +1674,7 @@
 /**
  * This proc is used to determine whether or not the mob can handle touching a burning object.
  */
-/mob/living/carbon/proc/can_touch_burning(atom/burning_atom)
+/mob/living/carbon/proc/can_touch_burning(atom/burning_atom, ignore_gloves = FALSE)
 	// So people can take their own clothes off
 	if((burning_atom == src) || (burning_atom.loc == src))
 		return TRUE
@@ -1682,7 +1682,7 @@
 	if(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABADDON))
 		return TRUE
 
-	if(gloves?.max_heat_protection_temperature >= 360)
+	if(!ignore_gloves && (gloves?.max_heat_protection_temperature >= 360))
 		return TRUE
 
 	return FALSE

@@ -31,7 +31,7 @@
 	domain = "King of the Hells and Archdevil of Wisdom."
 	desc = "Abraxas led the attack against Psydon. He is the mastermind, the strategist of the depths. Claimed Baotha to be his own spawn, though her public rejection left populations globally confused. It is only a matter of time before he strikes the surface once more."
 	flaws = "Arrogance, Hunger for Power"
-	worshippers = "Depraved Researchers, Corrupted Aasimar"
+	worshippers = "Depraved Researchers, Corrupted Aasimar, Greedy Nobles."
 	sins = "Failure, Bad Planning"
 	boons = "Access to roles with blood magic. Keen sight and hearing to develop your strategy."
 	added_traits = list(TRAIT_DEVILS_REJECTION, TRAIT_DEVIL_MARKED_ABRAXAS)
