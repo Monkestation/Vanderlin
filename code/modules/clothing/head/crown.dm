@@ -129,12 +129,6 @@
 	visible_message(span_warning("[src] crumbles to dust, the ashes spiriting away in the direction of the Keep."))
 	qdel(src) //Anti-stall
 
-/obj/item/clothing/head/crown/serpcrown/surplus
-	name = "crown"
-	desc = "A replacement for the Crown of Vanderlin, every bit as valid as proof of sovereignity as the original."
-	icon_state = "serpcrowno"
-	sellprice = VALUE_GOLD_ITEM
-
 /obj/item/clothing/head/crown/sparrowcrown
 	name = "champions circlet"
 	desc = "Winner of tournaments, bask in Ravox's glory."
@@ -175,9 +169,9 @@
 /obj/item/clothing/head/crown/circlet/sleepless/equipped(mob/user, slot)
 	. = ..()
 	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_SLEEPIMMUNE,"Fatal Insomnia")
+		ADD_TRAIT(user, TRAIT_SLEEPIMMUNE, "clouded_circlet")
 	else
-		REMOVE_TRAIT(user, TRAIT_SLEEPIMMUNE,"Fatal Insomnia")
+		REMOVE_TRAIT(user, TRAIT_SLEEPIMMUNE, "clouded_circlet")
 
 //............... Stink Immunity Circlet ............... //
 /obj/item/clothing/head/crown/circlet/stink
