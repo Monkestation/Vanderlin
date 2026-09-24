@@ -193,7 +193,7 @@
 /obj/item/storage/belt/leather/breechcloth/blackbelt
 	name = "black belt with breechcloth"
 	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
-	icon_state = "breechcloth_black"
+	icon_state = "breechclothalt"
 
 /obj/item/storage/belt/leather/slayer
 	name = "rugged dwarven belt"
