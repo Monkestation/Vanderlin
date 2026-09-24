@@ -54,7 +54,6 @@
 	var/obj/item/offhand = get_inactive_held_item()
 	var/obj/item/parrying_weapon = mainhand
 
-
 	var/parry_data = calculate_parry_values(mainhand, offhand)
 	parrying_weapon = parry_data["used_weapon"]
 	weapon_parry = parry_data["weapon_parry"]
@@ -126,8 +125,11 @@
 			attacker_feedback += " Cancelled out!"
 		to_chat(attacker, span_info("[attacker_feedback]"))
 
-	if(!roll_result)
-		to_chat(src, span_warning("The enemy defeated my parry!"))
+	if(roll_result == DICE_FAILURE || roll_result == DICE_CRIT_FAILURE)
+		if(roll_result == DICE_CRIT_FAILURE)
+			to_chat(src, span_warning("I completely fumbled my parry!"))
+		else
+			to_chat(src, span_warning("The enemy defeated my parry!"))
 		return FALSE
 
 	/*update_parrying_penalty()*/
@@ -138,6 +140,11 @@
 		drained = drained + (master.wbalance * ((GET_MOB_ATTRIBUTE_VALUE(attacker, STAT_STRENGTH) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_STRENGTH)) * -5))
 	drained = max(drained, 5)
 
+	//reduce drain on exceptional parry
+	if(roll_result == DICE_CRIT_SUCCESS)
+		drained = floor(drained * 0.5)
+		to_chat(src, span_notice("A perfect parry!"))
+
 	if(weapon_parry)
 		if(do_parry(parrying_weapon, drained, attacker))
 			process_parry_aftermath(attacker, parrying_weapon, defender_skill, attacker_skill, attacker_intent)
@@ -145,7 +152,7 @@
 		return FALSE
 	else
 		if(do_unarmed_parry(drained, attacker))
-			if((body_position != LYING_DOWN) && attacker_skill && (defender_skill < attacker_skill - SKILL_LEVEL_NOVICE))
+			if((body_position != LYING_DOWN) && attacker_skill && (defender_skill < attacker_skill - SKILL_RANK_NOVICE))
 				adjust_experience(/datum/attribute/skill/combat/unarmed, max(round(GET_MOB_ATTRIBUTE_VALUE(src, STAT_INTELLIGENCE)/2), 0), FALSE)
 			flash_fullscreen("blackflash2")
 			return TRUE
@@ -219,19 +226,16 @@
 	else
 		defender_skill = GET_MOB_SKILL_VALUE(src, /datum/attribute/skill/combat/unarmed)
 
-	var/attacker_type = /datum/attribute/skill/combat/unarmed
 	if(attacker.mind)
 		var/obj/item/weapon/attacking_weapon = attacker_intent.get_master_item()
 		if(attacking_weapon)
 			attacker_skill = GET_MOB_SKILL_VALUE(attacker, attacking_weapon.associated_skill)
-			attacker_type = attacking_weapon.associated_skill
 		else
 			attacker_skill = GET_MOB_SKILL_VALUE(attacker, /datum/attribute/skill/combat/unarmed)
 
 	return list(
 		"defender_skill" = defender_skill,
-		"attacker_skill" = attacker_skill,
-		"attacker_type" = attacker_type
+		"attacker_skill" = attacker_skill
 	)
 
 /**
