@@ -772,6 +772,9 @@
 		clear_fullscreen("inqvision")
 	if(HAS_TRAIT(src, TRAIT_SEE_LEYLINES))
 		see_invisible = SEE_INVISIBLE_LEYLINES
+	if(HAS_TRAIT(src, TRAIT_LEVIATHAN_CURSE))
+		lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
+		see_in_dark = 2
 	if(see_override)
 		see_invisible = see_override
 	return ..()

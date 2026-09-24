@@ -150,6 +150,12 @@
 //////////////////////
 /// ARCHDEVIL CURSES ///
 //////////////////////
+/datum/curse/abraxas
+	name = "Abraxas' Curse"
+	description = "The hells lay claim to my flesh!"
+	trait = TRAIT_ABRAXAS_CURSE
+	var/old_species
+
 /datum/curse/mephistopheles
 	name = "Mephistopheles' Curse"
 	description = "I am incapable of wielding Blood Magic."
@@ -158,7 +164,7 @@
 /datum/curse/leviathan
 	name = "Leviathan's Curse"
 	description = "The abyss is pressing in... I hear it..."
-	trait = TRAIT_SCHIZO_AMBIENCE
+	trait = TRAIT_LEVIATHAN_CURSE
 
 //////////////////////
 /// ON GAIN / LOSS ///
@@ -194,6 +200,15 @@
 /datum/curse/xylix/on_loss(mob/living/carbon/human/owner)
 	. = ..()
 	owner.attributes.subtract_sheet(/datum/attribute_holder/sheet/xylix_curse)
+
+/datum/curse/abraxas/on_gain(mob/living/carbon/human/owner, silent)
+	. = ..()
+	old_species =
+	owner.set_species(/datum/species/tieberian)
+
+/datum/curse/abraxas/on_loss(mob/living/carbon/human/owner)
+	. = ..()
+	owner.set_species(old_species)
 
 //////////////////////
 ///    ON LIFE     ///
