@@ -15,12 +15,14 @@
 	parrying_penalty_timer = null
 */
 
-/// Return 2*defending skill level + parry modifer (enemy weapon skill is included in this) - 20 (if defender incapacitated).
+/// Return 1 + half of defending skill level + parry modifer - 4 (if defender incapacitated). +2 if parry mode.
 /mob/living/proc/get_parrying_score(skill_used = /datum/attribute/skill/combat/unarmed, modifier = 0)
 	var/stun_penalty = 0
 	if(incapacitated())
-		stun_penalty = 20
-	return floor(max(0, GET_MOB_SKILL_VALUE(src, skill_used)*2 + modifier - stun_penalty))
+		stun_penalty = 4
+	if(cmode && (d_intent == INTENT_PARRY))
+		modifier += 2
+	return floor(max(0, 1 + GET_MOB_SKILL_VALUE(src, skill_used)/2 + modifier - stun_penalty))
 
 /**
  * Attempt to parry an attack
@@ -67,25 +69,24 @@
 	var/skill_type = weapon_parry ? parrying_weapon.associated_skill : /datum/attribute/skill/combat/unarmed
 
 	// wdefense variable on parrying_weapon * 2
-	var/parry_modifier = parry_data["weapon_defense_flat"] * 5
-	// decreases defense for knife/fists if fighting against normal weapons
-	if((skill_type == /datum/attribute/skill/combat/unarmed || skill_type == /datum/attribute/skill/combat/knives) && (skill_data["attacker_type"] != /datum/attribute/skill/combat/knives && skill_data["attacker_type"] != /datum/attribute/skill/combat/unarmed))
-		parry_modifier -= 25
+	var/parry_modifier = parry_data["weapon_defense_flat"] * 2
 	// Defender's combat intent modifier
-	parry_modifier += rmb_intent?.def_bonus
+	parry_modifier += floor(rmb_intent?.def_bonus / 10)
 
 	if(HAS_TRAIT(src, TRAIT_EXPERT_PARRY))
 		parry_modifier += 2
 
 	// Attacker special bonuses
 	if(attacker.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/guidance))
-		parry_modifier -= 10
+		parry_modifier -= 2
 	if(attacker.attributes?.has_diceroll_modifier(/datum/diceroll_modifier/fervor))
-		parry_modifier -= 5
+		parry_modifier -= 1
 
 	// Situational penalties
 	if(body_position == LYING_DOWN)
-		parry_modifier -= 10
+		parry_modifier -= 2
+
+	var/attacker_opposition = floor(attacker_skill / 2)
 
 	// Speed penalty for fast weapons still applies
 	if(attacker.mind)
@@ -96,34 +97,27 @@
 			var/speed_delta = GET_MOB_ATTRIBUTE_VALUE(attacker, STAT_SPEED) - GET_MOB_ATTRIBUTE_VALUE(src, STAT_SPEED)
 			parry_modifier -= speed_delta * 2
 
-	var/parry_score = get_parrying_score(skill_type, parry_modifier - attacker_skill)
+	var/parry_score = get_parrying_score(skill_type, parry_modifier - attacker_opposition)
 
 	var/attacker_dualwielding = attacker.dual_wielding_check()
 	var/defender_dualwielding = dual_wielding_check()
 
-	//balance caps
-	if(parry_score > 95)
-		parry_score = 95
-	if(parry_score < 5)
-		parry_score = 5
-
 	// Show roll info to defender
 	if(client?.prefs.read_preference(/datum/preference/toggle/showrolls))
-		var/text = "Roll to parry... (score: [parry_score]/100)"
+		var/text = "Roll to parry... (score: [parry_score])"
 		if(attacker_dualwielding)
 			if(defender_dualwielding)
 				text += " Dual wield cancels out."
 			else
-				text += " Disadvantage! (score: [max(5, parry_score - 10)])"
+				text += " Disadvantage! (score: [max(0, parry_score - 2)])"
 		to_chat(src, span_info("[text]"))
 
 	//disadvantage from attacker dual wielding lowers score by 2 if unmatched
 	var/effective_score = parry_score
 	if(attacker_dualwielding && !defender_dualwielding)
-		effective_score = max(5, parry_score - 10)
+		effective_score = max(0, parry_score - 2)
 
-	var/roll = rand(1, 100)
-	var/roll_result = roll <= effective_score ? TRUE : FALSE
+	var/roll_result = diceroll(effective_score, context = DICE_CONTEXT_PHYSICAL)
 
 	// Show attacker feedback
 	if(attacker.client?.prefs.read_preference(/datum/preference/toggle/showrolls) && attacker_dualwielding)
