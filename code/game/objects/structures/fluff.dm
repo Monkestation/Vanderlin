@@ -1138,23 +1138,44 @@
 		if(1)
 			I = new /obj/item/reagent_containers/glass/bottle/healthpot(user.loc)
 		if(2)
-			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+			if(HAS_TRAIT(user, TRAIT_HEAVYARMOR))
+				I = new /obj/item/clothing/armor/plate(user.loc)
+			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
 				I = new /obj/item/clothing/armor/medium/scale(user.loc)
 			else
-				I = new /obj/item/clothing/armor/chainmail/iron(user.loc)
+				I = new /obj/item/clothing/armor/leather/masterwork(user.loc)
 		if(4)
-			I = new /obj/item/clothing/head/helmet/horned(user.loc)
-		if(6)
-			if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/polearms) > 2)
-				I = new /obj/item/weapon/polearm/spear/billhook(user.loc)
-			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/bows) > 2)
-				I = new /obj/item/gun/ballistic/bow/long(user.loc)
-			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/swords) > 2)
-				I = new /obj/item/weapon/sword/long(user.loc)
+			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/head/helmet/heavy/bucket(user.loc)
 			else
-				I = new /obj/item/weapon/mace/steel(user.loc)
+				I = new /obj/item/clothing/head/helmet/leather/masterwork(user.loc)
+		if(6)
+			var/list/weapon_options = list()
+
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/polearms) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Billhook"] = /obj/item/weapon/polearm/spear/billhook
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/bows) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Longbow"] = /obj/item/gun/ballistic/bow/long
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/swords) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Longsword"] = /obj/item/weapon/sword/long
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/axesmaces) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Steel mace"] = /obj/item/weapon/mace/steel
+				weapon_options["Battle axe"] = /obj/item/weapon/axe/battle
+
+			var/chosen_weapon
+			if(length(weapon_options))
+				var/chosen_name = browser_input_list(user, "Choose your weapon.", "BLESSING FROM THE THIEF-GOD", weapon_options, timeout = 20 SECONDS)
+				chosen_weapon = chosen_name ? weapon_options[chosen_name] : /obj/item/weapon/knife/dagger/navaja
+			else
+				chosen_weapon = /obj/item/weapon/knife/dagger/navaja //I had no idea what to put as default
+			I = new chosen_weapon(user.loc)
 		if(8)
-			I = new /obj/item/clothing/pants/chainlegs(user.loc)
+			if(HAS_TRAIT(user, TRAIT_HEAVYARMOR))
+				I = new /obj/item/clothing/pants/platelegs(user.loc)
+			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/pants/chainlegs(user.loc)
+			else
+				I = new /obj/item/clothing/pants/trou/leather/masterwork(user.loc)
 	if(I)
 		I.sellprice = 0
 
