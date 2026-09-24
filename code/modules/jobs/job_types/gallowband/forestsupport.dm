@@ -30,7 +30,6 @@
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_FORSUPP
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = ALL_AGES_LIST_CHILD

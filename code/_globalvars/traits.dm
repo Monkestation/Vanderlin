@@ -136,6 +136,8 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Seed Knower" = TRAIT_SEEDKNOW,
 		"Noble Blooded" = TRAIT_NOBLE_BLOOD,
 		"Recognised Noble" = TRAIT_NOBLE_POWER,
+		"THROAT Power" = TRAIT_THROAT_POWER,
+		"Crownless THROAT" = TRAIT_CROWNLESS_THROAT,
 		"Empath" = TRAIT_EMPATH,
 		"Thief-Sense" = TRAIT_THIEFSENSE,
 		"Battleready" = TRAIT_BATTLE_READY,

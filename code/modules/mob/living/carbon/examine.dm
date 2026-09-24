@@ -200,9 +200,6 @@
 		// Cabal
 		if(HAS_TRAIT(user, TRAIT_CABAL) && (istype(patron, /datum/patron/inhumen/zizo) || HAS_TRAIT(src, TRAIT_CABAL)))
 			. += span_purple("A fellow seeker of Her ascension.")
-		// Centrist
-		if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && (HAS_TRAIT(src, TRAIT_DIVINE_CENTRIST) && !HAS_TRAIT(src, TRAIT_DIVINE_SERVANT)))
-			. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
 
 		// The disgusing inquistion section
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))

@@ -29,7 +29,6 @@
 	tutorial = "The Oratorium claims you are naught more than a 'cleric', but you know the truth; you are a sacrificial lamb. Your hands, unmarred through prayer and pacifism, have been gifted with the power to manipulate blood - to siphon away the wounds of others, so that you may endure in their stead. Let your censer's light shepherd the Inquisitor's retinue forth, lest they're led astray by wrath and temptation."
 	selection_color = JCOLOR_INQUISITION
 	outfit = /datum/outfit/absolver
-	bypass_lastclass = TRUE
 	display_order = JDO_ABSOLVER
 	give_bank_account = 15
 	knows_the_town = TRUE

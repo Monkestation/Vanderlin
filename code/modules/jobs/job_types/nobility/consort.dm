@@ -9,7 +9,6 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 0
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/servant)
 	allowed_races = RACES_PLAYER_ROYALTY

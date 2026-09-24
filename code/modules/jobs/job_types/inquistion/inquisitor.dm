@@ -26,7 +26,6 @@
 	give_bank_account = 30
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	bypass_lastclass = TRUE
 	antag_role = /datum/antagonist/purishep
 
 	mind_traits = list(

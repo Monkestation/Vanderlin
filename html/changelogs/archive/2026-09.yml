@@ -269,3 +269,36 @@
   - rscadd: Added a knife sheathe with the above.
   - map: Remapped the Court Agent hideout.
   - bugfix: Bathing with integrated skin armor now works properly.
+2026-09-18:
+  realforest2001:
+  - rscadd: Added more heretical examine highlights.
+  - rscadd: Added some non-heretical examine highlights.
+  - balance: Adjusted duration of Enervating Elegy's status effect.
+  - bugfix: Fixed unreachable code in create_wave.
+  - rscdel: Deleted the Check Devotion verb as made redundant by Devotion being displayed
+      on Stat tab.
+  - rscadd: Court Agent and Wretches no longer appear in the actors list from lobby.
+  - map: Fixed some parts of the Vanderlin Keep moat that got stuck on rocks.
+  - bugfix: Fixed spell-granting scrolls breaking if you right click them.
+  - map: Vault is no longer jauntable.
+  - map: Fixed heir secret passage on Vanderlin being linked.
+  - rscdel: Removed Skeleton Be-Special.
+  - bugfix: You now require arcyne skill to invoke magic runes.
+2026-09-20:
+  SpeedofDeath118:
+  - rscadd: Added the ornate tunic and ornate dress to the Loadout menu.
+2026-09-21:
+  Ardcrumb:
+  - map: Adjusts the inquisition base's items and adds some additional ones for QoL.
+  Gatsby229:
+  - rscadd: Added several neurotoxins.
+  - rscadd: Added god/lux based poisons, each with strong effects.
+  realforest2001:
+  - rscdel: Disables Grandmaster Templar
+  - code_imp: Renamed a variable for whether you can play a job back-to-back rounds.
+2026-09-22:
+  SamuraiSpork:
+  - balance: Reduced cost of Blessed Bullion in Marque shop
+  - code_imp: Edited name of "Extra Funding" to 400 mammons instead of 80 silvers.
+  realforest2001:
+  - bugfix: Heretic monarchs without the triumph no longer break roundstart.
