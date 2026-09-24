@@ -102,9 +102,9 @@
 			if(n_name && !named)
 				named = n_name
 				name = "[(n_name ? "[n_name]" : null)]"
+				update_appearance(UPDATE_NAME)
 		return
 	..()
-	update_appearance(UPDATE_NAME)
 
 /obj/item/child_toy/soft_toy/bear
 	name = "bear doll"
