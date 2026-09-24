@@ -5,9 +5,6 @@
 	added_languages = list(/datum/language/hellspeak)
 
 /datum/patron/archdevil/can_pray(mob/living/follower)
-	// Redefined this entire proc just to tell you:
-	// Yes, the godless can pray. This is intentional.
-	// Maybe they pray to themselves?
 	return TRUE
 
 /datum/patron/archdevil/hear_prayer(mob/living/follower, message)

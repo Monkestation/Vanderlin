@@ -203,7 +203,7 @@
 
 /datum/curse/abraxas/on_gain(mob/living/carbon/human/owner, silent)
 	. = ..()
-	old_species = owner.dna?.species
+	old_species = owner.dna.species
 	owner.set_species(/datum/species/tieberian)
 
 /datum/curse/abraxas/on_loss(mob/living/carbon/human/owner)

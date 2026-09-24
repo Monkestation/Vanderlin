@@ -930,7 +930,7 @@
 	name = "Dark Secrets"
 	greet_text = span_notice("You have a dark secret, hidden power you have concealed for most of your life. Is now the time to let it out?")
 	req_text = "Worship an Archdevil."
-	allowed_patrons = list(/datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/mephistopheles/leviathan)
+	allowed_patrons = list(/datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/leviathan)
 	restricted_traits = list(TRAIT_BLOOD_MAGE, TRAIT_BLOOD_SORCERER, TRAIT_BLOOD_STUDENT, TRAIT_VITAE_USER)
 	weight = 15 //Should be fine.
 

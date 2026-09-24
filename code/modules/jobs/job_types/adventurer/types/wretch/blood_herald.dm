@@ -138,6 +138,7 @@
 		if("Handclaws")
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/claws)
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/handclaw/steel/bloodsteel, ITEM_SLOT_BELT_R, TRUE)
+			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, JOB_TRAIT)
 
 
 /datum/outfit/wretch/blood_herald
