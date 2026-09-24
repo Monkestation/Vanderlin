@@ -185,7 +185,7 @@
 /obj/item/storage/belt/leather/breechcloth
 	name = "belt with breechcloth"
 	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
-	icon_state = "breechbelt"
+	icon_state = "breechcloth"
 	detail_tag = "_detail"
 	detail_color = CLOTHING_TARAXACUM_YELLOW
 	sewrepair = FALSE
@@ -193,7 +193,7 @@
 /obj/item/storage/belt/leather/breechcloth/blackbelt
 	name = "black belt with breechcloth"
 	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
-	icon_state = "breechbeltalt"
+	icon_state = "breechcloth_black"
 
 /obj/item/storage/belt/leather/slayer
 	name = "rugged dwarven belt"
