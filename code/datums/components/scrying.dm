@@ -75,7 +75,7 @@
 		to_chat(user, span_warning(text_cooldown_fail))
 		return FALSE
 
-	var/search_name = tgui_input_text(user, "Who are you looking for?", name, timeout = 10 SECONDS)
+	var/search_name = tgui_input_text(user, "Who are you looking for?", name, encode = FALSE, timeout = 10 SECONDS)
 
 	//check is applied twice to prevent someone from bypassing the cooldown
 	if(!COOLDOWN_FINISHED(src, scry_cooldown))
