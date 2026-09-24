@@ -32,6 +32,7 @@
 )
 
 #define ARCHDEVIL_CURSES list(\
+	/datum/curse/abraxas,\
 	/datum/curse/mephistopheles,\
 	/datum/curse/leviathan\
 )
