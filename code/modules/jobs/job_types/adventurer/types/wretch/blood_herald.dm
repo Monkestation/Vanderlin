@@ -52,12 +52,16 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/wretch/blood_herald
 	cmode_music = 'sound/music/cmode/antag/combat_deadlyshadows.ogg'
-	total_positions = 0
+	total_positions = 1
+	roll_chance = 10
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
 	allowed_patrons = list(/datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/leviathan)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/blood_herald
+
+	antag_job = TRUE
+	antag_role = /datum/antagonist/blood_mage/herald
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
