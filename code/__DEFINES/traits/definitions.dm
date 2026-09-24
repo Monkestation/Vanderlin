@@ -381,8 +381,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STRONGBITE "Strong Bite"
 #define TRAIT_HATEWOMEN	"Ladykiller"
 #define TRAIT_SEEDKNOW "Seed Knower"
-#define TRAIT_NOBLE_BLOOD	"Noble Blooded"
-#define TRAIT_NOBLE_POWER	"Noble Authority"
+
+#define TRAIT_NOBLE_BLOOD "Noble Blooded"
+#define TRAIT_NOBLE_POWER "Noble Authority"
+#define TRAIT_THROAT_POWER "Wielder of the THROAT"
+#define TRAIT_CROWNLESS_THROAT "Crownless THROAT"
+
 #define TRAIT_EMPATH "Empath"
 #define TRAIT_BATTLE_READY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
