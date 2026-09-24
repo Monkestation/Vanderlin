@@ -1108,7 +1108,8 @@
 			if(istype(W, /obj/item/reagent_containers/lux))
 				B.contrib += 120
 				record_round_statistic(STATS_SHRINE_VALUE, 120)
-			else if(istype(W, /obj/item/coin) || (istype(W, /obj/item/gem) && !istype(W, /obj/item/gem/amethyst)) || istype(W, /obj/item/reagent_containers/glass/cup/silver) || istype(W, /obj/item/reagent_containers/glass/cup/golden) || istype(W, /obj/item/reagent_containers/glass/carafe) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/statue))
+			else if(((!istype(W, /obj/item/clothing) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/clothing/head/crown/nyle) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/neck/psycross)) && !istype(W, /obj/item/weapon) && W.get_real_price() >= 30) || istype(W, /obj/item/coin))
+				//idol takes whatever has value > 30 (aside from normal clothing and weapons with exception for jewelry)
 				if(!istype(W, /obj/item/coin))
 					B.contrib += (W.get_real_price() / 2) // sell jewelry and other fineries, though at a lesser price compared to fencing them first
 					record_round_statistic(STATS_SHRINE_VALUE, (W.get_real_price() / 2))
