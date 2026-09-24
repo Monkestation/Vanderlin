@@ -62,28 +62,23 @@
 	var/hugable = FALSE
 	var/named = FALSE
 	var/has_storage = FALSE
-	var/datum/component/storage/storage_component_path = /datum/component/storage/concrete/grid/coin_pouch/cloth
-
-/obj/item/child_toy/Initialize(mapload, ...)
-	. = ..()
-	if(has_storage && storage_component_path)
-		AddComponent(storage_component_path)
+	var/storage_component_path = /datum/component/storage/concrete/grid/coin_pouch/cloth
 
 /obj/item/child_toy/attack_self(mob/living/user)
-	if(hugable)
+		if(!hugable)
+				return
+
 		user.add_stress(/datum/stress_event/hug)
 		playsound(user, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
 		visible_message(span_emote("[user] hugs [src.name]."), span_emote("I hug [src.name]."))
-	else
-		return
 
-/obj/item/child_toy/stickd
+/obj/item/child_toy/stick_doll
 	name = "stick doll"
 	desc = "It can be either beloved toy of a child or tool of malicious ritual."
 	icon_state = "stickd"
 
 /obj/item/child_toy/ball
-	name = " leather ball"
+	name = "leather ball"
 	desc = "It is said that kicking a ball is the favourite game of the Orcish clans... especially the brawl after it."
 	icon_state = "ball"
 	drop_sound = 'sound/items/basketball_bounce.ogg'
@@ -97,11 +92,11 @@
 
 /obj/item/child_toy/soft_toy/attackby(obj/item/W, mob/user, list/modifiers)
 	if(!user.is_literate())
-		to_chat(user, "<span class='warning'>I don't know any verba.</span>")
+		to_chat(user, span_warning("I don't know how to read or write."))
 		return
 	if(istype(W, /obj/item/needle))
 		if(named)
-			to_chat(user, "<span class='warning'>its already named.</span>")
+			to_chat(user, span_warning("It is already named."))
 		else
 			var/n_name = browser_input_text(usr, "what would you like to name your toy?", "Toy Naming", null, MAX_NAME_LEN)
 			if(n_name && !named)
@@ -128,6 +123,11 @@
 	has_storage = TRUE
 	storage_component_path = /datum/component/storage/concrete/grid/coin_pouch/cloth
 	abstract_type = /obj/item/child_toy/soft_toy/kobold
+
+/obj/item/child_toy/soft_toy/kobold/Initialize(mapload, ...)
+	. = ..()
+	if(has_storage && storage_component_path)
+		AddComponent(storage_component_path)
 
 /obj/item/child_toy/soft_toy/kobold/amber
 	name = "amberhide kobold doll"
@@ -175,19 +175,19 @@
 
 /obj/item/child_toy/toy_soldier/attackby(obj/item/G, mob/user, list/modifiers)
 	if(!user.is_literate())
-		to_chat(user, "<span class='warning'>I don't know any verba.</span>")
+		to_chat(user, span_warning("I don't know how to read or write."))
 		return
 	if(istype(G, /obj/item/weapon/chisel))
 		if(named)
-			to_chat(user, "<span class='warning'>its already named.</span>")
+			to_chat(user, span_warning("It is already named."))
 		else
 			var/n_name = browser_input_text(usr, "what would you like to name your toy?", "Toy Naming", null, MAX_NAME_LEN)
 			if(n_name && !named)
 				named = n_name
 				name = "[(n_name ? "[n_name]" : null)]"
+				update_appearance(UPDATE_NAME)
 		return
 	..()
-	update_appearance(UPDATE_NAME)
 
 /obj/item/child_toy/toy_soldier/update_icon_state()
 	. = ..()

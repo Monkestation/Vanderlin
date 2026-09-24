@@ -57,9 +57,9 @@
 	output = /obj/item/clothing/head/crown/wooden
 	craftdiff = 3
 
-/datum/repeatable_crafting_recipe/crafting/stickd
+/datum/repeatable_crafting_recipe/crafting/stick_doll
 	name = "Stick Doll"
-	output = /obj/item/child_toy/stickd
+	output = /obj/item/child_toy/stick_doll
 	requirements = list(
 		/obj/item/grown/log/tree/stick = 3,
 		/obj/item/natural/fibers = 2

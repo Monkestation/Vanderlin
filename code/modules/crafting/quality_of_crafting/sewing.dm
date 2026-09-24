@@ -2034,7 +2034,7 @@
 	category = "Toy"
 
 /datum/repeatable_crafting_recipe/sewing/doll
-	name = "Doll"
+	name = "doll"
 	output = /obj/item/child_toy/soft_toy/doll
 	requirements = list(
 		/obj/item/natural/cloth = 2,
