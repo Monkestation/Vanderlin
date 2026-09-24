@@ -200,16 +200,11 @@
 		// Cabal
 		if(HAS_TRAIT(user, TRAIT_CABAL) && (istype(patron, /datum/patron/inhumen/zizo) || HAS_TRAIT(src, TRAIT_CABAL)))
 			. += span_purple("A fellow seeker of Her ascension.")
-		// Centrist
-		if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && (HAS_TRAIT(src, TRAIT_DIVINE_CENTRIST) && !HAS_TRAIT(src, TRAIT_DIVINE_SERVANT)))
-			. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
 
 		// The disgusing inquistion section
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))
 			if(real_name in GLOB.inquis_suspect_players)
 				. += span_userdanger("SUSPECTED OF HERESY...")
-			if(has_status_effect(/datum/status_effect/debuff/blood_mark/curse) || has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
-				. += span_bloody("Marked by Blood Magic!")
 
 		var/they_pur = HAS_TRAIT(user, TRAIT_PURITAN)
 		var/they_inquis = HAS_TRAIT(user, TRAIT_INQUISITION)
@@ -239,7 +234,7 @@
 				disgust_msg = span_necrosis("[P[THEY]] look[pl] really disgusted.")
 			if(DISGUST_LEVEL_DISGUSTED to INFINITY)
 				disgust_msg = span_necrosis(html_tag("B", "[P[THEY]] look[pl] extremely disgusted."))
-		if(disgust_msg && HAS_TRAIT(user, TRAIT_EMPATH) || disgust >= DISGUST_LEVEL_DISGUSTED)
+		if(disgust_msg && (HAS_TRAIT(user, TRAIT_EMPATH) || HAS_TRAIT(user, TRAIT_DEVIL_MARKED_LEVIATHAN)) || disgust >= DISGUST_LEVEL_DISGUSTED)
 			. += disgust_msg
 
 		// Stress
@@ -255,7 +250,7 @@
 				stress_msg = span_tinywarning("[P[THEY]] look[pl] stressed.")
 			if(STRESS_NEUTRAL to STRESS_BAD)
 				stress_msg = span_tinynotice("[P[THEY]] look[pl] a little stressed.")
-		if(stress_msg && HAS_TRAIT(user, TRAIT_EMPATH) || stress >= STRESS_INSANE)
+		if(stress_msg && (HAS_TRAIT(user, TRAIT_EMPATH) || HAS_TRAIT(user, TRAIT_DEVIL_MARKED_LEVIATHAN)) || stress >= STRESS_INSANE)
 			. += stress_msg
 
 		//Drunkenness
@@ -319,13 +314,22 @@
 				slot_title = " on [P[THEIR]] left side"
 			if(ITEM_SLOT_BELT_R)
 				slot_title = " on [P[THEIR]] right side"
-		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [I.get_examine_string(user, FALSE, TRUE)][slot_title]."
+		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [get_item_examine_label(I, user, I.get_examine_string(user, FALSE, TRUE))][slot_title]."
 	for(var/obj/item/I in held_items)
 		if(I.item_flags & ABSTRACT)
 			continue
 		var/wielding = I.is_wielded()
-		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [I.get_examine_string(user, FALSE, TRUE)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
+		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [get_item_examine_label(I, user, I.get_examine_string(user, FALSE, TRUE))] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
 
+/mob/living/proc/get_item_examine_label(obj/item/I, mob/living/user, item_examine_string)
+	if(isnull(item_examine_string))
+		item_examine_string = I.get_examine_string(user)
+	var/list/examine_highlight_status = I.get_examine_highlight_status(user)
+	if(length(examine_highlight_status))
+		var/datum/examine_highlight/highlight_type = examine_highlight_status[1]
+		var/heresy_examine_tooltip = I.get_examine_highlight_description(examine_highlight_status) + "<br>" + highlight_type.explanation
+		item_examine_string = span_tooltip_dangerous_html(heresy_examine_tooltip, I.get_examine_highlight_labeled_string(highlight_type, item_examine_string))
+	return item_examine_string
 
 /// Things that are physical but do not need to see your face to establish.
 /// Since these tend to vary in location items must be added to the list manually.

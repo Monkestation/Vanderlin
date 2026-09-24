@@ -50,6 +50,7 @@
 	desc = "Fine particles of bloodstone."
 	melting_material = /datum/material/bloodsteel
 	item_weight = 350 GRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
 
 /obj/item/ore/dust/bloodstone/Initialize(mapload)
 	. = ..()

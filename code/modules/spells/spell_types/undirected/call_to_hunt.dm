@@ -6,7 +6,8 @@
 
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/attribute/skill/magic/holy
+	spell_flags = SPELL_DEVIL_BLOCKED
+	associated_skill = /datum/attribute/skill/magic/druidic
 	invocation = "FOR THE HUNT!"
 	invocation_type = INVOCATION_SHOUT
 

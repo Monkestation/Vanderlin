@@ -347,3 +347,47 @@
 	)
 	results = list(/datum/reagent/poison/soulbane_ichor = 15)
 	mix_message = "The reagents collapse into a lightless black ichor that seems to absorb nearby illumination."
+
+/datum/chemical_reaction/gamble
+	name = "Desgracia Luckbane"
+	id = "gamble"
+	required_reagents = list(
+		/datum/reagent/blood/tiefling = 10,
+		/datum/reagent/druqks = 10,
+		/datum/reagent/lux = 1
+	)
+	results = list( /datum/reagent/poison/gamble = 10)
+	mix_message = "The blood changes hue slightly as the lux mixes, ever so slightly, and the glow vanishes."
+
+/datum/chemical_reaction/erratique
+	name = "Erratique Neurotoxin"
+	id = "erratique"
+	required_reagents = list(
+		/datum/reagent/toxin/spidervenom_inert = 10,
+		/datum/reagent/druqks = 5,
+		/datum/reagent/medicine/antidote = 5
+	)
+	results = list(/datum/reagent/poison/erratique = 20)  //Is it just me or do I smell military grade deliriant war chemicals?
+	mix_message = "The weakened venom foams as the drugs mix with it, before settling with a dizzying scent."
+
+/datum/chemical_reaction/kingsbane
+	name = "Kingsbane"
+	id = "kingsbane"
+	required_reagents = list(
+		/datum/reagent/lux_tainted = 5,
+		/datum/reagent/consumable/ethanol/elfblue = 5,
+		/datum/reagent/mercury = 5
+	)
+	results = list(/datum/reagent/poison/kingsbane = 15)
+	mix_message = "The solution fizzles violently, as it becomes a solid mettalic gold color."
+	
+/datum/chemical_reaction/tear
+	name = "Sunder Toxin"
+	id = "tear"
+	required_reagents = list(
+		/datum/reagent/blood = 5,
+		/datum/reagent/water/gross = 5,
+		/datum/reagent/consumable/nutriment/bone_marrow = 5
+	)
+	results = list(/datum/reagent/poison/tear = 15)
+	mix_message = "The reagents mix together to create a visually disgusting sludge."

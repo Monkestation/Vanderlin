@@ -153,7 +153,7 @@
 
 /obj/item/weapon/knife/dagger/silver/arcyne/Initialize()
 	. = ..()
-	filter(type="drop_shadow", x=0, y=0, size=1, offset=1, color="#800080")
+	filter(type="drop_shadow", x=0, y=0, size=1, offset=2, color="#800080")
 
 /obj/item/weapon/knife/dagger/silver/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!istype(tool, /obj/item/ore/cinnabar))
@@ -750,7 +750,7 @@
 	qdel_timer = QDEL_IN_STOPPABLE(src, 10 MINUTES)
 
 /obj/structure/soul/proc/drain_mana(mob/living/user)
-	var/datum/beam/transfer_beam = user.Beam(src, icon_state = "drain_life", time = INFINITY)
+	var/datum/beam/transfer_beam = user.Beam(src, icon_state = "drain_mana", time = INFINITY)
 
 	var/failed = FALSE
 	while(!failed)

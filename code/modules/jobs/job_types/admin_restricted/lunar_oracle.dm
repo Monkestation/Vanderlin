@@ -53,7 +53,7 @@
 
 	cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	allowed_patrons = list(/datum/patron/divine/noc)
 
 	outfit = /datum/outfit/admin/oracle
@@ -88,6 +88,7 @@
 		TRAIT_LUNAR_ORDER,
 		TRAIT_BLINDFIGHTING,
 		TRAIT_SORCERER,
+		TRAIT_IDENTIFY_DEVIL_MARKS,
 	)
 
 	languages = list(

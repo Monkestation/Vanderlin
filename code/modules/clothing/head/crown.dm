@@ -7,6 +7,8 @@
 	abstract_type = /obj/item/clothing/head/crown
 	item_weight = 2.23 KILOGRAMS //the weight of the crown or something thematic
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
+	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 
 /obj/item/clothing/head/crown/circlet
 	name = "golden circlet"
@@ -108,10 +110,9 @@
 	name = "crown of Vanderlin"
 	desc = "Heavy is the weight of the crown, and even heavier the responsibility it infers to its wearer."
 	icon_state = "serpcrown"
-	mob_overlay_icon = 'icons/roguetown/clothing/onmob/head.dmi'
-	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK
 	sellprice = VALUE_EXTREME
 	resistance_flags = FIRE_PROOF|ACID_PROOF|LAVA_PROOF|UNACIDABLE|INDESTRUCTIBLE
+	examine_highlight_type = /datum/examine_highlight/royal_court/crown
 
 /obj/item/clothing/head/crown/serpcrown/Initialize()
 	. = ..()
@@ -127,12 +128,6 @@
 /obj/item/clothing/head/crown/serpcrown/proc/anti_stall()
 	visible_message(span_warning("[src] crumbles to dust, the ashes spiriting away in the direction of the Keep."))
 	qdel(src) //Anti-stall
-
-/obj/item/clothing/head/crown/serpcrown/surplus
-	name = "crown"
-	desc = "A replacement for the Crown of Vanderlin, every bit as valid as proof of sovereignity as the original."
-	icon_state = "serpcrowno"
-	sellprice = VALUE_GOLD_ITEM
 
 /obj/item/clothing/head/crown/sparrowcrown
 	name = "champions circlet"
@@ -174,9 +169,9 @@
 /obj/item/clothing/head/crown/circlet/sleepless/equipped(mob/user, slot)
 	. = ..()
 	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_SLEEPIMMUNE,"Fatal Insomnia")
+		ADD_TRAIT(user, TRAIT_SLEEPIMMUNE, "clouded_circlet")
 	else
-		REMOVE_TRAIT(user, TRAIT_SLEEPIMMUNE,"Fatal Insomnia")
+		REMOVE_TRAIT(user, TRAIT_SLEEPIMMUNE, "clouded_circlet")
 
 //............... Stink Immunity Circlet ............... //
 /obj/item/clothing/head/crown/circlet/stink

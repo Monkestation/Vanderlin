@@ -39,7 +39,7 @@
 
 	allowed_races = RACES_PLAYER_NO_KOBOLD
 	allowed_ages = list(AGE_OLD, AGE_IMMORTAL)
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	tutorial = "Eat. Train. Sleep. Eat. Train. Sleep.\n\n\
 		My daes of adventuring are long past. Mine was a name that none could avoid. I built up a guild from plank and nail, but now my daes are spent raising up fools who may eclipse me, or more likely perish.\n\
@@ -53,7 +53,6 @@
 	give_bank_account = 20
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	bypass_lastclass = TRUE
 	selection_color = "#3b150e"
 
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/mercenary)

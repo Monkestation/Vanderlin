@@ -131,7 +131,7 @@ SUBSYSTEM_DEF(ambience)
 	if(cmode && cmode_music)
 		used = cmode_music
 		vol *= 1.2
-	else if(music_enabled && HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE))
+	else if(music_enabled && (HAS_TRAIT(src, TRAIT_SCHIZO_AMBIENCE) || HAS_TRAIT(src, TRAIT_LEVIATHAN_CURSE)))
 		used = 'sound/music/dreamer_is_still_asleep.ogg'
 	else if(music_enabled && has_stress_type(/datum/stress_event/black_briar2))
 		used = 'sound/music/briar.ogg'

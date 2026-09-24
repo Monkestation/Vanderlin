@@ -13,7 +13,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/grant_title)
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ROYALTY
 	outfit = /datum/outfit/hand
 	advclass_cat_rolls = list(CTAG_HAND = 20)
@@ -40,7 +39,8 @@
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS,
 		TRAIT_KNOW_COURTAGENT_DOORS,
-		TRAIT_KNOWCOURTAGENTS
+		TRAIT_KNOWCOURTAGENTS,
+		TRAIT_KNOWBANDITS
 	)
 	traits = list(
 		TRAIT_NOBLE_BLOOD,
@@ -56,8 +56,6 @@
 	name = JOB_HAND
 	belt = /obj/item/storage/belt/leather/black
 	neck = /obj/item/storage/keyring/hand
-	ring = /obj/item/clothing/ring/courtagent_ring/blacksteel
-
 
 /datum/job/hand/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -67,6 +65,17 @@
 		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(agent_callback), spawned))
 	else
 		agent_callback(spawned)
+
+/datum/job/hand/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+	var/static/list/rings = list(
+		"Blacksteel Ring" = /obj/item/clothing/ring/courtagent_ring/blacksteel/hand,
+		"Bronze Ring" = /obj/item/clothing/ring/courtagent_ring/bronze/hand,
+		"Silver Ring" = /obj/item/clothing/ring/courtagent_ring/silver/hand,
+		"Gold Ring" = /obj/item/clothing/ring/courtagent_ring/gold/hand,
+	)
+	spawned.select_equippable(player_client, rings, message = "Choose Your Ring", title = "HAND")
 
 /datum/job/hand/proc/agent_callback(mob/living/carbon/human/H)
 	addtimer(CALLBACK(src, PROC_REF(know_agents), H), 6 SECONDS)

@@ -1,0 +1,14 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added worship of the Archdevils."
+  - rscadd: "Tied roles that start with blood magic to the Archdevils."
+  - rscadd: "Gloves now hide your palms. Certain roles can identify devil worshippers by examining their bare palms from close range. This may change."
+  - rscadd: "Gloves (other than plate/chain) now hide if you're wearing a ring."
+  - rscadd: "Added Abraxas' Curse, which turns you into a tiefling."
+  - rscadd: "Added Mephistopheles' Curse, which prevents you using blood magic."
+  - rscadd: "Added Leviathan's Curse, which makes you unable to see in the dark and plays eerie sounds."
+  - rscadd: "Added Blood Herald Wretch, a rare spawn which functions similar to Iconoclast. No god can claim dominion over your masters, you will bring them all low."
+  - rscadd: "Added a unique variant of Blood Choke to the Herald, able to be resisted out of by Resist, Clicking the Status Icon or Clicking yourself."
+  - rscadd: "Added Blood Harvest, an AOE Blood Magic spell that is not possible to learn. Used by the Herald as their only source of Vitae and to keep them fighting longer."
+  - balance: "Blacksteel (and bloodsteel) armor now has the correct stats."

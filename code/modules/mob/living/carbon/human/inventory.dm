@@ -1,5 +1,5 @@
 
-/mob/living/carbon/human/get_equipped_items(include_flags = NONE)
+/mob/living/carbon/human/get_equipped_items(include_flags = NONE, ignore_skin = FALSE)
 	var/list/items = ..()
 	// if(!(include_flags & INCLUDE_POCKETS))
 	// 	items -= list(l_store, r_store, s_store)
@@ -139,8 +139,9 @@
 			if(wear_armor)
 				return
 			wear_armor = equipping
-			if(equipping.flags_inv & HIDEJUMPSUIT)
+			if(equipping.flags_inv & HIDESHIRTPANTS)
 				update_inv_shirt()
+				update_inv_pants()
 			if(wear_armor.breakouttime) //when equipping a straightjacket
 				ADD_TRAIT(src, TRAIT_RESTRAINED, SUIT_TRAIT)
 				stop_pulling() //can't pull if restrained

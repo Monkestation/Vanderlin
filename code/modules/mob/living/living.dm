@@ -1050,6 +1050,8 @@
 	// Reapply arcyne momentum if this mind had it before death
 	if(HAS_MIND_TRAIT(src, TRAIT_ARCYNE_MOMENTUM) && !has_status_effect(/datum/status_effect/buff/arcyne_momentum))
 		apply_status_effect(/datum/status_effect/buff/arcyne_momentum)
+	if(HAS_MIND_TRAIT(src, TRAIT_BLOOD_BIND) && !has_status_effect(/datum/status_effect/buff/blood_bound))
+		apply_status_effect(/datum/status_effect/buff/blood_bound)
 
 	// The signal is called after everything else so components can properly check the updated values
 	SEND_SIGNAL(src, COMSIG_LIVING_REVIVE, full_heal_flags)
@@ -1323,6 +1325,14 @@
 		stop_attack(FALSE)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_RESIST, src)
+
+	if(has_status_effect(/datum/status_effect/debuff/blood_choke/herald))
+		to_chat(src, span_bloody("I attempt to free myself from the grip of blood magic."))
+		if(do_after(src, 3.5 SECONDS, src))
+			to_chat(src, span_bloody("I successfully escape death's grasp!"))
+			remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
+		return
+
 	//resisting grabs (as if it helps anyone...)
 	if(!HAS_TRAIT(src, TRAIT_RESTRAINED) && pulledby)
 		log_combat(src, pulledby, "resisted grab")
@@ -2607,7 +2617,7 @@
 	var/looktime = 5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) * 2)
 	if(has_quirk(/datum/quirk/boon/keen_eye))
 		looktime *= 0.25
-	if(HAS_TRAIT(src, TRAIT_KEENEYES))
+	if(HAS_TRAIT(src, TRAIT_KEENEYES) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABRAXAS))
 		looktime *= 0.25
 	if(do_after(src, looktime))
 		// var/huhsneak

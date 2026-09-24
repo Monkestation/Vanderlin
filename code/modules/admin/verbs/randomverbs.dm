@@ -50,9 +50,9 @@
 			var/volume = "Normal"
 			var/first_time_message
 			for(var/patron in COLORFUL_PATRONS)
-				if(patron in god_options)
-					continue
-				god_options += patron
+				god_options |= patron
+			for(var/devil in ARCHDEVIL_PATRON_NAMES)
+				god_options |= devil
 			chosen_god = browser_input_list(user, "Which god?", "God", god_options, "CANCEL", 20 SECONDS)
 			if(!chosen_god || (chosen_god == "CANCEL"))
 				message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
@@ -70,6 +70,8 @@
 			if(first_time && first_time_message)
 				to_chat(target, SPAN_GOD_FIRST_FEEL(first_time_message))
 				message_admins("<span class='adminnotice'><b> SubtleMessage: [key_name_admin(user)] -> [key_name_admin(target)] :</b> [first_time_message]</span>")
+			if(chosen_god in ARCHDEVIL_PATRON_NAMES)
+				chosen_god = "archdevil"
 			message = "<span class='god_[ckey(chosen_god)]'>[message]</span>"
 			switch(volume)
 				if("Loud")

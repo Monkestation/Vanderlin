@@ -15,7 +15,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
 	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
-
+	flags_inv = HIDEHANDS
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/gloves/plate
 	prevent_crits = ALL_EXCEPT_STAB
@@ -65,7 +65,7 @@
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
 	armor_class = AC_MEDIUM
-	armor_type = /datum/armor/gloves/plate/good
+	armor_type = /datum/armor/gloves/plate/blacksteel
 	item_weight = 1.65 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 	max_integrity = INTEGRITY_OLD_BLACKSTEEL
@@ -105,11 +105,13 @@
 	name = "gilded gauntlets"
 	desc = "Shimmering plate gauntlets. Many riches have been taken with these, and just as many lives."
 	icon_state = "matthiosgloves"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 /obj/item/clothing/gloves/plate/inhumen/graggar
 	name = "vicious gauntlets"
 	desc = "Plate gauntlets that reek of death. Many lives have been taken with these."
 	icon_state = "graggarplategloves"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/clothing/gloves/plate/inhumen/graggar/heavy
 	name = "vicious plated gauntlets"
@@ -123,6 +125,7 @@
 	name = "saccharine gauntlets"
 	desc = "Tantalizing plate gauntlets, you almost feel like you can't take them off..."
 	icon_state = "baothagloves"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 //............... Gronnic gloves ............... //
 /obj/item/clothing/gloves/plate/iron/gronn

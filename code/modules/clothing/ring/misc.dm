@@ -358,7 +358,6 @@
 	desc = "" // the description is handled upon examine.
 	pickpocket_difficulty = SKILL_RANK_EXPERT
 
-
 /obj/item/clothing/ring/apothecary_ring/examine(mob/user)
 	. = ..()
 	if(is_apothecary_job(user.mind.assigned_role))
@@ -369,6 +368,8 @@
 		. += "An uncomfortably heavy ring of thaumic iron. Specifically made for apothecaries upon graduation. \n \
 		This gives them the right to both extract and manipulate lux, so long as they follow Pestra's teachings."
 
+// ................... The Court Agent's ring .......................
+
 /obj/item/clothing/ring/courtagent_ring
 	name = "Finger's Crown"
 	icon_state = "ring_s_agent"
@@ -377,22 +378,132 @@
 	examine_name = /obj/item/clothing/ring/silver::name
 	base_icon_state = "ring_s"
 	abstract_type = /obj/item/clothing/ring/courtagent_ring
+	examine_highlight_type = /datum/examine_highlight/royal_court/court_agent
 	var/metal_adjective = "silver"
+	var/mob/living/carbon/user_mob
+	COOLDOWN_DECLARE(transmit_cooldown)
+	var/transmit_cooldown_duration = 30 SECONDS
+	var/hand_ring = FALSE
 
 /obj/item/clothing/ring/courtagent_ring/silver/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/clothing/ring/courtagent_ring/silver/hand
+	hand_ring = TRUE
+
 /obj/item/clothing/ring/courtagent_ring/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/anti_theft)
-	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand. \
-	\nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
+	desc = "A [metal_adjective] signet ring, engraved with the sigil of the Hand."
+	if(!hand_ring)
+		desc += " \nThis ring is proof that its barer is under the personal employment of the Hand. A Crown for one's Finger."
+	else
+		name = "Hand's Signet Ring"
 
 /obj/item/clothing/ring/courtagent_ring/get_examine_icon(mob/user)
 	if(isobserver(user) || HAS_TRAIT(user, TRAIT_COURTAGENT) || get_dist(user, src) < 1)
 		return ..()
 	return ma2html(mutable_appearance(icon, base_icon_state), user)
+
+/obj/item/clothing/ring/courtagent_ring/get_mechanics_examine(mob/user)
+	. = ..()
+	if(HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
+		. += span_info("You can send messages to other agents by middle-clicking the ring while it is worn. The cooldown is [transmit_cooldown_duration / 10]s, and is halved when using direct communication.")
+
+/obj/item/clothing/ring/courtagent_ring/equipped(mob/living/carbon/user, slot)
+	. = ..()
+	if(!ishuman(user) || !HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
+		return
+	if(slot & ITEM_SLOT_RING)
+		user_mob = user
+		GLOB.agent_rings += src
+	else
+		user_mob = null
+		GLOB.agent_rings -= src
+
+/obj/item/clothing/ring/courtagent_ring/dropped(mob/user)
+	. = ..()
+	user_mob = null
+	GLOB.agent_rings -= src
+
+/obj/item/clothing/ring/courtagent_ring/Destroy()
+	. = ..()
+	user_mob = null
+	GLOB.agent_rings -= src
+
+/obj/item/clothing/ring/courtagent_ring/MiddleClick(mob/living/carbon/user, list/modifiers)
+	if(.)
+		return
+	if(!isliving(user) || !HAS_MIND_TRAIT(user, TRAIT_KNOWCOURTAGENTS))
+		return
+
+	if(HAS_ANY_OF_TRAITS(user, list(
+		TRAIT_KNOCKEDOUT,
+		TRAIT_IMMOBILIZED,
+		TRAIT_FLOORED,
+		TRAIT_HANDS_BLOCKED,
+		TRAIT_RESTRAINED,
+		TRAIT_INCAPACITATED,
+		TRAIT_MUTE,
+	)) || user.stat)
+		to_chat(user, span_warning("You cannot use your ring in this state!"))
+		return
+
+	if(src != user.get_item_by_slot(ITEM_SLOT_RING))
+		to_chat(user, span_warning("You cannot use the message function when not wearing the ring!"))
+		return
+	/// Backup warning just in case it doesn't link, only happens if it is given in an outfit directly (sometimes).
+	if(!(src in GLOB.agent_rings))
+		to_chat(user, span_warning("[src] is not linked to other rings, take it off and try again!"))
+		return
+	if(!COOLDOWN_FINISHED(src, transmit_cooldown))
+		to_chat(user, span_warning("It is too soon to send another message! You need to wait [COOLDOWN_TIMELEFT(src, transmit_cooldown)/10]s!"))
+		return
+	if(!user.can_speak_vocal())
+		to_chat(user, span_warning("You cannot communicate with your ring whilst unable to speak!"))
+		return
+
+	user.changeNext_move(CLICK_CD_MELEE)
+	if(!length(GLOB.agent_rings))
+		return
+	var/list/possible_targets = list("EVERYONE")
+	for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
+		if(ring.user_mob == user)
+			continue
+		possible_targets += ring.user_mob.real_name
+
+	var/chosen_target = tgui_input_list(user, "Who do you wish to contact?", "Contact Target", possible_targets, timeout = 20 SECONDS)
+	if(!chosen_target)
+		return
+	var/message = tgui_input_text(user, "What do you want to say?", "Message to [chosen_target]", encode = FALSE, timeout = 60 SECONDS)
+	if(!message)
+		return
+
+	user.whisper(message)
+
+	log_game("COURT AGENT: [key_name(user)] sent a court-agent ring message. '[message]'")
+	if(chosen_target == "EVERYONE")
+		COOLDOWN_START(src, transmit_cooldown, transmit_cooldown_duration)
+		for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
+			if(ring.user_mob == user)
+				continue
+			ring.receive_message(message, user, TRUE, hand_ring)
+		return
+
+	COOLDOWN_START(src, transmit_cooldown, transmit_cooldown_duration / 2)
+	for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
+		if(ring.user_mob.real_name != chosen_target)
+			continue
+		ring.receive_message(message, user, FALSE, hand_ring)
+		return
+
+/obj/item/clothing/ring/courtagent_ring/proc/receive_message(message, mob/living/carbon/user, broadcast = TRUE, is_hand = FALSE)
+	if(!user_mob)
+		return
+	to_chat(user_mob, span_notice("[broadcast ? "Global" : "Direct"] [is_hand ? "Hand's Instruction" : "Agent Message"] received from [user.real_name]: '[span_blue(message)]'"))
+	user_mob.playsound_local(user_mob, 'sound/misc/mail.ogg', 100, FALSE, -1)
+	log_game("COURT AGENT: [key_name(user_mob)] received a court-agent ring message from [key_name(user)].")
 
 /obj/item/clothing/ring/courtagent_ring/gold
 	icon_state = "ring_g_agent"
@@ -400,14 +511,23 @@
 	base_icon_state = "ring_g"
 	metal_adjective = "golden"
 
+/obj/item/clothing/ring/courtagent_ring/gold/hand
+	hand_ring = TRUE
+
 /obj/item/clothing/ring/courtagent_ring/blacksteel
 	icon_state = "ring_bs_agent"
 	examine_name = /obj/item/clothing/ring/blacksteel::name
 	base_icon_state = "ring_bs"
 	metal_adjective = "blacksteel"
 
+/obj/item/clothing/ring/courtagent_ring/blacksteel/hand
+	hand_ring = TRUE
+
 /obj/item/clothing/ring/courtagent_ring/bronze
 	icon_state = "ring_b_agent"
 	examine_name = /obj/item/clothing/ring/bronze::name
 	base_icon_state = "ring_b"
 	metal_adjective = "bronze"
+
+/obj/item/clothing/ring/courtagent_ring/bronze/hand
+	hand_ring = TRUE

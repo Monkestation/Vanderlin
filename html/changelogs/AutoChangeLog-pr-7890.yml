@@ -1,0 +1,10 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "All Circlets and Crowns can now fit on the mask slot too."
+  - rscadd: "Added two admin traits for using the THROAT without being regent or without the crown."
+  - rscdel: "Removed the surplus crown from code."
+  - bugfix: "Fixed scrying people with apostrophes in their name."
+  - map: "Inn Toilet and Baths now use a proper door with a deadbolt instead of a plank of wood."
+  - map: "Keep servants quarters got the same door upgrade."
+  - rscdel: "Church roles no longer identify Centrism at a glance."

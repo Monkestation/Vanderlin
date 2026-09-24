@@ -149,6 +149,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	armor_type = /datum/armor/plate/blacksteel
 	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
 	smeltresult = /obj/item/ingot/blacksteel
@@ -255,6 +256,7 @@
 	name = "gilded fullplate"
 	desc = "Full plate. Tales told of men in armor such as this stealing many riches, or lives."
 	icon_state = "matthiosarmor"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 //.............. Graggar Armor .................//
 
@@ -262,6 +264,7 @@
 	name = "vicious full-plate"
 	desc = "A sinister set full plate. Untold violence stirs from within."
 	icon_state = "graggarplate"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 //.............. Baotha Armor .................//
 
@@ -269,6 +272,7 @@
 	name = "saccharine full-plate"
 	desc = "A tantalizing set full plate, you almost feel like you can't take them off.."
 	icon_state = "baothaplate"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 //.............. Silver Armor .................//
 
