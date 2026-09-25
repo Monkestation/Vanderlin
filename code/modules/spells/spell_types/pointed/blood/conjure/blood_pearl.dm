@@ -61,7 +61,7 @@
 	if(HAS_TRAIT(user, TRAIT_VITAE_USER) || HAS_TRAIT(user, TRAIT_BLOOD_SENSE))
 		. += span_bloody("The pearl contains [vitae_amount]/[max_vitae] Vitae")
 	else if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT))
-		. += SPAN_GOD_NECRA("A Necran could destroy this...")
+		. += SPAN_GOD_NECRA("Necran rites could destroy this...")
 	else
 		. += span_warning("This just feels wrong... I should get rid of it.")
 
@@ -70,7 +70,7 @@
 	if(!ishuman(user))
 		return
 	var/mob/living/carbon/human/human_user = user
-	if(!HAS_TRAIT(human_user, TRAIT_VITAE_USER) && !HAS_TRAIT(human_user, TRAIT_BLOOD_STUDENT))
+	if(!HAS_ANY_OF_TRAITS(human_user, list(TRAIT_VITAE_USER, TRAIT_BLOOD_STUDENT, TRAIT_BLOOD_SENSE)))
 		to_chat(human_user, span_danger("I do not know what to do with this."))
 		return
 	var/list/options_list = list(PEARL_OPTION_DRAW)
@@ -154,6 +154,23 @@
 /obj/item/sealed_blood_pearl/Initialize(mapload)
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=1, offset=2, color=COLOR_BLOOD_MAGIC)//maybe use different colour
+
+/obj/item/sealed_blood_pearl/examine(mob/user)
+	. = ..()
+	if(HAS_TRAIT(user, TRAIT_VITAE_USER) || HAS_TRAIT(user, TRAIT_BLOOD_SENSE))
+		. += span_bloody("The pearl can be used a component for a Blood Tome.")
+	else if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT))
+		. += SPAN_GOD_NECRA("Necran rites could destroy this...")
+	else
+		. += span_warning("This just feels wrong... I should get rid of it.")
+
+/obj/item/sealed_blood_pearl/proc/shatter()
+	visible_message(span_bloody("Blood pours as the pearl shatters..."), blind_message = span_info("I hear gushing liquid."))
+	var/turf/target_turf = get_turf(src)
+	if(istype(target_turf, /turf/open))
+		target_turf.add_liquid(/datum/reagent/blood, 750)
+	playsound(src, 'sound/magic/crystal.ogg', 100, TRUE)
+	qdel(src)
 
 #undef PEARL_OPTION_DRAW
 #undef PEARL_OPTION_FEED
