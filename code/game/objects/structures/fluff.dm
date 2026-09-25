@@ -1108,7 +1108,7 @@
 			if(istype(W, /obj/item/reagent_containers/lux))
 				B.contrib += 120
 				record_round_statistic(STATS_SHRINE_VALUE, 120)
-			else if(((!istype(W, /obj/item/clothing) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/clothing/head/crown/nyle) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/neck/psycross)) && !istype(W, /obj/item/weapon) && W.get_real_price() >= 30) || istype(W, /obj/item/coin))
+			else if(((!istype(W, /obj/item/clothing) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/clothing/head/crown/nyle) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/neck/psycross)) && !istype(W, /obj/item/weapon) && W.get_real_price() >= 25) || istype(W, /obj/item/coin))
 				//idol takes whatever has value > 30 (aside from normal clothing and weapons with exception for jewelry)
 				if(!istype(W, /obj/item/coin))
 					B.contrib += (W.get_real_price() / 2) // sell jewelry and other fineries, though at a lesser price compared to fencing them first
@@ -1145,6 +1145,13 @@
 				I = new /obj/item/clothing/armor/medium/scale(user.loc)
 			else
 				I = new /obj/item/clothing/armor/leather/masterwork(user.loc)
+		if(3)
+			if(HAS_TRAIT(user, TRAIT_HEAVYARMOR))
+				I = new /obj/item/clothing/pants/platelegs(user.loc)
+			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/pants/chainlegs(user.loc)
+			else
+				I = new /obj/item/clothing/pants/trou/leather/masterwork(user.loc)
 		if(4)
 			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
 				I = new /obj/item/clothing/head/helmet/heavy/bucket(user.loc)
@@ -1170,13 +1177,6 @@
 			else
 				chosen_weapon = /obj/item/weapon/knife/dagger/navaja //I had no idea what to put as default
 			I = new chosen_weapon(user.loc)
-		if(8)
-			if(HAS_TRAIT(user, TRAIT_HEAVYARMOR))
-				I = new /obj/item/clothing/pants/platelegs(user.loc)
-			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
-				I = new /obj/item/clothing/pants/chainlegs(user.loc)
-			else
-				I = new /obj/item/clothing/pants/trou/leather/masterwork(user.loc)
 	if(I)
 		I.sellprice = 0
 
