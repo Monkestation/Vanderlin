@@ -60,7 +60,7 @@
 		pearl.shatter(TRUE)
 		return
 	else if(istype(cast_on, /obj/item/sealed_blood_pearl))
-		var/obj/item/sealed_blood_pearl/pearl = cast_om
+		var/obj/item/sealed_blood_pearl/pearl = cast_on
 		pearl.shatter()
 		return
 
