@@ -22,7 +22,7 @@
 /datum/action/cooldown/spell/burial_rites/is_valid_target(atom/cast_on)
 	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/inhumen/profane) || istype(cast_on, /obj/item/psydonmusicbox))
 		return TRUE
-	if(istype(cast_on, /obj/item/blood_pearl) || istype(/obj/item/sealed_blood_pearl))
+	if(istype(cast_on, /obj/item/blood_pearl) || istype(cast_on, /obj/item/sealed_blood_pearl))
 		return TRUE
 	else if(!istype(cast_on, /obj/structure/closet/dirthole))
 		return FALSE
