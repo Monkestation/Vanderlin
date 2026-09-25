@@ -67,4 +67,5 @@
 		/obj/item/book/magicaltheory = 1,
 		/obj/item/recipe_book/arcyne = 1,
 		/obj/item/spellbook/adept/starter/blood = 1,
+		/obj/item/scrying/flame = 1,
 	)

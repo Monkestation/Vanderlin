@@ -69,4 +69,5 @@
 		/obj/item/book/magicaltheory = 1,
 		/obj/item/recipe_book/arcyne = 1,
 		/obj/item/key/archive = 1,
+		/obj/item/scrying/flame = 1,
 	)
