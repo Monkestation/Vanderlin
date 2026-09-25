@@ -106,3 +106,67 @@
 		if(BODY_ZONE_PRECISE_NOSE)
 			return "snout"
 	return ..()
+
+/mob/living/simple_animal/hostile/retaliate/gator/corpse_gator
+	name = "Fog Gator"
+	desc = "Motes of Zizite magicks flit through the air around this massive reptile. An ordinary beast no longer, Daftmarsh folklore recounts its tendency to drag the living under the depths, so that they may return in sodden undeath."
+
+	move_to_delay = 8
+	vision_range = 9
+	aggro_vision_range = 9
+
+	botched_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/mince/beef = 2,
+								/obj/item/reagent_containers/food/snacks/rotten/meat = 5)
+	butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/mince/beef = 3,
+						/obj/item/reagent_containers/food/snacks/rotten/meat = 7,
+						/obj/item/natural/voidstone = 1,
+						/obj/item/alch/bone = 6)
+	perfect_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/steak = 2,
+						/obj/item/reagent_containers/food/snacks/rotten/meat = 9,
+						/obj/item/alch/sinew = 3,
+						/obj/item/natural/voidstone = 2,
+						/obj/item/alch/bone = 9)
+	head_butcher = /obj/item/natural/head/corpse_gator
+
+	health = 2102
+	maxHealth = 2102
+	tame_chance = 1 //So you're saying there's a chance?
+
+	mob_biotypes = MOB_ORGANIC|MOB_UNDEAD
+	base_intents = list(/datum/intent/simple/bigbite)
+	attack_sound = list('sound/vo/mobs/gator/gatorattack1.ogg', 'sound/vo/mobs/gator/gatorattack2.ogg')
+	melee_damage_lower = 26
+	melee_damage_upper = 48
+
+	base_strength = 18
+	base_perception = 12
+	base_intelligence = 7 //oh no
+	base_constitution = 15
+	base_endurance = 20
+	base_speed = 13
+	base_fortune = 9
+
+	defprob = 40
+	defdrain = 10
+	retreat_health = 0
+
+	minbodytemp = 0
+
+	can_buckle = FALSE
+	footstep_type = FOOTSTEP_MOB_HEAVY
+	faction = list(FACTION_UNDEAD)
+
+	ai_controller = /datum/ai_controller/gator/corpse_gator
+	dendor_taming_chance = DENDOR_TAME_PROB_NONE
+
+/mob/living/simple_animal/hostile/retaliate/gator/corpse_gator/Initialize()
+	. = ..()
+	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
+
+/mob/living/simple_animal/hostile/retaliate/corpse_gator/proc/TailSwipe(mob/victim)
+	var/mob/living/target = victim
+	src.visible_message(span_notice("[src] slams [target] with it's tail, knocking them to the floor!"))
+	target.Paralyze(2)
+	target.apply_damage(20, BRUTE)
+	shake_camera(target, 2, 1)
