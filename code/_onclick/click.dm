@@ -94,7 +94,7 @@
 		return
 
 	//aim assist, redirects the target if you click on tile, item or obj a person is standing on
-	if((isturf(clicked_atom) || isturf(clicked_atom.loc)) && LAZYACCESS(modifiers, LEFT_CLICK) && src.cmode && !used_intent.noaa && !ismob(clicked_atom))
+	if(LAZYACCESS(modifiers, LEFT_CLICK) && cmode && !used_intent.noaa && !ismob(clicked_atom) && (isturf(clicked_atom) || isturf(clicked_atom.loc)))
 		var/turf/T
 		if(isturf(clicked_atom))
 			T = clicked_atom
@@ -102,9 +102,9 @@
 			T = clicked_atom.loc
 		var/mob/living/target
 		for(var/mob/living/mob in T)
-			if(mob.invisibility || mob == src)
+			if(mob == src || mob.invisibility || mob.alpha <= 200)
 				continue
-			if(mob.stat == DEAD || mob.body_position == LYING_DOWN)
+			if(mob.stat > SOFT_CRIT || mob.body_position == LYING_DOWN)
 				continue
 			target = mob
 			break
