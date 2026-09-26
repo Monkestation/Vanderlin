@@ -378,26 +378,63 @@
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 
 
-//................ Copper Hatchet ............... //
-/obj/item/weapon/axe/copper
-	name = "copper hatchet"
-	desc = "A simple designed handaxe, an outdated weapon from simpler times."
-	icon_state = "chatchet"
-	force = DAMAGE_BAD_AXE
-	force_wielded = DAMAGE_BAD_AXE_WIELD
-	throwforce = DAMAGE_BAD_AXE_WIELD
+//................ Hatchets ............... //
+
+/obj/item/weapon/axe/hatchet
+	name = "huntsman hatchet"
+	desc = "A simple iron wilderness handaxe with a hammer bit, a tool often used by those who trek for long into the wild."
+	icon_state = "hatchet"
+	force = DAMAGE_AXE
+	force_wielded = 0
+	gripped_intents = null
+	alt_intents = list(MACE_STRIKE, MACE_SMASH)//Has a hammer on the back of it, can be used to smash things
+	throwforce = DAMAGE_AXE_WIELD
+	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
 	wdefense = AVERAGE_PARRY
+	max_blade_int = 200
+	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_IRON
+	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 150
+	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
+	sellprice = 25
+	item_weight = 1000 GRAMS
+
+	throw_speed = 3
+	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 60, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+
+/obj/item/weapon/axe/hatchet/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.5,"sx" = -12,"sy" = -10,"nx" = 12,"ny" = -10,"wx" = -8,"wy" = -7,"ex" = 3,"ey" = -9,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 90,"sturn" = -90,"wturn" = -90,"eturn" = 90,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.5,"sx" = -12,"sy" = 3,"nx" = 12,"ny" = 2,"wx" = -8,"wy" = 2,"ex" = 4,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("onbelt")
+				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
+
+
+
+/obj/item/weapon/axe/hatchet/copper
+	name = "copper hatchet"
+	desc = "A simply designed handaxe, an outdated weapon from simpler times."
+	icon_state = "chatchet"
+	force = DAMAGE_BAD_AXE + 4
+	throwforce = DAMAGE_BAD_AXE_WIELD + 4
 	max_blade_int = 100
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_COPPER
 	smeltresult = /obj/item/ingot/copper
 	melting_material = /datum/material/copper
-	melt_amount = 150
-	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
 	sellprice = 15
 	item_weight = 700 GRAMS
 
-/obj/item/weapon/axe/copper/getonmobprop(tag)
+	throw_speed = 2
+	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 40, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+
+
+/obj/item/weapon/axe/hatchet/copper/getonmobprop(tag)
 	. = ..()
 	if(tag)
 		switch(tag)
@@ -408,13 +445,15 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 
+
+
 //................ Bone Axe ............... //
 /obj/item/weapon/axe/boneaxe
 	name = "bone axe"
 	desc = "A rough axe made of bones."
 	icon_state = "boneaxe"
-	force = DAMAGE_BAD_AXE
-	force_wielded =	DAMAGE_BAD_AXE_WIELD
+	force = DAMAGE_BAD_AXE + 2
+	force_wielded =	DAMAGE_BAD_AXE_WIELD + 2
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
 	anvilrepair = /datum/attribute/skill/craft/crafting
@@ -439,8 +478,8 @@
 	name = "troll-horn bone axe"
 	desc = "A rough axe made of bones, strengthed with an troll's horn."
 	icon_state = "boneaxe"
-	force = DAMAGE_BAD_AXE
-	force_wielded =	DAMAGE_BAD_AXE_WIELD
+	force = DAMAGE_BAD_AXE + 3
+	force_wielded =	DAMAGE_BAD_AXE_WIELD + 3
 	wdefense = MEDIOCRE_PARRY
 	wlength = WLENGTH_SHORT
 	anvilrepair = /datum/attribute/skill/craft/crafting

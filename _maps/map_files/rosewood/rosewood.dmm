@@ -36113,7 +36113,7 @@
 /area/indoors/town/smithy)
 "rsg" = (
 /obj/structure/rack,
-/obj/item/weapon/axe/copper,
+/obj/item/weapon/axe/hatchet/copper,
 /obj/item/grown/log/tree/small{
 	pixel_y = -9;
 	pixel_x = 4
