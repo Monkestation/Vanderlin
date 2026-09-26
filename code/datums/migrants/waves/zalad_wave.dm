@@ -401,7 +401,6 @@
 	max_spawns = 1
 	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
 	weight = 25
-	downgrade_wave = /datum/migrant_wave/zalad_wave_down
 	roles = list(
 		/datum/migrant_role/zalad/emir = 1,
 		/datum/migrant_role/zalad/amirah = 1,
@@ -410,16 +409,3 @@
 		/datum/migrant_role/zalad_guard = 2
 	)
 	greet_text = "The Mercator Guild sent you, respected Zaladins, to seek favorable business proposal within the Kingdom of Vanderlin."
-
-/datum/migrant_wave/zalad_wave_down
-	name = "The Deshret Expedition"
-	max_spawns = 1
-	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/zalad/emir = 1,
-		/datum/migrant_role/zalad/amirah = 1,
-		/datum/migrant_role/zalad/furusiyya = 1,
-		/datum/migrant_role/qatil = 1
-	)
-	greet_text = "The Mercator Guild sent you, respected Zaladins, to seek favorable business proposal within the Kingdom of Vanderlin. Unfortunately most of your guards died on the way here."
