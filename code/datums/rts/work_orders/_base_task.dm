@@ -62,7 +62,7 @@
 /datum/work_order/proc/set_movement_target(atom/target)
 	if(!target)
 		stop_work("no target")
-	if(!length(get_path_to(worker, get_turf(target), TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 32 + 1, 250,1)))
+	if(!length(astar_path_to(src, target, max_steps = 100)))
 		stop_work("unreachable target")
 		return
 	worker.controller_mind.set_movement_target(target)

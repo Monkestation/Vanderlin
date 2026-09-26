@@ -46,6 +46,23 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 ///Added to the move packet `processing_move_loop_flags` so we know when a loop is behind movement even in absence of other flags
 #define MOVED_BY_MOVEMENT_LOOP (1<<6)
 
+//Index defines for movement bucket data packets
+#define MOVEMENT_BUCKET_TIME 1
+#define MOVEMENT_BUCKET_LIST 2
+
+// Movement loop status flags
+/// Has the loop been paused, soon to be resumed?
+#define MOVELOOP_STATUS_PAUSED (1<<0)
+/// Is the loop running? (Is true even when paused)
+#define MOVELOOP_STATUS_RUNNING (1<<1)
+/// Is the loop queued in a subsystem?
+#define MOVELOOP_STATUS_QUEUED (1<<2)
+
+///Return values for moveloop Move()
+#define MOVELOOP_FAILURE 0
+#define MOVELOOP_SUCCESS 1
+#define MOVELOOP_NOT_READY 2
+
 #define DEFAULT_MOB_SNEAK_TIME 5 SECONDS
 
 /**
@@ -113,8 +130,3 @@ GLOBAL_VAR_INIT(glide_size_multiplier, 1.0)
 #define ZMOVE_FALL_FLAGS (ZMOVE_FALL_CHECKS|ZMOVE_ALLOW_BUCKLED)
 /// Used when swimming
 #define ZMOVE_SWIM_FLAGS (ZMOVE_WATER_CHECKS|ZMOVE_INCAPACITATED_CHECKS|ZMOVE_CHECK_PULLS|ZMOVE_ALLOW_BUCKLED)
-
-///Return values for moveloop Move()
-#define MOVELOOP_FAILURE 0
-#define MOVELOOP_SUCCESS 1
-#define MOVELOOP_NOT_READY 2
