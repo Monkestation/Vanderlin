@@ -1,0 +1,4 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - rscadd: "Working aim assist, now clicking on a tile/item/object a person is standing on will target them. Doesn't work on people laying down/dead, those that are invisible."
