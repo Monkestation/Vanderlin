@@ -12,8 +12,8 @@
 		var/datum/material/bar_material = bar_type::melting_material
 		if(!ispath(item_material, bar_material))
 			TEST_FAIL("[created_item] melting material [item_material] does not match input ingot material [bar_material].")
-		// var/obj/item/ingot/smelt_result = created_item::smeltresult
-		// if(!ispath(smelt_result))
-		// 	continue
-		// if(!ispath(smelt_result, bar_type))
-		// 	TEST_FAIL("[created_item] melting ingot [smelt_result] does not match input ingot [bar_type].")
+		var/obj/item/ingot/smelt_result = created_item::smeltresult
+		if(!ispath(smelt_result))
+			continue
+		if(!ispath(smelt_result, bar_type))
+			TEST_FAIL("[created_item] melting ingot [smelt_result] does not match input ingot [bar_type].")
