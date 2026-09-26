@@ -170,9 +170,9 @@
 	return TRUE
 
 /obj/item/natural/cloth/proc/wring_cloth(atom/target, mob/living/user)
-	if(reagents.total_volume == 0)
-		to_chat(user, span_warning("Nothing to wring out."))
-		return FALSE
+	// if(reagents.total_volume == 0)
+	// 	to_chat(user, span_warning("Nothing to wring out."))
+	// 	return FALSE
 	if(isobj(target))
 		var/obj/O = target
 		if(!O.reagents || !O.is_open_container())

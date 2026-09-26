@@ -15,7 +15,6 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 50,
-		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/labor/farming = 30,
 	)
@@ -34,7 +33,6 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 60,
-		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/labor/farming = 30,
 	)
