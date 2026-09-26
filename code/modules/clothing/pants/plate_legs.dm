@@ -97,7 +97,8 @@
 	name = "darksteel garments"
 	desc = "Leg garments worn by true anointed of the Dame of Progress. In Her name."
 	icon_state = "zizocloth"
-	smeltresult = /obj/item/ingot/avantyne
+	melting_material = /datum/material/avantyne
+	melt_amount = 100
 	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/pants/platelegs/inhumen/zizo/alt

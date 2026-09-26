@@ -9,6 +9,7 @@
 	climbable = TRUE
 
 	var/list/stuff_shit = list()
+	var/list/item_carry_weights = list()
 
 	var/current_capacity = 0
 	var/maximum_capacity = 300 KILOGRAMS
@@ -28,15 +29,20 @@
 		addtimer(CALLBACK(src, PROC_REF(take_contents)), 0)
 	. = ..()
 	update_appearance(UPDATE_ICON)
+	RegisterSignal(src, COMSIG_TRY_STORAGE_TAKE, PROC_REF(on_pneumatic_take))
+
+/obj/structure/handcart/try_pneumatic_insert(list/atom/movable/things)
+	for(var/atom/movable/thing as anything in things.Copy())
+		if(put_in(null, thing, TRUE))
+			things -= thing
+	return things
 
 /obj/structure/handcart/container_resist(mob/living/user)
 	var/atom/L = drop_location()
 	for(var/atom/movable/AM in stuff_shit)
 		if(AM == user)
 			AM.forceMove(L)
-			stuff_shit -= AM
-			current_capacity = max(current_capacity - user.get_mob_weight() + user.carry_weight, 0)
-			update_appearance(UPDATE_ICON)
+			remove_from_cart(AM)
 			break
 
 /obj/structure/handcart/dump_contents()
@@ -44,11 +50,30 @@
 	for(var/atom/movable/AM in src)
 		AM.forceMove(L)
 	stuff_shit = list()
+	item_carry_weights = list()
 	current_capacity = 0
 
 /obj/structure/handcart/Destroy()
+	UnregisterSignal(src, COMSIG_TRY_STORAGE_TAKE)
 	dump_contents()
 	return ..()
+
+/obj/structure/handcart/proc/on_pneumatic_take(datum/source, atom/movable/thing, turf/target_turf)
+	SIGNAL_HANDLER
+	if(!target_turf || !(thing in stuff_shit))
+		return
+	remove_from_cart(thing)
+	thing.forceMove(target_turf)
+
+/obj/structure/handcart/proc/remove_from_cart(atom/movable/AM)
+	if(!(AM in stuff_shit))
+		return FALSE
+	var/weight = item_carry_weights[AM]
+	stuff_shit -= AM
+	item_carry_weights -= AM
+	current_capacity = max(current_capacity - (isnum(weight) ? weight : 0), 0)
+	update_appearance(UPDATE_ICON)
+	return TRUE
 
 /obj/structure/handcart/MouseDrop_T(atom/movable/AM, mob/living/user)
 	if(!istype(AM) || !isturf(AM.loc) || istype(AM, /atom/movable/screen))
@@ -202,6 +227,7 @@
 		AM.forceMove(src)
 	current_capacity += weight
 	stuff_shit += AM
+	item_carry_weights[AM] = weight
 	update_appearance(UPDATE_ICON)
 	return TRUE
 

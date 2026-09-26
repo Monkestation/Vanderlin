@@ -5,10 +5,11 @@
 	reagent_requirements = list(
 		/datum/reagent/water = 25
 	)
-	craft_verb = "cooking for "
+	craft_verb = "cooking "
 	required_container = /obj/item/reagent_containers/glass/bucket/pot
 	var/datum/reagent/created_reagent
 	var/water_conversion = 1
+	var/created_amount = 0
 	var/datum/pollutant/finished_smell
 	///the amount we pollute
 	var/pollute_amount = 600
@@ -36,7 +37,7 @@
 	return real_cooking_time
 
 /datum/container_craft/cooking/create_item(obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
-	if(created_reagent)
+	if(created_reagent && length(reagent_requirements))
 		var/turf/pot_turf = get_turf(crafter)
 		var/datum/reagent/first = reagent_requirements[1]
 		var/reagent_amount = reagent_requirements[first]
@@ -58,6 +59,24 @@
 				pot_turf.pollute_turf(finished_smell, pollute_amount)
 			initiator.nobles_seen_servant_work()
 		playsound(pot_turf, "bubbles", 30, TRUE)
+	else if(created_reagent)
+		var/turf/pot_turf = get_turf(crafter)
+		var/calculated_quality = calculate_reagent_quality(crafter, initiator, removing_items)
+		for(var/j = 1 to output_amount)
+			// Create quality data for the new reagent
+			var/list/quality_data = list(
+				"quality" = calculated_quality,
+			)
+
+			// Add the reagent with quality data
+			crafter.reagents.add_reagent(created_reagent, created_amount, quality_data)
+
+			after_craft(null, crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, removing_items)
+			if(finished_smell)
+				pot_turf.pollute_turf(finished_smell, pollute_amount)
+			initiator.nobles_seen_servant_work()
+		playsound(pot_turf, "bubbles", 30, TRUE)
+
 	else
 		..()
 
@@ -153,9 +172,12 @@
 
 /datum/container_craft/cooking/extra_html()
 	var/html
-	var/datum/reagent/first = reagent_requirements[1]
-	var/result_amount = reagent_requirements[first]
-	if(water_conversion > 0)
-		result_amount = CEILING((result_amount * water_conversion), 1)
+	var/result_amount = created_amount
+	if(length(reagent_requirements))
+		var/datum/reagent/first = reagent_requirements[1]
+		result_amount = reagent_requirements[first]
+		if(water_conversion > 0)
+			result_amount = CEILING((result_amount * water_conversion), 1)
 	html += "[UNIT_FORM_STRING(result_amount)] of [initial(created_reagent.name)]<br>"
+
 	return html
