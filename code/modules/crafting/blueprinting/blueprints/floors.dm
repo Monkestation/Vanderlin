@@ -327,6 +327,11 @@
 	result_type = /turf/open/floor/tile/masonic/moonbw
 	craftdiff = 3
 
+/datum/blueprint_recipe/floor/masonic/suntile
+    name = "Sun Tile"
+    result_type = /turf/open/floor/tile/masonic/suntile
+    craftdiff = 3
+
 /datum/blueprint_recipe/floor/masonic/full
 	name = "Masonic White Tile"
 	result_type = /turf/open/floor/tile/masonic/full

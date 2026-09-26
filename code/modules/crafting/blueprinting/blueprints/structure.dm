@@ -440,6 +440,17 @@
 	category = "Structures"
 	skillcraft = /datum/attribute/skill/misc/sewing
 
+/datum/blueprint_recipe/structure/sunrug
+	name = "Sun Rug"
+	desc = "A decorative rug depicting the sun."
+	result_type = /obj/structure/fluff/sunrug
+	required_materials = list(
+		/obj/item/natural/cloth = 3
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
 /datum/blueprint_recipe/structure/fibermat/square
 	name = "Square Fiber Mat"
 	desc = "A rustic mat woven from fiber."
@@ -465,6 +476,7 @@
 /datum/blueprint_recipe/structure/clutter/books
 	name = "Clutter (Books)"
 	desc = "A few stacks of books with a pot of ink & quill waiting for inspiration."
+	supports_directions = TRUE
 	result_type = /obj/structure/fluff/clutter/books
 	required_materials = list(
 		/obj/item/natural/fibers = 2
@@ -474,9 +486,21 @@
 /datum/blueprint_recipe/structure/clutter/teapot
 	name = "Clutter (Teapot)"
 	desc = "A teapot & accompanying cups on a mat."
+	supports_directions = TRUE
 	result_type = /obj/structure/fluff/clutter/teapot
 	required_materials = list(
 		/obj/item/natural/stone = 2
+	)
+	category = "Structures"
+
+/datum/blueprint_recipe/structure/clutter/sewing
+	name = "Clutter (Sewing)"
+	desc = "A roll of cloth and fiber waiting to be sewn."
+	supports_directions = TRUE
+	result_type = /obj/structure/fluff/clutter/teapot
+	required_materials = list(
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/cloth = 1
 	)
 	category = "Structures"
 
