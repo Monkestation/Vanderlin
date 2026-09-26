@@ -94,7 +94,7 @@
 		return
 
 	//aim assist, redirects the target if you click on tile, item or obj a person is standing on
-	if((isturf(clicked_atom) || isturf(clicked_atom.loc)) && LAZYACCESS(modifiers, LEFT_CLICK) && src.cmode && !used_intent.noaa)
+	if((isturf(clicked_atom) || isturf(clicked_atom.loc)) && LAZYACCESS(modifiers, LEFT_CLICK) && src.cmode && !used_intent.noaa && !ismob(clicked_atom))
 		var/turf/T
 		if(isturf(clicked_atom))
 			T = clicked_atom
