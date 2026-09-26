@@ -474,6 +474,7 @@
 	item_weight = 200 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	pickpocket_difficulty = SKILL_RANK_MASTER
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/weapon/knife/dagger/steel/inhumen/profane/examine(mob/user)
 	. = ..()
@@ -541,7 +542,7 @@
 			if(!(target.dna?.species.id in RACES_PLAYER_ALL))
 				to_chat(user, span_warning("I can't steal this face!"))
 				return
-			var/datum/beam/transfer_beam = user.Beam(target, icon_state = "drain_life", time = 6 SECONDS)
+			var/datum/beam/transfer_beam = user.Beam(target, icon_state = "drain_mana", time = 6 SECONDS)
 
 			playsound(
 				user,

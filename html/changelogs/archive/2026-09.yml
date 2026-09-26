@@ -302,3 +302,37 @@
   - code_imp: Edited name of "Extra Funding" to 400 mammons instead of 80 silvers.
   realforest2001:
   - bugfix: Heretic monarchs without the triumph no longer break roundstart.
+2026-09-25:
+  Galaxybird:
+  - rscadd: Added the ability to designate another character as a sibling in Family
+      preferences
+  ModDownloading:
+  - rscadd: Drow and Half-Drow can now be Enforcers.
+  realforest2001:
+  - rscadd: All Circlets and Crowns can now fit on the mask slot too.
+  - rscadd: Added two admin traits for using the THROAT without being regent or without
+      the crown.
+  - rscdel: Removed the surplus crown from code.
+  - bugfix: Fixed scrying people with apostrophes in their name.
+  - map: Inn Toilet and Baths now use a proper door with a deadbolt instead of a plank
+      of wood.
+  - map: Keep servants quarters got the same door upgrade.
+  - rscdel: Church roles no longer identify Centrism at a glance.
+  - rscadd: Added worship of the Archdevils.
+  - rscadd: Tied roles that start with blood magic to the Archdevils.
+  - rscadd: Gloves now hide your palms. Certain roles can identify devil worshippers
+      by examining their bare palms from close range. This may change.
+  - rscadd: Gloves (other than plate/chain) now hide if you're wearing a ring.
+  - rscadd: Added Abraxas' Curse, which turns you into a tiefling.
+  - rscadd: Added Mephistopheles' Curse, which prevents you using blood magic.
+  - rscadd: Added Leviathan's Curse, which makes you unable to see in the dark and
+      plays eerie sounds.
+  - rscadd: Added Blood Herald Wretch, a rare spawn which functions similar to Iconoclast.
+      No god can claim dominion over your masters, you will bring them all low.
+  - rscadd: Added a unique variant of Blood Choke to the Herald, able to be resisted
+      out of by Resist, Clicking the Status Icon or Clicking yourself.
+  - rscadd: Added Blood Harvest, an AOE Blood Magic spell that is not possible to
+      learn. Used by the Herald as their only source of Vitae and to keep them fighting
+      longer.
+  - balance: Blacksteel (and bloodsteel) armor now has the correct stats.
+  - rscadd: Bug Reports generated in-game can now be tagged as a Sprites issue.

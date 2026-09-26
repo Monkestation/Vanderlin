@@ -26,6 +26,7 @@
 	It would be best to keep this power to yourself, no others are worthy, you alone deserve this. Open use of Blood Magic would surely see you executed."
 	outfit = /datum/outfit/occult
 	category_tags = list(CTAG_ADVENTURER)
+	allowed_patrons = list(/datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/leviathan)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/occult
 	traits = list(

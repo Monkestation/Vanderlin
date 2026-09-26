@@ -93,9 +93,10 @@
 //Bit flags for the flags_inv variable, which determine when a piece of clothing hides another. IE a helmet hiding glasses.
 //Make sure to update check_obscured_slots() if you add more.
 #define HIDEGLOVES (1<<0)
-#define HIDESUITSTORAGE (1<<1)
-#define HIDEJUMPSUIT (1<<2)	//these first four are only used in exterior suits
-#define HIDESHOES (1<<3)
+/// Specifically the bare hands themselves, not items in hand
+#define HIDEHANDS (1<<1)
+#define HIDESHIRTPANTS (1<<2)
+#define HIDERING (1<<3)
 #define HIDEMASK (1<<4)
 #define HIDEEARS (1<<5)	// (ears means headsets and such)
 #define HIDEEYES (1<<6)	// Whether eyes and glasses are hidden

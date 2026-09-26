@@ -488,14 +488,14 @@
 		for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
 			if(ring.user_mob == user)
 				continue
-			ring.receive_message(message, user, FALSE, hand_ring)
+			ring.receive_message(message, user, TRUE, hand_ring)
 		return
 
 	COOLDOWN_START(src, transmit_cooldown, transmit_cooldown_duration / 2)
 	for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
 		if(ring.user_mob.real_name != chosen_target)
 			continue
-		ring.receive_message(message, user, TRUE, hand_ring)
+		ring.receive_message(message, user, FALSE, hand_ring)
 		return
 
 /obj/item/clothing/ring/courtagent_ring/proc/receive_message(message, mob/living/carbon/user, broadcast = TRUE, is_hand = FALSE)

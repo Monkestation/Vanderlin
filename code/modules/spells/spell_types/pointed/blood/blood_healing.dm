@@ -17,7 +17,7 @@
 
 	charge_required = FALSE
 	cooldown_time = 10 SECONDS
-	spell_cost = 50
+	spell_cost = 75
 	spell_flags = SPELL_UNETCHABLE
 
 	/// Base healing before adjustments
@@ -84,7 +84,7 @@
 	charge_required = TRUE
 	charge_time = 2 SECONDS
 	cooldown_time = 20 SECONDS
-	spell_cost = 100
+	spell_cost = 150
 	check_flags = AB_CHECK_CONSCIOUS|AB_CHECK_PHASED
 
 	invocation_type = INVOCATION_WHISPER
@@ -94,3 +94,19 @@
 	wound_modifier = 0.5
 	blood_restoration = BLOOD_VOLUME_SURVIVE / 2
 	required_level = 7
+
+/datum/action/cooldown/spell/blood_healing/herald
+	name = "Herald's Persistence"
+	learnable = FALSE
+	cooldown_time = 15 SECONDS
+	spell_cost = 100
+	base_healing = 20
+	wound_modifier = 1
+
+	invocation_type = INVOCATION_SHOUT
+	invocation = "I am their Herald, I will not fall!"
+
+/datum/action/cooldown/spell/blood_healing/herald/is_valid_target(atom/cast_on)
+	. = ..()
+	if(cast_on != owner)
+		return FALSE

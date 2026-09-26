@@ -140,15 +140,16 @@ DEFINE_BITFIELD(antimagic_flags, list(
 // Generic Bitflags for spells
 /// Ignore the trait [TRAIT_SPELLBLOCK]
 #define SPELL_IGNORE_SPELLBLOCK (1 << 0)
-
 /// Is learnable via Rituos
 #define SPELL_RITUOS (1 << 1)
-
+/// Psydonic Miracle
 #define SPELL_PSYDON (1 << 2)
 
 #define SPELL_TEMPORARY (1 << 3)
-
+/// Cannot be etched for spell stones
 #define SPELL_UNETCHABLE (1 << 4)
+/// Does not work on those with TRAIT_DEVILS_REJECTION
+#define SPELL_DEVIL_BLOCKED (1 << 5)
 
 // Bitflags for spell requirements
 /// Whether the spell requires wizard clothes to cast.

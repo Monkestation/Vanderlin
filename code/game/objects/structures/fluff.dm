@@ -1337,7 +1337,7 @@
 	if(confirm != "Yes")
 		return
 
-	ADD_TRAIT(user, TRAIT_DIVINE_CONVERT, DEVOTION_TRAIT)
+	ADD_TRAIT(user, TRAIT_CHANGED_PATRON, DEVOTION_TRAIT)
 	user.set_patron(real_patron)
 	to_chat(user, "<span class='god_[LOWER_TEXT(real_patron.name)]'>You have devoted yourself to [real_patron]!</span>")
 	log_game("PATRON: [key_name(user)] changed their patron from [old_patron.name] to [real_patron]")

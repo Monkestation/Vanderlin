@@ -17,6 +17,8 @@
 /datum/antagonist/blood_mage/mage/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/blood_mage/occult))
 		return
+	if(istype(examined_datum, /datum/antagonist/blood_mage/herald))
+		return span_boldnotice("The Blood Herald of The Archdevils, bringer of ruin and death.")
 	if(istype(examined_datum, /datum/antagonist/blood_mage/sorcerer))
 		return span_boldnotice("A formidable Blood Sorcerer, they could teach me much.")
 	if(istype(examined_datum, /datum/antagonist/blood_mage/student))
@@ -50,6 +52,8 @@
 		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
 		return span_boldnotice("A deadite.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/herald))
+		return span_boldnotice("The Blood Herald of The Archdevils, bringer of ruin and death.")
 	if(istype(examined_datum, /datum/antagonist/blood_mage/sorcerer))
 		return span_boldnotice("A fellow Blood Sorcerer.")
 	if(istype(examined_datum, /datum/antagonist/blood_mage/student))
@@ -65,6 +69,8 @@
 	increase_votepwr = FALSE
 
 /datum/antagonist/blood_mage/student/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+	if(istype(examined_datum, /datum/antagonist/blood_mage/herald))
+		return span_boldnotice("The Blood Herald of The Archdevils, bringer of ruin and death.")
 	if(istype(examined_datum, /datum/antagonist/blood_mage/sorcerer))
 		return span_boldnotice("A Scion of Blood Magic... the things I could learn...")
 	if(istype(examined_datum, /datum/antagonist/blood_mage/student))
@@ -82,6 +88,43 @@
 /datum/antagonist/blood_mage/occult/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	return
 
+/datum/antagonist/blood_mage/herald
+	name = "Blood Herald"
+	antag_hud_name = "bloodherald"
+	confess_lines = list(
+		"MY MASTERS WILL BRING RUIN!",
+		"THE FALSE GODS WILL BURN!",
+		"FEAR THE COMING DARKNESS!",
+	)
+
+/datum/antagonist/blood_mage/herald/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
+		return span_boldnotice("The immortal servant of the Sun Queen.")
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker))
+		return span_boldnotice("The immortal servant of the Moon Prince.")
+	if(istype(examined_datum, /datum/antagonist/vampire/lord))
+		return span_boldnotice("Firstborn lord of Kaine.")
+	if(istype(examined_datum, /datum/antagonist/vampire/lords_spawn))
+		return span_boldnotice("The spawn of the firstborn.")
+	if(istype(examined_datum, /datum/antagonist/vampire))
+		return span_boldnotice("A child of Kaine.")
+	if(istype(examined_datum, /datum/antagonist/vampire/outcast))
+		return span_boldnotice("An outcast child of Kaine.")
+	if(istype(examined_datum, /datum/antagonist/zombie))
+		return span_boldnotice("A deadite.")
+	if(istype(examined_datum, /datum/antagonist/skeleton))
+		return span_boldnotice("A deadite.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/herald))
+		return span_boldnotice("Blood Herald of The Archdevils, bringer of ruin and death.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/sorcerer))
+		return span_boldnotice("A formidable Blood Sorcerer.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/student))
+		return span_boldnotice("A student of Blood Magic.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/mage))
+		return span_boldnotice("An established Blood Mage.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/occult))
+		return span_boldnotice("Someone who found forbidden knowledge...")
+
 /datum/antagonist/blood_mage/roundend_report()
 	if(owner?.current)
 		var/the_name = owner.name
@@ -90,8 +133,3 @@
 			the_name = H.real_name
 			to_chat(world, "[the_name] was a [name].")
 	return
-
-/datum/antagonist/blood_mage/occult
-	name = "Occult Librarian"
-	antag_hud_name = null
-	antag_hud_type = null

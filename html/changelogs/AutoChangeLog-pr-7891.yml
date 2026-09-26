@@ -1,0 +1,5 @@
+author: "Ordosian"
+delete-after: True
+changes:
+  - image: "Fixed a bunch of sprites."
+  - code_imp: "breeches icon state."
