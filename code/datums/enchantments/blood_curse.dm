@@ -68,36 +68,36 @@
 		return
 
 	var/curse_effect = get_curse_effect(target)
-	if(!curse_effect || !(get_curse_effect(user) <= BLOOD_CURSE_RELIGION))
+	if(!curse_effect || (get_curse_effect(user) > BLOOD_CURSE_RELIGION))
 		return
 	var/vitae_gain = 1
 
 	switch(curse_effect)
 		if(BLOOD_CURSE_RELIGION)
-			to_chat(user, span_userdanger("My strength is sapped by the blood curse."))
-			to_chat(user, SPAN_GOD_ARCHDEVILS("My patron's mark helps resist some of the curse's effects."))
-			user.apply_status_effect(/datum/status_effect/debuff/blood_curse_lesser, null, curse_effect)
+			to_chat(target, span_userdanger("My strength is sapped by the blood curse."))
+			to_chat(target, SPAN_GOD_ARCHDEVILS("My patron's mark helps resist some of the curse's effects."))
+			target.apply_status_effect(/datum/status_effect/debuff/blood_curse_lesser, null, curse_effect)
 			vitae_gain += 1
 		if(BLOOD_CURSE_STUDENT)
 			to_chat(target, span_userdanger("My strength is sapped by the blood curse!"))
 			to_chat(target, span_bloody("My training helps resist some of the curse's effects."))
 			target.apply_status_effect(/datum/status_effect/debuff/blood_curse_lesser, null, curse_effect)
 			vitae_gain += 1
-		if(BLOOD_CURSE_WEAKENED, BLOOD_CURSE_TOXIC)
+		if(BLOOD_CURSE_WEAKENED)
 			to_chat(target, span_userdanger("My strength is sapped by the blood curse!"))
 			target.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 			vitae_gain += 2
 		if(BLOOD_CURSE_TOXIC)
+			to_chat(target, span_userdanger("My strength is sapped by the blood curse!"))
+			target.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 			to_chat(target, span_userdanger("The curse is seeping into my blood! It burns!"))
 			target.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_hit)
 			target.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, poison_hit)
 			to_chat(user, span_bloody("[target] is poisoned by the blood curse."))
-			if(target.mind)
-				vitae_gain += 2
+			vitae_gain += 4
 
 	user.adjust_bloodpool(vitae_gain)
 	last_used["ON_HIT"] = world.time
-	last_used["PULSE"] = (world.time + BLOOD_CURSE_PULSE)
 	return
 
 /datum/enchantment/bloodcurse/proc/on_equip(obj/item/cursed_item, mob/living/carbon/human/user)
@@ -109,7 +109,7 @@
 	if(check_curse_guard(cursed_item, user))
 		curse_effect = BLOOD_CURSE_GLOVED
 
-	last_used["PULSE"] = world.time
+	last_used["PULSE"] = (world.time + BLOOD_CURSE_PULSE)
 	switch(curse_effect)
 		if(BLOOD_CURSE_RELIGION)
 			to_chat(user, span_userdanger("My strength is sapped by the blood curse."))
@@ -185,6 +185,7 @@
 			to_chat(victim, span_bloody("The curse floods my veins with toxins!"))
 			victim.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 			victim.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, poison_pulse)
+			victim.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_pulse)
 	last_used["PULSE"] = world.time
 
 /datum/enchantment/bloodcurse/process(delta_time)
