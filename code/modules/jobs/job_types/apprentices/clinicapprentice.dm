@@ -1,9 +1,11 @@
 /datum/attribute_holder/sheet/job/clinicapprentice/child
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 1,
-		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/misc/reading = 30,
@@ -15,9 +17,13 @@
 /datum/attribute_holder/sheet/job/clinicapprentice
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 1,
-		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/combat/unarmed = 20,
+		STAT_SPEED = 1,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/combat/wrestling = 30,
+		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/craft/engineering = 20,
