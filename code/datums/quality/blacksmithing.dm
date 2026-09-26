@@ -17,18 +17,25 @@
 	var/difficulty_modifier = 0
 	var/minigame_plays = 0
 	var/skill_randomization = 0
+	var/simple_hit_used = FALSE
+	var/simple_hit_amount = 0
+	var/simple_performance = 0
 
-/datum/quality_calculator/blacksmithing/New(mat_qual = 0, skill_qual = 0, components = 1, reagent_qual = 0, perf_qual = 0, diff_mod = 0, mini_play = 1)
+/datum/quality_calculator/blacksmithing/New(mat_qual = 0, skill_qual = 0, components = 1, reagent_qual = 0, perf_qual = 0, diff_mod = 0, mini_play = 1, simple_used = FALSE, simple_amount = 0, simple_perf = 0)
 	..()
 	performance_quality = perf_qual
 	difficulty_modifier = diff_mod
 	minigame_plays = mini_play
+	simple_hit_used = simple_used
+	simple_hit_amount = simple_amount
+	simple_performance = simple_perf
 
 /datum/quality_calculator/blacksmithing/calculate_final_quality()
+	var/avg_material = floor(material_quality / num_components)
 	var/avg_skill = skill_quality / minigame_plays
 	avg_skill = min(avg_skill + skill_randomization, SKILL_LEVEL_LEGENDARY) // just a healthy amount of randomization
-	var/avg_material = floor(material_quality / num_components)
 	var/avg_performance = performance_quality / minigame_plays
+	var/max_quality = BLACKSMITH_QUALITY_LEGENDARY
 
 	/* Explanations for factors and their scaling
 	* Skill (MAJOR): Essentially the base quality for each skill level
@@ -36,19 +43,26 @@
 	* Performance (MINOR): Good performance can push items up a tier
 	* Difficulty (MINOR) : Makes harder recipes have lower qualities in general
 	*/
-	var/skill_component = (avg_skill / 6.5) * 13
-	var/material_component = ((avg_material - SMELTERY_QUALITY_NORMAL) / SMELTERY_QUALITY_NORMAL) * 6
-	var/performance_component
-	if(avg_performance > MINIMUM_ANVIL_MINIGAME_SCORE)
-		performance_component = (avg_performance / 100) * 3
-	else
-		performance_component = (avg_performance - MINIMUM_ANVIL_MINIGAME_SCORE)
-	var/difficulty_penalty = difficulty_modifier * 0.4
 
-	var/final_quality = skill_component + material_component + performance_component - difficulty_penalty
+	var/material_component = ((avg_material - SMELTERY_QUALITY_NORMAL) / SMELTERY_QUALITY_NORMAL) * 6
+	var/skill_component = (avg_skill / 6.5) * 13
+	var/difficulty_penalty = difficulty_modifier * 0.4
+	var/final_quality
+	if(simple_hit_used)
+		max_quality = BLACKSMITH_QUALITY_FINE
+		var/avg_simple_skill = min((skill_quality / simple_hit_amount) + skill_randomization, SKILL_LEVEL_LEGENDARY)
+		var/simple_skill_component = (avg_simple_skill / 6.5) * 13
+		final_quality = simple_skill_component + material_component - difficulty_penalty + simple_performance - 2 // -2 because the minigame is harder
+	else
+		var/performance_component
+		if(avg_performance > MINIMUM_ANVIL_MINIGAME_SCORE)
+			performance_component = (avg_performance / 100) * 3
+		else
+			performance_component = (avg_performance - MINIMUM_ANVIL_MINIGAME_SCORE)
+		final_quality = skill_component + material_component + performance_component - difficulty_penalty
 	final_quality -= 7
 
-	return clamp(final_quality, BLACKSMITH_QUALITY_SPOILED, BLACKSMITH_QUALITY_LEGENDARY)
+	return clamp(final_quality, BLACKSMITH_QUALITY_SPOILED, max_quality)
 
 /datum/quality_calculator/blacksmithing/apply_quality_to_item(obj/item/target, track_creation)
 	. = ..()
