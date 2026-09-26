@@ -5,7 +5,6 @@
 	total_positions = 0
 	spawn_positions = 0
 	enabled = FALSE
-	bypass_lastclass = TRUE
 	selection_color = "#f700ff"
 	can_have_apprentices = FALSE
 	whitelisted_ckeys = list("ADMINLOCK")

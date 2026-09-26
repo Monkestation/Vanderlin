@@ -172,10 +172,6 @@ Reel teleports the attached atom to the grabbed turf.
 					else if(!W.climbable)
 						success = FALSE
 						return success
-				for(var/obj/structure/fluff/railing/F in cont)
-					if(F)
-						success = FALSE
-						return success
 			else
 				success = FALSE
 				return success
@@ -189,7 +185,9 @@ Reel teleports the attached atom to the grabbed turf.
 				return success
 			for(var/obj/O in (T.contents + Tt.contents))
 				if(O)
-					if(O.density || O.opacity)	//ANY dense or opaque objects. It's strict, but it's also a teleport, so.
+					if(istype(O, /obj/structure/fluff/railing))
+						continue
+					if(O.density || O.opacity)	//ANY (aside from railings) dense or opaque objects. It's strict, but it's also a teleport, so.
 						success = FALSE
 						return success
 	return success

@@ -18,6 +18,7 @@
 	charge_required = FALSE
 	cooldown_time = 10 SECONDS
 	spell_cost = 10
+	spell_flags = SPELL_DEVIL_BLOCKED
 
 	/// Base healing before adjustments
 	var/base_healing = 12.5

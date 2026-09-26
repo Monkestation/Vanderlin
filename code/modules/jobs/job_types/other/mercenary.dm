@@ -12,7 +12,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 
 	allowed_races = RACES_PLAYER_ALL

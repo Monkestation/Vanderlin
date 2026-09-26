@@ -6,6 +6,7 @@
 
 	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
+	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "May you find bliss through your pain."
 	invocation_type = INVOCATION_WHISPER

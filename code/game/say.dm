@@ -98,7 +98,7 @@
 				arrowpart += " ⇈"
 			if(speakturf.z < sourceturf.z)
 				arrowpart += " ⇊"
-			if(!HAS_TRAIT(src, TRAIT_KEENEARS))
+			if(!HAS_TRAIT(src, TRAIT_KEENEARS) && !HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABRAXAS))
 				if(istype(speaker, /mob/living))
 					var/mob/living/L = speaker
 					// This isn't accurate purposely

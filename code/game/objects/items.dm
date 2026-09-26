@@ -704,7 +704,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			var/mob/living/carbon/C = user
 			if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
 				can_handle_hot = TRUE
-			else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS))
+			else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS) || HAS_TRAIT(C, TRAIT_DEVIL_MARKED_ABADDON))
 				can_handle_hot = TRUE
 		else
 			can_handle_hot = TRUE

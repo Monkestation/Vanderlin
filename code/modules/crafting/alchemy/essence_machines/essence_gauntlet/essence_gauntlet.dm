@@ -2,6 +2,7 @@
 	name = "essence gauntlet"
 	desc = "A gauntlet that can store alchemical essences and channel them into alchemical spells. Advanced combinations can unlock powerful effects."
 	icon_state = "essence_gauntlet"
+	flags_inv = HIDEHANDS
 	var/list/obj/item/essence_vial/stored_vials = list()
 	var/max_vials = 4
 

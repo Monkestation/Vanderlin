@@ -205,6 +205,8 @@
 /// All storytellers
 #define STORYTELLERS_ALL (DIVINE_STORYTELLERS + INHUMEN_STORYTELLERS)
 
+#define PSYDON "Psydon"
+
 // Divine pantheon
 #define ASTRATA "Astrata"
 #define NOC "Noc"
@@ -223,6 +225,12 @@
 #define BAOTHA "Baotha"
 #define GRAGGAR "Graggar"
 #define MATTHIOS "Matthios"
+
+// Archdevils
+#define ABRAXAS "Abraxas"
+#define ABADDON "Abaddon"
+#define MEPHISTOPHELES "Mephistopheles"
+#define LEVIATHAN "Leviathan"
 
 // Devotion Classes
 #define DEVOTION_CLASS_PRIEST "Priest"

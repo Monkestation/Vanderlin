@@ -42,7 +42,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 12
 	spawn_positions = 12
-	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 
 	allowed_races = RACES_PLAYER_ALL
@@ -134,7 +133,6 @@
 	total_positions = 6
 	spawn_positions = 6
 	allowed_ages = list(AGE_CHILD)
-	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/soilchild
