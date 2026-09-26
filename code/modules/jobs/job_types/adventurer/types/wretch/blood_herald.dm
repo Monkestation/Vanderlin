@@ -53,7 +53,7 @@
 	outfit = /datum/outfit/wretch/blood_herald
 	cmode_music = 'sound/music/cmode/antag/combat_deadlyshadows.ogg'
 	total_positions = 1
-	roll_chance = 10
+	roll_chance = 30
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
 	allowed_patrons = list(/datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/leviathan)
@@ -73,6 +73,7 @@
 		TRAIT_STEELHEARTED,
 		TRAIT_BATTLE_READY,
 		TRAIT_NOPAINSTUN,
+		TRAIT_POISON_RESILIENCE,
 		TRAIT_CRITICAL_RESISTANCE,
 		TRAIT_THIEFSENSE,
 		TRAIT_DEVIL_MARKED_ABRAXAS,
