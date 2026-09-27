@@ -54588,6 +54588,9 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
+"vsa" = (
+/turf/open/floor/mushroom/blue,
+/area/indoors/town/keep/throne)
 "vsl" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -124560,7 +124563,7 @@ xIu
 brq
 jWw
 brq
-esD
+vsa
 brq
 jWw
 brq
