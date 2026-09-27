@@ -142,13 +142,13 @@
 
 		// Only regenerate path if we've moved to a different position or don't have a cached path
 		if(!walk_to_cached_path || walk_to_last_pos != current_pos)
-			walk_to_cached_path = get_path_to(src, target_pos, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 33, 250, 1)
+			walk_to_cached_path = astar_path_to(src, target_pos, max_steps = 100)
 			walk_to_last_pos = current_pos
 
 		var/moved = FALSE
 
 		if(length(walk_to_cached_path))
-			walk(src, 0) // Stop any existing walk
+			GLOB.move_manager.stop_looping(src)
 			set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
 			step_to(src, walk_to_cached_path[1], 0)
 			face_atom(walk_to_target)
@@ -156,7 +156,7 @@
 			walk_to_cached_path.Cut(1, 2)
 			moved = TRUE
 		else
-			walk_towards(src, walk_to_target, 0, total_multiplicative_slowdown())
+			GLOB.move_manager.home_onto(src, walk_to_target, total_multiplicative_slowdown())
 			moved = TRUE
 
 		if(moved)
@@ -166,7 +166,7 @@
 
 /mob/living/carbon/human/proc/remove_walk_to_trait()
 	REMOVE_TRAIT(src, TRAIT_MOVEMENT_BLOCKED, VAMPIRE_TRAIT)
-	walk(src, 0) // Stop any walking
+	GLOB.move_manager.stop_looping(src)
 	walk_to_target = null
 	walk_to_duration = 0
 	walk_to_steps_taken = 0

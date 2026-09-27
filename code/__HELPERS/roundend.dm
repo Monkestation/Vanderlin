@@ -17,7 +17,7 @@
 	ADD_TRAIT(src, TRAIT_DEAF, TRAIT_GENERIC)
 	Stun(6000, 1, 1)
 	ADD_TRAIT(src, TRAIT_MUTE, TRAIT_GENERIC)
-	walk(src, 0) //stops them mid pathing even if they're stunimmune
+	GLOB.move_manager.stop_looping(src)
 	if(client)
 		add_verb(client, /client/proc/commendsomeone)
 

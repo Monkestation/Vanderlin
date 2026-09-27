@@ -279,7 +279,7 @@
 
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	setDir(movedir)
-	var/datum/move_loop/loop = SSmove_manager.move(src, dir, delay = calculate_delay(), subsystem = SSminecarts, flags = MOVEMENT_LOOP_START_FAST|MOVEMENT_LOOP_IGNORE_PRIORITY, move_loop_type = /datum/move_loop/minecart)
+	var/datum/move_loop/loop = GLOB.move_manager.move(src, dir, delay = calculate_delay(), subsystem = SSminecarts, flags = MOVEMENT_LOOP_START_FAST|MOVEMENT_LOOP_IGNORE_PRIORITY, move_loop_type = /datum/move_loop/minecart)
 	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(check_rail))
 	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(decay_momentum))
 
@@ -288,7 +288,7 @@
 
 	if(momentum <= 0)
 		stack_trace("Mine cart moving on 0 momentum!")
-		SSmove_manager.stop_looping(src, SSminecarts)
+		GLOB.move_manager.stop_looping(src, SSminecarts)
 		obj_flags &= ~BLOCK_Z_OUT_DOWN
 		RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 		momentum = 0
@@ -310,7 +310,7 @@
 					if(!located)
 						continue
 					setDir(get_dir(rail, located))
-					var/datum/move_loop/minecart/loop = SSmove_manager.processing_on(src, SSminecarts)
+					var/datum/move_loop/minecart/loop = GLOB.move_manager.processing_on(src, SSminecarts)
 					loop.direction = get_dir(rail, located)
 				last_travelled_to = travel.aportalid
 				return MOVELOOP_SKIP_STEP
@@ -343,7 +343,7 @@
 		return NONE
 
 	// Can't go straight and cant turn = STOP
-	SSmove_manager.stop_looping(src, SSminecarts)
+	GLOB.move_manager.stop_looping(src, SSminecarts)
 	obj_flags &= ~BLOCK_Z_OUT_DOWN
 	RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	if(momentum >= 12)
@@ -365,7 +365,7 @@
 				visible_message(span_notice("[src] comes to a sudden stop."))
 			else
 				visible_message(span_notice("[src] comes to a stop."))
-			SSmove_manager.stop_looping(src, SSminecarts)
+			GLOB.move_manager.stop_looping(src, SSminecarts)
 			obj_flags &= ~BLOCK_Z_OUT_DOWN
 			RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 			momentum = 0
@@ -375,7 +375,7 @@
 
 	// No more momentum = STOP
 	if(momentum <= 0)
-		SSmove_manager.stop_looping(src, SSminecarts)
+		GLOB.move_manager.stop_looping(src, SSminecarts)
 		obj_flags &= ~BLOCK_Z_OUT_DOWN
 		RemoveElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 		momentum = 0
@@ -383,7 +383,7 @@
 		return
 
 	// Handles slowing down the move loop / cart
-	var/datum/move_loop/loop = SSmove_manager.processing_on(src, SSminecarts)
+	var/datum/move_loop/loop = GLOB.move_manager.processing_on(src, SSminecarts)
 	loop?.set_delay(calculate_delay())
 
 /// Calculates how fast the cart is going

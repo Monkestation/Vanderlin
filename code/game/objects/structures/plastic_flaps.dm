@@ -8,6 +8,7 @@
 	density = FALSE
 	anchored = TRUE
 	CanAtmosPass = ATMOS_PASS_NO
+	can_astar_pass = CANASTARPASS_ALWAYS_PROC
 
 /obj/structure/plasticflaps/opaque
 	opacity = TRUE
@@ -29,14 +30,12 @@
 		return FALSE
 	return TRUE
 
-/obj/structure/plasticflaps/CanAStarPass(ID, to_dir, requester)
-	if(isliving(requester))
-		var/mob/living/M = requester
-		if(!M.ventcrawler && M.mob_size != MOB_SIZE_TINY)
+/obj/structure/plasticflaps/CanAStarPass(to_dir, datum/can_pass_info/pass_info)
+	if(pass_info.is_living)
+		if(pass_info.mob_size != MOB_SIZE_TINY)
 			return FALSE
-	var/atom/movable/M = requester
-	if(M && M.pulling)
-		return CanAStarPass(ID, to_dir, M.pulling)
+	if(pass_info.pulling_info)
+		return CanAStarPass(to_dir, pass_info.pulling_info)
 	return TRUE //diseases, stings, etc can pass
 
 /obj/structure/plasticflaps/CanAllowThrough(atom/movable/A, turf/T)

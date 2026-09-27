@@ -144,7 +144,7 @@ GLOBAL_LIST_INIT(cached_building_images, list())
 		return FALSE
 	if(length(needed_broken_turfs))
 		for(var/turf/turf in needed_broken_turfs)
-			if(!length(get_path_to(worker, turf, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 32 + 1, 250,1)))
+			if(!length(astar_path_to(worker, turf, max_steps = 100)))
 				continue
 			worker.controller_mind.set_current_task(/datum/work_order/break_turf, turf, src)
 			needed_broken_turfs -= turf

@@ -73,7 +73,7 @@
 
 	// Check if already charging
 	if(charger in charging)
-		SSmove_manager.stop_looping(charger)
+		GLOB.move_manager.stop_looping(charger)
 
 	charging += charger
 	actively_moving = FALSE
@@ -92,7 +92,7 @@
 	playsound(charger, 'sound/misc/meteorimpact.ogg', 100, TRUE, 8, 0.9)
 	var/time_to_hit = min(get_dist(charger, target), charge_distance) * charge_speed
 
-	var/datum/move_loop/new_loop = SSmove_manager.home_onto(charger, target, delay = charge_speed, timeout = time_to_hit, priority = MOVEMENT_ABOVE_SPACE_PRIORITY)
+	var/datum/move_loop/new_loop = GLOB.move_manager.home_onto(charger, target, delay = charge_speed, timeout = time_to_hit, priority = MOVEMENT_ABOVE_SPACE_PRIORITY)
 	if(!new_loop)
 		cleanup_charge(charger)
 		return

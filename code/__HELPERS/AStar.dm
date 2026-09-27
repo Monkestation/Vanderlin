@@ -41,33 +41,9 @@ Actual Adjacent procs :
 	node[TOTAL_COST_F] = new_g + new_h * (1 + PF_TIEBREAKER); \
 	node[NODE_TURN] = new_nt
 
-#define ASTAR_CLOSE_ENOUGH_TO_END(end, checking_turf, mintargetdist) \
-	(checking_turf == end || (mintargetdist && (get_dist_3d(checking_turf, end) <= mintargetdist)))
-
 #define SORT_TOTAL_COST_F(list) (list[TOTAL_COST_F])
 
 #define PF_TIEBREAKER 0.005
-#define MASK_ODD 85
-#define MASK_EVEN 170
-
-/proc/PathWeightCompare(list/a, list/b)
-	return a[TOTAL_COST_F] - b[TOTAL_COST_F]
-
-/proc/HeapPathWeightCompare(list/a, list/b)
-	return b[TOTAL_COST_F] - a[TOTAL_COST_F]
-
-/proc/get_path_to(atom/movable/requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
-	var/l = SSpathfinder.mobs.getfree(requester)
-	while (!l)
-		stoplag(3)
-		if(QDELETED(requester)) // check if we've stopped existing, since we slept
-			return list() // no path, we got deleted
-		l = SSpathfinder.mobs.getfree(requester)
-	var/list/path = AStar(requester, end, dist, maxnodes, maxnodedepth, mintargetdist, adjacent, id, exclude, simulated_only, check_z_levels)
-	SSpathfinder.mobs.found(l)
-	if (!path)
-		path = list()
-	return path
 
 /proc/AStar(atom/movable/requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
 	var/turf/end = get_turf(_end)
@@ -184,18 +160,18 @@ Actual Adjacent procs :
  * Useful for wave defense etc, where a point might be behind unbroken obstacles -
  * mobs should still path as close as possible instead of giving up entirely.
  */
-/proc/get_path_to_closest_approach(atom/movable/requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
-	var/l = SSpathfinder.mobs.getfree(requester)
-	while (!l)
-		stoplag(3)
-		if(QDELETED(requester))
-			return list()
-		l = SSpathfinder.mobs.getfree(requester)
-	var/list/path = AStarClosestApproach(requester, end, dist, maxnodes, maxnodedepth, mintargetdist, adjacent, id, exclude, simulated_only, check_z_levels)
-	SSpathfinder.mobs.found(l)
-	if (!path)
-		path = list()
-	return path
+// /proc/get_path_to_closest_approach(atom/movable/requester, end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
+// 	var/l = SSpathfinder.mobs.getfree(requester)
+// 	while (!l)
+// 		stoplag(3)
+// 		if(QDELETED(requester))
+// 			return list()
+// 		l = SSpathfinder.mobs.getfree(requester)
+// 	var/list/path = AStarClosestApproach(requester, end, dist, maxnodes, maxnodedepth, mintargetdist, adjacent, id, exclude, simulated_only, check_z_levels)
+// 	SSpathfinder.mobs.found(l)
+// 	if (!path)
+// 		path = list()
+// 	return path
 
 /proc/AStarClosestApproach(atom/movable/requester, _end, dist, maxnodes, maxnodedepth = 30, mintargetdist, adjacent = /turf/proc/reachableTurftest, id = null, turf/exclude = null, simulated_only = TRUE, check_z_levels = TRUE)
 	var/turf/end = get_turf(_end)
@@ -351,10 +327,12 @@ Actual Adjacent procs :
 
 // Add a helper function to compute 3D Manhattan distance
 /turf/proc/Distance3D(turf/T)
-	if(!T)
+	if(!istype(T))
 		return 0
+
 	if(z == T.z)
 		return abs(x - T.x) + abs(y - T.y)
+
 	if(is_in_zweb(z, T.z))
 		return abs(x - T.x) + abs(y - T.y) + abs(z - T.z) * 5
 
@@ -404,23 +382,6 @@ Actual Adjacent procs :
 
 	return abs(cx - T.x) + abs(cy - T.y) + abs(cz - T.z) * 5 + hops * 5
 
-/turf/proc/LinkBlockedWithAccess(turf/T, requester, ID)
-	var/adir = get_dir(src, T)
-	var/rdir = ((adir & MASK_ODD)<<1)|((adir & MASK_EVEN)>>1)
-	for(var/obj/O in T)
-		if(!O.CanAStarPass(ID, rdir, requester))
-			return TRUE
-	for(var/obj/O in src)
-		if(!O.CanAStarPass(ID, adir, requester))
-			return TRUE
-	for(var/mob/living/M in T)
-		if(!M.CanPass(requester, src))
-			return TRUE
-	for(var/obj/structure/M in T)
-		if(!M.CanPass(requester, src))
-			return TRUE
-	return FALSE
-
 #undef ATURF
 #undef TOTAL_COST_F
 #undef DIST_FROM_START_G
@@ -430,4 +391,4 @@ Actual Adjacent procs :
 #undef BLOCKED_FROM
 #undef ASTAR_NODE
 #undef ASTAR_UPDATE_NODE
-#undef ASTAR_CLOSE_ENOUGH_TO_END
+//#undef ASTAR_CLOSE_ENOUGH_TO_END

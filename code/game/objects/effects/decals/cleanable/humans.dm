@@ -185,17 +185,32 @@ GLOBAL_VAR_INIT(dryblood_colormatrix, color_hex2color_matrix("#967c69"))
 
 	var/already_rotting = FALSE
 
-/obj/effect/decal/cleanable/blood/gibs/proc/streak(list/directions)
-	set waitfor = FALSE
-	var/list/diseases = list()
-	SEND_SIGNAL(src, COMSIG_GIBS_STREAK, directions, diseases)
+	///Information about the diseases our streaking spawns
+	var/list/streak_diseases
+
+/obj/effect/decal/cleanable/blood/gibs/proc/streak(list/directions, mapload=FALSE)
+	SEND_SIGNAL(src, COMSIG_GIBS_STREAK, directions, streak_diseases)
 	var/direction = pick(directions)
-	for(var/i in 0 to rand(1,3))
-		sleep(2)
-		if(i > 0)
-			new /obj/effect/decal/cleanable/blood/splatter(loc, color)
-		if(!step_to(src, get_step(src, direction), 0))
-			break
+	streak_diseases = list()
+	var/delay = 2
+	var/range = pick(0, 200; 1, 150; 2, 50; 3, 17; 50)
+	if(!step_to(src, get_step(src, direction), 0))
+		return
+
+	if(mapload)
+		for(var/i in 1 to range)
+			new /obj/effect/decal/cleanable/blood/splatter(loc, streak_diseases)
+			if(!step_to(src, get_step(src, direction), 0))
+				break
+		return
+
+	var/datum/move_loop/loop = GLOB.move_manager.move_to(src, get_step(src, direction), delay = delay, timeout = range * delay, priority = MOVEMENT_ABOVE_SPACE_PRIORITY)
+	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(spread_movement_effects))
+
+/obj/effect/decal/cleanable/blood/gibs/proc/spread_movement_effects(datum/move_loop/has_target/source)
+	SIGNAL_HANDLER
+
+	new /obj/effect/decal/cleanable/blood/splatter(loc, streak_diseases)
 
 /obj/effect/decal/cleanable/blood/gibs/up
 	icon_state = "gibup1"
@@ -479,7 +494,7 @@ GLOBAL_VAR_INIT(dryblood_colormatrix, color_hex2color_matrix("#967c69"))
 
 /obj/effect/decal/cleanable/blood/wallsplatter/proc/fly_towards(turf/target_turf, range)
 	flight_dir = get_dir(src, target_turf)
-	var/datum/move_loop/loop = SSmove_manager.move_towards(src, target_turf, splatter_speed, timeout = splatter_speed * range, priority = MOVEMENT_ABOVE_SPACE_PRIORITY, flags = MOVEMENT_LOOP_START_FAST)
+	var/datum/move_loop/loop = GLOB.move_manager.move_towards(src, target_turf, splatter_speed, timeout = splatter_speed * range, priority = MOVEMENT_ABOVE_SPACE_PRIORITY, flags = MOVEMENT_LOOP_START_FAST)
 	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(pre_move))
 	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(post_move))
 	RegisterSignal(loop, COMSIG_QDELETING, PROC_REF(loop_done))
