@@ -58,6 +58,11 @@
 	/// Handle viewport toggle on right click
 	var/has_viewport = FALSE
 
+/obj/structure/door/bolt
+	icon_state = MAP_SWITCH("woodhandle", "woodhandledir")
+	has_bolt = TRUE
+	lock = /datum/lock
+
 /obj/structure/door/Initialize()
 	. = ..()
 	if(has_bolt && has_viewport)

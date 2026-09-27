@@ -108,11 +108,13 @@ GLOBAL_LIST_EMPTY(agent_rings)
 
 /// Checks if the mob sitting on the throne is worthy, has to be monarch or regent
 /obj/structure/fake_machine/titan/proc/is_worthy(mob/living/carbon/human/checked_mob)
-	if(!(SSticker.rulermob == checked_mob || SSticker.regent_mob == checked_mob))
-		say("You are not worthy!")
-		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-		return FALSE
-	return TRUE
+	if((SSticker.rulermob == checked_mob || SSticker.regent_mob == checked_mob))
+		return TRUE
+	if(HAS_TRAIT(checked_mob, TRAIT_THROAT_POWER))
+		return TRUE
+	say("You are not worthy!")
+	playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+	return FALSE
 
 /// Check if the mob has the crown
 /obj/structure/fake_machine/titan/proc/has_crown(mob/living/carbon/human/checked_mob)
@@ -134,7 +136,7 @@ GLOBAL_LIST_EMPTY(agent_rings)
 /obj/structure/fake_machine/titan/proc/perform_check(mob/checked_mob, has_to_be_worthy = TRUE)
 	if(!is_valid_mob(checked_mob))
 		return FALSE
-	if(!has_crown(checked_mob))
+	if(!has_crown(checked_mob) && !HAS_TRAIT(checked_mob, TRAIT_CROWNLESS_THROAT))
 		return FALSE
 	if(has_to_be_worthy && !is_worthy(checked_mob))
 		return FALSE

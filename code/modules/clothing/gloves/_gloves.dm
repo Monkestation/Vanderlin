@@ -42,6 +42,8 @@
 	grid_height = 32
 	item_weight = 300 GRAMS
 
+	flags_inv = HIDEHANDS|HIDERING
+
 	var/transfer_prints = FALSE
 	var/unarmed_bonus = 1
 

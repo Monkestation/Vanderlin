@@ -88,7 +88,8 @@
 	icon_state = "corruptclaws"
 	force = DAMAGE_KATAR + 8
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLOODSTEEL
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
 
 /obj/item/weapon/handclaw/steel/bloodsteel/Initialize(mapload)
 	. = ..()

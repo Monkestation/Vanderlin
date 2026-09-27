@@ -11,6 +11,7 @@
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT)
 	max_integrity = 50
 	resistance_flags = FIRE_PROOF
+	flags_inv = HIDEHANDS
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	break_sound = 'sound/foley/cloth_rip.ogg'

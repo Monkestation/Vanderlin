@@ -347,6 +347,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_AI_MOVEMENT_HALTED "ai_movement_halted"
 ///do we have arcyne momentum
 #define TRAIT_ARCYNE_MOMENTUM "arcyne_momentum"
+///blood magic version of momentum binding, but doesn't have momentum mechanics
+#define TRAIT_BLOOD_BIND "blood_bind"
 
 /// Trait given to a living mob and any observer mobs that stem from them if they suicide.
 /// For clarity, this trait should always be associated/tied to a reference to the mob that suicided- not anything else.
@@ -381,8 +383,12 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STRONGBITE "Strong Bite"
 #define TRAIT_HATEWOMEN	"Ladykiller"
 #define TRAIT_SEEDKNOW "Seed Knower"
-#define TRAIT_NOBLE_BLOOD	"Noble Blooded"
-#define TRAIT_NOBLE_POWER	"Noble Authority"
+
+#define TRAIT_NOBLE_BLOOD "Noble Blooded"
+#define TRAIT_NOBLE_POWER "Noble Authority"
+#define TRAIT_THROAT_POWER "Wielder of the THROAT"
+#define TRAIT_CROWNLESS_THROAT "Crownless THROAT"
+
 #define TRAIT_EMPATH "Empath"
 #define TRAIT_BATTLE_READY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
@@ -526,6 +532,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RECOGNIZED "Recognized" // Given to famous migrants, pilgrims and adventurers, enable their title.
 #define TRAIT_FANATICAL "Fanatical" //Trait used for fanatical mobs who can bypass the excommunication(not the curses though.)
 
+
+#define TRAIT_CHANGED_PATRON "Changed Patron"
+#define TRAIT_PATRON_LANGUAGE "Patron Language"
+
 // Divine patron trait bonuses:
 #define TRAIT_SOUL_EXAMINE "Blessing of Necra"  //can check bodies to see if they have departed
 #define TRAIT_ROT_EATER "Blessing of Pestra" //can eat rotten food
@@ -543,7 +553,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SILVER_BLESSED "Silver Blessed"
 #define TRAIT_DIVINE_CENTRIST "Divine Centrist"
 #define TRAIT_DIVINE_SERVANT "Divine Servant"
-#define TRAIT_DIVINE_CONVERT "Divine Convert"
 #define TRAIT_LUNAR_ORDER "Member of the Lunar Order"
 #define TRAIT_DREAM_CAVE "Access to the Dream Cave"
 
@@ -553,10 +562,20 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CABAL "Of the Cabal" //Zizo cultists recognize each other too
 #define TRAIT_MATTHIOS_EYES	"Eyes of Matthios" //Examine to see the most expensive item someone has
 
+// Archdevil patron traits
+/// No miracle healing, the Archdevils reject the influence of the so called gods. This is a major balance point for Devil worship.
+#define TRAIT_DEVILS_REJECTION "Devil's Rejection"
+#define TRAIT_DEVIL_MARKED_ABRAXAS "Devil Marked - Abraxas"
+#define TRAIT_DEVIL_MARKED_ABADDON "Devil Marked - Abaddon"
+#define TRAIT_DEVIL_MARKED_MEPHISTOPHELES "Devil Marked - Mephistopheles"
+#define TRAIT_DEVIL_MARKED_LEVIATHAN "Devil Marked - Leviathan"
+#define TRAIT_IDENTIFY_DEVIL_MARKS "Occult Identification"
+
 // Other Patron Trait Bonuses
 #define TRAIT_MANEATER_IMMUNITY "Blessing of The Hunt" //Cannot be grabbed by maneaters.
 /// Target can't be grabbed by tanglers
 #define TRAIT_ENTANGLER_IMMUNITY "Vinewalker"
+
 
 // PATRON CURSE TRAITS
 #define TRAIT_CURSE "Curse" //source
@@ -574,6 +593,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_GRAGGAR_CURSE "Graggar's Curse"
 #define TRAIT_MATTHIOS_CURSE "Matthios' Curse"
 #define TRAIT_BAOTHA_CURSE "Baotha's Curse"
+#define TRAIT_ABRAXAS_CURSE "Abraxas' Curse"
+#define TRAIT_LEVIATHAN_CURSE "Leviathan's Curse"
 
 // HIDDEN DOOR TRAITS
 #define TRAIT_KNOW_KEEP_DOORS "know_keep_doors"
