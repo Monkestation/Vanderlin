@@ -32912,6 +32912,9 @@
 	},
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
+"ncn" = (
+/turf/open/floor/mushroom/blue,
+/area/indoors/town/keep/throne)
 "ncu" = (
 /obj/structure/bookcase,
 /obj/item/recipe_book/alchemy,
@@ -54588,9 +54591,6 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
-"vsa" = (
-/turf/open/floor/mushroom/blue,
-/area/indoors/town/keep/throne)
 "vsl" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -124352,7 +124352,7 @@ iMw
 rlH
 vvz
 ybN
-mLz
+ncn
 srI
 xph
 dZb
@@ -124563,7 +124563,7 @@ xIu
 brq
 jWw
 brq
-vsa
+ncn
 brq
 jWw
 brq
@@ -124765,7 +124765,7 @@ brq
 esD
 tTO
 esD
-brq
+ncn
 esD
 eTa
 esD
