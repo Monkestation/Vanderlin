@@ -101,3 +101,9 @@
 
 	var/mob/living/carbon/target = cast_on
 	to_chat(target, span_userdanger("I am being choked by Blood Magic, I must RESIST!"))
+
+/datum/action/cooldown/spell/status/blood_choke/whisper // For occult librarians, so they don't get immediately caught.
+	name = "Choke With Blood (Whisper)"
+	learnable = FALSE
+	invocation_type = WHISPER
+	invocation = "Caedis Strangulo..."
