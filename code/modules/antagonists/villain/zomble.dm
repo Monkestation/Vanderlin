@@ -266,7 +266,7 @@
 
 /mob/living/carbon/human/proc/zombie_seek()
 	set name = "Seek Brains"
-	set category = "RoleUnique.Zizo"
+	set category = "RoleUnique.Patron"
 
 	if(!IS_DEADITE(src))
 		return FALSE
