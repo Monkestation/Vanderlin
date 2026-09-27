@@ -105,5 +105,5 @@
 /datum/action/cooldown/spell/status/blood_choke/whisper // For occult librarians, so they don't get immediately caught.
 	name = "Choke With Blood (Whisper)"
 	learnable = FALSE
-	invocation_type = WHISPER
+	invocation_type = INVOCATION_WHISPER
 	invocation = "Caedis Strangulo..."
