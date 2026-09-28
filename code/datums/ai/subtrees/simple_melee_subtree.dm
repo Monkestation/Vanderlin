@@ -83,9 +83,9 @@
 /datum/ai_behavior/basic_melee_attack/gator_attack/corpse_gator
 	action_cooldown = 0.5 SECONDS
 	var/tail_swipe_chance = 10 // Chance to perform a tail swipe, runs before death roll
-	var/death_roll_chance = 30 // Chance to perform a death roll on attack
-	var/death_roll_damage = 20 // Extra damage from death roll
-	var/death_roll_cooldown = 15 SECONDS // Time between death rolls
+	death_roll_chance = 30 // Chance to perform a death roll on attack
+	death_roll_damage = 20 // Extra damage from death roll
+	death_roll_cooldown = 15 SECONDS // Time between death rolls
 
 /datum/ai_behavior/basic_melee_attack/gator_attack/corpse_gator/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
