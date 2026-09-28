@@ -3641,13 +3641,6 @@
 	},
 /turf/open/floor/metal/alt,
 /area/indoors/town/clocktower)
-"arN" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_mountain-forest";
-	aportalid = "vanderlin-town_mountain-mountain"
-	},
-/turf/open/floor/cobble,
-/area/outdoors/mountains/anvil/snowyforest)
 "arO" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -55579,7 +55572,7 @@ aiX
 aiX
 aBC
 akk
-arN
+aBC
 aiX
 aiX
 aiX
