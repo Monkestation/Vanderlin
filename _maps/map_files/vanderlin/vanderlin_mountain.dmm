@@ -11301,6 +11301,13 @@
 	},
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
+"drG" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "vanderlin-town_mountain-town";
+	aportalid = "vanderlin-town_mountain-mountain"
+	},
+/turf/open/floor/cobblerock,
+/area/under/mountains/anvil/lower)
 "dtm" = (
 /turf/closed/mineral/bedrock/cold,
 /area/outdoors/mountains/anvil/peak)
@@ -12793,13 +12800,6 @@
 /obj/structure/water_pipe,
 /turf/open/openspace,
 /area/indoors/town/clocktower)
-"lsj" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-town_mountain-town";
-	aportalid = "vanderlin-town_mountain-mountain"
-	},
-/turf/open/floor/cobblerock,
-/area/under/mountains/anvil/lower)
 "ltv" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
 /obj/item/natural/poo{
@@ -15087,7 +15087,7 @@ aZR
 aZR
 aZR
 jby
-lsj
+drG
 jby
 aZR
 aZR
