@@ -100,7 +100,7 @@
 	if(prob(tail_swipe_chance) && isliving(target))
 		var/mob/living/L = target
 		if(L.stat != DEAD)
-			controller.pawn.TailSwipe(L)
+			gator_pawn.TailSwipe(L)
 
 	// Check if we can perform a death roll
 	if(prob(death_roll_chance) && death_roll_cooldown_time <= world.time && isliving(target))
