@@ -3641,6 +3641,13 @@
 	},
 /turf/open/floor/metal/alt,
 /area/indoors/town/clocktower)
+"arN" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "vanderlin-forest_mountain-forest";
+	aportalid = "vanderlin-town_mountain-mountain"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/mountains/anvil/snowyforest)
 "arO" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -12387,6 +12394,13 @@
 /obj/item/ore/coal,
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/peak)
+"jby" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "vanderlin-town_mountain-town";
+	aportalid = "vanderlin-town_mountain-mountain"
+	},
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/lower)
 "jeO" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -12779,6 +12793,13 @@
 /obj/structure/water_pipe,
 /turf/open/openspace,
 /area/indoors/town/clocktower)
+"lsj" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "vanderlin-town_mountain-town";
+	aportalid = "vanderlin-town_mountain-mountain"
+	},
+/turf/open/floor/cobblerock,
+/area/under/mountains/anvil/lower)
 "ltv" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
 /obj/item/natural/poo{
@@ -15065,9 +15086,9 @@ aZR
 aZR
 aZR
 aZR
-aZR
-aZR
-aZR
+jby
+lsj
+jby
 aZR
 aZR
 aZR
@@ -15267,9 +15288,9 @@ ali
 ali
 ali
 ali
-ali
-ali
-ali
+ako
+ahP
+ako
 ali
 ali
 ali
@@ -15468,11 +15489,11 @@ ali
 ali
 ali
 ali
+aNm
 ali
 ali
 ali
-ali
-ali
+aNm
 ali
 ali
 ali
@@ -15671,8 +15692,8 @@ aKK
 aKK
 ali
 ali
-aKK
-ali
+ako
+ahP
 ali
 ali
 ali
@@ -15873,9 +15894,9 @@ aKK
 aKK
 ali
 aKK
-aKK
-ali
-ali
+ako
+aHH
+ako
 ali
 ali
 ali
@@ -16075,7 +16096,7 @@ ali
 aKK
 aKK
 ali
-aKK
+ali
 ali
 ali
 ali
@@ -16276,11 +16297,11 @@ aKK
 aKK
 aKK
 aKK
-aKK
+aNm
 ali
 ali
 ali
-ali
+aNm
 ali
 ali
 ali
@@ -16479,8 +16500,8 @@ aKK
 aKK
 aKK
 aKK
-aKK
-aKK
+ali
+ali
 ali
 ali
 ali
@@ -16681,7 +16702,7 @@ aKK
 aKK
 aKK
 aKK
-aKK
+ali
 ali
 ali
 ali
@@ -17084,11 +17105,11 @@ aKK
 aKK
 aKK
 aKK
+aNm
 ali
 ali
 ali
-ali
-ali
+aNm
 ali
 aKK
 aKK
@@ -55558,7 +55579,7 @@ aiX
 aiX
 aBC
 akk
-aBC
+arN
 aiX
 aiX
 aiX
