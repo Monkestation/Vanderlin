@@ -381,3 +381,4 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 	target.say("I accept your challenge!", spans = list("green"))
 	log_combat(target, usr, "accepted an honor duel")
 	message_admins("[key_name_admin(target)] has accepted an honor duel challenge from [key_name_admin(usr)].")
+	// I need to make it so other people can recognise that a duel is taking place, and create a marker for a small area within which it should be happening.
