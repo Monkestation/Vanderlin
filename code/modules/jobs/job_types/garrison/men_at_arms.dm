@@ -46,8 +46,8 @@
 	shirt = /obj/item/clothing/shirt/gambeson
 	neck = /obj/item/clothing/neck/gorget
 	gloves = /obj/item/clothing/gloves/chain/iron
-	wrists = /obj/item/clothing/wrists/bracers/leather
-	pants = /obj/item/clothing/pants/trou/leather/splint
+	wrists = /obj/item/clothing/wrists/bracers/leather/brigandine
+	pants = /obj/item/clothing/pants/trou/leather/brigandine
 	shoes = /obj/item/clothing/shoes/boots/leather/advanced/watch
 	belt = /obj/item/storage/belt/leather
 	backpack_contents = list(
