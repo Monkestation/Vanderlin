@@ -9366,10 +9366,7 @@
 /turf/open/floor/grass,
 /area/outdoors/bog/south/west)
 "hPr" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-forest";
-	aportalid = "vanderlin-forest_bog-bog"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/bog_forest,
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/north)
 "hPD" = (
@@ -11418,10 +11415,7 @@
 	},
 /area/under/cavewet)
 "jRV" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-bog_mountain-mountain";
-	aportalid = "vanderlin-bog_mountain-bog"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/bog_mountain,
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/east)
 "jSx" = (

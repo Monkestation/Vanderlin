@@ -1489,10 +1489,7 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "ahd" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-bog_mountain-bog";
-	aportalid = "vanderlin-bog_mountain-mountain"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/mountain_bog,
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "ahe" = (
@@ -1764,7 +1761,6 @@
 /area/indoors/mountains/anvil/upperkeep)
 "aiw" = (
 /obj/machinery/light/fueled/firebowl/standing/blue{
-	pixel_y = 0;
 	pixel_x = -9;
 	density = 0
 	},
@@ -1968,9 +1964,7 @@
 /obj/item/paper/inqslip/confession{
 	pixel_x = 9
 	},
-/obj/item/paper/inqslip/confession{
-	pixel_y = 0
-	},
+/obj/item/paper/inqslip/confession,
 /obj/item/paper/inqslip/confession{
 	pixel_x = -9
 	},
@@ -2149,10 +2143,7 @@
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
 "akk" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_mountain-forest";
-	aportalid = "vanderlin-forest_mountain-mountain"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/mountain_forest,
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "akl" = (
@@ -5832,10 +5823,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "aBC" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_mountain-forest";
-	aportalid = "vanderlin-forest_mountain-mountain"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/mountain_forest,
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/snowyforest)
 "aBE" = (
@@ -6835,10 +6823,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
 "aGG" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-bog_mountain-bog";
-	aportalid = "vanderlin-bog_mountain-mountain"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/mountain_bog,
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/snowyforest)
 "aGH" = (
@@ -9197,7 +9182,6 @@
 /area/indoors/mountains/anvil/upperkeep)
 "aSf" = (
 /obj/structure/dye_bin{
-	pixel_y = 0;
 	pixel_x = 10
 	},
 /obj/structure/dye_bin/luxury{
@@ -10232,10 +10216,7 @@
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
 "aXn" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-bog_mountain-bog";
-	aportalid = "vanderlin-bog_mountain-mountain"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/mountain_bog,
 /turf/open/floor/cobble/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "aXo" = (
