@@ -455,8 +455,8 @@ GLOBAL_VAR_INIT(mobids, 1)
 			face_atom(examinify)
 		if(m_intent != MOVE_INTENT_SNEAK)
 			visible_message(span_emote("[src] looks at [examinify]."), span_emote("I look at [examinify]."))
-		else if(isliving(examinify))
-			var/mob/living/examaniee = examinify
+		else if(isliving(examinify) && !cross_z_examine)
+				var/mob/living/examaniee = examinify
 			if(examaniee.peek_examine_check(src))
 				to_chat(src, span_info("My peeking went unnoticed.."))
 			else
