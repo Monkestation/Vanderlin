@@ -33,11 +33,11 @@
 	conjured_mobs -= summoned
 
 /datum/action/cooldown/spell/raise_undead/proc/register_minion(mob/living/minion, mob/living/user)
-	if(length(conjured_mobs))
-		var/mob/living/last = conjured_mobs[length(conjured_mobs)]
+	if(length(conjured_mobs) >= max_summons)
+		var/mob/living/last = conjured_mobs[1]
 		if(!QDELETED(last))
 			qdel(last)
-		conjured_mobs.len--
+		conjured_mobs.Cut(1, 2)
 
 	conjured_mobs += minion
 	RegisterSignal(minion, COMSIG_QDELETING, PROC_REF(remove_conjure))

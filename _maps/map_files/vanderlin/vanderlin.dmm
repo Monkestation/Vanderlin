@@ -20577,7 +20577,7 @@
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
 "iqr" = (
-/obj/structure/door/weak/bolt{
+/obj/structure/door/bolt{
 	name = "Baths";
 	dir = 1
 	},
@@ -28256,12 +28256,6 @@
 /obj/item/natural/stone,
 /turf/open/floor/dirt,
 /area/outdoors/basin)
-"lof" = (
-/obj/structure/door/weak/bolt{
-	name = "Linens"
-	},
-/turf/open/floor/tile,
-/area/indoors/town/keep/servant)
 "loh" = (
 /obj/structure/fluff/railing/tall{
 	dir = 8
@@ -36274,9 +36268,9 @@
 /turf/open/floor/grass,
 /area/outdoors/town)
 "ovm" = (
-/obj/structure/door/weak/bolt{
-	name = "Toilet";
-	dir = 1
+/obj/structure/door/bolt{
+	dir = 1;
+	name = "Toilet"
 	},
 /turf/open/floor/woodturned,
 /area/indoors/town/tavern)
@@ -40020,10 +40014,10 @@
 /turf/open/floor/blocks,
 /area/indoors/town/clocktower)
 "pQC" = (
-/obj/structure/door/weak/bolt{
+/obj/effect/mapping_helpers/access/locker,
+/obj/structure/door/bolt{
 	dir = 1
 	},
-/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/passages/basement)
 "pQG" = (
@@ -51422,6 +51416,12 @@
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/dirt,
 /area/outdoors/town/noble_manor/red)
+"unA" = (
+/obj/structure/door/violet/bolt{
+	name = "Linens"
+	},
+/turf/open/floor/tile,
+/area/indoors/town/keep/servant)
 "unC" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
@@ -55450,7 +55450,7 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
 "vKm" = (
-/obj/structure/door/weak/bolt{
+/obj/structure/door/violet/bolt{
 	name = "Bunkroom"
 	},
 /turf/open/floor/tile,
@@ -61409,7 +61409,7 @@
 /turf/open/floor/tile,
 /area/indoors/town/bath)
 "xUs" = (
-/obj/structure/door/weak/bolt,
+/obj/structure/door/bolt,
 /turf/open/floor/greenstone,
 /area/indoors/town/keep/basement)
 "xUE" = (
@@ -78499,7 +78499,7 @@ pUh
 oWs
 pUh
 oWs
-lof
+unA
 vnd
 sUh
 sUh

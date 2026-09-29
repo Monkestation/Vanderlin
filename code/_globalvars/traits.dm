@@ -116,7 +116,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Vinewalker" = TRAIT_ENTANGLER_IMMUNITY,
 		"Enlightened Centrist" = TRAIT_DIVINE_CENTRIST,
 		"Divine Servant" = TRAIT_DIVINE_SERVANT,
-		"Divine Convert" = TRAIT_DIVINE_CONVERT,
+		"Changed Patron" = TRAIT_CHANGED_PATRON,
 		"Golden Blood" = TRAIT_SEEPRICES,
 		"Of the Cabal" = TRAIT_CABAL,
 		"Unleechable" = TRAIT_LEECHIMMUNE,
@@ -136,6 +136,8 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Seed Knower" = TRAIT_SEEDKNOW,
 		"Noble Blooded" = TRAIT_NOBLE_BLOOD,
 		"Recognised Noble" = TRAIT_NOBLE_POWER,
+		"THROAT Power" = TRAIT_THROAT_POWER,
+		"Crownless THROAT" = TRAIT_CROWNLESS_THROAT,
 		"Empath" = TRAIT_EMPATH,
 		"Thief-Sense" = TRAIT_THIEFSENSE,
 		"Battleready" = TRAIT_BATTLE_READY,
@@ -225,6 +227,12 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Blood Sense" = TRAIT_BLOOD_SENSE,
 		"Vitae User" = TRAIT_VITAE_USER,
 		"Sanguine Block" = TRAIT_BLOOD_MAGIC_BLOCKED,
+		"Devil's Rejection" = TRAIT_DEVILS_REJECTION,
+		"Devil's Mark - Abraxas" = TRAIT_DEVIL_MARKED_ABRAXAS,
+		"Devil's Mark - Abaddon" = TRAIT_DEVIL_MARKED_ABADDON,
+		"Devil's Mark - Mephistopheles" = TRAIT_DEVIL_MARKED_MEPHISTOPHELES,
+		"Devil's Mark - Leviathan" = TRAIT_DEVIL_MARKED_LEVIATHAN,
+		"Occult Identification" = TRAIT_IDENTIFY_DEVIL_MARKS,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS
@@ -316,7 +324,7 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_DEATHSIGHT = span_info("I can feel when someone nearby draws the Undermaiden's attention, a tiny voice whispering 'Someone has died,' in my ear."),
 	TRAIT_DIVINE_CENTRIST = "I haven't connected a divine patron. I wonder which one I should profess myself to...",
 	TRAIT_DIVINE_SERVANT = SPAN_GOD_GENERIC("I serve the divine."),
-	TRAIT_DIVINE_CONVERT = SPAN_GOD_GENERIC("I recently converted to a new Patron."),
+	TRAIT_CHANGED_PATRON = SPAN_GOD_GENERIC("I recently converted to a new Patron."),
 	TRAIT_CABAL = span_purple("In secret, I have studied the ways of Her ascension, and know of others of the Cabal."),
 	TRAIT_LEGENDARY_ALCHEMIST = span_info("An expert in the art of finding herbs in the wild."),
 	TRAIT_DECEIVING_MEEKNESS = "People look at me and think I am a weakling. They are mistaken.",
@@ -378,6 +386,11 @@ GLOBAL_LIST_INIT(roguetraits, list(
 	TRAIT_BLOOD_SORCERER = span_bloody("I am a gifted blood sorcerer, wielding innate power over blood magic. Woe unto those who oppose me. I cannot use magickal tomes."),
 	TRAIT_BLOOD_STUDENT = span_bloody("I am a student of blood magic."),
 	TRAIT_BLOOD_MAGIC_BLOCKED = span_bloody("I am permanently blocked from using blood magic!"),
+	TRAIT_DEVIL_MARKED_ABRAXAS = SPAN_GOD_ARCHDEVILS("My soul and palm are marked by Abraxas. I am better at noticing details and hidden things."),
+	TRAIT_DEVIL_MARKED_ABADDON = SPAN_GOD_ARCHDEVILS("My soul and palm are marked by Abaddon. I can hold burning hot items, and I am not affected by heat. Fire can still harm me."),
+	TRAIT_DEVIL_MARKED_MEPHISTOPHELES = SPAN_GOD_ARCHDEVILS("My soul and palm are marked by Mephistopheles. I am attuned to Blood Magic, casting it is more efficient for me."),
+	TRAIT_DEVIL_MARKED_LEVIATHAN = SPAN_GOD_ARCHDEVILS("My soul and palm are marked by Leviathan."),
+	TRAIT_IDENTIFY_DEVIL_MARKS = span_info("I know how to identify the marks of the Archdevils."),
 ))
 
 /// value -> trait name, generated on use from trait_by_type global

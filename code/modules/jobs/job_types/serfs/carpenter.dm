@@ -4,14 +4,14 @@
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_ENDURANCE = 1,
+		STAT_ENDURANCE = 2,
 		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/craft/carpentry = 50,

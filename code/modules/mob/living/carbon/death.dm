@@ -15,7 +15,7 @@
 		BT.on_death()
 
 /mob/living/carbon/attempt_infect(force = FALSE, bite = FALSE)
-	if(!force && has_world_trait(/datum/world_trait/necra_requiem))
+	if(!force && (has_world_trait(/datum/world_trait/necra_requiem) && !bite))
 		return
 	if(!(bite || force) && (stat > DEAD))
 		return
@@ -25,7 +25,7 @@
 	organ = new(get_turf(src))
 	if(bite)
 		organ.converts_living = TRUE
-		organ.revive_time = 1 MINUTES
+		organ.revive_time = 10 SECONDS
 	organ.Insert(src)
 
 /mob/living/carbon/dust(just_ash, drop_items, force)
