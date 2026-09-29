@@ -41,14 +41,9 @@
 /datum/outfit/watchman
 	name = "Men-at-arms Base"
 	cloak = /obj/item/clothing/cloak/stabard/guard
-	armor = /obj/item/clothing/armor/brigandine/light
-	shirt = /obj/item/clothing/shirt/gambeson
-	neck = /obj/item/clothing/neck/gorget
-	gloves = /obj/item/clothing/gloves/chain/iron
-	wrists = /obj/item/clothing/wrists/bracers/leather/brigandine
-	pants = /obj/item/clothing/pants/trou/leather/brigandine
 	shoes = /obj/item/clothing/shoes/boots/leather/advanced/watch
 	belt = /obj/item/storage/belt/leather
+	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel/special = 1,
 		/obj/item/storage/keyring/manorguard = 1
@@ -75,6 +70,7 @@
 	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/attribute_holder/sheet/job/menatarms/footman
 	raw_attribute_list = list(
@@ -105,7 +101,6 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/advclass/menatarms/watchman_footman/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
@@ -114,7 +109,7 @@
 		"Steel Shortsword & Shield" = list(/obj/item/weapon/sword/short, /obj/item/weapon/shield/tower/metal),
 		"Billhook & Iron Shortsword" = list(/obj/item/weapon/polearm/spear/billhook, /obj/item/weapon/sword/short/iron),
 		"Halberd" = /obj/item/weapon/polearm/halberd,
-		"Greataxe" = /obj/item/weapon/greataxe,
+		"Greataxe" = /obj/item/weapon/greataxe/steel,
 		"Eagle's Beak" = /obj/item/weapon/polearm/eaglebeak,
 	)
 
@@ -134,7 +129,13 @@
 	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARMOR.", "EQUIP YOURSELF.", armors)
 
 	switch(armor_choice)
-		//Brigandine Set doesn't need a case, it's the default armor anyway!
+		if("Brigandine Set")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/brigandine/light, ITEM_SLOT_ARMOR, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson, ITEM_SLOT_SHIRT, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/neck/gorget, ITEM_SLOT_PANTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/leather/brigandine, ITEM_SLOT_WRISTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/chain/iron, ITEM_SLOT_GLOVES, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/brigandine, ITEM_SLOT_NECK, TRUE)
 		if("Chainmail Set")
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/medium/scale, ITEM_SLOT_ARMOR, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/chainmail/iron, ITEM_SLOT_SHIRT, TRUE)
@@ -180,11 +181,15 @@
 	traits = list(
 		TRAIT_DODGEEXPERT
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/ranger
 	name = "Archer Men-At-Arms"
-	backl = /obj/item/storage/backpack/satchel
+	armor = /obj/item/clothing/armor/brigandine/light
+	shirt = /obj/item/clothing/armor/gambeson
+	neck = /obj/item/clothing/neck/gorget
+	wrists =/obj/item/clothing/wrists/bracers/leather/brigandine
+	gloves = /obj/item/clothing/gloves/chain/iron
+	pants = /obj/item/clothing/pants/trou/leather/brigandine
 
 /datum/job/advclass/menatarms/watchman_ranger/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -192,10 +197,10 @@
 	var/weapon_choice = browser_input_list(spawned, "CHOOSE YOUR WEAPON.", "AIM TRUE.", weapons)
 	switch(weapon_choice)
 		if("Bow")
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/long, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/long, ITEM_SLOT_BACK_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
 		if("Crossbow")
-			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross, ITEM_SLOT_BACK_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 
 	var/static/list/sidearms = list("Stiletto", "Iron Shortsword", "Cudgel")
@@ -236,15 +241,25 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
+	spells = list(
+		/datum/action/cooldown/spell/diagnose
+	)
 
 /datum/outfit/watchman/hospitaller
 	name = "Hospitaller Men-At-Arms"
+	armor = /obj/item/clothing/armor/brigandine/light
+	shirt = /obj/item/clothing/armor/gambeson
+	neck = /obj/item/clothing/neck/gorget
+	wrists =/obj/item/clothing/wrists/bracers/leather/brigandine
+	gloves = /obj/item/clothing/gloves/chain/iron
+	pants = /obj/item/clothing/pants/trou/leather/brigandine
 	backr = /obj/item/storage/backpack/backpack
 	backpack_contents = list(
 		/obj/item/weapon/knife/dagger/steel/special = 1,
 		/obj/item/storage/keyring/manorguard = 1,
 		/obj/item/natural/bundle/cloth/bandage/full = 2,
+		/obj/item/natural/worms/leech = 1,
+		/obj/item/needle = 1,
 		/obj/item/tourniquet = 1,
 		/obj/item/splint = 1
 	)
@@ -291,7 +306,6 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/job/advclass/menatarms/watchman_cavalry/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
@@ -305,22 +319,28 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title = "TAKE UP ARMS.")
 
 	switch(weapon_choice)
-		if("Steel Sabre & Crossbow" || "Steel Shortsword & Shortbow")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
-		if("Steel Spear" || "Lucerne")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
-		if("Steel Shortsword & Shortbow")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/bows, 33, 33)
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
-		if("Steel Sabre & Crossbow")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/crossbows, 33, 33)
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
+        if("Steel Spear", "Lucerne")
+            spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
+        if("Steel Shortsword & Shortbow")
+            spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/bows, 33, 33)
+            spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+            spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
+        if("Steel Sabre & Crossbow")
+            spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/crossbows, 33, 33)
+            spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+            spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 
 	var/armors = list("Brigandine Set", "Chainmail Set")
 	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARMOR.", "EQUIP YOURSELF.", armors)
 
 	switch(armor_choice)
-		//Brigandine Set doesn't need a case, it's the default armor anyway!
+		if("Brigandine Set")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/brigandine/light, ITEM_SLOT_ARMOR, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson, ITEM_SLOT_SHIRT, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/neck/gorget, ITEM_SLOT_PANTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/leather/brigandine, ITEM_SLOT_WRISTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/chain/iron, ITEM_SLOT_GLOVES, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/brigandine, ITEM_SLOT_NECK, TRUE)
 		if("Chainmail Set")
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/medium/scale, ITEM_SLOT_ARMOR, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/chainmail/iron, ITEM_SLOT_SHIRT, TRUE)
@@ -340,7 +360,7 @@
 
 /datum/job/advclass/menatarms/watchman_cavalry/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	new /mob/living/simple_animal/hostile/retaliate/saigabuck/tame/saddled(get_turf(spawned))
+	new /mob/living/simple_animal/hostile/retaliate/saiga/tame/saddled(get_turf(spawned))
 
 /datum/attribute_holder/sheet/job/menatarms/sergeant
 	raw_attribute_list = list(
@@ -361,9 +381,9 @@
 	)
 
 /datum/job/advclass/menatarms/watchman_sergeant
-	title = "Sergeant Men-At-Arms"
+	title = "Sergeant-At-Arms"
 	outfit = /datum/outfit/watchman/sergeant
-	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD)
+	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	total_positions = 1
 	category_tags = list(CTAG_MENATARMS)
 	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/sergeant
@@ -371,11 +391,10 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_HEAVYARMOR
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS)
 
 /datum/outfit/watchman/sergeant
 	name = "Sergeant Men-At-Arms"
-	head = /obj/item/clothing/head/helmet/visored/sallet
+	armor = /obj/item/clothing/armor/brigandine/captain
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	pants = /obj/item/clothing/pants/chainlegs/iron
 	wrists = /obj/item/clothing/wrists/bracers
@@ -389,7 +408,7 @@
 		"Steel Shortsword & Shield" = list(/obj/item/weapon/sword/short, /obj/item/weapon/shield/tower/metal),
 		"Billhook & Iron Shortsword" = list(/obj/item/weapon/polearm/spear/billhook, /obj/item/weapon/sword/short/iron),
 		"Halberd" = /obj/item/weapon/polearm/halberd,
-		"Greataxe" = /obj/item/weapon/greataxe,
+		"Greataxe" = /obj/item/weapon/greataxe/steel,
 		"Eagle's Beak" = /obj/item/weapon/polearm/eaglebeak,
 	)
 
@@ -404,3 +423,5 @@
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 35, 35)
 		if("Iron Warhammer & Shield" || "Steel Shortsword & Shield")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/shields, 35, 35)
+
+	spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/visored/sallet, ITEM_SLOT_HEAD, TRUE)
