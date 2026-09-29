@@ -1,0 +1,5 @@
+author: "Wyrmtongue336"
+delete-after: True
+changes:
+  - rscadd: "Adds a whisper variant of \"Choke with blood\""
+  - code_imp: "Occult Librarian now whispers the choke with blood invocation."
