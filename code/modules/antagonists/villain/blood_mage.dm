@@ -238,7 +238,7 @@
 	for(var/datum/mind/found_mind in get_minds(ROLE_BLOOD_HERALD))
 		herald.mind?.share_identities(found_mind)
 
-	herald.set_faction(list(FACTION_BLOOD_MAGIC))
+	herald.set_faction(list(FACTION_BLOOD_MAGIC, FACTION_INFERNAL))
 	herald.hud_used?.set_bloody_bloodpool()
 	herald.maxbloodpool += 1000
 	herald.set_bloodpool(2500)

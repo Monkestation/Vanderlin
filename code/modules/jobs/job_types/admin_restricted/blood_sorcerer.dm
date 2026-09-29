@@ -26,7 +26,7 @@
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	technique_points = 14
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
+	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC, FACTION_INFERNAL)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/blood_sorcerer
 
