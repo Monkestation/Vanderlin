@@ -635,8 +635,12 @@
 
 /datum/move_loop/minecart/move()
 	var/atom/old_loc = moving.loc
+	var/obj/structure/minecart_rail/current_rail = locate(/obj/structure/minecart_rail) in old_loc
+	if(current_rail?.has_lock_module && current_rail.locked)
+		return MOVELOOP_FAILURE
+
 	var/turf/new_loc = get_step(moving, direction)
-	if(locate(/obj/structure/minecart_rail) in old_loc)
+	if(current_rail)
 		if(istype(new_loc, /turf/open/openspace))
 			var/turf/below_turf = GET_TURF_BELOW(new_loc)
 			if(locate(/obj/structure/minecart_rail) in below_turf)

@@ -18,6 +18,7 @@
 	cmode_music = 'sound/music/cmode/antag/combatskeleton.ogg'
 	var/should_have_aggro = TRUE
 	headprice = 7
+	mob_biotypes = MOB_HUMANOID|MOB_ORGANIC|MOB_UNDEAD
 
 /mob/living/carbon/human/species/skeleton/npc/no_equipment
 	skel_outfit = null

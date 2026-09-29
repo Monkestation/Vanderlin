@@ -45,7 +45,6 @@
 	give_bank_account = 10
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 
 	allowed_races = RACES_PLAYER_ALL

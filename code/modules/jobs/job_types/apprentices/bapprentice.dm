@@ -28,7 +28,6 @@
 	give_bank_account = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	job_bitflag = BITFLAG_CONSTRUCTOR

@@ -6,7 +6,7 @@
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	resistance_flags = FLAMMABLE // Made of leather
-
+	flags_inv = HIDEHANDS
 	armor_type = /datum/armor/minimal
 	max_integrity = INTEGRITY_OLD_POOR
 	clothing_traits = list(TRAIT_FINGERPRINT_PASSTHROUGH)

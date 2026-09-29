@@ -30,12 +30,11 @@
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_FORSUPP
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = ALL_AGES_LIST_CHILD
 	allowed_races = RACES_PLAYER_ALL
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	allowed_patrons = list(/datum/patron/alternate/great_hunt)
 
 

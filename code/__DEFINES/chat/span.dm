@@ -181,6 +181,7 @@
 #define SPAN_GOD_PSYDON(str) ("<span class='god_psydon'>" + str + "</span>")
 #define SPAN_GOD_GREATHUNT(str) ("<span class='god_thegreathunt'>" + str + "</span>")
 #define SPAN_GOD_GRAGGAZO(str) ("<span class='god_graggazo'>" + str + "</span>")
+#define SPAN_GOD_ARCHDEVILS(str) ("<span class='god_archdevil'>" + str + "</span>")
 
 /* Complex Spans */
 /// Ones where span_X isn't just the class
@@ -197,3 +198,7 @@
 
 /// No italics
 #define conditional_tooltip_alt(normal_text, tooltip_text, condition) (condition ? span_tooltip_alt(tooltip_text, normal_text) : normal_text)
+
+/// Displays a tooltip. Accepts HTML. For the love of all that is holy, ensure input is trusted.
+/// * SPAN_LINKIFY doesn't work here.
+#define span_tooltip_dangerous_html(tip, str) ("<span data-component=\"TooltipHTML\" data-html=\"[replacetext(tip, "\"", "'")]\" class=\"tooltip\">[str]</span>")

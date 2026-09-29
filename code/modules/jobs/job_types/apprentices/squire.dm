@@ -16,7 +16,6 @@
 	known_by_the_town = TRUE
 	jobs_i_always_know = KNOW_COURT_LIST
 	jobs_always_know_me = KNOW_COURT_AGENT_LIST
-	bypass_lastclass = TRUE
 	selection_color = "#304529"
 	advclass_cat_rolls = list(CTAG_SQUIRE = 20)
 	can_have_apprentices = FALSE
@@ -42,12 +41,6 @@
 	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/manorguard
-	backr = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/storage/belt/pouch/coins/poor = 1,
-		/obj/item/clothing/neck/chaincoif = 1,
-		/obj/item/weapon/hammer/iron = 1
-	)
 
 /datum/job/advclass/squire
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
@@ -119,6 +112,12 @@
 	name = "Pikeman Squire"
 	r_hand = /obj/item/weapon/polearm/spear
 	cloak = /obj/item/clothing/cloak/stabard/guard
+	backr = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/clothing/neck/chaincoif = 1,
+		/obj/item/weapon/hammer/iron = 1
+	)
 
 /datum/attribute_holder/sheet/job/squire/footman
 	raw_attribute_list = list(
@@ -180,6 +179,12 @@
 	name = "Footman Squire"
 	beltr = /obj/item/weapon/sword
 	cloak = /obj/item/clothing/cloak/tabard/knight/guard
+	backr = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/clothing/neck/chaincoif = 1,
+		/obj/item/weapon/hammer/iron = 1
+	)
 
 /datum/attribute_holder/sheet/job/squire/skirmisher
 	raw_attribute_list = list(
@@ -243,8 +248,14 @@
 /datum/outfit/squire/skirmisher
 	name = "Bowman Squire"
 	beltr = /obj/item/ammo_holder/quiver/arrows
-	backl = /obj/item/gun/ballistic/bow/short
 	cloak = /obj/item/clothing/cloak/stabard/jupon/guard
+	backl = /obj/item/gun/ballistic/bow/short
+	backr = /obj/item/storage/backpack/satchel
+	backpack_contents = list(
+		/obj/item/storage/belt/pouch/coins/poor = 1,
+		/obj/item/clothing/neck/chaincoif = 1,
+		/obj/item/weapon/hammer/iron = 1
+	)
 
 /datum/outfit/squire/skirmisher/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()

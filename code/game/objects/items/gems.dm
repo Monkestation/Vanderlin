@@ -170,6 +170,7 @@
 	desc = "Something about this gem just doesn't sit right with you. Holding it makes the blood leave your fingertips."
 	smeltresult = /obj/item/ingot/component/glutcrystal
 	dropshrink = 1
+	examine_highlight_type = /datum/examine_highlight/heresy_veryodd/glut
 
 /obj/item/gem/blood_diamond/examine(mob/user)
 	. = ..()

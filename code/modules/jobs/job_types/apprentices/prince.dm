@@ -17,7 +17,6 @@
 	known_by_the_town = TRUE
 	jobs_i_always_know = KNOW_COURT_LIST
 	jobs_always_know_me = KNOW_COURT_AGENT_LIST
-	bypass_lastclass = TRUE
 
 	can_have_apprentices = FALSE
 	noble_income = 20
@@ -46,6 +45,10 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER
 	)
+
+/datum/outfit/heir
+	name = "Prince Base"
+	neck = /obj/item/key/heir
 
 /datum/job/prince/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -102,8 +105,7 @@
 	shoes = /obj/item/clothing/shoes/nobleboot
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/weapon/sword
-	beltr = /obj/item/key/heir
-	neck = /obj/item/storage/belt/pouch/coins/rich
+	beltr = /obj/item/storage/belt/pouch/coins/rich
 	backr = /obj/item/storage/backpack/satchel
 
 /datum/attribute_holder/sheet/job/heir/aristocrat
@@ -148,7 +150,6 @@
 /datum/outfit/heir/aristocrat
 	name = "Sheltered Aristocrat (Prince)"
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/key/heir
 	beltr = /obj/item/storage/belt/pouch/coins/rich
 
 /datum/outfit/heir/aristocrat/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -208,7 +209,6 @@
 /datum/outfit/heir/inbred
 	name = "Inbred Wastrel (Prince)"
 	belt = /obj/item/storage/belt/leather
-	beltl = /obj/item/key/heir
 	beltr = /obj/item/storage/belt/pouch/coins/rich
 
 /datum/outfit/heir/inbred/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
