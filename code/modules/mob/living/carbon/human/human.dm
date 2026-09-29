@@ -154,8 +154,9 @@
 
 /mob/living/carbon/human/get_status_tab_items()
 	. = ..()
-	if(clan)
+	if(HAS_TRAIT(src, TRAIT_VITAE_USER) || HAS_TRAIT(src, TRAIT_BLOOD_SENSE))
 		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
+	if(clan)
 		. += "DETECTIONS: [detections]"
 	if(cleric)
 		. += "[cleric.devotion_title]: [round(cleric.devotion)]/[cleric.max_devotion]"
