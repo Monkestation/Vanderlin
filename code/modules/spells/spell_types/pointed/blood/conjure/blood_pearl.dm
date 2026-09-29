@@ -21,7 +21,7 @@
 
 	charge_required = FALSE
 	cooldown_time = 30 SECONDS
-	spell_cost = 600
+	spell_cost = 100
 	spell_flags = SPELL_UNETCHABLE
 
 /datum/action/cooldown/spell/blood_pearl/cast(atom/cast_on)
@@ -52,7 +52,7 @@
 	grid_height = 32
 	item_weight = 120 GRAMS
 	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
-	var/vitae_amount = 500 // Summon spell is set to 600, 100 more than Vitae stored to prevent using for dupes.
+	var/vitae_amount = 50
 	var/max_vitae = 1000
 	var/stored_blood_color = COLOR_BLOOD
 

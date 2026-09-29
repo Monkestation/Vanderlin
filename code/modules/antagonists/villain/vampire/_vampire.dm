@@ -65,6 +65,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/blood_mage/sorcerer))
 		return span_boldnotice("A formidable Blood Sorcerer.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/herald))
+		return span_boldnotice("Blood Herald of The Archdevils, bringer of ruin and death.")
 
 /datum/antagonist/vampire/on_gain()
 	SSmapping.retainer.vampires |= owner
