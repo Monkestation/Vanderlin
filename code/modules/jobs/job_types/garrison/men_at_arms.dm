@@ -305,7 +305,7 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title = "TAKE UP ARMS.")
 
 	switch(weapon_choice)
-		if("Steel Sabre & Crossbow" || "Steel Shortsword & Shortbow")
+		if("Steel Sabre & Crossbow", "Steel Shortsword & Shortbow")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
 		if("Steel Spear" || "Lucerne")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
