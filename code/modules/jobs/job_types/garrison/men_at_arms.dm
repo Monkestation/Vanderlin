@@ -42,7 +42,7 @@
 	name = "Men-at-arms Base"
 	cloak = /obj/item/clothing/cloak/stabard/guard
 	armor = /obj/item/clothing/armor/brigandine/light
-	shirt = /obj/item/clothing/shirt/gambeson
+	shirt = /obj/item/clothing/armor/gambeson
 	neck = /obj/item/clothing/neck/gorget
 	gloves = /obj/item/clothing/gloves/chain/iron
 	wrists = /obj/item/clothing/wrists/bracers/leather/brigandine
