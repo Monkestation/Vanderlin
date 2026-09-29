@@ -479,7 +479,8 @@ GLOBAL_VAR_INIT(mobids, 1)
 		else
 			client.recent_examines[ref_to_atom] = world.time // set to when we last normal examine'd them
 			addtimer(CALLBACK(src, PROC_REF(clear_from_recent_examines), ref_to_atom), RECENT_EXAMINE_MAX_WINDOW)
-			handle_eye_contact(examinify)
+			if(!cross_z_examine)
+					handle_eye_contact(examinify)
 
 	if(!result_combined)
 		var/list/result = examinify.examine(src)
