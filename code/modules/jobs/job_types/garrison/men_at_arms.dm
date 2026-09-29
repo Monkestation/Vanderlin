@@ -325,7 +325,7 @@
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/medium/scale, ITEM_SLOT_ARMOR, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/chainmail/iron, ITEM_SLOT_SHIRT, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/chainlegs, ITEM_SLOT_PANTS, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/leather, ITEM_SLOT_WRISTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/leather, ITEM_SLOT_WRISTS, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/chain, ITEM_SLOT_GLOVES, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/neck/chaincoif, ITEM_SLOT_NECK, TRUE)
 
