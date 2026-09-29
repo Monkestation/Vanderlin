@@ -228,6 +228,7 @@
 	head = /obj/item/clothing/head/helmet/visored/blkknight/bloodsteel
 	neck = /obj/item/clothing/neck/chaincoif/bloodsteel
 	armor = /obj/item/clothing/armor/plate/blkknight/bloodsteel
+	shirt = /obj/item/clothing/armor/regenerating/skin/infernal/greater
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/plate/blk/bloodsteel
 	pants = /obj/item/clothing/pants/platelegs/blk/bloodsteel

@@ -109,6 +109,7 @@
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	neck = /obj/item/clothing/neck/gorget
 	cloak = /obj/item/clothing/cloak/half/colored/blood
+	shirt = /obj/item/clothing/armor/regenerating/skin/infernal
 	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
 	gloves = /obj/item/clothing/gloves/leather/advanced
 	ring = /obj/item/clothing/ring/gold/rontz

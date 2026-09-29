@@ -21,3 +21,19 @@
 	piercing = 20
 	fire = 0
 	acid = 0
+
+/datum/armor/skin/infernal
+	blunt = 30
+	slash = 30
+	stab = 30
+	piercing = 20
+	fire = 50
+	acid = 0
+
+/datum/armor/skin/infernal/greater
+	blunt = 35
+	slash = 35
+	stab = 35
+	piercing = 30
+	fire = 75
+	acid = 0
