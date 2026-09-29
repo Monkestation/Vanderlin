@@ -400,7 +400,7 @@
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 35, 35)
 		if("Iron Warhammer & Shield" || "Greataxe")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 35, 35)
-		if("Billhook & Iron Shortsword" || "Halberd" || "Eagle's Beak")
+		if("Billhook & Iron Shortsword", "Halberd", "Eagle's Beak")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 35, 35)
 		if("Iron Warhammer & Shield" || "Steel Shortsword & Shield")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/shields, 35, 35)
