@@ -90,16 +90,17 @@
 		STAT_STRENGTH = -1,
 		STAT_ENDURANCE = 1,
 		STAT_PERCEPTION = 2,
-		STAT_INTELLIGENCE = 2,
+		STAT_INTELLIGENCE = 3,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/misc/reading = 40,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/labor/mathematics = 40,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/music = 50
 	)
 
@@ -108,13 +109,14 @@
 		STAT_STRENGTH = -2,
 		STAT_ENDURANCE = 1,
 		STAT_PERCEPTION = 3,
-		STAT_INTELLIGENCE = 3,
+		STAT_INTELLIGENCE = 4,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/misc/reading = 50,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/labor/mathematics = 50,
 		/datum/attribute/skill/combat/polearms = 30,
@@ -192,7 +194,7 @@
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/labor/mathematics = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/misc/swimming = 30,
@@ -228,7 +230,7 @@
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/labor/mathematics = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/misc/swimming = 30,
@@ -283,6 +285,8 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/music = 40
 	)
 
@@ -298,6 +302,8 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/magic/holy = 50,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/music = 40
 	)
 

@@ -1104,8 +1104,8 @@
 		setShockStage(0, FALSE, TRUE)
 
 	if(heal_flags & HEAL_ESSENTIALS)
-		set_nutrition(NUTRITION_LEVEL_FED + 50)
-		set_hydration(HYDRATION_LEVEL_HYDRATED + 50)
+		set_nutrition(NUTRITION_LEVEL_WELL_FED)
+		set_hydration(HYDRATION_LEVEL_WELL_HYDRATED)
 
 	set_disgust(0)
 	cure_husk()
@@ -3147,7 +3147,7 @@
 	reset_technique_mastery_points(silent)
 	reset_form_mastery_points(silent)
 
-/mob/living/proc/offer_item(mob/living/offered_to, obj/offered_item)
+/mob/living/proc/offer_item(mob/living/offered_to, obj/item/offered_item)
 	if(isnull(offered_to) || isnull(offered_item))
 		stack_trace("no offered_to or offered_item in offer_item()")
 		return FALSE
@@ -3165,7 +3165,7 @@
 	if(stealthy)
 		to_chat(src, span_notice("I secretly offer [offered_item] to [offered_to]."))
 		to_chat(offered_to, span_notice("[offered_to] secretly offers [offered_item] to me..."))
-	else
+	else if(!offered_item.on_offer(src, offered_to))
 		visible_message(
 			span_notice("[src] offers [offered_item] to [offered_to] with an outstretched hand."), \
 			span_notice("I offer [offered_item] to [offered_to] with an outstretched hand."), \

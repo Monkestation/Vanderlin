@@ -1,0 +1,31 @@
+{
+    "map_name": "Wyrmwood",
+    "map_path": "map_files/wyrmwood",
+    "map_file": "wyrmwood.dmm",
+	"immigrant_origin": "Wyrmwood",
+	"monarch_title": "Burgomaster",
+	"monarch_title_f": "Burgomaster",
+	"traits": [
+		{
+			"Up": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		}
+	],
+	"other_z": [],
+	"minetype": null,
+	"space_empty_levels": 0,
+	"space_ruin_levels": 0,
+	"world_traits" : ["/datum/world_trait/wyrmwood"]
+}

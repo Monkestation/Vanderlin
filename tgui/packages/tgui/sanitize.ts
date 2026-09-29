@@ -80,3 +80,10 @@ export function sanitizeText(
     FORBID_ATTR: forbidAttr,
   });
 }
+
+/**
+ * Used for code-defined HTML. Less safe than sanitizeText.
+ * This version allows for full HTML tags minus scripting and other XSS risks.
+ */
+export const sanitizeHTML = (input: string) =>
+  DOMPurify.sanitize(input, { USE_PROFILES: { html: true } });

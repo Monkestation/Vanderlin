@@ -713,7 +713,8 @@
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
-	smeltresult = /obj/item/ingot/avantyne
+	melting_material = /datum/material/avantyne
+	melt_amount = 100
 	item_weight = 3.7 KILOGRAMS
 	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 

@@ -1385,7 +1385,7 @@
 		return TRUE
 
 ///This proc handles punching damage. IMPORTANT: Our owner is the TARGET and not the USER in this proc. For whatever reason...
-/datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+/datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, damage_type)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>I don't want to harm [target]!</span>")
 		return FALSE
@@ -1434,8 +1434,9 @@
 		if(!target.lying_attack_check(user))
 			return 0
 
-		//note we don't really pass in a list for EP because this is pure blunt so its redundant
-		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = user.used_intent.blade_class)
+		var/list/split = list()
+		target.run_armor_check(selzone, damage_type, blade_dulling = user.used_intent.blade_class, damage = damage, split_output = split)
+
 
 		target.lastattacker = user.real_name
 		if(target.mind)
@@ -1448,8 +1449,16 @@
 		target.next_attack_msg.Cut()
 
 		var/nodmg = FALSE
-		var/actual_damage = target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block, skip_dtype = TRUE)
-		if(!actual_damage)
+		var/typed_actual = 0
+		var/blunt_actual = 0
+
+		if(split[DAMAGE_TYPED] > 0)
+			typed_actual = target.apply_damage(split[DAMAGE_TYPED], damage_type, affecting, 0)
+		if(split[DAMAGE_BLUNT] > 0)
+			blunt_actual = target.apply_damage(split[DAMAGE_BLUNT], BRUTE, affecting, 0, can_crit = FALSE)
+
+		var/real_damage = typed_actual + blunt_actual
+		if(!real_damage)
 			nodmg = TRUE
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
@@ -1457,7 +1466,7 @@
 			if(affecting.body_zone == BODY_ZONE_HEAD)
 				SEND_SIGNAL(user, COMSIG_HEAD_PUNCHED, target)
 		log_combat(user, target, "punched")
-		knockback(attacker_style, target, user, actual_damage)
+		knockback(attacker_style, target, user, real_damage)
 
 		if(!nodmg)
 			if(user.limb_destroyer)
@@ -1824,7 +1833,7 @@
 			disarm(M, H, attacker_style)
 			return
 	if(istype(M.used_intent, /datum/intent/unarmed))
-		harm(M, H, attacker_style)
+		harm(M, H, attacker_style, M.used_intent.blade_class)
 
 // We need to remove this
 /datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, selzone, accurate = FALSE, signal)

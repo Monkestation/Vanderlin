@@ -188,6 +188,8 @@
 
 	zombie.base_intents = list(INTENT_DISARM, INTENT_GRAB, INTENT_HARM, /datum/intent/unarmed/claw)
 	zombie.update_a_intents()
+	zombie.rog_intent_change(4)
+	zombie.rog_intent_change(4, 1)
 
 	zombie.remove_all_languages()
 	zombie.grant_language(/datum/language/undead)
@@ -200,7 +202,7 @@
 	zombie.fully_heal(HEAL_OXY|HEAL_TOX) //zombles dont breathe and are immune to poison
 	for(var/obj/item/bodypart/zombie_part as anything in zombie.bodyparts)
 		if(!HAS_TRAIT(zombie_part, TRAIT_ROTTEN) && !zombie_part.skeletonized)
-			zombie_part.kill_limb()
+			zombie_part.kill_limb(TRUE)
 		if(zombie_part.can_be_disabled)
 			zombie_part.update_disabled()
 	zombie.update_body()
@@ -208,7 +210,7 @@
 	zombie.update_eyes()
 
 	zombie.add_client_colour(/datum/client_colour/monochrome)
-	zombie.ai_controller = new /datum/ai_controller/zombie(zombie)
+	zombie.ai_controller = new /datum/ai_controller/human_deadite(zombie)
 	zombie.AddComponent(/datum/component/ai_aggro_system)
 	zombie.attributes?.add_attribute_modifier(/datum/attribute_modifier/zombie)
 
