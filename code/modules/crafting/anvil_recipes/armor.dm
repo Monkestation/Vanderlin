@@ -424,7 +424,7 @@
 	craftdiff = 1
 
 /datum/anvil_recipe/armor/iron/town_watch_helmet_lt
-	name = "Town Watch Liutenant helmet"
+	name = "Town Watch Lieutenant helmet"
 	additional_items = list(/obj/item/natural/feather = 1)
 	created_item = /obj/item/clothing/head/helmet/watchmen/lt
 	craftdiff = 1
