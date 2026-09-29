@@ -184,6 +184,40 @@
 	herald.update_age_stats(herald.age, TRUE)
 	equip_herald()
 	herald.AddComponent(/datum/component/violent_death)
+	grant_weapon(herald)
+
+/datum/antagonist/blood_mage/herald/proc/grant_weapon(mob/living/carbon/human/herald)
+	if(!herald.client)
+		herald.equip_to_slot_or_del(new /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel, ITEM_SLOT_HANDS, TRUE)
+		herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
+		return
+
+	var/static/list/weapons = list(
+		"Broadsword" = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel,
+		"Rapier" = /obj/item/weapon/sword/rapier/bloodsteel,
+		"Spear" = /obj/item/weapon/polearm/spear/bloodsteel,
+		"Halberd" = /obj/item/weapon/polearm/halberd/bloodsteel,
+		"Whip" = /obj/item/weapon/whip/bloodsteel,
+		"Handclaws" = /obj/item/weapon/handclaw/steel/bloodsteel,
+	)
+	var/weapon_choice = herald.select_equippable(herald.client, weapons, message = "Choose Your Specialisation", title = "BLOOD HERALD")
+	if(!weapon_choice)
+		return
+	switch(weapon_choice)
+		if("Broadsword")
+			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
+		if("Rapier")
+			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
+		if("Spear")
+			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/polearm)
+		if("Halberd")
+			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/polearm)
+		if("Whip")
+			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/whip)
+		if("Handclaws")
+			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/claws)
+			herald.equip_to_slot_or_del(new /obj/item/weapon/handclaw/steel/bloodsteel, ITEM_SLOT_BELT_R, TRUE)
+			ADD_TRAIT(herald, TRAIT_DUALWIELDER, JOB_TRAIT)
 
 /datum/antagonist/blood_mage/herald/on_removal()
 	var/mob/living/herald = owner.current
@@ -255,40 +289,6 @@
 	ADD_TRAIT(herald, TRAIT_NOAMBUSH, JOB_TRAIT)
 
 	addtimer(CALLBACK(herald, TYPE_PROC_REF(/mob/living/carbon/human, choose_name_popup), ROLE_BLOOD_HERALD), 5 SECONDS)
-
-/datum/outfit/blood_herald/post_equip(mob/living/carbon/human/herald, visuals_only)
-	. = ..()
-	if(!herald.client)
-		herald.equip_to_slot_or_del(new /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel, ITEM_SLOT_HANDS, TRUE)
-		herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
-		return
-
-	var/static/list/weapons = list(
-		"Broadsword" = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel,
-		"Rapier" = /obj/item/weapon/sword/rapier/bloodsteel,
-		"Spear" = /obj/item/weapon/polearm/spear/bloodsteel,
-		"Halberd" = /obj/item/weapon/polearm/halberd/bloodsteel,
-		"Whip" = /obj/item/weapon/whip/bloodsteel,
-		"Handclaws" = /obj/item/weapon/handclaw/steel/bloodsteel,
-	)
-	var/weapon_choice = herald.select_equippable(herald.client, weapons, message = "Choose Your Specialisation", title = "BLOOD HERALD")
-	if(!weapon_choice)
-		return
-	switch(weapon_choice)
-		if("Broadsword")
-			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
-		if("Rapier")
-			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
-		if("Spear")
-			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/polearm)
-		if("Halberd")
-			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/polearm)
-		if("Whip")
-			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/whip)
-		if("Handclaws")
-			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/claws)
-			herald.equip_to_slot_or_del(new /obj/item/weapon/handclaw/steel/bloodsteel, ITEM_SLOT_BELT_R, TRUE)
-			ADD_TRAIT(herald, TRAIT_DUALWIELDER, JOB_TRAIT)
 
 /datum/attribute_holder/sheet/job/blood_herald
 	raw_attribute_list = list(
