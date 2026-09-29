@@ -452,11 +452,11 @@ GLOBAL_VAR_INIT(mobids, 1)
 	var/cross_z_examine = our_turf && their_turf && our_turf.z != their_turf.z
 
 	if(isturf(examinify.loc) && isliving(src) && stat == CONSCIOUS)
-			face_atom(examinify)
+		face_atom(examinify)
 		if(m_intent != MOVE_INTENT_SNEAK)
 			visible_message(span_emote("[src] looks at [examinify]."), span_emote("I look at [examinify]."))
 		else if(isliving(examinify) && !cross_z_examine)
-				var/mob/living/examaniee = examinify
+			var/mob/living/examaniee = examinify
 			if(examaniee.peek_examine_check(src))
 				to_chat(src, span_info("My peeking went unnoticed.."))
 			else
@@ -480,7 +480,7 @@ GLOBAL_VAR_INIT(mobids, 1)
 			client.recent_examines[ref_to_atom] = world.time // set to when we last normal examine'd them
 			addtimer(CALLBACK(src, PROC_REF(clear_from_recent_examines), ref_to_atom), RECENT_EXAMINE_MAX_WINDOW)
 			if(!cross_z_examine)
-					handle_eye_contact(examinify)
+				handle_eye_contact(examinify)
 
 	if(!result_combined)
 		var/list/result = examinify.examine(src)
