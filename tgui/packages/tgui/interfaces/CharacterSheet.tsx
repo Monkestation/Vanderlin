@@ -14,6 +14,7 @@ type Data = {
   nickname_color: string;
   permadeath: string;
   examine_music: string;
+  quirks_count: number;
   pq: number;
   triumphs: number;
   faith: string;
@@ -60,6 +61,7 @@ export const CharacterSheet = () => {
     nickname_color = '#ffffff',
     permadeath = 'disabled',
     examine_music = 'None',
+    quirks_count = 0,
     pq = 0,
     triumphs = 0,
     faith = '',
@@ -90,7 +92,7 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={680} title="Who Are You?">
+    <Window width={480} height={700} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -159,6 +161,14 @@ export const CharacterSheet = () => {
                 <span style={editStyle} onClick={() => edit('examine_music')}>{examine_music}</span>
               </LabeledList.Item>
             </LabeledList>
+            <Button
+              mt={1}
+              fluid
+              icon="star"
+              onClick={() => act('open_quirks')}
+            >
+              Quirks ({quirks_count})
+            </Button>
           </Section>
         )}
 

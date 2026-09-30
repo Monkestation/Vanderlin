@@ -36,6 +36,7 @@
 	data["nickname_color"] = "#" + prefs.read_preference(/datum/preference/color/nickname_color)
 	data["permadeath"] = prefs.read_preference(/datum/preference/toggle/permadeath) ? "ENABLED" : "disabled"
 	data["examine_music"] = prefs.read_preference(/datum/preference/choiced/examine_music)
+	data["quirks_count"] = length(prefs.quirks)
 	data["pq"] = get_playerquality(owner.ckey)
 	data["triumphs"] = SStriumphs.get_triumphs(owner.ckey)
 	data["faith"] = prefs.read_preference(/datum/preference/choiced/faith)
@@ -118,4 +119,10 @@
 				return
 			var/datum/body_markings_menu/bm_menu = new(owner.client.prefs, owner)
 			bm_menu.ui_interact(owner)
+			return TRUE
+		if("open_quirks")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			var/datum/quirk_menu/qm = new(owner.client.prefs)
+			qm.ui_interact(owner)
 			return TRUE

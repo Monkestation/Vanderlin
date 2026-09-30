@@ -4754,6 +4754,7 @@
 #include "modular_vanderlin_ui\code\datums\antag_preferences_menu.dm"
 #include "modular_vanderlin_ui\code\datums\body_markings_menu.dm"
 #include "modular_vanderlin_ui\code\datums\character_sheet.dm"
+#include "modular_vanderlin_ui\code\datums\quirk_menu.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\character_gallery.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\erp_preferences.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\examine_music.dm"
