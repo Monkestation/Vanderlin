@@ -40,6 +40,9 @@
 	data["species"] = species_path ? species_path::name : "Unknown"
 	var/datum/culture/culture_path = prefs.read_preference(/datum/preference/choiced/culture)
 	data["culture"] = culture_path ? culture_path::name : "Unknown"
+	data["family_mode"] = prefs.read_preference(/datum/preference/choiced/family_mode)
+	data["gender_pref"] = prefs.read_preference(/datum/preference/choiced/gender_choice)
+	data["spouse_pref"] = prefs.read_preference(/datum/preference/text/setspouse) || "None"
 	return data
 
 /datum/character_sheet/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)

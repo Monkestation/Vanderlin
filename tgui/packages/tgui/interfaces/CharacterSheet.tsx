@@ -16,6 +16,9 @@ type Data = {
   patron: string;
   species: string;
   culture: string;
+  family_mode: string;
+  gender_pref: string;
+  spouse_pref: string;
 };
 
 export const CharacterSheet = () => {
@@ -34,6 +37,9 @@ export const CharacterSheet = () => {
     patron = '',
     species = '',
     culture = '',
+    family_mode = '',
+    gender_pref = '',
+    spouse_pref = '',
   } = data;
 
   return (
@@ -57,6 +63,12 @@ export const CharacterSheet = () => {
             onClick={() => setCurrentTab('appearance')}
           >
             Appearance
+          </Tabs.Tab>
+          <Tabs.Tab
+            selected={currentTab === 'family'}
+            onClick={() => setCurrentTab('family')}
+          >
+            Family
           </Tabs.Tab>
         </Tabs>
 
@@ -91,6 +103,16 @@ export const CharacterSheet = () => {
             <LabeledList>
               <LabeledList.Item label="Species">{species}</LabeledList.Item>
               <LabeledList.Item label="Culture">{culture}</LabeledList.Item>
+            </LabeledList>
+          </Section>
+        )}
+
+        {currentTab === 'family' && (
+          <Section title="Family">
+            <LabeledList>
+              <LabeledList.Item label="Family Type">{family_mode}</LabeledList.Item>
+              <LabeledList.Item label="Gender Preference">{gender_pref}</LabeledList.Item>
+              <LabeledList.Item label="Spouse Preference">{spouse_pref}</LabeledList.Item>
             </LabeledList>
           </Section>
         )}
