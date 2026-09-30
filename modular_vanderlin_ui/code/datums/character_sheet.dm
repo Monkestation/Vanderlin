@@ -67,6 +67,8 @@
 	data["gender_pref"] = prefs.read_preference(/datum/preference/choiced/gender_choice)
 	data["spouse_pref"] = prefs.read_preference(/datum/preference/text/setspouse) || "None"
 	data["ooc_notes"] = prefs.read_preference(/datum/preference/text/ooc_notes) || ""
+	data["ooc_extra_link"] = prefs.read_preference(/datum/preference/text/ooc_extra_link) || ""
+	data["flavortext"] = prefs.read_preference(/datum/preference/text/flavortext) || ""
 	var/list/rumors_list = prefs.read_preference(/datum/preference/list_type/rumors)
 	data["rumors"] = rumors_list ? rumors_list.Join(", ") : ""
 	var/list/gossip_list = prefs.read_preference(/datum/preference/list_type/noble_gossip)

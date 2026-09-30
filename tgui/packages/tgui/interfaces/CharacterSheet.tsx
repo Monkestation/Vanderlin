@@ -31,6 +31,8 @@ type Data = {
   gender_pref: string;
   spouse_pref: string;
   ooc_notes: string;
+  ooc_extra_link: string;
+  flavortext: string;
   rumors: string;
   noble_gossip: string;
   food_prefs: string;
@@ -78,6 +80,8 @@ export const CharacterSheet = () => {
     gender_pref = '',
     spouse_pref = '',
     ooc_notes = '',
+    ooc_extra_link = '',
+    flavortext = '',
     rumors = '',
     noble_gossip = '',
     food_prefs = '',
@@ -92,7 +96,7 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={700} title="Who Are You?">
+    <Window width={480} height={760} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -252,8 +256,18 @@ export const CharacterSheet = () => {
         {currentTab === 'descriptors' && (
           <Section title="Descriptors">
             <LabeledList>
+              <LabeledList.Item label="Flavour Text">
+                <span style={editStyle} onClick={() => edit('flavortext')}>{flavortext || 
+'None'
+}</span>
+              </LabeledList.Item>
               <LabeledList.Item label="OOC Notes">
                 <span style={editStyle} onClick={() => edit('ooc_notes')}>{ooc_notes || 
+'None'
+}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="OOC Extra Link">
+                <span style={editStyle} onClick={() => edit('ooc_extra_link')}>{ooc_extra_link || 
 'None'
 }</span>
               </LabeledList.Item>

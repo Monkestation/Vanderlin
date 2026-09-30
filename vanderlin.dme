@@ -4761,6 +4761,7 @@
 #include "modular_vanderlin_ui\code\datums\preferences\nickname_color.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\nsfw_flavor.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\nudeshot_link.dm"
+#include "modular_vanderlin_ui\code\datums\preferences\ooc_extra_link_handler.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\permadeath.dm"
 #include "modular_vanderlin_ui\code\modules\mob\living\carbon\human\character_gallery_var.dm"
 #include "modular_vanderlin_ui\code\modules\mob\living\carbon\human\examine_music.dm"
