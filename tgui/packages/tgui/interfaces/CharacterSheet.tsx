@@ -24,6 +24,8 @@ type Data = {
   rumors: string;
   noble_gossip: string;
   food_prefs: string;
+  nsfw_flavor: string;
+  erp_preferences: string;
 };
 
 const editStyle = {
@@ -55,12 +57,14 @@ export const CharacterSheet = () => {
     rumors = '',
     noble_gossip = '',
     food_prefs = '',
+    nsfw_flavor = 'OFF',
+    erp_preferences = '',
   } = data;
 
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={480} title="Who Are You?">
+    <Window width={480} height={520} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -186,6 +190,14 @@ export const CharacterSheet = () => {
               <LabeledList.Item label="Noble Gossip">{noble_gossip || 
 'None'
 }</LabeledList.Item>
+              <LabeledList.Item label="NSFW Flavour">
+                <span style={editStyle} onClick={() => edit('nsfw_flavor')}>{nsfw_flavor}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="ERP Preferences">
+                <span style={editStyle} onClick={() => edit('erp_preferences')}>{erp_preferences || 
+'None'
+}</span>
+              </LabeledList.Item>
             </LabeledList>
           </Section>
         )}

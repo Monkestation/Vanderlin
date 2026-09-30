@@ -51,6 +51,8 @@
 	data["noble_gossip"] = gossip_list ? gossip_list.Join(", ") : ""
 	var/list/food_list = prefs.read_preference(/datum/preference/list_type/culinary_preferences)
 	data["food_prefs"] = food_list ? food_list.Join(", ") : ""
+	data["nsfw_flavor"] = prefs.read_preference(/datum/preference/toggle/nsfw_flavor) ? "ON" : "OFF"
+	data["erp_preferences"] = prefs.read_preference(/datum/preference/text/erp_preferences) || ""
 	return data
 
 /datum/character_sheet/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
