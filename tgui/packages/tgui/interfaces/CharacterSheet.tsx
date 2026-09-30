@@ -171,7 +171,7 @@ export const CharacterSheet = () => {
               mt={1}
               fluid
               icon="user-tag"
-              onClick={() => act('open_role_prefs')}
+              onClick={() => act('open_job_select')}
             >
               Change Role
             </Button>
@@ -179,7 +179,7 @@ export const CharacterSheet = () => {
               mt={1}
               fluid
               icon="user-secret"
-              onClick={() => act('open_role_prefs')}
+              onClick={() => act('open_antag_prefs')}
             >
               Antagonist Preferences
             </Button>

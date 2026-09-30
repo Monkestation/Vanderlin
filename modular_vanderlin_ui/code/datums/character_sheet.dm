@@ -91,8 +91,14 @@
 				return
 			pref.handle_link(prefs, owner)
 			return TRUE
-		if("open_role_prefs")
+		if("open_job_select")
 			if(!owner || !owner.client || !owner.client.prefs)
 				return
-			owner.client.prefs.show_choices(owner, 4)
+			owner.client.prefs.open_job_middleware(owner)
+			return TRUE
+		if("open_antag_prefs")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			var/datum/antag_preferences_menu/antag_menu = new(owner.client.prefs)
+			antag_menu.ui_interact(owner)
 			return TRUE
