@@ -53,6 +53,15 @@
 	data["species"] = species_path ? species_path::name : "Unknown"
 	var/datum/culture/culture_path = prefs.read_preference(/datum/preference/choiced/culture)
 	data["culture"] = culture_path ? culture_path::name : "Unknown"
+	data["skin_tone"] = prefs.read_preference(/datum/preference/choiced/skin_tone)
+	data["detail_color"] = "#" + prefs.read_preference(/datum/preference/color/detail_color)
+	var/list/bm_count = list()
+	for(var/zone in prefs.body_markings)
+		bm_count += prefs.body_markings[zone].len
+	var/total_markings = 0
+	for(var/n in bm_count)
+		total_markings += n
+	data["markings_count"] = total_markings
 	data["family_mode"] = prefs.read_preference(/datum/preference/choiced/family_mode)
 	data["gender_pref"] = prefs.read_preference(/datum/preference/choiced/gender_choice)
 	data["spouse_pref"] = prefs.read_preference(/datum/preference/text/setspouse) || "None"
@@ -101,4 +110,10 @@
 				return
 			var/datum/antag_preferences_menu/antag_menu = new(owner.client.prefs)
 			antag_menu.ui_interact(owner)
+			return TRUE
+		if("open_body_markings")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			var/datum/body_markings_menu/bm_menu = new(owner.client.prefs, owner)
+			bm_menu.ui_interact(owner)
 			return TRUE

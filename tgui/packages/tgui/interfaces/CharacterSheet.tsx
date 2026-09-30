@@ -23,6 +23,9 @@ type Data = {
   loadout3: string;
   species: string;
   culture: string;
+  skin_tone: string;
+  detail_color: string;
+  markings_count: number;
   family_mode: string;
   gender_pref: string;
   spouse_pref: string;
@@ -64,6 +67,9 @@ export const CharacterSheet = () => {
     loadout3 = 'None',
     species = '',
     culture = '',
+    skin_tone = '',
+    detail_color = '#000000',
+    markings_count = 0,
     family_mode = '',
     gender_pref = '',
     spouse_pref = '',
@@ -80,7 +86,7 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={620} title="Who Are You?">
+    <Window width={480} height={640} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -195,7 +201,21 @@ export const CharacterSheet = () => {
               <LabeledList.Item label="Culture">
                 <span style={editStyle} onClick={() => edit('culture')}>{culture}</span>
               </LabeledList.Item>
+              <LabeledList.Item label="Skin Tone">
+                <span style={editStyle} onClick={() => edit('skin_tone')}>{skin_tone}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Detail Color">
+                <span style={{ ...editStyle, color: detail_color }} onClick={() => edit('detail_color')}>{detail_color}</span>
+              </LabeledList.Item>
             </LabeledList>
+            <Button
+              mt={1}
+              fluid
+              icon="paint-brush"
+              onClick={() => act('open_body_markings')}
+            >
+              Body Markings ({markings_count})
+            </Button>
           </Section>
         )}
 
