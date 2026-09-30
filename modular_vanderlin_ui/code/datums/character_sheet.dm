@@ -55,6 +55,9 @@
 	data["food_prefs"] = food_list ? food_list.Join(", ") : ""
 	data["nsfw_flavor"] = prefs.read_preference(/datum/preference/toggle/nsfw_flavor) ? "ON" : "OFF"
 	data["erp_preferences"] = prefs.read_preference(/datum/preference/text/erp_preferences) || ""
+	var/list/gallery_list = prefs.read_preference(/datum/preference/list_type/character_gallery)
+	data["gallery_count"] = gallery_list ? length(gallery_list) : 0
+	data["gallery_links"] = gallery_list ? gallery_list.Join(", ") : ""
 	return data
 
 /datum/character_sheet/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)

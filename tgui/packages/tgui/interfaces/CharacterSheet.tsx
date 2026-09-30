@@ -28,6 +28,8 @@ type Data = {
   food_prefs: string;
   nsfw_flavor: string;
   erp_preferences: string;
+  gallery_count: number;
+  gallery_links: string;
 };
 
 const editStyle = {
@@ -63,12 +65,14 @@ export const CharacterSheet = () => {
     food_prefs = '',
     nsfw_flavor = 'OFF',
     erp_preferences = '',
+    gallery_count = 0,
+    gallery_links = '',
   } = data;
 
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={560} title="Who Are You?">
+    <Window width={480} height={580} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -207,6 +211,13 @@ export const CharacterSheet = () => {
                 <span style={editStyle} onClick={() => edit('erp_preferences')}>{erp_preferences || 
 'None'
 }</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Character Gallery">
+                <span style={editStyle} onClick={() => edit('character_gallery')}>
+                  {gallery_count} image(s){gallery_links ? ': ' + gallery_links : 
+''
+}
+                </span>
               </LabeledList.Item>
             </LabeledList>
           </Section>
