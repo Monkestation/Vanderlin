@@ -1144,38 +1144,45 @@
 			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
 				I = new /obj/item/clothing/armor/medium/scale(user.loc)
 			else
-				I = new /obj/item/clothing/armor/leather/masterwork(user.loc)
+				I = new /obj/item/clothing/armor/leather/advanced(user.loc)
 		if(3)
 			if(HAS_TRAIT(user, TRAIT_HEAVYARMOR))
 				I = new /obj/item/clothing/pants/platelegs(user.loc)
 			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
 				I = new /obj/item/clothing/pants/chainlegs(user.loc)
 			else
-				I = new /obj/item/clothing/pants/trou/leather/masterwork(user.loc)
+				I = new /obj/item/clothing/pants/trou/leather/advanced(user.loc)
 		if(4)
 			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
 				I = new /obj/item/clothing/head/helmet/heavy/bucket(user.loc)
 			else
-				I = new /obj/item/clothing/head/helmet/leather/masterwork(user.loc)
+				I = new /obj/item/clothing/head/helmet/leather/advanced(user.loc)
 		if(6)
-			var/list/weapon_options = list()
+			var/list/weapon_options = list("Navaja knife" = /obj/item/weapon/knife/dagger/navaja)
 
 			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/polearms) > SKILL_LEVEL_JOURNEYMAN)
 				weapon_options["Billhook"] = /obj/item/weapon/polearm/spear/billhook
+				weapon_options["Quarterstaff"] = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
 			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/bows) > SKILL_LEVEL_JOURNEYMAN)
 				weapon_options["Longbow"] = /obj/item/gun/ballistic/bow/long
 			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/swords) > SKILL_LEVEL_JOURNEYMAN)
 				weapon_options["Longsword"] = /obj/item/weapon/sword/long
+				weapon_options["Sabre"] = /obj/item/weapon/sword/sabre
 			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/axesmaces) > SKILL_LEVEL_JOURNEYMAN)
 				weapon_options["Steel mace"] = /obj/item/weapon/mace/steel
 				weapon_options["Battle axe"] = /obj/item/weapon/axe/battle
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/whipsflails) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Steel flail"] = /obj/item/weapon/flail
+				weapon_options["Steel whip"] = /obj/item/weapon/whip/steel
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/unarmed) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Knuckles"] = /obj/item/weapon/knuckles
 
 			var/chosen_weapon
-			if(length(weapon_options))
-				var/chosen_name = browser_input_list(user, "Choose your weapon.", "BLESSING FROM THE THIEF-GOD", weapon_options, timeout = 20 SECONDS)
+			if(length(weapon_options) <= 1)
+				var/chosen_name = browser_input_list(user, "Choose your blessing.", "STOLEN STEEL. NOT MADE FOR US.", weapon_options, timeout = 20 SECONDS)
 				chosen_weapon = chosen_name ? weapon_options[chosen_name] : /obj/item/weapon/knife/dagger/navaja
 			else
-				chosen_weapon = /obj/item/weapon/knife/dagger/navaja //I had no idea what to put as default
+				chosen_weapon = /obj/item/weapon/knife/dagger/navaja
 			I = new chosen_weapon(user.loc)
 	if(I)
 		I.sellprice = 0
