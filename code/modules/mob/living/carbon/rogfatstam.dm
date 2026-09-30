@@ -58,7 +58,7 @@
 	)
 
 /mob/living/proc/update_energy()
-	if(cmode && !HAS_TRAIT(src, TRAIT_BREADY))
+	if(cmode && !HAS_TRAIT(src, TRAIT_BATTLE_READY))
 		adjust_energy(-2)
 
 /mob/living/proc/update_energy_modifiers()

@@ -31,7 +31,7 @@
 ///  SUPPLIES  START HERE! WOW!
 
 /datum/inqports/supplies/extrafunding
-	name = "(80 Silvers) Extra Funding"
+	name = "(400 Mammons) Extra Funding"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/extrafunding
 	marquescost = 16
 	maximum = 1
@@ -169,7 +169,7 @@
 /datum/inqports/supplies/bullion
 	name = "6 Blessed Silver Bullion"
 	item_type = /obj/structure/closet/crate/chest/inqreliquary/relic/bullion
-	marquescost = 16
+	marquescost = 12
 
 /obj/structure/closet/crate/chest/inqreliquary/relic/bullion/populate_contents()
 	for(var/i in 1 to 6)

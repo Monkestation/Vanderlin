@@ -304,6 +304,7 @@
 	sellprice = 1000
 	resistance_flags = FIRE_PROOF
 	item_weight = 600 GRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/vampire
 
 /obj/item/clothing/head/vampire/Initialize(mapload)
 	. = ..()
@@ -459,3 +460,26 @@
 	icon_state = "explorerhat"
 	item_state = "explorerhat"
 	sewrepair = TRUE
+
+/obj/item/clothing/head/rosa
+	name = "scarlet hat"
+	desc = "A finely crafted hat from Wintermare, typically worn by their nobility."
+	icon_state = "rosahat2"
+	icon = 'icons/roguetown/clothing/special/rosewood.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+
+/obj/item/clothing/head/rosa/three
+	name = "velvet hat"
+	icon_state = "rosahat3"
+
+/obj/item/clothing/head/rosa/four
+	name = "obsidian hat"
+	icon_state = "rosahat4"
+
+/obj/item/clothing/head/rosa/five
+	name = "sable hat"
+	icon_state = "rosahat5"
+
+/obj/item/clothing/head/rosa/six
+	name = "maroon cap"
+	icon_state = "rosahat6"

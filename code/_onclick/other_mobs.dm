@@ -534,7 +534,7 @@
 	var/obj/item/picked = pick(stealpos)
 	var/final_difficulty = picked.pickpocket_difficulty
 	if(thief.zone_selected == BODY_ZONE_PRECISE_NECK)
-		final_difficulty = max(final_difficulty + 1, SKILL_RANK_LEGENDARY)
+		final_difficulty = min(final_difficulty + 1, SKILL_RANK_LEGENDARY)
 
 	if(HAS_TRAIT(picked, TRAIT_CANT_BE_STOLEN))
 		exp_to_gain /= 2

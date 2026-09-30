@@ -75,7 +75,6 @@
 		OFFSET_ARMOR = list(0,-3),\
 		OFFSET_UNDIES = list(0,0)\
 	)
-	id_override = SPEC_ID_GOBLIN
 
 /datum/species/goblin/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()

@@ -18,6 +18,7 @@
 	charge_required = FALSE
 	cooldown_time = 10 SECONDS
 	spell_cost = 10
+	spell_flags = SPELL_DEVIL_BLOCKED
 
 	/// Base healing before adjustments
 	var/base_healing = 12.5
@@ -40,7 +41,7 @@
 
 /datum/action/cooldown/spell/healing/cast(mob/living/cast_on)
 	. = ..()
-	if(cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark))
+	if(cast_on.has_status_effect(/datum/status_effect/debuff/blood_mark/curse))
 		cast_on.visible_message(
 			span_warning("[cast_on] recoils as their flesh is burned by blood!"),
 			span_bloody("The Blood Mark sears my flesh with a wave of pain!"),
@@ -315,6 +316,7 @@
 
 	base_healing = 35
 	wound_modifier = 0.35
+	associated_skill = /datum/attribute/skill/magic/druidic
 
 /datum/action/cooldown/spell/healing/greater
 	name = "Miracle"
