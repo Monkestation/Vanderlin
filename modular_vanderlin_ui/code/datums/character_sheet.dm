@@ -43,6 +43,13 @@
 	data["family_mode"] = prefs.read_preference(/datum/preference/choiced/family_mode)
 	data["gender_pref"] = prefs.read_preference(/datum/preference/choiced/gender_choice)
 	data["spouse_pref"] = prefs.read_preference(/datum/preference/text/setspouse) || "None"
+	data["ooc_notes"] = prefs.read_preference(/datum/preference/text/ooc_notes) || ""
+	var/list/rumors_list = prefs.read_preference(/datum/preference/list_type/rumors)
+	data["rumors"] = rumors_list ? rumors_list.Join(", ") : ""
+	var/list/gossip_list = prefs.read_preference(/datum/preference/list_type/noble_gossip)
+	data["noble_gossip"] = gossip_list ? gossip_list.Join(", ") : ""
+	var/list/food_list = prefs.read_preference(/datum/preference/list_type/culinary_preferences)
+	data["food_prefs"] = food_list ? food_list.Join(", ") : ""
 	return data
 
 /datum/character_sheet/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)

@@ -19,6 +19,10 @@ type Data = {
   family_mode: string;
   gender_pref: string;
   spouse_pref: string;
+  ooc_notes: string;
+  rumors: string;
+  noble_gossip: string;
+  food_prefs: string;
 };
 
 export const CharacterSheet = () => {
@@ -40,10 +44,14 @@ export const CharacterSheet = () => {
     family_mode = '',
     gender_pref = '',
     spouse_pref = '',
+    ooc_notes = '',
+    rumors = '',
+    noble_gossip = '',
+    food_prefs = '',
   } = data;
 
   return (
-    <Window width={480} height={460} title="Who Are You?">
+    <Window width={480} height={480} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -69,6 +77,12 @@ export const CharacterSheet = () => {
             onClick={() => setCurrentTab('family')}
           >
             Family
+          </Tabs.Tab>
+          <Tabs.Tab
+            selected={currentTab === 'descriptors'}
+            onClick={() => setCurrentTab('descriptors')}
+          >
+            Descriptors
           </Tabs.Tab>
         </Tabs>
 
@@ -113,6 +127,25 @@ export const CharacterSheet = () => {
               <LabeledList.Item label="Family Type">{family_mode}</LabeledList.Item>
               <LabeledList.Item label="Gender Preference">{gender_pref}</LabeledList.Item>
               <LabeledList.Item label="Spouse Preference">{spouse_pref}</LabeledList.Item>
+            </LabeledList>
+          </Section>
+        )}
+
+        {currentTab === 'descriptors' && (
+          <Section title="Descriptors">
+            <LabeledList>
+              <LabeledList.Item label="OOC Notes">{ooc_notes || 
+'None'
+}</LabeledList.Item>
+              <LabeledList.Item label="Food Preferences">{food_prefs || 
+'None'
+}</LabeledList.Item>
+              <LabeledList.Item label="Rumors">{rumors || 
+'None'
+}</LabeledList.Item>
+              <LabeledList.Item label="Noble Gossip">{noble_gossip || 
+'None'
+}</LabeledList.Item>
             </LabeledList>
           </Section>
         )}
