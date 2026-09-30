@@ -70,11 +70,18 @@
 	data["ooc_extra_link"] = prefs.read_preference(/datum/preference/text/ooc_extra_link) || ""
 	data["flavortext"] = prefs.read_preference(/datum/preference/text/flavortext) || ""
 	var/list/rumors_list = prefs.read_preference(/datum/preference/list_type/rumors)
-	data["rumors"] = rumors_list ? rumors_list.Join(", ") : ""
+	data["rumors_count"] = rumors_list ? length(rumors_list) : 0
 	var/list/gossip_list = prefs.read_preference(/datum/preference/list_type/noble_gossip)
-	data["noble_gossip"] = gossip_list ? gossip_list.Join(", ") : ""
-	var/list/food_list = prefs.read_preference(/datum/preference/list_type/culinary_preferences)
-	data["food_prefs"] = food_list ? food_list.Join(", ") : ""
+	data["gossip_count"] = gossip_list ? length(gossip_list) : 0
+	var/list/culinary = prefs.read_preference(/datum/preference/list_type/culinary_preferences)
+	if(culinary)
+		var/obj/item/reagent_containers/food/snacks/fav_food_ref = culinary[CULINARY_FAVOURITE_FOOD]
+		data["favourite_food"] = fav_food_ref ? fav_food_ref::name : "None"
+		var/datum/reagent/fav_drink_ref = culinary[CULINARY_FAVOURITE_DRINK]
+		data["favourite_drink"] = fav_drink_ref ? fav_drink_ref::name : "None"
+	else
+		data["favourite_food"] = "None"
+		data["favourite_drink"] = "None"
 	data["nsfw_flavor"] = prefs.read_preference(/datum/preference/toggle/nsfw_flavor) ? "ON" : "OFF"
 	data["erp_preferences"] = prefs.read_preference(/datum/preference/text/erp_preferences) || ""
 	data["headshot_link"] = prefs.read_preference(/datum/preference/text/headshot_link) || ""
@@ -127,4 +134,22 @@
 				return
 			var/datum/quirk_menu/qm = new(owner.client.prefs)
 			qm.ui_interact(owner)
+			return TRUE
+		if("open_culinary")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			var/datum/culinary_menu/cm = new(owner.client.prefs, owner)
+			cm.ui_interact(owner)
+			return TRUE
+		if("open_rumors")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			var/datum/text_list_menu/tlm = new(owner.client.prefs, owner, /datum/preference/list_type/rumors, MAX_RUMORS, MAX_GOSSIP_LENGTH, "Rumors")
+			tlm.ui_interact(owner)
+			return TRUE
+		if("open_gossip")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			var/datum/text_list_menu/tlm = new(owner.client.prefs, owner, /datum/preference/list_type/noble_gossip, MAX_NOBLE_GOSSIP, MAX_GOSSIP_LENGTH, "Noble Gossip")
+			tlm.ui_interact(owner)
 			return TRUE

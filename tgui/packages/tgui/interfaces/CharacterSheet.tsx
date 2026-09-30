@@ -33,9 +33,10 @@ type Data = {
   ooc_notes: string;
   ooc_extra_link: string;
   flavortext: string;
-  rumors: string;
-  noble_gossip: string;
-  food_prefs: string;
+  rumors_count: number;
+  gossip_count: number;
+  favourite_food: string;
+  favourite_drink: string;
   nsfw_flavor: string;
   erp_preferences: string;
   headshot_link: string;
@@ -82,9 +83,10 @@ export const CharacterSheet = () => {
     ooc_notes = '',
     ooc_extra_link = '',
     flavortext = '',
-    rumors = '',
-    noble_gossip = '',
-    food_prefs = '',
+    rumors_count = 0,
+    gossip_count = 0,
+    favourite_food = 'None',
+    favourite_drink = 'None',
     nsfw_flavor = 'OFF',
     erp_preferences = '',
     headshot_link = '',
@@ -96,7 +98,7 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={760} title="Who Are You?">
+    <Window width={480} height={780} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -271,15 +273,8 @@ export const CharacterSheet = () => {
 'None'
 }</span>
               </LabeledList.Item>
-              <LabeledList.Item label="Food Preferences">{food_prefs || 
-'None'
-}</LabeledList.Item>
-              <LabeledList.Item label="Rumors">{rumors || 
-'None'
-}</LabeledList.Item>
-              <LabeledList.Item label="Noble Gossip">{noble_gossip || 
-'None'
-}</LabeledList.Item>
+              <LabeledList.Item label="Favourite Food">{favourite_food}</LabeledList.Item>
+              <LabeledList.Item label="Favourite Drink">{favourite_drink}</LabeledList.Item>
               <LabeledList.Item label="NSFW Flavour">
                 <span style={editStyle} onClick={() => edit('nsfw_flavor')}>{nsfw_flavor}</span>
               </LabeledList.Item>
@@ -306,6 +301,30 @@ export const CharacterSheet = () => {
                 </span>
               </LabeledList.Item>
             </LabeledList>
+            <Button
+              mt={1}
+              fluid
+              icon="utensils"
+              onClick={() => act('open_culinary')}
+            >
+              Manage Culinary Preferences
+            </Button>
+            <Button
+              mt={1}
+              fluid
+              icon="comment-dots"
+              onClick={() => act('open_rumors')}
+            >
+              Rumors ({rumors_count})
+            </Button>
+            <Button
+              mt={1}
+              fluid
+              icon="crown"
+              onClick={() => act('open_gossip')}
+            >
+              Noble Gossip ({gossip_count})
+            </Button>
           </Section>
         )}
       </Window.Content>
