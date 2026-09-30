@@ -42,7 +42,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
-	bypass_lastclass = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
 	jobs_i_always_know = KNOW_COURT_LIST
@@ -74,6 +73,7 @@
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/reading = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/athletics = 30,
@@ -169,6 +169,7 @@
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sneaking = 25,
 		/datum/attribute/skill/misc/athletics = 25,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/labor/mathematics = 30,
@@ -233,6 +234,7 @@
 		/datum/attribute/skill/misc/reading = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/labor/mathematics = 30,
@@ -272,6 +274,7 @@
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/labor/mathematics = 30,

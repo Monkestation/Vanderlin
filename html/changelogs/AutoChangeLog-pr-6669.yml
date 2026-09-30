@@ -1,0 +1,8 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - balance: "Towner roles now have statlines on par with the average Adventurer (+3 or +4 instead of +2)."
+  - balance: "Business owners have higher Wrestling skill to deal with unruly customers, and may have 30 skill in their primary weapon."
+  - balance: "The Preacher rare Pilgrim role has better stats and skills, and has Psydonian Grit."
+  - balance: "Squires no longer have negative statlines."
+  - qol: "Almost every role has a minimum of 10 Wrestling, Unarmed, Swimming, Climbing, and Athletics skill. Most had this already but a few were previously overlooked."

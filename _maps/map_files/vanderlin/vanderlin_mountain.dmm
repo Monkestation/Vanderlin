@@ -888,6 +888,7 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/item/broom,
+/obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
 "adZ" = (
@@ -1240,6 +1241,8 @@
 /obj/item/statue/silver/finger{
 	name = "inquisitorial rebuttal"
 	},
+/obj/item/weapon/shield/wood,
+/obj/item/weapon/shield/wood,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
 "afP" = (
@@ -1760,7 +1763,11 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
 "aiw" = (
-/obj/machinery/light/fueled/firebowl/standing/blue,
+/obj/machinery/light/fueled/firebowl/standing/blue{
+	pixel_y = 0;
+	pixel_x = -9;
+	density = 0
+	},
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
 	},
@@ -1946,21 +1953,42 @@
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "ajx" = (
-/obj/structure/rack/shelf/notdense,
 /obj/item/paper/inqslip/confession{
-	pixel_y = 34;
+	pixel_y = 14;
 	pixel_x = -9
 	},
 /obj/item/paper/inqslip/confession{
-	pixel_y = 34
+	pixel_y = 14
 	},
 /obj/item/paper/inqslip/confession{
-	pixel_y = 34;
-	pixel_x = 8
+	pixel_y = 14;
+	pixel_x = 9
 	},
-/obj/item/weapon/shield/wood,
-/obj/item/weapon/shield/wood,
 /obj/structure/rack/shelf/biggest,
+/obj/item/paper/inqslip/confession{
+	pixel_x = 9
+	},
+/obj/item/paper/inqslip/confession{
+	pixel_y = 0
+	},
+/obj/item/paper/inqslip/confession{
+	pixel_x = -9
+	},
+/obj/item/paper/inqslip/confession{
+	pixel_x = -9
+	},
+/obj/item/paper/inqslip/confession,
+/obj/item/paper/inqslip/confession{
+	pixel_y = -9
+	},
+/obj/item/paper/inqslip/confession{
+	pixel_y = -9;
+	pixel_x = 9
+	},
+/obj/item/paper/inqslip/confession{
+	pixel_y = -9;
+	pixel_x = -9
+	},
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "ajy" = (
@@ -3153,7 +3181,6 @@
 	icon_state = "longtable_mid"
 	},
 /obj/item/reagent_containers/glass/cup/steel,
-/obj/item/book/bibble/psy,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
 "aps" = (
@@ -3209,6 +3236,7 @@
 	pixel_x = -4;
 	pixel_y = -4
 	},
+/obj/item/clothing/neck/psycross/silver,
 /obj/item/clothing/neck/psycross/silver,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
@@ -4466,6 +4494,11 @@
 /obj/item/kitchen/fork/pewter,
 /obj/item/kitchen/fork/pewter,
 /obj/item/kitchen/fork/pewter,
+/obj/item/plate{
+	pixel_x = 9;
+	pixel_y = 6
+	},
+/obj/item/kitchen/fork/pewter,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
 "avG" = (
@@ -5030,29 +5063,6 @@
 "aym" = (
 /obj/structure/table/wood{
 	icon_state = "longtable"
-	},
-/obj/item/paper/inqslip/confession{
-	pixel_x = -2;
-	pixel_y = 6
-	},
-/obj/item/paper/inqslip/confession{
-	pixel_y = -2;
-	pixel_x = -6
-	},
-/obj/item/paper/inqslip/confession{
-	pixel_y = 8;
-	pixel_x = -9
-	},
-/obj/item/paper/inqslip/confession{
-	pixel_y = -2;
-	pixel_x = -3
-	},
-/obj/item/inqarticles/tallowpot{
-	pixel_y = 15;
-	pixel_x = 13
-	},
-/obj/item/reagent_containers/food/snacks/tallow/red{
-	pixel_x = 6
 	},
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
@@ -7873,8 +7883,8 @@
 /obj/structure/table/wood/crafted,
 /obj/item/reagent_containers/glass/bowl,
 /obj/item/reagent_containers/glass/bowl{
-	pixel_y = -3;
-	pixel_x = 6
+	pixel_y = 5;
+	pixel_x = 9
 	},
 /obj/item/reagent_containers/glass/bowl{
 	pixel_x = -5;
@@ -7882,6 +7892,11 @@
 	},
 /obj/item/kitchen/spoon/pewter,
 /obj/item/kitchen/spoon/pewter,
+/obj/item/kitchen/spoon/pewter,
+/obj/item/reagent_containers/glass/bowl{
+	pixel_x = -5;
+	pixel_y = -5
+	},
 /obj/item/kitchen/spoon/pewter,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
@@ -8134,18 +8149,6 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aNl" = (
-/obj/structure/rack/shelf/notdense,
-/obj/item/paper/inqslip/confession{
-	pixel_y = 34;
-	pixel_x = -9
-	},
-/obj/item/paper/inqslip/confession{
-	pixel_y = 34
-	},
-/obj/item/paper/inqslip/confession{
-	pixel_y = 34;
-	pixel_x = 8
-	},
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
@@ -8297,7 +8300,10 @@
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
 "aOa" = (
-/obj/machinery/light/fueled/firebowl/standing/blue,
+/obj/machinery/light/fueled/firebowl/standing/blue{
+	pixel_x = 9;
+	density = 0
+	},
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
@@ -8899,7 +8905,6 @@
 /area/indoors/mountains/anvil/upperkeep)
 "aQU" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
-/obj/item/bin/water,
 /turf/open/floor/twig,
 /area/indoors/town/church/inquisition)
 "aQW" = (
@@ -9191,7 +9196,14 @@
 /turf/open/openspace,
 /area/indoors/mountains/anvil/upperkeep)
 "aSf" = (
-/obj/structure/chair/stool/bar,
+/obj/structure/dye_bin{
+	pixel_y = 0;
+	pixel_x = 10
+	},
+/obj/structure/dye_bin/luxury{
+	pixel_x = -7;
+	pixel_y = -2
+	},
 /turf/open/floor/twig,
 /area/indoors/town/church/inquisition)
 "aSh" = (
@@ -9274,6 +9286,13 @@
 /area/indoors/mountains/anvil/keep)
 "aSA" = (
 /obj/structure/table/church/m,
+/obj/item/reagent_containers/food/snacks/tallow/red{
+	pixel_x = 6
+	},
+/obj/item/inqarticles/tallowpot{
+	pixel_y = 15;
+	pixel_x = -5
+	},
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "aSB" = (
@@ -9341,8 +9360,14 @@
 /area/indoors/mountains/anvil/keep)
 "aSV" = (
 /obj/structure/table/wood/crafted,
-/obj/item/reagent_containers/glass/bucket/pot/stone,
-/obj/item/cooking/pan,
+/obj/item/reagent_containers/glass/bucket/pot/stone{
+	pixel_y = 9;
+	pixel_x = -6
+	},
+/obj/item/cooking/pan{
+	pixel_y = -1;
+	pixel_x = 11
+	},
 /turf/open/floor/tile,
 /area/indoors/town/church/inquisition)
 "aSW" = (
@@ -9847,18 +9872,6 @@
 /turf/closed/mineral/bedrock/cold,
 /area/indoors/mountains/anvil/keep)
 "aVy" = (
-/obj/structure/rack/shelf/notdense,
-/obj/item/paper/inqslip/confession{
-	pixel_y = 34;
-	pixel_x = -9
-	},
-/obj/item/paper/inqslip/confession{
-	pixel_y = 34
-	},
-/obj/item/paper/inqslip/confession{
-	pixel_y = 34;
-	pixel_x = 8
-	},
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
 	},
@@ -10379,6 +10392,7 @@
 /obj/item/natural/feather,
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/broom,
+/obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
 "aXU" = (
@@ -11857,6 +11871,8 @@
 /obj/item/storage/backpack/satchel/grenzel,
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/flashlight/flare/torch/lantern,
+/obj/item/flashlight/flare/torch/lantern,
+/obj/item/storage/backpack/satchel/grenzel,
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "gBK" = (
@@ -12683,6 +12699,32 @@
 /obj/effect/decal/cleanable/debris/glass,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"kNZ" = (
+/obj/structure/fluff/walldeco/church/line{
+	dir = 8
+	},
+/obj/structure/fluff/walldeco/church/line{
+	dir = 4
+	},
+/obj/structure/table/stone_small,
+/obj/item/paper/inqslip/confession{
+	pixel_y = -2;
+	pixel_x = -3
+	},
+/obj/item/paper/inqslip/confession{
+	pixel_y = 8;
+	pixel_x = -9
+	},
+/obj/item/paper/inqslip/confession{
+	pixel_x = -2;
+	pixel_y = 6
+	},
+/obj/item/paper/inqslip/confession{
+	pixel_y = -2;
+	pixel_x = -6
+	},
+/turf/open/floor/churchbrick,
+/area/indoors/town/church/inquisition)
 "kRd" = (
 /obj/structure/fluff/walldeco/bath/wallpipes/innie{
 	pixel_x = 1;
@@ -87114,7 +87156,7 @@ aCZ
 aCZ
 aCZ
 aRW
-add
+kNZ
 aIS
 awI
 awI

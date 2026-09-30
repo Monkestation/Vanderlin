@@ -750,7 +750,7 @@
 	qdel_timer = QDEL_IN_STOPPABLE(src, 10 MINUTES)
 
 /obj/structure/soul/proc/drain_mana(mob/living/user)
-	var/datum/beam/transfer_beam = user.Beam(src, icon_state = "drain_life", time = INFINITY)
+	var/datum/beam/transfer_beam = user.Beam(src, icon_state = "drain_mana", time = INFINITY)
 
 	var/failed = FALSE
 	while(!failed)

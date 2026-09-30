@@ -3,8 +3,9 @@
 		STAT_PERCEPTION = 1,
 		STAT_SPEED = 2,
 		STAT_STRENGTH = -1,
-		/datum/attribute/skill/combat/knives = 10,
-		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
@@ -32,7 +33,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
 

@@ -87,7 +87,7 @@ SUBSYSTEM_DEF(job)
 
 	if(!latejoin)
 		if(player.client)
-			if(job.bypass_lastclass)
+			if(!job.block_sequential_rounds)
 				player.client.prefs.lastclass = null
 			else
 				player.client.prefs.lastclass = job.title
@@ -157,8 +157,8 @@ SUBSYSTEM_DEF(job)
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
 		return FALSE
 
-	if((player_prefs.lastclass == job.title) && (!job.bypass_lastclass))
-		JobDebug("Eligibility failed: lastclass, Player: [player], Job: [job.title]")
+	if((player_prefs.lastclass == job.title) && (job.block_sequential_rounds))
+		JobDebug("Eligibility failed: sequential round, Player: [player], Job: [job.title]")
 		return FALSE
 
 	if(job.banned_leprosy && is_misc_banned(player.client.ckey, BAN_MISC_LEPROSY))
@@ -695,8 +695,8 @@ SUBSYSTEM_DEF(job)
 	// Ready up bonus
 	if(!equipping.islatejoin && player_client)
 		equipping.apply_status_effect(/datum/status_effect/buff/foodbuff)
-		equipping.hydration = NUTRITION_LEVEL_WELL_FED // Set higher hydration
-		equipping.nutrition = HYDRATION_LEVEL_HYDRATED
+		equipping.set_hydration(HYDRATION_LEVEL_WELL_HYDRATED)
+		equipping.set_nutrition(NUTRITION_LEVEL_WELL_FED)
 		var/triumphs = 1
 		if(is_lord_job(job)) //monarch bonus
 			to_chat(player_client, span_notice("Heavy is the weight of the crown. But you have the resolve to wear it high. In this, you TRIUMPH."))
@@ -877,7 +877,7 @@ SUBSYSTEM_DEF(job)
 	if(!job.prefs_species_check(player_prefs))
 		return
 
-	if((player_prefs.lastclass == job.title) && (!job.bypass_lastclass))
+	if((player_prefs.lastclass == job.title) && (job.block_sequential_rounds))
 		return
 
 	if(job.banned_leprosy && is_misc_banned(player.client.ckey, BAN_MISC_LEPROSY))

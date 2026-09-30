@@ -1,6 +1,6 @@
 /datum/attribute_holder/sheet/job/servant
 	raw_attribute_list = list(
-		STAT_SPEED = 1,
+		STAT_SPEED = 2,
 		STAT_ENDURANCE = 1,
 
 		/datum/attribute/skill/combat/knives = 20,
@@ -9,6 +9,10 @@
 		/datum/attribute/skill/labor/butchering = 10,
 		/datum/attribute/skill/labor/farming = 10,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/misc/sewing = 30,
@@ -23,16 +27,20 @@
 
 /datum/attribute_holder/sheet/job/servant/old
 	raw_attribute_list = list(
-		STAT_SPEED = 1,
+		STAT_SPEED = 2,
 		STAT_ENDURANCE = 1,
 
-		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/labor/butchering = 10,
 		/datum/attribute/skill/labor/farming = 10,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/misc/sewing = 30,
@@ -55,7 +63,6 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 5
 	spawn_positions = 5
-	bypass_lastclass = TRUE
 	give_bank_account = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
@@ -109,13 +116,18 @@
 
 /datum/attribute_holder/sheet/job/tapster
 	raw_attribute_list = list(
-		STAT_SPEED = 1,
+		STAT_SPEED = 2,
 		STAT_ENDURANCE = 1,
 
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/cooking = 30,
 		/datum/attribute/skill/labor/butchering = 10,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/labor/farming = 10,
 		/datum/attribute/skill/misc/sewing = 20,
@@ -139,7 +151,6 @@
 	total_positions = 2
 	spawn_positions = 2
 
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
@@ -210,7 +221,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
-	bypass_lastclass = TRUE
 	give_bank_account = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE

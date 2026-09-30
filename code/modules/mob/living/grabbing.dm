@@ -743,6 +743,7 @@
 		else
 			drinklimb(C)
 	return 1
+
 /obj/item/grabbing/bite/proc/bitelimb(mob/living/user) //implies limb_grabbed and sublimb are things
 	if(!user.Adjacent(grabbed))
 		qdel(src)

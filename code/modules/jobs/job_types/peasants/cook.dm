@@ -2,12 +2,17 @@
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 1,
 		STAT_INTELLIGENCE = 1,
-		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/combat/knives = 20,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/labor/butchering = 30,
 		/datum/attribute/skill/labor/taming = 10,
 		/datum/attribute/skill/labor/farming = 10
@@ -17,8 +22,8 @@
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 1,
 		STAT_INTELLIGENCE = 1,
-		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/combat/knives = 20,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/misc/reading = 10,
 		/datum/attribute/skill/craft/cooking = 50,
 		/datum/attribute/skill/craft/crafting = 10,
@@ -39,7 +44,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
