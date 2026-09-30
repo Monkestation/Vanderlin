@@ -1,7 +1,84 @@
+/datum/job/advclass/hunter/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+/datum/attribute_holder/sheet/job/hunter/crossbowandhatch
+	raw_attribute_list = list(
+		STAT_ENDURANCE = 1,
+		STAT_STRENGTH = 1,
+		/datum/attribute/skill/combat/axesmaces = 25,
+		/datum/attribute/skill/combat/unarmed = 15,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/crossbows = list(10, 30)
+	)
+
+/datum/attribute_holder/sheet/job/hunter/crossbowandknife
+	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/combat/unarmed = 10,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/crossbows = list(10, 30)
+	)
+
+/datum/attribute_holder/sheet/job/hunter/bowandknife
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_INTELLIGENCE = 1,
+		/datum/attribute/skill/combat/unarmed = 10,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/swords = list(10, 30)
+	)
+
+/datum/attribute_holder/sheet/job/hunter/bowandhatch
+	raw_attribute_list = list(
+		STAT_PERCEPTION = 1,
+		STAT_ENDURANCE = 1,
+		/datum/attribute/skill/combat/axesmaces = 25,
+		/datum/attribute/skill/combat/unarmed = 15,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/axesmaces = list(10, 30)
+	)
+
+/datum/job/advclass/hunter
+	inherit_parent_title = TRUE
+	should_reset_stats = FALSE
+	factions = list(FACTION_TOWN)
+
+/datum/job/advclass/hunter/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+	. = ..()
+
+
+	var/weapons = list("Crossbow and Hatchet", "Crossbow and Knife", "Bow and Hatchet", "Bow and Knife")
+	var/weapon_choice = browser_input_list(spawned, "Choose Your Specialisations.", weapons)
+	if(!weapon_choice)
+		return
+
+
+	switch(weapon_choice)
+		if("Crossbow and Hatchet")
+			spawned.put_in_hands(new /obj/item/weapon/axe/hatchet(get_turf(spawned)), TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross/hunt, ITEM_SLOT_BACK_L, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hunter/crossbowandhatch)
+		if("Crossbow and Knife")
+			spawned.put_in_hands(new /obj/item/weapon/knife/hunting(get_turf(spawned)), TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross/hunt, ITEM_SLOT_BACK_L, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hunter/crossbowandknife)
+		if("Bow and Hatchet")
+			spawned.put_in_hands(new /obj/item/weapon/axe/hatchet(get_turf(spawned)), TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow, ITEM_SLOT_BACK_L, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hunter/bowandhatch)
+		if("Bow and Knife")
+			spawned.put_in_hands(new /obj/item/weapon/knife/hunting(get_turf(spawned)), TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow, ITEM_SLOT_BACK_L, TRUE)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hunter/bowandknife)
+
 /datum/attribute_holder/sheet/job/hunter
 	raw_attribute_list = list(
-		STAT_INTELLIGENCE = 1,
-		STAT_PERCEPTION = 3,
+		STAT_PERCEPTION = 2,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/tanning = 30,
 		/datum/attribute/skill/combat/bows = 30,
@@ -89,7 +166,6 @@
 	head = /obj/item/clothing/head/brimmed
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
 	backr = /obj/item/storage/backpack/satchel
-	backl = /obj/item/gun/ballistic/bow
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/storage/meatbag
@@ -98,7 +174,6 @@
 		/obj/item/reagent_containers/powder/salt = 1,
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,
-		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/flashlight/flare/torch/lantern = 1,
 		/obj/item/key/hunter = 1
 	)

@@ -381,8 +381,8 @@
 //................ Hatchets ............... //
 
 /obj/item/weapon/axe/hatchet
-	name = "huntsman hatchet"
-	desc = "A simple iron wilderness handaxe with a hammer bit, a tool often used by those who trek for long into the wild."
+	name = "wilderness hatchet"
+	desc = "A simple iron handaxe with a hammer bit, a tool often used by those who trek for long into the wild."
 	icon_state = "hatchet"
 	force = DAMAGE_AXE
 	force_wielded = 0
@@ -402,7 +402,7 @@
 	item_weight = 1000 GRAMS
 
 	throw_speed = 3
-	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 60, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
+	embedding = list("embedded_pain_multiplier" = 5, "embed_chance" = 40, "embedded_fall_chance" = 0, "embedded_ignore_throwspeed_threshold" = 1)
 
 /obj/item/weapon/axe/hatchet/getonmobprop(tag)
 	. = ..()
