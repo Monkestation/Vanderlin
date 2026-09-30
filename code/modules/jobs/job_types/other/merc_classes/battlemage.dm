@@ -74,16 +74,16 @@
 	spawned.merctype = 9
 	spawned.adjust_technique_mastery_points(2, FALSE, TECHNIQUE_IMBUE)
 
-	var/obj/item/clothing/armor/brigandine/color_armor = new(get_turf(equipped_human))
+	var/obj/item/clothing/armor/brigandine/color_armor = new(get_turf(spawned))
 	var/static/list/specials = list("Swords", "Polearms", "Maces", "Freeform")
 
 	browser_input_list(spawned, "CHOOSE YOUR SPECIALIZATION.", "BATTLEMAGE TRAINING.", specials)
 	switch(specials)
 		if("Swords")
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/caedo)
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/air_strike)
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/leyline_anchor)
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/blade_storm)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/caedo)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/air_strike)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/leyline_anchor)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/projectile/blade_storm)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/battlemage/swords)
 			var/static/list/weapons = list(
 				"Arming Sword" = /obj/item/weapon/sword/arming,
@@ -97,10 +97,10 @@
 					spawned.put_in_hands(new /obj/item/weapon/shield/heater(get_turf(spawned)), TRUE)
 			color_armor.color = "#50090f"
 		if("Polearms")
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/arcane_phalanx)
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/projectile/pilum)
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/advance)
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/gate_of_reckoning)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/arcane_phalanx)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/projectile/pilum)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/advance)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/gate_of_reckoning)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/battlemage/polearms)
 			var/static/list/weapons = list(
 				"Spear" = /obj/item/weapon/polearm/spear/steel,
@@ -109,10 +109,9 @@
 			var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "MAGIC ARMS.")
 			color_armor.color = "#2a2459"
 		if("Maces")
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/telegraphed_strike/spellblade/shatter)
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/telegraphed_strike/spellblade/tremor)
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/charge)
-			spawned.mind.AddSpell(new /datum/action/cooldown/spell/cataclysm)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/telegraphed_strike/spellblade/shatter)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/telegraphed_strike/spellblade/tremor)
+			spawned.mind.add_spell(/datum/action/cooldown/spell/cataclysm)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/battlemage/axesmaces)
 			var/static/list/weapons = list(
 				"Mace" = /obj/item/weapon/mace/steel,

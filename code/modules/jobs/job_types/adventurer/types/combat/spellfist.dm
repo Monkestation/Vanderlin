@@ -62,7 +62,7 @@
 	gloves = /obj/item/clothing/gloves/bandages
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots/leather
-	belt = /obj/item/storage/belt/rope
+	belt = /obj/item/storage/belt/leather/rope
 	beltr = /obj/item/weapon/knuckles/bronze
 	beltl = /obj/item/storage/magebag/poor
 	backl = /obj/item/storage/backpack/satchel
