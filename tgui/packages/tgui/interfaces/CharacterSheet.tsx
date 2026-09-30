@@ -13,6 +13,7 @@ type Data = {
   dominant_hand: string;
   nickname_color: string;
   permadeath: string;
+  examine_music: string;
   pq: number;
   faith: string;
   patron: string;
@@ -47,6 +48,7 @@ export const CharacterSheet = () => {
     dominant_hand = '',
     nickname_color = '#ffffff',
     permadeath = 'disabled',
+    examine_music = 'None',
     pq = 0,
     faith = '',
     patron = '',
@@ -66,7 +68,7 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={540} title="Who Are You?">
+    <Window width={480} height={560} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -130,6 +132,9 @@ export const CharacterSheet = () => {
               </LabeledList.Item>
               <LabeledList.Item label="Permadeath">
                 <span style={editStyle} onClick={() => edit('permadeath')}>{permadeath}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Examine Music">
+                <span style={editStyle} onClick={() => edit('examine_music')}>{examine_music}</span>
               </LabeledList.Item>
             </LabeledList>
           </Section>
