@@ -70,7 +70,7 @@
 				if(istype(tongs_used, /obj/item/weapon/tongs/stone))
 					tongs_used.take_damage(1, BRUTE, BLUNT)
 		else
-			if(on)
+			if(on && !(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABADDON)))
 				to_chat(user, span_warning("It's too hot to retrieve items with your hands."))
 				return
 			user.put_in_hands(retrieved_item)

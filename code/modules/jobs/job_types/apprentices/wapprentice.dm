@@ -44,7 +44,6 @@
 	give_bank_account = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 	can_have_apprentices = FALSE
 	magic_user = TRUE

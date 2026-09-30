@@ -27,7 +27,6 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 	is_quest_giver = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)

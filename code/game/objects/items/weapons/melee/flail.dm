@@ -168,7 +168,8 @@
 	force = DAMAGE_GOOD_FLAIL + 3
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLOODSTEEL
 	minstr = 5
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
 	sellprice = 0
 	item_weight = 1.2 KILOGRAMS
 

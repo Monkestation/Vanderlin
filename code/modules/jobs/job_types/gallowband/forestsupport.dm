@@ -4,8 +4,8 @@
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = 1,
-		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/craft/carpentry = 30,
@@ -30,7 +30,6 @@
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_FORSUPP
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = ALL_AGES_LIST_CHILD
