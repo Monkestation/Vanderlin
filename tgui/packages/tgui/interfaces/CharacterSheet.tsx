@@ -11,6 +11,7 @@ type Data = {
   accent: string;
   voice_color: string;
   dominant_hand: string;
+  nickname_color: string;
   pq: number;
   faith: string;
   patron: string;
@@ -36,6 +37,7 @@ export const CharacterSheet = () => {
     accent = '',
     voice_color = '#ffffff',
     dominant_hand = '',
+    nickname_color = '#ffffff',
     pq = 0,
     faith = '',
     patron = '',
@@ -96,6 +98,9 @@ export const CharacterSheet = () => {
               <LabeledList.Item label="Accent">{accent}</LabeledList.Item>
               <LabeledList.Item label="Voice Color">
                 <span style={{ color: voice_color }}>{voice_color}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Nickname Color">
+                <span style={{ color: nickname_color }}>{nickname_color}</span>
               </LabeledList.Item>
               <LabeledList.Item label="Dominant Hand">{dominant_hand}</LabeledList.Item>
             </LabeledList>
