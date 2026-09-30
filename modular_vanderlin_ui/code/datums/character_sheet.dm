@@ -91,3 +91,8 @@
 				return
 			pref.handle_link(prefs, owner)
 			return TRUE
+		if("open_role_prefs")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			owner.client.prefs.show_choices(owner, 4)
+			return TRUE

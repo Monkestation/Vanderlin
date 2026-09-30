@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useBackend } from '../backend';
-import { LabeledList, Section, Tabs } from 'tgui-core/components';
+import { Button, LabeledList, Section, Tabs } from 'tgui-core/components';
 import { Window } from '../layouts';
 
 type Data = {
@@ -80,7 +80,7 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={600} title="Who Are You?">
+    <Window width={480} height={620} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -167,6 +167,22 @@ export const CharacterSheet = () => {
               <LabeledList.Item label="Loadout Item 2">{loadout2}</LabeledList.Item>
               <LabeledList.Item label="Loadout Item 3">{loadout3}</LabeledList.Item>
             </LabeledList>
+            <Button
+              mt={1}
+              fluid
+              icon="user-tag"
+              onClick={() => act('open_role_prefs')}
+            >
+              Change Role
+            </Button>
+            <Button
+              mt={1}
+              fluid
+              icon="user-secret"
+              onClick={() => act('open_role_prefs')}
+            >
+              Antagonist Preferences
+            </Button>
           </Section>
         )}
 
