@@ -36,8 +36,10 @@
 	data["pq"] = get_playerquality(owner.ckey)
 	data["faith"] = prefs.read_preference(/datum/preference/choiced/faith)
 	data["patron"] = prefs.read_preference(/datum/preference/choiced/patron)
-	data["species"] = prefs.read_preference(/datum/preference/choiced/species)
-	data["culture"] = prefs.read_preference(/datum/preference/choiced/culture)
+	var/datum/species/species_path = prefs.read_preference(/datum/preference/choiced/species)
+	data["species"] = species_path ? species_path::name : "Unknown"
+	var/datum/culture/culture_path = prefs.read_preference(/datum/preference/choiced/culture)
+	data["culture"] = culture_path ? culture_path::name : "Unknown"
 	return data
 
 /datum/character_sheet/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)
