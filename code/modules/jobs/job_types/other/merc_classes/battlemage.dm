@@ -129,9 +129,9 @@
 			var/static/list/weapons = list(
 				"Arming Sword" = /obj/item/weapon/sword/arming,
 				"Longsword" = /obj/item/weapon/sword/long,
-				"Shortsword + Shield" = /obj/item/weapon/sword/short
+				"Shortsword + Shield" = /obj/item/weapon/sword/short,
 				"Spear" = /obj/item/weapon/polearm/spear/steel,
-				"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
+				"Quarterstaff" = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel,
 				"Mace" = /obj/item/weapon/mace/steel,
 				"Warclub" = /obj/item/weapon/mace/goden/steel,
 				"Warhammer + Shield" = /obj/item/weapon/mace/warhammer/steel
