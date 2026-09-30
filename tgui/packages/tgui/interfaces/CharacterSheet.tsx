@@ -15,8 +15,12 @@ type Data = {
   permadeath: string;
   examine_music: string;
   pq: number;
+  triumphs: number;
   faith: string;
   patron: string;
+  loadout1: string;
+  loadout2: string;
+  loadout3: string;
   species: string;
   culture: string;
   family_mode: string;
@@ -52,8 +56,12 @@ export const CharacterSheet = () => {
     permadeath = 'disabled',
     examine_music = 'None',
     pq = 0,
+    triumphs = 0,
     faith = '',
     patron = '',
+    loadout1 = 'None',
+    loadout2 = 'None',
+    loadout3 = 'None',
     species = '',
     culture = '',
     family_mode = '',
@@ -72,7 +80,7 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={580} title="Who Are You?">
+    <Window width={480} height={600} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -148,12 +156,16 @@ export const CharacterSheet = () => {
           <Section title="Class">
             <LabeledList>
               <LabeledList.Item label="Player Quality">{pq}</LabeledList.Item>
+              <LabeledList.Item label="Triumphs">{triumphs}</LabeledList.Item>
               <LabeledList.Item label="Faith">
                 <span style={editStyle} onClick={() => edit('faith')}>{faith}</span>
               </LabeledList.Item>
               <LabeledList.Item label="Patron">
                 <span style={editStyle} onClick={() => edit('selected_patron')}>{patron}</span>
               </LabeledList.Item>
+              <LabeledList.Item label="Loadout Item 1">{loadout1}</LabeledList.Item>
+              <LabeledList.Item label="Loadout Item 2">{loadout2}</LabeledList.Item>
+              <LabeledList.Item label="Loadout Item 3">{loadout3}</LabeledList.Item>
             </LabeledList>
           </Section>
         )}
