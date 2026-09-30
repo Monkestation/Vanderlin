@@ -26,8 +26,13 @@ type Data = {
   food_prefs: string;
 };
 
+const editStyle = {
+  cursor: 'pointer',
+  textDecoration: 'underline dotted',
+};
+
 export const CharacterSheet = () => {
-  const { data } = useBackend<Data>();
+  const { data, act } = useBackend<Data>();
   const [currentTab, setCurrentTab] = useState('identity');
   const {
     character_name = 'Unnamed',
@@ -51,6 +56,8 @@ export const CharacterSheet = () => {
     noble_gossip = '',
     food_prefs = '',
   } = data;
+
+  const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
     <Window width={480} height={480} title="Who Are You?">
@@ -91,18 +98,30 @@ export const CharacterSheet = () => {
         {currentTab === 'identity' && (
           <Section title="Identity">
             <LabeledList>
-              <LabeledList.Item label="Character Name">{character_name}</LabeledList.Item>
-              <LabeledList.Item label="Pronouns">{pronouns}</LabeledList.Item>
-              <LabeledList.Item label="Age">{age}</LabeledList.Item>
-              <LabeledList.Item label="Voice Type">{voice_type}</LabeledList.Item>
-              <LabeledList.Item label="Accent">{accent}</LabeledList.Item>
+              <LabeledList.Item label="Character Name">
+                <span style={editStyle} onClick={() => edit('real_name')}>{character_name}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Pronouns">
+                <span style={editStyle} onClick={() => edit('pronouns')}>{pronouns}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Age">
+                <span style={editStyle} onClick={() => edit('age')}>{age}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Voice Type">
+                <span style={editStyle} onClick={() => edit('voice_type')}>{voice_type}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Accent">
+                <span style={editStyle} onClick={() => edit('selected_accent')}>{accent}</span>
+              </LabeledList.Item>
               <LabeledList.Item label="Voice Color">
-                <span style={{ color: voice_color }}>{voice_color}</span>
+                <span style={{ ...editStyle, color: voice_color }} onClick={() => edit('voice_color')}>{voice_color}</span>
               </LabeledList.Item>
               <LabeledList.Item label="Nickname Color">
-                <span style={{ color: nickname_color }}>{nickname_color}</span>
+                <span style={{ ...editStyle, color: nickname_color }} onClick={() => edit('nickname_color')}>{nickname_color}</span>
               </LabeledList.Item>
-              <LabeledList.Item label="Dominant Hand">{dominant_hand}</LabeledList.Item>
+              <LabeledList.Item label="Dominant Hand">
+                <span style={editStyle} onClick={() => edit('domhand')}>{dominant_hand}</span>
+              </LabeledList.Item>
             </LabeledList>
           </Section>
         )}
@@ -111,8 +130,12 @@ export const CharacterSheet = () => {
           <Section title="Class">
             <LabeledList>
               <LabeledList.Item label="Player Quality">{pq}</LabeledList.Item>
-              <LabeledList.Item label="Faith">{faith}</LabeledList.Item>
-              <LabeledList.Item label="Patron">{patron}</LabeledList.Item>
+              <LabeledList.Item label="Faith">
+                <span style={editStyle} onClick={() => edit('faith')}>{faith}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Patron">
+                <span style={editStyle} onClick={() => edit('selected_patron')}>{patron}</span>
+              </LabeledList.Item>
             </LabeledList>
           </Section>
         )}
@@ -120,8 +143,12 @@ export const CharacterSheet = () => {
         {currentTab === 'appearance' && (
           <Section title="Appearance">
             <LabeledList>
-              <LabeledList.Item label="Species">{species}</LabeledList.Item>
-              <LabeledList.Item label="Culture">{culture}</LabeledList.Item>
+              <LabeledList.Item label="Species">
+                <span style={editStyle} onClick={() => edit('species')}>{species}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Culture">
+                <span style={editStyle} onClick={() => edit('culture')}>{culture}</span>
+              </LabeledList.Item>
             </LabeledList>
           </Section>
         )}
@@ -129,9 +156,15 @@ export const CharacterSheet = () => {
         {currentTab === 'family' && (
           <Section title="Family">
             <LabeledList>
-              <LabeledList.Item label="Family Type">{family_mode}</LabeledList.Item>
-              <LabeledList.Item label="Gender Preference">{gender_pref}</LabeledList.Item>
-              <LabeledList.Item label="Spouse Preference">{spouse_pref}</LabeledList.Item>
+              <LabeledList.Item label="Family Type">
+                <span style={editStyle} onClick={() => edit('family_mode')}>{family_mode}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Gender Preference">
+                <span style={editStyle} onClick={() => edit('gender_choice')}>{gender_pref}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Spouse Preference">
+                <span style={editStyle} onClick={() => edit('setspouse')}>{spouse_pref}</span>
+              </LabeledList.Item>
             </LabeledList>
           </Section>
         )}
@@ -139,9 +172,11 @@ export const CharacterSheet = () => {
         {currentTab === 'descriptors' && (
           <Section title="Descriptors">
             <LabeledList>
-              <LabeledList.Item label="OOC Notes">{ooc_notes || 
+              <LabeledList.Item label="OOC Notes">
+                <span style={editStyle} onClick={() => edit('ooc_notes')}>{ooc_notes || 
 'None'
-}</LabeledList.Item>
+}</span>
+              </LabeledList.Item>
               <LabeledList.Item label="Food Preferences">{food_prefs || 
 'None'
 }</LabeledList.Item>

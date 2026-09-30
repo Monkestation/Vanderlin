@@ -61,3 +61,16 @@
 		if("close")
 			ui.close()
 			return TRUE
+		if("edit_field")
+			if(!owner)
+				return
+			var/client/owner_client = owner.client
+			if(!owner_client || !owner_client.prefs)
+				return
+			var/datum/preferences/prefs = owner_client.prefs
+			var/pref_key = params["pref_key"]
+			var/datum/preference/pref = GLOB.preference_entries_by_key[pref_key]
+			if(!pref)
+				return
+			pref.handle_link(prefs, owner)
+			return TRUE
