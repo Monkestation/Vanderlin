@@ -27,3 +27,14 @@
 	exp_flash = 1
 	exp_fire = 0
 	speed = 2.5
+
+/datum/action/cooldown/spell/projectile/fire_flare/crimson_blade
+	name = "Fire Burst"
+	desc = "Shoot out a low-powered ball of fire that shines brightly on impact, potentially blinding a target."
+
+	cooldown_time = 45 SECONDS
+	spell_cost = 40
+	spell_type = SPELL_STAMINA
+	spell_flags = SPELL_UNETCHABLE
+	required_form = null
+	associated_skill = /datum/attribute/skill/misc/athletics

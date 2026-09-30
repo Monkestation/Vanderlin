@@ -325,7 +325,7 @@
 	if(!check_rights())
 		return FALSE
 
-	var/category = input("Category") as null|anything in list("Ten", "Inhuman", "Special")
+	var/category = input("Category") as null|anything in list("Ten", "Inhuman", "Archdevil", "Special")
 	if(!category)
 		return FALSE
 
@@ -335,6 +335,8 @@
 			curse = input("Curse") as null|anything in TEN_CURSES
 		if("Inhuman")
 			curse = input("Curse") as null|anything in INHUMEN_CURSES
+		if("Archdevil")
+			curse = input("Curse") as null|anything in ARCHDEVIL_CURSES
 		if("Special")
 			curse = input("Curse") as null|anything in SPECIAL_CURSES
 

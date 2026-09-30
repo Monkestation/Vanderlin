@@ -3,15 +3,18 @@
 		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
 		STAT_PERCEPTION = -1,
 		STAT_FORTUNE = -1,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 20, //Wrestling the deadites
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/magic/holy = 30,
 		/datum/attribute/skill/craft/masonry = 20, //Crafting grave decorations
@@ -31,7 +34,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONHERETICAL
 	allowed_patrons = list(/datum/patron/divine/necra)

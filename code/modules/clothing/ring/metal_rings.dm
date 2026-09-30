@@ -45,6 +45,7 @@
 /obj/item/clothing/ring/emeraldbs/loadout
 	misc_flags = CRAFTING_TEST_EXCLUDE
 	sellprice = 0
+	desc = "A mythical blacksteel ring with a polished Gemerald set into it. It feels a little lighter than it should..."
 
 /obj/item/clothing/ring/rubybs
 	name = "rontz ring of blacksteel"
@@ -55,6 +56,7 @@
 /obj/item/clothing/ring/rubybs/loadout
 	misc_flags = CRAFTING_TEST_EXCLUDE
 	sellprice = 0
+	desc = "A mythical blacksteel ring with a polished Rontz set into it. It feels a little lighter than it should..."
 
 /obj/item/clothing/ring/topazbs
 	name = "toper ring of blacksteel"
@@ -65,6 +67,7 @@
 /obj/item/clothing/ring/topazbs/loadout
 	misc_flags = CRAFTING_TEST_EXCLUDE
 	sellprice = 0
+	desc = "A mythical blacksteel ring with a polished Toper set into it. It feels a little lighter than it should..."
 
 /obj/item/clothing/ring/quartzbs
 	name = "blortz ring of blacksteel"
@@ -75,6 +78,7 @@
 /obj/item/clothing/ring/quartzbs/loadout
 	misc_flags = CRAFTING_TEST_EXCLUDE
 	sellprice = 0
+	desc = "A mythical blacksteel ring with a polished Blortz set into it. It feels a little lighter than it should..."
 
 /obj/item/clothing/ring/sapphirebs
 	name = "saffira ring of blacksteel"
@@ -85,6 +89,7 @@
 /obj/item/clothing/ring/sapphirebs/loadout
 	misc_flags = CRAFTING_TEST_EXCLUDE
 	sellprice = 0
+	desc = "A mythical blacksteel ring with a polished Saffira set into it. It feels a little lighter than it should..."
 
 /obj/item/clothing/ring/diamondbs
 	name = "dorpel ring of blacksteel"
@@ -95,3 +100,4 @@
 /obj/item/clothing/ring/diamondbs/loadout
 	misc_flags = CRAFTING_TEST_EXCLUDE
 	sellprice = 0
+	desc = "A mythical blacksteel ring with a polished Dorpel set into it. It feels a little lighter than it should..."

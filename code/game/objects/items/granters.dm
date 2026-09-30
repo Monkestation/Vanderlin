@@ -110,6 +110,7 @@
 /obj/item/book/granter/spell
 	grid_width = 64
 	grid_height = 32
+	can_open = FALSE
 
 	var/datum/action/cooldown/spell/spell
 	var/spellname = "conjure bugs"

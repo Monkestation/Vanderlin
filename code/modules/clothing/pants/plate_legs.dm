@@ -97,7 +97,8 @@
 	name = "darksteel garments"
 	desc = "Leg garments worn by true anointed of the Dame of Progress. In Her name."
 	icon_state = "zizocloth"
-	smeltresult = /obj/item/ingot/avantyne
+	melting_material = /datum/material/avantyne
+	melt_amount = 100
 	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/pants/platelegs/inhumen/zizo/alt
@@ -109,16 +110,19 @@
 	name = "gilded leggings"
 	desc = "Plate leggings. perfect for sprinting away after a theft of mammon, or life."
 	icon_state = "matthioslegs"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 /obj/item/clothing/pants/platelegs/inhumen/graggar
 	name = "vicious leggings"
 	desc = "A sinister pair of plate chausses that have born witness many violent atrocities."
 	icon_state = "graggarplatelegs"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/clothing/pants/platelegs/inhumen/baotha
 	name = "saccharine garments"
 	desc = "Leg garments worn by those who see the truth of freedom through addiction."
 	icon_state = "baothaskirt"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 //.............. Silver Platelegs .................//
 

@@ -336,7 +336,7 @@
 			ignore_z = TRUE
 
 		var/keenears_range_bonus = 0
-		if(HAS_TRAIT(hearing_movable, TRAIT_KEENEARS))
+		if(HAS_TRAIT(hearing_movable, TRAIT_KEENEARS) || HAS_TRAIT(hearing_movable, TRAIT_DEVIL_MARKED_ABRAXAS))
 			keenears_range_bonus = 5
 
 		if(!ignore_z && z_message_type == Z_MODE_ONE_CEILING && hearing_movable.z != z)

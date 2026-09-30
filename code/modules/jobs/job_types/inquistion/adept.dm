@@ -11,7 +11,6 @@
 	factions = list(FACTION_INQUISITION, FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
-	bypass_lastclass = TRUE
 
 	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
 	allowed_races = RACES_PLAYER_ALL

@@ -120,6 +120,7 @@
 	desc = "The Lord's key."
 	icon_state = "bosskey"
 	lockids = list(ACCESS_LORD)
+	examine_highlight_type = /datum/examine_highlight/royal_court
 
 /obj/item/key/lord/Initialize()
 	. = ..()
