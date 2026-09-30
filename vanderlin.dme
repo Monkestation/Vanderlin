@@ -4755,5 +4755,8 @@
 #include "modular_vanderlin_ui\code\datums\preferences\erp_preferences.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\nickname_color.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\nsfw_flavor.dm"
+#include "modular_vanderlin_ui\code\datums\preferences\permadeath.dm"
 #include "modular_vanderlin_ui\code\modules\mob\living\carbon\human\nickname_color_var.dm"
+#include "modular_vanderlin_ui\code\modules\mob\living\carbon\human\permadeath_revive_check.dm"
+#include "modular_vanderlin_ui\code\modules\mob\living\carbon\human\permadeath_var.dm"
 // END_INCLUDE

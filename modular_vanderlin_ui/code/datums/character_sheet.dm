@@ -34,6 +34,7 @@
 	data["voice_color"] = "#" + prefs.read_preference(/datum/preference/color/voice_color)
 	data["dominant_hand"] = (prefs.read_preference(/datum/preference/choiced/domhand) == 1) ? "Left" : "Right"
 	data["nickname_color"] = "#" + prefs.read_preference(/datum/preference/color/nickname_color)
+	data["permadeath"] = prefs.read_preference(/datum/preference/toggle/permadeath) ? "ENABLED" : "disabled"
 	data["pq"] = get_playerquality(owner.ckey)
 	data["faith"] = prefs.read_preference(/datum/preference/choiced/faith)
 	data["patron"] = prefs.read_preference(/datum/preference/choiced/patron)
