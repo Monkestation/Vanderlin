@@ -74,6 +74,8 @@
 	data["food_prefs"] = food_list ? food_list.Join(", ") : ""
 	data["nsfw_flavor"] = prefs.read_preference(/datum/preference/toggle/nsfw_flavor) ? "ON" : "OFF"
 	data["erp_preferences"] = prefs.read_preference(/datum/preference/text/erp_preferences) || ""
+	data["headshot_link"] = prefs.read_preference(/datum/preference/text/headshot_link) || ""
+	data["nudeshot_link"] = prefs.read_preference(/datum/preference/text/nudeshot_link) || ""
 	var/list/gallery_list = prefs.read_preference(/datum/preference/list_type/character_gallery)
 	data["gallery_count"] = gallery_list ? length(gallery_list) : 0
 	data["gallery_links"] = gallery_list ? gallery_list.Join(", ") : ""

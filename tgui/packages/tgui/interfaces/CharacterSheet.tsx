@@ -35,6 +35,8 @@ type Data = {
   food_prefs: string;
   nsfw_flavor: string;
   erp_preferences: string;
+  headshot_link: string;
+  nudeshot_link: string;
   gallery_count: number;
   gallery_links: string;
 };
@@ -79,6 +81,8 @@ export const CharacterSheet = () => {
     food_prefs = '',
     nsfw_flavor = 'OFF',
     erp_preferences = '',
+    headshot_link = '',
+    nudeshot_link = '',
     gallery_count = 0,
     gallery_links = '',
   } = data;
@@ -86,7 +90,7 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={640} title="Who Are You?">
+    <Window width={480} height={680} title="Who Are You?">
       <Window.Content>
         <Tabs>
           <Tabs.Tab
@@ -257,6 +261,16 @@ export const CharacterSheet = () => {
               </LabeledList.Item>
               <LabeledList.Item label="ERP Preferences">
                 <span style={editStyle} onClick={() => edit('erp_preferences')}>{erp_preferences || 
+'None'
+}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Headshot">
+                <span style={editStyle} onClick={() => edit('headshot_link')}>{headshot_link || 
+'None'
+}</span>
+              </LabeledList.Item>
+              <LabeledList.Item label="Nudeshot">
+                <span style={editStyle} onClick={() => edit('nudeshot_link')}>{nudeshot_link || 
 'None'
 }</span>
               </LabeledList.Item>
