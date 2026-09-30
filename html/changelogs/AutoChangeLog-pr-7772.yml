@@ -1,0 +1,5 @@
+author: "PotatoTomahto"
+delete-after: True
+changes:
+  - balance: "you will now be warned before you get debuffed by hunger and thirst"
+  - balance: "hunger and thirst rates increased"

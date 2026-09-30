@@ -21,6 +21,8 @@ GLOBAL_LIST_EMPTY(biggates)
 	var/obj/structure/attached_to
 	/// this is dumb but I'm not refactoring this right meow.
 	var/is_big_gate = TRUE
+	/// direction the gate's 3 segments extend in. EAST = horizontal (default), NORTH = vertical.
+	var/layout_dir = EAST
 	/// which bodyparts we affect when crushing a carbon mob.
 	var/static/list/bodyparts_to_crush = list(
 			BODY_ZONE_HEAD,
@@ -51,6 +53,35 @@ GLOBAL_LIST_EMPTY(biggates)
 	. = ..()
 	INVOKE_ASYNC(src, PROC_REF(open))
 
+/obj/structure/gate/vertical
+	icon = 'icons/roguetown/misc/gate-vertical.dmi'
+	bound_width = 32
+	bound_height = 96
+	layout_dir = NORTH
+
+/obj/structure/gate/vertical/preopen
+	icon_state = "gate0"
+
+/obj/structure/gate/vertical/preopen/Initialize()
+	. = ..()
+	INVOKE_ASYNC(src, PROC_REF(open))
+
+/obj/structure/gate/vertical/bars
+	icon_state = "bar1"
+	base_state = "bar"
+	opacity = FALSE
+	pass_flags_self = PASSGRILLE|LETPASSTHROW|PASSSTRUCTURE|NOTLETPASSTHROWNMOB
+	bound_width = 32
+	bound_height = 96
+	layout_dir = NORTH
+
+/obj/structure/gate/vertical/bars/preopen
+	icon_state = "bar0"
+
+/obj/structure/gate/vertical/bars/preopen/Initialize()
+	. = ..()
+	INVOKE_ASYNC(src, PROC_REF(open))
+
 /obj/gblock
 	name = ""
 	desc = ""
@@ -76,11 +107,11 @@ GLOBAL_LIST_EMPTY(biggates)
 	blocker = new blocker_ref(current_turf)
 	turfsy += current_turf
 	blockers += blocker
-	current_turf = get_step(current_turf, EAST)
+	current_turf = get_step(current_turf, layout_dir)
 	blocker = new blocker_ref(current_turf)
 	turfsy += current_turf
 	blockers += blocker
-	current_turf = get_step(current_turf, EAST)
+	current_turf = get_step(current_turf, layout_dir)
 	blocker = new blocker_ref(current_turf)
 	turfsy += current_turf
 	blockers += blocker

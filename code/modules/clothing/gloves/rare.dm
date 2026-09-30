@@ -14,7 +14,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melt_amount = 75
 	melting_material = /datum/material/steel
-
+	flags_inv = HIDEHANDS
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/gloves/plate/good
 	max_integrity = INTEGRITY_OLD_STRONGEST

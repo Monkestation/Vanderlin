@@ -64,3 +64,4 @@
 /obj/item/spellbook/mid/starter/blood
 	themed_form = FORM_BLOOD
 	designlist = list("blood")
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic

@@ -395,6 +395,10 @@
 
 	var/obj/structure/minecart_rail/located_rail = locate(/obj/structure/minecart_rail) in get_turf(src)
 
+	// A locked rail holds the cart in place until it receives redstone power
+	if(located_rail?.has_lock_module && located_rail.locked)
+		return FALSE
+
 	// If our current turf does NOT have a rail, only check the next rail. Otherwise, check our current rail then check the next rail.
 	for(var/obj/structure/minecart_rail/rail in next_turf)
 		if(!located_rail)
@@ -448,9 +452,33 @@
 	var/obj/structure/minecart_rail/potential_power = locate() in loc
 	if(!potential_power)
 		return
+	if(potential_power.has_lock_module && potential_power.locked)
+		return
 	update_rail_state(TRUE)
 	if(potential_power.rotations_per_minute)
 		momentum += round(potential_power.rotations_per_minute / 3)
+
+/// Starts the cart moving because a powered rail under it just unlocked.
+/obj/structure/closet/crate/miningcar/proc/launch_from_rail(obj/structure/minecart_rail/rail)
+	if(!on_rails || momentum > 0)
+		return
+	if(!rail.rotations_per_minute)
+		return
+
+	var/movedir = dir
+	var/turf/next_turf = get_step(src, movedir)
+	if(!can_travel_on_turf(next_turf, movedir))
+		return
+
+	momentum += round(rail.rotations_per_minute / 3)
+	if(momentum <= 0)
+		return
+
+	obj_flags |= BLOCK_Z_OUT_DOWN
+	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
+	var/datum/move_loop/loop = SSmove_manager.move(src, dir, delay = calculate_delay(), subsystem = SSminecarts, flags = MOVEMENT_LOOP_START_FAST|MOVEMENT_LOOP_IGNORE_PRIORITY, move_loop_type = /datum/move_loop/minecart)
+	RegisterSignal(loop, COMSIG_MOVELOOP_PREPROCESS_CHECK, PROC_REF(check_rail))
+	RegisterSignal(loop, COMSIG_MOVELOOP_POSTPROCESS, PROC_REF(decay_momentum))
 
 /// Throws all the contents of the cart out ahead
 /obj/structure/closet/crate/miningcar/proc/throw_contents()
