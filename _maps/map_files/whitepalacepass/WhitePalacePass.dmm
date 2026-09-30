@@ -3090,6 +3090,11 @@
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/broom,
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "bMv" = (
@@ -7982,6 +7987,7 @@
 	pixel_x = 16;
 	redstone_id = "bar_shutter"
 	},
+/obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/tavern)
 "eEH" = (
@@ -19848,6 +19854,7 @@
 /area/outdoors/town/keep)
 "mdO" = (
 /obj/structure/table/wood/plain,
+/obj/item/reagent_containers/peppermill,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/tavern)
 "meg" = (
@@ -22073,6 +22080,10 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/steward)
+"nwx" = (
+/obj/structure/table/wood/plain,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/tavern)
 "nwC" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/paper{
@@ -22449,10 +22460,48 @@
 /area/indoors/town/garrison)
 "nII" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/cup/teacup,
-/obj/item/reagent_containers/glass/cup/teacup,
-/obj/item/reagent_containers/glass/cup/teacup,
-/obj/item/reagent_containers/glass/cup/teacup,
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_x = 10;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_x = 10;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_x = -5;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = 3;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = 3;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = 3;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = -4;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = -6;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = -6;
+	pixel_y = -4
+	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "nJd" = (
@@ -24286,10 +24335,41 @@
 /area/indoors/town/keep/gate)
 "oUk" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/bucket/wooden,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
+/obj/item/reagent_containers/glass/cup/glassware/wineglass{
+	pixel_x = -13;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/glass/cup/glassware/wineglass{
+	pixel_x = -9;
+	pixel_y = 12
+	},
+/obj/item/reagent_containers/glass/cup/glassware/wineglass{
+	pixel_x = -8;
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/glass/cup/glassware/wineglass{
+	pixel_x = -13;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/glass/cup/clay{
+	pixel_y = 10;
+	pixel_x = 2
+	},
+/obj/item/reagent_containers/glass/cup/clay{
+	pixel_y = 10;
+	pixel_x = 6
+	},
+/obj/item/reagent_containers/glass/cup/rose{
+	pixel_x = -4;
+	pixel_y = -10
+	},
+/obj/item/reagent_containers/glass/cup/rose{
+	pixel_x = -7;
+	pixel_y = -10
+	},
+/obj/item/reagent_containers/glass/carafe/teapot/rose{
+	pixel_x = 5
+	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "oUl" = (
@@ -30659,20 +30739,20 @@
 "tcl" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
-	pixel_x = -6;
-	pixel_y = 9
+	pixel_x = 3;
+	pixel_y = -4
 	},
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
-	pixel_x = -6;
-	pixel_y = 9
+	pixel_x = 3;
+	pixel_y = -4
 	},
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
-	pixel_x = -6;
-	pixel_y = 9
+	pixel_x = 3;
+	pixel_y = -4
 	},
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
-	pixel_x = -6;
-	pixel_y = 9
+	pixel_x = 3;
+	pixel_y = -4
 	},
 /obj/item/reagent_containers/food/snacks/bread{
 	pixel_x = -5;
@@ -34298,6 +34378,14 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/natural/bundle/stick,
 /obj/item/natural/bundle/stick,
+/obj/item/grown/log/tree/small{
+	pixel_x = 5;
+	pixel_y = -1
+	},
+/obj/item/grown/log/tree/small{
+	pixel_x = -7;
+	pixel_y = 5
+	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "vth" = (
@@ -102118,7 +102206,7 @@ duR
 dkd
 vbK
 wAO
-cSl
+nwx
 eEv
 cSl
 gMZ

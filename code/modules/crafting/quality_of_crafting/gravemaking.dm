@@ -100,6 +100,7 @@
 	)
 	attacked_atom = /obj/item/natural/stone
 	starting_atom  = /obj/item/rope
+	output = /obj/item/gravedecor/gravefence
 	skillcraft = /datum/attribute/skill/craft/crafting
 	craftdiff = 0
 

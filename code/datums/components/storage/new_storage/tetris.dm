@@ -626,6 +626,9 @@
 			LAZYADD(item_to_grid_coordinates[storing], calculated_coordinates)
 	storing.item_flags |= SHRINK_ENCHANT
 	SEND_SIGNAL(parent, COMSIG_STORAGE_ADDED, storing)
+	var/turf/parent_turf = get_turf(parent)
+	if(parent_turf)
+		SEND_SIGNAL(parent_turf, COMSIG_STORAGE_TURF_INSERTED, storing, parent)
 	return TRUE
 
 /datum/component/storage/proc/grid_remove_item(obj/item/removed)
@@ -806,9 +809,12 @@
 		//Being destroyed, just move to nullspace now (so it's not in contents for the icon update)
 		removed.moveToNullspace()
 	removed.update_appearance()
-	SEND_SIGNAL(parent, COMSIG_STORAGE_REMOVED, removed)
+	SEND_SIGNAL(parent, COMSIG_STORAGE_REMOVED, removed, new_location)
 	update_icon()
 	refresh_mob_views()
+	var/turf/parent_turf = get_turf(parent)
+	if(parent_turf)
+		SEND_SIGNAL(parent_turf, COMSIG_STORAGE_TURF_REMOVED, removed, master.parent)
 	return TRUE
 
 /atom/movable/screen/close
@@ -843,7 +849,7 @@
 	else
 		if(!istype(storage_master))
 			return
-		storage_master.hide_from(usr)
+		storage_master.close(usr)
 
 /atom/movable/screen/close/MouseDrop(atom/over, src_location, over_location, src_control, over_control, params)
 	. = ..()
