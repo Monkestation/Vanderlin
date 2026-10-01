@@ -166,6 +166,13 @@
 
 	triumph_cost_permanent = 75
 
+/datum/loadout_item/hood
+	name = "Hood"
+	item_path = /obj/item/clothing/head/roguehood
+	ui_category = "Hats"
+
+	triumph_cost_permanent = 50
+
 /datum/loadout_item/peel_pin
 	name = "Peel Pin"
 	item_path = /obj/item/clothing/head/peel_pin

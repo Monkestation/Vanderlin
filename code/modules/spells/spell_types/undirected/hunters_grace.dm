@@ -6,6 +6,7 @@
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 
+	associated_skill = /datum/attribute/skill/magic/druidic
 	invocation = "The prey will not escape!"
 	invocation_type = INVOCATION_WHISPER
 

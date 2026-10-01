@@ -23,22 +23,16 @@
 	outfit = /datum/outfit/skeleton
 	give_bank_account = FALSE
 	languages = list(/datum/language/undead)
+	spawn_type = /mob/living/carbon/human/species/skeleton/no_equipment
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/skeleton
 
 	traits = list(
-		TRAIT_NOMOOD,
 		TRAIT_NOSTAMINA,
 		TRAIT_NOLIMBDISABLE,
-		TRAIT_NOHUNGER,
-		TRAIT_NOBREATH,
-		TRAIT_NOPAIN,
-		TRAIT_TOXIMMUNE,
-		TRAIT_SLEEPIMMUNE,
 		TRAIT_SHOCKIMMUNE,
-		TRAIT_NOBLOOD,
+		TRAIT_NOAMBUSH,
 	)
-
 
 /datum/job/skeleton/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -46,25 +40,9 @@
 	spawned.mind.special_role = "Skeleton"
 	spawned.mind?.current.job = null
 
-	if(spawned.dna && spawned.dna.species)
-		spawned.dna.species.soundpack_m = new /datum/voicepack/skeleton()
-		spawned.dna.species.soundpack_f = new /datum/voicepack/skeleton()
-
 	spawned.regenerate_limb(BODY_ZONE_R_ARM)
 	spawned.regenerate_limb(BODY_ZONE_L_ARM)
-	spawned.skeletonize()
-	spawned.base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
-	spawned.update_a_intents()
-	spawned.grant_undead_eyes()
-	ADD_TRAIT(spawned, TRAIT_NOAMBUSH, JOB_TRAIT)
-	spawned.underwear = "Nude"
-	if(length(spawned.quirks))
-		spawned.clear_quirks()
-	spawned.update_body()
-	spawned.mob_biotypes = MOB_UNDEAD
-	spawned.set_faction(list(FACTION_UNDEAD))
-
-
+	spawned.skeletonize(FALSE)
 
 /* RAIDER SKELETONS */
 

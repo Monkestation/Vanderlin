@@ -6,7 +6,7 @@
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/shields = 10,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/knives = 10,
@@ -30,7 +30,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 

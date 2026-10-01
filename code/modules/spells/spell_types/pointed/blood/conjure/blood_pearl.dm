@@ -51,6 +51,7 @@
 	grid_width = 32
 	grid_height = 32
 	item_weight = 120 GRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
 	var/vitae_amount = 500 // Summon spell is set to 600, 100 more than Vitae stored to prevent using for dupes.
 	var/max_vitae = 1000
 	var/stored_blood_color = COLOR_BLOOD
@@ -148,6 +149,7 @@
 	grid_width = 32
 	grid_height = 32
 	item_weight = 120 GRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
 
 /obj/item/sealed_blood_pearl/Initialize(mapload)
 	. = ..()

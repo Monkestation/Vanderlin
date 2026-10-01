@@ -9,7 +9,6 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 8
 	spawn_positions = 8
-	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
@@ -82,7 +81,7 @@
 		"Flail" = /obj/item/weapon/flail/militia, \
 		"Warhammer" = /obj/item/weapon/mace/warhammer, \
 	)
-	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR MAIN AND SIDE WEAPON", title = "FOOTMAN")
+	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR MAIN WEAPON", title = "FOOTMAN")
 	switch(choice)
 		if("Sword")
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 10, 30)

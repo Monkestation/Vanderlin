@@ -7,6 +7,10 @@
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/misc/lockpicking = 20,
 		/datum/attribute/skill/labor/mathematics = 30
@@ -45,7 +49,6 @@
 	give_bank_account = 10
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 
 	allowed_races = RACES_PLAYER_ALL

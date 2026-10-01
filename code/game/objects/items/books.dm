@@ -30,6 +30,8 @@
 
 	base_icon_state = "basic_book"
 	var/open = FALSE
+	/// Whether or not this is locked to its state.
+	var/can_open = TRUE
 	var/dat				//Actual page content
 	var/due_date = 0	//Game time in 1/10th seconds
 	var/author			//Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
@@ -201,6 +203,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+	if(!can_open)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(!open)
 		slot_flags &= ~ITEM_SLOT_HIP
 		open = TRUE

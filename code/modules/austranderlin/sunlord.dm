@@ -29,7 +29,6 @@
 	factions = list(FACTION_RATS)
 	total_positions = 0
 	spawn_positions = 0
-	bypass_lastclass = TRUE
 	banned_leprosy = FALSE
 	honorary = "God-Lord"
 	honorary_suffix = "the Sun"

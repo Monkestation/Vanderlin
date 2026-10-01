@@ -3,7 +3,10 @@
 		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_ENDURANCE = 1,
+		STAT_SPEED = 1,
 		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/alchemy = 20,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/labor/farming = 20,
@@ -23,7 +26,6 @@
 	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)

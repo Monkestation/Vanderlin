@@ -6,8 +6,9 @@
 		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 1,
-		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/masonry = 30,
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/craft/engineering = 40,
@@ -27,8 +28,9 @@
 		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 1,
-		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/masonry = 30,
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/craft/engineering = 50,
@@ -56,7 +58,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/artificer
