@@ -1,7 +1,7 @@
 {
-	"map_name": "Wilderness North",
+	"map_name": "Wilderness",
 	"map_path": "map_files/wilderness",
-	"map_file": "wildernorth.dmm",
+	"map_file": "wildermiddletest.dmm",
 	"traits": [
 		{
 			"Up": true,
