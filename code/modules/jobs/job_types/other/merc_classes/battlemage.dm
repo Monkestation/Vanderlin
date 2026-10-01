@@ -80,10 +80,10 @@
 	browser_input_list(spawned, "CHOOSE YOUR SPECIALIZATION.", "BATTLEMAGE TRAINING.", specials)
 	switch(specials)
 		if("Swords")
-			spawned.mind.add_spell(/datum/action/cooldown/spell/caedo)
-			spawned.mind.add_spell(/datum/action/cooldown/spell/air_strike)
-			spawned.mind.add_spell(/datum/action/cooldown/spell/leyline_anchor)
-			spawned.mind.add_spell(/datum/action/cooldown/spell/projectile/blade_storm)
+			spawned.add_spell(/datum/action/cooldown/spell/caedo)
+			spawned.add_spell(/datum/action/cooldown/spell/air_strike)
+			spawned.add_spell(/datum/action/cooldown/spell/leyline_anchor)
+			spawned.add_spell(/datum/action/cooldown/spell/projectile/blade_storm)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/battlemage/swords)
 			var/static/list/weapons = list(
 				"Arming Sword" = /obj/item/weapon/sword/arming,
@@ -91,16 +91,15 @@
 				"Shortsword + Shield" = /obj/item/weapon/sword/short
 			)
 			var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "MAGIC ARMS.")
-			switch(weapon_choice)
-				if("Shortsword + Shield")
-					spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/battlemage/shields)
-					spawned.put_in_hands(new /obj/item/weapon/shield/heater(get_turf(spawned)), TRUE)
+			if(weapon_choice == "Shortsword + Shield")
+				spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/battlemage/shields)
+				spawned.put_in_hands(new /obj/item/weapon/shield/heater(get_turf(spawned)), TRUE)
 			color_armor.color = "#50090f"
 		if("Polearms")
-			spawned.mind.add_spell(/datum/action/cooldown/spell/arcane_phalanx)
-			spawned.mind.add_spell(/datum/action/cooldown/spell/projectile/pilum)
-			spawned.mind.add_spell(/datum/action/cooldown/spell/advance)
-			spawned.mind.add_spell(/datum/action/cooldown/spell/gate_of_reckoning)
+			spawned.add_spell(/datum/action/cooldown/spell/arcane_phalanx)
+			spawned.add_spell(/datum/action/cooldown/spell/projectile/pilum)
+			spawned.add_spell(/datum/action/cooldown/spell/advance)
+			spawned.add_spell(/datum/action/cooldown/spell/gate_of_reckoning)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/battlemage/polearms)
 			var/static/list/weapons = list(
 				"Spear" = /obj/item/weapon/polearm/spear/steel,
@@ -109,9 +108,9 @@
 			var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "MAGIC ARMS.")
 			color_armor.color = "#2a2459"
 		if("Maces")
-			spawned.mind.add_spell(/datum/action/cooldown/spell/telegraphed_strike/spellblade/shatter)
-			spawned.mind.add_spell(/datum/action/cooldown/spell/telegraphed_strike/spellblade/tremor)
-			spawned.mind.add_spell(/datum/action/cooldown/spell/cataclysm)
+			spawned.add_spell(/datum/action/cooldown/spell/telegraphed_strike/spellblade/shatter)
+			spawned.add_spell(/datum/action/cooldown/spell/telegraphed_strike/spellblade/tremor)
+			spawned.add_spell(/datum/action/cooldown/spell/cataclysm)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/battlemage/axesmaces)
 			var/static/list/weapons = list(
 				"Mace" = /obj/item/weapon/mace/steel,
@@ -147,7 +146,7 @@
 					spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/battlemage/shields)
 					spawned.put_in_hands(new /obj/item/weapon/shield/heater(get_turf(spawned)), TRUE)
 			color_armor.color = "#7e632c"
-		spawned.equip_to_slot(color_armor, ITEM_SLOT_ARMOR, TRUE)
+	spawned.equip_to_slot(color_armor, ITEM_SLOT_ARMOR, TRUE)
 
 /datum/outfit/mercenary/battlemage
 	name = "Battlemage (Mercenary)"

@@ -18,18 +18,18 @@
 		/datum/attribute/skill/craft/alchemy = 20
 	)
 
-/datum/job/advclass/combat/muscle_magos
+/datum/job/advclass/wretch/muscle_magos
 	title = "Muscle Magos"
 	tutorial = "A warrior who has dabbled in the arts of magic, you blend martial arts and spellcraft to earn your keep."
 	allowed_races = RACES_PLAYER_ALL
-	outfit = /datum/outfit/combat/muscle_magos
+	outfit = /datum/outfit/wretch/muscle_magos
 	total_positions = 2
 	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
-	form_points = 5
+	form_points = 4
 	technique_points = 1
 
 	traits = list(
@@ -51,12 +51,12 @@
 		/datum/action/cooldown/spell/tempest_rush,
 	)
 
-/datum/job/advclass/combat/muscle_magos/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/wretch/muscle_magos/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.adjust_technique_mastery_points(2, FALSE, TECHNIQUE_IMBUE)
 	spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
 
-/datum/outfit/combat/muscle_magos
+/datum/outfit/wretch/muscle_magos
 	name = "Muscle Magos (Wretch)"
 	armor = /obj/item/clothing/armor/leather/jerkin
 	neck = /obj/item/clothing/neck/coif

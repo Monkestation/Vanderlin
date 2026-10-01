@@ -27,7 +27,7 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
-	form_points = 7
+	form_points = 3
 
 	traits = list(
 		TRAIT_SORCERER,
