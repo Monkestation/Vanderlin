@@ -38,6 +38,9 @@
 /datum/ai_planning_subtree/basic_melee_attack_subtree/gator_attack
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/gator_attack
 
+/datum/ai_planning_subtree/basic_melee_attack_subtree/gator_attack/corpse_gator
+	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/gator_attack/corpse_gator
+
 /datum/ai_planning_subtree/basic_melee_attack_subtree/meatvine
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/meatvine
 
@@ -89,7 +92,7 @@
 
 /datum/ai_behavior/basic_melee_attack/gator_attack/corpse_gator/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
 	. = ..()
-	var/mob/living/simple_animal/hostile/retaliate/gator/gator_pawn = controller.pawn
+	var/mob/living/simple_animal/hostile/retaliate/gator/corpse_gator/gator_pawn = controller.pawn
 	var/atom/target = controller.blackboard[target_key]
 
 	if(!istype(gator_pawn) || QDELETED(target) || !isliving(target))
