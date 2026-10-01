@@ -159,6 +159,12 @@
 	ai_controller = /datum/ai_controller/gator/corpse_gator
 	dendor_taming_chance = DENDOR_TAME_PROB_NONE
 
+/mob/living/simple_animal/hostile/retaliate/gator/corpse_gator/update_overlays()
+	. = ..()
+	if(stat == DEAD)
+		return
+	. += emissive_appearance(icon, "gator-eyes-red")
+
 /mob/living/simple_animal/hostile/retaliate/gator/corpse_gator/Initialize()
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
