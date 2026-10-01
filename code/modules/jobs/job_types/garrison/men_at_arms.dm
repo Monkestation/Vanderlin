@@ -44,10 +44,6 @@
 	shoes = /obj/item/clothing/shoes/boots/leather/advanced/watch
 	belt = /obj/item/storage/belt/leather
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1,
-		/obj/item/storage/keyring/manorguard = 1
-	)
 /datum/job/men_at_arms/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
 
@@ -96,10 +92,18 @@
 	Now you get to stare at them in the eyes, watching as they bleed, \
 	exanguinated personally by one of the Monarch's best. \
 	You are poor, and your belly is yet full."
+	outfit = /datum/outfit/watchman/footman
 	category_tags = list(CTAG_MENATARMS)
 	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/footman
 	traits = list(
 		TRAIT_MEDIUMARMOR
+	)
+
+/datum/outfit/watchman/footman
+	name = "Footman Men-At-Arms"
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1,
+		/obj/item/storage/keyring/manorguard = 1
 	)
 
 /datum/job/advclass/menatarms/watchman_footman/on_roundstart(mob/living/spawned, client/player_client)
@@ -111,19 +115,19 @@
 		"Halberd" = /obj/item/weapon/polearm/halberd,
 		"Greataxe" = /obj/item/weapon/greataxe/steel,
 		"Eagle's Beak" = /obj/item/weapon/polearm/eaglebeak,
+		"Longsword" = /obj/item/weapon/sword/long,
 	)
 
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title = "TAKE UP ARMS.")
 
-	switch(weapon_choice)
-		if("Steel Shortsword & Shield", "Billhook & Iron Shortsword")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
-		if("Iron Warhammer & Shield", "Greataxe")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 33, 33)
-		if("Billhook & Iron Shortsword", "Halberd", "Eagle's Beak")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
-		if("Iron Warhammer & Shield", "Steel Shortsword & Shield")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/shields, 33, 33)
+	if(weapon_choice == "Steel Shortsword & Shield" || weapon_choice == "Billhook & Iron Shortsword" || weapon_choice == "Longsword")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+	if(weapon_choice == "Iron Warhammer & Shield" || weapon_choice == "Greataxe")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 33, 33)
+	if(weapon_choice == "Billhook & Iron Shortsword" || weapon_choice == "Halberd" || weapon_choice == "Eagle's Beak")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
+	if(weapon_choice == "Iron Warhammer & Shield" || weapon_choice == "Steel Shortsword & Shield")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/shields, 33, 33)
 
 	var/armors = list("Brigandine Set", "Chainmail Set", "Cuirass Set")
 	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARMOR.", "EQUIP YOURSELF.", armors)
@@ -190,6 +194,10 @@
 	wrists =/obj/item/clothing/wrists/bracers/leather/brigandine
 	gloves = /obj/item/clothing/gloves/chain/iron
 	pants = /obj/item/clothing/pants/trou/leather/brigandine
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1,
+		/obj/item/storage/keyring/manorguard = 1
+	)
 
 /datum/job/advclass/menatarms/watchman_ranger/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -203,15 +211,15 @@
 			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross, ITEM_SLOT_BACK_R, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 
-	var/static/list/sidearms = list("Stiletto", "Iron Shortsword", "Cudgel")
+	var/static/list/sidearms = list("Stiletto", "Steel Shortsword", "Flanged Mace")
 	var/sidearm_choice = browser_input_list(spawned, "CHOOSE YOUR SIDEARM.", "BE VIGILANT.", sidearms)
 	switch(sidearm_choice)
 		if("Stiletto")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/knife/dagger/steel/stiletto, ITEM_SLOT_BELT_L, TRUE)
-		if("Iron Shortsword")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/short/iron, ITEM_SLOT_BELT_L, TRUE)
-		if("Cudgel")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
+		if("Steel Shortsword")
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/short, ITEM_SLOT_BELT_L, TRUE)
+		if("Flanged Mace")
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/steel/flanged, ITEM_SLOT_BELT_L, TRUE)
 
 /datum/attribute_holder/sheet/job/menatarms/hospitaller
 	raw_attribute_list = list(
@@ -266,17 +274,17 @@
 
 /datum/job/advclass/menatarms/watchman_hospitaller/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/static/list/sidearms = list("Stiletto", "Iron Shortsword", "Cudgel")
+	var/static/list/sidearms = list("Stiletto", "Steel Shortsword", "Flanged Mace")
 	var/sidearm_choice = browser_input_list(spawned, "CHOOSE YOUR SIDEARM.", "BE VIGILANT.", sidearms)
 	switch(sidearm_choice)
 		if("Stiletto")
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/knife/dagger/steel/stiletto, ITEM_SLOT_BELT_L, TRUE)
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 30, 30)
-		if("Iron Shortsword")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/short/iron, ITEM_SLOT_BELT_L, TRUE)
+		if("Steel Shortsword")
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/sword/short, ITEM_SLOT_BELT_L, TRUE)
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 30, 30)
-		if("Cudgel")
-			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/cudgel, ITEM_SLOT_BELT_L, TRUE)
+		if("Flanged Mace")
+			spawned.equip_to_slot_or_del(new /obj/item/weapon/mace/steel/flanged, ITEM_SLOT_BELT_L, TRUE)
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 30, 30)
 
 /datum/attribute_holder/sheet/job/menatarms/cavalry
@@ -300,6 +308,7 @@
 
 /datum/job/advclass/menatarms/watchman_cavalry
 	title = "Cavalry Men-At-Arms"
+	outfit = /datum/outfit/watchman/cavalry
 	category_tags = list(CTAG_MENATARMS)
 	total_positions = 2
 	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/cavalry
@@ -307,28 +316,34 @@
 		TRAIT_MEDIUMARMOR
 	)
 
+/datum/outfit/watchman/cavalry
+	name = "Cavalry Men-At-Arms"
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1,
+		/obj/item/storage/keyring/manorguard = 1
+	)
+
 /datum/job/advclass/menatarms/watchman_cavalry/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
 	var/static/list/weapons = list(
-		"Steel Sabre & Crossbow" = list(/obj/item/weapon/sword/sabre, /obj/item/gun/ballistic/bow/cross),
-		"Steel Shortsword & Shortbow" = list(/obj/item/weapon/sword/short, /obj/item/gun/ballistic/bow/short),
+		"Steel Sabre & Crossbow" = list(/obj/item/weapon/sword/sabre || /obj/item/gun/ballistic/bow/cross),
+		"Steel Shortsword & Shortbow" = list(/obj/item/weapon/sword/short || /obj/item/gun/ballistic/bow/short),
 		"Steel Spear" = /obj/item/weapon/polearm/spear/steel,
 		"Lucerne" = /obj/item/weapon/polearm/eaglebeak/lucerne,
 	)
 
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title = "TAKE UP ARMS.")
 
-	switch(weapon_choice)
-		if("Steel Spear", "Lucerne")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
-		if("Steel Shortsword & Shortbow")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/bows, 33, 33)
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
-		if("Steel Sabre & Crossbow")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/crossbows, 33, 33)
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
-			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
+	if(weapon_choice == "Steel Spear" || weapon_choice == "Lucerne")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
+	if(weapon_choice == "Steel Shortsword & Shortbow")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/bows, 33, 33)
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+		spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
+	if(weapon_choice == "Steel Sabre & Crossbow")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/crossbows, 33, 33)
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+		spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 
 	var/armors = list("Brigandine Set", "Chainmail Set")
 	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARMOR.", "EQUIP YOURSELF.", armors)
@@ -400,6 +415,10 @@
 	wrists = /obj/item/clothing/wrists/bracers
 	gloves = /obj/item/clothing/gloves/chain
 	neck = /obj/item/clothing/neck/bevor
+	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel/special = 1,
+		/obj/item/storage/keyring/manorguard = 1
+	)
 
 /datum/job/advclass/menatarms/watchman_sergeant/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
@@ -410,18 +429,18 @@
 		"Halberd" = /obj/item/weapon/polearm/halberd,
 		"Greataxe" = /obj/item/weapon/greataxe/steel,
 		"Eagle's Beak" = /obj/item/weapon/polearm/eaglebeak,
+		"Longsword" = /obj/item/weapon/sword/long,
 	)
 
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title = "TAKE UP ARMS.")
 
-	switch(weapon_choice)
-		if("Steel Shortsword & Shield", "Billhook & Iron Shortsword")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 35, 35)
-		if("Iron Warhammer & Shield", "Greataxe")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 35, 35)
-		if("Billhook & Iron Shortsword", "Halberd", "Eagle's Beak")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 35, 35)
-		if("Iron Warhammer & Shield", "Steel Shortsword & Shield")
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/shields, 35, 35)
+	if(weapon_choice == "Steel Shortsword & Shield" || weapon_choice == "Billhook & Iron Shortsword" || weapon_choice == "Longsword")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 35, 35)
+	if(weapon_choice == "Iron Warhammer & Shield" || weapon_choice == "Greataxe")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 35, 35)
+	if(weapon_choice == "Billhook & Iron Shortsword" || weapon_choice == "Halberd" || weapon_choice == "Eagle's Beak")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 35, 35)
+	if(weapon_choice == "Iron Warhammer & Shield" || weapon_choice == "Steel Shortsword & Shield")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/shields, 35, 35)
 
 	spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/visored/sallet, ITEM_SLOT_HEAD, TRUE)
