@@ -169,10 +169,3 @@
 	. = ..()
 	ADD_TRAIT(src, TRAIT_NOBREATH, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_TOXIMMUNE, TRAIT_GENERIC)
-
-/mob/living/simple_animal/hostile/retaliate/corpse_gator/proc/TailSwipe(mob/victim)
-	var/mob/living/target = victim
-	src.visible_message(span_notice("[src] slams [target] with it's tail, knocking them to the floor!"))
-	target.Paralyze(2)
-	target.apply_damage(20, BRUTE)
-	shake_camera(target, 2, 1)

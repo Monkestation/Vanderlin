@@ -85,7 +85,6 @@
 
 /datum/ai_behavior/basic_melee_attack/gator_attack/corpse_gator
 	action_cooldown = 0.5 SECONDS
-	var/tail_swipe_chance = 10 // Chance to perform a tail swipe, runs before death roll
 	death_roll_chance = 30 // Chance to perform a death roll on attack
 	death_roll_damage = 20 // Extra damage from death roll
 	death_roll_cooldown = 15 SECONDS // Time between death rolls
@@ -99,11 +98,6 @@
 		return
 
 	var/death_roll_cooldown_time = controller.blackboard[BB_GATOR_DEATH_ROLL_COOLDOWN]
-
-	if(prob(tail_swipe_chance) && isliving(target))
-		var/mob/living/L = target
-		if(L.stat != DEAD)
-			gator_pawn.TailSwipe(L)
 
 	// Check if we can perform a death roll
 	if(prob(death_roll_chance) && death_roll_cooldown_time <= world.time && isliving(target))
