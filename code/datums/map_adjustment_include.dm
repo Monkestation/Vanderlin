@@ -12,3 +12,4 @@
 #include "..\..\_maps\map_files\whitepalacepass\map_adjustment_whitepalacepass.dm"
 #include "..\..\_maps\map_files\vanderlin\map_adjustment_vanderlin.dm"
 #include "..\..\_maps\map_files\voyager\map_adjustment_voyager.dm"
+#include "..\..\_maps\map_files\wilderness\map_adjustment_wilderness.dm"
