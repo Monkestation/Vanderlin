@@ -8,6 +8,7 @@
 	cast_range = 1
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/astrata)
 
@@ -65,6 +66,8 @@
 			return . | SPELL_CANCEL_CAST
 
 	if(needs_cross)
+		if(has_world_trait(/datum/world_trait/wyrmwood))
+			return .
 		for(var/obj/structure/fluff/psycross/S in view(max_cross_distance, owner))
 			target_cross = S
 			break
@@ -76,10 +79,11 @@
 
 /datum/action/cooldown/spell/revive/cast(mob/living/carbon/human/cast_on)
 	. = ..()
-	if(QDELETED(target_cross))
-		return
-	target_cross.AOE_flash(owner, 7)
-	target_cross = null
+	if(!has_world_trait(/datum/world_trait/wyrmwood))
+		if(QDELETED(target_cross))
+			return
+		target_cross.AOE_flash(owner, 7)
+		target_cross = null
 	if(cast_on.mob_biotypes & MOB_UNDEAD)
 		if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
 			cast_on.visible_message(span_warning("[cast_on] overpowers being unmade!"), span_greentext("I overpower being unmade!"))
@@ -122,6 +126,7 @@
 	cast_range = 1
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/noc)
 
@@ -190,6 +195,8 @@
 			return . | SPELL_CANCEL_CAST
 
 	if(needs_cross)
+		if(has_world_trait(/datum/world_trait/wyrmwood))
+			return .
 		for(var/obj/structure/fluff/psycross/S in view(max_cross_distance, owner))
 			target_cross = S
 			break
@@ -201,10 +208,11 @@
 
 /datum/action/cooldown/spell/revive_noc/cast(mob/living/carbon/human/cast_on)
 	. = ..()
-	if(QDELETED(target_cross))
-		return
-	target_cross.AOE_flash(owner, 7)
-	target_cross = null
+	if(!has_world_trait(/datum/world_trait/wyrmwood))
+		if(QDELETED(target_cross))
+			return
+		target_cross.AOE_flash(owner, 7)
+		target_cross = null
 	if(cast_on.mob_biotypes & MOB_UNDEAD)
 		if(cast_on.mind?.has_antag_datum(/datum/antagonist/vampire/lord))
 			cast_on.visible_message(span_warning("[cast_on] overpowers being unmade!"), span_greentext("I overpower being unmade!"))

@@ -192,3 +192,6 @@
 		atom_break(damage_type)
 		return TRUE
 	return FALSE
+
+/atom/proc/drill_act(dirll_power)
+	return

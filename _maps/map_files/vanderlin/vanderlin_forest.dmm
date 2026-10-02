@@ -560,10 +560,7 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "dt" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_mountain-mountain";
-	aportalid = "vanderlin-forest_mountain-forest"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/forest_mountain,
 /turf/open/floor/dirt/road,
 /area/under/cave)
 "dv" = (
@@ -3128,10 +3125,7 @@
 /turf/closed/wall/mineral/decowood,
 /area/indoors/wilderness/tavern)
 "sl" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_town-town";
-	aportalid = "vanderlin-forest_town-forest"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/forest_basin,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
 "sp" = (
@@ -8096,10 +8090,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/tavern)
 "Uc" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-bog";
-	aportalid = "vanderlin-forest_bog-forest"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/forest_bog,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
 "Ud" = (

@@ -23,6 +23,7 @@ const LABELS = [
   "Medical",
   "Interface",
   "Mapping",
+  "Sprites",
   "Other",
 ]
 

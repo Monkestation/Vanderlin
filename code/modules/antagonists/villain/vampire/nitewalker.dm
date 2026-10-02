@@ -34,6 +34,7 @@
 /datum/antagonist/vampire/lord/nitewalker
 	name = "The Nitewarden"
 	antag_hud_type = ANTAG_HUD_NITEWARDEN
+	antag_hud_name = "nitewarden"
 	confess_lines = list(
 		"HE KNOWS ALL!!",
 		"SILVER STILL STALKS THE NITE!!",

@@ -130,10 +130,13 @@
 	var/list/mapping = list()
 	for(var/rpath in subtypesof(/datum/infusion_recipe))
 		var/datum/infusion_recipe/r = new rpath
+		if(!istype(infusion_target, r.target_type))
+			qdel(r)
+			continue
 		opts[r.name] = rpath
 		mapping[rpath] = r
 	if(!opts.len)
-		to_chat(user, span_warning("No infusion recipes available."))
+		to_chat(user, span_warning("No infusion recipes available for [infusion_target]."))
 		for(var/rpath in mapping)
 			qdel(mapping[rpath])
 		return

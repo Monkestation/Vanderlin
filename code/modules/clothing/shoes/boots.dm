@@ -303,7 +303,8 @@
 	desc = "Plate boots. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizoboots"
 	item_state = "zizoboots"
-	smeltresult = /obj/item/ingot/avantyne
+	melting_material = /datum/material/avantyne
+	melt_amount = 100
 	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/shoes/boots/armor/inhumen/matthios

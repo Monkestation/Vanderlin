@@ -49,7 +49,6 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_NONHERETICAL
 	blacklisted_species = list(SPEC_ID_TRITON, SPEC_ID_HARPY, SPEC_ID_SNOW_ELF, SPEC_ID_HALF_SNOW_ELF)
 	outfit = /datum/outfit/courtphys/male

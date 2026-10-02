@@ -293,8 +293,8 @@
 	icon_state = "zizoshield"
 	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_DARKSTEEL
 	sellprice = 0
-	smeltresult = /obj/item/ingot/avantyne
-	melting_material = null
+	melting_material = /datum/material/avantyne
+	melt_amount = 100
 	design_chosen = FALSE
 	item_weight = 4 KILOGRAMS
 

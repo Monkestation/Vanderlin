@@ -12,7 +12,7 @@
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	smeltresult = null
-
+	flags_inv = HIDEHANDS
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/gloves/maille
 	prevent_crits = ALL_EXCEPT_BLUNT
