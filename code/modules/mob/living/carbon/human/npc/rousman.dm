@@ -68,16 +68,12 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	icon_state = "rousman_chest"
 /obj/item/bodypart/chest/rousman/update_icon_dropped()
 	return
-/obj/item/bodypart/chest/rousman/get_limb_icon(dropped, hideaux = FALSE)
-	return
 
 /obj/item/bodypart/l_arm/rousman
 	dismemberable = 1
 	icon = 'icons/roguetown/mob/monster/rousman.dmi'
 	icon_state = "rousman_l_arm"
 /obj/item/bodypart/l_arm/rousman/update_icon_dropped()
-	return
-/obj/item/bodypart/l_arm/rousman/get_limb_icon(dropped, hideaux = FALSE)
 	return
 
 /obj/item/bodypart/r_arm/rousman
@@ -86,16 +82,12 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	icon_state = "rousman_r_arm"
 /obj/item/bodypart/r_arm/rousman/update_icon_dropped()
 	return
-/obj/item/bodypart/r_arm/rousman/get_limb_icon(dropped, hideaux = FALSE)
-	return
 
 /obj/item/bodypart/r_leg/rousman
 	dismemberable = 1
 	icon = 'icons/roguetown/mob/monster/rousman.dmi'
 	icon_state = "rousman_r_leg"
 /obj/item/bodypart/r_leg/rousman/update_icon_dropped()
-	return
-/obj/item/bodypart/r_leg/rousman/get_limb_icon(dropped, hideaux = FALSE)
 	return
 
 /obj/item/bodypart/l_leg/rousman
@@ -104,17 +96,12 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	icon_state = "rousman_l_leg"
 /obj/item/bodypart/l_leg/rousman/update_icon_dropped()
 	return
-/obj/item/bodypart/l_leg/rousman/get_limb_icon(dropped, hideaux = FALSE)
-	return
 /////////////////////////////////////////////////////////////////////////////
 
 /obj/item/bodypart/head/rousman
 	sellprice = 5
 
 /obj/item/bodypart/head/rousman/update_icon_dropped()
-	return
-
-/obj/item/bodypart/head/rousman/get_limb_icon(dropped, hideaux = FALSE)
 	return
 
 /obj/item/bodypart/head/rousman/getonmobprop(tag)
@@ -157,11 +144,37 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		TRAIT_INHUMENCAMP,
 		TRAIT_NOMOOD,
 		TRAIT_NOHUNGER,
+		TRAIT_TINY,
 	)
 
-	no_equip = list(ITEM_SLOT_SHIRT, ITEM_SLOT_MASK, ITEM_SLOT_GLOVES, ITEM_SLOT_SHOES, ITEM_SLOT_PANTS)
-	offset_features_m = list(OFFSET_HANDS = list(0,-4), OFFSET_NECK = list(0,-4), OFFSET_CLOAK = list(0,-5), OFFSET_BACK = list(0,-4))
-	offset_features_f = list(OFFSET_HANDS = list(0,-4), OFFSET_NECK = list(0,-4), OFFSET_CLOAK = list(0,-5), OFFSET_BACK = list(0,-4))
+	limbs_icon_m = 'icons/roguetown/mob/monster/rousman.dmi'
+	limbs_icon_f = 'icons/roguetown/mob/monster/rousman.dmi'
+
+	custom_id = "dwarf"
+	custom_clothes = TRUE
+
+	swap_male_clothes = TRUE
+
+	offset_features_f = list(
+		OFFSET_RING = list(0,-4),\
+		OFFSET_GLOVES = list(0,0),\
+		OFFSET_WRISTS = list(0,0),\
+		OFFSET_HANDS = list(0,-4),\
+		OFFSET_CLOAK = list(0,0),\
+		OFFSET_FACEMASK = list(0,-6),\
+		OFFSET_HEAD = list(0,-5),\
+		OFFSET_FACE = list(0,0),\
+		OFFSET_BELT = list(0,0),\
+		OFFSET_BACK = list(0,-5),\
+		OFFSET_NECK = list(0,-5),\
+		OFFSET_MOUTH = list(0,-5),\
+		OFFSET_PANTS = list(0,0),\
+		OFFSET_SHIRT = list(0,0),\
+		OFFSET_ARMOR = list(0,0),\
+		OFFSET_UNDIES = list(0,0),\
+	)
+
+	no_equip = list()
 	dam_icon_f = null
 	dam_icon_m = null
 	damage_overlay_type = ""
@@ -184,7 +197,16 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 		ORGAN_SLOT_STOMACH = /obj/item/organ/stomach,
 		ORGAN_SLOT_APPENDIX = /obj/item/organ/appendix,
 		ORGAN_SLOT_GUTS = /obj/item/organ/guts,
+		ORGAN_SLOT_HORNS = /obj/item/organ/horns/rousman,
+		ORGAN_SLOT_TAIL = /obj/item/organ/tail/rousman,
 	)
+
+
+	customizers = list(
+		/datum/customizer/organ/tail/rousman,
+		/datum/customizer/bodypart_feature/face_detail,
+	)
+
 
 /datum/species/rousman/random_character(mob/living/carbon/human/species/rousman/target_mob)
 	if(istype(target_mob) && target_mob.randomize_rous_name)
