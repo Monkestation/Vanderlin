@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useBackend } from '../backend';
-import { Button, LabeledList, Section, Tabs } from 'tgui-core/components';
+import { Button, LabeledList, Section, Stack, Tabs } from 'tgui-core/components';
 import { Window } from '../layouts';
 
 type Data = {
+  preview_image: string;
   character_name: string;
   pronouns: string;
   age: string;
@@ -54,6 +55,7 @@ export const CharacterSheet = () => {
   const { data, act } = useBackend<Data>();
   const [currentTab, setCurrentTab] = useState('identity');
   const {
+    preview_image = '',
     character_name = 'Unnamed',
     pronouns = '',
     age = '',
@@ -98,8 +100,38 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={480} height={780} title="Who Are You?">
+    <Window width={480} height={860} title="Who Are You?">
       <Window.Content>
+        <Section>
+          <Stack>
+            <Stack.Item>
+              <Button
+                icon="chevron-left"
+                onClick={() => act('rotate_preview', { way: 'left' })}
+              />
+            </Stack.Item>
+            <Stack.Item grow>
+              {preview_image && (
+                <img
+                  src={
+'data:image/png;base64,'
+ + preview_image}
+                  style={{
+                    display: 'block',
+                    margin: '0 auto',
+                    imageRendering: 'pixelated',
+                  }}
+                />
+              )}
+            </Stack.Item>
+            <Stack.Item>
+              <Button
+                icon="chevron-right"
+                onClick={() => act('rotate_preview', { way: 'right' })}
+              />
+            </Stack.Item>
+          </Stack>
+        </Section>
         <Tabs>
           <Tabs.Tab
             selected={currentTab === 'identity'}

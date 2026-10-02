@@ -1,5 +1,6 @@
 /datum/character_sheet
 	var/mob/dead/new_player/owner
+	var/preview_dir = SOUTH
 
 /datum/character_sheet/New(mob/dead/new_player/owner)
 	. = ..()
@@ -18,6 +19,14 @@
 		ui = new(user, src, "CharacterSheet")
 		ui.open()
 
+/datum/character_sheet/proc/render_preview(datum/preferences/prefs)
+	var/mob/living/carbon/human/dummy/mannequin = generate_or_wait_for_human_dummy("vanderlin_ui_preview")
+	prefs.apply_prefs_to(mannequin, TRUE)
+	mannequin.dir = preview_dir
+	var/result = icon2base64(getFlatIcon(mannequin))
+	unset_busy_human_dummy("vanderlin_ui_preview")
+	return result
+
 /datum/character_sheet/ui_data(mob/user)
 	var/list/data = list()
 	if(!owner)
@@ -26,6 +35,7 @@
 	if(!owner_client || !owner_client.prefs)
 		return data
 	var/datum/preferences/prefs = owner_client.prefs
+	data["preview_image"] = render_preview(prefs)
 	data["character_name"] = prefs.read_preference(/datum/preference/text/real_name) || "Unnamed"
 	data["pronouns"] = prefs.read_preference(/datum/preference/choiced/pronouns)
 	data["age"] = prefs.read_preference(/datum/preference/choiced/age)
@@ -98,6 +108,21 @@
 	switch(action)
 		if("close")
 			ui.close()
+			return TRUE
+		if("rotate_preview")
+			var/list/cycle = list(SOUTH, WEST, NORTH, EAST)
+			var/current_index = cycle.Find(preview_dir)
+			if(!current_index)
+				current_index = 1
+			if(params["way"] == "left")
+				current_index--
+				if(current_index < 1)
+					current_index = length(cycle)
+			else
+				current_index++
+				if(current_index > length(cycle))
+					current_index = 1
+			preview_dir = cycle[current_index]
 			return TRUE
 		if("edit_field")
 			if(!owner)
