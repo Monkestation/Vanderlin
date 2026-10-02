@@ -28,6 +28,13 @@
 #define ACCESS_CAPTAIN "captain"
 #define ACCESS_GATE "gate"
 
+// Gallowband
+#define ACCESS_GALLOWBAND "gallowband"
+#define ACCESS_GALLOWBAND_SECURE "gallowband_secure"
+#define ACCESS_GALLOWBAND_HERSIR "gallowband_hersir"
+#define ACCESS_GALLOWBAND_WARDEN "gallowband_warden"
+#define ACCESS_GALLOWBAND_GOTHI "gallowband_gothi"
+
 // Church
 #define ACCESS_CHURCH "church"
 #define ACCESS_PRIEST "priest"

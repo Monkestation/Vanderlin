@@ -101,6 +101,6 @@
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/key/forrestgarrison = 1,
+		/obj/item/storage/keyring/gallowband/warden = 1,
 		/obj/item/signal_horn/ambush = 1
 	)
