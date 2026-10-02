@@ -230,10 +230,10 @@
 			head = /obj/item/clothing/head/helmet/heavy/inhumen/baotha
 			mask = /obj/item/clothing/face/spectacles/sglasses
 			neck = /obj/item/clothing/neck/gorget
-			armor = /obj/item/clothing/armor/plate
-			gloves = /obj/item/clothing/gloves/plate
-			pants = /obj/item/clothing/pants/platelegs
-			shoes = /obj/item/clothing/shoes/boots/armor
+			armor = /obj/item/clothing/armor/plate/full/inhumen/baotha
+			gloves = /obj/item/clothing/gloves/plate/inhumen/baotha
+			pants = /obj/item/clothing/pants/platelegs/inhumen/baotha
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/baotha
 			beltr = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
 			beltl = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
