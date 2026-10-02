@@ -26,7 +26,7 @@
 /area/under/cave)
 "bI" = (
 /obj/structure/flora/grass/bush_meagre/tundra,
-/turf/open,
+/turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
 "bZ" = (
 /turf/open/floor/snow{
@@ -131,7 +131,7 @@
 /turf/open/water/river,
 /area/outdoors/mountains/anvil/snowyforest)
 "gf" = (
-/turf/open,
+/turf/open/openspace,
 /area/under/cave)
 "gh" = (
 /obj/structure/flora/grass/bush_meagre/tundra,
@@ -405,7 +405,7 @@
 	},
 /area/outdoors/mountains/anvil/peak)
 "pd" = (
-/turf/open,
+/turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
 "pw" = (
 /obj/effect/landmark/quest_spawner/medium,
@@ -635,7 +635,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/mountains/anvil/snowyforest)
 "xE" = (
-/turf/open,
+/turf/open/openspace,
 /area)
 "xK" = (
 /obj/structure/fluff/nest{
@@ -870,7 +870,7 @@
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/peak)
 "Gc" = (
-/turf/open,
+/turf/open/openspace,
 /area/outdoors/mountains/anvil/peak)
 "Gd" = (
 /obj/structure/flora/newtree/snow,
@@ -884,7 +884,7 @@
 /area/outdoors/mountains/anvil/snowyforest)
 "Go" = (
 /obj/effect/waterfall,
-/turf/open,
+/turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
 "Gp" = (
 /turf/open/floor/naturalstone,
