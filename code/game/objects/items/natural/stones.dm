@@ -416,6 +416,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 				S.set_up(1, 1, front)
 				S.start()
 
+/obj/item/natural/rock/drill_act(drill_power)
+	take_damage(drill_power, BCLASS_PIERCE)
+
 /obj/item/natural/rock/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.cmode)
 		return NONE

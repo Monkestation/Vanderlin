@@ -103,6 +103,16 @@
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/chickenleg
 	item_weight = 200 GRAMS
 
+/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/egg_washed
+	name = "egg washed bird meat"
+	icon = 'icons/obj/food/raw/raw_deep_fried.dmi'
+	icon_state = "chickencutlet_washed"
+
+/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/coated
+	name = "crumb coated bird meat"
+	icon = 'icons/obj/food/raw/raw_deep_fried.dmi'
+	icon_state = "chickencutlet_coated"
+
 /*	........   Fish sounds   ................ */
 /obj/item/reagent_containers/food/snacks/fish
 	chopping_sound = TRUE

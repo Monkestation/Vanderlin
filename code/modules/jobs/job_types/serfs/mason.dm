@@ -2,13 +2,13 @@
 /datum/attribute_holder/sheet/job/mason
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_INTELLIGENCE = 1,
+		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/labor/mining = 30,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/masonry = 40,
@@ -29,7 +29,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 6
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 

@@ -36,7 +36,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	can_have_apprentices = TRUE
-	bypass_lastclass = TRUE
 	starting_wage = 30
 
 	allowed_races = RACES_PLAYER_NONEXOTIC

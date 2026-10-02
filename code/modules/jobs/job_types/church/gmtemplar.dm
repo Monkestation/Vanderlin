@@ -29,9 +29,8 @@
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_GMTEMPLAR
 	factions = list(FACTION_TOWN)
-	total_positions = 1
-	spawn_positions = 1
-	bypass_lastclass = TRUE
+	total_positions = 0
+	spawn_positions = 0
 	cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED

@@ -76,9 +76,14 @@
 		return FALSE
 	rotations_per_minute = min(rpm, 32)
 	operating = rotations_per_minute > 0
+	var/current_turf = get_turf(src)
 	if(!operating)
-		for(var/atom/movable/movable in loc)
+		for(var/atom/movable/movable in current_turf)
 			stop_conveying(movable)
+	else
+		// If we're on, start conveying so moveloops on our tile can be refreshed if they stopped for some reason
+		for(var/atom/movable/movable in get_turf(src))
+			start_conveying(movable)
 	update_appearance()
 	return TRUE
 
