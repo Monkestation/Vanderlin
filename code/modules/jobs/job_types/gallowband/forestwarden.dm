@@ -46,7 +46,7 @@
 	)
 
 	outfit = /datum/outfit/forestwarden
-	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/forest)
+	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/gallowband, /datum/action/cooldown/spell/undirected/list_target/convert_role/servant/gallowband)
 	give_bank_account = 45
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
