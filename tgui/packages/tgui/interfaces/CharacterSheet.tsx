@@ -1,5 +1,5 @@
 import { useBackend } from '../backend';
-import { Button, LabeledList, Section, Stack } from 'tgui-core/components';
+import { Box, Button, LabeledList, Section, Stack } from 'tgui-core/components';
 import { Window } from '../layouts';
 
 type Data = {
@@ -50,6 +50,15 @@ const editStyle = {
   textDecoration: 'underline dotted',
 };
 
+const boxBorder = {
+  border: '1px solid rgba(255, 255, 255, 0.35)',
+};
+
+const dividerStyle = {
+  borderLeft: '1px solid rgba(255, 255, 255, 0.35)',
+  paddingLeft: '8px',
+};
+
 export const CharacterSheet = () => {
   const { data, act } = useBackend<Data>();
   const {
@@ -98,19 +107,26 @@ export const CharacterSheet = () => {
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
   return (
-    <Window width={760} height={820} title="Who Are You?">
+    <Window width={900} height={820} title="Who Are You?">
       <Window.Content scrollable>
-        <Section>
-          <Stack>
-            <Stack.Item>
-              <Button
-                icon="chevron-left"
-                onClick={() => act('rotate_preview', { way: 'left' })}
-              />
-            </Stack.Item>
-            <Stack.Item grow>
-              <Stack vertical align="center">
+        <Stack>
+          <Stack.Item style={{ width: 
+'320px'
+ }}>
+            <Box style={boxBorder} p={1} mb={1}>
+              <Box bold mb={1} style={{ textAlign: 
+'center'
+ }}>
+                Просмотр спрайта персонажа
+              </Box>
+              <Stack justify="center" align="center">
                 <Stack.Item>
+                  <Button
+                    icon="chevron-left"
+                    onClick={() => act('rotate_preview', { way: 'left' })}
+                  />
+                </Stack.Item>
+                <Stack.Item mx={1}>
                   {preview_image && (
                     <img
                       src={
@@ -125,71 +141,93 @@ export const CharacterSheet = () => {
                 </Stack.Item>
                 <Stack.Item>
                   <Button
+                    icon="chevron-right"
+                    onClick={() => act('rotate_preview', { way: 'right' })}
+                  />
+                </Stack.Item>
+              </Stack>
+              <Stack justify="center" mt={1}>
+                <Stack.Item grow basis={0}>
+                  <Button
+                    fluid
                     onClick={() => edit('species')}
                   >
-                    Species: {species}
+                    Раса
+                  </Button>
+                </Stack.Item>
+                <Stack.Item grow basis={0}>
+                  <Button
+                    fluid
+                    onClick={() => act('open_body_markings')}
+                  >
+                    Детали персонажа
                   </Button>
                 </Stack.Item>
               </Stack>
-            </Stack.Item>
-            <Stack.Item>
-              <Button
-                icon="chevron-right"
-                onClick={() => act('rotate_preview', { way: 'right' })}
-              />
-            </Stack.Item>
-          </Stack>
-        </Section>
+              <Box mt={1} style={{ textAlign: 
+'center'
+ }} color="label">
+                {species}
+              </Box>
+            </Box>
 
-        <Stack>
-          <Stack.Item grow basis={0}>
-            <Section title="Личность" fill>
-              <LabeledList>
-                <LabeledList.Item label="Имя">
-                  <span style={editStyle} onClick={() => edit('real_name')}>{character_name}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Возраст">
-                  <span style={editStyle} onClick={() => edit('age')}>{age}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Местоимение">
-                  <span style={editStyle} onClick={() => edit('pronouns')}>{pronouns}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Происхождение">
-                  <span style={editStyle} onClick={() => edit('culture')}>{culture}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Религия">
-                  <span style={editStyle} onClick={() => edit('faith')}>{faith}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Покровитель">
-                  <span style={editStyle} onClick={() => edit('selected_patron')}>{patron}</span>
-                </LabeledList.Item>
-              </LabeledList>
-            </Section>
+            <Box style={boxBorder} p={1}>
+              <Stack>
+                <Stack.Item grow basis={0}>
+                  <Box bold mb={1} style={{ textAlign: 
+'center'
+ }}>
+                    Личность
+                  </Box>
+                  <LabeledList>
+                    <LabeledList.Item label="Имя">
+                      <span style={editStyle} onClick={() => edit('real_name')}>{character_name}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Возраст">
+                      <span style={editStyle} onClick={() => edit('age')}>{age}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Местоим.">
+                      <span style={editStyle} onClick={() => edit('pronouns')}>{pronouns}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Происх.">
+                      <span style={editStyle} onClick={() => edit('culture')}>{culture}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Религия">
+                      <span style={editStyle} onClick={() => edit('faith')}>{faith}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Покров.">
+                      <span style={editStyle} onClick={() => edit('selected_patron')}>{patron}</span>
+                    </LabeledList.Item>
+                  </LabeledList>
+                </Stack.Item>
+                <Stack.Item grow basis={0} style={dividerStyle}>
+                  <Box bold mb={1} style={{ textAlign: 
+'center'
+ }}>
+                    Тело
+                  </Box>
+                  <LabeledList>
+                    <LabeledList.Item label="Кожа">
+                      <span style={editStyle} onClick={() => edit('skin_tone')}>{skin_tone}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Детали">
+                      <span style={{ ...editStyle, color: detail_color }} onClick={() => edit('detail_color')}>{detail_color}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Тату">
+                      <Button
+                        onClick={() => act('open_body_markings')}
+                      >
+                        ({markings_count})
+                      </Button>
+                    </LabeledList.Item>
+                  </LabeledList>
+                </Stack.Item>
+              </Stack>
+            </Box>
           </Stack.Item>
-          <Stack.Item grow basis={0}>
-            <Section title="Тело" fill>
-              <LabeledList>
-                <LabeledList.Item label="Цвет кожи">
-                  <span style={editStyle} onClick={() => edit('skin_tone')}>{skin_tone}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Цвет деталей">
-                  <span style={{ ...editStyle, color: detail_color }} onClick={() => edit('detail_color')}>{detail_color}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Тату/Маркировки">
-                  <Button
-                    onClick={() => act('open_body_markings')}
-                  >
-                    Открыть ({markings_count})
-                  </Button>
-                </LabeledList.Item>
-              </LabeledList>
-            </Section>
-          </Stack.Item>
-        </Stack>
 
-        <Stack>
-          <Stack.Item grow basis={0}>
-            <Section title="Голос" fill>
+          <Stack.Item grow>
+            <Section title="Голос" style={boxBorder} mb={1}>
               <LabeledList>
                 <LabeledList.Item label="Цвет голоса">
                   <span style={{ ...editStyle, color: voice_color }} onClick={() => edit('voice_color')}>{voice_color}</span>
@@ -205,9 +243,8 @@ export const CharacterSheet = () => {
                 </LabeledList.Item>
               </LabeledList>
             </Section>
-          </Stack.Item>
-          <Stack.Item grow basis={0}>
-            <Section title="Игровые функции" fill>
+
+            <Section title="Игровые функции" style={boxBorder} mb={1}>
               <LabeledList>
                 <LabeledList.Item label="Доминирующая рука">
                   <span style={editStyle} onClick={() => edit('domhand')}>{dominant_hand}</span>
@@ -227,81 +264,104 @@ export const CharacterSheet = () => {
                 </LabeledList.Item>
               </LabeledList>
             </Section>
+
+            <Stack>
+              <Stack.Item grow basis={0}>
+                <Section title="IC Описания" fill style={boxBorder}>
+                  <LabeledList>
+                    <LabeledList.Item label="Хэдшот">
+                      <span style={editStyle} onClick={() => edit('headshot_link')}>{headshot_link || 
+'None'
+}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Флэйвор">
+                      <span style={editStyle} onClick={() => edit('flavortext')}>{flavortext || 
+'None'
+}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="NSFW">
+                      <span style={editStyle} onClick={() => edit('nsfw_flavor')}>{nsfw_flavor}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Слухи">
+                      <Button
+                        onClick={() => act('open_rumors')}
+                      >
+                        ({rumors_count})
+                      </Button>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Nudeshot">
+                      <span style={editStyle} onClick={() => edit('nudeshot_link')}>{nudeshot_link || 
+'None'
+}</span>
+                    </LabeledList.Item>
+                  </LabeledList>
+                </Section>
+              </Stack.Item>
+              <Stack.Item grow basis={0}>
+                <Section title="OOC Описания" fill style={boxBorder}>
+                  <LabeledList>
+                    <LabeledList.Item label="Заметки">
+                      <span style={editStyle} onClick={() => edit('ooc_notes')}>{ooc_notes || 
+'None'
+}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Доп. ссылка">
+                      <span style={editStyle} onClick={() => edit('ooc_extra_link')}>{ooc_extra_link || 
+'None'
+}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="ERP">
+                      <span style={editStyle} onClick={() => edit('erp_preferences')}>{erp_preferences || 
+'None'
+}</span>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Галерея">
+                      <Button
+                        onClick={() => edit('character_gallery')}
+                      >
+                        ({gallery_count})
+                      </Button>
+                    </LabeledList.Item>
+                    <LabeledList.Item label="Сплетни">
+                      <Button
+                        onClick={() => act('open_gossip')}
+                      >
+                        ({gossip_count})
+                      </Button>
+                    </LabeledList.Item>
+                  </LabeledList>
+                </Section>
+              </Stack.Item>
+            </Stack>
+
+            <Stack mt={1}>
+              <Stack.Item grow basis={0}>
+                <Button
+                  fluid
+                  color="good"
+                  icon="save"
+                  onClick={() => act('save_character')}
+                >
+                  Сохранить изменения
+                </Button>
+              </Stack.Item>
+              <Stack.Item grow basis={0}>
+                <Button
+                  fluid
+                  color="bad"
+                  icon="undo"
+                  onClick={() => act('cancel_changes')}
+                >
+                  Отменить изменения
+                </Button>
+              </Stack.Item>
+            </Stack>
           </Stack.Item>
         </Stack>
 
-        <Stack>
+        <Stack mt={1}>
           <Stack.Item grow basis={0}>
-            <Section title="IC Описания" fill>
-              <LabeledList>
-                <LabeledList.Item label="Хэдшот">
-                  <span style={editStyle} onClick={() => edit('headshot_link')}>{headshot_link || 
-'None'
-}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Флэйвор">
-                  <span style={editStyle} onClick={() => edit('flavortext')}>{flavortext || 
-'None'
-}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="NSFW флейвор">
-                  <span style={editStyle} onClick={() => edit('nsfw_flavor')}>{nsfw_flavor}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Слухи">
-                  <Button
-                    onClick={() => act('open_rumors')}
-                  >
-                    Открыть ({rumors_count})
-                  </Button>
-                </LabeledList.Item>
-                <LabeledList.Item label="Nudeshot">
-                  <span style={editStyle} onClick={() => edit('nudeshot_link')}>{nudeshot_link || 
-'None'
-}</span>
-                </LabeledList.Item>
-              </LabeledList>
-            </Section>
-          </Stack.Item>
-          <Stack.Item grow basis={0}>
-            <Section title="OOC Описания" fill>
-              <LabeledList>
-                <LabeledList.Item label="OOC Заметки">
-                  <span style={editStyle} onClick={() => edit('ooc_notes')}>{ooc_notes || 
-'None'
-}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="OOC доп. ссылка">
-                  <span style={editStyle} onClick={() => edit('ooc_extra_link')}>{ooc_extra_link || 
-'None'
-}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="ERP Предпочтения">
-                  <span style={editStyle} onClick={() => edit('erp_preferences')}>{erp_preferences || 
-'None'
-}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Галерея">
-                  <Button
-                    onClick={() => edit('character_gallery')}
-                  >
-                    {gallery_count} image(s)
-                  </Button>
-                </LabeledList.Item>
-                <LabeledList.Item label="Сплетни знати">
-                  <Button
-                    onClick={() => act('open_gossip')}
-                  >
-                    Открыть ({gossip_count})
-                  </Button>
-                </LabeledList.Item>
-              </LabeledList>
-            </Section>
-          </Stack.Item>
-        </Stack>
-
-        <Stack>
-          <Stack.Item grow basis={0}>
-            <Section title="Класс" fill>
+            <Section title="Класс" fill style={boxBorder}>
               <LabeledList>
                 <LabeledList.Item label="Player Quality">{pq}</LabeledList.Item>
                 <LabeledList.Item label="Триумфы">{triumphs}</LabeledList.Item>
@@ -336,7 +396,7 @@ export const CharacterSheet = () => {
             </Section>
           </Stack.Item>
           <Stack.Item grow basis={0}>
-            <Section title="Семья" fill>
+            <Section title="Семья" fill style={boxBorder}>
               <LabeledList>
                 <LabeledList.Item label="Тип семьи">
                   <span style={editStyle} onClick={() => edit('family_mode')}>{family_mode}</span>
@@ -349,29 +409,6 @@ export const CharacterSheet = () => {
                 </LabeledList.Item>
               </LabeledList>
             </Section>
-          </Stack.Item>
-        </Stack>
-
-        <Stack mt={1}>
-          <Stack.Item grow basis={0}>
-            <Button
-              fluid
-              color="good"
-              icon="save"
-              onClick={() => act('save_character')}
-            >
-              Сохранить изменения
-            </Button>
-          </Stack.Item>
-          <Stack.Item grow basis={0}>
-            <Button
-              fluid
-              color="bad"
-              icon="undo"
-              onClick={() => act('cancel_changes')}
-            >
-              Отменить изменения
-            </Button>
           </Stack.Item>
         </Stack>
       </Window.Content>
