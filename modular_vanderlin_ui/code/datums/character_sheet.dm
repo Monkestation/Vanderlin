@@ -109,6 +109,18 @@
 		if("close")
 			ui.close()
 			return TRUE
+		if("save_character")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			owner.client.prefs.save_character()
+			to_chat(owner, span_notice("Character saved."))
+			return TRUE
+		if("cancel_changes")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			owner.client.prefs.load_character(owner.client.prefs.default_slot)
+			to_chat(owner, span_notice("Changes discarded."))
+			return TRUE
 		if("rotate_preview")
 			var/list/cycle = list(SOUTH, WEST, NORTH, EAST)
 			var/current_index = cycle.Find(preview_dir)
