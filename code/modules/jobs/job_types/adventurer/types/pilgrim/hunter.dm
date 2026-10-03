@@ -1,4 +1,4 @@
-/datum/job/advclass/pilgrim/hunter/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/pilgrim/hunter/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
 /datum/attribute_holder/sheet/job/pilgrim/hunter/crossbowandhatch
@@ -43,11 +43,8 @@
 		/datum/attribute/skill/combat/axesmaces = list(10, 30)
 	)
 
-/datum/job/advclass/pilgrim/hunter
-	inherit_parent_title = TRUE
-	should_reset_stats = FALSE
 
-/datum/job/advclass/pilgrim/hunter/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/pilgrim/hunter/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
 

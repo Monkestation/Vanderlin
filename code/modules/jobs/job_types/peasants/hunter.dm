@@ -1,4 +1,4 @@
-/datum/job/advclass/hunter/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/hunter/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
 /datum/attribute_holder/sheet/job/hunter/crossbowandhatch
@@ -43,12 +43,7 @@
 		/datum/attribute/skill/combat/axesmaces = list(10, 30)
 	)
 
-/datum/job/advclass/hunter
-	inherit_parent_title = TRUE
-	should_reset_stats = FALSE
-	factions = list(FACTION_TOWN)
-
-/datum/job/advclass/hunter/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/hunter/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
 
