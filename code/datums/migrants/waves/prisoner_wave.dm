@@ -183,33 +183,10 @@
 	name = "The Prisoners' Convoy"
 	max_spawns = 3
 	shared_wave_type = /datum/migrant_wave/prisoner_convoy
-	downgrade_wave = /datum/migrant_wave/prisoner_convoy_down
 	weight = 45
 	roles = list(
 		/datum/migrant_role/gaoler = 1,
 		/datum/migrant_role/prisoner_guard = 2,
 		/datum/migrant_role/mig_prisoner = 4,
-	)
-	greet_text = "Nobody escapes the rule of Vanderlin's monarchs. Some fled to another kingdom and got caught, they are now on their way back."
-
-/datum/migrant_wave/prisoner_convoy_down
-	name = "The Prisoners' Convoy"
-	shared_wave_type = /datum/migrant_wave/prisoner_convoy
-	downgrade_wave = /datum/migrant_wave/prisoner_convoy_down_two
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/gaoler = 1,
-		/datum/migrant_role/prisoner_guard = 1,
-		/datum/migrant_role/mig_prisoner = 3,
-	)
-	greet_text = "Nobody escapes the rule of Vanderlin's monarchs. Some fled to another kingdom and got caught, they are now on their way back."
-
-/datum/migrant_wave/prisoner_convoy_down_two
-	name = "The Prisoner Convoy"
-	shared_wave_type = /datum/migrant_wave/prisoner_convoy
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/gaoler = 1,
-		/datum/migrant_role/mig_prisoner = 1,
 	)
 	greet_text = "Nobody escapes the rule of Vanderlin's monarchs. Some fled to another kingdom and got caught, they are now on their way back."

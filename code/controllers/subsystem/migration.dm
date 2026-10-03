@@ -13,11 +13,11 @@ SUBSYSTEM_DEF(migrants)
 	var/wave_timer = 0
 
 	/// Time between successful waves
-	var/time_between_waves = 3 MINUTES
+	var/time_between_waves = 1 MINUTES
 	/// Time between failing waves
-	var/time_between_fail_wave = 90 SECONDS
+	var/time_between_fail_wave = 30 SECONDS
 	/// how long waves wait for players
-	var/wave_wait_time = 30 SECONDS
+	var/wave_wait_time = 1 MINUTES
 
 	/// Track waves that have happened
 	var/list/spawned_waves = list()
