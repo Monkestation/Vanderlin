@@ -888,6 +888,30 @@
 	density = FALSE
 	anchored = FALSE
 
+/obj/structure/fluff/clutter/sewing
+    name = "roll of cloth & needle"
+    desc = "A roll of cloth and fiber waiting to be sewn."
+    icon = 'icons/roguetown/misc/structure.dmi'
+    icon_state = "clutter_sewing"
+    density = FALSE
+    anchored = FALSE
+
+/obj/structure/fluff/clutter/tablecloth
+    name = "tablecloth"
+    desc = "A decorative tablecloth depicting the moon."
+    icon = 'icons/roguetown/misc/structure.dmi'
+    icon_state = "tablecloth_moon"
+    density = FALSE
+    anchored = FALSE
+
+/obj/structure/fluff/clutter/tablecloth/sun
+    name = "tablecloth"
+    desc = "A decorative tablecloth depicting the sun."
+    icon = 'icons/roguetown/misc/structure.dmi'
+    icon_state = "tablecloth_sun"
+    density = FALSE
+    anchored = FALSE
+
 /obj/structure/fluff/moonrug
 	name = "moon rug"
 	desc = "A decorative rug depicting the phases of the moon."
@@ -895,6 +919,14 @@
 	icon_state = "moonrug"
 	density = FALSE
 	anchored = FALSE
+
+/obj/structure/fluff/sunrug
+    name = "sun rug"
+    desc = "A decorative rug depicting the sun."
+    icon = 'icons/roguetown/misc/64x64.dmi'
+    icon_state = "sunrug"
+    density = FALSE
+    anchored = FALSE
 
 /obj/structure/fluff/fibermat/square
 	name = "square fiber mat"

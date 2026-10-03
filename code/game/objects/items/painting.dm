@@ -138,3 +138,9 @@
 	desc = "A painting of a lamptern lit vase of flowers."
 	icon_state = "flowerpainting_deployed"
 	stolen_painting = /obj/item/painting/flower
+
+/obj/structure/fluff/walldeco/painting/dawn
+	desc = "A painting of Astrata's radiant dawn."
+	icon_state = "dawnpainting_deployed"
+	stolen_painting = /obj/item/painting/dawn
+
