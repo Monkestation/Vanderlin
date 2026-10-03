@@ -2,7 +2,6 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = 1,
-		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 20,
@@ -17,17 +16,17 @@
 		/datum/attribute/skill/craft/alchemy = 10
 	)
 
-/datum/job/advclass/mercenary/spellsword
+/datum/job/advclass/combat/spellsword
 	title = "Spellsword"
 	tutorial = "A warrior who has dabbled in the arts of magic, you blend swordplay and spellcraft to earn your keep."
 	allowed_races = RACES_PLAYER_ALL
-	outfit = /datum/outfit/mercenary/spellsword
-	category_tags = list(CTAG_MERCENARY)
+	outfit = /datum/outfit/combat/spellsword
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	total_positions = 5
 	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	blacklisted_species = list(SPEC_ID_HALFLING)
-	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
+	exp_types_granted = list(EXP_TYPE_ADVENTURER, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
 	form_points = 7
 	technique_points = 2
@@ -46,13 +45,12 @@
 		/datum/action/cooldown/spell/essence/mend/spell,
 	)
 
-/datum/job/advclass/mercenary/spellsword/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/combat/spellsword/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.merctype = 9
 	spawned.adjust_technique_mastery_points(3, FALSE, TECHNIQUE_IMBUE)
 
-/datum/outfit/mercenary/spellsword
-	name = "Spellsword (Mercenary)"
+/datum/outfit/combat/spellsword
+	name = "Spellsword (Adventurer)"
 	armor = /obj/item/clothing/armor/leather
 	neck = /obj/item/clothing/neck/gorget
 	wrists = /obj/item/clothing/wrists/bracers/leather
@@ -60,8 +58,8 @@
 	gloves = /obj/item/clothing/gloves/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots/leather
-	belt = /obj/item/storage/belt/leather/mercenary
-	beltr = /obj/item/weapon/sword
+	belt = /obj/item/storage/belt/leather
+	beltr = /obj/item/weapon/sword/iron
 	beltl = /obj/item/storage/magebag/poor
 	backl = /obj/item/storage/backpack/satchel
 	scabbards = list(/obj/item/weapon/scabbard/sword)
