@@ -916,36 +916,6 @@
 		devotion.make_acolyte()
 		devotion.grant_to(character)
 
-/datum/special_trait/skeleton
-	name = "Skeleton"
-	greet_text = span_boldwarning("I was... am... afflicted with a curse by a lich that left me without my flesh, but I still retained control of myself... (This is not an antagonist role, expect to be attacked unless wearing something to cover your head.)")
-	allowed_ctags = list(CTAG_PILGRIM)
-	req_text = "Be a Pilgrim."
-	weight = 20
-
-/datum/special_trait/skeleton/on_apply(mob/living/carbon/human/character, silent)
-	character.skeletonize(FALSE)
-	character.skele_look()
-	character.grant_undead_eyes()
-
-	character.mob_biotypes |= MOB_UNDEAD
-	character.dna?.species?.inherent_traits |= TRAIT_NOBLOOD
-	character.dna?.species?.soundpack_m = new /datum/voicepack/skeleton()
-	character.dna?.species?.soundpack_f = new /datum/voicepack/skeleton()
-
-	ADD_TRAIT(character, TRAIT_NOLIMBDISABLE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_EASYDISMEMBER, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_LIMBATTACHMENT, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOHUNGER, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOBREATH, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOPAIN, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_TOXIMMUNE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_SLEEPIMMUNE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_SHOCKIMMUNE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOBLOOD, BE_SPECIAL_TRAIT)
-
-	character.update_body()
-
 /datum/attribute_holder/sheet/job/dark_secrets
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
@@ -959,22 +929,22 @@
 /datum/special_trait/dark_secrets
 	name = "Dark Secrets"
 	greet_text = span_notice("You have a dark secret, hidden power you have concealed for most of your life. Is now the time to let it out?")
-	req_text = "Be an Apostate. Don't be Monarch."
-	allowed_patrons = list(/datum/patron/godless/autotheist, /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/godless, /datum/patron/godless/naivety)
+	req_text = "Worship an Archdevil."
+	allowed_patrons = list(/datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/leviathan)
+	restricted_traits = list(TRAIT_BLOOD_MAGE, TRAIT_BLOOD_SORCERER, TRAIT_BLOOD_STUDENT, TRAIT_VITAE_USER)
 	weight = 15 //Should be fine.
-	restricted_jobs = list(/datum/job/lord, /datum/job/monk, /datum/job/priest, /datum/job/templar)
 
 /datum/special_trait/dark_secrets/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/dark_secrets)
 	character.add_spell(/datum/action/cooldown/spell/status/blood_sight, silent = TRUE, mastery_spell = TRUE)
 	character.add_spell(/datum/action/cooldown/spell/projectile/blood_steal, silent = TRUE, mastery_spell = TRUE)
 	character.grant_language(/datum/language/sanguine)
-	character.adjust_technique_mastery_points(2)
-	character.adjust_form_mastery_points(3, specific_form = FORM_BLOOD)
+	character.adjust_technique_mastery_points(3)
+	character.adjust_form_mastery_points(4, specific_form = FORM_BLOOD)
 	ADD_TRAIT(character, TRAIT_BLOOD_STUDENT, BE_SPECIAL_TRAIT)
 	character.hud_used?.set_bloody_bloodpool()
 	character.adjust_bloodpool()
-	to_chat(character, span_bloody("I have available innate spellpoints."))
+	to_chat(character, SPAN_GOD_ARCHDEVILS("I have available innate spellpoints."))
 
 /datum/special_trait/overcompensating
 	name = "Overcompensating"

@@ -30,7 +30,8 @@
 		/turf/closed/mineral/cinnabar/moss = 5,
 		/turf/closed/mineral/gold/moss = 15,
 		/turf/closed/mineral/iron/moss = 25,
-		/turf/closed/mineral/silver/moss = 15
+		/turf/closed/mineral/silver/moss = 15,
+		/turf/closed/mineral/bloodstone/moss = 5
 	)
 
 /turf/closed/mineral/copper/moss
@@ -48,6 +49,10 @@
 /turf/closed/mineral/gold/moss
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_moss.dmi', 'icons/turf/mining/mining_moss.dmi')
 	icon_state = MAP_SWITCH("mineral", "gold_moss")
+
+/turf/closed/mineral/bloodstone/moss
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_moss.dmi', 'icons/turf/mining/mining_moss.dmi')
+	icon_state = MAP_SWITCH("mineral", "gem_moss")
 
 /turf/closed/mineral/salt/moss
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_moss.dmi', 'icons/turf/mining/mining_moss.dmi')

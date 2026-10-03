@@ -146,6 +146,7 @@
 /area/indoors/town/vault
 	name = "vault"
 	icon_state = "vault"
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | NO_TELEPORT
 
 /area/indoors/town/vault/can_craft_here()
 	return FALSE

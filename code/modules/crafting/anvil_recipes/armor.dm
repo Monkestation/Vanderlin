@@ -1235,12 +1235,47 @@
 	craftdiff = 5
 */
 
+// --------- BLOODSTEEL -----------
+/datum/anvil_recipe/armor/bloodsteel
+	required_material = /obj/item/ingot/bloodsteel
+	craftdiff = 6 // this is the good stuff
+	abstract_type = /datum/anvil_recipe/armor/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/chaincoif
+	name = "Bloodsteel Chain Coif"
+	created_item = /obj/item/clothing/neck/chaincoif/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/platechest
+	name = "Bloodsteel Plate Armor"
+	additional_items = list(/obj/item/ingot/bloodsteel = 3)
+	created_item = /obj/item/clothing/armor/plate/blkknight/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/platelegs
+	name = "Bloodsteel Plate Chausses"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/clothing/pants/platelegs/blk/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/helmet
+	name = "Bloodsteel Great Helm"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/clothing/head/helmet/visored/blkknight/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/plategloves
+	name = "Bloodsteel Plate Gauntlets"
+	created_item = /obj/item/clothing/gloves/plate/blk/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/plateboots
+	name = "Bloodsteel Plate Boots"
+	created_item = /obj/item/clothing/shoes/boots/armor/blkknight/bloodsteel
+
+
+///////////////////////////////////////////////
+
 /datum/anvil_recipe/armor/anklets
 	name = "golden anklets"
 	required_material = /obj/item/ingot/gold
 	created_item = /obj/item/clothing/shoes/anklets
 	craftdiff = 2
-
 
 /datum/anvil_recipe/armor/grandmaster_plate
 	name = "holy silver plate"

@@ -32,7 +32,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
 

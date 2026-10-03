@@ -21,6 +21,14 @@
 	spell_flags = SPELL_UNETCHABLE
 	status_effect = /datum/status_effect/buff/coagulate
 
+/datum/action/cooldown/spell/status/coagulate/is_valid_target(atom/cast_on)
+	. = ..()
+	if(!ishuman(cast_on))
+		return FALSE
+	var/mob/living/carbon/human/target = cast_on
+	if(HAS_TRAIT(target, TRAIT_NOBLOOD))
+		return FALSE
+
 /datum/status_effect/buff/coagulate
 	id = "coagulate_buff"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/coagulate

@@ -87,7 +87,7 @@ SUBSYSTEM_DEF(job)
 
 	if(!latejoin)
 		if(player.client)
-			if(job.bypass_lastclass)
+			if(!job.block_sequential_rounds)
 				player.client.prefs.lastclass = null
 			else
 				player.client.prefs.lastclass = job.title
@@ -157,8 +157,8 @@ SUBSYSTEM_DEF(job)
 		JobDebug("Eligibility failed: patron, Player: [player], Job: [job.title]")
 		return FALSE
 
-	if((player_prefs.lastclass == job.title) && (!job.bypass_lastclass))
-		JobDebug("Eligibility failed: lastclass, Player: [player], Job: [job.title]")
+	if((player_prefs.lastclass == job.title) && (job.block_sequential_rounds))
+		JobDebug("Eligibility failed: sequential round, Player: [player], Job: [job.title]")
 		return FALSE
 
 	if(job.banned_leprosy && is_misc_banned(player.client.ckey, BAN_MISC_LEPROSY))
@@ -877,7 +877,7 @@ SUBSYSTEM_DEF(job)
 	if(!job.prefs_species_check(player_prefs))
 		return
 
-	if((player_prefs.lastclass == job.title) && (!job.bypass_lastclass))
+	if((player_prefs.lastclass == job.title) && (job.block_sequential_rounds))
 		return
 
 	if(job.banned_leprosy && is_misc_banned(player.client.ckey, BAN_MISC_LEPROSY))

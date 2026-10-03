@@ -39,7 +39,6 @@
 	display_order = JDO_CLINICAPPRENTICE
 	total_positions = 4
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 	give_bank_account = 5
 	knows_the_town = TRUE

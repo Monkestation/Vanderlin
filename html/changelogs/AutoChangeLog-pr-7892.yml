@@ -1,0 +1,4 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Bug Reports generated in-game can now be tagged as a Sprites issue."

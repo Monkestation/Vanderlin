@@ -1,0 +1,4 @@
+author: "Galaxybird"
+delete-after: True
+changes:
+  - rscadd: "Added the ability to designate another character as a sibling in Family preferences"

@@ -44,7 +44,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 5
 	spawn_positions = 5
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 

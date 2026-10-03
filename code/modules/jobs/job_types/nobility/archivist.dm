@@ -10,11 +10,10 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	advclass_cat_rolls = list(CTAG_ARCHIVIST = 20)
 	give_bank_account = 100
@@ -58,6 +57,7 @@
 		TRAIT_NOBLE_BLOOD,
 		TRAIT_NOBLE_POWER,
 		TRAIT_VIRGIN,
+		TRAIT_IDENTIFY_DEVIL_MARKS,
 	)
 
 /datum/job/advclass/archivist

@@ -9,7 +9,6 @@
 	total_positions = 20
 	spawn_positions = 20
 	banned_leprosy = FALSE
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 

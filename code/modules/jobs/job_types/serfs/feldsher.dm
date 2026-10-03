@@ -54,7 +54,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	trainable_skills = list(/datum/attribute/skill/misc/medicine = 0.1)
 	max_apprentices = 2

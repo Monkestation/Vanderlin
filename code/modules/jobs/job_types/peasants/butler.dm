@@ -38,7 +38,6 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 	starting_wage = 35
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)

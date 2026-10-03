@@ -647,13 +647,20 @@
 		return
 
 	if(src == M)
-		if(has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
-			to_chat(src, "<span class='notice'>I attempt to remove the durathread strand from around my neck.</span>")
+		if(has_status_effect(/datum/status_effect/debuff/blood_choke/herald))
+			to_chat(src, span_bloody("I attempt to free myself from the grip of blood magic."))
 			if(do_after(src, 3.5 SECONDS, src))
-				to_chat(src, "<span class='notice'>I successfully remove the durathread strand.</span>")
-				remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
+				to_chat(src, span_bloody("I successfully escape death's grasp!"))
+				remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
 			return
 		check_for_injuries(M)
+		return
+
+	if(has_status_effect(/datum/status_effect/debuff/blood_choke/herald))
+		visible_message(span_bloody("[M] attempts to free [src] from the grip of blood magic."), span_bloody("[M] is trying to free me from the grip of blood magic."))
+		if(do_after(src, 3.5 SECONDS, src))
+			visible_message(span_bloody("[M] successfully frees [src] from the grip of blood magic."), span_bloody("[M] has freed me from death's grasp!"))
+			remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
 		return
 
 	if(wear_armor)
@@ -763,13 +770,6 @@
 				toxin_report = " [span_red("\[DANGER\]")]"
 			examination += "<font color = '[reagent.color]'>[reagent.name] ([floor(reagent.volume)])[toxin_report]</font>"
 
-	if(deep_examination)
-		if(has_status_effect(/datum/status_effect/debuff/revive_bloodmagic))
-			examination += "ø ------------ ø"
-			examination += "[span_bloody("BLOOD CURSED")]"
-		else if(has_status_effect(/datum/status_effect/debuff/blood_mark) || has_status_effect(/datum/status_effect/buff/blood_mark))
-			examination += "ø ------------ ø"
-			examination += "[span_bloody("BLOOD MARKED")]"
 	examination += "ø ------------ ø</span>"
 	if(!silent)
 		to_chat(user, examination.Join("\n"))

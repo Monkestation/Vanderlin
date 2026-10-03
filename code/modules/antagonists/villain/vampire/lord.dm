@@ -26,7 +26,7 @@
 	allow_preference_switching = TRUE
 	var/chooses_name = TRUE
 	var/outfit = /datum/outfit/vamplord
-	var/patron = /datum/patron/godless/autotheist
+	var/patron = /datum/patron/archdevil/mephistopheles
 
 	var/ascension_level = 0
 	// thralls to set the clan of on creation

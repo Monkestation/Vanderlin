@@ -61,8 +61,6 @@
 	dyeable = TRUE
 	var/hugable = FALSE
 	var/named = FALSE
-	var/has_storage = FALSE
-	var/storage_component_path = /datum/component/storage/concrete/grid/coin_pouch/cloth
 
 /obj/item/child_toy/attack_self(mob/living/user)
 		if(!hugable)
@@ -120,8 +118,8 @@
 
 /obj/item/child_toy/soft_toy/kobold
 	desc = "It has a opening so you can keep all your treasures in his tummy."
-	has_storage = TRUE
-	storage_component_path = /datum/component/storage/concrete/grid/coin_pouch/cloth
+	var/has_storage = TRUE
+	var/storage_component_path = /datum/component/storage/concrete/grid/coin_pouch/cloth
 	abstract_type = /obj/item/child_toy/soft_toy/kobold
 
 /obj/item/child_toy/soft_toy/kobold/Initialize(mapload, ...)

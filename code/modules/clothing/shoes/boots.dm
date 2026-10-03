@@ -311,6 +311,7 @@
 	desc = "Plate boots. A door kicked in, treasures to behold inside."
 	icon_state = "matthiosboots"
 	item_state = "matthiosboots"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 // variant with no armor, just drip.
 /obj/item/clothing/shoes/boots/armor/inhumen/matthios/lord
@@ -323,6 +324,7 @@
 	desc = "A menacing pair of plate boots, caked in blood and brain matter. Known for crushing skulls."
 	icon_state = "graggarplateboots"
 	item_state = "graggarplateboots"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/clothing/shoes/boots/armor/inhumen/baotha
 	name = "saccharine boots"
@@ -330,6 +332,7 @@
 	icon_state = "baothaboots"
 	item_state = "baothaboots"
 	smeltresult = /obj/item/ingot/component/baotha
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 
 //.............. Gronn Boots .................//

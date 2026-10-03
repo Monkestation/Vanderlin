@@ -436,7 +436,7 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	armor_class = AC_MEDIUM
-	armor_type = /datum/armor/head/plate/good
+	armor_type = /datum/armor/head/plate/blacksteel
 	item_weight = 6.4 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 	max_integrity = INTEGRITY_OLD_BLACKSTEEL
