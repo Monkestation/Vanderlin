@@ -27,6 +27,24 @@
 	taste_mult = 1.8
 	toxicity = 3
 
+/datum/reagent/blood/drow
+	name = "Drow Blood"
+	color = "#451ea0"
+	metabolization_rate = REAGENTS_SLOW_METABOLISM
+	taste_description = "bitterness"
+	taste_mult = 0.5
+	toxicity = 1 //Effectively extra damage if they drink it.
+
+/datum/reagent/blood/drow/on_mob_life(mob/living/carbon/M, efficiency)
+	if(volume > 0.09 && !HAS_TRAIT(M, TRAIT_BLOODDRINKER) && HAS_TRAIT(M, TRAIT_NASTY_EATER) && !isdarkelf(M)) //no poisoning other Drow or people who can handle contaminated blood
+		if(HAS_TRAIT(M, TRAIT_POISON_RESILIENCE))
+			M.add_nausea(0.33)
+			M.adjustToxLoss(1)
+		else
+			M.add_nausea(1)
+			M.adjustToxLoss(2.2)
+	return ..()
+
 /datum/reagent/blood/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	return FALSE
 
