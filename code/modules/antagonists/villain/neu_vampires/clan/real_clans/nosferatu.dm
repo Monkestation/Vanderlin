@@ -6,7 +6,6 @@
 
 /datum/clan_leader/nosferatu
 	lord_spells = list(
-		/datum/action/cooldown/spell/enslave_mortal,
 		/datum/action/cooldown/spell/undirected/mansion_portal,
 		/datum/action/cooldown/spell/undirected/shapeshift/rat_vampire,
 		/datum/action/cooldown/spell/undirected/conjure_item/vamp_sword,
@@ -46,6 +45,7 @@
 		TRAIT_LIMBATTACHMENT,
 		TRAIT_NASTY_EATER,
 		TRAIT_POISON_RESILIENCE,
+		TRAIT_VAMP_OFFERED
 	)
 
 /datum/clan/nosferatu/get_downside_string()

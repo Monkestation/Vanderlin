@@ -2,7 +2,7 @@
 	name = "Encode Thoughts"
 	desc = "Latch onto the mind of one who is nearby, weaving a particular thought into their mind."
 	button_icon_state = "encode_thought"
-	sound = 'sound/magic/PSY.ogg'
+	sound = 'sound/ddrelief.ogg'
 
 	required_form = FORM_DEATH
 
@@ -35,7 +35,7 @@
 
 /datum/action/cooldown/spell/undirected/list_target/encode_thoughts/proc/handle_message(mob/living/cast_on)
 	cast_on.playsound_local(cast_on, sound, 100, TRUE)
-	to_chat(cast_on, "Your mind thinks to itself: </span><font color=#7246ff>\"[message]...\"</font>")
+	to_chat(cast_on, span_mind_control("Your mind thinks to itself: </span><font color=#7246ff><i>\"[message]...\"</i></font>"))
 
 /datum/action/cooldown/spell/undirected/list_target/encode_thoughts/vampire
 	name = "Vampiric Manipulation"
