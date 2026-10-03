@@ -74,7 +74,6 @@
 	icon_state = "seer_armour"
 	item_state = "seer_armour"
 	icon = 'icons/roguetown/mob/monster/rousman.dmi'
-	icon = 'icons/roguetown/mob/monster/rousman.dmi'
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
 	body_parts_covered = CHEST|GROIN|VITALS|LEGS
 	armor_type = /datum/armor/robe/rous

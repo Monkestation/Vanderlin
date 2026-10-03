@@ -395,3 +395,9 @@
 	icon = 'icons/mob/sprite_accessory/tails/medicator.dmi'
 	icon_state = "vulture"
 	specuse = list(SPEC_ID_MEDICATOR)
+
+/datum/sprite_accessory/tail/rousman
+	name = "Rousman Tail"
+	icon = 'icons/mob/sprite_accessory/tails/rousman.dmi'
+	icon_state = "rousman"
+	specuse = list(SPEC_ID_ROUSMAN)
