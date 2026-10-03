@@ -11275,6 +11275,13 @@
 	},
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
+"drG" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "vanderlin-town_mountain-town";
+	aportalid = "vanderlin-town_mountain-mountain"
+	},
+/turf/open/floor/cobblerock,
+/area/under/mountains/anvil/lower)
 "dtm" = (
 /turf/closed/mineral/bedrock/cold,
 /area/outdoors/mountains/anvil/peak)
@@ -12368,6 +12375,13 @@
 /obj/item/ore/coal,
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/peak)
+"jby" = (
+/obj/structure/fluff/traveltile{
+	aportalgoesto = "vanderlin-town_mountain-town";
+	aportalid = "vanderlin-town_mountain-mountain"
+	},
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/lower)
 "jeO" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
@@ -15046,9 +15060,9 @@ aZR
 aZR
 aZR
 aZR
-aZR
-aZR
-aZR
+jby
+drG
+jby
 aZR
 aZR
 aZR
@@ -15248,9 +15262,9 @@ ali
 ali
 ali
 ali
-ali
-ali
-ali
+ako
+ahP
+ako
 ali
 ali
 ali
@@ -15449,11 +15463,11 @@ ali
 ali
 ali
 ali
+aNm
 ali
 ali
 ali
-ali
-ali
+aNm
 ali
 ali
 ali
@@ -15652,8 +15666,8 @@ aKK
 aKK
 ali
 ali
-aKK
-ali
+ako
+ahP
 ali
 ali
 ali
@@ -15854,9 +15868,9 @@ aKK
 aKK
 ali
 aKK
-aKK
-ali
-ali
+ako
+aHH
+ako
 ali
 ali
 ali
@@ -16056,7 +16070,7 @@ ali
 aKK
 aKK
 ali
-aKK
+ali
 ali
 ali
 ali
@@ -16257,11 +16271,11 @@ aKK
 aKK
 aKK
 aKK
-aKK
+aNm
 ali
 ali
 ali
-ali
+aNm
 ali
 ali
 ali
@@ -16460,8 +16474,8 @@ aKK
 aKK
 aKK
 aKK
-aKK
-aKK
+ali
+ali
 ali
 ali
 ali
@@ -16662,7 +16676,7 @@ aKK
 aKK
 aKK
 aKK
-aKK
+ali
 ali
 ali
 ali
@@ -17065,11 +17079,11 @@ aKK
 aKK
 aKK
 aKK
+aNm
 ali
 ali
 ali
-ali
-ali
+aNm
 ali
 aKK
 aKK
