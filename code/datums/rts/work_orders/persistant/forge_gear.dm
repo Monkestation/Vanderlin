@@ -25,7 +25,7 @@
 	name = "Craft Axe"
 	ui_icon = 'icons/roguetown/weapons/32/axes_picks.dmi'
 	ui_icon_state = "axe"
-	gear_path = list(/obj/item/weapon/axe/copper, /obj/item/weapon/axe/iron)
+	gear_path = list(/obj/item/weapon/axe/hatchet/copper, /obj/item/weapon/axe/iron)
 	material_cost = list(MAT_INGOT = 2, MAT_WOOD = 1)
 	gear_type = /datum/worker_gear/axe
 
