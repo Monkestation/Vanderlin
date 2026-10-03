@@ -295,7 +295,7 @@
 
 /obj/item/clothing/head/helmet/heavy/inhumen/baotha_alt
 	name = "saccharine sallet"
-	desc = "Behold the spider of addiction..."
+	desc = "Surrender to the Queen of Temptation..."
 	icon_state = "baothahelm"
 	item_weight = 4.5 KILOGRAMS
 	smeltresult = /obj/item/ingot/component/baotha
@@ -563,6 +563,8 @@
 	if(!picked)
 		var/list/icons = HELMET_GOLD_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice

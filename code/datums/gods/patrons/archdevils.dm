@@ -90,7 +90,8 @@
 
 /mob/living/carbon/human/proc/hellspark()
 	set name = "Conjure Spark"
-	set category = "RoleUnique.Devil"
+	set category = "RoleUnique.Patron"
+
 	if(incapacitated(IGNORE_GRAB) || stat >= UNCONSCIOUS)
 		to_chat(usr, span_warning("You cannot do this in your current state."))
 		return

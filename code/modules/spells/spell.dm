@@ -996,7 +996,7 @@
 			if(!HAS_TRAIT(caster, TRAIT_VITAE_USER) && !HAS_TRAIT(caster, TRAIT_BLOOD_STUDENT))
 				final_cost = used_cost * 2
 			if(HAS_TRAIT(caster, TRAIT_DEVIL_MARKED_MEPHISTOPHELES))
-				final_cost = used_cost * 0.9
+				final_cost = final_cost * 0.9
 			if(!caster.has_bloodpool_cost(final_cost))
 				if(feedback)
 					caster.balloon_alert(caster, "need more vitae to cast!")
