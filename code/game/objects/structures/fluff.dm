@@ -1118,12 +1118,12 @@
 			else
 				to_chat(user, span_warning("The idol doesn't want your garbage."))
 				return
+			qdel(W)
 			if(B.contrib >= 80)
 				give_rewards(B, user)
 			else
 				playsound(src,'sound/items/matidol1.ogg', 50, TRUE)
 			playsound(src,'sound/misc/eat.ogg', rand(30, 60), TRUE)
-			qdel(W)
 			return
 
 	return ..()
@@ -1173,11 +1173,13 @@
 			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/whipsflails) > SKILL_LEVEL_JOURNEYMAN)
 				weapon_options["Steel flail"] = /obj/item/weapon/flail
 				weapon_options["Steel whip"] = /obj/item/weapon/whip/steel
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/shields) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Kite shield"] = /obj/item/weapon/shield/tower/metal
 			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/unarmed) > SKILL_LEVEL_JOURNEYMAN)
 				weapon_options["Knuckles"] = /obj/item/weapon/knuckles
 
 			var/chosen_weapon
-			if(length(weapon_options) <= 1)
+			if(length(weapon_options))
 				var/chosen_name = browser_input_list(user, "Choose your blessing.", "STOLEN STEEL. NOT MADE FOR US.", weapon_options, timeout = 20 SECONDS)
 				chosen_weapon = chosen_name ? weapon_options[chosen_name] : /obj/item/weapon/knife/dagger/navaja
 			else
