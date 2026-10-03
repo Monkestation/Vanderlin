@@ -82,7 +82,7 @@
 /datum/outfit/forestpreacher
 	name = JOB_FOREST_PREACHER
 	armor = /obj/item/clothing/armor/leather/shamancoat
-	neck = /obj/item/clothing/neck/psycross/great_hunt
+	neck = /obj/item/clothing/neck/psycross/great_hunt/divine_link
 	pants = /obj/item/clothing/pants/trou/leather/gronn
 	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
