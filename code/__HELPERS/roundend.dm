@@ -4,8 +4,7 @@
 /mob/proc/do_game_over()
 	if(SSticker.current_state != GAME_STATE_FINISHED)
 		return
-	status_flags |= GODMODE
-	ADD_TRAIT(src, TRAIT_NO_TRANSFORM, ROUNDSTART_TRAIT)
+	add_traits(list(TRAIT_GODMODE, TRAIT_NO_TRANSFORM), ROUNDSTART_TRAIT)
 	ai_controller?.set_ai_status(AI_STATUS_OFF)
 	if(client)
 		add_verb(client, /client/proc/lobbyooc)

@@ -7,8 +7,7 @@
 		if(attacker.binded == TRUE)
 			return FALSE
 	if(ismob(the_target))
-		var/mob/M = the_target
-		if(M.status_flags & GODMODE)
+		if(HAS_TRAIT(the_target, TRAIT_GODMODE))
 			return FALSE
 	if(living_mob.see_invisible < the_target.invisibility)
 		return FALSE

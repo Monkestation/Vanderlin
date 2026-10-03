@@ -68,8 +68,8 @@
 	limb.drop_limb()
 
 /datum/surgery_operation/limb/amputate/pegleg
-	name = "Detach Wooden Limb"
-	desc = "Saw off a patient's wooden limb."
+	name = "Detach Wooden Limb (Engineering)"
+	desc = "Saw off a patient's wooden limb using engineering skill."
 
 	required_bodytype = BODYPART_ROBOTIC
 	operation_flags = parent_type::operation_flags | OPERATION_MECHANIC
@@ -92,3 +92,9 @@
 /datum/surgery_operation/limb/amputate/pegleg/all_required_strings()
 	. = ..()
 	. += "the limb must be wooden"
+
+/datum/surgery_operation/limb/amputate/pegleg/medical
+	name = "Detach Wooden Limb (Medicine)"
+	desc = "Saw off a patient's wooden limb using medical skill."
+
+	skill_used = /datum/attribute/skill/misc/medicine

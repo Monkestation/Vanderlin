@@ -57,13 +57,15 @@
 	else
 		recipe = browser_input_list(src, "Choose a recipe to craft", "Recipes", recipes)
 
+	. = TRUE // EXPERIMENTAL: return TRUE to end attack chain early
 	if(!recipe || QDELETED(src) || QDELETED(attacked_atom) || QDELETED(starting_atom))
-		return FALSE
+		return
 
 	if(!Adjacent(attacked_atom)) // sanity check
-		return FALSE
+		return
 
-	return execute_recipe(recipe, starting_atom, attacked_atom)
+	INVOKE_ASYNC(src, PROC_REF(execute_recipe), recipe, starting_atom, attacked_atom)
+	return
 
 /mob/living/proc/execute_recipe(datum/slapcraft_recipe/target_recipe, obj/item/first_item, obj/item/second_item)
 	if(!target_recipe)

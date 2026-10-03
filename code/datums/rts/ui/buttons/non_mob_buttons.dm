@@ -11,7 +11,7 @@
 	if(!overlord_body)
 		return
 
-	overlord_body.status_flags &= ~GODMODE
+	REMOVE_TRAIT(overlord_body, TRAIT_GODMODE, MAGIC_TRAIT)
 	overlord_body.alpha = 255
 	overlord_body.visible_message(span_danger("[overlord_body] awakens from their trance, their form solidifying."))
 	master.linked_overlord.owner.transfer_to(overlord_body)

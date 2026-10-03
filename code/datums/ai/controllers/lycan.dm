@@ -51,8 +51,7 @@
 		return TRUE
 
 	if(ismob(the_target)) //Target is in godmode, ignore it.
-		var/mob/M = the_target
-		if(M.status_flags & GODMODE)
+		if(HAS_TRAIT(the_target, TRAIT_GODMODE))
 			return FALSE
 
 	if(living_mob.see_invisible < the_target.invisibility)//Target's invisible to us, forget it
