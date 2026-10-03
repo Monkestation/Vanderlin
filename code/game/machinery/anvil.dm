@@ -27,6 +27,10 @@
 		if(HAS_TRAIT(working_material, TRAIT_NEEDS_QUENCH))
 			. += span_warning("[working_material] is too hot to touch.")
 
+/obj/machinery/anvil/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_info("Alt-click with a hammer in hand to use the anvil's minigame for better quality.")
+
 /obj/machinery/anvil/attack_hand(mob/living/user, list/modifiers)
 	if(smithing)
 		to_chat(user, span_warning("[src] is currently being worked on!"))
@@ -47,6 +51,8 @@
 
 	var/obj/item/actual_attacking_item = tool
 	var/obj/item/weapon/tongs/tongs_used
+	var/alt_click = LAZYACCESS(modifiers, ALT_CLICKED)
+
 	if(istype(tool, /obj/item/weapon/tongs))
 		tongs_used = tool
 		if(tongs_used.held_item)
@@ -67,9 +73,26 @@
 			if(!working_material.currecipe)
 				if(!choose_recipe(user))
 					return ITEM_INTERACT_BLOCKING
-			if(!working_material.currecipe.is_recipe_available(user))
+
+			var/datum/anvil_recipe/recipe = working_material.currecipe
+
+			if(!recipe.is_recipe_available(user))
 				return ITEM_INTERACT_BLOCKING
-			// Start the minigame instead of direct hammering
+
+			if(isnull(recipe.used_simple_hit))
+				if(alt_click)
+					recipe.used_simple_hit = FALSE
+					start_minigame(user, tool)
+					return ITEM_INTERACT_SUCCESS
+				else
+					simple_hit(user, tool)
+					recipe.used_simple_hit = TRUE
+					return ITEM_INTERACT_SUCCESS
+
+			if(recipe.used_simple_hit)
+				simple_hit(user, tool)
+				return ITEM_INTERACT_SUCCESS
+
 			start_minigame(user, tool)
 			return ITEM_INTERACT_SUCCESS
 
@@ -79,6 +102,21 @@
 		if(tongs_used && !tongs_used.held_item)
 			tongs_used.set_held_item(working_material)
 			return ITEM_INTERACT_SUCCESS
+
+// For some reason item_interaction doesnt get the alt_clicked modifier without it
+/obj/machinery/anvil/AltClick(mob/user)
+	. = ..()
+	if(!isliving(user))
+		return
+
+	var/obj/item/weapon/hammer/hammer = user.get_active_held_item()
+	if(!istype(hammer))
+		return
+
+	if(!user.CanReach(src))
+		return
+
+	item_interaction(user, hammer, list(ALT_CLICKED = TRUE))
 
 /obj/machinery/anvil/proc/try_place_item(obj/item/item, mob/living/user)
 	if(working_material?.currecipe?.item_added(item, user))
@@ -151,6 +189,45 @@
 
 	return TRUE
 
+/obj/machinery/anvil/proc/simple_hit(mob/living/user, obj/item/weapon/hammer/hammer)
+	if(!working_material || !working_material.currecipe)
+		return
+
+	var/datum/anvil_recipe/recipe = working_material.currecipe
+
+	if(!recipe.is_recipe_available(user))
+		return
+
+	if(!recipe.can_advance(user))
+		shake_camera(user, 1, 1)
+		playsound(src, 'sound/items/bsmithfail.ogg', 100, FALSE)
+		return
+
+	if(!recipe.advance(user, 0, TRUE))
+		return
+
+	var/recipe_skill = recipe.appro_skill
+	var/amt2raise = max(GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE), 1) * 1.6
+	amt2raise *= user.get_learning_boon(recipe_skill)
+	if(HAS_TRAIT(user, TRAIT_MALUMFIRE) || GET_MOB_SKILL_VALUE_OLD(user, recipe_skill) < 3)
+		user.mind.add_sleep_experience(recipe_skill, amt2raise, FALSE)
+
+	user.visible_message(span_info("[user] strikes the [working_material]."))
+	playsound(src, pick('sound/items/bsmith1.ogg', 'sound/items/bsmith2.ogg', 'sound/items/bsmith3.ogg', 'sound/items/bsmith4.ogg'), 100, FALSE)
+
+	var/total_chance = 7 * (GET_MOB_SKILL_VALUE_OLD(user, working_material.currecipe.appro_skill))
+	if(prob(1 + total_chance))
+		user.flash_fullscreen("whiteflash")
+		var/datum/effect_system/spark_spread/sparks = new()
+		var/turf/front = get_turf(src)
+		sparks.set_up(1, 1, front)
+		sparks.start()
+		working_material.currecipe.numberofbreakthroughs++
+	user.adjust_stamina(user.maximum_stamina / 20)
+
+	if(recipe.progress >= 100 && !length(recipe.additional_items) && !recipe.needed_item)
+		complete_recipe(user)
+
 /obj/machinery/anvil/proc/start_minigame(mob/living/user, obj/item/weapon/hammer/hammer)
 	if(!working_material || !working_material.currecipe)
 		return
@@ -189,7 +266,7 @@
 			user.flash_fullscreen("whiteflash")
 			quality_score = 100
 
-	var/success = recipe.advance(user, quality_score)
+	var/success = recipe.advance(user, quality_score, FALSE)
 	if(!success)
 		return
 
@@ -207,9 +284,9 @@
 	user.adjust_stamina(user.maximum_stamina / 20)
 
 	if(recipe.progress >= 100 && !length(recipe.additional_items) && !recipe.needed_item)
-		complete_recipe(user, quality_score)
+		complete_recipe(user)
 
-/obj/machinery/anvil/proc/complete_recipe(mob/living/user, quality_score)
+/obj/machinery/anvil/proc/complete_recipe(mob/living/user)
 	if(!working_material || !working_material.currecipe)
 		return
 
