@@ -54,3 +54,5 @@
 #define CULINARY_RANDOM_PREFERENCES "Random Preferences"
 #define FAVOURITE_FOOD_TRIUMPH "Favourite Food Triumph"
 #define FAVOURITE_DRINK_TRIUMPH "Favourite Drink Triumph"
+
+#define RANDOM_INGREDIENT_BUFF "random_buff"

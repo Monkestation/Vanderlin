@@ -205,6 +205,10 @@
 	foodtype = EGG
 	item_weight = 50 GRAMS
 
+/obj/item/reagent_containers/food/snacks/cooked/egg/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "egged", null, 10, topping_name = "a cooked egg")
+
 /obj/item/reagent_containers/food/snacks/cooked/twin_egg
 	tastes = list("fried egg" = 1)
 	name = "fried egg twins"
@@ -614,6 +618,7 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_POOR
 	item_weight = 150 GRAMS
+	given_ingredient_buff = null
 
 /*	.............   Fried onions   ................ */
 /obj/item/reagent_containers/food/snacks/onion_fried
@@ -646,6 +651,7 @@
 	faretype = FARE_NEUTRAL
 	portable = FALSE
 	item_weight = 150 GRAMS
+	given_ingredient_buff = null
 
 /*	.............   Grilled Sunreed   ................ */
 /obj/item/reagent_containers/food/snacks/produce/vegetable/sunreed_cooked
@@ -660,6 +666,7 @@
 	rotprocess = SHELFLIFE_LONG
 	faretype = FARE_NEUTRAL
 	item_weight = 150 GRAMS
+	given_ingredient_buff = null
 
 /obj/item/reagent_containers/food/snacks/produce/vegetable/sunreed_cooked/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(modified || !istype(tool, /obj/item/reagent_containers/food/snacks/butterslice))
@@ -673,6 +680,7 @@
 	var/obj/item/reagent_containers/food/snacks/S = tool
 
 	modified = TRUE
+	merge_ingredient_buffs(list(tool))
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
@@ -743,6 +751,10 @@
 	nutrition = COOKED_VEGGIE_NUTRITION/3
 	item_weight = 70 GRAMS
 
+/obj/item/reagent_containers/food/snacks/drowsbanejam/slice/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "drowsbanejam", null, 3, topping_name = "drowsbane jam")
+
 /*	.............   Baked Pompkaun  ................ */
 /obj/item/reagent_containers/food/snacks/fruit/pompkaun_goo/cooked
 	name = "baked pompkaun goo"
@@ -795,6 +807,7 @@
 	var/obj/item/reagent_containers/food/snacks/S = tool
 
 	modified = TRUE
+	merge_ingredient_buffs(list(tool))
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.5))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
@@ -820,7 +833,6 @@
 		name = "[name] with sunreed"
 		desc = "[desc] Crunchy sunreed has been scatered overtop."
 		add_overlay("corn_salad")
-
 	qdel(tool)
 	return ITEM_INTERACT_SUCCESS
 

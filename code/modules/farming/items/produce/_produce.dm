@@ -8,6 +8,7 @@
 	throwforce = 0
 	faretype = FARE_POOR
 	nutrition = SNACK_VPOOR
+	given_ingredient_buff = RANDOM_INGREDIENT_BUFF
 	var/list/pipe_reagents = list()
 	var/seed
 	var/bitesize_mod = 0

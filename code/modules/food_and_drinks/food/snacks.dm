@@ -103,6 +103,21 @@ All foods are distributed among various categories. Use common sense.
 	var/biting // if TRUE changes the icon state to the bitecount, for stuff like handpies. Will break unless you also set a base_icon_state
 	var/rot_away_timer
 
+	///the percent of a food item that needs to be this item to get the buff
+	var/ingredient_buff_composition = 20
+	///the ingredient buff datum we have for this, assembled and passed into created foods with the snapshotted quality
+	var/datum/ingredient_buff/given_ingredient_buff
+	/// Final buffs this cooked food grants when eaten
+	var/list/datum/ingredient_buff/assembled_buffs = list()
+	///if this is set we grab the ingredient effect from the parent instead.
+	var/obj/item/reagent_containers/food/snacks/ingredient_buff_from
+	/// Overlay states of toppings already applied, so each topping only goes on once
+	var/list/applied_toppings = list()
+	/// Display names of toppings applied, in order
+	var/list/topping_names = list()
+	/// The exact suffix we last appended to name, so we can strip it before rebuilding
+	var/topping_suffix
+
 /obj/item/reagent_containers/food/snacks/Initialize(mapload)
 	. = ..()
 	if(rotprocess)
@@ -297,6 +312,123 @@ All foods are distributed among various categories. Use common sense.
 /obj/item/proc/cooking(input as num)
 	return
 
+/obj/item/reagent_containers/food/snacks/proc/get_ingredient_buff_datum()
+	RETURN_TYPE(/datum/ingredient_buff)
+	if(!given_ingredient_buff && !ingredient_buff_from)
+		return null
+	var/obj/item/reagent_containers/food/snacks/buff_from = ingredient_buff_from
+	if(buff_from)
+		given_ingredient_buff = initial(buff_from.given_ingredient_buff)
+
+	if(given_ingredient_buff == RANDOM_INGREDIENT_BUFF)
+		var/used_type = type
+		if(ingredient_buff_from)
+			used_type = ingredient_buff_from
+		if(!(used_type in GLOB.randomized_ingredient_buffs))
+			var/static/list/allowed_types = list()
+			if(!length(allowed_types))
+				for(var/datum/ingredient_buff/buff as anything in subtypesof(/datum/ingredient_buff))
+					if(!initial(buff.random_choice))
+						continue
+					allowed_types |= buff
+					allowed_types[buff] = initial(buff.random_choice)
+
+			GLOB.randomized_ingredient_buffs |= used_type
+			GLOB.randomized_ingredient_buffs[used_type] = pickweight(allowed_types)
+		var/datum/ingredient_buff/new_buff = GLOB.randomized_ingredient_buffs[used_type]
+		given_ingredient_buff = new new_buff()
+	if(!istype(given_ingredient_buff))
+		given_ingredient_buff = new given_ingredient_buff()
+	return given_ingredient_buff
+
+/// Rebuilds the "topped with a, b and c" suffix. Safe to call repeatedly.
+/obj/item/reagent_containers/food/snacks/proc/update_topping_name()
+	// Strip our previous suffix, if the name still ends with it
+	if(topping_suffix)
+		var/suffix_len = length(topping_suffix)
+		if(copytext(name, -suffix_len) == topping_suffix)
+			name = copytext(name, 1, length(name) - suffix_len + 1)
+	if(!length(topping_names))
+		topping_suffix = null
+		return
+	topping_suffix = " topped with [english_list(topping_names)]"
+	name += topping_suffix
+
+/// What this item contributes when used as an ingredient, snapshotted with its current quality.
+/// Cooked dishes pass along the buffs they already assembled.
+/obj/item/reagent_containers/food/snacks/proc/get_contributed_buffs()
+	. = list()
+	if(length(assembled_buffs))
+		return assembled_buffs
+	var/datum/ingredient_buff/base = get_ingredient_buff_datum()
+	if(!base)
+		return // no buff datum, skipped for composition
+	var/datum/ingredient_buff/snapshot = base.copy()
+	snapshot.quality = recipe_quality
+	snapshot.composition_required = ingredient_buff_composition
+	. += snapshot
+
+/// Applies every assembled buff to the eater.
+/obj/item/reagent_containers/food/snacks/proc/apply_ingredient_buffs(mob/living/eater, multiplier = 1)
+	for(var/datum/ingredient_buff/buff as anything in assembled_buffs)
+		buff.apply_to(eater, multiplier)
+
+/// Re-assembles this dish's buffs after extra ingredients are added to it (toppings, garnishes, etc).
+/// Call BEFORE the extra ingredients are deleted, since their buffs are read from the items themselves, will cause issues if you don't!.
+/obj/item/reagent_containers/food/snacks/proc/merge_ingredient_buffs(list/extra_ingredients)
+	var/list/pool = list(src)
+	pool += extra_ingredients
+	assembled_buffs = assemble_ingredient_buffs(pool)
+
+/**
+ * Takes the consumed ingredients and returns the list of buffs the result qualifies for.
+ * Ingredients without a buff datum don't count toward the total, so plain filler never dilutes a buff.
+ * Fuck Ass global since this saves processing for multi creation
+ */
+/proc/assemble_ingredient_buffs(list/ingredients, list/reagents)
+	. = list()
+	var/list/contributors = list() // each entry is one contributor's list of buffs
+
+	for(var/obj/item/reagent_containers/food/snacks/S in ingredients)
+		contributors += list(S.get_contributed_buffs())
+
+	var/total = 0
+	var/list/groups = list() // buff type -> list(weight, quality, potency, duration, required, buff)
+
+	for(var/list/contributed as anything in contributors)
+		if(!length(contributed))
+			continue
+		total++
+		for(var/datum/ingredient_buff/B as anything in contributed)
+			var/weight = B.composition_share / 100
+			var/list/entry = groups[B.type]
+			if(!entry)
+				entry = list("weight" = 0, "quality" = 0, "potency" = 0, "duration" = 0, "required" = 0, "buff" = B)
+				groups[B.type] = entry
+			entry["weight"] += weight
+			entry["quality"] += B.quality * weight
+			entry["potency"] += B.potency_mult * weight
+			entry["duration"] += B.duration_mult * weight
+			// strictest requirement among contributors wins
+			entry["required"] = max(entry["required"], B.composition_required)
+
+	if(!total)
+		return
+
+	for(var/buff_type in groups)
+		var/list/entry = groups[buff_type]
+		var/share = (entry["weight"] / total) * 100
+		if(share < entry["required"])
+			continue
+		var/datum/ingredient_buff/template = entry["buff"]
+		var/datum/ingredient_buff/result = template.copy()
+		result.quality = entry["quality"] / entry["weight"]
+		result.potency_mult = entry["potency"] / entry["weight"]
+		result.duration_mult = entry["duration"] / entry["weight"]
+		result.composition_required = entry["required"]
+		result.composition_share = share
+		. += result
+
 /obj/item/reagent_containers/food/snacks/cooking(input as num, atom/A)
 	if(!input)
 		return
@@ -347,6 +479,7 @@ All foods are distributed among various categories. Use common sense.
 		return
 
 	var/apply_effect = TRUE
+	var/loveness = 0
 	if(ishuman(eater))
 		var/mob/living/carbon/human/human_eater = eater
 
@@ -355,29 +488,34 @@ All foods are distributed among various categories. Use common sense.
 			if(favorite_food_type == type)
 				if(human_eater.add_stress(/datum/stress_event/favourite_food))
 					to_chat(human_eater, span_green("Yum! My favorite food!"))
+				loveness = 2
 			else if(ispath(type, favorite_food_type))
 				var/obj/item/reagent_containers/food/snacks/favorite_food_instance = favorite_food_type
 				var/favorite_food_name = initial(favorite_food_instance.name)
 				if(favorite_food_name == name)
 					if(human_eater.add_stress(/datum/stress_event/favourite_food))
 						to_chat(human_eater, span_green("Yum! My favorite food!"))
+					loveness = 2
 			else
 				var/obj/item/reagent_containers/food/snacks/favorite_food_instance = favorite_food_type
 				var/slice_path = initial(favorite_food_instance.slice_path)
 				if(slice_path && type == slice_path)
 					if(human_eater.add_stress(/datum/stress_event/favourite_food))
 						to_chat(human_eater, span_green("Yum! My favorite food!"))
+					loveness = 1
 
 			var/hated_food_type = human_eater.culinary_preferences[CULINARY_HATED_FOOD]
 			if(hated_food_type == type)
 				if(human_eater.add_stress(/datum/stress_event/hated_food))
 					to_chat(human_eater, span_red("Yuck! My hated food!"))
+				loveness = 0.5
 			else if(ispath(type, hated_food_type))
 				var/obj/item/reagent_containers/food/snacks/hated_food_instance = hated_food_type
 				var/hated_food_name = initial(hated_food_instance.name)
 				if(hated_food_name == name)
 					if(human_eater.add_stress(/datum/stress_event/hated_food))
 						to_chat(human_eater, span_red("Yuck! My hated food!"))
+					loveness = 0.5
 			else
 				var/obj/item/reagent_containers/food/snacks/hated_food_instance = hated_food_type
 				var/slice_path = initial(hated_food_instance.slice_path)
@@ -435,6 +573,8 @@ All foods are distributed among various categories. Use common sense.
 				eater.apply_status_effect(effect)
 		else
 			eater.apply_status_effect(eat_effect)
+	if(apply_effect)
+		apply_ingredient_buffs(eater, loveness)
 	eater.taste(reagents)
 
 	if(!reagents.total_volume)
@@ -596,6 +736,8 @@ All foods are distributed among various categories. Use common sense.
 
 /obj/item/reagent_containers/food/snacks/examine(mob/user)
 	. = ..()
+	if(HAS_TRAIT(user, TRAIT_INGREDIENT_INSIGHT))
+		. += get_ingredient_buff_datum()?.examine_string()
 	if(!in_container)
 		switch (bitecount)
 			if (0)
@@ -606,7 +748,6 @@ All foods are distributed among various categories. Use common sense.
 				. += "[src] was bitten [bitecount] times!"
 			else
 				. += "[src] was bitten multiple times!"
-
 
 /obj/item/reagent_containers/food/snacks/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!tool.get_sharpness() || tool.wlength != WLENGTH_SHORT)
@@ -630,6 +771,20 @@ All foods are distributed among various categories. Use common sense.
 	if(slice(tool, user))
 		user.nobles_seen_servant_work()
 		return ITEM_INTERACT_SUCCESS
+
+/// Copies this item's buff data onto a child item (slice, portion, etc).
+/// Cooked dishes pass their frozen assembled buffs; otherwise a lone given_ingredient_buff template is passed down.
+/obj/item/reagent_containers/food/snacks/proc/pass_buffs_to(obj/item/reagent_containers/food/snacks/child)
+	if(!istype(child))
+		return
+	if(length(assembled_buffs))
+		child.assembled_buffs = list()
+		for(var/datum/ingredient_buff/frozen as anything in assembled_buffs)
+			child.assembled_buffs += frozen.copy()
+		return
+	if(get_ingredient_buff_datum())
+		child.given_ingredient_buff = given_ingredient_buff.copy()
+		child.ingredient_buff_composition = ingredient_buff_composition
 
 /obj/item/reagent_containers/food/snacks/proc/slice(obj/item/W, mob/user)
 	if((slices_num <= 0 || !slices_num) || !slice_path) //is the food sliceable?
@@ -661,6 +816,7 @@ All foods are distributed among various categories. Use common sense.
 			var/obj/item/reagent_containers/food/snacks/slice = new slice_path(loc)
 			slice.filling_color = filling_color
 			initialize_slice(slice, reagents_per_slice)
+			pass_buffs_to(slice)
 		qdel(src)
 	else
 		var/reagents_per_slice = reagents.total_volume/slices_num
@@ -674,6 +830,7 @@ All foods are distributed among various categories. Use common sense.
 			slice = new slice_path(loc)
 			slice.filling_color = filling_color
 			initialize_slice(slice, reagents_per_slice)
+			pass_buffs_to(slice)
 			qdel(src)
 			return TRUE
 		if(slices_num <= 0)

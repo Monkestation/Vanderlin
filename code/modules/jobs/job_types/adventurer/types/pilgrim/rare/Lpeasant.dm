@@ -41,7 +41,8 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
-		TRAIT_SEEDKNOW
+		TRAIT_SEEDKNOW,
+		TRAIT_INGREDIENT_INSIGHT,
 	)
 
 /datum/outfit/pilgrim/farmermaster
