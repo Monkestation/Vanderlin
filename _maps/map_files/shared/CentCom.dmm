@@ -4305,6 +4305,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/antag/bandit_lair)
+"uH" = (
+/obj/structure/pottery_lathe,
+/turf/open/floor/dirt/road,
+/area/outdoors/antag/bandit_lair)
 "uI" = (
 /obj/effect/mapping_helpers/virtual_z_link/broodmother_base,
 /turf/closed/mineral,
@@ -9694,10 +9698,6 @@
 "WC" = (
 /turf/open/water/ocean,
 /area/outdoors/woods_safe)
-"WD" = (
-/obj/structure/pottery_lathe,
-/turf/open/floor/dirt/road,
-/area/outdoors/antag/bandit_lair)
 "WE" = (
 /obj/item/paper{
 	info = "I've had enough of you cacks, so long, I left the tools and the forge, I don't care what you lot do with it, just don't try and hunt me down.      - Stonehead";
@@ -13083,7 +13083,7 @@ Qj
 Qj
 cn
 Zk
-WD
+uH
 cn
 Pb
 Pb
