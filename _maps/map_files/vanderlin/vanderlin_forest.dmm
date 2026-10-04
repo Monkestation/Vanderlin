@@ -4237,6 +4237,14 @@
 "vW" = (
 /turf/closed/basic,
 /area/outdoors/wilderness/east)
+"vZ" = (
+/obj/structure/rack,
+/obj/item/weapon/polearm/spear,
+/obj/item/weapon/polearm/spear{
+	pixel_x = -8
+	},
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "wa" = (
 /turf/open/openspace,
 /area/indoors/wilderness/tavern)
@@ -7262,6 +7270,12 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"Li" = (
+/obj/structure/rack,
+/obj/item/ammo_holder/quiver/arrows,
+/obj/item/gun/ballistic/bow/short,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "Lj" = (
 /obj/structure/fluff/railing/tall/palisade{
 	dir = 4
@@ -8048,6 +8062,10 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/north)
+"OH" = (
+/obj/structure/dye_bin,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "OJ" = (
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/central)
@@ -8704,6 +8722,12 @@
 	},
 /turf/closed/wall/mineral/stone,
 /area/indoors/dungeon)
+"Sv" = (
+/obj/structure/rack,
+/obj/item/natural/bundle/cloth/full,
+/obj/item/natural/bundle/cloth/bandage/full,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "Sw" = (
 /turf/open/floor/sand,
 /area/outdoors/wilderness)
@@ -8808,6 +8832,10 @@
 /obj/structure/chair/stool/bar,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/safe/gallowband_fort)
+"SV" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/ruinedwood/spiralfade,
+/area/indoors/wilderness/gallowband/garrison)
 "SW" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/clean/dirt,
@@ -9457,6 +9485,10 @@
 /obj/item/weapon/tongs/stone,
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/shop)
+"Wi" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/wilderness/gallowband/garrison)
 "Wj" = (
 /obj/item/bodypart/head/goblin,
 /turf/open/floor/dirt,
@@ -98751,7 +98783,7 @@ NT
 NT
 NT
 EU
-KW
+OH
 KW
 Os
 Os
@@ -98953,7 +98985,7 @@ NT
 NT
 yS
 EU
-KW
+Sv
 Gw
 Wv
 KA
@@ -99557,7 +99589,7 @@ NT
 NT
 NT
 fk
-KW
+vZ
 KW
 KW
 KW
@@ -99759,7 +99791,7 @@ NT
 NT
 Qg
 yS
-KW
+Li
 Gw
 Gw
 KW
@@ -99961,7 +99993,7 @@ NT
 NT
 Qg
 bZ
-KW
+Wi
 KW
 KW
 KW
@@ -100163,7 +100195,7 @@ NT
 Qg
 Qg
 bZ
-Gw
+SV
 Gw
 KW
 po
