@@ -63,12 +63,12 @@
 	var/named = FALSE
 
 /obj/item/child_toy/attack_self(mob/living/user)
-		if(!hugable)
-				return
+	if(!hugable)
+		return
 
-		user.add_stress(/datum/stress_event/hug)
-		playsound(user, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
-		visible_message(span_emote("[user] hugs [src.name]."), span_emote("I hug [src.name]."))
+	user.add_stress(/datum/stress_event/hug)
+	playsound(user, pick('sound/vo/hug.ogg'), 100, FALSE, -1)
+	visible_message(span_emote("[user] hugs [src.name]."), span_emote("I hug [src.name]."))
 
 /obj/item/child_toy/stick_doll
 	name = "stick doll"
