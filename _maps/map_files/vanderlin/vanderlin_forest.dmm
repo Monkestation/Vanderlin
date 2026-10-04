@@ -3402,6 +3402,8 @@
 /obj/item/grown/log/tree/stick,
 /obj/item/grown/log/tree/stick,
 /obj/item/grown/log/tree/stick,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/wilderness/gallowband/ship)
 "rK" = (
@@ -3688,7 +3690,7 @@
 /turf/open/floor/sandstone_tile/four,
 /area/indoors/dungeon)
 "tt" = (
-/obj/structure/pillory/reinforced,
+/obj/structure/pillory/gallowband/reinforced,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "tu" = (
@@ -4150,6 +4152,8 @@
 /obj/item/reagent_containers/glass/bottle/beer/spottedhen,
 /obj/item/reagent_containers/glass/bottle/beer/spottedhen,
 /obj/item/reagent_containers/glass/bottle/beer/spottedhen,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/wilderness/gallowband/ship)
 "vC" = (
@@ -5310,6 +5314,8 @@
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/reagent_containers/food/snacks/hardtack,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/wilderness/gallowband/ship)
 "BF" = (
@@ -8771,6 +8777,8 @@
 /obj/item/grown/log/tree/small,
 /obj/item/grown/log/tree/small,
 /obj/item/grown/log/tree/small,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/wilderness/gallowband/ship)
 "SP" = (
