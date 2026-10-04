@@ -3373,6 +3373,7 @@
 "cwp" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/fabric_double,
+/obj/structure/carpet/navy,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/magician)
 "cwr" = (
@@ -6571,12 +6572,12 @@
 /area/indoors/town/garrison)
 "eNd" = (
 /obj/structure/chair/wood/alt/chair_noble/red,
-/obj/effect/landmark/start/captain,
 /obj/structure/rack/shelf,
 /obj/item/natural/bundle/cloth{
 	pixel_y = 40;
 	amount = 10
 	},
+/obj/effect/landmark/start/captain,
 /turf/open/floor/carpet/red,
 /area/indoors/town/keep/garrison)
 "eNg" = (
@@ -7604,6 +7605,9 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
+	},
+/obj/effect/landmark/start/servant{
+	dir = 1
 	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/servant)
@@ -13711,6 +13715,10 @@
 /obj/effect/turf_decal/magedecal,
 /turf/open/floor/carpet/stellar,
 /area/indoors/town/keep/magician)
+"ktR" = (
+/obj/structure/carpet/navy,
+/turf/open/floor/ruinedwood/darker,
+/area/indoors/town/keep/magician)
 "ktT" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
 /area/indoors/town/tavern)
@@ -15632,7 +15640,9 @@
 	},
 /area/indoors/town/keep/lord_appt)
 "lXD" = (
-/obj/structure/door/violet,
+/obj/structure/door/violet{
+	name = "Court Magician's Chamber"
+	},
 /obj/effect/mapping_helpers/access/keyset/manor/mage,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/darker,
@@ -15918,6 +15928,9 @@
 "meW" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/double_pelt,
+/obj/effect/landmark/start/prince{
+	dir = 1
+	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/heir/heir1)
 "meZ" = (
@@ -15944,6 +15957,9 @@
 "mfL" = (
 /obj/structure/bed/hay,
 /obj/machinery/light/fueled/wallfire/candle/l,
+/obj/effect/landmark/start/servant{
+	dir = 4
+	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/servant)
 "mgh" = (
@@ -17808,8 +17824,17 @@
 /obj/structure/water_pipe,
 /turf/open/openspace,
 /area/indoors/town/clocktower)
+"nDy" = (
+/obj/effect/landmark/start/wapprentice{
+	dir = 1
+	},
+/turf/open/floor/carpet/stellar,
+/area/indoors/town/keep/magician)
 "nDP" = (
 /obj/structure/bed/hay,
+/obj/effect/landmark/start/servant{
+	dir = 1
+	},
 /turf/open/floor/wood,
 /area/indoors/town/keep/servant)
 "nEA" = (
@@ -19227,6 +19252,7 @@
 /area/indoors/town/keep/servant)
 "oNP" = (
 /obj/structure/closet/crate/drawer,
+/obj/structure/carpet/navy,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/magician)
 "oOs" = (
@@ -27040,6 +27066,7 @@
 "vlu" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/double_pelt,
+/obj/effect/landmark/start/prince,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/heir/heir2)
 "vlA" = (
@@ -28429,6 +28456,9 @@
 /area/under/town/sewer)
 "wpW" = (
 /obj/structure/chair/wood/alt/chair3{
+	dir = 1
+	},
+/obj/effect/landmark/start/archivist{
 	dir = 1
 	},
 /turf/open/floor/ruinedwood/spiral,
@@ -29851,9 +29881,15 @@
 /turf/open/floor/cobble,
 /area/indoors/town/keep/basement/thepit)
 "xuj" = (
-/obj/effect/landmark/start/wapprentice,
-/turf/open/floor/tile,
-/area/indoors/town/keep/magician)
+/obj/structure/bed/hay,
+/obj/effect/landmark/start/servant{
+	dir = 4
+	},
+/obj/effect/landmark/start/servant{
+	dir = 4
+	},
+/turf/open/floor/wood,
+/area/indoors/town/keep/servant)
 "xux" = (
 /turf/open/floor/tile/masonic,
 /area/indoors/town/keep/throne)
@@ -87611,7 +87647,7 @@ uiA
 edU
 hMK
 mfL
-nDP
+xuj
 hMK
 hMK
 iYt
@@ -126967,7 +127003,7 @@ jXg
 jXg
 jXg
 lZQ
-dlD
+lZQ
 lZQ
 ygD
 pUc
@@ -128586,7 +128622,7 @@ lZQ
 lSd
 szz
 efl
-efl
+nDy
 rar
 azA
 azA
@@ -128788,7 +128824,7 @@ lZQ
 maU
 fOP
 efl
-efl
+nDy
 lZQ
 ygD
 pUc
@@ -167773,7 +167809,7 @@ vFt
 lZQ
 mYn
 aKL
-xuj
+aKL
 aKL
 gjI
 lZQ
@@ -208577,8 +208613,8 @@ vFt
 oUv
 eHK
 bud
-olE
-olE
+ktR
+ktR
 pLm
 lZQ
 dLu
