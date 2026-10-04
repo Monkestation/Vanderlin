@@ -7232,7 +7232,7 @@
 "KV" = (
 /obj/structure/door/fancy,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/secure,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/wilderness/gallowband/ship)
 "KW" = (
