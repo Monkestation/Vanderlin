@@ -728,10 +728,6 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/beside_thatchwood)
-"dJ" = (
-/obj/structure/stone_tile/center/cracked,
-/turf/open/floor/dirt/road,
-/area/indoors/wilderness/shop)
 "dK" = (
 /mob/living/carbon/human/species/skeleton/no_equipment,
 /obj/item/clothing/head/helmet/leather/minershelm,
@@ -2821,8 +2817,7 @@
 /turf/open/openspace,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "oB" = (
-/obj/structure/stone_tile/block/cracked,
-/turf/open/floor/cobblerock,
+/turf/open/floor/cobble,
 /area/indoors/wilderness/shop)
 "oC" = (
 /obj/structure/fluff/customsign{
@@ -3072,10 +3067,6 @@
 /obj/structure/flora/newtree,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/north)
-"pY" = (
-/obj/structure/stone_tile/slab/cracked,
-/turf/open/floor/cobblerock,
-/area/indoors/wilderness/shop)
 "pZ" = (
 /obj/structure/table/wood{
 	dir = 5;
@@ -3338,13 +3329,13 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness/outpost/vanderlin)
 "rx" = (
-/obj/item/grown/log,
-/obj/item/grown/log{
+/obj/item/grown/log/tree,
+/obj/item/grown/log/tree{
 	pixel_x = 6
 	},
-/obj/item/grown/log{
-	pixel_x = 3;
-	pixel_y = 6
+/obj/item/grown/log/tree{
+	pixel_y = 6;
+	pixel_x = 3
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/shop)
@@ -8642,10 +8633,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"RY" = (
-/obj/structure/stone_tile/surrounding/cracked,
-/turf/open/floor/cobblerock,
-/area/indoors/wilderness/shop)
 "Sa" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 1
@@ -9445,7 +9432,6 @@
 /turf/closed/wall/mineral/wooddark,
 /area/indoors/wilderness)
 "Wf" = (
-/obj/structure/stone_tile/cracked,
 /obj/item/weapon/tongs/stone,
 /turf/open/floor/cobblerock,
 /area/indoors/wilderness/shop)
@@ -10019,9 +10005,6 @@
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/north)
-"YT" = (
-/turf/open/floor/dirt/road,
-/area/indoors/wilderness/shop)
 "YU" = (
 /turf/open/water/river{
 	dir = 1
@@ -36495,8 +36478,8 @@ fV
 Cw
 hq
 yY
-dJ
-RY
+oB
+hv
 hv
 ed
 ed
@@ -36697,7 +36680,7 @@ Cw
 Cw
 Vz
 rx
-pY
+hv
 oB
 vG
 ed
@@ -37101,7 +37084,7 @@ yb
 yb
 hq
 kP
-YT
+oB
 lP
 hq
 ed
