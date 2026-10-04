@@ -60,7 +60,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 	selection_color = "#c2a45d"
 	cmode_music = 'sound/music/cmode/church/CombatAstrata.ogg'
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
@@ -88,7 +87,7 @@
 
 	languages = list(/datum/language/celestial)
 	can_have_apprentices = FALSE
-	traits = list(TRAIT_VIRGIN)
+	traits = list(TRAIT_VIRGIN, TRAIT_IDENTIFY_DEVIL_MARKS)
 
 /datum/job/priest/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

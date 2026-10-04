@@ -46,7 +46,7 @@
 		if(1)
 			invocation_type = INVOCATION_WHISPER
 		if(2, 3)
-			invocation_type = INVOCATION_MESSAGE
+			invocation_type = INVOCATION_SHOUT
 
 /datum/action/cooldown/spell/projectile/blood_steal/toggle_arc_mode(mob/user)
 	current_mode = (current_mode % length(modes)) + 1

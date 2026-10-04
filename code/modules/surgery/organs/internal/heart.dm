@@ -14,8 +14,8 @@
 	current_blood = 600
 	blood_req = 5
 	oxygen_req = 5
-	nutriment_req = 1.5
-	hydration_req = 0.75
+	nutriment_req = 0.03
+	hydration_req = 0.03
 	/// Have we been bypassed to avoid nasty blockages?
 	var/open = FALSE
 	/// If we're not beating that is not a good sign

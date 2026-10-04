@@ -1,13 +1,14 @@
 /datum/attribute_holder/sheet/job/blacksmith
 	raw_attribute_list = list(
-		STAT_STRENGTH = 1,
+		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/blacksmithing = 40,
 		/datum/attribute/skill/craft/armorsmithing = 30,
@@ -37,7 +38,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/blacksmith

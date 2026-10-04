@@ -4,12 +4,14 @@
 		STAT_INTELLIGENCE = 3,
 		STAT_CONSTITUTION = 1,
 		STAT_ENDURANCE = 1,
+		STAT_SPEED = 1,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/magic/druidic = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/reading = 30,
@@ -26,7 +28,6 @@
 	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_ages = ALL_AGES_LIST
@@ -81,13 +82,13 @@
 		if("Path of Bone")//Plus to Surgery
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, 1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, -1, TRUE)
-			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/druidic, -1, TRUE)
 		if("Path of Nature")//Plus to Alchemy
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, 1, TRUE)
-			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, -1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/druidic, -1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, -1, TRUE)
-		if("Path of The Hunt")//Plus to Miracles
-			spawned.adjust_skillrank(/datum/attribute/skill/magic/holy, 1, TRUE)
+		if("Path of The Hunt")//Plus to Druid Magic
+			spawned.adjust_skillrank(/datum/attribute/skill/magic/druidic, 1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, -1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/medicine, -1, TRUE)
 

@@ -117,6 +117,12 @@
 	item_path = /obj/item/clothing/cloak/raincloak/furcloak
 	triumph_cost_permanent = 100
 
+/datum/loadout_item/forestcloak
+	name = "Forester's Cloak"
+	ui_category = "Cloaks"
+	item_path = /obj/item/clothing/cloak/forrestercloak
+	triumph_cost_permanent = 100
+
 /datum/loadout_item/bandolier
 	name = "Bandolier"
 	item_path = /obj/item/clothing/cloak/bandolier
@@ -134,6 +140,12 @@
 	item_path = /obj/item/clothing/cloak/poncho/fancycoat
 	ui_category = "Cloaks"
 	triumph_cost_permanent = 100
+
+/datum/loadout_item/forestcloaksnow
+	name = "Forester's Snow Cloak"
+	ui_category = "Cloaks"
+	item_path = /obj/item/clothing/cloak/forrestercloak/snow
+	triumph_cost_permanent = 200
 
 /datum/loadout_item/blackmeadow_coat
 	name = "Jinbaori"

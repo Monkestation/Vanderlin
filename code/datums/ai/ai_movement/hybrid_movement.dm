@@ -5,6 +5,7 @@
 	always_advanced = TRUE
 
 /datum/ai_movement/hybrid_pathing/wave_defense
+	max_path_distance = 50
 	path_to_closest_on_fail = TRUE
 	always_advanced = TRUE
 

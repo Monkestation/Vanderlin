@@ -235,3 +235,176 @@
   voidwytch:
   - rscadd: Added ten sets of Wintermare nobility clothes and their respective crafting
       recipes
+2026-09-15:
+  realforest2001:
+  - rscadd: Miscellaneous fixes and tweaks to Blood Magic related things.
+  - bugfix: Fixed Bloodstone Ore missing in cold/environment specific rocks.
+2026-09-16:
+  dwasint:
+  - rscadd: Added examine highlights system.
+  realforest2001:
+  - rscadd: Added forest cloak and forest snow cloak to loadout options.
+  - rscadd: Added a hood to loadout options.
+  - bugfix: Fixed pearl necklaces from loadout being free money.
+  - bugfix: Repulse spell will no longer fuck up everything in the game.
+2026-09-17:
+  realforest2001:
+  - rscadd: Half snow elves can be more things. Added half snow elf and snow elf to
+      more direct blacklists.
+  - rscadd: Added the ability for the Finger's Crown to send messages to other holders.
+      Only functions with people who know court agent identities. (Monarch, Hand and
+      agents)
+  - rscadd: Added the Quack subclass for Court Agent, locked to Medicator.
+  - rscadd: Added the Far Eastern Assassin subclass for Court Agent, locked to Human,
+      Elf, Drow and Half-Elf/Drow.
+  - rscadd: Added the Dunewalker subclass for Court Agent, locked to Zaladin relevant
+      races.
+  - rscadd: Added the Grenzelhoft Surefire subclass for Court Agent, locked to Grenzelhoft
+      relevant races.
+  - rscadd: Added Crimson Blade subclass for Court Agent and Adventurer, locked to
+      Tiefling. Rare spawn for Adventurer.
+  - rscadd: Added Occult Librarian subclass for Court Agent, locked to Apostatsy.
+      Medium-Rare spawn for Adventurer.
+  - rscadd: Added a trait for items not appearing on examine list.
+  - rscadd: Added a knife sheathe with the above.
+  - map: Remapped the Court Agent hideout.
+  - bugfix: Bathing with integrated skin armor now works properly.
+2026-09-18:
+  realforest2001:
+  - rscadd: Added more heretical examine highlights.
+  - rscadd: Added some non-heretical examine highlights.
+  - balance: Adjusted duration of Enervating Elegy's status effect.
+  - bugfix: Fixed unreachable code in create_wave.
+  - rscdel: Deleted the Check Devotion verb as made redundant by Devotion being displayed
+      on Stat tab.
+  - rscadd: Court Agent and Wretches no longer appear in the actors list from lobby.
+  - map: Fixed some parts of the Vanderlin Keep moat that got stuck on rocks.
+  - bugfix: Fixed spell-granting scrolls breaking if you right click them.
+  - map: Vault is no longer jauntable.
+  - map: Fixed heir secret passage on Vanderlin being linked.
+  - rscdel: Removed Skeleton Be-Special.
+  - bugfix: You now require arcyne skill to invoke magic runes.
+2026-09-20:
+  SpeedofDeath118:
+  - rscadd: Added the ornate tunic and ornate dress to the Loadout menu.
+2026-09-21:
+  Ardcrumb:
+  - map: Adjusts the inquisition base's items and adds some additional ones for QoL.
+  Gatsby229:
+  - rscadd: Added several neurotoxins.
+  - rscadd: Added god/lux based poisons, each with strong effects.
+  realforest2001:
+  - rscdel: Disables Grandmaster Templar
+  - code_imp: Renamed a variable for whether you can play a job back-to-back rounds.
+2026-09-22:
+  SamuraiSpork:
+  - balance: Reduced cost of Blessed Bullion in Marque shop
+  - code_imp: Edited name of "Extra Funding" to 400 mammons instead of 80 silvers.
+  realforest2001:
+  - bugfix: Heretic monarchs without the triumph no longer break roundstart.
+2026-09-25:
+  Galaxybird:
+  - rscadd: Added the ability to designate another character as a sibling in Family
+      preferences
+  ModDownloading:
+  - rscadd: Drow and Half-Drow can now be Enforcers.
+  realforest2001:
+  - rscadd: All Circlets and Crowns can now fit on the mask slot too.
+  - rscadd: Added two admin traits for using the THROAT without being regent or without
+      the crown.
+  - rscdel: Removed the surplus crown from code.
+  - bugfix: Fixed scrying people with apostrophes in their name.
+  - map: Inn Toilet and Baths now use a proper door with a deadbolt instead of a plank
+      of wood.
+  - map: Keep servants quarters got the same door upgrade.
+  - rscdel: Church roles no longer identify Centrism at a glance.
+  - rscadd: Added worship of the Archdevils.
+  - rscadd: Tied roles that start with blood magic to the Archdevils.
+  - rscadd: Gloves now hide your palms. Certain roles can identify devil worshippers
+      by examining their bare palms from close range. This may change.
+  - rscadd: Gloves (other than plate/chain) now hide if you're wearing a ring.
+  - rscadd: Added Abraxas' Curse, which turns you into a tiefling.
+  - rscadd: Added Mephistopheles' Curse, which prevents you using blood magic.
+  - rscadd: Added Leviathan's Curse, which makes you unable to see in the dark and
+      plays eerie sounds.
+  - rscadd: Added Blood Herald Wretch, a rare spawn which functions similar to Iconoclast.
+      No god can claim dominion over your masters, you will bring them all low.
+  - rscadd: Added a unique variant of Blood Choke to the Herald, able to be resisted
+      out of by Resist, Clicking the Status Icon or Clicking yourself.
+  - rscadd: Added Blood Harvest, an AOE Blood Magic spell that is not possible to
+      learn. Used by the Herald as their only source of Vitae and to keep them fighting
+      longer.
+  - balance: Blacksteel (and bloodsteel) armor now has the correct stats.
+  - rscadd: Bug Reports generated in-game can now be tagged as a Sprites issue.
+2026-09-27:
+  Ordosian:
+  - image: Fixed a bunch of sprites.
+  - code_imp: breeches icon state.
+  ta3754859-max:
+  - rscadd: Working aim assist, now clicking on a tile/item/object a person is standing
+      on will target them. Doesn't work on people laying down/dead, those that are
+      invisible.
+2026-09-28:
+  DustanHache:
+  - bugfix: 'Crude gravefence recipe now has a output.
+
+      :cl:
+
+      <!-- Both :cl:''s are required for the changelog to work! You can put your name
+      to the right of the first :cl: if you want to overwrite your GitHub username
+      as author ingame. -->
+
+      <!-- You can use multiple of the same prefix (they''re only used for the icon
+      ingame) and delete the unneeded ones. Despite some of the tags, changelogs should
+      generally represent how a player might be affected by the changes rather than
+      a summary of the PR''s contents. -->
+
+      ## Pre-Merge Checklist
+
+      <!-- Don''t bother filling these in while creating your Pull Request, just click
+      the checkboxes after the Pull Request is opened and you are redirected to the
+      page. -->
+
+      - [x] You tested this on a local server.
+
+      - [x] This code did not runtime during testing.
+
+      - [x] You documented all of your changes.
+
+      <!-- Neither the compiler nor workflow checks are perfect at detecting runtimes
+      and errors. It is important to test your code/feature/fix locally. -->'
+  dwasint:
+  - refactor: redstone has been rewritten to not be as bad, and is now obtainable
+  - rscadd: pneumatic tube system that allows the moving of items (and kobolds) through
+      tubes.
+  - rscadd: claw intent on zombies now lets you damage any structure instead of just
+      doors and windows
+  - rscadd: mob stock system for maps which will keep a set amount of things in stock
+      at any given time
+  - rscadd: vertical gates
+  - rscadd: you can now twirl spears by right clicking them while holding them in
+      your active hand.
+  - rscadd: you can now grow rice, and with that a few rice related dishes
+  - rscadd: you can now deep fry bird
+  - rscadd: you can now click glasses together by each offering eachother the glass
+2026-09-30:
+  ModDownloading:
+  - balance: Towner roles now have statlines on par with the average Adventurer (+3
+      or +4 instead of +2).
+  - balance: Business owners have higher Wrestling skill to deal with unruly customers,
+      and may have 30 skill in their primary weapon.
+  - balance: The Preacher rare Pilgrim role has better stats and skills, and has Psydonian
+      Grit.
+  - balance: Squires no longer have negative statlines.
+  - qol: Almost every role has a minimum of 10 Wrestling, Unarmed, Swimming, Climbing,
+      and Athletics skill. Most had this already but a few were previously overlooked.
+  - rscdel: Ghosts no longer have a black-and-white filter, which you could claim
+      is actually an addition of color but as far as the code is concerned it's deletion.
+  PotatoTomahto:
+  - balance: you will now be warned before you get debuffed by hunger and thirst
+  - balance: hunger and thirst rates increased
+  SamuraiSpork:
+  - spellcheck: Fixed incorrect spelling on Town Watch Lieutenant Helm
+  Wyrmtongue336:
+  - rscadd: Adds a whisper variant of "Choke with blood"
+  - code_imp: Occult Librarian now whispers the choke with blood invocation.

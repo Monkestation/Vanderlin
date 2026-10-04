@@ -59,6 +59,7 @@
 	desc = ""
 	item_state = "cursedrosa_crown"
 	icon_state = "cursedrosa_crown"
+	examine_highlight_type = /datum/examine_highlight/blackbriar
 
 /obj/item/clothing/head/flowercrown/salvia
 	name = "salvia crown"

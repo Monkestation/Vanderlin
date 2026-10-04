@@ -8,7 +8,7 @@
 	cast_range = 5
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	associated_skill = /datum/attribute/skill/magic/holy
+	associated_skill = /datum/attribute/skill/magic/druidic
 	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)
 
 	invocation = "Forest bind them..."

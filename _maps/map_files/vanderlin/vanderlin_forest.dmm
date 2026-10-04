@@ -560,10 +560,7 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "dt" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_mountain-mountain";
-	aportalid = "vanderlin-forest_mountain-forest"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/forest_mountain,
 /turf/open/floor/dirt/road,
 /area/under/cave)
 "dv" = (
@@ -1326,7 +1323,8 @@
 	},
 /obj/item/weapon/sword/katana/mulyeog/rumacaptain{
 	name = "Astrata's Will";
-	desc = "A gold-stained sword with cloud patterns, it seems to be a highly sacred relic."
+	desc = "A gold-stained sword with cloud patterns, it seems to be a highly sacred relic.";
+	examine_highlight_type = /datum/examine_highlight/divine
 	},
 /turf/open/floor/sandstone_tile/five,
 /area/indoors/dungeon)
@@ -3127,10 +3125,7 @@
 /turf/closed/wall/mineral/decowood,
 /area/indoors/wilderness/tavern)
 "sl" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_town-town";
-	aportalid = "vanderlin-forest_town-forest"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/forest_basin,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
 "sp" = (
@@ -8095,10 +8090,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/wilderness/tavern)
 "Uc" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_bog-bog";
-	aportalid = "vanderlin-forest_bog-forest"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/forest_bog,
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness)
 "Ud" = (

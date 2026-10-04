@@ -1,14 +1,14 @@
 /datum/attribute_holder/sheet/job/farmer
 	raw_attribute_list = list(
-		STAT_STRENGTH = 1,
+		STAT_STRENGTH = 2,
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 1,
 		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/polearms = 20,
-		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/whipsflails = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/labor/farming = 40,
@@ -22,6 +22,8 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/tanning = 20,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/labor/butchering = 40
@@ -42,7 +44,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 12
 	spawn_positions = 12
-	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 
 	allowed_races = RACES_PLAYER_ALL
@@ -102,13 +103,12 @@
 
 /datum/attribute_holder/sheet/job/soilchild
 	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
-		STAT_CONSTITUTION = 1,
-		STAT_ENDURANCE = -1,
-		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/labor/taming = 10,
@@ -134,7 +134,6 @@
 	total_positions = 6
 	spawn_positions = 6
 	allowed_ages = list(AGE_CHILD)
-	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/soilchild
