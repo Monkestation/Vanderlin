@@ -35,6 +35,7 @@
 		TRAIT_BATTLE_READY,
 		TRAIT_BLINDFIGHTING,
 		TRAIT_UNDODGING, //They can't dodge at all. This also mean that if they don't have anything to parry with, they're done.
+		TRAIT_EXPERT_PARRY,
 	)
 
 /datum/job/advclass/mercenary/enforcer/after_spawn(mob/living/carbon/human/spawned, client/player_client)

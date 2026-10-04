@@ -4338,6 +4338,7 @@
 #include "code\modules\spells\spell_types\pointed\eoran_charm.dm"
 #include "code\modules\spells\spell_types\pointed\extract_heart.dm"
 #include "code\modules\spells\spell_types\pointed\find_flaw.dm"
+#include "code\modules\spells\spell_types\pointed\forest_bind.dm"
 #include "code\modules\spells\spell_types\pointed\geas.dm"
 #include "code\modules\spells\spell_types\pointed\gravemark.dm"
 #include "code\modules\spells\spell_types\pointed\gravity.dm"

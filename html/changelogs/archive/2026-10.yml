@@ -1,0 +1,18 @@
+2026-10-02:
+  realforest2001:
+  - map: Transit Tiles to move between Vanderlin and its submaps are now faster.
+2026-10-03:
+  ModDownloading:
+  - balance: Baothan Iconoclasts now get the Baothan full plate instead of generic
+      full plate.
+2026-10-04:
+  ta3754859-max:
+  - balance: 'reworks the parry code to being a flat % chance with the formula being:
+      defender_skill * 2 - attacker_skill + weapon_defense * 5 + rmb_intent.def_bonus
+      + misc modifiers'
+  - balance: readjust the modifiers to fit the percent change
+  - balance: increased defense stats for all shields
+  - balance: gives fencer and enforcer expert parry traits
+  - balance: removes perfect parries
+  - bugfix: clenched fist has associated unarmed skill
+  - qol: on parry it shows your actual parry chance

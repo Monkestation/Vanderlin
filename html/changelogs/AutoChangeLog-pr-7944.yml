@@ -1,0 +1,9 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added access defines for different gallowband roles."
+  - balance: "Gave all gallowband roles 20 skill in Leatherwork Patching."
+  - balance: "Improved Gothi Medical skill to 20 (Worse than Bog Witch) and Druidic Trickery skill to 40 (equal to Bog Witch)."
+  - rscadd: "Added regional areas to the Murderwood."
+  - map: "Added a third Z to Murderwood, making the trees taller and slightly expanding the Gallowfort upward. More to come perhaps later."
+  - rscadd: "Added two new miracles to The Great Hunt, Forest Bind (Similar to Gravity spell) and Calm Beast (Tame, like Dendorites)."
