@@ -1,5 +1,6 @@
+import type { ReactNode } from 'react';
 import { useBackend } from '../backend';
-import { Box, Button, LabeledList, Section, Stack } from 'tgui-core/components';
+import { Box, Button, Stack } from 'tgui-core/components';
 import { Window } from '../layouts';
 
 type Data = {
@@ -42,7 +43,17 @@ type Data = {
   headshot_link: string;
   nudeshot_link: string;
   gallery_count: number;
-  gallery_links: string;
+};
+
+const LINE = '1px solid rgba(255, 255, 255, 0.35)';
+const HEADER_COLOR = '#6ee7b7';
+
+const frame = { border: LINE };
+
+const headerStyle = {
+  textAlign: 'center' as const,
+  color: HEADER_COLOR,
+  borderBottom: LINE,
 };
 
 const editStyle = {
@@ -50,14 +61,47 @@ const editStyle = {
   textDecoration: 'underline dotted',
 };
 
-const boxBorder = {
-  border: '1px solid rgba(255, 255, 255, 0.35)',
-};
+const isHex = (c: string) => /^#?[0-9a-fA-F]{6}$/.test(c);
+const hex = (c: string) => `#${c.replace(/^#+/, '')}`;
+const short = (text: string, max = 26) =>
+  text.length > max ? `${text.slice(0, max)}...` : text;
 
-const dividerStyle = {
-  borderLeft: '1px solid rgba(255, 255, 255, 0.35)',
-  paddingLeft: '8px',
-};
+const swatch = (c: string) =>
+  isHex(c) ? (
+    <Box
+      inline
+      mr={0.5}
+      style={{
+        width: '0.9em',
+        height: '0.9em',
+        background: hex(c),
+        border: LINE,
+        verticalAlign: 'middle',
+      }}
+    />
+  ) : null;
+
+const Panel = (props: { title: string; children: ReactNode }) => (
+  <Box style={{ ...frame, height: '100%' }}>
+    <Box bold py={0.5} style={headerStyle}>
+      {props.title}
+    </Box>
+    <Box p={1}>{props.children}</Box>
+  </Box>
+);
+
+const Row = (props: {
+  label: string;
+  stacked?: boolean;
+  children: ReactNode;
+}) => (
+  <Box py={0.4} style={{ textAlign: 'center' }}>
+    <Box inline={!props.stacked} color="label" mr={props.stacked ? 0 : 0.75}>
+      {props.label}:
+    </Box>
+    {props.children}
+  </Box>
+);
 
 export const CharacterSheet = () => {
   const { data, act } = useBackend<Data>();
@@ -101,314 +145,332 @@ export const CharacterSheet = () => {
     headshot_link = '',
     nudeshot_link = '',
     gallery_count = 0,
-    gallery_links = '',
   } = data;
 
   const edit = (key: string) => act('edit_field', { pref_key: key });
 
+  const field = (key: string, text: string) => (
+    <span style={editStyle} onClick={() => edit(key)}>
+      {text}
+    </span>
+  );
+
+  const colorField = (key: string, c: string) => (
+    <span style={editStyle} onClick={() => edit(key)}>
+      {swatch(c)}
+      {isHex(c) ? hex(c) : c}
+    </span>
+  );
+
   return (
-    <Window width={900} height={820} title="Who Are You?">
+    <Window width={960} height={960} title="Лист Персонажа">
       <Window.Content scrollable>
-        <Stack>
-          <Stack.Item style={{ width: 
-'320px'
- }}>
-            <Box style={boxBorder} p={1} mb={1}>
-              <Box bold mb={1} style={{ textAlign: 
-'center'
- }}>
-                Просмотр спрайта персонажа
-              </Box>
-              <Stack justify="center" align="center">
-                <Stack.Item>
-                  <Button
-                    icon="chevron-left"
-                    onClick={() => act('rotate_preview', { way: 'left' })}
-                  />
-                </Stack.Item>
-                <Stack.Item mx={1}>
-                  {preview_image && (
-                    <img
-                      src={
-'data:image/png;base64,'
- + preview_image}
-                      style={{
-                        display: 'block',
-                        imageRendering: 'pixelated',
-                      }}
-                    />
-                  )}
-                </Stack.Item>
-                <Stack.Item>
-                  <Button
-                    icon="chevron-right"
-                    onClick={() => act('rotate_preview', { way: 'right' })}
-                  />
-                </Stack.Item>
-              </Stack>
-              <Stack justify="center" mt={1}>
-                <Stack.Item grow basis={0}>
-                  <Button
-                    fluid
-                    onClick={() => edit('species')}
-                  >
-                    Раса
-                  </Button>
-                </Stack.Item>
-                <Stack.Item grow basis={0}>
-                  <Button
-                    fluid
-                    onClick={() => act('open_body_markings')}
-                  >
-                    Детали персонажа
-                  </Button>
-                </Stack.Item>
-              </Stack>
-              <Box mt={1} style={{ textAlign: 
-'center'
- }} color="label">
-                {species}
-              </Box>
-            </Box>
-
-            <Box style={boxBorder} p={1}>
-              <Stack>
-                <Stack.Item grow basis={0}>
-                  <Box bold mb={1} style={{ textAlign: 
-'center'
- }}>
-                    Личность
-                  </Box>
-                  <LabeledList>
-                    <LabeledList.Item label="Имя">
-                      <span style={editStyle} onClick={() => edit('real_name')}>{character_name}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Возраст">
-                      <span style={editStyle} onClick={() => edit('age')}>{age}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Местоим.">
-                      <span style={editStyle} onClick={() => edit('pronouns')}>{pronouns}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Происх.">
-                      <span style={editStyle} onClick={() => edit('culture')}>{culture}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Религия">
-                      <span style={editStyle} onClick={() => edit('faith')}>{faith}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Покров.">
-                      <span style={editStyle} onClick={() => edit('selected_patron')}>{patron}</span>
-                    </LabeledList.Item>
-                  </LabeledList>
-                </Stack.Item>
-                <Stack.Item grow basis={0} style={dividerStyle}>
-                  <Box bold mb={1} style={{ textAlign: 
-'center'
- }}>
-                    Тело
-                  </Box>
-                  <LabeledList>
-                    <LabeledList.Item label="Кожа">
-                      <span style={editStyle} onClick={() => edit('skin_tone')}>{skin_tone}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Детали">
-                      <span style={{ ...editStyle, color: detail_color }} onClick={() => edit('detail_color')}>{detail_color}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Тату">
-                      <Button
-                        onClick={() => act('open_body_markings')}
-                      >
-                        ({markings_count})
-                      </Button>
-                    </LabeledList.Item>
-                  </LabeledList>
-                </Stack.Item>
-              </Stack>
-            </Box>
-          </Stack.Item>
-
-          <Stack.Item grow>
-            <Section title="Голос" style={boxBorder} mb={1}>
-              <LabeledList>
-                <LabeledList.Item label="Цвет голоса">
-                  <span style={{ ...editStyle, color: voice_color }} onClick={() => edit('voice_color')}>{voice_color}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Тип голоса">
-                  <span style={editStyle} onClick={() => edit('voice_type')}>{voice_type}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Цвет никнейма">
-                  <span style={{ ...editStyle, color: nickname_color }} onClick={() => edit('nickname_color')}>{nickname_color}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Акцент">
-                  <span style={editStyle} onClick={() => edit('selected_accent')}>{accent}</span>
-                </LabeledList.Item>
-              </LabeledList>
-            </Section>
-
-            <Section title="Игровые функции" style={boxBorder} mb={1}>
-              <LabeledList>
-                <LabeledList.Item label="Доминирующая рука">
-                  <span style={editStyle} onClick={() => edit('domhand')}>{dominant_hand}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Предпочтение еды">
-                  <Button
-                    onClick={() => act('open_culinary')}
-                  >
-                    {favourite_food} / {favourite_drink}
-                  </Button>
-                </LabeledList.Item>
-                <LabeledList.Item label="Невозрождаемость">
-                  <span style={editStyle} onClick={() => edit('permadeath')}>{permadeath}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Музыка осмотра">
-                  <span style={editStyle} onClick={() => edit('examine_music')}>{examine_music}</span>
-                </LabeledList.Item>
-              </LabeledList>
-            </Section>
-
+        <Stack vertical>
+          <Stack.Item>
             <Stack>
               <Stack.Item grow basis={0}>
-                <Section title="IC Описания" fill style={boxBorder}>
-                  <LabeledList>
-                    <LabeledList.Item label="Хэдшот">
-                      <span style={editStyle} onClick={() => edit('headshot_link')}>{headshot_link || 
-'None'
-}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Флэйвор">
-                      <span style={editStyle} onClick={() => edit('flavortext')}>{flavortext || 
-'None'
-}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="NSFW">
-                      <span style={editStyle} onClick={() => edit('nsfw_flavor')}>{nsfw_flavor}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Слухи">
-                      <Button
-                        onClick={() => act('open_rumors')}
-                      >
-                        ({rumors_count})
-                      </Button>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Nudeshot">
-                      <span style={editStyle} onClick={() => edit('nudeshot_link')}>{nudeshot_link || 
-'None'
-}</span>
-                    </LabeledList.Item>
-                  </LabeledList>
-                </Section>
-              </Stack.Item>
-              <Stack.Item grow basis={0}>
-                <Section title="OOC Описания" fill style={boxBorder}>
-                  <LabeledList>
-                    <LabeledList.Item label="Заметки">
-                      <span style={editStyle} onClick={() => edit('ooc_notes')}>{ooc_notes || 
-'None'
-}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Доп. ссылка">
-                      <span style={editStyle} onClick={() => edit('ooc_extra_link')}>{ooc_extra_link || 
-'None'
-}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="ERP">
-                      <span style={editStyle} onClick={() => edit('erp_preferences')}>{erp_preferences || 
-'None'
-}</span>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Галерея">
-                      <Button
-                        onClick={() => edit('character_gallery')}
-                      >
-                        ({gallery_count})
-                      </Button>
-                    </LabeledList.Item>
-                    <LabeledList.Item label="Сплетни">
-                      <Button
-                        onClick={() => act('open_gossip')}
-                      >
-                        ({gossip_count})
-                      </Button>
-                    </LabeledList.Item>
-                  </LabeledList>
-                </Section>
-              </Stack.Item>
-            </Stack>
-
-            <Stack mt={1}>
-              <Stack.Item grow basis={0}>
-                <Button
-                  fluid
-                  color="good"
-                  icon="save"
-                  onClick={() => act('save_character')}
+                <Box
+                  style={{ ...frame, height: '100%', textAlign: 'center' }}
+                  p={1}
                 >
-                  Сохранить изменения
-                </Button>
+                  <Box bold>PQ</Box>
+                  <Box>{pq}</Box>
+                </Box>
               </Stack.Item>
               <Stack.Item grow basis={0}>
-                <Button
-                  fluid
-                  color="bad"
-                  icon="undo"
-                  onClick={() => act('cancel_changes')}
+                <Stack vertical>
+                  <Stack.Item>
+                    <Button
+                      fluid
+                      icon="user-tag"
+                      onClick={() => act('open_job_select')}
+                    >
+                      Выбор Роли
+                    </Button>
+                  </Stack.Item>
+                  <Stack.Item>
+                    <Button
+                      fluid
+                      color="bad"
+                      icon="user-secret"
+                      onClick={() => act('open_antag_prefs')}
+                    >
+                      Антагонист роли
+                    </Button>
+                  </Stack.Item>
+                </Stack>
+              </Stack.Item>
+              <Stack.Item grow basis={0}>
+                <Box
+                  style={{ ...frame, height: '100%', textAlign: 'center' }}
+                  p={1}
                 >
-                  Отменить изменения
-                </Button>
+                  <Box bold>Триумфы</Box>
+                  <Box>{triumphs}</Box>
+                </Box>
               </Stack.Item>
             </Stack>
           </Stack.Item>
-        </Stack>
 
-        <Stack mt={1}>
-          <Stack.Item grow basis={0}>
-            <Section title="Класс" fill style={boxBorder}>
-              <LabeledList>
-                <LabeledList.Item label="Player Quality">{pq}</LabeledList.Item>
-                <LabeledList.Item label="Триумфы">{triumphs}</LabeledList.Item>
-                <LabeledList.Item label="Loadout 1">{loadout1}</LabeledList.Item>
-                <LabeledList.Item label="Loadout 2">{loadout2}</LabeledList.Item>
-                <LabeledList.Item label="Loadout 3">{loadout3}</LabeledList.Item>
-              </LabeledList>
-              <Button
-                mt={1}
-                fluid
-                icon="star"
-                onClick={() => act('open_quirks')}
-              >
-                Quirks ({quirks_count})
-              </Button>
-              <Button
-                mt={1}
-                fluid
-                icon="user-tag"
-                onClick={() => act('open_job_select')}
-              >
-                Change Role
-              </Button>
-              <Button
-                mt={1}
-                fluid
-                icon="user-secret"
-                onClick={() => act('open_antag_prefs')}
-              >
-                Antagonist Preferences
-              </Button>
-            </Section>
+          <Stack.Item>
+            <Stack>
+              <Stack.Item grow basis={0}>
+                <Stack vertical>
+                  <Stack.Item>
+                    <Box style={frame} p={1}>
+                      <Box bold mb={1} style={{ textAlign: 'center' }}>
+                        Просмотр спрайта персонажа
+                      </Box>
+                      <Box style={frame} p={1}>
+                        <Stack align="center">
+                          <Stack.Item>
+                            <Button
+                              icon="arrow-left"
+                              style={{ fontSize: '1.6em' }}
+                              onClick={() =>
+                                act('rotate_preview', { way: 'left' })
+                              }
+                            />
+                          </Stack.Item>
+                          <Stack.Item grow style={{ textAlign: 'center' }}>
+                            {preview_image && (
+                              <img
+                                src={`data:image/png;base64,${preview_image}`}
+                                style={{
+                                  display: 'block',
+                                  margin: '0 auto',
+                                  height: '192px',
+                                  imageRendering: 'pixelated',
+                                }}
+                              />
+                            )}
+                            <Box color="label" mt={0.5}>
+                              {species}
+                            </Box>
+                          </Stack.Item>
+                          <Stack.Item>
+                            <Button
+                              icon="arrow-right"
+                              style={{ fontSize: '1.6em' }}
+                              onClick={() =>
+                                act('rotate_preview', { way: 'right' })
+                              }
+                            />
+                          </Stack.Item>
+                        </Stack>
+                        <Stack mt={1}>
+                          <Stack.Item grow basis={0}>
+                            <Button fluid onClick={() => edit('species')}>
+                              Раса
+                            </Button>
+                          </Stack.Item>
+                          <Stack.Item grow basis={0}>
+                            <Button
+                              fluid
+                              onClick={() => act('open_body_markings')}
+                            >
+                              Детали персонажа
+                            </Button>
+                          </Stack.Item>
+                        </Stack>
+                      </Box>
+                    </Box>
+                  </Stack.Item>
+
+                  <Stack.Item>
+                    <Box style={{ ...frame, display: 'flex' }}>
+                      <Box style={{ flex: 1 }}>
+                        <Box bold py={0.5} style={headerStyle}>
+                          Личность
+                        </Box>
+                        <Box p={1}>
+                          <Row label="Имя">
+                            {field('real_name', character_name)}
+                          </Row>
+                          <Row label="Возраст">{field('age', age)}</Row>
+                          <Row label="Местоимение">
+                            {field('pronouns', pronouns)}
+                          </Row>
+                          <Row label="Происхождение">
+                            {field('culture', culture)}
+                          </Row>
+                          <Row label="Религия">{field('faith', faith)}</Row>
+                          <Row label="Покровитель">
+                            {field('selected_patron', patron)}
+                          </Row>
+                        </Box>
+                      </Box>
+                      <Box style={{ flex: 1, borderLeft: LINE }}>
+                        <Box bold py={0.5} style={headerStyle}>
+                          Тело
+                        </Box>
+                        <Box p={1}>
+                          <Row label="Цвет кожи">
+                            {colorField('skin_tone', skin_tone)}
+                          </Row>
+                          <Row label="Цвет деталей">
+                            {colorField('detail_color', detail_color)}
+                          </Row>
+                          <Row label="Тату/Маркировки">
+                            <Button onClick={() => act('open_body_markings')}>
+                              Открыть ({markings_count})
+                            </Button>
+                          </Row>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </Stack.Item>
+                </Stack>
+              </Stack.Item>
+
+              <Stack.Item grow basis={0}>
+                <Stack vertical>
+                  <Stack.Item>
+                    <Stack>
+                      <Stack.Item grow basis={0}>
+                        <Panel title="Голос">
+                          <Row label="Цвет голоса">
+                            {colorField('voice_color', voice_color)}
+                          </Row>
+                          <Row label="Тип голоса">
+                            {field('voice_type', voice_type)}
+                          </Row>
+                          <Row label="Цвет никнейма">
+                            {colorField('nickname_color', nickname_color)}
+                          </Row>
+                          <Row label="Акцент">
+                            {field('selected_accent', accent)}
+                          </Row>
+                        </Panel>
+                      </Stack.Item>
+                      <Stack.Item grow basis={0}>
+                        <Panel title="Игровые функции">
+                          <Row label="Доминирующая рука">
+                            {field('domhand', dominant_hand)}
+                          </Row>
+                          <Row label="Предпочтение еды">
+                            <Button onClick={() => act('open_culinary')}>
+                              {favourite_food} / {favourite_drink}
+                            </Button>
+                          </Row>
+                          <Row label="Невозрождаемость">
+                            {field('permadeath', permadeath)}
+                          </Row>
+                        </Panel>
+                      </Stack.Item>
+                    </Stack>
+                  </Stack.Item>
+
+                  <Stack.Item>
+                    <Stack>
+                      <Stack.Item grow basis={0}>
+                        <Panel title="IC Описания">
+                          <Row stacked label="Хэдшот персонажа">
+                            {field('headshot_link', short(headshot_link || 'None'))}
+                          </Row>
+                          <Row stacked label="Флэйвор персонажа">
+                            {field('flavortext', short(flavortext || 'None'))}
+                          </Row>
+                          <Row stacked label="NSFW флейвор">
+                            {field('nsfw_flavor', nsfw_flavor)}
+                          </Row>
+                          <Row stacked label="Слухи/сплетни о персонаже">
+                            <Button onClick={() => act('open_rumors')}>
+                              Слухи ({rumors_count})
+                            </Button>
+                            <Button onClick={() => act('open_gossip')}>
+                              Сплетни ({gossip_count})
+                            </Button>
+                          </Row>
+                          <Row stacked label="Nudeshot">
+                            {field('nudeshot_link', short(nudeshot_link || 'None'))}
+                          </Row>
+                        </Panel>
+                      </Stack.Item>
+                      <Stack.Item grow basis={0}>
+                        <Panel title="OOC Описания">
+                          <Row stacked label="OOC Заметки">
+                            {field('ooc_notes', short(ooc_notes || 'None'))}
+                          </Row>
+                          <Row stacked label="OOC доп. изображение">
+                            {field('ooc_extra_link', short(ooc_extra_link || 'None'))}
+                          </Row>
+                          <Row stacked label="ERP Предпочтения">
+                            {field('erp_preferences', short(erp_preferences || 'None'))}
+                          </Row>
+                          <Row stacked label="Музыка при осмотре">
+                            {field('examine_music', examine_music)}
+                          </Row>
+                          <Row stacked label="Галерея персонажа">
+                            <Button onClick={() => edit('character_gallery')}>
+                              Открыть ({gallery_count})
+                            </Button>
+                          </Row>
+                        </Panel>
+                      </Stack.Item>
+                    </Stack>
+                  </Stack.Item>
+
+                  <Stack.Item>
+                    <Stack>
+                      <Stack.Item grow basis={0}>
+                        <Button
+                          fluid
+                          color="good"
+                          icon="save"
+                          onClick={() => act('save_character')}
+                        >
+                          Сохранить изменения
+                        </Button>
+                      </Stack.Item>
+                      <Stack.Item grow basis={0}>
+                        <Button
+                          fluid
+                          color="bad"
+                          icon="undo"
+                          onClick={() => act('cancel_changes')}
+                        >
+                          Отменить изменения
+                        </Button>
+                      </Stack.Item>
+                    </Stack>
+                  </Stack.Item>
+                </Stack>
+              </Stack.Item>
+            </Stack>
           </Stack.Item>
-          <Stack.Item grow basis={0}>
-            <Section title="Семья" fill style={boxBorder}>
-              <LabeledList>
-                <LabeledList.Item label="Тип семьи">
-                  <span style={editStyle} onClick={() => edit('family_mode')}>{family_mode}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Предпочтение пола">
-                  <span style={editStyle} onClick={() => edit('gender_choice')}>{gender_pref}</span>
-                </LabeledList.Item>
-                <LabeledList.Item label="Предпочтение супруга">
-                  <span style={editStyle} onClick={() => edit('setspouse')}>{spouse_pref}</span>
-                </LabeledList.Item>
-              </LabeledList>
-            </Section>
+
+          <Stack.Item>
+            <Stack>
+              <Stack.Item grow basis={0}>
+                <Panel title="Черты и снаряжение">
+                  <Row label="Loadout 1">{loadout1}</Row>
+                  <Row label="Loadout 2">{loadout2}</Row>
+                  <Row label="Loadout 3">{loadout3}</Row>
+                  <Button
+                    mt={1}
+                    fluid
+                    icon="star"
+                    onClick={() => act('open_quirks')}
+                  >
+                    Quirks ({quirks_count})
+                  </Button>
+                </Panel>
+              </Stack.Item>
+              <Stack.Item grow basis={0}>
+                <Panel title="Семья">
+                  <Row label="Тип семьи">
+                    {field('family_mode', family_mode)}
+                  </Row>
+                  <Row label="Предпочтение пола">
+                    {field('gender_choice', gender_pref)}
+                  </Row>
+                  <Row label="Предпочтение супруга">
+                    {field('setspouse', spouse_pref)}
+                  </Row>
+                </Panel>
+              </Stack.Item>
+            </Stack>
           </Stack.Item>
         </Stack>
       </Window.Content>
