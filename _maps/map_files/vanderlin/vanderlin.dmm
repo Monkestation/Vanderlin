@@ -3562,12 +3562,6 @@
 /obj/structure/window/stained/yellow,
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
-"bzO" = (
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/turf/open/floor/blocks,
-/area/indoors/town/keep/magician)
 "bzU" = (
 /turf/open/floor/twig,
 /area/outdoors/basin/safe)
@@ -7040,11 +7034,10 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
 "cRz" = (
-/obj/structure/chair/wood/alt/fancy{
-	dir = 4
+/obj/structure/fluff/railing/border{
+	dir = 1
 	},
-/obj/structure/carpet/blue,
-/turf/open/floor/greenstone,
+/turf/open/floor/blocks,
 /area/indoors/town/keep/magician)
 "cRB" = (
 /turf/open/floor/naturalstone,
@@ -11872,6 +11865,9 @@
 	pixel_y = -32
 	},
 /obj/structure/fluff/clutter/shrub/tundra,
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
 /turf/open/floor/greenstone/runed,
 /area/indoors/town/keep/magician)
 "eNR" = (
@@ -13834,9 +13830,6 @@
 "fBg" = (
 /turf/open/floor/cobble,
 /area/under/town/basement)
-"fBn" = (
-/turf/open/openspace,
-/area)
 "fBr" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/blocks/stonered/tiny,
@@ -31604,8 +31597,15 @@
 /turf/open/floor/grass,
 /area/outdoors/town)
 "mxQ" = (
-/turf/closed/wall/mineral/stone,
-/area/outdoors/town/keep/roof)
+/obj/structure/chair/wood/alt/fancy{
+	dir = 4
+	},
+/obj/structure/carpet/blue,
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/floor/greenstone,
+/area/indoors/town/keep/magician)
 "myc" = (
 /obj/structure/water_pipe,
 /turf/open/floor/greenstone,
@@ -36736,12 +36736,6 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
-"owK" = (
-/obj/machinery/light/fueled/wallfire/candle/blue{
-	pixel_y = -32
-	},
-/turf/open/floor/greenstone/runed,
-/area/indoors/town/keep/magician)
 "owM" = (
 /obj/structure/handcart,
 /obj/machinery/light/fueled/torchholder/r,
@@ -52621,12 +52615,6 @@
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass,
 /area/outdoors/town)
-"uEI" = (
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/turf/open/floor/greenstone,
-/area/indoors/town/keep/magician)
 "uEK" = (
 /obj/structure/bars{
 	layer = 2.8
@@ -56705,12 +56693,6 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
-"wds" = (
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/turf/open/floor/greenstone,
-/area/indoors/town/keep/magician)
 "wdx" = (
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -197312,11 +197294,11 @@ qFx
 qFx
 qFx
 qFx
-vAr
-thH
-vAr
-nQT
-mxQ
+qFx
+qFx
+qFx
+ybB
+ybB
 ybB
 ybB
 ybB
@@ -197509,19 +197491,19 @@ qFx
 qFx
 qFx
 qFx
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 vAr
 thH
-nQT
-nQT
-nQT
 vAr
-uRN
-oYW
-uRN
 nQT
 nQT
-nQT
-fBn
+ybB
+ybB
 ybB
 ybB
 ybB
@@ -197710,21 +197692,21 @@ qFx
 qFx
 qFx
 qFx
+qFx
+qFx
 vAr
+thH
+nQT
+nQT
+nQT
 vAr
-jZE
-dVW
-umt
-gWd
-bFJ
-bFJ
-tbW
-bFJ
-jVb
+uRN
+oYW
+uRN
 nQT
 nQT
 nQT
-nQT
+ybB
 ybB
 ybB
 ybB
@@ -197912,22 +197894,22 @@ qFx
 qFx
 qFx
 qFx
-nQT
-bvM
+qFx
+vAr
+vAr
 jZE
-ayr
-tbW
-cYf
+dVW
+umt
+gWd
+bFJ
 bFJ
 tbW
-tbW
-tbW
-hEh
-whz
-vAr
-hzm
+bFJ
+jVb
 nQT
-ybB
+nQT
+nQT
+nQT
 ybB
 ybB
 ybB
@@ -198114,22 +198096,22 @@ qFx
 qFx
 qFx
 qFx
-thH
-rSf
-jZE
-tbW
-tbW
-thH
-xHm
-fTG
-dvL
-tbW
-xSJ
-vAr
-bMa
-bFJ
+qFx
 nQT
-ybB
+bvM
+jZE
+ayr
+tbW
+cYf
+bFJ
+tbW
+tbW
+tbW
+hEh
+whz
+vAr
+hzm
+nQT
 ybB
 ybB
 ybB
@@ -198316,22 +198298,22 @@ qFx
 qFx
 qFx
 qFx
-nQT
-jjD
+qFx
+thH
+rSf
 jZE
 tbW
 tbW
-nQT
-nQT
-xxB
+thH
+xHm
+fTG
+dvL
 tbW
+xSJ
+vAr
+bMa
 bFJ
 nQT
-nQT
-nQT
-cFy
-nQT
-ybB
 ybB
 ybB
 ybB
@@ -198518,22 +198500,22 @@ qFx
 qFx
 qFx
 qFx
+qFx
 nQT
-uMf
+jjD
 jZE
 tbW
-gZc
+tbW
 nQT
 nQT
-nQT
-wLj
+xxB
+tbW
 bFJ
 nQT
-hVa
-qCe
-tbW
-sHs
-xmO
+nQT
+nQT
+cFy
+nQT
 xmO
 xmO
 xmO
@@ -198720,22 +198702,22 @@ qFx
 qFx
 qFx
 qFx
+qFx
 nQT
-wlu
-tLg
-ayr
-ayr
+uMf
+jZE
+tbW
+gZc
 nQT
-rnq
 nQT
-pgh
+nQT
+wLj
 bFJ
-fGj
-mUY
-mUY
-mUY
-dCn
-nNY
+nQT
+hVa
+qCe
+tbW
+sHs
 xmO
 xmO
 xmO
@@ -198922,22 +198904,22 @@ qFx
 qFx
 qFx
 qFx
+qFx
 nQT
+wlu
+tLg
+ayr
+ayr
 nQT
-nQT
-ceT
-cTT
-nQT
-rBy
 rnq
-tDE
-tbW
-vAr
-xbq
-xbq
-xbq
-thH
-nNY
+nQT
+pgh
+bFJ
+fGj
+mUY
+mUY
+mUY
+dCn
 qFx
 qFx
 qFx
@@ -199125,21 +199107,21 @@ qFx
 qFx
 qFx
 qFx
-qFx
 nQT
 nQT
 nQT
+ceT
+cTT
 nQT
-nQT
-vAr
-vAr
+rBy
+rnq
+tDE
 tbW
 vAr
 xbq
-kXj
+xbq
+xbq
 thH
-vAr
-nNY
 nNY
 qFx
 qFx
@@ -199329,19 +199311,19 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-nQT
-nQT
-dyJ
 nQT
 nQT
 nQT
 nQT
-nNY
-nNY
+nQT
+vAr
+vAr
+tbW
+vAr
+xbq
+kXj
+thH
+vAr
 xql
 qFx
 qFx
@@ -199536,13 +199518,13 @@ qFx
 qFx
 qFx
 qFx
-xql
-nNY
-nNY
-nNY
-nNY
-nNY
-nNY
+nQT
+nQT
+dyJ
+nQT
+nQT
+nQT
+nQT
 nNY
 qFx
 qFx
@@ -238520,10 +238502,10 @@ aaj
 otn
 oaD
 bFJ
-vUC
-ujN
-eJp
-bzO
+bFJ
+oaD
+bFJ
+bFJ
 koV
 nQT
 tnv
@@ -238722,10 +238704,10 @@ oaD
 vIp
 oaD
 vIp
-weR
-xcN
-rnq
-wds
+bFJ
+vUC
+ujN
+eJp
 eNQ
 nQT
 tnv
@@ -238924,10 +238906,10 @@ oHw
 bFJ
 oaD
 oaD
-pCL
-nwb
-lLF
-uEI
+bFJ
+weR
+xcN
+rnq
 cRz
 fKG
 tNL
@@ -239126,11 +239108,11 @@ gEt
 bFJ
 moA
 van
-bFJ
-bFJ
-bFJ
 oaD
-iRw
+pCL
+nwb
+lLF
+mxQ
 fKG
 xuz
 xuz
@@ -239332,7 +239314,7 @@ vIp
 bFJ
 oaD
 vIp
-wwM
+iRw
 fKG
 tNL
 xuz
@@ -239534,7 +239516,7 @@ bFJ
 oaD
 oaD
 bFJ
-owK
+wwM
 vAr
 qFx
 tNL
