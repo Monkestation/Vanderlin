@@ -295,7 +295,7 @@
 
 /obj/item/clothing/head/helmet/heavy/inhumen/baotha_alt
 	name = "saccharine sallet"
-	desc = "Behold the spider of addiction..."
+	desc = "Surrender to the Queen of Temptation..."
 	icon_state = "baothahelm"
 	item_weight = 4.5 KILOGRAMS
 	smeltresult = /obj/item/ingot/component/baotha
