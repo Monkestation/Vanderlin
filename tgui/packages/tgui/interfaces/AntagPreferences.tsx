@@ -31,8 +31,8 @@ export const AntagPreferences = () => {
 
   return (
     <Window width={400} height={480} title="Antagonist Preferences">
-      <Window.Content>
-        {total_banned && (
+      <Window.Content scrollable>
+        {!!total_banned && (
           <NoticeBox danger>
             You are banned from all antagonist roles.
           </NoticeBox>
