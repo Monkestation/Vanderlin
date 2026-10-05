@@ -49,15 +49,14 @@
 	data["quirks_count"] = length(prefs.quirks)
 	data["pq"] = get_playerquality(owner.ckey)
 	data["triumphs"] = SStriumphs.get_triumphs(owner.ckey)
-	var/faith_value = prefs.read_preference(/datum/preference/choiced/faith)
-	var/faith_name = "Unknown"
-	if(istype(faith_value, /datum/faith))
-		var/datum/faith/faith_instance = faith_value
-		faith_name = faith_instance.name
-	else if(ispath(faith_value, /datum/faith))
-		var/datum/faith/faith_path = faith_value
-		faith_name = faith_path::name
-	data["faith"] = faith_name
+	var/patron_value = prefs.read_preference(/datum/preference/choiced/patron)
+	var/datum/patron/faith_patron
+	if(istype(patron_value, /datum/patron))
+		faith_patron = patron_value
+	else if(ispath(patron_value, /datum/patron))
+		faith_patron = GLOB.patron_list[patron_value]
+	var/datum/faith/selected_faith = GLOB.faith_list[faith_patron?.associated_faith] || GLOB.faith_list[/datum/patron/divine/astrata::associated_faith]
+	data["faith"] = selected_faith ? replacetext(replacetext("\The [selected_faith.name]", "\proper", ""), "\improper", "") : "Unknown"
 	data["patron"] = prefs.read_preference(/datum/preference/choiced/patron)
 	var/loadout1_str = prefs._get_loadout_slot(1)
 	var/datum/loadout_item/loadout1_item = loadout1_str ? GLOB.loadout_items[text2path(loadout1_str)] : null
