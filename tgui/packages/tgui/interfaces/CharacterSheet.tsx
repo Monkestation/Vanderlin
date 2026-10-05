@@ -61,7 +61,7 @@ const editStyle = {
   textDecoration: 'underline dotted',
 };
 
-const isHex = (c: string) => /^#?[0-9a-fA-F]{6}$/.test(c);
+const isHex = (c: string) => /^#*[0-9a-fA-F]{6}$/.test(c);
 const hex = (c: string) => `#${c.replace(/^#+/, '')}`;
 const short = (text: string, max = 26) =>
   text.length > max ? `${text.slice(0, max)}...` : text;
@@ -169,13 +169,26 @@ export const CharacterSheet = () => {
           <Stack.Item>
             <Stack>
               <Stack.Item grow basis={0}>
-                <Box
-                  style={{ ...frame, height: '100%', textAlign: 'center' }}
-                  p={1}
-                >
-                  <Box bold>PQ</Box>
-                  <Box>{pq}</Box>
-                </Box>
+                <Stack vertical fill>
+                  <Stack.Item>
+                    <Button
+                      fluid
+                      icon="user"
+                      onClick={() => act('change_character')}
+                    >
+                      Смена персонажа
+                    </Button>
+                  </Stack.Item>
+                  <Stack.Item grow>
+                    <Box
+                      style={{ ...frame, height: '100%', textAlign: 'center' }}
+                      p={1}
+                    >
+                      <Box bold>PQ</Box>
+                      <Box>{pq}</Box>
+                    </Box>
+                  </Stack.Item>
+                </Stack>
               </Stack.Item>
               <Stack.Item grow basis={0}>
                 <Stack vertical>
@@ -267,7 +280,7 @@ export const CharacterSheet = () => {
                           <Stack.Item grow basis={0}>
                             <Button
                               fluid
-                              onClick={() => act('open_body_markings')}
+                              onClick={() => act('open_customizers')}
                             >
                               Детали персонажа
                             </Button>

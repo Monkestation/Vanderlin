@@ -109,6 +109,34 @@
 		if("close")
 			ui.close()
 			return TRUE
+		if("change_character")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			var/datum/preferences/prefs = owner.client.prefs
+			prefs.write_preference(/datum/preference/choiced/selected_accent, ACCENT_DEFAULT)
+			var/list/choices = list()
+			if(prefs.path)
+				var/savefile/S = new /savefile(prefs.path)
+				if(S)
+					for(var/i = 1, i <= prefs.max_save_slots, i++)
+						var/slot_name
+						S.cd = "/character[i]"
+						S["real_name"] >> slot_name
+						if(!slot_name)
+							slot_name = "Slot[i]"
+						choices[slot_name] = i
+			var/choice = browser_input_list(owner, "WHO IS YOUR HERO?", "NECRA AWAITS", choices, prefs.read_preference(/datum/preference/text/real_name))
+			if(choice)
+				choice = choices[choice]
+				if(!prefs.load_character(choice))
+					prefs.randomise_appearance_prefs()
+					prefs.save_character()
+			return TRUE
+		if("open_customizers")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			owner.client.prefs.ShowCustomizers(owner)
+			return TRUE
 		if("save_character")
 			if(!owner || !owner.client || !owner.client.prefs)
 				return
