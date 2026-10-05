@@ -49,7 +49,15 @@
 	data["quirks_count"] = length(prefs.quirks)
 	data["pq"] = get_playerquality(owner.ckey)
 	data["triumphs"] = SStriumphs.get_triumphs(owner.ckey)
-	data["faith"] = prefs.read_preference(/datum/preference/choiced/faith)
+	var/faith_value = prefs.read_preference(/datum/preference/choiced/faith)
+	var/faith_name = "Unknown"
+	if(istype(faith_value, /datum/faith))
+		var/datum/faith/faith_instance = faith_value
+		faith_name = faith_instance.name
+	else if(ispath(faith_value, /datum/faith))
+		var/datum/faith/faith_path = faith_value
+		faith_name = faith_path::name
+	data["faith"] = faith_name
 	data["patron"] = prefs.read_preference(/datum/preference/choiced/patron)
 	var/loadout1_str = prefs._get_loadout_slot(1)
 	var/datum/loadout_item/loadout1_item = loadout1_str ? GLOB.loadout_items[text2path(loadout1_str)] : null
