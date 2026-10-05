@@ -3562,6 +3562,12 @@
 /obj/structure/window/stained/yellow,
 /turf/open/floor/churchrough,
 /area/indoors/town/church)
+"bzO" = (
+/obj/effect/mapping_helpers/secret_door_creator/keep{
+	redstone_id = "Keep-DungeonPit"
+	},
+/turf/closed/wall/mineral/stone,
+/area/indoors/town/keep/passages/basement)
 "bzU" = (
 /turf/open/floor/twig,
 /area/outdoors/basin/safe)
@@ -6392,6 +6398,11 @@
 /area/indoors/town/noble_manor/red)
 "cEV" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/decal/carpet/square{
+	dir = 4;
+	pixel_x = -8;
+	pixel_y = -7
+	},
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/halls/e)
 "cEZ" = (
@@ -10653,10 +10664,11 @@
 	},
 /area/outdoors/town/keep/roof)
 "epq" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 1
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
 	},
-/area/indoors/town/keep/halls/w)
+/turf/open/floor/blocks,
+/area/indoors/town/keep/passages/basement)
 "epD" = (
 /obj/structure/well,
 /turf/open/floor/grass,
@@ -13830,6 +13842,12 @@
 "fBg" = (
 /turf/open/floor/cobble,
 /area/under/town/basement)
+"fBn" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/town/keep/halls/w)
 "fBr" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/blocks/stonered/tiny,
@@ -17006,11 +17024,9 @@
 /turf/open/floor/grass,
 /area/outdoors/exposed/shop)
 "gPh" = (
-/obj/structure/lever/hidden/keep{
-	redstone_id = "Keep-DungeonOuter"
-	},
-/turf/closed/wall/mineral/stone,
-/area/indoors/town/keep/basement)
+/obj/effect/decal/carpet/kover_black,
+/turf/open/floor/herringbone,
+/area/indoors/town/keep/halls/n)
 "gPl" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/chair/wood/alt/chair_noble/red,
@@ -18222,7 +18238,7 @@
 	redstone_id = "Keep-DungeonOuter"
 	},
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/keep/basement)
+/area/indoors/town/keep/passages/basement)
 "hrL" = (
 /obj/structure/fluff/nest{
 	name = "patch of straw"
@@ -31597,15 +31613,11 @@
 /turf/open/floor/grass,
 /area/outdoors/town)
 "mxQ" = (
-/obj/structure/chair/wood/alt/fancy{
-	dir = 4
+/obj/effect/decal/cleanable/dirt/cobweb{
+	dir = 1
 	},
-/obj/structure/carpet/blue,
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/turf/open/floor/greenstone,
-/area/indoors/town/keep/magician)
+/turf/closed/wall/mineral/stone/moss,
+/area/indoors/town/keep/passages/basement)
 "myc" = (
 /obj/structure/water_pipe,
 /turf/open/floor/greenstone,
@@ -36736,6 +36748,12 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
+"owK" = (
+/obj/structure/lever/hidden/keep{
+	redstone_id = "Keep-DungeonOuter"
+	},
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/keep/passages/basement)
 "owM" = (
 /obj/structure/handcart,
 /obj/machinery/light/fueled/torchholder/r,
@@ -38176,10 +38194,11 @@
 /turf/open/floor/ruinedwood/two,
 /area/indoors/town)
 "pcg" = (
-/obj/effect/decal/cleanable/dirt/dust,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/blocks,
-/area/indoors/town/keep/basement)
+/obj/structure/lever/hidden/keep{
+	redstone_id = "Keep-DungeonPit"
+	},
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/keep/passages/basement)
 "pco" = (
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/halls/s)
@@ -48865,6 +48884,12 @@
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/keep/kitchen)
+"sZs" = (
+/obj/effect/decal/carpet/square{
+	pixel_y = -8
+	},
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/keep/halls/w)
 "sZJ" = (
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/keep/feast)
@@ -52615,6 +52640,16 @@
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass,
 /area/outdoors/town)
+"uEI" = (
+/obj/structure/chair/wood/alt/fancy{
+	dir = 4
+	},
+/obj/structure/carpet/blue,
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/floor/greenstone,
+/area/indoors/town/keep/magician)
 "uEK" = (
 /obj/structure/bars{
 	layer = 2.8
@@ -54461,7 +54496,9 @@
 /turf/open/water/clean/dirt,
 /area/under/cave)
 "vjw" = (
-/obj/effect/decal/carpet/square,
+/obj/effect/decal/carpet/square{
+	pixel_y = -8
+	},
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/halls/n)
@@ -56693,6 +56730,9 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/soilsons)
+"wds" = (
+/turf/closed/mineral,
+/area/indoors/town/keep/halls/w)
 "wdx" = (
 /obj/structure/table/wood/plain_alt,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -83555,7 +83595,7 @@ nam
 cBr
 lvK
 skc
-cBr
+wxY
 wxY
 kZq
 uqM
@@ -83757,7 +83797,7 @@ nNY
 vgJ
 efT
 hmS
-jnU
+wxY
 kZq
 wxY
 uhI
@@ -83958,9 +83998,9 @@ nNY
 nNY
 vgJ
 qew
-jnU
-vgJ
-cBr
+iJu
+wxY
+kZq
 wxY
 kZq
 kZq
@@ -84161,8 +84201,8 @@ kfp
 dvH
 qew
 iJu
-vgJ
-jnU
+kZq
+kZq
 aMH
 gix
 gix
@@ -84363,8 +84403,8 @@ qFx
 vgJ
 qew
 iJu
-vgJ
-vgJ
+wxY
+kZq
 mhK
 udo
 acT
@@ -84560,13 +84600,13 @@ ibc
 ibc
 nNY
 mCB
-qFx
-qFx
-vgJ
+jnU
+jnU
+jnU
 qew
 jnU
-vgJ
-vgJ
+kZq
+wxY
 mhK
 bWg
 iFp
@@ -84762,13 +84802,13 @@ ibc
 aQE
 nNY
 ssf
-qFx
-qFx
-vgJ
+jnU
+qew
+qew
 qew
 jnU
-jnU
-vgJ
+wxY
+wxY
 mhK
 fLi
 nIL
@@ -84963,14 +85003,14 @@ qFx
 nam
 nam
 nam
-qFx
-qFx
-qFx
-vgJ
-qew
-qew
 jnU
+qew
+qew
+qew
+qew
 iJu
+wxY
+wxY
 mhK
 tMG
 eGN
@@ -85166,13 +85206,13 @@ qFx
 bIO
 rRw
 kxM
-kxM
+bzO
+pcg
 bIO
-qhF
-qhF
-wPj
-qew
-iJu
+bIO
+mxQ
+kZq
+kZq
 mhK
 uBD
 jXo
@@ -85373,8 +85413,8 @@ huj
 bNR
 rRw
 rRw
-qew
-iJu
+wxY
+wxY
 aMH
 bWg
 lcX
@@ -85575,8 +85615,8 @@ bCK
 nhL
 dcX
 rRw
-qew
-qew
+kZq
+wxY
 cfN
 lLw
 iFp
@@ -85777,8 +85817,8 @@ iTD
 qzt
 dXQ
 kxM
-qew
-qew
+kZq
+kZq
 cfN
 cfN
 gix
@@ -85979,9 +86019,9 @@ tiV
 bCK
 xuI
 bIO
-qew
-iJu
-cIe
+kZq
+wxY
+wxY
 lQj
 ljX
 kZq
@@ -86181,9 +86221,9 @@ bCK
 sul
 kxM
 bIO
-qew
-qew
-hrG
+kZq
+kZq
+wxY
 kZq
 wxY
 wxY
@@ -86383,10 +86423,10 @@ bIO
 bIO
 bIO
 kxM
-jnU
-efT
-gPh
-pcg
+wxY
+kZq
+wxY
+ljX
 wxY
 sBB
 sBB
@@ -86584,10 +86624,10 @@ nhL
 bIO
 meT
 meT
-meT
-meT
-meT
-cIe
+hrG
+wxY
+wxY
+wxY
 ljX
 uOP
 sBB
@@ -86785,11 +86825,11 @@ nhL
 ocF
 bIO
 meT
-qhF
-qhF
-qhF
-cIe
-cIe
+epq
+owK
+qhx
+wxY
+wxY
 kZq
 uhI
 kGx
@@ -86987,9 +87027,9 @@ nhL
 qzt
 bIO
 meT
-qhF
+meT
 vgJ
-qhF
+sDU
 cIe
 olj
 wxY
@@ -87189,9 +87229,9 @@ iqo
 qzt
 kxM
 meT
-qhF
+meT
 vgJ
-jnU
+cBr
 kZq
 kZq
 wxY
@@ -160304,7 +160344,7 @@ hlw
 dID
 qFx
 qFx
-xwx
+qFx
 xwx
 xCM
 pDr
@@ -160505,10 +160545,10 @@ hlw
 hlw
 dID
 qFx
+qFx
+qFx
 xwx
-xwx
-pDr
-oEj
+nmt
 oEj
 oEj
 oEj
@@ -160707,10 +160747,10 @@ hlw
 hlw
 dID
 qFx
+qFx
+qFx
 xwx
-xCM
-emu
-oEj
+cJn
 oEj
 oEj
 oEj
@@ -160909,9 +160949,9 @@ hlw
 hlw
 dID
 qFx
-xwx
-pDr
-omT
+qFx
+qFx
+fBn
 eCT
 eCT
 oEj
@@ -161111,9 +161151,9 @@ hlw
 hlw
 dID
 qFx
+qFx
+qFx
 xwx
-nmt
-oEj
 eCT
 wQX
 qQJ
@@ -161313,9 +161353,9 @@ hlw
 hlw
 dID
 qFx
+qFx
+qFx
 xwx
-cJn
-oEj
 eCT
 xRV
 dNT
@@ -161515,9 +161555,9 @@ hlw
 hlw
 dID
 qFx
-xwx
-pDr
-omT
+qFx
+qFx
+fBn
 eCT
 eCT
 fVd
@@ -161717,11 +161757,11 @@ hlw
 hlw
 dID
 qFx
+qFx
+qFx
+qFx
+wds
 xwx
-epq
-oEj
-fVd
-fVd
 fVd
 qod
 ghA
@@ -161932,7 +161972,7 @@ ghA
 msR
 ghA
 wLk
-fVd
+sZs
 fVd
 oEj
 oEj
@@ -164546,15 +164586,15 @@ hlw
 dID
 fhm
 fdB
+fdB
 jfm
 dxg
 pLl
 xsE
-xsE
 cdK
 kES
 pii
-pii
+gPh
 pii
 jUx
 jUx
@@ -164748,10 +164788,10 @@ hlw
 dID
 fhm
 fdB
+fdB
 jfm
 gwM
 pRJ
-txi
 vmK
 txi
 oRf
@@ -239112,7 +239152,7 @@ oaD
 pCL
 nwb
 lLF
-mxQ
+uEI
 fKG
 xuz
 xuz
