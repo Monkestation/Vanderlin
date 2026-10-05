@@ -66,7 +66,7 @@
 	exp_type = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
-	mind_traits = list(TRAIT_KNOWBANDITS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_STEELHEARTED)
 
 /datum/attribute_holder/sheet/job/menatarms/footman
 	raw_attribute_list = list(
@@ -109,8 +109,8 @@
 /datum/job/advclass/menatarms/watchman_footman/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
 	var/static/list/weapons = list(
-		"Iron Warhammer & Shield" = list(/obj/item/weapon/mace/warhammer, /obj/item/weapon/shield/tower/metal),
-		"Steel Shortsword & Shield" = list(/obj/item/weapon/sword/short, /obj/item/weapon/shield/tower/metal),
+		"Iron Warhammer & Shield" = list(/obj/item/weapon/mace/warhammer, /obj/item/weapon/shield/tower/buckleriron),
+		"Steel Shortsword & Shield" = list(/obj/item/weapon/sword/short, /obj/item/weapon/shield/tower/buckleriron),
 		"Billhook & Iron Shortsword" = list(/obj/item/weapon/polearm/spear/billhook, /obj/item/weapon/sword/short/iron),
 		"Halberd" = /obj/item/weapon/polearm/halberd,
 		"Greataxe" = /obj/item/weapon/greataxe/steel,
@@ -396,11 +396,12 @@
 	)
 
 /datum/job/advclass/menatarms/watchman_sergeant
-	title = "Sergeant-At-Arms"
+	title = "Serjeant-At-Arms"
 	outfit = /datum/outfit/watchman/sergeant
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	total_positions = 1
 	category_tags = list(CTAG_MENATARMS)
+	honorary = "Serjeant"
 	attribute_sheet = /datum/attribute_holder/sheet/job/menatarms/sergeant
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -408,8 +409,8 @@
 	)
 
 /datum/outfit/watchman/sergeant
-	name = "Sergeant Men-At-Arms"
-	armor = /obj/item/clothing/armor/brigandine/captain
+	name = "Serjeant Men-At-Arms"
+	armor = /obj/item/clothing/armor/brigandine
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	pants = /obj/item/clothing/pants/chainlegs/iron
 	wrists = /obj/item/clothing/wrists/bracers
@@ -423,8 +424,8 @@
 /datum/job/advclass/menatarms/watchman_sergeant/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
 	var/static/list/weapons = list(
-		"Iron Warhammer & Shield" = list(/obj/item/weapon/mace/warhammer, /obj/item/weapon/shield/tower/metal),
-		"Steel Shortsword & Shield" = list(/obj/item/weapon/sword/short, /obj/item/weapon/shield/tower/metal),
+		"Iron Warhammer & Shield" = list(/obj/item/weapon/mace/warhammer, /obj/item/weapon/shield/tower/buckleriron),
+		"Steel Shortsword & Shield" = list(/obj/item/weapon/sword/short, /obj/item/weapon/shield/tower/buckleriron),
 		"Billhook & Iron Shortsword" = list(/obj/item/weapon/polearm/spear/billhook, /obj/item/weapon/sword/short/iron),
 		"Halberd" = /obj/item/weapon/polearm/halberd,
 		"Greataxe" = /obj/item/weapon/greataxe/steel,
