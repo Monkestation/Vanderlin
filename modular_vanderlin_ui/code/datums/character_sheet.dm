@@ -144,6 +144,11 @@
 				return
 			owner.client.prefs.ShowCustomizers(owner)
 			return TRUE
+		if("open_descriptors")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			owner.client.prefs.show_descriptors_ui(owner)
+			return TRUE
 		if("save_character")
 			if(!owner || !owner.client || !owner.client.prefs)
 				return
@@ -157,7 +162,7 @@
 			to_chat(owner, span_notice("Changes discarded."))
 			return TRUE
 		if("rotate_preview")
-			var/list/cycle = list(SOUTH, WEST, NORTH, EAST)
+			var/list/cycle = list(SOUTH, EAST, NORTH, WEST)
 			var/current_index = cycle.Find(preview_dir)
 			if(!current_index)
 				current_index = 1

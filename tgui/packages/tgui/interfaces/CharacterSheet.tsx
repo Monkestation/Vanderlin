@@ -324,6 +324,11 @@ export const CharacterSheet = () => {
                           <Row label="Цвет деталей">
                             {colorField('detail_color', detail_color)}
                           </Row>
+                          <Row label="Физ. описания">
+                            <Button onClick={() => act('open_descriptors')}>
+                              Открыть
+                            </Button>
+                          </Row>
                           <Row label="Тату/Маркировки">
                             <Button onClick={() => act('open_body_markings')}>
                               Открыть ({markings_count})
