@@ -257,6 +257,13 @@
 	owner.announce_objectives()
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/lichintro.ogg', 80, FALSE, pressure_affected = FALSE)
 
+/datum/antagonist/blood_mage/herald/move_to_spawnpoint()
+	var/spawn_point = get_spawn_turf_for_job(JOB_ADVENTURER)
+	if(spawn_point)
+		owner.current?.forceMove(spawn_point)
+	else
+		SSjob.SendToBackupPoint(owner.current) // better run if this somehow happens
+
 /datum/outfit/blood_herald
 	name = ROLE_BLOOD_HERALD
 	head = /obj/item/clothing/head/helmet/visored/blkknight/bloodsteel
