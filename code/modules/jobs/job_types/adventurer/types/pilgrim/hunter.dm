@@ -49,7 +49,7 @@
 
 
 	var/weapons = list("Crossbow and Hatchet", "Crossbow and Knife", "Bow and Hatchet", "Bow and Knife")
-	var/weapon_choice = browser_input_list(spawned, "Choose Your Specialisations.", weapons)
+	var/weapon_choice = browser_input_list(spawned, "Choose Your Specialisations.", "Armaments", weapons)
 	if(!weapon_choice)
 		return
 
