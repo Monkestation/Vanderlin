@@ -246,23 +246,23 @@
     target.equip_to_slot_if_possible(src, ITEM_SLOT_HEAD)
 
 /obj/item/clothing/head/sack/equipped(mob/living/carbon/human/user, slot)
-    . = ..()
-    if(user.head == src)
-        user.become_blind("blindfold_[REF(src)]")
-        playsound(user, pick('sound/misc/blackbagequip.ogg', 'sound/misc/blackbagequip2.ogg'), 100, TRUE, 4)
-        user.playsound_local(src, 'sound/misc/blackbagloop.ogg', 100, FALSE)
-        worn = TRUE
-        ADD_TRAIT(user, TRAIT_BAGGED, TRAIT_GENERIC)
+	. = ..()
+	if(user.head == src)
+		user.become_blind("blindfold_[REF(src)]")
+		playsound(user, pick('sound/misc/blackbagequip.ogg', 'sound/misc/blackbagequip2.ogg'), 100, TRUE, 4)
+		user.playsound_local(src, 'sound/misc/blackbagloop.ogg', 100, FALSE)
+		worn = TRUE
+		ADD_TRAIT(user, TRAIT_BAGGED, TRAIT_GENERIC)
 
 /obj/item/clothing/head/sack/dropped(mob/living/carbon/human/user)
-    ..()
-    if(worn == TRUE)
-        user.cure_blind("blindfold_[REF(src)]")
-        worn = FALSE
-        update_integrity(max_integrity)
-        REMOVE_TRAIT(user, TRAIT_BAGGED, TRAIT_GENERIC)
-        playsound(user, pick('sound/misc/blackunbag.ogg'), 100, TRUE, 4)
-        user.emote("gasp", forced = TRUE)
+	..()
+	if(worn == TRUE)
+		user.cure_blind("blindfold_[REF(src)]")
+		worn = FALSE
+		update_integrity(max_integrity)
+		REMOVE_TRAIT(user, TRAIT_BAGGED, TRAIT_GENERIC)
+		playsound(user, pick('sound/misc/blackunbag.ogg'), 100, TRUE, 4)
+		user.emote("gasp", forced = TRUE)
 
 //............... Adept's Cowl ............... //
 
