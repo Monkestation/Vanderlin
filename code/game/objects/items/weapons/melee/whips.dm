@@ -140,7 +140,8 @@
 	icon_state = "whip_corrupt"
 	force = DAMAGE_WHIP + 3
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BLOODSTEEL
 
 /obj/item/weapon/whip/bloodsteel/Initialize(mapload)

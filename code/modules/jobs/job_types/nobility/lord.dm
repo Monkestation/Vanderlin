@@ -67,7 +67,6 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	)
 	allowed_races = RACES_PLAYER_MONARCH
 	outfit = /datum/outfit/lord
-	bypass_lastclass = TRUE
 	give_bank_account = 500
 
 	knows_the_town = TRUE

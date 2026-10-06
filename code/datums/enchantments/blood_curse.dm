@@ -3,9 +3,10 @@
 
 #define BLOOD_CURSE_HARMLESS 0
 #define BLOOD_CURSE_STUDENT 1
-#define BLOOD_CURSE_WEAKENED 2
-#define BLOOD_CURSE_GLOVED 3
-#define BLOOD_CURSE_TOXIC 4
+#define BLOOD_CURSE_RELIGION 2
+#define BLOOD_CURSE_WEAKENED 3
+#define BLOOD_CURSE_GLOVED 4
+#define BLOOD_CURSE_TOXIC 5
 
 #define BLOOD_CURSE_MAX_STACKS 6
 #define BLOOD_CURSE_HIT_COOLDOWN (5 SECONDS)
@@ -50,6 +51,8 @@
 		return BLOOD_CURSE_HARMLESS
 	if(HAS_TRAIT(target, TRAIT_BLOOD_STUDENT))
 		return BLOOD_CURSE_STUDENT
+	if(HAS_TRAIT(target, TRAIT_DEVIL_MARKED_MEPHISTOPHELES))
+		return BLOOD_CURSE_RELIGION
 	if(!ishuman(target))
 		return BLOOD_CURSE_WEAKENED
 	return BLOOD_CURSE_TOXIC
@@ -64,12 +67,17 @@
 	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
 		return
 
-	var/curse_effect = get_curse_effect(source, target)
-	if(!curse_effect || get_curse_effect(source, user) >= BLOOD_CURSE_WEAKENED)
+	var/curse_effect = get_curse_effect(target)
+	if(!curse_effect || !(get_curse_effect(user) <= BLOOD_CURSE_RELIGION))
 		return
-	var/vitae_gain = 0
+	var/vitae_gain = 1
 
 	switch(curse_effect)
+		if(BLOOD_CURSE_RELIGION)
+			to_chat(user, span_userdanger("My strength is sapped by the blood curse."))
+			to_chat(user, SPAN_GOD_ARCHDEVILS("My patron's mark helps resist some of the curse's effects."))
+			user.apply_status_effect(/datum/status_effect/debuff/blood_curse_lesser, null, curse_effect)
+			vitae_gain += 1
 		if(BLOOD_CURSE_STUDENT)
 			to_chat(target, span_userdanger("My strength is sapped by the blood curse!"))
 			to_chat(target, span_bloody("My training helps resist some of the curse's effects."))
@@ -78,7 +86,7 @@
 		if(BLOOD_CURSE_WEAKENED, BLOOD_CURSE_TOXIC)
 			to_chat(target, span_userdanger("My strength is sapped by the blood curse!"))
 			target.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
-			vitae_gain += 1
+			vitae_gain += 2
 		if(BLOOD_CURSE_TOXIC)
 			to_chat(target, span_userdanger("The curse is seeping into my blood! It burns!"))
 			target.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_hit)
@@ -103,6 +111,10 @@
 
 	last_used["PULSE"] = world.time
 	switch(curse_effect)
+		if(BLOOD_CURSE_RELIGION)
+			to_chat(user, span_userdanger("My strength is sapped by the blood curse."))
+			to_chat(user, SPAN_GOD_ARCHDEVILS("My patron's mark helps resist some of the curse's effects."))
+			user.apply_status_effect(/datum/status_effect/debuff/blood_curse_lesser, null, curse_effect)
 		if(BLOOD_CURSE_STUDENT)
 			to_chat(user, span_userdanger("My strength is sapped by the blood curse."))
 			to_chat(user, span_bloody("My training helps resist some of the curse's effects."))
@@ -128,6 +140,10 @@
 
 	last_used["PULSE"] = world.time
 	switch(curse_effect)
+		if(BLOOD_CURSE_RELIGION)
+			to_chat(user, span_userdanger("My strength is sapped by the blood curse."))
+			to_chat(user, SPAN_GOD_ARCHDEVILS("My patron's mark helps resist some of the curse's effects."))
+			user.apply_status_effect(/datum/status_effect/debuff/blood_curse_lesser, null, curse_effect)
 		if(BLOOD_CURSE_STUDENT)
 			to_chat(user, span_userdanger("My strength is sapped by the blood curse."))
 			to_chat(user, span_bloody("My training helps resist some of the curse's effects."))
@@ -157,12 +173,16 @@
 
 	to_chat(victim, span_userdanger("[enchanted_item] blazes with power. The Blood Curse pulses once more."))
 	switch(curse_effect)
+		if(BLOOD_CURSE_RELIGION)
+			to_chat(victim, SPAN_GOD_ARCHDEVILS("My patron's mark helps resist some of the curse's effects."))
+			victim.apply_status_effect(/datum/status_effect/debuff/blood_curse_lesser, null, curse_effect)
 		if(BLOOD_CURSE_STUDENT)
 			to_chat(victim, span_bloody("My training helps resist some of the curse's effects."))
 			victim.apply_status_effect(/datum/status_effect/debuff/blood_curse_lesser, null, curse_effect)
 		if(BLOOD_CURSE_WEAKENED, BLOOD_CURSE_GLOVED)
 			victim.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 		if(BLOOD_CURSE_TOXIC)
+			to_chat(victim, span_bloody("The curse floods my veins with toxins!"))
 			victim.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 			victim.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, poison_pulse)
 	last_used["PULSE"] = world.time
@@ -275,6 +295,7 @@
 
 #undef BLOOD_CURSE_HARMLESS
 #undef BLOOD_CURSE_STUDENT
+#undef BLOOD_CURSE_RELIGION
 #undef BLOOD_CURSE_WEAKENED
 #undef BLOOD_CURSE_GLOVED
 #undef BLOOD_CURSE_TOXIC
