@@ -35,10 +35,7 @@
 
 /datum/job/advclass/combat/lancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/datum/species/species = spawned.dna?.species
-	if(species && species.id == SPEC_ID_HUMEN)
-		species.native_language = "Zalad"
-		species.accent_language = species.get_accent(species.native_language)
+	spawned.accent = ACCENT_ZALAD
 
 /datum/outfit/adventurer/lancer
 	name = "Lancer (Adventurer)"

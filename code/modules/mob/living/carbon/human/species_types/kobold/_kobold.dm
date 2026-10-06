@@ -63,7 +63,7 @@
 
 	changesource_flags = WABBAJACK
 
-	native_language = "Utterances"
+	forced_native_accent = ACCENT_KOBOLD
 
 	limbs_icon_m = 'icons/roguetown/mob/bodies/f/kobold.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/kobold.dmi'
@@ -133,7 +133,6 @@
 
 /datum/species/kobold/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
 	. = ..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	if(hungry_hungry_kobold)
 		C.AddComponent(/datum/component/abberant_eater, DIET_KOBOLD, FALSE, DIET_TURF_KOBOLD, _keeps_items = TRUE)
 	C.grant_language(/datum/language/common)
@@ -144,7 +143,6 @@
 	. = ..()
 	if(hungry_hungry_kobold)
 		qdel(GetComponent(/datum/component/abberant_eater))
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/common)
 	C.remove_language(/datum/language/kobold)
 
@@ -153,7 +151,6 @@
 
 /datum/species/kobold/after_creation(mob/living/carbon/C)
 	..()
-	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
 
 /datum/species/kobold/spec_life(mob/living/carbon/human/H)
 	. = ..()

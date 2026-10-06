@@ -88,12 +88,7 @@
 	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
 	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
-
-	var/datum/species/species = spawned.dna?.species
-	if(!species)
-		return
-	species.native_language = "Old Psydonic"
-	species.accent_language = species.get_accent(species.native_language)
+	spawned.accent = ACCENT_GRENZ
 
 /datum/job/absolver/remove_job(mob/living/carbon/human/spawned)
 	. = ..()

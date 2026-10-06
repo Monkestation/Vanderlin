@@ -16,8 +16,8 @@
 /datum/preference/choiced/selected_accent/handle_link(datum/preferences/prefs, mob/user)
 	var/list/available = list(ACCENT_DEFAULT)
 
-	if(length(prefs.pref_species.multiple_accents))
-		for(var/accent_name in prefs.pref_species.multiple_accents)
+	if(length(prefs.pref_species.accents_list))
+		for(var/accent_name in prefs.pref_species.accents_list)
 			available |= accent_name
 
 	var/culture_type = prefs.read_preference(/datum/preference/choiced/culture)

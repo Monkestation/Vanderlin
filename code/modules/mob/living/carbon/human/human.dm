@@ -759,13 +759,6 @@
 			var/datum/job/lord_job = SSjob.GetJobType(/datum/job/lord)
 			lord_job?.get_informed_title(src, TRUE, new_title)
 
-/mob/proc/return_accent_list()
-	if(!accent)
-		return
-	if(accent == ACCENT_NONE)
-		return
-	return GLOB.accent_list[accent]
-
 // THIS SUCKS. PORT STRIPPABLE ELEMENT
 /mob/living/carbon/human/MouseDrop_T(mob/living/target, mob/living/user)
 	if(mouse_buckle_handling(target, user))

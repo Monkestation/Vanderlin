@@ -21,7 +21,6 @@
 /datum/species/aasimar
 	name = "Aasimar"
 	id = SPEC_ID_AASIMAR
-	native_language = "Celestial"
 	desc = "Immortal offspring sculpted by the gods for use in servitude. \
 	\n\n\
 	Aasimar roaming alone on Psydonia often are those abandoned after serving their purpose. \
@@ -119,7 +118,6 @@
 
 /datum/species/aasimar/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 
 /datum/species/aasimar/after_creation(mob/living/carbon/C)
@@ -130,7 +128,6 @@
 
 /datum/species/aasimar/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/celestial)
 	C.remove_spell(/datum/action/cooldown/spell/undirected/eternal_vigilance)
 

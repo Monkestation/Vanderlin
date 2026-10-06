@@ -28,9 +28,7 @@
 
 /datum/job/advclass/pilgrim/rare/preacher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.dna?.species.id == SPEC_ID_HUMEN)
-		spawned.dna.species.native_language = "Old Psydonic"
-		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+	spawned.accent = ACCENT_GRENZ
 
 /datum/outfit/pilgrim/preacher
 	name = "Preacher (Pilgrim)"

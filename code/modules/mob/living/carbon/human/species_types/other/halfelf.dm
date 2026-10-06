@@ -17,11 +17,11 @@
 /datum/species/human/halfelf
 	name = "Half-Elf"
 	id = SPEC_ID_HALF_ELF
-	multiple_accents = list(
-		"Humen Accent" = "Imperial",
-		"Elf Accent" = "Elfish",
-		"Wintermare Accent" = ACCENT_WINTERMARE,
-		"Ossland Accent" = ACCENT_OSSLAND,
+	accents_list = list(
+		ACCENT_NONE,
+		ACCENT_ELF,
+		ACCENT_WINTERMARE,
+		ACCENT_OSSLAND
 	)
 	desc = "The child of an Elf and a Humen. \
 	\n\n\
@@ -165,13 +165,6 @@
 
 /datum/species/human/halfelf/after_creation(mob/living/carbon/human/C)
 	..()
-	//If a donator picks the Elf Accent as a Half Elf, it will work the same as a non donator.
-	if(C.accent == ACCENT_ELF)
-		C.dna.species.native_language = "Elfish"
-		C.dna.species.accent_language = C.dna.species.get_accent(C.dna.species.native_language, 1)
-	if(!(C.accent in GLOB.accent_list))
-		C.dna.species.native_language = C.accent
-	C.dna.species.accent_language = C.dna.species.get_accent(C.dna.species.native_language, 1)
 	C.grant_language(/datum/language/elvish)
 	to_chat(C, "<span class='info'>I can speak Elvish with ,e before my speech.</span>")
 

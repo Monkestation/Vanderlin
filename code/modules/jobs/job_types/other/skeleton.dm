@@ -126,10 +126,6 @@
 	spawned.mind?.current.job = null
 	spawned.set_patron(/datum/patron/inhumen/zizo)
 
-	if(spawned.dna?.species)
-		spawned.dna.species.native_language = "Zizo Chant"
-		spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
-
 
 /* BASIC SKELETON OUTFIT */
 /datum/outfit/skeleton

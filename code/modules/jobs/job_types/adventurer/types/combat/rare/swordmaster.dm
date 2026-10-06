@@ -39,9 +39,8 @@
 	. = ..()
 	var/datum/species/species = spawned.dna?.species
 	if(species && species.id == SPEC_ID_HUMEN)
-		species.native_language = "Old Psydonic"
-		species.accent_language = species.get_accent(species.native_language)
 		species.soundpack_m = new /datum/voicepack/male/knight()
+	spawned.accent = ACCENT_GRENZ
 
 /datum/outfit/swordmaster
 	name = "Hedge Knight"

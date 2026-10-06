@@ -1,10 +1,10 @@
 /datum/species/human
 	name = "Humanb"
 	id = SPEC_ID_HUMEN
-	multiple_accents = list(
-		"No Accent" = ACCENT_NONE,
-		"Ossland Accent" = ACCENT_OSSLAND,
-		"Grenzelhoft Accent" = ACCENT_GRENZ,
+	accents_list = list(
+		ACCENT_NONE,
+		ACCENT_OSSLAND,
+		ACCENT_GRENZ,
 	)
 	changesource_flags = WABBAJACK
 	bodypart_features = list(
@@ -17,12 +17,10 @@
 
 /datum/species/human/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 
 /datum/species/human/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/common)
 
 /datum/species/human/qualifies_for_rank(rank, list/features)
