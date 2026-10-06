@@ -44,7 +44,7 @@
 	)
 
 
-/datum/job/pilgrim/hunter/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/pilgrim/hunter/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
 
