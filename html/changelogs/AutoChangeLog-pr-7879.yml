@@ -1,4 +1,0 @@
-author: "ModDownloading"
-delete-after: True
-changes:
-  - rscdel: "Ghosts no longer have a black-and-white filter, which you could claim is actually an addition of color but as far as the code is concerned it's deletion."
