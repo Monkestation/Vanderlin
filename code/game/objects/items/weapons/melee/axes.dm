@@ -392,6 +392,7 @@
 	wbalance = HARD_TO_DODGE
 	wlength = WLENGTH_SHORT
 	wdefense = AVERAGE_PARRY
+	w_class = WEIGHT_CLASS_NORMAL
 	max_blade_int = 200
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_IRON
 	smeltresult = /obj/item/ingot/iron

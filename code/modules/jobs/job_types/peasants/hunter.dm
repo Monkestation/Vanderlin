@@ -43,12 +43,13 @@
 		/datum/attribute/skill/combat/axesmaces = list(10, 30)
 	)
 
+
 /datum/job/hunter/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
 
 	var/weapons = list("Crossbow and Hatchet", "Crossbow and Knife", "Bow and Hatchet", "Bow and Knife")
-	var/weapon_choice = browser_input_list(spawned, "Choose Your Specialisations.", weapons)
+	var/weapon_choice = browser_input_list(spawned, "Choose Your Specialisations.", "Armaments", weapons)
 	if(!weapon_choice)
 		return
 
@@ -57,18 +58,22 @@
 		if("Crossbow and Hatchet")
 			spawned.put_in_hands(new /obj/item/weapon/axe/hatchet(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross/hunt, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hunter/crossbowandhatch)
 		if("Crossbow and Knife")
 			spawned.put_in_hands(new /obj/item/weapon/knife/hunting(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow/cross/hunt, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hunter/crossbowandknife)
 		if("Bow and Hatchet")
 			spawned.put_in_hands(new /obj/item/weapon/axe/hatchet(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_if_possible (new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hunter/bowandhatch)
 		if("Bow and Knife")
 			spawned.put_in_hands(new /obj/item/weapon/knife/hunting(get_turf(spawned)), TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/gun/ballistic/bow, ITEM_SLOT_BACK_L, TRUE)
+			spawned.equip_to_slot_if_possible(new /obj/item/ammo_holder/quiver/arrows, ITEM_SLOT_BELT_R, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/hunter/bowandknife)
 
 /datum/attribute_holder/sheet/job/hunter
@@ -162,13 +167,13 @@
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
 	backr = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather
-	beltr = /obj/item/ammo_holder/quiver/arrows
 	beltl = /obj/item/storage/meatbag
 	gloves = /obj/item/clothing/gloves/leather
 	backpack_contents = list(
 		/obj/item/reagent_containers/powder/salt = 1,
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,
+		/obj/item/weapon/knife/villager = 1,
 		/obj/item/flashlight/flare/torch/lantern = 1,
 		/obj/item/key/hunter = 1
 	)

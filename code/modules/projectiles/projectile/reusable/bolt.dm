@@ -168,6 +168,21 @@
 	chem_splash(target_loc, 3, list(reagents))
 	return ..()
 
+/obj/projectile/bullet/reusable/bolt/bonesinew
+	name = "bonebolt"
+	icon_state = "bonebolt"
+	damage = BOLT_DAMAGE - 5
+	armor_penetration = BOLT_PENETRATION-5
+	ammo_type = /obj/item/ammo_casing/caseless/bolt/bonesinew
+	speed = 1.1
+
+/obj/projectile/bullet/reusable/bolt/broadhead
+	name = "broadhead bolt"
+	icon_state = "ibroadbolt"
+	damage = BOLT_DAMAGE + 15
+	armor_penetration = BOLT_PENETRATION - 20
+	ammo_type = /obj/item/ammo_casing/caseless/bolt/broadhead
+
 /obj/projectile/bullet/reusable/bolt/holy
 	name = "sunderbolt"
 	icon_state = "bolthwater_proj"
