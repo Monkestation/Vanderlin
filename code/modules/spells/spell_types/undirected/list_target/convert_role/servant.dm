@@ -7,3 +7,10 @@
 	recruitment_message = "Join the keep's servants, %RECRUIT!"
 	accept_message = "I serve the Crown!"
 	refuse_message = "I refuse."
+
+/datum/action/cooldown/spell/undirected/list_target/convert_role/servant/gallowband
+	name = "Recruit Vinnumaour"
+	new_role = JOB_FOREST_SUPPORT
+	recruitment_faction = "Gallowband"
+	recruitment_message = "Join the Gallowband's vinnumaours, %RECRUIT!"
+	accept_message = "I serve the Forest!"

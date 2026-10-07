@@ -267,6 +267,44 @@
 	icon_state = "cheesekey"
 	lockids = list(ACCESS_CAPTAIN)
 
+/// Gallowband
+
+/obj/item/key/gallowband
+	name = "gallowband key"
+	desc = "This key belongs to the Gallowband."
+	icon_state = "rustkey"
+	lockids = list(ACCESS_GALLOWBAND)
+
+/obj/item/key/gallowband/secure
+	name = "gallowband garrison key"
+	desc = "This key belongs to the Gallowband Garrison."
+	icon_state = "spikekey"
+	lockids = list(ACCESS_GALLOWBAND_SECURE)
+
+/obj/item/key/gallowband/gothi
+	name = "gallowband gothi key"
+	desc = "This key belongs to the Gothi of the Gallowband."
+	icon_state = "birdkey"
+	lockids = list(ACCESS_GALLOWBAND_GOTHI)
+
+/obj/item/key/gallowband/hersir
+	name = "gallowband hersir key"
+	desc = "This key belongs to the Hersir of the Gallowband."
+	icon_state = "toothkey"
+	lockids = list(ACCESS_GALLOWBAND_HERSIR)
+
+/obj/item/key/gallowband/warden
+	name = "gallowband warden key"
+	desc = "This key belongs to the Warden of the Gallowband."
+	icon_state = "hornkey"
+	lockids = list(ACCESS_GALLOWBAND_WARDEN)
+
+/obj/item/key/bogwitch
+	name = "bog witch key"
+	desc = "This key opens the Bog Witch's hut."
+	icon_state = "hornkey"
+	lockids = list(ACCESS_BOGWITCH)
+
 /// Mercs
 
 /obj/item/key/tombwarden
@@ -291,12 +329,6 @@
 	desc = "This key opens the Steward's warehouse."
 	icon_state = "rustkey"
 	lockids = list(ACCESS_WAREHOUSE)
-
-/obj/item/key/bogwitch
-	name = "bogwitch key"
-	desc = "This key opens the Bog Witch's hut."
-	icon_state = "hornkey"
-	lockids = list(ACCESS_BOGWITCH)
 
 ////// MANOR
 

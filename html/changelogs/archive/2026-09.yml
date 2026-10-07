@@ -387,3 +387,24 @@
   - rscadd: you can now grow rice, and with that a few rice related dishes
   - rscadd: you can now deep fry bird
   - rscadd: you can now click glasses together by each offering eachother the glass
+2026-09-30:
+  ModDownloading:
+  - balance: Towner roles now have statlines on par with the average Adventurer (+3
+      or +4 instead of +2).
+  - balance: Business owners have higher Wrestling skill to deal with unruly customers,
+      and may have 30 skill in their primary weapon.
+  - balance: The Preacher rare Pilgrim role has better stats and skills, and has Psydonian
+      Grit.
+  - balance: Squires no longer have negative statlines.
+  - qol: Almost every role has a minimum of 10 Wrestling, Unarmed, Swimming, Climbing,
+      and Athletics skill. Most had this already but a few were previously overlooked.
+  - rscdel: Ghosts no longer have a black-and-white filter, which you could claim
+      is actually an addition of color but as far as the code is concerned it's deletion.
+  PotatoTomahto:
+  - balance: you will now be warned before you get debuffed by hunger and thirst
+  - balance: hunger and thirst rates increased
+  SamuraiSpork:
+  - spellcheck: Fixed incorrect spelling on Town Watch Lieutenant Helm
+  Wyrmtongue336:
+  - rscadd: Adds a whisper variant of "Choke with blood"
+  - code_imp: Occult Librarian now whispers the choke with blood invocation.

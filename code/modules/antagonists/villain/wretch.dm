@@ -14,15 +14,18 @@
 
 /datum/antagonist/wretch/on_gain()
 	remove_job()
-	var/mob/living/carbon/human/W = owner.current
-	W.delete_equipment()
-	W.purge_combat_knowledge()
+	var/mob/living/carbon/human/wretch = owner.current
+	wretch.honorary = null
+	wretch.honorary_suffix = null
+	wretch.job_honorary_override = null
+	wretch.delete_equipment()
+	wretch.purge_combat_knowledge()
 	owner.forget_and_be_forgotten()
 	move_to_spawnpoint()
 	. = ..()
-	W.reset_and_reroll_stats()
+	wretch.reset_and_reroll_stats()
 	owner.special_role = ROLE_WRETCH
-	SSrole_class_handler.setup_class_handler(W, list(CTAG_WRETCH = 30))
+	SSrole_class_handler.setup_class_handler(wretch, list(CTAG_WRETCH = 30))
 
 /datum/antagonist/wretch/greet()
 	to_chat(owner.current, span_notice("Somewhere in your lyfe, you fell to the wrong side of civilization. Hounded by the consequences of your actions, you now threaten the peace of those who still heed the authority that condemned you."))

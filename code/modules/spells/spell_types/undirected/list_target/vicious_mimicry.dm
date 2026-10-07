@@ -41,7 +41,7 @@
 	. = ..()
 	log_directed_talk(owner, cast_on, message, LOG_SAY, name)
 	var/mob/living/L = owner
-	var/static/list/bannedwords = list("zizo", "graggar", "matthios", "baotha", "inhumen", "heresy")
+	var/static/list/bannedwords = list("zizo", "graggar", "matthios", "baotha", "inhumen", "heresy", "abraxas", "abaddon", "mephistopheles", "leviathan", "*")
 	for(var/T in bannedwords)  //astrata smites naughty xylixans
 		if(findtext(message, T))
 			L.add_stress(/datum/stress_event/psycurselight)
