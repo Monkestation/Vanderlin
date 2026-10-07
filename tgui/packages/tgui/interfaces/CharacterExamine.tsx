@@ -51,6 +51,81 @@ const Body = (props: { text: string; empty: string }) =>
     <Box color="gray">{props.empty}</Box>
   );
 
+const GalleryPage = (props: { images: string[] }) => {
+  const { images } = props;
+  const [selected, setSelected] = useState<number | null>(null);
+
+  if (!images.length) {
+    return (
+      <Section fill title="Галерея персонажа">
+        <Box color="gray" textAlign="center" mt={4}>
+          В галерее нет изображений.
+        </Box>
+      </Section>
+    );
+  }
+
+  if (selected !== null && selected >= 0 && selected < images.length) {
+    const prev = (selected - 1 + images.length) % images.length;
+    const next = (selected + 1) % images.length;
+    return (
+      <Section
+        fill
+        scrollable
+        title={'Изображение ' + (selected + 1) + ' из ' + images.length}
+        buttons={
+          <>
+            <Button icon="arrow-left" onClick={() => setSelected(prev)} />
+            <Button icon="arrow-right" onClick={() => setSelected(next)} />
+            <Button icon="th" onClick={() => setSelected(null)}>
+              Все
+            </Button>
+          </>
+        }
+      >
+        <Box textAlign="center">
+          <img
+            src={images[selected]}
+            style={{ maxWidth: '100%', maxHeight: '560px' }}
+          />
+        </Box>
+      </Section>
+    );
+  }
+
+  return (
+    <Section fill scrollable title={'Галерея персонажа (' + images.length + ')'}>
+      <Box style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+        {images.map((url, i) => (
+          <Box
+            key={url + i}
+            onClick={() => setSelected(i)}
+            style={{
+              width: '200px',
+              height: '200px',
+              cursor: 'pointer',
+              border: '1px solid #444',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              overflow: 'hidden',
+            }}
+          >
+            <img
+              src={url}
+              style={{
+                maxWidth: '100%',
+                maxHeight: '100%',
+                objectFit: 'contain',
+              }}
+            />
+          </Box>
+        ))}
+      </Box>
+    </Section>
+  );
+};
+
 export const CharacterExamine = () => {
   const { act, data } = useBackend<any>();
   const [page, setPage] = useState('main');
@@ -79,44 +154,34 @@ export const CharacterExamine = () => {
     <Window title={name} width={1000} height={700}>
       <Window.Content>
         <Stack vertical fill>
-          {gallery.length > 0 && (
-            <>
-              <Stack>
-                <Stack.Item grow>
-                  <Button
-                    fluid
-                    align="center"
-                    fontSize="1.2em"
-                    selected={page === 'main'}
-                    onClick={() => setPage('main')}
-                  >
-                    Flavor Text
-                  </Button>
-                </Stack.Item>
-                <Stack.Item grow>
-                  <Button
-                    fluid
-                    align="center"
-                    fontSize="1.2em"
-                    selected={page === 'gallery'}
-                    onClick={() => setPage('gallery')}
-                  >
-                    Галерея
-                  </Button>
-                </Stack.Item>
-              </Stack>
-              <Stack.Divider />
-            </>
-          )}
+          <Stack>
+            <Stack.Item grow>
+              <Button
+                fluid
+                align="center"
+                fontSize="1.2em"
+                selected={page === 'main'}
+                onClick={() => setPage('main')}
+              >
+                Flavor Text
+              </Button>
+            </Stack.Item>
+            <Stack.Item grow>
+              <Button
+                fluid
+                align="center"
+                fontSize="1.2em"
+                selected={page === 'gallery'}
+                onClick={() => setPage('gallery')}
+              >
+                {'Галерея (' + gallery.length + ')'}
+              </Button>
+            </Stack.Item>
+          </Stack>
+          <Stack.Divider />
           <Stack.Item grow>
-            {page === 'gallery' && gallery.length > 0 ? (
-              <Section fill scrollable title="Галерея персонажа">
-                {gallery.map((url) => (
-                  <Box key={url} textAlign="center" mb={1}>
-                    <img src={url} style={{ maxWidth: '100%' }} />
-                  </Box>
-                ))}
-              </Section>
+            {page === 'gallery' ? (
+              <GalleryPage images={gallery} />
             ) : (
               <Stack fill>
                 <Stack.Item width="370px">
@@ -198,7 +263,9 @@ export const CharacterExamine = () => {
                       </>
                     ) : (
                       <>
-                        {!isUrl(nudeshot) && (<Box color="gray">NSFW материалов нет.</Box>)}
+                        {!isUrl(nudeshot) && (
+                          <Box color="gray">NSFW материалов нет.</Box>
+                        )}
                         {isUrl(nudeshot) && (
                           <Box mt={1} textAlign="center">
                             <img src={nudeshot} style={{ maxWidth: '100%' }} />
