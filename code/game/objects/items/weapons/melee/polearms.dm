@@ -656,7 +656,6 @@
 	icon_state = "bs_halberd"
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_HALBERD_WIELD + 2
-	wbalance = HARD_TO_DODGE
 	max_blade_int = 450
 	smeltresult = null
 	melting_material = /datum/material/blacksteel

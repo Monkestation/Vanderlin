@@ -313,4 +313,16 @@
 	keys = list(/obj/item/key/elder, /obj/item/key/blacksmith,/obj/item/key/tailor,/obj/item/key/tavern,/obj/item/key/apothecary, /obj/item/key/butcher, /obj/item/key/soilson,/obj/item/key/artificer,/obj/item/key/clinic)
 
 /obj/item/storage/keyring/bogwitch
-	keys = list(/obj/item/key/bogwitch)
+	keys = list(/obj/item/key/bogwitch, /obj/item/key/gallowband)
+
+/obj/item/storage/keyring/gallowband
+	keys = list(/obj/item/key/gallowband, /obj/item/key/gallowband/secure)
+
+/obj/item/storage/keyring/gallowband/hersir
+	keys = list(/obj/item/key/gallowband, /obj/item/key/gallowband/secure, /obj/item/key/gallowband/hersir)
+
+/obj/item/storage/keyring/gallowband/gothi
+	keys = list(/obj/item/key/gallowband, /obj/item/key/gallowband/secure, /obj/item/key/gallowband/gothi)
+
+/obj/item/storage/keyring/gallowband/warden
+	keys = list(/obj/item/key/gallowband, /obj/item/key/gallowband/secure, /obj/item/key/gallowband/gothi, /obj/item/key/gallowband/hersir, /obj/item/key/gallowband/warden)

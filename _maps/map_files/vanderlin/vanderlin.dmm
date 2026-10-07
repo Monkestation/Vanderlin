@@ -56376,10 +56376,7 @@
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
 "wdm" = (
-/obj/structure/fluff/traveltile{
-	aportalgoesto = "vanderlin-forest_town-forest";
-	aportalid = "vanderlin-forest_town-town"
-	},
+/obj/structure/fluff/traveltile/fast/vanderlin/basin_forest,
 /turf/open/floor/dirt/road,
 /area/outdoors/basin)
 "wdr" = (
