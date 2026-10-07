@@ -43,6 +43,7 @@ type Data = {
   headshot_link: string;
   nudeshot_link: string;
   gallery_count: number;
+  nsfw_gallery_count: number;
 };
 
 const LINE = '1px solid rgba(255, 255, 255, 0.35)';
@@ -145,6 +146,7 @@ export const CharacterSheet = () => {
     headshot_link = '',
     nudeshot_link = '',
     gallery_count = 0,
+    nsfw_gallery_count = 0,
   } = data;
 
   const edit = (key: string) => act('edit_field', { pref_key: key });
@@ -422,6 +424,9 @@ export const CharacterSheet = () => {
                           <Row stacked label="Галерея персонажа">
                             <Button onClick={() => edit('character_gallery')}>
                               Открыть ({gallery_count})
+                            </Button>
+                            <Button onClick={() => edit('nsfw_character_gallery')}>
+                              NSFW ({nsfw_gallery_count})
                             </Button>
                           </Row>
                         </Panel>

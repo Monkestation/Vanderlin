@@ -106,6 +106,9 @@
 	var/list/gallery_list = prefs.read_preference(/datum/preference/list_type/character_gallery)
 	data["gallery_count"] = gallery_list ? length(gallery_list) : 0
 	data["gallery_links"] = gallery_list ? gallery_list.Join(", ") : ""
+	var/list/nsfw_gallery_list = prefs.read_preference(/datum/preference/list_type/nsfw_character_gallery)
+	data["nsfw_gallery_count"] = nsfw_gallery_list ? length(nsfw_gallery_list) : 0
+	data["nsfw_gallery_links"] = nsfw_gallery_list ? nsfw_gallery_list.Join(", ") : ""
 	return data
 
 /datum/character_sheet/ui_act(action, list/params, datum/tgui/ui, datum/ui_state/state)

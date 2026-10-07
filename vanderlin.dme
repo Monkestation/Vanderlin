@@ -4762,6 +4762,7 @@
 #include "modular_vanderlin_ui\code\datums\preferences\erp_preferences.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\examine_music.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\nickname_color.dm"
+#include "modular_vanderlin_ui\code\datums\preferences\nsfw_character_gallery.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\nsfw_flavor.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\nudeshot_link.dm"
 #include "modular_vanderlin_ui\code\datums\preferences\ooc_extra_link_handler.dm"

@@ -14,6 +14,13 @@ const str = (v: unknown): string => {
 const isUrl = (v: unknown): boolean =>
   typeof v === 'string' && /^https?:\/\//i.test(v.trim());
 
+const parseLinks = (raw: unknown): string[] => {
+  const parts: unknown[] = Array.isArray(raw)
+    ? raw
+    : String(raw ?? '').split(',');
+  return parts.map((x) => String(x).trim()).filter((x) => isUrl(x));
+};
+
 const TEXT_STYLE = { whiteSpace: 'pre-wrap', wordBreak: 'break-word' } as const;
 
 const ModeButtons = (props: {
@@ -51,13 +58,42 @@ const Body = (props: { text: string; empty: string }) =>
     <Box color="gray">{props.empty}</Box>
   );
 
-const GalleryPage = (props: { images: string[] }) => {
-  const { images } = props;
+const GalleryPage = (props: { sfw: string[]; nsfw: string[] }) => {
+  const { sfw, nsfw } = props;
+  const [mode, setMode] = useState('SFW');
   const [selected, setSelected] = useState<number | null>(null);
+  const images = mode === 'NSFW' ? nsfw : sfw;
+  const changeMode = (m: string) => {
+    setMode(m);
+    setSelected(null);
+  };
+  const modeButtons = (
+    <>
+      <Button
+        selected={mode === 'SFW'}
+        bold={mode === 'SFW'}
+        textAlign="center"
+        minWidth="80px"
+        onClick={() => changeMode('SFW')}
+      >
+        {'SFW (' + sfw.length + ')'}
+      </Button>
+      <Button
+        selected={mode === 'NSFW'}
+        bold={mode === 'NSFW'}
+        disabled={!nsfw.length && mode !== 'NSFW'}
+        textAlign="center"
+        minWidth="80px"
+        onClick={() => changeMode('NSFW')}
+      >
+        {'NSFW (' + nsfw.length + ')'}
+      </Button>
+    </>
+  );
 
   if (!images.length) {
     return (
-      <Section fill title="Галерея персонажа">
+      <Section fill title="Галерея персонажа" buttons={modeButtons}>
         <Box color="gray" textAlign="center" mt={4}>
           В галерее нет изображений.
         </Box>
@@ -72,7 +108,9 @@ const GalleryPage = (props: { images: string[] }) => {
       <Section
         fill
         scrollable
-        title={'Изображение ' + (selected + 1) + ' из ' + images.length}
+        title={
+          mode + ': изображение ' + (selected + 1) + ' из ' + images.length
+        }
         buttons={
           <>
             <Button icon="arrow-left" onClick={() => setSelected(prev)} />
@@ -94,7 +132,12 @@ const GalleryPage = (props: { images: string[] }) => {
   }
 
   return (
-    <Section fill scrollable title={'Галерея персонажа (' + images.length + ')'}>
+    <Section
+      fill
+      scrollable
+      title={'Галерея персонажа (' + mode + ')'}
+      buttons={modeButtons}
+    >
       <Box style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
         {images.map((url, i) => (
           <Box
@@ -140,13 +183,8 @@ export const CharacterExamine = () => {
   const ooc = str(data.ooc_notes);
   const erp = str(data.erp_preferences);
 
-  const rawGallery = data.gallery_links ?? data.gallery ?? '';
-  const galleryParts: unknown[] = Array.isArray(rawGallery)
-    ? rawGallery
-    : String(rawGallery).split(',');
-  const gallery: string[] = galleryParts
-    .map((x) => String(x).trim())
-    .filter((x) => isUrl(x));
+  const sfwGallery = parseLinks(data.gallery_links ?? data.gallery);
+  const nsfwGallery = parseLinks(data.nsfw_gallery_links);
 
   const nsfwFlavorAvailable = isUrl(nudeshot);
 
@@ -174,14 +212,14 @@ export const CharacterExamine = () => {
                 selected={page === 'gallery'}
                 onClick={() => setPage('gallery')}
               >
-                {'Галерея (' + gallery.length + ')'}
+                {'Галерея (' + (sfwGallery.length + nsfwGallery.length) + ')'}
               </Button>
             </Stack.Item>
           </Stack>
           <Stack.Divider />
           <Stack.Item grow>
             {page === 'gallery' ? (
-              <GalleryPage images={gallery} />
+              <GalleryPage sfw={sfwGallery} nsfw={nsfwGallery} />
             ) : (
               <Stack fill>
                 <Stack.Item width="370px">
