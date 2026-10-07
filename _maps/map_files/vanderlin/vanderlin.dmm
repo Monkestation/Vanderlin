@@ -4239,11 +4239,8 @@
 /turf/open/floor/tile,
 /area/indoors/town/keep/courtagent)
 "bNR" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = -32;
-	pixel_y = 0
-	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/pillory,
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
 "bNX" = (
@@ -8921,6 +8918,12 @@
 "dDx" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
+"dDy" = (
+/obj/effect/mapping_helpers/secret_door_creator/keep{
+	redstone_id = "Keep-Art"
+	},
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/town/keep/library)
 "dDD" = (
 /obj/structure/bars,
 /turf/open/floor/tile/kitchen,
@@ -9366,9 +9369,9 @@
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
 "dLV" = (
-/obj/structure/pillory,
-/turf/open/floor/blocks,
-/area/indoors/town/cell)
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/cobble,
+/area/indoors/town/keep/passages/basement)
 "dLX" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/ppflowers,
@@ -18418,7 +18421,7 @@
 /turf/open/openspace,
 /area/indoors/town/church/chapel)
 "huj" = (
-/obj/structure/pillory,
+/obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/cobble,
 /area/indoors/town/cell)
 "hup" = (
@@ -20373,6 +20376,11 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/basement/ale)
+"ieb" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/blocks,
+/area/indoors/town/keep/passages/groundfloor)
 "ieB" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/twig,
@@ -28256,7 +28264,8 @@
 /area/outdoors/woods_safe)
 "liI" = (
 /obj/structure/fluff/clutter/shrub/red{
-	pixel_x = 2
+	pixel_x = 2;
+	density = 0
 	},
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/halls/s)
@@ -38262,7 +38271,7 @@
 "pbH" = (
 /obj/structure/table/wood/fancy/black,
 /turf/open/floor/hexstone,
-/area/indoors/town/keep/lord_appt)
+/area/indoors/town/vault)
 "pbL" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/craftstone,
@@ -40753,7 +40762,7 @@
 	},
 /obj/structure/table/wood/fancy/black,
 /turf/open/floor/hexstone,
-/area/indoors/town/keep/lord_appt)
+/area/indoors/town/vault)
 "pUO" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -42910,6 +42919,12 @@
 	},
 /turf/open/floor/dirt,
 /area/under/town/sewer)
+"qLC" = (
+/obj/structure/lever/hidden/keep{
+	redstone_id = "Keep-Art"
+	},
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/town/keep/library)
 "qLE" = (
 /obj/structure/table/map/vanderlin{
 	dir = 1
@@ -47386,7 +47401,7 @@
 	},
 /obj/structure/table/wood/fancy/black,
 /turf/open/floor/hexstone,
-/area/indoors/town/keep/lord_appt)
+/area/indoors/town/vault)
 "suF" = (
 /obj/structure/flora/ausbushes/brflowers,
 /turf/open/floor/dirt/road,
@@ -47807,6 +47822,7 @@
 /obj/item/paint_palette{
 	pixel_y = -6
 	},
+/obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
 "sBB" = (
@@ -52679,6 +52695,12 @@
 /obj/item/cigbutt/zigar,
 /turf/open/floor/cobble,
 /area/outdoors/town)
+"uBN" = (
+/obj/structure/lever/hidden/keep{
+	redstone_id = "Keep-Art"
+	},
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/town/keep/archivist)
 "uBO" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/paper,
@@ -57725,7 +57747,6 @@
 /area/indoors/town/vault)
 "wtE" = (
 /obj/structure/chair/stool,
-/obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
 "wtH" = (
@@ -58657,11 +58678,8 @@
 /area/indoors/town/keep/servant)
 "wKD" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = -32;
-	pixel_y = 0
-	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/pillory,
 /turf/open/floor/blocks,
 /area/indoors/town/cell)
 "wKG" = (
@@ -85205,7 +85223,7 @@ nam
 nam
 jnU
 qew
-qew
+dLV
 qew
 qew
 iJu
@@ -85607,7 +85625,7 @@ qFx
 bIO
 bIO
 wKD
-dLV
+wHw
 qzt
 huj
 bNR
@@ -120953,9 +120971,9 @@ qFx
 iwU
 mWk
 mWk
-pYm
-pYm
-pYm
+mWk
+mWk
+mWk
 pYm
 iwU
 qFx
@@ -121156,8 +121174,8 @@ iwU
 mWk
 iwU
 iwU
-iwU
-iwU
+mWk
+ieb
 iwU
 iwU
 qFx
@@ -121358,8 +121376,8 @@ iwU
 mWk
 iwU
 hyg
-hyg
-hyg
+cpu
+qiA
 hyg
 hyg
 hyg
@@ -121962,7 +121980,7 @@ dID
 qFx
 iwU
 pYm
-qiA
+hyg
 cIU
 slN
 aDo
@@ -122164,7 +122182,7 @@ dID
 qFx
 iwU
 pYm
-cpu
+hyg
 mnw
 uQN
 rfz
@@ -123185,8 +123203,8 @@ pYm
 pYm
 mWk
 mWk
-ubO
-ubO
+xwx
+xwx
 xwx
 xJi
 kPc
@@ -129678,7 +129696,7 @@ fbq
 poS
 oho
 dBZ
-ndE
+xTl
 qFx
 qFx
 qFx
@@ -163376,8 +163394,8 @@ qzJ
 qzJ
 qzJ
 qzJ
-qzJ
-hyg
+uBN
+qLC
 sBs
 nxd
 uyT
@@ -163578,8 +163596,8 @@ fdB
 fdB
 fdB
 fdB
-fdB
-hyg
+cYm
+dDy
 wtE
 uyT
 ggw
@@ -164179,7 +164197,7 @@ hlw
 hlw
 dID
 fhm
-fdB
+hWr
 tgC
 iJd
 skt
@@ -165593,7 +165611,7 @@ hlw
 hlw
 dID
 fhm
-fdB
+hWr
 dVc
 urY
 tTf
