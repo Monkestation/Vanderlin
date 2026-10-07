@@ -449,6 +449,11 @@
 	if(cmode_music)
 		DIRECT_OUTPUT(spawned, load_resource(cmode_music, -1)) //preload their combat mode music
 		spawned.cmode_music = cmode_music
+	// Player-chosen combat music (character setup) overrides the class music.
+	var/mob/living/carbon/human/music_human = spawned
+	if(istype(music_human) && music_human.preferred_cmode_music)
+		DIRECT_OUTPUT(spawned, load_resource(music_human.preferred_cmode_music, -1))
+		spawned.cmode_music = music_human.preferred_cmode_music
 
 	var/type_check
 	var/parent_type_check

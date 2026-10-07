@@ -85,6 +85,7 @@
 		skin_options += list(list("name" = skin_key, "color" = skin_hex))
 	data["skin_options"] = skin_options
 	data["detail_color"] = "#" + prefs.read_preference(/datum/preference/color/detail_color)
+	data["combat_music"] = prefs.read_preference(/datum/preference/choiced/combat_music)
 	var/list/bm_count = list()
 	for(var/zone in prefs.body_markings)
 		bm_count += prefs.body_markings[zone].len

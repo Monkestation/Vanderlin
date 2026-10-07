@@ -31,6 +31,7 @@ type Data = {
   skin_tone_wording: string;
   skin_options: { name: string; color: string }[];
   detail_color: string;
+  combat_music: string;
   markings_count: number;
   family_mode: string;
   gender_pref: string;
@@ -137,6 +138,7 @@ export const CharacterSheet = () => {
     skin_tone_wording = '',
     skin_options = [],
     detail_color = '#000000',
+    combat_music = 'default',
     markings_count = 0,
     family_mode = '',
     gender_pref = '',
@@ -460,6 +462,9 @@ export const CharacterSheet = () => {
                             <Button onClick={() => act('open_culinary')}>
                               {favourite_food} / {favourite_drink}
                             </Button>
+                          </Row>
+                          <Row label="Боевая музыка">
+                            {field('combat_music', combat_music === 'default' ? 'По классу' : combat_music)}
                           </Row>
                           <Row label="Невозрождаемость">
                             {field('permadeath', permadeath)}
