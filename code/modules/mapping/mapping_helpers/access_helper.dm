@@ -218,6 +218,19 @@
 /obj/effect/mapping_helpers/access/keyset/manor/mage
 	accesses = list(ACCESS_MAGE)
 
+/obj/effect/mapping_helpers/access/keyset/manor/nobility_guards
+    accesses = list(
+        ACCESS_AT_ARMS,
+        ACCESS_BUTLER,
+        ACCESS_HAND,
+        ACCESS_ARCHIVIST,
+        ACCESS_MAGE,
+        ACCESS_CONSORT,
+        ACCESS_HEIR,
+        ACCESS_STEWARD,
+        ACCESS_COURTAGENT
+    )
+
 /obj/effect/mapping_helpers/access/keyset/manor/archive
 	accesses = list(ACCESS_ARCHIVIST)
 
