@@ -3,7 +3,7 @@ import { useBackend } from 'tgui/backend';
 import { Window } from 'tgui/layouts';
 import { Box, Button, Section, Stack } from 'tgui-core/components';
 
-const clean = (v: unknown): string => {
+const str = (v: unknown): string => {
   if (typeof v !== 'string') {
     return '';
   }
@@ -14,169 +14,202 @@ const clean = (v: unknown): string => {
 const isUrl = (v: unknown): boolean =>
   typeof v === 'string' && /^https?:\/\//i.test(v.trim());
 
-const previewSrc = (v: unknown): string => {
-  const s = clean(v);
-  if (!s) {
-    return '';
-  }
-  if (s.startsWith('data:') || isUrl(s)) {
-    return s;
-  }
-  return 'data:image/png;base64,' + s;
-};
-
 const TEXT_STYLE = { whiteSpace: 'pre-wrap', wordBreak: 'break-word' } as const;
 
-const TextBlock = (props: { text: string; empty: string }) => {
-  const { text, empty } = props;
-  return text ? (
-    <Box style={TEXT_STYLE}>{text}</Box>
-  ) : (
-    <Box color="gray">{empty}</Box>
-  );
-};
+const ModeButtons = (props: {
+  mode: string;
+  setMode: (m: string) => void;
+  nsfwDisabled: boolean;
+}) => (
+  <>
+    <Button
+      selected={props.mode === 'SFW'}
+      bold={props.mode === 'SFW'}
+      textAlign="center"
+      minWidth="60px"
+      onClick={() => props.setMode('SFW')}
+    >
+      SFW
+    </Button>
+    <Button
+      selected={props.mode === 'NSFW'}
+      bold={props.mode === 'NSFW'}
+      disabled={props.nsfwDisabled}
+      textAlign="center"
+      minWidth="60px"
+      onClick={() => props.setMode('NSFW')}
+    >
+      NSFW
+    </Button>
+  </>
+);
 
-const Line = (props: { label: string; value: string }) =>
-  props.value ? (
-    <Box mb={0.5}>
-      <Box as="span" color="label">
-        {props.label}:{' '}
-      </Box>
-      {props.value}
-    </Box>
-  ) : null;
+const Body = (props: { text: string; empty: string }) =>
+  props.text ? (
+    <Box style={TEXT_STYLE}>{props.text}</Box>
+  ) : (
+    <Box color="gray">{props.empty}</Box>
+  );
 
 export const CharacterExamine = () => {
   const { act, data } = useBackend<any>();
-  const [showNsfw, setShowNsfw] = useState(false);
+  const [page, setPage] = useState('main');
+  const [oocMode, setOocMode] = useState('SFW');
+  const [flavorMode, setFlavorMode] = useState('SFW');
 
-  const name = clean(data.character_name) || 'Персонаж';
-  const headshot = clean(data.headshot_link);
-  const nudeshot = clean(data.nudeshot_link);
-  const oocLink = clean(data.ooc_extra_link);
-  const flavor = clean(data.flavortext);
-  const ooc = clean(data.ooc_notes);
-  const nsfwFlavor = clean(data.nsfw_flavor);
-  const erp = clean(data.erp_preferences);
-  const food = clean(data.favourite_food);
-  const drink = clean(data.favourite_drink);
+  const name = str(data.character_name) || 'Персонаж';
+  const headshot = str(data.headshot_link);
+  const nudeshot = str(data.nudeshot_link);
+  const oocLink = str(data.ooc_extra_link);
+  const flavor = str(data.flavortext ?? data.flavor_text);
+  const ooc = str(data.ooc_notes);
+  const erp = str(data.erp_preferences);
 
-  const rawGallery = data.gallery_links ?? data.gallery ?? [];
-  const gallery: string[] = Array.isArray(rawGallery)
-    ? rawGallery.filter((x: unknown) => isUrl(x))
-    : [];
+  const rawGallery = data.gallery_links ?? data.gallery ?? '';
+  const galleryParts: unknown[] = Array.isArray(rawGallery)
+    ? rawGallery
+    : String(rawGallery).split(',');
+  const gallery: string[] = galleryParts
+    .map((x) => String(x).trim())
+    .filter((x) => isUrl(x));
 
-  const mainImage = isUrl(headshot) ? headshot : previewSrc(data.preview_image);
+  const nsfwFlavorAvailable = isUrl(nudeshot);
 
   return (
-    <Window title={name} width={960} height={720}>
-      <Window.Content scrollable>
-        <Stack fill>
-          <Stack.Item width="330px">
-            <Section
-              title={name}
-              buttons={
-                <Button
-                  icon="sync"
-                  tooltip="Обновить"
-                  onClick={() => act('refresh')}
-                />
-              }
-            >
-              <Box textAlign="center" mb={1}>
-                {mainImage ? (
-                  <img
-                    src={mainImage}
-                    style={{
-                      maxWidth: '300px',
-                      maxHeight: '300px',
-                      imageRendering: headshot ? 'auto' : 'pixelated',
-                    }}
-                  />
-                ) : (
-                  <Box color="gray" py={6}>
-                    Изображения нет.
-                  </Box>
-                )}
-              </Box>
-              <Line label="Раса" value={clean(data.species)} />
-              <Line label="Пол" value={clean(data.gender)} />
-              <Line label="Местоимения" value={clean(data.pronouns)} />
-              <Line label="Возраст" value={clean(data.age)} />
-              <Line label="Вера" value={clean(data.faith)} />
-              <Line label="Покровитель" value={clean(data.patron)} />
-              <Line label="Любимая еда" value={food} />
-              <Line label="Любимый напиток" value={drink} />
-              {isUrl(oocLink) && (
-                <Button
-                  fluid
-                  mt={1}
-                  icon="link"
-                  onClick={() => act('open_link', { which: 'ooc_extra_link' })}
-                >
-                  OOC ссылка
-                </Button>
-              )}
-              <Button.Checkbox
-                fluid
-                mt={1}
-                checked={showNsfw}
-                onClick={() => setShowNsfw(!showNsfw)}
-              >
-                Показать NSFW
-              </Button.Checkbox>
-            </Section>
-          </Stack.Item>
-          <Stack.Item grow>
-            <Stack vertical>
-              <Stack.Item>
-                <Section title="Описание (Flavor Text)">
-                  <TextBlock text={flavor} empty="Описание не задано." />
-                </Section>
-              </Stack.Item>
-              <Stack.Item>
-                <Section title="OOC заметки">
-                  <TextBlock text={ooc} empty="OOC заметок нет." />
-                </Section>
-              </Stack.Item>
-              {gallery.length > 0 && (
-                <Stack.Item>
-                  <Section title="Галерея">
-                    {gallery.map((url) => (
-                      <Box key={url} textAlign="center" mb={1}>
-                        <img src={url} style={{ maxWidth: '100%' }} />
-                      </Box>
-                    ))}
-                  </Section>
+    <Window title={name} width={1000} height={700}>
+      <Window.Content>
+        <Stack vertical fill>
+          {gallery.length > 0 && (
+            <>
+              <Stack>
+                <Stack.Item grow>
+                  <Button
+                    fluid
+                    align="center"
+                    fontSize="1.2em"
+                    selected={page === 'main'}
+                    onClick={() => setPage('main')}
+                  >
+                    Flavor Text
+                  </Button>
                 </Stack.Item>
-              )}
-              {showNsfw && (
-                <>
-                  <Stack.Item>
-                    <Section title="NSFW описание">
-                      <TextBlock
-                        text={nsfwFlavor}
-                        empty="NSFW описание не задано."
-                      />
-                    </Section>
-                  </Stack.Item>
-                  <Stack.Item>
-                    <Section title="ERP предпочтения">
-                      <TextBlock text={erp} empty="Предпочтения не заданы." />
-                    </Section>
-                  </Stack.Item>
-                  {isUrl(nudeshot) && (
-                    <Stack.Item>
-                      <Section title="Nudeshot">
-                        <Box textAlign="center">
-                          <img src={nudeshot} style={{ maxWidth: '100%' }} />
+                <Stack.Item grow>
+                  <Button
+                    fluid
+                    align="center"
+                    fontSize="1.2em"
+                    selected={page === 'gallery'}
+                    onClick={() => setPage('gallery')}
+                  >
+                    Галерея
+                  </Button>
+                </Stack.Item>
+              </Stack>
+              <Stack.Divider />
+            </>
+          )}
+          <Stack.Item grow>
+            {page === 'gallery' && gallery.length > 0 ? (
+              <Section fill scrollable title="Галерея персонажа">
+                {gallery.map((url) => (
+                  <Box key={url} textAlign="center" mb={1}>
+                    <img src={url} style={{ maxWidth: '100%' }} />
+                  </Box>
+                ))}
+              </Section>
+            ) : (
+              <Stack fill>
+                <Stack.Item width="370px">
+                  <Stack fill vertical>
+                    <Stack.Item align="center">
+                      {isUrl(headshot) ? (
+                        <img
+                          src={headshot}
+                          style={{
+                            width: '350px',
+                            height: '350px',
+                            objectFit: 'contain',
+                          }}
+                        />
+                      ) : (
+                        <Box
+                          width="350px"
+                          height="350px"
+                          color="gray"
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          Хэдшота нет.
                         </Box>
+                      )}
+                    </Stack.Item>
+                    <Stack.Item grow>
+                      <Section
+                        fill
+                        scrollable
+                        title="OOC Notes"
+                        buttons={
+                          <ModeButtons
+                            mode={oocMode}
+                            setMode={setOocMode}
+                            nsfwDisabled={!erp}
+                          />
+                        }
+                      >
+                        {oocMode === 'SFW' ? (
+                          <Body text={ooc} empty="OOC заметок нет." />
+                        ) : (
+                          <Body text={erp} empty="NSFW заметок нет." />
+                        )}
                       </Section>
                     </Stack.Item>
-                  )}
-                </>
-              )}
-            </Stack>
+                  </Stack>
+                </Stack.Item>
+                <Stack.Item grow>
+                  <Section
+                    fill
+                    scrollable
+                    title="Flavor Text"
+                    buttons={
+                      <ModeButtons
+                        mode={flavorMode}
+                        setMode={setFlavorMode}
+                        nsfwDisabled={!nsfwFlavorAvailable}
+                      />
+                    }
+                  >
+                    {flavorMode === 'SFW' ? (
+                      <>
+                        <Body text={flavor} empty="Описание не задано." />
+                        {isUrl(oocLink) && (
+                          <Button
+                            mt={1}
+                            icon="link"
+                            onClick={() =>
+                              act('open_link', { which: 'ooc_extra_link' })
+                            }
+                          >
+                            OOC ссылка
+                          </Button>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {!isUrl(nudeshot) && (<Box color="gray">NSFW материалов нет.</Box>)}
+                        {isUrl(nudeshot) && (
+                          <Box mt={1} textAlign="center">
+                            <img src={nudeshot} style={{ maxWidth: '100%' }} />
+                          </Box>
+                        )}
+                      </>
+                    )}
+                  </Section>
+                </Stack.Item>
+              </Stack>
+            )}
           </Stack.Item>
         </Stack>
       </Window.Content>
