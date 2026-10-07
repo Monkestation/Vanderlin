@@ -10,10 +10,11 @@
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/craft/tanning = 20,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/craft/carpentry = 30,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/magic/druidic = 30,
-		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/magic/druidic = 40,
+		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/misc/sewing = 20,
@@ -42,6 +43,7 @@
 	exp_requirements = list(
 		EXP_TYPE_CHURCH = 600
 	)
+	spells = list(/datum/action/cooldown/spell/diagnose)
 
 	outfit = /datum/outfit/forestpreacher
 	give_bank_account = 40
@@ -60,6 +62,7 @@
 
 	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/job/forestpreacher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -81,7 +84,7 @@
 /datum/outfit/forestpreacher
 	name = JOB_FOREST_PREACHER
 	armor = /obj/item/clothing/armor/leather/shamancoat
-	neck = /obj/item/clothing/neck/psycross/great_hunt
+	neck = /obj/item/clothing/neck/psycross/great_hunt/divine_link
 	pants = /obj/item/clothing/pants/trou/leather/gronn
 	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
@@ -90,10 +93,10 @@
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	backl = /obj/item/storage/backpack/satchel
-	r_hand = /obj/item/weapon/polearm/woodstaff
+	backr = /obj/item/weapon/polearm/spear
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/key/forrestgarrison = 1,
+		/obj/item/storage/keyring/gallowband/gothi = 1,
 		/obj/item/needle = 1,
 	)

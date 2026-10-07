@@ -25,7 +25,7 @@
 	spell_impact_intensity = SPELL_IMPACT_NONE
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC | SPELL_REQUIRES_HUMAN | SPELL_REQUIRES_SAME_Z
 
-	var/max_range = 5
+	cast_range = 5
 	var/phase = /obj/effect/temp_visual/blink
 	var/phase_sound = 'sound/magic/blink.ogg'
 	var/phase_beam = "purple_lightning"
@@ -63,8 +63,8 @@
 		return FALSE
 
 	var/distance = get_dist(start, T)
-	if(distance > max_range)
-		to_chat(owner, span_warning("That location is too far away! I can only blink up to [max_range] tiles."))
+	if(distance > cast_range)
+		to_chat(owner, span_warning("That location is too far away! I can only blink up to [cast_range] tiles."))
 		return FALSE
 
 	var/path_err = validate_walk_path(start, T)

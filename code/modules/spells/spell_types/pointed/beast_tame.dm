@@ -31,6 +31,8 @@
 		/datum/pet_command/aggressive,
 		/datum/pet_command/calm,
 	)
+	var/control_desc = "Dendor's whisper"
+	var/sooth_desc = "soothing"
 
 /datum/action/cooldown/spell/beast_tame/is_valid_target(atom/cast_on)
 	. = ..()
@@ -50,12 +52,12 @@
 /datum/action/cooldown/spell/beast_tame/cast(mob/living/simple_animal/hostile/retaliate/cast_on)
 	. = ..()
 	if(!prob(cast_on.dendor_taming_chance))
-		to_chat(owner, span_warning("\The [cast_on] resists your soothing!"))
+		to_chat(owner, span_warning("\The [cast_on] resists your [sooth_desc]!"))
 		return
 
 	owner.visible_message(
-		span_greentext("[owner] soothes \the [cast_on] with Dendor's whisper."),
-		span_notice("I tame the beast with Dendor's whisper."),
+		span_greentext("[owner] soothes \the [cast_on] with [control_desc]."),
+		span_notice("I tame the beast with [control_desc]."),
 	)
 
 	cast_on.LoadComponent(/datum/component/obeys_commands, pet_commands)
@@ -82,3 +84,19 @@
 	required_form = FORM_EARTH
 	required_technique = TECHNIQUE_SUMMONING
 	required_items = null
+
+	invocation = "You will obey, beast!"
+	invocation_type = INVOCATION_SHOUT
+	control_desc = "arcyne might"
+	sooth_desc = "control"
+
+/datum/action/cooldown/spell/beast_tame/great_hunt
+	name = "Calm Beast"
+	spell_type = SPELL_DIVINE_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	associated_skill = /datum/attribute/skill/magic/druidic
+	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)
+
+	invocation = "The woods will protect me..."
+	control_desc = "the Will of the Hunt"
+	sooth_desc = "soothing"

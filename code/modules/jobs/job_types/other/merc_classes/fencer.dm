@@ -24,6 +24,10 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/fencer
 
+	traits = list(
+		TRAIT_EXPERT_PARRY
+	)
+
 /datum/job/advclass/mercenary/fencer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.merctype = 2

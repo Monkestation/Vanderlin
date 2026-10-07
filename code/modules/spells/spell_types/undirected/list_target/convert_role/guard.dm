@@ -18,3 +18,11 @@
 	recruitment_faction = "Forest Garrison"
 	recruitment_message = "Join the Forest Garrison, %RECRUIT!"
 	accept_message = "I swear to protect the forest!"
+
+/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/gallowband
+	name = "Recruit Gallowband"
+
+	new_role = "Gallowband Recruit"
+	recruitment_faction = "Gallowband"
+	recruitment_message = "Join the Gallowband, %RECRUIT!"
+	accept_message = "I swear to protect the forest!"

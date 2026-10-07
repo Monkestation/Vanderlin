@@ -43,6 +43,15 @@
 
 /area/outdoors/wilderness/beside_thatchwood
 
+/area/outdoors/wilderness/north
+	name = "Northern Murderwood"
+/area/outdoors/wilderness/east
+	name = "Eastern Murderwood"
+/area/outdoors/wilderness/south
+	name = "Southern Murderwood"
+/area/outdoors/wilderness/central
+	name = "Central Murderwood"
+
 /area/outdoors/wilderness/outpost/salem
 	name = "salem outpost"
 	first_time_text = "Salem Outpost"

@@ -478,7 +478,9 @@
 
 /atom/proc/ShiftClick(mob/user, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_CLICK_SHIFT, user, modifiers)
-	if(user.client && user.client.eye == user || user.client.eye == user.loc)
+	if(!user.client)
+		return
+	if(user.client.eye == user || user.client.eye == user.loc || user.is_looking_vertically())
 		user.examinate(src)
 
 /*
