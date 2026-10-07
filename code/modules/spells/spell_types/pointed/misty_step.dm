@@ -62,6 +62,11 @@
 		to_chat(owner, span_warning(dest_err))
 		return FALSE
 
+	var/distance = get_dist(start, T)
+	if(distance > cast_range)
+		to_chat(owner, span_warning("That location is too far away! I can only blink up to [cast_range] tiles."))
+		return FALSE
+
 	var/path_err = validate_walk_path(start, T)
 	if(path_err)
 		to_chat(owner, span_warning(path_err))

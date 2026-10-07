@@ -21,11 +21,11 @@
 	var/wolfname = "Werevolf"
 	var/list/datum/action/werewolf_form_powers = list(
 		// /datum/action/cooldown/spell/undirected/howl, //Nonfunctional
-		/datum/action/cooldown/spell/undirected/claws,
-		/datum/action/cooldown/spell/aoe/repulse/howl,
-		/datum/action/cooldown/spell/woundlick,
-		/datum/action/cooldown/spell/lunge,
-		/datum/action/cooldown/spell/throw_target,
+		/datum/action/cooldown/spell/undirected/claws, \
+		/datum/action/cooldown/spell/aoe/repulse/howl, \
+		/datum/action/cooldown/spell/woundlick, \
+		/datum/action/cooldown/spell/lunge, \
+		/datum/action/cooldown/spell/throw_target, \
 		/datum/action/cooldown/keen_nose
 	)
 	COOLDOWN_DECLARE(message_cooldown)

@@ -2841,6 +2841,13 @@
 	update_cone_show()
 	on_looking_z_level_change(get_turf(src), below_turf)
 
+/// Whether the mob's client is currently viewing through a vertical look (up/down) holder
+/mob/proc/is_looking_vertically()
+	return FALSE
+
+/mob/living/is_looking_vertically()
+	return looking_vertically != NONE && client?.eye == looking_holder
+
 /mob/living/proc/look_further(turf/T)
 	if(looking_vertically)
 		stop_looking()

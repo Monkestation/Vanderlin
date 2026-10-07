@@ -16,3 +16,43 @@
   - balance: removes perfect parries
   - bugfix: clenched fist has associated unarmed skill
   - qol: on parry it shows your actual parry chance
+2026-10-05:
+  realforest2001:
+  - rscadd: Added access defines for different gallowband roles.
+  - balance: Gave all gallowband roles 20 skill in Leatherwork Patching.
+  - balance: Improved Gothi Medical skill to 20 (Worse than Bog Witch) and Druidic
+      Trickery skill to 40 (equal to Bog Witch).
+  - rscadd: Added regional areas to the Murderwood.
+  - map: Added a third Z to Murderwood, making the trees taller and slightly expanding
+      the Gallowfort upward. More to come perhaps later.
+  - rscadd: Added two new miracles to The Great Hunt, Forest Bind (Similar to Gravity
+      spell) and Calm Beast (Tame, like Dendorites).
+  - map: Gallowband boat now has correct access on the front door.
+  - rscadd: Added pillories with gallowband locks.
+  ta3754859-max:
+  - balance: Intents with reach above 1 have halved armor penetration
+  - balance: removes swift balance from blacksteel halberd
+2026-10-06:
+  Ordosian:
+  - image: Fixed many gloves and offsets.
+  - code_imp: Makes decorated helmets no longer go invisible on no choice.
+  - image: Admin Icon File has some extra icons.
+  - code_imp: Ghost icon file for observers changed and observers are not just blank
+      ghosts anymore.
+  copper-404:
+  - rscadd: Adds a court physician's office to Daftmarsh.
+  - map: Makes the mage guild area a fully separated tower, accessible via bridges.
+  - map: Moves the garrison to the basement.
+  - map: Readjusts position of dungeon, servant areas, ale cellar, vault and others
+      in the basement.
+  - map: Adjusts position of captain's office on the first floor.
+  - map: Adjusts monarch's, heir's, guest bedroom, and meeting position on the second
+      floor.
+  - map: Adds a couple run down lounges.
+  - map: Adds three abandoned rooms.
+  - map: Generally adjusts the flow of the hallways to be more easy to grasp.
+  - map: Adds minor POIs to the bog and mountains (smuggler dock and hot spring cave
+      respectively.
+  - map: Very slight adjustments of some ruined structures in the bog.
+  ta3754859-max:
+  - map: fixes logs in thatchwood's smithy alongside removing broken tile objects

@@ -485,6 +485,8 @@
 	if(!picked)
 		var/list/icons = HELMET_KNIGHT_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -513,6 +515,8 @@
 	if(!picked)
 		var/list/icons = HELMET_HOUNSKULL_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -538,6 +542,8 @@
 	if(!picked)
 		var/list/icons = HELMET_BUCKET_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -595,6 +601,8 @@
 	if(!picked)
 		var/list/icons = BASCINET_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice

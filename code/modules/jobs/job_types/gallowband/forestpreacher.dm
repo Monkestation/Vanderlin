@@ -43,6 +43,7 @@
 	exp_requirements = list(
 		EXP_TYPE_CHURCH = 600
 	)
+	spells = list(/datum/action/cooldown/spell/diagnose)
 
 	outfit = /datum/outfit/forestpreacher
 	give_bank_account = 40
@@ -61,6 +62,7 @@
 
 	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/job/forestpreacher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
