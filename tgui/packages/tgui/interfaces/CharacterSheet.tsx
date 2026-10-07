@@ -432,6 +432,11 @@ export const CharacterSheet = () => {
                   <Stack.Item>
                     <Stack>
                       <Stack.Item grow basis={0}>
+                        <Button fluid icon="eye" onClick={() => act('open_examine')}>
+                          Осмотр
+                        </Button>
+                      </Stack.Item>
+                      <Stack.Item grow basis={0}>
                         <Button
                           fluid
                           color="good"

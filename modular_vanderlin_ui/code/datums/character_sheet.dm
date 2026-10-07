@@ -144,6 +144,10 @@
 				return
 			owner.client.prefs.ShowCustomizers(owner)
 			return TRUE
+		if("open_examine")
+			var/datum/character_examine/examine_view = new /datum/character_examine(src)
+			examine_view.ui_interact(usr)
+			return TRUE
 		if("open_descriptors")
 			if(!owner || !owner.client || !owner.client.prefs)
 				return
