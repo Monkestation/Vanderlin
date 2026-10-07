@@ -72,6 +72,18 @@
 	var/datum/culture/culture_path = prefs.read_preference(/datum/preference/choiced/culture)
 	data["culture"] = culture_path ? culture_path::name : "Unknown"
 	data["skin_tone"] = prefs.read_preference(/datum/preference/choiced/skin_tone)
+	var/list/skin_assoc = prefs.pref_species?.get_skin_list()
+	var/skin_value = prefs.read_preference(/datum/preference/choiced/skin_tone)
+	var/skin_name = skin_assoc ? find_key_by_value(skin_assoc, skin_value) : null
+	data["skin_tone_name"] = skin_name || "Custom"
+	data["skin_tone_wording"] = prefs.pref_species?.skin_tone_wording || "Skin tone"
+	var/list/skin_options = list()
+	for(var/skin_key in skin_assoc)
+		var/skin_hex = "[skin_assoc[skin_key]]"
+		if(copytext(skin_hex, 1, 2) != "#")
+			skin_hex = "#" + skin_hex
+		skin_options += list(list("name" = skin_key, "color" = skin_hex))
+	data["skin_options"] = skin_options
 	data["detail_color"] = "#" + prefs.read_preference(/datum/preference/color/detail_color)
 	var/list/bm_count = list()
 	for(var/zone in prefs.body_markings)
@@ -182,6 +194,16 @@
 				if(current_index > length(cycle))
 					current_index = 1
 			preview_dir = cycle[current_index]
+			return TRUE
+		if("set_skin_tone")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			var/datum/preferences/prefs = owner.client.prefs
+			var/list/skin_assoc = prefs.pref_species?.get_skin_list()
+			var/chosen_skin = params["name"]
+			if(!skin_assoc || !(chosen_skin in skin_assoc))
+				return
+			prefs.write_preference(/datum/preference/choiced/skin_tone, skin_assoc[chosen_skin])
 			return TRUE
 		if("edit_field")
 			if(!owner)

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { useBackend } from '../backend';
 import { Box, Button, Stack } from 'tgui-core/components';
@@ -26,6 +27,9 @@ type Data = {
   species: string;
   culture: string;
   skin_tone: string;
+  skin_tone_name: string;
+  skin_tone_wording: string;
+  skin_options: { name: string; color: string }[];
   detail_color: string;
   markings_count: number;
   family_mode: string;
@@ -129,6 +133,9 @@ export const CharacterSheet = () => {
     species = '',
     culture = '',
     skin_tone = '',
+    skin_tone_name = '',
+    skin_tone_wording = '',
+    skin_options = [],
     detail_color = '#000000',
     markings_count = 0,
     family_mode = '',
@@ -150,6 +157,7 @@ export const CharacterSheet = () => {
   } = data;
 
   const edit = (key: string) => act('edit_field', { pref_key: key });
+  const [skinOpen, setSkinOpen] = useState(false);
 
   const field = (key: string, text: string) => (
     <span style={editStyle} onClick={() => edit(key)}>
@@ -167,6 +175,83 @@ export const CharacterSheet = () => {
   return (
     <Window width={960} height={960} title="Лист Персонажа">
       <Window.Content scrollable>
+        {skinOpen && (
+          <Box
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 100,
+              background: 'rgba(0,0,0,0.8)',
+              overflowY: 'auto',
+              padding: '20px',
+            }}
+          >
+            <Box
+              style={{
+                maxWidth: '520px',
+                margin: '0 auto',
+                background: '#140d0d',
+                border: '1px solid #8a1c1c',
+              }}
+            >
+              <Box
+                bold
+                p={1}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  borderBottom: '1px solid #8a1c1c',
+                }}
+              >
+                <span>{'Выбор происхождения: ' + skin_tone_wording}</span>
+                <Button icon="times" onClick={() => setSkinOpen(false)} />
+              </Box>
+              <Box p={1}>
+                {skin_options.map((o) => (
+                  <Box
+                    key={o.name}
+                    onClick={() => {
+                      act('set_skin_tone', { name: o.name });
+                      setSkinOpen(false);
+                    }}
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      padding: '6px 8px',
+                      marginBottom: '4px',
+                      cursor: 'pointer',
+                      border:
+                        o.name === skin_tone_name
+                          ? '1px solid #c9a227'
+                          : '1px solid #3a2a2a',
+                      background: o.name === skin_tone_name ? '#2a1a1a' : 'transparent',
+                    }}
+                  >
+                    <Box
+                      style={{
+                        width: '28px',
+                        height: '28px',
+                        background: o.color,
+                        border: '1px solid #888',
+                        flexShrink: 0,
+                      }}
+                    />
+                    <Box style={{ flex: 1 }}>{o.name}</Box>
+                    <Box color="gray">{o.color}</Box>
+                  </Box>
+                ))}
+                {!skin_options.length && (
+                  <Box color="gray">Нет доступных вариантов.</Box>
+                )}
+              </Box>
+            </Box>
+          </Box>
+        )}
         <Stack vertical>
           <Stack.Item>
             <Stack>
@@ -321,7 +406,10 @@ export const CharacterSheet = () => {
                         </Box>
                         <Box p={1}>
                           <Row label="Цвет кожи">
-                            {colorField('skin_tone', skin_tone)}
+                            <span style={editStyle} onClick={() => setSkinOpen(true)}>
+                              {swatch(skin_tone)}
+                              {skin_tone_name || (isHex(skin_tone) ? hex(skin_tone) : skin_tone)}
+                            </span>
                           </Row>
                           <Row label="Цвет деталей">
                             {colorField('detail_color', detail_color)}
