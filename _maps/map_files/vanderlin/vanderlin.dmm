@@ -541,6 +541,10 @@
 /obj/item/clothing/head/peaceflower,
 /turf/open/water/hotspring,
 /area/outdoors/eora)
+"alm" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/keep/servant)
 "alw" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -27592,6 +27596,10 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
 /area/indoors/town/church)
+"kVQ" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/stone,
+/area/indoors/town/keep/servant)
 "kVR" = (
 /obj/structure/rack,
 /obj/item/clothing/armor/gambeson/steward{
@@ -45682,6 +45690,10 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
+"rMF" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/stone/moss,
+/area/indoors/town/keep/servant)
 "rMJ" = (
 /obj/structure/closet/crate/drawer{
 	pixel_y = 4
@@ -49854,6 +49866,10 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/church)
+"ttR" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/craftstone,
+/area/under/cave)
 "ttS" = (
 /turf/closed/wall/mineral/stone/window,
 /area/under/town/sewer)
@@ -52885,6 +52901,7 @@
 /obj/machinery/light/fueled/wallfire/candle/lamp,
 /obj/structure/fluff/steamvent,
 /obj/machinery/artificer_table,
+/obj/structure/water_pipe,
 /turf/open/floor/blocks/stonered/tiny,
 /area/indoors/town/keep/basement/royalknight)
 "uFJ" = (
@@ -57932,6 +57949,7 @@
 /turf/open/floor/wood,
 /area/indoors/town)
 "wxq" = (
+/obj/structure/water_pipe,
 /turf/open/floor/metal/alt,
 /area/indoors/town/keep/basement/royalknight)
 "wxr" = (
@@ -83023,11 +83041,11 @@ pUh
 pUh
 pUh
 qcM
-qcM
-tOs
-tOs
-iXr
-qcM
+kVQ
+alm
+alm
+rMF
+kVQ
 tgT
 oXU
 vwf
@@ -83229,9 +83247,9 @@ qFx
 qFx
 qFx
 qFx
-pTm
-hES
-tgT
+ttR
+aIU
+aFH
 uFG
 wxq
 wxq
@@ -161602,7 +161620,7 @@ bWN
 aSZ
 qVI
 sWQ
-ybB
+sWQ
 ybB
 ybB
 ybB
@@ -162008,7 +162026,7 @@ oPp
 oPp
 oPp
 oXK
-ybB
+sWQ
 ybB
 ybB
 ybB
