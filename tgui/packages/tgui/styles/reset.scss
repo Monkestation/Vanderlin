@@ -60,3 +60,10 @@ th {
   vertical-align: baseline;
   text-align: left;
 }
+
+// VANDERLIN-CURSOR: always use the game cursor in TGUI windows.
+// Without this, `cursor: pointer` (buttons, clickable elements) shows the
+// system hand instead of the in-game cursor. Text fields keep the I-beam.
+html *:not(input):not(textarea):not(select) {
+  cursor: var(--cursor-default, default) !important;
+}
