@@ -3491,6 +3491,7 @@
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\peasant.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\physicker.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\wanderer.dm"
+#include "code\modules\jobs\job_types\adventurer\types\pilgrim\wandering_gothi.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\weaver.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\woodcutter.dm"
 #include "code\modules\jobs\job_types\adventurer\types\pilgrim\rare\grenzelhoft.dm"
