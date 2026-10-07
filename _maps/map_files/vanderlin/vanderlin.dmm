@@ -541,10 +541,6 @@
 /obj/item/clothing/head/peaceflower,
 /turf/open/water/hotspring,
 /area/outdoors/eora)
-"alm" = (
-/obj/structure/water_pipe,
-/turf/closed/wall/mineral/craftstone,
-/area/indoors/town/keep/servant)
 "alw" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -27596,10 +27592,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/blocks,
 /area/indoors/town/church)
-"kVQ" = (
-/obj/structure/water_pipe,
-/turf/closed/wall/mineral/stone,
-/area/indoors/town/keep/servant)
 "kVR" = (
 /obj/structure/rack,
 /obj/item/clothing/armor/gambeson/steward{
@@ -32798,6 +32790,10 @@
 "mSj" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/tavern)
+"mSB" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/craftstone,
+/area/under/cave)
 "mSD" = (
 /obj/structure/flora/grass/bush/wall/tall,
 /obj/structure/flora/newtree,
@@ -41521,6 +41517,10 @@
 /obj/effect/landmark/backup_join,
 /turf/open/floor/wood,
 /area/outdoors/beach/boat)
+"qjM" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/craftstone,
+/area/indoors/town/keep/servant)
 "qjR" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass,
@@ -45690,10 +45690,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
-"rMF" = (
-/obj/structure/water_pipe,
-/turf/closed/wall/mineral/stone/moss,
-/area/indoors/town/keep/servant)
 "rMJ" = (
 /obj/structure/closet/crate/drawer{
 	pixel_y = 4
@@ -49648,6 +49644,12 @@
 "toR" = (
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/blue)
+"toV" = (
+/obj/structure/water_pipe{
+	pixel_y = 1
+	},
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/town/keep/feast)
 "toY" = (
 /obj/structure/table/wood/counter{
 	dir = 1
@@ -49866,10 +49868,6 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/church)
-"ttR" = (
-/obj/structure/water_pipe,
-/turf/closed/wall/mineral/craftstone,
-/area/under/cave)
 "ttS" = (
 /turf/closed/wall/mineral/stone/window,
 /area/under/town/sewer)
@@ -50092,6 +50090,10 @@
 	},
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor/red)
+"tyd" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/stone,
+/area/indoors/town/keep/servant)
 "tyg" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/carpet/royalblack,
@@ -51927,6 +51929,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
+"ume" = (
+/obj/structure/water_pipe,
+/turf/closed/wall/mineral/stone/moss,
+/area/indoors/town/keep/servant)
 "umt" = (
 /obj/structure/fermentation_keg/water,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
@@ -83041,11 +83047,11 @@ pUh
 pUh
 pUh
 qcM
-kVQ
-alm
-alm
-rMF
-kVQ
+tyd
+qjM
+qjM
+ume
+tyd
 tgT
 oXU
 vwf
@@ -83247,7 +83253,7 @@ qFx
 qFx
 qFx
 qFx
-ttR
+mSB
 aIU
 aFH
 uFG
@@ -163843,8 +163849,8 @@ xqQ
 xqQ
 xqQ
 xqQ
-cxn
-ybB
+toV
+gpT
 gpT
 ybB
 ybB
