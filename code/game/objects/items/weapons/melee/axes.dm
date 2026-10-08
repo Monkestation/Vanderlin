@@ -87,7 +87,7 @@
 
 /obj/item/weapon/axe/battle/double
 	name = "double headed battle axe"
-	desc = "Twice the heads for twice the carnage, excellent for cleaving the heads of your foes and the timber of the wood"
+	desc = "Twice the heads for twice the carnage, excellent for cleaving the heads of your foes and the timber of the wood."
 	icon_state = "battleaxedouble"
 	force = DAMAGE_AXE + 5
 	force_wielded = DAMAGE_HEAVYAXE_WIELD + 4
@@ -183,7 +183,7 @@
 //................ Psydonian Axe ............... //
 /obj/item/weapon/axe/psydon
 	name = "psydonian axe"
-	desc = "An axe forged of silver with a small psycross attached, Dendor and his foul beastmen be damned."
+	desc = "An axe forged of blessed silver with a small psycross attached, Dendor and his foul beastmen be damned."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyaxe"
 	max_blade_int = 240
@@ -271,7 +271,7 @@
 //................ Blacksteel Axe ............... //
 /obj/item/weapon/axe/battle/blacksteel
 	name = "blacksteel axe"
-	desc = "A magnificent battle axe of blacksteel, fitted to counter both unarmored assailants and heavy infantry. The edge might be fluted with nobler alloys, but it is no less wicked when introduced to maille-and-bone."
+	desc = "A magnificent battle axe of blacksteel, fitted to counter both unarmored assailants and heavy infantry. The edge might be fluted with nobler alloys, but it is no less wicked when introduced to maille and bone."
 	icon_state = "bs_axe"
 	force = DAMAGE_AXE + 2
 	force_wielded = DAMAGE_HEAVYAXE_WIELD + 2
@@ -299,7 +299,7 @@
 //------------------ Silver Axe ---------------//
 /obj/item/weapon/axe/silver
 	name = "silver axe"
-	desc = "A silver axe, not as strong as steel but more effective against supernatural foes."
+	desc = "A silver axe - not as strong as steel, but more effective against supernatural foes."
 	icon_state = "silveraxe"
 	max_blade_int = 200
 	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_SILVER
@@ -326,7 +326,7 @@
 
 /obj/item/weapon/axe/silver/double
 	name = "double headed silver axe"
-	desc = "A silver axe with two cleaving heads, for sweeping thorugh the beasts of the nite"
+	desc = "A silver axe with two cleaving heads, for sweeping thorugh the beasts of the nite."
 	icon_state = "silveraxedouble"
 	max_blade_int = 300
 	max_integrity = INTEGRITY_DBL_BATTLEAXE * INTEGRITY_MOD_SILVER
@@ -337,7 +337,7 @@
 //.................. Bearded Axe ...............//
 /obj/item/weapon/axe/steel/bearded
 	name = "bearded axe"
-	desc = "A large axe easily wielded in one hand or two, With a large hooked axe head to tearing into flesh and armor and ripping it away brutally."
+	desc = "A large axe easily wielded in one hand or two, with a large, hooked axe head for tearing into flesh and armor and brutally ripping it away."
 	icon_state = "atgervi_axe"
 	item_state = "atgervi_axe"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
@@ -381,7 +381,7 @@
 //................ Copper Hatchet ............... //
 /obj/item/weapon/axe/copper
 	name = "copper hatchet"
-	desc = "A simple designed handaxe, an outdated weapon from simpler times."
+	desc = "A simply designed handaxe, an outdated weapon from simpler times."
 	icon_state = "chatchet"
 	force = DAMAGE_BAD_AXE
 	force_wielded = DAMAGE_BAD_AXE_WIELD
@@ -437,7 +437,7 @@
 
 /obj/item/weapon/axe/trollboneaxe
 	name = "troll-horn bone axe"
-	desc = "A rough axe made of bones, strengthed with an troll's horn."
+	desc = "A rough axe made of bones, strengthed with a troll's horn."
 	icon_state = "boneaxe"
 	force = DAMAGE_BAD_AXE
 	force_wielded =	DAMAGE_BAD_AXE_WIELD
@@ -464,7 +464,7 @@
 //................ Great Axe ............... //
 /obj/item/weapon/greataxe
 	name = "greataxe"
-	desc = "An iron great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure."
+	desc = "A long-handled iron axe with a single blade, made for ruining someone's day beyond any measure."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "igreataxe"
 	force = DAMAGE_AXE
@@ -529,7 +529,7 @@
 
 /obj/item/weapon/greataxe/steel
 	name = "steel greataxe"
-	desc = "A steel great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure."
+	desc = "A long-handled steel axe with a single blade made for ruining someone's day beyond any measure."
 	icon_state = "sgreataxe"
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	max_blade_int = 300
@@ -567,7 +567,7 @@
 
 /obj/item/weapon/greataxe/steel/doublehead/graggar
 	name = "vicious greataxe"
-	desc = "A greataxe who's edge thrums with the motive force, violence, oh, sweet violence!"
+	desc = "A greataxe whose edge thrums with the motive force - violence, oh, sweet violence!"
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "graggargaxe"
 	alt_intents = list(AXE_CUT, AXE_CHOP)
