@@ -9,6 +9,7 @@ type Data = {
   character_name: string;
   pronouns: string;
   age: string;
+  gender: string;
   voice_type: string;
   body_size: number;
   voice_pitch: number;
@@ -111,6 +112,13 @@ const Row = (props: {
   </Box>
 );
 
+const InfoBox = (props: { title: string; value: ReactNode }) => (
+  <Box style={{ ...frame, height: '100%', textAlign: 'center' }} p={1}>
+    <Box bold>{props.title}</Box>
+    <Box>{props.value}</Box>
+  </Box>
+);
+
 export const CharacterSheet = () => {
   const { data, act } = useBackend<Data>();
   const {
@@ -118,6 +126,7 @@ export const CharacterSheet = () => {
     character_name = 'Unnamed',
     pronouns = '',
     age = '',
+    gender = '',
     voice_type = '',
     body_size = 100,
     voice_pitch = 100,
@@ -178,6 +187,13 @@ export const CharacterSheet = () => {
     </span>
   );
 
+  const genderLabel =
+    gender === 'male'
+      ? 'Мужской'
+      : gender === 'female'
+        ? 'Женский'
+        : gender || '—';
+
   return (
     <Window width={960} height={960} title="Лист Персонажа">
       <Window.Content scrollable>
@@ -235,7 +251,8 @@ export const CharacterSheet = () => {
                         o.name === skin_tone_name
                           ? '1px solid #c9a227'
                           : '1px solid #3a2a2a',
-                      background: o.name === skin_tone_name ? '#2a1a1a' : 'transparent',
+                      background:
+                        o.name === skin_tone_name ? '#2a1a1a' : 'transparent',
                     }}
                   >
                     <Box
@@ -259,67 +276,58 @@ export const CharacterSheet = () => {
           </Box>
         )}
         <Stack vertical>
+          {/* Шапка, ряд 1: Настройки | Смена персонажа | Триумфы */}
           <Stack.Item>
             <Stack>
               <Stack.Item grow basis={0}>
-                <Stack vertical fill>
-                  <Stack.Item>
-                    <Button
-                      fluid
-                      icon="user"
-                      onClick={() => act('change_character')}
-                    >
-                      Смена персонажа
-                    </Button>
-                  </Stack.Item>
-                  <Stack.Item grow>
-                    <Box
-                      style={{ ...frame, height: '100%', textAlign: 'center' }}
-                      p={1}
-                    >
-                      <Box bold>PQ</Box>
-                      <Box>{pq}</Box>
-                    </Box>
-                  </Stack.Item>
-                </Stack>
-              </Stack.Item>
-              <Stack.Item grow basis={0}>
-                <Stack vertical>
-                  <Stack.Item>
-                    <Button
-                      fluid
-                      icon="user-tag"
-                      onClick={() => act('open_job_select')}
-                    >
-                      Выбор Роли
-                    </Button>
-                  </Stack.Item>
-                  <Stack.Item>
-                    <Button
-                      fluid
-                      color="bad"
-                      icon="user-secret"
-                      onClick={() => act('open_antag_prefs')}
-                    >
-                      Антагонист роли
-                    </Button>
-                  </Stack.Item>
-                </Stack>
-              </Stack.Item>
-              <Stack.Item grow basis={0}>
-                <Box
-                  style={{ ...frame, height: '100%', textAlign: 'center' }}
-                  p={1}
+                <Button
+                  fluid
+                  icon="cog"
+                  textAlign="center"
+                  onClick={() => act('open_settings')}
                 >
-                  <Box bold>Триумфы</Box>
-                  <Box>{triumphs}</Box>
-                </Box>
+                  Настройки
+                </Button>
+              </Stack.Item>
+              <Stack.Item grow basis={0}>
+                <Button
+                  fluid
+                  icon="user"
+                  textAlign="center"
+                  onClick={() => act('change_character')}
+                >
+                  Смена персонажа
+                </Button>
+              </Stack.Item>
+              <Stack.Item grow basis={0}>
+                <InfoBox title="Триумфы" value={triumphs} />
+              </Stack.Item>
+            </Stack>
+          </Stack.Item>
+
+          {/* Шапка, ряд 2: PQ | пусто | Магазин триумфов */}
+          <Stack.Item>
+            <Stack>
+              <Stack.Item grow basis={0}>
+                <InfoBox title="PQ" value={pq} />
+              </Stack.Item>
+              <Stack.Item grow basis={0} />
+              <Stack.Item grow basis={0}>
+                <Button
+                  fluid
+                  icon="store"
+                  textAlign="center"
+                  onClick={() => act('open_triumph_shop')}
+                >
+                  Магазин триумфов
+                </Button>
               </Stack.Item>
             </Stack>
           </Stack.Item>
 
           <Stack.Item>
             <Stack>
+              {/* ЛЕВАЯ КОЛОНКА */}
               <Stack.Item grow basis={0}>
                 <Stack vertical>
                   <Stack.Item>
@@ -366,16 +374,24 @@ export const CharacterSheet = () => {
                         </Stack>
                         <Stack mt={1}>
                           <Stack.Item grow basis={0}>
-                            <Button fluid onClick={() => edit('species')}>
-                              Раса
+                            <Button
+                              fluid
+                              icon="user-tag"
+                              textAlign="center"
+                              onClick={() => act('open_job_select')}
+                            >
+                              Выбор Роли
                             </Button>
                           </Stack.Item>
                           <Stack.Item grow basis={0}>
                             <Button
                               fluid
-                              onClick={() => act('open_customizers')}
+                              color="bad"
+                              icon="user-secret"
+                              textAlign="center"
+                              onClick={() => act('open_antag_prefs')}
                             >
-                              Детали персонажа
+                              Антагонист роли
                             </Button>
                           </Stack.Item>
                         </Stack>
@@ -390,11 +406,11 @@ export const CharacterSheet = () => {
                           Личность
                         </Box>
                         <Box p={1}>
+                          <Row label="Раса">{field('species', species)}</Row>
                           <Row label="Имя">
                             {field('real_name', character_name)}
                           </Row>
                           <Row label="Возраст">{field('age', age)}</Row>
-                          <Row label="Размер тела">{field('body_size', `${body_size}%`)}</Row>
                           <Row label="Местоимение">
                             {field('pronouns', pronouns)}
                           </Row>
@@ -412,11 +428,21 @@ export const CharacterSheet = () => {
                           Тело
                         </Box>
                         <Box p={1}>
+                          <Row label="Тип тела (Пол)">
+                            {field('gender', genderLabel)}
+                          </Row>
                           <Row label="Цвет кожи">
-                            <span style={editStyle} onClick={() => setSkinOpen(true)}>
+                            <span
+                              style={editStyle}
+                              onClick={() => setSkinOpen(true)}
+                            >
                               {swatch(skin_tone)}
-                              {skin_tone_name || (isHex(skin_tone) ? hex(skin_tone) : skin_tone)}
+                              {skin_tone_name ||
+                                (isHex(skin_tone) ? hex(skin_tone) : skin_tone)}
                             </span>
+                          </Row>
+                          <Row label="Размер спрайта">
+                            {field('body_size', `${body_size}%`)}
                           </Row>
                           <Row label="Цвет деталей">
                             {colorField('detail_color', detail_color)}
@@ -426,8 +452,13 @@ export const CharacterSheet = () => {
                               Сбросить
                             </Button>
                           </Row>
-                          <Row label="Физ. описания">
+                          <Row label="Описание">
                             <Button onClick={() => act('open_descriptors')}>
+                              Открыть
+                            </Button>
+                          </Row>
+                          <Row label="Детали персонажа">
+                            <Button onClick={() => act('open_customizers')}>
                               Открыть
                             </Button>
                           </Row>
@@ -443,6 +474,7 @@ export const CharacterSheet = () => {
                 </Stack>
               </Stack.Item>
 
+              {/* ПРАВАЯ КОЛОНКА */}
               <Stack.Item grow basis={0}>
                 <Stack vertical>
                   <Stack.Item>
@@ -455,9 +487,11 @@ export const CharacterSheet = () => {
                           <Row label="Тип голоса">
                             {field('voice_type', voice_type)}
                           </Row>
-                          <Row label="Высота голоса">
-                            <Stack>
-                              <Stack.Item grow>{field('voice_pitch', `${voice_pitch}%`)}</Stack.Item>
+                          <Row label="Питч голоса">
+                            <Stack justify="center">
+                              <Stack.Item>
+                                {field('voice_pitch', `${voice_pitch}%`)}
+                              </Stack.Item>
                               <Stack.Item>
                                 <Button
                                   icon="play"
@@ -485,11 +519,16 @@ export const CharacterSheet = () => {
                               {favourite_food} / {favourite_drink}
                             </Button>
                           </Row>
-                          <Row label="Боевая музыка">
-                            {field('combat_music', combat_music === 'default' ? 'По классу' : combat_music)}
-                          </Row>
                           <Row label="Невозрождаемость">
                             {field('permadeath', permadeath)}
+                          </Row>
+                          <Row label="Боевая музыка">
+                            {field(
+                              'combat_music',
+                              combat_music === 'default'
+                                ? 'По классу'
+                                : combat_music,
+                            )}
                           </Row>
                         </Panel>
                       </Stack.Item>
@@ -501,7 +540,10 @@ export const CharacterSheet = () => {
                       <Stack.Item grow basis={0}>
                         <Panel title="IC Описания">
                           <Row stacked label="Хэдшот персонажа">
-                            {field('headshot_link', short(headshot_link || 'None'))}
+                            {field(
+                              'headshot_link',
+                              short(headshot_link || 'None'),
+                            )}
                           </Row>
                           <Row stacked label="Флэйвор персонажа">
                             {field('flavortext', short(flavortext || 'None'))}
@@ -518,7 +560,10 @@ export const CharacterSheet = () => {
                             </Button>
                           </Row>
                           <Row stacked label="Nudeshot">
-                            {field('nudeshot_link', short(nudeshot_link || 'None'))}
+                            {field(
+                              'nudeshot_link',
+                              short(nudeshot_link || 'None'),
+                            )}
                           </Row>
                         </Panel>
                       </Stack.Item>
@@ -528,10 +573,16 @@ export const CharacterSheet = () => {
                             {field('ooc_notes', short(ooc_notes || 'None'))}
                           </Row>
                           <Row stacked label="OOC доп. изображение">
-                            {field('ooc_extra_link', short(ooc_extra_link || 'None'))}
+                            {field(
+                              'ooc_extra_link',
+                              short(ooc_extra_link || 'None'),
+                            )}
                           </Row>
                           <Row stacked label="ERP Предпочтения">
-                            {field('erp_preferences', short(erp_preferences || 'None'))}
+                            {field(
+                              'erp_preferences',
+                              short(erp_preferences || 'None'),
+                            )}
                           </Row>
                           <Row stacked label="Музыка при осмотре">
                             {field('examine_music', examine_music)}
@@ -540,10 +591,20 @@ export const CharacterSheet = () => {
                             <Button onClick={() => edit('character_gallery')}>
                               SFW ({gallery_count})
                             </Button>
-                            <Button onClick={() => edit('nsfw_character_gallery')}>
+                            <Button
+                              onClick={() => edit('nsfw_character_gallery')}
+                            >
                               NSFW ({nsfw_gallery_count})
                             </Button>
                           </Row>
+                          <Box mt={0.5} style={{ textAlign: 'center' }}>
+                            <Button
+                              icon="eye"
+                              onClick={() => act('open_examine')}
+                            >
+                              Осмотр персонажа
+                            </Button>
+                          </Box>
                         </Panel>
                       </Stack.Item>
                     </Stack>
@@ -552,20 +613,11 @@ export const CharacterSheet = () => {
                   <Stack.Item>
                     <Stack>
                       <Stack.Item grow basis={0}>
-                        <Button fluid icon="cog" onClick={() => act('open_settings')}>
-                          Настройки
-                        </Button>
-                      </Stack.Item>
-                      <Stack.Item grow basis={0}>
-                        <Button fluid icon="eye" onClick={() => act('open_examine')}>
-                          Осмотр
-                        </Button>
-                      </Stack.Item>
-                      <Stack.Item grow basis={0}>
                         <Button
                           fluid
                           color="good"
                           icon="save"
+                          textAlign="center"
                           onClick={() => act('save_character')}
                         >
                           Сохранить изменения
@@ -576,6 +628,7 @@ export const CharacterSheet = () => {
                           fluid
                           color="bad"
                           icon="undo"
+                          textAlign="center"
                           onClick={() => act('cancel_changes')}
                         >
                           Отменить изменения
@@ -583,42 +636,47 @@ export const CharacterSheet = () => {
                       </Stack.Item>
                     </Stack>
                   </Stack.Item>
+
+                  <Stack.Item>
+                    <Panel title="Семья">
+                      <Row label="Тип семьи">
+                        {field('family_mode', family_mode)}
+                      </Row>
+                      <Row label="Предпочтение по полу">
+                        {field('gender_choice', gender_pref)}
+                      </Row>
+                      <Row label="Предпочтение супруга">
+                        {field('setspouse', spouse_pref)}
+                      </Row>
+                    </Panel>
+                  </Stack.Item>
                 </Stack>
               </Stack.Item>
             </Stack>
           </Stack.Item>
 
+          {/* Низ: черты и снаряжение */}
           <Stack.Item>
-            <Stack>
-              <Stack.Item grow basis={0}>
-                <Panel title="Черты и снаряжение">
+            <Panel title="Черты и снаряжение">
+              <Stack>
+                <Stack.Item grow basis={0}>
                   <Row label="Loadout 1">{loadout1}</Row>
                   <Row label="Loadout 2">{loadout2}</Row>
                   <Row label="Loadout 3">{loadout3}</Row>
+                </Stack.Item>
+                <Stack.Item grow basis={0}>
                   <Button
                     mt={1}
                     fluid
                     icon="star"
+                    textAlign="center"
                     onClick={() => act('open_quirks')}
                   >
                     Quirks ({quirks_count})
                   </Button>
-                </Panel>
-              </Stack.Item>
-              <Stack.Item grow basis={0}>
-                <Panel title="Семья">
-                  <Row label="Тип семьи">
-                    {field('family_mode', family_mode)}
-                  </Row>
-                  <Row label="Предпочтение пола">
-                    {field('gender_choice', gender_pref)}
-                  </Row>
-                  <Row label="Предпочтение супруга">
-                    {field('setspouse', spouse_pref)}
-                  </Row>
-                </Panel>
-              </Stack.Item>
-            </Stack>
+                </Stack.Item>
+              </Stack>
+            </Panel>
           </Stack.Item>
         </Stack>
       </Window.Content>

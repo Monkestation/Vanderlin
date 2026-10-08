@@ -39,6 +39,7 @@
 	data["character_name"] = prefs.read_preference(/datum/preference/text/real_name) || "Unnamed"
 	data["pronouns"] = prefs.read_preference(/datum/preference/choiced/pronouns)
 	data["age"] = prefs.read_preference(/datum/preference/choiced/age)
+	data["gender"] = prefs.read_preference(/datum/preference/choiced/gender)
 	data["voice_type"] = prefs.read_preference(/datum/preference/choiced/voice_type)
 	data["body_size"] = prefs.read_preference(/datum/preference/numeric/body_size)
 	data["voice_pitch"] = prefs.read_preference(/datum/preference/numeric/voice_pitch)
@@ -175,6 +176,10 @@
 			return TRUE
 		if("preview_voice")
 			play_voice_preview()
+			return TRUE
+		if("open_triumph_shop")
+			if(owner?.client)
+				SStriumphs.startup_triumphs_menu(owner.client)
 			return TRUE
 		if("open_settings")
 			if(!owner || !owner.client || !owner.client.prefs)
