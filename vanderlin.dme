@@ -4755,6 +4755,7 @@
 #include "modular_vanderlin_ui\code\datums\body_markings_menu.dm"
 #include "modular_vanderlin_ui\code\datums\character_examine.dm"
 #include "modular_vanderlin_ui\code\datums\character_sheet.dm"
+#include "modular_vanderlin_ui\code\datums\character_sheet_voice.dm"
 #include "modular_vanderlin_ui\code\datums\culinary_menu.dm"
 #include "modular_vanderlin_ui\code\datums\quirk_menu.dm"
 #include "modular_vanderlin_ui\code\datums\text_list_menu.dm"

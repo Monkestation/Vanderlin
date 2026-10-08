@@ -456,7 +456,16 @@ export const CharacterSheet = () => {
                             {field('voice_type', voice_type)}
                           </Row>
                           <Row label="Высота голоса">
-                            {field('voice_pitch', `${voice_pitch}%`)}
+                            <Stack>
+                              <Stack.Item grow>{field('voice_pitch', `${voice_pitch}%`)}</Stack.Item>
+                              <Stack.Item>
+                                <Button
+                                  icon="play"
+                                  tooltip="Прослушать"
+                                  onClick={() => act('preview_voice')}
+                                />
+                              </Stack.Item>
+                            </Stack>
                           </Row>
                           <Row label="Цвет никнейма">
                             {colorField('nickname_color', nickname_color)}

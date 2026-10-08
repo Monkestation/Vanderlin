@@ -173,6 +173,9 @@
 				return
 			owner.client.prefs.reset_all_customizer_accessory_colors()
 			return TRUE
+		if("preview_voice")
+			play_voice_preview()
+			return TRUE
 		if("open_settings")
 			if(!owner || !owner.client || !owner.client.prefs)
 				return
