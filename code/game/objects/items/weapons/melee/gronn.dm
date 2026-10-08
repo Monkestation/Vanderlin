@@ -22,8 +22,8 @@
 
 /obj/item/weapon/handclaw
 	name = "iron hound claws"
-	desc = "A pair of heavily curved claws, styled after beasts of the wilds for rending bare flesh, \
-			a show of the continual worship and veneration of the Great Hunt in Ossland."
+	desc = "A pair of heavily curved claws, styled after beasts of the wilds for rending bare flesh. \
+			A show of the continual worship and veneration of the Great Hunt in Ossland."
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "ironclaws"
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
@@ -49,8 +49,8 @@
 
 /obj/item/weapon/handclaw/steel
 	name = "steel mantis claws"
-	desc = "A pair of steel claws, an uncommon sight in Ossland as they do not forge their own steel, \
-			Their longer blades offer a superior defence option but their added weight slows them down."
+	desc = "A pair of steel claws, an uncommon sight in Ossland as they do not forge their own steel. \
+			Their longer blades offer a superior defence option, but their added weight slows them down."
 	icon_state = "steelclaws"
 	force = DAMAGE_KATAR + 7
 	wdefense = GOOD_PARRY
@@ -63,7 +63,7 @@
 
 /obj/item/weapon/handclaw/steel/silver
 	name = "silver mantis claws"
-	desc = "A pair of silver claws, an extremely rare sight in and out of Ossland. Their longer blades offer a superior defence option but their added weight slows them down."
+	desc = "A pair of silver claws, an extremely rare sight in and out of Ossland. Their longer blades offer a superior defence option, but their added weight slows them down."
 	icon_state = "silverclaws"
 	force = DAMAGE_KATAR + 7
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
@@ -103,8 +103,8 @@
 
 /obj/item/weapon/handclaw/gronn
 	name = "ossland beast claws"
-	desc = "A pair of uniquely reinforced iron claws forged with the addition of bone by the cleric-priests of Ossland. \
-			Their unique design aids them in slipping between the plates in armor and their light weight supports rapid aggressive slashes. \
+	desc = "A pair of uniquely-reinforced iron claws forged with the addition of bone by the cleric-priests of Ossland. \
+			Their unique design aids them in slipping between the plates in armor, and their light weight supports rapid, aggressive slashes. \
 			'The cycle of predator and prey continues. To hunt is to be hunted is to hunt in return.'"
 	icon_state = "gronnclaws"
 	wdefense = GOOD_PARRY
