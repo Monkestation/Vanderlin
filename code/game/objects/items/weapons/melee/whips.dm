@@ -3,7 +3,7 @@
 
 /obj/item/weapon/whip
 	name = "whip"
-	desc = "A leather whip, intertwining rope, leather and a fanged tip to inflict enormous pain. Favored by slavers and beast-tamers."
+	desc = "A leather whip, intertwining rope, leather, and a fanged tip to inflict enormous pain. Favored by slavers and beast-tamers."
 	icon_state = "whip"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	force = DAMAGE_WHIP
@@ -42,7 +42,7 @@
 //................ Repenta En ............... //
 /obj/item/weapon/whip/repenta
 	name = "\proper repenta en"
-	desc = "An extremely well maintained whip with a steel grip and a wire wrapped length. Only a fool would stand within reach of this weapon."
+	desc = "An extremely well-maintained whip with a steel grip and a wire-wrapped length. Only a fool would stand within reach of this weapon."
 	icon_state = "whip_repenta"
 	force = DAMAGE_WHIP + 4
 	resistance_flags = FIRE_PROOF
@@ -73,7 +73,7 @@
 //................ Steel Whip ............... //
 /obj/item/weapon/whip/steel
 	name = "steel whip"
-	desc = "A whip with a steel handle, core and tip."
+	desc = "A whip with a steel handle, core, and tip."
 	icon_state = "whip_steel"
 	force = DAMAGE_WHIP + 3
 	resistance_flags = FIRE_PROOF
@@ -83,7 +83,7 @@
 //................ Silver Whip ............... //
 /obj/item/weapon/whip/silver
 	name = "silver whip"
-	desc = "A whip with a silver handle, core and tip. It has been modified for inflicting burning pain on nitebeasts."
+	desc = "A whip with a silver handle, core, and tip. It has been modified for inflicting burning pain on nitebeasts."
 	icon_state = "whip_silver"
 	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
@@ -112,8 +112,8 @@
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/whip/psydon/relic
-	name = "Daybreak"
-	desc = "Holding this blessed silver evokes memories of the grand cathedrals, testaments to humanity’s faith. There, upon the ceiling, was painted a scene-most-beautiful: of Psydon, robed, in battle against the archdevils. Bring daelight to the faithful."
+	name = "Daebreak"
+	desc = "Holding this blessed silver evokes memories of the grand cathedrals, testaments to humenity’s faith. There, upon the ceiling, was painted a scene-most-beautiful: of Psydon, robed, in battle against the archdevils. Bring daelight to the faithful."
 	icon_state = "psywhip"
 	item_weight = 550 GRAMS
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
@@ -136,7 +136,7 @@
 //................ Bloodsteel Whip ............... //
 /obj/item/weapon/whip/bloodsteel
 	name = "bloodsteel whip"
-	desc = "A whip with a bloodsteel handle, core and tip."
+	desc = "A whip with a bloodsteel handle, core, and tip."
 	icon_state = "whip_corrupt"
 	force = DAMAGE_WHIP + 3
 	resistance_flags = FIRE_PROOF
@@ -206,7 +206,7 @@
 //................ Chain Whip ............... //
 /obj/item/weapon/whip/chain
 	name = "chain whip"
-	desc = "An iron chain, fixed to a leather grip. Its incredibly heavy, and unwieldy. You'll likely hurt yourself more than anyone else with this."
+	desc = "An iron chain, fixed to a leather grip. It is incredibly heavy and unwieldy. You'll likely hurt yourself more than anyone else with this."
 	icon_state = "whip_chain"
 	force = DAMAGE_WHIP + 3
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_MTLLASH)
@@ -230,7 +230,7 @@
 
 /obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"
-	desc = "A short but heavy leather whip, sporting a blunt reinforced tip and a longer handle."
+	desc = "A short but heavy leather whip, sporting a blunt, reinforced tip and a longer handle."
 	icon_state = "nagaika"
 	force = DAMAGE_WHIP + 5		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, SWORD_STRIKE)
@@ -240,7 +240,7 @@
 
 /obj/item/weapon/whip/urumi
 	name = "steel urumi"
-	desc = "A long, flexible whip-like sword originally developed by the Savannah Elves. While an effective weapon, it requires more maintenance compared to other swords."
+	desc = "A long, flexible, whip-like sword originally developed by the Savannah Elves. While an effective weapon, it requires more maintenance compared to other swords."
 	icon_state = "urumi_steel"
 	force = DAMAGE_WHIP + 3
 	wbalance = HARD_TO_DODGE
