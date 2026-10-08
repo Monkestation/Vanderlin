@@ -74,4 +74,3 @@
     preview_sound.frequency = pitch
     preview_sound.volume = 70
     SEND_SOUND(owner, preview_sound)
-    to_chat(owner, span_notice("Голос: [pack:type], звук [used_key], высота [round(pitch * 100)]%."))
