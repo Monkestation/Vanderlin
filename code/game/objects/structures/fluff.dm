@@ -1108,7 +1108,7 @@
 			if(istype(W, /obj/item/reagent_containers/lux))
 				B.contrib += 120
 				record_round_statistic(STATS_SHRINE_VALUE, 120)
-			else if(((!istype(W, /obj/item/clothing) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/clothing/head/crown/nyle) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/neck/psycross) || istype(W, /obj/item/clothing/face/)) && !istype(W, /obj/item/weapon) && W.get_real_price() >= 25) || istype(W, /obj/item/coin))
+			else if(((!istype(W, /obj/item/clothing) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/clothing/head/crown/nyle) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/neck/psycross) || istype(W, /obj/item/clothing/face)) && !istype(W, /obj/item/weapon) && W.get_real_price() >= 25) || istype(W, /obj/item/coin))
 				if(!istype(W, /obj/item/coin))
 					B.contrib += (W.get_real_price() / 2) // sell jewelry and other fineries, though at a lesser price compared to fencing them first
 					record_round_statistic(STATS_SHRINE_VALUE, (W.get_real_price() / 2))
