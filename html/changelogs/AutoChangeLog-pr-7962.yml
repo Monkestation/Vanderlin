@@ -1,4 +1,0 @@
-author: "DustanHache"
-delete-after: True
-changes:
-  - bugfix: "Fixed Energize and Reinvigorate/refresh. They both restore stamina and energy now like they say they should."

@@ -66,3 +66,7 @@
   - bugfix: Fixed being able to combat-buckle someone.
   - admin: Added a log for entering Vampire Blood Frenzy.
   - code_imp: Removed an unused antag variable.
+2026-10-08:
+  DustanHache:
+  - bugfix: Fixed Energize and Reinvigorate/refresh. They both restore stamina and
+      energy now like they say they should.
