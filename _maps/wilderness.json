@@ -1,7 +1,7 @@
 {
 	"map_name": "Wilderness",
 	"map_path": "map_files/wilderness",
-	"map_file": "wildermiddletest.dmm",
+	"map_file": "wildernorth.dmm",
 	"immigrant_origin": "Psydonia",
 	"monarch_title": "King",
 	"monarch_title_f": "Queen",
@@ -29,7 +29,7 @@
 		}
 	],
 	"other_z": [
-		"map_files/wilderness/wildernorth"
+		"map_files/wilderness/wildermiddletest"
 	],
 	"minetype": null,
 	"space_empty_levels": 0,
