@@ -52,7 +52,7 @@
 //................ Hunting Knife ............... //
 /obj/item/weapon/knife/hunting
 	name = "hunting knife"
-	desc = "Loyal companion to hunters and poachers, from humble bone to truest steel, disembowel your prey with glee."
+	desc = "Loyal companion to hunters and poachers. From humble bone to truest steel, disembowel your prey with glee."
 	icon_state = "huntingknife"
 	force = DAMAGE_DAGGER
 	melting_material = /datum/material/steel
@@ -169,7 +169,7 @@
 
 /obj/item/weapon/knife/scissors/steel
 	name = "steel scissors"
-	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing, more durable and a tad more deadly than their iron counterpart."
+	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing. More durable and a tad more deadly than their iron counterpart."
 	icon_state = "sscissors"
 	force = DAMAGE_DAGGER
 	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_STEEL
@@ -179,7 +179,7 @@
 //................ Cleaver ............... //
 /obj/item/weapon/knife/cleaver
 	name = "cleaver"
-	desc = "A chef's tool turned armament, cleave off cumbersome flesh with rudimentary ease."
+	desc = "A chef's tool turned armament. Cleave off cumbersome flesh with rudimentary ease."
 	icon_state = "cleav"
 	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP)
 	force = DAMAGE_KNIFE + 1
@@ -240,7 +240,7 @@
 /obj/item/weapon/knife/hunting/kukri/iron
 	name = "iron kukri"
 	icon_state = "kukri_iron"
-	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
+	desc = "A hefty knife that originated in the south-eastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	melting_material = /datum/material/iron
@@ -298,12 +298,12 @@
 /obj/item/weapon/knife/dagger/steel/royal
 	name = "decorated dagger"
 	icon_state = "gsdagger"
-	desc = "A dagger of refined steel with lavish gold decoration, even in the hands of most nobles it is considered overly decadent."
+	desc = "A dagger of refined steel with lavish gold decoration. Even in the hands of most nobles, it is considered overly decadent."
 	item_weight = 230 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/stiletto
 	name = "stiletto"
-	desc = "A needle thin dagger made of refined steel, the favored weapon of assassins and angry nobles."
+	desc = "A needle-thin dagger made of refined steel, the favored weapon of assassins and angry nobles."
 	icon_state = "stiletto"
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 	melt_amount = 45
@@ -312,7 +312,7 @@
 /obj/item/weapon/knife/hunting/kukri
 	name = "steel kukri"
 	icon_state = "kukri_steel"
-	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
+	desc = "A hefty knife that originated in the south-eastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER + 1
 	wdefense = AVERAGE_PARRY
 	melt_amount = 75
@@ -329,7 +329,7 @@
 
 /obj/item/weapon/knife/dagger/steel/hand
 	name = "\proper fervor"
-	desc = "A greatly forged length of steel. Strike with Fervor into the heart of those who dont even know where you lurk."
+	desc = "A well-forged length of steel. Strike with Fervor into the heart of those who don't even know where you lurk."
 	icon_state = "sdaggerhand"
 	sellprice = 200
 	item_weight = 220 GRAMS
@@ -338,7 +338,7 @@
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
 	name = "\proper apathy"
-	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact."
+	desc = "A well-forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact."
 	wdefense = GOOD_PARRY
 	icon_state = "spdaggerhand"
 	item_weight = 220 GRAMS
@@ -371,7 +371,7 @@
 
 /obj/item/weapon/knife/dagger/steel/inhumen/graggar
 	name = "vicious dagger"
-	desc = "A chipped and serrated blade designed with only one purpose. Blood."
+	desc = "A chipped and serrated blade designed with only one purpose - Blood."
 	icon_state = "graggardagger"
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
@@ -422,7 +422,7 @@
 /obj/item/weapon/knife/dagger/blacksteel/misericorde
 	name = "blacksteel misericorde"
 	desc = "A magnificent armor-piercing dagger of blacksteel. The curved handle is said to naturally improve one's aim, while locked in a \
-	lyfe-or-death struggle with plate-armored opponents."
+	life-or-death struggle with plate-armored opponents."
 	icon_state = "bs_misericorde"
 	force = DAMAGE_DAGGER + 3
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
@@ -453,7 +453,7 @@
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon
 	name = "psydonian dagger"
-	desc = "A silver dagger favored by close range fighters of the inquisition."
+	desc = "A silver dagger favored by close-range fighters of the Inquisition."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psydagger"
 	sellprice = 60
@@ -504,15 +504,15 @@
 		else
 			var/message = pick(
 				"<span class='danger'>Why...</span>",
-				"<span class='danger'>...Who sent you?</span>",
-				"<span class='danger'>...You will burn for what you've done...</span>",
+				"<span class='danger'>... who sent you?</span>",
+				"<span class='danger'>... you will burn for what you've done...</span>",
 				"<span class='danger'>I hate you...</span>",
 				"<span class='danger'>Someone stop them!</span>",
 				"<span class='danger'>Guards! Help!</span>",
-				"<span class='danger'>...What's that in your hand?</span>",
-				"<span class='danger'>...You love me...don't you?</span>",
-				"<span class='danger'>Wait...don't I know you?</span>",
-				"<span class='danger'>I thought you were...my friend...</span>",
+				"<span class='danger'>... what's that in your hand?</span>",
+				"<span class='danger'>... you love me... don't you?</span>",
+				"<span class='danger'>Wait... don't I know you?</span>",
+				"<span class='danger'>I thought you were... my friend...</span>",
 				"<span class='danger'>How long have I been in here...</span>")
 //			H.visible_message("profane dagger whispers, \"[message]\"")
 			to_chat(M, "profane dagger whispers, \"[message]\"")
@@ -591,7 +591,7 @@
 				repair_damage(max_integrity) // And fixes the dagger. No blacksmith required!
 				ADD_TRAIT(target, TRAIT_HARDCORE_PROFANE, "[type]")
 			else if(target.client == null) //See if the target's soul has left their body
-				to_chat(user, "<span class='danger'>Your target's soul has already escaped its corpse...you try to call it back!</span>")
+				to_chat(user, "<span class='danger'>Your target's soul has already escaped its corpse... you try to call it back!</span>")
 				get_profane_ghost(target,user) //Proc to capture a soul that has left the body.
 			else
 				user.adjust_triumphs(1)
@@ -648,7 +648,7 @@
 //................ Stone Knife ............... //
 /obj/item/weapon/knife/stone
 	name = "stone knife"
-	desc = "A tool favored by the wood-elves, easy to make, useful for skinning the flesh of beast and man alike."
+	desc = "A tool favored by the wood-elves. Easy to make, useful for skinning the flesh of beast and man alike."
 	icon_state = "stone_knife"
 	wdefense = TERRIBLE_PARRY
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
@@ -663,7 +663,7 @@
 
 /obj/item/weapon/knife/stone/kukri
 	name = "joapstone kukri"
-	desc = "A kukri made out of joapstone. It's more of a ceremonial piece than it is an implement of war, it's somewhat fragile. Be gentle with it."
+	desc = "A kukri made out of joapstone. It's more of a ceremonial piece than it is an implement of war, since it's somewhat fragile. Be gentle with it."
 	icon = 'icons/roguetown/gems/gem_jade.dmi'
 	icon_state = "kukri_jade"
 	wdefense = AVERAGE_PARRY
@@ -674,7 +674,7 @@
 
 /obj/item/weapon/knife/stone/opal
 	name = "opaloise knife"
-	desc = "A beautiful knife carved out of opaloise. It's not intended for combat. Its presence is vital in some Crimson Elven ceremonies."
+	desc = "A beautiful knife carved out of opaloise, not intended for combat. Its presence is vital in some Crimson Elven ceremonies."
 	icon = 'icons/roguetown/gems/gem_opal.dmi'
 	icon_state = "knife_opal"
 	wdefense = AVERAGE_PARRY
@@ -694,7 +694,7 @@
 
 /obj/item/weapon/knife/copper
 	name = "copper knife"
-	desc = "A knife of an older design, the copper serves decent enough."
+	desc = "A knife of an older design. The copper serves decently enough."
 	icon_state = "cdagger"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	max_blade_int = 100
@@ -705,7 +705,7 @@
 
 /obj/item/weapon/knife/throwingknife
 	name = "iron tossblade"
-	desc = ""
+	desc = "A tossblade forged from iron."
 	icon_state = "throw_knifei"
 	force = DAMAGE_DAGGER
 	throwforce = DAMAGE_DAGGER + 13
@@ -727,7 +727,7 @@
 
 /obj/item/weapon/knife/throwingknife/bronze
 	name = "bronze tossblade"
-	desc = "A tossblade forged from bronze. It's not as reliable compared to other tossblades, but it's much cheaper to make."
+	desc = "A tossblade forged from bronze. Not as reliable compared to other tossblades, but much cheaper to make."
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 10
 	throw_speed = 4
@@ -740,7 +740,7 @@
 
 /obj/item/weapon/knife/throwingknife/steel
 	name = "steel tossblade"
-	desc = ""
+	desc = "A tossblade forged from steel."
 	icon_state = "throw_knifes"
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 15
@@ -759,7 +759,7 @@
 
 /obj/item/weapon/knife/throwingknife/blacksteel
 	name = "blacksteel tossblade"
-	desc = ""
+	desc = "A tossblade forged from blacksteel."
 	icon_state = "throw_knifebs"
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 17
