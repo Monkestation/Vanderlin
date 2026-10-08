@@ -164,6 +164,18 @@
 			var/datum/character_examine/examine_view = new /datum/character_examine(src)
 			examine_view.ui_interact(usr)
 			return TRUE
+		if("reset_detail_colors")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			if(tgui_alert(owner, "Reset all accessory colors to their defaults?", "Reset colors", list("Yes", "No")) != "Yes")
+				return
+			owner.client.prefs.reset_all_customizer_accessory_colors()
+			return TRUE
+		if("open_settings")
+			if(!owner || !owner.client || !owner.client.prefs)
+				return
+			owner.client.prefs.show_choices(owner, 1)
+			return TRUE
 		if("open_descriptors")
 			if(!owner || !owner.client || !owner.client.prefs)
 				return

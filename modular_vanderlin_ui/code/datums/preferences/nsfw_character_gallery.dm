@@ -10,26 +10,26 @@
 	var/list/current = prefs.read_preference(/datum/preference/list_type/nsfw_character_gallery)
 	if(!current)
 		current = list()
-	var/choice = tgui_alert(user, "Character Gallery - what would you like to do?", "Gallery", list("Add Image", "Remove Image", "Cancel"))
+	var/choice = tgui_alert(user, "NSFW Character Gallery - what would you like to do?", "NSFW Gallery", list("Add Image", "Remove Image", "Cancel"))
 	if(choice == "Add Image")
 		if(length(current) >= 5)
-			to_chat(user, span_warning("Gallery is full (maximum 5 images). Remove one first."))
+			to_chat(user, span_warning("NSFW gallery is full (maximum 5 images). Remove one first."))
 			return
-		var/new_link = input(user, "Input image link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Add Gallery Image") as text|null
+		var/new_link = input(user, "Input image link (https, hosts: gyazo, lensdump, imgbox, catbox):", "Add NSFW Gallery Image") as text|null
 		if(!new_link)
 			return
 		if(!is_valid_headshot_link(user, new_link, FALSE))
 			return
 		current += new_link
 		prefs.write_preference(/datum/preference/list_type/nsfw_character_gallery, current)
-		to_chat(user, span_notice("Image added to gallery."))
+		to_chat(user, span_notice("Image added to NSFW gallery."))
 	else if(choice == "Remove Image")
 		if(!length(current))
-			to_chat(user, span_warning("Gallery is empty."))
+			to_chat(user, span_warning("NSFW gallery is empty."))
 			return
-		var/to_remove = input(user, "Select image to remove:", "Remove Gallery Image") as null|anything in current
+		var/to_remove = input(user, "Select image to remove:", "Remove NSFW Gallery Image") as null|anything in current
 		if(!to_remove)
 			return
 		current -= to_remove
 		prefs.write_preference(/datum/preference/list_type/nsfw_character_gallery, current)
-		to_chat(user, span_notice("Image removed from gallery."))
+		to_chat(user, span_notice("Image removed from NSFW gallery."))

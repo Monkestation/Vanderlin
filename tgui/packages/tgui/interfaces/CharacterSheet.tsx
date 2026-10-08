@@ -416,6 +416,11 @@ export const CharacterSheet = () => {
                           <Row label="Цвет деталей">
                             {colorField('detail_color', detail_color)}
                           </Row>
+                          <Row label="Цвета деталей">
+                            <Button onClick={() => act('reset_detail_colors')}>
+                              Сбросить
+                            </Button>
+                          </Row>
                           <Row label="Физ. описания">
                             <Button onClick={() => act('open_descriptors')}>
                               Открыть
@@ -516,7 +521,7 @@ export const CharacterSheet = () => {
                           </Row>
                           <Row stacked label="Галерея персонажа">
                             <Button onClick={() => edit('character_gallery')}>
-                              Открыть ({gallery_count})
+                              SFW ({gallery_count})
                             </Button>
                             <Button onClick={() => edit('nsfw_character_gallery')}>
                               NSFW ({nsfw_gallery_count})
@@ -529,6 +534,11 @@ export const CharacterSheet = () => {
 
                   <Stack.Item>
                     <Stack>
+                      <Stack.Item grow basis={0}>
+                        <Button fluid icon="cog" onClick={() => act('open_settings')}>
+                          Настройки
+                        </Button>
+                      </Stack.Item>
                       <Stack.Item grow basis={0}>
                         <Button fluid icon="eye" onClick={() => act('open_examine')}>
                           Осмотр
