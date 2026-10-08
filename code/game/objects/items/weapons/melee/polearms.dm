@@ -40,7 +40,7 @@
 //................ Wooden Staff ............... //
 /obj/item/weapon/polearm/woodstaff
 	name = "wooden staff"
-	desc = "The ultimate tool of travel for weary wanderers, support your weight or crack the heads that don't support you."
+	desc = "The ultimate tool of travel for weary wanderers. Support your weight, or crack the heads that don't support you."
 	icon_state = "woodstaff"
 	force =  DAMAGE_STAFF
 	force_wielded =  DAMAGE_STAFF_WIELD
@@ -80,7 +80,7 @@
 //................ Iron-shod Staff ............... //
 /obj/item/weapon/polearm/woodstaff/quarterstaff/iron
 	name = "iron quarterstaff"
-	desc = "A perfect tool for bounty hunters who prefer their prisoners broken and bruised but not slain. This reinforced staff is capable of clubbing even an armed opponent into submission with some carefully placed strikes."
+	desc = "A perfect tool for bounty hunters who prefer their prisoners broken and bruised, but not slain. This reinforced staff is capable of clubbing even an armed opponent into submission with some carefully-placed strikes."
 	icon_state = "quarterstaff_iron"
 	force = DAMAGE_STAFF + 4
 	force_wielded = DAMAGE_STAFF_WIELD + 5
@@ -94,7 +94,7 @@
 
 /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
 	name = "steel quarterstaff"
-	desc = "An unusual sight, a knightly combat staff made out of worked steel and reinforced wood. It is a heavy and powerful weapon, more than capable of beating the living daylights out of any brigand."
+	desc = "An unusual sight, a knightly combat staff made out of worked steel and reinforced wood. It is a heavy and powerful weapon, more than capable of beating the living daelights out of any brigand."
 	icon_state = "quarterstaff_steel"
 	force = DAMAGE_STAFF + 6
 	force_wielded =  DAMAGE_STAFF_WIELD + 7
@@ -126,7 +126,7 @@
 
 /obj/item/weapon/polearm/woodstaff/quarterstaff/gold
 	name = "golden quarterstaff"
-	desc = "The astute may point out that this staff is poorly designed. They would be correct. Gold, even low karat, is a bad material for a \
+	desc = "The astute may point out that this staff is poorly-designed. They would be correct. Gold, even low-carat, is a bad material for a \
 	weapon. This one additionally manages to be doubly-sinned by having a heavy chunk of gold at the end. It's almost a polehammer. Practical? \
 	No. But it makes a statement."
 	icon_state = "quarterstaff_gold"
@@ -142,7 +142,7 @@
 /obj/item/weapon/polearm/woodstaff/quarterstaff/blacksteel
 	name = "blacksteel quarterstaff"
 	desc = "A quarterstaff reinforced with blacksteel tips. One might imagine that the elegance of such a design hardly befits the people \
-	who'd traditionally wield such a weapon; then again, who are we to judge?"
+	who would traditionally wield such a weapon; then again, who are we to judge?"
 	icon_state = "quarterstaff_blacksteel"
 	force = DAMAGE_STAFF + 8
 	force_wielded =  DAMAGE_STAFF_WIELD + 8
@@ -152,7 +152,7 @@
 
 /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
 	name = "bloodsteel quarterstaff"
-	desc = "A quarterstaff with bloodsteel reinforcements. One would think such a material would be better used on a sharper implement of war, but who are we to judge."
+	desc = "A quarterstaff with bloodsteel reinforcements. One would think such a material would be better used on a sharper implement of war, but who are we to judge?"
 	icon_state = "quarterstaff_bloodsteel"
 	force = DAMAGE_STAFF + 6
 	force_wielded =  DAMAGE_STAFF_WIELD + 7
@@ -181,7 +181,7 @@
 //................ Spear ............... //
 /obj/item/weapon/polearm/spear
 	name = "spear"
-	desc = "The humble spear, use the pointy end."
+	desc = "The humble spear. Use the pointy end."
 	icon_state = "spear"
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_SPEAR_WIELD
@@ -229,7 +229,7 @@
 
 /obj/item/weapon/polearm/spear/steel/baotha
 	name = "laced swordstaff"
-	desc = "Keep the rest at arm's length, lest you're burdened with the pain of rememberance."
+	desc = "Keep the rest at arm's length, lest you're burdened with the pain of remembrance."
 	icon_state = "swordstaff"
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BLACKSTEEL
@@ -301,7 +301,7 @@
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
 	name = "psydonian spear"
-	desc = "A polearm with a twisting trident head perfect for mangling the bodies of the impure."
+	desc = "A polearm with a twisting trident head, perfect for mangling the bodies of the impure."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyspear"
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
@@ -436,7 +436,7 @@
 
 /obj/item/weapon/polearm/spear/javelin
 	name = "copper javelin"
-	desc = "Made for throwing, long out of favor and using inferior metals, it can still kill when your aim is true."
+	desc = "Made for throwing, long out of favor and using inferior metals. It can still kill when your aim is true."
 	icon_state = "cspear"
 	force = DAMAGE_SPEAR - 2
 	force_wielded = DAMAGE_SPEAR + 2
@@ -516,7 +516,7 @@
 
 /obj/item/weapon/polearm/spear/bone
 	name = "bone javelin"
-	desc = "Made by the tribes of the wilds for hunting, this spear will eventually kill your prey, if your aim remains true."
+	desc = "Made by the tribes of the wilds for hunting. This spear will eventually kill your prey, if your aim remains true."
 	icon_state = "bspear"
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 60
@@ -541,7 +541,7 @@
 
 /obj/item/weapon/polearm/spear/trollbone
 	name = "troll-horn bone javelin"
-	desc = "Made by the tribes of the wilds for hunting, and strengthened with a troll's horn, this spear will outlast your prey, if your aim remains true."
+	desc = "Made by the tribes of the wilds for hunting, and strengthened with a troll's horn. This spear will outlast your prey, if your aim remains true."
 	icon_state = "bspear"
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 60
@@ -568,7 +568,7 @@
 //................ Halberd ............... //
 /obj/item/weapon/polearm/halberd
 	name = "halberd"
-	desc = "A reinforced polearm for clobbering ordained with a crested ax head, pick and sharp point, a royal arm for defence and aggression."
+	desc = "A reinforced polearm for clobbering ordained with a crested axe head, pick, and sharp point. A royal arm for defence and aggression."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "halberd"
 	force = DAMAGE_SPEAR
@@ -617,7 +617,7 @@
 
 /obj/item/weapon/polearm/halberd/bloodsteel
 	name = "bloodsteel halberd"
-	desc = "A halberd forged from bloodsteel, the shimmering red metal makes it difficult to see all the blood..."
+	desc = "A halberd forged from bloodsteel. The shimmering red metal makes it difficult to see all the blood..."
 	icon_state = "corrupthalberd"
 	force = DAMAGE_SPEAR + 2
 	force_wielded = DAMAGE_HALBERD_WIELD + 2
@@ -697,7 +697,7 @@
 
 /obj/item/weapon/polearm/halberd/psydon/relic
 	name = "\proper sanctum"
-	desc = "These silver-tipped polearms are the bulwark of the Ordo Venatari, borrowing techniques from the Ordo Benetarus. During the early sieges, the Ordos used these to hold the horrors at bay for forty days-and-nites. A time always comes to fight - strike true."
+	desc = "These silver-tipped polearms are the bulwark of the Ordo Venatari, borrowing techniques from the Ordo Benetarus. During the early sieges, the Ordos used these to hold the horrors at bay for forty daes and forty nites. A time always comes to fight - strike true."
 	icon_state = "psyhalberd"
 	item_weight = 3.5 KILOGRAMS
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
@@ -710,7 +710,7 @@
 //................ Bardiche ............... //
 /obj/item/weapon/polearm/halberd/bardiche
 	name = "bardiche"
-	desc = "A grand axe of northernly design, renowned for easily chopping off limbs clean with brutal strength."
+	desc = "A grand axe of northernly design, renowned for easily chopping off limbs with brutal strength."
 	icon_state = "bardiche"
 	force = DAMAGE_AXE
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
@@ -817,7 +817,7 @@
 
 /obj/item/weapon/polearm/halberd/bardiche/ancient
 	name = "bardiche"
-	desc = "A grand axe of northern design, renowned for easily chopping off limbs clean with brutal strength."
+	desc = "A grand axe of northern design, renowned for easily chopping off limbs with brutal strength."
 	icon_state = "ancient_bardiche"
 
 /obj/item/weapon/polearm/halberd/bardiche/dendor
@@ -831,7 +831,7 @@
 
 /obj/item/weapon/polearm/halberd/bardiche/captain
 	name = "\proper deliverance"
-	desc = "A glaive decorated with gold forged for the Captain alongside their armor. To deliver justice with every wide swing."
+	desc = "A glaive decorated with gold, forged for the Captain alongside their armor. To deliver justice with every wide swing."
 	sellprice = 200
 	icon_state = "capglaive"
 	smeltresult = /obj/item/ingot/steel_slag
@@ -900,7 +900,7 @@
 //................ Lucerne Hammer ............... //
 /obj/item/weapon/polearm/eaglebeak/lucerne
 	name = "lucerne"
-	desc = "A polehammer of simple iron, fracture bone and dissent with simple brute force."
+	desc = "A polehammer of simple iron. Fracture bone and dissent with simple brute force."
 	icon_state = "polehammer"
 	force_wielded = DAMAGE_HALBERD_WIELD -3
 	wbalance = VERY_EASY_TO_DODGE
@@ -932,7 +932,7 @@
 
 /obj/item/weapon/polearm/spear/hoplite/abyssal
 	name = "abyssal spear"
-	desc = "A spear with a toothed end, inspired after the teeth of an abyssal monstrosity"
+	desc = "A spear with a toothed end, inspired after the teeth of an abyssal monstrosity."
 	icon = 'icons/roguetown/weapons/64/ancient.dmi'
 	icon_state = "ancient_spear"
 	sellprice = 40
@@ -940,7 +940,7 @@
 
 /obj/item/weapon/polearm/spear/bronze
 	name = "bronze spear"
-	desc = "A spear forged of bronze. Expensive but more durable than a regular iron one."
+	desc = "A spear forged of bronze. Expensive, but more durable than a regular iron one."
 	icon_state = "bronzespear"
 	max_blade_int = 200
 	melting_material = /datum/material/bronze
@@ -983,7 +983,7 @@
 
 /obj/item/weapon/polearm/spear/bonespear
 	name = "bone spear"
-	desc = "A spear made of bones."
+	desc = "A spear made of bone."
 	// icon_state = "bonespear"
 	icon_state = "stonespear_sk"
 	force = DAMAGE_SPEARPLUS
@@ -1005,7 +1005,7 @@
 
 /obj/item/weapon/polearm/spear/trollbonespear
 	name = "troll-horn bone spear"
-	desc = "A spear made of bones, strengthed with an troll's horn."
+	desc = "A spear made of bone, strengthened with a troll's horn."
 	// icon_state = "bonespear"
 	icon_state = "stonespear_sk"
 	force = DAMAGE_SPEARPLUS
@@ -1026,7 +1026,7 @@
 
 /obj/item/weapon/polearm/spear/naginata
 	name = "naginata"
-	desc = "A traditional eastern polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle quality of certain eastern bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
+	desc = "A traditional eastern polearm, combining the reach of a spear with the cutting power of a curved blade. Due to the brittle nature of certain eastern bladesmithing, weaponsmiths have adapted its blade to be easily replaceable when broken by a peg upon the end of the shaft."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
 	icon_state = "naginata"
 	force_wielded = DAMAGE_SPEAR_WIELD + 3
