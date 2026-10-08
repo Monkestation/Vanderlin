@@ -174,7 +174,14 @@
 		if("open_settings")
 			if(!owner || !owner.client || !owner.client.prefs)
 				return
-			owner.client.prefs.show_choices(owner, 1)
+			var/datum/preferences/settings_prefs = owner.client.prefs
+			var/settings_choice = tgui_input_list(owner, "Что настроить?", "Настройки клиента", list("Переключатели (звук, чат, геймплей)", "Раскладка клавиш"))
+			if(!settings_choice)
+				return TRUE
+			if(settings_choice == "Раскладка клавиш")
+				settings_prefs.set_keybinds(owner)
+			else
+				settings_prefs.process_link(owner, list("preference" = "toggles"))
 			return TRUE
 		if("open_descriptors")
 			if(!owner || !owner.client || !owner.client.prefs)
