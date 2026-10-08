@@ -10,6 +10,7 @@
     var/datum/preferences/prefs = owner.client.prefs
     var/datum/species/preview_species = prefs.pref_species
     if(!preview_species)
+        to_chat(owner, span_warning("Прослушивание: не выбрана раса."))
         return
 
     var/voice_kind = prefs.read_preference(/datum/preference/choiced/voice_type)
@@ -23,8 +24,10 @@
     var/pack = preview_species.soundpack_m
     if(use_female && preview_species.soundpack_f)
         pack = preview_species.soundpack_f
+    if(ispath(pack))
+        pack = new pack()
     if(!pack)
-        to_chat(owner, span_warning("Для этого голоса нет звуков."))
+        to_chat(owner, span_warning("Прослушивание: у расы нет звукового пака."))
         return
 
     var/modifier = null
@@ -32,18 +35,21 @@
         modifier = "old"
 
     var/possible_sounds
-    for(var/emote_key in list("laugh", "chuckle", "giggle", "sigh", "hmm", "cough"))
+    var/used_key
+    for(var/emote_key in list("laugh", "chuckle", "giggle", "sigh", "hmm", "cough", "yawn", "clearthroat", "gasp", "groan", "cry", "whimper", "paincrit", "painscream", "scream", "pain", "death"))
         possible_sounds = pack:get_sound(emote_key, modifier)
         if(possible_sounds)
+            used_key = emote_key
             break
     if(!possible_sounds)
-        to_chat(owner, span_warning("Для этого голоса нет звуков."))
+        to_chat(owner, span_warning("Прослушивание: у пака [pack:type] нет звуков для проверенных эмоций."))
         return
 
     var/used_sound = possible_sounds
     if(islist(possible_sounds))
         var/list/sound_list = possible_sounds
         if(!length(sound_list))
+            to_chat(owner, span_warning("Прослушивание: пустой список звуков для [used_key]."))
             return
         used_sound = pick(sound_list)
 
@@ -61,3 +67,4 @@
     preview_sound.frequency = pitch
     preview_sound.volume = 70
     SEND_SOUND(owner, preview_sound)
+    to_chat(owner, span_notice("Голос: [pack:type], звук [used_key], высота [round(pitch * 100)]%."))
