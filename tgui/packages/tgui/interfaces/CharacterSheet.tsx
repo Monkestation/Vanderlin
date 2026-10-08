@@ -10,6 +10,8 @@ type Data = {
   pronouns: string;
   age: string;
   voice_type: string;
+  body_size: number;
+  voice_pitch: number;
   accent: string;
   voice_color: string;
   dominant_hand: string;
@@ -117,6 +119,8 @@ export const CharacterSheet = () => {
     pronouns = '',
     age = '',
     voice_type = '',
+    body_size = 100,
+    voice_pitch = 100,
     accent = '',
     voice_color = '#ffffff',
     dominant_hand = '',
@@ -390,6 +394,7 @@ export const CharacterSheet = () => {
                             {field('real_name', character_name)}
                           </Row>
                           <Row label="Возраст">{field('age', age)}</Row>
+                          <Row label="Размер тела">{field('body_size', `${body_size}%`)}</Row>
                           <Row label="Местоимение">
                             {field('pronouns', pronouns)}
                           </Row>
@@ -449,6 +454,9 @@ export const CharacterSheet = () => {
                           </Row>
                           <Row label="Тип голоса">
                             {field('voice_type', voice_type)}
+                          </Row>
+                          <Row label="Высота голоса">
+                            {field('voice_pitch', `${voice_pitch}%`)}
                           </Row>
                           <Row label="Цвет никнейма">
                             {colorField('nickname_color', nickname_color)}
