@@ -13,7 +13,7 @@
 #define GOREFEAST_WORTHY list(\
 	span_danger("A worthy one!"),\
 	span_danger("Bathe me in their blood."),\
-	span_danger("You can smell their fear can't you?"),\
+	span_danger("You can smell their fear, can't you?"),\
 	span_danger("Unleash your fury, soak the soil in their blood."),\
 	span_danger("Feast on their organs."),\
 	span_danger("Cull the world of the weak!"),\
@@ -452,7 +452,7 @@
 
 /obj/item/weapon/greataxe/steel/grandmaster
 	name = "divine greataxe"
-	desc = "The Axe of Saint Altierre. A holy great axe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him and nearly killing him."
+	desc = "The Axe of Saint Altierre. A holy greataxe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him almost to the point of death."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
 	item_weight = 4.5 KILOGRAMS
