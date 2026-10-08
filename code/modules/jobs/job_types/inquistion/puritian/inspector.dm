@@ -80,7 +80,7 @@
 			spawned.equip_to_slot_or_del(new /obj/item/weapon/scabbard/sword, ITEM_SLOT_BELT_L, TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/retribution)
 
-		if("Daybreak (Whip)")
+		if("Daebreak (Whip)")
 			spawned.put_in_hands(new /obj/item/weapon/whip/psydon/relic(spawned), TRUE)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/daybreak)
 
