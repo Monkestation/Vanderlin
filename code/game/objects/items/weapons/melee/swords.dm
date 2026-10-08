@@ -55,7 +55,7 @@
 
 /obj/item/weapon/sword/short
 	name = "short sword"
-	desc = "A steel sword of shortened design and a reduced grip for single hand use."
+	desc = "A steel sword of shortened design and a reduced grip for single-hand use."
 	icon_state = "swordshort"
 	force = DAMAGE_SHORTSWORD
 	force_wielded = 0
@@ -72,7 +72,7 @@
 	weapon_special = /datum/special_intent/triple_stab
 
 /obj/item/weapon/sword/short/iron
-	desc = "An iron sword of shortened design and a reduced grip for single hand use."
+	desc = "An iron sword of shortened design and a reduced grip for single-hand use."
 	icon_state = "iswordshort"
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
@@ -83,7 +83,7 @@
 
 /obj/item/weapon/sword/short/bronze
 	name = "bronze short sword"
-	desc = "A bronze sword of shortened design and a reduced grip for single hand use."
+	desc = "A bronze sword of shortened design and a reduced grip for single-hand use."
 	icon_state = "shortsword_bronze"
 	wdefense = GOOD_PARRY
 	max_blade_int = 150
@@ -95,7 +95,7 @@
 /obj/item/weapon/sword/short/silver
 
 	name = "silver short sword"
-	desc = "A short silver sword, for those who fight the creatures of the nite."
+	desc = "A short silver sword, for those who fight the creachers of the nite."
 	icon_state = "silverswordshort"
 	force = DAMAGE_SHORTSWORD + 2
 	wdefense = GOOD_PARRY
@@ -127,7 +127,7 @@
 
 /obj/item/weapon/sword/short/bloodsteel
 	name = "bloodsteel short sword"
-	desc = "A sword of shortened design and a reduced grip for single hand use, the blade is made with shimmering red bloodsteel."
+	desc = "A sword of shortened design and a reduced grip for single-hand use. The blade is made with shimmering red bloodsteel."
 	icon_state = "corruptswordshort"
 	force = DAMAGE_SHORTSWORD + 2
 	sellprice = 0
@@ -185,7 +185,7 @@
 
 /obj/item/weapon/sword/silver
 	name = "silver sword"
-	desc = "A simple silver sword with an edge that gleams in moonlight."
+	desc = "A simple silver sword, with an edge that gleams in moonlight."
 	icon_state = "silversword"
 	max_blade_int = 240
 	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
@@ -200,7 +200,7 @@
 
 /obj/item/weapon/sword/bloodsteel
 	name = "bloodsteel sword"
-	desc = "A simple sword with a shimmering red bloodsteel blade."
+	desc = "A simple sword with a shimmering bloodsteel blade."
 	icon_state = "corruptsword"
 	force = DAMAGE_SWORD + 2
 	force_wielded = DAMAGE_SWORD_WIELD + 2
@@ -248,7 +248,7 @@
 
 /obj/item/weapon/sword/kaskara/iron
 	name = "iron kaskara"
-	desc = "A sword of with a small crossguard."
+	desc = "An iron sword with a small crossguard."
 	icon_state = "kaskara_iron"
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
@@ -258,7 +258,7 @@
 
 /obj/item/weapon/sword/stone
 	name = "stone sword"
-	desc = "A crudely made sword, wielded by savages."
+	desc = "A crudely-made sword, wielded by savages."
 	icon_state = "stone_sword"
 	force = DAMAGE_SWORD - 6
 	force_wielded = DAMAGE_SHORTSWORD - 1
@@ -270,8 +270,8 @@
 
 /obj/item/weapon/sword/blacksteel
 	name = "blacksteel arming sword"
-	desc = "A broad blade of blacksteel, mounted to a rosawooden handle that perfectly compliments its wielder's grasp. It is the culmination of \
-	Psydonia's storied history with arming swords; a mastersmith's triumph, only fit for the hands of a true hero.. or a truer villain."
+	desc = "A broad blade of blacksteel, mounted to a rosawooden handle that perfectly complements its wielder's grasp. It is the culmination of \
+	Psydonia's storied history with arming swords; a mastersmith's triumph, only fit for the hands of a true hero... or a truer villain."
 	icon_state = "bs_sword"
 	force = DAMAGE_SWORD + 2
 	force_wielded = DAMAGE_SWORD_WIELD + 2
@@ -284,8 +284,8 @@
 
 /obj/item/weapon/sword/blacksteel/decorated
 	name = "decorated blacksteel arming sword"
-	desc = "A broad blade of blacksteel, mounted atop a golden sabreguard that's been meticulously engraved with its commissoner's heraldry. It is \
-	a masterwork of unmatched opulance and lethality, and is - perhaps - the finest arming sword your eyes'll ever lay upon."
+	desc = "A broad blade of blacksteel, mounted atop a golden sabreguard that has been meticulously engraved with its commissoner's heraldry. It is \
+	a masterwork of unmatched opulance and lethality, and is - perhaps - the finest arming sword you will ever lay your eyes upon."
 	icon_state = "bs_swordregal"
 
 /*-------\
@@ -309,21 +309,21 @@
 
 /obj/item/weapon/sword/sabre/dec
 	name = "decorated sabre"
-	desc = "A sabre decorated with fashionable gold accents without sacrificing its lethal practicality."
+	desc = "A sabre decorated with fashionable gold accents, without sacrificing its lethal practicality."
 	icon_state = "decsaber"
 	sellprice = 140
 	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/sabre/captain
 	name = "\proper law"
-	desc = "A sabre decorated with gold forged specifically for the Captain alongside their armor. To bring Law to the lands, they shall use this blade."
+	desc = "A sabre decorated with gold, forged specifically for the Captain alongside their armor. To bring Law to the lands, they shall use this blade."
 	icon_state = "capsaber"
 	sellprice = 140
 	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/sabre/stalker
 	name = "stalker sabre"
-	desc = "A once elegant blade of mythril, diminishing under the suns gaze."
+	desc = "A once-elegant blade of mythril, diminishing under the sun's gaze."
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spidersaber"
 	possible_item_intents = list(SWORD_CUT, SHORT_THRUST)
@@ -332,9 +332,9 @@
 
 /obj/item/weapon/sword/sabre/noc
 	name = "moonlight khopesh"
+	desc = "Glittering moonlight upon blued steel."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "nockhopesh"
-	desc = "Glittering moonlight upon blued steel."
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST, SWORD_CHOP)
 	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
 	item_weight = 950 GRAMS
@@ -357,7 +357,7 @@
 /obj/item/weapon/sword/sabre/dadao
 	name = "steel dadao"
 	icon_state = "dadao_steel"
-	desc = "Sometimes also referred to as \"Saiga Choppers\". Dadaos are heavy eastern blades infamous for their ability to slice men in half."
+	desc = "Sometimes referred to as \"Saiga Choppers\". Dadaos are heavy eastern blades infamous for their ability to slice men in half."
 	force = DAMAGE_SWORD + 1
 	force_wielded = DAMAGE_SWORD_WIELD + 1
 	wdefense = AVERAGE_PARRY
@@ -420,7 +420,7 @@
 
 /obj/item/weapon/sword/sabre/scythe
 	name = "scythe sword"
-	desc = "A farming tool blade has been fastened to a shorter wooden handle to create an improvised weapon."
+	desc = "A farming tool's blade, fastened to a shorter wooden handle to create an improvised weapon."
 	icon_state = "scytheblade"
 	force = DAMAGE_SWORD - 2
 	wdefense = AVERAGE_PARRY
@@ -432,7 +432,7 @@
 \----------*/
 /obj/item/weapon/sword/scimitar
 	name = "scimitar"
-	desc = "A Zaladin design for swords, these curved blades are a common sight in the lands of the Ziggurat."
+	desc = "A Zaladin design for swords. These curved blades are a common sight in the lands of the Ziggurat."
 	icon_state = "scimitar"
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
@@ -443,7 +443,7 @@
 
 /obj/item/weapon/sword/scimitar/falchion
 	name = "falchion"
-	desc = "Broad blade, excellent steel, a design inspired by Malum the dwarves claim."
+	desc = "Broad blade, excellent steel - a design inspired by Malum, the dwarves claim."
 	icon_state = "falchion"
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
@@ -453,7 +453,7 @@
 
 /obj/item/weapon/sword/scimitar/messer
 	name = "messer"
-	desc = "Straight iron blade, simple cutting edge, no nonsense and a popular northern blade."
+	desc = "Straight iron blade, simple cutting edge. A popular, no-nonsense northern blade."
 	icon_state = "imesser"
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
@@ -466,7 +466,7 @@
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh/iron
 	name = "iron khopesh"
-	desc = "A crescent curved sword. It's popular among traveling Noccian scholars."
+	desc = "A crescent-curved sword. It's popular among travelling Noccian scholars."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "khopesh_iron"
 	max_blade_int = 200
@@ -477,7 +477,7 @@
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh
 	name = "steel khopesh"
-	desc = "A crescent curved sword. It's popular among traveling Noccian scholars."
+	desc = "A crescent-curved sword. It's popular among travelling Noccian scholars."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "khopesh_steel"
 	wbalance = EASY_TO_DODGE
@@ -534,7 +534,7 @@
 
 /obj/item/weapon/sword/scimitar/wodao
 	name = "steel wo dao"
-	desc = "A slightly curved blade of eastern origin. While less durable compared to other swords, it's swift balance and unique design makes it great for unleashing precise strikes."
+	desc = "A slightly-curved blade of eastern origin. While less durable compared to other swords, its swift balance and unique design makes it great for unleashing precise strikes."
 	icon_state = "wodao_steel"
 	wbalance = VERY_HARD_TO_DODGE
 	possible_item_intents = list(RAPIER_THRUST,RAPIER_CUT)
@@ -558,7 +558,7 @@
 \--------*/
 /obj/item/weapon/sword/rapier
 	name = "rapier"
-	desc = "A duelist's weapon derived from western battlefield instruments, it features a tapered \
+	desc = "A duelist's weapon derived from western battlefield instruments. It features a tapered \
 	blade with a specialized stabbing tip."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "rapier"
@@ -654,7 +654,7 @@
 
 /obj/item/weapon/sword/rapier/psy
 	name = "psydonian rapier"
-	desc = "A highly ornate silver rapier, used more as a show of status for members of the inquisition."
+	desc = "A highly-ornate silver rapier, used more as a show of status for members of the Inquisition."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyrapier"
 	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_SILVER
@@ -669,7 +669,8 @@
 
 /obj/item/weapon/sword/rapier/psy/relic
 	name = "retribution"
-	desc = "A rapier as swift as the inquisitors of the Ordo Venatari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
+	desc = "A rapier as swift as the Inquisitors of the Ordo Venatari. \
+	Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
 	item_weight = 700 GRAMS
 	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 	examine_highlight_type = /datum/examine_highlight/psydonite_relic
@@ -762,7 +763,7 @@
 
 /obj/item/weapon/sword/rapier/bloodsteel
 	name = "bloodsteel rapier"
-	desc = "A narrow length of shimmering bloodsteel, a flashing streak of red leaving pools of blood in its wake."
+	desc = "A narrow length of shimmering bloodsteel - a flashing streak of red leaving pools of blood in its wake."
 	icon_state = "corruptrapier"
 	force = DAMAGE_SWORD + 2
 	melting_material = /datum/material/bloodsteel
@@ -942,7 +943,7 @@
 /obj/item/weapon/sword/long/kriegmesser
 	name = "kriegmesser"
 	icon_state = "kriegmesser"
-	desc = "A long, single-edged sword with a crossguard and a long grip. It was designed to chop over stab, like a heavy cleaver."
+	desc = "A long, single-edged sword with a crossguard and a long grip. It was designed to chop more than stab, like a heavy cleaver."
 	force = DAMAGE_SWORD + 2
 	force_wielded = DAMAGE_LONGSWORD_WIELD + 3
 	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
@@ -1046,7 +1047,7 @@
 
 /obj/item/weapon/sword/long/rider/steppe
 	name = "steppe sabre"
-	desc = "A curved blade of nomadic origin, it is used by cavalrymen all across the far steppes."
+	desc = "A curved blade of nomadic origin. Used by cavalrymen all across the far steppes."
 	icon_state = "steppe"
 	force_wielded = 0
 	wdefense = ULTMATE_PARRY
@@ -1069,7 +1070,7 @@
 
 /obj/item/weapon/sword/long/forgotten
 	name = "forgotten blade"
-	desc = "A large silver-alloy sword made in a revisionist style, honoring Psydon. Best known as the preferred weapon of Inquisitorial Lodges."
+	desc = "A large silver-alloy sword made in a revisionist style, honoring Psydon. Often associated with older Inquisitors of the Oratorium Throni Vacui."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "oldpsybroadsword"
 	force = DAMAGE_SWORD * 0.9 // Damage is .9 of a steel sword
@@ -1098,7 +1099,6 @@
 
 /obj/item/weapon/sword/long/blacksteel
 	name = "blacksteel longsword"
-	desc = "A finely crafted silver longsword"
 	desc = "A sleek blade of a dark, and burnished hue. \
 			A handle carved from a rosawood branch. A pairing that shall sing as it parts the air. \
 			With it, one can write a song across all of Psydonia."
@@ -1128,8 +1128,8 @@
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/sword/long/psydon/relic
-	name = "\proper rememberance"
-	desc = "A balanced silver blade, favoured by both the Ordo Benetarus and the Ordo Venetari. May it carve a path through the Unholy, in honour and rememberance of Psydon's sacrifice."
+	name = "\proper remembrance"
+	desc = "A balanced silver blade, favoured by both the Ordo Benetarus and the Ordo Venetari. May it carve a path through the Unholy, in honour and remembrance of Psydon's sacrifice."
 	item_weight = 1.5 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 	examine_highlight_type = /datum/examine_highlight/psydonite_relic
@@ -1141,7 +1141,7 @@
 
 /obj/item/weapon/sword/long/silver/decorated
 	name = "decorated silver longsword"
-	desc = "A finely crafted silver longsword with a decorated golden hilt."
+	desc = "A finely-crafted silver longsword with a decorated golden hilt."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "declongsword"
 	max_blade_int = 240
@@ -1152,7 +1152,7 @@
 
 /obj/item/weapon/sword/long/silver
 	name = "silver longsword"
-	desc = "A finely crafted silver longsword"
+	desc = "A finely-crafted silver longsword."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "silverlongsword"
 	max_blade_int = 240
@@ -1168,7 +1168,7 @@
 
 /obj/item/weapon/sword/long/oldpsysword //Not attainable
 	name = "old psydonian longsword"
-	desc = "A finely made longsword, plated in a worn-down veneer of grubby silver. It's long seen better daes."
+	desc = "A finely-made longsword, plated in a worn-down veneer of grubby silver. It has long seen better daes."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "opsysword"
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
@@ -1176,7 +1176,7 @@
 //................ Greatsword ............... //
 /obj/item/weapon/sword/long/greatsword
 	name = "greatsword"
-	desc = "An oversized hunk of metal designed for putting fear into men and killing beasts."
+	desc = "An oversized hunk of metal, designed for putting fear into men and killing beasts."
 	icon_state = "gsw"
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	wbalance = EASY_TO_DODGE
@@ -1208,7 +1208,7 @@
 //................ Psydonian Greatsword ............... //
 /obj/item/weapon/sword/long/greatsword/psydon
 	name = "psydonian greatsword"
-	desc = "A mighty silver greatsword made to strike fear into the heart of even Archdevils."
+	desc = "A mighty silver greatsword, made to strike fear into the heart of even Archdevils."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psygsword"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
@@ -1253,7 +1253,7 @@
 
 /obj/item/weapon/sword/long/broadsword/psy
 	name = "old psydonian broadsword"
-	desc = "Even the most ignorant of zealots know that the holy silver loses its properties when not blessed by Priests for an extended period of time. Its edge remains as lethal as ever, however."
+	desc = "Even the most ignorant of zealots know that the holy silver loses its properties when not blessed by Priests for an extended period of time. Even so, its edge endures, lethal as ever."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psybroadsword"
 	smeltresult = /obj/item/ingot/silver
@@ -1263,7 +1263,7 @@
 
 /obj/item/weapon/sword/long/broadsword/psy/relic
 	name = "\proper creed"
-	desc = "Bathed in Psydonian prayers, this large and heavy blade exists to slay the inhumen and evil. The crossguard’s psycross is engraved with prayers of the Ordo Benetarus. You’re the light - show them the way."
+	desc = "Bathed in Psydonian prayers, this large and heavy blade exists to slay the inhumen and evil. The crossguard’s psycross is engraved with prayers of the Ordo Benetarus. You are the light - show them the way."
 	item_weight = 2.5 KILOGRAMS
 	smeltresult = /obj/item/ingot/silverblessed
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
@@ -1284,7 +1284,7 @@
 
 /obj/item/weapon/sword/long/greatsword/psydon/unforgotten
 	name = "unforgotten blade"
-	desc = "High Inquisitor Archibald once recorded an expedition of seven brave order members into eastern snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in remembrance."
+	desc = "High Inquisitor Archibald once recorded an expedition of seven brave order members, who ventured into the eastern snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in remembrance."
 	icon_state = "forgottenblade"
 	item_weight = 2.5 KILOGRAMS
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
@@ -1306,7 +1306,7 @@
 
 /obj/item/weapon/sword/long/greatsword/flamberge/blacksteel
 	name = "blacksteel flamberge"
-	desc = "Commonly known as a flame-bladed sword, this weapon has an undulating blade. Its wave-like form distributes force better, and is less likely to break on impact."
+	desc = "A flamberge made of blacksteel. As the undulating blade dances through battle, it shimmers in the air like a black flame."
 	icon_state = "blackflamb"
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 3
 	smeltresult = /obj/item/ingot/blacksteel
@@ -1326,7 +1326,7 @@
 
 /obj/item/weapon/sword/long/greatsword/zwei
 	name = "zweihander"
-	desc = "Sometimes known as a doppelhander or beidhander, this weapon's size is so impressive that its handling properties are more akin to that of a polearm than a sword."
+	desc = "Sometimes known as a doppelhander or beidhander. This weapon's size is so impressive that its handling properties are more akin to that of a polearm than a sword."
 	icon_state = "steelzwei_sk"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	possible_item_intents = list(ZWEI_CUT, ZWEI_THRUST, SWORD_STRIKE)
@@ -1364,7 +1364,7 @@
 //................ Kriegsmesser ............... //
 /obj/item/weapon/sword/long/greatsword/elfgsword
 	name = "elven kriegsmesser"
-	desc = "A huge, curved elven blade. It's metal is of a high quality, yet still light, crafted by the greatest elven bladesmiths."
+	desc = "A huge, curved elven blade. Its metal is of a high quality, yet still light, crafted by the greatest elven bladesmiths."
 	icon_state = "kriegsmesser"
 	sellprice = 120
 	item_weight = 2.3 KILOGRAMS
@@ -1455,7 +1455,7 @@
 
 /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
 	name = "bloodsteel broadsword"
-	desc = "A finely crafted broadsword, wide and heavy, with a shimmering red bloodsteel blade."
+	desc = "A finely crafted broadsword, wide and heavy, with a shimmering bloodsteel blade."
 	icon_state = "corruptbroadsword"
 	force = DAMAGE_SWORD + 2
 	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
@@ -1482,7 +1482,7 @@
 
 /obj/item/weapon/sword/long/greatsword/claymore/gold //Uncraftable
 	name = "ravoxian claymore"
-	desc = "A huge sword constructed out of Steel and Gold, wielded by certain Templars of the Ravoxian Order."
+	desc = "A huge sword constructed out of steel and gold, wielded by certain Templars of the Ravoxian Order."
 	icon_state = "gsclaymore"
 	max_blade_int = INTEGRITY_OLD_STRONG + 50
 	sellprice = 200
@@ -1505,7 +1505,7 @@
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore
 	name = "berserker sword"
-	desc = "A huge sword constructed out of a slab of Iron."
+	desc = "A huge sword constructed out of a slab of iron."
 	icon_state = "gutsclaymore"
 	bigboy = TRUE
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 2
@@ -1535,7 +1535,7 @@
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab
 
 	name = "\proper volfslayer"
-	desc = "A great slab of a silver sword, its previous wielder was said to have slain a wolfman in a single blow, bisecting the beast."
+	desc = "A great slab of a silver sword. Its previous wielder was said to have sliced a volfman in twain with a single blow."
 	icon_state = "machaslayer"
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 2
 	max_blade_int = INTEGRITY_OLD_STRONG + 50
@@ -1565,7 +1565,7 @@
 /obj/item/weapon/sword/long/exe
 	name = "executioner's sword"
 	icon_state = "exe"
-	desc = "An ancient blade of ginormous stature, with a round ended tip. The pride and joy of Vanderlin's greatest pastime, executions."
+	desc = "An ancient blade of ginormous stature, with a round ended tip. The pride and joy of Vanderlin's greatest pastime - executions."
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 4
 	possible_item_intents = list(SWORD_STRIKE, SWORD_CUT)
 	gripped_intents = list(SWORD_CUT, SWDLONG_CHOP, SWORD_STRIKE, SWORD_CLEAVE)
@@ -1596,7 +1596,7 @@
 
 /obj/item/weapon/sword/long/exe/silver
 	name = "silver executioner's sword"
-	desc = "An executioner's sword made of silver, best used against beasts of the nite, to put them to rest."
+	desc = "An executioner's sword made of silver, best used against beasts of the nite to put them to rest."
 	icon_state = "silverexealt"
 	item_weight = 3.5 KILOGRAMS
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER
@@ -1609,6 +1609,7 @@
 /obj/item/weapon/sword/long/exe/cloth
 	icon_state = "terminusest"
 	name = "Terminus Est"
+	desc = "A thief's end."
 	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/exe/cloth/attack_self_secondary(mob/user, list/modifiers)
@@ -1625,7 +1626,7 @@
 
 /obj/item/weapon/sword/coppermesser
 	name = "copper messer"
-	desc = "A weapon of war from simpler times, its copper material is unideal but still efficient for the price."
+	desc = "A weapon of war from simpler times. Its copper material is not ideal, but still efficient for the price."
 	icon_state = "cmesser"
 	item_state = "cmesser"
 	force = DAMAGE_SWORD - 5 // Messers are heavy weapons, crude and STR based.
@@ -1666,7 +1667,7 @@
 
 /obj/item/weapon/sword/long/rider/copper
 	name = "copper falx"
-	desc = "A special 'sword' of copper, the material isn't the best but is good enough to slash and kill."
+	desc = "A special 'sword' of copper. The material isn't the best, but is good enough to slash and kill."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "copperfalx"
 	item_state = "copperfalx"
@@ -1686,8 +1687,8 @@
 
 /obj/item/weapon/sword/rapier/ironestoc
 	name = "estoc"
-	desc = "A sword possessed of a quite long and tapered blade that is intended to be thrust between the \
-	gaps in an opponent's armor. The hilt is wrapped tight in black leather."
+	desc = "A sword possessed of a  long and tapered blade. It is intended to be thrust between the \
+	gaps in an opponent's plates, bursting through the maille rings. The hilt is wrapped tight in black leather."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "estoc"
 	force = DAMAGE_SWORD - 8
@@ -1762,7 +1763,7 @@
 
 /obj/item/weapon/sword/gladius
 	name = "gladius"
-	desc = "A bronze short sword with a slightly wider end, and no guard. Compliments a shield."
+	desc = "A bronze short sword, with a slightly wider end and no guard. Complements a shield."
 	icon_state = "gladius"
 	force = DAMAGE_SWORD + 2
 	force_wielded = 0
@@ -1777,7 +1778,7 @@
 //A weapon meant to be used with two hands.
 /obj/item/weapon/sword/katana
 	name = "katana"
-	desc = "A foreign sword."
+	desc = "A foreign sword, forged with meticulous care."
 	icon_state = "eastsword1"
 	force_wielded = DAMAGE_SWORD_WIELD + 3
 	wdefense = GOOD_PARRY
