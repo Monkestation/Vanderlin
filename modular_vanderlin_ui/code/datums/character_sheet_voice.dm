@@ -26,6 +26,13 @@
         pack = preview_species.soundpack_f
     if(ispath(pack))
         pack = new pack()
+    switch(voice_kind)
+        if(VOICE_TYPE_MASC_FOP)
+            pack = new /datum/voicepack/male/foppish()
+        if(VOICE_TYPE_FEM_DAINTY)
+            pack = new /datum/voicepack/female/dainty()
+        if(VOICE_TYPE_FEM_HAUGHTY)
+            pack = new /datum/voicepack/female/haughty()
     if(!pack)
         to_chat(owner, span_warning("Прослушивание: у расы нет звукового пака."))
         return
