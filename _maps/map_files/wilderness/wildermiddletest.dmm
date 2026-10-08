@@ -552,7 +552,7 @@
 /turf/open/floor/grass/cold,
 /area/under/cave)
 "uX" = (
-/turf/open,
+/turf/open/openspace,
 /area/outdoors/wilderness)
 "uZ" = (
 /obj/structure/flora/newtree,
@@ -1076,7 +1076,7 @@
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
 "QL" = (
-/turf/open,
+/turf/open/openspace,
 /area/under/cave)
 "QZ" = (
 /obj/structure/flora/grass,
