@@ -1156,6 +1156,11 @@
 				I = new /obj/item/clothing/head/helmet/heavy/bucket(user.loc)
 			else
 				I = new /obj/item/clothing/head/helmet/leather/advanced(user.loc)
+		if(5)
+			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/wrists/bracers(user.loc)
+			else
+				I = new /obj/item/clothing/wrists/bracers/leather/advanced(user.loc)
 		if(6)
 			var/list/weapon_options = list("Navaja knife" = /obj/item/weapon/knife/dagger/navaja)
 
