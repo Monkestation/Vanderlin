@@ -3514,12 +3514,11 @@
 /turf/open/floor/abyss_sand/path,
 /area/outdoors/bog/north/west)
 "bZb" = (
-/obj/structure/dungeon_entry,
 /obj/structure/fluff/walldeco/vinez{
 	pixel_x = 5;
 	pixel_y = 51
 	},
-/turf/open/floor/dirt,
+/turf/open/floor/cobble/mossy,
 /area/outdoors/bog/west)
 "bZo" = (
 /obj/structure/flora/ocean_plants{
@@ -3725,6 +3724,7 @@
 	pixel_x = -26;
 	pixel_y = 51
 	},
+/obj/structure/flora/grass/herb/calendula,
 /turf/open/floor/dirt,
 /area/outdoors/bog/west)
 "cpD" = (
@@ -12251,6 +12251,10 @@
 /obj/structure/fluff/railing/wood,
 /turf/open/openspace,
 /area/outdoors/bog/e_highroad)
+"kDC" = (
+/obj/structure/waystone,
+/turf/open/floor/dirt,
+/area/outdoors/bog/west)
 "kDL" = (
 /obj/structure/fluff/railing/stonehedge{
 	color = "#7D9BAE";
@@ -19390,6 +19394,10 @@
 "sEz" = (
 /turf/open/floor/ruinedwood/darker,
 /area/under/cavewet)
+"sEB" = (
+/obj/structure/flora/grass/herb/calendula,
+/turf/open/floor/dirt,
+/area/outdoors/bog/west)
 "sEE" = (
 /obj/structure/flora/tree,
 /obj/structure/flora/grass/water,
@@ -26634,7 +26642,7 @@ mdT
 mdT
 mdT
 fey
-omz
+kDC
 kZB
 vhv
 bgu
@@ -26838,7 +26846,7 @@ mdT
 fey
 bZb
 kZB
-omz
+sEB
 oke
 syb
 omz

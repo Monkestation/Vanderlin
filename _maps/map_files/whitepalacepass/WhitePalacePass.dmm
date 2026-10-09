@@ -7078,6 +7078,10 @@
 "egC" = (
 /turf/open/openspace,
 /area/indoors/town/keep/throne)
+"egV" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/closed/wall/mineral/decorstone,
+/area/under/town/basement)
 "ehh" = (
 /obj/effect/landmark/start/late/absolver{
 	dir = 1
@@ -14509,13 +14513,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/tavern)
-"iNi" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "iNl" = (
 /obj/structure/bookcase/random{
 	pixel_y = 19;
@@ -16323,10 +16320,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/clinic_large/apothecary)
 "jSI" = (
-/obj/structure/fluff/walldeco/vinez/blue{
-	dir = 4
-	},
-/turf/open/floor/cobble,
+/turf/open/openspace,
 /area/under/town/basement)
 "jTe" = (
 /obj/structure/table/wood/plain,
@@ -22656,6 +22650,12 @@
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
+"nNy" = (
+/obj/structure/stairs/stone{
+	dir = 2
+	},
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "nOU" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 4
@@ -27042,7 +27042,7 @@
 /obj/structure/fluff/walldeco/vinez/blue{
 	dir = 8
 	},
-/turf/open/floor/cobble,
+/turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
 "qJk" = (
 /obj/structure/door/fancy{
@@ -35201,8 +35201,8 @@
 /turf/open/floor/grass/cold,
 /area/indoors/town/church/chapel)
 "vVA" = (
-/obj/structure/dungeon_entry,
-/turf/open/floor/cobble,
+/obj/structure/dungeon_elevator,
+/turf/open/openspace,
 /area/under/town/basement)
 "vVI" = (
 /obj/effect/falling_leaves,
@@ -57365,8 +57365,8 @@ nJJ
 nJJ
 nJJ
 nJJ
-oaJ
-pRK
+gtX
+bpz
 mos
 mos
 mos
@@ -57568,8 +57568,8 @@ nJJ
 mEp
 oaJ
 pRK
-iNi
-qOn
+mos
+egV
 oBd
 gmI
 gmI
@@ -57770,7 +57770,7 @@ nJJ
 pRK
 mos
 qJh
-bDR
+wUw
 dRO
 ofo
 nPp
@@ -57970,9 +57970,9 @@ nJJ
 nJJ
 nJJ
 mos
-mos
+jSI
 vVA
-bDR
+nNy
 ofo
 qOn
 oBd
@@ -58172,9 +58172,9 @@ nJJ
 nJJ
 nJJ
 pRK
-mos
 jSI
-bDR
+jSI
+nNy
 oBd
 oBd
 dRO
@@ -58376,7 +58376,7 @@ nJJ
 dvf
 lgs
 lgs
-iNi
+wUw
 ofo
 shd
 kDy

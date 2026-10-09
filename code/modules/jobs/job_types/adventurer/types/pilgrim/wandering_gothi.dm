@@ -1,9 +1,9 @@
-/datum/attribute_holder/sheet/job/forestpreacher
+/datum/attribute_holder/sheet/job/pilgrim/wandering_gothi
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
-		STAT_INTELLIGENCE = 3,
+		STAT_INTELLIGENCE = 2,
 		STAT_CONSTITUTION = 1,
-		STAT_ENDURANCE = 1,
+		STAT_ENDURANCE = 2,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -14,57 +14,42 @@
 		/datum/attribute/skill/craft/carpentry = 30,
 		/datum/attribute/skill/labor/farming = 30,
 		/datum/attribute/skill/magic/druidic = 40,
-		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/reading = 30,
-		/datum/attribute/skill/misc/sewing = 20,
-		/datum/attribute/skill/labor/butchering = 30,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/labor/butchering = 20,
 		/datum/attribute/skill/labor/lumberjacking = 10
 	)
 
 
-/datum/job/forestpreacher
-	title = JOB_FOREST_PREACHER
-	tutorial = "Once you walked these woods as its Warden, until your bones ached too much to pick up your axe. Now you guide the next generation of hunters to follow in your footsteps. Advise them well. Accept your devotion's rewards with open eyes and arms."
-	department_flag = GALLOWBAND
-	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
+/datum/job/advclass/pilgrim/wandering_gothi
+	title = "Wandering Gothi"
+	tutorial = "Once a great prowler of Ossland, now an old preacher of The Great Hunt and blessed by its aspects, you wander the wooded lands and give the wisdom of The Hunt to those who would seek its natural plunder."
 	total_positions = 1
 	spawn_positions = 1
-	display_order = JDO_FORPREACH
-	selection_color = "#0d6929"
 
 	allowed_ages = list(AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
-	exp_type = list(EXP_TYPE_CHURCH)
-	exp_types_granted = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_CHURCH)
-	exp_requirements = list(
-		EXP_TYPE_CHURCH = 600
-	)
+	exp_types_granted = list(EXP_TYPE_CLERIC)
 	spells = list(/datum/action/cooldown/spell/diagnose/holy/hunt)
+	allowed_patrons = list(/datum/patron/alternate/great_hunt)
 
-	outfit = /datum/outfit/forestpreacher
-	give_bank_account = 40
-	knows_the_town = TRUE
-	known_by_the_town = TRUE
+	outfit = /datum/outfit/pilgrim/gothi
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
-	job_bitflag = BITFLAG_GARRISON
-
-	attribute_sheet = /datum/attribute_holder/sheet/job/forestpreacher
+	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/wandering_gothi
 
 	traits = list(
-		TRAIT_FORAGER,
-		TRAIT_GALLOWBAND
+		TRAIT_FORAGER
 	)
 
-	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
 	book_type = /obj/item/recipe_book/medical
 
-/datum/job/forestpreacher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
+/datum/job/advclass/pilgrim/wandering_gothi/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.set_patron(/datum/patron/alternate/great_hunt/proven)
 	spawned.apply_status_effect(/datum/status_effect/buff/bone_ward)
@@ -81,22 +66,20 @@
 		species.accent_language = species.get_accent(species.native_language)
 
 
-/datum/outfit/forestpreacher
-	name = JOB_FOREST_PREACHER
+/datum/outfit/pilgrim/gothi
+	name = "Wandering Gothi"
 	armor = /obj/item/clothing/armor/leather/shamancoat
-	neck = /obj/item/clothing/neck/psycross/great_hunt/divine_link
+	neck = /obj/item/clothing/neck/psycross/great_hunt
 	pants = /obj/item/clothing/pants/trou/leather/gronn
 	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	head = /obj/item/clothing/head/helmet/leather/shaman_hood
 	gloves = /obj/item/clothing/gloves/plate/beastclaws
 	belt = /obj/item/storage/belt/leather
-	beltr = /obj/item/storage/belt/pouch/coins/mid
+	beltr = /obj/item/storage/belt/pouch/coins/poor
 	backl = /obj/item/storage/backpack/satchel
 	backr = /obj/item/weapon/polearm/spear
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,
-		/obj/item/rope/chain = 1,
-		/obj/item/storage/keyring/gallowband/gothi = 1,
 		/obj/item/needle = 1,
 	)
