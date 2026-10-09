@@ -136,7 +136,7 @@ GLOBAL_LIST_EMPTY(agent_rings)
 /obj/structure/fake_machine/titan/proc/perform_check(mob/checked_mob, has_to_be_worthy = TRUE)
 	if(!is_valid_mob(checked_mob))
 		return FALSE
-	if(!has_crown(checked_mob) && !HAS_TRAIT(checked_mob, TRAIT_CROWNLESS_THROAT))
+	if(!HAS_TRAIT(checked_mob, TRAIT_CROWNLESS_THROAT) && !has_crown(checked_mob))
 		return FALSE
 	if(has_to_be_worthy && !is_worthy(checked_mob))
 		return FALSE

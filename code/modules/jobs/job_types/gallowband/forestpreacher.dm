@@ -43,7 +43,7 @@
 	exp_requirements = list(
 		EXP_TYPE_CHURCH = 600
 	)
-	spells = list(/datum/action/cooldown/spell/diagnose)
+	spells = list(/datum/action/cooldown/spell/diagnose/holy/hunt)
 
 	outfit = /datum/outfit/forestpreacher
 	give_bank_account = 40
