@@ -1,11 +1,12 @@
 /datum/action/cooldown/spell/undirected/call_to_hunt
 	name = "Call to Hunt"
-	desc = "Grants you and all allies nearby a buff to their strength, endurance, and constitution."
+	desc = "Grants yourself, and all nearby worshippers of The Great Hunt, a buff to strength, endurance, and constitution."
 	button_icon_state = "dendor"
 	sound = 'sound/magic/timestop.ogg'
 
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/druidic
 	invocation = "FOR THE HUNT!"
 	invocation_type = INVOCATION_SHOUT

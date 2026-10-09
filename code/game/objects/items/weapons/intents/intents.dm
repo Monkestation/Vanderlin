@@ -95,6 +95,7 @@
 		inspec += "\n[desc]"
 	if(reach != 1)
 		inspec += "\n<b>Reach:</b> [reach]"
+		inspec += "\n<b>Lowered penetration when fighting up-close.</b>"
 	if(damfactor != 1)
 		inspec += "\n<b>Damage:</b> [damfactor]"
 	if(penfactor)
@@ -234,7 +235,7 @@
 	misscost = 0
 	no_attack = TRUE
 	releasedrain = 0
-	blade_class = BCLASS_PUNCH
+	blade_class = BCLASS_BLUNT
 	item_damage_type = "blunt"
 
 /datum/intent/kick
@@ -457,7 +458,7 @@
 	animname = "claw"
 	blade_class = BCLASS_CUT
 	hitsound = "smallslash"
-	penfactor = 20
+	penfactor = 35
 	candodge = TRUE
 	canparry = TRUE
 	miss_text = "claws the air!"

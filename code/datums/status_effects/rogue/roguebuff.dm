@@ -25,24 +25,6 @@
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stress_event/drunk)
 
-/datum/status_effect/buff/foodbuff
-	id = "Food Buff"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/foodbuff
-	effectedstats = list(STAT_CONSTITUTION = 1, STAT_ENDURANCE = 1)
-	duration = 15 MINUTES
-	tick_interval = STATUS_EFFECT_NO_TICK
-
-/atom/movable/screen/alert/status_effect/buff/foodbuff
-	name = "Great Meal"
-	desc = span_nicegreen("That was a good meal!")
-	icon_state = "foodbuff"
-
-/datum/status_effect/buff/foodbuff/on_apply()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.add_stress(/datum/stress_event/goodfood)
-
 //============= CLEAN PLUS ===============
 /datum/status_effect/buff/clean_plus
 	id = "cleanplus"

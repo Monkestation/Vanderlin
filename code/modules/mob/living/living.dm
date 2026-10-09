@@ -1050,6 +1050,8 @@
 	// Reapply arcyne momentum if this mind had it before death
 	if(HAS_MIND_TRAIT(src, TRAIT_ARCYNE_MOMENTUM) && !has_status_effect(/datum/status_effect/buff/arcyne_momentum))
 		apply_status_effect(/datum/status_effect/buff/arcyne_momentum)
+	if(HAS_MIND_TRAIT(src, TRAIT_BLOOD_BIND) && !has_status_effect(/datum/status_effect/buff/blood_bound))
+		apply_status_effect(/datum/status_effect/buff/blood_bound)
 
 	// The signal is called after everything else so components can properly check the updated values
 	SEND_SIGNAL(src, COMSIG_LIVING_REVIVE, full_heal_flags)
@@ -1102,8 +1104,8 @@
 		setShockStage(0, FALSE, TRUE)
 
 	if(heal_flags & HEAL_ESSENTIALS)
-		set_nutrition(NUTRITION_LEVEL_FED + 50)
-		set_hydration(HYDRATION_LEVEL_HYDRATED + 50)
+		set_nutrition(NUTRITION_LEVEL_WELL_FED)
+		set_hydration(HYDRATION_LEVEL_WELL_HYDRATED)
 
 	set_disgust(0)
 	cure_husk()
@@ -1323,6 +1325,14 @@
 		stop_attack(FALSE)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_RESIST, src)
+
+	if(has_status_effect(/datum/status_effect/debuff/blood_choke/herald))
+		to_chat(src, span_bloody("I attempt to free myself from the grip of blood magic."))
+		if(do_after(src, 3.5 SECONDS, src))
+			to_chat(src, span_bloody("I successfully escape death's grasp!"))
+			remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
+		return
+
 	//resisting grabs (as if it helps anyone...)
 	if(!HAS_TRAIT(src, TRAIT_RESTRAINED) && pulledby)
 		log_combat(src, pulledby, "resisted grab")
@@ -2607,7 +2617,7 @@
 	var/looktime = 5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) * 2)
 	if(has_quirk(/datum/quirk/boon/keen_eye))
 		looktime *= 0.25
-	if(HAS_TRAIT(src, TRAIT_KEENEYES))
+	if(HAS_TRAIT(src, TRAIT_KEENEYES) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABRAXAS))
 		looktime *= 0.25
 	if(do_after(src, looktime))
 		// var/huhsneak
@@ -2830,6 +2840,13 @@
 	reset_perspective(looking_holder)
 	update_cone_show()
 	on_looking_z_level_change(get_turf(src), below_turf)
+
+/// Whether the mob's client is currently viewing through a vertical look (up/down) holder
+/mob/proc/is_looking_vertically()
+	return FALSE
+
+/mob/living/is_looking_vertically()
+	return looking_vertically != NONE && client?.eye == looking_holder
 
 /mob/living/proc/look_further(turf/T)
 	if(looking_vertically)
@@ -3137,7 +3154,7 @@
 	reset_technique_mastery_points(silent)
 	reset_form_mastery_points(silent)
 
-/mob/living/proc/offer_item(mob/living/offered_to, obj/offered_item)
+/mob/living/proc/offer_item(mob/living/offered_to, obj/item/offered_item)
 	if(isnull(offered_to) || isnull(offered_item))
 		stack_trace("no offered_to or offered_item in offer_item()")
 		return FALSE
@@ -3155,7 +3172,7 @@
 	if(stealthy)
 		to_chat(src, span_notice("I secretly offer [offered_item] to [offered_to]."))
 		to_chat(offered_to, span_notice("[offered_to] secretly offers [offered_item] to me..."))
-	else
+	else if(!offered_item.on_offer(src, offered_to))
 		visible_message(
 			span_notice("[src] offers [offered_item] to [offered_to] with an outstretched hand."), \
 			span_notice("I offer [offered_item] to [offered_to] with an outstretched hand."), \

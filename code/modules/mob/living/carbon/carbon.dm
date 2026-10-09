@@ -772,6 +772,9 @@
 		clear_fullscreen("inqvision")
 	if(HAS_TRAIT(src, TRAIT_SEE_LEYLINES))
 		see_invisible = SEE_INVISIBLE_LEYLINES
+	if(HAS_TRAIT(src, TRAIT_LEVIATHAN_CURSE))
+		lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
+		see_in_dark = 2
 	if(see_override)
 		see_invisible = see_override
 	return ..()
@@ -1674,15 +1677,15 @@
 /**
  * This proc is used to determine whether or not the mob can handle touching a burning object.
  */
-/mob/living/carbon/proc/can_touch_burning(atom/burning_atom)
+/mob/living/carbon/proc/can_touch_burning(atom/burning_atom, ignore_gloves = FALSE)
 	// So people can take their own clothes off
 	if((burning_atom == src) || (burning_atom.loc == src))
 		return TRUE
 
-	if(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS))
+	if(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABADDON))
 		return TRUE
 
-	if(gloves?.max_heat_protection_temperature >= 360)
+	if(!ignore_gloves && (gloves?.max_heat_protection_temperature >= 360))
 		return TRUE
 
 	return FALSE

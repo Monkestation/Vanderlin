@@ -12,7 +12,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 /mob/dead/observer
 	name = "ghost"
 	desc = "" //jinkies!
-	icon = 'icons/mob/mob.dmi'
+	icon = 'icons/admin/adminghost.dmi'
 	icon_state = "ghost"
 	plane = GHOST_PLANE
 	stat = DEAD
@@ -272,7 +272,6 @@ Works together with spawning an observer, noted above.
 	if(!bnw)
 		return ghost
 
-	ghost.add_client_colour(/datum/client_colour/monochrome)
 	SEND_SIGNAL(src, COMSIG_MOB_GHOSTIZED)
 	return ghost
 
@@ -356,7 +355,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		to_chat(usr, "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>")
 		return
 
-	remove_client_colour(/datum/client_colour/monochrome)
 	client.view_size.setDefault(client.view_size.getScreenSize())
 	mind.current_ghost = null
 	mind.current.ckey = ckey(key)

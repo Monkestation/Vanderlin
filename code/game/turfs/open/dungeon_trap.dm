@@ -38,8 +38,6 @@
 		return
 	if(!isobj(falling) && !ismob(falling))
 		return
-	if(!length(GLOB.dungeon_entries) || !length(GLOB.dungeon_exits))
-		return
 	var/turf/target = get_dungeon_tile()
 	if(!target)
 		return FALSE

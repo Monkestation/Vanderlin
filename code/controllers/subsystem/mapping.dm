@@ -60,6 +60,7 @@ SUBSYSTEM_DEF(mapping)
 	config = load_map_config("kalypso")
 	log_world("FORCE_RANDOM_WORLD_GEN enabled - loading Kalypso only for random world generation")
 #endif
+	config.post_load()
 
 #ifndef FORCE_RANDOM_WORLD_GEN
 	// After assigning a config datum to var/config, we check which map adjustment fits the current config
@@ -233,10 +234,6 @@ SUBSYSTEM_DEF(mapping)
 	if(config.map_name != "Voyage")
 		otherZ += load_map_config("map_files/shared/dungeon")
 
-		// Load additional delve levels if multi-level dungeons are enabled
-		if(SSdungeon_generator.multilevel_dungeons)
-			for(var/level = 2; level <= SSdungeon_generator.max_delve_levels; level++)
-				otherZ += load_map_config("map_files/shared/dungeon_delve[level]")
 #endif
 
 	//For all maps

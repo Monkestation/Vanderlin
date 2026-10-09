@@ -1337,7 +1337,7 @@
 	if(confirm != "Yes")
 		return
 
-	ADD_TRAIT(user, TRAIT_DIVINE_CONVERT, DEVOTION_TRAIT)
+	ADD_TRAIT(user, TRAIT_CHANGED_PATRON, DEVOTION_TRAIT)
 	user.set_patron(real_patron)
 	to_chat(user, "<span class='god_[LOWER_TEXT(real_patron.name)]'>You have devoted yourself to [real_patron]!</span>")
 	log_game("PATRON: [key_name(user)] changed their patron from [old_patron.name] to [real_patron]")
@@ -1481,8 +1481,7 @@
 	bride.adjust_triumphs(1)
 
 	if(!secret_marriage)
-		var/announcement_message = "Eora [groom.gender == bride.gender ? "begrudgingly accepts" : "proudly embraces"] the marriage between [groom.real_name] and [bride_first_name]!"
-		priority_announce(announcement_message, title = "Holy Union!", sound = 'sound/misc/bell.ogg')
+		priority_announce("Eora proudly embraces the marriage between [groom.real_name] and [bride_first_name]!", title = "Holy Union!", sound = 'sound/misc/bell.ogg')
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_MARRIAGE, groom, bride)
 	record_round_statistic(STATS_MARRIAGES)

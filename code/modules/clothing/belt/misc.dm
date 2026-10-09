@@ -60,6 +60,12 @@
 		/obj/item/key/forrestgarrison,
 	)
 
+/obj/item/storage/belt/leather/gallowband
+	populate_contents = list(
+		/obj/item/needle/thorn,
+		/obj/item/storage/keyring/gallowband,
+	)
+
 /obj/item/storage/belt/leather/townguard //they get their keys + dagger there
 	populate_contents = list(
 		/obj/item/weapon/knife/dagger/steel/special,
@@ -185,7 +191,7 @@
 /obj/item/storage/belt/leather/breechcloth
 	name = "belt with breechcloth"
 	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
-	icon_state = "breechbelt"
+	icon_state = "breechcloth"
 	detail_tag = "_detail"
 	detail_color = CLOTHING_TARAXACUM_YELLOW
 	sewrepair = FALSE
@@ -193,7 +199,7 @@
 /obj/item/storage/belt/leather/breechcloth/blackbelt
 	name = "black belt with breechcloth"
 	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
-	icon_state = "breechbeltalt"
+	icon_state = "breechclothalt"
 
 /obj/item/storage/belt/leather/slayer
 	name = "rugged dwarven belt"
@@ -398,6 +404,35 @@
 
 /obj/item/storage/backpack/satchel/black
 	color = CLOTHING_SOOT_BLACK
+
+/obj/item/storage/backpack/satchel/deadite_hunter/populate_contents()
+	for(var/i in 1 to rand(2, 10))
+		var/obj/item/type = pickweight(list(
+			/obj/item/natural/fur/volf = 1,
+			/obj/item/natural/fur/direbear = 1,
+			/obj/item/natural/fur/fox = 1,
+			/obj/item/natural/fur/raccoon = 1,
+			/obj/item/natural/fur/bobcat = 1,
+			/obj/item/reagent_containers/food/snacks/meat/steak = 6,
+			/obj/item/natural/hide = 3,
+		))
+		new type(src)
+
+/obj/item/storage/backpack/satchel/cloth/undead_miner/populate_contents()
+	. = ..()
+	for(var/i in 1 to rand(3, 5))
+		var/obj/item/ore/ore_type = pickweight(list(
+			/obj/item/ore/gold = 7,
+			/obj/item/ore/silver = 7,
+			/obj/item/ore/iron = 4,
+			/obj/item/ore/coal = 5,
+			/obj/item/ore/copper = 8,
+			/obj/item/ore/tin = 10,
+			/obj/item/ore/cinnabar = 3,
+			/obj/item/gem = 1
+		))
+
+		new ore_type(src)
 
 /obj/item/storage/backpack/backpack
 	name = "backpack"

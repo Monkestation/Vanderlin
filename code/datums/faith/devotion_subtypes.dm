@@ -258,6 +258,44 @@
 	miracles = list(
 		CLERIC_T0 = /datum/action/cooldown/spell/healing/hunt,
 		CLERIC_T1 = list(/datum/action/cooldown/spell/conjure/hunters_trick, /datum/action/cooldown/spell/undirected/hunters_grace),
-		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/call_to_hunt, /datum/action/cooldown/spell/conjure/will_of_woods)
+		CLERIC_T2 = list(/datum/action/cooldown/spell/beast_tame/great_hunt, /datum/action/cooldown/spell/forest_bind),
+		CLERIC_T3 = list(/datum/action/cooldown/spell/undirected/call_to_hunt, /datum/action/cooldown/spell/conjure/will_of_woods)
 	)
 	traits = list(TRAIT_BRUSHWALK)
+
+// Archdevils
+
+/datum/devotion/archdevil
+	devotion_color = "#510000"
+	devotion_title = "Favor"
+
+/datum/devotion/archdevil/grant_to(mob/living/carbon/human/holder)
+	if(!holder)
+		return
+	if(passive_devotion_gain || passive_progression_gain)
+		START_PROCESSING(SSprocessing, src)
+	holder_mob = holder
+	holder_mob.cleric = src
+	if(SSticker.HasRoundStarted())
+		initialize_hud()
+	else
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(initialize_hud)))
+	for(var/trait in traits)
+		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
+	for(var/datum/action/miracle as anything in miracles_extra)
+		grant_miracle(miracle)
+	check_progression()
+	initialize_tasks()
+
+/datum/devotion/archdevil/update_devotion(amount)
+	. += devotion
+	devotion = clamp(devotion += amount, 0, max_devotion)
+	. -= devotion
+	holder_mob?.hud_used?.bloodpool?.name = "Favor: [devotion]"
+	holder_mob?.hud_used?.bloodpool?.desc = "Favor: [devotion]/[max_devotion]"
+	if(devotion <= 0)
+		holder_mob?.hud_used?.bloodpool?.set_value(0, 1 SECONDS)
+	else
+		holder_mob?.hud_used?.bloodpool?.set_value((100 / (max_devotion / devotion)) / 100, 1 SECONDS)
+	if(.)
+		SEND_SIGNAL(holder_mob, COMSIG_LIVING_DEVOTION_CHANGED, amount)
