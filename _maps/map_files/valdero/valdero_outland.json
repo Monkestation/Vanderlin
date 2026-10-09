@@ -1,0 +1,24 @@
+{
+    "map_name": "Valdero Outlands",
+    "map_path": "map_files/valdero",
+    "map_file": "valdero_outland.dmm",
+	"traits": [
+        {
+            "Up": true
+        },
+        {
+            "Up": true,
+            "Down": true,
+            "Leylines": true
+        },
+        {
+            "Up": true,
+            "Down": true,
+            "Leylines": true
+        },
+        {
+            "Down": true,
+            "Leylines": true
+        }
+    ]
+}
