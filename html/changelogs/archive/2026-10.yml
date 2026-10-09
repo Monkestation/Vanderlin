@@ -32,3 +32,41 @@
   ta3754859-max:
   - balance: Intents with reach above 1 have halved armor penetration
   - balance: removes swift balance from blacksteel halberd
+2026-10-06:
+  Ordosian:
+  - image: Fixed many gloves and offsets.
+  - code_imp: Makes decorated helmets no longer go invisible on no choice.
+  - image: Admin Icon File has some extra icons.
+  - code_imp: Ghost icon file for observers changed and observers are not just blank
+      ghosts anymore.
+  copper-404:
+  - rscadd: Adds a court physician's office to Daftmarsh.
+  - map: Makes the mage guild area a fully separated tower, accessible via bridges.
+  - map: Moves the garrison to the basement.
+  - map: Readjusts position of dungeon, servant areas, ale cellar, vault and others
+      in the basement.
+  - map: Adjusts position of captain's office on the first floor.
+  - map: Adjusts monarch's, heir's, guest bedroom, and meeting position on the second
+      floor.
+  - map: Adds a couple run down lounges.
+  - map: Adds three abandoned rooms.
+  - map: Generally adjusts the flow of the hallways to be more easy to grasp.
+  - map: Adds minor POIs to the bog and mountains (smuggler dock and hot spring cave
+      respectively.
+  - map: Very slight adjustments of some ruined structures in the bog.
+  ta3754859-max:
+  - map: fixes logs in thatchwood's smithy alongside removing broken tile objects
+2026-10-07:
+  realforest2001:
+  - bugfix: Fixed Planar Shift breaking if you somehow fall out of it.
+  - bugfix: Fixed misty step being castable beyond range.
+  - bugfix: Fixed werewolves being given a howl that does nothing.
+  - rscadd: Changed Eora to not be homophobic for no reason.
+  - bugfix: Fixed Baothan helmet description.
+  - bugfix: Fixed being able to combat-buckle someone.
+  - admin: Added a log for entering Vampire Blood Frenzy.
+  - code_imp: Removed an unused antag variable.
+2026-10-08:
+  DustanHache:
+  - bugfix: Fixed Energize and Reinvigorate/refresh. They both restore stamina and
+      energy now like they say they should.

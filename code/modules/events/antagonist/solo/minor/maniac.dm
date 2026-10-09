@@ -11,7 +11,6 @@
 	roundstart = TRUE
 	antag_flag = ROLE_MANIAC
 	shared_occurence_type = SHARED_MINOR_THREAT
-	minor_roleset = TRUE
 
 	can_call_midround = TRUE
 

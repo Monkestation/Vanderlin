@@ -3360,7 +3360,11 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "aqm" = (
-/obj/structure/dungeon_entry,
+/obj/structure/waystone{
+	pixel_y = 2;
+	pixel_x = 16
+	},
+/obj/structure/flora/grass/herb/euphrasia,
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
 "aqn" = (
@@ -11449,6 +11453,10 @@
 "eai" = (
 /turf/open/floor/herringbone,
 /area/outdoors/mountains/anvil/peak)
+"egM" = (
+/obj/structure/hotspring/border,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/upper)
 "ehU" = (
 /obj/structure/table/wood/large/corner_new,
 /obj/item/statue/bronze/comb,
@@ -11687,6 +11695,14 @@
 /obj/structure/chair/bench/church,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"fvY" = (
+/obj/structure/roguerock{
+	icon_state = "rock2"
+	},
+/turf/open/floor/naturalstone{
+	dir = 8
+	},
+/area/under/mountains/anvil/upper)
 "fwo" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/cobble,
@@ -12202,6 +12218,9 @@
 	dir = 4
 	},
 /area/indoors/mountains/anvil/upperkeep)
+"idf" = (
+/turf/open/water/hotspring,
+/area/under/mountains/anvil/upper)
 "ieN" = (
 /obj/item/restraints/legcuffs/beartrap/armed,
 /turf/open/floor/herringbone,
@@ -12257,6 +12276,10 @@
 	},
 /turf/open/water/river,
 /area/outdoors/mountains/anvil/snowyforest)
+"iqq" = (
+/obj/structure/flora/grass/herb/euphrasia,
+/turf/open/floor/snow/patchy,
+/area/outdoors/mountains/anvil/snowyforest)
 "iqF" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/herringbone,
@@ -12282,6 +12305,14 @@
 /obj/structure/chair/stool/bar,
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/herringbone,
+/area/under/mountains/anvil/upper)
+"ixp" = (
+/obj/structure/hotspring/border/two,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/upper)
+"ixN" = (
+/obj/structure/hotspring/border/three,
+/turf/open/floor/naturalstone,
 /area/under/mountains/anvil/upper)
 "iyV" = (
 /obj/item/bin/water,
@@ -12476,6 +12507,12 @@
 "jDB" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/cobble,
+/area/under/mountains/anvil/upper)
+"jNY" = (
+/obj/structure/roguerock,
+/turf/open/floor/naturalstone{
+	dir = 8
+	},
 /area/under/mountains/anvil/upper)
 "jOa" = (
 /obj/structure/fluff/railing/wood,
@@ -12736,6 +12773,14 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
+"lgv" = (
+/obj/structure/roguerock{
+	icon_state = "rock3"
+	},
+/turf/open/floor/naturalstone{
+	dir = 8
+	},
+/area/under/mountains/anvil/upper)
 "lhW" = (
 /obj/structure/flora/grass/tundra,
 /turf/open/floor/dirt,
@@ -12851,6 +12896,10 @@
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/openspace,
 /area/outdoors/mountains/anvil/peak)
+"lXY" = (
+/obj/structure/hotspring/border/eight,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/upper)
 "lYs" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/clothing/ring/gold/saffira,
@@ -12865,6 +12914,10 @@
 /obj/item/reagent_containers/powder/blastpowder,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
+"min" = (
+/obj/structure/hotspring/border/eleven,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/upper)
 "mmA" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/grass/cold,
@@ -13117,6 +13170,10 @@
 /obj/item/gear/wood/unstable,
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
+"nrB" = (
+/obj/structure/hotspring/border/five,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/upper)
 "nuh" = (
 /obj/structure/chair/bench/church/r,
 /turf/open/floor/carpet/lord/corner{
@@ -13159,6 +13216,11 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
+"nNH" = (
+/turf/open/floor/naturalstone{
+	dir = 8
+	},
+/area/under/mountains/anvil/upper)
 "nOD" = (
 /obj/structure/chair/bench/throne/stone,
 /turf/open/floor/blocks/newstone,
@@ -13547,6 +13609,10 @@
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
+"pZg" = (
+/obj/structure/hotspring/border/four,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/upper)
 "qbq" = (
 /turf/open/floor/carpet/lord/corrner_inner{
 	dir = 1
@@ -13966,6 +14032,15 @@
 	},
 /turf/open/openspace,
 /area/outdoors/mountains/anvil/snowyforest)
+"sCJ" = (
+/obj/structure/roguerock{
+	icon_state = "rock4";
+	pixel_x = -1
+	},
+/turf/open/floor/naturalstone{
+	dir = 8
+	},
+/area/under/mountains/anvil/upper)
 "sCN" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -14230,6 +14305,10 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/mountains/anvil/snowyforest)
+"tRn" = (
+/obj/structure/hotspring/border/seven,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/upper)
 "tRr" = (
 /obj/structure/fluff/traveltile/bandit{
 	aportalgoesto = "banditin_mountain";
@@ -14359,6 +14438,10 @@
 /obj/item/perfume/random,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
+"uwR" = (
+/obj/structure/hotspring/border/fourteen,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/upper)
 "uxY" = (
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/cobble/snow,
@@ -14445,6 +14528,10 @@
 	},
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
+"uWi" = (
+/obj/structure/hotspring/border/ten,
+/turf/open/floor/naturalstone,
+/area/under/mountains/anvil/upper)
 "uWp" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/machinery/light/fueled/wallfire/candle/lamp,
@@ -118814,7 +118901,7 @@ aoM
 aoM
 acA
 agW
-aLm
+iqq
 aKS
 aLm
 aPv
@@ -122821,7 +122908,7 @@ aqx
 aqx
 aqx
 aqx
-aqx
+aoM
 aoM
 aoM
 aoM
@@ -123022,11 +123109,11 @@ aqx
 aqx
 aqx
 aqx
-aqx
 aoM
 aoM
-aoM
-aoM
+pZg
+tRn
+egM
 aoM
 aoM
 aoM
@@ -123226,10 +123313,10 @@ aqx
 aqx
 aoM
 aoM
-aoM
-aoM
-aoM
-aoM
+nrB
+idf
+uWi
+egM
 aoM
 aoM
 aoM
@@ -123427,11 +123514,11 @@ aqx
 aqx
 aoM
 aoM
-aoM
-aoM
-aoM
-aoM
-aoM
+nNH
+uwR
+min
+idf
+ixp
 aoM
 aoM
 aoM
@@ -123629,11 +123716,11 @@ aqx
 aoM
 aoM
 aoM
-aoM
-aoM
-aoM
-aoM
-aoM
+jNY
+apA
+nrB
+idf
+ixp
 aoM
 aoM
 aqx
@@ -123831,11 +123918,11 @@ aoM
 aoM
 aoM
 aoM
-aoM
-aoM
-aoM
-aoM
-aoM
+nNH
+nNH
+uwR
+lXY
+ixN
 aoM
 aoM
 aqx
@@ -124033,11 +124120,11 @@ aoM
 aoM
 aoM
 aoM
-aoM
-aoM
-aoM
-aoM
-aoM
+apA
+lgv
+nNH
+fvY
+nNH
 aoM
 aoM
 aqx
@@ -124234,11 +124321,11 @@ aoM
 aoM
 aoM
 aoM
-aoM
-aoM
-aoM
-aoM
-aoM
+apA
+apA
+nNH
+nNH
+nNH
 aoM
 aoM
 aoM
@@ -124435,12 +124522,12 @@ aGY
 aoM
 aoM
 aoM
-aKS
+aoM
+apA
 aoM
 aoM
-aoM
-aoM
-aoM
+sCJ
+nNH
 aoM
 aoM
 aoM

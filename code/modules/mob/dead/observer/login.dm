@@ -13,7 +13,7 @@
 		preferred_form = client.prefs.read_preference(/datum/preference/choiced/ghost_form)
 		ghost_orbit = client.prefs.read_preference(/datum/preference/choiced/ghost_orbit)
 
-	if(client.holder)
+	if(client.holder && client.prefs?.admin_ghost_icon)
 		icon_state = client.prefs.admin_ghost_icon
 
 	var/turf/T = get_turf(src)

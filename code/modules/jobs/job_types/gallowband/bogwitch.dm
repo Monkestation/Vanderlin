@@ -49,7 +49,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bogwitch
 
-	spells = list(/datum/action/cooldown/spell/diagnose)
+	spells = list(/datum/action/cooldown/spell/diagnose/holy/hunt)
 
 	traits = list(
 		TRAIT_DEADNOSE,

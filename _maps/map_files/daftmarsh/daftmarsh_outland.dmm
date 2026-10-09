@@ -259,14 +259,6 @@
 "cL" = (
 /turf/open/floor/cobble,
 /area/indoors)
-"cN" = (
-/obj/structure/dungeon_entry,
-/obj/structure/fluff/walldeco/vinez{
-	pixel_x = 5;
-	pixel_y = 51
-	},
-/turf/open/floor/dirt,
-/area/outdoors/bog)
 "cO" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade{
@@ -3601,10 +3593,6 @@
 /obj/structure/toilet,
 /mob/living/carbon/human/species/goblin/npc/hell,
 /obj/item/natural/poo,
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
-"Mz" = (
-/obj/structure/dungeon_entry,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "MD" = (
@@ -34408,7 +34396,7 @@ dF
 dF
 dF
 gO
-cN
+ws
 pg
 hX
 Td
@@ -73306,7 +73294,7 @@ Bt
 Bt
 vW
 Bt
-Mz
+GX
 kc
 kc
 kc
