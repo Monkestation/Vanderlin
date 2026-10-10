@@ -413,6 +413,48 @@
 	supports_directions = TRUE
 	craftdiff = 0
 
+/datum/blueprint_recipe/carpentry/wooden_table/round
+	name = "round wooden table"
+	desc = "A sturdy, round wooden table."
+	result_type = /obj/structure/table/wood/crafted/round
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth
+	name = "cloth draped wooden table (beige)"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/crafted/beige
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1,
+		/obj/item/natural/cloth = 2
+	)
+	supports_directions = TRUE
+	craftdiff = 0
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/brown
+	name = "cloth draped wooden table (brown)"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/crafted/brown
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/red
+	name = "cloth draped wooden table (red)"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/crafted/red
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/blue
+	name = "cloth draped wooden table (blue)"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/crafted/blue
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/green
+	name = "cloth draped wooden table (green)"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/crafted/green
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/purple
+	name = "cloth draped wooden table (purple)"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/crafted/purple
+
 /datum/blueprint_recipe/carpentry/wooden_table/smooth
 	name = "wooden table"
 	desc = "A sturdy wooden table."
