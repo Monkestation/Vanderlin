@@ -133,6 +133,10 @@
 	list_reagents = list(/datum/reagent/druqks = 15)
 	sellprice = 16
 
+/obj/item/reagent_containers/powder/spice/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "spice", null, 10, topping_name = "spice")
+
 /datum/reagent/druqks
 	name = "Drukqs"
 	description = ""
@@ -194,6 +198,10 @@
 	list_reagents = list(/datum/reagent/ozium = 15)
 	sellprice = 8
 
+/obj/item/reagent_containers/powder/ozium/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "ozium", null, 10, topping_name = "ozium")
+
 /datum/reagent/ozium
 	name = "Ozium"
 	description = ""
@@ -237,6 +245,10 @@
 	icon_state = "moondust"
 	list_reagents = list(/datum/reagent/moondust = 15)
 	sellprice = 16
+
+/obj/item/reagent_containers/powder/moondust/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "moondust", null, 10, topping_name = "moondust")
 
 /datum/reagent/moondust
 	name = "Moondust"
@@ -285,6 +297,10 @@
 	icon_state = "moondust_purest"
 	list_reagents = list(/datum/reagent/moondust_purest = 15)
 	sellprice = 20
+
+/obj/item/reagent_containers/powder/moondust_purest/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "moondust", null, 10, topping_name = "pure moondust")
 
 /datum/reagent/moondust_purest
 	name = "Purest Moondust"
@@ -350,6 +366,10 @@
 	list_reagents = list(/datum/reagent/ash = 1)//you shouldn't be eating this anyways
 	sellprice = 10
 	color = COLOR_PALE_GREEN_GRAY
+
+/obj/item/reagent_containers/powder/herbs/Initialize(mapload, vol)
+	. = ..()
+	AddElement(/datum/element/food_topping, "herbs", /datum/ingredient_buff_modifier/herb_spice, 4, topping_name = "herbs and spices")
 
 /obj/item/reagent_containers/powder/blastpowder
 	name = "blastpowder"

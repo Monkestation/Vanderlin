@@ -20,6 +20,7 @@
 	. = ..()
 	pixel_x = base_pixel_x + rand(8,-8)
 	pixel_y = base_pixel_y + rand(8,-8)
+	AddElement(/datum/element/food_topping, icon_state, null, 10, topping_name = name)
 
 /obj/item/reagent_containers/food/snacks/spiderhoney/proc/set_reagent(reagent)
 	var/datum/reagent/R = GLOB.chemical_reagents_list[reagent]

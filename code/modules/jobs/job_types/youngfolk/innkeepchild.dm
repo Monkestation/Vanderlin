@@ -35,6 +35,10 @@
 	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
+	traits = list(
+		TRAIT_INGREDIENT_INSIGHT
+	)
+
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/innkeep_son

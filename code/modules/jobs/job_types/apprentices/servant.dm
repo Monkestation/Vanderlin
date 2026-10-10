@@ -83,7 +83,8 @@
 		TRAIT_ROYALSERVANT
 	)
 	traits = list(
-		TRAIT_CAREFUL_CHAIRS
+		TRAIT_CAREFUL_CHAIRS,
+		TRAIT_INGREDIENT_INSIGHT
 	)
 	book_type = /obj/item/recipe_book/cooking
 

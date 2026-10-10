@@ -39,7 +39,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SINKING "sinking"
 
 // ************* mob traits
-
+///This trait lets us tell what an ingredient does when cooked with
+#define TRAIT_INGREDIENT_INSIGHT "Ingredient Insight"
 /// Prevents voluntary movement.
 #define TRAIT_IMMOBILIZED "immobilized"
 /// Buckling yourself to objects with this trait won't immobilize you

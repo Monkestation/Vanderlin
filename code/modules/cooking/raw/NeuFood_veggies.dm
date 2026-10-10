@@ -17,6 +17,10 @@
 	slice_skill = /datum/attribute/skill/craft/cooking/preparation
 	item_weight = 70 GRAMS
 
+/obj/item/reagent_containers/food/snacks/veg/onion_sliced/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "onion_sliced", null, 10, topping_name = "a slice of raw onion")
+
 /*	..................   Cabbage   ................... */
 /obj/item/reagent_containers/food/snacks/veg/cabbage_sliced
 	name = "shredded cabbage"

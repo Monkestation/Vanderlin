@@ -234,6 +234,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Devil's Mark - Mephistopheles" = TRAIT_DEVIL_MARKED_MEPHISTOPHELES,
 		"Devil's Mark - Leviathan" = TRAIT_DEVIL_MARKED_LEVIATHAN,
 		"Occult Identification" = TRAIT_IDENTIFY_DEVIL_MARKS,
+		"Ingredient Insight" = TRAIT_INGREDIENT_INSIGHT,
 	),
 	/obj/item/bodypart = list(
 		"TRAIT_PARALYSIS" = TRAIT_PARALYSIS

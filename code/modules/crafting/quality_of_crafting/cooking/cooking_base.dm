@@ -75,6 +75,8 @@
 	var/ingredient_count = 0
 	var/highest_quality = 0
 
+	var/list/assembled_buffs = assemble_ingredient_buffs(to_delete)
+
 	// Calculate average freshness and find highest quality ingredient
 	for(var/obj/item/reagent_containers/food_item in to_delete)
 		if(istype(food_item, /obj/item/reagent_containers/food/snacks) || istype(food_item, /obj/item/grown))
@@ -101,6 +103,7 @@
 		if(istype(new_item, /obj/item/reagent_containers/food/snacks))
 			// Apply freshness to the new food item
 			new_item.warming = min(5 MINUTES, average_freshness)
+			new_item.assembled_buffs = assembled_buffs.Copy()
 
 			// Calculate final quality based on ingredients, skill, and recipe
 			apply_food_quality(new_item, cooking_skill, highest_quality, average_freshness)

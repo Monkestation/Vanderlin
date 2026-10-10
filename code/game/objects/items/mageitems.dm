@@ -631,6 +631,9 @@
 	seed = /obj/item/neuFarm/seed/manabloom
 	item_weight = 20 GRAMS
 
+/obj/item/reagent_containers/food/snacks/produce/manabloom/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "manabloom", null, 10, topping_name = "manabloom petals")
 
 /obj/item/natural/artifact
 	name = "runed artifact"
