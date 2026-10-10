@@ -940,7 +940,7 @@
 /datum/special_trait/dark_secrets/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/dark_secrets)
 	character.add_spell(/datum/action/cooldown/spell/status/blood_sight, silent = TRUE, mastery_spell = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/projectile/blood_steal, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/blood_steal, silent = TRUE, mastery_spell = TRUE)
 	character.grant_language(/datum/language/sanguine)
 	character.adjust_technique_mastery_points(3)
 	character.adjust_form_mastery_points(4, specific_form = FORM_BLOOD)
