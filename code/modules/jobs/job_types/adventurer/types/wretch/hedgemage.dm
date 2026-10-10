@@ -94,7 +94,7 @@
 /datum/outfit/wretch/hedgemage
 	name = "Hedge Mage (Wretch)"
 	shoes = /obj/item/clothing/shoes/simpleshoes
-	belt = /obj/item/storage/belt/leather/rope
+	belt = /obj/item/storage/belt/leather/bandit
 	shirt = /obj/item/clothing/armor/gambeson/heavy
 	neck = /obj/item/clothing/neck/mana_star
 	backr = /obj/item/storage/backpack/satchel

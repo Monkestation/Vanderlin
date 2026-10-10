@@ -1108,7 +1108,7 @@
 			if(istype(W, /obj/item/reagent_containers/lux))
 				B.contrib += 120
 				record_round_statistic(STATS_SHRINE_VALUE, 120)
-			else if(istype(W, /obj/item/coin) || (istype(W, /obj/item/gem) && !istype(W, /obj/item/gem/amethyst)) || istype(W, /obj/item/reagent_containers/glass/cup/silver) || istype(W, /obj/item/reagent_containers/glass/cup/golden) || istype(W, /obj/item/reagent_containers/glass/carafe) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/statue))
+			else if(((!istype(W, /obj/item/clothing) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/clothing/head/crown/nyle) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/neck/psycross) || istype(W, /obj/item/clothing/face)) && !istype(W, /obj/item/weapon) && W.get_real_price() >= 25) || istype(W, /obj/item/coin))
 				if(!istype(W, /obj/item/coin))
 					B.contrib += (W.get_real_price() / 2) // sell jewelry and other fineries, though at a lesser price compared to fencing them first
 					record_round_statistic(STATS_SHRINE_VALUE, (W.get_real_price() / 2))
@@ -1118,12 +1118,12 @@
 			else
 				to_chat(user, span_warning("The idol doesn't want your garbage."))
 				return
+			qdel(W)
 			if(B.contrib >= 80)
 				give_rewards(B, user)
 			else
 				playsound(src,'sound/items/matidol1.ogg', 50, TRUE)
 			playsound(src,'sound/misc/eat.ogg', rand(30, 60), TRUE)
-			qdel(W)
 			return
 
 	return ..()
@@ -1138,23 +1138,58 @@
 		if(1)
 			I = new /obj/item/reagent_containers/glass/bottle/healthpot(user.loc)
 		if(2)
-			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+			if(HAS_TRAIT(user, TRAIT_HEAVYARMOR))
+				I = new /obj/item/clothing/armor/plate(user.loc)
+			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
 				I = new /obj/item/clothing/armor/medium/scale(user.loc)
 			else
 				I = new /obj/item/clothing/armor/chainmail/iron(user.loc)
-		if(4)
-			I = new /obj/item/clothing/head/helmet/horned(user.loc)
-		if(6)
-			if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/polearms) > 2)
-				I = new /obj/item/weapon/polearm/spear/billhook(user.loc)
-			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/bows) > 2)
-				I = new /obj/item/gun/ballistic/bow/long(user.loc)
-			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/swords) > 2)
-				I = new /obj/item/weapon/sword/long(user.loc)
+		if(3)
+			if(HAS_TRAIT(user, TRAIT_HEAVYARMOR))
+				I = new /obj/item/clothing/pants/platelegs(user.loc)
+			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/pants/chainlegs(user.loc)
 			else
-				I = new /obj/item/weapon/mace/steel(user.loc)
-		if(8)
-			I = new /obj/item/clothing/pants/chainlegs(user.loc)
+				I = new /obj/item/clothing/pants/trou/leather/advanced(user.loc)
+		if(4)
+			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/head/helmet/heavy/bucket(user.loc)
+			else
+				I = new /obj/item/clothing/head/helmet/leather/advanced(user.loc)
+		if(5)
+			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/wrists/bracers(user.loc)
+			else
+				I = new /obj/item/clothing/wrists/bracers/leather/advanced(user.loc)
+		if(6)
+			var/list/weapon_options = list("Navaja knife" = /obj/item/weapon/knife/dagger/navaja)
+
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/polearms) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Billhook"] = /obj/item/weapon/polearm/spear/billhook
+				weapon_options["Quarterstaff"] = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/bows) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Longbow"] = /obj/item/gun/ballistic/bow/long
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/swords) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Longsword"] = /obj/item/weapon/sword/long
+				weapon_options["Sabre"] = /obj/item/weapon/sword/sabre
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/axesmaces) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Steel mace"] = /obj/item/weapon/mace/steel
+				weapon_options["Battle axe"] = /obj/item/weapon/axe/battle
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/whipsflails) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Steel flail"] = /obj/item/weapon/flail
+				weapon_options["Steel whip"] = /obj/item/weapon/whip/steel
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/shields) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Kite shield"] = /obj/item/weapon/shield/tower/metal
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/combat/unarmed) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Knuckles"] = /obj/item/weapon/knuckles
+
+			var/chosen_weapon
+			if(length(weapon_options))
+				var/chosen_name = browser_input_list(user, "Choose your blessing.", "STOLEN STEEL. NOT MADE FOR US.", weapon_options, timeout = 20 SECONDS)
+				chosen_weapon = chosen_name ? weapon_options[chosen_name] : /obj/item/weapon/knife/dagger/navaja
+			else
+				chosen_weapon = /obj/item/weapon/knife/dagger/navaja
+			I = new chosen_weapon(user.loc)
 	if(I)
 		I.sellprice = 0
 
