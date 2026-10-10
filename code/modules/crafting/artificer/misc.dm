@@ -339,7 +339,7 @@
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/ammo_casing/caseless/arrow/broadhead
 	hammers_per_item = 6
-	craftdiff = 3
+	craftdiff = 2
 	created_amount = 5
 
 /datum/artificer_recipe/ammo/arrows/pyro
