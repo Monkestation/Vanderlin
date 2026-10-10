@@ -90,6 +90,7 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "necraflail"
 	item_weight = 1.4 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/necra
 
 //................ Silver Flail ............... //
 /obj/item/weapon/flail/silver
@@ -117,6 +118,7 @@
 	max_blade_int = 160
 	possible_item_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_LNGCUT)
 	wlength = WLENGTH_GREAT
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/noc
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon

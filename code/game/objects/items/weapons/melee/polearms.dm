@@ -827,6 +827,7 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	item_weight = 2.3 KILOGRAMS
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_IRON * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/dendor
 
 /obj/item/weapon/polearm/halberd/bardiche/captain
 	name = "\proper deliverance"

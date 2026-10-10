@@ -227,6 +227,7 @@
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	item_weight = 500 GRAMS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/xylix
 
 /obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"

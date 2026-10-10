@@ -42,6 +42,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
 	. = ..()
@@ -123,6 +124,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/zizo
 
 	COOLDOWN_DECLARE(fire_projectile)
 
@@ -244,6 +246,7 @@
 	projectile_damage_multiplier = 1.1
 
 	item_weight = 2 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 	var/obj/item/instrument/harp/turbulenta/FUCK
 
@@ -356,6 +359,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 	COOLDOWN_DECLARE(pleonexia_blink)
 
@@ -423,6 +427,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /datum/intent/sword/cut/martyr
 	item_damage_type = "fire"
@@ -460,6 +465,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /datum/intent/axe/cut/battle/greataxe/martyr
 	item_damage_type = "fire"
@@ -515,6 +521,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /obj/item/weapon/polearm/spear/grandmaster/Initialize()
 	. = ..()
@@ -544,6 +551,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
 	. = ..()

@@ -42,7 +42,7 @@
 	name = "trident of the depths"
 	desc = "An instrument of Abyssor's wrath to claim his bounties and punish the ignorant."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
-	icon_state = "tridentgold"
+	icon_state = "trident_holy"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	force = DAMAGE_SPEAR
@@ -78,6 +78,7 @@
 	armor_penetration = 5
 	can_parry = TRUE
 	has_inspect_verb = TRUE
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/abyssor
 
 /obj/item/fishingrod/abyssor_trident/Initialize()
 	. = ..()
@@ -160,4 +161,5 @@
 /obj/item/fishingrod/abyssor_trident/arcane
 	name = "Arcane Trident"
 	desc = "A conjured trident, it resonates with arcyne energy."
-	icon_state = "tridentblue"
+	icon_state = "trident_arcyne"
+	examine_highlight_type = null

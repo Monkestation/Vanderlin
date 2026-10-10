@@ -408,6 +408,7 @@
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "abyssorclaw"
 	item_weight = 350 GRAMS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/abyssor
 
 /obj/item/weapon/katar/silver
 	name = "silver katar"
@@ -516,6 +517,7 @@
 	force = DAMAGE_KNUCKLES + 2
 	item_weight = 200 GRAMS
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/eora
 
 /obj/item/weapon/knuckles/iron
 	name = "iron knuckles"

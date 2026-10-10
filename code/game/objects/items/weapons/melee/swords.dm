@@ -339,6 +339,7 @@
 	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
 	item_weight = 950 GRAMS
 	smeltresult = /obj/item/ingot/silver
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/noc
 
 /obj/item/weapon/sword/sabre/noc/Initialize(mapload)
 	. = ..()
@@ -746,6 +747,7 @@
 	item_weight = 650 GRAMS
 	SET_BASE_PIXEL(0, 0)
 	bigboy = FALSE
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/eora
 
 /obj/item/weapon/sword/rapier/blacksteel
 	name = "blacksteel rapier"
@@ -1095,6 +1097,7 @@
 	item_weight = 1.5 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/ravox
 
 /obj/item/weapon/sword/long/blacksteel
 	name = "blacksteel longsword"
@@ -1593,6 +1596,7 @@
 	icon_state = "astratasword"
 	item_weight = 3.5 KILOGRAMS
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/astrata
 
 /obj/item/weapon/sword/long/exe/silver
 	name = "silver executioner's sword"

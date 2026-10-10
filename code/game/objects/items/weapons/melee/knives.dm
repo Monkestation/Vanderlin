@@ -326,6 +326,7 @@
 	icon_state = "pestrasickle"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 	item_weight = 200 GRAMS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/pestra
 
 /obj/item/weapon/knife/dagger/steel/hand
 	name = "\proper fervor"

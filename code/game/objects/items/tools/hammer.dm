@@ -336,6 +336,7 @@
 	slot_flags = ITEM_SLOT_BACK
 	melt_amount = 150
 	sellprice = 1	//breaking bad cash pallet dot jpg
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/malum
 
 /obj/item/weapon/hammer/sledgehammer/war/malum/getonmobprop(tag)
 	. = ..()
