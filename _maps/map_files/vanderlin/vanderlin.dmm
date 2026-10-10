@@ -910,7 +910,7 @@
 /obj/structure/lever/hidden/keep{
 	redstone_id = "Keep-DungeonOuter"
 	},
-/turf/closed/wall/mineral/craftstone,
+/turf/closed/wall/mineral/stone,
 /area/indoors/town/keep/passages/basement)
 "arU" = (
 /obj/machinery/light/fueled/torchholder/r,
@@ -3377,12 +3377,6 @@
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/woodturned,
 /area/indoors/town/smithy)
-"bwk" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/indoors/town/keep/library)
 "bwl" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass,
@@ -4387,15 +4381,6 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/courtagent/prison)
-"bPX" = (
-/obj/structure/stairs/fancy/r{
-	dir = 4
-	},
-/obj/structure/stairs/fancy/l{
-	dir = 4
-	},
-/turf/open/floor/wood,
-/area/indoors/town/keep/halls/w)
 "bQg" = (
 /obj/structure/flora/grass/water,
 /turf/open/floor/dirt,
@@ -5633,6 +5618,7 @@
 	pixel_x = -2;
 	pixel_y = 6
 	},
+/obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
 "com" = (
@@ -19549,7 +19535,6 @@
 /turf/open/floor/twig,
 /area/indoors/soilsons)
 "hNJ" = (
-/obj/machinery/light/fueled/wallfire/candle,
 /obj/structure/fluff/clutter/shrub/red{
 	pixel_x = 2
 	},
@@ -19862,6 +19847,12 @@
 "hUp" = (
 /turf/open/floor/rooftop/green,
 /area/outdoors/town/keep/roof)
+"hUr" = (
+/obj/structure/lever/hidden/keep{
+	redstone_id = "Keep-MainCorridor"
+	},
+/turf/closed/wall/mineral/stonebrick,
+/area/indoors/town/keep/passages/groundfloor)
 "hUu" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -21121,7 +21112,7 @@
 /turf/open/floor/tile,
 /area/indoors/town/keep/halls/e)
 "iuV" = (
-/turf/closed/mineral,
+/turf/closed/wall/mineral/stone,
 /area/indoors/town/keep/lord_appt)
 "iuZ" = (
 /obj/structure/closet/crate/crafted_closet,
@@ -28458,6 +28449,12 @@
 /obj/structure/window/openclose/reinforced,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town)
+"llG" = (
+/obj/structure/fluff/walldeco/stone{
+	pixel_y = 32
+	},
+/turf/open/openspace,
+/area/indoors/town/keep/feast)
 "llH" = (
 /obj/structure/bed/shit,
 /turf/open/floor/metal/barograte,
@@ -31120,6 +31117,9 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
+"mln" = (
+/turf/closed/wall/mineral/stone,
+/area/indoors/town/keep/halls/n)
 "mlq" = (
 /obj/structure/mirror,
 /turf/open/floor/cobblerock,
@@ -36228,7 +36228,6 @@
 /obj/item/paint_palette{
 	pixel_y = -6
 	},
-/obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/library)
 "ojL" = (
@@ -44346,7 +44345,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/red)
 "rkR" = (
-/turf/closed/mineral,
+/turf/closed/wall/mineral/stone,
 /area/indoors/town/keep/halls/e)
 "rkW" = (
 /obj/structure/fluff/psycross,
@@ -47655,7 +47654,9 @@
 /obj/structure/chair/wood/alt/chair_noble/red{
 	dir = 8
 	},
-/obj/effect/landmark/start/archivist,
+/obj/effect/landmark/start/archivist{
+	dir = 8
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/archivist)
 "syS" = (
@@ -47991,12 +47992,6 @@
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/halls/w)
-"sEf" = (
-/obj/structure/stairs/stone,
-/obj/structure/stairs/stone,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/tile,
-/area/indoors/town/keep/basement)
 "sEi" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_x = -32
@@ -52551,6 +52546,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/theatre)
+"uyr" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/blocks,
+/area/indoors/town/keep/passages/groundfloor)
 "uyt" = (
 /obj/structure/fake_machine/stockpile{
 	pixel_x = -32;
@@ -53132,8 +53131,6 @@
 /area/indoors/town/cell)
 "uJQ" = (
 /obj/structure/stairs/stone,
-/obj/structure/stairs/stone,
-/obj/effect/decal/cleanable/dirt,
 /turf/open/floor/tile,
 /area/indoors/town/keep/halls/e)
 "uJR" = (
@@ -55622,7 +55619,7 @@
 	},
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/physician,
-/turf/open/floor/blocks,
+/turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/phys)
 "vDc" = (
 /obj/structure/fluff/walldeco/psybanner{
@@ -56089,11 +56086,6 @@
 "vLV" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/town/noble_manor/blue)
-"vMb" = (
-/obj/structure/stairs/stone,
-/obj/effect/decal/cleanable/dirt,
-/turf/open/floor/tile,
-/area/indoors/town/keep/halls/e)
 "vMq" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -56838,9 +56830,7 @@
 /turf/closed/wall/mineral/stone/moss,
 /area/indoors/town/church/crypt)
 "vZY" = (
-/obj/structure/window/openclose{
-	dir = 1
-	},
+/obj/structure/window/solid,
 /turf/open/floor/wood,
 /area/indoors/town/keep/throne)
 "wak" = (
@@ -61895,9 +61885,7 @@
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
 "xSu" = (
-/turf/open/floor/rooftop/green{
-	dir = 1
-	},
+/turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/library)
 "xSx" = (
 /obj/structure/chair/stool/crafted,
@@ -88157,7 +88145,7 @@ nHD
 vvX
 hCF
 qzt
-rRw
+kxM
 qhF
 iJu
 sDU
@@ -88571,7 +88559,7 @@ wxY
 wxY
 apB
 kRU
-sEf
+vgD
 cBr
 qFx
 qFx
@@ -122502,7 +122490,7 @@ lda
 jiN
 qBR
 oNy
-bPX
+dof
 rZH
 xJi
 kPc
@@ -122705,9 +122693,9 @@ qJA
 qBR
 xwx
 xwx
-xwx
+eXG
 gcW
-rDv
+kPc
 cxn
 xZl
 rSL
@@ -122903,10 +122891,10 @@ sxA
 iwU
 iwU
 iwU
-iwU
-iwU
-iwU
 mWk
+mWk
+mWk
+uyr
 sEc
 xJi
 kPc
@@ -123107,10 +123095,10 @@ mWk
 mWk
 pYm
 mWk
-mWk
-mWk
-eXG
-gcW
+iwU
+hUr
+xwx
+xJi
 kPc
 cxn
 jvw
@@ -123312,7 +123300,7 @@ mWk
 xwx
 xwx
 xwx
-xJi
+gcW
 kPc
 cxn
 pBz
@@ -128762,9 +128750,9 @@ vCu
 aLS
 qDS
 udh
-sxA
-mWk
-sxA
+iwU
+iwU
+iwU
 iUy
 ryT
 emG
@@ -129175,7 +129163,7 @@ uAK
 uPm
 iUy
 cCy
-vMb
+uJQ
 gLU
 uee
 rPe
@@ -160487,7 +160475,7 @@ hyg
 cnZ
 uyT
 uyT
-bwk
+uyT
 aep
 hyg
 mQz
@@ -162899,7 +162887,7 @@ hyg
 dJr
 vdx
 ghA
-msR
+ghA
 ghA
 xSu
 jhg
@@ -163113,8 +163101,8 @@ fow
 xqQ
 xqQ
 xqQ
-xqQ
-xqQ
+cxn
+llG
 sIp
 otp
 xqQ
@@ -164325,8 +164313,8 @@ mJW
 xqQ
 xqQ
 xqQ
-xqQ
-xqQ
+cxn
+llG
 sIp
 otp
 xqQ
@@ -165725,8 +165713,8 @@ uHq
 uHq
 kap
 aps
-fdB
-fdB
+mln
+mln
 vmT
 kAV
 dNF
@@ -165927,8 +165915,8 @@ pwY
 xeN
 jek
 aps
-fdB
-fdB
+mln
+mln
 vmT
 fHW
 fHW
