@@ -175,6 +175,10 @@
 	category = "Ammo"
 	craftdiff = 0
 
+/datum/anvil_recipe/weapons/iron/arrows/broadhead
+	name = "Broadhead Arrows"
+	created_item = /obj/item/ammo_casing/caseless/arrow/broadhead
+
 /datum/anvil_recipe/weapons/iron/bolts
 	name = "Crossbow Bolts"
 	appro_skill = /datum/attribute/skill/craft/engineering
@@ -182,6 +186,10 @@
 	created_item = /obj/item/ammo_casing/caseless/bolt
 	output_amount = 5
 	category = "Ammo"
+
+/datum/anvil_recipe/weapons/iron/bolts/broadhead
+	name = "Broadhead Crossbow Bolts"
+	created_item = /obj/item/ammo_casing/caseless/bolt/broadhead
 
 /datum/anvil_recipe/weapons/iron/javelin
 	name = "Iron Javelins"

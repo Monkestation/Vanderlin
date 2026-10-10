@@ -10,6 +10,12 @@
 /obj/item/ammo_holder/quiver/arrows
 	fill_type = /obj/item/ammo_casing/caseless/arrow
 
+/obj/item/ammo_holder/quiver/arrows/bonearrow
+	fill_type = /obj/item/ammo_casing/caseless/arrow/bone
+
+/obj/item/ammo_holder/quiver/arrows/broadhead
+	fill_type = /obj/item/ammo_casing/caseless/arrow/broadhead
+
 /obj/item/ammo_holder/quiver/arrows/water
 	fill_type = /obj/item/ammo_casing/caseless/arrow/water
 	fill_to = 10
