@@ -7787,6 +7787,9 @@
 /obj/structure/ladder,
 /turf/open/floor/ruinedwood,
 /area/outdoors/town/keep/roof)
+"dha" = (
+/turf/open/openspace,
+/area/under/town/basement)
 "dhc" = (
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/keep/guest/guest2)
@@ -17545,21 +17548,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/town)
-"gYs" = (
-/obj/structure/flora/grass/bush/wall/tall{
-	pixel_x = -8
-	},
-/obj/structure/flora/grass/bush_meagre{
-	pixel_x = 20;
-	pixel_y = -5
-	},
-/obj/structure/flora/grass/bush{
-	layer = 4.4;
-	pixel_x = 25;
-	pixel_y = 7
-	},
-/turf/open/floor/cobble/mossy,
-/area/under/town/basement)
 "gYv" = (
 /obj/structure/fluff/statue/gargoyle/moss,
 /turf/open/floor/grass,
@@ -37476,8 +37464,8 @@
 /turf/open/floor/metal/barograte,
 /area/outdoors/town)
 "oHB" = (
-/obj/structure/dungeon_entry/center/vanderlin,
-/turf/open/floor/cobble/mossy,
+/obj/structure/dungeon_elevator,
+/turf/open/openspace,
 /area/under/town/basement)
 "oHO" = (
 /obj/structure/bars,
@@ -54384,6 +54372,21 @@
 /obj/structure/fluff/railing/border,
 /turf/open/openspace,
 /area/indoors/town/keep/halls/w)
+"vdj" = (
+/obj/structure/flora/grass/bush_meagre{
+	pixel_x = 20;
+	pixel_y = -5
+	},
+/obj/structure/flora/grass/bush/wall/tall{
+	pixel_x = -8
+	},
+/obj/structure/flora/grass/bush{
+	layer = 4.4;
+	pixel_x = 25;
+	pixel_y = 7
+	},
+/turf/open/floor/cobble/mossy,
+/area/under/town/basement)
 "vdk" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass/yel,
@@ -87402,7 +87405,7 @@ ozq
 jQb
 cZN
 cZN
-gYs
+ryr
 gcf
 msU
 lHj
@@ -87604,7 +87607,7 @@ ozq
 jQb
 cZN
 cZN
-ryr
+vdj
 lUx
 msU
 wRn
@@ -87805,7 +87808,7 @@ ozq
 ozq
 jQb
 cZN
-cZN
+dha
 oHB
 ryr
 ryr
@@ -88007,8 +88010,8 @@ ozq
 ozq
 jQb
 cZN
-cZN
-ryr
+dha
+dha
 wRn
 ryr
 ryr
