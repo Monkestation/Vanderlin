@@ -84,7 +84,13 @@
 			owner.adjust_temp_blindness(-HEAL_AGGRAVATED * (level) SECONDS)
 			owner.adjust_eye_blur(-HEAL_AGGRAVATED * (level) SECONDS)
 
-	if(level >= 7 && prob(5))
+	// No more broken organs
+	if(level >= 6)
+		var/list/organ_list = owner.internal_organs
+		for(var/obj/item/organ/organ as anything in organ_list)
+			organ.applyOrganDamage(-HEAL_BASHING_LETHAL * (level * 0.5))
+
+	if(level >= 7 && prob(10))
 		owner.regenerate_limb(silent = FALSE)
 
 	// Masquerade violation check

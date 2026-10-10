@@ -6,8 +6,8 @@
 	cast_range = 1
 	charge_time = 2 SECONDS
 	spell_cost = 0
-	cooldown_time = 3 MINUTES
-	var/enslavement_time = 30 SECONDS
+	cooldown_time = 1 MINUTES
+	var/enslavement_time = 20 SECONDS
 	var/blood_cost = 50
 
 /datum/action/cooldown/spell/enslave_mortal/can_cast_spell(feedback)

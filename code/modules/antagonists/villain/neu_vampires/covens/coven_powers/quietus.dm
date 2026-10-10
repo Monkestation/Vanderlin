@@ -149,6 +149,13 @@
 	cooldown_length = 5 SECONDS
 	violates_masquerade = TRUE
 
+/datum/coven_power/quietus/scorpions_touch/can_activate()
+	. = ..()
+	if(owner.get_active_held_item())
+		to_chat(owner, span_danger("Your main hand is busy!"))
+		owner.adjust_bloodpool(vitae_cost)
+		return
+
 /datum/coven_power/quietus/scorpions_touch/activate()
 	. = ..()
 	owner.put_in_active_hand(new /obj/item/melee/touch_attack/quietus(owner))
@@ -169,7 +176,12 @@
 		L.adjustFireLoss(10)
 		L.AdjustKnockdown(3 SECONDS)
 		L.adjust_stamina(-50)
+		remove_hand_with_no_refund(src)
 	return ..()
+
+/obj/item/melee/touch_attack/dropped(mob/user)
+    . = ..()
+    qdel(src)
 
 //BAAL'S CARESS
 /datum/coven_power/quietus/baals_caress
@@ -196,12 +208,13 @@
 		if(alert)
 			to_chat(owner, span_warning("[src] can only be used on bladed weapons!"))
 		return FALSE
-
 	return .
 
 /datum/coven_power/quietus/baals_caress/activate(obj/item/weapon/target)
 	. = ..()
-	target.AddElement(/datum/element/one_time_poison, list(/datum/reagent/poison/doom = 2))
+	if(!target.reagents)
+		target.AddElement(/datum/element/tipped_item)
+	target.reagents.add_reagent(/datum/reagent/poison/doom, 2)
 
 /datum/coven_power/quietus/taste_of_death
 	name = "Taste of Death"
@@ -218,20 +231,28 @@
 //DAGON'S CALL
 /datum/coven_power/quietus/dagons_call
 	name = "Dagon's Call"
-	desc = "Curse the last person you attacked to drown in their own blood."
+	desc = "Curse the last person you fought, causing their blood to boil."
 
 	level = 5
 	check_flags = COVEN_CHECK_CAPABLE | COVEN_CHECK_CONSCIOUS | COVEN_CHECK_IMMOBILE | COVEN_CHECK_LYING
 	cooldown_length = 30 SECONDS
 
 /datum/coven_power/quietus/dagons_call/activate()
-	. = ..()
+
 	var/mob/living/lastattacker = owner.lastattacker_weakref?.resolve()
-	if(isliving(lastattacker))
-		lastattacker.adjust_stamina(-80)
-		lastattacker.adjust_fire_stacks(6)
-		lastattacker.adjustFireLoss(10)
-		to_chat(owner, "You send your curse on [lastattacker], the last creature you attacked.")
-	else
+
+	if(!isliving(lastattacker))
 		to_chat(owner, "You don't seem to have last attacked soul earlier...")
+		owner.adjust_bloodpool(vitae_cost)
 		return
+	. = ..()
+	for(var/atom/I in lastattacker.get_equipped_items())
+		var/datum/enchantment/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/silver)
+		if(ench)
+			to_chat(owner, span_danger("Silver dispells the curse! They are protected for now."))
+			return
+
+	lastattacker.adjust_stamina(-80)
+	lastattacker.fire_act(6, 6)
+	lastattacker.adjustFireLoss(10)
+	to_chat(owner, "You send your curse on [lastattacker], the last creature you attacked.")
