@@ -35,6 +35,31 @@
 	name = "tin zigbox"
 	created_item = /obj/item/storage/fancy/cigarettes/tinzig/empty
 
+/datum/anvil_recipe/tools/tin/soldier
+	name = "toy soldier"
+	created_item = /obj/item/child_toy/toy_soldier/soldier
+	output_amount = 5
+
+/datum/anvil_recipe/tools/tin/rider
+	name = "toy rider"
+	created_item = /obj/item/child_toy/toy_soldier/rider
+	output_amount = 2
+
+/datum/anvil_recipe/tools/tin/canon
+	name = "toy canon"
+	created_item = /obj/item/child_toy/toy_soldier/canon
+	output_amount = 2
+
+/datum/anvil_recipe/tools/tin/archer
+	name = "toy archer"
+	created_item = /obj/item/child_toy/toy_soldier/archer
+	output_amount = 5
+
+/datum/anvil_recipe/tools/tin/magos
+	name = "toy magos"
+	created_item = /obj/item/child_toy/toy_soldier/magos
+	output_amount = 3
+
 // --------- COPPER -----------
 
 /datum/anvil_recipe/tools/copper
