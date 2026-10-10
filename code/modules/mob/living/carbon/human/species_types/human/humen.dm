@@ -19,10 +19,10 @@
 /datum/species/human/northern
 	name = "Humen"
 	id = SPEC_ID_HUMEN
-	multiple_accents = list(
-		"No Accent" = ACCENT_NONE,
-		"Grenzelhoft Accent" = ACCENT_GRENZ,
-		"Ossland Accent" = ACCENT_OSSLAND,
+	accents_list = list(
+		ACCENT_NONE,
+		ACCENT_GRENZ,
+		ACCENT_OSSLAND
 	)
 	desc = "Humenity, created in Psydon's image. \
 	\n\n\

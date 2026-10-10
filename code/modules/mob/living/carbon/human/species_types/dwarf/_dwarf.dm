@@ -4,13 +4,15 @@
 /datum/species/dwarf
 	name = "Dwarfb"
 	id = SPEC_ID_DWARF
-	multiple_accents = list(
-		"Dwarf Accent" = ACCENT_DWARF,
-		"Ossland Accent" = ACCENT_OSSLAND,
-		"Grenzelhoft Accent" = ACCENT_GRENZ,
+	accents_list = list(
+		ACCENT_DWARF,
+		ACCENT_OSSLAND,
+		ACCENT_GRENZ,
+		ACCENT_NONE
 	)
+
+	default_accent = ACCENT_DWARF
 	changesource_flags = WABBAJACK
-	native_language = "Dwarfish"
 	exotic_bloodtype = /datum/blood_type/human/dwarf
 	meat = list(/obj/item/reagent_containers/food/snacks/meat/fatty/dwarf = 1, /obj/item/reagent_containers/food/snacks/fat = 0.25, /obj/item/reagent_containers/food/snacks/meat/steak/human = 0.5)
 
@@ -21,7 +23,6 @@
 
 /datum/species/dwarf/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/dwarvish)
 
@@ -35,7 +36,6 @@
 
 /datum/species/dwarf/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/dwarvish)
 
 /datum/species/dwarf/qualifies_for_rank(rank, list/features)

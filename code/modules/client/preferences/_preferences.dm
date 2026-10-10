@@ -1263,7 +1263,7 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 		if(is_misc_banned(parent.ckey, BAN_MISC_PUNISHMENT_CURSE))
 			ADD_TRAIT(character, TRAIT_PUNISHMENT_CURSE, TRAIT_BAN_PUNISHMENT)
 
-	if(pref_species.multiple_accents && length(pref_species.multiple_accents))
+	if(pref_species.accents_list && length(pref_species.accents_list))
 		change_accent = TRUE
 	else
 		change_accent = FALSE

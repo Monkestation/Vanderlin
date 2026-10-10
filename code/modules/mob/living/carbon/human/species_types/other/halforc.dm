@@ -22,11 +22,11 @@
 /datum/species/halforc
 	name = "Half-Orc"
 	id = SPEC_ID_HALF_ORC
-	multiple_accents = list(
-		"Half-Orc Accent" = ACCENT_HORC,
-		"Ossland Accent" = ACCENT_OSSLAND,
+	accents_list = list(
+		ACCENT_HORC,
+		ACCENT_OSSLAND
 	)
-	native_language = "Orcish"
+	default_accent = ACCENT_HORC
 	desc = "The bastards of Graggar. \
 	\n\n\
 	Half-Orcs are the offspring of orcs and another species, half-orcs, \
@@ -131,7 +131,6 @@
 
 /datum/species/halforc/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/orcish)
 
@@ -145,7 +144,6 @@
 
 /datum/species/halforc/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/orcish)
 
 /datum/species/halforc/qualifies_for_rank(rank, list/features)

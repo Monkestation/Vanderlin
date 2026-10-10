@@ -116,8 +116,6 @@
 	possible_ages = list(AGE_IMMORTAL)
 	use_skintones = TRUE
 
-	native_language = "Common"
-
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/automaton.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/m/automaton.dmi'
 
@@ -160,7 +158,6 @@
 	C.AddComponent(/datum/component/augmentable)
 	C.AddComponent(/datum/component/damage_shutdown)
 
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	RegisterSignal(C, COMSIG_MOB_TOGGLE_CMODE, PROC_REF(cmode_changed))
 
 
@@ -176,7 +173,6 @@
 
 	C.remove_movespeed_modifier(MOVESPEED_ID_AUTOMATON)
 
-	UnregisterSignal(C, list(COMSIG_MOB_SAY, COMSIG_MOB_TOGGLE_CMODE))
 	C.remove_language(/datum/language/common)
 
 

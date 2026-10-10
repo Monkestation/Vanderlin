@@ -53,6 +53,12 @@
 	liked_food = NONE
 	possible_ages = NORMAL_AGES_LIST_CHILD
 	changesource_flags = WABBAJACK
+	default_accent = ACCENT_DELF
+	accents_list = list(
+		ACCENT_DELF,
+		ACCENT_ELF,
+		ACCENT_NONE
+	)
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mem.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/ft.dmi'
 	hairyness = "t3"
@@ -184,4 +190,3 @@
 	return last_names
 
 /datum/species/elf/dark/after_creation(mob/living/carbon/human/C)
-	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 2)

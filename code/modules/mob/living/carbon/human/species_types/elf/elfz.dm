@@ -45,6 +45,11 @@
 	disliked_food = NONE
 	liked_food = NONE
 	possible_ages = NORMAL_AGES_LIST_CHILD
+	accents_list = list(
+		ACCENT_ELF,
+		ACCENT_DELF,
+		ACCENT_NONE
+	)
 	changesource_flags = WABBAJACK
 	limbs_icon_m = 'icons/roguetown/mob/bodies/m/mem.dmi'
 	limbs_icon_f = 'icons/roguetown/mob/bodies/f/ft.dmi'
@@ -159,9 +164,6 @@
 /datum/species/elf/zizo/get_possible_surnames(gender = MALE)
 	var/static/list/last_names = file2list('strings/rt/names/elf/elfsnf.txt')
 	return last_names
-
-/datum/species/elf/zizo/after_creation(mob/living/carbon/human/C)
-	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 2)
 
 /datum/species/elf/zizo/preference_accessible(datum/preferences/prefs)
 	. = ..()

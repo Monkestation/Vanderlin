@@ -22,12 +22,12 @@
 /datum/species/dwarf/dworc
 	name = "Dwarven Half-Orc"
 	id = SPEC_ID_DWARF_ORC
-	multiple_accents = list(
-		"Half-Orc Accent" = ACCENT_HORC,
-		"Dwarf Accent" = ACCENT_DWARF,
-		"Ossland Accent" = ACCENT_OSSLAND,
+	accents_list = list(
+		ACCENT_HORC,
+		ACCENT_DWARF,
+		ACCENT_OSSLAND
 	)
-	native_language = "Orcish"
+	default_accent = ACCENT_HORC
 	desc = "Orkified dwarves. \
 	\n\n\
 	Often insultingly called hoblins (half-goblins) due to their size, are the offspring of dwarf-orc and another species, \

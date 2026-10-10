@@ -292,55 +292,18 @@
 	var/punch_damage = 0
 	var/kick_damage = 0
 
-	/// Native language for accents
-	var/native_language = "Imperial"
-	/// Accent based of the language
-	var/accent_language
-	/// For races that can have more than one Accent such as the Half-Drow and Half-Elf
-	var/multiple_accents
+
+	/// Accent that will allways be applied (even on top of other accent)
+	var/forced_native_accent
+
+	/// default accent that applies if person's accent variable is default or null.
+	var/default_accent
+	/// list of accents for this species
+	var/accents_list
 
 ///////////
 // PROCS //
 ///////////
-
-/datum/species/proc/get_accent(language, variant = 0)
-	switch(language)
-		if("Old Psydonic", "Psydonic")
-			return strings("accents/grenz_replacement.json", "grenz")
-		if("Zalad")
-			return strings("accents/zalad_replacement.json", "arabic")
-		if("Imperial")
-			return
-		if("Elfish")
-			if(variant == 1)
-				return strings("accents/russian_replacement.json", "russian")
-			else
-				return strings("accents/french_replacement.json", "french")
-		if("Dwarfish")
-			return strings("accents/dwarf_replacement.json", "dwarf")
-		if("Infernal")
-			return strings("accents/spanish_replacement.json", "spanish")
-		if("Celestial", "Lunaris")
-			return
-		if("Orcish")
-			return strings("accents/halforc_replacement.json", "halforc")
-		if("Halfling")
-			return strings("accents/halfling_replacement.json", "halfling")
-		if("Utterances")
-			return strings("accents/kobold_replacement.json", "kobold")
-		if("Rous")
-			return strings("accents/rousman_replacement.json", "rous")
-		if("Deepspeak")
-			return strings("accents/triton_replacement.json", "triton")
-		if("Pirate")
-			return strings("accents/pirate_replacement.json", "pirate")
-		if("Zizo Chant")
-			return
-		if("Osslandic")
-			return strings("accents/ossland_replacement.json", "ossland")
-		if("Rockhill")
-			return strings("accents/rockhill_replacement.json", "rockhill")
-	return
 
 /datum/species/proc/get_pain_emote(power)
 	if(power < PAIN_EMOTE_MINIMUM)
@@ -387,81 +350,44 @@
 
 
 		var/mob/living/carbon/human/human
-		var/list/species_accent
-		var/special_accent = FALSE
 
 		if(ismob(source))
 			human = source
-			var/nativelang = human.dna.species.native_language
-			species_accent = human.dna.species.accent_language
+			var/list/accents_to_apply = list()
+	
+			if(human.accent == ACCENT_DEFAULT || human.accent == null)
+				var/default_accent = human.dna.species.default_accent
+				if(default_accent != null)
+					accents_to_apply |= default_accent
+			else if(human.accent != ACCENT_NONE)
+				accents_to_apply |= human.accent
 
-			var/language_check
+			if(human.dna.species.forced_native_accent != null)
+				accents_to_apply |= human.dna.species.forced_native_accent
 
-
-			var/list/accents_list = list(
-				ACCENT_NONE,
-				ACCENT_DWARF,
-				ACCENT_DELF,
-				ACCENT_ELF,
-				ACCENT_TIEFLING,
-				ACCENT_HORC,
-				ACCENT_TRITON,
-				ACCENT_GRENZ,
-				ACCENT_PIRATE,
-				ACCENT_MIDDLE_SPEAK,
-				ACCENT_ZALAD,
-				ACCENT_HALFLING,
-				ACCENT_KOBOLD,
-				ACCENT_ROUSMAN,
-				ACCENT_WINTERMARE,
-				ACCENT_OSSLAND,
-				ACCENT_ROCKHILL,
-			)
-
-			///This will only trigger for donators
-			if(human.accent in accents_list)
-				/// If the human is using a specie with multiple accents
-				if(length(human.dna.species.multiple_accents))
-					var/normalized_accent = (human.accent in GLOB.accent_list) ? GLOB.accent_list[human.accent] : human.accent
-					/// If the accent they picked is different to their species accent, in this case a Half Elf with an Elf Accent would not get special_accent set to TRUE.
-					if(!(normalized_accent == species_accent))
-						species_accent = human.return_accent_list()
-						special_accent = TRUE
+			for(var/accent in accents_to_apply)
+				var/list/related_languages 
+				if(islist(GLOB.accent_languages_blacklist[accent]))
+					related_languages = GLOB.accent_languages_blacklist[accent]
 				else
-					species_accent = human.return_accent_list()
-					special_accent = TRUE
+					related_languages = list(GLOB.accent_languages_blacklist[accent])
 
-			var/list/language_map = list(
-				/datum/language/common = "Imperial",
-				/datum/language/elvish = "Elfish",
-				/datum/language/dwarvish = "Dwarfish",
-				/datum/language/hellspeak = "Infernal",
-				/datum/language/orcish = "Orcish",
-				/datum/language/celestial = "Celestial",
-				/datum/language/zalad = "Zalad",
-				/datum/language/deepspeak = "Deepspeak",
-				/datum/language/oldpsydonic = "Old Psydonic",
-				/datum/language/newpsydonic = "Psydonic",
-				/datum/language/undead = "Zizo Chant"
-			)
+				var/skip_accent = FALSE
+				for(var/language_entry in related_languages)
+					if(language_entry == language)
+						skip_accent = TRUE
+				if(skip_accent)
+					continue
+				
+				var/list/accent_words_list = GLOB.accent_list[accent]
+				for(var/key in accent_words_list)
+					var/value = accent_words_list[key]
+					if(islist(value))
+						value = pick(value)
 
-			if (language in language_map)
-				language_check = language_map[language]
-			var/unaccented = FALSE
-			if(((language_check == "Psydonic") && (nativelang == "Old Psydonic")) || ((language_check == "Old Psydonic") && (nativelang == "Psydonic")))
-				unaccented = TRUE
-			else if(nativelang == language_check)
-				unaccented = TRUE
-			if(!unaccented || special_accent)
-				if(species_accent)
-					for(var/key in species_accent)
-						var/value = species_accent[key]
-						if(islist(value))
-							value = pick(value)
-
-						message = replacetextEx(message, " [uppertext(key)]", " [uppertext(value)]")
-						message = replacetextEx(message, " [capitalize(key)]", " [capitalize(value)]")
-						message = replacetextEx(message, " [key]", " [value]")
+					message = replacetextEx(message, " [uppertext(key)]", " [uppertext(value)]")
+					message = replacetextEx(message, " [capitalize(key)]", " [capitalize(value)]")
+					message = replacetextEx(message, " [key]", " [value]")
 
 	speech_args[SPEECH_MESSAGE] = trim(message)
 
@@ -479,8 +405,6 @@
 	..()
 
 /datum/species/proc/after_creation(mob/living/carbon/human/H)
-	if(H.mind)
-		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	return TRUE
 
 /datum/species/proc/check_roundstart_eligible()
@@ -860,6 +784,8 @@
 
 	SEND_SIGNAL(C, COMSIG_SPECIES_GAIN, src, old_species)
 
+	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
+
 /datum/species/proc/on_gender_update(mob/living/carbon/human/C, old_gender)
 	if(old_gender)
 		if(statsheet_male || statsheet_female)
@@ -893,6 +819,8 @@
 		C.remove_faction(inherent_factions)
 
 	SEND_SIGNAL(C, COMSIG_SPECIES_LOSS, src)
+
+	UnregisterSignal(C, COMSIG_MOB_SAY)
 
 /datum/species/proc/handle_body(mob/living/carbon/human/H)
 	H.remove_overlay(BODY_LAYER)
