@@ -61,19 +61,8 @@
 	name = "The Circus"
 	max_spawns = 1
 	shared_wave_type = /datum/migrant_wave/jestertroupe
-	downgrade_wave = /datum/migrant_wave/jestertroupe_down
 	weight = 10
 	roles = list(
 		/datum/migrant_role/jestertroupe = 3
-	)
-	greet_text = "Bread and Circuses. That's how little it takes to entertain the peasantry. You aren't funny for money, you're funny by nature."
-
-/datum/migrant_wave/jestertroupe_down
-	name = "The Comedian"
-	shared_wave_type = /datum/migrant_wave/jestertroupe
-	can_roll = FALSE
-	weight = 35
-	roles = list(
-		/datum/migrant_role/jestertroupe = 1,
 	)
 	greet_text = "Bread and Circuses. That's how little it takes to entertain the peasantry. You aren't funny for money, you're funny by nature."

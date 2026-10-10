@@ -156,7 +156,6 @@
 	name = "Rousman Cheese Convoy"
 	max_spawns = 4
 	shared_wave_type = /datum/migrant_wave/rousman_cheese
-	downgrade_wave = /datum/migrant_wave/rousman_cheese_down
 	can_roll = FALSE // Admin activated only
 	weight = 0
 	triumph_threshold = 50
@@ -164,29 +163,6 @@
 		/datum/migrant_role/rousman_cheese/overseer = 1,
 		/datum/migrant_role/rousman_cheese/cheesemaker = 2,
 		/datum/migrant_role/rousman_cheese/cheesemonger = 2
-	)
-	greet_text = "A somewhat more intelligent group of rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
-
-/datum/migrant_wave/rousman_cheese_down
-	name = "Rousman Expedition"
-	max_spawns = 4
-	shared_wave_type = /datum/migrant_wave/rousman_cheese
-	downgrade_wave = /datum/migrant_wave/rousman_cheese_down_one
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/rousman_cheese/overseer = 1,
-		/datum/migrant_role/rousman_cheese/cheesemaker = 1,
-		/datum/migrant_role/rousman_cheese/cheesemonger = 1
-	)
-	greet_text = "A somewhat more intelligent group of rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
-
-/datum/migrant_wave/rousman_cheese_down_one
-	name = "Rousman Expedition"
-	max_spawns = 4
-	shared_wave_type = /datum/migrant_wave/rousman_cheese
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/rousman_cheese/overseer = 1,
 	)
 	greet_text = "A somewhat more intelligent group of rousmen, those who truly appreciate the value of cheese products and wish to spread them to all."
 
