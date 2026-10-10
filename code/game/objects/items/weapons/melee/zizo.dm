@@ -1,6 +1,6 @@
 /obj/item/weapon/sword/arming/zizo_arming
 	name = "darksteel arming sword"
-	desc = "A short dark red blade, built upon a reliable design that has served for centuries. Called forth from Her will, if you wield this blade you are to be feared, if you do not, you are dead."
+	desc = "A short, dark red blade, built upon a reliable design that has served for centuries. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon_state = "zizoarming"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	melting_material = /datum/material/avantyne
@@ -9,7 +9,7 @@
 
 /obj/item/weapon/sword/rapier/zizo_rapier
 	name = "darksteel rapier"
-	desc = "A tapered dark red blade with a specialized stabbing tip. Called forth from Her will, if you wield this blade you are to be feared, if you do not, you are dead."
+	desc = "A tapered, dark red blade with a specialized stabbing tip. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon_state = "zizorapier"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	melting_material = /datum/material/avantyne
@@ -18,7 +18,7 @@
 
 /obj/item/weapon/sword/long/zizo_longsword
 	name = "darksteel longsword"
-	desc = "A long dark red hand-and-a-half blade. Called forth from Her will, if you wield this blade you are to be feared, if you do not, you are dead."
+	desc = "A long, dark red hand-and-a-half blade. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "zizolongsword"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
@@ -28,7 +28,7 @@
 
 /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword
 	name = "darksteel greatsword"
-	desc = "A dark red blade of dangerous proportions. Called forth from Her will, if you wield this blade you are to be feared, if you do not, you are dead."
+	desc = "A dark red blade of dangerous proportions. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon_state = "zizogsw"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	item_weight = 2.4 KILOGRAMS
@@ -50,7 +50,7 @@
 
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser
 	name = "darksteel kriegsmesser"
-	desc = "A dark red curved blade. Called forth from Her will, if you wield this blade you are to be feared, if you do not, you are dead."
+	desc = "A dark red curved blade. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon_state = "zizosword"
 	wdefense = ULTMATE_PARRY
 	sellprice = 0 // Super evil Zizo sword, nobody wants this

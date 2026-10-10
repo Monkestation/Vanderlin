@@ -2,7 +2,7 @@
 ==========================================================*/
 /obj/item/weapon/flail
 	name = "iron flail"
-	desc = "A sturdy handle affixed to a cruel spiked ball with a harrowing metal chain."
+	desc = "A sturdy handle, affixed to a cruel spiked ball with a harrowing metal chain."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	force = DAMAGE_NORMAL_FLAIL
@@ -48,14 +48,14 @@
 //................ Militia Flail ............... //
 /obj/item/weapon/flail/militia
 	name = "militia flail"
-	desc = "A lucky hit from such a flail can squash a cheap helmet along with the wearer's skull."
+	desc = "A lucky hit from such a flail can squash a cheap helmet, along with the wearer's skull."
 	icon_state = "militiaflail"
 	item_weight = 1.5 KILOGRAMS
 
 //................ Wooden Flail ............... // Obsolete by the thresher? No smash so its bad
 /obj/item/weapon/flail/towner
 	name = "wooden flail"
-	desc = "During peacetime these flails are used to thresh wheat. During wartime - to chase off marauders."
+	desc = "During peacetime, these flails are used to thresh wheat. During wartime - to chase off marauders."
 	icon_state = "peasantflail"
 	force = DAMAGE_WEAK_FLAIL
 	possible_item_intents = list(MACE_WDSTRIKE)
@@ -86,7 +86,7 @@
 
 /obj/item/weapon/flail/sflail/necraflail
 	name = "swift journey"
-	desc = "The striking head resembles Necra's original skull, striking true with a sculpted emblem of love and sacrifice. Perhaps one of the few Psydonic-designed emblems of The Ten left."
+	desc = "The striking head resembles Necra's original skull, striking true with a sculpted emblem of love and sacrifice. Perhaps one of the few Psydonic-designed emblems of the Ten left."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "necraflail"
 	item_weight = 1.4 KILOGRAMS
@@ -121,7 +121,7 @@
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
 	name = "psydonian flail"
-	desc = "A flail fashioned with the iconography of Psydon, and crafted entirely out of silver."
+	desc = "A flail fashioned with the iconography of Psydon, crafted entirely out of silver."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyflail"
 	force = DAMAGE_GOOD_FLAIL
@@ -150,7 +150,7 @@
 //................ Blacksteel Flail ............... //
 /obj/item/weapon/flail/blacksteel
 	name = "blacksteel flail"
-	desc = "An elegant flail of blacksteel. The heftsome weight makes it unmatched for driving back plate-armored opponents, so long as one \
+	desc = "An elegant flail of blacksteel. The hefty weight makes it unmatched for driving back plate-armored opponents, so long as one \
 	has the stamina to swing its alloyed chains around."
 	icon_state = "bs_flail"
 	force = DAMAGE_GOOD_FLAIL + 2
@@ -163,7 +163,7 @@
 //................ Bloodsteel Flail ............... //
 /obj/item/weapon/flail/bloodsteel
 	name = "bloodsteel flail"
-	desc = "A heavy carved bloodstone attached to a chain of red bloodsteel, built to crush even the strongest of armors."
+	desc = "A heavy, carved bloodstone attached to a chain of red bloodsteel, built to crush even the strongest of armor."
 	icon_state = "bs_flail"
 	force = DAMAGE_GOOD_FLAIL + 3
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLOODSTEEL
