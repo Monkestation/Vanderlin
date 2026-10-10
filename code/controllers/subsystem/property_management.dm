@@ -358,15 +358,7 @@ SUBSYSTEM_DEF(housing)
 			T.ScrapeAway()
 
 /datum/controller/subsystem/housing/proc/check_access(mob/user)
-	if(!has_world_trait(/datum/world_trait/delver))
-		return TRUE
-	if(!user || !user.client)
-		return FALSE
-
-	for(var/datum/property_controller/controller as anything in property_controllers)
-		if(controller.check_access(user))
-			return TRUE
-	return FALSE
+	return TRUE
 
 /datum/property_controller
 	var/obj/effect/landmark/house_spot/linked_property

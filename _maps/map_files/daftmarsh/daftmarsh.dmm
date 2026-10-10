@@ -114,10 +114,6 @@
 	dir = 4
 	},
 /area/under/town/sewer)
-"aff" = (
-/obj/structure/dungeon_entry,
-/turf/open/floor/cobble/mossy,
-/area/outdoors/basin/safe)
 "afp" = (
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/keep/guest/guest1)
@@ -115437,7 +115433,7 @@ ftQ
 ftQ
 ftQ
 ftQ
-aff
+rqT
 cDu
 cDu
 rqT

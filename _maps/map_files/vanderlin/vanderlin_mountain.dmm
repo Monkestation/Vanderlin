@@ -3360,7 +3360,11 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "aqm" = (
-/obj/structure/dungeon_entry,
+/obj/structure/waystone{
+	pixel_y = 2;
+	pixel_x = 16
+	},
+/obj/structure/flora/grass/herb/euphrasia,
 /turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
 "aqn" = (
@@ -12271,6 +12275,10 @@
 	dir = 4
 	},
 /turf/open/water/river,
+/area/outdoors/mountains/anvil/snowyforest)
+"iqq" = (
+/obj/structure/flora/grass/herb/euphrasia,
+/turf/open/floor/snow/patchy,
 /area/outdoors/mountains/anvil/snowyforest)
 "iqF" = (
 /obj/effect/decal/cleanable/blood/tracks,
@@ -118893,7 +118901,7 @@ aoM
 aoM
 acA
 agW
-aLm
+iqq
 aKS
 aLm
 aPv

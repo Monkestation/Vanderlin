@@ -238,6 +238,7 @@
 	attack_delay = 0.5 SECONDS
 	cooldown = 15 SECONDS
 	stamina_cost = 15	//Stamina cost
+	check_starting_loc = FALSE
 	var/min_dist = 3
 	var/push_dir
 

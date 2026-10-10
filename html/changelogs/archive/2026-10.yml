@@ -56,3 +56,17 @@
   - map: Very slight adjustments of some ruined structures in the bog.
   ta3754859-max:
   - map: fixes logs in thatchwood's smithy alongside removing broken tile objects
+2026-10-07:
+  realforest2001:
+  - bugfix: Fixed Planar Shift breaking if you somehow fall out of it.
+  - bugfix: Fixed misty step being castable beyond range.
+  - bugfix: Fixed werewolves being given a howl that does nothing.
+  - rscadd: Changed Eora to not be homophobic for no reason.
+  - bugfix: Fixed Baothan helmet description.
+  - bugfix: Fixed being able to combat-buckle someone.
+  - admin: Added a log for entering Vampire Blood Frenzy.
+  - code_imp: Removed an unused antag variable.
+2026-10-08:
+  DustanHache:
+  - bugfix: Fixed Energize and Reinvigorate/refresh. They both restore stamina and
+      energy now like they say they should.

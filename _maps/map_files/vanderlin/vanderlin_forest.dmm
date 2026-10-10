@@ -19,7 +19,7 @@
 /turf/open/water/marsh,
 /area/under/cave)
 "af" = (
-/obj/machinery/light/fueled/firebowl/stump,
+/obj/structure/waystone,
 /turf/open/floor/cobblerock,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "ah" = (

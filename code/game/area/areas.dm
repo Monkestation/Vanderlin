@@ -90,7 +90,6 @@
 
 	var/threat_region = "" // Key used to look up threat region this area belongs to
 
-	var/delver_restrictions = FALSE
 	var/coven_protected = FALSE
 	/// Used in `hole.dm`, grants bonus to a grave if buried here.
 	var/burial_grounds = FALSE
