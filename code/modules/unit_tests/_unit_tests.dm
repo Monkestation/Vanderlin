@@ -74,6 +74,7 @@
 #include "create_and_destroy.dm"
 #include "faction_supply_packs.dm"
 #include "focus_only_tests.dm"
+#include "gags_map_icons.dm"
 #include "item_detail_sanity.dm"
 #include "load_map_security.dm"
 #include "lootpanel.dm"
