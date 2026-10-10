@@ -69,7 +69,7 @@
 	icon_state = "curtain_blue-open"
 	color = null
 	alpha = 255
-	name = "Fancy Blue Curtain"
+	name = "fancy blue curtain"
 
 /obj/structure/curtain/bluecurtain/dir
 	icon_state = MAP_SWITCH("curtain_blue-open", "curtain_bluedir")
@@ -80,7 +80,7 @@
 	icon_state = "curtain_cyan-open"
 	color = null
 	alpha = 255
-	name = "Fancy Cyan Curtain"
+	name = "fancy cyan curtain"
 
 /obj/structure/curtain/cyancurtain/dir
 	icon_state = MAP_SWITCH("curtain_cyan-open", "curtain_cyandir")
@@ -91,7 +91,7 @@
 	icon_state = "curtain_brown-open"
 	color = null
 	alpha = 255
-	name = "Fancy Brown Curtain"
+	name = "fancy brown curtain"
 
 /obj/structure/curtain/browncurtain/dir
 	icon_state = MAP_SWITCH("curtain_brown-open", "curtain_browndir")
@@ -102,7 +102,7 @@
 	icon_state = "curtain_green-open"
 	color = null
 	alpha = 255
-	name = "Fancy Green Curtain"
+	name = "fancy green curtain"
 
 /obj/structure/curtain/greencurtain/dir
 	icon_state = MAP_SWITCH("curtain_green-open", "curtain_greendir")
@@ -113,7 +113,7 @@
 	icon_state = "curtain_purple-open"
 	color = null
 	alpha = 255
-	name = "Fancy Purple Curtain"
+	name = "fancy purple curtain"
 
 /obj/structure/curtain/purplecurtain/dir
 	icon_state = MAP_SWITCH("curtain_purple-open", "curtain_purpledir")
@@ -124,7 +124,7 @@
 	icon_state = "curtain_red-open"
 	color = null
 	alpha = 255
-	name = "Fancy Red Curtain"
+	name = "fancy red curtain"
 
 /obj/structure/curtain/redcurtain/dir
 	icon_state = MAP_SWITCH("curtain_red-open", "curtain_reddir")
@@ -135,9 +135,86 @@
 	icon_state = "curtain_noc-open"
 	color = null
 	alpha = 255
-	name = "Fancy Navy Curtain"
+	name = "fancy navy curtain"
 	desc = "Decorative navy curtains, popular amongst Noccites."
 
 /obj/structure/curtain/noccurtain/dir
 	icon_state = MAP_SWITCH("curtain_noc-open", "curtain_nocdir")
+	directional = TRUE
+
+/obj/structure/curtain/browncurtainold
+	icon_type = "old_curtain_brown"
+	icon_state = "old_curtain_brown-open"
+	color = null
+	alpha = 255
+	name = "old brown curtain"
+
+/obj/structure/curtain/browncurtainold/dir
+	icon_state = MAP_SWITCH("old_curtain_brown-open", "old_curtain_browndir")
+	directional = TRUE
+
+/obj/structure/curtain/redcurtainold
+	icon_type = "old_curtain_red"
+	icon_state = "old_curtain_red-open"
+	color = null
+	alpha = 255
+	name = "old red curtain"
+
+/obj/structure/curtain/redcurtainold/dir
+	icon_state = MAP_SWITCH("old_curtain_red-open", "old_curtain_reddir")
+	directional = TRUE
+
+/obj/structure/curtain/beigecurtainold
+	icon_type = "old_curtain_beige"
+	icon_state = "old_curtain_beige-open"
+	color = null
+	alpha = 255
+	name = "old beige curtain"
+
+/obj/structure/curtain/beigecurtainold/dir
+	icon_state = MAP_SWITCH("old_curtain_beige-open", "old_curtain_beigedir")
+	directional = TRUE
+
+/obj/structure/curtain/greencurtainold
+	icon_type = "old_curtain_green"
+	icon_state = "old_curtain_green-open"
+	color = null
+	alpha = 255
+	name = "old green curtain"
+
+/obj/structure/curtain/greencurtainold/dir
+	icon_state = MAP_SWITCH("old_curtain_green-open", "old_curtain_greendir")
+	directional = TRUE
+
+/obj/structure/curtain/bluecurtainold
+	icon_type = "old_curtain_blue"
+	icon_state = "old_curtain_blue-open"
+	color = null
+	alpha = 255
+	name = "old blue curtain"
+
+/obj/structure/curtain/bluecurtainold/dir
+	icon_state = MAP_SWITCH("old_curtain_blue-open", "old_curtain_bluedir")
+	directional = TRUE
+
+/obj/structure/curtain/purplecurtainold
+	icon_type = "old_curtain_purple"
+	icon_state = "old_curtain_purple-open"
+	color = null
+	alpha = 255
+	name = "old purple curtain"
+
+/obj/structure/curtain/purplecurtainold/dir
+	icon_state = MAP_SWITCH("old_curtain_purple-open", "old_curtain_purpledir")
+	directional = TRUE
+
+/obj/structure/curtain/suncurtain
+	icon_type = "sun_curtain"
+	icon_state = "sun_curtain-open"
+	color = null
+	alpha = 255
+	name = "sun curtain"
+
+/obj/structure/curtain/suncurtain/dir
+	icon_state = MAP_SWITCH("sun_curtain-open", "sun_curtaindir")
 	directional = TRUE
