@@ -319,6 +319,10 @@
 /obj/structure/closet/crate/coffin,
 /turf/open/floor/ruinedwood/turned/alt,
 /area/outdoors/town)
+"agF" = (
+/obj/structure/fluff/traveltile/fast/vanderlin/basin_forest,
+/turf/open/floor/dirt/road,
+/area/outdoors/basin)
 "agJ" = (
 /obj/structure/ladder{
 	name = "Operating theatre"
@@ -4669,12 +4673,6 @@
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/woodturned,
 /area/indoors/town/smithy)
-"bUx" = (
-/obj/structure/bookcase/random_recipes,
-/turf/open/floor/carpet/lord/corner{
-	dir = 8
-	},
-/area/indoors/town/tavern)
 "bUz" = (
 /obj/structure/dryclothes,
 /turf/open/floor/woodturned,
@@ -5036,10 +5034,6 @@
 /obj/structure/chair/stool,
 /turf/open/floor/tile/brownbrick,
 /area/indoors/town/merc_guild)
-"cck" = (
-/obj/structure/bookcase/random_recipes,
-/turf/open/floor/wood,
-/area/indoors/town/tavern)
 "cct" = (
 /turf/open/floor/cobble,
 /area/indoors/town/keep/servanthead)
@@ -5905,6 +5899,10 @@
 	},
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/captain)
+"cwQ" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/carpet/lord/corner,
+/area/indoors/town/tavern)
 "cwT" = (
 /obj/structure/fluff/walldeco/feldshersign{
 	pixel_y = -32
@@ -7444,6 +7442,10 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/church)
+"dcB" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/carpet/lord/right,
+/area/indoors/town/tavern)
 "dcE" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/wood,
@@ -9230,10 +9232,6 @@
 	},
 /turf/open/floor/woodturned,
 /area/indoors/town/keep/magician)
-"dLB" = (
-/obj/structure/bookcase/random_recipes,
-/turf/open/floor/carpet/lord/corner,
-/area/indoors/town/tavern)
 "dLG" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/bouquet/rosa,
@@ -19425,10 +19423,6 @@
 /obj/structure/bookcase/random/legends,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/library)
-"hQV" = (
-/obj/structure/bookcase/random_recipes,
-/turf/open/floor/carpet/lord/right,
-/area/indoors/town/tavern)
 "hQX" = (
 /obj/structure/quest_counter{
 	counter_id = "guild_1"
@@ -38364,6 +38358,10 @@
 	},
 /turf/open/floor/hexstone,
 /area/indoors/town)
+"piQ" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/woodturned,
+/area/indoors/town/tavern)
 "piS" = (
 /turf/open/water/river{
 	dir = 8
@@ -45402,12 +45400,6 @@
 	},
 /turf/open/floor/cobble/mossy,
 /area/outdoors/town/keep/forge)
-"rQc" = (
-/obj/structure/bookcase/random_recipes,
-/turf/open/floor/carpet/lord/corner{
-	dir = 1
-	},
-/area/indoors/town/tavern)
 "rQs" = (
 /obj/structure/fluff/walldeco/wantedposter{
 	pixel_y = -32
@@ -48945,10 +48937,6 @@
 	},
 /turf/open/floor/grass,
 /area/outdoors/town)
-"tkt" = (
-/obj/structure/bookcase/random_recipes,
-/turf/open/floor/carpet/lord/left,
-/area/indoors/town/tavern)
 "tkL" = (
 /obj/structure/roguerock,
 /turf/open/floor/sand,
@@ -53634,6 +53622,12 @@
 "vaq" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/guest/guest1)
+"var" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/carpet/lord/corner{
+	dir = 4
+	},
+/area/indoors/town/tavern)
 "vat" = (
 /obj/structure/table/wood/reinforced_alter,
 /obj/structure/mirror/fancy{
@@ -54451,6 +54445,10 @@
 /obj/structure/flora/grass,
 /turf/open/floor/dirt,
 /area/outdoors/town)
+"vpw" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/carpet/lord/left,
+/area/indoors/town/tavern)
 "vpS" = (
 /obj/effect/mapping_helpers/secret_door_creator/courtagent_hideout{
 	redstone_id = "courtagent2"
@@ -56378,10 +56376,6 @@
 "wdh" = (
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
-"wdm" = (
-/obj/structure/fluff/traveltile/fast/vanderlin/basin_forest,
-/turf/open/floor/dirt/road,
-/area/outdoors/basin)
 "wdr" = (
 /obj/structure/stairs{
 	dir = 8
@@ -60080,6 +60074,12 @@
 "xsG" = (
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/jester)
+"xsV" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/carpet/lord/corner{
+	dir = 8
+	},
+/area/indoors/town/tavern)
 "xsZ" = (
 /obj/structure/chair/wood/alt/fancy{
 	dir = 4
@@ -61823,12 +61823,6 @@
 /obj/structure/closet/crate/chest/crafted,
 /turf/open/floor/wood,
 /area/indoors/town)
-"yca" = (
-/obj/structure/bookcase/random_recipes,
-/turf/open/floor/carpet/lord/corner{
-	dir = 4
-	},
-/area/indoors/town/tavern)
 "yce" = (
 /obj/effect/decal/cleanable/generic,
 /turf/open/openspace,
@@ -61875,6 +61869,12 @@
 	},
 /turf/open/floor/cobble,
 /area/indoors/town/church)
+"ydn" = (
+/obj/structure/bookcase/random,
+/turf/open/floor/carpet/lord/corner{
+	dir = 1
+	},
+/area/indoors/town/tavern)
 "ydy" = (
 /obj/structure/window/solid,
 /obj/structure/curtain/purplecurtain/dir{
@@ -154026,7 +154026,7 @@ ibK
 ibK
 ibK
 ibK
-wdm
+agF
 rrW
 "}
 (55,1,3) = {"
@@ -154228,7 +154228,7 @@ ibK
 ibK
 ibK
 ibK
-wdm
+agF
 rrW
 "}
 (56,1,3) = {"
@@ -154430,7 +154430,7 @@ ibK
 ibK
 ibK
 ibK
-wdm
+agF
 rrW
 "}
 (57,1,3) = {"
@@ -166033,11 +166033,11 @@ pny
 ruH
 iYU
 iYU
-rQc
-tkt
+ydn
+vpw
 txg
 txg
-dLB
+cwQ
 pny
 pny
 pny
@@ -166434,14 +166434,14 @@ pny
 pny
 pny
 fVi
-ruH
+piQ
 iYU
 iYU
-yca
-hQV
+var
+dcB
 pwS
 twD
-bUx
+xsV
 mbH
 hWe
 dSj
@@ -210071,7 +210071,7 @@ mbH
 uyu
 cUs
 cUs
-cck
+ueu
 pny
 pny
 pny
@@ -210273,7 +210273,7 @@ uXs
 uXs
 hfK
 cUs
-cck
+ueu
 pny
 pny
 pny
