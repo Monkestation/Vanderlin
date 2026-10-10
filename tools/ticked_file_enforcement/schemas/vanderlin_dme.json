@@ -2,7 +2,9 @@
 	"file": "vanderlin.dme",
 	"scannable_directory": "code/",
 	"subdirectories": true,
-	"excluded_files": [],
+	"excluded_files": [
+		"_rmd.dm"
+	],
 	"forbidden_includes": [
 		"code/modules/tgs/**/*.dm",
 		"code/modules/unit_tests/[!_]*.dm"

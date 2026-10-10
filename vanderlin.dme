@@ -4730,4 +4730,7 @@
 #include "interface\fonts\datums\vaticanus.dm"
 #include "interface\fonts\datums\wernicke.dm"
 #include "interface\fonts\datums\yataghan.dm"
+#ifdef __DEMIR_BAKE__
+#include "code\_rmd.dm"
+#endif __DEMIR_BAKE__
 // END_INCLUDE

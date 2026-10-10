@@ -234,6 +234,7 @@
 	background_track_night = null
 	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
+		/turf/open/floor/naturalstone,
 		/turf/open/floor/dirt,
 		/turf/open/water,)
 	ambush_mobs = list(
