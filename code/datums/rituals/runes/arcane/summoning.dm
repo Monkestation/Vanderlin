@@ -29,8 +29,7 @@
 /obj/effect/decal/cleanable/ritual_rune/arcyne/summoning/proc/release_summon()
 	if(!summoned_mob)
 		return
-	REMOVE_TRAIT(summoned_mob, TRAIT_PACIFISM, MAGIC_TRAIT)
-	summoned_mob.status_flags -= GODMODE
+	summoned_mob.remove_traits(list(TRAIT_PACIFISM, TRAIT_GODMODE), MAGIC_TRAIT)
 	ADD_TRAIT(summoned_mob, TRAIT_UNDODGING, MAGIC_TRAIT)
 	summoned_mob.binded = FALSE
 	summoned_mob.SetParalyzed(0)

@@ -22,7 +22,7 @@
 	. = ..()
 	set_species(pick(viable_species))
 	spawning_region = WEAKREF(TR)
-	status_flags |= GODMODE
+	ADD_TRAIT(src, TRAIT_GODMODE, INNATE_TRAIT)
 	AddComponent(/datum/component/ghost_vessel, null, HARLEQUINN_VESSEL_ID)
 	RegisterSignal(src, COMSIG_GHOST_VESSEL_POSSESSED, PROC_REF(on_possessed))
 
@@ -31,7 +31,7 @@
 	INVOKE_ASYNC(src, PROC_REF(setup_harlequinn))
 
 /mob/living/carbon/human/harlequinn_vessel/proc/setup_harlequinn()
-	status_flags &= ~GODMODE
+	REMOVE_TRAIT(src, TRAIT_GODMODE, INNATE_TRAIT)
 	invisibility = 0
 	anchored = FALSE
 

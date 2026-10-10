@@ -235,17 +235,20 @@
 			to_chat(doctor, span_warning("The needle has no thread left!"))
 			return FALSE
 		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(doctor, STAT_INTELLIGENCE) * doctor.get_learning_boon(/datum/attribute/skill/misc/medicine)
+		var/heal_multiplier = 1
 		if(doctor.diceroll(doctor_skill - 1, context = DICE_CONTEXT_PHYSICAL) <= DICE_FAILURE)
-			to_chat(doctor, span_warning("My hand slips!"))
-			return FALSE
+			to_chat(doctor, span_warning("My hand slips and my sutures are messy!"))
+			heal_multiplier = 0.5
 		user.adjust_experience(/datum/attribute/skill/misc/medicine, amt2raise * 0.1)
 		doctor.visible_message(
 			span_green("<b>[doctor]</b> sutures <b>[patient]</b>'s [affecting.name] arteries with \the [src]."),
 			span_green("I suture <b>[patient]</b>'s [affecting.name] arteries with \the [src]."))
 		for(var/obj/item/organ/artery in affecting.getorganslotlist(ORGAN_SLOT_ARTERY))
-			if(artery.damage)
-				artery.applyOrganDamage(-artery.maxHealth/3)
-				return TRUE
+			if(!artery.damage)
+				continue
+			var/heal_amount = (artery.maxHealth / 3) * heal_multiplier
+			artery.applyOrganDamage(-heal_amount)
+			return TRUE
 
 	// Then try to sew wounds (crits)
 	var/list/sewable = affecting.get_sewable_wounds()
