@@ -1113,11 +1113,6 @@
 	additional_items = list(/obj/item/rope/chain = 1, /obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/flail/blacksteel
 
-/datum/anvil_recipe/weapons/blacksteel/battleaxe
-	name = "Blacksteel Battle Axe"
-	additional_items = list(/obj/item/ingot/blacksteel = 1)
-	created_item = /obj/item/weapon/axe/battle/blacksteel
-
 /datum/anvil_recipe/weapons/blacksteel/warhammer
 	name = "Blacksteel Warhammer"
 	additional_items = list(/obj/item/ingot/blacksteel = 1)
@@ -1164,6 +1159,11 @@
 	additional_items = list(/obj/item/ingot/bloodsteel = 1)
 	created_item = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
 
+/datum/anvil_recipe/weapons/bloodsteel/battleaxe
+	name = "Bloodsteel Axe"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/weapon/axe/battle/bloodsteel
+
 /datum/anvil_recipe/weapons/bloodsteel/whip
 	name = "Bloodsteel Whip"
 	additional_items = list(/obj/item/natural/hide/cured = 2)
@@ -1173,6 +1173,21 @@
 	name = "Bloodsteel Quarterstaff"
 	additional_items = list(/obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/mace
+	name = "Bloodsteel Mace"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/weapon/mace/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/barmace
+	name = "Bloodsteel Barmace"
+	additional_items = list(/obj/item/ingot/bloodsteel = 2)
+	created_item = /obj/item/weapon/mace/bloodsteel/barmace
+
+/datum/anvil_recipe/weapons/bloodsteel/warhammer
+	name = "Bloodsteel Warhammer"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/weapon/mace/warhammer/bloodsteel
 
 /datum/anvil_recipe/weapons/bloodsteel/halberd
 	name = "Bloodsteel Halberd"

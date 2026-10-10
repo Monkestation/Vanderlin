@@ -197,6 +197,8 @@
 		"Rapier" = /obj/item/weapon/sword/rapier/bloodsteel,
 		"Spear" = /obj/item/weapon/polearm/spear/bloodsteel,
 		"Halberd" = /obj/item/weapon/polearm/halberd/bloodsteel,
+		"Axe" = /obj/item/weapon/axe/battle/bloodsteel,
+		"Barmace" = /obj/item/weapon/mace/bloodsteel/barmace,
 		"Whip" = /obj/item/weapon/whip/bloodsteel,
 		"Handclaws" = /obj/item/weapon/handclaw/steel/bloodsteel,
 	)
@@ -204,14 +206,12 @@
 	if(!weapon_choice)
 		return
 	switch(weapon_choice)
-		if("Broadsword")
+		if("Broadsword", "Rapier")
 			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
-		if("Rapier")
-			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/sword)
-		if("Spear")
+		if("Spear", "Halberd")
 			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/polearm)
-		if("Halberd")
-			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/polearm)
+		if("Axe", "Barmace")
+			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/axemace)
 		if("Whip")
 			herald.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_herald/whip)
 		if("Handclaws")
@@ -329,6 +329,12 @@
 	raw_attribute_list = list()
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/polearms = list(40, 40)
+	)
+
+/datum/attribute_holder/sheet/job/blood_herald/axemace
+	raw_attribute_list = list()
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/axesmaces = list(40, 40)
 	)
 
 /datum/attribute_holder/sheet/job/blood_herald/claws

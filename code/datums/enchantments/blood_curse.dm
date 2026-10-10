@@ -92,7 +92,7 @@
 			target.apply_status_effect(/datum/status_effect/debuff/blood_curse, null, curse_effect)
 			to_chat(target, span_userdanger("The curse is seeping into my blood! It burns!"))
 			target.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_hit)
-			target.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, poison_hit)
+			target.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, poison_hit / 3)
 			to_chat(user, span_bloody("[target] is poisoned by the blood curse."))
 			vitae_gain += 4
 

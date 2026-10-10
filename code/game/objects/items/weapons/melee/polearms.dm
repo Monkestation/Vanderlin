@@ -625,8 +625,7 @@
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_BLOODSTEEL
 	max_blade_int = 300
 	melting_material = /datum/material/bloodsteel
-	melt_amount = 100
-	melt_amount = 150
+	melt_amount = 200
 	sellprice = 0
 
 /obj/item/weapon/polearm/halberd/bloodsteel/Initialize(mapload)

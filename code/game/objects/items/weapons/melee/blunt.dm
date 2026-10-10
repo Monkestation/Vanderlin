@@ -305,6 +305,32 @@
 	force_wielded = DAMAGE_MACE_WIELD + 4
 	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_BLACKSTEEL
 
+//................ Bloodsteel mace ............... //
+/obj/item/weapon/mace/bloodsteel
+	name = "bloodsteel mace"
+	desc = "A well-crafted mace with a bloodsteel head. Easier to control and hits just as hard."
+	icon_state = "corruptmace"
+	force = DAMAGE_MACE + 4
+	force_wielded = DAMAGE_MACE_WIELD + 2
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLOODSTEEL
+	smeltresult = null
+	melting_material = /datum/material/blacksteel
+	melt_amount = 150
+	sellprice = 120
+	item_weight = 1.3 KILOGRAMS
+
+/obj/item/weapon/mace/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
+/obj/item/weapon/mace/bloodsteel/barmace
+	name = "bloodsteel bar mace"
+	desc = "A long flanged mace of bloodsteel, a symbol of corruption and chaos."
+	icon_state = "corruptbarmace"
+	force = DAMAGE_MACE + 6
+	force_wielded = DAMAGE_MACE_WIELD + 4
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_BLOODSTEEL
+
 //................ Iron Bludgeon ............... // Less damage, more accurate, similar to a cudgel
 /obj/item/weapon/mace/bludgeon
 	name = "iron bludgeon"
@@ -674,7 +700,6 @@
 	force = DAMAGE_MACE_WIELD - 1
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	item_weight = 2.2 KILOGRAMS
@@ -688,7 +713,6 @@
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
 	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 90
@@ -704,10 +728,24 @@
 	icon_state = "bs_hammer"
 	force = DAMAGE_MACE_WIELD + 6
 	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_BLACKSTEEL
-	smeltresult = /obj/item/ingot/blacksteel
 	melting_material = /datum/material/blacksteel
 	melt_amount = 200
 	item_weight = 1.9 KILOGRAMS
+
+/obj/item/weapon/mace/warhammer/bloodsteel
+	name = "bloodsteel warhammer"
+	desc = "A magnificent warhammer of bloodsteel. Let none forget whom you serve."
+	icon_state = "corrupthammer"
+	force = DAMAGE_MACE_WIELD + 6
+	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_BLOODSTEEL
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 200
+	item_weight = 1.9 KILOGRAMS
+	sellprice = 0
+
+/obj/item/weapon/mace/warhammer/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //................ Elven Club  ............... //
 
