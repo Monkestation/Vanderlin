@@ -314,7 +314,7 @@
 	force_wielded = DAMAGE_MACE_WIELD + 2
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLOODSTEEL
 	smeltresult = null
-	melting_material = /datum/material/blacksteel
+	melting_material = /datum/material/bloodsteel
 	melt_amount = 150
 	sellprice = 120
 	item_weight = 1.3 KILOGRAMS
@@ -735,7 +735,7 @@
 /obj/item/weapon/mace/warhammer/bloodsteel
 	name = "bloodsteel warhammer"
 	desc = "A magnificent warhammer of bloodsteel. Let none forget whom you serve."
-	icon_state = "corrupthammer"
+	icon_state = "corruptwarhammer"
 	force = DAMAGE_MACE_WIELD + 6
 	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_BLOODSTEEL
 	melting_material = /datum/material/bloodsteel
