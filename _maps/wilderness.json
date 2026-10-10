@@ -1,0 +1,37 @@
+{
+	"map_name": "Wilderness",
+	"map_path": "map_files/wilderness",
+	"map_file": "wildernorth.dmm",
+	"immigrant_origin": "Psydonia",
+	"monarch_title": "King",
+	"monarch_title_f": "Queen",
+	"traits": [
+		{
+			"Up": true,
+			"Turf Weather Effects": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Down": true,
+			"Turf Weather Effects": true,
+            "Leylines": true
+		}
+	],
+	"other_z": [
+		"map_files/wilderness/wildermiddletest"
+	],
+	"minetype": null,
+	"space_empty_levels": 0,
+	"space_ruin_levels": 0
+}
