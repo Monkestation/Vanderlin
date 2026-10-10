@@ -171,8 +171,8 @@
 /obj/projectile/bullet/reusable/bolt/bonesinew
 	name = "bonebolt"
 	icon_state = "bonebolt"
-	damage = BOLT_DAMAGE - 5
-	armor_penetration = BOLT_PENETRATION-5
+	armor_penetration = BOLT_PENETRATION - 10
+	embedchance = 95
 	ammo_type = /obj/item/ammo_casing/caseless/bolt/bonesinew
 	speed = 1.1
 
