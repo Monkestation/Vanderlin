@@ -50,12 +50,24 @@
 	reagents.handle_reactions()
 	return BULLET_ACT_HIT
 
+/obj/projectile/bullet/reusable/arrow/broadhead
+	ammo_type = /obj/item/ammo_casing/caseless/arrow/broadhead
+	armor_penetration = ARROW_PENETRATION - 20
+	damage = ARROW_DAMAGE + 15
+
 /obj/projectile/bullet/reusable/arrow/stone
 	ammo_type = /obj/item/ammo_casing/caseless/arrow/stone
 	embedchance = 80
 	armor_penetration = 0
 	damage = ARROW_DAMAGE-2
 	woundclass = BCLASS_STAB
+
+/obj/projectile/bullet/reusable/arrow/stone/blunt
+	ammo_type = /obj/item/ammo_casing/caseless/arrow/stone/blunt
+	embedchance = 0
+	armor_penetration = 10
+	damage = DAMAGE_HAMMER
+	woundclass = BCLASS_BLUNT
 
 /obj/projectile/bullet/reusable/arrow/pyro
 	name = "pyroclastic arrow"

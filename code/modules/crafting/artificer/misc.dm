@@ -333,6 +333,15 @@
 	craftdiff = 2
 	created_amount = 5
 
+/datum/artificer_recipe/ammo/arrows
+	name = "Broadhead Arrows 5x (+1 Iron)"
+	required_item = /obj/item/natural/wood/plank
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/ammo_casing/caseless/arrow/broadhead
+	hammers_per_item = 6
+	craftdiff = 3
+	created_amount = 5
+
 /datum/artificer_recipe/ammo/arrows/pyro
 	name = "Fire Arrows 5x (+1 Iron) (+1 Blast Powder)"
 	required_item = /obj/item/natural/wood/plank

@@ -33,6 +33,11 @@
 	fill_type = /obj/item/ammo_casing/caseless/bolt/holy
 	fill_to = 10
 
+/obj/item/ammo_holder/quiver/bolt/bonesinew
+	fill_type = /obj/item/ammo_casing/caseless/bolt/bonesinew
+
+/obj/item/ammo_holder/quiver/bolt/broadhead
+	fill_type = /obj/item/ammo_casing/caseless/bolt/broadhead
 
 /obj/item/ammo_holder/quiver/bolts/pyro
 	fill_type = /obj/item/ammo_casing/caseless/bolt/pyro
