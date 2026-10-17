@@ -54,7 +54,7 @@
 	title = JOB_CITY_WATCH_LIEUTENANT
 	tutorial = "You are a lieutenant of the City Watch. \
 	You have been chosen by the Captain to lead the Watch in his absence; \
-	Failure is not an option."
+	You run day-to-day. Failure is not an option."
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CITYWATCHMEN
@@ -90,10 +90,10 @@
 	. = ..()
 
 	var/static/list/selectable = list( \
-		"Flail" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/flail), \
-		"Spear" = /obj/item/weapon/polearm/spear, \
-		"Sword" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/scabbard/sword, /obj/item/weapon/sword/iron), \
-		"Warhammer" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/mace/warhammer), \
+		"Flail" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/flail/sflail), \
+		"Spear" = /obj/item/weapon/polearm/spear/steel, \
+		"Sword" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/scabbard/sword, /obj/item/weapon/sword), \
+		"Warhammer" = list(/obj/item/weapon/shield/heater, /obj/item/weapon/mace/warhammer/steel), \
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR SECONDARY WEAPON", title = "LIEUTENANT")
 	if(!choice)
@@ -124,7 +124,8 @@
 	backpack_contents = list(
 		/obj/item/rope/chain = 1,
 		/obj/item/book/law/small = 1,
-		/obj/item/weapon/mace/cudgel = 1
+		/obj/item/weapon/mace/cudgel = 1,
+		/obj/item/signal_horn = 1
 	)
 
 /datum/outfit/lieutenant/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
