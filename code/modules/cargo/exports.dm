@@ -141,8 +141,6 @@
 		return FALSE
 	if(!get_cost(O, allowed_categories , apply_elastic))
 		return FALSE
-	if(O.flags_1 & HOLOGRAM_1)
-		return FALSE
 	return TRUE
 
 // Called only once, when the object is actually sold by the datum.
