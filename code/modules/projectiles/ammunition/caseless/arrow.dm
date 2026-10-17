@@ -18,6 +18,13 @@
 	. = ..()
 	AddElement(/datum/element/tipped_item, _max_reagents = 2, _dip_amount = 2, _attack_injects = FALSE)
 
+/obj/item/ammo_casing/caseless/arrow/broadhead
+	name = "broadhead arrow"
+	desc = "A fletched projectile, with simple plumes and a broad metal tip."
+	icon_state = "ibroadarrow"
+	projectile_type = /obj/projectile/bullet/reusable/arrow/broadhead
+
+
 /obj/item/ammo_casing/caseless/arrow/stone
 	name = "stone arrow"
 	desc = "A fletched projectile with a stone tip."
