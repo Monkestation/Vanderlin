@@ -7,6 +7,7 @@
 	bitesize = 1
 	mill_result = /obj/item/reagent_containers/food/snacks/produce/coffeebeans
 	rotprocess = null
+	given_ingredient_buff = null
 
 /obj/item/reagent_containers/food/snacks/produce/coffeebeans
 	name = "coffee beans"
@@ -28,3 +29,4 @@
 	bitesize = 1
 	rotprocess = null
 	w_class = WEIGHT_CLASS_TINY
+	given_ingredient_buff = null
