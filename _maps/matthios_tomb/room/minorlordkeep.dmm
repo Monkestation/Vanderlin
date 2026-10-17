@@ -37,8 +37,8 @@
 "fI" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shirt/undershirt/fancy,
-/obj/effect/spawner/map_spawner/loot/weapon,
 /obj/item/clothing/head/fancyhat,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/royal)
 "fT" = (
@@ -125,7 +125,7 @@
 /obj/item/paper,
 /obj/item/paper,
 /obj/item/paper,
-/obj/effect/spawner/map_spawner/loot/potion_stats,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors/royal)
 "pd" = (
@@ -156,7 +156,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "sT" = (
-/obj/structure/gate,
+/obj/structure/gate/bars,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "tf" = (
@@ -238,11 +238,6 @@
 /obj/item/chair/fancy,
 /turf/open/floor/cobble/alt,
 /area/under/tomb/indoors/royal)
-"Ay" = (
-/obj/structure/bed/shit,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/turf/open/floor/cobble,
-/area/under/tomb/indoors/royal)
 "AS" = (
 /obj/structure/bed/shit,
 /obj/structure/spider/stickyweb,
@@ -254,7 +249,7 @@
 /area/under/tomb/indoors/royal)
 "Ch" = (
 /obj/structure/bed/shit,
-/obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors/royal)
 "Cz" = (
@@ -366,10 +361,8 @@
 /area/under/tomb/wilds)
 "Oj" = (
 /obj/structure/closet/crate/chest/neu_iron,
-/obj/item/carvedgem/coral/fish,
-/obj/item/carvedgem/amber/figurine,
-/obj/item/carvedgem/amber/figurine,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/royal)
 "Pu" = (
@@ -388,7 +381,6 @@
 /area/under/tomb/wilds)
 "Qv" = (
 /obj/structure/table/stone_small,
-/obj/item/carvedgem/turq/fancyvase,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/royal)
 "QJ" = (
@@ -554,7 +546,7 @@ Hp
 pJ
 AS
 Hu
-Ay
+ww
 pJ
 Hp
 pJ

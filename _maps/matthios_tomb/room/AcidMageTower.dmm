@@ -13,7 +13,6 @@
 /area/under/tomb/indoors/magic)
 "aB" = (
 /obj/machinery/artificer_table,
-/obj/item/contraption/wood_metalizer,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "aK" = (
@@ -144,7 +143,9 @@
 /turf/closed/mineral/bedrock,
 /area/under/tomb/cave/wet)
 "gG" = (
-/mob/living/simple_animal/pet/cat/black,
+/mob/living/simple_animal/pet/cat/black{
+	name = "Zizita"
+	},
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
 "gH" = (
@@ -325,7 +326,6 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood,
-/obj/item/clothing/ring/gold/rontz,
 /mob/living/carbon/human/species/zizombie/npc/ambush,
 /turf/open/floor/carpet/green,
 /area/under/tomb/indoors/magic)
@@ -386,7 +386,7 @@
 /area/under/tomb/indoors/magic)
 "qd" = (
 /obj/structure/closet/crate/crafted_closet/lord,
-/obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
 "qf" = (
@@ -484,7 +484,6 @@
 /area/under/tomb/indoors/magic)
 "th" = (
 /obj/structure/table/stone_small,
-/obj/item/statue/gold,
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors/magic)
 "tl" = (
@@ -549,7 +548,7 @@
 /area/under/tomb/indoors/magic)
 "uJ" = (
 /obj/structure/trap/shock,
-/obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/dungeon_loot_spawner/low,
 /obj/effect/particle_effect/steam,
 /turf/open/water/bath,
 /area/under/tomb/indoors/magic)
@@ -571,8 +570,6 @@
 /area/under/tomb/indoors/magic)
 "vt" = (
 /obj/structure/table/vtable/v2,
-/obj/effect/spawner/map_spawner/loot/magic,
-/obj/item/statue/silver,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
 "vu" = (
@@ -634,7 +631,6 @@
 "xo" = (
 /obj/structure/bed/wool/double,
 /obj/item/bedsheet/fabric_double,
-/obj/item/clothing/ring/gold/protection,
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
@@ -715,8 +711,6 @@
 /area/under/tomb/indoors/magic)
 "Ba" = (
 /obj/structure/closet/crate/chest/neu_iron,
-/obj/effect/spawner/map_spawner/loot/food,
-/obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors/magic)
 "Bb" = (
@@ -920,18 +914,7 @@
 /area/under/tomb/indoors/magic)
 "KA" = (
 /obj/structure/table/wood/fancy/black,
-/obj/item/reagent_containers/glass/cup/silver{
-	pixel_y = -1;
-	pixel_x = 7
-	},
-/obj/item/reagent_containers/glass/cup/silver{
-	pixel_x = 8;
-	pixel_y = 12
-	},
-/obj/item/reagent_containers/glass/carafe/silver{
-	pixel_x = -7;
-	pixel_y = 10
-	},
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "KQ" = (
@@ -969,7 +952,6 @@
 /area/under/tomb/indoors/magic)
 "LS" = (
 /obj/structure/table/vtable/v2,
-/obj/item/clothing/face/facemask/goldmask,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "Ma" = (
@@ -988,7 +970,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/indoors/magic)
 "MJ" = (
-/obj/effect/spawner/map_spawner/loot/medium,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/magic)
 "MO" = (
@@ -1053,7 +1035,7 @@
 /area/under/tomb/indoors/magic)
 "OC" = (
 /obj/structure/table/vtable,
-/obj/effect/spawner/map_spawner/loot/medium,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
 "OI" = (
@@ -1084,7 +1066,7 @@
 /area/under/tomb/cave/wet)
 "OM" = (
 /obj/structure/trap/shock,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/medium,
 /obj/effect/particle_effect/steam,
 /turf/open/water/bath,
 /area/under/tomb/indoors/magic)
@@ -1099,12 +1081,12 @@
 /turf/open/floor/cobblerock/alt,
 /area/under/tomb/cave/wet)
 "Pl" = (
-/obj/structure/closet/crate/chest/lootbox,
+/obj/effect/dungeon_loot_spawner/high/chest,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "Pw" = (
 /obj/structure/table/stone_small,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors/magic)
 "PP" = (
@@ -1130,7 +1112,6 @@
 /obj/effect/decal/cleanable/blood/gibs/down,
 /obj/effect/decal/cleanable/blood/gibs/core,
 /obj/effect/decal/cleanable/blood/old,
-/obj/item/organ/ears/cat,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "Qs" = (
@@ -1237,7 +1218,6 @@
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/magic)
 "Tp" = (
@@ -1265,7 +1245,7 @@
 /obj/structure/table/church{
 	dir = 1
 	},
-/obj/item/statue/gold,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/magic)
 "TP" = (
@@ -1334,7 +1314,7 @@
 /area/under/tomb/indoors/magic)
 "WO" = (
 /obj/structure/bookcase/random,
-/obj/effect/spawner/map_spawner/loot,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/carpet/green,
 /area/under/tomb/indoors/magic)
 "XQ" = (
@@ -1375,7 +1355,6 @@
 /area/under/tomb/indoors/magic)
 "YE" = (
 /obj/structure/table/church,
-/obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/magic)
 "YL" = (
@@ -2108,7 +2087,7 @@ gl
 gl
 "}
 (22,1,1) = {"
-mG
+gl
 At
 Pd
 At

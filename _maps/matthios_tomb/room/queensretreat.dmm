@@ -54,7 +54,6 @@
 /obj/item/clothing/shirt/dress/gen/colored/purple,
 /obj/item/clothing/shirt/dress/silkdress,
 /obj/item/clothing/armor/leather/jacket/silk_coat,
-/obj/item/clothing/head/crown/nyle/consortcrown,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/royal)
 "bm" = (
@@ -103,11 +102,8 @@
 /obj/structure/table/wood/counter/end{
 	dir = 1
 	},
-/obj/item/statue/gold/loot{
-	pixel_x = -16;
-	pixel_y = 13
-	},
 /obj/item/reagent_containers/glass/bottle/redwine,
+/obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors/royal)
 "dh" = (
@@ -176,7 +172,7 @@
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/rotten/egg,
 /obj/item/reagent_containers/food/snacks/rotten/egg,
-/obj/effect/spawner/map_spawner/loot/medium,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors/royal)
 "hi" = (
@@ -375,7 +371,7 @@
 /turf/open/floor/grass,
 /area/under/tomb/wilds)
 "qh" = (
-/obj/item/statue/gold,
+/obj/effect/dungeon_loot_spawner/high/chest,
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors/royal)
 "qp" = (
@@ -503,12 +499,7 @@
 	pixel_y = -32
 	},
 /obj/structure/table/wood/fine,
-/obj/effect/spawner/map_spawner/loot/rare,
-/obj/item/gem,
-/obj/item/gem{
-	pixel_x = -9;
-	pixel_y = 5
-	},
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/royal)
 "vK" = (
@@ -590,7 +581,7 @@
 /area/under/tomb/indoors/royal)
 "Ao" = (
 /obj/structure/table/wood/fine,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/royal)
 "Bn" = (
@@ -741,10 +732,6 @@
 /area/under/tomb/indoors/royal)
 "Hh" = (
 /turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
-"HB" = (
-/obj/item/statue/silver,
-/turf/open/floor/carpet/red,
 /area/under/tomb/indoors/royal)
 "HJ" = (
 /obj/structure/fluff/railing/wood{
@@ -923,7 +910,6 @@
 /obj/machinery/light/fueled/wallfire/candle/weak/r,
 /obj/structure/closet/crate/crafted_closet/lord,
 /obj/item/clothing/neck/psycross/silver/divine/noc,
-/obj/item/clothing/ring/silver/noc,
 /obj/item/reagent_containers/glass/bottle/stronghealthpot,
 /obj/item/reagent_containers/glass/bottle/stronghealthpot,
 /obj/item/reagent_containers/glass/bottle/strongmanapot,
@@ -951,14 +937,6 @@
 /area/under/tomb/indoors/royal)
 "PG" = (
 /obj/structure/rack/shelf/notdense,
-/obj/item/gem/red{
-	pixel_x = -5;
-	pixel_y = 31
-	},
-/obj/item/gem/violet{
-	pixel_x = 6;
-	pixel_y = 32
-	},
 /obj/structure/fluff/clock,
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors/royal)
@@ -2483,7 +2461,7 @@ yM
 Vn
 GR
 GR
-Ao
+RU
 JC
 yi
 Yl
@@ -2675,7 +2653,7 @@ GR
 GR
 Dm
 Dm
-HB
+Dm
 JC
 yi
 Yl
@@ -2739,7 +2717,7 @@ uA
 GR
 Dm
 Dm
-HB
+Dm
 JC
 yi
 Yl

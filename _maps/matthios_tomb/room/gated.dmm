@@ -96,10 +96,10 @@
 /obj/structure/rack{
 	pixel_y = 10
 	},
-/obj/effect/spawner/map_spawner/loot/weapon,
 /obj/machinery/light/fueled/torchholder/l{
 	dir = 8
 	},
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors)
 "hc" = (
@@ -216,7 +216,7 @@
 /area/under/tomb/indoors)
 "pk" = (
 /obj/structure/table/wood/plain,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors)
 "pl" = (
@@ -356,8 +356,7 @@
 /turf/open/floor/blocks,
 /area/under/tomb/indoors)
 "AI" = (
-/obj/structure/closet/crate/chest,
-/obj/effect/spawner/map_spawner/loot/coin/high,
+/obj/effect/dungeon_loot_spawner/high/chest,
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors)
 "AJ" = (
@@ -382,9 +381,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "Cu" = (
-/obj/structure/closet/crate/chest,
-/obj/item/ingot/silver,
-/obj/item/statue/silver/gnome,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors)
 "CO" = (
@@ -402,9 +399,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "En" = (
-/obj/structure/closet/crate/chest,
-/obj/effect/spawner/map_spawner/loot/coin/med,
-/obj/item/clothing/wrists/goldbracelet,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors)
 "Es" = (
@@ -440,13 +435,6 @@
 /obj/machinery/light/fueled/firebowl,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
-"HM" = (
-/obj/structure/closet/crate/chest,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/item/clothing/ring/gold,
-/obj/item/plate/gold,
-/turf/open/floor/churchbrick,
-/area/under/tomb/indoors)
 "Ib" = (
 /obj/item/ammo_casing/caseless/arrow,
 /turf/open/floor/cobble,
@@ -505,11 +493,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /mob/living/carbon/human/species/skeleton/npc,
-/turf/open/floor/blocks,
-/area/under/tomb/indoors)
-"Mk" = (
-/obj/structure/table/wood/plain,
-/obj/effect/spawner/map_spawner/loot/armor,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors)
 "Mv" = (
@@ -616,10 +599,7 @@
 /area/under/tomb)
 "Sv" = (
 /obj/structure/table/wood/plain,
-/obj/item/reagent_containers/glass/carafe/silver{
-	pixel_x = 2;
-	pixel_y = 6
-	},
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "Tb" = (
@@ -1473,7 +1453,7 @@ bh
 bh
 AI
 XL
-HM
+Cu
 bh
 bh
 kX
@@ -3587,7 +3567,7 @@ Wh
 Wh
 LV
 vm
-Mk
+pk
 Wh
 Wh
 cI

@@ -1,14 +1,16 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/dungeon_loot_spawner/high/chest,
+/turf/open/floor/ruinedwood/chevron,
+/area/under/tomb/indoors)
 "aq" = (
 /obj/structure/table/wood/fancy,
-/obj/item/statue/gold/loot,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
 "ar" = (
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/effect/spawner/map_spawner/loot/medium,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/high/chest,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
 "aw" = (
@@ -147,12 +149,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors)
-"da" = (
-/obj/structure/closet/crate/chest/neu,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/ruinedwood/darker,
-/area/under/tomb/indoors)
 "dD" = (
 /obj/item/alch/silverdust,
 /obj/effect/decal/cleanable/blood,
@@ -271,10 +267,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "gR" = (
-/obj/structure/closet/crate/chest/gold,
-/obj/effect/spawner/map_spawner/loot/rare,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "gS" = (
@@ -467,10 +460,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 1
 	},
-/obj/structure/closet/crate/chest/neu_iron,
-/obj/effect/spawner/map_spawner/loot/medium,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "lX" = (
@@ -525,11 +515,6 @@
 	dir = 8
 	},
 /turf/open/floor/ruinedwood/darker,
-/area/under/tomb/indoors)
-"nK" = (
-/obj/effect/spawner/map_spawner/loot,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
 "nW" = (
 /obj/structure/flora/grass/water,
@@ -734,8 +719,6 @@
 /area/under/tomb/cave)
 "tA" = (
 /obj/structure/closet/crate/chest/old_crate,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
 "tU" = (
@@ -807,10 +790,10 @@
 	candodge = 0
 	},
 /obj/item/clothing/head/padded/deathface,
-/obj/item/clothing/gloves/plate/blk/death,
-/obj/item/clothing/armor/plate/blkknight/death,
-/obj/item/clothing/pants/platelegs/blk/death,
-/obj/item/clothing/shoes/boots/armor/blkknight/death,
+/obj/item/clothing/gloves/plate,
+/obj/item/clothing/armor/plate,
+/obj/item/clothing/pants/platelegs,
+/obj/item/clothing/shoes/boots/armor,
 /obj/item/weapon/sword/long/death,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /turf/open/floor/ruinedwood/chevron,
@@ -901,7 +884,7 @@
 /area/under/tomb/indoors)
 "xq" = (
 /obj/structure/table/wood,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "xt" = (
@@ -929,7 +912,6 @@
 /area/under/tomb/indoors)
 "yz" = (
 /obj/structure/table/vtable/v2,
-/obj/effect/spawner/map_spawner/loot/weapon,
 /obj/item/reagent_containers/glass/cup/skull,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors)
@@ -1188,13 +1170,10 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "Fr" = (
-/obj/structure/closet/crate/chest/neu_iron,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /obj/structure/spider/stickyweb{
 	dir = 8
 	},
-/obj/item/statue/silver,
-/obj/item/statue/silver,
-/obj/item/statue/iron,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "FC" = (
@@ -1294,7 +1273,7 @@
 "IM" = (
 /obj/item/clothing/shoes/boots/armor/ancient,
 /obj/item/clothing/gloves/chain/ancient,
-/obj/item/clothing/head/vampire,
+/obj/item/clothing/head/crown/nyle/consortcrown,
 /obj/item/clothing/gloves/chain/ancient,
 /obj/item/clothing/armor/plate/ancient/vampire,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
@@ -1409,8 +1388,6 @@
 /area/under/tomb/indoors)
 "LT" = (
 /obj/structure/table/wood/fancy/blue,
-/obj/effect/spawner/map_spawner/loot/medium,
-/obj/item/statue/silver,
 /obj/structure/fluff/wallclock/vampire,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
@@ -1478,15 +1455,11 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "Nx" = (
-/obj/structure/closet/crate/chest/neu_iron,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /obj/structure/spider/stickyweb{
 	dir = 8
 	},
 /obj/structure/spider/stickyweb,
-/obj/item/clothing/ring/silver/calm,
-/obj/item/clothing/ring/silver,
-/obj/item/clothing/ring/silver,
-/obj/item/clothing/ring/silver,
 /turf/open/floor/ruinedwood,
 /area/under/tomb/indoors)
 "NA" = (
@@ -1607,9 +1580,6 @@
 /area/under/tomb/cave/wet)
 "PE" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/obj/effect/spawner/map_spawner/loot/armor,
-/obj/effect/spawner/map_spawner/loot/armor,
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
@@ -1649,10 +1619,10 @@
 /area/under/tomb/indoors)
 "Qt" = (
 /obj/item/clothing/head/padded/deathface,
-/obj/item/clothing/gloves/plate/blk/death,
-/obj/item/clothing/armor/plate/blkknight/death,
-/obj/item/clothing/pants/platelegs/blk/death,
-/obj/item/clothing/shoes/boots/armor/blkknight/death,
+/obj/item/clothing/gloves/plate,
+/obj/item/clothing/armor/plate,
+/obj/item/clothing/pants/platelegs,
+/obj/item/clothing/shoes/boots/armor,
 /obj/item/weapon/sword/long/death,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
@@ -1676,7 +1646,7 @@
 /area/under/tomb/indoors)
 "RN" = (
 /obj/structure/closet/crate/drawer,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "RR" = (
@@ -1786,7 +1756,7 @@
 /area/under/tomb/indoors)
 "Vf" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "Vh" = (
@@ -1835,11 +1805,6 @@
 /obj/structure/fermentation_keg,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/ruinedwood/darker,
-/area/under/tomb/indoors)
-"VJ" = (
-/obj/item/statue/gold,
-/obj/effect/decal/cleanable/blood,
-/turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors)
 "VY" = (
 /obj/structure/fluff/railing/border{
@@ -1939,12 +1904,8 @@
 	},
 /area/under/tomb/lake)
 "Yf" = (
-/obj/structure/closet/crate/chest/neu_iron,
-/obj/effect/spawner/map_spawner/loot,
-/obj/effect/spawner/map_spawner/loot/rare,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/spawner/map_spawner/loot/common,
 /obj/effect/decal/cleanable/blood,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
 "Yg" = (
@@ -2014,8 +1975,8 @@
 /area/under/tomb/cave)
 "Zp" = (
 /obj/structure/closet/crate/crafted_closet/lord,
-/obj/effect/spawner/map_spawner/loot/medium,
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "Zx" = (
@@ -3710,7 +3671,7 @@ oU
 oT
 jn
 Jh
-da
+gR
 jn
 Vf
 Dz
@@ -6481,7 +6442,7 @@ gZ
 gZ
 gZ
 bM
-nK
+aa
 qC
 yz
 hK
@@ -6527,7 +6488,7 @@ Yf
 Uu
 Xa
 IM
-VJ
+cO
 Uu
 ar
 WC

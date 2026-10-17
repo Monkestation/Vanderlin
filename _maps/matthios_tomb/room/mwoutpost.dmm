@@ -220,10 +220,6 @@
 /obj/effect/decal/carpet/kover_darkred,
 /turf/open/floor/wood,
 /area/under/tomb/indoors)
-"po" = (
-/obj/effect/spawner/map_spawner/loot/potion_poisons,
-/turf/open/floor/cobblerock,
-/area/under/tomb/indoors)
 "qd" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/dirt/road,
@@ -306,10 +302,6 @@
 /area/under/tomb/cave)
 "uQ" = (
 /obj/structure/pillory,
-/turf/open/floor/dirt/road,
-/area/under/tomb/wilds)
-"vi" = (
-/obj/item/clothing/gloves/plate,
 /turf/open/floor/dirt/road,
 /area/under/tomb/wilds)
 "vD" = (
@@ -446,7 +438,6 @@
 	name = "prisoner chest";
 	desc = "used to store a prisoners belongings."
 	},
-/obj/effect/spawner/map_spawner/loot/coin/med,
 /turf/open/floor/cobblerock/alt,
 /area/under/tomb/indoors)
 "De" = (
@@ -456,7 +447,7 @@
 /turf/open/openspace,
 /area/under/tomb/wilds)
 "Dj" = (
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/cobblerock,
 /area/under/tomb/indoors)
 "Dx" = (
@@ -613,7 +604,6 @@
 "LB" = (
 /obj/structure/giantfur,
 /obj/effect/decal/cleanable/blood/puddle,
-/obj/effect/spawner/map_spawner/loot/coin,
 /turf/open/floor/wood,
 /area/under/tomb/indoors)
 "LR" = (
@@ -641,7 +631,7 @@
 /area/under/tomb/wilds)
 "MN" = (
 /obj/structure/closet/crate/drawer,
-/obj/item/clothing/ring/gold/ravox,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/wood,
 /area/under/tomb/indoors)
 "MR" = (
@@ -696,10 +686,10 @@
 /obj/item/clothing/head/helmet/heavy/necked/cadwyn/ravox,
 /obj/item/weapon/greataxe/steel/doublehead,
 /obj/item/clothing/armor/cuirass/fluted,
-/obj/item/clothing/pants/chainlegs/kilt,
+/obj/item/clothing/pants/chainlegs/kilt/iron,
 /obj/item/clothing/wrists/bracers/ironjackchain,
 /obj/item/clothing/cloak/graggar/heavy,
-/obj/item/clothing/shoes/boots/armor,
+/obj/item/clothing/shoes/boots/armor/ironmaille,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /turf/open/floor/wood,
 /area/under/tomb/indoors)
@@ -714,10 +704,7 @@
 	icon_state = "longtable";
 	dir = 1
 	},
-/obj/effect/spawner/map_spawner/loot/coin/low{
-	pixel_x = 8;
-	pixel_y = 6
-	},
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "Pc" = (
@@ -737,9 +724,9 @@
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "PY" = (
-/obj/effect/spawner/map_spawner/loot/coin/high,
-/turf/open/floor/wood,
-/area/under/tomb/indoors)
+/obj/effect/dungeon_loot_spawner/medium,
+/turf/open/floor/dirt/road,
+/area/under/tomb/wilds)
 "PZ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -851,8 +838,8 @@
 /turf/open/floor/wood,
 /area/under/tomb/indoors)
 "Wy" = (
-/obj/effect/spawner/map_spawner/loot/weapon,
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
 "Xa" = (
@@ -1051,7 +1038,7 @@ Je
 YT
 Pg
 qd
-vi
+Je
 NP
 eS
 Fp
@@ -1078,7 +1065,7 @@ Je
 Je
 or
 dH
-Je
+PY
 Lf
 eS
 Fp
@@ -1090,7 +1077,7 @@ IG
 KI
 Dj
 cA
-po
+RW
 Zq
 Fb
 Ou
@@ -1766,7 +1753,7 @@ xH
 KP
 MN
 AD
-PY
+AD
 KP
 xH
 Gg
