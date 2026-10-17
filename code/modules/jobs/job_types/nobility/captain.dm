@@ -1,10 +1,10 @@
 /datum/attribute_holder/sheet/job/captain
 	raw_attribute_list = list(
-		STAT_STRENGTH = 2,
+		STAT_STRENGTH = 3,
 		STAT_PERCEPTION = 2,
-		STAT_INTELLIGENCE = 1,
-		STAT_CONSTITUTION = 1,
 		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 2,
+		STAT_INTELLIGENCE = 1,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/wrestling = 40,
 		/datum/attribute/skill/combat/axesmaces = 40,
@@ -13,8 +13,8 @@
 		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/combat/whipsflails = 20,
-		/datum/attribute/skill/combat/crossbows = 30,
-		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 40,
+		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
@@ -121,9 +121,9 @@
 	gloves = /obj/item/clothing/gloves/plate
 	pants = /obj/item/clothing/pants/platelegs/captain
 	armor = /obj/item/clothing/armor/brigandine/captain
-	neck = /obj/item/clothing/neck/gorget
-	shirt = /obj/item/clothing/shirt/undershirt/colored/guard
-	shoes = /obj/item/clothing/shoes/boots/darkboots
+	neck = /obj/item/clothing/neck/bevor
+	shirt = /obj/item/clothing/armor/gambeson/arming
+	shoes = /obj/item/clothing/shoes/boots/armor
 	backl = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/weapon/mace/cudgel
