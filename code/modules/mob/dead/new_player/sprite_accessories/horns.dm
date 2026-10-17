@@ -206,3 +206,8 @@
 
 /datum/sprite_accessory/horns/triton/is_visible(obj/item/organ/organ, obj/item/bodypart/bodypart, mob/living/carbon/owner)
 	return is_human_part_visible(owner, HIDEMASK)
+
+/datum/sprite_accessory/horns/rousman
+	name = "Rousman Ears"
+	icon = 'icons/mob/sprite_accessory/horns/rousman.dmi'
+	icon_state = "rousman"

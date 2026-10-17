@@ -124,6 +124,7 @@
 	SPEC_ID_HALF_ORC,\
 	SPEC_ID_DWARF_ORC,\
 	SPEC_ID_GOBLIN,\
+	SPEC_ID_ROUSMAN,\
 )
 
 /// Species not considered discriminated against in Vanderlin. Used for nobility, etc.
@@ -181,6 +182,7 @@
 	SPEC_ID_ROUSMAN,\
 	SPEC_ID_GOBLIN,\
 	SPEC_ID_ORC,\
+	SPEC_ID_ROUSMAN,\
 )
 
 /// Species who are affiliated with Grenzelhoft or Psydon specifically.
@@ -413,4 +415,5 @@
 	SPEC_ID_KOBOLD_FORMIKRAG,\
 	SPEC_ID_DWARF_SUBTERRAN,\
 	SPEC_ID_DWARF_ORC,\
+	SPEC_ID_ROUSMAN,\
 )

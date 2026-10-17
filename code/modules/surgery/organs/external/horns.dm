@@ -18,3 +18,7 @@
 	accessory_type = /datum/sprite_accessory/horns/triton
 
 /obj/item/organ/horns/demihuman
+
+/obj/item/organ/horns/rousman
+	name = "rousman ears"
+	accessory_type = /datum/sprite_accessory/horns/rousman
