@@ -1,7 +1,7 @@
 {
 	"map_name": "Vanderlin",
 	"map_path": "map_files/vanderlin",
-	"map_file": "vanderlin.dmm",
+	"map_file": "vanderlin2.dmm",
 	"immigrant_origin": "Kingsfield",
 	"monarch_title": "King",
 	"monarch_title_f": "Queen",
@@ -22,6 +22,11 @@
 			"Down": true,
 			"Turf Weather Effects": true,
 			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true
 		},
 		{
 			"Up": true,
