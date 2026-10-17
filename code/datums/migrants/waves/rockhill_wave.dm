@@ -81,9 +81,7 @@
 	. = ..()
 	if(!spawned.dna?.species)
 		return
-	var/datum/species/species = spawned.dna.species
-	species.native_language = "Rockhill"
-	species.accent_language = species.get_accent(species.native_language)
+	spawned.accent = ACCENT_ROCKHILL
 
 /datum/migrant_role/rockhill_knight
 	name = "Knight of Rockhill"
@@ -149,9 +147,7 @@
 		S.name = "knight tabard ([index])"
 	if(!spawned.dna?.species)
 		return
-	var/datum/species/species = spawned.dna.species
-	species.native_language = "Rockhill"
-	species.accent_language = species.get_accent(species.native_language)
+	spawned.accent = ACCENT_ROCKHILL
 
 /datum/outfit/rockhill/knight
 	name = "Knight of Rockhill (Migrant Wave)"
@@ -267,9 +263,7 @@
 	. = ..()
 	if(!spawned.dna?.species)
 		return
-	var/datum/species/species = spawned.dna.species
-	species.native_language = "Rockhill"
-	species.accent_language = species.get_accent(species.native_language)
+	spawned.accent = ACCENT_ROCKHILL
 
 /datum/migrant_role/footman_guard
 	name = "Guardsmen of Rockhill"
@@ -285,17 +279,13 @@
 	. = ..()
 	if(!spawned.dna?.species)
 		return
-	var/datum/species/species = spawned.dna.species
-	species.native_language = "Rockhill"
-	species.accent_language = species.get_accent(species.native_language)
+	spawned.accent = ACCENT_ROCKHILL
 
 /datum/job/migrant/footman_bannerman/rockhill/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	if(!spawned.dna?.species)
 		return
-	var/datum/species/species = spawned.dna.species
-	species.native_language = "Rockhill"
-	species.accent_language = species.get_accent(species.native_language)
+	spawned.accent = ACCENT_ROCKHILL
 
 /datum/migrant_wave/rockhill_wave
 	name = "The Mayor's Visit"

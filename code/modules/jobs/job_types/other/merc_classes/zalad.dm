@@ -57,16 +57,7 @@
 	else
 		spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'	//Forgive me, Combat_DesertRider, I'm sorry, I'll miss you.
 
-	// Set native language for specific species
-	if(spawned.dna?.species)
-		var/datum/species/species = spawned.dna.species
-		if(species.id == SPEC_ID_HUMEN)
-			species.native_language = "Zalad"
-			species.accent_language = species.get_accent(species.native_language)
-		else if(species.id in list(SPEC_ID_HALF_ELF, SPEC_ID_HALF_DROW))
-			if(species.native_language == "Imperial")
-				species.native_language = "Zalad"
-				species.accent_language = species.get_accent(species.native_language)
+	spawned.accent = ACCENT_ZALAD
 
 /datum/outfit/mercenary/zalad
 	name = "Red Sands (Mercenary)"

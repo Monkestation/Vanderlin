@@ -13,7 +13,7 @@
 	name = "Rakshari"
 	id = SPEC_ID_RAKSHARI
 	changesource_flags = WABBAJACK
-	native_language = "Zalad"
+	default_accent = ACCENT_ZALAD
 
 	desc = "Rakshari origins trace back to nomadic desert tribes, \
 	whose survival in the harsh sands cultivated a culture steeped in resilience, cunning, and adaptability. \
@@ -111,7 +111,6 @@
 
 /datum/species/rakshari/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/zalad)
 	add_verb(C, /mob/living/carbon/human/species/rakshari/verb/emote_meow)
@@ -142,7 +141,6 @@
 
 /datum/species/rakshari/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	var/datum/action/cooldown/keen_nose/action = locate() in C.actions
 	if(action)
 		qdel(action)

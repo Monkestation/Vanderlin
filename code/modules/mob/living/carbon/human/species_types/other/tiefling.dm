@@ -18,7 +18,7 @@
 /datum/species/tieberian
 	name = "Tiefling"
 	id = SPEC_ID_TIEFLING
-	native_language = "Infernal"
+	default_accent = ACCENT_TIEFLING
 	desc = "Also known as Infernal-Spawn, Hell-Bloods, Surface-Devils, and perhaps in a more humorous manner, <i>thief</i>-lings. \
 	\n\n\
 	Their treatment ranges from shunning to distrust, depending on the region. \
@@ -139,7 +139,6 @@
 
 /datum/species/tieberian/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/hellspeak)
 
@@ -149,7 +148,6 @@
 
 /datum/species/tieberian/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/hellspeak)
 
 /datum/species/tieberian/qualifies_for_rank(rank, list/features)

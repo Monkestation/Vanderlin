@@ -27,7 +27,7 @@
 	No magick is present among these people, blessed not with the grand wizardry of Noc but that simpler everyday magicks of the world, for a halfling goes unseen as easily as the wind blows. Truly, they are a hearth in this age."
 
 	default_color = "FFFFFF"
-	native_language = "Halfling"
+	forced_native_accent = ACCENT_HALFLING
 	species_traits = list(EYECOLOR, HAIR, FACEHAIR, LIPS, STUBBLE, OLDGREY)
 	inherent_traits = list(TRAIT_NOMOBSWAP, TRAIT_LIGHT_STEP, TRAIT_COIN_ILLITERATE, TRAIT_LUCKY_COOK)
 	inherent_sheet = /datum/attribute_holder/sheet/job/species/halfling
@@ -110,14 +110,12 @@
 
 /datum/species/halfling/after_creation(mob/living/carbon/C)
 	..()
-	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
 	C.grant_language(/datum/language/halfling)
 	to_chat(C, span_info("I can speak Halfspeak with ,p before my speech."))
 
 /datum/species/halfling/on_species_gain(mob/living/carbon/C, datum/species/old_species, datum/preferences/pref_load)
 	. = ..()
 
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/common)
 	C.grant_language(/datum/language/halfling)
 
@@ -132,7 +130,6 @@
 		return
 	C.remove_language(/datum/language/common)
 	C.remove_language(/datum/language/halfling)
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	UnregisterSignal(C, COMSIG_MOB_EQUIPPED_ITEM)
 	C.remove_status_effect(/datum/status_effect/buff/free_feet)
 	C.remove_status_effect(/datum/status_effect/buff/stuffed)
