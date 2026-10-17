@@ -46,7 +46,16 @@
 				message_admins("[ADMIN_LOOKUPFLW(src)] successfully Diablerized [ADMIN_LOOKUPFLW(victim)]")
 				log_attack("[key_name(src)] successfully Diablerized [key_name(victim)].")
 				to_chat(src, span_danger("I have consumed my kindred!"))
+				to_chat(victim, span_userdanger("One of the kindred have consumed me! I share part of their mind now."))
 				victim.death()
+				//copied from the profane dagger
+				var/mob/living/simple_animal/shade/soulstone_spirit = new /mob/living/simple_animal/shade(src)
+				soulstone_spirit.AddComponent(/datum/component/soulstoned, src)
+				soulstone_spirit.name = src.real_name //To imitate a vampire going insane through diablerism, the spirit of the consumed can still speak out loud
+				soulstone_spirit.real_name = victim.real_name
+				soulstone_spirit.PossessByPlayer(victim.key)
+				soulstone_spirit.cancel_camera()
+				src.maxbloodpool += 500 //increase bloodpool from diablerism
 				return 0
 			else
 				to_chat(src, span_userdanger("<b>YOU TRY TO COMMIT DIABLERIE ON [victim].</b>"))
@@ -74,7 +83,7 @@
 	return drink_amt
 
 /mob/living/carbon/human/proc/vampire_conversion_prompt(mob/living/carbon/sire)
-	if(HAS_TRAIT(src, "offered_vampirism"))
+	if(HAS_TRAIT(src, TRAIT_VAMP_OFFERED))
 		return // my testing allowed to double up the prompts, so just incase
 	if(!istype(sire?.mind?.has_antag_datum(/datum/antagonist/vampire), /datum/antagonist/vampire) || !sire.clan)
 		return
@@ -88,12 +97,12 @@
 				to_chat(sire, span_warning("[src]'s soul is beyond your grasp."))
 				return
 
-	ADD_TRAIT(src, "offered_vampirism", INNATE_TRAIT)
+	ADD_TRAIT(src, TRAIT_VAMP_OFFERED, INNATE_TRAIT)
 	if(is_antag_banned(client_victim.ckey, ROLE_VAMPIRE))
 		to_chat(sire, span_warning("[src] could not be sired."))
 		return
 
-	var/datum/clan/sire_clan = sire.clan
+	var/datum/clan/C = sire.clan
 	var/choice = tgui_alert(client_victim, "You have been offered the immortal blessing. Take it, or perish.", "THE CURSE OF KAIN", list("I ACCEPT", "TO NECRA"), timeout = 15 SECONDS)
 	if(QDELETED(src))
 		return
@@ -107,10 +116,14 @@
 		return
 	grab_ghost(TRUE, TRUE)
 	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS|HEAL_ORGANS), 500, TRUE)
+	mind.add_antag_datum(new /datum/antagonist/vampire(C, TRUE))
+	var/datum/clan_hierarchy_node/new_clan_position = C.create_position(pick(C.new_members_titles), "A new member of clan [C.name]", sire.clan_position, 1)
+	new_clan_position.assign_member(src)
 	var/antag_datum = /datum/antagonist/vampire
-	if(istype(sire_clan, /datum/clan/nitewalker))
+	if(istype(C, /datum/clan/nitewalker))
 		antag_datum = /datum/antagonist/vampire/nitewarden
-	mind.add_antag_datum(new antag_datum(sire_clan, TRUE))
+	mind.add_antag_datum(new antag_datum(C, TRUE))
 	set_bloodpool(500)
+	grant_undead_eyes()
 	visible_message(span_danger("Some dark energy begins to flow into [src]..."))
 	visible_message(span_red("[src] rises as a new spawn!"))

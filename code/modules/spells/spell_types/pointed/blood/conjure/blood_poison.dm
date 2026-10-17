@@ -47,7 +47,9 @@
 	. = ..()
 	if(isweapon(cast_on))
 		var/obj/item/weapon/target_weapon = cast_on
-		target_weapon.AddElement(/datum/element/one_time_poison, list(/datum/reagent/poison/bloodstone_essence = blade_poison_amt))
+		if(!target_weapon.reagents)
+			target_weapon.AddElement(/datum/element/tipped_item)
+		target_weapon.reagents.add_reagent(/datum/reagent/poison/bloodstone_essence, blade_poison_amt)
 		to_chat(owner, span_warning("I poison [target_weapon]."))
 		log_attack("[key_name(owner)] coated [target_weapon] with blood poison.")
 		return TRUE
