@@ -44,3 +44,4 @@
 
 	required_form = FORM_ARCANE
 	required_technique = TECHNIQUE_ILLUSION
+	required_level = 10

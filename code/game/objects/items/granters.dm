@@ -192,7 +192,7 @@
 
 /obj/item/book/granter/spell/magick/invisibility
 	name = "Scroll of Invisibility"
-	spell = /datum/action/cooldown/spell/status/invisibility
+	spell = /datum/action/cooldown/spell/status/invisibility/arcyne
 	spellname = "invisibility"
 	icon_state = "scrollpurple"
 	remarks = list("Pallium nihilum..", "Occultare veritatem..", "Veritatem removan menor..")
@@ -200,17 +200,21 @@
 //scroll for giving the reader a spell point, this should be dungeon loot
 /obj/item/book/granter/spell_points
 	name = "Arcyne Insight"
-	icon_state = "scrollpurple"
+	icon_state = "enchantment"
 	icon = 'icons/roguetown/items/misc.dmi'
 	oneuse = TRUE
 	drop_sound = 'sound/foley/dropsound/paper_drop.ogg'
 	pickup_sound =  'sound/blank.ogg'
+	var/is_technique_scroll = FALSE
 
 /obj/item/book/granter/spell_points/on_reading_finished(mob/living/user)
 	var/arcaneskill = GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane)
 	if(arcaneskill >= SKILL_LEVEL_NOVICE) //Required arcane skill of NOVICE or higher to use the granter
 		to_chat(user, span_notice("I absorb the insights on the scroll, and feel more adept at spellcraft!"))
-		user.adjust_form_mastery_points(1)
+		if(is_technique_scroll)
+			user.adjust_technique_mastery_points(1)
+		else
+			user.adjust_form_mastery_points(1)
 		onlearned(user)
 	else
 		to_chat(user, span_notice("I don't know what to make of this."))
@@ -222,3 +226,6 @@
 		desc = "A scroll once inscribed with magical scripture. The surface is now barren of knowledge, siphoned by someone else. It's utterly useless."
 		icon_state = "scroll"
 		user.visible_message(span_warning("[src] has had its magic ink ripped from the scroll!"))
+
+/obj/item/book/granter/spell_points/technique
+	is_technique_scroll = TRUE

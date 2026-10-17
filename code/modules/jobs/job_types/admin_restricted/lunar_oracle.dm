@@ -118,6 +118,7 @@
 		devotion.make_oracle()
 		devotion.grant_to(spawned)
 	spawned.apply_status_effect(/datum/status_effect/buff/nocblessed)
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 	spawned.adjust_technique_mastery_points(12)
 	spawned.adjust_form_mastery_points(20)
