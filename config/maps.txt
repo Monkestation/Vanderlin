@@ -38,6 +38,10 @@ map voyager
 	votable
 endmap
 
+map valdero
+	maxplayers 35
+endmap
+
 map wyrmwood
 	maxplayers 0
 	votable
