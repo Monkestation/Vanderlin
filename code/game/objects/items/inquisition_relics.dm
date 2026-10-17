@@ -1079,15 +1079,13 @@
 		if(bagging)
 			addtimer(CALLBACK(src, PROC_REF(bagsound), M), timer)
 
-/obj/item/clothing/head/inqarticles/blackbag/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
-	if(!iscarbon(interacting_with))
-		return NONE
-
-	var/mob/living/carbon/M = interacting_with
+/obj/item/clothing/head/inqarticles/blackbag/attack(mob/living/M, mob/living/user, list/modifiers)
+	if(!ishuman(M))
+		return
 
 	if(HAS_TRAIT(M, TRAIT_BAGGED))
 		to_chat(user, span_warning("They've already been bagged."))
-		return ITEM_INTERACT_BLOCKING
+		return
 
 	var/obj/item/headgear = M.get_item_by_slot(ITEM_SLOT_HEAD)
 
@@ -1111,11 +1109,9 @@
 	else
 		bagging = FALSE
 
-	return ITEM_INTERACT_SUCCESS
-
 /obj/item/clothing/head/inqarticles/blackbag/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
-	if(user.head == src)
+	if(slot & ITEM_SLOT_HEAD)
 		bagging = FALSE
 		user.become_blind("blindfold_[REF(src)]")
 		playsound(user, pick('sound/misc/blackbagequip.ogg', 'sound/misc/blackbagequip2.ogg'), 100, TRUE, 4)
@@ -1161,6 +1157,31 @@
 				"eflip" = 8)
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+
+//............... Sewable black bag, avaible to non-inquisition ...............  //
+/obj/item/clothing/head/inqarticles/blackbag/civilian
+	name = "black bag"
+	desc = "An eyeless sack, used to blindfold prisoners or hostages."
+	icon_state = "sacked"
+	item_state = "sacked"
+	unequip_delay_self = 0
+	flags_inv = HIDEEARS|HIDEFACE|HIDEHAIR|HIDEFACIALHAIR
+	tint = TINT_BLIND
+	item_weight = 55 GRAMS
+
+/obj/item/clothing/head/inqarticles/blackbag/civilian/attack(mob/living/target, mob/living/user, list/modifiers)
+	if(target.get_item_by_slot(ITEM_SLOT_HEAD))
+		to_chat(user, "<span class='warning'>Remove [target.p_their()] headgear first!</span>")
+		return
+	target.visible_message("<span class='warning'>[user] forces [src] onto [target]'s head!</span>", \
+	"<span class='danger'>[target] forces [src] onto your head!</span>", "<i>I can't see anything.</i>")
+	if(ishuman(target)) // If the target is human and not in combat mode, stun them the same way a feint would.
+		var/mob/living/carbon/human/T = target
+		if(!T.cmode)
+			T.emote("whimper", intentional = FALSE)
+			T.changeNext_move(8)
+			T.Immobilize(10)
+	target.equip_to_slot(src, ITEM_SLOT_HEAD)
 
 
 /obj/item/inqarticles/bmirror

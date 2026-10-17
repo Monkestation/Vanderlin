@@ -7600,7 +7600,7 @@
 /obj/item/clothing/cloak/raincloak/colored/mortus{
 	name = "cloak"
 	},
-/obj/item/clothing/head/sack,
+/obj/item/clothing/head/inqarticles/blackbag/civilian,
 /obj/structure/closet/crate/crafted_closet/dark,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/dungeoneer)
@@ -30450,10 +30450,10 @@
 /area/under/town/basement)
 "lUy" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/head/sack{
+/obj/item/clothing/head/inqarticles/blackbag/civilian{
 	pixel_y = -5
 	},
-/obj/item/clothing/head/sack{
+/obj/item/clothing/head/inqarticles/blackbag/civilian{
 	pixel_x = -5;
 	pixel_y = 7
 	},
