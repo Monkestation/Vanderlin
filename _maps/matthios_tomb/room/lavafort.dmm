@@ -399,7 +399,6 @@
 /area/under/tomb/cave/lava)
 "zB" = (
 /obj/structure/fluff/railing/border,
-
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "zU" = (

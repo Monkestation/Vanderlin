@@ -431,7 +431,6 @@
 /turf/open/floor/grass,
 /area/under/tomb)
 "nG" = (
-
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/tomb/indoors/church)

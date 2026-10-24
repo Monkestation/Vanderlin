@@ -4,7 +4,6 @@
 /turf/open/floor/carpet/lord/left,
 /area/under/tomb/indoors/church)
 "as" = (
-
 /obj/effect/decal/cleanable/blood/gibs/down,
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/churchmarble/rust,
