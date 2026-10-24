@@ -1,4 +1,11 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/gate/bars{
+	redstone_id = "FireGate1";
+	name = "Hell gate"
+	},
+/turf/open/floor/cobble,
+/area/under/tomb)
 "ab" = (
 /obj/structure/rack/shelf/biggest,
 /obj/effect/dungeon_loot_spawner/medium,
@@ -12,12 +19,6 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
-"ae" = (
-/obj/structure/gate/bars{
-	redstone_id = FireGate2
-	},
-/turf/open/floor/cobble,
-/area/under/tomb)
 "af" = (
 /obj/structure/bed,
 /obj/effect/dungeon_loot_spawner/low,
@@ -177,13 +178,6 @@
 /obj/item/weapon/shield/tower/buckleriron,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/royal)
-"aC" = (
-/obj/structure/gate/bars{
-	redstone_id = FireGate1;
-	name = "Hell gate"
-	},
-/turf/open/floor/cobble,
-/area/under/tomb)
 "aD" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
 	base_strength = 15;
@@ -699,6 +693,13 @@
 	},
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
+"bU" = (
+/obj/structure/gate/bars{
+	redstone_id = "FireGate2";
+	name = "hell gate"
+	},
+/turf/open/floor/cobble,
+/area/under/tomb)
 "bZ" = (
 /obj/structure/bars/pipe{
 	dir = 8;
@@ -6402,13 +6403,13 @@ tY
 OO
 tY
 tY
-ae
+bU
 iH
 pz
 Xb
 Yw
 Zb
-aC
+aa
 Gx
 Vs
 eG
