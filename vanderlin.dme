@@ -1015,6 +1015,7 @@
 #include "code\datums\attributes\attributes\skills\_skill.dm"
 #include "code\datums\attributes\attributes\skills\combat.dm"
 #include "code\datums\attributes\attributes\skills\craft.dm"
+#include "code\datums\attributes\attributes\skills\educated.dm"
 #include "code\datums\attributes\attributes\skills\labor.dm"
 #include "code\datums\attributes\attributes\skills\magic.dm"
 #include "code\datums\attributes\attributes\skills\misc.dm"
