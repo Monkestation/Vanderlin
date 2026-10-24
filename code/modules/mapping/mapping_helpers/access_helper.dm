@@ -231,6 +231,10 @@
 		ACCESS_COURTAGENT
 	)
 
+/obj/effect/mapping_helpers/access/keyset/manor/dignitary
+	accesses = list(ACCESS_DIGNITARY, ACCESS_BUTLER)
+	difficulty = LOCK_LEGENDARY
+
 /obj/effect/mapping_helpers/access/keyset/manor/archive
 	accesses = list(ACCESS_ARCHIVIST)
 

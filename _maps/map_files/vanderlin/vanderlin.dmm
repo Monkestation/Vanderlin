@@ -9643,6 +9643,16 @@
 "dDx" = (
 /turf/open/floor/ruinedwood,
 /area/indoors/town/keep/guest/guest2)
+"dDz" = (
+/obj/structure/table/wood/fancy/purple,
+/obj/effect/decal/carpet/kover_black,
+/obj/item/paper,
+/obj/item/natural/feather{
+	pixel_x = -15;
+	pixel_y = 4
+	},
+/turf/open/floor/ruinedwood,
+/area/indoors/town/keep/dignitary)
 "dDD" = (
 /obj/structure/bars,
 /turf/open/floor/tile/kitchen,
@@ -12143,6 +12153,11 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/keep/gate)
+"eEW" = (
+/obj/structure/bed/inn/double,
+/obj/item/bedsheet/double_pelt,
+/turf/open/floor/carpet/purple,
+/area/indoors/town/keep/dignitary)
 "eFa" = (
 /obj/structure/bars,
 /obj/effect/mapping_helpers/structure/breaker{
@@ -21903,6 +21918,19 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/tavern)
+"iwa" = (
+/obj/structure/table/wood{
+	icon_state = "largetable";
+	dir = 4
+	},
+/obj/item/reagent_containers/glass/cup,
+/obj/item/candle/scandle/lit{
+	pixel_x = -15;
+	pixel_y = -10;
+	sellprice = 1
+	},
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/keep/feast)
 "iwd" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/lockpickring/mundane{
@@ -24930,9 +24958,13 @@
 /turf/open/floor/dirt/road,
 /area/indoors/town/church/inquisition)
 "jCD" = (
-/obj/item/trash/candle,
-/turf/open/floor/herringbone,
-/area/indoors/town/keep/passages/firstfloor)
+/obj/structure/closet/crate/drawer,
+/obj/item/candle/scandle/lit{
+	pixel_x = 2;
+	pixel_y = 13
+	},
+/turf/open/floor/carpet/purple,
+/area/indoors/town/keep/dignitary)
 "jCL" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup{
@@ -28545,10 +28577,8 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
 "kYM" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 1
-	},
-/area/indoors/town/keep/halls/w)
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/keep/dignitary)
 "kYO" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/table/wood/reinf_long,
@@ -30532,6 +30562,18 @@
 /obj/structure/fluff/walldeco/painting/queen,
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/keep/gate)
+"lMG" = (
+/obj/structure/table/wood{
+	icon_state = "largetable";
+	dir = 4
+	},
+/obj/item/candle/scandle/lit{
+	pixel_x = -15;
+	pixel_y = -10;
+	sellprice = 1
+	},
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/keep/feast)
 "lNk" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4;
@@ -31764,8 +31806,9 @@
 /turf/open/floor/hexstone,
 /area/indoors/town/orphanage)
 "mjU" = (
-/turf/closed/wall/mineral/wooddark,
-/area/indoors/town/keep/passages/firstfloor)
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/ruinedwood,
+/area/indoors/town/keep/dignitary)
 "mjZ" = (
 /obj/structure/flora/grass/herb/calendula,
 /obj/structure/wild_plant/nospread/sunflower,
@@ -34686,18 +34729,6 @@
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
-"nqD" = (
-/obj/structure/table/wood{
-	icon_state = "largetable";
-	dir = 4
-	},
-/obj/item/candle/scandle/lit{
-	pixel_x = -15;
-	pixel_y = -10;
-	sellprice = 1
-	},
-/turf/open/floor/blocks/stonered,
-/area/indoors/town/keep/feast)
 "nqQ" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
@@ -36898,6 +36929,10 @@
 /obj/structure/dye_bin,
 /turf/open/floor/blocks/paving,
 /area/under/town/sewer)
+"okq" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/carpet/purple,
+/area/indoors/town/keep/dignitary)
 "okz" = (
 /turf/open/floor/dirt,
 /area/under/cavewet)
@@ -38512,6 +38547,9 @@
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
+"oQG" = (
+/turf/open/floor/carpet/purple,
+/area/indoors/town/keep/dignitary)
 "oQI" = (
 /obj/structure/chair/wood/alt{
 	dir = 1
@@ -40387,8 +40425,15 @@
 /turf/open/floor/wood,
 /area/indoors/town)
 "pDr" = (
-/turf/closed/wall/mineral/wooddark/horizontal,
-/area/indoors/town/keep/halls/w)
+/obj/structure/closet/crate/crafted_closet,
+/obj/item/clothing/shirt/undershirt/fancy,
+/obj/item/clothing/shirt/tunic/noblecoat,
+/obj/item/clothing/shoes/nobleboot,
+/obj/item/clothing/shirt/dress/nobledress,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/item/clothing/pants/tights/colored/black,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/keep/dignitary)
 "pDt" = (
 /turf/open/floor/cobble,
 /area/outdoors/exposed/church)
@@ -42466,10 +42511,11 @@
 /turf/open/floor/grass,
 /area/outdoors/town)
 "qpC" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 8
+/obj/structure/lever/hidden/keep{
+	redstone_id = Keep-Dignitary
 	},
-/area/indoors/town/keep/passages/firstfloor)
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/town/keep/dignitary)
 "qpD" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/paint_palette/filled{
@@ -44949,6 +44995,12 @@
 /obj/effect/mapping_helpers/access/keyset/town/inn,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/town/basement)
+"rjZ" = (
+/obj/machinery/light/fueled/wallfire{
+	pixel_y = 32
+	},
+/turf/open/floor/carpet/purple,
+/area/indoors/town/keep/dignitary)
 "rki" = (
 /obj/structure/door/iron/bars{
 	name = "Dungeon Door"
@@ -47720,6 +47772,9 @@
 /obj/machinery/light/fueled/torchholder/metal_torch/west,
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/beach)
+"sne" = (
+/turf/open/floor/ruinedwood,
+/area/indoors/town/keep/dignitary)
 "snl" = (
 /obj/structure/stairs,
 /turf/open/floor/blocks,
@@ -49641,6 +49696,9 @@
 	},
 /turf/open/floor/tile/masonic,
 /area/indoors/town/keep/throne)
+"taF" = (
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/town/keep/dignitary)
 "taH" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -50916,6 +50974,11 @@
 /obj/effect/mapping_helpers/access/keyset/manor/lord/consort,
 /turf/open/floor/hexstone,
 /area/indoors/town/keep/lord_appt)
+"tDY" = (
+/obj/item/trash/candle,
+/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
+/turf/open/floor/herringbone,
+/area/indoors/town/keep/passages/firstfloor)
 "tEd" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/r,
 /obj/item/candle/yellow{
@@ -51148,9 +51211,9 @@
 /turf/open/floor/church/gold,
 /area/indoors/town/church)
 "tId" = (
-/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/turf/open/floor/herringbone,
-/area/indoors/town/keep/passages/firstfloor)
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/keep/dignitary)
 "tIn" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -54278,6 +54341,12 @@
 /obj/structure/bookcase/random/thesis,
 /turf/open/floor/metal/alt,
 /area/indoors/town/keep/magician)
+"uSa" = (
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 8
+	},
+/turf/open/floor/ruinedwood,
+/area/indoors/town/keep/dignitary)
 "uSb" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -56216,6 +56285,12 @@
 "vCu" = (
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/keep/captain)
+"vCw" = (
+/obj/structure/chair/wood/alt/chair_noble/purple{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood,
+/area/indoors/town/keep/dignitary)
 "vCA" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -61177,6 +61252,14 @@
 	},
 /turf/open/floor/woodturned/nosmooth,
 /area/indoors/town/keep/throne)
+"xqI" = (
+/obj/structure/fake_machine/mail/r{
+	mailtag = "Dignitary"
+	},
+/obj/effect/mapping_helpers/access/keyset/manor/dignitary,
+/obj/structure/closet/crate/chest,
+/turf/open/floor/blocks/newstone/alt,
+/area/indoors/town/keep/dignitary)
 "xqO" = (
 /obj/structure/flora/grass/bush{
 	pixel_x = 6
@@ -61226,6 +61309,12 @@
 	},
 /turf/closed/wall/mineral/wooddark/end,
 /area/outdoors/exposed/church)
+"xse" = (
+/obj/effect/mapping_helpers/secret_door_creator/keep{
+	redstone_id = Keep-Dignitary
+	},
+/turf/closed/wall/mineral/decorstone,
+/area/indoors/town/keep/dignitary)
 "xsi" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -61841,10 +61930,13 @@
 /turf/open/floor/churchmarble/violet,
 /area/indoors/town/church/inquisition)
 "xCM" = (
-/turf/closed/wall/mineral/wooddark/end{
-	dir = 8
+/obj/structure/door/window{
+	name = "Dignitary's Room"
 	},
-/area/indoors/town/keep/halls/w)
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/manor/dignitary,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/keep/dignitary)
 "xDd" = (
 /turf/open/floor/twig,
 /area/outdoors/farm)
@@ -62397,19 +62489,6 @@
 /obj/structure/fake_machine/vendor/blacksmith,
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
-"xPz" = (
-/obj/structure/table/wood{
-	icon_state = "largetable";
-	dir = 4
-	},
-/obj/item/reagent_containers/glass/cup,
-/obj/item/candle/scandle/lit{
-	pixel_x = -15;
-	pixel_y = -10;
-	sellprice = 1
-	},
-/turf/open/floor/blocks/stonered,
-/area/indoors/town/keep/feast)
 "xPG" = (
 /turf/closed/wall/mineral/roofwall/outercorner{
 	dir = 1
@@ -123210,7 +123289,7 @@ xts
 jHl
 fhh
 jHl
-xPz
+iwa
 uBo
 qpP
 riv
@@ -124220,7 +124299,7 @@ xts
 vhr
 fhh
 jHl
-nqD
+lMG
 uBo
 qpP
 ycJ
@@ -160964,14 +161043,14 @@ qFx
 qFx
 iZB
 iZB
-fRt
-fRt
-iZB
-fdB
-fdB
-fdB
-fdB
-fdB
+tDY
+taF
+taF
+qpC
+xse
+taF
+taF
+taF
 fdB
 fhm
 hyg
@@ -161164,16 +161243,16 @@ qFx
 qFx
 qFx
 qFx
-rKz
+qFx
 iZB
+iZB
+taF
+pDr
 tId
-jCD
-iZB
-iZB
-fhm
-fhm
-fhm
-iZB
+kYM
+mjU
+vCw
+taF
 fdB
 iZB
 hyg
@@ -161366,16 +161445,16 @@ qFx
 qFx
 qFx
 qFx
-iZB
-iZB
-iZB
-iZB
-iZB
-iZB
 qFx
 qFx
 qFx
-iZB
+taF
+rjZ
+oQG
+kYM
+sne
+dDz
+taF
 fdB
 fdB
 hyg
@@ -161571,13 +161650,13 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-mjU
+taF
+jCD
+oQG
+kYM
+sne
+uSa
+taF
 fdB
 fdB
 tIq
@@ -161773,13 +161852,13 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qFx
-qpC
+taF
+eEW
+okq
+kYM
+kYM
+xqI
+taF
 cme
 jXN
 nni
@@ -161975,13 +162054,13 @@ qFx
 qFx
 qFx
 qFx
-eCT
-kYM
-pDr
-pDr
+taF
+taF
+taF
+taF
 xCM
-eCT
-eCT
+taF
+taF
 qxs
 cXZ
 hyg
