@@ -33,8 +33,8 @@
 ---------------------------------------------------------------------------------*/
 
 /datum/attribute/skill/magic/arcane
-	name = FORM_ARCANE
-	desc = "Represents your character's ability to perform Arcyne Magic. The higher your skill the more powerful your spells will be."
+	name = "Arcyne Magic"
+	desc = "Represents your character's ability to perform the expansive field of Arcyne Magic. The higher your skill the more powerful your spells will be."
 	governing_attribute = STAT_INTELLIGENCE
 	default_attributes = list(
 		STAT_INTELLIGENCE = -8,
