@@ -1,4 +1,3 @@
-/*
 /datum/round_event_control/antagonist/solo/zizo_cult
 	name = "Zizo Cult"
 	tags = list(
@@ -63,4 +62,3 @@
 		leader = TRUE
 	else
 		antag_mind.add_antag_datum(antag_datum)
-*/

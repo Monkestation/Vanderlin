@@ -2654,6 +2654,7 @@
 #include "code\modules\antagonists\villain\werewolf\werewolf_spells.dm"
 #include "code\modules\antagonists\villain\werewolf\werewolf_transformation.dm"
 #include "code\modules\antagonists\villain\zizo_cult\rituals.dm"
+#include "code\modules\antagonists\villain\zizo_cult\tutorialbook.dm"
 #include "code\modules\antagonists\villain\zizo_cult\zizocult.dm"
 #include "code\modules\asset_cache\asset_cache_item.dm"
 #include "code\modules\asset_cache\asset_client.dm"

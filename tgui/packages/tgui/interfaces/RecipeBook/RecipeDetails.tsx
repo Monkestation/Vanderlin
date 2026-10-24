@@ -30,6 +30,7 @@ import { DetailOrgan } from './details/DetailOrgan';
 import { DetailChemicalReaction } from './details/DetailChemicalReaction';
 import { DetailDistillation } from './details/DetailDistillation';
 import { DetailArcyneCrafting } from './details/DetailArcyneCrafting';
+import { DetailZizoRitual } from './details/DetailZizoRitual';
 import { DetailSpellcraft } from './details/DetailSpellcraft';
 
 type Props = {
@@ -78,8 +79,9 @@ export const RecipeDetail = ({ recipe: r, lookup, pickerMap, allRecipes, essence
       case 'chemical_reaction':   return <DetailChemicalReaction {...sharedProps} />;
       case 'distillation':        return <DetailDistillation {...sharedProps} />;
       case 'arcyne_crafting':     return <DetailArcyneCrafting {...sharedProps} />;
+      case 'zizo_ritual':         return <DetailZizoRitual {...sharedProps} />;
       case 'spellcraft':          return <DetailSpellcraft {...sharedProps} />;
-      case 'spellcraft-item':          return <DetailSpellcraft {...sharedProps} />;
+      case 'spellcraft-item':     return <DetailSpellcraft {...sharedProps} />;
       default:
         return <Box className="RecipeBook__desc">No details available for type: {r.type}</Box>;
     }
