@@ -19,12 +19,6 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
-"ae" = (
-/obj/structure/winch{
-	redstone_id = ""FireGate3""
-	},
-/turf/open/floor/cobblerock,
-/area/under/tomb/wilds)
 "af" = (
 /obj/structure/bed,
 /obj/effect/dungeon_loot_spawner/low,
@@ -122,6 +116,12 @@
 "av" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"aw" = (
+/obj/structure/winch{
+	redstone_id = "FireGate3"
+	},
+/turf/open/floor/cobblerock,
 /area/under/tomb/wilds)
 "ax" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
@@ -6678,7 +6678,7 @@ Jx
 lm
 WL
 Jx
-ae
+aw
 zV
 Bo
 Dc
