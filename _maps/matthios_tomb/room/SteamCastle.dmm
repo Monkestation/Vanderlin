@@ -19,6 +19,12 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
+"ae" = (
+/obj/structure/winch{
+	redstone_id = ""FireGate3""
+	},
+/turf/open/floor/cobblerock,
+/area/under/tomb/wilds)
 "af" = (
 /obj/structure/bed,
 /obj/effect/dungeon_loot_spawner/low,
@@ -117,12 +123,6 @@
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
-"aw" = (
-/obj/structure/gate/bars{
-	redstone_id = FireGate3
-	},
-/turf/open/floor/cobble,
-/area/under/tomb/indoors/royal)
 "ax" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
 	base_strength = 15;
@@ -177,6 +177,12 @@
 /obj/item/weapon/mace/warhammer/steel,
 /obj/item/weapon/shield/tower/buckleriron,
 /turf/open/floor/churchmarble,
+/area/under/tomb/indoors/royal)
+"aC" = (
+/obj/structure/gate/bars{
+	redstone_id = "FireGate3"
+	},
+/turf/open/floor/cobble,
 /area/under/tomb/indoors/royal)
 "aD" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
@@ -1267,12 +1273,6 @@
 /obj/structure/chair/bench/couchablack/r,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/royal)
-"jK" = (
-/obj/structure/winch{
-	redstone_id = "FireGate3"
-	},
-/turf/open/floor/cobblerock,
-/area/under/tomb/wilds)
 "jU" = (
 /obj/item/rope/chain,
 /obj/structure/trap/shock,
@@ -6389,7 +6389,7 @@ Ia
 Ia
 Ia
 Ia
-aw
+aC
 tY
 tY
 lv
@@ -6678,7 +6678,7 @@ Jx
 lm
 WL
 Jx
-jK
+ae
 zV
 Bo
 Dc
