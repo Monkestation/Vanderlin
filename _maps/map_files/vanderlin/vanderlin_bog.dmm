@@ -14916,7 +14916,7 @@
 /turf/open/floor/tile,
 /area/indoors/shelter/bog/lich)
 "nsb" = (
-/obj/effect/decal/cleanable/sigil{
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil{
 	icon_state = "zizocircle";
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},

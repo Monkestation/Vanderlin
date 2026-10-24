@@ -108,7 +108,6 @@
 /turf/open/floor/woodturned,
 /area/under/tomb/cave/wet)
 "df" = (
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/tomb/indoors/church)
 "do" = (
@@ -167,7 +166,6 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "fs" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/tomb/indoors/church)
 "fC" = (
@@ -433,7 +431,7 @@
 /turf/open/floor/grass,
 /area/under/tomb)
 "nG" = (
-/obj/effect/decal/cleanable/sigil/S,
+
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/tomb/indoors/church)
@@ -507,7 +505,6 @@
 /turf/open/openspace,
 /area/under/tomb/indoors/church)
 "qW" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/plasteel/maniac/damaged,
@@ -529,7 +526,6 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "sy" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/tomb/indoors/church)
 "sH" = (
@@ -655,7 +651,6 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "yc" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/spawner/map_spawner/loot/magic,
 /turf/open/floor/plasteel/maniac/damaged,
@@ -670,7 +665,6 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "yn" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/tomb/indoors/church)
 "yM" = (
@@ -707,7 +701,6 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "AF" = (
-/obj/effect/decal/cleanable/sigil/W,
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/plasteel/maniac/damaged,
@@ -950,7 +943,7 @@
 "KS" = (
 /obj/structure/table/wood/fancy/black,
 /obj/item/weapon/knife/dagger/steel/inhumen/profane,
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/tomb/indoors/church)
 "KW" = (

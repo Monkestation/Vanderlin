@@ -3,11 +3,9 @@
 /turf/open/water/swamp/deep,
 /area/under/tomb/cave/wet)
 "cy" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "cA" = (
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "dx" = (
@@ -17,7 +15,6 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "eS" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
@@ -64,7 +61,6 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "iO" = (
-/obj/effect/decal/cleanable/sigil/W,
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
@@ -111,7 +107,7 @@
 /turf/open/floor/tile,
 /area/under/tomb/indoors)
 "qU" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/item/reagent_containers/powder/ozium{
 	pixel_y = 2
 	},
@@ -154,7 +150,6 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "tg" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "ug" = (
@@ -249,7 +244,6 @@
 /turf/open/floor/rooftop,
 /area/under/tomb/cave/wet)
 "IM" = (
-/obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "IY" = (
@@ -283,7 +277,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "LO" = (
-/obj/effect/decal/cleanable/sigil/S,
+
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "MS" = (
@@ -324,7 +318,6 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "RU" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "SC" = (

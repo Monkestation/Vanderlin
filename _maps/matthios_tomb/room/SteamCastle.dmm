@@ -454,7 +454,6 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "fC" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /mob/living/simple_animal/hostile/retaliate/blood,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
@@ -494,7 +493,6 @@
 /turf/open/floor/grass/red,
 /area/under/tomb/indoors/royal)
 "fT" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
@@ -567,7 +565,6 @@
 /turf/open/floor/twig,
 /area/under/tomb/indoors)
 "gZ" = (
-/obj/effect/decal/cleanable/sigil/W,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
@@ -2530,7 +2527,7 @@
 /turf/open/openspace,
 /area/under/tomb/indoors/royal)
 "BC" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/structure/table/optable,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/tile/masonic/single,
@@ -2643,7 +2640,6 @@
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "CM" = (
-/obj/effect/decal/cleanable/sigil/SW,
 /mob/living/simple_animal/hostile/retaliate/blood,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
@@ -3038,7 +3034,6 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "Hg" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
@@ -3329,7 +3324,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/indoors)
 "KG" = (
-/obj/effect/decal/cleanable/sigil/S,
+
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/tile/masonic/single,
@@ -3517,7 +3512,6 @@
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors)
 "MP" = (
-/obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
 "MW" = (
@@ -4375,7 +4369,6 @@
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "Vw" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
 "Vx" = (

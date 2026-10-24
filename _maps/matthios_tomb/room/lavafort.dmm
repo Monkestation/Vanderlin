@@ -39,7 +39,6 @@
 /area/under/tomb/cave/lava)
 "dQ" = (
 /obj/structure/fluff/railing/border,
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "dS" = (
@@ -52,7 +51,6 @@
 /area/under/tomb/cave/lava)
 "ez" = (
 /obj/structure/fluff/railing/border,
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "eR" = (
@@ -313,7 +311,6 @@
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
 "tJ" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /obj/structure/fluff/walldeco/church/line,
@@ -351,7 +348,7 @@
 /turf/open/openspace,
 /area/under/tomb/cave/lava)
 "vF" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/item/weapon/knife/dagger/silver,
 /obj/item/reagent_containers/powder/moondust_purest,
 /turf/open/floor/carpet/royalblack,
@@ -362,7 +359,6 @@
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "wA" = (
-/obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "xk" = (
@@ -403,7 +399,7 @@
 /area/under/tomb/cave/lava)
 "zB" = (
 /obj/structure/fluff/railing/border,
-/obj/effect/decal/cleanable/sigil/S,
+
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "zU" = (
@@ -499,7 +495,6 @@
 /area/under/tomb/cave/lava)
 "Fu" = (
 /obj/machinery/light/fueled/cauldron,
-/obj/effect/decal/cleanable/sigil/N,
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors/magic)
@@ -560,7 +555,6 @@
 /turf/closed/wall/mineral/stone,
 /area/under/tomb/indoors/magic)
 "Kc" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
 /obj/structure/fluff/walldeco/church/line,
@@ -733,7 +727,6 @@
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
 "UL" = (
-/obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "Vq" = (
