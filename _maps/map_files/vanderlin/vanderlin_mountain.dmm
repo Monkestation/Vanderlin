@@ -9600,7 +9600,6 @@
 /area/indoors/town/church/inquisition)
 "aUl" = (
 /obj/effect/decal/cleanable/dirt/dust,
-
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "aUm" = (
