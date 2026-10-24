@@ -5,6 +5,7 @@
 	sound = 'sound/magic/haste.ogg'
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 
 	charge_time = 4 SECONDS
 	charge_drain = 1

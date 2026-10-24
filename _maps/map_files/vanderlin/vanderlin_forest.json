@@ -8,6 +8,11 @@
             "Leylines": true
         },
         {
+            "Up": true,
+            "Down": true,
+            "Leylines": true
+        },
+        {
             "Down": true
         }
     ]

@@ -9,6 +9,7 @@
 	sound = 'sound/spellbooks/crystal.ogg'
 
 	required_form = FORM_ICE
+	associated_skill = /datum/attribute/skill/magic/arcane/ice
 	required_technique = TECHNIQUE_CREATION
 
 	telegraph_type = /obj/effect/temp_visual/trapice

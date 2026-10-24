@@ -1,6 +1,5 @@
 /obj/item/clothing/cloak/templar
 	var/overarmor = TRUE
-	has_storage = TRUE
 
 
 /obj/item/clothing/cloak/templar/astratan
@@ -74,7 +73,6 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/graggar
 	name = "vicious cloak"
@@ -96,7 +94,6 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/forrestercloak/snow
 	name = "snow cloak"

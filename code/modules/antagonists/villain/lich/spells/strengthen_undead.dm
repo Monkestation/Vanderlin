@@ -5,6 +5,7 @@
 	sound = 'sound/magic/whiteflame.ogg'
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 2
 	heretical_spell = TRUE

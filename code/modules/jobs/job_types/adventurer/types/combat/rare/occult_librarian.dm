@@ -39,7 +39,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/dark_whispers,
 		/datum/action/cooldown/spell/status/blood_sight,
-		/datum/action/cooldown/spell/projectile/blood_steal,
+		/datum/action/cooldown/spell/blood_steal,
 		/datum/action/cooldown/spell/diagnose/blood,
 		/datum/action/cooldown/spell/blood_healing,
 	)
@@ -67,4 +67,5 @@
 		/obj/item/book/magicaltheory = 1,
 		/obj/item/recipe_book/arcyne = 1,
 		/obj/item/spellbook/adept/starter/blood = 1,
+		/obj/item/scrying/flame = 1,
 	)

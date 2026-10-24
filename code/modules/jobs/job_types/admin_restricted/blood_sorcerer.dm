@@ -26,7 +26,7 @@
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	technique_points = 14
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
+	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC, FACTION_INFERNAL)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/blood_sorcerer
 
@@ -64,7 +64,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/list_target/teach_blood_magic,
 		/datum/action/cooldown/spell/status/blood_sight,
-		/datum/action/cooldown/spell/projectile/blood_steal,
+		/datum/action/cooldown/spell/blood_steal,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 	)
 	book_type = /obj/item/recipe_book/arcyne
@@ -109,6 +109,7 @@
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	neck = /obj/item/clothing/neck/gorget
 	cloak = /obj/item/clothing/cloak/half/colored/blood
+	shirt = /obj/item/clothing/armor/regenerating/skin/infernal
 	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
 	gloves = /obj/item/clothing/gloves/leather/advanced
 	ring = /obj/item/clothing/ring/gold/rontz

@@ -1,0 +1,9 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added a scrying flame to Occult Librarian."
+  - rscadd: "Changed Blood Herald from Wretch to Solo Antag."
+  - bugfix: "Fixed the vitae cost calculation for worship of Mephistopheles."
+  - rscadd: "Added Bloodsteel Axe, Mace, Barmace and Warhammer."
+  - rscadd: "Added examine highlights for templar weapons."
+  - rscadd: "Changed trident icons to the better ones."

@@ -6,6 +6,7 @@
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC|SPELL_REQUIRES_NO_MOVE // reap what you sow
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
 	required_technique = TECHNIQUE_ALTERATION
 
 	spell_flags = SPELL_RITUOS

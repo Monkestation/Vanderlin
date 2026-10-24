@@ -17,6 +17,7 @@
 	committed_strike = FALSE
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
 	required_technique = TECHNIQUE_IMBUE
 
 	var/momentum_cost = 3

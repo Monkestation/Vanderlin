@@ -1,0 +1,8 @@
+author: "Ardcrumb"
+delete-after: True
+changes:
+  - map: "Rework of the lavacaves in the basin"
+  - map: "Removal of the old transition zone areas"
+  - map: "Refurbished the roustower outskirts"
+  - map: "Adds a smaller lava source in the basin"
+  - map: "Adds a mini-dungeon to the vandermines bottom z that acts as a transition to Malum's anvil."

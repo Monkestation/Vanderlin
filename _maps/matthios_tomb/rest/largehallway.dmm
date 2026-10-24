@@ -27,6 +27,10 @@
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
+"n" = (
+/obj/structure/waystone/dungeon,
+/turf/open/floor/naturalstone,
+/area/under/tomb/cave)
 "o" = (
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
@@ -189,7 +193,7 @@ W
 W
 W
 W
-o
+n
 o
 o
 o

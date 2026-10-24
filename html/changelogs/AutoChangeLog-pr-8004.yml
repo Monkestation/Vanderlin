@@ -1,0 +1,4 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - admin: "Admins can now edit bans to day lengths again"

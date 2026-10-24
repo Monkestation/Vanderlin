@@ -191,16 +191,7 @@
 			head = /obj/item/clothing/head/helmet/heavy/necked/xylix
 			cloak = /obj/item/clothing/cloak/stabard/templar/xylix
 			beltl = /obj/item/weapon/whip/xylix
-		if(/datum/patron/inhumen/graggar)
-			head = /obj/item/clothing/head/helmet/heavy/inhumen/graggar
-			armor = /obj/item/clothing/armor/plate/full/inhumen/graggar
-			neck = /obj/item/clothing/neck/gorget
-			gloves = /obj/item/clothing/gloves/plate/inhumen/graggar
-			pants = /obj/item/clothing/pants/platelegs/inhumen/graggar
-			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/graggar
-			cloak = /obj/item/clothing/cloak/graggar
-			backr = /obj/item/weapon/greataxe/steel/doublehead/graggar
-		if(/datum/patron/inhumen/graggar_zizo)
+		if(/datum/patron/inhumen/graggar, /datum/patron/inhumen/graggar_zizo)
 			head = /obj/item/clothing/head/helmet/heavy/inhumen/graggar
 			armor = /obj/item/clothing/armor/plate/full/inhumen/graggar
 			neck = /obj/item/clothing/neck/gorget
@@ -230,10 +221,10 @@
 			head = /obj/item/clothing/head/helmet/heavy/inhumen/baotha
 			mask = /obj/item/clothing/face/spectacles/sglasses
 			neck = /obj/item/clothing/neck/gorget
-			armor = /obj/item/clothing/armor/plate
-			gloves = /obj/item/clothing/gloves/plate
-			pants = /obj/item/clothing/pants/platelegs
-			shoes = /obj/item/clothing/shoes/boots/armor
+			armor = /obj/item/clothing/armor/plate/full/inhumen/baotha
+			gloves = /obj/item/clothing/gloves/plate/inhumen/baotha
+			pants = /obj/item/clothing/pants/platelegs/inhumen/baotha
+			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/baotha
 			beltr = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
 			beltl = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)

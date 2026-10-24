@@ -325,6 +325,10 @@
 	dir = 4
 	},
 /area/under/tomb/cave/wet)
+"XC" = (
+/obj/structure/waystone/dungeon,
+/turf/open/floor/cobble/mossy,
+/area/under/tomb/cave/wet)
 "Yg" = (
 /obj/structure/ladder,
 /turf/open/floor/blocks,
@@ -419,7 +423,7 @@ tr
 tr
 tr
 tr
-KV
+XC
 fw
 Fn
 Fn

@@ -1,0 +1,9 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - rscadd: "waystones outside towns"
+  - rscadd: "waystones, when used outside the dungeon creates a link to a random waystone in the dungeon for 30 seconds and teleports you into it, anyone can use said waystone to follow"
+  - rscadd: "warpstone, when used on a waystone inside a dungeon creates a link to a random waystone out of the dungeon for 60 seconds, can be found as loot or bought from the merchant"
+  - rscadd: "the dungeon now has a total loot budget to spend during creation (pending remaps to fully be added) which will make the loot inside rooms feel more standardized between rounds, more loot spawns farther out"
+  - rscadd: "a new admin ability to respawn dungeon mobs choosing to respawn a fixed amount, %, and if it should be going from highest depth in, lowest depth out, or random."
+  - rscadd: "dungeon elevator, it goes up and down from the dungeon every minute and can carry a maximum of 500KG"

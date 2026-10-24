@@ -49,7 +49,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bogwitch
 
-	spells = list(/datum/action/cooldown/spell/diagnose)
+	spells = list(/datum/action/cooldown/spell/diagnose/holy/hunt)
 
 	traits = list(
 		TRAIT_DEADNOSE,
@@ -119,7 +119,7 @@
 	shoes = /obj/item/clothing/shoes/boots/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	gloves = /obj/item/clothing/gloves/leather
-	neck = /obj/item/clothing/neck/psycross/great_hunt
+	neck = /obj/item/clothing/neck/psycross/great_hunt/divine_link
 	backpack_contents = list(
 		/obj/item/scrying/eye/bogwitch = 1
 	)

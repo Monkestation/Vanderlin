@@ -1,0 +1,4 @@
+author: "budgetcommander0"
+delete-after: True
+changes:
+  - balance: "+5 surefire axes/maces (now at 25)"

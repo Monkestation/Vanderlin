@@ -1,0 +1,4 @@
+author: "MissyNym"
+delete-after: True
+changes:
+  - map: "Adventurers can now lock and unlock the front door of the Adventurer's Guild, provided they have a delver's key."

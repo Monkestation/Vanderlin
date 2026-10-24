@@ -1,0 +1,6 @@
+author: "Razzberry8492"
+delete-after: True
+changes:
+  - rscadd: "Added descriptions for some weapons that did not previously have them, such as Terminus Est and the iron and steel tossblades."
+  - spellcheck: "Fixed typos, bad punctuation, and poor grammar, and reworded some descriptions to make them less clunky."
+  - spellcheck: "Renamed the Psydonic whip relic - \"Daebreak\" instead of \"Daybreak\"."

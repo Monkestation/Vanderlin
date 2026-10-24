@@ -41,13 +41,13 @@
 	head = /obj/item/clothing/head/helmet/heavy/rust
 	neck = /obj/item/clothing/neck/gorget
 	armor = /obj/item/clothing/armor/plate/rust
-	shirt = /obj/item/clothing/armor/gambeson/heavy/colored/dark
+	shirt = /obj/item/clothing/armor/gambeson/heavy
 	wrists = /obj/item/clothing/wrists/bracers
 	gloves = /obj/item/clothing/gloves/plate/rust
 	pants = /obj/item/clothing/pants/platelegs/rust
 	shoes = /obj/item/clothing/shoes/boots/armor/light/rust
 	belt = /obj/item/storage/belt/leather/bandit
 	beltr = /obj/item/weapon/sword/long
-	backr = /obj/item/storage/backpack/satchel/black
+	backr = /obj/item/storage/backpack/satchel
 	backl = /obj/item/weapon/shield/tower/metal
 	backpack_contents = list(/obj/item/weapon/knife/dagger = 1, /obj/item/clothing/face/shepherd/rag = 1)

@@ -1,0 +1,8 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - balance: "Modernised rewards from Matthios idol"
+  - balance: "fixed missing shield skill in sellsword"
+  - balance: "rewritten idol code to accept most items in game (exception for clothing and weapons)"
+  - balance: "Changes Matthios robbing grave's quest to give curse protection on gain, instead as a reward"
+  - map: "adds pottery lathe to the hideout"

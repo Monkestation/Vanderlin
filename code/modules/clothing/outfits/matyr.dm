@@ -75,7 +75,6 @@
 	flags_inv = HIDEBOOB
 	var/overarmor = TRUE
 	sellprice = 300
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/grandmaster/MiddleClick(mob/user)
 	overarmor = !overarmor

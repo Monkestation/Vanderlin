@@ -1,0 +1,4 @@
+author: "dwasint"
+delete-after: True
+changes:
+  - bugfix: "ambushes now respect light level, and ambushable terrain, for instance murderwood no longer ambushes you on roads or next to lights during the day."

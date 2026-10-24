@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Fixes The Chosen special."
+  - bugfix: "Fixes runtime with vines."
+  - bugfix: "Fixes runtime with polearm backstep."

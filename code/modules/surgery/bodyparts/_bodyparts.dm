@@ -531,7 +531,7 @@
 	if(tourniquet) //this is always true, some might say a truth nuke.
 		. = TRUE
 	//else if.. else if.. so on.
-	if(pain_dam >= 0)
+	if(pain_dam > 0)
 		. = TRUE
 	else if(number_injuries)
 		. = TRUE

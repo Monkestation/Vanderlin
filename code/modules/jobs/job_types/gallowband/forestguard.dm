@@ -71,7 +71,7 @@
 	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/leather
-	belt = /obj/item/storage/belt/leather/fgarrison
+	belt = /obj/item/storage/belt/leather/gallowband
 	backl = /obj/item/storage/backpack/satchel
 
 /datum/outfit/forestguard/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -103,6 +103,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/axesmaces = 33,
 		/datum/attribute/skill/combat/whipsflails = 33,
 		/datum/attribute/skill/combat/swords = 30,
@@ -162,6 +163,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/bows = 33,
 		/datum/attribute/skill/combat/crossbows = 33,
 		/datum/attribute/skill/combat/knives = 30,
@@ -218,6 +220,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/knives = 20,
@@ -275,6 +278,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/bows = 10,
@@ -338,6 +342,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/swords = 33,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/shields = 30,

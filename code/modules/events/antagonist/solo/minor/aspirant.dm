@@ -10,7 +10,6 @@
 	roundstart = TRUE
 	antag_flag = ROLE_ASPIRANT
 	shared_occurence_type = SHARED_MINOR_THREAT
-	minor_roleset = TRUE
 
 	needed_job = list(
 		/datum/job/consort,

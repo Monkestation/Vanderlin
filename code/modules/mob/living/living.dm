@@ -2270,8 +2270,12 @@
 			var/datum/component/storage = item.GetComponent(/datum/component/storage)
 			if(storage)
 				pickable_items |= item
-		var/obj/item/picked = input(src, "What bag do you want to crawl into?") as null|anything in pickable_items
+		var/obj/item/picked = tgui_input_list(src, "What do you want to crawl into?", "Target Item", pickable_items, timeout = 20 SECONDS)
 		if(!picked)
+			return
+		if(stat == DEAD || !Adjacent(over))
+			return
+		if(incapacitated())
 			return
 		var/obj/item/mob_holder/holder = new(get_turf(src), src)
 		visible_message(span_warning("[src] starts to climb into [picked] on [over]."), span_warning("You start to climb into [picked] on [over]."))
@@ -2840,6 +2844,13 @@
 	reset_perspective(looking_holder)
 	update_cone_show()
 	on_looking_z_level_change(get_turf(src), below_turf)
+
+/// Whether the mob's client is currently viewing through a vertical look (up/down) holder
+/mob/proc/is_looking_vertically()
+	return FALSE
+
+/mob/living/is_looking_vertically()
+	return looking_vertically != NONE && client?.eye == looking_holder
 
 /mob/living/proc/look_further(turf/T)
 	if(looking_vertically)

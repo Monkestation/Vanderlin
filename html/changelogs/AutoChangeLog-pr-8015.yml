@@ -1,0 +1,7 @@
+author: "Blundir"
+delete-after: True
+changes:
+  - image: "added new sprite for the tailor's combined catalogue"
+  - map: "tailor's spider pen no longer has broken spider pathfinding due to wooden railing placement"
+  - map: "tailor's lobby now has leatherworking catalogue book"
+  - map: "tailor's workshop now has the missing red lipstick"

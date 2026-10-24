@@ -12,7 +12,9 @@
 	soundenv = 15
 	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
-				/turf/open/floor/grass)
+		/turf/open/floor/grass,
+		/turf/open/floor/dirt,
+	)
 
 	ambush_mobs = list(
 		new /datum/ambush_config/wolf_pack = 15,
@@ -42,6 +44,15 @@
 	threat_region = THREAT_REGION_NORTHERN_GROVE
 
 /area/outdoors/wilderness/beside_thatchwood
+
+/area/outdoors/wilderness/north
+	name = "Northern Murderwood"
+/area/outdoors/wilderness/east
+	name = "Eastern Murderwood"
+/area/outdoors/wilderness/south
+	name = "Southern Murderwood"
+/area/outdoors/wilderness/central
+	name = "Central Murderwood"
 
 /area/outdoors/wilderness/outpost/salem
 	name = "salem outpost"

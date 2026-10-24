@@ -1,0 +1,5 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - bugfix: "Mobs no longer move when they are ridden"
+  - bugfix: "You no longer get teleported back when moving through a travel tile while riding an animal"

@@ -20,9 +20,44 @@ GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each ind
 		return FALSE
 	return TRUE
 
+/// Returns only the spawn turfs that are an instance of one of the area's ambush_types.
+/// An area with no ambush_types allows no spawns.
+/proc/filter_ambush_spawns_by_type(list/turfs, list/allowed_types)
+	var/list/kept = list()
+	for(var/turf/spawn_turf as anything in turfs)
+		for(var/type_path in allowed_types)
+			if(istype(spawn_turf, type_path))
+				kept += spawn_turf
+				break
+	return kept
+
+/// Brightness of a turf from 0 to 1.
+/proc/get_ambush_turf_light(turf/here)
+	var/lit = here.get_lumcount()
+	// Sunlight is a separate overlay, not part of the corner lumcount. A turf the sun reaches
+	// counts as lit by the brightness of the current sun tint.
+	var/atom/movable/outdoor_effect/sky = here.outdoor_effect
+	if(sky && sky.state != SKY_BLOCKED)
+		var/sun_color = SSoutdoor_effects.picked_color
+		if(istext(sun_color) && length(sun_color) == 7)
+			var/sun_lit = ((GetRedPart(sun_color) * 0.299) + (GetGreenPart(sun_color) * 0.587) + (GetBluePart(sun_color) * 0.114)) / 255
+			lit = max(lit, sun_lit)
+	return clamp(lit, 0, 1)
+
+/// Returns a copy of the spawn turfs with lit ones randomly dropped, more often the brighter they are.
+/proc/filter_ambush_spawns_by_light(list/turfs)
+	var/list/kept = turfs.Copy()
+	for(var/turf/spawn_turf as anything in turfs)
+		if(prob(AMBUSH_LIGHT_REDUCTION * get_ambush_turf_light(spawn_turf)))
+			kept -= spawn_turf
+	return kept
+
 /mob/living/proc/consider_ambush(always = FALSE, ignore_cooldown = FALSE, min_dist = 1, max_dist = 7)
 	var/area/AR = get_area(src)
 	if(!length(AR?.ambush_mobs))
+		return
+	var/turf/turf = get_turf(src)
+	if(!(turf.type in AR.ambush_types))
 		return
 	var/datum/threat_region/TR = SSregionthreat.get_region(AR.threat_region)
 	if(TR && !COOLDOWN_FINISHED(TR, natural_ambush))
@@ -59,7 +94,11 @@ GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each ind
 				victimsa += V
 			if(victims > 3)
 				return
+	// Already limited to the area's ambush_types. Lit turfs are then randomly dropped, so ambushes
+	// are less likely in bright spots. Always-ambushes (the signal horn) ignore the light.
 	var/list/possible_targets = get_possible_ambush_spawn(min_dist, max_dist)
+	if(!always)
+		possible_targets = filter_ambush_spawns_by_light(possible_targets)
 	if(!possible_targets.len)
 		return
 	mob_timers["ambushlast"] = world.time
@@ -185,7 +224,9 @@ GLOBAL_VAR_INIT(ambush_mobconsider_cooldown, 2 MINUTES) // Cooldown for each ind
 		if(isturf(RS.loc) && !get_dist(RS.loc, src) < min_dist)
 			possible_targets += RS.loc.get_adjacent_ambush_turfs()
 
-	return possible_targets
+	// Only turfs of the area's ambush_types can spawn an ambush.
+	var/area/AR = get_area(src)
+	return filter_ambush_spawns_by_type(possible_targets, AR?.ambush_types)
 
 /atom/proc/get_adjacent_ambush_turfs()
 	var/list/adjacent = list()

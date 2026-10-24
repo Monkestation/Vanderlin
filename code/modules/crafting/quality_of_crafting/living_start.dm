@@ -29,13 +29,6 @@
 
 
 /mob/living/proc/try_recipes(obj/item/attacked_atom, obj/item/starting_atom)
-	if(has_world_trait(/datum/world_trait/delver))
-		var/area/area = get_area(src)
-		if(area.delver_restrictions)
-			return FALSE
-		if(!SShousing.check_access(key))
-			return FALSE
-
 	if(HAS_TRAIT(src, TRAIT_MALUM_CURSE))
 		to_chat(src, span_boldred("My cursed hands tremble as I fail to piece the materials together!"))
 		return

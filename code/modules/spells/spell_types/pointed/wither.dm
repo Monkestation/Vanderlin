@@ -12,6 +12,7 @@
 	spell_cost = 60
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_technique = TECHNIQUE_ALTERATION
 
 	invocation = "Arescentem!"

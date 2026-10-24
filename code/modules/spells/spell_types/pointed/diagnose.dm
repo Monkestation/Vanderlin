@@ -37,6 +37,11 @@
 	name = "Pestra's Diagnosis"
 	shows_reagents = TRUE
 
+/datum/action/cooldown/spell/diagnose/holy/hunt
+	name = "Hunter's Mercy"
+	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)
+	associated_skill = /datum/attribute/skill/magic/druidic
+
 /datum/action/cooldown/spell/diagnose/blood
 	name = "Blood Scan"
 	sound = 'sound/magic/PSY.ogg'

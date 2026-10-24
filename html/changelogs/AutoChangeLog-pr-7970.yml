@@ -1,0 +1,4 @@
+author: "PatapoIIIa"
+delete-after: True
+changes:
+  - rscadd: "show_verb_panel disable flag"

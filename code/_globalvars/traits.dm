@@ -156,6 +156,7 @@ GLOBAL_LIST_INIT(traits_by_type, list(
 		"Inhumen Anatomy" = TRAIT_INHUMANE_ANATOMY,
 		"Inhumen Digestion" = TRAIT_NASTY_EATER,
 		"Minor Fall Damage Immunity" = TRAIT_NOFALLDAMAGE1,
+		"Total Fall Damage Immunity" = TRAIT_NOFALLDAMAGE2,
 		"Veiled Whispers" = TRAIT_DEATHSIGHT,
 		"Cyclops (Left)" = TRAIT_CYCLOPS_LEFT,
 		"Cyclops (Right)" = TRAIT_CYCLOPS_RIGHT,
