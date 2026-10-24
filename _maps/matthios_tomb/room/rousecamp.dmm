@@ -1,4 +1,29 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/open/water/acid,
+/area/under/tomb/cave/lava)
+"ab" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/water/acid,
+/area/under/tomb/cave/lava)
+"ac" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/turf/open/water/acid,
+/area/under/tomb/cave/lava)
+"ad" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/water/acid,
+/area/under/tomb/cave/lava)
+"ae" = (
+/obj/structure/fluff/railing/border,
+/turf/open/water/acid,
+/area/under/tomb/cave/lava)
 "an" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/dirt,
@@ -22,24 +47,12 @@
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/dirt/road,
 /area/under/tomb/cave/lava)
-"dY" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/turf/open/lava/acid,
-/area/under/tomb/cave/lava)
 "eK" = (
 /turf/open/floor/cobblerock/alt,
 /area/under/tomb/cave/lava)
 "fK" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/openspace,
-/area/under/tomb/cave/lava)
-"hC" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/turf/open/lava/acid,
 /area/under/tomb/cave/lava)
 "hE" = (
 /turf/open/floor/dirt,
@@ -113,8 +126,7 @@
 /area/under/tomb/cave/lava)
 "np" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/effect/spawner/map_spawner/loot,
-/obj/effect/spawner/map_spawner/loot,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/dirt,
 /area/under/tomb/indoors)
 "nR" = (
@@ -143,7 +155,7 @@
 /area/under/tomb/cave/lava)
 "qx" = (
 /obj/structure/table/church,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/churchmarble,
 /area/under/tomb/cave/lava)
 "qX" = (
@@ -155,10 +167,6 @@
 	dir = 9
 	},
 /turf/open/floor/naturalstone,
-/area/under/tomb/cave/lava)
-"rA" = (
-/obj/effect/spawner/map_spawner/loot/weapon,
-/turf/open/floor/cobblerock,
 /area/under/tomb/cave/lava)
 "sb" = (
 /mob/living/carbon/human/species/rousman/ambush,
@@ -210,9 +218,6 @@
 "Ce" = (
 /turf/closed/mineral/bedrock,
 /area/under/tomb/cave/lava)
-"Cj" = (
-/turf/open/lava/acid,
-/area/under/tomb/cave/lava)
 "Dw" = (
 /obj/structure/flora/newtree/scorched,
 /turf/open/floor/naturalstone,
@@ -235,10 +240,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/lava)
-"Gk" = (
-/obj/machinery/light/fueled/hearth,
-/turf/open/floor/naturalstone,
-/area/under/tomb/cave/lava)
 "Gs" = (
 /obj/structure/chair/stool,
 /turf/open/floor/naturalstone,
@@ -248,7 +249,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/indoors)
 "Hs" = (
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/lava)
 "HQ" = (
@@ -256,9 +257,8 @@
 /area/under/tomb/cave/lava)
 "HZ" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/effect/spawner/map_spawner/loot,
-/obj/effect/spawner/map_spawner/loot,
 /obj/item/clothing/shoes/boots/darkboots,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/dirt,
 /area/under/tomb/indoors)
 "Ie" = (
@@ -280,7 +280,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/lava)
 "NM" = (
-/obj/item/statue/gold,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/cobble,
 /area/under/tomb/cave/lava)
 "Ou" = (
@@ -291,7 +291,7 @@
 /turf/open/floor/dirt/road,
 /area/under/tomb/cave/lava)
 "OY" = (
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/cobble,
 /area/under/tomb/cave/lava)
 "Ps" = (
@@ -309,16 +309,6 @@
 /area/under/tomb/cave/lava)
 "RM" = (
 /turf/open/water/swamp,
-/area/under/tomb/cave/lava)
-"RN" = (
-/obj/structure/fluff/railing/border,
-/turf/open/lava/acid,
-/area/under/tomb/cave/lava)
-"SW" = (
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/turf/open/lava/acid,
 /area/under/tomb/cave/lava)
 "To" = (
 /obj/machinery/light/fueled/firebowl/stump,
@@ -343,13 +333,9 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/lava)
-"UW" = (
-/obj/effect/spawner/map_spawner/loot/medium,
-/turf/open/floor/cobble,
-/area/under/tomb/cave/lava)
 "Vc" = (
 /obj/structure/table/church/m,
-/obj/item/clothing/neck/psycross/silver/divine/ravox,
+/obj/item/clothing/neck/psycross/divine/ravox,
 /turf/open/floor/churchmarble,
 /area/under/tomb/cave/lava)
 "VO" = (
@@ -437,12 +423,12 @@ mE
 mE
 mV
 Gf
-dY
-dY
-dY
-dY
-dY
-dY
+ab
+ab
+ab
+ab
+ab
+ab
 kG
 Ce
 Ce
@@ -565,11 +551,11 @@ jO
 mE
 WC
 Ul
-hC
-hC
-hC
-hC
-hC
+ac
+ac
+ac
+ac
+ac
 Ul
 qZ
 mE
@@ -598,11 +584,11 @@ Ie
 jO
 jO
 jO
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
 jO
 IU
 mE
@@ -624,17 +610,17 @@ mE
 mE
 jO
 jO
-Gk
+jO
 oW
 oW
 jO
 jO
 jO
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
 jO
 jO
 jO
@@ -656,18 +642,18 @@ mE
 jO
 mE
 mE
-Gk
+jO
 oW
 oW
 mE
 mE
 jO
 jO
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
 jO
 jO
 jO
@@ -696,11 +682,11 @@ mE
 IU
 jO
 jO
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
 jO
 mE
 Ce
@@ -727,12 +713,12 @@ mE
 mE
 mE
 jO
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
+aa
 jO
 mE
 Ce
@@ -752,18 +738,18 @@ jO
 jO
 jO
 jO
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
 jO
 jO
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
+aa
 jO
 jO
 jO
@@ -782,19 +768,19 @@ oW
 oW
 VO
 jO
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 jO
 jO
 jO
@@ -813,18 +799,18 @@ jO
 oW
 oW
 jO
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
 oW
 oW
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
+aa
 oW
 oW
 jO
@@ -844,19 +830,19 @@ mE
 jO
 jO
 jO
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
+aa
 oW
 jO
 jO
@@ -876,18 +862,18 @@ mE
 mE
 jO
 jO
-Cj
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
+aa
 jO
 jO
 jO
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
 jO
 jO
 sp
@@ -908,10 +894,10 @@ mE
 mE
 kG
 jO
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
 jO
 jO
 mE
@@ -940,9 +926,9 @@ WS
 HQ
 ih
 jO
-Cj
-Cj
-Cj
+aa
+aa
+aa
 jO
 jO
 mE
@@ -964,17 +950,17 @@ sp
 "}
 (19,1,1) = {"
 Ce
-Cj
-Cj
+aa
+aa
 lt
 HQ
 WS
 HQ
 ih
 jO
-Cj
-Cj
-Cj
+aa
+aa
+aa
 jO
 jO
 jO
@@ -996,17 +982,17 @@ Ce
 "}
 (20,1,1) = {"
 Ce
-Cj
-Cj
-RN
+aa
+aa
+ae
 HQ
 WS
 HQ
 ih
-Cj
-Cj
-Cj
-Cj
+aa
+aa
+aa
+aa
 jO
 jO
 oW
@@ -1028,17 +1014,17 @@ Ce
 "}
 (21,1,1) = {"
 Ce
-Cj
-Cj
-RN
+aa
+aa
+ae
 HQ
 WS
 HQ
-SW
-Cj
-Cj
-Cj
-Cj
+ad
+aa
+aa
+aa
+aa
 jO
 jO
 oW
@@ -1060,16 +1046,16 @@ Ce
 "}
 (22,1,1) = {"
 Ce
-Cj
-Cj
-RN
+aa
+aa
+ae
 HQ
 uw
 HQ
-SW
-Cj
-Cj
-Cj
+ad
+aa
+aa
+aa
 jO
 jO
 jO
@@ -1092,14 +1078,14 @@ Ce
 "}
 (23,1,1) = {"
 Ce
-Cj
-Cj
-RN
+aa
+aa
+ae
 HQ
 WS
 HQ
-SW
-Cj
+ad
+aa
 jO
 jO
 jO
@@ -1124,9 +1110,9 @@ Ce
 "}
 (24,1,1) = {"
 Ce
-Cj
-Cj
-RN
+aa
+aa
+ae
 HQ
 WS
 HQ
@@ -1156,9 +1142,9 @@ Ce
 "}
 (25,1,1) = {"
 Ce
-Cj
-Cj
-RN
+aa
+aa
+ae
 HQ
 WS
 HQ
@@ -1188,7 +1174,7 @@ Ce
 "}
 (26,1,1) = {"
 Ce
-Cj
+aa
 jO
 lt
 HQ
@@ -1585,10 +1571,10 @@ yp
 yp
 yp
 yp
+yp
 HQ
 HQ
-HQ
-HQ
+yp
 yp
 yp
 yp
@@ -1616,12 +1602,12 @@ yp
 yp
 yp
 yp
+yp
+yp
 HQ
 HQ
 HQ
-HQ
-HQ
-HQ
+yp
 yp
 yp
 yp
@@ -1647,14 +1633,14 @@ yp
 yp
 yp
 yp
-HQ
+yp
 HQ
 HQ
 HQ
 yp
-rA
 mE
-HQ
+yp
+yp
 yp
 yp
 yp
@@ -1678,16 +1664,16 @@ yp
 yp
 yp
 yp
-HQ
+yp
 HQ
 HQ
 yp
 HQ
 HQ
 mE
-mE
-mE
-HQ
+yp
+yp
+yp
 yp
 yp
 yp
@@ -1709,8 +1695,8 @@ yp
 yp
 yp
 yp
-HQ
-HQ
+yp
+yp
 HQ
 HQ
 HQ
@@ -1741,8 +1727,8 @@ yp
 yp
 HQ
 HQ
-HQ
-HQ
+yp
+yp
 HQ
 yp
 yp
@@ -1778,12 +1764,12 @@ HQ
 yp
 HQ
 yp
-NM
+HQ
 NM
 yp
 HQ
 yp
-UW
+HQ
 HQ
 HQ
 HQ
@@ -1837,8 +1823,8 @@ yp
 yp
 yp
 yp
-HQ
-HQ
+yp
+yp
 HQ
 HQ
 yp
@@ -1870,8 +1856,8 @@ yp
 yp
 yp
 yp
-HQ
-HQ
+yp
+yp
 HQ
 HQ
 HQ
@@ -1903,8 +1889,8 @@ yp
 yp
 yp
 yp
-HQ
-HQ
+yp
+yp
 HQ
 yp
 mE
@@ -1936,7 +1922,7 @@ yp
 yp
 yp
 yp
-HQ
+yp
 HQ
 HQ
 HQ

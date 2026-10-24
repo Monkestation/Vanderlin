@@ -1,4 +1,39 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/table/wood/fancy/purple,
+/obj/item/bouquet/rosa,
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/blocks/newstone/alt,
+/area/under/tomb/indoors/rest)
+"ab" = (
+/obj/item/clothing/neck/woolen,
+/obj/item/clothing/pants/tights/colored/guardsecond,
+/obj/item/clothing/shirt/undershirt/artificer,
+/obj/structure/mannequin/male{
+	dir = 8
+	},
+/obj/item/clothing/shoes/simpleshoes/colored,
+/obj/item/clothing/head/crown/circlet/rose,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
+"ac" = (
+/obj/structure/table/church,
+/obj/item/clothing/neck/psycross/silver/divine/eora{
+	pixel_y = 6
+	},
+/obj/item/clothing/ring/band,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
+"ad" = (
+/obj/structure/table/church{
+	dir = 1
+	},
+/obj/item/clothing/neck/psycross/silver/divine/eora{
+	pixel_y = 8
+	},
+/obj/item/clothing/ring/band,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/rest)
 "ar" = (
 /turf/open/openspace,
 /area/under/tomb/indoors/rest)
@@ -121,12 +156,6 @@
 "ev" = (
 /obj/structure/flora/grass/herb/rosa,
 /turf/open/floor/grass/eora,
-/area/under/tomb/indoors/rest)
-"eF" = (
-/obj/structure/table/wood/fancy/purple,
-/obj/item/bouquet/rosa,
-/obj/item/clothing/ring/silver/calm,
-/turf/open/floor/blocks/newstone/alt,
 /area/under/tomb/indoors/rest)
 "fb" = (
 /obj/structure/spider/stickyweb{
@@ -382,17 +411,6 @@
 	},
 /turf/open/openspace,
 /area/under/tomb/indoors/rest)
-"qi" = (
-/obj/structure/table/church{
-	dir = 1
-	},
-/obj/item/clothing/neck/psycross/silver/divine/eora{
-	pixel_y = 8
-	},
-/obj/item/clothing/ring/band,
-/obj/item/clothing/ring/silver/saffira,
-/turf/open/floor/churchmarble,
-/area/under/tomb/indoors/rest)
 "qB" = (
 /obj/structure/hotspring/border/ten,
 /turf/open/floor/dirt/road,
@@ -472,15 +490,6 @@
 /obj/structure/table/church/m,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/rest)
-"xi" = (
-/obj/structure/table/church,
-/obj/item/clothing/neck/psycross/silver/divine/eora{
-	pixel_y = 6
-	},
-/obj/item/clothing/ring/band,
-/obj/item/clothing/ring/silver/saffira,
-/turf/open/floor/churchmarble,
-/area/under/tomb/indoors/rest)
 "xu" = (
 /obj/machinery/light/fueledstreet/blue/midlamp{
 	pixel_y = 0;
@@ -491,17 +500,6 @@
 "xB" = (
 /obj/structure/spider/stickyweb/solo,
 /turf/open/floor/tile/diamond/purple,
-/area/under/tomb/indoors/rest)
-"yG" = (
-/obj/item/clothing/neck/woolen,
-/obj/item/clothing/pants/tights/colored/guardsecond,
-/obj/item/clothing/shirt/undershirt/artificer,
-/obj/item/clothing/head/crown/circlet,
-/obj/structure/mannequin/male{
-	dir = 8
-	},
-/obj/item/clothing/shoes/simpleshoes/colored,
-/turf/open/floor/churchmarble,
 /area/under/tomb/indoors/rest)
 "zL" = (
 /obj/structure/stairs{
@@ -1089,7 +1087,7 @@ LM
 LM
 qN
 ih
-eF
+aa
 az
 Ju
 qN
@@ -1449,7 +1447,7 @@ eb
 (19,1,1) = {"
 eb
 qN
-xi
+ac
 kM
 ZT
 kM
@@ -1503,9 +1501,9 @@ eb
 (21,1,1) = {"
 eb
 qN
-qi
+ad
 kM
-yG
+ab
 kM
 Aq
 IT
@@ -2097,7 +2095,7 @@ eb
 "}
 (18,1,2) = {"
 eb
-ar
+SU
 ar
 ar
 ar
@@ -2124,7 +2122,7 @@ eb
 "}
 (19,1,2) = {"
 eb
-ar
+qN
 ar
 ar
 ar
@@ -2151,7 +2149,7 @@ eb
 "}
 (20,1,2) = {"
 eb
-ar
+qN
 ar
 ar
 ar
@@ -2178,7 +2176,7 @@ eb
 "}
 (21,1,2) = {"
 eb
-ar
+qN
 ar
 ar
 ar
@@ -2205,7 +2203,7 @@ eb
 "}
 (22,1,2) = {"
 eb
-ar
+SU
 ar
 ar
 ar
