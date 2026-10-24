@@ -387,7 +387,6 @@
 /area/indoors/mountains/anvil/upperkeep)
 "abB" = (
 /obj/effect/decal/cleanable/dirt/dust,
-
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -7876,7 +7875,6 @@
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "aLY" = (
-/obj/effect/decal//sigil/SW,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
 "aLZ" = (
