@@ -34686,6 +34686,18 @@
 	},
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
+"nqD" = (
+/obj/structure/table/wood{
+	icon_state = "largetable";
+	dir = 4
+	},
+/obj/item/candle/scandle/lit{
+	pixel_x = -15;
+	pixel_y = -10;
+	sellprice = 1
+	},
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/keep/feast)
 "nqQ" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
@@ -36326,10 +36338,6 @@
 /obj/structure/table/wood{
 	icon_state = "largetable";
 	dir = 9
-	},
-/obj/item/candle/scandle{
-	pixel_x = 16;
-	pixel_y = -12
 	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/feast)
@@ -58695,9 +58703,7 @@
 "wAy" = (
 /obj/effect/mapping_helpers/access/keyset/manor/general,
 /obj/effect/mapping_helpers/access/locker,
-/obj/structure/door/window{
-	name = "Feast Hall"
-	},
+/obj/structure/door/fancy,
 /turf/open/floor/wood,
 /area/indoors/town/keep/throne)
 "wAH" = (
@@ -61274,6 +61280,11 @@
 	icon_state = "largetable";
 	dir = 5
 	},
+/obj/item/candle/scandle/lit{
+	pixel_x = -15;
+	pixel_y = -10;
+	sellprice = 1
+	},
 /turf/open/floor/blocks/stonered,
 /area/indoors/town/keep/feast)
 "xty" = (
@@ -62386,6 +62397,19 @@
 /obj/structure/fake_machine/vendor/blacksmith,
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
+"xPz" = (
+/obj/structure/table/wood{
+	icon_state = "largetable";
+	dir = 4
+	},
+/obj/item/reagent_containers/glass/cup,
+/obj/item/candle/scandle/lit{
+	pixel_x = -15;
+	pixel_y = -10;
+	sellprice = 1
+	},
+/turf/open/floor/blocks/stonered,
+/area/indoors/town/keep/feast)
 "xPG" = (
 /turf/closed/wall/mineral/roofwall/outercorner{
 	dir = 1
@@ -86194,8 +86218,8 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
+bIO
+rRw
 bIO
 rRw
 kxM
@@ -86395,11 +86419,11 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
 bIO
 bIO
 fQB
+wHw
+bCK
 wHw
 qzt
 mGb
@@ -86597,14 +86621,14 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
 bIO
 exT
 nhL
+hCF
+smp
 smp
 bkS
-bCK
+hCF
 nhL
 dcX
 rRw
@@ -86799,11 +86823,11 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
 rRw
 jQy
 bCK
+smp
+smp
 iTD
 fbQ
 iTD
@@ -87001,11 +87025,11 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
 kxM
 eUV
 hCF
+smp
+smp
 bCK
 lHi
 tiV
@@ -87203,11 +87227,11 @@ qFx
 qFx
 qFx
 qFx
-qFx
-qFx
 kxM
 kxM
 ijR
+bCK
+hCF
 nhL
 hCF
 bCK
@@ -123186,7 +123210,7 @@ xts
 jHl
 fhh
 jHl
-vhr
+xPz
 uBo
 qpP
 riv
@@ -124196,7 +124220,7 @@ xts
 vhr
 fhh
 jHl
-jHl
+nqD
 uBo
 qpP
 ycJ
