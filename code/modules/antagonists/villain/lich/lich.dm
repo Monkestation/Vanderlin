@@ -9,6 +9,7 @@
 		/datum/attribute/skill/craft/alchemy = 60,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/magic/arcane/death = 60,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/combat/polearms = 40,
 		/datum/attribute/skill/combat/wrestling = 30,

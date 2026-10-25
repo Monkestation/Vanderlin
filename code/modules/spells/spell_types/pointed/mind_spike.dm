@@ -5,6 +5,7 @@
 	self_cast_possible = FALSE
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 
 	invocation = "Suffer."
 	invocation_type = INVOCATION_SHOUT

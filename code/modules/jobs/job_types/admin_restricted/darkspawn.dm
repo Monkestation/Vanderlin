@@ -21,6 +21,7 @@
 		/datum/attribute/skill/misc/reading = 30,
 		/datum/attribute/skill/magic/holy = 60,
 		/datum/attribute/skill/magic/arcane = 60,
+		/datum/attribute/skill/magic/arcane/death = 60,
 		/datum/attribute/skill/magic/blood = 60,
 	)
 
