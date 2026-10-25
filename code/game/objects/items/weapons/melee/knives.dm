@@ -4,7 +4,7 @@
 /obj/item/weapon/knife
 	name = "knife"
 	icon = 'icons/roguetown/weapons/32/knives.dmi'
-	icon_state = "huntingknife"
+	icon_state = "combatknife"
 	force = DAMAGE_KNIFE
 	throwforce = DAMAGE_KNIFE
 	wdefense = MEDIOCRE_PARRY
@@ -55,8 +55,8 @@
 	desc = "Loyal companion to hunters and poachers. From humble bone to truest steel, disembowel your prey with glee."
 	icon_state = "huntingknife"
 	force = DAMAGE_DAGGER
-	melting_material = /datum/material/steel
-	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_STEEL
+	melting_material = /datum/material/iron
+	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_IRON
 	melt_amount = 75
 	sellprice = 6
 	item_weight = 150 GRAMS
@@ -241,11 +241,9 @@
 	name = "iron kukri"
 	icon_state = "kukri_iron"
 	desc = "A hefty knife that originated in the south-eastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
-	force = DAMAGE_DAGGER
-	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	melting_material = /datum/material/iron
 	item_weight = 250 GRAMS
-	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_IRON
 
 /obj/item/weapon/knife/dagger/njora
 	name = "iron seme"
@@ -313,6 +311,7 @@
 	name = "steel kukri"
 	icon_state = "kukri_steel"
 	desc = "A hefty knife that originated in the south-eastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
+	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	force = DAMAGE_DAGGER + 1
 	wdefense = AVERAGE_PARRY
 	melt_amount = 75

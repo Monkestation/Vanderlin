@@ -101,3 +101,19 @@
 /obj/item/clothing/head/hooded/rainhood/furhood
 	icon_state = "fur_hood"
 	block2add = FOV_BEHIND
+
+/obj/item/clothing/cloak/raincloak/bush
+	name = "bush cloak"
+	desc = "A cloak worn by hunters, adapted from forrester cloaks. Will keep you dry and warm, if nothing else."
+	icon_state = "bush_cloak"
+	item_state = "bush"
+	color = null
+	inhand_mod = TRUE
+	hoodtype = /obj/item/clothing/head/hooded/rainhood/bush
+	salvage_amount = 2
+	salvage_result = /obj/item/natural/hide/cured
+	min_cold_protection_temperature = -30
+
+/obj/item/clothing/head/hooded/rainhood/bush
+	icon_state = "bush_hood"
+	block2add = FOV_BEHIND
