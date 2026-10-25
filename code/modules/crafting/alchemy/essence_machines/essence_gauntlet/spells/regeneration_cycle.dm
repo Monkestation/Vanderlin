@@ -23,7 +23,6 @@
 	id = "regeneration_cycle"
 	alert_type = /atom/movable/screen/alert/status_effect/regeneration_cycle
 	duration = 300 SECONDS
-	tick_interval = 10 SECONDS
 
 /datum/status_effect/buff/regeneration_cycle/tick()
 	var/mob/living/carbon/carbon = owner
