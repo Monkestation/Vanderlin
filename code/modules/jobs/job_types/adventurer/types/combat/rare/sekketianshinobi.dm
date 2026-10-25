@@ -14,8 +14,8 @@
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/educated/reading = 10,
+		/datum/attribute/skill/educated/mathematics = 10,
 		/datum/attribute/skill/misc/lockpicking = 20, //these guys free slaves, they probably know how to disarm traps and unlock things
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/craft/crafting = 10,

@@ -10,7 +10,7 @@
 	)
 	raw_attribute_list = list(
 		/datum/attribute/skill/magic/blood = 10,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/climbing = 50,
 	)
 

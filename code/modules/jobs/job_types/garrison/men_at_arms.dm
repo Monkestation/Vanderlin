@@ -88,7 +88,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10
 	)
 
@@ -134,7 +134,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/labor/lumberjacking = 10
 	)
@@ -181,7 +181,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10
 	)
 
@@ -236,7 +236,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10
 	)
 

@@ -667,7 +667,7 @@
 
 /mob/living/carbon/human/is_literate()
 	if(mind)
-		if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/reading) > 0)
+		if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/educated/reading) > 0)
 			return TRUE
 		else
 			return FALSE

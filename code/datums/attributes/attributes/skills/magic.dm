@@ -107,6 +107,14 @@
 	)
 	shared_xp_percent = 0.5
 
+/datum/attribute/skill/magic/arcane/death
+	name = "Dark Magic"
+	desc = "Represents your character's ability to perform Dark Magic. The corrupted essence of another form of magic, Dark Magic takes things to the extreme. This is a sub-skill of Arcyne Magic."
+	default_attributes = list(
+		/datum/attribute/skill/magic/arcane = -30
+	)
+	shared_xp_percent = 0.1
+
 /*---------------------------------------------------------------------------------
 -----------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------*/

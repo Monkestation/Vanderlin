@@ -19,9 +19,9 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/attribute_holder/sheet/job/lord/old
@@ -42,9 +42,9 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/lord

@@ -48,7 +48,7 @@
 		return
 	if(!user.can_read(src))
 		if(info)
-			user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+			user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 		return
 	if(in_range(user, src) || isobserver(user))
 //		var/obj/screen/read/R = user.hud_used.reads

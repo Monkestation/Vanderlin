@@ -60,7 +60,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
@@ -78,7 +78,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
@@ -125,7 +125,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
 	)
@@ -142,7 +142,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
 	)
@@ -187,7 +187,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
@@ -205,7 +205,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10

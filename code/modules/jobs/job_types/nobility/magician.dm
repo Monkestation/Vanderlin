@@ -7,7 +7,7 @@
 		STAT_INTELLIGENCE = 5,
 		STAT_CONSTITUTION = -2,
 		STAT_SPEED = -2,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/magic/arcane = 50,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -15,7 +15,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/attribute_holder/sheet/job/magician/old
@@ -27,7 +27,7 @@
 		STAT_INTELLIGENCE = 6,
 		STAT_CONSTITUTION = -2,
 		STAT_SPEED = -3,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/magic/arcane = 50,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -35,7 +35,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/job/magician

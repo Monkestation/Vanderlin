@@ -19,7 +19,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/advclass/combat/ranger
