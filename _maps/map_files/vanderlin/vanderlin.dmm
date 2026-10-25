@@ -21581,9 +21581,7 @@
 	pixel_x = -4;
 	pixel_y = 7
 	},
-/obj/structure/table/wood/reinf_long{
-	dir = 4
-	},
+/obj/structure/table/wood/reinf_long,
 /turf/open/floor/carpet/lord/corner{
 	dir = 4
 	},
@@ -22723,7 +22721,6 @@
 /turf/open/floor/cobble,
 /area/under/cave)
 "iMv" = (
-/obj/structure/fake_machine/scomm/l,
 /obj/structure/bookcase/random,
 /turf/open/floor/churchrough,
 /area/indoors/town/keep/phys)
@@ -47429,6 +47426,11 @@
 /obj/item/burial_shroud,
 /turf/open/floor/cobble,
 /area/indoors/town/church/crypt)
+"shG" = (
+/obj/structure/water_pipe,
+/obj/structure/water_pipe,
+/turf/open/openspace,
+/area/outdoors/town/keep/roof)
 "shK" = (
 /obj/structure/meathook,
 /obj/effect/decal/cleanable/blood/drip,
@@ -48417,6 +48419,14 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/church/crypt)
+"szB" = (
+/obj/structure/fluff/walldeco/church/line,
+/obj/structure/fluff/walldeco/church/line{
+	dir = 1
+	},
+/obj/structure/fake_machine/scomm/l,
+/turf/open/floor/churchrough,
+/area/indoors/town/keep/phys)
 "szC" = (
 /obj/structure/door/window{
 	name = "Mercenary Hideout"
@@ -49322,6 +49332,12 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/adv_guild)
+"sQz" = (
+/obj/structure/water_pipe,
+/turf/open/floor/rooftop{
+	dir = 8
+	},
+/area/outdoors/town/keep/roof)
 "sQG" = (
 /obj/structure/rack/shelf,
 /obj/structure/chair/stool/bar,
@@ -50061,6 +50077,10 @@
 "tjf" = (
 /turf/open/openspace,
 /area/indoors/town/adv_guild)
+"tju" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/concrete,
+/area/indoors/town/keep/basement)
 "tjw" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -59730,9 +59750,7 @@
 	pixel_x = 1;
 	pixel_y = 8
 	},
-/obj/structure/table/wood/reinf_long{
-	dir = 8
-	},
+/obj/structure/table/wood/reinf_long,
 /turf/open/floor/carpet/lord/corner{
 	dir = 1
 	},
@@ -60560,6 +60578,13 @@
 	dir = 4
 	},
 /area/outdoors/town/roofs)
+"xcy" = (
+/obj/structure/water_pipe,
+/obj/structure/water_pipe,
+/turf/open/floor/rooftop{
+	dir = 8
+	},
+/area/outdoors/town/keep/roof)
 "xcD" = (
 /obj/machinery/light/fueled/hearth,
 /obj/item/reagent_containers/glass/bucket/pot,
@@ -84087,7 +84112,7 @@ cBr
 cBr
 cBr
 cBr
-kZq
+olj
 kZq
 vHd
 tMc
@@ -84691,7 +84716,7 @@ nam
 cBr
 eqS
 qWJ
-wxY
+hmc
 wxY
 kZq
 xHe
@@ -84710,7 +84735,7 @@ vnd
 cjK
 qcM
 cBr
-dOn
+tju
 dOn
 kZq
 kZq
@@ -85903,7 +85928,7 @@ qLo
 qLo
 qLo
 jnU
-wxY
+hmc
 wxY
 mhK
 fLi
@@ -86913,7 +86938,7 @@ iTD
 qzt
 dXQ
 kxM
-kZq
+olj
 kZq
 cfN
 cfN
@@ -124484,7 +124509,7 @@ gis
 bMk
 uBJ
 iMv
-pkw
+szB
 xwx
 bfY
 msS
@@ -171567,11 +171592,11 @@ qFx
 ybB
 ybB
 ybB
-ybB
-ybB
-ybB
-ybB
-ybB
+mQz
+mQz
+mQz
+mQz
+mQz
 ybB
 ybB
 ybB
@@ -171769,11 +171794,11 @@ qFx
 ybB
 ybB
 ybB
-ybB
-ybB
-ybB
-ybB
-ybB
+mQz
+mQz
+mQz
+mQz
+mQz
 ybB
 ybB
 ybB
@@ -171971,11 +171996,11 @@ qFx
 ybB
 ybB
 ybB
-ybB
-ybB
-ybB
-ybB
-ybB
+mQz
+mQz
+mQz
+mQz
+mQz
 ybB
 ybB
 ybB
@@ -172173,11 +172198,11 @@ qFx
 qFx
 ybB
 ybB
-ybB
-ybB
-ybB
-ybB
-ybB
+mQz
+mQz
+mQz
+mQz
+mQz
 ybB
 ybB
 ybB
@@ -172375,11 +172400,11 @@ qFx
 qFx
 qFx
 ybB
-ybB
-ybB
-ybB
-ybB
-ybB
+mQz
+mQz
+mQz
+mQz
+mQz
 ybB
 ybB
 ybB
@@ -172577,11 +172602,11 @@ qFx
 qFx
 qFx
 ybB
-ybB
-ybB
-ybB
-ybB
-ybB
+mQz
+mQz
+mQz
+mQz
+mQz
 ybB
 ybB
 ybB
@@ -201062,7 +201087,7 @@ nNY
 nNY
 nNY
 nNY
-sWQ
+ybB
 ybB
 ybB
 ybB
@@ -201263,7 +201288,7 @@ nNY
 nNY
 nNY
 nNY
-ybB
+sWQ
 sWQ
 ybB
 ybB
@@ -201465,8 +201490,8 @@ qFx
 nNY
 nNY
 nNY
-ybB
 sWQ
+ybB
 ybB
 ybB
 ybB
@@ -201667,8 +201692,8 @@ sWQ
 sWQ
 sWQ
 sWQ
-sWQ
-sWQ
+shG
+ybB
 ybB
 ybB
 ybB
@@ -201869,8 +201894,8 @@ xnE
 xnE
 ybB
 ybB
-ybB
 sWQ
+ybB
 ybB
 ybB
 ybB
@@ -202071,8 +202096,8 @@ xnE
 xnE
 xnE
 ybB
-ybB
 sWQ
+ybB
 ybB
 ybB
 ybB
@@ -202273,8 +202298,8 @@ xnE
 xnE
 xnE
 ybB
-ybB
 sWQ
+ybB
 ybB
 ybB
 ybB
@@ -202475,8 +202500,8 @@ xnE
 xnE
 xnE
 xnE
-xnE
-sWQ
+sQz
+ybB
 ybB
 ybB
 ybB
@@ -202677,7 +202702,7 @@ xnE
 xnE
 xnE
 xnE
-xnE
+xcy
 ybB
 ybB
 ybB
@@ -202879,8 +202904,8 @@ xnE
 xnE
 xnE
 xnE
-xnE
-ybB
+sQz
+sWQ
 ybB
 ybB
 ybB
