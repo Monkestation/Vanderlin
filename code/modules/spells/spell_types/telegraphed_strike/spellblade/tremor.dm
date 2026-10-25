@@ -4,6 +4,7 @@
 		Builds 1 momentum on hit. At 3+ momentum: consumes 3 to double damage."
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	button_icon_state = "tremor"
 	sound = null
 	invocation = "Tremor!"

@@ -13,6 +13,7 @@
 	delay_between_level = 0.05 SECONDS
 
 	required_form = FORM_ICE
+	associated_skill = /datum/attribute/skill/magic/arcane/ice
 	required_level = 2
 
 	button_icon_state = "frostbolt"
