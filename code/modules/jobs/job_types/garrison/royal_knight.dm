@@ -216,7 +216,7 @@
 		STAT_INTELLIGENCE = 1,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/shields = 20,
 		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/combat/whipsflails = 20,
