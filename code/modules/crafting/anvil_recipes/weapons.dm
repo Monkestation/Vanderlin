@@ -426,6 +426,10 @@
 	name = "Iron Knuckles"
 	created_item = /obj/item/weapon/knuckles/iron
 
+/datum/anvil_recipe/weapons/iron/handclaw
+	name = "Iron Hound Claws"
+	created_item = /obj/item/weapon/handclaw
+
 // --------- STEEL ------------  Fancy gear for Knights
 /datum/anvil_recipe/weapons/steel
 	abstract_type = /datum/anvil_recipe/weapons/steel
@@ -821,6 +825,10 @@
 	name = "Falchion"
 	created_item = /obj/item/weapon/sword/scimitar/falchion
 
+/datum/anvil_recipe/weapons/steel/mantisclaws
+	name = "Steel Mantis Claws"
+	created_item = /obj/item/weapon/handclaw/steel
+
 /datum/anvil_recipe/weapons/steel/elvenclub
 	name = "Steel Elven Warclub"
 	additional_items = list(/obj/item/ingot/steel = 1)
@@ -961,6 +969,10 @@
 	name = "Silver Katar"
 	created_item = /obj/item/weapon/katar/silver
 
+/datum/anvil_recipe/weapons/silver/mantisclaws
+	name = "Silver Mantis Claws"
+	created_item = /obj/item/weapon/handclaw/steel/silver
+
 /datum/anvil_recipe/weapons/silver/knuckles
 	name = "Silver Knuckles"
 	created_item = /obj/item/weapon/knuckles/silver
@@ -1055,6 +1067,10 @@
 /datum/anvil_recipe/weapons/blacksteel/knuckles
 	name = "Blacksteel Knuckles"
 	created_item = /obj/item/weapon/knuckles/blacksteel
+
+/datum/anvil_recipe/weapons/blacksteel/mantisclaws
+	name = "Blacksteel Mantis Claws"
+	created_item = /obj/item/weapon/handclaw/steel/blacksteel
 
 /datum/anvil_recipe/weapons/blacksteel/dagger
 	name = "Blacksteel Daggers"

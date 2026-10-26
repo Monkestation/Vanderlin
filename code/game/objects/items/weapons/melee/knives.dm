@@ -486,6 +486,26 @@
 		return ..()
 	return ma2html(mutable_appearance(icon, "sdagger"), user)
 
+/// TRUE if the dagger is out in the open (on a turf, or in someone's hand), allowing the souls trapped within to be heard.
+/// FALSE if it is hidden: inside any container (storage item, chest, wardrobe, etc.) or worn in a non-hand slot (belt, cloak, etc).
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/proc/is_exposed()
+	var/atom/container = loc
+	if(!container || isturf(container))
+		return TRUE
+	if(ismob(container))
+		var/mob/holder = container
+		return (src in holder.held_items)
+	return FALSE
+
+/// The mob carrying this dagger, however deeply it is nested in containers. Null if it is not carried.
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/proc/get_carrier()
+	var/atom/current = loc
+	while(current && !isturf(current))
+		if(ismob(current))
+			return current
+		current = current.loc
+	return null
+
 /obj/item/weapon/knife/dagger/steel/inhumen/profane/pickup(mob/living/M)
 	. = ..()
 	if(ishuman(M))
