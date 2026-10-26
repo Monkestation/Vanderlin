@@ -14,6 +14,7 @@
 	spell_cost = 20
 
 	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 
 	invocation = "Evomere Fumum!"
 	invocation_type = INVOCATION_SHOUT

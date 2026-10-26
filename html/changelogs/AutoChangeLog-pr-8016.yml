@@ -1,0 +1,6 @@
+author: "Sockssq"
+delete-after: True
+changes:
+  - bugfix: "Farmhand can be used on both sides now"
+  - map: "modified soilson farm placings of apairies"
+  - map: "added a stockpile in the soilsons"

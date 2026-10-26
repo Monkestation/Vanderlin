@@ -1,0 +1,6 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "A new, extended description to the Crown of Vanderlin, credit to Ardcrumb!"
+  - balance: "Regents can now use the Master's Rod just like the Monarch, credit to Forest for the code."
+  - spellcheck: "Master's Rod description now says \"symbol\" instead of \"symbold\". The lizards must've gotten to it."

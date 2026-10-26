@@ -5,6 +5,7 @@
 	sound = 'sound/magic/PSY.ogg'
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 
 	cooldown_time = 25 SECONDS
 	spell_cost = 25

@@ -4,6 +4,7 @@
 	button_icon_state = "readomen"
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
 
 	invocation = "Praescientia!"
 	invocation_type = INVOCATION_SHOUT

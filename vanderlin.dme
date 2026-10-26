@@ -4316,6 +4316,7 @@
 #include "code\modules\spells\spell_types\pointed\respite.dm"
 #include "code\modules\spells\spell_types\pointed\revive.dm"
 #include "code\modules\spells\spell_types\pointed\sacred_flame.dm"
+#include "code\modules\spells\spell_types\pointed\silence_dome.dm"
 #include "code\modules\spells\spell_types\pointed\silence_inhumen.dm"
 #include "code\modules\spells\spell_types\pointed\spirit_possession.dm"
 #include "code\modules\spells\spell_types\pointed\sundering_lightning.dm"

@@ -2270,8 +2270,12 @@
 			var/datum/component/storage = item.GetComponent(/datum/component/storage)
 			if(storage)
 				pickable_items |= item
-		var/obj/item/picked = input(src, "What bag do you want to crawl into?") as null|anything in pickable_items
+		var/obj/item/picked = tgui_input_list(src, "What do you want to crawl into?", "Target Item", pickable_items, timeout = 20 SECONDS)
 		if(!picked)
+			return
+		if(stat == DEAD || !Adjacent(over))
+			return
+		if(incapacitated())
 			return
 		var/obj/item/mob_holder/holder = new(get_turf(src), src)
 		visible_message(span_warning("[src] starts to climb into [picked] on [over]."), span_warning("You start to climb into [picked] on [over]."))

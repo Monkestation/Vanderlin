@@ -1,0 +1,4 @@
+author: "Lukas-Seltz"
+delete-after: True
+changes:
+  - bugfix: "The cuirass cannot have its permanent damage repaired using the type of bars the item is made from."

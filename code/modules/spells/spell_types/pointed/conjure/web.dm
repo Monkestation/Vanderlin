@@ -18,4 +18,5 @@
 	spell_flags = SPELL_RITUOS
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_technique = TECHNIQUE_CREATION
