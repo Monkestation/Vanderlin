@@ -152,7 +152,7 @@
 	craftdiff = 4
 
 /datum/artificer_recipe/weapons/hunting_crossbow
-	name = "Hunting Crossbow"
+	name = "Hunting Crossbow (+1 Iron) (+2 Sinew Fibers) (+1 Tail Bone)"
 	required_item = /obj/item/natural/wood/plank
 	created_item = /obj/item/gun/ballistic/bow/cross/hunt
 	additional_items = list(
