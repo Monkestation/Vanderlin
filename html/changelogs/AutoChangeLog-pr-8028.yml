@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "Adds anvil recipes for Iron, Steel, Silver, and Blacksteel handclaws."
