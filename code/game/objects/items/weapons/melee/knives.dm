@@ -311,13 +311,12 @@
 	name = "steel kukri"
 	icon_state = "kukri_steel"
 	desc = "A hefty knife that originated in the south-eastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
+	melting_material = /datum/material/steel
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	force = DAMAGE_DAGGER + 1
 	wdefense = AVERAGE_PARRY
-	melt_amount = 75
-    melting_material = /datum/material/steel
-	item_weight = 270 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
+	item_weight = 270 GRAMS
 
 /obj/item/weapon/knife/dagger/steel/pestrasickle
 	name = "plaguebringer sickle"
