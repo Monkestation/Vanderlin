@@ -400,7 +400,7 @@
 
 /obj/item/weapon/axe/hatchet
 	name = "hunting hatchet"
-	desc = "A simple iron handaxe with a hammer bit, a tool often used by hunters, or travelers alike."
+	desc = "A simple iron handaxe with a hammer bit, a tool often used by hunters and travelers alike."
 	icon_state = "hatchet"
 	force = DAMAGE_AXE + 4
 	force_wielded = 0
