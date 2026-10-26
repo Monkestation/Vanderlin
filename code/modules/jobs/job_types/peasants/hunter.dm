@@ -172,6 +172,7 @@
 	beltl = /obj/item/storage/meatbag
 	gloves = /obj/item/clothing/gloves/leather
 	backpack_contents = list(
+		/obj/item/needle/thorn = 1,
 		/obj/item/reagent_containers/powder/salt = 1,
 		/obj/item/flint = 1,
 		/obj/item/bait = 1,

@@ -306,6 +306,10 @@
 	output_amount = 3
 	craftdiff = 0
 
+/datum/anvil_recipe/weapons/iron/huntknife
+	name = "Hunting Knife"
+	created_item = /obj/item/weapon/knife/hunting
+
 /datum/anvil_recipe/weapons/iron/cleaver
 	name = "Cleaver"
 	created_item = /obj/item/weapon/knife/cleaver
@@ -742,10 +746,6 @@
 	name = "Glaive"
 	additional_items = list(/obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/polearm/halberd/bardiche/glaive
-
-/datum/anvil_recipe/weapons/steel/huntknife
-	name = "Hunting Knife"
-	created_item = /obj/item/weapon/knife/hunting
 
 /datum/anvil_recipe/weapons/steel/kiteshield
 	name = "Kite Shield"

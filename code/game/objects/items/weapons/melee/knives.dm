@@ -315,6 +315,7 @@
 	force = DAMAGE_DAGGER + 1
 	wdefense = AVERAGE_PARRY
 	melt_amount = 75
+    melting_material = /datum/material/steel
 	item_weight = 270 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL
 
