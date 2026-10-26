@@ -73,7 +73,7 @@
 		return FALSE
 	var/mob/living/carbon/human/human_user = user
 
-	if(!is_lord_job(human_user.mind?.assigned_role))
+	if(!(SSticker.rulermob == human_user || SSticker.regent_mob == human_user))
 		to_chat(user, span_danger("The rod doesn't obey me."))
 		return FALSE
 

@@ -6,6 +6,7 @@
 	self_cast_possible = FALSE
 
 	required_form = FORM_ICE
+	associated_skill = /datum/attribute/skill/magic/arcane/ice
 
 	invocation = "Death grip you!"
 	invocation_type = INVOCATION_SHOUT

@@ -5,6 +5,7 @@
 		At 3+ momentum: consumes 3 to double damage. Builds momentum on a multi-target hit."
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	button_icon_state = "shatter"
 	invocation = "Frange!"
 	damage = 40

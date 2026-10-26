@@ -105,6 +105,7 @@
 /datum/antagonist/blood_mage/herald
 	name = ROLE_BLOOD_HERALD
 	antag_hud_name = "bloodherald"
+	allow_preference_switching = TRUE
 	confess_lines = list(
 		"MY MASTERS WILL BRING RUIN!",
 		"THE FALSE GODS WILL BURN!",

@@ -96,7 +96,6 @@
 	color = CLOTHING_SOOT_BLACK
 	allowed_sex = list(MALE, FEMALE)
 	allowed_race = SPECIES_BASE_BODY
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/half/guard
 	name = "guard's half cloak"
@@ -168,7 +167,6 @@
 	slot_flags = ITEM_SLOT_CLOAK
 	nodismemsleeves = TRUE
 	slot_flags = ITEM_SLOT_CLOAK
-	has_storage = TRUE
 
 //............... Battle Nun ........................... (unique kit for the role, tabard for aesthetics)
 /obj/item/clothing/cloak/battlenun
@@ -337,7 +335,6 @@
 	allowed_race = SPECIES_BASE_BODY
 
 /obj/item/clothing/cloak/poncho
-
 	name = "cloth poncho"
 	desc = "A loose garment that is usually draped across ones upper body. No one's quite sure of its cultural origin."
 	icon_state = "poncho"
@@ -366,6 +363,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK //Same slots as the regular tabard, with the added bonus of being slingable on the rightmost backslot.
 	salvage_result = /obj/item/natural/hide/cured
+	has_storage = FALSE
 	grid_width = 64
 	grid_height = 96
 
@@ -460,7 +458,6 @@
 	icon = 'icons/roguetown/clothing/special/crusader.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/rosa
 	name = "regal cloak"
