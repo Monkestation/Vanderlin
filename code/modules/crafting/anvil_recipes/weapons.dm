@@ -743,6 +743,12 @@
 	created_item = /obj/item/weapon/sword/long
 	craftdiff = 3
 
+/datum/anvil_recipe/weapons/steel/longsword
+	name = "Jeweled Longsword"
+	additional_items = list(/obj/item/ingot/steel = 1, /obj/item/ingot/gold = 1)
+	created_item = /obj/item/weapon/sword/long/jeweled
+	craftdiff = 4
+
 /datum/anvil_recipe/weapons/steel/longsword/kriegsmesser
 	name = "Kriegsmesser"
 	additional_items = list(/obj/item/ingot/steel = 1)
