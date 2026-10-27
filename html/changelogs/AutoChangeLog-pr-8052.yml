@@ -1,5 +1,0 @@
-author: "Wyrmtongue336"
-delete-after: True
-changes:
-  - bugfix: "Soul chat will now be hidden from other players when the profane dagger is hidden."
-  - bugfix: "Assassins can now be triumphant on roundend reports and flex their kills."

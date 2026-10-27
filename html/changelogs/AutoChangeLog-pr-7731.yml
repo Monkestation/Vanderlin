@@ -1,6 +1,0 @@
-author: "PotatoTomahto"
-delete-after: True
-changes:
-  - balance: "increased bleed from injuries and arteries"
-  - bugfix: "enter hard crit when your brain runs out of blood"
-  - code_imp: "`TRAIT_GODMODE` instead of bitflag"

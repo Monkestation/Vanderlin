@@ -1,5 +1,0 @@
-author: "Blundir"
-delete-after: True
-changes:
-  - bugfix: "eora's candle going invisible when being lit"
-  - image: "eora's candle resprite"

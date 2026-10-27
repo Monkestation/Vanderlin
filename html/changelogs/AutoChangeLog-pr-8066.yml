@@ -1,7 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - bugfix: "Fixed fish breaking into feathers."
-  - image: "Added new sprites for silver dagger and arcyne dagger."
-  - rscadd: "Added jewled longsword."
-  - image: "Added some more knife related sprites, unimplemented."
