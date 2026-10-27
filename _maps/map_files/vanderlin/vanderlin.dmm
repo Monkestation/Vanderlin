@@ -801,19 +801,10 @@
 	dir = 1
 	},
 /area/indoors/town/keep/garrison)
-"aci" = (
-/turf/closed/mineral/warm{
-	name = "cracked rock"
-	},
-/area/under/cavelava)
 "acj" = (
 /obj/machinery/light/fueled/firebowl/firebowlb,
 /turf/open/floor/naturalstone,
 /area/under/cavelava)
-"ack" = (
-/obj/item/grown/log/tree/stake,
-/turf/open/floor/naturalstone,
-/area/outdoors/basin/safe)
 "acl" = (
 /turf/open/floor/naturalstone,
 /area/outdoors/basin/safe)
@@ -121040,7 +121031,7 @@ rvF
 acl
 qLp
 qLp
-aci
+qLp
 qLp
 qLp
 rbr
@@ -121442,7 +121433,7 @@ rqE
 oLF
 rvF
 rvF
-ack
+acl
 acf
 qFx
 acf
