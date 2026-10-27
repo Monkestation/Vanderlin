@@ -9908,6 +9908,7 @@
 /area/indoors/town/keep/archivist)
 "dRY" = (
 /obj/structure/closet/crate/chest/neu_iron,
+/obj/effect/mapping_helpers/access/keyset/garrison/general,
 /turf/open/floor/hexstone,
 /area/indoors/town/garrison)
 "dSj" = (
@@ -37279,6 +37280,7 @@
 "pdB" = (
 /obj/structure/closet/crate/chest/neu_iron,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/mapping_helpers/access/keyset/garrison/general,
 /turf/open/floor/hexstone,
 /area/indoors/town/garrison)
 "pdD" = (
