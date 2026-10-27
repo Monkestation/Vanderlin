@@ -77,7 +77,7 @@
 
 	players_report()
 
-	SSvote.initiate_vote("map", "Psydon")
+	SSvote.initiate_vote("map", "Psydon", TRUE)
 
 	CHECK_TICK
 
