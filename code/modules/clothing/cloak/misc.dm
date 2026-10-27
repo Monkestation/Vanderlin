@@ -159,6 +159,7 @@
 	name = "matron cloak"
 	desc = "A cloak that only the meanest of old crones bother to wear."
 	icon_state = "matroncloak"
+	item_state = "matroncloak"
 	icon = 'icons/roguetown/clothing/cloaks.dmi'
 	mob_overlay_icon ='icons/roguetown/clothing/onmob/cloaks.dmi'
 	body_parts_covered = CHEST|GROIN|VITALS|ARMS
@@ -166,7 +167,7 @@
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
 	nodismemsleeves = TRUE
-	slot_flags = ITEM_SLOT_CLOAK
+	has_storage = TRUE
 
 //............... Battle Nun ........................... (unique kit for the role, tabard for aesthetics)
 /obj/item/clothing/cloak/battlenun
