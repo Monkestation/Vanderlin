@@ -1,0 +1,11 @@
+author: "Blundir"
+delete-after: True
+changes:
+  - rscadd: "added crafting and snipping for flower bouquets"
+  - rscadd: "added numerous missing crafting recipes to tailor"
+  - qol: "reshuffled lists in tailor's book to be less confusing, a lot of gloves, pants, etc are placed in corresponding categories"
+  - balance: "tailor has the same core leatherworking skill as sewing now (30)"
+  - balance: "lowered the price of martyr's cloak to 20"
+  - bugfix: "loose pixel on hunter's gambeson sprite"
+  - bugfix: "crier's garb sprite having no sleeves"
+  - bugfix: "matron's cloak having darkness underneath it that obscured other clothing"
