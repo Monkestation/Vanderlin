@@ -1,0 +1,4 @@
+author: "TheDoktorZ"
+delete-after: True
+changes:
+  - bugfix: "Fixed fancy bookshelf code double."

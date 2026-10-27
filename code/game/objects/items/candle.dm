@@ -15,6 +15,7 @@
 	var/lit = FALSE
 	var/infinite = FALSE
 	var/start_lit = FALSE
+	var/melted_item = /obj/item/trash/candle
 
 /obj/item/candle/lit
 	start_lit = TRUE
@@ -84,7 +85,7 @@
 	if(!infinite)
 		wax--
 	if(!wax)
-		var/obj/item/trash/candle/candle = new /obj/item/trash/candle(get_turf(src))
+		var/obj/item/trash/candle/candle = new melted_item(get_turf(src))
 		var/datum/component/storage/STR = loc.GetComponent(/datum/component/storage)
 		if(STR)
 			SEND_SIGNAL(loc, COMSIG_TRY_STORAGE_INSERT, candle, null, TRUE, TRUE)
@@ -134,15 +135,16 @@
 /obj/item/candle/eora
 	icon = 'icons/roguetown/items/lighting.dmi'
 	name = "eora's candle"
-	desc = ""
-	color = "#f858b5ff"
+	desc = "A heart shaped candle blessed by the Eoran love, it burns with a beautiful pink flame and has a flowery odor."
 	light_color = "#ff13d8ff"
+	icon_state = "candle_eora"
 	infinite = TRUE
-	base_icon_state = "eora's candle"
+	base_icon_state = "candle_eora"
+	melted_item = /obj/item/trash/candle/eora
 
 /obj/item/candle/eora/lit
 	start_lit = TRUE
-	icon_state = "candle1_lit"
+	icon_state = "candle_eora_lit"
 
 /obj/item/candle/yellow/lit/infinite
 	light_power = 1
