@@ -81,7 +81,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 		if(!forced)
 			if(clan_selected)
-				vampire.set_clan(default_clan)
+				vampdude.set_clan(default_clan)
 		else
 			vampdude.set_clan_direct(forcing_clan)
 			forcing_clan = null
