@@ -70,7 +70,7 @@
 				L.visible_message(span_warning("The dark magic fades away around [L]!"))
 				playsound(damage_turf, 'sound/magic/magic_nulled.ogg', 100)
 				continue
-			L.apply_status_effect(/datum/status_effect/debuff/witherd)
+			L.apply_status_effect(/datum/status_effect/debuff/withered)
 
 /obj/effect/temp_visual/trap/wither_line
 	icon = 'icons/effects/effects.dmi'

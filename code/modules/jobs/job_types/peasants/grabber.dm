@@ -12,11 +12,11 @@
 		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/combat/firearms = 10,
 		/datum/attribute/skill/combat/crossbows = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/swimming = 40,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/labor/mathematics = 10
+		/datum/attribute/skill/educated/mathematics = 10
 	)
 
 /datum/job/grabber

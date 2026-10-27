@@ -26,18 +26,6 @@
 		"...you can feel the blood rush through your body in the freezing rain, scaling the tree rapidly - the figures behind you bicker to one-another... you lost them..."
 	)
 
-/datum/attribute/skill/misc/reading
-	name = "Reading"
-	desc = "Represents your character's ability to read and write. Without at least some skill in Reading, you'll be totally unable to read or write."
-	governing_attribute = STAT_INTELLIGENCE
-	default_attributes = list(
-		STAT_INTELLIGENCE = -8,
-	)
-	difficulty = SKILL_DIFFICULTY_EASY
-	dreams = list(
-		"...you lick your fingers, gently flipping through the old, decaying pages... re-reading the page, your eyes widen in shock... the truth is terrible... you feel a presence behind you... and the cold blade in your throat..."
-	)
-
 /datum/attribute/skill/misc/swimming
 	name = "Swimming"
 	desc = "Represents your character's ability to swim. The higher your skill in Swimming, the faster you can swim and the less energy you'll use."
