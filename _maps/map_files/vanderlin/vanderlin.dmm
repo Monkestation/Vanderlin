@@ -7114,7 +7114,7 @@
 /obj/structure/lever/hidden/keep{
 	redstone_id = "Keep-Art"
 	},
-/turf/closed/wall/mineral/decorstone,
+/turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/town/keep/library)
 "cFy" = (
 /obj/structure/door/weak/bolt{
@@ -12112,7 +12112,9 @@
 	pixel_x = 4;
 	pixel_y = -9
 	},
-/turf/open/floor/ruinedwood/spiral,
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 4
+	},
 /area/indoors/town/keep/library)
 "eHx" = (
 /obj/machinery/light/fueled/firebowl/stump,
@@ -16796,6 +16798,9 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/clinic_large)
+"gAz" = (
+/turf/closed/wall/mineral/wooddark/end,
+/area/indoors/town/keep/halls/w)
 "gAH" = (
 /obj/item/candle/yellow{
 	pixel_x = 11;
@@ -16830,6 +16835,9 @@
 /obj/item/ingot/gold,
 /turf/open/floor/greenstone,
 /area/under/town/sewer)
+"gBx" = (
+/turf/closed/wall/mineral/wooddark/vertical,
+/area/indoors/town/keep/library)
 "gBy" = (
 /obj/structure/chair/bench,
 /obj/effect/landmark/start/vagrant,
@@ -20344,6 +20352,12 @@
 "hZn" = (
 /turf/open/floor/cobble,
 /area/outdoors/town)
+"hZo" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 1
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/town/keep)
 "hZq" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/chair/stool,
@@ -36637,6 +36651,11 @@
 	},
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/keep/magician)
+"ovt" = (
+/turf/closed/wall/mineral/wooddark/end{
+	dir = 1
+	},
+/area/indoors/town/keep/library)
 "ovw" = (
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
@@ -36872,6 +36891,9 @@
 	dir = 8
 	},
 /area/outdoors/river)
+"ozr" = (
+/turf/closed/wall/mineral/wooddark/end,
+/area/indoors/town/keep/library)
 "ozy" = (
 /obj/structure/flora/grass/bush,
 /turf/open/floor/grass/red,
@@ -48721,6 +48743,12 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone/moss,
 /area/indoors/town/keep/magician)
+"thS" = (
+/obj/machinery/light/fueled/torchholder{
+	dir = 1
+	},
+/turf/open/floor/dirt/road,
+/area/outdoors/town/keep)
 "thU" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/twig,
@@ -49481,7 +49509,7 @@
 /obj/effect/mapping_helpers/secret_door_creator/keep{
 	redstone_id = "Keep-Art"
 	},
-/turf/closed/wall/mineral/decorstone,
+/turf/closed/wall/mineral/wooddark/vertical,
 /area/indoors/town/keep/library)
 "tyM" = (
 /obj/structure/pottery_lathe,
@@ -57226,11 +57254,12 @@
 	},
 /area/indoors/town/cell)
 "wCm" = (
+/obj/structure/flora/grass,
 /obj/machinery/light/fueled/torchholder{
 	dir = 1
 	},
-/turf/closed/wall/mineral/craftstone,
-/area/indoors/town/steward)
+/turf/open/floor/dirt,
+/area/outdoors/town/keep)
 "wCB" = (
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/carpet/lord/corner,
@@ -59323,6 +59352,9 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep/courtagent)
+"xnM" = (
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/indoors/town/keep/halls/w)
 "xnO" = (
 /obj/structure/stairs{
 	dir = 4
@@ -126084,8 +126116,8 @@ xTl
 khg
 xTl
 vZK
-fep
-wCm
+hZo
+mGE
 bnq
 uGl
 mtb
@@ -126892,8 +126924,8 @@ sHK
 kso
 eqL
 xTl
-xTl
-wCm
+thS
+mGE
 qJw
 iUo
 lAj
@@ -127700,7 +127732,7 @@ xTl
 vZK
 xTl
 oho
-dBZ
+wCm
 mGE
 mGE
 mGE
@@ -158579,9 +158611,9 @@ qFx
 qFx
 qFx
 qFx
-hyg
-hyg
-hyg
+bre
+dSl
+bre
 nQT
 nQT
 nQT
@@ -158780,12 +158812,12 @@ fhm
 fhm
 fhm
 fhm
-hyg
-hyg
+bre
+bre
 rGR
 ooX
-hyg
-hyg
+bre
+bre
 qFx
 qFx
 qFx
@@ -158982,12 +159014,12 @@ iCV
 iCV
 iCV
 fhm
-hyg
+gBx
 dZn
 uyT
 uyT
 fOb
-hyg
+gBx
 qFx
 qFx
 qFx
@@ -159184,13 +159216,13 @@ rFV
 rFV
 fdB
 fhm
-hyg
+gBx
 dMV
 fjD
 uyT
 ggw
-hyg
-hyg
+bre
+bre
 qFx
 mQz
 hUp
@@ -159386,13 +159418,13 @@ lYO
 rFV
 fdB
 iZB
-hyg
+gBx
 cwQ
 uyT
 uyT
 uyT
 pIB
-hyg
+gBx
 mQz
 hUp
 hUp
@@ -159588,7 +159620,7 @@ gLd
 rFV
 fdB
 fdB
-hyg
+gBx
 xSu
 uyT
 uyT
@@ -159998,7 +160030,7 @@ uyT
 uyT
 uyT
 iYu
-hyg
+gBx
 vQp
 vQp
 xwx
@@ -160194,13 +160226,13 @@ rFV
 rFV
 hcj
 aCa
-hyg
+gBx
 gnB
 uyT
 uyT
 uyT
 uyT
-hyg
+gBx
 wiP
 phK
 xwx
@@ -160396,13 +160428,13 @@ jBW
 jBW
 cFz
 jBW
-hyg
+gBx
 wda
 uyT
 uyT
 eov
 uMy
-hyg
+gBx
 aHC
 aHC
 nft
@@ -160598,13 +160630,13 @@ jBW
 jBW
 jBW
 vIx
-hyg
+ozr
 gVi
 uyT
 lLg
 hLl
 eHj
-hyg
+gBx
 aHC
 aHC
 bWN
@@ -160800,13 +160832,13 @@ oEj
 oEj
 jBW
 jBW
-hyg
-hyg
+bre
+ovt
 woq
-hyg
-hyg
-hyg
-hyg
+dSl
+dSl
+ozr
+bre
 tqu
 xwx
 iZB
@@ -161402,8 +161434,8 @@ msR
 ghA
 ieN
 dSl
-xwx
-xwx
+xnM
+gAz
 xJi
 kPc
 xKR
