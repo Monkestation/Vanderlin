@@ -273,7 +273,7 @@
 	category = "Pants"
 
 /datum/repeatable_crafting_recipe/leather/gloves/duelist_gloves
-	name = "dueslist gloves"
+	name = "duelist gloves"
 	requirements = list(
 		/obj/item/natural/hide/cured = 3,
 		/obj/item/natural/fibers = 1
