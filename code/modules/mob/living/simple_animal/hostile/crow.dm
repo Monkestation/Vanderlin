@@ -15,7 +15,7 @@
 	blade_dulling = DULLING_CUT
 	rotprocess = null
 
-/obj/item/reagent_containers/food/snacks/atom_deconstruct(disassembled)
+/obj/item/reagent_containers/food/snacks/crow/atom_deconstruct(disassembled)
 	new /obj/item/natural/feather(drop_location())
 
 /obj/item/reagent_containers/food/snacks/friedcrow
