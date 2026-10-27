@@ -1,5 +1,5 @@
 /datum/repeatable_crafting_recipe/sigdry
-	name = "westleach zig"
+	name = "westleach zig x2"
 	output = /obj/item/clothing/face/cigarette/rollie/nicotine
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/dry_westleach
 	requirements = list(
@@ -7,13 +7,14 @@
 	)
 	attacked_atom = /obj/item/reagent_containers/food/snacks/produce/dry_westleach
 
+	output_amount = 2
 	craft_time = 10 SECONDS
 	crafting_message = "starts rolling a westleach zig"
 	craftdiff = 0
 	subtypes_allowed = TRUE
 
 /datum/repeatable_crafting_recipe/sigsweet
-	name = "swampweed zig"
+	name = "swampweed zig x2"
 	output = /obj/item/clothing/face/cigarette/rollie/cannabis
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/swampweed_dried
 	requirements = list(
@@ -21,13 +22,14 @@
 	)
 	attacked_atom = /obj/item/reagent_containers/food/snacks/produce/swampweed_dried
 
+	output_amount = 2
 	craft_time = 10 SECONDS
 	crafting_message = "starts rolling a swampweed zig"
 	craftdiff = 0
 	subtypes_allowed = TRUE
 
 /datum/repeatable_crafting_recipe/zigarsmoke
-	name = "zigar"
+	name = "zigar x2"
 	output = /obj/item/clothing/face/cigarette/rollie/nicotine/zigar
 	starting_atom = /obj/item/reagent_containers/food/snacks/produce/dry_westleach
 	requirements = list(
@@ -37,9 +39,41 @@
 	attacked_atom = /obj/item/alch/tobaccodust
 	allow_inverse_start = TRUE
 
+	output_amount = 2
 	craft_time = 10 SECONDS
 	crafting_message = "starts rolling up a strong zigar"
-	craftdiff = 3
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/zigarbog
+	name = "bog zigar x2"
+	output = /obj/item/clothing/face/cigarette/rollie/cannabis/zigar
+	starting_atom = /obj/item/reagent_containers/food/snacks/produce/swampweed_dried
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/produce/swampweed_dried = 1,
+		/obj/item/alch/swampdust = 1
+	)
+	attacked_atom = /obj/item/alch/swampdust
+	allow_inverse_start = TRUE
+
+	output_amount = 2
+	craft_time = 10 SECONDS
+	crafting_message = "starts rolling up a strong bog zigar"
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/zigarbaked
+	name = "mud-baked bog 'bum"
+	output = /obj/item/clothing/face/cigarette/rollie/cannabis/zigar/baked
+	starting_atom = 	output = /obj/item/natural/clod/dirt
+	requirements = list(
+		/obj/item/clothing/face/cigarette/rollie/cannabis/zigar = 1,
+		/obj/item/natural/clod/dirt = 1
+	)
+	attacked_atom = /obj/item/clothing/face/cigarette/rollie/cannabis/zigar
+	allow_inverse_start = TRUE
+
+	craft_time = 10 SECONDS
+	crafting_message = "starts rubbing the clod over the bog zigar"
+	craftdiff = 2
 
 /datum/repeatable_crafting_recipe/canvas
 	name = "canvas"
