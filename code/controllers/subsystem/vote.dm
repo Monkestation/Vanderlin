@@ -301,7 +301,7 @@ SUBSYSTEM_DEF(vote)
 		for(var/client in GLOB.clients)
 			var/client/true_client = client
 			if(send_clients_vote)
-				true_client.vote()
+				true_client.mob.vote()
 		return 1
 	return 0
 
