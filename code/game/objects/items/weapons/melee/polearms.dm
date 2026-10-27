@@ -297,6 +297,7 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/abyssor
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon

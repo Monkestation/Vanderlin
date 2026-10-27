@@ -1,4 +1,4 @@
 author: "realforest2001"
 delete-after: True
 changes:
-  - bugfix: "Fixes wretch bans."
+  - rscadd: "Map Vote now pops up on screen."
