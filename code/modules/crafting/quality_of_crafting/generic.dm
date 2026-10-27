@@ -63,7 +63,7 @@
 /datum/repeatable_crafting_recipe/zigarbaked
 	name = "mud-baked bog 'bum"
 	output = /obj/item/clothing/face/cigarette/rollie/cannabis/zigar/baked
-	starting_atom = 	output = /obj/item/natural/clod/dirt
+	starting_atom = /obj/item/natural/clod/dirt
 	requirements = list(
 		/obj/item/clothing/face/cigarette/rollie/cannabis/zigar = 1,
 		/obj/item/natural/clod/dirt = 1
