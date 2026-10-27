@@ -61,6 +61,7 @@
 			"detail" = list("Sexes Needed: [jointext(job.allowed_sexes, ", ")]"),
 		)
 
+	var/datum/patron/patron = user.client.prefs.read_preference(/datum/preference/choiced/patron)
 	if(job.tennite_triumph_exclusive)
 		if(!user.client.has_triumph_buy(TRIUMPH_BUY_HERETIC_NOBLE) && !(patron.type in UNDIVIDED_TEMPLE_PATRONS))
 			return list(
@@ -69,7 +70,6 @@
 				"detail" = list("This role requires a Tennite Patron, or a Heretic Noble Triumph."),
 			)
 
-	var/datum/patron/patron = user.client.prefs.read_preference(/datum/preference/choiced/patron)
 	if(length(job.allowed_patrons) && !(patron.type in job.allowed_patrons))
 		var/list/patron_list = list()
 		for(var/datum/patron/mult_patron as anything in job.allowed_patrons)
