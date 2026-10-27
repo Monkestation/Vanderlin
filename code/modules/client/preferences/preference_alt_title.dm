@@ -61,6 +61,13 @@
 			"detail" = list("Sexes Needed: [jointext(job.allowed_sexes, ", ")]"),
 		)
 
+	if(job.tennite_triumph_exclusive && !(patron.type in UNDIVIDED_TEMPLE_PATRONS))
+		return list(
+			"code" = "NOBLE_PATRON",
+			"label" = "PATRON LOCK",
+			"detail" = list("This role requires a Tennite Patron, or a Heretic Noble Triumph."),
+		)
+
 	var/datum/patron/patron = user.client.prefs.read_preference(/datum/preference/choiced/patron)
 	if(length(job.allowed_patrons) && !(patron.type in job.allowed_patrons))
 		var/list/patron_list = list()
