@@ -1,0 +1,8 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "Men-at-Arms can now choose from five different subclasses: Footman, Archer, Hospitaller, Cavalry, and Sergeant."
+  - rscadd: "Men-at-Arms can now use new weapon and armor loadouts, and freely mix-and-match them when they spawn in."
+  - rscadd: "Brigandine Vambraces and Brigandine Chausses as new medium armor for your arms and legs respectively!"
+  - qol: "New Men-at-Arms descriptions, courtesy of Ardcrumb and Bonewheel!"
+  - image: "Changed the appearance of Watch Boots to Dark Boots instead of Noble Boots."
