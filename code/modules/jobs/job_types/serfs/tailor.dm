@@ -14,16 +14,16 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/misc/sewing = 30,
-		/datum/attribute/skill/craft/tanning = 20,
+		/datum/attribute/skill/craft/tanning = 30,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/labor/taming = 30,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/stealing = 10,
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/job/tailor

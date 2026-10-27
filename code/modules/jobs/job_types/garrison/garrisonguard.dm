@@ -100,7 +100,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/sneaking = 10,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/shields = list(30, 30),
@@ -163,7 +163,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/sneaking = 10,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/polearms = list(30, 30),
@@ -223,7 +223,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/bows = list(30, 30),

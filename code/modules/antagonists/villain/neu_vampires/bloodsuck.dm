@@ -108,8 +108,8 @@
 	grab_ghost(TRUE, TRUE)
 	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS|HEAL_ORGANS), 500, TRUE)
 	var/antag_datum = /datum/antagonist/vampire
-	if(istype(sire_clan, /datum/clan/nitewalker))
-		antag_datum = /datum/antagonist/vampire/nitewarden
+	if(istype(sire_clan, /datum/clan/niteguard))
+		antag_datum = /datum/antagonist/vampire/niteguard
 	mind.add_antag_datum(new antag_datum(sire_clan, TRUE))
 	set_bloodpool(500)
 	visible_message(span_danger("Some dark energy begins to flow into [src]..."))

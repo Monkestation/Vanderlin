@@ -99,6 +99,21 @@
 	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 650 GRAMS
 
+/obj/item/clothing/wrists/bracers/leather/brigandine
+	name = "brigandine vambraces"
+	desc = "Leather bracers layered over cloth sleeves with iron plates on the outside. Covers both arms entirely."
+	icon_state = "splintarms"
+	equip_delay_self = 2 SECONDS
+	unequip_delay_self = 2 SECONDS
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	melt_amount = 30
+	melting_material = /datum/material/iron
+	clothing_flags = CANT_SLEEP_IN
+	armor_type = /datum/armor/brigandine
+	max_integrity = ARMOR_INT_SIDE_HARDLEATHER
+	prevent_crits = ALL_EXCEPT_BLUNT
+	item_weight = 1.2 KILOGRAMS
+
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BRACERS ARE INTENDED
 //KEEP THIS IN MIND
 //...why the hell do they exist anyways, we got advanced/masterwork gloves.

@@ -10,6 +10,10 @@
 	grid_width = 32
 	grid_height = 64
 	item_weight = 27 GRAMS
+	salvage_result = /obj/item/alch/herb/rosa
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	salvage_amount = 3
+	fiber_salvage = TRUE
 
 /obj/item/bouquet/rosa
 	name = "rosa bouquet"
@@ -20,16 +24,19 @@
 	name = "salvia bouquet"
 	desc = "A bouquet of sweet smelling salvia, a beautiful and royal purple flower."
 	icon_state = "bouquet_salvia"
+	salvage_result = /obj/item/alch/herb/salvia
 
 /obj/item/bouquet/matricaria
 	name = "matricaria bouquet"
 	desc = "A bouquet of maricaria."
 	icon_state = "bouquet_matricaria"
+	salvage_result = /obj/item/alch/herb/matricaria
 
 /obj/item/bouquet/calendula
 	name = "calendula bouquet"
 	desc = "A bouquet of calendula, a flower used in herbal medicine due to its supposed healing properties."
 	icon_state = "bouquet_calendula"
+	salvage_result = /obj/item/alch/herb/calendula
 
 /obj/item/clothing/head/flowercrown
 	name = ""

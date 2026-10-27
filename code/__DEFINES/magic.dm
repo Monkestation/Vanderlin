@@ -229,7 +229,7 @@ DEFINE_BITFIELD(spell_requirements, list(
 #define TECHNIQUE_ILLUSION "Illusion"
 #define TECHNIQUE_IMBUE "Imbue"
 
-#define FORM_ARCANE "Arcane"
+#define FORM_ARCANE "Arcyne"
 #define FORM_FIRE "Pyromancy"
 #define FORM_WATER "Hydromancy"
 #define FORM_ICE "Cryomancy"

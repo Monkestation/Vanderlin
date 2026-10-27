@@ -21,9 +21,9 @@
 		STAT_PERCEPTION = 3,
 		STAT_INTELLIGENCE = 3,
 		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/attribute_holder/sheet/job/commoner_prisoner
