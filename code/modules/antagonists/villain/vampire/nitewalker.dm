@@ -1,4 +1,4 @@
-/datum/attribute_holder/sheet/job/nitewalker
+/datum/attribute_holder/sheet/job/nitewarden
 	raw_attribute_list = list(
 		STAT_STRENGTH = 6,
 		STAT_PERCEPTION = 6,
@@ -31,7 +31,7 @@
 		/datum/attribute/skill/misc/reading = 30,
 	)
 
-/datum/antagonist/vampire/lord/nitewalker
+/datum/antagonist/vampire/lord/nitewarden
 	name = "The Nitewarden"
 	antag_hud_type = ANTAG_HUD_NITEWARDEN
 	antag_hud_name = "nitewarden"
@@ -45,7 +45,7 @@
 	roundend_category = "Nitewardens"
 	antagpanel_category = "Nitewarden"
 	ascension_level = 4
-	outfit = /datum/outfit/nitewalker
+	outfit = /datum/outfit/nitewarden
 	patron = /datum/patron/divine/noc
 	innate_traits = list(
 		TRAIT_BLOOD_SENSE,
@@ -66,10 +66,10 @@
 		Serve The Moon or the dae will break you."
 	antag_flags = FLAG_FAKE_ANTAG
 	clan_selected = TRUE
-	default_clan = /datum/clan/nitewalker
+	default_clan = /datum/clan/niteguard
 	allow_preference_switching = FALSE
 
-/datum/antagonist/vampire/nitewarden
+/datum/antagonist/vampire/niteguard
 	name = "Niteguard"
 	antag_hud_type = ANTAG_HUD_NITEWARDEN
 	isgoodguy = TRUE
@@ -80,9 +80,9 @@
 		Serve The Moon or the dae will break you."
 	antag_flags = FLAG_FAKE_ANTAG
 	clan_selected = TRUE
-	default_clan = /datum/clan/nitewalker
+	default_clan = /datum/clan/niteguard
 
-/datum/antagonist/vampire/lord/nitewalker/on_gain()
+/datum/antagonist/vampire/lord/nitewarden/on_gain()
 	var/mob/living/carbon/human/blade = owner.current
 	blade.age = AGE_ADULT
 	blade.clear_quirks()
@@ -94,8 +94,8 @@
 
 	. = ..()
 
-	owner.special_role = "Nitewalker"
-	blade.attributes?.add_sheet(/datum/attribute_holder/sheet/job/nitewalker)
+	owner.special_role = "Nitewarden"
+	blade.attributes?.add_sheet(/datum/attribute_holder/sheet/job/nitewarden)
 
 	blade.maxbloodpool = 5000
 	blade.set_bloodpool(5000)
@@ -116,13 +116,13 @@
 
 	RegisterSignal(blade, COMSIG_ATOM_EXAMINE, PROC_REF(on_examine))
 
-/datum/antagonist/vampire/lord/nitewalker/on_removal()
+/datum/antagonist/vampire/lord/nitewarden/on_removal()
 	if(owner.current)
 		owner.current.remove_stat_modifier("[type]")
 		UnregisterSignal(owner.current, COMSIG_ATOM_EXAMINE)
 	. = ..()
 
-/datum/antagonist/vampire/lord/nitewalker/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+/datum/antagonist/vampire/lord/nitewarden/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/zombie))
 		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
@@ -130,7 +130,7 @@
 	if(istype(examined_datum, /datum/antagonist/purishep))
 		return span_red("Silverblood.")
 
-/datum/antagonist/vampire/lord/nitewalker/proc/on_examine(mob/living/carbon/human/blade, mob/living/carbon/human/user, list/examine_list)
+/datum/antagonist/vampire/lord/nitewarden/proc/on_examine(mob/living/carbon/human/blade, mob/living/carbon/human/user, list/examine_list)
 	if(!istype(blade) || !istype(user))
 		return
 	if(blade == user)
@@ -146,13 +146,13 @@
 	else if(user.mind?.has_antag_datum(/datum/antagonist/maniac))
 		examine_list += span_green("Yet another legally distinct vampire hunter!")
 
-/datum/antagonist/vampire/lord/nitewalker/greet()
+/datum/antagonist/vampire/lord/nitewarden/greet()
 	to_chat(owner.current, span_danger(antag_memory))
 
-/datum/antagonist/vampire/lord/nitewalker/move_to_spawnpoint()
+/datum/antagonist/vampire/lord/nitewarden/move_to_spawnpoint()
 	return
 
-/datum/outfit/nitewalker
+/datum/outfit/nitewarden
 	mask = /obj/item/clothing/face/shepherd/shadowmask
 	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
@@ -161,21 +161,21 @@
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
 	gloves = /obj/item/clothing/gloves/leather
-	ring =  /obj/item/clothing/ring/nitewalker
+	ring =  /obj/item/clothing/ring/nitewarden
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/scabbard/sword/noble
 	backl = /obj/item/storage/backpack/satchel/black
-	r_hand = /obj/item/weapon/sword/long/silver/nitewalker
-	l_hand = /obj/item/weapon/knife/dagger/steel/stiletto/nitewalker
+	r_hand = /obj/item/weapon/sword/long/silver/nitewarden
+	l_hand = /obj/item/weapon/knife/dagger/steel/stiletto/nitewarden
 	backpack_contents = list(/obj/item/needle/blessed = 1)
 
-/datum/outfit/nitewalker/post_equip(mob/living/carbon/human/H)
+/datum/outfit/nitewarden/post_equip(mob/living/carbon/human/H)
 	..()
 	var/datum/component/storage/concrete/scabbard/sword/holder = H.beltl?.GetComponent(/datum/component/storage/concrete/scabbard/sword)
-	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/nitewalker), list())
+	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/nitewarden), list())
 
 
-/obj/item/weapon/sword/long/silver/nitewalker
+/obj/item/weapon/sword/long/silver/nitewarden
 	name = "nite's grace"
 	desc = "A blade forged of lunar silver. The Moon Prince is watching."
 	force_wielded = DAMAGE_GREATSWORD_WIELD
@@ -186,32 +186,32 @@
 	sellprice = 0
 	slot_flags = 0 //scabbard only
 
-/obj/item/weapon/sword/long/silver/nitewalker/Initialize(mapload)
+/obj/item/weapon/sword/long/silver/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/anti_theft)
 
-/obj/item/weapon/knife/dagger/steel/stiletto/nitewalker
+/obj/item/weapon/knife/dagger/steel/stiletto/nitewarden
 	name = "nite's sting"
 	desc = "A needle thin blade forged of lunar silver. The Moon Prince is watching."
 	max_blade_int = 50000
 	max_integrity = 50000
 	resistance_flags = INDESTRUCTIBLE
 
-/obj/item/weapon/knife/dagger/steel/stiletto/nitewalker/Initialize(mapload)
+/obj/item/weapon/knife/dagger/steel/stiletto/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/lightning)
 	enchant(/datum/enchantment/silver)
 	enchant(/datum/enchantment/anti_theft)
 
-/obj/item/clothing/ring/nitewalker
+/obj/item/clothing/ring/nitewarden
 	name = "nitewarden's ring"
 	icon_state = "s_newring_ruby"
 	desc = "A ring of silver with a shimmering rontz set within. It thrums with unseen power."
 	sellprice = 500
 	misc_flags = CRAFTING_TEST_EXCLUDE
 
-/obj/item/clothing/ring/nitewalker/Initialize(mapload)
+/obj/item/clothing/ring/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/life_eternal)
 	enchant(/datum/enchantment/leaping)
