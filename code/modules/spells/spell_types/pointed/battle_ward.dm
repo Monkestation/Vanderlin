@@ -151,7 +151,7 @@
 	if(living_cross == owner)
 		return FALSE
 
-	if(living_cross.real_name in allied_persons)
+	if(LOWER_TEXT(living_cross.real_name) in allied_persons)
 		return FALSE
 	for(var/faction in allied_factions)
 		if(living_cross.has_faction(faction))
@@ -182,6 +182,10 @@
 /obj/structure/rune_ward/proc/trigger_visual()
 	alpha = 255
 	flick(icon_state, src)
+	addtimer(CALLBACK(src, PROC_REF(reset_visual)), 3 SECONDS)
+
+/obj/structure/rune_ward/proc/reset_visual()
+	alpha = initial(alpha)
 
 /obj/structure/rune_ward/proc/decrease_charges()
 	charges--

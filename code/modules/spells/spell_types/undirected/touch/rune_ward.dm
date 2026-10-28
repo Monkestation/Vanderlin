@@ -279,10 +279,10 @@
 				if(!caster.mind || (!caster.mind.do_i_know(name = new_ally)))
 					to_chat(caster, span_warning("I don't know anyone by that name."))
 					return FALSE
-				if(new_ally in target_rune.allied_persons)
+				if(LOWER_TEXT(new_ally) in target_rune.allied_persons)
 					to_chat(caster, span_warning("[new_ally] is already added to this rune."))
 					return FALSE
-				target_rune.allied_persons |= new_ally
+				target_rune.allied_persons |= LOWER_TEXT(new_ally)
 				return TRUE
 
 			if(change == "Remove")
@@ -293,7 +293,7 @@
 				var/chosen_ally = tgui_input_list(caster, "Which ally do you wish to remove from the rune?", "Remove Ally", options, timeout = 20 SECONDS)
 				if(!chosen_ally)
 					return FALSE
-				target_rune.allied_persons -= chosen_ally
+				target_rune.allied_persons -= LOWER_TEXT(chosen_ally)
 				return TRUE
 
 	return FALSE
