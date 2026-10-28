@@ -134,41 +134,59 @@
 	var/owner_name = "unknown"
 	var/owner_ckey = "unknown"
 	var/checks_antimagic = TRUE
+	var/charges = 1
+	var/list/allied_factions = list()
+	var/list/allied_persons = list()
 
 /obj/structure/rune_ward/Crossed(atom/movable/AM)
-	if(ismob(AM))
-		var/mob/M = AM
-		var/mob/owner = owner_ref?.resolve()
-		if(M == owner)
-			return
-		if(checks_antimagic && M.can_block_magic())
-			trigger_visual()
-			qdel(src)
-			return
-		if(AM.throwing)
-			return
-		if(isliving(AM))
-			var/mob/living/L = AM
-			if(L.movement_type & (FLYING|FLOATING))
-				return
-			if(L.pulledby)
-				return
-			if(L.mob_timers[RUNE_WARD_IMMUNITY_KEY] && world.time < L.mob_timers[RUNE_WARD_IMMUNITY_KEY])
-				return
-	else
-		return
-	var/mob/living/L = AM
-	if(!isliving(L))
-		return
-	L.mob_timers[RUNE_WARD_IMMUNITY_KEY] = world.time + RUNE_WARD_IMMUNITY_DURATION
-	log_combat(AM, src, "triggered [name] placed by [owner_name] ([owner_ckey]) at [AREACOORD(src)]")
-	rune_effect(L)
+	trigger_rune(AM)
+
+/obj/structure/rune_ward/proc/trigger_rune(atom/movable/AM)
+	if(!isliving(AM))
+		return FALSE
+
+	var/mob/living/living_cross = AM
+
+	var/mob/owner = owner_ref?.resolve()
+	if(living_cross == owner)
+		return FALSE
+
+	if(living_cross.real_name in allied_persons)
+		return FALSE
+	for(var/faction in allied_factions)
+		if(living_cross.has_faction(faction))
+			return FALSE
+
+	if(living_cross.throwing)
+		return FALSE
+	if(living_cross.movement_type & (FLYING|FLOATING))
+		return FALSE
+	if(living_cross.pulledby)
+		return FALSE
+	if(living_cross.mob_timers[RUNE_WARD_IMMUNITY_KEY] && world.time < living_cross.mob_timers[RUNE_WARD_IMMUNITY_KEY])
+		return FALSE
+
+	if(checks_antimagic && living_cross.can_block_magic())
+		trigger_visual()
+		decrease_charges()
+		visible_message(span_warning("[src] flares but [living_cross]'s magic protection stops any effects."))
+		return TRUE
+
+	living_cross.mob_timers[RUNE_WARD_IMMUNITY_KEY] = world.time + RUNE_WARD_IMMUNITY_DURATION
+	log_combat(living_cross, src, "triggered [name] placed by [owner_name] ([owner_ckey]) at [AREACOORD(src)]")
+	rune_effect(living_cross)
 	trigger_visual()
-	qdel(src)
+	decrease_charges()
+	return TRUE
 
 /obj/structure/rune_ward/proc/trigger_visual()
 	alpha = 255
 	flick(icon_state, src)
+
+/obj/structure/rune_ward/proc/decrease_charges()
+	charges--
+	if(charges <= 0)
+		qdel(src)
 
 /obj/structure/rune_ward/proc/rune_effect(mob/living/L)
 	return
@@ -189,6 +207,7 @@
 /obj/structure/rune_ward/stun
 	name = "shock rune"
 	icon_state = "rune_stun"
+	charges = 2
 
 /obj/structure/rune_ward/stun/rune_effect(mob/living/L)
 	to_chat(L, span_danger("<B>The rune erupts with arcyne lightning!</B>"))
@@ -241,6 +260,7 @@
 	name = "alarm rune"
 	icon_state = "rune_alarm"
 	alpha = 40
+	charges = 5
 
 /obj/structure/rune_ward/alarm/rune_effect(mob/living/L)
 	to_chat(L, span_danger("<B>The rune chimes loudly!</B>"))
