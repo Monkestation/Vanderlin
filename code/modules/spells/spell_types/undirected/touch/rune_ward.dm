@@ -82,7 +82,7 @@
 			break
 
 	if(!sacrifice)
-		for(var/obj/possible_sacrifice as anything in view(1, caster))
+		for(var/obj/possible_sacrifice in view(1, caster))
 			if(istype(possible_sacrifice, /obj/item/fertilizer/ash))
 				sacrifice = possible_sacrifice
 				break
