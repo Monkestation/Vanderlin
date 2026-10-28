@@ -422,6 +422,6 @@ GLOBAL_VAR_INIT(maniac_highlander, 0) // THERE CAN ONLY BE ONE!
 			var/mob/living/carbon/spirit/O = new /mob/living/carbon/spirit(get_turf(src))
 			O.ckey = user.ckey
 			O.returntolobby()
-			user.status_flags |= GODMODE // To prevent Trey Liam from dying
+			qdel(user)
 		return TRUE
 	. = ..()

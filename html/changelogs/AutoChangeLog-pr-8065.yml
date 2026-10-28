@@ -1,0 +1,8 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Spectral Skeletons are now semi transparent."
+  - rscadd: "Magical skills now have their own category, and make it clear if they're sub-skills or not."
+  - rscadd: "Added a new Life Magic spell to scan injuries. Includes detection of reagents within bodies."
+  - balance: "Regeneration Cycle now heals 30 points of damage (Brute and Burn) over 5 minutes, instead of 3 points of damage."
+  - code_imp: "Repathed Reading and Mathematics skills."

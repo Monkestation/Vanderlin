@@ -839,7 +839,7 @@ SUBSYSTEM_DEF(gamemode)
 
 	if(ttime >= GLOB.round_timer)
 		if(!SSvote.mode)
-			SSvote.initiate_vote("endround", "The Gods")
+			SSvote.initiate_vote("endround", "The Gods", TRUE)
 
 	if(SSmapping.retainer.head_rebel_decree)
 		if(reb_end_time == 0)

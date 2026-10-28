@@ -16,7 +16,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/misc/reading = 40
+		/datum/attribute/skill/educated/reading = 40
 	)
 
 /datum/attribute_holder/sheet/job/sellmage/old
@@ -37,7 +37,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/misc/reading = 40
+		/datum/attribute/skill/educated/reading = 40
 	)
 
 /datum/job/advclass/mercenary/sellmage

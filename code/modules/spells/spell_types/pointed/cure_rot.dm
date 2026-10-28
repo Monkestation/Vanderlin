@@ -8,7 +8,7 @@
 	cast_range = 1
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
-	spell_flags = SPELL_DEVIL_BLOCKED
+	spell_flags = SPELL_DEVIL_BLOCKED|SPELL_PSYDON
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver)
 
@@ -140,3 +140,4 @@
 
 	need_cross = FALSE
 	breaks_blood_curse = FALSE
+	initial_charges = 4

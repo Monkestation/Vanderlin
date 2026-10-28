@@ -12,10 +12,11 @@
 	item_examine_desc = "Contains the symbol of the Hands Court Agents."
 
 /datum/examine_highlight/royal_court/crown
+	explanation = "<span style='color: #ffdc7c;'><b>This is an item tied to the Royal Court!</b></span><br><br>The wearer of this relic, deemed to be Astrata's Chosen; has been granted total divine sovereignty over the kingdom by the Church of the Ten."
 	item_examine_desc = "<b>Heavy the Crown is, and ever shall it be.</b>"
 
 /datum/examine_highlight/royal_court/rod
-	item_examine_desc = "A symbold of the Crown's Power."
+	item_examine_desc = "A symbol of the Crown's Power."
 
 /datum/examine_highlight/divine
 	color = COLOR_VIBE_CROWN

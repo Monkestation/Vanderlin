@@ -70,3 +70,151 @@
   DustanHache:
   - bugfix: Fixed Energize and Reinvigorate/refresh. They both restore stamina and
       energy now like they say they should.
+2026-10-27:
+  Ardcrumb:
+  - map: Rework of the lavacaves in the basin
+  - map: Removal of the old transition zone areas
+  - map: Refurbished the roustower outskirts
+  - map: Adds a smaller lava source in the basin
+  - map: Adds a mini-dungeon to the vandermines bottom z that acts as a transition
+      to Malum's anvil.
+  Blumengama:
+  - rscadd: Added new decor items.
+  Blundir:
+  - image: added new sprite for the tailor's combined catalogue
+  - map: tailor's spider pen no longer has broken spider pathfinding due to wooden
+      railing placement
+  - map: tailor's lobby now has leatherworking catalogue book
+  - map: tailor's workshop now has the missing red lipstick
+  - rscadd: added crafting and snipping for flower bouquets
+  - rscadd: added numerous missing crafting recipes to tailor
+  - qol: reshuffled lists in tailor's book to be less confusing, a lot of gloves,
+      pants, etc are placed in corresponding categories
+  - balance: tailor has the same core leatherworking skill as sewing now (30)
+  - balance: lowered the price of martyr's cloak to 20
+  - bugfix: loose pixel on hunter's gambeson sprite
+  - bugfix: crier's garb sprite having no sleeves
+  - bugfix: matron's cloak having darkness underneath it that obscured other clothing
+  - bugfix: eora's candle going invisible when being lit
+  - image: eora's candle resprite
+  DustanHache:
+  - bugfix: Vintners rejoice, your title for soilson has been corrected by the kingsfield
+      steward association!
+  Lukas-Seltz:
+  - bugfix: The cuirass cannot have its permanent damage repaired using the type of
+      bars the item is made from.
+  MissyNym:
+  - map: Adventurers can now lock and unlock the front door of the Adventurer's Guild,
+      provided they have a delver's key.
+  ModDownloading:
+  - rscadd: A new, extended description to the Crown of Vanderlin, credit to Ardcrumb!
+  - balance: Regents can now use the Master's Rod just like the Monarch, credit to
+      Forest for the code.
+  - spellcheck: Master's Rod description now says "symbol" instead of "symbold". The
+      lizards must've gotten to it.
+  - balance: Nearly all cloak-slot items now have 2x2 storage space.
+  - rscadd: 'Men-at-Arms can now choose from five different subclasses: Footman, Archer,
+      Hospitaller, Cavalry, and Sergeant.'
+  - rscadd: Men-at-Arms can now use new weapon and armor loadouts, and freely mix-and-match
+      them when they spawn in.
+  - rscadd: Brigandine Vambraces and Brigandine Chausses as new medium armor for your
+      arms and legs respectively!
+  - qol: New Men-at-Arms descriptions, courtesy of Ardcrumb and Bonewheel!
+  - image: Changed the appearance of Watch Boots to Dark Boots instead of Noble Boots.
+  - rscadd: Adds anvil recipes for Iron, Steel, Silver, and Blacksteel handclaws.
+  Ordosian:
+  - image: Fixed Royal Coat from the Rosa set.
+  - map: Old inquisition base removed.
+  PatapoIIIa:
+  - rscadd: show_verb_panel disable flag
+  PotatoTomahto:
+  - balance: increased bleed from injuries and arteries
+  - bugfix: enter hard crit when your brain runs out of blood
+  - code_imp: '`TRAIT_GODMODE` instead of bitflag'
+  Razzberry8492:
+  - rscadd: Added descriptions for some weapons that did not previously have them,
+      such as Terminus Est and the iron and steel tossblades.
+  - spellcheck: Fixed typos, bad punctuation, and poor grammar, and reworded some
+      descriptions to make them less clunky.
+  - spellcheck: Renamed the Psydonic whip relic - "Daebreak" instead of "Daybreak".
+  Sockssq:
+  - bugfix: Farmhand can be used on both sides now
+  - map: modified soilson farm placings of apairies
+  - map: added a stockpile in the soilsons
+  TheDoktorZ:
+  - bugfix: The Monarch now remembers their childhood skills.
+  - map: Watch gatehouse reworked slightly.
+  - qol: The Lieutenant has a signal horn to alert their men
+  - balance: The LT has a single steel weapon now.
+  - bugfix: Fixed fancy bookshelf code double.
+  - rscadd: Added more possible colours for the kingdom's banners.
+  Wyrmtongue336:
+  - bugfix: Soul chat will now be hidden from other players when the profane dagger
+      is hidden.
+  - bugfix: Assassins can now be triumphant on roundend reports and flex their kills.
+  budgetcommander0:
+  - balance: +5 surefire axes/maces (now at 25)
+  dwasint:
+  - rscadd: waystones outside towns
+  - rscadd: waystones, when used outside the dungeon creates a link to a random waystone
+      in the dungeon for 30 seconds and teleports you into it, anyone can use said
+      waystone to follow
+  - rscadd: warpstone, when used on a waystone inside a dungeon creates a link to
+      a random waystone out of the dungeon for 60 seconds, can be found as loot or
+      bought from the merchant
+  - rscadd: the dungeon now has a total loot budget to spend during creation (pending
+      remaps to fully be added) which will make the loot inside rooms feel more standardized
+      between rounds, more loot spawns farther out
+  - rscadd: a new admin ability to respawn dungeon mobs choosing to respawn a fixed
+      amount, %, and if it should be going from highest depth in, lowest depth out,
+      or random.
+  - rscadd: dungeon elevator, it goes up and down from the dungeon every minute and
+      can carry a maximum of 500KG
+  - bugfix: ambushes now respect light level, and ambushable terrain, for instance
+      murderwood no longer ambushes you on roads or next to lights during the day.
+  - refactor: masochist has been refactored to actually work now. It has a three minute
+      grace period after the cravings start before stress kicks in. It uses a more
+      responsive signal approach now so it clears faster.
+  realforest2001:
+  - bugfix: Fixed fish breaking into feathers.
+  - image: Added new sprites for silver dagger and arcyne dagger.
+  - rscadd: Added jewled longsword.
+  - image: Added some more knife related sprites, unimplemented.
+  - bugfix: Fixes Kobolds cloning themselves.
+  - bugfix: Fixes The Chosen special.
+  - bugfix: Fixes runtime with vines.
+  - bugfix: Fixes runtime with polearm backstep.
+  - admin: Stops accidental claim overwrite
+  - admin: Admins can now edit bans to day lengths again
+  - rscadd: Added a Wandering Gothi pilgrim, requiring The Great Hunt patron. One
+      slot only.
+  - bugfix: Fixes wretch bans.
+  - rscadd: Added goldface to the housing blacklist.
+  - rscadd: Added a scrying flame to Occult Librarian.
+  - rscadd: Changed Blood Herald from Wretch to Solo Antag.
+  - bugfix: Fixed the vitae cost calculation for worship of Mephistopheles.
+  - rscadd: Added Bloodsteel Axe, Mace, Barmace and Warhammer.
+  - rscadd: Added examine highlights for templar weapons.
+  - rscadd: Changed trident icons to the better ones.
+  - rscadd: Added subskills to all forms of magic.
+  - balance: Most roles will have lower effective skills than they had before due
+      to the subskills. Necromancer/Lich unaffected regarding death skill.
+  - rscadd: Added unspent points display in the spellbook stats page.
+  - rscadd: Added Arcane Alteration spell - Silence.
+  - balance: Locked Lesser Phase Step to 8 Arcane Form.
+  - balance: Adjusted initial charges on multiple spells.
+  - rscadd: Added a technique point dungeon loot scroll.
+  - rscadd: Scrying Orb now fits in belts.
+  - balance: Adjusted balancing of Sal Petris.
+  ta3754859-max:
+  - balance: Modernised rewards from Matthios idol
+  - balance: fixed missing shield skill in sellsword
+  - balance: rewritten idol code to accept most items in game (exception for clothing
+      and weapons)
+  - balance: Changes Matthios robbing grave's quest to give curse protection on gain,
+      instead as a reward
+  - map: adds pottery lathe to the hideout
+  - bugfix: Mobs no longer move when they are ridden
+  - bugfix: You no longer get teleported back when moving through a travel tile while
+      riding an animal
+  - rscadd: Blood herald antag now let's you switch character slots on gain

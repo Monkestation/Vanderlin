@@ -64,21 +64,23 @@
 	name = "Lesser Necromancy"
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE
-	associated_skill = /datum/attribute/skill/magic/arcane
+	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	cabal_affine = TRUE
 	cooldown_time = 30 SECONDS
 	summon_lifespan = 1 MINUTES
+	learnable = FALSE
 
 /datum/action/cooldown/spell/conjure_summon/raise_lesser_undead/spectral
 	name = "Summon Spectral Skeleton"
 	desc = "Summons a temporary spectral skeleton to aid you."
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE
-	associated_skill = /datum/attribute/skill/magic/arcane
 	cooldown_time = 30 SECONDS
 	summon_lifespan = 1 MINUTES
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_technique = TECHNIQUE_SUMMONING
 	required_level = 2
 
