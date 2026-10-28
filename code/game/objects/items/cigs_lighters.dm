@@ -390,7 +390,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/face/cigarette/rollie/cannabis/zigar
 	name = "bog zigar"
-	desc = "A strong, rugged verison of the slightly less common swampweed zig, this isnt 'normal', or 'weak' by any standards- No, this is for the hardy, the rough and tough, and a real mannnnn... Woahhhh..."
+	desc = "A strong, rugged verison of the slightly less common swampweed zig, this isnt 'normal', or 'weak' by any standards- No, this is for the hardy, the rough and tough, and a real maaaaaaan... Wooooooah..."
 	icon_state = "bogzigaroff"
 	icon_on = "bogzigaron"
 	type_butt = /obj/item/cigbutt/zigar
@@ -399,7 +399,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/face/cigarette/rollie/cannabis/zigar/baked
 	name = "mud-baked bog 'bum"
-	desc = "A very sturdy, muddied verison of the rare and exotic bog zigar, this isnt 'clean', or for the weak hearted- No, this is for the Savage, the grimy Swampdweller, and a real mannnnn... Woahhhh..."
+	desc = "A very sturdy, muddied verison of the rare and exotic bog zigar, this isnt 'clean', or for the weak hearted- No, this is for the Briar, the grimy Swampdweller, and a real maaaaaaan... Wooooooah..."
 	icon_state = "bakedzigaroff"
 	icon_on = "bakedzigaron"
 	smoketime = 240
