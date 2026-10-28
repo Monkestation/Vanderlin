@@ -95,9 +95,6 @@
 		return
 	if(!user.hud_used.reads)
 		return
-	if(!user.can_read(src))
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE)
-		return
 	if(in_range(user, src) || isobserver(user))
 		user.changeNext_move(CLICK_CD_MELEE)
 
