@@ -149,6 +149,7 @@
 /obj/item/weapon/knife/dagger/silver/arcyne
 	name = "glowing purple silver dagger"
 	desc = "This dagger glows a faint purple. Quicksilver runs across its blade."
+	icon_state = "arcynedagger"
 	var/is_bled = FALSE
 
 /obj/item/weapon/knife/dagger/silver/arcyne/Initialize()

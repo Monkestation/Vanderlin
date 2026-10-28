@@ -18,8 +18,8 @@
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/labor/mathematics = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/combat/firearms = 10
 	)
 

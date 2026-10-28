@@ -514,7 +514,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			   /datum/antagonist/zizocultist, /datum/antagonist/zizocultist/leader,
 			   /datum/antagonist/werewolf, /datum/antagonist/werewolf/lesser,
 			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lords_spawn,
-			   /datum/antagonist/vampire/lord/daewalker, /datum/antagonist/vampire/lord/nitewalker)
+			   /datum/antagonist/vampire/lord/daewalker, /datum/antagonist/vampire/lord/nitewarden)
 				is_correct = TRUE
 				break
 

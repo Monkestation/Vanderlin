@@ -8,9 +8,10 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
-		/datum/attribute/skill/magic/arcane = 40,
+		/datum/attribute/skill/magic/arcane = 35,
+		/datum/attribute/skill/magic/arcane/death = 50,
 	)
 
 /datum/job/advclass/wretch/necromancer

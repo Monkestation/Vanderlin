@@ -24,7 +24,7 @@
 	output = /obj/item/clothing/shirt/undershirt/webs
 	requirements = list(/obj/item/natural/silk = 1)
 	craftdiff = 1
-	category = "Undershirt"
+	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/webbing
 	name = "trousers (webbed)"
@@ -213,7 +213,7 @@
 	output = /obj/item/clothing/shirt/undershirt/puritan
 	requirements = list(/obj/item/natural/silk = 5)
 	craftdiff = 3
-	category = "Undershirt"
+	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/noblecoat
 	name = "coat (fancy)"
@@ -540,6 +540,15 @@
 	craftdiff = 5
 	category = "Dress"
 
+/datum/repeatable_crafting_recipe/sewing/weaving/stewardhat
+	name = "steward tophat"
+	output = /obj/item/clothing/head/stewardtophat
+	requirements = list(/obj/item/natural/silk = 2,
+				/obj/item/natural/cloth = 2,
+	)
+	craftdiff = 5
+	category = "Hat"
+
 /datum/repeatable_crafting_recipe/sewing/weaving/silkdress
 	name = "dress (chemise, silk)"
 	output = /obj/item/clothing/shirt/dress/silkdress/colored/random
@@ -587,7 +596,7 @@
 				/obj/item/natural/silk = 1)
 	craftdiff = 6
 	sellprice = 30
-	category = "Dress"
+	category = "Wrists"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/royal_gown_winter
 	name = "winter dress"
@@ -672,6 +681,7 @@
 				/obj/item/natural/cloth = 2)
 	craftdiff = 6
 	category = "Undershirt"
+	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/weddingdress
 	name = "wedding silk dress"
@@ -680,6 +690,7 @@
 		/obj/item/natural/silk = 3
 	)
 	craftdiff = 3
+	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/absolver
 	name = "absolver's robe"
@@ -704,6 +715,7 @@
 		/obj/item/natural/silk = 3
 	)
 	craftdiff = 3
+	category = "Pants"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/sanguinevest
 	name = "sanguine vest"
@@ -728,6 +740,7 @@
 		/obj/item/natural/silk = 3
 	)
 	craftdiff = 3
+	category = "Pants"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/sanguinehat
 	name = "sanguine hat"
@@ -736,6 +749,7 @@
 		/obj/item/natural/silk = 2
 	)
 	craftdiff = 3
+	category = "Hat"
 
 /datum/repeatable_crafting_recipe/sewing/weaving/sanguinecap
 	name = "sanguine cap"
@@ -744,6 +758,7 @@
 		/obj/item/natural/silk = 2
 	)
 	craftdiff = 3
+	category = "Hat"
 
 // wintermare dresses
 

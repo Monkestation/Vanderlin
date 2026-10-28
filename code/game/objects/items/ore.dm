@@ -296,7 +296,7 @@
 
 /obj/item/ingot/silver
 	name = "silver bar"
-	desc = "A bar of glistening silver. The bane of nitewalkers."
+	desc = "A bar of glistening silver. The bane of nite creachers."
 	icon_state = "ingotsilv"
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver

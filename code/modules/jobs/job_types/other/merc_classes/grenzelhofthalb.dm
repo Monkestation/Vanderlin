@@ -11,7 +11,7 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/polearms = 36,
 		/datum/attribute/skill/combat/swords = 25, // their secondary weapon, could afford more training then the gun user
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 	)
 /datum/job/advclass/mercenary/grenzelhofthalb

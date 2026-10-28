@@ -5,12 +5,12 @@
 		STAT_CONSTITUTION = -2,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/lockpicking = 60,
-		/datum/attribute/skill/labor/mathematics = 50
+		/datum/attribute/skill/educated/mathematics = 50
 	)
 
 /datum/job/steward
