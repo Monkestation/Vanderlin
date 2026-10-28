@@ -41,7 +41,6 @@
 	leader = /datum/clan_leader/nitewarden
 	selectable_by_vampires = FALSE
 	allows_non_vampires = FALSE
-	force_VL_if_clan_is_empty = FALSE
 
 /datum/clan/niteguard/get_downside_string()
 	return "serve The Moon eternally."
