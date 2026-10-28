@@ -79,6 +79,13 @@
 	for(var/obj/item/I in caster.held_items)
 		if(istype(I, /obj/item/fertilizer/ash))
 			sacrifice = I
+			break
+
+	if(!sacrifice)
+		for(var/obj/possible_sacrifice as anything in view(1, caster))
+			if(istype(possible_sacrifice, /obj/item/fertilizer/ash))
+				sacrifice = possible_sacrifice
+				break
 
 	if(!sacrifice && uses_ash)
 		to_chat(caster, span_warning("I require some ash in a free hand."))
