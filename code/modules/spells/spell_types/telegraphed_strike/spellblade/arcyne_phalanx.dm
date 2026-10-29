@@ -15,6 +15,7 @@
 	spell_cost = 15
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_IMBUE
 
 	invocation = "Phalanx Arcana!"

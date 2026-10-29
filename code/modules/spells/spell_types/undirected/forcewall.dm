@@ -4,6 +4,7 @@
 	button_icon_state = "forcewall"
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_ILLUSION
 
 	charge_time = 2 SECONDS

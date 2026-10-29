@@ -8,6 +8,7 @@
 	summon_noun = "primordial"
 	recoil_energy_floor = 150
 	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 	var/mob_path = /mob/living/simple_animal/hostile/retaliate/primordial/fire
 
 /datum/action/cooldown/spell/conjure_summon/primordial/air
@@ -16,6 +17,7 @@
 	It grows mightier with your skill at Arcyne Armament - upgrading at Expert, and further at Master.\
 	A fast elemental with the highest melee damage, lowest health able to throw targets back"
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 	mob_path = /mob/living/simple_animal/hostile/retaliate/primordial/air
 
 /datum/action/cooldown/spell/conjure_summon/primordial/water
@@ -24,6 +26,7 @@
 	It grows mightier with your skill at Arcyne Armament - upgrading at Expert, and further at Master.\
 	A slow elemental with high health able to create a whirlpool around themselves"
 	required_form = FORM_WATER
+	associated_skill = /datum/attribute/skill/magic/arcane/water
 	mob_path = /mob/living/simple_animal/hostile/retaliate/primordial/water
 
 /datum/action/cooldown/spell/conjure_summon/primordial/spawn_summon(turf/T, mob/living/user)

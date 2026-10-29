@@ -81,8 +81,8 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/heir/daring
@@ -123,10 +123,10 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 	attribute_variance = list(
@@ -181,7 +181,7 @@
 		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 10
 	)

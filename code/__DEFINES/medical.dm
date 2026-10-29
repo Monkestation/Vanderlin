@@ -310,7 +310,7 @@ GLOBAL_VAR_INIT(thirst_rate_mod, 1)
 #define CPR_CHEST "cardio"
 
 // ~arteries
-#define ARTERIAL_BLOOD_FLOW 9
+#define ARTERIAL_BLOOD_FLOW 15
 
 #define ARTERY_HEAD /obj/item/organ/artery/head
 #define ARTERY_MOUTH /obj/item/organ/artery/mouth
@@ -395,7 +395,7 @@ GLOBAL_VAR_INIT(thirst_rate_mod, 1)
 #define BLEED_RATE_NOTICABLE	1.5
 
 /// Injuries bleed at (bleed_rate / BLEED_DAMAGE_RATIO) per tick
-#define BLEED_DAMAGE_RATIO 25
+#define BLEED_DAMAGE_RATIO 20
 
 // /obj/item/bodypart on_mob_life() retval flag
 #define BODYPART_LIFE_UPDATE_HEALTH (1<<0)

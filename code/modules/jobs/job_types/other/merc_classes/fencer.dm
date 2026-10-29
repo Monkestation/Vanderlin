@@ -9,7 +9,7 @@
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/athletics = 35,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/medicine = 25,
 		/datum/attribute/skill/craft/crafting = 10,
 	)
@@ -23,6 +23,10 @@
 	total_positions = 2
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/fencer
+
+	traits = list(
+		TRAIT_EXPERT_PARRY
+	)
 
 /datum/job/advclass/mercenary/fencer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

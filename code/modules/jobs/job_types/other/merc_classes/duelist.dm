@@ -11,7 +11,7 @@
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/craft/cooking = 30
@@ -28,8 +28,7 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/duelist
 
 	traits = list(
-		TRAIT_DODGEEXPERT,
-		TRAIT_EXPERT_PARRY
+		TRAIT_DODGEEXPERT
 	)
 
 /datum/job/advclass/mercenary/duelist/after_spawn(mob/living/carbon/human/spawned, client/player_client)

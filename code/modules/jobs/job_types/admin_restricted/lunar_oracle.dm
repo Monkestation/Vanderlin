@@ -5,29 +5,7 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
-		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/magic/arcane = 40,
-		/datum/attribute/skill/magic/holy = 40,
-		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/whipsflails = 40,
-		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/misc/sewing = 30,
-		/datum/attribute/skill/misc/medicine = 30,
-		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 40
-	)
-
-/datum/attribute_holder/sheet/job/oracle/old
-	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
-		STAT_INTELLIGENCE = 5,
-		STAT_ENDURANCE = 1,
-		STAT_CONSTITUTION = -2,
-		STAT_SPEED = -2,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/magic/arcane = 50,
 		/datum/attribute/skill/magic/holy = 50,
@@ -39,7 +17,29 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
+	)
+
+/datum/attribute_holder/sheet/job/oracle/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 5,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = -2,
+		STAT_SPEED = -2,
+		/datum/attribute/skill/educated/reading = 60,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/magic/arcane = 60,
+		/datum/attribute/skill/magic/holy = 60,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/educated/mathematics = 50
 	)
 
 /datum/job/admin/oracle
@@ -118,6 +118,7 @@
 		devotion.make_oracle()
 		devotion.grant_to(spawned)
 	spawned.apply_status_effect(/datum/status_effect/buff/nocblessed)
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 	spawned.adjust_technique_mastery_points(12)
 	spawned.adjust_form_mastery_points(20)

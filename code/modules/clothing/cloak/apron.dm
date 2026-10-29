@@ -51,7 +51,6 @@
 	boobed = FALSE
 	grid_width = 64
 	grid_height = 64
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/apron/maid/Initialize(mapload, ...)
 	. = ..()

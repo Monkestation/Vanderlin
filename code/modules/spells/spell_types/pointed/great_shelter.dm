@@ -11,6 +11,7 @@
 	sound = 'sound/spellbooks/crystal.ogg'
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_CREATION
 
 	click_to_activate = TRUE

@@ -29,13 +29,6 @@
 
 
 /mob/living/proc/try_recipes(obj/item/attacked_atom, obj/item/starting_atom)
-	if(has_world_trait(/datum/world_trait/delver))
-		var/area/area = get_area(src)
-		if(area.delver_restrictions)
-			return FALSE
-		if(!SShousing.check_access(key))
-			return FALSE
-
 	if(HAS_TRAIT(src, TRAIT_MALUM_CURSE))
 		to_chat(src, span_boldred("My cursed hands tremble as I fail to piece the materials together!"))
 		return
@@ -57,13 +50,15 @@
 	else
 		recipe = browser_input_list(src, "Choose a recipe to craft", "Recipes", recipes)
 
+	. = TRUE // EXPERIMENTAL: return TRUE to end attack chain early
 	if(!recipe || QDELETED(src) || QDELETED(attacked_atom) || QDELETED(starting_atom))
-		return FALSE
+		return
 
 	if(!Adjacent(attacked_atom)) // sanity check
-		return FALSE
+		return
 
-	return execute_recipe(recipe, starting_atom, attacked_atom)
+	INVOKE_ASYNC(src, PROC_REF(execute_recipe), recipe, starting_atom, attacked_atom)
+	return
 
 /mob/living/proc/execute_recipe(datum/slapcraft_recipe/target_recipe, obj/item/first_item, obj/item/second_item)
 	if(!target_recipe)

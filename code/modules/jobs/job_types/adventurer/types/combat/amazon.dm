@@ -9,7 +9,7 @@
 		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/swimming = 20,

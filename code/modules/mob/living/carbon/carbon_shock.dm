@@ -1,6 +1,7 @@
 
 /mob/living/carbon/update_shock()
 	. = ..()
+	SEND_SIGNAL(src, COMSIG_CARBON_SHOCK_UPDATED, traumatic_shock)
 	if(!client || !hud_used)
 		return
 	//Pain fucks up our vision

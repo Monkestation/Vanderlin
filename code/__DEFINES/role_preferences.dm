@@ -19,6 +19,7 @@
 #define ROLE_ZOMBIE				"Zombie"
 #define ROLE_NECRO_SKELETON		"Necromancer Skeleton"
 #define ROLE_WRETCH				"Wretch"
+#define ROLE_BLOOD_HERALD		"Blood Herald"
 
 
 GLOBAL_LIST_INIT(special_roles_rogue, list(
@@ -31,7 +32,8 @@ GLOBAL_LIST_INIT(special_roles_rogue, list(
 	ROLE_ASPIRANT = /datum/antagonist/aspirant,
 	ROLE_LICH = /datum/antagonist/lich,
 	ROLE_HARLEQUINN = /datum/antagonist/harlequinn,
-	ROLE_WRETCH = /datum/antagonist/wretch
+	ROLE_WRETCH = /datum/antagonist/wretch,
+	ROLE_BLOOD_HERALD = /datum/antagonist/blood_mage/herald
 ))
 
 //Job defines for what happens when you fail to qualify for any job during job selection

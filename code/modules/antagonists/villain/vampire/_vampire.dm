@@ -48,8 +48,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
 		examiner.add_stress(/datum/stress_event/its_the_fucking_daewalker)
 		return span_phobia("THE DIABLERIST OF THE SUN QUEEN!!")
-	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker) && !istype(the_examiner?.clan, /datum/clan/nitewalker))
-		examiner.add_stress(/datum/stress_event/its_the_nitewalker)
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewarden) && !istype(the_examiner?.clan, /datum/clan/niteguard))
+		examiner.add_stress(/datum/stress_event/its_the_nitewarden)
 		return span_phobia("THE DIABLERIST OF THE MOON PRINCE!!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Kaine's firstborn!")
@@ -65,6 +65,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/blood_mage/sorcerer))
 		return span_boldnotice("A formidable Blood Sorcerer.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/herald))
+		return span_boldnotice("Blood Herald of The Archdevils, bringer of ruin and death.")
 
 /datum/antagonist/vampire/on_gain()
 	SSmapping.retainer.vampires |= owner
@@ -77,9 +79,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		vampdude.hud_used?.set_bloody_bloodpool()
 		vampdude.grant_language(/datum/language/sanguine)
 
-		if(forced)
+		if(!forced)
+			if(clan_selected)
+				vampdude.set_clan(default_clan)
+		else
 			vampdude.set_clan_direct(forcing_clan)
 			forcing_clan = null
+		vampdude.grant_undead_eyes()
 
 	// The clan system now handles most of the setup, but we can still do antagonist-specific things
 	after_gain()

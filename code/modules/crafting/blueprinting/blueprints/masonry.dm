@@ -89,7 +89,7 @@
 	)
 	result_type = /obj/structure/fluff/statue/noc
 	construct_tool = /obj/item/weapon/hammer
-	skillcraft = /datum/attribute/skill/craft/crafting
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 3
 
 /datum/blueprint_recipe/masonry/noc/tall
@@ -101,7 +101,7 @@
 	)
 	result_type = /obj/structure/fluff/statue/noc/tall
 	construct_tool = /obj/item/weapon/hammer
-	skillcraft = /datum/attribute/skill/craft/crafting
+	skillcraft = /datum/attribute/skill/craft/masonry
 	craftdiff = 3
 
 /datum/blueprint_recipe/masonry/cauldron
