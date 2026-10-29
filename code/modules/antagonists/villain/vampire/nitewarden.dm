@@ -141,7 +141,7 @@
 		examine_list += span_boldred("The bloodsucker of Noc...")
 	else if(is_priest_job(user.mind?.assigned_role))
 		examine_list += SPAN_GOD_NOC("The servant of The Moon!")
-	else if(is_oracle_job(user.mind?.assigned_role))
+	else if(HAS_TRAIT(user, TRAIT_LUNAR_ORDER))
 		examine_list += SPAN_GOD_NOC("The everwalking servant of The Prince!")
 	else if(user.mind?.has_antag_datum(/datum/antagonist/maniac))
 		examine_list += span_green("Yet another legally distinct vampire hunter!")
@@ -165,19 +165,19 @@
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/scabbard/sword/noble
 	backl = /obj/item/storage/backpack/satchel/black
-	r_hand = /obj/item/weapon/sword/long/silver/nitewarden
-	l_hand = /obj/item/weapon/knife/dagger/steel/stiletto/nitewarden
+	r_hand = /obj/item/weapon/sword/long/silver/lunar/nitewarden
+	l_hand = /obj/item/weapon/knife/dagger/silver/lunar/misericorde/nitewarden
 	backpack_contents = list(/obj/item/needle/blessed = 1)
 
 /datum/outfit/nitewarden/post_equip(mob/living/carbon/human/H)
 	..()
 	var/datum/component/storage/concrete/scabbard/sword/holder = H.beltl?.GetComponent(/datum/component/storage/concrete/scabbard/sword)
-	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/nitewarden), list())
+	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/lunar/nitewarden), list())
 
 
-/obj/item/weapon/sword/long/silver/nitewarden
+/obj/item/weapon/sword/long/silver/lunar/nitewarden
 	name = "nite's grace"
-	desc = "A blade forged of lunar silver. The Moon Prince is watching."
+	desc = "The Moon Prince is watching."
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	wdefense = ULTMATE_PARRY
 	max_blade_int = 50000
@@ -186,33 +186,34 @@
 	sellprice = 0
 	slot_flags = 0 //scabbard only
 
-/obj/item/weapon/sword/long/silver/nitewarden/Initialize(mapload)
+/obj/item/weapon/sword/long/silver/lunar/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/anti_theft)
 
-/obj/item/weapon/knife/dagger/steel/stiletto/nitewarden
+/obj/item/weapon/knife/dagger/silver/lunar/misericorde/nitewarden
 	name = "nite's sting"
-	desc = "A needle thin blade forged of lunar silver. The Moon Prince is watching."
+	desc = "The Moon Prince is watching."
 	max_blade_int = 50000
 	max_integrity = 50000
 	resistance_flags = INDESTRUCTIBLE
 
-/obj/item/weapon/knife/dagger/steel/stiletto/nitewarden/Initialize(mapload)
+/obj/item/weapon/knife/dagger/silver/lunar/misericorde/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/lightning)
-	enchant(/datum/enchantment/silver)
 	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/clothing/ring/nitewarden
 	name = "nitewarden's ring"
 	icon_state = "s_newring_ruby"
-	desc = "A ring of silver with a shimmering rontz set within. It thrums with unseen power."
+	desc = "A ring of lunar silver with a shimmering rontz set within. It thrums with unseen power."
 	sellprice = 500
 	misc_flags = CRAFTING_TEST_EXCLUDE
+	examine_highlight_type = /datum/examine_highlight/divine/lunar_silver
 
 /obj/item/clothing/ring/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/life_eternal)
 	enchant(/datum/enchantment/leaping)
 	enchant(/datum/enchantment/anti_theft)
+	enchant(/datum/enchantment/silver)

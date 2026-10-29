@@ -307,6 +307,15 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/ingot/silver/lunar
+	name = "lunar silver bar"
+	desc = "A bar of glistening lunar silver. Blessed material of The Moon Prince and the ultimate bane of nite creachers."
+	icon_state = "ingotlunar"
+	smeltresult = /obj/item/ingot/silver/lunar
+	melting_material = /datum/material/lunar_silver
+	sellprice = 45
+	item_weight = 6.65 KILOGRAMS
+
 /obj/item/ingot/steel
 	name = "steel bar"
 	desc = "A bar of alloyed steel."
