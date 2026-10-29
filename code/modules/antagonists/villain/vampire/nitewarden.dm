@@ -209,7 +209,7 @@
 	desc = "A ring of lunar silver with a shimmering rontz set within. It thrums with unseen power."
 	sellprice = 500
 	misc_flags = CRAFTING_TEST_EXCLUDE
-	examine_highlight_type = /datum/examine_highlight/divine/lunar_silver
+	examine_highlight_type = /datum/examine_highlight/divine/lunar_silver/ring
 
 /obj/item/clothing/ring/nitewarden/Initialize(mapload)
 	. = ..()
