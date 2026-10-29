@@ -51,11 +51,11 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title = "TAKE UP ARMS.")
 
 	if(weapon_choice == "Steel Sword & Shield" || weapon_choice == "Billhook & Steel Shortsword" || weapon_choice == "Longsword & Shield")
-		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 37, 37)
 	if(weapon_choice == "Steel Warhammer & Shield" || weapon_choice == "Greataxe")
-		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 33, 33)
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 37, 37)
 	if(weapon_choice == "Billhook & Steel Shortsword" || weapon_choice == "Halberd" || weapon_choice == "Eagle's Beak")
-		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 37, 37)
 	if(weapon_choice == "Steel Warhammer & Shield" || weapon_choice == "Steel Sword & Shield" || weapon_choice == "Longsword & Shield")
 		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/shields, 33, 33)
 
