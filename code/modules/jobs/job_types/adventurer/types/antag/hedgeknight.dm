@@ -36,18 +36,61 @@
 		TRAIT_NOBLE_BLOOD,
 	)
 
+/datum/job/advclass/bandit/hedgeknight/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+	var/static/list/weapons = list(
+		"Longsword & Shield" = list(/obj/item/weapon/sword/long, /obj/item/weapon/shield/tower/metal),
+		"Steel Warhammer & Shield" = list(/obj/item/weapon/mace/warhammer, /obj/item/weapon/shield/tower/buckleriron),
+		"Steel Sword & Shield" = list(/obj/item/weapon/sword, /obj/item/weapon/shield/tower/buckleriron),
+		"Billhook & Steel Shortsword" = list(/obj/item/weapon/polearm/spear/billhook, /obj/item/weapon/sword/short),
+		"Halberd" = /obj/item/weapon/polearm/halberd,
+		"Greataxe" = /obj/item/weapon/greataxe/steel,
+		"Eagle's Beak" = /obj/item/weapon/polearm/eaglebeak,
+	)
+
+	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "CHOOSE YOUR WEAPON.", title = "TAKE UP ARMS.")
+
+	if(weapon_choice == "Steel Sword & Shield" || weapon_choice == "Billhook & Steel Shortsword" || weapon_choice == "Longsword & Shield")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+	if(weapon_choice == "Steel Warhammer & Shield" || weapon_choice == "Greataxe")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 33, 33)
+	if(weapon_choice == "Billhook & Steel Shortsword" || weapon_choice == "Halberd" || weapon_choice == "Eagle's Beak")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 33, 33)
+	if(weapon_choice == "Steel Warhammer & Shield" || weapon_choice == "Steel Sword & Shield" || weapon_choice == "Longsword & Shield")
+		spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/shields, 33, 33)
+
+	var/armors = list("Rusted Set, Brigandine Set")
+	var/armor_choice = browser_input_list(spawned, "CHOOSE YOUR ARMOR.", "EQUIP YOURSELF.", armors)
+
+	switch(armor_choice)
+		if("Rusted Set")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/plate/rust, ITEM_SLOT_ARMOR, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson/heavy, ITEM_SLOT_SHIRT, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/platelegs/rust, ITEM_SLOT_PANTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers, ITEM_SLOT_WRISTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/plate/rust, ITEM_SLOT_GLOVES, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/neck/gorget, ITEM_SLOT_NECK, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/shoes/boots/armor/light/rust, ITEM_SLOT_SHOES, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/heavy/rust, ITEM_SLOT_HEAD, TRUE)
+		if("Brigandine Set")
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/brigandine/light, ITEM_SLOT_ARMOR, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/chainmail, ITEM_SLOT_SHIRT, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/trou/leather/brigandine, ITEM_SLOT_PANTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers/leather/brigandine, ITEM_SLOT_WRISTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/plate, ITEM_SLOT_GLOVES, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/neck/chaincoif, ITEM_SLOT_NECK, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/shoes/boots/darkboots, ITEM_SLOT_SHOES, TRUE)
+			var/static/list/selectablehelmets = list(
+				"Royal Slitted Kettle Helmet" = /obj/item/clothing/head/helmet/kettle/slit/atarms,
+				"Slitted Kettle Helmet" = /obj/item/clothing/head/helmet/kettle/slit,
+				"Kettle Helmet"	= /obj/item/clothing/head/helmet/kettle,
+				"Steel Sallet" = /obj/item/clothing/head/helmet/sallet,
+				"Nasal Helmet" = /obj/item/clothing/head/helmet/nasal,
+			)
+			spawned.select_equippable(player_client, selectablehelmets, message = "Choose Your Helmet", title = "Hedge Knight")
+
 /datum/outfit/bandit/hedgeknight
 	name = "Hedge Knight (Bandit)"
-	head = /obj/item/clothing/head/helmet/heavy/rust
-	neck = /obj/item/clothing/neck/gorget
-	armor = /obj/item/clothing/armor/plate/rust
-	shirt = /obj/item/clothing/armor/gambeson/heavy
-	wrists = /obj/item/clothing/wrists/bracers
-	gloves = /obj/item/clothing/gloves/plate/rust
-	pants = /obj/item/clothing/pants/platelegs/rust
-	shoes = /obj/item/clothing/shoes/boots/armor/light/rust
 	belt = /obj/item/storage/belt/leather/bandit
-	beltr = /obj/item/weapon/sword/long
 	backr = /obj/item/storage/backpack/satchel
-	backl = /obj/item/weapon/shield/tower/metal
 	backpack_contents = list(/obj/item/weapon/knife/dagger = 1, /obj/item/clothing/face/shepherd/rag = 1)
