@@ -305,7 +305,7 @@
 	name = "decorated misericorde"
 	desc = "A wickedly lethal spike of refined steel with lavish gold decoration. Even in the hands of most nobles, it is considered overly decadent. The curved handle is said to naturally improve one's aim, while locked in a \
 	life-or-death struggle with plate-armored opponents."
-	icon_state = "decbollockdagger"
+	icon_state = "dec_misericorde"
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 
 /obj/item/weapon/knife/dagger/steel/stiletto

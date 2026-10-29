@@ -1738,9 +1738,9 @@
 	parrysound = "sword"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
 	slot_flags = ITEM_SLOT_BACK//how the fuck you could put this thing on your hip?
-	smeltresult = /obj/item/ingot/copper
 	sellprice = 25//lets make the two bars worth it
 	item_weight = 1.6 KILOGRAMS
+	melting_material = /datum/material/copper
 
 /obj/item/weapon/sword/rapier/ironestoc
 	name = "estoc"
