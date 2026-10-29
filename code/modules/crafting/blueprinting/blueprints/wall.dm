@@ -636,6 +636,16 @@
 	name = "Inner Brick Roof"
 	result_type = /turf/closed/wall/mineral/roofwall/innercorner
 
+/datum/blueprint_recipe/wall/underbrick
+	name = "Underbrick Wall"
+	desc = "A large stone-block wall."
+	required_materials = list(
+		/obj/item/natural/stoneblock = 4,
+	)
+	craftdiff = 4
+	skillcraft = /datum/attribute/skill/craft/masonry
+	result_type = /turf/closed/wall/mineral/underbrick
+
 /datum/blueprint_recipe/wall/pipe
 	name = "Pipe Wall"
 	desc = "A wall with a pipe embedded into it."
