@@ -92,5 +92,6 @@
 /datum/outfit/bandit/hedgeknight
 	name = "Hedge Knight (Bandit)"
 	belt = /obj/item/storage/belt/leather/bandit
+	cloak = /obj/item/clothing/cloak/stabard/jupon
 	backr = /obj/item/storage/backpack/satchel
 	backpack_contents = list(/obj/item/weapon/knife/dagger = 1, /obj/item/clothing/face/shepherd/rag = 1)
