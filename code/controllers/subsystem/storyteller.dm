@@ -832,11 +832,13 @@ SUBSYSTEM_DEF(gamemode)
 		return TRUE
 
 	var/ttime = world.time - SSticker.round_start_time
+
+	if(roundvoteend)
+		if(ttime >= round_ends_at)
+			return TRUE
+
 	if(ttime >= GLOB.round_timer)
-		if(roundvoteend)
-			if(ttime >= round_ends_at)
-				return TRUE
-		else if(!SSvote.mode)
+		if(!SSvote.mode)
 			SSvote.initiate_vote("endround", "The Gods", TRUE)
 
 	if(SSmapping.retainer.head_rebel_decree)
