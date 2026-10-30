@@ -74,11 +74,6 @@
 	stress_change = 2
 	desc = "<span class='red'>I've seen men lose their limbs.</span>"
 
-/datum/stress_event/fviewdismember
-	timer = 1 MINUTES
-	stress_change = 1
-	desc = "<span class='red'>This land is brutal.</span>"
-
 /datum/stress_event/viewgib
 	timer = 5 MINUTES
 	stress_change = 2
