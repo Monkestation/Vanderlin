@@ -151,6 +151,18 @@
 	hammers_per_item = 7
 	craftdiff = 4
 
+/datum/artificer_recipe/weapons/hunting_crossbow
+	name = "Hunting Crossbow (+1 Iron) (+2 Sinew Fibers) (+1 Tail Bone)"
+	required_item = /obj/item/natural/wood/plank
+	created_item = /obj/item/gun/ballistic/bow/cross/hunt
+	additional_items = list(
+	/obj/item/ingot/iron = 1,
+	/obj/item/natural/fibers/sinew = 2,
+	/obj/item/alch/bone = 1
+	)
+	hammers_per_item = 7
+	craftdiff = 3
+
 /datum/artificer_recipe/weapons/harpoon_gun
 	name = "Harpoon Gun (+1 Chain) (+2 Metal Gear) (+2 Bronze)"
 	required_item = /obj/item/ingot/steel
@@ -316,22 +328,40 @@
 	created_amount = 4
 
 /datum/artificer_recipe/ammo/bolts
-	name = "Crossbow Bolts 5x (+1 Iron)"
+	name = "Crossbow Bolts 20x (+1 Iron)"
 	required_item = /obj/item/natural/wood/plank
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/ammo_casing/caseless/bolt
 	hammers_per_item = 6
 	craftdiff = 2
-	created_amount = 5
+	created_amount = 20
+
+/datum/artificer_recipe/ammo/bolts/broadbolt
+	name = "Crossbow Broadhead Bolts 20x (+1 Iron)"
+	required_item = /obj/item/natural/wood/plank
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/ammo_casing/caseless/bolt/broadhead
+	hammers_per_item = 6
+	craftdiff = 2
+	created_amount = 20
 
 /datum/artificer_recipe/ammo/arrows
-	name = "Arrows 5x (+1 Iron)"
+	name = "Arrows 20x (+1 Iron)"
 	required_item = /obj/item/natural/wood/plank
 	additional_items = list(/obj/item/ingot/iron)
 	created_item = /obj/item/ammo_casing/caseless/arrow
 	hammers_per_item = 6
 	craftdiff = 2
-	created_amount = 5
+	created_amount = 20
+
+/datum/artificer_recipe/ammo/arrows/broadarrow
+	name = "Broadhead Arrows 20x (+1 Iron)"
+	required_item = /obj/item/natural/wood/plank
+	additional_items = list(/obj/item/ingot/iron)
+	created_item = /obj/item/ammo_casing/caseless/arrow/broadhead
+	hammers_per_item = 6
+	craftdiff = 2
+	created_amount = 20
 
 /datum/artificer_recipe/ammo/arrows/pyro
 	name = "Fire Arrows 5x (+1 Iron) (+1 Blast Powder)"

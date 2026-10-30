@@ -11,7 +11,7 @@
 	desc = ""
 	icon_state = "fat"
 	eat_effect = /datum/status_effect/debuff/uncookedfood
-	possible_item_intents = list(/datum/intent/use)
+	possible_item_intents = list(/datum/intent/food, /datum/intent/use)
 	nutrition = FAT_NUTRITION
 	item_weight = 230 GRAMS
 
@@ -19,25 +19,23 @@
 	if(!isliving(interacting_with))
 		return NONE
 
-	if(interacting_with != user)
-		return ..()
+	if(istype(user.used_intent, /datum/intent/use))
 
-	if(user.zone_selected == BODY_ZONE_PRECISE_MOUTH)
-		return ..()
+		var/mob/living/M = interacting_with
 
-	var/mob/living/M = interacting_with
-
-	user.visible_message(
+		user.visible_message(
 		span_warning("[user] starts to oil [user.p_them()]self up."),
 		span_warning("I start oiling myself up."),
 	)
 
-	if(!do_after(user, 5 SECONDS, M))
-		return ITEM_INTERACT_ANY_BLOCKER
+		if(!do_after(user, 5 SECONDS, M))
+			return ITEM_INTERACT_ANY_BLOCKER
 
-	M.apply_status_effect(/datum/status_effect/buff/oiled)
+		M.apply_status_effect(/datum/status_effect/buff/oiled)
 
-	return ITEM_INTERACT_SUCCESS
+		return ITEM_INTERACT_SUCCESS
+
+	return ..()
 
 /obj/item/reagent_containers/food/snacks/fat/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!istype(tool, /obj/item/reagent_containers/glass))
@@ -236,6 +234,7 @@
 /obj/item/reagent_containers/food/snacks/fat/salo
 	name = "salo"
 	icon_state = "salo4"
+	possible_item_intents = list(/datum/intent/food)
 	bitesize = 4
 	nutrition = FAT_NUTRITION*2*DRIED_MOD
 	slice_path = /obj/item/reagent_containers/food/snacks/fat/salo/slice
