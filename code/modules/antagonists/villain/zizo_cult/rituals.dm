@@ -614,6 +614,8 @@
 		to_chat(user, SPAN_GOD_ZIZO("YOU WERE NOT CHOSEN. THIS RITUAL IS NOT FOR YOU TO PERFORM."))
 		return FALSE
 	var/mob/living/carbon/human/virgin = locate() in center.contents
+	if(user == virgin)
+		return FALSE
 	if(!HAS_TRAIT(virgin, TRAIT_VIRGIN))
 		to_chat(user, SPAN_GOD_ZIZO("THE SIGILS DO NOT REACT TO THE BLOOD. THE SACRIFICE IS NOT A VIRGIN!"))
 		return FALSE
