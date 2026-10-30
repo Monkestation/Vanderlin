@@ -23,7 +23,8 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatManAtArms.ogg'
 	exp_types_granted = list(EXP_TYPE_GARRISON)
 
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_NO_KOBOLD
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
 
 	outfit = /datum/outfit/squire
