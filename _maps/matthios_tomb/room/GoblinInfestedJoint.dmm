@@ -137,11 +137,6 @@
 /obj/machinery/light/fueled/torchholder,
 /turf/closed/wall/mineral/decostone,
 /area/under/tomb)
-"ec" = (
-/obj/structure/bars/grille,
-/obj/item/statue/gold,
-/turf/open/openspace,
-/area/under/tomb)
 "ew" = (
 /obj/item/natural/rock,
 /obj/effect/decal/cleanable/dirt/cobweb,
@@ -316,10 +311,6 @@
 "ju" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/under/tomb/indoors)
-"jE" = (
-/obj/item/clothing/head/helmet/kettle/slit,
-/turf/open/floor/cobble/alt,
-/area/under/tomb/indoors)
 "jJ" = (
 /obj/effect/decal/cleanable/blood/gibs/body,
 /turf/open/floor/ruinedwood/turned,
@@ -378,7 +369,6 @@
 	pixel_y = 12;
 	pixel_x = 12
 	},
-/obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
 "lM" = (
@@ -529,12 +519,12 @@
 	dir = 4;
 	pixel_x = 1
 	},
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "rJ" = (
 /obj/structure/bars/grille,
-/obj/item/statue/gold/loot,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /turf/open/openspace,
 /area/under/tomb)
 "rM" = (
@@ -826,7 +816,7 @@
 /area/under/tomb/indoors)
 "CP" = (
 /obj/structure/flora/grass,
-/obj/effect/spawner/map_spawner/loot/medium,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/dirt,
 /area/under/tomb)
 "Do" = (
@@ -860,14 +850,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb)
 "Ej" = (
-/obj/item/ingot/gold{
-	pixel_y = 11;
-	pixel_x = -14
-	},
-/obj/item/ingot/gold{
-	pixel_y = -2;
-	pixel_x = 4
-	},
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
 "Et" = (
@@ -906,7 +889,7 @@
 /area/under/tomb)
 "FR" = (
 /obj/structure/rack,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "Gf" = (
@@ -954,7 +937,6 @@
 /area/under/tomb/indoors)
 "Ib" = (
 /obj/item/bodypart/head,
-/obj/item/clothing/head/helmet/nasal,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
 "Ih" = (
@@ -1139,16 +1121,14 @@
 /turf/open/floor/grass,
 /area/under/tomb)
 "Rh" = (
-/obj/structure/closet/crate/chest/lootbox,
-/obj/effect/spawner/map_spawner/loot/armor,
-/obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /turf/open/floor/cobble/alt,
 /area/under/tomb/indoors)
 "Rq" = (
 /obj/structure/closet/crate/chest/neu,
 /obj/item/gun/ballistic/bow/long,
 /obj/item/ammo_holder/quiver/arrows,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
 "Rs" = (
@@ -1188,7 +1168,6 @@
 	pixel_x = -4;
 	pixel_y = 6
 	},
-/obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/cobble/alt,
 /area/under/tomb/indoors)
 "To" = (
@@ -1357,7 +1336,7 @@
 /area/under/tomb)
 "ZE" = (
 /obj/structure/table/wood/plain_alt,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
 "ZH" = (
@@ -1993,7 +1972,7 @@ ON
 ON
 lS
 fu
-jE
+BB
 RA
 Et
 Hm
@@ -2773,7 +2752,7 @@ EN
 AY
 Wr
 ga
-ec
+ga
 ga
 wf
 ga
