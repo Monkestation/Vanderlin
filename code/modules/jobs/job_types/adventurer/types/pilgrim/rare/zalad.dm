@@ -5,7 +5,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/riding = 40,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/music = 10,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/craft/cooking = 20,
@@ -14,7 +14,7 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/pilgrim/rare/zaladin

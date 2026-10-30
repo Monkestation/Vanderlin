@@ -58,6 +58,7 @@
 		/datum/supply_pack/tools/parchment,
 		/datum/supply_pack/tools/sleepingbag,
 		/datum/supply_pack/tools/keyrings,
+		/datum/supply_pack/tools/warpstone,
 		// Materials
 		/datum/supply_pack/rawmats/cloth,
 		// Seeds for cultivation

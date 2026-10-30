@@ -269,6 +269,7 @@
 	grid_width = 64
 	toolspeed = 0.8
 	smeltresult = null
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/necra
 
 /obj/item/weapon/shovel/necran/Initialize()
 	. = ..()

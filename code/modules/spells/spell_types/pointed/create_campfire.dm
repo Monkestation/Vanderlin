@@ -10,6 +10,7 @@
 
 	spell_cost = 10
 	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 
 	invocation = "Ignis Castrensis Magicae."
 	invocation_type = INVOCATION_SHOUT

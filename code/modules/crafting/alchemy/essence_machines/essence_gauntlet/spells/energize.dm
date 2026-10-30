@@ -14,8 +14,8 @@
 
 	if(istype(target, /mob/living))
 		var/mob/living/L = target
-		L.adjust_stamina(30)
-		L.adjust_energy(30)
+		L.adjust_stamina(-30)
+		L.adjust_energy(-30)
 
 	if(istype(target, /obj/structure/mana_pylon))
 		var/obj/structure/mana_pylon/pylon = target
@@ -29,4 +29,5 @@
 	spell_type = SPELL_MANA
 
 	required_form = FORM_LIGHTNING
+	associated_skill = /datum/attribute/skill/magic/arcane/lightning
 	required_technique = TECHNIQUE_RESTORATION

@@ -1,0 +1,4 @@
+author: "Ordosian"
+delete-after: True
+changes:
+  - code_imp: "Made it so rare fish can now be fished normally with added bonuses to the fish"

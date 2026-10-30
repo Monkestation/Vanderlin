@@ -62,6 +62,7 @@
 		/datum/supply_pack/tools/wpipe,
 		/datum/supply_pack/tools/fishingline,
 		/datum/supply_pack/tools/fishinghook,
+		/datum/supply_pack/tools/warpstone,
 		/datum/supply_pack/storage/tray,
 		// Materials
 		/datum/supply_pack/rawmats/glass,
@@ -129,7 +130,7 @@
 		/datum/supply_pack/tools/medical/prlegl,
 		/datum/supply_pack/tools/medical/prlegr,
 		/datum/supply_pack/tools/medical/health,
-		/datum/supply_pack/tools/medical/mana
+		/datum/supply_pack/tools/medical/mana,
 	)
 	rare_pool = list(
 		// Luxury apparel

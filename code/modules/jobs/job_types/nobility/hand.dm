@@ -106,9 +106,9 @@
 		/datum/attribute/skill/misc/lockpicking = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/hand/hand
@@ -158,12 +158,12 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 60,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sneaking = 50,
 		/datum/attribute/skill/misc/stealing = 50,
 		/datum/attribute/skill/misc/lockpicking = 50,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/hand/spymaster
@@ -221,12 +221,12 @@
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/misc/medicine = 40,
 		/datum/attribute/skill/misc/lockpicking = 40,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/attribute_holder/sheet/job/advisor/old
@@ -242,12 +242,12 @@
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/misc/medicine = 40,
 		/datum/attribute/skill/misc/lockpicking = 40,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/hand/advisor
@@ -297,7 +297,7 @@
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/labor/taming = 40,
 		/datum/attribute/skill/misc/medicine = 20,
@@ -307,7 +307,7 @@
 		/datum/attribute/skill/misc/sewing = 15,
 		/datum/attribute/skill/craft/traps = 40,
 		/datum/attribute/skill/craft/crafting = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/attribute_holder/sheet/job/huntsmaster/old
@@ -328,7 +328,7 @@
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 50,
 		/datum/attribute/skill/labor/taming = 50,
 		/datum/attribute/skill/misc/medicine = 30,
@@ -338,7 +338,7 @@
 		/datum/attribute/skill/misc/sewing = 25,
 		/datum/attribute/skill/craft/traps = 50,
 		/datum/attribute/skill/craft/crafting = 40,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/hand/huntsmaster

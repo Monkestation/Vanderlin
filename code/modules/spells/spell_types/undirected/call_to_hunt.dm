@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/undirected/call_to_hunt
 	name = "Call to Hunt"
-	desc = "Grants you and all allies nearby a buff to their strength, endurance, and constitution."
+	desc = "Grants yourself, and all nearby worshippers of The Great Hunt, a buff to strength, endurance, and constitution."
 	button_icon_state = "dendor"
 	sound = 'sound/magic/timestop.ogg'
 

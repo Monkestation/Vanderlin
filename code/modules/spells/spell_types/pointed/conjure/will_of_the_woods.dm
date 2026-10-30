@@ -1,6 +1,6 @@
 /datum/action/cooldown/spell/conjure/will_of_woods
 	name = "Will of the Woods"
-	desc = "Summon the aid of the woods."
+	desc = "Summon the aid of the woods. The creatures summoned will be friendly to any under the protection of Call to Hunt."
 	button_icon_state = "tamebeast"
 	sound = 'sound/magic/timestop.ogg'
 	self_cast_possible = FALSE

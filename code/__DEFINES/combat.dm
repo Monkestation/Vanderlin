@@ -73,11 +73,11 @@
 #define CANUNCONSCIOUS	(1<<2)
 #define CANPUSH			(1<<3)
 #define CANSLOWDOWN		(1<<4)
-#define GODMODE			(1<<5)
 #define BLEEDOUT (1<<6)
 #define BUILDING_ORGANS (1<<7)
 
 //Health Defines
+#define MAX_LIVING_HEALTH 200
 #define HEALTH_THRESHOLD_CRIT 100
 #define HEALTH_THRESHOLD_FULLCRIT 70
 #define HEALTH_THRESHOLD_DEAD -100

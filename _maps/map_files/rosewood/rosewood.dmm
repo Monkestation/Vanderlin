@@ -4852,8 +4852,8 @@
 /turf/open/floor/cobble,
 /area/outdoors/town)
 "coR" = (
-/obj/structure/dungeon_entry/center/vanderlin,
-/turf/open/floor/cobble,
+/obj/structure/dungeon_elevator,
+/turf/open/openspace,
 /area/under/cavewet)
 "cpd" = (
 /obj/structure/fluff/walldeco/painting/castle{
@@ -28668,14 +28668,11 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/town/keep)
 "nMj" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
 /obj/structure/fluff/walldeco/stone{
 	pixel_x = -16;
 	pixel_y = 46
 	},
-/turf/open/floor/cobblerock,
+/turf/open/water/clean,
 /area/under/cavewet)
 "nMC" = (
 /obj/structure/fluff/walldeco/church/line{
@@ -29473,22 +29470,6 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/shop)
 "odm" = (
-/obj/structure/fluff/walldeco/stone{
-	pixel_x = 17;
-	pixel_y = 47
-	},
-/obj/structure/fluff/walldeco/vinez/blue{
-	pixel_x = -6;
-	pixel_y = 74
-	},
-/obj/structure/fluff/walldeco/vinez/blue{
-	pixel_x = 18;
-	pixel_y = 55
-	},
-/obj/structure/fluff/walldeco/vinez/blue{
-	pixel_x = 7;
-	pixel_y = 32
-	},
 /obj/structure/stairs/stone{
 	dir = 1
 	},
@@ -80178,7 +80159,7 @@ qJl
 qJl
 qJl
 qJl
-pAE
+gif
 coR
 bxY
 cPh
@@ -80380,8 +80361,8 @@ qJl
 qJl
 qJl
 qJl
-pAE
-cPh
+gif
+cQh
 odm
 aqn
 jRS

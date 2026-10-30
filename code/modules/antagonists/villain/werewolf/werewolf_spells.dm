@@ -4,7 +4,9 @@
 	button_icon_state = "howl"
 	has_visual_effects = FALSE
 	antimagic_flags = NONE
+	spell_type = SPELL_STAMINA
 	spell_flags = SPELL_IGNORE_SPELLBLOCK
+	associated_skill = null
 
 	charge_required = FALSE
 	cooldown_time = 1 MINUTES
@@ -53,6 +55,7 @@
 	has_visual_effects = FALSE
 	antimagic_flags = NONE
 	spell_flags = SPELL_IGNORE_SPELLBLOCK
+	spell_type = SPELL_STAMINA
 	associated_skill = null
 
 	charge_required = FALSE
@@ -88,6 +91,8 @@
 
 	cast_range = 1
 
+	spell_type = SPELL_STAMINA
+	associated_skill = /datum/attribute/skill/misc/medicine
 	spell_cost = 5
 	cooldown_time = 5 SECONDS
 	charge_required = FALSE

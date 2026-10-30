@@ -234,10 +234,6 @@ SUBSYSTEM_DEF(mapping)
 	if(config.map_name != "Voyage")
 		otherZ += load_map_config("map_files/shared/dungeon")
 
-		// Load additional delve levels if multi-level dungeons are enabled
-		if(SSdungeon_generator.multilevel_dungeons)
-			for(var/level = 2; level <= SSdungeon_generator.max_delve_levels; level++)
-				otherZ += load_map_config("map_files/shared/dungeon_delve[level]")
 #endif
 
 	//For all maps

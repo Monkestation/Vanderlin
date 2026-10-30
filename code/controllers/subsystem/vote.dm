@@ -233,7 +233,7 @@ SUBSYSTEM_DEF(vote)
 				return vote
 	return 0
 
-/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key)
+/datum/controller/subsystem/vote/proc/initiate_vote(vote_type, initiator_key, send_clients_vote = FALSE)
 	if(!mode)
 		if(started_time && initiator_key)
 			var/next_allowed_time = (started_time + CONFIG_GET(number/vote_delay))
@@ -298,14 +298,10 @@ SUBSYSTEM_DEF(vote)
 		var/vp = CONFIG_GET(number/vote_period)
 		to_chat(world, "\n<font color='purple'><b>[text]</b>\nClick <a href='byond://?src=[REF(src)]'>here</a> to place your vote.\nYou have [DisplayTimeText(vp)] to vote.</font>")
 		time_remaining = round(vp/10)
-//		for(var/c in GLOB.clients)
-//			var/client/C = c
-//			var/datum/action/vote/V = new
-//			if(question)
-//				V.name = "Vote: [question]"
-//			C.player_details.player_actions += V
-//			V.Grant(C.mob)
-//			generated_actions += V
+		for(var/client in GLOB.clients)
+			var/client/true_client = client
+			if(send_clients_vote)
+				true_client.mob.vote()
 		return 1
 	return 0
 
@@ -406,13 +402,13 @@ SUBSYSTEM_DEF(vote)
 				CONFIG_SET(flag/allow_vote_map, !CONFIG_GET(flag/allow_vote_map))
 		if("restart")
 			if(CONFIG_GET(flag/allow_vote_restart) || usr.client.holder)
-				initiate_vote("restart",usr.key)
+				initiate_vote("restart", usr.key, TRUE)
 		if("gamemode")
 			if(CONFIG_GET(flag/allow_vote_mode) || usr.client.holder)
 				initiate_vote("gamemode",usr.key)
 		if("map")
 			if(CONFIG_GET(flag/allow_vote_map) || usr.client.holder)
-				initiate_vote("map",usr.key)
+				initiate_vote("map", usr.key, TRUE)
 		if("custom")
 			if(usr.client.holder)
 				initiate_vote("custom",usr.key)

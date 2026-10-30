@@ -40,7 +40,7 @@
 /turf/open/floor/hexstone,
 /area/under/tomb/cave)
 "A" = (
-/obj/structure/fluff/psycross,
+/obj/structure/waystone/dungeon,
 /turf/open/floor/hexstone,
 /area/under/tomb/cave)
 "B" = (

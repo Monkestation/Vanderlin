@@ -57,6 +57,7 @@
 		/datum/supply_pack/tools/thresher,
 		/datum/supply_pack/tools/plough,
 		/datum/supply_pack/tools/bucket,
+		/datum/supply_pack/tools/warpstone,
 		///Weapon (Singular)
 		/datum/supply_pack/weapons/iron/bayonet,
 		// Food - Hearty dwarven fare

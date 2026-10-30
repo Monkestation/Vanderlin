@@ -17,8 +17,10 @@
 	var/datum/weakref/lastattacker_weakref = null
 
 	//Health and life related vars
-	var/maxHealth = 100 //Maximum health that should be possible.
-	var/health = 100 	//A mob's health
+	/// Maximum health that should be possible.
+	var/maxHealth = MAX_LIVING_HEALTH
+	/// The mob's current health.
+	var/health = MAX_LIVING_HEALTH
 
 	//Damage related vars, NOTE: THESE SHOULD ONLY BE MODIFIED BY PROCS
 	var/bruteloss = 0	//Brutal damage caused by brute force (punching, being clubbed by a toolbox ect... this also accounts for pressure damage)
@@ -264,13 +266,6 @@
 
 	var/list/affixes = list()
 	var/delve_level = 0
-
-	var/cold_res = 0
-	var/max_cold_res = 75
-	var/fire_res = 0
-	var/max_fire_res = 75
-	var/lightning_res = 0
-	var/max_lightning_res = 75
 
 	var/list/status_modifiers
 

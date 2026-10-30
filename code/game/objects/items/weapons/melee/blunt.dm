@@ -45,7 +45,7 @@
 
 /obj/item/weapon/mace/rungu
 	name = "iron rungu"
-	desc = "An iron from the fallen east. Possesses a smoothed out head."
+	desc = "An iron from the fallen east. Possesses a smoothed-out head."
 	icon_state = "rungu_iron"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	item_weight = 1.5 KILOGRAMS
@@ -63,7 +63,7 @@
 
 /obj/item/weapon/mace/shishpar
 	name = "iron shishpar"
-	desc = "A heavy foreign mace with a sword-like handle. Its weight makes it a little hard to wield, but its capable of delivering devastating blows."
+	desc = "A heavy foreign mace with a sword-like handle. Its weight makes it a little hard to wield, but it's capable of delivering devastating blows."
 	icon_state = "shishpar_iron"
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 2
@@ -238,7 +238,7 @@
 
 /obj/item/weapon/mace/steel/rungu
 	name = "steel rungu"
-	desc = "A steel mace from the fallen east. Possesses a smoothed out head."
+	desc = "A steel mace from the fallen east. Possesses a smoothed-out head."
 	icon_state = "rungu_steel"
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	wdefense = AVERAGE_PARRY //Due to costing less bars
@@ -259,7 +259,7 @@
 
 /obj/item/weapon/mace/steel/barmace
 	name = "steel bar mace"
-	desc = "A long flanged mace of solid steel, perfect for crushing goblins into pulp."
+	desc = "A long, flanged mace of solid steel, perfect for crushing goblins into pulp."
 	icon_state = "barmace"
 	force = DAMAGE_MACE + 3
 	force_wielded = DAMAGE_MACE_WIELD + 3
@@ -305,10 +305,36 @@
 	force_wielded = DAMAGE_MACE_WIELD + 4
 	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_BLACKSTEEL
 
+//................ Bloodsteel mace ............... //
+/obj/item/weapon/mace/bloodsteel
+	name = "bloodsteel mace"
+	desc = "A well-crafted mace with a bloodsteel head. Easier to control and hits just as hard."
+	icon_state = "corruptmace"
+	force = DAMAGE_MACE + 4
+	force_wielded = DAMAGE_MACE_WIELD + 2
+	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLOODSTEEL
+	smeltresult = null
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 150
+	sellprice = 120
+	item_weight = 1.3 KILOGRAMS
+
+/obj/item/weapon/mace/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
+/obj/item/weapon/mace/bloodsteel/barmace
+	name = "bloodsteel bar mace"
+	desc = "A long flanged mace of bloodsteel, a symbol of corruption and chaos."
+	icon_state = "corruptbarmace"
+	force = DAMAGE_MACE + 6
+	force_wielded = DAMAGE_MACE_WIELD + 4
+	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_BLOODSTEEL
+
 //................ Iron Bludgeon ............... // Less damage, more accurate, similar to a cudgel
 /obj/item/weapon/mace/bludgeon
 	name = "iron bludgeon"
-	desc = "An iron headed club, useful for beating the dregs back into their gutters."
+	desc = "An iron-headed club, useful for beating the dregs back into their gutters."
 	icon_state = "ibludgeon"
 	force = DAMAGE_CLUB + 3
 	force_wielded = DAMAGE_CLUB_WIELD + 2
@@ -466,7 +492,7 @@
 //................ Goedendag ............... //
 /obj/item/weapon/mace/goden
 	name = "warclub"
-	desc = "A two-handed club, decorated with a spiked cap crown. A perfect way to say Good Morning to any would be noble-knight."
+	desc = "A two-handed club, decorated with a spiked cap crown. A perfect way to say Good Morning to any would-be noble-knight."
 	icon = 'icons/roguetown/weapons/64/maces.dmi'
 	icon_state = "goedendag"
 	force = DAMAGE_CLUB
@@ -577,7 +603,7 @@
 //................ Shillelagh ............... //
 /obj/item/weapon/mace/goden/shillelagh		// The Briar signature weapon. Sturdy oak war club.
 	name = "shillelagh"
-	desc = "Big old oak branch, carved to a deadly weapon."
+	desc = "A nice old oak branch, carved into a deadly weapon."
 	icon = 'icons/roguetown/weapons/32/clubs.dmi'
 	icon_state = "shillelagh"
 	gripped_intents = list(MACE_WOODSMASH)
@@ -669,12 +695,11 @@
 
 /obj/item/weapon/mace/warhammer/steel
 	name = "steel warhammer"
-	desc = "A fine steel warhammer, makes a satisfying sound when paired with a knight's helm."
+	desc = "A fine steel warhammer. Makes a satisfying sound when paired with a knight's helm."
 	icon_state = "swarhammer"
 	force = DAMAGE_MACE_WIELD - 1
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	item_weight = 2.2 KILOGRAMS
@@ -688,7 +713,6 @@
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(MACE_STRIKE, MACE_SMASH, WARHM_IMPALE, WARHM_THRUST)
 	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 90
@@ -704,10 +728,24 @@
 	icon_state = "bs_hammer"
 	force = DAMAGE_MACE_WIELD + 6
 	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_BLACKSTEEL
-	smeltresult = /obj/item/ingot/blacksteel
 	melting_material = /datum/material/blacksteel
 	melt_amount = 200
 	item_weight = 1.9 KILOGRAMS
+
+/obj/item/weapon/mace/warhammer/bloodsteel
+	name = "bloodsteel warhammer"
+	desc = "A magnificent warhammer of bloodsteel. Let none forget whom you serve."
+	icon_state = "corruptwarhammer"
+	force = DAMAGE_MACE_WIELD + 6
+	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_BLOODSTEEL
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 200
+	item_weight = 1.9 KILOGRAMS
+	sellprice = 0
+
+/obj/item/weapon/mace/warhammer/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //................ Elven Club  ............... //
 
@@ -726,7 +764,7 @@
 
 /obj/item/weapon/mace/elvenclub/steel
 	name = "steel elven war club"
-	desc = "A sleek, one-handed war club, reforged from captured Grenzel steel. Its elegant bead designs channel elven grace, It is capable of delivering swift, painful blows."
+	desc = "A sleek, one-handed war club, reforged from captured Grenzel steel. Its elegant bead designs channel elven grace - it is capable of delivering swift, painful blows."
 	icon_state = "elvenclubsteel"
 	force = DAMAGE_MACE
 	force_wielded = DAMAGE_MACE_WIELD
@@ -742,7 +780,7 @@
 
 /obj/item/weapon/mace/elvenclub/bronze
 	name = "bronze elven war club"
-	desc = "A bronze one-handed war club with a sharp end. It's been long favoured by the Elves of Heartfelt, despite its foreign origins."
+	desc = "A bronze one-handed war club with a sharp end. It has been long favoured by the Elves of Heartfelt, despite its foreign origins."
 	icon_state = "elvenclub_bronze"
 	smeltresult = /obj/item/ingot/bronze
 	melting_material = /datum/material/bronze
@@ -773,7 +811,7 @@
 //................ Silver ............... //
 /obj/item/weapon/mace/silver
 	name = "silver mace"
-	desc = "A fanged silver mace, used to ward away creatures of the nite."
+	desc = "A flanged silver mace, used to ward away creachers of the nite."
 	icon_state = "silvermace"
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD
@@ -792,7 +830,7 @@
 
 /obj/item/weapon/mace/silver/barmace
 	name = "silver bar mace"
-	desc = "A long flanged mace of pure silver, a flashing symbol purity and the bane of countless nite creatures."
+	desc = "A long flanged mace of pure silver, a flashing symbol purity and the bane of countless nite-creachers."
 	icon_state = "silvermace"
 	force = DAMAGE_MACE + 2
 	force_wielded = DAMAGE_MACE_WIELD + 2
@@ -836,7 +874,7 @@
 /obj/item/weapon/mace/bronze
 	name = "bronze mace"
 	icon_state = "mace_bronze"
-	desc = "A spiked bronze mace. A weapon thats seen a revival in use amidst the cataclysm in Heartfelt."
+	desc = "A spiked bronze mace. A weapon that's seen a revival in use amidst the cataclysm in Heartfelt."
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 1 //Spiked
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BRONZE
@@ -846,7 +884,7 @@
 
 /obj/item/weapon/mace/bronze/shishpar
 	name = "bronze shishpar"
-	desc = "A heavy foreign mace with a sword-like handle. It's weight makes it a little hard to wield, but its capable of delivering devastating blows."
+	desc = "A heavy foreign mace with a sword-like handle. Its weight makes it a little hard to wield, but it's capable of delivering devastating blows."
 	icon_state = "shishpar_bronze"
 	force = DAMAGE_MACE_WIELD + 2
 	force_wielded = DAMAGE_MACE_WIELD + 3

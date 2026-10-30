@@ -3,6 +3,7 @@
 	var/id = null //The internal ID of a template, so we don't need to use name
 	var/width = 0
 	var/height = 0
+	var/z_levels = 1
 	var/mappath = null
 	var/loaded = 0 // Times loaded this round
 	var/datum/parsed_map/cached_map
@@ -124,7 +125,7 @@
 		var/turf/corner = locate(placement.x - round(width/2), placement.y - round(height/2), placement.z)
 		if(corner)
 			placement = corner
-	return block(placement, locate(placement.x+width-1, placement.y+height-1, placement.z))
+	return block(placement, locate(placement.x+width-1, placement.y+height-1, placement.z + (z_levels - 1)))
 
 
 //for your ever biggening badminnery kevinz000

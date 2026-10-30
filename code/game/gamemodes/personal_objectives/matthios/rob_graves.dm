@@ -2,7 +2,8 @@
 	name = "Rob Graves"
 	category = "Matthios' Chosen"
 	triumph_count = 2
-	rewards = list("2 Triumphs", "Matthios grows stronger", "Ability to rob graves without being cursed", "Matthios blesses you (+1 Endurance)")
+	immediate_effects = list("Ability to rob graves without being cursed")
+	rewards = list("2 Triumphs", "Matthios grows stronger", "Matthios blesses you (+1 Endurance)")
 	var/graves_robbed = 0
 	var/graves_required = 2
 
@@ -36,7 +37,6 @@
 
 /datum/objective/personal/grave_robbery/reward_owner()
 	. = ..()
-	ADD_TRAIT(owner.current, TRAIT_GRAVEROBBER, OBJECTIVE_TRAIT)
 	owner.current.adjust_stat_modifier(STATMOD_MATTHIOS_BLESSING, STAT_ENDURANCE, 1)
 
 /datum/objective/personal/grave_robbery/update_explanation_text()

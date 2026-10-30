@@ -8389,22 +8389,6 @@
 /obj/machinery/light/fueled/smelter/great,
 /turf/open/floor/naturalstone,
 /area/indoors/cave)
-"zq" = (
-/obj/structure/flora/grass/bush/wall/tall{
-	pixel_x = -24;
-	pixel_y = -4
-	},
-/obj/structure/flora/grass/bush_meagre{
-	pixel_x = -23;
-	pixel_y = -7
-	},
-/obj/structure/flora/grass/bush{
-	layer = 4.4;
-	pixel_x = -28;
-	pixel_y = 7
-	},
-/turf/open/floor/cobble/mossy,
-/area/outdoors/wilderness)
 "zr" = (
 /obj/effect/landmark/wave_defense{
 	set_id = "south-wyrm";
@@ -12806,6 +12790,22 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/town)
+"Mw" = (
+/obj/structure/flora/grass/bush_meagre{
+	pixel_x = -23;
+	pixel_y = -7
+	},
+/obj/structure/flora/grass/bush/wall/tall{
+	pixel_x = -24;
+	pixel_y = -4
+	},
+/obj/structure/flora/grass/bush{
+	layer = 4.4;
+	pixel_x = -28;
+	pixel_y = 7
+	},
+/turf/open/floor/cobble/mossy,
+/area/outdoors/wilderness)
 "Mx" = (
 /obj/structure/carpet/navy,
 /turf/open/floor/ruinedwood/darker,
@@ -13301,6 +13301,10 @@
 "NV" = (
 /turf/open/floor/hay,
 /area/indoors/dungeon)
+"NW" = (
+/obj/structure/dungeon_elevator,
+/turf/open/openspace,
+/area/outdoors/wilderness)
 "NX" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/sandals,
@@ -17286,10 +17290,6 @@
 /obj/structure/bookcase/random/myths,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/keep/archivist)
-"ZN" = (
-/obj/structure/dungeon_entry/center/vanderlin,
-/turf/open/floor/cobble/mossy,
-/area/outdoors/wilderness)
 "ZO" = (
 /obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/darker,
@@ -60216,8 +60216,8 @@ TU
 TU
 TU
 TU
-sI
-iA
+PJ
+NW
 sI
 Im
 iA
@@ -60418,8 +60418,8 @@ TU
 TU
 TU
 TU
-sI
-ZN
+PJ
+PJ
 fR
 Im
 Ab
@@ -60620,8 +60620,8 @@ TU
 TU
 TU
 TU
-sI
-iA
+TU
+Mw
 ho
 Im
 pS
@@ -60823,7 +60823,7 @@ TU
 TU
 TU
 TU
-zq
+TU
 Dk
 pS
 pS

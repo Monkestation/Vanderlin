@@ -18,9 +18,10 @@
 		/datum/attribute/skill/combat/whipsflails = 60,
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/misc/athletics = 50,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 60,
 		/datum/attribute/skill/magic/arcane = 60,
+		/datum/attribute/skill/magic/arcane/death = 60,
 		/datum/attribute/skill/magic/blood = 60,
 	)
 

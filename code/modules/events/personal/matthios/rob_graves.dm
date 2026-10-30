@@ -43,11 +43,14 @@
 
 	var/datum/objective/personal/grave_robbery/new_objective = new(owner = chosen_one.mind)
 	chosen_one.mind.add_personal_objective(new_objective)
+	ADD_TRAIT(chosen_one, TRAIT_GRAVEROBBER, OBJECTIVE_TRAIT)
 
 	bordered_message(chosen_one, list(
 		span_userdanger("YOU ARE MATTHIOS' CHOSEN!"),
 		span_notice("Dead don't need anything anymore! Rob graves to earn Matthios' approval!"),
 	))
 	chosen_one.playsound_local(chosen_one, 'sound/misc/gods/matthios_omen.ogg', 100)
+
+	to_chat(chosen_one, span_notice("Matthios grants you knowledge about rites of liberation! Free the dead of their burdens."))
 
 	chosen_one.mind.announce_personal_objectives()

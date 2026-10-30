@@ -6,6 +6,7 @@
 
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	spell_flags = SPELL_RITUOS
 	cooldown_time = 6 MINUTES
 

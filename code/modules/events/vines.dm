@@ -287,6 +287,8 @@
 
 /obj/structure/vine/Crossed(mob/crosser)
 	. = ..()
+	if(!ismob(crosser))
+		return
 	if(crosser.m_intent != MOVE_INTENT_SNEAK)
 		playsound(src,'sound/items/seedextract.ogg', 80, TRUE, -1)
 	if(isliving(crosser))
