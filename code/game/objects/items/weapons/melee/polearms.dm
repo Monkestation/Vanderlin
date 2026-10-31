@@ -606,7 +606,7 @@
 	force_wielded = DAMAGE_HALBERD_WIELD
 	wbalance = EASY_TO_DODGE
 	max_blade_int = 300
-	smeltresult = /obj/item/ingot/silver
+	smeltresult = null
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 120
@@ -615,6 +615,12 @@
 /obj/item/weapon/polearm/halberd/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/polearm/halberd/silver/lunar
+	name = "lunar silver halberd"
+	desc = "A halberd forged from lunar silver, a favored weapon of the Lunar Order."
+	icon_state = "lunar_halberd"
+	melting_material = /datum/material/lunar_silver
 
 /obj/item/weapon/polearm/halberd/bloodsteel
 	name = "bloodsteel halberd"

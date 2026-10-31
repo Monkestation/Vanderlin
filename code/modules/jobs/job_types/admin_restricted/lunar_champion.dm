@@ -13,7 +13,7 @@
 		/datum/attribute/skill/magic/holy = 40,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/sewing = 20,
-		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/polearms = 40,
 		/datum/attribute/skill/combat/whipsflails = 40,
 	)
 
@@ -86,9 +86,9 @@
 	cloak = /obj/item/clothing/cloak/stabard/templar/noc
 	wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltl = /obj/item/weapon/sword/sabre/noc
 	beltr = /obj/item/weapon/flail/silver/noc
 	backl = /obj/item/storage/backpack/satchel
+	backr = /obj/item/weapon/polearm/halberd/silver/lunar
 	backpack_contents = list(
 		/obj/item/needle = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1,

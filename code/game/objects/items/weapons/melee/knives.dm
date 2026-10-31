@@ -301,6 +301,13 @@
 	desc = "A dagger of refined steel with lavish gold decoration. Even in the hands of most nobles, it is considered overly decadent."
 	item_weight = 230 GRAMS
 
+/obj/item/weapon/knife/dagger/steel/royal/misericorde
+	name = "decorated misericorde"
+	desc = "A wickedly lethal spike of refined steel with lavish gold decoration. Even in the hands of most nobles, it is considered overly decadent. The curved handle is said to naturally improve one's aim, while locked in a \
+	life-or-death struggle with plate-armored opponents."
+	icon_state = "dec_misericorde"
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
+
 /obj/item/weapon/knife/dagger/steel/stiletto
 	name = "stiletto"
 	desc = "A needle-thin dagger made of refined steel, the favored weapon of assassins and angry nobles."
@@ -406,6 +413,19 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/knife/dagger/silver/lunar
+	name = "lunar silver dagger"
+	desc = "A dagger made of lunar silver, the thin death of nite creachers."
+	icon_state = "lunar_dagger"
+	sellprice = 80
+	melting_material = /datum/material/lunar_silver
+
+/obj/item/weapon/knife/dagger/silver/lunar/misericorde
+	name = "lunar silver misericorde"
+	desc = "An armor-piercing dagger of lunar silver. Even the most well protected nite creacher will fear its sting."
+	icon_state = "lunar_misericorde"
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
+
 //................ Blacksteel Dagger ............... //
 /obj/item/weapon/knife/dagger/blacksteel
 	name = "blacksteel dagger"
@@ -426,7 +446,7 @@
 	life-or-death struggle with plate-armored opponents."
 	icon_state = "bs_misericorde"
 	force = DAMAGE_DAGGER + 3
-	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 
 //................ Bloodsteel Dagger ............... //
 /obj/item/weapon/knife/dagger/bloodsteel

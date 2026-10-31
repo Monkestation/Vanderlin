@@ -568,6 +568,18 @@
 			if("onbelt")
 				return list("shrink" = 0.3,"sx" = -2,"sy" = -5,"nx" = 4,"ny" = -5,"wx" = 0,"wy" = -5,"ex" = 2,"ey" = -5,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 0,"eturn" = 0,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0)
 
+/obj/item/weapon/mace/goden/steel/lunar_silver
+	name = "lunar silver grand mace"
+	desc = "A long pole of blued steel with a lunar silver head. Built to crush nite creachers."
+	icon_state = "lunar_gmace"
+	melt_amount = 100
+	melting_material = /datum/material/lunar_silver
+	smeltresult = null
+
+/obj/item/weapon/mace/goden/steel/lunar_silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
 //................ Psydonian Grand Mace ............... //
 /obj/item/weapon/mace/goden/psydon
 	name = "psydonian grand mace"
@@ -722,6 +734,13 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/mace/warhammer/silver/lunar
+	name = "lunar silver warhammer"
+	desc = "A warhammer forged from lunar silver, made to fight nite-creachers in the Moon Prince's name. Living or dead, none that walk the nite to prey on the innocent can withstand it."
+	icon_state = "lunar_hammer"
+	sellprice = 120
+	melting_material = /datum/material/lunar_silver
+
 /obj/item/weapon/mace/warhammer/blacksteel
 	name = "blacksteel warhammer"
 	desc = "A magnificent warhammer of blacksteel. Ornamental, resplendant, and - above all else - lethal; the ideal sidearm for a knight."
@@ -818,7 +837,7 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
+	smeltresult = null
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 80
@@ -830,11 +849,17 @@
 
 /obj/item/weapon/mace/silver/barmace
 	name = "silver bar mace"
-	desc = "A long flanged mace of pure silver, a flashing symbol purity and the bane of countless nite-creachers."
-	icon_state = "silvermace"
+	desc = "A long flanged mace of pure silver, a flashing symbol of purity and the bane of countless nite-creachers."
+	icon_state = "silverbarmace"
 	force = DAMAGE_MACE + 2
 	force_wielded = DAMAGE_MACE_WIELD + 2
 	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_SILVER
+
+/obj/item/weapon/mace/silver/barmace/lunar
+	name = "lunar silver bar mace"
+	desc = "A long flanged mace of pure lunar silver, a flashing symbol of the Moon Prince's will."
+	icon_state = "lunar_barmace"
+	melting_material = /datum/material/lunar_silver
 
 /obj/item/weapon/mace/rungu/silver
 	name = "silver rungu"

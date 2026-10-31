@@ -95,6 +95,14 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/whip/silver/lunar
+	name = "lunar silver whip"
+	desc = "A blued leather corded whip with a handle, core and tip forged with lunar silver."
+	icon_state = "whip_lunar"
+	smeltresult = null
+	melt_amount = 100
+	melting_material = /datum/material/lunar_silver
+
 //................ Psydon Whip ............... //
 /obj/item/weapon/whip/psydon
 	name = "psydonian whip"

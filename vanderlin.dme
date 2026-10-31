@@ -2644,7 +2644,7 @@
 #include "code\modules\antagonists\villain\vampire\daewalker.dm"
 #include "code\modules\antagonists\villain\vampire\death_knight.dm"
 #include "code\modules\antagonists\villain\vampire\lord.dm"
-#include "code\modules\antagonists\villain\vampire\nitewalker.dm"
+#include "code\modules\antagonists\villain\vampire\nitewarden.dm"
 #include "code\modules\antagonists\villain\vampire\spawn.dm"
 #include "code\modules\antagonists\villain\vampire\objects\ancient_gear.dm"
 #include "code\modules\antagonists\villain\vampire\objects\bloodpool.dm"

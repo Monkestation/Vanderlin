@@ -973,6 +973,65 @@
 /datum/anvil_recipe/weapons/psy
 	required_material = /obj/item/ingot/silverblessed
 
+// --------------- Lunar Silver --------------------
+/datum/anvil_recipe/weapons/lunar_silver
+	abstract_type = /datum/anvil_recipe/weapons/lunar_silver
+	required_material = /obj/item/ingot/silver/lunar
+	craftdiff = 4
+
+/datum/anvil_recipe/weapons/lunar_silver/halberd
+	name = "Lunar Silver Halberd"
+	additional_items = list(/obj/item/ingot/silver/lunar = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/polearm/halberd/silver/lunar
+
+/datum/anvil_recipe/weapons/lunar_silver/greataxe
+	name = "Lunar Silver Greataxe"
+	additional_items = list(/obj/item/ingot/silver/lunar = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/greataxe/lunar_silver
+
+/datum/anvil_recipe/weapons/lunar_silver/grandmace
+	name = "Lunar Silver Grand Mace"
+	additional_items = list(/obj/item/ingot/silver/lunar = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/mace/goden/steel/lunar_silver
+
+/datum/anvil_recipe/weapons/lunar_silver/dagger
+	name = "Lunar Silver Dagger"
+	created_item = /obj/item/weapon/knife/dagger/silver/lunar
+	craftdiff = 3
+
+/datum/anvil_recipe/weapons/lunar_silver/misericorde
+	name = "Lunar Silver Misericorde"
+	created_item = /obj/item/weapon/knife/dagger/silver/lunar/misericorde
+	craftdiff = 3
+
+/datum/anvil_recipe/weapons/lunar_silver/barmace
+	name = "Lunar Silver Barmace"
+	additional_items = list(/obj/item/ingot/silver/lunar = 2)
+	created_item = /obj/item/weapon/mace/silver/barmace/lunar
+
+/datum/anvil_recipe/weapons/lunar_silver/hammer
+	name = "Lunar Silver Warhammer"
+	additional_items = list(/obj/item/ingot/silver/lunar = 1)
+	created_item = /obj/item/weapon/mace/warhammer/silver/lunar
+
+/datum/anvil_recipe/weapons/lunar_silver/sword
+	name = "Lunar Silver Sword"
+	created_item = /obj/item/weapon/sword/silver/lunar
+
+/datum/anvil_recipe/weapons/lunar_silver/longsword
+	name = "Lunar Silver Longsword"
+	additional_items = list(/obj/item/ingot/silver/lunar = 1)
+	created_item = /obj/item/weapon/sword/long/silver/lunar
+
+/datum/anvil_recipe/weapons/lunar_silver/rapier
+	name = "Lunar Silver Rapier"
+	created_item = /obj/item/weapon/sword/rapier/silver/lunar
+
+/datum/anvil_recipe/weapons/lunar_silver/whip
+	name = "Lunar Silver Whip"
+	additional_items = list(/obj/item/natural/hide/cured = 2)
+	created_item = /obj/item/weapon/whip/silver/lunar
+
 // --------------- Psydonite --------------------
 /datum/anvil_recipe/weapons/psy/axe
 	name = "Psydonian War Axe"
