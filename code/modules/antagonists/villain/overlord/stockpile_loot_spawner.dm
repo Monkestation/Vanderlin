@@ -184,7 +184,7 @@
 			stockpile_ref.remove_resources(available_costs)
 
 	// Spawn the loot
-	loot.spawn_loot(user, SSmapping.get_delve(user), user.return_item_rarity())
+	loot.spawn_loot(user)
 
 	if(resetting_item)
 		needs_reset = TRUE

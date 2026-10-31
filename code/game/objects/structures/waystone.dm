@@ -5,7 +5,7 @@ GLOBAL_LIST_EMPTY(surface_waystones)
 
 /obj/structure/waystone
 	name = "waystone"
-	desc = "A standing stone humming with quiet power. Touch it and it will carry you into the depths."
+	desc = "A standing stone humming with quiet power. Touch it and it will carry you into the depths. Be warned though, leaving requires a warpstone."
 	icon = 'icons/roguetown/misc/tallstructure.dmi'
 	icon_state = "waystone"
 	anchored = TRUE
