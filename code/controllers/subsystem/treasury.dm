@@ -95,6 +95,8 @@ SUBSYSTEM_DEF(treasury)
 			continue
 		var/wage = job_wages[H.job]
 		if(!wage)
+			wage = job_wages[H.mind.assigned_role?.parent_job.title]
+		if(!wage)
 			continue
 		give_money_account(wage, H, "Daily Wage")
 		var/cat = get_job_category(H.job)
