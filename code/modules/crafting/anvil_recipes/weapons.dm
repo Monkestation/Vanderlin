@@ -1244,8 +1244,9 @@
 	created_item = /obj/item/weapon/axe/steel/bearded
 	craftdiff = 3
 
-/datum/anvil_recipe/weapons/mace/cane/noble
+/datum/anvil_recipe/weapons/decorated_cane
 	name = "Decorated Cane"
 	craftdiff = 3
-	additional_items = list(/obj/item/ingot/gold = 1, /obj/item/grown/log/tree = 1)
+	required_material = /obj/item/ingot/gold
+	additional_items = list(/obj/item/grown/log/tree = 1)
 	created_item = /obj/item/weapon/mace/cane/noble
