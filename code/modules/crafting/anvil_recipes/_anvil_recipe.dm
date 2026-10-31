@@ -146,10 +146,6 @@
 	output_item.add_quench_requirement("recipe_creation", 60 SECONDS)
 
 /datum/anvil_recipe/proc/is_recipe_available(mob/user)
-	if(has_world_trait(/datum/world_trait/delver))
-		if(!has_recipe_unlocked(user.key, type))
-			return FALSE
-
 	if(!always_available && !(type in user?.mind?.learned_recipes))
 		return FALSE
 

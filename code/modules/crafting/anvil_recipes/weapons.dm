@@ -413,6 +413,10 @@
 	name = "Iron Knuckles"
 	created_item = /obj/item/weapon/knuckles/iron
 
+/datum/anvil_recipe/weapons/iron/handclaw
+	name = "Iron Hound Claws"
+	created_item = /obj/item/weapon/handclaw
+
 // --------- STEEL ------------  Fancy gear for Knights
 /datum/anvil_recipe/weapons/steel
 	abstract_type = /datum/anvil_recipe/weapons/steel
@@ -743,6 +747,12 @@
 	created_item = /obj/item/weapon/sword/long
 	craftdiff = 3
 
+/datum/anvil_recipe/weapons/steel/longsword
+	name = "Jeweled Longsword"
+	additional_items = list(/obj/item/ingot/steel = 1, /obj/item/ingot/gold = 1)
+	created_item = /obj/item/weapon/sword/long/jeweled
+	craftdiff = 4
+
 /datum/anvil_recipe/weapons/steel/longsword/kriegsmesser
 	name = "Kriegsmesser"
 	additional_items = list(/obj/item/ingot/steel = 1)
@@ -807,6 +817,10 @@
 /datum/anvil_recipe/weapons/steel/falchion
 	name = "Falchion"
 	created_item = /obj/item/weapon/sword/scimitar/falchion
+
+/datum/anvil_recipe/weapons/steel/mantisclaws
+	name = "Steel Mantis Claws"
+	created_item = /obj/item/weapon/handclaw/steel
 
 /datum/anvil_recipe/weapons/steel/elvenclub
 	name = "Steel Elven Warclub"
@@ -948,6 +962,10 @@
 	name = "Silver Katar"
 	created_item = /obj/item/weapon/katar/silver
 
+/datum/anvil_recipe/weapons/silver/mantisclaws
+	name = "Silver Mantis Claws"
+	created_item = /obj/item/weapon/handclaw/steel/silver
+
 /datum/anvil_recipe/weapons/silver/knuckles
 	name = "Silver Knuckles"
 	created_item = /obj/item/weapon/knuckles/silver
@@ -1043,6 +1061,10 @@
 	name = "Blacksteel Knuckles"
 	created_item = /obj/item/weapon/knuckles/blacksteel
 
+/datum/anvil_recipe/weapons/blacksteel/mantisclaws
+	name = "Blacksteel Mantis Claws"
+	created_item = /obj/item/weapon/handclaw/steel/blacksteel
+
 /datum/anvil_recipe/weapons/blacksteel/dagger
 	name = "Blacksteel Daggers"
 	created_item = /obj/item/weapon/knife/dagger/blacksteel
@@ -1113,11 +1135,6 @@
 	additional_items = list(/obj/item/rope/chain = 1, /obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/flail/blacksteel
 
-/datum/anvil_recipe/weapons/blacksteel/battleaxe
-	name = "Blacksteel Battle Axe"
-	additional_items = list(/obj/item/ingot/blacksteel = 1)
-	created_item = /obj/item/weapon/axe/battle/blacksteel
-
 /datum/anvil_recipe/weapons/blacksteel/warhammer
 	name = "Blacksteel Warhammer"
 	additional_items = list(/obj/item/ingot/blacksteel = 1)
@@ -1164,6 +1181,11 @@
 	additional_items = list(/obj/item/ingot/bloodsteel = 1)
 	created_item = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
 
+/datum/anvil_recipe/weapons/bloodsteel/battleaxe
+	name = "Bloodsteel Axe"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/weapon/axe/battle/bloodsteel
+
 /datum/anvil_recipe/weapons/bloodsteel/whip
 	name = "Bloodsteel Whip"
 	additional_items = list(/obj/item/natural/hide/cured = 2)
@@ -1173,6 +1195,21 @@
 	name = "Bloodsteel Quarterstaff"
 	additional_items = list(/obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/mace
+	name = "Bloodsteel Mace"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/weapon/mace/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/barmace
+	name = "Bloodsteel Barmace"
+	additional_items = list(/obj/item/ingot/bloodsteel = 2)
+	created_item = /obj/item/weapon/mace/bloodsteel/barmace
+
+/datum/anvil_recipe/weapons/bloodsteel/warhammer
+	name = "Bloodsteel Warhammer"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/weapon/mace/warhammer/bloodsteel
 
 /datum/anvil_recipe/weapons/bloodsteel/halberd
 	name = "Bloodsteel Halberd"

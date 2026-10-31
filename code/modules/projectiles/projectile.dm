@@ -356,7 +356,7 @@
  * Also, we select_target to find what to process_hit first.
  */
 /obj/projectile/proc/Impact(atom/A)
-	if(!trajectory && !istype(src, /obj/projectile/orbital))
+	if(!trajectory)
 		qdel(src)
 		return FALSE
 	if(LAZYACCESS(impacted, A))

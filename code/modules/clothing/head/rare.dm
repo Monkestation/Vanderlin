@@ -50,7 +50,7 @@
 	allowed_race = list(SPEC_ID_HUMEN, SPEC_ID_AASIMAR)
 	flags_inv = HIDEEARS
 	clothing_flags = CANT_SLEEP_IN
-	body_parts_covered = HEAD|EARS|HAIR
+	body_parts_covered = HEAD|EARS|HAIR|NOSE|EYES|MOUTH
 	item_weight = 3.5 KILOGRAMS
 
 

@@ -9,7 +9,3 @@
 /datum/world_trait/fishing_decrease
 	name = "River Drought"
 	desc = "Fishes are harder to catch."
-
-/datum/world_trait/delver
-	name = "Delver's Restriction"
-	desc = "Actions become limited in most areas."

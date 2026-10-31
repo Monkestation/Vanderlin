@@ -4,7 +4,7 @@
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 1,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/magic/holy = 40,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/attribute_holder/sheet/job/priest/old
@@ -23,7 +23,7 @@
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 1,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/magic/holy = 50,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -33,7 +33,7 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 #define PRIEST_ADD_PENANCE "Assign Penance"
 #define PRIEST_REMOVE_PENANCE "Absolve Penance"

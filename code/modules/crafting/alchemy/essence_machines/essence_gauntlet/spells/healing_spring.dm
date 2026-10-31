@@ -48,5 +48,6 @@
 	spell_type = SPELL_MANA
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 4

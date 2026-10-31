@@ -141,7 +141,8 @@ SUBSYSTEM_DEF(housing)
 					if(door.lock)
 						QDEL_NULL(door.lock)
 					door.lock = new /datum/lock/key(door, lock_list)
-
+				for(var/obj/item/saved_item in T.contents)
+					saved_item.sellprice = 0
 			return TRUE
 	return load_default_template(property, TRUE)
 
@@ -160,7 +161,7 @@ SUBSYSTEM_DEF(housing)
 	var/maxy = miny + property.template_y - 1
 	var/maxz = minz + property.template_z - 1
 
-	var/save_flags = SAVE_OBJECTS | SAVE_TURFS | SAVE_AREAS | SAVE_OBJECT_PROPERTIES | SAVE_UUID_STASIS | SAVE_WHITELIST
+	var/save_flags = SAVE_OBJECTS | SAVE_TURFS | SAVE_AREAS | SAVE_OBJECT_PROPERTIES | SAVE_UUID_STASIS | SAVE_ITEMS | SAVE_WHITELIST
 	var/map_data = write_map(minx, miny, minz, maxx, maxy, maxz, save_flags, SAVE_SHUTTLEAREA_DONTCARE, property_noop = property.save_id)
 
 	if(!map_data)
@@ -358,15 +359,7 @@ SUBSYSTEM_DEF(housing)
 			T.ScrapeAway()
 
 /datum/controller/subsystem/housing/proc/check_access(mob/user)
-	if(!has_world_trait(/datum/world_trait/delver))
-		return TRUE
-	if(!user || !user.client)
-		return FALSE
-
-	for(var/datum/property_controller/controller as anything in property_controllers)
-		if(controller.check_access(user))
-			return TRUE
-	return FALSE
+	return TRUE
 
 /datum/property_controller
 	var/obj/effect/landmark/house_spot/linked_property

@@ -70,11 +70,11 @@
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 30,
-		/datum/attribute/skill/labor/mathematics = 60
+		/datum/attribute/skill/educated/mathematics = 60
 	)
 
 /datum/attribute_holder/sheet/job/chronicler/old
@@ -84,11 +84,11 @@
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 50,
-		/datum/attribute/skill/labor/mathematics = 60
+		/datum/attribute/skill/educated/mathematics = 60
 	)
 
 /datum/job/advclass/archivist/chronicler
@@ -154,12 +154,12 @@
 		STAT_PERCEPTION = 1,
 		STAT_STRENGTH = -1,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/attribute_holder/sheet/job/dreamwatcher/old
@@ -169,12 +169,12 @@
 		STAT_PERCEPTION = 1,
 		STAT_STRENGTH = -1,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/job/advclass/archivist/dreamwatcher //Not a Magician nor an Acolyte, but something more, blessed by Noc since they were born, being capable of Visions and Feelings through dreams, they can feel the highest god influence or and get a hint about any of the active antags.

@@ -5,7 +5,7 @@
 	icon_state = "human_male"
 	density = TRUE
 	anchored = TRUE
-	max_integrity = 200
+	max_integrity = 300
 	var/timer = 480 //eventually the person will be freed
 	var/mob/living/petrified_mob
 
@@ -20,7 +20,7 @@
 		L.visible_message(span_warning("[L]'s skin rapidly turns to marble!"), span_userdanger("Your body freezes up! Can't... move... can't... think..."))
 		L.forceMove(src)
 		L.add_traits(list(TRAIT_MUTE), STATUE_MUTE)
-		atom_integrity = L.health + 100 //stoning damaged mobs will result in easier to shatter statues
+		atom_integrity = L.health + 300 //stoning damaged mobs will result in easier to shatter statues
 		max_integrity = atom_integrity
 		START_PROCESSING(SSobj, src)
 
