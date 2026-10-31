@@ -61,6 +61,7 @@
 	languages = list(
 		/datum/language/celestial_moon,
 		/datum/language/celestial,
+		/datum/language/elvish,
 		/datum/language/hellspeak
 	)
 
