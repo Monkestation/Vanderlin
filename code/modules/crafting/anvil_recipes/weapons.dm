@@ -234,7 +234,7 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/iron/dagger_iron
-	name = "Dagger"
+	name = "Iron Daggers"
 	created_item = /obj/item/weapon/knife/dagger
 	output_amount = 2
 	craftdiff = 0 // To train with
@@ -610,7 +610,7 @@
 	craftdiff = 1
 
 /datum/anvil_recipe/weapons/steel/royal
-	name = "Decorated Dagger"
+	name = "Decorated Daggers"
 	additional_items = list(/obj/item/ingot/gold = 1)
 	created_item = /obj/item/weapon/knife/dagger/steel/royal
 	output_amount = 2
@@ -860,8 +860,9 @@
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/silver/dagger
-	name = "Silver Dagger"
+	name = "Silver Daggers"
 	created_item = /obj/item/weapon/knife/dagger/silver
+	output_amount = 2
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/silver/silver_whip
@@ -995,8 +996,9 @@
 	created_item = /obj/item/weapon/mace/goden/steel/lunar_silver
 
 /datum/anvil_recipe/weapons/lunar_silver/dagger
-	name = "Lunar Silver Dagger"
+	name = "Lunar Silver Daggers"
 	created_item = /obj/item/weapon/knife/dagger/silver/lunar
+	output_amount = 2
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/lunar_silver/misericorde
@@ -1052,9 +1054,10 @@
 	additional_items = list(/obj/item/grown/log/tree/small = 1)
 
 /datum/anvil_recipe/weapons/psy/dagger
-	name = "Psydonian Dagger"
+	name = "Psydonian Daggers"
 	craftdiff = 3
 	created_item = /obj/item/weapon/knife/dagger/silver/psydon
+	output_amount = 2
 
 /datum/anvil_recipe/weapons/psy/shortsword
 	name = "Psydonian Shortsword"
