@@ -1,8 +1,9 @@
 /datum/job/squire
 	title = JOB_SQUIRE
+	alt_titles = list("Page", "Cadet", "Rookie")
 	tutorial = "You've always had greater aspirations than the simple life of a peasant. \n\
 	You and your friends practiced the basics, swordfighting with sticks and loosing arrows into hay bale targets. \n\
-	The Captain took notice of your potential, and recruited you as a personal ward. \
+	Someone of the garrison took notice of your potential, and you were taken into the castle as a ward. \
 	\n\n\
 	Learn from the garrison and train hard... maybe one dae you will be honored with knighthood."
 	department_flag = APPRENTICES
