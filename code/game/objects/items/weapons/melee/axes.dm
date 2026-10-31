@@ -224,8 +224,8 @@
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(AXE_CUT, PICK_INTENT)
-	gripped_intents = list(AXE_CUT, AXE_CHOP)
+	possible_item_intents = list(PICK_INTENT, AXE_CUT)
+	gripped_intents = list(PICK_INTENT, AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_STEEL
 
