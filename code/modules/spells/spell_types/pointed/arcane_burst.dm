@@ -9,7 +9,7 @@
 	cast_range = SPELL_RANGE_GROUND
 
 	required_form = FORM_ARCANE
-	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "Erumpe!"

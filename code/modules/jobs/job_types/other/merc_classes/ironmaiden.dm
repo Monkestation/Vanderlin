@@ -6,11 +6,11 @@
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/medicine = 40,
 		/datum/attribute/skill/misc/sewing = 30,
-		/datum/attribute/skill/misc/reading = 30, // Using the higher value (3) since there were two entries with different values
+		/datum/attribute/skill/educated/reading = 30, // Using the higher value (3) since there were two entries with different values
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/alchemy = 20,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/mercenary/ironmaiden
