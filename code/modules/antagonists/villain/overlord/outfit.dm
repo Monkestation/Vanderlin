@@ -22,9 +22,6 @@
 	H.adjust_technique_mastery_points(12)
 	H.adjust_form_mastery_points(20)
 	H.grant_language(/datum/language/undead)
-	if(H.dna?.species)
-		H.dna.species.native_language = "Zizo Chant"
-		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
 	H.dna.species.soundpack_m = new /datum/voicepack/lich()
 	ADD_TRAIT(H, TRAIT_NOAMBUSH, JOB_TRAIT)
 
