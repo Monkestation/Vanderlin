@@ -11,11 +11,11 @@
 		STAT_INTELLIGENCE = 4,
 		STAT_CONSTITUTION = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/magic/arcane = 40,
 		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/craft/alchemy = 40,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/job/migrant/magic_teacher
@@ -88,13 +88,13 @@
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 3,
 		STAT_SPEED = -2,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/combat/polearms = 10,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 	)
 
 /datum/job/migrant/magic_student

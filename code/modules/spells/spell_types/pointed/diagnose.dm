@@ -57,3 +57,16 @@
 	cooldown_time = 5 SECONDS
 	spell_cost = 5
 	shows_reagents = TRUE
+
+/datum/action/cooldown/spell/diagnose/life
+	name = "Detect Wounds"
+
+	cast_range = 4
+	associated_skill = /datum/attribute/skill/magic/arcane/life
+	spell_type = SPELL_MANA
+	required_form = FORM_LIFE
+	antimagic_flags = MAGIC_RESISTANCE
+
+	cooldown_time = 5 SECONDS
+	spell_cost = 5
+	shows_reagents = TRUE

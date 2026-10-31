@@ -124,6 +124,20 @@
 
 	triumph_cost_permanent = 5
 
+/datum/loadout_item/pantheon_cross
+	name = "Amulet of The Ten"
+	item_path = /obj/item/clothing/neck/psycross/silver/divine
+	ui_category = "Neck"
+
+	triumph_cost_permanent = 100
+
+/datum/loadout_item/pantheon_cross_wood
+	name = "Wooden Amulet of The Ten"
+	item_path = /obj/item/clothing/neck/psycross/divine
+	ui_category = "Neck"
+
+	triumph_cost_permanent = 5
+
 /datum/loadout_item/necra_cross
 	name = "Amulet of Necra"
 	item_path = /obj/item/clothing/neck/psycross/silver/divine/necra

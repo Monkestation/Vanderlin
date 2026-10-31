@@ -8,7 +8,7 @@
 		STAT_ENDURANCE = 2,
 		STAT_PERCEPTION = -1,
 		STAT_SPEED = 2,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/combat/unarmed = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/misc/sewing = 20,

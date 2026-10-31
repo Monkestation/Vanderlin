@@ -7418,10 +7418,6 @@
 "LN" = (
 /turf/closed/mineral/bedrock,
 /area/indoors/cave/late)
-"LP" = (
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/closed/mineral/random,
-/area/under/cave)
 "LQ" = (
 /obj/item/ore/coal,
 /obj/item/ore/coal,
@@ -102015,7 +102011,7 @@ tq
 tq
 tq
 tB
-LP
+YM
 YM
 JD
 JD

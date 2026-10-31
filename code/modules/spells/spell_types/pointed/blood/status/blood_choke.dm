@@ -36,9 +36,9 @@
 	id = "blood_choke_deb"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/blood_choke
 	duration = 20 SECONDS
-	tick_interval = 2 SECONDS
+	tick_interval = 1 SECONDS
 	var/damage_cooldown
-	var/damage_per_tick = 10
+	var/damage_per_tick = 4
 
 /datum/status_effect/debuff/blood_choke/on_apply()
 	. = ..()
@@ -49,10 +49,11 @@
 	to_chat(owner, span_bloody("My throat clears, I can breathe once more!"))
 
 /datum/status_effect/debuff/blood_choke/tick(seconds_between_ticks)
-	owner.emote("choke")
-	owner.adjustOxyLoss(damage_per_tick)
-	owner.visible_message(span_danger("[owner] chokes upon their own blood!"), \
+	if(prob(50))
+		owner.emote("choke")
+		owner.visible_message(span_danger("[owner] chokes upon their own blood!"), \
 		span_bloody("I am choking on my own blood!"), span_hear("I hear a sickening sound of pugilism!"), COMBAT_MESSAGE_RANGE)
+	owner.adjustOxyLoss(damage_per_tick)
 
 // ##########################################################################################
 
@@ -69,7 +70,7 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/herald_grip
 	duration = 3 MINUTES
 	tick_interval = 2 SECONDS
-	damage_per_tick = 3
+	damage_per_tick = 6
 
 /atom/movable/screen/alert/status_effect/debuff/herald_grip
 	name = "Blood Grasp"
