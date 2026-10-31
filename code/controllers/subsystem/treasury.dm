@@ -96,7 +96,9 @@ SUBSYSTEM_DEF(treasury)
 		var/title_to_check = H.job
 		var/wage = job_wages[title_to_check]
 		if(!wage)
-			title_to_check = H.mind.assigned_role?.parent_job.title
+			title_to_check = H.mind.assigned_role?.parent_job?.title
+			if(!title_to_check)
+				continue
 			wage = job_wages[title_to_check]
 		if(!wage)
 			continue
