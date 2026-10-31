@@ -142,9 +142,7 @@
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	wrists = /obj/item/storage/keyring/manorguard
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
+	beltl = /obj/item/weapon/knife/dagger/steel/special
 	belt = /obj/item/storage/belt/leather/steel
 	beltr = /obj/item/weapon/sword/arming
 	scabbards = list(/obj/item/weapon/scabbard/sword/noble)

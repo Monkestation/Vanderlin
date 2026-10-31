@@ -171,7 +171,7 @@
 	)
 
 /datum/job/advclass/menatarms/watchman_ranger
-	title = "Archer Men-At-Arms"
+	title = "Archer Man-At-Arms"
 	tutorial = "While the others charge into the fray hacking at anything they see, \
 	you’re behind them, taking precise shots with bolts and arrows. \
 	You are the bane of any would-be sieger, and your weapon is your life."
@@ -238,7 +238,7 @@
 	)
 
 /datum/job/advclass/menatarms/watchman_hospitaller
-	title = "Hospitaller Men-At-Arms"
+	title = "Hospitaller Man-At-Arms"
 	tutorial = "You never had the raw capacity of violence like the rest of them, \
 	nor the surgical talent of the feldsher, but what you do have is the best of both worlds, \
 	you keep them fighting, alive, and grateful for your help when you crack the skull of the bastard trying to twist the knife."
@@ -308,7 +308,7 @@
 	)
 
 /datum/job/advclass/menatarms/watchman_cavalry
-	title = "Cavalry Men-At-Arms"
+	title = "Cavalry Man-At-Arms"
 	tutorial = "You can hold yourself high above the rest. \
 	you’re quicker than any ne’er do well that dares to attack your city with your mount \
 	and you’re no slouch when it comes to running them through with a sabre while you’re at it. \

@@ -18,6 +18,9 @@
 
 /obj/structure/closet/crate/chest/steward
 	lock = /datum/lock/key/steward
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "chestiron_neu"
+	base_icon_state = "chestiron_neu"
 
 /datum/stock/import/wheat
 	name = "Crate of Wheat"
@@ -34,34 +37,64 @@
 	name = "City Watchman Equipment Crate"
 	desc = "Starting kit for a new City Watchman."
 	item_type = /obj/structure/closet/crate/chest/steward/townguard
-	export_price = 150
+	export_price = 200 // Sell value is 91, ~145% markup
 	importexport_amt = 1
 
 /obj/structure/closet/crate/chest/steward/townguard/populate_contents()
-	new /obj/item/clothing/head/helmet/townwatch(src)
+	new /obj/item/clothing/head/helmet/watchmen(src)
 	new /obj/item/clothing/cloak/half/guard(src)
-	new /obj/item/clothing/armor/gambeson(src)
-	new	/obj/item/clothing/pants/trou/leather/guard(src)
-	new /obj/item/clothing/shoes/boots/darkboots(src)
+	new /obj/item/clothing/armor/cuirass/fluted/iron(src)
 	new /obj/item/clothing/neck/gorget(src)
+	new /obj/item/clothing/shirt/guard(src)
+	new /obj/item/clothing/gloves/leather(src)
+	new /obj/item/clothing/wrists/bracers/iron/concealed(src)
+	new /obj/item/clothing/pants/guard(src)
+	new /obj/item/clothing/shoes/boots/armor/ironmaille(src)
+	new /obj/item/storage/belt/leather(src)
+	new /obj/item/weapon/polearm/spear(src)
 	new /obj/item/weapon/mace/cudgel(src)
 
 /datum/stock/import/maa
-	name = "Man-at-Arms Equipment Crate"
+	name = "Man-At-Arms Equipment Crate"
 	desc = "Starting kit for a new Man-at-Arms."
 	item_type = /obj/structure/closet/crate/chest/steward/manatarms
-	export_price = 350
+	export_price = 300 // Sell value is 106, ~183% markup
 	importexport_amt = 1
 
 /obj/structure/closet/crate/chest/steward/manatarms/populate_contents()
-	new /obj/item/clothing/head/helmet/kettle(src)
-	new /obj/item/clothing/neck/chaincoif/iron(src)
+	new /obj/item/clothing/head/helmet/kettle/slit/atarms(src)
 	new /obj/item/clothing/cloak/stabard/guard(src)
-	new /obj/item/clothing/armor/chainmail(src)
-	new /obj/item/clothing/pants/trou/leather/guard(src)
-	new /obj/item/clothing/shoes/boots/darkboots(src)
-	new /obj/item/weapon/knife/dagger/steel(src)
-	new /obj/item/weapon/polearm/spear/billhook(src)
+	new /obj/item/clothing/armor/brigandine/light(src)
+	new /obj/item/clothing/neck/gorget(src)
+	new /obj/item/clothing/armor/gambeson(src)
+	new /obj/item/clothing/gloves/chain/iron(src)
+	new /obj/item/clothing/wrists/bracers/leather/brigandine(src)
+	new /obj/item/clothing/pants/trou/leather/brigandine(src)
+	new /obj/item/clothing/shoes/boots/leather/advanced/watch(src)
+	new /obj/item/storage/belt/leather(src)
+	new /obj/item/weapon/shield/tower/buckleriron(src)
+	new /obj/item/weapon/sword/short(src)
+
+/datum/stock/import/maafront
+	name = "Vanguard Equipment Crate"
+	desc = "A heavier and much more expensive kit for a Man-At-Arms."
+	item_type = /obj/structure/closet/crate/chest/steward/vanatarms
+	export_price = 500 // Sell value is 146, ~242% markup
+	importexport_amt = 1
+
+/obj/structure/closet/crate/chest/steward/vanatarms/populate_contents()
+	new /obj/item/clothing/head/helmet/visored/sallet(src)
+	new /obj/item/clothing/cloak/stabard/guard(src)
+	new /obj/item/clothing/armor/cuirass/fluted(src)
+	new /obj/item/clothing/neck/chaincoif(src)
+	new /obj/item/clothing/armor/gambeson/arming(src)
+	new /obj/item/clothing/gloves/chain(src)
+	new /obj/item/clothing/wrists/bracers(src)
+	new /obj/item/clothing/pants/chainlegs(src)
+	new /obj/item/clothing/shoes/boots/leather/advanced/watch(src)
+	new /obj/item/storage/belt/leather(src)
+	new /obj/item/weapon/mace/warhammer(src)
+	new /obj/item/weapon/sword(src)
 
 /datum/stock/import/crossbow
 	name = "Crossbows Crate"

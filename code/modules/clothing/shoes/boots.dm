@@ -186,9 +186,9 @@
 	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/leather/advanced/watch
-	name = "watch boots"
+	name = "marching boots"
 	color = "#d5c2aa"
-	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the city watch long before they're seen."
+	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the soldiers long before they're seen."
 	icon_state = "blackboots"
 	item_state = "blackboots"
 	wetable = FALSE
