@@ -54,7 +54,7 @@
 					var/obj/item/clothing/neck/portalamulet/A = choice
 					A.uses -= 1
 					var/turf/G = get_turf(A)
-					new /obj/effect/landmark/vteleportsenddest(G.loc)
+					new /obj/effect/landmark/vteleportsenddest(G)
 					if(A.uses <= 0)
 						A.visible_message("[A] shatters!")
 						qdel(A)
