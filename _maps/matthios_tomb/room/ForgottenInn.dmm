@@ -79,6 +79,7 @@
 /area/under/tomb/indoors)
 "iD" = (
 /obj/structure/closet/crate/crafted_closet/inn/chest,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
 "jH" = (
@@ -109,6 +110,9 @@
 "lU" = (
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
+"my" = (
+/turf/open/floor/grass,
+/area/under/tomb)
 "mI" = (
 /obj/effect/mapping_helpers/outfit_handler{
 	outfit_to_equip = /datum/outfit/adventurer/barbarian
@@ -147,7 +151,7 @@
 /area/under/tomb/indoors)
 "rA" = (
 /obj/structure/well,
-/turf/open/floor/dirt,
+/turf/open/floor/grass,
 /area/under/tomb)
 "rI" = (
 /obj/effect/dungeon_directional_helper/north,
@@ -200,6 +204,13 @@
 /obj/item/reagent_containers/glass/cup/wooden/crafted{
 	pixel_x = -6;
 	pixel_y = 16
+	},
+/turf/open/floor/ruinedwood/spiralfade,
+/area/under/tomb/indoors)
+"us" = (
+/obj/structure/closet/crate/crafted_closet/inn/south,
+/obj/effect/dungeon_loot_spawner/medium/chest{
+	pixel_y = 5
 	},
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
@@ -425,6 +436,10 @@
 "Vf" = (
 /turf/open/water/bath,
 /area/under/tomb/indoors)
+"Vg" = (
+/obj/structure/fluff/walldeco/sign/saiga,
+/turf/open/floor/grass,
+/area/under/tomb)
 "VQ" = (
 /obj/structure/fluff/walldeco/sign/trophy,
 /turf/open/floor/ruinedwood/spiralfade,
@@ -519,15 +534,15 @@ tP
 Qe
 Qe
 tu
-tu
-tu
-tu
+my
+my
+my
 tu
 tu
 Qe
 Qe
-tu
-tu
+my
+my
 tu
 tu
 tu
@@ -541,18 +556,18 @@ tP
 Qe
 Qe
 tu
+my
+my
 tu
 tu
-tu
-tu
-ih
+Vg
 Qe
 Qe
 tu
 ih
-tu
-tu
-tu
+my
+my
+my
 Cb
 tu
 Qe
@@ -583,7 +598,7 @@ tP
 (5,1,1) = {"
 tP
 tu
-tu
+my
 Im
 WD
 ha
@@ -598,14 +613,14 @@ lU
 lU
 lU
 Im
-tu
+my
 tu
 tP
 "}
 (6,1,1) = {"
 tP
 Qe
-tu
+my
 Im
 Wx
 ha
@@ -620,7 +635,7 @@ is
 kl
 lU
 Im
-tu
+my
 tu
 tP
 "}
@@ -642,7 +657,7 @@ nW
 ur
 lU
 sh
-tu
+my
 Qe
 tP
 "}
@@ -752,7 +767,7 @@ Du
 Du
 Du
 Im
-tu
+my
 tu
 tP
 "}
@@ -774,7 +789,7 @@ lU
 lU
 OP
 Im
-tu
+my
 rA
 tP
 "}
@@ -796,7 +811,7 @@ lU
 lU
 OP
 sh
-tu
+my
 tu
 tP
 "}
@@ -824,7 +839,7 @@ tP
 "}
 (16,1,1) = {"
 tP
-tu
+my
 tu
 Im
 Im
@@ -840,13 +855,13 @@ YI
 Ug
 oq
 Im
-tu
+my
 tu
 tP
 "}
 (17,1,1) = {"
 tP
-tu
+my
 tu
 Im
 Im
@@ -862,29 +877,29 @@ Im
 Im
 rK
 Im
-tu
-tu
+my
+my
 tP
 "}
 (18,1,1) = {"
 tP
-tu
-tu
-tu
+my
+my
+my
 ZT
 ZT
 ZT
 ZT
-tu
-tu
+my
+my
 tu
 Qe
 tu
-tu
-tu
-tu
-tu
-tu
+my
+my
+my
+my
+my
 tu
 tP
 "}
@@ -894,8 +909,8 @@ tu
 tu
 tu
 tu
-tu
-tu
+my
+my
 tu
 Qe
 Qe
@@ -1232,7 +1247,7 @@ Dx
 lU
 lU
 AX
-xJ
+us
 lU
 Bz
 Vf

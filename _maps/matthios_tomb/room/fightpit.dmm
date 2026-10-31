@@ -2,19 +2,19 @@
 "ao" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/table/vtable,
-/obj/item/reagent_containers/glass/cup/golden{
-	pixel_y = 8;
-	pixel_x = -5
-	},
 /obj/item/reagent_containers/glass/bottle/redwine{
 	pixel_y = 12;
 	pixel_x = 7
+	},
+/obj/item/reagent_containers/glass/cup/silver{
+	pixel_y = 8;
+	pixel_x = -6
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
 "aX" = (
 /obj/structure/table/wood/counter/end,
-/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/rotten/sausage,
 /turf/open/floor/hexstone,
 /area/under/tomb)
 "aY" = (
@@ -39,13 +39,13 @@
 /area/under/tomb)
 "do" = (
 /obj/structure/rack/shelf/big,
-/obj/item/reagent_containers/glass/cup/silver{
-	pixel_x = 6;
-	pixel_y = 19
+/obj/item/reagent_containers/glass/cup/steel{
+	pixel_y = 12;
+	pixel_x = 11
 	},
-/obj/item/reagent_containers/glass/cup/silver{
-	pixel_y = 21;
-	pixel_x = -6
+/obj/item/reagent_containers/glass/cup/steel{
+	pixel_y = 10;
+	pixel_x = -5
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb)
@@ -195,9 +195,9 @@
 /obj/structure/table/wood/counter{
 	dir = 1
 	},
-/obj/item/reagent_containers/food/snacks/cooked/sausage{
-	pixel_y = 5;
-	pixel_x = -7
+/obj/item/reagent_containers/food/snacks/rotten/sausage{
+	pixel_x = -9;
+	pixel_y = 6
 	},
 /turf/open/floor/hexstone,
 /area/under/tomb)
@@ -284,18 +284,16 @@
 "vh" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/table/vtable/v2,
-/obj/item/reagent_containers/glass/cup/golden{
-	pixel_y = 8;
-	pixel_x = 8
-	},
-/obj/item/weapon/sword/decorated{
+/obj/effect/dungeon_loot_spawner/high{
 	pixel_x = -5;
+	pixel_y = 5
+	},
+/obj/item/reagent_containers/glass/cup/silver{
+	pixel_x = 6;
 	pixel_y = 8
 	},
-/obj/item/gem,
-/obj/item/gem{
-	pixel_x = -11;
-	pixel_y = 11
+/obj/item/weapon/sword/arming{
+	pixel_y = 10
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
@@ -319,7 +317,6 @@
 /area/under/tomb)
 "xK" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/weapon/polearm/spear/billhook,
 /obj/item/weapon/polearm/spear/billhook{
 	pixel_y = -8
 	},
@@ -336,7 +333,7 @@
 /obj/structure/table/wood/counter{
 	dir = 1
 	},
-/obj/item/reagent_containers/food/snacks/cooked/sausage,
+/obj/item/reagent_containers/food/snacks/rotten/sausage,
 /turf/open/floor/hexstone,
 /area/under/tomb)
 "yO" = (
@@ -423,9 +420,9 @@
 /obj/structure/table/wood/counter{
 	dir = 1
 	},
-/obj/item/reagent_containers/food/snacks/cooked/sausage{
-	pixel_x = 12;
-	pixel_y = 11
+/obj/item/reagent_containers/food/snacks/rotten/sausage{
+	pixel_y = 7;
+	pixel_x = 9
 	},
 /turf/open/floor/hexstone,
 /area/under/tomb)
@@ -550,6 +547,14 @@
 /area/under/tomb)
 "VC" = (
 /obj/structure/rack/shelf/big,
+/obj/item/reagent_containers/food/snacks/rotten/mince{
+	pixel_y = 3;
+	pixel_x = 3
+	},
+/obj/item/reagent_containers/food/snacks/rotten/mince{
+	pixel_y = 13;
+	pixel_x = -2
+	},
 /turf/open/floor/hexstone,
 /area/under/tomb)
 "Wk" = (

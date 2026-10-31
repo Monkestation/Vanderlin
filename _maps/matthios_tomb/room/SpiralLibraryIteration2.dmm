@@ -3,8 +3,7 @@
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
 	},
-/obj/structure/bookcase,
-/obj/item/book/random_book,
+/obj/structure/bookcase/random,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
 "bf" = (
@@ -15,27 +14,34 @@
 /area/under/tomb/indoors/magic)
 "bC" = (
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
+/obj/structure/bookcase/random/archive,
 /turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"cW" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/floor/ruinedwood,
 /area/under/tomb/indoors/magic)
 "dd" = (
 /obj/item/book/random_book,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
-"dX" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/turf/open/floor/churchrough,
+"dQ" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
+	},
+/turf/open/openspace,
+/area/under/tomb/indoors/magic)
+"dS" = (
+/obj/structure/stairs{
+	dir = 1
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/ruinedwood,
 /area/under/tomb/indoors/magic)
 "et" = (
 /obj/structure/fluff/railing/wood{
@@ -55,6 +61,15 @@
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
+"gu" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/ruinedwood/darker,
+/area/under/tomb/indoors/magic)
+"gO" = (
+/obj/effect/dungeon_loot_spawner/medium/chest,
+/obj/structure/closet/crate/chest,
+/turf/open/floor/ruinedwood/darker,
+/area/under/tomb/indoors/magic)
 "hV" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/churchrough,
@@ -62,6 +77,7 @@
 "ir" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/structure/rack/shelf,
+/obj/item/book/granter/spell/magick/invisibility,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "iA" = (
@@ -74,6 +90,10 @@
 /obj/effect/decal/cleanable/generic,
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"jD" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/ruinedwood,
 /area/under/tomb/indoors/magic)
 "kz" = (
 /obj/structure/fluff/railing/wood{
@@ -94,7 +114,6 @@
 /area/under/tomb/indoors/magic)
 "mm" = (
 /obj/effect/decal/cleanable/shreds,
-/obj/item/book/random_book,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "mA" = (
@@ -116,25 +135,39 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/under/tomb/indoors/magic)
+"rd" = (
+/obj/structure/bookcase/random/legends,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"rP" = (
+/obj/structure/fluff/walldeco/painting{
+	pixel_y = 0
+	},
+/turf/closed/wall/mineral/underbrick,
+/area/under/tomb/indoors/magic)
+"so" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/item/book/random_book,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
 "sX" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 4
 	},
-/obj/structure/bookcase,
+/obj/structure/bookcase/random/thesis,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "tg" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
+"tp" = (
+/obj/structure/bookcase/random/archive,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
 "tr" = (
 /obj/structure/rack/shelf,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
-/turf/open/floor/ruinedwood/darker,
-/area/under/tomb/indoors/magic)
-"tQ" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
 "tY" = (
@@ -148,13 +181,18 @@
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "uo" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
+/obj/structure/bookcase/random/myths,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "uW" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
+	},
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"va" = (
+/obj/machinery/light/fueled/wallfire/candle/blue{
+	pixel_y = -32
 	},
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
@@ -172,70 +210,56 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
-"xc" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/turf/open/floor/churchrough,
-/area/under/tomb/indoors/magic)
-"xi" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/turf/open/floor/churchrough,
+"wZ" = (
+/obj/structure/fluff/walldeco/bigpainting/relic,
+/turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
 "yd" = (
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb)
 "yG" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
+/obj/item/book/granter/spell/magick/fetch,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
 "zX" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/churchrough,
 /area/under/tomb)
-"Ak" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/turf/open/floor/churchrough,
-/area/under/tomb/indoors/magic)
 "Ay" = (
 /obj/effect/decal/remains/bigrat,
 /obj/item/book/random_book,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
+"AJ" = (
+/obj/effect/decal/cleanable/dirt/cobweb{
+	dir = 8
+	},
+/obj/item/book/random_book,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
 "BG" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
+"BK" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"Cv" = (
+/obj/structure/stairs,
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
+/turf/open/floor/ruinedwood,
+/area/under/tomb/indoors/magic)
 "DF" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
+/obj/structure/bookcase/random,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
 "Ea" = (
 /turf/open/floor/ruinedwood,
 /area/under/tomb/indoors/magic)
 "Fm" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
+/obj/structure/bookcase/random/thesis,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "Fr" = (
@@ -254,6 +278,13 @@
 "IM" = (
 /obj/structure/rack/shelf,
 /obj/effect/decal/cleanable/shreds,
+/obj/effect/dungeon_loot_spawner/low{
+	pixel_y = 32
+	},
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"JA" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "JT" = (
@@ -277,12 +308,6 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
-"LF" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/turf/open/floor/ruinedwood/darker,
-/area/under/tomb/indoors/magic)
 "LK" = (
 /obj/effect/decal/remains/bigrat,
 /turf/open/floor/churchrough,
@@ -290,6 +315,9 @@
 "Nr" = (
 /obj/effect/decal/cleanable/dirt/cobweb,
 /obj/structure/rack/shelf,
+/obj/effect/dungeon_loot_spawner/low{
+	pixel_y = 32
+	},
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
 "On" = (
@@ -331,6 +359,10 @@
 	},
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
+"Vg" = (
+/obj/machinery/light/fueled/wallfire/candle/blue/r,
+/turf/open/floor/ruinedwood/darker,
+/area/under/tomb/indoors/magic)
 "Vw" = (
 /turf/closed/wall/mineral/wooddark,
 /area/under/tomb/indoors/magic)
@@ -352,18 +384,7 @@
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "XX" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
+/obj/structure/bookcase/random,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "Yx" = (
@@ -371,12 +392,7 @@
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "ZC" = (
-/obj/structure/bookcase,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
-/obj/item/book/random_book,
+/obj/structure/bookcase/random/eoratica,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors/magic)
 
@@ -420,9 +436,9 @@ TP
 TP
 vI
 ir
-dX
+XX
 ud
-ud
+JA
 ud
 Yx
 XX
@@ -435,13 +451,13 @@ vV
 vV
 TP
 TP
-Lb
-dd
-xc
+so
+ud
+XX
 ud
 mm
 Yx
-dX
+XX
 dd
 ud
 TP
@@ -451,14 +467,14 @@ vV
 (5,1,1) = {"
 vV
 TP
-uo
+XX
 Lb
 Lb
-dX
+XX
 Yx
 ud
 ud
-uo
+XX
 Lb
 Lb
 sX
@@ -468,7 +484,7 @@ vV
 (6,1,1) = {"
 mA
 TP
-xi
+ud
 XF
 ud
 ud
@@ -490,7 +506,7 @@ Yx
 tg
 Ea
 Ea
-Ea
+jD
 Vw
 Vw
 ud
@@ -502,7 +518,7 @@ mA
 (8,1,1) = {"
 hV
 TP
-ud
+BK
 ud
 tg
 qJ
@@ -512,7 +528,7 @@ Qb
 Qb
 oc
 Yx
-ud
+va
 TP
 fT
 "}
@@ -524,7 +540,7 @@ dd
 iX
 Ea
 Ea
-Kl
+Cv
 Ea
 Ea
 tY
@@ -536,7 +552,7 @@ mA
 (10,1,1) = {"
 mA
 TP
-uo
+tp
 Lb
 Ql
 Ea
@@ -546,7 +562,7 @@ Ea
 Ea
 oc
 ud
-dX
+Fm
 TP
 mA
 "}
@@ -563,7 +579,7 @@ iA
 iA
 Lb
 ud
-Ak
+Fm
 TP
 vV
 "}
@@ -577,9 +593,9 @@ uo
 Yx
 ud
 ud
-XX
+rd
 Lb
-uW
+AJ
 TP
 TP
 vV
@@ -590,11 +606,11 @@ TP
 TP
 TP
 IM
-Ak
+uo
 ud
 Tb
 ud
-xi
+rd
 uW
 TP
 TP
@@ -693,7 +709,7 @@ TP
 TP
 yG
 vx
-tQ
+ZC
 FF
 vx
 vx
@@ -707,7 +723,7 @@ vV
 (5,1,2) = {"
 vV
 TP
-LF
+ZC
 Ay
 FF
 Xq
@@ -717,14 +733,14 @@ et
 JT
 wu
 FF
-FF
+gO
 TP
 vV
 "}
 (6,1,2) = {"
 yd
 TP
-tQ
+ZC
 vx
 BG
 Ea
@@ -746,7 +762,7 @@ FF
 Sj
 Ea
 Ea
-GR
+dS
 Qb
 Qb
 kz
@@ -758,17 +774,17 @@ yd
 (8,1,2) = {"
 yd
 TP
-FF
+gu
 FF
 BG
 qJ
-qJ
+cW
 TP
 vx
 vx
 kz
 vx
-vx
+dQ
 TP
 yd
 "}
@@ -791,7 +807,7 @@ yd
 "}
 (10,1,2) = {"
 yd
-TP
+rP
 FF
 wu
 BG
@@ -846,9 +862,9 @@ TP
 TP
 oT
 tr
-FF
+wZ
 vx
-FF
+Vg
 wu
 FF
 FF

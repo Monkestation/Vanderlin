@@ -41,6 +41,13 @@
 "aV" = (
 /turf/open/floor/dirt,
 /area/under/tomb)
+"cx" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 4
+	},
+/mob/living/carbon/human/species/skeleton/npc/ambush,
+/turf/open/floor/dirt,
+/area/under/tomb)
 "cP" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/ruinedwood/spiral,
@@ -57,10 +64,11 @@
 /obj/item/weapon/sword/iron{
 	pixel_x = 3
 	},
-/obj/item/weapon/sword/arming{
-	pixel_y = 3;
-	pixel_x = -1
-	},
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb/indoors)
+"eK" = (
+/obj/structure/table/wood/counter,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "fU" = (
@@ -92,15 +100,10 @@
 /turf/open/floor/dirt/road,
 /area/under/tomb)
 "rG" = (
-/obj/item/explosive/bottle{
-	pixel_x = 9;
-	pixel_y = 17
-	},
-/obj/item/explosive/bottle{
-	pixel_x = -1;
-	pixel_y = 17
-	},
 /obj/structure/rack/shelf/big,
+/obj/effect/dungeon_loot_spawner/low{
+	pixel_y = 14
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "us" = (
@@ -125,7 +128,6 @@
 /obj/structure/table/wood/counter/end{
 	dir = 4
 	},
-/obj/item/clothing/ring/silver,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "xt" = (
@@ -137,7 +139,9 @@
 /area/under/tomb)
 "yp" = (
 /obj/structure/closet/crate/drawer/inn,
-/obj/item/ingot/silver,
+/obj/effect/dungeon_loot_spawner/low{
+	pixel_y = 14
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "yK" = (
@@ -168,19 +172,14 @@
 /area/under/tomb)
 "HZ" = (
 /obj/structure/closet/crate/chest/crafted,
-/obj/item/gun/ballistic/bow/long,
-/obj/item/ammo_holder/quiver/arrows,
-/obj/item/flashlight/flare/torch/lantern,
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 8
 	},
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "Is" = (
 /obj/structure/fluff/buysign,
-/obj/structure/fluff/buysign{
-	desc = " Store Closed"
-	},
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "MY" = (
@@ -193,17 +192,14 @@
 /area/under/tomb/indoors)
 "SJ" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
+/obj/effect/dungeon_loot_spawner/low/chest{
+	pixel_y = 9
+	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "Vl" = (
 /obj/structure/rack,
-/obj/item/weapon/shield/wood{
-	pixel_x = -5
-	},
-/obj/item/weapon/shield/wood{
-	pixel_x = 8
-	},
-/obj/item/weapon/shield/tower,
+/obj/item/weapon/shield/wood,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "Xi" = (
@@ -293,7 +289,7 @@ av
 aH
 wK
 gn
-gn
+eK
 ab
 av
 aA
@@ -341,11 +337,11 @@ aB
 aB
 aV
 aR
-aV
-aV
-am
 uU
 aV
+am
+aV
+uU
 aR
 aV
 aV
@@ -360,7 +356,7 @@ aV
 am
 am
 am
-am
+qK
 am
 am
 am
@@ -376,7 +372,7 @@ aB
 aV
 aR
 aV
-uU
+aV
 am
 aV
 aV
@@ -394,9 +390,9 @@ aB
 Yx
 aV
 aV
-qK
+am
 aV
-uU
+aV
 aR
 aB
 aB
@@ -412,7 +408,7 @@ aA
 Gc
 Gc
 am
-Gc
+cx
 Gc
 aA
 aA
