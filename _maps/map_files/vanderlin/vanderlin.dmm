@@ -783,6 +783,13 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/garrison)
+"acf" = (
+/turf/closed/mineral/warm,
+/area/under/cave)
+"acg" = (
+/obj/effect/mob_spawn/corpse/human/damaged/elf,
+/turf/open/lava,
+/area/under/cavelava)
 "ach" = (
 /obj/effect/landmark/start/watchman{
 	dir = 1
@@ -794,6 +801,13 @@
 	dir = 1
 	},
 /area/indoors/town/keep/garrison)
+"acj" = (
+/obj/machinery/light/fueled/firebowl/firebowlb,
+/turf/open/floor/naturalstone,
+/area/under/cavelava)
+"acl" = (
+/turf/open/floor/naturalstone,
+/area/outdoors/basin/safe)
 "acu" = (
 /obj/effect/landmark/start/servant{
 	dir = 4
@@ -30539,9 +30553,6 @@
 "mpi" = (
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/keep/lord_appt)
-"mpu" = (
-/turf/open/floor/dirt,
-/area/under/cavelava)
 "mpF" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/fluff/railing/wood{
@@ -59981,9 +59992,6 @@
 "xVA" = (
 /turf/open/floor/metal,
 /area/indoors/town/clocktower)
-"xVB" = (
-/turf/closed/mineral/moss,
-/area/under/cavelava)
 "xVG" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/twig,
@@ -119410,9 +119418,9 @@ oiF
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
+acf
+acf
+acf
 qFx
 qFx
 qFx
@@ -119611,10 +119619,10 @@ oLF
 bcK
 qFx
 qFx
-qFx
-qFx
-rbr
-qFx
+acf
+acf
+acg
+acf
 qFx
 qFx
 qFx
@@ -119812,11 +119820,11 @@ rqE
 oLF
 qFx
 qFx
-qFx
-qFx
+acf
+acf
 rbr
 rbr
-qFx
+acf
 qFx
 qFx
 qFx
@@ -120014,11 +120022,11 @@ oLF
 oiF
 qFx
 qFx
-qFx
+acf
 rbr
 rbr
-qFx
-qFx
+acf
+acf
 qFx
 qFx
 qFx
@@ -120216,10 +120224,10 @@ bcK
 oiF
 qFx
 qFx
-qFx
+acf
 rbr
-qFx
-qFx
+acf
+acf
 qFx
 qFx
 qFx
@@ -120418,10 +120426,10 @@ oLF
 bcK
 qFx
 qFx
-qFx
+acf
 rbr
-qFx
-qFx
+acf
+acf
 qFx
 qFx
 qFx
@@ -120619,11 +120627,11 @@ bcK
 oLF
 bcK
 qFx
-qFx
-qFx
+acf
+acf
 rbr
 rbr
-qFx
+acf
 qFx
 qFx
 qFx
@@ -120817,16 +120825,16 @@ rvF
 oLF
 bcK
 oLF
-bcK
-bcK
-qFx
-qFx
-qFx
+rvF
+acl
+acf
+acf
+acf
 qLp
 qLp
 rbr
-qFx
-qFx
+acf
+acf
 qFx
 qFx
 qFx
@@ -121016,19 +121024,19 @@ jaQ
 rvF
 rvF
 rvF
-oiF
+rvF
+rvF
 bcK
-oiF
-bcK
-bcK
+rvF
+acl
 qLp
 qLp
-xVB
+qLp
 qLp
 qLp
 rbr
 rbr
-qFx
+acf
 qFx
 qFx
 qFx
@@ -121218,19 +121226,19 @@ jaQ
 rvF
 rvF
 rvF
-oLF
-bcK
-oLF
-oLF
-bcK
-mpu
+rvF
+rvF
+rvF
+rvF
+acl
 qLp
-qFx
-qFx
+acj
+acf
+acf
 qLp
-qFx
+acf
 rbr
-qFx
+acf
 qFx
 qFx
 qFx
@@ -121420,19 +121428,19 @@ jaQ
 rvF
 rvF
 rvF
-oLF
+rvF
 rqE
 oLF
-oLF
-bcK
-bcK
+rvF
+rvF
+acl
+acf
 qFx
-qFx
-qFx
-qFx
-qFx
+acf
+acf
+acf
 rbr
-qFx
+acf
 qFx
 qFx
 qFx
@@ -121627,14 +121635,14 @@ oLF
 oLF
 oLF
 bcK
-bcK
+acl
 qFx
 qFx
 qFx
 qFx
-qFx
-qFx
-qFx
+acf
+acf
+acf
 qFx
 qFx
 qFx
