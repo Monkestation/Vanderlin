@@ -180,12 +180,12 @@
 		typecacheof(list(/obj/item/reagent_containers/food/snacks/egg)
 	))
 
-/datum/component/storage/concrete/grid/magebag
+/datum/component/storage/concrete/grid/sack/magebag
 	max_w_class = WEIGHT_CLASS_NORMAL
 	screen_max_rows = 8
 	screen_max_columns = 5
 
-/datum/component/storage/concrete/grid/magebag/New(datum/P, ...)
+/datum/component/storage/concrete/grid/sack/magebag/New(datum/P, ...)
 	. = ..()
 	set_holdable(list(
 		/obj/item/natural/infernalash,
