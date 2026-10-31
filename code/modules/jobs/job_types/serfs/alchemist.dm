@@ -6,7 +6,7 @@
 		STAT_INTELLIGENCE = 3,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/craft/crafting = 30,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/attribute_holder/sheet/job/alchemist/old

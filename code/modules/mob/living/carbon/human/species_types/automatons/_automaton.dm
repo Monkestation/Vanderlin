@@ -45,10 +45,10 @@
 		/datum/attribute/skill/labor/butchering = 10,
 		/datum/attribute/skill/labor/farming = 10,
 		/datum/attribute/skill/labor/fishing = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/labor/mining = 10,
 		/datum/attribute/skill/misc/music = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sewing = 10,
 	)
 

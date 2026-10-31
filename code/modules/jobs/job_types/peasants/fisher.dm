@@ -19,7 +19,7 @@
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/climbing = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 /datum/attribute_holder/sheet/job/fisher/old
@@ -39,7 +39,7 @@
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/climbing = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 /datum/job/fisher

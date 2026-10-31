@@ -5,7 +5,7 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/magic/arcane = 50,
 		/datum/attribute/skill/magic/holy = 50,
@@ -17,7 +17,7 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/attribute_holder/sheet/job/oracle/old
@@ -27,7 +27,7 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = -2,
 		STAT_SPEED = -2,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/magic/arcane = 60,
 		/datum/attribute/skill/magic/holy = 60,
@@ -39,7 +39,7 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 50
+		/datum/attribute/skill/educated/mathematics = 50
 	)
 
 /datum/job/admin/oracle

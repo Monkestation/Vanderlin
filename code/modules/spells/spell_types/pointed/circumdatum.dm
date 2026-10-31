@@ -11,7 +11,7 @@
 
 	spell_color = 12
 	required_form = FORM_ARCANE
-	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
+	associated_skill = /datum/attribute/skill/magic/arcane
 
 	invocation = "Circumdatum!"
 	invocation_type = INVOCATION_SHOUT
