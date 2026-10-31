@@ -277,6 +277,19 @@
 /obj/item/natural/head/mole/apply_components()
 	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
 
+/obj/item/natural/head/corpse_gator
+	name = "fog gator head"
+	desc = "A trophy of victory over the corpse gator, plucked from the sinews of its neck. The eyes still seem to flicker ominously."
+	icon_state = "dragonhead"
+	grid_height = 96
+	grid_width = 96
+	sellprice = 112
+	blood_value = BLOOD_VOLUME_SAFE
+	item_weight = 3 KILOGRAMS
+
+/obj/item/natural/head/corpse_gator/apply_components()
+	AddComponent(/datum/component/two_handed, require_twohands=TRUE)
+
 /obj/item/natural/head/gote
 	name = "gote head"
 	desc = "The severed head of a fiery gote."
