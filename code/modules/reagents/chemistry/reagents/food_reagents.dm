@@ -16,6 +16,17 @@
 	var/hydration_factor = 0
 	var/quality = 0	//affects mood, typically higher for mixed drinks with more complex recipes
 
+/datum/reagent/proc/apply_data_buffs(mob/living/eater)
+	var/list/buffs = data?["ingredient_buffs"]
+	if(!length(buffs))
+		return
+	for(var/datum/ingredient_buff/buff as anything in buffs)
+		buff.apply_to(eater)
+
+/datum/reagent/consumable/on_mob_metabolize(mob/living/L)
+	. = ..()
+	apply_data_buffs(L)
+
 /datum/reagent/consumable/on_mob_life(mob/living/carbon/M, efficiency)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
