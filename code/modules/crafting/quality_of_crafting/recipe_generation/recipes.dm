@@ -871,3 +871,32 @@
 	data["required_skill"] = required_skill
 
 	return data
+
+/datum/ritual/return_recipe_data()
+	var/list/data = list()
+	data["type"] = "zizo_ritual"
+	data["name"] = name
+	data["category"] = is_cultist_ritual ? "Zizo's Chosen" : "Magick Forbidden"
+	data["description"] = description
+	data["is_cultist_ritual"] = is_cultist_ritual
+	data["descrequiment"] = descrequiment
+
+	// Ingredients — unordered item typepaths
+	var/list/ing_list = list()
+	for(var/item_type in ingredients)
+		ing_list += list(list(
+			"name" = initial(item_type:name),
+			"icon" = "[initial(item_type:icon)]",
+			"icon_state" = "[initial(item_type:icon_state)]",
+			"_path" = "[item_type]"
+		))
+	data["ingredients"] = ing_list
+
+	// Output item
+	data["output_name"] = initial(output:name)
+	data["output_icon"] = "[initial(output:icon)]"
+	data["output_state"] = "[initial(output:icon_state)]"
+	data["_output_path"] = "[output]"
+
+	return data
+

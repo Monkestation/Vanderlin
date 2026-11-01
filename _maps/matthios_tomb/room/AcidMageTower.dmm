@@ -1,7 +1,6 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "at" = (
 /obj/item/alch/runedust,
-/obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "aA" = (
@@ -36,7 +35,6 @@
 /obj/effect/decal/cleanable/blood/puddle,
 /obj/effect/decal/cleanable/blood/old,
 /obj/item/rope/chain,
-/obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "bY" = (
@@ -116,7 +114,6 @@
 /area/under/tomb/cave/wet)
 "fm" = (
 /obj/effect/decal/cleanable/vomit,
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "fx" = (
@@ -287,7 +284,6 @@
 /area/under/tomb/indoors/magic)
 "mF" = (
 /obj/item/chair/chair_nobles/red,
-/obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "mG" = (
@@ -332,7 +328,6 @@
 "on" = (
 /mob/living/simple_animal/hostile/retaliate/blood,
 /obj/effect/decal/cleanable/vomit,
-/obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "op" = (
@@ -733,7 +728,6 @@
 /area/under/tomb/indoors/magic)
 "BC" = (
 /obj/effect/decal/cleanable/vomit,
-/obj/effect/decal/cleanable/sigil/N,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "BN" = (
@@ -852,7 +846,6 @@
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "Fr" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "FM" = (
@@ -1369,7 +1362,7 @@
 /area/under/tomb/indoors/magic)
 "Yt" = (
 /obj/effect/decal/cleanable/vomit,
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/structure/fluff/statue/necra,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
