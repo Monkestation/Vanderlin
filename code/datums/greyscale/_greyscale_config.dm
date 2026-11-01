@@ -71,6 +71,35 @@
 		return QDEL_HINT_LETMELIVE
 	return ..()
 
+/datum/greyscale_config/process(seconds_per_tick)
+	if(!Refresh(loadFromDisk=TRUE))
+		return
+	if(!live_edit_types)
+		return
+	for(var/atom/thing in world)
+		if(live_edit_types[thing.type])
+			thing.update_greyscale()
+
+/datum/greyscale_config/proc/EnableAutoRefresh(live_type)
+	message_admins("Config auto refresh has been enabled for '[live_type]' with configuration [DebugName()]. Expect heavy lag.")
+	if(live_type)
+		if(!live_edit_types)
+			live_edit_types = list()
+		live_edit_types += typecacheof(live_type)
+	START_PROCESSING(SSgreyscale, src)
+
+/datum/greyscale_config/proc/DisableAutoRefresh(live_type, remove_all=FALSE)
+	if(!remove_all && !(live_type in live_edit_types))
+		return
+	message_admins("Config auto refresh has been disabled for '[live_type]' with configuration [DebugName()]")
+	if(remove_all)
+		live_edit_types = null
+	else if(live_type && live_edit_types)
+		live_edit_types -= typecacheof(live_type)
+	if(!length(live_edit_types))
+		live_edit_types = null
+		STOP_PROCESSING(SSgreyscale, src)
+
 /// Call this proc to handle all the data extraction from the json configuration. Can be forced to load values from disk instead of memory.
 /datum/greyscale_config/proc/Refresh(loadFromDisk=FALSE)
 	if(loadFromDisk)
@@ -105,6 +134,8 @@
 	icon_cache = list()
 
 	ReadMetadata()
+
+	SEND_SIGNAL(src, COMSIG_GREYSCALE_CONFIG_REFRESHED)
 
 	return TRUE
 

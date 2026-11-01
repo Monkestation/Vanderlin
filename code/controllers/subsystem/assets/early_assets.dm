@@ -21,5 +21,4 @@ SUBSYSTEM_DEF(early_assets)
 			stack_trace("Could not initialize early asset [asset_type]!")
 
 		CHECK_TICK
-
 	return ..()
