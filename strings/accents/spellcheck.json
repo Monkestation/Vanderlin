@@ -31,6 +31,13 @@
 		"youre ": "you're ",
 		"Youre ": "You're ",
 		"theyre": "they're"
+		".\": ".",
+		"?\": "?",
+		"!\": "!",
+		//It's easy to accidentally type a backslash before pressure enter during stressful moments.
+		"\\": "!!",
+		"||": "!!"
+		//Makes it easier to shout things under pressure. "Get them\\" and "HELP||" are much faster to type than "Get them!" and "Help!"
 		}
 	
 	
