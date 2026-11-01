@@ -61,7 +61,8 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
-		TRAIT_SEEDKNOW
+		TRAIT_SEEDKNOW,
+		TRAIT_INGREDIENT_INSIGHT
 	)
 	book_type = /obj/item/recipe_book/agriculture
 
@@ -147,7 +148,8 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
-		TRAIT_SEEDKNOW
+		TRAIT_SEEDKNOW,
+		TRAIT_INGREDIENT_INSIGHT
 	)
 
 /datum/outfit/soilchild
