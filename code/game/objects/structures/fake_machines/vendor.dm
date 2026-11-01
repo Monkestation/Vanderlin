@@ -270,10 +270,21 @@
 
 /obj/structure/fake_machine/vendor/inn/Initialize()
 	. = ..()
-	var/obj/I = new /obj/item/key/medroomi(src)
-	held_items[I] = list()
-	held_items[I]["NAME"] = I.name
-	held_items[I]["PRICE"] = 20
+	for(var/X in list(/obj/item/key/medroomi, /obj/item/key/medroomii, /obj/item/key/medroomiii, /obj/item/key/medroomiv))
+		var/obj/I = new X(src)
+		held_items[I] = list()
+		held_items[I]["NAME"] = I.name
+		held_items[I]["PRICE"] = 20
+	for(var/X in list(/obj/item/key/luxroomi, /obj/item/key/luxroomii, /obj/item/key/luxroomiii, /obj/item/key/luxroomiv))
+		var/obj/I = new X(src)
+		held_items[I] = list()
+		held_items[I]["NAME"] = I.name
+		held_items[I]["PRICE"] = 40
+	for(var/X in list(/obj/item/key/roomhunt))
+		var/obj/I = new X(src)
+		held_items[I] = list()
+		held_items[I]["NAME"] = I.name
+		held_items[I]["PRICE"] = 120
 
 /obj/structure/fake_machine/vendor/voyage
 	lockids = list(ACCESS_INN)
