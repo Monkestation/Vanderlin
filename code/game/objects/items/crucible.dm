@@ -5,7 +5,7 @@
 
 	icon = 'icons/roguetown/weapons/crucible.dmi'
 	icon_state = "crucible"
-	component_type = /datum/component/storage/concrete/grid/crucible
+	component_type = /datum/component/storage/concrete/sack/grid/crucible
 	grid_width = 64
 	grid_height = 96
 

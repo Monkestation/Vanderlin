@@ -129,7 +129,7 @@
 		return
 	if(user.cmode)
 		return
-	var/turf/T = get_turf(user)
+	var/turf/T = get_turf(src)
 	if(isturf(T))
 		user.changeNext_move(CLICK_CD_MELEE)
 
@@ -139,14 +139,12 @@
 			for(var/obj/item/I as anything in ore_list)
 				if(!interruptable_put(user, I))
 					return
-			return
 
 		var/list/wood_list = sieve_wood(user, T)
 		if(LAZYLEN(wood_list))
 			for(var/obj/item/I as anything in wood_list)
 				if(!interruptable_put(user, I))
 					return
-			return
 
 		for(var/obj/item/I in T)
 			if(!interruptable_put(user, I))

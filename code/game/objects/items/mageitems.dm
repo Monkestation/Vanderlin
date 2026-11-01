@@ -9,7 +9,7 @@
 	resistance_flags = NONE
 	max_integrity = 300
 	item_weight = 150 GRAMS
-	component_type = /datum/component/storage/concrete/grid/magebag
+	component_type = /datum/component/storage/concrete/grid/sack/magebag
 	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/storage/magebag/examine(mob/user)
