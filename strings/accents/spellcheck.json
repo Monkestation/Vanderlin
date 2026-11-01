@@ -16,12 +16,14 @@
 		" i'll ": " I'll ",
 		"isnt ": "isn't ",
 		"Isnt ": "Isn't ",
-		" cant ": " can't ",
-		"Cant ": "Can't ",
+		//" cant ": " can't ",
+		//"Cant ": "Can't ",
+		//"Cant" is a real word.
 		"dont ": "don't ",
 		"Dont ": "Don't ",
-		"wont ": "won't ",
-		"Wont ": "Won't ",
+		//"wont ": "won't ",
+		//"Wont ": "Won't ",
+		//"Wont" is also a real word.
 		" arent ": " aren't ",
 		"Arent ": "Aren't ",
 		"shouldnt ": "shouldn't ",
