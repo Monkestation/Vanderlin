@@ -270,7 +270,6 @@
 	max_spawns = 1
 	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
 	weight = 25
-	downgrade_wave = /datum/migrant_wave/grenzelhoft_visit_down
 	roles = list(
 		/datum/migrant_role/grenzelhoft_count = 1,
 		/datum/migrant_role/grenzelhoft_countess = 1,
@@ -278,13 +277,3 @@
 		/datum/migrant_role/grenzelhoft_man_at_arms = 2)
 	greet_text = "The council of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."
 
-/datum/migrant_wave/grenzelhoft_visit_down
-	name = "The Grenzelhoft visit"
-	max_spawns = 1
-	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/grenzelhoft_count = 1,
-		/datum/migrant_role/grenzelhoft_countess = 1,
-		/datum/migrant_role/grenzelhoft_knight = 1)
-	greet_text = "The council of the Grenzelhoft Imperiate has sent a diplomatic envoy to engage into diplomacy within the Kingdom of Vanderlin."

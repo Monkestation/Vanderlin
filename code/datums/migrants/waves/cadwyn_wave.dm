@@ -220,7 +220,6 @@
 /datum/migrant_wave/cadwyncrusade
 	name = "The Cadwyn Order Crusade"
 	shared_wave_type = /datum/migrant_wave/cadwyncrusade
-	downgrade_wave = /datum/migrant_wave/cadwyncrusade_down_one
 	weight = 5
 	max_spawns = 1
 	roles = list(
@@ -228,23 +227,3 @@
 		/datum/migrant_role/cadwynsentinel = 2
 	)
 	greet_text = "The influence of Z grows by the dae and more and more people fall victim to their foul deeds. The Cadwyn Order of Valoria has dispatched you and your brethren to quell these threats and recruit more members to the Order."
-
-/datum/migrant_wave/cadwyncrusade_down_one
-	name = "The Cadwyn Order Crusade"
-	shared_wave_type = /datum/migrant_wave/cadwyncrusade
-	downgrade_wave = /datum/migrant_wave/cadwyncrusade_down_two
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/cadwyncrusader = 1,
-		/datum/migrant_role/cadwynsentinel = 1
-	)
-	greet_text = "The influence of Z grows by the dae and more and more people fall victim to their foul deeds. The Cadwyn Order of Valoria has dispatched you and one other to quell these threats and recruit more members to the Order."
-
-/datum/migrant_wave/cadwyncrusade_down_two
-	name = "The Lone Cadwyn Order Crusader"
-	shared_wave_type = /datum/migrant_wave/cadwyncrusade
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/cadwyncrusader = 1
-	)
-	greet_text = "The influence of Z grows by the dae and more and more people fall victim to their foul deeds. The Cadwyn Order of Valoria cannot spare many members to assist in quelling the threat of Z outside of its own borders, so you have been sent alone to help the local clergy and perhaps recruit more able bodies to the Order"
