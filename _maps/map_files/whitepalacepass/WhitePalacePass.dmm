@@ -11963,8 +11963,8 @@
 "hgY" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/clothing/head/sack,
-/obj/item/clothing/head/sack,
+/obj/item/clothing/head/inqarticles/blackbag/civilian,
+/obj/item/clothing/head/inqarticles/blackbag/civilian,
 /obj/item/clothing/cloak/raincloak/colored/mortus{
 	name = "cloak"
 	},
