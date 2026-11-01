@@ -1,0 +1,28 @@
+{
+	"map_name": "Wilderness",
+	"map_path": "map_files/wilderness",
+	"map_file": "wildermiddletest.dmm",
+	"traits": [
+		{
+			"Up": true,
+			"Turf Weather Effects": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Down": true,
+			"Turf Weather Effects": true,
+            "Leylines": true
+		}
+	]
+}
