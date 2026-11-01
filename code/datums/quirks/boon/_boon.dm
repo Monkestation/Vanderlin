@@ -288,3 +288,27 @@
 		return
 
 	to_chat(owner, span_notice("You catch your reflection and can't help but admire yourself."))
+
+/datum/quirk/boon/beautiful/on_remove()
+	. = ..()
+	if(!owner)
+		return
+	REMOVE_TRAIT(owner, TRAIT_BEAUTIFUL, "[type]")
+
+/datum/quirk/boon/cultural_scholar
+	name = "Cultural Erudite"
+	desc = "Whether through long travels, extended scholarship, or osmosis, you've acquired deep knowledge of other culture and how they think. \
+	When examining items, you may consult cultural lore blurbs for cultures that aren't your own."
+	point_value = -1
+
+/datum/quirk/boon/cultural_scholar/on_spawn()
+	. = ..()
+	if(!owner)
+		return
+	ADD_TRAIT(owner, TRAIT_CULTURAL_KNOWLEDGE, "[type]")
+
+/datum/quirk/boon/cultural_scholar/on_remove()
+	. = ..()
+	if(!owner)
+		return
+	REMOVE_TRAIT(owner, TRAIT_CULTURAL_KNOWLEDGE, "[type]")
