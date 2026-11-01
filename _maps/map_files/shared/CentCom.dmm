@@ -101,9 +101,9 @@
 /turf/open/floor/grass/yel,
 /area/outdoors/admin_test)
 "as" = (
-/obj/item/weapon/axe/copper,
-/obj/item/weapon/axe/copper,
-/obj/item/weapon/axe/copper,
+/obj/item/weapon/axe/hatchet/copper,
+/obj/item/weapon/axe/hatchet/copper,
+/obj/item/weapon/axe/hatchet/copper,
 /obj/structure/table/wood/large/corner_new{
 	dir = 1
 	},

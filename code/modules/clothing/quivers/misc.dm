@@ -10,6 +10,12 @@
 /obj/item/ammo_holder/quiver/arrows
 	fill_type = /obj/item/ammo_casing/caseless/arrow
 
+/obj/item/ammo_holder/quiver/arrows/bonearrow
+	fill_type = /obj/item/ammo_casing/caseless/arrow/bone
+
+/obj/item/ammo_holder/quiver/arrows/broadhead
+	fill_type = /obj/item/ammo_casing/caseless/arrow/broadhead
+
 /obj/item/ammo_holder/quiver/arrows/water
 	fill_type = /obj/item/ammo_casing/caseless/arrow/water
 	fill_to = 10
@@ -33,6 +39,11 @@
 	fill_type = /obj/item/ammo_casing/caseless/bolt/holy
 	fill_to = 10
 
+/obj/item/ammo_holder/quiver/bolt/bonesinew
+	fill_type = /obj/item/ammo_casing/caseless/bolt/bonesinew
+
+/obj/item/ammo_holder/quiver/bolt/broadhead
+	fill_type = /obj/item/ammo_casing/caseless/bolt/broadhead
 
 /obj/item/ammo_holder/quiver/bolts/pyro
 	fill_type = /obj/item/ammo_casing/caseless/bolt/pyro

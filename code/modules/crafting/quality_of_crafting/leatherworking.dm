@@ -775,17 +775,30 @@
 /datum/repeatable_crafting_recipe/leather/forrestercloak
 	name = "forrester cloak"
 	output = /obj/item/clothing/cloak/forrestercloak
-	requirements = list(/obj/item/natural/silk = 1,
+	requirements = list(/obj/item/natural/fibers/sinew = 1,
+				/obj/item/natural/fur = 1,
 				/obj/item/natural/hide/cured = 2)
-	craftdiff = 4
+	craftdiff = 3
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/leather/forrestercloak_snow
 	name = "forrester cloak (snow)"
 	output = /obj/item/clothing/cloak/forrestercloak/snow
-	requirements = list(/obj/item/natural/silk = 1,
+	requirements = list(/obj/item/natural/fibers/sinew = 1,
+				/obj/item/natural/fur = 1,
 				/obj/item/natural/hide/cured = 2)
-	craftdiff = 4
+	craftdiff = 3
+	category = "Cloak"
+
+/datum/repeatable_crafting_recipe/leather/huntercloak_bush
+	name = "bush cloak"
+	output = /obj/item/clothing/cloak/raincloak/bush
+	requirements = list(/obj/item/natural/fibers/sinew = 1,
+				/obj/item/natural/fur = 1,
+				/obj/item/natural/hide/cured = 2,
+				/obj/item/alch/tobaccodust
+				)
+	craftdiff = 3
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/leather/wardencloak
@@ -793,7 +806,7 @@
 	output = /obj/item/clothing/cloak/wardencloak
 	requirements = list(/obj/item/natural/silk = 2,
 				/obj/item/natural/hide/cured = 2)
-	craftdiff = 5
+	craftdiff = 4
 	category = "Cloak"
 
 /datum/repeatable_crafting_recipe/leather/red_cloak
