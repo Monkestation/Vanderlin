@@ -37,3 +37,16 @@ GLOBAL_LIST_INIT(accent_list, list(
 	ACCENT_OSSLAND = strings("accents/ossland_replacement.json", "ossland"),
 	ACCENT_ROCKHILL = strings("accents/rockhill_replacement.json", "rockhill"),
 ))
+
+// exists to help with finding out what language should not apply the accent
+GLOBAL_LIST_INIT(accent_languages_blacklist, list(
+	ACCENT_DWARF = /datum/language/dwarvish,
+	ACCENT_DELF = /datum/language/elvish,
+	ACCENT_ELF = /datum/language/elvish,
+	ACCENT_TIEFLING = /datum/language/hellspeak,
+	ACCENT_HORC = /datum/language/orcish,
+	ACCENT_TRITON = /datum/language/deepspeak,
+	ACCENT_GRENZ = list(/datum/language/newpsydonic, /datum/language/oldpsydonic),
+	ACCENT_ZALAD = /datum/language/zalad,
+	ACCENT_WINTERMARE = /datum/language/elvish
+))
