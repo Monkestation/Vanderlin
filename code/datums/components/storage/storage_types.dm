@@ -39,7 +39,7 @@
 
 /datum/component/storage/concrete/scabbard/sword/New(list/raw_args)
 	. = ..()
-	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword, /obj/item/weapon/sword/katana, /obj/item/weapon/sword/long/daewalker, /obj/item/weapon/sword/long/silver/nitewalker))
+	set_holdable(list(/obj/item/weapon/sword), list(/obj/item/weapon/sword/long/exe, /obj/item/weapon/sword/long/greatsword, /obj/item/weapon/sword/katana, /obj/item/weapon/sword/long/daewalker, /obj/item/weapon/sword/long/silver/nitewarden))
 
 /datum/component/storage/concrete/scabbard/blackmeadow/New(list/raw_args)
 	. = ..()

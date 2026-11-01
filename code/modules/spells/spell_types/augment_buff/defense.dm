@@ -8,6 +8,7 @@
 
 	invocation = "Resta!"
 	required_form = FORM_LIFE
+	associated_skill = /datum/attribute/skill/magic/arcane/life
 	invocation_type = INVOCATION_SHOUT
 
 	charge_required = FALSE
