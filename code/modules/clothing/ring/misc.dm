@@ -467,11 +467,16 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(!length(GLOB.agent_rings))
 		return
-	var/list/possible_targets = list("EVERYONE")
+	var/list/possible_targets = list()
 	for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
 		if(ring.user_mob == user)
 			continue
 		possible_targets += ring.user_mob.real_name
+
+	if(!possible_targets.len)
+		to_chat(user, span_warning("There is no one to send a message to."))
+		return
+	possible_targets += "EVERYONE"
 
 	var/chosen_target = tgui_input_list(user, "Who do you wish to contact?", "Contact Target", possible_targets, timeout = 20 SECONDS)
 	if(!chosen_target)

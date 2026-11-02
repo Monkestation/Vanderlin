@@ -16357,6 +16357,11 @@
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/churchrough/pale,
 /area/outdoors/town)
+"WN" = (
+/obj/effect/mapping_helpers/access/keyset/garrison/general,
+/obj/structure/closet/crate/chest/neu_iron,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/garrison)
 "WO" = (
 /obj/structure/dye_bin/luxury{
 	pixel_x = 5;
@@ -38033,7 +38038,7 @@ uE
 ZX
 pl
 uE
-uE
+WN
 Cx
 Cx
 Cx

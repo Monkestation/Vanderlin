@@ -6,7 +6,7 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CONSORT
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 	total_positions = 0
 	spawn_positions = 1
 
@@ -74,7 +74,7 @@
 /datum/job/advclass/consort
 	inherit_parent_title = TRUE
 	exp_types_granted = list(EXP_TYPE_NOBLE)
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 
 /datum/attribute_holder/sheet/job/highborn
 	raw_attribute_list = list(
@@ -206,6 +206,7 @@
 	shirt = /obj/item/clothing/armor/gambeson/heavy/winterdress
 	armor = /obj/item/clothing/armor/leather/vest/winterjacket
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
+	wrists = /obj/item/weapon/scabbard/knife/hidden/bs_misericorde
 
 /datum/outfit/consort/courtesan/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
@@ -359,7 +360,7 @@
 /datum/job/exlady //just used to change the consort title
 	title = "Ex-Consort"
 	department_flag = NOBLEMEN
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_CONSORT

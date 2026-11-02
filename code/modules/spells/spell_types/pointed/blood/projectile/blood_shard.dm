@@ -13,7 +13,7 @@
 	heretical_spell = TRUE
 	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 
-	invocation = "CAEDIS FRAGMENTUM!!!"
+	invocation = "Caedis Fragmentum!"
 	invocation_type = INVOCATION_SHOUT
 
 	charge_time = 1 SECONDS
