@@ -1,0 +1,5 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - bugfix: "Crucible having wrong grid"
+  - rscadd: "Crucibles can pick up items off the ground"
