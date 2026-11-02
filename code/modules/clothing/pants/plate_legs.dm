@@ -18,6 +18,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	melting_material = /datum/material/steel
 	melt_amount = 100
+	smeltresult = null
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
 	clothing_flags = CANT_SLEEP_IN
@@ -40,7 +41,7 @@
 	desc = "Cuisses made of plated iron, offering additional protection against blunt force."
 	icon_state = "iplate_legs"
 	item_state = "iplate_legs"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/pants/plate/bad
 	max_integrity = INTEGRITY_OLD_STRONG
