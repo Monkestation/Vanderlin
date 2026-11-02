@@ -180,12 +180,12 @@
 		typecacheof(list(/obj/item/reagent_containers/food/snacks/egg)
 	))
 
-/datum/component/storage/concrete/grid/magebag
+/datum/component/storage/concrete/grid/sack/magebag
 	max_w_class = WEIGHT_CLASS_NORMAL
 	screen_max_rows = 8
 	screen_max_columns = 5
 
-/datum/component/storage/concrete/grid/magebag/New(datum/P, ...)
+/datum/component/storage/concrete/grid/sack/magebag/New(datum/P, ...)
 	. = ..()
 	set_holdable(list(
 		/obj/item/natural/infernalash,
@@ -255,14 +255,14 @@
 		typecacheof(list(/obj/item/ore, /obj/item/gem, /obj/item/reagent_containers/powder/salt, /obj/item/mana_battery/mana_crystal/standard))
 		)
 
-/datum/component/storage/concrete/grid/crucible
+/datum/component/storage/concrete/sack/grid/crucible
 	screen_max_rows = 5
 	screen_max_columns = 5
 	max_w_class = WEIGHT_CLASS_HUGE
 	not_while_equipped = TRUE
 	allow_big_nesting = TRUE
 
-/datum/component/storage/concrete/grid/crucible/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, list/modifiers, storage_click)
+/datum/component/storage/concrete/sack/grid/crucible/can_be_inserted(obj/item/storing, stop_messages, mob/user, worn_check, list/modifiers, storage_click)
 	if(!storing.melting_material)
 		var/obj/item/ingot/ingot = storing.smeltresult
 		if(!ispath(ingot, /obj/item/ingot))

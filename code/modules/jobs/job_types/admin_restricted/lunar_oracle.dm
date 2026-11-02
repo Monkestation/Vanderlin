@@ -49,7 +49,7 @@
 	Guide and educate the faithful. \
 	You are the light in the night, watcher of dreams."
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_CHURCH, SUB_FACTION_LUNAR_ORDER)
 
 	cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
@@ -139,6 +139,7 @@
 		/obj/item/needle/blessed = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1
 	)
+	l_hand = /obj/item/weapon/polearm/woodstaff/oracle
 
 /datum/action/oracle_announce
 	name = "Invoke Lunar Authority"

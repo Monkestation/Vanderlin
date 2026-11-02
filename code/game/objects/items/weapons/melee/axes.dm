@@ -224,8 +224,8 @@
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(AXE_CUT, PICK_INTENT)
-	gripped_intents = list(AXE_CUT, AXE_CHOP)
+	possible_item_intents = list(PICK_INTENT, AXE_CUT)
+	gripped_intents = list(PICK_INTENT, AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_STEEL
 
@@ -593,6 +593,13 @@
 	item_weight = 2 KILOGRAMS
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
+
+/obj/item/weapon/greataxe/truesilver
+	name = "truesilver greataxe"
+	desc = "A grand display of power and loyalty, this greataxe is forged of truesilver and sends nite creachers of all kinds to Necra's embrace one piece at a time."
+	icon_state = "lunar_greataxe"
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/greataxe/blacksteel
 	name = "blacksteel greataxe"

@@ -1,0 +1,4 @@
+author: "Sulaboy"
+delete-after: True
+changes:
+  - balance: "Pickaxes scale off axes/maces for combat instead of mining.  Tweaked pickAXE intents."
