@@ -324,6 +324,7 @@
 	melting_material = /datum/material/steel
 	sellprice = M_STEEL
 	item_weight = 5 KILOGRAMS
+	misc_flags = SMELTING_TEST_EXCLUDE
 
 /obj/item/ingot/steelholy
 	name = "holy steel bar"

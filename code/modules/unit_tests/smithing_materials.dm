@@ -5,6 +5,8 @@
 		if(!ispath(bar_type))
 			continue
 		var/obj/item/created_item = recipe::created_item
+		if(created_item::misc_flags & SMELTING_TEST_EXCLUDE)
+			continue
 		var/datum/material/item_material = created_item::melting_material
 		if(!item_material)
 			// This is because some things like spears don't give anything back intentionally
