@@ -153,21 +153,26 @@
 	return
 
 /datum/outfit/nitewarden
-	mask = /obj/item/clothing/face/shepherd/shadowmask
+	mask = /obj/item/clothing/face/shepherd/clothmask/colored/black
 	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
-	cloak = /obj/item/clothing/cloak/raincloak/furcloak
-	shirt = /obj/item/clothing/shirt/undershirt/formal
-	pants = /obj/item/clothing/pants/trou/formal
-	shoes = /obj/item/clothing/shoes/boots/hunter
+	cloak = /obj/item/clothing/cloak/rosa
+	armor = /obj/item/clothing/armor/leather/jacket/rosa
+	shirt = /obj/item/clothing/shirt/vampire
+	pants = /obj/item/clothing/pants/tights/colored/black
+	shoes = /obj/item/clothing/shoes/boots/rosa/seven
 	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
-	gloves = /obj/item/clothing/gloves/leather
+	gloves = /obj/item/clothing/gloves/leather/rosa/seven
 	ring =  /obj/item/clothing/ring/nitewarden
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/scabbard/sword/noble
 	backl = /obj/item/storage/backpack/satchel/black
 	r_hand = /obj/item/weapon/sword/long/silver/truesilver/nitewarden
 	l_hand = /obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden
-	backpack_contents = list(/obj/item/needle/blessed = 1)
+	backpack_contents = list(
+		/obj/item/needle/blessed = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
+		/obj/item/weapon/knife/throwingknife/silver/truesilver = 1
+	)
 
 /datum/outfit/nitewarden/post_equip(mob/living/carbon/human/H)
 	..()
