@@ -761,6 +761,7 @@
 
 /obj/item/clothing/head/helmet/blacksteel
 	abstract_type = /obj/item/clothing/head/helmet/blacksteel
+	melting_material = /datum/material/blacksteel
 
 /obj/item/clothing/head/helmet/blacksteel/bucket
 	name = "Blacksteel Great Helm"
@@ -777,7 +778,6 @@
 	block2add = FOV_BEHIND
 	max_integrity = 425
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	melting_material = /datum/material/blacksteel
 	item_weight = 4.5 KILOGRAMS
 	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 

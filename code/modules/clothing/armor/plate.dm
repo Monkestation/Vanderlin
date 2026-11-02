@@ -154,7 +154,7 @@
 	armor_type = /datum/armor/plate/blacksteel
 	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	item_weight = 8 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 6
 	stand_speed_reduction = 1.05

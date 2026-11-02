@@ -312,7 +312,6 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	force = DAMAGE_SPEARPLUS + 2
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/silver
 	melt_amount = null
 	melting_material = null
 	sellprice = 60
@@ -609,7 +608,6 @@
 	force_wielded = DAMAGE_HALBERD_WIELD
 	wbalance = EASY_TO_DODGE
 	max_blade_int = 300
-	smeltresult = null
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 120
@@ -667,7 +665,6 @@
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_HALBERD_WIELD + 2
 	max_blade_int = 450
-	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 200
 	sellprice = 250
@@ -732,7 +729,6 @@
 
 	swingsound = BLADEWOOSH_MED
 	axe_cut = 10
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	melt_amount = 140
 	sellprice = 30
@@ -755,7 +751,6 @@
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	associated_skill = /datum/attribute/skill/combat/axesmaces //It's ultimately a massive axe
 	axe_cut = 15
-	smeltresult = null
 	melt_amount = 75
 	sellprice = 20
 	item_weight = 2 KILOGRAMS
@@ -783,7 +778,6 @@
 	minstr = 9
 
 	axe_cut = 15
-	smeltresult = /obj/item/ingot/steel
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 50
@@ -914,7 +908,6 @@
 	force_wielded = DAMAGE_HALBERD_WIELD -3
 	wbalance = VERY_EASY_TO_DODGE
 	wdefense = AVERAGE_PARRY
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	melt_amount = 150
 	sellprice = 40
@@ -927,7 +920,7 @@
 	desc = "A humble spear with a bronze head, a rare survivor from the battles long past that nearly destroyed Psydonia."
 	icon_state = "bronzespear"
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	sellprice = 120 // A noble collector would love to get his/her hands on one of these spears
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BRONZE
@@ -982,7 +975,7 @@
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = 10
 	item_weight = 1.1 KILOGRAMS
 
@@ -1006,7 +999,6 @@
 	bigboy = TRUE
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	smeltresult = null
 	melting_material = null
 	melt_amount = 0
 	item_weight = 0.9 KILOGRAMS
@@ -1028,7 +1020,6 @@
 	bigboy = TRUE
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	smeltresult = null
 	melting_material = null
 	melt_amount = 0
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_IMPROV * INTEGRITY_SPECIAL_BONUS
