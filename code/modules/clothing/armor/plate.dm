@@ -81,6 +81,7 @@
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_FULL
 	item_weight = 15 KILOGRAMS
+	melt_amount = 150
 
 
 /obj/item/clothing/armor/plate/full/samsibsa
@@ -283,7 +284,7 @@
 	icon_state = "silverarmor"
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/plate/silver
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 15 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 3
 

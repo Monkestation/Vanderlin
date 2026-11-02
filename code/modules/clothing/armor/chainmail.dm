@@ -26,7 +26,7 @@
 	desc = "Made out of interlocked iron rings. Offers good resistance against arrows, stabs and cuts. \nUsually worn as padding for proper armor."
 	icon_state = "ihaubergeon"
 	item_state = "ihaubergeon"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR
 
 	armor_type = /datum/armor/maille/iron
@@ -71,7 +71,7 @@
 	icon_state = "ihauberk"
 	item_state = "ihauberk"
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/maille/iron
 	max_integrity = INTEGRITY_OLD_STRONG

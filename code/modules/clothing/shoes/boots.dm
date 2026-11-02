@@ -46,7 +46,9 @@
 	item_weight = 2.1 KILOGRAMS
 
 	material_category = ARMOR_MAT_PLATE
+	smeltresult = null
 	melting_material = /datum/material/steel
+	melt_amount = 100
 
 /obj/item/clothing/shoes/boots/armor/gold
 	name = "golden greaves"
@@ -94,7 +96,6 @@
 	armor_class = AC_LIGHT
 	sellprice = VALUE_IRON_ARMOR
 	item_weight = 1 KILOGRAMS
-	smeltresult = null
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
 	melt_amount = 50
 
@@ -276,7 +277,7 @@
 	desc = "Finely forged boots made out of silver."
 	icon_state = "silverboots"
 	armor_type = /datum/armor/boots/plate/silver
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 3.4 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
 

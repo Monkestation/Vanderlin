@@ -69,6 +69,7 @@
 
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
+	smeltresult = null
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -277,7 +278,6 @@
 	force_wielded = DAMAGE_HEAVYAXE_WIELD + 2
 	max_blade_int = 330
 	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_BLACKSTEEL
-	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 200
 	sellprice = 90
@@ -304,7 +304,6 @@
 	force_wielded = DAMAGE_HEAVYAXE_WIELD + 2
 	max_blade_int = 330
 	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_BLOODSTEEL
-	smeltresult = null
 	melting_material = /datum/material/bloodsteel
 	melt_amount = 200
 	sellprice = 0
@@ -321,7 +320,7 @@
 	icon_state = "silveraxe"
 	max_blade_int = 200
 	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	resistance_flags = FIRE_PROOF
 	sellprice = 80
 	axe_cut = 13
@@ -408,7 +407,6 @@
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 100
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_COPPER
-	smeltresult = /obj/item/ingot/copper
 	melting_material = /datum/material/copper
 	melt_amount = 150
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'

@@ -133,7 +133,7 @@
 	icon_state = "silverlegs"
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/pants/plate/silver
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 3.95 KILOGRAMS
 	sellprice = VALUE_SILVER_ARMOR
 
