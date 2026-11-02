@@ -25,7 +25,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/lava)
 "aI" = (
-/turf/open/lava/acid,
+/turf/open/water/acid,
 /area/under/tomb/cave/lava)
 "aS" = (
 /obj/effect/dungeon_directional_helper/south,
@@ -102,9 +102,9 @@
 /area/under/tomb/cave/lava)
 "uy" = (
 /obj/structure/fluff/wallclock,
-/obj/item/flashlight/flare/torch/lantern/copper,
 /obj/structure/closet/crate/chest,
 /obj/effect/mapping_helpers/access/locker,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors)
 "uR" = (
@@ -136,6 +136,24 @@
 "wo" = (
 /obj/item/fishingrod,
 /turf/open/floor/volcanic,
+/area/under/tomb/cave/lava)
+"yq" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_strength = 12;
+	base_speed = 15;
+	base_constitution = 14;
+	base_endurance = 14;
+	base_fortune = 10;
+	candodge = 0;
+	real_name = "The Entertainer"
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/head/jester,
+/obj/item/clothing/pants/tights/colored/jester,
+/obj/item/clothing/shirt/jester,
+/obj/item/clothing/shoes/jester,
+/obj/item/weapon/knife/dagger/steel/jile,
+/turf/open/floor/metal/barograte,
 /area/under/tomb/cave/lava)
 "zY" = (
 /obj/structure/ladder,
@@ -853,7 +871,7 @@ uV
 Ar
 so
 oB
-rg
+yq
 nC
 rg
 Ar
