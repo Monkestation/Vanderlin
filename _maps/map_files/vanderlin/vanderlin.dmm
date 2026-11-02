@@ -37187,6 +37187,12 @@
 	},
 /turf/open/floor/blocks,
 /area/indoors/town/keep/passages/firstfloor)
+"pcl" = (
+/obj/structure/fluff/signage{
+	name = "Mines of Vanderlin"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/basin/safe)
 "pco" = (
 /turf/closed/wall/mineral/roofwall/outercorner{
 	dir = 1
@@ -131113,7 +131119,7 @@ qFx
 qFx
 qFx
 kKE
-oJp
+pcl
 rvF
 rvF
 oLF
