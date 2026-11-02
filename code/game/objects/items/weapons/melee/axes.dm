@@ -23,6 +23,7 @@
 	grid_width = 32
 
 	weapon_special = /datum/special_intent/axe_swing
+	melting_material = /datum/material/iron
 	item_weight = 1.5 KILOGRAMS
 
 //................ Stone Axe ............... //
@@ -68,7 +69,6 @@
 
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -106,7 +106,6 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_IRON
 
-	smeltresult = /obj/item/ingot/iron
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
@@ -162,7 +161,7 @@
 	max_blade_int = 150
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_BRONZE
 
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
@@ -191,6 +190,7 @@
 
 	resistance_flags = FIRE_PROOF //So the blessing doesn't fuck up
 	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
@@ -251,7 +251,7 @@
 	icon_state = "saxe"
 	max_blade_int = 300
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_STEEL
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	resistance_flags = FIRE_PROOF
 	sellprice = 35
 	axe_cut = 15 // Better than iron
@@ -552,7 +552,6 @@
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	max_blade_int = 300
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_STEEL
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 90

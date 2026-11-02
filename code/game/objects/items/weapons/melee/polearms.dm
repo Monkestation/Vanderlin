@@ -582,7 +582,6 @@
 
 	slot_flags = ITEM_SLOT_BACK
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 90

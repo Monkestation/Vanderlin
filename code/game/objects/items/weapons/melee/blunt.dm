@@ -23,7 +23,8 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/attribute/skill/combat/axesmaces
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
 	sellprice = 20
@@ -67,7 +68,6 @@
 	icon_state = "shishpar_iron"
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 2
-	smeltresult = /obj/item/ingot/iron
 	melt_amount = 150
 	sellprice = 35
 	item_weight = 1.8 KILOGRAMS
@@ -132,7 +132,7 @@
 	force_wielded = DAMAGE_MACE - 1
 	sellprice = 35
 	item_weight = 600 GRAMS
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 /obj/item/weapon/mace/cane/necran
 	name = "necran rod"
@@ -211,7 +211,7 @@
 	force = DAMAGE_MACE + 3
 	force_wielded = DAMAGE_MACE_WIELD + 3
 	wdefense = GOOD_PARRY
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	sellprice = 100
 	item_weight = 1.8 KILOGRAMS
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL
@@ -226,7 +226,6 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
