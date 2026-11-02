@@ -8847,11 +8847,6 @@
 "GW" = (
 /turf/open/floor/church,
 /area/indoors/town/church/chapel)
-"GX" = (
-/obj/structure/dungeon_entry/center/vanderlin,
-/obj/effect/decal/woodpath,
-/turf/open/floor/grass/red,
-/area/under/town/basement)
 "GY" = (
 /obj/structure/train/carriage/not_train,
 /turf/open/floor/dirt,
@@ -71977,7 +71972,7 @@ hM
 hM
 hM
 hM
-GX
+uB
 uB
 jq
 jq
