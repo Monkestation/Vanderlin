@@ -1,0 +1,4 @@
+author: "Ben10083"
+delete-after: True
+changes:
+  - rscadd: "The chests by the Garrison cells can now be locked by the Watch. Some maps with a Garrison have been given a chest for this purpose."

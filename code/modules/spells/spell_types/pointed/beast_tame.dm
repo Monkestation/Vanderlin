@@ -93,7 +93,7 @@
 
 /datum/action/cooldown/spell/beast_tame/great_hunt
 	name = "Calm Beast"
-	spell_type = SPELL_DIVINE_MIRACLE
+	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/druidic
 	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)
