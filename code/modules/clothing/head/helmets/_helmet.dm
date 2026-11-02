@@ -7,6 +7,7 @@
 	resistance_flags = FIRE_PROOF
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
+	smeltresult = null
 	melt_amount = 75
 	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ITEM
