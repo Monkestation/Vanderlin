@@ -269,7 +269,6 @@
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_STEEL
 	slot_flags = ITEM_SLOT_BACK
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 250

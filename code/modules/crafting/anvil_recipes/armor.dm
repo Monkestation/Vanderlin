@@ -1069,7 +1069,7 @@
 
 /datum/anvil_recipe/armor/silver/armetowl
 	name = "Lunar Owl Armet"
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	additional_items = list(/obj/item/ingot/steel = 2)
 	created_item = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
 
 /datum/anvil_recipe/armor/silver/plateleg

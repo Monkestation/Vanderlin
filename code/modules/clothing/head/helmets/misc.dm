@@ -47,7 +47,6 @@
 	desc = "A humble iron helmet. The most standard and antiquated protection for one's head from harm."
 	icon_state = "skullcap"
 	sellprice = VALUE_CHEAP_IRON_HELMET
-	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	max_integrity = INTEGRITY_OLD_STRONG
@@ -145,7 +144,6 @@
 	flags_inv = HIDEEARS
 	sellprice = VALUE_CHEAP_STEEL_HELMET
 	max_integrity = INTEGRITY_OLD_STRONGEST
-	smeltresult = null
 	melting_material = /datum/material/steel
 	melt_amount = 50
 	body_parts_covered = COVERAGE_HEAD
@@ -172,7 +170,6 @@
 	armor_type = /datum/armor/head/scale
 	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.5 KILOGRAMS
-	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 50
 
@@ -205,7 +202,6 @@
 	armor_type = /datum/armor/head/scale
 	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.8 KILOGRAMS
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 
 //................ Iron Pot Helmet ............... //
@@ -288,7 +284,7 @@
 	icon_state = "sallet"
 	desc = "A simple steel helmet with no attachments. Helps protect the ears."
 	flags_inv = HIDEEARS
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_HELMET
 	armor_type = /datum/armor/head/plate
 	body_parts_covered = COVERAGE_HEAD
@@ -301,7 +297,7 @@
 	icon_state = "marauder_head"
 	body_parts_covered = HEAD|EARS|HAIR
 	max_integrity = INTEGRITY_OLD_STRONG + 50
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
 	worn_x_dimension = 64
 	worn_y_dimension = 64
@@ -314,7 +310,7 @@
 	icon_state = "isallet"
 	item_state = "isallet"
 	desc = "A simple iron helmet with no attachments. Helps protect the ears."
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_HELMET
 	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_OLD_STRONG
@@ -360,7 +356,7 @@
 	icon_state = "bascinet_novisor"
 	desc = "A simple steel bascinet without a visor. Makes up for what it lacks in protection in visibility."
 	flags_inv = HIDEEARS
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_HELMET
 
 	body_parts_covered = COVERAGE_HEAD
@@ -512,6 +508,7 @@
 		Close to the teachings of the moon himself, it shields the curious gaze of the one wearing it. \
 		Worn by the sentinels of the Lunar Order it symbolises their eternal watch over the nite."
 	armor_type = /datum/armor/head/plate/silver
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/head/helmet/visored/knight/owl/lunar/Initialize()
 	. = ..()
@@ -540,7 +537,7 @@
 	icon_state = "iknight"
 
 	item_weight = 4.45 KILOGRAMS
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_HELMET+BONUS_VALUE_TINY
 
 	armor_type = /datum/armor/head/plate/bad
@@ -615,7 +612,7 @@
 	flags_inv = HIDEEARS|HIDEHAIR
 	max_integrity = INTEGRITY_OLD_STRONG
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 	item_weight = 3.7 KILOGRAMS
 
@@ -638,7 +635,7 @@
 	block2add = FOV_BEHIND
 	max_integrity = INTEGRITY_OLD_STRONG
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 	item_weight = 3.2 KILOGRAMS
 
@@ -663,7 +660,7 @@
 	block2add = FOV_BEHIND
 	max_integrity = INTEGRITY_OLD_STRONG
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 	item_weight = 3.7 KILOGRAMS
 	detail_tag = "_detail"
@@ -681,7 +678,7 @@
 	block2add = FOV_BEHIND
 	max_integrity = INTEGRITY_OLD_STRONG//slighly more integrity
 	slot_flags = ITEM_SLOT_HEAD | ITEM_SLOT_HIP
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
 	item_weight = 3.7 KILOGRAMS
 	detail_tag = "_detail"
@@ -726,7 +723,7 @@
 	desc = "A finely forged silver bascinet, with adjustable visor to protect the face."
 	icon_state = "silverbascinet"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/64x64/head.dmi'
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/head/plate/silver
 	sellprice = VALUE_SILVER_ARMOR
@@ -780,7 +777,7 @@
 	block2add = FOV_BEHIND
 	max_integrity = 425
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	item_weight = 4.5 KILOGRAMS
 	max_integrity = INTEGRITY_OLD_BLACKSTEEL
 
@@ -880,7 +877,6 @@
 	armor_type = /datum/armor/head/plate
 	body_parts_covered = COVERAGE_HEAD_NOSE
 	item_weight = 2.7 KILOGRAMS
-	smeltresult = /obj/item/ingot/steel
 	melting_material = /datum/material/steel
 
 /obj/item/clothing/head/helmet/elfbarbute/winged

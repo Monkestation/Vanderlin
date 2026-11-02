@@ -298,7 +298,7 @@
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	examine_highlight_type = /datum/examine_highlight/divine_weapon/abyssor
@@ -351,8 +351,7 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	smeltresult = /obj/item/ingot/steel_slag
-	melting_material = null
+	melting_material = /datum/material/steel
 	sellprice = 60
 	item_weight = 2 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL
@@ -370,7 +369,7 @@
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_SPEAR_WIELD - 2
 	max_blade_int = 150
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	item_weight = 2 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_IRON
 
@@ -382,7 +381,7 @@
 	wdefense = GOOD_PARRY
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BRONZE
 	max_blade_int = 100
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	item_weight = 2 KILOGRAMS
 
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
@@ -417,7 +416,8 @@
 	wlength = WLENGTH_LONG
 
 	gripsprite = FALSE
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	melt_amount = null
 	melting_material = null
 	throw_speed = 2
@@ -435,7 +435,7 @@
 	max_blade_int = 200
 
 	gripsprite = FALSE
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	item_weight = 1.5 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL
 
@@ -845,7 +845,6 @@
 	desc = "A glaive decorated with gold, forged for the Captain alongside their armor. To deliver justice with every wide swing."
 	sellprice = 200
 	icon_state = "capglaive"
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	item_weight = 2.3 KILOGRAMS
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
@@ -856,7 +855,6 @@
 	icon_state = "glaive"
 	force = DAMAGE_AXE + 2
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_STEEL
