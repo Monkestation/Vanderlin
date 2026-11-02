@@ -16,7 +16,7 @@
 
 /proc/handle_maniac_visions(mob/living/target, atom/movable/screen/fullscreen/maniac/hallucinations)
 	//Random laughter
-	else if(prob(2))
+	if(prob(2))
 		var/static/list/funnies = list(
 			'sound/villain/comic1.ogg',
 			'sound/villain/comic2.ogg',
