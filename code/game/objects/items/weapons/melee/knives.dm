@@ -301,6 +301,13 @@
 	desc = "A dagger of refined steel with lavish gold decoration. Even in the hands of most nobles, it is considered overly decadent."
 	item_weight = 230 GRAMS
 
+/obj/item/weapon/knife/dagger/steel/royal/misericorde
+	name = "decorated misericorde"
+	desc = "A wickedly lethal spike of refined steel with lavish gold decoration. Even in the hands of most nobles, it is considered overly decadent. The curved handle is said to naturally improve one's aim, while locked in a \
+	life-or-death struggle with plate-armored opponents."
+	icon_state = "dec_misericorde"
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
+
 /obj/item/weapon/knife/dagger/steel/stiletto
 	name = "stiletto"
 	desc = "A needle-thin dagger made of refined steel, the favored weapon of assassins and angry nobles."
@@ -406,6 +413,20 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/knife/dagger/silver/truesilver
+	name = "truesilver dagger"
+	desc = "A dagger made of truesilver, the thin death of nite creachers."
+	icon_state = "lunar_dagger"
+	sellprice = 80
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/knife/dagger/silver/truesilver/misericorde
+	name = "truesilver misericorde"
+	desc = "An armor-piercing dagger of truesilver. Even the most well protected nite creacher will fear its sting."
+	icon_state = "lunar_misericorde"
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
+
 //................ Blacksteel Dagger ............... //
 /obj/item/weapon/knife/dagger/blacksteel
 	name = "blacksteel dagger"
@@ -426,7 +447,7 @@
 	life-or-death struggle with plate-armored opponents."
 	icon_state = "bs_misericorde"
 	force = DAMAGE_DAGGER + 3
-	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 
 //................ Bloodsteel Dagger ............... //
 /obj/item/weapon/knife/dagger/bloodsteel
@@ -751,7 +772,6 @@
 	desc = "A tossblade forged from bronze. Not as reliable compared to other tossblades, but much cheaper to make."
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 10
-	throw_speed = 4
 	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_BRONZE
 	icon_state = "throwing_bronze"
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 25, "embedded_fall_chance" = 15)
@@ -765,7 +785,6 @@
 	icon_state = "throw_knifes"
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 15
-	throw_speed = 4
 	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_STEEL
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/steel
@@ -784,29 +803,40 @@
 	icon_state = "throw_knifebs"
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 17
-	throw_speed = 4
 	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_BLACKSTEEL
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/blacksteel
 	sellprice = 10
 	item_weight = 85 GRAMS
 
-/obj/item/weapon/knife/throwingknife/psydon
-	name = "psydonian tossblade"
-	desc = "An unconventional method of delivering silver to a heretic; but one PSYDON smiles at, all the same. Doubles as an 'actual' knife in a pinch."
-	icon_state = "throw_knifep"
+/obj/item/weapon/knife/throwingknife/silver
+	name = "silver tossblade"
+	desc = "A tossblade forged from silver. An unconventional method of delivering silver to a heretic but no less effective."
+	icon_state = "throw_knifesil"
 	item_state = "bone_dagger"
-	wdefense = GOOD_PARRY
-	throw_speed = 4
 	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_SILVER
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)
 	sellprice = 65
 	melting_material = /datum/material/silver
 	item_weight = 80 GRAMS
 
-/obj/item/weapon/knife/throwingknife/psydon/Initialize(mapload)
+/obj/item/weapon/knife/throwingknife/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/knife/throwingknife/silver/truesilver
+	name = "truesilver tossblade"
+	desc = "A tossblade forged from truesilver. An unconventional method of delivering silver to a heretic but no less effective."
+	icon_state = "throw_knife_truesil"
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_TRUESILVER
+	melting_material = /datum/material/truesilver
+	sellprice = 80
+
+/obj/item/weapon/knife/throwingknife/silver/psydon
+	name = "psydonian tossblade"
+	desc = "An unconventional method of delivering silver to a heretic; but one PSYDON smiles at, all the same. Doubles as an 'actual' knife in a pinch."
+	icon_state = "throw_knifep"
+	wdefense = GOOD_PARRY
 
 /obj/item/weapon/knife/throwingknife/rous //Rousman exclusive item, can stay a bit better
 	name = "rous kunai"

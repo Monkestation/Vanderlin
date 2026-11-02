@@ -234,7 +234,7 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/iron/dagger_iron
-	name = "Dagger"
+	name = "Iron Daggers"
 	created_item = /obj/item/weapon/knife/dagger
 	output_amount = 2
 	craftdiff = 0 // To train with
@@ -610,7 +610,7 @@
 	craftdiff = 1
 
 /datum/anvil_recipe/weapons/steel/royal
-	name = "Decorated Dagger"
+	name = "Decorated Daggers"
 	additional_items = list(/obj/item/ingot/gold = 1)
 	created_item = /obj/item/weapon/knife/dagger/steel/royal
 	output_amount = 2
@@ -860,8 +860,9 @@
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/silver/dagger
-	name = "Silver Dagger"
+	name = "Silver Daggers"
 	created_item = /obj/item/weapon/knife/dagger/silver
+	output_amount = 2
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/silver/silver_whip
@@ -973,6 +974,66 @@
 /datum/anvil_recipe/weapons/psy
 	required_material = /obj/item/ingot/silverblessed
 
+// --------------- Truesilver --------------------
+/datum/anvil_recipe/weapons/truesilver
+	abstract_type = /datum/anvil_recipe/weapons/truesilver
+	required_material = /obj/item/ingot/silver/truesilver
+	craftdiff = 4
+
+/datum/anvil_recipe/weapons/truesilver/halberd
+	name = "Truesilver Halberd"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/polearm/halberd/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/greataxe
+	name = "Truesilver Greataxe"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/greataxe/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/grandmace
+	name = "Truesilver Grand Mace"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/mace/goden/steel/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/dagger
+	name = "Truesilver Daggers"
+	created_item = /obj/item/weapon/knife/dagger/silver/truesilver
+	output_amount = 2
+	craftdiff = 3
+
+/datum/anvil_recipe/weapons/truesilver/misericorde
+	name = "Truesilver Misericorde"
+	created_item = /obj/item/weapon/knife/dagger/silver/truesilver/misericorde
+	craftdiff = 3
+
+/datum/anvil_recipe/weapons/truesilver/barmace
+	name = "Truesilver Barmace"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 2)
+	created_item = /obj/item/weapon/mace/silver/barmace/lunar
+
+/datum/anvil_recipe/weapons/truesilver/hammer
+	name = "Truesilver Warhammer"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1)
+	created_item = /obj/item/weapon/mace/warhammer/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/sword
+	name = "Truesilver Sword"
+	created_item = /obj/item/weapon/sword/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/longsword
+	name = "Truesilver Longsword"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1)
+	created_item = /obj/item/weapon/sword/long/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/rapier
+	name = "Truesilver Rapier"
+	created_item = /obj/item/weapon/sword/rapier/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/whip
+	name = "Truesilver Whip"
+	additional_items = list(/obj/item/natural/hide/cured = 2)
+	created_item = /obj/item/weapon/whip/silver/truesilver
+
 // --------------- Psydonite --------------------
 /datum/anvil_recipe/weapons/psy/axe
 	name = "Psydonian War Axe"
@@ -993,9 +1054,10 @@
 	additional_items = list(/obj/item/grown/log/tree/small = 1)
 
 /datum/anvil_recipe/weapons/psy/dagger
-	name = "Psydonian Dagger"
+	name = "Psydonian Daggers"
 	craftdiff = 3
 	created_item = /obj/item/weapon/knife/dagger/silver/psydon
+	output_amount = 2
 
 /datum/anvil_recipe/weapons/psy/shortsword
 	name = "Psydonian Shortsword"

@@ -10,7 +10,7 @@
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/noc)
 
-	invocation = "Begone foul beasts!"
+	invocation = "Feel the moon's sting!"
 	invocation_type = INVOCATION_SHOUT
 
 	charge_time = 2 SECONDS
