@@ -1,0 +1,8 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added Truesilver. No differences to normal silver at this time."
+  - rscadd: "Changed Noc's templar weapons to Truesilver. No stat differences."
+  - rscadd: "Added Truesilver weapons. Sword, Longsword, Rapier, Whip, Barmace, Grand Mace, Halberd, Great Axe, Warhammer, Dagger, and Misericorde."
+  - rscadd: "Added Oracle version of the Staff of Testimonium."
+  - image: "Added sprites for all Truesilver weapons, courtesy of Azure Peak generic donator sprites."
