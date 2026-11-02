@@ -19,6 +19,7 @@
 		#include "map_files/vanderlin/vanderlin_forest.dmm"
 		#include "map_files/vanderlin/vanderlin_mountain.dmm"
 		#include "map_files/vanderlin/vanderlin.dmm"
+		#include "map_files/valdero/valdero.dmm"
 		#include "map_files/voyager/voyager.dmm"
 		#include "map_files/whitepalacepass/WhitePalacePass.dmm"
 	#endif
