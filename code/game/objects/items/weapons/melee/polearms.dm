@@ -136,6 +136,7 @@
 	max_integrity = INTEGRITY_QUARTERSTAFF * INTEGRITY_MOD_GOLD
 	minstr = 8
 	item_weight = 1.5 KILOGRAMS
+	smeltresult = null
 	melting_material = /datum/material/gold
 	melt_amount = 75
 
@@ -147,6 +148,7 @@
 	force = DAMAGE_STAFF + 8
 	force_wielded =  DAMAGE_STAFF_WIELD + 8
 	max_integrity = INTEGRITY_QUARTERSTAFF * INTEGRITY_MOD_BLACKSTEEL
+	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 75
 
@@ -157,7 +159,9 @@
 	force = DAMAGE_STAFF + 6
 	force_wielded =  DAMAGE_STAFF_WIELD + 7
 	max_integrity = INTEGRITY_QUARTERSTAFF * INTEGRITY_MOD_BLOODSTEEL
+	smeltresult = null
 	melting_material = /datum/material/bloodsteel
+	melt_amount = 75
 	sellprice = 0
 
 /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel/Initialize(mapload)

@@ -121,6 +121,7 @@
 	grid_height = 96
 	item_weight = 650 GRAMS
 	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/sword/short/psy/Initialize(mapload)
@@ -666,6 +667,7 @@
 	max_blade_int = 300
 	item_weight = 700 GRAMS
 	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/sword/rapier/psy/Initialize(mapload)
 	. = ..()

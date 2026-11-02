@@ -506,7 +506,7 @@
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	associated_skill = /datum/attribute/skill/combat/axesmaces
 	slot_flags = ITEM_SLOT_BACK
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 150
 	sellprice = 60
@@ -553,7 +553,6 @@
 	max_blade_int = 300
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_STEEL
 	melting_material = /datum/material/steel
-	melt_amount = 150
 	sellprice = 90
 	item_weight = 4.5 KILOGRAMS
 
@@ -609,7 +608,6 @@
 	max_blade_int = 300
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
-	melt_amount = 150
 	sellprice = 120
 	item_weight = 4 KILOGRAMS
 

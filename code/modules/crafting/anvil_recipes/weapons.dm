@@ -780,7 +780,7 @@
 	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/weapon/mace/warhammer/steel
 
-/datum/anvil_recipe/weapons/steel/peasant_flail
+/datum/anvil_recipe/weapons/iron/peasant_flail
 	name = "Peasant Flail"
 	additional_items = list(/obj/item/rope/chain = 1, /obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/flail/peasant
