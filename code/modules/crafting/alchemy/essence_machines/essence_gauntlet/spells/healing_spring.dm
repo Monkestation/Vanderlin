@@ -47,7 +47,7 @@
 	spell_cost = 120
 	spell_type = SPELL_MANA
 
-	required_form = FORM_EARTH
-	associated_skill = /datum/attribute/skill/magic/arcane/earth
+	required_form = FORM_LIFE
+	associated_skill = /datum/attribute/skill/magic/arcane/life
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 4

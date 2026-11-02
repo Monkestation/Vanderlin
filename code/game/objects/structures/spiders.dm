@@ -34,6 +34,10 @@
 	alpha = 109
 	max_integrity = 50
 	opacity = TRUE
+	var/summoned = FALSE
+
+/obj/structure/spider/stickyweb/summoned
+	summoned = TRUE
 
 /obj/structure/spider/stickyweb/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
@@ -59,9 +63,10 @@
 			icon_state = "stickyweb2"
 	dir = pick(GLOB.cardinals)
 	alpha = rand(80,109)
-	switch(pick(1,2))
-		if(1)
-			static_debris = list(/obj/item/natural/silk = 1)
+	if(!summoned)
+		switch(pick(1,2))
+			if(1)
+				static_debris = list(/obj/item/natural/silk = 1)
 	. = ..()
 
 /obj/structure/spider/cocoon
