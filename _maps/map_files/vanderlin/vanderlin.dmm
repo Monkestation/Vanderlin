@@ -11639,6 +11639,10 @@
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
+"eDM" = (
+/obj/structure/flora/hotspring_rocks/small/two,
+/turf/open/floor/grass/eora,
+/area/outdoors/eora)
 "eDW" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/river,
@@ -29688,6 +29692,10 @@
 /obj/structure/bars,
 /turf/open/floor/cobble,
 /area/under/dungeon)
+"lZa" = (
+/obj/structure/flora/hotspring_rocks/grassy,
+/turf/open/floor/grass/eora,
+/area/outdoors/eora)
 "lZc" = (
 /turf/closed/wall/mineral/decowood,
 /area/indoors/town/noble_manor/red)
@@ -32366,6 +32374,13 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/cobblerock,
 /area/outdoors/town/keep)
+"nbx" = (
+/obj/structure/flora/rock/pile/largejungle{
+	pixel_x = -25;
+	pixel_y = -5
+	},
+/turf/open/water/hotspring,
+/area/outdoors/eora)
 "nbM" = (
 /turf/closed/wall/mineral/stonebrick,
 /area/indoors/town/keep/courtagent/prison)
@@ -44624,6 +44639,10 @@
 	},
 /turf/open/floor/greenstone,
 /area/indoors/town/dwarfin)
+"rSD" = (
+/obj/structure/flora/rock/jungle,
+/turf/open/water/hotspring,
+/area/outdoors/eora)
 "rSJ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -58841,6 +58860,10 @@
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/blocks,
 /area/indoors/town/keep/basement)
+"xvU" = (
+/obj/structure/flora/hotspring_rocks/small/three,
+/turf/open/floor/grass/eora,
+/area/outdoors/eora)
 "xvW" = (
 /turf/closed/wall/mineral/decowood,
 /area/outdoors/town/keep/forge)
@@ -256565,7 +256588,7 @@ jgi
 mrj
 jgi
 jgi
-jgi
+lZa
 hOf
 hOf
 hOf
@@ -256940,10 +256963,10 @@ jgi
 jgi
 jgi
 jgi
-jgi
+lZa
 jgi
 mrj
-jgi
+eDM
 cUi
 gtB
 gtB
@@ -256970,7 +256993,7 @@ cUi
 gtB
 oUV
 jgi
-jgi
+eDM
 hOf
 hOf
 gyp
@@ -257148,16 +257171,16 @@ jKA
 gtB
 unN
 qXI
-qXI
+rSD
 iaD
 oUV
 jgi
 hOf
-jgi
+xvU
 wto
 qXI
 qXI
-qXI
+nbx
 qXI
 qXI
 kWg
@@ -257363,15 +257386,15 @@ qXI
 qXI
 qXI
 kWg
-jgi
+eDM
 jgi
 hOf
 kZE
 hOf
-jgi
+eDM
 jgi
 wto
-qXI
+rSD
 qXI
 kWg
 rfs
@@ -257768,7 +257791,7 @@ oDW
 jgi
 mrj
 mrj
-jgi
+lZa
 jgi
 hOf
 jgi
@@ -258156,7 +258179,7 @@ jgi
 jgi
 vKI
 fvD
-qXI
+rSD
 qXI
 qXI
 meN
@@ -258178,7 +258201,7 @@ jgi
 emO
 jgi
 jgi
-jgi
+lZa
 jgi
 jgi
 jgi
@@ -258349,7 +258372,7 @@ wKo
 jfa
 jfa
 jfa
-jgi
+lZa
 jgi
 emO
 jgi
@@ -258561,7 +258584,7 @@ hOf
 trH
 jgi
 jgi
-jgi
+xvU
 mrj
 jgi
 oDW
@@ -258580,7 +258603,7 @@ lNp
 cbi
 cbi
 jgi
-jgi
+eDM
 jgi
 hOf
 jgi
@@ -258975,7 +258998,7 @@ hOf
 jgi
 jgi
 jgi
-jgi
+eDM
 mrj
 jgi
 mrj
@@ -259380,7 +259403,7 @@ jgi
 mrj
 wto
 qXI
-qXI
+rSD
 qXI
 iaD
 oUV
@@ -259784,7 +259807,7 @@ hOf
 jgi
 vKI
 fvD
-jgi
+qXI
 qXI
 qXI
 qXI
@@ -259984,7 +260007,7 @@ gyp
 hOf
 hOf
 jgi
-jgi
+lZa
 hbU
 pSd
 gDW
@@ -259992,7 +260015,7 @@ qXI
 qXI
 qXI
 kWg
-jgi
+eDM
 wKo
 wKo
 wKo
@@ -260191,7 +260214,7 @@ jgi
 mrj
 hbU
 fvD
-qXI
+rSD
 qXI
 kWg
 mrj
