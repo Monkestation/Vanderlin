@@ -4687,22 +4687,6 @@
 /mob/living/simple_animal/hostile/retaliate/smallrat,
 /turf/open/floor/blocks/platform,
 /area/under/town/basement)
-"rM" = (
-/obj/structure/flora/grass/bush/wall/tall{
-	pixel_x = -24;
-	pixel_y = -4
-	},
-/obj/structure/flora/grass/bush_meagre{
-	pixel_x = -23;
-	pixel_y = -7
-	},
-/obj/structure/flora/grass/bush{
-	layer = 4.4;
-	pixel_x = -28;
-	pixel_y = 7
-	},
-/turf/open/floor/grass/red,
-/area/under/town/basement)
 "rN" = (
 /obj/structure/door{
 	name = "Apartment VI";
@@ -8865,6 +8849,7 @@
 /area/indoors/town/church/chapel)
 "GX" = (
 /obj/structure/dungeon_entry/center/vanderlin,
+/obj/effect/decal/woodpath,
 /turf/open/floor/grass/red,
 /area/under/town/basement)
 "GY" = (
@@ -9295,9 +9280,7 @@
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/tavern)
 "IP" = (
-/obj/item/candle/floorcandle1/lit{
-	pixel_y = -11
-	},
+/obj/structure/dungeon_elevator,
 /turf/open/floor/grass/red,
 /area/under/town/basement)
 "IQ" = (
@@ -9715,6 +9698,10 @@
 	},
 /turf/open/floor/cobblerock,
 /area/indoors/town/garrison)
+"KB" = (
+/obj/item/candle/floorcandle0/lit,
+/turf/open/floor/grass/red,
+/area/under/town/basement)
 "KC" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -11396,18 +11383,12 @@
 /turf/open/floor/tile/masonic/full/inverted,
 /area/indoors/town/keep/throne)
 "Rg" = (
-/obj/structure/flora/grass/bush/wall/tall{
-	pixel_x = -8
-	},
-/obj/structure/flora/grass/bush_meagre{
-	pixel_x = 20;
-	pixel_y = -5
-	},
 /obj/structure/flora/grass/bush{
 	layer = 4.4;
 	pixel_x = 25;
-	pixel_y = 7
+	pixel_y = 11
 	},
+/obj/structure/flora/grass/bush/wall,
 /turf/open/floor/grass/red,
 /area/under/town/basement)
 "Rh" = (
@@ -13140,9 +13121,11 @@
 /turf/open/floor/cobblerock,
 /area/indoors/town/garrison)
 "XY" = (
-/obj/item/candle/floorcandle0/lit{
-	pixel_y = -7
+/obj/structure/flora/grass/bush{
+	pixel_y = 7;
+	pixel_x = -5
 	},
+/obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass/red,
 /area/under/town/basement)
 "XZ" = (
@@ -13258,6 +13241,10 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/blocks/platform,
+/area/under/town/basement)
+"Yt" = (
+/obj/structure/flora/grass/bush/wall/tall,
+/turf/open/floor/grass/red,
 /area/under/town/basement)
 "Yv" = (
 /obj/structure/stairs{
@@ -71687,7 +71674,7 @@ hM
 hM
 hM
 Rg
-fk
+DI
 kN
 kN
 kN
@@ -71838,9 +71825,9 @@ hM
 hM
 hM
 hM
-fk
+Yt
 XY
-fk
+KB
 Ab
 Ab
 Ab
@@ -72144,7 +72131,7 @@ hM
 hM
 fk
 IP
-fk
+KB
 fk
 Ab
 Ab
@@ -72294,8 +72281,8 @@ hM
 hM
 hM
 hM
-rM
-DI
+fk
+fk
 DI
 DI
 eP
