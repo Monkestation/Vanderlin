@@ -139,6 +139,7 @@
 		/obj/item/needle/blessed = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1
 	)
+	l_hand = /obj/item/weapon/polearm/woodstaff/oracle
 
 /datum/action/oracle_announce
 	name = "Invoke Lunar Authority"
