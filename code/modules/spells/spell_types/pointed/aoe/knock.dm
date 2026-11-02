@@ -6,6 +6,7 @@
 	click_to_activate = FALSE
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 	required_technique = TECHNIQUE_ILLUSION
 	required_level = 6
 
@@ -15,6 +16,7 @@
 	invocation = "AULIE OXIN FIERA"
 	invocation_type = INVOCATION_WHISPER
 	aoe_radius = 3
+	initial_charges = 5
 
 /datum/action/cooldown/spell/aoe/knock/get_things_to_cast_on(atom/center)
 	return RANGE_TURFS(aoe_radius, center)

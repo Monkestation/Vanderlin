@@ -90,6 +90,50 @@
 	)
 	output = /obj/item/clothing/shirt/rags
 
+/datum/repeatable_crafting_recipe/sewing/bouquet_rosa
+	name = "rosa bouquet"
+	requirements = list(
+		/obj/item/alch/herb/rosa = 6,
+		/obj/item/natural/cloth = 1,
+		/obj/item/natural/fibers = 1,
+	)
+	output = /obj/item/bouquet/rosa
+	craftdiff = 0
+	category = "Misc Sewing"
+
+/datum/repeatable_crafting_recipe/sewing/bouquet_salvia
+	name = "salvia bouquet"
+	requirements = list(
+		/obj/item/alch/herb/salvia = 6,
+		/obj/item/natural/cloth = 1,
+		/obj/item/natural/fibers = 1,
+	)
+	output = /obj/item/bouquet/salvia
+	craftdiff = 0
+	category = "Misc Sewing"
+
+/datum/repeatable_crafting_recipe/sewing/bouquet_matricaria
+	name = "matricaria bouquet"
+	requirements = list(
+		/obj/item/alch/herb/matricaria = 6,
+		/obj/item/natural/cloth = 1,
+		/obj/item/natural/fibers = 1,
+	)
+	output = /obj/item/bouquet/matricaria
+	craftdiff = 0
+	category = "Misc Sewing"
+
+/datum/repeatable_crafting_recipe/sewing/bouquet_calendula
+	name = "calendula bouquet"
+	requirements = list(
+		/obj/item/alch/herb/calendula = 6,
+		/obj/item/natural/cloth = 1,
+		/obj/item/natural/fibers = 1,
+	)
+	output = /obj/item/bouquet/calendula
+	craftdiff = 0
+	category = "Misc Sewing"
+
 /datum/repeatable_crafting_recipe/sewing/winding_sheet
 	name = "winding sheet"
 	requirements = list(
@@ -149,11 +193,13 @@
 		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/shirt/undershirt
+	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/tunic
 	name = "tunic"
 	output = /obj/item/clothing/shirt/tunic
 	requirements = list(/obj/item/natural/cloth = 2)
+	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/lowcut_shirt
 	name = "low cut tunic"
@@ -162,7 +208,7 @@
 		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/shirt/undershirt/lowcut
-	category = "Undershirt"
+	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/stripedtunic
 	name = "striped tunic"
@@ -232,7 +278,7 @@
 	name = "cloth sash"
 	output = /obj/item/clothing/shirt/undershirt/sash
 	requirements = list(/obj/item/natural/cloth = 2,)
-	category = "Cloak"
+	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/knitcap
 	name = "knit cap"
@@ -636,7 +682,7 @@
 	)
 	output = /obj/item/clothing/shirt/undershirt/priest
 	craftdiff = 2
-	category = "Undershirt"
+	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/wrappings
 	name = "solar wrappings"
@@ -1238,6 +1284,14 @@
 	craftdiff = 3
 	category = "Belt"
 
+/datum/repeatable_crafting_recipe/sewing/cloth_belt_sash
+	name = "cloth sash belt"
+	output = /obj/item/storage/belt/leather/cloth/lady
+	requirements = list(/obj/item/natural/cloth = 2,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 3
+	category = "Belt"
+
 
 /* .............. recipes requiring skill 4 ..............*/
 
@@ -1781,8 +1835,9 @@
 		/obj/item/natural/cloth = 2,
 		/obj/item/natural/fibers = 1
 	)
-	craftdiff = 2
+	craftdiff = 3
 	category = "Cloak"
+	sellprice = 20
 
 /datum/repeatable_crafting_recipe/sewing/grandmaster_vestments
 	name = "holy silver vestments"

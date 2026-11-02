@@ -70,4 +70,5 @@
 	cooldown_time = 3 MINUTES
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_RESTORATION

@@ -4,6 +4,7 @@
 		list(
 			/obj/item/coin/copper/pile = 15,
 			/obj/item/weapon/knife/hunting = 5,
+			/obj/item/warpstone = 4,
 			/obj/item/weapon/knife/dagger = 8,
 			/obj/item/weapon/sword/iron = 3,
 			/obj/item/weapon/axe/copper = 10,

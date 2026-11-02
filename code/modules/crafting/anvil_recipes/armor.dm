@@ -155,6 +155,11 @@
 	created_item = /obj/item/clothing/pants/trou/leather/splint
 	output_amount = 2
 
+/datum/anvil_recipe/armor/iron/brigandine_chausses
+	name = "Brigandine Chausses"
+	additional_items = list(/obj/item/clothing/pants/trou/leather = 1)
+	created_item = /obj/item/clothing/pants/trou/leather/brigandine
+
 /datum/anvil_recipe/armor/iron/mailleboots
 	name = "Chainmail Boots"
 	additional_items = list(/obj/item/natural/hide/cured = 2)
@@ -243,6 +248,11 @@
 	name = "Iron Jack Chains"
 	created_item = /obj/item/clothing/wrists/bracers/ironjackchain
 	output_amount = 2
+
+/datum/anvil_recipe/armor/iron/brigandine_vambraces
+	name = "Brigandine Vambraces"
+	additional_items = list(/obj/item/clothing/wrists/bracers/leather = 1)
+	created_item = /obj/item/clothing/wrists/bracers/leather/brigandine
 
 /datum/anvil_recipe/armor/iron/ibracers
 	name = "Iron Plate Vambraces"

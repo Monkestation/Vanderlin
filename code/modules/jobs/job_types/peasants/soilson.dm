@@ -13,7 +13,7 @@
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/labor/farming = 40,
 		/datum/attribute/skill/labor/taming = 50,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/craft/cooking/brewing = 30,
 		/datum/attribute/skill/craft/cooking/winemaking = 30,
@@ -31,7 +31,7 @@
 
 /datum/job/farmer
 	title = JOB_SOILSON
-	alt_titles = list("Butcher", "Brewer", "Vinter", "Distiller", "Hogman")
+	alt_titles = list("Butcher", "Brewer", "Vintner", "Distiller", "Hogman")
 	f_title = "Soilbride"
 	tutorial = "It is a simple life you live. \
 	Your basic understanding of life is something many would be envious of if they knew how perfect it was. \

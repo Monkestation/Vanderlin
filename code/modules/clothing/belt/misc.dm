@@ -60,6 +60,12 @@
 		/obj/item/key/forrestgarrison,
 	)
 
+/obj/item/storage/belt/leather/gallowband
+	populate_contents = list(
+		/obj/item/needle/thorn,
+		/obj/item/storage/keyring/gallowband,
+	)
+
 /obj/item/storage/belt/leather/townguard //they get their keys + dagger there
 	populate_contents = list(
 		/obj/item/weapon/knife/dagger/steel/special,
@@ -579,7 +585,7 @@
 /obj/item/storage/belt/leather/knifebelt/psydon/Initialize()
 	. = ..()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/psydon/A = new(loc)
+		var/obj/item/weapon/knife/throwingknife/silver/psydon/A = new(loc)
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
 			qdel(A)
 
@@ -618,7 +624,7 @@
 /obj/item/storage/belt/leather/knifebelt/black/psydon/Initialize()
 	. = ..()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/psydon/A = new(loc)
+		var/obj/item/weapon/knife/throwingknife/silver/psydon/A = new(loc)
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
 			qdel(A)
 

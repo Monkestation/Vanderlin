@@ -1101,7 +1101,7 @@
 
 /// Yields produce on its tile if it's ready for harvest
 /obj/structure/soil/proc/yield_produce(modifier = 0)
-	if(!produce_ready || !plant_genetics)
+	if(!produce_ready || !plant_genetics || !plant.produce_type)
 		return
 
 	// GENETICS: Enhanced yield calculation

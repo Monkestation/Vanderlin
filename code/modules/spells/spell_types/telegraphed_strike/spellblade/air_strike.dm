@@ -15,6 +15,7 @@
 	spell_cost = 10
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 	required_technique = TECHNIQUE_IMBUE
 
 	invocation = "Ictus Venti!"

@@ -12,7 +12,7 @@ GLOBAL_LIST_INIT(ghost_verbs, list(
 /mob/dead/observer
 	name = "ghost"
 	desc = "" //jinkies!
-	icon = 'icons/mob/mob.dmi'
+	icon = 'icons/admin/adminghost.dmi'
 	icon_state = "ghost"
 	plane = GHOST_PLANE
 	stat = DEAD

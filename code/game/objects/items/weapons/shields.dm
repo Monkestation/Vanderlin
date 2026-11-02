@@ -9,7 +9,7 @@
 	flags_1 = null
 	force = DAMAGE_SHIELD
 	throwforce = DAMAGE_SHIELD / 2
-	wdefense = ULTMATE_PARRY
+	wdefense = SHIELD_PARRY
 	throw_speed = 1
 	throw_range = 3
 	w_class = WEIGHT_CLASS_BULKY
@@ -159,7 +159,7 @@
 	icon_state = "shield_tower"
 	force = DAMAGE_SHIELD + 5
 	throwforce = DAMAGE_SHIELD
-	wdefense = ULTMATE_PARRY + 1
+	wdefense = SHIELD_PARRY + 1
 	wbalance = EASY_TO_DODGE // Heavy, big shield
 	coverage = 65
 	wlength = WLENGTH_NORMAL
@@ -189,7 +189,7 @@
 	desc = "A gigantic, bronze reinforced shield that covers the entire body. An Aasimar relic from an era long past."
 	icon_state = "boeotian"
 	force = DAMAGE_SHIELD + 5
-	wdefense = ULTMATE_PARRY + 3
+	wdefense = SHIELD_PARRY + 3
 	coverage = 75 // Rare shield from unique job, gets a tiny bit of additional coverage
 	possible_item_intents = list(METAL_BASH, METAL_BLOCK)
 	resistance_flags = FIRE_PROOF
@@ -215,7 +215,7 @@
 	desc = "A knightly, kite shaped steel shield, emblazoned with heraldry. \nBoasts superior coverage and durability, owed to its exquisite craftsmanship."
 	icon_state = "ironsh"
 	force = DAMAGE_SHIELD * 2
-	wdefense = ULTMATE_PARRY + 2
+	wdefense = SHIELD_PARRY + 2
 	coverage = 70
 	possible_item_intents = list(METAL_BASH, METAL_BLOCK)
 	resistance_flags = FIRE_PROOF
@@ -276,7 +276,7 @@
 	desc = "The Ordo Benetarus holds a mantra: A Psydonian endures. A Psydonian preserves themselves. A Psydonian preserves His flock. Protect them."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyshield"
-	wdefense = ULTMATE_PARRY + 3
+	wdefense = SHIELD_PARRY + 3
 	coverage = 50
 	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_SILVER
 	item_weight = 5 KILOGRAMS
@@ -328,7 +328,7 @@
 	icon_state = "ironbuckler"
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	force = DAMAGE_SHIELD * 1.5
-	wdefense = ULTMATE_PARRY
+	wdefense = SHIELD_PARRY
 	wbalance = HARD_TO_DODGE // small, tiny shield
 	coverage = 10
 	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_IRON

@@ -10,6 +10,7 @@
 
 	spell_cost = 50
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 
 	invocation = "Awaken, rancor!!"
 	invocation_type = INVOCATION_SHOUT

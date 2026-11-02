@@ -12,7 +12,7 @@
 		/datum/attribute/skill/combat/polearms = list(-50, 50),
 		/datum/attribute/skill/combat/whipsflails = list(-50, 50),
 		/datum/attribute/skill/combat/knives = list(-50, 50),
-		/datum/attribute/skill/misc/reading = list(-50, 50)
+		/datum/attribute/skill/educated/reading = list(-50, 50)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,

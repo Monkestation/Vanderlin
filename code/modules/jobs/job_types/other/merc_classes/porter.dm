@@ -10,8 +10,8 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/swimming = 20,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 		//Can't expect those kobolds to not be thieves or assist with such things.
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/misc/lockpicking = 20,

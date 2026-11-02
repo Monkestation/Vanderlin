@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/craft/cooking = 20
 	)
@@ -39,7 +39,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/dark_whispers,
 		/datum/action/cooldown/spell/status/blood_sight,
-		/datum/action/cooldown/spell/projectile/blood_steal,
+		/datum/action/cooldown/spell/blood_steal,
 		/datum/action/cooldown/spell/diagnose/blood,
 		/datum/action/cooldown/spell/blood_healing,
 	)
@@ -67,4 +67,5 @@
 		/obj/item/book/magicaltheory = 1,
 		/obj/item/recipe_book/arcyne = 1,
 		/obj/item/spellbook/adept/starter/blood = 1,
+		/obj/item/scrying/flame = 1,
 	)

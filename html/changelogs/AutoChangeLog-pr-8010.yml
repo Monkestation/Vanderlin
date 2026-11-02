@@ -1,0 +1,4 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - rscadd: "Allows properties to save certain items"

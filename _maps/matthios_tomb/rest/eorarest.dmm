@@ -134,6 +134,13 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/under/tomb/indoors/rest)
+"fC" = (
+/obj/structure/fluff/railing/tall/stone{
+	dir = 1
+	},
+/obj/structure/waystone/dungeon,
+/turf/open/floor/grass/eora,
+/area/under/tomb/indoors/rest)
 "fM" = (
 /obj/structure/stairs{
 	dir = 4
@@ -1977,7 +1984,7 @@ ar
 ar
 ar
 ar
-lS
+fC
 Aq
 "}
 (14,1,2) = {"

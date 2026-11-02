@@ -19,11 +19,11 @@
 		/datum/attribute/skill/misc/stealing = 40,
 		/datum/attribute/skill/misc/lockpicking = 40,
 		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/job/advclass/wretch/reject

@@ -10,6 +10,7 @@
 	self_cast_possible = TRUE
 
 	required_form = FORM_LIFE
+	associated_skill = /datum/attribute/skill/magic/arcane/life
 	required_technique = TECHNIQUE_ALTERATION
 
 	spell_cost = 50

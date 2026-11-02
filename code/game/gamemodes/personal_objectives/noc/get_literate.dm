@@ -19,7 +19,7 @@
 	if(completed)
 		return
 
-	if(ispath(skill_ref, /datum/attribute/skill/misc/reading) && old_level == SKILL_RANK_NONE && new_level > SKILL_RANK_NONE)
+	if(ispath(skill_ref, /datum/attribute/skill/educated/reading) && old_level == SKILL_RANK_NONE && new_level > SKILL_RANK_NONE)
 		complete_objective()
 
 /datum/objective/personal/literacy/complete_objective()
@@ -30,7 +30,7 @@
 
 /datum/objective/personal/literacy/reward_owner()
 	. = ..()
-	owner.current.adjust_skill_level(/datum/attribute/skill/labor/mathematics, 10)
+	owner.current.adjust_skill_level(/datum/attribute/skill/educated/mathematics, 10)
 
 /datum/objective/personal/literacy/update_explanation_text()
 	explanation_text = "Get rid of your ignorance! Learn to read to please Noc!"
