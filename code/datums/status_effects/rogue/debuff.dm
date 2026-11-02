@@ -423,6 +423,19 @@
 	desc = "<span class='bloody '>I have returned from oblivion... but at what cost...</span>"
 	icon_state = "bloodcurse"
 
+/datum/status_effect/debuff/silenced
+	id = "silenced"
+	alert_type = /atom/movable/screen/alert/status_effect/debuff/silenced
+	duration = 15 SECONDS
+
+/datum/status_effect/debuff/silenced/permanent
+	duration = STATUS_EFFECT_PERMANENT
+	tick_interval = STATUS_EFFECT_NO_TICK
+
+/atom/movable/screen/alert/status_effect/debuff/silenced
+	name = "Silenced"
+	desc = "I have been silenced! I am unable to speak."
+
 /datum/status_effect/debuff/chilled
 	id = "chilled"
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/chilled

@@ -13,7 +13,7 @@
 		/datum/attribute/skill/craft/crafting = 20,//they need this to craft bottles
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/alchemy = 50,
@@ -34,7 +34,7 @@
 		/datum/attribute/skill/craft/crafting = 20,//they need this to craft bottles
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/alchemy = 60,

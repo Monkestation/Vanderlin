@@ -7,7 +7,7 @@
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/labor/taming = 10,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/labor/farming = 20

@@ -115,12 +115,14 @@
  */
 /datum/action/cooldown/spell/undirected/planar_shift/proc/stop_shift(mob/living/cast_on, turf/start_point)
 	if(QDELETED(cast_on) || QDELETED(holder_mob) || QDELETED(src))
+		shift_active = FALSE
 		return
 
 	UnregisterSignal(holder_mob, COMSIG_MOVABLE_MOVED)
 	// The caster escaped our holder_mob somehow?
 	if(cast_on.loc != holder_mob)
 		qdel(holder_mob)
+		shift_active = FALSE
 		return
 
 	// Pick an exit turf to deposit the shifter

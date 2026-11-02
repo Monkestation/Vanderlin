@@ -13,10 +13,10 @@
 		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/labor/mathematics = 30, //They use math to calculate the trajectory of attacks, so they can parry behind them, trust, ook told me
+		/datum/attribute/skill/educated/mathematics = 30, //They use math to calculate the trajectory of attacks, so they can parry behind them, trust, ook told me
 	)
 
 /datum/job/advclass/mercenary/enforcer
@@ -35,6 +35,7 @@
 		TRAIT_BATTLE_READY,
 		TRAIT_BLINDFIGHTING,
 		TRAIT_UNDODGING, //They can't dodge at all. This also mean that if they don't have anything to parry with, they're done.
+		TRAIT_EXPERT_PARRY,
 	)
 
 /datum/job/advclass/mercenary/enforcer/after_spawn(mob/living/carbon/human/spawned, client/player_client)

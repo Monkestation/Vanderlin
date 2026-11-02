@@ -10,10 +10,10 @@
 		/datum/attribute/skill/combat/shields = 20,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 10,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 	)
 
 /datum/attribute_holder/sheet/job/inhumencleric/old
@@ -28,10 +28,10 @@
 		/datum/attribute/skill/combat/shields = 20,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 20,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 	)
 
 /datum/job/advclass/combat/inhumencleric

@@ -6530,11 +6530,6 @@
 /obj/structure/flora/grass/thorn_bush,
 /turf/open/floor/dirt,
 /area/outdoors)
-"HV" = (
-/obj/structure/dungeon_entry,
-/obj/structure/fluff/walldeco/vinez/red,
-/turf/closed/mineral/random,
-/area/under/cave)
 "HX" = (
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/blood/tracks{
@@ -202541,7 +202536,7 @@ qp
 qp
 qp
 sB
-HV
+sB
 ir
 VD
 VD

@@ -284,38 +284,113 @@
 		return
 	narco.drugged_up = TRUE
 
+/// How often (deciseconds) we re-check the threshold while craving, to catch
+/// changes that don't fire the shock signal (blood loss, Endurance buffs expiring).
+#define MASO_RECHECK_INTERVAL (10 SECONDS)
+/// If the holder is dead when a craving would start, retry after this long.
+#define MASO_DEAD_RETRY_DELAY (1 MINUTES)
+/// Time between the craving starting and the stress/debuff kicking in. Getting
+/// enough pain inside this window satisfies the craving with no penalty at all.
+#define MASO_GRACE_PERIOD (3 MINUTES)
+
 /datum/quirk/vice/masochist
 	name = "Masochist"
 	desc = "I love the feeling of pain, so much I can't get enough of it."
 	point_value = 4
-	var/next_paincrave = 0
+	/// Timer that starts the next craving
+	var/craving_timer
+	/// Timer that periodically re-evaluates pain while craving
+	var/recheck_timer
+	/// Are we currently craving pain?
+	var/craving = FALSE
+	/// Timer that applies the penalties if the grace period runs out
+	var/grace_timer
+	/// Have the stress and debuff been applied for this craving?
+	var/penalties_active = FALSE
+	/// Last threshold we messaged the holder about
 	var/last_pain_threshold = NONE
+	/// Absolute world.time of the next craving, kept for anything that reads it
+	var/next_paincrave = 0
+
+/datum/quirk/vice/masochist/Destroy()
+	cleanup_craving()
+	if(craving_timer)
+		deltimer(craving_timer)
+		craving_timer = null
+	return ..()
 
 /datum/quirk/vice/masochist/on_examined(mob/user, list/P, list/examine_contents)
 	if(HAS_TRAIT(user, TRAIT_RECOGNIZE_ADDICTS))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, SPAN_GOD_BAOTHA("Masochist!"))
 
 /datum/quirk/vice/masochist/on_spawn()
-	next_paincrave = world.time + rand(15 MINUTES, 25 MINUTES)
+	schedule_craving(rand(1 MINUTES, 1 MINUTES))
 	return ..()
 
-/datum/quirk/vice/masochist/on_life(mob/living/user)
-	if(!ishuman(user))
-		return
-	var/mob/living/carbon/human/H = user
+/// Schedules the next craving to start in `delay` deciseconds
+/datum/quirk/vice/masochist/proc/schedule_craving(delay)
+	if(craving_timer)
+		deltimer(craving_timer)
+	next_paincrave = world.time + delay
+	craving_timer = addtimer(CALLBACK(src, PROC_REF(start_craving)), delay, TIMER_STOPPABLE)
 
-	if(next_paincrave > world.time)
-		last_pain_threshold = NONE
+/// The craving begins: apply penalties once and start listening for pain changes
+/datum/quirk/vice/masochist/proc/start_craving()
+	craving_timer = null
+
+	var/mob/living/carbon/human/H = owner
+	if(!H)
+		return
+	// No point craving on a corpse, try again later
+	if(H.stat == DEAD)
+		schedule_craving(MASO_DEAD_RETRY_DELAY)
 		return
 
-	H.add_stress(/datum/stress_event/vice)
-	H.apply_status_effect(/datum/status_effect/debuff/addiction)
+	craving = TRUE
+	last_pain_threshold = NONE
+
+	// Penalties are delayed: the holder gets a window to satisfy the craving first
+	grace_timer = addtimer(CALLBACK(src, PROC_REF(apply_penalties)), MASO_GRACE_PERIOD, TIMER_STOPPABLE)
+
+	RegisterSignal(H, COMSIG_CARBON_SHOCK_UPDATED, PROC_REF(on_shock_updated))
+	recheck_timer = addtimer(CALLBACK(src, PROC_REF(recheck)), MASO_RECHECK_INTERVAL, TIMER_STOPPABLE)
+
+	evaluate_pain(H)
+
+/// Pain changed on the holder
+/datum/quirk/vice/masochist/proc/on_shock_updated(datum/source, traumatic_shock)
+	SIGNAL_HANDLER
+
+	if(!craving)
+		return
+	evaluate_pain(source)
+
+/// Slow fallback re-check for blood volume and Endurance drift
+/datum/quirk/vice/masochist/proc/recheck()
+	recheck_timer = null
+	if(!craving)
+		return
+
+	var/mob/living/carbon/human/H = owner
+	if(!H)
+		return
+
+	evaluate_pain(H)
+	// evaluate_pain() may have satisfied the craving, in which case we must not re-arm
+	if(craving)
+		recheck_timer = addtimer(CALLBACK(src, PROC_REF(recheck)), MASO_RECHECK_INTERVAL, TIMER_STOPPABLE)
+
+/// Works out the current threshold, messages on changes, and satisfies the craving if high enough
+/datum/quirk/vice/masochist/proc/evaluate_pain(mob/living/carbon/human/H)
+	if(!craving || !istype(H) || H.stat == DEAD)
+		return
 
 	var/current_pain = H.getShock()
 	var/bloodloss_factor = 1
 	if(CAN_HAVE_BLOOD(H))
 		bloodloss_factor = clamp(1.0 - (H.get_blood_volume() / BLOOD_VOLUME_NORMAL), 0.0, 0.5)
-	var/new_pain_threshold = get_pain_threshold(current_pain * (1.0 + (bloodloss_factor * 1.4)) * clamp(2 - (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) / 10), 0.5, 1.5))
+	var/endurance_factor = clamp(2 - (GET_MOB_ATTRIBUTE_VALUE(H, STAT_ENDURANCE) / 10), 0.5, 1.5)
+	var/new_pain_threshold = get_pain_threshold(current_pain * (1.0 + (bloodloss_factor * 1.4)) * endurance_factor)
 
 	if(last_pain_threshold == NONE)
 		to_chat(H, span_boldwarning("I could really use some pain right now..."))
@@ -333,22 +408,63 @@
 				to_chat(H, span_blue("More, I love it!"))
 
 	last_pain_threshold = new_pain_threshold
+
 	if(new_pain_threshold == MASO_THRESHOLD_FOUR)
 		to_chat(H, span_blue("<b>That's more like it...</b>"))
-		next_paincrave = world.time + rand(35 MINUTES, 45 MINUTES)
-		H.remove_stress(/datum/stress_event/vice)
-		H.remove_status_effect(/datum/status_effect/debuff/addiction)
+		satisfy(H)
+
+/// Craving fulfilled: remove penalties, stop listening, schedule the next one
+/datum/quirk/vice/masochist/proc/satisfy(mob/living/carbon/human/H)
+	cleanup_craving() // also removes the penalties if they were applied
+	schedule_craving(rand(35 MINUTES, 45 MINUTES))
+
+/// The grace period ran out without the craving being satisfied
+/datum/quirk/vice/masochist/proc/apply_penalties()
+	grace_timer = null
+	if(!craving || penalties_active)
+		return
+
+	var/mob/living/carbon/human/H = owner
+	if(!H)
+		return
+
+	penalties_active = TRUE
+	H.add_stress(/datum/stress_event/vice)
+	H.apply_status_effect(/datum/status_effect/debuff/addiction)
+	to_chat(H, span_warning("The craving gnaws at me..."))
+
+/// Tears down everything the craving set up (signals, recheck timer, flags)
+/datum/quirk/vice/masochist/proc/cleanup_craving()
+	craving = FALSE
+	last_pain_threshold = NONE
+	if(recheck_timer)
+		deltimer(recheck_timer)
+		recheck_timer = null
+	if(grace_timer)
+		deltimer(grace_timer)
+		grace_timer = null
+	var/mob/living/carbon/human/H = owner
+	if(istype(H) && !QDELETED(H))
+		UnregisterSignal(H, COMSIG_CARBON_SHOCK_UPDATED)
+		if(penalties_active)
+			H.remove_stress(/datum/stress_event/vice)
+			H.remove_status_effect(/datum/status_effect/debuff/addiction)
+	penalties_active = FALSE
 
 /datum/quirk/vice/masochist/proc/get_pain_threshold(pain_amt)
 	switch(pain_amt)
-		if(-INFINITY to 25)
+		if(-INFINITY to SHOCK_STAGE_1)
 			return MASO_THRESHOLD_ONE
-		if(25 to 50)
+		if(SHOCK_STAGE_1 + 1 to SHOCK_STAGE_2)
 			return MASO_THRESHOLD_TWO
-		if(50 to 95)
+		if(SHOCK_STAGE_2 + 1 to SHOCK_STAGE_3)
 			return MASO_THRESHOLD_THREE
-		if(95 to INFINITY)
+		if(SHOCK_STAGE_3 + 1 to INFINITY)
 			return MASO_THRESHOLD_FOUR
+
+#undef MASO_RECHECK_INTERVAL
+#undef MASO_DEAD_RETRY_DELAY
+#undef MASO_GRACE_PERIOD
 
 // Chronic Pain Vices
 /datum/quirk/vice/chronic_arthritis

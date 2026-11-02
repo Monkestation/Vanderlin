@@ -1595,44 +1595,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	animate(pickup, alpha = 175, pixel_x = to_x, pixel_y = to_y, time = 0.3 SECONDS, transform = animation_matrix, easing = CUBIC_EASING)
 	animate(alpha = 0, transform = matrix().Scale(0.7), time = 0.1 SECONDS)
 
-/obj/item/proc/make_modifyable(sockets = 2, max_sockets = 2)
-	AddComponent(/datum/component/modifications, sockets, max_sockets)
-
-/proc/generate_random_socketed_item(item_type, socket_count, gem_quality_range = list(GEM_CHIPPED, GEM_PERFECT))
-	if(!item_type)
-		switch(rand(1, 2))
-			if(1)
-				item_type = pick(subtypesof(/obj/item/clothing))
-			if(2)
-				item_type = pick(subtypesof(/obj/item/weapon))
-
-	if(!socket_count)
-		socket_count = rand(1, 6)
-
-	var/obj/item/new_item = new item_type(get_turf(usr))
-	new_item.make_modifyable(socket_count, socket_count)
-
-	// Fill with random gems
-	var/list/gem_types = list(
-		/obj/item/gem/red,
-		/obj/item/gem/violet,
-		/obj/item/gem/yellow,
-		/obj/item/gem/green,
-		/obj/item/gem/diamond,
-		/obj/item/gem/blue,
-	)
-
-	for(var/i = 1 to socket_count)
-		var/gem_type = pick(gem_types)
-		var/obj/item/gem/new_gem = new gem_type
-		new_gem.quality = rand(gem_quality_range[1], gem_quality_range[2])
-		new_gem.generate_socketing_properties()
-
-		var/datum/component/modifications/mod = new_item.GetComponent(/datum/component/modifications)
-		mod?.socket_gem(new_gem, null) // null user for automatic generation
-
-	return new_item
-
 /obj/item/proc/can_embed()
 	if(HAS_TRAIT(src, TRAIT_NODROP) || HAS_TRAIT(src, TRAIT_NOEMBED))
 		return FALSE

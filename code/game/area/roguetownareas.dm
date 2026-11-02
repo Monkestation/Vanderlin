@@ -234,6 +234,7 @@
 	background_track_night = null
 	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
+		/turf/open/floor/naturalstone,
 		/turf/open/floor/dirt,
 		/turf/open/water,)
 	ambush_mobs = list(
@@ -427,10 +428,6 @@
 	background_track = 'sound/music/area/townstreets.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
 	background_track_night = 'sound/music/area/sleeping.ogg'
-
-/area/delver
-	delver_restrictions = TRUE
-	converted_type = /area/delver
 
 /area/ship/topdeck
 	name = "upperdeck"

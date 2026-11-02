@@ -13,6 +13,7 @@
 	cast_range = 15
 
 	required_form = FORM_ICE
+	associated_skill = /datum/attribute/skill/magic/arcane/ice
 	required_technique = TECHNIQUE_IMBUE
 
 	spell_cost = 25

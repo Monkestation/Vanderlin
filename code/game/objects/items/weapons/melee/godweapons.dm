@@ -13,7 +13,7 @@
 #define GOREFEAST_WORTHY list(\
 	span_danger("A worthy one!"),\
 	span_danger("Bathe me in their blood."),\
-	span_danger("You can smell their fear can't you?"),\
+	span_danger("You can smell their fear, can't you?"),\
 	span_danger("Unleash your fury, soak the soil in their blood."),\
 	span_danger("Feast on their organs."),\
 	span_danger("Cull the world of the weak!"),\
@@ -42,6 +42,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
 	. = ..()
@@ -123,6 +124,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/zizo
 
 	COOLDOWN_DECLARE(fire_projectile)
 
@@ -244,6 +246,7 @@
 	projectile_damage_multiplier = 1.1
 
 	item_weight = 2 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 	var/obj/item/instrument/harp/turbulenta/FUCK
 
@@ -356,6 +359,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 	COOLDOWN_DECLARE(pleonexia_blink)
 
@@ -423,6 +427,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /datum/intent/sword/cut/martyr
 	item_damage_type = "fire"
@@ -452,7 +457,7 @@
 
 /obj/item/weapon/greataxe/steel/grandmaster
 	name = "divine greataxe"
-	desc = "The Axe of Saint Altierre. A holy great axe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him and nearly killing him."
+	desc = "The Axe of Saint Altierre. A holy greataxe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him almost to the point of death."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
 	item_weight = 4.5 KILOGRAMS
@@ -460,6 +465,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /datum/intent/axe/cut/battle/greataxe/martyr
 	item_damage_type = "fire"
@@ -515,6 +521,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /obj/item/weapon/polearm/spear/grandmaster/Initialize()
 	. = ..()
@@ -544,6 +551,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
 	. = ..()

@@ -138,3 +138,15 @@
 	desc = "A painting of a lamptern lit vase of flowers."
 	icon_state = "flowerpainting_deployed"
 	stolen_painting = /obj/item/painting/flower
+
+/obj/item/painting/dawn
+	icon_state = "dawnpainting"
+	desc = "A painting of a Astrata's radiant dawn."
+	sellprice = 40
+	deployed_structure = /obj/structure/fluff/walldeco/painting/flower
+
+/obj/structure/fluff/walldeco/painting/dawn
+	desc = "A painting of a Astrata's radiant dawn."
+	icon_state = "dawnpainting_deployed"
+	stolen_painting = /obj/item/painting/dawn
+

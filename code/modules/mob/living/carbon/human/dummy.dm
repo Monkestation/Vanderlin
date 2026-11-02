@@ -1,7 +1,7 @@
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
-	status_flags = GODMODE|CANPUSH
+	status_flags = CANPUSH
 	mouse_drag_pointer = MOUSE_INACTIVE_POINTER
 	var/in_use = FALSE
 
@@ -15,6 +15,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	GLOB.mob_living_list -= src
 	GLOB.alive_mob_list -= src
 	GLOB.mob_list -= src
+	ADD_TRAIT(src, TRAIT_GODMODE, INNATE_TRAIT)
 
 /mob/living/carbon/human/dummy/Destroy()
 	in_use = FALSE

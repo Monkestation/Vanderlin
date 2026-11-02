@@ -29,7 +29,7 @@
 	internal_reagents.maximum_volume = 1000
 	internal_reagents.my_atom = src
 
-	AddComponent(/datum/component/storage/concrete/grid/crucible)
+	AddComponent(/datum/component/storage/concrete/sack/grid/crucible)
 
 	START_PROCESSING(SSobj, src)
 

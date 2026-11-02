@@ -16,7 +16,7 @@
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/riding = 10,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 35,
 
@@ -42,7 +42,7 @@
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/riding = 10,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 40,
 
