@@ -595,6 +595,7 @@
 	blocksound = CHAINHIT
 	melting_material = /datum/material/steel
 	melt_amount = 100
+	smeltresult = null
 	clothing_flags = CANT_SLEEP_IN
 	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT

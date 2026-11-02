@@ -168,6 +168,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	item_weight = 4 KILOGRAMS
+	smeltresult = null
 
 /obj/item/weapon/shield/tower/spidershield
 	name = "spider shield"

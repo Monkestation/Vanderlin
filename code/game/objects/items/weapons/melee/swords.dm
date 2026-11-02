@@ -179,6 +179,7 @@
 	icon_state = "decsword1"
 	sellprice = 140
 	item_weight = 1.2 KILOGRAMS
+	melting_material = /datum/material/steel
 
 /obj/item/weapon/sword/decorated/Initialize()
 	. = ..()

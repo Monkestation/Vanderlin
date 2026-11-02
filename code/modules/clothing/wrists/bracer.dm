@@ -213,6 +213,7 @@
 	sewrepair = null
 	alternate_worn_layer = WRISTS_LAYER
 	item_weight = 2.5 KILOGRAMS
+	melting_material = /datum/material/iron
 
 /obj/item/clothing/wrists/bracers/ironbriar/equipped(mob/user, slot)
 	. = ..()

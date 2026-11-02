@@ -91,7 +91,7 @@
 
 /datum/anvil_recipe/weapons/bronze/cane
 	name = "Artificer Cane"
-	additional_items = list(/obj/item/ingot/copper = 1)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 	created_item = /obj/item/weapon/mace/cane/bronze
 
 /datum/anvil_recipe/weapons/bronze/shortsword

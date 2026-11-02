@@ -29,7 +29,7 @@
 	desc = "Iron plate armor with shoulder guards. An incomplete, bulky set of good armor."
 	icon_state = "ihalfplate"
 	item_state = "ihalfplate"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR
 	armor_type = /datum/armor/plate/bad
 	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
@@ -109,7 +109,7 @@
 	icon_state = "iplate"
 	item_state = "iplate"
 	sellprice = VALUE_IRON_ARMOR*2
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/plate/bad
 	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
@@ -124,7 +124,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/rust_armor.dmi'
 	icon_state = "rustplate"
 	item_state = "rustplate"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/plate/bad
 	max_integrity = ARMOR_INT_CHEST_PLATE_DECREPIT
@@ -353,4 +353,3 @@
 	boobed = FALSE
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
-	smeltresult = /obj/item/ingot/iron

@@ -133,6 +133,8 @@
 	sellprice = 35
 	item_weight = 600 GRAMS
 	melting_material = /datum/material/bronze
+	smeltresult = null
+	melt_amount = 30
 
 /obj/item/weapon/mace/cane/necran
 	name = "necran rod"

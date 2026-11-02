@@ -364,10 +364,6 @@
 	created_item = /obj/item/clothing/head/helmet/ironpot/lakkariancap
 	additional_items = list(/obj/item/ingot/gold = 1)
 
-/datum/anvil_recipe/armor/iron/nasal_helmet
-	name = "Nasal Helmet"
-	created_item = /obj/item/clothing/head/helmet/nasal
-
 /datum/anvil_recipe/armor/iron/skullcap
 	name = "Skullcap"
 	created_item = /obj/item/clothing/head/helmet/skullcap
@@ -392,9 +388,9 @@
 	created_item = /obj/item/clothing/head/helmet/visored/sallet/iron
 	craftdiff = 2
 
-/datum/anvil_recipe/armor/iron/eoran_sallet
+/datum/anvil_recipe/armor/steel/eoran_sallet
 	name = "Eoran Sallet"
-	additional_items = list(/obj/item/ingot/iron = 1)
+	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/clothing/head/helmet/sallet/eoran
 	craftdiff = 2
 
@@ -404,9 +400,9 @@
 	created_item = (/obj/item/clothing/head/helmet/visored/knight/iron)
 	craftdiff = 2
 
-/datum/anvil_recipe/armor/iron/owlhelmet
+/datum/anvil_recipe/armor/steel/owlhelmet
 	name = "Strigidae Armet"
-	additional_items = list(/obj/item/ingot/iron = 1)
+	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/clothing/head/helmet/visored/knight/owl
 	craftdiff = 2
 
