@@ -219,12 +219,6 @@
 	},
 /turf/open/floor/dirt,
 /area/under/tomb/cave/lava)
-"nR" = (
-/obj/structure/circle_protection,
-/obj/item/alch/firedust,
-/obj/item/weapon/sword/silver,
-/turf/open/floor/hexstone,
-/area/under/tomb/cave/lava)
 "of" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
@@ -264,10 +258,6 @@
 "qt" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/cobble,
-/area/under/tomb/cave/lava)
-"qE" = (
-/mob/living/simple_animal/hostile/skeleton/bow,
-/turf/open/floor/carpet/royalblack,
 /area/under/tomb/cave/lava)
 "qN" = (
 /obj/structure/bed/inn/double,
@@ -352,8 +342,7 @@
 /area/under/tomb/cave/lava)
 "vF" = (
 /obj/effect/decal/cleanable/sigil,
-/obj/item/weapon/knife/dagger/silver,
-/obj/item/reagent_containers/powder/moondust_purest,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "ws" = (
@@ -641,7 +630,7 @@
 /area/under/tomb/cave/lava)
 "Pq" = (
 /obj/structure/fluff/buysign{
-	name = "If you are reading this, the Ten says you are a nerd."
+	name = "If you are reading this, Xylix says you are a nerd."
 	},
 /turf/open/floor/grass/red,
 /area/under/tomb/cave/lava)
@@ -724,10 +713,10 @@
 /obj/machinery/light/fueled/oven/west,
 /obj/structure/closet/crate/chest,
 /obj/item/cooking/pan,
-/obj/item/reagent_containers/food/snacks/meat/mince,
-/obj/item/reagent_containers/food/snacks/meat/mince,
-/obj/item/reagent_containers/food/snacks/meat/mince,
-/obj/item/reagent_containers/food/snacks/meat/mince,
+/obj/item/reagent_containers/food/snacks/meat/mince/beef,
+/obj/item/reagent_containers/food/snacks/meat/mince/beef,
+/obj/item/reagent_containers/food/snacks/meat/mince/beef,
+/obj/item/reagent_containers/food/snacks/meat/mince/beef,
 /obj/item/reagent_containers/food/snacks/meat/poultry,
 /obj/item/reagent_containers/food/snacks/meat/poultry,
 /turf/open/floor/hexstone,
@@ -759,7 +748,7 @@
 "Yd" = (
 /obj/structure/circle_protection,
 /obj/item/alch/firedust,
-/obj/item/weapon/sword/rapier/silver,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/hexstone,
 /area/under/tomb/cave/lava)
 "Ye" = (
@@ -1944,7 +1933,7 @@ Tr
 Tr
 Sd
 Jj
-nR
+Yd
 An
 Sd
 Tr
@@ -2239,7 +2228,7 @@ nt
 cx
 An
 HH
-qE
+HH
 nK
 Tr
 Tr
