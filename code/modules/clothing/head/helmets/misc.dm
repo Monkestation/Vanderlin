@@ -389,7 +389,7 @@
 	block2add = FOV_BEHIND
 	equip_delay_self = 3 SECONDS
 	unequip_delay_self = 3 SECONDS
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	sellprice = VALUE_STEEL_HELMET+BONUS_VALUE_TINY
 	armor_type = /datum/armor/head/plate
 	body_parts_covered = FULL_HEAD
@@ -437,6 +437,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/head/plate/blacksteel
+	melting_material = /datum/material/blacksteel
 	item_weight = 6.4 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 2
 	max_integrity = INTEGRITY_OLD_BLACKSTEEL
@@ -454,7 +455,7 @@
 	icon_state = "isallet_visor"
 	item_state = "isallet_visor"
 	item_weight = 3 KILOGRAMS
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_HELMET+BONUS_VALUE_TINY
 	armor_type = /datum/armor/head/plate/bad
 	max_integrity = INTEGRITY_OLD_STRONG

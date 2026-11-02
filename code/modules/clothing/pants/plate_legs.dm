@@ -74,7 +74,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/pants/plate/good
 	item_weight = 3 KILOGRAMS

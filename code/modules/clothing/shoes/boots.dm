@@ -46,6 +46,7 @@
 	item_weight = 2.1 KILOGRAMS
 
 	material_category = ARMOR_MAT_PLATE
+	melting_material = /datum/material/steel
 
 /obj/item/clothing/shoes/boots/armor/gold
 	name = "golden greaves"
@@ -55,7 +56,7 @@
 	body_parts_covered = FEET | LEGS
 	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
 	anvilrepair = null
-	smeltresult = /obj/item/ingot/gold
+	melting_material = /datum/material/gold
 	grid_height = 96
 	grid_width = 96
 	sellprice = 200
@@ -69,7 +70,7 @@
 	desc = "Padded sabatons of bronze, tightly strapped together and padded with hide from a fearsome beaste. The sandals clack about, yet they do not feel obstructive; if anything, you've never felt more agile while beplated."
 	icon_state = "bronzegreaves"
 	body_parts_covered = FEET | LEGS
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 /obj/item/clothing/shoes/boots/armor/light
 	name = "light plate boots"
@@ -81,7 +82,7 @@
 	armor_class = AC_MEDIUM
 	sellprice = 20
 	item_weight = 1.4 KILOGRAMS
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/clothing/shoes/boots/armor/ironmaille
 	name = "chainmail boots"
@@ -95,7 +96,7 @@
 	item_weight = 1 KILOGRAMS
 	smeltresult = null
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
-	melt_amount = 75
+	melt_amount = 50
 
 /obj/item/clothing/shoes/boots/armor/light/rust
 	name = "rusted light plate boots"
@@ -104,7 +105,7 @@
 	icon = 'icons/roguetown/clothing/special/rust_armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rust_armor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/rust_armor.dmi'
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/boots/plate/bad
 	max_integrity = INTEGRITY_OLD_STANDARD
@@ -117,7 +118,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/boots/plate/good
 	item_weight = 2.1 KILOGRAMS
