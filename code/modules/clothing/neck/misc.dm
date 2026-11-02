@@ -343,6 +343,7 @@
 	icon_state = "bevor"
 	flags_inv = HIDEFACIALHAIR
 	melting_material = /datum/material/steel
+	smeltresult = null
 	melt_amount = 75
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'

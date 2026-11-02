@@ -72,9 +72,9 @@
 	armor_type = /datum/armor/wrist/maille
 	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = CUT_AND_MINOR_CRITS
-	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
-	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
-	melt_amount = 75
+	smeltresult = null
+	melting_material = /datum/material/iron
+	melt_amount = 50 // we get one bar per two pieces of the item recovered and smelted
 
 /obj/item/clothing/wrists/bracers/leather
 	name = "leather bracers"

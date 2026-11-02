@@ -3,7 +3,7 @@
 	desc = "A steel nasal helmet, usually worn by the guards of any respectable fief."
 	icon_state = "nasal"
 	sellprice = VALUE_STEEL_SMALL_ITEM
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/steel
 	body_parts_covered = COVERAGE_NASAL
 	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 2.3 KILOGRAMS
@@ -15,7 +15,7 @@
 	desc = "Worn by proud fighters of remote clans."
 	icon_state = "gallowglass"
 	sellprice = VALUE_STEEL_SMALL_ITEM
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 2.5 KILOGRAMS
 
@@ -25,7 +25,7 @@
 	desc = "A typical style of helmet worn by Sea Elf pirates, this helmet comes with metal flaps that protects the cheeks."
 	icon_state = "coppergate"
 	sellprice = VALUE_STEEL_SMALL_ITEM
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	body_parts_covered = COVERAGE_NASAL
 	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 3.12 KILOGRAMS
@@ -36,7 +36,7 @@
 	desc = "Worn by proud Sea Elf clan leaders this decorative helmet design signifies wealth and authority."
 	icon_state = "decorative_coppergate"
 	sellprice = VALUE_STEEL_SMALL_ITEM+BONUS_VALUE_MODEST
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	body_parts_covered = COVERAGE_NASAL
 	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 3.12 KILOGRAMS
@@ -237,7 +237,7 @@
 	desc = "A heavy lamellar cap made out of copper, a primitive material with an effective design to keep the head safe"
 	icon_state = "lamellar"
 	flags_inv = HIDEEARS
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
 	sellprice = VALUE_LEATHER_HELMET // until copper/new mats properly finished and integrated this is a stopgap
 
 	armor_type = /datum/armor/head/padded/good
