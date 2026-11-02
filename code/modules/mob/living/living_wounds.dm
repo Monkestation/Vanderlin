@@ -57,6 +57,8 @@
 
 /// Loops through our list of wounds healing them until we run out of healing or all wounds are healed
 /mob/living/proc/heal_wounds(heal_amount, datum/source)
+	if(heal_amount <= 0)
+		return FALSE
 	var/healed_any = FALSE
 	for(var/datum/wound/wound as anything in get_wounds())
 		if(heal_amount <= 0)
@@ -65,13 +67,18 @@
 		if(amount_healed)
 			heal_amount -= amount_healed
 			healed_any = TRUE
+	for(var/obj/item/organ/artery/artery as anything in getorganslotlist(ORGAN_SLOT_ARTERY))
+		if(!artery.damage)
+			continue
+		artery.applyOrganDamage(-heal_amount)
+		healed_any = TRUE
 	return healed_any
 
 /// Simple version for adding a wound - DO NOT CALL THIS ON CARBON MOBS!
 /mob/living/proc/simple_add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE, forced = FALSE)
 	if(!wound || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
-	if(!forced && (status_flags & GODMODE))
+	if(!forced && HAS_TRAIT(src, TRAIT_GODMODE))
 		return FALSE
 	if(ispath(wound, /datum/wound))
 		var/datum/wound/primordial_wound = GLOB.primordial_wounds[wound]
@@ -103,7 +110,7 @@
 
 /// Simple version of crit rolling, attempts to do a critical hit on a mob that uses simple wounds - DO NOT CALL THIS ON CARBON MOBS, THEY HAVE BODYPARTS!
 /mob/living/proc/simple_woundcritroll(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE)
-	if(!bclass || !dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+	if(!bclass || !dam || HAS_TRAIT(src, TRAIT_GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return
 
 	var/do_crit = TRUE
@@ -172,7 +179,7 @@
 
 /// Tries to do a critical hit on a mob that uses simple wounds - DO NOT CALL THIS ON CARBON MOBS, THEY HAVE BODYPARTS!
 /mob/living/proc/simple_try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE)
-	if(!bclass || !dam || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
+	if(!bclass || !dam || HAS_TRAIT(src, TRAIT_GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS))
 		return FALSE
 	var/used
 	if(user)
@@ -222,7 +229,7 @@
 
 /// Simple version for adding an embedded object - DO NOT CALL THIS ON CARBON MOBS!
 /mob/living/proc/simple_add_embedded_object(obj/item/embedder, silent = FALSE, crit_message = FALSE)
-	if(!embedder || !embedder.can_embed() || (status_flags & GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) || HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
+	if(!embedder || !embedder.can_embed() || HAS_TRAIT(src, TRAIT_GODMODE) || !HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) || HAS_TRAIT(src, TRAIT_PIERCEIMMUNE))
 		return FALSE
 	LAZYADD(simple_embedded_objects, embedder)
 	embedder.is_embedded = TRUE

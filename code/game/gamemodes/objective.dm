@@ -175,7 +175,7 @@ GLOBAL_LIST(admin_objective_list) //Prefilled admin assignable objective list
 	if(!target || !considered_alive(target) || considered_afk(target))
 		return TRUE
 	var/turf/T = get_turf(target.current)
-	return !T || !is_station_level(T.z)
+	return !T || !is_town_level(T.z)
 
 /datum/objective/mutiny/update_explanation_text()
 	..()
@@ -486,7 +486,7 @@ GLOBAL_LIST_EMPTY(possible_items)
 	var/found = FALSE
 	while (!found)
 		var/area/dropoff_area = pick(GLOB.areas)
-		if(dropoff_area && is_station_level(dropoff_area.z) && !dropoff_area.outdoors)
+		if(dropoff_area && is_town_level(dropoff_area.z) && !dropoff_area.outdoors)
 			dropoff = dropoff_area
 			found = TRUE
 

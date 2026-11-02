@@ -1,4 +1,4 @@
-import { Box, Button, Section, Stack, Tabs } from 'tgui-core/components';
+import { Box, Button, Input, Section, Stack, Tabs, Tooltip} from 'tgui-core/components';
 import { useBackend, useLocalState } from '../backend';
 import { Window } from '../layouts';
 
@@ -15,6 +15,11 @@ type SnapshotData = {
   name: string;
   vcolor: string | null;
   job: string;
+  job_key: string;
+  job_category: string;
+  honorary: string | null;
+  honorary_suffix: string | null;
+  species: string;
   gender: string;
   age: number | string;
 };
@@ -34,15 +39,41 @@ type Data = {
   rival_pref: number;
 };
 
-// Known categories in preferred display order.
-// Any category not listed here will appear alphabetically after these.
 const TAB_ORDER = ['Rival', 'Friend'];
+
+const JOB_CATEGORY_ORDER = [
+  'Court',
+  'Garrison',
+  'Gallowband',
+  'Church',
+  'Inquisition',
+  'Serfs',
+  'Company',
+  'Peasants',
+  'Apprentices',
+  'Youth',
+  'Wanderers',
+  'Other',
+  'Unknown',
+];
+
+const jobCategoryRank = (cat: string | undefined) => {
+  const idx = JOB_CATEGORY_ORDER.indexOf(cat ?? 'Unknown');
+  return idx === -1 ? JOB_CATEGORY_ORDER.length : idx;
+};
+
+const formatDisplayName = (snapshot: SnapshotData | null, fallback: string) => {
+  if (!snapshot) return fallback;
+  const parts = [snapshot.honorary, snapshot.name ?? fallback, snapshot.honorary_suffix].filter(Boolean);
+  return parts.join(' ');
+};
 
 export const Relations = () => {
   const { data } = useBackend<Data>();
   const { relations = [], rival_count, rival_pref } = data;
 
   const [tab, setTab] = useLocalState<string>('rel_tab', 'All');
+  const [search, setSearch] = useLocalState<string>('rel_search', '');
 
   const categories = Array.from(new Set(relations.map((r) => r.category)));
   const orderedCategories = [
@@ -51,25 +82,48 @@ export const Relations = () => {
   ];
   const tabs = ['All', ...orderedCategories];
 
-  const visible = relations.filter((r) => {
-    if (tab === 'All') return true;
-    return r.category === tab;
-  });
+  const query = (search ?? '').trim().toLowerCase();
+
+  const visible = relations
+    .filter((r) => (tab === 'All' ? true : r.category === tab))
+    .filter((r) => {
+      if (!query) return true;
+      const s = r.snapshot;
+      const haystack = [
+        formatDisplayName(s, r.name),
+        s?.job,
+        s?.job_key,
+        s?.species,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(query);
+    })
+    .sort((a, b) => {
+      const catDiff = jobCategoryRank(a.snapshot?.job_category) - jobCategoryRank(b.snapshot?.job_category);
+      if (catDiff !== 0) return catDiff;
+      return formatDisplayName(a.snapshot, a.name).localeCompare(formatDisplayName(b.snapshot, b.name));
+    });
 
   return (
-    <Window width={360} height={520} title="Relations">
+    <Window width={380} height={560} title="Relations">
       <Window.Content scrollable>
         <Tabs>
           {tabs.map((t) => (
-            <Tabs.Tab
-              key={t}
-              selected={tab === t}
-              onClick={() => setTab(t)}
-            >
+            <Tabs.Tab key={t} selected={tab === t} onClick={() => setTab(t)}>
               {t}
             </Tabs.Tab>
           ))}
         </Tabs>
+        <Box mb={1}>
+          <Input
+            fluid
+            placeholder="Search name, job, or species..."
+            value={search ?? ''}
+            onChange={(value) => setSearch(value ?? '')}
+          />
+        </Box>
         <Box mb={1} color="label">
           Rivals: {rival_count} / {rival_pref} preferred
         </Box>
@@ -77,7 +131,7 @@ export const Relations = () => {
           {visible.length === 0 && (
             <Stack.Item>
               <Box color="gray" italic>
-                No relations in this category.
+                No relations match.
               </Box>
             </Stack.Item>
           )}
@@ -97,17 +151,21 @@ const RelationCard = ({ rel }: { rel: RelationEntry }) => {
   const { name, snapshot, desc, grudges } = rel;
   const [open, setOpen] = useLocalState<boolean>(`grudge_open_${name}`, false);
 
-  const displayName = snapshot?.name ?? name;
+  const displayName = formatDisplayName(snapshot, name);
   const job = snapshot?.job ?? 'Unknown';
+  const species = snapshot?.species ?? 'Unknown';
   const gender = snapshot?.gender
     ? snapshot.gender.charAt(0).toUpperCase() + snapshot.gender.slice(1)
     : 'Unknown';
   const age = snapshot?.age ?? '?';
+  const jobKey = snapshot?.job_key ?? job;
+  const hasAltTitle = jobKey && job !== jobKey;
+
 
   return (
     <Section
       title={
-        <Box inline>
+        <Box inline style={{ color: 'red', fontWeight: 'bold' }}>
           {displayName}
         </Box>
       }
@@ -129,7 +187,16 @@ const RelationCard = ({ rel }: { rel: RelationEntry }) => {
         </Stack.Item>
         <Stack.Item>
           <Box>
-            {job} &mdash; {gender}, {age}
+            {hasAltTitle ? (
+              <Tooltip content={jobKey}>
+                <Box inline style={{ borderBottom: '1px dotted currentColor', cursor: 'help' }}>
+                  {job}
+                </Box>
+              </Tooltip>
+            ) : (
+              job
+            )}
+            {' '}&mdash; {species}, {gender}, {age}
           </Box>
         </Stack.Item>
         {open && grudges.length > 0 && (
@@ -149,7 +216,13 @@ const RelationCard = ({ rel }: { rel: RelationEntry }) => {
                           <Button
                             icon="comment"
                             tooltip="Say this gossip aloud"
-                            onClick={() => act('say_gossip', { text: g.say_string, rel_index: g.rel_index, history_index: g.history_index })}
+                            onClick={() =>
+                              act('say_gossip', {
+                                text: g.say_string,
+                                rel_index: g.rel_index,
+                                history_index: g.history_index,
+                              })
+                            }
                           />
                         </Stack.Item>
                       )}

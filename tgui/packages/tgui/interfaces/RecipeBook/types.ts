@@ -284,6 +284,9 @@ export interface Recipe {
   distill_message?: string;
   ingredients?: ItemRef[];
   required_skill?: number;
+  // spellcraft
+  forms?: FormTechniqueContribution[];
+  techniques?: FormTechniqueContribution[];
 }
 
 export interface RecipeBookData {
@@ -291,4 +294,14 @@ export interface RecipeBookData {
   book_desc: string;
   recipes: Recipe[];
   linked_recipes: Recipe[];
+}
+
+export interface FormTechniqueContribution {
+  name: string;
+  color?: string;
+  points?: number;
+  cost_mult?: number;
+  speed_mult?: number;
+  magnitude_mod?: number;
+  holder?: number;
 }

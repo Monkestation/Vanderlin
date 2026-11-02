@@ -7,22 +7,21 @@ SUBSYSTEM_DEF(frenzy_handler)
 	var/list/currentrun = list()
 
 /datum/controller/subsystem/frenzy_handler/stat_entry(msg)
-	var/list/activelist = GLOB.frenzy_list
-	msg = "Frenzy:[length(activelist)]"
+	msg = "Frenzy:[length(GLOB.frenzy_list)]"
 	return ..()
 
 /datum/controller/subsystem/frenzy_handler/fire(resumed = FALSE)
 
-	if (!resumed)
+	if(!resumed)
 		var/list/activelist = GLOB.frenzy_list
 		src.currentrun = activelist.Copy()
 
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
 
-	while(currentrun.len)
-		var/mob/living/carbon/H = currentrun[currentrun.len]
-		--currentrun.len
+	while(length(currentrun))
+		var/mob/living/carbon/H = currentrun[length(currentrun)]
+		currentrun.len--
 
 		if (QDELETED(H)) // Some issue causes nulls to get into this list some times. This keeps it running, but the bug is still there.
 			GLOB.frenzy_list -= H
@@ -33,5 +32,6 @@ SUBSYSTEM_DEF(frenzy_handler)
 			H.handle_automated_frenzy()
 		else
 			GLOB.frenzy_list -= H
+
 		if (MC_TICK_CHECK)
 			return

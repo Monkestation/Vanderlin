@@ -3,11 +3,11 @@
 
 /datum/outfit/overlord/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/helmet/skullcap/cult
+	head = /obj/item/clothing/head/helmet/skullcap/magus
 	pants = /obj/item/clothing/pants/chainlegs
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/chaincoif
-	armor = /obj/item/clothing/shirt/robe/necromancer
+	armor = /obj/item/clothing/shirt/robe/magus
 	shirt = /obj/item/clothing/shirt/tunic/colored
 	wrists = /obj/item/clothing/wrists/bracers
 	gloves = /obj/item/clothing/gloves/chain
@@ -19,7 +19,8 @@
 
 	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lich)
 
-	H.adjust_spell_points(17)
+	H.adjust_technique_mastery_points(12)
+	H.adjust_form_mastery_points(20)
 	H.grant_language(/datum/language/undead)
 	if(H.dna?.species)
 		H.dna.species.native_language = "Zizo Chant"

@@ -61,8 +61,7 @@
 	stop_sound_channel(CHANNEL_HEARTBEAT)
 	heartbeat_sound = BEAT_NONE
 	pulse = PULSE_NONE
-	for(var/thing in getorganslotlist(ORGAN_SLOT_HEART))
-		var/obj/item/organ/heart/heart = thing
+	for(var/obj/item/organ/heart/heart as anything in getorganslotlist(ORGAN_SLOT_HEART))
 		heart.Stop()
 
 	if(!MOBTIMER_EXISTS(src, MT_DEATHDIED))
@@ -101,9 +100,9 @@
 					if(HU.dna?.species && dna?.species)
 						if(HU.dna.species.id == dna.species.id)
 							var/mob/living/carbon/D = HU
-							if(D.has_quirk(/datum/quirk/vice/maniac))
+							if(D.has_quirk(/datum/quirk/vice/addiction/sadist))
 								D.add_stress(/datum/stress_event/viewdeathmaniac)
-								D.sate_addiction(/datum/quirk/vice/maniac)
+								D.sate_addiction(/datum/quirk/vice/addiction/sadist)
 							else
 								D.add_stress(/datum/stress_event/viewdeath)
 
@@ -141,9 +140,9 @@
 			if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 				continue
 			var/mob/living/carbon/V = CA
-			if(V.has_quirk(/datum/quirk/vice/maniac))
+			if(V.has_quirk(/datum/quirk/vice/addiction/sadist))
 				V.add_stress(/datum/stress_event/viewgibmaniac)
-				V.sate_addiction(/datum/quirk/vice/maniac)
+				V.sate_addiction(/datum/quirk/vice/addiction/sadist)
 				continue
 			V.add_stress(/datum/stress_event/viewgib)
 	. = ..()

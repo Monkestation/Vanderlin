@@ -711,6 +711,7 @@
 		for(var/datum/job/job in SSjob.joinable_occupations)
 			if(job.title == Add)
 				job.total_positions += 1
+				job.spawn_positions += 1
 				break
 
 		src.manage_free_slots()
@@ -724,13 +725,12 @@
 
 		for(var/datum/job/job in SSjob.joinable_occupations)
 			if(job.title == Add)
-				var/newtime = null
-				newtime = input(usr, "How many jebs do you want?", "Add wanted posters", "[newtime]") as num|null
-				if(!newtime)
-					to_chat(src.owner, "Setting to amount of positions filled for the job")
-					job.total_positions = job.current_positions
+				var/new_slot_count = null
+				new_slot_count = input(usr, "How many jebs do you want?", "Add wanted posters", "[new_slot_count]") as num|null
+				if(!new_slot_count)
 					break
-				job.total_positions = newtime
+				job.total_positions = new_slot_count
+				job.spawn_positions = new_slot_count
 
 		src.manage_free_slots()
 
@@ -743,6 +743,7 @@
 		for(var/datum/job/job in SSjob.joinable_occupations)
 			if(job.title == Remove && job.total_positions - job.current_positions > 0)
 				job.total_positions -= 1
+				job.spawn_positions -= 1
 				break
 
 		src.manage_free_slots()
@@ -1236,7 +1237,7 @@
 			return
 		var/mob/M = locate(href_list["mob"]) in GLOB.mob_list
 		var/client/mob_client = M.client
-		check_pq_menu(mob_client.key)
+		check_pq_menu(mob_client.ckey)
 	else if(href_list["showtriumphs"])
 		if(!check_rights(R_ADMIN))
 			return

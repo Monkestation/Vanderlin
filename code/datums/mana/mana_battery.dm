@@ -96,7 +96,7 @@
 	grid_width = 32
 
 /obj/item/mana_battery/mana_crystal/standard/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(!istype(tool, /obj/item/weapon/knife))
+	if(!(tool.tool_behaviour == TOOL_KNIFE))
 		return NONE
 
 	user.visible_message(span_notice("[user] starts to chop up [src]!"), span_notice("You start to chop up [src]!"))
@@ -152,11 +152,11 @@
 	has_initial_mana_pool = TRUE
 	icon = 'icons/obj/crystals.dmi'
 	icon_state = "amulet"
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/neck/mana_star/Initialize()
 	. = ..()
 	enchant(/datum/enchantment/mana_regeneration)
-	enchant(/datum/enchantment/mana_capacity)
 
 /obj/item/clothing/neck/mana_star/get_initial_mana_pool_type()
 	return /datum/mana_pool/mana_star

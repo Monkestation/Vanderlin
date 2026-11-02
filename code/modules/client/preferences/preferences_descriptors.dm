@@ -106,7 +106,7 @@
 		var/list/custom_data = print_custom_descriptor_customization(i)
 		if(custom_data)
 			dat += custom_data
-	dat +=  "<br><a href='?_src_=prefs;preference=gossip;task=gossip'>Rivals, Gossip & Rumors</a>"
+	dat +=  "<br><a href='byond://?_src_=prefs;preference=gossip;task=gossip'>Rivals, Gossip & Rumors</a>"
 	dat += "<br><br><center>Descriptors can vary based on gender<br>Some don't appear if you don't match a requirement<center>"
 	return dat
 
@@ -114,7 +114,7 @@
 	var/static/list/translation = CUSTOM_PREFIX_TRANSLATION_LIST
 	var/list/dat = list()
 	var/datum/custom_descriptor_entry/custom_entry = custom_descriptors[index]
-	dat += "<br><b>Custom #[index]:</b> <a href='?_src_=prefs;index=[index];preference=custom_descriptor_prefix;task=change_descriptor'>[translation["[custom_entry.prefix_type]"]]</a><a href='?_src_=prefs;index=[index];preference=custom_descriptor_content;task=change_descriptor'>[custom_entry.content_text]</a>"
+	dat += "<br><b>Custom #[index]:</b> <a href='byond://?_src_=prefs;index=[index];preference=custom_descriptor_prefix;task=change_descriptor'>[translation["[custom_entry.prefix_type]"]]</a><a href='byond://?_src_=prefs;index=[index];preference=custom_descriptor_content;task=change_descriptor'>[custom_entry.content_text]</a>"
 	return dat
 
 /datum/preferences/proc/show_descriptors_ui(mob/user)

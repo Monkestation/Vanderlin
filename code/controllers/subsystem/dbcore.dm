@@ -239,6 +239,10 @@ SUBSYSTEM_DEF(dbcore)
 	last_error = error
 
 /datum/controller/subsystem/dbcore/proc/NewQuery(sql_query, arguments, db)
+	if(IsAdminAdvancedProcCall())
+		log_admin_private("ERROR: Advanced admin proc call led to sql query: [sql_query]. Query has been blocked")
+		message_admins("ERROR: Advanced admin proc call led to sql query. Query has been blocked")
+		return FALSE
 	if(!db)
 		return new /datum/DBQuery(connection, sql_query, arguments)
 	else
@@ -453,7 +457,7 @@ Delayed insert mode was removed in mysql 7 and only works with MyISAM type table
 			return FALSE
 
 /datum/DBQuery/proc/slow_query_check()
-	message_admins("HEY! A database query timed out. Did the server just hang? <a href='?_src_=holder;[HrefToken()];slowquery=yes'>\[YES\]</a>|<a href='?_src_=holder;[HrefToken()];slowquery=no'>\[NO\]</a>")
+	message_admins("HEY! A database query timed out. Did the server just hang? <a href='byond://?_src_=holder;[HrefToken()];slowquery=yes'>\[YES\]</a>|<a href='byond://?_src_=holder;[HrefToken()];slowquery=no'>\[NO\]</a>")
 
 /datum/DBQuery/proc/NextRow(async = TRUE)
 	Activity("NextRow")

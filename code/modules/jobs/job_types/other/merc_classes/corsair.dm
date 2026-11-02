@@ -11,7 +11,7 @@
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 30
 	)
 
@@ -45,7 +45,7 @@
 	beltl = /obj/item/weapon/sword/sabre/cutlass
 	beltr = /obj/item/weapon/knife/dagger
 	scabbards = list(/obj/item/weapon/scabbard/sword, /obj/item/weapon/scabbard/knife)
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/adventurer/corsair/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()

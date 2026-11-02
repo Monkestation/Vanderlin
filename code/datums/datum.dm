@@ -152,6 +152,13 @@
 
 	return QDEL_HINT_QUEUE
 
+///Generate a tag for this /datum, if it implements one
+///Should be called as early as possible, best would be in New, to avoid weakref mistargets
+///Really just don't use this, you don't need it, global lists will do just fine MOST of the time
+///We really only use it for mobs to make id'ing people easier
+/datum/proc/GenerateTag()
+	datum_flags |= DF_USE_TAG
+
 ///Only override this if you know what you're doing. You do not know what you're doing
 ///This is a threat
 /datum/proc/_clear_signal_refs()

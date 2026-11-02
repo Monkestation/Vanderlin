@@ -16,6 +16,7 @@
 	open_sound_volume = 35
 	close_sound_volume = 50
 	drag_slowdown = 0
+	sellprice = CARGO_CRATE_VALUE
 
 /obj/structure/closet/crate/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
@@ -91,6 +92,8 @@
 		else
 			to_chat(user, span_warning("The consecration failed, but you did seal the coffin."))
 		sealed = TRUE
+		for(var/mob/living/living in contents)
+			ADD_TRAIT(living, TRAIT_STASIS, "[src]")
 		icon_state = "casketconsecrated"
 		pot.remaining = max(pot.remaining - 150, 0) // take only 150 since each process tick removes 20 from the tallow pot, and sometimes people wait.
 		return
@@ -116,7 +119,10 @@
 							L.apply_status_effect(/datum/status_effect/debuff/cursed_t2)
 				SEND_SIGNAL(user, COMSIG_GRAVE_ROBBED, user)
 				sealed = FALSE
+				for(var/mob/living/living in contents)
+					REMOVE_TRAIT(living, TRAIT_STASIS, "[src]")
 				consecrated = FALSE
+
 				icon_state = "casket"
 				return
 		. = ..()

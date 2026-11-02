@@ -60,11 +60,11 @@
 	return TRUE
 
 /datum/job_priority_boost/proc/can_boost_vessel(vessel_id)
-    if(!is_valid())
-        return FALSE
-    if(length(applicable_jobs) && !(vessel_id in applicable_jobs))
-        return FALSE
-    return TRUE
+	if(!is_valid())
+		return FALSE
+	if(length(applicable_jobs) && !(vessel_id in applicable_jobs))
+		return FALSE
+	return TRUE
 
 /datum/job_priority_boost/proc/use_boost()
 	if(uses_remaining > 0)

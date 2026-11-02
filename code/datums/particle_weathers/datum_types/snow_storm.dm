@@ -1,18 +1,18 @@
 //Snow - goes down and swirls
 /particles/weather/snow
-	icon_state             = list("cross"=2, "snow_1"=5, "snow_2"=2, "snow_3"=2,)
-	color                  = "#ffffff"
-	position               = generator("box", list(-500,-256,0), list(400,500,0))
-	grow			       = list(-0.01,-0.01)
-	spin                   = generator("num",-10,10)
-	gravity                = list(0, -2, 0.1)
-	drift                  = generator("circle", 0, 3) // Some random movement for variation
-	friction               = 0.3  // shed 30% of velocity and drift every 0.1s
+	icon_state = list("cross" = 2, "snow_1" = 5, "snow_2" = 2, "snow_3" = 2,)
+	color = "#ffffff"
+	position = generator("box", list(-500, -256, 0), list(400, 500, 0))
+	grow = list(-0.01, -0.01)
+	spin = generator("num", -10, 10)
+	gravity = list(0, -2, 0.1)
+	drift = generator("circle", 0, 3) // Some random movement for variation
+	friction  = 0.3  // shed 30% of velocity and drift every 0.1s
 	//Weather effects, max values
-	maxSpawning           = 100
-	minSpawning           = 20
-	wind                  = 2
-	transform 			   = null
+	maxSpawning = 100
+	minSpawning = 20
+	wind = 2
+	transform = null
 
 /datum/particle_weather/snow_gentle
 	name = "Gentle Snow"
@@ -27,7 +27,6 @@
 	maxSeverityChange = 5
 	severitySteps = 5
 	immunity_type = TRAIT_SNOWSTORM_IMMUNE
-	probability = 1
 	target_trait = PARTICLEWEATHER_SNOW
 	forecast_tag = "snow"
 
@@ -44,13 +43,9 @@
 	minSeverity = 40
 	maxSeverity = 100
 
-	weather_duration_lower = 4 MINUTES
-	weather_duration_upper = 10 MINUTES
-
 	maxSeverityChange = 50
 	severitySteps = 50
 	immunity_type = TRAIT_SNOWSTORM_IMMUNE
-	probability = 1
 	target_trait = PARTICLEWEATHER_SNOW
 	weather_special_effect = /datum/weather_effect/snow
 	forecast_tag = "snow"

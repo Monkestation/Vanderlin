@@ -57,6 +57,9 @@
 	// For explosion tracking and logging
 	var/explosion_source
 
+	///do we apply burns or just brute?
+	var/burns = TRUE
+
 	// Workaround to account for the fact that this is subsystemized
 	// See on_turf_entered
 	var/list/atom/exploded_atoms = list()
@@ -205,14 +208,14 @@
 		var/atom/target = null
 		var/list/ranges = power_to_ranges(power)
 
-		INVOKE_ASYNC(in_turf, TYPE_PROC_REF(/atom, ex_act), explosion_severity, target, in_turf, ranges["devastation"], ranges["heavy"], ranges["light"], ranges["flame"])
+		INVOKE_ASYNC(in_turf, TYPE_PROC_REF(/atom, ex_act), explosion_severity, target, in_turf, ranges["devastation"], ranges["heavy"], ranges["light"], ranges["flame"], burns)
 
 		for(var/atom/A in in_turf)
 			if(A in exploded_atoms)
 				continue
 			if(A.gc_destroyed)
 				continue
-			INVOKE_ASYNC(A, TYPE_PROC_REF(/atom, ex_act), explosion_severity, target, in_turf, ranges["devastation"], ranges["heavy"], ranges["light"], ranges["flame"])
+			INVOKE_ASYNC(A, TYPE_PROC_REF(/atom, ex_act), explosion_severity, target, in_turf, ranges["devastation"], ranges["heavy"], ranges["light"], ranges["flame"], burns)
 			exploded_atoms += A
 
 	var/throw_dir = get_dir(in_turf, direction ? get_step(in_turf, direction) : pick(GLOB.alldirs))
@@ -270,6 +273,7 @@
 			E.power = new_power
 			E.power_falloff = new_falloff
 			E.falloff_shape = falloff_shape
+			E.burns = burns
 
 			// Set the direction the explosion is traveling in
 			E.direction = dir
@@ -324,7 +328,7 @@ as having entered the turf.
 
 
 // Spawns a cellular automaton of an explosion
-/proc/cell_explosion(turf/epicenter, power, falloff, falloff_shape = EXPLOSION_FALLOFF_SHAPE_LINEAR, direction, explosion_source, initial_call = TRUE)
+/proc/cell_explosion(turf/epicenter, power, falloff, falloff_shape = EXPLOSION_FALLOFF_SHAPE_LINEAR, direction, explosion_source, initial_call = TRUE, burns = TRUE)
 	if(!istype(epicenter))
 		epicenter = get_turf(epicenter)
 
@@ -367,6 +371,7 @@ as having entered the turf.
 	E.falloff_shape = falloff_shape
 	E.direction = direction
 	E.explosion_source = explosion_source
+	E.burns = burns
 
 	return E
 

@@ -12,7 +12,7 @@
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/whipsflails = 10,
 		/datum/attribute/skill/combat/shields = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/combat/axesmaces = 30,
 	)
@@ -26,7 +26,7 @@
 
 	traits = list(TRAIT_MEDIUMARMOR)
 	languages = list(/datum/language/newpsydonic)
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	total_positions = 2
 
 	cmode_music = 'sound/music/cmode/combat_grenzelhoft.ogg'
@@ -35,7 +35,7 @@
 	name = "Malaguero (Mercenary)"
 	neck = /obj/item/clothing/neck/coif
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	gloves = /obj/item/clothing/gloves/angle/grenzel
 	belt = /obj/item/storage/belt/leather
 	shirt = /obj/item/clothing/armor/gambeson

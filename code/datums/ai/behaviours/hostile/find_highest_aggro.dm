@@ -1,4 +1,5 @@
 /datum/ai_behavior/find_aggro_targets
+	behavior_flags = AI_BEHAVIOR_CAN_PLAN_DURING_EXECUTION | AI_BEHAVIOR_EXECUTE_ALONGSIDE
 	action_cooldown = 1 SECONDS
 
 /datum/ai_behavior/find_aggro_targets/get_cooldown(datum/ai_controller/cooldown_for)
@@ -59,6 +60,9 @@
 		return
 
 	// Clear target key since we don't have a valid target
+	var/atom/real_target = controller.blackboard[target_key]
+	if(isstructure(real_target))
+		return
 	controller.clear_blackboard_key(target_key)
 
 	// If we're using a field rn, just don't do anything
@@ -167,7 +171,7 @@
 /datum/ai_behavior/find_aggro_targets/proc/new_turf_found(turf/found, datum/ai_controller/controller, datum/targetting_datum/strategy)
 	var/valid_found = FALSE
 	var/mob/pawn = controller.pawn
-	for(var/maybe_target as anything in found)
+	for(var/maybe_target in found)
 		if(atom_allowed(maybe_target, strategy, pawn))
 			valid_found = TRUE
 			break
@@ -184,7 +188,7 @@
 	var/mob/living/pawn = controller.pawn
 	var/list/accepted_targets = list()
 
-	for(var/maybe_target as anything in found)
+	for(var/maybe_target in found)
 		if(atom_allowed(maybe_target, strategy, pawn))
 			accepted_targets += maybe_target
 
@@ -238,6 +242,19 @@
 		pawn.say(pick(GLOB.species_hostile))
 
 /datum/ai_behavior/find_aggro_targets/species_hostile/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
+	. = ..()
+	var/mob/living/pawn = controller.pawn
+	if(pawn)
+		pawn.cmode = FALSE
+
+/datum/ai_behavior/find_aggro_targets/guardsman/finish_action(datum/ai_controller/controller, succeeded, ...)
+	. = ..()
+	if(succeeded)
+		var/mob/living/pawn = controller.pawn
+		pawn.emote("rage")
+		pawn.say("For [SSmapping.config.map_name]!")
+
+/datum/ai_behavior/find_aggro_targets/guardsman/failed_to_find_anyone(datum/ai_controller/controller, target_key, targeting_strategy_key, hiding_location_key)
 	. = ..()
 	var/mob/living/pawn = controller.pawn
 	if(pawn)

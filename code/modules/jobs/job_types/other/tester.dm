@@ -12,7 +12,7 @@
 		/datum/attribute/skill/combat/polearms = list(-50, 50),
 		/datum/attribute/skill/combat/whipsflails = list(-50, 50),
 		/datum/attribute/skill/combat/knives = list(-50, 50),
-		/datum/attribute/skill/misc/reading = list(-50, 50)
+		/datum/attribute/skill/educated/reading = list(-50, 50)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
@@ -23,7 +23,7 @@
 	tutorial = "Try not to get obliterated by the Gods while they toy with you."
 	department_flag = PEASANTS
 	job_flags = (JOB_EQUIP_RANK)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	display_order = JDO_MERCENARY
 	#ifdef TESTSERVER
 	total_positions = 99

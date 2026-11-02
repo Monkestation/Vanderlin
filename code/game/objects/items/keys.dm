@@ -120,6 +120,7 @@
 	desc = "The Lord's key."
 	icon_state = "bosskey"
 	lockids = list(ACCESS_LORD)
+	examine_highlight_type = /datum/examine_highlight/royal_court
 
 /obj/item/key/lord/Initialize()
 	. = ..()
@@ -266,6 +267,44 @@
 	icon_state = "cheesekey"
 	lockids = list(ACCESS_CAPTAIN)
 
+/// Gallowband
+
+/obj/item/key/gallowband
+	name = "gallowband key"
+	desc = "This key belongs to the Gallowband."
+	icon_state = "rustkey"
+	lockids = list(ACCESS_GALLOWBAND)
+
+/obj/item/key/gallowband/secure
+	name = "gallowband garrison key"
+	desc = "This key belongs to the Gallowband Garrison."
+	icon_state = "spikekey"
+	lockids = list(ACCESS_GALLOWBAND_SECURE)
+
+/obj/item/key/gallowband/gothi
+	name = "gallowband gothi key"
+	desc = "This key belongs to the Gothi of the Gallowband."
+	icon_state = "birdkey"
+	lockids = list(ACCESS_GALLOWBAND_GOTHI)
+
+/obj/item/key/gallowband/hersir
+	name = "gallowband hersir key"
+	desc = "This key belongs to the Hersir of the Gallowband."
+	icon_state = "toothkey"
+	lockids = list(ACCESS_GALLOWBAND_HERSIR)
+
+/obj/item/key/gallowband/warden
+	name = "gallowband warden key"
+	desc = "This key belongs to the Warden of the Gallowband."
+	icon_state = "hornkey"
+	lockids = list(ACCESS_GALLOWBAND_WARDEN)
+
+/obj/item/key/bogwitch
+	name = "bog witch key"
+	desc = "This key opens the Bog Witch's hut."
+	icon_state = "hornkey"
+	lockids = list(ACCESS_BOGWITCH)
+
 /// Mercs
 
 /obj/item/key/tombwarden
@@ -291,12 +330,6 @@
 	icon_state = "rustkey"
 	lockids = list(ACCESS_WAREHOUSE)
 
-/obj/item/key/bogwitch
-	name = "bogwitch key"
-	desc = "This key opens the Bog Witch's hut."
-	icon_state = "hornkey"
-	lockids = list(ACCESS_BOGWITCH)
-
 ////// MANOR
 
 /obj/item/key/manor
@@ -305,11 +338,22 @@
 	icon_state = "mazekey"
 	lockids = list(ACCESS_MANOR)
 
+/obj/item/key/butler
+	name = "keep master key"
+	desc = "This key will open almost all Keep doors."
+	icon_state = "royalkey"
+	lockids = list(ACCESS_MANOR, ACCESS_BUTLER, ACCESS_SERVANT)
+
+/obj/item/key/servant
+	name = "keep servants key"
+	lockids = list(ACCESS_MANOR, ACCESS_SERVANT)
+	icon_state = "servekey"
+
 /obj/item/key/hand
 	name = "hand's key"
 	desc = "This regal key belongs to the Monarch's Right Hand."
 	icon_state = "cheesekey"
-	lockids = list(ACCESS_HAND)
+	lockids = list(ACCESS_HAND, ACCESS_COURTAGENT, ACCESS_SERVANT)
 
 /obj/item/key/courtagent
 	name = "court agent hideout key"
@@ -338,20 +382,36 @@
 /obj/item/key/consort
 	name = "consort key"
 	desc = "The Consort's key."
-	icon_state = "mazekey"
-	lockids = list(ACCESS_LORD)
+	icon_state = "royalkey"
+	lockids = list(ACCESS_MANOR, ACCESS_SERVANT, ACCESS_BUTLER, ACCESS_CONSORT)
 
-/obj/item/key/walls
+/obj/item/key/consort/monarch
+	name = "monarch's spare key"
+	desc = "The spare key of the monarch."
+
+/obj/item/key/heir
+	name = "heir's key"
+	desc = "The key of a royal arse."
+	icon_state = "lessroyalkey"
+	lockids = list(ACCESS_HEIR, ACCESS_MANOR)
+
+/obj/item/key/gatehouse
 	name = "keep gatehouse key"
 	desc = "This is a rusty key for the Keep Gatehouse."
 	icon_state = "rustkey"
 	lockids = list(ACCESS_MANOR_GATE)
 
+/obj/item/key/archivist
+	name = "archivist's key"
+	desc = "A smell of ink, parchment and dust clings to this key."
+	icon_state = "ekey"
+	lockids = list(ACCESS_ARCHIVIST)
+
 /obj/item/key/archive
 	name = "archive key"
 	desc = "This key looks barely used."
 	icon_state = "ekey"
-	lockids = list(ACCESS_ARCHIVE)
+	lockids = list(ACCESS_LIBRARY)
 
 /obj/item/key/mage
 	name = "magicians's key"
@@ -366,10 +426,28 @@
 	lockids = list(ACCESS_AT_ARMS)
 
 /obj/item/key/guest
-	name = "guest key"
-	desc = "The key to the manor's guest room. Given to visiting nobles."
+	name = "guest room master key"
+	desc = "The key to the keep guest rooms. Not for distribution."
 	icon_state = "greenkey"
-	lockids = list(ACCESS_GUEST)
+	lockids = list(ACCESS_GUEST1, ACCESS_GUEST2, ACCESS_GUEST3)
+
+/obj/item/key/guest/one
+	name = "guest room 1 key"
+	desc = "The key to the keep guest room. Given to visiting nobles."
+	icon_state = "brownkey"
+	lockids = list(ACCESS_GUEST1)
+
+/obj/item/key/guest/two
+	name = "guest room 2 key"
+	desc = "The key to the keep guest room. Given to visiting nobles."
+	icon_state = "brownkey"
+	lockids = list(ACCESS_GUEST2)
+
+/obj/item/key/guest/three
+	name = "guest room 3 key"
+	desc = "The key to the keep guest room. Given to visiting nobles."
+	icon_state = "brownkey"
+	lockids = list(ACCESS_GUEST3)
 
 /obj/item/key/courtphys
 	name = "court physician's key"
@@ -602,6 +680,54 @@
 	name = "penthouse ii key"
 	lockids = list("penthouse2")
 
+/obj/item/key/apartments/merc1
+	name = "mercenary apartment i key"
+	lockids = list("merc1")
+
+/obj/item/key/apartments/merc2
+	name = "mercenary apartment ii key"
+	lockids = list("merc2")
+
+/obj/item/key/apartments/merc3
+	name = "mercenary apartment iii key"
+	lockids = list("merc3")
+
+/obj/item/key/apartments/merc4
+	name = "mercenary apartment iv key"
+	lockids = list("merc4")
+
+/obj/item/key/apartments/merc5
+	name = "mercenary apartment v key"
+	lockids = list("merc5")
+
+/obj/item/key/apartments/merc6
+	name = "mercenary apartment vi key"
+	lockids = list("merc6")
+
+/obj/item/key/apartments/adv1
+	name = "adventurer apartment i key"
+	lockids = list("adv1")
+
+/obj/item/key/apartments/adv2
+	name = "adventurer apartment ii key"
+	lockids = list("adv2")
+
+/obj/item/key/apartments/adv3
+	name = "adventurer apartment iii key"
+	lockids = list("adv3")
+
+/obj/item/key/apartments/adv4
+	name = "adventurer apartment iv key"
+	lockids = list("adv4")
+
+/obj/item/key/apartments/adv5
+	name = "adventurer apartment v key"
+	lockids = list("adv5")
+
+/obj/item/key/apartments/adv6
+	name = "adventurer apartment vi key"
+	lockids = list("adv6")
+
 // SHOP KEYS
 
 /obj/item/key/shops
@@ -803,11 +929,11 @@
 /obj/item/key/vampire
 	desc = "This key is awfully pink and weirdly shaped."
 	icon_state = "vampkey"
-	lockids = list("mansionvampire")
+	lockids = list(ACCESS_VAMPIRE)
 
 /obj/item/key/bandit
 	icon_state = "mazekey"
-	lockids = list("banditcamp")
+	lockids = list(ACCESS_BANDIT)
 
 
 ////// MINOR NOBLES

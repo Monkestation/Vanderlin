@@ -191,7 +191,7 @@
 	initial_products = list()
 	initial_wanteds = list(
 		/obj/item/ingot/iron = list(5, INFINITY, ""),
-		/obj/item/natural/wood = list(8, INFINITY, ""),
+		/obj/item/natural/wood/plank = list(8, INFINITY, ""),
 	)
 	say_phrases = list(
 		ITEM_REJECTED_PHRASE = list(
@@ -375,7 +375,7 @@
 	initial_wanteds = list(
 		/obj/item/ingot/steel = list(8, INFINITY, ""),
 		/obj/item/natural/hide = list(12, INFINITY, ""),
-		/obj/item/natural/wood = list(6, INFINITY, ""),
+		/obj/item/natural/wood/plank = list(6, INFINITY, ""),
 	)
 	say_phrases = list(
 		ITEM_REJECTED_PHRASE = list(
@@ -571,7 +571,7 @@
 	base_type = list(/datum/supply_pack/instruments)
 	initial_products = list()
 	initial_wanteds = list(
-		/obj/item/natural/wood = list(4, INFINITY, ""),
+		/obj/item/natural/wood/plank = list(4, INFINITY, ""),
 		/obj/item/natural/bundle/fibers = list(6, INFINITY, ""),
 	)
 	say_phrases = list(

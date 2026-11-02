@@ -5,10 +5,11 @@
 		STAT_CONSTITUTION = 5,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/craft/alchemy = 60,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/magic/arcane/death = 60,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/combat/polearms = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
@@ -19,7 +20,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 10,
 
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/antagonist/lich
@@ -46,7 +47,7 @@
 		TRAIT_NOPAIN,
 		TRAIT_TOXIMMUNE,
 		TRAIT_STEELHEARTED,
-		TRAIT_NOSLEEP,
+		TRAIT_SLEEPIMMUNE,
 		TRAIT_INHUMENCAMP,
 		TRAIT_NOMOOD,
 		TRAIT_NOLIMBDISABLE,
@@ -58,11 +59,12 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_CABAL,
 		TRAIT_DEATHSIGHT,
+		TRAIT_NO_ORGAN_PROCESS,
 	)
 
 	var/list/spells = list(
 		/datum/action/cooldown/spell/projectile/fireball,
-		/datum/action/cooldown/spell/projectile/blood_bolt,
+		/datum/action/cooldown/spell/projectile/blood_bolt/arcyne,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/undirected/arcyne_eye,
@@ -127,9 +129,9 @@
 
 	L.set_faction(list(FACTION_UNDEAD))
 	L.mob_biotypes |= MOB_UNDEAD
-	L.grant_undead_eyes()
 	L.dna.species.inherent_traits |= TRAIT_NOBLOOD
 	L.skeletonize(FALSE)
+	L.grant_undead_eyes()
 
 	L.equipOutfit(/datum/outfit/lich)
 	L.set_patron(/datum/patron/inhumen/zizo)
@@ -142,11 +144,11 @@
 
 /datum/outfit/lich/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/helmet/skullcap/cult
+	head = /obj/item/clothing/head/helmet/skullcap/magus
 	pants = /obj/item/clothing/pants/chainlegs
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/chaincoif
-	armor = /obj/item/clothing/shirt/robe/necromancer
+	armor = /obj/item/clothing/shirt/robe/magus
 	shirt = /obj/item/clothing/shirt/tunic/colored
 	wrists = /obj/item/clothing/wrists/bracers
 	gloves = /obj/item/clothing/gloves/chain
@@ -155,10 +157,15 @@
 	beltr = /obj/item/reagent_containers/glass/bottle/manapot
 	beltl = /obj/item/weapon/knife/dagger/steel
 	r_hand = /obj/item/weapon/polearm/woodstaff
+	backpack_contents = list(
+		/obj/item/spellbook/expert/starter/death = 1
+	)
 
 	H.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lich)
 
-	H.adjust_spell_points(17) //Same as CM - Until they receive their spellbook.
+	H.adjust_technique_mastery_points(12)
+	H.adjust_form_mastery_points(20)
+	H.AddComponent(/datum/component/spell_modifier, list(), list(), list(FORM_DEATH = 2))
 	H.grant_language(/datum/language/undead)
 	if(H.dna?.species)
 		H.dna.species.native_language = "Zizo Chant"

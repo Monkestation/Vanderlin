@@ -2,13 +2,13 @@
 /datum/attribute_holder/sheet/job/mason
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_INTELLIGENCE = 1,
+		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/labor/mining = 30,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/masonry = 40,
@@ -16,7 +16,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/mason
@@ -26,15 +26,16 @@
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MASON
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 6
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/mason
 	give_bank_account = 8
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	can_be_apprentice = TRUE
 

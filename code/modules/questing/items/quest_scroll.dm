@@ -14,7 +14,7 @@ GLOBAL_LIST_EMPTY(quest_scrolls)
 	var/last_whisper = 0 // Last time the scroll whispered to the user
 	resistance_flags = FIRE_PROOF | LAVA_PROOF | INDESTRUCTIBLE | UNACIDABLE
 	max_integrity = 1000
-	armor = list("blunt" = 100, "slash" = 100, "stab" = 100, "piercing" = 100, "fire" = 100, "acid" = 100)
+	armor_type = /datum/armor/immune
 
 	COOLDOWN_DECLARE(next_compass_scan)
 
@@ -117,7 +117,7 @@ GLOBAL_LIST_EMPTY(quest_scrolls)
 			return
 	..()
 
-/obj/item/paper/scroll/quest/proc/get_quest_assignees(var/mob/user, var/include_giver = FALSE)
+/obj/item/paper/scroll/quest/proc/get_quest_assignees(mob/user, include_giver = FALSE)
 	var/list/assignees = list()
 
 	var/mob/quest_receiver = assigned_quest?.quest_receiver_reference?.resolve()

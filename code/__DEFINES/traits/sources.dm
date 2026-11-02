@@ -3,6 +3,7 @@
 #define TRAIT_GENERIC "generic"
 #define UNCONSCIOUS_TRAIT "unconscious"
 #define EYE_DAMAGE "eye_damage"
+#define EAR_DAMAGE "ear_damage"
 #define OBESITY_TRAIT "obesity"
 /// Granted by spells
 #define MAGIC_TRAIT "magic"
@@ -56,10 +57,12 @@
 #define BE_SPECIAL_TRAIT "be-special"
 /// trait associated with triumph buys
 #define TRIUMPH_TRAIT "triumph"
-/// trait assoicated with quirks
+/// trait associated with quirks
 #define QUIRK_TRAIT "quirk"
-/// trait assoicated with personal objectives
+/// trait associated with personal objectives
 #define OBJECTIVE_TRAIT "objective"
+/// trait associated with spawn protection
+#define HUGBOX_TRAIT	"hugbox"
 
 // unique trait sources, still defines
 #define TRAIT_BESTIALSENSE "bestial-sense"
@@ -73,6 +76,7 @@
 #define STASIS_MUTE "stasis"
 #define GENETICS_SPELL "genetics_spell"
 #define EYES_COVERED "eyes_covered"
+#define NO_EARS "no_ears"
 #define EYES_TINTED	"eyes_tinted"
 #define CULT_EYES "cult_eyes"
 #define TRAIT_SANTA "santa"
@@ -128,3 +132,7 @@
 #define MARTYR_TRAIT "martyr"
 /// Trait from wings
 #define WING_TRAIT "wings"
+/// Trait from brood eggs
+#define BROODMOTHER_EGG_TRAIT "broodmother_egg"
+/// Trait from an organ being inside a bodypart
+#define ORGAN_INSIDE_BODY_TRAIT "organ_inside_body"

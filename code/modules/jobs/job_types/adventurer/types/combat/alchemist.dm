@@ -12,7 +12,7 @@
 		/datum/attribute/skill/craft/bombs = 30,
 		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/misc/swimming = 10,
@@ -29,11 +29,11 @@
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/combat/alchemist
 	attribute_sheet = /datum/attribute_holder/sheet/job/alchemist_adventurer
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
 
 	traits = list(
-    	TRAIT_FORAGER,
+		TRAIT_FORAGER,
 		TRAIT_DEADNOSE
 	)
 

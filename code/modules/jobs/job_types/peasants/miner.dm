@@ -21,7 +21,7 @@
 		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/blacksmithing = 10,
 		/datum/attribute/skill/craft/smelting = 20,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 /datum/job/miner
@@ -31,15 +31,16 @@
 	department_flag = PEASANTS
 	display_order = JDO_MINER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 12
 	spawn_positions = 12
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/miner
 	give_bank_account = 6
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	can_be_apprentice = TRUE
 
@@ -75,7 +76,7 @@
 		return
 	shirt = /obj/item/clothing/shirt/undershirt/sailor
 	pants = /obj/item/clothing/pants/tights/sailor
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/miner/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()

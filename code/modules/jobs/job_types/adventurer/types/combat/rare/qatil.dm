@@ -12,7 +12,7 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/swimming = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sneaking = 40,
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/misc/lockpicking = 30,
@@ -34,7 +34,7 @@
 	outfit = /datum/outfit/adventurer/qatil
 	total_positions = 1
 	roll_chance = 10
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/qatil

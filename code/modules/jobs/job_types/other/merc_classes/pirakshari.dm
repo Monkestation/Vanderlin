@@ -14,7 +14,7 @@
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/climbing = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/craft/traps = 10
 	)
@@ -27,7 +27,7 @@
 	total_positions = 3
 	category_tags = list(CTAG_MERCENARY)
 
-	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
+	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander4.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/desert_pirate
 

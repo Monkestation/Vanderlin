@@ -29,7 +29,6 @@
 						/obj/item/alch/viscera = 1,
 						/obj/item/natural/fur/fox = 2,
 						/obj/item/natural/head/fox = 1)
-	faction = list("wolfs", "zombie")
 	mob_biotypes = MOB_ORGANIC|MOB_BEAST
 	remains_type = /obj/effect/decal/remains/fox
 	health = 100

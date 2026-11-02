@@ -6,7 +6,7 @@
 		STAT_INTELLIGENCE = 1,
 		STAT_SPEED = 1,
 		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/athletics = 20,
@@ -69,7 +69,7 @@
 
 /datum/outfit/pilgrim/noble
 	name = "Noble (Pilgrim)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backl = /obj/item/storage/backpack/satchel
 	neck = /obj/item/storage/belt/pouch/coins/veryrich
 	belt = /obj/item/storage/belt/leather

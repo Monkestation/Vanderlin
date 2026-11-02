@@ -21,15 +21,15 @@
 		return
 	playsound(src, 'sound/misc/handbell.ogg', 50, 1)
 
-	user.visible_message("<span class='notice'>[user] rings [src].</span>", span_notice("You ring [src]."))
+	user.visible_message(span_notice("[user] rings [src]."), span_notice("You ring [src]."))
 	for(var/mob/M in view(10, src.loc))
 		if(M != user && M.client)
-			to_chat(M, "<span class='notice'>You hear a small bell ringing.</span>")
+			to_chat(M, span_notice("You hear a small bell ringing."))
 
 	COOLDOWN_START(src, bell_ring, 4 SECONDS)
 
 /obj/item/handheld_bell/proc/sound_bell(mob/living/user)
-	user.visible_message("<span class='warning'>[user] rings the bell!</span>")
+	user.visible_message(span_warning("[user] rings the bell!"))
 	playsound(src, 'sound/misc/handbell.ogg', 100, TRUE)
 	var/turf/origin_turf = get_turf(src)
 
@@ -78,7 +78,7 @@
 
 		//sound played for other players
 		player.playsound_local(get_turf(player), 'sound/misc/handbell.ogg', 35, FALSE, pressure_affected = FALSE)
-		to_chat(player, "<span class='warning'>I hear the bell ring somewhere[disttext][dirtext]!</span>")
+		to_chat(player, span_warning("I hear the bell ring somewhere[disttext][dirtext]!"))
 
 /obj/item/handheld_bell/getonmobprop(tag)
 	. = ..()
@@ -120,11 +120,12 @@
 		return ITEM_INTERACT_BLOCKING
 
 	for(var/mob/M as anything in GLOB.player_list) // @everyone
-		if(M.client && M.can_hear()) // Disregard NPC's with no mind and sleeping/unconscious people
-			to_chat(M, "<span class='notice'>[src] rings, echoing solemnly far and wide across the realm.</span>")
-			M.playsound_local(M, 'sound/misc/bell.ogg', 50, 1)
+		if(!M.client || HAS_TRAIT(M, TRAIT_DEAF)) // Disregard NPC's with no mind and sleeping/unconscious people
+			continue
+		to_chat(M, span_notice("[src] rings, echoing solemnly far and wide across the realm."))
+		M.playsound_local(M, 'sound/misc/bell.ogg', 50, 1)
 
-	visible_message("<span class='notice'>[user] uses the [tool] to ring the [src].</span>")
+	visible_message(span_notice("[user] uses the [tool] to ring the [src]."))
 	COOLDOWN_START(src, bell_ring, 5 SECONDS)
 	return ITEM_INTERACT_SUCCESS
 

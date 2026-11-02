@@ -25,17 +25,61 @@
 
 	var/buildstacktype
 	var/buildstackamount = 2
-	var/bolts = TRUE
-
+	/// Directions in which the bed has its headrest on the left side.
+	var/left_headrest_dirs = NORTHEAST
 	//For the bed and sheet buff
 	var/sheet_tucked = FALSE
-	var/sheet_on = FALSE
 
-/obj/structure/bed/Initialize(mapload, ...)
+/obj/structure/bed/Initialize(mapload)
 	. = ..()
-	var/obj/item/bedsheet/sheet = locate() in loc
-	if(sheet)
-		sheet_on = TRUE
+	AddElement(/datum/element/soft_landing)
+	update_buckle_vars(dir)
+
+/obj/structure/bed/examine(mob/user)
+	. = ..()
+	if(sheet_tucked)
+		. += span_info("A sheet is neatly tucked in, and [src] looks ready for a good rest.")
+
+/obj/structure/bed/buckle_feedback(mob/living/being_buckled, mob/buckler)
+	if(HAS_TRAIT(being_buckled, TRAIT_RESTRAINED))
+		return ..()
+
+	if(being_buckled == buckler)
+		being_buckled.visible_message(
+			span_notice("[buckler] lays down on [src]."),
+			span_notice("You lay down on [src]."),
+			// visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
+		)
+	else
+		being_buckled.visible_message(
+			span_notice("[buckler] lays [being_buckled] down on [src]."),
+			span_notice("[buckler] lays you down on [src]."),
+			// visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
+		)
+
+/obj/structure/bed/unbuckle_feedback(mob/living/being_unbuckled, mob/unbuckler)
+	if(HAS_TRAIT(being_unbuckled, TRAIT_RESTRAINED))
+		return ..()
+
+	if(being_unbuckled == unbuckler)
+		being_unbuckled.visible_message(
+			span_notice("[unbuckler] gets up from [src]."),
+			span_notice("You get up from [src]."),
+			// visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
+		)
+	else
+		being_unbuckled.visible_message(
+			span_notice("[unbuckler] pulls [being_unbuckled] up from [src]."),
+			span_notice("[unbuckler] pulls you up from [src]."),
+			// visible_message_flags = ALWAYS_SHOW_SELF_MESSAGE,
+		)
+
+/obj/structure/bed/setDir(newdir)
+	. = ..()
+	update_buckle_vars(newdir)
+
+/obj/structure/bed/proc/update_buckle_vars(newdir)
+	buckle_lying = newdir & left_headrest_dirs ? 270 : 90
 
 /obj/structure/bed/atom_deconstruct(disassembled)
 	. = ..()
@@ -44,15 +88,6 @@
 
 /obj/structure/bed/attack_paw(mob/user)
 	return attack_hand(user)
-
-/obj/structure/bed/examine(mob/user)
-	. = ..()
-	if(sheet_tucked && sheet_on)
-		. += span_info("The sheet is neatly tucked in and the bed looks ready for a good rest.")
-	else if(!sheet_tucked && sheet_on)
-		. += span_info("Someone has already slept in this bed, the sheet is all messy.")
-	else
-		. += span_info("This bed has no sheet, at least it's still a bed.")
 
 /obj/structure/bed/post_buckle_mob(mob/living/M)
 	. = ..()

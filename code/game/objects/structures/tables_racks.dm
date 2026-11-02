@@ -380,12 +380,43 @@
 	icon = MAP_SWITCH('icons/obj/smooth_structures/fancy_table_royalblue.dmi', 'icons/obj/structures.dmi')
 	icon_state = "fancy_table_royalblue"
 
+/obj/structure/table/wood/fancy/navy
+	icon = MAP_SWITCH('icons/obj/smooth_structures/fancy_table_navy.dmi', 'icons/obj/structures.dmi')
+	icon_state = "fancy_table_navy"
+
+/obj/structure/table/wood/smooth
+	name = "wooden table"
+	icon = MAP_SWITCH('icons/obj/smooth_structures/tablewood_smooth.dmi', 'icons/obj/structures.dmi')
+	icon_state = "tablewood_smooth"
+	smoothing_flags = SMOOTH_BITMASK | SMOOTH_OBJ
+
 /*	..................   More tables   ................... */
 /obj/structure/table/wood/reinf_long
 	icon_state = "tablewood_reinf"
 
 /obj/structure/table/wood/plain_alt
 	icon_state = "tablewood_plain"
+
+/obj/structure/table/wood/round
+	icon_state = "tablewood_round"
+
+/obj/structure/table/wood/cloth/brown
+	icon_state = "tablecloth_brown"
+
+/obj/structure/table/wood/cloth/beige
+	icon_state = "tablecloth_beige"
+
+/obj/structure/table/wood/cloth/red
+	icon_state = "tablecloth_red"
+
+/obj/structure/table/wood/cloth/blue
+	icon_state = "tablecloth_blue"
+
+/obj/structure/table/wood/cloth/green
+	icon_state = "tablecloth_green"
+
+/obj/structure/table/wood/cloth/purple
+	icon_state = "tablecloth_purple"
 
 /obj/structure/table/wood/large_new
 	icon_state = "alt_largetable_mid"

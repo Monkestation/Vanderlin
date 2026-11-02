@@ -4,13 +4,14 @@
 		STAT_CONSTITUTION = 2,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/labor/taming = 30,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/labor/farming = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 	)
 
@@ -21,7 +22,7 @@
 	This is your duty, this is your call."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/cheesemaker
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	apprentice_name = "Cheesemaker Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 

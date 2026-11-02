@@ -6,16 +6,19 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CONSORT
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 	total_positions = 0
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/servant)
 	allowed_races = RACES_PLAYER_ROYALTY
 	outfit = /datum/outfit/consort
 	advclass_cat_rolls = list(CTAG_CONSORT = 20)
 	give_bank_account = 500
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	apprentice_name = JOB_SERVANT
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	noble_income = 22
@@ -57,7 +60,7 @@
 /datum/outfit/consort
 	name = JOB_CONSORT
 	head = /obj/item/clothing/head/crown/nyle/consortcrown
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	ring = /obj/item/clothing/ring/silver
 	belt = /obj/item/storage/belt/leather
 	beltl = /obj/item/storage/keyring/consort
@@ -71,6 +74,7 @@
 /datum/job/advclass/consort
 	inherit_parent_title = TRUE
 	exp_types_granted = list(EXP_TYPE_NOBLE)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 
 /datum/attribute_holder/sheet/job/highborn
 	raw_attribute_list = list(
@@ -84,12 +88,12 @@
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/sneaking = 10,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/attribute_holder/sheet/job/highborn/old
@@ -104,12 +108,12 @@
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/sneaking = 10,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/consort/highborn
@@ -157,12 +161,12 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/lockpicking = 20,
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/attribute_holder/sheet/job/courtesan/old
@@ -178,12 +182,12 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/lockpicking = 20,
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/job/advclass/consort/courtesan
@@ -202,6 +206,7 @@
 	shirt = /obj/item/clothing/armor/gambeson/heavy/winterdress
 	armor = /obj/item/clothing/armor/leather/vest/winterjacket
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
+	wrists = /obj/item/weapon/scabbard/knife/hidden/bs_misericorde
 
 /datum/outfit/consort/courtesan/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
@@ -226,7 +231,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 30,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/misc/riding = 10
@@ -247,7 +252,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 30,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/misc/riding = 10
@@ -293,12 +298,12 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/lockpicking = 20,
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/attribute_holder/sheet/job/night_spy/old
@@ -314,12 +319,12 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/lockpicking = 20,
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/job/advclass/consort/courtesan/night_spy
@@ -355,7 +360,7 @@
 /datum/job/exlady //just used to change the consort title
 	title = "Ex-Consort"
 	department_flag = NOBLEMEN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_CONSORT

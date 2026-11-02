@@ -6,10 +6,6 @@
 	spell_requirements = NONE
 	charge_time = 2 SECONDS
 
-	attunements = list(
-		/datum/attunement/death = 0.2,
-	)
-
 /datum/action/cooldown/spell/remove_enchantment/can_cast_spell(feedback)
 	. = ..()
 	if(!.)
@@ -89,10 +85,6 @@
 	charge_time = 2 SECONDS
 	spell_requirements = NONE
 
-	attunements = list(
-		/datum/attunement/death = 0.2,
-	)
-
 /datum/action/cooldown/spell/undirected/enter_overseer_mode/can_cast_spell(feedback)
 	. = ..()
 	if(!.)
@@ -118,7 +110,7 @@
 	var/mob/living/overlord_body = overlord_datum.owner.current
 
 	// Make the overlord body immobile and hidden during RTS mode
-	overlord_body.status_flags |= GODMODE
+	ADD_TRAIT(overlord_body, TRAIT_GODMODE, MAGIC_TRAIT)
 	overlord_body.alpha = 100
 	overlord_body.visible_message(span_danger("[overlord_body] enters a deep meditative trance, their form becoming ethereal."))
 	overlord_datum.owner.transfer_to(overlord_datum.overlord_controller)
@@ -131,7 +123,7 @@
 	if(!overlord_body)
 		return
 
-	overlord_body.status_flags &= ~GODMODE
+	REMOVE_TRAIT(overlord_body, TRAIT_GODMODE, MAGIC_TRAIT)
 	overlord_body.alpha = 255
 	overlord_body.visible_message(span_danger("[overlord_body] awakens from their trance, their form solidifying."))
 	overlord_datum.owner.transfer_to(overlord_body)
@@ -146,10 +138,6 @@
 	cooldown_time = 30 SECONDS
 	charge_time = 2 SECONDS
 	spell_requirements = NONE
-
-	attunements = list(
-		/datum/attunement/death = 0.2,
-	)
 
 	cast_range = 1
 
@@ -194,10 +182,6 @@
 	charge_time = 10 SECONDS
 	spell_requirements = NONE
 	spell_cost = 100
-
-	attunements = list(
-		/datum/attunement/death = 0.2,
-	)
 
 /datum/action/cooldown/spell/undirected/summon_worker/before_cast(atom/cast_on)
 	. = ..()

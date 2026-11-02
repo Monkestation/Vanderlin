@@ -31,8 +31,8 @@ SUBSYSTEM_DEF(movement)
 		currentrun = processing.Copy()
 
 	var/list/running = currentrun //Cache for... you've heard this before
-	while(running.len)
-		var/datum/move_loop/loop = running[running.len]
+	while(length(running))
+		var/datum/move_loop/loop = running[length(running)]
 		running.len--
 		if(loop.timer <= canonical_time)
 			loop.process() //This shouldn't get nulls, if it does, runtime

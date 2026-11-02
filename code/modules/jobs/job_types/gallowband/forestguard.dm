@@ -4,16 +4,17 @@
 	department_flag = GALLOWBAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_FORGUARD
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = ALL_AGES_LIST
 	allowed_races = RACES_PLAYER_ALL
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	give_bank_account = 30
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison2.ogg'
 
@@ -67,10 +68,10 @@
 /datum/outfit/forestguard
 	name = "Forest Guard Base"
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/leather
-	belt = /obj/item/storage/belt/leather/fgarrison
+	belt = /obj/item/storage/belt/leather/gallowband
 	backl = /obj/item/storage/backpack/satchel
 
 /datum/outfit/forestguard/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
@@ -83,6 +84,7 @@
 /datum/job/advclass/forestguard
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	banned_patrons = list()
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/forestguard/infantry
 	raw_attribute_list = list(
@@ -93,7 +95,7 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/lumberjacking = 10,
@@ -101,6 +103,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/axesmaces = 33,
 		/datum/attribute/skill/combat/whipsflails = 33,
 		/datum/attribute/skill/combat/swords = 30,
@@ -117,7 +120,7 @@
 	outfit = /datum/outfit/forestguard/infantry
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = ALL_AGES_LIST
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/infantry
 
@@ -152,7 +155,7 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/lumberjacking = 10,
@@ -160,6 +163,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/bows = 33,
 		/datum/attribute/skill/combat/crossbows = 33,
 		/datum/attribute/skill/combat/knives = 30,
@@ -173,7 +177,7 @@
 	outfit = /datum/outfit/forestguard/ranger
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = ALL_AGES_LIST
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/ranger
 
@@ -208,7 +212,7 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/lumberjacking = 10,
@@ -216,6 +220,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/knives = 20,
@@ -228,7 +233,7 @@
 	outfit = /datum/outfit/forestguard/reaver
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = ALL_AGES_LIST
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/reaver
 
@@ -265,7 +270,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/lumberjacking = 20,
@@ -273,6 +278,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/bows = 10,
@@ -286,13 +292,14 @@
 	outfit = /datum/outfit/forestguard/ossland_scout
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/ossland_scout
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
+		TRAIT_CLOSECOMBAT,
 		TRAIT_GALLOWBAND
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
@@ -300,9 +307,13 @@
 		/mob/proc/haltyell
 	)
 
+	spells = list(
+		/datum/action/innate/clench_fists
+	)
+
 /datum/outfit/forestguard/ossland_scout
 	name = JOB_FOREST_GUARD_HUSKARL_SCOUT
-	head = /obj/item/clothing/head/helmet/bascinet/atgervi/gronn/ownel
+	head = /obj/item/clothing/head/helmet/bascinet/owl/gronn/ownel
 	shirt = /obj/item/clothing/armor/chainmail/hauberk/gronn
 	gloves = /obj/item/clothing/gloves/angle/gronnfur
 	pants = /obj/item/clothing/pants/trou/leather/gronn
@@ -323,7 +334,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/lumberjacking = 20,
@@ -331,6 +342,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/swords = 33,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/shields = 30,
@@ -345,7 +357,7 @@
 	outfit = /datum/outfit/forestguard/ossland_fighter
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/ossland_fighter
 
@@ -361,7 +373,7 @@
 
 /datum/outfit/forestguard/ossland_fighter
 	name = JOB_FOREST_GUARD_HUSKARL_FIGHTER
-	head = /obj/item/clothing/head/helmet/bascinet/atgervi/gronn
+	head = /obj/item/clothing/head/helmet/bascinet/owl/gronn
 	shirt = /obj/item/clothing/armor/chainmail/hauberk/gronn
 	gloves = /obj/item/clothing/gloves/chain/gronn
 	beltl = /obj/item/weapon/sword/short/gronn

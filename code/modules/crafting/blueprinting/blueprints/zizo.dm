@@ -2,9 +2,10 @@
 	craftdiff = 0
 	category = "Structure"
 	requires_learning = TRUE
+	construct_tool = /obj/item/weapon/hammer
 
 /datum/blueprint_recipe/zizo/shrine
-	name = "Profane Shrine"
+	name = "inverted cross"
 	required_materials = list(
 		/obj/item/grown/log/tree/small = 1,
 		/obj/item/natural/stone = 2,

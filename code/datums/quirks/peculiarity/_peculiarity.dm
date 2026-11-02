@@ -14,6 +14,7 @@
 	var/mob/living/carbon/human/H = owner
 	H.transform = H.transform.Scale(1.15, 1.15)
 	H.update_transform()
+	return ..()
 
 /datum/quirk/peculiarity/large_sized/on_remove()
 	if(!ishuman(owner))
@@ -21,6 +22,7 @@
 	var/mob/living/carbon/human/H = owner
 	H.transform = H.transform.Scale(0.87, 0.87)
 	H.update_transform()
+	return ..()
 
 /datum/quirk/peculiarity/small_sized
 	name = "Small Build"
@@ -32,6 +34,7 @@
 	var/mob/living/carbon/human/H = owner
 	H.transform = H.transform.Scale(0.9, 0.9)
 	H.update_transform()
+	return ..()
 
 /datum/quirk/peculiarity/small_sized/on_remove()
 	if(!ishuman(owner))
@@ -39,7 +42,7 @@
 	var/mob/living/carbon/human/H = owner
 	H.transform = H.transform.Scale(1.11, 1.11)
 	H.update_transform()
-
+	return ..()
 
 /datum/quirk/peculiarity/witless_pixie
 	name = "Witless Pixie"
@@ -56,13 +59,16 @@
 		ADD_TRAIT(owner, TRAIT_BEAUTIFUL, QUIRK_TRAIT)
 	else if(prob(30))
 		ADD_TRAIT(owner, TRAIT_UGLY, QUIRK_TRAIT)
+	return ..()
 
 /datum/quirk/peculiarity/witless_pixie/on_remove()
 	owner?.remove_stat_modifier(STATMOD_WITLESS_PIXIE)
+	return ..()
 
 /datum/quirk/peculiarity/ugly
 	name = "Ugly"
 	desc = "Your appearance turns heads... in all the wrong ways. With features ranging from unsightly to grotesque, you likely have yet to find anyone impressed with your looks."
+	traits_to_add = list(TRAIT_UGLY)
 
 /datum/quirk/peculiarity/ugly/on_spawn()
 	if(!ishuman(owner))
@@ -71,31 +77,12 @@
 
 	REMOVE_TRAIT(H, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 	REMOVE_TRAIT(H, TRAIT_FISHFACE, TRAIT_GENERIC)
-
-	ADD_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
-
-/datum/quirk/peculiarity/ugly/on_remove()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	REMOVE_TRAIT(H, TRAIT_UGLY, TRAIT_GENERIC)
+	return ..()
 
 /datum/quirk/peculiarity/virgin
 	name = "Virgin"
-	desc = "YOU... ARE MAIDENLESS!! you never were good with women... or men, whether cause you are a awkward freak, or religous reasons, or simply plain unlucky, your blood remains untainted and pure."
-
-/datum/quirk/peculiarity/virgin/on_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.virginity = TRUE
-
-/datum/quirk/peculiarity/virgin/after_job_spawn()
-	if(!ishuman(owner))
-		return
-	var/mob/living/carbon/human/H = owner
-	H.virginity = TRUE
-
+	desc = "YOU... ARE MAIDENLESS! Whether because of awkwardness, deep religiosity, or sheer unluckiness, your body remains untainted and pure."
+	traits_to_add = list(TRAIT_VIRGIN)
 
 /datum/quirk/peculiarity/mystery_box
 	name = "Mystery Box"
@@ -124,6 +111,7 @@
 
 	H.put_in_hands(mystery_box)
 	find_keeper()
+	return ..()
 
 /datum/quirk/peculiarity/mystery_box/proc/find_keeper()
 	var/mob/living/carbon/human/box_owner = owner
@@ -179,6 +167,7 @@
 	if(mystery_box)
 		UnregisterSignal(mystery_box, COMSIG_ATOM_EXAMINE)
 		qdel(mystery_box)
+	return ..()
 
 /obj/item/mystery
 	name = "locked box"

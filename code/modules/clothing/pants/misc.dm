@@ -18,9 +18,9 @@
 	detail_tag = "_detail"
 	detail_color = CLOTHING_RED_OCHRE
 	colorgrenz = TRUE
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/pants/padded
 	prevent_crits = MINOR_CRITICALS
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 400 GRAMS
 
 /obj/item/clothing/pants/guard
@@ -33,9 +33,9 @@
 	detail_tag = "_detail"
 	color = CLOTHING_WHITE
 	detail_color = CLOTHING_SOOT_BLACK
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/pants/padded
 	prevent_crits = MINOR_CRITICALS
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 400 GRAMS
 	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
 
@@ -48,7 +48,7 @@
 	sleevetype = "leg"
 	detail_tag = "_detail"
 	detail_color = "#5E4440"
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/pants/padded
 	prevent_crits = MINOR_CRITICALS
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 400 GRAMS

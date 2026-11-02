@@ -5,10 +5,11 @@
 	reagent_requirements = list(
 		/datum/reagent/water = 25
 	)
-	craft_verb = "cooking for "
+	craft_verb = "cooking "
 	required_container = /obj/item/reagent_containers/glass/bucket/pot
 	var/datum/reagent/created_reagent
 	var/water_conversion = 1
+	var/created_amount = 0
 	var/datum/pollutant/finished_smell
 	///the amount we pollute
 	var/pollute_amount = 600
@@ -36,7 +37,7 @@
 	return real_cooking_time
 
 /datum/container_craft/cooking/create_item(obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
-	if(created_reagent)
+	if(created_reagent && length(reagent_requirements))
 		var/turf/pot_turf = get_turf(crafter)
 		var/datum/reagent/first = reagent_requirements[1]
 		var/reagent_amount = reagent_requirements[first]
@@ -58,6 +59,24 @@
 				pot_turf.pollute_turf(finished_smell, pollute_amount)
 			initiator.nobles_seen_servant_work()
 		playsound(pot_turf, "bubbles", 30, TRUE)
+	else if(created_reagent)
+		var/turf/pot_turf = get_turf(crafter)
+		var/calculated_quality = calculate_reagent_quality(crafter, initiator, removing_items)
+		for(var/j = 1 to output_amount)
+			// Create quality data for the new reagent
+			var/list/quality_data = list(
+				"quality" = calculated_quality,
+			)
+
+			// Add the reagent with quality data
+			crafter.reagents.add_reagent(created_reagent, created_amount, quality_data)
+
+			after_craft(null, crafter, initiator, found_optional_requirements, found_optional_wildcards, found_optional_reagents, removing_items)
+			if(finished_smell)
+				pot_turf.pollute_turf(finished_smell, pollute_amount)
+			initiator.nobles_seen_servant_work()
+		playsound(pot_turf, "bubbles", 30, TRUE)
+
 	else
 		..()
 
@@ -124,7 +143,7 @@
 
 /datum/container_craft/cooking/after_craft(atom/created_output, obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
 	. = ..()
-	var/datum/reagent/found_product = crafter.reagents.get_reagent(created_reagent)
+	var/datum/reagent/found_product = crafter.reagents.has_reagent(created_reagent)
 	if(!found_product)
 		return
 
@@ -151,48 +170,14 @@
 		LAZYADDASSOC(found_product.data, "custom_name", found_product.name)
 		LAZYADDASSOC(found_product.data, "custom_tastes", found_product.taste_description)
 
-	// Optionally modify reagent properties based on quality
-	apply_quality_effects_to_reagent(found_product)
-
-/**
- * Applies quality-based effects to the created reagent
- *
- * @param datum/reagent/reagent The reagent to modify
- */
-/datum/container_craft/cooking/proc/apply_quality_effects_to_reagent(datum/reagent/reagent)
-	if(!reagent)
-		return
-
-	var/reagent_quality = reagent.get_recipe_quality()
-	/*
-	// Modify reagent properties based on quality
-	switch(reagent.recipe_quality)
-		if(1) // Poor quality
-			reagent.metabolization_rate *= 1.2 // Metabolizes faster (less effective)
-
-		if(2) // Standard quality
-			EMPTY_BLOCK_GUARD // No modifications - baseline
-
-		if(3) // High quality
-			// High quality is more effective
-			reagent.metabolization_rate *= 0.9 // Metabolizes slower (more effective)
-
-		if(4) // Premium quality
-			// Premium quality is much more effective
-			reagent.metabolization_rate *= 0.75 // Metabolizes much slower (very effective)
-	*/
-	// Update description to reflect quality
-
-	// GLOB.food_quality_description[quality]
-	var/quality_desc = GLOB.food_quality_description[reagent_quality]
-	if(quality_desc && !findtext(reagent.description, quality_desc))
-		reagent.description += " The [LOWER_TEXT(reagent.name)] is of [quality_desc] quality."
-
 /datum/container_craft/cooking/extra_html()
 	var/html
-	var/datum/reagent/first = reagent_requirements[1]
-	var/result_amount = reagent_requirements[first]
-	if(water_conversion > 0)
-		result_amount = CEILING((result_amount * water_conversion), 1)
+	var/result_amount = created_amount
+	if(length(reagent_requirements))
+		var/datum/reagent/first = reagent_requirements[1]
+		result_amount = reagent_requirements[first]
+		if(water_conversion > 0)
+			result_amount = CEILING((result_amount * water_conversion), 1)
 	html += "[UNIT_FORM_STRING(result_amount)] of [initial(created_reagent.name)]<br>"
+
 	return html

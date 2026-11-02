@@ -79,7 +79,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 /// This handles the application of special abilities
 /datum/antagonist/proc/apply_innate_effects(mob/living/mob_override)
 	var/mob/living/M = mob_override || owner.current
-	for(var/trait as anything in innate_traits)
+	for(var/trait in innate_traits)
 		ADD_TRAIT(M, trait, "[type]")
 
 /// This handles the removal of special abilities
@@ -87,7 +87,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 	var/mob/living/M = mob_override || owner.current
 	if(!istype(M))
 		return
-	for(var/trait as anything in innate_traits)
+	for(var/trait in innate_traits)
 		REMOVE_TRAIT(M, trait, "[type]")
 
 /// Adds the specified antag hud to the player. Usually called in an antag datum file

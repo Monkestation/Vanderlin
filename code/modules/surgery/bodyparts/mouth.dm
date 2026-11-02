@@ -37,7 +37,7 @@
 
 /obj/item/natural/bundle/teeth/gold
 	name = "pile of gold teeth"
-	desc = "A digusting pile of bleeding gold teeth."
+	desc = "A digusting pile of gold teeth."
 	icon = 'icons/obj/surgery.dmi'
 	stackname = "teeth"
 	bundle_verb = "pile"
@@ -101,7 +101,7 @@
 
 /obj/item/bodypart/mouth
 	name = "jaw"
-	desc = "I have no mouth and i must scream."
+	desc = "I have no mouth and I must scream."
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "jaw"
 	base_icon_state = "jaw"
@@ -122,6 +122,9 @@
 	var/list/obj/item/natural/bundle/teeth/teeth = null
 	///our default tooth
 	var/default_tooth = /obj/item/natural/bundle/teeth
+
+/obj/item/bodypart/mouth/gold
+	default_tooth = /obj/item/natural/bundle/teeth/gold
 
 /obj/item/bodypart/mouth/Initialize(mapload)
 	. = ..()

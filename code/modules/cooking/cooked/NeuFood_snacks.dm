@@ -131,7 +131,7 @@
 	nutrition = COOKED_MEAT_NUTRITION + COOKED_VEGGIE_NUTRITION
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
-	list_reagents = list(/datum/reagent/drowsbane = 10)
+	list_reagents = list(/datum/reagent/poison/drowsbane = 10)
 	item_weight = 300 GRAMS
 
 /*	.............   Ribs   ................ */
@@ -355,6 +355,20 @@
 	nutrition = COOKED_MEAT_NUTRITION
 	foodtype = MEAT
 	item_weight = 250 GRAMS
+
+
+/obj/item/reagent_containers/food/snacks/cooked/frybird/fried
+	name = "tender frybird"
+	desc = "A deep-fried frybird, coated in toastcrumbs and ready to eat."
+	icon = 'icons/obj/food/cooked/cooked_deep_fried.dmi'
+	icon_state = "chickentender"
+	faretype = FARE_LAVISH
+	foodtype = MEAT | GRAIN
+	list_reagents = list(/datum/reagent/consumable/nutriment = SNACK_CHUNKY * 2)
+	bitesize = 5 // If you go through all of the efforts to make this it should have big portion
+	tastes = list("crunchy toastcrumbs" = 1, "tender chicken" = 1)
+	eat_effect = /datum/status_effect/buff/foodbuff/tier2
+	rotprocess = SHELFLIFE_DECENT
 
 /obj/item/reagent_containers/food/snacks/cooked/frybird_tatos
 	name = "frybird and tatos"
@@ -717,7 +731,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	faretype = FARE_NEUTRAL
 	portable = FALSE
-	list_reagents = list(/datum/reagent/drowsbane = 10)
+	list_reagents = list(/datum/reagent/poison/drowsbane = 10)
 	item_weight = 200 GRAMS
 
 /obj/item/reagent_containers/food/snacks/drowsbanejam/slice

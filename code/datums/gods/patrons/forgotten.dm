@@ -9,22 +9,22 @@
 	boons = "None. His power is divided."
 
 	associated_faith = /datum/faith/psydon
-
+	prayer_fail = "I can not talk to Him... I need His cross!"
 	confess_lines = list(
 		"THERE IS ONLY ONE TRUE GOD!",
 		"THE SUCCESSORS HALT HIS RETURN!",
 		"PSYDON WILL RETURN!",
 	)
 
-/datum/patron/psydon/can_pray(mob/living/carbon/human/follower)
-	//We just kind of assume the follower is a human here
-	if(
-		istype(follower.wear_wrists, /obj/item/clothing/neck/psycross) || istype(follower.wear_neck, /obj/item/clothing/neck/psycross) || istype(follower.get_active_held_item(), /obj/item/clothing/neck/psycross)
-		)
-		return TRUE
-
-	to_chat(follower, span_danger("I can not talk to Him... I need His cross!"))
-	return FALSE
+	associated_objects = alist(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/silver,
+			/obj/item/clothing/neck/psycross
+		),
+		PATRON_STRUCTURE = list(
+			/obj/structure/fluff/psycross
+		),
+	)
 
 /datum/patron/psydon/extremist
 	display_name = "Extremist Psydonite"

@@ -13,6 +13,39 @@
 		if("youngfolk") return GLOB.youngfolk_positions
 	return list()
 
+/proc/get_job_category(title)
+	if(!title)
+		return "Unknown"
+	if(title in GLOB.noble_courthand_positions)
+		return "Court"
+	if(title in GLOB.garrison_positions)
+		return "Garrison"
+	if(title in GLOB.gallowband_positions)
+		return "Gallowband"
+	if(title in GLOB.church_positions)
+		return "Church"
+	if(title in GLOB.inquisition_positions)
+		return "Inquisition"
+	if(title in GLOB.serf_positions)
+		return "Serfs"
+	if(title in GLOB.company_positions)
+		return "Company"
+	if(title in GLOB.peasant_positions)
+		return "Peasants"
+	if(title in GLOB.apprentices_positions)
+		return "Apprentices"
+	if(title in GLOB.youngfolk_positions)
+		return "Youth"
+	if(title in GLOB.allmig_positions)
+		return "Wanderers"
+	return "Other"
+
+/proc/get_job_sort_index(title)
+	if(!GLOB.job_assignment_order.len)
+		GLOB.job_assignment_order = get_job_assignment_order()
+	var/idx = GLOB.job_assignment_order.Find(title)
+	return idx ? idx : 9999
+
 /proc/link_family(datum/mind/mind_a, datum/mind/mind_b, bond, rel_type = /datum/relation/family, adopted = FALSE, in_law = FALSE)
 	if(!mind_a || !mind_b || mind_a == mind_b)
 		return null

@@ -52,6 +52,18 @@
 						return /datum/injury/burn/large
 					if(0 to 15)
 						return /datum/injury/burn/moderate
+			if(WOUND_INTENSE_BURN)
+				switch(damage)
+					if(50 to INFINITY)
+						return /datum/injury/intense_burn/carbonised
+					if(40 to 50)
+						return /datum/injury/intense_burn/deep
+					if(30 to 40)
+						return /datum/injury/intense_burn/severe
+					if(15 to 30)
+						return /datum/injury/intense_burn/large
+					if(0 to 15)
+						return /datum/injury/intense_burn/moderate
 			if(WOUND_LASH)
 				switch(damage)
 					if(50 to INFINITY)
@@ -143,7 +155,7 @@
 						return /datum/injury/bruise/moderate/mechanical
 					if(0 to 10)
 						return /datum/injury/bruise/small/mechanical
-			if(WOUND_BURN)
+			if(WOUND_BURN, WOUND_INTENSE_BURN)
 				switch(damage)
 					if(50 to INFINITY)
 						return /datum/injury/burn/carbonised/mechanical

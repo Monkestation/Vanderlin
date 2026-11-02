@@ -13,7 +13,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/stealing = 10,
@@ -29,7 +29,7 @@
 	the greatest adventures of the age and write amazing songs about them."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/adventurer/bard
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	apprentice_name = "Aspiring Bard"
 	cmode_music = 'sound/music/cmode/adventurer/CombatIntense.ogg'
 	exp_types_granted = list(EXP_TYPE_BARD)
@@ -73,7 +73,7 @@
 /datum/outfit/adventurer/bard
 	name = "Bard (Adventurer)"
 	head = /obj/item/clothing/head/bardhat
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	pants = /obj/item/clothing/pants/tights/colored/random
 	shirt = /obj/item/clothing/armor/gambeson/light // very, very shitty armor
 	belt = /obj/item/storage/belt/leather

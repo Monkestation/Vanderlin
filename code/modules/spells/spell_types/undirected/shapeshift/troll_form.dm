@@ -3,7 +3,7 @@
 	desc = "Transform into a troll."
 	button_icon_state = "trollshape"
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	charge_required = FALSE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
@@ -43,4 +43,4 @@
 		return
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/dendor)
 	spell_cost = 100
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE

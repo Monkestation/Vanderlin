@@ -8,6 +8,7 @@
 	invisibility = INVISIBILITY_LEYLINES
 	w_class = WEIGHT_CLASS_TINY
 	item_weight = 5 GRAMS
+	item_flags = NO_ITEM_TELEPORT
 	var/hear_radius = 2
 	var/muted = FALSE
 	var/datum/weakref/linked_living

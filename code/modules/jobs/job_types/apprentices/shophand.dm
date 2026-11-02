@@ -5,11 +5,15 @@
 		STAT_FORTUNE = 1,
 		/datum/attribute/skill/misc/stealing = 40,
 		/datum/attribute/skill/misc/sneaking = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/misc/lockpicking = 20,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/attribute_holder/sheet/job/shophand/choice_three
@@ -37,28 +41,23 @@
 	With enough time, you will become more than a glorified clerk and open a business that rivals all others."
 	department_flag = COMPANY
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = "Station"
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_SHOPHAND
 	is_quest_giver = TRUE
 	give_bank_account = 10
-	bypass_lastclass = TRUE
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	can_have_apprentices = FALSE
 
 	allowed_races = RACES_PLAYER_ALL
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
 
 	outfit = /datum/outfit/shophand
-	display_order = JDO_SHOPHAND
-	give_bank_account = 10
-	bypass_lastclass = TRUE
-	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
 	can_be_apprentice = TRUE
-
-	exp_types_granted = list(EXP_TYPE_MERCHANT_COMPANY)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/shophand
 

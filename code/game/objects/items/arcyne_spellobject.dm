@@ -15,6 +15,7 @@
 
 	grid_width = 64
 	grid_height = 32
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 	/// Maximum number of distinct spell slots
 	var/max_spells = 3
 	/// Minimum accepted spell tier
@@ -158,7 +159,6 @@
 					)
 
 	var/datum/action/cooldown/spell/instance = new E.spell_type(user)
-	instance.point_cost = 0
 	instance.spell_cost = 0
 	instance.cooldown_time = 0
 	instance.spell_flags |= SPELL_TEMPORARY
@@ -216,7 +216,6 @@
 	if(E.live_spell || !E.spell_type)
 		return
 	E.live_spell = new E.spell_type(user)
-	E.live_spell.point_cost = 0
 	E.live_spell.cooldown_time = 0
 	E.live_spell.spell_cost = 0
 	E.live_spell.spell_flags |= SPELL_TEMPORARY
@@ -365,7 +364,7 @@
 
 /obj/item/arcyne_spellobject/proc/generate_random_spells()
 	var/datum/action/cooldown/spell/spell_type_path = pick(subtypesof(/datum/action/cooldown/spell))
-	while(IS_ABSTRACT(spell_type_path) || initial(spell_type_path.spell_tier) < min_spell_tier || initial(spell_type_path.spell_tier) > max_spell_tier || (initial(spell_type_path.spell_flags) & SPELL_UNETCHABLE) || (initial(spell_type_path.spell_flags) & SPELL_ESSENCE))
+	while(IS_ABSTRACT(spell_type_path) || initial(spell_type_path.spell_tier) < min_spell_tier || initial(spell_type_path.spell_tier) > max_spell_tier || (initial(spell_type_path.spell_flags) & SPELL_UNETCHABLE) || (initial(spell_type_path.spell_type) != SPELL_MANA))
 		spell_type_path = pick(subtypesof(/datum/action/cooldown/spell))
 
 	var/datum/spellobject_entry/E = new()

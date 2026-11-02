@@ -304,6 +304,10 @@ em {
   color: hsl(0, 0%, 77.25%);
 }
 
+.looc {
+  color: hsl(210, 50%, 60%)
+}
+
 .adminobserverooc {
   color: hsl(48, 100%, 40%);
 }
@@ -899,6 +903,10 @@ em {
 
 .silver{
   color: hsl(0, 0%, 75%);
+}
+
+.yellow{
+  color: hsl(48, 100%, 70%);
 }
 
 .briar{
@@ -1656,6 +1664,32 @@ $border-width-px: $border-width * 1px;
 }
 /* ##### END ##### */
 
+/* ##### GRAGGAZO ##### */
+.god_graggazo {
+  color: hsl(125.9, 49.1%, 32.4%);
+  font-weight: bold;
+  animation: graggazo_flicker 1s infinite;
+}
+
+@keyframes graggazo_flicker {
+	25% {
+		color: hsl(125.9, 49.1%, 32.4%);
+	}
+
+	50% {
+		color: hsl(125.9, 52.9%, 34.1%);
+	}
+
+	75% {
+		color: hsl(339.2, 61%, 24.1%);
+	}
+
+	100% {
+		color: hsl(338.8, 52.2%, 32%);
+	}
+}
+/* ##### END ##### */
+
 /* ##### PSYDON ##### */
 .god_psydon {
   color: hsl(190.9, 36.3%, 82.2%);
@@ -1740,6 +1774,37 @@ $border-width-px: $border-width * 1px;
 		color: hsl(345, 36%, 37%);
 	}
 }
+/* ##### END ##### */
+
+/* ##### THE ARCHDEVILS ##### */
+.god_archdevil {
+	color: hsl(0, 97%, 24%);
+  font-weight: bold;
+  animation: archdevil_flicker 1s infinite;
+}
+
+@keyframes archdevil_flicker {
+	25% {
+		color: hsl(0, 97%, 24%);
+    transform: translate(-2px, -1px);
+	}
+
+	50% {
+		color: hsl(0, 66%, 39%);
+    transform: translate(1px, -2px);
+	}
+
+	75% {
+		color: hsl(22, 78%, 37%);
+    transform: translate(-1px, 2px);
+	}
+
+  100% {
+		color: hsl(0, 66%, 39%);
+    transform: translate(1px, 1px);
+	}
+}
+
 /* ##### END ##### */
 
 .highlight-bounce {

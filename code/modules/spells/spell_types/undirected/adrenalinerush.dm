@@ -23,5 +23,5 @@
 /datum/action/cooldown/spell/undirected/adrenalinerush/cast(mob/living/cast_on)
 	. = ..()
 	cast_on.emote("laugh", forced = TRUE)
-	cast_on.reagents?.add_reagent(/datum/reagent/berrypoison, 5)
+	cast_on.reagents?.add_reagent(/datum/reagent/poison/berry, 5)
 	cast_on.apply_status_effect(/datum/status_effect/buff/adrenalinerush)

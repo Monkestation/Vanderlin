@@ -6,7 +6,7 @@
 	icon_living = "bogbug"
 	icon_dead = "bogbugdead"
 
-	faction = list("bugs")
+	faction = NONE
 	emote_hear = null
 	emote_see = null
 	see_in_dark = 9

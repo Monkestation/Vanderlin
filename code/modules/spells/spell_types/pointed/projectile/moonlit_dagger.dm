@@ -5,12 +5,12 @@
 	sound = 'sound/misc/stings/generic.ogg'
 	charge_sound = 'sound/magic/holycharging.ogg'
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/noc)
 
-	invocation = "Begone foul beasts!"
+	invocation = "Feel the moon's sting!"
 	invocation_type = INVOCATION_SHOUT
 
 	charge_time = 2 SECONDS
@@ -25,7 +25,7 @@
 	icon_state = "moondagger"
 	nodamage = FALSE
 	damage_type = BRUTE
-	damage = DAMAGE_DAGGER * 1.5
+	damage = DAMAGE_DAGGER + 15
 	range = 7
 
 /obj/projectile/magic/moondagger/on_hit(mob/living/carbon/human/target, blocked = FALSE)
@@ -33,11 +33,11 @@
 	if(!ishuman(target))
 		return
 
-	var/datum/antagonist/werewolf/wolf_datum = target.mind?.has_antag_datum(/datum/antagonist/werewolf/)
-	var/datum/antagonist/vampire/sucker_datum = target.mind?.has_antag_datum(/datum/antagonist/vampire/)
+	var/datum/antagonist/werewolf/wolf_datum = target.mind?.has_antag_datum(/datum/antagonist/werewolf)
+	var/datum/antagonist/vampire/sucker_datum = target.mind?.has_antag_datum(/datum/antagonist/vampire)
 	if(istype(sucker_datum, /datum/antagonist/vampire/lord))
 		var/datum/antagonist/vampire/lord/sucker_lord = sucker_datum //I am very mature
-		if(sucker_lord.ascended >= 4)
+		if(sucker_lord.ascension_resistance() == 1)
 			target.visible_message(span_danger("\The [src] fails to affect [target]!"), span_userdanger("Feeble metal cannot hurt me, I AM THE ANCIENT!"))
 			return
 

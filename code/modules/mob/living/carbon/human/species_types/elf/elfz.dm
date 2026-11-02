@@ -32,16 +32,8 @@
 	id_override = SPEC_ID_DROW
 	desc = "Zizo's progeny. \
 	\n\n\
-	These elves hail from an underground expanse of newly-reborn empires. \
-	They lead harsh, matriarchal lives under the watchful gaze of Zizo, \
-	the vast majority hoping to one day achieve such power and domination for themselves. \
-	Zizo's spawn, the last snow elves, integrated themselves- whether gleefully or resentfully- within the dark elf culture \
-	their grandmother had carved through conquest. \
-	\n\n\
-	To most in Psydonia, a dark elf is nothing more than a servant of Zizo waiting to betray for power, \
-	leading most dark elves to remain within their safe underground strongholds. Those who breach the surface \
-	rarely receive fair treatment. \
-	Dark elves over 500 years old may remember their Ravoxian empire of old, yet few remain who were not killed or converted. \
+	These elves are the remnants of the snow elves who survived Zizo's ascension, those who shared her blood, however thin. \
+	Following Zizo's conquest of Subterra, they assimilated into Subterran society alongside the dark elves. \
 	\n\n\
 	WARNING: THIS IS A HEAVILY DISCRIMINATED AGAINST CHALLENGE SPECIES WITH ACTIVE SPECIES DETRIMENTS. YOU CAN AND WILL DIE A LOT; PLAY AT YOUR OWN RISK!"
 
@@ -160,8 +152,8 @@
 	))
 
 /datum/species/elf/zizo/get_possible_names(gender = MALE)
-	var/static/list/male_names = file2list('strings/rt/names/elf/elfdm.txt')
-	var/static/list/female_names = file2list('strings/rt/names/elf/elfdf.txt')
+	var/static/list/male_names = file2list('strings/rt/names/elf/elfzm.txt')
+	var/static/list/female_names = file2list('strings/rt/names/elf/elfzf.txt')
 	return (gender == FEMALE) ? female_names : male_names
 
 /datum/species/elf/zizo/get_possible_surnames(gender = MALE)

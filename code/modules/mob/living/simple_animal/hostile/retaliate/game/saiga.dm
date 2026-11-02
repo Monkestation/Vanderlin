@@ -1,7 +1,7 @@
 /mob/living/simple_animal/hostile/retaliate/saiga
-	icon = 'icons/roguetown/mob/monster/saiga.dmi'
 	name = "saiga"
 	desc = "Proud beasts of burden, war mounts, and symbols of luxury alike. Especially sacred to the steppe people of the Northeast Regions."
+	icon = 'icons/roguetown/mob/monster/saiga.dmi'
 	icon_state = "saiga"
 	icon_living = "saiga"
 	icon_dead = "saiga_dead"
@@ -9,7 +9,7 @@
 	SET_BASE_PIXEL(-8, 0)
 
 	animal_species = /mob/living/simple_animal/hostile/retaliate/saigabuck
-	faction = list("saiga")
+	faction = list(FACTION_NEUTRAL)
 	gender = FEMALE
 	footstep_type = FOOTSTEP_MOB_SHOE
 	emote_see = list("looks around.", "chews some leaves.")
@@ -161,15 +161,15 @@
 	return ..()
 
 /mob/living/simple_animal/hostile/retaliate/saigabuck
-	icon = 'icons/roguetown/mob/monster/saiga.dmi'
 	name = "saigabuck"
+	icon = 'icons/roguetown/mob/monster/saiga.dmi'
 	icon_state = "buck"
 	icon_living = "buck"
 	icon_dead = "buck_dead"
 	icon_gib = "buck_gib"
 	SET_BASE_PIXEL(-8, 0)
 
-	faction = list("saiga")
+	faction = list(FACTION_NEUTRAL)
 	footstep_type = FOOTSTEP_MOB_SHOE
 	emote_see = list("stares.")
 	move_to_delay = 8

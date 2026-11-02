@@ -12,7 +12,25 @@
 		"map_files/voyager/island_batch2"
 	],
 	"traits": [
-	{"Name": "The Sea", "Up": true}, {"Up": true, "Down": true}, {"Up": true, "Down": true}, {"Down": true}],
+		{
+			"Name": "The Sea",
+			"Up": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Leylines": true
+		},
+		{
+			"Down": true
+		}
+	],
 	"minetype": null,
 	"space_empty_levels": 0,
 	"space_ruin_levels": 0,

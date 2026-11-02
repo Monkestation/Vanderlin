@@ -10,7 +10,7 @@
 		STAT_ENDURANCE = 1,
 		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/swimming = 10,
@@ -25,7 +25,7 @@
 	tutorial = "You're a woodworker, ensure the settlement isn't a bunch of tents."
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	outfit = /datum/outfit/carpenter_p
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 

@@ -284,6 +284,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 /datum/ai_controller/proc/should_idle()
 	if(!can_idle || isnull(our_cells))
 		return FALSE
+	if(current_movement_target && isliving(current_movement_target))
+		return FALSE
 	for(var/datum/spatial_grid_cell/grid as anything in our_cells.member_cells)
 		if(locate(/mob/living) in grid.client_contents)
 			return FALSE
@@ -406,6 +408,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 		return FALSE
 	if(living_pawn.pulledby?.grab_state > GRAB_PASSIVE)
 		return FALSE
+	if(living_pawn.buckled_mobs)
+		return FALSE
 
 	return TRUE
 
@@ -434,7 +438,7 @@ have ways of interacting with a specific atom and control it. They posses a blac
 	if(!("[pawn_turf?.z]" in GLOB.weatherproof_z_levels))
 		if(SSmapping.level_has_any_trait(pawn_turf?.z, list(ZTRAIT_IGNORE_WEATHER_TRAIT)))
 			GLOB.weatherproof_z_levels |= "[pawn_turf?.z]"
-	if(!(pawn_turf?.z in SSmobs.town_z))
+	if(!(pawn_turf?.z in GLOB.town_z_levels))
 		if(!length(SSmobs.clients_by_zlevel[pawn_turf?.z]))
 			return AI_STATUS_OFF
 	if(!able_to_run)
@@ -454,7 +458,6 @@ have ways of interacting with a specific atom and control it. They posses a blac
 			stack_trace("[pawn]'s current movement target is not an atom, rather a [current_movement_target.type]! Did you accidentally set it to a weakref?")
 			CancelActions()
 			return
-
 		if(get_dist_3d(pawn, current_movement_target) > max_target_distance) //The distance is out of range
 			CancelActions()
 			return
@@ -475,7 +478,8 @@ have ways of interacting with a specific atom and control it. They posses a blac
 		// Then pick the max of this and the delta_time passed to ai_controller.process()
 		// Action cooldowns cannot happen faster than delta_time, so delta_time should be the value used in this scenario.
 		var/action_delta_time = max(current_behavior.get_cooldown(src) * 0.1, delta_time)
-
+		if(current_behavior.behavior_flags & AI_BEHAVIOR_EXECUTE_ALONGSIDE)
+			continue //we already did our shit queen
 		if(current_behavior.behavior_flags & AI_BEHAVIOR_REQUIRE_MOVEMENT) //Might need to move closer
 			if(!current_movement_target)
 				current_behavior.finish_action(src, FALSE)

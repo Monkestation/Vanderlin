@@ -17,9 +17,16 @@ export const Sidebar = ({ recipes, lookup, selectedRecipe, onSelect }: Props) =>
 
   const filtered = recipes.filter((r) => {
     const matchCat = category === 'All' || r.category === category;
-    const q = search.toLowerCase();
-    const matchSearch = !q || r.name?.toLowerCase().includes(q) || (r.search_data && r.search_data.toLowerCase().includes(q));
-    return matchCat && matchSearch;
+    const q = search.toLowerCase().trim();
+
+    if (!matchCat) return false;
+    if (!q) return true;
+    const matchName = r.name?.toLowerCase().includes(q);
+    const matchData = r.search_data && r.search_data.toLowerCase().includes(q);
+    const matchForms = r.forms?.some((f) => f.name?.toLowerCase().includes(q));
+    const matchTechniques = r.techniques?.some((t) => t.name?.toLowerCase().includes(q));
+
+    return matchName || matchData || matchForms || matchTechniques;
   });
 
   return (

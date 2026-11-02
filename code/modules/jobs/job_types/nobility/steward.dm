@@ -5,17 +5,17 @@
 		STAT_CONSTITUTION = -2,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/lockpicking = 60,
-		/datum/attribute/skill/labor/mathematics = 50
+		/datum/attribute/skill/educated/mathematics = 50
 	)
 
 /datum/job/steward
 	title = JOB_STEWARD
-	alt_titles = list("Landlord", "Chamberlain")
+	alt_titles = list("Chamberlain", "Seneschal")
 	alt_honorary = list("Thane")
 	tutorial = "Coin, Coin, Coin! Oh beautiful coin: \
 	You're addicted to it, and you hold the position as the King's personal treasurer of both coin and information. \
@@ -24,15 +24,18 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_STEWARD
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 	is_quest_giver = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	outfit = /datum/outfit/steward
 	give_bank_account = 100
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	noble_income = 16
 	cmode_music = 'sound/music/cmode/nobility/combat_noble.ogg'
 	job_bitflag = BITFLAG_ROYALTY
@@ -43,6 +46,7 @@
 	)
 	honorary = "Lord"
 	honorary_f = "Lady"
+	starting_wage = 35
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/steward
 	tennite_triumph_exclusive = TRUE
@@ -50,7 +54,8 @@
 	traits = list(
 		TRAIT_SEEPRICES,
 		TRAIT_NOBLE_BLOOD,
-		TRAIT_NOBLE_POWER
+		TRAIT_NOBLE_POWER,
+		TRAIT_VIRGIN
 	)
 
 /datum/outfit/steward/pre_equip(mob/living/carbon/human/H)
@@ -60,10 +65,6 @@
 	else
 		shirt = /obj/item/clothing/shirt/undershirt/fancy
 		pants = /obj/item/clothing/pants/trou/leathertights
-
-/datum/job/steward/after_spawn(mob/living/carbon/human/spawned, client/player_client)
-	. = ..()
-	spawned.virginity = TRUE
 
 /datum/job/steward/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

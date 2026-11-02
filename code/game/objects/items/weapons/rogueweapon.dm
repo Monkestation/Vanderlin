@@ -20,7 +20,7 @@
 	obj_flags = CAN_BE_HIT
 	blade_dulling = DULLING_BASH
 	resistance_flags = FIRE_PROOF
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STATIC_200
 	wdefense = GOOD_PARRY
 	experimental_onhip = TRUE
 	experimental_onback = TRUE
@@ -30,6 +30,7 @@
 		"embedded_fall_chance" = 0,
 	)
 	istrainable = TRUE // You can train weapon skills on a dummy with these.
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 	var/axe_cut = 0
 	var/datum/special_intent/weapon_special
 
@@ -40,11 +41,6 @@
 
 	if(weapon_special)
 		weapon_special = new weapon_special
-
-/obj/item/weapon/equipped(mob/user, slot, initial)
-	. = ..()
-	if(initial && randomize_blade_int)
-		update_integrity(max_integrity + rand(-(max_integrity * 0.2), 0), FALSE)
 
 /obj/item/weapon/Destroy(force)
 	if(istype(weapon_special))
@@ -105,6 +101,8 @@
 	var/probability = (nuforce * (total_dam / affecting.max_damage) - 5) //More weight given to total damage accumulated on the limb
 	if(affecting.body_zone == BODY_ZONE_HEAD) //Decapitations are harder to pull off in general
 		probability *= 0.5
+	if(user?.zone_selected in list(BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_R_EYE, BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS))
+		probability = 0
 	var/hard_dismember = HAS_TRAIT(affecting, TRAIT_HARDDISMEMBER)
 	var/easy_dismember = HAS_TRAIT(affecting, TRAIT_ROTTEN) || affecting.skeletonized || HAS_TRAIT(affecting, TRAIT_EASYDISMEMBER)
 	if(affecting.owner)

@@ -36,15 +36,15 @@ SUBSYSTEM_DEF(elastic)
 			qdel(request)
 
 /datum/controller/subsystem/elastic/proc/dispatch_request(datum/elastic_shard/shard, json_body)
-    if(shutting_down)
-        return
-    var/endpoint = shard.get_endpoint()
-    if(!endpoint)
-        return
-    var/datum/http_request/request = new()
-    request.prepare(RUSTG_HTTP_METHOD_POST, endpoint, json_body, list(
-        "Authorization" = "ApiKey [CONFIG_GET(string/metrics_api_token)]",
-        "Content-Type" = "application/json"
-    ))
-    request.begin_async()
-    active_requests += request
+	if(shutting_down)
+		return
+	var/endpoint = shard.get_endpoint()
+	if(!endpoint)
+		return
+	var/datum/http_request/request = new()
+	request.prepare(RUSTG_HTTP_METHOD_POST, endpoint, json_body, list(
+		"Authorization" = "ApiKey [CONFIG_GET(string/metrics_api_token)]",
+		"Content-Type" = "application/json"
+	))
+	request.begin_async()
+	active_requests += request

@@ -1,4 +1,6 @@
 /datum/config_entry
+	abstract_type = /datum/config_entry
+
 	var/name	//read-only, this is determined by the last portion of the derived entry type
 	var/config_entry_value
 	var/default	//read-only, just set value directly

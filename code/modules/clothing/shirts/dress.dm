@@ -219,3 +219,32 @@
 	icon_state = "fallgown"
 	slot_flags = ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR
 	detail_color = "#8b3f00"
+
+/obj/item/clothing/shirt/dress/rosa
+	name = "ivory dress"
+	desc = "A finely crafted dress from Wintermare, typically worn by their nobility."
+	icon_state = "rosadress1"
+	icon = 'icons/roguetown/clothing/special/rosewood.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+	boobed = FALSE
+
+/obj/item/clothing/shirt/dress/rosa/two
+	name = "scarlet dress"
+	icon_state = "rosadress2"
+
+/obj/item/clothing/shirt/dress/rosa/three
+	name = "velvet dress"
+	icon_state = "rosadress3"
+
+/obj/item/clothing/shirt/dress/rosa/four
+	name = "obsidian dress"
+	icon_state = "rosadress4"
+
+/obj/item/clothing/shirt/dress/rosa/five
+	name = "sable dress"
+	icon_state = "rosadress5"
+
+/obj/item/clothing/shirt/dress/rosa/six
+	name = "maroon dress"
+	icon_state = "rosadress6"

@@ -28,8 +28,8 @@
 #define BLOOD_VOLUME_NORMAL		1200
 #define BLOOD_VOLUME_SAFE		BLOOD_VOLUME_NORMAL * 0.8
 #define BLOOD_VOLUME_OKAY		BLOOD_VOLUME_NORMAL * 0.6
+#define BLOOD_VOLUME_RISKY		BLOOD_VOLUME_NORMAL * 0.55
 #define BLOOD_VOLUME_BAD 		BLOOD_VOLUME_NORMAL * 0.4
-#define BLOOD_VOLUME_BLEEDOUT 	BLOOD_VOLUME_NORMAL * 0.35
 #define BLOOD_VOLUME_SURVIVE	BLOOD_VOLUME_NORMAL * 0.2
 
 /// How efficiently humans regenerate blood.
@@ -64,8 +64,8 @@
 
 // ~organ sides
 #define NO_SIDE 0
-#define RIGHT_SIDE (1<<0)
-#define LEFT_SIDE (1<<1)
+#define RIGHT_SIDE 1
+#define LEFT_SIDE 2
 
 //Organ defines for carbon mobs
 #define CHRONIC_ARTHRITIS 1
@@ -79,6 +79,7 @@
 #define BODYPART_DISABLED_WOUND 3 //bone fracture
 #define BODYPART_DISABLED_ROT 4 //limb is rotten oh nooo
 #define BODYPART_DISABLED_CLAMPED 5 //limb is clamped by a hemostat or speculum
+#define BODYPART_DISABLED_TOURNIQUET 6
 
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
 
@@ -179,21 +180,25 @@
 #define NUTRITION_LEVEL_FAT 800
 #define NUTRITION_LEVEL_WELL_FED 700
 #define NUTRITION_LEVEL_FED 500
+#define NUTRITION_LEVEL_PECKISH	400
 #define NUTRITION_LEVEL_HUNGRY 350
+#define NUTRITION_LEVEL_VERY_HUNGRY 225
 #define NUTRITION_LEVEL_STARVING 100
 
 #define HYDRATION_LEVEL_FULL 1000
 #define HYDRATION_LEVEL_WATER_LOGGED 850
-#define HYDRATION_LEVEL_HYDRATED 700
-#define HYDRATION_LEVEL_SMALLTHIRST 600
+#define HYDRATION_LEVEL_WELL_HYDRATED 700
+#define HYDRATION_LEVEL_HYDRATED 600
+#define HYDRATION_LEVEL_SMALLTHIRST	400
 #define HYDRATION_LEVEL_THIRSTY 350
+#define NUTRITION_LEVEL_VERY_THIRSTY 225
 #define HYDRATION_LEVEL_DEHYDRATED 100
 
-#define NUTRITION_LEVEL_START_MIN 500
-#define NUTRITION_LEVEL_START_MAX 900
+#define NUTRITION_LEVEL_START_MIN NUTRITION_LEVEL_FED
+#define NUTRITION_LEVEL_START_MAX NUTRITION_LEVEL_WELL_FED
 
-#define HYDRATION_LEVEL_START_MIN 600
-#define HYDRATION_LEVEL_START_MAX 900
+#define HYDRATION_LEVEL_START_MIN HYDRATION_LEVEL_HYDRATED
+#define HYDRATION_LEVEL_START_MAX HYDRATION_LEVEL_WELL_HYDRATED
 
 //Disgust levels for humans
 #define DISGUST_LEVEL_MAXEDOUT 150
@@ -276,7 +281,8 @@
 #define SHOCK_ILLUSION (1 << 2)
 ///The shock doesn't stun.
 #define SHOCK_NOSTUN (1 << 3)
-
+///we only show a visual
+#define SHOCK_VISUAL_ONLY (1<<4)
 #define INCORPOREAL_MOVE_BASIC 1
 #define INCORPOREAL_MOVE_SHADOW 2 // leaves a trail of shadows
 #define INCORPOREAL_MOVE_JAUNT 3 // is blocked by holy water/salt
@@ -314,10 +320,6 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-/// Base factor at which mob nutrition decreases
-#define HUNGER_FACTOR		0.2
-/// Base Factor at which mob hydration decreases
-#define THIRST_FACTOR 0.05
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
@@ -331,6 +333,30 @@
 #define FLASH_PROTECTION_NONE 0
 #define FLASH_PROTECTION_FLASH 1
 #define FLASH_PROTECTION_WELDER 2
+
+
+/**
+ * Ear protection
+ * These values are additive to determine your overall ear/soundbang protection
+ */
+#define EAR_PROTECTION_NONE 0
+#define EAR_PROTECTION_NORMAL 1
+#define EAR_PROTECTION_HEAVY 2
+#define EAR_PROTECTION_VACUUM 3
+#define EAR_PROTECTION_FULL INFINITY
+
+/**
+ * Soundbang defines
+ * These values are used as argument to determine the strength of the soundbang_act call
+ */
+///Soundbang strength for most things like flashbangs, honkblasts and harm control modules
+#define SOUNDBANG_NORMAL 1
+///Soundbang strength for things like flashbangs in proximity and emagged harm alarm megaphones, cannot be countered by standard ear protection equipment
+#define SOUNDBANG_STRONG 2
+///Soundbang strength for things like changeling shrieks, which can affect robots and aliens as well.
+#define SOUNDBANG_MASSIVE 3
+///Soundbang strength for anything that cannot be stopped unless you're stacked on multiple effects and equipment to counter it (or are simply deaf)
+#define SOUNDBANG_OVERWHELMING 4
 
 #define HUMAN_FIRE_STACK_ICON_NUM	5
 
@@ -356,6 +382,14 @@
 #define DOING_INTERACTION_LIMIT(user, interaction_key, max_interaction_count) ((LAZYACCESS(user.do_afters, interaction_key) || 0) >= max_interaction_count)
 #define DOING_INTERACTION_WITH_TARGET(user, target) (LAZYACCESS(user.do_afters, target))
 #define DOING_INTERACTION_WITH_TARGET_LIMIT(user, target, max_interaction_count) ((LAZYACCESS(user.do_afters, target) || 0) >= max_interaction_count)
+
+// recent examine defines
+/// How long it takes for an examined atom to be removed from recent_examines. Should be the max of the below time windows
+#define RECENT_EXAMINE_MAX_WINDOW (2 SECONDS)
+/// If you examine the same atom twice in this timeframe, we call examine_more() instead of examine()
+#define EXAMINE_MORE_WINDOW (1 SECONDS)
+/// If you yawn while someone nearby has examined you within this time frame, it will force them to yawn as well. Tradecraft!
+#define YAWN_PROPAGATION_EXAMINE_WINDOW (1.5 SECONDS)
 
 //defense intents
 #define INTENT_DODGE 1
@@ -405,3 +439,6 @@
 #define FORBID_TELEKINESIS_REACH (1<<3)
 /// If resting on the floor is allowed to perform action
 #define ALLOW_RESTING (1<<4)
+
+/// In dynamic human icon gen we don't replace the held item.
+#define NO_REPLACE 0

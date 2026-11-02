@@ -5,10 +5,10 @@
 	self_cast_possible = FALSE
 	spell_requirements = SPELL_REQUIRES_NO_ANTIMAGIC|SPELL_REQUIRES_NO_MOVE // reap what you sow
 
-	point_cost = 1
-	attunements = list(
-		/datum/attunement/arcyne = 0.4,
-	)
+	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
+	required_technique = TECHNIQUE_ALTERATION
+
 	spell_flags = SPELL_RITUOS
 	invocation = "Be still!"
 	invocation_type = INVOCATION_SHOUT
@@ -20,10 +20,6 @@
 	spell_cost = 50
 
 	status_effect = /datum/status_effect/debuff/booming_blade
-
-/datum/action/cooldown/spell/status/booming_blade/handle_attunements()
-	. = ..()
-	extra_args = list(attuned_strength)
 
 /datum/status_effect/debuff/booming_blade
 	id = "booming_blade"

@@ -9,8 +9,8 @@
 	name = "Mutism"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I forget how to speak!</span>"
-	lose_text = "<span class='notice'>I suddenly remember how to speak.</span>"
+	gain_text = span_warning("I forget how to speak!")
+	lose_text = span_notice("I suddenly remember how to speak.")
 
 /datum/brain_trauma/severe/mute/on_gain()
 	ADD_TRAIT(owner, TRAIT_MUTE, TRAUMA_TRAIT)
@@ -24,8 +24,8 @@
 	name = "Aphasia"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I have trouble forming words in my head...</span>"
-	lose_text = "<span class='notice'>I suddenly remember how languages work.</span>"
+	gain_text = span_warning("I have trouble forming words in my head...")
+	lose_text = span_notice("I suddenly remember how languages work.")
 	var/datum/language_holder/prev_language
 	var/datum/language_holder/mob_language
 
@@ -47,8 +47,8 @@
 	name = "Cerebral Blindness"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I can't see!</span>"
-	lose_text = "<span class='notice'>My vision returns.</span>"
+	gain_text = span_warning("I can't see!")
+	lose_text = span_notice("My vision returns.")
 
 /datum/brain_trauma/severe/blindness/on_gain()
 	owner.become_blind(TRAUMA_TRAIT)
@@ -76,7 +76,7 @@
 	var/subject
 	switch(paralysis_type)
 		if("full")
-			subject = "your body"
+			subject = "my body"
 			paralysis_traits = list(TRAIT_PARALYSIS_L_ARM, TRAIT_PARALYSIS_R_ARM, TRAIT_PARALYSIS_L_LEG, TRAIT_PARALYSIS_R_LEG)
 		if("left")
 			subject = "the left side of my body"
@@ -85,26 +85,26 @@
 			subject = "the right side of my body"
 			paralysis_traits = list(TRAIT_PARALYSIS_R_ARM, TRAIT_PARALYSIS_R_LEG)
 		if("arms")
-			subject = "your arms"
+			subject = "my arms"
 			paralysis_traits = list(TRAIT_PARALYSIS_L_ARM, TRAIT_PARALYSIS_R_ARM)
 		if("legs")
-			subject = "your legs"
+			subject = "my legs"
 			paralysis_traits = list(TRAIT_PARALYSIS_L_LEG, TRAIT_PARALYSIS_R_LEG)
 		if("r_arm")
-			subject = "your right arm"
+			subject = "my right arm"
 			paralysis_traits = list(TRAIT_PARALYSIS_R_ARM)
 		if("l_arm")
-			subject = "your left arm"
+			subject = "my left arm"
 			paralysis_traits = list(TRAIT_PARALYSIS_L_ARM)
 		if("r_leg")
-			subject = "your right leg"
+			subject = "my right leg"
 			paralysis_traits = list(TRAIT_PARALYSIS_R_LEG)
 		if("l_leg")
-			subject = "your left leg"
+			subject = "my left leg"
 			paralysis_traits = list(TRAIT_PARALYSIS_L_LEG)
 
-	gain_text = "<span class='warning'>I can't feel [subject] anymore!</span>"
-	lose_text = "<span class='notice'>I can feel [subject] again!</span>"
+	gain_text = span_warning("I can't feel [subject] anymore!")
+	lose_text = span_notice("I can feel [subject] again!")
 
 /datum/brain_trauma/severe/paralysis/on_gain()
 	..()
@@ -125,8 +125,8 @@
 	name = "Narcolepsy"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I have a constant feeling of drowsiness...</span>"
-	lose_text = "<span class='notice'>I feel awake and aware again.</span>"
+	gain_text = span_warning("I have a constant feeling of drowsiness...")
+	lose_text = span_notice("I feel awake and aware again.")
 
 /datum/brain_trauma/severe/narcolepsy/on_life()
 	..()
@@ -139,10 +139,10 @@
 	if(drowsy)
 		sleep_chance += 3
 	if(prob(sleep_chance))
-		to_chat(owner, "<span class='warning'>I fall asleep.</span>")
+		to_chat(owner, span_warning("I fall asleep."))
 		owner.Sleeping(60)
 	else if(!drowsy && prob(sleep_chance * 2))
-		to_chat(owner, "<span class='warning'>I feel tired...</span>")
+		to_chat(owner, span_warning("I feel tired..."))
 		owner.adjust_drowsiness(20 SECONDS)
 
 /datum/brain_trauma/severe/monophobia
@@ -150,15 +150,15 @@
 	desc = ""
 	scan_desc = ""
 	gain_text = ""
-	lose_text = "<span class='notice'>I feel like you could be safe on my own.</span>"
+	lose_text = span_notice("I feel like you could be safe on my own.")
 	var/stress = 0
 
 /datum/brain_trauma/severe/monophobia/on_gain()
 	..()
 	if(check_alone())
-		to_chat(owner, "<span class='warning'>I feel really lonely...</span>")
+		to_chat(owner, span_warning("I feel really lonely..."))
 	else
-		to_chat(owner, "<span class='notice'>I feel safe, as long as you have people around you.</span>")
+		to_chat(owner, span_notice("I feel safe, as long as you have people around you."))
 
 /datum/brain_trauma/severe/monophobia/on_life()
 	..()
@@ -188,39 +188,39 @@
 	switch(rand(1,6))
 		if(1)
 			if(!high_stress)
-				to_chat(owner, "<span class='warning'>I feel sick...</span>")
+				to_chat(owner, span_warning("I feel sick..."))
 			else
-				to_chat(owner, "<span class='warning'>I feel really sick at the thought of being alone!</span>")
+				to_chat(owner, span_warning("I feel really sick at the thought of being alone!"))
 			addtimer(CALLBACK(owner, TYPE_PROC_REF(/mob/living/carbon, vomit), high_stress), 50) //blood vomit if high stress
 		if(2)
 			if(!high_stress)
-				to_chat(owner, "<span class='warning'>I can't stop shaking...</span>")
+				to_chat(owner, span_warning("I can't stop shaking..."))
 				owner.adjust_dizzy(20 SECONDS)
 				owner.adjust_confusion(20 SECONDS)
 				owner.adjust_jitter(20 SECONDS)
 			else
-				to_chat(owner, "<span class='warning'>I feel weak and scared! If only you weren't alone...</span>")
+				to_chat(owner, span_warning("I feel weak and scared! If only you weren't alone..."))
 				owner.adjust_dizzy(20 SECONDS)
 				owner.adjust_confusion(20 SECONDS)
 				owner.adjust_jitter(20 SECONDS)
 
 		if(3, 4)
 			if(!high_stress)
-				to_chat(owner, "<span class='warning'>I feel really lonely...</span>")
+				to_chat(owner, span_warning("I feel really lonely..."))
 			else
-				to_chat(owner, "<span class='warning'>You're going mad with loneliness!</span>")
+				to_chat(owner, span_warning("You're going mad with loneliness!"))
 
 		if(5)
 			if(!high_stress)
-				to_chat(owner, "<span class='warning'>My heart skips a beat.</span>")
+				to_chat(owner, span_warning("My heart skips a beat."))
 				owner.adjustOxyLoss(8)
 			else
 				if(prob(15) && ishuman(owner))
 					var/mob/living/carbon/human/H = owner
 					H.set_heartattack(TRUE)
-					to_chat(H, "<span class='danger'>I feel a stabbing pain in my heart!</span>")
+					to_chat(H, span_danger("I feel a stabbing pain in my heart!"))
 				else
-					to_chat(owner, "<span class='danger'>I feel my heart lurching in my chest...</span>")
+					to_chat(owner, span_danger("I feel my heart lurching in my chest..."))
 					owner.adjustOxyLoss(8)
 		if(6)
 			return
@@ -229,8 +229,8 @@
 	name = "Discoordination"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I can barely control my hands!</span>"
-	lose_text = "<span class='notice'>I feel in control of my hands again.</span>"
+	gain_text = span_warning("I can barely control my hands!")
+	lose_text = span_notice("I feel in control of my hands again.")
 
 /datum/brain_trauma/severe/discoordination/on_gain()
 	ADD_TRAIT(owner, TRAIT_MONKEYLIKE, TRAUMA_TRAIT)
@@ -244,8 +244,8 @@
 	name = "Traumatic Non-Violence"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='notice'>I feel oddly peaceful.</span>"
-	lose_text = "<span class='notice'>I no longer feel compelled to not harm.</span>"
+	gain_text = span_notice("I feel oddly peaceful.")
+	lose_text = span_notice("I no longer feel compelled to not harm.")
 
 /datum/brain_trauma/severe/pacifism/on_gain()
 	ADD_TRAIT(owner, TRAIT_PACIFISM, TRAUMA_TRAIT)
@@ -259,8 +259,8 @@
 	name = "Hypnotic Stupor"
 	desc = ""
 	scan_desc = ""
-	gain_text = "<span class='warning'>I feel somewhat dazed.</span>"
-	lose_text = "<span class='notice'>I feel like a fog was lifted from my mind.</span>"
+	gain_text = span_warning("I feel somewhat dazed.")
+	lose_text = span_notice("I feel like a fog was lifted from my mind.")
 
 /datum/brain_trauma/severe/hypnotic_stupor/on_lose() //hypnosis must be cleared separately, but brain surgery should get rid of both anyway
 	..()

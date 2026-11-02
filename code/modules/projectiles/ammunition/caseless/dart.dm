@@ -24,4 +24,4 @@
 
 /obj/item/ammo_casing/caseless/dart/poison/Initialize(mapload, ...)
 	. = ..()
-	reagents.add_reagent(/datum/reagent/berrypoison, 3)
+	reagents.add_reagent(/datum/reagent/poison/berry, 3)

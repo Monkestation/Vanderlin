@@ -39,14 +39,14 @@
 
 /datum/special_trait/nightvision
 	name = "Night Vision"
-	greet_text = span_notice("I can easily see in the dark.")
+	greet_text = span_notice("I can see as clear as any elf in the dark.")
 	weight = 100
 
 /datum/special_trait/nightvision/on_apply(mob/living/carbon/human/character, silent)
 	var/list/eye_list = character.getorganslotlist(ORGAN_SLOT_EYES)
 	for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-		eyes.see_in_dark = 3
-		eyes.lighting_alpha = LIGHTING_PLANE_ALPHA_NV_TRAIT
+		eyes.see_in_dark = SEE_IN_DARK_ELVEN_EYES
+		eyes.lighting_alpha = LIGHTING_PLANE_ALPHA_ELVEN_EYES
 		character.update_sight()
 
 /datum/special_trait/thickskin
@@ -180,10 +180,10 @@
 	allowed_jobs = list(/datum/job/magician, /datum/job/mageapprentice)
 
 /datum/special_trait/darkmagic/on_apply(mob/living/carbon/human/character, silent)
-	character.add_spell(/datum/action/cooldown/spell/eyebite, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/projectile/sickness, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/conjure/raise_lesser_undead/necromancer, silent = TRUE)
-	character.add_spell(/datum/action/cooldown/spell/gravemark, silent = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/eyebite, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/projectile/sickness, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/conjure_summon/raise_lesser_undead/necromancer, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/gravemark, silent = TRUE, mastery_spell = TRUE)
 
 /datum/special_trait/too_smart
 	name = "Too smart"
@@ -197,7 +197,7 @@
 
 /datum/attribute_holder/sheet/job/bookworm
 	clamped_adjustment = list(
-		/datum/attribute/skill/misc/reading = list(40, 40),
+		/datum/attribute/skill/educated/reading = list(40, 40),
 	)
 
 /datum/special_trait/bookworm
@@ -234,7 +234,7 @@
 	weight = 50
 
 /datum/special_trait/tombraider/on_apply(mob/living/carbon/human/character, silent)
-	character.mind.special_items["Whip"] = /obj/item/weapon/whip/antique
+	character.mind.special_items["Whip"] = /obj/item/weapon/whip/steel
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/tombraider)
 
 /datum/attribute_holder/sheet/job/drunk_rider
@@ -373,6 +373,8 @@
 
 /datum/special_trait/tavernbrawler/on_apply(mob/living/carbon/human/character)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/tavernbrawler)
+	character.add_spell(/datum/action/innate/clench_fists, TRUE)
+	ADD_TRAIT(character,TRAIT_CLOSECOMBAT, BE_SPECIAL_TRAIT)
 
 /datum/attribute_holder/sheet/job/mastercraftsmen
 	raw_attribute_list = list(
@@ -400,7 +402,7 @@
 
 /datum/attribute_holder/sheet/job/blueblood
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/special_trait/blueblood
@@ -435,7 +437,7 @@
 
 /datum/special_trait/burdened/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_MALUMFIRE, "[type]")
-	ADD_TRAIT(character, TRAIT_NOSLEEP, "[type]") // can't learn any new skills
+	ADD_TRAIT(character, TRAIT_SLEEPIMMUNE, "[type]") // can't learn any new skills
 	ADD_TRAIT(character, TRAIT_NOENERGY, "[type]")
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/burdened_one)
 	character.cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'  // has a burdened vibe to it
@@ -577,7 +579,7 @@
 	weight = 25
 
 /datum/special_trait/sadistic/on_apply(mob/living/carbon/human/character, silent)
-	character.add_quirk(/datum/quirk/vice/maniac)
+	character.add_quirk(/datum/quirk/vice/addiction/sadist)
 	add_verb(character, /mob/living/carbon/human/proc/torture_victim)
 	character.mind.special_items["Chains"] = /obj/item/rope/chain
 
@@ -630,7 +632,8 @@
 	weight = 50
 
 /datum/special_trait/unlucky/on_apply(mob/living/carbon/human/character, silent)
-	GET_MOB_ATTRIBUTE_VALUE(character, STAT_FORTUNE) = rand(1, 10)
+	var/mod = rand(1, 10)
+	character.adjust_stat_modifier("[type]", list(STAT_FORTUNE = -mod))
 
 /datum/special_trait/jesterphobia
 	name = "Jesterphobic"
@@ -714,7 +717,7 @@
 		/datum/attribute/skill/combat/knives = list(20, 60),
 	)
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/reading = -20,
+		/datum/attribute/skill/educated/reading = -20,
 		/datum/attribute/skill/misc/sneaking = -20,
 		/datum/attribute/skill/misc/stealing = -20,
 
@@ -750,7 +753,7 @@
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/wrestling = list(60, 60),
 		/datum/attribute/skill/combat/unarmed = list(60, 60),
-		/datum/attribute/skill/misc/reading = list(30, 60),
+		/datum/attribute/skill/educated/reading = list(30, 60),
 	)
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 10,
@@ -826,42 +829,125 @@
 
 /datum/special_trait/thinker/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/thinker)
-	character.adjust_spell_points(14) //Less points than Court Mage, why do Court mage get 17 points? what even?
-	character.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation, silent = TRUE)
-	character.generate_random_attunements(rand(4,6))
+	character.adjust_technique_mastery_points(3)
+	character.adjust_form_mastery_points(8)
+	character.add_spell(/datum/action/cooldown/spell/undirected/touch/prestidigitation, silent = TRUE, mastery_spell = TRUE)
 	character.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 	character.mana_pool.adjust_mana(100) //I don't know, they don't spawn with their full mana bar, so we give them a bit more mana at the start.
-	new /obj/item/book/granter/spellbook/master(get_turf(character))
+	new /obj/item/spellbook/master/starter/arcane(get_turf(character))
 
-/datum/special_trait/skeleton
-	name = "Skeleton"
-	greet_text = span_boldwarning("I was... am... afflicted with a curse by a lich that left me without my flesh, but I still retained control of myself... (This is not an antagonist role, expect to be attacked unless wearing something to cover your head.)")
-	allowed_ctags = list(CTAG_PILGRIM)
-	req_text = "Be a Pilgrim."
-	weight = 20
+/datum/attribute_holder/sheet/job/chosen
+	raw_attribute_list = list(
+		STAT_INTELLIGENCE = 1,
+		STAT_ENDURANCE = 2,
+		STAT_PERCEPTION = -1,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/magic/holy = list(50, 60),
+		/datum/attribute/skill/combat/polearms = list(20, 60)
+	)
 
-/datum/special_trait/skeleton/on_apply(mob/living/carbon/human/character, silent)
-	character.skeletonize(FALSE)
-	character.skele_look()
-	character.grant_undead_eyes()
+/datum/special_trait/chosen
+	name = "The Chosen"
+	greet_text = span_notice("Ruler of all I see, I am their will. <b>I AM CHOSEN</b>.")
+	req_text = "Monarch, worship The Ten or The Four"
+	allowed_patrons = ALL_MIRACLE_PATRONS
+	allowed_jobs = list(/datum/job/lord)
+	weight = 25 //Should be fine.
 
-	character.mob_biotypes |= MOB_UNDEAD
-	character.dna?.species?.inherent_traits |= TRAIT_NOBLOOD
-	character.dna?.species?.soundpack_m = new /datum/voicepack/skeleton()
-	character.dna?.species?.soundpack_f = new /datum/voicepack/skeleton()
+/datum/special_trait/chosen/on_apply(mob/living/carbon/human/character, silent)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/chosen)
+	var/patron_check = character.patron
+	if(!ispath(patron_check))
+		patron_check = character.patron.type
+	switch(patron_check)
+		if(/datum/patron/divine/astrata)
+			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+		if(/datum/patron/divine/eora)
+			ADD_TRAIT(character, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
+			ADD_TRAIT(character, TRAIT_EMPATH, TRAIT_GENERIC)
+			REMOVE_TRAIT(character, TRAIT_VIRGIN, JOB_TRAIT)
+			character.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
+		if(/datum/patron/divine/noc)
+			var/language = pick(list("Dwarvish", "Elvish", "Hellspeak", "Zaladin", "Orcish",))
+			switch(language)
+				if("Dwarvish")
+					character.grant_language(/datum/language/dwarvish)
+					to_chat(character,span_info("I learned the tongue of the mountain dwellers."))
+				if("Elvish")
+					character.grant_language(/datum/language/elvish)
+					to_chat(character,span_info("I learned the tongue of the primordial species."))
+				if("Hellspeak")
+					character.grant_language(/datum/language/hellspeak)
+					to_chat(character,span_info("I learned the tongue of the hellspawn."))
+				if("Zaladin")
+					character.grant_language(/datum/language/zalad)
+					to_chat(character,span_info("I learned the tongue of Zaladin."))
+				if("Orcish")
+					character.grant_language(/datum/language/orcish)
+					to_chat(character,span_info("I learned the tongue of the savages in my time."))
+			character.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
+		if(/datum/patron/divine/pestra)
+			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+		if(/datum/patron/divine/dendor)
+			ADD_TRAIT(character, TRAIT_SEEDKNOW, TRAIT_GENERIC)
+			character.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
+		if(/datum/patron/divine/abyssor)
+			character.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
+		if(/datum/patron/divine/ravox)
+			character.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
+		if(/datum/patron/divine/xylix)
+			character.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
+		if(/datum/patron/divine/malum)
+			ADD_TRAIT(character, TRAIT_MALUMFIRE, TRAIT_GENERIC)
+			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+		if(/datum/patron/inhumen/graggar)
+			character.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
+		if(/datum/patron/inhumen/zizo)
+			character.grant_language(/datum/language/undead)
+			character.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
+		if(/datum/patron/inhumen/matthios)
+			character.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
+		if(/datum/patron/inhumen/baotha)
+			character.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
 
-	ADD_TRAIT(character, TRAIT_NOLIMBDISABLE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_EASYDISMEMBER, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_LIMBATTACHMENT, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOHUNGER, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOBREATH, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOPAIN, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_TOXIMMUNE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOSLEEP, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_SHOCKIMMUNE, BE_SPECIAL_TRAIT)
-	ADD_TRAIT(character, TRAIT_NOBLOOD, BE_SPECIAL_TRAIT)
+	var/obj/item/clothing/neck/psycross/amulet = new character.patron?.associated_objects[PATRON_AMULET][1]
+	character.put_in_hand(amulet)
+	var/holder = character.patron?.devotion_holder
+	if(holder)
+		var/datum/devotion/devotion = new holder()
+		devotion.make_acolyte()
+		devotion.grant_to(character)
 
-	character.update_body()
+/datum/attribute_holder/sheet/job/dark_secrets
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 4,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/magic/blood = list(30, 40),
+		/datum/attribute/skill/combat/polearms = list(20, 40)
+	)
+
+/datum/special_trait/dark_secrets
+	name = "Dark Secrets"
+	greet_text = span_notice("You have a dark secret, hidden power you have concealed for most of your life. Is now the time to let it out?")
+	req_text = "Worship an Archdevil."
+	allowed_patrons = list(/datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/leviathan)
+	restricted_traits = list(TRAIT_BLOOD_MAGE, TRAIT_BLOOD_SORCERER, TRAIT_BLOOD_STUDENT, TRAIT_VITAE_USER)
+	weight = 15 //Should be fine.
+
+/datum/special_trait/dark_secrets/on_apply(mob/living/carbon/human/character, silent)
+	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/dark_secrets)
+	character.add_spell(/datum/action/cooldown/spell/status/blood_sight, silent = TRUE, mastery_spell = TRUE)
+	character.add_spell(/datum/action/cooldown/spell/blood_steal, silent = TRUE, mastery_spell = TRUE)
+	character.grant_language(/datum/language/sanguine)
+	character.adjust_technique_mastery_points(3)
+	character.adjust_form_mastery_points(4, specific_form = FORM_BLOOD)
+	ADD_TRAIT(character, TRAIT_BLOOD_STUDENT, BE_SPECIAL_TRAIT)
+	character.hud_used?.set_bloody_bloodpool()
+	character.adjust_bloodpool()
+	to_chat(character, SPAN_GOD_ARCHDEVILS("I have available innate spellpoints."))
 
 /datum/special_trait/overcompensating
 	name = "Overcompensating"
@@ -923,7 +1009,8 @@
 
 /datum/special_trait/bestial/on_apply(mob/living/carbon/human/character, silent)
 	character.grant_language(/datum/language/beast)
-	character.add_spell(/datum/action/cooldown/spell/undirected/howl/call_of_the_moon, silent = TRUE)
+	// Non functional howl
+	//character.add_spell(/datum/action/cooldown/spell/undirected/howl/call_of_the_moon, silent = TRUE)
 	ADD_TRAIT(character, TRAIT_NASTY_EATER, "[type]") // eat the raw meat
 
 /datum/attribute_holder/sheet/job/glutton
@@ -1063,12 +1150,13 @@
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/combat/wrestling = 30,
-        /datum/attribute/skill/combat/unarmed = 25,
+		/datum/attribute/skill/combat/unarmed = 25,
 	)
 
 /datum/special_trait/musclepriest/on_apply(mob/living/carbon/human/character, silent)
 	ADD_TRAIT(character, TRAIT_CRITICAL_RESISTANCE, BE_SPECIAL_TRAIT)
 	ADD_TRAIT(character, TRAIT_NOPAINSTUN, BE_SPECIAL_TRAIT)
+	ADD_TRAIT(character,TRAIT_CLOSECOMBAT, BE_SPECIAL_TRAIT)
 	QDEL_NULL(character.wear_pants)
 	QDEL_NULL(character.wear_shirt)
 	QDEL_NULL(character.wear_armor)
@@ -1083,6 +1171,9 @@
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
 	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
 	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
+	var/datum/action/innate/clench_fists/fists = new(character)
+	fists.Grant(character)
+
 /datum/special_trait/nrftw
 	name = "No Rest for the Wicked"
 	greet_text = span_notice("Miracles that heal others scorch me, and i feel as if i am being dreagged to the underworld.")

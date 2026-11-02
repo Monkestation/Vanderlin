@@ -90,7 +90,6 @@
 
 	var/threat_region = "" // Key used to look up threat region this area belongs to
 
-	var/delver_restrictions = FALSE
 	var/coven_protected = FALSE
 	/// Used in `hole.dm`, grants bonus to a grave if buried here.
 	var/burial_grounds = FALSE
@@ -118,7 +117,7 @@ GLOBAL_LIST_EMPTY(teleportlocs)
 			continue
 		if (!AR.has_contained_turfs())
 			continue
-		if (is_station_level(AR.z))
+		if (is_town_level(AR.z))
 			GLOB.teleportlocs[AR.name] = AR
 
 

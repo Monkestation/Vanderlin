@@ -9,9 +9,10 @@
 	cooldown_time = 5 MINUTES
 	spell_cost = 15
 	spell_flags = SPELL_RITUOS
-	attunements = list(
-		/datum/attunement/dark = 0.4
-	)
+
+	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
+	required_technique = TECHNIQUE_ALTERATION
 
 /datum/action/cooldown/spell/undirected/shadow_step/cast(atom/cast_on)
 	. = ..()

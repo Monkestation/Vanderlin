@@ -140,11 +140,9 @@ SUBSYSTEM_DEF(merchant)
 		if(output)
 			var/list/all_requirements = list()
 			if(recipe.required_material)
-				all_requirements[recipe.required_material] = recipe.num_of_materials
-
-			if(length(recipe.additional_items))
-				for(var/item in recipe.additional_items)
-					all_requirements[item] = 1
+				all_requirements[recipe.required_material] = 1
+			for(var/item in recipe.additional_items)
+				all_requirements[item] += recipe.additional_items[item]
 
 			var/cost = calculate_component_cost(all_requirements)
 			recipe_base_values[output] = cost + (recipe.craftdiff * 10)
@@ -159,11 +157,10 @@ SUBSYSTEM_DEF(merchant)
 		if(output)
 			var/list/all_requirements = list()
 			if(recipe.required_item)
-				all_requirements[recipe.required_item] = 1
+				all_requirements[recipe.required_item]++
 
-			if(length(recipe.additional_items))
-				for(var/item in recipe.additional_items)
-					all_requirements[item] = 1
+			for(var/item in recipe.additional_items)
+				all_requirements[item] += recipe.additional_items[item]
 
 			var/cost = calculate_component_cost(all_requirements)
 			recipe_base_values[output] = cost + (recipe.craftdiff * 10)
@@ -445,14 +442,13 @@ SUBSYSTEM_DEF(merchant)
 	var/turf/spawn_turf = pick(boat_spaces)
 	if(!spawn_turf)
 		return
-	var/obj/structure/closet/crate/chest/merchant/delivery_chest = new(spawn_turf)
+	var/obj/structure/closet/crate/chest/shippingcrate/merchant/delivery_chest = new(spawn_turf)
 	delivery_chest.name = "[LOWER_TEXT(category)] delivery chest"
 	register_lift_cargo(delivery_chest)
 	var/manifest_contents = "<h2>[category] Supply Division</h2><hr><b>Contained Cargo Manifest:</b><ul>"
-	for(var/item_type in items_to_pack)
-		var/atom/movable/item = item_type
-		if(ispath(item_type))
-			item = new item_type(delivery_chest)
+	for(var/atom/movable/item as anything in items_to_pack)
+		if(ispath(item))
+			item = new item(delivery_chest)
 		else
 			item.forceMove(delivery_chest)
 		if(isitem(item))

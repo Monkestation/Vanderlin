@@ -320,6 +320,10 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 	name = JOB_COURT_AGENT
 	jobs_to_spawn = list(JOB_COURT_AGENT)
 
+/obj/effect/landmark/start/late/courtagent
+	name = JOB_COURT_AGENT
+	jobs_to_spawn = list(JOB_COURT_AGENT)
+
 /obj/effect/landmark/start/fisher
 	name = JOB_FISHER
 	jobs_to_spawn = list(JOB_FISHER)
@@ -334,7 +338,7 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/outsider
 	name = "Outsiders"
-	jobs_to_spawn = list(JOB_PILGRIM, JOB_ADVENTURER, ROLE_WRETCH)
+	jobs_to_spawn = list(JOB_PILGRIM, JOB_ADVENTURER, ROLE_WRETCH, JOB_ADMIN_DARKSPAWN, JOB_ADMIN_BLOOD_SORCERER)
 	custom_handling = TRUE
 
 /obj/effect/landmark/start/outsider/Initialize(mapload)
@@ -414,14 +418,14 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/forestguard
 	name = JOB_FOREST_GUARD
-	jobs_to_spawn = list(JOB_FOREST_ENFORCER, JOB_FOREST_PREACHER, JOB_FOREST_GUARD, JOB_FOREST_SUPPORT, JOB_FOREST_GUARD_CLASSIC)//Spawns Forest Guards on maps without Gallowband
+	jobs_to_spawn = list(JOB_FOREST_GUARD, JOB_FOREST_GUARD_CLASSIC)//Spawns Forest Guards on maps without Gallowband
 
 /obj/effect/landmark/start/forestsupport
 	name = JOB_FOREST_SUPPORT
 	jobs_to_spawn = list(JOB_FOREST_SUPPORT)
 
 /obj/effect/landmark/start/late/gallowband
-	name = "Bog Witch and Apprentice"
+	name = "Combined Gallowband"
 	jobs_to_spawn = list(JOB_FOREST_WARDEN, JOB_FOREST_ENFORCER, JOB_FOREST_PREACHER, JOB_FOREST_GUARD, JOB_FOREST_SUPPORT)
 
 //Antagonist spawns
@@ -597,3 +601,13 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark/start/new_player)
 
 /obj/effect/landmark/death_arena/second
 	name = "Death arena spawn 2"
+
+
+//Admin job landmarks
+/obj/effect/landmark/start/lunar_oracle
+	name = "Lunar Oracle"
+	jobs_to_spawn = list(JOB_ADMIN_ORACLE)
+
+/obj/effect/landmark/start/late/lunar_oracle
+	name = "Lunar Oracle"
+	jobs_to_spawn = list(JOB_ADMIN_ORACLE)

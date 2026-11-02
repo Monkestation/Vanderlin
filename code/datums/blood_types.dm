@@ -131,7 +131,7 @@ GLOBAL_LIST_INIT_TYPED(blood_types, /datum/blood_type, init_subtypes_w_path_keys
 		return
 	if(sampled_from.cleric && istype(sampled_from.patron, /datum/patron/divine))
 		. |= BLOOD_PREFERENCE_HOLY
-	if(sampled_from.virginity)
+	if(HAS_TRAIT(sampled_from, TRAIT_VIRGIN))
 		. |= BLOOD_PREFERENCE_VIRGIN
 
 /datum/blood_type/human/tiefling

@@ -50,6 +50,10 @@
 	var/check_other_side = FALSE
 	var/list/revealed_to = list()
 	var/area/cached_destination_area
+	var/transit_delay = 5 SECONDS
+
+/obj/structure/fluff/traveltile/fast
+	transit_delay = 1 SECONDS
 
 /obj/structure/fluff/traveltile/Initialize()
 	GLOB.traveltiles += src
@@ -130,6 +134,8 @@
 /obj/structure/fluff/traveltile/proc/can_go(atom/movable/AM)
 	if(AM.pulledby)
 		return FALSE
+	if(!get_mind(AM) && AM.buckled_mobs)
+		return FALSE
 
 	if(AM.recent_travel)
 		if(world.time < AM.recent_travel + 15 SECONDS)
@@ -170,12 +176,12 @@
 	if(!can_go(user))
 		return
 
-	var/time2go = 5 SECONDS
+	var/time2go = transit_delay
 	if(check_other_side && the_tile.required_trait)
 		for(var/mob/living/M in hearers(7, get_turf(the_tile)))
 			if(!HAS_TRAIT(M, the_tile.required_trait))
 				to_chat(user, span_warning("I sense something off at the end of the trail."))
-				time2go = 7 SECONDS
+				time2go += 2 SECONDS
 				break
 
 	if(!do_after(user, time2go, src, (IGNORE_HELD_ITEM)))

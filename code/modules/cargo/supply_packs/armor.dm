@@ -96,7 +96,7 @@
 /datum/supply_pack/armor/light/shamaniccoat
 	name = "Shamanic Coat"
 	cost = 30
-	contains = /obj/item/clothing/armor/leather/atgervi
+	contains = /obj/item/clothing/armor/leather/shamancoat
 
 // SHIRT ARMOR
 
@@ -202,10 +202,10 @@
 	cost = 90
 	contains = /obj/item/clothing/head/helmet/sallet/elven
 
-/datum/supply_pack/armor/steel/atgervihelm
-	name = "Atgervi Helm"
+/datum/supply_pack/armor/steel/dwarvenhelm
+	name = "Owl Helmet"
 	cost = 60
-	contains = /obj/item/clothing/head/helmet/bascinet/atgervi
+	contains = /obj/item/clothing/head/helmet/bascinet/owl
 
 /datum/supply_pack/armor/steel/steppehelm
 	name = "Steppe Bascinet"
@@ -273,10 +273,10 @@
 
 // SHIRT ARMOR
 
-/datum/supply_pack/armor/steel/atgervichest
-	name = "Atgervi Hauberk"
+/datum/supply_pack/armor/steel/dwarvenchest
+	name = "Dwarven Hauberk"
 	cost = 95
-	contains = /obj/item/clothing/armor/chainmail/hauberk/atgervi
+	contains = /obj/item/clothing/armor/chainmail/hauberk/dwarven
 
 /datum/supply_pack/armor/steel/chainmail
 	name = "Steel Chainmail"
@@ -305,10 +305,10 @@
 	cost = 50
 	contains = /obj/item/clothing/gloves/plate
 
-/datum/supply_pack/armor/steel/atgervigloves
-	name = "Atgervi Gloves"
+/datum/supply_pack/armor/steel/beastclaws
+	name = "Beast Claws"
 	cost = 55
-	contains = /obj/item/clothing/gloves/plate/atgervi
+	contains = /obj/item/clothing/gloves/plate/beastclaws
 
 // PANTS
 

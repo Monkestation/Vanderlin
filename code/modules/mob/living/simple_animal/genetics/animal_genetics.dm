@@ -108,10 +108,10 @@ GLOBAL_LIST_INIT(all_animal_genes_weighted, generate_animaL_genes())
 	return names
 
 /datum/animal_genetics/proc/get_gene_by_exclusion_group(group)
-    for(var/datum/animal_gene/G in genes)
-        if(G.exclusion_group == group)
-            return G
-    return null
+	for(var/datum/animal_gene/G in genes)
+		if(G.exclusion_group == group)
+			return G
+	return null
 
 /// Build this parent's contribution for an inheritance pass.
 /// Returns an associative list of exclusion_group (or type path for ungrouped) -> gene datum.
@@ -388,8 +388,8 @@ GLOBAL_LIST_INIT(all_animal_genes_weighted, generate_animaL_genes())
 	genetics.refresh()
 
 /mob/living/simple_animal/proc/debug_breed_with(mob/living/simple_animal/father)
-    var/mob/living/simple_animal/baby = new type(loc)
-    baby.name = "Debug [name]"
-    if(genetics)
-        genetics.inherit_to(baby, father)
-    return baby
+	var/mob/living/simple_animal/baby = new type(loc)
+	baby.name = "Debug [name]"
+	if(genetics)
+		genetics.inherit_to(baby, father)
+	return baby

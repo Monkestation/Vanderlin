@@ -54,7 +54,7 @@
 	item_state = "woodbucket"
 	force = 5
 	throwforce = 10
-	armor = list("blunt" = 10, "slash" = 10, "stab" = 10,  "piercing" = 0, "fire" = 0, "acid" = 50)
+	armor_type = /datum/armor/bucket
 	resistance_flags = FLAMMABLE
 	dropshrink = 0.8
 	slot_flags = null

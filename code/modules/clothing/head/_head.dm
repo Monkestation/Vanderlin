@@ -10,7 +10,7 @@
 
 	body_parts_covered = COVERAGE_SKULL
 	slot_flags = ITEM_SLOT_HEAD
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 
 	equip_sound = "rustle"
 	pickup_sound = "rustle"

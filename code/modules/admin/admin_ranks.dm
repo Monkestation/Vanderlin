@@ -273,6 +273,7 @@ GLOBAL_PROTECT(protected_ranks)
 		msg += "\t[ckey] - [D.rank.name]\n"
 	testing(msg)
 	#endif
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_ADMINS_RELOADED)
 	return dbfail
 
 #ifdef TESTING

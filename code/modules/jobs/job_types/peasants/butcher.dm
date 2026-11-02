@@ -4,7 +4,7 @@
 		STAT_CONSTITUTION = 2,
 		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
@@ -23,15 +23,16 @@
 	display_order = JDO_BUTCHER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	department_flag = PEASANTS
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	attribute_sheet = /datum/attribute_holder/sheet/job/butcher
 	outfit = /datum/outfit/beastmaster
 	give_bank_account = TRUE
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 	can_be_apprentice = TRUE
 

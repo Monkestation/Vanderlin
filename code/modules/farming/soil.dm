@@ -86,7 +86,7 @@
 	if(!produce_ready)
 		return
 	apply_farming_fatigue(user, 4)
-	add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2)
+	user.add_sleep_experience(/datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2)
 
 	return_nutrients_to_soil()
 	var/farming_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/farming)
@@ -117,6 +117,8 @@
 	to_chat(user, span_notice(feedback))
 	yield_produce(modifier)
 	SEND_SIGNAL(user, COMSIG_PLANT_HARVESTED)
+
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_PLANT_HARVESTED, src, user, drop_location())
 
 /obj/structure/soil/proc/try_handle_harvest(obj/item/attacking_item, mob/user)
 	if(istype(attacking_item, /obj/item/weapon/sickle))
@@ -241,14 +243,14 @@
 			apply_farming_fatigue(user, 20)
 			to_chat(user, span_notice("I rip out the weeds."))
 			deweed()
-			add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
+			user.add_sleep_experience(/datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 			SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	if(istype(attacking_item, /obj/item/weapon/hoe))
 		apply_farming_fatigue(user, 10)
 		to_chat(user, span_notice("I rip out the weeds with the [attacking_item]"))
 		deweed()
-		add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
+		user.add_sleep_experience(/datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 		SEND_SIGNAL(user, COMSIG_PLANT_TENDED)
 		return TRUE
 	return FALSE
@@ -286,7 +288,7 @@
 			to_chat(user, span_notice("I remove the crop."))
 			playsound(src,'sound/items/seed.ogg', 100, FALSE)
 			uproot()
-			add_sleep_experience(user, /datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
+			user.add_sleep_experience(/datum/attribute/skill/labor/farming, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2)
 		return
 	. = ..()
 
@@ -1004,7 +1006,7 @@
 	// Nutrient deficiency affects plant health only if nutrients are required but unavailable
 	var/any_nutrients_needed = (nitrogen_needed > 0 || phosphorus_needed > 0 || potassium_needed > 0)
 	if(any_nutrients_needed && limiting_factor < 0.1)
-		adjust_plant_health(-dt * NUTRIENT_DEFICIENCY_DAMAGE_RATE)
+		actual_growth_time *= 0.75
 
 	return add_growth(actual_growth_time)
 
@@ -1099,7 +1101,7 @@
 
 /// Yields produce on its tile if it's ready for harvest
 /obj/structure/soil/proc/yield_produce(modifier = 0)
-	if(!produce_ready || !plant_genetics)
+	if(!produce_ready || !plant_genetics || !plant.produce_type)
 		return
 
 	// GENETICS: Enhanced yield calculation

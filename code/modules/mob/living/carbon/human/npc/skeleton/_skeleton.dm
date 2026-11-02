@@ -2,12 +2,12 @@
 	name = "skeleton"
 	icon = 'icons/roguetown/mob/monster/skeletons.dmi'
 	icon_state = MAP_SWITCH("", "skeleton")
+	faction = list(FACTION_HOSTILE, FACTION_UNDEAD)
 	race = /datum/species/human/northern
 	gender = MALE
 	bodyparts = list(/obj/item/bodypart/chest, /obj/item/bodypart/head, /obj/item/bodypart/l_arm,
 					/obj/item/bodypart/r_arm, /obj/item/bodypart/r_leg, /obj/item/bodypart/l_leg, /obj/item/bodypart/mouth)
-	faction = list(FACTION_UNDEAD)
-	var/skel_outfit = /datum/outfit/npc/skeleton
+	mob_biotypes = MOB_UNDEAD
 	ambushable = FALSE
 	rot_type = null
 	base_intents = list(INTENT_HELP, INTENT_DISARM, INTENT_GRAB, /datum/intent/unarmed/claw)
@@ -15,11 +15,11 @@
 	possible_mmb_intents = list(INTENT_STEAL, INTENT_JUMP, INTENT_KICK, INTENT_BITE)
 	stand_attempts = 4
 	cmode_music = 'sound/music/cmode/antag/combatskeleton.ogg'
-	var/should_have_aggro = TRUE
 	headprice = 7
+	mob_biotypes = MOB_HUMANOID|MOB_ORGANIC|MOB_UNDEAD
 
-/mob/living/carbon/human/species/skeleton/npc/no_equipment
-	skel_outfit = null
+	var/skel_outfit = /datum/outfit/npc/skeleton
+	var/should_have_aggro = TRUE
 
 /mob/living/carbon/human/species/skeleton/no_equipment
 	skel_outfit = null
@@ -31,6 +31,9 @@
 	wander = TRUE
 	attack_speed = -10
 
+/mob/living/carbon/human/species/skeleton/npc/no_equipment
+	skel_outfit = null
+
 /mob/living/carbon/human/species/skeleton/Initialize()
 	. = ..()
 	if(ai_controller && should_have_aggro)
@@ -41,12 +44,8 @@
 	..()
 	name = "skeleton"
 	real_name = "skeleton"
-	underwear = "Nude"
 	mob_biotypes = MOB_UNDEAD
-	faction = list(FACTION_UNDEAD)
-	var/turf/turf = get_turf(src)
-	if(SSterrain_generation.get_island_at_location(turf))
-		faction |= "islander"
+	add_faction(FACTION_UNDEAD)
 	if(length(quirks))
 		clear_quirks()
 	if(dna?.species)
@@ -57,16 +56,15 @@
 		if(headdy)
 			headdy.icon = 'icons/roguetown/mob/monster/skeletons.dmi'
 			headdy.icon_state = "skull"
-	for(var/obj/item/bodypart/B as anything in bodyparts)
-		B.skeletonize(FALSE)
-	grant_undead_eyes()
+	underwear = "Nude"
 	update_body()
+	grant_undead_eyes()
 	add_traits(list(TRAIT_NOMOOD, \
 		TRAIT_NOHUNGER, \
 		TRAIT_NOBREATH, \
 		TRAIT_NOHYGIENE, \
 		TRAIT_NOPAIN, \
-		TRAIT_NOSLEEP, \
+		TRAIT_SLEEPIMMUNE, \
 		TRAIT_EASYDISMEMBER, \
 		TRAIT_TOXIMMUNE, \
 		TRAIT_LIMBATTACHMENT, \
@@ -74,6 +72,7 @@
 		TRAIT_NO_ORGAN_PROCESS, \
 		TRAIT_NOBLOOD)
 		, SPECIES_TRAIT)
+	skeletonize(FALSE)
 	if(skel_outfit)
 		var/datum/outfit/OU = new skel_outfit
 		if(OU)
@@ -121,7 +120,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/colored/vagrant
 	pants = /obj/item/clothing/pants/chainlegs/iron
 	head = /obj/item/clothing/head/helmet/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	H.attributes.add_sheet(/datum/attribute_holder/sheet/job/skeleton_npc/greater)
 	H.set_patron(/datum/patron/inhumen/zizo)
 	ADD_TRAIT(H, TRAIT_HEAVYARMOR, JOB_TRAIT)

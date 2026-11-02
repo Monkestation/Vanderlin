@@ -76,15 +76,26 @@
 	LAZYADDASSOCLIST(., EXAMINE_SECT_NAME, span_larger("[get_examine_string(user, TRUE)]."))
 	// Our face
 	var/can_see_face = IsAdminGhost(user) || is_human_part_visible(src, HIDEFACE)
-	LAZYADDASSOC(., EXAMINE_SECT_FACE+0.5, can_see_face ? get_examine_face(user, P, .) : get_examine_noface(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_FACE, can_see_face ? get_examine_face(user, P, .) : get_examine_noface(user, P, .))
 	// Our gear
-	LAZYADDASSOC(., EXAMINE_SECT_GEAR+0.5, get_examine_gear(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_GEAR, get_examine_gear(user, P, .))
 	/// Our physical aspects
-	LAZYADDASSOC(., EXAMINE_SECT_BODY+0.5, get_examine_body(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_BODY, get_examine_body(user, P, .))
 	/// Warnings
-	LAZYADDASSOC(., EXAMINE_SECT_WARNING+0.5, get_examine_warnings(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_WARNING, get_examine_warnings(user, P, .))
 	/// Our health
-	LAZYADDASSOC(., EXAMINE_SECT_HEALTH+0.5, get_examine_health(user, P, .))
+	LAZYADDASSOC(., EXAMINE_SECT_HEALTH, get_examine_health(user, P, .))
+
+	if(ishuman(user) && iscarbon(src) && CAN_HAVE_BLOOD(src))
+		var/mob/living/carbon/human/human_user = user
+		if(HAS_TRAIT(human_user, TRAIT_BLOOD_SENSE))
+			var/cached_blood_volume = get_blood_volume()
+			var/vitae = 0
+			var/datum/blood_type/BT = get_blood_type()
+			if(istype(BT) && BT.vitae)
+				vitae = round(cached_blood_volume * BT.vitae)
+			LAZYADDASSOCLIST(., EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
+			LAZYADDASSOCLIST(., EXAMINE_SECT_PREGEAR, span_bloody("Vitae Reserves: [round(bloodpool)]/[maxbloodpool] VTR"))
 
 	// Antag stuff. This throws itself wherever it feels like.
 	for(var/datum/antagonist/antag_datum in user.mind?.antag_datums)
@@ -189,13 +200,11 @@
 		// Cabal
 		if(HAS_TRAIT(user, TRAIT_CABAL) && (istype(patron, /datum/patron/inhumen/zizo) || HAS_TRAIT(src, TRAIT_CABAL)))
 			. += span_purple("A fellow seeker of Her ascension.")
-		// Centrist
-		if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && (HAS_TRAIT(src, TRAIT_DIVINE_CENTRIST) && !HAS_TRAIT(src, TRAIT_DIVINE_SERVANT)))
-			. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
 
 		// The disgusing inquistion section
-		if(HAS_MIND_TRAIT(user, TRAIT_INQUISITION) && (real_name in GLOB.inquis_suspect_players))
-			. += span_userdanger("SUSPECTED OF HERESY...")
+		if(HAS_TRAIT(user, TRAIT_INQUISITION))
+			if(real_name in GLOB.inquis_suspect_players)
+				. += span_userdanger("SUSPECTED OF HERESY...")
 
 		var/they_pur = HAS_TRAIT(user, TRAIT_PURITAN)
 		var/they_inquis = HAS_TRAIT(user, TRAIT_INQUISITION)
@@ -225,7 +234,7 @@
 				disgust_msg = span_necrosis("[P[THEY]] look[pl] really disgusted.")
 			if(DISGUST_LEVEL_DISGUSTED to INFINITY)
 				disgust_msg = span_necrosis(html_tag("B", "[P[THEY]] look[pl] extremely disgusted."))
-		if(disgust_msg && HAS_TRAIT(user, TRAIT_EMPATH) || disgust >= DISGUST_LEVEL_DISGUSTED)
+		if(disgust_msg && (HAS_TRAIT(user, TRAIT_EMPATH) || HAS_TRAIT(user, TRAIT_DEVIL_MARKED_LEVIATHAN)) || disgust >= DISGUST_LEVEL_DISGUSTED)
 			. += disgust_msg
 
 		// Stress
@@ -241,7 +250,7 @@
 				stress_msg = span_tinywarning("[P[THEY]] look[pl] stressed.")
 			if(STRESS_NEUTRAL to STRESS_BAD)
 				stress_msg = span_tinynotice("[P[THEY]] look[pl] a little stressed.")
-		if(stress_msg && HAS_TRAIT(user, TRAIT_EMPATH) || stress >= STRESS_INSANE)
+		if(stress_msg && (HAS_TRAIT(user, TRAIT_EMPATH) || HAS_TRAIT(user, TRAIT_DEVIL_MARKED_LEVIATHAN)) || stress >= STRESS_INSANE)
 			. += stress_msg
 
 		//Drunkenness
@@ -305,13 +314,22 @@
 				slot_title = " on [P[THEIR]] left side"
 			if(ITEM_SLOT_BELT_R)
 				slot_title = " on [P[THEIR]] right side"
-		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [I.get_examine_string(user, FALSE, TRUE)][slot_title]."
+		. += "[I.get_examine_icon(user)] - [P[THEYVE]] [get_item_examine_label(I, user, I.get_examine_string(user, FALSE, TRUE))][slot_title]."
 	for(var/obj/item/I in held_items)
 		if(I.item_flags & ABSTRACT)
 			continue
 		var/wielding = I.is_wielded()
-		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [I.get_examine_string(user, FALSE, TRUE)] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
+		. += "[I.get_examine_icon(user)] - [P[THEYRE]] [wielding ? "wielding" : "holding"] [get_item_examine_label(I, user, I.get_examine_string(user, FALSE, TRUE))] in [P[THEIR]] [wielding ? "hands" : get_held_index_name(get_held_index_of_item(I))]."
 
+/mob/living/proc/get_item_examine_label(obj/item/I, mob/living/user, item_examine_string)
+	if(isnull(item_examine_string))
+		item_examine_string = I.get_examine_string(user)
+	var/list/examine_highlight_status = I.get_examine_highlight_status(user)
+	if(length(examine_highlight_status))
+		var/datum/examine_highlight/highlight_type = examine_highlight_status[1]
+		var/heresy_examine_tooltip = I.get_examine_highlight_description(examine_highlight_status) + "<br>" + highlight_type.explanation
+		item_examine_string = span_tooltip_dangerous_html(heresy_examine_tooltip, I.get_examine_highlight_labeled_string(highlight_type, item_examine_string))
+	return item_examine_string
 
 /// Things that are physical but do not need to see your face to establish.
 /// Since these tend to vary in location items must be added to the list manually.
@@ -442,9 +460,9 @@
 	var/fire_str
 	if(on_fire)
 		fire_str = span_boldwarning("on fire!")
-		if(L?.has_quirk(/datum/quirk/vice/pyromaniac)) // living only
+		if(L?.has_quirk(/datum/quirk/vice/addiction/pyromaniac)) // living only
 			fire_str += span_boldred(" IT'S BEAUTIFUL!")
-			L.sate_addiction(/datum/quirk/vice/pyromaniac)
+			L.sate_addiction(/datum/quirk/vice/addiction/pyromaniac)
 	else if(fire_stacks + divine_fire_stacks > 0)
 		fire_str += "covered in something flammable."
 	else if(fire_stacks < 0 && !on_fire)
@@ -588,7 +606,7 @@
 			. += span_tinywarning("[P[THEY]] look[pl] [nutrition_msg].")
 		var/hydration_msg
 		switch(hydration)
-			if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
+			if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_HYDRATED)
 				hydration_msg = "like [P[THEIR]] mouth is dry"
 			if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
 				hydration_msg = "thirsty"

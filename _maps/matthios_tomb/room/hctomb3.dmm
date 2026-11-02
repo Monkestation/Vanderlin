@@ -108,7 +108,7 @@
 /area/under/tomb/indoors)
 "cX" = (
 /obj/effect/decal/cleanable/blood/old,
-/obj/item/clothing/shoes/boots{
+/obj/item/clothing/shoes/boots/darkboots{
 	pixel_x = 6;
 	pixel_y = -9
 	},

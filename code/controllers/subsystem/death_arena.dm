@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(death_arena)
 	list_clear_nulls(waiting_fighters)
 	list_clear_nulls(tollless_clients)
 
-	for(var/client as anything in tollless_clients)
+	for(var/client in tollless_clients)
 		if(world.time > tollless_clients[client])
 			for(var/mob/living/carbon/spirit/spirit in waiting_fighters)
 				if(!spirit?.client)
@@ -194,7 +194,7 @@ SUBSYSTEM_DEF(death_arena)
 	desc = "It awaits an offering of your triumphs"
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "ravox_altar"
-	max_integrity = 1000000000
+	max_integrity = INTEGRITY_UNBREAKABLE
 
 /obj/structure/table/wood/fine/altar/after_added_effects(obj/item/item, mob/user)
 	if(!istype(item, /obj/item/bodypart/head))
@@ -212,7 +212,7 @@ SUBSYSTEM_DEF(death_arena)
 	plane = GAME_PLANE_UPPER
 	anchored = TRUE
 	density = TRUE
-	max_integrity = 1000000000
+	max_integrity = INTEGRITY_UNBREAKABLE
 	resistance_flags = INDESTRUCTIBLE
 
 
@@ -225,7 +225,7 @@ SUBSYSTEM_DEF(death_arena)
 	plane = GAME_PLANE_UPPER
 	anchored = TRUE
 	density = TRUE
-	max_integrity = 1000000000
+	max_integrity = INTEGRITY_UNBREAKABLE
 	resistance_flags = INDESTRUCTIBLE
 
 /obj/structure/underworld/necra/Initialize()

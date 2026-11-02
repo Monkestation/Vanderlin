@@ -6,7 +6,7 @@
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/craft/cooking = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/stealing = 10,
 		/datum/attribute/skill/misc/climbing = 10,
@@ -21,13 +21,14 @@
 	department_flag = YOUNGFOLK
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_INNKEEP_CHILD
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_CHILD)
 	allowed_races = RACES_PLAYER_ALL
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	outfit = /datum/outfit/innkeep_son
 	can_have_apprentices = FALSE

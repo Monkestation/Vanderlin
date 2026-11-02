@@ -1,7 +1,7 @@
 /mob/living
 	see_invisible = SEE_INVISIBLE_LIVING
 	sight = 0
-	see_in_dark = 8
+	see_in_dark = SEE_IN_DARK_DEFAULT_EYES
 	hud_possible = list(ANTAG_HUD)
 
 	///Tracks the scale of the mob transformation matrix in relation to its identity. Use update_transform(resize) to change it.
@@ -17,8 +17,10 @@
 	var/datum/weakref/lastattacker_weakref = null
 
 	//Health and life related vars
-	var/maxHealth = 100 //Maximum health that should be possible.
-	var/health = 100 	//A mob's health
+	/// Maximum health that should be possible.
+	var/maxHealth = MAX_LIVING_HEALTH
+	/// The mob's current health.
+	var/health = MAX_LIVING_HEALTH
 
 	//Damage related vars, NOTE: THESE SHOULD ONLY BE MODIFIED BY PROCS
 	var/bruteloss = 0	//Brutal damage caused by brute force (punching, being clubbed by a toolbox ect... this also accounts for pressure damage)
@@ -60,8 +62,6 @@
 	var/incorporeal_move = FALSE //FALSE is off, INCORPOREAL_MOVE_BASIC is normal, INCORPOREAL_MOVE_SHADOW is for ninjas
 								//and INCORPOREAL_MOVE_JAUNT is blocked by holy water/salt
 
-	var/list/surgeries //a list of surgery steps. generally empty, they're added when the player is performing them.
-
 	var/now_pushing = null //used by living/Bump() and living/PushAM() to prevent potential infinite loop.
 
 	var/cameraFollow = null
@@ -79,7 +79,8 @@
 
 	var/mob_size = MOB_SIZE_HUMAN
 	var/mob_biotypes = MOB_ORGANIC
-	var/metabolism_efficiency = 1 //more or less efficiency to metabolize helpful/harmful reagents and regulate body temperature..
+	/// more or less efficiency to metabolize helpful/harmful reagents and regulate body temperature..
+	var/metabolism_efficiency = 1
 	var/has_limbs = 0 //does the mob have distinct limbs?(arms,legs, chest,head)
 
 	/// Chem effects
@@ -256,20 +257,15 @@
 	var/pegleg = 0			//Handles check & slowdown for peglegs. Fuckin' bootleg, literally, but hey it at least works.
 	var/pet_passive = FALSE
 
-	/// amount of spell points this mob currently has
-	var/spell_points
-	/// amount of spell points this mob has used
-	var/used_spell_points
+	var/list/summoned_minions
+	var/attack_relay_refs = 0
+	var/attack_relay_self_added = FALSE
+
+	/// Whether we are in a swingdelay, used to check for disrupted swingdelays.
+	var/swing_state = FALSE
 
 	var/list/affixes = list()
 	var/delve_level = 0
-
-	var/cold_res = 0
-	var/max_cold_res = 75
-	var/fire_res = 0
-	var/max_fire_res = 75
-	var/lightning_res = 0
-	var/max_lightning_res = 75
 
 	var/list/status_modifiers
 
@@ -295,3 +291,5 @@
 	var/looking_vertically = NONE
 	///looking holder we use for look_up and look_down. we use this over resetting to the turf because we want to glide
 	var/atom/movable/looking_holder/looking_holder
+	///The NAME (not the reference) of the mob's summoner and probable master.
+	var/summoner = null

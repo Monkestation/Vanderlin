@@ -3,9 +3,6 @@
 	return area.coven_protected
 
 /mob/living
-	var/cached_island_id = null
-	var/last_island_check = 0
-
 	var/last_scale_number = 1
 
 	var/mob/living/walk_to_target
@@ -167,7 +164,7 @@
 /mob/living/proc/vampire_detected(value, forced = FALSE)
 	if(value <= 0)
 		return
-	if(!clan || istype(clan, /datum/clan/daewalker))
+	if(!clan || istype(clan, /datum/clan/daewalker) || istype(clan, /datum/clan/niteguard))
 		return
 	if(CheckZoneCoven(src))
 		return
@@ -346,17 +343,17 @@
 	// Apply thirst effects based on bloodpool levels
 	switch(bloodpool)
 		if(VITAE_LEVEL_HUNGRY to VITAE_LEVEL_FED)
-			apply_status_effect(/datum/status_effect/debuff/thirstyt1)
-			remove_status_effect(/datum/status_effect/debuff/thirstyt2)
-			remove_status_effect(/datum/status_effect/debuff/thirstyt3)
+			apply_status_effect(/datum/status_effect/debuff/thirsty/t1)
+			remove_status_effect(/datum/status_effect/debuff/thirsty/t2)
+			remove_status_effect(/datum/status_effect/debuff/thirsty/t3)
 		if(VITAE_LEVEL_STARVING to VITAE_LEVEL_HUNGRY)
-			apply_status_effect(/datum/status_effect/debuff/thirstyt2)
-			remove_status_effect(/datum/status_effect/debuff/thirstyt1)
-			remove_status_effect(/datum/status_effect/debuff/thirstyt3)
+			apply_status_effect(/datum/status_effect/debuff/thirsty/t2)
+			remove_status_effect(/datum/status_effect/debuff/thirsty/t1)
+			remove_status_effect(/datum/status_effect/debuff/thirsty/t3)
 		if(-INFINITY to VITAE_LEVEL_STARVING)
-			apply_status_effect(/datum/status_effect/debuff/thirstyt3)
-			remove_status_effect(/datum/status_effect/debuff/thirstyt1)
-			remove_status_effect(/datum/status_effect/debuff/thirstyt2)
+			apply_status_effect(/datum/status_effect/debuff/thirsty/t3)
+			remove_status_effect(/datum/status_effect/debuff/thirsty/t1)
+			remove_status_effect(/datum/status_effect/debuff/thirsty/t2)
 			if(prob(3))
 				playsound(src, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 

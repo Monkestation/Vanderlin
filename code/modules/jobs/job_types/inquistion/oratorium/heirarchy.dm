@@ -1120,7 +1120,7 @@
 		});
 
 		function switchSchool(school) {
-			window.location.href = '?src=[REF(src)];action=switch_school;school=' + school;
+			window.location.href='byond://?src=[REF(src)];action=switch_school;school=' + school;
 		}
 
 		function showNodeTooltip(event, nodeDataJson) {
@@ -1153,20 +1153,20 @@
 
 		function selectHierarchyPosition(positionRef) {
 			selectedPosition = positionRef;
-			window.location.href = '?src=[REF(src)];action=select_position;position_id=' + positionRef;
+			window.location.href='byond://?src=[REF(src)];action=select_position;position_id=' + positionRef;
 		}
 
 		function editPosition(positionRef) {
-			window.location.href = '?src=[REF(src)];action=edit_position;position_id=' + positionRef;
+			window.location.href='byond://?src=[REF(src)];action=edit_position;position_id=' + positionRef;
 		}
 
 		function toggleAssignPermission(positionRef) {
-			window.location.href = '?src=[REF(src)];action=toggle_assign_permission;position_id=' + positionRef;
+			window.location.href='byond://?src=[REF(src)];action=toggle_assign_permission;position_id=' + positionRef;
 		}
 
 		function removePosition(positionRef) {
 			if(confirm('Are you sure you want to remove this position?')) {
-				window.location.href = '?src=[REF(src)];action=remove_position;position_id=' + positionRef;
+				window.location.href='byond://?src=[REF(src)];action=remove_position;position_id=' + positionRef;
 			}
 		}
 

@@ -71,7 +71,7 @@ GLOBAL_LIST_EMPTY(indexed_item_paths)
 			var/list/drops = tier[2]
 			if(!islist(drops) || !length(drops))
 				continue
-			for(var/drop_type as anything in drops)
+			for(var/drop_type in drops)
 				if(!ispath(drop_type))
 					continue
 				var/key = "[drop_type]"
@@ -94,7 +94,6 @@ GLOBAL_LIST_EMPTY(indexed_item_paths)
 
 	var/static/list/blacklisted_types = list(
 		/mob/living/simple_animal/hostile/retaliate/banker,
-		/mob/living/simple_animal/hostile/retaliate/blacksmith,
 		/mob/living/simple_animal/hostile/retaliate/voiddragon/red/tsere,
 		/mob/living/simple_animal/hostile/retaliate/minotaur/axe,
 		/mob/living/simple_animal/hostile/retaliate/minotaur/axe/female,

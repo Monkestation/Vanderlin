@@ -54,7 +54,7 @@
 
 	drink_amt = min(victim.get_blood_volume(), drink_amt)
 	if(ingest)
-		drink_amt = victim.transfer_blood_impurities(reagents, drink_amt, 1.5, src)
+		drink_amt = victim.transfer_blood_impurities(reagents, drink_amt, 1.5)
 	if(used_vitae > 0)
 		var/datum/blood_type/victim_blood = victim.get_blood_type()
 		var/list/blood_data = victim_blood?.get_blood_data(victim)
@@ -93,7 +93,7 @@
 		to_chat(sire, span_warning("[src] could not be sired."))
 		return
 
-	var/datum/clan/C = sire.clan
+	var/datum/clan/sire_clan = sire.clan
 	var/choice = tgui_alert(client_victim, "You have been offered the immortal blessing. Take it, or perish.", "THE CURSE OF KAIN", list("I ACCEPT", "TO NECRA"), timeout = 15 SECONDS)
 	if(QDELETED(src))
 		return
@@ -107,7 +107,10 @@
 		return
 	grab_ghost(TRUE, TRUE)
 	revive((HEAL_DAMAGE|HEAL_AFFLICTIONS|HEAL_LIMBS|HEAL_WOUNDS|HEAL_ORGANS), 500, TRUE)
-	mind.add_antag_datum(new /datum/antagonist/vampire(C, TRUE))
+	var/antag_datum = /datum/antagonist/vampire
+	if(istype(sire_clan, /datum/clan/niteguard))
+		antag_datum = /datum/antagonist/vampire/niteguard
+	mind.add_antag_datum(new antag_datum(sire_clan, TRUE))
 	set_bloodpool(500)
 	visible_message(span_danger("Some dark energy begins to flow into [src]..."))
 	visible_message(span_red("[src] rises as a new spawn!"))

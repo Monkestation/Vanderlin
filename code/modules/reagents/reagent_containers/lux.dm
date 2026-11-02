@@ -25,8 +25,8 @@
 
 /datum/reagent/lux/on_mob_life(mob/living/carbon/M, efficiency)
 	SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 	if(M.has_status_effect(/datum/status_effect/debuff/lux_drained))
 		M.remove_status_effect(/datum/status_effect/debuff/lux_drained)
 		addtimer(CALLBACK(M, TYPE_PROC_REF(/mob/living, apply_status_effect), /datum/status_effect/debuff/lux_drained), 5 MINUTES)
@@ -157,8 +157,8 @@
 
 /datum/reagent/lux_tainted/on_mob_life(mob/living/carbon/M, efficiency)
 
-	if(M.has_quirk(/datum/quirk/vice/junkie))
-		M.sate_addiction(/datum/quirk/vice/junkie)
+	if(M.has_quirk(/datum/quirk/vice/addiction/junkie))
+		M.sate_addiction(/datum/quirk/vice/addiction/junkie)
 	if(M.has_status_effect(/datum/status_effect/debuff/lux_drained))
 		to_chat(M, span_green("This tastes awful, it won't help me feel my soul again.."))
 	if(M.has_status_effect(/datum/status_effect/debuff/flaw_lux_taken))

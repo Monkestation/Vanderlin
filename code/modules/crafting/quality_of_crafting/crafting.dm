@@ -535,19 +535,94 @@
 	starting_atom  = /obj/item/natural/fibers
 	output = /obj/item/broom
 
-/datum/repeatable_crafting_recipe/crafting/wpsycross
-	name = "wooden psycross"
+/datum/repeatable_crafting_recipe/crafting/unfinishedamulet
+	name = "unfinished amulet"
 	requirements = list(
-		/obj/item/grown/log/tree/small= 1,
+		/obj/item/grown/log/tree/stick= 3,
+		/obj/item/natural/fibers = 2,
 	)
 	tool_usage = list(
 		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
 	)
-	attacked_atom = /obj/item/grown/log/tree/small
+	attacked_atom = /obj/item/grown/log/tree/stick
+	starting_atom = /obj/item/weapon/knife
+	allow_inverse_start = FALSE
+	output = /obj/item/clothing/neck/psycross/unfinished
+	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet
+	name = "wooden psycross"
+	requirements = list(
+		/obj/item/clothing/neck/psycross/unfinished= 1,
+	)
+	tool_usage = list(
+		/obj/item/weapon/knife = list(span_notice("starts to whittle"), span_notice("start to whittle"), 'sound/items/wood_sharpen.ogg'),
+	)
+	attacked_atom = /obj/item/clothing/neck/psycross/unfinished
 	starting_atom = /obj/item/weapon/knife
 	allow_inverse_start = FALSE
 	output = /obj/item/clothing/neck/psycross
 	craft_time = 5 SECONDS
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/divine
+	name = "wooden amulet of the Ten"
+	output = /obj/item/clothing/neck/psycross/divine
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/astrata
+	name = "wooden amulet of Astrata"
+	output = /obj/item/clothing/neck/psycross/divine/astrata
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/noc
+	name = "wooden amulet of Noc"
+	output = /obj/item/clothing/neck/psycross/divine/noc
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/dendor
+	name = "wooden amulet of Dendor"
+	output = /obj/item/clothing/neck/psycross/divine/dendor
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/abyssor
+	name = "wooden amulet of Abyssor"
+	output = /obj/item/clothing/neck/psycross/divine/abyssor
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/necra
+	name = "wooden amulet of Necra"
+	output = /obj/item/clothing/neck/psycross/divine/necra
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/ravox
+	name = "wooden amulet of Ravox"
+	output = /obj/item/clothing/neck/psycross/divine/ravox
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/xylix
+	name = "wooden amulet of Xylix"
+	output = /obj/item/clothing/neck/psycross/divine/xylix
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/eora
+	name = "wooden amulet of Eora"
+	output = /obj/item/clothing/neck/psycross/divine/eora
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/pestra
+	name = "wooden amulet of Pestra"
+	output = /obj/item/clothing/neck/psycross/divine/pestra
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/malum
+	name = "wooden amulet of Malum"
+	output = /obj/item/clothing/neck/psycross/divine/malum
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/zizo
+	name = "wooden amulet of Zizo"
+	output = /obj/item/clothing/neck/psycross/zizo/wood
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/graggar
+	name = "wooden amulet of Graggar"
+	output = /obj/item/clothing/neck/psycross/graggar/wood
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/boatha
+	name = "wooden amulet of Baotha"
+	output = /obj/item/clothing/neck/psycross/baotha/wood
+
+/datum/repeatable_crafting_recipe/crafting/woodamulet/matthios
+	name = "wooden amulet of Matthios"
+	output = /obj/item/clothing/neck/psycross/matthios/wood
 
 /datum/repeatable_crafting_recipe/crafting/bone_amulet
 	name = "bone amulet"

@@ -17,6 +17,8 @@ GLOBAL_LIST_EMPTY(cache_timestamps) // Timestamps for each cache entry
 	var/import_only = FALSE
 	var/stable_price = FALSE
 	var/percent_bounty = FALSE
+	var/oversupply_amount = 999
+	var/oversupply_payout = 0
 
 	var/stockpile_id = STOCK_GENERIC // ID to match with stockpile objects
 	var/list/tracked_items = list() // Weakref list of tracked items

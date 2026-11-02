@@ -5,7 +5,7 @@
 	icon_state = "fireaxe"
 	anchored = TRUE
 	density = FALSE
-	armor = list("blunt" = 50, "slash" = 50, "stab" = 50,  "piercing" = 20, "fire" = 90, "acid" = 50)
+	armor_type = /datum/armor/displaycase
 	max_integrity = 150
 	integrity_failure = 0
 	var/open = TRUE

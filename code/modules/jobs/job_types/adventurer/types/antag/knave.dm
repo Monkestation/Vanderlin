@@ -14,7 +14,7 @@
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/carpentry = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/misc/athletics = 20,
@@ -51,14 +51,14 @@
 
 	switch(weapon_choice)
 		if("Crossbow & Dagger")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/crossbows, 15)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 15)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/crossbows, 15, 35)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 15, 35)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/cloak/raincloak/colored/mortus, ITEM_SLOT_CLOAK, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/lockpickring/mundane, ITEM_SLOT_BACKPACK, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/ammo_holder/quiver/bolts, ITEM_SLOT_BELT_R, TRUE)
 		if("Bow & Sword")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/bows, 15)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 15)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/bows, 15, 35)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 15, 35)
 			ADD_TRAIT(spawned, TRAIT_FORAGER, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_BRUSHWALK, TRAIT_GENERIC)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/head/helmet/leather/volfhelm, ITEM_SLOT_HEAD, TRUE)
@@ -68,10 +68,10 @@
 
 /datum/outfit/bandit/knave
 	name = "Knave (Bandit)"
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/bandit
 	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	mask = /obj/item/clothing/face/facemask/steel
 	neck = /obj/item/clothing/neck/coif
 	armor = /obj/item/clothing/armor/leather

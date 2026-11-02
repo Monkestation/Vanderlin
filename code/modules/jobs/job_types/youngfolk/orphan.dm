@@ -6,16 +6,20 @@
 	department_flag = YOUNGFOLK
 	job_flags = (JOB_NEW_PLAYER_JOINABLE | JOB_EQUIP_RANK)
 	display_order = JDO_ORPHAN
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	allowed_ages = list(AGE_CHILD)
 	total_positions = 12
 	spawn_positions = 12
-	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	advclass_cat_rolls = list(CTAG_ORPHAN = 7)
 	outfit = /datum/outfit/orphan
+
+	knows_the_town = TRUE
+	known_by_the_town = FALSE
+	jobs_i_always_know = list(JOB_MONARCH, JOB_MATRON)
+	jobs_always_know_me = list(JOB_MATRON)
 
 	spells = list(
 		/datum/action/cooldown/spell/undirected/call_for_hag,
@@ -25,12 +29,14 @@
 		TRAIT_ORPHAN,
 	)
 
-/datum/job/orphan/New()
-	. = ..()
-	peopleknowme = list()
-
 /datum/outfit/orphan
 	name = JOB_ORPHAN
+
+/datum/job/advclass/orphanadv
+	factions = list(FACTION_TOWN)
+	department_flag = YOUNGFOLK
+	jobs_i_always_know = list(JOB_MONARCH, JOB_MATRON)
+	jobs_always_know_me = list(JOB_MATRON)
 
 // BOOKISH BRAT - THE COURTLY CHILD
 
@@ -40,8 +46,8 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/combat/bows = 10,
 		/datum/attribute/skill/misc/riding = 10,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 10,
 	)
 
 /datum/job/advclass/orphanadv/bbrat
@@ -191,7 +197,7 @@
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/masonry = 10,
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/craft/cooking = 10,
@@ -329,9 +335,6 @@
 
 /datum/job/orphanadv/wwastrel/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	var/orphanage_renovated = FALSE
-	if(has_world_trait(/datum/world_trait/orphanage_renovated))
-		orphanage_renovated = TRUE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		spawned.adjust_stat_modifier(STATMOD_ORPHANAGE, list(
 			STAT_INTELLIGENCE = 1,
@@ -339,9 +342,6 @@
 
 /datum/outfit/orphanadv/wwastrel/pre_equip(mob/living/carbon/human/equipped_human)
 	. = ..()
-	var/orphanage_renovated = FALSE
-	if(has_world_trait(/datum/world_trait/orphanage_renovated))
-		orphanage_renovated = TRUE
 	if(has_world_trait(/datum/world_trait/orphanage_renovated))
 		shirt = /obj/item/clothing/shirt/undershirt
 		pants = /obj/item/clothing/pants/tights

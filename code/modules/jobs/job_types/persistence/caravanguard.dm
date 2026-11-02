@@ -14,7 +14,7 @@
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -26,7 +26,7 @@
 	tutorial = "You're a caravan guard, ensure the settlers aren't killed and maimed by whatever lurks in here."
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	outfit = /datum/outfit/caravanguard
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 

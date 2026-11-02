@@ -11,7 +11,7 @@
 	var/list/valid_animal_types = list(
 		/mob/living/simple_animal/hostile/retaliate/saiga
 	)
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/padded/good
 	max_integrity = ARMOR_INT_CHEST_LIGHT_MASTER
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
@@ -69,7 +69,7 @@
 	icon_state = "armorkit"
 	barding_state = "barding_chain"
 	female_barding_state = "barding_chain-f"
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/maille
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
@@ -99,7 +99,7 @@
 	icon_state = "armorkit"
 	barding_state = "barding_chain"
 	female_barding_state = "barding_chain"
-	armor = ARMOR_MAILLE
+	armor_type = /datum/armor/maille
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_STEEL
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'

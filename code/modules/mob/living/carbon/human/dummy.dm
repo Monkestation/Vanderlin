@@ -1,7 +1,7 @@
 
 /mob/living/carbon/human/dummy
 	real_name = "Test Dummy"
-	status_flags = GODMODE|CANPUSH
+	status_flags = CANPUSH
 	mouse_drag_pointer = MOUSE_INACTIVE_POINTER
 	var/in_use = FALSE
 
@@ -15,6 +15,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 	GLOB.mob_living_list -= src
 	GLOB.alive_mob_list -= src
 	GLOB.mob_list -= src
+	ADD_TRAIT(src, TRAIT_GODMODE, INNATE_TRAIT)
 
 /mob/living/carbon/human/dummy/Destroy()
 	in_use = FALSE
@@ -34,7 +35,7 @@ INITIALIZE_IMMEDIATE(/mob/living/carbon/human/dummy)
 /mob/living/carbon/human/dummy/setup_human_dna()
 	create_dna(src)
 	randomize_human(src)
-	dna.initialize_dna(skip_index = TRUE) //Skip stuff that requires full round init.
+	dna.initialize_dna(FALSE, FALSE, FALSE) //Skip stuff that requires full round init.
 
 //Inefficient pooling/caching way.
 GLOBAL_LIST_EMPTY(human_dummy_list)

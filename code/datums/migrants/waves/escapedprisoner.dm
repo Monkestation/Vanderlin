@@ -20,7 +20,7 @@
 		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/craft/cooking = 10,
@@ -57,7 +57,6 @@
 /datum/outfit/escprisoner
 	name = "Escaped Prisoner (Migrant Wave)"
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
-	mask = /obj/item/clothing/face/facemask/prisoner
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/brown
 	belt = /obj/item/storage/belt/leather/rope
 	beltl = /obj/item/weapon/knife/villager

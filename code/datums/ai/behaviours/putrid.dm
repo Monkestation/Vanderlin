@@ -44,21 +44,31 @@
 
 /datum/ai_behavior/papameat_feed_corpse/setup(datum/ai_controller/controller, corpse_key)
 	. = ..()
-	var/mob/living/corpse = controller.blackboard[corpse_key]
+	var/atom/movable/target = controller.blackboard[corpse_key]
 
-	if(!corpse || QDELETED(corpse) || corpse.stat != DEAD)
+	if(!target || QDELETED(target))
 		return FALSE
 
+	if(istype(target, /obj/structure/mob_wrap))
+		var/obj/structure/mob_wrap/wrap = target
+		if(!length(wrap.contents))
+			return FALSE
+	else
+		var/mob/living/corpse = target
+		if(!istype(corpse) || corpse.buckled)
+			return FALSE
+
 	controller.set_blackboard_key(BB_FEEDING_CORPSE, TRUE)
-	set_movement_target(controller, corpse)
+	set_movement_target(controller, target)
+
 
 /datum/ai_behavior/papameat_feed_corpse/perform(delta_time, datum/ai_controller/controller, corpse_key)
 	. = ..()
 	var/mob/living/simple_animal/our_mob = controller.pawn
-	var/mob/living/corpse = controller.blackboard[corpse_key]
+	var/atom/movable/target = controller.blackboard[corpse_key]
 	var/obj/structure/meatvine/papameat/papameat = controller.blackboard[BB_PAPAMEAT_TARGET]
 
-	if(!corpse || QDELETED(corpse) || corpse.stat != DEAD)
+	if(!target || QDELETED(target))
 		finish_action(controller, FALSE, corpse_key)
 		return
 
@@ -66,26 +76,41 @@
 		finish_action(controller, FALSE, corpse_key)
 		return
 
-	// If corpse is buckled to us, drag to papameat
+	if(istype(target, /obj/structure/mob_wrap))
+		var/obj/structure/mob_wrap/wrap = target
+
+		if(get_dist(our_mob, wrap) > 1)
+			set_movement_target(controller, wrap)
+			return
+
+		var/mob/living/freed = locate(/mob/living) in wrap.contents
+		if(!freed)
+			finish_action(controller, FALSE, corpse_key) // someone emptied it before we got there
+			return
+
+		qdel(wrap)
+		controller.set_blackboard_key(corpse_key, freed)
+		our_mob.buckle_mob(freed, TRUE)
+		set_movement_target(controller, papameat)
+		return
+
+	var/mob/living/corpse = target
+
 	if(corpse.buckled == our_mob)
 		if(get_dist(our_mob, papameat) <= 1)
-			// We're at the papameat, feed it
-			corpse.unbuckle_mob(TRUE)
-			papameat.consume_mob(corpse)
+			our_mob.unbuckle_mob(corpse)
+			papameat.consume_mob(corpse, our_mob)
 			finish_action(controller, TRUE, corpse_key)
 			return
 		else
-			// Keep dragging
 			set_movement_target(controller, papameat)
 			return
 
-	// Try to grab the corpse
 	if(get_dist(our_mob, corpse) <= 1)
 		if(corpse.buckled)
-			finish_action(controller, FALSE, corpse_key) // Someone else got it
+			finish_action(controller, FALSE, corpse_key)
 			return
 
-		// Buckle corpse to us (drag it)
 		our_mob.buckle_mob(corpse, TRUE)
 		set_movement_target(controller, papameat)
 

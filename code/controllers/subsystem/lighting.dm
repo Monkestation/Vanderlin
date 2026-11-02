@@ -10,9 +10,9 @@ SUBSYSTEM_DEF(lighting)
 	var/static/list/objects_queue = list() // List of lighting objects queued for update.
 	processing_flag = PROCESSING_LIGHTING
 
-/datum/controller/subsystem/lighting/stat_entry()
-	..("L:[length(sources_queue)]|C:[length(corners_queue)]|O:[length(objects_queue)]")
-
+/datum/controller/subsystem/lighting/stat_entry(msg)
+	msg = "L:[length(sources_queue)]|C:[length(corners_queue)]|O:[length(objects_queue)]"
+	return ..()
 
 /datum/controller/subsystem/lighting/Initialize(timeofday)
 	#ifdef ABSOLUTE_MINIMUM_MODE

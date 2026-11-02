@@ -75,43 +75,52 @@
 	item_weight = 300 GRAMS
 
 /obj/item/natural/fur/gote
+	name = "gote fur"
 	desc = "Pelt from a gote."
 	icon_state = "pelt_gote"
 
 /obj/item/natural/fur/volf
+	name = "volf fur"
 	desc = "Pelt from a volf."
 	icon_state = "pelt_volf"
 
 /obj/item/natural/fur/mole
+	name = "mole fur"
 	desc = "Pelt from a mole."
 	icon_state = "pelt_mole"
 
 /obj/item/natural/fur/rous
+	name = "rous fur"
 	desc = "Pelt from a rous."
 	icon_state = "pelt_rous"
 
 /obj/item/natural/fur/cabbit
+	name = "cabbit fur"
 	desc = "Pelt from a cabbit."
 	icon_state = "wool2"
 
 /obj/item/natural/fur/direbear
+	name = "direbear fur"
 	desc = "fur from one of Dendor's mightiest creachers."
 	icon_state = "pelt_direbear"
 	color = "#33302b"
 	sellprice = 28
 
 /obj/item/natural/fur/fox
+	name = "venard fur"
 	desc = "Fur from a venard."
 	icon_state = "pelt_fox"
 	color = null
 
 /obj/item/natural/fur/raccoon
+	name = "raccoon fur"
 	desc = "Fur from a raccoon."
 	icon_state = "pelt_raccoon"
 	color = null
 	sellprice = 12
 
 /obj/item/natural/fur/bobcat
+	name = "bobcat fur"
 	desc = "Fur from a lynx."
 	icon_state = "pelt_bobcat"
 	color = null

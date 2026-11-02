@@ -5,7 +5,7 @@
 	icon_state = "treenew"
 	base_icon_state = "tree"
 	num_random_icons = 2
-	armor = list("blunt" = 0, "slash" = 0, "stab" = 0,  "piercing" = 0, "fire" = -100, "acid" = 50)
+	armor_type = /datum/armor/tree
 	blade_dulling = DULLING_CUT
 	opacity = TRUE
 	density = TRUE

@@ -12,8 +12,7 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(FLAIL_THRESH, MACE_STRIKE)
-	max_integrity = INTEGRITY_POOR
-	minstr = 6
+	max_integrity = INTEGRITY_OLD_POOR
 
 	icon = 'icons/roguetown/weapons/tools.dmi'
 	mob_overlay_icon = 'icons/roguetown/onmob/onmob.dmi'
@@ -41,7 +40,6 @@
 	possible_item_intents = list(MACE_STRIKE)
 	gripped_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_THRESH,)
 
-	minstr = 7
 	smeltresult = /obj/item/ingot/iron
 	item_weight = 2.1 KILOGRAMS
 
@@ -146,7 +144,7 @@
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
 	sharpness = IS_SHARP
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	wlength = 10
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CUT
@@ -207,14 +205,13 @@
 
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	minstr = 5
 	sharpness = IS_BLUNT
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/attribute/skill/combat/polearms
 
 	wlength = 66
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 912 GRAMS
 
 /obj/item/weapon/hoe/Initialize()
@@ -346,7 +343,7 @@
 	force_wielded = DAMAGE_STAFF_WIELD - 10
 	smeltresult = null
 	anvilrepair = null
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 	item_weight = 742 GRAMS
 
 /*------------\
@@ -376,12 +373,11 @@
 	gripspriteonmob = TRUE
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
-	minstr = 6
 	drop_sound = 'sound/foley/dropsound/wooden_drop.ogg'
 	smeltresult = /obj/item/ingot/iron
 	associated_skill = /datum/attribute/skill/combat/polearms
 	thrown_bclass = BCLASS_STAB
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 1.91 KILOGRAMS
 
 	var/list/forked = list()

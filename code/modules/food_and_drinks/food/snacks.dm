@@ -476,12 +476,12 @@ All foods are distributed among various categories. Use common sense.
 		eatverb = pick(list("bite", "chew", "nibble", "gnaw", "gobble", "chomp"))
 
 	var/obj/item/kitchen/fork/fork_check = user.get_active_held_item()
-	var/obj/item/plate/plate_check
 
-	if(istype(loc, /obj/item/plate))
-		plate_check = loc
+	if(fork_check.tool_behaviour == TOOL_FORK)
+		var/obj/item/plate/plate_check
+		if(istype(loc, /obj/item/plate))
+			plate_check = loc
 
-	if(istype(fork_check))
 		if(!plate_check)
 			if(HAS_TRAIT(eater, TRAIT_NOBLE_BLOOD))
 				eater.add_stress(/datum/stress_event/noble_ate_with_just_a_fork)
@@ -523,7 +523,7 @@ All foods are distributed among various categories. Use common sense.
 			var/mob/living/carbon/C = eater
 			var/obj/item/bodypart/CH = C.get_bodypart(BODY_ZONE_HEAD)
 			if(C.cmode)
-				if(!CH.grabbedby)
+				if(!length(CH.grabbedby))
 					to_chat(user, "<span class='info'>[C.p_they(TRUE)] steals [C.p_their()] face from it.</span>")
 					return ITEM_INTERACT_BLOCKING
 

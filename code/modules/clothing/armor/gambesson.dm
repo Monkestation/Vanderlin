@@ -20,12 +20,18 @@
 	sellprice = VALUE_GAMBESSON
 
 	armor_class = AC_LIGHT
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/padded
 	body_parts_covered = COVERAGE_FULL
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 
 	material_category = ARMOR_MAT_FABRIC
-	item_weight = 3.5 KILOGRAMS
+	item_weight = 0.8 KILOGRAMS
+
+/obj/item/clothing/armor/gambeson/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/armor/gambeson/colored/black
+	color = CLOTHING_SOOT_BLACK
 
 /obj/item/clothing/armor/gambeson/light
 	name = "light gambeson"
@@ -34,9 +40,9 @@
 	color = CLOTHING_LINEN
 	sellprice = VALUE_LIGHT_GAMBESSON
 
-	armor = ARMOR_PADDED_BAD
+	armor_type = /datum/armor/padded/bad
 	prevent_crits = MINOR_CRITICALS
-	item_weight = 3 KILOGRAMS
+	item_weight = 0.6 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/light/steppe
 	name = "steppe robes"
@@ -55,8 +61,8 @@
 	icon_state = "gambesonp"
 	sellprice = VALUE_HEAVY_GAMBESSON
 
-	armor = ARMOR_PADDED_GOOD
-	item_weight = 4 KILOGRAMS
+	armor_type = /datum/armor/padded/good
+	item_weight = 1 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/heavy/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -71,7 +77,7 @@
 	name = "robed jupon"
 	desc = "A thick, quilted jupon with an iron heart protector. It's great for the southern desert's heat and northern tundra's cold."
 	icon_state = "lakkarijupon"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	sewrepair = /datum/attribute/skill/misc/sewing/mending
@@ -79,7 +85,7 @@
 	salvage_result = /obj/item/natural/cloth
 	dyeable = TRUE
 
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/padded/good
 
 /obj/item/clothing/armor/gambeson/apothecary
 	name = "apothecary overcoat"
@@ -87,7 +93,7 @@
 	icon_state = "apothover"
 	item_state = "apothover"
 
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/padded/good
 
 /obj/item/clothing/armor/gambeson/steward
 	name = "steward tailcoat"
@@ -95,7 +101,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/steward.dmi'
 	icon_state = "stewardtailcoat"
 	item_state = "stewardtailcoat"
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/padded
 	icon = 'icons/roguetown/clothing/special/steward.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/steward.dmi'
 
@@ -105,7 +111,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
 	icon_state = "handgambeson"
 	item_state = "handgambeson"
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/padded/good
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
 	detail_tag = "_detail"
@@ -121,7 +127,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/hand.dmi'
 	icon_state = "handhunt"
 	item_state = "handhunt"
-	armor = ARMOR_PADDED_GOOD
+	armor_type = /datum/armor/padded/good
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/hand.dmi'
 	icon = 'icons/roguetown/clothing/special/hand.dmi'
@@ -169,6 +175,7 @@
 	sellprice = VALUE_GAMBESSON+BONUS_VALUE_MODEST
 
 	body_parts_covered =  COVERAGE_ALL_BUT_LEGS
+	item_weight = 0.4 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/arming/fencer
 	name = "fencing shirt"
@@ -206,5 +213,5 @@
 	icon_state = "leathertunic"
 	color = null
 	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_CHOP)
-	armor = ARMOR_PADDED
+	armor_type = /datum/armor/padded
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS

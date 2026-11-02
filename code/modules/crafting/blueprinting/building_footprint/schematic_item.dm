@@ -154,10 +154,10 @@
 		return FALSE
 	var/turf/T = get_turf(cast_on)
 	if(!T)
-		owner.balloon_alert(owner, "Invalid placement!")
+		owner.balloon_alert(owner, "invalid placement!")
 		return FALSE
 	if(!schematic?.building_template)
-		owner.balloon_alert(owner, "Schematic is blank!")
+		owner.balloon_alert(owner, "schematic is blank!")
 		return FALSE
 	return TRUE
 

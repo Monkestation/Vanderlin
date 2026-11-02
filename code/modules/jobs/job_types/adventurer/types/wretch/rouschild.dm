@@ -10,9 +10,9 @@
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/labor/fishing = 20,
-		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/educated/mathematics = 10,
 		/datum/attribute/skill/misc/swimming = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/labor/taming = 40,
 	)
 
@@ -24,7 +24,7 @@
 	outfit = /datum/outfit/wretch/rouschild
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander2.ogg'
 	total_positions = 2
-	faction = FACTION_RATS
+	factions = list(FACTION_RATS)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/rouschild
 

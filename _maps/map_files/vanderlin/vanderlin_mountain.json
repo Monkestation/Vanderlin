@@ -2,5 +2,21 @@
     "map_name": "Malum's Anvil",
     "map_path": "map_files/vanderlin",
     "map_file": "vanderlin_mountain.dmm",
-	"traits": [{"Up": true, "Cellar": true}, {"Up": true, "Down": true, "Cellar": true}, {"Down": true, "Cellar": true}]
+	"traits": [
+        {
+            "Up": true,
+            "Cellar": true
+        },
+        {
+            "Up": true,
+            "Down": true,
+            "Cellar": true,
+            "Leylines": true
+        },
+        {
+            "Down": true,
+            "Cellar": true,
+            "Leylines": true
+        }
+    ]
 }

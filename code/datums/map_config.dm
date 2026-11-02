@@ -24,12 +24,15 @@
 	var/monarch_title = "King"
 	var/monarch_title_f = "Queen"
 
-	var/traits = null
+	var/list/traits = null
 	var/space_ruin_levels = 7
 	var/space_empty_levels = 1
 
 	/// List of unit tests that are skipped when running this map
 	var/list/skipped_tests
+
+	///this is like traits but on a global scale and can support in round stuff
+	var/list/world_traits
 
 	var/custom_area_sound = null
 	var/list/other_z
@@ -122,16 +125,13 @@
 		return
 
 	traits = json["traits"]
-	// "traits": [{"Linkage": "Cross"}, {"Space Ruins": true}]
-	if (islist(traits))
-		// "Station" is set by default, but it's assumed if you're setting
-		// traits you want to customize which level is cross-linked
-		for (var/level in traits)
-			if (!(ZTRAIT_STATION in level))
-				level[ZTRAIT_STATION] = TRUE
-	// "traits": null or absent -> default
-	else if (!isnull(traits))
+	if(!islist(traits))
 		log_world("map_config traits is not a list!")
+		return
+
+	world_traits = json["world_traits"]
+	if(!islist(world_traits) && !isnull(world_traits))
+		log_world("world_traits traits is not a list!")
 		return
 
 	var/temp = json["space_ruin_levels"]
@@ -190,6 +190,10 @@
 	defaulted = FALSE
 	return TRUE
 #undef CHECK_EXISTS
+
+/datum/map_config/proc/post_load()
+	for(var/item in world_traits)
+		SSmapping.add_world_trait(text2path(item), -1)
 
 /datum/map_config/proc/GetFullMapPaths()
 	if (istext(map_file))

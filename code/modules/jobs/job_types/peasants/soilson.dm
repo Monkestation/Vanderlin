@@ -1,23 +1,29 @@
 /datum/attribute_holder/sheet/job/farmer
 	raw_attribute_list = list(
-		STAT_STRENGTH = 1,
+		STAT_STRENGTH = 2,
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 1,
 		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/polearms = 20,
-		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/whipsflails = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/labor/farming = 40,
 		/datum/attribute/skill/labor/taming = 50,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/craft/cooking/brewing = 30,
+		/datum/attribute/skill/craft/cooking/winemaking = 30,
+		/datum/attribute/skill/craft/cooking/distilling = 30,
+		/datum/attribute/skill/craft/cooking/cheesemaking = 30,
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/tanning = 20,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/labor/butchering = 40
@@ -25,7 +31,7 @@
 
 /datum/job/farmer
 	title = JOB_SOILSON
-	alt_titles = list("Butcher", "Brewer", "Vinter", "Distiller", "Hogman")
+	alt_titles = list("Butcher", "Brewer", "Vintner", "Distiller", "Hogman")
 	f_title = "Soilbride"
 	tutorial = "It is a simple life you live. \
 	Your basic understanding of life is something many would be envious of if they knew how perfect it was. \
@@ -35,16 +41,17 @@
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_SOILSON
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 12
 	spawn_positions = 12
-	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/farmer
 	give_bank_account = 20
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	can_be_apprentice = TRUE
 
@@ -65,7 +72,7 @@
 	shirt = /obj/item/clothing/shirt/undershirt/sailor
 	pants = /obj/item/clothing/pants/tights/sailor
 	wrists = null
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 
 /datum/outfit/farmer
 	name = JOB_SOILSON
@@ -96,13 +103,12 @@
 
 /datum/attribute_holder/sheet/job/soilchild
 	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
-		STAT_CONSTITUTION = 1,
-		STAT_ENDURANCE = -1,
-		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/labor/taming = 10,
@@ -124,15 +130,16 @@
 	department_flag = YOUNGFOLK
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_SOILCHILD
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 6
 	spawn_positions = 6
 	allowed_ages = list(AGE_CHILD)
-	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/soilchild
 	give_bank_account = 10
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	job_bitflag = BITFLAG_CONSTRUCTOR
 

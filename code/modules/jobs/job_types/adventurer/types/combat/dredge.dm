@@ -4,7 +4,7 @@
 	Cast from your home for what is undoubtedly a heinous act of violence, your travels have washed you up upon this \
 	shiteheap. All you have are your possessions from your former life. Make some coin for yourself, lest you end up dead and gone."
 	outfit = /datum/outfit/adventurer/dredge
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	total_positions = 7
 	var/armortype
 	var/weapontype
@@ -33,7 +33,7 @@
 	spawned.adjust_skillrank(/datum/attribute/skill/misc/swimming, pick(0,1,2), TRUE)
 	spawned.adjust_skillrank(/datum/attribute/skill/misc/climbing, pick(0,0,1,2,3), TRUE)
 	spawned.adjust_skillrank(/datum/attribute/skill/misc/riding, pick(0,1,1,2), TRUE)
-	spawned.adjust_skillrank(/datum/attribute/skill/misc/reading, pick(0,0,1), TRUE)
+	spawned.adjust_skillrank(/datum/attribute/skill/educated/reading, pick(0,0,1), TRUE)
 	spawned.adjust_skillrank(/datum/attribute/skill/combat/polearms, pick(0,0,0,0,0,0,0,1,1,1,1,2,), TRUE) // Weapon rolls include the relevant skill. Rolling 'expert' or 'master' should be rare.
 	spawned.adjust_skillrank(/datum/attribute/skill/combat/swords, pick(0,0,0,0,0,0,0,1,1,1,1,2,), TRUE)
 	spawned.adjust_skillrank(/datum/attribute/skill/combat/whipsflails, pick(0,0,0,0,0,0,0,1,1,1,1,2,), TRUE)
@@ -61,13 +61,13 @@
 
 	switch(armortype)
 		if("Warrior")
-			spawned.adjust_skillrank(/datum/attribute/skill/misc/reading, 1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/educated/reading, 1, TRUE)
 			ADD_TRAIT(spawned, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 			to_chat(spawned,span_info("\
 			I am a sellsword. A greenhorn, but a sellsword nonetheless.")
 			)
 		if("Ironplate")
-			spawned.adjust_skillrank(/datum/attribute/skill/misc/reading, 1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/educated/reading, 1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/athletics, 1, TRUE)
 			spawned.change_stat(STAT_ENDURANCE, -1)
 			ADD_TRAIT(spawned, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
@@ -75,7 +75,7 @@
 			I am a sellsword by trade. I've held a weapon in my hand for longer than I can remember.")
 			)
 		if("Splint")
-			spawned.adjust_skillrank(/datum/attribute/skill/misc/reading, 1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/educated/reading, 1, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/swimming, 1, TRUE)
 			spawned.change_stat(STAT_ENDURANCE, 1)
 			to_chat(spawned,span_info("\
@@ -121,7 +121,7 @@
 			Like a raging current, I am unrelenting. My attacks will chip at my enemy until their skin sloughs, and their bones litter the dry, sandy shores.")
 			)
 		if("Psy")
-			spawned.adjust_skillrank(/datum/attribute/skill/misc/reading, 1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/educated/reading, 1, TRUE)
 			ADD_TRAIT(spawned, TRAIT_DODGEEXPERT, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_STEELHEARTED, TRAIT_GENERIC)
 			if(!spawned.has_language(/datum/language/newpsydonic))
@@ -173,7 +173,7 @@
 			God won't let me die. My life is a momentary lapse of reason. All will fall to ruin, even me.")
 			)
 		if("Noble") // Congratulations, you're important! Or were, rather.
-			spawned.adjust_skillrank(/datum/attribute/skill/misc/reading, pick(2,3), TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/educated/reading, pick(2,3), TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/music, 2, TRUE)
 			spawned.change_stat(STAT_INTELLIGENCE, 2)
 			spawned.change_stat(STAT_ENDURANCE, -1)
@@ -361,11 +361,26 @@
 			spawned.change_stat(STAT_INTELLIGENCE, 3)
 			spawned.change_stat(STAT_CONSTITUTION, -2)
 			spawned.change_stat(STAT_SPEED, -2)
-			spawned.adjust_spell_points(6)
+			spawned.adjust_form_mastery_points(6)
+			spawned.adjust_technique_mastery_points(2)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 			to_chat(spawned,span_info("\
 			I've studied the arcyne, those who step to me shall perish.")
 			)
+			var/static/list/selectable_books = list(
+				"Blazing Tome (Fire)" = /obj/item/spellbook/apprentice/starter/fire,
+				"Frostbound Tome (Ice)" = /obj/item/spellbook/apprentice/starter/ice,
+				"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/apprentice/starter/lightning,
+				"Stoneveined Tome (Earth)" = /obj/item/spellbook/apprentice/starter/earth,
+				"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/apprentice/starter/arcane,
+				"Grave-Touched Tome (Death)" = /obj/item/spellbook/apprentice/starter/death,
+				"Verdant Tome (Life)" = /obj/item/spellbook/apprentice/starter/life,
+				"Windswept Tome (Air)" = /obj/item/spellbook/apprentice/starter/air,
+				"Tidebound Tome (Water)" = /obj/item/spellbook/apprentice/starter/water,
+			)
+
+			INVOKE_ASYNC(src, TYPE_PROC_REF(/datum/job, grant_selected_spellbooks), spawned, selectable_books, 1)
+
 		if("Sword2")
 			spawned.change_stat(STAT_ENDURANCE, 1)
 			spawned.adjust_skillrank(/datum/attribute/skill/combat/swords, 3, TRUE)
@@ -497,13 +512,13 @@
 			I used to be a bard, the skills never left me. I'm a silver-tongued devil!")
 			)
 		if("Smart")
-			spawned.adjust_skillrank(/datum/attribute/skill/misc/reading, 4, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/educated/reading, 4, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/misc/music, rand(2,3), TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, 1, TRUE)
 			spawned.change_stat(STAT_INTELLIGENCE, 3)
 			spawned.change_stat(STAT_CONSTITUTION, -1)
 			spawned.change_stat(STAT_PERCEPTION, -2)
-			spawned.virginity = TRUE
+			ADD_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			spawned.grant_language(/datum/language/elvish)
 			spawned.grant_language(/datum/language/celestial)
 			spawned.grant_language(/datum/language/oldpsydonic)
@@ -523,7 +538,7 @@
 		if("Alch")
 			spawned.adjust_skillrank(/datum/attribute/skill/craft/alchemy, 2, TRUE)
 			spawned.adjust_skillrank(/datum/attribute/skill/magic/arcane, pick(1,2), TRUE)
-			spawned.adjust_skillrank(/datum/attribute/skill/misc/reading, 1, TRUE)
+			spawned.adjust_skillrank(/datum/attribute/skill/educated/reading, 1, TRUE)
 			spawned.change_stat(STAT_PERCEPTION, 1)
 			spawned.change_stat(STAT_INTELLIGENCE, 1)
 			spawned.change_stat(STAT_ENDURANCE, -1)
@@ -803,7 +818,7 @@
 
 /datum/outfit/adventurer/dredge
 	name = "Dredge (Adventurer)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/tights/colored/black
 	backl = /obj/item/storage/backpack/satchel
@@ -967,8 +982,8 @@
 				r_hand = /obj/item/weapon/polearm/woodstaff
 				head = /obj/item/clothing/head/roguehood/colored/mage
 				armor = /obj/item/clothing/shirt/robe/colored/mage
-				beltl = /obj/item/reagent_containers/glass/bottle/manapot
-				beltr = /obj/item/book/granter/spellbook/apprentice
+				beltl = /obj/item/reagent_containers/glass/bottle/manapot/labelled
+
 			if("Sword2")
 				beltl = /obj/item/weapon/sword/short/iron
 				beltr = /obj/item/weapon/sword/short/iron

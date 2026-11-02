@@ -7,7 +7,7 @@
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/labor/taming = 10,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/labor/farming = 20
@@ -21,9 +21,11 @@
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CHEESEMAKER
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/cheesemaker

@@ -44,3 +44,14 @@
 	desc = "Fine particles of tin ore."
 	melting_material = /datum/material/tin
 	item_weight = 300 GRAMS
+
+/obj/item/ore/dust/bloodstone
+	name = "bloodstone dust"
+	desc = "Fine particles of bloodstone."
+	melting_material = /datum/material/bloodsteel
+	item_weight = 350 GRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
+
+/obj/item/ore/dust/bloodstone/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)

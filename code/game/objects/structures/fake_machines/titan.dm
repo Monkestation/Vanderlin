@@ -3,6 +3,7 @@ GLOBAL_LIST_EMPTY(lord_decrees)
 GLOBAL_LIST_INIT(laws_of_the_land, initialize_laws_of_the_land())
 GLOBAL_LIST_EMPTY(court_agents)
 GLOBAL_LIST_EMPTY(ex_court_agents)
+GLOBAL_LIST_EMPTY(agent_rings)
 
 #define MODE_NONE "None"
 #define MODE_MAKE_ANNOUNCEMENT "Make Announcement"
@@ -14,7 +15,7 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 /proc/initialize_laws_of_the_land()
 	var/list/laws = strings("laws_of_the_land.json", "lawsets")
 	var/list/lawsets_weighted = list()
-	for(var/lawset_name as anything in laws)
+	for(var/lawset_name in laws)
 		var/list/lawset = laws[lawset_name]
 		lawsets_weighted[lawset_name] = lawset["weight"]
 	var/chosen_lawset = pickweight(lawsets_weighted)
@@ -107,11 +108,13 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 
 /// Checks if the mob sitting on the throne is worthy, has to be monarch or regent
 /obj/structure/fake_machine/titan/proc/is_worthy(mob/living/carbon/human/checked_mob)
-	if(!(SSticker.rulermob == checked_mob || SSticker.regent_mob == checked_mob))
-		say("You are not worthy!")
-		playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
-		return FALSE
-	return TRUE
+	if((SSticker.rulermob == checked_mob || SSticker.regent_mob == checked_mob))
+		return TRUE
+	if(HAS_TRAIT(checked_mob, TRAIT_THROAT_POWER))
+		return TRUE
+	say("You are not worthy!")
+	playsound(src, 'sound/misc/machineno.ogg', 100, FALSE, -1)
+	return FALSE
 
 /// Check if the mob has the crown
 /obj/structure/fake_machine/titan/proc/has_crown(mob/living/carbon/human/checked_mob)
@@ -133,7 +136,7 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 /obj/structure/fake_machine/titan/proc/perform_check(mob/checked_mob, has_to_be_worthy = TRUE)
 	if(!is_valid_mob(checked_mob))
 		return FALSE
-	if(!has_crown(checked_mob))
+	if(!HAS_TRAIT(checked_mob, TRAIT_CROWNLESS_THROAT) && !has_crown(checked_mob))
 		return FALSE
 	if(has_to_be_worthy && !is_worthy(checked_mob))
 		return FALSE
@@ -451,7 +454,7 @@ GLOBAL_LIST_EMPTY(ex_court_agents)
 		/datum/job/churchling::title,
 	)
 	var/list/possible_positions = list()
-	for(var/j_title as anything in unfiltered_positions)
+	for(var/j_title in unfiltered_positions)
 		var/datum/job/pos = SSjob.GetJob(j_title)
 		if(pos.total_positions != 0 && pos.spawn_positions != 0)
 			possible_positions += j_title

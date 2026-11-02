@@ -81,3 +81,75 @@
 	mappath = "_maps/map_files/vanderlin/house_templates/tailor.dmm"
 	width = 9
 	height = 9
+
+/datum/map_template/vanderlin_mercapt_1
+	name = "Vanderlin Mercenary Apartment One"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc1.dmm"
+	width = 6
+	height = 7
+
+/datum/map_template/vanderlin_mercapt_2
+	name = "Vanderlin Mercenary Apartment Two"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc2.dmm"
+	width = 6
+	height = 7
+
+/datum/map_template/vanderlin_mercapt_3
+	name = "Vanderlin Mercenary Apartment Three"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc3.dmm"
+	width = 7
+	height = 6
+
+/datum/map_template/vanderlin_mercapt_4
+	name = "Vanderlin Mercenary Apartment Four"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc4.dmm"
+	width = 7
+	height = 6
+
+/datum/map_template/vanderlin_mercapt_5
+	name = "Vanderlin Mercenary Apartment Five"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc5.dmm"
+	width = 7
+	height = 7
+
+/datum/map_template/vanderlin_mercapt_6
+	name = "Vanderlin Mercenary Apartment Six"
+	mappath = "_maps/map_files/vanderlin/house_templates/merc6.dmm"
+	width = 7
+	height = 7
+
+/datum/map_template/vanderlin_advapt_1
+	name = "Vanderlin Adventurer Apartment One"
+	mappath = "_maps/map_files/vanderlin/house_templates/adv1.dmm"
+	width = 3
+	height = 4
+
+/datum/map_template/vanderlin_advapt_2
+	name = "Vanderlin Adventurer Apartment Two"
+	mappath = "_maps/map_files/vanderlin/house_templates/adv2.dmm"
+	width = 3
+	height = 4
+
+/datum/map_template/vanderlin_advapt_3
+	name = "Vanderlin Adventurer Apartment Three"
+	mappath = "_maps/map_files/vanderlin/house_templates/adv3.dmm"
+	width = 3
+	height = 4
+
+/datum/map_template/vanderlin_advapt_4
+	name = "Vanderlin Adventurer Apartment Four"
+	mappath = "_maps/map_files/vanderlin/house_templates/adv4.dmm"
+	width = 3
+	height = 4
+
+/datum/map_template/vanderlin_advapt_5
+	name = "Vanderlin Adventurer Apartment Five"
+	mappath = "_maps/map_files/vanderlin/house_templates/adv5.dmm"
+	width = 3
+	height = 4
+
+/datum/map_template/vanderlin_advapt_6
+	name = "Vanderlin Adventurer Apartment Six"
+	mappath = "_maps/map_files/vanderlin/house_templates/adv6.dmm"
+	width = 3
+	height = 4

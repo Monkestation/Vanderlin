@@ -6,10 +6,9 @@
 	charge_sound = 'sound/magic/charging_lightning.ogg'
 	click_to_activate = FALSE
 
-	point_cost = 4
-	attunements = list(
-		/datum/attunement/electric = 0.9
-	)
+	required_form = FORM_LIGHTNING
+	associated_skill = /datum/attribute/skill/magic/arcane/lightning
+	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "Lighnting Lure!!!"
 	invocation_type = INVOCATION_SHOUT

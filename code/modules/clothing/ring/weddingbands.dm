@@ -3,6 +3,7 @@
 	desc = "A glimmering weddingband of silver, ornately decorated with the engravings of a lover's name."
 	icon_state = "s_ring_wedding"
 	sellprice = 3	//You don't get to smelt this down or sell it. No free mams for a loadout item.
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 	var/choicename = FALSE
 	var/choicedesc = FALSE
 
@@ -27,9 +28,9 @@
 		return
 
 /obj/item/clothing/ring/band/get_mechanics_examine(mob/user)
-    . = ..()
-    . += span_info("Right-click to add a custom name and description to the weddingband.")
-    . += span_info("If your character is meant to be already married to someone else, offer the ring to them while they are offering theirs to you. This will mark you as spouses, but will not change your names.")
+	. = ..()
+	. += span_info("Right-click to add a custom name and description to the weddingband.")
+	. += span_info("If your character is meant to be already married to someone else, offer the ring to them while they are offering theirs to you. This will mark you as spouses, but will not change your names.")
 
 /obj/item/clothing/ring/band/gold
 	name = "gold weddingband"

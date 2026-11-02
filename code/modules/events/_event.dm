@@ -54,7 +54,7 @@
 	/// List of the shared occurence types.
 	var/list/shared_occurences = list()
 	/// Whether a roundstart event can happen post roundstart. Very important for events which override job assignments.
-	var/can_run_post_roundstart = TRUE
+	var/can_run_post_roundstart = FALSE
 	/// If set then the type or list of types of storytellers we are restricted to being trigged by
 	var/list/allowed_storytellers
 	/// List of storytellers that will pick only their dedicated and general events in some cases, like when they are ascendant

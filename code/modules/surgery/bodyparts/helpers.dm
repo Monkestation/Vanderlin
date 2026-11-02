@@ -132,6 +132,5 @@
 /mob/living/carbon/update_limb_efficiencies()
 	if(status_flags & BUILDING_ORGANS)
 		return
-	for(var/thing in bodyparts)
-		var/obj/item/bodypart/limb = thing
+	for(var/obj/item/bodypart/limb as anything in bodyparts)
 		limb.update_limb_efficiency()

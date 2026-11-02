@@ -39,6 +39,8 @@
 	for(var/obj/item/bodypart/part as anything in carbon_patient.bodyparts)
 		if(HAS_TRAIT(part, TRAIT_ROTTEN))
 			return TRUE
+		if(part.germ_level >= INFECTION_LEVEL_ONE*0.2)
+			return TRUE
 
 	for(var/obj/item/organ/organ as anything in carbon_patient.internal_organs)
 		if(organ.germ_level >= INFECTION_LEVEL_ONE * 0.2)
@@ -85,10 +87,12 @@
 
 	var/damage = max(20 - (GET_MOB_SKILL_VALUE(surgeon, skill_used) / 3), 0)
 	for(var/obj/item/bodypart/part as anything in patient.bodyparts)
-		part.revive_limb()
-		part.germ_level = 0
+		part.revive_limb(FALSE)
+		part.set_germ_level(0)
 		part.receive_damage(burn = damage)
 
 	for(var/obj/item/organ as anything in patient.internal_organs)
 		if(organ.germ_level >= INFECTION_LEVEL_ONE * 0.2)
 			organ.set_germ_level(INFECTION_LEVEL_ONE * 0.2)
+
+	patient.update_body_parts(TRUE)

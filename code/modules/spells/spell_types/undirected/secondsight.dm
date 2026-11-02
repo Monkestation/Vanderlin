@@ -17,7 +17,7 @@
 		if(L.has_status_effect(status))
 			L.remove_status_effect(status)
 		else
-			var/duration_increase = attuned_strength * 1.0 MINUTES // god damnit this shit won't compile or some shit without these. Fuck it.
+			var/duration_increase = spell_magnitude_modifier * 1.0 MINUTES // god damnit this shit won't compile or some shit without these. Fuck it.
 			L.apply_status_effect(status, initial(status.duration) + duration_increase)
 
 /datum/status_effect/buff/secondsight
@@ -27,10 +27,10 @@
 /datum/status_effect/buff/secondsight/on_apply()
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_THERMAL_VISION, type)
-	owner.hud_used?.plane_masters_update()
+	owner.update_sight()
 
 /datum/status_effect/buff/secondsight/on_remove()
 	. = ..()
 	REMOVE_TRAIT(owner, TRAIT_THERMAL_VISION, type)
-	owner.see_invisible = SEE_INVISIBLE_LIVING
-	owner.hud_used?.plane_masters_update()
+	owner.update_sight()
+

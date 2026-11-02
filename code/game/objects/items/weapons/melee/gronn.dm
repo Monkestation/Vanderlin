@@ -8,7 +8,6 @@
 	possible_item_intents = list(/datum/intent/sword/cut/militia, /datum/intent/sword/chop/militia, SHORT_THRUST)
 	wlength = WLENGTH_SHORT
 	gripped_intents = null
-	minstr = 9 //NO TWINKS!!
 	w_class = WEIGHT_CLASS_NORMAL
 	smeltresult = /obj/item/ingot/iron
 	grid_width = 32
@@ -23,8 +22,8 @@
 
 /obj/item/weapon/handclaw
 	name = "iron hound claws"
-	desc = "A pair of heavily curved claws, styled after beasts of the wilds for rending bare flesh, \
-			a show of the continual worship and veneration of the Great Hunt in Ossland."
+	desc = "A pair of heavily curved claws, styled after beasts of the wilds for rending bare flesh. \
+			A show of the continual worship and veneration of the Great Hunt in Ossland."
 	icon = 'icons/roguetown/weapons/32/fists_claws.dmi'
 	icon_state = "ironclaws"
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
@@ -35,7 +34,7 @@
 	wlength = WLENGTH_NORMAL
 	possible_item_intents = list(/datum/intent/claw/cut, /datum/intent/claw/lunge, /datum/intent/claw/rend)
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_IRON
 
 	slot_flags = ITEM_SLOT_HIP
 	thrown_bclass = BCLASS_CUT
@@ -50,29 +49,69 @@
 
 /obj/item/weapon/handclaw/steel
 	name = "steel mantis claws"
-	desc = "A pair of steel claws, an uncommon sight in Ossland as they do not forge their own steel, \
-			Their longer blades offer a superior defence option but their added weight slows them down."
+	desc = "A pair of steel claws, an uncommon sight in Ossland as they do not forge their own steel. \
+			Their longer blades offer a superior defence option, but their added weight slows them down."
 	icon_state = "steelclaws"
 	force = DAMAGE_KATAR + 7
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(/datum/intent/claw/cut/steel, /datum/intent/claw/lunge/steel, /datum/intent/claw/rend/steel)
 	wbalance = EASY_TO_DODGE
 	max_blade_int = 250
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_STEEL
 	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 900 GRAMS
 
+/obj/item/weapon/handclaw/steel/silver
+	name = "silver mantis claws"
+	desc = "A pair of silver claws, an extremely rare sight in and out of Ossland. Their longer blades offer a superior defence option, but their added weight slows them down."
+	icon_state = "silverclaws"
+	force = DAMAGE_KATAR + 7
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
+	smeltresult = /obj/item/ingot/silver
+	item_weight = 800 GRAMS
+
+/obj/item/weapon/handclaw/steel/silver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/handclaw/steel/blacksteel
+	name = "blacksteel mantis claws"
+	desc = "An exquisite mimicry of a classic Osslandic weapon. Long blades offer effective defense while retaining lethal striking power."
+	icon_state = "bskatarclaw"
+	force = DAMAGE_KATAR + 9
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLACKSTEEL
+	smeltresult = /obj/item/ingot/blacksteel
+
+/obj/item/weapon/handclaw/steel/bloodsteel
+	name = "bloodsteel mantis claws"
+	desc = "A dark mimicry of a classic Osslandic weapon. Long blades offer effective defense while retaining lethal striking power."
+	icon_state = "corruptclaws"
+	force = DAMAGE_KATAR + 8
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLOODSTEEL
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
+
+/obj/item/weapon/handclaw/steel/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
+/obj/item/weapon/handclaw/steel/bloodsteel/relic
+	name = "\proper regret"
+	desc = "The claws of regret sink into all who are unprepared for dark ventures..."
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLOODSTEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/bloodmagic/relic
+
 /obj/item/weapon/handclaw/gronn
 	name = "ossland beast claws"
-	desc = "A pair of uniquely reinforced iron claws forged with the addition of bone by the cleric-priests of Ossland. \
-			Their unique design aids them in slipping between the plates in armor and their light weight supports rapid aggressive slashes. \
+	desc = "A pair of uniquely-reinforced iron claws forged with the addition of bone by the cleric-priests of Ossland. \
+			Their unique design aids them in slipping between the plates in armor, and their light weight supports rapid, aggressive slashes. \
 			'The cycle of predator and prey continues. To hunt is to be hunted is to hunt in return.'"
 	icon_state = "gronnclaws"
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(/datum/intent/claw/cut, /datum/intent/claw/lunge/gronn, /datum/intent/claw/rend)
 	wbalance = HARD_TO_DODGE
 	item_weight = 750 GRAMS
-
+	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_STEEL //Not actually made of steel but special exemption.
 
 /obj/item/weapon/handclaw/getonmobprop(tag)
 	. = ..()
@@ -149,7 +188,6 @@
 
 	swingsound = BLUNTWOOSH_HUGE
 	slot_flags = null //No.
-	dropshrink = 0.6
 	bigboy = TRUE
 	gripsprite = TRUE
 	item_weight = 6 KILOGRAMS

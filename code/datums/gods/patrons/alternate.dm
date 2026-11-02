@@ -33,7 +33,7 @@
 	flaws = "Intense, Morbid"
 	worshippers = "Hunters, the Northmen"
 	sins = "Wasting any of your kills, Smashing skullmets, Exploiting nature"
-
+	prayer_fail = "I need an amulet of the hunt for my prayers to be heard..."
 	confess_lines = list(
 		"I WILL BE REBORN!",
 		"TO HUNT IS TO TAKE YOUR PLACE IN THE CYCLE!",
@@ -41,15 +41,12 @@
 		"LET ME BE HUNTED, NOT SLAUGHTERED LIKE THIS!"
 	)
 	devotion_holder = /datum/devotion/alternate/great_hunt
-
-/datum/patron/alternate/great_hunt/can_pray(mob/living/carbon/human/follower)
-	var/amulet_type = /obj/item/clothing/neck/psycross/great_hunt
-
-	if(istype(follower.wear_wrists, amulet_type) || istype(follower.wear_neck, amulet_type) || istype(follower.get_active_held_item(), amulet_type))
-		return TRUE
-
-	to_chat(follower, span_danger("I need an amulet of the hunt for my prayers to be heard..."))
-	return FALSE
+	associated_objects = alist(
+		PATRON_AMULET = list(
+			/obj/item/clothing/neck/psycross/great_hunt
+		),
+		PATRON_STRUCTURE = null
+	)
 
 /datum/patron/alternate/great_hunt/proven
 	display_name = "The Great Hunt (Proven)"

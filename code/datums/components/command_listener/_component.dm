@@ -148,7 +148,7 @@ GLOBAL_LIST_INIT(automaton_order_jobs, list(JOB_ARTIFICER, "Supreme Artificer"))
 		return
 	*/
 
-	if(!owner.can_hear()) // their head was lopped off
+	if(HAS_TRAIT(owner, TRAIT_DEAF)) // their head was lopped off
 		return
 
 	if(!HAS_TRAIT(clicker, TRAIT_NOBLE_BLOOD) && !HAS_TRAIT(clicker, TRAIT_NOBLE_POWER) && !(clicker.job in GLOB.automaton_order_jobs))

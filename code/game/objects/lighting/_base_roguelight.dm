@@ -14,6 +14,7 @@
 	var/temperature_change = 20
 	var/temperature_weight = 1
 	var/temperature_falloff = 0.9
+	var/resting_range = 0
 
 /obj/machinery/light/fueled/Initialize()
 	if(soundloop)
@@ -30,8 +31,11 @@
 /obj/machinery/light/fueled/Destroy()
 	if(soundloop)
 		QDEL_NULL(soundloop)
+
+	GLOB.fires_list -= src
 	remove_temp_effect()
 	return ..()
+
 
 /obj/machinery/light/fueled/seton(s)
 	. = ..()
@@ -57,6 +61,15 @@
 		else
 			if(initial(fueluse) > 0)
 				. += "<span class='warning'>The fire is burned out and hungry...</span>"
+
+/obj/machinery/light/fueled/get_mechanics_examine(mob/user)
+	. = ..()
+	if(fueluse)
+		. += span_info("Click on the fire with fuel (sticks, logs, other flammable items) to add it, examine the campfire to see how much time the fuel will burn for.")
+	if(cookonme)
+		. += span_info("You can cook over the fire by using a suitable ingredient with one hand while holding a knife or wooden stake in the other.")
+	if(resting_range > 0)
+		. += span_info("Resting by this fire gradually restores energy and stamina.")
 
 
 /obj/machinery/light/fueled/extinguish()
@@ -93,9 +106,7 @@
 /obj/machinery/light/fueled/fire_act(added, maxstacks)
 	if(!on && ((fueluse > 0) || (initial(fueluse) == 0)))
 		playsound(src, 'sound/items/firelight.ogg', 100)
-		on = TRUE
-		update()
-		update_appearance(UPDATE_ICON_STATE)
+		seton(TRUE)
 		if(soundloop)
 			soundloop.start()
 		return TRUE
@@ -249,7 +260,7 @@
 			if(istype(W, /obj/item/natural/clod))
 				if(!user.temporarilyRemoveItemFromInventory(W))
 					return
-				on = FALSE
+				burn_out()
 				update()
 				update_appearance(UPDATE_ICON_STATE)
 				qdel(W)
@@ -277,3 +288,9 @@
 				holder.held_mob?.adjust_fire_stacks(5)
 				holder.held_mob?.IgniteMob()
 				holder.update_appearance()
+
+		if(resting_range > 0)
+			for(var/mob/living/carbon/human/human in range(resting_range, src))
+				human.apply_status_effect(/datum/status_effect/buff/campfire_stamina)
+				human.add_stress(/datum/stress_event/campfire)
+

@@ -10,7 +10,7 @@
 		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/magic/arcane = 10,
@@ -29,17 +29,27 @@
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	exp_types_granted = list(EXP_TYPE_MERCENARY, EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	magic_user = TRUE
-	spell_points = 5
+	form_points = 7
+	technique_points = 2
+
+	traits = list(
+		TRAIT_SORCERER,
+	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/spellsword
 
 	spells = list(
-		/datum/action/cooldown/spell/undirected/touch/prestidigitation
+		/datum/action/cooldown/spell/undirected/touch/prestidigitation,
+		/datum/action/cooldown/spell/bind_weapon,
+		/datum/action/cooldown/spell/recall_weapon,
+		/datum/action/cooldown/spell/empower_weapon,
+		/datum/action/cooldown/spell/essence/mend/spell,
 	)
 
 /datum/job/advclass/mercenary/spellsword/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 	spawned.merctype = 9
+	spawned.adjust_technique_mastery_points(3, FALSE, TECHNIQUE_IMBUE)
 
 /datum/outfit/mercenary/spellsword
 	name = "Spellsword (Mercenary)"
@@ -58,7 +68,6 @@
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/dagger = 1,
-		/obj/item/reagent_containers/glass/bottle/manapot = 1,
-		/obj/item/book/granter/spellbook/apprentice = 1,
+		/obj/item/reagent_containers/glass/bottle/manapot/labelled = 1,
 		/obj/item/chalk = 1
 	)

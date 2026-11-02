@@ -4,11 +4,8 @@
 	button_icon_state = "guidance"
 	sound = 'sound/magic/haste.ogg'
 
-	point_cost = 2
-	attunements = list(
-		/datum/attunement/earth = 1,
-	)
-	school = SCHOOL_TRANSMUTATION
+	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 
 	charge_time = 4 SECONDS
 	charge_drain = 1

@@ -89,7 +89,7 @@
 	var/turf/turf = get_turf(spawn_loc)
 	var/mob/living/new_mob = new worker_type(turf)
 	new_mob.controller_mind = new(new_mob, src)
-	new_mob.add_faction("overlord")
+	new_mob.add_faction(FACTION_OVERLORD)
 
 /mob/camera/strategy_controller/proc/try_setup_build(datum/building_datum/building)
 	if(held_build)
@@ -554,12 +554,17 @@
 	update_z(new_turf.z)
 
 /mob/camera/proc/update_z(new_z) // 1+ to register, null to unregister
-	if (registered_z != new_z)
-		if (registered_z)
-			SSmobs.camera_players_by_zlevel[registered_z] -= src
-		if (client)
-			if (new_z)
-				SSmobs.camera_players_by_zlevel[new_z] += src
-			registered_z = new_z
-		else
-			registered_z = null
+	if(registered_z == new_z)
+		return
+
+	if(registered_z)
+		SSmobs.camera_players_by_zlevel[registered_z] -= src
+
+	if(!client)
+		registered_z = null
+		return
+
+	if(new_z)
+		SSmobs.camera_players_by_zlevel[new_z] += src
+
+	registered_z = new_z

@@ -119,9 +119,9 @@
 	html_content += "<div class='section'>"
 	html_content += "<h3>Controls</h3>"
 	html_content += "<div class='controls'>"
-	html_content += "<a href='?src=[REF(src)];action=toggle_bonus' class='btn'>[surrounding_bonus ? "Disable" : "Enable"] Surrounding Bonus</a>"
-	html_content += "<a href='?src=[REF(src)];action=clear_grid' class='btn'>Clear Grid</a>"
-	html_content += "<a href='?src=[REF(src)];action=clear_selection' class='btn'>Clear Selection</a>"
+	html_content += "<a href='byond://?src=[REF(src)];action=toggle_bonus' class='btn'>[surrounding_bonus ? "Disable" : "Enable"] Surrounding Bonus</a>"
+	html_content += "<a href='byond://?src=[REF(src)];action=clear_grid' class='btn'>Clear Grid</a>"
+	html_content += "<a href='byond://?src=[REF(src)];action=clear_selection' class='btn'>Clear Selection</a>"
 	html_content += "</div>"
 	html_content += "<p>Surrounding Bonus: <strong>[surrounding_bonus ? "ON" : "OFF"]</strong> - Adjacent crops give floor(production/2) bonus to neighbors</p>"
 	if(selected_plant_type)
@@ -196,7 +196,7 @@
 			else
 				tooltip_content = "<div class='tooltip'><div class='tooltip-header'>Empty Cell ([x],[y])</div><div>Click to place selected plant</div></div>"
 
-			html_content += "<div class='[cell_class]' onclick=\"location.href='?src=[REF(src)];action=place;x=[x];y=[y]'\" oncontextmenu=\"location.href='?src=[REF(src)];action=remove;x=[x];y=[y]'; return false;\">[cell_content][tooltip_content]</div>"
+			html_content += "<div class='[cell_class]' onclick=\"location.href='byond://?src=[REF(src)];action=place;x=[x];y=[y]'\" oncontextmenu=\"location.href='byond://?src=[REF(src)];action=remove;x=[x];y=[y]'; return false;\">[cell_content][tooltip_content]</div>"
 
 	html_content += "</div></div></div>"
 
@@ -213,7 +213,7 @@
 			continue
 
 		var/selected_class = (selected_plant_type == plant_type) ? " selected" : ""
-		html_content += "<div class='plant-item[selected_class]' onclick=\"location.href='?src=[REF(src)];action=select;plant=[plant_type]'\">"
+		html_content += "<div class='plant-item[selected_class]' onclick=\"location.href='byond://?src=[REF(src)];action=select;plant=[plant_type]'\">"
 		html_content += "<div class='plant-name'>[plant.name]</div>"
 		html_content += "<div class='nutrient-info'>"
 		html_content += "Req: <span class='negative'>N-[plant.nitrogen_requirement] P-[plant.phosphorus_requirement] K-[plant.potassium_requirement]</span><br>"

@@ -22,6 +22,10 @@ VERB_MANAGER_SUBSYSTEM_DEF(input)
 	///if a click isnt delayed at all then it counts as 0 deciseconds.
 	var/average_click_delay = 0
 
+/datum/controller/subsystem/verb_manager/input/stat_entry(msg)
+	msg = "M/S:[round(movements_per_second,0.01)]|C/S:[round(clicks_per_second,0.01)]([round(delayed_clicks_per_second,0.01)]|CD:[round(average_click_delay,0.01)])"
+	return ..()
+
 /datum/controller/subsystem/verb_manager/input/Initialize()
 	setup_default_macro_sets()
 
@@ -49,7 +53,7 @@ VERB_MANAGER_SUBSYSTEM_DEF(input)
 // Badmins just wanna have fun ♪
 /datum/controller/subsystem/verb_manager/input/proc/refresh_client_macro_sets()
 	var/list/clients = GLOB.clients
-	for(var/i in 1 to clients.len)
+	for(var/i in 1 to length(clients))
 		var/client/user = clients[i]
 		user.set_macros()
 		user.update_movement_keys()
@@ -100,7 +104,3 @@ VERB_MANAGER_SUBSYSTEM_DEF(input)
 	movements_per_second = MC_AVG_SECONDS(movements_per_second, moves_this_run, wait TICKS)
 
 	current_clicks = 0
-
-/datum/controller/subsystem/verb_manager/input/stat_entry(msg)
-	. = ..()
-	. += "M/S:[round(movements_per_second,0.01)] | C/S:[round(clicks_per_second,0.01)]([round(delayed_clicks_per_second,0.01)] | CD: [round(average_click_delay,0.01)])"

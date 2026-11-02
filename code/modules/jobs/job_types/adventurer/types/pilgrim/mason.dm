@@ -18,7 +18,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/advclass/pilgrim/mason
@@ -27,7 +27,7 @@
 	You've known your entire life there are ancient secrets within stone, and now you must prove their value to others."
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/pilgrim/mason
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	apprentice_name = "Mason Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 

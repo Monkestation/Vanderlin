@@ -9,7 +9,7 @@
 		/datum/attribute/skill/combat/polearms = 40,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/job/advclass/combat/lancer
@@ -20,7 +20,7 @@
 	outfit = /datum/outfit/adventurer/lancer
 	total_positions = 1
 	roll_chance = 15
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander3.ogg'
 	is_recognized = TRUE
 

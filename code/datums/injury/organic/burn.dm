@@ -8,7 +8,7 @@
 /datum/injury/burn/infection_check()
 	//anything less than a FUCK burn isn't infectable if treated properly
 	var/normalized_damage = damage_per_injury()
-	if(is_treated() && normalized_damage < 25)
+	if(is_treated() || normalized_damage < 25)
 		return FALSE
 	if(is_disinfected())
 		return FALSE
@@ -19,7 +19,7 @@
 	switch(damage_type)
 		if(WOUND_BLUNT)
 			return prob(normalized_damage/2)
-		if(WOUND_BURN)
+		if(WOUND_BURN, WOUND_INTENSE_BURN)
 			return prob(normalized_damage*2)
 		if(WOUND_SLASH)
 			return prob(normalized_damage)
@@ -30,12 +30,6 @@
 
 /datum/injury/burn/can_merge(datum/injury/other)
 	return FALSE // don't merge burns so we can calculate fluid loss correctly
-
-/datum/injury/burn/apply_to_bodypart(obj/item/bodypart/limb)
-	. = ..()
-	//Burn damage can cause fluid loss due to blistering and cook-off
-	if(limb.owner && (limb.burn_dam/limb.max_damage) >= 0.25) // medium burn damage
-		limb.owner.adjust_blood_volume(-CEILING(BLOOD_VOLUME_SURVIVE * damage/150, 1))
 
 /*
 /datum/injury/burn/receive_damage(damage_received = 0, pain_received = 0, wounding_type = WOUND_BLUNT)

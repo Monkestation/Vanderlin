@@ -34,7 +34,7 @@
 	var/list/allowed_maps = list()
 
 	var/list/trader_outfits = list(
-		/obj/effect/mob_spawn/human/rakshari/trader
+		/obj/effect/mob_spawn/rakshari/trader
 	)
 
 	/// Weighted preferences for trader types - higher numbers = more likely
@@ -88,6 +88,11 @@
 	var/trader_count_penalty_scaling = 0.75
 	/// How wide the bell roll can swing around the peak
 	var/trader_count_bell_spread = 1
+	/// Floor/ceiling for how many of a wanted item a trader will buy before refusing more, before tier scaling
+	var/wanted_quantity_min = 3
+	var/wanted_quantity_max = 15
+	/// % chance a wanted item stays INFINITY instead of getting a rolled cap (staple goods a trader always wants)
+	var/wanted_infinite_chance = 10
 
 /datum/world_faction/New()
 	..()
@@ -656,6 +661,12 @@
 		unified_selection[pack_type] = weight
 
 	var/items_to_select = min(max_items, length(unified_selection))
+
+	// never take more than a random fraction of what's available,
+	// so weighted picks can actually exclude low-weight items instead of draining the pool.
+	// we might need to increase the variety of traders though
+	var/max_variety_cap = max(1, round(length(unified_selection) * 0.6))
+	items_to_select = min(items_to_select, max_variety_cap)
 	var/custom_items_selected = 0
 
 	for(var/i = 1 to items_to_select)
@@ -697,6 +708,7 @@
 
 	if(length(faction_products))
 		trader_data.initial_products = faction_products
+	randomize_wanted_quantities(trader_data)
 
 /datum/world_faction/proc/calculate_custom_item_price(base_price, tier)
 	var/price_modifier = 1.0 - (tier * 0.05)
@@ -724,16 +736,85 @@
 	return max(1, rand(base_quantity, base_quantity + 2))
 
 /datum/world_faction/proc/calculate_trader_price(datum/supply_pack/pack, item_type)
-	var/base_price = 20
+	//we try to use the tracked price
+	var/pack_cost = pack.cost
+	if(!pack_cost)
+		pack_cost = pack.baseline_price || 20 // fallback for packs with no cost data
 
-	if(pack.type in rare_pool)
-		base_price *= 2
-	else if(pack.type in exotic_pool)
-		base_price *= 3
+	// If a pack yields multiple items, split the cost per-unit since it would screw with stuff
+	var/item_count = 1
+	if(islist(pack.contains))
+		item_count = max(1, length(pack.contains))
+
+	var/base_price = max(1, round(pack_cost / item_count))
+
+	var/variance = 10 // default +-10%
+	if(pack.type in essential_packs)
+		variance = 5
+	else if(pack.type in common_pool)
+		variance = 8
 	else if(pack.type in uncommon_pool)
-		base_price *= 1.5
+		variance = 15
+	else if(pack.type in rare_pool)
+		variance = 20
+	else if(pack.type in exotic_pool)
+		variance = 30
 
-	return base_price
+	var/modifier = 1 + (rand(-variance+20, variance-20) * 0.01)
+	return max(1, round(base_price * modifier))
+
+/**
+ * Takes whatever initial_wanteds the trader_data type was hardcoded with (usually INFINITY caps)
+ * and rerolls actual purchase limits per-trader, scaled loosely by faction reputation tier.
+ */
+/datum/world_faction/proc/randomize_wanted_quantities(datum/trader_data/trader_data)
+	if(!length(trader_data.initial_wanteds))
+		return
+
+	var/tier = get_reputation_tier()
+	var/list/rerolled = list()
+
+	for(var/item_type in trader_data.initial_wanteds)
+		var/list/list = trader_data.initial_wanteds[item_type]
+		var/list/entry = list.Copy()
+
+		if(prob(wanted_infinite_chance))
+			entry[2] = INFINITY //trader always wants more of this
+		else
+			var/min_qty = wanted_quantity_min + round(tier * 0.5)
+			var/max_qty = wanted_quantity_max + (tier * 2)
+			entry[2] = rand(min_qty, max_qty)
+
+		rerolled[item_type] = entry
+
+	trader_data.initial_wanteds = rerolled
+
+/datum/world_faction/proc/award_trader_purchase_reputation(item_type)
+	faction_reputation += get_item_pool_rep(item_type)
+
+///for traders returns the amount of rep we get from buying this from them.
+/datum/world_faction/proc/get_item_pool_rep(item_type)
+	for(var/pack_type in essential_packs + common_pool + uncommon_pool + rare_pool + exotic_pool)
+		var/datum/supply_pack/pack = faction_supply_packs[pack_type]
+		if(!pack)
+			continue
+
+		var/found = islist(pack.contains) ? (item_type in pack.contains) : (pack.contains == item_type)
+		if(!found)
+			continue
+
+		if(pack_type in essential_packs)
+			return 1
+		if(pack_type in common_pool)
+			return 2
+		if(pack_type in uncommon_pool)
+			return 3
+		if(pack_type in rare_pool)
+			return 4
+		if(pack_type in exotic_pool)
+			return 5
+
+	return 0 // not from any pool
 
 /// Maps reputation tier (0-6) to a calculator's best achievable quality tier.
 /// quality_scale should be the calculator's lowest and highest quality_descriptor keys.

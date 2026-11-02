@@ -164,7 +164,7 @@
 		if(amount >= maxamount)
 			return ITEM_INTERACT_BLOCKING
 
-		if(!do_after(user, 5 DECISECONDS, src))
+		if(!do_after(user, 2.5 DECISECONDS, src))
 			return ITEM_INTERACT_BLOCKING
 
 		if(!istype(item, stacktype) && !istype(item, /obj/item/natural/bundle))
@@ -230,7 +230,7 @@
 			amount -= 1
 			var/obj/F = new stacktype(get_turf(src))
 			H.put_in_hands(F)
-			user.balloon_alert(user, "I remove \a [F].")
+			user.balloon_alert(user, "i remove \a [F].")
 
 	update_bundle()
 

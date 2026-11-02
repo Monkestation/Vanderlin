@@ -123,12 +123,15 @@
 
 /datum/species/human/halfdrow/get_skin_list()
 	return sortList(list(
-		"Zizo-Cursed" = SKIN_COLOR_ICECAP, // - (Pale)
 		"Parasite-Taineted" = SKIN_COLOUR_PARASITE_TAINTED, // - (Light purple)
 		"Mushroom-Minded" = SKIN_COLOR_MUSHROOM_MINDED, // - (Mid purple)
 		"Cave-Attuned" = SKIN_COLOR_CAVE_ATTUNED, // - (Deep purple)
 		"Fungus-Stained" = SKIN_COLOR_FUNGUS_STAINED, // - (Pink)
 		"Depth-Departed" = SKIN_COLOR_DEPTH_DEPARTED, // - (Grey-blue)
+		"Shallow-Shadowed" = SKIN_COLOR_SHALLOW_SHADOWED,
+		"Dark-Dweller" = SKIN_COLOR_DARK_DWELLER, // Dark grey
+		"Twilight-Traveled" = SKIN_COLOR_TWILIGHT_TRAVELED, //Mid grey
+		"Starlit-Sojourner" = SKIN_COLOR_STARLIT_SOJOURNER //Light grey
 	))
 
 /datum/species/human/halfdrow/get_hairc_list()

@@ -55,7 +55,7 @@
 	if(stat != DEAD)
 		return 1
 
-/mob/living/carbon/DeadLife()
+/mob/living/carbon/DeadLife(delta_time = SSMOBS_DT, times_fired)
 	set invisibility = 0
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -68,6 +68,7 @@
 	handle_embedded_objects()
 
 	check_cremation()
+	handle_bodyparts_death(delta_time, times_fired)
 
 /mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
 	return
@@ -85,6 +86,10 @@
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		if(bodypart.needs_processing)
 			. |= bodypart.on_life(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+
+/mob/living/carbon/proc/handle_bodyparts_death(delta_time, times_fired)
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		. |= bodypart.on_death(delta_time, times_fired)
 
 /mob/living/carbon/proc/handle_organs(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically
@@ -172,8 +177,8 @@ All effects don't start immediately, but rather get worse over time; the rate is
 		drunkenness = max(drunkenness - (drunkenness * 0.04) - 0.01, 0)
 		if(drunkenness >= 1)
 			SEND_SIGNAL(src, COMSIG_DRUG_INDULGE)
-			if(has_quirk(/datum/quirk/vice/alcoholic))
-				sate_addiction(/datum/quirk/vice/alcoholic)
+			if(has_quirk(/datum/quirk/vice/addiction/alcoholic))
+				sate_addiction(/datum/quirk/vice/addiction/alcoholic)
 		if(drunkenness >= 3)
 			if(prob(3))
 				slurring += 2
@@ -282,9 +287,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 					adjust_blood_volume(-10)
 				if(limb.cremation_progress >= 50)
 					if(limb.status == BODYPART_ORGANIC) //Non-organic limbs don't burn
-						limb.skeletonize()
 						should_update_body = TRUE
-						limb.drop_limb()
 						limb.visible_message("<span class='warning'>[src]'s [limb.name] crumbles into ash!</span>")
 						qdel(limb)
 					else
@@ -298,9 +301,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			head.cremation_progress += rand(1,4)
 			if(head.cremation_progress >= 50)
 				if(head.status == BODYPART_ORGANIC) //Non-organic limbs don't burn
-					head.skeletonize()
 					should_update_body = TRUE
-					head.drop_limb()
 					head.visible_message("<span class='warning'>[src]'s head crumbles into ash!</span>")
 					qdel(head)
 				else
@@ -343,7 +344,7 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	if(!needs_heart())
 		return FALSE
 	var/obj/item/organ/heart/heart = getorganslot(ORGAN_SLOT_HEART)
-	if(!heart || (heart.organ_flags & ORGAN_SYNTHETIC))
+	if(!heart || IS_ROBOTIC_ORGAN(heart))
 		return FALSE
 	return TRUE
 
@@ -414,13 +415,13 @@ All effects don't start immediately, but rather get worse over time; the rate is
 *	The mob tries to go to sleep or IS sleeping
 *
 *	Accounts for...
-*	TRAIT_NOSLEEP
+*	TRAIT_SLEEPIMMUNE
 *	CANT_SLEEP_IN
 *	Hunger and Hydration.
 */
 
 /mob/living/carbon/proc/handle_sleep()
-	if(HAS_TRAIT(src, TRAIT_NOSLEEP))
+	if(HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
 		return
 	var/cant_fall_asleep = FALSE
 	var/cause = "I just can't..."
@@ -462,10 +463,10 @@ All effects don't start immediately, but rather get worse over time; the rate is
 			if(toxloss)
 				adjustToxLoss(-(sleepy_mod * 0.15), FALSE, TRUE)
 				. |= BODYPART_LIFE_UPDATE_HEALTH
-			if(eyesclosed && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+			if(eyesclosed && !HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
 				Sleeping(300)
 		tiredness = 0
-	else if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_NOSLEEP))
+	else if(!IsSleeping() && !HAS_TRAIT(src, TRAIT_SLEEPIMMUNE))
 		// Resting on a bed or something
 		if(buckled?.sleepy)
 			if(eyesclosed && !cant_fall_asleep || (eyesclosed && !(fallingas >= 10 && cant_fall_asleep)))

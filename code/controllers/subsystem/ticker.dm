@@ -248,7 +248,7 @@ SUBSYSTEM_DEF(ticker)
 	//Get ALL town jobs
 	var/list/town_jobs = list()
 	for(var/datum/job/J as anything in SSjob.joinable_occupations)
-		if (J.faction == FACTION_TOWN)
+		if(FACTION_TOWN in J.factions)
 			town_jobs += J.title
 
 	//Now find players who readied with HIGH preference on those town jobs
@@ -292,23 +292,24 @@ SUBSYSTEM_DEF(ticker)
 	required_jobs = list()
 	readied_jobs = list(JOB_MONARCH)
 #endif
-	for(var/V in required_jobs)
+	for(var/needed_job in required_jobs)
 		for(var/mob/dead/new_player/player in GLOB.player_list)
 			if(!player || !player.client)
 				stack_trace("somehow [player] doesn't have a client, wtf?")
 				continue
-			if(player.client.prefs.job_preferences[V] == JP_HIGH)
+			if(player.client.prefs.job_preferences[needed_job] == JP_HIGH)
 				if(player.ready == PLAYER_READY_TO_PLAY)
-					if(player.client.prefs.lastclass == V)
-						if(player.IsJobUnavailable(V) != JOB_AVAILABLE)
-							to_chat(player, span_warning("You cannot be [V] and thus are not considered."))
-							continue
-					readied_jobs.Add(V)
+					var/job_status = player.IsJobUnavailable(needed_job, ignore_slots = TRUE)
+					if(job_status != JOB_AVAILABLE)
+						to_chat(player, span_warning("You cannot be [needed_job] and thus are not considered."))
+						message_admins("JOB ERROR: [key_name(player)] is unable to be [needed_job], Error [job_status]!")
+						continue
+					readied_jobs.Add(needed_job)
 
 	if(CONFIG_GET(flag/ruler_required) && !vote_started)
 		if(pre_vote > 4 && !voting)
 			voting = TRUE
-			SSvote.initiate_vote("norulervote", "The Gods")
+			SSvote.initiate_vote("norulervote", "The Gods", TRUE)
 		if(!((JOB_MONARCH in readied_jobs) || (start_immediately == TRUE))) //start_immediately triggers when the world is doing a test run or an admin hits start now, we don't need to check for king
 			to_chat(world, span_purple("[pick(no_ruler_lines)]"))
 			if(!voting)
@@ -374,6 +375,7 @@ SUBSYSTEM_DEF(ticker)
 	INVOKE_ASYNC(SSdbcore, TYPE_PROC_REF(/datum/controller/subsystem/dbcore, SetRoundStart))
 
 	message_admins(span_boldnotice("Welcome to [SSmapping.config.map_name]!"))
+	addtimer(CALLBACK(src, PROC_REF(revoke_antag_perms)), 3 MINUTES)
 
 	for(var/client/C in GLOB.clients)
 		if(!C?.mob)
@@ -746,6 +748,10 @@ SUBSYSTEM_DEF(ticker)
 	update_everything_flag_in_db()
 
 	text2file(login_music, "data/last_round_lobby_music.txt")
+
+/datum/controller/subsystem/ticker/proc/revoke_antag_perms()
+	GLOB.midround_antag_permission = FALSE
+	message_admins("ANTAGS: Global Midround Antag Rolling now DISABLED. Antagonists will now roll according to their own settings.")
 
 #undef ROUND_START_MUSIC_LIST
 #undef SS_TICKER_TRAIT

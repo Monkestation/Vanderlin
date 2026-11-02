@@ -3,9 +3,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 */
 #define OBESITY "obesity"
 
-// ************* atom traits
-#define EAR_DAMAGE "ear_damage"
-
 /// Prevents the affected atom from opening a loot window via alt click. See atom/AltClick()
 #define TRAIT_ALT_CLICK_BLOCKER "no_alt_click"
 
@@ -26,6 +23,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MOVE_SWIMMING	"move_swimming"
 /// Disables the floating animation. See above.
 #define TRAIT_NO_FLOATING_ANIM "no-floating-animation"
+/// Disables rot can be applied to items or mobs
+#define TRAIT_NO_ROT "no_rot"
 
 ///generic atom traits
 ///Chasms will be safe to cross while they've this trait.
@@ -57,6 +56,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_PULL_BLOCKED "pullblocked"
 /// Apply this to make a mob not dense, and remove it when you want it to no longer make them undense, other sources of undesity will still apply. Always define a unique source when adding a new instance of this!
 #define TRAIT_UNDENSE "undense"
+/// Makes the mob immune to damage and several other ailments.
+#define TRAIT_GODMODE "godmode"
 /// Abstract condition that prevents movement if being pulled and might be resisted against. Handcuffs and straight jackets, basically.
 #define TRAIT_RESTRAINED "restrained"
 /// Generically incapacitated, cannot interact
@@ -115,8 +116,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STUNIMMUNE "stun_immunity"
 /// Stun duration reduced (unused)
 #define TRAIT_STUNRESISTANCE "stun_resistance"
-/// Immunity to sleep
-#define TRAIT_SLEEPIMMUNE "sleep_immunity"
 /// Can't be pushed
 #define TRAIT_PUSHIMMUNE "push_immunity"
 /// Doesn't need a heart
@@ -129,10 +128,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RESISTHEATHANDS "resist_heat_handsonly"
 /// Resists low temperatures
 #define TRAIT_RESISTCOLD "resist_cold"
-/// Resist high pressure enviroments (unused with no atmos)
-#define TRAIT_RESISTHIGHPRESSURE "resist_high_pressure"
-/// Resist low pressure enviroments (unused with no atmos)
-#define TRAIT_RESISTLOWPRESSURE	"resist_low_pressure"
 /// This human is immune to the effects of being exploded. (ex_act)
 #define TRAIT_BOMBIMMUNE "bomb_immunity"
 /// Immunity against germs and viruses crippled
@@ -147,6 +142,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_EASYDISMEMBER "easy_dismember"
 /// Limbs can't be dismembered
 #define TRAIT_NODISMEMBER "dismember_immunity"
+/// Cannot be decapitated, other limbs still fall off.
+#define TRAIT_NODECAPITATE "decapitate_immunity"
 /// Can't get fire stacks (can get DIVINE fire stacks)
 #define TRAIT_NOFIRE "Nonflammable"
 /// Can't use guns
@@ -188,12 +185,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOHARDCRIT "nohardcrit"
 /// Can't enter soft crit
 #define TRAIT_NOSOFTCRIT "nosoftcrit"
-/// Shielded from mind altering effects (unused)
-#define TRAIT_MINDSHIELD "mindshield"
-/// Unused
-#define TRAIT_DISSECTED	"dissected"
 /// Can hear dead people
-#define TRAIT_SIXTHSENSE "sixth_sense"
+#define TRAIT_GHOSTEARS "ghost_sense"
 /// Immune to the effects of phobias
 #define TRAIT_FEARLESS "fearless"
 //These are used for brain-based paralysis, where replacing the limb won't fix it
@@ -217,8 +210,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_MAGIC_CHOKE "magic_choke"
 /// Immune to nervous cough
 #define TRAIT_SOOTHED_THROAT "soothed-throat"
-/// Can't lower hygiene
-#define TRAIT_ALWAYS_CLEAN "always-clean"
 /// Can throw reagent containers without spilling them
 #define TRAIT_BOOZE_SLIDER "booze-slider"
 /// Unused
@@ -356,6 +347,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_AI_PAUSED "TRAIT_AI_PAUSED"
 ///trait that stops our ai controlled mob from moving at all due to ai planning
 #define TRAIT_AI_MOVEMENT_HALTED "ai_movement_halted"
+///do we have arcyne momentum
+#define TRAIT_ARCYNE_MOMENTUM "arcyne_momentum"
+///blood magic version of momentum binding, but doesn't have momentum mechanics
+#define TRAIT_BLOOD_BIND "blood_bind"
 
 /// Trait given to a living mob and any observer mobs that stem from them if they suicide.
 /// For clarity, this trait should always be associated/tied to a reference to the mob that suicided- not anything else.
@@ -363,9 +358,6 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 
 /// Given to a mob that can throw to make them not able to throw
 #define TRAIT_NO_THROWING "no_throwing"
-
-/// Hides the SSD indicator. Used with scrying.
-#define TRAIT_NOSSDINDICATOR "nossdindicator"
 /// Instant grabs on someone else.
 #define TRAIT_NOSTRUGGLE "nostruggle"
 /// Black-bagged. More snowflaking.
@@ -393,16 +385,22 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_STRONGBITE "Strong Bite"
 #define TRAIT_HATEWOMEN	"Ladykiller"
 #define TRAIT_SEEDKNOW "Seed Knower"
-#define TRAIT_NOBLE_BLOOD	"Noble Blooded"
-#define TRAIT_NOBLE_POWER	"Noble Authority"
+
+#define TRAIT_NOBLE_BLOOD "Noble Blooded"
+#define TRAIT_NOBLE_POWER "Noble Authority"
+#define TRAIT_THROAT_POWER "Wielder of the THROAT"
+#define TRAIT_CROWNLESS_THROAT "Crownless THROAT"
+
 #define TRAIT_EMPATH "Empath"
-#define TRAIT_BREADY "Battleready"
+#define TRAIT_BATTLE_READY "Battleready"
 #define TRAIT_BLINDFIGHTING "Sixth-Sense"
+#define TRAIT_THIEFSENSE "Thief-Sense"
 #define TRAIT_MEDIUMARMOR "Mail Training"
 #define TRAIT_HEAVYARMOR "Plate Training"
 #define TRAIT_DODGEEXPERT "Fast Reflexes"
 #define TRAIT_UNDODGING	"Inflexible"
 #define TRAIT_UNPARRYING "Graceless"
+#define TRAIT_EXPERT_PARRY "Parry Expert"
 #define TRAIT_DECEIVING_MEEKNESS "Deceiving Meekness"
 #define TRAIT_VILLAIN "Villain"
 #define TRAIT_CRITICAL_RESISTANCE "Critical Resistance"
@@ -412,13 +410,14 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NOSTAMINA	"Indefatigable"
 /// Can't fall asleep
 #define TRAIT_FAT "Obese"
-#define TRAIT_NOSLEEP "Fatal Insomnia"
+/// Immunity to sleep
+#define TRAIT_SLEEPIMMUNE "Fatal Insomnia"
 #define TRAIT_FASTSLEEP "Fast Sleeper"
 #define TRAIT_NUDIST "Nudist" //you can't wear most clothes
 #define TRAIT_INHUMANE_ANATOMY "Inhumen Anatomy" //can't wear hats and shoes
 #define TRAIT_NASTY_EATER "Inhumen Digestion" //can eat rotten food, organs, poison berries, and drink murky water
 #define TRAIT_NOFALLDAMAGE1 "Minor Fall Damage Immunity"
-#define TRAIT_NOFALLDAMAGE2 "Total	 Fall Damage Immunity"
+#define TRAIT_NOFALLDAMAGE2 "Total Fall Damage Immunity"
 #define TRAIT_DEATHSIGHT "Veiled Whispers" // Is notified when a player character dies, but not told exactly where or how.
 #define TRAIT_CYCLOPS_LEFT "Cyclops (Left)" //poked left eye
 #define TRAIT_CYCLOPS_RIGHT	"Cyclops (Right)" //poked right eye
@@ -442,8 +441,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SEE_LEYLINES "Magical Visions"
 #define TRAIT_POISONBITE "Poison Bite"
 #define TRAIT_BLOODDRINKER "Blood Drinker" // Can drink blood without vomiting
+#define TRAIT_SILVER_IMMUNE "Silver Immune"
 #define TRAIT_FORAGER "Expert Forager"
 #define TRAIT_TINY "Tiny"
+#define TRAIT_BIGGUY "Big Guy"
 #define TRAIT_DREAM_WATCHER	"Noc Blessed" //Unique Trait of the Dream Watcher Town Elder Class, they have a chance to know about antags or gods influences.
 #define TRAIT_HOLLOWBONES "Hollow Bones"
 #define TRAIT_AMAZING_BACK "Light Load"
@@ -478,8 +479,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_INHUMENCAMP "inhumencamp"
 #define TRAIT_GALLOWBAND "gallowband"
 #define TRAIT_INTRAINING "intraining" //allows certain roles to bypass the average skill limitation of training dummies
-#define TRAIT_STEELHEARTED "steelhearted" //no bad mood from dismembering or seeing this
-#define TRAIT_IWASREVIVED "iwasrevived" //prevents PQ gain from reviving the same person twice
+#define TRAIT_STEELHEARTED "Steel Hearted" //no bad mood from dismembering or seeing this
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
 #define TRAIT_ZIZOID_HUNTED "zizoidhunted" // Used to signal character has been marked by death by the Zizoid cult
 #define TRAIT_LEPROSY "Leprosy"
@@ -493,12 +493,36 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_NODE_EXTRACTED "Humors Extracted"
 #define TRAIT_NO_EXPERIENCE	"unlearning"
 #define TRAIT_NO_SKILLS "zero_skills"
+#define TRAIT_HASMAGIC "hasmagic"
 /// This mob should never be affected by `/obj/effect/timestop`
 #define TRAIT_TIME_STOP_IMMUNE "timestopimmune"
 /// This mob should never close UI even if it doesn't have a client
 #define TRAIT_PRESERVE_UI_WITHOUT_CLIENT "preserve_ui_without_client"
 /// This mob can't have a split personality
 #define TRAIT_NO_SPLIT_PERSONALITY "no_split_personality"
+#define TRAIT_VIRGIN	"virginity"
+#define TRAIT_EXPLOSION_PREVENTER "exploded"
+
+#define TRAIT_BROOD "Broodspawn"
+
+// This is for UNARMED FIGHTERS. LIMIT ITS USE TO THEM
+#define TRAIT_CLOSECOMBAT "Close Combat"
+
+// Can see blood volume and vitae value of a mob.
+#define TRAIT_BLOOD_SENSE "Blood Senses"
+// Mob uses vitae for one purpose or another.
+#define TRAIT_VITAE_USER "Vitae User"
+// Bleeding is suspended by a spell
+#define TRAIT_SUSPENDED_BLEED "Suspended Bleeding"
+
+#define TRAIT_CONJURED_SUMMON "conjured_summon"
+#define TRAIT_CONJURE_BACKLASH "conjure_backlash"
+
+#define TRAIT_SORCERER "Sorcerer"
+#define TRAIT_BLOOD_MAGE "Blood Mage"
+#define TRAIT_BLOOD_SORCERER "Blood Sorcerer"
+#define TRAIT_BLOOD_STUDENT "Blood Student"
+#define TRAIT_BLOOD_MAGIC_BLOCKED "Sanguine Block"
 
 /// This mob's surgical operations ignore ALL speed modifiers (even positive ones!) besides tool quality.
 /// The mob can also no longer fail their operations, unless the operation says otherwise
@@ -509,6 +533,10 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_RECRUITED	"Recruit" //Trait used to give foreigners their new title
 #define TRAIT_RECOGNIZED "Recognized" // Given to famous migrants, pilgrims and adventurers, enable their title.
 #define TRAIT_FANATICAL "Fanatical" //Trait used for fanatical mobs who can bypass the excommunication(not the curses though.)
+
+
+#define TRAIT_CHANGED_PATRON "Changed Patron"
+#define TRAIT_PATRON_LANGUAGE "Patron Language"
 
 // Divine patron trait bonuses:
 #define TRAIT_SOUL_EXAMINE "Blessing of Necra"  //can check bodies to see if they have departed
@@ -527,7 +555,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_SILVER_BLESSED "Silver Blessed"
 #define TRAIT_DIVINE_CENTRIST "Divine Centrist"
 #define TRAIT_DIVINE_SERVANT "Divine Servant"
-#define TRAIT_DIVINE_CONVERT "Divine Convert"
+#define TRAIT_LUNAR_ORDER "Member of the Lunar Order"
+#define TRAIT_DREAM_CAVE "Access to the Dream Cave"
 
 // Inhumen patron trait bonuses
 #define TRAIT_ORGAN_EATER "Blessing of Graggar"//Can eat organs (duh.) and raw meat
@@ -535,10 +564,20 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_CABAL "Of the Cabal" //Zizo cultists recognize each other too
 #define TRAIT_MATTHIOS_EYES	"Eyes of Matthios" //Examine to see the most expensive item someone has
 
+// Archdevil patron traits
+/// No miracle healing, the Archdevils reject the influence of the so called gods. This is a major balance point for Devil worship.
+#define TRAIT_DEVILS_REJECTION "Devil's Rejection"
+#define TRAIT_DEVIL_MARKED_ABRAXAS "Devil Marked - Abraxas"
+#define TRAIT_DEVIL_MARKED_ABADDON "Devil Marked - Abaddon"
+#define TRAIT_DEVIL_MARKED_MEPHISTOPHELES "Devil Marked - Mephistopheles"
+#define TRAIT_DEVIL_MARKED_LEVIATHAN "Devil Marked - Leviathan"
+#define TRAIT_IDENTIFY_DEVIL_MARKS "Occult Identification"
+
 // Other Patron Trait Bonuses
 #define TRAIT_MANEATER_IMMUNITY "Blessing of The Hunt" //Cannot be grabbed by maneaters.
 /// Target can't be grabbed by tanglers
 #define TRAIT_ENTANGLER_IMMUNITY "Vinewalker"
+
 
 // PATRON CURSE TRAITS
 #define TRAIT_CURSE "Curse" //source
@@ -551,10 +590,13 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_XYLIX_CURSE "Xylix's Curse"
 #define TRAIT_PESTRA_CURSE "Pestra's Curse"
 #define TRAIT_EORA_CURSE "Eora's Curse"
+#define TRAIT_MALUM_CURSE "Malum's Curse"
 #define TRAIT_ZIZO_CURSE "Zizo's Curse"
 #define TRAIT_GRAGGAR_CURSE "Graggar's Curse"
 #define TRAIT_MATTHIOS_CURSE "Matthios' Curse"
 #define TRAIT_BAOTHA_CURSE "Baotha's Curse"
+#define TRAIT_ABRAXAS_CURSE "Abraxas' Curse"
+#define TRAIT_LEVIATHAN_CURSE "Leviathan's Curse"
 
 // HIDDEN DOOR TRAITS
 #define TRAIT_KNOW_KEEP_DOORS "know_keep_doors"
@@ -595,6 +637,8 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_ORGAN_OPERATED_ON "organ_operated_on"
 
 // **** item traits
+///are we twirling or in some way messing with an inhand
+#define TRAIT_TWIRLING "twirlin"
 /// Can't drop
 #define TRAIT_NODROP "nodrop"
 /// Can't be embedded
@@ -610,7 +654,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// The items needs two hands to be carried
 #define TRAIT_NEEDS_TWO_HANDS "needstwohands"
 /// This item can't be pickpocketed
-#define TRAIT_HARD_TO_STEAL "hard_to_steal"
+#define TRAIT_CANT_BE_STOLEN "cant_be_stolen"
+/// This item does not show on examine
+#define TRAIT_CONCEALED_ITEM "concealed_item"
 
 // **** turf traits
 ///Turf slowdown will be ignored when this trait is added to a turf.
@@ -623,6 +669,9 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 /// This object has sound debugging tools attached to it
 #define TRAIT_SOUND_DEBUGGED "sound_debugged"
 
+/// Gives you the Shifty Eyes quirk, rarely making people who examine you think you examined them back even when you didn't
+#define TRAIT_SHIFTY_EYES "shifty_eyes"
+
 /// This atom is a secluded location, which is counted as out of bounds.
 /// Anything that enters this atom's contents should react if it wants to stay in bounds.
 #define TRAIT_SECLUDED_LOCATION "secluded_loc"
@@ -634,4 +683,3 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 // genetic traits
 #define TRAIT_ANIMAL_NATURAL_ARMOR "natural_armor"
 #define TRAIT_ANIMAL_PRODUCTIVE "trait_productive"
-#define TRAIT_NO_ROT "no_rot"

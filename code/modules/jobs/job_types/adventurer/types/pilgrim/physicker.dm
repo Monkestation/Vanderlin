@@ -1,10 +1,15 @@
 /datum/attribute_holder/sheet/job/pilgrim/physicker
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = -1,
-		STAT_SPEED = 1,
-		/datum/attribute/skill/misc/reading = 30,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/craft/alchemy = 10,
@@ -18,7 +23,7 @@
 				their services."
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/pilgrim/physicker
-	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	total_positions = 2
 	apprentice_name = "Physicker Apprentice"
 	cmode_music = 'sound/music/cmode/nobility/combat_physician.ogg'
@@ -30,6 +35,7 @@
 		TRAIT_EMPATH,
 		TRAIT_DEADNOSE
 	)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/outfit/pilgrim/physicker
 	name = "Physicker (Pilgrim)"

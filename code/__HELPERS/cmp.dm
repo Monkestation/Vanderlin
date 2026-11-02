@@ -99,7 +99,7 @@ GLOBAL_VAR_INIT(cmp_field, "name")
 	return sorttext(initial(b.name),initial(a.name))
 
 /proc/cmp_reagents_boiling_asc(datum/reagent/a, datum/reagent/b)
-    return initial(a.boiling_point) - initial(b.boiling_point)
+	return initial(a.boiling_point) - initial(b.boiling_point)
 
 /proc/cmp_typepaths_asc(A, B)
 	return sorttext("[B]","[A]")

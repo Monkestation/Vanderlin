@@ -52,7 +52,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 
 		var/datum/beam/mana = Beam(
 			movable,
-			icon_state = "drain_life",
+			icon_state = "drain_mana",
 			max_distance = max_distance,
 			time = INFINITY,
 			beam_layer = LOWER_LEYLINE_LAYER,
@@ -79,7 +79,7 @@ GLOBAL_LIST_EMPTY(mana_fountains)
 
 		var/datum/beam/mana = Beam(
 			movable,
-			icon_state = "drain_life",
+			icon_state = "drain_mana",
 			max_distance = max_distance,
 			time = INFINITY,
 			beam_layer = LOWER_LEYLINE_LAYER,

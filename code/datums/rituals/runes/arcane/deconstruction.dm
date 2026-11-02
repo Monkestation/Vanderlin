@@ -107,7 +107,7 @@
 	required_skill = skill
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/decrafting/proc/find_matching_recipe(obj/item/item)
-	for(var/recipe_type as anything in subtypesof(/datum/arcyne_crafting_recipe))
+	for(var/recipe_type in subtypesof(/datum/arcyne_crafting_recipe))
 		var/datum/arcyne_crafting_recipe/R = new recipe_type
 		if(!ispath(R.output) || !istype(item, R.output))
 			qdel(R)
@@ -120,7 +120,7 @@
 		qdel(R)
 		return M
 
-	for(var/recipe_type as anything in subtypesof(/datum/repeatable_crafting_recipe))
+	for(var/recipe_type in subtypesof(/datum/repeatable_crafting_recipe))
 		var/datum/repeatable_crafting_recipe/R = new recipe_type
 		if(!ispath(R.output) || !istype(item, R.output))
 			qdel(R)
@@ -138,7 +138,7 @@
 	return null
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/decrafting/proc/try_invoke(mob/living/user)
-	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NOVICE)
 		to_chat(user, span_warning("You aren't able to invoke these symbols."))
 		return
 	if(rune_in_use)

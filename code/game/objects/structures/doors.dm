@@ -11,15 +11,18 @@
 	pass_flags_self = PASSDOORS|PASSSTRUCTURE
 	max_integrity = 1000
 	integrity_failure = 0.5
-	armor = list("blunt" = 10, "slash" = 10, "stab" = 10,  "piercing" = 0, "fire" = 0, "acid" = 0)
+	armor_type = /datum/armor/door
 	damage_deflection = 10
 	CanAtmosPass = ATMOS_PASS_DENSITY
 	break_sound = 'sound/combat/hits/onwood/destroywalldoor.ogg'
 	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg', 'sound/combat/hits/onwood/woodimpact (2).ogg')
 	lock = /datum/lock/key
 	can_add_lock = TRUE
+	clawable = FALSE
 
 	var/omni_bolt = FALSE
+
+	var/smashable = TRUE
 
 	/// Can people riding go through without falling off their mount
 	var/ridethrough = FALSE
@@ -55,6 +58,11 @@
 	var/has_bolt = FALSE
 	/// Handle viewport toggle on right click
 	var/has_viewport = FALSE
+
+/obj/structure/door/bolt
+	icon_state = MAP_SWITCH("woodhandle", "woodhandledir")
+	has_bolt = TRUE
+	lock = /datum/lock
 
 /obj/structure/door/Initialize()
 	. = ..()
@@ -420,14 +428,34 @@
 /obj/structure/door/green
 	icon_state = "wcg"
 
+/obj/structure/door/green/bolt
+	icon_state = MAP_SWITCH("wcg", "wcgdir")
+	has_bolt = TRUE
+	lock = /datum/lock
+
 /obj/structure/door/red
 	icon_state = "wcr"
+
+/obj/structure/door/red/bolt
+	icon_state = MAP_SWITCH("wcr", "wcrdir")
+	has_bolt = TRUE
+	lock = /datum/lock
 
 /obj/structure/door/violet
 	icon_state = "wcv"
 
+/obj/structure/door/violet/bolt
+	icon_state = MAP_SWITCH("wcv", "wcvdir")
+	has_bolt = TRUE
+	lock = /datum/lock
+
 /obj/structure/door/fancy
 	icon_state = "fancy_wood"
+
+/obj/structure/door/fancy/bolt
+	icon_state = MAP_SWITCH("fancy_wood", "fancy_wooddir")
+	has_bolt = TRUE
+	lock = /datum/lock
 
 /obj/structure/door/window
 	icon_state = "woodwindow"
@@ -485,7 +513,7 @@
 /obj/structure/door/iron
 	name = "iron door"
 	icon_state = "donjon"
-	armor = list("blunt" = 15, "slash" = 30, "stab" = 30,  "piercing" = 0, "fire" = 50, "acid" = 50)
+	armor_type = /datum/armor/door/heavy
 	max_integrity = 2000
 	damage_deflection = 15
 	resistance_flags = FIRE_PROOF
@@ -519,7 +547,7 @@
 /obj/structure/door/stone
 	name = "stone door"
 	icon_state = "stone"
-	armor = list("blunt" = 15, "slash" = 30, "stab" = 30,  "piercing" = 0, "fire" = 50, "acid" = 50)
+	armor_type = /datum/armor/door/heavy
 	open_sound = 'sound/foley/doors/stoneopen.ogg'
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)
@@ -539,7 +567,7 @@
 	name = "abyssal door"
 	icon_state = "abyssdoor"
 	icon = 'icons/delver/abyss_objects.dmi'
-	armor = list("blunt" = 15, "slash" = 30, "stab" = 30,  "piercing" = 0, "fire" = 50, "acid" = 50)
+	armor_type = /datum/armor/door/heavy
 	open_sound = 'sound/foley/doors/stoneopen.ogg'
 	close_sound = 'sound/foley/doors/stoneclose.ogg'
 	repair_thresholds = list(/obj/item/natural/stone = 1)

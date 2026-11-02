@@ -67,9 +67,9 @@ DEMESNE - Lich
 Ready or Not - Man-at-Arms
 OZYMANDIAS - Dungeon Track 3
 Black Powder - Grenzelhoft
-mechadh - Gaffer
 TRINITY (You Cant Kill Me) - Sacresants
 Good Men Die Young - Gaffer
+It's an Honor, Sir - Rakshari/Zaladin
 (BRASS) - Sling Blade - Xylixian theme
 (BRASS) - Triumph Over Evil - Ravoxian theme
 (BRASS) - Phases of the moon - Noccite theme
@@ -77,7 +77,7 @@ Good Men Die Young - Gaffer
 (BRASS) - Thread Softly - Veteran
 (BRASS) - Turncoat - Abyssorian theme
 SALON (BETA) - Combat Dream
-Meeting Ravox In Two Minutes - Grandmaster Ult
+I'M READY TO DIE, ARE YOU? - Grandmaster Ult
 
 
     SeanPhillips (https://youtube.com/@seanphillipsmusic / www.seanphillipsmusic.co.uk)
@@ -99,3 +99,23 @@ lute (b1).ogg: https://www.youtube.com/watch?v=n-wlB48Sq94
 harp (b1).ogg: https://www.youtube.com/watch?v=DaGdjI4HGTg
 flute (b1).ogg: https://www.youtube.com/watch?v=_bhiGbnfMT4
 viola (b1): https://www.youtube.com/watch?v=qmS-rX0_qRQ
+
+lute (9): https://youtu.be/0bLkPvYhSLA
+lute (10).ogg: https://youtu.be/zMJ54j6Ep70
+lute (11).ogg: https://www.youtube.com/watch?v=xJh865acA-U
+
+guitar (21).ogg: https://youtu.be/IXQqLbCX2Co
+
+accord (10).ogg: https://youtu.be/CFwhB-nR1eI
+accord (11).ogg: https://youtu.be/7n-bWSGcM-Q
+accord (12).ogg: https://youtu.be/NeBiRfUI9Tg
+accord (13).ogg: https://youtu.be/maQzUyKfReI
+accord (14).ogg: https://youtu.be/8tHrANh_TlI
+accord (15).ogg: https://youtu.be/mpI6WmE4OvI
+accord (16).ogg: https://youtu.be/ptUitzO-Cyk
+accord (17).ogg: https://youtu.be/DOuu1cfDgrU
+
+accord (18).ogg: https://youtu.be/r9-gd6nyuSg
+accord (19).ogg: https://youtu.be/uK_AfAr446g
+
+drum (6).ogg: https://youtu.be/J8hzw3Lpk9Q

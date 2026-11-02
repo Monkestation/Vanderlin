@@ -34,6 +34,7 @@
 		var/mob/living/L = AM
 		if(L.z == z)
 			if(!HAS_TRAIT(L, TRAIT_KNEESTINGER_IMMUNITY))
+				take_damage(15, BRUTE)
 				if(L.electrocute_act(20, src))
 					L.emote("painscream")
 					L.update_sneak_invis(TRUE)

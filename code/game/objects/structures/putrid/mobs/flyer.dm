@@ -2,7 +2,7 @@
 	icon_state = "flyer"
 	icon_living = "flyer"
 	icon_dead = "flyer_dead"
-	icon = 'icons/obj/cellular/wide_putrid.dmi'
+	icon = 'icons/obj/cellular/putrid_small.dmi'
 
 	movement_type = FLYING
 

@@ -320,7 +320,7 @@
 			return strings("accents/dwarf_replacement.json", "dwarf")
 		if("Infernal")
 			return strings("accents/spanish_replacement.json", "spanish")
-		if("Celestial")
+		if("Celestial", "Lunaris")
 			return
 		if("Orcish")
 			return strings("accents/halforc_replacement.json", "halforc")
@@ -585,15 +585,18 @@
 		var/list/organ_dna_list = pref_load.get_organ_dna_list()
 		for(var/organ_slot in organ_dna_list)
 			C.dna.organ_dna[organ_slot] = organ_dna_list[organ_slot]
+
 	//what should be put in if there is no mutantorgan (brains handled seperately)
 	var/list/slot_mutantorgans = organs
 	var/list/slots_to_iterate = list()
 	for(var/slot in C.dna.organ_dna)
 		slots_to_iterate |= slot
+
 	for(var/slot in slot_mutantorgans)
 		if(!is_organ_slot_allowed(C, slot))
 			continue
 		slots_to_iterate |= slot
+
 	// Remove the organs from the slots they should have nothing in
 	for(var/obj/item/organ/organ in C.internal_organs)
 		if(organ.slot in slots_to_iterate)
@@ -602,6 +605,7 @@
 			continue
 		organ.Remove(C, TRUE)
 		QDEL_NULL(organ)
+
 	var/list/source_key_list = color_key_source_list_from_carbon(C)
 	for(var/slot in slots_to_iterate)
 		var/obj/item/organ/oldorgan = C.getorganslot(slot) //used in removing
@@ -637,7 +641,7 @@
 			if(slot == ORGAN_SLOT_BRAIN)
 				var/obj/item/organ/brain/brain = oldorgan
 				if(!brain.decoy_override)//"Just keep it if it's fake" - confucius, probably
-					brain.Remove(C,TRUE, TRUE) //brain argument used so it doesn't cause any... sudden death.
+					brain.Remove(C, TRUE, movement_flags = NO_ID_TRANSFER) //brain argument used so it doesn't cause any... sudden death.
 					QDEL_NULL(brain)
 					oldorgan = null //now deleted
 			else
@@ -650,7 +654,7 @@
 		else if(should_have && !(initial(neworgan.zone) in excluded_zones))
 			used_neworgan = TRUE
 			if(neworgan)
-				neworgan.Insert(C, TRUE, FALSE)
+				neworgan.Insert(C, TRUE)
 				if(slot in PAIRED_ORGAN_SLOTS)
 					var/obj/item/organ/paired_organ = new neworgan.type()
 					paired_organ.switch_side(neworgan.side == RIGHT_SIDE ? LEFT_SIDE : RIGHT_SIDE)
@@ -661,7 +665,7 @@
 					if(pref_load)
 						pref_load.customize_organ(paired_organ)
 					if(!(initial(paired_organ.zone) in excluded_zones))
-						paired_organ.Insert(C, TRUE, FALSE)
+						paired_organ.Insert(C, TRUE)
 					else
 						qdel(paired_organ)
 		if(!used_neworgan)
@@ -739,7 +743,7 @@
 	/// Check if we have any customizer entries that don't match.
 	for(var/datum/customizer_entry/entry as anything in customizer_entries)
 		var/validated = FALSE
-		for(var/customizer_type as anything in customizers)
+		for(var/customizer_type in customizers)
 			if(customizer_type != entry.customizer_type)
 				continue
 			var/datum/customizer/customizer = CUSTOMIZER(customizer_type)
@@ -755,7 +759,7 @@
 			customizer_entries -= entry
 
 	/// Check if we have any missing customizer entries
-	for(var/customizer_type as anything in customizers)
+	for(var/customizer_type in customizers)
 		var/found = FALSE
 		for(var/datum/customizer_entry/entry as anything in customizer_entries)
 			if(entry.customizer_type != customizer_type)
@@ -806,15 +810,15 @@
 			else	//Entries in the list should only ever be items or null, so if it's not an item, we can assume it's an empty hand
 				C.put_in_hands(new mutanthands())
 
-	for(var/trait as anything in inherent_traits)
+	for(var/trait in inherent_traits)
 		ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	if(LAZYLEN(inherent_traits_f) && C.gender == FEMALE)
-		for(var/trait as anything in inherent_traits_f)
+		for(var/trait in inherent_traits_f)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	if(LAZYLEN(inherent_traits_m) && C.gender == MALE)
-		for(var/trait as anything in inherent_traits_m)
+		for(var/trait in inherent_traits_m)
 			ADD_TRAIT(C, trait, SPECIES_TRAIT)
 
 	if(inherent_sheet)
@@ -1381,7 +1385,7 @@
 		return TRUE
 
 ///This proc handles punching damage. IMPORTANT: Our owner is the TARGET and not the USER in this proc. For whatever reason...
-/datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style)
+/datum/species/proc/harm(mob/living/carbon/human/user, mob/living/carbon/human/target, datum/martial_art/attacker_style, damage_type)
 	if(HAS_TRAIT(user, TRAIT_PACIFISM))
 		to_chat(user, "<span class='warning'>I don't want to harm [target]!</span>")
 		return FALSE
@@ -1430,7 +1434,9 @@
 		if(!target.lying_attack_check(user))
 			return 0
 
-		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = user.used_intent.blade_class)
+		var/list/split = list()
+		target.run_armor_check(selzone, damage_type, blade_dulling = user.used_intent.blade_class, damage = damage, split_output = split)
+
 
 		target.lastattacker = user.real_name
 		if(target.mind)
@@ -1443,8 +1449,16 @@
 		target.next_attack_msg.Cut()
 
 		var/nodmg = FALSE
-		var/actual_damage = target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block, skip_dtype = TRUE)
-		if(!actual_damage)
+		var/typed_actual = 0
+		var/blunt_actual = 0
+
+		if(split[DAMAGE_TYPED] > 0)
+			typed_actual = target.apply_damage(split[DAMAGE_TYPED], damage_type, affecting, 0)
+		if(split[DAMAGE_BLUNT] > 0)
+			blunt_actual = target.apply_damage(split[DAMAGE_BLUNT], BRUTE, affecting, 0, can_crit = FALSE)
+
+		var/real_damage = typed_actual + blunt_actual
+		if(!real_damage)
 			nodmg = TRUE
 			target.next_attack_msg += " <span class='warning'>Armor stops the damage.</span>"
 		else
@@ -1452,7 +1466,7 @@
 			if(affecting.body_zone == BODY_ZONE_HEAD)
 				SEND_SIGNAL(user, COMSIG_HEAD_PUNCHED, target)
 		log_combat(user, target, "punched")
-		knockback(attacker_style, target, user, actual_damage)
+		knockback(attacker_style, target, user, real_damage)
 
 		if(!nodmg)
 			if(user.limb_destroyer)
@@ -1652,7 +1666,8 @@
 				target.mind.attackedme[user.real_name] = world.time
 			var/selzone = accuracy_check(user.zone_selected, user, target, /datum/attribute/skill/combat/unarmed, user.used_intent)
 			var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
-			var/damage = user.get_kick_damage(2.5)
+			var/damage = user.get_kick_damage() * 1.5
+			//note we don't really pass in a list for EP because this is pure blunt so its redundant
 			var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
 			var/balance = 10
 			target.next_attack_msg.Cut()
@@ -1758,8 +1773,9 @@
 		var/obj/item/bodypart/affecting = target.get_bodypart(check_zone(selzone))
 		if(!affecting)
 			affecting = target.get_bodypart(BODY_ZONE_CHEST)
+		//note we don't really pass in a list for EP because this is pure blunt so its redundant
 		var/armor_block = target.run_armor_check(selzone, "blunt", blade_dulling = BCLASS_BLUNT)
-		var/damage = user.get_kick_damage(1.4)
+		var/damage = user.get_kick_damage()
 		var/damage_blocked = FALSE
 
 		if(!target.apply_damage(damage, user.dna.species.attack_type, affecting, armor_block))
@@ -1817,10 +1833,10 @@
 			disarm(M, H, attacker_style)
 			return
 	if(istype(M.used_intent, /datum/intent/unarmed))
-		harm(M, H, attacker_style)
+		harm(M, H, attacker_style, M.used_intent.blade_class)
 
 // We need to remove this
-/datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, selzone, accurate = FALSE)
+/datum/species/proc/spec_attacked_by(obj/item/I, mob/living/user, obj/item/bodypart/affecting, intent, mob/living/carbon/human/H, selzone, accurate = FALSE, signal)
 	if(!I || !affecting)
 		return FALSE
 
@@ -1855,7 +1871,10 @@
 
 	var/pen = I.armor_penetration
 	if(user.used_intent?.penfactor)
-		pen = I.armor_penetration + user.used_intent.penfactor
+		if(user.used_intent.reach > 1 && user.Adjacent(H))
+			pen += user.used_intent.penfactor/2
+		else
+			pen += user.used_intent.penfactor
 
 	var/knockout_modifier = 0
 	if(!H.cmode && !H.stat && H.body_position != LYING_DOWN && user.m_intent == MOVE_INTENT_SNEAK && (H.dir == REVERSE_DIR(get_dir(H, user))))
@@ -1872,9 +1891,22 @@
 
 	var/def_zone = affecting.body_zone
 
-	var/armor_block = H.run_armor_check(selzone, I.damage_type, "", "", pen, damage = item_force, blade_dulling = user.used_intent.blade_class)
+	var/list/split = list()
+	H.run_armor_check(selzone, I.damage_type, "", "", pen, damage = item_force, blade_dulling = user.used_intent.blade_class, split_output = split)
+	if(signal & COMPONENT_ITEM_NO_DEFENSE)
+		split[DAMAGE_TYPED] = item_force
+		split[DAMAGE_BLUNT] = 0
 	var/weakness = H.check_weakness(I, user)
-	var/actual_damage = apply_damage(item_force * weakness, I.damtype, def_zone, armor_block, H, skip_dtype = TRUE)
+
+	var/typed_actual = 0
+	var/blunt_actual = 0
+
+	if(split[DAMAGE_TYPED] > 0)
+		typed_actual = apply_damage(split[DAMAGE_TYPED] * weakness, I.damtype, def_zone, 0, H, skip_dtype = TRUE)
+	if(split[DAMAGE_BLUNT] > 0)
+		blunt_actual = apply_damage(split[DAMAGE_BLUNT] * weakness, BRUTE, def_zone, 0, H, skip_dtype = TRUE, can_crit = FALSE)
+
+	var/actual_damage = typed_actual + blunt_actual
 	SEND_SIGNAL(I, COMSIG_ITEM_SPEC_ATTACKEDBY, H, user, affecting, actual_damage)
 
 	if(!actual_damage)
@@ -1884,7 +1916,12 @@
 			I.take_damage(1, BRUTE, I.damage_type)
 		return TRUE
 
-	var/datum/wound/bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, actual_damage, user, selzone, crit_message = TRUE, modifiers = list(CRIT_MOD_KNOCKOUT_CHANCE = knockout_modifier), incoming_germ = I.germ_level, pre_applied = TRUE)
+	var/datum/wound/bodypart_wound
+	if(typed_actual > 0)
+		bodypart_wound = affecting.bodypart_attacked_by(user.used_intent.blade_class, typed_actual, user, selzone, crit_message = TRUE, modifiers = list(CRIT_MOD_KNOCKOUT_CHANCE = knockout_modifier), incoming_germ = I.germ_level, pre_applied = TRUE)
+	if(blunt_actual > 0)
+		affecting.bodypart_attacked_by(BCLASS_BLUNT, blunt_actual, user, selzone, crit_message = (typed_actual <= 0), modifiers = list(CRIT_MOD_KNOCKOUT_CHANCE = knockout_modifier), incoming_germ = I.germ_level, pre_applied = TRUE)
+
 	H.send_item_attack_message(I, user, parse_zone(selzone))
 
 	if(istype(bodypart_wound) && bodypart_wound?.should_embed(I))
@@ -2144,7 +2181,7 @@
 /datum/species/proc/handle_temperature_effects(mob/living/carbon/human/H)
 	var/debuff_level = 0
 	// Heat damage and effects
-	if(H.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT && !HAS_TRAIT(H, TRAIT_RESISTHEAT))
+	if(H.bodytemperature > BODYTEMP_HEAT_DAMAGE_LIMIT && !HAS_TRAIT(H, TRAIT_RESISTHEAT) && !HAS_TRAIT(H, TRAIT_DEVIL_MARKED_ABADDON))
 		remove_cold_stress(H)
 
 		var/heat_excess = H.bodytemperature - BODYTEMP_HEAT_DAMAGE_LIMIT
@@ -2294,19 +2331,19 @@
 			// Mild heat stress - slight stamina drain
 			if(!H.temp_debuff_level || H.temp_debuff_level < 1)
 				H.temp_debuff_level = 1
-				H.adjust_hydration(-HUNGER_FACTOR * 0.5)
+				H.adjust_hydration(-H.total_nutriment_req * 0.5)
 		if(2)
 			H.throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/hot)
 			// Moderate heat stress - stamina drain + slight slowdown
 			if(!H.temp_debuff_level || H.temp_debuff_level < 2)
 				H.temp_debuff_level = 2
-				H.adjust_hydration(-HUNGER_FACTOR)
+				H.adjust_hydration(-H.total_nutriment_req)
 		if(3)
 			H.throw_alert("temp", /atom/movable/screen/alert/status_effect/debuff/hot)
 			// Severe heat stress - major stamina drain + significant slowdown
 			if(!H.temp_debuff_level || H.temp_debuff_level < 3)
 				H.temp_debuff_level = 3
-				H.adjust_hydration(-HUNGER_FACTOR * 2)
+				H.adjust_hydration(-H.total_nutriment_req * 2)
 
 /datum/species/proc/apply_cold_debuffs(mob/living/carbon/human/H, level, cold_deficit)
 	switch(level)
@@ -2409,7 +2446,7 @@
 			H.add_stress(/datum/stress_event/on_fire)
 
 /datum/species/proc/CanIgniteMob(mob/living/carbon/human/H)
-	if(H.status_flags & GODMODE)
+	if(HAS_TRAIT(H, TRAIT_GODMODE))
 		return FALSE
 	if(H.divine_fire_stacks > 0) // tieflings can't say no to astrata
 		return TRUE

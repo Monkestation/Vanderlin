@@ -1,0 +1,31 @@
+/datum/armor/neck/maille
+	blunt = 45
+	slash = 55
+	stab = 55
+	piercing = 40
+	fire = 0
+	acid = 0
+
+/datum/armor/neck/maille/good
+	blunt = 55
+	slash = 60
+	stab = 60
+	piercing = 45
+	fire = 0
+	acid = 0
+
+/datum/armor/neck/maille/iron
+	blunt = 30
+	slash = 45
+	stab = 50
+	piercing = 30
+	fire = 0
+	acid = 0
+
+/datum/armor/neck/maille/bloodsteel
+	blunt = 65
+	slash = 65
+	stab = 65
+	piercing = 55
+	fire = 0
+	acid = 0

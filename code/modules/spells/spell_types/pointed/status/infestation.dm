@@ -5,12 +5,9 @@
 	self_cast_possible = FALSE
 	sound = 'sound/magic/whiteflame.ogg'
 
-	point_cost = 1
-	associated_skill = /datum/attribute/skill/magic/druidic
-	attunements = list(
-		/datum/attunement/dark = 0.3,
-		/datum/attunement/death = 0.3,
-	)
+	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
+	required_technique = TECHNIQUE_SUMMONING
 
 	invocation = "Rot, take them!"
 	invocation_type = INVOCATION_SHOUT

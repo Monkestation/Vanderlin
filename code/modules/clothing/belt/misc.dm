@@ -30,7 +30,7 @@
 
 	populate_contents = list(
 		/obj/item/reagent_containers/glass/bottle/poison,
-		/obj/item/weapon/knife/dagger/steel/profane,
+		/obj/item/weapon/knife/dagger/steel/inhumen/profane,
 		/obj/item/lockpick,
 	)
 
@@ -58,6 +58,12 @@
 	populate_contents = list(
 		/obj/item/needle/thorn,
 		/obj/item/key/forrestgarrison,
+	)
+
+/obj/item/storage/belt/leather/gallowband
+	populate_contents = list(
+		/obj/item/needle/thorn,
+		/obj/item/storage/keyring/gallowband,
 	)
 
 /obj/item/storage/belt/leather/townguard //they get their keys + dagger there
@@ -96,6 +102,12 @@
 	name = "shalal belt"
 	icon_state = "shalal"
 	sellprice = 5
+
+/obj/item/storage/belt/leather/shalal/courtagent
+	populate_contents = list(
+		/obj/item/storage/keyring/courtagent,
+		/obj/item/lockpickring/mundane,
+	)
 
 /obj/item/storage/belt/leather/black
 	name = "black belt"
@@ -179,7 +191,7 @@
 /obj/item/storage/belt/leather/breechcloth
 	name = "belt with breechcloth"
 	desc = "A fine leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
-	icon_state = "breechbelt"
+	icon_state = "breechcloth"
 	detail_tag = "_detail"
 	detail_color = CLOTHING_TARAXACUM_YELLOW
 	sewrepair = FALSE
@@ -187,7 +199,7 @@
 /obj/item/storage/belt/leather/breechcloth/blackbelt
 	name = "black belt with breechcloth"
 	desc = "A fine black-leather strap notched with holes for a buckle to secure itself, and nestled above a halved tabard's coverings."
-	icon_state = "breechbeltalt"
+	icon_state = "breechclothalt"
 
 /obj/item/storage/belt/leather/slayer
 	name = "rugged dwarven belt"
@@ -219,6 +231,7 @@
 	component_type = /datum/component/storage/concrete/grid/coin_pouch
 	grid_height = 64
 	grid_width = 32
+	pickpocket_difficulty = SKILL_RANK_JOURNEYMAN
 
 /obj/item/storage/belt/pouch/medicine
 	populate_contents = list(
@@ -370,7 +383,7 @@
 	salvage_result = /obj/item/natural/cloth
 	component_type = /datum/component/storage/concrete/grid/satchel/cloth/big
 
-/obj/item/storage/backpack/satchel/otavan
+/obj/item/storage/backpack/satchel/grenzel
 	name = "grenzelhoftian leather satchel"
 	examine_name = "satchel"
 	desc = "A made to last leather bag from the Psydonian heart of Grenzelhoft. It's Grenzelhoft's finest."
@@ -392,6 +405,35 @@
 /obj/item/storage/backpack/satchel/black
 	color = CLOTHING_SOOT_BLACK
 
+/obj/item/storage/backpack/satchel/deadite_hunter/populate_contents()
+	for(var/i in 1 to rand(2, 10))
+		var/obj/item/type = pickweight(list(
+			/obj/item/natural/fur/volf = 1,
+			/obj/item/natural/fur/direbear = 1,
+			/obj/item/natural/fur/fox = 1,
+			/obj/item/natural/fur/raccoon = 1,
+			/obj/item/natural/fur/bobcat = 1,
+			/obj/item/reagent_containers/food/snacks/meat/steak = 6,
+			/obj/item/natural/hide = 3,
+		))
+		new type(src)
+
+/obj/item/storage/backpack/satchel/cloth/undead_miner/populate_contents()
+	. = ..()
+	for(var/i in 1 to rand(3, 5))
+		var/obj/item/ore/ore_type = pickweight(list(
+			/obj/item/ore/gold = 7,
+			/obj/item/ore/silver = 7,
+			/obj/item/ore/iron = 4,
+			/obj/item/ore/coal = 5,
+			/obj/item/ore/copper = 8,
+			/obj/item/ore/tin = 10,
+			/obj/item/ore/cinnabar = 3,
+			/obj/item/gem = 1
+		))
+
+		new ore_type(src)
+
 /obj/item/storage/backpack/backpack
 	name = "backpack"
 	desc = "A bulky backpack worn on the back which can store many items."
@@ -408,7 +450,7 @@
 
 /obj/item/storage/backpack/backpack/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/storage/backpack/backpack/artibackpack
 	name = "cooling backpack"
@@ -448,6 +490,7 @@
 		/obj/item/reagent_containers/syringe,
 	)
 	component_type = /datum/component/storage/concrete/grid/surgery_bag
+	pickpocket_difficulty = SKILL_LEVEL_MASTER
 
 /obj/item/surgeontoolspawner
 	name = "set of surgery tools"
@@ -542,7 +585,7 @@
 /obj/item/storage/belt/leather/knifebelt/psydon/Initialize()
 	. = ..()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/psydon/A = new(loc)
+		var/obj/item/weapon/knife/throwingknife/silver/psydon/A = new(loc)
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
 			qdel(A)
 
@@ -564,10 +607,24 @@
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
 			qdel(A)
 
+/obj/item/storage/belt/leather/knifebelt/black/east_iron/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/weapon/knife/throwingknife/eastern/A = new(loc)
+		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
+			qdel(A)
+
+/obj/item/storage/belt/leather/knifebelt/black/east_steel/Initialize()
+	. = ..()
+	for(var/i in 1 to max_storage)
+		var/obj/item/weapon/knife/throwingknife/steel/eastern/A = new(loc)
+		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
+			qdel(A)
+
 /obj/item/storage/belt/leather/knifebelt/black/psydon/Initialize()
 	. = ..()
 	for(var/i in 1 to max_storage)
-		var/obj/item/weapon/knife/throwingknife/psydon/A = new(loc)
+		var/obj/item/weapon/knife/throwingknife/silver/psydon/A = new(loc)
 		if(!SEND_SIGNAL(src, COMSIG_TRY_STORAGE_INSERT, A, null, TRUE, TRUE))
 			qdel(A)
 

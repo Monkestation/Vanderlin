@@ -1,7 +1,7 @@
 /datum/artificer_recipe
 	abstract_type = /datum/artificer_recipe
 	var/name
-	var/list/additional_items = list()
+	var/list/additional_items
 	var/appro_skill = /datum/attribute/skill/craft/engineering
 	var/atom/required_item
 	var/atom/created_item
@@ -28,7 +28,7 @@
 	if(hammers_per_item == 0)
 		hammered = TRUE
 		user.visible_message(span_warning("[user] hammers the contraption."))
-		if(additional_items.len)
+		if(length(additional_items))
 			needed_item = pick(additional_items)
 			additional_items[needed_item] -= 1
 			if(additional_items[needed_item] <= 0)

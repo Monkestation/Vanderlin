@@ -9,7 +9,7 @@
 		STAT_ENDURANCE = 1,
 		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/swimming = 10,
@@ -24,7 +24,7 @@
 	tutorial = "You're a mineworker, ensure the settlement has stone and ores."
 	department_flag = SERFS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	outfit = /datum/outfit/miner_p
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 

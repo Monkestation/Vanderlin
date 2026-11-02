@@ -155,7 +155,7 @@
 	var/turf/move_target = controller.current_movement_target
 	if(!move_target || get_dist(pawn, move_target) <= 1)
 		finish_action(controller, TRUE)
-		return.
+		return
 
 #undef HARASS_HEALTH_THRESHOLD
 #undef HARASS_STAMINA_THRESHOLD

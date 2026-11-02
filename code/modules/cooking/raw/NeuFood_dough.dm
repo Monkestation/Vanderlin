@@ -352,6 +352,21 @@
 	faretype = FARE_NEUTRAL
 	tastes = list("bread" = 1)
 	item_weight = 80 GRAMS
+	mill_result = /obj/item/reagent_containers/food/snacks/toastcrumbs
+
+/obj/item/reagent_containers/food/snacks/toastcrumbs
+	name = "toast crumbs"
+	desc = "Perfect for adding some crunch to deep-fried food."
+	icon = 'icons/obj/food/raw/raw_deep_fried.dmi'
+	icon_state = "toastcrumbs"
+	slices_num = 0
+	list_reagents = list(/datum/reagent/consumable/nutriment = 6)
+	w_class = WEIGHT_CLASS_TINY
+	tastes = list("crunch" = 1)
+	item_weight = 40 GRAMS
+	foodtype = GRAIN
+	bitesize = 1
+	rotprocess = SHELFLIFE_DECENT
 
 /obj/item/reagent_containers/food/snacks/stale_bread
 	name = "stale bread"
@@ -377,7 +392,7 @@
 	nutrition = BREAD_NUTRITION * 0.5 + RAISIN_NUTRITION
 
 /obj/item/reagent_containers/food/snacks/stale_bread/raisin/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 /*	.................   Raisin bread   ................... */
 /obj/item/reagent_containers/food/snacks/raisindough
@@ -409,7 +424,7 @@
 	tastes = list("bread" = 1,"dried fruit" = 1)
 
 /obj/item/reagent_containers/food/snacks/bread/raisin/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 /obj/item/reagent_containers/food/snacks/breadslice/raisin
 	name = "raisinbread slice"
@@ -422,7 +437,7 @@
 	tastes = list("bread" = 1,"dried fruit" = 1)
 
 /obj/item/reagent_containers/food/snacks/breadslice/raisin/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 /*	.................   Bookbread   ................... */
 
@@ -557,13 +572,13 @@
 
 /*	.................   Raisin Bookbread (Poison)  ................... */
 /obj/item/reagent_containers/food/snacks/jacksberrybutterdough/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 /obj/item/reagent_containers/food/snacks/bread/bookbread/jacksberry/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 /obj/item/reagent_containers/food/snacks/bookbreadslice/jacksberry/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 /*	.................   Blackberry Bookbread   ................... */
 /obj/item/reagent_containers/food/snacks/blackberrybutterdough
@@ -1546,7 +1561,7 @@
 	tastes = list("crunchy sunreed dough" = 1, "infernal spice" = 1)
 	faretype = FARE_NEUTRAL
 	stacktype = /obj/item/reagent_containers/food/snacks/chip_drowsbane
-	list_reagents = list(/datum/reagent/drowsbane = 10)
+	list_reagents = list(/datum/reagent/poison/drowsbane = 10)
 
 /obj/item/reagent_containers/food/snacks/chip
 	name = "sun-crackers"
@@ -1579,7 +1594,7 @@
 	tastes = list("crunchy sunreed dough" = 1, "infernal spice" = 1)
 	dropshrink = 0.8
 	faretype = FARE_NEUTRAL
-	list_reagents = list(/datum/reagent/drowsbane = 2)
+	list_reagents = list(/datum/reagent/poison/drowsbane = 2)
 	item_weight = 30 GRAMS
 
 /*-----------\
@@ -1673,7 +1688,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | DAIRY | RAW
 	faretype = FARE_IMPOVERISHED
-	list_reagents = list(/datum/reagent/drowsbane = 5)
+	list_reagents = list(/datum/reagent/poison/drowsbane = 5)
 	item_weight = 120 GRAMS
 
 
@@ -1688,7 +1703,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	foodtype = GRAIN | DAIRY
 	faretype = FARE_POOR
-	list_reagents = list(/datum/reagent/drowsbane = 20) //Sublethal levels.
+	list_reagents = list(/datum/reagent/poison/drowsbane = 20) //Sublethal levels.
 	item_weight = 120 GRAMS
 
 /*---------\
@@ -1758,7 +1773,7 @@
 	good_quality_descriptors()
 
 /obj/item/reagent_containers/food/snacks/biscuit/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 /*	.................   Prezzel   ................... */
 /obj/item/reagent_containers/food/snacks/foodbase/prezzel_raw
@@ -1939,7 +1954,7 @@
 	item_weight = 400 GRAMS
 
 /obj/item/reagent_containers/food/snacks/chescake_ready/poison
-	list_reagents = list(/datum/reagent/berrypoison = 6)
+	list_reagents = list(/datum/reagent/poison/berry = 6)
 
 /obj/item/reagent_containers/food/snacks/cheesecake_cooked
 	name = "cheesecake"
@@ -1960,7 +1975,7 @@
 	item_weight = 600 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cheesecake_cooked/poison
-	list_reagents = list(/datum/reagent/berrypoison = 10)
+	list_reagents = list(/datum/reagent/poison/berry = 10)
 
 /obj/item/reagent_containers/food/snacks/cheesecake_slice
 	name = "cheesecake slice"
@@ -1980,7 +1995,7 @@
 	item_weight = 100 GRAMS
 
 /obj/item/reagent_containers/food/snacks/cheesecake_slice/poison
-	list_reagents = list(/datum/reagent/berrypoison = 1.25)
+	list_reagents = list(/datum/reagent/poison/berry = 1.25)
 
 /*	.................   STRAWBERRY CAKE   ................... */
 
@@ -2425,7 +2440,7 @@
 	item_weight = 120 GRAMS
 
 /obj/item/reagent_containers/food/snacks/griddlecake/berry/poison
-	list_reagents = list(/datum/reagent/berrypoison = 5)
+	list_reagents = list(/datum/reagent/poison/berry = 5)
 
 /*	.................   Griddlecake Condiments   ................... */
 

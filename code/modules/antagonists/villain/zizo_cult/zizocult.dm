@@ -30,7 +30,7 @@
 		STAT_STRENGTH = 2,
 	)
 	clamped_adjustment = list(
-		/datum/attribute/skill/misc/reading = list(30, 30),
+		/datum/attribute/skill/educated/reading = list(30, 30),
 	)
 
 /datum/antagonist/zizocultist
@@ -70,8 +70,7 @@
 	)
 
 /datum/antagonist/zizocultist/examine_target(mob/user, mob/examined, list/P, list/examine_contents)
-	var/mob/living/carbon/human/H = examined
-	if(istype(H) && H.virginity)
+	if(HAS_TRAIT(examined, TRAIT_VIRGIN))
 		LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_BODY, span_purple(html_tag("B", "[P[THEYRE]] a virgin!")))
 	. = ..()
 
@@ -130,9 +129,9 @@
 			return FALSE
 		if(new_owner.assigned_role.title in GLOB.inquisition_positions)
 			return FALSE
-		if(new_owner.unconvertable)
+		if(new_owner.assigned_role.title in GLOB.admin_special_positions)
 			return FALSE
-		if(new_owner.current && HAS_TRAIT(new_owner.current, TRAIT_MINDSHIELD))
+		if(new_owner.unconvertable)
 			return FALSE
 
 /datum/antagonist/zizocultist/proc/add_cultist(datum/mind/cult_mind)
@@ -210,7 +209,7 @@
 
 /mob/living/carbon/human/proc/praise()
 	set name = "Praise the Dark Lady!"
-	set category = "RoleUnique.Zizo"
+	set category = "RoleUnique.Patron"
 
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
@@ -221,7 +220,7 @@
 
 /mob/living/carbon/human/proc/communicate()
 	set name = "Communicate with Cult"
-	set category = "RoleUnique.Zizo"
+	set category = "RoleUnique.Patron"
 
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
@@ -451,7 +450,7 @@
 
 /mob/living/carbon/human/proc/draw_sigil()
 	set name = "Draw Sigil"
-	set category = "RoleUnique.Zizo"
+	set category = "RoleUnique.Patron"
 	if(incapacitated(IGNORE_GRAB) || stat >= UNCONSCIOUS)
 		return
 
@@ -471,7 +470,7 @@
 
 /mob/living/carbon/human/proc/release_minion()
 	set name = "Release Lackey"
-	set category = "RoleUnique.Zizo"
+	set category = "RoleUnique.Patron"
 
 	if(!istype(src) || stat == DEAD)
 		return

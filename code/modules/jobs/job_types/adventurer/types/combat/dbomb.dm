@@ -14,16 +14,16 @@
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/craft/alchemy = 20,
 	)
 
 /datum/job/advclass/combat/dbomb
 	title = "Dwarven Bombardier"
 	tutorial = "Wandering tinkerers from the Blackpowder clan that specialize in the production of explosives."
-	allowed_races = list(SPEC_ID_DWARF)
+	allowed_races = list(SPEC_ID_DWARF, SPEC_ID_DWARF_ORC)
 	outfit = /datum/outfit/adventurer/dbomb
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/dbomb
 

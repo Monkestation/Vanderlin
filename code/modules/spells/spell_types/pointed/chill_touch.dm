@@ -5,11 +5,8 @@
 	sound = 'sound/magic/whiteflame.ogg'
 	self_cast_possible = FALSE
 
-	point_cost = 2
-	attunements = list(
-		/datum/attunement/ice = 0.3,
-		/datum/attunement/death = 0.2,
-	)
+	required_form = FORM_ICE
+	associated_skill = /datum/attribute/skill/magic/arcane/ice
 
 	invocation = "Death grip you!"
 	invocation_type = INVOCATION_SHOUT

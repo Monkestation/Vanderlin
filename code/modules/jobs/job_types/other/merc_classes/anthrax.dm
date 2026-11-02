@@ -7,7 +7,7 @@
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 10,
 	)
 
@@ -79,7 +79,7 @@
 
 /datum/outfit/mercenary/anthrax
 	name = "Anthrax (Mercenary)"
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	belt = /obj/item/storage/belt/leather/mercenary/black
 	pants = /obj/item/clothing/pants/trou/shadowpants
 	backl = /obj/item/storage/backpack/satchel

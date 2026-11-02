@@ -17,18 +17,15 @@
 /datum/species/human/halfzizo
 	name = "Half-Snow Elf"
 	id = SPEC_ID_HALF_SNOW_ELF
-	id_override = SPEC_ID_HALF_DROW
+	id_override = SPEC_ID_DROW
 	multiple_accents = list(
 		"Humen Accent" = "Imperial",
 		"Dark Elf Accent" = "Elfish"
 	)
 	desc = "The bastards of Zizo \
 	\n\n\
-	The distinction between Half-Elves and 'Half-Drow' has been a subject of debate for centuries. \
-	While similar in physicality and longevity to their non-drow cousins, their origins cause them to face discrimination akin to their elven side. \
-	\n\n\
-	Groups of half-elves and half-drow have been known to congregate together and consider themselves one species. \
-	According to some radical academic scholars, they might be one and the same species indeed- yet the people of Psydonia certainly do not believe the same at large. \
+	After Zizo's ascension, only her own blood line amongst the snow elves survived, while most stayed within Subterra blending into the dark elf population, some left and produced children with other races. \
+	Half-snow elves are the result of these unions. \
 	\n\
 	WARNING: THIS IS A HEAVILY DISCRIMINATED AGAINST CHALLENGE SPECIES WITH ACTIVE SPECIES DETRIMENTS. YOU CAN AND WILL DIE A LOT; PLAY AT YOUR OWN RISK!"
 

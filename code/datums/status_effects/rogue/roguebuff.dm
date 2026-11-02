@@ -25,24 +25,6 @@
 		var/mob/living/carbon/C = owner
 		C.remove_stress(/datum/stress_event/drunk)
 
-/datum/status_effect/buff/foodbuff
-	id = "Food Buff"
-	alert_type = /atom/movable/screen/alert/status_effect/buff/foodbuff
-	effectedstats = list(STAT_CONSTITUTION = 1, STAT_ENDURANCE = 1)
-	duration = 15 MINUTES
-	tick_interval = STATUS_EFFECT_NO_TICK
-
-/atom/movable/screen/alert/status_effect/buff/foodbuff
-	name = "Great Meal"
-	desc = span_nicegreen("That was a good meal!")
-	icon_state = "foodbuff"
-
-/datum/status_effect/buff/foodbuff/on_apply()
-	. = ..()
-	if(iscarbon(owner))
-		var/mob/living/carbon/C = owner
-		C.add_stress(/datum/stress_event/goodfood)
-
 //============= CLEAN PLUS ===============
 /datum/status_effect/buff/clean_plus
 	id = "cleanplus"
@@ -66,7 +48,7 @@
 /datum/status_effect/buff/druqks
 	id = "druqks"
 	alert_type = /atom/movable/screen/alert/status_effect/buff/druqks
-	effectedstats = list(STAT_INTELLIGENCE = 4, STAT_SPEED = 2, STAT_FORTUNE = -5)
+	effectedstats = list(STAT_INTELLIGENCE = 4, STAT_SPEED = 2, STAT_FORTUNE = -3)
 	duration = 2 MINUTES
 	tick_interval = STATUS_EFFECT_NO_TICK
 
@@ -725,7 +707,7 @@
 	for (var/mob/living/carbon/human/H in hearers(7, owner))
 		if (!H.client)
 			continue
-		if(!H.can_hear())
+		if(HAS_TRAIT(H, TRAIT_DEAF))
 			continue
 		if(H.mind?.has_antag_datum(/datum/antagonist))
 			if(!H.mind?.isactuallygood())
@@ -873,7 +855,7 @@
 	for (var/mob/living/carbon/human/H in hearers(7, owner))
 		if (!H.client)
 			continue
-		if(!H.can_hear())
+		if(HAS_TRAIT(H, TRAIT_DEAF))
 			continue
 		if(H.mind?.has_antag_datum(/datum/antagonist))
 			if(!H.mind?.isactuallygood())
@@ -1020,3 +1002,19 @@
 /atom/movable/screen/alert/status_effect/buff/free_feet
 	name = "Foot Freedom"
 	desc = "Not wearing shoes allows me to move more freely."
+
+/atom/movable/screen/alert/status_effect/buff/campfire_stamina
+	name = "Warm Rest"
+	desc = "It is nice and warm, I'm recovering my energy."
+	icon_state = "campfire"
+
+
+/datum/status_effect/buff/campfire_stamina
+	id = "stamina_campfire"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/campfire_stamina
+	duration = 5 SECONDS
+
+/datum/status_effect/buff/campfire_stamina/tick()
+	if(owner.cmode)
+		return
+	owner.adjust_energy(5)

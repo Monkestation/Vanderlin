@@ -8,7 +8,7 @@
 	layer = TABLE_LAYER //So that the crate inside doesn't appear underneath
 	allow_dense = TRUE
 	can_weld_shut = FALSE
-	armor = list("blunt" = 30, "slash" = 30, "stab" = 30,  "piercing" = 50, "fire" = 100, "acid" = 80)
+	armor_type = /datum/armor/supply_pod
 	anchored = TRUE //So it cant slide around after landing
 	anchorable = FALSE
 	flags_1 = PREVENT_CONTENTS_EXPLOSION_1

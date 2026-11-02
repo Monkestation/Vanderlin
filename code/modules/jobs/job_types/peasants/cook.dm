@@ -2,12 +2,17 @@
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 1,
 		STAT_INTELLIGENCE = 1,
-		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/labor/butchering = 30,
 		/datum/attribute/skill/labor/taming = 10,
 		/datum/attribute/skill/labor/farming = 10
@@ -17,9 +22,9 @@
 	raw_attribute_list = list(
 		STAT_ENDURANCE = 1,
 		STAT_INTELLIGENCE = 1,
-		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		STAT_CONSTITUTION = 2,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 50,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/sewing = 10,
@@ -36,16 +41,17 @@
 	You've spent more nites than you can count cutting meat and vegetables until your fingers are bloody and raw, but it's honest work."
 	department_flag = PEASANTS
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/cook
 	display_order = JDO_COOK
 	give_bank_account = 8
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 	can_be_apprentice = TRUE
 

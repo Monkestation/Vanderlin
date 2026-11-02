@@ -10,12 +10,13 @@
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/craft/tanning = 20,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/craft/carpentry = 30,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/magic/holy = 30,
-		/datum/attribute/skill/misc/medicine = 10,
+		/datum/attribute/skill/magic/druidic = 40,
+		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/labor/butchering = 30,
 		/datum/attribute/skill/labor/lumberjacking = 10
@@ -27,25 +28,27 @@
 	tutorial = "Once you walked these woods as its Warden, until your bones ached too much to pick up your axe. Now you guide the next generation of hunters to follow in your footsteps. Advise them well. Accept your devotion's rewards with open eyes and arms."
 	department_flag = GALLOWBAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_GALLOWBAND
+	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_FORPREACH
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = list(AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	exp_type = list(EXP_TYPE_CHURCH)
 	exp_types_granted = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_CHURCH)
 	exp_requirements = list(
 		EXP_TYPE_CHURCH = 600
 	)
+	spells = list(/datum/action/cooldown/spell/diagnose/holy/hunt)
 
 	outfit = /datum/outfit/forestpreacher
 	give_bank_account = 40
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison.ogg'
 
 	job_bitflag = BITFLAG_GARRISON
@@ -59,6 +62,7 @@
 
 	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
 	languages = list(/datum/language/gronnic)
+	book_type = /obj/item/recipe_book/medical
 
 /datum/job/forestpreacher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -79,20 +83,20 @@
 
 /datum/outfit/forestpreacher
 	name = JOB_FOREST_PREACHER
-	armor = /obj/item/clothing/armor/leather/atgervi
-	neck = /obj/item/clothing/neck/psycross/great_hunt
+	armor = /obj/item/clothing/armor/leather/shamancoat
+	neck = /obj/item/clothing/neck/psycross/great_hunt/divine_link
 	pants = /obj/item/clothing/pants/trou/leather/gronn
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	head = /obj/item/clothing/head/helmet/leather/shaman_hood
-	gloves = /obj/item/clothing/gloves/plate/atgervi
+	gloves = /obj/item/clothing/gloves/plate/beastclaws
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/storage/belt/pouch/coins/mid
 	backl = /obj/item/storage/backpack/satchel
-	r_hand = /obj/item/weapon/polearm/woodstaff
+	backr = /obj/item/weapon/polearm/spear
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/key/forrestgarrison = 1,
+		/obj/item/storage/keyring/gallowband/gothi = 1,
 		/obj/item/needle = 1,
 	)

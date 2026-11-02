@@ -41,6 +41,33 @@
 	)
 	traits = list(TRAIT_DIVINE_SERVANT)
 
+/datum/devotion/divine/noc/make_oracle()
+	devotion = 300
+	progression = CLERIC_REQ_3
+	passive_devotion_gain = 1
+	/// We're overriding the list.
+	miracles = list(
+		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/healing/greater/noc),
+		CLERIC_T1 = /datum/action/cooldown/spell/status/invisibility,
+		CLERIC_T2 = /datum/action/cooldown/spell/blindness/miracle,
+		CLERIC_T3 = list(/datum/action/cooldown/spell/projectile/moonlit_dagger, /datum/action/cooldown/spell/projectile/moonstrike),
+	)
+	miracles_extra += list(
+		/datum/action/cooldown/spell/revive_noc,
+		/datum/action/cooldown/spell/cure_rot,
+		/datum/action/cooldown/spell/diagnose/holy,
+	)
+	devotion_class = DEVOTION_CLASS_ACOLYTE // Equal to priest, but unique to Noc. Changing patron will reset to Acolyte tier.
+
+/datum/devotion/divine/noc/make_lunar_champion()
+	devotion = 250
+	max_devotion = 500
+	progression = CLERIC_REQ_3
+	devotion_class = DEVOTION_CLASS_TEMPLAR
+	miracles_extra += list(
+		/datum/action/cooldown/spell/projectile/moonstrike,
+	)
+
 /datum/devotion/divine/dendor
 	miracles = list(
 		CLERIC_T0 = /datum/action/cooldown/spell/healing,
@@ -75,7 +102,7 @@
 	miracles = list(
 		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/avert),
 		CLERIC_T1 = /datum/action/cooldown/spell/burial_rites,
-		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/locate_dead, /datum/action/cooldown/spell/aoe/abrogation, /datum/action/cooldown/spell/undirected/soul_speak, ),
+		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/locate_dead, /datum/action/cooldown/spell/aoe/abrogation, /datum/action/cooldown/spell/undirected/soul_speak),
 		CLERIC_T3 = /datum/action/cooldown/spell/aoe/churn_undead,
 	)
 	favored_species = list(SPEC_ID_AASIMAR)
@@ -112,7 +139,7 @@
 /datum/devotion/divine/pestra
 	miracles = list(
 		CLERIC_T0 = list(/datum/action/cooldown/spell/healing, /datum/action/cooldown/spell/undirected/conjure_item/summon_leech/pestra),
-		CLERIC_T1 = /datum/action/cooldown/spell/diagnose/holy,
+		CLERIC_T1 = /datum/action/cooldown/spell/diagnose/holy/pestra,
 		CLERIC_T2 = /datum/action/cooldown/spell/attach_bodypart,
 		CLERIC_T3 = /datum/action/cooldown/spell/cure_rot,
 	)
@@ -185,9 +212,9 @@
 
 /datum/devotion/inhumen/zizo
 	miracles = list(
-		CLERIC_T0 = list(/datum/action/cooldown/spell/undirected/touch/orison, /datum/action/cooldown/spell/aoe/snuff),
+		CLERIC_T0 = list(/datum/action/cooldown/spell/undirected/touch/orison/unholy, /datum/action/cooldown/spell/aoe/snuff),
 		CLERIC_T1 = /datum/action/cooldown/spell/projectile/profane,
-		CLERIC_T2 = /datum/action/cooldown/spell/conjure/raise_lesser_undead,
+		CLERIC_T2 = /datum/action/cooldown/spell/conjure_summon/raise_lesser_undead,
 		CLERIC_T3 = /datum/action/cooldown/spell/undirected/rituos,
 	)
 	traits = list(TRAIT_DEATHSIGHT)
@@ -231,6 +258,44 @@
 	miracles = list(
 		CLERIC_T0 = /datum/action/cooldown/spell/healing/hunt,
 		CLERIC_T1 = list(/datum/action/cooldown/spell/conjure/hunters_trick, /datum/action/cooldown/spell/undirected/hunters_grace),
-		CLERIC_T2 = list(/datum/action/cooldown/spell/undirected/call_to_hunt, /datum/action/cooldown/spell/conjure/will_of_woods)
+		CLERIC_T2 = list(/datum/action/cooldown/spell/beast_tame/great_hunt, /datum/action/cooldown/spell/forest_bind),
+		CLERIC_T3 = list(/datum/action/cooldown/spell/undirected/call_to_hunt, /datum/action/cooldown/spell/conjure/will_of_woods)
 	)
 	traits = list(TRAIT_BRUSHWALK)
+
+// Archdevils
+
+/datum/devotion/archdevil
+	devotion_color = "#510000"
+	devotion_title = "Favor"
+
+/datum/devotion/archdevil/grant_to(mob/living/carbon/human/holder)
+	if(!holder)
+		return
+	if(passive_devotion_gain || passive_progression_gain)
+		START_PROCESSING(SSprocessing, src)
+	holder_mob = holder
+	holder_mob.cleric = src
+	if(SSticker.HasRoundStarted())
+		initialize_hud()
+	else
+		SSticker.OnRoundstart(CALLBACK(src, PROC_REF(initialize_hud)))
+	for(var/trait in traits)
+		ADD_TRAIT(holder_mob, trait, DEVOTION_TRAIT)
+	for(var/datum/action/miracle as anything in miracles_extra)
+		grant_miracle(miracle)
+	check_progression()
+	initialize_tasks()
+
+/datum/devotion/archdevil/update_devotion(amount)
+	. += devotion
+	devotion = clamp(devotion += amount, 0, max_devotion)
+	. -= devotion
+	holder_mob?.hud_used?.bloodpool?.name = "Favor: [devotion]"
+	holder_mob?.hud_used?.bloodpool?.desc = "Favor: [devotion]/[max_devotion]"
+	if(devotion <= 0)
+		holder_mob?.hud_used?.bloodpool?.set_value(0, 1 SECONDS)
+	else
+		holder_mob?.hud_used?.bloodpool?.set_value((100 / (max_devotion / devotion)) / 100, 1 SECONDS)
+	if(.)
+		SEND_SIGNAL(holder_mob, COMSIG_LIVING_DEVOTION_CHANGED, amount)

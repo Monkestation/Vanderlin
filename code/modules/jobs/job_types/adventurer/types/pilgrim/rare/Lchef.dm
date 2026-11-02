@@ -2,15 +2,19 @@
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 3,
 		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 1,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/labor/butchering = 40,
 		/datum/attribute/skill/labor/taming = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/craft/cooking = 60
 	)
 
@@ -18,15 +22,19 @@
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 3,
 		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 1,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/labor/farming = 30,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/labor/butchering = 50,
 		/datum/attribute/skill/labor/taming = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/craft/cooking = 60
 	)
 
@@ -39,7 +47,7 @@
 	outfit = /datum/outfit/pilgrim/masterchef
 	total_positions = 1
 	roll_chance = 0
-	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	category_tags = list(CTAG_PILGRIM)
 	apprentice_name = "Chef Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE

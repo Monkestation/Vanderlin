@@ -6,7 +6,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/sewing = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/craft/cooking = 30,
@@ -19,7 +19,7 @@
 /datum/job/absolver
 	title = JOB_ABSOLVER
 	department_flag = INQUISITION
-	faction = "Station"
+	factions = list(FACTION_INQUISITION, FACTION_TOWN)
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	total_positions = 1 // THE ONE.
 	spawn_positions = 1
@@ -29,9 +29,10 @@
 	tutorial = "The Oratorium claims you are naught more than a 'cleric', but you know the truth; you are a sacrificial lamb. Your hands, unmarred through prayer and pacifism, have been gifted with the power to manipulate blood - to siphon away the wounds of others, so that you may endure in their stead. Let your censer's light shepherd the Inquisitor's retinue forth, lest they're led astray by wrath and temptation."
 	selection_color = JCOLOR_INQUISITION
 	outfit = /datum/outfit/absolver
-	bypass_lastclass = TRUE
 	display_order = JDO_ABSOLVER
 	give_bank_account = 15
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	antag_role = /datum/antagonist/purishep
 
@@ -84,7 +85,7 @@
 	spawned.hud_used?.initialize_bloodpool()
 	spawned.hud_used?.bloodpool.set_fill_color("#dcdddb")
 	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
-	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
+	spawned.hud_used?.bloodpool?.desc = "Grace: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
 	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
 
@@ -104,12 +105,12 @@
 /datum/outfit/absolver
 	name = JOB_ABSOLVER
 	wrists = /obj/item/clothing/wrists/bracers/psythorns
-	gloves = /obj/item/clothing/gloves/leather/otavan/inqgloves
+	gloves = /obj/item/clothing/gloves/leather/grenzel/inqgloves
 	beltr = /obj/item/flashlight/flare/torch/lantern/psycenser
 	beltl = /obj/item/storage/belt/pouch/coins/rich
 	neck = /obj/item/clothing/neck/psycross/silver
 	cloak = /obj/item/clothing/cloak/absolutionistrobe
-	backr = /obj/item/storage/backpack/satchel/otavan
+	backr = /obj/item/storage/backpack/satchel/grenzel
 	belt = /obj/item/storage/belt/leather
 	pants = /obj/item/clothing/pants/trou/leather/advanced/colored/duelpants
 	armor = /obj/item/clothing/armor/cuirass/psydon
@@ -117,11 +118,11 @@
 	shoes = /obj/item/clothing/shoes/psydonboots
 	mask = /obj/item/clothing/head/helmet/blacksteel/psythorns
 	head = /obj/item/clothing/head/helmet/heavy/absolver
-	ring = /obj/item/clothing/ring/signet/silver
+	ring = /obj/item/clothing/ring/signet/psy
 	backpack_contents = list(
 		/obj/item/book/bibble/psy = 1,
 		/obj/item/natural/bundle/cloth = 2,
-		/obj/item/reagent_containers/glass/bottle/healthpot = 2,
+		/obj/item/reagent_containers/glass/bottle/healthpot/labelled = 2,
 		/obj/item/paper/inqslip/arrival/abso = 1,
 		/obj/item/needle = 1,
 		/obj/item/natural/worms/leech = 1,

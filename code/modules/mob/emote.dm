@@ -128,7 +128,7 @@
 
 /mob/living/carbon/human/verb/emote_spin()
 	set name = "Spin"
-	set category = "Emotes.Silent"
+	set category = "Emotes.Actions"
 	emote("spin", intentional = TRUE)
 
 /datum/emote/spin/can_run_emote(mob/living/carbon/user, status_check = TRUE , intentional)

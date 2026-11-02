@@ -3,7 +3,7 @@
 	abstract_type = /datum/augment/armor
 	incompatible_installations = list(/datum/augment/armor)
 	color = COLOR_ASSEMBLY_YELLOW
-	var/list/armor_values
+	var/datum/armor/armor_type
 	var/finish
 	var/melee_damage = 0
 	var/shutdown_bonus = 0
@@ -12,7 +12,7 @@
 	. = ..()
 	if(!.)
 		return
-	H.physiology?.armor = H.physiology.armor.attachArmor(getArmor(arglist(armor_values)))
+	H.physiology.armor.add_other_armor(armor_type)
 	H.skin_tone = finish
 	H.update_body()
 	H.update_body_parts()
@@ -27,7 +27,7 @@
 	. = ..()
 	if(!.)
 		return
-	H.physiology?.armor = H.physiology.armor.detachArmor(getArmor(arglist(armor_values)))
+	H.physiology.armor.subtract_other_armor(armor_type)
 	H.skin_tone = null
 	H.update_body()
 	H.update_body_parts()
@@ -43,7 +43,7 @@
 	name = "tin plating"
 	desc = "You might as well have lined it with thatch."
 	engineering_difficulty = SKILL_RANK_NONE
-	armor_values = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/maille/iron
 	finish = "ABE8E6"
 	stability_cost = 15
 	engineering_difficulty = 0
@@ -53,7 +53,7 @@
 	name = "copper plating"
 	desc = "Less durable than bronze, but more sturdy than tin."
 	engineering_difficulty = SKILL_RANK_NOVICE
-	armor_values = ARMOR_MAILLE_IRON
+	armor_type = /datum/armor/maille/iron
 	finish = "B87A3D"
 	stability_cost = 10
 	engineering_difficulty = 1
@@ -64,7 +64,7 @@
 	name = "bronze plating"
 	desc = "The tried-true standard. Mass-produced and mass-reduced."
 	engineering_difficulty = SKILL_RANK_APPRENTICE
-	armor_values = ARMOR_MAILLE
+	armor_type = /datum/armor/maille
 	finish = "89713B"
 	melee_damage = 2
 	shutdown_bonus = 10
@@ -73,7 +73,7 @@
 	name = "iron plating"
 	desc = "Hearfelt was never known for its iron quality. An uncommon but nevertheless usable plating."
 	engineering_difficulty = SKILL_RANK_JOURNEYMAN
-	armor_values = ARMOR_MAILLE_GOOD
+	armor_type = /datum/armor/maille/good
 	finish = "A6A695"
 	stability_cost = -5
 	melee_damage = 3
@@ -83,7 +83,7 @@
 	name = "steel plating"
 	desc = "Hearfelt was never known for its iron quality. An uncommon but nevertheless usable plating."
 	engineering_difficulty = SKILL_RANK_EXPERT
-	armor_values = ARMOR_SCALE
+	armor_type = /datum/armor/scale
 	finish = "9EC0D3"
 	stability_cost = -10
 	melee_damage = 5
@@ -93,7 +93,7 @@
 	name = "gold plating"
 	desc = "Style over substance."
 	engineering_difficulty = SKILL_RANK_MASTER
-	armor_values = ARMOR_SCALE
+	armor_type = /datum/armor/scale
 	finish = "DBC70C"
 	stability_cost = -15
 	melee_damage = 7
@@ -103,7 +103,7 @@
 	name = "silver plating"
 	desc = "A blodsucker wouldn't stand a chance against this... if it was put inside of it or something."
 	engineering_difficulty = SKILL_RANK_MASTER
-	armor_values = ARMOR_SCALE
+	armor_type = /datum/armor/scale
 	finish = "CBD6D4"
 	stability_cost = -20
 	melee_damage = 7
@@ -113,7 +113,7 @@
 	name = "blacksteel plating"
 	desc = "You better be able to control this thing when it's loaded."
 	engineering_difficulty = SKILL_RANK_LEGENDARY
-	armor_values = ARMOR_PLATE_BSTEEL
+	armor_type = /datum/armor/plate/blacksteel
 	finish = "767B97"
 	stability_cost = -25
 	melee_damage = 10

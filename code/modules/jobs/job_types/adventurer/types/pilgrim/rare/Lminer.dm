@@ -8,18 +8,19 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_PERCEPTION = 1,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/labor/mining = 60,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/craft/masonry = 40,
 		/datum/attribute/skill/craft/traps = 10,
 		/datum/attribute/skill/craft/engineering = 40,
 		/datum/attribute/skill/craft/smelting = 60,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 /datum/attribute_holder/sheet/job/pilgrim/minermaster/old
@@ -31,18 +32,19 @@
 		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = 1,
 		STAT_PERCEPTION = 1,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/labor/mining = 60,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
+		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/craft/masonry = 40,
 		/datum/attribute/skill/craft/traps = 20,
 		/datum/attribute/skill/craft/engineering = 50,
 		/datum/attribute/skill/craft/smelting = 60,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 /datum/job/advclass/pilgrim/rare/minermaster
@@ -53,7 +55,7 @@
 	outfit = /datum/outfit/pilgrim/minermaster
 	total_positions = 1
 	roll_chance = 0
-	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	category_tags = list(CTAG_PILGRIM)
 	apprentice_name = "Miner Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	is_recognized = TRUE

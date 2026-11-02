@@ -64,6 +64,7 @@
 		return ITEM_INTERACT_BLOCKING
 
 	var/mob/living/carbon/human/H = interacting_with
+
 	if(!H.mind)
 		return ITEM_INTERACT_BLOCKING
 
@@ -151,7 +152,7 @@
 			continue
 		if(player.stat >= DEAD)
 			continue
-		if(!player.can_hear())
+		if(HAS_TRAIT(player, TRAIT_DEAF))
 			continue
 		if(player.can_block_magic(MAGIC_RESISTANCE_MIND, 0))
 			continue
@@ -243,3 +244,4 @@
 	name = "Servant Bell"
 	desc = "I've been summoned by the bell."
 	icon_state = "servant_bell"
+

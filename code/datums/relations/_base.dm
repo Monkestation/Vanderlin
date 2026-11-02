@@ -40,27 +40,63 @@
 	SHOULD_CALL_PARENT(FALSE)
 	return "[holder?.name] and [other?.name] have a relationship."
 
-/// Capture current identity state of the other mob into snapshot.
+/datum/relation/proc/_get_job_data(mob/living/carbon/human/H)
+	. = list("display" = "Unknown", "key" = "Unknown", "category" = "Unknown", "honorary" = null, "honorary_suffix" = null)
+	var/datum/job/J = H.mind?.assigned_role
+	if(!J)
+		return
+	.["key"] = J.title
+	.["category"] = get_job_category(J.title)
+	.["honorary"] = J.honorary
+	.["honorary_suffix"] = J.honorary_suffix
+	.["display"] = J.get_informed_title(H)
+
 /datum/relation/proc/refresh_snapshot()
 	if(!other?.current || !ishuman(other.current))
 		return
 	var/mob/living/carbon/human/H = other.current
+	var/list/job_data = _get_job_data(H)
 	snapshot = list(
 		"name" = H.real_name,
 		"vcolor" = H.voice_color,
-		"job" = _get_job_title(H),
+		"job" = job_data["display"],
+		"job_key" = job_data["key"],
+		"job_category" = job_data["category"],
+		"honorary" = job_data["honorary"],
+		"honorary_suffix" = job_data["honorary_suffix"],
+		"species" = H.dna?.species?.name || "Unknown",
 		"gender" = H.gender,
 		"age" = H.age,
 	)
 
-/datum/relation/proc/_get_job_title(mob/living/carbon/human/H)
-	if(H.mind?.assigned_role)
-		var/datum/job/J = H.mind?.assigned_role
-		if(J)
-			var/t = J.get_informed_title(H)
-			if(t)
-				return t
-	return "Unknown"
+/datum/relation/proc/enrich_snapshot()
+	if(!other?.current || !ishuman(other.current))
+		return
+	var/mob/living/carbon/human/H = other.current
+	var/list/job_data = _get_job_data(H)
+	snapshot["vcolor"] = H.voice_color
+	snapshot["job"] = job_data["display"]
+	snapshot["job_key"] = job_data["key"]
+	snapshot["job_category"] = job_data["category"]
+	snapshot["honorary"] = job_data["honorary"]
+	snapshot["honorary_suffix"] = job_data["honorary_suffix"]
+	snapshot["species"] = H.dna?.species?.name || "Unknown"
+	snapshot["gender"] = H.gender
+	snapshot["age"] = H.age
+
+/datum/relation/proc/snapshot_name_only(mob/living/carbon/human/H)
+	snapshot = list(
+		"name" = H.real_name,
+		"vcolor" = H.voice_color,
+		"job" = null,
+		"job_key" = null,
+		"job_category" = null,
+		"honorary" = null,
+		"honorary_suffix" = null,
+		"species" = null,
+		"gender" = null,
+		"age" = null,
+	)
 
 /// Returns TRUE if this relation conflicts with an existing relation type.
 /datum/relation/proc/conflicts_with(datum/relation/other_rel)
@@ -87,23 +123,3 @@
 /datum/relation/proc/add_history(datum/history/history)
 	LAZYADD(relation_history, history)
 	return history
-
-/datum/relation/proc/snapshot_name_only(mob/living/carbon/human/H)
-	snapshot = list(
-		"name" = H.real_name,
-		"vcolor" = null,
-		"job" = null,
-		"gender" = null,
-		"age" = null,
-	)
-
-/// Enrich an existing partial snapshot with full identity data.
-/datum/relation/proc/enrich_snapshot()
-	if(!other?.current || !ishuman(other.current))
-		return
-	var/mob/living/carbon/human/H = other.current
-	snapshot["name"] = H.real_name
-	snapshot["vcolor"] = H.voice_color
-	snapshot["job"] = _get_job_title(H)
-	snapshot["gender"] = H.gender
-	snapshot["age"] = H.age

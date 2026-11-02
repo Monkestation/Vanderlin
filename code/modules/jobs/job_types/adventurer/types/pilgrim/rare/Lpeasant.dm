@@ -1,17 +1,17 @@
 /datum/attribute_holder/sheet/job/pilgrim/farmermaster
 	attribute_variance = list(
-		/datum/attribute/skill/misc/swimming = list(0, 10)
+		/datum/attribute/skill/misc/swimming = list(20, 30)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
-		STAT_CONSTITUTION = 1,
+		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 2,
 		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/knives = 10,
-		/datum/attribute/skill/combat/polearms = 20,
-		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/whipsflails = 30,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/climbing = 20,
@@ -32,7 +32,7 @@
 	outfit = /datum/outfit/pilgrim/farmermaster
 	total_positions = 1
 	roll_chance = 0
-	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	category_tags = list(CTAG_PILGRIM)
 	apprentice_name = "Handyman"
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
 	is_recognized = TRUE

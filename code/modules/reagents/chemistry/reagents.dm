@@ -67,6 +67,8 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 	/// Base quality for newly created reagents of this type
 	var/base_recipe_quality = COOK_QUALITY_NORMAL
 	var/dead_head = TRUE
+	///if we can process in a dead mob as if we were alive
+	var/dead_life = FALSE
 	///if we are false we don't apply the liver efficiency to our metabolization
 	var/liver_chemical = TRUE
 	/// Boiling point in Kelvin. Used by chem_separator to determine distillation order.
@@ -131,7 +133,6 @@ GLOBAL_LIST_INIT(name2reagent, build_name2reagent())
 /datum/reagent/proc/on_transfer(atom/A, method=TOUCH, trans_volume) //Called after a reagent is transfered
 	if(iscarbon(A))
 		SEND_SIGNAL(A, COMSIG_CARBON_REAGENT_ADD, src, trans_volume, method)
-	return
 
 /datum/reagent/proc/set_quality(new_quality)
 	LAZYSET(data, "quality", new_quality)

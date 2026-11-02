@@ -5,7 +5,7 @@
 		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = 1,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 30,
@@ -15,7 +15,7 @@
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/craft/carpentry = 60,
 		/datum/attribute/skill/craft/engineering = 10,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/labor/lumberjacking = 40
@@ -27,7 +27,7 @@
 	As a master carpenter, you transform trees into anything from furniture to entire fortifications."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/mastercarpenter
-	category_tags = list(CTAG_PILGRIM, CTAG_TOWNER)
+	category_tags = list(CTAG_PILGRIM)
 	total_positions = 1
 	roll_chance = 0
 	apprentice_name = "Carpenter Apprentice"

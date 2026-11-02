@@ -3,11 +3,11 @@
 	desc = "Summons a magical field of flowers using a single flower."
 	button_icon_state = "flower_field"
 
-	point_cost = 5
-	attunements = list(
-		/datum/attunement/earth = 0.4,
-		/datum/attunement/life = 0.3,
-	)
+	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
+	required_technique = TECHNIQUE_CREATION
+	required_level = 3
+	initial_charges = 6
 
 	invocation = "May the earth bloom!"
 	invocation_type = INVOCATION_WHISPER
@@ -55,6 +55,7 @@
 	if(isliving(owner))
 		var/mob/living/L = owner
 		L.apply_status_effect(/datum/status_effect/buff/flowerfield_resistance)
+	qdel(flower_item)
 
 /datum/action/cooldown/spell/aoe/on_turf/circle/flower_field/cast_on_thing_in_aoe(turf/victim, atom/caster)
 	if(prob(25))

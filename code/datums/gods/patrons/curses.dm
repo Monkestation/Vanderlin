@@ -105,6 +105,11 @@
 	description = "I am unable to show any kind of affection or love, whether intimate or platonic."
 	trait = TRAIT_EORA_CURSE
 
+/datum/curse/malum
+	name = "Curse of Malum"
+	description = "I am forsaken by the Maker. My hands tremble when performing hands-on labor."
+	trait = TRAIT_MALUM_CURSE
+
 //////////////////////
 /// INHUMEN CURSES ///
 //////////////////////
@@ -143,6 +148,25 @@
 	trait = TRAIT_BAOTHA_CURSE
 
 //////////////////////
+/// ARCHDEVIL CURSES ///
+//////////////////////
+/datum/curse/abraxas
+	name = "Abraxas' Curse"
+	description = "The hells lay claim to my flesh!"
+	trait = TRAIT_ABRAXAS_CURSE
+	var/old_species
+
+/datum/curse/mephistopheles
+	name = "Mephistopheles' Curse"
+	description = "I am incapable of wielding Blood Magic."
+	trait = TRAIT_BLOOD_MAGIC_BLOCKED
+
+/datum/curse/leviathan
+	name = "Leviathan's Curse"
+	description = "The abyss is pressing in... I hear it..."
+	trait = TRAIT_LEVIATHAN_CURSE
+
+//////////////////////
 /// ON GAIN / LOSS ///
 //////////////////////
 /datum/curse/atheism/on_gain(mob/living/carbon/human/owner)
@@ -164,13 +188,27 @@
 	. = ..()
 	hallucinations = null
 
+/datum/attribute_holder/sheet/xylix_curse
+	raw_attribute_list = list(
+		STAT_FORTUNE = -10,
+	)
+
 /datum/curse/xylix/on_gain(mob/living/carbon/human/owner)
 	. = ..()
-	GET_MOB_ATTRIBUTE_VALUE(owner, STAT_FORTUNE) -= 10
+	owner.attributes?.add_sheet(/datum/attribute_holder/sheet/xylix_curse)
 
 /datum/curse/xylix/on_loss(mob/living/carbon/human/owner)
 	. = ..()
-	GET_MOB_ATTRIBUTE_VALUE(owner, STAT_FORTUNE) += 10
+	owner.attributes.subtract_sheet(/datum/attribute_holder/sheet/xylix_curse)
+
+/datum/curse/abraxas/on_gain(mob/living/carbon/human/owner, silent)
+	. = ..()
+	old_species = owner.dna.species
+	owner.set_species(/datum/species/tieberian)
+
+/datum/curse/abraxas/on_loss(mob/living/carbon/human/owner)
+	. = ..()
+	owner.set_species(old_species)
 
 //////////////////////
 ///    ON LIFE     ///

@@ -130,6 +130,9 @@ Sunlight System
 				master.turf_flags |= TURF_SUNLIGHT_QUEUED
 				GLOB.SUNLIGHT_QUEUE_CORNER += master
 
+	if(!length(affecting_corners)) // normalize: don't leave a truthy-but-empty list hanging around
+		affecting_corners = null
+
 #undef GLOBAL_LIGHT_RANGE
 #undef HARD_SUN
 #undef SUN_FALLOFF

@@ -4,7 +4,6 @@
 	button_icon_state = "light"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	point_cost = 1
 
 	cooldown_time = 30 SECONDS
 	spell_cost = 50
@@ -16,9 +15,8 @@
 	item_type = /obj/item/flashlight/flare/light
 	item_duration = null
 
-	attunements = list(
-		/datum/attunement/light = 0.3,
-	)
+	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 
 /datum/action/cooldown/spell/undirected/conjure_item/light/make_item()
 	var/obj/item = ..()

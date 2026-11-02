@@ -5,10 +5,10 @@
 	self_cast_possible = FALSE
 
 	sound = 'sound/magic/whiteflame.ogg'
-	point_cost = 1
-	attunements = list(
-		/datum/attunement/ice = 0.9
-	)
+
+	required_form = FORM_ICE
+	associated_skill = /datum/attribute/skill/magic/arcane/ice
+	required_technique = TECHNIQUE_ALTERATION
 
 	invocation = "Bite of Frost!!"
 	invocation_type = INVOCATION_SHOUT
@@ -22,7 +22,7 @@
 
 /datum/action/cooldown/spell/status/frostbite/cast(mob/living/cast_on)
 	. = ..()
-	extra_args = list(attuned_strength)
+	extra_args = list(spell_magnitude_modifier)
 	if(iscarbon(cast_on))
 		var/mob/living/carbon/C = cast_on
-		C.adjustFireLoss(15 * attuned_strength)
+		C.adjustFireLoss(15 * spell_magnitude_modifier)

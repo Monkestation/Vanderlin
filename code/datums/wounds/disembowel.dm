@@ -65,26 +65,26 @@
 
 /datum/wound/slash/disembowel/on_bodypart_gain(obj/item/bodypart/affected)
 	. = ..()
+
 	var/mob/living/carbon/gutted = affected.owner
+	if(gutted)
+		gutted.emote("painscream")
+
 	var/atom/drop_location = gutted.drop_location()
-	var/list/spilled_organs = list()
-	for(var/obj/item/organ/organ as anything in gutted.internal_organs)
-		var/org_zone = check_zone(organ.zone)
-		if(org_zone != BODY_ZONE_CHEST)
+	for(var/atom/movable/movable as anything in affected)
+		if(gutted)
+			movable.add_mob_blood(gutted)
+
+		if(!isorgan(movable))
+			movable.forceMove(drop_location)
+			movable.screen_loc = null // organ storage
 			continue
+
+		var/obj/item/organ/organ = movable
 		if(!(organ.slot in affected_organs))
 			continue
-		/*
-		var/spill_prob = affected_organs[organ.slot]
-		if(prob(spill_prob))
-		*/
-		spilled_organs += organ
-	for(var/obj/item/organ/spilled as anything in spilled_organs)
-		spilled.Remove(owner)
-		spilled.forceMove(drop_location)
-		spilled.scar_organ(30, 60)
-	if(istype(affected, /obj/item/bodypart/chest))
-		var/obj/item/bodypart/chest/cavity = affected
-		for(var/atom/movable/item as anything in cavity.cavity_items)
-			item.forceMove(drop_location)
-			cavity.cavity_items -= item
+
+		organ.Remove(owner)
+		organ.forceMove(get_turf(drop_location))
+		organ.scar_organ(30, 60)
+		organ.screen_loc = null // organ storage

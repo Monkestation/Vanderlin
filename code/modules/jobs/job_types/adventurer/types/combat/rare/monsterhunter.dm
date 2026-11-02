@@ -8,7 +8,7 @@
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/crossbows = 30,
@@ -44,7 +44,7 @@
 	name = "Monster Hunter"
 	shirt = /obj/item/clothing/shirt/undershirt/puritan
 	belt = /obj/item/storage/belt/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	pants = /obj/item/clothing/pants/tights/colored/black
 	armor = /obj/item/clothing/armor/leather/splint
 	cloak = /obj/item/clothing/cloak/cape/puritan

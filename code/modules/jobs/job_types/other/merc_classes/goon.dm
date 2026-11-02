@@ -9,7 +9,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/craft/cooking = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/athletics = 30
 	)
 
@@ -70,8 +70,10 @@
 	var/weapon_choice = spawned.select_equippable(player_client, weapons, message = "Choose your WEAPON.", title = "FOR THE BOSS.")
 	switch(weapon_choice)
 		if("Barehands")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/wrestling, 5)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 5, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/wrestling, 5, 35)
+			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
+			spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
 
 	var/static/list/armors = list(
 		"Brute, Splint Armor" = /obj/item/clothing/armor/leather/splint,

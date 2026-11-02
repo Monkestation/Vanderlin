@@ -64,7 +64,7 @@
 	)
 
 /datum/surgery_operation/limb/incise_skin/on_failure(obj/item/bodypart/limb, mob/living/surgeon, tool, list/operation_args)
-	limb.create_injury(WOUND_SLASH, 65, surgical = TRUE)
+	limb.create_injury(WOUND_SLASH, BLEED_DAMAGE_RATIO / 3, surgical = TRUE)
 
 	if(!limb.bleeds)
 		return ..()
@@ -283,7 +283,11 @@
 				fracture_type = /datum/wound/fracture/chest
 			if(BODY_ZONE_PRECISE_GROIN)
 				fracture_type = /datum/wound/fracture/groin
-		limb.add_wound(fracture_type)
+		var/datum/wound/fracture/existing_fracture = limb.has_wound(fracture_type)
+		if(existing_fracture)
+			existing_fracture.bone_set = FALSE
+		else
+			limb.add_wound(fracture_type)
 
 	display_results(
 		surgeon,

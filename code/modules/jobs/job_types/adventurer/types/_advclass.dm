@@ -31,7 +31,7 @@
 
 	apply_character_post_equipment(spawned)
 
-/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check, var/triumph_restriction_lift = FALSE)
+/datum/job/advclass/proc/check_requirements(mob/living/carbon/human/to_check, triumph_restriction_lift = FALSE)
 	if(!prob(roll_chance) && !triumph_restriction_lift)
 		return FALSE
 

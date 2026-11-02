@@ -38,6 +38,7 @@
 	var/choice = browser_input_list(user, "CHOOSE YOUR HERO'S CULTURE", "CULTURE", cultures)
 	if(!choice)
 		return
+	prefs.write_preference(/datum/preference/choiced/selected_accent, ACCENT_DEFAULT)
 	prefs.write_preference(/datum/preference/choiced/culture, cultures[choice])
 	var/datum/culture/pref_culture = prefs.read_preference(/datum/preference/choiced/culture)
 	to_chat(user, span_notice("[pref_culture::name]"))

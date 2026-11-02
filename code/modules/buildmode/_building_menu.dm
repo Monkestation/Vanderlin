@@ -13,14 +13,14 @@
 
 	// Add category tabs
 	dat += "<div class='tabs'>"
-	dat += "<a class='tab [current_category == BM_CATEGORY_TURF ? "active" : ""]' href='?src=[REF(src)];category=[BM_CATEGORY_TURF]'>Turfs</a>"
-	dat += "<a class='tab [current_category == BM_CATEGORY_OBJ ? "active" : ""]' href='?src=[REF(src)];category=[BM_CATEGORY_OBJ]'>Objects</a>"
-	dat += "<a class='tab [current_category == BM_CATEGORY_MOB ? "active" : ""]' href='?src=[REF(src)];category=[BM_CATEGORY_MOB]'>Mobs</a>"
-	dat += "<a class='tab [current_category == BM_CATEGORY_ITEM ? "active" : ""]' href='?src=[REF(src)];category=[BM_CATEGORY_ITEM]'>Items</a>"
-	dat += "<a class='tab [current_category == BM_CATEGORY_WEAPON ? "active" : ""]' href='?src=[REF(src)];category=[BM_CATEGORY_WEAPON]'>Weapons</a>"
-	dat += "<a class='tab [current_category == BM_CATEGORY_CLOTHING ? "active" : ""]' href='?src=[REF(src)];category=[BM_CATEGORY_CLOTHING]'>Clothing</a>"
-	dat += "<a class='tab [current_category == BM_CATEGORY_FOOD ? "active" : ""]' href='?src=[REF(src)];category=[BM_CATEGORY_FOOD]'>Food</a>"
-	dat += "<a class='tab [current_category == BM_CATEGORY_REAGENT_CONTAINERS ? "active" : ""]' href='?src=[REF(src)];category=[BM_CATEGORY_REAGENT_CONTAINERS]'>Liquid Vessels</a>"
+	dat += "<a class='tab [current_category == BM_CATEGORY_TURF ? "active" : ""]' href='byond://?src=[REF(src)];category=[BM_CATEGORY_TURF]'>Turfs</a>"
+	dat += "<a class='tab [current_category == BM_CATEGORY_OBJ ? "active" : ""]' href='byond://?src=[REF(src)];category=[BM_CATEGORY_OBJ]'>Objects</a>"
+	dat += "<a class='tab [current_category == BM_CATEGORY_MOB ? "active" : ""]' href='byond://?src=[REF(src)];category=[BM_CATEGORY_MOB]'>Mobs</a>"
+	dat += "<a class='tab [current_category == BM_CATEGORY_ITEM ? "active" : ""]' href='byond://?src=[REF(src)];category=[BM_CATEGORY_ITEM]'>Items</a>"
+	dat += "<a class='tab [current_category == BM_CATEGORY_WEAPON ? "active" : ""]' href='byond://?src=[REF(src)];category=[BM_CATEGORY_WEAPON]'>Weapons</a>"
+	dat += "<a class='tab [current_category == BM_CATEGORY_CLOTHING ? "active" : ""]' href='byond://?src=[REF(src)];category=[BM_CATEGORY_CLOTHING]'>Clothing</a>"
+	dat += "<a class='tab [current_category == BM_CATEGORY_FOOD ? "active" : ""]' href='byond://?src=[REF(src)];category=[BM_CATEGORY_FOOD]'>Food</a>"
+	dat += "<a class='tab [current_category == BM_CATEGORY_REAGENT_CONTAINERS ? "active" : ""]' href='byond://?src=[REF(src)];category=[BM_CATEGORY_REAGENT_CONTAINERS]'>Liquid Vessels</a>"
 	dat += "</div>"
 
 	dat += "<div class='search-container'>"
@@ -62,7 +62,7 @@
 
 		function sendTogglePixel(toggled) {
 			var a = document.createElement('a');
-			a.href = '?src=[REF(src)]&toggle_pixel=' + toggled;
+			a.href='byond://?src=[REF(src)]&toggle_pixel=' + toggled;
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);

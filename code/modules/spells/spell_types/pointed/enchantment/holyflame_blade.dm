@@ -4,14 +4,11 @@
 	button_icon_state = "enchant_weapon"
 
 	enchantment_duration = 5 MINUTES
-	attunements = list(
-		/datum/attunement/fire = 0.3,
-	)
 
 	charge_required = FALSE
 	spell_cost = 30
 	enchantment = DIVINE_FIRE_ENCHANT
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine)
 

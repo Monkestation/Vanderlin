@@ -21,9 +21,9 @@
 		STAT_PERCEPTION = 3,
 		STAT_INTELLIGENCE = 3,
 		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/attribute_holder/sheet/job/commoner_prisoner
@@ -52,12 +52,11 @@
 	department_flag = PEASANTS
 	display_order = JDO_PRISONER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 2
 	can_random = FALSE
 	banned_leprosy = FALSE
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 
@@ -90,4 +89,3 @@
 /datum/outfit/prisoner
 	name = JOB_PRISONER
 	pants = /obj/item/clothing/pants/loincloth/colored/brown
-	mask = /obj/item/clothing/face/facemask/prisoner

@@ -6,6 +6,9 @@
 	return (..() && !(NOSTOMACH in owner.dna.species.species_traits))
 
 /datum/organ_process/stomach/handle_process(mob/living/carbon/human/owner, delta_time, times_fired)
+	if(owner.stat == DEAD)
+		handle_digestion(owner, delta_time, times_fired, dead = TRUE)
+		return TRUE
 	if(!HAS_TRAIT(owner, TRAIT_NOHUNGER))
 		handle_nutrition(owner, delta_time, times_fired)
 	handle_digestion(owner, delta_time, times_fired)
@@ -44,7 +47,7 @@
 				owner.set_jitter_if_lower(10 SECONDS)
 			hunger_rate *= 3
 		hunger_rate *= owner.physiology.hunger_mod
-		hunger_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
+		// hunger_rate *= optimal_threshold/max(stomach_efficiency, failing_threshold)
 		if (ishuman(owner))
 			hunger_rate *= owner.dna.species.nutrition_mod
 		owner.adjust_nutrition(-hunger_rate * delta_time)
@@ -79,61 +82,67 @@
 
 /datum/organ_process/stomach/proc/handle_nutrition_hydration_state(mob/living/carbon/human/owner, delta_time, times_fired)
 	switch(owner.nutrition)
-		if(NUTRITION_LEVEL_FED to INFINITY)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt1)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt2)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt3)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt4)
-		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_FED)
-			owner.apply_status_effect(/datum/status_effect/debuff/hungryt1)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt2)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt3)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt4)
-		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_HUNGRY)
-			owner.apply_status_effect(/datum/status_effect/debuff/hungryt2)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt1)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt3)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt4)
+		if(NUTRITION_LEVEL_PECKISH to INFINITY)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t2)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t3)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t4)
+		if(NUTRITION_LEVEL_HUNGRY to NUTRITION_LEVEL_PECKISH)
+			owner.apply_status_effect(/datum/status_effect/debuff/hungry/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t2)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t3)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t4)
+		if(NUTRITION_LEVEL_VERY_HUNGRY to NUTRITION_LEVEL_HUNGRY)
+			owner.apply_status_effect(/datum/status_effect/debuff/hungry/t2)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t3)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t4)
+		if(NUTRITION_LEVEL_STARVING to NUTRITION_LEVEL_VERY_HUNGRY)
+			owner.apply_status_effect(/datum/status_effect/debuff/hungry/t3)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t2)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t4)
 		if(0 to NUTRITION_LEVEL_STARVING)
-			owner.apply_status_effect(/datum/status_effect/debuff/hungryt3)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt1)
-			owner.remove_status_effect(/datum/status_effect/debuff/hungryt2)
-			if(CONFIG_GET(flag/starvation_death))
-				owner.apply_status_effect(/datum/status_effect/debuff/hungryt4)
+			owner.apply_status_effect(/datum/status_effect/debuff/hungry/t4)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t2)
+			owner.remove_status_effect(/datum/status_effect/debuff/hungry/t3)
 			if(DT_PROB(3, delta_time))
 				playsound(owner, pick('sound/vo/hungry1.ogg','sound/vo/hungry2.ogg','sound/vo/hungry3.ogg'), 100, TRUE, -1)
 
 	switch(owner.hydration)
 		if(HYDRATION_LEVEL_SMALLTHIRST to INFINITY)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt1)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt2)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt3)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt4)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t2)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t3)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t4)
 		if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
-			owner.apply_status_effect(/datum/status_effect/debuff/thirstyt1)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt2)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt3)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt4)
-		if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
-			owner.apply_status_effect(/datum/status_effect/debuff/thirstyt2)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt1)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt3)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt4)
+			owner.apply_status_effect(/datum/status_effect/debuff/thirsty/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t2)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t3)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t4)
+		if(NUTRITION_LEVEL_VERY_THIRSTY to HYDRATION_LEVEL_THIRSTY)
+			owner.apply_status_effect(/datum/status_effect/debuff/thirsty/t2)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t3)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t4)
+		if(HYDRATION_LEVEL_DEHYDRATED to NUTRITION_LEVEL_VERY_THIRSTY)
+			owner.apply_status_effect(/datum/status_effect/debuff/thirsty/t3)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t2)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t4)
 		if(0 to HYDRATION_LEVEL_DEHYDRATED)
-			owner.apply_status_effect(/datum/status_effect/debuff/thirstyt3)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt1)
-			owner.remove_status_effect(/datum/status_effect/debuff/thirstyt2)
-			if(CONFIG_GET(flag/dehydration_death))
-				owner.apply_status_effect(/datum/status_effect/debuff/thirstyt4)
+			owner.apply_status_effect(/datum/status_effect/debuff/thirsty/t4)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t3)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t1)
+			owner.remove_status_effect(/datum/status_effect/debuff/thirsty/t2)
 
-/datum/organ_process/stomach/proc/handle_digestion(mob/living/carbon/human/owner, delta_time, times_fired)
+/datum/organ_process/stomach/proc/handle_digestion(mob/living/carbon/human/owner, delta_time, times_fired, dead = FALSE)
 	var/stomachal_efficiency = owner.getorganslotefficiency(ORGAN_SLOT_STOMACH)
 	var/list/stomachs = owner.getorganslotlist(ORGAN_SLOT_STOMACH)
 
 	for(var/obj/item/organ/stomach/stomach as anything in stomachs)
-		for(var/chunk in stomach.reagents.reagent_list)
-			var/datum/reagent/bit = chunk
-
+		for(var/datum/reagent/bit as anything in stomach.reagents.reagent_list)
 			if(bit.metabolization_rate <= 0)
 				continue
 
@@ -145,6 +154,9 @@
 				continue
 
 			stomach.reagents.trans_id_to(owner, bit.type, amount=amount)
+
+	if(dead) //corpses don't vomit or take damage from overeating, just keep moving reagents along
+		return
 
 	for(var/obj/item/organ/stomach/stomach as anything in stomachs)
 		if(!stomach.is_bruised() && !stomach.is_failing())
@@ -167,8 +179,7 @@
 
 /datum/organ_process/stomach/proc/handle_disgust(mob/living/carbon/human/owner, delta_time, times_fired)
 	var/combined_disgust_metabolism = 0
-	for(var/thing in owner.getorganslotlist(ORGAN_SLOT_STOMACH))
-		var/obj/item/organ/stomach/stomach = thing
+	for(var/obj/item/organ/stomach/stomach as anything in owner.getorganslotlist(ORGAN_SLOT_STOMACH))
 		combined_disgust_metabolism += stomach.disgust_metabolism
 
 	if(owner.disgust)

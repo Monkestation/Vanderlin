@@ -4,14 +4,14 @@
 	icon_state = "indoor_town"
 	background_track = 'sound/music/area/indoor.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 	converted_type = /area/outdoors/exposed/town
 
 /area/outdoors/exposed/town
 	icon_state = "town"
 	background_track = 'sound/music/area/towngen.ogg'
 	background_track_dusk = null
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 
 /area/indoors/town/shop
 	name = "Shop"
@@ -140,12 +140,22 @@
 	name = "dock warehouse import"
 	icon_state = "warehouse"
 
+/area/indoors/town/warehouse/metal
+	name = "metal storage"
+
+/area/indoors/town/warehouse/food
+	name = "food storage"
+
+/area/indoors/town/warehouse/generic
+	name = "stockhouse"
+
 /area/indoors/town/warehouse/can_craft_here()
 	return FALSE
 
 /area/indoors/town/vault
 	name = "vault"
 	icon_state = "vault"
+	area_flags = VALID_TERRITORY | UNIQUE_AREA | NO_TELEPORT
 
 /area/indoors/town/vault/can_craft_here()
 	return FALSE
@@ -175,7 +185,7 @@
 	icon_state = "clinic_feld"
 
 /area/indoors/town/thieves_guild
-	name = "Theives' Guild"
+	name = "Thieves' Guild"
 	first_time_text = "Thieves' Guild"
 	icon_state = "thieves_guild"
 
@@ -186,6 +196,19 @@
 	background_track = 'sound/music/area/shop.ogg'
 	background_track_dusk = null
 	background_track_night = null
+
+/area/indoors/town/adv_guild
+	name = "Adventurer's Guild"
+	first_time_text = "Adventurer's Guild"
+	icon_state = "adv_guild"
+	background_track = 'sound/music/area/shop.ogg'
+	background_track_dusk = null
+	background_track_night = null
+
+/area/indoors/town/train_station
+	name = "Train Station"
+	first_time_text = "Vanderlin Train Station"
+	icon_state = "train_station"
 
 /area/indoors/town/steward
 	name = "Steward's Office"
@@ -241,7 +264,7 @@
 	icon_state = "town"
 	background_track = 'sound/music/area/townstreets.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 	converted_type = /area/indoors/shelter/town
 	threat_region = THREAT_REGION_TOWN
 
@@ -253,7 +276,7 @@
 	icon_state = "town"
 	background_track = 'sound/music/area/townstreets.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 
 /area/outdoors/town/roofs
 	name = "roofs"
@@ -267,7 +290,7 @@
 	icon_state = "roofs"
 	background_track = 'sound/music/area/field.ogg'
 	background_track_dusk = 'sound/music/area/septimus.ogg'
-	background_track_night = 'sound/music/area/deliverer.ogg'
+	background_track_night = 'sound/music/area/field.ogg'
 
 
 ///// UNDERGROUND AREAS //////

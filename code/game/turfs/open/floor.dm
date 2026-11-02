@@ -26,7 +26,7 @@
 	burn_power = 50
 
 /turf/open/floor/Initialize(mapload)
-	if (!broken_states)
+	if (!length(broken_states))
 		broken_states = typelist("broken_states", list("damaged1", "damaged2", "damaged3", "damaged4", "damaged5"))
 	else
 		broken_states = typelist("broken_states", broken_states)
@@ -34,10 +34,11 @@
 		attacked_sound = typelist("attacked_sound", list('sound/combat/hits/onwood/woodimpact (1).ogg','sound/combat/hits/onwood/woodimpact (2).ogg'))
 	else
 		attacked_sound = typelist("attacked_sound", attacked_sound)
-	burnt_states = typelist("burnt_states", burnt_states)
+	if(length(burnt_states))
+		burnt_states = typelist("burnt_states", burnt_states)
 	if(!broken && broken_states && (icon_state in broken_states))
 		broken = TRUE
-	if(!burnt && burnt_states && (icon_state in burnt_states))
+	if(!burnt && length(burnt_states) && (icon_state in burnt_states))
 		burnt = TRUE
 	. = ..()
 	//This is so damaged or burnt tiles or platings don't get remembered as the default tile

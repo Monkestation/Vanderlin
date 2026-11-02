@@ -10,10 +10,8 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	var/is_silent = FALSE /// Determines whether or not we will scream our funny lines at people.
 	headprice = 12
 
-
 /mob/living/carbon/human/species/human/northern/highwayman/ambush
 	wander = TRUE
-
 
 /mob/living/carbon/human/species/human/northern/highwayman/Initialize()
 	. = ..()
@@ -21,14 +19,13 @@ GLOBAL_LIST_INIT(highwayman_aggro, file2list("strings/rt/highwaymanaggrolines.tx
 	addtimer(CALLBACK(src, PROC_REF(after_creation)), 1 SECONDS)
 	is_silent = TRUE
 
-
 /mob/living/carbon/human/species/human/northern/highwayman/after_creation()
 	..()
 	job = "Highwayman"
 	ADD_TRAIT(src, TRAIT_NOMOOD, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_NOHUNGER, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_LEECHIMMUNE, INNATE_TRAIT)
-	ADD_TRAIT(src, TRAIT_BREADY, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_BATTLE_READY, TRAIT_GENERIC)
 	ADD_TRAIT(src, TRAIT_MEDIUMARMOR, TRAIT_GENERIC)
 	equipOutfit(new /datum/outfit/job/human/species/human/northern/highwayman)
 	SEND_SIGNAL(src, COMSIG_MOB_MODIFY_AGGRO_LINES, GLOB.highwayman_aggro, TRUE)

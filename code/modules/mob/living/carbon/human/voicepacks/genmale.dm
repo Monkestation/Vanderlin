@@ -46,6 +46,8 @@
 				used = list('sound/vo/male/gen/groan (1).ogg','sound/vo/male/gen/groan (2).ogg','sound/vo/male/gen/groan (3).ogg','sound/vo/male/gen/groan (4).ogg','sound/vo/male/gen/groan (5).ogg','sound/vo/male/gen/groan (6).ogg')
 			if("grumble")
 				used = 'sound/vo/male/gen/grumble.ogg'
+			if("sniff")
+				used = list('sound/vo/male/gen/humansniff (1).ogg', 'sound/vo/male/gen/humansniff (2).ogg','sound/vo/male/gen/humansniff (3).ogg')
 			if("haltyell")
 				used = list('sound/vo/male/gen/haltyell (1).ogg','sound/vo/male/gen/haltyell (2).ogg')
 				if(prob(3))
@@ -88,6 +90,10 @@
 				used = 'sound/vo/male/gen/sigh.ogg'
 			if("snap")
 				used = list('sound/foley/fingersnap1.ogg', 'sound/foley/fingersnap2.ogg', 'sound/foley/fingersnap3.ogg', 'sound/foley/fingersnap4.ogg', 'sound/foley/fingersnap5.ogg', 'sound/foley/fingersnap6.ogg', 'sound/foley/fingersnap7.ogg')
+			if("snaptwice")
+				used = list('sound/foley/fingersnappingtwo (1).ogg', 'sound/foley/fingersnappingtwo (2).ogg', 'sound/foley/fingersnappingtwo (3).ogg')
+			if("snapthrice")
+				used = list('sound/foley/fingersnappingthree (1).ogg', 'sound/foley/fingersnappingthree (2).ogg', 'sound/foley/fingersnappingthree (3).ogg')
 			if("snore")
 				used = list('sound/vo/male/gen/snore (1).ogg','sound/vo/male/gen/snore (2).ogg','sound/vo/male/gen/snore (3).ogg','sound/vo/male/gen/snore (4).ogg')
 			if("whimper")
@@ -102,5 +108,7 @@
 				used = 'sound/vo/psst.ogg'
 			if("clap")
 				used = list('sound/vo/clap (1).ogg', 'sound/vo/clap (2).ogg', 'sound/vo/clap (3).ogg', 'sound/vo/clap (4).ogg')
+			if("claponce")
+				used = 'sound/vo/claponce.ogg'
 
 	return used

@@ -71,25 +71,26 @@
 		var/mob/card_holder = recursive_loc_check(A, /mob)
 		if(ismob(card_holder)) //If on a mob
 			if(card_holder.client && !(card_holder.client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_BANKCARD) && !force)
-				return
-
+				continue
+			if(HAS_TRAIT(card_holder, TRAIT_DEAF))
+				continue
 			card_holder.playsound_local(get_turf(card_holder), 'sound/blank.ogg', 50, TRUE)
-			if(card_holder.can_hear())
-				to_chat(card_holder, "[icon2html(icon_source, card_holder)] *[message]*")
+			to_chat(card_holder, "[icon2html(icon_source, card_holder)] *[message]*")
 		else if(isturf(A.loc)) //If on the ground
 			for(var/mob/M in hearers(1,get_turf(A)))
 				if(M.client && !(M.client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_BANKCARD) && !force)
-					return
+					continue
 				playsound(A, 'sound/blank.ogg', 50, TRUE)
 				A.audible_message("[icon2html(icon_source, hearers(A))] *[message]*", null, 1)
 				break
 		else
 			for(var/mob/M in A.loc) //If inside a container with other mobs (e.g. locker)
 				if(M.client && !(M.client.prefs.read_preference(/datum/preference/bitwise/chat_toggles) & CHAT_BANKCARD) && !force)
-					return
+					continue
+				if(HAS_TRAIT(M, TRAIT_DEAF))
+					continue
 				M.playsound_local(get_turf(M), 'sound/blank.ogg', 50, TRUE)
-				if(M.can_hear())
-					to_chat(M, "[icon2html(icon_source, M)] *[message]*")
+				to_chat(M, "[icon2html(icon_source, M)] *[message]*")
 
 /datum/bank_account/department
 	account_holder = "Guild Credit Agency"

@@ -34,7 +34,7 @@ function updateQuirkCustomization(selectElement) {
 	saveState();
 
 	// Navigate to update customization
-	window.location.href = '?quirk_customize=' + quirkRef + '&value=' + encodeURIComponent(selectedValue);
+	window.location.href='byond://?quirk_customize=' + quirkRef + '&value=' + encodeURIComponent(selectedValue);
 }
 
 // Handle text input changes
@@ -52,7 +52,7 @@ function updateQuirkText(inputElement) {
 	saveState();
 
 	// Navigate to update customization
-	window.location.href = '?quirk_customize=' + quirkRef + '&value=' + encodeURIComponent(textValue);
+	window.location.href='byond://?quirk_customize=' + quirkRef + '&value=' + encodeURIComponent(textValue);
 }
 
 // Debounced text update (optional - for auto-saving as user types)
@@ -70,7 +70,7 @@ function updateQuirkTextDebounced(inputElement) {
 		console.log('Auto-saving quirk text:', quirkRef, textValue);
 
 		// Use the non-reloading endpoint for smoother experience
-		window.location.href = '?quirk_text_update=' + quirkRef + '&text=' + encodeURIComponent(textValue);
+		window.location.href='byond://?quirk_text_update=' + quirkRef + '&text=' + encodeURIComponent(textValue);
 	}, 1000); // Wait 1 second after user stops typing
 }
 
@@ -239,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		var action = isSelected ? 'quirk_remove' : 'quirk_add';
 
 		// Navigate to update
-		window.location.href = '?' + action + '=' + quirkRef;
+		window.location.href='byond://?' + action + '=' + quirkRef;
 	});
 
 	// Handle select changes (prevent event bubbling)

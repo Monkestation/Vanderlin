@@ -130,7 +130,7 @@
 	data += "<div style='display: table-cell; width: 50%; vertical-align: top; border-left: 1px solid #444; padding: 0 10px;'>"
 	data += "<font color='#9b6937'><span class='bold'>Total Deaths:</span></font> [GLOB.vanderlin_round_stats[STATS_DEATHS]]<br>"
 	data += "<font color='#6b5ba1'><span class='bold'>Noble Deaths:</span></font> [GLOB.vanderlin_round_stats[STATS_NOBLE_DEATHS]]<br>"
-	data += "<font color='#e6b327'><span class='bold'>Holy Revivals:</span></font> [GLOB.vanderlin_round_stats[STATS_ASTRATA_REVIVALS]]<br>"
+	data += "<font color='#e6b327'><span class='bold'>Holy Revivals:</span></font> [(GLOB.vanderlin_round_stats[STATS_ASTRATA_REVIVALS] + GLOB.vanderlin_round_stats[STATS_NOC_REVIVALS])]<br>"
 	data += "<font color='#2dc5bd'><span class='bold'>Lux Revivals:</span></font> [GLOB.vanderlin_round_stats[STATS_LUX_REVIVALS]]<br>"
 	data += "<font color='#2dc5bd'><span class='bold'>Successful CPRs:</span></font> [GLOB.vanderlin_round_stats[STATS_CPR_REVIVALS]]<br>"
 	data += "<font color='#7cc05c'><span class='bold'>Wounds Fixed:</span></font> [GLOB.vanderlin_round_stats[STATS_WOUNDS_FIXED]]<br>"
@@ -217,6 +217,7 @@
 	data += "<font color='#c0c25f'><span class='bold'>Halflings:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_HALFLINGS]]<br>"
 	data += "<div style='height: 17.5px;'>&nbsp;</div>"
 	data += "<font color='#228B22'><span class='bold'>Half-Orcs:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_HALF_ORCS]]<br>"
+	data += "<font color='#518651'><span class='bold'>Dwarf-Orcs:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_DWARF_ORCS]]<br>"
 	data += "<font color='#CD853F'><span class='bold'>Kobolds:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_KOBOLDS]]<br>"
 	data += "<font color='#DC143C'><span class='bold'>Tieflings:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_TIEFLINGS]]<br>"
 	data += "<font color='#FFD700'><span class='bold'>Rakshari:</span></font> [GLOB.vanderlin_round_stats[STATS_ALIVE_RAKSHARI]]<br>"
@@ -971,7 +972,7 @@
 
 	// Inhumen Gods Section
 
-	data += "<div style='text-align: center; font-size: 1.3em; color: #AA0000; margin: 20px 0 10px 0;'><b>INHUMEN GODS</b></div>"
+	data += "<div style='text-align: center; font-size: 1.3em; color: #661239; margin: 20px 0 10px 0;'><b>INHUMEN GODS</b></div>"
 	data += "<div style='border-top: 3px solid #404040; margin: 0 auto 30px; width: 91.5%;'></div>"
 
 	data += "<div style='width: 91.5%; margin: 0 auto;'>"
@@ -990,6 +991,29 @@
 	data += god_ui_block("ZIZO", "#661239", "#ed9da3", /datum/storyteller/zizo, debug)
 
 	data += "</div></div>"
+
+
+	// Archdevil Section
+	data += "<div style='text-align: center; font-size: 1.3em; color: #AA0000; margin: 20px 0 10px 0;'><b>ARCHDEVILS</b></div>"
+	data += "<div style='border-top: 3px solid #404040; margin: 0 auto 30px; width: 91.5%;'></div>"
+
+	data += "<div style='width: 91.5%; margin: 0 auto;'>"
+	data += "<div style='display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 1fr; gap: 20px; margin-bottom: 20px;'>"
+
+	// Abraxas
+	data += direct_god_ui_block("ABRAXAS", "#680404", "#d32a35", /datum/patron/archdevil/abraxas, debug)
+
+	// Abaddon
+	data += direct_god_ui_block("ABADDON", "#680404", "#d32a35", /datum/patron/archdevil/abaddon, debug)
+
+	// Mephistopheles
+	data += direct_god_ui_block("MEPHISTOPHELES", "#680404", "#d32a35", /datum/patron/archdevil/mephistopheles, debug)
+
+	// Leviathan
+	data += direct_god_ui_block("LEVIATHAN", "#680404", "#d32a35", /datum/patron/archdevil/leviathan, debug)
+
+	data += "</div></div>"
+
 
 	mob << browse(null, "window=vanderlin_round_end")
 	var/datum/browser/popup = new(mob, "vanderlin_influences", "<center>Gods' Influences</center>", 1325, 875)
@@ -1049,6 +1073,87 @@
 		</div>
 	</div>
 	"}
+
+
+/// UI block to format information about non-storyteller god and their influences
+/proc/direct_god_ui_block(name, bg_color, title_color, datum/patron/patron, debug = FALSE)
+	var/total_influence = 0
+	var/datum/patron/initialized_patron = GLOB.patron_list[patron]
+	if(!initialized_patron)
+		return
+
+	var/patron_name = initialized_patron.name
+
+	var/dynamic_content = ""
+	var/followers = GLOB.patron_follower_counts[patron_name] || 0
+
+	dynamic_content += "Number of followers: [followers] ([get_colored_influence_value(followers * 20)])<br>"
+	total_influence += (followers * 20)
+
+	var/patron_monarch = GLOB.vanderlin_round_stats[STATS_MONARCH_PATRON] == patron_name ? TRUE : FALSE
+	dynamic_content += "[get_patron_adjective(patron_name)] monarch: [patron_monarch ? "YES" : "NO"] ([get_colored_influence_value((patron_monarch ? 500 : -250))])<br>"
+	total_influence += (patron_monarch ? 500 : -250)
+
+	/*
+	for(var/stat in initialized_storyteller.influence_factors)
+		var/list/stat_data = initialized_storyteller.influence_factors[stat]
+		var/stat_value = GLOB.vanderlin_round_stats[stat] || 0
+
+		dynamic_content += "[stat_data["name"]] [round(stat_value)] ([get_colored_influence_value(SSgamemode.calculate_specific_influence(storyteller, stat))])<br>"
+	*/
+
+	return {"
+	<div style='border:6px solid [bg_color]; background:[bg_color]; border-radius:6px; height:100%';>
+		<div style='font-weight:bold; font-size:1.2em; padding:8px; color:[title_color]'>[name]</div>
+		<div style='padding:8px; background:#111; border-radius:0 0 4px 4px;'>
+			<div style='margin-bottom:8px;'>[dynamic_content]</div>
+			<div style='border-top:1px solid #444; padding-top:6px;'>
+				<div>Total Influence: [get_colored_influence_value(total_influence)]</div>
+			</div>
+		</div>
+	</div>
+	"}
+
+/proc/get_patron_adjective(patron_name)
+	switch(patron_name)
+		if(ASTRATA)
+			return "Astratan"
+		if(NOC)
+			return "Noccite"
+		if(MALUM)
+			return "Malumite"
+		if(DENDOR)
+			return "Dendorite"
+		if(RAVOX)
+			return "Ravoxian"
+		if(EORA)
+			return "Eoran"
+		if(NECRA)
+			return "Necran"
+		if(ABYSSOR)
+			return "Abyssorite"
+		if(PESTRA)
+			return "Pestran"
+		if(XYLIX)
+			return "Xylixian"
+		if(ZIZO)
+			return "Zizite"
+		if(GRAGGAR)
+			return "Graggarite"
+		if(MATTHIOS)
+			return "Matthiosan"
+		if(BAOTHA)
+			return "Baothan"
+		if(PSYDON)
+			return "Psydonite"
+		if(ABRAXAS)
+			return "Abraxan"
+		if(ABADDON)
+			return "Abaddonian"
+		if(MEPHISTOPHELES)
+			return "Mephistophean"
+		if(LEVIATHAN)
+			return "Leviathanite"
 
 /// Colors resulting number depending on its value, with the operator attached
 /proc/get_colored_influence_value(num)

@@ -7,18 +7,19 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CHIEF
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 	honorary = "Elder"
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_NONHERETICAL
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	cmode_music = "sound/music/cmode/towner/CombatElder.ogg"
 	advclass_cat_rolls = list(CTAG_TOWN_ELDER = 20)
 	give_bank_account = 50
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
 	can_have_apprentices = FALSE
 
 	exp_type = list(EXP_TYPE_BARD, EXP_TYPE_LIVING)
@@ -82,22 +83,24 @@
 
 /datum/job/advclass/town_elder
 	exp_types_granted = list(EXP_TYPE_LEADERSHIP, EXP_TYPE_BARD)
+	factions = list(FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/town_elder/mayor
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_ENDURANCE = 1,
 		STAT_PERCEPTION = 2,
-		STAT_INTELLIGENCE = 2,
+		STAT_INTELLIGENCE = 3,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/labor/mathematics = 40,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/educated/mathematics = 40,
+		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/music = 50
 	)
 
@@ -106,15 +109,16 @@
 		STAT_STRENGTH = -2,
 		STAT_ENDURANCE = 1,
 		STAT_PERCEPTION = 3,
-		STAT_INTELLIGENCE = 3,
+		STAT_INTELLIGENCE = 4,
 		/datum/attribute/skill/craft/crafting = 30,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/riding = 40,
-		/datum/attribute/skill/labor/mathematics = 50,
+		/datum/attribute/skill/educated/mathematics = 50,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/music = 50
 	)
@@ -151,7 +155,7 @@
 	armor = /obj/item/clothing/armor/leather/vest/winterjacket
 	shirt = /obj/item/clothing/shirt/undershirt/fancy
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	gloves = /obj/item/clothing/gloves/leather/black
 	ring = /obj/item/clothing/ring/gold/toper
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak/colored/black
@@ -187,10 +191,10 @@
 		STAT_STRENGTH = 1,
 		STAT_ENDURANCE = 2,
 		STAT_INTELLIGENCE = 2,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/educated/reading = 10,
+		/datum/attribute/skill/educated/mathematics = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/misc/swimming = 30,
@@ -223,10 +227,10 @@
 		STAT_STRENGTH = 1,
 		STAT_ENDURANCE = 3,
 		STAT_INTELLIGENCE = 3,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/educated/reading = 10,
+		/datum/attribute/skill/educated/mathematics = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/misc/swimming = 30,
@@ -279,8 +283,10 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/music = 40
 	)
 
@@ -294,8 +300,10 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 50,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/music = 40
 	)
 
@@ -306,7 +314,7 @@
 
 /datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/noc
 	raw_attribute_list = list(
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/pestra
@@ -367,7 +375,8 @@
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/old
 
 	traits = list(
-		TRAIT_OLDPARTY
+		TRAIT_OLDPARTY,
+		TRAIT_VIRGIN,
 	)
 
 	languages = list(/datum/language/celestial)
@@ -375,7 +384,6 @@
 /datum/job/advclass/town_elder/hearth_acolyte/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
 
-	spawned.virginity = TRUE
 	switch(spawned.patron?.type)
 		if(/datum/patron/divine/astrata)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
@@ -385,11 +393,10 @@
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(spawned, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_EMPATH, TRAIT_GENERIC)
-			spawned.virginity = FALSE
+			REMOVE_TRAIT(spawned, TRAIT_VIRGIN, JOB_TRAIT)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/eora)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
 		if(/datum/patron/divine/noc)
-			spawned.adjust_skill_level(/datum/attribute/skill/labor/mathematics, 20)
 			var/language = pickweight(list("Dwarvish" = 1, "Elvish" = 1, "Hellspeak" = 1, "Zaladin" = 1, "Orcish" = 1,))
 			switch(language)
 				if("Dwarvish")
@@ -438,10 +445,6 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/malum)
 			ADD_TRAIT(spawned, TRAIT_MALUMFIRE, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
-
-	if(spawned.age == AGE_OLD)
-		spawned.adjust_skill_level(/datum/attribute/skill/magic/holy, 20)
-		spawned.adjust_stat_modifier(STATMOD_JOB, STAT_ENDURANCE, 1)
 
 	var/holder = spawned.patron?.devotion_holder
 	if(holder)
@@ -504,7 +507,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/music = 60,
 		/datum/attribute/skill/misc/athletics = 20
@@ -524,7 +527,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/music = 60,
 		/datum/attribute/skill/misc/athletics = 20
@@ -559,7 +562,7 @@
 	armor = /obj/item/clothing/armor/leather/jacket/silk_coat
 	shirt = /obj/item/clothing/shirt/tunic/noblecoat
 	pants = /obj/item/clothing/pants/trou/leather
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	gloves = /obj/item/clothing/gloves/leather
 	wrists = /obj/item/clothing/wrists/bracers/leather
 	cloak = /obj/item/clothing/cloak/half

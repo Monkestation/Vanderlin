@@ -5,18 +5,22 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 2,
-		STAT_PERCEPTION = 1,
-		STAT_ENDURANCE = 1,
-		/datum/attribute/skill/combat/knives = 20,
+		STAT_PERCEPTION = 2,
+		STAT_ENDURANCE = 2,
+		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/butchering = 20,
 		/datum/attribute/skill/labor/farming = 20,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/misc/music = 10,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/sneaking = 30,
@@ -25,7 +29,8 @@
 
 /datum/job/butler
 	title = JOB_BUTLER
-	f_title = "Head Housekeeper"
+	f_title = "Housekeeper"
+	alt_titles = list("Majordomo", "Master of Staff")
 	tutorial = "You are elevated to near nobility, as you hold the distinguished position of master of the royal household staff. \
 	Your blade is a charcuterie of artisanal cheeses and meat, your armor wit and classical training. \
 	By your word the meals are served, the chambers kept, and the floors polished clean. \
@@ -34,16 +39,20 @@
 	department_flag = SERFS
 	display_order = JDO_BUTLER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
+	starting_wage = 35
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_BUTLER
 
 	outfit = /datum/outfit/butler
 	give_bank_account = 30 // Along with the pouch, enough to purchase some ingredients from the farm and give hard working servants a silver here and there. Still need the assistance of the crown's coffers to do anything significant
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
 
 	exp_type = list(EXP_TYPE_LIVING)
@@ -66,13 +75,14 @@
 /datum/outfit/butler
 	name = JOB_BUTLER
 	shoes = /obj/item/clothing/shoes/nobleboot
-	beltr = /obj/item/storage/keyring/butler
 	beltl = /obj/item/storage/belt/pouch/coins/mid
+	beltr = /obj/item/weapon/whip/bronze/butler
 	backr = /obj/item/storage/backpack/satchel
 
 	backpack_contents = list(
 		/obj/item/weapon/knife/villager = 1,
-		/obj/item/servant_bell/lord = 1
+		/obj/item/servant_bell/lord = 1,
+		/obj/item/storage/keyring/butler = 1
 	)
 
 /datum/outfit/butler/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)

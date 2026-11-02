@@ -143,7 +143,7 @@
 	for(var/datum/crafting_slot/S in slots)
 		staged_types += S.item.type
 
-	for(var/recipe_type as anything in subtypesof(/datum/arcyne_crafting_recipe))
+	for(var/recipe_type in subtypesof(/datum/arcyne_crafting_recipe))
 		var/datum/arcyne_crafting_recipe/R = new recipe_type
 		var/list/needed = R.ingredients.Copy()
 		if(length(needed) != length(slots))
@@ -167,7 +167,7 @@
 	return null
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/proc/try_invoke(mob/living/user)
-	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
+	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NOVICE)
 		to_chat(user, span_warning("You aren't able to invoke these symbols."))
 		return
 	if(rune_in_use)

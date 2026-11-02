@@ -19,8 +19,8 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/attribute_holder/sheet/job/captain/law
@@ -38,20 +38,23 @@
 
 /datum/job/captain
 	title = JOB_GUARD_CAPTAIN
+	alt_titles = list("Commander of The Watch", "Knight Commander", "Watch Master", "Marshal")
+	unique_alt_honororary = TRUE
+	alt_honorary = list("Sir")
+	alt_honorary_female = list("Dame")
 	tutorial = "Law and Order, your divine reason for existence. \
 	You have been given command over the town and keep garrison to help ensure order and peace within the city, \
 	and defend it against the many dangers of the peninsula."
 	department_flag = NOBLEMEN
 	display_order = JDO_CAPTAIN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	faction = FACTION_TOWN
+	factions = list(FACTION_TOWN, SUB_FACTION_GARRISON, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 	honorary = JOB_GUARD_CAPTAIN
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
 	outfit = /datum/outfit/captain
 	spells = list(
@@ -59,6 +62,10 @@
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/serjeant
 		)
 	give_bank_account = 120
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	cmode_music = 'sound/music/cmode/antag/CombatSausageMaker.ogg'
 	noble_income = 11
 
@@ -116,12 +123,13 @@
 	armor = /obj/item/clothing/armor/brigandine/captain
 	neck = /obj/item/clothing/neck/gorget
 	shirt = /obj/item/clothing/shirt/undershirt/colored/guard
-	shoes = /obj/item/clothing/shoes/boots
+	shoes = /obj/item/clothing/shoes/boots/darkboots
 	backl = /obj/item/storage/backpack/satchel
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/weapon/mace/cudgel
 	cloak = /obj/item/clothing/cloak/captain
 	backpack_contents = list(
+		/obj/item/weapon/knife/dagger/steel = 1,
 		/obj/item/storage/keyring/captain = 1,
 		/obj/item/signal_horn = 1
 	)
