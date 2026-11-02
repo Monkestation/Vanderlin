@@ -3,7 +3,8 @@
 	desc = "Steel plate armor with shoulder guards. An incomplete, bulky set of excellent armor."
 	icon_state = "halfplate"
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel_slag
+	melt_amount = 100
+	melting_material = /datum/material/steel
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
