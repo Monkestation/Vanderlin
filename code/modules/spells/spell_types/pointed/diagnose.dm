@@ -39,6 +39,7 @@
 
 /datum/action/cooldown/spell/diagnose/holy/hunt
 	name = "Hunter's Mercy"
+	spell_type = SPELL_UNHOLY_MIRACLE
 	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)
 	associated_skill = /datum/attribute/skill/magic/druidic
 

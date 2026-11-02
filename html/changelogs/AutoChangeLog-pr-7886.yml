@@ -1,0 +1,5 @@
+author: "Rudolf-reindeer"
+delete-after: True
+changes:
+  - rscadd: "Added new toys for creation. Kobold dolls, tin toys, balls, stick dolls and cloth dolls."
+  - image: "Added sprites for above."

@@ -1,0 +1,31 @@
+2026-11-02:
+  Ben10083:
+  - rscadd: The chests by the Garrison cells can now be locked by the Watch. Some
+      maps with a Garrison have been given a chest for this purpose.
+  Ordosian:
+  - code_imp: Made it so rare fish can now be fished normally with added bonuses to
+      the fish
+  SSensum13:
+  - rscadd: added undivided/centrist amulets of the ten to loadout.
+  realforest2001:
+  - bugfix: Rune Ward spell now correctly requires ash either held in offhand or on
+      the floor adjacent.
+  - bugfix: Rune Ward spell can now be used to add allies to a rune.
+  - rscadd: Healing Spring spell moved from Geomancy to Vitamancy.
+  - rscadd: Added Extinguish Flames spell to Hydromancy.
+  - rscadd: Added more subfactions for use in conjunction with rune wards.
+  - rscadd: Added Blood Dagger spell, throws a bloodsteel dagger at a target. Does
+      not inflict curse.
+  - bugfix: Fixes wages.
+  - bugfix: Fixes vampire portals dumping you in random places.
+  - bugfix: Fixed excommunicated stopping great hunt miracles.
+  - rscadd: Added Truesilver. No differences to normal silver at this time.
+  - rscadd: Changed Noc's templar weapons to Truesilver. No stat differences.
+  - rscadd: Added Truesilver weapons. Sword, Longsword, Rapier, Whip, Barmace, Grand
+      Mace, Halberd, Great Axe, Warhammer, Dagger, and Misericorde.
+  - rscadd: Added Oracle version of the Staff of Testimonium.
+  - image: Added sprites for all Truesilver weapons, courtesy of Azure Peak generic
+      donator sprites.
+  ta3754859-max:
+  - balance: Brigand shield/flail loadout gets kite shield
+  - rscadd: Allows properties to save certain items

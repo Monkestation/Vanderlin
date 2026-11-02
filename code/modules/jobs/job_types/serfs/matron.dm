@@ -110,9 +110,9 @@
 	shoes = /obj/item/clothing/shoes/boots/leather
 	backr = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/matron
+	wrists = /obj/item/weapon/scabbard/knife/hidden/bs_misericorde
 
 	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/blacksteel/misericorde = 1,
 		/obj/item/key/matron = 1
 	)
 

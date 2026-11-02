@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - bugfix: "You can now select heraldry for tabards and jupons again by alt-clicking them."
