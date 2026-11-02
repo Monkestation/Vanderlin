@@ -1,0 +1,5 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - bugfix: "Sadist vice fulfillment is no longer blocked by being an Antagonist and/or being Steelhearted."
+  - balance: "Women no longer gain 1 extra point of stress from seeing dismemberments (that code was ancient)."

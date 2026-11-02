@@ -198,6 +198,16 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/sword/silver/truesilver
+	name = "truesilver sword"
+	desc = "A gleaming sword forged of truesilver, the perfect implement for keeping the nite safe."
+	icon_state = "lunar_sword"
+	sellprice = 80
+	smeltresult = null
+	melt_amount = 100
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_TRUESILVER
+
 /obj/item/weapon/sword/bloodsteel
 	name = "bloodsteel sword"
 	desc = "A simple sword with a shimmering bloodsteel blade."
@@ -332,13 +342,13 @@
 
 /obj/item/weapon/sword/sabre/noc
 	name = "moonlight khopesh"
-	desc = "Glittering moonlight upon blued steel."
+	desc = "Glittering moonlight upon truesilver."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "nockhopesh"
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST, SWORD_CHOP)
-	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_TRUESILVER
 	item_weight = 950 GRAMS
-	smeltresult = /obj/item/ingot/silver
+	smeltresult = /obj/item/ingot/silver/truesilver
 	examine_highlight_type = /datum/examine_highlight/divine_weapon/noc
 
 /obj/item/weapon/sword/sabre/noc/Initialize(mapload)
@@ -732,7 +742,7 @@
 	melt_amount = 100
 	max_blade_int = 240 // .8 of base steel
 	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	sellprice = 45
 	last_used = 0
 	item_weight = 650 GRAMS
@@ -740,6 +750,14 @@
 /obj/item/weapon/sword/rapier/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/sword/rapier/silver/truesilver
+	name = "truesilver rapier"
+	desc = "An elegant rapier forged of truesilver. An aristocratic take on hunting nite creachers."
+	icon_state = "lunar_rapier"
+	melting_material = /datum/material/truesilver
+	sellprice = 80
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/sword/rapier/eora
 	name = "\proper heartstring"
@@ -820,7 +838,9 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	smeltresult = /obj/item/ingot/steel_slag
+	smeltresult = null
+	melt_amount = 200
+	melting_material = /datum/material/steel
 	swingsound = BLADEWOOSH_LARGE
 	parrysound = "largeblade"
 	pickup_sound = "brandish_blade"
@@ -898,7 +918,7 @@
 	name = "iron shotel"
 	icon_state = "shotel_iron"
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_IRON * INTEGRITY_SPECIAL_MALUS
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = 60
 	item_weight = 1.5 KILOGRAMS
 
@@ -950,7 +970,7 @@
 	name = "iron aruval"
 	icon_state = "aruval_iron"
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_IRON
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = 35
 	item_weight = 1.7 KILOGRAMS
 
@@ -1008,6 +1028,7 @@
 	last_used = 0
 	item_weight = 1.4 KILOGRAMS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/sword/long/judgement/Initialize(mapload)
 	. = ..()
@@ -1045,6 +1066,7 @@
 	item_weight = 1.6 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/vampire
+	melting_material = /datum/material/ancient_alloy
 
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
 	. = ..()
@@ -1108,8 +1130,7 @@
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
 
 	last_used = 0
-	smeltresult = /obj/item/ingot/silver
-	melt_amount = 75
+	melting_material = /datum/material/silver
 	sellprice = 90
 	item_weight = 1.4 KILOGRAMS
 
@@ -1138,9 +1159,7 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_BLACKSTEEL
 	max_blade_int = 400
-	smeltresult = null
 	melting_material = /datum/material/blacksteel
-	melt_amount = 200
 	sellprice = 220
 
 /obj/item/weapon/sword/long/psydon
@@ -1149,7 +1168,7 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psysword"
 	last_used = 0
-	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 	sellprice = 100
 	item_weight = 1.5 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
@@ -1178,7 +1197,6 @@
 	max_blade_int = 240
 
 	last_used = 0
-	smeltresult = /obj/item/ingot/silver
 	sellprice = 160
 
 /obj/item/weapon/sword/long/silver
@@ -1190,12 +1208,20 @@
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
 
 	last_used = 0
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	sellprice = 120
 
 /obj/item/weapon/sword/long/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/sword/long/silver/truesilver
+	name = "truesilver longsword"
+	desc = "A finely-crafted longsword forged from truesilver."
+	icon_state = "lunar_longsword"
+	sellprice = 180
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/sword/long/oldpsysword //Not attainable
 	name = "old psydonian longsword"
@@ -1244,8 +1270,7 @@
 	icon_state = "psygsword"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	smeltresult = /obj/item/ingot/silverblessed
-	melt_amount = 150
+	melting_material = /datum/material/silver
 	sellprice = 150
 	item_weight = 2.5 KILOGRAMS
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER
@@ -1287,8 +1312,7 @@
 	desc = "Even the most ignorant of zealots know that the holy silver loses its properties when not blessed by Priests for an extended period of time. Even so, its edge endures, lethal as ever."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psybroadsword"
-	smeltresult = /obj/item/ingot/silver
-	melt_amount = 150
+	melting_material = /datum/material/silver
 	item_weight = 2.5 KILOGRAMS
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
 
@@ -1296,7 +1320,7 @@
 	name = "\proper creed"
 	desc = "Bathed in Psydonian prayers, this large and heavy blade exists to slay the inhumen and evil. The crossguard’s psycross is engraved with prayers of the Ordo Benetarus. You are the light - show them the way."
 	item_weight = 2.5 KILOGRAMS
-	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
@@ -1340,7 +1364,7 @@
 	desc = "A flamberge made of blacksteel. As the undulating blade dances through battle, it shimmers in the air like a black flame."
 	icon_state = "blackflamb"
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 3
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_BLACKSTEEL
 
 /obj/item/weapon/sword/long/greatsword/flamberge/blacksteel/getonmobprop(tag)
@@ -1364,7 +1388,7 @@
 	gripped_intents = list(ZWEI_CUT_REACH, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = 200
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_IRON
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	melt_amount = 225
 	sellprice = 60
 	item_weight = 3 KILOGRAMS
@@ -1389,7 +1413,7 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
 	max_blade_int = 300
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_STEEL
-	smeltresult = /obj/item/ingot/steel
+	melting_material = /datum/material/steel
 	sellprice = 90
 
 //................ Kriegsmesser ............... //
@@ -1422,7 +1446,7 @@
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	max_blade_int = 200
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_IRON
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = 90
 	item_weight = 2.8 KILOGRAMS
 
@@ -1467,7 +1491,7 @@
 	icon_state = "silverbroadsword"
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER
 	alt_intents = null
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	melt_amount = 200
 	sellprice = 150
 	item_weight = 2.9 KILOGRAMS
@@ -1519,6 +1543,7 @@
 	sellprice = 200
 	item_weight = 2.8 KILOGRAMS
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	melting_material = /datum/material/gold
 
 /obj/item/weapon/sword/long/greatsword/claymore/gold/getonmobprop(tag)
 	. = ..()
@@ -1548,6 +1573,7 @@
 	minstr = 15
 	sellprice = 240
 	item_weight = 4 KILOGRAMS
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/getonmobprop(tag)
 	. = ..()
@@ -1573,6 +1599,7 @@
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 	sellprice = 500
 	item_weight = 12 KILOGRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab/Initialize(mapload)
 	. = ..()
@@ -1632,6 +1659,7 @@
 	icon_state = "silverexealt"
 	item_weight = 3.5 KILOGRAMS
 	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/sword/long/exe/silver/Initialize(mapload)
 	. = ..()
@@ -1713,9 +1741,9 @@
 	parrysound = "sword"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
 	slot_flags = ITEM_SLOT_BACK//how the fuck you could put this thing on your hip?
-	smeltresult = /obj/item/ingot/copper
 	sellprice = 25//lets make the two bars worth it
 	item_weight = 1.6 KILOGRAMS
+	melting_material = /datum/material/copper
 
 /obj/item/weapon/sword/rapier/ironestoc
 	name = "estoc"

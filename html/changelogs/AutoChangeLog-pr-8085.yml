@@ -1,0 +1,5 @@
+author: "copper-404"
+delete-after: True
+changes:
+  - rscadd: "Gave the squire role same species lock as MAA."
+  - rscadd: "Gave the squire role alternative titles, more fitting of a trainee of the garrison rather than a knight's ward, to give options."

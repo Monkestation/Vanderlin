@@ -95,6 +95,15 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/whip/silver/truesilver
+	name = "truesilver whip"
+	desc = "A blued leather corded whip with a handle, core and tip forged with truesilver."
+	icon_state = "whip_lunar"
+	smeltresult = null
+	melt_amount = 100
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_TRUESILVER
+
 //................ Psydon Whip ............... //
 /obj/item/weapon/whip/psydon
 	name = "psydonian whip"
