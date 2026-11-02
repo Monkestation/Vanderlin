@@ -160,14 +160,13 @@
 	shirt = /obj/item/clothing/shirt/vampire
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/boots/rosa/seven
-	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
+	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden
 	gloves = /obj/item/clothing/gloves/leather/rosa/seven
 	ring =  /obj/item/clothing/ring/nitewarden
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/scabbard/sword/noble
 	backl = /obj/item/storage/backpack/satchel/black
 	r_hand = /obj/item/weapon/sword/long/silver/truesilver/nitewarden
-	l_hand = /obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden
 	backpack_contents = list(
 		/obj/item/needle/blessed = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
@@ -222,3 +221,14 @@
 	enchant(/datum/enchantment/leaping)
 	enchant(/datum/enchantment/anti_theft)
 	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden
+	armor_type = /datum/armor/wrist/leather/advanced
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	max_integrity = INTEGRITY_OLD_STANDARD + 50
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden/Initialize()
+	. = ..()
+	new /obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden(src)
+	update_appearance(UPDATE_ICON_STATE)
