@@ -171,6 +171,10 @@
 	name = "Jester's Quarters"
 	icon_state = "jester"
 
+/area/indoors/town/keep/dignitary
+	name = "Keep Dignitary's Room"
+	icon_state = "guest"
+
 /area/indoors/town/keep/guest
 	name = "Keep Guest Room"
 	icon_state = "guest"
