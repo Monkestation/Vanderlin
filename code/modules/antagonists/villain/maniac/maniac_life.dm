@@ -15,8 +15,6 @@
 
 
 /proc/handle_maniac_visions(mob/living/target, atom/movable/screen/fullscreen/maniac/hallucinations)
-	if(prob(0.5)) //It is funny once, it become a bit less funny after a while.
-		hallucinations.jumpscare(target)
 	//Random laughter
 	else if(prob(2))
 		var/static/list/funnies = list(
@@ -37,11 +35,6 @@
 	//Inner Thoughts..Or is it?
 	if(prob(5 * modifier))
 		INVOKE_ASYNC(target, GLOBAL_PROC_REF(handle_maniac_blurbs_hallucination), target)
-	//Meta hallucinations
-	else if(prob(1 * modifier) && prob(modifier * 5))
-		INVOKE_ASYNC(target, GLOBAL_PROC_REF(handle_maniac_admin_bwoink_hallucination), target)
-	else if(prob(1 * modifier) && prob(2 * modifier))
-		INVOKE_ASYNC(target, GLOBAL_PROC_REF(handle_maniac_admin_ban_hallucination), target)
 
 /proc/handle_maniac_object_hallucination(mob/living/target)
 	var/list/objects = list()
@@ -89,7 +82,7 @@
 /proc/handle_maniac_mob_hallucination(mob/living/target)
 	if(!target.client)
 		return
-	var/mob_message = pick("It's mom!", "I have to HURRY UP!", "They are CLOSE!","They are NEAR!")
+	var/mob_message = pick("I have to HURRY UP!", "They are CLOSE!","They are NEAR!")
 	var/turf/spawning_turf
 	var/list/turf/spawning_turfs = list()
 	for(var/turf/turf in view(target))
@@ -98,9 +91,7 @@
 		spawning_turf = pick(spawning_turfs)
 	if(!spawning_turf)
 		return
-	var/mob_state = pick("mom", "shadow", "deepone")
-	if(mob_message == "It's mom!")
-		mob_state = "mom"
+	var/mob_state = pick("shadow", "deepone")
 	var/image/mob_image = image('icons/roguetown/maniac/dreamer_mobs.dmi', spawning_turf, mob_state, FLOAT_LAYER, get_dir(spawning_turf, target))
 	mob_image.plane = GAME_PLANE_UPPER
 	target.client.images += mob_image
@@ -197,28 +188,6 @@
 	animate(fake_floor, pixel_y = -offset, time = disappearsecond, flags = ANIMATION_RELATIVE)
 	sleep(disappearsecond)
 	dreamer.client?.images -= fake_floor
-
-/proc/handle_maniac_admin_bwoink_hallucination(mob/living/target)
-	var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
-	var/fakemin = badmin?.owner?.key || "Trey Liam"
-	var/message = ""
-	message = pick_list_replacements("maniac.json", "dreamer_ahelp")
-	to_chat(target, "<font color='red' size='4'><b>-- Administrator private message --</b></font>")
-	to_chat(target, span_adminsay("ADMIN PM from-<b><span style='color: #0000EE; text-decoration: underline;'>[fakemin]</span></b>: [message]"))
-	to_chat(target, span_adminsay("<i>Click on the administrator's name to [pick("DIE", "CRY", "RISE", "WAKE UP")].</i>"))
-	SEND_SOUND(target, sound('sound/adminhelp.ogg'))
-
-/proc/handle_maniac_admin_ban_hallucination(mob/living/target)
-	var/datum/admins/badmin = GLOB.admin_datums[pick(GLOB.admin_datums)]
-	var/fakemin = badmin?.owner?.key || "Trey Liam"
-	var/message = ""
-	var/ban_appeal = pick("your grave", "WAKE UP WAKE UP WAKE UP", "cry a river", "bed and wake up")
-	message = pick_list_replacements("maniac.json", "dreamer_ban")
-	to_chat(target, span_boldannounce("<BIG>You have been banned by [fakemin] from the server.\nReason: [message]</BIG>"))
-	to_chat(target, span_boldannounce("This is a permanent ban. The round ID is [GLOB.rogue_round_id]."))
-	to_chat(target, span_boldannounce("To appeal this ban go to <span style='color: #0000EE;'>[ban_appeal].</span>"))
-	to_chat(target, "<div class='connectionClosed internal'>You are either AFK, experiencing lag or the connection has closed.</div>")
-	SEND_SOUND(target, sound(null))
 
 /proc/handle_maniac_blurbs_hallucination(mob/living/target)
 	if(!target.client)
