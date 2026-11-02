@@ -1,0 +1,4 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Fixed incorrect smelting paths. As a side effect, repairing metallic items should work more reliably now."
