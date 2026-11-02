@@ -165,17 +165,17 @@
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/scabbard/sword/noble
 	backl = /obj/item/storage/backpack/satchel/black
-	r_hand = /obj/item/weapon/sword/long/silver/lunar/nitewarden
-	l_hand = /obj/item/weapon/knife/dagger/silver/lunar/misericorde/nitewarden
+	r_hand = /obj/item/weapon/sword/long/silver/truesilver/nitewarden
+	l_hand = /obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden
 	backpack_contents = list(/obj/item/needle/blessed = 1)
 
 /datum/outfit/nitewarden/post_equip(mob/living/carbon/human/H)
 	..()
 	var/datum/component/storage/concrete/scabbard/sword/holder = H.beltl?.GetComponent(/datum/component/storage/concrete/scabbard/sword)
-	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/lunar/nitewarden), list())
+	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/truesilver/nitewarden), list())
 
 
-/obj/item/weapon/sword/long/silver/lunar/nitewarden
+/obj/item/weapon/sword/long/silver/truesilver/nitewarden
 	name = "nite's grace"
 	desc = "The Moon Prince is watching."
 	force_wielded = DAMAGE_GREATSWORD_WIELD
@@ -186,19 +186,19 @@
 	sellprice = 0
 	slot_flags = 0 //scabbard only
 
-/obj/item/weapon/sword/long/silver/lunar/nitewarden/Initialize(mapload)
+/obj/item/weapon/sword/long/silver/truesilver/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/anti_theft)
 
-/obj/item/weapon/knife/dagger/silver/lunar/misericorde/nitewarden
+/obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden
 	name = "nite's sting"
 	desc = "The Moon Prince is watching."
 	max_blade_int = 50000
 	max_integrity = 50000
 	resistance_flags = INDESTRUCTIBLE
 
-/obj/item/weapon/knife/dagger/silver/lunar/misericorde/nitewarden/Initialize(mapload)
+/obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/lightning)
 	enchant(/datum/enchantment/anti_theft)
@@ -206,10 +206,10 @@
 /obj/item/clothing/ring/nitewarden
 	name = "nitewarden's ring"
 	icon_state = "s_newring_ruby"
-	desc = "A ring of lunar silver with a shimmering rontz set within. It thrums with unseen power."
+	desc = "A ring of truesilver with a shimmering rontz set within. It thrums with unseen power."
 	sellprice = 500
 	misc_flags = CRAFTING_TEST_EXCLUDE
-	examine_highlight_type = /datum/examine_highlight/divine/lunar_silver/ring
+	examine_highlight_type = /datum/examine_highlight/divine/truesilver/ring
 
 /obj/item/clothing/ring/nitewarden/Initialize(mapload)
 	. = ..()

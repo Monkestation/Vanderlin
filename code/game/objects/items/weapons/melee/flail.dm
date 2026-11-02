@@ -112,7 +112,7 @@
 
 /obj/item/weapon/flail/silver/noc
 	name = "lunar flail"
-	desc = "A shining lunar silver flail, bane of all who lurk in the night and mounted with a crescent moon. Slice the nitebeasts apart."
+	desc = "A shining truesilver flail, bane of all who lurk in the night and mounted with a crescent moon. Slice the nitebeasts apart."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "moonflail"
 	sharpness = IS_SHARP
@@ -120,7 +120,8 @@
 	possible_item_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_LNGCUT)
 	wlength = WLENGTH_GREAT
 	examine_highlight_type = /datum/examine_highlight/divine_weapon/noc
-	melting_material = /datum/material/lunar_silver
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_TRUESILVER
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon

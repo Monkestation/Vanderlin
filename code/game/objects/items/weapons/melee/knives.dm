@@ -413,16 +413,17 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/knife/dagger/silver/lunar
-	name = "lunar silver dagger"
-	desc = "A dagger made of lunar silver, the thin death of nite creachers."
+/obj/item/weapon/knife/dagger/silver/truesilver
+	name = "truesilver dagger"
+	desc = "A dagger made of truesilver, the thin death of nite creachers."
 	icon_state = "lunar_dagger"
 	sellprice = 80
-	melting_material = /datum/material/lunar_silver
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_TRUESILVER
 
-/obj/item/weapon/knife/dagger/silver/lunar/misericorde
-	name = "lunar silver misericorde"
-	desc = "An armor-piercing dagger of lunar silver. Even the most well protected nite creacher will fear its sting."
+/obj/item/weapon/knife/dagger/silver/truesilver/misericorde
+	name = "truesilver misericorde"
+	desc = "An armor-piercing dagger of truesilver. Even the most well protected nite creacher will fear its sting."
 	icon_state = "lunar_misericorde"
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 

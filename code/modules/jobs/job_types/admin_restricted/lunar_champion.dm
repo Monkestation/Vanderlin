@@ -89,7 +89,7 @@
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltr = /obj/item/weapon/flail/silver/noc
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/polearm/halberd/silver/lunar
+	backr = /obj/item/weapon/polearm/halberd/silver/truesilver
 	backpack_contents = list(
 		/obj/item/needle = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1,

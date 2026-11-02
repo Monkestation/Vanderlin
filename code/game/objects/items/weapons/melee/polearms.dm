@@ -616,11 +616,12 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/polearm/halberd/silver/lunar
-	name = "lunar silver halberd"
-	desc = "A halberd forged from lunar silver, a favored weapon of the Lunar Order."
+/obj/item/weapon/polearm/halberd/silver/truesilver
+	name = "truesilver halberd"
+	desc = "A halberd forged from truesilver, a favored weapon of the Lunar Order."
 	icon_state = "lunar_halberd"
-	melting_material = /datum/material/lunar_silver
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/polearm/halberd/bloodsteel
 	name = "bloodsteel halberd"

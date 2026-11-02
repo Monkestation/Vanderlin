@@ -34,13 +34,13 @@
 /datum/examine_highlight/divine/scrying
 	item_examine_desc = "Blessed by the Moon Prince this Scrying Orb can only be handled by the faithful."
 
-/datum/examine_highlight/divine/lunar_silver
+/datum/examine_highlight/divine/truesilver
 	color = COLOR_SILVER
-	adjective = "Lunar Silver"
+	adjective = "Truesilver"
 	explanation = "<span style='color: #C0C0C0;'><b>This is an item of Divine importance!</b></span><br><br>A shining symbol of divinity, it is treasured by worshippers of The Ten."
 	item_examine_desc = "The Blessed Silver of the Moon Prince, there is no greater bane to nite creachers."
 
-/datum/examine_highlight/divine/lunar_silver/ring
+/datum/examine_highlight/divine/truesilver/ring
 	required_trait = TRAIT_LUNAR_ORDER
 
 /datum/examine_highlight/divine_weapon

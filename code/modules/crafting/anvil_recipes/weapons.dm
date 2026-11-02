@@ -974,65 +974,65 @@
 /datum/anvil_recipe/weapons/psy
 	required_material = /obj/item/ingot/silverblessed
 
-// --------------- Lunar Silver --------------------
-/datum/anvil_recipe/weapons/lunar_silver
-	abstract_type = /datum/anvil_recipe/weapons/lunar_silver
-	required_material = /obj/item/ingot/silver/lunar
+// --------------- Truesilver --------------------
+/datum/anvil_recipe/weapons/truesilver
+	abstract_type = /datum/anvil_recipe/weapons/truesilver
+	required_material = /obj/item/ingot/silver/truesilver
 	craftdiff = 4
 
-/datum/anvil_recipe/weapons/lunar_silver/halberd
-	name = "Lunar Silver Halberd"
-	additional_items = list(/obj/item/ingot/silver/lunar = 1, /obj/item/grown/log/tree/small = 1)
-	created_item = /obj/item/weapon/polearm/halberd/silver/lunar
+/datum/anvil_recipe/weapons/truesilver/halberd
+	name = "Truesilver Halberd"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/polearm/halberd/silver/truesilver
 
-/datum/anvil_recipe/weapons/lunar_silver/greataxe
-	name = "Lunar Silver Greataxe"
-	additional_items = list(/obj/item/ingot/silver/lunar = 1, /obj/item/grown/log/tree/small = 1)
-	created_item = /obj/item/weapon/greataxe/lunar_silver
+/datum/anvil_recipe/weapons/truesilver/greataxe
+	name = "Truesilver Greataxe"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/greataxe/truesilver
 
-/datum/anvil_recipe/weapons/lunar_silver/grandmace
-	name = "Lunar Silver Grand Mace"
-	additional_items = list(/obj/item/ingot/silver/lunar = 1, /obj/item/grown/log/tree/small = 1)
-	created_item = /obj/item/weapon/mace/goden/steel/lunar_silver
+/datum/anvil_recipe/weapons/truesilver/grandmace
+	name = "Truesilver Grand Mace"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/mace/goden/steel/truesilver
 
-/datum/anvil_recipe/weapons/lunar_silver/dagger
-	name = "Lunar Silver Daggers"
-	created_item = /obj/item/weapon/knife/dagger/silver/lunar
+/datum/anvil_recipe/weapons/truesilver/dagger
+	name = "Truesilver Daggers"
+	created_item = /obj/item/weapon/knife/dagger/silver/truesilver
 	output_amount = 2
 	craftdiff = 3
 
-/datum/anvil_recipe/weapons/lunar_silver/misericorde
-	name = "Lunar Silver Misericorde"
-	created_item = /obj/item/weapon/knife/dagger/silver/lunar/misericorde
+/datum/anvil_recipe/weapons/truesilver/misericorde
+	name = "Truesilver Misericorde"
+	created_item = /obj/item/weapon/knife/dagger/silver/truesilver/misericorde
 	craftdiff = 3
 
-/datum/anvil_recipe/weapons/lunar_silver/barmace
-	name = "Lunar Silver Barmace"
-	additional_items = list(/obj/item/ingot/silver/lunar = 2)
+/datum/anvil_recipe/weapons/truesilver/barmace
+	name = "Truesilver Barmace"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 2)
 	created_item = /obj/item/weapon/mace/silver/barmace/lunar
 
-/datum/anvil_recipe/weapons/lunar_silver/hammer
-	name = "Lunar Silver Warhammer"
-	additional_items = list(/obj/item/ingot/silver/lunar = 1)
-	created_item = /obj/item/weapon/mace/warhammer/silver/lunar
+/datum/anvil_recipe/weapons/truesilver/hammer
+	name = "Truesilver Warhammer"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1)
+	created_item = /obj/item/weapon/mace/warhammer/silver/truesilver
 
-/datum/anvil_recipe/weapons/lunar_silver/sword
-	name = "Lunar Silver Sword"
-	created_item = /obj/item/weapon/sword/silver/lunar
+/datum/anvil_recipe/weapons/truesilver/sword
+	name = "Truesilver Sword"
+	created_item = /obj/item/weapon/sword/silver/truesilver
 
-/datum/anvil_recipe/weapons/lunar_silver/longsword
-	name = "Lunar Silver Longsword"
-	additional_items = list(/obj/item/ingot/silver/lunar = 1)
-	created_item = /obj/item/weapon/sword/long/silver/lunar
+/datum/anvil_recipe/weapons/truesilver/longsword
+	name = "Truesilver Longsword"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1)
+	created_item = /obj/item/weapon/sword/long/silver/truesilver
 
-/datum/anvil_recipe/weapons/lunar_silver/rapier
-	name = "Lunar Silver Rapier"
-	created_item = /obj/item/weapon/sword/rapier/silver/lunar
+/datum/anvil_recipe/weapons/truesilver/rapier
+	name = "Truesilver Rapier"
+	created_item = /obj/item/weapon/sword/rapier/silver/truesilver
 
-/datum/anvil_recipe/weapons/lunar_silver/whip
-	name = "Lunar Silver Whip"
+/datum/anvil_recipe/weapons/truesilver/whip
+	name = "Truesilver Whip"
 	additional_items = list(/obj/item/natural/hide/cured = 2)
-	created_item = /obj/item/weapon/whip/silver/lunar
+	created_item = /obj/item/weapon/whip/silver/truesilver
 
 // --------------- Psydonite --------------------
 /datum/anvil_recipe/weapons/psy/axe

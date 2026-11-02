@@ -594,11 +594,12 @@
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
-/obj/item/weapon/greataxe/lunar_silver
-	name = "lunar silver greataxe"
-	desc = "A grand display of power and loyalty, this greataxe is forged of lunar silver and sends nite creachers of all kinds to Necra's embrace one piece at a time."
+/obj/item/weapon/greataxe/truesilver
+	name = "truesilver greataxe"
+	desc = "A grand display of power and loyalty, this greataxe is forged of truesilver and sends nite creachers of all kinds to Necra's embrace one piece at a time."
 	icon_state = "lunar_greataxe"
-	melting_material = /datum/material/lunar_silver
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/greataxe/blacksteel
 	name = "blacksteel greataxe"

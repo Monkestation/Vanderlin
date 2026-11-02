@@ -198,14 +198,15 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/sword/silver/lunar
-	name = "lunar silver sword"
-	desc = "A gleaming sword forged of lunar silver, the perfect implement for keeping the nite safe."
+/obj/item/weapon/sword/silver/truesilver
+	name = "truesilver sword"
+	desc = "A gleaming sword forged of truesilver, the perfect implement for keeping the nite safe."
 	icon_state = "lunar_sword"
 	sellprice = 80
 	smeltresult = null
 	melt_amount = 100
-	melting_material = /datum/material/lunar_silver
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/sword/bloodsteel
 	name = "bloodsteel sword"
@@ -341,13 +342,13 @@
 
 /obj/item/weapon/sword/sabre/noc
 	name = "moonlight khopesh"
-	desc = "Glittering moonlight upon lunar silver."
+	desc = "Glittering moonlight upon truesilver."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "nockhopesh"
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST, SWORD_CHOP)
-	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_TRUESILVER
 	item_weight = 950 GRAMS
-	smeltresult = /obj/item/ingot/silver/lunar
+	smeltresult = /obj/item/ingot/silver/truesilver
 	examine_highlight_type = /datum/examine_highlight/divine_weapon/noc
 
 /obj/item/weapon/sword/sabre/noc/Initialize(mapload)
@@ -750,12 +751,13 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/sword/rapier/silver/lunar
-	name = "lunar silver rapier"
-	desc = "An elegant rapier forged of lunar silver. An aristocratic take on hunting nite creachers."
+/obj/item/weapon/sword/rapier/silver/truesilver
+	name = "truesilver rapier"
+	desc = "An elegant rapier forged of truesilver. An aristocratic take on hunting nite creachers."
 	icon_state = "lunar_rapier"
-	melting_material = /datum/material/lunar_silver
+	melting_material = /datum/material/truesilver
 	sellprice = 80
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/sword/rapier/eora
 	name = "\proper heartstring"
@@ -1213,12 +1215,13 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/sword/long/silver/lunar
-	name = "lunar silver longsword"
-	desc = "A finely-crafted longsword forged from lunar silver."
+/obj/item/weapon/sword/long/silver/truesilver
+	name = "truesilver longsword"
+	desc = "A finely-crafted longsword forged from truesilver."
 	icon_state = "lunar_longsword"
 	sellprice = 180
-	melting_material = /datum/material/lunar_silver
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/sword/long/oldpsysword //Not attainable
 	name = "old psydonian longsword"
