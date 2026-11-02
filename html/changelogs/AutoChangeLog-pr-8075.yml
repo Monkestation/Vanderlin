@@ -1,0 +1,9 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Rune Ward spell now correctly requires ash either held in offhand or on the floor adjacent."
+  - bugfix: "Rune Ward spell can now be used to add allies to a rune."
+  - rscadd: "Healing Spring spell moved from Geomancy to Vitamancy."
+  - rscadd: "Added Extinguish Flames spell to Hydromancy."
+  - rscadd: "Added more subfactions for use in conjunction with rune wards."
+  - rscadd: "Added Blood Dagger spell, throws a bloodsteel dagger at a target. Does not inflict curse."
