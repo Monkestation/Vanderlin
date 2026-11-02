@@ -94,7 +94,7 @@
 	var/area/target_area = get_area(human_target)
 	if(istype(target_area, /area/indoors/town/keep) || istype(target_area, /area/outdoors/town/keep))
 		pass = TRUE
-	else if(human_target.has_faction(SUB_FACTION_KEEP))
+	else if(human_target.has_faction(SUB_FACTION_KEEP) || human_target.has_faction(SUB_FACTION_GARRISON))
 		pass = TRUE
 
 	if(!pass)
