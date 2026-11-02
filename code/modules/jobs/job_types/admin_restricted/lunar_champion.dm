@@ -9,11 +9,11 @@
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 40,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/sewing = 20,
-		/datum/attribute/skill/combat/swords = 40,
+		/datum/attribute/skill/combat/polearms = 40,
 		/datum/attribute/skill/combat/whipsflails = 40,
 	)
 
@@ -61,6 +61,7 @@
 	languages = list(
 		/datum/language/celestial_moon,
 		/datum/language/celestial,
+		/datum/language/elvish,
 		/datum/language/hellspeak
 	)
 
@@ -86,9 +87,9 @@
 	cloak = /obj/item/clothing/cloak/stabard/templar/noc
 	wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltl = /obj/item/weapon/sword/sabre/noc
 	beltr = /obj/item/weapon/flail/silver/noc
 	backl = /obj/item/storage/backpack/satchel
+	backr = /obj/item/weapon/polearm/halberd/silver/truesilver
 	backpack_contents = list(
 		/obj/item/needle = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1,

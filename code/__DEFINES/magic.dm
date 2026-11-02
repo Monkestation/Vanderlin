@@ -126,6 +126,7 @@ DEFINE_BITFIELD(antimagic_flags, list(
 #define SPELL_STAMINA 2
 /// Miracle, uses devotion and thus requires a devotion holder
 #define SPELL_DIVINE_MIRACLE 3
+/// Same as divine miracle, but ignores excommunication
 #define SPELL_UNHOLY_MIRACLE 4
 /// Cast with the essence gauntlet, using essence vials
 #define SPELL_ESSENCE 5
@@ -229,15 +230,15 @@ DEFINE_BITFIELD(spell_requirements, list(
 #define TECHNIQUE_ILLUSION "Illusion"
 #define TECHNIQUE_IMBUE "Imbue"
 
-#define FORM_FIRE "Fire"
-#define FORM_ICE "Ice"
-#define FORM_LIGHTNING "Lightning"
-#define FORM_EARTH "Earth"
-#define FORM_ARCANE "Arcane"
-#define FORM_DEATH "Death"
-#define FORM_LIFE "Life"
-#define FORM_AIR "Aeromancy"
+#define FORM_ARCANE "Arcyne"
+#define FORM_FIRE "Pyromancy"
 #define FORM_WATER "Hydromancy"
+#define FORM_ICE "Cryomancy"
+#define FORM_EARTH "Geomancy"
+#define FORM_AIR "Aeromancy"
+#define FORM_LIGHTNING "Astrapomancy"
+#define FORM_LIFE "Vitamancy"
+#define FORM_DEATH "Necromancy"
 #define FORM_BLOOD "Hemomancy"
 
 #define MASTERY_RANK_NOVICE 0
@@ -276,15 +277,15 @@ GLOBAL_LIST_INIT(all_techniques, list(
 ))
 
 GLOBAL_LIST_INIT(all_forms, list(
-	FORM_FIRE,
-	FORM_ICE,
-	FORM_LIGHTNING,
-	FORM_EARTH,
 	FORM_ARCANE,
+	FORM_FIRE,
+	FORM_WATER,
+	FORM_ICE,
+	FORM_EARTH,
+	FORM_AIR,
+	FORM_LIGHTNING,
 	FORM_LIFE,
 	FORM_DEATH,
-	FORM_AIR,
-	FORM_WATER,
 	FORM_BLOOD,
 ))
 

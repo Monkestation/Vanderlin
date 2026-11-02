@@ -39,6 +39,7 @@
 
 /datum/action/cooldown/spell/diagnose/holy/hunt
 	name = "Hunter's Mercy"
+	spell_type = SPELL_UNHOLY_MIRACLE
 	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)
 	associated_skill = /datum/attribute/skill/magic/druidic
 
@@ -53,6 +54,19 @@
 	heretical_spell = TRUE
 	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 	check_flags = AB_CHECK_CONSCIOUS
+
+	cooldown_time = 5 SECONDS
+	spell_cost = 5
+	shows_reagents = TRUE
+
+/datum/action/cooldown/spell/diagnose/life
+	name = "Detect Wounds"
+
+	cast_range = 4
+	associated_skill = /datum/attribute/skill/magic/arcane/life
+	spell_type = SPELL_MANA
+	required_form = FORM_LIFE
+	antimagic_flags = MAGIC_RESISTANCE
 
 	cooldown_time = 5 SECONDS
 	spell_cost = 5

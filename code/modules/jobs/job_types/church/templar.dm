@@ -9,7 +9,7 @@
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/magic/holy = 20,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/sewing = 20
@@ -22,7 +22,7 @@
 
 /datum/attribute_holder/sheet/job/templar/patron/noc
 	raw_attribute_list = list(
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/attribute_holder/sheet/job/templar/patron/noc/khopesh
@@ -168,6 +168,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_LUNAR_ORDER, JOB_TRAIT)
+			spawned.grant_language(/datum/language/celestial_moon)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			var/static/list/selectable = list(
 				"Moonlight Khopesh" = /obj/item/weapon/sword/sabre/noc,

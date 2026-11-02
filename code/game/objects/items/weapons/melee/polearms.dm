@@ -297,6 +297,7 @@
 	smeltresult = /obj/item/ingot/steel_slag
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/abyssor
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
@@ -605,7 +606,7 @@
 	force_wielded = DAMAGE_HALBERD_WIELD
 	wbalance = EASY_TO_DODGE
 	max_blade_int = 300
-	smeltresult = /obj/item/ingot/silver
+	smeltresult = null
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 120
@@ -614,6 +615,13 @@
 /obj/item/weapon/polearm/halberd/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/polearm/halberd/silver/truesilver
+	name = "truesilver halberd"
+	desc = "A halberd forged from truesilver, a favored weapon of the Lunar Order."
+	icon_state = "lunar_halberd"
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/polearm/halberd/bloodsteel
 	name = "bloodsteel halberd"

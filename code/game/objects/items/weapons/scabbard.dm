@@ -90,6 +90,11 @@
 	new /obj/item/weapon/knife/dagger/steel(src)
 	update_appearance(UPDATE_ICON_STATE)
 
+/obj/item/weapon/scabbard/knife/hidden/bs_misericorde/Initialize()
+	. = ..()
+	new /obj/item/weapon/knife/dagger/blacksteel/misericorde(src)
+	update_appearance(UPDATE_ICON_STATE)
+
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
 	desc = "A scabbard designed to hold a sword. The natural conclusion for those wishing to carry longblades."

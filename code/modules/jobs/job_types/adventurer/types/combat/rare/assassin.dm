@@ -18,7 +18,7 @@
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/craft/traps = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/advclass/combat/assassin

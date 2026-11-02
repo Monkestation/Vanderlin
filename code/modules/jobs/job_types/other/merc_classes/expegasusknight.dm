@@ -13,7 +13,7 @@
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/shields = 30,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 30
 	)
 

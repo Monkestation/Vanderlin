@@ -8,7 +8,7 @@
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/crossbows = 30,

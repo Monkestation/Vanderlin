@@ -6,7 +6,7 @@
 	self_cast_possible = FALSE
 
 	cast_range = 7
-	spell_type = SPELL_DIVINE_MIRACLE
+	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/druidic
 	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)
