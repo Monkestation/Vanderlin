@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Fixes wages."
+  - bugfix: "Fixes vampire portals dumping you in random places."
+  - bugfix: "Fixed excommunicated stopping great hunt miracles."

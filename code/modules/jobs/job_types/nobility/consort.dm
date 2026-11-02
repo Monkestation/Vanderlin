@@ -206,6 +206,7 @@
 	shirt = /obj/item/clothing/armor/gambeson/heavy/winterdress
 	armor = /obj/item/clothing/armor/leather/vest/winterjacket
 	cloak = /obj/item/clothing/cloak/raincloak/furcloak
+	wrists = /obj/item/weapon/scabbard/knife/hidden/bs_misericorde
 
 /datum/outfit/consort/courtesan/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()

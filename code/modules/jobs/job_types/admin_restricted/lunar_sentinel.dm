@@ -15,6 +15,21 @@
 		/datum/attribute/skill/misc/sewing = 20,
 	)
 
+/datum/attribute_holder/sheet/job/lunar_sentinel/khopesh
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/swords = 40
+	)
+
+/datum/attribute_holder/sheet/job/lunar_sentinel/flail
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/whipsflails = 40
+	)
+
+/datum/attribute_holder/sheet/job/lunar_sentinel/mace
+	raw_attribute_list = list(
+		/datum/attribute/skill/combat/axesmaces = 40
+	)
+
 /datum/job/admin/lunar_sentinel
 	title = JOB_ADMIN_LUNAR_SENTINEL
 	tutorial = "You are a devoted follower of Noc. \
@@ -59,6 +74,7 @@
 	languages = list(
 		/datum/language/celestial_moon,
 		/datum/language/celestial,
+		/datum/language/elvish,
 		/datum/language/hellspeak
 	)
 
@@ -77,15 +93,18 @@
 	var/static/list/selectable = list(
 		"Moonlight Khopesh" = /obj/item/weapon/sword/sabre/noc,
 		"Lunar Flail" = /obj/item/weapon/flail/silver/noc,
+		"Bar Mace" = /obj/item/weapon/mace/silver/barmace/lunar,
 	)
-	var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
+	var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "SENTINEL")
 	if(!choice)
 		return
 	switch(choice)
 		if("Moonlight Khopesh")
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc/khopesh)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lunar_sentinel/khopesh)
 		if("Lunar Flail")
-			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc/flail)
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lunar_sentinel/flail)
+		if("Bar Mace")
+			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/lunar_sentinel/mace)
 
 /datum/outfit/admin/lunar_sentinel
 	name = JOB_ADMIN_LUNAR_SENTINEL
