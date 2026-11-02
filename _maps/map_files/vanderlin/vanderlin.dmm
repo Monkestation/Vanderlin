@@ -11246,7 +11246,7 @@
 /area/outdoors/town/keep/roof)
 "eps" = (
 /obj/structure/lever/hidden/keep{
-	redstone_id = Keep-Dignitary
+	redstone_id = "Keep-Dignitary"
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/dignitary)
@@ -44631,7 +44631,7 @@
 /area/indoors/town/church/chapel)
 "rzX" = (
 /obj/effect/mapping_helpers/secret_door_creator/keep{
-	redstone_id = Keep-Dignitary
+	redstone_id = "Keep-Dignitary"
 	},
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/dignitary)
