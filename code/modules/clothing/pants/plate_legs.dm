@@ -16,7 +16,9 @@
 	pickup_sound = "rustle"
 	break_sound = 'sound/foley/breaksound.ogg'
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
+	smeltresult = null
 	r_sleeve_status = SLEEVE_NOMOD
 	l_sleeve_status = SLEEVE_NOMOD
 	clothing_flags = CANT_SLEEP_IN
@@ -39,7 +41,7 @@
 	desc = "Cuisses made of plated iron, offering additional protection against blunt force."
 	icon_state = "iplate_legs"
 	item_state = "iplate_legs"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/pants/plate/bad
 	max_integrity = INTEGRITY_OLD_STRONG
@@ -74,7 +76,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/pants/plate/good
 	item_weight = 3 KILOGRAMS
@@ -132,7 +134,7 @@
 	icon_state = "silverlegs"
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/pants/plate/silver
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 3.95 KILOGRAMS
 	sellprice = VALUE_SILVER_ARMOR
 
