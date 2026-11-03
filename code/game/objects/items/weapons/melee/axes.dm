@@ -441,6 +441,7 @@
 	max_blade_int = 100
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_COPPER
 	smeltresult = /obj/item/ingot/copper
+	smeltresult = /obj/item/ingot/copper
 	melting_material = /datum/material/copper
 	sellprice = 15
 	item_weight = 700 GRAMS
