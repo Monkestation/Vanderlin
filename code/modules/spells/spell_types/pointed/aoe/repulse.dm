@@ -16,6 +16,7 @@
 	charge_slowdown = 0.7
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 	required_technique = TECHNIQUE_CREATION
 
 	/// The minimum throw range of the replusion

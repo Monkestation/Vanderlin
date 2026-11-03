@@ -82,6 +82,7 @@
 	name = "Subdue Beast"
 	spell_type = SPELL_MANA
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_SUMMONING
 	required_items = null
 
@@ -92,7 +93,7 @@
 
 /datum/action/cooldown/spell/beast_tame/great_hunt
 	name = "Calm Beast"
-	spell_type = SPELL_DIVINE_MIRACLE
+	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/druidic
 	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)

@@ -12,7 +12,9 @@
 	soundenv = 15
 	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
 	ambush_types = list(
-				/turf/open/floor/grass)
+		/turf/open/floor/grass,
+		/turf/open/floor/dirt,
+	)
 
 	ambush_mobs = list(
 		new /datum/ambush_config/wolf_pack = 15,

@@ -114,10 +114,6 @@
 	dir = 4
 	},
 /area/under/town/sewer)
-"aff" = (
-/obj/structure/dungeon_entry,
-/turf/open/floor/cobble/mossy,
-/area/outdoors/basin/safe)
 "afp" = (
 /turf/open/floor/blocks/newstone,
 /area/indoors/town/keep/guest/guest1)
@@ -14815,6 +14811,7 @@
 /area/indoors/town/keep/halls/w)
 "ljV" = (
 /obj/structure/closet/crate/chest/neu,
+/obj/effect/mapping_helpers/access/keyset/garrison/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/garrison)
 "lky" = (
@@ -115437,7 +115434,7 @@ ftQ
 ftQ
 ftQ
 ftQ
-aff
+rqT
 cDu
 cDu
 rqT

@@ -10,7 +10,7 @@
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/sneaking = 60,
 		/datum/attribute/skill/misc/stealing = 60,
 		/datum/attribute/skill/misc/lockpicking = 50,

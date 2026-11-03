@@ -12,6 +12,7 @@
 	invocation = "Lend me thine ear."
 
 	required_form = FORM_WATER
+	associated_skill = /datum/attribute/skill/magic/arcane/water
 
 	invocation_type = INVOCATION_WHISPER
 

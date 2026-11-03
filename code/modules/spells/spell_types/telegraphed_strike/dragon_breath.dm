@@ -7,6 +7,7 @@
 	sound = 'sound/magic/fireball.ogg'
 
 	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 	required_technique = TECHNIQUE_CREATION
 
 	invocation_type = INVOCATION_SHOUT

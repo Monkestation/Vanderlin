@@ -12,10 +12,11 @@
 	invocation = "Strands that bind!"
 	invocation_type = INVOCATION_WHISPER
 
-	summon_type = list(/obj/structure/spider/stickyweb)
+	summon_type = list(/obj/structure/spider/stickyweb/summoned)
 	summon_radius = 3
 	summon_amount = 0
 	spell_flags = SPELL_RITUOS
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_technique = TECHNIQUE_CREATION

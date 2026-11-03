@@ -23,3 +23,6 @@
 #define THREAT_REGION_MOUNT_DECAP "Mountain"
 #define THREAT_REGION_TERRORBOG "Terrorbog"
 #define THREAT_REGION_COAST "Coast"
+
+/// A fully lit turf is dropped as an ambush spawn point this often.
+#define AMBUSH_LIGHT_REDUCTION 100

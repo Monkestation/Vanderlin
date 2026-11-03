@@ -134,6 +134,8 @@
 /obj/structure/fluff/traveltile/proc/can_go(atom/movable/AM)
 	if(AM.pulledby)
 		return FALSE
+	if(!get_mind(AM) && AM.buckled_mobs)
+		return FALSE
 
 	if(AM.recent_travel)
 		if(world.time < AM.recent_travel + 15 SECONDS)

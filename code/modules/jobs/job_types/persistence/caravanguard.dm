@@ -14,7 +14,7 @@
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/swimming = 20,

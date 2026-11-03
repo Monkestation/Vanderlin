@@ -89,7 +89,11 @@ GLOBAL_VAR(lordsecondary)
 		"WHITE"="#c7c0b5",
 		"ORANGE"="#b47011",
 		"MAJENTA"="#822b52",
-		"GOLD"="#d4af37"
+		"GOLD"="#d4af37",
+		"SILVER"="#C1C7CD",
+		"BLOOD"="#770d0d",
+		"BEIGE"="#D6C1B6",
+		"LEAF"="#52893D"
 	)
 	var/choice = browser_input_list(src, "Choose a Primary Color", "VANDERLIN", lordcolors)
 	if(!choice)

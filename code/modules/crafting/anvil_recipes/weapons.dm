@@ -91,7 +91,7 @@
 
 /datum/anvil_recipe/weapons/bronze/cane
 	name = "Artificer Cane"
-	additional_items = list(/obj/item/ingot/copper = 1)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 	created_item = /obj/item/weapon/mace/cane/bronze
 
 /datum/anvil_recipe/weapons/bronze/shortsword
@@ -234,7 +234,7 @@
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/iron/dagger_iron
-	name = "Dagger"
+	name = "Iron Daggers"
 	created_item = /obj/item/weapon/knife/dagger
 	output_amount = 2
 	craftdiff = 0 // To train with
@@ -412,6 +412,10 @@
 /datum/anvil_recipe/weapons/iron/knuckles
 	name = "Iron Knuckles"
 	created_item = /obj/item/weapon/knuckles/iron
+
+/datum/anvil_recipe/weapons/iron/handclaw
+	name = "Iron Hound Claws"
+	created_item = /obj/item/weapon/handclaw
 
 // --------- STEEL ------------  Fancy gear for Knights
 /datum/anvil_recipe/weapons/steel
@@ -606,7 +610,7 @@
 	craftdiff = 1
 
 /datum/anvil_recipe/weapons/steel/royal
-	name = "Decorated Dagger"
+	name = "Decorated Daggers"
 	additional_items = list(/obj/item/ingot/gold = 1)
 	created_item = /obj/item/weapon/knife/dagger/steel/royal
 	output_amount = 2
@@ -743,6 +747,12 @@
 	created_item = /obj/item/weapon/sword/long
 	craftdiff = 3
 
+/datum/anvil_recipe/weapons/steel/longsword
+	name = "Jeweled Longsword"
+	additional_items = list(/obj/item/ingot/steel = 1, /obj/item/ingot/gold = 1)
+	created_item = /obj/item/weapon/sword/long/jeweled
+	craftdiff = 4
+
 /datum/anvil_recipe/weapons/steel/longsword/kriegsmesser
 	name = "Kriegsmesser"
 	additional_items = list(/obj/item/ingot/steel = 1)
@@ -770,7 +780,7 @@
 	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/weapon/mace/warhammer/steel
 
-/datum/anvil_recipe/weapons/steel/peasant_flail
+/datum/anvil_recipe/weapons/iron/peasant_flail
 	name = "Peasant Flail"
 	additional_items = list(/obj/item/rope/chain = 1, /obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/flail/peasant
@@ -807,6 +817,10 @@
 /datum/anvil_recipe/weapons/steel/falchion
 	name = "Falchion"
 	created_item = /obj/item/weapon/sword/scimitar/falchion
+
+/datum/anvil_recipe/weapons/steel/mantisclaws
+	name = "Steel Mantis Claws"
+	created_item = /obj/item/weapon/handclaw/steel
 
 /datum/anvil_recipe/weapons/steel/elvenclub
 	name = "Steel Elven Warclub"
@@ -846,8 +860,9 @@
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/silver/dagger
-	name = "Silver Dagger"
+	name = "Silver Daggers"
 	created_item = /obj/item/weapon/knife/dagger/silver
+	output_amount = 2
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/silver/silver_whip
@@ -948,12 +963,76 @@
 	name = "Silver Katar"
 	created_item = /obj/item/weapon/katar/silver
 
+/datum/anvil_recipe/weapons/silver/mantisclaws
+	name = "Silver Mantis Claws"
+	created_item = /obj/item/weapon/handclaw/steel/silver
+
 /datum/anvil_recipe/weapons/silver/knuckles
 	name = "Silver Knuckles"
 	created_item = /obj/item/weapon/knuckles/silver
 
 /datum/anvil_recipe/weapons/psy
 	required_material = /obj/item/ingot/silverblessed
+
+// --------------- Truesilver --------------------
+/datum/anvil_recipe/weapons/truesilver
+	abstract_type = /datum/anvil_recipe/weapons/truesilver
+	required_material = /obj/item/ingot/silver/truesilver
+	craftdiff = 4
+
+/datum/anvil_recipe/weapons/truesilver/halberd
+	name = "Truesilver Halberd"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/polearm/halberd/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/greataxe
+	name = "Truesilver Greataxe"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/greataxe/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/grandmace
+	name = "Truesilver Grand Mace"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	created_item = /obj/item/weapon/mace/goden/steel/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/dagger
+	name = "Truesilver Daggers"
+	created_item = /obj/item/weapon/knife/dagger/silver/truesilver
+	output_amount = 2
+	craftdiff = 3
+
+/datum/anvil_recipe/weapons/truesilver/misericorde
+	name = "Truesilver Misericorde"
+	created_item = /obj/item/weapon/knife/dagger/silver/truesilver/misericorde
+	craftdiff = 3
+
+/datum/anvil_recipe/weapons/truesilver/barmace
+	name = "Truesilver Barmace"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 2)
+	created_item = /obj/item/weapon/mace/silver/barmace/lunar
+
+/datum/anvil_recipe/weapons/truesilver/hammer
+	name = "Truesilver Warhammer"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1)
+	created_item = /obj/item/weapon/mace/warhammer/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/sword
+	name = "Truesilver Sword"
+	created_item = /obj/item/weapon/sword/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/longsword
+	name = "Truesilver Longsword"
+	additional_items = list(/obj/item/ingot/silver/truesilver = 1)
+	created_item = /obj/item/weapon/sword/long/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/rapier
+	name = "Truesilver Rapier"
+	created_item = /obj/item/weapon/sword/rapier/silver/truesilver
+
+/datum/anvil_recipe/weapons/truesilver/whip
+	name = "Truesilver Whip"
+	additional_items = list(/obj/item/natural/hide/cured = 2)
+	created_item = /obj/item/weapon/whip/silver/truesilver
 
 // --------------- Psydonite --------------------
 /datum/anvil_recipe/weapons/psy/axe
@@ -975,9 +1054,10 @@
 	additional_items = list(/obj/item/grown/log/tree/small = 1)
 
 /datum/anvil_recipe/weapons/psy/dagger
-	name = "Psydonian Dagger"
+	name = "Psydonian Daggers"
 	craftdiff = 3
 	created_item = /obj/item/weapon/knife/dagger/silver/psydon
+	output_amount = 2
 
 /datum/anvil_recipe/weapons/psy/shortsword
 	name = "Psydonian Shortsword"
@@ -1042,6 +1122,10 @@
 /datum/anvil_recipe/weapons/blacksteel/knuckles
 	name = "Blacksteel Knuckles"
 	created_item = /obj/item/weapon/knuckles/blacksteel
+
+/datum/anvil_recipe/weapons/blacksteel/mantisclaws
+	name = "Blacksteel Mantis Claws"
+	created_item = /obj/item/weapon/handclaw/steel/blacksteel
 
 /datum/anvil_recipe/weapons/blacksteel/dagger
 	name = "Blacksteel Daggers"
@@ -1113,11 +1197,6 @@
 	additional_items = list(/obj/item/rope/chain = 1, /obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/flail/blacksteel
 
-/datum/anvil_recipe/weapons/blacksteel/battleaxe
-	name = "Blacksteel Battle Axe"
-	additional_items = list(/obj/item/ingot/blacksteel = 1)
-	created_item = /obj/item/weapon/axe/battle/blacksteel
-
 /datum/anvil_recipe/weapons/blacksteel/warhammer
 	name = "Blacksteel Warhammer"
 	additional_items = list(/obj/item/ingot/blacksteel = 1)
@@ -1164,6 +1243,11 @@
 	additional_items = list(/obj/item/ingot/bloodsteel = 1)
 	created_item = /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
 
+/datum/anvil_recipe/weapons/bloodsteel/battleaxe
+	name = "Bloodsteel Axe"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/weapon/axe/battle/bloodsteel
+
 /datum/anvil_recipe/weapons/bloodsteel/whip
 	name = "Bloodsteel Whip"
 	additional_items = list(/obj/item/natural/hide/cured = 2)
@@ -1173,6 +1257,21 @@
 	name = "Bloodsteel Quarterstaff"
 	additional_items = list(/obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/mace
+	name = "Bloodsteel Mace"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/weapon/mace/bloodsteel
+
+/datum/anvil_recipe/weapons/bloodsteel/barmace
+	name = "Bloodsteel Barmace"
+	additional_items = list(/obj/item/ingot/bloodsteel = 2)
+	created_item = /obj/item/weapon/mace/bloodsteel/barmace
+
+/datum/anvil_recipe/weapons/bloodsteel/warhammer
+	name = "Bloodsteel Warhammer"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/weapon/mace/warhammer/bloodsteel
 
 /datum/anvil_recipe/weapons/bloodsteel/halberd
 	name = "Bloodsteel Halberd"
@@ -1207,8 +1306,9 @@
 	created_item = /obj/item/weapon/axe/steel/bearded
 	craftdiff = 3
 
-/datum/anvil_recipe/weapons/mace/cane/noble
+/datum/anvil_recipe/weapons/decorated_cane
 	name = "Decorated Cane"
 	craftdiff = 3
-	additional_items = list(/obj/item/ingot/gold = 1, /obj/item/grown/log/tree = 1)
+	required_material = /obj/item/ingot/gold
+	additional_items = list(/obj/item/grown/log/tree = 1)
 	created_item = /obj/item/weapon/mace/cane/noble
