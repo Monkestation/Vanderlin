@@ -14811,6 +14811,7 @@
 /area/indoors/town/keep/halls/w)
 "ljV" = (
 /obj/structure/closet/crate/chest/neu,
+/obj/effect/mapping_helpers/access/keyset/garrison/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/garrison)
 "lky" = (

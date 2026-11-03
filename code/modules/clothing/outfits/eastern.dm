@@ -35,7 +35,6 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-	has_storage = TRUE
 
 /obj/item/clothing/head/spellcasterhat
 	name = "spellsinger hat"

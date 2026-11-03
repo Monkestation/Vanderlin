@@ -32,6 +32,7 @@
 	invocation = "Blood Bolt!!"
 	spell_type = SPELL_MANA
 	required_form = FORM_WATER
+	associated_skill = /datum/attribute/skill/magic/arcane/water
 	spell_flags = SPELL_RITUOS
 	heretical_spell = FALSE
 	projectile_type = /obj/projectile/magic/bloodlightning/lesser

@@ -155,6 +155,11 @@
 	created_item = /obj/item/clothing/pants/trou/leather/splint
 	output_amount = 2
 
+/datum/anvil_recipe/armor/iron/brigandine_chausses
+	name = "Brigandine Chausses"
+	additional_items = list(/obj/item/clothing/pants/trou/leather = 1)
+	created_item = /obj/item/clothing/pants/trou/leather/brigandine
+
 /datum/anvil_recipe/armor/iron/mailleboots
 	name = "Chainmail Boots"
 	additional_items = list(/obj/item/natural/hide/cured = 2)
@@ -243,6 +248,11 @@
 	name = "Iron Jack Chains"
 	created_item = /obj/item/clothing/wrists/bracers/ironjackchain
 	output_amount = 2
+
+/datum/anvil_recipe/armor/iron/brigandine_vambraces
+	name = "Brigandine Vambraces"
+	additional_items = list(/obj/item/clothing/wrists/bracers/leather = 1)
+	created_item = /obj/item/clothing/wrists/bracers/leather/brigandine
 
 /datum/anvil_recipe/armor/iron/ibracers
 	name = "Iron Plate Vambraces"
@@ -354,10 +364,6 @@
 	created_item = /obj/item/clothing/head/helmet/ironpot/lakkariancap
 	additional_items = list(/obj/item/ingot/gold = 1)
 
-/datum/anvil_recipe/armor/iron/nasal_helmet
-	name = "Nasal Helmet"
-	created_item = /obj/item/clothing/head/helmet/nasal
-
 /datum/anvil_recipe/armor/iron/skullcap
 	name = "Skullcap"
 	created_item = /obj/item/clothing/head/helmet/skullcap
@@ -382,9 +388,9 @@
 	created_item = /obj/item/clothing/head/helmet/visored/sallet/iron
 	craftdiff = 2
 
-/datum/anvil_recipe/armor/iron/eoran_sallet
+/datum/anvil_recipe/armor/steel/eoran_sallet
 	name = "Eoran Sallet"
-	additional_items = list(/obj/item/ingot/iron = 1)
+	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/clothing/head/helmet/sallet/eoran
 	craftdiff = 2
 
@@ -394,9 +400,9 @@
 	created_item = (/obj/item/clothing/head/helmet/visored/knight/iron)
 	craftdiff = 2
 
-/datum/anvil_recipe/armor/iron/owlhelmet
+/datum/anvil_recipe/armor/steel/owlhelmet
 	name = "Strigidae Armet"
-	additional_items = list(/obj/item/ingot/iron = 1)
+	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/clothing/head/helmet/visored/knight/owl
 	craftdiff = 2
 
@@ -1059,7 +1065,7 @@
 
 /datum/anvil_recipe/armor/silver/armetowl
 	name = "Lunar Owl Armet"
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	additional_items = list(/obj/item/ingot/steel = 2)
 	created_item = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
 
 /datum/anvil_recipe/armor/silver/plateleg

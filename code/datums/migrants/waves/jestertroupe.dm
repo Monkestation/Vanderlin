@@ -20,7 +20,7 @@
 		STAT_CONSTITUTION = -1,
 		STAT_SPEED = 1,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 	)
 
 /datum/job/migrant/jestertroupe

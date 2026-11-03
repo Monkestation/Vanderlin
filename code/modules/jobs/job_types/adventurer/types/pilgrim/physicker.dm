@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = -1,
 		STAT_SPEED = 2,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/wrestling = 20,

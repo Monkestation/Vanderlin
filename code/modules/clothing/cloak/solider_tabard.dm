@@ -14,7 +14,7 @@
 	detail_color = CLOTHING_RED_OCHRE
 	var/picked
 
-/obj/item/clothing/cloak/stabard/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/stabard/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -75,7 +75,7 @@
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
 
-/obj/item/clothing/cloak/stabard/guard/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/stabard/guard/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -116,7 +116,7 @@
 /obj/item/clothing/cloak/stabard/colored/dungeon
 	color = CLOTHING_SOOT_BLACK
 
-/obj/item/clothing/cloak/stabard/colored/dungeon/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/stabard/colored/dungeon/AltClick(mob/user, list/modifiers)
 	return
 
 /obj/item/clothing/cloak/stabard/mercenary/Initialize()
@@ -247,7 +247,7 @@
 	detail_tag = "_spl"
 	detail_color = CLOTHING_SOOT_BLACK
 
-/obj/item/clothing/cloak/stabard/jupon/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/stabard/jupon/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -308,7 +308,7 @@
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY | LORD_DETAIL_AND_COLOR
 
-/obj/item/clothing/cloak/stabard/jupon/guard/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/stabard/jupon/guard/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return

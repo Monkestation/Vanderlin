@@ -4,11 +4,11 @@
 	button_icon_state = "wolf_head"
 	sound = 'sound/magic/whiteflame.ogg'
 
-	associated_skill = /datum/attribute/skill/magic/druidic
 	invocation = "Teeth of a serpent."
 	invocation_type = INVOCATION_WHISPER
 
 	required_form = FORM_LIFE
+	associated_skill = /datum/attribute/skill/magic/arcane/life
 	required_technique = TECHNIQUE_ALTERATION
 
 	charge_required = FALSE

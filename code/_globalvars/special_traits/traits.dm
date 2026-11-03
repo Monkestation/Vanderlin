@@ -197,7 +197,7 @@
 
 /datum/attribute_holder/sheet/job/bookworm
 	clamped_adjustment = list(
-		/datum/attribute/skill/misc/reading = list(40, 40),
+		/datum/attribute/skill/educated/reading = list(40, 40),
 	)
 
 /datum/special_trait/bookworm
@@ -402,7 +402,7 @@
 
 /datum/attribute_holder/sheet/job/blueblood
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/special_trait/blueblood
@@ -717,7 +717,7 @@
 		/datum/attribute/skill/combat/knives = list(20, 60),
 	)
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/reading = -20,
+		/datum/attribute/skill/educated/reading = -20,
 		/datum/attribute/skill/misc/sneaking = -20,
 		/datum/attribute/skill/misc/stealing = -20,
 
@@ -753,7 +753,7 @@
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/wrestling = list(60, 60),
 		/datum/attribute/skill/combat/unarmed = list(60, 60),
-		/datum/attribute/skill/misc/reading = list(30, 60),
+		/datum/attribute/skill/educated/reading = list(30, 60),
 	)
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 10,

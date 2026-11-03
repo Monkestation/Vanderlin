@@ -314,6 +314,7 @@
 	required_items = list(/obj/item/clothing/neck/psycross/great_hunt)
 	healing_type = HEALING_HUNT
 
+	spell_type = SPELL_UNHOLY_MIRACLE
 	base_healing = 35
 	wound_modifier = 0.35
 	associated_skill = /datum/attribute/skill/magic/druidic

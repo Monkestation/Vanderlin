@@ -55,9 +55,9 @@
 
 /datum/antagonist/assassin/roundend_report()
 	var/traitorwin = FALSE
-	for(var/obj/item/I in owner.current) // Check to see if the Assassin has their profane dagger on them, and then check the souls contained therein.
+	for(var/obj/item/I in owner.current.get_all_gear()) // Check to see if the Assassin has their profane dagger on them, and then check the souls contained therein.
 		if(istype(I, /obj/item/weapon/knife/dagger/steel/inhumen/profane))
-			for(var/mob/dead/observer/profane/A in I) // Each trapped soul is announced to the server
+			for(var/mob/living/simple_animal/shade/A in I) // Each trapped soul is announced to the server
 				if(A)
 					to_chat(world, "The [A.name] has been stolen for Graggar by [owner.name].<span class='greentext'>DAMNATION!</span>")
 					traitorwin = TRUE

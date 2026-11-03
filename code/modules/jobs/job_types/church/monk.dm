@@ -10,7 +10,7 @@
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/axesmaces = 10,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 30,
 		/datum/attribute/skill/craft/cooking = 20
 	)
@@ -27,7 +27,7 @@
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/axesmaces = 10,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 40,
 		/datum/attribute/skill/craft/cooking = 20
 	)
@@ -39,7 +39,7 @@
 
 /datum/attribute_holder/sheet/job/acolyte/patron/noc
 	raw_attribute_list = list(
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/attribute_holder/sheet/job/acolyte/patron/pestra
@@ -100,7 +100,7 @@
 	department_flag = CHURCHMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MONK
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_CHURCH)
 	total_positions = 4
 	spawn_positions = 4
 

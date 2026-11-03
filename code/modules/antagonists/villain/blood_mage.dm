@@ -46,7 +46,7 @@
 /datum/antagonist/blood_mage/sorcerer/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
 		return span_boldnotice("The immortal servant of the Sun Queen.")
-	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker))
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewarden))
 		return span_boldnotice("The immortal servant of the Moon Prince.")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Firstborn lord of Kaine.")
@@ -105,6 +105,7 @@
 /datum/antagonist/blood_mage/herald
 	name = ROLE_BLOOD_HERALD
 	antag_hud_name = "bloodherald"
+	allow_preference_switching = TRUE
 	confess_lines = list(
 		"MY MASTERS WILL BRING RUIN!",
 		"THE FALSE GODS WILL BURN!",
@@ -144,7 +145,7 @@
 /datum/antagonist/blood_mage/herald/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
 		return span_boldnotice("The immortal servant of the Sun Queen.")
-	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker))
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewarden))
 		return span_boldnotice("The immortal servant of the Moon Prince.")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Firstborn lord of Kaine.")
