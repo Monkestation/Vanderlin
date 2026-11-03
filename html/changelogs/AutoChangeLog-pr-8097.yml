@@ -1,0 +1,5 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - rscadd: "The Hallucinations Vice, which allows you to have permanent hallucinations like the Zizo Curse gives you."
+  - rscdel: "Removed meta hallucinations from the Zizo Curse. No more fake ahelps!"
