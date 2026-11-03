@@ -2,11 +2,33 @@
   Ben10083:
   - rscadd: The chests by the Garrison cells can now be locked by the Watch. Some
       maps with a Garrison have been given a chest for this purpose.
+  CheffieGithub:
+  - bugfix: Fixed mismatched smelt results
+  ModDownloading:
+  - bugfix: Sadist vice fulfillment is no longer blocked by being an Antagonist and/or
+      being Steelhearted.
+  - balance: Women no longer gain 1 extra point of stress from seeing dismemberments
+      (that code was ancient).
+  - bugfix: You can now select heraldry for tabards and jupons again by alt-clicking
+      them.
   Ordosian:
   - code_imp: Made it so rare fish can now be fished normally with added bonuses to
       the fish
+  Rudolf-reindeer:
+  - rscadd: Added new toys for creation. Kobold dolls, tin toys, balls, stick dolls
+      and cloth dolls.
+  - image: Added sprites for above.
   SSensum13:
   - rscadd: added undivided/centrist amulets of the ten to loadout.
+  Sulaboy:
+  - balance: Pickaxes scale off axes/maces for combat instead of mining.  Tweaked
+      pickAXE intents.
+  TheDoktorZ:
+  - rscadd: More room keys are in the inn's peddler.
+  copper-404:
+  - rscadd: Gave the squire role same species lock as MAA.
+  - rscadd: Gave the squire role alternative titles, more fitting of a trainee of
+      the garrison rather than a knight's ward, to give options.
   realforest2001:
   - bugfix: Rune Ward spell now correctly requires ash either held in offhand or on
       the floor adjacent.
@@ -26,6 +48,14 @@
   - rscadd: Added Oracle version of the Staff of Testimonium.
   - image: Added sprites for all Truesilver weapons, courtesy of Azure Peak generic
       donator sprites.
+  - bugfix: Fixed incorrect smelting paths. As a side effect, repairing metallic items
+      should work more reliably now.
   ta3754859-max:
   - balance: Brigand shield/flail loadout gets kite shield
   - rscadd: Allows properties to save certain items
+  - bugfix: Crucible having wrong grid
+  - rscadd: Crucibles can pick up items off the ground
+  - qol: Summoners pouch can now pick up items in bulk similiary to sack
+  - qol: Handcart now picks up items from where it is currently standing, instead
+      of player's position. The loop has been fixed to not stop after picking up only
+      ores/wood.

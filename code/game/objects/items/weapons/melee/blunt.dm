@@ -23,7 +23,8 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/attribute/skill/combat/axesmaces
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	parrysound = list('sound/combat/parry/parrygen.ogg')
 	swingsound = BLUNTWOOSH_MED
 	sellprice = 20
@@ -67,7 +68,6 @@
 	icon_state = "shishpar_iron"
 	force = DAMAGE_MACE + 1
 	force_wielded = DAMAGE_MACE_WIELD + 2
-	smeltresult = /obj/item/ingot/iron
 	melt_amount = 150
 	sellprice = 35
 	item_weight = 1.8 KILOGRAMS
@@ -132,7 +132,9 @@
 	force_wielded = DAMAGE_MACE - 1
 	sellprice = 35
 	item_weight = 600 GRAMS
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
+	smeltresult = null
+	melt_amount = 30
 
 /obj/item/weapon/mace/cane/necran
 	name = "necran rod"
@@ -211,7 +213,7 @@
 	force = DAMAGE_MACE + 3
 	force_wielded = DAMAGE_MACE_WIELD + 3
 	wdefense = GOOD_PARRY
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	sellprice = 100
 	item_weight = 1.8 KILOGRAMS
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL
@@ -226,7 +228,6 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_STEEL
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -291,7 +292,6 @@
 	force = DAMAGE_MACE + 4
 	force_wielded = DAMAGE_MACE_WIELD + 2
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLACKSTEEL
-	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 150
 	sellprice = 120
@@ -313,7 +313,6 @@
 	force = DAMAGE_MACE + 4
 	force_wielded = DAMAGE_MACE_WIELD + 2
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLOODSTEEL
-	smeltresult = null
 	melting_material = /datum/material/bloodsteel
 	melt_amount = 150
 	sellprice = 120
@@ -363,7 +362,7 @@
 	force_wielded = DAMAGE_CLUB_WIELD + 1
 	wdefense = MEDIOCRE_PARRY
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_COPPER
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
 	sellprice = 10
 	item_weight = 900 GRAMS
 
@@ -431,6 +430,7 @@
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 	resistance_flags = FIRE_PROOF
 	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 	item_weight = 600 GRAMS
 
 /obj/item/weapon/mace/cudgel/psy/Initialize(mapload)
@@ -553,7 +553,8 @@
 	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_STEEL
 
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	sellprice = 60
 	item_weight = 3.5 KILOGRAMS
 
@@ -572,9 +573,7 @@
 	name = "truesilver grand mace"
 	desc = "A long pole of blued steel with a truesilver head. Built to crush nite creachers."
 	icon_state = "lunar_gmace"
-	melt_amount = 100
 	melting_material = /datum/material/truesilver
-	smeltresult = null
 	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/mace/goden/steel/truesilver/Initialize(mapload)
@@ -678,7 +677,7 @@
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_COPPER
 
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
 	parrysound = "parrywood"
 	sellprice = 35
 	item_weight = 2.5 KILOGRAMS
@@ -792,7 +791,6 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_blade_int = 250
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -803,7 +801,6 @@
 	name = "bronze elven war club"
 	desc = "A bronze one-handed war club with a sharp end. It has been long favoured by the Elves of Heartfelt, despite its foreign origins."
 	icon_state = "elvenclub_bronze"
-	smeltresult = /obj/item/ingot/bronze
 	melting_material = /datum/material/bronze
 	melt_amount = 100
 	item_weight = 1.4 KILOGRAMS
@@ -819,7 +816,6 @@
 	wbalance = DODGE_CHANCE_NORMAL
 	max_blade_int = 200
 	item_weight = 1.4 KILOGRAMS
-	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 150
@@ -839,7 +835,6 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
-	smeltresult = null
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 80
@@ -872,7 +867,6 @@
 	wdefense = GOOD_PARRY
 	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 45
@@ -908,7 +902,7 @@
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BRONZE
 	sellprice = 25
 	item_weight = 1.5 KILOGRAMS
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 /obj/item/weapon/mace/bronze/shishpar
 	name = "bronze shishpar"
