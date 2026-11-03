@@ -243,6 +243,12 @@
 	user.add_spell(/datum/action/cooldown/spell/undirected/message)
 	user.add_spell(/datum/action/cooldown/spell/undirected/list_target/encode_thoughts)
 
+/datum/ritual/soap
+	name = "Criminal's tool"
+	description = "Always clean-up after yourself. Unless you seek to send a message."
+	output = /obj/item/soap
+	ingredients = list(/obj/item/natural/cloth)
+
 /datum/ritual/summonneant
 	name = "Summon Neant"
 	special_requiment = /mob/living/carbon/human
