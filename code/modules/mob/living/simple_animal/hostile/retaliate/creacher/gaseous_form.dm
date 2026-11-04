@@ -33,6 +33,10 @@
 	dendor_taming_chance = DENDOR_TAME_PROB_NONE
 	lighting_alpha = 127
 
+/mob/living/simple_animal/hostile/retaliate/gaseousform/cold
+	icon_state = "mist_white"
+	icon_living = "mist_white"
+
 /mob/living/simple_animal/hostile/retaliate/gaseousform/Initialize()
 	. = ..()
 	set_light(1, 1, 2)

@@ -307,14 +307,18 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/ingot/silver/truesilver
+/obj/item/ingot/truesilver
 	name = "truesilver bar"
 	desc = "A bar of glistening truesilver. Blessed material of The Moon Prince and the ultimate bane of nite creachers."
 	icon_state = "ingotlunar"
-	smeltresult = /obj/item/ingot/silver/truesilver
+	smeltresult = /obj/item/ingot/truesilver
 	melting_material = /datum/material/truesilver
 	sellprice = 60
 	item_weight = 6.65 KILOGRAMS
+
+/obj/item/ingot/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/ingot/steel
 	name = "steel bar"
