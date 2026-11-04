@@ -6046,7 +6046,10 @@
 /turf/open/floor/cobble,
 /area/under/town/basement)
 "ckU" = (
-/turf/open/floor/churchmarble/violet,
+/obj/machinery/light/fueled/forge{
+	pixel_y = 5
+	},
+/turf/open/floor/churchmarble/gold,
 /area/under/cave)
 "ckW" = (
 /obj/item/candle/yellow/lit{
@@ -36721,12 +36724,6 @@
 /obj/structure/bars,
 /turf/open/water/sewer,
 /area/under/town/basement)
-"oHT" = (
-/obj/machinery/light/fueled/forge{
-	pixel_y = 5
-	},
-/turf/open/floor/churchmarble/gold,
-/area/under/cave)
 "oIe" = (
 /obj/structure/curtain/bounty/dir{
 	dir = 4
@@ -180726,10 +180723,10 @@ hWI
 hWI
 hWI
 lXO
-ckU
+cpK
 cvk
 pwx
-cpK
+cvk
 kfv
 hWI
 hWI
@@ -180928,11 +180925,11 @@ hWI
 tAo
 dkX
 aeB
-aeB
-bYL
-bYL
-ckU
 brL
+bYL
+bYL
+bYL
+aeB
 aeB
 hWI
 qFx
@@ -181331,7 +181328,7 @@ hWI
 kOg
 dkX
 odK
-oHT
+ckU
 dkX
 dkX
 dkX
@@ -181739,7 +181736,7 @@ aeB
 brL
 cvk
 cvk
-ckU
+cvk
 aeB
 aeB
 hWI
@@ -181941,7 +181938,7 @@ lxO
 cpK
 bYL
 jdv
-ckU
+bYL
 kfv
 hWI
 hWI
