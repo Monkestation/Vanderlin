@@ -2726,10 +2726,6 @@
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water,
 /area/under/cavewet)
-"aRF" = (
-/obj/structure/minecart_rail,
-/turf/open/floor/woodturned/nosmooth,
-/area/outdoors/town)
 "aRP" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/paper,
@@ -174475,10 +174471,10 @@ szR
 vor
 szR
 pNC
-aRF
-aRF
-aRF
-aRF
+fbM
+fbM
+fbM
+fbM
 mFi
 mFi
 hZn
