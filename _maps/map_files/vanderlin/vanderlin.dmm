@@ -2667,12 +2667,6 @@
 /obj/structure/chair/stool/bar,
 /turf/open/floor/wood,
 /area/indoors/town/clinic_large)
-"aPQ" = (
-/obj/structure/stairs{
-	dir = 8
-	},
-/turf/open/floor/twig,
-/area/outdoors/mountains)
 "aPT" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -7208,12 +7202,6 @@
 /obj/item/carvedgem/opal/tablet,
 /turf/open/floor/tile,
 /area/indoors/town/steward)
-"cEP" = (
-/obj/structure/table/wood/plain/alt,
-/obj/item/clothing/neck/psycross/silver/divine/dendor,
-/obj/item/clothing/head/padded/briarthorns,
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "cES" = (
 /obj/item/flint,
 /obj/structure/table/wood{
@@ -17530,9 +17518,6 @@
 /obj/item/weapon/knife/dagger/steel,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large/apothecary)
-"gMv" = (
-/turf/closed/wall/mineral/wooddark/slitted,
-/area/outdoors/mountains)
 "gMy" = (
 /obj/structure/window/openclose{
 	dir = 1
@@ -22412,12 +22397,6 @@
 "iFt" = (
 /turf/open/floor/carpet/red,
 /area/under/town/basement)
-"iFz" = (
-/obj/structure/bed/shit{
-	name = "makeshift bed"
-	},
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "iFK" = (
 /obj/structure/table/wood/fancy/green,
 /turf/open/floor/ruinedwood/spiral,
@@ -26152,9 +26131,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/alt,
 /area/outdoors/town)
-"kcX" = (
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "kcY" = (
 /turf/open/water/clean/dirt,
 /area/outdoors/town/keep)
@@ -28308,11 +28284,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
-"kWy" = (
-/obj/structure/table/wood/plain/alt,
-/obj/item/clothing/face/druid,
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "kWB" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_y = 32
@@ -29124,11 +29095,6 @@
 "lnP" = (
 /turf/open/floor/blocks,
 /area/indoors/town/keep/passages/thirdfloor)
-"lnQ" = (
-/obj/structure/fluff/railing/wood,
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "loa" = (
 /obj/structure/fake_machine/atm{
 	pixel_y = 0;
@@ -30252,13 +30218,6 @@
 /obj/effect/landmark/start/mercenary,
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/merc_guild)
-"lJX" = (
-/obj/structure/fluff/railing/wood,
-/obj/structure/table/wood/plain/alt,
-/obj/item/clothing/neck/psycross/silver/divine/dendor,
-/obj/item/clothing/shirt/robe/dendor,
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "lKh" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/plate,
@@ -38305,14 +38264,6 @@
 "oWu" = (
 /turf/open/floor/metal/barograte,
 /area/outdoors/basin/safe)
-"oWx" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1;
-	pixel_y = -1
-	},
-/obj/machinery/light/fueled/firebowl/stump,
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "oWz" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/candle/yellow/lit{
@@ -41783,12 +41734,6 @@
 "qjS" = (
 /turf/open/floor/metal/alt,
 /area/indoors/town/keep/magician)
-"qjT" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "qkb" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -42690,13 +42635,6 @@
 	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town)
-"qDY" = (
-/obj/structure/fluff/railing/wood{
-	dir = 8;
-	pixel_y = -1
-	},
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "qDZ" = (
 /obj/item/bin/water,
 /turf/open/floor/dirt,
@@ -44937,10 +44875,6 @@
 /obj/structure/fluff/walldeco/church/line,
 /turf/open/floor/churchbrick,
 /area/indoors/town/clinic_large)
-"ruN" = (
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/ruinedwood/chevron,
-/area/outdoors/mountains)
 "ruP" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -174203,10 +174137,10 @@ sMC
 vor
 wVT
 uoh
-jTd
-jTd
-jTd
-jTd
+rOu
+rOu
+rOu
+rOu
 sMC
 sMC
 wVT
@@ -174404,12 +174338,12 @@ lED
 vor
 wVT
 sMC
-jTd
-jTd
-pwP
-pwP
-jTd
-jTd
+rOu
+rOu
+sMC
+sMC
+sMC
+rOu
 wVT
 lED
 rOu
@@ -174606,13 +174540,13 @@ sMC
 szR
 vor
 ihj
-jTd
-jTd
-jTd
-pwP
-pwP
-jTd
+rOu
+sMC
+aqd
+sMC
+vxk
 wVT
+vxk
 rOu
 rOu
 wVT
@@ -174808,12 +174742,12 @@ wVT
 vor
 szR
 wVT
-jTd
-uIM
-jTd
-pwP
-pwP
-rEV
+rOu
+rOu
+sMC
+wVT
+wVT
+rOu
 wVT
 rOu
 rOu
@@ -175010,14 +174944,14 @@ vor
 szR
 rOu
 rOu
-jTd
-pwP
-bSn
-pwP
-pwP
-jTd
-wVT
+sMC
+sMC
 rOu
+sMC
+wVT
+aqd
+wVT
+aqd
 rOu
 vxk
 wVT
@@ -175212,12 +175146,12 @@ vor
 vor
 rOu
 wVT
-jTd
-jTd
-pwP
-pwP
-jTd
-jTd
+rOu
+rOu
+wVT
+sMC
+rOu
+sMC
 sMC
 lED
 wVT
@@ -175415,11 +175349,11 @@ vor
 rOu
 wVT
 uNU
-jTd
-jTd
-jTd
-jTd
-sMC
+rOu
+vxk
+rOu
+rOu
+uoh
 wVT
 sMC
 uoh
@@ -214401,12 +214335,12 @@ nRI
 nRI
 nRI
 nRI
-eQf
-wVw
-bXC
-bXC
-wVw
-xvm
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -214602,14 +214536,14 @@ nRI
 nRI
 nRI
 nRI
-eQf
-wVw
-gMv
-qDY
-qDY
-gMv
-wVw
-xvm
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -214804,14 +214738,14 @@ nRI
 nRI
 nRI
 nRI
-wVw
-gMv
-kcX
-kcX
-kcX
-iFz
-gMv
-wVw
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -215006,14 +214940,14 @@ nRI
 nRI
 nRI
 nRI
-wVw
-gMv
-aPQ
-kcX
-kcX
-kcX
-lnQ
-ppA
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -215208,14 +215142,14 @@ nRI
 nRI
 nRI
 nRI
-qEv
-oWx
 nRI
-gMv
-kWy
-kcX
-ruN
-huf
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -215410,14 +215344,14 @@ nRI
 nRI
 nRI
 nRI
-wVw
-gMv
-kcX
-kcX
-kcX
-kcX
-lJX
-huf
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -215612,14 +215546,14 @@ nRI
 nRI
 nRI
 nRI
-wVw
-gMv
-iFz
-kcX
-kcX
-cEP
-gMv
-wVw
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -215814,14 +215748,14 @@ nRI
 nRI
 nRI
 nRI
-qYO
-wVw
-gMv
-qjT
-qjT
-gMv
-wVw
-cLP
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -216017,12 +215951,12 @@ nRI
 nRI
 nRI
 nRI
-qYO
-wVw
-qxO
-qxO
-wVw
-cLP
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -254803,10 +254737,10 @@ nRI
 nRI
 nRI
 nRI
-eQf
-wVw
-wVw
-xvm
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -255004,12 +254938,12 @@ nRI
 nRI
 nRI
 nRI
-eQf
-wVw
-wVw
-wVw
-wVw
-xvm
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -255205,14 +255139,14 @@ nRI
 nRI
 nRI
 nRI
-eQf
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
-xvm
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -255407,14 +255341,14 @@ nRI
 nRI
 nRI
 nRI
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -255609,14 +255543,14 @@ nRI
 nRI
 nRI
 nRI
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -255811,14 +255745,14 @@ nRI
 nRI
 nRI
 nRI
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -256013,14 +255947,14 @@ nRI
 nRI
 nRI
 nRI
-qYO
-wVw
-wVw
-wVw
-wVw
-wVw
-wVw
-cLP
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -256216,12 +256150,12 @@ nRI
 nRI
 nRI
 nRI
-qYO
-wVw
-wVw
-wVw
-wVw
-cLP
+nRI
+nRI
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
@@ -256419,10 +256353,10 @@ nRI
 nRI
 nRI
 nRI
-qYO
-wVw
-wVw
-cLP
+nRI
+nRI
+nRI
+nRI
 nRI
 nRI
 nRI
