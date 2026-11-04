@@ -1382,7 +1382,7 @@
 "amt" = (
 /obj/structure/fake_machine/stockpile,
 /turf/open/floor/grass,
-/area/outdoors/town/keep/forge)
+/area/outdoors/town/keep)
 "amz" = (
 /obj/structure/fluff/railing/tall{
 	dir = 8
@@ -4950,10 +4950,6 @@
 	},
 /turf/open/floor/ruinedwood/turned,
 /area/outdoors/town)
-"bNA" = (
-/obj/structure/flora/grass/bush,
-/turf/open/floor/dirt,
-/area/outdoors/town/keep/forge)
 "bNB" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -12059,9 +12055,6 @@
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
-"eDQ" = (
-/turf/open/floor/dirt,
-/area/outdoors/town/keep/forge)
 "eDW" = (
 /obj/structure/flora/grass/water,
 /turf/open/water/river,
@@ -16986,7 +16979,7 @@
 /obj/item/ore/iron,
 /obj/item/ore/iron,
 /turf/open/floor/grass,
-/area/outdoors/town/keep/forge)
+/area/outdoors/town/keep)
 "gzf" = (
 /obj/structure/bed/inn,
 /obj/item/bedsheet/fabric,
@@ -38360,9 +38353,6 @@
 "oWP" = (
 /turf/closed/wall/mineral/pipe,
 /area/indoors/town/keep/passages/groundfloor)
-"oWT" = (
-/turf/open/floor/blocks,
-/area/indoors/town/keep/passages/secondfloor)
 "oWW" = (
 /obj/machinery/light/fueled/oven{
 	pixel_x = 31
@@ -43804,10 +43794,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/keep/jester)
-"qVT" = (
-/obj/structure/flora/grass/bush/wall,
-/turf/open/floor/dirt,
-/area/outdoors/town/keep/forge)
 "qVX" = (
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/clean,
@@ -46294,10 +46280,6 @@
 /obj/item/reagent_containers/food/snacks/smallrat,
 /turf/open/floor/wood,
 /area/indoors/town/garrison)
-"rYb" = (
-/obj/structure/flora/newtree,
-/turf/open/floor/dirt,
-/area/outdoors/town/keep/forge)
 "rYs" = (
 /obj/machinery/light/fueled/oven{
 	pixel_y = 31
@@ -51139,9 +51121,6 @@
 /obj/structure/fake_machine/hailerboard/r,
 /turf/open/floor/blocks,
 /area/outdoors/town)
-"tVB" = (
-/turf/open/openspace,
-/area/indoors/town/keep/passages/secondfloor)
 "tVC" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "Keep-BasementCorridor"
@@ -58790,12 +58769,6 @@
 	dir = 1
 	},
 /area/indoors/town/keep/halls/s)
-"wNt" = (
-/obj/structure/stairs/stone{
-	dir = 8
-	},
-/turf/open/floor/blocks,
-/area/indoors/town/keep/passages/secondfloor)
 "wNy" = (
 /obj/item/weapon/polearm/woodstaff,
 /obj/item/weapon/polearm/woodstaff{
@@ -130308,7 +130281,7 @@ uoq
 kFs
 dlp
 tyM
-gsY
+xTl
 xTl
 xTl
 xTl
@@ -130510,7 +130483,7 @@ qJH
 kFs
 kFs
 fVy
-gsY
+xTl
 xTl
 vZK
 xTl
@@ -130712,7 +130685,7 @@ qDZ
 kFs
 kFs
 kFs
-hhj
+eqL
 acV
 pJu
 xTl
@@ -131116,7 +131089,7 @@ fbs
 eSq
 jki
 nXN
-rYb
+fGb
 gFp
 oho
 xKB
@@ -131313,12 +131286,12 @@ iwU
 iwU
 iwU
 qFx
-qVT
-rYb
-eDQ
-rYb
-bNA
-eDQ
+pXi
+fGb
+oho
+fGb
+qXY
+oho
 fGb
 gFp
 qjR
@@ -209910,7 +209883,7 @@ ybB
 ybB
 ybB
 ybB
-ybB
+qFx
 qFx
 qFx
 qFx
@@ -210512,9 +210485,9 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -210714,9 +210687,9 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -210916,9 +210889,9 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -211118,12 +211091,12 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
-hhf
-hhf
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -211320,12 +211293,12 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
-oWT
-oWT
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -211506,6 +211479,7 @@ qFx
 qFx
 qFx
 qFx
+qFx
 ybB
 ybB
 ybB
@@ -211521,13 +211495,12 @@ ybB
 ybB
 ybB
 ybB
-ybB
-uNj
-uNj
-uNj
-hhf
-wNt
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -211708,6 +211681,8 @@ qFx
 qFx
 qFx
 qFx
+qFx
+qFx
 ybB
 ybB
 ybB
@@ -211722,14 +211697,12 @@ ybB
 ybB
 ybB
 ybB
-ybB
-ybB
-uNj
-uNj
-uNj
-hhf
-tVB
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -211926,12 +211899,12 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
-hhf
-tVB
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -212114,8 +212087,7 @@ qFx
 qFx
 qFx
 qFx
-ybB
-ybB
+qFx
 ybB
 ybB
 ybB
@@ -212131,9 +212103,10 @@ qFx
 qFx
 qFx
 qFx
-hhf
-hhf
-hhf
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -250110,10 +250083,10 @@ sEU
 sEU
 sEU
 sEU
-sEU
 qFx
 qFx
-roV
+qFx
+ouS
 wWb
 wWb
 wWb
@@ -250311,11 +250284,11 @@ sEU
 sEU
 sEU
 sEU
-sEU
 qFx
 qFx
 qFx
-roV
+qFx
+ouS
 wWb
 wWb
 wWb
@@ -250517,7 +250490,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -250712,14 +250685,14 @@ sEU
 sEU
 sEU
 sEU
-sEU
-sEU
 qFx
 qFx
 qFx
 qFx
 qFx
-roV
+qFx
+qFx
+ouS
 wWb
 wWb
 wWb
@@ -250913,7 +250886,6 @@ sEU
 sEU
 sEU
 sEU
-sEU
 qFx
 qFx
 qFx
@@ -250921,7 +250893,8 @@ qFx
 qFx
 qFx
 qFx
-roV
+qFx
+ouS
 wWb
 wWb
 wWb
@@ -251123,7 +251096,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -251325,7 +251298,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -251527,7 +251500,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -251729,7 +251702,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -251931,7 +251904,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252133,7 +252106,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252335,7 +252308,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252537,7 +252510,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252739,7 +252712,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252941,7 +252914,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -253143,7 +253116,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -253345,7 +253318,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
