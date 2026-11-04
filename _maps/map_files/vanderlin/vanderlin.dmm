@@ -26853,6 +26853,14 @@
 "kOg" = (
 /obj/structure/table/church/m,
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/item/weapon/tongs{
+	pixel_y = 3;
+	pixel_x = -18
+	},
+/obj/item/weapon/hammer/iron{
+	pixel_y = 4;
+	pixel_x = 2
+	},
 /turf/open/floor/churchmarble/gold,
 /area/under/cave)
 "kOu" = (
@@ -28639,7 +28647,7 @@
 /area/under/town/sewer)
 "lxO" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
-/obj/item/clothing/head/padded/malumhood,
+/obj/item/bin/water/gross,
 /turf/open/floor/churchmarble/violet,
 /area/under/cave)
 "lxP" = (
@@ -29981,7 +29989,8 @@
 /area/indoors/town/keep/passages/groundfloor)
 "lXO" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/churchmarble/violet,
+/obj/item/bin/water/gross,
+/turf/open/floor/churchmarble,
 /area/under/cave)
 "lYa" = (
 /turf/open/floor/churchrough,
@@ -36712,11 +36721,10 @@
 /turf/open/water/sewer,
 /area/under/town/basement)
 "oHT" = (
-/obj/structure/chair/bench/church{
-	dir = 1
+/obj/machinery/light/fueled/forge{
+	pixel_y = 5
 	},
-/obj/item/clothing/shirt/robe/malum,
-/turf/open/floor/churchmarble/violet,
+/turf/open/floor/churchmarble/gold,
 /area/under/cave)
 "oIe" = (
 /obj/structure/curtain/bounty/dir{
@@ -49092,11 +49100,10 @@
 	},
 /area/indoors/town/keep/halls/w)
 "tAo" = (
-/obj/structure/fluff/statue/gargoyle/candles{
-	pixel_y = 16;
-	base_pixel_y = 16
+/obj/machinery/light/fueled/smelter{
+	pixel_y = 23
 	},
-/turf/open/floor/churchmarble,
+/turf/open/floor/churchmarble/gold,
 /area/under/cave)
 "tAr" = (
 /obj/structure/stairs{
@@ -180718,8 +180725,8 @@ hWI
 hWI
 hWI
 lXO
-cvk
 ckU
+cvk
 pwx
 cpK
 kfv
@@ -180918,10 +180925,10 @@ dID
 hWI
 hWI
 tAo
+dkX
 aeB
 aeB
 bYL
-ckU
 bYL
 ckU
 brL
@@ -181121,7 +181128,7 @@ hWI
 kcX
 dkX
 dkX
-aeB
+dkX
 aeB
 aeB
 aeB
@@ -181323,7 +181330,7 @@ hWI
 kOg
 dkX
 odK
-dkX
+oHT
 dkX
 dkX
 dkX
@@ -181525,7 +181532,7 @@ hWI
 lWz
 dkX
 dkX
-aeB
+dkX
 aeB
 aeB
 aeB
@@ -181726,10 +181733,10 @@ dID
 hWI
 hWI
 tAo
+dkX
 aeB
-aeB
-oHT
-ckU
+brL
+cvk
 cvk
 ckU
 aeB
@@ -181930,8 +181937,8 @@ hWI
 hWI
 hWI
 lxO
+cpK
 bYL
-ckU
 jdv
 ckU
 kfv
