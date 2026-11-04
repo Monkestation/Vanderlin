@@ -38048,9 +38048,6 @@
 "oWP" = (
 /turf/closed/wall/mineral/pipe,
 /area/indoors/town/keep/passages/groundfloor)
-"oWT" = (
-/turf/open/floor/blocks,
-/area/indoors/town/keep/passages/secondfloor)
 "oWW" = (
 /obj/machinery/light/fueled/oven{
 	pixel_x = 31
@@ -50732,9 +50729,6 @@
 /obj/structure/fake_machine/hailerboard/r,
 /turf/open/floor/blocks,
 /area/outdoors/town)
-"tVB" = (
-/turf/open/openspace,
-/area/indoors/town/keep/passages/secondfloor)
 "tVC" = (
 /obj/structure/lever/hidden/keep{
 	redstone_id = "Keep-BasementCorridor"
@@ -58336,12 +58330,6 @@
 	dir = 1
 	},
 /area/indoors/town/keep/halls/s)
-"wNt" = (
-/obj/structure/stairs/stone{
-	dir = 8
-	},
-/turf/open/floor/blocks,
-/area/indoors/town/keep/passages/secondfloor)
 "wNy" = (
 /obj/item/weapon/polearm/woodstaff,
 /obj/item/weapon/polearm/woodstaff{
@@ -210004,9 +209992,9 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -210206,9 +210194,9 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -210408,9 +210396,9 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
+qFx
+qFx
+qFx
 qFx
 qFx
 qFx
@@ -210610,12 +210598,12 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
-hhf
-hhf
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -210812,12 +210800,12 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
-oWT
-oWT
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -210998,6 +210986,7 @@ qFx
 qFx
 qFx
 qFx
+qFx
 ybB
 ybB
 ybB
@@ -211013,13 +211002,12 @@ ybB
 ybB
 ybB
 ybB
-ybB
-uNj
-uNj
-uNj
-hhf
-wNt
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -211200,6 +211188,8 @@ qFx
 qFx
 qFx
 qFx
+qFx
+qFx
 ybB
 ybB
 ybB
@@ -211214,14 +211204,12 @@ ybB
 ybB
 ybB
 ybB
-ybB
-ybB
-uNj
-uNj
-uNj
-hhf
-tVB
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -211418,12 +211406,12 @@ ybB
 ybB
 ybB
 ybB
-uNj
-uNj
-uNj
-hhf
-tVB
-hhf
+qFx
+qFx
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -211606,8 +211594,7 @@ qFx
 qFx
 qFx
 qFx
-ybB
-ybB
+qFx
 ybB
 ybB
 ybB
@@ -211623,9 +211610,10 @@ qFx
 qFx
 qFx
 qFx
-hhf
-hhf
-hhf
+qFx
+qFx
+qFx
+qFx
 qFx
 qFx
 ouS
@@ -249602,10 +249590,10 @@ sEU
 sEU
 sEU
 sEU
-sEU
 qFx
 qFx
-roV
+qFx
+ouS
 wWb
 wWb
 wWb
@@ -249803,11 +249791,11 @@ sEU
 sEU
 sEU
 sEU
-sEU
 qFx
 qFx
 qFx
-roV
+qFx
+ouS
 wWb
 wWb
 wWb
@@ -250009,7 +249997,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -250204,14 +250192,14 @@ sEU
 sEU
 sEU
 sEU
-sEU
-sEU
 qFx
 qFx
 qFx
 qFx
 qFx
-roV
+qFx
+qFx
+ouS
 wWb
 wWb
 wWb
@@ -250405,7 +250393,6 @@ sEU
 sEU
 sEU
 sEU
-sEU
 qFx
 qFx
 qFx
@@ -250413,7 +250400,8 @@ qFx
 qFx
 qFx
 qFx
-roV
+qFx
+ouS
 wWb
 wWb
 wWb
@@ -250615,7 +250603,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -250817,7 +250805,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -251019,7 +251007,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -251221,7 +251209,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -251423,7 +251411,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -251625,7 +251613,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -251827,7 +251815,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252007,6 +251995,7 @@ qFx
 qFx
 qFx
 qFx
+qFx
 sEU
 sEU
 sEU
@@ -252015,7 +252004,6 @@ sEU
 sEU
 sEU
 sEU
-sEU
 qFx
 qFx
 qFx
@@ -252029,7 +252017,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252231,7 +252219,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252433,7 +252421,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252635,7 +252623,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -252837,7 +252825,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -253039,7 +253027,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -253241,7 +253229,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
@@ -253443,7 +253431,7 @@ qFx
 qFx
 qFx
 qFx
-roV
+ouS
 wWb
 wWb
 wWb
