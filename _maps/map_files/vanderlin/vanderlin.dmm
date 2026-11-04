@@ -28530,6 +28530,7 @@
 /area/indoors/town/noble_manor/yellow)
 "lvy" = (
 /obj/structure/door/stone,
+/obj/effect/mapping_helpers/access/keyset/church/general,
 /turf/open/floor/churchmarble/gold,
 /area/under/cave)
 "lvB" = (
