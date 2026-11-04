@@ -16037,10 +16037,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/outdoors/town)
-"gfv" = (
-/obj/structure/fluff/traveltile/exit_inquisition,
-/turf/open/floor/dirt,
-/area/under/cave)
 "gfE" = (
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/cobblerock/alt,
@@ -223847,7 +223843,7 @@ dID
 dID
 dID
 mdv
-gfv
+mdv
 dID
 dID
 dID
