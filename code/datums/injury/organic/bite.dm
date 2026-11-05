@@ -24,7 +24,7 @@
 		"ragged scar" = 0
 		)
 	fade_away_time = INFINITY
-	werewolf_infection_probability = 20
+	werewolf_infection_probability = 15
 
 /datum/injury/bite/flesh
 	bleed_threshold = 15
@@ -37,7 +37,7 @@
 		"ragged scar" = 0
 		)
 	fade_away_time = INFINITY
-	werewolf_infection_probability = 15
+	werewolf_infection_probability = 10
 
 /datum/injury/bite/gaping
 	bleed_threshold = 15
