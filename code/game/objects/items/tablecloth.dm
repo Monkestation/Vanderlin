@@ -24,8 +24,10 @@
 	if(istype(src.loc, /obj/structure/table))
 		. += span_info("The tablecloth is draped over a table, you can remove it by interacting with it using your hand.")
 
-/obj/item/tablecloth/Initialize(TRUE)
+/obj/item/tablecloth/Initialize(mapload)
 	. = ..()
+	if(!mapload)
+		return
 	var/obj/structure/table/table = locate(/obj/structure/table) in get_turf(src)
 	if(table)
 		forceMove(table)
