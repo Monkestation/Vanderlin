@@ -788,7 +788,7 @@
 				if(werewolf_antag && werewolf_antag.transformed)
 					var/mob/living/carbon/human/human = user
 					if(istype(caused_wound))
-						caused_wound?.werewolf_infect_attempt()
+						limb_grabbed.last_injury.werewolf_infect_attempt()
 					if(prob(30))
 						human.werewolf_feed(C)
 

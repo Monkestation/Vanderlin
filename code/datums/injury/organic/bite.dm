@@ -11,6 +11,7 @@
 		"bruised bite" = 2,
 		"small bruise" = 0
 		)
+	werewolf_infection_probability = 5
 
 /datum/injury/bite/deep
 	bleed_threshold = 15
@@ -23,6 +24,7 @@
 		"ragged scar" = 0
 		)
 	fade_away_time = INFINITY
+	werewolf_infection_probability = 20
 
 /datum/injury/bite/flesh
 	bleed_threshold = 15
@@ -35,6 +37,7 @@
 		"ragged scar" = 0
 		)
 	fade_away_time = INFINITY
+	werewolf_infection_probability = 15
 
 /datum/injury/bite/gaping
 	bleed_threshold = 15
@@ -46,6 +49,7 @@
 		"small puckered scar" = 0
 		)
 	fade_away_time = INFINITY
+	werewolf_infection_probability = 15
 
 /datum/injury/bite/gaping_big
 	bleed_threshold = 25
@@ -57,6 +61,7 @@
 		"large puckered scar" = 0
 		)
 	fade_away_time = INFINITY
+	werewolf_infection_probability = 20
 
 /datum/injury/bite/massive
 	bleed_threshold = 25
@@ -68,3 +73,5 @@
 		"massive jagged bite scar" = 0
 		)
 	fade_away_time = INFINITY
+	werewolf_infection_probability = 25
+
