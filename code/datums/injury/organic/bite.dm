@@ -11,7 +11,7 @@
 		"bruised bite" = 2,
 		"small bruise" = 0
 		)
-	werewolf_infection_probability = 5
+	werewolf_infection_probability = 10
 
 /datum/injury/bite/deep
 	bleed_threshold = 15
