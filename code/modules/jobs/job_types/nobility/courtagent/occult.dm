@@ -17,7 +17,7 @@
 		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 50
+		/datum/attribute/skill/educated/reading = 50
 	)
 
 /datum/job/advclass/courtagent/occult
@@ -28,7 +28,7 @@
 	Maybe your colleagues know, maybe they don't. Honesty is your own choice, so long as the church don't find out. Open use of this power would surely see you executed."
 	outfit = /datum/outfit/courtagent/occult
 	category_tags = list(CTAG_COURTAGENT)
-	allowed_patrons = list(/datum/patron/godless/dystheist, /datum/patron/godless/autotheist, /datum/patron/godless/godless, /datum/patron/godless/defiant, /datum/patron/godless/galadros)
+	allowed_patrons = list(/datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/leviathan)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/courtagent/occult
 	traits = list(
@@ -39,10 +39,10 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/status/blood_sight,
-		/datum/action/cooldown/spell/projectile/blood_steal,
+		/datum/action/cooldown/spell/blood_steal,
 		/datum/action/cooldown/spell/diagnose/blood,
 		/datum/action/cooldown/spell/blood_healing,
-		/datum/action/cooldown/spell/status/blood_choke,
+		/datum/action/cooldown/spell/status/blood_choke/whisper,
 		/datum/action/cooldown/spell/blood_poison,
 	)
 	book_type = /obj/item/recipe_book/arcyne
@@ -69,4 +69,5 @@
 		/obj/item/book/magicaltheory = 1,
 		/obj/item/recipe_book/arcyne = 1,
 		/obj/item/key/archive = 1,
+		/obj/item/scrying/flame = 1,
 	)

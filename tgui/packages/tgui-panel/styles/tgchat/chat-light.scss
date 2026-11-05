@@ -1747,6 +1747,37 @@ $border-width-px: $border-width * 1px;
 }
 /* ##### END ##### */
 
+/* ##### THE ARCHDEVILS ##### */
+.god_archdevil {
+	color: hsl(0, 97%, 24%);
+  font-weight: bold;
+  animation: archdevil_flicker 1s infinite;
+}
+
+@keyframes archdevil_flicker {
+	25% {
+		color: hsl(0, 97%, 24%);
+    transform: translate(-2px, -1px);
+	}
+
+	50% {
+		color: hsl(0, 66%, 39%);
+    transform: translate(1px, -2px);
+	}
+
+	75% {
+		color: hsl(22, 78%, 37%);
+    transform: translate(-1px, 2px);
+	}
+
+  100% {
+		color: hsl(0, 66%, 39%);
+    transform: translate(1px, 1px);
+	}
+}
+
+/* ##### END ##### */
+
 .highlight-bounce {
   animation: bounce 2s infinite;
   display: inline-block;

@@ -6,17 +6,17 @@
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/shields = 10,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/combat/firearms = 10,
 		/datum/attribute/skill/combat/crossbows = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/swimming = 40,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/labor/mathematics = 10
+		/datum/attribute/skill/educated/mathematics = 10
 	)
 
 /datum/job/grabber
@@ -30,7 +30,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 

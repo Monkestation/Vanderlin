@@ -378,7 +378,7 @@
 "aks" = (
 /obj/structure/door/viewport,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/metal,
 /area/indoors/town/cell)
 "akv" = (
@@ -2742,6 +2742,21 @@
 /obj/effect/landmark/start/innkeep,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
+"bqA" = (
+/obj/structure/flora/grass/bush_meagre{
+	pixel_x = 20;
+	pixel_y = -5
+	},
+/obj/structure/flora/grass/bush/wall/tall{
+	pixel_x = -8
+	},
+/obj/structure/flora/grass/bush{
+	layer = 4.4;
+	pixel_x = 25;
+	pixel_y = 7
+	},
+/turf/open/floor/cobble/mossy,
+/area/outdoors/exposed/under/basement)
 "bqE" = (
 /obj/structure/water_pipe,
 /turf/open/floor/concrete,
@@ -4371,7 +4386,7 @@
 	name = "forest warden bedroom"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "caJ" = (
@@ -5965,7 +5980,7 @@
 	dir = 4
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/metal/alt,
 /area/indoors/town/cell)
 "cKd" = (
@@ -7538,7 +7553,7 @@
 "dsU" = (
 /obj/structure/door/window,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
 "dtc" = (
@@ -18468,7 +18483,7 @@
 	name = "forest garrison"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/hexstone,
 /area/indoors/villagegarrison)
 "iDN" = (
@@ -30682,6 +30697,12 @@
 "nWX" = (
 /turf/open/dungeon_trap/australia,
 /area/indoors/town/tavern)
+"nXm" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/dirt,
+/area/outdoors/exposed/under/basement)
 "nXt" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -32104,21 +32125,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church/inquisition)
-"oBj" = (
-/obj/structure/flora/grass/bush/wall/tall{
-	pixel_x = -8
-	},
-/obj/structure/flora/grass/bush_meagre{
-	pixel_x = 20;
-	pixel_y = -5
-	},
-/obj/structure/flora/grass/bush{
-	layer = 4.4;
-	pixel_x = 25;
-	pixel_y = 7
-	},
-/turf/open/floor/cobble/mossy,
-/area/outdoors/exposed/under/basement)
 "oBo" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/turned,
@@ -34420,7 +34426,7 @@
 	name = "forest garrison barracks"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "pCb" = (
@@ -39990,8 +39996,10 @@
 /turf/open/water/marsh,
 /area/outdoors/farm)
 "rWA" = (
-/obj/structure/dungeon_entry/center/vanderlin,
-/turf/open/floor/cobble/mossy,
+/obj/structure/waystone{
+	pixel_x = 15
+	},
+/turf/open/floor/grass/healthy,
 /area/outdoors/exposed/under/basement)
 "rWG" = (
 /obj/structure/window/solid,
@@ -240807,7 +240815,7 @@ ozq
 liG
 mhR
 mhR
-oBj
+sLM
 xCK
 aek
 erc
@@ -241009,7 +241017,7 @@ ozq
 liG
 mhR
 mhR
-sLM
+bqA
 dyp
 aek
 hfb
@@ -241413,11 +241421,11 @@ ozq
 liG
 mhR
 mhR
-sLM
+hfb
 hfb
 sLM
 sLM
-aek
+nXm
 ftS
 scP
 scP

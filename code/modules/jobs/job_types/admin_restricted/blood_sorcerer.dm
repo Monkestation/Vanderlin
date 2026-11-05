@@ -7,7 +7,7 @@
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/blood = 60,
 		/datum/attribute/skill/misc/medicine = 40,
@@ -20,13 +20,13 @@
 	tutorial = "Dark and ancient power runs through your veins, one of the last mortal bastions of Blood Magic. Even the children of Kaine respect your power."
 	allowed_sexes = list(MALE, FEMALE)
 	allowed_races = RACES_PLAYER_ALL
-	allowed_patrons = list(/datum/patron/godless/dystheist, /datum/patron/godless/autotheist, /datum/patron/godless/godless, /datum/patron/godless/defiant, /datum/patron/godless/galadros)
+	allowed_patrons = list(/datum/patron/archdevil/mephistopheles)
 	outfit = /datum/outfit/admin/blood_sorcerer
 	cmode_music = 'sound/music/cmode/antag/combat_deadlyshadows.ogg'
 	exp_types_granted = list(EXP_TYPE_COMBAT, EXP_TYPE_MAGICK)
 	technique_points = 14
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
+	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC, FACTION_INFERNAL)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/blood_sorcerer
 
@@ -64,7 +64,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/list_target/teach_blood_magic,
 		/datum/action/cooldown/spell/status/blood_sight,
-		/datum/action/cooldown/spell/projectile/blood_steal,
+		/datum/action/cooldown/spell/blood_steal,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 	)
 	book_type = /obj/item/recipe_book/arcyne
@@ -100,6 +100,8 @@
 		spawned.mind?.share_identities(found_mind)
 	for(var/datum/mind/found_mind in get_minds("Blood Mage"))
 		spawned.mind?.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Blood Herald"))
+		spawned.mind?.share_identities(found_mind)
 
 /datum/outfit/admin/blood_sorcerer
 	name = JOB_ADMIN_BLOOD_SORCERER
@@ -107,6 +109,7 @@
 	shoes = /obj/item/clothing/shoes/boots/hunter
 	neck = /obj/item/clothing/neck/gorget
 	cloak = /obj/item/clothing/cloak/half/colored/blood
+	shirt = /obj/item/clothing/armor/regenerating/skin/infernal
 	wrists = /obj/item/clothing/wrists/bracers/leather/advanced
 	gloves = /obj/item/clothing/gloves/leather/advanced
 	ring = /obj/item/clothing/ring/gold/rontz

@@ -163,6 +163,10 @@
 	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
 	examine_highlight_type = /datum/examine_highlight/blackbriar
 
+/obj/item/ore/cursedrosa/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "cursedrosa", null, 3, topping_name = "black briar rosa")
+
 /obj/item/ore/cursedrosa/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
 	if(slot & ITEM_SLOT_MOUTH)
@@ -296,7 +300,7 @@
 
 /obj/item/ingot/silver
 	name = "silver bar"
-	desc = "A bar of glistening silver. The bane of nitewalkers."
+	desc = "A bar of glistening silver. The bane of nite creachers."
 	icon_state = "ingotsilv"
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
@@ -307,6 +311,15 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/ingot/silver/truesilver
+	name = "truesilver bar"
+	desc = "A bar of glistening truesilver. Blessed material of The Moon Prince and the ultimate bane of nite creachers."
+	icon_state = "ingotlunar"
+	smeltresult = /obj/item/ingot/silver/truesilver
+	melting_material = /datum/material/truesilver
+	sellprice = 60
+	item_weight = 6.65 KILOGRAMS
+
 /obj/item/ingot/steel
 	name = "steel bar"
 	desc = "A bar of alloyed steel."
@@ -315,6 +328,7 @@
 	melting_material = /datum/material/steel
 	sellprice = M_STEEL
 	item_weight = 5 KILOGRAMS
+	misc_flags = SMELTING_TEST_EXCLUDE
 
 /obj/item/ingot/steelholy
 	name = "holy steel bar"

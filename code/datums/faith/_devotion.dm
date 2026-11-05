@@ -7,6 +7,8 @@
 	var/devotion = 0
 	/// How much devotion the `holder_mob` can have
 	var/max_devotion = 1000
+	/// Override title for devotion
+	var/devotion_title = "Devotion"
 	/// Progress on reaching next tier, granting access to new miracles
 	var/progression = 0
 	/// How far the `holder_mob` can progress, use defines at `code\__DEFINES\faith.dm`
@@ -110,8 +112,8 @@
 	. += devotion
 	devotion = clamp(devotion += amount, 0, max_devotion)
 	. -= devotion
-	holder_mob?.hud_used?.bloodpool?.name = "Devotion: [devotion]"
-	holder_mob?.hud_used?.bloodpool?.desc = "Devotion: [devotion]/[max_devotion]"
+	holder_mob?.hud_used?.bloodpool?.name = "[devotion_title]: [devotion]"
+	holder_mob?.hud_used?.bloodpool?.desc = "[devotion_title]: [devotion]/[max_devotion]"
 	if(devotion <= 0)
 		holder_mob?.hud_used?.bloodpool?.set_value(0, 1 SECONDS)
 	else
@@ -270,22 +272,24 @@
 	to_chat(src, "<font color='purple'>I gained [prayersesh] devotion!</font>")
 
 /datum/devotion/proc/excommunicate()
-	if(!HAS_TRAIT(holder_mob, TRAIT_FANATICAL))
-		prayer_effectiveness = 0
-		devotion = -1
-		to_chat(holder_mob, span_userdanger("I have been excommunicated! The Ten no longer listen to my prayers nor my requests."))
-		STOP_PROCESSING(SSprocessing, src)
+	return
 
 /datum/devotion/proc/recommunicate()
+	return
+
+/datum/devotion/divine/excommunicate()
+	if(HAS_TRAIT(holder_mob, TRAIT_FANATICAL))
+		return
+	prayer_effectiveness = 0
+	devotion = -1
+	to_chat(holder_mob, span_userdanger("I have been excommunicated! The Ten no longer listen to my prayers nor my requests."))
+	STOP_PROCESSING(SSprocessing, src)
+
+/datum/devotion/divine/recommunicate()
 	if(!HAS_TRAIT(holder_mob, TRAIT_FANATICAL))
-		prayer_effectiveness = initial(prayer_effectiveness)
-		devotion = 0
-		to_chat(holder_mob, span_boldnotice("I have been welcomed back into the folds of the Ten."))
-		if(passive_devotion_gain || passive_progression_gain)
-			START_PROCESSING(SSprocessing, src)
-
-/datum/devotion/inhumen/excommunicate()
-	return
-
-/datum/devotion/inhumen/recommunicate()
-	return
+		return
+	prayer_effectiveness = initial(prayer_effectiveness)
+	devotion = 0
+	to_chat(holder_mob, span_boldnotice("I have been welcomed back into the folds of the Ten."))
+	if(passive_devotion_gain || passive_progression_gain)
+		START_PROCESSING(SSprocessing, src)

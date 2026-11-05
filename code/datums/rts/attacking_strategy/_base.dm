@@ -90,7 +90,7 @@
 		if(possible_target.controller_mind.master != worker.controller_mind.master)
 			return TRUE
 
-	if(possible_target.status_flags & GODMODE)
+	if(HAS_TRAIT(possible_target, TRAIT_GODMODE))
 		return FALSE
 
 	if(worker.see_invisible < possible_target.invisibility)//Target's invisible to us, forget it

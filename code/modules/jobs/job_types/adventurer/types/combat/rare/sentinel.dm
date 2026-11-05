@@ -12,7 +12,7 @@
 		/datum/attribute/skill/misc/riding = 50,
 		/datum/attribute/skill/combat/bows = 40,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/job/advclass/combat/rare/sentinel

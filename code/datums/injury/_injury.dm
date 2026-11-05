@@ -142,6 +142,9 @@
 
 //increase or decrease infection
 /datum/injury/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
+	if(add_germs > 0)
+		if(parent_mob?.getorgan(ORGAN_SLOT_ZOMBIE))
+			add_germs = round(add_germs * 1.5, 1)
 	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
 
 //makes the injury get infected more when the victim is moving around

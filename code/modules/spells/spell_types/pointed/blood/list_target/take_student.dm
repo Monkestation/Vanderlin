@@ -128,7 +128,7 @@
 	apprentice.attributes?.add_sheet(/datum/attribute_holder/sheet/job/blood_student)
 
 	apprentice.add_spell(/datum/action/cooldown/spell/status/blood_sight, mastery_spell = TRUE)
-	apprentice.add_spell(/datum/action/cooldown/spell/projectile/blood_steal, mastery_spell = TRUE)
+	apprentice.add_spell(/datum/action/cooldown/spell/blood_steal, mastery_spell = TRUE)
 	apprentice.adjust_form_mastery_points(4, specific_form = FORM_BLOOD)
 	apprentice.adjust_technique_mastery_points(3)
 	apprentice.hud_used?.set_bloody_bloodpool()

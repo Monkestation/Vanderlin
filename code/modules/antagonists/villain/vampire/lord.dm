@@ -10,7 +10,7 @@
 	)
 	raw_attribute_list = list(
 		/datum/attribute/skill/magic/blood = 10,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/climbing = 50,
 	)
 
@@ -26,7 +26,7 @@
 	allow_preference_switching = TRUE
 	var/chooses_name = TRUE
 	var/outfit = /datum/outfit/vamplord
-	var/patron = /datum/patron/godless/autotheist
+	var/patron = /datum/patron/archdevil/mephistopheles
 
 	var/ascension_level = 0
 	// thralls to set the clan of on creation
@@ -40,7 +40,6 @@
 	vampire.reset_and_reroll_stats()
 	vampire.purge_combat_knowledge()
 	vampire.remove_all_traits()
-	vampire.grant_undead_eyes()
 	. = ..()
 	if(!forced)
 		if(clan_selected)

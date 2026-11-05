@@ -196,6 +196,7 @@
 	if(affected_bodypart.post_damage_change())
 		affected_mob.update_damage_overlays()
 	affected_bodypart.disinfect_limb(30 SECONDS)
+	affected_bodypart.adjust_germ_level(-5)
 	return ..()
 
 /datum/reagent/medicine/vitalroot_draught

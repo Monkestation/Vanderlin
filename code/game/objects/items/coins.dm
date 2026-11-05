@@ -212,7 +212,7 @@
 	var/intelligence = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)
 	var/perception = GET_MOB_ATTRIBUTE_VALUE(user, STAT_PERCEPTION)
 	var/speed = GET_MOB_ATTRIBUTE_VALUE(user, STAT_SPEED)
-	var/mathematics_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/mathematics) || 0
+	var/mathematics_skill = GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/educated/mathematics) || 0
 	var/list/skill_data = list("delay" = 1.2 SECONDS,"error" = 0)
 
 	var/base_tier	// Base intelligence tiers

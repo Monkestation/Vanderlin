@@ -8,9 +8,8 @@
 	cast_range = 5
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
-	associated_skill = /datum/attribute/skill/magic/arcane
-
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_technique = TECHNIQUE_SUMMONING
 	heretical_spell = TRUE
 

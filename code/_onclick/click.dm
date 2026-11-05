@@ -93,6 +93,24 @@
 	if(SEND_SIGNAL(clicked_atom, COMSIG_ATOM_CLICKEDON, src, modifiers) & COMSIG_MOB_CANCEL_CLICKON)
 		return
 
+	//aim assist, redirects the target if you click on tile, item or obj a person is standing on
+	if(LAZYACCESS(modifiers, LEFT_CLICK) && cmode && !used_intent.noaa && !ismob(clicked_atom) && (isturf(clicked_atom) || isturf(clicked_atom.loc)))
+		var/turf/T
+		if(isturf(clicked_atom))
+			T = clicked_atom
+		else
+			T = clicked_atom.loc
+		var/mob/living/target
+		for(var/mob/living/mob in T)
+			if(mob == src || mob.invisibility || mob.alpha <= 200)
+				continue
+			if(mob.stat > SOFT_CRIT || mob.body_position == LYING_DOWN)
+				continue
+			target = mob
+			break
+		if(target)
+			clicked_atom = target
+
 	if(curplaying)
 		curplaying.on_mouse_up()
 
@@ -460,7 +478,9 @@
 
 /atom/proc/ShiftClick(mob/user, list/modifiers)
 	SEND_SIGNAL(src, COMSIG_CLICK_SHIFT, user, modifiers)
-	if(user.client && user.client.eye == user || user.client.eye == user.loc)
+	if(!user.client)
+		return
+	if(user.client.eye == user || user.client.eye == user.loc || user.is_looking_vertically())
 		user.examinate(src)
 
 /*

@@ -689,7 +689,7 @@
 
 //Updates the mob's health from bodyparts and mob damage variables
 /mob/living/carbon/updatehealth(amount)
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return
 	var/total_burn	= 0
 //	var/total_brute	= 0
@@ -772,6 +772,9 @@
 		clear_fullscreen("inqvision")
 	if(HAS_TRAIT(src, TRAIT_SEE_LEYLINES))
 		see_invisible = SEE_INVISIBLE_LEYLINES
+	if(HAS_TRAIT(src, TRAIT_LEVIATHAN_CURSE))
+		lighting_alpha = LIGHTING_PLANE_ALPHA_VISIBLE
+		see_in_dark = 2
 	if(see_override)
 		see_invisible = see_override
 	return ..()
@@ -1070,14 +1073,14 @@
 			REMOVE_TRAIT(src, TRAIT_GHOSTEARS, "near-death")
 
 /mob/living/carbon/update_stat()
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return
 	if(stat < DEAD)
 		if(health <= HEALTH_THRESHOLD_DEAD && !HAS_TRAIT(src, TRAIT_NODEATH))
 			INVOKE_ASYNC(src, PROC_REF(emote), "deathgurgle")
 			death()
 			return
-		if(health <= hardcrit_threshold && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
+		if((health <= hardcrit_threshold || undergoing_nervous_system_failure()) && !HAS_TRAIT(src, TRAIT_NOHARDCRIT))
 			set_stat(HARD_CRIT)
 		else if(HAS_TRAIT(src, TRAIT_KNOCKEDOUT))
 			set_stat(UNCONSCIOUS)
@@ -1454,6 +1457,8 @@
 		return FALSE
 	if(has_status_effect(/datum/status_effect/debuff/blood_choke))
 		return FALSE
+	if(has_status_effect(/datum/status_effect/debuff/silenced))
+		return FALSE
 
 /mob/living/carbon/proc/try_skin_burn(reaction_volume)
 	var/list/covered_zones = get_covered_body_zones()
@@ -1674,15 +1679,15 @@
 /**
  * This proc is used to determine whether or not the mob can handle touching a burning object.
  */
-/mob/living/carbon/proc/can_touch_burning(atom/burning_atom)
+/mob/living/carbon/proc/can_touch_burning(atom/burning_atom, ignore_gloves = FALSE)
 	// So people can take their own clothes off
 	if((burning_atom == src) || (burning_atom.loc == src))
 		return TRUE
 
-	if(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS))
+	if(HAS_TRAIT(src, TRAIT_RESISTHEAT) || HAS_TRAIT(src, TRAIT_RESISTHEATHANDS) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABADDON))
 		return TRUE
 
-	if(gloves?.max_heat_protection_temperature >= 360)
+	if(!ignore_gloves && (gloves?.max_heat_protection_temperature >= 360))
 		return TRUE
 
 	return FALSE

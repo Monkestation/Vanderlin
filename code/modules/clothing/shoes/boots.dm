@@ -46,6 +46,9 @@
 	item_weight = 2.1 KILOGRAMS
 
 	material_category = ARMOR_MAT_PLATE
+	smeltresult = null
+	melting_material = /datum/material/steel
+	melt_amount = 100
 
 /obj/item/clothing/shoes/boots/armor/gold
 	name = "golden greaves"
@@ -55,7 +58,7 @@
 	body_parts_covered = FEET | LEGS
 	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
 	anvilrepair = null
-	smeltresult = /obj/item/ingot/gold
+	melting_material = /datum/material/gold
 	grid_height = 96
 	grid_width = 96
 	sellprice = 200
@@ -69,7 +72,7 @@
 	desc = "Padded sabatons of bronze, tightly strapped together and padded with hide from a fearsome beaste. The sandals clack about, yet they do not feel obstructive; if anything, you've never felt more agile while beplated."
 	icon_state = "bronzegreaves"
 	body_parts_covered = FEET | LEGS
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 /obj/item/clothing/shoes/boots/armor/light
 	name = "light plate boots"
@@ -81,7 +84,7 @@
 	armor_class = AC_MEDIUM
 	sellprice = 20
 	item_weight = 1.4 KILOGRAMS
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/clothing/shoes/boots/armor/ironmaille
 	name = "chainmail boots"
@@ -93,9 +96,8 @@
 	armor_class = AC_LIGHT
 	sellprice = VALUE_IRON_ARMOR
 	item_weight = 1 KILOGRAMS
-	smeltresult = null
 	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
-	melt_amount = 75
+	melt_amount = 50
 
 /obj/item/clothing/shoes/boots/armor/light/rust
 	name = "rusted light plate boots"
@@ -104,7 +106,7 @@
 	icon = 'icons/roguetown/clothing/special/rust_armor.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rust_armor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/rust_armor.dmi'
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/boots/plate/bad
 	max_integrity = INTEGRITY_OLD_STANDARD
@@ -117,7 +119,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/boots/plate/good
 	item_weight = 2.1 KILOGRAMS
@@ -189,8 +191,8 @@
 	name = "watch boots"
 	color = "#d5c2aa"
 	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the city watch long before they're seen."
-	icon_state = "nobleboots"
-	item_state = "nobleboots"
+	icon_state = "blackboots"
+	item_state = "blackboots"
 	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/leather/advanced/watch/Initialize()
@@ -275,7 +277,7 @@
 	desc = "Finely forged boots made out of silver."
 	icon_state = "silverboots"
 	armor_type = /datum/armor/boots/plate/silver
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 3.4 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
 
@@ -303,7 +305,8 @@
 	desc = "Plate boots. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizoboots"
 	item_state = "zizoboots"
-	smeltresult = /obj/item/ingot/avantyne
+	melting_material = /datum/material/avantyne
+	melt_amount = 100
 	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
 
 /obj/item/clothing/shoes/boots/armor/inhumen/matthios

@@ -205,7 +205,7 @@ While it's not required reading, leadership roles may find this information usef
 		<br><br>
 		Spontaneous fortresses and towns of Crimsonland origin, established via nomadic means. These encampments take advantage of natural resources and nearby settlements to raid, conquer, consume, and then move on to more promising targets. They are ever-moving hordes of gluttony and rage which constantly follow a pattern of great loss followed by a steady regrowth. Most of these forces are still recovering from the most recent Goblin War.
 		<br><br>
-		A misogynistic and self-destructive culture to its extreme, scholars report that several terms of language have been developed just to describe masculinity. Any sane individual loses focus after an orc rambles about &Sigma;-class masculinity or whatever newest scam Graggarspawn have begun pushing. Records are sparse as a result.
+		A misogynistic and self-destructive culture to its extreme, scholars report that several terms of language have been developed just to describe masculinity. Records are sparse as a result of their inherent proclivity for violence and brute force in place of intellect.
 		<br><br>
 	</details>
 	<br><br>
@@ -244,7 +244,7 @@ While it's not required reading, leadership roles may find this information usef
 		<br>
 		<em>Equal, and perhaps confused, worship of The Ten.</em>
 		<br><br>
-		A common stance for youths who are too young or uninformed to truly devote themselves to a sole pantheon, it is the duty of The Church to guide them to choose and profess themselves to a sole patron god.
+		A common stance for youths who are too young or uninformed to truly devote themselves to a sole patron, it is the duty of The Church to guide them to choose and profess themselves to a sole patron god.
 		<br><br>
 		For an adult not in direct service of the pantheon to profess themselves with such faith is a slight upon the gods. They should be shamed, educated, and brought to the light of a sole patron. Astrata turns her gaze away from such indecisiveness.
 		<br><br>
@@ -326,8 +326,6 @@ While it's not required reading, leadership roles may find this information usef
 		<span style="display:block; color:#e4bae6; font-size:115%"> "I will always love you, sweetheart. Regardless of the ne'er-do-wells you associate with."</span>
 		<br>
 		Goddess of love, family, and art. Her domain encompasses marriage, painting, singing, and literature- especially romance. She is considered the backbone of The Ten, barely able to keep them together and officially allied. She was crafted from the heart of Psydon.
-		<br><br>
-		Despite Astrata's overt support for same-sex couples, Eora remains begrudging at best. Some theorize it is hatred, some theorize jealousy. Regardless, her failed seduction of Pestra early in their history and the Great Insult exchanged has left a lasting effect on the so-called goddess of love.
 		<br><br>
 	</details>
 
@@ -591,6 +589,13 @@ While it's not required reading, leadership roles may find this information usef
 		<br><br>
 	</details>
 
+	<details>
+		<summary><strong> Half dark-elves / "Half-drow" </strong></summary>
+		<br>
+		The child of a dark elf and humen. The distinction between half-elves and 'half-drow' has been a subject of debate for centuries. While similar in physicality and longevity to their non-drow cousins, their origins cause them to face discrimination akin to their elven side. Groups of half-elves and half-drow have been known to congregate together and consider themselves one species. According to some radical academic scholars, they might be one and the same species indeed- yet the people of Psydonia certainly do not believe the same at large.
+		<br><br>
+	</details>
+
 	<hr>
 	<strong><span style="font-size:115%"> DISCRIMINATED "INHUMEN" SPECIES </span></strong>
 	<br><br>
@@ -603,13 +608,6 @@ While it's not required reading, leadership roles may find this information usef
 		Tieflings began appearing all over Psydonia after Baotha's ascension within the 21st century, and were exiled in droves as the world adapted. They are often mistaken as being related to her.
 		<br><br>
 		Tieflings are incapable of reproducing with mortals, and thus are spawn of either devils, demons, or other tieflings. A tiefling may develop any number of hellish features, a wide range of horns, potential hooves, odd spines and spikes, or scales. Oddly positioned scales, hollow bones, and other varying oddities that appear consistently in tiefling biology make them considerably fragile. It is not uncommon for a tiefling to be generally unpleasant to look at in the eye of the commonfolk. As if to make matters worse, their hellish progenitors have left them a destiny of misfortune, though perhaps their immunity to fire opens new opportunities for them...
-		<br><br>
-	</details>
-
-	<details>
-		<summary><strong> Half dark-elves / "Half-drow" </strong></summary>
-		<br>
-		The child of a dark elf and humen. The distinction between half-elves and 'half-drow' has been a subject of debate for centuries. While similar in physicality and longevity to their non-drow cousins, their origins cause them to face discrimination akin to their elven side. Groups of half-elves and half-drow have been known to congregate together and consider themselves one species. According to some radical academic scholars, they might be one and the same species indeed- yet the people of Psydonia certainly do not believe the same at large.
 		<br><br>
 	</details>
 

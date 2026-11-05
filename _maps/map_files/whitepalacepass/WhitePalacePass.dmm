@@ -3090,6 +3090,11 @@
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/broom,
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/item/reagent_containers/glass/bucket/wooden,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
+/obj/item/natural/cloth,
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "bMv" = (
@@ -5321,6 +5326,11 @@
 /obj/structure/flora/hotspring_rocks,
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
+"dhK" = (
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/effect/mapping_helpers/access/keyset/garrison/general,
+/turf/open/floor/blocks,
+/area/indoors/villagegarrison)
 "dhQ" = (
 /obj/structure/door/fancy{
 	name = "Clinic Storage"
@@ -7073,6 +7083,10 @@
 "egC" = (
 /turf/open/openspace,
 /area/indoors/town/keep/throne)
+"egV" = (
+/obj/effect/decal/cleanable/debris/stone,
+/turf/closed/wall/mineral/decorstone,
+/area/under/town/basement)
 "ehh" = (
 /obj/effect/landmark/start/late/absolver{
 	dir = 1
@@ -7982,6 +7996,7 @@
 	pixel_x = 16;
 	redstone_id = "bar_shutter"
 	},
+/obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/tavern)
 "eEH" = (
@@ -14503,13 +14518,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/town/tavern)
-"iNi" = (
-/obj/structure/stairs/stone{
-	dir = 1
-	},
-/obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/floor/cobble,
-/area/under/town/basement)
 "iNl" = (
 /obj/structure/bookcase/random{
 	pixel_y = 19;
@@ -16317,10 +16325,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/clinic_large/apothecary)
 "jSI" = (
-/obj/structure/fluff/walldeco/vinez/blue{
-	dir = 4
-	},
-/turf/open/floor/cobble,
+/turf/open/openspace,
 /area/under/town/basement)
 "jTe" = (
 /obj/structure/table/wood/plain,
@@ -19848,6 +19853,7 @@
 /area/outdoors/town/keep)
 "mdO" = (
 /obj/structure/table/wood/plain,
+/obj/item/reagent_containers/peppermill,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town/tavern)
 "meg" = (
@@ -22073,6 +22079,10 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/steward)
+"nwx" = (
+/obj/structure/table/wood/plain,
+/turf/open/floor/ruinedwood/spiral,
+/area/indoors/town/tavern)
 "nwC" = (
 /obj/structure/table/wood/reinforced,
 /obj/item/paper{
@@ -22449,10 +22459,48 @@
 /area/indoors/town/garrison)
 "nII" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/cup/teacup,
-/obj/item/reagent_containers/glass/cup/teacup,
-/obj/item/reagent_containers/glass/cup/teacup,
-/obj/item/reagent_containers/glass/cup/teacup,
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_x = 10;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_x = 10;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_x = -5;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/tealeaves_dry{
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = 3;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = 3;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = 3;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = -4;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = -6;
+	pixel_y = -4
+	},
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
+	pixel_x = -6;
+	pixel_y = -4
+	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "nJd" = (
@@ -22607,6 +22655,12 @@
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
+"nNy" = (
+/obj/structure/stairs/stone{
+	dir = 2
+	},
+/turf/open/floor/cobble,
+/area/under/town/basement)
 "nOU" = (
 /obj/effect/decal/cleanable/dirt/cobweb{
 	dir = 4
@@ -24286,10 +24340,41 @@
 /area/indoors/town/keep/gate)
 "oUk" = (
 /obj/structure/rack/shelf/biggest,
-/obj/item/reagent_containers/glass/bucket/wooden,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
-/obj/item/natural/cloth,
+/obj/item/reagent_containers/glass/cup/glassware/wineglass{
+	pixel_x = -13;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/glass/cup/glassware/wineglass{
+	pixel_x = -9;
+	pixel_y = 12
+	},
+/obj/item/reagent_containers/glass/cup/glassware/wineglass{
+	pixel_x = -8;
+	pixel_y = 8
+	},
+/obj/item/reagent_containers/glass/cup/glassware/wineglass{
+	pixel_x = -13;
+	pixel_y = 10
+	},
+/obj/item/reagent_containers/glass/cup/clay{
+	pixel_y = 10;
+	pixel_x = 2
+	},
+/obj/item/reagent_containers/glass/cup/clay{
+	pixel_y = 10;
+	pixel_x = 6
+	},
+/obj/item/reagent_containers/glass/cup/rose{
+	pixel_x = -4;
+	pixel_y = -10
+	},
+/obj/item/reagent_containers/glass/cup/rose{
+	pixel_x = -7;
+	pixel_y = -10
+	},
+/obj/item/reagent_containers/glass/carafe/teapot/rose{
+	pixel_x = 5
+	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "oUl" = (
@@ -26962,7 +27047,7 @@
 /obj/structure/fluff/walldeco/vinez/blue{
 	dir = 8
 	},
-/turf/open/floor/cobble,
+/turf/closed/wall/mineral/decorstone,
 /area/under/town/basement)
 "qJk" = (
 /obj/structure/door/fancy{
@@ -30659,20 +30744,20 @@
 "tcl" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
-	pixel_x = -6;
-	pixel_y = 9
+	pixel_x = 3;
+	pixel_y = -4
 	},
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
-	pixel_x = -6;
-	pixel_y = 9
+	pixel_x = 3;
+	pixel_y = -4
 	},
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
-	pixel_x = -6;
-	pixel_y = 9
+	pixel_x = 3;
+	pixel_y = -4
 	},
 /obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted{
-	pixel_x = -6;
-	pixel_y = 9
+	pixel_x = 3;
+	pixel_y = -4
 	},
 /obj/item/reagent_containers/food/snacks/bread{
 	pixel_x = -5;
@@ -34298,6 +34383,14 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/natural/bundle/stick,
 /obj/item/natural/bundle/stick,
+/obj/item/grown/log/tree/small{
+	pixel_x = 5;
+	pixel_y = -1
+	},
+/obj/item/grown/log/tree/small{
+	pixel_x = -7;
+	pixel_y = 5
+	},
 /turf/open/floor/blocks,
 /area/under/town/basement)
 "vth" = (
@@ -35113,8 +35206,8 @@
 /turf/open/floor/grass/cold,
 /area/indoors/town/church/chapel)
 "vVA" = (
-/obj/structure/dungeon_entry,
-/turf/open/floor/cobble,
+/obj/structure/dungeon_elevator,
+/turf/open/openspace,
 /area/under/town/basement)
 "vVI" = (
 /obj/effect/falling_leaves,
@@ -57277,8 +57370,8 @@ nJJ
 nJJ
 nJJ
 nJJ
-oaJ
-pRK
+gtX
+bpz
 mos
 mos
 mos
@@ -57480,8 +57573,8 @@ nJJ
 mEp
 oaJ
 pRK
-iNi
-qOn
+mos
+egV
 oBd
 gmI
 gmI
@@ -57682,7 +57775,7 @@ nJJ
 pRK
 mos
 qJh
-bDR
+wUw
 dRO
 ofo
 nPp
@@ -57882,9 +57975,9 @@ nJJ
 nJJ
 nJJ
 mos
-mos
+jSI
 vVA
-bDR
+nNy
 ofo
 qOn
 oBd
@@ -58084,9 +58177,9 @@ nJJ
 nJJ
 nJJ
 pRK
-mos
 jSI
-bDR
+jSI
+nNy
 oBd
 oBd
 dRO
@@ -58288,7 +58381,7 @@ nJJ
 dvf
 lgs
 lgs
-iNi
+wUw
 ofo
 shd
 kDy
@@ -100122,7 +100215,7 @@ uVa
 rZe
 rZe
 dma
-dma
+dhK
 huX
 vFO
 gYc
@@ -102118,7 +102211,7 @@ duR
 dkd
 vbK
 wAO
-cSl
+nwx
 eEv
 cSl
 gMZ

@@ -23,6 +23,7 @@
 	grid_width = 32
 
 	weapon_special = /datum/special_intent/axe_swing
+	melting_material = /datum/material/iron
 	item_weight = 1.5 KILOGRAMS
 
 //................ Stone Axe ............... //
@@ -68,7 +69,7 @@
 
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
-	smeltresult = /obj/item/ingot/steel_slag
+	smeltresult = null
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 60
@@ -87,7 +88,7 @@
 
 /obj/item/weapon/axe/battle/double
 	name = "double headed battle axe"
-	desc = "Twice the heads for twice the carnage, excellent for cleaving the heads of your foes and the timber of the wood"
+	desc = "Twice the heads for twice the carnage, excellent for cleaving the heads of your foes and the timber of the wood."
 	icon_state = "battleaxedouble"
 	force = DAMAGE_AXE + 5
 	force_wielded = DAMAGE_HEAVYAXE_WIELD + 4
@@ -106,7 +107,6 @@
 	max_blade_int = 200
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_IRON
 
-	smeltresult = /obj/item/ingot/iron
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
@@ -162,7 +162,7 @@
 	max_blade_int = 150
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_BRONZE
 
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 
@@ -183,7 +183,7 @@
 //................ Psydonian Axe ............... //
 /obj/item/weapon/axe/psydon
 	name = "psydonian axe"
-	desc = "An axe forged of silver with a small psycross attached, Dendor and his foul beastmen be damned."
+	desc = "An axe forged of blessed silver with a small psycross attached, Dendor and his foul beastmen be damned."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyaxe"
 	max_blade_int = 240
@@ -191,6 +191,7 @@
 
 	resistance_flags = FIRE_PROOF //So the blessing doesn't fuck up
 	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 	parrysound = "sword"
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	sellprice = 60
@@ -224,8 +225,8 @@
 	force_wielded = DAMAGE_AXE_WIELD
 	wdefense = AVERAGE_PARRY
 	wlength = WLENGTH_NORMAL
-	possible_item_intents = list(AXE_CUT, PICK_INTENT)
-	gripped_intents = list(AXE_CUT, AXE_CHOP)
+	possible_item_intents = list(PICK_INTENT, AXE_CUT)
+	gripped_intents = list(PICK_INTENT, AXE_CUT, AXE_CHOP)
 	max_blade_int = 300
 	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_STEEL
 
@@ -251,7 +252,7 @@
 	icon_state = "saxe"
 	max_blade_int = 300
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_STEEL
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	resistance_flags = FIRE_PROOF
 	sellprice = 35
 	axe_cut = 15 // Better than iron
@@ -271,13 +272,12 @@
 //................ Blacksteel Axe ............... //
 /obj/item/weapon/axe/battle/blacksteel
 	name = "blacksteel axe"
-	desc = "A magnificent battle axe of blacksteel, fitted to counter both unarmored assailants and heavy infantry. The edge might be fluted with nobler alloys, but it is no less wicked when introduced to maille-and-bone."
+	desc = "A magnificent battle axe of blacksteel, fitted to counter both unarmored assailants and heavy infantry. The edge might be fluted with nobler alloys, but it is no less wicked when introduced to maille and bone."
 	icon_state = "bs_axe"
 	force = DAMAGE_AXE + 2
 	force_wielded = DAMAGE_HEAVYAXE_WIELD + 2
 	max_blade_int = 330
 	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_BLACKSTEEL
-	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 200
 	sellprice = 90
@@ -295,15 +295,32 @@
 	sellprice = 150
 	item_weight = 1.8 KILOGRAMS
 
+//................ Bloodsteel Axe ............... //
+/obj/item/weapon/axe/battle/bloodsteel
+	name = "bloodsteel axe"
+	desc = "A magnificent battle axe of bloodsteel, fitted to counter both unarmored assailants and heavy infantry. The perfect tool for hewing through the unworthy."
+	icon_state = "corruptaxe"
+	force = DAMAGE_AXE + 2
+	force_wielded = DAMAGE_HEAVYAXE_WIELD + 2
+	max_blade_int = 330
+	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_BLOODSTEEL
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 200
+	sellprice = 0
+	item_weight = 1.2 KILOGRAMS
+
+/obj/item/weapon/axe/battle/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 //------------------ Silver Axe ---------------//
 /obj/item/weapon/axe/silver
 	name = "silver axe"
-	desc = "A silver axe, not as strong as steel but more effective against supernatural foes."
+	desc = "A silver axe - not as strong as steel, but more effective against supernatural foes."
 	icon_state = "silveraxe"
 	max_blade_int = 200
 	max_integrity = INTEGRITY_BATTLEAXE * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	resistance_flags = FIRE_PROOF
 	sellprice = 80
 	axe_cut = 13
@@ -326,7 +343,7 @@
 
 /obj/item/weapon/axe/silver/double
 	name = "double headed silver axe"
-	desc = "A silver axe with two cleaving heads, for sweeping thorugh the beasts of the nite"
+	desc = "A silver axe with two cleaving heads, for sweeping thorugh the beasts of the nite."
 	icon_state = "silveraxedouble"
 	max_blade_int = 300
 	max_integrity = INTEGRITY_DBL_BATTLEAXE * INTEGRITY_MOD_SILVER
@@ -337,7 +354,7 @@
 //.................. Bearded Axe ...............//
 /obj/item/weapon/axe/steel/bearded
 	name = "bearded axe"
-	desc = "A large axe easily wielded in one hand or two, With a large hooked axe head to tearing into flesh and armor and ripping it away brutally."
+	desc = "A large axe easily wielded in one hand or two, with a large, hooked axe head for tearing into flesh and armor and brutally ripping it away."
 	icon_state = "atgervi_axe"
 	item_state = "atgervi_axe"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
@@ -381,7 +398,7 @@
 //................ Copper Hatchet ............... //
 /obj/item/weapon/axe/copper
 	name = "copper hatchet"
-	desc = "A simple designed handaxe, an outdated weapon from simpler times."
+	desc = "A simply designed handaxe, an outdated weapon from simpler times."
 	icon_state = "chatchet"
 	force = DAMAGE_BAD_AXE
 	force_wielded = DAMAGE_BAD_AXE_WIELD
@@ -390,7 +407,6 @@
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 100
 	max_integrity = INTEGRITY_AXE * INTEGRITY_MOD_COPPER
-	smeltresult = /obj/item/ingot/copper
 	melting_material = /datum/material/copper
 	melt_amount = 150
 	pickup_sound = 'sound/foley/equip/rummaging-03.ogg'
@@ -437,7 +453,7 @@
 
 /obj/item/weapon/axe/trollboneaxe
 	name = "troll-horn bone axe"
-	desc = "A rough axe made of bones, strengthed with an troll's horn."
+	desc = "A rough axe made of bones, strengthed with a troll's horn."
 	icon_state = "boneaxe"
 	force = DAMAGE_BAD_AXE
 	force_wielded =	DAMAGE_BAD_AXE_WIELD
@@ -464,7 +480,7 @@
 //................ Great Axe ............... //
 /obj/item/weapon/greataxe
 	name = "greataxe"
-	desc = "An iron great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure."
+	desc = "A long-handled iron axe with a single blade, made for ruining someone's day beyond any measure."
 	icon = 'icons/roguetown/weapons/64/axes.dmi'
 	icon_state = "igreataxe"
 	force = DAMAGE_AXE
@@ -488,7 +504,7 @@
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	associated_skill = /datum/attribute/skill/combat/axesmaces
 	slot_flags = ITEM_SLOT_BACK
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = null
 	melting_material = /datum/material/iron
 	melt_amount = 150
 	sellprice = 60
@@ -529,14 +545,12 @@
 
 /obj/item/weapon/greataxe/steel
 	name = "steel greataxe"
-	desc = "A steel great axe, a long-handled axe with a single blade made for ruining someone's day beyond any measure."
+	desc = "A long-handled steel axe with a single blade made for ruining someone's day beyond any measure."
 	icon_state = "sgreataxe"
 	force_wielded = DAMAGE_HEAVYAXE_WIELD
 	max_blade_int = 300
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_STEEL
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
-	melt_amount = 150
 	sellprice = 90
 	item_weight = 4.5 KILOGRAMS
 
@@ -567,14 +581,21 @@
 
 /obj/item/weapon/greataxe/steel/doublehead/graggar
 	name = "vicious greataxe"
-	desc = "A greataxe who's edge thrums with the motive force, violence, oh, sweet violence!"
+	desc = "A greataxe whose edge thrums with the motive force - violence, oh, sweet violence!"
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "graggargaxe"
 	alt_intents = list(AXE_CUT, AXE_CHOP)
 	sellprice = 0 // Graggarite axe, nobody wants this
 	item_weight = 2 KILOGRAMS
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
+
+/obj/item/weapon/greataxe/truesilver
+	name = "truesilver greataxe"
+	desc = "A grand display of power and loyalty, this greataxe is forged of truesilver and sends nite creachers of all kinds to Necra's embrace one piece at a time."
+	icon_state = "lunar_greataxe"
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/greataxe/blacksteel
 	name = "blacksteel greataxe"
@@ -585,7 +606,6 @@
 	max_blade_int = 300
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_BLACKSTEEL
 	melting_material = /datum/material/blacksteel
-	melt_amount = 150
 	sellprice = 120
 	item_weight = 4 KILOGRAMS
 

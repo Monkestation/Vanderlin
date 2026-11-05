@@ -23,7 +23,6 @@
 	id = "regeneration_cycle"
 	alert_type = /atom/movable/screen/alert/status_effect/regeneration_cycle
 	duration = 300 SECONDS
-	tick_interval = 10 SECONDS
 
 /datum/status_effect/buff/regeneration_cycle/tick()
 	var/mob/living/carbon/carbon = owner
@@ -36,9 +35,10 @@
 /datum/action/cooldown/spell/essence/regeneration_cycle/spell
 	name = "Rejuvenation Cycle"
 	charge_required = TRUE
-	charge_time = 2 SECONDS
-	spell_cost = 80
+	charge_time = 5 SECONDS
+	spell_cost = 100
 	spell_type = SPELL_MANA
 
 	required_form = FORM_LIFE
+	associated_skill = /datum/attribute/skill/magic/arcane/life
 	required_technique = TECHNIQUE_RESTORATION

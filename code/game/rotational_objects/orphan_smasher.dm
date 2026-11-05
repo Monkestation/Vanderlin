@@ -2,6 +2,48 @@
 #define STEP_LEVER "pull the lever"
 #define STEP_BUTTON "push a button"
 
+/datum/hover_data/orphan_smasher
+
+/datum/hover_data/orphan_smasher/proc/build_image(atom/source)
+	var/obj/structure/orphan_smasher/smasher = source
+	if(!smasher.current)
+		return null
+
+	var/obj/item/product = smasher.current.created_item
+	var/image/hover_image = image(icon = initial(product.icon), icon_state = initial(product.icon_state), loc = source, layer = ABOVE_HUD_PLANE)
+	hover_image.plane = GAME_PLANE_UPPER
+	hover_image.pixel_y = 40
+
+	var/bar_progress = round((smasher.progress / smasher.needed_progress) * 100, 5)
+	var/image/progress_overlay = image(icon = 'icons/effects/progressbar.dmi', icon_state = "prog_bar_[bar_progress]")
+	progress_overlay.pixel_y = 38
+	hover_image.overlays += progress_overlay
+
+	var/queue_len = length(smasher.anvil_recipes_to_craft)
+	if(queue_len > 1)
+		var/x_offset = 24
+		var/alpha_value = 255
+		for(var/i in 2 to queue_len)
+			alpha_value *= 0.7
+			var/datum/anvil_recipe/queued_recipe = smasher.anvil_recipes_to_craft[i]
+			var/obj/item/queued_product = queued_recipe.created_item
+			var/image/queue_icon = image(icon = initial(queued_product.icon), icon_state = initial(queued_product.icon_state))
+			queue_icon.pixel_x = x_offset
+			queue_icon.pixel_y = 0
+			queue_icon.alpha = alpha_value
+			hover_image.overlays += queue_icon
+			x_offset += 24
+
+	return hover_image
+
+/datum/hover_data/orphan_smasher/setup_data(atom/source, mob/enterer)
+	if(!enterer.client)
+		return
+	var/image/hover_image = build_image(source)
+	if(!hover_image)
+		return
+	add_client_image(hover_image, enterer.client)
+
 /obj/structure/orphan_smasher
 	name = "auto anvil"
 	desc = "A holy amalgamation of buttons and levers built purposely to fulfill Malum's will."
@@ -26,6 +68,7 @@
 	var/needed_progress = 100
 
 	var/static/list/regular_recipes = list()
+	var/static/list/gib_sounds = list('sound/combat/gib (1).ogg', 'sound/combat/gib (2).ogg')
 
 	var/list/step_list = list()
 
@@ -44,6 +87,7 @@
 				continue
 			regular_recipes |= new recipe_path
 
+	AddComponent(/datum/component/hovering_information, /datum/hover_data/orphan_smasher)
 	START_PROCESSING(SSobj, src)
 
 /obj/structure/orphan_smasher/Destroy()
@@ -85,14 +129,7 @@
 	if(current.rotations_required > rotations_per_minute)
 		return
 
-	var/list/material_copy = current_requirements.Copy()
-	for(var/atom/listed_atom in bin.contents)
-		if(listed_atom.type in material_copy)
-			material_copy[listed_atom.type]--
-			if(material_copy[listed_atom.type] <= 0)
-				material_copy -= listed_atom.type
-
-	if(length(material_copy))
+	if(!materials_satisfied())
 		return
 
 	progress += 5 * (rotations_per_minute / 16)
@@ -115,7 +152,7 @@
 		return
 
 	victim.apply_damage(10 * (rotations_per_minute / 8), BRUTE, BODY_ZONE_HEAD, damage_type = BCLASS_BLUNT)
-	playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
+	playsound(src, pick(gib_sounds), 200, FALSE, 3)
 	bloodied = TRUE
 	update_animation_effect()
 
@@ -141,7 +178,7 @@
 	if(!check_step_damage(user))
 		return
 
-	var/option = input(user, "Remove or Add a recipe?", src) as null|anything in list("Add", "Remove")
+	var/option = tgui_input_list(user, "Remove or Add a recipe?", "Recipe Queue", list("Add", "Remove"))
 	if(!option)
 		return
 
@@ -153,12 +190,15 @@
 		if(!length(options))
 			return
 
-		var/datum/anvil_recipe/choice = input(user, "Choose a recipe to add to the queue", src) as null|anything in options
+		var/datum/anvil_recipe/choice = tgui_input_list(user, "Choose a recipe to add to the queue", "Add Recipe", options)
 		if(!choice)
 			return
 		anvil_recipes_to_craft |= choice
 	else
-		var/datum/anvil_recipe/choice = input(user, "Choose a recipe to remove from the queue", src) as null|anything in anvil_recipes_to_craft
+		if(!length(anvil_recipes_to_craft))
+			return
+
+		var/datum/anvil_recipe/choice = tgui_input_list(user, "Choose a recipe to remove from the queue", "Remove Recipe", anvil_recipes_to_craft)
 		if(!choice)
 			return
 		if(choice == current)
@@ -167,40 +207,17 @@
 		anvil_recipes_to_craft -= choice
 
 /obj/structure/orphan_smasher/update_animation_effect()
-	if(!bloodied)
-		if(!rotation_network || rotation_network?.overstressed || !rotations_per_minute || !working)
-			animate(src, icon_state = "1", time = 1)
-			return
-		var/frame_stage = 1 / ((rotations_per_minute / 30) * 5)
-		if(rotation_direction == WEST)
-			animate(src, icon_state = "1", time = frame_stage, loop=-1)
-			animate(icon_state = "2", time = frame_stage)
-			animate(icon_state = "3", time = frame_stage)
-			animate(icon_state = "4", time = frame_stage)
-			animate(icon_state = "5", time = frame_stage)
-		else
-			animate(src, icon_state = "5", time = frame_stage, loop=-1)
-			animate(icon_state = "4", time = frame_stage)
-			animate(icon_state = "3", time = frame_stage)
-			animate(icon_state = "2", time = frame_stage)
-			animate(icon_state = "1", time = frame_stage)
-	else
-		if(!rotation_network || rotation_network?.overstressed || !rotations_per_minute || !working)
-			animate(src, icon_state = "b1", time = 1)
-			return
-		var/frame_stage = 1 / ((rotations_per_minute / 30) * 5)
-		if(rotation_direction == WEST)
-			animate(src, icon_state = "b1", time = frame_stage, loop=-1)
-			animate(icon_state = "b2", time = frame_stage)
-			animate(icon_state = "b3", time = frame_stage)
-			animate(icon_state = "b4", time = frame_stage)
-			animate(icon_state = "b5", time = frame_stage)
-		else
-			animate(src, icon_state = "b5", time = frame_stage, loop=-1)
-			animate(icon_state = "b4", time = frame_stage)
-			animate(icon_state = "b3", time = frame_stage)
-			animate(icon_state = "b2", time = frame_stage)
-			animate(icon_state = "b1", time = frame_stage)
+	var/prefix = bloodied ? "b" : ""
+	if(!rotation_network || rotation_network?.overstressed || !rotations_per_minute || !working)
+		animate(src, icon_state = "[prefix]1", time = 1)
+		return
+
+	var/frame_stage = 1 / ((rotations_per_minute / 30) * 5)
+	var/list/frame_order = rotation_direction == WEST ? list(1,2,3,4,5) : list(5,4,3,2,1)
+
+	animate(src, icon_state = "[prefix][frame_order[1]]", time = frame_stage, loop = -1)
+	for(var/i in 2 to length(frame_order))
+		animate(icon_state = "[prefix][frame_order[i]]", time = frame_stage)
 
 /obj/structure/orphan_smasher/set_rotations_per_minute(speed)
 	. = ..()
@@ -208,8 +225,40 @@
 		return
 	set_stress_use(128 * (speed / 8))
 
-/obj/structure/orphan_smasher/proc/try_set_recipe_stuff()
+/// Returns TRUE if everything current_requirements calls for is currently sitting in the bin.
+/obj/structure/orphan_smasher/proc/materials_satisfied()
+	var/list/material_copy = current_requirements.Copy()
+	for(var/atom/listed_atom in bin.contents)
+		if(listed_atom.type in material_copy)
+			material_copy[listed_atom.type]--
+			if(material_copy[listed_atom.type] <= 0)
+				material_copy -= listed_atom.type
 
+	return !length(material_copy)
+
+/// Deletes the materials required for current_requirements out of the bin.
+/obj/structure/orphan_smasher/proc/consume_materials()
+	var/list/material_copy = current_requirements.Copy()
+	for(var/atom/listed_atom in bin.contents)
+		if(listed_atom.type in material_copy)
+			material_copy[listed_atom.type]--
+			SEND_SIGNAL(bin, COMSIG_TRY_STORAGE_TAKE, listed_atom, get_turf(src), TRUE)
+			qdel(listed_atom)
+
+			if(material_copy[listed_atom.type] <= 0)
+				material_copy -= listed_atom.type
+
+/// Applies crush damage + gib sound + a visible message to user's active arm.
+/obj/structure/orphan_smasher/proc/crush_user(mob/living/user, damage, self_message, others_message)
+	user.apply_damage(damage, BRUTE, get_active_arm(user), damage_type = BCLASS_BLUNT)
+	playsound(src, pick(gib_sounds), 200, FALSE, 3)
+	user.visible_message(span_danger(others_message), span_danger(self_message))
+
+/// Which arm zone to hit based on the user's active hand.
+/obj/structure/orphan_smasher/proc/get_active_arm(mob/living/user)
+	return (user.active_hand_index == 1) ? BODY_ZONE_L_ARM : BODY_ZONE_R_ARM
+
+/obj/structure/orphan_smasher/proc/try_set_recipe_stuff()
 	var/datum/anvil_recipe/first = anvil_recipes_to_craft[1]
 	if(first == current)
 		return
@@ -225,15 +274,7 @@
 	needed_progress = max(1, current.craftdiff) * 100
 
 /obj/structure/orphan_smasher/proc/create_current()
-	var/list/material_copy = current_requirements.Copy()
-	for(var/atom/listed_atom in bin.contents)
-		if(listed_atom.type in material_copy)
-			material_copy[listed_atom.type]--
-			SEND_SIGNAL(bin, COMSIG_TRY_STORAGE_TAKE, listed_atom, get_turf(src), TRUE)
-			qdel(listed_atom)
-
-			if(material_copy[listed_atom.type] <= 0)
-				material_copy -= listed_atom.type
+	consume_materials()
 
 	var/atom/new_atom
 	for(var/i in 1 to current.output_amount)
@@ -247,18 +288,13 @@
 	current_requirements = list()
 	progress = 0
 
-
 /obj/structure/orphan_smasher/proc/check_step_damage(mob/living/user)
 	if(!length(step_list))
 		return TRUE
 
-	var/body_zone = BODY_ZONE_R_ARM
-	if(user.active_hand_index == 1)
-		body_zone = BODY_ZONE_L_ARM
 	if(working)
-		user.apply_damage(15 * (rotations_per_minute / 8), BRUTE, body_zone, damage_type = BCLASS_BLUNT)
-		playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
-		user.visible_message(span_danger("[user] gets their arm crushed by [src]!"), span_danger("You get your arm crushed by [src]!"))
+		crush_user(user, 15 * (rotations_per_minute / 8), \
+			"You get your arm crushed by [src]!", "[user] gets their arm crushed by [src]!")
 		bloodied = TRUE
 		update_animation_effect()
 
@@ -266,15 +302,13 @@
 
 	switch(step_on)
 		if(STEP_FIDDLE)
-			user.apply_damage(5 * (rotations_per_minute / 8), BRUTE, body_zone, damage_type = BCLASS_BLUNT)
-			playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
-			user.visible_message(span_danger("[user] get their hand caught in [src]'s cogs!"), span_danger("You get your hand caught in [src]'s cogs!"))
+			crush_user(user, 5 * (rotations_per_minute / 8), \
+				"You get your hand caught in [src]'s cogs!", "[user] gets their hand caught in [src]'s cogs!")
+		if(STEP_BUTTON)
+			crush_user(user, 8 * (rotations_per_minute / 8), \
+				"You get your hand flattened by [src]!", "[user] gets their hand flattened by [src]!")
 		if(STEP_LEVER)
 			return
-		if(STEP_BUTTON)
-			user.apply_damage(8 * (rotations_per_minute / 8), BRUTE, body_zone, damage_type = BCLASS_BLUNT)
-			playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
-			user.visible_message(span_danger("[user] gets their hand flattened by [src]!"), span_danger("You get your hand flattened by[src]!"))
 
 /obj/structure/orphan_smasher/proc/try_step(step_type, mob/living/user)
 	var/next_step
@@ -284,14 +318,9 @@
 		next_step = post_start_list[length(step_list) + 1]
 
 	if(next_step != step_type)
-		user.visible_message(span_danger("[user] messes with [src]!"), span_danger("You mess with [src]!"))
+		crush_user(user, 4 * max(1, (rotations_per_minute / 8)), \
+			"You mess with [src]!", "[user] messes with [src]!")
 		step_list = list()
-
-		var/body_zone = BODY_ZONE_R_ARM
-		if(user.active_hand_index == 1)
-			body_zone = BODY_ZONE_L_ARM
-		user.apply_damage(4 * max(1, (rotations_per_minute / 8)), BRUTE, body_zone, damage_type = BCLASS_BLUNT)
-		playsound(src, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)
 		return
 
 	if(!do_after(user, 1.2 SECONDS, src))
@@ -300,16 +329,11 @@
 	to_chat(user, span_notice("You [step_type]."))
 	step_list |= step_type
 
-	if(working)
-		if(length(step_list) == length(post_start_list))
-			working = FALSE
-			step_list = list()
-			update_animation_effect()
-	else
-		if(length(step_list) == length(pre_start_list))
-			working = TRUE
-			step_list = list()
-			update_animation_effect()
+	var/list/target_list = working ? post_start_list : pre_start_list
+	if(length(step_list) == length(target_list))
+		working = !working
+		step_list = list()
+		update_animation_effect()
 
 /obj/structure/material_bin
 	name = "auto anvil hopper"

@@ -35,9 +35,13 @@
 //HALF DROW SKIN TONES
 #define SKIN_COLOUR_PARASITE_TAINTED "a191a1" //Light purple
 #define SKIN_COLOR_MUSHROOM_MINDED "897489" //Mid purple
-#define SKIN_COLOR_CAVE_ATTUNED "5f5f70" // Dark purple
-#define SKIN_COLOR_FUNGUS_STAINED "897489" //Pink
+#define SKIN_COLOR_CAVE_ATTUNED "413e50" // Dark purple
+#define SKIN_COLOR_FUNGUS_STAINED "ab9aaf" //Pink
 #define SKIN_COLOR_DEPTH_DEPARTED "5f5f70" //Grey-blue
+#define SKIN_COLOR_SHALLOW_SHADOWED "8a8896" //Light-blue
+#define SKIN_COLOR_DARK_DWELLER "47444c" //Dark grey
+#define SKIN_COLOR_TWILIGHT_TRAVELED "6a676f" //Mid grey
+#define SKIN_COLOR_STARLIT_SOJOURNER "8b8990" //Light grey
 
 //HUMEN SKIN TONES
 #define SKIN_COLOR_ICECAP "fff0e9" //Pale as SHIT!!

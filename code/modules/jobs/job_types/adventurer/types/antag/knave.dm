@@ -14,7 +14,7 @@
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/carpentry = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/misc/athletics = 20,
@@ -68,7 +68,7 @@
 
 /datum/outfit/bandit/knave
 	name = "Knave (Bandit)"
-	belt = /obj/item/storage/belt/leather
+	belt = /obj/item/storage/belt/leather/bandit
 	pants = /obj/item/clothing/pants/trou/leather
 	shirt = /obj/item/clothing/shirt/shortshirt/colored/random
 	shoes = /obj/item/clothing/shoes/boots/darkboots

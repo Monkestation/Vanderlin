@@ -200,9 +200,6 @@
 		// Cabal
 		if(HAS_TRAIT(user, TRAIT_CABAL) && (istype(patron, /datum/patron/inhumen/zizo) || HAS_TRAIT(src, TRAIT_CABAL)))
 			. += span_purple("A fellow seeker of Her ascension.")
-		// Centrist
-		if(HAS_TRAIT(user, TRAIT_DIVINE_SERVANT) && (HAS_TRAIT(src, TRAIT_DIVINE_CENTRIST) && !HAS_TRAIT(src, TRAIT_DIVINE_SERVANT)))
-			. += SPAN_GOD_ASTRATA("An 'Enlightened Centrist'. Shame!")
 
 		// The disgusing inquistion section
 		if(HAS_TRAIT(user, TRAIT_INQUISITION))
@@ -237,7 +234,7 @@
 				disgust_msg = span_necrosis("[P[THEY]] look[pl] really disgusted.")
 			if(DISGUST_LEVEL_DISGUSTED to INFINITY)
 				disgust_msg = span_necrosis(html_tag("B", "[P[THEY]] look[pl] extremely disgusted."))
-		if(disgust_msg && HAS_TRAIT(user, TRAIT_EMPATH) || disgust >= DISGUST_LEVEL_DISGUSTED)
+		if(disgust_msg && (HAS_TRAIT(user, TRAIT_EMPATH) || HAS_TRAIT(user, TRAIT_DEVIL_MARKED_LEVIATHAN)) || disgust >= DISGUST_LEVEL_DISGUSTED)
 			. += disgust_msg
 
 		// Stress
@@ -253,7 +250,7 @@
 				stress_msg = span_tinywarning("[P[THEY]] look[pl] stressed.")
 			if(STRESS_NEUTRAL to STRESS_BAD)
 				stress_msg = span_tinynotice("[P[THEY]] look[pl] a little stressed.")
-		if(stress_msg && HAS_TRAIT(user, TRAIT_EMPATH) || stress >= STRESS_INSANE)
+		if(stress_msg && (HAS_TRAIT(user, TRAIT_EMPATH) || HAS_TRAIT(user, TRAIT_DEVIL_MARKED_LEVIATHAN)) || stress >= STRESS_INSANE)
 			. += stress_msg
 
 		//Drunkenness
@@ -609,7 +606,7 @@
 			. += span_tinywarning("[P[THEY]] look[pl] [nutrition_msg].")
 		var/hydration_msg
 		switch(hydration)
-			if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_SMALLTHIRST)
+			if(HYDRATION_LEVEL_THIRSTY to HYDRATION_LEVEL_HYDRATED)
 				hydration_msg = "like [P[THEIR]] mouth is dry"
 			if(HYDRATION_LEVEL_DEHYDRATED to HYDRATION_LEVEL_THIRSTY)
 				hydration_msg = "thirsty"

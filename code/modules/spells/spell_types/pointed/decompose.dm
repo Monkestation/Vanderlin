@@ -7,9 +7,9 @@
 	self_cast_possible = FALSE
 	spell_flags = SPELL_RITUOS
 	cast_range = 1
-	associated_skill = /datum/attribute/skill/magic/arcane
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_technique = TECHNIQUE_ALTERATION
 	heretical_spell = TRUE
 

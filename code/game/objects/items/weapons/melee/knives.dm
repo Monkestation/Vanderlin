@@ -52,7 +52,7 @@
 //................ Hunting Knife ............... //
 /obj/item/weapon/knife/hunting
 	name = "hunting knife"
-	desc = "Loyal companion to hunters and poachers, from humble bone to truest steel, disembowel your prey with glee."
+	desc = "Loyal companion to hunters and poachers. From humble bone to truest steel, disembowel your prey with glee."
 	icon_state = "huntingknife"
 	force = DAMAGE_DAGGER
 	melting_material = /datum/material/steel
@@ -114,7 +114,7 @@
 	misscost = 0
 	no_attack = TRUE
 	releasedrain = 0
-	blade_class = BCLASS_PUNCH
+	blade_class = BCLASS_BLUNT
 
 /obj/item/weapon/knife/scissors/interact_with_atom(atom/interacting_with, mob/living/user, list/modifiers)
 	if(user.cmode)
@@ -169,7 +169,7 @@
 
 /obj/item/weapon/knife/scissors/steel
 	name = "steel scissors"
-	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing, more durable and a tad more deadly than their iron counterpart."
+	desc = "Scissors made of solid steel that may be used to salvage usable materials from clothing. More durable and a tad more deadly than their iron counterpart."
 	icon_state = "sscissors"
 	force = DAMAGE_DAGGER
 	max_integrity = INTEGRITY_KNIFE * INTEGRITY_MOD_STEEL
@@ -179,7 +179,7 @@
 //................ Cleaver ............... //
 /obj/item/weapon/knife/cleaver
 	name = "cleaver"
-	desc = "A chef's tool turned armament, cleave off cumbersome flesh with rudimentary ease."
+	desc = "A chef's tool turned armament. Cleave off cumbersome flesh with rudimentary ease."
 	icon_state = "cleav"
 	possible_item_intents = list(DAGGER_CUT, CLEAVER_CHOP)
 	force = DAMAGE_KNIFE + 1
@@ -240,7 +240,7 @@
 /obj/item/weapon/knife/hunting/kukri/iron
 	name = "iron kukri"
 	icon_state = "kukri_iron"
-	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
+	desc = "A hefty knife that originated in the south-eastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP, DAGGER_THRUST)
 	melting_material = /datum/material/iron
@@ -298,12 +298,19 @@
 /obj/item/weapon/knife/dagger/steel/royal
 	name = "decorated dagger"
 	icon_state = "gsdagger"
-	desc = "A dagger of refined steel with lavish gold decoration, even in the hands of most nobles it is considered overly decadent."
+	desc = "A dagger of refined steel with lavish gold decoration. Even in the hands of most nobles, it is considered overly decadent."
 	item_weight = 230 GRAMS
+
+/obj/item/weapon/knife/dagger/steel/royal/misericorde
+	name = "decorated misericorde"
+	desc = "A wickedly lethal spike of refined steel with lavish gold decoration. Even in the hands of most nobles, it is considered overly decadent. The curved handle is said to naturally improve one's aim, while locked in a \
+	life-or-death struggle with plate-armored opponents."
+	icon_state = "dec_misericorde"
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 
 /obj/item/weapon/knife/dagger/steel/stiletto
 	name = "stiletto"
-	desc = "A needle thin dagger made of refined steel, the favored weapon of assassins and angry nobles."
+	desc = "A needle-thin dagger made of refined steel, the favored weapon of assassins and angry nobles."
 	icon_state = "stiletto"
 	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 	melt_amount = 45
@@ -312,7 +319,7 @@
 /obj/item/weapon/knife/hunting/kukri
 	name = "steel kukri"
 	icon_state = "kukri_steel"
-	desc = "A hefty knife that originated in the Southeastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
+	desc = "A hefty knife that originated in the south-eastern reaches of Faience. Its design makes it great for chopping through vegetation and other obstacles."
 	force = DAMAGE_DAGGER + 1
 	wdefense = AVERAGE_PARRY
 	melt_amount = 75
@@ -326,10 +333,11 @@
 	icon_state = "pestrasickle"
 	wdefense = GOOD_PARRY //They use a dagger, but it should be fine for them to also parry with it.
 	item_weight = 200 GRAMS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/pestra
 
 /obj/item/weapon/knife/dagger/steel/hand
 	name = "\proper fervor"
-	desc = "A greatly forged length of steel. Strike with Fervor into the heart of those who dont even know where you lurk."
+	desc = "A well-forged length of steel. Strike with Fervor into the heart of those who don't even know where you lurk."
 	icon_state = "sdaggerhand"
 	sellprice = 200
 	item_weight = 220 GRAMS
@@ -338,7 +346,7 @@
 
 /obj/item/weapon/knife/dagger/steel/hand/parry
 	name = "\proper apathy"
-	desc = "A greatly forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact."
+	desc = "A well-forged length of steel made to be able to parry. Defend with Apathy for any strike that approaches you, for you know they will not make contact."
 	wdefense = GOOD_PARRY
 	icon_state = "spdaggerhand"
 	item_weight = 220 GRAMS
@@ -371,7 +379,7 @@
 
 /obj/item/weapon/knife/dagger/steel/inhumen/graggar
 	name = "vicious dagger"
-	desc = "A chipped and serrated blade designed with only one purpose. Blood."
+	desc = "A chipped and serrated blade designed with only one purpose - Blood."
 	icon_state = "graggardagger"
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
@@ -405,6 +413,20 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/knife/dagger/silver/truesilver
+	name = "truesilver dagger"
+	desc = "A dagger made of truesilver, the thin death of nite creachers."
+	icon_state = "lunar_dagger"
+	sellprice = 80
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/knife/dagger/silver/truesilver/misericorde
+	name = "truesilver misericorde"
+	desc = "An armor-piercing dagger of truesilver. Even the most well protected nite creacher will fear its sting."
+	icon_state = "lunar_misericorde"
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
+
 //................ Blacksteel Dagger ............... //
 /obj/item/weapon/knife/dagger/blacksteel
 	name = "blacksteel dagger"
@@ -422,10 +444,10 @@
 /obj/item/weapon/knife/dagger/blacksteel/misericorde
 	name = "blacksteel misericorde"
 	desc = "A magnificent armor-piercing dagger of blacksteel. The curved handle is said to naturally improve one's aim, while locked in a \
-	lyfe-or-death struggle with plate-armored opponents."
+	life-or-death struggle with plate-armored opponents."
 	icon_state = "bs_misericorde"
 	force = DAMAGE_DAGGER + 3
-	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT, DAGGER_CHOP)
+	possible_item_intents = list(STILETTO_THRUST, STILETTO_CUT)
 
 //................ Bloodsteel Dagger ............... //
 /obj/item/weapon/knife/dagger/bloodsteel
@@ -453,7 +475,7 @@
 //................ Psydonian Dagger ............... //
 /obj/item/weapon/knife/dagger/silver/psydon
 	name = "psydonian dagger"
-	desc = "A silver dagger favored by close range fighters of the inquisition."
+	desc = "A silver dagger favored by close-range fighters of the Inquisition."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psydagger"
 	sellprice = 60
@@ -474,6 +496,7 @@
 	item_weight = 200 GRAMS
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 	pickpocket_difficulty = SKILL_RANK_MASTER
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/weapon/knife/dagger/steel/inhumen/profane/examine(mob/user)
 	. = ..()
@@ -484,6 +507,26 @@
 	if(isobserver(user) || HAS_TRAIT(user, TRAIT_ASSASSIN) || get_dist(user, src) < 1)
 		return ..()
 	return ma2html(mutable_appearance(icon, "sdagger"), user)
+
+/// TRUE if the dagger is out in the open (on a turf, or in someone's hand), allowing the souls trapped within to be heard.
+/// FALSE if it is hidden: inside any container (storage item, chest, wardrobe, etc.) or worn in a non-hand slot (belt, cloak, etc).
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/proc/is_exposed()
+	var/atom/container = loc
+	if(!container || isturf(container))
+		return TRUE
+	if(ismob(container))
+		var/mob/holder = container
+		return (src in holder.held_items)
+	return FALSE
+
+/// The mob carrying this dagger, however deeply it is nested in containers. Null if it is not carried.
+/obj/item/weapon/knife/dagger/steel/inhumen/profane/proc/get_carrier()
+	var/atom/current = loc
+	while(current && !isturf(current))
+		if(ismob(current))
+			return current
+		current = current.loc
+	return null
 
 /obj/item/weapon/knife/dagger/steel/inhumen/profane/pickup(mob/living/M)
 	. = ..()
@@ -503,15 +546,15 @@
 		else
 			var/message = pick(
 				"<span class='danger'>Why...</span>",
-				"<span class='danger'>...Who sent you?</span>",
-				"<span class='danger'>...You will burn for what you've done...</span>",
+				"<span class='danger'>... who sent you?</span>",
+				"<span class='danger'>... you will burn for what you've done...</span>",
 				"<span class='danger'>I hate you...</span>",
 				"<span class='danger'>Someone stop them!</span>",
 				"<span class='danger'>Guards! Help!</span>",
-				"<span class='danger'>...What's that in your hand?</span>",
-				"<span class='danger'>...You love me...don't you?</span>",
-				"<span class='danger'>Wait...don't I know you?</span>",
-				"<span class='danger'>I thought you were...my friend...</span>",
+				"<span class='danger'>... what's that in your hand?</span>",
+				"<span class='danger'>... you love me... don't you?</span>",
+				"<span class='danger'>Wait... don't I know you?</span>",
+				"<span class='danger'>I thought you were... my friend...</span>",
 				"<span class='danger'>How long have I been in here...</span>")
 //			H.visible_message("profane dagger whispers, \"[message]\"")
 			to_chat(M, "profane dagger whispers, \"[message]\"")
@@ -541,7 +584,7 @@
 			if(!(target.dna?.species.id in RACES_PLAYER_ALL))
 				to_chat(user, span_warning("I can't steal this face!"))
 				return
-			var/datum/beam/transfer_beam = user.Beam(target, icon_state = "drain_life", time = 6 SECONDS)
+			var/datum/beam/transfer_beam = user.Beam(target, icon_state = "drain_mana", time = 6 SECONDS)
 
 			playsound(
 				user,
@@ -590,7 +633,7 @@
 				repair_damage(max_integrity) // And fixes the dagger. No blacksmith required!
 				ADD_TRAIT(target, TRAIT_HARDCORE_PROFANE, "[type]")
 			else if(target.client == null) //See if the target's soul has left their body
-				to_chat(user, "<span class='danger'>Your target's soul has already escaped its corpse...you try to call it back!</span>")
+				to_chat(user, "<span class='danger'>Your target's soul has already escaped its corpse... you try to call it back!</span>")
 				get_profane_ghost(target,user) //Proc to capture a soul that has left the body.
 			else
 				user.adjust_triumphs(1)
@@ -647,7 +690,7 @@
 //................ Stone Knife ............... //
 /obj/item/weapon/knife/stone
 	name = "stone knife"
-	desc = "A tool favored by the wood-elves, easy to make, useful for skinning the flesh of beast and man alike."
+	desc = "A tool favored by the wood-elves. Easy to make, useful for skinning the flesh of beast and man alike."
 	icon_state = "stone_knife"
 	wdefense = TERRIBLE_PARRY
 	possible_item_intents = list(DAGGER_CUT, DAGGER_CHOP)
@@ -662,7 +705,7 @@
 
 /obj/item/weapon/knife/stone/kukri
 	name = "joapstone kukri"
-	desc = "A kukri made out of joapstone. It's more of a ceremonial piece than it is an implement of war, it's somewhat fragile. Be gentle with it."
+	desc = "A kukri made out of joapstone. It's more of a ceremonial piece than it is an implement of war, since it's somewhat fragile. Be gentle with it."
 	icon = 'icons/roguetown/gems/gem_jade.dmi'
 	icon_state = "kukri_jade"
 	wdefense = AVERAGE_PARRY
@@ -673,7 +716,7 @@
 
 /obj/item/weapon/knife/stone/opal
 	name = "opaloise knife"
-	desc = "A beautiful knife carved out of opaloise. It's not intended for combat. Its presence is vital in some Crimson Elven ceremonies."
+	desc = "A beautiful knife carved out of opaloise, not intended for combat. Its presence is vital in some Crimson Elven ceremonies."
 	icon = 'icons/roguetown/gems/gem_opal.dmi'
 	icon_state = "knife_opal"
 	wdefense = AVERAGE_PARRY
@@ -693,7 +736,7 @@
 
 /obj/item/weapon/knife/copper
 	name = "copper knife"
-	desc = "A knife of an older design, the copper serves decent enough."
+	desc = "A knife of an older design. The copper serves decently enough."
 	icon_state = "cdagger"
 	possible_item_intents = list(DAGGER_CUT, DAGGER_THRUST)
 	max_blade_int = 100
@@ -704,7 +747,7 @@
 
 /obj/item/weapon/knife/throwingknife
 	name = "iron tossblade"
-	desc = ""
+	desc = "A tossblade forged from iron."
 	icon_state = "throw_knifei"
 	force = DAMAGE_DAGGER
 	throwforce = DAMAGE_DAGGER + 13
@@ -726,10 +769,9 @@
 
 /obj/item/weapon/knife/throwingknife/bronze
 	name = "bronze tossblade"
-	desc = "A tossblade forged from bronze. It's not as reliable compared to other tossblades, but it's much cheaper to make."
+	desc = "A tossblade forged from bronze. Not as reliable compared to other tossblades, but much cheaper to make."
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 10
-	throw_speed = 4
 	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_BRONZE
 	icon_state = "throwing_bronze"
 	embedding = list("embedded_pain_multiplier" = 3, "embed_chance" = 25, "embedded_fall_chance" = 15)
@@ -739,11 +781,10 @@
 
 /obj/item/weapon/knife/throwingknife/steel
 	name = "steel tossblade"
-	desc = ""
+	desc = "A tossblade forged from steel."
 	icon_state = "throw_knifes"
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 15
-	throw_speed = 4
 	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_STEEL
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/steel
@@ -758,33 +799,44 @@
 
 /obj/item/weapon/knife/throwingknife/blacksteel
 	name = "blacksteel tossblade"
-	desc = ""
+	desc = "A tossblade forged from blacksteel."
 	icon_state = "throw_knifebs"
 	item_state = "bone_dagger"
 	throwforce = DAMAGE_DAGGER + 17
-	throw_speed = 4
 	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_BLACKSTEEL
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 15)
 	melting_material = /datum/material/blacksteel
 	sellprice = 10
 	item_weight = 85 GRAMS
 
-/obj/item/weapon/knife/throwingknife/psydon
-	name = "psydonian tossblade"
-	desc = "An unconventional method of delivering silver to a heretic; but one PSYDON smiles at, all the same. Doubles as an 'actual' knife in a pinch."
-	icon_state = "throw_knifep"
+/obj/item/weapon/knife/throwingknife/silver
+	name = "silver tossblade"
+	desc = "A tossblade forged from silver. An unconventional method of delivering silver to a heretic but no less effective."
+	icon_state = "throw_knifesil"
 	item_state = "bone_dagger"
-	wdefense = GOOD_PARRY
-	throw_speed = 4
 	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_SILVER
 	embedding = list("embedded_pain_multiplier" = 4, "embed_chance" = 50, "embedded_fall_chance" = 0)
 	sellprice = 65
 	melting_material = /datum/material/silver
 	item_weight = 80 GRAMS
 
-/obj/item/weapon/knife/throwingknife/psydon/Initialize(mapload)
+/obj/item/weapon/knife/throwingknife/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/knife/throwingknife/silver/truesilver
+	name = "truesilver tossblade"
+	desc = "A tossblade forged from truesilver. An unconventional method of delivering silver to a heretic but no less effective."
+	icon_state = "throw_knife_truesil"
+	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_TRUESILVER
+	melting_material = /datum/material/truesilver
+	sellprice = 80
+
+/obj/item/weapon/knife/throwingknife/silver/psydon
+	name = "psydonian tossblade"
+	desc = "An unconventional method of delivering silver to a heretic; but one PSYDON smiles at, all the same. Doubles as an 'actual' knife in a pinch."
+	icon_state = "throw_knifep"
+	wdefense = GOOD_PARRY
 
 /obj/item/weapon/knife/throwingknife/rous //Rousman exclusive item, can stay a bit better
 	name = "rous kunai"

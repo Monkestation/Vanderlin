@@ -4306,9 +4306,9 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/antag/bandit_lair)
 "uH" = (
-/obj/effect/decal/cleanable/debris/stone,
-/turf/open/floor/twig,
-/area/indoors/antag/bandit_lair)
+/obj/structure/pottery_lathe,
+/turf/open/floor/dirt/road,
+/area/outdoors/antag/bandit_lair)
 "uI" = (
 /obj/effect/mapping_helpers/virtual_z_link/broodmother_base,
 /turf/closed/mineral,
@@ -5773,7 +5773,6 @@
 /obj/item/clothing/head/crown/circlet/stink,
 /obj/item/clothing/head/crown/circlet/sleepless,
 /obj/item/clothing/head/crown/circlet,
-/obj/item/clothing/head/crown/serpcrown/surplus,
 /turf/open/floor/carpet,
 /area/indoors/admin_test)
 "Cv" = (
@@ -9699,10 +9698,6 @@
 "WC" = (
 /turf/open/water/ocean,
 /area/outdoors/woods_safe)
-"WD" = (
-/obj/effect/decal/cleanable/debris/stone,
-/turf/open/floor/cobblerock,
-/area/indoors/antag/bandit_lair)
 "WE" = (
 /obj/item/paper{
 	info = "I've had enough of you cacks, so long, I left the tools and the forge, I don't care what you lot do with it, just don't try and hunt me down.      - Stonehead";
@@ -13088,7 +13083,7 @@ Qj
 Qj
 cn
 Zk
-cn
+uH
 cn
 Pb
 Pb
@@ -13346,7 +13341,7 @@ Zk
 kC
 cw
 Pf
-uH
+JB
 za
 pu
 cw
@@ -13607,8 +13602,8 @@ Zk
 Ks
 Ev
 za
-uH
-WD
+JB
+za
 WI
 Qj
 mP
@@ -13996,7 +13991,7 @@ Pb
 Qj
 SX
 JB
-WD
+za
 za
 nN
 oV

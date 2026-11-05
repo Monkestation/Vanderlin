@@ -3,7 +3,7 @@
 
 /obj/item/weapon/whip
 	name = "whip"
-	desc = "A leather whip, intertwining rope, leather and a fanged tip to inflict enormous pain. Favored by slavers and beast-tamers."
+	desc = "A leather whip, intertwining rope, leather, and a fanged tip to inflict enormous pain. Favored by slavers and beast-tamers."
 	icon_state = "whip"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	force = DAMAGE_WHIP
@@ -42,7 +42,7 @@
 //................ Repenta En ............... //
 /obj/item/weapon/whip/repenta
 	name = "\proper repenta en"
-	desc = "An extremely well maintained whip with a steel grip and a wire wrapped length. Only a fool would stand within reach of this weapon."
+	desc = "An extremely well-maintained whip with a steel grip and a wire-wrapped length. Only a fool would stand within reach of this weapon."
 	icon_state = "whip_repenta"
 	force = DAMAGE_WHIP + 4
 	resistance_flags = FIRE_PROOF
@@ -73,7 +73,7 @@
 //................ Steel Whip ............... //
 /obj/item/weapon/whip/steel
 	name = "steel whip"
-	desc = "A whip with a steel handle, core and tip."
+	desc = "A whip with a steel handle, core, and tip."
 	icon_state = "whip_steel"
 	force = DAMAGE_WHIP + 3
 	resistance_flags = FIRE_PROOF
@@ -83,7 +83,7 @@
 //................ Silver Whip ............... //
 /obj/item/weapon/whip/silver
 	name = "silver whip"
-	desc = "A whip with a silver handle, core and tip. It has been modified for inflicting burning pain on nitebeasts."
+	desc = "A whip with a silver handle, core, and tip. It has been modified for inflicting burning pain on nitebeasts."
 	icon_state = "whip_silver"
 	force = DAMAGE_WHIP + 2
 	resistance_flags = FIRE_PROOF
@@ -94,6 +94,15 @@
 /obj/item/weapon/whip/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/whip/silver/truesilver
+	name = "truesilver whip"
+	desc = "A blued leather corded whip with a handle, core and tip forged with truesilver."
+	icon_state = "whip_lunar"
+	smeltresult = null
+	melt_amount = 100
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_TRUESILVER
 
 //................ Psydon Whip ............... //
 /obj/item/weapon/whip/psydon
@@ -112,8 +121,8 @@
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/whip/psydon/relic
-	name = "Daybreak"
-	desc = "Holding this blessed silver evokes memories of the grand cathedrals, testaments to humanity’s faith. There, upon the ceiling, was painted a scene-most-beautiful: of Psydon, robed, in battle against the archdevils. Bring daelight to the faithful."
+	name = "Daebreak"
+	desc = "Holding this blessed silver evokes memories of the grand cathedrals, testaments to humenity’s faith. There, upon the ceiling, was painted a scene-most-beautiful: of Psydon, robed, in battle against the archdevils. Bring daelight to the faithful."
 	icon_state = "psywhip"
 	item_weight = 550 GRAMS
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
@@ -136,11 +145,12 @@
 //................ Bloodsteel Whip ............... //
 /obj/item/weapon/whip/bloodsteel
 	name = "bloodsteel whip"
-	desc = "A whip with a bloodsteel handle, core and tip."
+	desc = "A whip with a bloodsteel handle, core, and tip."
 	icon_state = "whip_corrupt"
 	force = DAMAGE_WHIP + 3
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 100
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_BLOODSTEEL
 
 /obj/item/weapon/whip/bloodsteel/Initialize(mapload)
@@ -205,7 +215,7 @@
 //................ Chain Whip ............... //
 /obj/item/weapon/whip/chain
 	name = "chain whip"
-	desc = "An iron chain, fixed to a leather grip. Its incredibly heavy, and unwieldy. You'll likely hurt yourself more than anyone else with this."
+	desc = "An iron chain, fixed to a leather grip. It is incredibly heavy and unwieldy. You'll likely hurt yourself more than anyone else with this."
 	icon_state = "whip_chain"
 	force = DAMAGE_WHIP + 3
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_MTLLASH)
@@ -226,10 +236,11 @@
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	item_weight = 500 GRAMS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/xylix
 
 /obj/item/weapon/whip/nagaika //Import only
 	name = "nagaika whip"
-	desc = "A short but heavy leather whip, sporting a blunt reinforced tip and a longer handle."
+	desc = "A short but heavy leather whip, sporting a blunt, reinforced tip and a longer handle."
 	icon_state = "nagaika"
 	force = DAMAGE_WHIP + 5		//Same as a cudgel/sword for intent purposes. Basically a 2 range cudgel while one-handing.
 	possible_item_intents = list(WHIP_MTLCRACK, WHIP_LASH, SWORD_STRIKE)
@@ -239,7 +250,7 @@
 
 /obj/item/weapon/whip/urumi
 	name = "steel urumi"
-	desc = "A long, flexible whip-like sword originally developed by the Savannah Elves. While an effective weapon, it requires more maintenance compared to other swords."
+	desc = "A long, flexible, whip-like sword originally developed by the Savannah Elves. While an effective weapon, it requires more maintenance compared to other swords."
 	icon_state = "urumi_steel"
 	force = DAMAGE_WHIP + 3
 	wbalance = HARD_TO_DODGE
@@ -253,7 +264,8 @@
 	resistance_flags = FIRE_PROOF
 	sharpness = IS_SHARP
 	blade_dulling = DULLING_BASH
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	item_weight = 800 GRAMS
 
 /obj/item/weapon/whip/urumi/iron
@@ -262,7 +274,7 @@
 	force = DAMAGE_WHIP
 	max_blade_int = 150
 	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_IRON
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	item_weight = 850 GRAMS
 
 /obj/item/weapon/whip/urumi/bronze
@@ -271,7 +283,7 @@
 	force = DAMAGE_WHIP
 	max_blade_int = 100
 	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_BRONZE
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	item_weight = 800 GRAMS
 
 /obj/item/weapon/whip/urumi/silver
@@ -280,7 +292,7 @@
 	force = DAMAGE_WHIP + 1
 	max_blade_int = 160
 	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 750 GRAMS
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)

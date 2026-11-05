@@ -11,9 +11,10 @@
 		/datum/attribute/skill/craft/traps = 20,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/combat/knives = 50,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -33,9 +34,10 @@
 		/datum/attribute/skill/craft/traps = 20,
 		/datum/attribute/skill/misc/climbing = 53,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/combat/knives = 60,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -53,7 +55,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	allowed_sexes = list(FEMALE)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
@@ -109,9 +110,9 @@
 	shoes = /obj/item/clothing/shoes/boots/leather
 	backr = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/matron
+	wrists = /obj/item/weapon/scabbard/knife/hidden/bs_misericorde
 
 	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/blacksteel/misericorde = 1,
 		/obj/item/key/matron = 1
 	)
 

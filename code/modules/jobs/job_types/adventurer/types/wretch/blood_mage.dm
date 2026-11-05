@@ -8,7 +8,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/blood = 40,
 		/datum/attribute/skill/magic/arcane = 20, // Needed for book crafting and basic survivability.
@@ -29,11 +29,12 @@
 	technique_points = 4 // This is mirrored by their form points manually, due to minimal technique-less spells. Do not increase either beyond 4.
 	factions = list(FACTION_NEUTRAL, FACTION_BLOOD_MAGIC)
 	magic_user = TRUE
+	allowed_patrons = list(/datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/leviathan)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bloodmage
 
 	antag_job = TRUE
-	antag_role = /datum/antagonist/blood_mage/mage
+	antag_role = /datum/antagonist/blood_mage
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -49,7 +50,7 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/status/blood_sight,
-		/datum/action/cooldown/spell/projectile/blood_steal,
+		/datum/action/cooldown/spell/blood_steal,
 		/datum/action/cooldown/spell/projectile/blood_bolt,
 	)
 	book_type = /obj/item/recipe_book/arcyne
@@ -97,6 +98,8 @@
 	for(var/datum/mind/found_mind in get_minds(JOB_ADMIN_BLOOD_SORCERER))
 		spawned.mind?.share_identities(found_mind)
 	for(var/datum/mind/found_mind in get_minds("Blood Mage"))
+		spawned.mind?.share_identities(found_mind)
+	for(var/datum/mind/found_mind in get_minds("Blood Herald"))
 		spawned.mind?.share_identities(found_mind)
 
 /datum/outfit/wretch/bloodmage

@@ -8,6 +8,7 @@
 	cast_range = 1
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/necra, /obj/item/clothing/neck/psycross/silver/divine/astrata)
 
@@ -21,7 +22,7 @@
 /datum/action/cooldown/spell/burial_rites/is_valid_target(atom/cast_on)
 	if(istype(cast_on, /obj/item/weapon/knife/dagger/steel/inhumen/profane) || istype(cast_on, /obj/item/psydonmusicbox))
 		return TRUE
-	if(istype(cast_on, /obj/item/blood_pearl))
+	if(istype(cast_on, /obj/item/blood_pearl) || istype(cast_on, /obj/item/sealed_blood_pearl))
 		return TRUE
 	else if(!istype(cast_on, /obj/structure/closet/dirthole))
 		return FALSE
@@ -57,6 +58,10 @@
 	else if(istype(cast_on, /obj/item/blood_pearl))
 		var/obj/item/blood_pearl/pearl = cast_on
 		pearl.shatter(TRUE)
+		return
+	else if(istype(cast_on, /obj/item/sealed_blood_pearl))
+		var/obj/item/sealed_blood_pearl/pearl = cast_on
+		pearl.shatter()
 		return
 
 	if(pacify_coffin(cast_on, owner))

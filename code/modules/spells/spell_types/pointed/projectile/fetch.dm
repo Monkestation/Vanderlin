@@ -6,6 +6,7 @@
 	sound = 'sound/magic/magnet.ogg'
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 
 	//yoink
 	invocation = "YO'EIN'KAR!"
