@@ -589,7 +589,7 @@
 /datum/blueprint_recipe/structure/clutter/tablecloth/moon
 	name = "Clutter (Tablecloth, Moon)"
 	desc = "A decorative table cloth depicting the moon."
-	result_type = /obj/structure/fluff/clutter/tablecloth/moon
+	result_type = /obj/item/tablecloth/moon
 	required_materials = list(
 		/obj/item/natural/cloth = 2
 	)
@@ -598,7 +598,7 @@
 /datum/blueprint_recipe/structure/clutter/tablecloth/sun
 	name = "Clutter (Tablecloth, Sun)"
 	desc = "A decorative table cloth depicting the sun."
-	result_type = /obj/structure/fluff/clutter/tablecloth/sun
+	result_type = /obj/item/tablecloth/sun
 	required_materials = list(
 		/obj/item/natural/cloth = 2
 	)
