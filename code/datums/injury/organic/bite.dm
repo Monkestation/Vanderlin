@@ -11,7 +11,7 @@
 		"bruised bite" = 2,
 		"small bruise" = 0
 		)
-	werewolf_infection_probability = 10
+	werewolf_infection_probability = 5
 
 /datum/injury/bite/deep
 	bleed_threshold = 15
@@ -24,7 +24,7 @@
 		"ragged scar" = 0
 		)
 	fade_away_time = INFINITY
-	werewolf_infection_probability = 15
+	werewolf_infection_probability = 10
 
 /datum/injury/bite/flesh
 	bleed_threshold = 15
