@@ -266,6 +266,7 @@
 		/obj/item/natural/fibers = 1
 	)
 	output = /obj/item/clothing/pants/trou/apothecary
+	category = "Pants"
 
 /datum/repeatable_crafting_recipe/leather/pants/fur
 	name = "fur trousers"
@@ -358,6 +359,7 @@
 /datum/repeatable_crafting_recipe/leather/boots
 	name = "leather boots"
 	output = /obj/item/clothing/shoes/boots/leather
+	category = "Boots"
 
 /datum/repeatable_crafting_recipe/leather/corset
 	name = "corset"
