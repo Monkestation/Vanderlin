@@ -31,8 +31,10 @@
 	var/obj/structure/table/table = locate(/obj/structure/table) in get_turf(src)
 	if(table)
 		forceMove(table)
-		table.vis_contents += cloth
-		cloth.vis_flags |= (VIS_INHERIT_PLANE|VIS_INHERIT_LAYER)
+		table.vis_contents += src
+		vis_flags |= (VIS_INHERIT_PLANE|VIS_INHERIT_LAYER)
+		pixel_w = 0
+		pixel_z = 0
 
 /obj/item/tablecloth/moon
 	name = "moon tablecloth"
