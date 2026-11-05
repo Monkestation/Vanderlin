@@ -202,7 +202,6 @@
 		/obj/item/natural/fibers = 1,
 	)
 	output = /obj/item/clothing/shirt/tunic
-	requirements = list(/obj/item/natural/cloth = 2)
 	category = "Shirt"
 
 /datum/repeatable_crafting_recipe/sewing/lowcut_shirt
