@@ -195,7 +195,6 @@
 /// Clothing
 /datum/repeatable_crafting_recipe/leather/gloves
 	name = "leather gloves"
-	output_amount = 2
 	output = /obj/item/clothing/gloves/leather
 	craftdiff = 1
 	category = "Gloves"
