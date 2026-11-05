@@ -4,6 +4,9 @@
 	name = "bouquet"
 	desc = "The bouquet people love the most is one that produces a beautiful display of flowers."
 	icon = 'icons/roguetown/items/misc.dmi'
+	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
+	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
+	experimental_inhand = FALSE
 	icon_state = "bouquet_base"
 	item_state = ""
 
@@ -19,23 +22,27 @@
 	name = "rosa bouquet"
 	desc =  "A bouquet of rosas, one of Eora's most beautiful flowers. They are a symbol of love and devotion."
 	icon_state = "bouquet_rosa"
+	item_state = "bouquet_rosa"
 
 /obj/item/bouquet/salvia
 	name = "salvia bouquet"
 	desc = "A bouquet of sweet smelling salvia, a beautiful and royal purple flower."
 	icon_state = "bouquet_salvia"
+	item_state = "bouquet_salvia"
 	salvage_result = /obj/item/alch/herb/salvia
 
 /obj/item/bouquet/matricaria
 	name = "matricaria bouquet"
 	desc = "A bouquet of maricaria."
 	icon_state = "bouquet_matricaria"
+	item_state = "bouquet_matricaria"
 	salvage_result = /obj/item/alch/herb/matricaria
 
 /obj/item/bouquet/calendula
 	name = "calendula bouquet"
 	desc = "A bouquet of calendula, a flower used in herbal medicine due to its supposed healing properties."
 	icon_state = "bouquet_calendula"
+	item_state = "bouquet_calendula"
 	salvage_result = /obj/item/alch/herb/calendula
 
 /obj/item/clothing/head/flowercrown
