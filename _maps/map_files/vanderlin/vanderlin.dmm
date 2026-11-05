@@ -4742,9 +4742,6 @@
 	dir = 8
 	},
 /area/indoors/town/dwarfin)
-"bJz" = (
-/turf/open/floor/churchmarble/violet,
-/area/under/cave)
 "bJM" = (
 /obj/effect/spawner/map_spawner/loot/potion_vitals,
 /obj/structure/rack/shelf/biggest,
@@ -5201,13 +5198,6 @@
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/cobble,
 /area/under/town/basement)
-"bRy" = (
-/obj/structure/chair/bench/church{
-	dir = 1
-	},
-/obj/item/clothing/shirt/robe/malum,
-/turf/open/floor/churchmarble/violet,
-/area/under/cave)
 "bRA" = (
 /obj/structure/rack,
 /obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
@@ -16756,7 +16746,8 @@
 /area/under/town/basement)
 "gvZ" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
-/turf/open/floor/churchmarble/violet,
+/obj/item/bin/water/gross,
+/turf/open/floor/churchmarble,
 /area/under/cave)
 "gwf" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -18819,6 +18810,7 @@
 /area/indoors/town/keep/phys)
 "hpW" = (
 /obj/structure/door/stone,
+/obj/effect/mapping_helpers/access/keyset/church/general,
 /turf/open/floor/churchmarble/gold,
 /area/under/cave)
 "hqh" = (
@@ -33685,7 +33677,7 @@
 /area/indoors/town/keep/kitchen)
 "nbb" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
-/obj/item/clothing/head/padded/malumhood,
+/obj/item/bin/water/gross,
 /turf/open/floor/churchmarble/violet,
 /area/under/cave)
 "nbf" = (
@@ -38194,6 +38186,14 @@
 "oVc" = (
 /obj/structure/table/church/m,
 /obj/machinery/light/fueled/wallfire/candle,
+/obj/item/weapon/tongs{
+	pixel_y = 3;
+	pixel_x = -18
+	},
+/obj/item/weapon/hammer/iron{
+	pixel_y = 4;
+	pixel_x = 2
+	},
 /turf/open/floor/churchmarble/gold,
 /area/under/cave)
 "oVj" = (
@@ -43577,11 +43577,10 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church)
 "qUk" = (
-/obj/structure/fluff/statue/gargoyle/candles{
-	pixel_y = 16;
-	base_pixel_y = 16
+/obj/machinery/light/fueled/smelter{
+	pixel_y = 23
 	},
-/turf/open/floor/churchmarble,
+/turf/open/floor/churchmarble/gold,
 /area/under/cave)
 "qUo" = (
 /obj/structure/rack,
@@ -44047,6 +44046,12 @@
 "rdM" = (
 /turf/closed/wall/mineral/decorstone,
 /area/indoors/town/keep/kitchen)
+"rdT" = (
+/obj/machinery/light/fueled/forge{
+	pixel_y = 5
+	},
+/turf/open/floor/churchmarble/gold,
+/area/under/cave)
 "rdU" = (
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/stone/moss,
@@ -181141,7 +181146,7 @@ qFx
 nNY
 wDX
 xYD
-qFx
+dID
 dID
 biy
 rat
@@ -181736,10 +181741,10 @@ hWI
 hWI
 hWI
 gvZ
-rCd
-bJz
-uGD
 fml
+rCd
+uGD
+rCd
 ezu
 hWI
 hWI
@@ -181936,13 +181941,13 @@ dID
 hWI
 hWI
 qUk
+dkX
 aeB
-aeB
-boc
-bJz
-boc
-bJz
 qub
+boc
+boc
+boc
+aeB
 aeB
 hWI
 qFx
@@ -182139,7 +182144,7 @@ hWI
 irV
 dkX
 dkX
-aeB
+dkX
 aeB
 aeB
 aeB
@@ -182341,7 +182346,7 @@ hWI
 oVc
 dkX
 cyi
-dkX
+rdT
 dkX
 dkX
 dkX
@@ -182543,7 +182548,7 @@ hWI
 kSz
 dkX
 dkX
-aeB
+dkX
 aeB
 aeB
 aeB
@@ -182744,12 +182749,12 @@ dID
 hWI
 hWI
 qUk
+dkX
 aeB
-aeB
-bRy
-bJz
+qub
 rCd
-bJz
+rCd
+rCd
 aeB
 aeB
 hWI
@@ -182948,10 +182953,10 @@ hWI
 hWI
 hWI
 nbb
+fml
 boc
-bJz
 ebf
-bJz
+boc
 ezu
 hWI
 hWI
