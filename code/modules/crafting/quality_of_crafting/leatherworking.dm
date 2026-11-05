@@ -228,12 +228,10 @@
 /datum/repeatable_crafting_recipe/leather/gloves/fencer/phys
 	name = "physicker gloves"
 	output = /obj/item/clothing/gloves/leather/phys
-	category = "Gloves"
 
 /datum/repeatable_crafting_recipe/leather/gloves/fencer/apothecary
 	name = "apothecary gloves"
 	output = /obj/item/clothing/gloves/leather/apothecary
-	category = "Gloves"
 
 /datum/repeatable_crafting_recipe/leather/gloves/heavy
 	name = "heavy leather gloves"
