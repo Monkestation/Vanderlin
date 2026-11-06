@@ -896,22 +896,6 @@
 	density = FALSE
 	anchored = FALSE
 
-/obj/structure/fluff/clutter/tablecloth/moon
-	name = "tablecloth"
-	desc = "A decorative table cloth depicting the moon."
-	icon = 'icons/roguetown/misc/structure.dmi'
-	icon_state = "tablecloth_moon"
-	density = FALSE
-	anchored = FALSE
-
-/obj/structure/fluff/clutter/tablecloth/sun
-	name = "tablecloth"
-	desc = "A decorative table cloth depicting the sun."
-	icon = 'icons/roguetown/misc/structure.dmi'
-	icon_state = "tablecloth_sun"
-	density = FALSE
-	anchored = FALSE
-
 /obj/structure/fluff/moonrug
 	name = "moon rug"
 	desc = "A decorative rug depicting the phases of the moon."
