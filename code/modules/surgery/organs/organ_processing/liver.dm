@@ -21,6 +21,9 @@
 
 	var/provide_pain_message = HAS_NO_TOXIN
 
+	if(!HAS_TRAIT(owner, TRAIT_TOXINLOVER) && owner.getToxLoss() > 40)
+		owner.adjustToxLoss(-0.5)
+
 	if(liver.filterToxins && !HAS_TRAIT(owner, TRAIT_TOXINLOVER))
 		var/obj/belly = owner.getorganslot(ORGAN_SLOT_STOMACH)
 		for(var/datum/reagent/toxin/T in owner.reagents.reagent_list)
