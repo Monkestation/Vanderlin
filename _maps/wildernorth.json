@@ -1,0 +1,37 @@
+{
+	"map_name": "Wilderness",
+	"map_path": "map_files/wilder",
+	"map_file": "wildernorth.dmm",
+	"immigrant_origin": "Elsewhere",
+	"monarch_title": "Chieftain",
+	"monarch_title_f": "Chieftess",
+	"traits": [
+		{
+			"Up": true,
+			"Turf Weather Effects": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		}
+	],
+	"other_z": [
+		"map_files/wilder/wildermiddletest.dmm"
+	],
+	"minetype": null,
+	"space_empty_levels": 0,
+	"space_ruin_levels": 0
+}
