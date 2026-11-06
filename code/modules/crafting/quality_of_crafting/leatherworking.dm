@@ -300,22 +300,6 @@
 	output = /obj/item/clothing/pants/trou/beltpants
 	category = "Pants"
 
-/datum/repeatable_crafting_recipe/leather/gloves/duelist_gloves
-	name = "dueslist gloves"
-	requirements = list(
-		/obj/item/natural/hide/cured = 3,
-		/obj/item/natural/fibers = 1
-	)
-	output = /obj/item/clothing/gloves/leather/duelgloves
-
-/datum/repeatable_crafting_recipe/leather/gloves/fencergloves
-	name = "fencing gloves"
-	requirements = list(
-		/obj/item/natural/hide/cured = 3,
-		/obj/item/natural/fibers = 1
-	)
-	output = /obj/item/clothing/gloves/leather/fencer
-
 /datum/repeatable_crafting_recipe/leather/bracers
 	name = "leather bracers"
 	output_amount = 2
