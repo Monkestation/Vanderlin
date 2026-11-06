@@ -40,9 +40,9 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/lava)
 "l" = (
-/obj/item/weapon/pick/steel,
 /obj/effect/decal/cleanable/blood/gibs/body,
 /obj/effect/decal/cleanable/blood,
+/obj/item/weapon/pick,
 /turf/open/floor/volcanic,
 /area/under/tomb/cave/lava)
 "m" = (
@@ -129,8 +129,8 @@
 /turf/open/floor/volcanic,
 /area/under/tomb/cave/lava)
 "N" = (
-/obj/item/weapon/pick/steel,
 /obj/effect/decal/cleanable/blood,
+/obj/item/weapon/pick,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/lava)
 "P" = (

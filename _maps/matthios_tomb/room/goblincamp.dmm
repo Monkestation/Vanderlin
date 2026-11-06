@@ -1,16 +1,22 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ae" = (
-/turf/closed/mineral/bedrock,
+/turf/closed/mineral/bedrock/cold,
 /area/under/tomb/cave)
+"ag" = (
+/obj/structure/closet/crate/chest/crate,
+/obj/item/reagent_containers/food/snacks/rotten/egg,
+/obj/item/reagent_containers/food/snacks/rotten/egg,
+/obj/item/reagent_containers/food/snacks/rotten/poultry,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
 "ao" = (
 /obj/structure/chair/stool,
 /obj/item/fishingrod,
-/obj/effect/spawner/map_spawner/random_lure,
-/turf/open/floor/ruinedwood,
+/turf/open/floor/snow,
 /area/under/tomb/cave)
 "aN" = (
 /mob/living/carbon/human/species/goblin/npc/cave,
-/turf/open/floor/dirt,
+/turf/open/floor/dirt/road,
 /area/under/tomb/wilds)
 "bZ" = (
 /obj/structure/stairs/stone{
@@ -20,19 +26,14 @@
 /area/under/tomb/wilds)
 "cD" = (
 /obj/machinery/light/fueled/firebowl,
-/turf/open/floor/snow,
+/turf/open/floor/grass/cold,
 /area/under/tomb/wilds)
 "cG" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/metal,
 /area/under/tomb/cave)
 "cJ" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 8
-	},
+/mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "dh" = (
@@ -40,10 +41,6 @@
 /area/under/tomb/cave)
 "eU" = (
 /obj/effect/decal/cleanable/blood/drip,
-/obj/item/weapon/polearm/spear/billhook,
-/obj/item/clothing/head/crown/circlet/sleepless,
-/obj/effect/spawner/map_spawner/loot/coin/absurd,
-/obj/effect/spawner/map_spawner/loot/potion_vitals,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /mob/living/carbon/human/species/goblin/npc{
 	base_constitution = 20;
@@ -54,7 +51,9 @@
 	base_speed = 20;
 	name = "Level 1 Goblin"
 	},
-/turf/open/floor/dirt,
+/obj/item/clothing/head/crown/circlet/shell,
+/obj/item/weapon/polearm/spear,
+/turf/open/floor/dirt/road,
 /area/under/tomb/wilds)
 "ff" = (
 /obj/structure/flora/grass/water/reeds,
@@ -74,8 +73,8 @@
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "jO" = (
-/mob/living/simple_animal/hostile/orc/orc_marauder,
-/turf/open/floor/snow/patchy,
+/obj/structure/table/wood/treestump,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "kc" = (
 /obj/structure/fermentation_keg/random/water,
@@ -83,7 +82,7 @@
 /area/under/tomb/wilds)
 "kd" = (
 /obj/structure/table/wood,
-/obj/item/reagent_containers/glass/bottle/wine,
+/obj/item/reagent_containers/glass/bottle/saigamilk,
 /turf/open/floor/grass/cold,
 /area/under/tomb/wilds)
 "kK" = (
@@ -97,15 +96,9 @@
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "ml" = (
-/obj/item/fishing/lure/meat,
-/obj/item/fishing/lure/meat,
-/obj/item/fishing/lure/meat,
-/obj/item/fishing/lure/meat,
-/obj/item/fishing/lure/meat,
-/obj/item/fishing/lure/meat,
-/obj/item/fishing/lure/meat,
-/turf/open/floor/ruinedwood,
-/area/under/tomb/cave)
+/obj/item/bodypart/r_arm/orc,
+/turf/open/floor/dirt/road,
+/area/under/tomb/wilds)
 "mQ" = (
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
@@ -120,14 +113,19 @@
 /turf/open/floor/snow/patchy,
 /area/under/tomb/wilds)
 "op" = (
-/obj/structure/flora/newtree/snow,
-/turf/open/floor/grass/cold,
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 1
+	},
+/turf/open/floor/snow,
 /area/under/tomb/wilds)
 "oH" = (
-/turf/open/water,
+/turf/open/water/clean/dirt,
 /area/under/tomb/cave)
 "pe" = (
-/turf/open/floor/dirt,
+/turf/open/floor/dirt/road,
 /area/under/tomb/indoors)
 "pt" = (
 /obj/structure/fluff/railing/border{
@@ -138,6 +136,13 @@
 "pB" = (
 /obj/structure/table/wood/treestump,
 /turf/open/floor/snow,
+/area/under/tomb/wilds)
+"qe" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/obj/item/bodypart/l_leg/orc,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "qh" = (
 /obj/structure/barricade/wooden,
@@ -153,18 +158,35 @@
 	},
 /turf/open/floor/snow,
 /area/under/tomb/wilds)
+"sy" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/turf/open/floor/grass/cold,
+/area/under/tomb/wilds)
 "sG" = (
 /turf/open/water/river{
 	dir = 8
 	},
 /area/under/tomb/cave)
+"th" = (
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/dirt/road,
+/area/under/tomb/cave)
+"vL" = (
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/turf/open/floor/grass/cold,
+/area/under/tomb/wilds)
 "vX" = (
 /obj/structure/closet/crate/chest/crate,
 /obj/item/reagent_containers/glass/bottle/waterskin,
-/obj/item/reagent_containers/food/snacks/cheese,
-/obj/item/reagent_containers/food/snacks/cheese,
-/obj/item/reagent_containers/food/snacks/cheese,
-/obj/item/reagent_containers/food/snacks/cheese,
+/obj/item/reagent_containers/food/snacks/rotten/egg,
+/obj/item/reagent_containers/food/snacks/rotten/egg,
+/obj/item/reagent_containers/food/snacks/rotten/egg,
+/obj/item/reagent_containers/food/snacks/rotten/poultry,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "wL" = (
@@ -181,17 +203,11 @@
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "yB" = (
-/obj/effect/spawner/map_spawner/loot/magic,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "yN" = (
-/obj/structure/fluff/railing/wood{
-	dir = 1
-	},
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/turf/open/floor/grass/cold,
+/turf/closed/wall/mineral/wooddark/slitted,
 /area/under/tomb/wilds)
 "zc" = (
 /obj/structure/door/stone,
@@ -203,9 +219,9 @@
 /turf/open/floor/grass/cold,
 /area/under/tomb/wilds)
 "zM" = (
-/obj/effect/spawner/map_spawner/loot/potion_vitals,
-/turf/open/floor/grass/cold,
-/area/under/tomb/wilds)
+/obj/structure/flora/grass/water/reeds,
+/turf/open/water/clean/dirt,
+/area/under/tomb/cave)
 "zZ" = (
 /obj/machinery/light/fueled/hearth,
 /obj/machinery/light/fueled/oven/east,
@@ -225,11 +241,10 @@
 "AA" = (
 /obj/structure/bed/shit,
 /mob/living/carbon/human/species/goblin/npc/cave,
-/turf/open/floor/dirt,
+/turf/open/floor/dirt/road,
 /area/under/tomb/indoors)
 "AK" = (
 /obj/structure/fermentation_keg/random/beer,
-/obj/item/reagent_containers/glass/cup/golden,
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "AR" = (
@@ -257,10 +272,9 @@
 /area/under/tomb/cave)
 "CK" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/item/flashlight/flare/torch/lantern/bronzelamptern,
-/obj/item/flashlight/flare/torch/lantern/bronzelamptern,
 /obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/dirt,
+/obj/item/flashlight/flare/torch/lantern/copper,
+/turf/open/floor/dirt/road,
 /area/under/tomb/indoors)
 "CQ" = (
 /obj/structure/stairs/stone{
@@ -274,7 +288,7 @@
 /area/under/tomb/wilds)
 "EL" = (
 /obj/effect/decal/cleanable/blood/drip,
-/turf/open/floor/dirt,
+/turf/open/floor/dirt/road,
 /area/under/tomb/wilds)
 "Fe" = (
 /obj/structure/fluff/railing/wood,
@@ -291,9 +305,19 @@
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
+"HT" = (
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/turf/open/floor/dirt/road,
+/area/under/tomb/wilds)
 "Ib" = (
-/obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/grass/cold,
+/area/under/tomb/wilds)
+"Ij" = (
+/mob/living/carbon/human/species/orc/ambush,
+/turf/open/floor/dirt/road,
 /area/under/tomb/wilds)
 "IS" = (
 /obj/machinery/light/fueled/firebowl,
@@ -301,14 +325,19 @@
 /area/under/tomb/wilds)
 "JS" = (
 /obj/effect/decal/cleanable/blood,
-/turf/open/floor/dirt,
+/turf/open/floor/dirt/road,
+/area/under/tomb/wilds)
+"JY" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/food/snacks/rotten/poultry,
+/turf/open/floor/grass/cold,
 /area/under/tomb/wilds)
 "Kr" = (
 /turf/closed/wall/mineral/tent,
 /area/under/tomb/indoors)
 "KC" = (
 /obj/structure/flora/newtree/snow,
-/turf/open/floor/snow,
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "KV" = (
 /obj/structure/flora/newtree/snow,
@@ -316,7 +345,7 @@
 /area/under/tomb/cave)
 "LB" = (
 /obj/structure/roguetent,
-/turf/open/floor/dirt,
+/turf/open/floor/dirt/road,
 /area/under/tomb/indoors)
 "Md" = (
 /obj/structure/fluff/railing/border{
@@ -337,27 +366,26 @@
 /turf/open/floor/grass/cold,
 /area/under/tomb/wilds)
 "MQ" = (
+/turf/open/floor/dirt/road,
+/area/under/tomb/cave)
+"Ne" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
 	},
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/dirt,
-/area/under/tomb/wilds)
-"Ne" = (
-/mob/living/simple_animal/hostile/orc/spear2,
-/turf/open/floor/snow/patchy,
+/turf/open/floor/dirt/road,
 /area/under/tomb/wilds)
 "Op" = (
-/obj/effect/spawner/map_spawner/loot/rare,
-/turf/open/floor/dirt,
+/turf/open/floor/dirt/road,
 /area/under/tomb/wilds)
 "Pa" = (
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/snow/patchy,
+/obj/structure/fluff/railing/tall/palisade{
+	dir = 8
+	},
+/turf/open/floor/snow,
 /area/under/tomb/wilds)
 "Pu" = (
 /obj/structure/bed/shit,
-/turf/open/floor/dirt,
+/turf/open/floor/dirt/road,
 /area/under/tomb/indoors)
 "QS" = (
 /obj/structure/table/wood,
@@ -382,8 +410,19 @@
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "SZ" = (
-/obj/structure/fluff/statue/tdummy,
+/obj/item/bodypart/chest/orc,
+/turf/open/floor/dirt/road,
+/area/under/tomb/wilds)
+"TI" = (
+/mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/grass/cold,
+/area/under/tomb/wilds)
+"TR" = (
+/obj/structure/fluff/railing/wood,
+/obj/structure/fluff/railing/wood{
+	dir = 4
+	},
+/turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "UV" = (
 /obj/structure/fluff/railing/wood{
@@ -396,10 +435,10 @@
 /area/under/tomb/wilds)
 "VO" = (
 /obj/effect/dungeon_directional_helper/west,
-/turf/open/floor/dirt,
+/turf/open/floor/dirt/road,
 /area/under/tomb/cave)
 "WR" = (
-/turf/open/floor/ruinedwood,
+/turf/open/floor/snow/patchy,
 /area/under/tomb/cave)
 "Xg" = (
 /obj/structure/fluff/railing/wood{
@@ -416,23 +455,22 @@
 	},
 /area/under/tomb/cave)
 "Yd" = (
-/obj/structure/closet/crate/chest/wicker,
 /obj/machinery/light/fueled/wallfire/candle,
-/obj/item/gem/yellow,
-/turf/open/floor/dirt,
+/obj/effect/dungeon_loot_spawner/low/chest,
+/turf/open/floor/dirt/road,
 /area/under/tomb/indoors)
 "Ys" = (
-/obj/structure/fluff/railing/wood{
-	dir = 4
-	},
-/obj/structure/fluff/railing/wood,
-/turf/open/floor/grass/cold,
+/turf/closed/mineral/bedrock/cold,
 /area/under/tomb/wilds)
 "YE" = (
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/wilds)
 "Zo" = (
 /turf/open/floor/grass/cold,
+/area/under/tomb/wilds)
+"ZM" = (
+/obj/structure/fluff/statue/tdummy,
+/turf/open/floor/snow/patchy,
 /area/under/tomb/wilds)
 
 (1,1,1) = {"
@@ -449,9 +487,9 @@ ae
 ae
 ae
 ae
-dh
+MQ
 VO
-dh
+MQ
 ae
 ae
 ae
@@ -475,19 +513,19 @@ oH
 oH
 ae
 ae
-XD
+Ys
 mQ
 mQ
 mQ
 mQ
 mQ
+Op
+Op
 mQ
 mQ
 mQ
 mQ
-mQ
-mQ
-XD
+Ys
 CQ
 UY
 UY
@@ -507,28 +545,28 @@ XN
 oH
 oH
 oH
-XD
-XD
+Ys
+Ys
 mQ
 mQ
 IS
 mQ
+Op
+Op
 Zo
 Zo
-Zo
-Zo
-XD
-XD
-XD
+Ys
+Ys
+Ys
 CQ
 UY
 UY
 UY
-ff
+zM
 oH
 oH
 sG
-ff
+zM
 ae
 "}
 (4,1,1) = {"
@@ -536,20 +574,20 @@ ae
 oH
 oH
 XN
-ff
+zM
 oH
 oH
 UY
-XD
-XD
+Ys
+Ys
 Zo
 Zo
 Zo
-UY
-UY
-XD
-XD
-XD
+Op
+Op
+Ys
+Ys
+Ys
 UY
 UY
 UY
@@ -557,7 +595,7 @@ UY
 UY
 oH
 oH
-ff
+zM
 fu
 sG
 oH
@@ -566,20 +604,20 @@ ae
 (5,1,1) = {"
 ae
 oH
-ff
+zM
 XN
 oH
 oH
 UY
 UY
 UY
-XD
-XD
-XD
+Ys
+Ys
+Ys
 UY
-UY
-XD
-XD
+Op
+Ys
+Ys
 UY
 UY
 UY
@@ -588,7 +626,7 @@ UY
 UY
 UY
 oH
-fu
+oH
 fu
 sG
 oH
@@ -609,7 +647,7 @@ UY
 UY
 UY
 UY
-UY
+Op
 UY
 UY
 UY
@@ -636,7 +674,7 @@ fu
 fu
 XN
 oH
-ff
+zM
 oH
 oH
 UY
@@ -653,7 +691,7 @@ fu
 fu
 fu
 sG
-ff
+zM
 oH
 mQ
 mQ
@@ -686,8 +724,8 @@ oH
 oH
 oH
 oH
-XD
-XD
+Ys
+Ys
 mQ
 ae
 "}
@@ -712,13 +750,13 @@ fu
 sG
 oH
 oH
-ff
+zM
 oH
 oH
-UY
-Zo
-Zo
-XD
+op
+vL
+vL
+Ys
 mQ
 mQ
 ae
@@ -728,14 +766,14 @@ ae
 lZ
 ae
 UY
-Zo
-Zo
-Zo
+on
+on
+on
 oH
 oH
 oH
 oH
-ff
+zM
 pt
 ii
 cG
@@ -743,46 +781,46 @@ oH
 oH
 oH
 oH
+op
+Pa
+vL
+Pa
 UY
 UY
 Zo
-Zo
-Zo
-Zo
-Zo
-XD
+Ys
 mQ
-Zo
+Rc
 ae
 "}
 (11,1,1) = {"
 ae
 qh
 ae
-Zo
 on
 on
 Zo
-Zo
-Zo
+on
+on
+on
 UY
 UY
 UY
 Md
 YE
 Ax
-UY
-UY
-UY
-UY
+Pa
+Pa
+Pa
+Pa
 Zo
-Zo
-Zo
+UY
+UY
 on
 on
 on
-Zo
-XD
+UY
+Ys
 Zo
 Zo
 ae
@@ -791,77 +829,77 @@ ae
 ae
 qh
 ae
-Zo
-on
-on
-on
 on
 on
 Zo
-UY
-UY
-UY
-UY
-UY
-UY
-UY
-UY
 Zo
 Zo
 Zo
-Ne
+on
+UY
+UY
+UY
+Op
+Op
+on
+mQ
+mQ
+Zo
+mQ
+UY
+on
 on
 Cd
 on
-Zo
-XD
+UY
+Ys
 Zo
 Zo
 ae
 "}
 (13,1,1) = {"
 ae
-dh
+MQ
 ae
 ae
-Zo
-on
-Cd
-jO
 on
 Zo
+cD
+Zo
+TI
+on
 UY
 UY
+Op
+Op
 UY
-UY
-UY
-UY
-UY
-UY
+Op
+on
+on
+on
+cJ
+on
+on
+on
+on
 UY
 Zo
-on
-on
-on
-on
-Zo
-Zo
-XD
+Ys
 Zo
 Zo
 ae
 "}
 (14,1,1) = {"
 HA
-dh
+MQ
 wL
 ae
-Zo
-on
 on
 on
 Zo
-UY
+Zo
+on
+on
 UY
 UY
 bZ
@@ -869,62 +907,62 @@ bZ
 bZ
 UY
 UY
-UY
-UY
-Zo
-on
-on
-Zo
-Zo
-Zo
-XD
-XD
-Zo
 mQ
+on
+Op
+on
+mQ
+UY
+UY
+Zo
+Ys
+Ys
+Zo
+Op
 Ct
 "}
 (15,1,1) = {"
 ae
-dh
+MQ
 dh
 ae
 ae
+on
+on
+on
+on
+UY
+XD
+XD
+XD
+XD
+XD
+XD
+XD
+XD
+UY
+Op
+Op
+UY
+UY
 Zo
-Zo
-Zo
-UY
-UY
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-UY
-UY
-UY
-UY
-UY
-Zo
-XD
-XD
+Ys
+Ys
 IS
-mQ
-mQ
+Op
+Op
 ae
 "}
 (16,1,1) = {"
 iN
-dh
-dh
-dh
+MQ
+MQ
+MQ
 ae
 ae
-UY
-UY
-UY
+Pa
+Pa
+Pa
 XD
 XD
 QS
@@ -932,26 +970,26 @@ yw
 kK
 zZ
 vX
-vX
+ag
 XD
 XD
 XD
+Op
 UY
-UY
-XD
-XD
-XD
+Ys
+Ys
+Ys
 mQ
-mQ
-mQ
-mQ
+Op
+Op
+Op
 iN
 "}
 (17,1,1) = {"
 ae
 dh
-dh
-dh
+MQ
+th
 dh
 mU
 UY
@@ -961,60 +999,60 @@ UY
 mQ
 mQ
 mQ
+Op
+Op
+Op
+Op
+on
+UY
+UY
+Op
+UY
+UY
+UY
 mQ
-Zo
-Zo
-Zo
-mQ
-UY
-UY
-UY
-UY
-UY
-UY
-mQ
-mQ
-mQ
+Op
+Op
 aN
-mQ
+Op
 ae
 "}
 (18,1,1) = {"
 ae
 dh
+MQ
+Kr
+Kr
+Kr
+Kr
+UY
+UY
+mQ
+Op
+Op
+Op
+Op
+Op
+Op
+Op
+Op
+Op
+Op
+Op
+UY
+UY
+Op
+Op
+Op
 dh
-Kr
-Kr
-Kr
-Kr
-UY
-UY
-mQ
-mQ
-mQ
-Zo
-Zo
-Zo
-Zo
-Zo
-Zo
-mQ
-mQ
-UY
-UY
-UY
-mQ
-mQ
-mQ
-WR
-WR
-WR
+MQ
+dh
 ae
 "}
 (19,1,1) = {"
 ae
 dh
-dh
+MQ
 Kr
 Pu
 pe
@@ -1022,7 +1060,7 @@ Kr
 Kr
 mQ
 IS
-mQ
+Op
 kc
 wP
 Zo
@@ -1030,106 +1068,106 @@ Rc
 wP
 Sc
 Zo
-mQ
-mQ
-mQ
+on
+Op
+Op
 IS
+Op
+Op
 mQ
 mQ
-mQ
-mQ
-WR
-WR
+dh
+MQ
 WR
 ae
 "}
 (20,1,1) = {"
 ae
 dh
-dh
+MQ
 Kr
 CK
 pe
 pe
 LB
-mQ
-mQ
+Ij
+Op
 Zo
 wP
 kd
 wP
 wP
 Cz
-wP
+JY
 Zo
-mQ
-mQ
-mQ
-mQ
-mQ
+Op
+Op
+Op
+Op
+Op
 mQ
 mQ
 oH
-WR
-WR
-ml
+mU
+MQ
+mU
 ae
 "}
 (21,1,1) = {"
 ae
 dh
-dh
+MQ
 Kr
 AA
 pe
 Kr
 Kr
-mQ
-mQ
-Zo
-Zo
+Op
+Op
+Op
+Op
 nG
 nG
 nG
 nG
 mQ
-mQ
-mQ
+Op
+Op
 mQ
 Ss
 mQ
-mQ
-ff
+on
+zM
 oH
 oH
-WR
+mU
 ao
-WR
+mU
 ae
 "}
 (22,1,1) = {"
 ae
 dh
-dh
+MQ
 Kr
 Kr
 Kr
 Kr
 mQ
 mQ
+Op
+Op
+Op
+Op
 mQ
 mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
-mQ
+Op
+Op
+Op
+Op
 Zo
 Zo
-Zo
+on
 oH
 oH
 oH
@@ -1142,25 +1180,25 @@ ae
 (23,1,1) = {"
 ae
 dh
-dh
-dh
-dh
-dh
-dh
-mQ
-mQ
-mQ
-cJ
-My
-My
-My
-My
-My
-My
 MQ
+MQ
+MQ
+MQ
+MQ
+Op
+Op
+Op
+yN
+My
+Ne
+Ne
+My
+Ne
+My
+yN
+Op
 Zo
-SZ
-Zo
+ZM
 oH
 oH
 oH
@@ -1179,24 +1217,24 @@ Kr
 Kr
 Kr
 dh
-mQ
-mQ
-Zo
+Op
+Op
+Op
 MJ
 RK
-mQ
+ml
 JS
-mQ
+Op
 EL
 yB
 Fe
+Op
 Zo
-Zo
-Zo
+on
 oH
 oH
 oH
-ff
+zM
 dh
 hy
 hy
@@ -1211,20 +1249,20 @@ Pu
 pe
 Kr
 Kr
-mQ
-Zo
+cJ
+Op
 Zo
 MJ
 Ib
-mQ
-mQ
+Op
+Op
 eU
-mQ
+SZ
 Zo
 Fe
-Zo
-Zo
-ff
+Op
+on
+zM
 oH
 oH
 oH
@@ -1243,23 +1281,23 @@ Yd
 pe
 pe
 LB
-mQ
+Op
 Zo
 Zo
 MJ
 Zo
-mQ
 Op
-mQ
-zM
+Op
+Op
+Op
 Zo
 Fe
-Zo
+Op
 mQ
 oH
 oH
 oH
-hy
+WR
 hy
 KV
 hy
@@ -1281,17 +1319,17 @@ Zo
 yN
 FU
 FU
-FU
+qe
+HT
+HT
 Xg
-Xg
-Xg
-Ys
-mQ
+yN
+Op
 mQ
 oH
 oH
-ff
-hy
+zM
+WR
 hy
 hy
 dh
@@ -1314,20 +1352,20 @@ mQ
 mQ
 mQ
 mQ
-Zo
-Zo
+Op
+Op
 mQ
-mQ
-mQ
+Op
+Op
 IS
 oH
 oH
 oH
 oH
-dh
+WR
 dh
 oH
-ff
+zM
 oH
 ae
 "}
@@ -1347,9 +1385,9 @@ mQ
 mQ
 mQ
 mQ
-mQ
-mQ
-mQ
+Op
+Op
+Op
 mQ
 oH
 oH
@@ -1397,39 +1435,39 @@ ae
 "}
 
 (1,1,2) = {"
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
 UY
 on
 UY
 UY
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
 "}
 (2,1,2) = {"
-XD
+Ys
 rD
 rD
 rD
@@ -1458,10 +1496,10 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (3,1,2) = {"
-XD
+Ys
 rD
 rD
 rD
@@ -1490,10 +1528,10 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (4,1,2) = {"
-XD
+Ys
 rD
 rD
 rD
@@ -1522,10 +1560,10 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (5,1,2) = {"
-XD
+Ys
 rD
 rD
 rD
@@ -1554,10 +1592,10 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (6,1,2) = {"
-XD
+Ys
 rD
 rD
 rD
@@ -1586,10 +1624,10 @@ rD
 rD
 rD
 KC
-XD
+Ys
 "}
 (7,1,2) = {"
-XD
+Ys
 UY
 rD
 rD
@@ -1618,12 +1656,12 @@ rD
 rD
 UY
 UY
-XD
+Ys
 "}
 (8,1,2) = {"
-XD
+Ys
+on
 UY
-UY
 rD
 rD
 rD
@@ -1648,14 +1686,14 @@ rD
 rD
 rD
 UY
-UY
-UY
-XD
+mQ
+Zo
+Ys
 "}
 (9,1,2) = {"
-XD
+Ys
+on
 UY
-UY
 rD
 rD
 rD
@@ -1679,15 +1717,15 @@ rD
 rD
 rD
 rD
-UY
+Zo
 cD
-UY
-XD
+mQ
+Ys
 "}
 (10,1,2) = {"
-XD
+Ys
 KC
-UY
+mQ
 rD
 rD
 rD
@@ -1711,47 +1749,47 @@ rD
 rD
 rD
 rD
-UY
-UY
-UY
-XD
+mQ
+Zo
+on
+Ys
 "}
 (11,1,2) = {"
-XD
+Ys
+on
+on
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+rD
+on
 UY
 UY
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-rD
-UY
-UY
-UY
-XD
+Ys
 "}
 (12,1,2) = {"
-XD
-UY
-UY
+Ys
+on
+on
 rD
 rD
 rD
@@ -1778,12 +1816,12 @@ rD
 UY
 UY
 UY
-XD
+Ys
 "}
 (13,1,2) = {"
-XD
-UY
-UY
+Ys
+on
+mQ
 KC
 rD
 rD
@@ -1810,13 +1848,13 @@ rD
 UY
 UY
 UY
-XD
+Ys
 "}
 (14,1,2) = {"
 on
 on
-UY
-UY
+mQ
+mQ
 rD
 rD
 rD
@@ -1848,7 +1886,7 @@ UY
 on
 on
 on
-UY
+on
 UY
 rD
 rD
@@ -1862,7 +1900,7 @@ bZ
 bZ
 Zo
 Zo
-UY
+mQ
 rD
 rD
 rD
@@ -1870,8 +1908,8 @@ rD
 rD
 rD
 UY
-UY
-UY
+on
+on
 UY
 UY
 UY
@@ -1894,22 +1932,22 @@ on
 on
 Zo
 UY
+mQ
+mQ
 UY
 UY
 UY
 UY
 UY
-UY
-UY
-UY
-UY
+on
+on
 UY
 UY
 UY
 UY
 "}
 (17,1,2) = {"
-XD
+Ys
 on
 on
 Zo
@@ -1917,8 +1955,8 @@ Zo
 UY
 UY
 UY
-Zo
-Zo
+mQ
+mQ
 Zo
 Zo
 Zo
@@ -1929,19 +1967,19 @@ UY
 UY
 UY
 on
+Zo
+Zo
+Zo
 on
-UY
-UY
-UY
-UY
+on
 UY
 UY
 UV
 UV
-XD
+Ys
 "}
 (18,1,2) = {"
-XD
+Ys
 on
 on
 on
@@ -1950,8 +1988,8 @@ Zo
 Zo
 Zo
 Zo
-zp
-Zo
+jO
+mQ
 Zo
 on
 on
@@ -1959,21 +1997,21 @@ on
 Zo
 Zo
 UY
-on
-on
-on
+Zo
+Zo
+Zo
 UY
-UY
-UY
-UY
+mQ
+Zo
+Zo
 UV
 rS
 rD
 rD
-XD
+Ys
 "}
 (19,1,2) = {"
-XD
+Ys
 UY
 on
 on
@@ -1982,8 +2020,8 @@ on
 Zo
 Zo
 Zo
-Zo
-Zo
+mQ
+mQ
 Zo
 on
 on
@@ -1995,17 +2033,17 @@ on
 on
 pB
 UY
-UY
+mQ
 cD
-rS
+sy
 rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (20,1,2) = {"
-XD
+Ys
 UY
 UY
 Zo
@@ -2026,18 +2064,18 @@ UY
 UY
 UY
 UY
-UY
-UV
-rS
+mQ
+Xg
+TR
 rD
 rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (21,1,2) = {"
-XD
+Ys
 UY
 UY
 Zo
@@ -2066,10 +2104,10 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (22,1,2) = {"
-XD
+Ys
 UY
 UY
 Zo
@@ -2082,8 +2120,8 @@ on
 on
 on
 on
-Zo
-Zo
+mQ
+mQ
 Zo
 Zo
 UY
@@ -2098,10 +2136,10 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (23,1,2) = {"
-XD
+Ys
 UY
 UY
 Zo
@@ -2113,13 +2151,13 @@ Zo
 on
 on
 on
-Zo
-op
-Zo
+mQ
+KC
+mQ
 Zo
 on
 on
-CS
+Fe
 rD
 rD
 rD
@@ -2130,28 +2168,28 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (24,1,2) = {"
-XD
+Ys
 UY
 UY
 UY
 Zo
 Zo
+mQ
+jO
+mQ
 Zo
-zp
+on
+on
+mQ
+mQ
 Zo
 Zo
 on
-on
-Zo
-Zo
-Zo
-Zo
-on
-Cd
-Pa
+cD
+Fe
 rD
 rD
 rD
@@ -2162,24 +2200,24 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (25,1,2) = {"
-XD
+Ys
 UY
 UY
 UY
 on
 on
 Zo
-Zo
+mQ
 Zo
 Zo
 on
 on
 Zo
-Zo
-Zo
+mQ
+mQ
 Zo
 UY
 on
@@ -2194,10 +2232,10 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (26,1,2) = {"
-XD
+Ys
 UY
 UY
 on
@@ -2210,8 +2248,8 @@ Zo
 on
 on
 Zo
-zp
-Zo
+jO
+mQ
 Zo
 UY
 CS
@@ -2226,10 +2264,10 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (27,1,2) = {"
-XD
+Ys
 UY
 UY
 on
@@ -2258,11 +2296,11 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (28,1,2) = {"
-XD
-XD
+Ys
+Ys
 UY
 UY
 UY
@@ -2290,12 +2328,12 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (29,1,2) = {"
-XD
-XD
-XD
+Ys
+Ys
+Ys
 UY
 UY
 UY
@@ -2322,37 +2360,37 @@ rD
 rD
 rD
 rD
-XD
+Ys
 "}
 (30,1,2) = {"
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
 UY
 on
 on
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
-XD
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
+Ys
 "}

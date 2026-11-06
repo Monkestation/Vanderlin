@@ -128,14 +128,12 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/wet)
 "dK" = (
-/obj/structure/closet/crate/chest,
 /obj/machinery/light/fueled/wallfire/candle/blue{
 	pixel_y = -32
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/weapon/shield/tower/metal,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
 "eB" = (
@@ -180,9 +178,6 @@
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
 "fN" = (
-/obj/item/weapon/mace/warhammer{
-	pixel_y = 32
-	},
 /obj/effect/decal/cleanable/blood/old,
 /obj/structure/rack/shelf/notdense,
 /turf/open/floor/blocks/stonered/tiny,
@@ -229,8 +224,7 @@
 /area/under/tomb/cave/spider)
 "if" = (
 /obj/structure/table/stone_small,
-/obj/item/ammo_holder/quiver/bolts,
-/obj/item/gun/ballistic/bow/cross,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
 "iV" = (
@@ -412,6 +406,10 @@
 	},
 /turf/open/floor/church,
 /area/under/tomb/indoors)
+"pr" = (
+/obj/effect/dungeon_loot_spawner/low,
+/turf/closed/wall/mineral/craftstone,
+/area/under/tomb/indoors)
 "pt" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -448,9 +446,6 @@
 /area/under/tomb/cave/spider)
 "rV" = (
 /obj/structure/rack/shelf/notdense,
-/obj/item/weapon/mace/steel/morningstar{
-	pixel_y = 32
-	},
 /turf/open/floor/blocks/stonered,
 /area/under/tomb/indoors)
 "rY" = (
@@ -504,15 +499,6 @@
 /area/under/tomb/indoors)
 "tC" = (
 /obj/structure/table/stone_small,
-/obj/item/ammo_casing/caseless/bolt/pyro{
-	pixel_x = -4;
-	pixel_y = -4
-	},
-/obj/item/ammo_casing/caseless/bolt/pyro,
-/obj/item/ammo_casing/caseless/bolt/pyro{
-	pixel_x = 4;
-	pixel_y = 4
-	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
 "tD" = (
@@ -570,9 +556,6 @@
 	pixel_x = 5;
 	pixel_y = -7
 	},
-/obj/item/ingot/silver{
-	pixel_y = 2
-	},
 /turf/open/floor/church,
 /area/under/tomb/cave/spider)
 "vH" = (
@@ -618,14 +601,6 @@
 /area/under/tomb/cave/spider)
 "ws" = (
 /obj/structure/rack,
-/obj/item/clothing/shoes/boots/armor/dwarven{
-	pixel_x = -6;
-	pixel_y = 7
-	},
-/obj/item/clothing/gloves/plate/dwarven{
-	pixel_y = -3;
-	pixel_x = 1
-	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/church,
 /area/under/tomb/cave/spider)
@@ -851,11 +826,9 @@
 /turf/open/floor/church,
 /area/under/tomb/indoors)
 "EX" = (
-/obj/structure/bed{
-	pixel_y = 0
-	},
-/obj/structure/bed{
-	pixel_y = 10
+/obj/structure/bed/hay,
+/obj/structure/bed/hay{
+	pixel_y = 19
 	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
@@ -952,6 +925,7 @@
 	pixel_y = 7;
 	pixel_x = -4
 	},
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
 "Hg" = (
@@ -1181,11 +1155,8 @@
 /area/under/tomb/indoors)
 "LV" = (
 /obj/structure/rack,
-/obj/item/clothing/head/helmet/heavy/dwarven{
-	pixel_y = 5;
-	pixel_x = -6
-	},
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/church,
 /area/under/tomb/cave/spider)
 "Mc" = (
@@ -1302,11 +1273,9 @@
 /turf/open/floor/churchrough,
 /area/under/tomb/cave/spider)
 "PR" = (
-/obj/structure/closet/crate/chest/gold,
-/obj/effect/spawner/map_spawner/loot/potion_vitals,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/spawner/map_spawner/loot/potion_stats,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/church,
 /area/under/tomb/cave/spider)
 "Qf" = (
@@ -1417,8 +1386,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/spider/stickyweb,
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
-/obj/structure/closet/crate/chest/lootbox,
-/obj/item/clothing/armor/plate/full/dwarven,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
 "Vz" = (
@@ -1565,9 +1533,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /obj/item/clothing/pants/trou,
 /obj/structure/rack/shelf/notdense,
-/obj/item/weapon/polearm/eaglebeak{
-	pixel_y = 16
-	},
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors)
 "ZZ" = (
@@ -3000,7 +2965,7 @@ bg
 bg
 bg
 bg
-ho
+pr
 fN
 Lr
 tn

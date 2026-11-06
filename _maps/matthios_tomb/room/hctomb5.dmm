@@ -41,7 +41,7 @@
 /area/under/tomb/indoors/rest)
 "fg" = (
 /obj/effect/decal/cobbleedge,
-/turf/open/floor/naturalstone,
+/turf/open/floor/cobblerock,
 /area/under/tomb)
 "fv" = (
 /turf/closed/wall/mineral/stone,
@@ -50,7 +50,7 @@
 /obj/effect/decal/cobbleedge{
 	dir = 10
 	},
-/turf/open/floor/naturalstone,
+/turf/open/floor/cobblerock,
 /area/under/tomb)
 "gb" = (
 /obj/machinery/light/fueled/torchholder/l,
@@ -92,6 +92,10 @@
 	},
 /turf/closed/wall/mineral/stone,
 /area/under/tomb/indoors/rest)
+"jb" = (
+/mob/living/carbon/human/species/skeleton/npc/peasant,
+/turf/open/floor/cobblerock,
+/area/under/tomb)
 "js" = (
 /turf/closed/wall/mineral/decostone/cand,
 /area/under/tomb/indoors)
@@ -135,10 +139,7 @@
 /area/under/tomb)
 "rX" = (
 /obj/structure/table/wood/nice/decorated,
-/obj/item/reagent_containers/glass/carafe/silver/redwine{
-	pixel_y = 11;
-	pixel_x = -2
-	},
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/wood,
 /area/under/tomb/indoors/rest)
 "sk" = (
@@ -200,6 +201,14 @@
 "yk" = (
 /turf/open/floor/dirt,
 /area/under/tomb)
+"yq" = (
+/obj/structure/flora/grass/herb/random,
+/turf/open/floor/grass/cold,
+/area/under/tomb)
+"yQ" = (
+/mob/living/carbon/human/species/skeleton/npc/peasant,
+/turf/open/floor/cobble,
+/area/under/tomb)
 "yU" = (
 /obj/structure/stairs/stone{
 	dir = 1;
@@ -211,17 +220,21 @@
 	},
 /turf/open/floor/cobble,
 /area/under/tomb/indoors/rest)
+"zE" = (
+/mob/living/carbon/human/species/skeleton/npc/peasant,
+/turf/open/floor/dirt,
+/area/under/tomb)
 "zH" = (
 /obj/effect/decal/cobbleedge{
 	dir = 6
 	},
-/turf/open/floor/naturalstone,
+/turf/open/floor/cobblerock,
 /area/under/tomb)
 "Ae" = (
 /obj/effect/decal/cobbleedge{
 	dir = 9
 	},
-/turf/open/floor/naturalstone,
+/turf/open/floor/dirt,
 /area/under/tomb)
 "BZ" = (
 /obj/effect/decal/cobbleedge{
@@ -281,6 +294,10 @@
 "Kz" = (
 /turf/closed/wall/mineral/decostone,
 /area/under/tomb/indoors)
+"KX" = (
+/mob/living/carbon/human/species/skeleton/npc/peasant,
+/turf/open/floor/grass/cold,
+/area/under/tomb)
 "LP" = (
 /obj/item/clothing/pants/skirt/colored/random{
 	pixel_x = 8;
@@ -289,6 +306,9 @@
 /obj/effect/decal/cleanable/vomit/old,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/rest)
+"LQ" = (
+/turf/open/floor/cobble,
+/area/under/tomb)
 "Mo" = (
 /obj/structure/mannequin,
 /turf/open/floor/herringbone,
@@ -307,15 +327,9 @@
 /turf/open/floor/wood,
 /area/under/tomb/indoors/rest)
 "Pa" = (
-/obj/item/clothing/neck/psycross/gold{
-	pixel_x = -6;
-	pixel_y = 0
-	},
 /obj/structure/table/stone_small,
-/obj/item/weapon/knife/dagger/silver{
-	pixel_x = 6;
-	pixel_y = 5
-	},
+/obj/effect/dungeon_loot_spawner/low,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors)
 "PE" = (
@@ -338,7 +352,7 @@
 /area/under/tomb/indoors/rest)
 "Qh" = (
 /obj/effect/dungeon_directional_helper/west,
-/turf/open/floor/naturalstone,
+/turf/open/floor/cobble,
 /area/under/tomb)
 "QB" = (
 /obj/machinery/light/fueled/torchholder/r,
@@ -386,7 +400,6 @@
 /area/under/tomb)
 "RP" = (
 /obj/structure/closet/crate/crafted_closet/dark,
-/obj/item/clothing/ring/silver,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/rest)
 "Sc" = (
@@ -400,6 +413,9 @@
 /obj/effect/decal/shadow_floor,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/rest)
+"Sv" = (
+/turf/open/floor/grass/cold,
+/area/under/tomb)
 "SB" = (
 /obj/machinery/light/fueled/wallfire/candle/weak/l,
 /turf/open/floor/herringbone,
@@ -472,15 +488,15 @@ oZ
 oZ
 oZ
 oZ
+Sv
+Sv
+Sv
 yk
-lA
-lA
-lA
-Ya
+yk
 Qh
-Ya
-Ya
-Ya
+yk
+Sv
+Sv
 oZ
 oZ
 oZ
@@ -493,15 +509,15 @@ oZ
 oZ
 oZ
 oZ
-WK
+yq
+Sv
+Sv
+Sv
+LQ
+LQ
+bT
 yk
-lA
-lA
-Ya
-Ya
-Ya
-Ya
-Ya
+Sv
 oZ
 oZ
 oZ
@@ -517,13 +533,13 @@ oZ
 oZ
 oZ
 oZ
+Sv
+yk
+yk
+LQ
+bT
 yk
 lA
-Ya
-wk
-Ya
-Ya
-Ya
 oZ
 oZ
 oZ
@@ -539,12 +555,12 @@ oZ
 oZ
 oZ
 oZ
+KX
 yk
+LQ
 Ya
-Ya
-Ya
-Ya
-Ya
+bT
+yk
 Ya
 oZ
 oZ
@@ -560,13 +576,13 @@ oZ
 oZ
 oZ
 oZ
-Ya
-Ya
-Ya
-Ya
+yk
+yk
+bT
+LQ
 oZ
-Ya
-Ya
+yk
+Sv
 oZ
 oZ
 oZ
@@ -582,13 +598,13 @@ oZ
 oZ
 oZ
 lA
-Ya
-Ya
-wk
-Ya
+yk
+yk
+bT
+LQ
 oZ
-Ya
-Ya
+yk
+yk
 oZ
 oZ
 oZ
@@ -598,21 +614,21 @@ oZ
 (7,1,1) = {"
 oZ
 oZ
-WK
+yq
 oZ
 oZ
 oZ
 yk
 lA
 lA
-Ya
-Ya
-Ya
-Ya
-Ya
-yk
-oZ
 bT
+yk
+Ya
+bT
+yk
+yk
+oZ
+jb
 bT
 PE
 oZ
@@ -622,16 +638,16 @@ oZ
 oZ
 yk
 oZ
-lA
-lA
+yk
+yk
 lA
 lA
 oZ
-Ya
-Ya
-Ya
-Ya
-Ya
+bT
+yk
+LQ
+lA
+Sv
 yk
 oZ
 oZ
@@ -646,15 +662,15 @@ lA
 lA
 lA
 lA
-Ya
-lA
-Ya
-Ya
-Ya
-Ya
+yk
+yk
+yk
 Ya
 yk
-lA
+LQ
+bT
+yk
+Sv
 oZ
 oZ
 bT
@@ -668,15 +684,15 @@ lA
 lA
 lA
 lA
-Ya
-Ya
-Ya
-Ya
-Ya
-Ya
-Ya
-lA
-lA
+yk
+yk
+yk
+bT
+yk
+LQ
+yk
+yk
+Sv
 oZ
 bT
 bT
@@ -685,20 +701,20 @@ oZ
 "}
 (11,1,1) = {"
 lA
-Ya
-Ya
-Ya
-Ya
-Ya
-Ya
+yk
+yk
+Sv
+yk
+yk
+yk
 Ae
 BZ
 fx
+bT
 Ya
-Ya
-Ya
-lA
-lA
+yk
+Sv
+Sv
 yk
 lA
 oZ
@@ -711,17 +727,17 @@ fv
 fv
 fv
 fv
-Ya
-Ya
+Sv
+Sv
 Ra
 Ru
 fg
-Ya
-Ya
-lA
-lA
+LQ
+bT
+Sv
+Sv
 oZ
-yk
+Sv
 oZ
 oZ
 oZ
@@ -738,13 +754,13 @@ fv
 fv
 fv
 zH
-Ya
-Ya
-lA
+LQ
+bT
+Sv
 oZ
 oZ
-yk
-yk
+Sv
+Sv
 oZ
 oZ
 oZ
@@ -760,13 +776,13 @@ tb
 Zj
 fv
 Ya
-Ya
-Ya
-lA
+LQ
+bT
+yk
 oZ
 cI
-yk
-WK
+Sv
+yq
 oZ
 oZ
 oZ
@@ -781,10 +797,10 @@ wP
 Zj
 Zj
 di
+bT
 Ya
-Ya
-Ya
-lA
+bT
+Sv
 oZ
 oZ
 oZ
@@ -803,11 +819,11 @@ fv
 fv
 fv
 fv
-Ya
-Ya
-Ya
-Ya
-lA
+bT
+bT
+bT
+Sv
+yk
 oZ
 oZ
 oZ
@@ -825,11 +841,11 @@ fv
 gb
 Em
 fv
-Ya
-Ya
-Ya
-Ya
-Ya
+bT
+yQ
+bT
+Sv
+Sv
 oZ
 oZ
 oZ
@@ -847,11 +863,11 @@ EP
 wP
 Rh
 fv
-Ya
-Ya
-Ya
-Ya
-Ya
+bT
+LQ
+LQ
+lA
+Sv
 yk
 oZ
 oZ
@@ -870,10 +886,10 @@ wP
 PI
 fv
 Ya
-Ya
-Ya
-Ya
-Ya
+LQ
+LQ
+Sv
+Sv
 oZ
 oZ
 oZ
@@ -891,11 +907,11 @@ fv
 fv
 fv
 fv
-Ya
-Ya
+LQ
+LQ
 Cl
-Ya
-Ya
+Sv
+Sv
 oZ
 oZ
 oZ
@@ -975,7 +991,7 @@ oZ
 oZ
 oZ
 oZ
-yk
+zE
 RI
 bT
 oZ
