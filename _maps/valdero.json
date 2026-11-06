@@ -1,0 +1,55 @@
+{
+	"map_name": "Valdero",
+	"map_path": "map_files/valdero",
+	"map_file": "valdero.dmm",
+	"immigrant_origin": "Vanderlin",
+	"monarch_title": "Tywysog",
+	"monarch_title_f": "Tywysoges",
+	"traits": [
+		{
+			"Up": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		},
+		{
+			"Up": true,
+			"Down": true,
+			"Turf Weather Effects": true,
+			"Leylines": true
+		}
+	],
+	"other_z": [
+		"map_files/daftmarsh/daftmarsh_outland"
+	],
+	"minetype": null,
+	"space_empty_levels": 0,
+	"space_ruin_levels": 0
+}
