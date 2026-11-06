@@ -5479,7 +5479,7 @@
 /obj/item/clothing/cloak/raincloak/colored/mortus{
 	name = "cloak"
 	},
-/obj/item/clothing/head/sack,
+/obj/item/clothing/head/inqarticles/blackbag/civilian,
 /turf/open/floor/cobble,
 /area/indoors/town/keep/dungeoneer)
 "cCt" = (
