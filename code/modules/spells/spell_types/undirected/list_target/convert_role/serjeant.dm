@@ -3,21 +3,11 @@
 	desc = "Promote someone to your trusted serjeant."
 	button_icon_state = "recruit_guard"
 
-	new_role = "Serjeant-at-Arms"
+	new_role = "Serjeant-At-Arms"
 	recruitment_faction = "Garrison"
-	recruitment_message = "You are promoted to the rank of Serjeant, %RECRUIT."
-	give_choice = FALSE
-	accept_message = null
-	refuse_message = null
-
-/datum/action/cooldown/spell/undirected/list_target/convert_role/serjeant/can_convert(mob/living/carbon/human/cast_on)
-	. = ..()
-	if(!.)
-		return
-	var/datum/job/J = SSjob.GetJobType(cast_on.job_type)
-	if(!(is_type_in_list(J, list(/datum/job/men_at_arms, /datum/job/advclass/menatarms)) || is_type_in_list(J?.parent_job, list(/datum/job/men_at_arms, /datum/job/advclass/menatarms))))
-		return
-	return TRUE
+	recruitment_message = "I'd promote you to Serjeant-At-Arms, %RECRUIT."
+	accept_message = "I shall take on this responsibility!"
+	refuse_message = "I refuse it."
 
 /datum/action/cooldown/spell/undirected/list_target/convert_role/serjeant/on_conversion(mob/living/carbon/human/cast_on)
 	. = ..()
