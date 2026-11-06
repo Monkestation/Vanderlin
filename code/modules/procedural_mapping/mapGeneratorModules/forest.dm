@@ -119,7 +119,6 @@
 		/turf/open/floor/dirt/road = 30,
 	)
 	allowed_areas = list(/area/outdoors/wilderness/plains)
-
 /datum/mapGeneratorModule/forestgrassplains
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
 	allowed_turfs = list(/turf/open/floor/grass)
@@ -137,3 +136,4 @@
 		/obj/structure/flora/grass/maneater/real = 0.1,
 		/obj/structure/wild_plant/nospread/mushroom/waddle = 0.5,
 		/obj/structure/wild_plant/nospread/mushroom/merkel = 0.2,
+	)
