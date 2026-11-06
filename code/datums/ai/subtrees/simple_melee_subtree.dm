@@ -38,6 +38,9 @@
 /datum/ai_planning_subtree/basic_melee_attack_subtree/gator_attack
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/gator_attack
 
+/datum/ai_planning_subtree/basic_melee_attack_subtree/gator_attack/corpse_gator
+	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/gator_attack/corpse_gator
+
 /datum/ai_planning_subtree/basic_melee_attack_subtree/meatvine
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/meatvine
 
@@ -80,6 +83,27 @@
 	// Set cooldown
 	controller.set_blackboard_key(BB_GATOR_DEATH_ROLL_COOLDOWN, world.time + death_roll_cooldown)
 
+/datum/ai_behavior/basic_melee_attack/gator_attack/corpse_gator
+	action_cooldown = 0.5 SECONDS
+	death_roll_chance = 30 // Chance to perform a death roll on attack
+	death_roll_damage = 20 // Extra damage from death roll
+	death_roll_cooldown = 15 SECONDS // Time between death rolls
+
+/datum/ai_behavior/basic_melee_attack/gator_attack/corpse_gator/perform(delta_time, datum/ai_controller/controller, target_key, targetting_datum_key, hiding_location_key)
+	. = ..()
+	var/mob/living/simple_animal/hostile/retaliate/gator/corpse_gator/gator_pawn = controller.pawn
+	var/atom/target = controller.blackboard[target_key]
+
+	if(!istype(gator_pawn) || QDELETED(target) || !isliving(target))
+		return
+
+	var/death_roll_cooldown_time = controller.blackboard[BB_GATOR_DEATH_ROLL_COOLDOWN]
+
+	// Check if we can perform a death roll
+	if(prob(death_roll_chance) && death_roll_cooldown_time <= world.time && isliving(target))
+		var/mob/living/L = target
+		if(L.stat != DEAD)
+			perform_death_roll(controller, gator_pawn, L)
 
 /datum/ai_planning_subtree/basic_melee_attack_subtree/saiga
 	melee_attack_behavior = /datum/ai_behavior/basic_melee_attack/saiga
