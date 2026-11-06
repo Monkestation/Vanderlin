@@ -15,6 +15,8 @@
 		/datum/mapGeneratorModule/forestgrass,
 		/datum/mapGeneratorModule/forestswampwaterturf,
 		/datum/mapGeneratorModule/forestwaterturf,
+		/datum/mapGeneratorModule/forestplains,
+		/datum/mapGeneratorModule/forestgrassplains,
 	)
 
 /datum/mapGeneratorModule/forest
