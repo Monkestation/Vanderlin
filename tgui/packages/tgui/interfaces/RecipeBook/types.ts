@@ -287,6 +287,11 @@ export interface Recipe {
   // spellcraft
   forms?: FormTechniqueContribution[];
   techniques?: FormTechniqueContribution[];
+  //cult
+  is_cultist_ritual?: boolean;
+  special_requiment?: string;
+  descrequiment?: string;
+  description?: string;
 }
 
 export interface RecipeBookData {

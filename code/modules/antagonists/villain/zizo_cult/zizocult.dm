@@ -229,7 +229,7 @@
 	var/speak = input("What do you speak of?", "ZIZO") as text|null
 	if(!speak)
 		return
-	whisper("O schlet'a ty'schkotot ty'skvoro...")
+	whisper(message = "O schlet'a ty'schkotot ty'skvoro...", language = /datum/language/undead)
 	sleep(5)
 	if(stat >= UNCONSCIOUS || !can_speak_vocal())
 		return
@@ -241,185 +241,176 @@
 
 	log_telepathy("[key_name(src)] used cultist telepathy to say: [speak]")
 
-/obj/effect/decal/cleanable/sigil
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil
 	name = "sigils"
+
 	desc = "Strange runics. They hurt your eyes."
 	icon_state = "center"
 	icon = 'icons/obj/sigils.dmi'
-	clean_type = CLEAN_TYPE_LIGHT_DECAL //the sigils are made out of blood, they should be cleanable with a rag, they are also very easily spammed
-	var/sigil_type
+	color = null
+	invocation = "O'vena tesa...."
+	invoker_desc = "A forbidden rune offering great power, comes at an even greater cost."
+	runesize = 1
 
-/obj/effect/decal/cleanable/sigil/examine(mob/user)
+	SET_BASE_PIXEL(-32, -32)
+	clean_type = CLEAN_TYPE_LIGHT_DECAL //the sigils are made out of blood, they should be cleanable with a rag, they are also very easily spammed
+
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil/examine(mob/user)
 	. = ..()
-	if(!sigil_type)
-		return
 
 	if(isliving(user))
 		var/mob/living/living_user = user
-		if(istype(living_user, /datum/patron/inhumen/zizo))
-			to_chat(user, "It is of the [sigil_type] circle.")
+		if(istype(living_user.patron, /datum/patron/inhumen/zizo))
+			to_chat(user, "Through this the path to dominance shall unveil.")
 
-/obj/effect/decal/cleanable/sigil/proc/consume_ingredients(datum/ritual/R)
-
-	for(var/atom/A in get_step(src, NORTH))
-		if(istype(A, R.n_req) && !ishuman(A))
-			playsound(src, 'sound/foley/flesh_rem2.ogg', 30)
-			qdel(A)
-
-	for(var/atom/A in get_step(src, SOUTH))
-		if(istype(A, R.s_req) && !ishuman(A))
-			playsound(src, 'sound/foley/flesh_rem2.ogg', 30)
-			qdel(A)
-
-	for(var/atom/A in get_step(src, EAST))
-		if(istype(A, R.e_req) && !ishuman(A))
-			playsound(src, 'sound/foley/flesh_rem2.ogg', 30)
-			qdel(A)
-
-	for(var/atom/A in get_step(src, WEST))
-		if(istype(A, R.w_req) && !ishuman(A))
-			playsound(src, 'sound/foley/flesh_rem2.ogg', 30)
-			qdel(A)
-
-	for(var/atom/A in loc.contents)
-		if(istype(A, R.center_requirement) && !ishuman(A))
-			playsound(src, 'sound/foley/flesh_rem2.ogg', 30)
-			qdel(A)
-
-/obj/effect/decal/cleanable/sigil/attack_hand(mob/living/user)
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil/attack_hand(mob/living/user)
 	. = ..()
-	if(icon_state != "center") // fucking awful but it has to be this way
-		return
+
+
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil/find_matching_recipe()
+	var/list/staged_types = list()
+	for(var/datum/crafting_slot/S in slots)
+		staged_types += S.item.type
+
+	for(var/recipe_type in subtypesof(/datum/ritual))
+		var/datum/ritual/R = new recipe_type
+		var/list/needed = R.ingredients.Copy()
+		if(length(needed) != length(slots))
+			continue
+		// Try to match each staged item against the needed list.
+		var/list/remaining = needed.Copy()
+		var/matched = TRUE
+		for(var/datum/crafting_slot/S in slots)
+			var/found = FALSE
+			for(var/req_type in remaining)
+				if(istype(S.item, req_type))
+					remaining.Remove(req_type)
+					found = TRUE
+					break
+			if(!found)
+				matched = FALSE
+				break
+		if(matched && !length(remaining))
+			return new recipe_type()
+		qdel(R)
+	return null
+
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil/get_slot_layout(count)
+	switch(count)
+		if(1)
+			return list(list(0, 0))
+		if(2)
+			return list(list(-24, 0), list(24, 0))
+		if(3)
+			return list(list(0, 26), list(-26, -16), list(44, -16))
+		if(4)
+			return list(list(-24, 24), list(24, 24), list(-24, -24), list(24, -24))
+		if(5)
+			return list(list(0, 30), list(15, 10), list(18, -26), list(-18, -26), list(-15, 10))
+		if(6)
+			return list(list(0, 30), list(26, 15), list(26, -15), list(0, -30), list(-26, -15), list(-26, 15))
+	//evenly space around a circle at radius 48px if we are above 6 items
+	var/list/offsets = list()
+	for(var/i = 0, i < count, i++)
+		var/angle = (360 / count) * i - 90
+		offsets += list(list(round(48 * cos(angle)), round(48 * sin(angle))))
+	return offsets
+
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil/try_invoke(mob/living/user)
 	if(!istype(user.patron, /datum/patron/inhumen/zizo))
-		return
-	var/list/rituals_pre = list()
-	switch(sigil_type)
-		if("Transmutation")
-			rituals_pre = subtypesof(/datum/ritual/transmutation)
-		if("Fleshcrafting")
-			rituals_pre = subtypesof(/datum/ritual/fleshcrafting)
-		if("Servantry")
-			rituals_pre = subtypesof(/datum/ritual/servantry)
-	if(!length(rituals_pre))
-		return
-	var/list/rituals = list()
-	for(var/datum/ritual/ritual as anything in rituals_pre)
-		if(IS_ABSTRACT(ritual))
-			continue
-		if(initial(ritual.is_cultist_ritual) && !(is_zizocultist(user.mind) || is_zizolackey(user.mind))) // some rituals are cultist exclusive
-			continue
-		rituals += initial(ritual.name)
-
-	var/ritualnameinput = browser_input_list(user, "Rituals", "ZIZO", rituals)
-	if(!ritualnameinput)
-		return
-
-	var/datum/ritual/pickritual = LAZYACCESS(GLOB.ritualslist, ritualnameinput)
-	if(!pickritual)
-		return
-
-	var/cardinal_success = FALSE
-	var/center_success = FALSE
-	var/dews = 0
-
-	if(pickritual.e_req)
-		for(var/atom/A in get_step(src, EAST))
-			if(istype(A, pickritual.e_req))
-				dews++
-				break
-			else
-				continue
-	else
-		dews++
-
-	if(pickritual.s_req)
-		for(var/atom/A in get_step(src, SOUTH))
-			if(istype(A, pickritual.s_req))
-				dews++
-				break
-			else
-				continue
-	else
-		dews++
-
-	if(pickritual.w_req)
-		for(var/atom/A in get_step(src, WEST))
-			if(istype(A, pickritual.w_req))
-				dews++
-				break
-			else
-				continue
-	else
-		dews++
-
-	if(pickritual.n_req)
-		for(var/atom/A in get_step(src, NORTH))
-			if(istype(A, pickritual.n_req))
-				dews++
-				break
-			else
-				continue
-	else
-		dews++
-
-	if(dews >= 4)
-		cardinal_success = TRUE
-
-	for(var/atom/A in loc.contents)
-		if(!istype(A, pickritual.center_requirement))
-			continue
-		else
-			center_success = TRUE
-			break
-
-	var/badritualpunishment = FALSE
-	if(cardinal_success != TRUE)
-		if(badritualpunishment)
-			return
-		to_chat(user, span_danger("That's not how you do it, fool."))
 		user.electrocute_act(10, src)
+		to_chat(user, SPAN_GOD_ZIZO("You shouldn't meddle in what you can't comprehend."))
+		return
+	var/datum/ritual/r = matched_recipe
+	if(r.is_cultist_ritual && !user.mind.has_antag_datum(/datum/antagonist/zizocultist))
+		to_chat(user, span_notice("No... It doesn't make any sense! I don't have enough INSIGHT."))
 		return
 
-	if(center_success != TRUE)
-		if(badritualpunishment)
+	if(r.special_requiment)
+		var/needed_thing = locate(r.special_requiment) in get_turf(src)
+		if(!needed_thing)
+			if(ispath(r.special_requiment, /mob/living/carbon/human))
+				to_chat(user, span_notice("The ritual lacks a person on top of the sigil!"))
+			if(ispath(needed_thing, /obj/item))
+				to_chat(user, span_notice("The ritual lacks an item on top of the sigil!"))
 			return
-		to_chat(user, span_danger("That's not how you do it, fool."))
-		user.electrocute_act(10, src)
+
+	if(!r.invoke_requiments(user, get_turf(src)))
 		return
 
-	consume_ingredients(pickritual)
+	if(rune_in_use)
+		to_chat(user, span_notice("The rune is already active."))
+		return
+	rune_in_use = TRUE
+	animating = TRUE
+
+	user.whisper(invocation, language = /datum/language/undead, ignore_spam = TRUE, forced = "cult invocation")
 	user.playsound_local(user, 'sound/vo/cult/tesa.ogg', 25)
-	user.whisper("O'vena tesa...")
-	pickritual.invoke(user, loc)
+	playsound(src, 'sound/magic/cosmic_expansion.ogg', 60, TRUE)
+	SpinAnimation(
+		speed = 1.5 SECONDS,
+		loops = 1,
+		clockwise = FALSE,
+		segments = 6, // smoother than default 3
+		parallel = TRUE
+	)
 
-/obj/effect/decal/cleanable/sigil/N
-	icon_state = "N"
+	INVOKE_ASYNC(src, PROC_REF(run_craft_animation), user)
 
-/obj/effect/decal/cleanable/sigil/NE
-	icon_state = "NE"
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil/run_craft_animation(mob/living/user)
+	var/turf/center = get_turf(src)
 
-/obj/effect/decal/cleanable/sigil/E
-	icon_state = "E"
+	//slide all items to center and fade them out.
+	for(var/datum/crafting_slot/S in slots)
+		animate(S.item,
+			pixel_x = 0, pixel_y = 0,
+			alpha = 0,
+			transform = matrix() * 0.2,
+			time = 1.5 SECONDS,
+			flags = ANIMATION_END_NOW
+		)
+	sleep(1.5 SECONDS)
 
-/obj/effect/decal/cleanable/sigil/SE
-	icon_state = "SE"
+	//delete ingredients.
+	for(var/datum/crafting_slot/S in slots)
+		qdel(S.item)
+	slots.Cut()
 
-/obj/effect/decal/cleanable/sigil/S
-	icon_state = "S"
+	sleep(0.2 SECONDS)
+	//spawn output invisible and floating, then fade it in.
+	var/datum/ritual/r = matched_recipe
+	r.invoke(user, get_turf(src))
+	if(r.output)
+		var/obj/item/result = new r.output(center)
+		result.OnCrafted(dir, user)
+		result.alpha = 0
+		var/saved_transform = result.transform
+		result.transform = matrix() * 0.1
+		animate(result,
+			alpha = 255,
+			transform = saved_transform,
+			pixel_y = 8,
+			time = 1.2 SECONDS,
+			flags = ANIMATION_END_NOW
+		)
+		sleep(1.2 SECONDS)
+		animate(result, pixel_y = 0, time = 0.3 SECONDS, flags = ANIMATION_END_NOW)
+		sleep(0.3 SECONDS)
 
-/obj/effect/decal/cleanable/sigil/SW
-	icon_state = "SW"
+	playsound(src, 'sound/foley/flesh_rem2.ogg', 80)
 
-/obj/effect/decal/cleanable/sigil/W
-	icon_state = "W"
+	animating = FALSE
+	rune_in_use = FALSE
 
-/obj/effect/decal/cleanable/sigil/NW
-	icon_state = "NW"
+	user.mind.add_sleep_experience(/datum/attribute/skill/magic/arcane, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 2) + 10, FALSE)
 
-/turf/open/floor/proc/generateSigils(mob/M, input)
+	matched_recipe = null
+	do_invoke_glow()
+
+/turf/open/floor/proc/generateSigils(mob/M)
 	var/turf/T = get_turf(M.loc)
 	for(var/obj/A in T)
-		if(istype(A, /obj/effect/decal/cleanable/sigil))
+		if(istype(A, /obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil))
 			to_chat(M, span_warning("There is already a sigil here."))
 			return
 		if(A.density && !(A.flags_1 & ON_BORDER_1))
@@ -428,25 +419,9 @@
 	if(do_after(M, 5 SECONDS))
 		M.bloody_hands--
 		M.update_inv_gloves()
-		var/obj/effect/decal/cleanable/sigil/C = new(src)
-		C.sigil_type = input
+		new /obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil(src)
 		playsound(M, 'sound/items/write.ogg', 100)
-		var/list/sigilsPath = list(
-			/obj/effect/decal/cleanable/sigil/N,
-			/obj/effect/decal/cleanable/sigil/S,
-			/obj/effect/decal/cleanable/sigil/E,
-			/obj/effect/decal/cleanable/sigil/W,
-			/obj/effect/decal/cleanable/sigil/NE,
-			/obj/effect/decal/cleanable/sigil/NW,
-			/obj/effect/decal/cleanable/sigil/SE,
-			/obj/effect/decal/cleanable/sigil/SW
-		)
 
-		for(var/i = 1; i <= GLOB.alldirs.len; i++)
-			var/turf/floor = get_step(src, GLOB.alldirs[i])
-			var/sigil = sigilsPath[i]
-
-			new sigil(floor)
 
 /mob/living/carbon/human/proc/draw_sigil()
 	set name = "Draw Sigil"
@@ -454,19 +429,13 @@
 	if(incapacitated(IGNORE_GRAB) || stat >= UNCONSCIOUS)
 		return
 
-	var/list/runes = list("Servantry", "Transmutation", "Fleshcrafting")
-
 	if(!bloody_hands && !get_bleed_rate())
 		to_chat(src, span_danger("My hands aren't bloody enough."))
 		return
 
-	var/input = input("Sigil Type", "ZIZO") as null|anything in runes
-	if(!input)
-		return
-
 	var/turf/open/floor/T = get_turf(src)
 	if(istype(T))
-		T.generateSigils(src, input)
+		T.generateSigils(src)
 
 /mob/living/carbon/human/proc/release_minion()
 	set name = "Release Lackey"

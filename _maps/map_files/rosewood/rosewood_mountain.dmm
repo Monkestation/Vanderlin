@@ -1644,7 +1644,6 @@
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/dungeon)
 "mW" = (
-/obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/dungeon)
 "mZ" = (
@@ -1833,7 +1832,6 @@
 /area/indoors/mountains/anvil/surface/building)
 "ov" = (
 /obj/item/ingot/gold,
-/obj/effect/decal/cleanable/sigil/N,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/dungeon)
 "oy" = (
@@ -2043,7 +2041,6 @@
 /turf/open/floor/hexstone,
 /area/under/mountains/anvil/lower)
 "qh" = (
-/obj/effect/decal/cleanable/sigil/S,
 /obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/dungeon)
@@ -2324,7 +2321,6 @@
 /area/under/mountains/anvil/dungeon/lower)
 "su" = (
 /obj/item/reagent_containers/glass/cup/golden,
-/obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/dungeon)
 "sx" = (
@@ -2693,7 +2689,6 @@
 /area/under/cavewet)
 "vO" = (
 /obj/effect/spawner/map_spawner/loot/coin/high,
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/dungeon)
 "vQ" = (
@@ -4586,7 +4581,6 @@
 /area/under/mountains/anvil/dungeon)
 "KY" = (
 /obj/item/ore/gold,
-/obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/dungeon)
 "KZ" = (
@@ -4636,7 +4630,6 @@
 /area/under/mountains/anvil/dungeon/lower)
 "Lx" = (
 /obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/dungeon)
 "Ly" = (
@@ -6078,7 +6071,6 @@
 /area/under/mountains/anvil/upper)
 "Wn" = (
 /obj/item/ore/silver,
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/volcanic,
 /area/under/mountains/anvil/dungeon)
 "Wp" = (
@@ -6523,7 +6515,7 @@
 /turf/open/floor/cobble,
 /area/under/mountains/anvil/dungeon/lower)
 "ZV" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/item/clothing/armor/plate/blkknight{
 	name = "Drakeleaf Plate";
 	desc = "Drakeleaf armor, made from the scales of Tsere herself. Wearing such a thing is a tribute to the great achievement this one has made."

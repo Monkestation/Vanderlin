@@ -105,6 +105,10 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 					var/datum/wound/sub2 = sub
 					if(!initial(sub2:show_in_book))
 						continue
+				if(ispath(sub, /datum/ritual))
+					var/datum/ritual/sub2 = sub
+					if(initial(sub2:hides_from_books))
+						continue
 				var/list/entry = get_cached_recipe_data(sub)
 				if(entry) recipes += list(entry)
 		else

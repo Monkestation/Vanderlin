@@ -1920,7 +1920,6 @@
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/noble_manor/red)
 "aVT" = (
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/naturalstone,
 /area/outdoors/open_sky)
 "aVX" = (
@@ -7734,7 +7733,6 @@
 /area/outdoors/basin)
 "dFl" = (
 /obj/item/weapon/knife/dagger,
-/obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/churchbrick,
 /area/outdoors/open_sky)
 "dFz" = (
@@ -18088,7 +18086,6 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/town/keep/roof)
 "iKc" = (
-/obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/churchbrick,
 /area/outdoors/open_sky)
 "iKj" = (
@@ -21058,7 +21055,6 @@
 /turf/open/floor/grass/cold,
 /area/outdoors/town)
 "kfs" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/churchbrick,
 /area/outdoors/open_sky)
 "kfA" = (
@@ -38118,7 +38114,6 @@
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/town)
 "som" = (
-/obj/effect/decal/cleanable/sigil/N,
 /turf/open/floor/naturalstone,
 /area/outdoors/open_sky)
 "sox" = (
@@ -42546,7 +42541,6 @@
 /turf/open/floor/grass/eora,
 /area/outdoors/town/keep/roof)
 "uxp" = (
-/obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/churchbrick,
 /area/outdoors/open_sky)
 "uxR" = (
@@ -43829,7 +43823,6 @@
 /turf/open/floor/cobblerock/alt,
 /area/outdoors/town)
 "vcX" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/remains/human,
 /turf/open/floor/churchbrick,
 /area/outdoors/open_sky)
@@ -43969,7 +43962,6 @@
 /turf/open/floor/cobble/snow,
 /area/outdoors/town)
 "vfM" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /mob/living/carbon/human/species/zizombie,
 /turf/open/floor/naturalstone,
 /area/outdoors/open_sky)
@@ -50216,7 +50208,7 @@
 /turf/open/water/swamp,
 /area/indoors/town/keep/servant)
 "yjN" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/effect/decal/remains/cabbit,
 /turf/open/floor/churchbrick,
 /area/outdoors/open_sky)
