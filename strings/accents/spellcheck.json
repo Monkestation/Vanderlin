@@ -16,19 +16,20 @@
 		" i'll ": " I'll ",
 		"isnt ": "isn't ",
 		"Isnt ": "Isn't ",
-		" cant ": " can't ",
-		"Cant ": "Can't ",
 		"dont ": "don't ",
 		"Dont ": "Don't ",
-		"wont ": "won't ",
-		"Wont ": "Won't ",
 		" arent ": " aren't ",
 		"Arent ": "Aren't ",
 		"shouldnt ": "shouldn't ",
 		"Shouldnt ": "Shouldn't ",
 		"youre ": "you're ",
 		"Youre ": "You're ",
-		"theyre": "they're"
+		"theyre": "they're",
+		".\\": ".",
+		"?\\": "?",
+		"!\\": "!",
+		"\\": "!!",
+		"||": "!!"
 		}
 	
 	
