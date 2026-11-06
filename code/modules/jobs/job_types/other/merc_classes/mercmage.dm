@@ -66,6 +66,7 @@
 	magic_user = TRUE
 	form_points = 8
 	technique_points = 1
+	book_type = /obj/item/recipe_book/arcyne
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sellmage
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/sellmage/old

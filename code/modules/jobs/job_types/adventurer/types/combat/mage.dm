@@ -47,6 +47,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/mage
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/mage/old
+	book_type = /obj/item/recipe_book/arcyne
 
 
 /datum/job/advclass/combat/mage/after_spawn(mob/living/carbon/human/spawned, client/player_client)

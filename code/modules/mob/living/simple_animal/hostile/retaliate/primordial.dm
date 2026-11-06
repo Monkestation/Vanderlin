@@ -122,7 +122,7 @@
 	minimum_distance = 0
 	ranged = 1
 	ranged_cooldown_time = 4 SECONDS
-	projectiletype = /obj/projectile/magic/spitfire/primordial
+	projectiletype = /obj/projectile/magic/aoe/fireball/flare/primordial
 	projectilesound = 'sound/magic/whiteflame.ogg'
 	base_constitution = 10
 	base_strength = 10
@@ -199,7 +199,7 @@
 	minimum_distance = 0
 	ranged = 1
 	ranged_cooldown_time = 4 SECONDS
-	projectiletype = /obj/projectile/magic/frost_shard/primordial
+	projectiletype = /obj/projectile/magic/frostbolt/primordial
 	projectilesound = 'sound/spellbooks/icicle.ogg'
 
 	base_constitution = 10
@@ -390,17 +390,26 @@
 	anchored = TRUE
 	duration = 8
 
-/obj/projectile/magic/spitfire/primordial
+/obj/projectile/magic/aoe/fireball/flare/primordial
 	name = "primordial flame"
-	damage = 20
 	arcshot = TRUE
 
-/obj/projectile/magic/frost_shard/primordial
+/obj/projectile/magic/frostbolt/primordial
 	name = "primordial frost shard"
 	damage = 18
 	arcshot = TRUE
 
 /obj/projectile/magic/greater_arcyne_bolt/primordial
+
+/obj/projectile/magic/primordial_gust
 	name = "primordial gale"
-	damage = 27
+	icon_state = "flight"
+	damage = 18
 	arcshot = TRUE
+	damage_type = BRUTE
+	woundclass = BCLASS_CUT
+	armor_penetration = 15
+	nodamage = FALSE
+	flag = "piercing"
+	speed = 2
+	spread = 4
