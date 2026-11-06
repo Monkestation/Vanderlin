@@ -6,11 +6,13 @@
 	item_state = "blackboots"
 	armor_type = /datum/armor/boots
 	sellprice = 10
-	salvage_result = /obj/item/natural/hide/cured
-	salvage_amount = 1
 	max_integrity = INTEGRITY_OLD_STANDARD
 	wetable = FALSE
 	abstract_type = /obj/item/clothing/shoes/boots
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	salvage_amount = 1
+	fiber_salvage = FALSE
 
 /obj/item/clothing/shoes/boots/darkboots
 	name = "dark boots"

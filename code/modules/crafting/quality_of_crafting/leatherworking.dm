@@ -261,7 +261,7 @@
 /// Pants
 /datum/repeatable_crafting_recipe/leather/pants
 	name = "work trousers"
-		requirements = list(
+	requirements = list(
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/fibers = 1
 	)
