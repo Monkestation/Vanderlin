@@ -823,7 +823,7 @@
 /datum/repeatable_crafting_recipe/leather/vest/jester
 	name = "jester's tunick"
 	output = /obj/item/clothing/shirt/jester
-	craftdiff = 3"
+	craftdiff = 3
 
 /datum/repeatable_crafting_recipe/leather/jacket
 	name = "leather jacket"
