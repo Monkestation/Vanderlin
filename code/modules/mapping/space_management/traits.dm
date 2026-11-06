@@ -29,18 +29,6 @@
 			return FALSE
 	return TRUE
 
-/datum/controller/subsystem/mapping/proc/get_delve(z)
-	if (!isnum(z) || z < 1)
-		return null
-	if (z_list)
-		if (z > z_list.len)
-			stack_trace("Unmanaged z-level [z]! maxz = [world.maxz], z_list.len = [z_list.len]")
-			return list()
-		var/datum/space_level/S = get_level(z)
-		return S.delve
-	return 0
-
-
 // Get a list of all z which have the specified trait
 /datum/controller/subsystem/mapping/proc/levels_by_trait(trait)
 	. = list()

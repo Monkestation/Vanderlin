@@ -1,382 +1,87 @@
+/datum/loot_table/tiered
+	name = "tiered items"
+	cascading = TRUE
+	loot_table = list(
+		/datum/loot_table/rare = 5,
+		/datum/loot_table/medium = 25,
+		/datum/loot_table/common = 100
+	)
+
 /datum/loot_table/common
 	name = "common items"
 	loot_table = list(
-		list(
-			/obj/item/coin/copper/pile = 15,
-			/obj/item/weapon/knife/hunting = 5,
-			/obj/item/warpstone = 4,
-			/obj/item/weapon/knife/dagger = 8,
-			/obj/item/weapon/sword/iron = 3,
-			/obj/item/weapon/axe/copper = 10,
-			/obj/item/weapon/mace = 5,
-			/obj/item/clothing/armor/leather = 10,
-			/obj/item/clothing/gloves/chain/iron = 3,
-			/obj/item/clothing/neck/coif = 3,
-			/obj/item/natural/poo = 5,
-			/obj/item/statue/bronze/figurine = 3,
-			/obj/item/statue/bronze/vase = 2,
-			/obj/item/statue/bronze/totem = 1,
-			/obj/item/statue/bronze/comb = 3,
-			/obj/item/weapon/knife/dagger/bronze = 8
-		)
+		/obj/item/coin/copper/pile = 15,
+		/obj/item/weapon/knife/hunting = 5,
+		/obj/item/warpstone = 4,
+		/obj/item/weapon/knife/dagger = 8,
+		/obj/item/weapon/sword/iron = 3,
+		/obj/item/weapon/axe/copper = 10,
+		/obj/item/weapon/mace = 5,
+		/obj/item/clothing/armor/leather = 10,
+		/obj/item/clothing/gloves/chain/iron = 3,
+		/obj/item/clothing/neck/coif = 3,
+		/obj/item/natural/poo = 5,
+		/obj/item/statue/bronze/figurine = 3,
+		/obj/item/statue/bronze/vase = 2,
+		/obj/item/statue/bronze/totem = 1,
+		/obj/item/statue/bronze/comb = 3,
+		/obj/item/weapon/knife/dagger/bronze = 8
 	)
 
 /datum/loot_table/medium
 	name = "medium items"
 	loot_table = list(
-		list(
-			/obj/item/coin/silver/pile = 15,
-			/obj/item/weapon/knife/dagger/steel = 4,
-			/obj/item/weapon/axe/iron = 10,
-			/obj/item/ammo_holder/quiver/arrows = 5,
-			/obj/item/weapon/sword/short/iron = 5,
-			/obj/item/clothing/armor/cuirass/iron = 10,
-			/obj/item/clothing/armor/gambeson = 10,
-			/obj/item/clothing/gloves/chain/iron = 3,
-			/obj/item/clothing/neck/gorget = 3,
-			/obj/item/statue/gold/loot = 1,
-			/obj/item/carvedgem/rose/fish = 1,
-			/obj/item/carvedgem/shell/comb = 1,
-			/obj/item/statue/silver/figurine = 1,
-			/obj/item/carvedgem/onyxa/cutgem = 1,
-			/obj/item/carvedgem/shell/cutgem = 1
-		)
+		/obj/item/coin/silver/pile = 15,
+		/obj/item/weapon/knife/dagger/steel = 4,
+		/obj/item/weapon/axe/iron = 10,
+		/obj/item/ammo_holder/quiver/arrows = 5,
+		/obj/item/weapon/sword/short/iron = 5,
+		/obj/item/clothing/armor/cuirass/iron = 10,
+		/obj/item/clothing/armor/gambeson = 10,
+		/obj/item/clothing/gloves/chain/iron = 3,
+		/obj/item/clothing/neck/gorget = 3,
+		/obj/item/statue/gold/loot = 1,
+		/obj/item/carvedgem/rose/fish = 1,
+		/obj/item/carvedgem/shell/comb = 1,
+		/obj/item/statue/silver/figurine = 1,
+		/obj/item/carvedgem/onyxa/cutgem = 1,
+		/obj/item/carvedgem/shell/cutgem = 1
 	)
 
 /datum/loot_table/rare
 	name = "rare items"
 	loot_table = list(
-		list(
-			/obj/item/coin/gold/pile = 15,
-			/obj/item/weapon/knife/dagger/silver = 5,
-			/obj/item/weapon/sword/long/greatsword = 2,
-			/obj/item/weapon/axe/iron = 10,
-			/obj/item/ingot/gold = 5,
-			/obj/item/ingot/silver = 5,
-			/obj/item/clothing/head/crown/circlet = 2,
-			/obj/item/clothing/head/crown/circlet/golddiadem = 2,
-			/obj/item/clothing/head/crown/circlet/silverdiadem = 3,
-			/obj/item/clothing/head/crown/circlet/silverheaddress = 2,
-			/obj/item/clothing/head/crown/circlet/goldheaddress = 1,
-			/obj/item/clothing/face/facemask/goldnosechain = 1,
-			/obj/item/clothing/face/facemask/silverveil = 1,
-			/obj/item/clothing/armor/medium/scale = 8,
-			/obj/item/clothing/armor/plate = 8,
-			/obj/item/clothing/gloves/chain = 3,
-			/obj/item/clothing/neck/bevor = 3,
-			/obj/item/clothing/pants/chainlegs = 5,
-			/obj/item/clothing/pants/chainlegs/kilt = 5,
-			/obj/item/carvedgem/jade/wyrm = 1,
-			/obj/item/carvedgem/amber/beaver = 1,
-			/obj/item/carvedgem/turq/ka = 1,
-			/obj/item/carvedgem/onyxa/spider = 1,
-			/obj/item/carvedgem/shell/turtle = 1,
-			/obj/item/reagent_containers/glass/carafe/teapot/gold = 2,
-			/obj/item/statue/gold/bust = 1,
-			/obj/item/statue/gold/vasefancy = 1,
-			/obj/item/statue/silver/vase = 3,
-			/obj/item/statue/silver/figurine = 3,
-			/obj/item/weapon/sword/rapier/nimcha = 2,
-			/obj/item/weapon/mace/gada = 2,
-			/obj/item/weapon/whip/urumi/silver = 1,
-			/obj/item/weapon/sword/silver = 3
-		)
-	)
-
-/datum/loot_table/magic
-	name = "generic magic table"
-	loot_table = list(
-		list(
-			/obj/item/clothing/ring/active/nomag = 20,
-			/obj/item/clothing/ring/gold/protection = 10,
-			/obj/item/clothing/ring/gold/ravox = 6,
-			/obj/item/clothing/ring/silver/calm = 20,
-			/obj/item/clothing/ring/silver/noc = 6,
-			/obj/item/clothing/head/crown/circlet/vision = 3,
-			/obj/item/clothing/head/crown/circlet/sleepless = 3,
-			/obj/item/clothing/head/crown/circlet/stink = 5,
-			/obj/item/clothing/neck/talkstone = 10,
-			/obj/item/clothing/ring/dragon_ring = 1
-		)
-	)
-
-/datum/loot_table/coin
-	name = "generic coins"
-	loot_table = list(
-		list(
-			/obj/item/coin/gold/pile = 5,
-			/obj/item/coin/gold = 10,
-			/obj/item/coin/silver/pile = 20,
-			/obj/item/coin/silver = 25,
-			/obj/item/coin/copper/pile = 30,
-			/obj/item/coin/copper = 35
-		)
-	)
-	base_max = 3
-
-/datum/loot_table/coin/low
-	name = "generic coins low"
-	loot_table = list(
-		list(
-			/obj/item/coin/copper/pile = 75,
-			/obj/item/coin/copper = 25
-		)
-	)
-
-/datum/loot_table/coin/med
-	name = "generic coins medium"
-	loot_table = list(
-		list(
-			/obj/item/coin/silver/pile = 75,
-			/obj/item/coin/silver = 25
-		)
-	)
-
-/datum/loot_table/coin/high
-	name = "generic coins high"
-	loot_table = list(
-		list(
-			/obj/item/coin/gold/pile = 75,
-			/obj/item/coin/gold = 25
-		)
-	)
-
-/datum/loot_table/coin/absurd
-	name = "generic coins absurd"
-	loot_table = list(
-		list(
-			/obj/item/coin/gold/pile = 50,
-			/obj/item/gem = 50
-		)
-	)
-
-/datum/loot_table/weapon
-	name = "generic weapons"
-	loot_table = list(
-		list(
-			/obj/item/weapon/mace/bludgeon/copper = 15,
-			/obj/item/weapon/axe/copper = 15,
-			/obj/item/weapon/knife/copper = 15,
-			/obj/item/weapon/sword/long/rider/copper = 15,
-			/obj/item/weapon/sword/coppermesser = 15,
-			/obj/item/weapon/polearm/spear/javelin = 15,
-			/obj/item/weapon/axe/iron = 10,
-			/obj/item/weapon/polearm/halberd/bardiche = 10,
-			/obj/item/weapon/sword/rapier/ironestoc = 10,
-			/obj/item/weapon/polearm/eaglebeak/lucerne = 10,
-			/obj/item/weapon/polearm/spear/billhook/ji/iron = 5,
-			/obj/item/weapon/mace = 10,
-			/obj/item/weapon/mace/bludgeon = 10,
-			/obj/item/weapon/mace/spiked = 8,
-			/obj/item/weapon/mace/rungu = 4,
-			/obj/item/weapon/mace/elvenclub = 6,
-			/obj/item/weapon/sword/kaskara/iron = 4,
-			/obj/item/weapon/sword/long/shotel/iron = 2,
-			/obj/item/weapon/sword/sabre/dadao/iron = 4,
-			/obj/item/weapon/whip/urumi/iron = 3,
-			/obj/item/weapon/knife/hunting/kukri/iron = 3,
-			/obj/item/weapon/sword/scimitar/wodao/iron = 4,
-			/obj/item/weapon/sword/scimitar/messer = 10,
-			/obj/item/weapon/mace/elvenclub = 7,
-			/obj/item/weapon/sword/sabre/dadao/bronze = 5,
-			/obj/item/weapon/sword/short/bronze = 10,
-			/obj/item/weapon/sword/bronze = 10,
-			/obj/item/weapon/mace/bronze = 10,
-			/obj/item/weapon/polearm/spear/billhook/ji/bronze = 3,
-			/obj/item/weapon/flail/militia = 10,
-			/obj/item/weapon/mace/bronze/shishpar = 5,
-			/obj/item/weapon/whip/urumi/bronze = 2,
-			/obj/item/weapon/mace/elvenclub/bronze = 4,
-			/obj/item/weapon/axe/bronze = 10,
-			/obj/item/weapon/sword/short/iron = 10,
-			/obj/item/weapon/sword/long/greatsword/zwei = 10,
-			/obj/item/gun/ballistic/bow/short = 10,
-			/obj/item/gun/ballistic/bow = 10,
-			/obj/item/gun/ballistic/bow/long = 5,
-			/obj/item/gun/ballistic/bow/cross = 5,
-			/obj/item/weapon/axe/steel = 5,
-			/obj/item/weapon/axe/steel/nsapo = 2,
-			/obj/item/weapon/sword/long/greatsword = 2,
-			/obj/item/weapon/sword/sabre/dadao = 2,
-			/obj/item/weapon/sword/kaskara = 2,
-			/obj/item/weapon/sword/scimitar/wodao = 2,
-			/obj/item/weapon/sword/rapier = 5,
-			/obj/item/weapon/sword/sabre = 5,
-			/obj/item/weapon/mace/goden/steel = 2,
-			/obj/item/weapon/mace/steel = 5,
-			/obj/item/weapon/mace/steel/rungu = 2,
-			/obj/item/weapon/mace/steel/shishpar = 2,
-			/obj/item/weapon/hammer/sledgehammer/war = 2,
-			/obj/item/weapon/whip/urumi = 1,
-		)
-	)
-
-/datum/loot_table/armor
-	name = "generic armor"
-	loot_table = list(
-		list(
-			/obj/item/clothing/face/facemask/copper = 15,
-			/obj/item/clothing/wrists/bracers/copper = 15,
-			/obj/item/clothing/head/helmet/coppercap = 15,
-			/obj/item/clothing/armor/cuirass/copperchest = 15,
-			/obj/item/clothing/pants/chainlegs/iron = 10,
-			/obj/item/clothing/pants/chainlegs/kilt/iron = 10,
-			/obj/item/clothing/armor/chainmail/iron = 10,
-			/obj/item/clothing/armor/plate/iron = 10,
-			/obj/item/clothing/armor/cuirass/iron = 10,
-			/obj/item/clothing/head/helmet/heavy/rust = 10,
-			/obj/item/clothing/armor/plate/rust = 10,
-			/obj/item/clothing/gloves/plate/rust = 10,
-			/obj/item/clothing/pants/platelegs/rust = 10,
-			/obj/item/clothing/shoes/boots/armor/light/rust = 10,
-			/obj/item/clothing/head/helmet/heavy/ironplate = 8,
-			/obj/item/clothing/armor/leather/splint = 10,
-			/obj/item/clothing/armor/brigandine = 5,
-			/obj/item/clothing/head/helmet/horned = 10,
-			/obj/item/clothing/head/helmet/skullcap = 10,
-			/obj/item/clothing/head/helmet/heavy/frog = 5,
-			/obj/item/clothing/head/helmet/visored/hounskull = 5,
-			/obj/item/clothing/face/facemask/steel = 10,
-			/obj/item/clothing/armor/plate/full = 5,
-			/obj/item/clothing/neck/chaincoif = 5,
-			/obj/item/clothing/neck/bevor/iron = 5,
-			/obj/item/clothing/neck/highcollier/iron = 5,
-			/obj/item/clothing/armor/cuirass = 1
-		)
-	)
-
-/datum/loot_table/food
-	name = "generic food"
-	loot_table = list(
-		list(
-			/obj/item/reagent_containers/food/snacks/bread = 10,
-			/obj/item/reagent_containers/food/snacks/bread/raisin = 10,
-			/obj/item/reagent_containers/food/snacks/bun = 10,
-			/obj/item/reagent_containers/food/snacks/cheesebun = 10,
-			/obj/item/reagent_containers/food/snacks/frybread = 10,
-			/obj/item/reagent_containers/food/snacks/cooked/frysteak = 10,
-			/obj/item/reagent_containers/food/snacks/cooked/egg = 10,
-			/obj/item/reagent_containers/food/snacks/cooked/frybird = 10,
-			/obj/item/reagent_containers/food/snacks/cooked/ham = 10,
-			/obj/item/reagent_containers/food/snacks/cooked/sausage = 10,
-			/obj/item/reagent_containers/food/snacks/produce/vegetable/potato/baked = 10,
-			/obj/item/reagent_containers/food/snacks/onion_fried = 10,
-			/obj/item/reagent_containers/food/snacks/raisins = 10,
-			/obj/item/reagent_containers/food/snacks/meat/salami = 10,
-			/obj/item/reagent_containers/food/snacks/hardtack = 10
-		)
-	)
-
-/datum/loot_table/potion_vitals
-	name = "generic vital potions"
-	loot_table = list(
-		list(
-			/obj/item/reagent_containers/glass/bottle/healthpot = 10,
-			/obj/item/reagent_containers/glass/bottle/stronghealthpot = 5,
-			/obj/item/reagent_containers/glass/bottle/manapot = 10,
-			/obj/item/reagent_containers/glass/bottle/strongmanapot = 5,
-			/obj/item/reagent_containers/glass/bottle/stampot = 10,
-			/obj/item/reagent_containers/glass/bottle/strongstampot = 5
-		)
-	)
-
-/datum/loot_table/potion_poisons
-	name = "generic poisons"
-	loot_table = list(
-		list(
-			/obj/item/reagent_containers/glass/bottle/poison = 10,
-			/obj/item/reagent_containers/glass/bottle/strongpoison = 5,
-			/obj/item/reagent_containers/glass/bottle/stampoison = 10,
-			/obj/item/reagent_containers/glass/bottle/strongstampoison = 5,
-			/obj/item/reagent_containers/glass/bottle/stampot = 10,
-			/obj/item/reagent_containers/glass/bottle/strongstampot = 5
-		)
-	)
-
-/datum/loot_table/potion_ingredient
-	var/static/list/all_potion_ings = list()
-	loot_table = list()
-
-/datum/loot_table/potion_ingredient/New()
-	if(!all_potion_ings.len)
-		all_potion_ings = subtypesof(/obj/item/alch)
-	if(!loot_table.len)
-		var/list/ingredient_list = list()
-		for(var/ingredient in all_potion_ings)
-			ingredient_list[ingredient] = 1
-		loot_table = list(ingredient_list)
-	..()
-
-/datum/loot_table/potion_ingredient/herb
-	name = "generic herbs"
-	loot_table = list(
-		list(
-			/obj/item/alch/herb/atropa = 5,
-			/obj/item/alch/herb/matricaria = 5,
-			/obj/item/alch/herb/symphitum = 5,
-			/obj/item/alch/herb/taraxacum = 5,
-			/obj/item/alch/herb/euphrasia = 5,
-			/obj/item/alch/herb/paris = 5,
-			/obj/item/alch/herb/calendula = 5,
-			/obj/item/alch/herb/mentha = 5,
-			/obj/item/alch/herb/urtica = 5,
-			/obj/item/alch/herb/salvia = 5,
-			/obj/item/alch/herb/hypericum = 5,
-			/obj/item/alch/herb/benedictus = 5,
-			/obj/item/alch/herb/valeriana = 5,
-			/obj/item/alch/herb/artemisia = 5,
-			/obj/item/alch/herb/rosa = 5,
-			/obj/item/alch/herb/euphorbia = 5
-		)
-	)
-
-/datum/loot_table/potion_stats
-	name = "generic stat potions"
-	loot_table = list(
-		list(
-			/obj/item/reagent_containers/glass/bottle/vial/strpot = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/perpot = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/endpot = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/conpot = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/intpot = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/spdpot = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/lucpot = 10
-		)
-	)
-
-/datum/loot_table/potion_skills
-	name = "skill elixirs"
-	loot_table = list(
-		list(
-			/obj/item/reagent_containers/glass/bottle/vial/bladeart = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/heavy_arms = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/whip_hand = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/marksmans_eye = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/shield_bearer = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/craftsmans_wit = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/smelters_patience = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/builders_draught = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/trappers_sense = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/alchemists_clarity = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/smiths_blood = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/skinners_elixir = 10,
-
-			/obj/item/reagent_containers/glass/bottle/vial/locksmiths_oil = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/cooks_brine = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/prep_hands_tonic = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/brewers_wort = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/seamstress_thimble_drop = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/miners_heart = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/farmers_almanac = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/beastwhisper = 10,
-
-			/obj/item/reagent_containers/glass/bottle/vial/miracle_water = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/vital_ichor = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/arcane_solvent = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/wild_draught = 10,
-
-			/obj/item/reagent_containers/glass/bottle/vial/athletes_brine = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/shadow_tonic = 10,
-			/obj/item/reagent_containers/glass/bottle/vial/scholars_ink = 10
-		)
+		/obj/item/coin/gold/pile = 15,
+		/obj/item/weapon/knife/dagger/silver = 5,
+		/obj/item/weapon/sword/long/greatsword = 2,
+		/obj/item/weapon/axe/iron = 10,
+		/obj/item/ingot/gold = 5,
+		/obj/item/ingot/silver = 5,
+		/obj/item/clothing/head/crown/circlet = 2,
+		/obj/item/clothing/head/crown/circlet/golddiadem = 2,
+		/obj/item/clothing/head/crown/circlet/silverdiadem = 3,
+		/obj/item/clothing/head/crown/circlet/silverheaddress = 2,
+		/obj/item/clothing/head/crown/circlet/goldheaddress = 1,
+		/obj/item/clothing/face/facemask/goldnosechain = 1,
+		/obj/item/clothing/face/facemask/silverveil = 1,
+		/obj/item/clothing/armor/medium/scale = 8,
+		/obj/item/clothing/armor/plate = 8,
+		/obj/item/clothing/gloves/chain = 3,
+		/obj/item/clothing/neck/bevor = 3,
+		/obj/item/clothing/pants/chainlegs = 5,
+		/obj/item/clothing/pants/chainlegs/kilt = 5,
+		/obj/item/carvedgem/jade/wyrm = 1,
+		/obj/item/carvedgem/amber/beaver = 1,
+		/obj/item/carvedgem/turq/ka = 1,
+		/obj/item/carvedgem/onyxa/spider = 1,
+		/obj/item/carvedgem/shell/turtle = 1,
+		/obj/item/reagent_containers/glass/carafe/teapot/gold = 2,
+		/obj/item/statue/gold/bust = 1,
+		/obj/item/statue/gold/vasefancy = 1,
+		/obj/item/statue/silver/vase = 3,
+		/obj/item/statue/silver/figurine = 3,
+		/obj/item/weapon/sword/rapier/nimcha = 2,
+		/obj/item/weapon/mace/gada = 2,
+		/obj/item/weapon/whip/urumi/silver = 1,
+		/obj/item/weapon/sword/silver = 3
 	)

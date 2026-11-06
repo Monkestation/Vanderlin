@@ -27,7 +27,7 @@
 /obj/structure/statue/petrified/process(seconds_per_tick)
 	if(!petrified_mob)
 		STOP_PROCESSING(SSobj, src)
-	timer -= seconds_per_tick * 10
+	timer -= 10
 	petrified_mob.Stun(40) //So they can't do anything while petrified
 	if(timer <= 0)
 		STOP_PROCESSING(SSobj, src)
