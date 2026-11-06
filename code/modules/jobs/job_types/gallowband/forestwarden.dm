@@ -77,10 +77,7 @@
 	add_verb(spawned, /mob/proc/haltyell)
 	spawned.set_patron(/datum/patron/alternate/great_hunt/proven)
 
-	var/datum/species/species = spawned.dna?.species
-	if(species)
-		species.native_language = "Osslandic"
-		species.accent_language = species.get_accent(species.native_language)
+	spawned.accent = ACCENT_OSSLAND
 
 /datum/outfit/forestwarden
 	name = JOB_FOREST_WARDEN

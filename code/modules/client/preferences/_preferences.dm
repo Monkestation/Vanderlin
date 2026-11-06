@@ -1262,8 +1262,11 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			ADD_TRAIT(character, TRAIT_LEPROSY, TRAIT_BAN_PUNISHMENT)
 		if(is_misc_banned(parent.ckey, BAN_MISC_PUNISHMENT_CURSE))
 			ADD_TRAIT(character, TRAIT_PUNISHMENT_CURSE, TRAIT_BAN_PUNISHMENT)
-
-	if(pref_species.multiple_accents && length(pref_species.multiple_accents))
+	
+	var/datum/culture/culture_datum = read_preference(/datum/preference/choiced/culture)
+	if(pref_species.selectable_accents && length(pref_species.selectable_accents))
+		change_accent = TRUE
+	else if (culture_datum?.accent)
 		change_accent = TRUE
 	else
 		change_accent = FALSE

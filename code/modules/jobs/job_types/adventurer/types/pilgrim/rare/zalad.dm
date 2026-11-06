@@ -42,14 +42,7 @@
 
 /datum/job/advclass/pilgrim/rare/zaladin/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	if(spawned.dna?.species)
-		if(spawned.dna.species.id == SPEC_ID_HUMEN)
-			spawned.dna.species.native_language = "Zalad"
-			spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
-		if(spawned.dna.species.id == SPEC_ID_HALF_ELF)
-			if(spawned.dna.species.native_language == "Imperial")
-				spawned.dna.species.native_language = "Zalad"
-				spawned.dna.species.accent_language = spawned.dna.species.get_accent(spawned.dna.species.native_language)
+	spawned.accent = ACCENT_ZALAD
 
 /datum/outfit/pilgrim/zalad
 	name = "Zaladin Emir (Pilgrim)"
