@@ -1,5 +1,5 @@
 /area/outdoors/wilderness
-	name = "murderwood"
+	name = "coastwood"
 	icon = 'icons/turf/areas/forest.dmi'
 	icon_state = "woods"
 	droning_index = DRONING_FOREST_DAY
@@ -29,7 +29,44 @@
 		new /datum/ambush_config/highwayman_gang = 6,
 		new /datum/ambush_config/mixed_wildlife = 15,
 	)
-	first_time_text = "THE MURDERWOOD"
+	first_time_text = "THE SOUTHERN COASTWOODS"
+	custom_area_sound = 'sound/misc/stings/ForestSting.ogg'
+	converted_type = /area/indoors/shelter/woods
+	threat_region = THREAT_REGION_WOODS
+
+
+/area/outdoors/wilderness/plains
+	name = "coastwoodplains"
+	icon = 'icons/turf/areas/forest.dmi'
+	icon_state = "woods"
+	droning_index = DRONING_FOREST_DAY
+	droning_index_night = DRONING_FOREST_NIGHT
+	ambient_index = AMBIENCE_BIRDS
+	ambient_index_night = AMBIENCE_FOREST
+	background_track = 'sound/music/area/forest.ogg'
+	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_night = 'sound/music/area/forestnight.ogg'
+	soundenv = 15
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
+	ambush_types = list(
+		/turf/open/floor/grass,
+		/turf/open/floor/dirt,
+	)
+
+	ambush_mobs = list(
+		new /datum/ambush_config/wolf_pack = 15,
+		new /datum/ambush_config/lone_troll = 10,
+		new /datum/ambush_config/troll_and_wolves = 8,
+		new /datum/ambush_config/goblin_ambush_party = 15,
+		new /datum/ambush_config/goblin_raid_party = 8,
+		new /datum/ambush_config/raccoon_swarm = 20,
+		new /datum/ambush_config/mole_pack = 15,
+		new /datum/ambush_config/deserter_patrol = 12,
+		new /datum/ambush_config/highwayman_duo = 10,
+		new /datum/ambush_config/highwayman_gang = 6,
+		new /datum/ambush_config/mixed_wildlife = 15,
+	)
+	first_time_text = "THE COASTWOOD PLAINS"
 	custom_area_sound = 'sound/misc/stings/ForestSting.ogg'
 	converted_type = /area/indoors/shelter/woods
 	threat_region = THREAT_REGION_WOODS
@@ -46,13 +83,13 @@
 /area/outdoors/wilderness/beside_thatchwood
 
 /area/outdoors/wilderness/north
-	name = "Northern Murderwood"
+	name = "Northern Coastwood"
 /area/outdoors/wilderness/east
-	name = "Eastern Murderwood"
+	name = "Eastern Coastwood"
 /area/outdoors/wilderness/south
-	name = "Southern Murderwood"
+	name = "Southern Coastwood"
 /area/outdoors/wilderness/central
-	name = "Central Murderwood"
+	name = "Central Coastwood"
 
 /area/outdoors/wilderness/outpost/salem
 	name = "salem outpost"

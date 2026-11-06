@@ -98,3 +98,40 @@
 		/obj/structure/flora/grass/water/reeds = 30,
 		/obj/structure/kneestingers = 30,
 	)
+/datum/mapGeneratorModule/forestplains
+	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
+	allowed_turfs = list(/turf/open/floor/dirt)
+	excluded_turfs = list(/turf/open/floor/dirt/road)
+	spawnableAtoms = list(
+		/obj/structure/flora/grass = 80,
+		/obj/item/natural/rock = 6,
+		/obj/structure/flora/grass/herb/random = 5,
+		/obj/structure/wild_plant/nospread/ollie = 0.6,
+		/obj/item/natural/stone = 5,
+		/obj/structure/essence_node = 0.4,
+		/obj/item/grown/log/tree/stick = 4,
+		/obj/structure/flora/grass/bush_meagre = 2,
+		/obj/structure/table/wood/treestump = 2,
+	)
+	spawnableTurfs = list(
+		/turf/open/floor/dirt/road = 30,
+	)
+	allowed_areas = list(/area/outdoors/wilderness/plains)
+
+	/datum/mapGeneratorModule/forestgrassplains
+	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
+	allowed_turfs = list(/turf/open/floor/grass)
+	allowed_areas = list(/area/outdoors/wilderness/plains)
+	spawnableAtoms = list(
+		/obj/structure/flora/grass = 80,
+		/obj/structure/flora/grass/bush_meagre = 7,
+		/obj/structure/flora/grass/herb/random = 6,
+		/obj/item/grown/log/tree/stick = 5,
+		/obj/item/natural/stone = 3,
+		/obj/item/natural/rock = 2,
+		/obj/structure/flora/grass/pyroclasticflowers = 1,
+		/obj/structure/flora/grass/maneater = 0.3,
+		/obj/structure/essence_node = 1,
+		/obj/structure/flora/grass/maneater/real = 0.1,
+		/obj/structure/wild_plant/nospread/mushroom/waddle = 0.5,
+		/obj/structure/wild_plant/nospread/mushroom/merkel = 0.2,

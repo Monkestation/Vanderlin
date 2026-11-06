@@ -5920,7 +5920,7 @@
 /area/indoors/antag/vampire_manor)
 "Dv" = (
 /obj/structure/fluff/buysign{
-	name = "To the Murderwoods"
+	name = "To the coastwoods"
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/woods_safe)
