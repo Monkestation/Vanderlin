@@ -242,10 +242,18 @@
 	name = "heavy leather gloves"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fibers = 1
+		/obj/item/natural/fur = 1
 	)
 	output = /obj/item/clothing/gloves/angle
 	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/leather/gloves/grenzelheavy
+	name = "grenzelhoftian heavy leather gloves"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/fur = 1
+	)
+	output = /obj/item/clothing/gloves/angle/grenzel
 
 /datum/repeatable_crafting_recipe/leather/gloves/heavy/grenzel
 	name = "grenzelhoftian gloves"
@@ -255,14 +263,7 @@
 /datum/repeatable_crafting_recipe/leather/gloves/heavy/inquisitor
 	name = "inquisitor gloves"
 	output = /obj/item/clothing/gloves/leather/grenzel/inqgloves
-
-/datum/repeatable_crafting_recipe/leather/gloves/grenzelheavy
-	name = "grenzelhoftian heavy leather gloves"
-	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/fur = 1
-	)
-	output = /obj/item/clothing/gloves/leather/grenzel/inqgloves
+	craftdiff = 4
 
 /// Pants
 /datum/repeatable_crafting_recipe/leather/pants
