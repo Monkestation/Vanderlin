@@ -194,10 +194,6 @@
 
 /// Clothing
 
-/datum/repeatable_crafting_recipe/leather/corset
-	name = "corset"
-	output = /obj/item/clothing/armor/corset
-
 /// Gloves
 /datum/repeatable_crafting_recipe/leather/gloves
 	name = "leather gloves"
@@ -356,6 +352,19 @@
 	name = "caligae"
 	output = /obj/item/clothing/shoes/gladiator
 	craftdiff = 1
+
+/datum/repeatable_crafting_recipe/leather/shoes/jester
+	name = "jester shoes"
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 1
+	)
+	output = /obj/item/clothing/shoes/jester
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/leather/shoes/jester/babouche
+	name = "babouche"
+	output = /obj/item/clothing/shoes/shalal
 
 /// boots
 
@@ -676,6 +685,117 @@
 	output = /obj/item/storage/belt/leather/suspenders
 	craftdiff = 3
 
+/// Head pieces
+/datum/repeatable_crafting_recipe/leather/helmet
+	name = "leather helmet"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+	)
+	output = /obj/item/clothing/head/helmet/leather
+	craftdiff = 1
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/helmet/hardened_conical
+	name = "hardened conical helmet"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/ingot/iron = 1,
+	)
+	output = /obj/item/clothing/head/helmet/leather/conical
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/leather/helmet/ominous_hood
+	name = "ominous hood"
+	output = /obj/item/clothing/head/helmet/leather/hood_ominous
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/leather/coif
+	name = "leather coif"
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+	)
+	output = /obj/item/clothing/neck/coif
+	craftdiff = 1
+	category = "Armor"
+
+/datum/repeatable_crafting_recipe/leather/coif/headscarf
+	name = "headscarf"
+	output = /obj/item/clothing/head/helmet/leather/headscarf
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/leather/coif/adept_cowl
+	name = "adept cowl"
+	output = /obj/item/clothing/head/adeptcowl
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/leather/coif/jester
+	name = "jester hat"
+	output = /obj/item/clothing/head/jester
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/leather/hat
+	name = "brimmed hat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 1,
+	)
+	output = /obj/item/clothing/head/brimmed
+	craftdiff = 1
+	category = "Hat"
+
+/datum/repeatable_crafting_recipe/leather/hat/court_physician_hat
+	name = "court physician hat"
+	output = /obj/item/clothing/head/physhat
+
+/datum/repeatable_crafting_recipe/leather/hat/buckled
+	name = "buckled hat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 3,
+	)
+	output = /obj/item/clothing/head/helmet/leather/inquisitor
+	craftdiff = 3
+
+/datum/repeatable_crafting_recipe/leather/hat/inquisitor
+	name = "inquisitorial hat"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/natural/feather = 1,
+	)
+	output = /obj/item/clothing/head/leather/inqhat
+	craftdiff = 4
+
+/datum/repeatable_crafting_recipe/leather/hat/inquisitor/gravetender
+	name = "gravetender's hat"
+	output = /obj/item/clothing/head/leather/inqhat/gravehat
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/leather/hat/tricorn
+	name = "tricorn (black)"
+	requirements = list(
+		/obj/item/natural/hide/cured = 2,
+	)
+	output = /obj/item/clothing/head/helmet/leather/tricorn
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/leather/hat/inquisitor/duel
+	name = "duelist hat"
+	output = /obj/item/clothing/head/leather/duelhat
+	craftdiff = 2
+
+/datum/repeatable_crafting_recipe/leather/hat/top
+	name = "top hat"
+	output = /obj/item/clothing/head/tophat
+	requirements = list(/obj/item/natural/hide/cured = 1,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 4
+
+/// Chest pieces
+/datum/repeatable_crafting_recipe/leather/corset
+	name = "corset"
+	output = /obj/item/clothing/armor/corset
 
 /datum/repeatable_crafting_recipe/leather/vest
 	name = "leather vest"
@@ -719,24 +839,6 @@
 	)
 	output = /obj/item/clothing/cloak/apron/brown
 	craftdiff = 2
-
-/datum/repeatable_crafting_recipe/leather/helmet
-	name = "leather helmet"
-	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-	)
-	output = /obj/item/clothing/head/helmet/leather
-	craftdiff = 1
-	category = "Armor"
-
-/datum/repeatable_crafting_recipe/leather/coif
-	name = "leather coif"
-	requirements = list(
-		/obj/item/natural/hide/cured = 1,
-	)
-	output = /obj/item/clothing/neck/coif
-	craftdiff = 2
-	category = "Armor"
 
 /datum/repeatable_crafting_recipe/leather/leatherjacket
 	name = "leather jacket"
@@ -828,110 +930,6 @@
 				/obj/item/natural/fibers = 2)
 	craftdiff = 3
 
-/datum/repeatable_crafting_recipe/leather/ominous_hood
-	name = "ominous hood"
-	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-	)
-	output = /obj/item/clothing/head/helmet/leather/hood_ominous
-	craftdiff = 3
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/adept_cowl
-	name = "adept cowl"
-	requirements = list(
-		/obj/item/natural/hide/cured = 1,
-	)
-	output = /obj/item/clothing/head/adeptcowl
-	craftdiff = 3
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/inquisitor_hat
-	name = "inquisitorial hat"
-	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/feather = 1,
-	)
-	output = /obj/item/clothing/head/leather/inqhat
-	craftdiff = 4
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/gravetenderhat
-	name = "gravetender's hat"
-	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/feather = 1,
-	)
-	output = /obj/item/clothing/head/leather/inqhat/gravehat
-	craftdiff = 2
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/brimmedhat
-	name = "brimmed hat"
-	requirements = list(
-		/obj/item/natural/hide/cured = 1,
-	)
-	output = /obj/item/clothing/head/brimmed
-	craftdiff = 1
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/court_physician_hat
-	name = "court physician hat"
-	requirements = list(
-		/obj/item/natural/hide/cured = 1,
-	)
-	output_amount = 1
-	output = /obj/item/clothing/head/physhat
-	craftdiff = 1
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/tricorn
-	name = "tricorn (black)"
-	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-	)
-	output = /obj/item/clothing/head/helmet/leather/tricorn
-	craftdiff = 2
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/headscarf
-	name = "headscarf"
-	requirements = list(
-		/obj/item/natural/hide/cured = 1,
-	)
-	output = /obj/item/clothing/head/helmet/leather/headscarf
-	craftdiff = 1
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/buckled_hat
-	name = "buckled hat"
-	requirements = list(
-		/obj/item/natural/hide/cured = 3,
-	)
-	output = /obj/item/clothing/head/helmet/leather/inquisitor
-	craftdiff = 3
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/hardened_conical
-	name = "hardened conical helmet"
-	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-		/obj/item/ingot/iron = 1,
-	)
-	output = /obj/item/clothing/head/helmet/leather/conical
-	craftdiff = 3
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/duelhat
-	name = "duelist hat"
-	requirements = list(
-		/obj/item/natural/hide/cured = 2,
-		/obj/item/natural/feather = 1,
-	)
-	output = /obj/item/clothing/head/leather/duelhat
-	craftdiff = 2
-	category = "Hat"
-
 /// Standalones
 
 /datum/repeatable_crafting_recipe/leather/leathercollar
@@ -1007,45 +1005,6 @@
 				/obj/item/natural/fibers = 1)
 	craftdiff = 4
 	category = "Wrists"
-
-/datum/repeatable_crafting_recipe/leather/standalone/top_hat
-	name = "top hat"
-	output = /obj/item/clothing/head/tophat
-	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/standalone/jester_hat
-	name = "jester hat"
-	output = /obj/item/clothing/head/jester
-	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-	category = "Hat"
-
-/datum/repeatable_crafting_recipe/leather/standalone/babouche
-	name = "babouche"
-	output = /obj/item/clothing/shoes/shalal
-	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-	category = "Shoes"
-
-/datum/repeatable_crafting_recipe/leather/standalone/jester_shoes
-	name = "jester shoes"
-	output = /obj/item/clothing/shoes/jester
-	requirements = list(/obj/item/natural/hide/cured = 1,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
-	category = "Shoes"
-
-/datum/repeatable_crafting_recipe/leather/standalone/grenzel_shoes
-	name = "grenzelhoftian shoes"
-	output = /obj/item/clothing/shoes/grenzel
-	requirements = list(/obj/item/natural/hide/cured = 3,
-				/obj/item/natural/fibers = 1)
-	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/leather_duelcoat
 	name = "leather duelist coat"
