@@ -33,7 +33,7 @@ While it's not required reading, leadership roles may find this information usef
 		<p><strong> - City of Vanderlin </strong><br> A canyon settlement on a nearby peninsula to the East of the Isle of Enigma. Reaping the boons of both, Vanderlin is a city of trade and prosperity. Built over the first-discovered opening to the Tomb of Matthios, it attracts adventurers from all over Psydonia to delve within and seek fortune.  </p>
 		<p><strong> - County of Daftmarsh </strong><br> A thrice-sunken castle, now a town-on-stilts built from its ruins. Daftmarsh guards the river delta directly North of Vanderlin. It often serves as a safe cove for pirates, providing Vanderlin merchant ships safe passage in exchange for the Crown's averted eyes. </p>
 		<p><strong> - Mire of the Terrorbog </strong><br> A fertile and marshy area of the peninsula, overgrown and suffering an invasion of beespiders.  </p>
-		<p><strong> - Shire of Murderwood </strong><br> Ancestral Forest bearing many glades, overrun by villains, knaves, and other lawlessness. A testament to Dendor's madness, its constant-shifting thicket stretches across Western Vanderlin. </p>
+		<p><strong> - Shire of the Coastwoods </strong><br> Ancestral Forest bearing many glades, overrun by villains, knaves, and other lawlessness. A testament to Dendor's madness, its constant-shifting thicket stretches across Western Vanderlin. </p>
 		<p><strong> - Malum's Anvil </strong><br> A jagged mountain filled with ores, treasures, and lava. Likewise a cacophony of horrid goblins, beasts, and other misfortunes. The crater of Astrata's fallen shard still scars its peak. </p>
 	</details>
 	<br>
