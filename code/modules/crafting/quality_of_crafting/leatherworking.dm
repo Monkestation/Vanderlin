@@ -216,7 +216,7 @@
 		/obj/item/natural/hide/cured = 1,
 		/obj/item/natural/fur = 1
 	)
-	output = /obj/item/clothing/gloves/leather/feld
+	output = /obj/item/clothing/gloves/angle/furlined
 
 /datum/repeatable_crafting_recipe/leather/gloves/fencer
 	name = "fencing gloves"
@@ -392,12 +392,12 @@
 	output = /obj/item/clothing/shoes/boots/furlinedanklets
 
 /datum/repeatable_crafting_recipe/leather/furboots
-	name = "fur lined boots"
+	name = "fur boots"
 	requirements = list(
 		/obj/item/natural/hide/cured = 2,
 		/obj/item/natural/fur = 2,
 	)
-	output = /obj/item/clothing/shoes/boots/furlinedboots
+	output = /obj/item/clothing/shoes/boots/furboots
 	craftdiff = 1
 
 /datum/repeatable_crafting_recipe/leather/boots/short
