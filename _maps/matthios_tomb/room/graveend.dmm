@@ -51,7 +51,7 @@
 /area/under/tomb)
 "aR" = (
 /obj/structure/table/wood/plain/alt,
-/obj/item/storage/belt/leather/plaquegold,
+/obj/item/storage/belt/leather/steel,
 /turf/open/floor/hexstone,
 /area/under/tomb)
 "aZ" = (
@@ -66,7 +66,7 @@
 /turf/open/floor/hexstone,
 /area/under/tomb)
 "fx" = (
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/hexstone,
 /area/under/tomb)
 "kb" = (
@@ -77,7 +77,7 @@
 /area/under/tomb)
 "kF" = (
 /obj/structure/table/wood/plain/alt,
-/obj/item/reagent_containers/glass/cup/golden,
+/obj/item/reagent_containers/glass/cup/shellfancy,
 /turf/open/floor/hexstone,
 /area/under/tomb)
 "nD" = (
@@ -89,7 +89,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb)
 "qq" = (
-/obj/item/statue/gold/loot,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/hexstone,
 /area/under/tomb)
 "va" = (
@@ -103,10 +103,6 @@
 "zb" = (
 /obj/effect/decal/cleanable/blood/puddle,
 /obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/hexstone,
-/area/under/tomb)
-"zp" = (
-/obj/effect/spawner/map_spawner/loot,
 /turf/open/floor/hexstone,
 /area/under/tomb)
 "zr" = (
@@ -566,7 +562,7 @@ aO
 "}
 (20,1,2) = {"
 aO
-zp
+fx
 aN
 YK
 aN

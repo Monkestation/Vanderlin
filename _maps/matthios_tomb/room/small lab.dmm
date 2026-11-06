@@ -29,10 +29,6 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
 "ew" = (
@@ -107,29 +103,15 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
-"mV" = (
-/obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
+"oY" = (
+/obj/structure/fluff/walldeco/painting/skull{
+	pixel_y = 32
+	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
 "oZ" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
 "qw" = (
@@ -176,6 +158,9 @@
 /obj/structure/fluff/walldeco/chains{
 	pixel_y = 21;
 	pixel_x = 9
+	},
+/obj/structure/fluff/walldeco/med3{
+	pixel_x = -33
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
@@ -240,6 +225,10 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
+"Bg" = (
+/obj/structure/fluff/fibermat/round,
+/turf/open/floor/blocks,
+/area/under/tomb/indoors)
 "BV" = (
 /obj/structure/table/wood/plain_alt,
 /obj/structure/fluff/millstone,
@@ -289,6 +278,12 @@
 	},
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
+"Hc" = (
+/obj/structure/fluff/walldeco/med4{
+	pixel_x = -32
+	},
+/turf/open/floor/ruinedwood/turned/darker,
+/area/under/tomb/indoors)
 "HN" = (
 /obj/structure/kneestingers{
 	pixel_y = 11
@@ -297,6 +292,7 @@
 /area/under/tomb/indoors)
 "Jp" = (
 /obj/structure/bed/hay,
+/obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
 "Jt" = (
@@ -306,8 +302,6 @@
 /area/under/tomb/indoors)
 "Lq" = (
 /obj/structure/closet/crate/chest/wicker,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -366,6 +360,7 @@
 "QD" = (
 /obj/structure/closet/crate/chest,
 /obj/item/reagent_containers/food/snacks/cooked/coppiette,
+/obj/item/reagent_containers/food/snacks/cooked/coppiette,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
 "Ra" = (
@@ -380,13 +375,6 @@
 /obj/structure/closet/crate/chest/wicker,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/produce/grain/wheat,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
-/obj/item/reagent_containers/food/snacks/raisins,
 /obj/item/reagent_containers/food/snacks/raisins,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/under/tomb/indoors)
@@ -545,7 +533,7 @@ Wu
 UM
 vx
 qw
-iK
+Hc
 Cl
 uJ
 yC
@@ -587,7 +575,7 @@ UM
 Rv
 Wu
 uJ
-iK
+oY
 iK
 iK
 Jt
@@ -653,7 +641,7 @@ Wu
 wO
 Wu
 Eo
-Yf
+Bg
 Yf
 Yf
 Yf
@@ -1153,7 +1141,7 @@ Yi
 Yi
 UM
 ek
-mV
+oZ
 oZ
 RK
 UM

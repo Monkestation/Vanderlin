@@ -34,6 +34,12 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/cobble,
 /area/under/tomb)
+"fQ" = (
+/obj/structure/tent_wall{
+	dir = 1
+	},
+/turf/open/floor/cobble,
+/area/under/tomb)
 "gQ" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/metal,
@@ -59,8 +65,14 @@
 /turf/open/floor/cobble,
 /area/under/tomb)
 "nf" = (
-/obj/structure/roguetent,
 /obj/effect/decal/cleanable/dirt/cobweb,
+/obj/structure/bed/shit,
+/turf/open/floor/cobble,
+/area/under/tomb)
+"nq" = (
+/obj/structure/tent_wall{
+	dir = 8
+	},
 /turf/open/floor/cobble,
 /area/under/tomb)
 "pw" = (
@@ -97,6 +109,11 @@
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/cobble,
 /area/under/tomb)
+"yo" = (
+/obj/effect/decal/cleanable/dirt,
+/mob/living/carbon/human/species/goblin/npc/cave,
+/turf/open/floor/cobble,
+/area/under/tomb)
 "yq" = (
 /obj/effect/decal/remains/human,
 /turf/open/floor/metal,
@@ -119,6 +136,10 @@
 "Bt" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/metal,
+/area/under/tomb)
+"Cc" = (
+/obj/structure/fluff/fibermat/round,
+/turf/open/floor/cobble,
 /area/under/tomb)
 "Ck" = (
 /obj/structure/fluff/walldeco/skullspike,
@@ -148,12 +169,17 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/metal,
 /area/under/tomb)
+"DW" = (
+/mob/living/carbon/human/species/goblin/npc/ambush/cave,
+/turf/open/floor/ruinedwood/darker,
+/area/under/tomb)
 "Fq" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/cobble,
 /area/under/tomb)
 "FU" = (
 /obj/machinery/light/fueled/torchholder/l,
+/obj/structure/fluff/fibermat/square,
 /turf/open/floor/cobble,
 /area/under/tomb)
 "Gc" = (
@@ -163,6 +189,10 @@
 "HK" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/cobble,
+/area/under/tomb)
+"LX" = (
+/obj/effect/dungeon_loot_spawner/medium,
+/turf/open/floor/metal,
 /area/under/tomb)
 "NV" = (
 /obj/effect/decal/cleanable/blood/tracks{
@@ -210,11 +240,8 @@
 /area/under/tomb)
 "YV" = (
 /obj/structure/closet/crate/chest/old_crate,
-/obj/item/reagent_containers/glass/bottle/healthpot,
-/obj/item/reagent_containers/food/snacks/meat/sausage,
-/obj/item/reagent_containers/food/snacks/meat/sausage,
-/obj/item/reagent_containers/food/snacks/meat/sausage,
 /obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/cobble,
 /area/under/tomb)
 
@@ -251,7 +278,7 @@ aV
 aG
 nf
 FU
-it
+fQ
 OX
 aj
 Ck
@@ -263,26 +290,26 @@ aV
 (4,1,1) = {"
 aV
 aZ
-pG
+aj
 OX
+it
+Cc
 aj
 aj
 aj
-aj
-FU
-pw
+yo
 aZ
 aV
 "}
 (5,1,1) = {"
 aV
 aZ
-it
+nq
+nq
+nq
 aj
-it
 aj
-aj
-aj
+pG
 aj
 bT
 aG
@@ -321,7 +348,7 @@ aV
 aG
 Vy
 aj
-Vy
+aj
 pw
 Wd
 OX
@@ -335,12 +362,12 @@ aV
 aG
 aj
 wV
-Vy
+aj
 aj
 Wd
 Ck
 CW
-aj
+Vy
 aG
 aV
 "}
@@ -403,7 +430,7 @@ aV
 "}
 (2,1,2) = {"
 aV
-zd
+DW
 zd
 zd
 Tm
@@ -464,7 +491,7 @@ zd
 Bt
 hV
 rx
-hV
+LX
 DM
 Bt
 zd
@@ -538,7 +565,7 @@ zd
 Gc
 zd
 Af
-zd
+DW
 aV
 "}
 (12,1,2) = {"
