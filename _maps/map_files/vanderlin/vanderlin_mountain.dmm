@@ -14072,6 +14072,14 @@
 /obj/item/clothing/ring/silver,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"sIw" = (
+/obj/structure/fluff/traveltile/inquisition{
+	aportalgoesto = "inq_enter2";
+	aportalid = "inq_exit2";
+	name = "To the Vanderlin Grove"
+	},
+/turf/open/floor/cobblerock,
+/area/under/mountains/anvil/lower)
 "sJF" = (
 /obj/structure/fluff/railing/tall/stone{
 	dir = 1
@@ -88859,9 +88867,9 @@ aYi
 aUj
 aIS
 aZR
-aZR
-aZR
-aZR
+ako
+ako
+aXi
 aZR
 adi
 aZR
@@ -89061,10 +89069,10 @@ aIS
 aIS
 aIS
 aZR
-adi
-adi
-adi
-adi
+ako
+ako
+aXi
+aZR
 adi
 aZR
 "}
@@ -89263,10 +89271,10 @@ aer
 aZR
 aZR
 aZR
-adi
-adi
-adi
-adi
+aZR
+ako
+aXi
+aZR
 adi
 aZR
 "}
@@ -89465,10 +89473,10 @@ aer
 aZR
 adi
 adi
-adi
-adi
-adi
-adi
+aZR
+sIw
+aZR
+aZR
 adi
 aZR
 "}
@@ -89667,9 +89675,9 @@ aZR
 aZR
 adi
 adi
-adi
-adi
-adi
+aZR
+aZR
+aZR
 adi
 adi
 aZR
