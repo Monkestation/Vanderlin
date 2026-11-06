@@ -120,7 +120,7 @@
 	)
 	allowed_areas = list(/area/outdoors/wilderness/plains)
 
-	/datum/mapGeneratorModule/forestgrassplains
+/datum/mapGeneratorModule/forestgrassplains
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
 	allowed_turfs = list(/turf/open/floor/grass)
 	allowed_areas = list(/area/outdoors/wilderness/plains)
