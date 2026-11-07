@@ -228,21 +228,21 @@
 	min_cold_protection_temperature = -20
 	wetable = FALSE
 
-/obj/item/clothing/shoes/boots/furlinedboots/advanced
+/obj/item/clothing/shoes/boots/furboots/advanced
 	name = "hardened fur boots"
 	desc = "Boots lined with fur, and protected with hardened, expertly tanned leather."
 	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/boots/leather/advanced
 
-/obj/item/clothing/shoes/boots/furlinedboots/masterwork
+/obj/item/clothing/shoes/boots/furboots/masterwork
 	name = "masterwork fur boots"
 	desc = "Boots lined with thick fur, and protected with hardened, masterfully tanned leather made by only the best."
 	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/boots/leather/master
 
-/obj/item/clothing/shoes/boots/furlinedboots/masterwork/Initialize()
+/obj/item/clothing/shoes/boots/furboots/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 

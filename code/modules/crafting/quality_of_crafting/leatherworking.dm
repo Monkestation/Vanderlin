@@ -942,8 +942,8 @@
 	craftdiff = 4
 
 /datum/repeatable_crafting_recipe/leather/standalone/furboots
-	name = "hardened fur lined boots"
-	output = /obj/item/clothing/shoes/boots/furlinedboots/advanced
+	name = "hardened fur boots"
+	output = /obj/item/clothing/shoes/boots/furboots/advanced
 	requirements = list(/obj/item/natural/hide/cured = 1,
 				/obj/item/natural/fur = 2,
 				/obj/item/natural/fibers/sinew = 1)
@@ -1141,9 +1141,9 @@
 
 /datum/repeatable_crafting_recipe/leather/standalone/furboots/masterwork
 	name = "masterwork fur lined boots"
-	output = /obj/item/clothing/shoes/boots/furlinedboots/masterwork
-	attacked_atom = /obj/item/clothing/shoes/boots/furlinedboots
-	requirements = list(/obj/item/clothing/shoes/boots/furlinedboots = 1,
+	output = /obj/item/clothing/shoes/boots/furboots/masterwork
+	attacked_atom = /obj/item/clothing/shoes/boots/furboots
+	requirements = list(/obj/item/clothing/shoes/boots/furboots = 1,
 				/obj/item/natural/cured/essence = 1,
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 5
