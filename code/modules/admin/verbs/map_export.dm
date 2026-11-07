@@ -349,7 +349,14 @@ GLOBAL_LIST_EMPTY(save_whitelist)
 
 				//====SAVING OBJECTS====
 				if((save_flag & SAVE_OBJECTS) && !skip_objects)
-					for(var/obj/thing in pull_from)
+					var/list/all_objects = pull_from.contents.Copy()
+
+					for(var/obj/structure/closet/chest in pull_from) //check for items in chests
+						if(chest.opened)
+							continue
+						all_objects += chest.contents
+
+					for(var/obj/thing in all_objects)
 						CHECK_TICK
 
 						if(thing.type in obj_blacklist)
