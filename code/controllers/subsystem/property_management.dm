@@ -64,7 +64,7 @@ SUBSYSTEM_DEF(housing)
 				property.owner_ckey = owner_ckey
 				property.owner_property_slot = owner_slot
 				property.temporary_claim = FALSE
-				load_property(property, owner_ckey, owner_slot)
+				load_property(property, owner_ckey, owner_slot, load_flags = null)
 				create_property_controller(property)
 				continue
 
@@ -121,7 +121,7 @@ SUBSYSTEM_DEF(housing)
 
 	return TRUE
 
-/datum/controller/subsystem/housing/proc/load_property(obj/effect/landmark/house_spot/property, ckey, slot)
+/datum/controller/subsystem/housing/proc/load_property(obj/effect/landmark/house_spot/property, ckey, slot, load_flags)
 	var/property_file = "data/properties/[ckey]_[property.save_id]_[slot].dmm"
 
 	if(fexists(property_file))
@@ -142,11 +142,15 @@ SUBSYSTEM_DEF(housing)
 						QDEL_NULL(door.lock)
 					door.lock = new /datum/lock/key(door, lock_list)
 				for(var/obj/item/saved_item in T.contents)
-					saved_item.sellprice = 0
+					if(!(load_flags & LOAD_VALUE))
+						saved_item.sellprice = 0
+					if(!(load_flags & LOAD_SALVAGE))
+						saved_item.salvage_result = null
+						saved_item.melting_material = null
 			return TRUE
 	return load_default_template(property, TRUE)
 
-/datum/controller/subsystem/housing/proc/save_property(obj/effect/landmark/house_spot/property, ckey, slot)
+/datum/controller/subsystem/housing/proc/save_property(obj/effect/landmark/house_spot/property, ckey, slot, save_flags)
 	if(!property || !ckey || !slot)
 		return FALSE
 
@@ -161,7 +165,6 @@ SUBSYSTEM_DEF(housing)
 	var/maxy = miny + property.template_y - 1
 	var/maxz = minz + property.template_z - 1
 
-	var/save_flags = SAVE_OBJECTS | SAVE_TURFS | SAVE_AREAS | SAVE_OBJECT_PROPERTIES | SAVE_UUID_STASIS | SAVE_ITEMS | SAVE_WHITELIST
 	var/map_data = write_map(minx, miny, minz, maxx, maxy, maxz, save_flags, SAVE_SHUTTLEAREA_DONTCARE, property_noop = property.save_id)
 
 	if(!map_data)
@@ -183,7 +186,7 @@ SUBSYSTEM_DEF(housing)
 	property_controllers += controller
 	return controller
 
-/datum/controller/subsystem/housing/proc/purchase_property(obj/effect/landmark/house_spot/property, mob/user, slot)
+/datum/controller/subsystem/housing/proc/purchase_property(obj/effect/landmark/house_spot/property, mob/user, slot, load_flags)
 	if(!user || !user.client || !property || !slot)
 		return FALSE
 
@@ -214,12 +217,12 @@ SUBSYSTEM_DEF(housing)
 
 	// Reload property with owner's saved data if available
 	clear_property_area(property)
-	load_property(property, ckey, slot)
+	load_property(property, ckey, slot, load_flags)
 	create_property_controller(property)
 
 	return TRUE
 
-/datum/controller/subsystem/housing/proc/claim_temporary(obj/effect/landmark/house_spot/property, mob/user, slot)
+/datum/controller/subsystem/housing/proc/claim_temporary(obj/effect/landmark/house_spot/property, mob/user, slot, load_flags)
 	if(!user || !user.client || !property || !slot)
 		return FALSE
 
@@ -241,7 +244,7 @@ SUBSYSTEM_DEF(housing)
 
 	// Load property if user has a saved design
 	clear_property_area(property)
-	load_property(property, ckey, slot)
+	load_property(property, ckey, slot, load_flags)
 	create_property_controller(property)
 
 	return TRUE
@@ -428,7 +431,14 @@ SUBSYSTEM_DEF(housing)
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "questnoti"
 
+	var/save_flags = SAVE_OBJECTS | SAVE_TURFS | SAVE_AREAS | SAVE_OBJECT_PROPERTIES | SAVE_UUID_STASIS | SAVE_ITEMS | SAVE_WHITELIST
+	var/load_flags
+
 	var/obj/effect/landmark/house_spot/linked_property
+
+/obj/structure/sign/property_sign/wilderness
+	var/save_flags = SAVE_OBJECTS | SAVE_TURFS | SAVE_AREAS | SAVE_OBJECT_PROPERTIES | SAVE_UUID_STASIS | SAVE_ITEMS | SAVE_WHITELIST | SAVE_ITEMS_WEAPON
+	var/load_flags = LOAD_SALVAGE
 
 /obj/structure/sign/property_sign/proc/setup_property_link(obj/effect/landmark/house_spot/property)
 	linked_property = property
@@ -515,7 +525,7 @@ SUBSYSTEM_DEF(housing)
 		to_chat(user, span_warning("Someone entered the area!"))
 		return
 
-	if(SShousing.claim_temporary(linked_property, user, selected_slot))
+	if(SShousing.claim_temporary(linked_property, user, selected_slot, load_flags))
 		claimed = TRUE
 		name = "Claimed Property (Slot [selected_slot])"
 		desc = "Click to save your current design to slot [selected_slot]."
@@ -536,7 +546,7 @@ SUBSYSTEM_DEF(housing)
 	if(confirm != "Yes")
 		return
 
-	if(SShousing.save_property(linked_property, user.ckey, slot))
+	if(SShousing.save_property(linked_property, user.ckey, slot, save_flags))
 		to_chat(user, span_notice("Property saved successfully to slot [slot]!"))
 	else
 		to_chat(user, span_warning("Failed to save property!"))
@@ -602,7 +612,7 @@ SUBSYSTEM_DEF(housing)
 	if(confirm != "Yes")
 		return
 
-	if(SShousing.purchase_property(linked_property, user, selected_slot))
+	if(SShousing.purchase_property(linked_property, user, selected_slot, load_flags))
 		to_chat(user, span_notice("Property purchased successfully with design slot [selected_slot]!"))
 		qdel(src)
 	else
