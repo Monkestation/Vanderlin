@@ -260,7 +260,7 @@
 			if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
 				to_chat(user, span_warning("BLEH! [src] tastes of SILVER! My gift cannot take hold."))
 			else
-				open_wound.werewolf_infect_attempt()
+				affecting.last_injury.werewolf_infect_attempt()
 				if(prob(30))
 					H.werewolf_feed(src)
 		if(IS_DEADITE(user) && !IS_DEADITE(src))
