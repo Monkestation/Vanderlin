@@ -244,6 +244,9 @@ GLOBAL_LIST_EMPTY(save_whitelist)
 	//Clothing, there is a check to not allow armor further down in the code
 	list += typesof(/obj/item/clothing)
 	list -= typesof(/obj/item/clothing/head/helmet) //due to most of them lacking armor class
+	list += typesof(/obj/item/storage/backpack/)
+	list -= typesof(/obj/item/storage/backpack/satchel/surgbag)
+	list -= typesof(/obj/item/storage/backpack/backpack/artibackpack)
 	return list
 
 /**
