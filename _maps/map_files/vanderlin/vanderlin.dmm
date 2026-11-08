@@ -49550,7 +49550,7 @@
 	pixel_y = 10;
 	pixel_x = 1
 	},
-/obj/structure/fluff/clutter/tablecloth/moon{
+/obj/item/tablecloth/moon{
 	layer = 2.8
 	},
 /turf/open/floor/churchmarble/gold,

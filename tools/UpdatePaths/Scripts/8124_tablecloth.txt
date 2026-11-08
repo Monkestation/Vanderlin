@@ -1,0 +1,3 @@
+/obj/structure/fluff/clutter/tablecloth/moon : /obj/item/tablecloth/moon{@OLD}
+
+/obj/structure/fluff/clutter/tablecloth/moon : /obj/item/tablecloth/sun{@OLD}
