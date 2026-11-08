@@ -844,7 +844,7 @@
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/magic/holy = list(50, 60),
-		/datum/attribute/skill/combat/polearms = list(20, 60)
+		/datum/attribute/skill/combat/polearms/staves = list(20, 60)
 	)
 
 /datum/special_trait/chosen
@@ -926,7 +926,7 @@
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/magic/blood = list(30, 40),
-		/datum/attribute/skill/combat/polearms = list(20, 40)
+		/datum/attribute/skill/combat/polearms/staves = list(20, 40)
 	)
 
 /datum/special_trait/dark_secrets

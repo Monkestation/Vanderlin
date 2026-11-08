@@ -35,6 +35,7 @@
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/combat/polearms/staves = 40,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/medicine = 30,
