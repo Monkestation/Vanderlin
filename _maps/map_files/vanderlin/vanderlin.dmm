@@ -12969,15 +12969,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/tile,
 /area/indoors/town/keep/courtagent)
-"eXz" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/turf/open/floor/cobble,
-/area/indoors/town/keep/basement)
 "eXT" = (
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/wood,
@@ -23028,6 +23019,7 @@
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/reagent_containers/food/snacks/hardtack,
+/obj/item/reagent_containers/food/snacks/produce/coffeebeansroasted,
 /turf/open/floor/herringbone,
 /area/indoors/town/keep/knight)
 "iXo" = (
@@ -79273,7 +79265,7 @@ uRF
 lXv
 olj
 kZq
-eXz
+piZ
 cBr
 twI
 qFz
@@ -81493,7 +81485,7 @@ wxY
 wxY
 wxY
 kZq
-ujy
+wxY
 kKi
 mlq
 uKh
