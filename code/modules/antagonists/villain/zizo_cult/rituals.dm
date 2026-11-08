@@ -164,6 +164,7 @@
 		to_chat(user, SPAN_GOD_ZIZO("The ritual requires a parchment with a name."))
 		return FALSE
 	return TRUE
+
 /datum/ritual/darksunmark/invoke(mob/living/user, turf/center)
 	var/obj/item/paper/P = locate() in center.contents
 	var/paper_name = STRIP_HTML_FULL(P.info, MAX_NAME_LEN)
@@ -183,9 +184,8 @@
 			var/obj/item/weapon/knife/dagger/steel/inhumen/profane/dagger = locate() in HL.get_all_gear()
 			if(dagger)
 				to_chat(HL, "profane dagger whispers, <span class='danger'>\"The terrible Zizo has called for our aid. Hunt and strike down our common foe, [paper_name]!\"</span>")
-	if(!target || !assassin_found)
-		to_chat(user, span_warning("There has been no answer to your call to the Dark Sun. It seems his servants are far from here..."))
-		return
+	if(!assassin_found)
+		to_chat(user, span_warning("There has been no immediate answer to your call to the Dark Sun..."))
 	if(!target.get_quirk(/datum/quirk/vice/hunted))
 		target.add_quirk(/datum/quirk/vice/hunted)
 		var/datum/quirk/vice/hunted/quirk = target.get_quirk(/datum/quirk/vice/hunted)
@@ -193,7 +193,7 @@
 		quirk.customization_value = "Marked for death by the terrible Zizo."
 		to_chat(user, span_warning("Your target has been marked, your profane call answered by the Dark Sun. [target.real_name] will surely perish!"))
 		to_chat(target, span_warningbig("My hair stands on end. Has someone just said my name? I should watch my back."))
-		log_hunted("[key_name(target)] playing as [target] had the hunted flaw by Zizoid curse.")
+		log_hunted("[key_name(target)] playing as [target] had the hunted flaw by Zizoid curse sent by [key_name(user)] ([user.real_name]).")
 	else
 		to_chat(user, span_warning("Your target is already hunted by the Dark Sun's assassins."))
 	qdel(P)
