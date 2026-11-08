@@ -437,8 +437,8 @@ SUBSYSTEM_DEF(housing)
 	var/obj/effect/landmark/house_spot/linked_property
 
 /obj/structure/sign/property_sign/wilderness
-	var/save_flags = SAVE_OBJECTS | SAVE_TURFS | SAVE_AREAS | SAVE_OBJECT_PROPERTIES | SAVE_UUID_STASIS | SAVE_ITEMS | SAVE_WHITELIST | SAVE_ITEMS_WEAPON
-	var/load_flags = LOAD_SALVAGE
+	save_flags = SAVE_OBJECTS | SAVE_TURFS | SAVE_AREAS | SAVE_OBJECT_PROPERTIES | SAVE_UUID_STASIS | SAVE_ITEMS | SAVE_WHITELIST | SAVE_ITEMS_WEAPON
+	load_flags = LOAD_SALVAGE
 
 /obj/structure/sign/property_sign/proc/setup_property_link(obj/effect/landmark/house_spot/property)
 	linked_property = property
