@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	// New variables for clan selection
 	var/clan_selected = FALSE
 	var/custom_clan_name = ""
-	var/list/selected_covens = list("Bloodheal" = /datum/coven/bloodheal)
+	var/list/selected_covens = list()
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
 	antag_flags = FLAG_ANTAG_CAP_TEAM
@@ -142,15 +142,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	show_coven_selection(vampdude)
 
 /datum/antagonist/vampire/proc/show_coven_selection(mob/living/carbon/human/vampdude)
+	selected_covens += /datum/coven/bloodheal
 	var/list/coven_options = list()
-	var/list/available_covens = list()
 
 	// Get all available covens
 	for(var/coven_type in subtypesof(/datum/coven))
 		var/datum/coven/temp_coven = new coven_type
 		// Only show covens that aren't clan-restricted or can be used by custom clans
 		if(!temp_coven.clan_restricted && !istype(temp_coven, /datum/coven/bloodheal))
-			available_covens += coven_type
 			coven_options[temp_coven.name] = coven_type
 		qdel(temp_coven)
 
