@@ -17,7 +17,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	// New variables for clan selection
 	var/clan_selected = FALSE
 	var/custom_clan_name = ""
-	var/list/selected_covens = list()
+	var/list/selected_covens = list("Bloodheal" = /datum/coven/bloodheal)
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
 	antag_flags = FLAG_ANTAG_CAP_TEAM
@@ -149,7 +149,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	for(var/coven_type in subtypesof(/datum/coven))
 		var/datum/coven/temp_coven = new coven_type
 		// Only show covens that aren't clan-restricted or can be used by custom clans
-		if(!temp_coven.clan_restricted)
+		if(!temp_coven.clan_restricted && !istype(temp_coven, /datum/coven/bloodheal))
 			available_covens += coven_type
 			coven_options[temp_coven.name] = coven_type
 		qdel(temp_coven)
@@ -158,10 +158,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		to_chat(vampdude, span_warning("No covens available for selection."))
 		finalize_custom_clan(vampdude)
 		return
-
-	// Forces first coven to be bloodheal (seen too much newbies not pick it)
-	selected_covens += coven_options["Bloodheal"]
-	coven_options -= "Bloodheal"
 
 	// Select second coven
 	if(length(coven_options))
