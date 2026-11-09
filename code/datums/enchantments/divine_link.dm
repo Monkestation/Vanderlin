@@ -37,3 +37,13 @@
 	if(!carbon.cleric)
 		return
 	carbon.cleric.update_devotion(2)
+
+
+/datum/enchantment/divine_link/wilds
+	enchantment_name = "Woodland Link"
+	examine_text = "You can feel the The Wilds closer then ever before."
+	enchantment_color = "#78b157"
+	essence_recipe = list(
+		/datum/thaumaturgical_essence/life = 50,
+		/datum/thaumaturgical_essence/magic = 10,
+	)

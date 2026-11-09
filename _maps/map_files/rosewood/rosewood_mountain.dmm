@@ -1164,7 +1164,7 @@
 /turf/open/floor/dirt,
 /area/under/mountains/anvil/dungeon)
 "iS" = (
-/obj/structure/dungeon_entry/center,
+/obj/structure/waystone,
 /turf/open/floor/grass/cold,
 /area/under/mountains/anvil/upper)
 "iT" = (

@@ -514,7 +514,7 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			   /datum/antagonist/zizocultist, /datum/antagonist/zizocultist/leader,
 			   /datum/antagonist/werewolf, /datum/antagonist/werewolf/lesser,
 			   /datum/antagonist/vampire, /datum/antagonist/vampire/lord, /datum/antagonist/vampire/lords_spawn,
-			   /datum/antagonist/vampire/lord/daewalker, /datum/antagonist/vampire/lord/nitewalker)
+			   /datum/antagonist/vampire/lord/daewalker, /datum/antagonist/vampire/lord/nitewarden)
 				is_correct = TRUE
 				break
 
@@ -524,7 +524,8 @@ GLOBAL_LIST_EMPTY(letters_sent)
 			if(/datum/patron/inhumen/matthios, /datum/patron/inhumen/zizo, /datum/patron/inhumen/graggar,
 			   /datum/patron/inhumen/baotha, /datum/patron/godless/godless, /datum/patron/godless/autotheist,
 			   /datum/patron/godless/defiant, /datum/patron/godless/dystheist, /datum/patron/godless/rashan,
-			   /datum/patron/godless/galadros)
+			   /datum/patron/godless/galadros, /datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon,
+			   /datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/leviathan)
 				is_correct = TRUE
 
 	// Check excommunication

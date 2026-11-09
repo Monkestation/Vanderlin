@@ -27,4 +27,3 @@
 	name = "Status"
 	desc = ""
 	icon_state = "status"
-	alert_group = ALERT_DEBUFF

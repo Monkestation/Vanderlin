@@ -1,8 +1,9 @@
 /datum/job/squire
 	title = JOB_SQUIRE
+	alt_titles = list("Page", "Cadet", "Rookie")
 	tutorial = "You've always had greater aspirations than the simple life of a peasant. \n\
 	You and your friends practiced the basics, swordfighting with sticks and loosing arrows into hay bale targets. \n\
-	The Captain took notice of your potential, and recruited you as a personal ward. \
+	Someone of the garrison took notice of your potential, and you were taken into the castle as a ward. \
 	\n\n\
 	Learn from the garrison and train hard... maybe one dae you will be honored with knighthood."
 	department_flag = APPRENTICES
@@ -16,7 +17,6 @@
 	known_by_the_town = TRUE
 	jobs_i_always_know = KNOW_COURT_LIST
 	jobs_always_know_me = KNOW_COURT_AGENT_LIST
-	bypass_lastclass = TRUE
 	selection_color = "#304529"
 	advclass_cat_rolls = list(CTAG_SQUIRE = 20)
 	can_have_apprentices = FALSE
@@ -24,7 +24,8 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatManAtArms.ogg'
 	exp_types_granted = list(EXP_TYPE_GARRISON)
 
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_NO_KOBOLD
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
 
 	outfit = /datum/outfit/squire
@@ -45,15 +46,13 @@
 
 /datum/job/advclass/squire
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_NO_KOBOLD
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted = list(EXP_TYPE_GARRISON)
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 
 /datum/attribute_holder/sheet/job/squire/lancer
 	raw_attribute_list = list(
-		STAT_SPEED = -1,
-
 		/datum/attribute/skill/combat/axesmaces = 10,
 		/datum/attribute/skill/combat/crossbows = 10,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -63,7 +62,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
@@ -71,10 +70,7 @@
 
 /datum/attribute_holder/sheet/job/squire/lancer/adult
 	raw_attribute_list = list(
-		STAT_SPEED = -1,
-		STAT_STRENGTH = -1,
-		STAT_CONSTITUTION = -1,
-
+		STAT_ENDURANCE = 1,
 		/datum/attribute/skill/combat/axesmaces = 10,
 		/datum/attribute/skill/combat/crossbows = 10,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -84,7 +80,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
@@ -122,8 +118,6 @@
 
 /datum/attribute_holder/sheet/job/squire/footman
 	raw_attribute_list = list(
-		STAT_SPEED = -1,
-
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -133,17 +127,14 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
 	)
 
 /datum/attribute_holder/sheet/job/squire/footman/adult
 	raw_attribute_list = list(
-		STAT_SPEED = -1,
-		STAT_STRENGTH = -1,
-		STAT_CONSTITUTION = -1,
-
+		STAT_CONSTITUTION = 1,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
@@ -153,7 +144,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
 	)
@@ -189,9 +180,6 @@
 
 /datum/attribute_holder/sheet/job/squire/skirmisher
 	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
-		STAT_CONSTITUTION = -1,
-
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/combat/crossbows = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -201,7 +189,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10
@@ -209,10 +197,7 @@
 
 /datum/attribute_holder/sheet/job/squire/skirmisher/adult
 	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
-		STAT_CONSTITUTION = -1,
-		STAT_SPEED = -1,
-
+		STAT_PERCEPTION = 1,
 		/datum/attribute/skill/combat/bows = 20,
 		/datum/attribute/skill/combat/crossbows = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -222,7 +207,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/craft/armorsmithing = 10

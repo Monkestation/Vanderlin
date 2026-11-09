@@ -78,6 +78,7 @@
 		if(A)
 			A?.attached_effect = src //so the alert can reference us, if it needs to
 			linked_alert = A //so we can reference the alert, if we need to
+			A.after_attach()
 
 	if((duration == STATUS_EFFECT_PERMANENT) && (tick_interval == STATUS_EFFECT_NO_TICK)) //don't process if we don't care
 		return TRUE
@@ -253,3 +254,6 @@
 /atom/movable/screen/alert/status_effect/Destroy()
 	attached_effect = null
 	return ..()
+
+/atom/movable/screen/alert/status_effect/proc/after_attach()
+	return

@@ -13,7 +13,7 @@
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/combat/shields = 35,
 		/datum/attribute/skill/misc/medicine = 10
 	)

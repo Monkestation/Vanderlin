@@ -16,7 +16,7 @@
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/misc/swimming = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/craft/cooking = 10,
@@ -88,7 +88,7 @@
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/athletics = 10,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/lockpicking = 20,
@@ -128,7 +128,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/migrant/mig_guard

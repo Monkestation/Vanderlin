@@ -116,10 +116,3 @@
 	ui_category = "Accessories"
 	triumph_cost_permanent = 300
 	loadout_flags = LOADOUT_FLAG_NO_RENT
-
-/datum/loadout_item/puffer
-	name = "\"Puffer\""
-	item_path = /obj/item/gun/ballistic/powder/wheellock/puffer
-	ui_category = "Accessories"
-	triumph_cost_permanent = 100000 //this is straigrght up not feasible to get in a season lol
-	loadout_flags = LOADOUT_FLAG_NO_RENT

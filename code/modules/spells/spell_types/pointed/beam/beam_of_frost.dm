@@ -4,6 +4,7 @@
 	button_icon_state = "rayoffrost"
 
 	required_form = FORM_ICE
+	associated_skill = /datum/attribute/skill/magic/arcane/ice
 	required_technique = TECHNIQUE_DESTRUCTION
 
 	charge_time = 2.5 SECONDS

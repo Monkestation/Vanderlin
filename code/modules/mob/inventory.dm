@@ -380,10 +380,12 @@
 		obscured |= ITEM_SLOT_MOUTH
 	if(hidden_slots & HIDEGLOVES)
 		obscured |= ITEM_SLOT_GLOVES
-	if(hidden_slots & HIDEJUMPSUIT)
+		obscured |= ITEM_SLOT_RING
+	if(hidden_slots & HIDERING)
+		obscured |= ITEM_SLOT_RING
+	if(hidden_slots & HIDESHIRTPANTS)
 		obscured |= ITEM_SLOT_PANTS
-	if(hidden_slots & HIDESHOES)
-		obscured |= ITEM_SLOT_SHOES
+		obscured |= ITEM_SLOT_SHIRT
 	if(hidden_slots & HIDEBELT)
 		obscured |= ITEM_SLOT_BELT_R
 		obscured |= ITEM_SLOT_BELT_L

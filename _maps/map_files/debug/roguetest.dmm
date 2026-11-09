@@ -203,14 +203,7 @@
 /turf/open/floor/dirt,
 /area/outdoors)
 "aG" = (
-/obj/structure/flora/grass/bush{
-	pixel_x = 19
-	},
-/obj/structure/flora/grass/bush{
-	pixel_x = 7;
-	pixel_y = 6
-	},
-/turf/open/floor/dirt,
+/turf/open/openspace,
 /area/outdoors/mountains/decap)
 "aH" = (
 /obj/structure/table/wood{
@@ -231,10 +224,6 @@
 	pixel_x = 14
 	},
 /obj/structure/fluff/walldeco/vinez,
-/obj/structure/fluff/walldeco/vinez{
-	pixel_y = -29;
-	pixel_x = 9
-	},
 /turf/closed/mineral/random/med,
 /area/outdoors/mountains/decap)
 "aK" = (
@@ -1244,11 +1233,6 @@
 /obj/structure/flora/grass/bush{
 	pixel_x = 10
 	},
-/obj/structure/flora/grass/bush_meagre{
-	pixel_y = -5;
-	pixel_x = 24;
-	layer = 7
-	},
 /obj/structure/flora/grass/bush{
 	pixel_x = 24;
 	pixel_y = 5
@@ -1289,8 +1273,8 @@
 /turf/open/floor/church/gold,
 /area/indoors/town/keep)
 "hF" = (
-/obj/structure/dungeon_entry/center,
-/turf/open/floor/dirt,
+/obj/structure/dungeon_elevator,
+/turf/open/openspace,
 /area/outdoors/mountains/decap)
 "hJ" = (
 /obj/structure/fluff/railing/wood{
@@ -1369,6 +1353,10 @@
 	},
 /turf/open/floor/churchbrick,
 /area/indoors/town/keep)
+"js" = (
+/obj/structure/waystone,
+/turf/open/floor/grass/yel,
+/area/outdoors)
 "jt" = (
 /obj/structure/hotspring/border/three,
 /obj/machinery/light/fueled/torchholder/hotspring/standing{
@@ -1750,27 +1738,6 @@
 /obj/structure/table/wood/plain/alt,
 /turf/open/floor/church/gold,
 /area/indoors/town/keep)
-"rm" = (
-/obj/structure/flora/shroom_tree{
-	pixel_x = -36;
-	pixel_y = 3
-	},
-/obj/structure/flora/grass/bush_meagre{
-	pixel_y = -2;
-	pixel_x = -16;
-	layer = 7
-	},
-/obj/structure/flora/grass/bush_meagre{
-	pixel_y = -4;
-	pixel_x = -29;
-	layer = 7
-	},
-/obj/structure/flora/grass/bush{
-	pixel_x = -7;
-	pixel_y = 1
-	},
-/turf/open/floor/dirt,
-/area/outdoors/mountains/decap)
 "rJ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1
@@ -2882,6 +2849,7 @@
 /obj/structure/chair/hotspring_bench/left{
 	pixel_y = 12
 	},
+/obj/item/warpstone,
 /turf/open/floor/grass/yel,
 /area/outdoors)
 "Lr" = (
@@ -10529,7 +10497,7 @@ as
 yP
 qZ
 qZ
-co
+aG
 hF
 aL
 aL
@@ -10786,7 +10754,7 @@ as
 yP
 co
 aJ
-qZ
+aG
 aG
 ah
 bv
@@ -11044,7 +11012,7 @@ yP
 co
 co
 co
-rm
+bv
 bv
 bv
 bp
@@ -14898,7 +14866,7 @@ vD
 zg
 zg
 zg
-QN
+js
 Pm
 FN
 ky

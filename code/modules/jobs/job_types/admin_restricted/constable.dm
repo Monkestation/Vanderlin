@@ -12,7 +12,7 @@
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/combat/firearms = 40,

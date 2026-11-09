@@ -325,7 +325,7 @@
 	if(!check_rights())
 		return FALSE
 
-	var/category = input("Category") as null|anything in list("Ten", "Inhuman", "Special")
+	var/category = input("Category") as null|anything in list("Ten", "Inhuman", "Archdevil", "Special")
 	if(!category)
 		return FALSE
 
@@ -335,6 +335,8 @@
 			curse = input("Curse") as null|anything in TEN_CURSES
 		if("Inhuman")
 			curse = input("Curse") as null|anything in INHUMEN_CURSES
+		if("Archdevil")
+			curse = input("Curse") as null|anything in ARCHDEVIL_CURSES
 		if("Special")
 			curse = input("Curse") as null|anything in SPECIAL_CURSES
 
@@ -414,7 +416,12 @@
 			type = "map"
 		if("Custom")
 			type = "custom"
-	SSvote.initiate_vote(type, usr.key)
+	var/broadcast = tgui_input_list(usr, "Force popup?", "Force Popup", list("Yes", "No"))
+	if(broadcast == "Yes")
+		broadcast = TRUE
+	else
+		broadcast = FALSE
+	SSvote.initiate_vote(type, usr.key, broadcast)
 
 /datum/admins/proc/adjusttriumphs(mob/living/M in GLOB.mob_list)
 	set name = "Adjust Triumphs"

@@ -16,8 +16,8 @@
 	current_blood = 2.5
 	blood_req = 0.25
 	oxygen_req = 0.5
-	nutriment_req = 0.075
-	hydration_req = 0.075
+	nutriment_req = 0.002
+	hydration_req = 0.002
 
 	low_threshold_passed = span_info("My ears begin to resonate with an internal ring sometimes.")
 	now_failing = span_warning("I am unable to hear at all!")
@@ -66,7 +66,7 @@
 ///Adjust the temporary deafness of the person, up or down
 /obj/item/organ/ears/proc/adjust_temporary_deafness(amount)
 	// organ failure makes us permanently deafened. Also, doesn't do anything if not in someone or during godmode
-	if(amount > 0 && owner && (owner.status_flags & GODMODE))
+	if(amount > 0 && owner && HAS_TRAIT(owner, TRAIT_GODMODE))
 		return
 
 	temporary_deafness = max(temporary_deafness + amount * damage_multiplier, 0)

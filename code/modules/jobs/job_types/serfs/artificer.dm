@@ -6,8 +6,9 @@
 		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 1,
-		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/masonry = 30,
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/craft/engineering = 40,
@@ -17,8 +18,8 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/labor/mining = 20,
 		/datum/attribute/skill/craft/smelting = 40,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 		/datum/attribute/skill/craft/bombs = 30,
 	)
 
@@ -27,8 +28,9 @@
 		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = 2,
 		STAT_ENDURANCE = 1,
-		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/masonry = 30,
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/craft/engineering = 50,
@@ -38,8 +40,8 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/labor/mining = 20,
 		/datum/attribute/skill/craft/smelting = 40,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 		/datum/attribute/skill/craft/bombs = 30,
 	)
 
@@ -56,7 +58,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ALL
 
 	outfit = /datum/outfit/artificer

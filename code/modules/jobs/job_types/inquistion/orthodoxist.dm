@@ -5,7 +5,6 @@
 	total_positions = 2 // TWO GOONS!!
 	spawn_positions = 2
 	allowed_races = list(SPEC_ID_HUMEN, SPEC_ID_DWARF)
-	bypass_lastclass = TRUE
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor2.ogg'
 	allowed_patrons = list(
 		/datum/patron/psydon
@@ -49,7 +48,7 @@
 	spawned.hud_used?.initialize_bloodpool()
 	spawned.hud_used?.bloodpool.set_fill_color("#dcdddb")
 	spawned.hud_used?.bloodpool?.name = "Psydon's Grace: [spawned.bloodpool]"
-	spawned.hud_used?.bloodpool?.desc = "Devotion: [spawned.bloodpool]/[spawned.maxbloodpool]"
+	spawned.hud_used?.bloodpool?.desc = "Grace: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
 	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
 

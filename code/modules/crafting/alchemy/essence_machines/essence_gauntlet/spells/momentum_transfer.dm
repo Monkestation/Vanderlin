@@ -110,4 +110,5 @@
 	spell_type = SPELL_MANA
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_ALTERATION

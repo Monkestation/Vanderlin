@@ -25,7 +25,9 @@
 /datum/species/goblin/hell/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	. = ..()
 	C.AddComponent(/datum/component/violent_death)
+	C.add_faction(FACTION_INFERNAL)
 
 /datum/species/goblin/hell/on_species_loss(mob/living/carbon/C)
 	. = ..()
 	qdel(C.GetComponent(/datum/component/violent_death))
+	C.remove_faction(FACTION_INFERNAL)

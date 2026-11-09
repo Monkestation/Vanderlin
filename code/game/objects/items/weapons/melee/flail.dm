@@ -2,7 +2,7 @@
 ==========================================================*/
 /obj/item/weapon/flail
 	name = "iron flail"
-	desc = "A sturdy handle affixed to a cruel spiked ball with a harrowing metal chain."
+	desc = "A sturdy handle, affixed to a cruel spiked ball with a harrowing metal chain."
 	icon_state = "iflail"
 	icon = 'icons/roguetown/weapons/32/whips_flails.dmi'
 	force = DAMAGE_NORMAL_FLAIL
@@ -17,7 +17,9 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/attribute/skill/combat/whipsflails
-	smeltresult = /obj/item/ingot/iron
+	melt_amount = 100
+	melting_material = /datum/material/iron
+	smeltresult = null
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
@@ -48,14 +50,14 @@
 //................ Militia Flail ............... //
 /obj/item/weapon/flail/militia
 	name = "militia flail"
-	desc = "A lucky hit from such a flail can squash a cheap helmet along with the wearer's skull."
+	desc = "A lucky hit from such a flail can squash a cheap helmet, along with the wearer's skull."
 	icon_state = "militiaflail"
 	item_weight = 1.5 KILOGRAMS
 
 //................ Wooden Flail ............... // Obsolete by the thresher? No smash so its bad
 /obj/item/weapon/flail/towner
 	name = "wooden flail"
-	desc = "During peacetime these flails are used to thresh wheat. During wartime - to chase off marauders."
+	desc = "During peacetime, these flails are used to thresh wheat. During wartime - to chase off marauders."
 	icon_state = "peasantflail"
 	force = DAMAGE_WEAK_FLAIL
 	possible_item_intents = list(MACE_WDSTRIKE)
@@ -73,7 +75,7 @@
 	icon_state = "flail"
 	force = DAMAGE_GOOD_FLAIL
 	smeltresult = null
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	sellprice = 35
 	item_weight = 1.4 KILOGRAMS
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_STEEL
@@ -83,13 +85,15 @@
 	desc = "An ancient knightly flail made of worked steel, with a flanged head. An effective and brutal design."
 	icon_state = "aflail"
 	item_weight = 1.4 KILOGRAMS
+	melting_material = /datum/material/steel
 
 /obj/item/weapon/flail/sflail/necraflail
 	name = "swift journey"
-	desc = "The striking head resembles Necra's original skull, striking true with a sculpted emblem of love and sacrifice. Perhaps one of the few Psydonic-designed emblems of The Ten left."
+	desc = "The striking head resembles Necra's original skull, striking true with a sculpted emblem of love and sacrifice. Perhaps one of the few Psydonic-designed emblems of the Ten left."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "necraflail"
 	item_weight = 1.4 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/necra
 
 //................ Silver Flail ............... //
 /obj/item/weapon/flail/silver
@@ -99,8 +103,7 @@
 	force = DAMAGE_GOOD_FLAIL - 1
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_SILVER
 	minstr = 4
-	smeltresult = null
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	sellprice = 90
 	item_weight = 1 KILOGRAMS
 
@@ -110,18 +113,21 @@
 
 /obj/item/weapon/flail/silver/noc
 	name = "lunar flail"
-	desc = "A shining silver flail, bane of all who lurk in the night and mounted with a crescent moon. Slice the nitebeasts apart."
+	desc = "A shining truesilver flail, bane of all who lurk in the night and mounted with a crescent moon. Slice the nitebeasts apart."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "moonflail"
 	sharpness = IS_SHARP
 	max_blade_int = 160
 	possible_item_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_LNGCUT)
 	wlength = WLENGTH_GREAT
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/noc
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_TRUESILVER
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
 	name = "psydonian flail"
-	desc = "A flail fashioned with the iconography of Psydon, and crafted entirely out of silver."
+	desc = "A flail fashioned with the iconography of Psydon, crafted entirely out of silver."
 	icon = 'icons/roguetown/weapons/32/psydonite.dmi'
 	icon_state = "psyflail"
 	force = DAMAGE_GOOD_FLAIL
@@ -150,25 +156,25 @@
 //................ Blacksteel Flail ............... //
 /obj/item/weapon/flail/blacksteel
 	name = "blacksteel flail"
-	desc = "An elegant flail of blacksteel. The heftsome weight makes it unmatched for driving back plate-armored opponents, so long as one \
+	desc = "An elegant flail of blacksteel. The hefty weight makes it unmatched for driving back plate-armored opponents, so long as one \
 	has the stamina to swing its alloyed chains around."
 	icon_state = "bs_flail"
 	force = DAMAGE_GOOD_FLAIL + 2
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLACKSTEEL
 	minstr = 4
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	sellprice = 120
 	item_weight = 1 KILOGRAMS
 
 //................ Bloodsteel Flail ............... //
 /obj/item/weapon/flail/bloodsteel
 	name = "bloodsteel flail"
-	desc = "A heavy carved bloodstone attached to a chain of red bloodsteel, built to crush even the strongest of armors."
+	desc = "A heavy, carved bloodstone attached to a chain of red bloodsteel, built to crush even the strongest of armor."
 	icon_state = "bs_flail"
 	force = DAMAGE_GOOD_FLAIL + 3
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLOODSTEEL
 	minstr = 5
-	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
 	sellprice = 0
 	item_weight = 1.2 KILOGRAMS
 
@@ -263,7 +269,6 @@
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_STEEL
 	slot_flags = ITEM_SLOT_BACK
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 250

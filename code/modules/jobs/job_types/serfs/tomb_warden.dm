@@ -22,11 +22,11 @@
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/swimming = 10,
-		/datum/attribute/skill/labor/mathematics = 25,
+		/datum/attribute/skill/educated/mathematics = 25,
 	)
 
 /datum/job/tomb_warden
@@ -53,7 +53,6 @@
 	give_bank_account = 20
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	bypass_lastclass = TRUE
 	selection_color = "#3b150e"
 
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/mercenary)

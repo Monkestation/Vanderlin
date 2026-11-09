@@ -6,6 +6,7 @@
 
 	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
+	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "May you find bliss through your pain."
 	invocation_type = INVOCATION_WHISPER
@@ -37,4 +38,5 @@
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE
 	spell_cost = 20
-	required_form = FORM_AIR
+	required_form = FORM_LIFE
+	associated_skill = /datum/attribute/skill/magic/arcane/life

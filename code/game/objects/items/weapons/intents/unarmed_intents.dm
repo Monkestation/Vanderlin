@@ -15,7 +15,7 @@
 	rmb_ranged = TRUE
 	candodge = TRUE
 	canparry = TRUE
-	blade_class = BCLASS_PUNCH
+	blade_class = BCLASS_BLUNT
 	miss_text = "swings a fist at the air!"
 	miss_sound = "punchwoosh"
 	item_damage_type = "blunt"

@@ -4,15 +4,17 @@
 		STAT_INTELLIGENCE = 3,
 		STAT_CONSTITUTION = 1,
 		STAT_ENDURANCE = 1,
+		STAT_SPEED = 1,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/labor/farming = 30,
 		/datum/attribute/skill/magic/druidic = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/sewing = 20
 	)
 
@@ -26,7 +28,6 @@
 	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)
 	allowed_ages = ALL_AGES_LIST
@@ -48,7 +49,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/bogwitch
 
-	spells = list(/datum/action/cooldown/spell/diagnose)
+	spells = list(/datum/action/cooldown/spell/diagnose/holy/hunt)
 
 	traits = list(
 		TRAIT_DEADNOSE,
@@ -118,7 +119,7 @@
 	shoes = /obj/item/clothing/shoes/boots/leather
 	pants = /obj/item/clothing/pants/trou/leather
 	gloves = /obj/item/clothing/gloves/leather
-	neck = /obj/item/clothing/neck/psycross/great_hunt
+	neck = /obj/item/clothing/neck/psycross/great_hunt/divine_link
 	backpack_contents = list(
 		/obj/item/scrying/eye/bogwitch = 1
 	)

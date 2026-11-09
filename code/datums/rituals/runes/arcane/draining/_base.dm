@@ -152,7 +152,7 @@
 			var/drain = min(pylon.mana_pool.amount, mana_cost * max(1, length(subscribers)))
 			pylon.mana_pool.adjust_mana(-drain)
 			var/turf/turf = get_turf(src)
-			turf.Beam(pylon, icon_state = "drain_life", time = loop_speed, override_target_pixel_y = 32)
+			turf.Beam(pylon, icon_state = "drain_mana", time = loop_speed, override_target_pixel_y = 32)
 			mana_found = TRUE
 			break
 

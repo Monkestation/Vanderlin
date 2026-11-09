@@ -373,6 +373,90 @@
 	category = "Structures"
 	skillcraft = /datum/attribute/skill/misc/sewing
 
+/datum/blueprint_recipe/structure/curtain/browncurtainold
+	name = "Old Brown Curtain"
+	desc = "Old brown curtains, moth-eaten and dusty."
+	result_type = /obj/structure/curtain/browncurtainold
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 2
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
+/datum/blueprint_recipe/structure/curtain/redcurtainold
+	name = "Old Red Curtain"
+	desc = "Old red curtains, moth-eaten and dusty."
+	result_type = /obj/structure/curtain/redcurtainold
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 2
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
+/datum/blueprint_recipe/structure/curtain/bluecurtainold
+	name = "Old Blue Curtain"
+	desc = "Old blue curtains, moth-eaten and dusty."
+	result_type = /obj/structure/curtain/bluecurtainold
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 2
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
+/datum/blueprint_recipe/structure/curtain/greencurtainold
+	name = "Old Green Curtain"
+	desc = "Old green curtains, moth-eaten and dusty."
+	result_type = /obj/structure/curtain/greencurtainold
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 2
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
+/datum/blueprint_recipe/structure/curtain/beigecurtainold
+	name = "Old Beige Curtain"
+	desc = "Old beige curtains, moth-eaten and dusty."
+	result_type = /obj/structure/curtain/beigecurtainold
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 2
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
+/datum/blueprint_recipe/structure/curtain/purplecurtainold
+	name = "Old Purple Curtain"
+	desc = "Old purple curtains, moth-eaten and dusty."
+	result_type = /obj/structure/curtain/purplecurtainold
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 2
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
+/datum/blueprint_recipe/structure/curtain/suncurtain
+	name = "Sun Curtain"
+	desc = "Curtains woven with warm hues to keep the cold out."
+	result_type = /obj/structure/curtain/suncurtain
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 2
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
 /datum/blueprint_recipe/structure/bed
 	name = "Bed"
 	desc = "A simple wooden bed with fiber bedding."
@@ -440,6 +524,17 @@
 	category = "Structures"
 	skillcraft = /datum/attribute/skill/misc/sewing
 
+/datum/blueprint_recipe/structure/sunrug
+	name = "Sug Rug"
+	desc = "A decorative rug depicting the sun."
+	result_type = /obj/structure/fluff/sunrug
+	required_materials = list(
+		/obj/item/natural/cloth = 3
+	)
+	construct_tool = /obj/item/needle
+	category = "Structures"
+	skillcraft = /datum/attribute/skill/misc/sewing
+
 /datum/blueprint_recipe/structure/fibermat/square
 	name = "Square Fiber Mat"
 	desc = "A rustic mat woven from fiber."
@@ -467,7 +562,8 @@
 	desc = "A few stacks of books with a pot of ink & quill waiting for inspiration."
 	result_type = /obj/structure/fluff/clutter/books
 	required_materials = list(
-		/obj/item/natural/fibers = 2
+		/obj/item/natural/fibers = 2,
+		/obj/item/natural/hide/cured = 1
 	)
 	category = "Structures"
 
@@ -480,12 +576,41 @@
 	)
 	category = "Structures"
 
+/datum/blueprint_recipe/structure/clutter/sewing
+	name = "Clutter (Sewing)"
+	desc = "A handful of fiber and cloth."
+	result_type = /obj/structure/fluff/clutter/sewing
+	required_materials = list(
+		/obj/item/natural/fibers = 1,
+		/obj/item/natural/cloth = 2,
+	)
+	category = "Structures"
+
+/datum/blueprint_recipe/structure/clutter/tablecloth/moon
+	name = "Clutter (Tablecloth, Moon)"
+	desc = "A decorative table cloth depicting the moon."
+	result_type = /obj/structure/fluff/clutter/tablecloth/moon
+	required_materials = list(
+		/obj/item/natural/cloth = 2
+	)
+	category = "Structures"
+
+/datum/blueprint_recipe/structure/clutter/tablecloth/sun
+	name = "Clutter (Tablecloth, Sun)"
+	desc = "A decorative table cloth depicting the sun."
+	result_type = /obj/structure/fluff/clutter/tablecloth/sun
+	required_materials = list(
+		/obj/item/natural/cloth = 2
+	)
+	category = "Structures"
+
 /datum/blueprint_recipe/structure/clutter/shrub/tundra
 	name = "potted shrub"
 	desc = "A stone pot with a cold tundra shrub there-in."
 	result_type = /obj/structure/fluff/clutter/shrub/tundra
 	required_materials = list(
-		/obj/item/natural/stone = 2
+		/obj/item/natural/stone = 2,
+		/obj/item/natural/clod/dirt
 	)
 	category = "Structures"
 
@@ -494,7 +619,8 @@
 	desc = "A stone pot with a red autumnal shrub there-in."
 	result_type = /obj/structure/fluff/clutter/shrub/red
 	required_materials = list(
-		/obj/item/natural/stone = 2
+		/obj/item/natural/stone = 2,
+		/obj/item/natural/clod/dirt
 	)
 	category = "Structures"
 
