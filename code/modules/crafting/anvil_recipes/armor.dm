@@ -155,6 +155,11 @@
 	created_item = /obj/item/clothing/pants/trou/leather/splint
 	output_amount = 2
 
+/datum/anvil_recipe/armor/iron/brigandine_chausses
+	name = "Brigandine Chausses"
+	additional_items = list(/obj/item/clothing/pants/trou/leather = 1)
+	created_item = /obj/item/clothing/pants/trou/leather/brigandine
+
 /datum/anvil_recipe/armor/iron/mailleboots
 	name = "Chainmail Boots"
 	additional_items = list(/obj/item/natural/hide/cured = 2)
@@ -243,6 +248,11 @@
 	name = "Iron Jack Chains"
 	created_item = /obj/item/clothing/wrists/bracers/ironjackchain
 	output_amount = 2
+
+/datum/anvil_recipe/armor/iron/brigandine_vambraces
+	name = "Brigandine Vambraces"
+	additional_items = list(/obj/item/clothing/wrists/bracers/leather = 1)
+	created_item = /obj/item/clothing/wrists/bracers/leather/brigandine
 
 /datum/anvil_recipe/armor/iron/ibracers
 	name = "Iron Plate Vambraces"
@@ -354,10 +364,6 @@
 	created_item = /obj/item/clothing/head/helmet/ironpot/lakkariancap
 	additional_items = list(/obj/item/ingot/gold = 1)
 
-/datum/anvil_recipe/armor/iron/nasal_helmet
-	name = "Nasal Helmet"
-	created_item = /obj/item/clothing/head/helmet/nasal
-
 /datum/anvil_recipe/armor/iron/skullcap
 	name = "Skullcap"
 	created_item = /obj/item/clothing/head/helmet/skullcap
@@ -382,9 +388,9 @@
 	created_item = /obj/item/clothing/head/helmet/visored/sallet/iron
 	craftdiff = 2
 
-/datum/anvil_recipe/armor/iron/eoran_sallet
+/datum/anvil_recipe/armor/steel/eoran_sallet
 	name = "Eoran Sallet"
-	additional_items = list(/obj/item/ingot/iron = 1)
+	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/clothing/head/helmet/sallet/eoran
 	craftdiff = 2
 
@@ -394,9 +400,9 @@
 	created_item = (/obj/item/clothing/head/helmet/visored/knight/iron)
 	craftdiff = 2
 
-/datum/anvil_recipe/armor/iron/owlhelmet
+/datum/anvil_recipe/armor/steel/owlhelmet
 	name = "Strigidae Armet"
-	additional_items = list(/obj/item/ingot/iron = 1)
+	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/clothing/head/helmet/visored/knight/owl
 	craftdiff = 2
 
@@ -424,7 +430,7 @@
 	craftdiff = 1
 
 /datum/anvil_recipe/armor/iron/town_watch_helmet_lt
-	name = "Town Watch Liutenant helmet"
+	name = "Town Watch Lieutenant helmet"
 	additional_items = list(/obj/item/natural/feather = 1)
 	created_item = /obj/item/clothing/head/helmet/watchmen/lt
 	craftdiff = 1
@@ -1059,7 +1065,7 @@
 
 /datum/anvil_recipe/armor/silver/armetowl
 	name = "Lunar Owl Armet"
-	additional_items = list(/obj/item/ingot/steel, /obj/item/ingot/steel)
+	additional_items = list(/obj/item/ingot/steel = 2)
 	created_item = /obj/item/clothing/head/helmet/visored/knight/owl/lunar
 
 /datum/anvil_recipe/armor/silver/plateleg
@@ -1235,12 +1241,47 @@
 	craftdiff = 5
 */
 
+// --------- BLOODSTEEL -----------
+/datum/anvil_recipe/armor/bloodsteel
+	required_material = /obj/item/ingot/bloodsteel
+	craftdiff = 6 // this is the good stuff
+	abstract_type = /datum/anvil_recipe/armor/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/chaincoif
+	name = "Bloodsteel Chain Coif"
+	created_item = /obj/item/clothing/neck/chaincoif/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/platechest
+	name = "Bloodsteel Plate Armor"
+	additional_items = list(/obj/item/ingot/bloodsteel = 3)
+	created_item = /obj/item/clothing/armor/plate/blkknight/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/platelegs
+	name = "Bloodsteel Plate Chausses"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/clothing/pants/platelegs/blk/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/helmet
+	name = "Bloodsteel Great Helm"
+	additional_items = list(/obj/item/ingot/bloodsteel = 1)
+	created_item = /obj/item/clothing/head/helmet/visored/blkknight/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/plategloves
+	name = "Bloodsteel Plate Gauntlets"
+	created_item = /obj/item/clothing/gloves/plate/blk/bloodsteel
+
+/datum/anvil_recipe/armor/bloodsteel/plateboots
+	name = "Bloodsteel Plate Boots"
+	created_item = /obj/item/clothing/shoes/boots/armor/blkknight/bloodsteel
+
+
+///////////////////////////////////////////////
+
 /datum/anvil_recipe/armor/anklets
 	name = "golden anklets"
 	required_material = /obj/item/ingot/gold
 	created_item = /obj/item/clothing/shoes/anklets
 	craftdiff = 2
-
 
 /datum/anvil_recipe/armor/grandmaster_plate
 	name = "holy silver plate"

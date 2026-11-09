@@ -13,6 +13,7 @@
 	cast_range = SPELL_RANGE_GROUND
 
 	required_form = FORM_ICE
+	associated_skill = /datum/attribute/skill/magic/arcane/ice
 	required_technique = TECHNIQUE_CREATION
 
 	invocation = "Gelu Fallax!"

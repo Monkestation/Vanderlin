@@ -76,6 +76,7 @@
 	sound = 'sound/magic/whiteflame.ogg'
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 
 	invocation = "Eldritch blast!"
 	invocation_type = INVOCATION_SHOUT

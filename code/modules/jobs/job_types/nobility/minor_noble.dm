@@ -6,13 +6,13 @@
 		STAT_INTELLIGENCE = 1,
 		STAT_SPEED = 1,
 		STAT_CONSTITUTION = 1,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/combat/bows = 20
 	)
 
@@ -42,7 +42,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 2
 	spawn_positions = 2
-	bypass_lastclass = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
 	jobs_i_always_know = KNOW_COURT_LIST
@@ -74,12 +73,13 @@
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/misc/athletics = 10,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/combat/bows = 20
 	)
 
@@ -121,8 +121,8 @@
 		STAT_CONSTITUTION = -2,
 		STAT_ENDURANCE = 1,
 		STAT_SPEED = -3,
-		/datum/attribute/skill/labor/mathematics = 60,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/mathematics = 60,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/combat/bows = 20
@@ -165,13 +165,14 @@
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/magic/arcane = 25,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sneaking = 25,
 		/datum/attribute/skill/misc/athletics = 25,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/combat/bows = 20
 	)
 
@@ -228,14 +229,15 @@
 		STAT_INTELLIGENCE = 3,
 		STAT_SPEED = 2,
 		/datum/attribute/skill/misc/music = 25,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/combat/bows = 20
 	)
 
@@ -268,13 +270,14 @@
 /datum/attribute_holder/sheet/job/vassal
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 1,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/combat/bows = 10
 	)
 

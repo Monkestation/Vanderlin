@@ -424,6 +424,89 @@
 	supports_directions = TRUE
 	craftdiff = 0
 
+/datum/blueprint_recipe/carpentry/wooden_table/round
+	name = "round wooden table"
+	desc = "A sturdy, round wooden table."
+	result_type = /obj/structure/table/wood/round
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1
+	)
+	supports_directions = TRUE
+	craftdiff = 0
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth
+	name = "brown draped table"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/cloth/brown
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1,
+		/obj/item/natural/cloth = 2
+	)
+	supports_directions = TRUE
+	craftdiff = 0
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/beige
+	name = "beige draped table"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/cloth/beige
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1,
+		/obj/item/natural/cloth = 2
+	)
+	supports_directions = TRUE
+	craftdiff = 0
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/red
+	name = "red draped table"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/cloth/red
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1,
+		/obj/item/natural/cloth = 2
+	)
+	supports_directions = TRUE
+	craftdiff = 0
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/blue
+	name = "blue draped table"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/cloth/blue
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1,
+		/obj/item/natural/cloth = 2
+	)
+	supports_directions = TRUE
+	craftdiff = 0
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/green
+	name = "green draped table"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/cloth/green
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1,
+		/obj/item/natural/cloth = 2
+	)
+	supports_directions = TRUE
+	craftdiff = 0
+
+/datum/blueprint_recipe/carpentry/wooden_table/cloth/purple
+	name = "purple draped table"
+	desc = "A sturdy wooden table draped in cloth."
+	result_type = /obj/structure/table/wood/cloth/purple
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 2,
+		/obj/item/natural/wood/plank = 1,
+		/obj/item/natural/cloth = 2
+	)
+	supports_directions = TRUE
+	craftdiff = 0
+
 /datum/blueprint_recipe/carpentry/pillory
 	name = "pillory"
 	desc = "A restraining device for punishment."

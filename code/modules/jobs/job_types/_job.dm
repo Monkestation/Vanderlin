@@ -148,7 +148,8 @@
 	var/banned_leprosy = TRUE
 	var/banned_lunatic = TRUE
 
-	var/bypass_lastclass = FALSE
+	/// Whether or not this class prevents you playing it two rounds in a row.
+	var/block_sequential_rounds = FALSE
 
 	var/give_bank_account = FALSE
 

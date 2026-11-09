@@ -67,4 +67,4 @@
 	misscost = 0
 	no_attack = TRUE
 	releasedrain = 0
-	blade_class = BCLASS_PUNCH
+	blade_class = BCLASS_BLUNT

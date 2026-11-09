@@ -6,10 +6,9 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_CITYWATCHMEN
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_GARRISON)
 	total_positions = 8
 	spawn_positions = 8
-	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_ADULT, AGE_MIDDLEAGED, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
@@ -44,7 +43,7 @@
 
 /datum/job/advclass/garrison
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_GARRISON)
 
 /mob/proc/haltyell()
 	set name = "HALT!"
@@ -101,7 +100,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/sneaking = 10,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/shields = list(30, 30),
@@ -164,7 +163,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/sneaking = 10,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/polearms = list(30, 30),
@@ -224,7 +223,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/bows = list(30, 30),

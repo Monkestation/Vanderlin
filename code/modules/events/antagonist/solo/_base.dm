@@ -25,6 +25,8 @@
 	)
 	/// Can this trigger mid round? Backup cover for latest_start
 	var/can_call_midround = FALSE
+	///what world traits we explicitly do not run with
+	var/list/blocked_world_traits = list(/datum/world_trait/wyrmwood)
 
 /datum/round_event_control/antagonist/solo/from_ghosts/get_candidates()
 	var/round_started = SSticker.HasRoundStarted()
@@ -37,6 +39,11 @@
 	. = ..()
 	if(!.)
 		return
+	if(length(blocked_world_traits))
+		for(var/trait in blocked_world_traits)
+			if(has_world_trait(trait))
+				return FALSE
+
 	var/antag_amt = get_antag_amount()
 	var/list/candidates = get_candidates()
 	if(length(candidates) < antag_amt)

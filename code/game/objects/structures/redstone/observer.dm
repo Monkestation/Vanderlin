@@ -1,103 +1,82 @@
-
 /obj/structure/redstone/observer
 	name = "redstone observer"
-	desc = "Detects changes in the block it's observing and emits a redstone pulse."
-	icon_state = "comparator"
-	redstone_role = REDSTONE_ROLE_SOURCE
-	var/turf/observing_turf
-	var/last_observed_state
-	var/pulse_length = 2
-	var/pulsing = FALSE
-	can_connect_wires = TRUE
+	desc = "Watches the tile in front of it. Pulses when a matching item enters, or when a container on that tile gains or loses one."
+	icon_state = "observer"
+	is_source = TRUE
+	/// Types this observer reacts to. Empty = react to anything.
+	var/list/filter_types = list()
+	var/turf/watched_turf
+	var/pulse_time = 3
 
-/obj/structure/redstone/observer/Initialize()
+/obj/structure/redstone/observer/Initialize(mapload)
 	. = ..()
-	update_observing_turf()
-	register_observation_signals()
-	update_appearance(UPDATE_ICON_STATE)
+	watch_turf(get_step(src, dir))
 
 /obj/structure/redstone/observer/Destroy()
-	unregister_observation_signals()
+	unwatch_turf()
 	return ..()
 
-/obj/structure/redstone/observer/get_source_power()
-	return pulsing ? 15 : 0
+//we use overlays
+/obj/structure/redstone/observer/update_power_color()
+	return
 
-/obj/structure/redstone/observer/get_output_directions()
-	return list(REVERSE_DIR(dir))
-
-/obj/structure/redstone/observer/can_connect_to(obj/structure/redstone/other, dir)
-	return (dir == REVERSE_DIR(dir))
-
-/obj/structure/redstone/observer/can_receive_from(obj/structure/redstone/source, direction)
-	return FALSE
-
-/obj/structure/redstone/observer/proc/update_observing_turf()
-	unregister_observation_signals()
-	observing_turf = get_step(src, dir)
-	last_observed_state = get_turf_state(observing_turf)
-
-/obj/structure/redstone/observer/proc/register_observation_signals()
-	if(!observing_turf)
-		return
-	RegisterSignal(observing_turf, COMSIG_TURF_CHANGE, PROC_REF(on_observed_change))
-	RegisterSignal(observing_turf, COMSIG_TURF_ENTERED, PROC_REF(on_observed_change))
-	RegisterSignal(observing_turf, COMSIG_ATOM_EXITED, PROC_REF(on_observed_change))
-
-/obj/structure/redstone/observer/proc/unregister_observation_signals()
-	if(!observing_turf)
-		return
-	UnregisterSignal(observing_turf, list(COMSIG_TURF_CHANGE, COMSIG_ATOM_ENTERED, COMSIG_ATOM_EXITED))
-
-/obj/structure/redstone/observer/proc/get_turf_state(turf/T)
-	if(!T)
-		return null
-	var/list/state = list()
-	state["turf_type"] = T.type
-	state["objects"] = list()
-	for(var/obj/O in T)
-		state["objects"] += O.type
-	return state
-
-/obj/structure/redstone/observer/proc/on_observed_change()
-	SIGNAL_HANDLER
-	if(pulsing)
-		return
-	var/current_state = get_turf_state(observing_turf)
-	if(!compare_states(last_observed_state, current_state))
-		emit_pulse()
-		last_observed_state = current_state
-
-/obj/structure/redstone/observer/proc/compare_states(list/state1, list/state2)
-	if(!state1 || !state2)
-		return FALSE
-	if(state1["turf_type"] != state2["turf_type"])
-		return FALSE
-	if(length(state1["objects"]) != length(state2["objects"]))
-		return FALSE
-	return TRUE
-
-/obj/structure/redstone/observer/proc/emit_pulse()
-	pulsing = TRUE
-	power_level = 15
-	schedule_network_update()
-	update_appearance(UPDATE_ICON_STATE)
-
-	spawn(pulse_length * 10)
-		pulsing = FALSE
-		power_level = 0
-		schedule_network_update()
-		update_appearance(UPDATE_ICON_STATE)
-
-/obj/structure/redstone/observer/update_icon_state()
+/obj/structure/redstone/observer/update_overlays()
 	. = ..()
-	icon_state = pulsing ? "comparator_pulse" : "comparator"
+	. += powered_overlay("eyes_front")
 
-/obj/structure/redstone/observer/AltClick(mob/user, list/modifiers)
-	if(!Adjacent(user))
+/obj/structure/redstone/observer/get_output_toward(atom/asker)
+	if(!power)
+		return 0
+	var/dir_to_asker = get_dir(src, asker)
+	if(dir_to_asker != REVERSE_DIR(dir))
+		return 0
+	return power
+
+/obj/structure/redstone/observer/setDir(newdir)
+	var/old_dir = dir
+	. = ..()
+	if(old_dir == dir)
 		return
-	dir = turn(dir, 90)
-	update_observing_turf()
-	register_observation_signals()
-	update_appearance(UPDATE_ICON_STATE)
-	to_chat(user, "<span class='notice'>You rotate the [name].</span>")
+	watch_turf(get_step(src, dir))
+
+/obj/structure/redstone/observer/proc/watch_turf(turf/new_turf)
+	unwatch_turf()
+	watched_turf = new_turf
+	if(!watched_turf)
+		return
+	RegisterSignals(watched_turf, list(
+		COMSIG_ATOM_ENTERED,
+		COMSIG_STORAGE_TURF_INSERTED,
+		COMSIG_STORAGE_TURF_REMOVED,
+	), PROC_REF(on_watched_change))
+
+/obj/structure/redstone/observer/proc/unwatch_turf()
+	if(!watched_turf)
+		return
+	UnregisterSignal(watched_turf, list(
+		COMSIG_ATOM_ENTERED,
+		COMSIG_STORAGE_TURF_INSERTED,
+		COMSIG_STORAGE_TURF_REMOVED,
+	))
+	watched_turf = null
+
+/obj/structure/redstone/observer/proc/on_watched_change(datum/source, atom/movable/thing)
+	SIGNAL_HANDLER
+	check_match(thing)
+
+/obj/structure/redstone/observer/proc/check_match(atom/movable/thing)
+	if(QDELETED(thing))
+		return
+	if(length(filter_types))
+		var/matched = FALSE
+		for(var/filter_type in filter_types)
+			if(istype(thing, filter_type))
+				matched = TRUE
+				break
+		if(!matched)
+			return
+	pulse()
+
+/obj/structure/redstone/observer/proc/pulse()
+	set_power(max_power)
+	addtimer(CALLBACK(src, PROC_REF(set_power), 0), pulse_time)

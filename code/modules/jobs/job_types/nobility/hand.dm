@@ -9,11 +9,10 @@
 	department_flag = NOBLEMEN
 	display_order = JDO_HAND
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 	total_positions = 1
 	spawn_positions = 1
 	spells = list(/datum/action/cooldown/spell/undirected/list_target/grant_title)
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_ROYALTY
 	outfit = /datum/outfit/hand
 	advclass_cat_rolls = list(CTAG_HAND = 20)
@@ -91,7 +90,7 @@
 
 /datum/job/advclass/hand
 	exp_types_granted = list(EXP_TYPE_NOBLE, EXP_TYPE_LEADERSHIP)
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 
 /datum/attribute_holder/sheet/job/hand
 	raw_attribute_list = list(
@@ -107,9 +106,9 @@
 		/datum/attribute/skill/misc/lockpicking = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/hand/hand
@@ -159,12 +158,12 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 60,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sneaking = 50,
 		/datum/attribute/skill/misc/stealing = 50,
 		/datum/attribute/skill/misc/lockpicking = 50,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/hand/spymaster
@@ -222,12 +221,12 @@
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/misc/medicine = 40,
 		/datum/attribute/skill/misc/lockpicking = 40,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/attribute_holder/sheet/job/advisor/old
@@ -243,12 +242,12 @@
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/misc/medicine = 40,
 		/datum/attribute/skill/misc/lockpicking = 40,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/hand/advisor
@@ -298,7 +297,7 @@
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/labor/taming = 40,
 		/datum/attribute/skill/misc/medicine = 20,
@@ -308,7 +307,7 @@
 		/datum/attribute/skill/misc/sewing = 15,
 		/datum/attribute/skill/craft/traps = 40,
 		/datum/attribute/skill/craft/crafting = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/attribute_holder/sheet/job/huntsmaster/old
@@ -329,7 +328,7 @@
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 50,
 		/datum/attribute/skill/labor/taming = 50,
 		/datum/attribute/skill/misc/medicine = 30,
@@ -339,7 +338,7 @@
 		/datum/attribute/skill/misc/sewing = 25,
 		/datum/attribute/skill/craft/traps = 50,
 		/datum/attribute/skill/craft/crafting = 40,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/hand/huntsmaster

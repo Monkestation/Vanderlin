@@ -10,6 +10,7 @@
 	self_cast_possible = TRUE
 
 	required_form = FORM_LIGHTNING
+	associated_skill = /datum/attribute/skill/magic/arcane/lightning
 
 	invocation = "Desperta ferro!"
 	invocation_type = INVOCATION_SHOUT

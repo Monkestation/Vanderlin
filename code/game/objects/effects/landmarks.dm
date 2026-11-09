@@ -418,14 +418,14 @@ INITIALIZE_IMMEDIATE(/obj/effect/landmark)
 
 /obj/effect/landmark/start/forestguard
 	name = JOB_FOREST_GUARD
-	jobs_to_spawn = list(JOB_FOREST_ENFORCER, JOB_FOREST_PREACHER, JOB_FOREST_GUARD, JOB_FOREST_SUPPORT, JOB_FOREST_GUARD_CLASSIC)//Spawns Forest Guards on maps without Gallowband
+	jobs_to_spawn = list(JOB_FOREST_GUARD, JOB_FOREST_GUARD_CLASSIC)//Spawns Forest Guards on maps without Gallowband
 
 /obj/effect/landmark/start/forestsupport
 	name = JOB_FOREST_SUPPORT
 	jobs_to_spawn = list(JOB_FOREST_SUPPORT)
 
 /obj/effect/landmark/start/late/gallowband
-	name = "Bog Witch and Apprentice"
+	name = "Combined Gallowband"
 	jobs_to_spawn = list(JOB_FOREST_WARDEN, JOB_FOREST_ENFORCER, JOB_FOREST_PREACHER, JOB_FOREST_GUARD, JOB_FOREST_SUPPORT)
 
 //Antagonist spawns

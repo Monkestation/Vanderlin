@@ -78,6 +78,14 @@
 	sellprice = 30
 	examine_highlight_type = /datum/examine_highlight/heresy_odd/great_hunt
 
+/obj/item/clothing/neck/psycross/great_hunt/divine_link
+	name = "blessed bone amulet"
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/neck/psycross/great_hunt/divine_link/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/divine_link/wilds)
+
 // INHUMEN PSYCROSSES
 
 /obj/item/clothing/neck/psycross/zizo

@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/craft/cooking = 20
 	)
@@ -26,6 +26,7 @@
 	It would be best to keep this power to yourself, no others are worthy, you alone deserve this. Open use of Blood Magic would surely see you executed."
 	outfit = /datum/outfit/occult
 	category_tags = list(CTAG_ADVENTURER)
+	allowed_patrons = list(/datum/patron/archdevil/mephistopheles, /datum/patron/archdevil/abraxas, /datum/patron/archdevil/abaddon, /datum/patron/archdevil/leviathan)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/occult
 	traits = list(
@@ -38,7 +39,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/dark_whispers,
 		/datum/action/cooldown/spell/status/blood_sight,
-		/datum/action/cooldown/spell/projectile/blood_steal,
+		/datum/action/cooldown/spell/blood_steal,
 		/datum/action/cooldown/spell/diagnose/blood,
 		/datum/action/cooldown/spell/blood_healing,
 	)
@@ -66,4 +67,5 @@
 		/obj/item/book/magicaltheory = 1,
 		/obj/item/recipe_book/arcyne = 1,
 		/obj/item/spellbook/adept/starter/blood = 1,
+		/obj/item/scrying/flame = 1,
 	)

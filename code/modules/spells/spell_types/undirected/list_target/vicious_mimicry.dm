@@ -5,6 +5,7 @@
 
 	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/xylix)
 
@@ -40,7 +41,7 @@
 	. = ..()
 	log_directed_talk(owner, cast_on, message, LOG_SAY, name)
 	var/mob/living/L = owner
-	var/static/list/bannedwords = list("zizo", "graggar", "matthios", "baotha", "inhumen", "heresy")
+	var/static/list/bannedwords = list("zizo", "graggar", "matthios", "baotha", "inhumen", "heresy", "abraxas", "abaddon", "mephistopheles", "leviathan", "*")
 	for(var/T in bannedwords)  //astrata smites naughty xylixans
 		if(findtext(message, T))
 			L.add_stress(/datum/stress_event/psycurselight)

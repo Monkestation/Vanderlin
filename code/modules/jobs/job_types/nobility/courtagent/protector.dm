@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/attribute_holder/sheet/job/courtagent/protector/swordshield

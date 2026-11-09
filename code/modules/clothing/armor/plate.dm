@@ -3,7 +3,8 @@
 	desc = "Steel plate armor with shoulder guards. An incomplete, bulky set of excellent armor."
 	icon_state = "halfplate"
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel_slag
+	melt_amount = 100
+	melting_material = /datum/material/steel
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
@@ -28,7 +29,7 @@
 	desc = "Iron plate armor with shoulder guards. An incomplete, bulky set of good armor."
 	icon_state = "ihalfplate"
 	item_state = "ihalfplate"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR
 	armor_type = /datum/armor/plate/bad
 	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
@@ -80,6 +81,7 @@
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_FULL
 	item_weight = 15 KILOGRAMS
+	melt_amount = 150
 
 
 /obj/item/clothing/armor/plate/full/samsibsa
@@ -107,7 +109,7 @@
 	icon_state = "iplate"
 	item_state = "iplate"
 	sellprice = VALUE_IRON_ARMOR*2
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/plate/bad
 	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
@@ -122,7 +124,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/rust_armor.dmi'
 	icon_state = "rustplate"
 	item_state = "rustplate"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/plate/bad
 	max_integrity = ARMOR_INT_CHEST_PLATE_DECREPIT
@@ -149,9 +151,10 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	armor_type = /datum/armor/plate/blacksteel
 	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	item_weight = 8 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 6
 	stand_speed_reduction = 1.05
@@ -281,7 +284,7 @@
 	icon_state = "silverarmor"
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/plate/silver
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 15 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 3
 
@@ -350,4 +353,3 @@
 	boobed = FALSE
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
-	smeltresult = /obj/item/ingot/iron

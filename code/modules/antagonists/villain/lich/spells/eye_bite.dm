@@ -5,6 +5,7 @@
 	sound = 'sound/items/beartrap.ogg'
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_level = 2
 
 	charge_time = 2 SECONDS

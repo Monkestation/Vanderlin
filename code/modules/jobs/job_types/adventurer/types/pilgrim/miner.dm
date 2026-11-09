@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
 		STAT_INTELLIGENCE = -2,
-		STAT_ENDURANCE = 1,
+		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 1,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/labor/mining = 40,
@@ -16,7 +16,7 @@
 		/datum/attribute/skill/craft/traps = 10,
 		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/smelting = 40,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/advclass/pilgrim/pilgrimminer

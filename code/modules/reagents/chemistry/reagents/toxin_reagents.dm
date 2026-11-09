@@ -263,7 +263,8 @@
 	metabolization_rate = 10
 
 /obj/item/reagent_containers/spidervenom_inert
-	list_reagents = list(/datum/reagent/toxin/spidervenom_inert = 10)
+	list_reagents = list(/datum/reagent/toxin/spidervenom_inert = 20)
+	grind_results = list(/datum/reagent/toxin/spidervenom_inert = 20)
 	name = "Pale spider gland"
 	desc = "A squishy pale gland, filled to the brim with venom of the deadly Aragn spider. Feels cold to the touch."
 	icon = 'icons/obj/webbing.dmi'

@@ -5,6 +5,7 @@
 	sound = 'sound/magic/whiteflame.ogg'
 
 	required_form = FORM_WATER
+	associated_skill = /datum/attribute/skill/magic/arcane/water
 	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "HYDRO MURIATIC!!!!"

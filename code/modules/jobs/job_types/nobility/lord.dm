@@ -9,19 +9,22 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		STAT_SPEED = 1,
 		STAT_PERCEPTION = 2,
 		STAT_FORTUNE = 5,
-		/datum/attribute/skill/combat/polearms = 20,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/crossbows = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/knives = 30,
-		/datum/attribute/skill/misc/swimming = 10,
-		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 40,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/attribute_holder/sheet/job/lord/old
@@ -32,19 +35,22 @@ GLOBAL_LIST_EMPTY(lord_titles)
 		STAT_SPEED = 1,
 		STAT_PERCEPTION = 2,
 		STAT_FORTUNE = 5,
-		/datum/attribute/skill/combat/polearms = 20,
-		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/swords = 50,
 		/datum/attribute/skill/combat/crossbows = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/combat/swords = 50,
 		/datum/attribute/skill/combat/knives = 30,
-		/datum/attribute/skill/misc/swimming = 10,
-		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/axesmaces = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 40,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/sewing = 10,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/lord
@@ -58,7 +64,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_LORD
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 	total_positions = 0
 	spawn_positions = 1
 	spells = list(
@@ -67,7 +73,6 @@ GLOBAL_LIST_EMPTY(lord_titles)
 	)
 	allowed_races = RACES_PLAYER_MONARCH
 	outfit = /datum/outfit/lord
-	bypass_lastclass = TRUE
 	give_bank_account = 500
 
 	knows_the_town = TRUE
@@ -215,7 +220,7 @@ GLOBAL_LIST_EMPTY(lord_titles)
 /datum/job/exlord //just used to change the lords title
 	title = "Ex-Monarch"
 	department_flag = NOBLEMEN
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_LORD

@@ -7,6 +7,8 @@
 		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/labor/butchering = 20,
 		/datum/attribute/skill/labor/taming = 30,
@@ -17,7 +19,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/swimming = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 /datum/attribute_holder/sheet/job/hunter/old
@@ -29,6 +31,8 @@
 		/datum/attribute/skill/combat/bows = 40,
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/labor/butchering = 20,
 		/datum/attribute/skill/labor/taming = 30,
@@ -39,7 +43,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/swimming = 10,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 
@@ -55,7 +59,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 4
 	spawn_positions = 4
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 

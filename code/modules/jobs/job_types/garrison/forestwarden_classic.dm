@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/lumberjacking = 10,
@@ -33,11 +33,10 @@
 	the foul creachers that taint his land. Alone, you will die in these woods."
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_GARRISON)
 	total_positions = 0
 	spawn_positions = 0
 	display_order = JDO_FORWARDEN
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)

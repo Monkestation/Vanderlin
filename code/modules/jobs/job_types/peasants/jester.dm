@@ -12,7 +12,7 @@
 		/datum/attribute/skill/misc/riding = list(-20, 50),
 		/datum/attribute/skill/labor/fishing = list(-20, 50),
 		/datum/attribute/skill/combat/wrestling = list(-20, 20),
-		/datum/attribute/skill/misc/reading = list(-20, 50),
+		/datum/attribute/skill/educated/reading = list(-20, 50),
 		/datum/attribute/skill/misc/sneaking = list(-20, 50),
 		/datum/attribute/skill/misc/stealing = list(-20, 50),
 		/datum/attribute/skill/misc/lockpicking = list(-20, 50),
@@ -43,7 +43,6 @@
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 

@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/lumberjacking = 10,
@@ -33,7 +33,6 @@
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_FORWARDEN
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
@@ -47,7 +46,7 @@
 	)
 
 	outfit = /datum/outfit/forestwarden
-	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/forest)
+	spells = list(/datum/action/cooldown/spell/undirected/list_target/convert_role/guard/gallowband, /datum/action/cooldown/spell/undirected/list_target/convert_role/servant/gallowband)
 	give_bank_account = 45
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
@@ -102,6 +101,6 @@
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/key/forrestgarrison = 1,
+		/obj/item/storage/keyring/gallowband/warden = 1,
 		/obj/item/signal_horn/ambush = 1
 	)

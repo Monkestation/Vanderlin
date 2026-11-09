@@ -1,19 +1,19 @@
 /datum/attribute_holder/sheet/job/farmer
 	raw_attribute_list = list(
-		STAT_STRENGTH = 1,
+		STAT_STRENGTH = 2,
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 1,
 		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/polearms = 20,
-		/datum/attribute/skill/combat/whipsflails = 10,
+		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/whipsflails = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/labor/farming = 40,
 		/datum/attribute/skill/labor/taming = 50,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/craft/cooking/brewing = 30,
 		/datum/attribute/skill/craft/cooking/winemaking = 30,
@@ -22,6 +22,8 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/tanning = 20,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/labor/butchering = 40
@@ -29,7 +31,7 @@
 
 /datum/job/farmer
 	title = JOB_SOILSON
-	alt_titles = list("Butcher", "Brewer", "Vinter", "Distiller", "Hogman")
+	alt_titles = list("Butcher", "Brewer", "Vintner", "Distiller", "Hogman")
 	f_title = "Soilbride"
 	tutorial = "It is a simple life you live. \
 	Your basic understanding of life is something many would be envious of if they knew how perfect it was. \
@@ -42,7 +44,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 12
 	spawn_positions = 12
-	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 
 	allowed_races = RACES_PLAYER_ALL
@@ -60,7 +61,8 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
-		TRAIT_SEEDKNOW
+		TRAIT_SEEDKNOW,
+		TRAIT_INGREDIENT_INSIGHT
 	)
 	book_type = /obj/item/recipe_book/agriculture
 
@@ -102,13 +104,12 @@
 
 /datum/attribute_holder/sheet/job/soilchild
 	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
-		STAT_CONSTITUTION = 1,
-		STAT_ENDURANCE = -1,
-		STAT_INTELLIGENCE = 1,
+		STAT_CONSTITUTION = 2,
+		STAT_ENDURANCE = 1,
+		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
-		/datum/attribute/skill/combat/polearms = 10,
+		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/labor/farming = 20,
 		/datum/attribute/skill/labor/taming = 10,
@@ -134,7 +135,6 @@
 	total_positions = 6
 	spawn_positions = 6
 	allowed_ages = list(AGE_CHILD)
-	bypass_lastclass = TRUE
 	selection_color = "#553e01"
 	allowed_races = RACES_PLAYER_ALL
 	outfit = /datum/outfit/soilchild
@@ -148,7 +148,8 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
-		TRAIT_SEEDKNOW
+		TRAIT_SEEDKNOW,
+		TRAIT_INGREDIENT_INSIGHT
 	)
 
 /datum/outfit/soilchild

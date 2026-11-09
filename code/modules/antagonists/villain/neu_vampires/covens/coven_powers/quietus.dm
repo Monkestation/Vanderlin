@@ -18,7 +18,7 @@
 	vitae_cost = 15
 	duration_length = 5 SECONDS
 	cooldown_length = 15 SECONDS
-	var/datum/proximity_monitor/advanced/silence_field/proximity_field
+	var/datum/proximity_monitor/advanced/quietus_field/proximity_field
 	var/silence_range = 7
 	var/validation_timer
 
@@ -26,7 +26,7 @@
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, "quietus")
 	if(!proximity_field)
-		proximity_field = new /datum/proximity_monitor/advanced/silence_field(owner, silence_range, FALSE, src)
+		proximity_field = new /datum/proximity_monitor/advanced/quietus_field(owner, silence_range, FALSE, src)
 		// Apply silence to all mobs currently in range
 		apply_initial_silence()
 		// Start validation timer to check positions periodically - this is really redundant but its useful incases of forceMove
@@ -83,55 +83,57 @@
 	if(!HAS_TRAIT(target, TRAIT_DEAF))
 		ADD_TRAIT(target, TRAIT_DEAF, "quietus")
 		target.adjust_confusion_up_to(2.5 SECONDS, 5 SECONDS)
+	target.apply_status_effect(/datum/status_effect/debuff/silenced/permanent)
 
 /datum/coven_power/quietus/silence_of_death/proc/remove_silence(mob/living/carbon/human/target)
 	if(HAS_TRAIT_FROM(target, TRAIT_DEAF, "quietus"))
 		REMOVE_TRAIT(target, TRAIT_DEAF, "quietus")
 	if(HAS_TRAIT_FROM(target, TRAIT_SILENT_FOOTSTEPS, "quietus"))
 		REMOVE_TRAIT(target, TRAIT_SILENT_FOOTSTEPS, "quietus")
+	target.remove_status_effect(/datum/status_effect/debuff/silenced/permanent)
 
 // Proximity monitor for the silence field
-/datum/proximity_monitor/advanced/silence_field
+/datum/proximity_monitor/advanced/quietus_field
 	var/datum/coven_power/quietus/silence_of_death/parent_power
 	var/list/affected_mobs = list()
 
-/datum/proximity_monitor/advanced/silence_field/New(atom/center, range, ignore_if_not_on_turf, datum/coven_power/quietus/silence_of_death/power)
+/datum/proximity_monitor/advanced/quietus_field/New(atom/center, range, ignore_if_not_on_turf, datum/coven_power/quietus/silence_of_death/power)
 	parent_power = power
 	. = ..()
 
-/datum/proximity_monitor/advanced/silence_field/setup_field_turf(turf/target)
+/datum/proximity_monitor/advanced/quietus_field/setup_field_turf(turf/target)
 	. = ..()
 	// Check for any mobs already on this turf
 	for(var/mob/living/carbon/human/H in target)
 		if(parent_power.should_affect_target(H))
 			add_affected_mob(H)
 
-/datum/proximity_monitor/advanced/silence_field/field_edge_crossed(atom/movable/movable, turf/location, direction)
+/datum/proximity_monitor/advanced/quietus_field/field_edge_crossed(atom/movable/movable, turf/location, direction)
 	. = ..()
 	if(istype(movable, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = movable
 		if(parent_power.should_affect_target(H))
 			add_affected_mob(H)
 
-/datum/proximity_monitor/advanced/silence_field/field_edge_uncrossed(atom/movable/movable, turf/location, direction)
+/datum/proximity_monitor/advanced/quietus_field/field_edge_uncrossed(atom/movable/movable, turf/location, direction)
 	. = ..()
 	if(istype(movable, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = movable
 		remove_affected_mob(H)
 
-/datum/proximity_monitor/advanced/silence_field/proc/add_affected_mob(mob/living/carbon/human/target)
+/datum/proximity_monitor/advanced/quietus_field/proc/add_affected_mob(mob/living/carbon/human/target)
 	if(target in affected_mobs)
 		return
 	affected_mobs |= target
 	parent_power.apply_silence(target)
 
-/datum/proximity_monitor/advanced/silence_field/proc/remove_affected_mob(mob/living/carbon/human/target)
+/datum/proximity_monitor/advanced/quietus_field/proc/remove_affected_mob(mob/living/carbon/human/target)
 	if(!(target in affected_mobs))
 		return
 	affected_mobs -= target
 	parent_power.remove_silence(target)
 
-/datum/proximity_monitor/advanced/silence_field/Destroy()
+/datum/proximity_monitor/advanced/quietus_field/Destroy()
 	// Clean up all affected mobs when the field is destroyed
 	for(var/mob/living/carbon/human/H in affected_mobs)
 		parent_power.remove_silence(H)

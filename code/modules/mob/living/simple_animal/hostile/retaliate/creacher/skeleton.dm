@@ -45,6 +45,8 @@
 /mob/living/simple_animal/hostile/skeleton/spectral
 	name = "Spectral Skeleton"
 	desc = "A spectral skeleton formed from arcyne magic."
+	alpha = 200
+	loot = list(/obj/item/fertilizer/ash)
 
 /mob/living/simple_animal/hostile/skeleton/axe
 	name = "Skeleton"
@@ -59,6 +61,8 @@
 /mob/living/simple_animal/hostile/skeleton/axe/spectral
 	name = "Spectral Skeleton"
 	desc = "A spectral skeleton formed from arcyne magic."
+	alpha = 200
+	loot = list(/obj/item/fertilizer/ash)
 
 /mob/living/simple_animal/hostile/skeleton/spear
 	name = "Skeleton"
@@ -74,6 +78,8 @@
 /mob/living/simple_animal/hostile/skeleton/spear/spectral
 	name = "Spectral Skeleton"
 	desc = "A spectral skeleton formed from arcyne magic."
+	alpha = 200
+	loot = list(/obj/item/fertilizer/ash)
 
 /mob/living/simple_animal/hostile/skeleton/guard
 	name = "Skeleton"
@@ -90,6 +96,8 @@
 /mob/living/simple_animal/hostile/skeleton/guard/spectral
 	name = "Spectral Skeleton"
 	desc = "A spectral skeleton formed from arcyne magic."
+	alpha = 200
+	loot = list(/obj/item/fertilizer/ash)
 
 /mob/living/simple_animal/hostile/skeleton/bow
 	name = "Skeleton"
@@ -120,6 +128,8 @@
 /mob/living/simple_animal/hostile/skeleton/bow/spectral
 	name = "Spectral Skeleton"
 	desc = "A spectral skeleton formed from arcyne magic."
+	alpha = 200
+	loot = list(/obj/item/fertilizer/ash)
 
 /mob/living/simple_animal/hostile/skeleton/get_sound(input)
 	switch(input)

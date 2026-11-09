@@ -10,7 +10,6 @@
 	allowed_ages = list(AGE_CHILD)
 	total_positions = 12
 	spawn_positions = 12
-	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner.ogg'
@@ -47,8 +46,8 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/combat/bows = 10,
 		/datum/attribute/skill/misc/riding = 10,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 10,
 	)
 
 /datum/job/advclass/orphanadv/bbrat
@@ -198,7 +197,7 @@
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/masonry = 10,
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/craft/cooking = 10,
