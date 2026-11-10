@@ -59,3 +59,25 @@
   - qol: Handcart now picks up items from where it is currently standing, instead
       of player's position. The loop has been fixed to not stop after picking up only
       ores/wood.
+2026-11-10:
+  Blundir:
+  - image: added proper inhand sprites for flower bouquets and for flowers that are
+      used for them
+  ModDownloading:
+  - refactor: Corrected Half-Drow placement in the Lore Primer, they're now represented
+      as Tolerated rather than Inhumen to match gameplay.
+  - rscadd: The Hallucinations Vice, which allows you to have permanent hallucinations
+      like the Zizo Curse gives you.
+  - rscdel: Removed meta hallucinations from the Zizo Curse. No more fake ahelps!
+  Ordosian:
+  - bugfix: Fixed squire subclasses
+  - map: Moved the Mine to the Basin area, replaces old lava cave. Inquisition spot
+      moved near Rous Tower. Secrets added to the Mines.
+  dwasint:
+  - rscadd: Ingredient Buffs, every base food item (meat, produce) gets a randomized
+      buff that when cooked with will imbue the cooked item with it. This scales off
+      the quality of the base food item.
+  - rscadd: soilsons, servants, cooks, innkeepers, and their kids can inspect food
+      items to see what buff is given when you cook with it.
+  ta3754859-max:
+  - bugfix: Werewolf being unable to spread lycanthrophy
