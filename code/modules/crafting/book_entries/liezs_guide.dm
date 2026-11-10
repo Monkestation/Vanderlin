@@ -267,4 +267,9 @@
 		Once someone dies, or from being bitten and infected by a deadite, a festering ooze appears in the brain. This will cause you to slowly start rotting and turn deadite. For cure or revival you need to remove this. You can also implant it to infect someone! So have fun with that fun fact!<br>
 		</div>
 		<br>
+
+		<div>
+		<h2>GET OUT OF MY CLINIC, FOOL! <i>PUTAIN DE BORDEL DE MERDE!!</i></h2>
+        Do not be afraid to tell people to get out if they are crowding the clinic, especially if they are getting in your way, this CAN get you in trouble but this is YOUR clinic. How rudely or how nicely you say it depends on you, but do not be afraid to tell people to stop getting in your way or crowding the clinic. <i>Je m'en fous</i>, the inn is next door.<br>
+		</div>
 	"}
