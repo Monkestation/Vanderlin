@@ -96,16 +96,16 @@
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 
 /obj/item/clothing/pants/platelegs/inhumen/zizo
-	name = "darksteel garments"
+	name = "avantyne garments"
 	desc = "Leg garments worn by true anointed of the Dame of Progress. In Her name."
 	icon_state = "zizocloth"
 	melting_material = /datum/material/avantyne
 	melt_amount = 100
-	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/clothing/pants/platelegs/inhumen/zizo/alt
-	name = "darksteel plate skirt"
-	desc = "Ribbed darksteel plates with a dark cloth skirt attached. Serve in Her name."
+	name = "avantyne plate skirt"
+	desc = "Ribbed avantyne plates with a dark cloth skirt attached. Serve in Her name."
 	icon_state = "zizoplatelegs_med"
 
 /obj/item/clothing/pants/platelegs/inhumen/matthios
