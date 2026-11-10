@@ -1,5 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - rscadd: "Ingredient Buffs, every base food item (meat, produce) gets a randomized buff that when cooked with will imbue the cooked item with it. This scales off the quality of the base food item."
-  - rscadd: "soilsons, servants, cooks, innkeepers, and their kids can inspect food items to see what buff is given when you cook with it."
