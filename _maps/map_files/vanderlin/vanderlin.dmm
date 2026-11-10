@@ -3223,10 +3223,7 @@
 /turf/open/floor/grass,
 /area/outdoors/town/roofs)
 "bgQ" = (
-/obj/structure/door/window{
-	name = "Armoursmith"
-	},
-/obj/effect/mapping_helpers/access/keyset/town/smith,
+/obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/smithy)
 "bho" = (
@@ -4297,17 +4294,12 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/tavern)
 "bDt" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = 32;
-	pixel_y = 0
+/obj/structure/fluff/walldeco/sign/armorsmithsign/left{
+	pixel_y = 26;
+	pixel_x = -10
 	},
-/obj/structure/table/wood/reinforced_alter,
-/obj/structure/bars{
-	icon_state = "barsbent";
-	layer = 2.81
-	},
-/turf/open/floor/herringbone,
-/area/indoors/town/smithy)
+/turf/open/floor/blocks,
+/area/outdoors/town)
 "bDu" = (
 /obj/structure/door{
 	lockid = "slums1";
@@ -6084,7 +6076,7 @@
 /area/outdoors/exposed/church)
 "clQ" = (
 /obj/structure/fake_machine/scomm/l,
-/turf/open/floor/blocks/newstone/alt,
+/turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "cmb" = (
 /obj/structure/fake_machine/scomm/l,
@@ -15542,20 +15534,12 @@
 /turf/open/floor/grass/yel,
 /area/outdoors/town)
 "ggO" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/paper,
-/obj/item/natural/feather,
+/obj/structure/fluff/walldeco/sign/weaponsmithsign{
+	pixel_x = 8;
+	pixel_y = 26
+	},
 /turf/open/floor/blocks,
-/area/indoors/town/smithy)
+/area/outdoors/town)
 "ggR" = (
 /obj/item/book/sword,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -16315,10 +16299,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/water/sewer,
 /area/under/town/sewer)
-"gyb" = (
-/obj/structure/fluff/walldeco/sign/weaponsmithsign/left,
-/turf/open/floor/blocks,
-/area/outdoors/town)
 "gyd" = (
 /obj/effect/mapping_helpers/structure/breaker,
 /obj/structure/door/weak,
@@ -17917,7 +17897,15 @@
 /turf/open/floor/cobblerock,
 /area/under/town/sewer)
 "hkB" = (
-/turf/closed/wall/mineral/craftstone,
+/obj/structure/fluff/railing/wood{
+	dir = 8;
+	pixel_y = -1
+	},
+/obj/machinery/light/fueled/lanternpost/fixed{
+	dir = 1
+	},
+/obj/structure/flora/grass,
+/turf/open/floor/grass,
 /area/outdoors/town)
 "hkP" = (
 /obj/structure/curtain/bounty,
@@ -21423,7 +21411,8 @@
 	dir = 10
 	},
 /obj/structure/fluff/railing/border,
-/turf/open/floor/herringbone,
+/obj/structure/grindwheel,
+/turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "iFh" = (
 /obj/effect/decal/cleanable/blood,
@@ -23916,13 +23905,6 @@
 "jEY" = (
 /turf/closed/wall/mineral/pipe,
 /area/indoors/town/shop)
-"jFi" = (
-/obj/structure/grindwheel{
-	pixel_y = 21;
-	density = 0
-	},
-/turf/open/floor/blocks,
-/area/indoors/town/smithy)
 "jFp" = (
 /obj/structure/table/wood/crafted,
 /obj/structure/fluff/railing/border{
@@ -27894,6 +27876,7 @@
 	pixel_x = -32;
 	pixel_y = 0
 	},
+/obj/structure/table/wood/plain,
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/smithy)
 "llz" = (
@@ -31015,11 +30998,6 @@
 	dir = 4
 	},
 /obj/structure/flora/grass,
-/obj/structure/flora/ausbushes/brflowers,
-/obj/machinery/light/fueled/lanternpost/fixed{
-	pixel_x = 7;
-	pixel_y = 22
-	},
 /turf/open/floor/grass,
 /area/outdoors/town)
 "mxQ" = (
@@ -33570,13 +33548,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/churchbrick,
 /area/indoors/town/clinic_large)
-"nyz" = (
-/obj/structure/fluff/walldeco/sign/weaponsmithsign/left{
-	pixel_x = -7;
-	pixel_y = 27
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/town)
 "nyE" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/outdoors/exposed/church/graveyard)
@@ -36528,7 +36499,7 @@
 /area/indoors/town)
 "oKG" = (
 /obj/structure/fluff/railing/border,
-/turf/open/floor/blocks,
+/turf/open/floor/herringbone,
 /area/indoors/town/smithy)
 "oKL" = (
 /obj/machinery/light/fueled/torchholder{
@@ -38015,13 +37986,6 @@
 /obj/item/soap/bath,
 /turf/open/floor/tile/bath,
 /area/indoors/town/keep/courtagent)
-"pmC" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = -32;
-	pixel_y = 0
-	},
-/turf/closed/wall/mineral/stone,
-/area/indoors/town/smithy)
 "pmN" = (
 /turf/open/floor/metal/alt,
 /area/indoors/town/shop)
@@ -41791,18 +41755,6 @@
 	},
 /turf/open/floor/dirt,
 /area/outdoors/town)
-"qLy" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_x = -32;
-	pixel_y = 0
-	},
-/obj/machinery/light/fueled/smelter/great,
-/obj/item/storage/crucible/random{
-	pixel_x = -3;
-	pixel_y = 14
-	},
-/turf/open/floor/blocks/newstone/alt,
-/area/indoors/town/smithy)
 "qLA" = (
 /obj/structure/fluff/walldeco/vinez{
 	dir = 4;
@@ -42828,19 +42780,6 @@
 /obj/structure/fake_machine/scomm/l,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/indoors/town/adv_guild)
-"rfJ" = (
-/obj/structure/closet/crate/crafted_closet/inn/chest,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/coal,
-/obj/item/ore/iron,
-/obj/item/ore/iron,
-/obj/item/ore/tin,
-/obj/item/ore/tin,
-/obj/item/ore/copper,
-/obj/item/ore/copper,
-/turf/open/floor/blocks,
-/area/indoors/town/smithy)
 "rfU" = (
 /obj/structure/closet/crate/chest,
 /obj/item/rope/chain,
@@ -52102,7 +52041,7 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/turf/open/floor/herringbone,
+/turf/open/floor/cobblerock,
 /area/indoors/town/smithy)
 "uRa" = (
 /obj/structure/flora/shells,
@@ -59682,11 +59621,12 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/town/clinic_large)
 "xHL" = (
-/obj/structure/fake_machine/scomm,
-/mob/living/simple_animal/pet/cat/cabbit{
-	name = "Hammer"
+/obj/machinery/light/fueled/smelter/great,
+/obj/item/storage/crucible/random{
+	pixel_x = -3;
+	pixel_y = 14
 	},
-/turf/open/floor/herringbone,
+/turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/smithy)
 "xHW" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
@@ -59970,12 +59910,16 @@
 /turf/open/floor/carpet/lord/center,
 /area/indoors/town/keep/garrison)
 "xPs" = (
-/obj/structure/table/wood/reinforced_alter,
-/obj/structure/bars{
-	icon_state = "barsbent";
-	layer = 2.81
-	},
-/obj/structure/fake_machine/vendor/blacksmith,
+/obj/structure/closet/crate/crafted_closet/inn/chest,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/coal,
+/obj/item/ore/iron,
+/obj/item/ore/iron,
+/obj/item/ore/tin,
+/obj/item/ore/tin,
+/obj/item/ore/copper,
+/obj/item/ore/copper,
 /turf/open/floor/herringbone,
 /area/indoors/town/smithy)
 "xPU" = (
@@ -60046,7 +59990,13 @@
 /turf/open/water/ocean/abyss,
 /area/outdoors/beach)
 "xRN" = (
-/obj/structure/grindwheel,
+/obj/structure/fake_machine/scomm{
+	pixel_y = 0;
+	pixel_x = 32
+	},
+/mob/living/simple_animal/pet/cat/cabbit{
+	name = "Hammer"
+	},
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/town/smithy)
 "xRO" = (
@@ -121787,12 +121737,12 @@ djj
 hZn
 czz
 mxi
+vtd
 mlB
-bhL
 sCJ
-ujJ
-ujJ
-ujJ
+jxr
+sCJ
+jxr
 sCJ
 hWg
 bKi
@@ -121800,10 +121750,10 @@ xBX
 bKi
 ujt
 uLI
+xPs
+xPs
+xFO
 jOj
-sjl
-qLy
-mIV
 mWB
 xvH
 pKM
@@ -121992,20 +121942,20 @@ opk
 bKi
 lgF
 rWG
-jFi
-hCp
-hCp
+bgQ
+akP
+bgQ
+llx
 sCJ
-ujt
 ujt
 ujt
 ujt
 sCJ
 nnH
 xys
-kmk
-kmk
-kmk
+gjf
+gjf
+gjf
 rte
 pIb
 ujt
@@ -122192,22 +122142,22 @@ hZn
 mFi
 olf
 mxD
-hkB
+qBh
 sCJ
-xHL
-xys
-gjf
+uCH
+dlK
+dlK
+dlK
+hDg
+hCp
 xFO
-jbm
-ouY
-pmC
-gQw
+hCp
 clQ
 xys
+gjf
+gjf
 xys
-iJV
-xRN
-kmk
+gjf
 vDf
 nce
 ujt
@@ -122392,24 +122342,24 @@ oEK
 mFi
 xvY
 mFi
-gyb
-hZn
 czz
-xPs
+hZn
+bDt
+lCk
+dlK
+dlK
+dlK
+dlK
+ujJ
+hCp
 gjf
+nAu
 gjf
-qFO
-mWB
+xys
 gjf
-slp
 sCJ
-ouY
-kmk
-hCp
-hCp
-hCp
-hCp
-hCp
+gjf
+xys
 oKG
 nce
 ujt
@@ -122597,19 +122547,19 @@ hZn
 hZn
 hZn
 czz
+rWG
+dlK
+dlK
+dlK
+dlK
 tni
+hCp
+xys
+xys
 gjf
-slV
-mNY
-mWB
-mWB
-hCp
-fWg
-hCp
-hCp
-hCp
-nAu
+gjf
 tFy
+xFO
 xys
 xys
 iFa
@@ -122798,23 +122748,23 @@ hZn
 mFi
 mFi
 hZn
-czz
-bDt
-gjf
-mWB
-nWt
-mWB
-mWB
+ggO
+lCk
+dlK
+dlK
+dlK
+dlK
+sRe
 hCp
-qCW
-hCp
+xys
+qFO
 nPR
 mWB
 gjf
 gjf
 xys
-sCJ
-lCk
+slV
+qUW
 ujt
 ujt
 ujt
@@ -123002,25 +122952,25 @@ qIy
 hPP
 hkB
 sCJ
-xys
-xys
-gjf
-mWB
-xys
-qUW
+jMG
+dHY
+tLS
+dzx
 sCJ
 ubN
-qFO
+gjf
+mNY
+gjf
 mWB
-mWB
 qFO
+gjf
+gjf
 xys
-sCJ
-uCH
-akP
-dlK
-llx
-dCX
+gjf
+xys
+jbm
+xys
+lCk
 mFi
 hZn
 rft
@@ -123204,24 +123154,24 @@ fHQ
 mxi
 mxi
 ujt
-ggO
+nLz
+ceL
+tLS
+dzx
+sCJ
 eJa
-rfJ
-rfJ
 hCp
-hCp
-hDg
-hCp
-mNY
-mWB
+nWt
 gjf
+mWB
 nPw
+gjf
+gjf
 xys
-ujJ
-dlK
-dlK
-dlK
-dlK
+gjf
+kmk
+kmk
+mIV
 dCX
 hZn
 hZn
@@ -123406,25 +123356,25 @@ mHV
 syu
 qBh
 sCJ
-ujt
-ujt
+jxr
 ujt
 jxr
-hDg
+jxr
+ujt
 ujt
 sCJ
 fIH
-nWt
+xys
 gjf
-mWB
 nWt
 xys
-tni
-dlK
-dlK
-dlK
-dlK
-bgQ
+xys
+qCW
+qCW
+kmk
+kmk
+gQw
+dCX
 mFi
 hZn
 rft
@@ -123606,7 +123556,7 @@ hZn
 czz
 czz
 mFi
-nyz
+mFi
 czz
 rrl
 czz
@@ -123621,12 +123571,12 @@ gjf
 aQr
 uQY
 xys
-sRe
-dlK
-dlK
-dlK
-dlK
-bgQ
+fWg
+iJV
+kmk
+kmk
+ouY
+dCX
 mFi
 mFi
 gfg
@@ -123824,10 +123774,10 @@ ujt
 pKM
 pKM
 pKM
-jMG
-dHY
-tLS
-dzx
+sjl
+kmk
+kmk
+slp
 dCX
 czz
 mFi
@@ -124026,10 +123976,10 @@ hWg
 rSh
 bKi
 pKM
-nLz
-ceL
-tLS
-dzx
+xHL
+xRN
+kmk
+ouY
 dCX
 czz
 mFi
@@ -124230,7 +124180,7 @@ ohf
 pKM
 dCX
 ujt
-dCX
+ujJ
 ujt
 kZd
 czz
