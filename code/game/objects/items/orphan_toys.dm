@@ -169,6 +169,7 @@
 	resistance_flags = FIRE_PROOF
 	abstract_type = /obj/item/child_toy/toy_soldier
 	item_weight = 5 GRAMS
+	smeltresult = null
 	var/open = FALSE
 
 /obj/item/child_toy/toy_soldier/attackby(obj/item/G, mob/user, list/modifiers)

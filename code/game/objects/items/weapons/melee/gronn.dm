@@ -41,7 +41,8 @@
 	swingsound = list('sound/combat/wooshes/bladed/wooshmed (1).ogg','sound/combat/wooshes/bladed/wooshmed (2).ogg','sound/combat/wooshes/bladed/wooshmed (3).ogg')
 	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	anvilrepair = /datum/attribute/skill/craft/weaponsmithing
 	grid_height = 96
 	grid_width = 32
@@ -58,7 +59,7 @@
 	wbalance = EASY_TO_DODGE
 	max_blade_int = 250
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_STEEL
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	item_weight = 900 GRAMS
 
 /obj/item/weapon/handclaw/steel/silver
@@ -67,7 +68,7 @@
 	icon_state = "silverclaws"
 	force = DAMAGE_KATAR + 7
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 800 GRAMS
 
 /obj/item/weapon/handclaw/steel/silver/Initialize(mapload)
@@ -80,7 +81,7 @@
 	icon_state = "bskatarclaw"
 	force = DAMAGE_KATAR + 9
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLACKSTEEL
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 
 /obj/item/weapon/handclaw/steel/bloodsteel
 	name = "bloodsteel mantis claws"
@@ -89,7 +90,6 @@
 	force = DAMAGE_KATAR + 8
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_BLOODSTEEL
 	melting_material = /datum/material/bloodsteel
-	melt_amount = 100
 
 /obj/item/weapon/handclaw/steel/bloodsteel/Initialize(mapload)
 	. = ..()
