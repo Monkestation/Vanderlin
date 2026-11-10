@@ -73,11 +73,25 @@
   - bugfix: Fixed squire subclasses
   - map: Moved the Mine to the Basin area, replaces old lava cave. Inquisition spot
       moved near Rous Tower. Secrets added to the Mines.
+  - map: Old Mine area next to the keep has now been transformed into a Lake Grove.
   dwasint:
   - rscadd: Ingredient Buffs, every base food item (meat, produce) gets a randomized
       buff that when cooked with will imbue the cooked item with it. This scales off
       the quality of the base food item.
   - rscadd: soilsons, servants, cooks, innkeepers, and their kids can inspect food
       items to see what buff is given when you cook with it.
+  grungussuss:
+  - rscadd: rejected royal tieflings are noble blood now.
+  - bugfix: Muscle priest now gets priest keys
+  - bugfix: hersir's maul is blunt now
+  - bugfix: fixed being able to cast dark whispers on a dead person.
+  - bugfix: egg washed bird meat can be made now.
+  realforest2001:
+  - spellcheck: Removed all references of darksteel and replaced with Avantyne, matching
+      the liquid form and allowing for easier naming distinction.
   ta3754859-max:
   - bugfix: Werewolf being unable to spread lycanthrophy
+  - qol: Re-added gathering materials for carts from the spot the user is standing
+      on
+  - qol: Switched dumping handcart's contents to alt+click
+  - qol: Added controls under the mechanics tab when examining the handcart
