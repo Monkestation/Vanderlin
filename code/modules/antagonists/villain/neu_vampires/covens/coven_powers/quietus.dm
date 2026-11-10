@@ -182,8 +182,8 @@
 	return ..()
 
 /obj/item/melee/touch_attack/dropped(mob/user)
-    . = ..()
-    qdel(src)
+	. = ..()
+	qdel(src)
 
 //BAAL'S CARESS
 /datum/coven_power/quietus/baals_caress

@@ -947,7 +947,7 @@
 
 			function addXP(covenName) {
 				var amount = parseInt(document.getElementById("xp_input_" + covenName).value) || 0;
-   				window.location = 'byond://?src=[REF(src)];action=add_xp;coven_name=' + encodeURIComponent(covenName) + ';amount=' + amount;
+				window.location = 'byond://?src=[REF(src)];action=add_xp;coven_name=' + encodeURIComponent(covenName) + ';amount=' + amount;
 			}
 
 			// Research tree interaction variables
