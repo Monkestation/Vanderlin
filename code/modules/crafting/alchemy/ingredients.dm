@@ -140,14 +140,24 @@
 	alternate_worn_layer  = 8.9 //On top of helmet
 	body_parts_covered = NONE
 	item_weight = 9 GRAMS
+	var/datum/ingredient_buff_modifier/modifier
+
+/obj/item/alch/herb/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, icon_state, modifier, 10, topping_name = name)
 
 /obj/item/alch/herb/atropa
 	name = "atropa"
 	icon_state = "atropa"
+	modifier = /datum/ingredient_buff_modifier/atropa
 
 /obj/item/alch/herb/matricaria
 	name = "matricaria"
 	icon_state = "matricaria"
+	item_state = "matricaria"
+	experimental_inhand = FALSE
+	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
+	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 
 /obj/item/alch/herb/symphitum
 	name = "symphitum"
@@ -168,6 +178,10 @@
 /obj/item/alch/herb/calendula
 	name = "calendula"
 	icon_state = "calendula"
+	item_state = "calendula"
+	experimental_inhand = FALSE
+	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
+	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 
 /obj/item/alch/herb/mentha
 	name = "mentha"
@@ -180,12 +194,20 @@
 /obj/item/alch/herb/salvia
 	name = "salvia"
 	icon_state = "salvia"
+	item_state = "salvia"
+	experimental_inhand = FALSE
+	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
+	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 
 /obj/item/alch/herb/rosa
 	name = "rosa"
 	icon_state = "rosa"
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK|ITEM_SLOT_MOUTH
 	spitoutmouth = FALSE
+	experimental_inhand = FALSE
+	item_state = "rosa"
+	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
+	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 
 /obj/item/alch/herb/rosa/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -223,6 +245,7 @@
 	desc = "The un-initiated are forbidden from picking this holy flower, which is said to watch over the graves near where it blooms. A sign that the deceased are now in a better place..."
 	dropshrink = 0.75
 	icon_state = "necralily"
+	modifier = /datum/ingredient_buff_modifier/necran_lily
 
 /obj/item/alch/thaumicdust
 	name = "thaumic iron dust"

@@ -1,0 +1,4 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - refactor: "Corrected Half-Drow placement in the Lore Primer, they're now represented as Tolerated rather than Inhumen to match gameplay."
