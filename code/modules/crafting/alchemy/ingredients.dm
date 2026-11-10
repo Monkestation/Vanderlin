@@ -154,6 +154,10 @@
 /obj/item/alch/herb/matricaria
 	name = "matricaria"
 	icon_state = "matricaria"
+	item_state = "matricaria"
+	experimental_inhand = FALSE
+	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
+	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 
 /obj/item/alch/herb/symphitum
 	name = "symphitum"
@@ -174,6 +178,10 @@
 /obj/item/alch/herb/calendula
 	name = "calendula"
 	icon_state = "calendula"
+	item_state = "calendula"
+	experimental_inhand = FALSE
+	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
+	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 
 /obj/item/alch/herb/mentha
 	name = "mentha"
@@ -186,12 +194,20 @@
 /obj/item/alch/herb/salvia
 	name = "salvia"
 	icon_state = "salvia"
+	item_state = "salvia"
+	experimental_inhand = FALSE
+	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
+	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 
 /obj/item/alch/herb/rosa
 	name = "rosa"
 	icon_state = "rosa"
 	slot_flags = ITEM_SLOT_HEAD|ITEM_SLOT_MASK|ITEM_SLOT_MOUTH
 	spitoutmouth = FALSE
+	experimental_inhand = FALSE
+	item_state = "rosa"
+	lefthand_file = 'icons/roguetown/onmob/lefthand.dmi'
+	righthand_file = 'icons/roguetown/onmob/righthand.dmi'
 
 /obj/item/alch/herb/rosa/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
