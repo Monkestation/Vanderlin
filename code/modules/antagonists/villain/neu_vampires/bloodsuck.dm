@@ -120,7 +120,7 @@
 	if(istype(sire_clan, /datum/clan/niteguard))
 		antag_datum = /datum/antagonist/vampire/niteguard
 	mind.add_antag_datum(new antag_datum(sire_clan , TRUE))
-	var/datum/clan_hierarchy_node/new_clan_position = C.create_position(pick(sire_clan .new_members_titles), "A new member of clan [sire_clan .name]", sire.clan_position, 1)
+	var/datum/clan_hierarchy_node/new_clan_position = sire_clan.create_position(pick(sire_clan.new_members_titles), "A new member of clan [sire_clan .name]", sire.clan_position, 1)
 	new_clan_position.assign_member(src)
 	set_bloodpool(500)
 	visible_message(span_danger("Some dark energy begins to flow into [src]..."))

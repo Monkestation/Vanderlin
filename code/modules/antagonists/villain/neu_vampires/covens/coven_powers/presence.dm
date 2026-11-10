@@ -25,7 +25,7 @@
 
 /datum/coven_power/presence/awe/pre_activation_checks(mob/living/target)
 	if(target.stat != CONSCIOUS)
-		to_chat(owner, span_danger("Minds of the dead cannot be swayed."))
+		to_chat(owner, span_danger("Minds of the dead or unconscious cannot be swayed."))
 		return FALSE
 	var/mypower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)
 	var/theirpower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE) - 5
@@ -74,7 +74,7 @@
 
 /datum/coven_power/presence/dread_gaze/pre_activation_checks(mob/living/target)
 	if(target.stat != CONSCIOUS)
-		to_chat(owner, span_danger("Minds of the dead cannot be swayed."))
+		to_chat(owner, span_danger("Minds of the dead or unconscious cannot be swayed."))
 		return FALSE
 	var/mypower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE)
 	var/theirpower = GET_MOB_ATTRIBUTE_VALUE(owner, STAT_INTELLIGENCE) - 5
