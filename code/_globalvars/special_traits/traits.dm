@@ -1166,8 +1166,9 @@
 	character.equip_to_slot_or_del(new/obj/item/clothing/armor/regenerating/skin/disciple/sunlord(character), ITEM_SLOT_ARMOR)
 	character.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/pugilist(character), ITEM_SLOT_GLOVES)
 	character.equip_to_slot_or_del(new /obj/item/storage/belt/leather/steel(character), ITEM_SLOT_BELT)
-	character.equip_to_slot_or_del(new /obj/item/clothing/shoes/rare/hoplite(character), ITEM_SLOT_SHOES)
+	character.equip_to_slot_or_del(new /obj/item/storage/keyring/priest(character), ITEM_SLOT_BELT_L)
 	character.equip_to_slot_or_del(new /obj/item/weapon/katar(character), ITEM_SLOT_BELT_R)
+	character.equip_to_slot_or_del(new /obj/item/clothing/shoes/rare/hoplite(character), ITEM_SLOT_SHOES)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
 	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
 	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist
