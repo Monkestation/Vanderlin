@@ -1305,15 +1305,6 @@
 	dir = 1
 	},
 /area/outdoors/town/keep/roof)
-"alh" = (
-/obj/effect/waterfall{
-	pixel_y = 0;
-	pixel_x = 10;
-	base_pixel_x = 10;
-	base_pixel_y = 0
-	},
-/turf/open/water/river,
-/area/outdoors/eora)
 "als" = (
 /obj/item/natural/rock/iron,
 /turf/open/floor/cobblerock,
@@ -30864,22 +30855,6 @@
 /obj/item/bedsheet/pelt,
 /turf/open/floor/cobblerock,
 /area/indoors/town/church)
-"lVM" = (
-/obj/effect/waterfall{
-	pixel_x = 15;
-	pixel_y = 19
-	},
-/obj/effect/waterfall{
-	pixel_x = 5
-	},
-/obj/effect/waterfall{
-	pixel_x = -5
-	},
-/obj/effect/waterfall{
-	pixel_x = 13
-	},
-/turf/open/water/river,
-/area/outdoors/eora)
 "lVQ" = (
 /obj/structure/chair/hotspring_bench/left{
 	dir = 1
@@ -57829,6 +57804,9 @@
 /area/indoors/town)
 "wyx" = (
 /obj/structure/hotspring/border/two,
+/obj/effect/waterfall{
+	pixel_y = 0
+	},
 /turf/open/water/river,
 /area/outdoors/eora)
 "wyB" = (
@@ -259428,7 +259406,7 @@ jgi
 pDP
 qXI
 wyx
-lVM
+lNp
 cbi
 jgi
 jgi
@@ -259630,7 +259608,7 @@ gtB
 xvh
 qXI
 wyx
-alh
+lNp
 lNp
 lNp
 lNp
