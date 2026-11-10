@@ -137,6 +137,7 @@
 	var/charges = 1
 	var/list/allied_factions = list()
 	var/list/allied_persons = list()
+	var/list/enemy_persons = list()
 
 /obj/structure/rune_ward/Crossed(atom/movable/AM)
 	trigger_rune(AM)
@@ -151,11 +152,13 @@
 	if(living_cross == owner)
 		return FALSE
 
-	if(LOWER_TEXT(living_cross.real_name) in allied_persons)
-		return FALSE
-	for(var/faction in allied_factions)
-		if(living_cross.has_faction(faction))
+	var/name_check = LOWER_TEXT(living_cross.real_name)
+	if(!(name_check in enemy_persons))
+		if(name_check in allied_persons)
 			return FALSE
+		for(var/faction in allied_factions)
+			if(living_cross.has_faction(faction))
+				return FALSE
 
 	if(living_cross.throwing)
 		return FALSE
