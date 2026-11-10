@@ -254,7 +254,7 @@
 			to_chat(owner, span_danger("Silver dispells the curse! They are protected for now."))
 			return
 
-	lastattacker.adjust_stamina(-80)
+	lastattacker.adjust_stamina(80)
 	lastattacker.fire_act(6, 6)
 	lastattacker.adjustFireLoss(10)
 	to_chat(owner, "You send your curse on [lastattacker], the last creature you attacked.")
