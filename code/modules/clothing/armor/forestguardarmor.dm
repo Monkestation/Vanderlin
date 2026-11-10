@@ -81,6 +81,7 @@
 
 	prevent_crits = ALL_EXCEPT_STAB
 	abstract_type = /obj/item/clothing/head/helmet/medium/decorated
+	melting_material = /datum/material/steel
 
 /obj/item/clothing/head/helmet/medium/decorated/skullmet
 	name = "skullmet"

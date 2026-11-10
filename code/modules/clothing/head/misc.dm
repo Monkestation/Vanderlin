@@ -371,6 +371,7 @@
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
 	item_weight = 1.23 KILOGRAMS
+	melting_material = /datum/material/steel
 
 /obj/item/clothing/head/roguehood/psydon
 	name = "psydonian hood"
