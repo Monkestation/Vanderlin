@@ -3112,6 +3112,7 @@
 #include "code\modules\crafting\book_entries\gnomes.dm"
 #include "code\modules\crafting\book_entries\grimoire.dm"
 #include "code\modules\crafting\book_entries\grims_guide.dm"
+#include "code\modules\crafting\book_entries\liezs_guide.dm"
 #include "code\modules\crafting\book_entries\mana_sources.dm"
 #include "code\modules\crafting\book_entries\medical.dm"
 #include "code\modules\crafting\book_entries\repair.dm"
