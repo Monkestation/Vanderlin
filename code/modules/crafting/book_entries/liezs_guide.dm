@@ -269,7 +269,7 @@
 		<br>
 
 		<div>
-		<h2>GET OUT OF MY CLINIC, FOOL! <i>PUTAIN DE BORDEL DE MERDE!!</i></h2>
+		<h2>GET OUT OF MY CLINIC, CUMBERSOME FOOL! <i>PUTAIN DE BORDEL DE MERDE!!</i></h2>
         Do not be afraid to tell people to get out if they are crowding the clinic, especially if they are getting in your way, this CAN get you in trouble but this is YOUR clinic. How rudely or how nicely you say it depends on you, but do not be afraid to tell people to stop getting in your way or crowding the clinic. <i>Je m'en fous</i>, the inn is next door.<br>
 		</div>
 	"}
