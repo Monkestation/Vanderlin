@@ -33786,15 +33786,6 @@
 "ncK" = (
 /turf/closed/wall/mineral/craftstone,
 /area/indoors/town/noble_manor/red)
-"ncT" = (
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/turf/open/floor/cobble,
-/area/indoors/town/keep/basement)
 "nda" = (
 /obj/structure/bookcase/random/archive{
 	opacity = 0
@@ -79685,7 +79676,7 @@ uRF
 lXv
 olj
 kZq
-ncT
+piZ
 cBr
 twI
 qFz
@@ -80693,7 +80684,7 @@ wxY
 wxY
 kZq
 kZq
-uqM
+ujy
 vHd
 vHd
 nmY
@@ -81905,7 +81896,7 @@ wxY
 wxY
 wxY
 kZq
-ujy
+wxY
 kKi
 mlq
 uKh
