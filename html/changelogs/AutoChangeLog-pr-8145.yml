@@ -1,0 +1,6 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - qol: "Re-added gathering materials for carts from the spot the user is standing on"
+  - qol: "Switched dumping handcart's contents to alt+click"
+  - qol: "Added controls under the mechanics tab when examining the handcart"
