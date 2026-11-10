@@ -11,7 +11,6 @@
 	can_sew = FALSE
 	can_cauterize = FALSE
 	passive_healing = 0.5
-	werewolf_infection_probability = 15
 	associated_bclasses = list(BCLASS_BITE)
 	can_roll = FALSE
 	required_bodypart_status = BODYPART_ORGANIC
@@ -20,7 +19,6 @@
 	name = "nip"
 	whp = 15
 	woundpain = 3
-	werewolf_infection_probability = 10
 
 /datum/wound/bite/large
 	name = "gnarly bite"
@@ -37,4 +35,3 @@
 	can_sew = TRUE
 	can_cauterize = TRUE
 	passive_healing = 0
-	werewolf_infection_probability = 20
