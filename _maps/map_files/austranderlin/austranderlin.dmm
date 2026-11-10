@@ -661,7 +661,6 @@
 "apV" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
@@ -14333,7 +14332,6 @@
 "gJq" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/fermentation_keg,
-/obj/effect/decal/cleanable/sigil/N,
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
@@ -14922,7 +14920,6 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/closet/crate/crafted_closet/inn/chest,
-/obj/effect/decal/cleanable/sigil/NE,
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
@@ -20613,7 +20610,6 @@
 /area/outdoors/exposed/church/graveyard)
 "jxA" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil/S,
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
@@ -39749,7 +39745,6 @@
 /area/outdoors/town)
 "rSk" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
 "rSx" = (
@@ -40792,7 +40787,6 @@
 /turf/open/water/clean,
 /area/outdoors/exposed/under/basement)
 "spk" = (
-/obj/effect/decal/cleanable/sigil/SW,
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
@@ -40971,7 +40965,6 @@
 "stM" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil/W,
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
@@ -41969,7 +41962,7 @@
 /obj/structure/mannequin/male,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)
@@ -46441,7 +46434,6 @@
 "uQN" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil/E,
 /obj/structure/carpet/purple,
 /turf/open/floor/tile/kitchen,
 /area/indoors/town)

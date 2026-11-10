@@ -4,7 +4,6 @@
 /turf/open/floor/carpet/lord/left,
 /area/under/tomb/indoors/church)
 "as" = (
-/obj/effect/decal/cleanable/sigil/S,
 /obj/effect/decal/cleanable/blood/gibs/down,
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/churchmarble/rust,
@@ -114,7 +113,7 @@
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/effect/blood_rune,
 /obj/item/clothing/cloak/templar/astratan,
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/item/clothing/neck/psycross/silver/divine/astrata{
 	pixel_y = -2;
 	pixel_x = 15
@@ -177,7 +176,6 @@
 /turf/closed/wall/mineral/decostone/moss/red,
 /area/under/tomb/indoors/magic)
 "jL" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/churchmarble/rust,
 /area/under/tomb/indoors/magic)
@@ -238,7 +236,6 @@
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
 "ms" = (
-/obj/effect/decal/cleanable/sigil/SW,
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/churchmarble/rust,
 /area/under/tomb/indoors/magic)
@@ -301,7 +298,6 @@
 /area/under/tomb/indoors/magic)
 "rI" = (
 /obj/item/organ/heart,
-/obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "rL" = (
@@ -397,7 +393,6 @@
 "wu" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /obj/item/bodypart/r_arm/zizombie,
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "xn" = (
@@ -409,7 +404,6 @@
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
 "xZ" = (
-/obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "yn" = (
@@ -438,7 +432,6 @@
 "zz" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/item/bodypart/l_leg/zizombie,
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "zB" = (
@@ -520,26 +513,22 @@
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/church)
 "CU" = (
-/obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/churchmarble/rust,
 /area/under/tomb/indoors/magic)
 "Dv" = (
 /obj/item/organ/appendix,
-/obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "DC" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/item/clothing/shirt/robe/priest,
 /turf/open/floor/churchmarble/rust,
 /area/under/tomb/indoors/magic)
 "DG" = (
 /obj/item/bodypart/head/zizombie,
-/obj/effect/decal/cleanable/sigil/N,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "Et" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/churchmarble/rust,
 /area/under/tomb/indoors/magic)
@@ -565,13 +554,11 @@
 "FN" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /obj/effect/decal/cleanable/blood/tracks,
-/obj/effect/decal/cleanable/sigil/W,
 /obj/item/carvedgem/amber/sun,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "FU" = (
 /obj/effect/decal/cleanable/blood/gibs,
-/obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "FW" = (
@@ -605,7 +592,6 @@
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/church)
 "HJ" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/churchmarble/rust,
 /area/under/tomb/indoors/magic)
 "IO" = (
@@ -636,7 +622,6 @@
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
 "KA" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/churchmarble/rust,
 /area/under/tomb/indoors/magic)
@@ -829,7 +814,6 @@
 /turf/closed/wall/mineral/decostone/moss/red/cand,
 /area/under/tomb/indoors/magic)
 "Xd" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/churchmarble/rust,
 /area/under/tomb/indoors/magic)
