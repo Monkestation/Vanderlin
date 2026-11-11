@@ -8,7 +8,7 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/magic/arcane = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 20,
