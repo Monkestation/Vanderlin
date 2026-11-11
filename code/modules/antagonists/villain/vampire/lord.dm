@@ -40,7 +40,11 @@
 	vampire.reset_and_reroll_stats()
 	vampire.purge_combat_knowledge()
 	vampire.remove_all_traits()
-  
+	if(!forced)
+		if(clan_selected)
+			vampire.set_clan(default_clan)
+		else
+			show_clan_selection(vampire)
 	. = ..()
   
 	for(var/datum/antagonist/vampire/thrall_datum in starting_thralls)
