@@ -64,8 +64,7 @@
 
 	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, FAMILY_PROGENY), 10 SECONDS)
 
-	if(spawned.dna.species.id != SPEC_ID_TIEFLING)
-		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
+	ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
 
 /datum/job/advclass/wretch/reject/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
