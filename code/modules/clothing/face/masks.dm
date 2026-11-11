@@ -341,7 +341,6 @@
 	armor_type = /datum/armor/mask/metal/steel
 	desc = "A knightly steel mask that both conceals and protects the face. Usually paired with a bascinet."
 	max_integrity = 300
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 100
 
