@@ -46,7 +46,6 @@
 		else
 			show_clan_selection(vampire)
 	. = ..()
-  
 	for(var/datum/antagonist/vampire/thrall_datum in starting_thralls)
 		var/mob/living/carbon/human/thrall = thrall_datum.owner?.current
 		if(!istype(thrall))
