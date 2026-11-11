@@ -142,7 +142,7 @@
 	name = "malum's anvil dwarven keep"
 	icon_state = "keepmalum"
 	first_time_text = "THE BROKEN ANVIL"
-	background_track = 'sound/music/area/decap.ogg'
+	background_track = 'sound/music/area/dwarf.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	custom_area_sound = 'sound/misc/stings/MalumSting.ogg'
@@ -151,10 +151,20 @@
 	name = "malum's anvil upper dwarven keep"
 	icon_state = "upperkeepmalum"
 	first_time_text = "THE RUSTED HAMMER"
-	background_track = 'sound/music/area/decap.ogg'
+	background_track = 'sound/music/area/dwarf.ogg'
 	background_track_dusk = null
 	background_track_night = null
 	custom_area_sound = 'sound/misc/stings/RosewoodSting.ogg'
+
+/area/indoors/mountains/anvil/vault
+	name = "malum's anvil upper dwarven keep vault"
+	icon_state = "vaultmalum"
+	first_time_text = "MALUM'S VAULT"
+	background_track = 'sound/music/area/indoor.ogg'
+	background_track_dusk = null
+	background_track_night = null
+	custom_area_sound = 'sound/misc/stings/RosewoodSting.ogg'
+	area_flags = NO_TELEPORT // Let's at least make this a LITTLE harder to break into, shall we? :|
 
 /area/indoors/mountains/anvil/surface
 	name = null

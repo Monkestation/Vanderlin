@@ -3,10 +3,11 @@
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 3 SECONDS
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/scale
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 	clothing_flags = CANT_SLEEP_IN
 	prevent_crits = ALL_EXCEPT_STAB
 	abstract_type = /obj/item/clothing/armor/medium
@@ -19,7 +20,7 @@
 
 	body_parts_covered = COVERAGE_ALL_BUT_ARMS
 	prevent_crits = ALL_CRITICAL_HITS
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 7 KILOGRAMS
 
 /obj/item/clothing/armor/medium/scale/steppe
@@ -58,7 +59,7 @@
 	icon_state = "inqcoat"
 	item_state = "inqcoat"
 	sleevetype = "shirt"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	equip_delay_self = 4 SECONDS
 	blocksound = SOFTHIT
@@ -88,7 +89,6 @@
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "armored inquisitorial duster"
 	desc = "Metal plates reinforce this heavy coat, worn over the top of the finest Psydonian plate."
-	smeltresult = /obj/item/ingot/steel_slag
 	icon_state = "inqcoata"
 	item_state = "inqcoata"
 	equip_delay_self = 4 SECONDS

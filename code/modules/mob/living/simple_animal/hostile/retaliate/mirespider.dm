@@ -1,7 +1,8 @@
 /mob/living/simple_animal/hostile/retaliate/mirespider
-	icon = 'icons/mob/mirespider_small.dmi'
-	desc = "Said to have originated from the decapitated heads of fallen legionnaires from eons past, grown legs and a voracious appetite, mire crawlers are common pests in many a wetland. Occasionally hunted for their silk."
+	desc = "Said to have originated from the decapitated heads of fallen legionnaires from eons past, \
+		grown legs and a voracious appetite, mire crawlers are common pests in many a wetland. Occasionally hunted for their silk."
 	name = "mire crawler"
+	icon = 'icons/mob/mirespider_small.dmi'
 	icon_state = "crawler"
 	icon_living = "crawler"
 	icon_dead = "crawler_dead"
@@ -12,7 +13,7 @@
 	see_in_dark = 10
 	move_to_delay = 3
 
-	faction = list("zombie", "spiders")
+	faction = list(FACTION_SPIDERS)
 	attack_sound = list('sound/vo/mobs/spider/attack (1).ogg','sound/vo/mobs/spider/attack (2).ogg','sound/vo/mobs/spider/attack (3).ogg','sound/vo/mobs/spider/attack (4).ogg')
 
 	base_intents = list(/datum/intent/simple/bite/mirespider)
@@ -147,14 +148,16 @@
 	return ..()
 
 /mob/living/simple_animal/hostile/mirespider_lurker
-	icon = 'icons/mob/mirespider_big.dmi'
-	desc = "An unusually large and dangerous mire crawler, these lumbering creatures tend to find smaller specimens gravitating to them for safety - or perhaps simply to hunt more efficiently."
+
+	desc = "An unusually large and dangerous mire crawler, these lumbering creatures tend to find smaller \
+		specimens gravitating to them for safety - or perhaps simply to hunt more efficiently."
 	name = "mire lurker"
+	icon = 'icons/mob/mirespider_big.dmi'
 	icon_state = "lurker"
 	icon_living = "lurker"
 	icon_dead = "lurker_dead"
 
-	faction = list("zombie", "spiders")
+	faction = list(FACTION_SPIDERS)
 	attack_sound = list('sound/vo/mobs/spider/attack (1).ogg','sound/vo/mobs/spider/attack (2).ogg','sound/vo/mobs/spider/attack (3).ogg','sound/vo/mobs/spider/attack (4).ogg')
 
 	base_intents = list(/datum/intent/simple/bite/mirespider_lurker)
@@ -257,15 +260,15 @@
 	followers.Cut()
 
 /mob/living/simple_animal/hostile/mirespider_paralytic
-	icon = 'icons/mob/mirespider_small.dmi'
 	name = "aragn"
+	icon = 'icons/mob/mirespider_small.dmi'
 	desc = "A gigantic species of spider accompanied always by a strong sulphuric stench. Its fangs carry \
 	a dangerous paralytic; a danger for the common traveller, and an opportunity to any aspiring poisoner."
 	icon_state = "aragn"
 	icon_living = "aragn"
 	icon_dead = "aragn_dead"
 
-	faction = list("zombie", "spiders")
+	faction = list(FACTION_SPIDERS)
 	attack_sound = list('sound/vo/mobs/spider/attack (1).ogg','sound/vo/mobs/spider/attack (2).ogg','sound/vo/mobs/spider/attack (3).ogg','sound/vo/mobs/spider/attack (4).ogg')
 
 	base_intents = list(/datum/intent/simple/bite/mirespider_paralytic)
@@ -343,13 +346,13 @@
 	qdel(src)
 
 /mob/living/simple_animal/hostile/retaliate/mirespider/angry
-	faction = list("mad", "zombie")
+	faction = list(FACTION_SPIDERS)
 
 /mob/living/simple_animal/hostile/mirespider_paralytic/angry
-	faction = list("mad", "zombie")
+	faction = list(FACTION_SPIDERS)
 
 /mob/living/simple_animal/hostile/mirespider_lurker/angry
-	faction = list("mad", "zombie")
+	faction = list(FACTION_SPIDERS)
 
 /obj/projectile/bullet/spider
 	name = "web glob"

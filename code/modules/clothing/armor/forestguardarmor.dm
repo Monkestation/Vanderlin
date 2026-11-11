@@ -14,7 +14,7 @@
 /obj/item/clothing/armor/leather/advanced/forrester/masterwork
 	name = "masterwork forrester's armor"
 	desc = "Armour worn by few, those that live to hunt, to battle. \nThe soft, cloth linings with masterfully tanned leather make it easy to repair with a needle."
-	max_integrity = INTEGRITY_STRONG + 200
+	max_integrity = INTEGRITY_OLD_STRONG + 200
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/leather/master
 
@@ -39,7 +39,6 @@
 	salvage_amount = 1
 	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/forrestercloak/snow
 	icon_state = "snowcloak"
@@ -55,7 +54,6 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/forest_guard.dmi'
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
-	has_storage = TRUE
 
 /obj/item/clothing/head/helmet/visored/warden
 	name = "wardens's helmet"
@@ -83,6 +81,7 @@
 
 	prevent_crits = ALL_EXCEPT_STAB
 	abstract_type = /obj/item/clothing/head/helmet/medium/decorated
+	melting_material = /datum/material/steel
 
 /obj/item/clothing/head/helmet/medium/decorated/skullmet
 	name = "skullmet"
@@ -100,12 +99,13 @@
 		var/list/icons = SKULLMET_ICONS
 		var/choice = tgui_input_list(user, "Choose a helmet design.", "Helmet designs", icons)
 		var/playerchoice = icons[choice]
-		picked = TRUE
-		icon_state = playerchoice
-		item_state = playerchoice
-		if(loc == user && ishuman(user))
-			var/mob/living/carbon/H = user
-			H.update_inv_head()
+		if(playerchoice)
+			picked = TRUE
+			icon_state = playerchoice
+			item_state = playerchoice
+			if(loc == user && ishuman(user))
+				var/mob/living/carbon/H = user
+				H.update_inv_head()
 		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 
 /obj/item/clothing/head/helmet/medium/decorated/rousskullmet

@@ -12,7 +12,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/job/advclass/combat/bladesinger
@@ -21,7 +21,7 @@
 	allowed_races = list(SPEC_ID_ELF)
 	total_positions = 1
 	outfit = /datum/outfit/bladesinger
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatWarrior.ogg'
 	roll_chance = 7
 

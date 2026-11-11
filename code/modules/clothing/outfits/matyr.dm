@@ -8,7 +8,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/cloaks.dmi'
 	body_parts_covered = CHEST|GROIN
 	boobed = FALSE
-	sellprice = 100
+	sellprice = 20
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	flags_inv = HIDEBOOB
 
@@ -75,7 +75,6 @@
 	flags_inv = HIDEBOOB
 	var/overarmor = TRUE
 	sellprice = 300
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/grandmaster/MiddleClick(mob/user)
 	overarmor = !overarmor
@@ -97,6 +96,7 @@
 	flags_inv = HIDEFACE
 	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_CHOP, BCLASS_BLUNT)
 	sellprice = 0
+	smeltresult = /obj/item/ingot/gold
 
 /obj/item/clothing/face/lordmask/preceptor/gold
 	name = "preceptor's mask"

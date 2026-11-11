@@ -9,7 +9,7 @@
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/climbing = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/alchemy = 10,
@@ -23,7 +23,7 @@
 	you in the back, and wait for an opportune moment to stab them in theirs. Make a fine practice far away from the eyes of \
 	your competition, lest you find yourself dead and floating downstream."
 	outfit = /datum/outfit/chirurgeon
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	attribute_sheet = /datum/attribute_holder/sheet/job/chirurgeon
 

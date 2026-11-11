@@ -28,6 +28,13 @@
 #define ACCESS_CAPTAIN "captain"
 #define ACCESS_GATE "gate"
 
+// Gallowband
+#define ACCESS_GALLOWBAND "gallowband"
+#define ACCESS_GALLOWBAND_SECURE "gallowband_secure"
+#define ACCESS_GALLOWBAND_HERSIR "gallowband_hersir"
+#define ACCESS_GALLOWBAND_WARDEN "gallowband_warden"
+#define ACCESS_GALLOWBAND_GOTHI "gallowband_gothi"
+
 // Church
 #define ACCESS_CHURCH "church"
 #define ACCESS_PRIEST "priest"
@@ -104,6 +111,12 @@
 
 // Other
 #define ACCESS_BOGWITCH "bogwitch"
+#define ACCESS_DREAM_CAVE "Dreamcave"
+
+// Antags
+#define ACCESS_BANDIT "banditcamp"
+#define ACCESS_VAMPIRE "mansionvampire"
+#define ACCESS_LICH "lichlair"
 
 // Lock Strength
 #define LOCK_LEGENDARY 1

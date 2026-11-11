@@ -429,7 +429,7 @@
 		if(nodmg)
 			return FALSE
 
-/mob/living/carbon/human/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range)
+/mob/living/carbon/human/ex_act(severity, target, epicenter, devastation_range, heavy_impact_range, light_impact_range, flame_range, burns)
 	if(HAS_TRAIT(src, TRAIT_BOMBIMMUNE))
 		return
 
@@ -446,7 +446,7 @@
 	var/dmgmod = round(rand(0.5, 1.5), 0.1)
 	var/bomb_armor = 0
 
-	if(fdist)
+	if(fdist && burns)
 		var/stacks = ((fdist - fodist) * 2)
 		fire_act(stacks)
 
@@ -476,6 +476,10 @@
 			if(bomb_armor)
 				brute_loss = (10 * (2 - round(bomb_armor*0.01, 0.05)) * ldist) - ((10 * (2 - round(bomb_armor*0.01, 0.05))) * fodist)
 				damage_clothes(max(brute_loss - bomb_armor, 0), BRUTE, "blunt")
+	if(!burns)
+		brute_loss += burn_loss
+		burn_loss = 0
+
 	take_overall_damage(brute_loss,burn_loss, damage_type = BCLASS_BLUNT)
 
 	//attempt to dismember bodyparts
@@ -643,13 +647,20 @@
 		return
 
 	if(src == M)
-		if(has_status_effect(STATUS_EFFECT_CHOKINGSTRAND))
-			to_chat(src, "<span class='notice'>I attempt to remove the durathread strand from around my neck.</span>")
+		if(has_status_effect(/datum/status_effect/debuff/blood_choke/herald))
+			to_chat(src, span_bloody("I attempt to free myself from the grip of blood magic."))
 			if(do_after(src, 3.5 SECONDS, src))
-				to_chat(src, "<span class='notice'>I successfully remove the durathread strand.</span>")
-				remove_status_effect(STATUS_EFFECT_CHOKINGSTRAND)
+				to_chat(src, span_bloody("I successfully escape death's grasp!"))
+				remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
 			return
 		check_for_injuries(M)
+		return
+
+	if(has_status_effect(/datum/status_effect/debuff/blood_choke/herald))
+		visible_message(span_bloody("[M] attempts to free [src] from the grip of blood magic."), span_bloody("[M] is trying to free me from the grip of blood magic."))
+		if(do_after(src, 3.5 SECONDS, src))
+			visible_message(span_bloody("[M] successfully frees [src] from the grip of blood magic."), span_bloody("[M] has freed me from death's grasp!"))
+			remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
 		return
 
 	if(wear_armor)
@@ -659,7 +670,7 @@
 
 	return ..()
 
-/mob/living/carbon/human/proc/check_for_injuries(mob/user = src, advanced = FALSE, silent = FALSE, additional = FALSE)
+/mob/living/carbon/human/proc/check_for_injuries(mob/user = src, advanced = FALSE, silent = FALSE, additional = FALSE, show_reagents = FALSE)
 	var/list/examination = list("<span class='info'>ø ------------ ø")
 	var/m1
 	var/deep_examination = advanced
@@ -750,6 +761,15 @@
 	if(additional)
 		examination += span_info(span_green("[getToxLoss()] TOXIN"))
 		examination += span_info(span_blue("[getOxyLoss()] OXYGEN"))
+
+	if(show_reagents && length(reagents.reagent_list))
+		examination += "ø ------------ ø"
+		for(var/datum/reagent/reagent in reagents.reagent_list)
+			var/toxin_report = ""
+			if(istype(reagent, /datum/reagent/toxin) || istype(reagent, /datum/reagent/poison))
+				toxin_report = " [span_red("\[DANGER\]")]"
+			examination += "<font color = '[reagent.color]'>[reagent.name] ([floor(reagent.volume)])[toxin_report]</font>"
+
 	examination += "ø ------------ ø</span>"
 	if(!silent)
 		to_chat(user, examination.Join("\n"))

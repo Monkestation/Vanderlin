@@ -1,16 +1,16 @@
 #define MAX_ASCENT 4
 /datum/attribute_holder/sheet/job/vampire_lord
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/unarmed = list(40, 40)
+		/datum/attribute/skill/combat/unarmed = list(40, 40),
+		/datum/attribute/skill/combat/wrestling = list(50, 50),
+		/datum/attribute/skill/combat/swords = list(40, 40),
+		/datum/attribute/skill/combat/axesmaces = list(40, 40),
+		/datum/attribute/skill/combat/polearms = list(40, 40),
+		/datum/attribute/skill/combat/whipsflails = list(40, 40),
 	)
 	raw_attribute_list = list(
 		/datum/attribute/skill/magic/blood = 10,
-		/datum/attribute/skill/combat/wrestling = 50,
-		/datum/attribute/skill/combat/swords = 40,
-		/datum/attribute/skill/combat/axesmaces = 40,
-		/datum/attribute/skill/combat/polearms = 40,
-		/datum/attribute/skill/combat/whipsflails = 40,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/climbing = 50,
 	)
 
@@ -26,7 +26,7 @@
 	allow_preference_switching = TRUE
 	var/chooses_name = TRUE
 	var/outfit = /datum/outfit/vamplord
-	var/patron = /datum/patron/godless/autotheist
+	var/patron = /datum/patron/archdevil/mephistopheles
 
 	var/ascension_level = 0
 	// thralls to set the clan of on creation
@@ -40,13 +40,7 @@
 	vampire.reset_and_reroll_stats()
 	vampire.purge_combat_knowledge()
 	vampire.remove_all_traits()
-	vampire.grant_undead_eyes()
 	. = ..()
-	if(!forced)
-		if(clan_selected)
-			vampire.set_clan(default_clan)
-		else
-			show_clan_selection(vampire)
 	for(var/datum/antagonist/vampire/thrall_datum in starting_thralls)
 		var/mob/living/carbon/human/thrall = thrall_datum.owner?.current
 		if(!istype(thrall))

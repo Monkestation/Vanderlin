@@ -400,7 +400,7 @@
 /turf/closed/wall/mineral/decostone,
 /area/under/tomb)
 "il" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/effect/spawner/map_spawner/loot/armor,
 /obj/item/clothing/cloak/tabard/crusader,
 /turf/open/floor/carpet,

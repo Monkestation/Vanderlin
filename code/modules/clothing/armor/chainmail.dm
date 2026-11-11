@@ -8,14 +8,15 @@
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	sellprice = VALUE_STEEL_ARMOR
 
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/maille
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 6 KILOGRAMS
 
 	material_category = ARMOR_MAT_CHAINMAIL
@@ -25,12 +26,12 @@
 	desc = "Made out of interlocked iron rings. Offers good resistance against arrows, stabs and cuts. \nUsually worn as padding for proper armor."
 	icon_state = "ihaubergeon"
 	item_state = "ihaubergeon"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR
 
 	armor_type = /datum/armor/maille/iron
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 6 KILOGRAMS
 
 //................ Hauberk ............... //
@@ -40,7 +41,8 @@
 	icon_state = "hauberk"
 	item_state = "hauberk"
 	sellprice = VALUE_STEEL_ARMOR_FINE
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 
 	body_parts_covered = COVERAGE_FULL
 	item_weight = 9 KILOGRAMS
@@ -69,9 +71,9 @@
 	icon_state = "ihauberk"
 	item_state = "ihauberk"
 	sellprice = VALUE_IRON_ARMOR_UNUSUAL
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/maille/iron
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 9 KILOGRAMS
 

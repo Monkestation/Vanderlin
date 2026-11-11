@@ -7,12 +7,14 @@
 	resistance_flags = FIRE_PROOF
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = null
+	melt_amount = 75
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ITEM
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_type = /datum/armor/head/plate/bad
-	max_integrity = INTEGRITY_POOR //Looked like it was defaulting to integrity_worst from head.dm which gave some helmets the same durability has hats.
+	max_integrity = INTEGRITY_OLD_POOR //Looked like it was defaulting to INTEGRITY_OLD_WORST from head.dm which gave some helmets the same durability has hats.
 	body_parts_covered = COVERAGE_SKULL
 	prevent_crits = ALL_EXCEPT_STAB
 

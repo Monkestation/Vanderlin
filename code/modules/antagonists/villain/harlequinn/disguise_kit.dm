@@ -60,7 +60,7 @@
 		COMSIG_ATOM_UPDATE_APPEARANCE,
 		COMSIG_ATOM_WAS_ATTACKED,
 	))
-	user.name = old_name
+	user.real_name = old_name
 	user.cut_overlays()
 	user.regenerate_icons()
 	user.alpha = 255

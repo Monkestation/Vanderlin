@@ -29,7 +29,7 @@
 		if(zone_precise != BODY_ZONE_PRECISE_NECK)
 			return FALSE
 
-	if(C.status_flags & GODMODE)
+	if(HAS_TRAIT(C, TRAIT_GODMODE))
 		return FALSE
 
 	if(HAS_TRAIT(C, TRAIT_NODISMEMBER))
@@ -85,14 +85,11 @@
 		for(var/mob/living/carbon/CA in hearers(world.view, C))
 			if(CA != C && !CA.is_blind())
 				if(stress2give == /datum/stress_event/viewdismember)
-					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
-						continue
 					if(CA.has_quirk(/datum/quirk/vice/addiction/sadist))
 						CA.add_stress(/datum/stress_event/viewdismembermaniac)
 						CA.sate_addiction(/datum/quirk/vice/addiction/sadist)
 						continue
-					if(CA.gender == FEMALE)
-						CA.add_stress(/datum/stress_event/fviewdismember)
+					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 						continue
 				CA.add_stress(stress2give)
 
@@ -157,9 +154,9 @@
 	return TRUE
 
 /obj/item/bodypart/head/dismember(dam_type, bclass, mob/living/user, zone_precise, forced)
-	. = ..()
-	if(HAS_TRAIT(owner, TRAIT_NODECAPITATE))
+	if(owner && HAS_TRAIT(owner, TRAIT_NODECAPITATE))
 		return FALSE
+	. = ..()
 
 	if(owner?.client)
 		add_abstract_elastic_data(ELASCAT_COMBAT, ELASDATA_DECAPITATIONS, 1)

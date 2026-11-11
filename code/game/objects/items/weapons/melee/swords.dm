@@ -17,7 +17,7 @@
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST)
 	alt_intents = list(DAZE_BASH, SWORD_STRIKE, POMMEL_BASH)
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
 
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_HIP
@@ -28,7 +28,9 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	flags_1 = CONDUCT_1
 	thrown_bclass = BCLASS_CUT
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = null
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	sellprice = 30
 	grid_height = 96
 	grid_width = 64
@@ -55,7 +57,7 @@
 
 /obj/item/weapon/sword/short
 	name = "short sword"
-	desc = "A steel sword of shortened design and a reduced grip for single hand use."
+	desc = "A steel sword of shortened design and a reduced grip for single-hand use."
 	icon_state = "swordshort"
 	force = DAMAGE_SHORTSWORD
 	force_wielded = 0
@@ -67,40 +69,41 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	sellprice = 30
 	item_weight = 700 GRAMS
-	smeltresult = /obj/item/ingot/steel_slag
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_STEEL
+	melting_material = /datum/material/steel
 	weapon_special = /datum/special_intent/triple_stab
 
 /obj/item/weapon/sword/short/iron
-	desc = "An iron sword of shortened design and a reduced grip for single hand use."
+	desc = "An iron sword of shortened design and a reduced grip for single-hand use."
 	icon_state = "iswordshort"
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
+	melting_material = /datum/material/iron
 	sellprice = 15
 	item_weight = 750 GRAMS
 
 /obj/item/weapon/sword/short/bronze
 	name = "bronze short sword"
-	desc = "A bronze sword of shortened design and a reduced grip for single hand use."
+	desc = "A bronze sword of shortened design and a reduced grip for single-hand use."
 	icon_state = "shortsword_bronze"
 	wdefense = GOOD_PARRY
 	max_blade_int = 150
-	max_integrity = INTEGRITY_STANDARD
-	smeltresult = /obj/item/ingot/bronze
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BRONZE
+	melting_material = /datum/material/bronze
 	sellprice = 10
 	item_weight = 700 GRAMS
 
 /obj/item/weapon/sword/short/silver
 
 	name = "silver short sword"
-	desc = "A short silver sword, for those who fight the creatures of the nite."
+	desc = "A short silver sword, for those who fight the creachers of the nite."
 	icon_state = "silverswordshort"
 	force = DAMAGE_SHORTSWORD + 2
 	wdefense = GOOD_PARRY
 	max_blade_int = 250
-	max_integrity = INTEGRITY_STRONGEST * 0.8
-	smeltresult = /obj/item/ingot/silver
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
+	melting_material = /datum/material/silver
 	sellprice = 60
 	item_weight = 650 GRAMS
 
@@ -118,10 +121,22 @@
 	grid_height = 96
 	item_weight = 650 GRAMS
 	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/sword/short/psy/Initialize(mapload)
 	. = ..()						//+2 force, +50 blade int, +50 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, FALSE, 2, 50, 50, 1, TRUE)
+
+/obj/item/weapon/sword/short/bloodsteel
+	name = "bloodsteel short sword"
+	desc = "A sword of shortened design and a reduced grip for single-hand use. The blade is made with shimmering red bloodsteel."
+	icon_state = "corruptswordshort"
+	force = DAMAGE_SHORTSWORD + 2
+	sellprice = 0
+	item_weight = 600 GRAMS
+	melting_material = /datum/material/bloodsteel
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BLOODSTEEL
 
 /obj/item/weapon/sword/short/ida //Worse thrust but more damage for cutting.
 	name = "steel ida"
@@ -148,10 +163,11 @@
 	desc = "A trustworthy blade design, the first dedicated tool of war since before the age of history."
 	icon_state = "sword1"
 	sellprice = 30
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 
 	weapon_special = /datum/special_intent/shin_swipe
 	item_weight = 1.2 KILOGRAMS
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/sword/arming/Initialize()
 	. = ..()
@@ -159,9 +175,11 @@
 		icon_state = "sword[rand(1,3)]"
 
 /obj/item/weapon/sword/decorated
+	name = "decorated sword"
 	icon_state = "decsword1"
 	sellprice = 140
 	item_weight = 1.2 KILOGRAMS
+	melting_material = /datum/material/steel
 
 /obj/item/weapon/sword/decorated/Initialize()
 	. = ..()
@@ -170,11 +188,11 @@
 
 /obj/item/weapon/sword/silver
 	name = "silver sword"
-	desc = "A simple silver sword with an edge that gleams in moonlight."
+	desc = "A simple silver sword, with an edge that gleams in moonlight."
 	icon_state = "silversword"
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST * 0.8
-	smeltresult = /obj/item/ingot/silver
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
+	melting_material = /datum/material/silver
 	sellprice = 45
 	last_used = 0
 	item_weight = 1.1 KILOGRAMS
@@ -183,13 +201,36 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/sword/silver/truesilver
+	name = "truesilver sword"
+	desc = "A gleaming sword forged of truesilver, the perfect implement for keeping the nite safe."
+	icon_state = "lunar_sword"
+	sellprice = 80
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/sword/bloodsteel
+	name = "bloodsteel sword"
+	desc = "A simple sword with a shimmering bloodsteel blade."
+	icon_state = "corruptsword"
+	force = DAMAGE_SWORD + 2
+	force_wielded = DAMAGE_SWORD_WIELD + 2
+	max_blade_int = 240
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BLOODSTEEL
+	melting_material = /datum/material/bloodsteel
+	sellprice = 0
+	item_weight = 1 KILOGRAMS
+
+/obj/item/weapon/sword/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/weapon/sword/iron
 	desc = "A simple iron sword with a tested edge, sharp and true."
 	icon_state = "isword"
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
 	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/sword/bronze
@@ -198,8 +239,8 @@
 	icon_state = "sword_bronze"
 	wdefense = GOOD_PARRY
 	max_blade_int = 150
-	max_integrity = INTEGRITY_STANDARD
-	smeltresult = /obj/item/ingot/bronze
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BRONZE
+	melting_material = /datum/material/bronze
 	item_weight = 1.2 KILOGRAMS
 
 /obj/item/weapon/sword/kaskara
@@ -211,29 +252,47 @@
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_CHOP)
 	alt_intents = null
 	item_weight = 1.2 KILOGRAMS
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/sword/kaskara/iron
 	name = "iron kaskara"
-	desc = "A sword of with a small crossguard."
+	desc = "An iron sword with a small crossguard."
 	icon_state = "kaskara_iron"
 	wdefense = GOOD_PARRY
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
+	melting_material = /datum/material/iron
 	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/sword/stone
 	name = "stone sword"
-	desc = "A crudely made sword, wielded by savages."
+	desc = "A crudely-made sword, wielded by savages."
 	icon_state = "stone_sword"
 	force = DAMAGE_SWORD - 6
 	force_wielded = DAMAGE_SHORTSWORD - 1
 	wdefense = AVERAGE_PARRY
 	max_blade_int = 50
-	max_integrity = INTEGRITY_WORST / 4
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IMPROV
 	item_weight = 900 GRAMS
-	smeltresult = null
+
+/obj/item/weapon/sword/blacksteel
+	name = "blacksteel arming sword"
+	desc = "A broad blade of blacksteel, mounted to a rosawooden handle that perfectly complements its wielder's grasp. It is the culmination of \
+	Psydonia's storied history with arming swords; a mastersmith's triumph, only fit for the hands of a true hero... or a truer villain."
+	icon_state = "bs_sword"
+	force = DAMAGE_SWORD + 2
+	force_wielded = DAMAGE_SWORD_WIELD + 2
+	max_blade_int = 360
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BLACKSTEEL
+	melting_material = /datum/material/blacksteel
+	item_weight = 1.1 KILOGRAMS
+
+/obj/item/weapon/sword/blacksteel/decorated
+	name = "decorated blacksteel arming sword"
+	desc = "A broad blade of blacksteel, mounted atop a golden sabreguard that has been meticulously engraved with its commissoner's heraldry. It is \
+	a masterwork of unmatched opulance and lethality, and is - perhaps - the finest arming sword you will ever lay your eyes upon."
+	icon_state = "bs_swordregal"
 
 /*-------\
 | Sabres |	Onehanded, slightly weaker thrust, better for parries. Think rapier but cutting focus.
@@ -242,47 +301,51 @@
 	name = "sabre"
 	desc = "A swift sabre, favored by duelists and cut-throats alike."
 	icon_state = "saber"
+	force = DAMAGE_SWORD + 4
 	force_wielded = 0
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST)
 	gripped_intents = null
 	alt_intents = null
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	swingsound = BLADEWOOSH_SMALL
 	item_weight = 900 GRAMS
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/sword/sabre/dec
 	name = "decorated sabre"
-	desc = "A sabre decorated with fashionable gold accents without sacrificing its lethal practicality."
+	desc = "A sabre decorated with fashionable gold accents, without sacrificing its lethal practicality."
 	icon_state = "decsaber"
 	sellprice = 140
 	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/sabre/captain
 	name = "\proper law"
-	desc = "A sabre decorated with gold forged specifically for the Captain alongside their armor. To bring Law to the lands, they shall use this blade."
+	desc = "A sabre decorated with gold, forged specifically for the Captain alongside their armor. To bring Law to the lands, they shall use this blade."
 	icon_state = "capsaber"
 	sellprice = 140
 	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/sabre/stalker
 	name = "stalker sabre"
-	desc = "A once elegant blade of mythril, diminishing under the suns gaze."
+	desc = "A once-elegant blade of mythril, diminishing under the sun's gaze."
 	icon = 'icons/roguetown/weapons/32/elven.dmi'
 	icon_state = "spidersaber"
 	possible_item_intents = list(SWORD_CUT, SHORT_THRUST)
 	item_weight = 850 GRAMS
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/sword/sabre/noc
 	name = "moonlight khopesh"
+	desc = "Glittering moonlight upon truesilver."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "nockhopesh"
-	desc = "Glittering moonlight upon blued steel."
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST, SWORD_CHOP)
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_TRUESILVER
 	item_weight = 950 GRAMS
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/truesilver
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/noc
 
 /obj/item/weapon/sword/sabre/noc/Initialize(mapload)
 	. = ..()
@@ -301,7 +364,7 @@
 /obj/item/weapon/sword/sabre/dadao
 	name = "steel dadao"
 	icon_state = "dadao_steel"
-	desc = "Sometimes also referred to as \"Saiga Choppers\". Dadaos are heavy eastern blades infamous for their ability to slice men in half."
+	desc = "Sometimes referred to as \"Saiga Choppers\". Dadaos are heavy eastern blades infamous for their ability to slice men in half."
 	force = DAMAGE_SWORD + 1
 	force_wielded = DAMAGE_SWORD_WIELD + 1
 	wdefense = AVERAGE_PARRY
@@ -313,16 +376,16 @@
 	name = "iron dadao"
 	icon_state = "dadao_iron"
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
+	melting_material = /datum/material/iron
 	item_weight = 1.3 KILOGRAMS
 
 /obj/item/weapon/sword/sabre/dadao/bronze
 	name = "bronze dadao"
 	icon_state = "dadao_bronze"
 	max_blade_int = 150
-	max_integrity = INTEGRITY_STANDARD
-	smeltresult = /obj/item/ingot/bronze
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BRONZE
+	melting_material = /datum/material/bronze
 	item_weight = 1.1 KILOGRAMS
 
 //................ Shalal Sabre ............... //
@@ -364,28 +427,30 @@
 
 /obj/item/weapon/sword/sabre/scythe
 	name = "scythe sword"
-	desc = "A farming tool blade has been fastened to a shorter wooden handle to create an improvised weapon."
+	desc = "A farming tool's blade, fastened to a shorter wooden handle to create an improvised weapon."
 	icon_state = "scytheblade"
 	force = DAMAGE_SWORD - 2
 	wdefense = AVERAGE_PARRY
 	item_weight = 1 KILOGRAMS
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
 
 /*----------\
 | Scimitars |	Normal swords with a strong cutting emphasis.
 \----------*/
 /obj/item/weapon/sword/scimitar
 	name = "scimitar"
-	desc = "A Zaladin design for swords, these curved blades are a common sight in the lands of the Ziggurat."
+	desc = "A Zaladin design for swords. These curved blades are a common sight in the lands of the Ziggurat."
 	icon_state = "scimitar"
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
 	swingsound = BLADEWOOSH_LARGE
 	item_weight = 1.1 KILOGRAMS
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/sword/scimitar/falchion
 	name = "falchion"
-	desc = "Broad blade, excellent steel, a design inspired by Malum the dwarves claim."
+	desc = "Broad blade, excellent steel - a design inspired by Malum, the dwarves claim."
 	icon_state = "falchion"
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
@@ -395,31 +460,31 @@
 
 /obj/item/weapon/sword/scimitar/messer
 	name = "messer"
-	desc = "Straight iron blade, simple cutting edge, no nonsense and a popular northern blade."
+	desc = "Straight iron blade, simple cutting edge. A popular, no-nonsense northern blade."
 	icon_state = "imesser"
 	wbalance = EASY_TO_DODGE
 	possible_item_intents = list(SWORD_CUT, AXE_CHOP)
 	gripped_intents = list(SWORD_CUT, AXE_CHOP)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = 20
 	item_weight = 1.4 KILOGRAMS
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh/iron
 	name = "iron khopesh"
-	desc = "A crescent curved sword. It's popular among traveling Noccian scholars."
+	desc = "A crescent-curved sword. It's popular among travelling Noccian scholars."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "khopesh_iron"
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = 20
 	item_weight = 1.2 KILOGRAMS
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
 
 /obj/item/weapon/sword/scimitar/lakkarikhopesh
 	name = "steel khopesh"
-	desc = "A crescent curved sword. It's popular among traveling Noccian scholars."
+	desc = "A crescent-curved sword. It's popular among travelling Noccian scholars."
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "khopesh_steel"
 	wbalance = EASY_TO_DODGE
@@ -433,8 +498,8 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_iron"
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
+	melting_material = /datum/material/iron
 	sellprice = 20
 	item_weight = 1.1 KILOGRAMS
 
@@ -455,8 +520,8 @@
 	icon = 'icons/roguetown/weapons/32/swords.dmi'
 	icon_state = "sengese_bronze"
 	max_blade_int = 150
-	max_integrity = INTEGRITY_STANDARD
-	smeltresult = /obj/item/ingot/bronze
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BRONZE
+	melting_material = /datum/material/bronze
 	sellprice = 15
 	item_weight = 1 KILOGRAMS
 
@@ -465,8 +530,8 @@
 	icon = 'icons/roguetown/weapons/32/lakkari.dmi'
 	icon_state = "sengese_silver"
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST * 0.8
-	smeltresult = /obj/item/ingot/silver
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_SILVER
+	melting_material = /datum/material/silver
 	sellprice = 30
 	item_weight = 1 KILOGRAMS
 
@@ -476,13 +541,13 @@
 
 /obj/item/weapon/sword/scimitar/wodao
 	name = "steel wo dao"
-	desc = "A slightly curved blade of eastern origin. While less durable compared to other swords, it's swift balance and unique design makes it great for unleashing precise strikes."
+	desc = "A slightly-curved blade of eastern origin. While less durable compared to other swords, its swift balance and unique design makes it great for unleashing precise strikes."
 	icon_state = "wodao_steel"
 	wbalance = VERY_HARD_TO_DODGE
 	possible_item_intents = list(RAPIER_THRUST,RAPIER_CUT)
 	swingsound =  BLADEWOOSH_SMALL
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_MALUS
 	item_weight = 900 GRAMS
 
 /obj/item/weapon/sword/scimitar/wodao/iron
@@ -491,8 +556,8 @@
 	force = DAMAGE_SWORD - 1
 	force_wielded = DAMAGE_SWORD_WIELD -1
 	max_blade_int = 160
-	max_integrity = INTEGRITY_STRONG * 0.8
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON * INTEGRITY_SPECIAL_MALUS
+	melting_material = /datum/material/iron
 	item_weight = 950 GRAMS
 
 /*--------\
@@ -500,16 +565,16 @@
 \--------*/
 /obj/item/weapon/sword/rapier
 	name = "rapier"
-	desc = "A duelist's weapon derived from western battlefield instruments, it features a tapered \
+	desc = "A duelist's weapon derived from western battlefield instruments. It features a tapered \
 	blade with a specialized stabbing tip."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "rapier"
 	force_wielded = 0
 	wbalance = VERY_HARD_TO_DODGE
-	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT)
+	possible_item_intents = list(RAPIER_THRUST, RAPIER_CUT, ESTOC_LUNGE)
 	gripped_intents = null
 	alt_intents = null
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	bigboy = TRUE
 	parrysound = list('sound/combat/parry/bladed/bladedthin (1).ogg', 'sound/combat/parry/bladed/bladedthin (2).ogg', 'sound/combat/parry/bladed/bladedthin (3).ogg')
 	parrysound = "rapier"
@@ -518,6 +583,7 @@
 
 	weapon_special = /datum/special_intent/piercing_lunge
 	item_weight = 700 GRAMS
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/sword/rapier/getonmobprop(tag)
 	. = ..()
@@ -595,13 +661,14 @@
 
 /obj/item/weapon/sword/rapier/psy
 	name = "psydonian rapier"
-	desc = "A highly ornate silver rapier, used more as a show of status for members of the inquisition."
+	desc = "A highly-ornate silver rapier, used more as a show of status for members of the Inquisition."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psyrapier"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_SILVER
 	max_blade_int = 300
 	item_weight = 700 GRAMS
 	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/sword/rapier/psy/Initialize(mapload)
 	. = ..()
@@ -610,8 +677,11 @@
 
 /obj/item/weapon/sword/rapier/psy/relic
 	name = "retribution"
-	desc = "A rapier as swift as the inquisitors of the Ordo Venatari. Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
+	desc = "A rapier as swift as the Inquisitors of the Ordo Venatari. \
+	Strike evil at its heart. Purge the unholy through the slightest window it offers, in Psydon’s name."
 	item_weight = 700 GRAMS
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/rapier/dec
 	name = "decorated rapier"
@@ -637,6 +707,7 @@
 	bigboy = FALSE
 	SET_BASE_PIXEL(0, 0)
 	item_weight = 500 GRAMS
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_MALUS
 
 /obj/item/weapon/sword/rapier/caneblade/courtphysician
 	name = "cane blade"
@@ -655,9 +726,10 @@
 	desc = "Passed down through the ages, a weapon that once carved a kingdom out now relegated to a decorative piece."
 	icon_state = "lord_rapier"
 	force = DAMAGE_SWORD_WIELD
-	sellprice = 200
+	sellprice = 240
 	max_blade_int = 400
 	item_weight = 750 GRAMS
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/sword/rapier/silver
 	name = "silver rapier"
@@ -666,8 +738,8 @@
 	force = DAMAGE_SWORD - 2
 	melt_amount = 100
 	max_blade_int = 240 // .8 of base steel
-	max_integrity = INTEGRITY_STRONGEST * 0.8
-	smeltresult = /obj/item/ingot/silver
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_SILVER
+	melting_material = /datum/material/silver
 	sellprice = 45
 	last_used = 0
 	item_weight = 650 GRAMS
@@ -675,6 +747,14 @@
 /obj/item/weapon/sword/rapier/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/sword/rapier/silver/truesilver
+	name = "truesilver rapier"
+	desc = "An elegant rapier forged of truesilver. An aristocratic take on hunting nite creachers."
+	icon_state = "lunar_rapier"
+	melting_material = /datum/material/truesilver
+	sellprice = 80
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/sword/rapier/eora
 	name = "\proper heartstring"
@@ -684,6 +764,32 @@
 	item_weight = 650 GRAMS
 	SET_BASE_PIXEL(0, 0)
 	bigboy = FALSE
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/eora
+
+/obj/item/weapon/sword/rapier/blacksteel
+	name = "blacksteel rapier"
+	desc = "A magnificent rapier of blacksteel. Despite originating from the matrimony of cutting-edge swordsmanship techniques and metallurgy, it \
+	doesn't actually have a cutting edge to call its own. Not like that matters as much, of course, when it can pierce straight through plate armor."
+	icon_state = "blacksteelrapier"
+	force = DAMAGE_SWORD + 2
+	melting_material = /datum/material/blacksteel
+	melt_amount = 100
+	max_blade_int = 400
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_BLACKSTEEL
+	item_weight = 600 GRAMS
+
+/obj/item/weapon/sword/rapier/bloodsteel
+	name = "bloodsteel rapier"
+	desc = "A narrow length of shimmering bloodsteel - a flashing streak of red leaving pools of blood in its wake."
+	icon_state = "corruptrapier"
+	force = DAMAGE_SWORD + 2
+	melting_material = /datum/material/bloodsteel
+	item_weight = 600 GRAMS
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_BLOODSTEEL
+
+/obj/item/weapon/sword/rapier/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 // Hoplite Kophesh
 /obj/item/weapon/sword/khopesh
@@ -699,14 +805,14 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_CHOP, SWORD_STRIKE)
 	gripped_intents = null
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BRONZE
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	SET_BASE_PIXEL(-16, -16)
 	bigboy = TRUE // WHY DOES THIS FUCKING VARIABLE CONTROL WHETHER THE BLOOD OVERLAY WORKS ON 64x64 WEAPONS
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	sellprice = 200 // A noble collector would love to get his/her hands on one of these blades
 	item_weight = 1.3 KILOGRAMS
 
@@ -727,7 +833,8 @@
 	wlength = WLENGTH_LONG
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	smeltresult = /obj/item/ingot/steel_slag
+	melt_amount = 200
+	melting_material = /datum/material/steel
 	swingsound = BLADEWOOSH_LARGE
 	parrysound = "largeblade"
 	pickup_sound = "brandish_blade"
@@ -743,6 +850,34 @@
 
 	weapon_special = /datum/special_intent/side_sweep
 	item_weight = 1.5 KILOGRAMS
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL
+
+/obj/item/weapon/sword/long/jeweled
+	name = "jeweled longsword"
+	desc = "A long hand-and-a-half blade, the hilt is gilded gold and set with a glimmering rontz. A masterclass in style and death."
+	icon_state = "kingslayer"
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	sellprice = 240
+
+/obj/item/weapon/sword/long/jeweled/getonmobprop(tag)
+	. = ..()
+	if(tag == "altgrip" && .)
+		return .
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.4,"sx" = -14,"sy" = -8,"nx" = 13,"ny" = -8,"wx" = -10,"wy" = -5,"ex" = 7,"ey" = -6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -13,"sturn" = 110,"wturn" = -60,"eturn" = -30,"nflip" = 1,"sflip" = 1,"wflip" = 8,"eflip" = 1)
+			if("onbelt")
+				return list("shrink" = 0.4,"sx" = -4,"sy" = -6,"nx" = 5,"ny" = -6,"wx" = 0,"wy" = -6,"ex" = -1,"ey" = -6,"nturn" = 100,"sturn" = 156,"wturn" = 90,"eturn" = 180,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
+			if("wielded")
+				return list("shrink" = 0.5,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
+			if("onback")
+				return list("shrink" = 0.45, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1, "nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1, "northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0)
+			if("onbelt")
+				return list("shrink" = 0.4, "sx" = -4, "sy" = -6, "nx" = 5, "ny" = -6, "wx" = 0, "wy" = -6, "ex" = -1, "ey" = -6, "nturn" = 100, "sturn" = 156, "wturn" = 90, "eturn" = 180, "nflip" = 0, "sflip" = 0, "wflip" = 0, "eflip" = 0, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0)
+			if("altgrip")
+				return list("shrink" = 0.45,"sx" = 2,"sy" = 3,"nx" = -7,"ny" = 1,"wx" = -8,"wy" = 0,"ex" = 8,"ey" = -1,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -135,"sturn" = -35,"wturn" = 45,"eturn" = 145,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
+
 
 /obj/item/weapon/sword/long/shotel
 	name = "steel shotel"
@@ -755,7 +890,7 @@
 
 	gripsprite = FALSE
 	sellprice = 80
-	max_integrity = INTEGRITY_STRONG - 50 //this thing is long as hell, it would be more likely to break over time
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_MALUS //this thing is long as hell, it would be more likely to break over time
 	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/sword/long/shotel/getonmobprop(tag)
@@ -776,8 +911,8 @@
 /obj/item/weapon/sword/long/shotel/iron //Balance-patch
 	name = "iron shotel"
 	icon_state = "shotel_iron"
-	max_integrity = INTEGRITY_STANDARD - 50
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_IRON * INTEGRITY_SPECIAL_MALUS
+	melting_material = /datum/material/iron
 	sellprice = 60
 	item_weight = 1.5 KILOGRAMS
 
@@ -807,7 +942,6 @@
 	gripped_intents = list(SWDLONG_CUT, SWDLONG_CHOP, SWORD_DISARM)
 	alt_intents = null
 	gripsprite = FALSE
-	max_integrity = INTEGRITY_STRONGEST
 	sellprice = 60
 	item_weight = 1.6 KILOGRAMS
 
@@ -829,8 +963,8 @@
 /obj/item/weapon/sword/long/aruval/iron //Balance-patch
 	name = "iron aruval"
 	icon_state = "aruval_iron"
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_IRON
+	melting_material = /datum/material/iron
 	sellprice = 35
 	item_weight = 1.7 KILOGRAMS
 
@@ -849,37 +983,18 @@
 			if("onbelt")
 				return list("shrink" = 0.4,"sx" = -4,"sy" = -6,"nx" = 5,"ny" = -6,"wx" = 0,"wy" = -6,"ex" = -1,"ey" = -6,"nturn" = 100,"sturn" = 156,"wturn" = 90,"eturn" = 180,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
 
-/obj/item/weapon/sword/long/death
-	color = CLOTHING_SOOT_BLACK
-
-/obj/item/weapon/sword/long/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.5,"sx" = -14,"sy" = -8,"nx" = 15,"ny" = -7,"wx" = -10,"wy" = -5,"ex" = 7,"ey" = -6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -13,"sturn" = 110,"wturn" = -60,"eturn" = -30,"nflip" = 1,"sflip" = 1,"wflip" = 8,"eflip" = 1)
-			if("altgrip")
-				return list("shrink" = 0.5,"sx" = -14,"sy" = -8,"nx" = 15,"ny" = -7,"wx" = -10,"wy" = -5,"ex" = 7,"ey" = -6,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 212,"sturn" = 335,"wturn" = 165,"eturn" = 195,"nflip" = 1,"sflip" = 1,"wflip" = 8,"eflip" = 1)
-			if("onback")
-				return list("shrink" = 0.5,"sx" = -1,"sy" = 2,"nx" = 0,"ny" = 2,"wx" = 2,"wy" = 1,"ex" = 0,"ey" = 1,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 15,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
-			if("wielded")
-				return list("shrink" = 0.6,"sx" = 6,"sy" = -2,"nx" = -4,"ny" = 2,"wx" = -8,"wy" = -1,"ex" = 8,"ey" = 3,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 15,"sturn" = -200,"wturn" = -160,"eturn" = -25,"nflip" = 8,"sflip" = 8,"wflip" = 0,"eflip" = 0)
-			if("onbelt")
-				return list("shrink" = 0.6,"sx" = -4,"sy" = -6,"nx" = 5,"ny" = -6,"wx" = 0,"wy" = -6,"ex" = -1,"ey" = -6,"nturn" = 100,"sturn" = 156,"wturn" = 90,"eturn" = 180,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0)
-
-
 //................Kriegmesser...................//
 /obj/item/weapon/sword/long/kriegmesser
 	name = "kriegmesser"
 	icon_state = "kriegmesser"
-	desc = "A long, single-edged sword with a crossguard and a long grip. It was designed to chop over stab, like a heavy cleaver."
+	desc = "A long, single-edged sword with a crossguard and a long grip. It was designed to chop more than stab, like a heavy cleaver."
 	force = DAMAGE_SWORD + 2
 	force_wielded = DAMAGE_LONGSWORD_WIELD + 3
 	possible_item_intents = list(SWORD_CUT, SWORD_CHOP)
 	gripped_intents = list(SWORD_CUT, SWDLONG_CHOP, SWORD_STRIKE, SWORD_CLEAVE)
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST
 	item_weight = 1.8 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 //................ Heirloom Sword ............... //
 /obj/item/weapon/sword/long/heirloom
@@ -889,7 +1004,6 @@
 	force = DAMAGE_SWORD - 2
 	force_wielded = DAMAGE_SWORD_WIELD - 2
 	max_blade_int = 180 // Neglected, unused
-	max_integrity = INTEGRITY_STRONG
 	static_price = TRUE
 	sellprice = 45 // Old and chipped
 	item_weight = 1.5 KILOGRAMS
@@ -901,12 +1015,14 @@
 	desc = "A sword with a silvered grip, a jeweled hilt and a honed blade; a design fit for nobility."
 	force = DAMAGE_SWORD - 2
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
 
 	sellprice = 363
 	static_price = TRUE
 	last_used = 0
 	item_weight = 1.4 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/sword/long/judgement/Initialize(mapload)
 	. = ..()
@@ -932,6 +1048,7 @@
 	desc = "A horrid sword with a silvered grip, a jeweled hilt and a honed blade; a design unfit for a true paladin."
 	color = CLOTHING_SOOT_BLACK
 	item_weight = 1.4 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious
 
 /obj/item/weapon/sword/long/vlord // this sprite is a one handed sword, not a longsword.
 	icon_state = "vlord"
@@ -941,10 +1058,14 @@
 	sellprice = 0
 	static_price = TRUE
 	item_weight = 1.6 KILOGRAMS
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/vampire
+	melting_material = /datum/material/ancient_alloy
 
 /obj/item/weapon/sword/long/vlord/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
+	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/weapon/sword/long/vlord/getonmobprop(tag)
 	. = ..()
@@ -972,7 +1093,7 @@
 
 /obj/item/weapon/sword/long/rider/steppe
 	name = "steppe sabre"
-	desc = "A curved blade of nomadic origin, it is used by cavalrymen all across the far steppes."
+	desc = "A curved blade of nomadic origin. Used by cavalrymen all across the far steppes."
 	icon_state = "steppe"
 	force_wielded = 0
 	wdefense = ULTMATE_PARRY
@@ -995,16 +1116,15 @@
 
 /obj/item/weapon/sword/long/forgotten
 	name = "forgotten blade"
-	desc = "A large silver-alloy sword made in a revisionist style, honoring Psydon. Best known as the preferred weapon of Inquisitorial Lodges."
+	desc = "A large silver-alloy sword made in a revisionist style, honoring Psydon. Often associated with older Inquisitors of the Oratorium Throni Vacui."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "oldpsybroadsword"
 	force = DAMAGE_SWORD * 0.9 // Damage is .9 of a steel sword
-	max_blade_int = INTEGRITY_STRONG * 0.8 // Integrity and blade retention is .8 of a steel sword
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_blade_int = INTEGRITY_OLD_STRONG * 0.8 // Integrity and blade retention is .8 of a steel sword
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
 
 	last_used = 0
-	smeltresult = /obj/item/ingot/silver
-	melt_amount = 75
+	melting_material = /datum/material/silver
 	sellprice = 90
 	item_weight = 1.4 KILOGRAMS
 
@@ -1019,6 +1139,22 @@
 	icon_state = "ravoxflamberge"
 	force = DAMAGE_SWORD + 2
 	item_weight = 1.5 KILOGRAMS
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/ravox
+
+/obj/item/weapon/sword/long/blacksteel
+	name = "blacksteel longsword"
+	desc = "A sleek blade of a dark, and burnished hue. \
+			A handle carved from a rosawood branch. A pairing that shall sing as it parts the air. \
+			With it, one can write a song across all of Psydonia."
+	icon_state = "bslongsword"
+	force = DAMAGE_SWORD + 3
+	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_BLACKSTEEL
+	max_blade_int = 400
+	melting_material = /datum/material/blacksteel
+	sellprice = 220
 
 /obj/item/weapon/sword/long/psydon
 	name = "psydonian longsword"
@@ -1026,18 +1162,21 @@
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psysword"
 	last_used = 0
-	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 	sellprice = 100
 	item_weight = 1.5 KILOGRAMS
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/sword/long/psydon/Initialize(mapload)
 	. = ..()
 	AddComponent(/datum/component/psyblessed, FALSE, 3, FALSE, 50, 1, TRUE)
 
 /obj/item/weapon/sword/long/psydon/relic
-	name = "\proper rememberance"
-	desc = "A balanced silver blade, favoured by both the Ordo Benetarus and the Ordo Venetari. May it carve a path through the Unholy, in honour and rememberance of Psydon's sacrifice."
+	name = "\proper remembrance"
+	desc = "A balanced silver blade, favoured by both the Ordo Benetarus and the Ordo Venetari. May it carve a path through the Unholy, in honour and remembrance of Psydon's sacrifice."
 	item_weight = 1.5 KILOGRAMS
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/long/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -1046,42 +1185,49 @@
 
 /obj/item/weapon/sword/long/silver/decorated
 	name = "decorated silver longsword"
-	desc = "A finely crafted silver longsword with a decorated golden hilt."
+	desc = "A finely-crafted silver longsword with a decorated golden hilt."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "declongsword"
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST * 0.8
 
 	last_used = 0
-	smeltresult = /obj/item/ingot/silver
 	sellprice = 160
 
 /obj/item/weapon/sword/long/silver
 	name = "silver longsword"
-	desc = "A finely crafted silver longsword"
+	desc = "A finely-crafted silver longsword."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "silverlongsword"
 	max_blade_int = 240
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
 
 	last_used = 0
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	sellprice = 120
 
 /obj/item/weapon/sword/long/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/weapon/sword/long/silver/truesilver
+	name = "truesilver longsword"
+	desc = "A finely-crafted longsword forged from truesilver."
+	icon_state = "lunar_longsword"
+	sellprice = 180
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_TRUESILVER
+
 /obj/item/weapon/sword/long/oldpsysword //Not attainable
 	name = "old psydonian longsword"
-	desc = "A finely made longsword, plated in a worn-down veneer of grubby silver. It's long seen better daes."
+	desc = "A finely-made longsword, plated in a worn-down veneer of grubby silver. It has long seen better daes."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "opsysword"
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
 
 //................ Greatsword ............... //
 /obj/item/weapon/sword/long/greatsword
 	name = "greatsword"
-	desc = "An oversized hunk of metal designed for putting fear into men and killing beasts."
+	desc = "An oversized hunk of metal, designed for putting fear into men and killing beasts."
 	icon_state = "gsw"
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	wbalance = EASY_TO_DODGE
@@ -1094,6 +1240,8 @@
 
 	weapon_special = /datum/special_intent/greatsword_swing
 	item_weight = 2.5 KILOGRAMS
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_STEEL
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/sword/long/greatsword/getonmobprop(tag)
 	. = ..()
@@ -1111,15 +1259,15 @@
 //................ Psydonian Greatsword ............... //
 /obj/item/weapon/sword/long/greatsword/psydon
 	name = "psydonian greatsword"
-	desc = "A mighty silver greatsword made to strike fear into the heart of even Archdevils."
+	desc = "A mighty silver greatsword, made to strike fear into the heart of even Archdevils."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psygsword"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	gripped_intents = list(SWORD_CUT, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
-	smeltresult = /obj/item/ingot/silverblessed
-	melt_amount = 150
+	melting_material = /datum/material/silver
 	sellprice = 150
 	item_weight = 2.5 KILOGRAMS
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/sword/long/greatsword/psydon/Initialize(mapload)
 	. = ..()
@@ -1146,6 +1294,8 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_THRUST, SWDLONG_CHOP)
 	item_weight = 2.5 KILOGRAMS
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/long/greatsword/psydon/relic/Initialize(mapload)
 	. = ..()
@@ -1153,18 +1303,20 @@
 
 /obj/item/weapon/sword/long/broadsword/psy
 	name = "old psydonian broadsword"
-	desc = "Even the most ignorant of zealots know that the holy silver loses its properties when not blessed by Priests for an extended period of time. Its edge remains as lethal as ever, however."
+	desc = "Even the most ignorant of zealots know that the holy silver loses its properties when not blessed by Priests for an extended period of time. Even so, its edge endures, lethal as ever."
 	icon = 'icons/roguetown/weapons/64/psydonite.dmi'
 	icon_state = "psybroadsword"
-	smeltresult = /obj/item/ingot/silver
-	melt_amount = 150
+	melting_material = /datum/material/silver
 	item_weight = 2.5 KILOGRAMS
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/sword/long/broadsword/psy/relic
 	name = "\proper creed"
-	desc = "Bathed in Psydonian prayers, this large and heavy blade exists to slay the inhumen and evil. The crossguard’s psycross is engraved with prayers of the Ordo Benetarus. You’re the light - show them the way."
+	desc = "Bathed in Psydonian prayers, this large and heavy blade exists to slay the inhumen and evil. The crossguard’s psycross is engraved with prayers of the Ordo Benetarus. You are the light - show them the way."
 	item_weight = 2.5 KILOGRAMS
-	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/psydonite_relic
 
 /obj/item/weapon/sword/long/broadsword/psy/getonmobprop(tag)
 	. = ..()
@@ -1181,9 +1333,10 @@
 
 /obj/item/weapon/sword/long/greatsword/psydon/unforgotten
 	name = "unforgotten blade"
-	desc = "High Inquisitor Archibald once recorded an expedition of seven brave order members into eastern snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against darksteel-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in remembrance."
+	desc = "High Inquisitor Archibald once recorded an expedition of seven brave order members, who ventured into the eastern snow-felled wastes to root out evil. Its leader, Holy Ordinator Guillemin, was said to have held on for seven daes and seven nights against avantyne-clad heretics before Psydon acknowledged his endurance. Nothing but his blade remained - his psycross wrapped around its hilt in remembrance."
 	icon_state = "forgottenblade"
 	item_weight = 2.5 KILOGRAMS
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 
 /obj/item/weapon/sword/long/greatsword/psydon/unforgotten/Initialize()
 	. = ..()					//+50 Blade int, +3 DMG, +50 int, +1 def, make it silver
@@ -1200,16 +1353,36 @@
 	sellprice = 120
 	item_weight = 2.8 KILOGRAMS
 
+/obj/item/weapon/sword/long/greatsword/flamberge/blacksteel
+	name = "blacksteel flamberge"
+	desc = "A flamberge made of blacksteel. As the undulating blade dances through battle, it shimmers in the air like a black flame."
+	icon_state = "blackflamb"
+	force_wielded = DAMAGE_GREATSWORD_WIELD + 3
+	melting_material = /datum/material/blacksteel
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_BLACKSTEEL
+
+/obj/item/weapon/sword/long/greatsword/flamberge/blacksteel/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen")
+				return list("shrink" = 0.6,"sx" = -6,"sy" = 6,"nx" = 6,"ny" = 7,"wx" = 0,"wy" = 5,"ex" = -1,"ey" = 7,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -50,"sturn" = 40,"wturn" = 50,"eturn" = -50,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
+			if("wielded")
+				return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
+			if("onback")
+				return list("shrink" = 0.6,"sx" = -1,"sy" = 2,"nx" = 0,"ny" = 2,"wx" = 2,"wy" = 1,"ex" = 0,"ey" = 1,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 15,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
+
+
 /obj/item/weapon/sword/long/greatsword/zwei
 	name = "zweihander"
-	desc = "Sometimes known as a doppelhander or beidhander, this weapon's size is so impressive that its handling properties are more akin to that of a polearm than a sword."
+	desc = "Sometimes known as a doppelhander or beidhander. This weapon's size is so impressive that its handling properties are more akin to that of a polearm than a sword."
 	icon_state = "steelzwei_sk"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	possible_item_intents = list(ZWEI_CUT, ZWEI_THRUST, SWORD_STRIKE)
 	gripped_intents = list(ZWEI_CUT_REACH, SWDLONG_THRUST, SWORD_STRIKE, SWDLONG_CHOP)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_IRON
+	melting_material = /datum/material/iron
 	melt_amount = 225
 	sellprice = 60
 	item_weight = 3 KILOGRAMS
@@ -1233,14 +1406,14 @@
 	icon_state = "steelzwei"
 	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
 	max_blade_int = 300
-	max_integrity = INTEGRITY_STRONGEST
-	smeltresult = /obj/item/ingot/steel
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_STEEL
+	melting_material = /datum/material/steel
 	sellprice = 90
 
 //................ Kriegsmesser ............... //
 /obj/item/weapon/sword/long/greatsword/elfgsword
 	name = "elven kriegsmesser"
-	desc = "A huge, curved elven blade. It's metal is of a high quality, yet still light, crafted by the greatest elven bladesmiths."
+	desc = "A huge, curved elven blade. Its metal is of a high quality, yet still light, crafted by the greatest elven bladesmiths."
 	icon_state = "kriegsmesser"
 	sellprice = 120
 	item_weight = 2.3 KILOGRAMS
@@ -1258,28 +1431,6 @@
 			if("onback")
 				return list("shrink" = 0.6,"sx" = -1,"sy" = 3,"nx" = -1,"ny" = 2,"wx" = 3,"wy" = 4,"ex" = -1,"ey" = 5,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 20,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 
-//................ Zizo Sword ............... //
-/obj/item/weapon/sword/long/greatsword/zizo
-	name = "darksteel kriegsmesser"
-	desc = "A dark red curved blade. Called forth from Her will, if you wield this blade you are to be feared, if you do not, you are dead."
-	icon_state = "zizosword"
-	wdefense = ULTMATE_PARRY
-	sellprice = 0 // Super evil Zizo sword, nobody wants this
-	item_weight = 2.3 KILOGRAMS
-
-/obj/item/weapon/sword/long/greatsword/zizo/getonmobprop(tag)
-	. = ..()
-	if(tag)
-		switch(tag)
-			if("gen")
-				return list("shrink" = 0.6,"sx" = -6,"sy" = 6,"nx" = 6,"ny" = 7,"wx" = 0,"wy" = 5,"ex" = -1,"ey" = 7,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = -50,"sturn" = 40,"wturn" = 50,"eturn" = -50,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-			if("altgrip")
-				return list("shrink" = 0.6,"sx" = -6,"sy" = 6,"nx" = 6,"ny" = 7,"wx" = 0,"wy" = 5,"ex" = -1,"ey" = 7,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 130,"sturn" = 220,"wturn" = 230,"eturn" = 130,"nflip" = 0,"sflip" = 8,"wflip" = 8,"eflip" = 0)
-			if("wielded")
-				return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 4,"sflip" = 4,"wflip" = 1,"eflip" = 0)
-			if("onback")
-				return list("shrink" = 0.6,"sx" = -1,"sy" = 3,"nx" = -1,"ny" = 2,"wx" = 3,"wy" = 4,"ex" = -1,"ey" = 5,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 20,"nflip" = 1,"sflip" = 1,"wflip" = 1,"eflip" = 1,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
-
 //................ Claymores ............... //
 
 /obj/item/weapon/sword/long/greatsword/claymore/iron
@@ -1288,8 +1439,8 @@
 	icon_state = "ironclaymore"
 	force_wielded = DAMAGE_LONGSWORD_WIELD
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_IRON
+	melting_material = /datum/material/iron
 	sellprice = 90
 	item_weight = 2.8 KILOGRAMS
 
@@ -1332,9 +1483,9 @@
 	name = "silver broadsword"
 	desc = " A silver broadsword, wide and heavy, for dicing up the hordes of the undead."
 	icon_state = "silverbroadsword"
-	max_integrity = INTEGRITY_STRONGEST * 0.8
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER
 	alt_intents = null
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	melt_amount = 200
 	sellprice = 150
 	item_weight = 2.9 KILOGRAMS
@@ -1351,13 +1502,42 @@
 			if("wielded") return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
 			if("onback") return list("shrink" = 0.5, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1, "nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1, "northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0)
 
+/obj/item/weapon/sword/long/greatsword/claymore/bloodsteel
+	name = "bloodsteel broadsword"
+	desc = "A finely crafted broadsword, wide and heavy, with a shimmering bloodsteel blade."
+	icon_state = "corruptbroadsword"
+	force = DAMAGE_SWORD + 2
+	force_wielded = DAMAGE_LONGSWORD_WIELD + 2
+	max_blade_int = 240
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_BLOODSTEEL
+	melting_material = /datum/material/bloodsteel
+	melt_amount = 200
+	sellprice = 0
+	item_weight = 2.5 KILOGRAMS
+	alt_intents = list()
+
+/obj/item/weapon/sword/long/greatsword/claymore/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
+/obj/item/weapon/sword/long/greatsword/claymore/bloodsteel/getonmobprop(tag)
+	. = ..()
+	if(tag)
+		switch(tag)
+			if("gen") return list("shrink" = 0.5, "sx" = -14, "sy" = -8, "nx" = 15, "ny" = -7, "wx" = -10, "wy" = -5, "ex" = 7, "ey" = -6, "northabove" = 0, "southabove" = 1, "eastabove" = 1, "westabove" = 0, "nturn" = -13, "sturn" = 110, "wturn" = -60, "eturn" = -30, "nflip" = 1, "sflip" = 1, "wflip" = 8, "eflip" = 1)
+			if("wielded") return list("shrink" = 0.6,"sx" = 9,"sy" = -4,"nx" = -7,"ny" = 1,"wx" = -9,"wy" = 2,"ex" = 10,"ey" = 2,"northabove" = 0,"southabove" = 1,"eastabove" = 1,"westabove" = 0,"nturn" = 5,"sturn" = -190,"wturn" = -170,"eturn" = -10,"nflip" = 8,"sflip" = 8,"wflip" = 1,"eflip" = 0)
+			if("onback") return list("shrink" = 0.5, "sx" = -1, "sy" = 2, "nx" = 0, "ny" = 2, "wx" = 2, "wy" = 1, "ex" = 0, "ey" = 1, "nturn" = 0, "sturn" = 0, "wturn" = 70, "eturn" = 15, "nflip" = 1, "sflip" = 1, "wflip" = 1, "eflip" = 1, "northabove" = 1, "southabove" = 0, "eastabove" = 0, "westabove" = 0)
+
+
 /obj/item/weapon/sword/long/greatsword/claymore/gold //Uncraftable
 	name = "ravoxian claymore"
-	desc = "A huge sword constructed out of Steel and Gold, wielded by certain Templars of the Ravoxian Order."
+	desc = "A huge sword constructed out of steel and gold, wielded by certain Templars of the Ravoxian Order."
 	icon_state = "gsclaymore"
-	max_blade_int = INTEGRITY_STRONG + 50
+	max_blade_int = INTEGRITY_OLD_STRONG + 50
 	sellprice = 200
 	item_weight = 2.8 KILOGRAMS
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	melting_material = /datum/material/gold
 
 /obj/item/weapon/sword/long/greatsword/claymore/gold/getonmobprop(tag)
 	. = ..()
@@ -1375,18 +1555,19 @@
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore
 	name = "berserker sword"
-	desc = "A huge sword constructed out of a slab of Iron."
+	desc = "A huge sword constructed out of a slab of iron."
 	icon_state = "gutsclaymore"
 	bigboy = TRUE
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 2
 	wdefense = ULTMATE_PARRY
 	possible_item_intents = list(SWORD_CUT, SWORD_THRUST, SWORD_STRIKE)
 	gripped_intents = list(GUTS_CUT, GUTS_THRUST, GUTS_STRIKE, GUTS_CHOP)
-	max_blade_int = INTEGRITY_STRONG + 50
-	max_integrity = INTEGRITY_STRONGEST
+	max_blade_int = INTEGRITY_OLD_STRONG + 50
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_IRON * INTEGRITY_SPECIAL_BONUS
 	minstr = 15
 	sellprice = 240
 	item_weight = 4 KILOGRAMS
+	melting_material = /datum/material/iron
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/getonmobprop(tag)
 	. = ..()
@@ -1405,13 +1586,14 @@
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab
 
 	name = "\proper volfslayer"
-	desc = "A great slab of a silver sword, its previous wielder was said to have slain a wolfman in a single blow, bisecting the beast."
+	desc = "A great slab of a silver sword. Its previous wielder was said to have sliced a volfman in twain with a single blow."
 	icon_state = "machaslayer"
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 2
-	max_blade_int = INTEGRITY_STRONG + 50
-	max_integrity = INTEGRITY_STRONGEST
+	max_blade_int = INTEGRITY_OLD_STRONG + 50
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER * INTEGRITY_SPECIAL_BONUS
 	sellprice = 500
 	item_weight = 12 KILOGRAMS
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab/Initialize(mapload)
 	. = ..()
@@ -1435,12 +1617,13 @@
 /obj/item/weapon/sword/long/exe
 	name = "executioner's sword"
 	icon_state = "exe"
-	desc = "An ancient blade of ginormous stature, with a round ended tip. The pride and joy of Vanderlin's greatest pastime, executions."
+	desc = "An ancient blade of ginormous stature, with a round ended tip. The pride and joy of Vanderlin's greatest pastime - executions."
 	force_wielded = DAMAGE_GREATSWORD_WIELD + 4
 	possible_item_intents = list(SWORD_STRIKE, SWORD_CUT)
 	gripped_intents = list(SWORD_CUT, SWDLONG_CHOP, SWORD_STRIKE, SWORD_CLEAVE)
 	slot_flags = ITEM_SLOT_BACK
 	item_weight = 3.5 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/weapon/sword/long/exe/getonmobprop(tag)
 	. = ..()
@@ -1461,12 +1644,16 @@
 	icon = 'icons/roguetown/weapons/64/patron.dmi'
 	icon_state = "astratasword"
 	item_weight = 3.5 KILOGRAMS
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/astrata
 
 /obj/item/weapon/sword/long/exe/silver
 	name = "silver executioner's sword"
-	desc = "An executioner's sword made of silver, best used against beasts of the nite, to put them to rest."
+	desc = "An executioner's sword made of silver, best used against beasts of the nite to put them to rest."
 	icon_state = "silverexealt"
 	item_weight = 3.5 KILOGRAMS
+	max_integrity = INTEGRITY_GREATSWORD * INTEGRITY_MOD_SILVER
+	melting_material = /datum/material/silver
 
 /obj/item/weapon/sword/long/exe/silver/Initialize(mapload)
 	. = ..()
@@ -1476,6 +1663,7 @@
 /obj/item/weapon/sword/long/exe/cloth
 	icon_state = "terminusest"
 	name = "Terminus Est"
+	desc = "A thief's end."
 	item_weight = 3.5 KILOGRAMS
 
 /obj/item/weapon/sword/long/exe/cloth/attack_self_secondary(mob/user, list/modifiers)
@@ -1492,7 +1680,7 @@
 
 /obj/item/weapon/sword/coppermesser
 	name = "copper messer"
-	desc = "A weapon of war from simpler times, its copper material is unideal but still efficient for the price."
+	desc = "A weapon of war from simpler times. Its copper material is not ideal, but still efficient for the price."
 	icon_state = "cmesser"
 	item_state = "cmesser"
 	force = DAMAGE_SWORD - 5 // Messers are heavy weapons, crude and STR based.
@@ -1503,7 +1691,7 @@
 	possible_item_intents = list(SWORD_CUT, SWORD_STRIKE)
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE, SWORD_CHOP)
 	max_blade_int = 100
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_COPPER
 
 	lefthand_file = 'icons/mob/inhands/weapons/roguebig_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/roguebig_righthand.dmi'
@@ -1512,7 +1700,7 @@
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
 	sellprice = 10
 	item_weight = 1.8 KILOGRAMS
 
@@ -1533,7 +1721,7 @@
 
 /obj/item/weapon/sword/long/rider/copper
 	name = "copper falx"
-	desc = "A special 'sword' of copper, the material isn't the best but is good enough to slash and kill."
+	desc = "A special 'sword' of copper. The material isn't the best, but is good enough to slash and kill."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "copperfalx"
 	item_state = "copperfalx"
@@ -1542,19 +1730,19 @@
 	throwforce = DAMAGE_SWORD - 5
 	gripped_intents = list(SWORD_CUT, SWORD_STRIKE)
 	max_blade_int = 100 // Shitty Weapon
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_COPPER
 
 	parrysound = "sword"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
 	slot_flags = ITEM_SLOT_BACK//how the fuck you could put this thing on your hip?
-	smeltresult = /obj/item/ingot/copper
 	sellprice = 25//lets make the two bars worth it
 	item_weight = 1.6 KILOGRAMS
+	melting_material = /datum/material/copper
 
 /obj/item/weapon/sword/rapier/ironestoc
 	name = "estoc"
-	desc = "A sword possessed of a quite long and tapered blade that is intended to be thrust between the \
-	gaps in an opponent's armor. The hilt is wrapped tight in black leather."
+	desc = "A sword possessed of a  long and tapered blade. It is intended to be thrust between the \
+	gaps in an opponent's plates, bursting through the maille rings. The hilt is wrapped tight in black leather."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "estoc"
 	force = DAMAGE_SWORD - 8
@@ -1565,13 +1753,13 @@
 	possible_item_intents = list(SWORD_CHOP, SWORD_STRIKE)
 	gripped_intents = list(ESTOC_THRUST, ESTOC_LUNGE, SWORD_CHOP, SWORD_STRIKE)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_IRON
 
 	inhand_x_dimension = 64
 	inhand_y_dimension = 64
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	item_weight = 1.4 KILOGRAMS
 
 /obj/item/weapon/estoc/getonmobprop(tag)
@@ -1629,22 +1817,22 @@
 
 /obj/item/weapon/sword/gladius
 	name = "gladius"
-	desc = "A bronze short sword with a slightly wider end, and no guard. Compliments a shield."
+	desc = "A bronze short sword, with a slightly wider end and no guard. Complements a shield."
 	icon_state = "gladius"
 	force = DAMAGE_SWORD + 2
 	force_wielded = 0
 	wdefense = AVERAGE_PARRY
 	gripped_intents = null
 	max_blade_int = 150
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_BRONZE
 
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	item_weight = 700 GRAMS
 
 //A weapon meant to be used with two hands.
 /obj/item/weapon/sword/katana
 	name = "katana"
-	desc = "A foreign sword."
+	desc = "A foreign sword, forged with meticulous care."
 	icon_state = "eastsword1"
 	force_wielded = DAMAGE_SWORD_WIELD + 3
 	wdefense = GOOD_PARRY
@@ -1656,8 +1844,9 @@
 	pickup_sound = "brandish_blade"
 	slot_flags = ITEM_SLOT_BACK|ITEM_SLOT_HIP
 	melt_amount = 75
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	item_weight = 1.1 KILOGRAMS
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_STEEL
 
 /obj/item/weapon/sword/katana/mulyeog
 	name = "foreign straight blade"
@@ -1671,7 +1860,7 @@
 
 /obj/item/weapon/sword/katana/mulyeog/rumacaptain
 	name = "samjeongdo"
-	desc = "A gold-stained with cloud patterns on the groove. One of a kind."
+	desc = "A gold-stained blade with cloud patterns on the groove. One of a kind."
 	icon_state = "eastsword3"
 	force = DAMAGE_SWORD + 3
 	wdefense = GREAT_PARRY
@@ -1682,7 +1871,6 @@
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "hook_sword"
 	possible_item_intents = list(SWORD_CUT, CURVED_THRUST, SWORD_STRIKE, SWORD_DISARM)
-	max_integrity = INTEGRITY_STRONG
 	item_weight = 1 KILOGRAMS
 
 /obj/item/weapon/sword/sabre/hook/getonmobprop(tag)
@@ -1846,7 +2034,7 @@
 
 	parrysound = "bladedmedium"
 	pickup_sound = 'sound/foley/equip/swordlarge2.ogg'
-	smeltresult = /obj/item/ingot/gold
+	melting_material = /datum/material/gold
 	item_weight = 2.2 KILOGRAMS
 
 /datum/intent/sword/cut/martyr

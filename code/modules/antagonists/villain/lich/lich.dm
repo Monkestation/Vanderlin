@@ -5,10 +5,11 @@
 		STAT_CONSTITUTION = 5,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/craft/alchemy = 60,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/magic/arcane/death = 60,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/combat/polearms = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
@@ -19,7 +20,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 10,
 
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/antagonist/lich
@@ -63,7 +64,7 @@
 
 	var/list/spells = list(
 		/datum/action/cooldown/spell/projectile/fireball,
-		/datum/action/cooldown/spell/projectile/blood_bolt,
+		/datum/action/cooldown/spell/projectile/blood_bolt/arcyne,
 		/datum/action/cooldown/spell/projectile/sickness,
 		/datum/action/cooldown/spell/projectile/fetch,
 		/datum/action/cooldown/spell/undirected/arcyne_eye,
@@ -143,11 +144,11 @@
 
 /datum/outfit/lich/pre_equip(mob/living/carbon/human/H)
 	..()
-	head = /obj/item/clothing/head/helmet/skullcap/cult
+	head = /obj/item/clothing/head/helmet/skullcap/magus
 	pants = /obj/item/clothing/pants/chainlegs
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/chaincoif
-	armor = /obj/item/clothing/shirt/robe/necromancer
+	armor = /obj/item/clothing/shirt/robe/magus
 	shirt = /obj/item/clothing/shirt/tunic/colored
 	wrists = /obj/item/clothing/wrists/bracers
 	gloves = /obj/item/clothing/gloves/chain

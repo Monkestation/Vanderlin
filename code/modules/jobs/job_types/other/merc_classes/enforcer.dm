@@ -13,16 +13,16 @@
 		/datum/attribute/skill/combat/swords = 40,
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/labor/mathematics = 30, //They use math to calculate the trajectory of attacks, so they can parry behind them, trust, ook told me
+		/datum/attribute/skill/educated/mathematics = 30, //They use math to calculate the trajectory of attacks, so they can parry behind them, trust, ook told me
 	)
 
 /datum/job/advclass/mercenary/enforcer
 	title = "Enforcer"
-	tutorial = "You're an exiled enforcer that took refuges in the valorian regions long ago, near the beginning of Z's ascension, robed in black, and known for wild antics, loose camaraderie and a huge hatred for dark elves and the descendants of Zizo, You once used your blade to shake down anyone who hasn't paid their 'protection fees', nowadays, you will fight for anyone for the right price."
-	allowed_races = list(SPEC_ID_ELF, SPEC_ID_HUMEN, SPEC_ID_HALF_ELF)
+	tutorial = "You're an exiled enforcer that took refuges in the valorian regions long ago, near the beginning of Z's ascension, robed in black, and known for wild antics, loose camaraderie and a huge hatred for Subterrans and the descendants of Zizo, You once used your blade to shake down anyone who hasn't paid their 'protection fees', nowadays, you will fight for anyone for the right price."
+	allowed_races = list(SPEC_ID_ELF, SPEC_ID_HUMEN, SPEC_ID_HALF_ELF, SPEC_ID_HALF_DROW, SPEC_ID_DROW)
 	outfit = /datum/outfit/mercenary/enforcer
 	category_tags = list(CTAG_MERCENARY)
 	total_positions = 5
@@ -32,9 +32,10 @@
 
 	traits = list(
 		TRAIT_NOPAINSTUN,
-		TRAIT_BREADY,
+		TRAIT_BATTLE_READY,
 		TRAIT_BLINDFIGHTING,
 		TRAIT_UNDODGING, //They can't dodge at all. This also mean that if they don't have anything to parry with, they're done.
+		TRAIT_EXPERT_PARRY,
 	)
 
 /datum/job/advclass/mercenary/enforcer/after_spawn(mob/living/carbon/human/spawned, client/player_client)

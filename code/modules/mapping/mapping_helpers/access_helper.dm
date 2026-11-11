@@ -132,6 +132,26 @@
 /obj/effect/mapping_helpers/access/keyset/garrison/gate
 	accesses = list(ACCESS_GATE)
 
+//Gallowband locks
+/obj/effect/mapping_helpers/access/keyset/gallowband
+	color = "#1b580e"
+	difficulty = LOCK_EXPERT
+
+/obj/effect/mapping_helpers/access/keyset/gallowband/general
+	accesses = list(ACCESS_GALLOWBAND)
+
+/obj/effect/mapping_helpers/access/keyset/gallowband/secure
+	accesses = list(ACCESS_GALLOWBAND_SECURE)
+
+/obj/effect/mapping_helpers/access/keyset/gallowband/warden
+	accesses = list(ACCESS_GALLOWBAND_WARDEN)
+
+/obj/effect/mapping_helpers/access/keyset/gallowband/hersir
+	accesses = list(ACCESS_GALLOWBAND_HERSIR)
+
+/obj/effect/mapping_helpers/access/keyset/gallowband/gothi
+	accesses = list(ACCESS_GALLOWBAND_GOTHI)
+
 // Church locks
 /obj/effect/mapping_helpers/access/keyset/church
 	color = "#eaed3e"
@@ -284,4 +304,23 @@
 
 /obj/effect/mapping_helpers/access/keyset/other/bogwitch
 	accesses = list(ACCESS_BOGWITCH)
+	difficulty = LOCK_MASTER
+
+
+/obj/effect/mapping_helpers/access/keyset/antag
+	color = "#990000"
+
+/obj/effect/mapping_helpers/access/keyset/antag/bandit
+	accesses = list(ACCESS_BANDIT)
+
+/obj/effect/mapping_helpers/access/keyset/antag/vampire_manor
+	accesses = list(ACCESS_VAMPIRE)
+	difficulty = LOCK_MASTER
+
+/obj/effect/mapping_helpers/access/keyset/antag/lich
+	accesses = list(ACCESS_LICH)
+	difficulty = LOCK_MASTER
+
+/obj/effect/mapping_helpers/access/keyset/admin/oracle
+	accesses = list(ACCESS_DREAM_CAVE)
 	difficulty = LOCK_MASTER

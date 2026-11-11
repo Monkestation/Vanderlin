@@ -743,6 +743,7 @@
 		else
 			drinklimb(C)
 	return 1
+
 /obj/item/grabbing/bite/proc/bitelimb(mob/living/user) //implies limb_grabbed and sublimb are things
 	if(!user.Adjacent(grabbed))
 		qdel(src)
@@ -774,9 +775,8 @@
 
 	if(real_damage)
 		playsound(C, "smallslash", 100, FALSE, -1)
-		var/datum/wound/caused_wound
 		if(typed_actual > 0)
-			caused_wound = limb_grabbed.bodypart_attacked_by(BCLASS_BITE, typed_actual, user, sublimb_grabbed, crit_message = TRUE, pre_applied = TRUE, organ_bonus = CANT_ORGAN)
+			limb_grabbed.bodypart_attacked_by(BCLASS_BITE, typed_actual, user, sublimb_grabbed, crit_message = TRUE, pre_applied = TRUE, organ_bonus = CANT_ORGAN)
 		if(blunt_actual > 0)
 			limb_grabbed.bodypart_attacked_by(BCLASS_BLUNT, blunt_actual, user, sublimb_grabbed, crit_message = (typed_actual <= 0), pre_applied = TRUE, organ_bonus = CANT_ORGAN)
 
@@ -786,8 +786,7 @@
 				var/datum/antagonist/werewolf/werewolf_antag = user.mind.has_antag_datum(/datum/antagonist/werewolf)
 				if(werewolf_antag && werewolf_antag.transformed)
 					var/mob/living/carbon/human/human = user
-					if(istype(caused_wound))
-						caused_wound?.werewolf_infect_attempt()
+					limb_grabbed.last_injury.werewolf_infect_attempt()
 					if(prob(30))
 						human.werewolf_feed(C)
 

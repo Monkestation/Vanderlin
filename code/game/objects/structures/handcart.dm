@@ -9,6 +9,7 @@
 	climbable = TRUE
 
 	var/list/stuff_shit = list()
+	var/list/item_carry_weights = list()
 
 	var/current_capacity = 0
 	var/maximum_capacity = 300 KILOGRAMS
@@ -23,20 +24,31 @@
 	if(upgrade)
 		. += span_notice("This cart has \an [upgrade] installed.")
 
+/obj/structure/handcart/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_notice("Left click to gather stuff from where you stand")
+	. += span_notice("Right click to gather stuff from cart's position")
+	. += span_notice("Alt click to spill cart's contents")
+
 /obj/structure/handcart/Initialize(mapload)
 	if(mapload)		// if closed, any item at the crate's loc is put in the contents
 		addtimer(CALLBACK(src, PROC_REF(take_contents)), 0)
 	. = ..()
 	update_appearance(UPDATE_ICON)
+	RegisterSignal(src, COMSIG_TRY_STORAGE_TAKE, PROC_REF(on_pneumatic_take))
+
+/obj/structure/handcart/try_pneumatic_insert(list/atom/movable/things)
+	for(var/atom/movable/thing as anything in things.Copy())
+		if(put_in(null, thing, TRUE))
+			things -= thing
+	return things
 
 /obj/structure/handcart/container_resist(mob/living/user)
 	var/atom/L = drop_location()
 	for(var/atom/movable/AM in stuff_shit)
 		if(AM == user)
 			AM.forceMove(L)
-			stuff_shit -= AM
-			current_capacity = max(current_capacity - user.get_mob_weight() + user.carry_weight, 0)
-			update_appearance(UPDATE_ICON)
+			remove_from_cart(AM)
 			break
 
 /obj/structure/handcart/dump_contents()
@@ -44,11 +56,30 @@
 	for(var/atom/movable/AM in src)
 		AM.forceMove(L)
 	stuff_shit = list()
+	item_carry_weights = list()
 	current_capacity = 0
 
 /obj/structure/handcart/Destroy()
+	UnregisterSignal(src, COMSIG_TRY_STORAGE_TAKE)
 	dump_contents()
 	return ..()
+
+/obj/structure/handcart/proc/on_pneumatic_take(datum/source, atom/movable/thing, turf/target_turf)
+	SIGNAL_HANDLER
+	if(!target_turf || !(thing in stuff_shit))
+		return
+	remove_from_cart(thing)
+	thing.forceMove(target_turf)
+
+/obj/structure/handcart/proc/remove_from_cart(atom/movable/AM)
+	if(!(AM in stuff_shit))
+		return FALSE
+	var/weight = item_carry_weights[AM]
+	stuff_shit -= AM
+	item_carry_weights -= AM
+	current_capacity = max(current_capacity - (isnum(weight) ? weight : 0), 0)
+	update_appearance(UPDATE_ICON)
+	return TRUE
 
 /obj/structure/handcart/MouseDrop_T(atom/movable/AM, mob/living/user)
 	if(!istype(AM) || !isturf(AM.loc) || istype(AM, /atom/movable/screen))
@@ -102,9 +133,17 @@
 	. = ..()
 	if(.)
 		return
-	if(user.cmode)
+	gather(user, get_turf(user))
+	return TRUE
+
+/obj/structure/handcart/attack_hand_secondary(mob/user)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	var/turf/T = get_turf(user)
+	gather(user, get_turf(src))
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/structure/handcart/proc/gather(mob/living/user, turf/T)
 	if(isturf(T))
 		user.changeNext_move(CLICK_CD_MELEE)
 
@@ -114,14 +153,12 @@
 			for(var/obj/item/I as anything in ore_list)
 				if(!interruptable_put(user, I))
 					return
-			return
 
 		var/list/wood_list = sieve_wood(user, T)
 		if(LAZYLEN(wood_list))
 			for(var/obj/item/I as anything in wood_list)
 				if(!interruptable_put(user, I))
 					return
-			return
 
 		for(var/obj/item/I in T)
 			if(!interruptable_put(user, I))
@@ -202,6 +239,7 @@
 		AM.forceMove(src)
 	current_capacity += weight
 	stuff_shit += AM
+	item_carry_weights[AM] = weight
 	update_appearance(UPDATE_ICON)
 	return TRUE
 
@@ -229,9 +267,9 @@
 	if(M)
 		. += M
 
-/obj/structure/handcart/attack_hand_secondary(mob/user, list/modifiers)
+/obj/structure/handcart/AltClick(mob/user, list/modifiers)
 	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+	if(. == ALT_CLICKED)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(length(stuff_shit))
@@ -239,7 +277,7 @@
 		visible_message(span_info("[user] dumps out [src]!"))
 		playsound(src, 'sound/foley/cartdump.ogg', 100, FALSE, -1)
 		update_appearance(UPDATE_ICON)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ALT_CLICKED
 
 /obj/structure/handcart/proc/insertion_allowed(atom/movable/AM)
 	if(ismob(AM))

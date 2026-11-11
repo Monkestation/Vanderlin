@@ -1,24 +1,26 @@
 
+// -------------- SPIDER HONEY -----------------
 /obj/item/reagent_containers/food/snacks/spiderhoney
-	name = "honeycomb"
+	name = "spider honey"
 	desc = ""
-	icon_state = "honey"
+	icon_state = "spiderhoney"
 	dropshrink = 0.8
-	possible_transfer_amounts = list()
-	spillable = FALSE
 	volume = 10
 	amount_per_transfer_from_this = 0
 	nutrition = HONEY_NUTRITION
+	w_class = WEIGHT_CLASS_TINY
+	foodtype = SUGAR | RAW
 	list_reagents = list(/datum/reagent/consumable/honey = 5)
 	grind_results = list()
-	tastes = list("sweetness" = 1)
+	tastes = list("sweetness and spiderwebs" = 1)
 	item_weight = 30 GRAMS
-	var/honey_color
+	faretype = FARE_FINE
 
 /obj/item/reagent_containers/food/snacks/spiderhoney/Initialize()
 	. = ..()
 	pixel_x = base_pixel_x + rand(8,-8)
 	pixel_y = base_pixel_y + rand(8,-8)
+	AddElement(/datum/element/food_topping, icon_state, null, 10, topping_name = name)
 
 /obj/item/reagent_containers/food/snacks/spiderhoney/proc/set_reagent(reagent)
 	var/datum/reagent/R = GLOB.chemical_reagents_list[reagent]
@@ -29,7 +31,6 @@
 /obj/item/reagent_containers/food/snacks/spiderhoney/honey
 	name = "honey"
 	icon_state = "honeycomb"
-	item_weight = 50 GRAMS
 	tastes = list("sweetness" = 1)
 
 /obj/item/reagent_containers/food/snacks/spiderhoney/honey/mad
@@ -70,6 +71,5 @@
 /obj/item/reagent_containers/food/snacks/spiderhoney/honey/wild
 	name = "wild honey"
 	desc = "Sweet wild honey. It has a more complex flavor than regular honey."
-	icon_state = "honey_wild"
-	honey_color = "#6d4633"
+	icon_state = "honey_red"
 	list_reagents = list(/datum/reagent/consumable/honey = 7)

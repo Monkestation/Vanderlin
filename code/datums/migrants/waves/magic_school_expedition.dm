@@ -11,11 +11,11 @@
 		STAT_INTELLIGENCE = 4,
 		STAT_CONSTITUTION = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/magic/arcane = 40,
 		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/craft/alchemy = 40,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/job/migrant/magic_teacher
@@ -44,6 +44,22 @@
 		spawned.cmode_music = 'sound/music/cmode/antag/combat_evilwizard.ogg'
 	spawned.mana_pool?.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 
+/datum/job/migrant/magic_teacher/on_roundstart(mob/living/spawned, client/player_client)
+	. = ..()
+	var/static/list/selectable_books = list(
+		"Blazing Tome (Fire)" = /obj/item/spellbook/expert/starter/fire,
+		"Frostbound Tome (Ice)" = /obj/item/spellbook/expert/starter/ice,
+		"Storm-Charged Tome (Lightning)" = /obj/item/spellbook/expert/starter/lightning,
+		"Stoneveined Tome (Earth)" = /obj/item/spellbook/expert/starter/earth,
+		"Thrice-Warded Tome (Arcane)" = /obj/item/spellbook/expert/starter/arcane,
+		"Grave-Touched Tome (Death)" = /obj/item/spellbook/expert/starter/death,
+		"Verdant Tome (Life)" = /obj/item/spellbook/expert/starter/life,
+		"Windswept Tome (Air)" = /obj/item/spellbook/expert/starter/air,
+		"Tidebound Tome (Water)" = /obj/item/spellbook/expert/starter/water,
+	)
+
+	grant_selected_spellbooks(spawned, selectable_books, 1)
+
 /datum/outfit/magic_teacher
 	name = "Magic School Teacher (Migrant Wave)"
 	head = /obj/item/clothing/head/wizhat
@@ -55,7 +71,6 @@
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/mana_star
 	backpack_contents = list(
-		/obj/item/spellbook/expert = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1,
 	)
 
@@ -73,13 +88,13 @@
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 3,
 		STAT_SPEED = -2,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/combat/polearms = 10,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 	)
 
 /datum/job/migrant/magic_student

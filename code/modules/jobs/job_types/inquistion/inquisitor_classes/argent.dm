@@ -15,7 +15,7 @@
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/firearms = 10,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/medicine = 20,
@@ -183,17 +183,7 @@
 			stomach = new /obj/item/organ/stomach/acid_spit
 			stomach.Insert(spawned)
 		if("Goblin Eyes - Nightvision")
-			var/list/eye_list = spawned.getorganslotlist(ORGAN_SLOT_EYES)
-			for(var/obj/item/organ/eyes/eyes as anything in eye_list)
-				eyes.Remove(spawned,1)
-				QDEL_NULL(eyes)
-
-			var/obj/item/organ/eyes/LE = new /obj/item/organ/eyes/night_vision/nightmare
-			var/obj/item/organ/eyes/RE = new /obj/item/organ/eyes/night_vision/nightmare
-			LE.switch_side(LEFT_SIDE)
-
-			LE.Insert(spawned)
-			RE.Insert(spawned)
+			spawned.grant_nightmare_eyes()
 		if("Greenskin Hands - Strong Grip")
 			ADD_TRAIT(spawned, TRAIT_STRONG_GRABBER, TRAIT_GENERIC)
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/confessor/greenskin)
@@ -219,6 +209,7 @@
 		if("Serpentine Glands - Thermal Vision and Venom")
 			ADD_TRAIT(spawned, TRAIT_THERMAL_VISION, TRAIT_GENERIC)
 			ADD_TRAIT(spawned, TRAIT_POISONBITE, TRAIT_GENERIC)
+			spawned.update_sight()
 
 /datum/outfit/argent
 	name = "Argent (Sacrestants)"

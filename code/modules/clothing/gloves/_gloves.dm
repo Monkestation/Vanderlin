@@ -24,7 +24,7 @@
 	resistance_flags = FIRE_PROOF
 
 	attack_verb = list("challenged")
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 
 	strip_delay = 2 SECONDS
 	equip_delay_other = 4 SECONDS
@@ -41,6 +41,8 @@
 	grid_width = 64
 	grid_height = 32
 	item_weight = 300 GRAMS
+
+	flags_inv = HIDEHANDS|HIDERING
 
 	var/transfer_prints = FALSE
 	var/unarmed_bonus = 1

@@ -1,7 +1,7 @@
 /mob/living
 	see_invisible = SEE_INVISIBLE_LIVING
 	sight = 0
-	see_in_dark = 8
+	see_in_dark = SEE_IN_DARK_DEFAULT_EYES
 	hud_possible = list(ANTAG_HUD)
 
 	///Tracks the scale of the mob transformation matrix in relation to its identity. Use update_transform(resize) to change it.
@@ -17,8 +17,10 @@
 	var/datum/weakref/lastattacker_weakref = null
 
 	//Health and life related vars
-	var/maxHealth = 100 //Maximum health that should be possible.
-	var/health = 100 	//A mob's health
+	/// Maximum health that should be possible.
+	var/maxHealth = MAX_LIVING_HEALTH
+	/// The mob's current health.
+	var/health = MAX_LIVING_HEALTH
 
 	//Damage related vars, NOTE: THESE SHOULD ONLY BE MODIFIED BY PROCS
 	var/bruteloss = 0	//Brutal damage caused by brute force (punching, being clubbed by a toolbox ect... this also accounts for pressure damage)
@@ -77,7 +79,8 @@
 
 	var/mob_size = MOB_SIZE_HUMAN
 	var/mob_biotypes = MOB_ORGANIC
-	var/metabolism_efficiency = 1 //more or less efficiency to metabolize helpful/harmful reagents and regulate body temperature..
+	/// more or less efficiency to metabolize helpful/harmful reagents and regulate body temperature..
+	var/metabolism_efficiency = 1
 	var/has_limbs = 0 //does the mob have distinct limbs?(arms,legs, chest,head)
 
 	/// Chem effects
@@ -263,13 +266,6 @@
 
 	var/list/affixes = list()
 	var/delve_level = 0
-
-	var/cold_res = 0
-	var/max_cold_res = 75
-	var/fire_res = 0
-	var/max_fire_res = 75
-	var/lightning_res = 0
-	var/max_lightning_res = 75
 
 	var/list/status_modifiers
 

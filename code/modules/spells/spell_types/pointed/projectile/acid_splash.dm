@@ -5,6 +5,7 @@
 	sound = 'sound/magic/whiteflame.ogg'
 
 	required_form = FORM_WATER
+	associated_skill = /datum/attribute/skill/magic/arcane/water
 	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "HYDRO MURIATIC!!!!"
@@ -28,6 +29,8 @@
 	name = "Caustic Splash"
 
 	projectile_type = /obj/projectile/magic/acidsplash/quietus
+	required_form = null
+	required_technique = null
 
 /datum/action/cooldown/spell/projectile/acid_splash/organ
 	name = "Acid Spray"

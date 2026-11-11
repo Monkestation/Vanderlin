@@ -7,19 +7,20 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = 19 //lol?
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	advclass_cat_rolls = list(CTAG_ARCHIVIST = 20)
 	give_bank_account = 100
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 
 	job_bitflag = BITFLAG_ROYALTY
 	allowed_patrons = list(/datum/patron/divine/noc)
@@ -57,10 +58,11 @@
 		TRAIT_NOBLE_POWER,
 		TRAIT_CULTURAL_KNOWLEDGE,
 		TRAIT_VIRGIN,
+		TRAIT_IDENTIFY_DEVIL_MARKS,
 	)
 
 /datum/job/advclass/archivist
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 
 /datum/attribute_holder/sheet/job/chronicler
 	raw_attribute_list = list(
@@ -69,11 +71,11 @@
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 30,
-		/datum/attribute/skill/labor/mathematics = 60
+		/datum/attribute/skill/educated/mathematics = 60
 	)
 
 /datum/attribute_holder/sheet/job/chronicler/old
@@ -83,11 +85,11 @@
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 50,
-		/datum/attribute/skill/labor/mathematics = 60
+		/datum/attribute/skill/educated/mathematics = 60
 	)
 
 /datum/job/advclass/archivist/chronicler
@@ -153,12 +155,12 @@
 		STAT_PERCEPTION = 1,
 		STAT_STRENGTH = -1,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/attribute_holder/sheet/job/dreamwatcher/old
@@ -168,12 +170,12 @@
 		STAT_PERCEPTION = 1,
 		STAT_STRENGTH = -1,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/job/advclass/archivist/dreamwatcher //Not a Magician nor an Acolyte, but something more, blessed by Noc since they were born, being capable of Visions and Feelings through dreams, they can feel the highest god influence or and get a hint about any of the active antags.

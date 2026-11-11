@@ -4,8 +4,9 @@
 	sound = 'sound/magic/timestop.ogg'
 
 
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
+	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/holy
 	invocation = "May you find bliss through your pain."
 	invocation_type = INVOCATION_WHISPER
@@ -33,6 +34,9 @@
 /datum/action/cooldown/spell/painkiller/spell
 	name = "Numb Senses"
 	desc = "Numbs a targets senses lowering the pain they recieve."
+	invocation = "Through the arcyne, you shall have peace."
 	spell_type = SPELL_MANA
+	antimagic_flags = MAGIC_RESISTANCE
 	spell_cost = 20
-	required_form = FORM_AIR
+	required_form = FORM_LIFE
+	associated_skill = /datum/attribute/skill/magic/arcane/life

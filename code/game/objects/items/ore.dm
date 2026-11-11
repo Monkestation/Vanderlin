@@ -114,6 +114,22 @@
 	item_weight = 4.2 KILOGRAMS
 	indexed = TRUE
 
+/obj/item/ore/bloodstone
+	name = "bloodstone"
+	desc = "A blood red stone of uncertain origin, the precursor for bloodsteel."
+	icon_state = "orecorrupt1"
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	sellprice = 0 // No one will buy this
+	item_weight = 4.15 KILOGRAMS
+	mill_result = /obj/item/ore/dust/bloodstone
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
+
+/obj/item/ore/bloodstone/Initialize(mapload)
+	. = ..()
+	icon_state = "orecorrupt[rand(1,3)]"
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/ore/coal/charcoal
 	name = "charcoal"
 	icon_state = "oreada"
@@ -145,6 +161,11 @@
 	resistance_flags = FIRE_PROOF
 	armor_type = /datum/armor/cursedrosa
 	attacked_sound = list('sound/combat/hits/armor/chain_slashed (1).ogg', 'sound/combat/hits/armor/chain_slashed (2).ogg', 'sound/combat/hits/armor/chain_slashed (3).ogg')
+	examine_highlight_type = /datum/examine_highlight/blackbriar
+
+/obj/item/ore/cursedrosa/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "cursedrosa", null, 3, topping_name = "black briar rosa")
 
 /obj/item/ore/cursedrosa/equipped(mob/living/carbon/human/user, slot)
 	. = ..()
@@ -279,7 +300,7 @@
 
 /obj/item/ingot/silver
 	name = "silver bar"
-	desc = "A bar of glistening silver. The bane of nitewalkers."
+	desc = "A bar of glistening silver. The bane of nite creachers."
 	icon_state = "ingotsilv"
 	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
@@ -290,6 +311,15 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
+/obj/item/ingot/silver/truesilver
+	name = "truesilver bar"
+	desc = "A bar of glistening truesilver. Blessed material of The Moon Prince and the ultimate bane of nite creachers."
+	icon_state = "ingotlunar"
+	smeltresult = /obj/item/ingot/silver/truesilver
+	melting_material = /datum/material/truesilver
+	sellprice = 60
+	item_weight = 6.65 KILOGRAMS
+
 /obj/item/ingot/steel
 	name = "steel bar"
 	desc = "A bar of alloyed steel."
@@ -298,6 +328,7 @@
 	melting_material = /datum/material/steel
 	sellprice = M_STEEL
 	item_weight = 5 KILOGRAMS
+	misc_flags = SMELTING_TEST_EXCLUDE
 
 /obj/item/ingot/steelholy
 	name = "holy steel bar"
@@ -325,6 +356,19 @@
 	smeltresult = /obj/item/ingot/blacksteel
 	melting_material = /datum/material/blacksteel
 	item_weight = 5.2 KILOGRAMS
+
+/obj/item/ingot/bloodsteel
+	name = "bloodsteel bar"
+	desc = "A bar of cursed bloodsteel."
+	icon_state = "ingotcorrupt"
+	smeltresult = /obj/item/ingot/bloodsteel
+	melting_material = /datum/material/bloodsteel
+	sellprice = M_STEEL
+	item_weight = 5 KILOGRAMS
+
+/obj/item/ingot/bloodsteel/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
 
 /obj/item/ingot/steel_slag
 	name = "steel slag"
@@ -367,6 +411,14 @@
 	. = ..()
 	add_filter(FORCE_FILTER, 2, list("type" = "outline", "color" = "#FF4500", "alpha" = 50, "size" = 1))
 
+/obj/item/ingot/vampire
+	name = "ancient ceremonial alloy"
+	desc = "An ingot of enchanted gilbranze, radiating with ceremonial authority. Chiseled into the surface is an intricate golden matrix; forbidden knowledge, long lost in the wake of Zizo's ascension."
+	icon_state = "ingotvampire"
+	smeltresult = /obj/item/ingot/purifiedaalloy
+	sellprice = 200
+
+
 //Anomalous Smeltings
 /obj/item/ingot/weeping
 	name = "enduring ingot"
@@ -385,7 +437,7 @@
 /obj/item/ingot/draconic
 	name = "draconic ingot"
 	desc = "A slab of obsidian, crackling with energy. Your fingers blister from the sheer heat, radiating off of its glassy surface. </br>'..no man, be-they a saint or sinner, can truly withstand such power..' </br>'..but, perhaps, you are different..' </br>'..find a way to give the remains a new life; a new vessel that may yet make the followers of evil weep..'"
-	icon_state = "ingotblacksteel"
+	icon_state = "ingotdraconic"
 	smeltresult = /obj/item/ingot/draconic
 	melting_material = /datum/material/draconic
 	color = "#70b8ff"
@@ -398,10 +450,9 @@
 
 /obj/item/ingot/avantyne
 	name = "avantyne wafer"
-	desc = "This ingot, though borne of unholy circumstance, rumbles with otherworldly potential. Chiseled onto the darksteel is a forbidden iteration of the psycross; a foreboding sign for those who bow to lesser gods."
+	desc = "This ingot, though borne of unholy circumstance, rumbles with otherworldly potential. Chiseled onto the avantyne is a forbidden iteration of the psycross; a foreboding sign for those who bow to lesser gods."
 	icon_state = "ingotavantyne"
-	smeltresult = null
-	sellprice = 130
+	sellprice = 0 // Super evil Zizo material, nobody wants this
 	smeltresult = /obj/item/ingot/avantyne
 	melting_material = /datum/material/avantyne
 
@@ -409,7 +460,6 @@
 	name = "ketryl ingot"
 	desc = "Named after its mythical status, this ingot is forged as per the dwarven standards etched in a small imprint on the ingot's surface. Ketryl is often folded in thin layers, stronger than steel, yet unusually light at the same time."
 	icon_state = "ingotketryl"
-	smeltresult = null
 	sellprice = 555
 	smeltresult = /obj/item/ingot/ketryl
 	melting_material = /datum/material/ketryl
@@ -441,6 +491,7 @@
 	icon_state = "component_blood"
 	smeltresult = /obj/item/gem/blood_diamond //Ensures that it can be reused for any Glut-specific ritual, should one find this in its crystalline form.
 	sellprice = 33
+	examine_highlight_type = /datum/examine_highlight/heresy_veryodd/glut
 
 /obj/item/ingot/component/glutcrystal/examine(mob/user)
 	. = ..()
@@ -477,9 +528,9 @@
 
 /obj/item/ingot/component/threadavantyne
 	name = "avantyne thread"
-	desc = "These strands, though borne of unholy circumstance, shimmer with otherworldly potential. Each wire of darksteel seem to twitch with vigor, whenever brought close to another alloy; like a parasite drawn to a host."
+	desc = "These strands, though borne of unholy circumstance, shimmer with otherworldly potential. Each wire of avantyne seem to twitch with vigor, whenever brought close to another alloy; like a parasite drawn to a host."
 	icon_state = "component_avantynethread"
-	sellprice = 66
+	sellprice = 0 // Super evil Zizo material, nobody wants this
 
 /obj/item/ingot/component/threadketryl
 	name = "ketryl thread"
@@ -492,6 +543,7 @@
 	desc = "Whispering fragments of an otherworldly alloy. </br>Power always comes at a price."
 	icon_state = "component_zizo"
 	dropshrink = 0.7
+	sellprice = 0 // Super evil Zizo material, nobody wants this
 
 /obj/item/ingot/component/graggar
 	name = "vicious fragment"

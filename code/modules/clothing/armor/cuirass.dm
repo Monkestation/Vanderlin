@@ -5,7 +5,8 @@
 	icon_state = "cuirass"
 	item_state = "cuirass"
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	boobed = FALSE
 	sellprice = VALUE_STEEL_ARMOR
 
@@ -13,7 +14,7 @@
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_TORSO
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 6 KILOGRAMS
 
 //................ Grenzelhoft Cuirass ............... //
@@ -24,7 +25,7 @@
 	item_state = "grenzelcuirass"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	boobed = TRUE
-
+	melting_material = /datum/material/blacksteel
 	armor_type = /datum/armor/plate/good
 	item_weight = 5 KILOGRAMS
 
@@ -48,12 +49,14 @@
 	desc = "Many cooking pots ended their daes on the anvil to form this protective plate."
 	icon_state = "ibreastplate"
 	item_state = "ibreastplate"
-	smeltresult = /obj/item/ingot/iron
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	sellprice = VALUE_IRON_ARMOR
 
 	armor_type = /datum/armor/plate/bad
 	body_parts_covered = COVERAGE_VEST
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 5 KILOGRAMS
 
 //................ Rusted Breastplate ............... //
@@ -67,7 +70,7 @@
 	item_state = "rustcuriass"
 	sellprice = VALUE_IRON_ARMOR/2
 
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_OLD_STANDARD
 
 //................ Scourge Breastplate ............... //
 /obj/item/clothing/armor/cuirass/iron/shadowplate
@@ -82,26 +85,17 @@
 	desc = "Very simple and crude protection for the chest. Ancient fighters once used similar gear, with better quality..."
 	icon_state = "copperchest"
 	item_state = "copperchest"
-	smeltresult = /obj/item/ingot/copper
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	melting_material = /datum/material/copper
+	melt_amount = 100
 	sellprice = VALUE_DIRT_CHEAP
 
 	armor_class = AC_LIGHT
 	armor_type = /datum/armor/plate/bad
 	body_parts_covered = CHEST
 	prevent_crits = ONLY_VITAL_ORGANS
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 3 KILOGRAMS
-
-/obj/item/clothing/armor/cuirass/vampire
-	name = "ancient plate"
-	desc = "A ornate, ceremonial plate cuirass of considerable age."
-	icon_state = "vplate"
-
-	armor_class = AC_MEDIUM
-	armor_type = /datum/armor/plate/good
-	body_parts_covered = COVERAGE_TORSO
-	prevent_crits = ALL_CRITICAL_HITS_VAMP
-	item_weight = 6 KILOGRAMS
 
 /obj/item/clothing/armor/cuirass/fencer
 	name = "fencer's cuirass"
@@ -115,7 +109,9 @@
 /obj/item/clothing/armor/cuirass/psydon
 	name = "psydonian chestplate"
 	desc = "An expertly smithed form-fitting steel cuirass that is much lighter and agile, but breaks with much more ease. It's thinner, but backed with silk and leather."
-	melt_amount = 75
+	desc = "An expertly smithed form-fitting steel cuirass that is much lighter and agile, but breaks with much more ease. It's thinner, but backed with silk and leather."
+	melting_material = /datum/material/silver
+	melt_amount = 100
 	icon_state = "ornatechestplate"
 	item_state = "ornatechestplate"
 
@@ -125,8 +121,13 @@
 	desc = "A sturdy steel cuirass with tassets. Supposedly protective, though maybe not against crossbow bolts."
 
 	body_parts_covered = CHEST | VITALS | LEGS
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	item_weight = 6.5 KILOGRAMS
+
+/obj/item/clothing/armor/cuirass/fluted/ornate
+	name = "ornate fluted cuirass"
+	icon_state = "ornatecuirass"
+	desc = "A fluted cuirass with decorative engravings across its surface. Fitting for a noble, or maybe just someone who wants to look fancy."
 
 /obj/item/clothing/armor/cuirass/fluted/iron
 	name = "iron fluted cuirass"
@@ -134,19 +135,20 @@
 	icon_state = "flutedcuirass_iron"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/watchmen_onmob.dmi'// TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
 	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
-
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	sellprice = VALUE_IRON_ARMOR
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 6.5 KILOGRAMS
 
 
 /obj/item/clothing/armor/cuirass/ornate
 	name = "psydonian cuirass"
 	icon_state = "ornatecuirass"
-	desc = "An ornate steel cuirass with tassets, favored by both the Oratorium Throni Vacui and the Order of the Silver Psycross. \
-			Made to endure."
+	desc = "An ornate steel cuirass with tassets, favored by both the Oratorium Throni Vacui and the Order of the Silver Psycross. Made to endure."
+	melting_material = /datum/material/silver
+	melt_amount = 100
 
 /obj/item/clothing/armor/cuirass/fluted/gold
 	name = "golden cuirass"

@@ -7,7 +7,7 @@
 		STAT_INTELLIGENCE = 5,
 		STAT_CONSTITUTION = -2,
 		STAT_SPEED = -2,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/magic/arcane = 50,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -15,7 +15,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/attribute_holder/sheet/job/magician/old
@@ -27,7 +27,7 @@
 		STAT_INTELLIGENCE = 6,
 		STAT_CONSTITUTION = -2,
 		STAT_SPEED = -3,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/magic/arcane = 50,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -35,7 +35,7 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/job/magician
@@ -49,18 +49,19 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_MAGICIAN
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_MAGEGUILD)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/magician
 	give_bank_account = 120
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_COURT_LIST
+	jobs_always_know_me = KNOW_COURT_AGENT_LIST
 	cmode_music = 'sound/music/cmode/nobility/CombatCourtMagician.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
 	magic_user = TRUE
@@ -105,7 +106,12 @@
 	if(istype(spawned.patron, /datum/patron/inhumen/zizo))
 		spawned.grant_language(/datum/language/undead)
 
-	if(spawned.gender == MALE && spawned.dna?.species  && spawned.dna.species.id != SPEC_ID_MEDICATOR)
+	var/list/voiceless_species = list(
+		SPEC_ID_MEDICATOR,
+		SPEC_ID_KOBOLD,
+		SPEC_ID_KOBOLD_FORMIKRAG
+	)
+	if(spawned.gender == MALE && spawned.dna?.species && !(spawned.dna.species.id in voiceless_species))
 		spawned.dna.species.soundpack_m = new /datum/voicepack/male/wizard()
 
 /datum/job/magician/on_roundstart(mob/living/spawned, client/player_client)
@@ -153,7 +159,7 @@
 	shoes = /obj/item/clothing/shoes/shortboots
 	neck = /obj/item/clothing/neck/mana_star
 	backpack_contents = list(
-		/obj/item/scrying = 1,
+		/obj/item/scrying/orb = 1,
 		/obj/item/chalk = 1,
 		/obj/item/reagent_containers/glass/bottle/killersice = 1,
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1,

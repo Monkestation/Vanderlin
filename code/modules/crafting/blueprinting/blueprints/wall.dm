@@ -162,6 +162,175 @@
 	category = "Walls"
 	floor_object = TRUE
 
+/datum/blueprint_recipe/wall/bluetentwall
+	name = "Blue Tent Wall"
+	desc = "A colourful tent wall."
+	result_type = /turf/closed/wall/mineral/tent/blue
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/cyantentwall
+	name = "Cyan Tent Wall"
+	desc = "A colourful tent wall."
+	result_type = /turf/closed/wall/mineral/tent/cyan
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/browntentwall
+	name = "Brown Tent Wall"
+	desc = "A colourful tent wall."
+	result_type = /turf/closed/wall/mineral/tent/brown
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/greententwall
+	name = "Green Tent Wall"
+	desc = "A colourful tent wall."
+	result_type = /turf/closed/wall/mineral/tent/green
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/purpletentwall
+	name = "Purple Tent Wall"
+	desc = "A colourful tent wall."
+	result_type = /turf/closed/wall/mineral/tent/purple
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/redtentwall
+	name = "Red Tent Wall"
+	desc = "A colourful tent wall."
+	result_type = /turf/closed/wall/mineral/tent/red
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/reddecotentwall
+	name = "Decorated Red Tent Wall"
+	desc = "A colourful tent wall embossed with gold."
+	result_type = /turf/closed/wall/mineral/tent/reddeco
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/purpledecotentwall
+	name = "Decorated Purple Tent Wall"
+	desc = "A colourful tent wall embossed with gold."
+	result_type = /turf/closed/wall/mineral/tent/purpledeco
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/greendecotentwall
+	name = "Decorated Green Tent Wall"
+	desc = "A colourful tent wall embossed with gold."
+	result_type = /turf/closed/wall/mineral/tent/greendeco
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/browndecotentwall
+	name = "Decorated Brown Tent Wall"
+	desc = "A colourful tent wall embossed with gold."
+	result_type = /turf/closed/wall/mineral/tent/browndeco
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/cyandecotentwall
+	name = "Decorated Cyan Tent Wall"
+	desc = "A colourful tent wall embossed with gold."
+	result_type = /turf/closed/wall/mineral/tent/cyandeco
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/bluedecotentwall
+	name = "Decorated Blue Tent Wall"
+	desc = "A colourful tent wall embossed with gold."
+	result_type = /turf/closed/wall/mineral/tent/bluedeco
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
+/datum/blueprint_recipe/wall/noctentwall
+	name = "Decorated Navy Tent Wall"
+	desc = "A colourful tent wall embossed with silver, popular amonst Noccites."
+	result_type = /turf/closed/wall/mineral/tent/noc
+	required_materials = list(
+		/obj/item/grown/log/tree/stick = 1,
+		/obj/item/natural/cloth = 1
+	)
+	construct_tool = /obj/item/weapon/knife
+	build_time = 3 SECONDS
+	category = "Walls"
+	floor_object = TRUE
+
 /datum/blueprint_recipe/wall/daubwall
 	name = "Daub Wall"
 	desc = "A daub wall made of sticks and dirt."

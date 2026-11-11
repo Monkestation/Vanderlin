@@ -3,20 +3,20 @@ GLOBAL_LIST_INIT(customizer_choices, build_customizer_choices())
 
 /proc/build_customizer_choices()
 	. = list()
-	for(var/datum/customizer_choice/type as anything in typesof(/datum/customizer_choice))
-		if(IS_ABSTRACT(type))
+	for(var/datum/customizer_choice/choice_type as anything in typesof(/datum/customizer_choice))
+		if(IS_ABSTRACT(choice_type))
 			continue
-		.[type] = new type()
+		.[choice_type] = new choice_type()
 	return .
 
 GLOBAL_LIST_INIT(customizers, build_customizers())
 
 /proc/build_customizers()
 	. = list()
-	for(var/datum/customizer/type as anything in typesof(/datum/customizer))
-		if(IS_ABSTRACT(type))
+	for(var/datum/customizer/customizer_type as anything in typesof(/datum/customizer))
+		if(IS_ABSTRACT(customizer_type))
 			continue
-		.[type] = new type()
+		.[customizer_type] = new customizer_type()
 	return .
 
 /proc/color_pick_sanitized_lumi(mob/user, description, title, default_value, min_lumi = 0.07, max_lumi = 1.0)

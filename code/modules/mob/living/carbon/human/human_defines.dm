@@ -91,6 +91,7 @@
 	var/setspouse
 	var/setchild
 	var/setparent
+	var/setsibling
 	var/gender_choice_pref = ANY_GENDER
 	var/familytree_pref = FAMILY_NONE
 	var/family_adoption_pref = FALSE
@@ -132,6 +133,7 @@
 	var/breathe_tick = 0 // Used for gas mask delays.
 
 	var/merctype = 0 // Used for mercenary backgrounds - check mail.dm
+	var/mercdesc // Description used for mercenary statue.
 	var/tokenclaimed = FALSE // Check for one-time tri reward.
 
 	possible_rmb_intents = list(/datum/rmb_intent/feint,\

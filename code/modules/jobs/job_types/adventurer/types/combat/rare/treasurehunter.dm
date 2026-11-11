@@ -18,7 +18,7 @@
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/misc/lockpicking = 20,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/advclass/combat/gravedigger
@@ -27,7 +27,7 @@
 	necrotic flesh off of that trinket you found."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/adventurer/gravedigger
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/gravedigger

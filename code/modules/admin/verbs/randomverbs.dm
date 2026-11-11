@@ -50,9 +50,9 @@
 			var/volume = "Normal"
 			var/first_time_message
 			for(var/patron in COLORFUL_PATRONS)
-				if(patron in god_options)
-					continue
-				god_options += patron
+				god_options |= patron
+			for(var/devil in ARCHDEVIL_PATRON_NAMES)
+				god_options |= devil
 			chosen_god = browser_input_list(user, "Which god?", "God", god_options, "CANCEL", 20 SECONDS)
 			if(!chosen_god || (chosen_god == "CANCEL"))
 				message_admins("[key_name_admin(user)] decided not to talk into [ADMIN_LOOKUPFLW(target)]'s head")
@@ -70,6 +70,8 @@
 			if(first_time && first_time_message)
 				to_chat(target, SPAN_GOD_FIRST_FEEL(first_time_message))
 				message_admins("<span class='adminnotice'><b> SubtleMessage: [key_name_admin(user)] -> [key_name_admin(target)] :</b> [first_time_message]</span>")
+			if(chosen_god in ARCHDEVIL_PATRON_NAMES)
+				chosen_god = "archdevil"
 			message = "<span class='god_[ckey(chosen_god)]'>[message]</span>"
 			switch(volume)
 				if("Loud")
@@ -259,14 +261,18 @@
 	if(!check_rights(R_ADMIN))
 		return
 
-	M.status_flags ^= GODMODE
-	to_chat(usr, "<span class='adminnotice'>Toggled [(M.status_flags & GODMODE) ? "ON" : "OFF"]</span>")
+	if(HAS_TRAIT_FROM(M, TRAIT_GODMODE, ADMIN_TRAIT))
+		REMOVE_TRAIT(M, TRAIT_GODMODE, ADMIN_TRAIT)
+	else
+		ADD_TRAIT(M, TRAIT_GODMODE, ADMIN_TRAIT)
+	var/new_godmode_state = HAS_TRAIT_FROM(M, TRAIT_GODMODE, ADMIN_TRAIT)
+	to_chat(usr, "<span class='adminnotice'>Toggled [new_godmode_state ? "ON" : "OFF"]</span>")
 
-	log_admin("[key_name(usr)] has toggled [key_name(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]")
-	var/msg = "[key_name_admin(usr)] has toggled [ADMIN_LOOKUPFLW(M)]'s nodamage to [(M.status_flags & GODMODE) ? "On" : "Off"]"
+	log_admin("[key_name(usr)] has toggled [key_name(M)]'s nodamage to [new_godmode_state ? "On" : "Off"]")
+	var/msg = "[key_name_admin(usr)] has toggled [ADMIN_LOOKUPFLW(M)]'s nodamage to [new_godmode_state ? "On" : "Off"]"
 	message_admins(msg)
 	admin_ticket_log(M, msg)
-	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Godmode", "[M.status_flags & GODMODE ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Godmode", "[new_godmode_state ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
 /proc/cmd_admin_mute(whom, mute_type, automute = 0)
@@ -735,6 +741,24 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	SSblackbox.record_feedback("nested tally", "admin_toggle", 1, list("Toggled Hub Visibility", "[GLOB.hub_visibility ? "Enabled" : "Disabled"]")) //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/client/proc/scan_health(mob/living/carbon/target as mob)
+	set name = "Scan Health"
+	set category = "GameMaster.Gods"
+	if(!check_rights())
+		to_chat(usr, span_warning("You should not have this button. Shoo."))
+		return FALSE
+
+	if(!ishuman(target))
+		to_chat(usr, span_warning("You can only use this on human targets."))
+		return FALSE
+	var/mob/living/carbon/human/human_target = target
+	if(QDELETED(human_target))
+		return FALSE
+	human_target.check_for_injuries(mob, TRUE, FALSE, TRUE, TRUE)
+	log_admin("[key_name(usr)] admin-scanned the health of [key_name(target)]")
+	message_admins("[key_name_admin(usr)] admin-scanned the health of [key_name_admin(target)]")
+	return TRUE
+
 /client/proc/smite(mob/living/target as mob)
 	set name = "Smite"
 	set category = "GameMaster.Gods"
@@ -821,7 +845,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 			for (var/mob/living/carbon in GLOB.carbon_list) // Admin smite, just tell all assassins whether they have their knife or not
 				if (HAS_TRAIT(carbon, TRAIT_ASSASSIN) && !(carbon.stat == DEAD)) //Check if they are an assassin and alive
 					// for(var/obj/item/I in carbon) // Checks to see if the assassin has their dagger on them. If so, the dagger will let them know of a new target.
-					// 	if(istype(I, /obj/item/weapon/knife/dagger/steel/profane)) // Checks to see if the assassin has their dagger on them.
+					// 	if(istype(I, /obj/item/weapon/knife/dagger/steel/inhumen/profane)) // Checks to see if the assassin has their dagger on them.
 					to_chat(carbon, "<span class='danger'>\"The Dark Sun Graggar himself has ordered us to punish [target.real_name] for their transgressions!\"</span>")
 			to_chat(target.mind, "<span class='danger'>My hair stands on end. Has someone just said my name? I should watch my back.</span>")
 		if(ADMIN_PUNISHMENT_MEATPIE)

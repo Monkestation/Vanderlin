@@ -7,7 +7,7 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/lumberjacking = 10,
@@ -15,6 +15,7 @@
 		/datum/attribute/skill/craft/carpentry = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/combat/axesmaces = 40,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/knives = 20,
@@ -34,12 +35,11 @@
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_FORFORCER
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	allowed_races = RACES_PLAYER_ALL
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT, EXP_TYPE_LEADERSHIP)
@@ -96,5 +96,5 @@
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/key/forrestgarrison = 1,
+		/obj/item/storage/keyring/gallowband/hersir = 1,
 	)

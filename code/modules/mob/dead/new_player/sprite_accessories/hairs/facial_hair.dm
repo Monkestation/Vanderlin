@@ -49,7 +49,7 @@
 	name = "Dignitary"
 	icon_state = "braided"
 	gender = MALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/facial/manly
 	name = "Drinker"
@@ -169,40 +169,40 @@
 	name = "Gnomish"
 	icon_state = "facial_gnomish"
 	gender = MALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/facial/newlywed
 	name = "Newlywed (Feminine)"
 	icon_state = "facial_newlywed"
 	gender = FEMALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/facial/anniversary
 	name = "Anniversary (Feminine)"
 	icon_state = "facial_anniversary"
 	gender = FEMALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/facial/longbraid
 	name = "Longbraid"
 	icon_state = "facial_longbraid"
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/facial/pinnacle
 	name = "Pinnacle (Masculine)"
 	icon_state = "facial_pinnacle"
 	gender = MALE
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/facial/enchanter
 	name = "Enchanter"
 	icon_state = "facial_enchanter"
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/facial/curlypom
 	name = "Curlypom"
 	icon_state = "facial_curlypom"
-	specuse = list(SPEC_ID_DWARF)
+	specuse = list(SPEC_ID_DWARF, , SPEC_ID_DWARF_ORC)
 
 /datum/sprite_accessory/hair/facial/rakshari/kesh
 	name = "Kesh"

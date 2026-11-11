@@ -27,7 +27,7 @@
 			continue
 		register_participant(wave_mob.ai_controller)
 		wave_mob.ai_controller.change_ai_movement_type(/datum/ai_movement/hybrid_pathing/wave_defense)
-		wave_mob.ai_controller.max_target_distance = 100
+		wave_mob.ai_controller.max_target_distance = 50
 		wave_mob.ai_controller.blackboard[BB_TARGETTING_DATUM] = new /datum/targetting_datum/basic/allow_structures
 
 /datum/wave_defense_coordinator/Destroy(force)

@@ -4,12 +4,16 @@
 	)
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 3,
+		STAT_CONSTITUTION = 2,
 		STAT_SPEED = 1,
 		STAT_PERCEPTION = -1,
-		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/craft/crafting = 20,//they need this to craft bottles
+		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/alchemy = 50,
@@ -21,12 +25,16 @@
 /datum/attribute_holder/sheet/job/apothecary/old
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 3,
+		STAT_CONSTITUTION = 2,
 		STAT_SPEED = 1,
 		STAT_PERCEPTION = -1,
-		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/craft/crafting = 20,//they need this to craft bottles
+		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/alchemy = 60,
@@ -48,7 +56,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	trainable_skills = list(/datum/attribute/skill/craft/alchemy = 0.1)
 	max_apprentices = 2
@@ -74,6 +81,7 @@
 	job_bitflag = BITFLAG_CONSTRUCTOR
 
 	exp_type = list(EXP_TYPE_LIVING)
+	exp_types_granted = list(EXP_TYPE_MEDICAL)
 	exp_requirements = list(
 		EXP_TYPE_LIVING = 600
 	)

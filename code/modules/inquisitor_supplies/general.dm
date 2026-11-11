@@ -31,7 +31,7 @@
 ///  SUPPLIES  START HERE! WOW!
 
 /datum/inqports/supplies/extrafunding
-	name = "(80 Silvers) Extra Funding"
+	name = "(400 Mammons) Extra Funding"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/extrafunding
 	marquescost = 16
 	maximum = 1
@@ -91,7 +91,7 @@
 
 /obj/structure/closet/crate/chest/inqcrate/supplies/redpots/populate_contents()
 	for(var/i in 1 to 3)
-		new /obj/item/reagent_containers/glass/bottle/healthpot(src)
+		new /obj/item/reagent_containers/glass/bottle/healthpot/labelled(src)
 
 /datum/inqports/supplies/lifebloodvials
 	name = "3 Vials of Strong lifeblood"
@@ -110,17 +110,17 @@
 
 /obj/structure/closet/crate/chest/inqcrate/supplies/bluepots/populate_contents()
 	for(var/i in 1 to 3)
-		new /obj/item/reagent_containers/glass/bottle/manapot(src)
+		new /obj/item/reagent_containers/glass/bottle/manapot/labelled(src)
 
 /datum/inqports/supplies/strongbluevials
-	name = "3 Vials of Strong mana"
+	name = "3 Bottles of Strong mana"
 	item_type = /obj/structure/closet/crate/chest/inqcrate/supplies/sbluevials
 	maximum = 4
 	marquescost = 16
 
 /obj/structure/closet/crate/chest/inqcrate/supplies/sbluevials/populate_contents()
 	for(var/i in 1 to 3)
-		new /obj/item/reagent_containers/glass/bottle/strongmanapot(src)
+		new /obj/item/reagent_containers/glass/bottle/strongmanapot/labelled(src)
 
 /datum/inqports/supplies/smokes
 	name = "4 Smokebombs"
@@ -169,7 +169,7 @@
 /datum/inqports/supplies/bullion
 	name = "6 Blessed Silver Bullion"
 	item_type = /obj/structure/closet/crate/chest/inqreliquary/relic/bullion
-	marquescost = 16
+	marquescost = 12
 
 /obj/structure/closet/crate/chest/inqreliquary/relic/bullion/populate_contents()
 	for(var/i in 1 to 6)

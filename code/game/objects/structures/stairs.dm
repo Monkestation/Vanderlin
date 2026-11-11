@@ -296,14 +296,20 @@
 	return get_target_loc(dirmove) || get_step(src, dirmove) // just normal movement if we failed to find a matching stair
 
 /// Get the turf above/below us corresponding to the direction we're moving on the stairs.
+/// Why do we have both? well virtual bounds can be finnicky and instead of trusting event staff to always get it right this fixes it
 /obj/structure/stairs/proc/get_target_loc(dirmove)
 	var/turf/newtarg
+	var/turf/offset_turf = get_step(src, dirmove)
 	if(dirmove == dir)
 		// the optimization macro here is beacuse this can be called in pathfinding
 		// and therefore can be quite expensive
-		newtarg = GET_TURF_ABOVE_DIAGONAL(get_turf(src), UP|dirmove)
+		newtarg = GET_TURF_ABOVE(offset_turf)
+		if(!newtarg)
+			newtarg = GET_TURF_ABOVE_DIAGONAL(get_turf(src), UP|dirmove)
 	else if(dirmove == REVERSE_DIR(dir))
-		newtarg = GET_TURF_BELOW_DIAGONAL(get_turf(src), DOWN|dirmove)
+		newtarg = GET_TURF_BELOW(offset_turf)
+		if(!newtarg)
+			newtarg = GET_TURF_BELOW_DIAGONAL(get_turf(src), DOWN|dirmove)
 	if(!newtarg)
 		return // nowhere to move to???
 	for(var/obj/structure/stairs/partner in newtarg)

@@ -22,7 +22,8 @@
 	var/obj/item/bodypart/affecting = target.get_bodypart(def_zone)
 	if(!affecting || affecting.status != BODYPART_ORGANIC)
 		return
-	if(target.getarmor(def_zone, "stab", 0, simulate=TRUE) - rand(get_armor_by_type(/datum/armor/leather/good).get_rating(STAB), get_armor_by_type(/datum/armor/maille/good).get_rating(STAB) + 5) >= 0)
+	var/list/armor_list = target.getarmor(def_zone, "stab", 0, simulate=TRUE)
+	if(armor_list[ARMOR_TYPE_DMG] - rand(get_armor_by_type(/datum/armor/leather/good).get_rating(STAB), get_armor_by_type(/datum/armor/maille/good).get_rating(STAB) + 5) >= 0)
 		return //we blocked it
 	playsound(parent, 'sound/combat/hits/hi_arrow.ogg', 30, TRUE, -4)
 	if(prob(60))

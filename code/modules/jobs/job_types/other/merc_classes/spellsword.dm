@@ -10,7 +10,7 @@
 		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/magic/arcane = 10,
@@ -68,6 +68,6 @@
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/dagger = 1,
-		/obj/item/reagent_containers/glass/bottle/manapot = 1,
+		/obj/item/reagent_containers/glass/bottle/manapot/labelled = 1,
 		/obj/item/chalk = 1
 	)

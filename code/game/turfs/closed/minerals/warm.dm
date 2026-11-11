@@ -30,7 +30,8 @@
 		/turf/closed/mineral/cinnabar/warm = 5,
 		/turf/closed/mineral/gold/warm = 15,
 		/turf/closed/mineral/iron/warm = 25,
-		/turf/closed/mineral/silver/warm = 15
+		/turf/closed/mineral/silver/warm = 15,
+		/turf/closed/mineral/bloodstone/warm = 5
 	)
 
 /turf/closed/mineral/copper/warm
@@ -48,6 +49,10 @@
 /turf/closed/mineral/gold/warm
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_red.dmi', 'icons/turf/mining/mining_hot.dmi')
 	icon_state = MAP_SWITCH("mineral", "gold_warm")
+
+/turf/closed/mineral/bloodstone/warm
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_red.dmi', 'icons/turf/mining/mining_hot.dmi')
+	icon_state = MAP_SWITCH("mineral", "gem_warm")
 
 /turf/closed/mineral/salt/warm
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_red.dmi', 'icons/turf/mining/mining_hot.dmi')

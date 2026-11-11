@@ -10,7 +10,7 @@
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/sneaking = 60,
 		/datum/attribute/skill/misc/stealing = 60,
 		/datum/attribute/skill/misc/lockpicking = 50,
@@ -108,7 +108,7 @@
 	backpack_contents = list(
 		/obj/item/lockpick = 1,
 		/obj/item/grapplinghook = 1,
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 	)
 
 /datum/job/advclass/wretch/antiquarian/after_spawn(mob/living/carbon/human/spawned, client/player_client)

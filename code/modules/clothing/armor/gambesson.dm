@@ -27,6 +27,12 @@
 	material_category = ARMOR_MAT_FABRIC
 	item_weight = 0.8 KILOGRAMS
 
+/obj/item/clothing/armor/gambeson/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/armor/gambeson/colored/black
+	color = CLOTHING_SOOT_BLACK
+
 /obj/item/clothing/armor/gambeson/light
 	name = "light gambeson"
 	desc = "Thin and the maker skimped on the padding, typically worn by the peasantry to give some protection against cold for the whole body."
@@ -36,7 +42,7 @@
 
 	armor_type = /datum/armor/padded/bad
 	prevent_crits = MINOR_CRITICALS
-	item_weight = 3 KILOGRAMS
+	item_weight = 0.6 KILOGRAMS
 
 /obj/item/clothing/armor/gambeson/light/steppe
 	name = "steppe robes"
@@ -71,7 +77,7 @@
 	name = "robed jupon"
 	desc = "A thick, quilted jupon with an iron heart protector. It's great for the southern desert's heat and northern tundra's cold."
 	icon_state = "lakkarijupon"
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	r_sleeve_status = SLEEVE_NORMAL
 	l_sleeve_status = SLEEVE_NORMAL
 	sewrepair = /datum/attribute/skill/misc/sewing/mending

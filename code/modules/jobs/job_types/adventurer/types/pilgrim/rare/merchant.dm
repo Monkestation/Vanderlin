@@ -1,15 +1,22 @@
 /datum/attribute_holder/sheet/job/pilgrim/merchant
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 2,
-		STAT_SPEED = 1,
-		/datum/attribute/skill/misc/reading = 30,
-		/datum/attribute/skill/combat/knives = 20,
+		STAT_SPEED = 2,
+		/datum/attribute/skill/educated/reading = 30,
+		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/craft/alchemy = 10,
-		/datum/attribute/skill/labor/mathematics = 50,
+		/datum/attribute/skill/educated/mathematics = 50,
+	)
+	clamped_adjustment = list(
+		/datum/attribute/skill/combat/knives = list(20, 20),
+		/datum/attribute/skill/combat/wrestling = list(20, 20),
+		/datum/attribute/skill/combat/unarmed = list(10, 10),
 	)
 
 /datum/job/advclass/pilgrim/rare/merchant
@@ -38,16 +45,16 @@
 	switch(merchant_type)
 		if("FOOD")
 			outfit = /datum/outfit/pilgrim/merchant/food
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/cooking, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/cooking, 20, 30)
 		if("HEAL")
 			outfit = /datum/outfit/pilgrim/merchant/heal
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20, 30)
 		if("SILK")
 			outfit = /datum/outfit/pilgrim/merchant/silk
-			spawned.adjust_skill_level(/datum/attribute/skill/misc/sewing, 20)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/misc/sewing, 20, 40)
 		if("GEMS")
 			outfit = /datum/outfit/pilgrim/merchant/gem
-			spawned.adjust_skill_level(/datum/attribute/skill/craft/blacksmithing, 10)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/blacksmithing, 10, 10)
 
 /datum/outfit/pilgrim/merchant
 	name = "Travelling Merchant (Pilgrim)"
@@ -84,10 +91,10 @@
 
 /datum/outfit/pilgrim/merchant/heal
 	backpack_contents = list(
-		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
-		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
-		/obj/item/reagent_containers/glass/bottle/healthpot = 1,
-		/obj/item/reagent_containers/glass/bottle/manapot = 1,
+		/obj/item/reagent_containers/glass/bottle/healthpot/labelled = 1,
+		/obj/item/reagent_containers/glass/bottle/healthpot/labelled = 1,
+		/obj/item/reagent_containers/glass/bottle/healthpot/labelled = 1,
+		/obj/item/reagent_containers/glass/bottle/manapot/labelled = 1,
 		/obj/item/flint = 1,
 		/obj/item/weapon/knife/dagger = 1
 	)

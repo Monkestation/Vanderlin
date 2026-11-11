@@ -96,7 +96,6 @@
 	color = CLOTHING_SOOT_BLACK
 	allowed_sex = list(MALE, FEMALE)
 	allowed_race = SPECIES_BASE_BODY
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/half/guard
 	name = "guard's half cloak"
@@ -142,6 +141,9 @@
 /obj/item/clothing/cloak/half/colored/red
 	color = CLOTHING_BLOOD_RED
 
+/obj/item/clothing/cloak/half/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
 /obj/item/clothing/cloak/half/vet
 	name = "town watch cloak"
 	icon_state = "guardcloak"
@@ -157,6 +159,7 @@
 	name = "matron cloak"
 	desc = "A cloak that only the meanest of old crones bother to wear."
 	icon_state = "matroncloak"
+	item_state = "matroncloak"
 	icon = 'icons/roguetown/clothing/cloaks.dmi'
 	mob_overlay_icon ='icons/roguetown/clothing/onmob/cloaks.dmi'
 	body_parts_covered = CHEST|GROIN|VITALS|ARMS
@@ -164,7 +167,6 @@
 	sleevetype = "shirt"
 	slot_flags = ITEM_SLOT_CLOAK
 	nodismemsleeves = TRUE
-	slot_flags = ITEM_SLOT_CLOAK
 	has_storage = TRUE
 
 //............... Battle Nun ........................... (unique kit for the role, tabard for aesthetics)
@@ -277,6 +279,7 @@
 	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
 	sellprice = 0 // See above comment
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/graggar
 
 /obj/item/clothing/cloak/graggar/heavy
 	name = "vicious halfcloak"
@@ -333,7 +336,6 @@
 	allowed_race = SPECIES_BASE_BODY
 
 /obj/item/clothing/cloak/poncho
-
 	name = "cloth poncho"
 	desc = "A loose garment that is usually draped across ones upper body. No one's quite sure of its cultural origin."
 	icon_state = "poncho"
@@ -362,6 +364,7 @@
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK_R|ITEM_SLOT_SHIRT|ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK //Same slots as the regular tabard, with the added bonus of being slingable on the rightmost backslot.
 	salvage_result = /obj/item/natural/hide/cured
+	has_storage = FALSE
 	grid_width = 64
 	grid_height = 96
 
@@ -456,4 +459,16 @@
 	icon = 'icons/roguetown/clothing/special/crusader.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/crusader.dmi'
-	has_storage = TRUE
+
+/obj/item/clothing/cloak/rosa
+	name = "regal cloak"
+	desc = "A finely crafted cloak from Wintermare, typically worn by their nobility."
+	icon_state = "rosacloak7"
+	alternate_worn_layer = CLOAK_BEHIND_LAYER
+	icon = 'icons/roguetown/clothing/special/rosewood.dmi'
+	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+	sleeved = 'icons/roguetown/clothing/special/onmob/rosewood.dmi'
+
+/obj/item/clothing/cloak/rosa/two
+	name = "courtly cloak"
+	icon_state = "rosacloak8"

@@ -14,7 +14,7 @@
 	ventcrawler = VENTCRAWLER_ALWAYS
 	emote_see = list("pecks at the ground.","flaps its wings viciously.")
 	speak_chance = 2
-	faction = list("chickens")
+	faction = list(FACTION_NEUTRAL)
 
 	botched_butcher_results = list(/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet = 1)
 	butcher_results = list(/obj/item/reagent_containers/food/snacks/fat = 1,

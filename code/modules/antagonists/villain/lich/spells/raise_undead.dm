@@ -5,8 +5,10 @@
 	sound = 'sound/magic/magnet.ogg'
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_technique = TECHNIQUE_SUMMONING
 	required_level = 12
+	heretical_spell = TRUE
 
 	charge_time = 6 SECONDS
 	charge_drain = 1
@@ -32,10 +34,11 @@
 	conjured_mobs -= summoned
 
 /datum/action/cooldown/spell/raise_undead/proc/register_minion(mob/living/minion, mob/living/user)
-	var/mob/living/last = conjured_mobs[length(conjured_mobs)]
-	if(!QDELETED(last))
-		qdel(last)
-	conjured_mobs.len--
+	if(length(conjured_mobs) >= max_summons)
+		var/mob/living/last = conjured_mobs[1]
+		if(!QDELETED(last))
+			qdel(last)
+		conjured_mobs.Cut(1, 2)
 
 	conjured_mobs += minion
 	RegisterSignal(minion, COMSIG_QDELETING, PROC_REF(remove_conjure))
@@ -109,8 +112,9 @@
 	clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 10, 30, TRUE)
 	clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 20, 30, TRUE)
 
-	mind.current.job = null
-	mind.add_antag_datum(/datum/antagonist/skeleton)
+	if(mind)
+		mind.current.job = null
+		mind.add_antag_datum(/datum/antagonist/skeleton)
 
 	dna.species.soundpack_m = new /datum/voicepack/skeleton()
 	dna.species.soundpack_f = new /datum/voicepack/skeleton()

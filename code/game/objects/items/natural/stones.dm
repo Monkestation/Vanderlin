@@ -416,6 +416,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 				S.set_up(1, 1, front)
 				S.start()
 
+/obj/item/natural/rock/drill_act(drill_power)
+	take_damage(drill_power, BCLASS_PIERCE)
+
 /obj/item/natural/rock/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.cmode)
 		return NONE
@@ -495,6 +498,9 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 /obj/item/natural/rock/gemerald
 	mineralType = /obj/item/gem
 
+/obj/item/natural/rock/bloodstone
+	mineralType = /obj/item/ore/bloodstone
+
 /obj/item/natural/rock/random_ore
 	name = "rock?"
 	desc = "Wait, this shouldn't be here?"
@@ -510,7 +516,8 @@ GLOBAL_LIST_INIT(stone_personality_descs, list(
 		/obj/item/natural/rock/silver,
 		/obj/item/natural/rock/copper,
 		/obj/item/natural/rock/tin,
-		/obj/item/natural/rock/gemerald
+		/obj/item/natural/rock/gemerald,
+		/obj/item/natural/rock/bloodstone
 	))
 	new theboi(get_turf(src))
 	return INITIALIZE_HINT_QDEL

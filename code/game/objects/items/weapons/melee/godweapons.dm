@@ -13,7 +13,7 @@
 #define GOREFEAST_WORTHY list(\
 	span_danger("A worthy one!"),\
 	span_danger("Bathe me in their blood."),\
-	span_danger("You can smell their fear can't you?"),\
+	span_danger("You can smell their fear, can't you?"),\
 	span_danger("Unleash your fury, soak the soil in their blood."),\
 	span_danger("Feast on their organs."),\
 	span_danger("Cull the world of the weak!"),\
@@ -34,7 +34,7 @@
 	possible_item_intents = list(AXE_CUT, AXE_CHOP)
 	gripped_intents = list(AXE_CUT, AXE_GRTCHOP, SWORD_STRIKE)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST + 220
+	max_integrity = INTEGRITY_GOD_WEAPON
 	minstr = 12
 	resistance_flags = FIRE_PROOF
 	sellprice = 550
@@ -42,6 +42,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
 	. = ..()
@@ -113,7 +114,7 @@
 	possible_item_intents = list(SPEAR_CUT)
 	gripped_intents = list(POLEARM_CHOP, WHIP_STRIKE, NEANT_SHOOT)
 	max_blade_int = 200
-	max_integrity = INTEGRITY_STRONGEST + 220
+	max_integrity = INTEGRITY_GOD_WEAPON
 	slot_flags = ITEM_SLOT_BACK
 	resistance_flags = FIRE_PROOF
 
@@ -123,6 +124,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/zizo
 
 	COOLDOWN_DECLARE(fire_projectile)
 
@@ -244,6 +246,7 @@
 	projectile_damage_multiplier = 1.1
 
 	item_weight = 2 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 	var/obj/item/instrument/harp/turbulenta/FUCK
 
@@ -350,12 +353,13 @@
 	desc = "A sword of legend. If they are true, then this is the blade of Matthios himself. Rumor has it, it steals space and time."
 	possible_item_intents = list(SWORD_STRIKE, SWORD_CUT)
 	gripped_intents = list(SWORD_STRIKE, SWORD_CHOP, SWORD_THRUST, PLEX_BLINK)
-	max_integrity = INTEGRITY_STRONGEST + 220
+	max_integrity = INTEGRITY_GOD_WEAPON
 	sellprice = 550
 	item_weight = 1.5 KILOGRAMS
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 	COOLDOWN_DECLARE(pleonexia_blink)
 
@@ -419,9 +423,11 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrsword"
 	item_weight = 1.5 KILOGRAMS
+	max_integrity = INTEGRITY_GOD_WEAPON
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /datum/intent/sword/cut/martyr
 	item_damage_type = "fire"
@@ -447,16 +453,19 @@
 	var/safe_damage_wielded = 30
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/weapon/greataxe/steel/grandmaster
 	name = "divine greataxe"
-	desc = "The Axe of Saint Altierre. A holy great axe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him and nearly killing him."
+	desc = "The Axe of Saint Altierre. A holy greataxe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him almost to the point of death."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
 	item_weight = 4.5 KILOGRAMS
+	max_integrity = INTEGRITY_GOD_WEAPON
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /datum/intent/axe/cut/battle/greataxe/martyr
 	item_damage_type = "fire"
@@ -488,6 +497,7 @@
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)
 
 /datum/intent/polearm/cut/martyr
 	item_damage_type = "fire"
@@ -507,9 +517,11 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrtrident"
 	item_weight = 2.5 KILOGRAMS
+	max_integrity = INTEGRITY_GOD_WEAPON
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /obj/item/weapon/polearm/spear/grandmaster/Initialize()
 	. = ..()
@@ -519,6 +531,7 @@
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)
 
 /datum/intent/mace/strike/martyr
 	item_damage_type = "fire"
@@ -534,9 +547,11 @@
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrmace"
 	item_weight = 3.5 KILOGRAMS
+	max_integrity = INTEGRITY_GOD_WEAPON
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
 	. = ..()
@@ -546,3 +561,4 @@
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
 	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/anti_theft)

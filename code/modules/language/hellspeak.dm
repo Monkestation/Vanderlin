@@ -1,6 +1,6 @@
 /datum/language/hellspeak
 	name = "Infernal"
-	desc = ""
+	desc = "The language of the Tieflings and other beings of the infernal realms."
 	icon_state = "infernal"
 	spans = list(SPAN_HELL)
 	speech_verb = "states"

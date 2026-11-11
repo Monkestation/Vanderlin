@@ -23,7 +23,7 @@
 	button_icon_state = "lightning"
 	sound = 'sound/foley/jumpland/waterland.ogg'
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/abyssor)
@@ -42,7 +42,7 @@
 	name = "trident of the depths"
 	desc = "An instrument of Abyssor's wrath to claim his bounties and punish the ignorant."
 	icon = 'icons/roguetown/weapons/64/polearms.dmi'
-	icon_state = "tridentgold"
+	icon_state = "trident_holy"
 	lefthand_file = 'icons/mob/inhands/weapons/rogue_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/weapons/rogue_righthand.dmi'
 	force = DAMAGE_SPEAR
@@ -53,7 +53,7 @@
 	possible_item_intents = list(SPEAR_THRUST, ROD_AUTO, ROD_CAST)
 	gripped_intents = list(SPEAR_THRUST, SPEAR_CUT, POLEARM_BASH)
 	max_blade_int = 50
-	max_integrity = INTEGRITY_WORST / 2 // not meant for long-term combat
+	max_integrity = INTEGRITY_OLD_WORST / 2 // not meant for long-term combat
 
 	SET_BASE_PIXEL(-16, -16)
 	inhand_x_dimension = 64
@@ -78,6 +78,7 @@
 	armor_penetration = 5
 	can_parry = TRUE
 	has_inspect_verb = TRUE
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/abyssor
 
 /obj/item/fishingrod/abyssor_trident/Initialize()
 	. = ..()
@@ -160,4 +161,5 @@
 /obj/item/fishingrod/abyssor_trident/arcane
 	name = "Arcane Trident"
 	desc = "A conjured trident, it resonates with arcyne energy."
-	icon_state = "tridentblue"
+	icon_state = "trident_arcyne"
+	examine_highlight_type = null

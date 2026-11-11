@@ -9,7 +9,7 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 40,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/medicine = 20
 	)
 

@@ -16,7 +16,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/athletics = 30
 	)
 
@@ -72,8 +72,8 @@
 	var/choice = spawned.select_equippable(player_client, selectable, message = "CHOOSE YOUR WEAPON", title = "FOR FORTUNE AND GLORY!")
 	switch(choice)
 		if("Sword")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/swords, 13)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 13, 33)
 		if("Mace")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 13)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/axesmaces, 13, 33)
 		if("Polehammer")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/polearms, 13)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 13, 33)

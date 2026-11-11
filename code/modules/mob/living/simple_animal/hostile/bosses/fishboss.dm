@@ -1,10 +1,10 @@
 /mob/living/simple_animal/hostile/boss/fishboss
 	name = "Duke of the Deep"
 	desc = "An enormous, bloated deep one, pulsating with ancient power from the abyss."
-	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
-	faction = list("deepone")
 	icon = 'icons/roguetown/mob/monster/pufferboss.dmi'
 	icon_state = "pufferman"
+	mob_biotypes = MOB_ORGANIC|MOB_HUMANOID
+	faction = list(FACTION_DEEP)
 	vision_range = 16
 	aggro_vision_range = 24
 	ranged = 1

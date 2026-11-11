@@ -1,0 +1,5 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Fixes duplicate clan assignments"
+  - bugfix: "Fixes wretches retaining custom job titles from their previous job."

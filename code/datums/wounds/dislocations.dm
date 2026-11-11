@@ -11,6 +11,7 @@
 	sound_effect = "fracturedry"
 	whp = 40
 	woundpain = 20
+	splint_suppression = TRUE
 	mob_overlay = ""
 	sewn_overlay = ""
 	can_sew = FALSE
@@ -20,7 +21,6 @@
 	passive_healing = 0.25
 	qdel_on_droplimb = TRUE
 
-	werewolf_infection_probability = 0
 	associated_bclasses = DISLOCATION_BCLASSES
 	min_damage_dividend = 0.4
 	/// Whether or not we can be surgically relocated

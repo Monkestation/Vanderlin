@@ -5,6 +5,7 @@
 	sound = 'sound/magic/churn.ogg'
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_ILLUSION
 
 	invocation = "darkness envelop them."
@@ -31,7 +32,7 @@
 	charge_sound = 'sound/magic/holycharging.ogg'
 	required_form = null
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/noc)

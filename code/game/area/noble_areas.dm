@@ -8,10 +8,12 @@
 	background_track_dusk = null
 	background_track_night = null
 	converted_type = /area/outdoors/exposed/manorgarri
+	var/keep_autoname = TRUE
 
 /area/indoors/town/keep/Initialize()
 	. = ..()
-	first_time_text = "THE KEEP OF [uppertext(SSmapping.config.map_name)]"
+	if(keep_autoname)
+		first_time_text = "THE KEEP OF [uppertext(SSmapping.config.map_name)]"
 
 /area/indoors/town/keep/thewall
 	name = "Keep Wall"
@@ -21,14 +23,24 @@
 	name = "Keep Grounds"
 	icon = 'icons/turf/areas/manor.dmi'
 	icon_state = "manor_out"
+	var/keep_autoname = TRUE
 
 /area/outdoors/town/keep/Initialize()
 	. = ..()
-	first_time_text = "[uppertext(SSmapping.config.map_name)] KEEP GROUNDS"
+	if(keep_autoname)
+		first_time_text = "[uppertext(SSmapping.config.map_name)] KEEP GROUNDS"
 
 /area/outdoors/town/keep/roof
 	name = "Keep Roof"
 	icon_state = "manor_roof"
+
+/area/outdoors/town/keep/stable
+	name = "Keep Stables"
+	icon_state = "manor_stable"
+
+/area/outdoors/town/keep/forge
+	name = "Royal Forge"
+	icon_state = "manor_forge"
 
 /area/indoors/town/keep/throne
 	name = "Throne Room"
@@ -53,6 +65,11 @@
 	background_track_dusk = null
 	background_track_night = null
 
+/area/indoors/town/keep/courtagent/prison
+	name = "Court Agent's Prison"
+	keep_autoname = FALSE
+	first_time_text = "THE PRISON THAT NEVER EXISTED"
+
 /area/indoors/town/keep/passages
 	name = "Keep Passages"
 	icon_state = "passage"
@@ -73,6 +90,10 @@
 /area/indoors/town/keep/passages/secondfloor
 	name = "Keep Passages (Second Floor)"
 	icon_state = "passage_second"
+
+/area/indoors/town/keep/passages/thirdfloor
+	name = "Keep Passages (Third Floor)"
+	icon_state = "passage_third"
 
 /area/indoors/town/keep/phys
 	name = "Court Physician's Office"
@@ -131,7 +152,7 @@
 	icon_state = "servant_head"
 
 /area/indoors/town/keep/library
-	name = "Keep Libray"
+	name = "Keep Library"
 	icon_state = "library"
 
 /area/indoors/town/keep/archivist

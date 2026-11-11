@@ -138,25 +138,37 @@
 		else
 			owner.status_flags &= ~BLEEDOUT
 
-	var/temp_bleed = 0
-	var/bleed_mod = 1
+	var/true_bleed = 0
 	for(var/obj/item/bodypart/bleed_part as anything in owner.bodyparts)
-		var/true_bleed = bleed_part.get_bleed_rate() * delta_time
+		var/temp_bleed = bleed_part.get_bleed_rate() * delta_time
 		switch(owner.pulse)
 			if(PULSE_SLOW)
-				true_bleed *= 0.8
+				temp_bleed *= 0.8
 			if(PULSE_FAST)
-				true_bleed *= 1.25
+				temp_bleed *= 1.25
 			if(PULSE_FASTER, PULSE_THREADY)
-				true_bleed *= 1.5
+				temp_bleed *= 1.5
 		if(owner.status_flags & BLEEDOUT)
-			true_bleed *= 0.5 //this gives us some nice bleed reduction so you have more time to save someone whos in crit
-		true_bleed = CEILING(true_bleed * bleed_mod, 0.1)
-		temp_bleed += true_bleed
+			temp_bleed *= 0.5 //this gives us some nice bleed reduction so you have more time to save someone whos in crit
+		true_bleed += CEILING(temp_bleed, 0.1)
+
 		if(bleed_part.bandage)
-			bleed_part.try_bandage_expire()
-	if(temp_bleed > 0)
-		if(owner.bleed(temp_bleed, FALSE) && temp_bleed >= BLEED_RATE_NOTICABLE && owner.body_position == STANDING_UP)
+			bleed_part.try_bandage_expire(bleed_part.get_bandaged_bleed_rate())
+			var/datum/reagents/bandage_reagents = bleed_part.bandage.reagents
+			if(bandage_reagents?.total_volume > 0 && owner.reagents)
+				for(var/datum/reagent/reagent in bandage_reagents.reagent_list)
+					if(istype(reagent, /datum/reagent/blood))
+						continue
+					var/amount_to_transfer = round(min(reagent.volume, reagent.metabolization_rate), 0.0001)//CHEMICAL_QUANTISATION_LEVEL
+					if(amount_to_transfer <= 0)
+						continue
+					if(reagent.on_bodypart_absorb(owner, bleed_part, amount_to_transfer))
+						bandage_reagents.trans_id_to(owner, reagent.type, amount_to_transfer)
+					else
+						bandage_reagents.remove_reagent(reagent.type, amount_to_transfer)
+
+	if(true_bleed > 0)
+		if(owner.bleed(true_bleed, FALSE) && true_bleed >= BLEED_RATE_NOTICABLE && owner.body_position == STANDING_UP)
 			var/bleed_sound = "sound/gore/blood[rand(1, 6)].ogg"
 			playsound(owner, bleed_sound, 60, FALSE)
 			. |= ORGAN_PROCESS_UPDATE_HEALTH
@@ -185,7 +197,7 @@
 		owner.remove_status_effect(/datum/status_effect/debuff/bleedingworse)
 		owner.remove_status_effect(/datum/status_effect/debuff/bleedingworst)
 
-	if(temp_bleed)
+	if(true_bleed)
 		owner.add_stress(/datum/stress_event/bleeding)
 	else
 		owner.remove_stress(/datum/stress_event/bleeding)

@@ -16,6 +16,7 @@
 	charge_slowdown = 0.7
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 	required_technique = TECHNIQUE_CREATION
 
 	/// The minimum throw range of the replusion
@@ -28,7 +29,11 @@
 	var/repulse_force = MOVE_FORCE_EXTREMELY_STRONG
 
 /datum/action/cooldown/spell/aoe/repulse/is_valid_target(atom/cast_on)
-	return ismovable(cast_on)
+	if(ismob(cast_on))
+		return TRUE
+	if(isobj(cast_on))
+		var/obj/object = cast_on
+		return !object.anchored
 
 /datum/action/cooldown/spell/aoe/repulse/cast_on_thing_in_aoe(atom/movable/victim, atom/caster)
 	if(ismob(victim))

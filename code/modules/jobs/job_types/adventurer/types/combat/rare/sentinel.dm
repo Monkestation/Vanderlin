@@ -12,7 +12,7 @@
 		/datum/attribute/skill/misc/riding = 50,
 		/datum/attribute/skill/combat/bows = 40,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/job/advclass/combat/rare/sentinel
@@ -22,7 +22,7 @@
 	outfit = /datum/outfit/adventurer/sentinel
 	total_positions = 1
 	roll_chance = 30
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sentinel

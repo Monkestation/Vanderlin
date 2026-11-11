@@ -9,8 +9,9 @@
 	item_weight = 0 GRAMS
 	wbalance = HARD_TO_DODGE
 	wdefense = GOOD_PARRY
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = INTEGRITY_STATIC_200
 	experimental_inhand = FALSE
+	associated_skill = /datum/attribute/skill/combat/unarmed
 	possible_item_intents = list(CLOSECOMBAT_PUNCH, CLOSECOMBAT_JAB, CLOSECOMBAT_SLUG, CLOSECOMBAT_SLAM)
 	weapon_special = /datum/special_intent/upper_cut
 

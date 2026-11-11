@@ -30,7 +30,7 @@
 	speed = 1
 	move_to_delay = 3
 
-	faction = list("neutral", "silicon", "homunculus")
+	faction = list(FACTION_NEUTRAL)
 
 	gold_core_spawnable = FRIENDLY_SPAWN
 

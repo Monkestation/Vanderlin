@@ -58,7 +58,7 @@
 	var/list/eligible = list()
 	for(var/datum/action/cooldown/spell/S in user.actions)
 		// Exclude the essence family (creation spells) and anything already essence-flagged
-		if(S.spell_type == SPELL_ESSENCE)
+		if(S.spell_type != SPELL_MANA)
 			continue
 		if(S.spell_flags & SPELL_TEMPORARY)
 			continue

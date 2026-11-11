@@ -181,6 +181,8 @@
 		for(var/mob/living/carbon/human/human in view(5, user))
 			if(human == user)
 				continue
+			if(human.stat == DEAD)
+				continue
 			if(is_species(human, fear_type))
 				var/mob/living/carbon/human/H = user
 				H.emote("scream")
@@ -192,6 +194,8 @@
 	else if(fear_type == "Nobles")
 		for(var/mob/living/carbon/human/human in view(5, user))
 			if(human == user)
+				continue
+			if(human.stat == DEAD)
 				continue
 			if(human.is_noble())
 				var/mob/living/carbon/human/H = user
@@ -205,6 +209,8 @@
 		for(var/mob/living/carbon/human/human in view(5, user))
 			if(human == user)
 				continue
+			if(human.stat == DEAD)
+				continue
 			if(HAS_TRAIT(human, TRAIT_INQUISITION))
 				var/mob/living/carbon/human/H = user
 				H.emote("scream")
@@ -213,7 +219,6 @@
 				to_chat(H, span_userdanger("You see [human] and freeze in terror!"))
 				next_scream_time = world.time + 25 SECONDS
 				return
-
 
 /datum/stress_event/traumatized
 	desc = "<span class='danger'>I saw one of THOSE things again!</span>\n"
@@ -289,13 +294,10 @@
 	to_chat(new_rat, span_userdanger("You have been reincarnated as a rat. Your adventure ends here."))
 
 	// Make the rat unable to do much
-	ADD_TRAIT(new_rat, TRAIT_PACIFISM, QUIRK_TRAIT)
-	ADD_TRAIT(new_rat, TRAIT_MUTE, QUIRK_TRAIT)
+	add_traits(list(TRAIT_PACIFISM, TRAIT_MUTE, TRAIT_GODMODE, TRAIT_NOFIRE), QUIRK_TRAIT)
 	new_rat.melee_damage_lower = 0
 	new_rat.melee_damage_upper = 0
 	new_rat.obj_damage = 0
-	new_rat.status_flags |= GODMODE
-	ADD_TRAIT(new_rat, TRAIT_NOFIRE, QUIRK_TRAIT)
 
 /datum/quirk/vice/weak_heart
 	name = "Weak Heart"
@@ -444,6 +446,7 @@
 	customization_type = QUIRK_TEXT
 	customization_label = "Why do they suspect me?"
 	customization_placeholder = "Spotted eating organs."
+	var/logged = FALSE
 
 /datum/quirk/vice/suspicion/get_desc(datum/preferences/prefs)
 	var/reason = prefs?.quirk_customizations[type]
@@ -458,7 +461,15 @@
 		return
 
 	var/mob/living/carbon/human/H = owner
-
-	GLOB.inquis_suspect_players += H.real_name
+	GLOB.inquis_suspect_players |= H.real_name
 	to_chat(H, span_boldwarning("For reasons legitimate or not, I am hunted by the inquisition in this land..."))
+
 	return ..()
+
+/datum/quirk/vice/suspicion/on_life(mob/living/user)
+	if(!ishuman(user))
+		return
+	var/mob/living/carbon/human/H = user
+	if(!logged && H.name)
+		log_hunted("[H.ckey] playing as [H.name] has the Inquisitorial Suspicion quirk.")
+		logged = TRUE

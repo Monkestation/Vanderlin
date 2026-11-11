@@ -4,7 +4,7 @@
 	button_icon_state = "appraise"
 	has_visual_effects = FALSE
 	cast_range = 2
-	associated_skill = /datum/attribute/skill/misc/reading
+	associated_skill = /datum/attribute/skill/educated/reading
 	charge_required = FALSE
 	cooldown_time = 5 SECONDS
 	spell_cost = 0
@@ -25,6 +25,6 @@
 /datum/action/cooldown/spell/appraise/holy
 	name = "Appraise"
 
-	spell_type = SPELL_MIRACLE
-	antimagic_flags = MAGIC_RESISTANCE_HOLY
+	spell_type = SPELL_UNHOLY_MIRACLE
+	antimagic_flags = MAGIC_RESISTANCE_UNHOLY
 	associated_skill = /datum/attribute/skill/magic/holy

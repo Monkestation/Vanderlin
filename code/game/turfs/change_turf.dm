@@ -77,6 +77,8 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 	var/old_exl = explosion_level
 	var/old_exi = explosion_id
 	var/old_bp = blueprint_data
+	var/turf/old_above = virtual_above
+	var/turf/old_below = virtual_below
 	blueprint_data = null
 
 	var/list/old_baseturfs = baseturfs
@@ -112,6 +114,17 @@ GLOBAL_LIST_INIT(blacklisted_automated_baseturfs, typecacheof(list(
 
 	new_turf.explosion_id = old_exi
 	new_turf.explosion_level = old_exl
+
+	if(old_above)
+		new_turf.virtual_above = old_above
+		old_above.virtual_below = src
+		new_turf.on_virtual_link_changed()
+		old_above.on_virtual_link_changed()
+	if(old_below)
+		new_turf.virtual_below = old_below
+		old_below.virtual_above = src
+		new_turf.on_virtual_link_changed()
+		old_below.on_virtual_link_changed()
 
 	if(!(flags & CHANGETURF_DEFER_CHANGE))
 		new_turf.AfterChange(flags)

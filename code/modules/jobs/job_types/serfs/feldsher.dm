@@ -5,13 +5,16 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 4,
-		STAT_PERCEPTION = 1,
+		STAT_PERCEPTION = 2,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/misc/reading = 50,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/educated/reading = 50,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 50,
@@ -23,13 +26,16 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 4,
-		STAT_PERCEPTION = 1,
+		STAT_PERCEPTION = 2,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/misc/reading = 50,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/combat/knives = 30,
+		/datum/attribute/skill/educated/reading = 50,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 60,
@@ -52,7 +58,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	trainable_skills = list(/datum/attribute/skill/misc/medicine = 0.1)
 	max_apprentices = 2

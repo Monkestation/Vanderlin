@@ -321,7 +321,13 @@ Actual Adjacent procs :
 	if(!T.can_cross_safely(requester))  // dangerous turf! lava or openspace (or others in the future)
 		return FALSE
 
-	var/z_distance = abs(T.z - z)
+	var/z_distance = 0
+	if(T.z != z)
+		if (T.virtual_above || T.virtual_below)
+			if(T.virtual_above?.z == z || T.virtual_below?.z == z)
+				z_distance = 1
+	else
+		z_distance = abs(T.z - z)
 	if(!z_distance)  // standard check for same-z pathing
 		return !LinkBlockedWithAccess(T, requester, ID)
 
@@ -329,11 +335,12 @@ Actual Adjacent procs :
 		return FALSE
 
 	var/obj/structure/stairs/source_stairs = locate(/obj/structure/stairs) in src
-	if(T.z < z)  // going down
-		if(source_stairs?.get_target_loc(REVERSE_DIR(source_stairs.dir)) == T)
+	if(source_stairs)
+		// Check if T is the target going UP the stairs
+		if(source_stairs.get_target_loc(source_stairs.dir) == T)
 			return TRUE
-	else  // heading DOWN stairs was handled earlier, so now handle going UP stairs
-		if(source_stairs?.get_target_loc(source_stairs.dir) == T)
+		// Check if T is the target going DOWN the stairs (reversed direction)
+		if(source_stairs.get_target_loc(REVERSE_DIR(source_stairs.dir)) == T)
 			return TRUE
 
 	return FALSE
@@ -344,12 +351,58 @@ Actual Adjacent procs :
 
 // Add a helper function to compute 3D Manhattan distance
 /turf/proc/Distance3D(turf/T)
-	if (!T || !istype(T))
+	if(!T)
 		return 0
-	var/dx = abs(x - T.x)
-	var/dy = abs(y - T.y)
-	var/dz = abs(z - T.z) * 5  // Weight z-level differences higher
-	return (dx + dy + dz)
+	if(z == T.z)
+		return abs(x - T.x) + abs(y - T.y)
+	if(is_in_zweb(z, T.z))
+		return abs(x - T.x) + abs(y - T.y) + abs(z - T.z) * 5
+
+	if(!length(GLOB.virtual_region_index))
+		return 1000000 // effectively impossible
+
+	var/cx = x
+	var/cy = y
+	var/cz = z
+	var/hops = 0
+	var/list/visited = list(cz)
+
+	while(!is_in_zweb(cz, T.z))
+		var/next_z
+		var/next_x
+		var/next_y
+		var/found = FALSE
+
+		for(var/stack_z in get_multiz_accessible_levels(cz))
+			for(var/datum/virtual_region_link/L in GLOB.virtual_region_index["[stack_z]"])
+				if(L.z_below == stack_z)
+					next_z = L.z_above
+					next_x = cx + L.offset_x
+					next_y = cy + L.offset_y
+					found = TRUE
+					break
+				else if(L.z_above == stack_z)
+					next_z = L.z_below
+					next_x = cx - L.offset_x
+					next_y = cy - L.offset_y
+					found = TRUE
+					break
+			if(found)
+				break
+
+		if(!found || (next_z in visited))
+			return abs(cx - T.x) + abs(cy - T.y) + abs(cz - T.z) * 5
+
+		visited += next_z
+		cx = next_x
+		cy = next_y
+		cz = next_z
+		hops++
+
+		if(hops > 32)
+			break
+
+	return abs(cx - T.x) + abs(cy - T.y) + abs(cz - T.z) * 5 + hops * 5
 
 /turf/proc/LinkBlockedWithAccess(turf/T, requester, ID)
 	var/adir = get_dir(src, T)

@@ -193,6 +193,9 @@
 		using.set_new_hud(src)
 		static_inventory += using
 
+	backhudl = new /atom/movable/screen/backhudl/empty_border(null, src)
+	static_inventory += backhudl
+
 	setup_mob()
 
 

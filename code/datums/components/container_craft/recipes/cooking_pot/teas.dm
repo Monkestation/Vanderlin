@@ -10,7 +10,7 @@
 
 
 /datum/container_craft/cooking/tea/after_craft(atom/created_output, obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
-	var/datum/reagent/found_product = crafter.reagents.get_reagent(created_reagent)
+	var/datum/reagent/found_product = crafter.reagents.has_reagent(created_reagent)
 
 	if(!length(found_optional_requirements) && !length(found_optional_reagents))
 		return

@@ -25,6 +25,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	//Forced mob worn layer instead of the standard preferred ssize.
 	var/alternate_worn_layer
 
+	///this is our highlight information
+	var/datum/examine_highlight/examine_highlight_type
+
 	//Dimensions of the icon file used when this item is worn, eg: hats.dmi
 	//eg: 32x32 sprite, 64x64 sprite, etc.
 	//allows inhands/worn sprites to be of any size, but still centered on a mob properly
@@ -44,6 +47,8 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	var/item_flags = NONE
 	///do we have a child icon?
 	var/childcore = FALSE
+
+	var/misc_flags = NONE
 
 	var/list/hitsound
 	///Played when the item is used, for example tools
@@ -300,6 +305,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	/// This thing can be used to unlock locks
 	var/can_unlock = TRUE
 
+	/// Required pickpocket skill (old style) to steal.
+	var/pickpocket_difficulty = NONE
+
 	///do we block the offhand while wielding
 	var/wield_block = TRUE
 	/// Needed for grandmaster/martyr weapons, might be shitcode, might be usable for the future, *shrug, it works
@@ -316,6 +324,9 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 /obj/item/Initialize(mapload)
 	if (attack_verb)
 		attack_verb = typelist("attack_verb", attack_verb)
+
+	if(melting_material && !examine_highlight_type)
+		examine_highlight_type = initial(melting_material.material_examine_hint)
 
 	if(experimental_inhand)
 		var/props2gen = list("gen")
@@ -693,6 +704,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 		var/mob/living/carbon/C = user
 		if(!C.can_touch_burning(src))
 			to_chat(user, "<span class='warning'>[src] is too hot to touch.</span>")
+			return FALSE
 
 	if(resistance_flags & ON_FIRE)
 		var/can_handle_hot = FALSE
@@ -700,7 +712,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 			var/mob/living/carbon/C = user
 			if(C.gloves && (C.gloves.max_heat_protection_temperature > 360))
 				can_handle_hot = TRUE
-			else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS))
+			else if(HAS_TRAIT(C, TRAIT_RESISTHEAT) || HAS_TRAIT(C, TRAIT_RESISTHEATHANDS) || HAS_TRAIT(C, TRAIT_DEVIL_MARKED_ABADDON))
 				can_handle_hot = TRUE
 		else
 			can_handle_hot = TRUE
@@ -1591,44 +1603,6 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 	animate(pickup, alpha = 175, pixel_x = to_x, pixel_y = to_y, time = 0.3 SECONDS, transform = animation_matrix, easing = CUBIC_EASING)
 	animate(alpha = 0, transform = matrix().Scale(0.7), time = 0.1 SECONDS)
 
-/obj/item/proc/make_modifyable(sockets = 2, max_sockets = 2)
-	AddComponent(/datum/component/modifications, sockets, max_sockets)
-
-/proc/generate_random_socketed_item(item_type, socket_count, gem_quality_range = list(GEM_CHIPPED, GEM_PERFECT))
-	if(!item_type)
-		switch(rand(1, 2))
-			if(1)
-				item_type = pick(subtypesof(/obj/item/clothing))
-			if(2)
-				item_type = pick(subtypesof(/obj/item/weapon))
-
-	if(!socket_count)
-		socket_count = rand(1, 6)
-
-	var/obj/item/new_item = new item_type(get_turf(usr))
-	new_item.make_modifyable(socket_count, socket_count)
-
-	// Fill with random gems
-	var/list/gem_types = list(
-		/obj/item/gem/red,
-		/obj/item/gem/violet,
-		/obj/item/gem/yellow,
-		/obj/item/gem/green,
-		/obj/item/gem/diamond,
-		/obj/item/gem/blue,
-	)
-
-	for(var/i = 1 to socket_count)
-		var/gem_type = pick(gem_types)
-		var/obj/item/gem/new_gem = new gem_type
-		new_gem.quality = rand(gem_quality_range[1], gem_quality_range[2])
-		new_gem.generate_socketing_properties()
-
-		var/datum/component/modifications/mod = new_item.GetComponent(/datum/component/modifications)
-		mod?.socket_gem(new_gem, null) // null user for automatic generation
-
-	return new_item
-
 /obj/item/proc/can_embed()
 	if(HAS_TRAIT(src, TRAIT_NODROP) || HAS_TRAIT(src, TRAIT_NOEMBED))
 		return FALSE
@@ -1638,6 +1612,14 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 /obj/item/examine(mob/user)
 	. = ..()
+	var/list/examine_highlight_status = get_examine_highlight_status(user)
+	if(length(examine_highlight_status))
+		var/datum/examine_highlight/highlight_type = examine_highlight_status[1]
+		var/examine_desc = get_examine_highlight_description(examine_highlight_status, itis = TRUE, allcaps = FALSE)
+		var/examine_tooltip = highlight_type.explanation
+
+		. += span_info(span_tooltip_dangerous_html(examine_tooltip, examine_desc))
+
 	if(currecipe)
 		. += span_warning("It is currently being worked on to become \a [currecipe.name].")
 	/// Check for item culture descriptions.
@@ -1678,6 +1660,7 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 				if(1 to 4)
 					if(alch_skill >= SKILL_LEVEL_EXPERT)
 						. += span_notice(" Smells faintly of [smell].")
+
 
 /**
  * Returns the atom(either itself or an internal module) that will interact/attack the target on behalf of us
@@ -1830,3 +1813,62 @@ GLOBAL_DATUM_INIT(fire_overlay, /mutable_appearance, mutable_appearance('icons/e
 
 		target.remove_enchantment(path)
 		message_admins(span_notice("[key_name_admin(usr)] has removed [path] enchantment from [target]."))
+
+/// Called when this item is offered to another mob, before the default offer message/effect happens.
+/// Return TRUE if this proc fully handled the offer (e.g. played its own messages/sounds),
+/// which will suppress the default "offers item with an outstretched hand" message.
+/// Return FALSE to let the default offer behavior play out.
+/obj/item/proc/on_offer(mob/living/offerer, mob/living/offered_to)
+	return FALSE
+
+/obj/item/proc/get_examine_highlight_status(mob/user)
+	if(!examine_highlight_type)
+		return null
+	if(istype(examine_highlight_type))
+		return list(examine_highlight_type, examine_highlight_type.item_examine_desc)
+	var/datum/examine_highlight/examine_type = GLOB.examine_highlights[examine_highlight_type]
+	if(!isobserver(user) && examine_type.required_trait && !HAS_TRAIT(user, examine_type.required_trait))
+		return null
+	if(!isobserver(user) && examine_type.required_mind_trait && !HAS_MIND_TRAIT(user, examine_type.required_mind_trait))
+		return null
+	return list(GLOB.examine_highlights[examine_highlight_type], examine_type.item_examine_desc)
+
+/obj/item/proc/get_examine_highlight_description(list/examine_highlight_status, itis = FALSE, allcaps = TRUE)
+	if(!examine_highlight_status)
+		return null
+
+	var/datum/examine_highlight/highlight_type = examine_highlight_status[1]
+	var/heresy_desc = examine_highlight_status[2]
+	if(!highlight_type || !heresy_desc)
+		return null
+
+	var/adjective = highlight_type.adjective
+	var/highlight_itis = "[itis ? highlight_type.leader : ""]<b>[adjective]</b>"
+
+	return get_examine_highlight_labeled_string(highlight_type, "[allcaps ? uppertext(highlight_itis) : highlight_itis]: [allcaps ? uppertext(heresy_desc) : heresy_desc]")
+
+/obj/item/proc/get_examine_highlight_labeled_string(datum/examine_highlight/highlight_type, label_string)
+	if(!highlight_type || !label_string)
+		return null
+
+	var/highlight_color = highlight_type.color
+	var/highlight_symbol = highlight_type.symbol
+
+	return "<span style='color: [highlight_color];'>[highlight_symbol] [label_string] [highlight_symbol]</span>"
+
+/obj/item/proc/set_custom_examine_highlight(adjective, leader, explanation, color, symbol, desc)
+	var/datum/examine_highlight/custom/H = examine_highlight_type
+	if(!istype(H))
+		H = new /datum/examine_highlight/custom()
+	H.adjective = adjective
+	H.leader = leader
+	H.explanation = explanation
+	H.color = color
+	H.symbol = symbol
+	H.item_examine_desc = desc
+	examine_highlight_type = H
+
+/obj/item/proc/clear_custom_examine_highlight()
+	if(istype(examine_highlight_type, /datum/examine_highlight/custom))
+		qdel(examine_highlight_type)
+	examine_highlight_type = initial(examine_highlight_type)

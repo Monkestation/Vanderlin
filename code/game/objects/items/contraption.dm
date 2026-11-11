@@ -526,7 +526,7 @@
 		attachment = null
 	if(!on)
 		user.visible_message(span_notice("[user] begins packing up \the [src]."))
-		if(!do_after(user, 2 SECONDS, TRUE, src))
+		if(!do_after(user, 2 SECONDS, src))
 			return
 		var/obj/item/mobilestove/new_mobilestove = new /obj/item/mobilestove(get_turf(src))
 		new_mobilestove.color = src.color

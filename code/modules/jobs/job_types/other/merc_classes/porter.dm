@@ -10,8 +10,8 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/swimming = 20,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 		//Can't expect those kobolds to not be thieves or assist with such things.
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/misc/lockpicking = 20,
@@ -34,7 +34,7 @@
 /datum/job/advclass/mercenary/porter
 	title = "Porter"
 	tutorial = "You are a jack-of-all-trades from the dank depth of subterra, You've survived by being useful. Whether it's carrying someone's burdens, mending their gears, stitching wounds, or even cooking a surprisingly edible meal, For a price, of course."
-	allowed_races = list(SPEC_ID_KOBOLD, SPEC_ID_HALFLING)
+	allowed_races = list(SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALFLING)
 	blacklisted_species = list(SPEC_ID_DWARF_SUBTERRAN)
 	outfit = /datum/outfit/mercenary/porter
 	category_tags = list(CTAG_MERCENARY)
@@ -50,6 +50,7 @@
 		TRAIT_SEEDKNOW,
 		TRAIT_SEEPRICES,
 		TRAIT_DODGEEXPERT,
+		TRAIT_INGREDIENT_INSIGHT,
 	)
 
 /datum/job/advclass/mercenary/porter/after_spawn(mob/living/carbon/human/spawned, client/player_client)

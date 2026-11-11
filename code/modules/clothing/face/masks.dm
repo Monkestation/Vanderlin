@@ -316,6 +316,12 @@
 /obj/item/clothing/face/facemask/prisoner
 	clothing_flags = NONE //they're used to this being stuck on their face
 
+/obj/item/clothing/face/shepherd/clothmask/colored
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/face/shepherd/clothmask/colored/black
+	color = CLOTHING_SOOT_BLACK
+
 /obj/item/clothing/face/facemask/prisoner/Initialize()
 	. = ..()
 	name = "cursed mask"
@@ -335,7 +341,6 @@
 	armor_type = /datum/armor/mask/metal/steel
 	desc = "A knightly steel mask that both conceals and protects the face. Usually paired with a bascinet."
 	max_integrity = 300
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 100
 

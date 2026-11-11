@@ -54,7 +54,7 @@
 					var/obj/item/clothing/neck/portalamulet/A = choice
 					A.uses -= 1
 					var/turf/G = get_turf(A)
-					new /obj/effect/landmark/vteleportsenddest(G.loc)
+					new /obj/effect/landmark/vteleportsenddest(G)
 					if(A.uses <= 0)
 						A.visible_message("[A] shatters!")
 						qdel(A)
@@ -125,6 +125,7 @@
 	name = "Gate Amulet"
 	icon_state = "bloodtooth"
 	icon = 'icons/roguetown/clothing/neck.dmi'
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
 	var/uses = 3
 	var/can_local_portal = FALSE
 

@@ -30,6 +30,7 @@
 	tastes = list("meat" = 1)
 	gender = PLURAL
 	item_weight = 200 GRAMS
+	given_ingredient_buff = RANDOM_INGREDIENT_BUFF
 
 /obj/item/reagent_containers/food/snacks/meat/on_consume(mob/living/eater)
 	var/reset_eat_effect = FALSE
@@ -103,14 +104,22 @@
 	become_rot_type = /obj/item/reagent_containers/food/snacks/rotten/chickenleg
 	item_weight = 200 GRAMS
 
+/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/egg_washed
+	name = "egg washed bird meat"
+	icon = 'icons/obj/food/raw/raw_deep_fried.dmi'
+	icon_state = "chickencutlet_washed"
+
+/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/coated
+	name = "crumb coated bird meat"
+	icon = 'icons/obj/food/raw/raw_deep_fried.dmi'
+	icon_state = "chickencutlet_coated"
+
 /*	........   Fish sounds   ................ */
 /obj/item/reagent_containers/food/snacks/fish
 	chopping_sound = TRUE
 	slices_num = 2
 	faretype = FARE_POOR
 	var/rare = FALSE
-	/// Number representing how rare the fish is, 0 is the lowest common fish
-	var/rarity_rank = 0
 
 /obj/item/reagent_containers/food/snacks/fish/dead
 	status = FISH_DEAD
@@ -191,6 +200,7 @@
 	cannibalism = TRUE
 	cannibalism_for = ALL_RACES_LIST
 	item_weight = 150 GRAMS
+	given_ingredient_buff = null
 	var/obj/item/organ/organ_inside
 
 /obj/item/reagent_containers/food/snacks/meat/organ/Destroy()
@@ -273,6 +283,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	nutrition = MINCE_NUTRITION * COOK_MOD
 	color = "#a0655f"
+	given_ingredient_buff = null
 
 /obj/item/reagent_containers/food/snacks/meat/mince/fish
 	name = "minced fish"
@@ -285,6 +296,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	nutrition = MINCE_NUTRITION * COOK_MOD
 	color = "#a0655f"
+	given_ingredient_buff = null
 
 /obj/item/reagent_containers/food/snacks/meat/mince/poultry
 	name = "minced poultry"
@@ -297,6 +309,7 @@
 	rotprocess = SHELFLIFE_DECENT
 	nutrition = MINCE_NUTRITION * COOK_MOD
 	color = "#a0655f"
+	given_ingredient_buff = null
 
 /*	..................   METT   ................... */
 /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett
@@ -313,6 +326,10 @@
 	rotprocess = SHELFLIFE_TINY
 	faretype = FARE_POOR
 	item_weight = 150 GRAMS
+
+/obj/item/reagent_containers/food/snacks/meat/mince/beef/mett/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "metted", null, 10, topping_name = "grenzel mett")
 
 /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett/slice
 	name = "grenzel mett"

@@ -35,6 +35,12 @@
 		/datum/sprite_accessory/detail/tattoo_lips,
 		/datum/sprite_accessory/detail/tattoo_eye_r,
 		/datum/sprite_accessory/detail/tattoo_eye_l,
+		/datum/sprite_accessory/detail/warpaint_blue_stripes,
+		/datum/sprite_accessory/detail/warpaint_red_stripes,
+		/datum/sprite_accessory/detail/warpaint_green_stripes,
+		/datum/sprite_accessory/detail/warpaint_purple_stripes,
+		/datum/sprite_accessory/detail/warpaint_black_stripes,
+		/datum/sprite_accessory/detail/eyebags
 	)
 
 /datum/customizer/bodypart_feature/accessory
@@ -66,6 +72,8 @@
 		/datum/sprite_accessory/accessories/chokere,
 		/datum/sprite_accessory/accessories/eyepierce,
 		/datum/sprite_accessory/accessories/eyepierce/alt,
+		/datum/sprite_accessory/accessories/earrings/hoop,
+		/datum/sprite_accessory/accessories/earrings/hoop/sil,
 	)
 
 /datum/customizer/bodypart_feature/accessory/rakshari

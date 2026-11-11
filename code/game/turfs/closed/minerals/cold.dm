@@ -30,7 +30,8 @@
 		/turf/closed/mineral/cinnabar/cold = 5,
 		/turf/closed/mineral/gold/cold = 15,
 		/turf/closed/mineral/iron/cold = 25,
-		/turf/closed/mineral/silver/cold = 15
+		/turf/closed/mineral/silver/cold = 15,
+		/turf/closed/mineral/bloodstone/cold = 5
 	)
 
 /turf/closed/mineral/copper/cold
@@ -48,6 +49,10 @@
 /turf/closed/mineral/gold/cold
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining/mining_cold.dmi')
 	icon_state = MAP_SWITCH("mineral", "gold_ice")
+
+/turf/closed/mineral/bloodstone/cold
+	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining/mining_cold.dmi')
+	icon_state = MAP_SWITCH("mineral", "gem_ice")
 
 /turf/closed/mineral/salt/cold
 	icon = MAP_SWITCH('icons/turf/smooth/walls/mineral_blue.dmi', 'icons/turf/mining/mining_cold.dmi')

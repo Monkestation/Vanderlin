@@ -39,6 +39,20 @@
 	relevant_layers = list(BODY_FRONT_LAYER)
 	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF)
 
+/datum/sprite_accessory/accessories/earrings/hoop
+	name = "Hoop Earrings (G)"
+	icon_state = "earringhoop"
+	gender = FEMALE
+	relevant_layers = list(BODY_FRONT_LAYER)
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF)
+
+/datum/sprite_accessory/accessories/earrings/hoop/sil
+	name = "Hoop Earrings (S)"
+	icon_state = "earringsilhoop"
+	gender = FEMALE
+	relevant_layers = list(BODY_FRONT_LAYER)
+	specuse = list(SPEC_ID_HUMEN, SPEC_ID_DWARF, SPEC_ID_ELF)
+
 /datum/sprite_accessory/accessories/earrings/em
 	name = "Earrings (E)"
 	icon_state = "earrings_em"

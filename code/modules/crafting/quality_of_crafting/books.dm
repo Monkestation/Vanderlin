@@ -396,8 +396,8 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 	can_spawn = FALSE
 	name = "High Fashion Encyclopedia"
 	desc = "The combined works of famed Elise Heiran and Orym Vayore."
-	icon_state ="book7_0"
-	base_icon_state = "book7"
+	icon_state ="book9_0"
+	base_icon_state = "book9"
 	types = list(
 		/datum/book_entry/sewing_repair,
 		/datum/repeatable_crafting_recipe/sewing,
@@ -611,6 +611,8 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 		/datum/book_entry/organ_surgery,
 		/datum/book_entry/lobotomy,
 		/datum/book_entry/pestran_chimeric,
+		/datum/repeatable_crafting_recipe/survival/tourniquet,
+		/datum/repeatable_crafting_recipe/survival/splint,
 		/datum/chimeric_table,
 		/datum/chimeric_node,
 		/datum/wound,

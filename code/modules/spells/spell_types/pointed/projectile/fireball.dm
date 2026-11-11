@@ -19,6 +19,7 @@
 	projectile_type = /obj/projectile/magic/aoe/fireball/rogue
 
 	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 	required_technique = TECHNIQUE_DESTRUCTION
 	shared_cooldown = FIREBALL_SHARED_COOLDOWN
 
@@ -35,8 +36,11 @@
 
 	associated_skill = /datum/attribute/skill/magic/blood
 
-	required_form = null
+	invocation = "CAEDIS DISPLOSIO!!!"
+
 	spell_type = SPELL_BLOOD
+	required_form = FORM_BLOOD
+	heretical_spell = TRUE
 
 	charge_time = 4 SECONDS
 	spell_cost = 150
@@ -47,7 +51,8 @@
 	desc = "Shoot out an immense ball of fire that explodes on impact."
 	button_icon_state = "fireball_greater"
 
-	required_level = 3
+	required_level = 8
+	initial_charges = 6
 
 	charge_time = 4 SECONDS
 	charge_drain = 2

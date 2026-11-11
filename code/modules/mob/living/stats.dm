@@ -69,8 +69,6 @@
 					devotion.make_templar()
 				if(DEVOTION_CLASS_ACOLYTE)
 					devotion.make_acolyte()
-				if(DEVOTION_CLASS_ABSOLVER)
-					devotion.make_absolver()
 				if(DEVOTION_CLASS_CLERIC)
 					devotion.make_cleric()
 				if(DEVOTION_CLASS_CHURCHLING)

@@ -4,7 +4,7 @@
 	button_icon_state = "speakwithdead"
 	sound = 'sound/magic/churn.ogg'
 
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/necra)
@@ -61,7 +61,7 @@
 	called.summoned = TRUE
 	called.beingmoved = TRUE
 	called.invisibility = INVISIBILITY_OBSERVER
-	called.status_flags |= GODMODE
+	ADD_TRAIT(called, TRAIT_GODMODE, MAGIC_TRAIT)
 	called.Stun(61 SECONDS)
 	called.density = FALSE
 
@@ -97,7 +97,7 @@
 	soul.beingmoved = FALSE
 	soul.fully_heal()
 	soul.invisibility = initial(soul.invisibility)
-	soul.status_flags &= ~GODMODE
+	REMOVE_TRAIT(soul, TRAIT_GODMODE, MAGIC_TRAIT)
 	soul.update_cone()
 	soul.density = initial(soul.density)
 	SSdeath_arena.add_fighter(soul, soul.mind?.last_death)

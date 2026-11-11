@@ -9,7 +9,8 @@
 	resistance_flags = NONE
 	max_integrity = 300
 	item_weight = 150 GRAMS
-	component_type = /datum/component/storage/concrete/grid/magebag
+	component_type = /datum/component/storage/concrete/grid/sack/magebag
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/storage/magebag/examine(mob/user)
 	. = ..()
@@ -148,11 +149,12 @@
 /obj/item/weapon/knife/dagger/silver/arcyne
 	name = "glowing purple silver dagger"
 	desc = "This dagger glows a faint purple. Quicksilver runs across its blade."
+	icon_state = "arcynedagger"
 	var/is_bled = FALSE
 
 /obj/item/weapon/knife/dagger/silver/arcyne/Initialize()
 	. = ..()
-	filter(type="drop_shadow", x=0, y=0, size=2, offset=1, color=rgb(128, 0, 128, 1))
+	filter(type="drop_shadow", x=0, y=0, size=1, offset=2, color="#800080")
 
 /obj/item/weapon/knife/dagger/silver/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(!istype(tool, /obj/item/ore/cinnabar))
@@ -630,6 +632,9 @@
 	seed = /obj/item/neuFarm/seed/manabloom
 	item_weight = 20 GRAMS
 
+/obj/item/reagent_containers/food/snacks/produce/manabloom/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "manabloom", null, 10, topping_name = "manabloom petals")
 
 /obj/item/natural/artifact
 	name = "runed artifact"
@@ -749,7 +754,7 @@
 	qdel_timer = QDEL_IN_STOPPABLE(src, 10 MINUTES)
 
 /obj/structure/soul/proc/drain_mana(mob/living/user)
-	var/datum/beam/transfer_beam = user.Beam(src, icon_state = "drain_life", time = INFINITY)
+	var/datum/beam/transfer_beam = user.Beam(src, icon_state = "drain_mana", time = INFINITY)
 
 	var/failed = FALSE
 	while(!failed)

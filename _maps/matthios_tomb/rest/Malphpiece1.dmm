@@ -91,6 +91,10 @@
 /obj/item/clothing/ring/gold,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
+"fj" = (
+/obj/structure/waystone/dungeon,
+/turf/open/floor/dirt/road,
+/area/under/tomb)
 "iS" = (
 /obj/structure/table/wood/nice/decorated,
 /obj/item/clothing/face/cigarette/pipe/westman,
@@ -190,7 +194,7 @@ aM
 ax
 aZ
 aM
-aL
+fj
 aL
 aL
 aT

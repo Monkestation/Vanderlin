@@ -4,6 +4,7 @@
 	button_icon_state = "longstride"
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 	required_technique = TECHNIQUE_ALTERATION
 
 	invocation = "Walk unopposed."

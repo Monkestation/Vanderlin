@@ -695,7 +695,7 @@
 	icon_state = "church-gold_marble"
 
 /turf/open/floor/churchrough/gold
-	icon_state = "church-gold_marble"
+	icon_state = "church-gold_rough"
 
 // Green - Dendor shrines.
 /turf/open/floor/church/green
@@ -744,6 +744,7 @@
 	smoothing_list = SMOOTH_GROUP_FLOOR_DIRT_ROAD + SMOOTH_GROUP_FLOOR_GRASS
 	neighborlay = "cobbleedge"
 	max_integrity = 1200
+	path_weight = 8
 
 /turf/open/floor/cobble/atom_destruction(damage_flag)
 	. = ..()
@@ -865,6 +866,15 @@
 
 /turf/open/floor/tile/masonic/spiral
 	icon_state = "masonicspiral"
+
+/turf/open/floor/tile/masonic/moondark
+	icon_state = "moontile_dark"
+
+/turf/open/floor/tile/masonic/moonbw
+	icon_state = "moontile_bw"
+
+/turf/open/floor/tile/masonic/suntile
+	icon_state = "suntile"
 
 /turf/open/floor/tile/masonic/full
 	icon_state = "masonicfull_white"
@@ -1114,6 +1124,7 @@
 	smoothing_flags = SMOOTH_EDGE
 	smoothing_groups = SMOOTH_GROUP_OPEN_FLOOR + SMOOTH_GROUP_FLOOR_DIRT_ROAD
 	neighborlay = "graveledge"
+	path_weight = 10
 
 /turf/open/floor/sand/Initialize()
 	. = ..()

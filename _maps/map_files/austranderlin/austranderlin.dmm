@@ -378,7 +378,7 @@
 "aks" = (
 /obj/structure/door/viewport,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/metal,
 /area/indoors/town/cell)
 "akv" = (
@@ -800,7 +800,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/town/keep)
 "aud" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/weapon/mace/woodclub,
 /obj/item/weapon/knife/dagger,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -2109,7 +2109,7 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/cloak/matron,
 /obj/item/clothing/pants/trou/beltpants,
 /obj/item/clothing/shirt/undershirt/colored/black,
@@ -2742,6 +2742,21 @@
 /obj/effect/landmark/start/innkeep,
 /turf/open/floor/ruinedwood/turned/darker,
 /area/indoors/town/tavern)
+"bqA" = (
+/obj/structure/flora/grass/bush_meagre{
+	pixel_x = 20;
+	pixel_y = -5
+	},
+/obj/structure/flora/grass/bush/wall/tall{
+	pixel_x = -8
+	},
+/obj/structure/flora/grass/bush{
+	layer = 4.4;
+	pixel_x = 25;
+	pixel_y = 7
+	},
+/turf/open/floor/cobble/mossy,
+/area/outdoors/exposed/under/basement)
 "bqE" = (
 /obj/structure/water_pipe,
 /turf/open/floor/concrete,
@@ -3501,10 +3516,10 @@
 /area/indoors/town/noble_manor/red)
 "bGL" = (
 /obj/structure/closet/crate/crafted_closet/lord,
-/obj/item/clothing/armor/plate/blkknight,
 /obj/item/clothing/head/helmet/visored/blkknight,
 /obj/item/weapon/sword/rapier/dec/lord,
 /obj/item/scomstone,
+/obj/item/clothing/armor/plate/blkknight/lordly,
 /turf/open/floor/tile,
 /area/indoors/town/keep/lord_appt)
 "bGU" = (
@@ -4290,7 +4305,7 @@
 /turf/open/floor/hexstone,
 /area/indoors/town/clocktower)
 "bYu" = (
-/obj/structure/fluff/statue,
+/obj/structure/fluff/statue/necra,
 /obj/machinery/light/fueled/torchholder,
 /turf/open/floor/blocks,
 /area/outdoors/town)
@@ -4371,7 +4386,7 @@
 	name = "forest warden bedroom"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "caJ" = (
@@ -5965,7 +5980,7 @@
 	dir = 4
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/metal/alt,
 /area/indoors/town/cell)
 "cKd" = (
@@ -6340,8 +6355,7 @@
 /turf/open/floor/rooftop/green,
 /area/outdoors/mountains)
 "cSa" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady";
+/obj/structure/fluff/statue/necra{
 	pixel_x = 14;
 	pixel_y = 19
 	},
@@ -6718,9 +6732,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/noble_manor/red)
 "daO" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/dirt,
 /area/outdoors/exposed/church/graveyard)
 "daT" = (
@@ -7541,7 +7553,7 @@
 "dsU" = (
 /obj/structure/door/window,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
 "dtc" = (
@@ -9478,7 +9490,7 @@
 /turf/open/floor/grass,
 /area/outdoors/town/noble_manor/blue)
 "epI" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/nobleboot,
 /obj/item/clothing/head/courtierhat,
 /obj/item/clothing/shirt/tunic/noblecoat,
@@ -10135,6 +10147,7 @@
 /obj/structure/rack/shelf/biggest,
 /obj/item/storage/backpack/backpack,
 /obj/item/flashlight/flare/torch/lantern,
+/obj/item/repair_kit/metal/empty,
 /turf/open/floor/blocks,
 /area/indoors/town/smithy)
 "eJe" = (
@@ -15921,8 +15934,7 @@
 /turf/open/openspace,
 /area/outdoors/river)
 "hxL" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady";
+/obj/structure/fluff/statue/necra{
 	pixel_x = 15;
 	pixel_y = 9
 	},
@@ -18471,7 +18483,7 @@
 	name = "forest garrison"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/hexstone,
 /area/indoors/villagegarrison)
 "iDN" = (
@@ -19946,7 +19958,7 @@
 /obj/item/clothing/head/hatfur,
 /obj/item/clothing/armor/basiceast/crafteast,
 /obj/item/clothing/pants/trou/shadowpants,
-/obj/item/clothing/shoes/boots/armor/matthios/lord,
+/obj/item/clothing/shoes/boots/armor/inhumen/matthios/lord,
 /turf/open/floor/tile,
 /area/indoors/town/keep/lord_appt)
 "jjn" = (
@@ -21304,7 +21316,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/outdoors/town)
 "jNe" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/nobleboot,
 /obj/item/clothing/head/courtierhat,
 /obj/item/clothing/head/chaperon/colored,
@@ -25977,7 +25989,7 @@
 	pixel_x = 2;
 	pixel_y = 3
 	},
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/reagent_containers/glass/cup/wooden{
 	pixel_x = 1;
 	pixel_y = -6
@@ -26771,7 +26783,7 @@
 /turf/open/floor/churchmarble,
 /area/indoors/town/church/chapel)
 "mlc" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/armor/gambeson,
 /obj/item/clothing/armor/gambeson,
 /obj/item/clothing/armor/gambeson,
@@ -30685,6 +30697,12 @@
 "nWX" = (
 /turf/open/dungeon_trap/australia,
 /area/indoors/town/tavern)
+"nXm" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/turf/open/floor/dirt,
+/area/outdoors/exposed/under/basement)
 "nXt" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1;
@@ -31064,9 +31082,7 @@
 /turf/open/floor/twig,
 /area/under/cave)
 "ohn" = (
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/dirt/road,
 /area/outdoors/exposed/church/graveyard)
 "oho" = (
@@ -31476,7 +31492,7 @@
 	pixel_x = -32;
 	pixel_y = 0
 	},
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/cloak/tabard/knight/guard{
 	pixel_x = -6;
 	pixel_y = 2
@@ -32109,21 +32125,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/dirt/road,
 /area/indoors/town/church/inquisition)
-"oBj" = (
-/obj/structure/flora/grass/bush/wall/tall{
-	pixel_x = -8
-	},
-/obj/structure/flora/grass/bush_meagre{
-	pixel_x = 20;
-	pixel_y = -5
-	},
-/obj/structure/flora/grass/bush{
-	layer = 4.4;
-	pixel_x = 25;
-	pixel_y = 7
-	},
-/turf/open/floor/cobble/mossy,
-/area/outdoors/exposed/under/basement)
 "oBo" = (
 /obj/structure/fluff/railing/wood,
 /turf/open/floor/ruinedwood/turned,
@@ -32423,6 +32424,7 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
+/obj/item/repair_kit/cloth/empty,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town/shop)
 "oHw" = (
@@ -34424,7 +34426,7 @@
 	name = "forest garrison barracks"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "pCb" = (
@@ -36979,9 +36981,7 @@
 /area/outdoors/town)
 "qJT" = (
 /obj/structure/flora/grass,
-/obj/structure/fluff/statue{
-	name = "The Veiled Lady"
-	},
+/obj/structure/fluff/statue/necra,
 /turf/open/floor/grass/yel,
 /area/outdoors/exposed/church/graveyard)
 "qJY" = (
@@ -39996,8 +39996,10 @@
 /turf/open/water/marsh,
 /area/outdoors/farm)
 "rWA" = (
-/obj/structure/dungeon_entry/center/vanderlin,
-/turf/open/floor/cobble/mossy,
+/obj/structure/waystone{
+	pixel_x = 15
+	},
+/turf/open/floor/grass/healthy,
 /area/outdoors/exposed/under/basement)
 "rWG" = (
 /obj/structure/window/solid,
@@ -44675,7 +44677,7 @@
 /turf/open/floor/hexstone,
 /area/indoors/town/clocktower)
 "ucP" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/shoes/boots/leather,
@@ -48816,7 +48818,7 @@
 /turf/open/floor/carpet/green,
 /area/indoors/town/merc_guild)
 "vNk" = (
-/obj/structure/nocdevice,
+/obj/structure/scrying/nocdevice,
 /obj/structure/carpet/blue,
 /turf/open/floor/cobblerock,
 /area/indoors/town/keep/magician)
@@ -51273,7 +51275,7 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/town/noble_manor/blue)
 "wLV" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/broom,
 /obj/item/natural/cloth,
 /obj/item/natural/cloth,
@@ -54618,7 +54620,7 @@
 /turf/open/floor/hexstone,
 /area/indoors/town/clocktower)
 "ylD" = (
-/obj/structure/closet/crate/crafted_closet/crafted,
+/obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/shoes/boots/darkboots,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -240813,7 +240815,7 @@ ozq
 liG
 mhR
 mhR
-oBj
+sLM
 xCK
 aek
 erc
@@ -241015,7 +241017,7 @@ ozq
 liG
 mhR
 mhR
-sLM
+bqA
 dyp
 aek
 hfb
@@ -241419,11 +241421,11 @@ ozq
 liG
 mhR
 mhR
-sLM
+hfb
 hfb
 sLM
 sLM
-aek
+nXm
 ftS
 scP
 scP

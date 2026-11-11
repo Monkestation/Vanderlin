@@ -6,7 +6,7 @@
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/craft/cooking = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/misc/stealing = 10,
 		/datum/attribute/skill/misc/climbing = 10,
@@ -24,7 +24,6 @@
 	factions = list(FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
-	bypass_lastclass = TRUE
 
 	allowed_ages = list(AGE_CHILD)
 	allowed_races = RACES_PLAYER_ALL
@@ -35,6 +34,10 @@
 	can_have_apprentices = FALSE
 	can_be_apprentice = TRUE
 	cmode_music = 'sound/music/cmode/towner/CombatInn.ogg'
+
+	traits = list(
+		TRAIT_INGREDIENT_INSIGHT
+	)
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
 

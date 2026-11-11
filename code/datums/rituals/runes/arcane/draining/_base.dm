@@ -48,7 +48,7 @@
 		set_light(0, 0, 0)
 
 /obj/effect/decal/cleanable/ritual_rune/arcyne/mana_siphon/attack_hand(mob/living/user)
-	if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
+	if(GET_MOB_ATTRIBUTE_VALUE(user, /datum/attribute/skill/magic/arcane) <= SKILL_LEVEL_NONE)
 		to_chat(user, span_warning("You aren't able to invoke these symbols."))
 		return
 
@@ -152,7 +152,7 @@
 			var/drain = min(pylon.mana_pool.amount, mana_cost * max(1, length(subscribers)))
 			pylon.mana_pool.adjust_mana(-drain)
 			var/turf/turf = get_turf(src)
-			turf.Beam(pylon, icon_state = "drain_life", time = loop_speed, override_target_pixel_y = 32)
+			turf.Beam(pylon, icon_state = "drain_mana", time = loop_speed, override_target_pixel_y = 32)
 			mana_found = TRUE
 			break
 

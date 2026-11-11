@@ -59,7 +59,7 @@
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/brigandine
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 	item_weight = 8 KILOGRAMS
 	stand_speed_reduction = 1.15
@@ -121,7 +121,7 @@
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/plate/bad
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 	uses_lord_coloring = LORD_PRIMARY
 	stand_speed_reduction = 1.15
@@ -142,7 +142,7 @@
 	// add armor plate bad from defines
 	stand_speed_reduction = 1.05
 
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/armor/brigandine/light
 	name = "lightweight brigandine"
@@ -150,8 +150,8 @@
 	icon_state = "light_brigandine"
 	body_parts_covered = COVERAGE_TORSO
 	max_integrity = ARMOR_INT_CHEST_PLATE_BRIGANDINE
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
+	melt_amount = 100
 	armor_class = AC_LIGHT //steel version of the studded leather armor now
 	w_class = WEIGHT_CLASS_BULKY
 	prevent_crits = ALL_EXCEPT_STAB
@@ -178,3 +178,4 @@
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_SCALE //250 INT, or a little above Iron - and +100 INT over the Copper variant.
 	armor_class = AC_LIGHT
 	armor_type = /datum/armor/brigandine
+	melt_amount = 100

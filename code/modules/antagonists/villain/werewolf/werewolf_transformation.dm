@@ -144,7 +144,7 @@
 	for(var/obj/item/dropped_item in werewolf_user)
 		werewolf_user.dropItemToGround(dropped_item, silent = TRUE)
 	var/mob/living/carbon/human/caster_mob = status_caster_mob
-	werewolf_user.emote("scream", forced = TRUE)
+	werewolf_user.emote("scream")
 
 	to_chat(caster_mob, span_userdanger("The beast within returns to slumber."))
 	playsound(caster_mob, pick('sound/combat/gib (1).ogg','sound/combat/gib (2).ogg'), 200, FALSE, 3)

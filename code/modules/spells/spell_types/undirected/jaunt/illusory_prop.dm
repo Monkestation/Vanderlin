@@ -6,7 +6,7 @@
 	sound = 'sound/magic/crystal.ogg'
 	invocation = "Hide my face, my form replace."
 	invocation_type = INVOCATION_WHISPER
-	spell_type = SPELL_MIRACLE
+	spell_type = SPELL_DIVINE_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	associated_skill = /datum/attribute/skill/magic/holy
 	required_items = list(/obj/item/clothing/neck/psycross/silver/divine/xylix)
@@ -135,6 +135,7 @@
 /datum/action/cooldown/spell/undirected/jaunt/illusory_prop/spell
 	name = "Lesser Illusory Prop"
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_ILLUSION
 	required_items = null
 	spell_type = SPELL_MANA

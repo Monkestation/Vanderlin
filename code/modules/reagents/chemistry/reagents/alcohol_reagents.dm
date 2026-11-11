@@ -15,15 +15,16 @@
 	hydration_factor = 10
 	boiling_point = T0C + 78 // Ethanol boils at 78.4C
 	var/boozepwr = 65 //Higher numbers equal higher hardness, higher hardness equals more intense alcohol poisoning
+	/// To be used for wines to allow for aging in bottles. Use ferementation keg system for other alcohols
 	var/datum/reagent/age_path
-	var/age_time = 10 MINUTES
+	var/age_time = 5 MINUTES
 	var/age_timer
 
 /datum/reagent/consumable/ethanol/on_bodypart_absorb(mob/living/carbon/affected_mob, obj/item/bodypart/affected_bodypart, amount_to_transfer)
 	affected_bodypart.disinfect_limb(boozepwr)
 	for(var/datum/injury/injury in affected_bodypart.injuries)
 		injury.adjust_germ_level(-boozepwr * 0.5)
-	affected_bodypart.adjust_germ_level(-boozepwr * 0.1)
+	affected_bodypart.adjust_germ_level(-boozepwr * 0.2)
 	return ..()
 
 /datum/reagent/consumable/ethanol/New()
@@ -347,7 +348,6 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	color = "#c997d8"
 	quality = DRINK_NICE
 	age_path = /datum/reagent/consumable/ethanol/plum_wine/aged
-	age_time = 10 MINUTES
 
 /datum/reagent/consumable/ethanol/plum_wine/aged
 	name = "Aged Umeshu"

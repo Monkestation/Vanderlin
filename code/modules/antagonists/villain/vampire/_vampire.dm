@@ -21,6 +21,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	var/forced = FALSE
 	var/datum/clan/forcing_clan
 	antag_flags = FLAG_ANTAG_CAP_TEAM
+	innate_traits = list(TRAIT_BLOOD_SENSE, TRAIT_VITAE_USER)
 
 /datum/antagonist/vampire/New(datum/clan/incoming_clan, forced_clan = FALSE)
 	. = ..()
@@ -31,19 +32,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		forcing_clan = incoming_clan
 	else if(incoming_clan)
 		default_clan = incoming_clan
-
-/datum/antagonist/vampire/examine_target(mob/examiner, mob/living/carbon/examined, list/P, list/examine_contents)
-	. = ..()
-	if(!istype(examined))
-		return
-	if(!CAN_HAVE_BLOOD(examined))
-		return
-	var/cached_blood_volume = examined.get_blood_volume()
-	var/vitae = 0
-	var/datum/blood_type/BT = examined.get_blood_type()
-	if(istype(BT) && BT.vitae)
-		vitae = round(cached_blood_volume * BT.vitae)
-	LAZYADDASSOCLIST(examine_contents, EXAMINE_SECT_PREGEAR, span_bloody("Blood Volume: [round(cached_blood_volume)] ([vitae] VT)"))
 
 /datum/antagonist/vampire/outcast
 	name = "Outcast Vampire"
@@ -60,8 +48,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
 		examiner.add_stress(/datum/stress_event/its_the_fucking_daewalker)
 		return span_phobia("THE DIABLERIST OF THE SUN QUEEN!!")
-	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker) && !istype(the_examiner?.clan, /datum/clan/nitewalker))
-		examiner.add_stress(/datum/stress_event/its_the_nitewalker)
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewarden) && !istype(the_examiner?.clan, /datum/clan/niteguard))
+		examiner.add_stress(/datum/stress_event/its_the_nitewarden)
 		return span_phobia("THE DIABLERIST OF THE MOON PRINCE!!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Kaine's firstborn!")
@@ -72,9 +60,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	if(istype(examined_datum, /datum/antagonist/vampire/outcast))
 		return span_boldnotice("An outcast child of Kaine.")
 	if(istype(examined_datum, /datum/antagonist/zombie))
-		return span_boldnotice("Another deadite.")
+		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
-		return span_boldnotice("Another deadite.")
+		return span_boldnotice("A deadite.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/sorcerer))
+		return span_boldnotice("A formidable Blood Sorcerer.")
+	if(istype(examined_datum, /datum/antagonist/blood_mage/herald))
+		return span_boldnotice("Blood Herald of The Archdevils, bringer of ruin and death.")
 
 /datum/antagonist/vampire/on_gain()
 	SSmapping.retainer.vampires |= owner
@@ -84,13 +76,16 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 
 	if(ishuman(owner.current))
 		var/mob/living/carbon/human/vampdude = owner.current
-		vampdude.hud_used?.shutdown_bloodpool()
-		vampdude.hud_used?.initialize_bloodpool()
-		vampdude.hud_used?.bloodpool.set_fill_color("#510000")
+		vampdude.hud_used?.set_bloody_bloodpool()
+		vampdude.grant_language(/datum/language/sanguine)
 
-		if(forced)
+		if(!forced)
+			if(clan_selected)
+				vampdude.set_clan(default_clan)
+		else
 			vampdude.set_clan_direct(forcing_clan)
 			forcing_clan = null
+		vampdude.grant_undead_eyes()
 
 	// The clan system now handles most of the setup, but we can still do antagonist-specific things
 	after_gain()

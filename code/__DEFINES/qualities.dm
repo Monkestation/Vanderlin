@@ -19,21 +19,15 @@
 #define SMELTERY_QUALITY_GREAT 5
 #define SMELTERY_QUALITY_EXCELLENT 6
 
-#define SMELTING_DENOMINATOR 22
+#define SMELTING_DENOMINATOR 24
 
 //Food and reagent qualities for cooking
+#define COOK_QUALITY_TERRIBLE -1
+#define COOK_QUALITY_POOR 0
 #define COOK_QUALITY_NORMAL 1
 #define COOK_QUALITY_NICE 2
 #define COOK_QUALITY_GOOD 3
 #define COOK_QUALITY_VERYGOOD 4
-
-/// Labels for food quality
-GLOBAL_ALIST_INIT(food_quality_description, alist(
-	COOK_QUALITY_NORMAL = "okay",
-	COOK_QUALITY_NICE = "nice",
-	COOK_QUALITY_GOOD = "good",
-	COOK_QUALITY_VERYGOOD = "very good",
-))
 
 // Stardew Valley-style qualities
 #define CROP_QUALITY_REGULAR 1

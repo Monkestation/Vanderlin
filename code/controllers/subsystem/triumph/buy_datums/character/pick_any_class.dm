@@ -24,6 +24,7 @@
 		CTAG_CONSORT,
 		CTAG_TOWN_ELDER,
 		CTAG_ROYALKNIGHT,
+		CTAG_COURTAGENT,
 	)
 
 /datum/job/advclass/pick_everything/on_roundstart(mob/living/carbon/human/spawned, client/player_client)

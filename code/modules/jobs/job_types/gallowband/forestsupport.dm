@@ -4,16 +4,17 @@
 		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = 1,
-		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/craft/carpentry = 30,
 		/datum/attribute/skill/craft/tanning = 10,
+		/datum/attribute/skill/craft/tanning/patching = 20,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/labor/lumberjacking = 30,
 		/datum/attribute/skill/labor/butchering = 10
@@ -30,12 +31,11 @@
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_FORSUPP
-	bypass_lastclass = TRUE
 	selection_color = "#0d6929"
 
 	allowed_ages = ALL_AGES_LIST_CHILD
 	allowed_races = RACES_PLAYER_ALL
-	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	allowed_patrons = list(/datum/patron/alternate/great_hunt)
 
 
@@ -111,7 +111,7 @@
 	backl = /obj/item/storage/backpack/satchel
 	backpack_contents = list(
 		/obj/item/weapon/knife/hunting = 1,
-		/obj/item/key/forrestgarrison = 1,
+		/obj/item/key/gallowband = 1,
 		/obj/item/needle = 1,
 		/obj/item/weapon/hammer/wood = 1,
 	)

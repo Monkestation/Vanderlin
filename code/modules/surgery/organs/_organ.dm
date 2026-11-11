@@ -95,9 +95,9 @@
 	var/blood_req = 0
 	/// Determines lung oxygen restoration and suffocation amount
 	var/oxygen_req = 0
-	/// Controls passive nutriment loss. Units are nutriment_req/100 per second
+	/// Controls passive nutriment loss. Units are nutriment_req per second
 	var/nutriment_req = 0
-	/// Controls passive hydration loss. Units are nutriment_req/100 per second
+	/// Controls passive hydration loss. Units are nutriment_req per second
 	var/hydration_req = 0
 
 	/// The space we occupy inside a limb - unaffected by w_class for balance reasons
@@ -202,10 +202,15 @@
 	for(var/slot in organ_efficiency)
 		if(organ_efficiency[slot] <= cap)
 			continue
+		if(side != NO_SIDE)
+			cap *= 0.5
+			amount *= 0.5
 		organ_efficiency[slot] = max(cap, organ_efficiency[slot] - amount)
 
 /obj/item/organ/proc/scarred_below(value)
 	for(var/slot in organ_efficiency)
+		if(side != NO_SIDE)
+			value *= 0.5
 		if(organ_efficiency[slot] <= value)
 			return TRUE
 	return FALSE
@@ -362,7 +367,7 @@
 	if(isnull(local_temp))
 		return (organ_flags & ORGAN_FROZEN)
 	//you get some leeway...
-	if(local_temp < 15)
+	if(local_temp < 5)
 		organ_flags |= ORGAN_FROZEN
 		return (organ_flags & ORGAN_FROZEN)
 
@@ -516,8 +521,8 @@
 		return
 	applyOrganDamage(-healing_amount, damage) // pass curent damage incase we are over cap
 	//this doesn't seem very right at all...
-	owner.adjust_nutrition(-nutriment_req/200 * delta_time)
-	owner.adjust_hydration(-hydration_req/200 * delta_time)
+	owner.adjust_nutrition(-nutriment_req * 0.5 * delta_time)
+	owner.adjust_hydration(-hydration_req * 0.5 * delta_time)
 
 /** organ_failure
  * generic proc for handling dying organs
@@ -587,7 +592,7 @@
 	var/effective_efficiency = LAZYACCESS(organ_efficiency, slot)
 	if(isnull(effective_efficiency))
 		return effective_efficiency
-	var/static/list/no_bleedout_organs = list(ORGAN_SLOT_ARTERY)
+	var/static/list/no_bleedout_organs = list(ORGAN_SLOT_ARTERY, ORGAN_SLOT_SPLEEN, ORGAN_SLOT_LIVER, ORGAN_SLOT_STOMACH)
 	if(slot in no_bleedout_organs)
 		if(is_failing_without_bleedout())
 			return 0

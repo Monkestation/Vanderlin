@@ -9,7 +9,6 @@
 	total_positions = 0
 	spawn_positions = 0
 	banned_leprosy = FALSE
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	can_be_apprentice = TRUE

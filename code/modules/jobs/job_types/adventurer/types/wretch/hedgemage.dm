@@ -7,7 +7,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/arcane = 40 // Base value, adjusted for age in after_spawn
 	)
@@ -21,7 +21,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
 		/datum/attribute/skill/magic/arcane = 50 // Base value, adjusted for age in after_spawn
 	)
@@ -52,6 +52,7 @@
 	spells = list(
 		/datum/action/cooldown/spell/undirected/touch/prestidigitation
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/wretch/hedgemage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -93,7 +94,7 @@
 /datum/outfit/wretch/hedgemage
 	name = "Hedge Mage (Wretch)"
 	shoes = /obj/item/clothing/shoes/simpleshoes
-	belt = /obj/item/storage/belt/leather/rope
+	belt = /obj/item/storage/belt/leather/bandit
 	shirt = /obj/item/clothing/armor/gambeson/heavy
 	neck = /obj/item/clothing/neck/mana_star
 	backr = /obj/item/storage/backpack/satchel
@@ -103,7 +104,7 @@
 	backpack_contents = list(
 		/obj/item/chalk = 1,
 		/obj/item/rope/chain = 1,
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/weapon/knife/dagger/silver/arcyne = 1
 	)

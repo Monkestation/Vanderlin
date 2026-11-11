@@ -152,6 +152,7 @@
 	has_initial_mana_pool = TRUE
 	icon = 'icons/obj/crystals.dmi'
 	icon_state = "amulet"
+	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/neck/mana_star/Initialize()
 	. = ..()

@@ -630,3 +630,35 @@
 		if(!is_cleanable(movable_content))
 			continue
 		movable_content.wash(clean_types)
+
+///What power is present at a turf, whether from something physically
+///standing on it or from a directional emitter on
+///an adjacent tile that's specifically outputting into src
+/turf/proc/get_turf_power(obj/structure/redstone/ignore = null)
+	var/best = 0
+	for(var/obj/structure/redstone/R in src)
+		if(R == ignore)
+			continue
+		best = max(best, R.power)
+	for(var/direction in GLOB.cardinals)
+		var/turf/NT = get_step(src, direction)
+		if(!NT)
+			continue
+		for(var/obj/structure/redstone/R in NT)
+			if(R == ignore)
+				continue
+			best = max(best, R.get_output_toward(src))
+	return best
+
+/// Returns the highest power output from structures and redstone components on this turf
+/turf/proc/get_redstone_power_output(atom/asker = null)
+	var/max_p = 0
+	for(var/obj/structure/S in src)
+		if(S == asker)
+			continue
+		if(istype(S, /obj/structure/redstone))
+			var/obj/structure/redstone/R = S
+			max_p = max(max_p, R.get_output_toward(asker))
+		else
+			max_p = max(max_p, S.get_redstone_output())
+	return max_p

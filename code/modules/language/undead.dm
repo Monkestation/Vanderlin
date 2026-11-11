@@ -1,6 +1,6 @@
 /datum/language/undead
 	name = "Zizo Chant"
-	desc = ""
+	desc = "Dark speech, the language of HER. Speaking this is unwise in the presence of worshippers to The Ten."
 	icon_state = "zizo"
 	spans = list(SPAN_UNDEAD)
 	speech_verb = "chants"

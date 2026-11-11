@@ -1,7 +1,7 @@
 /datum/job/goblin
 	title = "Goblin"
 	job_flags = JOB_EQUIP_RANK
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_HOSTILE)
 	total_positions = 0
 	spawn_positions = 0
 	allowed_races = RACES_PLAYER_ALL

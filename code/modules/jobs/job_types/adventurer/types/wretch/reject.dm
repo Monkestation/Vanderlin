@@ -19,11 +19,11 @@
 		/datum/attribute/skill/misc/stealing = 40,
 		/datum/attribute/skill/misc/lockpicking = 40,
 		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/job/advclass/wretch/reject
@@ -38,6 +38,7 @@
 		SPEC_ID_ELF,\
 		SPEC_ID_DROW,\
 		SPEC_ID_HALF_ORC,\
+		SPEC_ID_DWARF_ORC,\
 		SPEC_ID_TIEFLING,\
 	)
 	allowed_ages = list(AGE_ADULT, AGE_CHILD)
@@ -63,8 +64,7 @@
 
 	addtimer(CALLBACK(SSfamilytree, TYPE_PROC_REF(/datum/controller/subsystem/familytree, AddRoyal), spawned, FAMILY_PROGENY), 10 SECONDS)
 
-	if(spawned.dna.species.id != SPEC_ID_TIEFLING)
-		ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
+	ADD_TRAIT(spawned, TRAIT_NOBLE_BLOOD, TRAIT_GENERIC)
 
 /datum/job/advclass/wretch/reject/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

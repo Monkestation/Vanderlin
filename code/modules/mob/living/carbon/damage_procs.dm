@@ -1,25 +1,3 @@
-
-/mob/living/carbon/get_elemental_resistance(resistance_type = COLD_DAMAGE)
-	var/resistance = 0
-	var/max_resistance_modifers = 0
-	for(var/obj/item/item in get_equipped_items())
-		var/item_resistance = SEND_SIGNAL(item, COMSIG_ATOM_GET_RESISTANCE, resistance_type)
-		var/item_max_resistance = SEND_SIGNAL(item, COMSIG_ATOM_GET_MAX_RESISTANCE, resistance_type)
-
-		if(item_resistance)
-			resistance += item_resistance
-		if(item_max_resistance)
-			max_resistance_modifers += item_max_resistance
-
-	switch(resistance_type)
-		if(COLD_DAMAGE)
-			return min(cold_res + resistance, max_cold_res + max_resistance_modifers)
-		if(FIRE_DAMAGE)
-			return min(fire_res + resistance, max_fire_res + max_resistance_modifers)
-		if(LIGHTNING_DAMAGE)
-			return min(lightning_res + resistance, max_lightning_res + max_resistance_modifers)
-
-
 /mob/living/carbon/get_status_mod(status_key)
 	var/total_modifier = LAZYACCESS(status_modifiers, status_key)
 	for(var/obj/item/item in get_equipped_items())
@@ -100,7 +78,7 @@
 	adjustBruteLoss(diff, updating_health, forced, required_bodytype, damage_type)
 
 /mob/living/carbon/adjustBruteLoss(amount, updating_health = TRUE, forced = FALSE, required_status, damage_type = WOUND_INTERNAL_BRUISE, can_crit = FALSE)
-	if(!forced && (status_flags & GODMODE))
+	if(!forced && HAS_TRAIT(src, TRAIT_GODMODE))
 		return FALSE
 	if(amount > 0)
 		take_overall_damage(amount, 0, updating_health, required_status, damage_type = damage_type, no_crit = can_crit)
@@ -116,7 +94,7 @@
 	adjustFireLoss(diff, updating_health, forced, required_bodytype)
 
 /mob/living/carbon/adjustFireLoss(amount, updating_health = TRUE, forced = FALSE, required_status, intense)
-	if(!forced && (status_flags & GODMODE))
+	if(!forced && HAS_TRAIT(src, TRAIT_GODMODE))
 		return FALSE
 	if(amount > 0)
 		take_overall_damage(0, amount, updating_health, required_status, damage_type = (intense ? BCLASS_INTENSE_BURN : null))
@@ -167,7 +145,7 @@
  */
 /mob/living/carbon/adjustOrganLoss(slot, amount, maximum)
 	var/obj/item/organ/O = getorganslot(slot)
-	if(O && !(status_flags & GODMODE))
+	if(O && !HAS_TRAIT(src, TRAIT_GODMODE))
 		O.applyOrganDamage(amount, maximum)
 
 /** setOrganLoss
@@ -178,7 +156,7 @@
  */
 /mob/living/carbon/setOrganLoss(slot, amount)
 	var/obj/item/organ/O = getorganslot(slot)
-	if(O && !(status_flags & GODMODE))
+	if(O && !HAS_TRAIT(src, TRAIT_GODMODE))
 		O.setOrganDamage(amount)
 
 /** getOrganLoss
@@ -198,7 +176,7 @@
 	return amount
 
 /mob/living/carbon/adjustPainLoss(amount, updating_health = TRUE, forced = FALSE, required_status = null)
-	if(!forced && (status_flags & GODMODE))
+	if(!forced && HAS_TRAIT(src, TRAIT_GODMODE))
 		return 0
 	var/list/obj/item/bodypart/parts = get_painable_bodyparts(adding_pain = (amount > 0 ? TRUE : FALSE))
 	if(!length(parts))
@@ -316,16 +294,43 @@
 	return TRUE
 
 /mob/living/carbon/can_feel_pain()
-	return !HAS_TRAIT(src, TRAIT_NOPAIN) && !IsUnconscious()
+	return !HAS_TRAIT(src, TRAIT_NOPAIN)
 
 /mob/living/carbon/getShock(painkiller_included = TRUE)
 	if(!can_feel_pain())
 		return 0
 
-	var/shock = 0
-	shock += SHOCK_MOD_CLONE * getCloneLoss()
+	var/list/fractions = list()
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
-		shock += bodypart.get_shock(painkiller_included)
+		if(!bodypart.max_pain_damage)
+			continue
+		var/frac = bodypart.get_shock(painkiller_included) / (bodypart.max_pain_damage * 0.7)
+		fractions += clamp(frac, 0, 1.3) // allow slight overshoot per-limb, but bounded
+
+	sortTim(fractions, GLOBAL_PROC_REF(cmp_numeric_dsc)) // worst limb first
+
+	var/weighted_sum = 0
+	var/max_weighted_sum = 0
+	var/weight = 1
+	for(var/i in 1 to length(fractions))
+		weighted_sum += fractions[i] * weight
+		max_weighted_sum += weight
+		if(fractions[1] <= 0)
+			weight *= SHOCK_USELESS_DECAY
+		else
+			weight *= SHOCK_STACK_DECAY
+
+	// pad max_weighted_sum out to a consistent limb count so losing limbs
+	// doesn't change what "fully wounded on every remaining limb" maps to
+	var/remaining_weight = weight
+	for(var/i in length(fractions)+1 to SHOCK_STACK_MAX_LIMBS)
+		max_weighted_sum += remaining_weight
+		remaining_weight *= SHOCK_STACK_DECAY
+
+	var/shock = max_weighted_sum ? (weighted_sum / max_weighted_sum) * SHOCK_STAGE_MAX : 0
+
+	// clone loss stays additive on top, uncapped by design (separate hurt channel)
+	shock += SHOCK_MOD_CLONE * getCloneLoss()
 
 	return max(0, shock)
 
@@ -408,7 +413,7 @@
 // damage MANY bodyparts, in random order
 /mob/living/carbon/take_overall_damage(brute = 0, burn = 0, updating_health = TRUE, required_status = BODYPART_ORGANIC, damage_type, no_crit = FALSE)
 	. = FALSE
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return	//godmode
 
 	// treat negative args as positive

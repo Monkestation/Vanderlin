@@ -4,7 +4,7 @@
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_CONSTITUTION = 1,
+		STAT_CONSTITUTION = 2,
 		STAT_ENDURANCE = 1,
 		STAT_INTELLIGENCE = -1,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -17,6 +17,7 @@
 		/datum/attribute/skill/labor/taming = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/craft/tanning = 10,
 		/datum/attribute/skill/misc/climbing = 20,
 	)
@@ -27,7 +28,7 @@
 				and more likely to die poor. Farm workers, carriers, handymen."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/peasant
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	apprentice_name = "Handyman"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 

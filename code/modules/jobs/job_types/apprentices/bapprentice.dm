@@ -1,17 +1,20 @@
 /datum/attribute_holder/sheet/job/bapprentice
 	raw_attribute_list = list(
+		STAT_STRENGTH = 1,
 		STAT_ENDURANCE = 2,
 		STAT_SPEED = 1,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/craft/blacksmithing = 30,
 		/datum/attribute/skill/craft/armorsmithing = 20,
 		/datum/attribute/skill/craft/weaponsmithing = 20,
 		/datum/attribute/skill/craft/smelting = 30,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 20
+		/datum/attribute/skill/educated/reading = 20
 	)
 
 /datum/job/bapprentice
@@ -28,7 +31,6 @@
 	give_bank_account = TRUE
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
-	bypass_lastclass = TRUE
 	can_have_apprentices = FALSE
 	cmode_music = 'sound/music/cmode/towner/CombatTowner2.ogg'
 	job_bitflag = BITFLAG_CONSTRUCTOR

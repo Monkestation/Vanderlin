@@ -14,6 +14,7 @@
 	invocation_type = INVOCATION_SHOUT
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 
 	charge_required = FALSE
 	cooldown_time = 2 MINUTES

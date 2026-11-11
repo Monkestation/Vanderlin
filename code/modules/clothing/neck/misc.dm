@@ -133,7 +133,7 @@
 	armor_class = AC_LIGHT
 	armor_type = /datum/armor/neck/leather
 	body_parts_covered = NECK|HAIR|EARS|HEAD
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 	prevent_crits = CUT_AND_MINOR_CRITS
 	item_weight = 850 GRAMS
 
@@ -162,7 +162,7 @@
 
 /obj/item/clothing/neck/coif/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/coif/cloth
 	name = "padded coif"
@@ -207,7 +207,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 
 	armor_type = /datum/armor/neck/leather
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 	item_weight = 275 GRAMS
 
@@ -229,7 +229,7 @@
 	smeltresult = /obj/item/fertilizer/ash
 
 	armor_type = /datum/armor/neck/leather
-	max_integrity = INTEGRITY_WORST
+	max_integrity = INTEGRITY_OLD_WORST
 	prevent_crits = CUT_AND_MINOR_CRITS
 
 /obj/item/clothing/neck/bellcollar/Initialize()
@@ -272,13 +272,12 @@
 	blocksound = CHAINHIT
 	smeltresult = null
 	melting_material = /datum/material/steel
-	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/neck/maille
 	body_parts_covered = NECK|HAIR|EARS|HEAD
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
 	item_weight = 1 KILOGRAMS
@@ -310,30 +309,27 @@
 
 /obj/item/clothing/neck/chaincoif/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/chaincoif/iron
 	icon_state = "ichaincoif"
 	name = "iron chain coif"
 	desc = "A chain coif made of interwoven iron rings. Affordable protection against arrows and blades, \
 			but should be used as padding rather than relied upon as armor."
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
-	melt_amount = 100
 
 	armor_type = /datum/armor/neck/maille/iron
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/neck/gorget/copper
 	name = "neck protector"
 	icon_state = "copperneck"
 	desc = "An antique and simple protection for the neck, used more as an accessory by the common folk. But poor protection is still better than nothing."
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
 
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/neck/leather/good
-	max_integrity = INTEGRITY_POOR
-
+	max_integrity = INTEGRITY_OLD_POOR
 
 //..................................................................................................................................
 /*---------------\
@@ -347,10 +343,9 @@
 	desc = "A piece of steel plate armor meant to protect the throat and neck of its wearer against decapitation, extending the protection of armor plates."
 	icon_state = "bevor"
 	flags_inv = HIDEFACIALHAIR
+	melting_material = /datum/material/steel
+	smeltresult = null
 	melt_amount = 75
-	melting_material = /datum/material/steel
-	melt_amount = 100
-	melting_material = /datum/material/steel
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
@@ -361,7 +356,7 @@
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/neck/plate
 	body_parts_covered = NECK|EARS|MOUTH|NOSE
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_STAB
 
 	material_category = ARMOR_MAT_PLATE
@@ -369,24 +364,22 @@
 
 /obj/item/clothing/neck/bevor/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/bevor/bronze
 	name = "bronze gorgette"
 	desc = "A jutting slab of bronze, traditionally mounted atop a panoplic assembly to veil the neck from precise strikes. </br>To tip the chin up while grounded is an ancient gesture; one which willingly beckons for the 'gift of mercy'."
 	icon_state = "bbevor"
-	melt_amount = 75
 	melting_material = /datum/material/bronze
 
 /obj/item/clothing/neck/bevor/iron
 	name = "iron bevor"
 	desc = "A piece of iron plate armor meant to protect the throat and neck of its wearer against decapitation, extending the protection of armor plates."
 	icon_state = "ibevor"
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 
 /obj/item/clothing/neck/gorget
 	name = "gorget"
@@ -400,13 +393,15 @@
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = null
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/neck/plate/bad
 	body_parts_covered = NECK
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_STAB
 
 	material_category = ARMOR_MAT_PLATE
@@ -414,7 +409,7 @@
 
 /obj/item/clothing/neck/gorget/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/gorget/blackmeadow
 	name = "blackmeadow gorget"
@@ -527,7 +522,6 @@
 	icon_state = "goldgorget"
 	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
 	melting_material = /datum/material/gold
-	melt_amount = 75
 	grid_height = 96
 	grid_width = 96
 	sellprice = 200
@@ -540,6 +534,7 @@
 	name = "silver gorget"
 	desc = "A sparkling set of plates designed to protect the neck, traditionally worn atop a jacket or cuirass. They seem to shine with moonlight, even in the darkness."
 	icon_state = "sgorget"
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/neck/gorget/silver/Initialize()
 	. = ..()
@@ -578,7 +573,7 @@
 	name = "bronze gorget"
 	desc = "A heavy collar of great age, meant to protect the neck."
 	icon_state = "aasimarneck"
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	armor_type = /datum/armor/neck/maille/good
 
 /obj/item/clothing/neck/highcollier
@@ -598,9 +593,11 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	smeltresult = null
 	clothing_flags = CANT_SLEEP_IN
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
 
 	material_category = ARMOR_MAT_CHAINMAIL
@@ -629,7 +626,7 @@
 
 /obj/item/clothing/neck/highcollier/Initialize()
 	. = ..()
-	ADD_TRAIT(src, TRAIT_HARD_TO_STEAL, TRAIT_GENERIC)
+	ADD_TRAIT(src, TRAIT_CANT_BE_STOLEN, TRAIT_GENERIC)
 
 /obj/item/clothing/neck/highcollier/iron
 	name = "iron high collier"
@@ -637,9 +634,7 @@
 	icon_state = "ihigh_collier"
 	body_parts_covered = NECK|MOUTH
 	armor_type = /datum/armor/neck/maille/iron
-	max_integrity = INTEGRITY_STRONG
-	smeltresult = /obj/item/ingot/iron
-	melt_amount = 100
+	max_integrity = INTEGRITY_OLD_STRONG
 	melting_material = /datum/material/iron
 
 /obj/item/clothing/neck/highcollier/iron/renegadecollar

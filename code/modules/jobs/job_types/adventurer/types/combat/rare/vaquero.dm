@@ -19,7 +19,7 @@
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/misc/lockpicking = 10,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/job/advclass/combat/vaquero
@@ -28,7 +28,7 @@
 	allowed_races = list(SPEC_ID_TIEFLING)
 	outfit = /datum/outfit/vaquero
 	cmode_music = 'sound/music/cmode/adventurer/combat_vaquero.ogg'
-	category_tags = list(CTAG_ADVENTURER)
+	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
 	total_positions = 1
 	roll_chance = 7
 

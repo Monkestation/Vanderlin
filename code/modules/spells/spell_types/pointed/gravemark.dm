@@ -6,8 +6,10 @@
 	spell_cost = 25
 	cast_range = 4
 	charge_required = FALSE
+	heretical_spell = TRUE
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 
 /datum/action/cooldown/spell/gravemark/is_valid_target(atom/cast_on)
 	. = ..()

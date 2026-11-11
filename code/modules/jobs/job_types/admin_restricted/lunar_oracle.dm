@@ -5,29 +5,7 @@
 		STAT_ENDURANCE = 1,
 		STAT_CONSTITUTION = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
-		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/magic/arcane = 40,
-		/datum/attribute/skill/magic/holy = 40,
-		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/combat/whipsflails = 40,
-		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/misc/sewing = 30,
-		/datum/attribute/skill/misc/medicine = 30,
-		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 40
-	)
-
-/datum/attribute_holder/sheet/job/oracle/old
-	raw_attribute_list = list(
-		STAT_STRENGTH = -1,
-		STAT_INTELLIGENCE = 5,
-		STAT_ENDURANCE = 1,
-		STAT_CONSTITUTION = -2,
-		STAT_SPEED = -2,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/magic/arcane = 50,
 		/datum/attribute/skill/magic/holy = 50,
@@ -39,7 +17,29 @@
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
+	)
+
+/datum/attribute_holder/sheet/job/oracle/old
+	raw_attribute_list = list(
+		STAT_STRENGTH = -1,
+		STAT_INTELLIGENCE = 5,
+		STAT_ENDURANCE = 1,
+		STAT_CONSTITUTION = -2,
+		STAT_SPEED = -2,
+		/datum/attribute/skill/educated/reading = 60,
+		/datum/attribute/skill/misc/riding = 20,
+		/datum/attribute/skill/magic/arcane = 60,
+		/datum/attribute/skill/magic/holy = 60,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 30,
+		/datum/attribute/skill/misc/athletics = 30,
+		/datum/attribute/skill/combat/whipsflails = 40,
+		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/misc/sewing = 30,
+		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/craft/cooking = 10,
+		/datum/attribute/skill/educated/mathematics = 50
 	)
 
 /datum/job/admin/oracle
@@ -49,14 +49,14 @@
 	Guide and educate the faithful. \
 	You are the light in the night, watcher of dreams."
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_CHURCH, SUB_FACTION_LUNAR_ORDER)
 
 	cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
-	blacklisted_species = list(SPEC_ID_HALFLING)
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	allowed_patrons = list(/datum/patron/divine/noc)
 
-	outfit = /datum/outfit/oracle
+	outfit = /datum/outfit/admin/oracle
 	honorary = "Oracle"
 
 	magic_user = TRUE
@@ -82,11 +82,13 @@
 
 	traits = list(
 		TRAIT_DREAM_WATCHER,
+		TRAIT_DREAM_CAVE,
 		TRAIT_EMPATH,
 		TRAIT_STEELHEARTED,
 		TRAIT_LUNAR_ORDER,
 		TRAIT_BLINDFIGHTING,
 		TRAIT_SORCERER,
+		TRAIT_IDENTIFY_DEVIL_MARKS,
 	)
 
 	languages = list(
@@ -104,6 +106,7 @@
 		/datum/language/deepspeak,
 		/datum/language/thievescant
 	)
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/admin/oracle/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
@@ -115,12 +118,13 @@
 		devotion.make_oracle()
 		devotion.grant_to(spawned)
 	spawned.apply_status_effect(/datum/status_effect/buff/nocblessed)
+	spawned.add_quirk(/datum/quirk/boon/folk_hero)
 
 	spawned.adjust_technique_mastery_points(12)
 	spawned.adjust_form_mastery_points(20)
 	spawned.mana_pool.set_intrinsic_recharge(MANA_ALL_LEYLINES)
 
-/datum/outfit/oracle
+/datum/outfit/admin/oracle
 	name = JOB_ADMIN_ORACLE
 	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
 	pants = /obj/item/clothing/pants/tights/colored/black
@@ -132,9 +136,10 @@
 	backl = /obj/item/storage/backpack/satchel
 	cloak = /obj/item/clothing/cloak/raincloak/colored/chalk
 	backpack_contents = list(
-		/obj/item/needle = 1,
+		/obj/item/needle/blessed = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1
 	)
+	l_hand = /obj/item/weapon/polearm/woodstaff/oracle
 
 /datum/action/oracle_announce
 	name = "Invoke Lunar Authority"
@@ -170,4 +175,4 @@
 	name = "dream key"
 	desc = "A mysterious key to an even more mysterious place..."
 	icon_state = "ekey"
-	lockids = list("Dreamcave")
+	lockids = list(ACCESS_DREAM_CAVE)

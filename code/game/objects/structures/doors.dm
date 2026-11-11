@@ -18,6 +18,7 @@
 	attacked_sound = list('sound/combat/hits/onwood/woodimpact (1).ogg', 'sound/combat/hits/onwood/woodimpact (2).ogg')
 	lock = /datum/lock/key
 	can_add_lock = TRUE
+	clawable = FALSE
 
 	var/omni_bolt = FALSE
 
@@ -57,6 +58,11 @@
 	var/has_bolt = FALSE
 	/// Handle viewport toggle on right click
 	var/has_viewport = FALSE
+
+/obj/structure/door/bolt
+	icon_state = MAP_SWITCH("woodhandle", "woodhandledir")
+	has_bolt = TRUE
+	lock = /datum/lock
 
 /obj/structure/door/Initialize()
 	. = ..()
@@ -422,14 +428,34 @@
 /obj/structure/door/green
 	icon_state = "wcg"
 
+/obj/structure/door/green/bolt
+	icon_state = MAP_SWITCH("wcg", "wcgdir")
+	has_bolt = TRUE
+	lock = /datum/lock
+
 /obj/structure/door/red
 	icon_state = "wcr"
+
+/obj/structure/door/red/bolt
+	icon_state = MAP_SWITCH("wcr", "wcrdir")
+	has_bolt = TRUE
+	lock = /datum/lock
 
 /obj/structure/door/violet
 	icon_state = "wcv"
 
+/obj/structure/door/violet/bolt
+	icon_state = MAP_SWITCH("wcv", "wcvdir")
+	has_bolt = TRUE
+	lock = /datum/lock
+
 /obj/structure/door/fancy
 	icon_state = "fancy_wood"
+
+/obj/structure/door/fancy/bolt
+	icon_state = MAP_SWITCH("fancy_wood", "fancy_wooddir")
+	has_bolt = TRUE
+	lock = /datum/lock
 
 /obj/structure/door/window
 	icon_state = "woodwindow"

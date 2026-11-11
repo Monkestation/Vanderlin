@@ -51,3 +51,16 @@
 
 /datum/effect_system/steam_spread
 	effect_type = /obj/effect/particle_effect/steam
+
+/obj/effect/particle_effect/blood_mist
+	name = "blood mist"
+	icon_state = "extinguish"
+	density = FALSE
+	color = "#580808"
+
+/obj/effect/particle_effect/blood_mist/Initialize()
+	. = ..()
+	QDEL_IN(src, 20)
+
+/datum/effect_system/blood_mist_spread
+	effect_type = /obj/effect/particle_effect/blood_mist

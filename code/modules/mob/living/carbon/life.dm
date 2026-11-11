@@ -55,7 +55,7 @@
 	if(stat != DEAD)
 		return 1
 
-/mob/living/carbon/DeadLife()
+/mob/living/carbon/DeadLife(delta_time = SSMOBS_DT, times_fired)
 	set invisibility = 0
 
 	if(HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
@@ -68,6 +68,7 @@
 	handle_embedded_objects()
 
 	check_cremation()
+	handle_bodyparts_death(delta_time, times_fired)
 
 /mob/living/carbon/handle_random_events() //BP/WOUND BASED PAIN
 	return
@@ -85,6 +86,10 @@
 	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
 		if(bodypart.needs_processing)
 			. |= bodypart.on_life(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
+
+/mob/living/carbon/proc/handle_bodyparts_death(delta_time, times_fired)
+	for(var/obj/item/bodypart/bodypart as anything in bodyparts)
+		. |= bodypart.on_death(delta_time, times_fired)
 
 /mob/living/carbon/proc/handle_organs(delta_time, times_fired, virus_immunity, antibiotics, immunity_weakness, passed_temp)
 	if(HAS_TRAIT(src, TRAIT_NO_ORGAN_PROCESS)) //internal stasis basically

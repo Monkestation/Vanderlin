@@ -1,9 +1,16 @@
 /datum/attribute_holder/sheet/job/pilgrim/preacher
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/reading = 40,
+		STAT_ENDURANCE = 2,
+		STAT_CONSTITUTION = 1,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/music = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/craft/crafting = 20,
+		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/combat/wrestling = 20,
-		/datum/attribute/skill/combat/unarmed = 20
+		/datum/attribute/skill/combat/unarmed = 30
 	)
 
 /datum/job/advclass/pilgrim/rare/preacher
@@ -13,7 +20,7 @@
 	Sway these nonbelievers to the right path!"
 	allowed_races = RACES_PLAYER_GRENZ
 	outfit = /datum/outfit/pilgrim/preacher
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	total_positions = 1
 	cmode_music = 'sound/music/cmode/church/CombatInquisitor.ogg'
 	allowed_patrons = list(/datum/patron/psydon, /datum/patron/psydon/extremist)
@@ -21,6 +28,8 @@
 	attribute_sheet = /datum/attribute_holder/sheet/job/pilgrim/preacher
 
 	traits = list(
+		TRAIT_PSYDONIAN_GRIT,
+		TRAIT_PSYDONITE,
 		TRAIT_FOREIGNER
 	)
 

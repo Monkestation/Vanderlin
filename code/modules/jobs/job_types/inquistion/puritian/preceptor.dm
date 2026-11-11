@@ -11,7 +11,7 @@
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/combat/firearms = 30,
 	)
@@ -29,7 +29,7 @@
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/combat/firearms = 30,
 	)

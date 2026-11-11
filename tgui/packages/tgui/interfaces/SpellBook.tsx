@@ -3,6 +3,7 @@ import { useBackend } from 'tgui/backend';
 import {
   Box,
   Button,
+  Collapsible,
   DmIcon,
   Icon,
   Section,
@@ -21,6 +22,7 @@ type Track = {
     castSpeed: number;
     magnitude: number;
   } | null;
+  unspent_points: number;
 };
 
 type SpellEntry = {
@@ -37,6 +39,7 @@ type SpellEntry = {
   canUnlearn: boolean;
   icon: string;
   iconState: string;
+  heretical: boolean;
 };
 
 type SpellBookData = {
@@ -129,7 +132,11 @@ const SpellCard = (props: {
           <SpellSprite icon={spell.icon} iconState={spell.iconState} />
         </Stack.Item>
         <Stack.Item grow>
-          <Box bold>{spell.name}</Box>
+          {spell.heretical ? (
+          <Box bold color="red">{spell.name} {spell.heretical && "(HERESY)"}</Box>
+          ) :
+          (<Box bold>{spell.name}</Box>
+          )}
           <Box color="label" fontSize="0.9em">
             {spell.desc}
           </Box>
@@ -187,9 +194,18 @@ const InvestRow = (props: {
     <Stack align="center" mb={0.5} className="SpellBook__invest-row">
       <Stack.Item grow>
         <Box bold>{track.name}</Box>
-        <Box color="label" fontSize="0.9em">
-          {track.rank} - Level {track.level}
-        </Box>
+
+        {!!track.unspent_points && (
+          <Box color="label" fontSize="0.9em">
+            {track.rank} - Level {track.level} <br></br>
+            Unspent Points - {track.unspent_points}
+          </Box>
+        )}
+        {!track.unspent_points && (
+          <Box color="label" fontSize="0.9em">
+            {track.rank} - Level {track.level}
+          </Box>
+        )}
         {modifierText && (
           <Box color="average" fontSize="0.85em">
             {modifierText}
@@ -343,6 +359,18 @@ const LearnPage = (props: {
       </Stack.Item>
 
       <Stack.Item grow style={{ minHeight: 0 }}>
+        {activeForm === "Necromancy" && (
+        <Collapsible title="Warning">
+          The use of Death Magic is frowned upon by The Divine Patheon, you should expect great scrutiny when wielding it. <br></br>
+          Certain spells within this form are heretical under The Ten and if recognised may lead to excommunication or execution. <br></br>
+        </Collapsible>
+        )}
+        {activeForm === "Hemomancy" && (
+        <Collapsible title="Warning">
+          The use of Blood Magic is considered heresy by The Divine Pantheon, and is frowned upon even by The Four. <br></br>
+          Attempting to use Blood Magic without the proper instruction will be inefficient and potentially dangerous.
+        </Collapsible>
+        )}
         <Stack fill>
           <Stack.Item grow={3} style={{ minHeight: 0 }}>
             <Section title="Techniques" fill>
@@ -429,7 +457,7 @@ export const SpellBook = () => {
   const [page, setPage] = useState<'learn' | 'stats'>('learn');
 
   return (
-    <Window width={780} height={640} title="Spellcraft">
+    <Window width={1160} height={800} title="Spellcraft">
       <Window.Content scrollable={false}>
         <Stack vertical fill>
           <Stack.Item>
@@ -450,7 +478,7 @@ export const SpellBook = () => {
                 </Stack>
               }
             >
-              <Tabs>
+              <Tabs m="0px">
                 <Tabs.Tab selected={page === 'learn'} onClick={() => setPage('learn')}>
                   <Icon name="book-open" mr={1} />
                   Learn

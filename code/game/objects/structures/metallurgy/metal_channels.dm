@@ -50,11 +50,11 @@
 	if(!new_overlay)
 		icon_state = "channel"
 
-	var/datum/reagent/molten_metal/metal = group_reagents?.get_reagent(/datum/reagent/molten_metal)
-	var/datum/material/largest = metal?.largest_metal
+	var/datum/reagent/molten_metal/metal = group_reagents?.has_reagent(/datum/reagent/molten_metal)
 	if(!metal)
 		return
 
+	var/datum/material/largest = metal.largest_metal
 	. += mutable_appearance(
 		icon,
 		"[icon_state]-c",
@@ -242,7 +242,7 @@
 	. = ..()
 	if(!istype(I, /obj/item/reagent_containers) && !istype(I, /obj/item/storage/crucible))
 		return
-	var/datum/reagent/molten_metal/metal = I.reagents.get_reagent(/datum/reagent/molten_metal)
+	var/datum/reagent/molten_metal/metal = I.reagents.has_reagent(/datum/reagent/molten_metal)
 	if(!metal)
 		return
 

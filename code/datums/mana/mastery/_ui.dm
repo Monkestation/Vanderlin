@@ -70,6 +70,7 @@
 			"level" = mastery.get_technique_level(technique),
 			"rank" = mastery.get_technique_rank_name(technique),
 			"modifiers" = technique_modifiers[technique],
+			"unspent_points" = mastery.spendable_technique_points[technique] ? mastery.spendable_technique_points[technique] : 0,
 		))
 	data["techniqueLevels"] = technique_data
 
@@ -81,6 +82,7 @@
 			"level" = mastery.get_form_level(form),
 			"rank" = mastery.get_form_rank_name(form),
 			"modifiers" = form_modifiers[form],
+			"unspent_points" = mastery.spendable_form_points[form] ? mastery.spendable_form_points[form] : 0,
 		))
 	data["formLevels"] = form_data
 
@@ -111,6 +113,7 @@
 			"canUnlearn" = is_unlocked, // any unlocked spell can be unlearned
 			"icon" = "[initial(spell_path.button_icon)]",
 			"iconState" = initial(spell_path.button_icon_state),
+			"heretical" = initial(spell_path.heretical_spell),
 		))
 	data["spells"] = spell_data
 	return data

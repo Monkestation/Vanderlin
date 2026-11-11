@@ -20,7 +20,7 @@
 
 	var/wolfname = "Werevolf"
 	var/list/datum/action/werewolf_form_powers = list(
-		/datum/action/cooldown/spell/undirected/howl, \
+		// /datum/action/cooldown/spell/undirected/howl, //Nonfunctional
 		/datum/action/cooldown/spell/undirected/claws, \
 		/datum/action/cooldown/spell/aoe/repulse/howl, \
 		/datum/action/cooldown/spell/woundlick, \
@@ -188,7 +188,7 @@
 	slot_flags = null
 	name = "werevolf's skin"
 	desc = ""
-	icon_state = null
+	color = "#3f3b2c"
 	body_parts_covered = FULL_BODY
 	resistance_flags = FIRE_PROOF
 	armor_type = /datum/armor/brigandine
@@ -196,7 +196,7 @@
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	sewrepair = null
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_OLD_STRONG
 	item_flags = DROPDEL
 	repair_time = 15 SECONDS
 

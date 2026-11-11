@@ -188,3 +188,51 @@
 	can_gain_with_sight = FALSE
 	can_gain_by_walking = FALSE
 	check_other_side = TRUE
+
+/obj/structure/fluff/traveltile/exit_oracle_cave
+	name = "To the Town"
+	aportalid = "oracle_city"
+	aportalgoesto = "city_oracle"
+
+/obj/structure/fluff/traveltile/oracle_cave
+	name = "To the Dream Cave"
+	aportalid = "city_oracle"
+	aportalgoesto = "oracle_city"
+	required_trait = TRAIT_DREAM_CAVE
+	can_gain_with_sight = FALSE
+	check_other_side = TRUE
+
+// MAIN MAP THINGS
+
+/obj/structure/fluff/traveltile/fast/vanderlin/basin_forest
+	aportalid = "vanderlin-basin_forest"
+	aportalgoesto = "vanderlin-forest_basin"
+
+/obj/structure/fluff/traveltile/fast/vanderlin/forest_basin
+	aportalid = "vanderlin-forest_basin"
+	aportalgoesto = "vanderlin-basin_forest"
+
+/obj/structure/fluff/traveltile/fast/vanderlin/forest_bog
+	aportalid = "vanderlin-forest_bog"
+	aportalgoesto = "vanderlin-bog_forest"
+
+/obj/structure/fluff/traveltile/fast/vanderlin/bog_forest
+	aportalid = "vanderlin-bog_forest"
+	aportalgoesto = "vanderlin-forest_bog"
+
+/obj/structure/fluff/traveltile/fast/vanderlin/bog_mountain
+	aportalid = "vanderlin-bog_mountain"
+	aportalgoesto = "vanderlin-mountain_bog"
+
+/obj/structure/fluff/traveltile/fast/vanderlin/mountain_bog
+	aportalid = "vanderlin-mountain_bog"
+	aportalgoesto = "vanderlin-bog_mountain"
+
+/obj/structure/fluff/traveltile/fast/vanderlin/forest_mountain
+	aportalid = "vanderlin-forest_mountain"
+	aportalgoesto = "vanderlin-mountain_forest"
+
+/obj/structure/fluff/traveltile/fast/vanderlin/mountain_forest
+	aportalid = "vanderlin-mountain_forest"
+	aportalgoesto = "vanderlin-forest_mountain"
+

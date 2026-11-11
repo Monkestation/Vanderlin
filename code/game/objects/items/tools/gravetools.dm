@@ -17,7 +17,7 @@
 
 	experimental_onhip = FALSE
 	experimental_onback = FALSE
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = INTEGRITY_STATIC_300
 	sharpness = IS_SHARP
 	w_class = WEIGHT_CLASS_BULKY
 	slot_flags = ITEM_SLOT_BACK
@@ -269,6 +269,7 @@
 	grid_width = 64
 	toolspeed = 0.8
 	smeltresult = null
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/necra
 
 /obj/item/weapon/shovel/necran/Initialize()
 	. = ..()

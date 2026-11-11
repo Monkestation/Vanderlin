@@ -14,10 +14,10 @@
 		/datum/attribute/skill/combat/shields = 30,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 20,
 		/datum/attribute/skill/craft/cooking = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/attribute_holder/sheet/job/paladin/extremist
@@ -32,7 +32,7 @@
 	tutorial = "Paladins are former noblemen and clerics who have dedicated themselves to great combat prowess. Often, they were promised redemption for past sins if they crusaded in the name of the gods."
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	outfit = /datum/outfit/paladin
-	allowed_patrons = ALL_CLERIC_PATRONS
+	allowed_patrons = ALL_TEMPLE_PATRONS
 	total_positions = 1
 	category_tags = list(CTAG_ADVENTURER)
 	roll_chance = 7

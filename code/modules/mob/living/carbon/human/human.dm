@@ -154,11 +154,12 @@
 
 /mob/living/carbon/human/get_status_tab_items()
 	. = ..()
-	if(clan)
+	if(HAS_TRAIT(src, TRAIT_VITAE_USER) || HAS_TRAIT(src, TRAIT_BLOOD_SENSE))
 		. += "VITAE: [round(bloodpool)]/[maxbloodpool]"
+	if(clan)
 		. += "DETECTIONS: [detections]"
 	if(cleric)
-		. += "Devotion: [round(cleric.devotion)]/[cleric.max_devotion]"
+		. += "[cleric.devotion_title]: [round(cleric.devotion)]/[cleric.max_devotion]"
 
 /mob/living/carbon/human/show_inv(mob/user)
 	user.set_machine(src)
@@ -463,12 +464,13 @@
 
 					if((diceroll >= DICE_SUCCESS) || (!attributes && prob(35)))
 						looping = FALSE
+						set_heartattack(FALSE)
+						target.emote("breathgasp")
+						target.adjust_jitter(100 SECONDS)
 						if(target.revive())
 							target.grab_ghost(TRUE)
 							target.visible_message(span_warning("<b>[target]</b> limply spasms their muscles."), \
-											span_userdanger("My muscles spasm as i am brought back to life!"))
-							target.emote("breathgasp")
-							target.adjust_jitter(100 SECONDS)
+											span_userdanger("My muscles spasm as I am brought back to life!"))
 							add_abstract_elastic_data(ELASCAT_MEDICAL, ELASDATA_CPR_REVIVE, 1)
 							target.apply_status_effect(/datum/status_effect/debuff/revive)
 							record_round_statistic(STATS_CPR_REVIVALS, 1)
@@ -477,8 +479,6 @@
 							 * Aiming for points (0, 15) (30, 10) (50, 5)
 							 */
 							they_heart.applyOrganDamage(15 * (NUM_E ** (-0.022 * medical_skill)), they_heart.high_threshold)
-						else
-							to_chat(src, span_warning("[target] isn't responding to my resuscitation..."))
 	while (looping)
 
 /mob/living/carbon/human/cuff_resist(obj/item/I, breakouttime = 1 MINUTES, cuff_break = 0, instant = FALSE)
@@ -666,7 +666,7 @@
 
 /mob/living/carbon/human/is_literate()
 	if(mind)
-		if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/reading) > 0)
+		if(GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/educated/reading) > 0)
 			return TRUE
 		else
 			return FALSE
@@ -791,6 +791,8 @@
 
 //src is the user that will be carrying, target is the mob to be carried
 /mob/living/carbon/human/proc/can_piggyback(mob/living/carbon/target)
+	if(HAS_TRAIT(target, TRAIT_MOVE_FLYING) || HAS_TRAIT(target, TRAIT_MOVE_FLOATING))
+		return FALSE
 	return istype(target) && target.stat == CONSCIOUS
 
 /mob/living/carbon/human/proc/can_be_firemanned(mob/living/target)
@@ -799,6 +801,9 @@
 /mob/living/carbon/human/proc/fireman_carry(mob/living/carbon/target)
 	if(!can_be_firemanned(target) || incapacitated(IGNORE_GRAB))
 		to_chat(src, span_warning("I can't fireman carry [target] while [target.p_they()] [target.p_are()] standing!"))
+		return
+	if(HAS_TRAIT(src, TRAIT_MOVE_FLYING) || HAS_TRAIT(src, TRAIT_MOVE_FLOATING))
+		to_chat(src, span_warning("I can't fireman carry [target] while I am flying."))
 		return
 
 	var/carrydelay = 5 SECONDS //if you have latex you are faster at grabbing
@@ -1101,6 +1106,7 @@
 		return
 
 	message_admins("[ADMIN_LOOKUPFLW_PP(src)] is a [mind.assigned_role.get_informed_title(src)] and has been disconnected for more than 30 seconds!")
+	log_admin("[key_name(src)] is a [mind.assigned_role.get_informed_title(src)] and has been disconnected for more than 30 seconds.")
 
 /mob/living/carbon/human/nobles_seen_servant_work()
 	if(!is_servant_job(mind.assigned_role))
@@ -1120,7 +1126,7 @@
 
 //OVERRIDE IGNORING PARENT RETURN VALUE
 /mob/living/carbon/human/updatehealth(amount)
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return
 	var/total_burn	= 0
 //	var/total_brute	= 0

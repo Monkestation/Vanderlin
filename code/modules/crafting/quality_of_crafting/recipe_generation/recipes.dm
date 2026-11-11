@@ -606,8 +606,6 @@
 	var/list/specials = list()
 	if(embed_chance)
 		specials += "Can embed weapons ([embed_chance]% chance)"
-	if(werewolf_infection_probability)
-		specials += "Can cause werewolf infection ([werewolf_infection_probability]% chance)"
 	if(qdel_on_droplimb)
 		specials += "Removed when limb is severed"
 	data["special_props"] = specials
@@ -768,6 +766,9 @@
 	data["type"] = "chemical_reaction"
 	data["name"] = name
 	data["category"] = "Chemistry"
+	if(length(results))
+		var/datum/reagent/first_result = results[1]
+		data["desc"] = first_result?.description
 
 	// Results: list(reagent_type_path = unit_amount)
 	var/list/result_list = list()

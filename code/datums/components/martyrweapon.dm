@@ -4,7 +4,7 @@
 
 /datum/component/martyr_weapon
 	/// Areas in which activation is allowed
-	var/list/allowed_areas = list(/area/indoors/town/church/chapel)
+	var/list/allowed_areas = list(/area/indoors/town/church/chapel, /area/indoors/town/church, /area/outdoors/exposed/church, /area/outdoors/exposed/church/graveyard, /area/indoors/town/church/crypt)
 	/// Patrons which are allowed to hold
 	var/list/allowed_patrons = list(/datum/patron/divine/ravox)
 	/// Jobs which are allowed to hold

@@ -7,6 +7,7 @@
 	cast_range = 12
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 
 	invocation = "MAGIC MISSILE!!!"
 	invocation_type = INVOCATION_SHOUT

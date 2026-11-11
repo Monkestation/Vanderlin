@@ -20,7 +20,7 @@
 
 	armor_type = /datum/armor/minimal
 	prevent_crits = list(BCLASS_TWIST)
-	max_integrity = INTEGRITY_POOR
+	max_integrity = INTEGRITY_OLD_POOR
 
 /obj/item/clothing/shirt/robe/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -34,7 +34,7 @@
 /obj/item/clothing/shirt/robe/colored/black
 	color = CLOTHING_DARK_INK
 
-/obj/item/clothing/shirt/robe/colored/red//placeholder for xylix acolyte robes
+/obj/item/clothing/shirt/robe/colored/red
 	color = CLOTHING_WINESTAIN_RED
 
 /obj/item/clothing/shirt/robe/colored/purple
@@ -71,15 +71,6 @@
 	icon_state = "nocrobe"
 	sleeved = null
 
-//someone should make sure the necromancer robe gets dwarf and child sprites
-/obj/item/clothing/shirt/robe/necromancer
-	name = "necromancer robes"
-	desc = "Eerie black garb of death."
-	icon_state = "warlock"
-	allowed_ages = ALL_AGES_LIST
-	allowed_race = SPECIES_BASE_BODY
-	sleeved = null
-
 /obj/item/clothing/shirt/robe/dendor
 	name = "briar robe"
 	desc = "Nature nurtures us and we, in turn, will nurture it back in the end."
@@ -110,6 +101,7 @@
 	desc = "Holy vestments sanctified by divine hands. Caution is advised if not a faithful."
 	icon_state = "priestrobe"
 	dropshrink = 0.8
+	examine_highlight_type = /datum/examine_highlight/divine/priest
 
 /obj/item/clothing/shirt/robe/priest/pickup(mob/living/user)
 	if((user.job != JOB_PRIEST) && (user.job != JOB_PRIEST_FEM))
@@ -131,21 +123,38 @@
 	color = pick(CLOTHING_BERRY_BLUE, CLOTHING_SPRING_GREEN, CLOTHING_TARAXACUM_YELLOW, CLOTHING_WINESTAIN_RED)
 	. = ..()
 
+/obj/item/clothing/shirt/robe/colored/blood
+	color = COLOR_BLOOD_MAGIC
+
+/obj/item/clothing/shirt/robe/bloodweave
+	name = "bloodweave robe"
+	desc = "A seemingly plain robe woven with bloodsteel threads. It radiates a sinister aura."
+	armor_type = /datum/armor/robe/bloodweave
+	prevent_crits = CUT_AND_MINOR_CRITS
+	max_integrity = 250
+	color = COLOR_BLOOD_MAGIC
+	misc_flags = CRAFTING_TEST_EXCLUDE
+	examine_highlight_type = /datum/examine_highlight/heresy_suspicious/bloodmagic
+
+/obj/item/clothing/shirt/robe/bloodweave/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/bloodcurse)
+
 /obj/item/clothing/shirt/robe/wizard
 	name = "wizard's robe"
 	desc = "What wizard's ensemble would be complete without robes?"
 	icon_state = "wizardrobes"
 
 /obj/item/clothing/shirt/robe/magus
-	name = "magus's robe"
-	desc = "A dark padded robe worn by only the most mysterious of mages, the magi."
+	name = "magus robe"
+	desc = "A dark padded robe gilded with golden thread. Worn by only the most mysterious of mages, the magi."
 	icon_state = "warlock"
-	allowed_sex = list(MALE)
 	allowed_race = SPECIES_BASE_BODY
 
 	armor_type = /datum/armor/robe/magus
-	prevent_crits = list(BCLASS_CUT, BCLASS_TWIST)
+	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = 200
+	sleeved = null
 
 /obj/item/clothing/shirt/robe/merchant
 	name = "guilder jacket"

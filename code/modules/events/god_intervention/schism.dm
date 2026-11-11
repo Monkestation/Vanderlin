@@ -179,7 +179,6 @@ GLOBAL_LIST_EMPTY(tennite_schisms)
 			C.passive_devotion_gain = 1
 			C.passive_progression_gain = 1
 			START_PROCESSING(SSprocessing, C)
-		add_verb(selected_priest, /mob/living/carbon/human/proc/devotionreport)
 		add_verb(selected_priest, /mob/living/carbon/human/proc/clericpray)
 		selected_priest.give_priest_verbs(coronate = FALSE, penance = FALSE)
 

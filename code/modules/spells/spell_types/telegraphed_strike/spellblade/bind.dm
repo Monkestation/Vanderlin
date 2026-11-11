@@ -12,6 +12,7 @@
 	self_cast_possible = TRUE
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_IMBUE
 	spell_cost = 40
 
@@ -31,7 +32,7 @@
 		return FALSE
 
 	var/obj/item/weapon = H.get_active_held_item()
-	if(!weapon)
+	if(!istype(weapon))
 		// Empty hands - unbind current weapon if one exists
 		var/datum/status_effect/buff/arcyne_momentum/unbind_M = H.has_status_effect(/datum/status_effect/buff/arcyne_momentum)
 		if(unbind_M?.bound_weapon && !QDELETED(unbind_M.bound_weapon))

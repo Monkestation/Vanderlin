@@ -21,14 +21,14 @@
 
 /datum/loadout_item/pearlcross
 	name = "Pearl Cross"
-	item_path = /obj/item/clothing/neck/psycross/pearl
+	item_path = /obj/item/clothing/neck/psycross/pearl/loadout
 	ui_category = "Neck"
 
 	triumph_cost_permanent = 50
 
 /datum/loadout_item/bpearl
 	name = "Blue Pearl Cross"
-	item_path = /obj/item/clothing/neck/psycross/bpearl
+	item_path = /obj/item/clothing/neck/psycross/bpearl/loadout
 	ui_category = "Neck"
 
 	triumph_cost_permanent = 50
@@ -103,6 +103,13 @@
 
 	triumph_cost_permanent = 5
 
+/datum/loadout_item/psydon_cross_gold
+	name = "Golden Psycross"
+	item_path = /obj/item/clothing/neck/psycross/gold
+	ui_category = "Neck"
+
+	triumph_cost_permanent = 150
+
 /datum/loadout_item/psydon_cross
 	name = "Silver Psycross"
 	item_path = /obj/item/clothing/neck/psycross/silver
@@ -113,6 +120,20 @@
 /datum/loadout_item/psydon_cross_wood
 	name = "Wooden Psycross"
 	item_path = /obj/item/clothing/neck/psycross
+	ui_category = "Neck"
+
+	triumph_cost_permanent = 5
+
+/datum/loadout_item/pantheon_cross
+	name = "Amulet of The Ten"
+	item_path = /obj/item/clothing/neck/psycross/silver/divine
+	ui_category = "Neck"
+
+	triumph_cost_permanent = 100
+
+/datum/loadout_item/pantheon_cross_wood
+	name = "Wooden Amulet of The Ten"
+	item_path = /obj/item/clothing/neck/psycross/divine
 	ui_category = "Neck"
 
 	triumph_cost_permanent = 5

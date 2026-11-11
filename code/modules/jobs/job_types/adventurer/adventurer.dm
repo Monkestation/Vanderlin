@@ -14,7 +14,6 @@ GLOBAL_VAR_INIT(adventurer_hugbox_duration_still, 3 MINUTES)
 	factions = list(FACTION_FOREIGNERS)
 	total_positions = 14
 	spawn_positions = 14
-	bypass_lastclass = TRUE
 
 	allowed_races = RACES_PLAYER_ALL
 	blacklisted_species = list(SPEC_ID_HALFLING)

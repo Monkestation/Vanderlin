@@ -1,24 +1,24 @@
 /datum/attribute_holder/sheet/job/pilgrim/blacksmith
 	attribute_variance = list(
-		/datum/attribute/skill/misc/swimming = list(0, 10),
 		/datum/attribute/skill/craft/crafting = list(10, 20),
 		/datum/attribute/skill/craft/masonry = list(10, 20),
 		/datum/attribute/skill/craft/carpentry = list(10, 20)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_ENDURANCE = 1,
+		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/engineering = 30,
 		/datum/attribute/skill/craft/traps = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/craft/blacksmithing = 30,
 		/datum/attribute/skill/craft/armorsmithing = 30,
@@ -28,25 +28,25 @@
 
 /datum/attribute_holder/sheet/job/pilgrim/blacksmith/old
 	attribute_variance = list(
-		/datum/attribute/skill/misc/swimming = list(0, 10),
 		/datum/attribute/skill/craft/crafting = list(10, 20),
 		/datum/attribute/skill/craft/masonry = list(10, 20),
 		/datum/attribute/skill/craft/carpentry = list(10, 20)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,
-		STAT_ENDURANCE = 1,
+		STAT_ENDURANCE = 2,
 		STAT_CONSTITUTION = 1,
 		STAT_SPEED = -1,
 		/datum/attribute/skill/combat/swords = 10,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/engineering = 30,
 		/datum/attribute/skill/craft/traps = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/craft/blacksmithing = 40,
 		/datum/attribute/skill/craft/armorsmithing = 30,
@@ -60,7 +60,7 @@
 	to ceaselessly toil in dedication to Malum."
 	allowed_sexes = list(MALE, FEMALE)
 	outfit = /datum/outfit/pilgrim/blacksmith
-	category_tags = list(CTAG_PILGRIM)
+	category_tags = list(CTAG_PILGRIM, CTAG_VAMP_PILGRIM)
 	apprentice_name = "Blacksmith Apprentice"
 	cmode_music = 'sound/music/cmode/towner/CombatBeggar.ogg'
 

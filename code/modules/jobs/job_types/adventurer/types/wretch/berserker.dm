@@ -57,8 +57,8 @@
 
 	switch(choice)
 		if("MY BARE HANDS!!!")
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/unarmed, 20)
-			spawned.adjust_skill_level(/datum/attribute/skill/combat/knives, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/unarmed, 20, 50)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 40, 40)
 			spawned.add_spell(/datum/action/innate/clench_fists, TRUE)
 			ADD_TRAIT(spawned, TRAIT_CLOSECOMBAT, JOB_TRAIT)
 			spawned.mind.special_items["My Gloves"] = /obj/item/clothing/gloves/bandages/pugilist
@@ -88,5 +88,5 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1,
 		/obj/item/rope/chain = 1,
 		/obj/item/weapon/scabbard/knife = 1,
-		/obj/item/reagent_containers/glass/bottle/stronghealthpot = 1
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1
 	)

@@ -61,6 +61,13 @@
 	// ~shit that got embedded on this injury
 	var/list/embedded_objects
 
+	/// Werewolf infection probability for bites on this wound
+	var/werewolf_infection_probability = 0
+	/// Time taken until werewolf infection comes in
+	var/werewolf_infection_time = 2 MINUTES
+	/// Actual infection timer
+	var/werewolf_infection_timer = null
+
 /datum/injury/New(our_damage)
 	. = ..()
 	created = world.time
@@ -74,11 +81,17 @@
 		damage = our_damage
 		init_stage(damage)
 
+	if(werewolf_infection_probability)
+		werewolf_infect_attempt()
+
 /datum/injury/Destroy()
 	if(parent_bodypart)
 		remove_from_bodypart()
 	if(parent_mob)
 		remove_from_mob()
+	if(werewolf_infection_timer)
+		deltimer(werewolf_infection_timer)
+		werewolf_infection_timer = null
 	embedded_objects = null
 	return ..()
 
@@ -142,6 +155,9 @@
 
 //increase or decrease infection
 /datum/injury/proc/adjust_germ_level(add_germs, minimum_germs = 0, maximum_germs = INFECTION_LEVEL_THREE)
+	if(add_germs > 0)
+		if(parent_mob?.getorgan(ORGAN_SLOT_ZOMBIE))
+			add_germs = round(add_germs * 1.5, 1)
 	germ_level = clamp(germ_level + add_germs, minimum_germs, maximum_germs)
 
 //makes the injury get infected more when the victim is moving around
@@ -373,15 +389,19 @@
 	injury_flags &= ~INJURY_BANDAGED
 	return TRUE
 
-/datum/injury/proc/is_bleeding()
+/datum/injury/proc/is_bleeding(ignore_bandage = FALSE)
 	if(!CAN_HAVE_BLOOD(parent_mob))
 		return
 
 	for(var/obj/item/item as anything in embedded_objects)
 		if(item.w_class >= WEIGHT_CLASS_SMALL)
 			return FALSE
+	if(!ignore_bandage && is_bandaged())
+		return FALSE
+	if(is_sutured())
+		return FALSE
 
-	if(is_bandaged() || is_sutured())
+	if(HAS_TRAIT(parent_mob, TRAIT_SUSPENDED_BLEED))
 		return FALSE
 
 	if(required_status & BODYPART_ROBOTIC)
@@ -389,10 +409,12 @@
 
 	return (damage_per_injury() > bleed_threshold)
 
-/datum/injury/proc/get_bleed_rate(ignore_is_bleeding = FALSE)
+/datum/injury/proc/get_bleed_rate(ignore_bandage = FALSE)
 	if(!CAN_HAVE_BLOOD(parent_mob))
 		return 0
-	if(!ignore_is_bleeding && !is_bleeding())
+	if(HAS_TRAIT(parent_mob, TRAIT_SUSPENDED_BLEED))
+		return 0
+	if(!is_bleeding(ignore_bandage))
 		return 0
 	var/bad_embeddies = 0
 	for(var/obj/item/item in embedded_objects)
@@ -426,3 +448,41 @@
 	if((damage_type == WOUND_BURN) || (damage_type == WOUND_INTENSE_BURN))
 		other_mod = SHOCK_MOD_BURN
 	return damage * pain_modifier * other_mod
+
+/datum/injury/proc/werewolf_infect_attempt()
+	if(QDELETED(src) || QDELETED(parent_mob))
+		return FALSE
+	if(werewolf_infection_timer || !ishuman(parent_mob) || !prob(werewolf_infection_probability*amount))
+		return
+	var/mob/living/carbon/human/human_owner = parent_mob
+	if(!human_owner.can_werewolf())
+		return
+	if(human_owner.stat >= DEAD) //forget it
+		return
+	var/static/list/silver_items = list(
+		/obj/item/clothing/neck/psycross/silver,
+		/obj/item/clothing/neck/silveramulet
+	)
+	if(is_type_in_list(human_owner.wear_wrists, silver_items) || is_type_in_list(human_owner.wear_neck, silver_items))
+		if(prob(50))
+			return
+	to_chat(human_owner, span_danger("I feel horrible... REALLY horrible..."))
+	MOBTIMER_SET(human_owner, MT_PUKE)
+	werewolf_infection_timer = addtimer(CALLBACK(src, PROC_REF(wake_werewolf)), werewolf_infection_time, TIMER_STOPPABLE)
+	return TRUE
+
+/datum/injury/proc/wake_werewolf()
+	if(QDELETED(src) || QDELETED(parent_mob))
+		return FALSE
+	if(!ishuman(parent_mob))
+		return FALSE
+	var/mob/living/carbon/human/human_owner = parent_mob
+	var/datum/antagonist/werewolf/wolfy = human_owner.werewolf_check()
+	if(!wolfy)
+		return FALSE
+	werewolf_infection_timer = null
+	human_owner.flash_fullscreen("redflash3")
+	to_chat(human_owner, span_danger("It hurts... Is this really the end for me?"))
+	human_owner.emote("scream") // heres your warning to others bro
+	human_owner.Knockdown(1)
+	return wolfy

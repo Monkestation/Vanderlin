@@ -4,7 +4,7 @@
 		if(SSmapping.level_has_any_trait(turf.z, list(ZTRAIT_MATTHIOS_DUNGEON)))
 			add_faction(FACTION_MATTHIOS)
 		if(SSterrain_generation.get_island_at_location(turf))
-			add_faction("islander")
+			add_faction(FACTION_ISLAND)
 	. = ..()
 	if(initial_size != RESIZE_DEFAULT_SIZE)
 		update_transform(initial_size)
@@ -409,10 +409,16 @@
 /mob/living/carbon/proc/kick_attack_check(mob/living/L)
 	if(L == src)
 		return FALSE
+	if(ishuman(src) && ishuman(L))
+		var/mob/living/carbon/human/kicked = src
+		var/mob/living/carbon/human/kicker = L
+		if(((kicked.dna?.species.id in SPECIES_SHORTIES) || kicked.age == AGE_CHILD || HAS_TRAIT(kicked, TRAIT_TINY)) && !((kicker.dna?.species.id in SPECIES_SHORTIES) || kicker.age == AGE_CHILD || HAS_TRAIT(kicker, TRAIT_TINY)))
+			return TRUE
 	if(body_position == LYING_DOWN)
 		return TRUE
 	if(HAS_TRAIT(L, TRAIT_CLOSECOMBAT))
 		return TRUE
+
 	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
 	if( !(check_zone(L.zone_selected) in acceptable) )
 		to_chat(L, "<span class='warning'>I can't reach that.</span>")
@@ -422,6 +428,15 @@
 /mob/living/carbon/proc/lying_attack_check(mob/living/L, obj/item/I)
 	if(L == src)
 		return TRUE
+	var/short_attacker = FALSE
+	var/short_victim = FALSE
+	if(ishuman(src) && ishuman(L))
+		var/mob/living/carbon/human/attacked = src
+		var/mob/living/carbon/human/attacker = L
+		if((attacked.dna?.species.id in SPECIES_SHORTIES) || attacked.age == AGE_CHILD || HAS_TRAIT(attacked, TRAIT_TINY))
+			short_victim = TRUE
+		if((attacker.dna?.species.id in SPECIES_SHORTIES) || attacker.age == AGE_CHILD || HAS_TRAIT(attacker, TRAIT_TINY))
+			short_attacker = TRUE
 
 	var/CZ = FALSE
 	var/list/acceptable = list(BODY_ZONE_L_LEG, BODY_ZONE_R_LEG, BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_L_ARM)
@@ -429,14 +444,14 @@
 		if(I)
 			if(I.wlength > WLENGTH_NORMAL)
 				CZ = TRUE
-			else if(HAS_TRAIT(L, TRAIT_TINY) && !HAS_TRAIT(src, TRAIT_TINY)) //midget variant, allows neck no head
-				acceptable = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_PRECISE_R_HAND,BODY_ZONE_PRECISE_L_HAND,BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_NECK, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
-			else if(!HAS_TRAIT(L, TRAIT_TINY)) //we have a short/medium weapon, so allow hitting legs
+			else if(short_attacker && !short_victim) //midget variant, no neck as you any misses will hit head either way
+				acceptable = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_PRECISE_R_HAND,BODY_ZONE_PRECISE_L_HAND,BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_CHEST, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
+			else if(!short_attacker) //we have a short/medium weapon, so allow hitting legs
 				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 		else
-			if(HAS_TRAIT(L, TRAIT_TINY) && !HAS_TRAIT(src, TRAIT_TINY)  && (!CZ)) //tiny punches
+			if(short_attacker && !short_victim  && (!CZ)) //tiny punches
 				acceptable = list(BODY_ZONE_R_ARM,BODY_ZONE_L_ARM,BODY_ZONE_PRECISE_R_HAND,BODY_ZONE_PRECISE_L_HAND,BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_CHEST, BODY_ZONE_R_LEG, BODY_ZONE_L_LEG, BODY_ZONE_PRECISE_R_FOOT, BODY_ZONE_PRECISE_L_FOOT)
-			else if(!HAS_TRAIT(L, TRAIT_TINY) && (!CZ)) //we are punching, no legs
+			else //we are punching, no legs
 				acceptable = list(BODY_ZONE_HEAD, BODY_ZONE_PRECISE_MOUTH, BODY_ZONE_R_ARM, BODY_ZONE_CHEST, BODY_ZONE_PRECISE_GROIN, BODY_ZONE_PRECISE_STOMACH, BODY_ZONE_PRECISE_R_HAND, BODY_ZONE_PRECISE_L_HAND, BODY_ZONE_L_ARM, BODY_ZONE_PRECISE_NECK, BODY_ZONE_PRECISE_R_EYE,BODY_ZONE_PRECISE_L_EYE, BODY_ZONE_PRECISE_EARS, BODY_ZONE_PRECISE_SKULL, BODY_ZONE_PRECISE_NOSE, BODY_ZONE_PRECISE_MOUTH)
 	else if(L.body_position == LYING_DOWN && (body_position != LYING_DOWN)) //we are prone, victim is standing
 		if(I)
@@ -451,11 +466,11 @@
 		CZ = TRUE
 	if(CZ)
 		if( !(check_zone(L.zone_selected) in acceptable) )
-			to_chat(L, "<span class='warning'>I can't reach that.</span>")
+			to_chat(L, span_danger("I can't reach that."))
 			return FALSE
 	else
 		if( !(L.zone_selected in acceptable) )
-			to_chat(L, "<span class='warning'>I can't reach that.</span>")
+			to_chat(L, span_danger("I can't reach that."))
 			return FALSE
 	return TRUE
 
@@ -953,7 +968,7 @@
 	health = min(new_value, maxHealth)
 
 /mob/living/proc/updatehealth(amount = 0)
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return
 	set_health(maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss())
 	if(CAN_HAVE_BLOOD(src) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
@@ -1035,6 +1050,8 @@
 	// Reapply arcyne momentum if this mind had it before death
 	if(HAS_MIND_TRAIT(src, TRAIT_ARCYNE_MOMENTUM) && !has_status_effect(/datum/status_effect/buff/arcyne_momentum))
 		apply_status_effect(/datum/status_effect/buff/arcyne_momentum)
+	if(HAS_MIND_TRAIT(src, TRAIT_BLOOD_BIND) && !has_status_effect(/datum/status_effect/buff/blood_bound))
+		apply_status_effect(/datum/status_effect/buff/blood_bound)
 
 	// The signal is called after everything else so components can properly check the updated values
 	SEND_SIGNAL(src, COMSIG_LIVING_REVIVE, full_heal_flags)
@@ -1087,8 +1104,8 @@
 		setShockStage(0, FALSE, TRUE)
 
 	if(heal_flags & HEAL_ESSENTIALS)
-		set_nutrition(NUTRITION_LEVEL_FED + 50)
-		set_hydration(HYDRATION_LEVEL_HYDRATED + 50)
+		set_nutrition(NUTRITION_LEVEL_WELL_FED)
+		set_hydration(HYDRATION_LEVEL_WELL_HYDRATED)
 
 	set_disgust(0)
 	cure_husk()
@@ -1308,6 +1325,14 @@
 		stop_attack(FALSE)
 
 	SEND_SIGNAL(src, COMSIG_LIVING_RESIST, src)
+
+	if(has_status_effect(/datum/status_effect/debuff/blood_choke/herald))
+		to_chat(src, span_bloody("I attempt to free myself from the grip of blood magic."))
+		if(do_after(src, 3.5 SECONDS, src))
+			to_chat(src, span_bloody("I successfully escape death's grasp!"))
+			remove_status_effect(/datum/status_effect/debuff/blood_choke/herald)
+		return
+
 	//resisting grabs (as if it helps anyone...)
 	if(!HAS_TRAIT(src, TRAIT_RESTRAINED) && pulledby)
 		log_combat(src, pulledby, "resisted grab")
@@ -1948,7 +1973,7 @@
  * Returns a mob (what our mob turned into) or null (if we failed).
  */
 /mob/living/proc/wabbajack(what_to_randomize, change_flags = WABBAJACK)
-	if(stat == DEAD || (status_flags & GODMODE) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
+	if(stat == DEAD || HAS_TRAIT(src, TRAIT_GODMODE) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 
 	if(SEND_SIGNAL(src, COMSIG_LIVING_PRE_WABBAJACKED, what_to_randomize) & STOP_WABBAJACK)
@@ -2245,8 +2270,12 @@
 			var/datum/component/storage = item.GetComponent(/datum/component/storage)
 			if(storage)
 				pickable_items |= item
-		var/obj/item/picked = input(src, "What bag do you want to crawl into?") as null|anything in pickable_items
+		var/obj/item/picked = tgui_input_list(src, "What do you want to crawl into?", "Target Item", pickable_items, timeout = 20 SECONDS)
 		if(!picked)
+			return
+		if(stat == DEAD || !Adjacent(over))
+			return
+		if(incapacitated())
 			return
 		var/obj/item/mob_holder/holder = new(get_turf(src), src)
 		visible_message(span_warning("[src] starts to climb into [picked] on [over]."), span_warning("You start to climb into [picked] on [over]."))
@@ -2592,7 +2621,7 @@
 	var/looktime = 5 SECONDS - (GET_MOB_ATTRIBUTE_VALUE(src, STAT_PERCEPTION) * 2)
 	if(has_quirk(/datum/quirk/boon/keen_eye))
 		looktime *= 0.25
-	if(HAS_TRAIT(src, TRAIT_KEENEYES))
+	if(HAS_TRAIT(src, TRAIT_KEENEYES) || HAS_TRAIT(src, TRAIT_DEVIL_MARKED_ABRAXAS))
 		looktime *= 0.25
 	if(do_after(src, looktime))
 		// var/huhsneak
@@ -2815,6 +2844,13 @@
 	reset_perspective(looking_holder)
 	update_cone_show()
 	on_looking_z_level_change(get_turf(src), below_turf)
+
+/// Whether the mob's client is currently viewing through a vertical look (up/down) holder
+/mob/proc/is_looking_vertically()
+	return FALSE
+
+/mob/living/is_looking_vertically()
+	return looking_vertically != NONE && client?.eye == looking_holder
 
 /mob/living/proc/look_further(turf/T)
 	if(looking_vertically)
@@ -3122,7 +3158,7 @@
 	reset_technique_mastery_points(silent)
 	reset_form_mastery_points(silent)
 
-/mob/living/proc/offer_item(mob/living/offered_to, obj/offered_item)
+/mob/living/proc/offer_item(mob/living/offered_to, obj/item/offered_item)
 	if(isnull(offered_to) || isnull(offered_item))
 		stack_trace("no offered_to or offered_item in offer_item()")
 		return FALSE
@@ -3140,7 +3176,7 @@
 	if(stealthy)
 		to_chat(src, span_notice("I secretly offer [offered_item] to [offered_to]."))
 		to_chat(offered_to, span_notice("[offered_to] secretly offers [offered_item] to me..."))
-	else
+	else if(!offered_item.on_offer(src, offered_to))
 		visible_message(
 			span_notice("[src] offers [offered_item] to [offered_to] with an outstretched hand."), \
 			span_notice("I offer [offered_item] to [offered_to] with an outstretched hand."), \

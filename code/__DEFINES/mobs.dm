@@ -79,6 +79,7 @@
 #define BODYPART_DISABLED_WOUND 3 //bone fracture
 #define BODYPART_DISABLED_ROT 4 //limb is rotten oh nooo
 #define BODYPART_DISABLED_CLAMPED 5 //limb is clamped by a hemostat or speculum
+#define BODYPART_DISABLED_TOURNIQUET 6
 
 #define DEFAULT_BODYPART_ICON_ORGANIC 'icons/mob/human_parts_greyscale.dmi'
 
@@ -179,21 +180,25 @@
 #define NUTRITION_LEVEL_FAT 800
 #define NUTRITION_LEVEL_WELL_FED 700
 #define NUTRITION_LEVEL_FED 500
+#define NUTRITION_LEVEL_PECKISH	400
 #define NUTRITION_LEVEL_HUNGRY 350
+#define NUTRITION_LEVEL_VERY_HUNGRY 225
 #define NUTRITION_LEVEL_STARVING 100
 
 #define HYDRATION_LEVEL_FULL 1000
 #define HYDRATION_LEVEL_WATER_LOGGED 850
-#define HYDRATION_LEVEL_HYDRATED 700
-#define HYDRATION_LEVEL_SMALLTHIRST 600
+#define HYDRATION_LEVEL_WELL_HYDRATED 700
+#define HYDRATION_LEVEL_HYDRATED 600
+#define HYDRATION_LEVEL_SMALLTHIRST	400
 #define HYDRATION_LEVEL_THIRSTY 350
+#define NUTRITION_LEVEL_VERY_THIRSTY 225
 #define HYDRATION_LEVEL_DEHYDRATED 100
 
-#define NUTRITION_LEVEL_START_MIN 500
-#define NUTRITION_LEVEL_START_MAX 900
+#define NUTRITION_LEVEL_START_MIN NUTRITION_LEVEL_FED
+#define NUTRITION_LEVEL_START_MAX NUTRITION_LEVEL_WELL_FED
 
-#define HYDRATION_LEVEL_START_MIN 600
-#define HYDRATION_LEVEL_START_MAX 900
+#define HYDRATION_LEVEL_START_MIN HYDRATION_LEVEL_HYDRATED
+#define HYDRATION_LEVEL_START_MAX HYDRATION_LEVEL_WELL_HYDRATED
 
 //Disgust levels for humans
 #define DISGUST_LEVEL_MAXEDOUT 150
@@ -315,10 +320,6 @@
 #define OFFSET_ARMOR "wear_armor"
 #define OFFSET_UNDIES "underwear"
 
-/// Base factor at which mob nutrition decreases
-#define HUNGER_FACTOR		0.2
-/// Base Factor at which mob hydration decreases
-#define THIRST_FACTOR 0.05
 #define	HYGIENE_FACTOR  	0.05  //factor at which hygiene decreases
 #define ETHEREAL_CHARGE_FACTOR	0.12 //factor at which ethereal's charge decreases
 #define REAGENTS_METABOLISM 1	//How many units of reagent are consumed per tick, by default.
@@ -384,9 +385,9 @@
 
 // recent examine defines
 /// How long it takes for an examined atom to be removed from recent_examines. Should be the max of the below time windows
-#define RECENT_EXAMINE_MAX_WINDOW (1.5 SECONDS)
+#define RECENT_EXAMINE_MAX_WINDOW (2 SECONDS)
 /// If you examine the same atom twice in this timeframe, we call examine_more() instead of examine()
-#define EXAMINE_MORE_WINDOW (0.75 SECONDS)
+#define EXAMINE_MORE_WINDOW (1 SECONDS)
 /// If you yawn while someone nearby has examined you within this time frame, it will force them to yawn as well. Tradecraft!
 #define YAWN_PROPAGATION_EXAMINE_WINDOW (1.5 SECONDS)
 

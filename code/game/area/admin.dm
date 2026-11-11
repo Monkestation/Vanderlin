@@ -1,3 +1,10 @@
+/area/indoors/admin_test
+	name = "Testing Zone"
+
+/area/outdoors/admin_test
+	name = "Testing Zone (Outdoors)"
+
+
 /area/indoors/town/church/dreamcave
 	name = "The Dream Cave"
 	icon = 'icons/turf/areas/manor.dmi'

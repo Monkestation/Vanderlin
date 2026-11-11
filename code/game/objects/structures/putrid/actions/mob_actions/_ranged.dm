@@ -111,6 +111,6 @@
 
 	// Set up click ability and fire
 	set_click_ability(mob)
-	var/result = InterceptClickOn(mob, "[MIDDLE_CLICK]=1", target)
+	var/result = InterceptClickOn(mob, list(MIDDLE_CLICK), target)
 	unset_click_ability(mob, refund_cooldown = !result)
 	return result

@@ -18,10 +18,11 @@
 	current_blood = 20
 	blood_req = 1
 	oxygen_req = 2
-	nutriment_req = 2.4
-	hydration_req = 0.9
+	nutriment_req = 0.02
+	hydration_req = 0.01
 
-	var/blood_regen_factor = BLOOD_REGEN_FACTOR // how much blood the spleen regenerates per efficiency point, per 2 seconds
+	/// How much blood the spleen regenerates per efficiency point per second
+	var/blood_regen_factor = BLOOD_REGEN_FACTOR
 
 /obj/item/organ/spleen/on_owner_examine(datum/source, mob/user, list/examine_list)
 	if(!ishuman(owner))

@@ -3,7 +3,8 @@
 	desc = "Steel plate armor with shoulder guards. An incomplete, bulky set of excellent armor."
 	icon_state = "halfplate"
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel_slag
+	melt_amount = 100
+	melting_material = /datum/material/steel
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 4 SECONDS
 	equip_sound = 'sound/foley/equip/equip_armor_plate.ogg'
@@ -15,7 +16,7 @@
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS //Has shoulder guards, and nothing else to suggest leg protection
 	prevent_crits = ALL_EXCEPT_BLUNT
-	max_integrity = INTEGRITY_STRONGEST
+	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
 	stand_speed_reduction = 1.2
 	item_weight = 9 KILOGRAMS
 
@@ -28,10 +29,10 @@
 	desc = "Iron plate armor with shoulder guards. An incomplete, bulky set of good armor."
 	icon_state = "ihalfplate"
 	item_state = "ihalfplate"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
 
 /obj/item/clothing/armor/plate/iron/banded
 	name = "banded iron armor"
@@ -80,6 +81,7 @@
 	armor_type = /datum/armor/plate
 	body_parts_covered = COVERAGE_FULL
 	item_weight = 15 KILOGRAMS
+	melt_amount = 150
 
 
 /obj/item/clothing/armor/plate/full/samsibsa
@@ -107,10 +109,10 @@
 	icon_state = "iplate"
 	item_state = "iplate"
 	sellprice = VALUE_IRON_ARMOR*2
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STRONG
+	max_integrity = ARMOR_INT_CHEST_PLATE_IRON
 	item_weight = 15 KILOGRAMS
 
 //................ Rusted Half-plate ............... //
@@ -122,10 +124,10 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/rust_armor.dmi'
 	icon_state = "rustplate"
 	item_state = "rustplate"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/plate/bad
-	max_integrity = INTEGRITY_STANDARD
+	max_integrity = ARMOR_INT_CHEST_PLATE_DECREPIT
 	item_weight = 8.75 KILOGRAMS
 
 /obj/item/clothing/armor/plate/silver
@@ -149,11 +151,19 @@
 	icon = 'icons/roguetown/clothing/special/blkknight.dmi'
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
+	armor_type = /datum/armor/plate/blacksteel
+	max_integrity = ARMOR_INT_CHEST_PLATE_BLACKSTEEL
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	item_weight = 8 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 6
 	stand_speed_reduction = 1.05
+
+/obj/item/clothing/armor/plate/blkknight/lordly
+	name = "lordly plate"
+	desc ="A full, master-crafted ensemble of fine blacksteel, complete with arm, leg and groin protection, and worn with a heavy, indubitably stylish, fur-lined collar of genuine saigahair to boot. The latest battle-fashion amongst the high nobility of Psydonia."
+	icon_state = "lordly"
+	body_parts_covered = COVERAGE_FULL
 
 //................ Deccorated Half-plate ............... //
 
@@ -221,37 +231,50 @@
 
 
 //................ Zizo Armor ...............//
-
-/obj/item/clothing/armor/plate/full/zizo
-	name = "darksteel fullplate"
-	desc = "Full plate. Called forth from the edge of what should be known. In Her name."
-	icon_state = "zizoplate"
+/obj/item/clothing/armor/plate/full/inhumen
+	name = "BASE INHUMEN ARMOR"
+	abstract_type = /obj/item/clothing/armor/plate/full/inhumen
+	misc_flags = CRAFTING_TEST_EXCLUDE
 	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
+	icon_state = "zizoplate"
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // Incredibly evil Zizoid armor, this should be burnt, nobody wants this
+	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
+
+/obj/item/clothing/armor/plate/full/inhumen/zizo
+	name = "avantyne fullplate"
+	desc = "Full plate. Called forth from the edge of what should be known. In Her name."
+	icon_state = "zizoplate"
+	melting_material = /datum/material/avantyne
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_AVANTYNE
+
+/obj/item/clothing/armor/plate/full/inhumen/zizo/alt
+	name = "ribbed avantyne fullplate"
+	icon_state = "zizoplatechest_med"
 
 //................ Matthios Armor ...............//
 
-/obj/item/clothing/armor/plate/full/matthios
+/obj/item/clothing/armor/plate/full/inhumen/matthios
 	name = "gilded fullplate"
 	desc = "Full plate. Tales told of men in armor such as this stealing many riches, or lives."
 	icon_state = "matthiosarmor"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 //.............. Graggar Armor .................//
 
-/obj/item/clothing/armor/plate/full/graggar
+/obj/item/clothing/armor/plate/full/inhumen/graggar
 	name = "vicious full-plate"
 	desc = "A sinister set full plate. Untold violence stirs from within."
 	icon_state = "graggarplate"
-	icon = 'icons/roguetown/clothing/special/evilarmor.dmi'
-	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sleeved = 'icons/roguetown/clothing/special/onmob/evilarmor.dmi'
-	sellprice = 0 // See above comment
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
+
+//.............. Baotha Armor .................//
+
+/obj/item/clothing/armor/plate/full/inhumen/baotha
+	name = "saccharine full-plate"
+	desc = "A tantalizing set full plate, you almost feel like you can't take them off.."
+	icon_state = "baothaplate"
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 //.............. Silver Armor .................//
 
@@ -261,7 +284,7 @@
 	icon_state = "silverarmor"
 	allowed_ages = ALL_AGES_LIST //placeholder until younglings have onmob sprites for this item
 	armor_type = /datum/armor/plate/silver
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 15 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM * 3
 
@@ -330,4 +353,3 @@
 	boobed = FALSE
 	body_parts_covered = COVERAGE_ALL_BUT_LEGS
 	max_integrity = ARMOR_INT_CHEST_PLATE_STEEL
-	smeltresult = /obj/item/ingot/iron

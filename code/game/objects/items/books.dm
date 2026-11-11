@@ -30,6 +30,8 @@
 
 	base_icon_state = "basic_book"
 	var/open = FALSE
+	/// Whether or not this is locked to its state.
+	var/can_open = TRUE
 	var/dat				//Actual page content
 	var/due_date = 0	//Game time in 1/10th seconds
 	var/author			//Who wrote the thing, can be changed by pen or PC. It is not automatically assigned
@@ -144,7 +146,7 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 4, FALSE)
 		return
 	if(in_range(user, src) || isobserver(user))
 		if(!pages.len)
@@ -201,6 +203,8 @@
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
+	if(!can_open)
+		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
 	if(!open)
 		slot_flags &= ~ITEM_SLOT_HIP
 		open = TRUE
@@ -270,7 +274,7 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 4, FALSE)
 		return
 	if(in_range(user, src) || isobserver(user))
 		user.changeNext_move(CLICK_CD_MELEE)
@@ -706,7 +710,7 @@
 		return
 	if(!user.can_read(src))
 		to_chat(user, span_warning("I study [src], but this verba still eludes me..."))
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE) //?
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 4, FALSE) //?
 		return
 	if(!in_range(user, src) && !isobserver(user))
 		to_chat(user, span_warning("I am too far away to read [src]."))

@@ -15,7 +15,7 @@
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/climbing = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/athletics = 30
 	)
 
@@ -53,9 +53,9 @@
 	cloak = /obj/item/clothing/cloak/raincloak/colored/red
 	belt = /obj/item/storage/belt/leather/mercenary
 	beltr = /obj/item/weapon/sword
-	beltl = /obj/item/reagent_containers/glass/bottle/stronghealthpot
+	beltl = /obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled
 	backpack_contents = list(
 		/obj/item/storage/belt/pouch/coins/mid = 1,
-		/obj/item/reagent_containers/glass/bottle/healthpot = 3,
+		/obj/item/reagent_containers/glass/bottle/healthpot/labelled = 3,
 		/obj/item/weapon/knife/hunting = 1
 	)

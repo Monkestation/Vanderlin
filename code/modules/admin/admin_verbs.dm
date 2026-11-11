@@ -49,6 +49,7 @@ GLOBAL_PROTECT(admin_verbs_default)
 	/client/proc/manage_paintings,
 	/client/proc/ShowAllFamilies,
 	/datum/admins/proc/anoint_priest,
+	/client/proc/scan_health,
 	)
 GLOBAL_LIST_INIT(admin_verbs_admin, world.AVerbsAdmin())
 GLOBAL_PROTECT(admin_verbs_admin)
