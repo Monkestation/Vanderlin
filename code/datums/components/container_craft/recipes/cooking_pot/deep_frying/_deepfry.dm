@@ -25,6 +25,9 @@
 
 /datum/container_craft/cooking/egg_wash/poultry
 	name = "Egg Washed Bird Meat"
+	requirements = list(
+		/obj/item/reagent_containers/food/snacks/meat/poultry/cutlet = 1
+	)
 	output = /obj/item/reagent_containers/food/snacks/meat/poultry/cutlet/egg_washed
 
 /datum/container_craft/cooking/deep_fry
