@@ -15,7 +15,7 @@
 	cooldown_time = 20 SECONDS
 	spell_cost = 35
 
-	projectile_type = /obj/projectile/magic/energy/moonstrike
+	projectile_type = /obj/projectile/magic/moonstrike
 
 /datum/action/cooldown/spell/projectile/moonstrike/can_cast_spell(feedback)
 	. = ..()
@@ -23,7 +23,7 @@
 		return
 	return can_cast_lunar_magic(feedback)
 
-/obj/projectile/magic/energy/moonstrike
+/obj/projectile/magic/moonstrike
 	name = "moonstrike"
 	icon_state = "slash"
 	damage = 30

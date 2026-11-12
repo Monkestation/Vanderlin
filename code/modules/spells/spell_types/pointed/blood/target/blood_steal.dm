@@ -66,6 +66,12 @@
 		holder.maptext = MAPTEXT(tag)
 		holder.color = "#b11212"
 
+/datum/action/cooldown/spell/blood_steal/is_valid_target(atom/cast_on)
+	. = ..()
+	if(!ishuman(cast_on))
+		return FALSE
+	return TRUE
+
 /datum/action/cooldown/spell/blood_steal/cast(atom/cast_on)
 	. = ..()
 	if(!ishuman(cast_on) || !ishuman(owner))

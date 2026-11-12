@@ -95,3 +95,16 @@
       on
   - qol: Switched dumping handcart's contents to alt+click
   - qol: Added controls under the mechanics tab when examining the handcart
+2026-11-11:
+  realforest2001:
+  - bugfix: Fixes duplicate clan assignments
+  - bugfix: Fixes wretches retaining custom job titles from their previous job.
+  - bugfix: Fixed elemental primordials firing projectiles which don't do damage.
+  - rscadd: Vampire animal forms (Bat, Rat, Mist) now have inherent nightvision. Frog
+      loses out because Eora is a wimp.
+  - rscadd: Added Brother/Sister honorifics for Lunar Order personnel.
+  - code_imp: Updated typepath for some magical projectiles.
+  - bugfix: Fixed Adventurer Mage, Mercenary Mage and Archivist not having magic guidebook.
+  - bugfix: Fixed silver not applying bane loop correctly.
+  - bugfix: Fixed truesilver being usable to make normal silver items.
+  - balance: Split skill for quarterstaffs into a subskill of polearms.
