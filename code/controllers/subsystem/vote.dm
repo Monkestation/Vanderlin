@@ -191,6 +191,7 @@ SUBSYSTEM_DEF(vote)
 						SSticker.vote_started = TRUE
 					if("Wait for Ruler")
 						SSticker.vote_started = FALSE
+						SSticker.voting = FALSE
 						SSticker.pre_vote = 0
 	if(restart)
 		var/active_admins = 0
