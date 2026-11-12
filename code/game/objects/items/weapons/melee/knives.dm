@@ -389,12 +389,12 @@
 	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 /obj/item/weapon/knife/dagger/steel/inhumen/zizo
-	name = "darksteel dagger"
-	desc = "A vile dagger made of darksteel."
+	name = "avantyne dagger"
+	desc = "A vile dagger made of avantyne."
 	icon_state = "zizodagger"
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_DARKSTEEL
-	examine_highlight_type = /datum/examine_highlight/heresy_alarming/darksteel
+	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_AVANTYNE
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/avantyne
 
 //................ Silver Dagger ............... //
 /obj/item/weapon/knife/dagger/silver

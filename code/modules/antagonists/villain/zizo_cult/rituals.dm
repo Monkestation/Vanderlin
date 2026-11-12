@@ -305,7 +305,7 @@ GLOBAL_LIST_INIT(ritualslist, build_zizo_rituals())
 	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 /datum/ritual/transmutation/summonarmor
-	name = "Summon Darksteel Armor"
+	name = "Summon Avantyne Armor"
 	center_requirement = /mob/living/carbon/human
 	n_req = /obj/item/ingot/steel
 	s_req = /obj/item/ingot/steel
