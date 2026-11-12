@@ -1,5 +1,0 @@
-author: "ta3754859-max"
-delete-after: True
-changes:
-  - qol: "Summoners pouch can now pick up items in bulk similiary to sack"
-  - qol: "Handcart now picks up items from where it is currently standing, instead of player's position. The loop has been fixed to not stop after picking up only ores/wood."

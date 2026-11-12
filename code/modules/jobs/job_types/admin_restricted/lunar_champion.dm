@@ -29,6 +29,8 @@
 	allowed_races = RACES_PLAYER_NONDISCRIMINATED
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	allowed_patrons = list(/datum/patron/divine/noc)
+	honorary = "Brother"
+	honorary_f = "Sister"
 
 	outfit = /datum/outfit/admin/lunar_champion
 

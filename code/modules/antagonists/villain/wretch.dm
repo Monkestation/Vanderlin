@@ -18,6 +18,7 @@
 	wretch.honorary = null
 	wretch.honorary_suffix = null
 	wretch.job_honorary_override = null
+	wretch.job_title_override = null
 	wretch.delete_equipment()
 	wretch.purge_combat_knowledge()
 	owner.forget_and_be_forgotten()

@@ -387,6 +387,8 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 		if(initiator.stat_roll(STAT_FORTUNE, 4, 9))
 			output_amount++
 
+	var/list/assembled_buffs = assemble_ingredient_buffs(removing_items)
+
 	// Create the output items
 	for(var/j = 1 to output_amount)
 		var/atom/created_output = new output(get_turf(crafter))
@@ -396,6 +398,7 @@ GLOBAL_LIST_INIT(container_craft_to_singleton, init_container_crafts())
 			var/obj/item/reagent_containers/food/snacks/food_item = created_output
 			// Apply freshness to the new food item
 			food_item.warming = min(5 MINUTES, average_freshness)
+			food_item.assembled_buffs = assembled_buffs.Copy()
 
 			// Calculate final quality based on ingredients, skill, and recipe
 			apply_food_quality(food_item, cooking_skill, highest_food_quality, highest_recipe_quality, average_freshness)

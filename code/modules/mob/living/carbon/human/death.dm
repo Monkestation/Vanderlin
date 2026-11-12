@@ -96,15 +96,14 @@
 	if(!gibbed && yeae)
 		for(var/mob/living/carbon/human/HU in viewers(7, src))
 			if(HU != src && !HU.is_blind())
-				if(!HAS_TRAIT(HU, TRAIT_VILLAIN)) //temporary measure for npc skeletons
-					if(HU.dna?.species && dna?.species)
-						if(HU.dna.species.id == dna.species.id)
-							var/mob/living/carbon/D = HU
-							if(D.has_quirk(/datum/quirk/vice/addiction/sadist))
-								D.add_stress(/datum/stress_event/viewdeathmaniac)
-								D.sate_addiction(/datum/quirk/vice/addiction/sadist)
-							else
-								D.add_stress(/datum/stress_event/viewdeath)
+				if(HU.dna?.species && dna?.species)
+					if(HU.dna.species.id == dna.species.id)
+						var/mob/living/carbon/D = HU
+						if(D.has_quirk(/datum/quirk/vice/addiction/sadist))
+							D.add_stress(/datum/stress_event/viewdeathmaniac)
+							D.sate_addiction(/datum/quirk/vice/addiction/sadist)
+						else if(!HAS_TRAIT(HU, TRAIT_VILLAIN))
+							D.add_stress(/datum/stress_event/viewdeath)
 
 	dna.species.spec_death(gibbed, src) // parent call deletes dna
 
