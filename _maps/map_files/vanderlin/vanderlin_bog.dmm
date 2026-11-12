@@ -2947,6 +2947,10 @@
 	},
 /turf/open/floor/dirt/road,
 /area/outdoors/bog/north)
+"bxq" = (
+/obj/effect/spawner/traveltile_spawner/vertical/vampire,
+/turf/open/floor/dirt/road,
+/area/outdoors/bog/north/west)
 "bxv" = (
 /obj/structure/bridge_stakes{
 	dir = 4
@@ -19464,10 +19468,6 @@
 	},
 /turf/open/floor/twig,
 /area/outdoors/bog/north)
-"sIm" = (
-/obj/effect/spawner/traveltile_spawner/vertical/vampire,
-/turf/open/water/swamp/deep,
-/area/outdoors/bog/west)
 "sIL" = (
 /obj/structure/table/wood/crafted,
 /turf/open/floor/twig,
@@ -25395,7 +25395,7 @@ pNu
 pNu
 pNu
 cNF
-cNF
+bxq
 cNF
 pNu
 pNu
@@ -25452,7 +25452,7 @@ mdT
 mdT
 mdT
 ikz
-sIm
+ikz
 ikz
 mdT
 mdT

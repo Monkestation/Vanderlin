@@ -293,56 +293,6 @@
 	tastes = list("bread" = 1)
 	item_weight = 80 GRAMS
 
-/obj/item/reagent_containers/food/snacks/breadslice/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(modified || !is_type_in_list(tool, list(
-		/obj/item/reagent_containers/food/snacks/meat/salami/slice,
-		/obj/item/reagent_containers/food/snacks/cheddarslice,
-		/obj/item/reagent_containers/food/snacks/cooked/egg,
-		/obj/item/reagent_containers/food/snacks/fat/salo/slice,
-		/obj/item/reagent_containers/food/snacks/butterslice,
-		/obj/item/reagent_containers/food/snacks/meat/mince/beef/mett)))
-		return ..()
-
-	var/obj/item/reagent_containers/food/snacks/S = tool
-	var/cooking = 5 SECONDS - (GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking))*8
-	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
-	if(!do_after(user, cooking, src, display_over_user=TRUE))
-		return ITEM_INTERACT_BLOCKING
-
-	modified = TRUE
-	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
-	user.nobles_seen_servant_work()
-	S.reagents?.trans_to(src, S.reagents.total_volume)
-	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment, S.nutrition * 0.75)
-	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment/vitamin, S.nutrition * 0.25)
-	tastes |= S.tastes
-	foodtype |= S.foodtype
-	faretype++
-
-	if(istype(tool, /obj/item/reagent_containers/food/snacks/meat/salami/slice))
-		name = "[name] & salumoi"
-		desc = "[desc] A thick slice of salumoi has been added."
-		add_overlay("salumoid")
-	else if(istype(tool, /obj/item/reagent_containers/food/snacks/cheddarslice))
-		name = "[name] & cheese"
-		desc = "[desc] Fat cheese slices has been added."
-		add_overlay("cheesed")
-	else if(istype(tool, /obj/item/reagent_containers/food/snacks/cooked/egg))
-		name = "[name] & egg"
-		add_overlay("egged")
-	else if(istype(tool, /obj/item/reagent_containers/food/snacks/fat/salo/slice))
-		name = "[name] & salo"
-		add_overlay("salod")
-	else if(istype(tool, /obj/item/reagent_containers/food/snacks/butterslice))
-		name = "buttered [name]"
-		add_overlay("buttered")
-	else if(istype(tool, /obj/item/reagent_containers/food/snacks/meat/mince/beef/mett))
-		name = "[name] & mett"
-		add_overlay("metted")
-
-	qdel(tool)
-	return ITEM_INTERACT_SUCCESS
-
 /obj/item/reagent_containers/food/snacks/breadslice/toast
 	name = "toasted bread"
 	icon_state = "toast"
@@ -471,30 +421,6 @@
 	foodtype = GRAIN | DAIRY
 	tastes = list("chewy butterdough" = 1)
 	item_weight = 90 GRAMS
-
-/obj/item/reagent_containers/food/snacks/bookbreadslice/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
-	if(modified || !istype(tool, /obj/item/reagent_containers/food/snacks/butterslice))
-		return ..()
-
-	short_cooktime = (50 - ((GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/craft/cooking)) * 8))
-	playsound(user, 'sound/foley/dropsound/food_drop.ogg', 50, TRUE, -1)
-	if(!do_after(user, short_cooktime, src, display_over_user=TRUE))
-		return ITEM_INTERACT_BLOCKING
-
-	var/obj/item/reagent_containers/food/snacks/S = tool
-
-	modified = TRUE
-	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
-	user.nobles_seen_servant_work()
-	S.reagents?.trans_to(src, S.reagents.total_volume)
-	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment, S.nutrition * 0.75)
-	LAZYADDASSOC(bonus_reagents, /datum/reagent/consumable/nutriment/vitamin, S.nutrition * 0.25)
-	tastes |= S.tastes
-
-	name = "buttered [name]"
-	add_overlay("bookbread_buttered")
-	qdel(tool)
-	return ITEM_INTERACT_SUCCESS
 
 /*	.................   Raspberry Bookbread   ................... */
 /obj/item/reagent_containers/food/snacks/raspberrybutterdough
@@ -1087,6 +1013,7 @@
 		return ITEM_INTERACT_BLOCKING
 
 	modified = TRUE
+	merge_ingredient_buffs(list(tool))
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
@@ -1179,6 +1106,7 @@
 	var/obj/item/reagent_containers/food/snacks/S = tool
 
 	modified = TRUE
+	merge_ingredient_buffs(list(tool))
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)*0.2))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
@@ -1442,6 +1370,7 @@
 	var/obj/item/reagent_containers/food/snacks/S = tool
 
 	modified = TRUE
+	merge_ingredient_buffs(list(tool))
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2))
 	user.nobles_seen_servant_work()
 	S.reagents?.trans_to(src, S.reagents.total_volume)
@@ -2459,6 +2388,7 @@
 	var/obj/item/reagent_containers/food/snacks/S = tool
 
 	modified = TRUE
+	merge_ingredient_buffs(list(tool))
 	faretype++
 	user.mind.add_sleep_experience(/datum/attribute/skill/craft/cooking/baking, (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.2))
 	user.nobles_seen_servant_work()

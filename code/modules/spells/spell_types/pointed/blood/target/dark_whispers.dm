@@ -43,7 +43,7 @@
 	. = ..()
 	message = tgui_input_text(owner, "What thought do you wish to weave to [cast_on]?", "[src]")
 
-	if(!message)
+	if(!message || !is_valid_target(cast_on))
 		reset_spell_cooldown()
 		return
 

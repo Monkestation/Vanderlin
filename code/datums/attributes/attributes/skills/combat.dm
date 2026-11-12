@@ -40,6 +40,19 @@
 		"...his mouth meets his head, his teeth meets teeth, blood gushes from his mouth after a firm strike - you have no blade, yet you're armed..."
 	)
 
+/datum/attribute/skill/combat/polearms/staves
+	name = "Staves"
+	desc = "Represents your character's ability to fight with simple staves. The higher your skill in Staves, the more accurate you'll be with staves and the better you'll be at parrying with them."
+	governing_attribute = STAT_STRENGTH
+	default_attributes = list(
+		STAT_STRENGTH = -5,
+		STAT_ENDURANCE = -7,
+	)
+	difficulty = SKILL_DIFFICULTY_AVERAGE
+	dreams = list(
+		"...whack them once, whack them twice, a branch of wood can do wonders in battle..."
+	)
+
 /datum/attribute/skill/combat/axesmaces
 	name = "Axes & Maces"
 	desc = "Represents your character's ability to fight with axes and maces. The higher your skill in Axes & Maces, the more accurate you'll be with axes and maces and the better you'll be at parrying with them."

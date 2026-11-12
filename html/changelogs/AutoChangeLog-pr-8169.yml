@@ -1,0 +1,5 @@
+author: "Ordosian"
+delete-after: True
+changes:
+  - bugfix: "fixed a bunch of missing sprites."
+  - image: "imported missing onmob exotic silkbelt sprites."
