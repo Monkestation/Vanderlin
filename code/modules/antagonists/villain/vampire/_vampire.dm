@@ -78,14 +78,15 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		var/mob/living/carbon/human/vampdude = owner.current
 		vampdude.hud_used?.set_bloody_bloodpool()
 		vampdude.grant_language(/datum/language/sanguine)
-
-		if(!forced)
-			if(clan_selected)
-				vampdude.set_clan(default_clan)
-		else
-			vampdude.set_clan_direct(forcing_clan)
-			forcing_clan = null
 		vampdude.grant_undead_eyes()
+
+		if(!vampdude.clan)
+			if(!forced)
+				if(clan_selected)
+					vampdude.set_clan(default_clan)
+			else
+				vampdude.set_clan_direct(forcing_clan)
+				forcing_clan = null
 
 	// The clan system now handles most of the setup, but we can still do antagonist-specific things
 	after_gain()
