@@ -30,6 +30,7 @@
 	mob_size = MOB_SIZE_TINY
 	is_flying_animal = TRUE
 	speak_emote = list("squeaks")
+	lighting_alpha = 127
 
 //this is literally a shapeshift and ai can't actually use it
 	ai_controller = /datum/ai_controller/bat
