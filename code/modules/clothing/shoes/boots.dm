@@ -303,13 +303,13 @@
 	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
 
 /obj/item/clothing/shoes/boots/armor/inhumen/zizo
-	name = "darksteel boots"
+	name = "avantyne boots"
 	desc = "Plate boots. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizoboots"
 	item_state = "zizoboots"
 	melting_material = /datum/material/avantyne
 	melt_amount = 100
-	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/clothing/shoes/boots/armor/inhumen/matthios
 	name = "gilded boots"

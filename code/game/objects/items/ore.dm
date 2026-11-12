@@ -311,14 +311,18 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/ingot/silver/truesilver
+/obj/item/ingot/truesilver
 	name = "truesilver bar"
 	desc = "A bar of glistening truesilver. Blessed material of The Moon Prince and the ultimate bane of nite creachers."
 	icon_state = "ingotlunar"
-	smeltresult = /obj/item/ingot/silver/truesilver
+	smeltresult = /obj/item/ingot/truesilver
 	melting_material = /datum/material/truesilver
 	sellprice = 60
 	item_weight = 6.65 KILOGRAMS
+
+/obj/item/ingot/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/silver)
 
 /obj/item/ingot/steel
 	name = "steel bar"
@@ -450,7 +454,7 @@
 
 /obj/item/ingot/avantyne
 	name = "avantyne wafer"
-	desc = "This ingot, though borne of unholy circumstance, rumbles with otherworldly potential. Chiseled onto the darksteel is a forbidden iteration of the psycross; a foreboding sign for those who bow to lesser gods."
+	desc = "This ingot, though borne of unholy circumstance, rumbles with otherworldly potential. Chiseled onto the avantyne is a forbidden iteration of the psycross; a foreboding sign for those who bow to lesser gods."
 	icon_state = "ingotavantyne"
 	sellprice = 0 // Super evil Zizo material, nobody wants this
 	smeltresult = /obj/item/ingot/avantyne
@@ -528,7 +532,7 @@
 
 /obj/item/ingot/component/threadavantyne
 	name = "avantyne thread"
-	desc = "These strands, though borne of unholy circumstance, shimmer with otherworldly potential. Each wire of darksteel seem to twitch with vigor, whenever brought close to another alloy; like a parasite drawn to a host."
+	desc = "These strands, though borne of unholy circumstance, shimmer with otherworldly potential. Each wire of avantyne seem to twitch with vigor, whenever brought close to another alloy; like a parasite drawn to a host."
 	icon_state = "component_avantynethread"
 	sellprice = 0 // Super evil Zizo material, nobody wants this
 
