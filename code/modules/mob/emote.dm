@@ -139,10 +139,11 @@
 /datum/emote/spin/run_emote(mob/living/carbon/user, params, type_override, intentional, targeted)
 	. = ..()
 	user.spin(4, 1)
-	user.Immobilize(5)
 
 	if(!iscarbon(user))
 		return
+
+	user.Immobilize(5)
 
 	if(user.get_timed_status_effect_duration(/datum/status_effect/confusion) > BEYBLADE_PUKE_THRESHOLD)
 		user.vomit(BEYBLADE_PUKE_NUTRIENT_LOSS, distance = 0)
