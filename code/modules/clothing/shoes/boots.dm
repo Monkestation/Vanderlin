@@ -270,6 +270,25 @@
 	salvage_amount = 1
 	item_weight = 125 GRAMS
 
+/obj/item/clothing/shoes/boots/footbandages
+	name = "bandage footwraps"
+	desc = "Thickly-woven bandages that've been wrapped around the feet. Doesn't do much for hurting others, but its better than going bare."
+	icon_state = "footwraps"
+	item_state = "footwraps"
+	is_barefoot = TRUE
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT)
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
+	resistance_flags = FIRE_PROOF
+	blade_dulling = DULLING_BASHCHOP
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	armor_type = /datum/armor/boots/leather
+	body_parts_covered = FEET | LEGS
+	salvage_result = /obj/item/natural/cloth
+	salvage_amount = 1
+	item_weight = 225 GRAMS
+
 /obj/item/clothing/shoes/boots/armor/silver
 	name = "silver boots"
 	desc = "Finely forged boots made out of silver."

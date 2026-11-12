@@ -975,6 +975,14 @@
 	craftdiff = 4
 	category = "Shoes"
 
+/datum/repeatable_crafting_recipe/leather/standalone/shorts
+	name = "leather shorts"
+	output = /obj/item/clothing/pants/trou/leather/shorts
+	requirements = list(/obj/item/natural/hide/cured = 2,
+				/obj/item/natural/fibers = 1)
+	craftdiff = 1
+	category = "Pants"
+
 /datum/repeatable_crafting_recipe/leather/standalone/gatemaster_coat
 	name = "gatemaster's coat"
 	output = /obj/item/clothing/armor/leather/jacket/gatemaster_jacket
@@ -1226,6 +1234,14 @@
 			/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 	category = "Hat"
+
+/datum/repeatable_crafting_recipe/leather/standalone/shorts_hardened
+	name = "hardened leather shorts"
+	output = /obj/item/clothing/pants/trou/leather/shorts/advanced
+	requirements = list(/obj/item/natural/hide/cured = 2,
+				/obj/item/natural/fibers/sinew = 1)
+	craftdiff = 4
+	category = "Pants"
 
 /datum/repeatable_crafting_recipe/leather/standalone/chausses
 	name = "hardened leather chausses"
