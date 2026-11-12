@@ -17,7 +17,7 @@
 /datum/job/advclass/vampspecial/rascal
 	title= "Immortal Rascal"
 	tutorial = "You were cursed when you were very young, growth stunted by immortality your physical age is a poor reflection of the centuries. Perhaps with your lord's ascension, you will finally age."
-	outfit = /datum/outfit/vamp_rascal
+	outfit = /datum/outfit/vampspecial/vamp_rascal
 	attribute_sheet = /datum/attribute_holder/sheet/job/young_vampire
 	allowed_ages = list(AGE_CHILD)
 
