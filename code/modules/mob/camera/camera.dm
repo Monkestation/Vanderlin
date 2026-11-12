@@ -22,5 +22,5 @@
 /mob/camera/canUseStorage()
 	return FALSE
 
-/mob/camera/emote(act, m_type = null, message = null, intentional = FALSE, forced_silence = FALSE, forced = FALSE, targeted = FALSE)
+/mob/camera/emote(act, m_type = null, message = null, intentional = FALSE, force_silence = FALSE, forced = FALSE, targeted = FALSE)
 	return
