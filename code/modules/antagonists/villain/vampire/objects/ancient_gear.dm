@@ -33,7 +33,8 @@
 	block2add = FOV_BEHIND
 	item_weight = 4.6 KILOGRAMS
 	max_integrity = INTEGRITY_OLD_STRONG
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	sellprice = VALUE_STEEL_HELMET
 
 /obj/item/clothing/head/helmet/ancient/vampire

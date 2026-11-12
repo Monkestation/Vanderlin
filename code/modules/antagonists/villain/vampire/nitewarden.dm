@@ -1,34 +1,34 @@
 /datum/attribute_holder/sheet/job/nitewarden
 	raw_attribute_list = list(
-		STAT_STRENGTH = 6,
+		STAT_STRENGTH = 3,
 		STAT_PERCEPTION = 6,
 		STAT_INTELLIGENCE = 6,
-		STAT_CONSTITUTION = 6,
-		STAT_ENDURANCE = 6,
+		STAT_CONSTITUTION = 4,
+		STAT_ENDURANCE = 4,
 		STAT_SPEED = 6,
-		STAT_FORTUNE = 6,
+		STAT_FORTUNE = 3,
 		/datum/attribute/skill/combat/swords = 60,
-		/datum/attribute/skill/combat/knives = 50,
+		/datum/attribute/skill/combat/knives = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
-		/datum/attribute/skill/combat/bows = 40,
-		/datum/attribute/skill/combat/crossbows = 40,
-		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/bows = 20,
+		/datum/attribute/skill/combat/crossbows = 20,
+		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/combat/unarmed = 50,
 		/datum/attribute/skill/combat/wrestling = 50,
-		/datum/attribute/skill/combat/whipsflails = 20,
+		/datum/attribute/skill/combat/whipsflails = 30,
 		/datum/attribute/skill/craft/armorsmithing = 10,
 		/datum/attribute/skill/craft/weaponsmithing = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/traps = 40,
-		/datum/attribute/skill/educated/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 60,
 		/datum/attribute/skill/misc/athletics = 60,
-		/datum/attribute/skill/misc/lockpicking = 30,
+		/datum/attribute/skill/misc/lockpicking = 40,
 		/datum/attribute/skill/misc/climbing = 50,
-		/datum/attribute/skill/misc/medicine = 30,
+		/datum/attribute/skill/misc/medicine = 45,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/misc/swimming = 50,
 		/datum/attribute/skill/misc/sneaking = 50,
-		/datum/attribute/skill/educated/reading = 30,
+		/datum/attribute/skill/educated/reading = 60,
 	)
 
 /datum/antagonist/vampire/lord/nitewarden
@@ -141,7 +141,7 @@
 		examine_list += span_boldred("The bloodsucker of Noc...")
 	else if(is_priest_job(user.mind?.assigned_role))
 		examine_list += SPAN_GOD_NOC("The servant of The Moon!")
-	else if(is_oracle_job(user.mind?.assigned_role))
+	else if(HAS_TRAIT(user, TRAIT_LUNAR_ORDER))
 		examine_list += SPAN_GOD_NOC("The everwalking servant of The Prince!")
 	else if(user.mind?.has_antag_datum(/datum/antagonist/maniac))
 		examine_list += span_green("Yet another legally distinct vampire hunter!")
@@ -153,31 +153,35 @@
 	return
 
 /datum/outfit/nitewarden
-	mask = /obj/item/clothing/face/shepherd/shadowmask
+	mask = /obj/item/clothing/face/shepherd/clothmask/colored/black
 	neck = /obj/item/clothing/neck/psycross/silver/divine/noc
-	cloak = /obj/item/clothing/cloak/raincloak/furcloak
-	shirt = /obj/item/clothing/shirt/undershirt/formal
-	pants = /obj/item/clothing/pants/trou/formal
-	shoes = /obj/item/clothing/shoes/boots/hunter
-	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard
-	gloves = /obj/item/clothing/gloves/leather
+	cloak = /obj/item/clothing/cloak/rosa
+	armor = /obj/item/clothing/armor/leather/jacket/rosa
+	shirt = /obj/item/clothing/shirt/vampire
+	pants = /obj/item/clothing/pants/tights/colored/black
+	shoes = /obj/item/clothing/shoes/boots/rosa/seven
+	wrists = /obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden
+	gloves = /obj/item/clothing/gloves/leather/rosa/seven
 	ring =  /obj/item/clothing/ring/nitewarden
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/scabbard/sword/noble
 	backl = /obj/item/storage/backpack/satchel/black
-	r_hand = /obj/item/weapon/sword/long/silver/nitewarden
-	l_hand = /obj/item/weapon/knife/dagger/steel/stiletto/nitewarden
-	backpack_contents = list(/obj/item/needle/blessed = 1)
+	r_hand = /obj/item/weapon/sword/long/silver/truesilver/nitewarden
+	backpack_contents = list(
+		/obj/item/needle/blessed = 1,
+		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
+		/obj/item/weapon/knife/throwingknife/silver/truesilver = 1
+	)
 
 /datum/outfit/nitewarden/post_equip(mob/living/carbon/human/H)
 	..()
 	var/datum/component/storage/concrete/scabbard/sword/holder = H.beltl?.GetComponent(/datum/component/storage/concrete/scabbard/sword)
-	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/nitewarden), list())
+	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/truesilver/nitewarden), list())
 
 
-/obj/item/weapon/sword/long/silver/nitewarden
+/obj/item/weapon/sword/long/silver/truesilver/nitewarden
 	name = "nite's grace"
-	desc = "A blade forged of lunar silver. The Moon Prince is watching."
+	desc = "The Moon Prince is watching."
 	force_wielded = DAMAGE_GREATSWORD_WIELD
 	wdefense = ULTMATE_PARRY
 	max_blade_int = 50000
@@ -186,33 +190,45 @@
 	sellprice = 0
 	slot_flags = 0 //scabbard only
 
-/obj/item/weapon/sword/long/silver/nitewarden/Initialize(mapload)
+/obj/item/weapon/sword/long/silver/truesilver/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/anti_theft)
 
-/obj/item/weapon/knife/dagger/steel/stiletto/nitewarden
+/obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden
 	name = "nite's sting"
-	desc = "A needle thin blade forged of lunar silver. The Moon Prince is watching."
+	desc = "The Moon Prince is watching."
 	max_blade_int = 50000
 	max_integrity = 50000
 	resistance_flags = INDESTRUCTIBLE
 
-/obj/item/weapon/knife/dagger/steel/stiletto/nitewarden/Initialize(mapload)
+/obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/lightning)
-	enchant(/datum/enchantment/silver)
 	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/clothing/ring/nitewarden
 	name = "nitewarden's ring"
 	icon_state = "s_newring_ruby"
-	desc = "A ring of silver with a shimmering rontz set within. It thrums with unseen power."
+	desc = "A ring of truesilver with a shimmering rontz set within. It thrums with unseen power."
 	sellprice = 500
 	misc_flags = CRAFTING_TEST_EXCLUDE
+	examine_highlight_type = /datum/examine_highlight/divine/truesilver/ring
 
 /obj/item/clothing/ring/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/life_eternal)
 	enchant(/datum/enchantment/leaping)
 	enchant(/datum/enchantment/anti_theft)
+	enchant(/datum/enchantment/silver)
+
+/obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden
+	armor_type = /datum/armor/wrist/leather/advanced
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT, BCLASS_TWIST)
+	max_integrity = INTEGRITY_OLD_STANDARD + 50
+	misc_flags = CRAFTING_TEST_EXCLUDE
+
+/obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden/Initialize()
+	. = ..()
+	new /obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden(src)
+	update_appearance(UPDATE_ICON_STATE)

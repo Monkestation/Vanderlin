@@ -8,7 +8,7 @@
 		/datum/attribute/skill/magic/holy = 40,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms/staves = 30,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/sewing = 30,
@@ -27,7 +27,7 @@
 		/datum/attribute/skill/magic/holy = 50,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/polearms/staves = 40,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/sewing = 30,
@@ -57,7 +57,7 @@
 	department_flag = CHURCHMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_PRIEST
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_CHURCH)
 	total_positions = 1
 	spawn_positions = 1
 	selection_color = "#c2a45d"

@@ -1,0 +1,110 @@
+2026-11-02:
+  Ben10083:
+  - rscadd: The chests by the Garrison cells can now be locked by the Watch. Some
+      maps with a Garrison have been given a chest for this purpose.
+  CheffieGithub:
+  - bugfix: Fixed mismatched smelt results
+  ModDownloading:
+  - bugfix: Sadist vice fulfillment is no longer blocked by being an Antagonist and/or
+      being Steelhearted.
+  - balance: Women no longer gain 1 extra point of stress from seeing dismemberments
+      (that code was ancient).
+  - bugfix: You can now select heraldry for tabards and jupons again by alt-clicking
+      them.
+  Ordosian:
+  - code_imp: Made it so rare fish can now be fished normally with added bonuses to
+      the fish
+  Rudolf-reindeer:
+  - rscadd: Added new toys for creation. Kobold dolls, tin toys, balls, stick dolls
+      and cloth dolls.
+  - image: Added sprites for above.
+  SSensum13:
+  - rscadd: added undivided/centrist amulets of the ten to loadout.
+  Sulaboy:
+  - balance: Pickaxes scale off axes/maces for combat instead of mining.  Tweaked
+      pickAXE intents.
+  TheDoktorZ:
+  - rscadd: More room keys are in the inn's peddler.
+  copper-404:
+  - rscadd: Gave the squire role same species lock as MAA.
+  - rscadd: Gave the squire role alternative titles, more fitting of a trainee of
+      the garrison rather than a knight's ward, to give options.
+  realforest2001:
+  - bugfix: Rune Ward spell now correctly requires ash either held in offhand or on
+      the floor adjacent.
+  - bugfix: Rune Ward spell can now be used to add allies to a rune.
+  - rscadd: Healing Spring spell moved from Geomancy to Vitamancy.
+  - rscadd: Added Extinguish Flames spell to Hydromancy.
+  - rscadd: Added more subfactions for use in conjunction with rune wards.
+  - rscadd: Added Blood Dagger spell, throws a bloodsteel dagger at a target. Does
+      not inflict curse.
+  - bugfix: Fixes wages.
+  - bugfix: Fixes vampire portals dumping you in random places.
+  - bugfix: Fixed excommunicated stopping great hunt miracles.
+  - rscadd: Added Truesilver. No differences to normal silver at this time.
+  - rscadd: Changed Noc's templar weapons to Truesilver. No stat differences.
+  - rscadd: Added Truesilver weapons. Sword, Longsword, Rapier, Whip, Barmace, Grand
+      Mace, Halberd, Great Axe, Warhammer, Dagger, and Misericorde.
+  - rscadd: Added Oracle version of the Staff of Testimonium.
+  - image: Added sprites for all Truesilver weapons, courtesy of Azure Peak generic
+      donator sprites.
+  - bugfix: Fixed incorrect smelting paths. As a side effect, repairing metallic items
+      should work more reliably now.
+  ta3754859-max:
+  - balance: Brigand shield/flail loadout gets kite shield
+  - rscadd: Allows properties to save certain items
+  - bugfix: Crucible having wrong grid
+  - rscadd: Crucibles can pick up items off the ground
+  - qol: Summoners pouch can now pick up items in bulk similiary to sack
+  - qol: Handcart now picks up items from where it is currently standing, instead
+      of player's position. The loop has been fixed to not stop after picking up only
+      ores/wood.
+2026-11-10:
+  Blundir:
+  - image: added proper inhand sprites for flower bouquets and for flowers that are
+      used for them
+  ModDownloading:
+  - refactor: Corrected Half-Drow placement in the Lore Primer, they're now represented
+      as Tolerated rather than Inhumen to match gameplay.
+  - rscadd: The Hallucinations Vice, which allows you to have permanent hallucinations
+      like the Zizo Curse gives you.
+  - rscdel: Removed meta hallucinations from the Zizo Curse. No more fake ahelps!
+  Ordosian:
+  - bugfix: Fixed squire subclasses
+  - map: Moved the Mine to the Basin area, replaces old lava cave. Inquisition spot
+      moved near Rous Tower. Secrets added to the Mines.
+  - map: Old Mine area next to the keep has now been transformed into a Lake Grove.
+  dwasint:
+  - rscadd: Ingredient Buffs, every base food item (meat, produce) gets a randomized
+      buff that when cooked with will imbue the cooked item with it. This scales off
+      the quality of the base food item.
+  - rscadd: soilsons, servants, cooks, innkeepers, and their kids can inspect food
+      items to see what buff is given when you cook with it.
+  grungussuss:
+  - rscadd: rejected royal tieflings are noble blood now.
+  - bugfix: Muscle priest now gets priest keys
+  - bugfix: hersir's maul is blunt now
+  - bugfix: fixed being able to cast dark whispers on a dead person.
+  - bugfix: egg washed bird meat can be made now.
+  realforest2001:
+  - spellcheck: Removed all references of darksteel and replaced with Avantyne, matching
+      the liquid form and allowing for easier naming distinction.
+  ta3754859-max:
+  - bugfix: Werewolf being unable to spread lycanthrophy
+  - qol: Re-added gathering materials for carts from the spot the user is standing
+      on
+  - qol: Switched dumping handcart's contents to alt+click
+  - qol: Added controls under the mechanics tab when examining the handcart
+2026-11-11:
+  realforest2001:
+  - bugfix: Fixes duplicate clan assignments
+  - bugfix: Fixes wretches retaining custom job titles from their previous job.
+  - bugfix: Fixed elemental primordials firing projectiles which don't do damage.
+  - rscadd: Vampire animal forms (Bat, Rat, Mist) now have inherent nightvision. Frog
+      loses out because Eora is a wimp.
+  - rscadd: Added Brother/Sister honorifics for Lunar Order personnel.
+  - code_imp: Updated typepath for some magical projectiles.
+  - bugfix: Fixed Adventurer Mage, Mercenary Mage and Archivist not having magic guidebook.
+  - bugfix: Fixed silver not applying bane loop correctly.
+  - bugfix: Fixed truesilver being usable to make normal silver items.
+  - balance: Split skill for quarterstaffs into a subskill of polearms.

@@ -13,7 +13,7 @@
 	heretical_spell = TRUE
 	antimagic_flags = MAGIC_RESISTANCE_BLOOD
 
-	invocation = "CAEDIS FRAGMENTUM!!!"
+	invocation = "Caedis Fragmentum!"
 	invocation_type = INVOCATION_SHOUT
 
 	charge_time = 1 SECONDS
@@ -22,14 +22,14 @@
 	cooldown_time = 5 SECONDS
 	spell_cost = 75
 	spell_flags = SPELL_UNETCHABLE
-	projectile_type = /obj/projectile/magic/energy/bloodshard
+	projectile_type = /obj/projectile/magic/bloodshard
 
 /datum/action/cooldown/spell/projectile/blood_shard/ready_projectile(obj/projectile/to_fire, atom/target, mob/user, iteration)
 	. = ..()
 	to_fire.damage *= spell_magnitude_modifier
 	to_fire.armor_penetration *= spell_magnitude_modifier
 
-/obj/projectile/magic/energy/bloodshard
+/obj/projectile/magic/bloodshard
 	name = "blood shard"
 	icon_state = "blood_bolt"
 	damage = 30
