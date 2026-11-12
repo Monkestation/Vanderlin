@@ -108,3 +108,16 @@
   - bugfix: Fixed silver not applying bane loop correctly.
   - bugfix: Fixed truesilver being usable to make normal silver items.
   - balance: Split skill for quarterstaffs into a subskill of polearms.
+2026-11-12:
+  ModDownloading:
+  - qol: Wait for Ruler votes now fire again if people choose to wait.
+  Ordosian:
+  - bugfix: fixed a bunch of missing sprites.
+  - image: imported missing onmob exotic silkbelt sprites.
+  grungussuss:
+  - bugfix: observers can spin again.
+  - bugfix: observers can say sentences beginning with a single letter again.
+  - bugfix: It is now possible to melt tallow in a pot.
+  ta3754859-max:
+  - rscadd: New items to persistent housing whitelist (Toys, hammers, lanterns, satchels)
+  - bugfix: persistent housing not saving items inside chests
