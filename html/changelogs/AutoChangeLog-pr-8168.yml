@@ -1,0 +1,5 @@
+author: "grungussuss"
+delete-after: True
+changes:
+  - bugfix: "observers can spin again."
+  - bugfix: "observers can say sentences beginning with a single letter again."
