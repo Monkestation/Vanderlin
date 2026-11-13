@@ -1,6 +1,3 @@
-/mob/dead/observer/check_emote(message, forced)
-	return emote(copytext(message, length(message[1]) + 1), intentional = !forced, force_silence = TRUE)
-
 //Modified version of get_message_mods, removes the trimming, the only thing we care about here is admin channels
 /mob/dead/observer/get_message_mods(message, list/mods)
 	var/key = message[1]
@@ -24,7 +21,7 @@
 			client.dsay(message)
 		return
 
-	if(check_emote(message, forced))
+	if(check_emote(message, forced, force_silence = TRUE))
 		return
 
 	. = say_dead(message)
