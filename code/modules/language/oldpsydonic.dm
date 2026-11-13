@@ -15,6 +15,10 @@
 	additional_syllable_high = 2
 	default_priority = 80
 
+	mutual_understanding = list(
+		/datum/language/newpsydonic = 35,
+	)
+
 	syllables = list(
 		"ja",
 		"ne",
