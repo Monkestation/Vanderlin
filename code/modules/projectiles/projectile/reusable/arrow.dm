@@ -50,6 +50,14 @@
 	reagents.handle_reactions()
 	return BULLET_ACT_HIT
 
+/obj/projectile/bullet/reusable/arrow/broadhead
+	name = "broadhead arrow"
+	desc = "An arrow with a broad tip, usually used by hunters."
+	icon_state = "ibroadheadarrow_proj"
+	ammo_type = /obj/item/ammo_casing/caseless/arrow/broadhead
+	armor_penetration = ARROW_PENETRATION - 15
+	damage = ARROW_DAMAGE + 15
+
 /obj/projectile/bullet/reusable/arrow/stone
 	ammo_type = /obj/item/ammo_casing/caseless/arrow/stone
 	embedchance = 80
@@ -135,6 +143,9 @@
 	return ..()
 
 /obj/projectile/bullet/reusable/arrow/bone
+	name = "bone arrow"
+	desc = "An arrow made of bone, the design used since and likely before anyone can remember."
+	icon_state = "bonearrow_proj"
 	ammo_type = /obj/item/ammo_casing/caseless/arrow/bone
 	embedchance = 95
 	armor_penetration = 15

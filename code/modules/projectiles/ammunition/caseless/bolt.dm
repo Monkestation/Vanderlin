@@ -45,6 +45,18 @@
 	RemoveElement(/datum/element/tipped_item)
 	qdel(reagents)
 
+/obj/item/ammo_casing/caseless/bolt/bonesinew
+	name = "bone bolt"
+	desc = "A bolt made from bone and wood, heldfast by tight sinew fiber."
+	icon_state = "bonebolt"
+	projectile_type = /obj/projectile/bullet/reusable/bolt/bonesinew
+
+/obj/item/ammo_casing/caseless/bolt/broadhead
+	name = "broadhead bolt"
+	desc = "A bolt with a broad head, meant for hunting- Or killing those without armor."
+	icon_state = "ibroadbolt"
+	projectile_type = /obj/projectile/bullet/reusable/bolt/broadhead
+
 /obj/item/ammo_casing/caseless/bolt/holy
 	name = "sunderbolt"
 	desc = "A silver-tipped bolt, containing a small vial of holy water. Though it inflicts lesser wounds on living flesh, it exceeds when employed against the unholy; a snap and a crack, followed by a fiery surprise. </br>'One baptism for the remission of sins.'"
