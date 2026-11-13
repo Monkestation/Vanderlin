@@ -1,0 +1,167 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/open/floor/rooftop{
+	dir = 8
+	},
+/area)
+"d" = (
+/turf/closed/wall/mineral/wooddark/slitted,
+/area)
+"e" = (
+/turf/closed/wall/mineral/wood,
+/area)
+"j" = (
+/obj/structure/door/red,
+/turf/open/floor/ruinedwood,
+/area)
+"m" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/ruinedwood,
+/area)
+"p" = (
+/turf/open/floor/ruinedwood,
+/area)
+"D" = (
+/obj/effect/landmark/hammer/dev_text{
+	name = "This should be persistent housing, but no idea how to do it ~Ardcrumb"
+	},
+/turf/open/floor/ruinedwood,
+/area)
+"R" = (
+/obj/structure/table/wood/counter,
+/obj/structure/bars/wooden_arch,
+/turf/open/floor/ruinedwood,
+/area)
+"V" = (
+/turf/open/floor/rooftop{
+	dir = 4
+	},
+/area)
+
+(1,1,1) = {"
+d
+e
+e
+e
+d
+"}
+(2,1,1) = {"
+e
+m
+p
+m
+e
+"}
+(3,1,1) = {"
+e
+p
+p
+p
+e
+"}
+(4,1,1) = {"
+d
+e
+e
+j
+d
+"}
+(5,1,1) = {"
+e
+m
+D
+p
+e
+"}
+(6,1,1) = {"
+e
+p
+p
+p
+e
+"}
+(7,1,1) = {"
+e
+p
+p
+p
+e
+"}
+(8,1,1) = {"
+e
+p
+p
+p
+e
+"}
+(9,1,1) = {"
+d
+j
+R
+R
+d
+"}
+
+(1,1,2) = {"
+a
+a
+a
+a
+a
+"}
+(2,1,2) = {"
+a
+a
+a
+a
+a
+"}
+(3,1,2) = {"
+a
+a
+a
+a
+a
+"}
+(4,1,2) = {"
+a
+a
+a
+a
+a
+"}
+(5,1,2) = {"
+p
+p
+p
+p
+p
+"}
+(6,1,2) = {"
+a
+a
+a
+a
+a
+"}
+(7,1,2) = {"
+V
+V
+V
+V
+V
+"}
+(8,1,2) = {"
+V
+V
+V
+V
+V
+"}
+(9,1,2) = {"
+V
+V
+V
+V
+V
+"}

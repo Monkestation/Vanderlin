@@ -1,0 +1,319 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"b" = (
+/turf/closed/wall/mineral/stone,
+/area/outdoors/wilderness/outpost/vanderlin)
+"c" = (
+/obj/machinery/light/fueled/torchholder/l,
+/turf/template_noop,
+/area/template_noop)
+"e" = (
+/turf/template_noop,
+/area/template_noop)
+"f" = (
+/turf/closed/wall/mineral/stone/window,
+/area/indoors/wilderness)
+"g" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"i" = (
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"j" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"l" = (
+/obj/structure/door/stone,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"m" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/stone,
+/area/outdoors/wilderness/outpost/vanderlin)
+"n" = (
+/obj/structure/ladder,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"o" = (
+/turf/closed/wall/mineral/stone/window,
+/area/outdoors/wilderness/outpost/vanderlin)
+"p" = (
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"s" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"t" = (
+/obj/structure/closet/crate/chest/wickertrunk,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"u" = (
+/obj/structure/ladder,
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/effect/decal/cleanable/dirt/cobweb,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"w" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/structure/bed/hay,
+/obj/effect/decal/cleanable/dirt/dust,
+/turf/open/floor/ruinedwood/spiral,
+/area/outdoors/wilderness/outpost/vanderlin)
+"y" = (
+/turf/open/floor/rooftop{
+	dir = 8
+	},
+/area/outdoors/wilderness/plains)
+"B" = (
+/turf/open/floor/rooftop{
+	dir = 4
+	},
+/area/outdoors/wilderness/plains)
+
+(1,1,1) = {"
+b
+b
+b
+b
+b
+b
+"}
+(2,1,1) = {"
+b
+n
+i
+i
+g
+b
+"}
+(3,1,1) = {"
+b
+i
+i
+i
+i
+b
+"}
+(4,1,1) = {"
+b
+i
+i
+i
+i
+b
+"}
+(5,1,1) = {"
+b
+i
+i
+i
+i
+b
+"}
+(6,1,1) = {"
+b
+j
+i
+i
+j
+b
+"}
+(7,1,1) = {"
+b
+b
+m
+l
+b
+b
+"}
+(8,1,1) = {"
+c
+e
+e
+e
+e
+c
+"}
+(9,1,1) = {"
+e
+e
+e
+e
+e
+e
+"}
+(10,1,1) = {"
+f
+e
+e
+e
+e
+f
+"}
+
+(1,1,2) = {"
+b
+b
+o
+o
+b
+b
+"}
+(2,1,2) = {"
+b
+u
+i
+i
+g
+b
+"}
+(3,1,2) = {"
+b
+i
+i
+i
+i
+o
+"}
+(4,1,2) = {"
+b
+i
+i
+i
+i
+b
+"}
+(5,1,2) = {"
+b
+i
+i
+i
+i
+b
+"}
+(6,1,2) = {"
+b
+t
+i
+i
+i
+b
+"}
+(7,1,2) = {"
+b
+i
+i
+t
+p
+b
+"}
+(8,1,2) = {"
+b
+i
+p
+p
+p
+o
+"}
+(9,1,2) = {"
+b
+w
+p
+p
+s
+b
+"}
+(10,1,2) = {"
+b
+b
+o
+o
+b
+b
+"}
+
+(1,1,3) = {"
+y
+y
+y
+y
+y
+y
+"}
+(2,1,3) = {"
+y
+y
+y
+y
+y
+y
+"}
+(3,1,3) = {"
+y
+y
+y
+y
+y
+y
+"}
+(4,1,3) = {"
+y
+y
+y
+y
+y
+y
+"}
+(5,1,3) = {"
+y
+y
+y
+y
+y
+y
+"}
+(6,1,3) = {"
+B
+B
+B
+B
+B
+B
+"}
+(7,1,3) = {"
+B
+B
+B
+B
+B
+B
+"}
+(8,1,3) = {"
+B
+B
+B
+B
+B
+B
+"}
+(9,1,3) = {"
+B
+B
+B
+B
+B
+B
+"}
+(10,1,3) = {"
+B
+B
+B
+B
+B
+B
+"}
