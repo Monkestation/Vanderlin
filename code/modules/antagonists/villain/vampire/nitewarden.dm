@@ -130,10 +130,11 @@
 	if(istype(examined_datum, /datum/antagonist/purishep))
 		return span_red("Silverblood.")
 
-/datum/antagonist/vampire/lord/nitewarden/proc/on_examine(mob/living/carbon/human/blade, mob/living/carbon/human/user, list/examine_list)
-	if(!istype(blade) || !istype(user))
+/datum/antagonist/vampire/lord/nitewarden/proc/on_examine(datum/source, mob/user, list/examine_list)
+	SIGNAL_HANDLER
+	if(!istype(user))
 		return
-	if(blade == user)
+	if(owner.current == user)
 		return
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))
 		examine_list += span_boldred("Blood Drinker! They can have no excuses!")

@@ -128,9 +128,10 @@
 
 
 /datum/antagonist/vampire/lord/daewalker/proc/on_examine(mob/living/carbon/human/blade, mob/living/carbon/human/user, list/examine_list)
-	if(!istype(blade) || !istype(user))
+	SIGNAL_HANDLER
+	if(!istype(user))
 		return
-	if(blade == user)
+	if(owner.current == user)
 		return
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))
 		examine_list += span_boldred("TRAITOR! His capture has been ordered by the highest authority!")
