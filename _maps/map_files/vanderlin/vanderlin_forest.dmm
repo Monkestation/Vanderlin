@@ -2231,7 +2231,7 @@
 "ic" = (
 /obj/structure/gate/bars/preopen{
 	name = "Bridge gate";
-	redstone_id = "bridgegate"
+	redstone_id = bridgegate
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/machinery/light/fueled/torchholder/l,
@@ -5287,12 +5287,6 @@
 /obj/item/clothing/shirt/undershirt/formal,
 /turf/open/floor/woodturned,
 /area/outdoors/wilderness/plains)
-"td" = (
-/obj/structure/gate/bars/preopen{
-	redstone_id = "thatchsouth"
-	},
-/turf/open/floor/cobble,
-/area/outdoors/wilderness/plains)
 "te" = (
 /obj/structure/table/wood/large/corner{
 	dir = 10;
@@ -5309,13 +5303,6 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shirt/dress,
 /turf/open/floor/woodturned,
-/area/outdoors/wilderness/plains)
-"th" = (
-/obj/structure/winch{
-	redstone_id = "thatchsouth";
-	name = "south"
-	},
-/turf/open/floor/cobble,
 /area/outdoors/wilderness/plains)
 "ti" = (
 /obj/effect/decal/carpet,
@@ -5383,22 +5370,6 @@
 /obj/item/clothing/cloak/templar/astratan,
 /turf/open/floor/sandstone_tile/four,
 /area/indoors/dungeon)
-"tt" = (
-/obj/structure/winch{
-	redstone_id = thatchnorth;
-	name = "north"
-	},
-/obj/machinery/light/fueled/wallfire/candle{
-	pixel_y = -32
-	},
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/plains)
-"tu" = (
-/obj/structure/gate/bars/preopen{
-	redstone_id = thatchnorth
-	},
-/turf/open/floor/cobble,
-/area/outdoors/wilderness/plains)
 "tv" = (
 /obj/structure/closet/crate/coffin,
 /obj/item/clothing/neck/psycross/pearl,
@@ -5447,7 +5418,7 @@
 /area/outdoors/wilderness/south)
 "tA" = (
 /obj/structure/winch{
-	redstone_id = "bridgegate";
+	redstone_id = bridgegate;
 	name = "Bridge gate"
 	},
 /turf/open/floor/cobble,
@@ -6553,6 +6524,12 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"xb" = (
+/obj/structure/gate/bars/preopen{
+	redstone_id = "towngatesouth"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/wilderness/plains)
 "xc" = (
 /obj/structure/meathook,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -8074,16 +8051,41 @@
 /obj/item/clothing/ring/jade,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"By" = (
+/obj/structure/winch{
+	dir = 1;
+	name = "winch (north)";
+	redstone_id = "towngatenorth"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/wilderness/plains)
 "Bz" = (
 /mob/living/simple_animal/hostile/retaliate/troll/axe,
 /turf/open/floor/naturalstone,
 /area/under/cave)
+"BA" = (
+/obj/machinery/light/fueled/wallfire/candle{
+	pixel_y = -32
+	},
+/obj/structure/winch{
+	dir = 1;
+	name = "winch (south)";
+	redstone_id = "towngatesouth"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness/plains)
 "BB" = (
 /obj/effect/landmark/start/outsider{
 	dir = 4
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/south)
+"BC" = (
+/obj/structure/gate/bars/preopen{
+	redstone_id = "towngatenorth"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/wilderness/plains)
 "BD" = (
 /obj/machinery/light/fueled/torchholder/c{
 	pixel_y = 0;
@@ -19402,7 +19404,7 @@ lN
 lN
 lN
 lM
-th
+By
 mh
 vO
 vO
@@ -19604,7 +19606,7 @@ xo
 lN
 lN
 wM
-tt
+BA
 cK
 uS
 xN
@@ -20205,13 +20207,13 @@ lM
 lM
 lM
 lM
-tu
+BC
 lP
 lN
 lN
 lN
 lN
-td
+xb
 lM
 lM
 lM
