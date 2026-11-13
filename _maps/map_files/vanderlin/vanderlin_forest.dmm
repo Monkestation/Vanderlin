@@ -5915,16 +5915,6 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness/south)
-"vg" = (
-/obj/effect/landmark/house_spot{
-	save_id = "thatch1";
-	property_id = "thatch1";
-	template_x = 10;
-	template_y = 6;
-	default_template = null
-	},
-/turf/open/openspace,
-/area/outdoors/wilderness/outpost/vanderlin)
 "vh" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiral,
@@ -8028,8 +8018,15 @@
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/plains)
 "Br" = (
-/turf/closed/wall/mineral/wooddark/vertical,
-/area/outdoors/wilderness/plains)
+/obj/effect/landmark/house_spot{
+	save_id = "thatch3";
+	property_id = "thatch3";
+	template_x = 9;
+	template_y = 6;
+	default_template = datum/map_template/thatch3
+	},
+/turf/open/openspace,
+/area/outdoors/wilderness/outpost/vanderlin)
 "Bs" = (
 /obj/structure/fluff/walldeco/sparrowflag{
 	pixel_x = -32
@@ -8045,8 +8042,15 @@
 /turf/open/floor/dirt/road,
 /area/outdoors/wilderness/plains)
 "Bu" = (
-/turf/closed/wall/mineral/wooddark/horizontal,
-/area/outdoors/wilderness/plains)
+/obj/effect/landmark/house_spot{
+	save_id = "thatch2";
+	property_id = "thatch2";
+	template_x = 9;
+	template_y = 5;
+	default_template = datum/map_template/thatch2
+	},
+/turf/open/openspace,
+/area/outdoors/wilderness/outpost/vanderlin)
 "Bv" = (
 /obj/structure/door/iron/bars{
 	name = "Armoury"
@@ -8071,32 +8075,16 @@
 /obj/item/clothing/ring/jade,
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"By" = (
-/obj/effect/landmark/hammer/dev_text{
-	name = "This should be persistent housing, but no idea how to do it ~Ardcrumb"
-	},
-/turf/open/floor/ruinedwood,
-/area/outdoors/wilderness/plains)
 "Bz" = (
 /mob/living/simple_animal/hostile/retaliate/troll/axe,
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"BA" = (
-/obj/structure/curtain/beigecurtainold/dir{
-	dir = 1
-	},
-/turf/closed/wall/mineral/wooddark/window,
-/area/outdoors/wilderness/plains)
 "BB" = (
 /obj/effect/landmark/start/outsider{
 	dir = 4
 	},
 /turf/open/floor/grass,
 /area/outdoors/wilderness/south)
-"BC" = (
-/obj/structure/door/red,
-/turf/open/floor/ruinedwood,
-/area/outdoors/wilderness/plains)
 "BD" = (
 /obj/machinery/light/fueled/torchholder/c{
 	pixel_y = 0;
@@ -8127,11 +8115,6 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/blocks,
 /area/indoors/dungeon)
-"BI" = (
-/obj/structure/table/wood/counter,
-/obj/structure/bars/wooden_arch,
-/turf/open/floor/ruinedwood,
-/area/outdoors/wilderness/plains)
 "BJ" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8
@@ -8161,6 +8144,16 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/plains)
+"BO" = (
+/obj/effect/landmark/house_spot{
+	save_id = "thatch1";
+	property_id = "thatch1";
+	template_x = 10;
+	template_y = 6;
+	default_template = datum/map_template/thatch1
+	},
+/turf/open/openspace,
+/area/outdoors/wilderness/outpost/vanderlin)
 "BR" = (
 /turf/open/water/river{
 	dir = 8
@@ -8183,32 +8176,6 @@
 "BY" = (
 /obj/structure/bars/grille,
 /turf/open/openspace,
-/area/outdoors/wilderness/plains)
-"BZ" = (
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/turf/open/openspace,
-/area/outdoors/wilderness/plains)
-"Ca" = (
-/obj/structure/stairs{
-	dir = 4
-	},
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/turf/open/floor/ruinedwood,
-/area/outdoors/wilderness/plains)
-"Cb" = (
-/obj/machinery/light/fueled/wallfire/candle/r,
-/obj/structure/bed/hay,
-/turf/open/floor/ruinedwood,
 /area/outdoors/wilderness/plains)
 "Cd" = (
 /obj/structure/rack/shelf/biggest,
@@ -13567,7 +13534,7 @@ tR
 tR
 tR
 tR
-vg
+BO
 BJ
 qM
 BJ
@@ -17810,11 +17777,11 @@ lP
 lU
 lU
 lU
-sb
-rk
-rk
-rk
-sb
+tR
+tR
+tR
+tR
+Bu
 mh
 yc
 yc
@@ -18012,11 +17979,11 @@ lP
 lU
 lU
 lU
-rk
-sn
-tW
-sn
-rk
+tR
+tR
+tR
+tR
+tR
 mh
 yc
 yc
@@ -18214,11 +18181,11 @@ lU
 lP
 lR
 lU
-rk
-tW
-tW
-tW
-rk
+tR
+tR
+tR
+tR
+tR
 xh
 Aj
 yc
@@ -18416,11 +18383,11 @@ lU
 lP
 lR
 lU
-sb
-rk
-rk
-BC
-sb
+tR
+tR
+tR
+tR
+tR
 xh
 yc
 yc
@@ -18618,11 +18585,11 @@ lU
 lP
 lU
 lU
-rk
-sn
-By
-tW
-rk
+tR
+tR
+tR
+tR
+tR
 xh
 Aj
 yc
@@ -18820,11 +18787,11 @@ lU
 lP
 lU
 lU
-rk
-tW
-tW
-tW
-rk
+tR
+tR
+tR
+tR
+tR
 mh
 yB
 mh
@@ -19022,11 +18989,11 @@ lR
 lP
 lU
 lU
-rk
-tW
-tW
-tW
-rk
+tR
+tR
+tR
+tR
+tR
 mh
 uP
 lM
@@ -19224,11 +19191,11 @@ lU
 lP
 lP
 lU
-rk
-tW
-tW
-tW
-rk
+tR
+tR
+tR
+tR
+tR
 xh
 lM
 lM
@@ -19426,11 +19393,11 @@ lU
 lU
 lP
 lP
-sb
-BC
-BI
-BI
-sb
+tR
+tR
+tR
+tR
+tR
 xh
 lN
 lN
@@ -24280,12 +24247,12 @@ lU
 lR
 lR
 lR
-sb
-Bu
-Bu
-Bu
-Bu
-sb
+tR
+tR
+tR
+tR
+tR
+Br
 lR
 xh
 mh
@@ -24482,12 +24449,12 @@ lU
 lR
 lP
 lR
-Br
-sn
-tW
-tW
-sn
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 lU
 xh
 mh
@@ -24684,12 +24651,12 @@ lU
 lR
 lP
 lR
-BA
-tW
-tW
-tW
-tW
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 lU
 xh
 mh
@@ -24886,12 +24853,12 @@ lU
 lU
 lP
 BD
-Br
-tW
-tW
-tW
-tW
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 lU
 xh
 mh
@@ -25088,12 +25055,12 @@ lU
 lU
 lR
 lP
-BC
-tW
-tW
-tW
-tW
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 lR
 mh
 mh
@@ -25290,12 +25257,12 @@ lU
 lU
 lU
 BE
-Br
-tW
-By
-tW
-al
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 lU
 mh
 mh
@@ -25492,12 +25459,12 @@ lR
 lU
 lU
 lU
-BA
-tW
-tW
-tW
-sb
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 lU
 xn
 mh
@@ -25694,12 +25661,12 @@ lU
 lU
 lU
 lU
-Br
-sE
-tW
-tW
-sE
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 lU
 xn
 cK
@@ -25896,12 +25863,12 @@ lU
 lU
 lU
 lR
-sb
-Bu
-Bu
-Bu
-Bu
-sb
+tR
+tR
+tR
+tR
+tR
+tR
 lU
 xn
 cK
@@ -64681,12 +64648,12 @@ pR
 pR
 pR
 pR
-sb
-Bu
-Bu
-Bu
-Bu
-sb
+tR
+tR
+tR
+tR
+tR
+tR
 pR
 mh
 mh
@@ -64883,12 +64850,12 @@ pR
 pR
 pR
 pR
-Br
-sn
-tW
-tW
-sn
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 pR
 mh
 mh
@@ -65085,12 +65052,12 @@ pR
 pR
 pR
 pR
-BA
-tW
-tW
-tW
-tW
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 pR
 mh
 mh
@@ -65287,12 +65254,12 @@ pR
 pR
 pR
 pR
-Br
-tW
-tW
-tW
-tW
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 pR
 mh
 mh
@@ -65489,12 +65456,12 @@ pR
 pR
 pR
 pR
-Br
-tW
-tW
-tW
-tW
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 pR
 mh
 mh
@@ -65691,12 +65658,12 @@ pR
 pR
 pR
 pR
-Br
-tW
-tW
-tW
-BZ
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 pR
 mh
 mh
@@ -65893,12 +65860,12 @@ pR
 pR
 pR
 pR
-BA
-tW
-tW
-tW
-Ca
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 pR
 mh
 mh
@@ -66095,12 +66062,12 @@ pR
 pR
 pR
 pR
-Br
-Cb
-tW
-tW
-sE
-Br
+tR
+tR
+tR
+tR
+tR
+tR
 pR
 mh
 mh
@@ -66297,12 +66264,12 @@ pR
 pR
 pR
 pR
-sb
-Bu
-Bu
-Bu
-Bu
-sb
+tR
+tR
+tR
+tR
+tR
+tR
 pR
 mh
 mh
@@ -105082,7 +105049,7 @@ pR
 pR
 pR
 pR
-pS
+pR
 pS
 pS
 pS
@@ -105284,8 +105251,8 @@ pR
 pR
 pR
 pR
-pS
-pS
+pR
+pR
 pS
 pS
 pS
@@ -105486,8 +105453,8 @@ pR
 pR
 pR
 pR
-pS
-pS
+pR
+pR
 pS
 pS
 pS
@@ -105688,8 +105655,8 @@ pR
 pR
 pR
 pR
-pS
-pS
+pR
+pR
 pS
 pS
 pS
@@ -105890,8 +105857,8 @@ pR
 pR
 pR
 pR
-tW
-tW
+pR
+pR
 tW
 tW
 tW
@@ -106092,8 +106059,8 @@ pR
 pR
 pR
 pR
-pU
-pU
+pR
+pR
 pU
 pU
 pU
@@ -106294,8 +106261,8 @@ pR
 pR
 pR
 pR
-pU
-pU
+pR
+pR
 pU
 pU
 pU
@@ -106496,8 +106463,8 @@ pR
 pR
 pR
 pR
-pU
-pU
+pR
+pR
 pU
 pU
 pU
@@ -106698,8 +106665,8 @@ pR
 pR
 pR
 pR
-pU
-pU
+pR
+pR
 pU
 pU
 pU

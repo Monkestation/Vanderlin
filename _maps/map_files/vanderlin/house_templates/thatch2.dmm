@@ -1,167 +1,168 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"a" = (
-/turf/open/floor/rooftop{
-	dir = 8
-	},
-/area)
-"d" = (
+"b" = (
 /turf/closed/wall/mineral/wooddark/slitted,
-/area)
-"e" = (
+/area/outdoors/wilderness/outpost/vanderlin)
+"c" = (
 /turf/closed/wall/mineral/wood,
-/area)
-"j" = (
-/obj/structure/door/red,
-/turf/open/floor/ruinedwood,
-/area)
-"m" = (
+/area/outdoors/wilderness/outpost/vanderlin)
+"f" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood,
-/area)
-"p" = (
+/area/outdoors/wilderness/outpost/vanderlin)
+"g" = (
 /turf/open/floor/ruinedwood,
-/area)
-"D" = (
-/obj/effect/landmark/hammer/dev_text{
-	name = "This should be persistent housing, but no idea how to do it ~Ardcrumb"
-	},
+/area/outdoors/wilderness/outpost/vanderlin)
+"h" = (
+/obj/structure/door/red,
 /turf/open/floor/ruinedwood,
-/area)
-"R" = (
+/area/outdoors/wilderness/outpost/vanderlin)
+"i" = (
 /obj/structure/table/wood/counter,
 /obj/structure/bars/wooden_arch,
 /turf/open/floor/ruinedwood,
-/area)
-"V" = (
+/area/outdoors/wilderness/outpost/vanderlin)
+"k" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/outdoors/wilderness/outpost/vanderlin)
+"l" = (
+/turf/open/floor/rooftop{
+	dir = 8
+	},
+/area/outdoors/wilderness/plains)
+"n" = (
+/turf/open/floor/ruinedwood,
+/area/outdoors/wilderness/plains)
+"o" = (
 /turf/open/floor/rooftop{
 	dir = 4
 	},
-/area)
+/area/outdoors/wilderness/plains)
 
 (1,1,1) = {"
-d
-e
-e
-e
-d
+b
+c
+c
+c
+b
 "}
 (2,1,1) = {"
-e
-m
-p
-m
-e
+c
+f
+g
+f
+c
 "}
 (3,1,1) = {"
-e
-p
-p
-p
-e
+c
+g
+g
+g
+c
 "}
 (4,1,1) = {"
-d
-e
-e
-j
-d
+b
+c
+c
+h
+b
 "}
 (5,1,1) = {"
-e
-m
-D
-p
-e
+c
+f
+g
+g
+c
 "}
 (6,1,1) = {"
-e
-p
-p
-p
-e
+c
+g
+g
+g
+c
 "}
 (7,1,1) = {"
-e
-p
-p
-p
-e
+c
+g
+g
+g
+c
 "}
 (8,1,1) = {"
-e
-p
-p
-p
-e
+c
+g
+g
+g
+c
 "}
 (9,1,1) = {"
-d
-j
-R
-R
-d
+k
+h
+i
+i
+b
 "}
 
 (1,1,2) = {"
-a
-a
-a
-a
-a
+l
+l
+l
+l
+l
 "}
 (2,1,2) = {"
-a
-a
-a
-a
-a
+l
+l
+l
+l
+l
 "}
 (3,1,2) = {"
-a
-a
-a
-a
-a
+l
+l
+l
+l
+l
 "}
 (4,1,2) = {"
-a
-a
-a
-a
-a
+l
+l
+l
+l
+l
 "}
 (5,1,2) = {"
-p
-p
-p
-p
-p
+n
+n
+n
+n
+n
 "}
 (6,1,2) = {"
-a
-a
-a
-a
-a
+l
+l
+l
+l
+l
 "}
 (7,1,2) = {"
-V
-V
-V
-V
-V
+o
+o
+o
+o
+o
 "}
 (8,1,2) = {"
-V
-V
-V
-V
-V
+o
+o
+o
+o
+o
 "}
 (9,1,2) = {"
-V
-V
-V
-V
-V
+o
+o
+o
+o
+o
 "}
