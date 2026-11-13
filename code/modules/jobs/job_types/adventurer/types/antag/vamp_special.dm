@@ -74,7 +74,7 @@
 /datum/job/advclass/vampspecial/mage
 	title = "Immortal Mage"
 	tutorial = "You were sired by your lord shortly after graduating from arcyne studies and now put centuries of magical experience to use in furthering their goals."
-	outfit = /datum/outfit/adventurer/mage
+	outfit = /datum/outfit/vampspecial/vampmage
 	category_tags = list(CTAG_VAMP_ADVENTURE)
 	total_positions = 4
 	cmode_music = 'sound/music/cmode/antag/combat_deadlyshadows.ogg'

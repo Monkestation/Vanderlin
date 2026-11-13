@@ -80,13 +80,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		vampdude.grant_language(/datum/language/sanguine)
 		vampdude.grant_undead_eyes()
 
-		if(!vampdude.clan)
-			if(!forced)
-				if(clan_selected)
-					vampdude.set_clan(default_clan)
-			else
-				vampdude.set_clan_direct(forcing_clan)
-				forcing_clan = null
+		if(!vampdude.clan && !forced)
+			if(clan_selected)
+				vampdude.set_clan(default_clan)
+		else if(forced)
+			vampdude.set_clan_direct(forcing_clan)
+			forcing_clan = null
+		else
+			message_admins(span_red("ERROR: Vampire Setup - No clan set"))
 
 	// The clan system now handles most of the setup, but we can still do antagonist-specific things
 	after_gain()
