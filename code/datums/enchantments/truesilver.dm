@@ -134,7 +134,8 @@
 	if(world.time < (last_used["BLESSING"] + 15 SECONDS))
 		return FALSE
 	var/affected = affected_by_bane(user)
-	if(affected)
+	//Trait blocks both the good and the bad.
+	if(affected || HAS_TRAIT(user, TRAIT_TRUESILVER_IMMUNE))
 		return FALSE
 
 	last_used["BLESSING"] = world.time
