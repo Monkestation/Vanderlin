@@ -2231,7 +2231,7 @@
 "ic" = (
 /obj/structure/gate/bars/preopen{
 	name = "Bridge gate";
-	redstone_id = bridgegate
+	redstone_id = "bridgegate"
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/machinery/light/fueled/torchholder/l,
@@ -5447,7 +5447,7 @@
 /area/outdoors/wilderness/south)
 "tA" = (
 /obj/structure/winch{
-	redstone_id = bridgegate;
+	redstone_id = "bridgegate";
 	name = "Bridge gate"
 	},
 /turf/open/floor/cobble,
