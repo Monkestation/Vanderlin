@@ -2228,15 +2228,6 @@
 /obj/structure/lootable_structure/stockpile/powder_sack,
 /turf/open/floor/blocks/newstone/alt,
 /area/outdoors/wilderness/central)
-"ic" = (
-/obj/structure/gate/bars/preopen{
-	name = "Bridge gate";
-	redstone_id = bridgegate
-	},
-/obj/machinery/light/fueled/wallfire/candle/l,
-/obj/machinery/light/fueled/torchholder/l,
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/plains)
 "id" = (
 /obj/structure/fluff/walldeco/stone,
 /turf/closed/wall/mineral/stone/moss,
@@ -5287,6 +5278,14 @@
 /obj/item/clothing/shirt/undershirt/formal,
 /turf/open/floor/woodturned,
 /area/outdoors/wilderness/plains)
+"td" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/machinery/light/fueled/torchholder/l,
+/obj/structure/gate/bars/preopen{
+	redstone_id = "keepgatesouth"
+	},
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness/plains)
 "te" = (
 /obj/structure/table/wood/large/corner{
 	dir = 10;
@@ -5303,6 +5302,13 @@
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/clothing/shirt/dress,
 /turf/open/floor/woodturned,
+/area/outdoors/wilderness/plains)
+"th" = (
+/obj/structure/winch{
+	name = "winch (south)";
+	redstone_id = "keepgatesouth"
+	},
+/turf/open/floor/cobble,
 /area/outdoors/wilderness/plains)
 "ti" = (
 /obj/effect/decal/carpet,
@@ -5416,13 +5422,6 @@
 	},
 /turf/open/floor/cobble,
 /area/outdoors/wilderness/south)
-"tA" = (
-/obj/structure/winch{
-	redstone_id = bridgegate;
-	name = "Bridge gate"
-	},
-/turf/open/floor/cobble,
-/area/outdoors/wilderness/plains)
 "tB" = (
 /turf/open/floor/herringbone,
 /area/outdoors/wilderness/plains)
@@ -59225,7 +59224,7 @@ pR
 pR
 yL
 lM
-ic
+td
 pL
 pL
 pY
@@ -60031,7 +60030,7 @@ pR
 yQ
 mh
 uP
-tA
+th
 yI
 ul
 pR
