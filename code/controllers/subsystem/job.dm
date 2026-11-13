@@ -204,8 +204,6 @@ SUBSYSTEM_DEF(job)
 
 /// Get job preferences for a player, considering multi-char
 /datum/controller/subsystem/job/proc/get_player_job_prefs(mob/dead/new_player/player, char_index = 0)
-	if(char_index > 0 && length(player.multi_ready_characters) >= char_index)
-		return player.multi_ready_characters[char_index]["job_preferences"]
 	return player.client.prefs.job_preferences
 
 /// Lock in the current character selection - call this after job assignment succeeds
@@ -288,27 +286,11 @@ SUBSYSTEM_DEF(job)
 					RejectPlayer(player)
 					continue
 
-				if(!length(player.multi_ready_characters))
-					if(player.client.prefs.job_preferences[job.title] != level)
-						continue
-					if(!check_job_eligibility(player, job))
-						continue
-					pool[player] = get_player_job_weight(player, job)
-				else
-					var/best_weight = 0
-					for(var/char_idx in 1 to length(player.multi_ready_characters))
-						var/list/char_data = player.multi_ready_characters[char_idx]
-						var/list/char_job_prefs = char_data["job_preferences"]
-						if(char_job_prefs[job.title] != level)
-							continue
-						player.apply_multi_ready_character(char_idx)
-						if(!check_job_eligibility(player, job))
-							continue
-						var/w = get_player_job_weight(player, job)
-						if(w > best_weight)
-							best_weight = w
-					if(best_weight > 0)
-						pool[player] = best_weight
+				if(player.client.prefs.job_preferences[job.title] != level)
+					continue
+				if(!check_job_eligibility(player, job))
+					continue
+				pool[player] = get_player_job_weight(player, job)
 
 			while(length(pool) && ((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
 				var/mob/dead/new_player/picked = pickweight(pool)
@@ -320,31 +302,13 @@ SUBSYSTEM_DEF(job)
 
 				var/assigned = FALSE
 
-				if(!length(picked.multi_ready_characters))
-					JobDebug("Single-char DO: Player [picked], Job [job.title], Weight: [weight_value]")
-					if(AssignRole(picked, job))
-						for(var/datum/job_priority_boost/boost in get_player_boosts(picked))
-							if(boost.can_boost_job(job))
-								boost.use_boost()
-								JobDebug("DO boost used, Player: [picked], Job: [job.title], Weight: [weight_value]")
-						assigned = TRUE
-				else
-					for(var/char_idx in 1 to length(picked.multi_ready_characters))
-						var/list/char_data = picked.multi_ready_characters[char_idx]
-						var/list/char_job_prefs = char_data["job_preferences"]
-						if(char_job_prefs[job.title] != level)
-							continue
-						picked.apply_multi_ready_character(char_idx)
-						if(!check_job_eligibility(picked, job))
-							continue
-						JobDebug("Multi-char DO: Player [picked], Char [char_idx] (Slot [char_data["slot"]]), Job [job.title], Weight: [weight_value]")
-						if(AssignRole(picked, job))
-							for(var/datum/job_priority_boost/boost in get_player_boosts(picked))
-								if(boost.can_boost_job(job))
-									boost.use_boost()
-									JobDebug("DO boost responsible for pick, Player: [picked], Job: [job.title]")
-							assigned = TRUE
-						break
+				JobDebug("Single-char DO: Player [picked], Job [job.title], Weight: [weight_value]")
+				if(AssignRole(picked, job))
+					for(var/datum/job_priority_boost/boost in get_player_boosts(picked))
+						if(boost.can_boost_job(job))
+							boost.use_boost()
+							JobDebug("DO boost used, Player: [picked], Job: [job.title], Weight: [weight_value]")
+					assigned = TRUE
 
 				if(assigned)
 					unassigned -= picked
@@ -373,27 +337,11 @@ SUBSYSTEM_DEF(job)
 			if(QDELETED(player))
 				continue
 
-			if(!length(player.multi_ready_characters))
-				if(player.client.prefs.job_preferences[job.title] != JP_HIGH)
-					continue
-				if(!check_job_eligibility(player, job))
-					continue
-				pool[player] = get_player_job_weight(player, job)
-			else
-				var/best_weight = 0
-				for(var/char_idx in 1 to length(player.multi_ready_characters))
-					var/list/char_data = player.multi_ready_characters[char_idx]
-					var/list/char_job_prefs = char_data["job_preferences"]
-					if(char_job_prefs[job.title] != JP_HIGH)
-						continue
-					player.apply_multi_ready_character(char_idx)
-					if(!check_job_eligibility(player, job))
-						continue
-					var/w = get_player_job_weight(player, job)
-					if(w > best_weight)
-						best_weight = w
-				if(best_weight > 0)
-					pool[player] = best_weight
+			if(player.client.prefs.job_preferences[job.title] != JP_HIGH)
+				continue
+			if(!check_job_eligibility(player, job))
+				continue
+			pool[player] = get_player_job_weight(player, job)
 
 		while(length(pool) && ((job.current_positions < job.spawn_positions) || job.spawn_positions == -1))
 			var/mob/dead/new_player/picked = pickweight(pool)
@@ -403,26 +351,10 @@ SUBSYSTEM_DEF(job)
 			if(!picked || QDELETED(picked) || !(picked in unassigned))
 				continue
 
-			if(!length(picked.multi_ready_characters))
-				JobDebug("Required job single-char: Player [picked], Job [job.title], Weight [weight_value]")
-				if(AssignRole(picked, job))
-					unassigned -= picked
-					amt_picked++
-			else
-				for(var/char_idx in 1 to length(picked.multi_ready_characters))
-					var/list/char_data = picked.multi_ready_characters[char_idx]
-					var/list/char_job_prefs = char_data["job_preferences"]
-					if(char_job_prefs[job.title] != JP_HIGH)
-						continue
-					picked.apply_multi_ready_character(char_idx)
-					if(!check_job_eligibility(picked, job))
-						continue
-					JobDebug("Required job multi-char: Player [picked], Char [char_idx], Slot [char_data["slot"]], Job [job.title], Weight [weight_value]")
-					if(AssignRole(picked, job))
-						picked.finalize_multi_ready_character()
-						unassigned -= picked
-						amt_picked++
-					break
+			JobDebug("Required job single-char: Player [picked], Job [job.title], Weight [weight_value]")
+			if(AssignRole(picked, job))
+				unassigned -= picked
+				amt_picked++
 
 	return amt_picked
 
