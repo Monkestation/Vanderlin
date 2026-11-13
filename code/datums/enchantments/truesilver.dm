@@ -1,7 +1,9 @@
-#define AFFECTED_WEAK 1
-#define AFFECTED 2
-#define TRUESILVER_BANE_MAX_STACKS 8
-#define TRUESILVER_BANE_COOLDOWN (3 SECONDS)
+#define TRUESILVER_UNAFFECTED 0
+#define TRUESILVER_RESISTANT 1
+#define TRUESILVER_AFFECTED 2
+#define TRUESILVER_VULNERABLE 3
+#define TRUESILVER_BANE_MAX_STACKS 6
+#define TRUESILVER_BANE_COOLDOWN (4 SECONDS)
 
 /datum/enchantment/truesilver
 	enchantment_name = "Truesilver's light"
@@ -26,25 +28,33 @@
 	RegisterSignal(item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 
 /datum/enchantment/truesilver/proc/on_drop(obj/item/i, mob/living/user)
-	if(active_item)
-		active_item = FALSE
+	active_item = FALSE
 	STOP_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/truesilver/proc/affected_by_bane(mob/target)
 	if(!ishuman(target) || !target.mind)
-		return UNAFFECTED
-	if(HAS_TRAIT(target, TRAIT_SILVER_IMMUNE))
-		return UNAFFECTED
+		return TRUESILVER_UNAFFECTED
 	var/datum/antagonist/vampire/vamp_datum = target.mind.has_antag_datum(/datum/antagonist/vampire)
 	var/datum/antagonist/werewolf/wolf_datum = IS_WEREWOLF(target)
+	var/lesser_wolf = FALSE
+	if(istype(wolf_datum, /datum/antagonist/werewolf/lesser))
+		lesser_wolf = TRUE
 	if(istype(vamp_datum, /datum/antagonist/vampire/lord))
 		var/datum/antagonist/vampire/lord/lord_datum = vamp_datum
-		return lord_datum.ascension_resistance() == 1 ? UNAFFECTED : AFFECTED_WEAK
+		if((lord_datum.ascension_resistance() == 1) || HAS_TRAIT(target, TRAIT_SILVER_IMMUNE))
+			return TRUESILVER_RESISTANT
+		else
+			return TRUESILVER_AFFECTED
+
 	if(!vamp_datum && !wolf_datum)
-		return UNAFFECTED
-	if(wolf_datum?.transformed || vamp_datum)
-		return AFFECTED
-	return UNAFFECTED
+		return TRUESILVER_UNAFFECTED
+	if(HAS_TRAIT(target, TRAIT_SILVER_IMMUNE))
+		return TRUESILVER_RESISTANT
+	if((lesser_wolf && wolf_datum?.transformed) || vamp_datum)
+		return TRUESILVER_VULNERABLE
+	if(wolf_datum?.transformed)
+		return TRUESILVER_AFFECTED
+	return TRUESILVER_UNAFFECTED
 
 /datum/enchantment/truesilver/proc/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
 	if(!user.CanReach(target))
@@ -67,11 +77,18 @@
 	target.apply_status_effect(/datum/status_effect/debuff/truesilver_bane, null, affected)
 
 	// Fire damage
-	target.adjustFireLoss(15)
-	target.adjust_divine_fire_stacks(3)
-	target.IgniteMob()
+	switch(affected)
+		if(TRUESILVER_RESISTANT)
+			target.adjustFireLoss(10)
+		if(TRUESILVER_AFFECTED)
+			target.adjustFireLoss(15)
+			target.adjust_divine_fire_stacks(1)
+		if(TRUESILVER_VULNERABLE)
+			target.adjustFireLoss(20)
+			target.adjust_divine_fire_stacks(3)
 
-	if(vamp_datum && affected != AFFECTED_WEAK)
+	if(vamp_datum && affected > TRUESILVER_RESISTANT)
+		target.IgniteMob()
 		if(SEND_SIGNAL(target, COMSIG_DISGUISE_STATUS))
 			target.visible_message("<font color='white'>[target]'s curse manifests!</font>", ignored_mobs = list(target))
 
@@ -87,7 +104,7 @@
 	START_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/truesilver/proc/apply_bane(obj/item/i, mob/living/carbon/human/user, pulse)
-	if(pulse && (world.time < (last_used["PULSE"] + 15 SECONDS)))
+	if(pulse && (world.time < (last_used["PULSE"] + 10 SECONDS)))
 		return
 	var/affected = affected_by_bane(user)
 	if(!affected)
@@ -102,9 +119,15 @@
 	else
 		to_chat(user, span_userdanger("I have held TRUESILVER!"))
 	user.apply_status_effect(/datum/status_effect/debuff/truesilver_bane, null, affected)
-	if(affected != AFFECTED_WEAK)
-		user.adjustFireLoss(35)
-		user.fire_act(1, 10)
+	switch(affected)
+		if(TRUESILVER_RESISTANT)
+			user.adjustFireLoss(20)
+		if(TRUESILVER_VULNERABLE)
+			user.adjustFireLoss(45)
+			user.fire_act(2, 12)
+		else
+			user.adjustFireLoss(35)
+			user.fire_act(1, 10)
 
 /datum/enchantment/truesilver/proc/on_bite(obj/item/i, mob/living/carbon/human/user)
 	var/affected = affected_by_bane(user)
@@ -112,8 +135,16 @@
 		return FALSE
 	to_chat(user, span_userdanger("They wear TRUESILVER!"))
 	user.apply_status_effect(/datum/status_effect/debuff/truesilver_bane, null, affected)
-	if(affected != AFFECTED_WEAK)
-		user.Paralyze(2 SECONDS)
+	switch(affected)
+		if(TRUESILVER_RESISTANT)
+			user.adjustFireLoss(10)
+		if(TRUESILVER_AFFECTED)
+			user.Paralyze(2 SECONDS)
+			user.adjustFireLoss(10)
+		if(TRUESILVER_VULNERABLE)
+			user.Paralyze(3 SECONDS)
+			user.adjustFireLoss(15)
+			user.fire_act(1, 2)
 	return TRUE
 
 /datum/enchantment/truesilver/process(delta_time)
@@ -121,6 +152,7 @@
 		STOP_PROCESSING(SSenchantment, src)
 		return
 	if(!active_item)
+		STOP_PROCESSING(SSenchantment, src)
 		return
 	var/mob/living/carbon/human/victim = enchanted_item.loc
 	if(!ishuman(victim))
@@ -133,18 +165,29 @@
 	alert_type = /atom/movable/screen/alert/status_effect/debuff/truesilver_bane
 	duration = 17 SECONDS
 	tick_interval = -1 // No ticking needed
-	effectedstats = list(STAT_STRENGTH = -3, STAT_PERCEPTION = -3, STAT_INTELLIGENCE = -3, STAT_CONSTITUTION = -3, STAT_ENDURANCE = -3, STAT_SPEED = -3, STAT_FORTUNE = -3)
+	effectedstats = list(STAT_STRENGTH = -2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -2, STAT_SPEED = -2, STAT_FORTUNE = -2)
 	var/stacks = 0
 	var/max_stacks = TRUESILVER_BANE_MAX_STACKS
-	var/affected_type = AFFECTED // Will be set on application
+	var/affected_type = TRUESILVER_AFFECTED // Will be set on application
 	var/is_stunned = FALSE
 
 /datum/status_effect/debuff/truesilver_bane/on_creation(mob/living/new_owner, duration_override, affected)
-	affected_type = affected || AFFECTED
+	affected_type = affected || TRUESILVER_AFFECTED
+	update_stats()
 	ADD_TRAIT(new_owner, TRAIT_COVEN_BANE, VAMPIRE_TRAIT)
 	if(new_owner.clan)
 		new_owner.clan.disable_covens(new_owner)
 	. = ..()
+
+/datum/status_effect/debuff/truesilver_bane/proc/update_stats()
+	switch(affected_type)
+		if(TRUESILVER_RESISTANT)
+			effectedstats = list(STAT_STRENGTH = -1, STAT_PERCEPTION = -1, STAT_INTELLIGENCE = -1, STAT_CONSTITUTION = -1, STAT_ENDURANCE = -1, STAT_SPEED = -3, STAT_FORTUNE = -1)
+		if(TRUESILVER_AFFECTED)
+			effectedstats = list(STAT_STRENGTH = -2, STAT_PERCEPTION = -2, STAT_INTELLIGENCE = -2, STAT_CONSTITUTION = -2, STAT_ENDURANCE = -2, STAT_SPEED = -2, STAT_FORTUNE = -2)
+		if(TRUESILVER_VULNERABLE)
+			effectedstats = list(STAT_STRENGTH = -3, STAT_PERCEPTION = -3, STAT_INTELLIGENCE = -3, STAT_CONSTITUTION = -3, STAT_ENDURANCE = -3, STAT_SPEED = -3, STAT_FORTUNE = -3)
+
 
 /datum/status_effect/debuff/truesilver_bane/on_apply()
 	. = ..()
@@ -186,14 +229,16 @@
 	is_stunned = TRUE
 	to_chat(owner, span_userdanger("The truesilver's curse overwhelms me!"))
 
-	if(affected_type == AFFECTED_WEAK)
-		// Vampire lords get lighter punishment
-		owner.Knockdown(45)
-		owner.Stun(17)
-	else
-		// Normal creatures get full punishment
-		owner.Immobilize(55)
-		owner.Stun(27.5)
+	switch(affected_type)
+		if(TRUESILVER_RESISTANT)
+			owner.Knockdown(30)
+			owner.Stun(15)
+		if(TRUESILVER_AFFECTED)
+			owner.Knockdown(40)
+			owner.Stun(20)
+		if(TRUESILVER_VULNERABLE)
+			owner.Immobilize(55)
+			owner.Stun(27.5)
 
 	update_alert()
 
