@@ -1,11 +1,11 @@
 
 /obj/item/bodypart/onbite(mob/living/user)
 	. = ..()
-	if(!.)
+	if(.)
 		return
 	if(status != BODYPART_ORGANIC)
 		return TRUE
-	if(IS_DEADITE(user) || is_species(/datum/species/werewolf))
+	if(IS_DEADITE(user) || is_species(user, /datum/species/werewolf))
 		if(user.has_status_effect(/datum/status_effect/debuff/silver_bane))
 			to_chat(user, span_notice("My power is weakened, I cannot heal!"))
 			return TRUE
@@ -46,14 +46,13 @@
 		if(!do_after(user, used_time, src))
 			return
 		var/drops = 1 + round(lerp(0, 3, GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/labor/butchering) / SKILL_RANK_LEGENDARY))
-		var/amt2raise = GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/3
 		for(var/i in 1 to drops)
 			var/choose_type = pickweight(food_type)
 			var/obj/item/reagent_containers/food/snacks/food = new choose_type(get_turf(src))
 			if(HAS_TRAIT(src, TRAIT_ROTTEN))
 				food.become_rotten()
 		new /obj/effect/decal/cleanable/blood/splatter(get_turf(src), bloodcolor)
-		user.adjust_experience(/datum/attribute/skill/labor/butchering, amt2raise, FALSE)
+		user.mind.add_sleep_experience(/datum/attribute/skill/labor/butchering, GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE) * 0.5)
 		qdel(src)
 		return
 	..()
