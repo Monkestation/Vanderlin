@@ -2228,15 +2228,6 @@
 /obj/structure/lootable_structure/stockpile/powder_sack,
 /turf/open/floor/blocks/newstone/alt,
 /area/outdoors/wilderness/central)
-"ic" = (
-/obj/effect/decal/cleanable/debris/stone,
-/obj/machinery/light/fueled/hearth{
-	pixel_y = 11;
-	pixel_x = 0
-	},
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/open/floor/blocks/newstone/alt,
-/area/outdoors/wilderness/central)
 "id" = (
 /obj/structure/fluff/walldeco/stone,
 /turf/closed/wall/mineral/stone/moss,
@@ -5915,6 +5906,14 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness/south)
+"vg" = (
+/obj/effect/decal/cleanable/debris/stone,
+/obj/machinery/light/fueled/hearth{
+	pixel_y = 11;
+	pixel_x = 0
+	},
+/turf/open/floor/blocks/newstone/alt,
+/area/outdoors/wilderness/central)
 "vh" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiral,
@@ -97268,7 +97267,7 @@ lO
 lO
 lO
 fI
-ic
+vg
 gA
 hR
 hQ
