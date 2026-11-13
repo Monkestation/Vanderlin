@@ -76,7 +76,7 @@
 #define SKIN_COLOR_LARIMAR "a9ded1" //Cyan
 #define SKIN_COLOR_AMAZONITE "b6f1f2" //also Cyan
 #define SKIN_COLOR_ZINC "daeaeb" //Light aqua
-#define SKIN_COLOR_IRON "95998C" //Grey
+#define SKIN_COLOR_IRON_A "95998C" //Grey
 #define SKIN_COLOR_CLAY "5E3319" //Reddish Orange
 
 //TIEFLING SKIN TONES
