@@ -5915,6 +5915,16 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness/south)
+"vg" = (
+/obj/effect/landmark/house_spot{
+	save_id = "thatch1";
+	property_id = "thatch1";
+	template_x = 10;
+	template_y = 6;
+	default_template = null
+	},
+/turf/open/openspace,
+/area/outdoors/wilderness/outpost/vanderlin)
 "vh" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/ruinedwood/spiral,
@@ -13557,7 +13567,7 @@ tR
 tR
 tR
 tR
-tR
+vg
 BJ
 qM
 BJ
