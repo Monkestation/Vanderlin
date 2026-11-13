@@ -1,7 +1,6 @@
 /datum/container_craft/cooking/melt_tallow
 	name = "Melt Tallow"
 	category = "Deep Frying"
-	required_chem_temp = 450
 	requirements = list(
 		/obj/item/reagent_containers/food/snacks/tallow = 1
 	)
