@@ -105,13 +105,13 @@
 
 /datum/enchantment/truesilver/proc/apply_bane(obj/item/i, mob/living/carbon/human/user, pulse)
 	if(pulse && (world.time < (last_used["PULSE"] + 10 SECONDS)))
-		return
+		return FALSE
 	var/affected = affected_by_bane(user)
 	if(!affected)
-		return
+		return FALSE
 
 	if(check_curse_guard(i, user))
-		affected = AFFECTED_WEAK
+		affected = TRUESILVER_RESISTANT
 
 	last_used["PULSE"] = world.time
 	if(pulse)
@@ -128,6 +128,18 @@
 		else
 			user.adjustFireLoss(35)
 			user.fire_act(1, 10)
+	return TRUE
+
+/datum/enchantment/truesilver/proc/apply_blessing(obj/item/i, mob/living/carbon/human/user)
+	if(world.time < (last_used["BLESSING"] + 15 SECONDS))
+		return FALSE
+	var/affected = affected_by_bane(user)
+	if(affected)
+		return FALSE
+
+	last_used["BLESSING"] = world.time
+	user.apply_status_effect(/datum/status_effect/buff/truesilver_blessing)
+	return TRUE
 
 /datum/enchantment/truesilver/proc/on_bite(obj/item/i, mob/living/carbon/human/user)
 	var/affected = affected_by_bane(user)
@@ -158,7 +170,21 @@
 	if(!ishuman(victim))
 		active_item = FALSE
 		return
-	apply_bane(enchanted_item, victim, TRUE)
+	if(apply_bane(enchanted_item, victim, TRUE))
+		return
+	apply_blessing(enchanted_item, victim)
+
+/datum/status_effect/buff/truesilver_blessing
+	id = "truesilver_blessing"
+	alert_type = /atom/movable/screen/alert/status_effect/buff/truesilver_blessing
+	duration = 17 SECONDS
+	tick_interval = -1 // No ticking needed
+	effectedstats = list(STAT_PERCEPTION = 1, STAT_INTELLIGENCE = 1)
+
+/atom/movable/screen/alert/status_effect/buff/truesilver_blessing
+	name = "Truesilver's Blessing"
+	desc = "The blessing of such a divine metal."
+	icon_state = "intelligence"
 
 /datum/status_effect/debuff/truesilver_bane
 	id = "truesilver_bane"
@@ -254,7 +280,7 @@
 /atom/movable/screen/alert/status_effect/debuff/truesilver_bane
 	name = "Truesilver's Bane"
 	desc = "My BANE!"
-	icon_state = "hunger4"
+	icon_state = "silvercurse"
 
 /atom/movable/screen/alert/status_effect/debuff/truesilver_bane/proc/update_info(stacks, is_stunned)
 	if(is_stunned)
@@ -264,7 +290,9 @@
 		name = "Truesilver's Bane ([stacks]/[TRUESILVER_BANE_MAX_STACKS])"
 		desc = span_warning("I am cursed by truesilver. [TRUESILVER_BANE_MAX_STACKS - stacks] more contact[TRUESILVER_BANE_MAX_STACKS - stacks == 1 ? "" : "s"] will overwhelm me!")
 
-#undef AFFECTED
-#undef AFFECTED_WEAK
+#undef TRUESILVER_UNAFFECTED
+#undef TRUESILVER_RESISTANT
+#undef TRUESILVER_AFFECTED
+#undef TRUESILVER_VULNERABLE
 #undef TRUESILVER_BANE_MAX_STACKS
 #undef TRUESILVER_BANE_COOLDOWN
