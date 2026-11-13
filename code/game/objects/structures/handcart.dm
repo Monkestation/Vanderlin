@@ -24,6 +24,12 @@
 	if(upgrade)
 		. += span_notice("This cart has \an [upgrade] installed.")
 
+/obj/structure/handcart/get_mechanics_examine(mob/user)
+	. = ..()
+	. += span_notice("Left click to gather stuff from where you stand")
+	. += span_notice("Right click to gather stuff from cart's position")
+	. += span_notice("Alt click to spill cart's contents")
+
 /obj/structure/handcart/Initialize(mapload)
 	if(mapload)		// if closed, any item at the crate's loc is put in the contents
 		addtimer(CALLBACK(src, PROC_REF(take_contents)), 0)
@@ -127,9 +133,17 @@
 	. = ..()
 	if(.)
 		return
-	if(user.cmode)
+	gather(user, get_turf(user))
+	return TRUE
+
+/obj/structure/handcart/attack_hand_secondary(mob/user)
+	. = ..()
+	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
-	var/turf/T = get_turf(src)
+	gather(user, get_turf(src))
+	return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+
+/obj/structure/handcart/proc/gather(mob/living/user, turf/T)
 	if(isturf(T))
 		user.changeNext_move(CLICK_CD_MELEE)
 
@@ -253,9 +267,9 @@
 	if(M)
 		. += M
 
-/obj/structure/handcart/attack_hand_secondary(mob/user, list/modifiers)
+/obj/structure/handcart/AltClick(mob/user, list/modifiers)
 	. = ..()
-	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
+	if(. == ALT_CLICKED)
 		return
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(length(stuff_shit))
@@ -263,7 +277,7 @@
 		visible_message(span_info("[user] dumps out [src]!"))
 		playsound(src, 'sound/foley/cartdump.ogg', 100, FALSE, -1)
 		update_appearance(UPDATE_ICON)
-		return SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN
+		return ALT_CLICKED
 
 /obj/structure/handcart/proc/insertion_allowed(atom/movable/AM)
 	if(ismob(AM))
