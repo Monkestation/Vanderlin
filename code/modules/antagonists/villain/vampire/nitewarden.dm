@@ -220,7 +220,7 @@
 	enchant(/datum/enchantment/life_eternal)
 	enchant(/datum/enchantment/leaping)
 	enchant(/datum/enchantment/anti_theft)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden
 	armor_type = /datum/armor/wrist/leather/advanced
