@@ -1,0 +1,4 @@
+author: "grungussuss"
+delete-after: True
+changes:
+  - bugfix: "the green noble manor now has a key"
