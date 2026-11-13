@@ -7,7 +7,7 @@
 		STAT_SPEED = -2,
 		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/magic/arcane = 30,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/craft/alchemy = 20,
@@ -22,7 +22,7 @@
 		STAT_SPEED = -2,
 		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/magic/arcane = 40,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/craft/alchemy = 20,
@@ -32,7 +32,7 @@
 	title = "Mage"
 	tutorial = "A wandering graduate of the many colleges of magick across Psydonia, you search for a job to put your degree to use. And they say school was hard..."
 	outfit = /datum/outfit/adventurer/mage
-	category_tags = list(CTAG_ADVENTURER, CTAG_VAMP_ADVENTURE)
+	category_tags = list(CTAG_ADVENTURER)
 	total_positions = 4
 	cmode_music = 'sound/music/cmode/adventurer/CombatSorcerer.ogg'
 	allowed_patrons = list(/datum/patron/divine/noc, /datum/patron/inhumen/zizo)
@@ -47,6 +47,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/mage
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/mage/old
+	book_type = /obj/item/recipe_book/arcyne
 
 
 /datum/job/advclass/combat/mage/after_spawn(mob/living/carbon/human/spawned, client/player_client)
