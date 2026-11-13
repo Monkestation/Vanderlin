@@ -63,4 +63,6 @@
 /datum/job/advclass/mercenary/grenzelhoftgun/after_spawn(mob/living/carbon/human/H)
 	. = ..()
 	H.merctype = 2
-	H.accent = ACCENT_GRENZ
+	var/datum/language_holder/lh = H.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_GRENZ

@@ -1221,6 +1221,8 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 			continue
 		if(!pref.should_apply)
 			continue
+		if(pref.post_mind_pref)
+			continue
 		pref.apply_to_human(character, read_preference(pref.type), src)
 
 	if(character.real_name in GLOB.chosen_names)
@@ -1271,17 +1273,24 @@ GLOBAL_LIST_INIT(name_adjustments, list())
 	else
 		change_accent = FALSE
 
-	if(donator)
-		character.accent = read_preference(/datum/preference/choiced/selected_accent)
-	if(change_accent && !donator)
-		character.accent = read_preference(/datum/preference/choiced/selected_accent)
-		change_accent = FALSE
-
 	/* :V */
 
 	if(icon_updates)
 		character.update_body()
 		character.update_body_parts(redraw = TRUE)
+
+/// Applies preferences that must explicitly be applied after mind creation
+/datum/preferences/proc/apply_post_mind_preferences(mob/living/carbon/human/character)
+	for(var/datum/preference/pref as anything in GLOB.preferences_in_priority_order)
+		if(!pref)
+			continue
+		if(pref.savefile_identifier != PREF_CHARACTER)
+			continue
+		if(!pref.should_apply)
+			continue
+		if(!pref.post_mind_pref)
+			continue
+		pref.apply_to_human(character, read_preference(pref.type), src)
 
 /datum/preferences/proc/get_default_name(name_id)
 	// you can use name_id to add more here

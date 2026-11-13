@@ -65,7 +65,9 @@
 	spawned.hud_used?.bloodpool?.desc = "Grace: [spawned.bloodpool]/[spawned.maxbloodpool]"
 	spawned.maxbloodpool = 1000
 	spawned.AddComponent(/datum/component/bloodpool_regen, 0.5)
-	spawned.accent = ACCENT_GRENZ
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_GRENZ
 
 /datum/job/inquisitor/remove_job(mob/living/carbon/human/spawned)
 	. = ..()

@@ -353,14 +353,15 @@
 
 		if(ismob(source))
 			human = source
+			var/datum/language_holder/language_holder = human.get_language_holder()
 			var/list/accents_to_apply = list()
 	
-			if(human.accent == ACCENT_DEFAULT || human.accent == null)
+			if(language_holder.accent == ACCENT_DEFAULT || language_holder.accent == null)
 				var/default_accent = human.dna.species.default_accent
 				if(default_accent != null)
 					accents_to_apply |= default_accent
-			else if(human.accent != ACCENT_NONE)
-				accents_to_apply |= human.accent
+			else if(language_holder.accent != ACCENT_NONE)
+				accents_to_apply |= language_holder.accent
 
 			if(human.dna.species.forced_native_accent != null)
 				accents_to_apply |= human.dna.species.forced_native_accent

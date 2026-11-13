@@ -46,7 +46,9 @@
 	. = ..()
 	if(!spawned.dna?.species)
 		return
-	spawned.accent = ACCENT_GRENZ
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_GRENZ
 
 /datum/outfit/grenzelhoft_count
 	name = "Grenzelhoft Count (Migrant Wave)"
@@ -113,7 +115,9 @@
 	. = ..()
 	if(!spawned.dna?.species)
 		return
-	spawned.accent = ACCENT_GRENZ
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_GRENZ
 
 /datum/outfit/grenzelhoft_countess
 	name = "Grenzelhoft Countess (Migrant Wave)"
@@ -172,7 +176,9 @@
 	. = ..()
 	if(!spawned.dna?.species)
 		return
-	spawned.accent = ACCENT_GRENZ
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_GRENZ
 
 /datum/outfit/grenzelhoft_knight
 	name = "Grenzelhoft Knight (Migrant Wave)"
@@ -233,7 +239,9 @@
 
 	if(!spawned.dna?.species)
 		return
-	spawned.accent = ACCENT_GRENZ
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_GRENZ
 
 /datum/outfit/grenzelhoft_man_at_arms
 	name = "Grenzelhoft Man-at-Arms (Migrant Wave)"

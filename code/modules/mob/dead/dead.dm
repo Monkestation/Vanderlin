@@ -204,7 +204,9 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	mind.active = FALSE
 	close_spawn_windows()
 	var/mob/living/spawning_mob = mind.assigned_role.get_spawn_mob(client, destination, islatejoin)
+	var/tmp/client/client_obj = client
 	mind.transfer_to(spawning_mob)
+	client_obj.prefs.apply_post_mind_preferences(spawning_mob)
 	spawning_mob.after_creation()
 	GLOB.chosen_names += spawning_mob.real_name
 	new_character = spawning_mob

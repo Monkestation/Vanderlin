@@ -35,7 +35,9 @@
 
 /datum/job/advclass/combat/lancer/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.accent = ACCENT_ZALAD
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_ZALAD
 
 /datum/outfit/adventurer/lancer
 	name = "Lancer (Adventurer)"

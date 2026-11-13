@@ -287,7 +287,6 @@
 
 	var/obj/effect/spell_rune/spell_rune
 	var/datum/intent/curplaying
-	var/accent = ACCENT_DEFAULT
 	var/cmode_timer
 	var/monitor_key
 

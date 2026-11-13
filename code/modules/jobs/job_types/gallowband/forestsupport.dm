@@ -93,7 +93,9 @@
 	else
 		add_verb(spawned, /mob/proc/haltyell)
 
-	spawned.accent = ACCENT_OSSLAND
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_OSSLAND
 
 /datum/outfit/forestsupport
 	name = JOB_FOREST_SUPPORT

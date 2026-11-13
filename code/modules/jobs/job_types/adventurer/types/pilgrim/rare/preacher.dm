@@ -37,7 +37,9 @@
 
 /datum/job/advclass/pilgrim/rare/preacher/after_spawn(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
-	spawned.accent = ACCENT_GRENZ
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_GRENZ
 
 /datum/outfit/pilgrim/preacher
 	name = "Preacher (Pilgrim)"

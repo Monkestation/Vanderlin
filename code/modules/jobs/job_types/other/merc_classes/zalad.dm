@@ -57,7 +57,9 @@
 	else
 		spawned.cmode_music = 'sound/music/cmode/adventurer/CombatOutlander.ogg'	//Forgive me, Combat_DesertRider, I'm sorry, I'll miss you.
 
-	spawned.accent = ACCENT_ZALAD
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_ZALAD
 
 /datum/outfit/mercenary/zalad
 	name = "Red Sands (Mercenary)"

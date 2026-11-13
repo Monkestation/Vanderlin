@@ -54,7 +54,9 @@
 	if(!species)
 		return
 
-	spawned.accent = ACCENT_ZALAD
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_ZALAD
 
 /datum/outfit/courtagent/dunewalker
 	name = "Zalad Dunewalker (Court Agent)"

@@ -77,7 +77,9 @@
 	add_verb(spawned, /mob/proc/haltyell)
 	spawned.set_patron(/datum/patron/alternate/great_hunt/proven)
 
-	spawned.accent = ACCENT_OSSLAND
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_OSSLAND
 
 /datum/outfit/forestwarden
 	name = JOB_FOREST_WARDEN
