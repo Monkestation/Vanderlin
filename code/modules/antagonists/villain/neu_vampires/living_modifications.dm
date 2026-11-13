@@ -164,7 +164,7 @@
 /mob/living/proc/vampire_detected(value, forced = FALSE)
 	if(value <= 0)
 		return
-	if(!clan || istype(clan, /datum/clan/daewalker) || istype(clan, /datum/clan/nitewalker))
+	if(!clan || istype(clan, /datum/clan/daewalker) || istype(clan, /datum/clan/niteguard))
 		return
 	if(CheckZoneCoven(src))
 		return
@@ -392,4 +392,6 @@
 	if(!master.clan)
 		return
 	master.clan.add_non_vampire_member(src)
+	var/datum/clan_hierarchy_node/new_clan_position = master.clan.create_position("Thrall", "A mortal servant to the clan.", master.clan_position, 1)
+	new_clan_position.assign_member(src)
 	add_bodypart_feature(new /datum/bodypart_feature/vamprire_seal)

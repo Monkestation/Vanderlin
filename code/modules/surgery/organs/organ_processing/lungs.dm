@@ -77,7 +77,7 @@
  * A mob suffocating due to being in a vacuum may be treated differently than a mob suffocating due to lung failure.
  */
 /mob/living/carbon/proc/check_breath(breath, skip_breath = FALSE, delta_time)
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		failed_last_breath = FALSE
 		return FALSE
 
@@ -102,7 +102,7 @@
 
 /obj/item/organ/lungs/proc/check_breath(breath, mob/living/carbon/human/breather, skip_breath, delta_time)
 	. = TRUE
-	if(breather.status_flags & GODMODE)
+	if(HAS_TRAIT(breather, TRAIT_GODMODE))
 		breather.failed_last_breath = FALSE
 		return FALSE
 

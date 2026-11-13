@@ -154,19 +154,15 @@
 		switch(fishrarity)
 			if("rare")
 				raritydesc = "rare"
-				caughtfish.rarity_rank = 1
 				caughtfish.raritymod = list("com"= -30)//some incentive to use rarer tiny fish as bait
 			if("ultra")
 				raritydesc = "ultra-rare"
-				caughtfish.rarity_rank = 2
 				caughtfish.raritymod = list("com"= -50)
 			if("gold")
 				raritydesc = "legendary"
-				caughtfish.rarity_rank = 3
 				caughtfish.raritymod = list("com"= -70, "rare" = -20)
 			else
 				raritydesc = "common"
-				caughtfish.rarity_rank = 0
 		caughtfish.icon_state = "[caughtfish.icon_state][fishrarity]"
 		if(fishrarity != "com")
 			caughtfish:rare = TRUE

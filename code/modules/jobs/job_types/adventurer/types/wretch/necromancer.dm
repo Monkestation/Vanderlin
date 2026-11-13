@@ -3,14 +3,15 @@
 		STAT_STRENGTH = -1,
 		STAT_CONSTITUTION = -1,
 		STAT_INTELLIGENCE = 4,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms/staves = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 30,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/alchemy = 40,
-		/datum/attribute/skill/magic/arcane = 40,
+		/datum/attribute/skill/magic/arcane = 35,
+		/datum/attribute/skill/magic/arcane/death = 50,
 	)
 
 /datum/job/advclass/wretch/necromancer

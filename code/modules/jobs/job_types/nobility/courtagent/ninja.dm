@@ -16,8 +16,8 @@
 		/datum/attribute/skill/misc/stealing = 50,
 		/datum/attribute/skill/misc/lockpicking = 50,
 		/datum/attribute/skill/craft/crafting = 10,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/reading = 10,
+		/datum/attribute/skill/educated/mathematics = 20,
 	)
 
 /datum/job/advclass/courtagent/ninja

@@ -121,9 +121,9 @@
 	price_per_unit = 11
 
 	/// Less than this and it wont petrify
-	var/min_volume_to_pretrify = 3
+	var/min_volume_to_pretrify = 15
 	/// So 1u of exposure is 5 seconds of statue time
-	var/reagent_to_time_conversion = 5 SECONDS
+	var/reagent_to_time_conversion = 3 SECONDS
 
 /datum/reagent/sal_petris/expose_mob(mob/living/exposed_mob, methods, reac_volume, show_message, touch_protection)
 	. = ..()

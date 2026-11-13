@@ -17,7 +17,7 @@
 		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 50
+		/datum/attribute/skill/educated/reading = 50
 	)
 
 /datum/job/advclass/courtagent/occult

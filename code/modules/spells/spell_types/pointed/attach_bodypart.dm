@@ -172,3 +172,4 @@
 	charge_time = 2 SECONDS
 	cooldown_time = 30 SECONDS
 	spell_cost = 125
+	initial_charges = 5

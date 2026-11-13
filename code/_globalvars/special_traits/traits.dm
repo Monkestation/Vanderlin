@@ -197,7 +197,7 @@
 
 /datum/attribute_holder/sheet/job/bookworm
 	clamped_adjustment = list(
-		/datum/attribute/skill/misc/reading = list(40, 40),
+		/datum/attribute/skill/educated/reading = list(40, 40),
 	)
 
 /datum/special_trait/bookworm
@@ -402,7 +402,7 @@
 
 /datum/attribute_holder/sheet/job/blueblood
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/special_trait/blueblood
@@ -717,7 +717,7 @@
 		/datum/attribute/skill/combat/knives = list(20, 60),
 	)
 	raw_attribute_list = list(
-		/datum/attribute/skill/misc/reading = -20,
+		/datum/attribute/skill/educated/reading = -20,
 		/datum/attribute/skill/misc/sneaking = -20,
 		/datum/attribute/skill/misc/stealing = -20,
 
@@ -753,7 +753,7 @@
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/wrestling = list(60, 60),
 		/datum/attribute/skill/combat/unarmed = list(60, 60),
-		/datum/attribute/skill/misc/reading = list(30, 60),
+		/datum/attribute/skill/educated/reading = list(30, 60),
 	)
 	raw_attribute_list = list(
 		STAT_CONSTITUTION = 10,
@@ -844,7 +844,7 @@
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/magic/holy = list(50, 60),
-		/datum/attribute/skill/combat/polearms = list(20, 60)
+		/datum/attribute/skill/combat/polearms/staves = list(20, 60)
 	)
 
 /datum/special_trait/chosen
@@ -858,16 +858,19 @@
 /datum/special_trait/chosen/on_apply(mob/living/carbon/human/character, silent)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/chosen)
 	var/patron_check = character.patron
+	var/amulet_type = /obj/item/clothing/neck/psycross/silver
 	if(!ispath(patron_check))
 		patron_check = character.patron.type
 	switch(patron_check)
 		if(/datum/patron/divine/astrata)
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/silver/divine/astrata
 		if(/datum/patron/divine/eora)
 			ADD_TRAIT(character, TRAIT_BEAUTIFUL, TRAIT_GENERIC)
 			ADD_TRAIT(character, TRAIT_EMPATH, TRAIT_GENERIC)
 			REMOVE_TRAIT(character, TRAIT_VIRGIN, JOB_TRAIT)
 			character.cmode_music = 'sound/music/cmode/church/CombatEora.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/silver/divine/eora
 		if(/datum/patron/divine/noc)
 			var/language = pick(list("Dwarvish", "Elvish", "Hellspeak", "Zaladin", "Orcish",))
 			switch(language)
@@ -887,31 +890,42 @@
 					character.grant_language(/datum/language/orcish)
 					to_chat(character,span_info("I learned the tongue of the savages in my time."))
 			character.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/silver/divine/noc
 		if(/datum/patron/divine/pestra)
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/silver/divine/pestra
 		if(/datum/patron/divine/dendor)
 			ADD_TRAIT(character, TRAIT_SEEDKNOW, TRAIT_GENERIC)
 			character.cmode_music = 'sound/music/cmode/church/CombatDendor.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/silver/divine/dendor
 		if(/datum/patron/divine/abyssor)
 			character.cmode_music = 'sound/music/cmode/church/CombatAbyssor.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/silver/divine/abyssor
 		if(/datum/patron/divine/ravox)
 			character.cmode_music = 'sound/music/cmode/church/CombatRavox.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/silver/divine/ravox
 		if(/datum/patron/divine/xylix)
 			character.cmode_music = 'sound/music/cmode/church/CombatXylix.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/silver/divine/xylix
 		if(/datum/patron/divine/malum)
 			ADD_TRAIT(character, TRAIT_MALUMFIRE, TRAIT_GENERIC)
 			character.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/silver/divine/malum
 		if(/datum/patron/inhumen/graggar)
 			character.cmode_music = 'sound/music/cmode/antag/combat_werewolf.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/graggar
 		if(/datum/patron/inhumen/zizo)
 			character.grant_language(/datum/language/undead)
 			character.cmode_music = 'sound/music/cmode/antag/combat_cult.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/zizo
 		if(/datum/patron/inhumen/matthios)
 			character.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/matthios
 		if(/datum/patron/inhumen/baotha)
 			character.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
+			amulet_type = /obj/item/clothing/neck/psycross/baotha
 
-	var/obj/item/clothing/neck/psycross/amulet = new character.patron?.associated_objects[PATRON_AMULET][1]
+	var/obj/item/clothing/neck/psycross/amulet = new amulet_type
 	character.put_in_hand(amulet)
 	var/holder = character.patron?.devotion_holder
 	if(holder)
@@ -926,7 +940,7 @@
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/magic/blood = list(30, 40),
-		/datum/attribute/skill/combat/polearms = list(20, 40)
+		/datum/attribute/skill/combat/polearms/staves = list(20, 40)
 	)
 
 /datum/special_trait/dark_secrets
@@ -1166,8 +1180,9 @@
 	character.equip_to_slot_or_del(new/obj/item/clothing/armor/regenerating/skin/disciple/sunlord(character), ITEM_SLOT_ARMOR)
 	character.equip_to_slot_or_del(new /obj/item/clothing/gloves/bandages/pugilist(character), ITEM_SLOT_GLOVES)
 	character.equip_to_slot_or_del(new /obj/item/storage/belt/leather/steel(character), ITEM_SLOT_BELT)
-	character.equip_to_slot_or_del(new /obj/item/clothing/shoes/rare/hoplite(character), ITEM_SLOT_SHOES)
+	character.equip_to_slot_or_del(new /obj/item/storage/keyring/priest(character), ITEM_SLOT_BELT_L)
 	character.equip_to_slot_or_del(new /obj/item/weapon/katar(character), ITEM_SLOT_BELT_R)
+	character.equip_to_slot_or_del(new /obj/item/clothing/shoes/rare/hoplite(character), ITEM_SLOT_SHOES)
 	character.attributes?.add_sheet(/datum/attribute_holder/sheet/job/musclepriest)
 	character.modifier_set_stat_to(/datum/attribute_holder/sheet/job/musclepriest, STAT_STRENGTH, 15)
 	character.mind.special_items["Spare gloves"] = /obj/item/clothing/gloves/bandages/pugilist

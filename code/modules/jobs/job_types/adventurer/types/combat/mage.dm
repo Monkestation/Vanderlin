@@ -5,9 +5,9 @@
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -2,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/magic/arcane = 30,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/craft/alchemy = 20,
@@ -20,9 +20,9 @@
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -2,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/magic/arcane = 40,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/craft/alchemy = 20,
@@ -47,6 +47,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/mage
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/mage/old
+	book_type = /obj/item/recipe_book/arcyne
 
 
 /datum/job/advclass/combat/mage/after_spawn(mob/living/carbon/human/spawned, client/player_client)

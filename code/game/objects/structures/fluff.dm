@@ -579,7 +579,7 @@
 /obj/structure/fluff/signage/examine(mob/user)
 	. = ..()
 	if(!user.is_literate())
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 		. += "I have no idea what it says."
 	else
 		. += "It says something."
@@ -592,7 +592,7 @@
 /obj/structure/fluff/buysign/examine(mob/user)
 	. = ..()
 	if(!user.is_literate())
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 		. += "I have no idea what it says."
 	else
 		. += "It says something."
@@ -605,7 +605,7 @@
 /obj/structure/fluff/sellsign/examine(mob/user)
 	. = ..()
 	if(!user.is_literate())
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 		. += "I have no idea what it says."
 	else
 		. += "It says something."
@@ -624,7 +624,7 @@
 	. = ..()
 	if(wrotesign)
 		if(!user.is_literate())
-			user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+			user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 			. += "I have no idea what it says."
 		else
 			. += "It says \"[wrotesign]\"."

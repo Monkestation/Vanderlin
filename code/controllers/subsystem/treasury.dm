@@ -93,11 +93,17 @@ SUBSYSTEM_DEF(treasury)
 	for(var/mob/living/carbon/human/H in SStreasury.bank_accounts) //this might be better then bank accounts?
 		if(!H.mind || !H.job)
 			continue
-		var/wage = job_wages[H.job]
+		var/title_to_check = H.job
+		var/wage = job_wages[title_to_check]
+		if(!wage)
+			title_to_check = H.mind.assigned_role?.parent_job?.title
+			if(!title_to_check)
+				continue
+			wage = job_wages[title_to_check]
 		if(!wage)
 			continue
 		give_money_account(wage, H, "Daily Wage")
-		var/cat = get_job_category(H.job)
+		var/cat = get_job_category(title_to_check)
 		category_totals[cat] += wage
 
 	for(var/cat in category_totals)

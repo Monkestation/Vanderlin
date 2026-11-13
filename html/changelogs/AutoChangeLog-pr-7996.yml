@@ -1,4 +1,0 @@
-author: "dwasint"
-delete-after: True
-changes:
-  - refactor: "masochist has been refactored to actually work now. It has a three minute grace period after the cravings start before stress kicks in. It uses a more responsive signal approach now so it clears faster."

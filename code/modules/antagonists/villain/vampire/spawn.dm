@@ -6,6 +6,7 @@
 		"MY MASTER COMMANDS!",
 		"THE SUN IS THE ANATHEMA OF OUR MASTER!",
 	)
+	allow_preference_switching = TRUE
 
 /datum/antagonist/vampire/lords_spawn/on_gain()
 	var/mob/living/carbon/human/vampire = owner.current
@@ -15,7 +16,6 @@
 	vampire.purge_combat_knowledge()
 	vampire.remove_all_traits()
 	. = ..()
-	vampire.grant_undead_eyes()
 	ADD_TRAIT(vampire, TRAIT_FOREIGNER, JOB_TRAIT)
 	SSrole_class_handler.setup_class_handler(vampire, list(CTAG_VAMP_ADVENTURE = 5, CTAG_VAMP_PILGRIM=2))
 

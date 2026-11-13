@@ -39,6 +39,22 @@
 	item_weight = 1.2 KILOGRAMS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
 
+/obj/item/clothing/pants/trou/leather/brigandine
+	name = "brigandine chausses"
+	desc = "Leather pants overlaid with iron plates for added protection. Common among soldiers."
+	icon_state = "brigandinelegs"
+	armor_type = /datum/armor/brigandine
+	equip_delay_self = 2 SECONDS
+	unequip_delay_self = 2 SECONDS
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	melt_amount = 30
+	melting_material = /datum/material/iron
+	allowed_ages = ALL_AGES_LIST
+	clothing_flags = CANT_SLEEP_IN
+	max_integrity = ARMOR_INT_LEG_HARDLEATHER
+	item_weight = 1.2 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
+
 /obj/item/clothing/pants/trou/leather/advanced
 	name = "hardened leather chausses"
 	desc = "Sturdy, durable, flexible. The finest leather to protect your nether regions."

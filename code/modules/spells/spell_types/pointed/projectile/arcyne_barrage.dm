@@ -13,6 +13,7 @@
 	cast_range = 21
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation_type = INVOCATION_NONE

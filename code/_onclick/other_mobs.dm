@@ -260,7 +260,7 @@
 			if(HAS_TRAIT(src, TRAIT_SILVER_BLESSED))
 				to_chat(user, span_warning("BLEH! [src] tastes of SILVER! My gift cannot take hold."))
 			else
-				open_wound.werewolf_infect_attempt()
+				affecting.last_injury.werewolf_infect_attempt()
 				if(prob(30))
 					H.werewolf_feed(src)
 		if(IS_DEADITE(user) && !IS_DEADITE(src))
@@ -666,7 +666,7 @@
 	var/prev_pixel_z = pixel_z
 	var/prev_transform = transform
 
-	if(HAS_TRAIT(src, TRAIT_FLIP_JUMP) || GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 4)
+	if(HAS_TRAIT(src, TRAIT_FLIP_JUMP) || GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 5)
 		do_a_flip = TRUE
 		if((dir & SOUTH) || (dir & WEST))
 			flip_direction = FLIP_DIRECTION_ANTICLOCKWISE

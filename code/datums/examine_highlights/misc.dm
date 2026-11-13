@@ -12,10 +12,11 @@
 	item_examine_desc = "Contains the symbol of the Hands Court Agents."
 
 /datum/examine_highlight/royal_court/crown
+	explanation = "<span style='color: #ffdc7c;'><b>This is an item tied to the Royal Court!</b></span><br><br>The wearer of this relic, deemed to be Astrata's Chosen; has been granted total divine sovereignty over the kingdom by the Church of the Ten."
 	item_examine_desc = "<b>Heavy the Crown is, and ever shall it be.</b>"
 
 /datum/examine_highlight/royal_court/rod
-	item_examine_desc = "A symbold of the Crown's Power."
+	item_examine_desc = "A symbol of the Crown's Power."
 
 /datum/examine_highlight/divine
 	color = COLOR_VIBE_CROWN
@@ -25,8 +26,22 @@
 /datum/examine_highlight/divine/priest
 	item_examine_desc = "The ensemble of an annointed Priest of Astrata."
 
+/datum/examine_highlight/divine/oracle
+	color = COLOR_SILVER
+	explanation = "<span style='color: #C0C0C0;'><b>This is an item of Divine importance!</b></span><br><br>A shining symbol of divinity, it is treasured by worshippers of The Ten."
+	item_examine_desc = "The ensemble of The Lunar Oracle of Noc."
+
 /datum/examine_highlight/divine/scrying
 	item_examine_desc = "Blessed by the Moon Prince this Scrying Orb can only be handled by the faithful."
+
+/datum/examine_highlight/divine/truesilver
+	color = COLOR_SILVER
+	adjective = "Truesilver"
+	explanation = "<span style='color: #C0C0C0;'><b>This is an item of Divine importance!</b></span><br><br>A shining symbol of divinity, it is treasured by worshippers of The Ten."
+	item_examine_desc = "The Blessed Silver of the Moon Prince, there is no greater bane to nite creachers."
+
+/datum/examine_highlight/divine/truesilver/ring
+	required_trait = TRAIT_LUNAR_ORDER
 
 /datum/examine_highlight/divine_weapon
 	color = COLOR_VIBE_CROWN

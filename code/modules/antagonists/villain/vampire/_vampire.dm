@@ -48,8 +48,8 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
 		examiner.add_stress(/datum/stress_event/its_the_fucking_daewalker)
 		return span_phobia("THE DIABLERIST OF THE SUN QUEEN!!")
-	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker) && !istype(the_examiner?.clan, /datum/clan/nitewalker))
-		examiner.add_stress(/datum/stress_event/its_the_nitewalker)
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewarden) && !istype(the_examiner?.clan, /datum/clan/niteguard))
+		examiner.add_stress(/datum/stress_event/its_the_nitewarden)
 		return span_phobia("THE DIABLERIST OF THE MOON PRINCE!!")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Kaine's firstborn!")
@@ -79,9 +79,13 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		vampdude.hud_used?.set_bloody_bloodpool()
 		vampdude.grant_language(/datum/language/sanguine)
 
-		if(forced)
+		if(!forced)
+			if(clan_selected)
+				vampdude.set_clan(default_clan)
+		else
 			vampdude.set_clan_direct(forcing_clan)
 			forcing_clan = null
+		vampdude.grant_undead_eyes()
 
 	// The clan system now handles most of the setup, but we can still do antagonist-specific things
 	after_gain()
@@ -127,15 +131,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	show_coven_selection(vampdude)
 
 /datum/antagonist/vampire/proc/show_coven_selection(mob/living/carbon/human/vampdude)
+	selected_covens += /datum/coven/bloodheal
 	var/list/coven_options = list()
-	var/list/available_covens = list()
 
 	// Get all available covens
 	for(var/coven_type in subtypesof(/datum/coven))
 		var/datum/coven/temp_coven = new coven_type
 		// Only show covens that aren't clan-restricted or can be used by custom clans
-		if(!temp_coven.clan_restricted)
-			available_covens += coven_type
+		if(!temp_coven.clan_restricted && !istype(temp_coven, /datum/coven/bloodheal))
 			coven_options[temp_coven.name] = coven_type
 		qdel(temp_coven)
 
@@ -143,12 +146,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		to_chat(vampdude, span_warning("No covens available for selection."))
 		finalize_custom_clan(vampdude)
 		return
-
-	// Select first coven
-	var/first_choice = input(vampdude, "Choose your first coven:", "Coven Selection") as null|anything in coven_options
-	if(first_choice)
-		selected_covens += coven_options[first_choice]
-		coven_options -= first_choice
 
 	// Select second coven
 	if(length(coven_options))

@@ -968,7 +968,7 @@
 	health = min(new_value, maxHealth)
 
 /mob/living/proc/updatehealth(amount = 0)
-	if(status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return
 	set_health(maxHealth - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss())
 	if(CAN_HAVE_BLOOD(src) && HAS_TRAIT(src, TRAIT_SIMPLE_WOUNDS) && !HAS_TRAIT(src, TRAIT_BLOODLOSS_IMMUNE))
@@ -1973,7 +1973,7 @@
  * Returns a mob (what our mob turned into) or null (if we failed).
  */
 /mob/living/proc/wabbajack(what_to_randomize, change_flags = WABBAJACK)
-	if(stat == DEAD || (status_flags & GODMODE) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
+	if(stat == DEAD || HAS_TRAIT(src, TRAIT_GODMODE) || HAS_TRAIT(src, TRAIT_NO_TRANSFORM))
 		return
 
 	if(SEND_SIGNAL(src, COMSIG_LIVING_PRE_WABBAJACKED, what_to_randomize) & STOP_WABBAJACK)
@@ -2270,8 +2270,12 @@
 			var/datum/component/storage = item.GetComponent(/datum/component/storage)
 			if(storage)
 				pickable_items |= item
-		var/obj/item/picked = input(src, "What bag do you want to crawl into?") as null|anything in pickable_items
+		var/obj/item/picked = tgui_input_list(src, "What do you want to crawl into?", "Target Item", pickable_items, timeout = 20 SECONDS)
 		if(!picked)
+			return
+		if(stat == DEAD || !Adjacent(over))
+			return
+		if(incapacitated())
 			return
 		var/obj/item/mob_holder/holder = new(get_turf(src), src)
 		visible_message(span_warning("[src] starts to climb into [picked] on [over]."), span_warning("You start to climb into [picked] on [over]."))

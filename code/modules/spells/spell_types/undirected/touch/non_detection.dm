@@ -5,6 +5,7 @@
 	can_cast_on_self = TRUE
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_ILLUSION
 
 	spell_flags = SPELL_RITUOS

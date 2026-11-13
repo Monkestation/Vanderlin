@@ -10,13 +10,13 @@
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/magic/arcane = 30,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/misc/reading = 40
+		/datum/attribute/skill/educated/reading = 40
 	)
 
 /datum/attribute_holder/sheet/job/sellmage/old
@@ -31,13 +31,13 @@
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/magic/arcane = 30,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/misc/reading = 40
+		/datum/attribute/skill/educated/reading = 40
 	)
 
 /datum/job/advclass/mercenary/sellmage
@@ -66,6 +66,7 @@
 	magic_user = TRUE
 	form_points = 8
 	technique_points = 1
+	book_type = /obj/item/recipe_book/arcyne
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/sellmage
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/sellmage/old

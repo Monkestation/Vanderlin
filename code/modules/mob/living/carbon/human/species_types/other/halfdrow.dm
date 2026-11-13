@@ -27,9 +27,7 @@
 	While similar in physicality and longevity to their non-drow cousins, their origins cause them to face discrimination akin to their elven side. \
 	\n\n\
 	Groups of half-elves and half-drow have been known to congregate together and consider themselves one species. \
-	According to some radical academic scholars, they might be one and the same species indeed- yet the people of Psydonia certainly do not believe the same at large. \
-	\n\
-	THIS IS A DISCRIMINATED SPECIES. EXPECT A MORE DIFFICULT EXPERIENCE. <B>NOBLES EVEN MORE SO.</B> PLAY AT YOUR OWN RISK."
+	According to some radical academic scholars, they might be one and the same species indeed- yet the people of Psydonia certainly do not believe the same at large."
 
 	default_color = "FFFFFF"
 
@@ -128,6 +126,10 @@
 		"Cave-Attuned" = SKIN_COLOR_CAVE_ATTUNED, // - (Deep purple)
 		"Fungus-Stained" = SKIN_COLOR_FUNGUS_STAINED, // - (Pink)
 		"Depth-Departed" = SKIN_COLOR_DEPTH_DEPARTED, // - (Grey-blue)
+		"Shallow-Shadowed" = SKIN_COLOR_SHALLOW_SHADOWED,
+		"Dark-Dweller" = SKIN_COLOR_DARK_DWELLER, // Dark grey
+		"Twilight-Traveled" = SKIN_COLOR_TWILIGHT_TRAVELED, //Mid grey
+		"Starlit-Sojourner" = SKIN_COLOR_STARLIT_SOJOURNER //Light grey
 	))
 
 /datum/species/human/halfdrow/get_hairc_list()
