@@ -610,7 +610,6 @@
 	wbalance = EASY_TO_DODGE
 	max_blade_int = 300
 	melting_material = /datum/material/silver
-	melt_amount = 150
 	sellprice = 120
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_SILVER
 
@@ -618,12 +617,21 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/polearm/halberd/silver/truesilver
+/obj/item/weapon/polearm/halberd/truesilver
 	name = "truesilver halberd"
 	desc = "A halberd forged from truesilver, a favored weapon of the Lunar Order."
 	icon_state = "lunar_halberd"
+	force = DAMAGE_SPEAR
+	force_wielded = DAMAGE_HALBERD_WIELD
+	wbalance = EASY_TO_DODGE
+	max_blade_int = 300
 	melting_material = /datum/material/truesilver
+	sellprice = 140
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/polearm/halberd/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/truesilver)
 
 /obj/item/weapon/polearm/halberd/bloodsteel
 	name = "bloodsteel halberd"

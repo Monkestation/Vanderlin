@@ -419,7 +419,7 @@
 
 /obj/item/weapon/sword/long/grandmaster
 	name = "divine longsword"
-	desc = "The Blade of Saint Altierre. A holy sword forged of silver, said to represent her will to fight for us all, and the Justice she stood for."
+	desc = "The Blade of Saint Altierre. A holy sword forged of truesilver, said to represent her will to fight for us all, and the Justice she stood for."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrsword"
 	item_weight = 1.5 KILOGRAMS
@@ -452,12 +452,12 @@
 	var/safe_damage = 25
 	var/safe_damage_wielded = 30
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/weapon/greataxe/steel/grandmaster
 	name = "divine greataxe"
-	desc = "The Axe of Saint Altierre. A holy greataxe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him almost to the point of death."
+	desc = "The Axe of Saint Altierre. A holy greataxe forged of truesilver, said to represent the brutal attack she struck Graggar with, mortally wounding him almost to the point of death."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
 	item_weight = 4.5 KILOGRAMS
@@ -496,7 +496,7 @@
 	var/safe_damage = 15
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 	enchant(/datum/enchantment/anti_theft)
 
 /datum/intent/polearm/cut/martyr
@@ -513,7 +513,7 @@
 
 /obj/item/weapon/polearm/spear/grandmaster
 	name = "divine trident"
-	desc = "The Trident of Saint Altierre. A holy spear forged of silver in the form of a holy weapon of Abyssor, said to represent her unfathomable Rage against the inhumen gods."
+	desc = "The Trident of Saint Altierre. A holy spear forged of truesilver in the form of a holy weapon of Abyssor, said to represent her unfathomable Rage against the inhumen gods."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrtrident"
 	item_weight = 2.5 KILOGRAMS
@@ -530,7 +530,7 @@
 	var/safe_damage = 15
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 	enchant(/datum/enchantment/anti_theft)
 
 /datum/intent/mace/strike/martyr
@@ -543,7 +543,7 @@
 
 /obj/item/weapon/mace/goden/steel/grandmaster
 	name = "divine grandmace"
-	desc = "The Mace of Saint Altierre. A holy mace forged of silver, said to represent her unyielding Might that turned upon Graggar before his ascension."
+	desc = "The Mace of Saint Altierre. A holy mace forged of truesilver, said to represent her unyielding Might that turned upon Graggar before his ascension."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrmace"
 	item_weight = 3.5 KILOGRAMS
@@ -560,5 +560,5 @@
 	var/safe_damage = 15
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 	enchant(/datum/enchantment/anti_theft)

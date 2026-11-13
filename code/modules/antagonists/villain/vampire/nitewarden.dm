@@ -59,7 +59,7 @@
 		TRAIT_NOAMBUSH,
 		TRAIT_NOHYGIENE, // too cool to stink
 		TRAIT_NOPAINSTUN,
-		TRAIT_SILVER_IMMUNE,
+		TRAIT_TRUESILVER_IMMUNE,
 	)
 	antag_memory = "Protect those who walk the nite.\n\
 		The dark creachers are always present.\n\
@@ -166,20 +166,20 @@
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/scabbard/sword/noble
 	backl = /obj/item/storage/backpack/satchel/black
-	r_hand = /obj/item/weapon/sword/long/silver/truesilver/nitewarden
+	r_hand = /obj/item/weapon/sword/long/truesilver/nitewarden
 	backpack_contents = list(
 		/obj/item/needle/blessed = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
-		/obj/item/weapon/knife/throwingknife/silver/truesilver = 1
+		/obj/item/weapon/knife/throwingknife/truesilver = 1
 	)
 
 /datum/outfit/nitewarden/post_equip(mob/living/carbon/human/H)
 	..()
 	var/datum/component/storage/concrete/scabbard/sword/holder = H.beltl?.GetComponent(/datum/component/storage/concrete/scabbard/sword)
-	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/truesilver/nitewarden), list())
+	holder?.set_holdable(list(/obj/item/weapon/sword/long/truesilver/nitewarden), list())
 
 
-/obj/item/weapon/sword/long/silver/truesilver/nitewarden
+/obj/item/weapon/sword/long/truesilver/nitewarden
 	name = "nite's grace"
 	desc = "The Moon Prince is watching."
 	force_wielded = DAMAGE_GREATSWORD_WIELD
@@ -190,19 +190,19 @@
 	sellprice = 0
 	slot_flags = 0 //scabbard only
 
-/obj/item/weapon/sword/long/silver/truesilver/nitewarden/Initialize(mapload)
+/obj/item/weapon/sword/long/truesilver/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/anti_theft)
 
-/obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden
+/obj/item/weapon/knife/dagger/truesilver/misericorde/nitewarden
 	name = "nite's sting"
 	desc = "The Moon Prince is watching."
 	max_blade_int = 50000
 	max_integrity = 50000
 	resistance_flags = INDESTRUCTIBLE
 
-/obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden/Initialize(mapload)
+/obj/item/weapon/knife/dagger/truesilver/misericorde/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/lightning)
 	enchant(/datum/enchantment/anti_theft)
@@ -230,5 +230,5 @@
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden/Initialize()
 	. = ..()
-	new /obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden(src)
+	new /obj/item/weapon/knife/dagger/truesilver/misericorde/nitewarden(src)
 	update_appearance(UPDATE_ICON_STATE)

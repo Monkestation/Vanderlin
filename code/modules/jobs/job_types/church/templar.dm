@@ -172,7 +172,7 @@
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			var/static/list/selectable = list(
 				"Moonlight Khopesh" = /obj/item/weapon/sword/sabre/noc,
-				"Lunar Flail" = /obj/item/weapon/flail/silver/noc,
+				"Lunar Flail" = /obj/item/weapon/flail/noc,
 			)
 			var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "TEMPLAR")
 			if(!choice)

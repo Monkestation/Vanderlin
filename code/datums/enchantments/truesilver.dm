@@ -32,7 +32,7 @@
 	STOP_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/truesilver/proc/affected_by_bane(mob/target)
-	if(!ishuman(target) || !target.mind)
+	if(!ishuman(target) || !target.mind || HAS_TRAIT(target, TRAIT_TRUESILVER_IMMUNE))
 		return TRUESILVER_UNAFFECTED
 	var/datum/antagonist/vampire/vamp_datum = target.mind.has_antag_datum(/datum/antagonist/vampire)
 	var/datum/antagonist/werewolf/wolf_datum = IS_WEREWOLF(target)

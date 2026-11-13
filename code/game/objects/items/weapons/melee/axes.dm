@@ -597,6 +597,10 @@
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_TRUESILVER
 
+/obj/item/weapon/greataxe/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/truesilver)
+
 /obj/item/weapon/greataxe/blacksteel
 	name = "blacksteel greataxe"
 	desc = "A magnificent greataxe of blacksteel, tipped with spikes to keep the horrors at bay. No one's quite sure as to whether it's meant \
