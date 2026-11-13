@@ -2015,6 +2015,16 @@
 	craftdiff = 2
 	category = "Gloves"
 
+/datum/repeatable_crafting_recipe/sewing/bandaged_feet
+	name = "Bandage footwraps"
+	output = /obj/item/clothing/shoes/boots/footbandages
+	requirements = list(
+		/obj/item/natural/cloth = 4,
+		/obj/item/natural/fibers = 1
+	)
+	craftdiff = 2
+	category = "Boots"
+
 /datum/repeatable_crafting_recipe/sewing/bandaged_gloves_weighted
 	name = "Weighted Bandaged Gloves"
 	output = /obj/item/clothing/gloves/bandages/weighted
