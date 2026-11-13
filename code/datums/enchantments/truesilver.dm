@@ -7,11 +7,11 @@
 
 /datum/enchantment/truesilver
 	enchantment_name = "Truesilver's light"
-	examine_text = span_silver("Noc's light shines through it. The absolute bane of nitecreachers.")
+	examine_text = SPAN_GOD_NOC("Noc's light shines through it. The absolute bane of nitecreachers.")
 	essence_recipe = list(
 		/datum/thaumaturgical_essence/order = 150,
-		/datum/thaumaturgical_essence/light = 75,
-		/datum/thaumaturgical_essence/magic = 75
+		/datum/thaumaturgical_essence/light = 150,
+		/datum/thaumaturgical_essence/magic = 150
 	)
 	var/list/last_used = list()
 	var/active_item = FALSE
