@@ -2228,6 +2228,15 @@
 /obj/structure/lootable_structure/stockpile/powder_sack,
 /turf/open/floor/blocks/newstone/alt,
 /area/outdoors/wilderness/central)
+"ic" = (
+/obj/structure/gate/bars/preopen{
+	name = "Bridge gate";
+	redstone_id = bridgegate
+	},
+/obj/machinery/light/fueled/wallfire/candle/l,
+/obj/machinery/light/fueled/torchholder/l,
+/turf/open/floor/cobblerock,
+/area/outdoors/wilderness/plains)
 "id" = (
 /obj/structure/fluff/walldeco/stone,
 /turf/closed/wall/mineral/stone/moss,
@@ -5280,7 +5289,7 @@
 /area/outdoors/wilderness/plains)
 "td" = (
 /obj/structure/gate/bars/preopen{
-	redstone_id = thatchsouth
+	redstone_id = "thatchsouth"
 	},
 /turf/open/floor/cobble,
 /area/outdoors/wilderness/plains)
@@ -5303,7 +5312,7 @@
 /area/outdoors/wilderness/plains)
 "th" = (
 /obj/structure/winch{
-	redstone_id = thatchsouth;
+	redstone_id = "thatchsouth";
 	name = "south"
 	},
 /turf/open/floor/cobble,
@@ -6544,15 +6553,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/cave)
-"xb" = (
-/obj/structure/gate/bars/preopen{
-	name = "bridge gate";
-	redstone_id = bridgegate
-	},
-/obj/machinery/light/fueled/wallfire/candle/l,
-/obj/machinery/light/fueled/torchholder/l,
-/turf/open/floor/cobblerock,
-/area/outdoors/wilderness/plains)
 "xc" = (
 /obj/structure/meathook,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -59223,7 +59223,7 @@ pR
 pR
 yL
 lM
-xb
+ic
 pL
 pL
 pY
