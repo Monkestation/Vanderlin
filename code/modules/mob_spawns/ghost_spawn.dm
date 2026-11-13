@@ -151,6 +151,8 @@
 
 /obj/effect/mob_spawn/ghost_role/special(mob/living/spawned_mob, mob/mob_possessor, apply_prefs)
 	. = ..()
+	//if prefs were applied, we will iterate trough post mind prefs too.
+	var/prefs_applied = FALSE
 	if(mob_possessor)
 		if(mob_possessor.client && apply_prefs && allow_custom_character && ishuman(spawned_mob))
 			var/mob/living/carbon/human/spawned_human = spawned_mob
@@ -161,6 +163,7 @@
 			if(allow_custom_character & GHOSTROLE_TAKE_PREFS_SPECIES)
 				spawned_human.set_species(mob_possessor.client.prefs.pref_species)
 				spawned_human.fully_replace_character_name(spawned_human.real_name, spawned_human.dna.species.random_name())
+			prefs_applied = TRUE
 		if(mob_possessor.mind)
 			mob_possessor.mind.transfer_to(spawned_mob, force_key_move = TRUE)
 		else
@@ -170,6 +173,8 @@
 	if(spawned_mind)
 		spawned_mob.mind.set_assigned_role(SSjob.GetJobType(spawner_job_path))
 		spawned_mind.name = spawned_mob.real_name
+		if(prefs_applied)
+			mob_possessor.client.prefs.apply_post_mind_preferences(spawned_mob)
 
 	if(show_flavor)
 		var/output_message = "<span class='big bold'>[you_are_text]</span>"

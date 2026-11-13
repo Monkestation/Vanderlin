@@ -90,7 +90,9 @@
 	blade.headshot_link = null
 	blade.flavortext = null
 	blade.flavortext_display = null
-	blade.accent = ACCENT_NONE
+	var/datum/language_holder/lh = blade.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_NONE
 
 	. = ..()
 

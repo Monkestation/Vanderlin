@@ -53,9 +53,9 @@
 /datum/job/advclass/mercenary/grenzelhofthalb/after_spawn(mob/living/carbon/human/H)
 	. = ..()
 	H.merctype = 2
-	if(H.dna?.species.id == SPEC_ID_HUMEN)
-		H.dna.species.native_language = "Old Psydonic"
-		H.dna.species.accent_language = H.dna.species.get_accent(H.dna.species.native_language)
+	var/datum/language_holder/lh = H.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_GRENZ
 
 /datum/job/advclass/mercenary/grenzelhofthalb/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()
