@@ -2,16 +2,34 @@
 "a" = (
 /turf/closed/mineral/bedrock,
 /area/under/tomb)
+"b" = (
+/obj/machinery/light/fueled/chand,
+/turf/open/openspace,
+/area/under/tomb)
 "c" = (
 /obj/item/clothing/armor/cuirass/iron,
+/turf/open/floor/naturalstone,
+/area/under/tomb)
+"d" = (
+/obj/effect/decal/cleanable/blood/drip{
+	dir = 1
+	},
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "e" = (
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
-"g" = (
-/obj/item/clothing/head/helmet/ironpot,
+"f" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 4
+	},
+/turf/open/floor/naturalstone,
+/area/under/tomb)
+"h" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 1
+	},
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "i" = (
@@ -19,8 +37,9 @@
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
-"k" = (
-/obj/item/clothing/armor/chainmail/iron,
+"j" = (
+/obj/effect/landmark/chest_or_mimic,
+/obj/item/weapon/sword/iron,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "l" = (
@@ -34,24 +53,20 @@
 /area/under/tomb)
 "n" = (
 /obj/effect/landmark/chest_or_mimic,
-/obj/item/clothing/ring/silver,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "o" = (
 /obj/item/clothing/head/helmet/bascinet,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
-"p" = (
-/obj/item/clothing/armor/medium/scale,
-/obj/item/weapon/polearm/spear,
-/turf/open/floor/naturalstone,
-/area/under/tomb)
-"q" = (
-/obj/item/clothing/head/helmet/winged,
-/turf/open/floor/naturalstone,
-/area/under/tomb)
 "r" = (
-/obj/item/clothing/armor/gambeson/arming,
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/blood/drip{
+	dir = 1
+	},
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "s" = (
@@ -67,6 +82,13 @@
 /area/under/tomb)
 "u" = (
 /obj/effect/dungeon_directional_helper/north,
+/turf/open/floor/naturalstone,
+/area/under/tomb)
+"v" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 6
+	},
+/obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "x" = (
@@ -89,19 +111,20 @@
 "B" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /obj/effect/landmark/chest_or_mimic,
-/obj/item/clothing/ring/silver/rontz,
+/obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "C" = (
-/obj/item/clothing/shoes/boots/armor,
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood/drip{
+	dir = 4
+	},
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "D" = (
 /obj/structure/stairs/stone,
-/turf/open/floor/naturalstone,
-/area/under/tomb)
-"G" = (
-/obj/item/clothing/head/helmet/skullcap,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "H" = (
@@ -112,6 +135,14 @@
 /area/under/tomb)
 "I" = (
 /obj/item/weapon/polearm/spear,
+/turf/open/floor/naturalstone,
+/area/under/tomb)
+"K" = (
+/obj/effect/decal/cleanable/blood/gibs/down,
+/turf/open/floor/naturalstone,
+/area/under/tomb)
+"L" = (
+/obj/structure/bars,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "M" = (
@@ -134,8 +165,11 @@
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
-"U" = (
-/obj/item/clothing/armor/leather/hide,
+"V" = (
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/blood/drip,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "X" = (
@@ -149,7 +183,10 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 "Z" = (
-/obj/item/clothing/armor/cuirass/grenzelhoft,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/effect/decal/cleanable/blood/tracks{
+	dir = 4
+	},
 /turf/open/floor/naturalstone,
 /area/under/tomb)
 
@@ -206,9 +243,9 @@ a
 a
 a
 a
-a
-a
-a
+L
+L
+L
 a
 a
 a
@@ -252,9 +289,9 @@ R
 R
 R
 R
-Z
 R
-M
+R
+R
 R
 R
 R
@@ -272,8 +309,8 @@ R
 R
 R
 R
-I
-U
+R
+R
 R
 R
 R
@@ -295,7 +332,7 @@ R
 X
 M
 y
-R
+I
 R
 R
 y
@@ -316,14 +353,14 @@ R
 R
 Q
 R
-o
-C
+R
+R
 y
 R
 R
-M
-k
-I
+R
+R
+R
 R
 a
 Y
@@ -332,36 +369,36 @@ Y
 (9,1,1) = {"
 R
 R
-a
+L
 R
 R
 R
-G
+R
 R
 R
 i
-m
+j
 n
 R
-g
 R
 R
 R
-a
+R
+L
 R
 R
 "}
 (10,1,1) = {"
 u
 R
-a
+L
 R
 y
 R
 P
 R
-c
-m
+R
+n
 B
 s
 y
@@ -369,14 +406,14 @@ R
 R
 y
 R
-a
+L
 R
 e
 "}
 (11,1,1) = {"
 R
 R
-a
+L
 R
 R
 R
@@ -391,19 +428,19 @@ R
 R
 R
 R
-a
+L
 R
 R
 "}
 (12,1,1) = {"
 R
 R
-a
+L
 R
 R
 R
 R
-p
+I
 y
 R
 y
@@ -413,7 +450,7 @@ y
 R
 R
 R
-a
+L
 R
 R
 "}
@@ -427,6 +464,7 @@ R
 R
 R
 R
+I
 R
 R
 R
@@ -434,7 +472,6 @@ R
 R
 R
 R
-r
 a
 z
 z
@@ -449,12 +486,12 @@ R
 R
 R
 R
-I
-q
+R
+R
 R
 c
 R
-I
+R
 R
 R
 a
@@ -468,7 +505,7 @@ a
 a
 R
 R
-M
+R
 y
 R
 R
@@ -493,12 +530,12 @@ R
 R
 R
 R
-M
 R
 R
-I
 R
-M
+R
+R
+R
 a
 a
 a
@@ -536,9 +573,9 @@ a
 a
 a
 a
-a
-a
-a
+L
+L
+L
 a
 a
 a
@@ -604,7 +641,7 @@ R
 t
 x
 x
-R
+d
 x
 x
 D
@@ -626,7 +663,7 @@ R
 t
 x
 x
-R
+f
 x
 x
 D
@@ -648,7 +685,7 @@ R
 R
 R
 R
-R
+Z
 R
 R
 R
@@ -670,7 +707,7 @@ R
 x
 x
 x
-R
+f
 x
 x
 x
@@ -692,7 +729,7 @@ x
 x
 x
 x
-R
+f
 x
 x
 x
@@ -714,7 +751,7 @@ x
 x
 x
 x
-R
+r
 x
 x
 x
@@ -733,13 +770,13 @@ R
 x
 x
 x
+b
 x
 x
-x
-R
-x
+f
 x
 x
+b
 x
 x
 x
@@ -758,7 +795,7 @@ x
 x
 x
 x
-R
+f
 x
 x
 x
@@ -780,7 +817,7 @@ x
 x
 x
 x
-R
+f
 x
 x
 x
@@ -794,15 +831,15 @@ x
 "}
 (10,1,2) = {"
 R
-R
-R
-R
-R
-R
-R
-R
-R
-R
+K
+h
+h
+V
+h
+h
+h
+C
+v
 R
 R
 R
@@ -887,13 +924,13 @@ R
 R
 x
 x
-x
+b
 x
 x
 R
 x
 x
-x
+b
 x
 x
 x

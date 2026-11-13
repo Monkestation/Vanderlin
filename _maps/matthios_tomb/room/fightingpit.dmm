@@ -64,8 +64,8 @@
 /area/under/tomb)
 "ks" = (
 /obj/structure/closet/crate/chest/gold,
-/obj/item/clothing/head/helmet/visored/knight,
-/obj/item/clothing/gloves/plate,
+/obj/item/clothing/gloves/chain,
+/obj/item/clothing/head/helmet/visored/knight/iron,
 /turf/open/floor/metal,
 /area/under/tomb)
 "lh" = (
@@ -95,8 +95,8 @@
 "ry" = (
 /obj/structure/closet/crate/chest/gold,
 /obj/item/weapon/sword/sabre/cutlass,
-/obj/item/weapon/knife/dagger/silver,
 /obj/item/weapon/shield/tower/metal,
+/obj/item/weapon/knife/dagger/steel,
 /turf/open/floor/metal,
 /area/under/tomb)
 "rz" = (
@@ -224,9 +224,7 @@
 /area/under/tomb)
 "OB" = (
 /obj/structure/closet/crate/chest/gold,
-/obj/item/gem/green,
-/obj/item/gem/red,
-/obj/item/gem/yellow,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /turf/open/floor/metal,
 /area/under/tomb)
 "Pd" = (

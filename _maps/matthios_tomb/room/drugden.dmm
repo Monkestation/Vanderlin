@@ -49,18 +49,13 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"hU" = (
-/obj/structure/bed/shit,
-/obj/item/statue/iron,
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
 "il" = (
 /obj/structure/stairs/d,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "iy" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/statue/silver,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "iO" = (
@@ -163,8 +158,8 @@
 "uv" = (
 /obj/structure/table/vtable,
 /obj/item/weapon/knife/dagger/silver{
-	pixel_y = 8;
-	pixel_x = 6
+	pixel_y = 3;
+	pixel_x = 7
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
@@ -193,7 +188,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "Cj" = (
-/obj/item/statue/steel,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/tile,
 /area/under/tomb/indoors)
 "Cy" = (
@@ -270,7 +265,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "JN" = (
-/obj/item/gem/violet,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/water/bath,
 /area/under/tomb/indoors)
 "Kf" = (
@@ -293,12 +288,11 @@
 "Nh" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/closet/crate/drawer/inn,
-/obj/item/gem/blue,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "Pk" = (
 /mob/living/carbon/human/species/zizombie/npc/militiamen,
-/obj/item/clothing/ring/gold/gemerald,
 /obj/effect/mapping_helpers/floor_clothing_equipper,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
@@ -308,10 +302,6 @@
 /area/under/tomb/indoors)
 "RE" = (
 /obj/structure/table/vtable/v2,
-/obj/item/weapon/knife/dagger/silver{
-	pixel_y = 3;
-	pixel_x = -3
-	},
 /obj/item/reagent_containers/powder/moondust,
 /obj/item/reagent_containers/powder/moondust{
 	pixel_y = 10;
@@ -362,11 +352,6 @@
 	pixel_y = 23;
 	pixel_x = 14
 	},
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
-"Zx" = (
-/obj/structure/bed/shit,
-/obj/item/statue/iron/deformed,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "ZQ" = (
@@ -910,7 +895,7 @@ Dh
 jV
 js
 rz
-Zx
+ht
 jV
 RU
 iO
@@ -952,7 +937,7 @@ hr
 ro
 Dh
 jV
-hU
+ht
 rz
 ht
 jV

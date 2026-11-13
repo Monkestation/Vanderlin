@@ -8,15 +8,12 @@
 	pixel_x = 14;
 	pixel_y = -8
 	},
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/spider)
 "e" = (
 /obj/structure/spider/stickyweb,
 /mob/living/simple_animal/hostile/retaliate/spider,
-/turf/open/floor/naturalstone,
-/area/under/tomb/cave/spider)
-"g" = (
-/obj/item/coin/copper/pile,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/spider)
 "h" = (
@@ -66,7 +63,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/spider)
 "z" = (
-/obj/item/reagent_containers/food/snacks/cooked/sausage{
+/obj/item/reagent_containers/food/snacks/rotten/sausage{
 	pixel_x = 14;
 	pixel_y = 4
 	},
@@ -162,7 +159,7 @@
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/spider)
 "V" = (
-/obj/item/statue/iron,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave/spider)
 "W" = (
@@ -900,8 +897,8 @@ a
 X
 Y
 X
+V
 X
-g
 a
 X
 X

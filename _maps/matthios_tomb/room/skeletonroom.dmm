@@ -1,4 +1,18 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"at" = (
+/obj/effect/decal/carpet{
+	dir = 8;
+	pixel_y = 16
+	},
+/turf/open/floor/wood,
+/area/under/tomb/indoors/church)
+"bF" = (
+/obj/structure/chair/bench/church/r,
+/mob/living/carbon/human/species/skeleton/npc/warrior,
+/turf/open/floor/carpet/lord/corner{
+	dir = 8
+	},
+/area/under/tomb/indoors/church)
 "bZ" = (
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/stone/moss,
@@ -77,15 +91,16 @@
 	},
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors/church)
+"lh" = (
+/obj/structure/chair/bench/church/mid,
+/turf/open/floor/carpet/lord/left{
+	dir = 1
+	},
+/area/under/tomb/indoors/church)
 "lM" = (
 /obj/structure/table/church/m,
 /obj/item/clothing/ring/active/nomag{
-	pixel_x = 23;
-	pixel_y = 6
-	},
-/obj/item/weapon/sword/decorated{
-	name = "A Lords Blade";
-	desc = "A long dead kings Blade, Forgotten to time yet master in work."
+	pixel_y = 9
 	},
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors/church)
@@ -103,6 +118,12 @@
 /obj/structure/fluff/walldeco/painting,
 /turf/closed/wall/mineral/stone/moss,
 /area/under/tomb/indoors/church)
+"pp" = (
+/obj/structure/chair/bench/church,
+/turf/open/floor/carpet/lord/corner{
+	dir = 1
+	},
+/area/under/tomb/indoors/church)
 "pt" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -115,8 +136,18 @@
 	},
 /turf/open/floor/wood,
 /area/under/tomb/indoors/church)
+"ro" = (
+/obj/structure/fluff/walldeco/painting/castle,
+/turf/closed/wall/mineral/stone/moss,
+/area/under/tomb/indoors/church)
 "rq" = (
 /turf/open/floor/hexstone,
+/area/under/tomb/indoors/church)
+"rC" = (
+/obj/structure/chair/bench/church,
+/turf/open/floor/carpet/lord/corner{
+	dir = 2
+	},
 /area/under/tomb/indoors/church)
 "rG" = (
 /obj/effect/dungeon_directional_helper/north,
@@ -125,6 +156,9 @@
 "sj" = (
 /obj/structure/table/church{
 	dir = 1
+	},
+/obj/item/candle/scandelabrasingle/lit{
+	pixel_y = 19
 	},
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors/church)
@@ -137,12 +171,7 @@
 /area/under/tomb/indoors/church)
 "sU" = (
 /obj/structure/table/vtable,
-/obj/item/statue/gold/loot{
-	pixel_y = 11
-	},
-/turf/open/floor/hexstone,
-/area/under/tomb/indoors/church)
-"tN" = (
+/obj/effect/dungeon_loot_spawner/high,
 /obj/structure/fluff/walldeco/bigpainting,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors/church)
@@ -158,21 +187,15 @@
 /obj/effect/dungeon_directional_helper/south,
 /turf/open/floor/cobblerock,
 /area/under/tomb)
-"wm" = (
-/obj/item/ingot/gold,
-/obj/item/ingot/gold{
-	pixel_x = 9;
-	pixel_y = -4
-	},
-/obj/item/ingot/gold{
-	pixel_y = 4;
-	pixel_x = 5
-	},
-/turf/open/floor/hexstone,
-/area/under/tomb/indoors/church)
 "Dn" = (
 /obj/structure/fluff/walldeco/painting/crown,
 /turf/closed/wall/mineral/stone/moss,
+/area/under/tomb/indoors/church)
+"Fd" = (
+/obj/structure/chair/bench/church/r,
+/turf/open/floor/carpet/lord/corner{
+	dir = 4
+	},
 /area/under/tomb/indoors/church)
 "FJ" = (
 /obj/item/reagent_containers/food/snacks/smallrat,
@@ -185,6 +208,12 @@
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/cobblerock,
 /area/under/tomb)
+"GI" = (
+/obj/structure/chair/bench/church/r,
+/turf/open/floor/carpet/lord/corner{
+	dir = 8
+	},
+/area/under/tomb/indoors/church)
 "HA" = (
 /turf/closed/mineral/bedrock,
 /area/under/tomb)
@@ -199,15 +228,15 @@
 /area/under/tomb)
 "Jr" = (
 /obj/structure/table/vtable/v2,
-/obj/item/statue/gold{
-	pixel_y = 14
-	},
+/obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors/church)
 "KA" = (
 /obj/structure/chair/bench/church/mid,
 /mob/living/carbon/human/species/skeleton/npc/warrior,
-/turf/open/floor/carpet/lord/center,
+/turf/open/floor/carpet/lord/right{
+	dir = 1
+	},
 /area/under/tomb/indoors/church)
 "KI" = (
 /obj/structure/fluff/walldeco/bigpainting/lake,
@@ -215,13 +244,8 @@
 /area/under/tomb/indoors/church)
 "KQ" = (
 /obj/structure/table/church,
-/obj/item/reagent_containers/glass/cup/golden{
-	pixel_x = -6;
-	pixel_y = 14
-	},
-/obj/item/gem/blue{
-	pixel_y = 7;
-	pixel_x = 5
+/obj/item/candle/scandelabrasingle/lit{
+	pixel_y = 19
 	},
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors/church)
@@ -267,10 +291,6 @@
 	},
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/hexstone,
-/area/under/tomb/indoors/church)
-"SB" = (
-/obj/structure/fluff/walldeco/painting/castle,
-/turf/closed/wall/mineral/stone,
 /area/under/tomb/indoors/church)
 "SO" = (
 /turf/open/floor/cobblerock,
@@ -323,6 +343,13 @@
 /obj/item/weapon/knife/cleaver{
 	pixel_x = -2;
 	pixel_y = -8
+	},
+/turf/open/floor/wood,
+/area/under/tomb/indoors/church)
+"YJ" = (
+/obj/effect/decal/carpet{
+	dir = 4;
+	pixel_y = 16
 	},
 /turf/open/floor/wood,
 /area/under/tomb/indoors/church)
@@ -381,15 +408,15 @@ HA
 (4,1,1) = {"
 HA
 eD
-tN
 rq
 rq
-uk
+rq
+pp
 uk
 uk
 uk
 iu
-uk
+rC
 rq
 rq
 gQ
@@ -406,7 +433,7 @@ gi
 gi
 gi
 gi
-gi
+lh
 rq
 rq
 gQ
@@ -418,12 +445,12 @@ eD
 Jr
 rq
 rq
-TP
+Fd
 TP
 kd
 TP
 TP
-TP
+GI
 rq
 rq
 eD
@@ -483,15 +510,15 @@ SO
 (10,1,1) = {"
 HA
 gQ
-wm
+WQ
 rq
 rq
-uk
+pp
 uk
 uk
 iu
 uk
-uk
+rC
 rq
 rq
 gQ
@@ -499,7 +526,7 @@ HA
 "}
 (11,1,1) = {"
 HA
-gQ
+ro
 rq
 rq
 rq
@@ -508,7 +535,7 @@ gi
 gi
 gi
 gi
-gi
+lh
 rq
 rq
 eD
@@ -516,16 +543,16 @@ HA
 "}
 (12,1,1) = {"
 HA
-SB
+eD
 rq
 rq
 rq
-TP
+Fd
 TP
 kd
 TP
 TP
-kd
+bF
 rq
 rq
 gQ
@@ -534,7 +561,7 @@ HA
 (13,1,1) = {"
 HA
 gQ
-WQ
+rq
 rq
 rq
 rq
@@ -625,7 +652,7 @@ Gd
 Gd
 SQ
 SQ
-SQ
+YJ
 SQ
 SQ
 SQ
@@ -795,7 +822,7 @@ Gd
 Gd
 SQ
 SQ
-SQ
+at
 SQ
 SQ
 TH
