@@ -56,11 +56,22 @@
 	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/clothing/pants/trou/leather/advanced
-	name = "hardened leather chausses"
+	name = "hardened leather trousers"
 	desc = "Sturdy, durable, flexible. The finest leather to protect your nether regions."
 	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/pants/leather/advanced
+
+/obj/item/clothing/pants/trou/leather/masterwork
+	name = "masterwork leather trousers"
+	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
+	max_integrity = INTEGRITY_OLD_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
+	armor_type = /datum/armor/pants/leather/master
+
+/obj/item/clothing/pants/trou/leather/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
 /obj/item/clothing/pants/trou/leather/advanced/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -89,17 +100,6 @@
 
 /obj/item/clothing/pants/trou/leather/quiltedkilt/colored/linen
 	color = CLOTHING_LINEN
-
-/obj/item/clothing/pants/trou/leather/masterwork
-	name = "masterwork leather chausses"
-	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_OLD_STRONG + 100
-	prevent_crits = ALL_EXCEPT_STAB
-	armor_type = /datum/armor/pants/leather/master
-
-/obj/item/clothing/pants/trou/leather/masterwork/Initialize()
-	. = ..()
-	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
 /obj/item/clothing/pants/trou/leather/mourning
 	name = "mourning trousers"

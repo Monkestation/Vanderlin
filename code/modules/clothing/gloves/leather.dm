@@ -7,11 +7,13 @@
 	blocksound = SOFTHIT
 	blade_dulling = DULLING_BASHCHOP
 	resistance_flags = FLAMMABLE // Made of leather
-
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	salvage_amount = 1
+	fiber_salvage = FALSE
 	armor_type = /datum/armor/gloves/padded/bad
 	prevent_crits = CUT_AND_MINOR_CRITS
 	max_integrity = INTEGRITY_OLD_POOR
-	salvage_result = null
 	item_weight = 300 GRAMS
 
 /obj/item/clothing/gloves/leather/black
@@ -69,8 +71,6 @@
 	break_sound = 'sound/foley/cloth_rip.ogg'
 	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
 	anvilrepair = null
-	sewrepair = /datum/attribute/skill/craft/tanning/patching
-	salvage_result = /obj/item/natural/hide/cured
 	dyeable = TRUE
 
 /obj/item/clothing/gloves/leather/grenzel/inqgloves
