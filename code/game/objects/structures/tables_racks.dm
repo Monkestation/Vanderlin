@@ -37,7 +37,7 @@
 
 /obj/structure/table/Initialize()
 	. = ..()
-	AddElement(/datum/element/footstep_override, priority = STEP_SOUND_TABLE_PRIORITY)
+	AddElement(/datum/element/footstep_override, priority = STEP_SOUND_TABLE_PRIORITY, footstep = FOOTSTEP_OLDWOOD, barefootstep = FOOTSTEP_HARD_BAREFOOT, land_sound = 'sound/foley/jumpland/woodland.ogg')
 
 /obj/structure/table/update_icon()
 	. = ..()
