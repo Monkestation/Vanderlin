@@ -123,6 +123,8 @@
 	. = ..()
 
 /datum/antagonist/vampire/lord/nitewarden/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
+		return SPAN_GOD_ASTRATA("My Solar Counterpart.")
 	if(istype(examined_datum, /datum/antagonist/zombie))
 		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
@@ -130,22 +132,22 @@
 	if(istype(examined_datum, /datum/antagonist/purishep))
 		return span_red("Silverblood.")
 
-/datum/antagonist/vampire/lord/nitewarden/proc/on_examine(datum/source, mob/user, list/examine_list)
+/datum/antagonist/vampire/lord/nitewarden/proc/on_examine(mob/living/warden, mob/living/user, list/examine_list, list/P)
 	SIGNAL_HANDLER
-	if(!istype(user))
+	if(warden == user)
 		return
-	if(owner.current == user)
+	if(!is_human_part_visible(warden, HIDEFACE))
 		return
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))
-		examine_list += span_boldred("Blood Drinker! They can have no excuses!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_boldred("Blood Drinker! They can have no excuses!"))
 	else if(user.mind?.has_antag_datum(/datum/antagonist/werewolf))
-		examine_list += span_boldred("The bloodsucker of Noc...")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_boldred("The bloodsucker of Noc..."))
 	else if(is_priest_job(user.mind?.assigned_role))
-		examine_list += SPAN_GOD_NOC("The servant of The Moon!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, SPAN_GOD_NOC("The servant of The Moon!"))
 	else if(HAS_TRAIT(user, TRAIT_LUNAR_ORDER))
-		examine_list += SPAN_GOD_NOC("The everwalking servant of The Prince!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, SPAN_GOD_NOC("The everwalking servant of The Prince!"))
 	else if(user.mind?.has_antag_datum(/datum/antagonist/maniac))
-		examine_list += span_green("Yet another legally distinct vampire hunter!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_green("Yet another legally distinct vampire hunter!"))
 
 /datum/antagonist/vampire/lord/nitewarden/greet()
 	to_chat(owner.current, span_danger(antag_memory))
