@@ -301,7 +301,7 @@
 	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/bars/grille/Initialize()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
 	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	dir = pick(GLOB.cardinals)
 	return ..()
@@ -367,7 +367,7 @@
 
 /obj/structure/bars/pipe/Initialize()
 	. = ..()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/bars/pipe/left
@@ -1672,7 +1672,7 @@
 
 /obj/structure/fluff/steamvent/Initialize()
 	. = ..()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
 	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
 	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))
 

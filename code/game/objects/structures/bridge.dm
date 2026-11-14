@@ -15,7 +15,7 @@
 
 /obj/structure/bridge/Initialize(mapload)
 	. = ..()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD, barefootstep = FOOTSTEP_HARD_BAREFOOT, land_sound = 'sound/foley/jumpland/woodland.ogg')
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD, barefootstep = FOOTSTEP_OLDWOOD)
 	var/static/list/loc_connections = list(COMSIG_ATOM_EXIT = PROC_REF(on_exit))
 	AddElement(/datum/element/connect_loc, loc_connections)
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))

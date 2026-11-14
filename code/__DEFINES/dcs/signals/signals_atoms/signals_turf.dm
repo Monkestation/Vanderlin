@@ -5,8 +5,6 @@
 
 ///from /datum/element/footstep/prepare_step(): (list/steps)
 #define COMSIG_TURF_PREPARE_STEP_SOUND "turf_prepare_step_sound"
-#define COMSIG_TURF_GET_LAND_SOUND "turf_get_land_sound"
-	#define LAND_SOUND_RETURNED (1<<0)
 	//stops element/footstep/proc/prepare_step() from returning null if the turf itself has no sound
 	#define FOOTSTEP_OVERRIDEN (1<<0)
 

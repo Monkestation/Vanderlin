@@ -10,8 +10,6 @@
 	var/heavyfootstep
 	///The sound played for movables with shoed step sound type.
 	var/footstep
-	///The sound played for movables that land on the turf.
-	var/land_sound
 	///The priority this element has in relation to other elements of the same type attached to other movables on the same turf.
 	var/priority
 	/**
@@ -20,7 +18,7 @@
 	 */
 	var/list/occupied_turfs = list()
 
-/datum/element/footstep_override/Attach(atom/movable/target, clawfootstep = FOOTSTEP_HARD_CLAW, barefootstep = FOOTSTEP_HARD_BAREFOOT, heavyfootstep = FOOTSTEP_GENERIC_HEAVY, footstep = FOOTSTEP_FLOOR, land_sound = null, priority = STEP_SOUND_NO_PRIORITY)
+/datum/element/footstep_override/Attach(atom/movable/target, clawfootstep = FOOTSTEP_HARD_CLAW, barefootstep = FOOTSTEP_HARD_BAREFOOT, heavyfootstep = FOOTSTEP_GENERIC_HEAVY, footstep = FOOTSTEP_FLOOR, priority = STEP_SOUND_NO_PRIORITY)
 	. = ..()
 	if(!ismovable(target))
 		return ELEMENT_INCOMPATIBLE
@@ -30,7 +28,6 @@
 	src.heavyfootstep = heavyfootstep
 	src.footstep = footstep
 	src.priority = priority
-	src.land_sound = land_sound
 
 	RegisterSignal(target, COMSIG_MOVABLE_MOVED, PROC_REF(on_moved))
 	if(isturf(target.loc))
@@ -60,7 +57,6 @@
 		return
 	occupied_turfs[location] = list(movable)
 	RegisterSignal(location, COMSIG_TURF_PREPARE_STEP_SOUND, PROC_REF(prepare_steps))
-	RegisterSignal(location, COMSIG_TURF_GET_LAND_SOUND, PROC_REF(get_land_sound))
 
 /**
  * Removes the movable from the list of movables with the element occupying the turf.
@@ -72,13 +68,6 @@
 	if(!occupied_turfs[location])
 		occupied_turfs -= location
 		UnregisterSignal(location, COMSIG_TURF_PREPARE_STEP_SOUND)
-		UnregisterSignal(location, COMSIG_TURF_GET_LAND_SOUND)
-
-/datum/element/footstep_override/proc/get_land_sound(turf/source, list/_land_sound)
-	SIGNAL_HANDLER
-	if(land_sound)
-		_land_sound += src.land_sound
-		return LAND_SOUND_RETURNED
 
 ///Changes the sound types to be played if the element priority is higher than the one in the steps list.
 /datum/element/footstep_override/proc/prepare_steps(turf/source, list/steps)

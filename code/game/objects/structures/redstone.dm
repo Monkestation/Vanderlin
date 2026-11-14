@@ -445,7 +445,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/floordoor/Initialize()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD, barefootstep = FOOTSTEP_HARD_BAREFOOT, land_sound = 'sound/foley/jumpland/woodland.ogg')
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_OLDWOOD)
 	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	AddComponent(/datum/component/squeak, list('sound/foley/footsteps/FTMET_A1.ogg','sound/foley/footsteps/FTMET_A2.ogg','sound/foley/footsteps/FTMET_A3.ogg','sound/foley/footsteps/FTMET_A4.ogg'), 40, extrarange = SHORT_RANGE_SOUND_EXTRARANGE)
 	return ..()
@@ -544,7 +544,7 @@ GLOBAL_LIST_EMPTY(redstone_objs)
 
 /obj/structure/kybraxor/Initialize()
 	. = ..()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
 
 /obj/structure/kybraxor/redstone_triggered(mob/user)
 	if(changing_state)

@@ -16,7 +16,7 @@
 /obj/structure/roller/Initialize(mapload)
 	. = ..()
 	movedir = dir
-	AddElement(/datum/element/footstep_override, priority = STEP_SOUND_CONVEYOR_PRIORITY, footstep = FOOTSTEP_PLATING, land_sound = 'sound/foley/jumpland/metalland.ogg')
+	AddElement(/datum/element/footstep_override, priority = STEP_SOUND_CONVEYOR_PRIORITY)
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_TURF_IGNORE_SLOWDOWN)))
 
 	var/static/list/loc_connections = list(
