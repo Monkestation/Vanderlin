@@ -1,0 +1,3 @@
+/obj/item/key/mnoble2_yellow : /obj/item/key/mnoble2_green{@OLD}
+/area/indoors/town/noble_manor/yellow : /area/indoors/town/noble_manor/green{@OLD}
+/area/outdoors/town/noble_manor/yellow : /area/outdoors/town/noble_manor/green{@OLD}
