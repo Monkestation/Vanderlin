@@ -1375,6 +1375,7 @@
 #include "code\datums\enchantments\shattering.dm"
 #include "code\datums\enchantments\shrinking.dm"
 #include "code\datums\enchantments\silver.dm"
+#include "code\datums\enchantments\truesilver.dm"
 #include "code\datums\enchantments\on_hit\_base.dm"
 #include "code\datums\enchantments\on_hit\chaos_storm.dm"
 #include "code\datums\enchantments\on_hit\frostbite.dm"

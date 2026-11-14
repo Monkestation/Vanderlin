@@ -413,15 +413,21 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/knife/dagger/silver/truesilver
+/obj/item/weapon/knife/dagger/truesilver
 	name = "truesilver dagger"
 	desc = "A dagger made of truesilver, the thin death of nite creachers."
 	icon_state = "lunar_dagger"
+	max_blade_int = 160
 	sellprice = 80
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_DAGGER * INTEGRITY_MOD_TRUESILVER
+	item_weight = 210 GRAMS
 
-/obj/item/weapon/knife/dagger/silver/truesilver/misericorde
+/obj/item/weapon/knife/dagger/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/truesilver)
+
+/obj/item/weapon/knife/dagger/truesilver/misericorde
 	name = "truesilver misericorde"
 	desc = "An armor-piercing dagger of truesilver. Even the most well protected nite creacher will fear its sting."
 	icon_state = "lunar_misericorde"
@@ -824,13 +830,18 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/knife/throwingknife/silver/truesilver
+/obj/item/weapon/knife/throwingknife/truesilver
 	name = "truesilver tossblade"
 	desc = "A tossblade forged from truesilver. An unconventional method of delivering silver to a heretic but no less effective."
 	icon_state = "throw_knife_truesil"
 	max_integrity = INTEGRITY_TOSSBLADE * INTEGRITY_MOD_TRUESILVER
 	melting_material = /datum/material/truesilver
 	sellprice = 80
+	item_weight = 80 GRAMS
+
+/obj/item/weapon/knife/throwingknife/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/truesilver)
 
 /obj/item/weapon/knife/throwingknife/silver/psydon
 	name = "psydonian tossblade"
