@@ -96,11 +96,17 @@
 	return
 
 /datum/enchantment/truesilver/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
+	last_used["PULSE"] = (world.time + 10 SECONDS)
+	last_used["BLESSING"] = (world.time + 15 SECONDS)
 	apply_bane(i, user, FALSE)
+	apply_blessing(i, user)
 	START_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/truesilver/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
+	last_used["PULSE"] = (world.time + 10 SECONDS)
+	last_used["BLESSING"] = (world.time + 15 SECONDS)
 	apply_bane(i, user, FALSE)
+	apply_blessing(i, user)
 	START_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/truesilver/proc/apply_bane(obj/item/i, mob/living/carbon/human/user, pulse)
