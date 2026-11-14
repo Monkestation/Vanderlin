@@ -123,6 +123,8 @@
 	give_bank_account = 10
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_CHURCH_COURT_LIST
+	jobs_always_know_me = KNOW_CHURCH_COURT_LIST
 
 	job_bitflag = BITFLAG_CHURCH
 

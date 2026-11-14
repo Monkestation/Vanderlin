@@ -41,6 +41,8 @@
 	outfit = /datum/outfit/undertaker
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_CHURCH_COURT_LIST
+	jobs_always_know_me = KNOW_CHURCH_COURT_LIST
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 	can_be_apprentice = TRUE
 
