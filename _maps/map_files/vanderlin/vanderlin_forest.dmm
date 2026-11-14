@@ -7998,7 +7998,7 @@
 	property_id = "thatch3";
 	template_x = 9;
 	template_y = 6;
-	default_template = datum/map_template/thatch3
+	default_template = /datum/map_template/thatch3
 	},
 /turf/open/openspace,
 /area/outdoors/wilderness/outpost/vanderlin)
@@ -8022,7 +8022,7 @@
 	property_id = "thatch2";
 	template_x = 9;
 	template_y = 5;
-	default_template = datum/map_template/thatch2
+	default_template = /datum/map_template/thatch2
 	},
 /turf/open/openspace,
 /area/outdoors/wilderness/outpost/vanderlin)
@@ -8150,7 +8150,7 @@
 	property_id = "thatch1";
 	template_x = 10;
 	template_y = 6;
-	default_template = datum/map_template/thatch1
+	default_template = /datum/map_template/thatch1
 	},
 /turf/open/openspace,
 /area/outdoors/wilderness/outpost/vanderlin)
