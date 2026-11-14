@@ -1162,7 +1162,6 @@
 
 /obj/structure/fluff/statue/evil/proc/give_rewards(datum/antagonist/bandit/offering_bandit, mob/user)
 	offering_bandit.tri_amt++
-	user.mind.adjust_triumphs(1)
 	offering_bandit.contrib -= 80
 
 	var/obj/item/I
