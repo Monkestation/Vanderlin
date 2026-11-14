@@ -1,0 +1,168 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"b" = (
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/outdoors/wilderness/outpost/vanderlin)
+"c" = (
+/turf/closed/wall/mineral/wood,
+/area/outdoors/wilderness/outpost/vanderlin)
+"f" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/ruinedwood,
+/area/outdoors/wilderness/outpost/vanderlin)
+"g" = (
+/turf/open/floor/ruinedwood,
+/area/outdoors/wilderness/outpost/vanderlin)
+"h" = (
+/obj/structure/door/red,
+/turf/open/floor/ruinedwood,
+/area/outdoors/wilderness/outpost/vanderlin)
+"i" = (
+/obj/structure/table/wood/counter,
+/obj/structure/bars/wooden_arch,
+/turf/open/floor/ruinedwood,
+/area/outdoors/wilderness/outpost/vanderlin)
+"k" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/outdoors/wilderness/outpost/vanderlin)
+"l" = (
+/turf/open/floor/rooftop{
+	dir = 8
+	},
+/area/outdoors/wilderness/plains)
+"n" = (
+/turf/open/floor/ruinedwood,
+/area/outdoors/wilderness/plains)
+"o" = (
+/turf/open/floor/rooftop{
+	dir = 4
+	},
+/area/outdoors/wilderness/plains)
+
+(1,1,1) = {"
+b
+c
+c
+c
+b
+"}
+(2,1,1) = {"
+c
+f
+g
+f
+c
+"}
+(3,1,1) = {"
+c
+g
+g
+g
+c
+"}
+(4,1,1) = {"
+b
+c
+c
+h
+b
+"}
+(5,1,1) = {"
+c
+f
+g
+g
+c
+"}
+(6,1,1) = {"
+c
+g
+g
+g
+c
+"}
+(7,1,1) = {"
+c
+g
+g
+g
+c
+"}
+(8,1,1) = {"
+c
+g
+g
+g
+c
+"}
+(9,1,1) = {"
+k
+h
+i
+i
+b
+"}
+
+(1,1,2) = {"
+l
+l
+l
+l
+l
+"}
+(2,1,2) = {"
+l
+l
+l
+l
+l
+"}
+(3,1,2) = {"
+l
+l
+l
+l
+l
+"}
+(4,1,2) = {"
+l
+l
+l
+l
+l
+"}
+(5,1,2) = {"
+n
+n
+n
+n
+n
+"}
+(6,1,2) = {"
+l
+l
+l
+l
+l
+"}
+(7,1,2) = {"
+o
+o
+o
+o
+o
+"}
+(8,1,2) = {"
+o
+o
+o
+o
+o
+"}
+(9,1,2) = {"
+o
+o
+o
+o
+o
+"}
