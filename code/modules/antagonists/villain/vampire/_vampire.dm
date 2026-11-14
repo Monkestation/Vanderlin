@@ -86,7 +86,7 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		else if(forced)
 			vampdude.set_clan_direct(forcing_clan)
 			forcing_clan = null
-		else
+		if(!vampdude.clan)
 			message_admins(span_red("ERROR: Vampire Setup - No clan set"))
 
 	// The clan system now handles most of the setup, but we can still do antagonist-specific things
