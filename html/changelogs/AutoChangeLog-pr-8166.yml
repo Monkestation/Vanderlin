@@ -1,0 +1,6 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Selecting a clan is no longer overriden by Nosferatu."
+  - rscadd: "Added an Immortal Rascal subclass for Vampire Spawn as a backup for somehow selecting child slots."
+  - rscadd: "Added a blood magic capable subclass for Vampire Spawn, requiring a magic patron or archdevil patron."
