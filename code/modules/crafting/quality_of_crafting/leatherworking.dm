@@ -551,7 +551,7 @@
 	name = "forrester cloak (snow)"
 	output = /obj/item/clothing/cloak/forrestercloak/snow
 
-/datum/repeatable_crafting_recipe/leather/forrester/snow/hunter_bush
+/datum/repeatable_crafting_recipe/leather/cloak/forrester/snow/hunter_bush
 	name = "bush cloak"
 	requirements = list(
 		/obj/item/natural/fibers/sinew = 1,
