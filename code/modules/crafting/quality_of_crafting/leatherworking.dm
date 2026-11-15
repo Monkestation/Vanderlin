@@ -554,10 +554,10 @@
 /datum/repeatable_crafting_recipe/leather/forrester/snow/hunter_bush
 	name = "bush cloak"
 	requirements = list(
-    /obj/item/natural/fibers/sinew = 1,
+    	/obj/item/natural/fibers/sinew = 1,
 		/obj/item/natural/fur = 1,
 		/obj/item/natural/hide/cured = 2,
-    /obj/item/alch/tobaccodust = 1
+    	/obj/item/alch/tobaccodust = 1
 	)
  	output = /obj/item/clothing/cloak/raincloak/bush
 
