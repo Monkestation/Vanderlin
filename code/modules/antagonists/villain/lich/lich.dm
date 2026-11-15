@@ -102,10 +102,22 @@
 	set category = "RoleUnique.Lich"
 
 	var/confirm = tgui_alert(usr, "Confirm Self Destruct", "Confirm", DEFAULT_INPUT_CONFIRMATIONS)
-	if(confirm == CHOICE_CONFIRM)
-		death(FALSE)
-		message_admins("Lich [key_name_admin(usr)] self-destructed.")
-		log_game("Lich [key_name(usr)] self-destructed.")
+	if(confirm != CHOICE_CONFIRM)
+		return
+	death(FALSE)
+	message_admins("Lich [key_name_admin(usr)] self-destructed.")
+	log_game("Lich [key_name(usr)] self-destructed.")
+
+	var/turf/targetturf = get_turf(usr)
+	var/last_dist = 0
+	for(var/turf/T as anything in spiral_range_turfs(4, targetturf))
+		if(!T)
+			continue
+		var/dist = get_dist(targetturf, T)
+		if(dist > last_dist)
+			last_dist = dist
+			sleep(2 + min(4 - last_dist, 12) * 0.5) //gets faster
+		new /obj/effect/temp_visual/target/lightning(T)
 
 /datum/antagonist/lich/on_removal()
 	var/mob/living/lich_mob = owner.current
