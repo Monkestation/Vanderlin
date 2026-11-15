@@ -54,6 +54,10 @@
 	var/overlay_ignore_lighting = FALSE
 	/// Glows with emissive in the dark
 	var/glows = FALSE
+	/// Does this eye have blinking animations?
+	var/blink_animation = TRUE
+	// A abstract eyelid object (yes, really) used to animate blinking
+	var/obj/effect/abstract/eyelid_effect/eyelid
 
 /obj/item/organ/eyes/left
 	zone = BODY_ZONE_PRECISE_L_EYE
@@ -63,7 +67,26 @@
 	. = ..()
 	if(!owner && !eye_color)
 		eye_color = random_eye_color(TRUE)
+
+	if(blink_animation)
+		eyelid = new /obj/effect/abstract/eyelid_effect(src, eye_icon_state, owner)
+
 	update_appearance()
+
+/obj/item/organ/eyes/Destroy()
+	QDEL_NULL(eyelid)
+
+	. = ..()
+
+/obj/item/organ/eyes/proc/generate_body_overlay(image/overlay, obj/item/bodypart/head/my_head)
+	overlay.icon_state = eye_icon_state
+
+	if(eye_color)
+		overlay.color = eye_color
+
+	var/eyelid = get_eyelid_overlay(overlay, my_head)
+
+	overlay.overlays += eyelid
 
 /obj/item/organ/eyes/update_overlays()
 	. = ..()
@@ -75,6 +98,74 @@
 			var/image/emissive_iris = emissive_appearance(icon, iris_icon_state)
 			emissive_iris.color = eye_color || "#FFFFFF"
 			. += emissive_iris
+
+#define BASE_BLINKING_DELAY 5 SECONDS
+#define RAND_BLINKING_DELAY 1 SECONDS
+#define BLINK_DURATION 0.15 SECONDS
+#define BLINK_LOOPS 5
+
+/// Modifies eye overlays to also act as eyelids, both for blinking and for when you're knocked out cold
+/obj/item/organ/eyes/proc/get_eyelid_overlay(image/eye, obj/item/bodypart/head/my_head)
+	var/mob/living/carbon/human/parent = my_head.owner
+
+	if(!istype(parent)) // fuck
+		return
+
+	if(HAS_TRAIT(parent, TRAIT_NO_EYELIDS))
+		return
+
+	/*
+	var/list/base_color = GetColors(my_head.skin_tone)
+	var/eyelid_color = rgb(base_color[1], base_color[2], base_color[3])
+	*/
+	var/eyelid_color = my_head.skin_tone
+	// If we're knocked out, just color the eyes
+	if (IS_DEAD_OR_INCAP(parent))
+		eye.color = eyelid_color
+		return
+
+	if (!blink_animation || HAS_TRAIT(parent, TRAIT_PREVENT_BLINKING))
+		return
+
+	eyelid.color = eyelid_color
+	eyelid.render_target = "*[REF(src)]_eyelid"
+	parent.vis_contents += eyelid
+	animate_eyelid(parent)
+	var/mutable_appearance/eyelid_overlay = mutable_appearance(layer = -EYES_LAYER)
+	eyelid_overlay.render_source = "*[REF(src)]_eyelid"
+	return eyelid_overlay
+
+/// Animates one eyelid at a time, thanks BYOND and thanks animation chains
+/obj/item/organ/eyes/proc/animate_eyelid(list/anim_times = null)
+	. = list()
+	if(isnull(eyelid)) // Can't blink if we don't have an eyelid
+		return
+	blink()
+
+/obj/item/organ/eyes/proc/blink(duration = BLINK_DURATION)
+	if(!blink_animation)
+		return
+
+	animate(eyelid, alpha = 0, time = 0)
+	animate(alpha = 255, time = 0)
+	animate(time = duration)
+	animate(alpha = 0, time = 0)
+
+/obj/effect/abstract/eyelid_effect
+	name = "eyelid"
+	icon = 'icons/mob/human_face.dmi'
+	layer = -EYES_LAYER
+	vis_flags = VIS_INHERIT_DIR | VIS_INHERIT_PLANE | VIS_INHERIT_ID
+	color = "#cc0099"
+
+/obj/effect/abstract/eyelid_effect/Initialize(mapload, new_state)
+	. = ..()
+	icon_state = new_state
+
+#undef BASE_BLINKING_DELAY
+#undef RAND_BLINKING_DELAY
+#undef BLINK_DURATION
+#undef BLINK_LOOPS
 
 /obj/item/organ/eyes/switch_side(new_side = RIGHT_SIDE)
 	side = new_side
