@@ -264,7 +264,8 @@
 	resistance_flags = FIRE_PROOF
 	sharpness = IS_SHARP
 	blade_dulling = DULLING_BASH
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	item_weight = 800 GRAMS
 
 /obj/item/weapon/whip/urumi/iron
@@ -273,7 +274,7 @@
 	force = DAMAGE_WHIP
 	max_blade_int = 150
 	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_IRON
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	item_weight = 850 GRAMS
 
 /obj/item/weapon/whip/urumi/bronze
@@ -282,7 +283,7 @@
 	force = DAMAGE_WHIP
 	max_blade_int = 100
 	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_BRONZE
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	item_weight = 800 GRAMS
 
 /obj/item/weapon/whip/urumi/silver
@@ -291,7 +292,7 @@
 	force = DAMAGE_WHIP + 1
 	max_blade_int = 160
 	max_integrity = INTEGRITY_URUMI * INTEGRITY_MOD_SILVER
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 750 GRAMS
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)

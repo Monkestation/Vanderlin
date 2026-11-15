@@ -8,6 +8,7 @@
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/polearms/staves = 10,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/swimming = 10,

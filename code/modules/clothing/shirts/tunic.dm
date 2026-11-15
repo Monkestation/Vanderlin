@@ -17,6 +17,7 @@
 	sleevetype = "noblecoat"
 	color = CLOTHING_WHITE
 	boobed = TRUE
+	salvage_result = /obj/item/natural/silk
 
 /obj/item/clothing/shirt/tunic/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE

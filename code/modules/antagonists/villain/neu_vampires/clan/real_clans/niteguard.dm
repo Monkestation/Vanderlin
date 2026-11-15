@@ -1,7 +1,8 @@
 /datum/clan_leader/nitewarden
 	lord_spells = list(
 		/datum/action/cooldown/spell/undirected/shapeshift/bat,
-		/datum/action/cooldown/spell/undirected/shapeshift/mist,
+		/datum/action/cooldown/spell/undirected/shapeshift/fox,
+		/datum/action/cooldown/spell/undirected/shapeshift/mist/cold,
 	)
 	lord_verbs = list(
 		/mob/living/carbon/human/proc/punish_spawn
@@ -41,7 +42,6 @@
 	leader = /datum/clan_leader/nitewarden
 	selectable_by_vampires = FALSE
 	allows_non_vampires = FALSE
-	force_VL_if_clan_is_empty = FALSE
 
 /datum/clan/niteguard/get_downside_string()
 	return "serve The Moon eternally."

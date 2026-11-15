@@ -94,7 +94,7 @@
 	var/area/target_area = get_area(human_target)
 	if(istype(target_area, /area/indoors/town/keep) || istype(target_area, /area/outdoors/town/keep))
 		pass = TRUE
-	else if(human_target.has_faction(SUB_FACTION_KEEP))
+	else if(human_target.has_faction(SUB_FACTION_KEEP) || human_target.has_faction(SUB_FACTION_GARRISON))
 		pass = TRUE
 
 	if(!pass)
@@ -465,7 +465,8 @@
 	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	thrown_bclass = BCLASS_CUT
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon
@@ -475,6 +476,7 @@
 	icon_state = "psykatar"
 	item_weight = 400 GRAMS
 	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
@@ -508,7 +510,7 @@
 	desc = "A glimmering silver blade that sits above the user's fist. Used by holy monks who otherwise prefer unarmed combat to fight the creatures of the nite."
 	icon_state = "silverkatar"
 	item_weight = 400 GRAMS
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/katar/silver/Initialize(mapload)
@@ -559,6 +561,7 @@
 	associated_skill = /datum/attribute/skill/combat/unarmed
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	melting_material = /datum/material/steel
+	melt_amount = 100
 	melt_amount = 75
 	grid_width = 64
 	grid_height = 32
@@ -616,8 +619,7 @@
 	name = "iron knuckles"
 	desc = "A mean-looking pair of iron knuckles. Not that good in quality, but they do the job."
 	icon_state = "ironknuckle"
-	smeltresult = /obj/item/ingot/iron
-	melting_material = null
+	melting_material = /datum/material/iron
 	force = DAMAGE_KNUCKLES - 2
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IRON
 
@@ -625,8 +627,7 @@
 	name = "bronze knuckles"
 	desc = "A mean-looking pair of bronze knuckles. Mildly heavier than its steel counterpart, making it a solid defensive option, if somewhat less wieldy."
 	icon_state = "bronzeknuckle"
-	smeltresult = /obj/item/ingot/bronze
-	melting_material = null
+	melting_material = /datum/material/bronze
 	force = DAMAGE_KNUCKLES - 4
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BRONZE
 
@@ -635,8 +636,7 @@
 	desc = "A simple piece of harm that has been moulded from pure silver, and further studded to stop errant strikes dead in their tracks. Though ostensibly holy, these hefty knuckleweights are \
 	more strongly associated with underground pugilistic tournaments; a solid right hook could drive more-than-enough force to blow a yeoman's jaw clean off."
 	icon_state = "silverknuckle"
-	smeltresult = /obj/item/ingot/silver
-	melting_material = null
+	melting_material = /datum/material/silver
 	force = DAMAGE_KNUCKLES + 2
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 
@@ -648,7 +648,6 @@
 	name = "blacksteel knuckles"
 	desc = "An exotic use for an expensive metal - punch them with wealth."
 	icon_state = "bsknuckle"
-	smeltresult = /obj/item/ingot/blacksteel
-	melting_material = null
+	melting_material = /datum/material/blacksteel
 	force = DAMAGE_KNUCKLES + 4
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLACKSTEEL

@@ -91,7 +91,7 @@
 
 /datum/anvil_recipe/weapons/bronze/cane
 	name = "Artificer Cane"
-	additional_items = list(/obj/item/ingot/copper = 1)
+	additional_items = list(/obj/item/ingot/bronze = 1)
 	created_item = /obj/item/weapon/mace/cane/bronze
 
 /datum/anvil_recipe/weapons/bronze/shortsword
@@ -780,7 +780,7 @@
 	additional_items = list(/obj/item/ingot/steel = 1)
 	created_item = /obj/item/weapon/mace/warhammer/steel
 
-/datum/anvil_recipe/weapons/steel/peasant_flail
+/datum/anvil_recipe/weapons/iron/peasant_flail
 	name = "Peasant Flail"
 	additional_items = list(/obj/item/rope/chain = 1, /obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/flail/peasant
@@ -977,22 +977,22 @@
 // --------------- Truesilver --------------------
 /datum/anvil_recipe/weapons/truesilver
 	abstract_type = /datum/anvil_recipe/weapons/truesilver
-	required_material = /obj/item/ingot/silver/truesilver
+	required_material = /obj/item/ingot/truesilver
 	craftdiff = 4
 
 /datum/anvil_recipe/weapons/truesilver/halberd
 	name = "Truesilver Halberd"
-	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	additional_items = list(/obj/item/ingot/truesilver = 1, /obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/polearm/halberd/silver/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/greataxe
 	name = "Truesilver Greataxe"
-	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	additional_items = list(/obj/item/ingot/truesilver = 1, /obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/greataxe/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/grandmace
 	name = "Truesilver Grand Mace"
-	additional_items = list(/obj/item/ingot/silver/truesilver = 1, /obj/item/grown/log/tree/small = 1)
+	additional_items = list(/obj/item/ingot/truesilver = 1, /obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/mace/goden/steel/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/dagger
@@ -1008,12 +1008,12 @@
 
 /datum/anvil_recipe/weapons/truesilver/barmace
 	name = "Truesilver Barmace"
-	additional_items = list(/obj/item/ingot/silver/truesilver = 2)
+	additional_items = list(/obj/item/ingot/truesilver = 2)
 	created_item = /obj/item/weapon/mace/silver/barmace/lunar
 
 /datum/anvil_recipe/weapons/truesilver/hammer
 	name = "Truesilver Warhammer"
-	additional_items = list(/obj/item/ingot/silver/truesilver = 1)
+	additional_items = list(/obj/item/ingot/truesilver = 1)
 	created_item = /obj/item/weapon/mace/warhammer/silver/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/sword
@@ -1022,7 +1022,7 @@
 
 /datum/anvil_recipe/weapons/truesilver/longsword
 	name = "Truesilver Longsword"
-	additional_items = list(/obj/item/ingot/silver/truesilver = 1)
+	additional_items = list(/obj/item/ingot/truesilver = 1)
 	created_item = /obj/item/weapon/sword/long/silver/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/rapier

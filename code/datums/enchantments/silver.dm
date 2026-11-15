@@ -79,9 +79,11 @@
 
 /datum/enchantment/silver/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
 	apply_bane(i, user, FALSE)
+	START_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/silver/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
 	apply_bane(i, user, FALSE)
+	START_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/silver/proc/apply_bane(obj/item/i, mob/living/carbon/human/user, pulse)
 	if(pulse && (world.time < (last_used["PULSE"] + 15 SECONDS)))

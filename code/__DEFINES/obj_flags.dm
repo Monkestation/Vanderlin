@@ -65,6 +65,7 @@
 
 /// use on color subtypes for clothes, so the unit test for crafting doesn't scream at you.
 #define CRAFTING_TEST_EXCLUDE	(1<<0)
+#define SMELTING_TEST_EXCLUDE	(1<<1)
 
 /// Flags for specifically what kind of items to get in get_equipped_items
 #define INCLUDE_POCKETS (1<<0)
