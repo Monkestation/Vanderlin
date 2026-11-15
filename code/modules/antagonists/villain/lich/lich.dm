@@ -104,6 +104,8 @@
 	var/confirm = tgui_alert(usr, "Confirm Self Destruct", "Confirm", DEFAULT_INPUT_CONFIRMATIONS)
 	if(confirm == CHOICE_CONFIRM)
 		death(FALSE)
+		message_admins("Lich [key_name_admin(usr)] self-destructed.")
+		log_game("Lich [key_name(usr)] self-destructed.")
 
 /datum/antagonist/lich/on_removal()
 	var/mob/living/lich_mob = owner.current
