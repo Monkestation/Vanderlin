@@ -915,7 +915,7 @@
 "adG" = (
 /obj/structure/fluff/clock,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "adO" = (
 /obj/structure/fake_machine/hailer,
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -1672,7 +1672,7 @@
 /area/outdoors/eora)
 "avJ" = (
 /turf/closed/mineral,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "avL" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/cobble/alt,
@@ -2165,7 +2165,7 @@
 "aJQ" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/dirt/road,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "aJV" = (
 /obj/structure/rack,
 /obj/item/natural/bundle/cloth{
@@ -2193,7 +2193,7 @@
 "aKo" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/tile,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "aKr" = (
 /obj/structure/closet/crate/crafted_closet,
 /turf/open/floor/herringbone,
@@ -2489,7 +2489,7 @@
 	},
 /obj/structure/rack/shelf/big,
 /turf/open/floor/tile/bath,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "aPz" = (
 /obj/structure/curtain/bounty{
 	color = "grey"
@@ -3253,7 +3253,7 @@
 "bhA" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/dirt,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "bhL" = (
 /obj/structure/fluff/railing/wood{
 	dir = 8;
@@ -3448,7 +3448,7 @@
 "bkG" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/tile/bath,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "bkJ" = (
 /obj/structure/fluff/railing/wood,
 /obj/effect/landmark/stall,
@@ -3986,7 +3986,7 @@
 	},
 /obj/structure/carpet/green,
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "bwX" = (
 /obj/structure/flora/grass/bush/wall/tall,
 /obj/structure/fluff/railing/wood{
@@ -5524,10 +5524,10 @@
 /area/outdoors/town)
 "bYI" = (
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "bYK" = (
 /turf/open/water/bath,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "bYL" = (
 /obj/structure/chair/bench/church/r{
 	dir = 1
@@ -6198,7 +6198,7 @@
 /obj/structure/table/wood/plain_alt,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "cpb" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/blocks,
@@ -6401,7 +6401,7 @@
 /area/outdoors/town)
 "ctu" = (
 /turf/closed/wall/mineral/stone,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "cty" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -8818,7 +8818,7 @@
 /obj/structure/bookcase/random,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "drC" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/cup/wooden{
@@ -8883,7 +8883,7 @@
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "dsp" = (
 /obj/structure/chair/stool,
 /turf/open/floor/wood,
@@ -9158,7 +9158,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/chair/stool,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "dyW" = (
 /turf/open/floor/grass/yel,
 /area/outdoors/town)
@@ -9337,7 +9337,7 @@
 	opacity = 0
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "dCv" = (
 /obj/effect/landmark/tram/queued_path/cargo_pre_enter{
 	next_path_id = "cargo_stop"
@@ -9389,7 +9389,7 @@
 "dDD" = (
 /obj/structure/bars,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "dDJ" = (
 /turf/closed/wall/mineral/wooddark/end{
 	dir = 1
@@ -9977,7 +9977,7 @@
 /area/under/town/basement)
 "dRl" = (
 /turf/open/floor/dirt,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "dRq" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble1,
@@ -10822,7 +10822,7 @@
 "ekw" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "ekF" = (
 /obj/structure/table/wood{
 	dir = 10;
@@ -10935,7 +10935,7 @@
 	dir = 4
 	},
 /turf/open/floor/grass/cold,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "emG" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/blocks/newstone,
@@ -11268,7 +11268,7 @@
 "esU" = (
 /obj/structure/flora/newtree/palm,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "esZ" = (
 /turf/closed/mineral/deep,
 /area/under/cave)
@@ -11328,7 +11328,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "euu" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 1
@@ -11341,7 +11341,7 @@
 	pixel_y = -32
 	},
 /turf/open/water/bath,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "euD" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -11609,7 +11609,7 @@
 /obj/structure/chair/wood/alt/chair_noble,
 /obj/structure/carpet/green,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "eBt" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 8
@@ -11717,7 +11717,7 @@
 /obj/structure/chair/bench/couch/right,
 /obj/structure/rack/shelf,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "eDH" = (
 /obj/item/candle/yellow/lit{
 	pixel_x = -9;
@@ -11807,11 +11807,11 @@
 	},
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "eFy" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "eFK" = (
 /obj/effect/decal/borderfall{
 	dir = 1
@@ -11892,7 +11892,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "eHx" = (
 /obj/machinery/light/fueled/firebowl/stump,
 /turf/open/floor/cobblerock,
@@ -11980,7 +11980,7 @@
 /obj/structure/flora/grass,
 /obj/structure/flora/starfish,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "eIS" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -12377,7 +12377,7 @@
 /obj/item/kitchen/fork/iron,
 /obj/item/kitchen/fork/iron,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "ePK" = (
 /obj/structure/fluff/statue/knight/interior/r,
 /turf/open/floor/blocks,
@@ -12502,7 +12502,7 @@
 /area/outdoors/exposed/shop)
 "eRI" = (
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "eRK" = (
 /obj/structure/chair/stool/crafted,
 /turf/open/floor/ruinedwood/spiral,
@@ -12639,7 +12639,7 @@
 /obj/structure/fermentation_keg/water,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "eVp" = (
 /obj/structure/fluff/walldeco/vinez/red,
 /turf/closed/wall/mineral/craftstone,
@@ -13548,7 +13548,7 @@
 "fmQ" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "fmZ" = (
 /obj/structure/flora/grass,
 /obj/structure/flora/grass/bush/wall/tall,
@@ -14006,7 +14006,7 @@
 	dir = 1
 	},
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "fwH" = (
 /obj/structure/table/wood{
 	dir = 10;
@@ -14677,7 +14677,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/item/broom,
 /turf/open/floor/cobblerock/alt,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "fKG" = (
 /obj/structure/bars,
 /turf/open/floor/metal,
@@ -14797,7 +14797,7 @@
 "fMT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "fNe" = (
 /obj/structure/table/wood/counter{
 	dir = 4
@@ -14883,7 +14883,7 @@
 "fOF" = (
 /obj/structure/flora/starfish,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "fOK" = (
 /mob/living/simple_animal/pet/cat/inn{
 	desc = "This old, wrinkled cat demands the utmost respect from his servants. Not even the king of Vanderlin is exempt from his worship.";
@@ -15089,7 +15089,7 @@
 	},
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "fUp" = (
 /obj/structure/door/fancy{
 	name = "Keep Entrance"
@@ -15446,7 +15446,7 @@
 /obj/effect/landmark/events/haunts,
 /obj/structure/carpet/green,
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "gbH" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/door/violet{
@@ -15460,7 +15460,7 @@
 	dir = 5
 	},
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "gbL" = (
 /obj/effect/decal/cleanable/blood/old,
 /obj/effect/decal/cleanable/blood/gibs/old,
@@ -16863,7 +16863,7 @@
 "gIY" = (
 /obj/structure/flora/shells,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "gJz" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 4
@@ -16947,7 +16947,7 @@
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/book/manners,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "gKO" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/hexstone,
@@ -18309,7 +18309,7 @@
 "hru" = (
 /obj/structure/bars/cemetery,
 /turf/open/water/ocean,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "hrv" = (
 /obj/item/kitchen/spoon,
 /obj/structure/fake_machine/scomm/l,
@@ -18787,7 +18787,7 @@
 /obj/item/broom,
 /obj/item/flint,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "hyY" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/concrete,
@@ -19267,7 +19267,7 @@
 "hGI" = (
 /obj/structure/chair/bench/couch/alt,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "hGN" = (
 /turf/open/water/swamp,
 /area/outdoors/town/keep)
@@ -19490,7 +19490,7 @@
 "hNt" = (
 /obj/structure/mannequin,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "hNA" = (
 /turf/closed/wall/mineral/stone/window,
 /area/indoors/town/garrison)
@@ -19739,7 +19739,7 @@
 /area/under/cavewet)
 "hTA" = (
 /turf/closed/wall/mineral/craftstone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "hTH" = (
 /obj/machinery/light/fueled/torchholder/r,
 /turf/open/floor/hay,
@@ -20521,7 +20521,7 @@
 "ijI" = (
 /obj/structure/table/wood/plain_alt,
 /turf/closed/basic,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "ijR" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_x = 32;
@@ -20557,7 +20557,7 @@
 	dir = 4
 	},
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "ill" = (
 /obj/item/ore/copper,
 /turf/open/floor/cobblerock,
@@ -20802,7 +20802,7 @@
 "iqG" = (
 /obj/structure/bookcase/random,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "iqS" = (
 /obj/item/reagent_containers/food/snacks/produce/vegetable/potato{
 	pixel_x = 1;
@@ -21816,7 +21816,7 @@
 /area/indoors/town/garrison/lieutenant)
 "iKO" = (
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "iKR" = (
 /obj/structure/chair/stool{
 	pixel_y = 5
@@ -21944,7 +21944,7 @@
 "iMR" = (
 /obj/structure/table/wood/fancy/green,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "iMT" = (
 /obj/structure/fluff/walldeco/vinez/r,
 /obj/structure/closet/crate/chest/wickertrunk/blue,
@@ -21990,7 +21990,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /turf/open/floor/cobblerock/alt,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "iNY" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/wood,
@@ -22043,7 +22043,7 @@
 "iOT" = (
 /obj/structure/closet/crate/chest/gold,
 /turf/open/floor/tile,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "iOW" = (
 /obj/structure/flora/ausbushes/ywflowers,
 /turf/open/floor/dirt,
@@ -22115,7 +22115,7 @@
 "iRA" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock/alt,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "iRF" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood/tracks,
@@ -22827,7 +22827,7 @@
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/peppermill,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "jgi" = (
 /turf/open/floor/grass/eora,
 /area/outdoors/eora)
@@ -23147,7 +23147,7 @@
 	dir = 4
 	},
 /turf/open/floor/wood/nosmooth,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "jmA" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /obj/structure/carpet/blue,
@@ -23911,7 +23911,7 @@
 "jBn" = (
 /obj/structure/flora/grass/bush/wall,
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "jBt" = (
 /obj/structure/fluff/nest{
 	name = "patch of straw"
@@ -25292,7 +25292,7 @@
 	pixel_y = -32
 	},
 /turf/open/floor/dirt/road,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "kgg" = (
 /turf/open/floor/carpet/lord/right,
 /area/indoors/town/keep/throne)
@@ -25317,7 +25317,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "kgu" = (
 /obj/effect/decal/cleanable/debris/wood,
 /turf/open/floor/ruinedwood/alt,
@@ -26791,7 +26791,7 @@
 /obj/item/weapon/hammer/iron,
 /obj/item/natural/bundle/plank,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "kMN" = (
 /obj/structure/fluff/big_chain{
 	pixel_y = 12
@@ -26881,7 +26881,7 @@
 "kOy" = (
 /obj/structure/fluff/statue/tdummy,
 /turf/open/floor/dirt,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "kOI" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -27237,7 +27237,7 @@
 /area/indoors/town)
 "kUV" = (
 /turf/open/floor/dirt/road,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "kVf" = (
 /obj/structure/pottery_lathe,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -27261,7 +27261,7 @@
 /obj/structure/flora/grass,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "kVE" = (
 /obj/effect/spawner/map_spawner/hauntz_random,
 /turf/open/floor/ruinedwood/spiral,
@@ -28530,7 +28530,7 @@
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "lvy" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/keyset/church/general,
@@ -28839,7 +28839,7 @@
 /obj/structure/flora/grass/bush_meagre,
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "lCK" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/fueled/torchholder{
@@ -29586,10 +29586,10 @@
 "lRm" = (
 /obj/structure/carpet/green,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "lRy" = (
 /turf/open/floor/cobblerock/alt,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "lRC" = (
 /obj/structure/flora/grass/herb/euphrasia,
 /turf/open/floor/dirt,
@@ -29908,11 +29908,11 @@
 /obj/structure/flora/grass/bush/wall,
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "lWx" = (
 /obj/structure/fluff/walldeco/painting/castle,
 /turf/closed/wall/mineral/craftstone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "lWz" = (
 /obj/structure/table/church{
 	dir = 1
@@ -30250,7 +30250,7 @@
 "mcT" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/dirt/road,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "mdh" = (
 /obj/machinery/light/fueled/firebowl/standing,
 /turf/open/floor/grass,
@@ -30268,7 +30268,7 @@
 "mdY" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "meh" = (
 /obj/machinery/light/fueled/wallfire{
 	pixel_y = 32
@@ -30354,7 +30354,7 @@
 	dir = 10
 	},
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "mgb" = (
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/blocks,
@@ -30429,7 +30429,7 @@
 /area/indoors/town/clinic_large)
 "mgZ" = (
 /turf/open/floor/tile/checker,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "mhc" = (
 /obj/structure/fluff/railing/wood{
 	dir = 4
@@ -30710,7 +30710,7 @@
 "mnf" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "mnh" = (
 /obj/item/weapon/shield/wood,
 /obj/structure/rack,
@@ -30841,7 +30841,7 @@
 "mok" = (
 /obj/structure/closet/crate/crafted_closet/inn/south,
 /turf/open/floor/dirt/road,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "moq" = (
 /obj/structure/stairs{
 	dir = 4
@@ -31725,7 +31725,7 @@
 "mGN" = (
 /obj/structure/fluff/walldeco/painting/castle,
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "mHn" = (
 /obj/structure/chair/stool,
 /turf/open/floor/wood,
@@ -31827,7 +31827,7 @@
 	dir = 1
 	},
 /turf/open/floor/dirt,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "mIU" = (
 /obj/structure/toilet/filled,
 /turf/open/floor/blocks/paving,
@@ -31945,7 +31945,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/roguerock,
 /turf/open/water/ocean,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "mLy" = (
 /obj/structure/roguerock,
 /turf/open/floor/dirt,
@@ -32297,7 +32297,7 @@
 /obj/item/servant_bell,
 /obj/item/lipstick/green,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "mSJ" = (
 /obj/structure/chair/wood/alt/chair_noble/red,
 /turf/open/floor/cobble/mossy,
@@ -32591,7 +32591,7 @@
 	pixel_x = 4
 	},
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "mZr" = (
 /obj/structure/stairs/stone/church{
 	dir = 8
@@ -33194,7 +33194,7 @@
 	mailtag = "Green"
 	},
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "nlH" = (
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner/_tennite,
@@ -33291,7 +33291,7 @@
 	},
 /obj/structure/carpet/green,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "nnF" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobble,
@@ -34457,7 +34457,7 @@
 	name = "Green Noble Vault"
 	},
 /turf/open/floor/tile,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "nPf" = (
 /obj/effect/decal/cleanable/blood/over_wall,
 /turf/closed/wall/mineral/wooddark,
@@ -34509,7 +34509,7 @@
 "nQh" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/water/ocean,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "nQn" = (
 /obj/machinery/light/fueled/torchholder/r,
 /obj/structure/table/wood/plain_alt,
@@ -34694,7 +34694,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "nTi" = (
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/item/recipe_book/gravemaking,
@@ -34773,7 +34773,7 @@
 "nUC" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock/alt,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "nVi" = (
 /obj/structure/window/openclose/reinforced,
 /obj/structure/bars/passage/shutter/open{
@@ -35838,7 +35838,7 @@
 "oqB" = (
 /obj/structure/flora/starfish,
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "oqE" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
@@ -35932,13 +35932,13 @@
 "osc" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "osh" = (
 /obj/structure/flora/grass,
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/natural/bundle/brick,
 /turf/open/floor/dirt/road,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "osm" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/clinic_large/apothecary)
@@ -35974,7 +35974,7 @@
 "otI" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "otN" = (
 /obj/structure/flora/grass{
 	icon_state = "grass2"
@@ -36464,7 +36464,7 @@
 /obj/structure/bookcase/random,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "oDW" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass/eora,
@@ -36561,7 +36561,7 @@
 /obj/item/rope,
 /obj/machinery/light/fueled/wallfire/candle/lamp,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "oFb" = (
 /obj/structure/closet/crate/crafted_closet,
 /obj/item/candle/yellow,
@@ -36736,7 +36736,7 @@
 /obj/item/clothing/face/cigarette/pipe/westman,
 /obj/item/reagent_containers/food/snacks/produce/dry_westleach,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "oIx" = (
 /obj/structure/fluff/railing/wood,
 /obj/structure/flora/grass,
@@ -37149,7 +37149,7 @@
 /area/under/dungeon)
 "oSd" = (
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "oSg" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
@@ -37405,7 +37405,7 @@
 /area/outdoors/basin/safe)
 "oYh" = (
 /turf/closed/mineral,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "oYt" = (
 /obj/machinery/light/fueled/torchholder{
 	dir = 1
@@ -37443,7 +37443,7 @@
 /obj/structure/table/wood/plain_alt,
 /obj/item/cooking/pan,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "oZj" = (
 /obj/structure/flora/grass/bush,
 /obj/structure/flora/grass,
@@ -37487,7 +37487,7 @@
 "pao" = (
 /obj/structure/flora/grass,
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "paD" = (
 /obj/structure/fluff/railing/border{
 	dir = 5
@@ -37619,7 +37619,7 @@
 /area/outdoors/river)
 "pcP" = (
 /turf/open/water/ocean,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "pcQ" = (
 /obj/structure/table/wood{
 	dir = 1;
@@ -37774,7 +37774,7 @@
 "peh" = (
 /obj/structure/bars/cemetery,
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "pen" = (
 /obj/effect/decal/cobblerockedge{
 	dir = 6
@@ -38570,7 +38570,7 @@
 /area/indoors/town/shop)
 "pvl" = (
 /turf/open/floor/tile/bath,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "pvL" = (
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/blocks,
@@ -38790,7 +38790,7 @@
 "pBb" = (
 /obj/item/weapon/mace/woodclub/train_sword,
 /turf/open/floor/dirt,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "pBg" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/bottle/elfblue,
@@ -39077,7 +39077,7 @@
 /obj/item/clothing/pants/skirt/patkilt/colored/green,
 /obj/item/clothing/shirt/undershirt/sash/colored/green,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "pGp" = (
 /turf/closed/mineral,
 /area/under/town/sewer)
@@ -39308,7 +39308,7 @@
 	},
 /obj/structure/flora/driftwood,
 /turf/open/water/ocean,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "pKd" = (
 /obj/structure/table/wood/counter/end{
 	dir = 1
@@ -39573,7 +39573,7 @@
 	},
 /obj/structure/fluff/millstone,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "pOR" = (
 /obj/structure/lever{
 	redstone_id = "thronegrille";
@@ -39769,7 +39769,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "pRq" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /obj/structure/chair/bench/couch/lord_secondary,
@@ -41163,7 +41163,7 @@
 "qrs" = (
 /obj/item/bin/water,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "qrx" = (
 /obj/structure/chair/wood{
 	dir = 4
@@ -42294,7 +42294,7 @@
 "qOl" = (
 /obj/effect/spawner/map_spawner/hauntz_random,
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "qOn" = (
 /obj/machinery/printingpress,
 /turf/open/floor/churchmarble,
@@ -42476,7 +42476,7 @@
 	pixel_y = -4
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "qRT" = (
 /obj/effect/decal/borderfall{
 	dir = 1
@@ -42850,7 +42850,7 @@
 /obj/structure/carpet/green,
 /obj/structure/bookcase/random,
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "qYO" = (
 /obj/structure/flora/newleaf/corner{
 	dir = 5
@@ -43287,7 +43287,7 @@
 	dir = 9
 	},
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "riw" = (
 /obj/structure/door/viewport,
 /obj/effect/mapping_helpers/access/locker,
@@ -43456,7 +43456,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "rlC" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/spider/stickyweb,
@@ -44112,7 +44112,7 @@
 /area/indoors/town/keep/servant)
 "rzd" = (
 /turf/open/floor/cobblerock/alt,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "rzg" = (
 /turf/closed/wall/mineral/stone,
 /area/indoors/town/garrison)
@@ -44234,12 +44234,12 @@
 /obj/structure/chair/stool,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "rBf" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/bookcase/random,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "rBr" = (
 /obj/structure/fluff/walldeco/customflag{
 	pixel_x = -32
@@ -44522,7 +44522,7 @@
 /obj/structure/rack/shelf,
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/ruinedwood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "rHh" = (
 /turf/closed/mineral,
 /area/outdoors/exposed/church)
@@ -44563,7 +44563,7 @@
 "rIu" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "rJe" = (
 /obj/structure/flora/grass/bush,
 /obj/effect/falling_sakura,
@@ -45425,7 +45425,7 @@
 /obj/item/dice_cup/wooden/liars_dice,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "saB" = (
 /obj/structure/fake_machine/mail/r{
 	mailtag = "Keep Guest Room 2"
@@ -46313,7 +46313,7 @@
 /obj/structure/flora/tree/dead_bush,
 /obj/structure/flora/grass,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "srv" = (
 /obj/structure/fake_machine/scomm/l,
 /turf/open/floor/metal/barograte,
@@ -47699,14 +47699,14 @@
 	},
 /obj/structure/rack/shelf/big,
 /turf/open/floor/tile/bath,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "sQK" = (
 /obj/structure/mirror/fancy{
 	pixel_x = -31;
 	pixel_y = -2
 	},
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "sQX" = (
 /obj/structure/fermentation_keg,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -47732,12 +47732,12 @@
 /obj/structure/rack/shelf,
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "sRI" = (
 /obj/structure/closet/keyrack,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "sRP" = (
 /obj/structure/fluff/walldeco/church/line{
 	dir = 4
@@ -48183,7 +48183,7 @@
 "tez" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "teX" = (
 /obj/structure/water_pipe,
 /turf/open/openspace,
@@ -48431,7 +48431,7 @@
 "tkL" = (
 /obj/structure/roguerock,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "tla" = (
 /obj/structure/table/wood/reinf_long{
 	dir = 8
@@ -48472,7 +48472,7 @@
 /obj/structure/flora/tree/dead_bush,
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "tmo" = (
 /obj/machinery/essence/research_matrix,
 /turf/open/floor/blocks/stonered/tiny,
@@ -48527,7 +48527,7 @@
 "tnM" = (
 /obj/structure/roguerock,
 /turf/open/water/ocean,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "tnT" = (
 /obj/structure/well,
 /obj/machinery/light/fueled/wallfire/candle{
@@ -48835,7 +48835,7 @@
 /area/indoors/town/merc_guild)
 "tuw" = (
 /turf/open/floor/tile,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "tuC" = (
 /obj/structure/fake_machine/scomm/r,
 /turf/open/floor/ruinedwood/turned/darker,
@@ -49038,7 +49038,7 @@
 "tyB" = (
 /obj/item/reagent_containers/glass/bucket/wooden,
 /turf/open/floor/ruinedwood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "tyF" = (
 /obj/structure/fluff/railing/wood{
 	pixel_y = -4
@@ -49138,7 +49138,7 @@
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/structure/carpet/green,
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "tBi" = (
 /obj/structure/water_pipe{
 	name = "keep line"
@@ -49442,7 +49442,7 @@
 	pixel_y = 42
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "tHJ" = (
 /obj/structure/carpet/purple,
 /turf/open/floor/wood,
@@ -49864,7 +49864,7 @@
 "tQc" = (
 /obj/structure/chair/bench,
 /turf/open/floor/grass,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "tQe" = (
 /obj/structure/table/wood{
 	icon_state = "tablewood1"
@@ -50725,7 +50725,7 @@
 /area/indoors/town/keep/magician)
 "ujR" = (
 /turf/closed/wall/mineral/decowood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "ujZ" = (
 /obj/structure/fermentation_keg/random/water,
 /turf/open/floor/carpet/lord/corner{
@@ -50917,7 +50917,7 @@
 /obj/structure/bed/hay,
 /obj/effect/decal/cleanable/dirt/cobweb,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "uoM" = (
 /obj/structure/bookcase/random_recipes,
 /obj/item/recipe_book/blacksmithing,
@@ -50996,7 +50996,7 @@
 "upM" = (
 /obj/structure/closet/crate/chest/old_crate,
 /turf/open/floor/ruinedwood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "upR" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass/red,
@@ -51284,7 +51284,7 @@
 	pixel_y = 39
 	},
 /turf/open/floor/dirt/road,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "uvt" = (
 /obj/machinery/light/fueled/firebowl/standing{
 	pixel_x = -10;
@@ -51524,7 +51524,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "uAC" = (
 /obj/structure/stairs{
 	dir = 4
@@ -52317,7 +52317,7 @@
 	dir = 1
 	},
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "uOx" = (
 /obj/structure/chair/stool,
 /turf/open/floor/metal/barograte,
@@ -52330,7 +52330,7 @@
 "uOB" = (
 /obj/structure/bed/hay,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "uOO" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/ruinedwood/spiral,
@@ -52364,7 +52364,7 @@
 "uPt" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/stone,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "uPF" = (
 /obj/structure/closet/crate/chest/neu_fancy,
 /obj/item/storage/keyring,
@@ -52372,7 +52372,7 @@
 /obj/item/storage/keyring,
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "uPH" = (
 /obj/structure/chair/stool,
 /turf/open/floor/twig,
@@ -52664,7 +52664,7 @@
 /area/indoors/town/noble_manor/red)
 "uTx" = (
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "uTB" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -52754,7 +52754,7 @@
 "uVx" = (
 /obj/structure/fermentation_keg/water,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "uVO" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -52787,7 +52787,7 @@
 	dir = 6
 	},
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "uWQ" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/tent_kit,
@@ -54292,7 +54292,7 @@
 	pixel_y = 44
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "vyF" = (
 /obj/structure/table/wood/reinf_long,
 /obj/item/soap{
@@ -54393,7 +54393,7 @@
 "vAE" = (
 /obj/structure/carpet/green,
 /turf/open/floor/wood/nosmooth,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "vBs" = (
 /turf/closed/wall/mineral/wood,
 /area/indoors/town/keep/lord_appt)
@@ -54675,7 +54675,7 @@
 /obj/structure/flora/grass,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/dirt/road,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "vIe" = (
 /turf/open/floor/naturalstone,
 /area/indoors/town/train_station)
@@ -54946,7 +54946,7 @@
 /area/indoors/town/church)
 "vNl" = (
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "vNs" = (
 /obj/effect/landmark/mapGenerator/cave,
 /turf/closed,
@@ -54973,7 +54973,7 @@
 /area/indoors/town/tavern)
 "vNQ" = (
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "vOa" = (
 /turf/closed/wall/mineral/stone/moss,
 /area/indoors/town/adv_guild)
@@ -55710,7 +55710,7 @@
 /obj/effect/mapping_helpers/access/locker,
 /obj/effect/mapping_helpers/access/keyset/manor/Noble2,
 /turf/open/floor/ruinedwood/two,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "wdh" = (
 /turf/open/floor/churchrough,
 /area/indoors/town/church/chapel)
@@ -56971,7 +56971,7 @@
 "wCN" = (
 /obj/structure/fluff/wallclock,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "wCO" = (
 /obj/structure/table/wood/counter/end{
 	dir = 1
@@ -56997,7 +56997,7 @@
 	pixel_x = -50
 	},
 /turf/closed/wall/mineral/stone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "wCT" = (
 /obj/structure/closet/crate/chest/gold,
 /obj/item/gem/blue,
@@ -57091,7 +57091,7 @@
 	pixel_y = -1
 	},
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "wEl" = (
 /obj/structure/closet/crate/chest/old_crate,
 /obj/item/reagent_containers/food/snacks/hardtack,
@@ -57854,7 +57854,7 @@
 	},
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/wood,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "wRz" = (
 /obj/machinery/light/fueled/torchholder/l,
 /obj/structure/fluff/walldeco/church/line{
@@ -58030,7 +58030,7 @@
 /obj/structure/bed/wool/double,
 /obj/item/bedsheet/double_pelt,
 /turf/open/floor/herringbone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "wVT" = (
 /turf/open/floor/dirt,
 /area/outdoors/woods_safe)
@@ -58554,7 +58554,7 @@
 "xcL" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "xcN" = (
 /obj/structure/stairs{
 	dir = 1
@@ -59003,7 +59003,7 @@
 "xmr" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/closed/wall/mineral/craftstone,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "xmt" = (
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/dirt,
@@ -59270,7 +59270,7 @@
 /area/under/cavewet)
 "xsp" = (
 /turf/closed/wall/mineral/wooddark/horizontal,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "xsq" = (
 /turf/closed/mineral,
 /area/outdoors/mountains)
@@ -59605,7 +59605,7 @@
 /obj/structure/flora/starfish,
 /obj/structure/bars/cemetery,
 /turf/open/floor/sand,
-/area/outdoors/town/noble_manor/yellow)
+/area/outdoors/town/noble_manor/green)
 "xxA" = (
 /turf/open/floor/tile,
 /area/indoors/town/keep/garrison)
@@ -60605,7 +60605,7 @@
 /area/indoors/town/keep/basement)
 "xUE" = (
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "xUS" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -61136,7 +61136,7 @@
 	pixel_y = 31
 	},
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "yeW" = (
 /obj/structure/trap/saw_blades,
 /turf/open/floor/churchrough,
@@ -61302,7 +61302,7 @@
 /obj/item/weapon/knife/villager,
 /obj/structure/rack/shelf,
 /turf/open/floor/ruinedwood/alt,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "yhG" = (
 /obj/structure/closet/crate/chest,
 /obj/item/storage/belt/pouch/coins/rich,
@@ -61460,7 +61460,7 @@
 /area/indoors/town/clocktower)
 "ylP" = (
 /turf/closed/wall/mineral/wooddark/end,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "ylS" = (
 /obj/machinery/light/fueled/wallfire/candle/blue/l,
 /turf/open/floor/carpet/lord/left,
@@ -61477,7 +61477,7 @@
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /obj/item/reagent_containers/food/snacks/produce/grain/wheat,
 /turf/open/floor/tile/kitchen,
-/area/indoors/town/noble_manor/yellow)
+/area/indoors/town/noble_manor/green)
 "ylW" = (
 /obj/structure/fluff/railing/wood{
 	dir = 1

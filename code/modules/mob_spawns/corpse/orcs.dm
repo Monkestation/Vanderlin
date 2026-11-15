@@ -35,7 +35,7 @@
 	name = "Orc Marauder"
 	armor = /obj/item/clothing/armor/chainmail
 	pants =	/obj/item/clothing/pants/chainlegs
-	shoes = /obj/item/clothing/shoes/boots/furlinedboots
+	shoes = /obj/item/clothing/shoes/boots/furboots
 	head = /obj/item/clothing/head/helmet/leather
 
 /obj/effect/mob_spawn/corpse/orc/ravager

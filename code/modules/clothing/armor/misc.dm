@@ -16,6 +16,7 @@
 	icon_state = "corset"
 	armor_type = /datum/armor/padded/bad
 	body_parts_covered = COVERAGE_VEST
+	blocksound = SOFTHIT
 	item_weight = 230 GRAMS
 
 //................ Amazon chainkini ............... //
