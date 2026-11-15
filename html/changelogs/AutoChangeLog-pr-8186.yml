@@ -1,0 +1,4 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Added capacity for the lich to kill themselves via a verb in RoleUnique tab."
