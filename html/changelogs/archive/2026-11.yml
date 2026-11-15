@@ -121,3 +121,26 @@
   ta3754859-max:
   - rscadd: New items to persistent housing whitelist (Toys, hammers, lanterns, satchels)
   - bugfix: persistent housing not saving items inside chests
+2026-11-15:
+  Spitegremlin:
+  - balance: rebalanced crafting requirements for a few items, and crafting difficulties
+  - bugfix: fixed some exploits, and gave corset proper hit sounds because it sounded
+      like metal onhit before. Also made gloves and boots salvageable
+  - code_imp: moved recipes for boots/some shoes, pants and gloves in leathercrafting
+      around, and made it less bulky to read through
+  grungussuss:
+  - bugfix: fixed the rotation on dual wielded weapons attack animations.
+  - bugfix: the green noble manor now has a key
+  - rscadd: Added the capability to climb branches using hand left click.
+  - rscadd: Signage can be passed through now.
+  realforest2001:
+  - bugfix: Selecting a clan is no longer overriden by Nosferatu.
+  - rscadd: Added an Immortal Rascal subclass for Vampire Spawn as a backup for somehow
+      selecting child slots.
+  - rscadd: Added a blood magic capable subclass for Vampire Spawn, requiring a magic
+      patron or archdevil patron.
+  - rscadd: Added capacity for the lich to kill themselves via a verb in RoleUnique
+      tab.
+  ta3754859-max:
+  - bugfix: Butchering limbs yields exp for butchering like it was supposed to
+  - bugfix: Werewolves and zombies can consume limbs to regain health
