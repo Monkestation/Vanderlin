@@ -950,7 +950,7 @@
 	craftdiff = 4
 	category = "Shoes"
 
- /datum/repeatable_crafting_recipe/leather/standalone/shorts
+/datum/repeatable_crafting_recipe/leather/standalone/shorts
 	name = "leather shorts"
 	output = /obj/item/clothing/pants/trou/leather/shorts
 	requirements = list(/obj/item/natural/hide/cured = 2,
