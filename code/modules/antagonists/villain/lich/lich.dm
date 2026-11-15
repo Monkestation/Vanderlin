@@ -95,11 +95,21 @@
 	lich.update_age_stats(lich.age, TRUE)
 	skele_look()
 	equip_lich()
+	add_verb(lich, /mob/living/carbon/human/proc/lich_self_destruct)
+
+/mob/living/carbon/human/proc/lich_self_destruct()
+	set name = "Self Destruct"
+	set category = "RoleUnique.Lich"
+
+	var/confirm = tgui_alert(usr, "Confirm Self Destruct", "Confirm", DEFAULT_INPUT_CONFIRMATIONS)
+	if(confirm == CHOICE_CONFIRM)
+		death(FALSE)
 
 /datum/antagonist/lich/on_removal()
 	var/mob/living/lich_mob = owner.current
 	lich_mob.remove_spells(source = src)
 	UnregisterSignal(lich_mob, COMSIG_LIVING_DEATH)
+	remove_verb(lich_mob, /mob/living/carbon/human/proc/lich_self_destruct)
 	return ..()
 
 /datum/antagonist/lich/greet()
