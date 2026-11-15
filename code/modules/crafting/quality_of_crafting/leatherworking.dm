@@ -551,6 +551,16 @@
 	name = "forrester cloak (snow)"
 	output = /obj/item/clothing/cloak/forrestercloak/snow
 
+/datum/repeatable_crafting_recipe/leather/cloak/forrester/snow/hunter_bush
+	name = "bush cloak"
+	requirements = list(
+		/obj/item/natural/fibers/sinew = 1,
+		/obj/item/natural/fur = 1,
+		/obj/item/natural/hide/cured = 2,
+		/obj/item/alch/tobaccodust = 1
+	)
+	output = /obj/item/clothing/cloak/raincloak/bush
+
 /datum/repeatable_crafting_recipe/leather/cloak/battlenun
 	name = "battlenun cloak"
 	requirements = list(
@@ -949,7 +959,7 @@
 				/obj/item/natural/fibers/sinew = 1)
 	craftdiff = 4
 	category = "Shoes"
-  
+
  /datum/repeatable_crafting_recipe/leather/standalone/shorts
 	name = "leather shorts"
 	output = /obj/item/clothing/pants/trou/leather/shorts
