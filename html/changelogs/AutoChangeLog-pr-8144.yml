@@ -1,0 +1,5 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - bugfix: "Butchering limbs yields exp for butchering like it was supposed to"
+  - bugfix: "Werewolves and zombies can consume limbs to regain health"

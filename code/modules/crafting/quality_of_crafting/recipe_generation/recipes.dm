@@ -606,8 +606,6 @@
 	var/list/specials = list()
 	if(embed_chance)
 		specials += "Can embed weapons ([embed_chance]% chance)"
-	if(werewolf_infection_probability)
-		specials += "Can cause werewolf infection ([werewolf_infection_probability]% chance)"
 	if(qdel_on_droplimb)
 		specials += "Removed when limb is severed"
 	data["special_props"] = specials

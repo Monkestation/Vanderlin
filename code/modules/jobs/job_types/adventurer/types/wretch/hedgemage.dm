@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 4, // Base for non-old characters
 		STAT_ENDURANCE = 1,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms/staves = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
@@ -16,7 +16,7 @@
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 5, // Base for non-old characters
 		STAT_ENDURANCE = 1,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms/staves = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/wrestling = 30,

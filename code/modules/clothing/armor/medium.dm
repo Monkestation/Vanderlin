@@ -3,7 +3,8 @@
 	equip_delay_self = 4 SECONDS
 	unequip_delay_self = 3 SECONDS
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/scale
 	max_integrity = INTEGRITY_OLD_STANDARD
@@ -88,7 +89,6 @@
 	slot_flags = ITEM_SLOT_ARMOR
 	name = "armored inquisitorial duster"
 	desc = "Metal plates reinforce this heavy coat, worn over the top of the finest Psydonian plate."
-	smeltresult = /obj/item/ingot/steel_slag
 	icon_state = "inqcoata"
 	item_state = "inqcoata"
 	equip_delay_self = 4 SECONDS
