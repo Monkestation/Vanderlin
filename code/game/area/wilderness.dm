@@ -85,6 +85,7 @@
 	name = "thatchwood outpost"
 	first_time_text = "Thatchwood Outpost Outskirts"
 	threat_region = THREAT_REGION_NORTHERN_GROVE
+	ambush_mobs = null
 
 /area/outdoors/wilderness/beside_thatchwood
 
