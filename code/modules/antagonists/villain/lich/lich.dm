@@ -95,16 +95,41 @@
 	lich.update_age_stats(lich.age, TRUE)
 	skele_look()
 	equip_lich()
+	add_verb(lich, /mob/living/carbon/human/proc/lich_self_destruct)
+
+/mob/living/carbon/human/proc/lich_self_destruct()
+	set name = "Self Destruct"
+	set category = "RoleUnique.Lich"
+
+	var/confirm = tgui_alert(usr, "Confirm Self Destruct", "Confirm", DEFAULT_INPUT_CONFIRMATIONS)
+	if(confirm != CHOICE_CONFIRM)
+		return
+	death(FALSE)
+	message_admins("Lich [key_name_admin(usr)] self-destructed.")
+	log_game("Lich [key_name(usr)] self-destructed.")
+
+	var/turf/targetturf = get_turf(usr)
+	var/last_dist = 0
+	for(var/turf/T as anything in spiral_range_turfs(4, targetturf))
+		if(!T)
+			continue
+		var/dist = get_dist(targetturf, T)
+		if(dist > last_dist)
+			last_dist = dist
+			sleep(2 + min(4 - last_dist, 12) * 0.5) //gets faster
+		new /obj/effect/temp_visual/target/lightning(T)
 
 /datum/antagonist/lich/on_removal()
 	var/mob/living/lich_mob = owner.current
 	lich_mob.remove_spells(source = src)
 	UnregisterSignal(lich_mob, COMSIG_LIVING_DEATH)
+	remove_verb(lich_mob, /mob/living/carbon/human/proc/lich_self_destruct)
 	return ..()
 
 /datum/antagonist/lich/greet()
 	. = ..()
 	to_chat(owner.current, span_userdanger("The secret of immortality is mine, but this is not enough. A thousand lichdoms have risen and fallen over the eras. Mine will be the one to last."))
+	to_chat(owner.current, span_userdanger("I can forcibly sever my connection to the mortal plane and restore at a phylactery by Self Destructing. (This is a verb in the Role Unique tab)"))
 	owner.announce_objectives()
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/lichintro.ogg', 80, FALSE, pressure_affected = FALSE)
 
