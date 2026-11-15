@@ -1,0 +1,6 @@
+author: "Spitegremlin"
+delete-after: True
+changes:
+  - balance: "rebalanced crafting requirements for a few items, and crafting difficulties"
+  - bugfix: "fixed some exploits, and gave corset proper hit sounds because it sounded like metal onhit before. Also made gloves and boots salvageable"
+  - code_imp: "moved recipes for boots/some shoes, pants and gloves in leathercrafting around, and made it less bulky to read through"
