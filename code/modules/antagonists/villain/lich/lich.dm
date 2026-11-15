@@ -129,6 +129,7 @@
 /datum/antagonist/lich/greet()
 	. = ..()
 	to_chat(owner.current, span_userdanger("The secret of immortality is mine, but this is not enough. A thousand lichdoms have risen and fallen over the eras. Mine will be the one to last."))
+	to_chat(owner.current, span_userdanger("I can forcibly sever my connection to the mortal plane and restore at a phylactery by Self Destructing. (This is a verb in the Role Unique tab)"))
 	owner.announce_objectives()
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/lichintro.ogg', 80, FALSE, pressure_affected = FALSE)
 
