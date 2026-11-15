@@ -79,6 +79,12 @@
 	name = "thatchwood outpost"
 	first_time_text = "Thatchwood Outpost"
 	threat_region = THREAT_REGION_NORTHERN_GROVE
+	ambush_mobs = null
+
+/area/outdoors/wilderness/outpost/vanderlin/outskirts
+	name = "thatchwood outpost"
+	first_time_text = "Thatchwood Outpost Outskirts"
+	threat_region = THREAT_REGION_NORTHERN_GROVE
 
 /area/outdoors/wilderness/beside_thatchwood
 
@@ -151,35 +157,35 @@
 	ambush_mobs = null
 	icon_state = "woods_safe"
 
-/area/outdoors/wilderness/safe/gallowband_fort
-	name = "gallowband fort"
-	icon_state = "gallowband_outdoors"
-	first_time_text = "Gallowband Fort"
+/area/outdoors/wilderness/safe/forestguard_fort
+	name = "forestguard fort"
+	icon_state = "forestguard_outdoors"
+	first_time_text = "Forest Garrison Fort"
 
-/area/indoors/wilderness/gallowband
-	name = "gallowband camp"
-	icon_state = "gallowband_indoors"
+/area/indoors/wilderness/forestguard
+	name = "forestguard camp"
+	icon_state = "forestguard_indoors"
 
-/area/indoors/wilderness/gallowband/garrison
-	name = "gallowband fort"
-	icon_state = "gallowband_garrison"
+/area/indoors/wilderness/forestguard/garrison
+	name = "Forest Garrison"
+	icon_state = "forestguard_garrison"
 	background_track = 'sound/music/area/manorgarri.ogg'
 	converted_type = /area/outdoors/exposed/manorgarri
 
-/area/indoors/wilderness/gallowband/garrison/gatehouse
-	name = "gallowband gatehouse"
+/area/indoors/wilderness/forestguard/garrison/gatehouse
+	name = "forestguard gatehouse"
 
-/area/indoors/wilderness/gallowband/garrison/watchtower
-	name = "gallowband watchtower"
-	first_time_text = "Gallowband Watchtower"
+/area/indoors/wilderness/forestguard/garrison/watchtower
+	name = "forestguard watchtower"
+	first_time_text = "Forest Garrison Watchtower"
 
-/area/indoors/wilderness/gallowband/ship
-	name = "gallowband ship"
-	icon_state = "gallowband_ship"
-	first_time_text = "Gallowband Ship"
+/area/indoors/wilderness/forestguard/ship
+	name = "forestguard ship"
+	icon_state = "forestguard_ship"
+	first_time_text = "Forest Garrison Ship"
 
-/area/indoors/wilderness/gallowband/cell
-	name = "gallowband cell"
+/area/indoors/wilderness/forestguard/cell
+	name = "forestguard cell"
 	icon_state = "cell"
 	ambient_index = AMBIENCE_DUNGEON
 	ambient_index_night = AMBIENCE_DUNGEON

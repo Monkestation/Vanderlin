@@ -1,4 +1,8 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/wooddark/vertical,
+/area/outdoors/wilderness/outpost/vanderlin)
 "b" = (
 /turf/closed/wall/mineral/wooddark/slitted,
 /area/outdoors/wilderness/outpost/vanderlin)
@@ -116,7 +120,7 @@ h
 c
 "}
 (6,1,1) = {"
-c
+a
 h
 h
 h
