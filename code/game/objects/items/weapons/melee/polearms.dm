@@ -55,6 +55,7 @@
 	sellprice = 5
 	item_weight = 1 KILOGRAMS
 	weapon_special = /datum/special_intent/quarterstaff_sweep
+	associated_skill = /datum/attribute/skill/combat/polearms/staves
 
 /obj/item/weapon/polearm/woodstaff/getonmobprop(tag)
 	. = ..()

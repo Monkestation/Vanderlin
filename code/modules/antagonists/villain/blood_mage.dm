@@ -310,7 +310,7 @@
 
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/whipsflails = 20,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
 
 		/datum/attribute/skill/misc/riding = 30,

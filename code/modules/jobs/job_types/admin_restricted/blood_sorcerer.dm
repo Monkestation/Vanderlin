@@ -2,7 +2,7 @@
 	raw_attribute_list = list(
 		STAT_INTELLIGENCE = 5,
 		STAT_PERCEPTION = 2,
-		/datum/attribute/skill/combat/polearms = 50,
+		/datum/attribute/skill/combat/polearms/staves = 50,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/combat/wrestling = 30,

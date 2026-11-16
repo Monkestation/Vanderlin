@@ -388,6 +388,44 @@
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 	update_appearance(UPDATE_OVERLAYS)
 
+/obj/structure/flora/newbranch/examine(mob/user)
+	. = ..()
+	. += span_notice("I could climb to it by using my hand with [span_bold("primary")] intent.")
+	. += span_warning("Trying to climb this while encumbered will prove to be [span_danger("difficult")].")
+
+/obj/structure/flora/newbranch/attack_hand(mob/user, list/modifiers)
+	. = ..()
+	if(.)
+		return
+
+	var/do_after_time = 0.75 SECONDS
+
+	if(iscarbon(user))
+		var/mob/living/carbon/carbon_user = user
+		do_after_time += 0.75 SECONDS * 2 ^ (carbon_user.encumbrance) // QUADRATIC
+
+	do_after_time *= GET_MOB_SKILL_SPEED_MOD(user, /datum/attribute/skill/misc/climbing)
+
+	if(user.m_intent != MOVE_INTENT_SNEAK)
+		user.visible_message(span_danger("[user] starts climbing to [src]!"), span_warning("I start climbing to [src]."))
+
+	if(do_after(user, do_after_time, src, display_over_user = TRUE))
+
+		if(do_after_time >= 3 SECONDS)
+			var/roll = rand(20, 60) // you have to be really good at climbing if you use heavy armor.
+			if(GET_MOB_SKILL_VALUE(user, /datum/attribute/skill/misc/climbing) + rand(1, GET_MOB_ATTRIBUTE_VALUE(user, STAT_FORTUNE)) < roll)
+				user.visible_message(span_danger("[user] fails to climb to [src]!"), span_danger("I fail to climb to [src]."))
+				return
+
+		if(user.m_intent != MOVE_INTENT_SNEAK)
+			playsound(user, 'sound/foley/climb.ogg', 100, TRUE)
+			user.visible_message(span_warning("[user] climbs to the [src]!"), span_warning("I climb to the [src]."))
+
+		user.Move(src.loc)
+
+		var/exp_to_gain = (GET_MOB_ATTRIBUTE_VALUE(user, STAT_INTELLIGENCE)/2) * user.get_learning_boon(/datum/attribute/skill/misc/climbing)
+		user.adjust_experience(/datum/attribute/skill/misc/climbing, exp_to_gain, FALSE)
+
 /obj/structure/flora/newbranch/update_overlays()
 	. = ..()
 	if(!underlay_base)
@@ -442,9 +480,10 @@
 	plane = FLOOR_PLANE
 
 /obj/structure/flora/newleaf/attack_hand(mob/user)
-	if(isopenspace(loc))
+	. = ..()
+	if(!. && isopenspace(loc))
 		loc.attack_hand(user) // so clicking leaves with an empty hand lets you climb down.
-	return ..()
+		return
 
 /obj/structure/flora/newleaf/corner
 	icon_state = "corner-leaf1"

@@ -84,16 +84,16 @@
 			owner.adjust_temp_blindness(-HEAL_AGGRAVATED * (level) SECONDS)
 			owner.adjust_eye_blur(-HEAL_AGGRAVATED * (level) SECONDS)
 
-	for(var/obj/item/organ/possible_organ in owner.internal_organs)
-		if(ORGAN_SLOT_ARTERY in possible_organ.organ_efficiency)
-			continue
-		if(ORGAN_SLOT_EYES in possible_organ.organ_efficiency)
-			continue
-		if(ORGAN_SLOT_BRAIN in possible_organ.organ_efficiency)
-			continue
-		if(possible_organ.organ_flags & ORGAN_DESTROYED)
-			possible_organ.organ_flags &= ~ORGAN_DESTROYED
-		possible_organ.applyOrganDamage(-HEAL_BASHING_LETHAL * (level * 0.5))
+		for(var/obj/item/organ/possible_organ in owner.internal_organs)
+			if(ORGAN_SLOT_ARTERY in possible_organ.organ_efficiency)
+				continue
+			if(ORGAN_SLOT_EYES in possible_organ.organ_efficiency)
+				continue
+			if(ORGAN_SLOT_BRAIN in possible_organ.organ_efficiency)
+				continue
+			if(possible_organ.organ_flags & ORGAN_DESTROYED)
+				possible_organ.organ_flags &= ~ORGAN_DESTROYED
+			possible_organ.applyOrganDamage(-HEAL_BASHING_LETHAL * (level * 0.5))
 
 	if(level >= 7 && prob(5))
 		owner.regenerate_limb(silent = FALSE)
