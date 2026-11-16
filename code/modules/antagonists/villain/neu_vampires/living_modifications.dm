@@ -104,7 +104,7 @@
 	else
 		hud_used?.bloodpool?.set_value((100 / (maxbloodpool / bloodpool)) / 100, 1 SECONDS)
 
-/mob/proc/affects_masquerade()
+/mob/proc/affects_masquerade(town_only=TRUE)
 	return FALSE
 
 /mob/living/carbon/affects_masquerade(town_only=TRUE)

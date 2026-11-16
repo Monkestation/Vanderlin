@@ -132,10 +132,10 @@
 	deadchat_broadcast(rendered, source, follow_target = src, speaker_key = key)
 
 ///Check if this message is an emote
-/mob/proc/check_emote(message, forced)
+/mob/proc/check_emote(message, forced, force_silence = FALSE)
 	if(copytext(message, 1, 2) == "*")
-		emote(copytext_char(message, 2), intentional = !forced)
-		return 1
+		emote(copytext_char(message, 2), intentional = !forced, force_silence = force_silence)
+		return TRUE
 
 /mob/proc/check_whisper(message, forced)
 	if(copytext(message, 1, 2) == "+")

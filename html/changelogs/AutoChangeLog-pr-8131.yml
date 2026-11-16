@@ -1,5 +1,0 @@
-author: "ta3754859-max"
-delete-after: True
-changes:
-  - rscadd: "New items to persistent housing whitelist (Toys, hammers, lanterns, satchels)"
-  - bugfix: "persistent housing not saving items inside chests"

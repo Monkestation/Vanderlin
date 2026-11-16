@@ -80,7 +80,7 @@
 #define FACTION_INFERNAL "Infernal"
 #define FACTION_LEYLINE "Leyline"
 #define FACTION_OVERLORD "Overlord"
-#define FACTION_BLOOD_MAGIC	"Blood Magic"
+#define FACTION_BLOOD_MAGIC	"Hemomancers"
 
 #define SUB_FACTION_KEEP "Keep"
 #define SUB_FACTION_GARRISON "Garrison"
