@@ -60271,6 +60271,10 @@
 "xFA" = (
 /obj/structure/giantfur/small,
 /obj/effect/decal/cleanable/dirt/dust,
+/obj/structure/trophy/deer{
+	pixel_y = 0;
+	pixel_x = -32
+	},
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/town)
 "xFD" = (
