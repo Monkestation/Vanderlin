@@ -4272,12 +4272,13 @@
 /turf/open/water/ocean/abyss,
 /area/under/cave)
 "pP" = (
-/turf/closed/mineral/bedrock,
-/area/outdoors/wilderness/plains)
+/obj/machinery/light/fueled/firebowl,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness/outpost/vanderlin/outskirts)
 "pQ" = (
-/obj/structure/fluff/traveltile/fast/vanderlin/basin_forest,
-/turf/open/floor/cobble,
-/area/outdoors/wilderness/plains)
+/obj/structure/flora/newtree,
+/turf/open/floor/dirt/road,
+/area/outdoors/wilderness/outpost/vanderlin/outskirts)
 "pR" = (
 /turf/open/openspace,
 /area/outdoors/wilderness/plains)
@@ -5829,12 +5830,22 @@
 /obj/machinery/light/fueled/oven/south,
 /turf/open/floor/tile/kitchen,
 /area/indoors/wilderness)
+"uZ" = (
+/turf/closed/mineral/bedrock,
+/area/outdoors/wilderness/outpost/vanderlin/outskirts)
 "va" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
+"vb" = (
+/obj/structure/fluff/traveltile/fast/vanderlin/basin_forest{
+	aportalid = "vanderlin-forest_basin";
+	aportalgoesto = "vanderlin-basin_forest"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/wilderness/outpost/vanderlin/outskirts)
 "vc" = (
 /obj/structure/window/openclose/reinforced{
 	dir = 8
@@ -5886,6 +5897,16 @@
 /obj/structure/closet/crate/drawer,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor)
+"vi" = (
+/obj/structure/fluff/traveltile/fast/vanderlin/basin_forest{
+	aportalgoesto = "vanderlin-basin_forest"
+	},
+/obj/structure/fluff/traveltile/fast/vanderlin/basin_forest{
+	aportalid = "vanderlin-forest_basin";
+	aportalgoesto = "vanderlin-basin_forest"
+	},
+/turf/open/floor/cobble,
+/area/outdoors/wilderness/outpost/vanderlin/outskirts)
 "vj" = (
 /obj/structure/flora/grass/water,
 /obj/structure/flora/grass/water,
@@ -19178,7 +19199,7 @@ nr
 Cr
 qT
 qT
-qT
+Cr
 qT
 qT
 Ps
@@ -19580,7 +19601,7 @@ SI
 (34,1,1) = {"
 nr
 Cr
-qT
+Cr
 qT
 qT
 qT
@@ -19591,7 +19612,7 @@ qT
 qT
 qT
 rb
-rb
+Pm
 qT
 rd
 OT
@@ -20186,10 +20207,10 @@ SI
 (37,1,1) = {"
 nr
 Cr
-qT
+Cr
 Pm
 rb
-rb
+Pm
 Ps
 rb
 qT
@@ -21198,7 +21219,7 @@ nr
 Cr
 Cr
 qT
-rb
+Pm
 rb
 qT
 Ps
@@ -21601,9 +21622,9 @@ SI
 nr
 Cr
 Pm
-rb
+Pm
 qT
-rb
+Pm
 rb
 Ps
 qT
@@ -21623,7 +21644,7 @@ Nj
 Bs
 Bs
 Bp
-GU
+Hg
 HI
 HI
 HI
@@ -21803,7 +21824,7 @@ SI
 nr
 Cr
 Cr
-qT
+Cr
 qT
 qT
 qT
@@ -22005,9 +22026,9 @@ SI
 nr
 Cr
 Cr
+Cr
 qT
-qT
-qT
+Cr
 qT
 qT
 Ps
@@ -22206,9 +22227,9 @@ SI
 (47,1,1) = {"
 nr
 Cr
+Cr
 qT
-qT
-qT
+Cr
 qT
 qT
 qT
@@ -22406,12 +22427,12 @@ yK
 SI
 "}
 (48,1,1) = {"
-pP
-rb
+uZ
+Pm
+Cr
+Cr
 qT
-qT
-qT
-qT
+Cr
 rb
 rb
 Ps
@@ -22608,8 +22629,8 @@ yK
 SI
 "}
 (49,1,1) = {"
+uZ
 pP
-Ps
 Ps
 Ps
 Ps
@@ -22810,7 +22831,7 @@ yK
 SI
 "}
 (50,1,1) = {"
-pQ
+vb
 Px
 Px
 Py
@@ -23012,7 +23033,7 @@ yK
 SI
 "}
 (51,1,1) = {"
-pQ
+vi
 Px
 Px
 Px
@@ -23214,7 +23235,7 @@ yK
 SI
 "}
 (52,1,1) = {"
-pQ
+vb
 Py
 Py
 Py
@@ -23416,8 +23437,8 @@ yK
 SI
 "}
 (53,1,1) = {"
+uZ
 pP
-Ps
 Ps
 Ps
 Ps
@@ -23618,10 +23639,10 @@ yK
 SI
 "}
 (54,1,1) = {"
-pP
-Ps
-rb
-rb
+uZ
+pQ
+Pm
+Pm
 rb
 qT
 qT
@@ -23822,9 +23843,9 @@ SI
 (55,1,1) = {"
 nr
 Cr
-qT
-qT
-qT
+Cr
+Cr
+Cr
 qT
 qT
 qT
@@ -24025,7 +24046,7 @@ SI
 nr
 Cr
 Cr
-qT
+Cr
 qT
 qT
 qT
@@ -24428,12 +24449,12 @@ SI
 (58,1,1) = {"
 nr
 Cr
+Cr
+Cr
 qT
 qT
 qT
-qT
-qT
-qT
+Cr
 qT
 qT
 qT
@@ -24631,8 +24652,8 @@ SI
 nr
 Cr
 qT
-qT
-rb
+Cr
+Pm
 rb
 rb
 qT
@@ -24833,7 +24854,7 @@ SI
 nr
 Cr
 Cr
-qT
+Cr
 rb
 qT
 qT
@@ -25035,10 +25056,10 @@ SI
 nr
 Cr
 Cr
-qT
+Cr
 qT
 rb
-rb
+Pm
 rb
 rb
 rb
@@ -26046,7 +26067,7 @@ nr
 Cr
 Cr
 qT
-qT
+Cr
 qT
 qT
 Cr
@@ -26452,7 +26473,7 @@ qT
 qT
 Cr
 qT
-qT
+Cr
 qT
 qT
 qT
