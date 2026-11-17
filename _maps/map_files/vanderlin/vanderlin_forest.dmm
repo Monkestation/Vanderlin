@@ -4645,6 +4645,16 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor)
+"rh" = (
+/obj/structure/chair/wood/alt/chair3{
+	dir = 4
+	},
+/obj/effect/landmark/start/forestguard{
+	dir = 4
+	},
+/turf/open/floor/carpet/red,
+/area/indoors/wilderness/gallowband/garrison,
+/area/indoors/wilderness/forestguard)
 "ri" = (
 /obj/effect/decal/cleanable/food/mess/rotting,
 /turf/open/floor/tile/kitchen,
@@ -5314,6 +5324,16 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/noble_manor)
+"tn" = (
+/obj/structure/chair/wood/alt/chair3{
+	dir = 8
+	},
+/obj/effect/landmark/start/forestguard{
+	dir = 8
+	},
+/turf/open/floor/carpet/red,
+/area/indoors/wilderness/gallowband/garrison,
+/area/indoors/wilderness/forestguard)
 "to" = (
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/craftstone,
@@ -5499,6 +5519,16 @@
 /obj/structure/carpet/purple,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor)
+"tZ" = (
+/obj/structure/chair/wood/alt/chair3{
+	dir = 2
+	},
+/obj/effect/landmark/start/forestwarden{
+	dir = 2
+	},
+/turf/open/floor/carpet/red,
+/area/indoors/wilderness/gallowband/garrison,
+/area/indoors/wilderness/forestguard)
 "ua" = (
 /obj/structure/table/map{
 	dir = 6
@@ -5558,6 +5588,11 @@
 "ul" = (
 /turf/closed/wall/mineral/stone/window,
 /area/outdoors/wilderness/plains)
+"um" = (
+/obj/effect/landmark/start/forestenforcer,
+/turf/open/floor/hexstone,
+/area/indoors/wilderness/gallowband/garrison,
+/area/indoors/wilderness/forestguard)
 "un" = (
 /obj/structure/table/wood/counter,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -5668,6 +5703,11 @@
 /obj/structure/carpet/purple,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor)
+"uD" = (
+/obj/effect/landmark/start/forestpreacher,
+/turf/open/floor/hexstone,
+/area/indoors/wilderness/gallowband/garrison,
+/area/indoors/wilderness/forestguard)
 "uE" = (
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe)
@@ -5695,6 +5735,11 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/central)
+"uJ" = (
+/obj/effect/landmark/start/forestsupport,
+/turf/open/floor/hexstone,
+/area/indoors/wilderness/gallowband/garrison,
+/area/indoors/wilderness/forestguard)
 "uK" = (
 /turf/closed/basic,
 /area/outdoors/wilderness/central)
@@ -5717,6 +5762,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/churchbrick,
 /area/indoors/dungeon)
+"uO" = (
+/obj/effect/landmark/hammer/dev_text{
+	name = "these are always two coked up lesbians, good for them"
+	},
+/turf/open/floor/hexstone,
+/area/indoors/wilderness/gallowband/garrison,
+/area/indoors/wilderness/forestguard)
 "uP" = (
 /obj/structure/table/wood/counter/end{
 	dir = 4
@@ -9912,13 +9964,6 @@
 /obj/structure/table/stone_small,
 /turf/open/floor/cobblerock,
 /area/indoors/dungeon)
-"Nz" = (
-/obj/structure/chair/wood/alt/chair3{
-	dir = 4
-	},
-/turf/open/floor/carpet/red,
-/area/indoors/wilderness/gallowband/garrison,
-/area/indoors/wilderness/forestguard)
 "NA" = (
 /obj/effect/mapping_helpers/access/locker,
 /obj/structure/door/stone{
@@ -9944,13 +9989,6 @@
 "NE" = (
 /obj/structure/table/map/vanderlin{
 	dir = 6
-	},
-/turf/open/floor/carpet/red,
-/area/indoors/wilderness/gallowband/garrison,
-/area/indoors/wilderness/forestguard)
-"NF" = (
-/obj/structure/chair/wood/alt/chair3{
-	dir = 8
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/wilderness/gallowband/garrison,
@@ -10398,13 +10436,6 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness/south)
 "OF" = (
-/turf/open/floor/carpet/red,
-/area/indoors/wilderness/gallowband/garrison,
-/area/indoors/wilderness/forestguard)
-"OG" = (
-/obj/structure/chair/wood/alt/chair3{
-	dir = 2
-	},
 /turf/open/floor/carpet/red,
 /area/indoors/wilderness/gallowband/garrison,
 /area/indoors/wilderness/forestguard)
@@ -19768,8 +19799,8 @@ rd
 rd
 Nx
 Nx
-Nz
-Nz
+rh
+rh
 Nc
 sA
 sA
@@ -20169,9 +20200,9 @@ qT
 qT
 qT
 rd
+um
 Nx
-Nx
-OG
+tZ
 Op
 ND
 rd
@@ -20371,8 +20402,8 @@ Gd
 Gd
 lD
 rd
-Nx
-Nx
+uD
+uO
 OF
 Or
 NE
@@ -20573,11 +20604,11 @@ Gd
 Gd
 Gd
 rd
+uJ
 Nx
 Nx
-Nx
-NF
-NF
+tn
+tn
 Nc
 Bt
 Bt
