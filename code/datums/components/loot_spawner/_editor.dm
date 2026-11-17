@@ -167,7 +167,7 @@
 			return TRUE
 
 		if("search")
-			var/query = lowertext(trim("[params["query"]]"))
+			var/query = LOWER_TEXT(trim("[params["query"]]"))
 			search_results = list()
 			if(length(query) < 3)
 				notice = "Type at least 3 characters to search."
@@ -579,4 +579,4 @@
 //this is just for exporting easier
 /proc/loot_editor_slug(text)
 	var/static/regex/bad_chars = regex(@"[^a-z0-9_]", "g")
-	return bad_chars.Replace(lowertext(trim("[text]")), "_")
+	return bad_chars.Replace(LOWER_TEXT(trim("[text]")), "_")
