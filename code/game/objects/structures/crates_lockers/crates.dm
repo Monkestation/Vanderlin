@@ -17,6 +17,7 @@
 	close_sound_volume = 50
 	drag_slowdown = 0
 	sellprice = CARGO_CRATE_VALUE
+	pass_flags_self = PASSGRILLE|LETPASSTHROW|PASSSTRUCTURE|NOTLETPASSTHROWNMOB
 
 /obj/structure/closet/crate/CanAllowThrough(atom/movable/mover, turf/target)
 	. = ..()
