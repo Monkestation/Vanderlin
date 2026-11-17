@@ -5,6 +5,6 @@
 /// Sent from /atom/movable/screen/lobby/button/ready/Click() : ()
 #define COMSIG_HUD_PLAYER_READY_TOGGLE "hud_player_ready_toggle"
 /// Sent from /atom/movable/screen/lobby/actors/Click() : ()
-#define COMSIG_HUD_ACTORS_LIST_TOGGLED "hud_actors_list_toggle"
+#define COMSIG_HUD_RIGHT_CHASSIS_TOGGLED "hud_right_chassis_toggle"
 /// Sent from /atom/movable/screen/lobby/everybody_shake() : ()
 #define COMSIG_HUD_EVERYBODY_SHAKE "hud_everybody_shake"
