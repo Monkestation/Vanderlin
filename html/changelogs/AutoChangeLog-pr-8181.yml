@@ -1,0 +1,5 @@
+author: "grungussuss"
+delete-after: True
+changes:
+  - rscadd: "Landing on a pipe now plays a sound effect."
+  - bugfix: "you no longer \"jump into\" a pipe when jumping onto it."
