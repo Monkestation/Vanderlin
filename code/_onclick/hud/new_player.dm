@@ -23,9 +23,32 @@
 			lobbyscreen.RegisterSignal(src, COMSIG_HUD_LOBBY_COLLAPSED, TYPE_PROC_REF(/atom/movable/screen/lobby, collapse_button))
 			lobbyscreen.RegisterSignal(src, COMSIG_HUD_LOBBY_EXPANDED, TYPE_PROC_REF(/atom/movable/screen/lobby, expand_button))
 
+		if (lobbyscreen.can_be_looked_at_by_skull)
+			RegisterSignal(lobbyscreen, COMSIG_ATOM_MOUSE_ENTERED, TYPE_PROC_REF(/datum/hud/new_player, skull_look_at_source))
+
 	. = ..()
 
-/datum/hud/new_player/proc/everybody_shakes()
+/datum/hud/new_player/proc/skull_look_at_source(datum/source)
+	SIGNAL_HANDLER
+
+	var/atom/movable/screen/lobby/screen_source = source
+
+	var/atom/movable/screen/lobby/eyes/skull_eyes = locate(/atom/movable/screen/lobby/eyes) in  static_inventory
+
+	var/list/eyes_offsets = screen_loc_to_offset(skull_eyes.screen_loc)
+
+	var/list/source_offsets = screen_loc_to_offset(screen_source.screen_loc)
+
+	var/eyes_x = eyes_offsets[1]
+	var/eyes_y = eyes_offsets[2]
+
+	var/source_x = source_offsets[1]
+	var/source_y = source_offsets[2]
+
+	var/new_dir = get_dir(source_x - eyes_x, source_y - eyes_y)
+	skull_eyes.dir = new_dir
+
+/datum/hud/new_player/proc/everybody_shakes(datum/source)
 	SIGNAL_HANDLER
 	//var/list/hud_elements = subtypesof(/atom/movable/screen/lobby)
 
@@ -34,13 +57,15 @@
 		animate(element, element.transform = element.transform.Translate(x = -1 - rand(2, 4), y = 2 + rand(1, 3)), time = 3, easing = ELASTIC_EASING)
 		animate(element, element.transform = matrix(), time = 3, easing = ELASTIC_EASING)
 
-	shake_camera(mymob, 4, 3)
+	shake_camera(mymob, 4, 2)
 
 	playsound(mymob, 'sound/lead_pipe_hit.ogg', 50, TRUE)
 
 //copypaste begin
 
 INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
+
+#define BUTTONS_WEST_OFFSET WEST:58
 
 /atom/movable/screen/lobby
 	plane = LOBBY_MENU_PLANE
@@ -50,26 +75,33 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	var/always_shown = FALSE
 	/// If true we will create this button every time the HUD is generated
 	var/always_available = TRUE
+	/// How much to move up on collapse
+	var/collapse_y_move = MOVE_AMOUNT
+	/// Does the skull look at this when the mouse hovers over it?
+	var/can_be_looked_at_by_skull = FALSE
 
 ///Run sleeping actions after initialize
 /atom/movable/screen/lobby/proc/SlowInit()
 	return
 
 ///Animates moving the button off-screen
-/atom/movable/screen/lobby/proc/collapse_button()
+/atom/movable/screen/lobby/proc/collapse_button(datum/source)
 	SIGNAL_HANDLER
-	animate(src, transform = transform.Translate(x = 0, y = MOVE_AMOUNT), time = LOBBY_SCREEN_SLIDE_DURATION, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
+	animate(src, transform = transform.Translate(x = 0, y = -8), time = 0.15 SECONDS, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
+	animate(transform = transform.Translate(x = 0, y = collapse_y_move + 8), time = LOBBY_SCREEN_SLIDE_DURATION, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
 
 ///Animates moving the button back into place
-/atom/movable/screen/lobby/proc/expand_button()
+/atom/movable/screen/lobby/proc/expand_button(datum/source)
 	SIGNAL_HANDLER
-	animate(src, transform = matrix(), time = LOBBY_SCREEN_SLIDE_DURATION, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
+	animate(src, transform = transform.Translate(x = 0, y = -collapse_y_move - 8), time = LOBBY_SCREEN_SLIDE_DURATION, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
+	animate(transform = transform.Translate(x = 0, y = 8), time = 0.25 SECONDS, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
 
 /atom/movable/screen/lobby/chain
 	icon = 'icons/hud/lobby/chain.dmi'
 	icon_state = "chain"
 	layer = LOBBY_BACKGROUND_LAYER
-	screen_loc = "WEST:10,TOP:5"
+	screen_loc = "WEST:10,TOP:105"
+	collapse_y_move = 200
 
 /atom/movable/screen/lobby/left_chassis
 	icon = 'icons/hud/lobby/left_chassis.dmi'
@@ -81,7 +113,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	icon = 'icons/hud/lobby/right_chassis.dmi'
 	icon_state = "right_chassis"
 	plane = LOBBY_MENU_PLANE
-	layer = LOBBY_BACKGROUND_LAYER
+	layer = LOBBY_BACKGROUND_LAYER - 0.1
 	screen_loc = "WEST:139,TOP:6"
 	var/collapsed = FALSE
 
@@ -89,16 +121,16 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	. = ..()
 	RegisterSignal(hud, COMSIG_HUD_RIGHT_CHASSIS_TOGGLED, TYPE_PROC_REF(/atom/movable/screen/lobby/right_chassis, toggle_right_chassis))
 
-/atom/movable/screen/lobby/right_chassis/proc/toggle_right_chassis()
+/atom/movable/screen/lobby/right_chassis/proc/toggle_right_chassis(datum/source)
 	SIGNAL_HANDLER
 	if(collapsed)
 		animate(src, transform = matrix(), time = 0.5 SECONDS, easing = CUBIC_EASING|EASE_IN, flags = ANIMATION_PARALLEL)
-		addtimer(CALLBACK(hud, TYPE_PROC_REF(/datum/hud/new_player, everybody_shakes)), 0.5 SECONDS)
+		addtimer(CALLBACK(hud, TYPE_PROC_REF(/datum/hud/new_player, everybody_shakes)), 0.6 SECONDS)
 	else
 		animate(src, transform = transform.Translate(x = 450, y = 0), time = 0.4 SECONDS, easing = CUBIC_EASING|EASE_IN, flags = ANIMATION_PARALLEL)
 	collapsed = !collapsed
 
-/atom/movable/screen/lobby/right_chassis/proc/signal_shake()
+/atom/movable/screen/lobby/right_chassis/proc/signal_shake(datum/source)
 	SIGNAL_HANDLER
 	SEND_SIGNAL(hud, COMSIG_HUD_EVERYBODY_SHAKE)
 
@@ -111,6 +143,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	///Should this button play the select sound?
 	var/select_sound_play = TRUE
 	layer = LOBBY_MENU_LAYER
+	can_be_looked_at_by_skull = TRUE
 
 /atom/movable/screen/lobby/button/Click(location, control, params)
 	if(!usr.client)
@@ -172,15 +205,58 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	icon = 'icons/hud/lobby/skull.dmi'
 	base_icon_state = "skull"
 	icon_state = "skull"
-	screen_loc = "WEST:1,TOP:-300"
+	screen_loc = "WEST:1,TOP:-200"
+	collapse_y_move = 200
+	var/blip_enabled = TRUE
+
+/atom/movable/screen/lobby/eyes
+	icon = 'icons/hud/lobby/eyes.dmi'
+	base_icon_state = "eyes"
+	icon_state = "eyes"
+	layer = LOBBY_SHUTTER_LAYER
+	screen_loc = "WEST:1,TOP:-200"
+	collapse_y_move = 200
+
+/atom/movable/screen/lobby/button/skull/proc/collapse_menu()
+	SEND_SIGNAL(hud, COMSIG_HUD_LOBBY_COLLAPSED)
+
+/atom/movable/screen/lobby/button/skull/proc/expand_menu()
+	SEND_SIGNAL(hud, COMSIG_HUD_LOBBY_EXPANDED)
+
+/atom/movable/screen/lobby/button/skull/Click(location, control, params)
+	. = ..()
+	if(!.)
+		return
+
+	if(!enabled)
+		return
+
+	if(!istype(hud, /datum/hud/new_player))
+		return
+	var/datum/hud/new_player/our_hud = hud
+	//base_icon_state = our_hud.menu_hud_status ? "expand" : "collapse"
+	// name = "[our_hud.menu_hud_status ? "Expand" : "Collapse"] Lobby Menu"
+	set_button_status(FALSE)
+
+	//animate bottom buttons' movement
+	if(our_hud.menu_hud_status)
+		collapse_menu()
+	else
+		expand_menu()
+	our_hud.menu_hud_status = !our_hud.menu_hud_status
+
+	//re-enable clicking the button when the shutter animation finishes
+	//we use sleep here so it can work during game setup, as addtimer would not work until the game would finish setting up
+	sleep(1.1 * LOBBY_SCREEN_SLIDE_DURATION)
+	set_button_status(TRUE)
 
 ///Prefs menu
 /atom/movable/screen/lobby/button/character_setup
 	name = "View Character Setup"
-	screen_loc = "WEST:29,TOP:-10"
-	icon = 'icons/hud/lobby/character_sheet.dmi'
-	icon_state = "character_sheet_disabled"
-	base_icon_state = "character_sheet"
+	screen_loc = "WEST:57,TOP:-90"
+	icon = 'icons/hud/lobby/character_setup.dmi'
+	icon_state = "character_setup"
+	base_icon_state = "character_setup"
 	enabled = FALSE
 
 /atom/movable/screen/lobby/button/character_setup/Initialize(mapload, datum/hud/hud_owner)
@@ -201,7 +277,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 	hud.mymob.client?.setup_character()
 
-/atom/movable/screen/lobby/button/character_setup/proc/enable_character_setup()
+/atom/movable/screen/lobby/button/character_setup/proc/enable_character_setup(datum/source)
 	SIGNAL_HANDLER
 	/*
 	flick("[base_icon_state]_enabled", src)
@@ -211,8 +287,8 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 ///Button that appears before the game has started
 /atom/movable/screen/lobby/button/ready
 	name = "Toggle Readiness"
-	screen_loc = "WEST:20,TOP:-68"
-	icon = 'icons/hud/lobby/ready.dmi'
+	screen_loc = "WEST:57,TOP:-150"
+	icon = 'icons/hud/lobby/ready_button.dmi'
 	icon_state = "not_ready"
 	base_icon_state = "not_ready"
 	///Whether we are readied up for the round or not
@@ -231,7 +307,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 			set_button_status(FALSE)
 	*/
 
-/atom/movable/screen/lobby/button/ready/proc/hide_ready_button()
+/atom/movable/screen/lobby/button/ready/proc/hide_ready_button(datum/source)
 	SIGNAL_HANDLER
 	/*
 	set_button_status(FALSE)
@@ -239,7 +315,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	RegisterSignal(SSticker, COMSIG_TICKER_ERROR_SETTING_UP, PROC_REF(show_ready_button))
 	*/
 
-/atom/movable/screen/lobby/button/ready/proc/show_ready_button()
+/atom/movable/screen/lobby/button/ready/proc/show_ready_button(datum/source)
 	SIGNAL_HANDLER
 	/*
 	set_button_status(TRUE)
@@ -262,6 +338,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	update_appearance(UPDATE_ICON)
 	SEND_SIGNAL(hud, COMSIG_HUD_PLAYER_READY_TOGGLE)
 
+/*
 ///Shown when the game has started
 /atom/movable/screen/lobby/button/join
 	name = "Join Game"
@@ -326,9 +403,11 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	SIGNAL_HANDLER
 	set_button_status(FALSE)
 
+*/
+
 /atom/movable/screen/lobby/button/lore
 	name = "Lore Primer"
-	screen_loc = "WEST:20,TOP:-101"
+	screen_loc = "WEST:57,TOP:-185"
 	icon = 'icons/hud/lobby/lore.dmi'
 	icon_state = "lore"
 	base_icon_state = "lore"
@@ -343,10 +422,10 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 /atom/movable/screen/lobby/button/migration
 	name = "Migration"
-	screen_loc = "WEST:20,TOP:-134"
-	icon = 'icons/hud/lobby/migration.dmi'
-	icon_state = "migration"
-	base_icon_state = "migration"
+	screen_loc = "WEST:57,TOP:-220"
+	icon = 'icons/hud/lobby/migrate.dmi'
+	icon_state = "migrate"
+	base_icon_state = "migrate"
 
 /atom/movable/screen/lobby/button/migration/Click(location, control, params)
 	. = ..()
@@ -357,70 +436,24 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 	migrant.show_ui()
 
-/atom/movable/screen/lobby/button/actors
+/atom/movable/screen/lobby/button/collapse_right_chassis
 	name = "Actors"
-	screen_loc = "WEST:20,TOP:-167"
-	icon = 'icons/hud/lobby/actors.dmi'
-	icon_state = "actors"
-	base_icon_state = "actors"
+	screen_loc = "WEST:80,TOP:-250"
+	icon = 'icons/hud/lobby/cross.dmi'
+	icon_state = "cross"
+	base_icon_state = "cross"
 
-/atom/movable/screen/lobby/button/actors/Click(location, control, params)
+/atom/movable/screen/lobby/button/collapse_right_chassis/Click(location, control, params)
 	. = ..()
 	if(!.)
 		return
 
-	SEND_SIGNAL(hud, COMSIG_HUD_ACTORS_LIST_TOGGLED)
+	SEND_SIGNAL(hud, COMSIG_HUD_RIGHT_CHASSIS_TOGGLED)
 
 	//hud.mymob.client?.view_actors_manifest()
 
-/atom/movable/screen/lobby/button/collapse
-	name = "Collapse Lobby Menu"
-	icon = 'icons/hud/lobby/collapse_expand.dmi'
-	icon_state = "collapse"
-	base_icon_state = "collapse"
-	layer = LOBBY_BELOW_MENU_LAYER
-	screen_loc = "WEST:10,TOP:-390"
-	always_shown = TRUE
 
-	var/blip_enabled = TRUE
-
-/atom/movable/screen/lobby/button/collapse/proc/collapse_menu()
-	SEND_SIGNAL(hud, COMSIG_HUD_LOBBY_COLLAPSED)
-	//wait for the shutter to come down
-	collapse_button()
-
-/atom/movable/screen/lobby/button/collapse/proc/expand_menu()
-	SEND_SIGNAL(hud, COMSIG_HUD_LOBBY_EXPANDED)
-	expand_button()
-
-/atom/movable/screen/lobby/button/collapse/Click(location, control, params)
-	. = ..()
-	if(!.)
-		return
-
-	if(!enabled)
-		return
-
-	if(!istype(hud, /datum/hud/new_player))
-		return
-	var/datum/hud/new_player/our_hud = hud
-	base_icon_state = our_hud.menu_hud_status ? "expand" : "collapse"
-	name = "[our_hud.menu_hud_status ? "Expand" : "Collapse"] Lobby Menu"
-	set_button_status(FALSE)
-
-	//animate bottom buttons' movement
-	if(our_hud.menu_hud_status)
-		collapse_menu()
-	else
-		expand_menu()
-	our_hud.menu_hud_status = !our_hud.menu_hud_status
-
-	//re-enable clicking the button when the shutter animation finishes
-	//we use sleep here so it can work during game setup, as addtimer would not work until the game would finish setting up
-	sleep(1.1 * LOBBY_SCREEN_SLIDE_DURATION)
-	set_button_status(TRUE)
 
 #undef LOBBY_SCREEN_SLIDE_DURATION
 #undef MOVE_AMOUNT
-
-*/
+#undef BUTTONS_WEST_OFFSET
