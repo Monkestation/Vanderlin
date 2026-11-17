@@ -2122,6 +2122,7 @@
 #include "code\game\objects\items\soap.dm"
 #include "code\game\objects\items\spell_focus.dm"
 #include "code\game\objects\items\statue.dm"
+#include "code\game\objects\items\tablecloth.dm"
 #include "code\game\objects\items\tent_kit.dm"
 #include "code\game\objects\items\toys.dm"
 #include "code\game\objects\items\trash.dm"

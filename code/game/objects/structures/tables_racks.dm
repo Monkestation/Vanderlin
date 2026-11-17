@@ -160,6 +160,17 @@
 
 	return ITEM_INTERACT_SUCCESS
 
+/obj/structure/table/atom_deconstruct(disassembled)
+	. = ..()
+	var/turf/target_turf = get_turf(src)
+	if(buildstack)
+		new buildstack(target_turf, buildstackamount)
+
+	if(frame)
+		new frame(target_turf)
+	else if(framestack)
+		new framestack(get_turf(src), framestackamount)
+
 /obj/structure/table/item_interaction(mob/living/user, obj/item/tool, list/modifiers)
 	if(user.cmode)
 		return NONE
@@ -172,6 +183,10 @@
 
 	if(!user.transferItemToLoc(tool, drop_location(), silent = FALSE))
 		return NONE
+
+	if(istype(tool, /obj/item/tablecloth))
+		if(try_add_tablecloth(user,tool))
+			return NONE
 
 	var/icon_x = text2num(LAZYACCESS(modifiers, ICON_X))
 	var/icon_y = text2num(LAZYACCESS(modifiers, ICON_Y))
@@ -187,16 +202,32 @@
 
 	return ITEM_INTERACT_SUCCESS
 
-/obj/structure/table/atom_deconstruct(disassembled)
-	. = ..()
-	var/turf/target_turf = get_turf(src)
-	if(buildstack)
-		new buildstack(target_turf, buildstackamount)
+/obj/structure/table/proc/try_add_tablecloth(mob/living/user, obj/item/tablecloth/cloth)
+	if(!istype(cloth, /obj/item/tablecloth))
+		return FALSE
+	if(locate(/obj/item/tablecloth) in src)
+		balloon_alert(user, "already has tablecloth!")
+		return FALSE
+	if(!user.transferItemToLoc(cloth, src))
+		return FALSE
 
-	if(frame)
-		new frame(target_turf)
-	else if(framestack)
-		new framestack(get_turf(src), framestackamount)
+	vis_contents += cloth
+	cloth.vis_flags |= (VIS_INHERIT_PLANE|VIS_INHERIT_LAYER)
+	return TRUE
+
+/obj/structure/table/proc/remove_tablecloth()
+	var/obj/item/tablecloth/cloth = locate(/obj/item/tablecloth) in src
+	if(!cloth)
+		return FALSE
+	cloth.forceMove(get_turf(src))
+
+	vis_contents -= cloth
+	cloth.vis_flags &= (VIS_INHERIT_PLANE|VIS_INHERIT_LAYER)
+
+/obj/structure/table/examine(mob/user)
+	. = ..()
+	if(locate(/obj/item/tablecloth) in src)
+		. += span_info("The table has a tablecloth on it, you can remove it by interacting with it using your hand.")
 
 /*
  * Wooden tables
