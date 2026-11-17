@@ -1,0 +1,5 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - bugfix: "Fixed missing exemptions for magical items."
+  - bugfix: "Fixed town elder hammer."
