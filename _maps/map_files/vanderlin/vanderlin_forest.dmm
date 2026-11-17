@@ -3807,9 +3807,8 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness/plains)
 "oe" = (
-/mob/living/carbon/human/species/goblin/npc/ambush/cave,
-/turf/open/floor/naturalstone,
-/area/under/cave)
+/turf/closed/wall/mineral/stone,
+/area/indoors/wilderness/gallowband/cell)
 "of" = (
 /obj/structure/kneestingers,
 /turf/open/water/river{
@@ -5042,6 +5041,10 @@
 /obj/structure/trap/saw_blades,
 /turf/open/floor/hexstone,
 /area/indoors/dungeon)
+"sv" = (
+/mob/living/simple_animal/hostile/retaliate/direbear,
+/turf/open/floor/naturalstone,
+/area/under/cave)
 "sw" = (
 /obj/item/natural/stone,
 /obj/effect/decal/cleanable/debris/stone,
@@ -5323,6 +5326,18 @@
 	},
 /turf/open/floor/tile/diamond/purple,
 /area/indoors/town/noble_manor)
+"tn" = (
+/obj/structure/closet/keyrack{
+	pixel_y = 0;
+	pixel_x = 32
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/item/key/forrestgarrison,
+/obj/item/key/forrestgarrison,
+/obj/item/key/forrestgarrison,
+/obj/effect/mapping_helpers/access/keyset/gallowband/secure,
+/turf/open/floor/blocks,
+/area/indoors/wilderness/forestguard)
 "to" = (
 /obj/structure/fluff/walldeco/painting/skull,
 /turf/closed/wall/mineral/craftstone,
@@ -5508,6 +5523,10 @@
 /obj/structure/carpet/purple,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor)
+"tZ" = (
+/obj/structure/window/stained/silver/alt,
+/turf/open/floor/blocks/platform,
+/area/indoors/town/church)
 "ua" = (
 /obj/structure/table/map{
 	dir = 6
@@ -5564,6 +5583,13 @@
 /obj/effect/decal/cleanable/dirt,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
+"ul" = (
+/obj/structure/bars,
+/turf/open/floor/grass,
+/area/indoors/wilderness/gallowband/cell)
+"um" = (
+/turf/open/floor/hay,
+/area/indoors/wilderness/gallowband/cell)
 "un" = (
 /obj/structure/table/wood/counter,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -5674,6 +5700,14 @@
 /obj/structure/carpet/purple,
 /turf/open/floor/wood,
 /area/indoors/town/noble_manor)
+"uD" = (
+/obj/structure/door/iron/bars{
+	name = "Cell Door"
+	},
+/obj/effect/mapping_helpers/access/locker,
+/obj/effect/mapping_helpers/access/keyset/gallowband/secure,
+/turf/open/floor/dirt/road,
+/area/indoors/wilderness/gallowband/cell)
 "uE" = (
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe)
@@ -5701,6 +5735,10 @@
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/central)
+"uJ" = (
+/obj/structure/toilet/filled,
+/turf/open/floor/dirt,
+/area/indoors/wilderness/gallowband/cell)
 "uK" = (
 /turf/closed/basic,
 /area/outdoors/wilderness/central)
@@ -5887,15 +5925,6 @@
 /obj/structure/kneestingers,
 /turf/open/water/river,
 /area/outdoors/wilderness/central)
-"vp" = (
-/obj/structure/door/iron/bars{
-	name = "Cell Door"
-	},
-/obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/secure,
-/turf/open/floor/dirt/road,
-/area/indoors/wilderness/gallowband/cell,
-/area/indoors/wilderness/forestguard/cell)
 "vq" = (
 /obj/structure/table/wood/fancy/purple,
 /obj/item/clothing/face/spectacles/sglasses,
@@ -7774,10 +7803,6 @@
 /obj/machinery/light/fueled/torchholder/l,
 /turf/open/floor/dirt/road,
 /area/indoors/wilderness/forestguard)
-"Bp" = (
-/turf/closed/wall/mineral/stone,
-/area/indoors/wilderness/gallowband/cell,
-/area/indoors/wilderness/forestguard/cell)
 "Bq" = (
 /obj/structure/fluff/walldeco/sparrowflag{
 	pixel_x = 32
@@ -7791,11 +7816,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/indoors/wilderness/forestguard)
-"Bs" = (
-/obj/structure/bars,
-/turf/open/floor/grass,
-/area/indoors/wilderness/gallowband/cell,
-/area/indoors/wilderness/forestguard/cell)
 "Bt" = (
 /obj/structure/flora/grass,
 /turf/open/floor/dirt/road,
@@ -8144,10 +8164,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/indoors/wilderness/forestguard)
-"Cf" = (
-/turf/open/floor/hay,
-/area/indoors/wilderness/gallowband/cell,
-/area/indoors/wilderness/forestguard/cell)
 "Cg" = (
 /obj/item/natural/rock,
 /obj/effect/decal/cleanable/dirt/dust,
@@ -8537,10 +8553,6 @@
 /obj/machinery/loom,
 /turf/open/floor/twig,
 /area/outdoors/wilderness/outpost/vanderlin)
-"DA" = (
-/mob/living/simple_animal/hostile/retaliate/troll/cave/ambush,
-/turf/open/floor/naturalstone,
-/area/under/cave)
 "DB" = (
 /obj/effect/waterfall,
 /turf/open/water/river{
@@ -9582,19 +9594,6 @@
 /obj/structure/flora/grass/water,
 /turf/open/water/clean/dirt,
 /area/outdoors/wilderness/central)
-"GD" = (
-/obj/structure/closet/keyrack{
-	pixel_y = 0;
-	pixel_x = 32
-	},
-/obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
-/obj/item/key/forrestgarrison,
-/obj/item/key/forrestgarrison,
-/obj/item/key/forrestgarrison,
-/obj/effect/mapping_helpers/access/keyset/gallowband/secure,
-/turf/open/floor/blocks,
-/area/indoors/wilderness/forestguard)
 "GE" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/hexstone,
@@ -10802,11 +10801,6 @@
 /obj/effect/landmark/quest_spawner/easy,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness)
-"MW" = (
-/obj/structure/toilet/filled,
-/turf/open/floor/dirt,
-/area/indoors/wilderness/gallowband/cell,
-/area/indoors/wilderness/forestguard/cell)
 "MX" = (
 /obj/structure/fake_machine/atm,
 /turf/open/floor/grass,
@@ -11678,12 +11672,6 @@
 	},
 /turf/open/floor/ruinedwood,
 /area/indoors/wilderness)
-"Rx" = (
-/obj/structure/window/stained/silver/alt,
-/turf/closed/wall/mineral/craftstone{
-	color = "#96C8FF"
-	},
-/area/indoors/town/church)
 "Ry" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
@@ -12258,10 +12246,6 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/open/floor/cobble,
 /area/indoors/dungeon)
-"Up" = (
-/obj/structure/window/stained/silver/alt,
-/turf/open/floor/ruinedwood,
-/area/indoors/town/church)
 "Uq" = (
 /obj/effect/decal/cleanable/debris/wood,
 /obj/effect/decal/cleanable/dirt/cobweb{
@@ -21487,9 +21471,9 @@ FJ
 Fy
 Bh
 xF
-Bs
-Bs
-Bp
+ul
+ul
+oe
 Hg
 HI
 HI
@@ -21689,9 +21673,9 @@ Fy
 Fy
 Bj
 xF
-MW
-Cf
-Bs
+uJ
+um
+ul
 GU
 GS
 HI
@@ -21891,9 +21875,9 @@ Fy
 FJ
 Bl
 xF
-Cf
-Cf
-Bs
+um
+um
+ul
 GU
 GU
 HI
@@ -22093,9 +22077,9 @@ Fy
 FM
 Bm
 xI
-Bs
-vp
-Bp
+ul
+uD
+oe
 HI
 HI
 HI
@@ -25522,7 +25506,7 @@ rb
 qT
 AR
 Hb
-GD
+tn
 Gx
 Gk
 BN
@@ -46506,7 +46490,7 @@ YM
 YM
 YM
 jf
-ID
+sv
 YM
 YM
 ZX
@@ -48121,7 +48105,7 @@ YM
 YM
 YM
 YM
-oe
+ID
 YM
 YM
 YM
@@ -49535,7 +49519,7 @@ YM
 YM
 uo
 zt
-ID
+sv
 DP
 YM
 YM
@@ -49697,9 +49681,9 @@ YM
 YM
 YM
 YM
-cw
-cw
-cw
+YM
+YM
+YM
 YM
 YM
 YM
@@ -49734,8 +49718,8 @@ YM
 YM
 YM
 YM
-DA
 ID
+sv
 jf
 Sf
 YM
@@ -49899,9 +49883,9 @@ YM
 YM
 YM
 YM
-cw
-cw
-cw
+YM
+YM
+YM
 YM
 YM
 YM
@@ -50101,9 +50085,9 @@ YM
 YM
 YM
 YM
-cw
-cw
-cw
+YM
+YM
+YM
 YM
 YM
 YM
@@ -50329,7 +50313,7 @@ YM
 YM
 Xp
 Xp
-ID
+sv
 ID
 YM
 YM
@@ -50734,7 +50718,7 @@ YM
 YM
 Aq
 jf
-oe
+ID
 YM
 YM
 YM
@@ -51952,7 +51936,7 @@ YM
 YM
 YM
 Rs
-ID
+sv
 ID
 YM
 YM
@@ -52356,7 +52340,7 @@ YM
 YM
 ID
 jf
-oe
+ID
 YM
 YM
 YM
@@ -55838,7 +55822,7 @@ Sd
 RQ
 RQ
 RC
-Rx
+tZ
 QS
 QS
 QS
@@ -56242,7 +56226,7 @@ RD
 RD
 RD
 RF
-Rx
+tZ
 Rv
 Rv
 Rv
@@ -96234,7 +96218,7 @@ pR
 pR
 pR
 pR
-Up
+tZ
 UB
 Uw
 RQ
@@ -96441,7 +96425,7 @@ RD
 RQ
 RQ
 Us
-Up
+tZ
 pR
 pR
 pR
@@ -96638,7 +96622,7 @@ pR
 pR
 pR
 pR
-Up
+tZ
 Us
 RD
 RQ
