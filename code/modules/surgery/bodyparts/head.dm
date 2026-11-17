@@ -198,16 +198,26 @@
 	var/mutable_appearance/left_overlay
 	left_overlay = image('icons/mob/human_face.dmi', "eye-left-missing", -EYES_LAYER, SOUTH)
 
-	eyes_left?.generate_body_overlay(left_overlay, src) // this can be null if we don't have eyes.
+	var/list/left_generated_overlays = list()
 
-	. += left_overlay
+	left_generated_overlays = eyes_left?.generate_body_overlay(left_overlay, src) // this can be null if we don't have eyes.
+
+	if(left_generated_overlays.len == 0)
+		. += left_overlay
+	else
+		. += left_generated_overlays
 
 	var/mutable_appearance/right_overlay
 	right_overlay = image('icons/mob/human_face.dmi', "eye-right-missing", -EYES_LAYER, SOUTH)
 
-	eyes_right?.generate_body_overlay(right_overlay, src) // this can be null if we don't have eyes.
+	var/list/right_generated_overlays = list()
 
-	. += right_overlay
+	right_generated_overlays = eyes_right?.generate_body_overlay(right_overlay, src) // this can be null if we don't have eyes.
+
+	if(right_generated_overlays.len == 0)
+		. += right_overlay
+	else
+		. += right_generated_overlays
 
 /obj/item/bodypart/head/monkey
 	icon = 'icons/mob/animal_parts.dmi'

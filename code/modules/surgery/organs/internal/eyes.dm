@@ -79,14 +79,26 @@
 	. = ..()
 
 /obj/item/organ/eyes/proc/generate_body_overlay(image/overlay, obj/item/bodypart/head/my_head)
+	. = list()
+
+	var/generated_eye = generate_eye_overlay(overlay, my_head)
+	if(!generated_eye)
+		return
+
+	. += generated_eye
+
+	. += get_eyelid_overlay(overlay, my_head)
+
+/obj/item/organ/eyes/proc/generate_eye_overlay(image/overlay, obj/item/bodypart/head/my_head)
+	. = overlay
+
+	if(!eye_icon_state)
+		return
+
 	overlay.icon_state = eye_icon_state
 
 	if(eye_color)
 		overlay.color = eye_color
-
-	var/eyelid = get_eyelid_overlay(overlay, my_head)
-
-	overlay.overlays += eyelid
 
 /obj/item/organ/eyes/update_overlays()
 	. = ..()
@@ -127,12 +139,12 @@
 	if (!blink_animation || HAS_TRAIT(parent, TRAIT_PREVENT_BLINKING))
 		return
 
-	eyelid.color = eyelid_color
-	eyelid.render_target = "*[REF(src)]_eyelid"
+	//eyelid.color = eyelid_color
+	eyelid.render_target = "*[REF(parent)]_eyelid"
 	parent.vis_contents += eyelid
 	animate_eyelid(parent)
-	var/mutable_appearance/eyelid_overlay = mutable_appearance(layer = -EYES_LAYER)
-	eyelid_overlay.render_source = "*[REF(src)]_eyelid"
+	var/mutable_appearance/eyelid_overlay = mutable_appearance(layer = -EYES_LAYER + 0.1)
+	eyelid_overlay.render_source = "*[REF(parent)]_eyelid"
 	return eyelid_overlay
 
 /// Animates one eyelid at a time, thanks BYOND and thanks animation chains
@@ -154,9 +166,9 @@
 /obj/effect/abstract/eyelid_effect
 	name = "eyelid"
 	icon = 'icons/mob/human_face.dmi'
-	layer = -EYES_LAYER
+	layer = -EYES_LAYER + 0.1
 	vis_flags = VIS_INHERIT_DIR | VIS_INHERIT_PLANE | VIS_INHERIT_ID
-	color = "#cc0099"
+	color = "#0f010c"
 
 /obj/effect/abstract/eyelid_effect/Initialize(mapload, new_state)
 	. = ..()
