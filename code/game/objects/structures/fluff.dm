@@ -1129,6 +1129,12 @@
 	icon_state = "evilidol"
 	icon = 'icons/roguetown/misc/structure.dmi'
 
+/obj/structure/fluff/statue/evil/examine(mob/user)
+	. = ..()
+	if(user.mind?.has_antag_datum(/datum/antagonist/bandit))
+		. += "You may make a maximum of [MAX_BANDIT_REWARDS] sacrifices to the idol."
+		. += "You can collect a maximum of [get_max_triumphs()] triumphs for your sacrifices."
+
 /obj/structure/fluff/statue/evil/attackby(obj/item/W, mob/user, list/modifiers)
 	if(user.mind)
 		var/datum/antagonist/bandit/B = user.mind.has_antag_datum(/datum/antagonist/bandit)
