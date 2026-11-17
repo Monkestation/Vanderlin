@@ -567,7 +567,6 @@
 	desc = ""
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "shitsign"
-	density = TRUE
 	anchored = TRUE
 	layer = ABOVE_MOB_LAYER
 	plane = GAME_PLANE_UPPER
