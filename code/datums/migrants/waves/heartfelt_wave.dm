@@ -357,7 +357,6 @@
 	max_spawns = 1
 	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
 	weight = 25
-	downgrade_wave = /datum/migrant_wave/heartfelt_down
 	roles = list(
 		/datum/migrant_role/heartfelt_lord = 1,
 		/datum/migrant_role/heartfelt_lady = 1,
@@ -366,35 +365,3 @@
 		/datum/migrant_role/heartfelt_artificer = 1,
 	)
 	greet_text = "Fleeing disaster, you have come together as a court, united in a final effort to restore the former glory and promise of Heartfelt. Stay close and watch out for each other, for all of your sakes!"
-
-/datum/migrant_wave/heartfelt_down
-	name = "The Court of Heartfelt"
-	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
-	can_roll = FALSE
-	downgrade_wave = /datum/migrant_wave/heartfelt_down_one
-	roles = list(
-		/datum/migrant_role/heartfelt_lord = 1,
-		/datum/migrant_role/heartfelt_lady = 1,
-		/datum/migrant_role/heartfelt_hand = 1,
-	)
-	greet_text = "Fleeing disaster, you have come together as a court, united in a final effort to restore the former glory and promise of Heartfelt. Stay close and watch out for each other, for all of your sakes! Your Knight, Magos and Artificer did not make it..."
-
-/datum/migrant_wave/heartfelt_down_one
-	name = "The Court of Heartfelt"
-	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
-	can_roll = FALSE
-	downgrade_wave = /datum/migrant_wave/heartfelt_down_two
-	roles = list(
-		/datum/migrant_role/heartfelt_lord = 1,
-		/datum/migrant_role/heartfelt_hand = 1,
-	)
-	greet_text = "Fleeing disaster, you have come together as a court, united in a final effort to restore the former glory and promise of Heartfelt. Stay close and watch out for each other, for all of your sakes! The journey took its heavy toll. Only you two made it, the rest..."
-
-/datum/migrant_wave/heartfelt_down_two
-	name = "The Court of Heartfelt"
-	shared_wave_type = list(/datum/migrant_wave/grenzelhoft_visit,/datum/migrant_wave/zalad_wave,/datum/migrant_wave/rockhill_wave,/datum/migrant_wave/heartfelt)
-	can_roll = FALSE
-	roles = list(
-		/datum/migrant_role/heartfelt_lord = 1,
-	)
-	greet_text = "Fleeing disaster, you have come together as a court, united in a final effort to restore the former glory and promise of Heartfelt. But disaster followed hot on your heels, from Heartfelt to this very place! You are the last one remaining, oh how tragic!"
