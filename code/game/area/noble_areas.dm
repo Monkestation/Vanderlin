@@ -296,11 +296,11 @@
 	first_time_text = "Blue Noble Manor"
 	icon_state = "noble1_out"
 
-/area/indoors/town/noble_manor/yellow
-	name = "Yellow Noble Manor"
+/area/indoors/town/noble_manor/green
+	name = "Green Noble Manor"
 	icon_state = "noble2"
 
-/area/outdoors/town/noble_manor/yellow
+/area/outdoors/town/noble_manor/green
 	icon_state = "noble2_out"
 	first_time_text = "Green Noble Manor"
 

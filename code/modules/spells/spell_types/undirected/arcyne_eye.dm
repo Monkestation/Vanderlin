@@ -9,6 +9,7 @@
 	spell_cost = 0
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 
 /datum/action/cooldown/spell/undirected/arcyne_eye/cast(atom/cast_on)
 	. = ..()

@@ -74,11 +74,6 @@
 	stress_change = 2
 	desc = "<span class='red'>I've seen men lose their limbs.</span>"
 
-/datum/stress_event/fviewdismember
-	timer = 1 MINUTES
-	stress_change = 1
-	desc = "<span class='red'>This land is brutal.</span>"
-
 /datum/stress_event/viewgib
 	timer = 5 MINUTES
 	stress_change = 2
@@ -221,10 +216,10 @@
 	stress_change = 3
 	desc = span_phobia("IT'S THE FUCKING DAEWALKER!!")
 
-/datum/stress_event/its_the_nitewalker
+/datum/stress_event/its_the_nitewarden
 	timer = 3 MINUTES
 	stress_change = 2
-	desc = span_phobia("THE NITEWALKER ROAMS!!")
+	desc = span_phobia("THE NITEWARDEN ROAMS!!")
 
 /datum/stress_event/fishface
 	timer = 1 MINUTES

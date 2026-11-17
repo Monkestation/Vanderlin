@@ -8877,7 +8877,9 @@
 /turf/open/floor/churchmarble/rust,
 /area/indoors/mountains/anvil/keep)
 "aQR" = (
-/obj/structure/fluff/traveltile/inquisition,
+/obj/structure/fluff/traveltile/inquisition{
+	name = "To the Vanderlin Grove"
+	},
 /turf/open/floor/cobblerock,
 /area/under/mountains/anvil/lower)
 "aQS" = (
@@ -11908,6 +11910,13 @@
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
+"gFR" = (
+/obj/structure/fluff/traveltile/inquisition{
+	aportalgoesto = "inq_enter2";
+	aportalid = "inq_exit2"
+	},
+/turf/open/floor/cobblerock,
+/area/under/mountains/anvil/lower)
 "gIj" = (
 /obj/structure/table/stone_small,
 /obj/item/clothing/head/crown/nyle{
@@ -88859,11 +88868,11 @@ aYi
 aUj
 aIS
 aZR
+ako
+ako
+aXi
 aZR
 aZR
-aZR
-aZR
-adi
 aZR
 "}
 (166,1,2) = {"
@@ -89061,11 +89070,11 @@ aIS
 aIS
 aIS
 aZR
-adi
-adi
-adi
-adi
-adi
+aXi
+ako
+aXi
+aZR
+aZR
 aZR
 "}
 (167,1,2) = {"
@@ -89263,11 +89272,11 @@ aer
 aZR
 aZR
 aZR
-adi
-adi
-adi
-adi
-adi
+aXi
+ako
+ako
+aZR
+aZR
 aZR
 "}
 (168,1,2) = {"
@@ -89464,12 +89473,12 @@ aer
 aer
 aZR
 adi
-adi
-adi
-adi
-adi
-adi
-adi
+aZR
+aZR
+aXi
+gFR
+aZR
+aZR
 aZR
 "}
 (169,1,2) = {"
@@ -89667,11 +89676,11 @@ aZR
 aZR
 adi
 adi
-adi
-adi
-adi
-adi
-adi
+aZR
+aZR
+aZR
+aZR
+aZR
 aZR
 "}
 (170,1,2) = {"
@@ -89870,9 +89879,9 @@ adi
 adi
 adi
 adi
-adi
-adi
-adi
+aZR
+aZR
+aZR
 adi
 aZR
 "}

@@ -546,7 +546,7 @@ Keep them reasonable to make
 /datum/alch_cauldron_recipe/sal_petris
 	recipe_name = "Sal Petris"
 	smells_like = "chalk dust and still air"
-	output_reagents = list(/datum/reagent/sal_petris = 25)
+	output_reagents = list(/datum/reagent/sal_petris = 15)
 	required_essences = list(
 		/datum/thaumaturgical_essence/earth = 18,
 		/datum/thaumaturgical_essence/order = 18,

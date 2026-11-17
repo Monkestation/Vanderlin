@@ -8,6 +8,7 @@
 	cast_range = 5
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_IMBUE
 	spell_cost = 25
 

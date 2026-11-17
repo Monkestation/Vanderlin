@@ -125,12 +125,14 @@
 	name = "iron spoon"
 	icon_state = "spoon_iron"
 	melting_material = /datum/material/iron
+	smeltresult = null
 	melt_amount = 20
 
 /obj/item/kitchen/spoon/pewter
 	name = "pewter spoon"
 	icon_state = "spoon_iron"
 	melting_material = /datum/material/tin
+	smeltresult = null
 	melt_amount = 20
 
 /obj/item/kitchen/fork
@@ -143,12 +145,14 @@
 	name = "iron fork"
 	icon_state = "fork_iron"
 	melting_material = /datum/material/iron
+	smeltresult = null
 	melt_amount = 20
 
 /obj/item/kitchen/fork/pewter
 	name = "pewter fork"
 	icon_state = "fork_iron"
 	melting_material = /datum/material/tin
+	smeltresult = null
 	melt_amount = 20
 
 /obj/item/reagent_containers/glass/bowl
@@ -305,6 +309,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	melting_material = /datum/material/iron
 	melt_amount = 20
+	smeltresult = null
 	max_usages = 7
 
 /obj/item/reagent_containers/glass/bowl/pewter
@@ -313,6 +318,7 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	melting_material = /datum/material/tin
 	melt_amount = 20
+	smeltresult = null
 	max_usages = 7
 
 /obj/item/reagent_containers/glass/bowl/jade

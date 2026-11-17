@@ -9,7 +9,7 @@
 	resistance_flags = NONE
 	max_integrity = 300
 	item_weight = 150 GRAMS
-	component_type = /datum/component/storage/concrete/grid/magebag
+	component_type = /datum/component/storage/concrete/grid/sack/magebag
 	pickpocket_difficulty = SKILL_RANK_EXPERT
 
 /obj/item/storage/magebag/examine(mob/user)
@@ -149,6 +149,7 @@
 /obj/item/weapon/knife/dagger/silver/arcyne
 	name = "glowing purple silver dagger"
 	desc = "This dagger glows a faint purple. Quicksilver runs across its blade."
+	icon_state = "arcynedagger"
 	var/is_bled = FALSE
 
 /obj/item/weapon/knife/dagger/silver/arcyne/Initialize()
@@ -631,6 +632,9 @@
 	seed = /obj/item/neuFarm/seed/manabloom
 	item_weight = 20 GRAMS
 
+/obj/item/reagent_containers/food/snacks/produce/manabloom/Initialize(mapload)
+	. = ..()
+	AddElement(/datum/element/food_topping, "manabloom", null, 10, topping_name = "manabloom petals")
 
 /obj/item/natural/artifact
 	name = "runed artifact"

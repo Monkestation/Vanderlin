@@ -46,7 +46,7 @@
 /datum/antagonist/blood_mage/sorcerer/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
 		return span_boldnotice("The immortal servant of the Sun Queen.")
-	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker))
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewarden))
 		return span_boldnotice("The immortal servant of the Moon Prince.")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Firstborn lord of Kaine.")
@@ -145,7 +145,7 @@
 /datum/antagonist/blood_mage/herald/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
 		return span_boldnotice("The immortal servant of the Sun Queen.")
-	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewalker))
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewarden))
 		return span_boldnotice("The immortal servant of the Moon Prince.")
 	if(istype(examined_datum, /datum/antagonist/vampire/lord))
 		return span_boldnotice("Firstborn lord of Kaine.")
@@ -310,7 +310,7 @@
 
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/whipsflails = 20,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/combat/axesmaces = 20,
 
 		/datum/attribute/skill/misc/riding = 30,

@@ -9,6 +9,7 @@
 
 	spell_cost = 75
 	required_form = FORM_LIGHTNING
+	associated_skill = /datum/attribute/skill/magic/arcane/lightning
 
 	invocation = "Resurge!"
 	invocation_type = INVOCATION_SHOUT

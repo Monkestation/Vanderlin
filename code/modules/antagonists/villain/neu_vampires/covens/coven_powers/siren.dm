@@ -38,7 +38,14 @@
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, LOWER_TEXT(config.ic_filter_regex.match))
 		return
 
-	target.say(message = new_say, forced = "melpominee 1")
+	var/static/list/bannedwords = list("zizo", "graggar", "matthios", "baotha", "inhumen", "heresy", "abraxas", "abaddon", "mephistopheles", "leviathan")
+	for(var/T in bannedwords)  //astrata smites naughty xylixans
+		if(findtext(new_say, T))
+			to_chat(owner, span_warning("You cannot force someone to speak heresy!"))
+			return
+
+	target.say(message = new_say, forced = owner.key)
+	log_combat(owner, target, "forced Siren Speech")
 
 	if (!isliving(target))
 		return

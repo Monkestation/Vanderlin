@@ -15,8 +15,8 @@
 		/datum/attribute/skill/labor/farming = 30,
 		/datum/attribute/skill/magic/druidic = 40,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/combat/polearms = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/combat/polearms/staves = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/labor/butchering = 30,
 		/datum/attribute/skill/labor/lumberjacking = 10

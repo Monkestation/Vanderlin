@@ -4,7 +4,7 @@
 		STAT_INTELLIGENCE = 4,
 		STAT_PERCEPTION = 1,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/swords = 20,
@@ -13,7 +13,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 50,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/labor/farming = 30,
 		/datum/attribute/skill/craft/engineering = 20,
 	)
@@ -24,7 +24,7 @@
 		STAT_INTELLIGENCE = 5,
 		STAT_PERCEPTION = 1,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/swords = 30,
@@ -33,7 +33,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 60,
 		/datum/attribute/skill/craft/alchemy = 30,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/labor/farming = 30,
 		/datum/attribute/skill/craft/engineering = 20,
 	)
@@ -46,7 +46,7 @@
 	department_flag = NOBLEMEN
 	display_order = JDO_PHYSICIAN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 	total_positions = 1
 	spawn_positions = 1
 	allowed_races = RACES_PLAYER_NONHERETICAL

@@ -59,6 +59,7 @@
 #define SKILL_CATEGORY_SKULDUGGERY "Skulduggery Skills"
 #define SKILL_CATEGORY_MEDICAL "Medical Skills"
 #define SKILL_CATEGORY_RESEARCH "Research Skills"
+#define SKILL_CATEGORY_MAGIC "Magical Skills"
 #define SKILL_CATEGORY_ENGINEERING "Trade Skills"
 #define SKILL_CATEGORY_DOMESTIC "Domestic Skills"
 #define SKILL_CATEGORY_DUMB "Stupid Skills"

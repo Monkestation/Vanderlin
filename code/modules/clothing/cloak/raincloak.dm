@@ -19,7 +19,6 @@
 	salvage_result = /obj/item/natural/hide/cured
 	color = CLOTHING_BARK_BROWN
 	wetable = FALSE
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/raincloak/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -80,7 +79,6 @@
 	icon_state = "furgrey"
 	inhand_mod = FALSE
 	hoodtype = /obj/item/clothing/head/hooded/rainhood/furhood
-	salvage_amount = 1
 	salvage_result = /obj/item/natural/fur
 	min_cold_protection_temperature = -20
 

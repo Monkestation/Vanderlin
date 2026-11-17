@@ -103,7 +103,7 @@
 	icon_state = "aasimarwrist"
 	item_state = "aasimarwrist"
 	armor_type = /datum/armor/wrist/plate/hoplite // Less protection than steel
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 
 //copper bracers
 
@@ -115,7 +115,7 @@
 	item_state = "copperarm"
 	armor_type = /datum/armor/wrist/plate/copper
 	prevent_crits = list(BCLASS_LASHING, BCLASS_BITE, BCLASS_CUT, BCLASS_CHOP, BCLASS_BLUNT, BCLASS_TWIST)
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
 	blocksound = PLATEHIT
 	resistance_flags = FIRE_PROOF
 	anvilrepair = /datum/attribute/skill/craft/armor_repair

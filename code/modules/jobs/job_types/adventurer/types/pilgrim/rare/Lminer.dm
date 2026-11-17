@@ -20,7 +20,7 @@
 		/datum/attribute/skill/craft/traps = 10,
 		/datum/attribute/skill/craft/engineering = 40,
 		/datum/attribute/skill/craft/smelting = 60,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 /datum/attribute_holder/sheet/job/pilgrim/minermaster/old
@@ -44,7 +44,7 @@
 		/datum/attribute/skill/craft/traps = 20,
 		/datum/attribute/skill/craft/engineering = 50,
 		/datum/attribute/skill/craft/smelting = 60,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 /datum/job/advclass/pilgrim/rare/minermaster

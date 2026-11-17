@@ -15,7 +15,7 @@
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/misc/lockpicking = 20, // they can lock pick basic doors to set traps in funny spots
 		/datum/attribute/skill/craft/traps = 40, // rogue gets 3 master skills but this cant even have master in a non-combat skill? smh
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/advclass/combat/trapper

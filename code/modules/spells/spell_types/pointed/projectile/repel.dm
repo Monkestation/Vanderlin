@@ -6,6 +6,7 @@
 	sound = 'sound/magic/unmagnet.ogg'
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 
 	invocation = "Repel!"
 	invocation_type = INVOCATION_SHOUT

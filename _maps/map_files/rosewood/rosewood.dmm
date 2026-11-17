@@ -22933,7 +22933,7 @@
 /obj/item/clothing/shoes/boots/leather,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
-/obj/item/clothing/shoes/boots/furlinedboots,
+/obj/item/clothing/shoes/boots/furboots,
 /obj/item/clothing/cloak/raincloak/furcloak,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep)
@@ -32358,7 +32358,7 @@
 /obj/item/clothing/shoes/boots/darkboots,
 /obj/item/clothing/pants/tights/colored/black,
 /obj/item/clothing/shirt/undershirt/fancy,
-/obj/item/clothing/shoes/boots/furlinedboots,
+/obj/item/clothing/shoes/boots/furboots,
 /obj/item/clothing/cloak/raincloak/furcloak,
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/keep)

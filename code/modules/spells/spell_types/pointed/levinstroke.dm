@@ -10,6 +10,7 @@
 	spell_cost = 40
 
 	required_form = FORM_LIGHTNING
+	associated_skill = /datum/attribute/skill/magic/arcane/lightning
 	required_technique = TECHNIQUE_ALTERATION
 
 	invocation = "Fio Fulmen!"

@@ -35,8 +35,8 @@
 /datum/examine_highlight/heresy_alarming/zizo
 	item_examine_desc = "An item of worship and faith to the Pale Lady."
 
-/datum/examine_highlight/heresy_alarming/darksteel
-	item_examine_desc = "Steel made using the dark magics of Zizo, Crafted in Ritual from the screaming flesh of the living and dead in unnatural conjunction!"
+/datum/examine_highlight/heresy_alarming/avantyne
+	item_examine_desc = "A vile metal made using the dark magics of Zizo, crafted in Ritual from the screaming flesh of the living and dead in unnatural conjunction!"
 
 //##########################################################
 /datum/examine_highlight/heresy_veryodd/glut

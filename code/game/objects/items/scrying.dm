@@ -30,6 +30,9 @@
 /obj/item/scrying/orb
 	name = "arcyne scrying orb"
 	desc = "Within its glass depths, you can scry on many unsuspecting beings..."
+	w_class = WEIGHT_CLASS_SMALL
+	sellprice = 150
+	item_weight = 250 GRAMS
 
 /obj/item/scrying/orb/pass_scrying_checks(mob/living/user)
 	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/arcane) < 1)
@@ -52,6 +55,9 @@
 	desc = "It is pulsating."
 	icon = 'icons/roguetown/items/misc.dmi'
 	icon_state ="scryeye"
+	w_class = WEIGHT_CLASS_SMALL
+	sellprice = 0
+	item_weight = 50 GRAMS
 
 /obj/item/scrying/eye/add_scry_comp()
 	AddComponent(/datum/component/scrying, 8 SECONDS, 5 MINUTES)
@@ -63,7 +69,7 @@
 	AddComponent(/datum/component/scrying, 8 SECONDS, 60 SECONDS)
 
 /obj/item/scrying/eye/bogwitch/pass_scrying_checks(mob/living/user)
-	if(!istype(user.patron, /datum/patron/alternate/great_hunt/proven))
+	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/druidic) < 1)
 		to_chat(user, span_warning("I do not know what to do with this..."))
 		return FALSE
 	return TRUE
@@ -80,7 +86,7 @@
 	examine_highlight_type = /datum/examine_highlight/heresy_veryodd/scrying
 
 /obj/item/scrying/flame/add_scry_comp()
-	AddComponent(/datum/component/scrying, 10 SECONDS, 50 SECONDS, TRUE, FALSE, "I look into NAME_HERE but only see dark fire. Maybe I should wait.", 17, 13)
+	AddComponent(/datum/component/scrying, 10 SECONDS, 50 SECONDS, FALSE, FALSE, "I look into NAME_HERE but only see dark fire. Maybe I should wait.", 17, 13)
 
 /obj/item/scrying/flame/pass_scrying_checks(mob/living/user)
 	if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/magic/blood) < 1)

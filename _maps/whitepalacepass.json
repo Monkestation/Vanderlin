@@ -3,8 +3,8 @@
     "map_path": "map_files/whitepalacepass",
     "map_file": "WhitePalacePass.dmm",
 	"immigrant_origin": "Rosewood",
-	"monarch_title": "Baron",
-	"monarch_title_f": "Baroness",
+	"monarch_title": "Marquess",
+	"monarch_title_f": "Marchioness",
 	"traits": [
 		{
 			"Up": true,

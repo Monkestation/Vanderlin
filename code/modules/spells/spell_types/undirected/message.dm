@@ -5,6 +5,7 @@
 	button_icon_state = "message"
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 
 	charge_required = FALSE
 	spell_cost = 30

@@ -58,3 +58,20 @@
 
 /mob/living/simple_animal/shade/suicide_log(obj/item/suicide_tool)
 	..()
+
+/// Souls trapped in a profane dagger are only heard by everyone nearby while the dagger exposed.
+/// While it's hidden, only the wielder and the other souls in the dagger can hear them.
+/mob/living/simple_animal/shade/send_speech(message, message_range = 6, obj/source = src, bubble_type = bubble_icon, list/spans, datum/language/message_language, list/message_mods = list(), original_message)
+	var/obj/item/weapon/knife/dagger/steel/inhumen/profane/dagger = loc
+	if(!istype(dagger) || dagger.is_exposed())
+		return ..()
+
+	var/rendered = compose_message(src, message_language, message, null, spans, message_mods, TRUE)
+	var/list/listeners = list()
+	var/mob/carrier = dagger.get_carrier()
+	if(carrier)
+		listeners += carrier
+	for(var/mob/living/simple_animal/shade/fellow_soul in dagger.contents) // includes ourselves
+		listeners |= fellow_soul
+	for(var/mob/listener as anything in listeners)
+		listener.Hear(rendered, src, message_language, message, null, spans, message_mods, original_message)

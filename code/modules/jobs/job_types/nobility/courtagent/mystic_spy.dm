@@ -8,7 +8,7 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/polearms = 20,
+		/datum/attribute/skill/combat/polearms/staves = 20,
 		/datum/attribute/skill/magic/arcane = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 20,
@@ -17,7 +17,7 @@
 		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 30
+		/datum/attribute/skill/educated/reading = 30
 	)
 
 /datum/job/advclass/courtagent/mystic

@@ -18,8 +18,8 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/labor/mining = 20,
 		/datum/attribute/skill/craft/smelting = 40,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 		/datum/attribute/skill/craft/bombs = 30,
 	)
 
@@ -40,8 +40,8 @@
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/labor/mining = 20,
 		/datum/attribute/skill/craft/smelting = 40,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 		/datum/attribute/skill/craft/bombs = 30,
 	)
 

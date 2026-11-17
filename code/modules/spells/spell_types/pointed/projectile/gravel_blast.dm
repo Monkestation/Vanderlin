@@ -15,6 +15,7 @@
 	spell_cost = 15
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "Saxum Iaci!"

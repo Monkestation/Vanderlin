@@ -38,4 +38,5 @@
 	spell_type = SPELL_MANA
 	antimagic_flags = MAGIC_RESISTANCE
 	spell_cost = 20
-	required_form = FORM_AIR
+	required_form = FORM_LIFE
+	associated_skill = /datum/attribute/skill/magic/arcane/life

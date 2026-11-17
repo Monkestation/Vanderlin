@@ -4,7 +4,7 @@
 	button_icon_state = "dendor"
 	sound = 'sound/magic/timestop.ogg'
 
-	spell_type = SPELL_DIVINE_MIRACLE
+	spell_type = SPELL_UNHOLY_MIRACLE
 	antimagic_flags = MAGIC_RESISTANCE_HOLY
 	spell_flags = SPELL_DEVIL_BLOCKED
 	associated_skill = /datum/attribute/skill/magic/druidic

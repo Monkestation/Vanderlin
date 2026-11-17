@@ -18,7 +18,7 @@
 	vitae_cost = 15
 	duration_length = 5 SECONDS
 	cooldown_length = 15 SECONDS
-	var/datum/proximity_monitor/advanced/silence_field/proximity_field
+	var/datum/proximity_monitor/advanced/quietus_field/proximity_field
 	var/silence_range = 7
 	var/validation_timer
 
@@ -26,7 +26,7 @@
 	. = ..()
 	ADD_TRAIT(owner, TRAIT_SILENT_FOOTSTEPS, "quietus")
 	if(!proximity_field)
-		proximity_field = new /datum/proximity_monitor/advanced/silence_field(owner, silence_range, FALSE, src)
+		proximity_field = new /datum/proximity_monitor/advanced/quietus_field(owner, silence_range, FALSE, src)
 		// Apply silence to all mobs currently in range
 		apply_initial_silence()
 		// Start validation timer to check positions periodically - this is really redundant but its useful incases of forceMove
@@ -83,55 +83,57 @@
 	if(!HAS_TRAIT(target, TRAIT_DEAF))
 		ADD_TRAIT(target, TRAIT_DEAF, "quietus")
 		target.adjust_confusion_up_to(2.5 SECONDS, 5 SECONDS)
+	target.apply_status_effect(/datum/status_effect/debuff/silenced/permanent)
 
 /datum/coven_power/quietus/silence_of_death/proc/remove_silence(mob/living/carbon/human/target)
 	if(HAS_TRAIT_FROM(target, TRAIT_DEAF, "quietus"))
 		REMOVE_TRAIT(target, TRAIT_DEAF, "quietus")
 	if(HAS_TRAIT_FROM(target, TRAIT_SILENT_FOOTSTEPS, "quietus"))
 		REMOVE_TRAIT(target, TRAIT_SILENT_FOOTSTEPS, "quietus")
+	target.remove_status_effect(/datum/status_effect/debuff/silenced/permanent)
 
 // Proximity monitor for the silence field
-/datum/proximity_monitor/advanced/silence_field
+/datum/proximity_monitor/advanced/quietus_field
 	var/datum/coven_power/quietus/silence_of_death/parent_power
 	var/list/affected_mobs = list()
 
-/datum/proximity_monitor/advanced/silence_field/New(atom/center, range, ignore_if_not_on_turf, datum/coven_power/quietus/silence_of_death/power)
+/datum/proximity_monitor/advanced/quietus_field/New(atom/center, range, ignore_if_not_on_turf, datum/coven_power/quietus/silence_of_death/power)
 	parent_power = power
 	. = ..()
 
-/datum/proximity_monitor/advanced/silence_field/setup_field_turf(turf/target)
+/datum/proximity_monitor/advanced/quietus_field/setup_field_turf(turf/target)
 	. = ..()
 	// Check for any mobs already on this turf
 	for(var/mob/living/carbon/human/H in target)
 		if(parent_power.should_affect_target(H))
 			add_affected_mob(H)
 
-/datum/proximity_monitor/advanced/silence_field/field_edge_crossed(atom/movable/movable, turf/location, direction)
+/datum/proximity_monitor/advanced/quietus_field/field_edge_crossed(atom/movable/movable, turf/location, direction)
 	. = ..()
 	if(istype(movable, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = movable
 		if(parent_power.should_affect_target(H))
 			add_affected_mob(H)
 
-/datum/proximity_monitor/advanced/silence_field/field_edge_uncrossed(atom/movable/movable, turf/location, direction)
+/datum/proximity_monitor/advanced/quietus_field/field_edge_uncrossed(atom/movable/movable, turf/location, direction)
 	. = ..()
 	if(istype(movable, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = movable
 		remove_affected_mob(H)
 
-/datum/proximity_monitor/advanced/silence_field/proc/add_affected_mob(mob/living/carbon/human/target)
+/datum/proximity_monitor/advanced/quietus_field/proc/add_affected_mob(mob/living/carbon/human/target)
 	if(target in affected_mobs)
 		return
 	affected_mobs |= target
 	parent_power.apply_silence(target)
 
-/datum/proximity_monitor/advanced/silence_field/proc/remove_affected_mob(mob/living/carbon/human/target)
+/datum/proximity_monitor/advanced/quietus_field/proc/remove_affected_mob(mob/living/carbon/human/target)
 	if(!(target in affected_mobs))
 		return
 	affected_mobs -= target
 	parent_power.remove_silence(target)
 
-/datum/proximity_monitor/advanced/silence_field/Destroy()
+/datum/proximity_monitor/advanced/quietus_field/Destroy()
 	// Clean up all affected mobs when the field is destroyed
 	for(var/mob/living/carbon/human/H in affected_mobs)
 		parent_power.remove_silence(H)
@@ -148,6 +150,13 @@
 	violates_masquerade = TRUE
 	cooldown_length = 5 SECONDS
 	violates_masquerade = TRUE
+
+/datum/coven_power/quietus/scorpions_touch/can_activate()
+	. = ..()
+	if(owner.get_active_held_item())
+		to_chat(owner, span_danger("Your main hand is busy!"))
+		owner.adjust_bloodpool(vitae_cost)
+		return
 
 /datum/coven_power/quietus/scorpions_touch/activate()
 	. = ..()
@@ -169,7 +178,12 @@
 		L.adjustFireLoss(10)
 		L.AdjustKnockdown(3 SECONDS)
 		L.adjust_stamina(-50)
+		remove_hand_with_no_refund(src)
 	return ..()
+
+/obj/item/melee/touch_attack/dropped(mob/user)
+	. = ..()
+	qdel(src)
 
 //BAAL'S CARESS
 /datum/coven_power/quietus/baals_caress
@@ -196,12 +210,13 @@
 		if(alert)
 			to_chat(owner, span_warning("[src] can only be used on bladed weapons!"))
 		return FALSE
-
 	return .
 
 /datum/coven_power/quietus/baals_caress/activate(obj/item/weapon/target)
 	. = ..()
-	target.AddElement(/datum/element/one_time_poison, list(/datum/reagent/poison/doom = 2))
+	if(!target.reagents)
+		target.AddElement(/datum/element/tipped_item)
+	target.reagents.add_reagent(/datum/reagent/poison/doom, 2)
 
 /datum/coven_power/quietus/taste_of_death
 	name = "Taste of Death"
@@ -218,20 +233,28 @@
 //DAGON'S CALL
 /datum/coven_power/quietus/dagons_call
 	name = "Dagon's Call"
-	desc = "Curse the last person you attacked to drown in their own blood."
+	desc = "Curse the last person you fought, causing their blood to boil."
 
 	level = 5
 	check_flags = COVEN_CHECK_CAPABLE | COVEN_CHECK_CONSCIOUS | COVEN_CHECK_IMMOBILE | COVEN_CHECK_LYING
 	cooldown_length = 30 SECONDS
 
 /datum/coven_power/quietus/dagons_call/activate()
-	. = ..()
+
 	var/mob/living/lastattacker = owner.lastattacker_weakref?.resolve()
-	if(isliving(lastattacker))
-		lastattacker.adjust_stamina(-80)
-		lastattacker.adjust_fire_stacks(6)
-		lastattacker.adjustFireLoss(10)
-		to_chat(owner, "You send your curse on [lastattacker], the last creature you attacked.")
-	else
+
+	if(!isliving(lastattacker))
 		to_chat(owner, "You don't seem to have last attacked soul earlier...")
+		owner.adjust_bloodpool(vitae_cost)
 		return
+	. = ..()
+	for(var/atom/I in lastattacker.get_equipped_items())
+		var/datum/enchantment/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/silver)
+		if(ench)
+			to_chat(owner, span_danger("Silver dispells the curse! They are protected for now."))
+			return
+
+	lastattacker.adjust_stamina(80)
+	lastattacker.fire_act(6, 6)
+	lastattacker.adjustFireLoss(10)
+	to_chat(owner, "You send your curse on [lastattacker], the last creature you attacked.")

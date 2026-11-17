@@ -12,9 +12,10 @@
 	resistance_flags = FIRE_PROOF
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
-	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
 	max_integrity = INTEGRITY_OLD_STRONG
 	item_weight = 1.2 KILOGRAMS
+	melting_material = /datum/material/steel
+	melt_amount = 100
 
 /obj/item/clothing/wrists/bracers/preceptor
 	name = "sojourner's wrappings"
@@ -42,6 +43,7 @@
 	armor_type = /datum/armor/wrist/maille
 	armor_class = AC_MEDIUM
 	max_integrity = INTEGRITY_OLD_STRONG
+	melting_material = /datum/material/iron
 
 /obj/item/clothing/wrists/bracers/iron/concealed
 	name = "concealed iron plate vambraces"
@@ -58,9 +60,7 @@
 	armor_type = /datum/armor/wrist/maille
 	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = CUT_AND_MINOR_CRITS
-	smeltresult = /obj/item/fertilizer/ash
-	melting_material = /datum/material/steel
-	melt_amount = 75
+	melt_amount = 50
 
 /obj/item/clothing/wrists/bracers/ironjackchain
 	name = "iron jack chains"
@@ -72,9 +72,8 @@
 	armor_type = /datum/armor/wrist/maille
 	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = CUT_AND_MINOR_CRITS
-	smeltresult = /obj/item/fertilizer/ash //we avoid melting one piece for one bar
-	melting_material = /datum/material/iron // we get one bar per two pieces of the item recovered and smelted
-	melt_amount = 75
+	melting_material = /datum/material/iron
+	melt_amount = 50 // we get one bar per two pieces of the item recovered and smelted
 
 /obj/item/clothing/wrists/bracers/leather
 	name = "leather bracers"
@@ -98,6 +97,23 @@
 	salvage_result = null
 	max_integrity = INTEGRITY_OLD_STANDARD
 	item_weight = 650 GRAMS
+	melting_material = null
+
+/obj/item/clothing/wrists/bracers/leather/brigandine
+	name = "brigandine vambraces"
+	desc = "Leather bracers layered over cloth sleeves with iron plates on the outside. Covers both arms entirely."
+	icon_state = "splintarms"
+	equip_delay_self = 2 SECONDS
+	unequip_delay_self = 2 SECONDS
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	melt_amount = 30
+	melting_material = /datum/material/iron
+	smeltresult = null
+	clothing_flags = CANT_SLEEP_IN
+	armor_type = /datum/armor/brigandine
+	max_integrity = ARMOR_INT_SIDE_HARDLEATHER
+	prevent_crits = ALL_EXCEPT_BLUNT
+	item_weight = 1.2 KILOGRAMS
 
 //THE ARMOUR VALUES OF ADVANCED AND MASTERWORK BRACERS ARE INTENDED
 //KEEP THIS IN MIND
@@ -197,6 +213,7 @@
 	sewrepair = null
 	alternate_worn_layer = WRISTS_LAYER
 	item_weight = 2.5 KILOGRAMS
+	melting_material = /datum/material/iron
 
 /obj/item/clothing/wrists/bracers/ironbriar/equipped(mob/user, slot)
 	. = ..()

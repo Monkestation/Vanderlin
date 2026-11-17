@@ -7,12 +7,12 @@
 /area/indoors/town)
 "e" = (
 /obj/structure/rack/shelf/biggest,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
 /area/indoors/town)
 "h" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/cup/wooden,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
 /area/indoors/town)
 "i" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
@@ -35,18 +35,21 @@
 "K" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/cloth,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
 /area/indoors/town)
 "L" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/broom,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
+/area/indoors/town)
+"R" = (
+/turf/open/floor/twig,
 /area/indoors/town)
 "S" = (
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
 /area/indoors/town)
 "W" = (
 /obj/structure/table/wood/plain_alt,
@@ -74,10 +77,10 @@ b
 "}
 (3,1,1) = {"
 b
-a
+R
 a
 t
-a
+R
 b
 "}
 (4,1,1) = {"
@@ -93,7 +96,7 @@ b
 L
 a
 a
-a
+R
 b
 "}
 (6,1,1) = {"

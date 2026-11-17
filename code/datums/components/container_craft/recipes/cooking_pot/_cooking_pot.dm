@@ -37,6 +37,7 @@
 	return real_cooking_time
 
 /datum/container_craft/cooking/create_item(obj/item/crafter, mob/initiator, list/found_optional_requirements, list/found_optional_wildcards, list/found_optional_reagents, list/removing_items)
+	var/list/assembled_buffs = assemble_ingredient_buffs(removing_items)
 	if(created_reagent && length(reagent_requirements))
 		var/turf/pot_turf = get_turf(crafter)
 		var/datum/reagent/first = reagent_requirements[1]
@@ -50,6 +51,8 @@
 			var/list/quality_data = list(
 				"quality" = calculated_quality,
 			)
+			if(length(assembled_buffs))
+				quality_data["ingredient_buffs"] = assembled_buffs
 
 			// Add the reagent with quality data
 			crafter.reagents.add_reagent(created_reagent, reagent_amount * water_conversion, quality_data)
@@ -67,6 +70,8 @@
 			var/list/quality_data = list(
 				"quality" = calculated_quality,
 			)
+			if(length(assembled_buffs))
+				quality_data["ingredient_buffs"] = assembled_buffs
 
 			// Add the reagent with quality data
 			crafter.reagents.add_reagent(created_reagent, created_amount, quality_data)

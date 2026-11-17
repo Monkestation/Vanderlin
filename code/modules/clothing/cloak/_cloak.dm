@@ -21,7 +21,7 @@
 	item_weight = 350 GRAMS
 
 	/// Does it have internal storage? If so it will create a component below.
-	var/has_storage = FALSE
+	var/has_storage = TRUE
 	/// Similar function to pocket_storage_component_path but rather than always loading it's conditional.
 	var/datum/component/storage/storage_component_path = /datum/component/storage/concrete/grid/cloak
 

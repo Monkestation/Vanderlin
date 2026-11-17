@@ -135,6 +135,7 @@
 /datum/action/cooldown/spell/undirected/jaunt/illusory_prop/spell
 	name = "Lesser Illusory Prop"
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_ILLUSION
 	required_items = null
 	spell_type = SPELL_MANA

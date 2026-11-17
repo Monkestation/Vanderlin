@@ -15,7 +15,7 @@
 		/datum/attribute/skill/craft/crafting = 40,
 		/datum/attribute/skill/craft/carpentry = 60,
 		/datum/attribute/skill/craft/engineering = 10,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/labor/lumberjacking = 40

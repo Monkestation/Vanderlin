@@ -16,6 +16,7 @@
 	item_outline = "#6495ED"
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_CREATION
 
 /datum/action/cooldown/spell/undirected/conjure_item/brick/make_item()

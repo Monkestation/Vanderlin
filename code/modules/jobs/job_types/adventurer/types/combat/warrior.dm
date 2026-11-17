@@ -10,7 +10,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 	clamped_adjustment = list(
 		/datum/attribute/skill/combat/wrestling = list(20, 20),
@@ -112,7 +112,7 @@
 /datum/outfit/adventurer/sfighter/pre_equip(mob/living/carbon/human/H, visuals_only)
 	. = ..()
 
-	shoes = pick(/obj/item/clothing/shoes/boots/darkboots, /obj/item/clothing/shoes/boots/furlinedboots) // no armored boots for common adventurers.
+	shoes = pick(/obj/item/clothing/shoes/boots/darkboots, /obj/item/clothing/shoes/boots/furboots) // no armored boots for common adventurers.
 	gloves = pick(/obj/item/clothing/gloves/leather, /obj/item/clothing/gloves/leather/advanced, /obj/item/clothing/gloves/fingerless)
 	armor = pick(/obj/item/clothing/armor/chainmail/iron, /obj/item/clothing/armor/leather/splint, /obj/item/clothing/armor/cuirass/iron, /obj/item/clothing/armor/brigandine/light)
 	neck = pick(/obj/item/clothing/neck/chaincoif/iron, /obj/item/clothing/neck/gorget, /obj/item/clothing/neck/highcollier/iron, /obj/item/clothing/neck/coif/cloth, /obj/item/clothing/neck/coif)

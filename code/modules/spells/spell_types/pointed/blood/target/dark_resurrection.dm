@@ -11,6 +11,7 @@
 	required_form = FORM_BLOOD
 	required_technique = TECHNIQUE_RESTORATION
 	required_level = 14
+	initial_charges = 4
 	spell_flags = SPELL_UNETCHABLE
 	heretical_spell = TRUE
 	antimagic_flags = MAGIC_RESISTANCE_BLOOD

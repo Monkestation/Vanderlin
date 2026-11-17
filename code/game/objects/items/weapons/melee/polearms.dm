@@ -55,6 +55,7 @@
 	sellprice = 5
 	item_weight = 1 KILOGRAMS
 	weapon_special = /datum/special_intent/quarterstaff_sweep
+	associated_skill = /datum/attribute/skill/combat/polearms/staves
 
 /obj/item/weapon/polearm/woodstaff/getonmobprop(tag)
 	. = ..()
@@ -136,6 +137,7 @@
 	max_integrity = INTEGRITY_QUARTERSTAFF * INTEGRITY_MOD_GOLD
 	minstr = 8
 	item_weight = 1.5 KILOGRAMS
+	smeltresult = null
 	melting_material = /datum/material/gold
 	melt_amount = 75
 
@@ -147,6 +149,7 @@
 	force = DAMAGE_STAFF + 8
 	force_wielded =  DAMAGE_STAFF_WIELD + 8
 	max_integrity = INTEGRITY_QUARTERSTAFF * INTEGRITY_MOD_BLACKSTEEL
+	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 75
 
@@ -157,7 +160,9 @@
 	force = DAMAGE_STAFF + 6
 	force_wielded =  DAMAGE_STAFF_WIELD + 7
 	max_integrity = INTEGRITY_QUARTERSTAFF * INTEGRITY_MOD_BLOODSTEEL
+	smeltresult = null
 	melting_material = /datum/material/bloodsteel
+	melt_amount = 75
 	sellprice = 0
 
 /obj/item/weapon/polearm/woodstaff/quarterstaff/bloodsteel/Initialize(mapload)
@@ -294,9 +299,10 @@
 	force_wielded = DAMAGE_SPEAR_WIELD + 2
 	throwforce = DAMAGE_SPEAR_WIELD
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/abyssor
 
 //................ Psydonian Spear ............... //
 /obj/item/weapon/polearm/spear/psydon
@@ -307,7 +313,6 @@
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
 	force = DAMAGE_SPEARPLUS + 2
 	resistance_flags = FIRE_PROOF
-	smeltresult = /obj/item/ingot/silver
 	melt_amount = null
 	melting_material = null
 	sellprice = 60
@@ -346,8 +351,7 @@
 	gripped_intents = list(POLEARM_THRUST, SPEAR_CUT, POLEARM_CHOP, POLEARM_BASH)
 	resistance_flags = FIRE_PROOF
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	smeltresult = /obj/item/ingot/steel_slag
-	melting_material = null
+	melting_material = /datum/material/steel
 	sellprice = 60
 	item_weight = 2 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL
@@ -365,7 +369,7 @@
 	force = DAMAGE_SPEAR
 	force_wielded = DAMAGE_SPEAR_WIELD - 2
 	max_blade_int = 150
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	item_weight = 2 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_IRON
 
@@ -377,7 +381,7 @@
 	wdefense = GOOD_PARRY
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BRONZE
 	max_blade_int = 100
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	item_weight = 2 KILOGRAMS
 
 //................ Stone Short Spear ............... //		- Short spears got shorter reach and worse wield effect, made for one handed and throwing
@@ -412,7 +416,8 @@
 	wlength = WLENGTH_LONG
 
 	gripsprite = FALSE
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	melt_amount = null
 	melting_material = null
 	throw_speed = 2
@@ -430,7 +435,7 @@
 	max_blade_int = 200
 
 	gripsprite = FALSE
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	item_weight = 1.5 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_STEEL
 
@@ -581,7 +586,6 @@
 
 	slot_flags = ITEM_SLOT_BACK
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 90
@@ -605,7 +609,6 @@
 	force_wielded = DAMAGE_HALBERD_WIELD
 	wbalance = EASY_TO_DODGE
 	max_blade_int = 300
-	smeltresult = /obj/item/ingot/silver
 	melting_material = /datum/material/silver
 	melt_amount = 150
 	sellprice = 120
@@ -614,6 +617,13 @@
 /obj/item/weapon/polearm/halberd/silver/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/silver)
+
+/obj/item/weapon/polearm/halberd/silver/truesilver
+	name = "truesilver halberd"
+	desc = "A halberd forged from truesilver, a favored weapon of the Lunar Order."
+	icon_state = "lunar_halberd"
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_TRUESILVER
 
 /obj/item/weapon/polearm/halberd/bloodsteel
 	name = "bloodsteel halberd"
@@ -656,7 +666,6 @@
 	force = DAMAGE_SPEARPLUS
 	force_wielded = DAMAGE_HALBERD_WIELD + 2
 	max_blade_int = 450
-	smeltresult = null
 	melting_material = /datum/material/blacksteel
 	melt_amount = 200
 	sellprice = 250
@@ -721,7 +730,6 @@
 
 	swingsound = BLADEWOOSH_MED
 	axe_cut = 10
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	melt_amount = 140
 	sellprice = 30
@@ -744,7 +752,6 @@
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	associated_skill = /datum/attribute/skill/combat/axesmaces //It's ultimately a massive axe
 	axe_cut = 15
-	smeltresult = null
 	melt_amount = 75
 	sellprice = 20
 	item_weight = 2 KILOGRAMS
@@ -772,7 +779,6 @@
 	minstr = 9
 
 	axe_cut = 15
-	smeltresult = /obj/item/ingot/steel
 	melting_material = /datum/material/steel
 	melt_amount = 75
 	sellprice = 50
@@ -834,7 +840,6 @@
 	desc = "A glaive decorated with gold, forged for the Captain alongside their armor. To deliver justice with every wide swing."
 	sellprice = 200
 	icon_state = "capglaive"
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	item_weight = 2.3 KILOGRAMS
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_STEEL * INTEGRITY_SPECIAL_BONUS
@@ -845,7 +850,6 @@
 	icon_state = "glaive"
 	force = DAMAGE_AXE + 2
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	max_integrity = INTEGRITY_HALBERD * INTEGRITY_MOD_STEEL
@@ -905,7 +909,6 @@
 	force_wielded = DAMAGE_HALBERD_WIELD -3
 	wbalance = VERY_EASY_TO_DODGE
 	wdefense = AVERAGE_PARRY
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 	melt_amount = 150
 	sellprice = 40
@@ -918,7 +921,7 @@
 	desc = "A humble spear with a bronze head, a rare survivor from the battles long past that nearly destroyed Psydonia."
 	icon_state = "bronzespear"
 	max_blade_int = 200
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	sellprice = 120 // A noble collector would love to get his/her hands on one of these spears
 	item_weight = 1 KILOGRAMS
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_BRONZE
@@ -973,7 +976,7 @@
 	resistance_flags = FLAMMABLE // Weapon made mostly of wood
 	associated_skill = /datum/attribute/skill/combat/polearms
 	drop_sound = 'sound/foley/dropsound/blade_drop.ogg'
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = 10
 	item_weight = 1.1 KILOGRAMS
 
@@ -997,7 +1000,6 @@
 	bigboy = TRUE
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	smeltresult = null
 	melting_material = null
 	melt_amount = 0
 	item_weight = 0.9 KILOGRAMS
@@ -1019,7 +1021,6 @@
 	bigboy = TRUE
 	gripsprite = TRUE
 	w_class = WEIGHT_CLASS_BULKY
-	smeltresult = null
 	melting_material = null
 	melt_amount = 0
 	max_integrity = INTEGRITY_SPEAR * INTEGRITY_MOD_IMPROV * INTEGRITY_SPECIAL_BONUS

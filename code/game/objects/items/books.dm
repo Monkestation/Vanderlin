@@ -146,7 +146,7 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 4, FALSE)
 		return
 	if(in_range(user, src) || isobserver(user))
 		if(!pages.len)
@@ -274,7 +274,7 @@
 	if(!user.hud_used.reads)
 		return
 	if(!user.can_read(src))
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 4, FALSE)
 		return
 	if(in_range(user, src) || isobserver(user))
 		user.changeNext_move(CLICK_CD_MELEE)
@@ -653,7 +653,7 @@
 
 	var/newtitle = SANITIZE_HEAR_MESSAGE(tgui_input_text(user, "Enter the title of the manuscript:", max_length = MAX_CHARTER_LEN))
 	var/newauthor = SANITIZE_HEAR_MESSAGE(tgui_input_text(user, "Enter the author's name:", max_length = MAX_CHARTER_LEN))
-	var/newcategory = tgui_input_list(user, "Select the category of the manuscript:", list("Apocrypha & Grimoires", "Myths & Tales", "Legends & Accounts", "Thesis", "Eoratica"))
+	var/newcategory = tgui_input_list(user, "Select the category of the manuscript", "Book Category", list("Apocrypha & Grimoires", "Myths & Tales", "Legends & Accounts", "Thesis", "Eoratica"))
 	var/selection = tgui_input_list(user, "Choose a book style", "Book Style", book_icons)
 	if(!selection)
 		return
@@ -710,7 +710,7 @@
 		return
 	if(!user.can_read(src))
 		to_chat(user, span_warning("I study [src], but this verba still eludes me..."))
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 4, FALSE) //?
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 4, FALSE) //?
 		return
 	if(!in_range(user, src) && !isobserver(user))
 		to_chat(user, span_warning("I am too far away to read [src]."))

@@ -16,6 +16,7 @@
 	spell_flags = SPELL_RITUOS
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_SUMMONING
 
 	self_cast_possible = FALSE

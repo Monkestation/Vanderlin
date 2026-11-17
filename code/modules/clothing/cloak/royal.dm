@@ -15,7 +15,6 @@
 	detail_tag = "_det"
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
-	has_storage = TRUE
 	storage_component_path = /datum/component/storage/concrete/grid/cloak/lord
 
 /obj/item/clothing/cloak/lordcloak/ladycloak

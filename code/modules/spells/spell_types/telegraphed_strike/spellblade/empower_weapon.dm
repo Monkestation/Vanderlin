@@ -7,6 +7,7 @@
 	sound = 'sound/magic/antimagic.ogg'
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_IMBUE
 
 	spell_cost = 0

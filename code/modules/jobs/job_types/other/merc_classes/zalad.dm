@@ -17,7 +17,7 @@
 		/datum/attribute/skill/combat/swords = 33,
 		/datum/attribute/skill/combat/polearms = 10,
 		/datum/attribute/skill/combat/whipsflails = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/athletics = 30
 	)
 
