@@ -33,6 +33,8 @@ GLOBAL_LIST_EMPTY(antagonists)
 	/// Does this allow you to swap your character's preferences for a new one before fully applying?
 	var/allow_preference_switching = FALSE
 
+	var/blocks_triumphs = TRUE
+
 	///flags used by storytellers
 	var/antag_flags = NONE
 
