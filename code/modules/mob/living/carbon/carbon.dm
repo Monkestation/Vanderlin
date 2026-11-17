@@ -608,6 +608,7 @@
 	else
 		if(!CAN_HAVE_BLOOD(src))
 			return TRUE
+		src.adjust_blood_volume(-20)
 		if(message)
 			visible_message("<span class='danger'>[src] coughs up blood!</span>", "<span class='danger'>I cough up blood!</span>")
 
