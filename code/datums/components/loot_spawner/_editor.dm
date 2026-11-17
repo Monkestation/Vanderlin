@@ -167,7 +167,7 @@
 			return TRUE
 
 		if("search")
-			var/query = lowertext(trim("[params["query"]]"))
+			var/query = LOWER_TEXT(trim("[params["query"]]"))
 			search_results = list()
 			if(length(query) < 3)
 				notice = "Type at least 3 characters to search."
