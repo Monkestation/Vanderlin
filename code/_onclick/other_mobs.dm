@@ -661,6 +661,7 @@
  * * extra_tile - when the jump has ended, throw another tile
  */
 /mob/living/proc/jump_action_resolve(atom/target, stamina_cost, range, extra_tile)
+	target = get_turf(target)
 	var/do_a_flip = FALSE
 	var/flip_direction = FLIP_DIRECTION_CLOCKWISE
 	var/prev_pixel_z = pixel_z
@@ -692,13 +693,17 @@
 	throw_at(target, range, 1, spin = FALSE, callback = CALLBACK(src, PROC_REF(jump_ended), extra_tile))
 
 /mob/living/proc/jump_ended(extra_tile)
-	if(QDELETED(src) || isopenspace(loc))
+	if(QDELETED(src))
 		return
 
 	if(isopenturf(loc))
 		var/turf/open/open_turf = loc
-		if(open_turf.landsound)
-			playsound(open_turf, open_turf.landsound, 100, FALSE)
+		var/list/landsound = list()
+		var/sigreturn = SEND_SIGNAL(open_turf, COMSIG_TURF_GET_LAND_SOUND, landsound)
+		if(!(sigreturn & LAND_SOUND_RETURNED))
+			landsound += open_turf.landsound
+		if(landsound.len >= 1)
+			playsound(open_turf, landsound[1], 100, FALSE)
 
 	if(extra_tile)
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, throw_at), get_step(src, dir), 1, 1, null, FALSE), 0.1 SECONDS)

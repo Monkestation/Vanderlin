@@ -84,5 +84,5 @@
 		if(!amt)
 			to_chat(world, "[the_name] was a bandit.")
 		else
-			to_chat(world, "[the_name] was a bandit. He stole [amt] triumphs worth of loot.")
+			to_chat(world, "[the_name] was a bandit. He stole [amt] shiny piles worth of loot.")
 	return
