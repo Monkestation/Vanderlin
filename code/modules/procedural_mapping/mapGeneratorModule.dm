@@ -10,6 +10,7 @@
 	var/list/excluded_turfs = list()
 	var/list/allowed_turfs = list()
 	var/list/allowed_areas = list()
+	var/list/excluded_areas = list()
 	var/include_subtypes = TRUE
 
 //Syncs the module up with its mother
@@ -27,6 +28,7 @@
 	excluded_turfs = typecacheof(excluded_turfs)
 	allowed_turfs = typecacheof(allowed_turfs)
 	allowed_areas = typecacheof(allowed_areas, only_root_path = !include_subtypes)
+	excluded_areas = typecacheof(excluded_areas)
 	var/list/map = mother.map
 	for(var/turf/T as anything in map)
 		place(T)
@@ -46,6 +48,9 @@
 
 	// no need for get_area, that has an extra get_turf we don't need
 	if(!allowed_areas?[T.loc?.type])
+		return
+
+	if(excluded_areas?[T.loc?.type])
 		return
 
 	// Check if an excluded atom is present. Excluded atoms are atoms that rely on turf to remain the same, and should not be modified by mapgen.
