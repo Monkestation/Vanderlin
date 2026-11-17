@@ -43,6 +43,7 @@
 		/turf/open/floor/dirt/road = 30,
 	)
 	allowed_areas = list(/area/outdoors/wilderness)
+	excluded_areas = list(/area/outdoors/wilderness/plains)
 
 /datum/mapGeneratorModule/forestroad
 	clusterCheckFlags = CLUSTER_CHECK_DIFFERENT_ATOMS
@@ -58,6 +59,7 @@
 	excluded_turfs = list(/turf/open/floor/dirt/road)
 	spawnableTurfs = list(/turf/open/floor/grass = 15)
 	allowed_areas = list(/area/outdoors/wilderness)
+	excluded_areas = list(/area/outdoors/wilderness/plains)
 
 /datum/mapGeneratorModule/forestgrass
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
@@ -80,6 +82,7 @@
 		/obj/structure/wild_plant/nospread/mushroom/waddle = 0.5,
 		/obj/structure/wild_plant/nospread/mushroom/merkel = 0.2,
 	)
+	excluded_areas = list(/area/outdoors/wilderness/plains)
 
 /datum/mapGeneratorModule/forestwaterturf
 	clusterCheckFlags = CLUSTER_CHECK_SAME_ATOMS
