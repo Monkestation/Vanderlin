@@ -1240,7 +1240,7 @@
 		playsound(src,'sound/items/matidol2.ogg', 50, TRUE)
 
 /obj/structure/fluff/statue/evil/proc/get_max_triumphs()
-	return clamp(ceil(length(GLOB.clients) / 15), 1, 4)
+	return clamp(floor(length(GLOB.clients) / 15), 1, 4)
 
 /obj/structure/fluff/statue/graggar
 	name = "Graggar Idol"
