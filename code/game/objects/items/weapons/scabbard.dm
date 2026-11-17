@@ -228,7 +228,7 @@
 	item_state = "kazscab"
 	force = DAMAGE_SWORD - 15
 	force_wielded = DAMAGE_SWORD - 15
-	wdefense = GREAT_PARRY
+	wdefense = SHIELD_PARRY
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/attribute/skill/craft/carpentry

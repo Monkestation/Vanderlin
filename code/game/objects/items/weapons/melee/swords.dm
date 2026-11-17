@@ -1812,6 +1812,7 @@
 	name = "katana"
 	desc = "A foreign sword, forged with meticulous care."
 	icon_state = "eastsword1"
+	force = DAMAGE_SWORD + 3
 	force_wielded = DAMAGE_SWORD_WIELD + 3
 	wdefense = GOOD_PARRY
 	possible_item_intents = list(KATANA_ONEHAND, SWORD_STRIKE)
@@ -1840,7 +1841,6 @@
 	name = "samjeongdo"
 	desc = "A gold-stained blade with cloud patterns on the groove. One of a kind."
 	icon_state = "eastsword3"
-	force = DAMAGE_SWORD + 3
 	wdefense = GREAT_PARRY
 
 /obj/item/weapon/sword/sabre/hook
