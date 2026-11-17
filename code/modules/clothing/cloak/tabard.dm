@@ -13,7 +13,7 @@
 	slot_flags = ITEM_SLOT_ARMOR|ITEM_SLOT_CLOAK
 	var/picked
 
-/obj/item/clothing/cloak/tabard/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/tabard/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -79,7 +79,7 @@
 	color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
 
-/obj/item/clothing/cloak/tabard/knight/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/tabard/knight/AltClick(mob/user, list/modifiers)
 	return
 
 /obj/item/clothing/cloak/tabard/crusader
@@ -87,7 +87,7 @@
 	detail_tag = "_psy"
 	detail_color = CLOTHING_WHITE
 
-/obj/item/clothing/cloak/tabard/crusader/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/tabard/crusader/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -130,7 +130,7 @@
 	detail_tag = "_quad"
 	detail_color = CLOTHING_SOOT_BLACK
 
-/obj/item/clothing/cloak/tabard/crusader/tief/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/tabard/crusader/tief/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -166,7 +166,7 @@
 	detail_color = CLOTHING_PLUM_PURPLE
 	uses_lord_coloring = LORD_PRIMARY
 
-/obj/item/clothing/cloak/tabard/knight/guard/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/tabard/knight/guard/AltClick(mob/user, list/modifiers)
 	. = ..()
 	if(. == SECONDARY_ATTACK_CANCEL_ATTACK_CHAIN)
 		return
@@ -206,5 +206,5 @@
 	color = CLOTHING_SOOT_BLACK
 	detail_color = CLOTHING_WHITE
 
-/obj/item/clothing/cloak/tabard/adept/attack_hand_secondary(mob/user, list/modifiers)
+/obj/item/clothing/cloak/tabard/adept/AltClick(mob/user, list/modifiers)
 	return

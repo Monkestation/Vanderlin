@@ -90,6 +90,7 @@
 			if(/datum/patron/divine/noc)
 				spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 				ADD_TRAIT(spawned, TRAIT_LUNAR_ORDER, JOB_TRAIT)
+				spawned.grant_language(/datum/language/celestial_moon)
 			if(/datum/patron/divine/pestra)
 				spawned.cmode_music = 'sound/music/cmode/adventurer/CombatMonk.ogg'
 			if(/datum/patron/divine/abyssor)

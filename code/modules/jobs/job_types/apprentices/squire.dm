@@ -1,8 +1,9 @@
 /datum/job/squire
 	title = JOB_SQUIRE
+	alt_titles = list("Page", "Cadet", "Rookie")
 	tutorial = "You've always had greater aspirations than the simple life of a peasant. \n\
 	You and your friends practiced the basics, swordfighting with sticks and loosing arrows into hay bale targets. \n\
-	The Captain took notice of your potential, and recruited you as a personal ward. \
+	Someone of the garrison took notice of your potential, and you were taken into the castle as a ward. \
 	\n\n\
 	Learn from the garrison and train hard... maybe one dae you will be honored with knighthood."
 	department_flag = APPRENTICES
@@ -23,7 +24,8 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatManAtArms.ogg'
 	exp_types_granted = list(EXP_TYPE_GARRISON)
 
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_NO_KOBOLD
+	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
 
 	outfit = /datum/outfit/squire
@@ -44,7 +46,7 @@
 
 /datum/job/advclass/squire
 	allowed_ages = list(AGE_CHILD, AGE_ADULT)
-	allowed_races = RACES_PLAYER_NONDISCRIMINATED
+	allowed_races = RACES_PLAYER_NO_KOBOLD
 	exp_type = list(EXP_TYPE_GARRISON)
 	exp_types_granted = list(EXP_TYPE_GARRISON)
 	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)

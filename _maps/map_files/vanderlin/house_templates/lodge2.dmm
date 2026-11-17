@@ -6,7 +6,7 @@
 "h" = (
 /obj/structure/bed/mediocre,
 /obj/item/bedsheet/cloth,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
 /area/indoors/town)
 "l" = (
 /obj/structure/table/wood/plain_alt,
@@ -14,12 +14,12 @@
 /area/indoors/town)
 "p" = (
 /obj/structure/rack/shelf/biggest,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
 /area/indoors/town)
 "t" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/cup/wooden,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
 /area/indoors/town)
 "u" = (
 /obj/structure/chair/wood/alt{
@@ -30,7 +30,7 @@
 "w" = (
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/broom,
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
 /area/indoors/town)
 "y" = (
 /turf/closed/wall/mineral/wooddark/slitted,
@@ -43,7 +43,7 @@
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
 	},
-/turf/open/floor/ruinedwood/darker,
+/turf/open/floor/twig,
 /area/indoors/town)
 "N" = (
 /turf/open/floor/ruinedwood/darker,
@@ -54,6 +54,9 @@
 "V" = (
 /obj/machinery/light/fueled/wallfire/candle/r,
 /turf/open/floor/ruinedwood/darker,
+/area/indoors/town)
+"Y" = (
+/turf/open/floor/twig,
 /area/indoors/town)
 
 (1,1,1) = {"
@@ -69,7 +72,7 @@ R
 w
 N
 N
-N
+Y
 R
 "}
 (3,1,1) = {"
@@ -82,10 +85,10 @@ R
 "}
 (4,1,1) = {"
 R
-N
+Y
 N
 u
-N
+Y
 R
 "}
 (5,1,1) = {"

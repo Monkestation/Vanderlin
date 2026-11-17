@@ -85,14 +85,11 @@
 		for(var/mob/living/carbon/CA in hearers(world.view, C))
 			if(CA != C && !CA.is_blind())
 				if(stress2give == /datum/stress_event/viewdismember)
-					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
-						continue
 					if(CA.has_quirk(/datum/quirk/vice/addiction/sadist))
 						CA.add_stress(/datum/stress_event/viewdismembermaniac)
 						CA.sate_addiction(/datum/quirk/vice/addiction/sadist)
 						continue
-					if(CA.gender == FEMALE)
-						CA.add_stress(/datum/stress_event/fviewdismember)
+					if(HAS_TRAIT(CA, TRAIT_STEELHEARTED))
 						continue
 				CA.add_stress(stress2give)
 

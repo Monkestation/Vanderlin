@@ -12,3 +12,7 @@
 	if(HAS_TRAIT(owner, TRAIT_COVEN_BANE))
 		return FALSE
 	. = ..()
+
+/datum/action/cooldown/spell/undirected/shapeshift/mist/cold
+	name = "Cold Mist Form"
+	possible_shapes = list(/mob/living/simple_animal/hostile/retaliate/gaseousform/cold)
