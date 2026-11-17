@@ -1,0 +1,5 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - balance: "Liver now passively heals toxin damage above 40. Because of this poison takes slightly more time to start stunning you"
+  - balance: "Coughing blood now actually makes you loose blood volume per cough"

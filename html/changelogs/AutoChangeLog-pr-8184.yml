@@ -1,0 +1,4 @@
+author: "TheDoktorZ"
+delete-after: True
+changes:
+  - rscdel: "Bandits' ability to get Triumphs from stealing."
