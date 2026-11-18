@@ -75,6 +75,7 @@
 	name = "Blood Magic Apprentice"
 	antag_hud_name = "bloodapp"
 	increase_votepwr = FALSE
+	blocks_triumphs = FALSE
 
 /datum/antagonist/blood_mage/student/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	if(istype(examined_datum, /datum/antagonist/blood_mage/occult))
@@ -94,6 +95,7 @@
 	antag_hud_type = null
 	increase_votepwr = FALSE
 	isgoodguy = TRUE
+	blocks_triumphs = FALSE
 
 /datum/antagonist/blood_mage/occult/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
 	return

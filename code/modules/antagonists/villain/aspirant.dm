@@ -73,12 +73,14 @@
 	show_name_in_check_antagonists = TRUE
 	show_in_roundend = TRUE
 	increase_votepwr = FALSE
+	blocks_triumphs = FALSE
 
 /datum/antagonist/aspirant/ruler
 	name = "Ruler"
 	show_name_in_check_antagonists = TRUE
 	show_in_roundend = FALSE
 	increase_votepwr = FALSE
+	blocks_triumphs = FALSE
 
 /datum/antagonist/aspirant/on_gain()
 	. = ..()
