@@ -183,6 +183,15 @@
 	craftdiff = 1
 	category = "Misc Leather"
 
+/datum/repeatable_crafting_recipe/leather/ball
+	name = "ball"
+	output = /obj/item/child_toy/ball
+	attacked_atom = /obj/machinery/tanningrack
+	requirements = list(/obj/item/natural/hide/cured = 2,
+				/obj/item/natural/cloth = 1)
+	craftdiff = 2
+	category = "Misc Leather"
+
 /// Clothing
 /datum/repeatable_crafting_recipe/leather/gloves
 	name = "leather gloves"

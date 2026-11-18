@@ -5326,6 +5326,11 @@
 /obj/structure/flora/hotspring_rocks,
 /turf/open/floor/grass/yel,
 /area/outdoors/basin)
+"dhK" = (
+/obj/structure/closet/crate/chest/neu_iron,
+/obj/effect/mapping_helpers/access/keyset/garrison/general,
+/turf/open/floor/blocks,
+/area/indoors/villagegarrison)
 "dhQ" = (
 /obj/structure/door/fancy{
 	name = "Clinic Storage"
@@ -100210,7 +100215,7 @@ uVa
 rZe
 rZe
 dma
-dma
+dhK
 huX
 vFO
 gYc

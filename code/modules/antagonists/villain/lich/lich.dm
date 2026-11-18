@@ -11,7 +11,7 @@
 		/datum/attribute/skill/magic/arcane = 50,
 		/datum/attribute/skill/magic/arcane/death = 60,
 		/datum/attribute/skill/misc/riding = 40,
-		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/polearms/staves = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/swords = 20,

@@ -17,7 +17,9 @@
 	w_class = WEIGHT_CLASS_NORMAL
 	slot_flags = ITEM_SLOT_HIP
 	associated_skill = /datum/attribute/skill/combat/whipsflails
-	smeltresult = /obj/item/ingot/iron
+	melt_amount = 100
+	melting_material = /datum/material/iron
+	smeltresult = null
 	pickup_sound = 'sound/foley/equip/equip_armor_chain.ogg'
 	drop_sound = 'sound/foley/dropsound/chain_drop.ogg'
 	equip_sound = 'sound/foley/equip/equip_armor_chain.ogg'
@@ -73,7 +75,7 @@
 	icon_state = "flail"
 	force = DAMAGE_GOOD_FLAIL
 	smeltresult = null
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
 	sellprice = 35
 	item_weight = 1.4 KILOGRAMS
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_STEEL
@@ -83,6 +85,7 @@
 	desc = "An ancient knightly flail made of worked steel, with a flanged head. An effective and brutal design."
 	icon_state = "aflail"
 	item_weight = 1.4 KILOGRAMS
+	melting_material = /datum/material/steel
 
 /obj/item/weapon/flail/sflail/necraflail
 	name = "swift journey"
@@ -100,8 +103,7 @@
 	force = DAMAGE_GOOD_FLAIL - 1
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_SILVER
 	minstr = 4
-	smeltresult = null
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	sellprice = 90
 	item_weight = 1 KILOGRAMS
 
@@ -111,7 +113,7 @@
 
 /obj/item/weapon/flail/silver/noc
 	name = "lunar flail"
-	desc = "A shining silver flail, bane of all who lurk in the night and mounted with a crescent moon. Slice the nitebeasts apart."
+	desc = "A shining truesilver flail, bane of all who lurk in the night and mounted with a crescent moon. Slice the nitebeasts apart."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
 	icon_state = "moonflail"
 	sharpness = IS_SHARP
@@ -119,6 +121,8 @@
 	possible_item_intents = list(FLAIL_LNGSTRIKE, FLAIL_LNGSMASH, FLAIL_LNGCUT)
 	wlength = WLENGTH_GREAT
 	examine_highlight_type = /datum/examine_highlight/divine_weapon/noc
+	melting_material = /datum/material/truesilver
+	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_TRUESILVER
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
@@ -158,7 +162,7 @@
 	force = DAMAGE_GOOD_FLAIL + 2
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLACKSTEEL
 	minstr = 4
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	sellprice = 120
 	item_weight = 1 KILOGRAMS
 
@@ -171,7 +175,6 @@
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_BLOODSTEEL
 	minstr = 5
 	melting_material = /datum/material/bloodsteel
-	melt_amount = 100
 	sellprice = 0
 	item_weight = 1.2 KILOGRAMS
 
@@ -266,7 +269,6 @@
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_STEEL
 	slot_flags = ITEM_SLOT_BACK
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	melt_amount = 150
 	sellprice = 250

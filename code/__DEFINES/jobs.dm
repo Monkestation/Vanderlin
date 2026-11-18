@@ -59,7 +59,6 @@
 #define FACTION_QUEST "Quest"
 
 #define FACTION_TOWN "Town"
-#define SUB_FACTION_KEEP "Keep"
 #define FACTION_FOREIGNERS "Foreigners"
 #define FACTION_MIGRANTS "Migrants"
 #define FACTION_UNDEAD "Undead"
@@ -82,6 +81,14 @@
 #define FACTION_LEYLINE "Leyline"
 #define FACTION_OVERLORD "Overlord"
 #define FACTION_BLOOD_MAGIC	"Blood Magic"
+
+#define SUB_FACTION_KEEP "Keep"
+#define SUB_FACTION_GARRISON "Garrison"
+#define SUB_FACTION_ROYAL "Royal Family"
+#define SUB_FACTION_COURT "Royal Court"
+#define SUB_FACTION_MAGEGUILD "Mage Guild"
+#define SUB_FACTION_CHURCH "Church"
+#define SUB_FACTION_LUNAR_ORDER "Lunar Order"
 
 #define NOBLEMEN		(1<<0)
 #define GARRISON		(1<<1)

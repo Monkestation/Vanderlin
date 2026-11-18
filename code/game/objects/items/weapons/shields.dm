@@ -168,6 +168,7 @@
 	melting_material = /datum/material/iron
 	melt_amount = 75
 	item_weight = 4 KILOGRAMS
+	smeltresult = null
 
 /obj/item/weapon/shield/tower/spidershield
 	name = "spider shield"
@@ -224,7 +225,6 @@
 	parrysound = list('sound/combat/parry/shield/metalshield (1).ogg','sound/combat/parry/shield/metalshield (2).ogg','sound/combat/parry/shield/metalshield (3).ogg')
 	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_STEEL
 	sellprice = 30
-	smeltresult = /obj/item/ingot/steel_slag
 	melting_material = /datum/material/steel
 	design_chosen = FALSE
 	item_weight = 4 KILOGRAMS
@@ -285,13 +285,13 @@
 	. = ..()							//+0 force, +100 int, +1 def, make silver
 	AddComponent(/datum/component/psyblessed, TRUE, 0, FALSE, 100, 1, TRUE)
 
-/obj/item/weapon/shield/tower/metal/darksteel
-	name = "darksteel shield"
+/obj/item/weapon/shield/tower/metal/avantyne
+	name = "avantyne shield"
 	desc = "An interloper in causality's ever-so-fragile stream, woven from wafers to ward against those who're not yet ready to comprehend \
 	the gospel of Her disciples. Zizo sought to ward Her children from extinction, but failed; and in the throes of divine mania, She had come \
 	to realize that this world was no longer worth saving."
 	icon_state = "zizoshield"
-	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_SHIELD * INTEGRITY_MOD_AVANTYNE
 	sellprice = 0
 	melting_material = /datum/material/avantyne
 	melt_amount = 100

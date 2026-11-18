@@ -83,7 +83,7 @@
 	minimum_distance = 5
 	ranged_cooldown_time = 70
 	ai_controller = /datum/ai_controller/deepone_ranged
-	var/allowed_projectile_types = list(/obj/projectile/magic/frostbolt, /obj/projectile/magic/energy/rogue3, /obj/projectile/magic/repel)
+	var/allowed_projectile_types = list(/obj/projectile/magic/frostbolt, /obj/projectile/magic/arcyne_bolt, /obj/projectile/magic/repel)
 
 /mob/living/simple_animal/hostile/deepone/wiz/boss
 	wander = FALSE

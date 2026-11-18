@@ -16,6 +16,7 @@
 		/datum/attribute/skill/magic/druidic = 40,
 		/datum/attribute/skill/misc/medicine = 30,
 		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms/staves = 30,
 		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/labor/butchering = 20,

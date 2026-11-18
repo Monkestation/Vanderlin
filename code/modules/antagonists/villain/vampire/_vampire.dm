@@ -131,15 +131,14 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 	show_coven_selection(vampdude)
 
 /datum/antagonist/vampire/proc/show_coven_selection(mob/living/carbon/human/vampdude)
+	selected_covens += /datum/coven/bloodheal
 	var/list/coven_options = list()
-	var/list/available_covens = list()
 
 	// Get all available covens
 	for(var/coven_type in subtypesof(/datum/coven))
 		var/datum/coven/temp_coven = new coven_type
 		// Only show covens that aren't clan-restricted or can be used by custom clans
-		if(!temp_coven.clan_restricted)
-			available_covens += coven_type
+		if(!temp_coven.clan_restricted && !istype(temp_coven, /datum/coven/bloodheal))
 			coven_options[temp_coven.name] = coven_type
 		qdel(temp_coven)
 
@@ -147,12 +146,6 @@ GLOBAL_LIST_EMPTY(vampire_objects)
 		to_chat(vampdude, span_warning("No covens available for selection."))
 		finalize_custom_clan(vampdude)
 		return
-
-	// Select first coven
-	var/first_choice = input(vampdude, "Choose your first coven:", "Coven Selection") as null|anything in coven_options
-	if(first_choice)
-		selected_covens += coven_options[first_choice]
-		coven_options -= first_choice
 
 	// Select second coven
 	if(length(coven_options))
