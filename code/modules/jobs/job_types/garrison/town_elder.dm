@@ -266,8 +266,8 @@
 	beltr = /obj/item/weapon/pick/paxe
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	backl = /obj/item/storage/backpack/backpack
+	neck = /obj/item/storage/belt/pouch/coins/mid
 	backpack_contents = list(
-		/obj/item/storage/belt/pouch/coins/mid = 1,
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/storage/keyring/master_of_crafts_and_labor = 1,
 		/obj/item/weapon/hammer/steel = 1
