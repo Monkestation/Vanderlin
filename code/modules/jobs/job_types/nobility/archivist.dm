@@ -67,6 +67,7 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 8,
+		STAT_PERCEPTION = 3,
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
@@ -74,6 +75,11 @@
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 30,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 3,
 		/datum/attribute/skill/educated/mathematics = 60
 	)
 
@@ -81,6 +87,7 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 8,
+		STAT_PERCEPTION = 3,
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
@@ -88,6 +95,11 @@
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 50,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
+		/datum/attribute/skill/misc/athletics = 3,
 		/datum/attribute/skill/educated/mathematics = 60
 	)
 
@@ -159,6 +171,11 @@
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/educated/mathematics = 40
 	)
 
@@ -174,6 +191,11 @@
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
+		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/educated/mathematics = 40
 	)
 

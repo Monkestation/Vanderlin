@@ -1,8 +1,10 @@
 /datum/attribute_holder/sheet/job/steward
 	raw_attribute_list = list(
-		STAT_STRENGTH = -2,
-		STAT_INTELLIGENCE = 5,
+		STAT_INTELLIGENCE = 4,
+		STAT_PERCEPTION = 2,
+		STAT_SPEED = 1,
 		STAT_CONSTITUTION = -2,
+		STAT_STRENGTH = -1,
 		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/educated/reading = 60,
@@ -10,6 +12,11 @@
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/lockpicking = 60,
+		/datum/attribute/skill/combat/wrestling = 20,
+		/datum/attribute/skill/combat/unarmed = 10,
+		/datum/attribute/skill/misc/swimming = 20,
+		/datum/attribute/skill/misc/climbing = 20,
+		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/educated/mathematics = 50
 	)
 
@@ -85,14 +92,17 @@
 		if("Dagger")
 			weapon_choice = new /obj/item/weapon/knife/dagger/steel/royal(spawned)
 			scabbard_choice = new /obj/item/weapon/scabbard/knife/royal(spawned)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 33, 33)
 
 		if("Rapier")
 			weapon_choice = new /obj/item/weapon/sword/rapier/dec(spawned)
 			scabbard_choice = new /obj/item/weapon/scabbard/sword/royal(spawned)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
 
 		if("Cane Blade")
 			weapon_choice = new /obj/item/weapon/sword/rapier/caneblade(spawned)
 			scabbard_choice = new /obj/item/weapon/scabbard/cane(spawned)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
 
 	if(scabbard_choice && weapon_choice)
 		if(SEND_SIGNAL(scabbard_choice, COMSIG_TRY_STORAGE_INSERT, weapon_choice, null, TRUE, FALSE))
