@@ -1,0 +1,5 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - balance: "Enforcer and Ninja katanas can use all four main intents one-handed, instead of only two-handed."
+  - balance: "Enforcer scabbards now have the same parry strength as shields."

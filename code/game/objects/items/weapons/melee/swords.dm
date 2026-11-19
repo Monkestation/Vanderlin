@@ -201,13 +201,18 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/sword/silver/truesilver
+/obj/item/weapon/sword/truesilver
 	name = "truesilver sword"
 	desc = "A gleaming sword forged of truesilver, the perfect implement for keeping the nite safe."
 	icon_state = "lunar_sword"
+	max_blade_int = 240
 	sellprice = 80
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/sword/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/truesilver)
 
 /obj/item/weapon/sword/bloodsteel
 	name = "bloodsteel sword"
@@ -349,7 +354,7 @@
 
 /obj/item/weapon/sword/sabre/noc/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 
 //................ Cutlass ............... //
 /obj/item/weapon/sword/sabre/cutlass
@@ -748,13 +753,19 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/sword/rapier/silver/truesilver
+/obj/item/weapon/sword/rapier/truesilver
 	name = "truesilver rapier"
 	desc = "An elegant rapier forged of truesilver. An aristocratic take on hunting nite creachers."
 	icon_state = "lunar_rapier"
+	force = DAMAGE_SWORD - 2
+	max_blade_int = 240 // .8 of base steel
 	melting_material = /datum/material/truesilver
 	sellprice = 80
 	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/sword/rapier/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/truesilver)
 
 /obj/item/weapon/sword/rapier/eora
 	name = "\proper heartstring"
@@ -1209,13 +1220,18 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/sword/long/silver/truesilver
+/obj/item/weapon/sword/long/truesilver
 	name = "truesilver longsword"
 	desc = "A finely-crafted longsword forged from truesilver."
 	icon_state = "lunar_longsword"
+	max_blade_int = 240
 	sellprice = 180
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/sword/long/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/truesilver)
 
 /obj/item/weapon/sword/long/oldpsysword //Not attainable
 	name = "old psydonian longsword"

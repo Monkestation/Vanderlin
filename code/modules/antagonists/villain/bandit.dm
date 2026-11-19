@@ -6,7 +6,7 @@
 	job_rank = ROLE_BANDIT
 	antag_hud_type = ANTAG_HUD_BANDIT
 	antag_hud_name = ROLE_BANDIT
-	var/tri_amt
+	var/reward_amt
 	var/contrib
 	antag_flags = FLAG_ANTAG_CAP_IGNORE
 	confess_lines = list(
@@ -76,7 +76,7 @@
 
 /datum/antagonist/bandit/roundend_report()
 	if(owner?.current)
-		var/amt = tri_amt
+		var/amt = reward_amt
 		var/the_name = owner.name
 		if(ishuman(owner.current))
 			var/mob/living/carbon/human/H = owner.current
@@ -84,5 +84,5 @@
 		if(!amt)
 			to_chat(world, "[the_name] was a bandit.")
 		else
-			to_chat(world, "[the_name] was a bandit. He stole [amt] shiny piles worth of loot.")
+			to_chat(world, "[the_name] was a bandit. They stole [amt] thief's blessings worth of loot.")
 	return

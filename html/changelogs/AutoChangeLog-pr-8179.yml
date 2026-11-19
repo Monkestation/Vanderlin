@@ -1,6 +1,0 @@
-author: "grungussuss"
-delete-after: True
-changes:
-  - rscadd: "Iron bar doors can now be shot through"
-  - rscadd: "Braziers can now be shot through"
-  - rscadd: "crates/chests can now be sho through"

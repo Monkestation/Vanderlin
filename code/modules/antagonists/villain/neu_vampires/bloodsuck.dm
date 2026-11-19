@@ -34,6 +34,9 @@
 		human_victim.add_bite_animation()
 
 	for(var/atom/I in victim.get_equipped_items())
+		var/datum/enchantment/truesilver/true_ench = SSenchantment.get_enchantment(I, /datum/enchantment/truesilver)
+		if(true_ench?.on_bite(I, src))
+			return 0
 		var/datum/enchantment/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/silver)
 		if(ench?.on_bite(I, src))
 			return 0

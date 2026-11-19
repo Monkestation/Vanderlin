@@ -983,7 +983,7 @@
 /datum/anvil_recipe/weapons/truesilver/halberd
 	name = "Truesilver Halberd"
 	additional_items = list(/obj/item/ingot/truesilver = 1, /obj/item/grown/log/tree/small = 1)
-	created_item = /obj/item/weapon/polearm/halberd/silver/truesilver
+	created_item = /obj/item/weapon/polearm/halberd/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/greataxe
 	name = "Truesilver Greataxe"
@@ -997,42 +997,42 @@
 
 /datum/anvil_recipe/weapons/truesilver/dagger
 	name = "Truesilver Daggers"
-	created_item = /obj/item/weapon/knife/dagger/silver/truesilver
+	created_item = /obj/item/weapon/knife/dagger/truesilver
 	output_amount = 2
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/truesilver/misericorde
 	name = "Truesilver Misericorde"
-	created_item = /obj/item/weapon/knife/dagger/silver/truesilver/misericorde
+	created_item = /obj/item/weapon/knife/dagger/truesilver/misericorde
 	craftdiff = 3
 
 /datum/anvil_recipe/weapons/truesilver/barmace
 	name = "Truesilver Barmace"
 	additional_items = list(/obj/item/ingot/truesilver = 2)
-	created_item = /obj/item/weapon/mace/silver/barmace/lunar
+	created_item = /obj/item/weapon/mace/truesilver_barmace
 
 /datum/anvil_recipe/weapons/truesilver/hammer
 	name = "Truesilver Warhammer"
 	additional_items = list(/obj/item/ingot/truesilver = 1)
-	created_item = /obj/item/weapon/mace/warhammer/silver/truesilver
+	created_item = /obj/item/weapon/mace/warhammer/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/sword
 	name = "Truesilver Sword"
-	created_item = /obj/item/weapon/sword/silver/truesilver
+	created_item = /obj/item/weapon/sword/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/longsword
 	name = "Truesilver Longsword"
 	additional_items = list(/obj/item/ingot/truesilver = 1)
-	created_item = /obj/item/weapon/sword/long/silver/truesilver
+	created_item = /obj/item/weapon/sword/long/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/rapier
 	name = "Truesilver Rapier"
-	created_item = /obj/item/weapon/sword/rapier/silver/truesilver
+	created_item = /obj/item/weapon/sword/rapier/truesilver
 
 /datum/anvil_recipe/weapons/truesilver/whip
 	name = "Truesilver Whip"
 	additional_items = list(/obj/item/natural/hide/cured = 2)
-	created_item = /obj/item/weapon/whip/silver/truesilver
+	created_item = /obj/item/weapon/whip/truesilver
 
 // --------------- Psydonite --------------------
 /datum/anvil_recipe/weapons/psy/axe

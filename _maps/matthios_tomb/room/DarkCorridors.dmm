@@ -21,8 +21,8 @@
 "bQ" = (
 /obj/structure/table/wood/counter/end,
 /obj/item/book/granter/spell/magick/greaterfireball{
-	pixel_y = 11;
-	pixel_x = 15
+	pixel_y = 6;
+	pixel_x = 19
 	},
 /turf/open/floor/blocks/stonered,
 /area/under/tomb/indoors/church)
@@ -65,8 +65,7 @@
 /area/under/tomb)
 "ha" = (
 /obj/structure/spider/stickyweb,
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /turf/open/floor/cobble,
 /area/under/tomb)
 "hM" = (
@@ -78,8 +77,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb)
 "in" = (
-/obj/structure/closet/crate/chest/old_crate,
-/obj/effect/spawner/map_spawner/loot/magic,
+/obj/effect/dungeon_loot_spawner/high/chest,
 /turf/open/floor/cobble,
 /area/under/tomb/cave/wet)
 "ip" = (
@@ -90,6 +88,7 @@
 "iB" = (
 /obj/machinery/light/fueled/firebowl,
 /obj/structure/trap/fire,
+/obj/structure/fluff/statue/knight,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors/church)
 "iC" = (
@@ -159,16 +158,12 @@
 /obj/structure/fluff/walldeco/chains,
 /turf/closed/wall/mineral/stone,
 /area/under/tomb/cave/wet)
-"pZ" = (
-/obj/effect/spawner/map_spawner/loot/potion_stats,
-/turf/open/floor/cobble/alt,
-/area/under/tomb)
 "qe" = (
 /obj/structure/fluff/walldeco/chains,
 /turf/closed/wall/mineral/stone,
 /area/under/tomb)
 "qi" = (
-/obj/item/clothing/ring/gold/rontz,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/cobblerock,
 /area/under/tomb)
 "qk" = (
@@ -217,6 +212,7 @@
 /area/under/tomb/cave/wet)
 "vk" = (
 /obj/machinery/light/fueled/firebowl,
+/obj/structure/fluff/statue/knight/r,
 /turf/open/floor/blocks/stonered/tiny,
 /area/under/tomb/indoors/church)
 "vR" = (
@@ -225,13 +221,11 @@
 /turf/open/floor/grass,
 /area/under/tomb/wilds)
 "wx" = (
-/obj/structure/closet/crate/chest/lootbox,
-/obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/dungeon_loot_spawner/high/chest,
 /turf/open/floor/cobble,
 /area/under/tomb)
 "wN" = (
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/effect/spawner/map_spawner/loot/medium,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/cobble,
 /area/under/tomb)
 "xd" = (
@@ -240,14 +234,12 @@
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
 "xg" = (
-/obj/structure/fluff/statue/astrata,
+/obj/structure/fluff/statue/astrata{
+	pixel_x = 0
+	},
 /obj/structure/trap/fire,
 /turf/open/floor/blocks/stonered,
 /area/under/tomb/indoors/church)
-"xp" = (
-/obj/effect/spawner/map_spawner/loot/rare,
-/turf/open/floor/cobble,
-/area/under/tomb)
 "xr" = (
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/cobble,
@@ -259,10 +251,6 @@
 "yO" = (
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/cobble/alt,
-/area/under/tomb)
-"yU" = (
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/cobble,
 /area/under/tomb)
 "zq" = (
 /turf/open/openspace,
@@ -350,7 +338,7 @@
 /area/under/tomb)
 "Ir" = (
 /obj/effect/decal/remains/human,
-/obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/cobble,
 /area/under/tomb/cave/wet)
 "IE" = (
@@ -378,14 +366,9 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cobble/alt,
 /area/under/tomb)
-"KG" = (
-/mob/living/simple_animal/hostile/retaliate/spider,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/cobble,
-/area/under/tomb)
 "KH" = (
 /obj/structure/trap/poison,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/cobble,
 /area/under/tomb)
 "KO" = (
@@ -462,8 +445,7 @@
 /area/under/tomb/wilds)
 "QO" = (
 /obj/structure/fluff/walldeco/chains,
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /turf/open/floor/cobble,
 /area/under/tomb)
 "RU" = (
@@ -482,10 +464,6 @@
 /obj/effect/decal/remains/cabbit,
 /obj/structure/flora/grass/water/reeds,
 /turf/open/water/swamp,
-/area/under/tomb/cave/wet)
-"Su" = (
-/obj/effect/spawner/map_spawner/loot/rare,
-/turf/open/floor/cobble,
 /area/under/tomb/cave/wet)
 "Sy" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
@@ -511,8 +489,7 @@
 /turf/open/floor/cobble/alt,
 /area/under/tomb)
 "TT" = (
-/obj/structure/closet/crate/chest/lootbox,
-/obj/effect/spawner/map_spawner/loot/medium,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /turf/open/floor/cobble,
 /area/under/tomb)
 "Uk" = (
@@ -525,7 +502,7 @@
 /turf/open/floor/cobble,
 /area/under/tomb/cave/wet)
 "UX" = (
-/obj/effect/spawner/map_spawner/loot/potion_stats,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/cobble,
 /area/under/tomb)
 "WB" = (
@@ -687,7 +664,7 @@ IE
 (4,1,1) = {"
 IE
 wx
-TT
+UX
 IE
 tu
 tu
@@ -723,7 +700,7 @@ IE
 IE
 XX
 pq
-KG
+LN
 XX
 TJ
 TJ
@@ -735,7 +712,7 @@ QO
 qk
 Sy
 IE
-pq
+wN
 pq
 pq
 LN
@@ -763,11 +740,11 @@ tm
 TJ
 pq
 tu
-wN
+pq
 pq
 pq
 dQ
-yU
+pq
 pq
 XX
 XX
@@ -787,7 +764,7 @@ Sy
 dQ
 pq
 LN
-pZ
+TJ
 XX
 Xw
 XX
@@ -803,7 +780,7 @@ XX
 XX
 pq
 pq
-yU
+pq
 IE
 TJ
 XX
@@ -904,7 +881,7 @@ IE
 ZY
 TJ
 IE
-TT
+pq
 TT
 IE
 "}
@@ -977,7 +954,7 @@ IE
 pq
 iC
 nK
-xp
+pq
 XX
 pq
 En
@@ -1051,7 +1028,7 @@ cD
 cD
 cD
 RY
-Su
+cD
 IK
 ft
 cD
@@ -1287,7 +1264,7 @@ YJ
 Pv
 SE
 ER
-SE
+ER
 Uk
 SE
 Pv
@@ -1447,7 +1424,7 @@ pq
 Pv
 PR
 Uk
-PR
+ER
 Uk
 PR
 Pv
