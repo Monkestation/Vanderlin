@@ -1,6 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - rscadd: "Added Truesilver Enchantment for Truesilver weapons."
-  - code_imp: "Moved truesilver weapons off of silver subtyping."
-  - bugfix: "Fixed on_examine signals for Daewalker and Nitewarden."
