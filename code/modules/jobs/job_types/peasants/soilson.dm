@@ -13,7 +13,7 @@
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/labor/farming = 40,
 		/datum/attribute/skill/labor/taming = 50,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/craft/cooking/brewing = 30,
 		/datum/attribute/skill/craft/cooking/winemaking = 30,
@@ -61,7 +61,8 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
-		TRAIT_SEEDKNOW
+		TRAIT_SEEDKNOW,
+		TRAIT_INGREDIENT_INSIGHT
 	)
 	book_type = /obj/item/recipe_book/agriculture
 
@@ -147,7 +148,8 @@
 
 	traits = list(
 		TRAIT_DEADNOSE,
-		TRAIT_SEEDKNOW
+		TRAIT_SEEDKNOW,
+		TRAIT_INGREDIENT_INSIGHT
 	)
 
 /datum/outfit/soilchild

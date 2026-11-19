@@ -12,7 +12,7 @@
 		/datum/attribute/skill/craft/bombs = 30,
 		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/misc/swimming = 10,

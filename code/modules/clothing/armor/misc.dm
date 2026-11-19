@@ -16,6 +16,7 @@
 	icon_state = "corset"
 	armor_type = /datum/armor/padded/bad
 	body_parts_covered = COVERAGE_VEST
+	blocksound = SOFTHIT
 	item_weight = 230 GRAMS
 
 //................ Amazon chainkini ............... //
@@ -150,8 +151,8 @@
 	icon_state = "light_brigandine"
 	body_parts_covered = COVERAGE_TORSO
 	max_integrity = ARMOR_INT_CHEST_PLATE_BRIGANDINE
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
+	melt_amount = 100
 	armor_class = AC_LIGHT //steel version of the studded leather armor now
 	w_class = WEIGHT_CLASS_BULKY
 	prevent_crits = ALL_EXCEPT_STAB
@@ -178,3 +179,4 @@
 	max_integrity = ARMOR_INT_CHEST_MEDIUM_SCALE //250 INT, or a little above Iron - and +100 INT over the Copper variant.
 	armor_class = AC_LIGHT
 	armor_type = /datum/armor/brigandine
+	melt_amount = 100

@@ -180,6 +180,7 @@
 
 //Valorian Duelist Merc - On par with grenzelhoftian's stats.
 /obj/item/clothing/shoes/nobleboot/duelboots
+	name = "duelist boots"
 	desc = "Boots custom fit for a Valorian Duelist. Footwork is paramount in a duel, so good boots are a must."
 	armor_type = /datum/armor/boots/leather/noble/good
 

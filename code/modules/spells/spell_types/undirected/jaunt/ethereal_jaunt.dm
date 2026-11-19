@@ -30,7 +30,7 @@
 	name = "Lesser Ethereal Jaunt"
 	cooldown_time = 95 SECONDS
 	required_form = FORM_ARCANE
-	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_ALTERATION
 	required_level = 12 //lol
 	initial_charges = 3

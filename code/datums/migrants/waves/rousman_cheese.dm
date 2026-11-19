@@ -21,8 +21,8 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/craft/cooking = 30,
 		/datum/attribute/skill/craft/crafting = 30,
-		/datum/attribute/skill/misc/reading = 30,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/reading = 30,
+		/datum/attribute/skill/educated/mathematics = 20,
 	)
 
 /datum/job/migrant/rousman_cheese/overseer
@@ -77,7 +77,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/craft/cooking = 30,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/migrant/rousman_cheese/cheesemaker
@@ -120,7 +120,7 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/craft/cooking = 20,
 		/datum/attribute/skill/craft/crafting = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 	)
 
 /datum/job/migrant/rousman_cheese/cheesemonger

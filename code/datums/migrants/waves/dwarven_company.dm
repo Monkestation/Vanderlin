@@ -30,7 +30,7 @@
 		/datum/attribute/skill/craft/smelting = 20,
 		/datum/attribute/skill/craft/engineering = 10,
 		/datum/attribute/skill/craft/traps = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/job/migrant/dwarven_company/captain
@@ -83,7 +83,7 @@
 		/datum/attribute/skill/craft/smelting = 30,
 		/datum/attribute/skill/craft/engineering = 30,
 		/datum/attribute/skill/craft/traps = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/attribute_holder/sheet/job/migrant/weaponsmith/old
@@ -106,7 +106,7 @@
 		/datum/attribute/skill/craft/smelting = 30,
 		/datum/attribute/skill/craft/engineering = 30,
 		/datum/attribute/skill/craft/traps = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/job/migrant/dwarven_company/weaponsmith
@@ -169,7 +169,7 @@
 		/datum/attribute/skill/craft/smelting = 30,
 		/datum/attribute/skill/craft/engineering = 30,
 		/datum/attribute/skill/craft/traps = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/attribute_holder/sheet/job/migrant/armorsmith/old
@@ -192,7 +192,7 @@
 		/datum/attribute/skill/craft/smelting = 30,
 		/datum/attribute/skill/craft/engineering = 30,
 		/datum/attribute/skill/craft/traps = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 	)
 
 /datum/job/migrant/dwarven_company/armorsmith

@@ -12,7 +12,7 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/swimming = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sneaking = 40,
 		/datum/attribute/skill/misc/stealing = 20,
 		/datum/attribute/skill/misc/lockpicking = 30,

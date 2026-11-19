@@ -51,7 +51,12 @@
 				remove_status_effect(/datum/status_effect/debuff/dreamytime)
 				if(mind)
 					INVOKE_ASYNC(mind.sleep_adv, TYPE_PROC_REF(/datum/sleep_adv, advance_cycle))
-					if(!mind.antag_datums || !mind.antag_datums.len)
+					var/can_triumph = TRUE
+					if(mind.antag_datums || mind.antag_datums.len)
+						for(var/datum/antagonist/antag_datum in mind.antag_datums)
+							if(antag_datum.blocks_triumphs)
+								can_triumph = FALSE
+					if(can_triumph)
 						allmig_reward++
 						var/static/list/towner_jobs
 						towner_jobs = GLOB.serf_positions | GLOB.peasant_positions | GLOB.apprentices_positions | GLOB.youngfolk_positions | GLOB.company_positions

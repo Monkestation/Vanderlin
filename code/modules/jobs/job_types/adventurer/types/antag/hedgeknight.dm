@@ -14,11 +14,11 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/labor/butchering = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/job/advclass/bandit/hedgeknight //heavy knight class - just like black knight adventurer class. starts with heavy armor training and plate, but less weapon skills than brigand, sellsword and knave

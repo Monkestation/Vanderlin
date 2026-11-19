@@ -149,13 +149,14 @@
 	icon_state = "visioncirclet"
 	item_state = "visioncirclet"
 	sellprice = VALUE_MAGIC_ITEM_STRONG
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/crown/circlet/vision/equipped(mob/user, slot)
 	. = ..()
 	if ((slot & ITEM_SLOT_HEAD) && istype(user))
-		ADD_TRAIT(user, TRAIT_THERMAL_VISION, "mysical_circlet")
+		ADD_TRAIT(user, TRAIT_THERMAL_VISION, "mystical_circlet")
 	else
-		REMOVE_TRAIT(user, TRAIT_THERMAL_VISION, "mysical_circlet")
+		REMOVE_TRAIT(user, TRAIT_THERMAL_VISION, "mystical_circlet")
 	user.update_sight()
 
 //............... Nosleep Circlet ............... //
@@ -165,6 +166,7 @@
 	icon_state = "sleepcirclet"
 	item_state = "sleepcirclet"
 	sellprice = VALUE_MAGIC_ITEM_WEAK
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/crown/circlet/sleepless/equipped(mob/user, slot)
 	. = ..()
@@ -180,6 +182,7 @@
 	icon_state = "stinkcirclet"
 	item_state = "stinkcirclet"
 	sellprice = VALUE_MAGIC_ITEM_WEAK
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/crown/circlet/stink/equipped(mob/user, slot)
 	. = ..()

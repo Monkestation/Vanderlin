@@ -5,13 +5,13 @@
 		STAT_CONSTITUTION = 5,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/craft/alchemy = 60,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/magic/arcane = 50,
 		/datum/attribute/skill/magic/arcane/death = 60,
 		/datum/attribute/skill/misc/riding = 40,
-		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/polearms/staves = 40,
 		/datum/attribute/skill/combat/wrestling = 30,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/swords = 20,
@@ -20,7 +20,7 @@
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/athletics = 10,
 
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/antagonist/lich
@@ -95,16 +95,41 @@
 	lich.update_age_stats(lich.age, TRUE)
 	skele_look()
 	equip_lich()
+	add_verb(lich, /mob/living/carbon/human/proc/lich_self_destruct)
+
+/mob/living/carbon/human/proc/lich_self_destruct()
+	set name = "Self Destruct"
+	set category = "RoleUnique.Lich"
+
+	var/confirm = tgui_alert(usr, "Confirm Self Destruct", "Confirm", DEFAULT_INPUT_CONFIRMATIONS)
+	if(confirm != CHOICE_CONFIRM)
+		return
+	death(FALSE)
+	message_admins("Lich [key_name_admin(usr)] self-destructed.")
+	log_game("Lich [key_name(usr)] self-destructed.")
+
+	var/turf/targetturf = get_turf(usr)
+	var/last_dist = 0
+	for(var/turf/T as anything in spiral_range_turfs(4, targetturf))
+		if(!T)
+			continue
+		var/dist = get_dist(targetturf, T)
+		if(dist > last_dist)
+			last_dist = dist
+			sleep(2 + min(4 - last_dist, 12) * 0.5) //gets faster
+		new /obj/effect/temp_visual/target/lightning(T)
 
 /datum/antagonist/lich/on_removal()
 	var/mob/living/lich_mob = owner.current
 	lich_mob.remove_spells(source = src)
 	UnregisterSignal(lich_mob, COMSIG_LIVING_DEATH)
+	remove_verb(lich_mob, /mob/living/carbon/human/proc/lich_self_destruct)
 	return ..()
 
 /datum/antagonist/lich/greet()
 	. = ..()
 	to_chat(owner.current, span_userdanger("The secret of immortality is mine, but this is not enough. A thousand lichdoms have risen and fallen over the eras. Mine will be the one to last."))
+	to_chat(owner.current, span_userdanger("I can forcibly sever my connection to the mortal plane and restore at a phylactery by Self Destructing. (This is a verb in the Role Unique tab)"))
 	owner.announce_objectives()
 	owner.current.playsound_local(get_turf(owner.current), 'sound/music/lichintro.ogg', 80, FALSE, pressure_affected = FALSE)
 

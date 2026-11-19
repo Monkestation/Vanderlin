@@ -6,7 +6,7 @@
 	dropshrink = 0.6
 	drop_sound = 'sound/foley/dropsound/book_drop.ogg'
 	force = 5
-	associated_skill = /datum/attribute/skill/misc/reading
+	associated_skill = /datum/attribute/skill/educated/reading
 	name = "tome of the arcyne"
 	desc = "A crackling, glowing book, filled with runes and symbols that hurt the mind to stare at."
 	item_weight = 547 GRAMS

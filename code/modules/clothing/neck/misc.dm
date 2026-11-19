@@ -270,7 +270,8 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
-	smeltresult = /obj/item/ingot/steel_slag
+	smeltresult = null
+	melting_material = /datum/material/steel
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_MEDIUM
@@ -315,7 +316,7 @@
 	name = "iron chain coif"
 	desc = "A chain coif made of interwoven iron rings. Affordable protection against arrows and blades, \
 			but should be used as padding rather than relied upon as armor."
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/neck/maille/iron
 	max_integrity = INTEGRITY_OLD_STRONG
@@ -324,7 +325,7 @@
 	name = "neck protector"
 	icon_state = "copperneck"
 	desc = "An antique and simple protection for the neck, used more as an accessory by the common folk. But poor protection is still better than nothing."
-	smeltresult = /obj/item/ingot/copper
+	melting_material = /datum/material/copper
 
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/neck/leather/good
@@ -343,6 +344,7 @@
 	icon_state = "bevor"
 	flags_inv = HIDEFACIALHAIR
 	melting_material = /datum/material/steel
+	smeltresult = null
 	melt_amount = 75
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
@@ -374,7 +376,6 @@
 	name = "iron bevor"
 	desc = "A piece of iron plate armor meant to protect the throat and neck of its wearer against decapitation, extending the protection of armor plates."
 	icon_state = "ibevor"
-	smeltresult = /obj/item/ingot/iron
 	melting_material = /datum/material/iron
 
 	armor_type = /datum/armor/plate/bad
@@ -392,7 +393,9 @@
 	equip_sound = 'sound/foley/equip/equip_armor.ogg'
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	break_sound = 'sound/foley/breaksound.ogg'
-	smeltresult = /obj/item/ingot/iron
+	smeltresult = null
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	clothing_flags = CANT_SLEEP_IN
 
 	armor_class = AC_HEAVY
@@ -518,7 +521,7 @@
 	desc = "A series of resplendant golden plates designed to protect the neck, traditionally worn atop a jacket or cuirass. The holy sigil between its buckled halves promises to carry the flame of its wearer, no matter what strike's poised its way."
 	icon_state = "goldgorget"
 	armor_class = AC_HEAVY //Ceremonial. Heavy is the head that bares the burden.
-	smeltresult = /obj/item/ingot/gold
+	melting_material = /datum/material/gold
 	grid_height = 96
 	grid_width = 96
 	sellprice = 200
@@ -531,6 +534,7 @@
 	name = "silver gorget"
 	desc = "A sparkling set of plates designed to protect the neck, traditionally worn atop a jacket or cuirass. They seem to shine with moonlight, even in the darkness."
 	icon_state = "sgorget"
+	melting_material = /datum/material/silver
 
 /obj/item/clothing/neck/gorget/silver/Initialize()
 	. = ..()
@@ -569,7 +573,7 @@
 	name = "bronze gorget"
 	desc = "A heavy collar of great age, meant to protect the neck."
 	icon_state = "aasimarneck"
-	smeltresult = /obj/item/ingot/bronze
+	melting_material = /datum/material/bronze
 	armor_type = /datum/armor/neck/maille/good
 
 /obj/item/clothing/neck/highcollier
@@ -589,7 +593,9 @@
 	adjustable = CAN_CADJUST
 	toggle_icon_state = TRUE
 	blocksound = CHAINHIT
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
+	smeltresult = null
 	clothing_flags = CANT_SLEEP_IN
 	max_integrity = INTEGRITY_OLD_STRONGEST
 	prevent_crits = ALL_EXCEPT_BLUNT
@@ -629,7 +635,7 @@
 	body_parts_covered = NECK|MOUTH
 	armor_type = /datum/armor/neck/maille/iron
 	max_integrity = INTEGRITY_OLD_STRONG
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 
 /obj/item/clothing/neck/highcollier/iron/renegadecollar
 	icon_state = "renegadecollar"

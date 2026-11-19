@@ -92,14 +92,14 @@
 		STAT_PERCEPTION = 2,
 		STAT_INTELLIGENCE = 3,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/labor/mathematics = 40,
+		/datum/attribute/skill/educated/mathematics = 40,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/music = 50
 	)
@@ -111,14 +111,14 @@
 		STAT_PERCEPTION = 3,
 		STAT_INTELLIGENCE = 4,
 		/datum/attribute/skill/craft/crafting = 30,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/riding = 40,
-		/datum/attribute/skill/labor/mathematics = 50,
+		/datum/attribute/skill/educated/mathematics = 50,
 		/datum/attribute/skill/combat/polearms = 30,
 		/datum/attribute/skill/misc/music = 50
 	)
@@ -191,8 +191,8 @@
 		STAT_STRENGTH = 1,
 		STAT_ENDURANCE = 2,
 		STAT_INTELLIGENCE = 2,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/educated/reading = 10,
+		/datum/attribute/skill/educated/mathematics = 10,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -227,8 +227,8 @@
 		STAT_STRENGTH = 1,
 		STAT_ENDURANCE = 3,
 		STAT_INTELLIGENCE = 3,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/labor/mathematics = 10,
+		/datum/attribute/skill/educated/reading = 10,
+		/datum/attribute/skill/educated/mathematics = 10,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/combat/axesmaces = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
@@ -266,8 +266,8 @@
 	beltr = /obj/item/weapon/pick/paxe
 	beltl = /obj/item/flashlight/flare/torch/lantern
 	backl = /obj/item/storage/backpack/backpack
+	neck = /obj/item/storage/belt/pouch/coins/mid
 	backpack_contents = list(
-		/obj/item/storage/belt/pouch/coins/mid = 1,
 		/obj/item/weapon/knife/hunting = 1,
 		/obj/item/storage/keyring/master_of_crafts_and_labor = 1,
 		/obj/item/weapon/hammer/steel = 1
@@ -283,7 +283,7 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
@@ -300,7 +300,7 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 50,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
@@ -314,7 +314,7 @@
 
 /datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/noc
 	raw_attribute_list = list(
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/attribute_holder/sheet/job/town_elder/hearth_acolyte/patron/pestra
@@ -507,7 +507,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/misc/reading = 40,
+		/datum/attribute/skill/educated/reading = 40,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/music = 60,
 		/datum/attribute/skill/misc/athletics = 20
@@ -527,7 +527,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/misc/reading = 50,
+		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/music = 60,
 		/datum/attribute/skill/misc/athletics = 20

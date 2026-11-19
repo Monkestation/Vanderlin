@@ -12,7 +12,7 @@
 	spell_flags = SPELL_RITUOS
 
 	required_form = FORM_ARCANE
-	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
+	associated_skill = /datum/attribute/skill/magic/arcane
 
 
 /datum/action/cooldown/spell/undirected/blade_ward/cast(atom/cast_on)

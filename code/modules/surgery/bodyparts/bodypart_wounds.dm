@@ -77,7 +77,7 @@
 /obj/item/bodypart/proc/add_wound(datum/wound/wound, silent = FALSE, crit_message = FALSE, forced = FALSE)
 	if(!wound || !owner)
 		return
-	if(!forced && (owner.status_flags & GODMODE))
+	if(!forced && HAS_TRAIT(owner, TRAIT_GODMODE))
 		return
 	if(!ispath(wound) && !istype(wound))
 		return
@@ -191,7 +191,7 @@
 
 /// Called in two cases, as an override to an attack after IE apply_damage on a zone. Or After an attack to return a wound.
 /obj/item/bodypart/proc/bodypart_attacked_by(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list(), incoming_germ, organ_bonus, pre_applied = FALSE)
-	if(!bclass || !dam || !owner || (owner.status_flags & GODMODE))
+	if(!bclass || !dam || !owner || HAS_TRAIT(owner, TRAIT_GODMODE))
 		return
 	dam *= damage_multiplier
 	// if(dam < 5 && bclass != WOUND_INTERNAL_BRUISE)
@@ -280,7 +280,7 @@
 			return crit_attempt
 
 /obj/item/bodypart/proc/try_crit(bclass, dam, mob/living/user, zone_precise, silent = FALSE, crit_message = FALSE, list/modifiers = list())
-	if(!bclass || isnum(bclass) || !dam || (owner.status_flags & GODMODE))
+	if(!bclass || isnum(bclass) || !dam || HAS_TRAIT(owner, TRAIT_GODMODE))
 		return FALSE
 	if(dam < 5)
 		return FALSE
@@ -349,7 +349,7 @@
 /obj/item/bodypart/proc/add_embedded_object(obj/item/embedder, silent = FALSE, crit_message = FALSE)
 	if(!embedder || !embedder.can_embed())
 		return FALSE
-	if(owner && ((owner.status_flags & GODMODE) || HAS_TRAIT(owner, TRAIT_PIERCEIMMUNE)))
+	if(owner && (HAS_TRAIT(owner, TRAIT_GODMODE) || HAS_TRAIT(owner, TRAIT_PIERCEIMMUNE)))
 		return FALSE
 	if(istype(embedder, /obj/item/natural/worms/leech))
 		record_round_statistic(STATS_LEECHES_EMBEDDED)

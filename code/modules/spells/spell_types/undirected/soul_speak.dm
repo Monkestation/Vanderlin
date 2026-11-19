@@ -61,7 +61,7 @@
 	called.summoned = TRUE
 	called.beingmoved = TRUE
 	called.invisibility = INVISIBILITY_OBSERVER
-	called.status_flags |= GODMODE
+	ADD_TRAIT(called, TRAIT_GODMODE, MAGIC_TRAIT)
 	called.Stun(61 SECONDS)
 	called.density = FALSE
 
@@ -97,7 +97,7 @@
 	soul.beingmoved = FALSE
 	soul.fully_heal()
 	soul.invisibility = initial(soul.invisibility)
-	soul.status_flags &= ~GODMODE
+	REMOVE_TRAIT(soul, TRAIT_GODMODE, MAGIC_TRAIT)
 	soul.update_cone()
 	soul.density = initial(soul.density)
 	SSdeath_arena.add_fighter(soul, soul.mind?.last_death)

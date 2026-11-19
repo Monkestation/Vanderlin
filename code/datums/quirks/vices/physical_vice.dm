@@ -13,7 +13,7 @@
 	if(!ishuman(owner))
 		return
 	var/mob/living/carbon/human/H = owner
-	owner.adjust_skill_level(/datum/attribute/skill/misc/reading, 10)
+	owner.adjust_skill_level(/datum/attribute/skill/educated/reading, 10)
 
 	H.put_in_hands(new /obj/item/clothing/face/spectacles())
 	H.become_nearsighted(type)

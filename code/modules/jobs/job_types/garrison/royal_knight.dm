@@ -7,7 +7,7 @@
 	department_flag = GARRISON
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_ROYALKNIGHT
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_GARRISON, SUB_FACTION_KEEP)
 	outfit = /datum/outfit/royalknight
 	total_positions = 2
 	spawn_positions = 2
@@ -142,9 +142,7 @@
 	shirt = /obj/item/clothing/armor/gambeson/arming
 	wrists = /obj/item/storage/keyring/manorguard
 	backl = /obj/item/storage/backpack/satchel
-	backpack_contents = list(
-		/obj/item/weapon/knife/dagger/steel/special = 1
-	)
+	beltl = /obj/item/weapon/knife/dagger/steel/special
 	belt = /obj/item/storage/belt/leather/steel
 	beltr = /obj/item/weapon/sword/arming
 	scabbards = list(/obj/item/weapon/scabbard/sword/noble)
@@ -175,8 +173,8 @@
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/reading = 10,
+		/datum/attribute/skill/educated/mathematics = 30
 )
 
 /datum/job/advclass/royalknight/knight
@@ -216,7 +214,7 @@
 		STAT_INTELLIGENCE = 1,
 		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/wrestling = 30,
-		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/shields = 20,
 		/datum/attribute/skill/combat/polearms = 20,
 		/datum/attribute/skill/combat/whipsflails = 20,
@@ -228,8 +226,8 @@
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
-		/datum/attribute/skill/misc/reading = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/reading = 10,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/craft/engineering = 30,
 	)
 

@@ -11,7 +11,7 @@
 	aoe_radius = 4
 
 	required_form = FORM_ARCANE
-	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "BE TORN APART!!!"

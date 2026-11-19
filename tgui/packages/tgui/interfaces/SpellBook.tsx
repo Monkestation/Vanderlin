@@ -359,7 +359,7 @@ const LearnPage = (props: {
       </Stack.Item>
 
       <Stack.Item grow style={{ minHeight: 0 }}>
-        {activeForm === "Death" && (
+        {activeForm === "Necromancy" && (
         <Collapsible title="Warning">
           The use of Death Magic is frowned upon by The Divine Patheon, you should expect great scrutiny when wielding it. <br></br>
           Certain spells within this form are heretical under The Ten and if recognised may lead to excommunication or execution. <br></br>
@@ -367,8 +367,8 @@ const LearnPage = (props: {
         )}
         {activeForm === "Hemomancy" && (
         <Collapsible title="Warning">
-          The use of Hemomancy is considered heresy by The Divine Pantheon, and is frowned upon even by The Four. <br></br>
-          Attempting to use Hemomancy without the proper instruction will be inefficient and potentially dangerous.
+          The use of Blood Magic is considered heresy by The Divine Pantheon, and is frowned upon even by The Four. <br></br>
+          Attempting to use Blood Magic without the proper instruction will be inefficient and potentially dangerous.
         </Collapsible>
         )}
         <Stack fill>

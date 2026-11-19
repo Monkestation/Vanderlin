@@ -16,7 +16,7 @@
 		/datum/attribute/skill/combat/unarmed = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/misc/climbing = 40,

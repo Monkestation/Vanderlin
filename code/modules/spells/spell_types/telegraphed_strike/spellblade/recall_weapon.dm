@@ -9,7 +9,7 @@
 	self_cast_possible = TRUE
 
 	required_form = FORM_ARCANE
-	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
+	associated_skill = /datum/attribute/skill/magic/arcane
 	required_technique = TECHNIQUE_IMBUE
 
 	spell_cost = 15

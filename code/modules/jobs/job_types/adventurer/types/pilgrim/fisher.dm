@@ -14,7 +14,7 @@
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 	)
 
@@ -35,7 +35,7 @@
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 	)
 

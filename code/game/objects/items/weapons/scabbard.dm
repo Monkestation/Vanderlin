@@ -90,6 +90,11 @@
 	new /obj/item/weapon/knife/dagger/steel(src)
 	update_appearance(UPDATE_ICON_STATE)
 
+/obj/item/weapon/scabbard/knife/hidden/bs_misericorde/Initialize()
+	. = ..()
+	new /obj/item/weapon/knife/dagger/blacksteel/misericorde(src)
+	update_appearance(UPDATE_ICON_STATE)
+
 /obj/item/weapon/scabbard/sword
 	name = "scabbard"
 	desc = "A scabbard designed to hold a sword. The natural conclusion for those wishing to carry longblades."
@@ -228,7 +233,7 @@
 	item_state = "kazscab"
 	force = DAMAGE_SWORD - 15
 	force_wielded = DAMAGE_SWORD - 15
-	wdefense = GREAT_PARRY
+	wdefense = SHIELD_PARRY
 	slot_flags = ITEM_SLOT_HIP|ITEM_SLOT_BACK
 	w_class = WEIGHT_CLASS_BULKY
 	anvilrepair = /datum/attribute/skill/craft/carpentry

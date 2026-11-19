@@ -10,7 +10,7 @@
 	can_cast_on_self = TRUE
 
 	required_form = FORM_ARCANE
-	associated_skill = /datum/attribute/skill/magic/arcane/arcyne
+	associated_skill = /datum/attribute/skill/magic/arcane
 
 	cooldown_time = 1 MINUTES
 

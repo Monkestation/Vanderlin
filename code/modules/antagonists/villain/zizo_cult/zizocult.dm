@@ -30,7 +30,7 @@
 		STAT_STRENGTH = 2,
 	)
 	clamped_adjustment = list(
-		/datum/attribute/skill/misc/reading = list(30, 30),
+		/datum/attribute/skill/educated/reading = list(30, 30),
 	)
 
 /datum/antagonist/zizocultist

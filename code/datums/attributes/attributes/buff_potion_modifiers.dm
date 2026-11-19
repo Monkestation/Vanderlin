@@ -135,7 +135,7 @@
 	id = "Farmer's Almanac Tonic"
 	attribute_list = list(
 		/datum/attribute/skill/labor/farming = 12,
-		/datum/attribute/skill/labor/mathematics = 12
+		/datum/attribute/skill/educated/mathematics = 12
 	)
 
 /datum/attribute_modifier/beastwhisper
@@ -189,7 +189,7 @@
 /datum/attribute_modifier/scholars_ink
 	id = "Scholar's Ink"
 	attribute_list = list(
-		/datum/attribute/skill/misc/reading = 12,
+		/datum/attribute/skill/educated/reading = 12,
 		/datum/attribute/skill/misc/music = 8,
 		/datum/attribute/skill/misc/medicine = 12
 	)

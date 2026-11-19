@@ -18,7 +18,7 @@
 		/datum/attribute/skill/misc/athletics = 40,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/riding = 40,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 	)
 
 /datum/job/advclass/wretch/disgraced

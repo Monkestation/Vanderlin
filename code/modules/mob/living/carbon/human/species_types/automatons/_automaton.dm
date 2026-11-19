@@ -18,6 +18,11 @@
 	culture = /datum/culture/universal/heartfelt
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
 
+/mob/living/carbon/human/species/automaton/Initialize()
+	. = ..()
+	if(CONFIG_GET(flag/allow_automatons))
+		return INITIALIZE_HINT_LATELOAD
+
 /mob/living/carbon/human/species/automaton/vessel/LateInitialize()
 	. = ..()
 	AddComponent(/datum/component/ghost_vessel, /obj/item/riddleofsteel)
@@ -45,10 +50,10 @@
 		/datum/attribute/skill/labor/butchering = 10,
 		/datum/attribute/skill/labor/farming = 10,
 		/datum/attribute/skill/labor/fishing = 10,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/labor/mining = 10,
 		/datum/attribute/skill/misc/music = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/sewing = 10,
 	)
 

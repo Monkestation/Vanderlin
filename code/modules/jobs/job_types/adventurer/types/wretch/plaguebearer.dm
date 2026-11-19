@@ -12,7 +12,7 @@
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/carpentry = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/medicine = 40,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/craft/alchemy = 50,
