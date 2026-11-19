@@ -1836,7 +1836,7 @@
 	icon_state = "eastsword1"
 	force_wielded = DAMAGE_SWORD_WIELD + 3
 	wdefense = GOOD_PARRY
-	possible_item_intents = list(KATANA_ONEHAND, SWORD_STRIKE)
+	possible_item_intents = list(KATANA_CUT, KATANA_ARC, SWORD_STRIKE, PRECISION_CUT)
 	gripped_intents = list(KATANA_CUT, KATANA_ARC, SWORD_STRIKE, PRECISION_CUT)
 	alt_intents = null
 
