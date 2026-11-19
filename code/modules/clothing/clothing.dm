@@ -43,8 +43,6 @@
 
 	var/clothing_flags = NONE
 
-	var/misc_flags = NONE
-
 	var/toggle_icon_state = TRUE //appends _t to our icon state when toggled
 
 	//Var modification - PLEASE be careful with this I know who you are and where you live

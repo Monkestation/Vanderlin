@@ -41,7 +41,7 @@
 
 	var/static/list/weapons = list(
 		"Battleaxe & Cudgel" = list(/obj/item/weapon/axe/battle, /obj/item/weapon/mace/cudgel),
-		"Flail & Shield" = list(/obj/item/weapon/shield/wood, /obj/item/weapon/flail),
+		"Flail & Shield" = list(/obj/item/weapon/shield/tower/metal, /obj/item/weapon/flail),
 	)
 
 	spawned.select_equippable(player_client, weapons, message = "Choose your weapon.", title = "TAKE UP ARMS.")

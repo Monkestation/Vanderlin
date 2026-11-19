@@ -31,7 +31,7 @@
 /obj/structure/minecart_rail/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_TURF_IGNORE_SLOWDOWN)))
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK,  land_sound = 'sound/foley/jumpland/metalland.ogg')
 	set_minecart_dirs(initial = TRUE)
 
 /obj/structure/minecart_rail/LateInitialize()

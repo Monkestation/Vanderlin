@@ -466,6 +466,12 @@
 #undef MASO_DEAD_RETRY_DELAY
 #undef MASO_GRACE_PERIOD
 
+/datum/quirk/vice/hallucinations
+	name = "Hallucinations"
+	desc = "You suffer from chronic hallucinations that can make reality difficult to discern."
+	point_value = 4
+	traits_to_add = list(TRAIT_SCHIZO_FLAW)
+
 // Chronic Pain Vices
 /datum/quirk/vice/chronic_arthritis
 	name = "Chronic Arthritis"

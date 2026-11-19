@@ -15,6 +15,7 @@
 		/datum/attribute/skill/combat/bows = 50,
 		/datum/attribute/skill/combat/swords = 60,
 		/datum/attribute/skill/combat/polearms = 60,
+		/datum/attribute/skill/combat/polearms/staves = 60,
 		/datum/attribute/skill/combat/whipsflails = 60,
 		/datum/attribute/skill/misc/climbing = 50,
 		/datum/attribute/skill/misc/athletics = 50,

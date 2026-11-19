@@ -133,10 +133,13 @@
 		return
 	if(isliving(user))
 		. = TRUE
-		var/new_flags = Z_MOVE_CLIMBING_FLAGS & ~ZMOVE_LYING_CHECKS
-		if(!user.can_z_move(DOWN, src, GET_TURF_BELOW(src), z_move_flags = new_flags|ZMOVE_FEEDBACK))
-			return
-		INVOKE_ASYNC(src, PROC_REF(start_traveling), user, DOWN)
+		attempt_climbing_down(user)
+
+/turf/open/openspace/proc/attempt_climbing_down(mob/user)
+	var/new_flags = Z_MOVE_CLIMBING_FLAGS & ~ZMOVE_LYING_CHECKS
+	if(!user.can_z_move(DOWN, src, GET_TURF_BELOW(src), z_move_flags = new_flags|ZMOVE_FEEDBACK))
+		return
+	INVOKE_ASYNC(src, PROC_REF(start_traveling), user, DOWN)
 
 /turf/open/openspace/proc/start_traveling(mob/living/user, direction)
 	var/turf/target = get_step_multiz(src, direction)

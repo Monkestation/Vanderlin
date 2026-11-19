@@ -943,9 +943,9 @@
 	icon_state = "noble1"
 	lockids = list(ACCESS_NOBLE1)
 
-/obj/item/key/mnoble2_yellow
+/obj/item/key/mnoble2_green
 	name = "Key of the noble house 2"
-	desc = "A very detailed steel key, has gold details and a yellow gemstone on it... is for the noble house number two."
+	desc = "A very detailed steel key, has gold details and a green gemstone on it... is for the noble house number two."
 	icon_state = "noble2"
 	lockids = list(ACCESS_NOBLE2)
 

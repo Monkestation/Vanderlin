@@ -28,7 +28,6 @@
 
 	ignore_bloody = TRUE
 
-	werewolf_infection_probability = 0
 	associated_bclasses = FRACTURE_BCLASSES
 	viable_zones = GENERIC_FRACTURE_BODYPARTS
 

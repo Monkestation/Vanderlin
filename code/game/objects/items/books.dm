@@ -653,7 +653,7 @@
 
 	var/newtitle = SANITIZE_HEAR_MESSAGE(tgui_input_text(user, "Enter the title of the manuscript:", max_length = MAX_CHARTER_LEN))
 	var/newauthor = SANITIZE_HEAR_MESSAGE(tgui_input_text(user, "Enter the author's name:", max_length = MAX_CHARTER_LEN))
-	var/newcategory = tgui_input_list(user, "Select the category of the manuscript:", list("Apocrypha & Grimoires", "Myths & Tales", "Legends & Accounts", "Thesis", "Eoratica"))
+	var/newcategory = tgui_input_list(user, "Select the category of the manuscript", "Book Category", list("Apocrypha & Grimoires", "Myths & Tales", "Legends & Accounts", "Thesis", "Eoratica"))
 	var/selection = tgui_input_list(user, "Choose a book style", "Book Style", book_icons)
 	if(!selection)
 		return

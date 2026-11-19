@@ -7,7 +7,7 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = 19 //lol?
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 	total_positions = 1
 	spawn_positions = 1
 
@@ -61,7 +61,7 @@
 	)
 
 /datum/job/advclass/archivist
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 
 /datum/attribute_holder/sheet/job/chronicler
 	raw_attribute_list = list(
@@ -105,6 +105,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/chronicler
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/chronicler/old
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/archivist/chronicler/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()

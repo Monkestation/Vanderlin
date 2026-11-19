@@ -1,39 +1,39 @@
 /obj/item/weapon/sword/arming/zizo_arming
-	name = "darksteel arming sword"
+	name = "avantyne arming sword"
 	desc = "A short, dark red blade, built upon a reliable design that has served for centuries. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon_state = "zizoarming"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	melting_material = /datum/material/avantyne
 	melt_amount = 100
-	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/weapon/sword/rapier/zizo_rapier
-	name = "darksteel rapier"
+	name = "avantyne rapier"
 	desc = "A tapered, dark red blade with a specialized stabbing tip. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon_state = "zizorapier"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	melting_material = /datum/material/avantyne
 	melt_amount = 100
-	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/weapon/sword/long/zizo_longsword
-	name = "darksteel longsword"
+	name = "avantyne longsword"
 	desc = "A long, dark red hand-and-a-half blade. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon = 'icons/roguetown/weapons/64/swords.dmi'
 	icon_state = "zizolongsword"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	melting_material = /datum/material/avantyne
 	melt_amount = 100
-	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword
-	name = "darksteel greatsword"
+	name = "avantyne greatsword"
 	desc = "A dark red blade of dangerous proportions. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon_state = "zizogsw"
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	item_weight = 2.4 KILOGRAMS
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/weapon/sword/long/greatsword/claymore/zizo_greatsword/getonmobprop(tag)
 	. = ..()
@@ -49,14 +49,14 @@
 				return list("shrink" = 0.6,"sx" = -1,"sy" = 1,"nx" = 0,"ny" = 1,"wx" = 2,"wy" = 0,"ex" = 0,"ey" = 0,"nturn" = 0,"sturn" = 0,"wturn" = 70,"eturn" = 15,"nflip" = 0,"sflip" = 0,"wflip" = 0,"eflip" = 0,"northabove" = 1,"southabove" = 0,"eastabove" = 0,"westabove" = 0)
 
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser
-	name = "darksteel kriegsmesser"
+	name = "avantyne kriegsmesser"
 	desc = "A dark red curved blade. Called forth from Her will, if you wield this blade you are to be feared - if you do not, you are dead."
 	icon_state = "zizosword"
 	wdefense = ULTMATE_PARRY
 	sellprice = 0 // Super evil Zizo sword, nobody wants this
 	item_weight = 2.3 KILOGRAMS
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/weapon/sword/long/greatsword/zizo_kriegsmesser/getonmobprop(tag)
 	. = ..()
