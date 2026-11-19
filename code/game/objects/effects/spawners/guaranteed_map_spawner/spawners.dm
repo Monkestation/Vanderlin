@@ -10,7 +10,7 @@
 		/obj/item/key/miner = 1,
 		/obj/item/key/tailor = 1,
 		/obj/item/key/mnoble1_blue = 1,
-		/obj/item/key/mnoble2_yellow = 1,
+		/obj/item/key/mnoble2_green = 1,
 		/obj/item/key/mnoble3_red = 1,
 		/obj/item/key/soilson = 1,
 		/obj/item/key/butcher = 1,

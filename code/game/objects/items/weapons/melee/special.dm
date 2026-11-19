@@ -94,7 +94,7 @@
 	var/area/target_area = get_area(human_target)
 	if(istype(target_area, /area/indoors/town/keep) || istype(target_area, /area/outdoors/town/keep))
 		pass = TRUE
-	else if(human_target.has_faction(SUB_FACTION_KEEP))
+	else if(human_target.has_faction(SUB_FACTION_KEEP) || human_target.has_faction(SUB_FACTION_GARRISON))
 		pass = TRUE
 
 	if(!pass)
@@ -216,6 +216,99 @@
 		human_user.log_message("has silenced [human_target.real_name] with the [src]!", LOG_ATTACK)
 		to_chat(human_target, span_danger("I'm silenced by the staff!"))
 		COOLDOWN_START(src, staff, 10 SECONDS)
+
+//................ Moonlight Staff ............... //
+/obj/item/weapon/polearm/woodstaff/oracle
+	name = "moonlight staff"
+	desc = "A symbolic staff wielded by the Lunar Oracle of Noc."
+	icon_state = "lunar_staff"
+	force_wielded =  DAMAGE_STAFF_WIELD + 1
+	resistance_flags = FIRE_PROOF // Leniency for unique items
+	dropshrink = 0.6
+	sellprice = 100
+	possible_item_intents = list(POLEARM_BASH, /datum/intent/oracle_smite, /datum/intent/oracle_silence)
+	gripped_intents = list(POLEARM_BASH, /datum/intent/mace/smash/wood, /datum/intent/oracle_smite, /datum/intent/oracle_silence)
+	COOLDOWN_DECLARE(staff)
+	item_weight = 1.2 KILOGRAMS
+	smeltresult = null
+	melting_material = null
+	melt_amount = 0
+	pickpocket_difficulty = SKILL_RANK_EXPERT
+	examine_highlight_type = /datum/examine_highlight/divine/oracle
+
+/datum/intent/oracle_smite
+	name = "smite"
+	blade_class = null
+	icon_state = "inshock"
+	tranged = TRUE
+	noaa = TRUE
+
+/datum/intent/oracle_silence
+	name = "silence"
+	blade_class = null
+	icon_state = "insilence"
+	tranged = TRUE
+	noaa = TRUE
+
+/obj/item/weapon/polearm/woodstaff/oracle/afterattack(atom/target, mob/user, flag)
+	. = ..()
+	if(get_dist(user, target) > 7)
+		return
+	user.changeNext_move(CLICK_CD_MELEE)
+
+	if(!ishuman(user))
+		return
+
+	var/mob/living/carbon/human/human_user = user
+	if(!is_oracle_job(human_user.mind?.assigned_role))
+		to_chat(user, span_danger("The staff doesn't obey me."))
+		return
+
+	if(!ishuman(target))
+		return
+
+	var/mob/living/carbon/human/human_target = target
+	user.visible_message(span_warning("[human_user] points [src] at [human_target]."))
+
+	if(human_target == human_user)
+		return
+	if(human_target.can_block_magic(MAGIC_RESISTANCE_HOLY))
+		return
+
+	var/pass = FALSE
+	var/area/target_area = get_area(human_target)
+	if(istype(target_area, /area/indoors/town/church) || istype(target_area, /area/outdoors/exposed/church))
+		pass = TRUE
+	else if(human_target.mind?.assigned_role.department_flag & CHURCHMEN)
+		pass = TRUE
+	else if(HAS_TRAIT(human_target, TRAIT_LUNAR_ORDER))
+		pass = TRUE
+
+	if(!pass)
+		to_chat(human_user, span_warning("You cannot use [src] against [human_target]"))
+		return FALSE
+
+	if(!COOLDOWN_FINISHED(src, staff))
+		to_chat(user, span_danger("The [src] is not ready yet! [round(COOLDOWN_TIMELEFT(src, staff) / 10, 1)] seconds left!"))
+		return
+
+	if(istype(user.used_intent, /datum/intent/oracle_smite))
+		human_user.visible_message(span_warning("[human_user] smites [human_target] with \the [src]."))
+		user.Beam(target, icon_state = "solar_beam", time = 0.5 SECONDS) // LIGHTNING
+		playsound(user, 'sound/magic/lightningshock.ogg', 70, TRUE)
+		human_target.electrocute_act(5, src)
+		human_user.log_message("has smitten [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm smitten by the staff!"))
+		COOLDOWN_START(src, staff, 30 SECONDS)
+		return
+
+	if(istype(user.used_intent, /datum/intent/oracle_silence))
+		human_user.visible_message(span_warning("[human_user] silences [human_target] with \the [src]."))
+		human_target.set_silence(20 SECONDS)
+		human_user.log_message("has silenced [human_target.real_name] with the [src]!", LOG_ATTACK)
+		to_chat(human_target, span_danger("I'm silenced by the staff!"))
+		COOLDOWN_START(src, staff, 10 SECONDS)
+
 
 /obj/item/weapon/mace/stunmace
 	name = "stunmace"
@@ -372,7 +465,8 @@
 	associated_skill = /datum/attribute/skill/combat/unarmed
 	pickup_sound = 'sound/foley/equip/swordsmall2.ogg'
 	thrown_bclass = BCLASS_CUT
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	item_weight = 400 GRAMS
 
 /obj/item/weapon/katar/psydon
@@ -382,6 +476,7 @@
 	icon_state = "psykatar"
 	item_weight = 400 GRAMS
 	smeltresult = /obj/item/ingot/silverblessed
+	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/katar/psydon/Initialize(mapload)
@@ -415,7 +510,7 @@
 	desc = "A glimmering silver blade that sits above the user's fist. Used by holy monks who otherwise prefer unarmed combat to fight the creatures of the nite."
 	icon_state = "silverkatar"
 	item_weight = 400 GRAMS
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	max_integrity = INTEGRITY_HANDCLAW * INTEGRITY_MOD_SILVER
 
 /obj/item/weapon/katar/silver/Initialize(mapload)
@@ -466,6 +561,7 @@
 	associated_skill = /datum/attribute/skill/combat/unarmed
 	anvilrepair = /datum/attribute/skill/craft/weapon_repair
 	melting_material = /datum/material/steel
+	melt_amount = 100
 	melt_amount = 75
 	grid_width = 64
 	grid_height = 32
@@ -523,8 +619,7 @@
 	name = "iron knuckles"
 	desc = "A mean-looking pair of iron knuckles. Not that good in quality, but they do the job."
 	icon_state = "ironknuckle"
-	smeltresult = /obj/item/ingot/iron
-	melting_material = null
+	melting_material = /datum/material/iron
 	force = DAMAGE_KNUCKLES - 2
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_IRON
 
@@ -532,8 +627,7 @@
 	name = "bronze knuckles"
 	desc = "A mean-looking pair of bronze knuckles. Mildly heavier than its steel counterpart, making it a solid defensive option, if somewhat less wieldy."
 	icon_state = "bronzeknuckle"
-	smeltresult = /obj/item/ingot/bronze
-	melting_material = null
+	melting_material = /datum/material/bronze
 	force = DAMAGE_KNUCKLES - 4
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BRONZE
 
@@ -542,8 +636,7 @@
 	desc = "A simple piece of harm that has been moulded from pure silver, and further studded to stop errant strikes dead in their tracks. Though ostensibly holy, these hefty knuckleweights are \
 	more strongly associated with underground pugilistic tournaments; a solid right hook could drive more-than-enough force to blow a yeoman's jaw clean off."
 	icon_state = "silverknuckle"
-	smeltresult = /obj/item/ingot/silver
-	melting_material = null
+	melting_material = /datum/material/silver
 	force = DAMAGE_KNUCKLES + 2
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_SILVER
 
@@ -555,7 +648,6 @@
 	name = "blacksteel knuckles"
 	desc = "An exotic use for an expensive metal - punch them with wealth."
 	icon_state = "bsknuckle"
-	smeltresult = /obj/item/ingot/blacksteel
-	melting_material = null
+	melting_material = /datum/material/blacksteel
 	force = DAMAGE_KNUCKLES + 4
 	max_integrity = INTEGRITY_MACE * INTEGRITY_MOD_BLACKSTEEL

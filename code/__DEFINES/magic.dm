@@ -126,6 +126,7 @@ DEFINE_BITFIELD(antimagic_flags, list(
 #define SPELL_STAMINA 2
 /// Miracle, uses devotion and thus requires a devotion holder
 #define SPELL_DIVINE_MIRACLE 3
+/// Same as divine miracle, but ignores excommunication
 #define SPELL_UNHOLY_MIRACLE 4
 /// Cast with the essence gauntlet, using essence vials
 #define SPELL_ESSENCE 5

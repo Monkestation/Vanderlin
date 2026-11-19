@@ -1,6 +1,0 @@
-author: "realforest2001"
-delete-after: True
-changes:
-  - bugfix: "Vampire clan application should now work correctly."
-  - bugfix: "All vampires now get night vision."
-  - code_imp: "Replaced references to nitewalker with nitewarden."

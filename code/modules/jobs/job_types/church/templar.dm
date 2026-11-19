@@ -112,7 +112,7 @@
 	department_flag = CHURCHMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_TEMPLAR
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_CHURCH)
 	total_positions = 2
 	spawn_positions = 2
 
@@ -168,6 +168,7 @@
 			spawned.attributes?.add_sheet(/datum/attribute_holder/sheet/job/templar/patron/noc)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, JOB_TRAIT)
 			ADD_TRAIT(spawned, TRAIT_LUNAR_ORDER, JOB_TRAIT)
+			spawned.grant_language(/datum/language/celestial_moon)
 			spawned.cmode_music = 'sound/music/cmode/church/CombatNoc.ogg'
 			var/static/list/selectable = list(
 				"Moonlight Khopesh" = /obj/item/weapon/sword/sabre/noc,

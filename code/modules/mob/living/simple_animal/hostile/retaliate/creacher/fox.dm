@@ -56,6 +56,7 @@
 	attack_sound = list('sound/vo/mobs/vw/attack (1).ogg','sound/vo/mobs/vw/attack (2).ogg','sound/vo/mobs/vw/attack (3).ogg','sound/vo/mobs/vw/attack (4).ogg')
 	dodgetime = 30
 	tame_chance = 25
+	lighting_alpha = 127
 
 
 /mob/living/simple_animal/hostile/retaliate/fox/Initialize()

@@ -13,10 +13,3 @@
 	if(HAS_TRAIT(owner, TRAIT_COVEN_BANE))
 		return FALSE
 	. = ..()
-
-/datum/action/cooldown/spell/undirected/shapeshift/rat_vampire/do_shapeshift(mob/living/caster)
-	. = ..()
-	if(!.)
-		return
-	var/mob/living/new_shape = .
-	new_shape.adjust_stat_modifier("[REF(src)]", list(STAT_SPEED = -5))

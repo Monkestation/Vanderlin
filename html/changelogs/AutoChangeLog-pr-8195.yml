@@ -1,0 +1,4 @@
+author: "realforest2001"
+delete-after: True
+changes:
+  - rscadd: "Returned bandit triumphs from Matthios Idol, maximum deterimined by Player-count/15 maxed at 4 per round."

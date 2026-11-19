@@ -18,6 +18,11 @@
 	culture = /datum/culture/universal/heartfelt
 	cmode_music = 'sound/music/cmode/towner/CombatPrisoner.ogg'
 
+/mob/living/carbon/human/species/automaton/Initialize()
+	. = ..()
+	if(CONFIG_GET(flag/allow_automatons))
+		return INITIALIZE_HINT_LATELOAD
+
 /mob/living/carbon/human/species/automaton/vessel/LateInitialize()
 	. = ..()
 	AddComponent(/datum/component/ghost_vessel, /obj/item/riddleofsteel)

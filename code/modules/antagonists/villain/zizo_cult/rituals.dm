@@ -274,7 +274,7 @@
 	playsound(center, pick('sound/items/bsmith1.ogg','sound/items/bsmith2.ogg','sound/items/bsmith3.ogg','sound/items/bsmith4.ogg'), 100, FALSE)
 
 /datum/ritual/summonarmor
-	name = "Summon Darksteel Armor"
+	name = "Summon Avantyne Armor"
 	special_requiment = /mob/living/carbon/human
 	description = "Place a body in the middle. Your enemies shall fear armor made from DARKSTEEL."
 	descrequiment = "A humanoid carcass."

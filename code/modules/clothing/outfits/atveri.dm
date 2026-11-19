@@ -103,6 +103,8 @@
 	block2add = null
 	worn_x_dimension = 32
 	worn_y_dimension = 48
+	melting_material = /datum/material/steel
+	melt_amount = 100
 
 /obj/item/clothing/head/helmet/leather/saiga/moose
 	name = "moose hood"
@@ -119,7 +121,7 @@
 	experimental_onhip = FALSE
 
 /obj/item/clothing/shoes/boots/leather/furlined
-	name = "fur-lined leather boots"
+	name = "fur-lined boots"
 	desc = "A pair of strong leather boots, designed to endure battle and the chill of the frozen north both."
 	icon_state = "atgervi_boots"
 	item_state = "atgervi_boots"

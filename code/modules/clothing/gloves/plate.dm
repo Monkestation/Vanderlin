@@ -14,7 +14,9 @@
 	drop_sound = 'sound/foley/dropsound/armor_drop.ogg'
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
 	sewrepair = null
-	smeltresult = /obj/item/ingot/iron //no 1 to 1 conversion
+	smeltresult = null
+	melting_material = /datum/material/steel
+	melt_amount = 75
 	flags_inv = HIDEHANDS
 	armor_class = AC_HEAVY
 	armor_type = /datum/armor/gloves/plate
@@ -35,6 +37,7 @@
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/gloves/plate/bad
 	max_integrity = INTEGRITY_OLD_STRONG
+	melting_material = /datum/material/iron
 
 /obj/item/clothing/gloves/plate/iron/banded
 	name = "banded iron gauntlets"
@@ -50,7 +53,7 @@
 	sleeved = 'icons/roguetown/clothing/special/onmob/rust_armor.dmi'
 	icon_state = "rustgloves"
 	item_state = "rustgloves"
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
 	sellprice = VALUE_IRON_ARMOR/2
 	armor_type = /datum/armor/gloves/plate/bad
 	max_integrity = INTEGRITY_OLD_STANDARD
@@ -63,7 +66,7 @@
 	mob_overlay_icon = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	sleeved = 'icons/roguetown/clothing/special/onmob/blkknight.dmi'
 	anvilrepair = /datum/attribute/skill/craft/blacksmithing
-	smeltresult = /obj/item/ingot/blacksteel
+	melting_material = /datum/material/blacksteel
 	armor_class = AC_MEDIUM
 	armor_type = /datum/armor/gloves/plate/blacksteel
 	item_weight = 1.65 KILOGRAMS
@@ -75,7 +78,7 @@
 	desc = "Finely forged gauntlets made out of silver."
 	icon_state = "silvergloves"
 	armor_type = /datum/armor/gloves/plate/silver
-	smeltresult = /obj/item/ingot/silver
+	melting_material = /datum/material/silver
 	item_weight = 2.94 KILOGRAMS
 	sellprice = VALUE_SILVER_ITEM
 
@@ -95,11 +98,11 @@
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 
 /obj/item/clothing/gloves/plate/inhumen/zizo
-	name = "darksteel gauntlets"
-	desc = "darksteel plate gauntlets. Called forth from the edge of what should be known. In Her name."
+	name = "avantyne gauntlets"
+	desc = "avantyne plate gauntlets. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizogauntlets"
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/clothing/gloves/plate/inhumen/matthios
 	name = "gilded gauntlets"
