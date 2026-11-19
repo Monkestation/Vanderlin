@@ -246,8 +246,17 @@
 /datum/ritual/soap
 	name = "Criminal's tool"
 	description = "Always clean-up after yourself. Unless you seek to send a message."
-	output = /obj/item/soap
+	output = /obj/item/soap/evil
 	ingredients = list(/obj/item/natural/cloth)
+
+/obj/item/soap/evil
+	name = "accursed soap"
+	desc = "It is pulsating."
+	clean_speed = 1
+	clean_effectiveness = 100
+	clean_strength = CLEAN_ALL
+	color = LIGHT_COLOR_BLOOD_MAGIC
+	uses = 200
 
 /datum/ritual/summonneant
 	name = "Summon Neant"
