@@ -20,17 +20,17 @@
 
 /datum/attribute_holder/sheet/job/minor_dagger
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/knives = list(20, 40)
+		/datum/attribute/skill/combat/knives = list(25, 40)
 	)
 
 /datum/attribute_holder/sheet/job/minor_swords
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(20, 40)
+		/datum/attribute/skill/combat/swords = list(25, 40)
 	)
 
 /datum/attribute_holder/sheet/job/minor_bows
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/bows = list(20, 40)
+		/datum/attribute/skill/combat/bows = list(25, 40)
 	)
 
 /datum/job/minor_noble

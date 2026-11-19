@@ -92,17 +92,17 @@
 		if("Dagger")
 			weapon_choice = new /obj/item/weapon/knife/dagger/steel/royal(spawned)
 			scabbard_choice = new /obj/item/weapon/scabbard/knife/royal(spawned)
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 33, 33)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 30, 30)
 
 		if("Rapier")
 			weapon_choice = new /obj/item/weapon/sword/rapier/dec(spawned)
 			scabbard_choice = new /obj/item/weapon/scabbard/sword/royal(spawned)
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 27, 30)
 
 		if("Cane Blade")
 			weapon_choice = new /obj/item/weapon/sword/rapier/caneblade(spawned)
 			scabbard_choice = new /obj/item/weapon/scabbard/cane(spawned)
-			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 33, 33)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/swords, 27, 30)
 
 	if(scabbard_choice && weapon_choice)
 		if(SEND_SIGNAL(scabbard_choice, COMSIG_TRY_STORAGE_INSERT, weapon_choice, null, TRUE, FALSE))

@@ -7,8 +7,8 @@
 		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/knives = 27,
-		/datum/attribute/skill/combat/swords = 30,
+		/datum/attribute/skill/combat/knives = 25,
+		/datum/attribute/skill/combat/swords = 27,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
@@ -30,8 +30,8 @@
 		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/combat/unarmed = 20,
-		/datum/attribute/skill/combat/knives = 30,
-		/datum/attribute/skill/combat/swords = 33,
+		/datum/attribute/skill/combat/knives = 27,
+		/datum/attribute/skill/combat/swords = 30,
 		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
@@ -45,7 +45,7 @@
 	)
 /datum/job/courtphys
 	title = JOB_COURT_PHYSICIAN
-	alt_titles = list("Court Chirurgian")
+	alt_titles = list("Court Chirurgeon")
 	tutorial = "One fateful evening at a royal banquet, your steady hand and sharp eye saved the royal bloodline. \
 	Now, you serve as the trusted healer of the crown, a living symbol of Pestra's favor. \
 	Your duty is clear: keep the monarch alive, no matter the cost."
