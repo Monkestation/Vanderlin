@@ -45,7 +45,7 @@
 	var/source_x = source_offsets[1]
 	var/source_y = source_offsets[2]
 
-	var/new_dir = get_dir(source_x - eyes_x, source_y - eyes_y)
+	var/new_dir = get_dir_from_offset(source_x - eyes_x, source_y - eyes_y)
 	skull_eyes.dir = new_dir
 
 /datum/hud/new_player/proc/everybody_shakes(datum/source)
