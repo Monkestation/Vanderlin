@@ -89,9 +89,9 @@
 	cloak = /obj/item/clothing/cloak/stabard/templar/noc
 	wrists = /obj/item/clothing/neck/psycross/silver/divine/noc
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltr = /obj/item/weapon/flail/silver/noc
+	beltr = /obj/item/weapon/flail/noc
 	backl = /obj/item/storage/backpack/satchel
-	backr = /obj/item/weapon/polearm/halberd/silver/truesilver
+	backr = /obj/item/weapon/polearm/halberd/truesilver
 	backpack_contents = list(
 		/obj/item/needle = 1,
 		/obj/item/storage/belt/pouch/coins/rich = 1,

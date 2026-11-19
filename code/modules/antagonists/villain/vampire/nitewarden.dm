@@ -59,7 +59,7 @@
 		TRAIT_NOAMBUSH,
 		TRAIT_NOHYGIENE, // too cool to stink
 		TRAIT_NOPAINSTUN,
-		TRAIT_SILVER_IMMUNE,
+		TRAIT_TRUESILVER_IMMUNE,
 	)
 	antag_memory = "Protect those who walk the nite.\n\
 		The dark creachers are always present.\n\
@@ -123,6 +123,8 @@
 	. = ..()
 
 /datum/antagonist/vampire/lord/nitewarden/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/daewalker))
+		return SPAN_GOD_ASTRATA("My Solar Counterpart.")
 	if(istype(examined_datum, /datum/antagonist/zombie))
 		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
@@ -130,21 +132,22 @@
 	if(istype(examined_datum, /datum/antagonist/purishep))
 		return span_red("Silverblood.")
 
-/datum/antagonist/vampire/lord/nitewarden/proc/on_examine(mob/living/carbon/human/blade, mob/living/carbon/human/user, list/examine_list)
-	if(!istype(blade) || !istype(user))
+/datum/antagonist/vampire/lord/nitewarden/proc/on_examine(mob/living/warden, mob/living/user, list/examine_list, list/P)
+	SIGNAL_HANDLER
+	if(warden == user)
 		return
-	if(blade == user)
+	if(!is_human_part_visible(warden, HIDEFACE))
 		return
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))
-		examine_list += span_boldred("Blood Drinker! They can have no excuses!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_boldred("Blood Drinker! They can have no excuses!"))
 	else if(user.mind?.has_antag_datum(/datum/antagonist/werewolf))
-		examine_list += span_boldred("The bloodsucker of Noc...")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_boldred("The bloodsucker of Noc..."))
 	else if(is_priest_job(user.mind?.assigned_role))
-		examine_list += SPAN_GOD_NOC("The servant of The Moon!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, SPAN_GOD_NOC("The servant of The Moon!"))
 	else if(HAS_TRAIT(user, TRAIT_LUNAR_ORDER))
-		examine_list += SPAN_GOD_NOC("The everwalking servant of The Prince!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, SPAN_GOD_NOC("The everwalking servant of The Prince!"))
 	else if(user.mind?.has_antag_datum(/datum/antagonist/maniac))
-		examine_list += span_green("Yet another legally distinct vampire hunter!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_green("Yet another legally distinct vampire hunter!"))
 
 /datum/antagonist/vampire/lord/nitewarden/greet()
 	to_chat(owner.current, span_danger(antag_memory))
@@ -166,20 +169,20 @@
 	belt = /obj/item/storage/belt/leather/plaquesilver
 	beltl = /obj/item/weapon/scabbard/sword/noble
 	backl = /obj/item/storage/backpack/satchel/black
-	r_hand = /obj/item/weapon/sword/long/silver/truesilver/nitewarden
+	r_hand = /obj/item/weapon/sword/long/truesilver/nitewarden
 	backpack_contents = list(
 		/obj/item/needle/blessed = 1,
 		/obj/item/reagent_containers/glass/bottle/stronghealthpot/labelled = 1,
-		/obj/item/weapon/knife/throwingknife/silver/truesilver = 1
+		/obj/item/weapon/knife/throwingknife/truesilver = 1
 	)
 
 /datum/outfit/nitewarden/post_equip(mob/living/carbon/human/H)
 	..()
 	var/datum/component/storage/concrete/scabbard/sword/holder = H.beltl?.GetComponent(/datum/component/storage/concrete/scabbard/sword)
-	holder?.set_holdable(list(/obj/item/weapon/sword/long/silver/truesilver/nitewarden), list())
+	holder?.set_holdable(list(/obj/item/weapon/sword/long/truesilver/nitewarden), list())
 
 
-/obj/item/weapon/sword/long/silver/truesilver/nitewarden
+/obj/item/weapon/sword/long/truesilver/nitewarden
 	name = "nite's grace"
 	desc = "The Moon Prince is watching."
 	force_wielded = DAMAGE_GREATSWORD_WIELD
@@ -190,19 +193,19 @@
 	sellprice = 0
 	slot_flags = 0 //scabbard only
 
-/obj/item/weapon/sword/long/silver/truesilver/nitewarden/Initialize(mapload)
+/obj/item/weapon/sword/long/truesilver/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/vampiric)
 	enchant(/datum/enchantment/anti_theft)
 
-/obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden
+/obj/item/weapon/knife/dagger/truesilver/misericorde/nitewarden
 	name = "nite's sting"
 	desc = "The Moon Prince is watching."
 	max_blade_int = 50000
 	max_integrity = 50000
 	resistance_flags = INDESTRUCTIBLE
 
-/obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden/Initialize(mapload)
+/obj/item/weapon/knife/dagger/truesilver/misericorde/nitewarden/Initialize(mapload)
 	. = ..()
 	enchant(/datum/enchantment/on_hit/lightning)
 	enchant(/datum/enchantment/anti_theft)
@@ -220,7 +223,7 @@
 	enchant(/datum/enchantment/life_eternal)
 	enchant(/datum/enchantment/leaping)
 	enchant(/datum/enchantment/anti_theft)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden
 	armor_type = /datum/armor/wrist/leather/advanced
@@ -230,5 +233,5 @@
 
 /obj/item/clothing/wrists/bracers/leather/scabbard/nitewarden/Initialize()
 	. = ..()
-	new /obj/item/weapon/knife/dagger/silver/truesilver/misericorde/nitewarden(src)
+	new /obj/item/weapon/knife/dagger/truesilver/misericorde/nitewarden(src)
 	update_appearance(UPDATE_ICON_STATE)

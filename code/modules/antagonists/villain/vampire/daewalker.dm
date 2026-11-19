@@ -119,6 +119,8 @@
 	. = ..()
 
 /datum/antagonist/vampire/lord/daewalker/examine_friendorfoe(datum/antagonist/examined_datum, mob/examiner, mob/examined)
+	if(istype(examined_datum, /datum/antagonist/vampire/lord/nitewarden))
+		return SPAN_GOD_NOC("My Lunar Counterpart.")
 	if(istype(examined_datum, /datum/antagonist/zombie))
 		return span_boldnotice("A deadite.")
 	if(istype(examined_datum, /datum/antagonist/skeleton))
@@ -127,21 +129,22 @@
 		return span_red("Silverblood.")
 
 
-/datum/antagonist/vampire/lord/daewalker/proc/on_examine(mob/living/carbon/human/blade, mob/living/carbon/human/user, list/examine_list)
-	if(!istype(blade) || !istype(user))
+/datum/antagonist/vampire/lord/daewalker/proc/on_examine(mob/living/daewalker, mob/living/carbon/human/user, list/examine_list, list/P)
+	SIGNAL_HANDLER
+	if(daewalker == user)
 		return
-	if(blade == user)
+	if(!is_human_part_visible(daewalker, HIDEFACE))
 		return
 	if(HAS_TRAIT(user, TRAIT_INQUISITION))
-		examine_list += span_boldred("TRAITOR! His capture has been ordered by the highest authority!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_boldred("TRAITOR! His capture has been ordered by the highest authority!"))
 	else if(user.mind?.has_antag_datum(/datum/antagonist/werewolf))
-		examine_list += span_boldred("The bloodsucker of Astrata...")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_boldred("The bloodsucker of Astrata..."))
 	else if(is_priest_job(user.mind?.assigned_role))
-		examine_list += SPAN_GOD_ASTRATA("The servant of our Sun Queen!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, SPAN_GOD_ASTRATA("The servant of our Sun Queen!"))
 	else if(istype(user.culture, /datum/culture/universal/grenzelhoft))
-		examine_list += span_boldred("The nitebeast of Grenz! He's here!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_boldred("The nitebeast of Grenz! He's here!"))
 	else if(user.mind?.has_antag_datum(/datum/antagonist/maniac))
-		examine_list += span_green("The legally distinct vampire hunter!")
+		LAZYADDASSOCLIST(examine_list, EXAMINE_SECT_FACE, span_green("The legally distinct vampire hunter!"))
 
 
 /datum/antagonist/vampire/lord/daewalker/greet()
