@@ -301,7 +301,7 @@
 	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/bars/grille/Initialize()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
 	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	dir = pick(GLOB.cardinals)
 	return ..()
@@ -367,7 +367,7 @@
 
 /obj/structure/bars/pipe/Initialize()
 	. = ..()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/bars/pipe/left
@@ -1129,11 +1129,17 @@
 	icon_state = "evilidol"
 	icon = 'icons/roguetown/misc/structure.dmi'
 
+/obj/structure/fluff/statue/evil/examine(mob/user)
+	. = ..()
+	if(user.mind?.has_antag_datum(/datum/antagonist/bandit))
+		. += "You may make a maximum of [MAX_BANDIT_REWARDS] sacrifices to the idol."
+		. += "You can collect a maximum of [get_max_triumphs()] triumphs for your sacrifices."
+
 /obj/structure/fluff/statue/evil/attackby(obj/item/W, mob/user, list/modifiers)
 	if(user.mind)
 		var/datum/antagonist/bandit/B = user.mind.has_antag_datum(/datum/antagonist/bandit)
 		if(B)
-			if(B.tri_amt >= 8)
+			if(B.reward_amt >= MAX_BANDIT_REWARDS)
 				to_chat(user, span_warning("The idol had collected enough tribute from you."))
 				return
 			if(istype(W, /obj/item/reagent_containers/lux))
@@ -1160,12 +1166,13 @@
 	return ..()
 
 /obj/structure/fluff/statue/evil/proc/give_rewards(datum/antagonist/bandit/offering_bandit, mob/user)
-	offering_bandit.tri_amt++
-	user.mind.adjust_triumphs(1)
+	offering_bandit.reward_amt++
 	offering_bandit.contrib -= 80
+	if(offering_bandit.reward_amt <= get_max_triumphs())
+		user.mind.adjust_triumphs(1, reason = "Pleased the Master Thief.")
 
 	var/obj/item/I
-	switch(offering_bandit.tri_amt)
+	switch(offering_bandit.reward_amt)
 		if(1)
 			I = new /obj/item/reagent_containers/glass/bottle/healthpot(user.loc)
 		if(2)
@@ -1233,10 +1240,13 @@
 	if(I)
 		I.sellprice = 0
 
-	if(offering_bandit.contrib >= 100 && offering_bandit.tri_amt < 8)
+	if(offering_bandit.contrib >= 100 && offering_bandit.reward_amt < MAX_BANDIT_REWARDS)
 		give_rewards(offering_bandit, user)
 	else
 		playsound(src,'sound/items/matidol2.ogg', 50, TRUE)
+
+/obj/structure/fluff/statue/evil/proc/get_max_triumphs()
+	return clamp(floor(length(GLOB.clients) / 15), 1, 4)
 
 /obj/structure/fluff/statue/graggar
 	name = "Graggar Idol"
@@ -1672,7 +1682,7 @@
 
 /obj/structure/fluff/steamvent/Initialize()
 	. = ..()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
 	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
 	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))
 

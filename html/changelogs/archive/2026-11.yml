@@ -144,3 +144,24 @@
   ta3754859-max:
   - bugfix: Butchering limbs yields exp for butchering like it was supposed to
   - bugfix: Werewolves and zombies can consume limbs to regain health
+2026-11-17:
+  Blundir:
+  - map: small remap of hunter's cabin
+  PatapoIIIa:
+  - refactor: refactored sound code
+  TheDoktorZ:
+  - rscdel: Killed the mystery box from existence.
+  - rscdel: Bandits' ability to get Triumphs from stealing.
+  grungussuss:
+  - rscadd: Landing on a pipe now plays a sound effect.
+  - bugfix: you no longer "jump into" a pipe when jumping onto it.
+  - rscadd: Iron bar doors can now be shot through
+  - rscadd: Braziers can now be shot through
+  - rscadd: crates/chests can now be sho through
+  realforest2001:
+  - bugfix: Fixed missing exemptions for magical items.
+  - bugfix: Fixed town elder hammer.
+  ta3754859-max:
+  - balance: Liver now passively heals toxin damage above 40. Because of this poison
+      takes slightly more time to start stunning you
+  - balance: Coughing blood now actually makes you loose blood volume per cough

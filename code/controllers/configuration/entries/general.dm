@@ -235,6 +235,8 @@
 
 /datum/config_entry/flag/kick_inactive	//force disconnect for inactive players
 
+/datum/config_entry/flag/allow_automatons
+
 /datum/config_entry/flag/load_jobs_from_txt
 
 /datum/config_entry/flag/forbid_singulo_possession
