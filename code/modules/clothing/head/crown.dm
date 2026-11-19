@@ -149,6 +149,7 @@
 	icon_state = "visioncirclet"
 	item_state = "visioncirclet"
 	sellprice = VALUE_MAGIC_ITEM_STRONG
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/crown/circlet/vision/equipped(mob/user, slot)
 	. = ..()
@@ -165,6 +166,7 @@
 	icon_state = "sleepcirclet"
 	item_state = "sleepcirclet"
 	sellprice = VALUE_MAGIC_ITEM_WEAK
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/crown/circlet/sleepless/equipped(mob/user, slot)
 	. = ..()
@@ -180,6 +182,7 @@
 	icon_state = "stinkcirclet"
 	item_state = "stinkcirclet"
 	sellprice = VALUE_MAGIC_ITEM_WEAK
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/head/crown/circlet/stink/equipped(mob/user, slot)
 	. = ..()

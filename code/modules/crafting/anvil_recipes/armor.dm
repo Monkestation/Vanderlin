@@ -1123,7 +1123,7 @@
 
 /*
 /datum/anvil_recipe/armor/blacksteel/zizo_plate_chest
-	name = "Darksteel Plate Armor"
+	name = "Avantyne Plate Armor"
 	additional_items = list(/obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel, /obj/item/ingot/blacksteel)
 	created_item = /obj/item/clothing/armor/plate/full/inhumen/zizo
 	craftdiff = 5
@@ -1149,7 +1149,7 @@
 
 /*
 /datum/anvil_recipe/armor/blacksteel/zizo_plate_pants
-	name = "Darksteel Plate Chausses"
+	name = "Avantyne Plate Chausses"
 	additional_items = list(/obj/item/ingot/blacksteel)
 	created_item = /obj/item/clothing/pants/platelegs/inhumen/zizo
 	craftdiff = 5
@@ -1168,7 +1168,7 @@
 
 /*
 /datum/anvil_recipe/armor/blacksteel/zizo_plate_gloves
-	name = "Darksteel Plate Gauntlets"
+	name = "Avantyne Plate Gauntlets"
 	created_item = /obj/item/clothing/gloves/plate/inhumen/zizo
 	craftdiff = 5
 
@@ -1200,18 +1200,18 @@
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/zizo_plate_boots
-	name = "Darksteel Plate Boots"
+	name = "Avantyne Plate Boots"
 	created_item = /obj/item/clothing/shoes/boots/armor/inhumen/zizo
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/zizo_helm_visor
-	name = "Darksteel Barbute"
+	name = "Avantyne Barbute"
 	additional_items = list(/obj/item/ingot/blacksteel)
 	created_item = /obj/item/clothing/head/helmet/visored/zizo
 	craftdiff = 5
 
 /datum/anvil_recipe/armor/blacksteel/zizo_helm
-	name = "Darksteel Frog Helm"
+	name = "Avantyne Frog Helm"
 	additional_items = list(/obj/item/ingot/blacksteel)
 	created_item = /obj/item/clothing/head/helmet/heavy/inhumen/zizo
 	craftdiff = 5

@@ -10,6 +10,9 @@
 #define SAVE_ITEMS_WEAPON (1 << 9)
 #define SAVE_WHITELIST (1 << 10) //! This will save special items aswell and remove special items, used for housing
 
+#define LOAD_VALUE (1 << 1) //! Load item value?
+#define LOAD_SALVAGE (1 << 2) //! Make items smeltable/salvagable?
+
 //Ignore turf if it contains
 #define SAVE_SHUTTLEAREA_DONTCARE 0
 #define SAVE_SHUTTLEAREA_IGNORE 1

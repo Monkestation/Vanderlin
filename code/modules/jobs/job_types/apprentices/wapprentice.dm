@@ -8,7 +8,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 10,
-		/datum/attribute/skill/combat/polearms = 20
+		/datum/attribute/skill/combat/polearms/staves = 20
 	)
 
 /datum/attribute_holder/sheet/job/mageapprentice/adult
@@ -21,7 +21,7 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 10,
-		/datum/attribute/skill/combat/polearms = 20
+		/datum/attribute/skill/combat/polearms/staves = 20
 	)
 
 /datum/job/mageapprentice

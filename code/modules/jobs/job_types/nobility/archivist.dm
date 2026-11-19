@@ -105,6 +105,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/chronicler
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/chronicler/old
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/archivist/chronicler/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()

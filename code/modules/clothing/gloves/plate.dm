@@ -98,11 +98,11 @@
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 
 /obj/item/clothing/gloves/plate/inhumen/zizo
-	name = "darksteel gauntlets"
-	desc = "darksteel plate gauntlets. Called forth from the edge of what should be known. In Her name."
+	name = "avantyne gauntlets"
+	desc = "avantyne plate gauntlets. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizogauntlets"
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/clothing/gloves/plate/inhumen/matthios
 	name = "gilded gauntlets"

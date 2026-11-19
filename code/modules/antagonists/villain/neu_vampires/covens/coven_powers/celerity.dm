@@ -20,8 +20,8 @@
 	desc = "Celerity power description"
 	violates_masquerade = TRUE
 	refresh_violations = TRUE
-	duration_length = 3 SECONDS
-	cooldown_length = 3 SECONDS
+	duration_length = 10 SECONDS
+	cooldown_length = 10 SECONDS
 
 	toggled = TRUE
 	check_flags = COVEN_CHECK_LYING | COVEN_CHECK_IMMOBILE

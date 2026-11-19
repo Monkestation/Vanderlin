@@ -184,5 +184,6 @@
 	attack_sound = 'sound/blank.ogg'
 	pass_flags = PASSTABLE | PASSGRILLE | PASSMOB
 	mob_size = MOB_SIZE_TINY
+	lighting_alpha = 127
 
 	var/stepped_sound = 'sound/blank.ogg'

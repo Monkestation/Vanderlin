@@ -231,6 +231,12 @@ GLOBAL_LIST_EMPTY(save_whitelist)
 	list += typesof(/obj/item/candle)
 	list += list(/obj/item/storage/sack, /obj/item/broom, /obj/item/dmusicbox, /obj/item/pestle)
 	list += typesof(/obj/item/instrument)
+	list += typesof(/obj/item/flashlight/flare/torch)
+	list += typesof(/obj/item/toy)
+	list += typesof(/obj/item/orphan_toy)
+	//Hammer
+	list += typesof(/obj/item/weapon/hammer)
+	list -= typesof(/obj/item/weapon/hammer/sledgehammer)
 	//Knives
 	list += typesof(/obj/item/weapon/knife)
 	list -= typesof(/obj/item/weapon/knife/dagger)
@@ -238,6 +244,9 @@ GLOBAL_LIST_EMPTY(save_whitelist)
 	//Clothing, there is a check to not allow armor further down in the code
 	list += typesof(/obj/item/clothing)
 	list -= typesof(/obj/item/clothing/head/helmet) //due to most of them lacking armor class
+	list += typesof(/obj/item/storage/backpack/)
+	list -= typesof(/obj/item/storage/backpack/satchel/surgbag)
+	list -= typesof(/obj/item/storage/backpack/backpack/artibackpack)
 	return list
 
 /**
@@ -343,8 +352,18 @@ GLOBAL_LIST_EMPTY(save_whitelist)
 
 				//====SAVING OBJECTS====
 				if((save_flag & SAVE_OBJECTS) && !skip_objects)
-					for(var/obj/thing in pull_from)
+					var/list/all_objects = pull_from.contents.Copy()
+
+					for(var/obj/structure/closet/chest in pull_from) //check for items in chests
+						if(chest.opened)
+							continue
+						all_objects += chest.contents
+
+					for(var/obj/thing in all_objects)
 						CHECK_TICK
+
+						if(thing.type in obj_blacklist)
+							continue
 
 						if(isitem(thing))
 							if((save_flag & SAVE_WHITELIST) && !(thing.type in GLOB.save_whitelist)) //we do hard types because its faster then ischecking
@@ -357,9 +376,6 @@ GLOBAL_LIST_EMPTY(save_whitelist)
 									continue
 							if(isweapon(thing) && !(save_flag & SAVE_ITEMS_WEAPON || (thing.type in GLOB.save_whitelist))) //still allows cooking knives
 								continue
-
-						if(thing.type in obj_blacklist)
-							continue
 
 						//====HANDLE UUID STASIS SAVING====
 						if((save_flag & SAVE_UUID_STASIS) && thing.UUID_saving)

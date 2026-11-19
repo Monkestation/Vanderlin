@@ -8,7 +8,7 @@
 		/datum/attribute/skill/magic/holy = 40,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/polearms = 30,
+		/datum/attribute/skill/combat/polearms/staves = 30,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/sewing = 30,
@@ -27,7 +27,7 @@
 		/datum/attribute/skill/magic/holy = 50,
 		/datum/attribute/skill/combat/unarmed = 30,
 		/datum/attribute/skill/combat/wrestling = 10,
-		/datum/attribute/skill/combat/polearms = 40,
+		/datum/attribute/skill/combat/polearms/staves = 40,
 		/datum/attribute/skill/combat/axesmaces = 20,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/sewing = 30,
@@ -68,6 +68,10 @@
 
 	outfit = /datum/outfit/priest
 	give_bank_account = 30
+	knows_the_town = TRUE
+	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_CHURCH_COURT_LIST
+	jobs_always_know_me = KNOW_CHURCH_COURT_LIST
 	spells = list(
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/templar,
 		/datum/action/cooldown/spell/undirected/list_target/convert_role/church/acolyte,

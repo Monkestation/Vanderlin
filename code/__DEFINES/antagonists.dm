@@ -8,3 +8,6 @@
 #define IS_DEADITE(mob) (mob?.mind?.has_antag_datum(/datum/antagonist/zombie))
 
 GLOBAL_VAR_INIT(midround_antag_permission, TRUE)
+
+/// The maximum number of rewards a bandit can receive from an idol. Not the same value as maximum number of triumphs.
+#define MAX_BANDIT_REWARDS 8

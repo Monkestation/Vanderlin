@@ -1,7 +1,8 @@
 /datum/clan_leader/nitewarden
 	lord_spells = list(
 		/datum/action/cooldown/spell/undirected/shapeshift/bat,
-		/datum/action/cooldown/spell/undirected/shapeshift/mist,
+		/datum/action/cooldown/spell/undirected/shapeshift/fox,
+		/datum/action/cooldown/spell/undirected/shapeshift/mist/cold,
 	)
 	lord_verbs = list(
 		/mob/living/carbon/human/proc/punish_spawn
@@ -34,7 +35,7 @@
 		TRAIT_ZJUMP,
 		TRAIT_IMMUNE_TO_FRENZY,
 		TRAIT_COVEN_RESISTANT,
-		TRAIT_SILVER_IMMUNE,
+		TRAIT_TRUESILVER_IMMUNE,
 		TRAIT_DIVINE_SERVANT
 	)
 	leader_title = "Nitewarden"

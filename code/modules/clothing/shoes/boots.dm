@@ -6,11 +6,13 @@
 	item_state = "blackboots"
 	armor_type = /datum/armor/boots
 	sellprice = 10
-	salvage_result = /obj/item/natural/hide/cured
-	salvage_amount = 1
 	max_integrity = INTEGRITY_OLD_STANDARD
 	wetable = FALSE
 	abstract_type = /obj/item/clothing/shoes/boots
+	sewrepair = /datum/attribute/skill/craft/tanning/patching
+	salvage_result = /obj/item/natural/hide/cured
+	salvage_amount = 1
+	fiber_salvage = FALSE
 
 /obj/item/clothing/shoes/boots/darkboots
 	name = "dark boots"
@@ -188,9 +190,9 @@
 	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/leather/advanced/watch
-	name = "watch boots"
+	name = "marching boots"
 	color = "#d5c2aa"
-	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the city watch long before they're seen."
+	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the soldiers long before they're seen."
 	icon_state = "blackboots"
 	item_state = "blackboots"
 	wetable = FALSE
@@ -211,8 +213,8 @@
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
-/obj/item/clothing/shoes/boots/furlinedboots
-	name = "fur lined boots"
+/obj/item/clothing/shoes/boots/furboots
+	name = "fur boots"
 	desc = "Leather boots lined with fur."
 	gender = PLURAL
 	icon_state = "furlinedboots"
@@ -226,21 +228,21 @@
 	min_cold_protection_temperature = -20
 	wetable = FALSE
 
-/obj/item/clothing/shoes/boots/furlinedboots/advanced
-	name = "hardened fur lined boots"
+/obj/item/clothing/shoes/boots/furboots/advanced
+	name = "hardened fur boots"
 	desc = "Boots lined with fur, and protected with hardened, expertly tanned leather."
 	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/boots/leather/advanced
 
-/obj/item/clothing/shoes/boots/furlinedboots/masterwork
-	name = "masterwork fur lined boots"
+/obj/item/clothing/shoes/boots/furboots/masterwork
+	name = "masterwork fur boots"
 	desc = "Boots lined with thick fur, and protected with hardened, masterfully tanned leather made by only the best."
 	max_integrity = INTEGRITY_OLD_STRONG + 100
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/boots/leather/master
 
-/obj/item/clothing/shoes/boots/furlinedboots/masterwork/Initialize()
+/obj/item/clothing/shoes/boots/furboots/masterwork/Initialize()
 	. = ..()
 	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
@@ -301,13 +303,13 @@
 	AddComponent(/datum/component/squeak, custom_sounds = list(SFX_EVIL_BOOT_STEP))
 
 /obj/item/clothing/shoes/boots/armor/inhumen/zizo
-	name = "darksteel boots"
+	name = "avantyne boots"
 	desc = "Plate boots. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizoboots"
 	item_state = "zizoboots"
 	melting_material = /datum/material/avantyne
 	melt_amount = 100
-	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/clothing/shoes/boots/armor/inhumen/matthios
 	name = "gilded boots"

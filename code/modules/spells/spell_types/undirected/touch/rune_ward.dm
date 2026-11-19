@@ -217,6 +217,7 @@
 
 #define MODIFY_ALLY_FACTION "Modify Factions"
 #define MODIFY_ALLY_PERSON "Modify Allies"
+#define MODIFY_EXPLICIT_ENEMIES "Modify Enemies"
 
 /datum/action/cooldown/spell/undirected/touch/rune_ward/proc/modify_rune(obj/item/melee/touch_attack/hand, atom/victim, mob/living/carbon/caster)
 	var/obj/structure/rune_ward/target_rune
@@ -240,7 +241,7 @@
 			target_rune.trigger_rune(caster)
 		return FALSE
 
-	var/mode_choice = tgui_alert(caster, "What do you wish to do?", "Choose Action", list(MODIFY_ALLY_FACTION, MODIFY_ALLY_PERSON), 20 SECONDS)
+	var/mode_choice = tgui_alert(caster, "What do you wish to do?", "Choose Action", list(MODIFY_ALLY_FACTION, MODIFY_ALLY_PERSON, MODIFY_EXPLICIT_ENEMIES), 20 SECONDS)
 	switch(mode_choice)
 		if(MODIFY_ALLY_FACTION)
 			var/change = tgui_alert(caster, "Do you wish to add or remove a faction?", "Add/Remove", list("Add", "Remove"), 20 SECONDS)
@@ -257,6 +258,7 @@
 				if(!chosen_faction)
 					return FALSE
 				target_rune.allied_factions |= chosen_faction
+				to_chat(caster, span_green("[chosen_faction] faction added to the rune."))
 				return TRUE
 
 			else if(change == "Remove")
@@ -268,6 +270,7 @@
 				if(!chosen_faction)
 					return FALSE
 				target_rune.allied_factions -= chosen_faction
+				to_chat(caster, span_red("[chosen_faction] faction removed from the rune."))
 				return TRUE
 
 		if(MODIFY_ALLY_PERSON)
@@ -283,6 +286,7 @@
 					to_chat(caster, span_warning("[new_ally] is already added to this rune."))
 					return FALSE
 				target_rune.allied_persons |= LOWER_TEXT(new_ally)
+				to_chat(caster, span_green("[new_ally] added to the rune."))
 				return TRUE
 
 			if(change == "Remove")
@@ -294,12 +298,42 @@
 				if(!chosen_ally)
 					return FALSE
 				target_rune.allied_persons -= LOWER_TEXT(chosen_ally)
+				to_chat(caster, span_red("[chosen_ally] removed from the rune."))
+				return TRUE
+
+		if(MODIFY_EXPLICIT_ENEMIES)
+			var/change = tgui_alert(caster, "Do you wish to add or remove an enemy?", "Add/Remove", list("Add", "Remove"), 20 SECONDS)
+			if(change == "Add")
+				var/new_enemy = tgui_input_text(caster, "Who do you wish to add to the rune?", "Add Enemy", timeout = 20 SECONDS)
+				if(!new_enemy)
+					return FALSE
+				if(!caster.mind || (!caster.mind.do_i_know(name = new_enemy)))
+					to_chat(caster, span_warning("I don't know anyone by that name."))
+					return FALSE
+				if(LOWER_TEXT(new_enemy) in target_rune.enemy_persons)
+					to_chat(caster, span_warning("[new_enemy] is already added to this rune."))
+					return FALSE
+				target_rune.enemy_persons |= LOWER_TEXT(new_enemy)
+				to_chat(caster, span_green("[new_enemy] added to the rune."))
+				return TRUE
+
+			if(change == "Remove")
+				var/list/options = target_rune.enemy_persons.Copy()
+				if(!options.len)
+					to_chat(caster, span_warning("No enemies available to remove."))
+					return FALSE
+				var/chosen_enemy = tgui_input_list(caster, "Which enemy do you wish to remove from the rune?", "Remove Enemy", options, timeout = 20 SECONDS)
+				if(!chosen_enemy)
+					return FALSE
+				target_rune.enemy_persons -= LOWER_TEXT(chosen_enemy)
+				to_chat(caster, span_red("[chosen_enemy] removed from the rune."))
 				return TRUE
 
 	return FALSE
 
 #undef MODIFY_ALLY_FACTION
 #undef MODIFY_ALLY_PERSON
+#undef MODIFY_EXPLICIT_ENEMIES
 
 /obj/item/melee/touch_attack/rune_ward
 	name = "\improper inscribing hand"

@@ -242,14 +242,14 @@
 	sellprice = 0 // Incredibly evil armor, this should be burnt, nobody wants this
 
 /obj/item/clothing/armor/plate/full/inhumen/zizo
-	name = "darksteel fullplate"
+	name = "avantyne fullplate"
 	desc = "Full plate. Called forth from the edge of what should be known. In Her name."
 	icon_state = "zizoplate"
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/clothing/armor/plate/full/inhumen/zizo/alt
-	name = "ribbed darksteel fullplate"
+	name = "ribbed avantyne fullplate"
 	icon_state = "zizoplatechest_med"
 
 //................ Matthios Armor ...............//
