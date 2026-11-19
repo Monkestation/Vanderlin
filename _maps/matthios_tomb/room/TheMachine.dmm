@@ -50,7 +50,7 @@
 /area/under/tomb/indoors)
 "cN" = (
 /obj/machinery/artificer_table,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/metal/barograte,
 /area/under/tomb)
 "dm" = (
@@ -205,7 +205,7 @@
 /turf/open/water/clean,
 /area/under/tomb)
 "kB" = (
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors)
 "kJ" = (
@@ -231,10 +231,6 @@
 "lB" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /mob/living/carbon/human/species/skeleton/npc/warrior,
-/turf/open/floor/metal/barograte,
-/area/under/tomb/indoors)
-"lN" = (
-/obj/effect/spawner/map_spawner/loot/coin/med,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors)
 "lV" = (
@@ -429,7 +425,7 @@
 	pixel_x = 32;
 	pixel_y = 0
 	},
-/obj/effect/spawner/map_spawner/loot/medium,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/concrete,
 /area/under/tomb/indoors)
 "sf" = (
@@ -450,13 +446,9 @@
 /turf/open/floor/metal/barograte,
 /area/under/tomb)
 "sY" = (
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/metal/barograte,
 /area/under/tomb)
-"tn" = (
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/metal/barograte,
-/area/under/tomb/indoors)
 "tq" = (
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 4
@@ -1063,7 +1055,7 @@
 /obj/structure/table/wood/large/corner{
 	dir = 9
 	},
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/metal,
 /area/under/tomb/indoors)
 "WH" = (
@@ -1116,7 +1108,7 @@
 /turf/open/water/clean,
 /area/under/tomb)
 "ZI" = (
-/obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors)
 "ZK" = (
@@ -2115,9 +2107,9 @@ jo
 GV
 MF
 Jj
-lN
 Ni
-tn
+Ni
+kB
 Jj
 MF
 GY
