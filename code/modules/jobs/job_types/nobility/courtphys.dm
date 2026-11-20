@@ -2,17 +2,20 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 4,
-		STAT_PERCEPTION = 1,
+		STAT_PERCEPTION = 2,
 		STAT_CONSTITUTION = -1,
 		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/combat/knives = 20,
-		/datum/attribute/skill/combat/swords = 20,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 25,
+		/datum/attribute/skill/combat/swords = 27,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 50,
 		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/labor/farming = 30,
 		/datum/attribute/skill/craft/engineering = 20,
@@ -22,24 +25,27 @@
 	raw_attribute_list = list(
 		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 5,
-		STAT_PERCEPTION = 1,
+		STAT_PERCEPTION = 2,
 		STAT_CONSTITUTION = -1,
 		/datum/attribute/skill/educated/reading = 50,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/combat/knives = 20,
+		/datum/attribute/skill/combat/unarmed = 20,
+		/datum/attribute/skill/combat/knives = 27,
 		/datum/attribute/skill/combat/swords = 30,
-		/datum/attribute/skill/combat/wrestling = 10,
+		/datum/attribute/skill/combat/wrestling = 20,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 60,
 		/datum/attribute/skill/craft/alchemy = 30,
+		/datum/attribute/skill/misc/swimming = 30,
+		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/labor/farming = 30,
 		/datum/attribute/skill/craft/engineering = 20,
 	)
 /datum/job/courtphys
 	title = JOB_COURT_PHYSICIAN
-	alt_titles = list("Court Chirurgian")
+	alt_titles = list("Court Chirurgeon")
 	tutorial = "One fateful evening at a royal banquet, your steady hand and sharp eye saved the royal bloodline. \
 	Now, you serve as the trusted healer of the crown, a living symbol of Pestra's favor. \
 	Your duty is clear: keep the monarch alive, no matter the cost."

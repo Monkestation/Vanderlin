@@ -10,6 +10,8 @@
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/athletics = 20,
+		/datum/attribute/skill/misc/swimming = 10,
+		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/combat/unarmed = 10,
 		/datum/attribute/skill/combat/wrestling = 10,
 		/datum/attribute/skill/educated/mathematics = 30,
@@ -18,17 +20,17 @@
 
 /datum/attribute_holder/sheet/job/minor_dagger
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/knives = list(20, 40)
+		/datum/attribute/skill/combat/knives = list(25, 40)
 	)
 
 /datum/attribute_holder/sheet/job/minor_swords
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/swords = list(20, 40)
+		/datum/attribute/skill/combat/swords = list(25, 40)
 	)
 
 /datum/attribute_holder/sheet/job/minor_bows
 	clamped_adjustment = list(
-		/datum/attribute/skill/combat/bows = list(20, 40)
+		/datum/attribute/skill/combat/bows = list(25, 40)
 	)
 
 /datum/job/minor_noble
@@ -70,7 +72,7 @@
 		STAT_CONSTITUTION = 1,
 		STAT_ENDURANCE = 1,
 		STAT_SPEED = 1,
-		/datum/attribute/skill/combat/swords = 10,
+		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/misc/riding = 30,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/misc/swimming = 10,
@@ -116,15 +118,17 @@
 
 /datum/attribute_holder/sheet/job/magnate
 	raw_attribute_list = list(
-		STAT_STRENGTH = -3,
+		STAT_STRENGTH = -1,
 		STAT_INTELLIGENCE = 3,
+		STAT_PERCEPTION = 2,
 		STAT_CONSTITUTION = -2,
 		STAT_ENDURANCE = 1,
-		STAT_SPEED = -3,
+		STAT_SPEED = -2,
 		/datum/attribute/skill/educated/mathematics = 60,
 		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/misc/athletics = 10,
+		/datum/attribute/skill/combat/knives = 20,
 		/datum/attribute/skill/combat/bows = 20
 	)
 
