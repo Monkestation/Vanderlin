@@ -652,6 +652,18 @@
 #define FLIP_DIRECTION_CLOCKWISE 1
 #define FLIP_DIRECTION_ANTICLOCKWISE 0
 
+// https://www.youtube.com/watch?v=WQuL95_ckDo
+/mob/living/proc/check_flippability()
+	. = FALSE
+	if(HAS_TRAIT(src, TRAIT_FLIP_JUMP) || GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 5)
+		if(sprinted_tiles >= 2)
+			. = TRUE
+
+/mob/living/carbon/check_flippability()
+	. = ..()
+	if(encumbrance > ENCUMBRANCE_LIGHT) // being encumbered... encumbers your ability to flip.
+		return FALSE
+
 /**
  * Jump resolve
  * Args
@@ -667,8 +679,9 @@
 	var/prev_pixel_z = pixel_z
 	var/prev_transform = transform
 
-	if(HAS_TRAIT(src, TRAIT_FLIP_JUMP) || GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 5)
+	if(check_flippability())
 		do_a_flip = TRUE
+		pass_flags |= PASSMOB
 		if((dir & SOUTH) || (dir & WEST))
 			flip_direction = FLIP_DIRECTION_ANTICLOCKWISE
 
@@ -707,6 +720,8 @@
 
 	if(extra_tile)
 		addtimer(CALLBACK(src, TYPE_PROC_REF(/atom/movable, throw_at), get_step(src, dir), 1, 1, null, FALSE), 0.1 SECONDS)
+
+	pass_flags &= ~PASSMOB
 
 #undef FLIP_DIRECTION_CLOCKWISE
 #undef FLIP_DIRECTION_ANTICLOCKWISE
