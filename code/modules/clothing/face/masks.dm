@@ -88,7 +88,7 @@
 
 /obj/item/clothing/face/facemask/silvernosechain/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/face/facemask/goldveil
 	name = "golden face veil"
@@ -130,7 +130,7 @@
 
 /obj/item/clothing/face/facemask/silverveil/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/face/jademask
 	name = "joapstone mask "
@@ -408,7 +408,7 @@
 
 /obj/item/clothing/face/facemask/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/face/facemask/silver/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()

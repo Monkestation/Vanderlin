@@ -140,7 +140,7 @@
 
 /obj/item/clothing/pants/platelegs/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 //.............. Gronn Platelegs .................//
 
