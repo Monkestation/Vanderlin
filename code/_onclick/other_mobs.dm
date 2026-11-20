@@ -656,7 +656,8 @@
 /mob/living/proc/check_flippability()
 	. = FALSE
 	if(HAS_TRAIT(src, TRAIT_FLIP_JUMP) || GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/misc/athletics) > 5)
-		. = TRUE
+		if(sprinted_tiles >= 2)
+			. = TRUE
 
 /mob/living/carbon/check_flippability()
 	. = ..()
