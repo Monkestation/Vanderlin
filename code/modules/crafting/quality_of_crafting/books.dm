@@ -601,11 +601,12 @@ GLOBAL_LIST_EMPTY(linked_recipe_cache)
 
 /obj/item/recipe_book/medical
 	name = "The Feldsher's Handbook: Field Medicine and Improvised Care"
-	desc = "Compiled by Grim the fickle."
+	desc = "Compiled, penned, and co-authored by Liezillith a La Lumiere d'Etoiles and Grim the fickle."
 	icon_state ="book4_0"
 	base_icon_state = "book4"
 
 	types = list(
+		/datum/book_entry/liezs_guide,
 		/datum/book_entry/grims_guide,
 		/datum/book_entry/cavity_access,
 		/datum/book_entry/organ_surgery,
