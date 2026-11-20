@@ -129,7 +129,7 @@
 
 /obj/item/storage/belt/leather/plaquesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/storage/belt/leather/steel
 	name = "steel belt"

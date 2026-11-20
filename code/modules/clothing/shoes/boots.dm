@@ -285,7 +285,7 @@
 
 /obj/item/clothing/shoes/boots/armor/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 //............... Evil Boots ............... //
 /obj/item/clothing/shoes/boots/armor/inhumen

@@ -29,7 +29,7 @@
 
 /obj/item/clothing/head/crown/circlet/silverdiadem/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/head/crown/circlet/goldheaddress
 	name = "zenarii headdress"
@@ -46,7 +46,7 @@
 
 /obj/item/clothing/head/crown/circlet/silverheaddress/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/head/crown/circlet/jade
 	name = "joapstone circlet"

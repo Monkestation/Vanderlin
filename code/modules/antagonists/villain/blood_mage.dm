@@ -363,7 +363,7 @@
 
 /obj/item/clothing/head/helmet/visored/blkknight/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/clothing/armor/plate/blkknight/bloodsteel
 	name = "bloodsteel plate"
@@ -376,7 +376,7 @@
 
 /obj/item/clothing/armor/plate/blkknight/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/clothing/shoes/boots/armor/blkknight/bloodsteel
 	name = "bloodsteel boots"
@@ -389,7 +389,7 @@
 
 /obj/item/clothing/shoes/boots/armor/blkknight/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/clothing/gloves/plate/blk/bloodsteel
 	name = "bloodsteel gauntlets"
@@ -402,7 +402,7 @@
 
 /obj/item/clothing/gloves/plate/blk/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/clothing/pants/platelegs/blk/bloodsteel
 	name = "bloodsteel greaves"
@@ -415,7 +415,7 @@
 
 /obj/item/clothing/pants/platelegs/blk/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/clothing/neck/chaincoif/bloodsteel
 	name = "bloodsteel chain coif"
@@ -429,5 +429,5 @@
 
 /obj/item/clothing/neck/chaincoif/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 

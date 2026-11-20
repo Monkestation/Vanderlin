@@ -84,7 +84,7 @@
 
 /obj/item/clothing/gloves/plate/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 	//............... Evil Gloves ............... //
 /obj/item/clothing/gloves/plate/inhumen

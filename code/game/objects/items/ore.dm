@@ -49,7 +49,7 @@
 /obj/item/ore/silver/Initialize(mapload)
 	. = ..()
 	icon_state = "oresilv[rand(1,3)]"
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/ore/iron
 	name = "raw iron"
@@ -128,7 +128,7 @@
 /obj/item/ore/bloodstone/Initialize(mapload)
 	. = ..()
 	icon_state = "orecorrupt[rand(1,3)]"
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/ore/coal/charcoal
 	name = "charcoal"
@@ -309,7 +309,7 @@
 
 /obj/item/ingot/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/ingot/truesilver
 	name = "truesilver bar"
@@ -322,7 +322,7 @@
 
 /obj/item/ingot/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/ingot/steel
 	name = "steel bar"
@@ -372,7 +372,7 @@
 
 /obj/item/ingot/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/ingot/steel_slag
 	name = "steel slag"
