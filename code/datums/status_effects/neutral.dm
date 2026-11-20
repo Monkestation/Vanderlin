@@ -28,20 +28,21 @@
 
 /datum/status_effect/aasimar_stasis/deep
 	id = "aasimar_stasis_deep"
-	duration = 20 SECONDS
-	remove_on_fullheal = TRUE
+	duration = 60 SECONDS
 
 /datum/status_effect/aasimar_stasis/deep/on_apply()
 	. = ..()
 	to_chat(owner, span_notice("I let my 'self' sink deep."))
 	ADD_TRAIT(owner, TRAIT_DEAF, "stasis")
-	owner.apply_status_effect(/datum/status_effect/grouped/blindness)
+	ADD_TRAIT(owner, TRAIT_MUTE, "stasis")
+	owner.adjust_temp_blindness(55 SECONDS) // 5 seconds shoter so you can look around a bit
+	owner.remove_status_effect(/datum/status_effect/debuff/sleepytime) // Removes the debuff, but no sleep Triumph or dream XP boost
 
 /datum/status_effect/aasimar_stasis/deep/on_remove()
 	. = ..()
 	to_chat(owner, span_notice("I return to the surface."))
 	REMOVE_TRAIT(owner, TRAIT_DEAF, "stasis")
-	owner.remove_status_effect(/datum/status_effect/grouped/blindness)
+	REMOVE_TRAIT(owner, TRAIT_MUTE, "stasis")
 
 /datum/status_effect/aasimar_stasis/deep/tick()
 	. = ..()
