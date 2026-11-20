@@ -101,8 +101,9 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 				PL2 += "[PL[i]]"
 			else
 				PL2 += "[PL[i]], "
-
 		var/str_job = job.title
+		if(job.wanderer_role)
+			str_job = "Wanderer"
 		if(readied_as)
 			if(PL2.len)
 				dat += "<B>[str_job]</B> ([readied_as]) - [PL2.Join()]<br>"
