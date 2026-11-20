@@ -12,6 +12,7 @@
 	)
 	var/list/last_used = list()
 	var/active_item = FALSE
+	cooldown_time = SILVER_BANE_COOLDOWN
 
 /datum/enchantment/on_hit/silver/register_triggers(atom/item)
 	. = ..()
@@ -49,8 +50,6 @@
 	if(!user.CanReach(target))
 		return
 	if(!ishuman(target))
-		return
-	if(world.time < (src.last_used["ON-HIT"] + SILVER_BANE_COOLDOWN))
 		return
 	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
 		return

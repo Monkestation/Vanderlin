@@ -29,6 +29,7 @@
 	/// Repeat application on curse pulse.
 	var/poison_pulse = 3.5
 	var/active_item = FALSE
+	cooldown_time = BLOOD_CURSE_HIT_COOLDOWN
 
 /datum/enchantment/on_hit/bloodcurse/register_triggers(atom/item)
 	. = ..()
@@ -61,8 +62,6 @@
 	if(!user.CanReach(target))
 		return
 	if(!ishuman(target) || target.stat >= HARD_CRIT)
-		return
-	if(world.time < (src.last_used["ON_HIT"] + BLOOD_CURSE_HIT_COOLDOWN))
 		return
 	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
 		return
