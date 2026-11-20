@@ -340,7 +340,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/antag/lich)
 "bU" = (
-/obj/effect/decal/cleanable/sigil{
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil{
 	icon_state = "zizocircle";
 	icon = 'icons/roguetown/misc/96x96.dmi';
 	pixel_x = 15;
@@ -681,7 +681,7 @@
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/antag/lich)
 "dT" = (
-/obj/effect/decal/cleanable/sigil{
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil{
 	icon_state = "zizocircle";
 	icon = 'icons/roguetown/misc/96x96.dmi';
 	pixel_x = 8;
@@ -1323,7 +1323,7 @@
 /area/indoors/antag/lich)
 "hc" = (
 /obj/item/chair/wood,
-/obj/effect/decal/cleanable/sigil{
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil{
 	icon_state = "zizocircle";
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},
@@ -3011,7 +3011,7 @@
 /turf/open/floor/naturalstone,
 /area/indoors/mountains)
 "qz" = (
-/obj/effect/decal/cleanable/sigil{
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil{
 	icon_state = "zizocircle";
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},
@@ -4090,7 +4090,7 @@
 /area/indoors/antag/lich)
 "wd" = (
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/decal/cleanable/sigil{
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil{
 	icon_state = "zizocircle";
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},
@@ -6445,7 +6445,7 @@
 	},
 /area/outdoors/bog)
 "If" = (
-/obj/effect/decal/cleanable/sigil{
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil{
 	icon_state = "zizocircle";
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},
@@ -7745,7 +7745,7 @@
 /turf/open/floor/church/purple,
 /area/indoors/antag/lich)
 "PG" = (
-/obj/effect/decal/cleanable/sigil{
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil{
 	icon_state = "zizocircle";
 	icon = 'icons/roguetown/misc/96x96.dmi'
 	},

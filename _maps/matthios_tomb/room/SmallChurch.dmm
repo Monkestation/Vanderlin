@@ -124,7 +124,6 @@
 /turf/open/floor/woodturned,
 /area/under/tomb/cave/wet)
 "df" = (
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/churchrough/violet,
 /area/under/tomb/indoors/church)
 "dk" = (
@@ -211,7 +210,6 @@
 /turf/open/floor/church,
 /area/under/tomb/indoors/church)
 "fs" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/churchrough/violet,
 /area/under/tomb/indoors/church)
 "fC" = (
@@ -524,7 +522,6 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "nG" = (
-/obj/effect/decal/cleanable/sigil/S,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/churchrough/violet,
 /area/under/tomb/indoors/church)
@@ -636,7 +633,6 @@
 /turf/open/openspace,
 /area/under/tomb/indoors/church)
 "qW" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/churchrough/violet,
 /area/under/tomb/indoors/church)
@@ -666,7 +662,6 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "sy" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/churchrough/violet,
 /area/under/tomb/indoors/church)
 "sH" = (
@@ -844,7 +839,6 @@
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/church)
 "yc" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/churchrough/violet,
@@ -862,7 +856,6 @@
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/church)
 "yn" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/churchrough/violet,
 /area/under/tomb/indoors/church)
 "yD" = (
@@ -917,7 +910,6 @@
 /turf/open/floor/church,
 /area/under/tomb/indoors/church)
 "AF" = (
-/obj/effect/decal/cleanable/sigil/W,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/churchrough/violet,
 /area/under/tomb/indoors/church)
@@ -1245,7 +1237,7 @@
 /area/under/tomb)
 "KS" = (
 /obj/structure/table/wood/fancy/black,
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/churchrough/violet,
 /area/under/tomb/indoors/church)

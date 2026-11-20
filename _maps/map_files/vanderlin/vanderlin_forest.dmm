@@ -880,7 +880,6 @@
 /turf/open/floor/grass,
 /area/outdoors/wilderness/safe/gallowband_fort)
 "eD" = (
-/obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/north)
 "eE" = (
@@ -888,7 +887,6 @@
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/north)
 "eF" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/north)
 "eI" = (
@@ -7845,7 +7843,6 @@
 /turf/open/floor/grass,
 /area/indoors/dungeon)
 "NP" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/north)
 "NQ" = (
@@ -8185,7 +8182,6 @@
 /turf/open/floor/herringbone,
 /area/indoors/dungeon)
 "Pq" = (
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/north)
 "Pt" = (
@@ -8420,7 +8416,7 @@
 /area/under/cave)
 "QM" = (
 /obj/structure/fluff/statue/gargoyle/candles,
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/north)
 "QN" = (
@@ -8459,7 +8455,6 @@
 	pixel_x = 7;
 	pixel_y = 7
 	},
-/obj/effect/decal/cleanable/sigil/E,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/north)
 "QX" = (
@@ -8690,7 +8685,6 @@
 /turf/open/floor/carpet/red,
 /area/indoors/dungeon)
 "Sn" = (
-/obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/north)
 "Sq" = (
@@ -9104,7 +9098,6 @@
 /turf/open/floor/dirt,
 /area/under/cave)
 "Uh" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/dirt,
 /area/outdoors/wilderness/north)
 "Uj" = (
@@ -9200,7 +9193,6 @@
 /turf/open/floor/sand,
 /area/indoors/dungeon)
 "UK" = (
-/obj/effect/decal/cleanable/sigil/N,
 /turf/open/floor/grass,
 /area/outdoors/wilderness/north)
 "UN" = (
