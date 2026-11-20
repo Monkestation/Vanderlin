@@ -1,6 +1,4 @@
 /datum/job/advclass/vampspecial
-	category_tags = list(CTAG_VAMP_ADVENTURE)
-	abstract_type = /datum/job/advclass/vampspecial
 
 // A caveat job to catch Vampire Spawn that are somehow children. Otherwise they're kicked back to the lobby and there's one less vampire in the round.
 /datum/attribute_holder/sheet/job/young_vampire
@@ -21,6 +19,7 @@
 	outfit = /datum/outfit/vampspecial/vamp_rascal
 	attribute_sheet = /datum/attribute_holder/sheet/job/young_vampire
 	allowed_ages = list(AGE_CHILD)
+	category_tags = list(CTAG_VAMP_ADVENTURE)
 
 /datum/outfit/vampspecial/vamp_rascal
 	name = "Immortal Rascal (Vampire Spawn)"
