@@ -165,3 +165,26 @@
   - balance: Liver now passively heals toxin damage above 40. Because of this poison
       takes slightly more time to start stunning you
   - balance: Coughing blood now actually makes you loose blood volume per cough
+2026-11-19:
+  Blundir:
+  - rscadd: New/Old psydonic languages now have 35% mutual understanding
+  MissyNym:
+  - map: Some of the Tomb of Matthios has been rebalanced and given a bit of beautification.
+  ModDownloading:
+  - balance: Enforcer and Ninja katanas can use all four main intents one-handed,
+      instead of only two-handed.
+  - balance: Enforcer scabbards now have the same parry strength as shields.
+  TheDoktorZ:
+  - balance: Updated the ancient military equipment imports.
+  - bugfix: Added an updated face for the Returning Bannermen.
+  - bugfix: Guard recruits get the main class title now so they can get wages.
+  - bugfix: Changed the "watch boots" to something Archeon would probably like more.
+  - spellcheck: MAA are no longer plural in titles.
+  budgetcommander0:
+  - balance: Increased Steam Knight unarmed skill to 30.
+  realforest2001:
+  - rscadd: Added Truesilver Enchantment for Truesilver weapons.
+  - code_imp: Moved truesilver weapons off of silver subtyping.
+  - bugfix: Fixed on_examine signals for Daewalker and Nitewarden.
+  - rscadd: Returned bandit triumphs from Matthios Idol, maximum deterimined by Player-count/15
+      maxed at 4 per round.

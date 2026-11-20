@@ -4,13 +4,12 @@
 /area/under/tomb/indoors/royal)
 "af" = (
 /obj/structure/table/vtable,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
 "aj" = (
 /obj/structure/closet/crate/drawer/random,
 /obj/machinery/light/fueled/wallfire/candle/weak,
-/obj/effect/spawner/map_spawner/loot/food,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
@@ -34,7 +33,6 @@
 /area/under/tomb)
 "aH" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/effect/spawner/map_spawner/loot/medium,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
 "aO" = (
@@ -48,11 +46,6 @@
 "aZ" = (
 /obj/effect/landmark/chest_or_mimic,
 /turf/open/floor/carpet,
-/area/under/tomb/indoors/royal)
-"be" = (
-/obj/structure/closet/crate/crafted_closet/inn,
-/obj/effect/spawner/map_spawner/loot/armor,
-/turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
 "bh" = (
 /obj/structure/trap/wall_projectile{
@@ -108,10 +101,6 @@
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/tile/masonic/inverted,
 /area/under/tomb/indoors/royal)
-"ce" = (
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/tile/masonic/inverted,
-/area/under/tomb/indoors/royal)
 "cf" = (
 /obj/structure/flora/ausbushes/fullgrass,
 /obj/structure/flora/ausbushes/lavendergrass,
@@ -124,13 +113,6 @@
 /obj/structure/trap/shock,
 /turf/open/water/bath,
 /area/under/tomb)
-"cq" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/soap/bath,
-/obj/item/soap/bath,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
-/turf/open/floor/metal/barograte,
-/area/under/tomb/indoors/magic)
 "cu" = (
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
@@ -247,7 +229,7 @@
 /area/under/tomb/wilds)
 "fc" = (
 /obj/structure/table/wood/fancy,
-/obj/item/clothing/ring/silver,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "fe" = (
@@ -295,6 +277,10 @@
 	dir = 4
 	},
 /area/under/tomb/sewer)
+"gd" = (
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/metal/barograte,
+/area/under/tomb/indoors/magic)
 "go" = (
 /turf/open/openspace,
 /area/under/tomb/indoors/royal)
@@ -417,7 +403,7 @@
 /obj/structure/closet/crate/crafted_closet/inn,
 /obj/item/clothing/armor/leather/vest/colored/random,
 /obj/item/clothing/pants/trou/leathertights,
-/obj/item/statue/silver,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/church,
 /area/under/tomb/indoors)
 "iv" = (
@@ -426,10 +412,6 @@
 /obj/item/restraints/legcuffs/beartrap/armed/camouflage,
 /turf/open/floor/grass,
 /area/under/tomb/wilds)
-"iC" = (
-/obj/effect/spawner/map_spawner/loot/magic,
-/turf/open/floor/carpet,
-/area/under/tomb/indoors/royal)
 "iF" = (
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/churchmarble,
@@ -453,8 +435,6 @@
 /area/under/tomb/indoors/royal)
 "iV" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/effect/spawner/map_spawner/loot,
-/obj/item/clothing/head/helmet/leather,
 /turf/open/floor/church,
 /area/under/tomb/indoors)
 "iW" = (
@@ -472,7 +452,7 @@
 /area/under/tomb)
 "jl" = (
 /obj/structure/closet/crate/crafted_closet/inn,
-/obj/effect/spawner/map_spawner/loot,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/church,
 /area/under/tomb/indoors)
 "jn" = (
@@ -481,6 +461,10 @@
 "jr" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/closed/wall/mineral/decostone/cand,
+/area/under/tomb/indoors/royal)
+"jE" = (
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "jQ" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
@@ -493,7 +477,6 @@
 "jT" = (
 /obj/structure/table/wood/fancy,
 /obj/item/reagent_containers/glass/carafe/silver/redwine,
-/obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "kf" = (
@@ -580,10 +563,6 @@
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/closed/wall/mineral/stone,
 /area/under/tomb/indoors/magic)
-"lS" = (
-/obj/effect/spawner/map_spawner/loot/medium,
-/turf/open/floor/carpet,
-/area/under/tomb/indoors/royal)
 "mb" = (
 /obj/structure/flora/ausbushes/reedbush,
 /obj/structure/flora/grass/water,
@@ -604,13 +583,13 @@
 /turf/open/floor/grass,
 /area/under/tomb/wilds)
 "mB" = (
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors/magic)
 "mK" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/soap/bath,
-/obj/item/soap,
+/obj/item/soap/bath,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors/magic)
 "mU" = (
@@ -710,7 +689,6 @@
 /mob/living/simple_animal/hostile/retaliate/bigrat,
 /obj/effect/decal/cleanable/blood/gibs,
 /obj/effect/decal/cleanable/blood,
-/obj/item/statue/silver,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors/magic)
 "pq" = (
@@ -720,8 +698,8 @@
 /area/under/tomb/wilds)
 "pA" = (
 /obj/structure/table/wood/reinforced_alt,
-/obj/item/reagent_containers/glass/cup/silver,
 /obj/effect/decal/cleanable/blood/splatter,
+/obj/item/reagent_containers/glass/cup/skull,
 /turf/open/floor/tile/masonic/inverted,
 /area/under/tomb/indoors/royal)
 "pD" = (
@@ -737,6 +715,10 @@
 /obj/structure/stairs/stone/church,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors/magic)
+"pX" = (
+/obj/structure/table/wood,
+/turf/open/floor/tile/kitchen,
+/area/under/tomb/indoors)
 "qc" = (
 /obj/structure/bars/pipe{
 	dir = 8
@@ -744,12 +726,11 @@
 /obj/structure/bars/pipe{
 	dir = 10
 	},
-/obj/effect/spawner/map_spawner/loot,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/openspace,
 /area/under/tomb/sewer)
 "qd" = (
 /obj/structure/table/wood/reinforced_alt,
-/obj/item/reagent_containers/glass/cup/golden,
 /turf/open/floor/tile/masonic/inverted,
 /area/under/tomb/indoors/royal)
 "qg" = (
@@ -767,8 +748,8 @@
 /obj/structure/bars/pipe{
 	dir = 8
 	},
-/obj/effect/spawner/map_spawner/loot,
 /obj/effect/waterfall,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/openspace,
 /area/under/tomb/sewer)
 "qT" = (
@@ -863,8 +844,7 @@
 /area/under/tomb/indoors)
 "sE" = (
 /obj/structure/table/wood/fancy/black,
-/obj/effect/spawner/map_spawner/loot,
-/obj/effect/spawner/map_spawner/loot/food,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "sJ" = (
@@ -882,6 +862,11 @@
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/water/bath,
 /area/under/tomb)
+"sV" = (
+/obj/structure/rack/shelf/biggest,
+/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/turf/open/floor/metal/barograte,
+/area/under/tomb/indoors/magic)
 "sW" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/ausbushes/grassybush,
@@ -948,7 +933,7 @@
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "tT" = (
-/obj/effect/spawner/map_spawner/loot,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
 "tW" = (
@@ -965,7 +950,7 @@
 "ug" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/soap,
-/obj/item/soap,
+/obj/item/soap/bath,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors/magic)
 "uj" = (
@@ -976,7 +961,7 @@
 "uo" = (
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /obj/structure/closet/crate/chest/lootbox,
-/obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
 "uD" = (
@@ -1035,7 +1020,6 @@
 /area/under/tomb/indoors/royal)
 "vf" = (
 /obj/structure/table/vtable/v2,
-/obj/effect/spawner/map_spawner/loot/rare,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
 "vj" = (
@@ -1228,11 +1212,6 @@
 /obj/structure/chair/wood/alt/fancy,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
-"zC" = (
-/obj/structure/closet/crate/crafted_closet/inn,
-/obj/item/clothing/pants/trou/leather,
-/turf/open/floor/church,
-/area/under/tomb/indoors)
 "zG" = (
 /turf/closed/mineral/bedrock,
 /area/under/tomb/indoors/royal)
@@ -1318,7 +1297,7 @@
 /area/under/tomb/indoors/royal)
 "BE" = (
 /obj/structure/closet/crate/chest/old_crate,
-/obj/effect/spawner/map_spawner/loot,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/church,
 /area/under/tomb/indoors)
 "BG" = (
@@ -1342,7 +1321,9 @@
 "BY" = (
 /obj/structure/table/wood,
 /obj/item/reagent_containers/glass/bowl,
-/obj/effect/spawner/map_spawner/loot/food,
+/obj/item/reagent_containers/food/snacks/rotten/sausage{
+	pixel_y = 7
+	},
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors)
 "Cc" = (
@@ -1437,7 +1418,7 @@
 /obj/structure/bars/pipe{
 	dir = 5
 	},
-/obj/effect/spawner/map_spawner/loot,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/openspace,
 /area/under/tomb/sewer)
 "DG" = (
@@ -1459,13 +1440,6 @@
 /obj/structure/fluff/walldeco/vinez,
 /turf/closed/wall/mineral/decostone,
 /area/under/tomb)
-"DT" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/soap,
-/obj/item/soap/bath,
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
-/turf/open/floor/metal/barograte,
-/area/under/tomb/indoors/magic)
 "Et" = (
 /turf/closed/wall/mineral/stone,
 /area/under/tomb/indoors)
@@ -1569,10 +1543,6 @@
 /obj/item/reagent_containers/glass/cup/silver,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
-"Gw" = (
-/obj/effect/spawner/map_spawner/loot/food,
-/turf/open/floor/carpet,
-/area/under/tomb/indoors/royal)
 "GH" = (
 /obj/item/chair/fancy,
 /turf/open/floor/tile/masonic/inverted,
@@ -1583,7 +1553,7 @@
 "GM" = (
 /obj/structure/table/wood/counter,
 /obj/item/reagent_containers/glass/cup/wooden,
-/obj/effect/spawner/map_spawner/loot/food,
+/obj/item/reagent_containers/food/snacks/rotten/meat,
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
 "Hh" = (
@@ -1623,7 +1593,7 @@
 	dir = 8
 	},
 /obj/item/reagent_containers/glass/cup/wooden,
-/obj/effect/spawner/map_spawner/loot/food,
+/obj/item/reagent_containers/food/snacks/rotten/poultry,
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
 "HU" = (
@@ -1670,11 +1640,6 @@
 	},
 /turf/open/openspace,
 /area/under/tomb/sewer)
-"IR" = (
-/obj/item/reagent_containers/glass/bottle,
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/metal/barograte,
-/area/under/tomb/indoors/magic)
 "IS" = (
 /obj/effect/decal/cleanable/blood/splatter,
 /turf/open/floor/churchmarble,
@@ -1687,11 +1652,6 @@
 /obj/effect/decal/cleanable/food/flour,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors)
-"IZ" = (
-/obj/effect/spawner/map_spawner/loot/weapon,
-/obj/effect/decal/cleanable/blood/splatter,
-/turf/open/floor/church,
-/area/under/tomb/indoors)
 "Jp" = (
 /obj/item/natural/poo/horse,
 /obj/structure/bars/pipe/left,
@@ -1700,7 +1660,6 @@
 "Jz" = (
 /obj/structure/table/wood/fine,
 /obj/item/painting/castle,
-/obj/item/statue/gold/loot,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "JA" = (
@@ -1826,7 +1785,7 @@
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
-/obj/effect/spawner/map_spawner/loot,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/tile/masonic/inverted,
 /area/under/tomb/indoors/royal)
 "LZ" = (
@@ -1969,11 +1928,6 @@
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/hexstone,
 /area/under/tomb/wilds)
-"Qu" = (
-/obj/structure/table/vtable/v2,
-/obj/effect/spawner/map_spawner/loot/food,
-/turf/open/floor/blocks,
-/area/under/tomb/indoors/royal)
 "Qy" = (
 /obj/item/natural/glass/shard,
 /turf/open/floor/hexstone,
@@ -1993,6 +1947,14 @@
 /obj/item/natural/cloth,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
+"QX" = (
+/obj/structure/table/wood,
+/obj/item/reagent_containers/glass/bowl,
+/obj/item/reagent_containers/food/snacks/rotten/egg{
+	pixel_y = 8
+	},
+/turf/open/floor/tile/kitchen,
+/area/under/tomb/indoors)
 "QY" = (
 /turf/closed/wall/mineral/stone/window/moss,
 /area/under/tomb/indoors)
@@ -2007,7 +1969,6 @@
 /area/under/tomb/indoors)
 "Rk" = (
 /obj/structure/closet/crate/drawer/random,
-/obj/effect/spawner/map_spawner/loot/medium,
 /obj/effect/decal/cleanable/blood/old,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
@@ -2027,11 +1988,6 @@
 "RC" = (
 /turf/open/floor/metal,
 /area/under/tomb/indoors)
-"RE" = (
-/obj/structure/closet/crate/chest/lootbox,
-/obj/item/statue/gold/loot,
-/turf/open/floor/carpet,
-/area/under/tomb/indoors/royal)
 "RL" = (
 /obj/structure/flora/ausbushes/lavendergrass,
 /obj/structure/flora/grass,
@@ -2090,12 +2046,11 @@
 /area/under/tomb/sewer)
 "Uh" = (
 /obj/structure/closet/crate/chest/lootbox,
-/obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
 "Uo" = (
 /obj/structure/closet/crate/chest/neu_iron,
-/obj/item/statue/gold/loot,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
 "Uz" = (
@@ -2174,7 +2129,7 @@
 /area/under/tomb/indoors)
 "VN" = (
 /obj/structure/table/wood,
-/obj/effect/spawner/map_spawner/loot/food,
+/obj/item/reagent_containers/food/snacks/rotten/breadslice,
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
 "VP" = (
@@ -2268,13 +2223,12 @@
 /area/under/tomb/sewer)
 "YB" = (
 /obj/structure/table/wood,
-/obj/effect/spawner/map_spawner/loot/food,
+/obj/item/reagent_containers/food/snacks/rotten/chickenleg,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors)
 "YE" = (
 /obj/structure/closet/crate/crafted_closet/lord,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/obj/item/clothing/wrists/bracers,
+/obj/effect/dungeon_loot_spawner/high/chest,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "YI" = (
@@ -2296,7 +2250,6 @@
 /area/under/tomb/indoors/royal)
 "Zc" = (
 /obj/structure/table/wood/reinforced_alt,
-/obj/item/reagent_containers/glass/cup/skull,
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/tile/masonic/inverted,
 /area/under/tomb/indoors/royal)
@@ -2353,7 +2306,6 @@
 /turf/open/water/bath,
 /area/under/tomb/indoors)
 "ZZ" = (
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
 /obj/machinery/light/fueled/wallfire/candle/weak,
 /turf/open/floor/metal/barograte,
 /area/under/tomb/indoors/magic)
@@ -2479,10 +2431,10 @@ iv
 da
 eX
 RT
-YB
+pX
 VA
 VA
-TJ
+QX
 Zl
 vW
 "}
@@ -2554,7 +2506,7 @@ vW
 vW
 NG
 dP
-Gw
+iN
 iN
 wQ
 fc
@@ -3015,7 +2967,7 @@ sq
 sq
 ZZ
 qi
-mB
+Cc
 pf
 oy
 Ir
@@ -3049,7 +3001,7 @@ ao
 Tb
 Cq
 uS
-Vs
+sV
 Ir
 gu
 Af
@@ -3107,13 +3059,13 @@ fv
 fv
 KT
 Et
-DT
+sV
 gZ
 fq
 Xv
-IR
+PS
 Cc
-Vs
+gd
 Et
 fe
 FL
@@ -3139,13 +3091,13 @@ RC
 kJ
 RC
 RT
-cq
+sV
 PS
 pG
 Lq
 uN
 kx
-Vs
+sV
 Et
 iu
 bn
@@ -3180,7 +3132,7 @@ pf
 Np
 RT
 gu
-IZ
+uf
 FL
 gu
 RT
@@ -3211,7 +3163,7 @@ yl
 yl
 fB
 RT
-zC
+iV
 BG
 FL
 Od
@@ -3743,7 +3695,7 @@ Mj
 pF
 oY
 aj
-uD
+jE
 yN
 Qj
 rl
@@ -3790,7 +3742,7 @@ Yz
 Xr
 ft
 FT
-iC
+iN
 aZ
 GI
 JD
@@ -3853,7 +3805,7 @@ Yz
 Yz
 Xr
 AN
-lS
+iN
 iN
 ZM
 GI
@@ -3885,7 +3837,7 @@ Yz
 Yz
 nI
 vb
-RE
+CQ
 LB
 ek
 GI
@@ -3966,7 +3918,7 @@ Cl
 Cl
 Zl
 Ku
-ce
+Ku
 UZ
 VP
 Ku
@@ -4016,7 +3968,7 @@ Fx
 ae
 ae
 KV
-Qu
+vf
 GI
 iG
 IS
@@ -4074,7 +4026,7 @@ NH
 NH
 cu
 ri
-be
+aH
 Le
 ae
 kz

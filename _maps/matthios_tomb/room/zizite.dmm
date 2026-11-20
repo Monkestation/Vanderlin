@@ -1,4 +1,34 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/item/clothing/neck/psycross/silver/divine/noc,
+/turf/open/floor/church/gold,
+/area/under/tomb/indoors/church)
+"ab" = (
+/obj/structure/closet/crate/crafted_closet/steward,
+/obj/effect/dungeon_loot_spawner/low,
+/obj/item/statue/silver/urn{
+	name = "tarnished silver urn";
+	sellprice = 10
+	},
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
+"ac" = (
+/obj/structure/closet/crate/crafted_closet/steward,
+/obj/effect/dungeon_loot_spawner/low,
+/obj/item/carvedgem/amber/urn{
+	name = "cracked petriamber urn";
+	sellprice = 10
+	},
+/obj/item/carvedgem/amber/urn{
+	name = "cracked petriamber urn";
+	sellprice = 10
+	},
+/obj/item/carvedgem/amber/duck{
+	sellprice = 5;
+	name = "old toy duck"
+	},
+/turf/open/floor/churchrough,
+/area/under/tomb/indoors/magic)
 "aj" = (
 /mob/living/carbon/human/species/demihuman/base/skilled/light_gear,
 /turf/open/floor/carpet/lord/left,
@@ -41,15 +71,6 @@
 	},
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
-"cY" = (
-/obj/item/clothing/neck/psycross/gold,
-/obj/item/ingot/steelholy,
-/obj/item/ingot/steelholy,
-/obj/item/ingot/steelholy,
-/obj/item/ingot/silverblessed,
-/obj/structure/closet/crate/crafted_closet/steward,
-/turf/open/floor/churchrough,
-/area/under/tomb/indoors/magic)
 "dm" = (
 /obj/item/clothing/armor/chainmail/hauberk/ancient{
 	pixel_y = -9;
@@ -71,7 +92,6 @@
 	pixel_y = 1;
 	pixel_x = -10
 	},
-/obj/item/clothing/ring/gold/ravox,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
 "dz" = (
@@ -86,13 +106,9 @@
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
 "dH" = (
-/obj/item/clothing/pants/platelegs/inhumen/zizo,
+/obj/item/clothing/pants/platelegs,
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
-"el" = (
-/obj/item/clothing/head/helmet/visored/silver/armet,
-/turf/open/floor/church/gold,
-/area/under/tomb/indoors/church)
 "eo" = (
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
@@ -101,12 +117,12 @@
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
 "eJ" = (
-/obj/item/weapon/sword/sabre/noc,
 /obj/item/clothing/neck/psycross/zizo,
 /obj/item/clothing/shirt/robe/magus{
 	pixel_y = 2;
 	pixel_x = 8
 	},
+/obj/item/weapon/sword/sabre,
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
 "eS" = (
@@ -119,9 +135,7 @@
 	pixel_y = -2;
 	pixel_x = 15
 	},
-/obj/item/clothing/armor/cuirass/fluted/gold/king{
-	pixel_y = -10
-	},
+/obj/item/clothing/armor/cuirass/fluted/ornate,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
 "fR" = (
@@ -140,11 +154,7 @@
 /area/under/tomb/indoors/church)
 "gW" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/gem/amber,
-/obj/item/gem/amber,
-/obj/item/gem/amber,
-/obj/item/gem/amber,
-/obj/item/statue/gold,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
 "hg" = (
@@ -162,7 +172,7 @@
 "il" = (
 /obj/structure/closet/crate/crafted_closet/steward,
 /obj/item/instrument/psyaltery,
-/obj/item/coin/gold/pile,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "iq" = (
@@ -230,10 +240,6 @@
 	pixel_x = 14
 	},
 /obj/effect/decal/remains/human,
-/obj/item/clothing/ring/gold/saffira{
-	pixel_y = 1;
-	pixel_x = 3
-	},
 /obj/item/clothing/cloak/grandmaster,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
@@ -273,15 +279,10 @@
 /obj/item/clothing/neck/psycross/silver/divine/necra{
 	pixel_y = 1
 	},
-/obj/item/statue/gold/comb{
-	pixel_x = 9;
-	pixel_y = 7
-	},
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/church)
 "qj" = (
 /obj/structure/closet/crate/crafted_closet/steward,
-/obj/item/weapon/knife/dagger/steel/inhumen/profane,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "qy" = (
@@ -343,13 +344,6 @@
 /obj/structure/fluff/statue/astrata/bling,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
-"tB" = (
-/obj/structure/closet/crate/crafted_closet/steward,
-/obj/item/clothing/ring/active/nomag,
-/obj/item/coin/gold/pile,
-/obj/item/coin/gold/pile,
-/turf/open/floor/churchrough,
-/area/under/tomb/indoors/magic)
 "tL" = (
 /obj/item/natural/wood/plank,
 /obj/item/natural/wood/plank{
@@ -364,10 +358,7 @@
 /area/under/tomb/indoors/magic)
 "va" = (
 /obj/structure/table/stone_small,
-/obj/item/reagent_containers/glass/carafe/gold{
-	pixel_y = 6;
-	pixel_x = 10
-	},
+/obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
 "vc" = (
@@ -379,10 +370,7 @@
 /area/under/tomb/indoors/magic)
 "ve" = (
 /obj/structure/table/church/m,
-/obj/item/statue/gold{
-	pixel_y = 12;
-	pixel_x = -2
-	},
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/church)
 "vU" = (
@@ -441,14 +429,9 @@
 /obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/carpet/lord/center,
 /area/under/tomb/indoors/church)
-"zB" = (
-/obj/effect/mapping_helpers/structure/breaker,
-/turf/closed/wall/window/stained/yellow,
-/area/under/tomb/indoors/church)
 "zM" = (
-/obj/item/riddleofsteel,
 /obj/structure/closet/crate/crafted_closet/steward,
-/obj/item/coin/gold/pile,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "zX" = (
@@ -466,7 +449,8 @@
 /turf/open/floor/carpet/lord/left,
 /area/under/tomb/indoors/church)
 "AX" = (
-/obj/item/weapon/polearm/halberd/silver,
+/obj/item/clothing/shirt/robe/magus,
+/obj/item/rope/chain,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
 "Bh" = (
@@ -480,25 +464,7 @@
 /area/under/tomb/indoors/church)
 "BF" = (
 /obj/structure/table/stone_small,
-/obj/structure/healingfountain{
-	pixel_y = 11
-	},
-/turf/open/floor/churchrough,
-/area/under/tomb/indoors/magic)
-"BG" = (
-/obj/item/reagent_containers/glass/bottle/strongmanapot,
-/obj/item/reagent_containers/glass/bottle/stronghealthpot{
-	pixel_x = 12
-	},
-/turf/open/floor/church/violet,
-/area/under/tomb/indoors/magic)
-"BP" = (
-/obj/structure/closet/crate/crafted_closet/steward,
-/obj/item/carvedgem/amber/urn,
-/obj/item/carvedgem/amber/urn,
-/obj/item/carvedgem/amber/duck/sunduck,
-/obj/item/coin/gold/pile,
-/obj/item/coin/gold/pile,
+/obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/churchrough,
 /area/under/tomb/indoors/magic)
 "Cc" = (
@@ -582,11 +548,6 @@
 /obj/effect/dungeon_directional_helper/west,
 /turf/open/floor/church/violet,
 /area/under/tomb)
-"Hb" = (
-/obj/structure/table/stone_small,
-/obj/item/weapon/flail/psydon/relic,
-/turf/open/floor/churchrough,
-/area/under/tomb/indoors/magic)
 "Hf" = (
 /turf/open/floor/church/violet,
 /area/under/tomb/indoors/magic)
@@ -730,8 +691,6 @@
 /area/under/tomb/indoors/church)
 "Td" = (
 /obj/structure/closet/crate/chest/gold,
-/obj/item/coin/gold/pile,
-/obj/item/coin/gold/pile,
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/reagent_containers/food/snacks/hardtack,
@@ -741,6 +700,7 @@
 /obj/item/reagent_containers/food/snacks/hardtack,
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple,
 /obj/item/reagent_containers/food/snacks/produce/fruit/apple,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/church/gold,
 /area/under/tomb/indoors/church)
 "Tx" = (
@@ -1246,7 +1206,7 @@ bG
 Hf
 Hf
 XF
-BG
+Hf
 Hf
 "}
 (15,1,1) = {"
@@ -1821,7 +1781,7 @@ Hw
 Hw
 Sm
 PB
-tB
+ab
 PB
 il
 PB
@@ -1837,7 +1797,7 @@ zf
 Mw
 VC
 tg
-eo
+aa
 FL
 sR
 gW
@@ -1864,11 +1824,11 @@ zf
 tL
 ZJ
 Ph
-sR
 AX
+eo
 FL
 Td
-zB
+Wp
 Uq
 "}
 (13,1,2) = {"
@@ -1891,7 +1851,7 @@ La
 lm
 Vm
 Bv
-el
+eo
 dm
 eo
 qy
@@ -1901,7 +1861,7 @@ Mw
 (14,1,2) = {"
 Hw
 XF
-Hb
+BF
 lV
 HJ
 KA
@@ -1922,18 +1882,18 @@ xC
 qS
 mg
 eo
-zB
+Wp
 Uq
 "}
 (15,1,2) = {"
 Hw
 Sm
 PB
-BP
+ac
 PB
 zM
 PB
-cY
+zM
 SB
 if
 SB
