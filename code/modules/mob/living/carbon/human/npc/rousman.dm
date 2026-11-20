@@ -169,7 +169,7 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 	var/raceicon = "rousman"
 	exotic_bloodtype = /datum/blood_type/human/corrupted/rousman
 	meat = list(/obj/item/reagent_containers/food/snacks/meat/strange/inhumen = 1, /obj/item/natural/fur/rous = 0.5)
-	native_language = "Rous"
+	forced_native_accent = ACCENT_ROUSMAN
 	possible_ages = NORMAL_AGES_LIST
 
 	organs = list(
@@ -260,17 +260,14 @@ GLOBAL_LIST_EMPTY(rousman_ambush_objects)
 
 /datum/species/rousman/on_species_gain(mob/living/carbon/C, datum/species/old_species)
 	..()
-	RegisterSignal(C, COMSIG_MOB_SAY, PROC_REF(handle_speech))
 	C.grant_language(/datum/language/rousman)
 
 /datum/species/rousman/after_creation(mob/living/carbon/C)
 	..()
-	C.dna.species.accent_language = C.dna.species.get_accent(native_language, 1)
 	C.grant_language(/datum/language/rousman)
 
 /datum/species/rousman/on_species_loss(mob/living/carbon/C)
 	. = ..()
-	UnregisterSignal(C, COMSIG_MOB_SAY)
 	C.remove_language(/datum/language/rousman)
 
 // ##################################### END SPECIES BIT #####################################

@@ -50,10 +50,9 @@
 
 	GLOB.inquisition.add_member_to_school(spawned, "Benetarus", 0, "Disciple")
 
-	var/datum/species/species = spawned.dna?.species
-	if(species)
-		species.native_language = "Old Psydonic"
-		species.accent_language = species.get_accent(species.native_language)
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_GRENZ
 
 /datum/job/advclass/sacrestant/disciple/on_roundstart(mob/living/carbon/human/spawned, client/player_client)
 	. = ..()

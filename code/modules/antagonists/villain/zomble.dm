@@ -194,8 +194,6 @@
 	zombie.remove_all_languages()
 	zombie.grant_language(/datum/language/undead)
 	if(zombie.dna?.species)
-		zombie.dna.species.native_language = "Zizo Chant"
-		zombie.dna.species.accent_language = zombie.dna.species.get_accent(zombie.dna.species.native_language)
 		zombie.dna.species.soundpack_m = new /datum/voicepack/zombie/m()
 		zombie.dna.species.soundpack_f = new /datum/voicepack/zombie/f()
 

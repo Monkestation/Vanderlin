@@ -47,6 +47,9 @@
 	///if this is a preference we don't natively apply
 	var/should_apply = TRUE
 
+	///if this preference must be applied post mind creation
+	var/post_mind_pref = FALSE
+
 	///if this preference has special post job applications
 	var/post_job_pref = FALSE
 	///these are the jobs we actually care about

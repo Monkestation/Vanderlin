@@ -191,6 +191,7 @@
 	old_mob.client.prefs.apply_prefs_to(new_character)
 	new_character.dna.update_dna_identity()
 	old_mob.mind.transfer_to(new_character)
+	old_mob.client.prefs.apply_post_mind_preferences(new_character)
 	if(qdel_old_mob)
 		qdel(old_mob)
 	return new_character

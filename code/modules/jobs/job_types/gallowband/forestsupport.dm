@@ -93,11 +93,9 @@
 	else
 		add_verb(spawned, /mob/proc/haltyell)
 
-	var/datum/species/species = spawned.dna?.species
-	if(species)
-		species.native_language = "Osslandic"
-		species.accent_language = species.get_accent(species.native_language)
-
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_OSSLAND
 
 /datum/outfit/forestsupport
 	name = JOB_FOREST_SUPPORT
