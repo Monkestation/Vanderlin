@@ -6266,7 +6266,7 @@
 /obj/item/clothing/cloak/raincloak/colored/mortus{
 	name = "cloak"
 	},
-/obj/item/clothing/head/sack,
+/obj/item/clothing/head/inqarticles/blackbag/civilian,
 /obj/structure/closet/crate/crafted_closet/dark,
 /obj/item/paper{
 	pixel_x = 10
@@ -26061,10 +26061,10 @@
 /area/outdoors/town)
 "lUy" = (
 /obj/structure/closet/crate/crafted_closet,
-/obj/item/clothing/head/sack{
+/obj/item/clothing/head/inqarticles/blackbag/civilian{
 	pixel_y = -5
 	},
-/obj/item/clothing/head/sack{
+/obj/item/clothing/head/inqarticles/blackbag/civilian{
 	pixel_x = -5;
 	pixel_y = 7
 	},
