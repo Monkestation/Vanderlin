@@ -145,6 +145,7 @@
 			if(!choice)
 				return
 			active_color = selectable_colors[choice]
+			interact(user) // refresh the menu
 
 		if("paint")
 			if(!inserted)
