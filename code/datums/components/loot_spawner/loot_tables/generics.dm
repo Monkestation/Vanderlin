@@ -15,7 +15,7 @@
 		/obj/item/warpstone = 4,
 		/obj/item/weapon/knife/dagger = 8,
 		/obj/item/weapon/sword/iron = 3,
-		/obj/item/weapon/axe/copper = 10,
+		/obj/item/weapon/axe/hatchet/copper = 10,
 		/obj/item/weapon/mace = 5,
 		/obj/item/clothing/armor/leather = 10,
 		/obj/item/clothing/gloves/chain/iron = 3,

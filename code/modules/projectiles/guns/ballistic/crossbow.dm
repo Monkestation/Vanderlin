@@ -39,6 +39,17 @@
 	pullback_time = 2 SECONDS
 	pullback_movement = TRUE
 
+/obj/item/gun/ballistic/bow/cross/hunt
+	name = "hunting crossbow"
+	desc = "A complex yet simple tool of war, turned to survival. Commonly used by hunters, this will put a hole in most beasties."
+	icon_state = "huntingcrossbow"
+	base_icon_state = "huntingcrossbow"
+	item_weight = 1.8 KILOGRAMS
+
+	projectile_damage_multiplier = 0.8
+
+	pullback_time = 3 SECONDS
+
 /obj/item/gun/ballistic/bow/cross/getonmobprop(tag)
 	. = ..()
 	if(tag)
