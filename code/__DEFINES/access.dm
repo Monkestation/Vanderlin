@@ -65,6 +65,7 @@
 #define ACCESS_NOBLE3 "nobles3"
 #define ACCESS_NOBLE2 "nobles2"
 #define ACCESS_NOBLE1 "nobles1"
+#define ACCESS_DIGNITARY "dignitary"
 
 // Shops
 #define ACCESS_SHOP_I "shop1"
