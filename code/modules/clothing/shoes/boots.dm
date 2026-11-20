@@ -190,9 +190,9 @@
 	wetable = FALSE
 
 /obj/item/clothing/shoes/boots/leather/advanced/watch
-	name = "watch boots"
+	name = "marching boots"
 	color = "#d5c2aa"
-	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the city watch long before they're seen."
+	desc = "These boots are reinforced with iron padding, designed not just for protection but for presence, announcing the approach of the soldiers long before they're seen."
 	icon_state = "blackboots"
 	item_state = "blackboots"
 	wetable = FALSE
@@ -273,6 +273,25 @@
 	salvage_result = /obj/item/natural/cloth
 	salvage_amount = 1
 	item_weight = 125 GRAMS
+
+/obj/item/clothing/shoes/boots/footbandages
+	name = "bandage footwraps"
+	desc = "Thickly-woven bandages that've been wrapped around the feet. Doesn't do much for hurting others, but its better than going bare."
+	icon_state = "footwraps"
+	item_state = "footwraps"
+	is_barefoot = TRUE
+	prevent_crits = list(BCLASS_CUT, BCLASS_STAB, BCLASS_BLUNT)
+	sewrepair = /datum/attribute/skill/misc/sewing/mending
+	dyeable = TRUE
+	resistance_flags = FIRE_PROOF
+	blade_dulling = DULLING_BASHCHOP
+	break_sound = 'sound/foley/cloth_rip.ogg'
+	drop_sound = 'sound/foley/dropsound/cloth_drop.ogg'
+	armor_type = /datum/armor/boots/leather
+	body_parts_covered = FEET | LEGS
+	salvage_result = /obj/item/natural/cloth
+	salvage_amount = 1
+	item_weight = 225 GRAMS
 
 /obj/item/clothing/shoes/boots/armor/silver
 	name = "silver boots"

@@ -167,11 +167,11 @@
 /area/under/tomb/cave/lava)
 "M" = (
 /obj/machinery/anvil,
-/obj/item/riddleofsteel,
 /obj/item/weapon/hammer/steel{
 	pixel_x = -6;
 	pixel_y = 5
 	},
+/obj/effect/dungeon_loot_spawner/high,
 /turf/open/floor/dirt,
 /area/under/tomb/cave/lava)
 "N" = (

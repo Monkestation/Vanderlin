@@ -41,7 +41,7 @@
 	// Update vampire datum if they have one
 	var/datum/antagonist/vampire/vamp_datum = H.mind?.has_antag_datum(/datum/antagonist/vampire)
 	H.maxbloodpool += vitae_bonus
-	if(vamp_datum)
+	if(!istype(vamp_datum, /datum/antagonist/vampire/lord))
 		vamp_datum.name = "[lord_title]"
 		vamp_datum.antag_hud_name = "vamplord"
 

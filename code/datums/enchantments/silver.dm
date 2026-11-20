@@ -32,7 +32,7 @@
 /datum/enchantment/silver/proc/affected_by_bane(mob/target)
 	if(!ishuman(target) || !target.mind)
 		return UNAFFECTED
-	if(HAS_TRAIT(target, TRAIT_SILVER_IMMUNE))
+	if(HAS_TRAIT(target, TRAIT_SILVER_IMMUNE) || HAS_TRAIT(target, TRAIT_TRUESILVER_IMMUNE))
 		return UNAFFECTED
 	var/datum/antagonist/vampire/vamp_datum = target.mind.has_antag_datum(/datum/antagonist/vampire)
 	var/datum/antagonist/werewolf/wolf_datum = IS_WEREWOLF(target)
@@ -78,10 +78,12 @@
 	return
 
 /datum/enchantment/silver/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
+	last_used["PULSE"] = (world.time + 15 SECONDS)
 	apply_bane(i, user, FALSE)
 	START_PROCESSING(SSenchantment, src)
 
 /datum/enchantment/silver/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
+	last_used["PULSE"] = (world.time + 15 SECONDS)
 	apply_bane(i, user, FALSE)
 	START_PROCESSING(SSenchantment, src)
 
@@ -208,7 +210,7 @@
 /atom/movable/screen/alert/status_effect/debuff/silver_bane
 	name = "Silver's Bane"
 	desc = "My BANE!"
-	icon_state = "hunger4"
+	icon_state = "silvercurse"
 
 /atom/movable/screen/alert/status_effect/debuff/silver_bane/proc/update_info(stacks, is_stunned)
 	if(is_stunned)
