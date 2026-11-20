@@ -108,7 +108,7 @@
 /turf/open/floor/metal/barograte/open,
 /area/under/tomb/sewer)
 "oB" = (
-/obj/item/weapon/sword/long/greatsword/zwei,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/metal/barograte/open,
 /area/under/tomb/sewer)
 "px" = (

@@ -30,7 +30,8 @@
 		TRAIT_ZJUMP,
 		TRAIT_IMMUNE_TO_FRENZY,
 		TRAIT_COVEN_RESISTANT,
-		TRAIT_SILVER_IMMUNE
+		TRAIT_TRUESILVER_IMMUNE,
+		TRAIT_DIVINE_SERVANT
 	)
 	leader_title = "Daewalker"
 	leader = /datum/clan_leader/daewalker

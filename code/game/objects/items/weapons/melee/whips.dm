@@ -95,14 +95,21 @@
 	. = ..()
 	enchant(/datum/enchantment/silver)
 
-/obj/item/weapon/whip/silver/truesilver
+/obj/item/weapon/whip/truesilver
 	name = "truesilver whip"
 	desc = "A blued leather corded whip with a handle, core and tip forged with truesilver."
 	icon_state = "whip_lunar"
+	force = DAMAGE_WHIP + 2
+	resistance_flags = FIRE_PROOF
 	smeltresult = null
 	melt_amount = 100
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_TRUESILVER
+	item_weight = 550 GRAMS
+
+/obj/item/weapon/whip/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/truesilver)
 
 //................ Psydon Whip ............... //
 /obj/item/weapon/whip/psydon
