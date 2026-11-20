@@ -196,6 +196,9 @@
 
 	var/shows_in_list = TRUE
 
+	/// Do we display as "WANDERER" in the readyup/actors list?
+	var/wanderer_role = FALSE
+
 	/// can we have apprentices?
 	var/can_have_apprentices = TRUE
 	/// the skills and % of xp they should transfer over to apprentices as they are trained.
@@ -233,12 +236,17 @@
 	/// Job bitflag for storyteller
 	var/job_bitflag = NONE
 
-	/// Blacklisted from the actor
-
-	var/static/list/actors_list_blacklist = list(
+	/// Jobs that will display as generic "Wanderers" in the actor
+	var/static/list/actors_list_wanderlist = list(
 		/datum/job/adventurer,
 		/datum/job/pilgrim,
 		/datum/job/courtagent,
+		/datum/job/bandit,
+	)
+
+	/// Blacklisted from the actor
+	var/static/list/actors_list_blacklist = list(
+
 		/datum/job/skeleton/zizoid,
 		/datum/job/advclass/wretch,
 	)
@@ -459,6 +467,8 @@
 	else
 		type_check = type
 		parent_type_check = parent_type
+	if((type_check in actors_list_wanderlist) || (parent_type_check in actors_list_wanderlist))
+		used_title = "Wanderer"
 	if(!(type_check in actors_list_blacklist) && !(parent_type_check in actors_list_blacklist)) //don't show these.
 		GLOB.actors_list[spawned.mobid] = "[spawned.real_name] as [used_title]<BR>"
 
@@ -893,6 +903,7 @@
 	data["job_reopens_slots_on_death"] = job_reopens_slots_on_death
 	data["is_foreigner"] = is_foreigner
 	data["is_recognized"] = is_recognized
+	data["wanderer_role"] = wanderer_role
 	data["shows_in_list"] = shows_in_list
 	data["can_have_apprentices"] = can_have_apprentices
 	data["max_apprentices"] = max_apprentices
@@ -974,6 +985,7 @@
 	job_reopens_slots_on_death = data["job_reopens_slots_on_death"]
 	is_foreigner = data["is_foreigner"]
 	is_recognized = data["is_recognized"]
+	wanderer_role = data["wanderer_role"]
 	shows_in_list = data["shows_in_list"]
 	can_have_apprentices = data["can_have_apprentices"]
 	max_apprentices = data["max_apprentices"]
