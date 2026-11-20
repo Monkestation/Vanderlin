@@ -322,7 +322,7 @@
 
 /obj/item/ingot/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 
 /obj/item/ingot/steel
 	name = "steel bar"

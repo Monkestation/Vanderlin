@@ -13,8 +13,8 @@
 /area/under/tomb/wilds/bog)
 "cq" = (
 /obj/structure/table/wood/nice/decorated_alt,
-/obj/item/reagent_containers/glass/cup/golden,
 /obj/structure/closet/crate/chest/gold,
+/obj/effect/dungeon_loot_spawner/medium/chest,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "cr" = (
@@ -51,12 +51,6 @@
 /turf/open/floor/blocks/paving/vert,
 /area/under/tomb/indoors)
 "gk" = (
-/turf/open/floor/carpet,
-/area/under/tomb/indoors/royal)
-"gl" = (
-/obj/structure/table/wood/nice/decorated_alt,
-/obj/item/statue/gold/loot,
-/obj/structure/closet/crate/chest/gold,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "iQ" = (
@@ -140,8 +134,8 @@
 /area/under/tomb/indoors/royal)
 "xu" = (
 /obj/structure/table/wood/nice/decorated_alt,
-/obj/item/clothing/ring/gold,
 /obj/structure/closet/crate/chest/gold,
+/obj/effect/dungeon_loot_spawner/high/chest,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "xQ" = (
@@ -154,8 +148,8 @@
 /area/under/tomb/indoors/royal)
 "Bv" = (
 /obj/structure/table/wood/nice/decorated_alt,
-/obj/item/statue/gold,
 /obj/structure/closet/crate/chest/gold,
+/obj/effect/dungeon_loot_spawner/low/chest,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/royal)
 "CP" = (
@@ -191,12 +185,6 @@
 /mob/living/simple_animal/hostile/retaliate/trufflepig,
 /turf/open/floor/dirt/ambush,
 /area/under/tomb/wilds/bog)
-"Iq" = (
-/obj/structure/table/wood/nice/decorated_alt,
-/obj/item/ore/gold,
-/obj/structure/closet/crate/chest/gold,
-/turf/open/floor/carpet,
-/area/under/tomb/indoors/royal)
 "Lx" = (
 /obj/machinery/light/fueled/wallfire/candle/l,
 /turf/open/floor/carpet,
@@ -217,12 +205,6 @@
 /obj/structure/flora/shroom_tree,
 /turf/open/floor/dirt/ambush,
 /area/under/tomb/wilds/bog)
-"NY" = (
-/obj/structure/table/wood/nice/decorated_alt,
-/obj/item/ingot/gold,
-/obj/structure/closet/crate/chest/gold,
-/turf/open/floor/carpet,
-/area/under/tomb/indoors/royal)
 "Oa" = (
 /obj/structure/flora/grass/swampweed,
 /turf/open/floor/dirt/ambush,
@@ -499,7 +481,7 @@ CP
 (3,1,2) = {"
 CP
 pk
-gl
+Bv
 gk
 gk
 gk
@@ -531,7 +513,7 @@ Yd
 gk
 gk
 gk
-NY
+Bv
 gk
 gk
 gk
@@ -595,7 +577,7 @@ xu
 gk
 gk
 gk
-NY
+Bv
 gk
 gk
 gk
@@ -619,7 +601,7 @@ CP
 (11,1,2) = {"
 Yd
 gk
-cq
+Bv
 gk
 gk
 gk
@@ -627,7 +609,7 @@ CX
 gk
 gk
 gk
-Iq
+Bv
 pk
 xQ
 "}

@@ -94,8 +94,8 @@
 	. = ..()
 	var/static/list/selectable = list(
 		"Moonlight Khopesh" = /obj/item/weapon/sword/sabre/noc,
-		"Lunar Flail" = /obj/item/weapon/flail/silver/noc,
-		"Bar Mace" = /obj/item/weapon/mace/silver/barmace/lunar,
+		"Lunar Flail" = /obj/item/weapon/flail/noc,
+		"Bar Mace" = /obj/item/weapon/mace/truesilver_barmace,
 	)
 	var/choice = spawned.select_equippable(player_client, selectable, message = "Choose Your Specialisation", title = "SENTINEL")
 	if(!choice)
@@ -122,6 +122,7 @@
 	belt = /obj/item/storage/belt/leather
 	beltr = /obj/item/flashlight/flare/torch/lantern
 	backl = /obj/item/storage/backpack/satchel
+	l_hand = /obj/item/weapon/shield/tower/metal
 	backpack_contents = list(
 		/obj/item/needle = 1,
 		/obj/item/storage/belt/pouch/coins/mid = 1,
