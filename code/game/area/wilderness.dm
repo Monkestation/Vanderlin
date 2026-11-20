@@ -1,5 +1,5 @@
 /area/outdoors/wilderness
-	name = "murderwood"
+	name = "coastwood"
 	icon = 'icons/turf/areas/forest.dmi'
 	icon_state = "woods"
 	droning_index = DRONING_FOREST_DAY
@@ -29,7 +29,44 @@
 		new /datum/ambush_config/highwayman_gang = 6,
 		new /datum/ambush_config/mixed_wildlife = 15,
 	)
-	first_time_text = "THE MURDERWOOD"
+	first_time_text = "THE SOUTHERN COASTWOODS"
+	custom_area_sound = 'sound/misc/stings/ForestSting.ogg'
+	converted_type = /area/indoors/shelter/woods
+	threat_region = THREAT_REGION_WOODS
+
+
+/area/outdoors/wilderness/plains
+	name = "coastwoodplains"
+	icon = 'icons/turf/areas/forest.dmi'
+	icon_state = "woods"
+	droning_index = DRONING_FOREST_DAY
+	droning_index_night = DRONING_FOREST_NIGHT
+	ambient_index = AMBIENCE_BIRDS
+	ambient_index_night = AMBIENCE_FOREST
+	background_track = 'sound/music/area/forest.ogg'
+	background_track_dusk = 'sound/music/area/septimus.ogg'
+	background_track_night = 'sound/music/area/forestnight.ogg'
+	soundenv = 15
+	ambush_times = list(NIGHT,DAWN,DUSK,DAY)
+	ambush_types = list(
+		/turf/open/floor/grass,
+		/turf/open/floor/dirt,
+	)
+
+	ambush_mobs = list(
+		new /datum/ambush_config/wolf_pack = 15,
+		new /datum/ambush_config/lone_troll = 10,
+		new /datum/ambush_config/troll_and_wolves = 8,
+		new /datum/ambush_config/goblin_ambush_party = 15,
+		new /datum/ambush_config/goblin_raid_party = 8,
+		new /datum/ambush_config/raccoon_swarm = 20,
+		new /datum/ambush_config/mole_pack = 15,
+		new /datum/ambush_config/deserter_patrol = 12,
+		new /datum/ambush_config/highwayman_duo = 10,
+		new /datum/ambush_config/highwayman_gang = 6,
+		new /datum/ambush_config/mixed_wildlife = 15,
+	)
+	first_time_text = "THE COASTWOOD PLAINS"
 	custom_area_sound = 'sound/misc/stings/ForestSting.ogg'
 	converted_type = /area/indoors/shelter/woods
 	threat_region = THREAT_REGION_WOODS
@@ -42,17 +79,24 @@
 	name = "thatchwood outpost"
 	first_time_text = "Thatchwood Outpost"
 	threat_region = THREAT_REGION_NORTHERN_GROVE
+	ambush_mobs = null
+
+/area/outdoors/wilderness/outpost/vanderlin/outskirts
+	name = "thatchwood outpost"
+	first_time_text = "Thatchwood Outpost Outskirts"
+	threat_region = THREAT_REGION_NORTHERN_GROVE
+	ambush_mobs = null
 
 /area/outdoors/wilderness/beside_thatchwood
 
 /area/outdoors/wilderness/north
-	name = "Northern Murderwood"
+	name = "Northern Coastwood"
 /area/outdoors/wilderness/east
-	name = "Eastern Murderwood"
+	name = "Eastern Coastwood"
 /area/outdoors/wilderness/south
-	name = "Southern Murderwood"
+	name = "Southern Coastwood"
 /area/outdoors/wilderness/central
-	name = "Central Murderwood"
+	name = "Central Coastwood"
 
 /area/outdoors/wilderness/outpost/salem
 	name = "salem outpost"
@@ -114,35 +158,35 @@
 	ambush_mobs = null
 	icon_state = "woods_safe"
 
-/area/outdoors/wilderness/safe/gallowband_fort
-	name = "gallowband fort"
-	icon_state = "gallowband_outdoors"
-	first_time_text = "Gallowband Fort"
+/area/outdoors/wilderness/safe/forestguard_fort
+	name = "forestguard fort"
+	icon_state = "forestguard_outdoors"
+	first_time_text = "Forest Garrison Fort"
 
-/area/indoors/wilderness/gallowband
-	name = "gallowband camp"
-	icon_state = "gallowband_indoors"
+/area/indoors/wilderness/forestguard
+	name = "forestguard camp"
+	icon_state = "forestguard_indoors"
 
-/area/indoors/wilderness/gallowband/garrison
-	name = "gallowband fort"
-	icon_state = "gallowband_garrison"
+/area/indoors/wilderness/forestguard/garrison
+	name = "Forest Garrison"
+	icon_state = "forestguard_garrison"
 	background_track = 'sound/music/area/manorgarri.ogg'
 	converted_type = /area/outdoors/exposed/manorgarri
 
-/area/indoors/wilderness/gallowband/garrison/gatehouse
-	name = "gallowband gatehouse"
+/area/indoors/wilderness/forestguard/garrison/gatehouse
+	name = "forestguard gatehouse"
 
-/area/indoors/wilderness/gallowband/garrison/watchtower
-	name = "gallowband watchtower"
-	first_time_text = "Gallowband Watchtower"
+/area/indoors/wilderness/forestguard/garrison/watchtower
+	name = "forestguard watchtower"
+	first_time_text = "Forest Garrison Watchtower"
 
-/area/indoors/wilderness/gallowband/ship
-	name = "gallowband ship"
-	icon_state = "gallowband_ship"
-	first_time_text = "Gallowband Ship"
+/area/indoors/wilderness/forestguard/ship
+	name = "forestguard ship"
+	icon_state = "forestguard_ship"
+	first_time_text = "Forest Garrison Ship"
 
-/area/indoors/wilderness/gallowband/cell
-	name = "gallowband cell"
+/area/indoors/wilderness/forestguard/cell
+	name = "forestguard cell"
 	icon_state = "cell"
 	ambient_index = AMBIENCE_DUNGEON
 	ambient_index_night = AMBIENCE_DUNGEON

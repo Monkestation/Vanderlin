@@ -153,3 +153,21 @@
 	mappath = "_maps/map_files/vanderlin/house_templates/adv6.dmm"
 	width = 3
 	height = 4
+
+/datum/map_template/thatch1
+	name = "Vanderlin cottage one"
+	mappath = "_maps/map_files/vanderlin/house_templates/thatch1.dmm"
+	width = 10
+	height = 6
+
+/datum/map_template/thatch2
+	name = "Vanderlin cottage two"
+	mappath = "_maps/map_files/vanderlin/house_templates/thatch2.dmm"
+	width = 9
+	height = 5
+
+/datum/map_template/thatch3
+	name = "Vanderlin cottage three"
+	mappath = "_maps/map_files/vanderlin/house_templates/thatch3.dmm"
+	width = 9
+	height = 6

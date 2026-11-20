@@ -1,0 +1,299 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/open/floor/rooftop{
+	dir = 8
+	},
+/area/outdoors/wilderness/outpost/vanderlin/outskirts)
+"b" = (
+/turf/open/floor/ruinedwood,
+/area/outdoors/wilderness/outpost/vanderlin/outskirts)
+"c" = (
+/turf/open/floor/rooftop{
+	dir = 4
+	},
+/area/outdoors/wilderness/outpost/vanderlin/outskirts)
+"d" = (
+/turf/closed/wall/mineral/wooddark/slitted,
+/area/indoors/wilderness)
+"g" = (
+/turf/closed/wall/mineral/wooddark/vertical,
+/area/indoors/wilderness)
+"k" = (
+/turf/closed/wall/mineral/wooddark/horizontal,
+/area/indoors/wilderness)
+"o" = (
+/obj/machinery/light/fueled/wallfire/candle/l,
+/turf/open/floor/ruinedwood,
+/area/indoors/wilderness)
+"p" = (
+/turf/open/floor/ruinedwood,
+/area/indoors/wilderness)
+"u" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/turf/open/floor/ruinedwood,
+/area/indoors/wilderness)
+"w" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/turf/open/floor/ruinedwood,
+/area/indoors/wilderness)
+"x" = (
+/obj/structure/curtain/beigecurtainold/dir{
+	dir = 1
+	},
+/turf/closed/wall/mineral/wooddark/window,
+/area/indoors/wilderness)
+"y" = (
+/obj/structure/door/red,
+/turf/open/floor/ruinedwood,
+/area/indoors/wilderness)
+"z" = (
+/obj/structure/sign/property_sign/claim,
+/turf/closed/wall/mineral/wooddark/vertical,
+/area/indoors/wilderness)
+"A" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/turf/open/openspace,
+/area/indoors/wilderness)
+"B" = (
+/obj/structure/stairs{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/floor/ruinedwood,
+/area/indoors/wilderness)
+"C" = (
+/obj/machinery/light/fueled/wallfire/candle/r,
+/obj/structure/bed/hay,
+/turf/open/floor/ruinedwood,
+/area/indoors/wilderness)
+
+(1,1,1) = {"
+d
+k
+k
+k
+k
+d
+"}
+(2,1,1) = {"
+g
+o
+p
+p
+o
+g
+"}
+(3,1,1) = {"
+x
+p
+p
+p
+p
+g
+"}
+(4,1,1) = {"
+g
+p
+p
+p
+p
+g
+"}
+(5,1,1) = {"
+y
+p
+p
+p
+p
+g
+"}
+(6,1,1) = {"
+z
+p
+p
+p
+u
+g
+"}
+(7,1,1) = {"
+x
+p
+p
+p
+d
+g
+"}
+(8,1,1) = {"
+g
+w
+p
+p
+w
+g
+"}
+(9,1,1) = {"
+d
+k
+k
+k
+k
+d
+"}
+
+(1,1,2) = {"
+d
+k
+k
+k
+k
+d
+"}
+(2,1,2) = {"
+g
+o
+p
+p
+o
+g
+"}
+(3,1,2) = {"
+x
+p
+p
+p
+p
+g
+"}
+(4,1,2) = {"
+g
+p
+p
+p
+p
+g
+"}
+(5,1,2) = {"
+g
+p
+p
+p
+p
+g
+"}
+(6,1,2) = {"
+g
+p
+p
+p
+A
+g
+"}
+(7,1,2) = {"
+x
+p
+p
+p
+B
+g
+"}
+(8,1,2) = {"
+g
+C
+p
+p
+w
+g
+"}
+(9,1,2) = {"
+d
+k
+k
+k
+k
+d
+"}
+
+(1,1,3) = {"
+a
+a
+a
+a
+a
+a
+"}
+(2,1,3) = {"
+a
+a
+a
+a
+a
+a
+"}
+(3,1,3) = {"
+a
+a
+a
+a
+a
+a
+"}
+(4,1,3) = {"
+a
+a
+a
+a
+a
+a
+"}
+(5,1,3) = {"
+b
+b
+b
+b
+b
+b
+"}
+(6,1,3) = {"
+c
+c
+c
+c
+c
+c
+"}
+(7,1,3) = {"
+c
+c
+c
+c
+c
+c
+"}
+(8,1,3) = {"
+c
+c
+c
+c
+c
+c
+"}
+(9,1,3) = {"
+c
+c
+c
+c
+c
+c
+"}
