@@ -10,6 +10,7 @@
 	spell_cost = 50
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 
 	invocation = "Terra Teneat!"
 	invocation_type = INVOCATION_SHOUT

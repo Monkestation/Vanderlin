@@ -87,6 +87,7 @@ SUBSYSTEM_DEF(role_class_handler)
 		if(!class_select.linked_client) // this ref will disappear if they disconnect neways probably, as its a client
 			class_select.linked_client = H.client // Thus we just give it back to them
 		class_select.second_step() // And give them a second dose of something they already dosed on
+		return
 	else
 		class_select = new()
 	class_select.linked_client = H.client

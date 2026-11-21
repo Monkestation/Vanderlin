@@ -980,6 +980,10 @@
 	is_swimming_tile = FALSE
 	immerse_overlay = null
 
+	light_outer_range =  4
+	light_power = 1
+	light_color = "#56ff0d"
+
 /turf/open/water/acid/mapped
 	desc = "You know how this got here. You think."
 	notake = TRUE

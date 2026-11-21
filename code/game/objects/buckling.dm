@@ -278,6 +278,9 @@
 	if(!Adjacent(user) || !Adjacent(target) || !isturf(user.loc) || user.incapacitated() || target.anchored)
 		return FALSE
 
+	if((target != user) && target.cmode && (target.stat <= SOFT_CRIT))
+		return
+
 	if(iscarbon(user))
 		var/mob/living/carbon/carbon_user = user
 		if(carbon_user.usable_hands <= 0)

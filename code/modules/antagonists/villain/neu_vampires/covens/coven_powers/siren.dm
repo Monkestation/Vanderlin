@@ -38,7 +38,14 @@
 		SSblackbox.record_feedback("tally", "ic_blocked_words", 1, LOWER_TEXT(config.ic_filter_regex.match))
 		return
 
-	target.say(message = new_say, forced = "melpominee 1")
+	var/static/list/bannedwords = list("zizo", "graggar", "matthios", "baotha", "inhumen", "heresy", "abraxas", "abaddon", "mephistopheles", "leviathan")
+	for(var/T in bannedwords)  //astrata smites naughty xylixans
+		if(findtext(new_say, T))
+			to_chat(owner, span_warning("You cannot force someone to speak heresy!"))
+			return
+
+	target.say(message = new_say, forced = owner.key)
+	log_combat(owner, target, "forced Siren Speech")
 
 	if (!isliving(target))
 		return
@@ -123,7 +130,7 @@
 /mob/living/carbon/human/proc/create_walk_to(duration, mob/living/walk_to)
 	ADD_TRAIT(src, TRAIT_MOVEMENT_BLOCKED, VAMPIRE_TRAIT)
 	walk_to_target = walk_to
-	walk_to_duration = duration
+	COOLDOWN_START(src, walk_to_duration, duration)
 	walk_to_steps_taken = 0
 	walk_to_last_pos = get_turf(src)
 	walk_to_cached_path = null
@@ -132,7 +139,10 @@
 	walk_to_caster()
 
 /mob/living/carbon/human/proc/walk_to_caster()
-	if(!walk_to_target || walk_to_steps_taken >= walk_to_duration)
+	if(!walk_to_target || COOLDOWN_FINISHED(src, walk_to_duration))
+		remove_walk_to_trait()
+		return
+	if(stat || buckled || grabbedby)
 		remove_walk_to_trait()
 		return
 
@@ -145,8 +155,6 @@
 			walk_to_cached_path = get_path_to(src, target_pos, TYPE_PROC_REF(/turf, Heuristic_cardinal_3d), 33, 250, 1)
 			walk_to_last_pos = current_pos
 
-		var/moved = FALSE
-
 		if(length(walk_to_cached_path))
 			walk(src, 0) // Stop any existing walk
 			set_glide_size(DELAY_TO_GLIDE_SIZE(total_multiplicative_slowdown()))
@@ -154,13 +162,8 @@
 			face_atom(walk_to_target)
 
 			walk_to_cached_path.Cut(1, 2)
-			moved = TRUE
 		else
 			walk_towards(src, walk_to_target, 0, total_multiplicative_slowdown())
-			moved = TRUE
-
-		if(moved)
-			walk_to_steps_taken++
 
 	addtimer(CALLBACK(src, PROC_REF(walk_to_caster)), total_multiplicative_slowdown())
 
@@ -168,8 +171,7 @@
 	REMOVE_TRAIT(src, TRAIT_MOVEMENT_BLOCKED, VAMPIRE_TRAIT)
 	walk(src, 0) // Stop any walking
 	walk_to_target = null
-	walk_to_duration = 0
-	walk_to_steps_taken = 0
+	COOLDOWN_RESET(src, walk_to_duration)
 	walk_to_last_pos = null
 	walk_to_cached_path = null
 

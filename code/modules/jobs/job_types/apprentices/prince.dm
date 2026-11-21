@@ -8,7 +8,7 @@
 	But someday you'll have to grow up, and that will be the day your carelessness will cost you more than a few mammons."
 	department_flag = APPRENTICES
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 	total_positions = 2
 	spawn_positions = 2
 	display_order = JDO_PRINCE
@@ -60,7 +60,7 @@
 	allowed_races = RACES_PLAYER_ROYALTY
 	exp_type = list(EXP_TYPE_NOBLE)
 	exp_types_granted = list(EXP_TYPE_NOBLE)
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT, SUB_FACTION_ROYAL)
 
 /datum/attribute_holder/sheet/job/heir/daring
 	raw_attribute_list = list(
@@ -81,8 +81,8 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/athletics = 10,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 /datum/job/advclass/heir/daring
@@ -123,10 +123,10 @@
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 10,
-		/datum/attribute/skill/labor/mathematics = 30
+		/datum/attribute/skill/educated/mathematics = 30
 	)
 
 	attribute_variance = list(
@@ -181,7 +181,7 @@
 		/datum/attribute/skill/combat/knives = 10,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/riding = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 10
 	)

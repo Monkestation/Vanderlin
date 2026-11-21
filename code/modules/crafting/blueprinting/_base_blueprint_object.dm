@@ -14,8 +14,8 @@
 
 	var/datum/blueprint_recipe/recipe
 	var/tmp/mob/creator
-	var/construction_progress = 0
-	var/max_construction_progress = 100
+	var/tmp/construction_progress = 0
+	var/tmp/max_construction_progress = 100
 	var/tmp/list/viewing_images = list() // Track images by client
 	var/blueprint_dir = SOUTH // Direction this blueprint will be built in
 
@@ -23,7 +23,7 @@
 	var/stored_pixel_y = 0
 	var/stored_pixel_x = 0
 
-	var/list/stored_items = list()
+	var/tmp/list/stored_items = list()
 
 	var/tmp/time_when_placed
 

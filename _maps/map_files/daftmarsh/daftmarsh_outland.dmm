@@ -259,14 +259,6 @@
 "cL" = (
 /turf/open/floor/cobble,
 /area/indoors)
-"cN" = (
-/obj/structure/dungeon_entry,
-/obj/structure/fluff/walldeco/vinez{
-	pixel_x = 5;
-	pixel_y = 51
-	},
-/turf/open/floor/dirt,
-/area/outdoors/bog)
 "cO" = (
 /obj/structure/fluff/railing/tall/palisade,
 /obj/structure/fluff/railing/tall/palisade{
@@ -998,7 +990,7 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/metal/alt,
 /area/indoors/town/cell)
 "kf" = (
@@ -1100,7 +1092,7 @@
 	dir = 8
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/metal/alt,
 /area/indoors/town/cell)
 "la" = (
@@ -1345,7 +1337,7 @@
 /area/outdoors/bog)
 "nh" = (
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /obj/structure/door/green{
 	name = "Salem Garrison"
 	},
@@ -2167,7 +2159,7 @@
 	name = "forrest warden bedroom"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "xp" = (
@@ -3172,7 +3164,7 @@
 	name = "Salem Garrison"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/hexstone,
 /area/indoors/villagegarrison)
 "Ii" = (
@@ -3245,7 +3237,7 @@
 	name = "forrest garrison barracks"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/garrison/forest,
+/obj/effect/mapping_helpers/access/keyset/gallowband/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "IP" = (
@@ -3601,10 +3593,6 @@
 /obj/structure/toilet,
 /mob/living/carbon/human/species/goblin/npc/hell,
 /obj/item/natural/poo,
-/turf/open/floor/naturalstone,
-/area/under/mountains/anvil/lower)
-"Mz" = (
-/obj/structure/dungeon_entry,
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "MD" = (
@@ -34408,7 +34396,7 @@ dF
 dF
 dF
 gO
-cN
+ws
 pg
 hX
 Td
@@ -73306,7 +73294,7 @@ Bt
 Bt
 vW
 Bt
-Mz
+GX
 kc
 kc
 kc

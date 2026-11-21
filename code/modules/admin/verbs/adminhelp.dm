@@ -508,7 +508,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 
 	switch(action)
 		if("claimticket")
-			claim_ticket()
+			claim_assert()
 		if("ticket")
 			TicketPanel()
 		if("retitle")

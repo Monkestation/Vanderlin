@@ -19,8 +19,8 @@
 		/datum/attribute/skill/misc/swimming = 30,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/riding = 30,
-		/datum/attribute/skill/misc/reading = 20,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/reading = 20,
+		/datum/attribute/skill/educated/mathematics = 30,
 	)
 
 /datum/attribute_holder/sheet/job/captain/law
@@ -48,7 +48,7 @@
 	department_flag = NOBLEMEN
 	display_order = JDO_CAPTAIN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_GARRISON, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 	total_positions = 1
 	spawn_positions = 1
 	honorary = JOB_GUARD_CAPTAIN

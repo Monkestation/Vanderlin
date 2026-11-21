@@ -13,7 +13,7 @@
 #define GOREFEAST_WORTHY list(\
 	span_danger("A worthy one!"),\
 	span_danger("Bathe me in their blood."),\
-	span_danger("You can smell their fear can't you?"),\
+	span_danger("You can smell their fear, can't you?"),\
 	span_danger("Unleash your fury, soak the soil in their blood."),\
 	span_danger("Feast on their organs."),\
 	span_danger("Cull the world of the weak!"),\
@@ -42,6 +42,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/graggar
 
 /obj/item/weapon/polearm/halberd/bardiche/woodcutter/gorefeast/Initialize(mapload, ...)
 	. = ..()
@@ -123,6 +124,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/zizo
 
 	COOLDOWN_DECLARE(fire_projectile)
 
@@ -244,6 +246,7 @@
 	projectile_damage_multiplier = 1.1
 
 	item_weight = 2 KILOGRAMS
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/baotha
 
 	var/obj/item/instrument/harp/turbulenta/FUCK
 
@@ -356,6 +359,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/heresy_alarming/matthios
 
 	COOLDOWN_DECLARE(pleonexia_blink)
 
@@ -415,7 +419,7 @@
 
 /obj/item/weapon/sword/long/grandmaster
 	name = "divine longsword"
-	desc = "The Blade of Saint Altierre. A holy sword forged of silver, said to represent her will to fight for us all, and the Justice she stood for."
+	desc = "The Blade of Saint Altierre. A holy sword forged of truesilver, said to represent her will to fight for us all, and the Justice she stood for."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrsword"
 	item_weight = 1.5 KILOGRAMS
@@ -423,6 +427,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /datum/intent/sword/cut/martyr
 	item_damage_type = "fire"
@@ -447,12 +452,12 @@
 	var/safe_damage = 25
 	var/safe_damage_wielded = 30
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 	enchant(/datum/enchantment/anti_theft)
 
 /obj/item/weapon/greataxe/steel/grandmaster
 	name = "divine greataxe"
-	desc = "The Axe of Saint Altierre. A holy great axe forged of silver, said to represent the brutal attack she struck Graggar with, mortally wounding him and nearly killing him."
+	desc = "The Axe of Saint Altierre. A holy greataxe forged of truesilver, said to represent the brutal attack she struck Graggar with, mortally wounding him almost to the point of death."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyraxe"
 	item_weight = 4.5 KILOGRAMS
@@ -460,6 +465,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /datum/intent/axe/cut/battle/greataxe/martyr
 	item_damage_type = "fire"
@@ -490,7 +496,7 @@
 	var/safe_damage = 15
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 	enchant(/datum/enchantment/anti_theft)
 
 /datum/intent/polearm/cut/martyr
@@ -507,7 +513,7 @@
 
 /obj/item/weapon/polearm/spear/grandmaster
 	name = "divine trident"
-	desc = "The Trident of Saint Altierre. A holy spear forged of silver in the form of a holy weapon of Abyssor, said to represent her unfathomable Rage against the inhumen gods."
+	desc = "The Trident of Saint Altierre. A holy spear forged of truesilver in the form of a holy weapon of Abyssor, said to represent her unfathomable Rage against the inhumen gods."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrtrident"
 	item_weight = 2.5 KILOGRAMS
@@ -515,6 +521,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /obj/item/weapon/polearm/spear/grandmaster/Initialize()
 	. = ..()
@@ -523,7 +530,7 @@
 	var/safe_damage = 15
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 	enchant(/datum/enchantment/anti_theft)
 
 /datum/intent/mace/strike/martyr
@@ -536,7 +543,7 @@
 
 /obj/item/weapon/mace/goden/steel/grandmaster
 	name = "divine grandmace"
-	desc = "The Mace of Saint Altierre. A holy mace forged of silver, said to represent her unyielding Might that turned upon Graggar before his ascension."
+	desc = "The Mace of Saint Altierre. A holy mace forged of truesilver, said to represent her unyielding Might that turned upon Graggar before his ascension."
 	icon = 'icons/roguetown/weapons/64/godweapons.dmi'
 	icon_state = "martyrmace"
 	item_weight = 3.5 KILOGRAMS
@@ -544,6 +551,7 @@
 	smeltresult = null
 	melting_material = null
 	melt_amount = 0
+	examine_highlight_type = /datum/examine_highlight/divine_weapon/altierre
 
 /obj/item/weapon/mace/goden/steel/grandmaster/Initialize()
 	. = ..()
@@ -552,5 +560,5 @@
 	var/safe_damage = 15
 	var/safe_damage_wielded = 35
 	AddComponent(/datum/component/martyr_weapon, active_intents, active_intents_wielded, safe_damage, safe_damage_wielded)
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/truesilver)
 	enchant(/datum/enchantment/anti_theft)

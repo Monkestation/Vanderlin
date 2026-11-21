@@ -5,7 +5,8 @@
 	icon_state = "cuirass"
 	item_state = "cuirass"
 	anvilrepair = /datum/attribute/skill/craft/armor_repair
-	smeltresult = /obj/item/ingot/steel_slag
+	melting_material = /datum/material/steel
+	melt_amount = 100
 	boobed = FALSE
 	sellprice = VALUE_STEEL_ARMOR
 
@@ -24,7 +25,7 @@
 	item_state = "grenzelcuirass"
 	sleeved = 'icons/roguetown/clothing/onmob/helpers/stonekeep_merc.dmi'
 	boobed = TRUE
-
+	melting_material = /datum/material/blacksteel
 	armor_type = /datum/armor/plate/good
 	item_weight = 5 KILOGRAMS
 
@@ -48,7 +49,9 @@
 	desc = "Many cooking pots ended their daes on the anvil to form this protective plate."
 	icon_state = "ibreastplate"
 	item_state = "ibreastplate"
-	smeltresult = /obj/item/ingot/iron
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	sellprice = VALUE_IRON_ARMOR
 
 	armor_type = /datum/armor/plate/bad
@@ -82,7 +85,9 @@
 	desc = "Very simple and crude protection for the chest. Ancient fighters once used similar gear, with better quality..."
 	icon_state = "copperchest"
 	item_state = "copperchest"
-	smeltresult = /obj/item/ingot/copper
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	melting_material = /datum/material/copper
+	melt_amount = 100
 	sellprice = VALUE_DIRT_CHEAP
 
 	armor_class = AC_LIGHT
@@ -104,7 +109,9 @@
 /obj/item/clothing/armor/cuirass/psydon
 	name = "psydonian chestplate"
 	desc = "An expertly smithed form-fitting steel cuirass that is much lighter and agile, but breaks with much more ease. It's thinner, but backed with silk and leather."
-	melt_amount = 75
+	desc = "An expertly smithed form-fitting steel cuirass that is much lighter and agile, but breaks with much more ease. It's thinner, but backed with silk and leather."
+	melting_material = /datum/material/silver
+	melt_amount = 100
 	icon_state = "ornatechestplate"
 	item_state = "ornatechestplate"
 
@@ -128,8 +135,8 @@
 	icon_state = "flutedcuirass_iron"
 	mob_overlay_icon = 'icons/roguetown/clothing/onmob/watchmen_onmob.dmi'// TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
 	icon = 'icons/roguetown/clothing/watchmen_item.dmi' // TODO: DUMP INTO APPROPRIATE FILE IF PR WILL BE APROVED
-
-	smeltresult = /obj/item/ingot/iron
+	melting_material = /datum/material/iron
+	melt_amount = 100
 	sellprice = VALUE_IRON_ARMOR
 	armor_type = /datum/armor/plate/bad
 	max_integrity = INTEGRITY_OLD_STRONG
@@ -139,8 +146,9 @@
 /obj/item/clothing/armor/cuirass/ornate
 	name = "psydonian cuirass"
 	icon_state = "ornatecuirass"
-	desc = "An ornate steel cuirass with tassets, favored by both the Oratorium Throni Vacui and the Order of the Silver Psycross. \
-			Made to endure."
+	desc = "An ornate steel cuirass with tassets, favored by both the Oratorium Throni Vacui and the Order of the Silver Psycross. Made to endure."
+	melting_material = /datum/material/silver
+	melt_amount = 100
 
 /obj/item/clothing/armor/cuirass/fluted/gold
 	name = "golden cuirass"

@@ -7,7 +7,7 @@
 		/datum/attribute/skill/misc/medicine = 10,
 		/datum/attribute/skill/magic/holy = 20,
 		/datum/attribute/skill/misc/sewing = 20,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/craft/cooking = 10
 	)

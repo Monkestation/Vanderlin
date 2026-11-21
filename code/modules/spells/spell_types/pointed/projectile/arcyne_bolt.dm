@@ -7,6 +7,7 @@
 	cast_range = 12
 
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 
 	invocation = "MAGIC MISSILE!!!"
 	invocation_type = INVOCATION_SHOUT
@@ -17,14 +18,14 @@
 	cooldown_time = 5 SECONDS
 	spell_cost = 20
 	spell_flags = SPELL_RITUOS
-	projectile_type = /obj/projectile/magic/energy/rogue3
+	projectile_type = /obj/projectile/magic/arcyne_bolt
 
 /datum/action/cooldown/spell/projectile/arcyne_bolt/ready_projectile(obj/projectile/to_fire, atom/target, mob/user, iteration)
 	. = ..()
 	to_fire.damage *= spell_magnitude_modifier
 	to_fire.armor_penetration *= spell_magnitude_modifier
 
-/obj/projectile/magic/energy/rogue3
+/obj/projectile/magic/arcyne_bolt
 	name = "arcyne bolt"
 	icon_state = "arcane_barrage"
 	damage = 30

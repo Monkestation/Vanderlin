@@ -7,6 +7,7 @@
 
 	required_technique = TECHNIQUE_ILLUSION
 	required_form = FORM_ARCANE
+	associated_skill = /datum/attribute/skill/magic/arcane
 
 	charge_time = 4 SECONDS
 	charge_drain = 1

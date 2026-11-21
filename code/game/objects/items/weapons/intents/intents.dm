@@ -95,6 +95,7 @@
 		inspec += "\n[desc]"
 	if(reach != 1)
 		inspec += "\n<b>Reach:</b> [reach]"
+		inspec += "\n<b>Lowered penetration when fighting up-close.</b>"
 	if(damfactor != 1)
 		inspec += "\n<b>Damage:</b> [damfactor]"
 	if(penfactor)

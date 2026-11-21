@@ -1,4 +1,39 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/turf/open/water/acid,
+/area/under/tomb/cave/wet)
+"ab" = (
+/obj/structure/statue/bone/rib,
+/turf/open/water/acid,
+/area/under/tomb/cave/wet)
+"ac" = (
+/obj/structure/forcefield,
+/turf/open/water/acid,
+/area/under/tomb/cave/wet)
+"ad" = (
+/obj/structure/forcefield,
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/water/acid,
+/area/under/tomb/cave/wet)
+"ae" = (
+/obj/structure/statue/bone/skull,
+/turf/open/water/acid,
+/area/under/tomb/cave/wet)
+"af" = (
+/obj/structure/forcefield,
+/obj/effect/waterfall/acid,
+/turf/open/water/acid,
+/area/under/tomb/cave/wet)
+"ag" = (
+/obj/structure/statue/bone/skull/half,
+/turf/open/water/acid,
+/area/under/tomb/cave/wet)
+"ah" = (
+/obj/structure/statue/bone/skull/half{
+	dir = 8
+	},
+/turf/open/water/acid,
+/area/under/tomb/cave/wet)
 "at" = (
 /obj/item/alch/runedust,
 /obj/effect/decal/cleanable/sigil/W,
@@ -13,7 +48,6 @@
 /area/under/tomb/indoors/magic)
 "aB" = (
 /obj/machinery/artificer_table,
-/obj/item/contraption/wood_metalizer,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "aK" = (
@@ -95,10 +129,6 @@
 /mob/living/simple_animal/hostile/retaliate/mole,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors/magic)
-"eO" = (
-/obj/structure/statue/bone/rib,
-/turf/open/lava/acid,
-/area/under/tomb/cave/wet)
 "eS" = (
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/carpet/lord/right,
@@ -144,7 +174,9 @@
 /turf/closed/mineral/bedrock,
 /area/under/tomb/cave/wet)
 "gG" = (
-/mob/living/simple_animal/pet/cat/black,
+/mob/living/simple_animal/pet/cat/black{
+	name = "Zizita"
+	},
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
 "gH" = (
@@ -325,7 +357,6 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/blood,
-/obj/item/clothing/ring/gold/rontz,
 /mob/living/carbon/human/species/zizombie/npc/ambush,
 /turf/open/floor/carpet/green,
 /area/under/tomb/indoors/magic)
@@ -386,7 +417,7 @@
 /area/under/tomb/indoors/magic)
 "qd" = (
 /obj/structure/closet/crate/crafted_closet/lord,
-/obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
 "qf" = (
@@ -456,11 +487,6 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors/magic)
-"sn" = (
-/obj/structure/forcefield,
-/obj/effect/waterfall/acid,
-/turf/open/lava/acid,
-/area/under/tomb/cave/wet)
 "so" = (
 /obj/structure/forcefield,
 /turf/closed/mineral/bedrock,
@@ -484,7 +510,6 @@
 /area/under/tomb/indoors/magic)
 "th" = (
 /obj/structure/table/stone_small,
-/obj/item/statue/gold,
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors/magic)
 "tl" = (
@@ -530,10 +555,6 @@
 	},
 /turf/open/floor/tile,
 /area/under/tomb/indoors/magic)
-"uh" = (
-/obj/structure/forcefield,
-/turf/open/lava/acid,
-/area/under/tomb/cave/wet)
 "uo" = (
 /obj/effect/dungeon_directional_helper/north,
 /turf/open/floor/cobble/alt,
@@ -549,7 +570,7 @@
 /area/under/tomb/indoors/magic)
 "uJ" = (
 /obj/structure/trap/shock,
-/obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/dungeon_loot_spawner/low,
 /obj/effect/particle_effect/steam,
 /turf/open/water/bath,
 /area/under/tomb/indoors/magic)
@@ -571,8 +592,6 @@
 /area/under/tomb/indoors/magic)
 "vt" = (
 /obj/structure/table/vtable/v2,
-/obj/effect/spawner/map_spawner/loot/magic,
-/obj/item/statue/silver,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
 "vu" = (
@@ -626,15 +645,9 @@
 "wY" = (
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
-"xc" = (
-/obj/structure/forcefield,
-/obj/machinery/light/fueled/wallfire/candle/blue,
-/turf/open/lava/acid,
-/area/under/tomb/cave/wet)
 "xo" = (
 /obj/structure/bed/wool/double,
 /obj/item/bedsheet/fabric_double,
-/obj/item/clothing/ring/gold/protection,
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
@@ -699,9 +712,6 @@
 /obj/structure/barricade/wooden/crude,
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors/magic)
-"At" = (
-/turf/open/lava/acid,
-/area/under/tomb/cave/wet)
 "AK" = (
 /obj/item/soap,
 /obj/structure/trap/shock,
@@ -715,8 +725,6 @@
 /area/under/tomb/indoors/magic)
 "Ba" = (
 /obj/structure/closet/crate/chest/neu_iron,
-/obj/effect/spawner/map_spawner/loot/food,
-/obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors/magic)
 "Bb" = (
@@ -898,10 +906,6 @@
 	},
 /turf/open/floor/tile,
 /area/under/tomb/indoors/magic)
-"Ib" = (
-/obj/structure/statue/bone/skull/half,
-/turf/open/lava/acid,
-/area/under/tomb/cave/wet)
 "Ie" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/naturalstone,
@@ -920,18 +924,7 @@
 /area/under/tomb/indoors/magic)
 "KA" = (
 /obj/structure/table/wood/fancy/black,
-/obj/item/reagent_containers/glass/cup/silver{
-	pixel_y = -1;
-	pixel_x = 7
-	},
-/obj/item/reagent_containers/glass/cup/silver{
-	pixel_x = 8;
-	pixel_y = 12
-	},
-/obj/item/reagent_containers/glass/carafe/silver{
-	pixel_x = -7;
-	pixel_y = 10
-	},
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors/magic)
 "KQ" = (
@@ -959,17 +952,12 @@
 /obj/effect/dungeon_directional_helper/east,
 /turf/open/floor/cobble/alt,
 /area/under/tomb/cave/wet)
-"Ll" = (
-/obj/structure/statue/bone/skull,
-/turf/open/lava/acid,
-/area/under/tomb/cave/wet)
 "LA" = (
 /obj/machinery/light/fueled/cauldron,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "LS" = (
 /obj/structure/table/vtable/v2,
-/obj/item/clothing/face/facemask/goldmask,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "Ma" = (
@@ -988,7 +976,7 @@
 /turf/open/floor/dirt,
 /area/under/tomb/indoors/magic)
 "MJ" = (
-/obj/effect/spawner/map_spawner/loot/medium,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/magic)
 "MO" = (
@@ -1053,7 +1041,7 @@
 /area/under/tomb/indoors/magic)
 "OC" = (
 /obj/structure/table/vtable,
-/obj/effect/spawner/map_spawner/loot/medium,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/carpet,
 /area/under/tomb/indoors/magic)
 "OI" = (
@@ -1084,7 +1072,7 @@
 /area/under/tomb/cave/wet)
 "OM" = (
 /obj/structure/trap/shock,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/medium,
 /obj/effect/particle_effect/steam,
 /turf/open/water/bath,
 /area/under/tomb/indoors/magic)
@@ -1099,12 +1087,12 @@
 /turf/open/floor/cobblerock/alt,
 /area/under/tomb/cave/wet)
 "Pl" = (
-/obj/structure/closet/crate/chest/lootbox,
+/obj/effect/dungeon_loot_spawner/high/chest,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "Pw" = (
 /obj/structure/table/stone_small,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors/magic)
 "PP" = (
@@ -1130,7 +1118,6 @@
 /obj/effect/decal/cleanable/blood/gibs/down,
 /obj/effect/decal/cleanable/blood/gibs/core,
 /obj/effect/decal/cleanable/blood/old,
-/obj/item/organ/ears/cat,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors/magic)
 "Qs" = (
@@ -1203,12 +1190,6 @@
 /obj/structure/fluff/walldeco/chains,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/magic)
-"Sb" = (
-/obj/structure/statue/bone/skull/half{
-	dir = 8
-	},
-/turf/open/lava/acid,
-/area/under/tomb/cave/wet)
 "Se" = (
 /obj/structure/bookcase/random,
 /obj/structure/spider/stickyweb,
@@ -1237,7 +1218,6 @@
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/splatter,
-/obj/effect/spawner/map_spawner/loot/weapon,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/magic)
 "Tp" = (
@@ -1265,7 +1245,7 @@
 /obj/structure/table/church{
 	dir = 1
 	},
-/obj/item/statue/gold,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/magic)
 "TP" = (
@@ -1334,7 +1314,7 @@
 /area/under/tomb/indoors/magic)
 "WO" = (
 /obj/structure/bookcase/random,
-/obj/effect/spawner/map_spawner/loot,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/carpet/green,
 /area/under/tomb/indoors/magic)
 "XQ" = (
@@ -1375,7 +1355,6 @@
 /area/under/tomb/indoors/magic)
 "YE" = (
 /obj/structure/table/church,
-/obj/effect/spawner/map_spawner/loot/common,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors/magic)
 "YL" = (
@@ -1470,7 +1449,7 @@ gl
 (2,1,1) = {"
 gl
 gl
-eO
+ab
 Pd
 gl
 gl
@@ -1506,10 +1485,10 @@ Pd
 jJ
 FM
 Pd
-At
+aa
 eY
 Pd
-At
+aa
 FM
 Pd
 FM
@@ -1523,12 +1502,12 @@ jk
 gl
 gl
 FM
-At
-eO
+aa
+ab
 gl
 gl
-At
-At
+aa
+aa
 gl
 "}
 (4,1,1) = {"
@@ -1536,31 +1515,31 @@ gl
 jk
 FM
 Pd
-At
-At
-At
-At
-At
-At
+aa
+aa
+aa
+aa
+aa
+aa
 jJ
 Pd
 Pd
 Gh
-At
-At
+aa
+aa
 Gh
 Pd
 Pd
 FM
 gl
 jB
-At
-At
-At
+aa
+aa
+aa
 FM
 FM
-At
-At
+aa
+aa
 gl
 "}
 (5,1,1) = {"
@@ -1568,27 +1547,27 @@ gl
 gl
 FM
 Pd
-At
+aa
 gl
 Ie
-At
-At
+aa
+aa
 Pd
 Pd
 Pd
 Pd
-At
-At
+aa
+aa
 Gh
 Gh
 Gh
-At
+aa
 Pd
 FM
 eY
 Pd
 FM
-At
+aa
 Qj
 nF
 YS
@@ -1599,29 +1578,29 @@ gl
 gl
 gl
 Pd
-At
-At
+aa
+aa
 gl
 FM
-At
+aa
 Pd
 FM
 Pd
 Pd
-At
+aa
 GA
 nF
-uh
-uh
-uh
-uh
-uh
-uh
+ac
+ac
+ac
+ac
+ac
+ac
 Pd
 FM
-At
-At
-At
+aa
+aa
+aa
 YS
 eY
 gl
@@ -1631,43 +1610,43 @@ gl
 gl
 gl
 mG
-At
+aa
 Pd
 rz
 Pd
-At
+aa
 jk
 mG
-uh
-uh
-uh
-uh
-uh
-uh
+ac
+ac
+ac
+ac
+ac
+ac
 TF
 TF
 TF
 TF
-uh
-uh
+ac
+ac
 On
 JA
-At
+aa
 FM
 FM
-At
-At
+aa
+aa
 gl
 "}
 (8,1,1) = {"
 gl
 gl
 mG
-At
-At
-uh
-uh
-uh
+aa
+aa
+ac
+ac
+ac
 Ci
 TF
 Na
@@ -1684,7 +1663,7 @@ TF
 TF
 TF
 so
-At
+aa
 FM
 Pd
 FM
@@ -1697,7 +1676,7 @@ gl
 gl
 Pd
 Pd
-uh
+ac
 TF
 TF
 TF
@@ -1715,10 +1694,10 @@ aK
 qb
 Zk
 TF
-uh
-At
-At
-At
+ac
+aa
+aa
+aa
 gl
 gl
 gl
@@ -1729,7 +1708,7 @@ Pd
 FM
 FM
 Pd
-uh
+ac
 TF
 Zm
 jO
@@ -1747,8 +1726,8 @@ rv
 rM
 fL
 Na
-uh
-At
+ac
+aa
 Pd
 gl
 gl
@@ -1757,11 +1736,11 @@ gl
 "}
 (11,1,1) = {"
 gl
-At
-Ib
+aa
+ag
 FM
-At
-uh
+aa
+ac
 Na
 EL
 Gc
@@ -1779,8 +1758,8 @@ eb
 JE
 Zk
 Na
-uh
-At
+ac
+aa
 FM
 gl
 gl
@@ -1790,10 +1769,10 @@ gl
 (12,1,1) = {"
 gl
 Pd
-Sb
-At
+ah
+aa
 Ie
-uh
+ac
 TF
 Nt
 Dj
@@ -1811,8 +1790,8 @@ eb
 KA
 Zk
 Na
-uh
-At
+ac
+aa
 Pd
 FM
 Ie
@@ -1823,7 +1802,7 @@ gl
 gl
 YS
 Pd
-At
+aa
 FM
 FM
 uE
@@ -1843,9 +1822,9 @@ Rl
 Rl
 Rl
 TF
-uh
+ac
 nF
-At
+aa
 Pd
 FM
 nF
@@ -1855,8 +1834,8 @@ gl
 Gh
 Gh
 YS
-At
-At
+aa
+aa
 Gh
 uE
 Ac
@@ -1875,10 +1854,10 @@ Ox
 Rl
 Rl
 TF
-xc
-At
-At
-At
+ad
+aa
+aa
+aa
 Pd
 Gh
 Gh
@@ -1888,8 +1867,8 @@ Gh
 Pd
 Gh
 Gh
-At
-uh
+aa
+ac
 TF
 Dl
 UY
@@ -1910,7 +1889,7 @@ Vo
 QZ
 Gh
 Pd
-At
+aa
 Gh
 FM
 Gh
@@ -1921,7 +1900,7 @@ Gh
 Gh
 Pd
 Gh
-uh
+ac
 TF
 lE
 Dj
@@ -1942,7 +1921,7 @@ Vo
 QZ
 Gh
 ku
-At
+aa
 Gh
 Gh
 GF
@@ -1953,7 +1932,7 @@ Gh
 Pd
 Gh
 Gh
-uh
+ac
 TF
 TF
 TF
@@ -1971,10 +1950,10 @@ vB
 TF
 rs
 TF
-xc
-At
+ad
+aa
 GA
-At
+aa
 Gh
 ku
 FM
@@ -1985,8 +1964,8 @@ gl
 jB
 Pd
 nF
-uh
-uh
+ac
+ac
 TF
 rD
 jp
@@ -2003,9 +1982,9 @@ Yc
 QL
 qf
 Na
-uh
-At
-At
+ac
+aa
+aa
 FM
 rz
 Pd
@@ -2018,7 +1997,7 @@ gl
 gl
 Pd
 Pd
-uh
+ac
 TF
 Nl
 YY
@@ -2035,7 +2014,7 @@ yR
 QL
 EZ
 Na
-uh
+ac
 nF
 FM
 FM
@@ -2050,7 +2029,7 @@ gl
 gl
 FM
 Pd
-uh
+ac
 Na
 ty
 cM
@@ -2067,8 +2046,8 @@ QL
 Sq
 Cg
 Na
-uh
-uh
+ac
+ac
 Pd
 gl
 gl
@@ -2082,7 +2061,7 @@ gl
 FM
 YS
 jJ
-uh
+ac
 Na
 Ct
 kn
@@ -2100,7 +2079,7 @@ qg
 QL
 TF
 qc
-uh
+ac
 FM
 FM
 gl
@@ -2108,13 +2087,13 @@ gl
 gl
 "}
 (22,1,1) = {"
-mG
-At
+gl
+aa
 Pd
-At
+aa
 Qj
 FM
-uh
+ac
 Na
 XQ
 jp
@@ -2132,8 +2111,8 @@ nA
 MF
 uE
 TF
-uh
-At
+ac
+aa
 eY
 FM
 gl
@@ -2143,10 +2122,10 @@ gl
 gl
 eY
 Pd
-At
-At
+aa
+aa
 mG
-sn
+af
 TF
 Bk
 hK
@@ -2164,11 +2143,11 @@ Na
 TF
 uE
 Ci
-uh
-At
-At
-At
-eO
+ac
+aa
+aa
+aa
+ab
 gl
 "}
 (24,1,1) = {"
@@ -2176,7 +2155,7 @@ gl
 YS
 YS
 Pd
-At
+aa
 gl
 gl
 TF
@@ -2190,14 +2169,14 @@ TF
 TF
 TF
 TF
-uh
-uh
-uh
-uh
+ac
+ac
+ac
+ac
 FM
 gl
 mG
-At
+aa
 YS
 eY
 nF
@@ -2208,28 +2187,28 @@ gl
 gl
 Ie
 Pd
-At
+aa
 Pd
 FM
-uh
-uh
-uh
-uh
-uh
-uh
-uh
-uh
+ac
+ac
+ac
+ac
+ac
+ac
+ac
+ac
 TF
 TF
-uh
-uh
+ac
+ac
 Pd
-At
+aa
 Pd
 FM
 FM
 Pd
-At
+aa
 Pd
 YL
 gl
@@ -2238,31 +2217,31 @@ gl
 (26,1,1) = {"
 gl
 mG
-Ll
-At
-At
-At
+ae
+aa
+aa
+aa
 FM
 FM
 Pd
-At
+aa
 Pd
 Gh
 Gh
 Pd
-uh
-uh
-uh
-uh
+ac
+ac
+ac
+ac
 Gx
 jJ
 gl
 mG
-At
-At
-At
-At
-At
+aa
+aa
+aa
+aa
+aa
 Ie
 gl
 gl
@@ -2273,28 +2252,28 @@ gl
 gl
 nF
 YL
-At
-At
-At
-At
-At
+aa
+aa
+aa
+aa
+aa
 ku
 gl
 gl
 Pd
 Gh
 FM
-At
+aa
 Pd
 eY
 gl
 gl
 mG
-Ll
+ae
 eY
 Pd
 Pd
-At
+aa
 gl
 gl
 gl
@@ -2306,8 +2285,8 @@ gl
 gl
 YS
 YS
-At
-At
+aa
+aa
 Pd
 eY
 eY
@@ -2318,7 +2297,7 @@ FM
 FM
 FM
 FM
-At
+aa
 gl
 gl
 gl
@@ -2338,7 +2317,7 @@ gl
 gl
 gl
 mG
-eO
+ab
 jB
 FM
 YS

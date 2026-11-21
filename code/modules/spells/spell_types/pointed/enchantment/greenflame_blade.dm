@@ -9,6 +9,7 @@
 	enchantment = SEARING_BLADE_ENCHANT
 
 	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 
 
 /datum/action/cooldown/spell/enchantment/green_flame/crimson_blade

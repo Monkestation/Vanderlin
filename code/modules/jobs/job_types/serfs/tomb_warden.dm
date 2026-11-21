@@ -22,11 +22,11 @@
 		/datum/attribute/skill/craft/weaponsmithing = 10,
 		/datum/attribute/skill/misc/climbing = 10,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 40,
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/swimming = 10,
-		/datum/attribute/skill/labor/mathematics = 25,
+		/datum/attribute/skill/educated/mathematics = 25,
 	)
 
 /datum/job/tomb_warden

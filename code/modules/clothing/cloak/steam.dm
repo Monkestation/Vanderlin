@@ -8,6 +8,7 @@
 	icon = 'icons/roguetown/clothing/steamknight.dmi'
 	w_class = WEIGHT_CLASS_HUGE
 	slot_flags = ITEM_SLOT_BACK
+	has_storage = FALSE
 
 	//you can't unsmelt your boiler Sir Steam Knightus
 	smeltresult = /obj/item/ingot/bronze

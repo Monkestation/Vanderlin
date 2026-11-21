@@ -15,10 +15,10 @@
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/climbing = 20,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/magic/holy = 30,
 		/datum/attribute/skill/craft/masonry = 20, //Crafting grave decorations
-		/datum/attribute/skill/labor/mathematics = 20
+		/datum/attribute/skill/educated/mathematics = 20
 	)
 
 /datum/job/undertaker
@@ -31,7 +31,7 @@
 	department_flag = CHURCHMEN
 	display_order = JDO_GRAVETENDER
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_TOWN)
+	factions = list(FACTION_TOWN, SUB_FACTION_CHURCH)
 	total_positions = 3
 	spawn_positions = 3
 
@@ -41,6 +41,8 @@
 	outfit = /datum/outfit/undertaker
 	knows_the_town = TRUE
 	known_by_the_town = TRUE
+	jobs_i_always_know = KNOW_CHURCH_COURT_LIST
+	jobs_always_know_me = KNOW_CHURCH_COURT_LIST
 	cmode_music = 'sound/music/cmode/church/CombatGravekeeper.ogg'
 	can_be_apprentice = TRUE
 

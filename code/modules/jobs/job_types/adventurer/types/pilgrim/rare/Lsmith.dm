@@ -5,7 +5,7 @@
 		/datum/attribute/skill/craft/crafting = list(20, 40),
 		/datum/attribute/skill/craft/carpentry = list(10, 20),
 		/datum/attribute/skill/craft/cooking = list(0, 10),
-		/datum/attribute/skill/misc/reading = list(10, 20)
+		/datum/attribute/skill/educated/reading = list(10, 20)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
@@ -27,7 +27,7 @@
 		/datum/attribute/skill/craft/armorsmithing = 60,
 		/datum/attribute/skill/craft/weaponsmithing = 60,
 		/datum/attribute/skill/craft/smelting = 60,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 	)
 
 /datum/attribute_holder/sheet/job/pilgrim/masterblacksmith/old
@@ -37,7 +37,7 @@
 		/datum/attribute/skill/craft/crafting = list(20, 40),
 		/datum/attribute/skill/craft/carpentry = list(10, 20),
 		/datum/attribute/skill/craft/cooking = list(0, 10),
-		/datum/attribute/skill/misc/reading = list(10, 20)
+		/datum/attribute/skill/educated/reading = list(10, 20)
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
@@ -59,7 +59,7 @@
 		/datum/attribute/skill/craft/armorsmithing = 60,
 		/datum/attribute/skill/craft/weaponsmithing = 60,
 		/datum/attribute/skill/craft/smelting = 60,
-		/datum/attribute/skill/labor/mathematics = 20,
+		/datum/attribute/skill/educated/mathematics = 20,
 	)
 
 /datum/job/advclass/pilgrim/rare/masterblacksmith

@@ -121,3 +121,16 @@
 	name = "Tribal Tattoos"
 	desc = "Detailed tribal tattoos carved upon half-orc warriors to inspire courage within those who bear them, always on proud display to the world."
 	color = "#3d583d"
+
+/obj/item/clothing/armor/regenerating/skin/infernal
+	name = "Infernal Sigils"
+	desc = "Sigils of the infernal, drawn in cursed blood. Only the greatest servants of the Archdevils bear such marks."
+	color = COLOR_BLOOD_MAGIC
+	armor_type = /datum/armor/skin/infernal
+	prevent_crits = list(BCLASS_CUT, BCLASS_BLUNT)
+	max_integrity = 300
+	repair_time = 20 SECONDS
+
+/obj/item/clothing/armor/regenerating/skin/infernal/greater
+	name = "Greater Infernal Sigils"
+	armor_type = /datum/armor/skin/infernal/greater

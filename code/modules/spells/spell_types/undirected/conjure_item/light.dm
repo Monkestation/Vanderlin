@@ -16,6 +16,7 @@
 	item_duration = null
 
 	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 
 /datum/action/cooldown/spell/undirected/conjure_item/light/make_item()
 	var/obj/item = ..()

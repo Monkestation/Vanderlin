@@ -34,3 +34,6 @@
 
 /// Called from bodypart changing owner, which could be on attach or detachment. Either argument can be null. (mob/living/carbon/new_owner, mob/living/carbon/old_owner)
 #define COMSIG_BODYPART_CHANGED_OWNER "bodypart_changed_owner"
+
+/// Called from update_shock() with the current shock value
+#define COMSIG_CARBON_SHOCK_UPDATED "carbon_shock_updated"

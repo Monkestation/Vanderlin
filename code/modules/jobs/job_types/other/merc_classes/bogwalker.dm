@@ -1,6 +1,6 @@
 /datum/attribute_holder/sheet/job/bogwalker
 	attribute_variance = list(
-		/datum/attribute/skill/misc/reading = list(0, 10),
+		/datum/attribute/skill/educated/reading = list(0, 10),
 	)
 	raw_attribute_list = list(
 		STAT_STRENGTH = 1,

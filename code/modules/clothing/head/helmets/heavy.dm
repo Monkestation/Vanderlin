@@ -210,13 +210,13 @@
 	block2add = FOV_BEHIND
 
 /obj/item/clothing/head/helmet/heavy/inhumen/zizo
-	name = "darksteel frog helmet"
-	desc = "A darksteel frog helmet. This one has an adjustable visor. Called forth from the edge of what should be known. In Her name."
+	name = "avantyne frog helmet"
+	desc = "An avantyne frog helmet. This one has an adjustable visor. Called forth from the edge of what should be known. In Her name."
 	adjustable = CAN_CADJUST
 	icon_state = "zizofrogmouth"
 	item_weight = 4.5 KILOGRAMS
 	melting_material = /datum/material/avantyne
-	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_DARKSTEEL
+	max_integrity = INTEGRITY_OLD_STRONGEST * INTEGRITY_MOD_AVANTYNE
 
 /obj/item/clothing/head/helmet/heavy/inhumen/zizo/volfhelm
 	name = "avantyne volf-face bascinet"
@@ -233,7 +233,7 @@
 
 /obj/item/clothing/head/helmet/heavy/inhumen/zizo/bascinet
 	name = "avantyne bascinet"
-	desc = "A darksteeled bascinet, perpetually backlit with an eerie crimson haze. Glimpse into the abyss for too long..</br>‎<font color='FF0000'>..and something will look back.</font>"
+	desc = "An avantyne bascinet, perpetually backlit with an eerie crimson haze. Glimpse into the abyss for too long..</br>‎<font color='FF0000'>..and something will look back.</font>"
 	icon_state = "zizobascinet"
 	item_state = "zizobascinet"
 	icon = 'icons/roguetown/clothing/head.dmi'
@@ -295,7 +295,7 @@
 
 /obj/item/clothing/head/helmet/heavy/inhumen/baotha_alt
 	name = "saccharine sallet"
-	desc = "Behold the spider of addiction..."
+	desc = "Surrender to the Queen of Temptation..."
 	icon_state = "baothahelm"
 	item_weight = 4.5 KILOGRAMS
 	smeltresult = /obj/item/ingot/component/baotha
@@ -485,6 +485,8 @@
 	if(!picked)
 		var/list/icons = HELMET_KNIGHT_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -513,6 +515,8 @@
 	if(!picked)
 		var/list/icons = HELMET_HOUNSKULL_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -538,6 +542,8 @@
 	if(!picked)
 		var/list/icons = HELMET_BUCKET_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -563,6 +569,8 @@
 	if(!picked)
 		var/list/icons = HELMET_GOLD_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice
@@ -593,6 +601,8 @@
 	if(!picked)
 		var/list/icons = BASCINET_DECORATIONS
 		var/choice = tgui_input_list(user, "Choose a crest.", "Knightly crests", icons)
+		if(!choice)
+			return
 		var/playerchoice = icons[choice]
 		picked = TRUE
 		icon_state = playerchoice

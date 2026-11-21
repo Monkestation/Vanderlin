@@ -301,7 +301,7 @@
 	var/static/list/turf_traits = list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)
 
 /obj/structure/bars/grille/Initialize()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
 	AddElement(/datum/element/give_turf_traits, string_list(turf_traits))
 	dir = pick(GLOB.cardinals)
 	return ..()
@@ -367,7 +367,7 @@
 
 /obj/structure/bars/pipe/Initialize()
 	. = ..()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
 	AddElement(/datum/element/give_turf_traits, string_list(list(TRAIT_IMMERSE_STOPPED, TRAIT_CHASM_STOPPED)))
 
 /obj/structure/bars/pipe/left
@@ -567,7 +567,6 @@
 	desc = ""
 	icon = 'icons/roguetown/misc/structure.dmi'
 	icon_state = "shitsign"
-	density = TRUE
 	anchored = TRUE
 	layer = ABOVE_MOB_LAYER
 	plane = GAME_PLANE_UPPER
@@ -579,7 +578,7 @@
 /obj/structure/fluff/signage/examine(mob/user)
 	. = ..()
 	if(!user.is_literate())
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 		. += "I have no idea what it says."
 	else
 		. += "It says something."
@@ -592,7 +591,7 @@
 /obj/structure/fluff/buysign/examine(mob/user)
 	. = ..()
 	if(!user.is_literate())
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 		. += "I have no idea what it says."
 	else
 		. += "It says something."
@@ -605,7 +604,7 @@
 /obj/structure/fluff/sellsign/examine(mob/user)
 	. = ..()
 	if(!user.is_literate())
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 		. += "I have no idea what it says."
 	else
 		. += "It says something."
@@ -624,7 +623,7 @@
 	. = ..()
 	if(wrotesign)
 		if(!user.is_literate())
-			user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+			user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 			. += "I have no idea what it says."
 		else
 			. += "It says \"[wrotesign]\"."
@@ -888,11 +887,43 @@
 	density = FALSE
 	anchored = FALSE
 
+/obj/structure/fluff/clutter/sewing
+	name = "sewing kit"
+	desc = "A handful of fiber and cloth."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "clutter_sewing"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/tablecloth/moon
+	name = "tablecloth"
+	desc = "A decorative table cloth depicting the moon."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "tablecloth_moon"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/clutter/tablecloth/sun
+	name = "tablecloth"
+	desc = "A decorative table cloth depicting the sun."
+	icon = 'icons/roguetown/misc/structure.dmi'
+	icon_state = "tablecloth_sun"
+	density = FALSE
+	anchored = FALSE
+
 /obj/structure/fluff/moonrug
 	name = "moon rug"
 	desc = "A decorative rug depicting the phases of the moon."
-	icon = 'icons/roguetown/misc/96x96.dmi'
+	icon = 'icons/roguetown/misc/64x64.dmi'
 	icon_state = "moonrug"
+	density = FALSE
+	anchored = FALSE
+
+/obj/structure/fluff/sunrug
+	name = "sun rug"
+	desc = "A decorative rug depicting the sun."
+	icon = 'icons/roguetown/misc/64x64.dmi'
+	icon_state = "sunrug"
 	density = FALSE
 	anchored = FALSE
 
@@ -1098,17 +1129,23 @@
 	icon_state = "evilidol"
 	icon = 'icons/roguetown/misc/structure.dmi'
 
+/obj/structure/fluff/statue/evil/examine(mob/user)
+	. = ..()
+	if(user.mind?.has_antag_datum(/datum/antagonist/bandit))
+		. += "You may make a maximum of [MAX_BANDIT_REWARDS] sacrifices to the idol."
+		. += "You can collect a maximum of [get_max_triumphs()] triumphs for your sacrifices."
+
 /obj/structure/fluff/statue/evil/attackby(obj/item/W, mob/user, list/modifiers)
 	if(user.mind)
 		var/datum/antagonist/bandit/B = user.mind.has_antag_datum(/datum/antagonist/bandit)
 		if(B)
-			if(B.tri_amt >= 8)
+			if(B.reward_amt >= MAX_BANDIT_REWARDS)
 				to_chat(user, span_warning("The idol had collected enough tribute from you."))
 				return
 			if(istype(W, /obj/item/reagent_containers/lux))
 				B.contrib += 120
 				record_round_statistic(STATS_SHRINE_VALUE, 120)
-			else if(istype(W, /obj/item/coin) || (istype(W, /obj/item/gem) && !istype(W, /obj/item/gem/amethyst)) || istype(W, /obj/item/reagent_containers/glass/cup/silver) || istype(W, /obj/item/reagent_containers/glass/cup/golden) || istype(W, /obj/item/reagent_containers/glass/carafe) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/statue))
+			else if(((!istype(W, /obj/item/clothing) || istype(W, /obj/item/clothing/head/crown/circlet) || istype(W, /obj/item/clothing/head/crown/nyle) || istype(W, /obj/item/clothing/ring) || istype(W, /obj/item/clothing/neck/psycross) || istype(W, /obj/item/clothing/face)) && !istype(W, /obj/item/weapon) && W.get_real_price() >= 25) || istype(W, /obj/item/coin))
 				if(!istype(W, /obj/item/coin))
 					B.contrib += (W.get_real_price() / 2) // sell jewelry and other fineries, though at a lesser price compared to fencing them first
 					record_round_statistic(STATS_SHRINE_VALUE, (W.get_real_price() / 2))
@@ -1118,50 +1155,98 @@
 			else
 				to_chat(user, span_warning("The idol doesn't want your garbage."))
 				return
+			qdel(W)
 			if(B.contrib >= 80)
 				give_rewards(B, user)
 			else
 				playsound(src,'sound/items/matidol1.ogg', 50, TRUE)
 			playsound(src,'sound/misc/eat.ogg', rand(30, 60), TRUE)
-			qdel(W)
 			return
 
 	return ..()
 
 /obj/structure/fluff/statue/evil/proc/give_rewards(datum/antagonist/bandit/offering_bandit, mob/user)
-	offering_bandit.tri_amt++
-	user.mind.adjust_triumphs(1)
+	offering_bandit.reward_amt++
 	offering_bandit.contrib -= 80
+	if(offering_bandit.reward_amt <= get_max_triumphs())
+		user.mind.adjust_triumphs(1, reason = "Pleased the Master Thief.")
 
 	var/obj/item/I
-	switch(offering_bandit.tri_amt)
+	switch(offering_bandit.reward_amt)
 		if(1)
 			I = new /obj/item/reagent_containers/glass/bottle/healthpot(user.loc)
 		if(2)
-			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+			if(HAS_TRAIT(user, TRAIT_HEAVYARMOR))
+				I = new /obj/item/clothing/armor/plate(user.loc)
+			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
 				I = new /obj/item/clothing/armor/medium/scale(user.loc)
 			else
 				I = new /obj/item/clothing/armor/chainmail/iron(user.loc)
-		if(4)
-			I = new /obj/item/clothing/head/helmet/horned(user.loc)
-		if(6)
-			if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/polearms) > 2)
-				I = new /obj/item/weapon/polearm/spear/billhook(user.loc)
-			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/bows) > 2)
-				I = new /obj/item/gun/ballistic/bow/long(user.loc)
-			else if(GET_MOB_SKILL_VALUE_OLD(user, /datum/attribute/skill/combat/swords) > 2)
-				I = new /obj/item/weapon/sword/long(user.loc)
+		if(3)
+			if(HAS_TRAIT(user, TRAIT_HEAVYARMOR))
+				I = new /obj/item/clothing/pants/platelegs(user.loc)
+			else if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/pants/chainlegs(user.loc)
 			else
-				I = new /obj/item/weapon/mace/steel(user.loc)
-		if(8)
-			I = new /obj/item/clothing/pants/chainlegs(user.loc)
+				I = new /obj/item/clothing/pants/trou/leather/advanced(user.loc)
+		if(4)
+			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/head/helmet/heavy/bucket(user.loc)
+			else
+				I = new /obj/item/clothing/head/helmet/leather/advanced(user.loc)
+		if(5)
+			if(HAS_TRAIT(user, TRAIT_MEDIUMARMOR))
+				I = new /obj/item/clothing/wrists/bracers(user.loc)
+			else
+				I = new /obj/item/clothing/wrists/bracers/leather/advanced(user.loc)
+		if(6)
+			var/list/weapon_options = list("Navaja knife" = /obj/item/weapon/knife/dagger/navaja)
+
+			// Matthios armory, curated for the person getting a reward. Contains mostly steel gear from bandit subclasses, but also has more gimmicky stuff that's rarely seen.
+			if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/polearms) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Billhook"] = /obj/item/weapon/polearm/spear/billhook
+				weapon_options["Quarterstaff"] = /obj/item/weapon/polearm/woodstaff/quarterstaff/steel
+			if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/bows) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Longbow"] = /obj/item/gun/ballistic/bow/long
+			if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/crossbows) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Slurbow"] = /obj/item/gun/ballistic/bow/cross/slur
+			if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/swords) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Longsword"] = /obj/item/weapon/sword/long
+				weapon_options["Sabre"] = /obj/item/weapon/sword/sabre
+			if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/axesmaces) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Steel mace"] = /obj/item/weapon/mace/steel
+				weapon_options["Battle axe"] = /obj/item/weapon/axe/battle
+			if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/whipsflails) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Steel flail"] = /obj/item/weapon/flail
+				weapon_options["Steel whip"] = /obj/item/weapon/whip/steel
+			if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/shields) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Kite shield"] = /obj/item/weapon/shield/tower/metal
+			if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/unarmed) > SKILL_LEVEL_JOURNEYMAN)
+				weapon_options["Knuckles"] = /obj/item/weapon/knuckles
+				weapon_options["Mantis claws"] = /obj/item/weapon/handclaw/steel
+
+			var/chosen_weapon
+			if(length(weapon_options))
+				var/chosen_name = browser_input_list(user, "Choose your blessing.", "STOLEN STEEL. NOT MADE FOR US.", weapon_options, timeout = 20 SECONDS)
+				chosen_weapon = chosen_name ? weapon_options[chosen_name] : /obj/item/weapon/knife/dagger/navaja
+			else
+				chosen_weapon = /obj/item/weapon/knife/dagger/navaja
+			I = new chosen_weapon(user.loc)
+		if(7)
+			if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/bows) > SKILL_LEVEL_JOURNEYMAN)
+				I = new /obj/item/ammo_holder/quiver/arrows(user.loc)
+			else if(GET_MOB_SKILL_VALUE_RAW(user, /datum/attribute/skill/combat/crossbows) > SKILL_LEVEL_JOURNEYMAN)
+				I = new /obj/item/ammo_holder/quiver/bolts(user.loc)
 	if(I)
 		I.sellprice = 0
 
-	if(offering_bandit.contrib >= 100 && offering_bandit.tri_amt < 8)
+	if(offering_bandit.contrib >= 100 && offering_bandit.reward_amt < MAX_BANDIT_REWARDS)
 		give_rewards(offering_bandit, user)
 	else
 		playsound(src,'sound/items/matidol2.ogg', 50, TRUE)
+
+/obj/structure/fluff/statue/evil/proc/get_max_triumphs()
+	return clamp(floor(length(GLOB.clients) / 15), 1, 4)
 
 /obj/structure/fluff/statue/graggar
 	name = "Graggar Idol"
@@ -1481,8 +1566,7 @@
 	bride.adjust_triumphs(1)
 
 	if(!secret_marriage)
-		var/announcement_message = "Eora [groom.gender == bride.gender ? "begrudgingly accepts" : "proudly embraces"] the marriage between [groom.real_name] and [bride_first_name]!"
-		priority_announce(announcement_message, title = "Holy Union!", sound = 'sound/misc/bell.ogg')
+		priority_announce("Eora proudly embraces the marriage between [groom.real_name] and [bride_first_name]!", title = "Holy Union!", sound = 'sound/misc/bell.ogg')
 
 	SEND_GLOBAL_SIGNAL(COMSIG_GLOBAL_MARRIAGE, groom, bride)
 	record_round_statistic(STATS_MARRIAGES)
@@ -1598,7 +1682,7 @@
 
 /obj/structure/fluff/steamvent/Initialize()
 	. = ..()
-	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK)
+	AddElement(/datum/element/footstep_override, footstep = FOOTSTEP_CATWALK, land_sound = 'sound/foley/jumpland/metalland.ogg')
 	var/obj/effect/abstract/shared_particle_holder/steamvent_particle = add_shared_particles(/particles/smoke/cig/big, "steam_vent", pool_size = 4)
 	steamvent_particle.particles.position = generator(GEN_BOX, list(-14, -14), list(14, 14))
 

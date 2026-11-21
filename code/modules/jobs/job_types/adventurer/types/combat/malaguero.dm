@@ -12,7 +12,7 @@
 		/datum/attribute/skill/combat/swords = 20,
 		/datum/attribute/skill/combat/whipsflails = 10,
 		/datum/attribute/skill/combat/shields = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/combat/axesmaces = 30,
 	)

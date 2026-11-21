@@ -5,6 +5,7 @@
 	sound = 'sound/magic/magnet.ogg'
 
 	required_form = FORM_DEATH
+	associated_skill = /datum/attribute/skill/magic/arcane/death
 	required_technique = TECHNIQUE_SUMMONING
 	required_level = 12
 	heretical_spell = TRUE

@@ -4,6 +4,7 @@
 		//BLACK MAGIC THINGS//
 		//////////////////////
 	parent_type = /datum
+	show_verb_panel = FALSE
 		////////////////
 		//ADMIN THINGS//
 		////////////////

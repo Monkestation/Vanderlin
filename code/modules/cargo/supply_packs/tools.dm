@@ -19,6 +19,11 @@
 	cost = 20
 	contains = /obj/item/lockpickring/mundane
 
+/datum/supply_pack/tools/warpstone
+	name = "Warpstone"
+	cost = 30
+	contains = /obj/item/warpstone
+
 /datum/supply_pack/tools/keyrings
 	name = "Keyring"
 	cost = 5

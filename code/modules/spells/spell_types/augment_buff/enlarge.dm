@@ -4,6 +4,7 @@
 	button_icon_state = "enlarge"
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 
 	invocation = "Dilatare!"
 	invocation_type = INVOCATION_SHOUT

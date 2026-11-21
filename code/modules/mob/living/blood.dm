@@ -118,7 +118,7 @@
 
 /// Makes a blood drop, leaking amt units of blood from the mob
 /mob/living/proc/bleed(amount, should_update = TRUE)
-	if((status_flags & GODMODE) || !can_bleed())
+	if(HAS_TRAIT(src, TRAIT_GODMODE) || !can_bleed())
 		return
 	if(!get_blood_volume())
 		return
@@ -402,11 +402,11 @@
 	return CAN_HAVE_BLOOD(src) ? blood_volume : 0 // Overriding blood setting code can cause blood_volume to be non-zero even when a mob shouldn't have blood.
 
 /mob/living/carbon/get_blood_volume(apply_modifiers = FALSE)
-	if (!CAN_HAVE_BLOOD(src))
+	if(!CAN_HAVE_BLOOD(src))
 		return 0 // Overriding blood setting code can cause blood_volume to be non-zero even when a mob shouldn't have blood.
-	if (!apply_modifiers)
+	if(!apply_modifiers)
 		return blood_volume // Default behavior, returns the real blood volume.
-	if (status_flags & GODMODE)
+	if(HAS_TRAIT(src, TRAIT_GODMODE))
 		return default_blood_volume // Makes TRAIT_GODMODE grant immunity to the effects of bleeding. (oxyloss, passing out, etc.)
 
 	var/amount = blood_volume

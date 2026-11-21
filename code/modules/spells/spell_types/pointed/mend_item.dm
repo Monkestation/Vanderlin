@@ -6,6 +6,7 @@
 	spell_flags = SPELL_RITUOS
 
 	required_form = FORM_LIFE
+	associated_skill = /datum/attribute/skill/magic/arcane/life
 	required_technique = TECHNIQUE_ALTERATION
 
 	charge_time = 3 SECONDS

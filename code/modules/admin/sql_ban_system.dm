@@ -301,7 +301,7 @@
 		var/list/uncategorized = list()
 		for(var/datum/job/job_type as anything in SSjob.all_occupations)
 			var/title = job_type.title
-			if(title == "NOPE")
+			if(title == JOB_INVALID)
 				continue
 			if(istype(job_type, /datum/job/advclass))
 				continue
@@ -841,7 +841,7 @@
 				return
 		qdel(query_check_adminban_count)
 
-	if (!(interval in list("SECOND", "MINUTE", "HOUR", DAY, "WEEK", "MONTH", "YEAR")))
+	if (!(interval in list("SECOND", "MINUTE", "HOUR", "DAY", "WEEK", "MONTH", "YEAR")))
 		interval = "MINUTE"
 
 	var/list/changes_text = list()

@@ -221,6 +221,7 @@
 
 	required_technique = TECHNIQUE_CREATION
 	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 
 	click_to_activate = TRUE
 	cast_range = SPELL_RANGE_GROUND

@@ -154,7 +154,9 @@
 		if(isliving(target))
 			var/mob/living/target_mob = target
 			var/damage_amt = DIVINE_FIRE_DAMAGE
-			if(source.has_enchantment(/datum/enchantment/silver))
+			if(source.has_enchantment(/datum/enchantment/truesilver))
+				damage_amt = damage_amt*2
+			else if(source.has_enchantment(/datum/enchantment/silver))
 				damage_amt = damage_amt*1.5
 			target_mob.adjustFireLoss(damage_amt)
 			target_mob.visible_message(span_warning("Divine fire leaps from [source], burning [target_mob]!"), span_warning("Divine fire leaps from [source] and singes you!"))

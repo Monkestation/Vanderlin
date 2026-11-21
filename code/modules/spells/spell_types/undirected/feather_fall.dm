@@ -10,6 +10,7 @@
 	spell_flags = SPELL_RITUOS
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 	required_technique = TECHNIQUE_ALTERATION
 
 

@@ -16,7 +16,7 @@
 		/datum/attribute/skill/combat/crossbows = 20,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/carpentry = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/misc/climbing = 30,
 		/datum/attribute/skill/misc/athletics = 30,
 		/datum/attribute/skill/misc/sewing = 10,
@@ -41,7 +41,7 @@
 
 	var/static/list/weapons = list(
 		"Battleaxe & Cudgel" = list(/obj/item/weapon/axe/battle, /obj/item/weapon/mace/cudgel),
-		"Flail & Shield" = list(/obj/item/weapon/shield/wood, /obj/item/weapon/flail),
+		"Flail & Shield" = list(/obj/item/weapon/shield/tower/metal, /obj/item/weapon/flail),
 	)
 
 	spawned.select_equippable(player_client, weapons, message = "Choose your weapon.", title = "TAKE UP ARMS.")

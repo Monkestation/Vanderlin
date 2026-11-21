@@ -155,7 +155,6 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/ordinatorcape/warrior
 	name = "warrior silks"
@@ -192,7 +191,6 @@
 	sleevetype = "shirt"
 	nodismemsleeves = TRUE
 	inhand_mod = TRUE
-	has_storage = TRUE
 
 /obj/item/clothing/cloak/absolutionistrobe/black
 	name = "blessed robe"

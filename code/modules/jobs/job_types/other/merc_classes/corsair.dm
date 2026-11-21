@@ -11,7 +11,7 @@
 		/datum/attribute/skill/misc/sneaking = 20,
 		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/misc/athletics = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 30
 	)
 

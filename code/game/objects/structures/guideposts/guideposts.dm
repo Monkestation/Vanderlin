@@ -54,7 +54,7 @@
 		return
 
 	if(!user.is_literate())
-		user.adjust_experience(/datum/attribute/skill/misc/reading, 2, FALSE)
+		user.adjust_experience(/datum/attribute/skill/educated/reading, 2, FALSE)
 		to_chat(user, span_warning("You can't make sense of what's carved into [src]."))
 		return
 

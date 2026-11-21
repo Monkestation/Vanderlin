@@ -7,7 +7,7 @@
 	department_flag = NOBLEMEN
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = 19 //lol?
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 	total_positions = 1
 	spawn_positions = 1
 
@@ -61,7 +61,7 @@
 	)
 
 /datum/job/advclass/archivist
-	factions = list(FACTION_TOWN, SUB_FACTION_KEEP)
+	factions = list(FACTION_TOWN, SUB_FACTION_KEEP, SUB_FACTION_COURT)
 
 /datum/attribute_holder/sheet/job/chronicler
 	raw_attribute_list = list(
@@ -70,11 +70,11 @@
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 30,
-		/datum/attribute/skill/labor/mathematics = 60
+		/datum/attribute/skill/educated/mathematics = 60
 	)
 
 /datum/attribute_holder/sheet/job/chronicler/old
@@ -84,11 +84,11 @@
 		STAT_CONSTITUTION = -1,
 		STAT_ENDURANCE = -1,
 		STAT_SPEED = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/misc/riding = 20,
 		/datum/attribute/skill/craft/alchemy = 30,
 		/datum/attribute/skill/magic/arcane = 50,
-		/datum/attribute/skill/labor/mathematics = 60
+		/datum/attribute/skill/educated/mathematics = 60
 	)
 
 /datum/job/advclass/archivist/chronicler
@@ -105,6 +105,7 @@
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/chronicler
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/chronicler/old
+	book_type = /obj/item/recipe_book/arcyne
 
 /datum/job/advclass/archivist/chronicler/on_roundstart(mob/living/spawned, client/player_client)
 	. = ..()
@@ -154,12 +155,12 @@
 		STAT_PERCEPTION = 1,
 		STAT_STRENGTH = -1,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/attribute_holder/sheet/job/dreamwatcher/old
@@ -169,12 +170,12 @@
 		STAT_PERCEPTION = 1,
 		STAT_STRENGTH = -1,
 		STAT_CONSTITUTION = -1,
-		/datum/attribute/skill/misc/reading = 60,
+		/datum/attribute/skill/educated/reading = 60,
 		/datum/attribute/skill/craft/crafting = 30,
 		/datum/attribute/skill/craft/cooking = 10,
 		/datum/attribute/skill/misc/sewing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
-		/datum/attribute/skill/labor/mathematics = 40
+		/datum/attribute/skill/educated/mathematics = 40
 	)
 
 /datum/job/advclass/archivist/dreamwatcher //Not a Magician nor an Acolyte, but something more, blessed by Noc since they were born, being capable of Visions and Feelings through dreams, they can feel the highest god influence or and get a hint about any of the active antags.

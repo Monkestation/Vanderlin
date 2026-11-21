@@ -174,6 +174,7 @@
 	activetime = 30 SECONDS
 	sellprice = 100
 	pickpocket_difficulty = SKILL_RANK_EXPERT
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/ring/active/nomag/update_icon_state()
 	. = ..()
@@ -201,6 +202,7 @@
 	name = "ring of protection"
 	desc = "Old ring, inscribed with arcyne words. Once held magical powers, perhaps it does still?"
 	icon_state = "ring_protection"
+	misc_flags = CRAFTING_TEST_EXCLUDE
 	var/antileechy
 	var/antimagika	// will cause bugs if equipped roundstart to wizards
 	var/antishocky
@@ -245,6 +247,7 @@
 	name = "ring of ravox"
 	desc = "Old ring, inscribed with arcyne words. Just being near it imbues you with otherworldly strength."
 	icon_state = "ring_ravox"
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/ring/gold/ravox/equipped(mob/living/user, slot)
 	. = ..()
@@ -264,6 +267,7 @@
 	name = "soothing ring"
 	desc = "A lightweight ring that feels entirely weightless, and easing to your mind as you place it upon a finger."
 	icon_state = "s_newring_quartz"
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/ring/silver/calm/equipped(mob/living/user, slot)
 	. = ..()
@@ -283,6 +287,7 @@
 	name = "ring of noc"
 	desc = "Old ring, inscribed with arcyne words. Just being near it imbues you with otherworldly knowledge."
 	icon_state = "ring_sapphire"
+	misc_flags = CRAFTING_TEST_EXCLUDE
 
 /obj/item/clothing/ring/silver/noc/equipped(mob/living/user, slot)
 	. = ..()
@@ -467,11 +472,16 @@
 	user.changeNext_move(CLICK_CD_MELEE)
 	if(!length(GLOB.agent_rings))
 		return
-	var/list/possible_targets = list("EVERYONE")
+	var/list/possible_targets = list()
 	for(var/obj/item/clothing/ring/courtagent_ring/ring as anything in GLOB.agent_rings)
 		if(ring.user_mob == user)
 			continue
 		possible_targets += ring.user_mob.real_name
+
+	if(!possible_targets.len)
+		to_chat(user, span_warning("There is no one to send a message to."))
+		return
+	possible_targets += "EVERYONE"
 
 	var/chosen_target = tgui_input_list(user, "Who do you wish to contact?", "Contact Target", possible_targets, timeout = 20 SECONDS)
 	if(!chosen_target)

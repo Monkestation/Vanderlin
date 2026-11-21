@@ -21,7 +21,7 @@
 		/datum/attribute/skill/craft/engineering = 20,
 		/datum/attribute/skill/craft/blacksmithing = 10,
 		/datum/attribute/skill/craft/smelting = 20,
-		/datum/attribute/skill/misc/reading = 10
+		/datum/attribute/skill/educated/reading = 10
 	)
 
 /datum/job/miner

@@ -887,8 +887,8 @@
 /turf/open/floor/tile/masonic/single,
 /area/indoors/antag/lich)
 "fc" = (
-/obj/structure/dungeon_entry,
-/turf/closed/mineral/bedrock/cold,
+/obj/structure/waystone,
+/turf/open/floor/grass/cold,
 /area/outdoors/bog)
 "fd" = (
 /obj/effect/landmark/hammer/dev_text,
@@ -98277,7 +98277,7 @@ Gy
 Gy
 IC
 IC
-IC
+Av
 Av
 Av
 Av
@@ -98681,7 +98681,7 @@ Gy
 Gy
 IC
 IC
-IC
+Av
 Av
 bD
 Av

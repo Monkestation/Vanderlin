@@ -14,6 +14,7 @@
 	cast_range = 7
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 	required_technique = TECHNIQUE_IMBUE
 	spell_cost = 90
 

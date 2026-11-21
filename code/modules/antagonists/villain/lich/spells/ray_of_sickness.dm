@@ -5,6 +5,7 @@
 	sound = 'sound/misc/portal_enter.ogg'
 
 	required_form = FORM_WATER
+	associated_skill = /datum/attribute/skill/magic/arcane/water
 
 	charge_time = 2 SECONDS
 	charge_drain = 1

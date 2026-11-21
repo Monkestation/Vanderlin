@@ -15,7 +15,7 @@
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/misc/sewing = 10,
 		/datum/attribute/skill/misc/medicine = 10,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/labor/lumberjacking = 30,
 	)
 

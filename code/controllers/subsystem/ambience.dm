@@ -146,7 +146,9 @@ SUBSYSTEM_DEF(ambience)
 		return
 
 	client.current_ambient_sound = used
-	SEND_SOUND(src, sound(used, repeat = 1, wait = 0, volume = vol, channel = CHANNEL_BUZZ))
+	var/sound/buzz = sound(used, repeat = 1, wait = 0, volume = vol, channel = CHANNEL_BUZZ)
+	buzz.status = SOUND_STREAM
+	SEND_SOUND(src, buzz)
 
 /mob/proc/cancel_looping_ambience()
 	if(!client)

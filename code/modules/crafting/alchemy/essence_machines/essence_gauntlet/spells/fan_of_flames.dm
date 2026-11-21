@@ -55,4 +55,5 @@
 	spell_type = SPELL_MANA
 
 	required_form = FORM_FIRE
+	associated_skill = /datum/attribute/skill/magic/arcane/fire
 	required_technique = TECHNIQUE_DESTRUCTION

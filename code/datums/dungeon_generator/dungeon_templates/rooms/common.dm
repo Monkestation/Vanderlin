@@ -1,7 +1,7 @@
 /datum/map_template/dungeon/room
 	name = "Room Tile"
 	abstract_type = /datum/map_template/dungeon/room
-	type_weight = 15
+	type_weight = 20
 
 /datum/map_template/dungeon/room/sewer
 	mappath = "_maps/matthios_tomb/room/Sewers2.dmm"
@@ -14,6 +14,8 @@
 	east_offset = 6
 	west_offset = 6
 
+	min_depth = 5
+
 /datum/map_template/dungeon/room/acidfight
 	mappath = "_maps/matthios_tomb/room/acidfight.dmm"
 	id = "acid_fight"
@@ -25,6 +27,7 @@
 	east_offset = 10
 	west_offset = 10
 
+	min_depth = 14
 
 /datum/map_template/dungeon/room/skeletonroom
 	mappath = "_maps/matthios_tomb/room/skeletonroom.dmm"
@@ -37,6 +40,9 @@
 	east_offset = 8
 	west_offset = 8
 
+	min_depth = 14
+	unique = TRUE
+
 /datum/map_template/dungeon/room/graveend
 	mappath = "_maps/matthios_tomb/room/graveend.dmm"
 	id = "graveend"
@@ -46,6 +52,8 @@
 
 	west_offset = 3
 
+	min_depth = 6
+
 /datum/map_template/dungeon/room/fightpit
 	mappath = "_maps/matthios_tomb/room/fightpit.dmm"
 	id = "fightpit"
@@ -54,6 +62,8 @@
 
 	west_offset = 10
 	south_offset = 10
+
+	min_depth = 9
 
 /datum/map_template/dungeon/room/sewers
 	mappath = "_maps/matthios_tomb/room/sewers.dmm"
@@ -66,16 +76,21 @@
 	east_offset = 7
 	west_offset = 7
 
+	min_depth = 5
+
 /datum/map_template/dungeon/room/campnotherthing
 	mappath = "_maps/matthios_tomb/room/campnotherthing.dmm"
 	id = "campnotherthing"
 	width = 12
 	height = 12
+	rarity = 10 //chud ass room tbh
 
 	north_offset = 5
 	south_offset = 5
 	east_offset = 6
 	west_offset = 6
+
+	min_depth = 10
 
 /datum/map_template/dungeon/room/cavecamp
 	mappath = "_maps/matthios_tomb/room/cavecamp.dmm"
@@ -88,6 +103,8 @@
 	east_offset = 5
 	west_offset = 6
 
+	min_depth = 5
+
 /datum/map_template/dungeon/room/drugden
 	mappath = "_maps/matthios_tomb/room/drugden.dmm"
 	id = "drugden"
@@ -98,6 +115,8 @@
 	south_offset = 10
 	east_offset = 10
 	west_offset = 10
+
+	min_depth = 9
 
 /datum/map_template/dungeon/room/dwelfhome
 	mappath = "_maps/matthios_tomb/room/dwelfhome.dmm"
@@ -110,7 +129,9 @@
 	east_offset = 7
 	west_offset = 7
 
-/*
+	min_depth = 7
+
+
 /datum/map_template/dungeon/room/SpiralLibraryIteration2
 	mappath = "_maps/matthios_tomb/room/SpiralLibraryIteration2.dmm"
 	id = "SpiralLibraryIteration2"
@@ -121,9 +142,10 @@
 	south_offset = 7
 	east_offset = 7
 	west_offset = 7
-*/
 
-/*
+	min_depth = 8
+	unique = TRUE
+
 /datum/map_template/dungeon/room/Skeletonpit
 	mappath = "_maps/matthios_tomb/room/Skeletonpit.dmm"
 	id = "Skeletonpit"
@@ -134,7 +156,8 @@
 	south_offset = 9
 	east_offset = 10
 	west_offset = 10
-*/
+
+	min_depth = 10
 
 /datum/map_template/dungeon/room/Malphpiece4
 	mappath = "_maps/matthios_tomb/room/Malphpiece4.dmm"
@@ -147,6 +170,9 @@
 	east_offset = 3
 	west_offset = 10
 
+	unique = TRUE
+	min_depth = 16
+
 /datum/map_template/dungeon/room/ForgottenInn
 	mappath = "_maps/matthios_tomb/room/ForgottenInn.dmm"
 	id = "ForgottenInn"
@@ -158,6 +184,8 @@
 	east_offset = 11
 	west_offset = 11
 
+	min_depth = 6
+
 /datum/map_template/dungeon/room/fightingpit
 	mappath = "_maps/matthios_tomb/room/fightingpit.dmm"
 	id = "fightingpit"
@@ -166,6 +194,8 @@
 
 	east_offset = 7
 	west_offset = 7
+
+	min_depth = 10
 
 /datum/map_template/dungeon/room/small_lab
 	mappath = "_maps/matthios_tomb/room/small lab.dmm"
@@ -178,6 +208,8 @@
 	north_offset = 10
 	south_offset = 10
 
+	min_depth = 7
+
 /datum/map_template/dungeon/room/Allbutwesthall
 	mappath = "_maps/matthios_tomb/room/Allbutwesthall.dmm"
 	id = "Allbutwesthall"
@@ -187,6 +219,8 @@
 	east_offset = 7
 	north_offset = 7
 	south_offset = 7
+
+	min_depth = 8
 
 /datum/map_template/dungeon/room/Bathhouse_Dungeon
 	mappath = "_maps/matthios_tomb/room/Bathhouse Dungeon.dmm"
@@ -198,6 +232,9 @@
 	east_offset = 14
 	north_offset = 15
 	south_offset = 15
+
+	min_depth = 15
+	unique = TRUE
 
 /datum/map_template/dungeon/room/lava_small
 	mappath = "_maps/matthios_tomb/room/Lava Small.dmm"
@@ -243,6 +280,8 @@
 	north_offset = 14
 	south_offset = 14
 
+	min_depth = 16
+
 /datum/map_template/dungeon/room/GoblinInfestedJoint
 	mappath = "_maps/matthios_tomb/room/GoblinInfestedJoint.dmm"
 	id = "GoblinInfestedJoint"
@@ -287,6 +326,8 @@
 	north_offset = 14
 	south_offset = 14
 
+	max_occurrences = 2
+
 /datum/map_template/dungeon/room/hctomb1
 	mappath = "_maps/matthios_tomb/room/hctomb1.dmm"
 	id = "hctomb1"
@@ -297,6 +338,8 @@
 	east_offset = 15
 	north_offset = 14
 	south_offset = 14
+
+	min_depth = 9
 
 /datum/map_template/dungeon/room/hctomb2
 	mappath = "_maps/matthios_tomb/room/hctomb2.dmm"
@@ -309,6 +352,8 @@
 	north_offset = 15
 	south_offset = 15
 
+	min_depth = 8
+
 /datum/map_template/dungeon/room/hctomb3
 	mappath = "_maps/matthios_tomb/room/hctomb3.dmm"
 	id = "hctomb3"
@@ -319,6 +364,8 @@
 	east_offset = 15
 	north_offset = 15
 	south_offset = 15
+
+	min_depth = 11
 
 /datum/map_template/dungeon/room/hctomb4
 	mappath = "_maps/matthios_tomb/room/hctomb4.dmm"
@@ -331,6 +378,8 @@
 	north_offset = 15
 	south_offset = 15
 
+	min_depth = 6
+
 /datum/map_template/dungeon/room/hctomb5
 	mappath = "_maps/matthios_tomb/room/hctomb5.dmm"
 	id = "hctomb5"
@@ -340,6 +389,8 @@
 	west_offset = 6
 	east_offset = 8
 	north_offset = 9
+
+	min_depth = 8
 
 /datum/map_template/dungeon/room/goblincamp
 	mappath = "_maps/matthios_tomb/room/goblincamp.dmm"
@@ -351,6 +402,8 @@
 	east_offset = 15
 	north_offset = 13
 	south_offset = 13
+
+	min_depth = 17
 
 /datum/map_template/dungeon/room/rousecamp
 	mappath = "_maps/matthios_tomb/room/rousecamp.dmm"
@@ -373,17 +426,22 @@
 	east_offset = 15
 	north_offset = 14
 	south_offset = 14
+	unique = TRUE
 
 /datum/map_template/dungeon/room/lavafort
 	mappath = "_maps/matthios_tomb/room/lavafort.dmm"
 	id = "lavafort"
 	width = 30
 	height = 30
+	rarity = 50
 
 	west_offset = 15
 	east_offset = 15
 	north_offset = 14
 	south_offset = 14
+
+	unique = TRUE
+	min_depth = 6
 
 /datum/map_template/dungeon/room/magicanvil
 	mappath = "_maps/matthios_tomb/room/magicanvil.dmm"
@@ -408,6 +466,7 @@
 	east_offset = 22
 	north_offset = 22
 	south_offset = 22
+	unique = TRUE
 
 /datum/map_template/dungeon/room/AcidMageTower
 	mappath = "_maps/matthios_tomb/room/AcidMageTower.dmm"
@@ -420,6 +479,8 @@
 	north_offset = 15
 	south_offset = 15
 
+	min_depth = 18
+
 /datum/map_template/dungeon/room/Goonies
 	mappath = "_maps/matthios_tomb/room/Goonies.dmm"
 	id = "Goonies"
@@ -430,6 +491,9 @@
 	east_offset = 20
 	north_offset = 30
 	south_offset = 30
+
+	min_depth = 20
+	unique = TRUE
 
 /datum/map_template/dungeon/room/SmithRest
 	mappath = "_maps/matthios_tomb/room/SmithRest.dmm"
@@ -451,6 +515,7 @@
 	west_offset = 18
 	east_offset = 18
 	south_offset = 26
+	unique = TRUE
 
 /datum/map_template/dungeon/room/MinorLordKeep
 	mappath = "_maps/matthios_tomb/room/MinorLordKeep.dmm"
@@ -485,16 +550,23 @@
 	north_offset = 19
 	south_offset = 19
 
+	min_depth = 14
+	unique = TRUE
+
 /datum/map_template/dungeon/room/zizite
 	mappath = "_maps/matthios_tomb/room/zizite.dmm"
 	id = "zizite"
 	width = 25
 	height = 25
+	rarity = 200
 
 	west_offset = 14
 	east_offset = 14
 	north_offset = 12
 	south_offset = 12
+
+	unique = TRUE
+	min_depth = 10
 
 /datum/map_template/dungeon/room/mwoutpost
 	mappath = "_maps/matthios_tomb/room/mwoutpost.dmm"

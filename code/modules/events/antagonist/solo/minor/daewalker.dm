@@ -11,7 +11,6 @@ GLOBAL_VAR_INIT(vamp_detection, FALSE)
 	antag_datum = /datum/antagonist/vampire/lord/daewalker
 	antag_flag = ROLE_VAMPIRE
 	shared_occurence_type = null
-	minor_roleset = TRUE
 	max_occurrences = 1
 	allowed_storytellers = DIVINE_STORYTELLERS
 	dedicated_storytellers = list(/datum/storyteller/astrata)

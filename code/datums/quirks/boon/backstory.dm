@@ -332,7 +332,7 @@
 /datum/backstory/misc/literacy
 	name = "Basic Literacy"
 	desc = "You spent time learning to read and write as a child."
-	granted_skill = /datum/attribute/skill/misc/reading
+	granted_skill = /datum/attribute/skill/educated/reading
 
 /datum/backstory/misc/swimmer
 	name = "Summer Swimmer"
@@ -342,7 +342,7 @@
 /datum/backstory/misc/merchant
 	name = "Marketplace Assistant"
 	desc = "You helped handle the coin from your family's ventures, and still have a good handle on math."
-	granted_skill = /datum/attribute/skill/labor/mathematics
+	granted_skill = /datum/attribute/skill/educated/mathematics
 
 /datum/backstory/magic
 	abstract_type = /datum/backstory/magic

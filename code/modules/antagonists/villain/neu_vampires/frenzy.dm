@@ -68,6 +68,7 @@
 		return
 	ADD_TRAIT(src, TRAIT_IN_FRENZY, MAGIC_TRAIT)
 	add_client_colour(/datum/client_colour/glass_colour/red)
+	log_combat(src, src, "Entered Bloodfrenzy")
 	GLOB.frenzy_list += src
 
 /mob/living/proc/exit_frenzymod()
@@ -79,6 +80,7 @@
 	GLOB.frenzy_list -= src
 	clear_frenzy_cache()
 	last_frenzy_check = world.time
+	log_combat(src, src, "Exited Bloodfrenzy")
 
 /mob/living/proc/CheckFrenzyMove()
 	if(stat >= SOFT_CRIT)

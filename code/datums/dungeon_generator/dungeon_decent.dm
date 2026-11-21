@@ -64,25 +64,7 @@ GLOBAL_LIST_INIT(descent_level_map, list()) // Maps z-levels to their descent ob
 	return ..()
 
 /obj/structure/dungeon_descent/proc/use(mob/user, is_ghost = FALSE)
-	if(!attempt_descent(user, is_ghost))
-		return
-
-	// Find available dungeon entries on the target level
-	var/list/available_entries = get_target_entries()
-	if(!length(available_entries))
-		to_chat(user, span_warning("The stairway seems to lead nowhere..."))
-		return
-
-	// Pick random entry point on target level
-	var/obj/structure/dungeon_entry/target = pick(available_entries)
-
-	if(!is_ghost)
-		to_chat(user, span_notice("You descend deeper into the dungeon..."))
-		playsound(src, 'sound/foley/ladder.ogg', 100, FALSE)
-		if(!do_after(user, 3 SECONDS, src))
-			return
-
-	user.zMove(target = get_turf(target), z_move_flags = ZMOVE_LADDER_FLAGS)
+	return
 
 /obj/structure/dungeon_descent/proc/attempt_descent(mob/user, is_ghost = FALSE)
 	if(!is_ghost && !can_descend)
@@ -111,14 +93,3 @@ GLOBAL_LIST_INIT(descent_level_map, list()) // Maps z-levels to their descent ob
 		to_chat(user, span_warning("You cannot descend yet. Something holds you back."))
 		return FALSE
 	return TRUE
-
-/obj/structure/dungeon_descent/proc/get_target_entries()
-	var/list/entries = list()
-
-	// Look through all dungeon entries for ones on our target level
-	for(var/obj/structure/dungeon_exit/entry as anything in GLOB.dungeon_exits)
-		if(entry.delve_level == target_delve_level)
-			entries |= entry
-
-
-	return entries

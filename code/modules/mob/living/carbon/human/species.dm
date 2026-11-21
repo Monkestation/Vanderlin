@@ -1871,7 +1871,10 @@
 
 	var/pen = I.armor_penetration
 	if(user.used_intent?.penfactor)
-		pen = I.armor_penetration + user.used_intent.penfactor
+		if(user.used_intent.reach > 1 && user.Adjacent(H))
+			pen += user.used_intent.penfactor/2
+		else
+			pen += user.used_intent.penfactor
 
 	var/knockout_modifier = 0
 	if(!H.cmode && !H.stat && H.body_position != LYING_DOWN && user.m_intent == MOVE_INTENT_SNEAK && (H.dir == REVERSE_DIR(get_dir(H, user))))
@@ -2443,7 +2446,7 @@
 			H.add_stress(/datum/stress_event/on_fire)
 
 /datum/species/proc/CanIgniteMob(mob/living/carbon/human/H)
-	if(H.status_flags & GODMODE)
+	if(HAS_TRAIT(H, TRAIT_GODMODE))
 		return FALSE
 	if(H.divine_fire_stacks > 0) // tieflings can't say no to astrata
 		return TRUE

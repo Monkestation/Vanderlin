@@ -20,7 +20,7 @@
 		/datum/attribute/skill/combat/bows = 30,
 		/datum/attribute/skill/misc/swimming = 20,
 		/datum/attribute/skill/misc/athletics = 20,
-		/datum/attribute/skill/misc/reading = 20,
+		/datum/attribute/skill/educated/reading = 20,
 		/datum/attribute/skill/misc/climbing = 40,
 		/datum/attribute/skill/misc/sneaking = 30,
 		/datum/attribute/skill/craft/cooking = 10,

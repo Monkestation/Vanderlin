@@ -11,7 +11,6 @@
 
 /datum/clan_leader/lord
 	lord_spells = list(
-		/datum/action/cooldown/spell/enslave_mortal,
 		/datum/action/cooldown/spell/undirected/shapeshift/bat,
 		/datum/action/cooldown/spell/undirected/mansion_portal,
 		/datum/action/cooldown/spell/undirected/shapeshift/mist,
@@ -42,7 +41,7 @@
 	// Update vampire datum if they have one
 	var/datum/antagonist/vampire/vamp_datum = H.mind?.has_antag_datum(/datum/antagonist/vampire)
 	H.maxbloodpool += vitae_bonus
-	if(vamp_datum)
+	if(!istype(vamp_datum, /datum/antagonist/vampire/lord))
 		vamp_datum.name = "[lord_title]"
 		vamp_datum.antag_hud_name = "vamplord"
 

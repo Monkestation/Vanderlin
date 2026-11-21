@@ -189,6 +189,7 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 	sins = "Cowardice, Cruelty, Stagnation"
 	boons = "Your used weapons dull slower."
 	added_traits = list(TRAIT_SHARPER_BLADES)
+	added_verbs = list(/mob/living/carbon/human/proc/honor_duel)
 	devotion_holder = /datum/devotion/divine/ravox
 	confess_lines = list(
 		"RAVOX IS JUSTICE!",
@@ -324,3 +325,60 @@ GLOBAL_LIST_INIT(patron_sound_themes, list(
 			/obj/structure/fluff/psycross
 		),
 	)
+
+
+/mob/living/carbon/human/proc/honor_duel()
+	set name = "Honor Duel"
+	set category = "RoleUnique.Patron"
+
+	if(incapacitated(IGNORE_GRAB) || stat >= UNCONSCIOUS)
+		to_chat(usr, span_warning("You cannot do this in your current state."))
+		return
+	if(!can_speak_vocal())
+		to_chat(usr, span_warning("You cannot speak, you are unable to issue your challenge."))
+		return
+
+	var/static/last_challenge_time = 0
+
+	if(world.time < last_challenge_time + 1 MINUTES)
+		var/time_left = round((last_challenge_time + 1 MINUTES - world.time) / 10)
+		to_chat(src, span_warning("You must wait [time_left] more seconds before making another challenge."))
+		return
+
+	var/list/targets = list()
+	for(var/mob/living/nearby_living in oview(5, get_turf(usr)))
+		if(nearby_living == usr)
+			continue
+		if(!nearby_living.mind)
+			continue
+		if(nearby_living.stat > SOFT_CRIT)
+			continue
+		targets += nearby_living
+
+	if(!length(targets))
+		to_chat(usr, span_warning("No possible targets nearby."))
+		return
+
+	var/mob/living/target = tgui_input_list(usr, "Who do you wish to challenge?", "Challenge to a Duel", targets, timeout = 20 SECONDS)
+	if(!target)
+		return
+
+	if(target.stat > SOFT_CRIT)
+		to_chat(usr, span_warning("You cannot challenge [target] while they are in this state."))
+		return
+	if(!target.can_speak_vocal())
+		to_chat(usr, span_warning("[target] is unable to speak, they cannot accept your challenge."))
+		return
+
+	say("I challenge you to an honorable duel!", spans = list("green"))
+	log_combat(usr, target, "challenged to an honor duel")
+	var/acceptance = tgui_alert(target, "You have been challenged to an honor duel by [usr], do you accept?", "Accept Duel", DEFAULT_INPUT_CHOICES, 20 SECONDS)
+	if(acceptance != CHOICE_YES)
+		target.say("I do not accept your challenge!", spans = list("green"))
+		log_combat(target, usr, "refused an honor duel")
+		return
+
+	target.say("I accept your challenge!", spans = list("green"))
+	log_combat(target, usr, "accepted an honor duel")
+	message_admins("[key_name_admin(target)] has accepted an honor duel challenge from [key_name_admin(usr)].")
+	// I need to make it so other people can recognise that a duel is taking place, and create a marker for a small area within which it should be happening.

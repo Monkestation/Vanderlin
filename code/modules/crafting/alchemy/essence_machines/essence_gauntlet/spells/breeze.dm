@@ -29,3 +29,4 @@
 	spell_type = SPELL_MANA
 
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air

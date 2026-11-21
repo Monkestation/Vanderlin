@@ -17,7 +17,7 @@
 		/datum/attribute/skill/misc/lockpicking = 30,
 		/datum/attribute/skill/misc/stealing = 30,
 		/datum/attribute/skill/craft/crafting = 20,
-		/datum/attribute/skill/misc/reading = 50
+		/datum/attribute/skill/educated/reading = 50
 	)
 
 /datum/job/advclass/courtagent/occult
@@ -39,7 +39,7 @@
 
 	spells = list(
 		/datum/action/cooldown/spell/status/blood_sight,
-		/datum/action/cooldown/spell/projectile/blood_steal,
+		/datum/action/cooldown/spell/blood_steal,
 		/datum/action/cooldown/spell/diagnose/blood,
 		/datum/action/cooldown/spell/blood_healing,
 		/datum/action/cooldown/spell/status/blood_choke/whisper,
@@ -69,4 +69,5 @@
 		/obj/item/book/magicaltheory = 1,
 		/obj/item/recipe_book/arcyne = 1,
 		/obj/item/key/archive = 1,
+		/obj/item/scrying/flame = 1,
 	)

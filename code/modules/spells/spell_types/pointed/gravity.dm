@@ -6,6 +6,7 @@
 	self_cast_possible = FALSE
 	spell_flags = SPELL_RITUOS
 	required_form = FORM_AIR
+	associated_skill = /datum/attribute/skill/magic/arcane/air
 
 	//https://www.youtube.com/watch?v=MfK3Ygb7Jzk
 	invocation = "Fall."

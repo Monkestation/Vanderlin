@@ -4,7 +4,7 @@
 		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = 2,
 		/datum/attribute/skill/combat/knives = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 40,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/sewing = 10,
@@ -24,7 +24,7 @@
 		STAT_INTELLIGENCE = 1,
 		STAT_CONSTITUTION = 2,
 		/datum/attribute/skill/combat/knives = 30,
-		/datum/attribute/skill/misc/reading = 10,
+		/datum/attribute/skill/educated/reading = 10,
 		/datum/attribute/skill/craft/cooking = 50,
 		/datum/attribute/skill/craft/crafting = 10,
 		/datum/attribute/skill/misc/sewing = 10,
@@ -56,6 +56,10 @@
 	can_be_apprentice = TRUE
 
 	job_bitflag = BITFLAG_CONSTRUCTOR
+
+	traits = list(
+		TRAIT_INGREDIENT_INSIGHT
+	)
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/cook
 	attribute_sheet_old = /datum/attribute_holder/sheet/job/cook/old

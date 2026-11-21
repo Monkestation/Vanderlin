@@ -12,7 +12,7 @@
 		/datum/attribute/skill/craft/crafting = 20,
 		/datum/attribute/skill/labor/butchering = 20,
 		/datum/attribute/skill/labor/farming = 20,
-		/datum/attribute/skill/labor/mathematics = 30,
+		/datum/attribute/skill/educated/mathematics = 30,
 		/datum/attribute/skill/misc/athletics = 20,
 		/datum/attribute/skill/misc/swimming = 10,
 		/datum/attribute/skill/combat/unarmed = 20,
@@ -20,7 +20,7 @@
 		/datum/attribute/skill/misc/climbing = 20,
 		/datum/attribute/skill/misc/medicine = 20,
 		/datum/attribute/skill/misc/music = 10,
-		/datum/attribute/skill/misc/reading = 30,
+		/datum/attribute/skill/educated/reading = 30,
 		/datum/attribute/skill/misc/riding = 10,
 		/datum/attribute/skill/misc/sewing = 30,
 		/datum/attribute/skill/misc/sneaking = 30,
@@ -65,7 +65,8 @@
 
 	mind_traits = list(
 		TRAIT_KNOW_KEEP_DOORS,
-		TRAIT_ROYALSERVANT
+		TRAIT_ROYALSERVANT,
+		TRAIT_INGREDIENT_INSIGHT,
 	)
 	traits = list(
 		TRAIT_CAREFUL_CHAIRS

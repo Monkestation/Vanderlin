@@ -4,8 +4,10 @@
 	button_icon_state = "flower_field"
 
 	required_form = FORM_EARTH
+	associated_skill = /datum/attribute/skill/magic/arcane/earth
 	required_technique = TECHNIQUE_CREATION
 	required_level = 3
+	initial_charges = 6
 
 	invocation = "May the earth bloom!"
 	invocation_type = INVOCATION_WHISPER

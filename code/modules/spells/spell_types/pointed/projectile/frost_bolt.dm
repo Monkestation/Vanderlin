@@ -5,6 +5,7 @@
 	sound = 'sound/magic/whiteflame.ogg'
 
 	required_form = FORM_ICE
+	associated_skill = /datum/attribute/skill/magic/arcane/ice
 	required_technique = TECHNIQUE_DESTRUCTION
 
 	invocation = "Beam of Frost!!"

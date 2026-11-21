@@ -42,4 +42,5 @@
 	spell_type = SPELL_MANA
 
 	required_form = FORM_WATER
+	associated_skill = /datum/attribute/skill/magic/arcane/water
 	duration = 5 MINUTES

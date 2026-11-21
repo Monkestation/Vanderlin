@@ -26,6 +26,21 @@
 	max_integrity = INTEGRITY_OLD_POOR
 	item_weight = 0.7 KILOGRAMS
 
+/obj/item/clothing/pants/trou/leather/shorts
+	name = "leather shorts"
+	desc = "Standard leather shorts for those whom dislike full coverage."
+	icon_state = "rogueshorts"
+	var/hide_bottom = HIDEUNDIESBOT //Makes sure underwear isnt showing underneath
+	item_weight = 0.4 KILOGRAMS
+	body_parts_covered = GROIN
+
+/obj/item/clothing/pants/trou/leather/shorts/advanced
+	name = "hardened leather shorts"
+	desc = "Hardened leather shorts for those whom dislike full coverage. Protects whats most important."
+	max_integrity = INTEGRITY_OLD_STRONG
+	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
+	armor_type = /datum/armor/pants/leather/advanced
+
 /obj/item/clothing/pants/trou/leather/guard
 	uses_lord_coloring = LORD_PRIMARY
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -39,12 +54,39 @@
 	item_weight = 1.2 KILOGRAMS
 	pickpocket_difficulty = SKILL_RANK_EXPERT
 
+/obj/item/clothing/pants/trou/leather/brigandine
+	name = "brigandine chausses"
+	desc = "Leather pants overlaid with iron plates for added protection. Common among soldiers."
+	icon_state = "brigandinelegs"
+	armor_type = /datum/armor/brigandine
+	equip_delay_self = 2 SECONDS
+	unequip_delay_self = 2 SECONDS
+	anvilrepair = /datum/attribute/skill/craft/armor_repair
+	melt_amount = 30
+	melting_material = /datum/material/iron
+	allowed_ages = ALL_AGES_LIST
+	clothing_flags = CANT_SLEEP_IN
+	max_integrity = ARMOR_INT_LEG_HARDLEATHER
+	item_weight = 1.2 KILOGRAMS
+	pickpocket_difficulty = SKILL_RANK_EXPERT
+
 /obj/item/clothing/pants/trou/leather/advanced
-	name = "hardened leather chausses"
+	name = "hardened leather trousers"
 	desc = "Sturdy, durable, flexible. The finest leather to protect your nether regions."
 	max_integrity = INTEGRITY_OLD_STRONG
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/pants/leather/advanced
+
+/obj/item/clothing/pants/trou/leather/masterwork
+	name = "masterwork leather trousers"
+	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
+	max_integrity = INTEGRITY_OLD_STRONG + 100
+	prevent_crits = ALL_EXCEPT_STAB
+	armor_type = /datum/armor/pants/leather/master
+
+/obj/item/clothing/pants/trou/leather/masterwork/Initialize()
+	. = ..()
+	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
 /obj/item/clothing/pants/trou/leather/advanced/colored
 	misc_flags = CRAFTING_TEST_EXCLUDE
@@ -73,17 +115,6 @@
 
 /obj/item/clothing/pants/trou/leather/quiltedkilt/colored/linen
 	color = CLOTHING_LINEN
-
-/obj/item/clothing/pants/trou/leather/masterwork
-	name = "masterwork leather chausses"
-	desc = "These chausses are a craftsmanship marvel. Made with the finest leather. Strong, nimble, reliable."
-	max_integrity = INTEGRITY_OLD_STRONG + 100
-	prevent_crits = ALL_EXCEPT_STAB
-	armor_type = /datum/armor/pants/leather/master
-
-/obj/item/clothing/pants/trou/leather/masterwork/Initialize()
-	. = ..()
-	filters += filter(type="drop_shadow", x=0, y=0, size=0.5, offset=1, color=rgb(218, 165, 32))
 
 /obj/item/clothing/pants/trou/leather/mourning
 	name = "mourning trousers"
