@@ -14,7 +14,7 @@
 
 /obj/item/quicksilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/quicksilver/luxinfused
 	name = "absolving silver"
