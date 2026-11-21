@@ -34,7 +34,10 @@
 		human_victim.add_bite_animation()
 
 	for(var/atom/I in victim.get_equipped_items())
-		var/datum/enchantment/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/silver)
+		var/datum/enchantment/on_hit/truesilver/true_ench = SSenchantment.get_enchantment(I, /datum/enchantment/on_hit/truesilver)
+		if(true_ench?.on_bite(I, src))
+			return 0
+		var/datum/enchantment/on_hit/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/on_hit/silver)
 		if(ench?.on_bite(I, src))
 			return 0
 
@@ -103,7 +106,7 @@
 		return
 
 	var/datum/clan/sire_clan = sire.clan
-	var/choice = tgui_alert(client_victim, "You have been offered the immortal blessing. Take it, or perish.", "THE CURSE OF KAIN", list("I ACCEPT", "TO NECRA"), timeout = 15 SECONDS)
+	var/choice = tgui_alert(client_victim, "You have been offered the immortal blessing. Take it, or perish. (Refusal will result in permanent death)", "THE CURSE OF KAIN", list("I ACCEPT", "TO NECRA"), timeout = 15 SECONDS)
 	if(QDELETED(src))
 		return
 	if(choice != "I ACCEPT")

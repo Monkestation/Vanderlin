@@ -109,9 +109,9 @@
 
 /obj/item/weapon/flail/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
-/obj/item/weapon/flail/silver/noc
+/obj/item/weapon/flail/noc
 	name = "lunar flail"
 	desc = "A shining truesilver flail, bane of all who lurk in the night and mounted with a crescent moon. Slice the nitebeasts apart."
 	icon = 'icons/roguetown/weapons/32/patron.dmi'
@@ -122,7 +122,12 @@
 	wlength = WLENGTH_GREAT
 	examine_highlight_type = /datum/examine_highlight/divine_weapon/noc
 	melting_material = /datum/material/truesilver
+	force = DAMAGE_GOOD_FLAIL - 1
 	max_integrity = INTEGRITY_FLAIL * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/flail/noc/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
@@ -180,7 +185,7 @@
 
 /obj/item/weapon/flail/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/weapon/flail/bloodsteel/relic
 	name = "\proper heart of Mephistopheles"

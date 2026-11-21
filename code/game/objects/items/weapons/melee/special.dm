@@ -515,7 +515,7 @@
 
 /obj/item/weapon/katar/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /datum/intent/knuckles/strike
 	name = "punch"
@@ -642,7 +642,7 @@
 
 /obj/item/weapon/knuckles/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/knuckles/blacksteel
 	name = "blacksteel knuckles"

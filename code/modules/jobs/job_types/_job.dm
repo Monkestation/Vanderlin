@@ -4,7 +4,7 @@
 	/// Daily wage paid out at dawn, set per job type. 0 = unpaid.
 	var/starting_wage = 0
 	/// The name of the job , used for preferences, bans and more. Make sure you know what you're doing before changing this.
-	var/title = "NOPE"
+	var/title = JOB_INVALID
 	///List of viable alternative jobs
 	var/list/alt_titles
 	/// Alternative titles selectable for female-presenting mobs

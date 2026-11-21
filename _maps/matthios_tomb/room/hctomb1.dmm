@@ -144,7 +144,7 @@
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "hz" = (
-/obj/effect/spawner/map_spawner/loot/potion_ingredient/herb,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/dirt,
 /area/under/tomb/cave)
 "hX" = (
@@ -256,7 +256,7 @@
 /area/under/tomb)
 "pO" = (
 /obj/structure/rack,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/cobble/alt,
 /area/under/tomb/indoors)
 "pT" = (
@@ -554,8 +554,7 @@
 /area/under/tomb/indoors)
 "FF" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/effect/spawner/map_spawner/loot/armor,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
 "FH" = (
@@ -627,7 +626,7 @@
 /area/under/tomb)
 "Kc" = (
 /obj/structure/rack,
-/obj/item/clothing/neck/chaincoif/iron,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
 "Kz" = (
@@ -677,7 +676,7 @@
 /area/under/tomb/indoors)
 "NQ" = (
 /obj/structure/closet/crate/chest/crate,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
 "OL" = (
@@ -741,7 +740,7 @@
 /area/under/tomb/cave)
 "Rz" = (
 /obj/structure/rack,
-/obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/dungeon_loot_spawner/low,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
 "RD" = (
@@ -764,11 +763,6 @@
 /area/under/tomb/cave)
 "Sz" = (
 /obj/structure/table/wood/plain_alt,
-/obj/item/coin/copper,
-/obj/item/coin/copper{
-	pixel_x = -5;
-	pixel_y = 6
-	},
 /turf/open/floor/cobble/alt,
 /area/under/tomb/indoors)
 "SA" = (
@@ -786,7 +780,7 @@
 /area/under/tomb)
 "Tw" = (
 /obj/structure/rack,
-/obj/effect/spawner/map_spawner/loot/weapon,
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/floor/ruinedwood/spiralfade,
 /area/under/tomb/indoors)
 "TZ" = (
@@ -2059,7 +2053,7 @@ TZ
 (5,1,2) = {"
 TZ
 TZ
-hz
+eF
 jx
 jx
 qx

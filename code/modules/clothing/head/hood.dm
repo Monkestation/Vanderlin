@@ -125,7 +125,7 @@
 
 /obj/item/clothing/head/roguehood/bloodweave/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 //............... Feldshers Hood ............... //
 /obj/item/clothing/head/roguehood/feld

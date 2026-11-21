@@ -40,15 +40,6 @@
 /obj/item/natural/stone,
 /turf/open/floor/naturalstone,
 /area/under/tomb/cave)
-"dE" = (
-/obj/structure/closet/dirthole/closed,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/effect/spawner/map_spawner/loot/armor,
-/obj/effect/mapping_helpers/structure/grave_spawner/t2,
-/turf/open/floor/dirt,
-/area/under/tomb)
 "ew" = (
 /obj/structure/closet/dirthole/closed,
 /obj/item/clothing/neck/gorget/copper,
@@ -101,7 +92,7 @@
 /area/under/tomb/cave)
 "hY" = (
 /obj/structure/closet/dirthole/closed,
-/obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/dungeon_loot_spawner/medium,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /obj/structure/closet/burial_shroud,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
@@ -156,7 +147,7 @@
 /area/under/tomb)
 "mj" = (
 /obj/structure/closet/dirthole/closed,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /obj/structure/closet/burial_shroud,
 /obj/item/weapon/sword/coppermesser,
 /mob/living/carbon/human/species/skeleton/npc/ambush,
@@ -189,7 +180,7 @@
 /area/under/tomb/cave)
 "oM" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
-/obj/effect/spawner/map_spawner/loot/rare,
+/obj/effect/dungeon_loot_spawner/low,
 /obj/structure/closet/dirthole/closed,
 /obj/item/clothing/head/peaceflower{
 	pixel_y = -10;
@@ -274,7 +265,7 @@
 /area/under/tomb/cave)
 "xy" = (
 /obj/structure/closet/dirthole/closed,
-/obj/effect/spawner/map_spawner/loot/common,
+/obj/effect/dungeon_loot_spawner/low,
 /mob/living/carbon/human/species/skeleton/npc/warrior,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt/road,
@@ -287,7 +278,7 @@
 "yG" = (
 /obj/structure/closet/dirthole/closed,
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
-/obj/effect/spawner/map_spawner/loot/armor,
+/obj/effect/dungeon_loot_spawner/medium,
 /obj/effect/mapping_helpers/structure/grave_spawner/t2,
 /turf/open/floor/dirt,
 /area/under/tomb)
@@ -333,15 +324,7 @@
 /turf/open/floor/cobblerock,
 /area/under/tomb/cave)
 "Cj" = (
-/obj/item/ingot/gold,
-/obj/item/ingot/gold{
-	pixel_x = 8;
-	pixel_y = -4
-	},
-/obj/item/ingot/gold{
-	pixel_x = 4;
-	pixel_y = 3
-	},
+/obj/effect/dungeon_loot_spawner/medium,
 /turf/open/water/swamp/deep,
 /area/under/tomb/cave)
 "Co" = (
@@ -363,10 +346,6 @@
 /obj/structure/closet/dirthole/closed,
 /obj/effect/mapping_helpers/structure/grave_spawner,
 /turf/open/floor/dirt,
-/area/under/tomb)
-"De" = (
-/obj/effect/mapping_helpers/structure/grave_spawner,
-/turf/closed/mineral/bedrock,
 /area/under/tomb)
 "Dz" = (
 /obj/effect/decal/cleanable/blood/splatter,
@@ -508,13 +487,6 @@
 /obj/effect/spawner/map_spawner/beartrap,
 /turf/open/floor/cobblerock,
 /area/under/tomb/cave)
-"Qk" = (
-/obj/structure/closet/dirthole/closed,
-/obj/effect/landmark/chest_or_mimic,
-/obj/item/gem,
-/obj/effect/mapping_helpers/structure/grave_spawner/t3,
-/turf/open/floor/dirt,
-/area/under/tomb)
 "Rk" = (
 /obj/structure/closet/dirthole/closed,
 /obj/item/weapon/shield/wood,
@@ -897,8 +869,8 @@ iR
 iR
 iR
 in
-dE
-dE
+in
+in
 iR
 iR
 iR
@@ -953,7 +925,7 @@ iR
 iR
 iR
 iR
-Qk
+in
 qH
 yG
 in
@@ -1117,7 +1089,7 @@ XK
 XK
 in
 AG
-De
+iR
 iR
 qH
 XK

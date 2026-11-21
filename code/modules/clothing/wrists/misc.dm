@@ -20,7 +20,7 @@
 
 /obj/item/clothing/wrists/silverbracelet/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/wrists/gem
 	name = "gem bracelet base"

@@ -144,3 +144,54 @@
   ta3754859-max:
   - bugfix: Butchering limbs yields exp for butchering like it was supposed to
   - bugfix: Werewolves and zombies can consume limbs to regain health
+2026-11-17:
+  Blundir:
+  - map: small remap of hunter's cabin
+  PatapoIIIa:
+  - refactor: refactored sound code
+  TheDoktorZ:
+  - rscdel: Killed the mystery box from existence.
+  - rscdel: Bandits' ability to get Triumphs from stealing.
+  grungussuss:
+  - rscadd: Landing on a pipe now plays a sound effect.
+  - bugfix: you no longer "jump into" a pipe when jumping onto it.
+  - rscadd: Iron bar doors can now be shot through
+  - rscadd: Braziers can now be shot through
+  - rscadd: crates/chests can now be sho through
+  realforest2001:
+  - bugfix: Fixed missing exemptions for magical items.
+  - bugfix: Fixed town elder hammer.
+  ta3754859-max:
+  - balance: Liver now passively heals toxin damage above 40. Because of this poison
+      takes slightly more time to start stunning you
+  - balance: Coughing blood now actually makes you loose blood volume per cough
+2026-11-19:
+  Blundir:
+  - rscadd: New/Old psydonic languages now have 35% mutual understanding
+  MissyNym:
+  - map: Some of the Tomb of Matthios has been rebalanced and given a bit of beautification.
+  ModDownloading:
+  - balance: Enforcer and Ninja katanas can use all four main intents one-handed,
+      instead of only two-handed.
+  - balance: Enforcer scabbards now have the same parry strength as shields.
+  TheDoktorZ:
+  - balance: Updated the ancient military equipment imports.
+  - bugfix: Added an updated face for the Returning Bannermen.
+  - bugfix: Guard recruits get the main class title now so they can get wages.
+  - bugfix: Changed the "watch boots" to something Archeon would probably like more.
+  - spellcheck: MAA are no longer plural in titles.
+  budgetcommander0:
+  - balance: Increased Steam Knight unarmed skill to 30.
+  realforest2001:
+  - rscadd: Added Truesilver Enchantment for Truesilver weapons.
+  - code_imp: Moved truesilver weapons off of silver subtyping.
+  - bugfix: Fixed on_examine signals for Daewalker and Nitewarden.
+  - rscadd: Returned bandit triumphs from Matthios Idol, maximum deterimined by Player-count/15
+      maxed at 4 per round.
+2026-11-21:
+  Spitegremlin:
+  - rscadd: Added new footwraps
+  - rscadd: Added new leather shorts
+  realforest2001:
+  - bugfix: Fixed vamp special class tags.
+  - bugfix: Fixed Vampire Awe being a piece of shit.

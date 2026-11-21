@@ -12,7 +12,7 @@
 #define BLOOD_CURSE_HIT_COOLDOWN (5 SECONDS)
 
 
-/datum/enchantment/bloodcurse
+/datum/enchantment/on_hit/bloodcurse
 	enchantment_name = "Blood Curse"
 	examine_text = span_bloody("Dark power clings to it, radiating the cloying smell of blood.")
 	essence_recipe = list(
@@ -29,11 +29,12 @@
 	/// Repeat application on curse pulse.
 	var/poison_pulse = 3.5
 	var/active_item = FALSE
+	cooldown_time = BLOOD_CURSE_HIT_COOLDOWN
 
-/datum/enchantment/bloodcurse/register_triggers(atom/item)
+/datum/enchantment/on_hit/bloodcurse/register_triggers(atom/item)
 	. = ..()
-	registered_signals += COMSIG_ITEM_ATTACK
-	RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
+	// registered_signals += COMSIG_ITEM_ATTACK
+	// RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
 	//registered_signals += COMSIG_ITEM_PICKUP
 	//RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	registered_signals += COMSIG_ITEM_EQUIPPED
@@ -41,12 +42,12 @@
 	registered_signals += COMSIG_ITEM_DROPPED
 	RegisterSignal(item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 
-/datum/enchantment/bloodcurse/proc/on_drop(obj/item/i, mob/living/user)
+/datum/enchantment/on_hit/bloodcurse/proc/on_drop(obj/item/i, mob/living/user)
 	if(active_item)
 		active_item = FALSE
 	STOP_PROCESSING(SSenchantment, src)
 
-/datum/enchantment/bloodcurse/proc/get_curse_effect(mob/living/carbon/human/target)
+/datum/enchantment/on_hit/bloodcurse/proc/get_curse_effect(mob/living/carbon/human/target)
 	if(HAS_TRAIT(target, TRAIT_VITAE_USER) || target.has_status_effect(/datum/status_effect/buff/blood_mark/curse_shield))
 		return BLOOD_CURSE_HARMLESS
 	if(HAS_TRAIT(target, TRAIT_BLOOD_STUDENT))
@@ -57,12 +58,10 @@
 		return BLOOD_CURSE_WEAKENED
 	return BLOOD_CURSE_TOXIC
 
-/datum/enchantment/bloodcurse/proc/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
+/datum/enchantment/on_hit/bloodcurse/apply_attack_effects(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
 	if(!user.CanReach(target))
 		return
 	if(!ishuman(target) || target.stat >= HARD_CRIT)
-		return
-	if(world.time < (src.last_used["ON_HIT"] + BLOOD_CURSE_HIT_COOLDOWN))
 		return
 	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
 		return
@@ -100,7 +99,7 @@
 	last_used["ON_HIT"] = world.time
 	return
 
-/datum/enchantment/bloodcurse/proc/on_equip(obj/item/cursed_item, mob/living/carbon/human/user)
+/datum/enchantment/on_hit/bloodcurse/proc/on_equip(obj/item/cursed_item, mob/living/carbon/human/user)
 	active_item = TRUE
 	var/curse_effect = get_curse_effect(user)
 	if(!curse_effect || user.stat >= HARD_CRIT)
@@ -129,7 +128,7 @@
 	START_PROCESSING(SSenchantment, src)
 
 /*
-/datum/enchantment/bloodcurse/proc/on_pickup(obj/item/cursed_item, mob/living/carbon/human/user)
+/datum/enchantment/on_hit/bloodcurse/proc/on_pickup(obj/item/cursed_item, mob/living/carbon/human/user)
 	active_item = TRUE
 	var/curse_effect = get_curse_effect(user)
 	if(!curse_effect || user.stat >= HARD_CRIT)
@@ -158,7 +157,7 @@
 	START_PROCESSING(SSenchantment, src)
 */
 
-/datum/enchantment/bloodcurse/proc/curse_pulse(mob/living/carbon/human/victim)
+/datum/enchantment/on_hit/bloodcurse/proc/curse_pulse(mob/living/carbon/human/victim)
 	if(!active_item)
 		return
 	if(world.time < (last_used["PULSE"] + BLOOD_CURSE_PULSE))
@@ -188,7 +187,7 @@
 			victim.reagents.add_reagent(/datum/reagent/poison/hexblood_poison, poison_pulse)
 	last_used["PULSE"] = world.time
 
-/datum/enchantment/bloodcurse/process(delta_time)
+/datum/enchantment/on_hit/bloodcurse/process(delta_time)
 	if(!enchanted_item)
 		STOP_PROCESSING(SSenchantment, src)
 		return

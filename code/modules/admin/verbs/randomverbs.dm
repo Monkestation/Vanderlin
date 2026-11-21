@@ -484,7 +484,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	var/list/job_list = list()
 	for(var/datum/job/job as anything in SSjob.joinable_occupations)
-		if(IS_ABSTRACT(job) || (job.title == "NOPE") || (job.title == "ADMIN SPECIAL JOB")) // Safety first.
+		if(IS_ABSTRACT(job) || (job.title == JOB_INVALID) || (job.title == "ADMIN SPECIAL JOB")) // Safety first.
 			continue
 		job_list += job.title
 
