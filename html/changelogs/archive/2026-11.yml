@@ -188,3 +188,10 @@
   - bugfix: Fixed on_examine signals for Daewalker and Nitewarden.
   - rscadd: Returned bandit triumphs from Matthios Idol, maximum deterimined by Player-count/15
       maxed at 4 per round.
+2026-11-21:
+  Spitegremlin:
+  - rscadd: Added new footwraps
+  - rscadd: Added new leather shorts
+  realforest2001:
+  - bugfix: Fixed vamp special class tags.
+  - bugfix: Fixed Vampire Awe being a piece of shit.
