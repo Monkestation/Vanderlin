@@ -197,6 +197,13 @@
 	icon_state = "scrollpurple"
 	remarks = list("Pallium nihilum..", "Occultare veritatem..", "Veritatem removan menor..")
 
+/obj/item/book/granter/spell/magick/cabbit
+	name = "Scroll of Cabbit Form"
+	spell =  /datum/action/cooldown/spell/undirected/shapeshift/cabbit
+	spellname = "cabbit form"
+	icon_state = "scrollpurple"
+	remarks = list("Corpore induere...", "Cabbit..", "Res amabilis..")
+
 //scroll for giving the reader a spell point, this should be dungeon loot
 /obj/item/book/granter/spell_points
 	name = "Arcyne Insight"
