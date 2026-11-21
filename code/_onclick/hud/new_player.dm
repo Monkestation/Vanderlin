@@ -45,7 +45,14 @@
 	var/source_x = source_offsets[1]
 	var/source_y = source_offsets[2]
 
-	var/new_dir = get_dir_from_offset(source_x - eyes_x, source_y - eyes_y)
+	var/delta_x = source_x - eyes_x
+	var/delta_y = source_y - eyes_y
+	if (abs(delta_x) > abs(delta_y) * 2)
+		delta_y = 0
+	else if (abs(delta_y) > abs(delta_x) * 2)
+		delta_x = 0
+
+	var/new_dir = get_dir_from_offset(SIGN(delta_x), SIGN(delta_y))
 	skull_eyes.dir = new_dir
 
 /datum/hud/new_player/proc/everybody_shakes(datum/source)
@@ -87,21 +94,21 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 ///Animates moving the button off-screen
 /atom/movable/screen/lobby/proc/collapse_button(datum/source)
 	SIGNAL_HANDLER
-	animate(src, transform = transform.Translate(x = 0, y = -8), time = 0.15 SECONDS, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
-	animate(transform = transform.Translate(x = 0, y = collapse_y_move + 8), time = LOBBY_SCREEN_SLIDE_DURATION, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
+	animate(src, transform = transform.Translate(x = 0, y = -10), time = 0.20 SECONDS, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
+	animate(transform = transform.Translate(x = 0, y = collapse_y_move + 10), time = LOBBY_SCREEN_SLIDE_DURATION, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
 
 ///Animates moving the button back into place
 /atom/movable/screen/lobby/proc/expand_button(datum/source)
 	SIGNAL_HANDLER
-	animate(src, transform = transform.Translate(x = 0, y = -collapse_y_move - 8), time = LOBBY_SCREEN_SLIDE_DURATION, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
-	animate(transform = transform.Translate(x = 0, y = 8), time = 0.25 SECONDS, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
+	animate(src, transform = transform.Translate(x = 0, y = -collapse_y_move - 10), time = LOBBY_SCREEN_SLIDE_DURATION, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
+	animate(transform = transform.Translate(x = 0, y = 10), time = 0.35 SECONDS, easing = CUBIC_EASING|EASE_IN|EASE_OUT)
 
 /atom/movable/screen/lobby/chain
 	icon = 'icons/hud/lobby/chain.dmi'
 	icon_state = "chain"
 	layer = LOBBY_BACKGROUND_LAYER
-	screen_loc = "WEST:10,TOP:105"
-	collapse_y_move = 200
+	screen_loc = "WEST:10,TOP:145"
+	collapse_y_move = 150
 
 /atom/movable/screen/lobby/left_chassis
 	icon = 'icons/hud/lobby/left_chassis.dmi'
@@ -205,8 +212,8 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	icon = 'icons/hud/lobby/skull.dmi'
 	base_icon_state = "skull"
 	icon_state = "skull"
-	screen_loc = "WEST:1,TOP:-200"
-	collapse_y_move = 200
+	screen_loc = "WEST:1,TOP:-150"
+	collapse_y_move = 150
 	var/blip_enabled = TRUE
 
 /atom/movable/screen/lobby/eyes
@@ -214,8 +221,8 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	base_icon_state = "eyes"
 	icon_state = "eyes"
 	layer = LOBBY_SHUTTER_LAYER
-	screen_loc = "WEST:1,TOP:-200"
-	collapse_y_move = 200
+	screen_loc = "WEST:1,TOP:-151" // FORGIVE ME, I WAS LAZY
+	collapse_y_move = 150
 
 /atom/movable/screen/lobby/button/skull/proc/collapse_menu()
 	SEND_SIGNAL(hud, COMSIG_HUD_LOBBY_COLLAPSED)
@@ -259,16 +266,23 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	base_icon_state = "character_setup"
 	enabled = FALSE
 
+/atom/movable/screen/lobby/meter_arrow
+	name = "Meter arrow"
+	screen_loc = "WEST:29,TOP:-22"
+	icon = 'icons/hud/lobby/meter_arrow.dmi'
+	icon_state = "ticking"
+	base_icon_state = "ticking"
+	layer = LOBBY_MENU_LAYER
+
 /atom/movable/screen/lobby/button/character_setup/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
-	/*
+
 	if(SSatoms.initialized == INITIALIZATION_INNEW_REGULAR)
 		flick("[base_icon_state]_enabled", src)
 		set_button_status(TRUE)
 	else
 		set_button_status(FALSE)
 		RegisterSignal(SSatoms, COMSIG_SUBSYSTEM_POST_INITIALIZE, PROC_REF(enable_character_setup))
-	*/
 
 /atom/movable/screen/lobby/button/character_setup/Click(location, control, params)
 	. = ..()
@@ -279,10 +293,8 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 /atom/movable/screen/lobby/button/character_setup/proc/enable_character_setup(datum/source)
 	SIGNAL_HANDLER
-	/*
 	flick("[base_icon_state]_enabled", src)
 	set_button_status(TRUE)
-	*/
 
 ///Button that appears before the game has started
 /atom/movable/screen/lobby/button/ready
@@ -296,7 +308,6 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 /atom/movable/screen/lobby/button/ready/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
-	/*
 	switch(SSticker.current_state)
 		if(GAME_STATE_PREGAME, GAME_STATE_STARTUP)
 			RegisterSignal(SSticker, COMSIG_TICKER_ENTER_SETTING_UP, PROC_REF(hide_ready_button))
@@ -305,23 +316,18 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 			RegisterSignal(SSticker, COMSIG_TICKER_ERROR_SETTING_UP, PROC_REF(show_ready_button))
 		else
 			set_button_status(FALSE)
-	*/
 
 /atom/movable/screen/lobby/button/ready/proc/hide_ready_button(datum/source)
 	SIGNAL_HANDLER
-	/*
 	set_button_status(FALSE)
 	UnregisterSignal(SSticker, COMSIG_TICKER_ENTER_SETTING_UP)
 	RegisterSignal(SSticker, COMSIG_TICKER_ERROR_SETTING_UP, PROC_REF(show_ready_button))
-	*/
 
 /atom/movable/screen/lobby/button/ready/proc/show_ready_button(datum/source)
 	SIGNAL_HANDLER
-	/*
 	set_button_status(TRUE)
 	UnregisterSignal(SSticker, COMSIG_TICKER_ERROR_SETTING_UP)
 	RegisterSignal(SSticker, COMSIG_TICKER_ENTER_SETTING_UP, PROC_REF(hide_ready_button))
-	*/
 
 /atom/movable/screen/lobby/button/ready/Click(location, control, params)
 	. = ..()
@@ -338,14 +344,13 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	update_appearance(UPDATE_ICON)
 	SEND_SIGNAL(hud, COMSIG_HUD_PLAYER_READY_TOGGLE)
 
-/*
 ///Shown when the game has started
 /atom/movable/screen/lobby/button/join
 	name = "Join Game"
-	screen_loc = "WEST:20,TOP:-68"
-	icon = 'icons/hud/lobby/join_game.dmi'
+	screen_loc = "WEST:57,TOP:-150"
+	icon = 'icons/hud/lobby/join_button.dmi'
 	icon_state = "" //Default to not visible
-	base_icon_state = "join_game"
+	base_icon_state = ""
 	enabled = null // set in init
 
 /atom/movable/screen/lobby/button/join/Initialize(mapload, datum/hud/hud_owner)
@@ -403,8 +408,6 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	SIGNAL_HANDLER
 	set_button_status(FALSE)
 
-*/
-
 /atom/movable/screen/lobby/button/lore
 	name = "Lore Primer"
 	screen_loc = "WEST:57,TOP:-185"
@@ -438,10 +441,10 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 /atom/movable/screen/lobby/button/collapse_right_chassis
 	name = "Actors"
-	screen_loc = "WEST:80,TOP:-250"
-	icon = 'icons/hud/lobby/cross.dmi'
-	icon_state = "cross"
-	base_icon_state = "cross"
+	screen_loc = "WEST:57,TOP:-255"
+	icon = 'icons/hud/lobby/actors.dmi'
+	icon_state = "actors"
+	base_icon_state = "actors"
 
 /atom/movable/screen/lobby/button/collapse_right_chassis/Click(location, control, params)
 	. = ..()
