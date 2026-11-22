@@ -1,4 +1,6 @@
+///Base layer of chat elements
 #define CHAT_LAYER 1
+/// Maximum precision of float before rounding errors occur (in this context)
 #define CHAT_LAYER_Z_STEP 0.0001
 
 #define CHAT_SPELLING_DELAY_WITH_EXCLAIMED_MULTIPLIER (CHAT_SPELLING_DELAY - 0.0003 SECONDS * (EXCLAIMED_MULTIPLIER - 1))
@@ -53,13 +55,18 @@ The pipeline:
 
 		the toot feature is currently impractical because of needed sound system refactors.
 */
+/**
+ * # Chat Message Overlay
+ *
+ * Datum for generating a message overlay on the map
+ */
 /datum/chatmessage
-	/// Base image that anchors the message position and dimensions.
+	/// The visual element of the chat messsage
 	var/image/message
 	// this is usually a player but can also be an item or structure if an admin possesses one.
-	/// Atom used as the location for the message and its letter images.
+	/// The location in which the message is appearing
 	var/atom/message_loc
-	/// Client that owns and displays this message.
+	/// The client who heard this message
 	var/client/owned_by
 	/// Font size used for the message and its letters.
 	var/font_size = 8
@@ -112,6 +119,15 @@ The pipeline:
 	/// World time when this message last played a toot.
 	var/last_toot_time
 
+/**
+ * Constructs a chat message overlay
+ *
+ * Arguments:
+ * * text - The text content of the overlay
+ * * target - The target atom to display the overlay at
+ * * owner - The mob that owns this overlay, only this mob will be able to view it
+ * * extra_classes - Extra classes to apply to the span that holds the text
+ */
 /datum/chatmessage/New(text, atom/target, mob/owner, datum/language/language, list/extra_classes = list())
 	. = ..()
 	if (!istype(target))
@@ -153,6 +169,9 @@ The pipeline:
 	letter_images = null
 	return ..()
 
+/**
+ * Calls qdel on the chatmessage when its parent is deleted, used to register qdel signal
+ */
 /datum/chatmessage/proc/on_parent_qdel()
 	SIGNAL_HANDLER
 
@@ -168,21 +187,34 @@ The pipeline:
 
 	premature_end_of_life()
 
+/**
+ * Generates a chat message image representation
+ *
+ * Arguments:
+ * * text - The text content of the overlay
+ * * target - The target atom to display the overlay at
+ * * owner - The mob that owns this overlay, only this mob will be able to view it
+ * * extra_classes - Extra classes to apply to the span that holds the text
+ */
 /datum/chatmessage/proc/prepare_message_content(text, atom/target, mob/owner, datum/language/language, list/extra_classes)
+	/// Cached icons to show what language the user is speaking
 	var/static/list/language_icons
+	// Register client who owns this message
 	owned_by = owner.client
 
 	RegisterSignal(owned_by, COMSIG_QDELETING, PROC_REF(on_parent_qdel))
 	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_parent_take_damage))
 
+	// Clip message
 	var/maxlen = owned_by.prefs.read_preference(/datum/preference/numeric/max_chat_length)
 	var/list/message_tokens = split_text_preserving_html(text, maxlen)
 	text = message_tokens.Join()
 
+	// Calculate target color if not already present
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		if(H.voice_color && (target.chat_color != H.voice_color))
-			target.chat_color = "#[H.voice_color]"
+			target.chat_color = "#[H.voice_color]" // Preferences santitises this
 			target.chat_color_darkened = target.chat_color
 			target.chat_color_name = target.name
 
@@ -195,25 +227,30 @@ The pipeline:
 		target.chat_color = "#[target.voicecolor_override]"
 		target.chat_color_darkened = target.chat_color
 
-	if(!tgt_color)
+	if(!tgt_color) // False when using emotes
+		// We dim italicized text to make it more distinguishable from regular text
 		tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color
 
+	// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
 	var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
 	var/unprocessed_text = text
 	text = replacetext(text, url_scheme, "")
 	if(text != unprocessed_text)
 		message_tokens = split_text_preserving_html(text)
 
+	// Reject whitespace
 	var/static/regex/whitespace = new(@"^\s*$")
 	if (whitespace.Find(text))
 		qdel(src)
 		return
 
+	// Non mobs speakers can be small
 	if (!ismob(target))
 		extra_classes |= "small"
 
 	var/list/prefixes
 
+	// Append language icon if the language uses one
 	var/datum/language/language_instance = GLOB.language_datum_instances[language]
 	if (language_instance?.display_icon(owner))
 		var/icon/language_icon = LAZYACCESS(language_icons, language)
@@ -230,6 +267,10 @@ The pipeline:
 
 	text = "[prefixes?.Join("&nbsp;")][text]"
 
+	// Approximate text height
+	// Note we have to replace HTML encoded metacharacters otherwise MeasureText will return a zero height
+	// BYOND Bug #2563917
+	// Construct text
 	var/complete_text = turn_to_styled(text)
 
 	var/mheight
@@ -252,10 +293,12 @@ The pipeline:
 	if(HAS_TRAIT(message_loc, TRAIT_SHAKY_SPEECH))
 		source_shake = TRUE
 
+	// Translate any existing messages upwards, apply exponential decay factors to timers
 	if (owned_by.seen_messages)
 		for(var/datum/chatmessage/m as anything in owned_by.seen_messages[message_loc])
 			m.end_for_new_message(mheight)
 
+	// Build message image
 	message = image(loc = message_loc, layer = CHAT_LAYER)
 	message.plane = RUNECHAT_PLANE
 	message.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
@@ -266,6 +309,7 @@ The pipeline:
 	message.maptext_x = (CHAT_MESSAGE_WIDTH - owner.bound_width) * -0.5
 	prepare_letter_layout()
 
+	// View the message
 	LAZYADDASSOCLIST(owned_by.seen_messages, message_loc, src)
 	owned_by.images |= message
 	animate(message, alpha = 150, time = CHAT_MESSAGE_SPAWN_TIME)
@@ -277,7 +321,7 @@ The pipeline:
 
 /datum/chatmessage/proc/turn_to_styled(string)
 	var/extra_font_style = _extra_classes.Find("god_zizo") ? "font-weight:bold;" : ""
-	return {"<span style='font-size:[font_size]pt;font-family:"Pterra";color:[tgt_color];text-shadow:0 0 5px #000,0 0 5px #000,0 0 5px #000,0 0 5px #000;[extra_font_style]' class='center maptext [_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[string]</span>"}
+	return {"<span style='font-size:[font_size]pt;font-family:"Pterra";color:[tgt_color];text-shadow:0 0 5px #000,0 0 5px #000,0 0 5px #000,0 0 5px #000;[extra_font_style]' class='center maptext [_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[string]</span>"} //AAAAAAAAAAAAAAA
 
 /datum/chatmessage/proc/split_text_preserving_html(text, max_length = null)
 	var/list/result = list()
@@ -290,14 +334,17 @@ The pipeline:
 	while(current_pos <= text_length)
 		var/current_character = copytext_char(text, current_pos, current_pos + 1)
 		var/token
+		// Check if we're at the start of an HTML entity
 		if(current_character == "&")
 			var/entity_end = findtext_char(text, ";", current_pos)
 			if(entity_end && (entity_end - current_pos <= 33))
 				var/entity = copytext_char(text, current_pos, entity_end + 1)
 				if(html_entity.Find(entity))
+					// Found a complete entity, add it as one unit
 					token = entity
 					current_pos = entity_end + 1
 				else
+					// Not an entity, add single character
 					token = current_character
 					current_pos++
 			else
@@ -377,7 +424,7 @@ The pipeline:
 		if(premature_end)
 			return
 		var/extra_delay = spelling_extra_delays(letter)
-		if(skip_spelling)
+		if(skip_spelling) // this is dogshit code quality btw
 			animate_letter_into_existence(letter, direction, FALSE)
 			if(isnull(extra_delay))
 				extra_delay = 0
@@ -398,6 +445,7 @@ The pipeline:
 
 	current_string_index = 0
 	if(!QDELETED(message))
+		// Prepare for destruction
 		end_timer = addtimer(CALLBACK(src, PROC_REF(end_of_life)), delay + 2 SECONDS)
 
 /datum/chatmessage/proc/animate_letter_into_existence(string, direction = 1, audible = TRUE, reveal_delay = 0)
@@ -1158,7 +1206,7 @@ The pipeline:
 	premature_end = TRUE
 	current_string_index = 0
 	animate_letter_into_existence(pick(CHAT_GLORF_LIST), 1, FALSE)
-	var/delay = rand(10, 20) * 0.01 SECONDS
+	var/delay = rand(10, 20) * 0.01 SECONDS // yes, I'm dividing by 100 and then using the SECONDS define which multiplies by 10, deal with it. ^_^
 
 	for(var/image/letter_image as anything in letter_images)
 		animate(
@@ -1172,6 +1220,9 @@ The pipeline:
 
 	addtimer(CALLBACK(src, PROC_REF(end_of_life)), delay + 0.1 SECONDS)
 
+/**
+ * Applies final animations to overlay CHAT_MESSAGE_EOL_FADE deciseconds prior to message deletion
+ */
 /datum/chatmessage/proc/end_of_life(fadetime = CHAT_MESSAGE_EOL_FADE)
 	if(QDELETED(src) || is_retiring)
 		return
@@ -1185,17 +1236,29 @@ The pipeline:
 
 	QDEL_IN(src, fadetime)
 
+/**
+ * Creates a message overlay at a defined location for a given speaker
+ *
+ * Arguments:
+ * * speaker - The atom who is saying this message
+ * * message_language - The language that the message is said in
+ * * raw_message - The text content of the message
+ * * spans - Additional classes to be added to the message
+ */
 /mob/proc/create_chat_message(atom/movable/speaker, datum/language/message_language, raw_message, list/spans)
 	if(HAS_TRAIT(speaker, TRAIT_RUNECHAT_HIDDEN))
 		return
+	// Ensure the list we are using, if present, is a copy so we don't modify the list provided to us
 	spans = spans?.Copy()
 
+	// Check for virtual speakers (aka hearing a message through a radio)
 	var/atom/movable/originalSpeaker = speaker
 	if (istype(speaker, /atom/movable/virtualspeaker))
 		var/atom/movable/virtualspeaker/v = speaker
 		speaker = v.source
 		spans |= "virtual-speaker"
 
+	// Ignore virtual speaker (most often radio messages) from ourself
 	if (originalSpeaker != src && speaker == src)
 		return
 
@@ -1205,6 +1268,7 @@ The pipeline:
 	else
 		text = lang_treat(speaker, message_language, raw_message, spans, null, TRUE)
 
+	// Display visual above source
 	new /datum/chatmessage(text, speaker, src, message_language, spans)
 
 #undef CHAT_LAYER
