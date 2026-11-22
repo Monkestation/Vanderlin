@@ -229,11 +229,12 @@ GLOBAL_LIST_EMPTY(save_whitelist)
 	list += typesof(/obj/item/reagent_containers/glass)
 	list -= typesof(/obj/item/reagent_containers/glass/bottle) //potions etc.
 	list += typesof(/obj/item/candle)
-	list += list(/obj/item/storage/sack, /obj/item/broom, /obj/item/dmusicbox, /obj/item/pestle)
+	list += list(/obj/item/storage/sack, /obj/item/broom, /obj/item/dmusicbox, /obj/item/pestle, /obj/item/paint_brush, /obj/item/paint_palette, /obj/item/natural/feather)
 	list += typesof(/obj/item/instrument)
 	list += typesof(/obj/item/flashlight/flare/torch)
 	list += typesof(/obj/item/toy)
 	list += typesof(/obj/item/orphan_toy)
+	list += typesof(/obj/item/canvas)
 	//Hammer
 	list += typesof(/obj/item/weapon/hammer)
 	list -= typesof(/obj/item/weapon/hammer/sledgehammer)
@@ -376,6 +377,11 @@ GLOBAL_LIST_EMPTY(save_whitelist)
 									continue
 							if(isweapon(thing) && !(save_flag & SAVE_ITEMS_WEAPON || (thing.type in GLOB.save_whitelist))) //still allows cooking knives
 								continue
+
+						if(istype(thing, /obj/item/canvas))
+							var/obj/item/canvas/canvas = thing
+							if(canvas.loads_painting)
+								canvas.upload_painting()
 
 						//====HANDLE UUID STASIS SAVING====
 						if((save_flag & SAVE_UUID_STASIS) && thing.UUID_saving)
