@@ -185,7 +185,7 @@ The pipeline:
 	if(damage < 4)
 		return
 
-	premature_end_of_life()
+	INVOKE_ASYNC(src, PROC_REF(premature_end_of_life))
 
 /**
  * Generates a chat message image representation
@@ -898,7 +898,7 @@ The pipeline:
 		if(length(token) != 1)
 			return FALSE
 		var/ascii_character = text2ascii(token)
-		if(ascii_character < 32 || ascii_character > 126 || token in list("<", ">", "&"))
+		if(ascii_character < 32 || ascii_character > 126 || (token in list("<", ">", "&")))
 			return FALSE
 		previous_token = token
 
