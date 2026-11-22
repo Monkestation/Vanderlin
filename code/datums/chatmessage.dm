@@ -1,15 +1,9 @@
-///Base layer of chat elements
 #define CHAT_LAYER 1
-///Highest possible layer of chat elements
-#define CHAT_LAYER_MAX 2
-/// Maximum precision of float before rounding errors occur (in this context)
 #define CHAT_LAYER_Z_STEP 0.0001
-/// The number of z-layer 'slices' usable by the chat message layering
-#define CHAT_LAYER_MAX_Z (CHAT_LAYER_MAX - CHAT_LAYER) / CHAT_LAYER_Z_STEP
 
-#define CHAT_SPELLING_DELAY_WITH_EXCLAIMED_MULTIPLIER (CHAT_SPELLING_DELAY - 0.0003 SECONDS * (EXCLAIMED_MULTIPLER - 1))
+#define CHAT_SPELLING_DELAY_WITH_EXCLAIMED_MULTIPLIER (CHAT_SPELLING_DELAY - 0.0003 SECONDS * (EXCLAIMED_MULTIPLIER - 1))
 
-#define EXCLAIMED_MULTIPLER (exclaimed ? 3 : 1)
+#define EXCLAIMED_MULTIPLIER (exclaimed ? 3 : 1)
 
 #define BLIP_TONE_FEMININE list(42000, 46000)
 #define BLIP_TONE_DEFAULT list(28000, 34000)
@@ -17,63 +11,108 @@
 
 #define TOOT_COOLDOWN 1.5 SECONDS
 
-/**
- * # Chat Message Overlay
- *
- * Datum for generating a message overlay on the map
- */
+
+/*
+Animated runechat version 3.0:
+
+- A system that allows us to animate every letter in a runechat message individually:
+	this is done by making every letter a seperate image, which allows us to control
+	every letter seperately, color? you got it. alpha? yes. motion? yessiree.
+
+The pipeline:
+
+	1. Tokenize the text: because we can have html in the text, instead of making each letter a list entry, we introduce a token system.
+		A token is a list entry responsible for a single “spelling out” instance. This can be a space, an HTML tag, an icon, or a letter.
+
+	2. Create the container for the images to go onto. This is /image/message, and it gives the text its position and dimensions.
+		The tokens are separate images placed at the same location and positioned relative to it;
+		they are not literally children of the message image.
+
+	3. Prepare the text: clip it to the player’s chat limit, apply its color and styling, add a language icon if needed
+		split it into tokens, and measure its height.
+		If the code needs to yield, the message setup is queued so it doesn’t block the Runechat subsystem.
+
+	4. Calculate the layout before spelling starts.
+		Measure the tokens, decide which line each one belongs to, account for spaces and HTML,
+		wrap words that don’t fit,
+		calculate each visible token’s horizontal offset.
+		This is why the letters can be separate images but still line up as text.
+
+	5. Start spelling out the tokens in order.
+		Spaces and HTML tags still take part in the layout, but they don’t get their own visible letter image.
+		Each visible token gets its own image.
+
+	6. Animate each new image into place. Letters fade in and move up slightly; emotes skip the entrance movement.
+		Punctuation adds a pause, and exclamation marks can add extra movement.
+
+	7. When the text moves onto a new line, move the existing letters up and keep the newest line at the bottom.
+		Remove lines that are too old to stay visible.
+
+	8. When the message is replaced, interrupted, or reaches the end of its life, fade out and remove its images.
+		The toot proc is separate from the spelling pipeline; it is preserved for a future feature but isn’t called by the typing loop right now.
+
+		the toot feature is currently impractical because of needed sound system refactors.
+*/
 /datum/chatmessage
-	/// The visual element of the chat messsage
+	/// Base image that anchors the message position and dimensions.
 	var/image/message
-	/// The location in which the message is appearing
+	// this is usually a player but can also be an item or structure if an admin possesses one.
+	/// Atom used as the location for the message and its letter images.
 	var/atom/message_loc
-	/// The client who heard this message
+	/// Client that owns and displays this message.
 	var/client/owned_by
-	/// Contains the scheduled destruction time
-	var/scheduled_destruction
-	/// Contains the approximate amount of lines for height decay
-	var/approx_lines
-	/// if we finished typing up all our letters.
-	var/finished_typing = FALSE
+	/// Font size used for the message and its letters.
 	var/font_size = 8
+	/// Color applied to the message text.
 	var/tgt_color = null
+	/// Additional styling classes applied to the message.
 	var/list/_extra_classes
-	var/text
-	var/list/remaining_strings
-	var/current_string = ""
+	/// Ordered tokens to reveal, including spaces and markup.
+	var/list/remaining_tokens
+	/// Tokens that have already been processed for display.
 	var/list/revealed_tokens = list()
+	/// Individual images used to render visible tokens.
 	var/list/letter_images = list()
+	/// HTML tags currently active while rendering tokens.
 	var/list/open_html_tags = list()
+	/// Line number for each letter image.
 	var/list/letter_line_numbers = list()
+	/// Horizontal pixel offset for each token.
 	var/list/token_pixel_offsets = list()
+	/// Line number assigned to each token.
 	var/list/token_line_numbers = list()
+	/// Cumulative line width after each token.
 	var/list/token_line_width_after = list()
+	/// Measured width of each laid-out line.
 	var/list/layout_line_widths = list()
+	/// Tokens containing spaces omitted at line breaks.
 	var/list/dropped_space_tokens = list()
+	/// Cached text-width measurements used during layout.
 	var/list/token_width_cache = list()
+	/// Layer assigned to the next letter image.
 	var/next_letter_layer = CHAT_LAYER
+	/// Line currently being revealed, starting at zero.
 	var/current_line_number = 0
+	/// Cumulative width of the current line in pixels while adding tokens without a prepared layout.
 	var/current_line_width = 0
+	/// Index of the token currently being revealed; zero for appended text.
 	var/current_string_index = 0
+	/// Timer for the message's scheduled end.
 	var/end_timer = TIMER_ID_NULL
+	/// Whether typing was stopped early by damage or replacement.
 	var/premature_end = FALSE
+	/// Whether the message is already fading out or being deleted.
 	var/is_retiring = FALSE
+	/// Whether the original message ended with multiple exclamation marks.
 	var/exclaimed = FALSE
+	/// Sound frequency range selected for the owner's voice.
 	var/list/blip_tone = BLIP_TONE_DEFAULT
+	/// Whether the speaker should shake as letters are spelled out.
 	var/source_shake = FALSE
+	/// World time when this message last played a toot.
 	var/last_toot_time
 
-/**
- * Constructs a chat message overlay
- *
- * Arguments:
- * * text - The text content of the overlay
- * * target - The target atom to display the overlay at
- * * owner - The mob that owns this overlay, only this mob will be able to view it
- * * extra_classes - Extra classes to apply to the span that holds the text
- * * lifespan - The lifespan of the message in deciseconds
- */
-/datum/chatmessage/New(text, atom/target, mob/owner, datum/language/language, list/extra_classes = list(), lifespan = CHAT_MESSAGE_LIFESPAN)
+/datum/chatmessage/New(text, atom/target, mob/owner, datum/language/language, list/extra_classes = list())
 	. = ..()
 	if (!istype(target))
 		CRASH("Invalid target given for chatmessage")
@@ -96,15 +135,10 @@
 
 	_extra_classes = extra_classes.Copy()
 
-	src.text = text
-
-	remaining_strings = split_text_preserving_html(src.text)
-
 	if((length(text) > 1) && ((text[length(text)] == "!") && (text[length(text) - 1] == "!")))
 		exclaimed = TRUE
 
-	INVOKE_ASYNC(src, PROC_REF(generate_image), text, target, owner, language, extra_classes, lifespan)
-
+	INVOKE_ASYNC(src, PROC_REF(prepare_message_content), text, target, owner, language, extra_classes)
 
 /datum/chatmessage/Destroy()
 	if (owned_by)
@@ -119,9 +153,6 @@
 	letter_images = null
 	return ..()
 
-/**
- * Calls qdel on the chatmessage when its parent is deleted, used to register qdel signal
- */
 /datum/chatmessage/proc/on_parent_qdel()
 	SIGNAL_HANDLER
 
@@ -137,34 +168,21 @@
 
 	premature_end_of_life()
 
-/**
- * Generates a chat message image representation
- *
- * Arguments:
- * * text - The text content of the overlay
- * * target - The target atom to display the overlay at
- * * owner - The mob that owns this overlay, only this mob will be able to view it
- * * extra_classes - Extra classes to apply to the span that holds the text
- * * lifespan - The lifespan of the message in deciseconds
- */
-/datum/chatmessage/proc/generate_image(text, atom/target, mob/owner, datum/language/language, list/extra_classes, lifespan)
-	/// Cached icons to show what language the user is speaking
+/datum/chatmessage/proc/prepare_message_content(text, atom/target, mob/owner, datum/language/language, list/extra_classes)
 	var/static/list/language_icons
-	// Register client who owns this message
 	owned_by = owner.client
 
 	RegisterSignal(owned_by, COMSIG_QDELETING, PROC_REF(on_parent_qdel))
 	RegisterSignal(owner, COMSIG_MOB_APPLY_DAMAGE, PROC_REF(on_parent_take_damage))
 
-	// Clip message
 	var/maxlen = owned_by.prefs.read_preference(/datum/preference/numeric/max_chat_length)
-	text = clip_text_preserving_html(text, maxlen)
+	var/list/message_tokens = split_text_preserving_html(text, maxlen)
+	text = message_tokens.Join()
 
-	// Calculate target color if not already present
 	if(ishuman(target))
 		var/mob/living/carbon/human/H = target
 		if(H.voice_color && (target.chat_color != H.voice_color))
-			target.chat_color = "#[H.voice_color]" // Preferences santitises this
+			target.chat_color = "#[H.voice_color]"
 			target.chat_color_darkened = target.chat_color
 			target.chat_color_name = target.name
 
@@ -177,27 +195,25 @@
 		target.chat_color = "#[target.voicecolor_override]"
 		target.chat_color_darkened = target.chat_color
 
-	if(!tgt_color) // False when using emotes
-		// We dim italicized text to make it more distinguishable from regular text
+	if(!tgt_color)
 		tgt_color = extra_classes.Find("italics") ? target.chat_color_darkened : target.chat_color
 
-	// Get rid of any URL schemes that might cause BYOND to automatically wrap something in an anchor tag
 	var/static/regex/url_scheme = new(@"[A-Za-z][A-Za-z0-9+-\.]*:\/\/", "g")
+	var/unprocessed_text = text
 	text = replacetext(text, url_scheme, "")
+	if(text != unprocessed_text)
+		message_tokens = split_text_preserving_html(text)
 
-	// Reject whitespace
 	var/static/regex/whitespace = new(@"^\s*$")
 	if (whitespace.Find(text))
 		qdel(src)
 		return
 
-	// Non mobs speakers can be small
 	if (!ismob(target))
 		extra_classes |= "small"
 
 	var/list/prefixes
 
-	// Append language icon if the language uses one
 	var/datum/language/language_instance = GLOB.language_datum_instances[language]
 	if (language_instance?.display_icon(owner))
 		var/icon/language_icon = LAZYACCESS(language_icons, language)
@@ -207,46 +223,39 @@
 			LAZYSET(language_icons, language, language_icon)
 		LAZYADD(prefixes, "\icon[language_icon]")
 
-	src.text = "[prefixes?.Join("&nbsp;")][text]"
-	remaining_strings = list()
+	remaining_tokens = list()
 	if(length(prefixes))
-		remaining_strings += prefixes.Join("&nbsp;")
-	remaining_strings += split_text_preserving_html(text)
+		remaining_tokens += split_text_preserving_html(prefixes.Join("&nbsp;"))
+	remaining_tokens += message_tokens
 
-	// Approximate text height
-	// Note we have to replace HTML encoded metacharacters otherwise MeasureText will return a zero height
-	// BYOND Bug #2563917
-	// Construct text
-	var/static/regex/html_metachars = new(@"&[A-Za-z]{1,7};", "g")
-	var/complete_text = turn_to_styled(src.text)
+	text = "[prefixes?.Join("&nbsp;")][text]"
+
+	var/complete_text = turn_to_styled(text)
 
 	var/mheight
 	WXH_TO_HEIGHT(owned_by.MeasureText(complete_text, null, CHAT_MESSAGE_WIDTH), mheight)
 	if(!VERB_SHOULD_YIELD)
-		return finish_image_generation(mheight, target, owner, complete_text, lifespan)
+		return create_message_overlay(mheight, target, owner)
 
-	var/datum/callback/our_callback = CALLBACK(src, PROC_REF(finish_image_generation), mheight, target, owner, complete_text, lifespan, TRUE)
+	var/datum/callback/our_callback = CALLBACK(src, PROC_REF(create_message_overlay), mheight, target, owner, TRUE)
 	SSrunechat.message_queue += our_callback
 
-/datum/chatmessage/proc/finish_image_generation(mheight, atom/target, mob/owner, complete_text, lifespan, async_spelling = FALSE)
+/datum/chatmessage/proc/create_message_overlay(mheight, atom/target, mob/owner, async_spelling = FALSE)
 	if(!owned_by || QDELETED(owned_by))
 		return qdel(src)
 
 	if(!target || QDELETED(target))
 		return qdel(src)
 
-	approx_lines = max(1, mheight / CHAT_MESSAGE_APPROX_LHEIGHT)
 	message_loc = isturf(target) ? target : get_atom_on_turf(target)
 
 	if(HAS_TRAIT(message_loc, TRAIT_SHAKY_SPEECH))
 		source_shake = TRUE
 
-	// Move older messages up and fade them out as this message appears.
 	if (owned_by.seen_messages)
 		for(var/datum/chatmessage/m as anything in owned_by.seen_messages[message_loc])
 			m.end_for_new_message(mheight)
 
-	// Build message image
 	message = image(loc = message_loc, layer = CHAT_LAYER)
 	message.plane = RUNECHAT_PLANE
 	message.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
@@ -257,13 +266,9 @@
 	message.maptext_x = (CHAT_MESSAGE_WIDTH - owner.bound_width) * -0.5
 	prepare_letter_layout()
 
-	// View the message
 	LAZYADDASSOCLIST(owned_by.seen_messages, message_loc, src)
 	owned_by.images |= message
 	animate(message, alpha = 150, time = CHAT_MESSAGE_SPAWN_TIME)
-
-	// Prepare for destruction
-	scheduled_destruction = world.time + (lifespan - CHAT_MESSAGE_EOL_FADE)
 
 	if(async_spelling)
 		INVOKE_ASYNC(src, PROC_REF(spelling_loop))
@@ -271,16 +276,46 @@
 		spelling_loop()
 
 /datum/chatmessage/proc/turn_to_styled(string)
-	return {"<span style='font-size:[font_size]pt;font-family:"Pterra";color:[tgt_color];text-shadow:0 0 5px #000,0 0 5px #000,0 0 5px #000,0 0 5px #000;' class='center maptext [_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[string]</span>"} //AAAAAAAAAAAAAAA
+	var/extra_font_style = _extra_classes.Find("god_zizo") ? "font-weight:bold;" : ""
+	return {"<span style='font-size:[font_size]pt;font-family:"Pterra";color:[tgt_color];text-shadow:0 0 5px #000,0 0 5px #000,0 0 5px #000,0 0 5px #000;[extra_font_style]' class='center maptext [_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[string]</span>"}
 
-/datum/chatmessage/proc/clip_text_preserving_html(text, max_length)
-	var/list/tokens = split_text_preserving_html(text)
+/datum/chatmessage/proc/split_text_preserving_html(text, max_length = null)
 	var/list/result = list()
 	var/list/open_tags = list()
+	var/current_pos = 1
+	var/text_length = length_char(text)
 	var/visible_characters = 0
+	var/static/regex/html_entity = regex(@"^&(#([0-9]+|[xX][0-9A-Fa-f]+)|[A-Za-z][A-Za-z0-9]*);$")
 
-	for(var/token in tokens)
-		if(findtext(token, "<") == 1 && findtext(token, ">"))
+	while(current_pos <= text_length)
+		var/current_character = copytext_char(text, current_pos, current_pos + 1)
+		var/token
+		if(current_character == "&")
+			var/entity_end = findtext_char(text, ";", current_pos)
+			if(entity_end && (entity_end - current_pos <= 33))
+				var/entity = copytext_char(text, current_pos, entity_end + 1)
+				if(html_entity.Find(entity))
+					token = entity
+					current_pos = entity_end + 1
+				else
+					token = current_character
+					current_pos++
+			else
+				token = current_character
+				current_pos++
+		else if(current_character == "<")
+			var/entity_end = findtext_char(text, ">", current_pos)
+			if(entity_end)
+				token = copytext_char(text, current_pos, entity_end + 1)
+				current_pos = entity_end + 1
+			else
+				token = current_character
+				current_pos++
+		else
+			token = current_character
+			current_pos++
+
+		if(!isnull(max_length) && findtext(token, "<") == 1 && findtext(token, ">") && !is_runechat_icon_token(token))
 			result += token
 			var/tag_end = findtext(token, ">")
 			if(findtext(token, "</") == 1)
@@ -300,63 +335,18 @@
 				open_tags += opening_name
 			continue
 
-		if(visible_characters >= max_length)
-			result += "..."
+		if(!isnull(max_length) && visible_characters >= max_length)
+			result += "."
+			result += "."
+			result += "."
 			break
 
 		result += token
-		visible_characters++
+		if(!isnull(max_length))
+			visible_characters++
 
 	for(var/index = length(open_tags), index > 0, index--)
 		result += "</[open_tags[index]]>"
-
-	return result.Join()
-
-/datum/chatmessage/proc/split_text_preserving_html(text) // this proc was AI-generated by deepseek
-	var/list/result = list()
-	var/current_pos = 1
-	var/text_length = length(text)
-	var/static/regex/html_entity = regex(@"^&(#([0-9]+|[xX][0-9A-Fa-f]+)|[A-Za-z][A-Za-z0-9]*);$")
-
-	while(current_pos <= text_length)
-		// Check if we're at the start of an HTML entity
-		if(copytext(text, current_pos, current_pos + 1) == "&")
-			var/entity_end = findtext(text, ";", current_pos)
-			if(entity_end && (entity_end - current_pos <= 33))
-				var/entity = copytext(text, current_pos, entity_end + 1)
-				if(html_entity.Find(entity))
-					result += entity
-					current_pos = entity_end + 1
-					continue
-		else if(copytext(text, current_pos, current_pos + 1) == "<")
-			var/entity_end = findtext(text, ">", current_pos)
-			if(entity_end)
-				// Found a complete entity, add it as one unit
-				var/entity = copytext(text, current_pos, entity_end + 1)
-				result += entity
-				current_pos = entity_end + 1
-				continue
-		else if(copytext(text, current_pos, current_pos + 1) == "�") // Should handle UTF-8 multi-byte characters
-			var/offset = 1
-			var/failed = FALSE
-			var/entity
-			while(current_pos + offset <= text_length)
-				var/test_char = copytext(text, current_pos, current_pos + offset + 1)
-				if(!findtext(test_char, "�")) // Valid character found
-					entity = test_char
-					break
-				offset++
-				if(offset > 4) // UTF-8 max 4 bytes
-					failed = TRUE
-					break
-			if(!failed)
-				result += entity
-				current_pos += offset + 1
-				continue
-
-		// Not an entity, add single character
-		result += copytext(text, current_pos, current_pos + 1)
-		current_pos++
 
 	return result
 
@@ -381,8 +371,8 @@
 				mobs_around++
 		if(mobs_around > 4)
 			skip_spelling = TRUE
-	for(var/string_index in 1 to length(remaining_strings))
-		var/letter = remaining_strings[string_index]
+	for(var/string_index in 1 to length(remaining_tokens))
+		var/letter = remaining_tokens[string_index]
 		current_string_index = string_index
 		if(premature_end)
 			return
@@ -407,17 +397,8 @@
 		return
 
 	current_string_index = 0
-	finished_typing = TRUE
 	if(!QDELETED(message))
 		end_timer = addtimer(CALLBACK(src, PROC_REF(end_of_life)), delay + 2 SECONDS)
-
-/datum/chatmessage/proc/add_string(string = "", direction = 1, audible = TRUE)
-	if(QDELETED(src))
-		return
-	if(premature_end)
-		return
-
-	return animate_letter_into_existence(string, direction, audible)
 
 /datum/chatmessage/proc/animate_letter_into_existence(string, direction = 1, audible = TRUE, reveal_delay = 0)
 	var/list/new_images = _add_string(string, direction, audible)
@@ -426,6 +407,8 @@
 		owned_by.images |= letter_image
 		var/spawn_pixel_y = letter_image.pixel_y
 		var/target_pixel_y = spawn_pixel_y - spawn_offset
+
+		// begins with 0 alpha, fades into existence on a spot above their designated position
 		animate(
 			letter_image,
 			alpha = 255,
@@ -433,6 +416,7 @@
 			time = CHAT_MESSAGE_LETTER_FADE_TIME,
 			easing = LINEAR_EASING,
 		)
+		// moves down to their designated spot after fading in.
 		if(spawn_offset)
 			animate(
 				pixel_y = target_pixel_y,
@@ -461,7 +445,6 @@
 	else
 		tokens = split_text_preserving_html(string)
 	for(var/token in tokens)
-		current_string += token
 		revealed_tokens += token
 		var/target_token_index = length(revealed_tokens)
 		if(current_string_index && target_token_index <= length(token_line_numbers))
@@ -497,7 +480,7 @@
 					layout_line_widths[current_line_number + 1] = max(current_layout_width, current_line_width)
 					token_line_width_after[target_token_index] = current_line_width
 
-		if(findtext(token, "<") == 1 && findtext(token, ">"))
+		if(findtext(token, "<") == 1 && findtext(token, ">") && !is_runechat_icon_token(token))
 			if(findtext(token, "<br") == 1)
 				continue
 			else if(findtext(token, "</") == 1)
@@ -566,7 +549,8 @@
 	var/list/layout_open_tags = list()
 	var/measure_run = ""
 	var/measure_run_width = 0
-	var/token_count = length(remaining_strings)
+	var/token_count = length(remaining_tokens)
+	var/has_html_markup = FALSE
 	for(var/slot_index in 1 to token_count)
 		token_widths += 0
 		line_break_tokens += 0
@@ -575,54 +559,121 @@
 		token_line_width_after += 0
 		layout_line_widths += 0
 		dropped_space_tokens += 0
+		var/token = remaining_tokens[slot_index]
+		if(findtext(token, "<") == 1 && findtext(token, ">"))
+			has_html_markup = TRUE
 	layout_line_widths += 0
 
-	for(var/token_index in 1 to token_count)
-		var/measure_token = remaining_strings[token_index]
-		if(findtext(measure_token, "<") == 1 && findtext(measure_token, ">"))
-			measure_run = ""
-			measure_run_width = 0
-			if(findtext(measure_token, "<br") == 1 || findtext(measure_token, "<hr") == 1)
+	var/use_cached_plain_layout = FALSE
+	if(!has_html_markup)
+		use_cached_plain_layout = prepare_cached_plain_widths(token_widths, line_break_tokens)
+
+	if(has_html_markup)
+		for(var/token_index in 1 to token_count)
+			var/measure_token = remaining_tokens[token_index]
+			if(is_runechat_icon_token(measure_token))
+				token_widths[token_index] = measure_token_width(measure_token, layout_open_tags)
+				measure_run = ""
+				measure_run_width = 0
+				continue
+
+			if(findtext(measure_token, "<") == 1 && findtext(measure_token, ">"))
+				measure_run = ""
+				measure_run_width = 0
+				if(findtext(measure_token, "<br") == 1 || findtext(measure_token, "<hr") == 1)
+					line_break_tokens[token_index] = TRUE
+				else if(findtext(measure_token, "</") == 1)
+					close_html_tag(measure_token, layout_open_tags)
+				else if(!findtext(measure_token, "/>"))
+					layout_open_tags += measure_token
+				token_widths[token_index] = 0
+				continue
+
+			if(measure_token == @"\n" || measure_token == @"\r")
 				line_break_tokens[token_index] = TRUE
-			else if(findtext(measure_token, "</") == 1)
-				close_html_tag(measure_token, layout_open_tags)
-			else if(!findtext(measure_token, "/>"))
-				layout_open_tags += measure_token
+				token_widths[token_index] = 0
+				measure_run = ""
+				measure_run_width = 0
+				continue
+
+			if(measure_token == " ")
+				var/space_prefix_width = measure_token_width(measure_run + measure_token, layout_open_tags)
+				var/space_width = space_prefix_width - measure_run_width
+				if(space_width <= 0)
+					space_width = measure_token_width(measure_token, layout_open_tags)
+				token_widths[token_index] = space_width
+				measure_run = ""
+				measure_run_width = 0
+				continue
+
+			var/prefix_width = measure_token_width(measure_run + measure_token, layout_open_tags)
+			var/character_width = prefix_width - measure_run_width
+			if(character_width <= 0)
+				character_width = measure_token_width(measure_token, layout_open_tags)
+				measure_run_width += character_width
+			else
+				measure_run_width = prefix_width
+			token_widths[token_index] = character_width
+			measure_run += measure_token
+	else if(!use_cached_plain_layout)
+		for(var/token_index in 1 to token_count)
 			token_widths[token_index] = 0
-			continue
+			line_break_tokens[token_index] = FALSE
 
-		if(measure_token == @"\n" || measure_token == @"\r")
-			line_break_tokens[token_index] = TRUE
-			token_widths[token_index] = 0
-			measure_run = ""
-			measure_run_width = 0
-			continue
+		var/token_index = 1
+		var/previous_run = ""
+		while(token_index <= token_count)
+			var/measure_token = remaining_tokens[token_index]
+			if(measure_token == @"\n" || measure_token == @"\r")
+				line_break_tokens[token_index] = TRUE
+				previous_run = ""
+				token_index++
+				continue
 
-		if(measure_token == " ")
-			var/space_prefix_width = measure_token_width(measure_run + measure_token, layout_open_tags)
-			var/space_width = space_prefix_width - measure_run_width
-			if(space_width <= 0)
-				space_width = measure_token_width(measure_token, layout_open_tags)
-			token_widths[token_index] = space_width
-			measure_run = ""
-			measure_run_width = 0
-			continue
+			if(measure_token == " ")
+				var/space_prefix_width = measure_token_width(previous_run + measure_token, layout_open_tags)
+				var/previous_run_width = length(previous_run) ? measure_token_width(previous_run, layout_open_tags) : 0
+				var/space_width = space_prefix_width - previous_run_width
+				if(space_width <= 0)
+					space_width = measure_token_width(measure_token, layout_open_tags)
+				token_widths[token_index] = space_width
+				previous_run = ""
+				token_index++
+				continue
 
-		var/prefix_width = measure_token_width(measure_run + measure_token, layout_open_tags)
-		var/character_width = prefix_width - measure_run_width
-		if(character_width <= 0)
-			character_width = measure_token_width(measure_token, layout_open_tags)
-			measure_run_width += character_width
-		else
-			measure_run_width = prefix_width
-		token_widths[token_index] = character_width
-		measure_run += measure_token
+			var/run_end = token_index
+			var/run_text = ""
+			while(run_end <= token_count && remaining_tokens[run_end] != " " && remaining_tokens[run_end] != @"\n" && remaining_tokens[run_end] != @"\r")
+				run_text += remaining_tokens[run_end]
+				run_end++
+
+			var/run_width = measure_token_width(run_text, layout_open_tags, null)
+			var/fallback_width = max(1, round(font_size * 0.6))
+			if(run_width < CHAT_MESSAGE_WIDTH && (length(run_text) == 1 || run_width != fallback_width))
+				token_widths[token_index] = run_width
+			else
+				measure_run = ""
+				measure_run_width = 0
+				for(var/run_token_index in token_index to (run_end - 1))
+					var/run_token = remaining_tokens[run_token_index]
+					var/prefix_width = measure_token_width(measure_run + run_token, layout_open_tags)
+					var/character_width = prefix_width - measure_run_width
+					if(character_width <= 0)
+						character_width = measure_token_width(run_token, layout_open_tags)
+						measure_run_width += character_width
+					else
+						measure_run_width = prefix_width
+					token_widths[run_token_index] = character_width
+					measure_run += run_token
+
+			previous_run = run_text
+			token_index = run_end
 
 	var/current_layout_line = 0
 	var/current_layout_width = 0
 	var/layout_index = 1
 	while(layout_index <= token_count)
-		var/layout_token = remaining_strings[layout_index]
+		var/layout_token = remaining_tokens[layout_index]
 		if(line_break_tokens[layout_index])
 			token_line_numbers[layout_index] = current_layout_line
 			token_line_width_after[layout_index] = current_layout_width
@@ -636,7 +687,7 @@
 			var/space_width = token_widths[layout_index]
 			var/next_word_width = 0
 			var/lookahead = layout_index + 1
-			while(lookahead <= token_count && !line_break_tokens[lookahead] && remaining_strings[lookahead] != " ")
+			while(lookahead <= token_count && !line_break_tokens[lookahead] && remaining_tokens[lookahead] != " ")
 				next_word_width += token_widths[lookahead]
 				lookahead++
 
@@ -662,7 +713,7 @@
 
 		var/word_end = layout_index
 		var/word_width = 0
-		while(word_end <= token_count && !line_break_tokens[word_end] && remaining_strings[word_end] != " ")
+		while(word_end <= token_count && !line_break_tokens[word_end] && remaining_tokens[word_end] != " ")
 			word_width += token_widths[word_end]
 			word_end++
 
@@ -685,61 +736,216 @@
 
 	layout_line_widths[current_layout_line + 1] = current_layout_width
 
-	var/list/position_open_tags = list()
-	var/position_index = 1
-	while(position_index <= token_count)
-		var/position_line = token_line_numbers[position_index]
-		var/line_start_index = position_index
-		while(position_index <= token_count && token_line_numbers[position_index] == position_line)
-			position_index++
-		var/line_end_index = position_index - 1
-		var/line_markup = position_open_tags.Join()
-		var/has_preserved_space = FALSE
-		var/pending_space_width = 0
+	if(use_cached_plain_layout)
+		var/position_index = 1
+		while(position_index <= token_count)
+			var/position_line = token_line_numbers[position_index]
+			var/line_start_index = position_index
+			while(position_index <= token_count && token_line_numbers[position_index] == position_line)
+				position_index++
+			var/line_end_index = position_index - 1
+			var/line_markup = ""
+			var/current_line_offset = 0
+			var/has_preserved_space = FALSE
+			var/pending_space_width = 0
 
-		for(var/position_token_index in line_start_index to line_end_index)
-			var/position_token = remaining_strings[position_token_index]
-			if(findtext(position_token, "<") == 1 && findtext(position_token, ">"))
-				if(findtext(position_token, "<br") == 1 || findtext(position_token, "<hr") == 1)
+			for(var/position_token_index in line_start_index to line_end_index)
+				var/position_token = remaining_tokens[position_token_index]
+				if(position_token == @"\n" || position_token == @"\r" || dropped_space_tokens[position_token_index])
+					token_line_width_after[position_token_index] = current_line_offset
 					continue
+
+				if(position_token == " ")
+					if(!has_preserved_space)
+						pending_space_width = token_widths[position_token_index]
+						has_preserved_space = TRUE
+					token_line_width_after[position_token_index] = current_line_offset
+					continue
+
+				token_pixel_offsets[position_token_index] = current_line_offset + pending_space_width
+				current_line_offset += pending_space_width + token_widths[position_token_index]
+				if(has_preserved_space)
+					line_markup += " "
 				line_markup += position_token
-				if(findtext(position_token, "</") == 1)
-					close_html_tag(position_token, position_open_tags)
-				else if(!findtext(position_token, "/>"))
-					position_open_tags += position_token
+				has_preserved_space = FALSE
+				pending_space_width = 0
+				token_line_width_after[position_token_index] = current_line_offset
+
+			var/line_width = measure_layout_width(line_markup, list())
+			layout_line_widths[position_line + 1] = line_width
+			var/centered_line_offset = (CHAT_MESSAGE_WIDTH - line_width) * 0.5
+			for(var/offset_token_index in line_start_index to line_end_index)
+				token_pixel_offsets[offset_token_index] += centered_line_offset
+	else
+		var/list/position_open_tags = list()
+		var/position_index = 1
+		while(position_index <= token_count)
+			var/position_line = token_line_numbers[position_index]
+			var/line_start_index = position_index
+			while(position_index <= token_count && token_line_numbers[position_index] == position_line)
+				position_index++
+			var/line_end_index = position_index - 1
+			var/line_markup = position_open_tags.Join()
+			var/has_preserved_space = FALSE
+			var/pending_space_width = 0
+
+			for(var/position_token_index in line_start_index to line_end_index)
+				var/position_token = remaining_tokens[position_token_index]
+				if(findtext(position_token, "<") == 1 && findtext(position_token, ">") && !is_runechat_icon_token(position_token))
+					if(findtext(position_token, "<br") == 1 || findtext(position_token, "<hr") == 1)
+						continue
+					line_markup += position_token
+					if(findtext(position_token, "</") == 1)
+						close_html_tag(position_token, position_open_tags)
+					else if(!findtext(position_token, "/>"))
+						position_open_tags += position_token
+					token_line_width_after[position_token_index] = measure_layout_width(line_markup, position_open_tags)
+					continue
+
+				if(position_token == @"\n" || position_token == @"\r" || dropped_space_tokens[position_token_index])
+					token_line_width_after[position_token_index] = measure_layout_width(line_markup, position_open_tags)
+					continue
+
+				if(position_token == " " || position_token == "&nbsp;")
+					if(!has_preserved_space)
+						pending_space_width = measure_token_width(position_token, position_open_tags)
+						has_preserved_space = TRUE
+					else if(position_token == "&nbsp;")
+						pending_space_width += measure_token_width(position_token, position_open_tags)
+					token_line_width_after[position_token_index] = measure_layout_width(line_markup, position_open_tags)
+					continue
+
+				var/prefix_width = measure_layout_width(line_markup, position_open_tags)
+				token_pixel_offsets[position_token_index] = prefix_width + pending_space_width
+				if(has_preserved_space)
+					line_markup += " "
+				line_markup += position_token
+				has_preserved_space = FALSE
+				pending_space_width = 0
 				token_line_width_after[position_token_index] = measure_layout_width(line_markup, position_open_tags)
+
+			var/line_width = measure_layout_width(line_markup, position_open_tags)
+			if(!line_width)
+				line_width = layout_line_widths[position_line + 1]
+			layout_line_widths[position_line + 1] = line_width
+			var/centered_line_offset = (CHAT_MESSAGE_WIDTH - line_width) * 0.5
+
+			for(var/offset_token_index in line_start_index to line_end_index)
+				token_pixel_offsets[offset_token_index] += centered_line_offset
+
+/// Prepares per-token advances from a cached ASCII glyph-pair table when exact word widths agree.
+/datum/chatmessage/proc/prepare_cached_plain_widths(list/token_widths, list/line_break_tokens)
+	var/token_count = length(remaining_tokens)
+	var/previous_token
+	for(var/token_index in 1 to token_count)
+		var/token = remaining_tokens[token_index]
+		if(token == @"\n" || token == @"\r")
+			previous_token = null
+			continue
+		if(token == " ")
+			if(previous_token == " ")
+				return FALSE
+			previous_token = token
+			continue
+		if(length(token) != 1)
+			return FALSE
+		var/ascii_character = text2ascii(token)
+		if(ascii_character < 32 || ascii_character > 126 || token in list("<", ">", "&"))
+			return FALSE
+		previous_token = token
+
+	var/token_index = 1
+	var/previous_run = ""
+	while(token_index <= token_count)
+		var/token = remaining_tokens[token_index]
+		if(token == @"\n" || token == @"\r")
+			line_break_tokens[token_index] = TRUE
+			previous_run = ""
+			token_index++
+			continue
+
+		if(token == " ")
+			var/space_prefix_width = measure_token_width(previous_run + token, list())
+			var/previous_run_width = length(previous_run) ? measure_token_width(previous_run, list()) : 0
+			var/space_width = space_prefix_width - previous_run_width
+			if(space_width <= 0)
+				space_width = measure_token_width(token, list())
+			token_widths[token_index] = space_width
+			previous_run = ""
+			token_index++
+			continue
+
+		var/run_end = token_index
+		var/run_text = ""
+		while(run_end <= token_count && remaining_tokens[run_end] != " " && remaining_tokens[run_end] != @"\n" && remaining_tokens[run_end] != @"\r")
+			run_text += remaining_tokens[run_end]
+			run_end++
+
+		var/run_width = measure_token_width(run_text, list(), null)
+		if(run_width >= CHAT_MESSAGE_WIDTH)
+			return FALSE
+
+		var/previous_character
+		var/pair_advance_total = 0
+		var/run_token_index = token_index
+		while(run_token_index < run_end)
+			var/run_token = remaining_tokens[run_token_index]
+			if(run_token == previous_character)
+				var/repeated_advance = get_cached_ascii_advance(run_token, run_token)
+				if(isnull(repeated_advance))
+					return FALSE
+				while(run_token_index < run_end && remaining_tokens[run_token_index] == run_token)
+					token_widths[run_token_index] = repeated_advance
+					pair_advance_total += repeated_advance
+					run_token_index++
+				previous_character = run_token
 				continue
 
-			if(position_token == @"\n" || position_token == @"\r" || dropped_space_tokens[position_token_index])
-				token_line_width_after[position_token_index] = measure_layout_width(line_markup, position_open_tags)
-				continue
+			var/character_advance = get_cached_ascii_advance(run_token, previous_character)
+			if(isnull(character_advance))
+				return FALSE
+			token_widths[run_token_index] = character_advance
+			pair_advance_total += character_advance
+			previous_character = run_token
+			run_token_index++
 
-			if(position_token == " " || position_token == "&nbsp;")
-				if(!has_preserved_space)
-					pending_space_width = measure_token_width(position_token, position_open_tags)
-					has_preserved_space = TRUE
-				else if(position_token == "&nbsp;")
-					pending_space_width += measure_token_width(position_token, position_open_tags)
-				token_line_width_after[position_token_index] = measure_layout_width(line_markup, position_open_tags)
-				continue
+		if(pair_advance_total != run_width)
+			return FALSE
 
-			var/prefix_width = measure_layout_width(line_markup, position_open_tags)
-			token_pixel_offsets[position_token_index] = prefix_width + pending_space_width
-			if(has_preserved_space)
-				line_markup += " "
-			line_markup += position_token
-			has_preserved_space = FALSE
-			pending_space_width = 0
-			token_line_width_after[position_token_index] = measure_layout_width(line_markup, position_open_tags)
+		previous_run = run_text
+		token_index = run_end
 
-		var/line_width = measure_layout_width(line_markup, position_open_tags)
-		if(!line_width)
-			line_width = layout_line_widths[position_line + 1]
-		layout_line_widths[position_line + 1] = line_width
-		var/centered_line_offset = (CHAT_MESSAGE_WIDTH - line_width) * 0.5
+	return TRUE
 
-		for(var/offset_token_index in line_start_index to line_end_index)
-			token_pixel_offsets[offset_token_index] += centered_line_offset
+/// Returns a cached advance for an ASCII glyph, or for its pair with the previous glyph.
+/datum/chatmessage/proc/get_cached_ascii_advance(character, previous_character)
+	var/static/list/advance_cache = list()
+	var/static/list/cache_order = list()
+	var/cache_profile = "[font_size]|[_extra_classes != null ? _extra_classes.Join() : ""]"
+	var/cache_key = isnull(previous_character) ? "[cache_profile]|glyph|[character]" : "[cache_profile]|pair|[previous_character][character]"
+	var/cached_advance = advance_cache[cache_key]
+	if(!isnull(cached_advance))
+		return cached_advance
+
+	var/advance
+	if(isnull(previous_character))
+		advance = measure_token_width(character, list(), null)
+	else
+		var/previous_width = get_cached_ascii_advance(previous_character)
+		if(isnull(previous_width))
+			return null
+		var/pair_width = measure_token_width("[previous_character][character]", list(), null)
+		advance = pair_width - previous_width
+	if(advance <= 0)
+		return null
+
+	if(length(cache_order) >= 8192)
+		var/expired_key = cache_order[1]
+		cache_order.Cut(1, 2)
+		advance_cache.Remove(expired_key)
+	advance_cache[cache_key] = advance
+	cache_order += cache_key
+	return advance
 
 /datum/chatmessage/proc/measure_layout_width(text, list/active_html_tags)
 	if(!length(text))
@@ -750,8 +956,9 @@
 	if(!isnull(cached_width))
 		return cached_width
 
-	var/measurement_text = {"<span style='font-size:[font_size]pt;font-family:"Pterra";-dm-text-outline:1px #0005;' class='[_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[text]"}
-	for(var/index = length(active_html_tags), index > 0, index--)
+	var/extra_font_style = _extra_classes.Find("god_zizo") ? "font-weight:bold;" : ""
+	var/measurement_text = {"<span style='font-size:[font_size]pt;font-family:"Pterra";-dm-text-outline:1px #0005;[extra_font_style]' class='[_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[text]"}
+	for(var/index = length(active_html_tags), index > 0; index--)
 		var/open_tag = active_html_tags[index]
 		var/tag_end = findtext(open_tag, ">")
 		var/tag_name = copytext(open_tag, 2, tag_end)
@@ -767,16 +974,21 @@
 	token_width_cache[cache_key] = layout_width
 	return layout_width
 
-/datum/chatmessage/proc/measure_token_width(token, list/active_html_tags)
-	if(findtext(token, "\\icon") == 1)
+/datum/chatmessage/proc/is_runechat_icon_token(token)
+	return findtext(uppertext(token), "<IMG CLASS=ICON") == 1
+
+/datum/chatmessage/proc/measure_token_width(token, list/active_html_tags, max_width = CHAT_MESSAGE_WIDTH)
+	if(findtext(token, "\\icon") == 1 || is_runechat_icon_token(token))
 		return 9
 
-	var/cache_key = "[active_html_tags.Join()]|[token]"
+	var/cache_width = isnull(max_width) ? "natural" : "[max_width]"
+	var/cache_key = "[cache_width]|[active_html_tags.Join()]|[token]"
 	var/cached_width = token_width_cache[cache_key]
 	if(!isnull(cached_width))
 		return cached_width
 
-	var/measurement_text = {"<span style='font-size:[font_size]pt;font-family:"Pterra";' class='[_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[active_html_tags.Join()][token]"}
+	var/extra_font_style = _extra_classes.Find("god_zizo") ? "font-weight:bold;" : ""
+	var/measurement_text = {"<span style='font-size:[font_size]pt;font-family:"Pterra";[extra_font_style]' class='[_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[active_html_tags.Join()][token]"}
 	for(var/index = length(active_html_tags), index > 0, index--)
 		var/open_tag = active_html_tags[index]
 		var/tag_end = findtext(open_tag, ">")
@@ -787,10 +999,14 @@
 		measurement_text += "</[tag_name]>"
 	measurement_text += "</span>"
 
-	var/measurement = owned_by.MeasureText(measurement_text, null, CHAT_MESSAGE_WIDTH)
+	var/measurement
+	if(isnull(max_width))
+		measurement = owned_by.MeasureText(measurement_text, null)
+	else
+		measurement = owned_by.MeasureText(measurement_text, null, max_width)
 	var/width_end = findtext(measurement, "x")
 	var/token_width = width_end ? text2num(copytext(measurement, 1, width_end)) : 0
-	if(token_width > 0 && token_width < CHAT_MESSAGE_WIDTH)
+	if(token_width > 0 && (isnull(max_width) || token_width < max_width))
 		token_width_cache[cache_key] = token_width
 	else if(token == " ")
 		token_width_cache[cache_key] = 3
@@ -827,7 +1043,8 @@
 			tag_name = copytext(tag_name, 1, tag_space)
 		render_text += "</[tag_name]>"
 
-	return {"<span style='font-size:[font_size]pt;font-family:"Pterra";color:[tgt_color];-dm-text-outline: 1px #0005;' class='maptext [_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[render_text]</span>"}
+	var/extra_font_style = _extra_classes.Find("god_zizo") ? "font-weight:bold;" : ""
+	return {"<span style='font-size:[font_size]pt;font-family:"Pterra";color:[tgt_color];-dm-text-outline: 1px #0005;[extra_font_style]' class='maptext [_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[render_text]</span>"}
 
 /datum/chatmessage/proc/end_for_new_message(rise_height)
 	if(QDELETED(src) || is_retiring)
@@ -840,7 +1057,6 @@
 		end_timer = TIMER_ID_NULL
 
 	current_string_index = 0
-	finished_typing = TRUE
 	if(!ends_with_ellipsis())
 		var/list/ellipsis_images = _add_string("...", 1, FALSE)
 		for(var/image/ellipsis_image as anything in ellipsis_images)
@@ -922,9 +1138,9 @@
 		animate(
 			message_loc,
 			time = CHAT_SPELLING_DELAY_WITH_EXCLAIMED_MULTIPLIER + 0.3 - (exclaimed ? 0 : 0.1),
-			pixel_w = ((exclaimed_multiplier - 1) + rand(exclaimed_multiplier - 1, exclaimed_multiplier + (exclaimed ? 0 : 3))) * pick(-1, 1),
-			pixel_z = (exclaimed_multiplier + rand((exclaimed_multiplier - 1 + (exclaimed ? 0 : 3)) * direction, 1 * (direction ? direction : 1) * exclaimed_multiplier)),
-			transform = message_loc.transform.Turn(rand(2 * exclaimed_multiplier, 6 * (exclaimed_multiplier - 0.5) * direction)),
+			pixel_w = ((exclaimed_multiplier - 1) + rand(exclaimed_multiplier - 1, exclaimed_multiplier + (exclaimed ? 0 : 2))) * pick(-1, 1),
+			pixel_z = (exclaimed_multiplier + rand((exclaimed_multiplier - 1 + (exclaimed ? 0 : 2)) * direction, 1 * (direction ? direction : 1) * exclaimed_multiplier)),
+			transform = message_loc.transform.Turn(rand(2 * exclaimed_multiplier, 4 * (exclaimed_multiplier - 0.5) * direction)),
 			easing = ELASTIC_EASING,
 		)
 		animate(
@@ -942,7 +1158,7 @@
 	premature_end = TRUE
 	current_string_index = 0
 	animate_letter_into_existence(pick(CHAT_GLORF_LIST), 1, FALSE)
-	var/delay = rand(10, 20) * 0.01 SECONDS // yes, I'm dividing by 100 and then using the SECONDS define which multiplies by 10, deal with it. ^_^
+	var/delay = rand(10, 20) * 0.01 SECONDS
 
 	for(var/image/letter_image as anything in letter_images)
 		animate(
@@ -956,9 +1172,6 @@
 
 	addtimer(CALLBACK(src, PROC_REF(end_of_life)), delay + 0.1 SECONDS)
 
-/**
- * Applies final animations to overlay CHAT_MESSAGE_EOL_FADE deciseconds prior to message deletion
- */
 /datum/chatmessage/proc/end_of_life(fadetime = CHAT_MESSAGE_EOL_FADE)
 	if(QDELETED(src) || is_retiring)
 		return
@@ -972,29 +1185,17 @@
 
 	QDEL_IN(src, fadetime)
 
-/**
- * Creates a message overlay at a defined location for a given speaker
- *
- * Arguments:
- * * speaker - The atom who is saying this message
- * * message_language - The language that the message is said in
- * * raw_message - The text content of the message
- * * spans - Additional classes to be added to the message
- */
 /mob/proc/create_chat_message(atom/movable/speaker, datum/language/message_language, raw_message, list/spans)
 	if(HAS_TRAIT(speaker, TRAIT_RUNECHAT_HIDDEN))
 		return
-	// Ensure the list we are using, if present, is a copy so we don't modify the list provided to us
 	spans = spans?.Copy()
 
-	// Check for virtual speakers (aka hearing a message through a radio)
 	var/atom/movable/originalSpeaker = speaker
 	if (istype(speaker, /atom/movable/virtualspeaker))
 		var/atom/movable/virtualspeaker/v = speaker
 		speaker = v.source
 		spans |= "virtual-speaker"
 
-	// Ignore virtual speaker (most often radio messages) from ourself
 	if (originalSpeaker != src && speaker == src)
 		return
 
@@ -1004,15 +1205,12 @@
 	else
 		text = lang_treat(speaker, message_language, raw_message, spans, null, TRUE)
 
-	// Display visual above source
 	new /datum/chatmessage(text, speaker, src, message_language, spans)
 
 #undef CHAT_LAYER
-#undef CHAT_LAYER_MAX
 #undef CHAT_LAYER_Z_STEP
-#undef CHAT_LAYER_MAX_Z
 #undef CHAT_SPELLING_DELAY_WITH_EXCLAIMED_MULTIPLIER
-#undef EXCLAIMED_MULTIPLER
+#undef EXCLAIMED_MULTIPLIER
 #undef BLIP_TONE_DEFAULT
 #undef BLIP_TONE_FEMININE
 #undef BLIP_TONE_MASCULINE
