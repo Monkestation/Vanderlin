@@ -1006,7 +1006,7 @@ The pipeline:
 
 	var/extra_font_style = _extra_classes.Find("god_zizo") ? "font-weight:bold;" : ""
 	var/measurement_text = {"<span style='font-size:[font_size]pt;font-family:"Pterra";-dm-text-outline:1px #0005;[extra_font_style]' class='[_extra_classes != null ? _extra_classes.Join(" ") : ""]'>[text]"}
-	for(var/index = length(active_html_tags), index > 0; index--)
+	for(var/index = length(active_html_tags), index > 0, index--)
 		var/open_tag = active_html_tags[index]
 		var/tag_end = findtext(open_tag, ">")
 		var/tag_name = copytext(open_tag, 2, tag_end)
@@ -1199,7 +1199,6 @@ The pipeline:
 		)
 
 /datum/chatmessage/proc/premature_end_of_life()
-	SIGNAL_HANDLER
 	if(QDELETED(message))
 		return
 
