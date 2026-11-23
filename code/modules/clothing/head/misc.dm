@@ -308,7 +308,7 @@
 
 /obj/item/clothing/head/vampire/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 //................ Faceless Hood ............... //	- Faceless One
 

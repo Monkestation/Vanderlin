@@ -1,0 +1,4 @@
+author: "ta3754859-max"
+delete-after: True
+changes:
+  - bugfix: "Silver, truesilver, bloodcurse only apply when you get succesfully hit (as in the affected bodypart wasn't armored, didn't dodge nor parry the attack, picking up still gives you the stacks)"

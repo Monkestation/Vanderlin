@@ -93,7 +93,7 @@
 
 /obj/item/weapon/whip/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/whip/truesilver
 	name = "truesilver whip"
@@ -109,7 +109,7 @@
 
 /obj/item/weapon/whip/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 //................ Psydon Whip ............... //
 /obj/item/weapon/whip/psydon
@@ -162,7 +162,7 @@
 
 /obj/item/weapon/whip/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 //................ Caning Stick.................//
 /obj/item/weapon/whip/cane
@@ -304,4 +304,4 @@
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)

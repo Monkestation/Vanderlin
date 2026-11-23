@@ -6,7 +6,7 @@
 
 /obj/item/clothing/ring/signet/psy/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/ring/signet/psy/get_mechanics_examine(mob/user)
 	. = ..()

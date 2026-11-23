@@ -339,7 +339,7 @@
 
 /obj/item/clothing/head/helmet/heavy/necked/noc/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 //............... Necra Helmet ............... //
 /obj/item/clothing/head/helmet/heavy/necked/necra

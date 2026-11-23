@@ -6,7 +6,7 @@
 
 /obj/item/clothing/ring/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/ring/silver/makers_guild
 	name = "makers' ring"
@@ -324,7 +324,7 @@
 
 /obj/item/clothing/ring/signet/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/ring/signet/attack_hand_secondary(mob/user, list/modifiers)
 	. = ..()
@@ -392,7 +392,7 @@
 
 /obj/item/clothing/ring/courtagent_ring/silver/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/ring/courtagent_ring/silver/hand
 	hand_ring = TRUE

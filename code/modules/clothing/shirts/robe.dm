@@ -138,7 +138,7 @@
 
 /obj/item/clothing/shirt/robe/bloodweave/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/clothing/shirt/robe/wizard
 	name = "wizard's robe"

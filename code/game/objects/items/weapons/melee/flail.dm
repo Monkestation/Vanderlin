@@ -109,7 +109,7 @@
 
 /obj/item/weapon/flail/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/flail/noc
 	name = "lunar flail"
@@ -127,7 +127,7 @@
 
 /obj/item/weapon/flail/noc/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 //................ Psydon Flail ............... //
 /obj/item/weapon/flail/psydon
@@ -185,7 +185,7 @@
 
 /obj/item/weapon/flail/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/weapon/flail/bloodsteel/relic
 	name = "\proper heart of Mephistopheles"
