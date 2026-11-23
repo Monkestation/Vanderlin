@@ -74,6 +74,14 @@
 	affected.Stun(10)
 	affected.adjust_temp_blindness(10 SECONDS)
 
+/datum/wound/facial/eyes/on_mob_loss(mob/living/affected)
+	. = ..()
+	if(!iscarbon(affected))
+		return
+	var/mob/living/carbon/carbon_owner = affected
+	for(var/obj/item/organ/eyes/eye as anything in carbon_owner.eye_organs)
+		eye?.update_eyelid_state()
+
 /datum/wound/facial/eyes/right
 	name = "right eye evisceration"
 	check_name = "<span class='danger'>RIGHT EYE</span>"

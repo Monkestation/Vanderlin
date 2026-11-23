@@ -59,6 +59,7 @@
 	// A abstract eyelid object (yes, really) used to animate blinking
 	var/obj/effect/abstract/eyelid_effect/eyelid
 	var/mutable_appearance/eyelid_overlay
+	var/obj/item/bodypart/head/wound_signal_head
 
 /obj/item/organ/eyes/left
 	zone = BODY_ZONE_PRECISE_L_EYE
@@ -173,14 +174,51 @@
 	var/mob/living/carbon/human/human_owner = owner
 	var/obj/item/bodypart/head/head = human_owner.get_bodypart(BODY_ZONE_HEAD)
 	attach_eyelid(human_owner, head?.skin_tone)
-	animate(eyelid, alpha = human_owner.eyesclosed ? 255 : 0, time = 0, flags = ANIMATION_END_NOW)
+	var/should_close_eyelid = human_owner.eyesclosed || human_owner.stat >= UNCONSCIOUS || has_eye_wound(head)
+	animate(eyelid, alpha = should_close_eyelid ? 255 : 0, time = 0, flags = ANIMATION_END_NOW)
+
+/obj/item/organ/eyes/proc/has_eye_wound(obj/item/bodypart/head/head)
+	if(!head)
+		return FALSE
+	for(var/datum/wound/wound as anything in head.wounds)
+		if(!istype(wound, /datum/wound/facial/eyes) && !istype(wound, /datum/wound/fracture/head/eyes))
+			continue
+		if(zone in wound.viable_zones)
+			return TRUE
+	return FALSE
+
+/obj/item/organ/eyes/proc/register_head_wound_signal(obj/item/bodypart/head/head)
+	if(wound_signal_head == head)
+		return
+	unregister_head_wound_signal()
+	if(!head)
+		return
+	wound_signal_head = head
+	RegisterSignal(head, COMSIG_BODYPART_WOUND_REMOVED, PROC_REF(on_eye_wound_removed))
+
+/obj/item/organ/eyes/proc/unregister_head_wound_signal()
+	if(!wound_signal_head)
+		return
+	UnregisterSignal(wound_signal_head, COMSIG_BODYPART_WOUND_REMOVED)
+	wound_signal_head = null
+
+/obj/item/organ/eyes/proc/on_eye_wound_gained(mob/living/source, datum/wound/wound)
+	SIGNAL_HANDLER
+	if(istype(wound, /datum/wound/facial/eyes) || istype(wound, /datum/wound/fracture/head/eyes))
+		update_eyelid_state()
+
+/obj/item/organ/eyes/proc/on_eye_wound_removed(obj/item/bodypart/head/source, datum/wound/wound)
+	SIGNAL_HANDLER
+	if(istype(wound, /datum/wound/facial/eyes) || istype(wound, /datum/wound/fracture/head/eyes))
+		update_eyelid_state()
 
 /obj/item/organ/eyes/proc/blink_once(duration = BLINK_DURATION)
 	if(!eyelid || !blink_animation)
 		return
 	if(ishuman(owner))
 		var/mob/living/carbon/human/human_owner = owner
-		if(human_owner.eyesclosed)
+		if(human_owner.eyesclosed || human_owner.stat >= UNCONSCIOUS || has_eye_wound(human_owner.get_bodypart(BODY_ZONE_HEAD)))
+			update_eyelid_state()
 			return
 
 	animate(eyelid, alpha = 255, time = 0, flags = ANIMATION_END_NOW)
@@ -237,6 +275,8 @@
 	if(ishuman(organ_owner))
 		var/mob/living/carbon/human/human_owner = organ_owner
 		var/obj/item/bodypart/head/head = human_owner.get_bodypart(BODY_ZONE_HEAD)
+		RegisterSignal(organ_owner, COMSIG_LIVING_WOUND_GAINED, PROC_REF(on_eye_wound_gained))
+		register_head_wound_signal(head)
 		attach_eyelid(human_owner, head?.skin_tone)
 		update_eyelid_state()
 		head?.start_eye_blinking()
@@ -260,6 +300,8 @@
 /obj/item/organ/eyes/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
 	if(ishuman(organ_owner))
 		detach_eyelid(organ_owner)
+		UnregisterSignal(organ_owner, COMSIG_LIVING_WOUND_GAINED)
+	unregister_head_wound_signal()
 
 	. = ..()
 

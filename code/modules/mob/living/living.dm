@@ -2898,6 +2898,11 @@
 
 	if(. <= UNCONSCIOUS || new_stat >= UNCONSCIOUS)
 		update_body() // to update eyes
+		if(iscarbon(src))
+			var/mob/living/carbon/carbon_owner = src
+			for(var/obj/item/organ/eyes/eye as anything in carbon_owner.eye_organs)
+				if(eye)
+					eye.update_eyelid_state()
 
 	switch(.) //Previous stat.
 		if(CONSCIOUS)

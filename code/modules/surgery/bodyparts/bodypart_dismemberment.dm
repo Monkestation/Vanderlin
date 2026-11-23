@@ -226,6 +226,8 @@
 			head.eyes_left = src
 
 	. = ..()
+	if(istype(head) && ishuman(owner))
+		register_head_wound_signal(head)
 	// mob_insert redraws before bodypart_insert moves the eye into the head and I don't want touch that rn
 	if(istype(head) && ishuman(owner) && !(owner.status_flags & BUILDING_ORGANS))
 		var/mob/living/carbon/human/human_owner = owner
@@ -243,6 +245,7 @@
 
 /obj/item/organ/eyes/on_bodypart_remove(obj/item/bodypart/head/head)
 	if(istype(head))
+		unregister_head_wound_signal()
 		if(side == RIGHT_SIDE)
 			head.eyes_right = null
 		if(side == LEFT_SIDE)
