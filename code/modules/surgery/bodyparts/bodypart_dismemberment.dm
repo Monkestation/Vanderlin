@@ -225,7 +225,11 @@
 		if(side == LEFT_SIDE)
 			head.eyes_left = src
 
-	return ..()
+	. = ..()
+	// mob_insert redraws before bodypart_insert moves the eye into the head.
+	if(istype(head) && ishuman(owner) && !(owner.status_flags & BUILDING_ORGANS))
+		var/mob/living/carbon/human/human_owner = owner
+		human_owner.update_body_parts(TRUE)
 
 /obj/item/organ/ears/on_bodypart_insert(obj/item/bodypart/head/head)
 	if(istype(head))

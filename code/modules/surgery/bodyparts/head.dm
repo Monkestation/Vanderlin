@@ -29,6 +29,7 @@
 	var/obj/item/organ/eyes/eyes_left
 	var/obj/item/organ/ears/ears
 	var/obj/item/organ/tongue/tongue
+	var/blink_timer
 
 	//Limb appearance info:
 	var/real_name = "" //Replacement name
@@ -48,6 +49,48 @@
 /obj/item/bodypart/head/Initialize()
 	. = ..()
 	randomize_price()
+
+/obj/item/bodypart/head/Destroy()
+	stop_eye_blinking()
+	return ..()
+
+#define HEAD_BASE_BLINKING_DELAY 5 SECONDS
+#define HEAD_RAND_BLINKING_DELAY 1 SECONDS
+
+/obj/item/bodypart/head/proc/start_eye_blinking()
+	if(blink_timer || !ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/human_owner = owner
+	var/has_blinking_eye = FALSE
+	for(var/obj/item/organ/eyes/eye as anything in human_owner.eye_organs)
+		if(eye?.blink_animation)
+			has_blinking_eye = TRUE
+			break
+
+	if(has_blinking_eye)
+		blink_timer = addtimer(CALLBACK(src, PROC_REF(blink_eyes)), HEAD_BASE_BLINKING_DELAY + rand(0, HEAD_RAND_BLINKING_DELAY), TIMER_STOPPABLE)
+
+/obj/item/bodypart/head/proc/stop_eye_blinking()
+	if(blink_timer)
+		deltimer(blink_timer)
+		blink_timer = null
+
+/obj/item/bodypart/head/proc/blink_eyes()
+	blink_timer = null
+	if(!ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/human_owner = owner
+	if(!HAS_TRAIT(human_owner, TRAIT_PREVENT_BLINKING) && !HAS_TRAIT(human_owner, TRAIT_NO_EYELIDS))
+		for(var/obj/item/organ/eyes/eye as anything in human_owner.eye_organs)
+			if(eye?.blink_animation)
+				eye.blink_once()
+
+	start_eye_blinking()
+
+#undef HEAD_BASE_BLINKING_DELAY
+#undef HEAD_RAND_BLINKING_DELAY
 
 /obj/item/bodypart/head/attackby(obj/item/I, mob/user, list/modifiers)
 	if(length(contents) && I.get_sharpness() && !user.cmode)
@@ -202,7 +245,7 @@
 
 	left_generated_overlays = eyes_left?.generate_body_overlay(left_overlay, src) // this can be null if we don't have eyes.
 
-	if(left_generated_overlays.len == 0)
+	if(LAZYLEN(left_generated_overlays) == 0)
 		. += left_overlay
 	else
 		. += left_generated_overlays
@@ -214,7 +257,7 @@
 
 	right_generated_overlays = eyes_right?.generate_body_overlay(right_overlay, src) // this can be null if we don't have eyes.
 
-	if(right_generated_overlays.len == 0)
+	if(LAZYLEN(right_generated_overlays) == 0)
 		. += right_overlay
 	else
 		. += right_generated_overlays

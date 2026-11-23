@@ -58,6 +58,7 @@
 	var/blink_animation = TRUE
 	// A abstract eyelid object (yes, really) used to animate blinking
 	var/obj/effect/abstract/eyelid_effect/eyelid
+	var/mutable_appearance/eyelid_overlay
 
 /obj/item/organ/eyes/left
 	zone = BODY_ZONE_PRECISE_L_EYE
@@ -65,15 +66,18 @@
 
 /obj/item/organ/eyes/Initialize()
 	. = ..()
+	eye_icon_state = (side == RIGHT_SIDE) ? "eye-right" : "eye-left"
 	if(!owner && !eye_color)
 		eye_color = random_eye_color(TRUE)
 
 	if(blink_animation)
-		eyelid = new /obj/effect/abstract/eyelid_effect(src, eye_icon_state, owner)
+		eyelid = new /obj/effect/abstract/eyelid_effect(src, eye_icon_state)
 
 	update_appearance()
 
 /obj/item/organ/eyes/Destroy()
+	if(ishuman(owner))
+		detach_eyelid(owner)
 	QDEL_NULL(eyelid)
 
 	. = ..()
@@ -111,55 +115,77 @@
 			emissive_iris.color = eye_color || "#FFFFFF"
 			. += emissive_iris
 
-#define BASE_BLINKING_DELAY 5 SECONDS
-#define RAND_BLINKING_DELAY 1 SECONDS
 #define BLINK_DURATION 0.15 SECONDS
-#define BLINK_LOOPS 5
 
 /// Modifies eye overlays to also act as eyelids, both for blinking and for when you're knocked out cold
 /obj/item/organ/eyes/proc/get_eyelid_overlay(image/eye, obj/item/bodypart/head/my_head)
 	var/mob/living/carbon/human/parent = my_head.owner
 
-	if(!istype(parent)) // fuck
+	if(!istype(parent))
 		return
 
 	if(HAS_TRAIT(parent, TRAIT_NO_EYELIDS))
 		return
 
-	/*
-	var/list/base_color = GetColors(my_head.skin_tone)
-	var/eyelid_color = rgb(base_color[1], base_color[2], base_color[3])
-	*/
-	var/eyelid_color = my_head.skin_tone
+	var/base_eyelid_color = my_head.skin_tone
+	var/eyelid_color = get_eyelid_color(base_eyelid_color)
 	// If we're knocked out, just color the eyes
 	if (IS_DEAD_OR_INCAP(parent))
+	if(IS_DEAD_OR_INCAP(parent))
 		eye.color = eyelid_color
 		return
 
 	if (!blink_animation || HAS_TRAIT(parent, TRAIT_PREVENT_BLINKING))
+	if(!blink_animation || HAS_TRAIT(parent, TRAIT_PREVENT_BLINKING))
 		return
 
-	//eyelid.color = eyelid_color
-	eyelid.render_target = "*[REF(parent)]_eyelid"
-	parent.vis_contents += eyelid
-	animate_eyelid(parent)
-	var/mutable_appearance/eyelid_overlay = mutable_appearance(layer = -EYES_LAYER + 0.1)
-	eyelid_overlay.render_source = "*[REF(parent)]_eyelid"
+	attach_eyelid(parent, base_eyelid_color)
 	return eyelid_overlay
 
-/// Animates one eyelid at a time, thanks BYOND and thanks animation chains
-/obj/item/organ/eyes/proc/animate_eyelid(list/anim_times = null)
-	. = list()
-	if(isnull(eyelid)) // Can't blink if we don't have an eyelid
-		return
-	blink()
+/obj/item/organ/eyes/proc/get_eyelid_color(base_color)
+	if(!base_color)
+		return "#0f010c"
+	return BlendRGB(base_color, "#000000", 0.3)
 
-/obj/item/organ/eyes/proc/blink(duration = BLINK_DURATION)
-	if(!blink_animation)
+/obj/item/organ/eyes/proc/attach_eyelid(mob/living/carbon/human/parent, eyelid_color)
+	if(!eyelid || !parent || HAS_TRAIT(parent, TRAIT_NO_EYELIDS))
+		return
+	eyelid.render_target = "*[REF(src)]_eyelid"
+	if(eyelid_color)
+		eyelid.color = get_eyelid_color(eyelid_color)
+	parent.vis_contents |= eyelid
+	if(!eyelid_overlay)
+		eyelid_overlay = mutable_appearance(layer = -EYES_LAYER + 0.1)
+		eyelid_overlay.render_source = eyelid.render_target
+		parent.add_overlay(eyelid_overlay)
+
+/obj/item/organ/eyes/proc/detach_eyelid(mob/living/carbon/human/parent)
+	if(!parent)
+		return
+	if(eyelid)
+		parent.vis_contents -= eyelid
+	if(eyelid_overlay)
+		parent.cut_overlay(eyelid_overlay)
+		eyelid_overlay = null
+
+/obj/item/organ/eyes/proc/update_eyelid_state()
+	if(!eyelid || !ishuman(owner))
 		return
 
-	animate(eyelid, alpha = 0, time = 0)
-	animate(alpha = 255, time = 0)
+	var/mob/living/carbon/human/human_owner = owner
+	var/obj/item/bodypart/head/head = human_owner.get_bodypart(BODY_ZONE_HEAD)
+	attach_eyelid(human_owner, head?.skin_tone)
+	animate(eyelid, alpha = human_owner.eyesclosed ? 255 : 0, time = 0, flags = ANIMATION_END_NOW)
+
+/obj/item/organ/eyes/proc/blink_once(duration = BLINK_DURATION)
+	if(!eyelid || !blink_animation)
+		return
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		if(human_owner.eyesclosed)
+			return
+
+	animate(eyelid, alpha = 255, time = 0, flags = ANIMATION_END_NOW)
 	animate(time = duration)
 	animate(alpha = 0, time = 0)
 
@@ -173,11 +199,9 @@
 /obj/effect/abstract/eyelid_effect/Initialize(mapload, new_state)
 	. = ..()
 	icon_state = new_state
+	alpha = 0
 
-#undef BASE_BLINKING_DELAY
-#undef RAND_BLINKING_DELAY
 #undef BLINK_DURATION
-#undef BLINK_LOOPS
 
 /obj/item/organ/eyes/switch_side(new_side = RIGHT_SIDE)
 	side = new_side
@@ -187,6 +211,8 @@
 	else
 		zone = BODY_ZONE_PRECISE_L_EYE
 		eye_icon_state = "eye-left"
+	if(eyelid)
+		eyelid.icon_state = eye_icon_state
 	if(!owner)
 		current_zone = zone
 	update_appearance()
@@ -210,6 +236,13 @@
 	organ_owner.eye_organs.len = max(length(organ_owner.eye_organs), sight_index)
 	organ_owner.eye_organs[sight_index] = src
 
+	if(ishuman(organ_owner))
+		var/mob/living/carbon/human/human_owner = organ_owner
+		var/obj/item/bodypart/head/head = human_owner.get_bodypart(BODY_ZONE_HEAD)
+		attach_eyelid(human_owner, head?.skin_tone)
+		update_eyelid_state()
+		head?.start_eye_blinking()
+
 	if(!(owner.status_flags & BUILDING_ORGANS))
 		if(ishuman(owner))
 			var/mob/living/carbon/human/HMN = owner
@@ -227,6 +260,9 @@
 		eyet?.update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/organ/eyes/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+	if(ishuman(organ_owner))
+		detach_eyelid(organ_owner)
+
 	. = ..()
 
 	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
