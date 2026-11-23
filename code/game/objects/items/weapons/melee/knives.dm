@@ -411,7 +411,7 @@
 
 /obj/item/weapon/knife/dagger/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/knife/dagger/truesilver
 	name = "truesilver dagger"
@@ -425,7 +425,7 @@
 
 /obj/item/weapon/knife/dagger/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/knife/dagger/truesilver/misericorde
 	name = "truesilver misericorde"
@@ -470,7 +470,7 @@
 
 /obj/item/weapon/knife/dagger/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/weapon/knife/dagger/bloodsteel/relic
 	name = "orphan's dream"
@@ -828,7 +828,7 @@
 
 /obj/item/weapon/knife/throwingknife/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/knife/throwingknife/truesilver
 	name = "truesilver tossblade"
@@ -841,7 +841,7 @@
 
 /obj/item/weapon/knife/throwingknife/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/knife/throwingknife/silver/psydon
 	name = "psydonian tossblade"

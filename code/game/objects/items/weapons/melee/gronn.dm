@@ -73,7 +73,7 @@
 
 /obj/item/weapon/handclaw/steel/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/handclaw/steel/blacksteel
 	name = "blacksteel mantis claws"
@@ -93,7 +93,7 @@
 
 /obj/item/weapon/handclaw/steel/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/weapon/handclaw/steel/bloodsteel/relic
 	name = "\proper regret"

@@ -512,7 +512,7 @@
 
 /obj/item/clothing/head/helmet/visored/knight/owl/lunar/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/head/helmet/visored/knight/aalloy
 	name = "decrepit bascinet"
@@ -733,7 +733,7 @@
 
 /obj/item/clothing/head/helmet/visored/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/head/helmet/visored/silver/armet
 	name = "silver armet"
@@ -742,7 +742,7 @@
 
 /obj/item/clothing/head/helmet/visored/silver/armet/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 //............... Feldshers Cage ............... //
 /obj/item/clothing/head/helmet/feld

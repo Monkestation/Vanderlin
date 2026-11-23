@@ -52,7 +52,7 @@
 				if(mind)
 					INVOKE_ASYNC(mind.sleep_adv, TYPE_PROC_REF(/datum/sleep_adv, advance_cycle))
 					var/can_triumph = TRUE
-					if(mind.antag_datums || mind.antag_datums.len)
+					if(mind.antag_datums || mind.antag_datums?.len)
 						for(var/datum/antagonist/antag_datum in mind.antag_datums)
 							if(antag_datum.blocks_triumphs)
 								can_triumph = FALSE

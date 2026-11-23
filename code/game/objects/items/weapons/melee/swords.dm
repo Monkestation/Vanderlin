@@ -109,7 +109,7 @@
 
 /obj/item/weapon/sword/short/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/short/psy
 	name = "psydonian shortsword"
@@ -199,7 +199,7 @@
 
 /obj/item/weapon/sword/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/truesilver
 	name = "truesilver sword"
@@ -212,7 +212,7 @@
 
 /obj/item/weapon/sword/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/sword/bloodsteel
 	name = "bloodsteel sword"
@@ -228,7 +228,7 @@
 
 /obj/item/weapon/sword/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/weapon/sword/iron
 	desc = "A simple iron sword with a tested edge, sharp and true."
@@ -354,7 +354,7 @@
 
 /obj/item/weapon/sword/sabre/noc/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 //................ Cutlass ............... //
 /obj/item/weapon/sword/sabre/cutlass
@@ -542,7 +542,7 @@
 
 /obj/item/weapon/sword/scimitar/sengese/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/scimitar/wodao
 	name = "steel wo dao"
@@ -751,7 +751,7 @@
 
 /obj/item/weapon/sword/rapier/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/rapier/truesilver
 	name = "truesilver rapier"
@@ -765,7 +765,7 @@
 
 /obj/item/weapon/sword/rapier/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/sword/rapier/eora
 	name = "\proper heartstring"
@@ -800,7 +800,7 @@
 
 /obj/item/weapon/sword/rapier/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 // Hoplite Kophesh
 /obj/item/weapon/sword/khopesh
@@ -1037,7 +1037,7 @@
 
 /obj/item/weapon/sword/long/judgement/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/long/judgement/getonmobprop(tag)
 	. = ..()
@@ -1141,7 +1141,7 @@
 
 /obj/item/weapon/sword/long/forgotten/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/long/ravox
 	name = "duel settler"
@@ -1218,7 +1218,7 @@
 
 /obj/item/weapon/sword/long/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/long/truesilver
 	name = "truesilver longsword"
@@ -1231,7 +1231,7 @@
 
 /obj/item/weapon/sword/long/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/sword/long/oldpsysword //Not attainable
 	name = "old psydonian longsword"
@@ -1508,7 +1508,7 @@
 
 /obj/item/weapon/sword/long/greatsword/claymore/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/long/greatsword/claymore/silver/getonmobprop(tag)
 	. = ..()
@@ -1534,7 +1534,7 @@
 
 /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel/getonmobprop(tag)
 	. = ..()
@@ -1613,7 +1613,7 @@
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab/getonmobprop(tag)
 	. = ..()
@@ -1673,7 +1673,7 @@
 
 /obj/item/weapon/sword/long/exe/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 //................ Terminus Est ............... //
 /obj/item/weapon/sword/long/exe/cloth

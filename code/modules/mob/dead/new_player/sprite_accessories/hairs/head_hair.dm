@@ -1702,3 +1702,7 @@
 /datum/sprite_accessory/hair/head/rakshari/fluffy_tail
 	name = "Fluffy Tail"
 	icon_state = "fluffy_tail"
+
+/datum/sprite_accessory/hair/head/rakshari/youthful_mane
+	name = "Youthful Mane"
+	icon_state = "youthful_mane"

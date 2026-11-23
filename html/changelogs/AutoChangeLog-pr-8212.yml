@@ -1,0 +1,4 @@
+author: "Wyrmtongue336"
+delete-after: True
+changes:
+  - bugfix: "job-banned players can no longer roll for jobs against other players and steal the slot"

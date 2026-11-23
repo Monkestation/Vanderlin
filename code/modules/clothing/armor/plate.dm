@@ -290,7 +290,7 @@
 
 /obj/item/clothing/armor/plate/full/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/armor/plate/fluted
 	name = "fluted half-plate"

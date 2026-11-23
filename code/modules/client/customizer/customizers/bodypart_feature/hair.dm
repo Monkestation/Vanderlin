@@ -424,6 +424,7 @@
 		/datum/sprite_accessory/hair/head/rakshari/high_tail,
 		/datum/sprite_accessory/hair/head/rakshari/doubleknot,
 		/datum/sprite_accessory/hair/head/rakshari/fluffy_tail,
+		/datum/sprite_accessory/hair/head/rakshari/youthful_mane,
 	)
 
 // ===== FACIAL HAIR
