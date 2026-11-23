@@ -226,7 +226,7 @@
 			head.eyes_left = src
 
 	. = ..()
-	// mob_insert redraws before bodypart_insert moves the eye into the head.
+	// mob_insert redraws before bodypart_insert moves the eye into the head and I don't want touch that rn
 	if(istype(head) && ishuman(owner) && !(owner.status_flags & BUILDING_ORGANS))
 		var/mob/living/carbon/human/human_owner = owner
 		human_owner.update_body_parts(TRUE)
