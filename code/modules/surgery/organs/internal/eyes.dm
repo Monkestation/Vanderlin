@@ -130,12 +130,10 @@
 	var/base_eyelid_color = my_head.skin_tone
 	var/eyelid_color = get_eyelid_color(base_eyelid_color)
 	// If we're knocked out, just color the eyes
-	if (IS_DEAD_OR_INCAP(parent))
 	if(IS_DEAD_OR_INCAP(parent))
 		eye.color = eyelid_color
 		return
 
-	if (!blink_animation || HAS_TRAIT(parent, TRAIT_PREVENT_BLINKING))
 	if(!blink_animation || HAS_TRAIT(parent, TRAIT_PREVENT_BLINKING))
 		return
 
