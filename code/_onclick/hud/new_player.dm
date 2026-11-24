@@ -1,6 +1,10 @@
 #define LOBBY_SCREEN_SLIDE_DURATION 1.25 SECONDS
 #define MOVE_AMOUNT 400
 
+/proc/populate_actors()
+	for(var/i in 1 to 40)
+		GLOB.actors_list += "bla bla as meow meow<BR>"
+
 /datum/hud/new_player
 	///Whether the menu is currently on the client's screen or not
 	var/menu_hud_status = TRUE
@@ -212,7 +216,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 		if(!length(player_name))
 			player_name = player.client.key
 
-		var/readied_job = "No high-priority job"
+		var/readied_job = "No role"
 		for(var/job_title in player.client.prefs.job_preferences)
 			if(player.client.prefs.job_preferences[job_title] != JP_HIGH)
 				continue
@@ -235,8 +239,8 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 		readied_names += "[html_encode(player_name)] - [html_encode(readied_job)]"
 
-	var/countdown = SSticker.current_state == GAME_STATE_SETTING_UP ? "Starting..." : DisplayTimeText(SSticker.GetTimeLeft())
-	var/readied_list = "No players readied"
+	var/countdown = SSticker.current_state == GAME_STATE_SETTING_UP ? "Opening the curtains..." : DisplayTimeText(SSticker.GetTimeLeft())
+	var/readied_list = "No puppetmasters."
 	if(length(readied_names))
 		if(length(readied_names) > 12)
 			var/split_index = CEILING(length(readied_names) / 2, 1)
@@ -253,16 +257,19 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 			readied_list = "<div style='display: inline-block; vertical-align: top; width: 210px;'>[left_column_text]</div><div style='display: inline-block; vertical-align: top; width: 210px;'>[right_column_text]</div>"
 		else
 			readied_list = readied_names.Join("<br>")
-	maptext = MAPTEXT("<span style='font-size: 8pt; color: #FFFFFF; text-shadow: 1px 1px 1px #000000;'><b>Players online:</b> [GLOB.clients.len]<br><b>Map:</b> [html_encode(SSmapping.config.map_name)]<br><b>Round starts in:</b> [countdown]<br><br><b>Readied players ([length(readied_names)]):</b><br>[readied_list]</span>")
+	maptext = MAPTEXT("<span style='font-size: 8pt; color: #b8b4b4; text-shadow: 1px 1px 1px #000000;'><b>Puppetmasters in the theatre:</b> [GLOB.clients.len]<br><b>Scenario:</b> [html_encode(SSmapping.config.map_name)]<br><b>Theatre opens in:</b> [countdown]<br><br><b>Readied puppetmasters ([length(readied_names)]):</b><br>[readied_list]</span>")
 
 /atom/movable/screen/lobby/right_chassis/right_chassis_screen/proc/render_actors_list()
 	var/list/actor_entries = list()
 	for(var/actor_id in GLOB.actors_list)
 		actor_entries += GLOB.actors_list[actor_id]
 
-	var/actors = length(actor_entries) ? actor_entries.Join() : "No actors recorded"
+	for(var/i in 1 to 5)
+		actor_entries += "bla bla as meow meow"
+
+	var/actors = length(actor_entries) ? actor_entries.Join() : "No actors."
 	var/round_duration = DisplayTimeText(world.time - SSticker.round_start_time)
-	maptext = MAPTEXT("<span style='font-size: 8pt; color: #FFFFFF; text-shadow: 1px 1px 1px #000000;'><b>Players online:</b> [GLOB.clients.len]<br><b>Map:</b> [html_encode(SSmapping.config.map_name)]<br><b>Round has been going for:</b> [round_duration]<br><b>Actors listed ([length(actor_entries)]):</b><br>[actors]</span>")
+	maptext = MAPTEXT("<span style='font-size: 8pt; color: #b8b4b4; text-shadow: 1px 1px 1px #000000;'><b>Puppetmasters in the theatre:</b> [GLOB.clients.len]<br><b>Scenario:</b> [html_encode(SSmapping.config.map_name)]<br><b>Play duration:</b> [round_duration]<br><b>Actors([length(actor_entries)]):</b><br>[actors]</span>")
 
 /atom/movable/screen/lobby/right_chassis/right_chassis_screen/toggle_right_chassis(datum/source) // dogshit
 	if(collapsed)
@@ -505,13 +512,13 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	. = ..()
 	switch(SSticker.current_state)
 		if(GAME_STATE_PREGAME, GAME_STATE_STARTUP)
-			set_button_status(FALSE)
+			hide_join_button()
 			RegisterSignal(SSticker, COMSIG_TICKER_ENTER_SETTING_UP, PROC_REF(show_join_button))
 		if(GAME_STATE_SETTING_UP)
-			set_button_status(TRUE)
+			show_join_button()
 			RegisterSignal(SSticker, COMSIG_TICKER_ERROR_SETTING_UP, PROC_REF(hide_join_button))
 		else
-			set_button_status(TRUE)
+			show_join_button()
 
 /atom/movable/screen/lobby/button/join/Click(location, control, params)
 	. = ..()
