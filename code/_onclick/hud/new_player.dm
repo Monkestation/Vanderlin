@@ -264,9 +264,6 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	for(var/actor_id in GLOB.actors_list)
 		actor_entries += GLOB.actors_list[actor_id]
 
-	for(var/i in 1 to 5)
-		actor_entries += "bla bla as meow meow"
-
 	var/actors = length(actor_entries) ? actor_entries.Join() : "No actors."
 	var/round_duration = DisplayTimeText(world.time - SSticker.round_start_time)
 	maptext = MAPTEXT("<span style='font-size: 8pt; color: #b8b4b4; text-shadow: 1px 1px 1px #000000;'><b>Puppetmasters in the theatre:</b> [GLOB.clients.len]<br><b>Scenario:</b> [html_encode(SSmapping.config.map_name)]<br><b>Play duration:</b> [round_duration]<br><b>Actors([length(actor_entries)]):</b><br>[actors]</span>")
