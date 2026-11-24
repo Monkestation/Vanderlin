@@ -170,7 +170,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	screen_loc = "WEST:170,TOP:-32"
 	maptext_width = 450
 	maptext_height = 280
-	maptext_x = 20
+	maptext_x = 10
 	maptext_y = 230
 	click_sound = 'sound/lobby/glass_chink.ogg'
 	var/refresh_timer
@@ -550,10 +550,12 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 /atom/movable/screen/lobby/button/join/proc/show_join_button()
 	SIGNAL_HANDLER
+	base_icon_state = "join"
 	set_button_status(TRUE)
 
 /atom/movable/screen/lobby/button/join/proc/hide_join_button()
 	SIGNAL_HANDLER
+	base_icon_state = ""
 	set_button_status(FALSE)
 
 /atom/movable/screen/lobby/button/lore
@@ -601,9 +603,47 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 	SEND_SIGNAL(hud, COMSIG_HUD_RIGHT_CHASSIS_TOGGLED)
 
-	//hud.mymob.client?.view_actors_manifest()
+/atom/movable/screen/lobby/button/link
+	layer = LOBBY_MENU_LAYER
 
+/atom/movable/screen/lobby/button/link/discord
+	icon = 'icons/hud/lobby/discord_icon.dmi'
+	icon_state = "discord"
+	base_icon_state = "discord"
+	screen_loc = "WEST:62,TOP:-59"
+	mouse_opacity = MOUSE_OPACITY_OPAQUE
 
+/atom/movable/screen/lobby/button/link/discord/Click(location, control, params)
+	. = ..()
+	var/discord_url = CONFIG_GET(string/discordinvite) || "https://discord.gg/vanderlin"
+
+	usr << link(discord_url)
+
+/atom/movable/screen/lobby/button/link/github
+	icon = 'icons/hud/lobby/github_icon.dmi'
+	icon_state = "github"
+	base_icon_state = "github"
+	screen_loc = "WEST:78,TOP:-59"
+	mouse_opacity = MOUSE_OPACITY_OPAQUE
+
+/atom/movable/screen/lobby/button/link/github/Click(location, control, params)
+	. = ..()
+	var/githuburl = CONFIG_GET(string/githuburl)
+
+	usr << link(githuburl)
+
+/atom/movable/screen/lobby/button/link/wiki
+	icon = 'icons/hud/lobby/wiki_icon.dmi'
+	icon_state = "wiki"
+	base_icon_state = "wiki"
+	screen_loc = "WEST:94,TOP:-59"
+	mouse_opacity = MOUSE_OPACITY_OPAQUE
+
+/atom/movable/screen/lobby/button/link/wiki/Click(location, control, params)
+	. = ..()
+	var/wikiurl = CONFIG_GET(string/wikiurl)
+
+	usr << link(wikiurl)
 
 #undef LOBBY_SCREEN_SLIDE_DURATION
 #undef MOVE_AMOUNT

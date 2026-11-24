@@ -42,7 +42,7 @@ INITIALIZE_IMMEDIATE(/mob/dead)
 	loc = destination
 	Moved(oldloc, NONE, TRUE)
 
-/mob/dead/new_player/proc/lobby_refresh()
+/mob/dead/new_player/proc/legacy_lobby_refresh()
 	set waitfor = 0
 
 	if(!client)
