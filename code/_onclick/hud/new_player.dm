@@ -35,6 +35,13 @@
 
 	var/atom/movable/screen/lobby/eyes/skull_eyes = locate(/atom/movable/screen/lobby/eyes) in  static_inventory
 
+	var/new_dir = SOUTH
+
+	if(istype(source, /atom/movable/screen/lobby/button/skull))
+		skull_eyes.dir = new_dir // if we look at ourselves - assign south
+		flick("eyes_hovered_over", skull_eyes)
+		return
+
 	var/list/eyes_offsets = screen_loc_to_offset(skull_eyes.screen_loc)
 
 	var/list/source_offsets = screen_loc_to_offset(screen_source.screen_loc)
@@ -52,7 +59,7 @@
 	else if (abs(delta_y) > abs(delta_x) * 2)
 		delta_x = 0
 
-	var/new_dir = get_dir_from_offset(SIGN(delta_x), SIGN(delta_y))
+	new_dir = get_dir_from_offset(SIGN(delta_x), SIGN(delta_y))
 	skull_eyes.dir = new_dir
 
 /datum/hud/new_player/proc/everybody_shakes(datum/source)
@@ -86,6 +93,37 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	var/collapse_y_move = MOVE_AMOUNT
 	/// Does the skull look at this when the mouse hovers over it?
 	var/can_be_looked_at_by_skull = FALSE
+	/// which chink sound to play when clicking this.
+	var/click_sound = 'sound/lobby/metal_chink.ogg'
+
+/atom/movable/screen/lobby/Click(location, control, params)
+	. = ..()
+
+	click_effect(hud.mymob.client, params)
+
+	if(click_sound)
+		hud.mymob.playsound_local(soundin = click_sound, vol = 70, vary = TRUE)
+
+/atom/movable/screen/lobby/proc/click_effect(client/click_client, params)
+	var/list/click_params = params2list(params)
+	var/click_screen_loc = LAZYACCESS(click_params, SCREEN_LOC)
+	if(!click_screen_loc)
+		return
+
+	var/list/click_offset = screen_loc_to_offset(click_screen_loc, click_client.view)
+	var/atom/movable/screen/chink_click_effect/effect = new
+	effect.screen_loc = offset_to_screen_loc(click_offset[1] - 6, click_offset[2] - 6, click_client.view) // I don't even know.
+	click_client.screen += effect
+	animate(effect, alpha = 0, time = 0.5 SECONDS, flags = ANIMATION_PARALLEL)
+	QDEL_IN(effect, 0.6 SECONDS)
+
+/atom/movable/screen/chink_click_effect
+	icon = 'icons/hud/lobby/chink.dmi'
+	icon_state = "chink"
+	plane = LOBBY_MENU_PLANE
+	layer = LOBBY_BOTTOM_BUTTON_LAYER
+	alpha = 200
+	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 
 ///Run sleeping actions after initialize
 /atom/movable/screen/lobby/proc/SlowInit()
@@ -109,6 +147,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	layer = LOBBY_BACKGROUND_LAYER
 	screen_loc = "WEST:10,TOP:145"
 	collapse_y_move = 150
+	click_sound = 'sound/lobby/metal_chink_light.ogg'
 
 /atom/movable/screen/lobby/left_chassis
 	icon = 'icons/hud/lobby/left_chassis.dmi'
@@ -123,6 +162,114 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	layer = LOBBY_BACKGROUND_LAYER - 0.1
 	screen_loc = "WEST:139,TOP:6"
 	var/collapsed = FALSE
+
+/atom/movable/screen/lobby/right_chassis/right_chassis_screen
+	icon = 'icons/hud/lobby/right_chassis_screen.dmi'
+	icon_state = "right_chassis_screen"
+	layer = LOBBY_BELOW_MENU_LAYER
+	screen_loc = "WEST:170,TOP:-32"
+	maptext_width = 450
+	maptext_height = 280
+	maptext_x = 20
+	maptext_y = 230
+	click_sound = 'sound/lobby/glass_chink.ogg'
+	var/refresh_timer
+
+/atom/movable/screen/lobby/right_chassis/right_chassis_screen/Initialize(mapload, datum/hud/hud_owner)
+	. = ..()
+	RegisterSignal(SSdcs, COMSIG_GLOB_PLAYER_READY_TOGGLE, PROC_REF(update_ready_players))
+	RegisterSignal(SSticker, COMSIG_TICKER_ROUND_STARTING, PROC_REF(show_actors_list))
+	update_display()
+	refresh_timer = addtimer(CALLBACK(src, PROC_REF(update_display)), 1 SECONDS, TIMER_LOOP | TIMER_STOPPABLE)
+
+/atom/movable/screen/lobby/right_chassis/right_chassis_screen/Destroy(force)
+	if(refresh_timer)
+		deltimer(refresh_timer)
+	return ..()
+
+/atom/movable/screen/lobby/right_chassis/right_chassis_screen/proc/update_display()
+	if(SSticker.current_state >= GAME_STATE_PLAYING)
+		render_actors_list()
+		return
+
+	render_ready_players()
+
+/atom/movable/screen/lobby/right_chassis/right_chassis_screen/proc/update_ready_players(datum/source)
+	SIGNAL_HANDLER
+	update_display()
+
+/atom/movable/screen/lobby/right_chassis/right_chassis_screen/proc/show_actors_list(datum/source, round_start_time)
+	SIGNAL_HANDLER
+	render_actors_list()
+
+/atom/movable/screen/lobby/right_chassis/right_chassis_screen/proc/render_ready_players()
+	var/list/readied_names = list()
+	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
+		if(!player.client || !player.client.prefs || player.ready != PLAYER_READY_TO_PLAY)
+			continue
+
+		var/player_name = player.client.prefs.read_preference(/datum/preference/text/real_name)
+		if(!length(player_name))
+			player_name = player.client.key
+
+		var/readied_job = "No high-priority job"
+		for(var/job_title in player.client.prefs.job_preferences)
+			if(player.client.prefs.job_preferences[job_title] != JP_HIGH)
+				continue
+
+			var/datum/job/job
+			if(job_title in SSjob.name_occupations)
+				job = SSjob.name_occupations[job_title]
+			if(job)
+				var/list/selected_titles
+				var/list/alt_job_selections = player.client.prefs.alt_job_selections
+				if(alt_job_selections && (job_title in alt_job_selections))
+					selected_titles = alt_job_selections[job_title]
+				if(selected_titles && ("title" in selected_titles))
+					readied_job = selected_titles["title"]
+				else
+					readied_job = player.client.prefs.get_job_display_name(job)
+			else
+				readied_job = job_title
+			break
+
+		readied_names += "[html_encode(player_name)] - [html_encode(readied_job)]"
+
+	var/countdown = SSticker.current_state == GAME_STATE_SETTING_UP ? "Starting..." : DisplayTimeText(SSticker.GetTimeLeft())
+	var/readied_list = "No players readied"
+	if(length(readied_names))
+		if(length(readied_names) > 12)
+			var/split_index = CEILING(length(readied_names) / 2, 1)
+			var/list/left_column = list()
+			var/list/right_column = list()
+			for(var/index in 1 to length(readied_names))
+				if(index <= split_index)
+					left_column += readied_names[index]
+				else
+					right_column += readied_names[index]
+
+			var/left_column_text = left_column.Join("<br>")
+			var/right_column_text = right_column.Join("<br>")
+			readied_list = "<div style='display: inline-block; vertical-align: top; width: 210px;'>[left_column_text]</div><div style='display: inline-block; vertical-align: top; width: 210px;'>[right_column_text]</div>"
+		else
+			readied_list = readied_names.Join("<br>")
+	maptext = MAPTEXT("<span style='font-size: 8pt; color: #FFFFFF; text-shadow: 1px 1px 1px #000000;'><b>Players online:</b> [GLOB.clients.len]<br><b>Map:</b> [html_encode(SSmapping.config.map_name)]<br><b>Round starts in:</b> [countdown]<br><br><b>Readied players ([length(readied_names)]):</b><br>[readied_list]</span>")
+
+/atom/movable/screen/lobby/right_chassis/right_chassis_screen/proc/render_actors_list()
+	var/list/actor_entries = list()
+	for(var/actor_id in GLOB.actors_list)
+		actor_entries += GLOB.actors_list[actor_id]
+
+	var/actors = length(actor_entries) ? actor_entries.Join() : "No actors recorded"
+	var/round_duration = DisplayTimeText(world.time - SSticker.round_start_time)
+	maptext = MAPTEXT("<span style='font-size: 8pt; color: #FFFFFF; text-shadow: 1px 1px 1px #000000;'><b>Players online:</b> [GLOB.clients.len]<br><b>Map:</b> [html_encode(SSmapping.config.map_name)]<br><b>Round has been going for:</b> [round_duration]<br><b>Actors listed ([length(actor_entries)]):</b><br>[actors]</span>")
+
+/atom/movable/screen/lobby/right_chassis/right_chassis_screen/toggle_right_chassis(datum/source) // dogshit
+	if(collapsed)
+		animate(src, transform = matrix(), time = 0.5 SECONDS, easing = CUBIC_EASING|EASE_IN, flags = ANIMATION_PARALLEL)
+	else
+		animate(src, transform = transform.Translate(x = 450, y = 0), time = 0.4 SECONDS, easing = CUBIC_EASING|EASE_IN, flags = ANIMATION_PARALLEL)
+	collapsed = !collapsed
 
 /atom/movable/screen/lobby/right_chassis/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
@@ -147,10 +294,10 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	VAR_PROTECTED/enabled = TRUE
 	///Is the button currently being hovered over with the mouse?
 	var/highlighted = FALSE
-	///Should this button play the select sound?
-	var/select_sound_play = TRUE
 	layer = LOBBY_MENU_LAYER
 	can_be_looked_at_by_skull = TRUE
+
+	click_sound = 'sound/lobby/button_press.ogg'
 
 /atom/movable/screen/lobby/button/Click(location, control, params)
 	if(!usr.client)
@@ -162,8 +309,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 		return
 
 	flick("[base_icon_state]_pressed", src)
-	if(select_sound_play)
-		hud.mymob.playsound_local(soundin = 'sound/menu/button_press.ogg', vol = 50, vary = TRUE)
+
 	return TRUE
 
 /atom/movable/screen/lobby/button/MouseEntered(location, control, params)
@@ -189,14 +335,12 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 /atom/movable/screen/lobby/button/update_icon(updates)
 	. = ..()
-	/*
 	if(!enabled)
 		icon_state = "[base_icon_state]_disabled"
 		return
 	else if(highlighted)
 		icon_state = "[base_icon_state]_highlighted"
 		return
-	*/
 	icon_state = base_icon_state
 
 ///Updates the button's status: TRUE to enable interaction with the button, FALSE to disable
@@ -226,9 +370,11 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 
 /atom/movable/screen/lobby/button/skull/proc/collapse_menu()
 	SEND_SIGNAL(hud, COMSIG_HUD_LOBBY_COLLAPSED)
+	playsound(hud.mymob, 'sound/lobby/metal_chain.ogg', 50, TRUE)
 
 /atom/movable/screen/lobby/button/skull/proc/expand_menu()
 	SEND_SIGNAL(hud, COMSIG_HUD_LOBBY_EXPANDED)
+	playsound(hud.mymob, 'sound/lobby/metal_chain.ogg', 50, TRUE)
 
 /atom/movable/screen/lobby/button/skull/Click(location, control, params)
 	. = ..()
@@ -273,6 +419,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 	icon_state = "ticking"
 	base_icon_state = "ticking"
 	layer = LOBBY_MENU_LAYER
+	click_sound = 'sound/lobby/glass_chink.ogg'
 
 /atom/movable/screen/lobby/button/character_setup/Initialize(mapload, datum/hud/hud_owner)
 	. = ..()
@@ -343,6 +490,7 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/lobby)
 		base_icon_state = "not_ready"
 	update_appearance(UPDATE_ICON)
 	SEND_SIGNAL(hud, COMSIG_HUD_PLAYER_READY_TOGGLE)
+	SEND_GLOBAL_SIGNAL(COMSIG_GLOB_PLAYER_READY_TOGGLE)
 
 ///Shown when the game has started
 /atom/movable/screen/lobby/button/join
