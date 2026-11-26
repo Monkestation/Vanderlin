@@ -68,5 +68,5 @@
 /datum/lock/key/pillory/church
 	lockid_list = list(ACCESS_CHURCH, ACCESS_PRIEST)
 
-/datum/lock/key/pillory/gallowband
-	lockid_list = list(ACCESS_GALLOWBAND_SECURE, ACCESS_GALLOWBAND_HERSIR, ACCESS_GALLOWBAND_GOTHI, ACCESS_GALLOWBAND_WARDEN)
+/datum/lock/key/pillory/forestguard
+	lockid_list = list(ACCESS_FOREST_GUARD_SECURE, ACCESS_FOREST_GUARD_WARDEN)

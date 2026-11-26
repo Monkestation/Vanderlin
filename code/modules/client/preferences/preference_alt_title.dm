@@ -206,7 +206,7 @@
 	var/list/omegalist = list(
 		list("name" = "Nobles", "jobs" = GLOB.noble_courthand_positions),
 		list("name" = "Garrison", "jobs" = GLOB.garrison_positions),
-		list("name" = "Gallowband", "jobs" = GLOB.gallowband_positions),
+		list("name" = "Forest Guard", "jobs" = GLOB.forest_guard_positions),
 		list("name" = "Churchmen", "jobs" = GLOB.church_positions),
 		list("name" = "Peasantry", "jobs" = GLOB.peasant_positions),
 		list("name" = "Apprentices", "jobs" = GLOB.apprentices_positions),

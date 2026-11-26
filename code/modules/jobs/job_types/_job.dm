@@ -280,7 +280,7 @@
 			jobs_i_know |= X
 		for(var/X in GLOB.garrison_positions)
 			jobs_i_know |= X
-		for(var/X in GLOB.gallowband_positions)
+		for(var/X in GLOB.forest_guard_positions)
 			jobs_i_know |= X
 		for(var/X in GLOB.noble_positions)
 			jobs_i_know |= X
@@ -302,7 +302,7 @@
 			jobs_that_know_me |= X
 		for(var/X in GLOB.garrison_positions)
 			jobs_that_know_me |= X
-		for(var/X in GLOB.gallowband_positions)
+		for(var/X in GLOB.forest_guard_positions)
 			jobs_that_know_me |= X
 		for(var/X in GLOB.noble_positions)
 			jobs_that_know_me |= X

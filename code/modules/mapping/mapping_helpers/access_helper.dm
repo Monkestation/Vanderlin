@@ -132,25 +132,19 @@
 /obj/effect/mapping_helpers/access/keyset/garrison/gate
 	accesses = list(ACCESS_GATE)
 
-//Gallowband locks
-/obj/effect/mapping_helpers/access/keyset/gallowband
+//Forest Guard locks
+/obj/effect/mapping_helpers/access/keyset/forest_guard
 	color = "#1b580e"
 	difficulty = LOCK_EXPERT
 
-/obj/effect/mapping_helpers/access/keyset/gallowband/general
-	accesses = list(ACCESS_GALLOWBAND)
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general
+	accesses = list(ACCESS_FOREST_GUARD)
 
-/obj/effect/mapping_helpers/access/keyset/gallowband/secure
-	accesses = list(ACCESS_GALLOWBAND_SECURE)
+/obj/effect/mapping_helpers/access/keyset/forest_guard/secure
+	accesses = list(ACCESS_FOREST_GUARD_SECURE)
 
-/obj/effect/mapping_helpers/access/keyset/gallowband/warden
-	accesses = list(ACCESS_GALLOWBAND_WARDEN)
-
-/obj/effect/mapping_helpers/access/keyset/gallowband/hersir
-	accesses = list(ACCESS_GALLOWBAND_HERSIR)
-
-/obj/effect/mapping_helpers/access/keyset/gallowband/gothi
-	accesses = list(ACCESS_GALLOWBAND_GOTHI)
+/obj/effect/mapping_helpers/access/keyset/forest_guard/warden
+	accesses = list(ACCESS_FOREST_GUARD_WARDEN)
 
 // Church locks
 /obj/effect/mapping_helpers/access/keyset/church

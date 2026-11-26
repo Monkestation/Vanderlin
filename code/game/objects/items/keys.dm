@@ -273,31 +273,19 @@
 	name = "gallowband key"
 	desc = "This key belongs to the Gallowband."
 	icon_state = "rustkey"
-	lockids = list(ACCESS_GALLOWBAND)
+	lockids = list(ACCESS_FOREST_GUARD)
 
 /obj/item/key/gallowband/secure
 	name = "gallowband garrison key"
 	desc = "This key belongs to the Gallowband Garrison."
 	icon_state = "spikekey"
-	lockids = list(ACCESS_GALLOWBAND_SECURE)
-
-/obj/item/key/gallowband/gothi
-	name = "gallowband gothi key"
-	desc = "This key belongs to the Gothi of the Gallowband."
-	icon_state = "birdkey"
-	lockids = list(ACCESS_GALLOWBAND_GOTHI)
-
-/obj/item/key/gallowband/hersir
-	name = "gallowband hersir key"
-	desc = "This key belongs to the Hersir of the Gallowband."
-	icon_state = "toothkey"
-	lockids = list(ACCESS_GALLOWBAND_HERSIR)
+	lockids = list(ACCESS_FOREST_GUARD_SECURE)
 
 /obj/item/key/gallowband/warden
 	name = "gallowband warden key"
 	desc = "This key belongs to the Warden of the Gallowband."
 	icon_state = "hornkey"
-	lockids = list(ACCESS_GALLOWBAND_WARDEN)
+	lockids = list(ACCESS_FOREST_GUARD_WARDEN)
 
 /obj/item/key/bogwitch
 	name = "bog witch key"

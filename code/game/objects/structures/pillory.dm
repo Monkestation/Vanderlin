@@ -30,7 +30,7 @@
 	lock = /datum/lock/key/pillory/church
 
 /obj/structure/pillory/gallowband
-	lock = /datum/lock/key/pillory/gallowband
+	lock = /datum/lock/key/pillory/forestguard
 
 /obj/structure/pillory/gallowband/double
 	icon_state = "pillory_double"

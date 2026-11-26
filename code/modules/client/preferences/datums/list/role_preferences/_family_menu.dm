@@ -63,7 +63,7 @@
 	var/list/all_job_groups = list(
 		list("label" = "Noble", "key" = "noble"),
 		list("label" = "Garrison", "key" = "garrison"),
-		list("label" = "Gallowband", "key" = "gallowband"),
+		list("label" = "Forest Guard", "key" = "forest_guard"),
 		list("label" = "Church", "key" = "church"),
 		list("label" = "Inquisition", "key" = "inquisition"),
 		list("label" = "Serf", "key" = "serf"),
@@ -183,7 +183,7 @@
 			var/key = params["key"]
 			if(!key)
 				return FALSE
-			var/list/valid_keys = list("noble","garrison","gallowband","church","inquisition","serf","company","peasant","apprentice","allmig","youngfolk")
+			var/list/valid_keys = list("noble","garrison","forest_guard","church","inquisition","serf","company","peasant","apprentice","allmig","youngfolk")
 			if(!(key in valid_keys))
 				return FALSE
 			var/list/current = (prefs.read_preference( /datum/preference/list_type/role_setting/picker/family_job_filler) || list())

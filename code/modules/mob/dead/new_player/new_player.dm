@@ -499,7 +499,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 	var/static/list/omegalist = list(
 		GLOB.noble_courthand_positions,
 		GLOB.garrison_positions,
-		GLOB.gallowband_positions,
+		GLOB.forest_guard_positions,
 		GLOB.church_positions,
 		GLOB.peasant_positions,
 		GLOB.apprentices_positions,
@@ -535,7 +535,7 @@ GLOBAL_LIST_INIT(roleplay_readme, file2list("strings/rt/Lore_Primer.txt"))
 					cat_name = "Nobles"
 				if (GARRISON)
 					cat_name = "Garrison"
-				if (GALLOWBAND)
+				if (FOREST_GUARD)
 					cat_name = "Gallowband"
 				if (SERFS)
 					cat_name = "Yeomanry"

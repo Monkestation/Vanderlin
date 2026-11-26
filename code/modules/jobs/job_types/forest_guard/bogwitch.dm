@@ -25,7 +25,7 @@
 	department_flag = OUTSIDERS
 	job_flags = (JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_BOGWITCH
-	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
+	factions = list(FACTION_FOREST_GUARD, FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
 	allowed_races = RACES_PLAYER_ALL
@@ -56,9 +56,9 @@
 		TRAIT_FORAGER,
 		TRAIT_LEGENDARY_ALCHEMIST,
 		TRAIT_STEELHEARTED,
-		TRAIT_GALLOWBAND
+		TRAIT_FOREST_GUARD
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_FOREST_GUARD_SECRETS)
 	selection_color = "#a33096"
 	languages = list(/datum/language/gronnic)
 	book_type = /obj/item/recipe_book/medical
