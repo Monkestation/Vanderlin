@@ -6935,7 +6935,7 @@
 /obj/item/flashlight/flare/torch/lantern,
 /obj/item/clothing/wrists/bracers/iron,
 /obj/item/clothing/shirt/undershirt/colored/black,
-/obj/item/clothing/head/sack,
+/obj/item/clothing/head/inqarticles/blackbag/civilian,
 /turf/open/floor/wood,
 /area/ship/shipbrig)
 "TL" = (

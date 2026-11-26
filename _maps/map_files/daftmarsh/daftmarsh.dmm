@@ -8974,7 +8974,7 @@
 /obj/item/clothing/cloak/raincloak/colored/mortus{
 	name = "cloak"
 	},
-/obj/item/clothing/head/sack,
+/obj/item/clothing/head/inqarticles/blackbag/civilian,
 /obj/structure/closet/crate/crafted_closet,
 /obj/machinery/light/fueled/wallfire/candle{
 	pixel_y = -32
