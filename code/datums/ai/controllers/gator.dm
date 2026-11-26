@@ -114,3 +114,24 @@
 		if(water_target)
 			controller.queue_behavior(/datum/ai_behavior/return_to_water, BB_GATOR_PREFERRED_TERRITORY)
 			return SUBTREE_RETURN_FINISH_PLANNING
+
+/datum/ai_controller/gator/corpse_gator
+	movement_delay = 0.4 SECONDS
+	ai_movement = /datum/ai_movement/hybrid_pathing
+	blackboard = list(
+		BB_TARGETTING_DATUM = new /datum/targetting_datum/basic/allow_items(),
+		BB_GATOR_IN_WATER = FALSE,
+		BB_GATOR_AMBUSH_COOLDOWN = 0,
+		BB_GATOR_DEATH_ROLL_COOLDOWN = 0,
+		BB_GATOR_PREFERRED_TERRITORY = null
+	)
+	planning_subtrees = list(
+		/datum/ai_planning_subtree/simple_find_target/gator,
+		/datum/ai_planning_subtree/find_food/gator,
+		/datum/ai_planning_subtree/gator_behavior,
+		/datum/ai_planning_subtree/basic_melee_attack_subtree/gator_attack/corpse_gator,
+		/datum/ai_planning_subtree/find_dead_bodies,
+		/datum/ai_planning_subtree/eat_dead_body,
+		/datum/ai_planning_subtree/find_water,
+	)
+	idle_behavior = /datum/idle_behavior/gator_idle
