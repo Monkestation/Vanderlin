@@ -109,7 +109,7 @@
 
 /obj/item/weapon/sword/short/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/short/psy
 	name = "psydonian shortsword"
@@ -199,15 +199,20 @@
 
 /obj/item/weapon/sword/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
-/obj/item/weapon/sword/silver/truesilver
+/obj/item/weapon/sword/truesilver
 	name = "truesilver sword"
 	desc = "A gleaming sword forged of truesilver, the perfect implement for keeping the nite safe."
 	icon_state = "lunar_sword"
+	max_blade_int = 240
 	sellprice = 80
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_SWORD * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/sword/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/sword/bloodsteel
 	name = "bloodsteel sword"
@@ -223,7 +228,7 @@
 
 /obj/item/weapon/sword/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/weapon/sword/iron
 	desc = "A simple iron sword with a tested edge, sharp and true."
@@ -349,7 +354,7 @@
 
 /obj/item/weapon/sword/sabre/noc/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 //................ Cutlass ............... //
 /obj/item/weapon/sword/sabre/cutlass
@@ -537,7 +542,7 @@
 
 /obj/item/weapon/sword/scimitar/sengese/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/scimitar/wodao
 	name = "steel wo dao"
@@ -746,15 +751,21 @@
 
 /obj/item/weapon/sword/rapier/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
-/obj/item/weapon/sword/rapier/silver/truesilver
+/obj/item/weapon/sword/rapier/truesilver
 	name = "truesilver rapier"
 	desc = "An elegant rapier forged of truesilver. An aristocratic take on hunting nite creachers."
 	icon_state = "lunar_rapier"
+	force = DAMAGE_SWORD - 2
+	max_blade_int = 240 // .8 of base steel
 	melting_material = /datum/material/truesilver
 	sellprice = 80
 	max_integrity = INTEGRITY_RAPIER * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/sword/rapier/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/sword/rapier/eora
 	name = "\proper heartstring"
@@ -789,7 +800,7 @@
 
 /obj/item/weapon/sword/rapier/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 // Hoplite Kophesh
 /obj/item/weapon/sword/khopesh
@@ -1026,7 +1037,7 @@
 
 /obj/item/weapon/sword/long/judgement/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/long/judgement/getonmobprop(tag)
 	. = ..()
@@ -1130,7 +1141,7 @@
 
 /obj/item/weapon/sword/long/forgotten/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/long/ravox
 	name = "duel settler"
@@ -1207,15 +1218,20 @@
 
 /obj/item/weapon/sword/long/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
-/obj/item/weapon/sword/long/silver/truesilver
+/obj/item/weapon/sword/long/truesilver
 	name = "truesilver longsword"
 	desc = "A finely-crafted longsword forged from truesilver."
 	icon_state = "lunar_longsword"
+	max_blade_int = 240
 	sellprice = 180
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_LONGSWORD * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/sword/long/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/sword/long/oldpsysword //Not attainable
 	name = "old psydonian longsword"
@@ -1492,7 +1508,7 @@
 
 /obj/item/weapon/sword/long/greatsword/claymore/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/long/greatsword/claymore/silver/getonmobprop(tag)
 	. = ..()
@@ -1518,7 +1534,7 @@
 
 /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/weapon/sword/long/greatsword/claymore/bloodsteel/getonmobprop(tag)
 	. = ..()
@@ -1597,7 +1613,7 @@
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/sword/long/greatsword/gutsclaymore/silverslab/getonmobprop(tag)
 	. = ..()
@@ -1657,7 +1673,7 @@
 
 /obj/item/weapon/sword/long/exe/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 //................ Terminus Est ............... //
 /obj/item/weapon/sword/long/exe/cloth
@@ -1836,7 +1852,7 @@
 	icon_state = "eastsword1"
 	force_wielded = DAMAGE_SWORD_WIELD + 3
 	wdefense = GOOD_PARRY
-	possible_item_intents = list(KATANA_ONEHAND, SWORD_STRIKE)
+	possible_item_intents = list(KATANA_CUT, KATANA_ARC, SWORD_STRIKE, PRECISION_CUT)
 	gripped_intents = list(KATANA_CUT, KATANA_ARC, SWORD_STRIKE, PRECISION_CUT)
 	alt_intents = null
 

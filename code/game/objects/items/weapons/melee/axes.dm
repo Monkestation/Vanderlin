@@ -311,7 +311,7 @@
 
 /obj/item/weapon/axe/battle/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 //------------------ Silver Axe ---------------//
 /obj/item/weapon/axe/silver
@@ -328,7 +328,7 @@
 
 /obj/item/weapon/axe/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/axe/silver/getonmobprop(tag)
 	. = ..()
@@ -596,6 +596,10 @@
 	icon_state = "lunar_greataxe"
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_GREATAXE * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/greataxe/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/greataxe/blacksteel
 	name = "blacksteel greataxe"

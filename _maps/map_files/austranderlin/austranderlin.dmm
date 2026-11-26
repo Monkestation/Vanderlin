@@ -378,7 +378,7 @@
 "aks" = (
 /obj/structure/door/viewport,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/metal,
 /area/indoors/town/cell)
 "akv" = (
@@ -4386,7 +4386,7 @@
 	name = "forest warden bedroom"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "caJ" = (
@@ -5980,7 +5980,7 @@
 	dir = 4
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/metal/alt,
 /area/indoors/town/cell)
 "cKd" = (
@@ -7553,7 +7553,7 @@
 "dsU" = (
 /obj/structure/door/window,
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/wood,
 /area/indoors/villagegarrison)
 "dtc" = (
@@ -18483,7 +18483,7 @@
 	name = "forest garrison"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/hexstone,
 /area/indoors/villagegarrison)
 "iDN" = (
@@ -34426,7 +34426,7 @@
 	name = "forest garrison barracks"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "pCb" = (

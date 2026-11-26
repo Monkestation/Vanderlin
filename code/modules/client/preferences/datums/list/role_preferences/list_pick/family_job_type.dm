@@ -9,7 +9,7 @@
 	picker_options = list(
 		"noble",
 		"garrison",
-		"gallowband",
+		"forest_guard",
 		"church",
 		"inquisition",
 		"serf",
@@ -32,7 +32,7 @@
 	var/list/group_options = list(
 		"Noble" = "noble",
 		"Garrison" = "garrison",
-		"Gallowband" = "gallowband",
+		"Forest Guard" = "forest_guard",
 		"Church" = "church",
 		"Inquisition" = "inquisition",
 		"Serf" = "serf",

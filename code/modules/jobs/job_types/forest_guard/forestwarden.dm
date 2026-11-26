@@ -27,9 +27,9 @@
 /datum/job/forestwarden
 	title = JOB_FOREST_WARDEN
 	tutorial = "You were born to the forest - no thorn, tree, nor troll is unknown to you while you stand under these leaves. You alone have proven worthy to lead the Gallowband, and you alone are trusted to hold this weight. Honour the ancient oaths to protect these woods and bear your symbolic helmet with pride. The Hunt calls you, and one dae, you will die in these woods, leaving the mantle to another."
-	department_flag = GALLOWBAND
+	department_flag = FOREST_GUARD
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
-	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
+	factions = list(FACTION_FOREST_GUARD, FACTION_TOWN)
 	total_positions = 1
 	spawn_positions = 1
 	display_order = JDO_FORWARDEN
@@ -63,13 +63,13 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_NOBLE_POWER,
 		TRAIT_FORAGER,
-		TRAIT_GALLOWBAND
+		TRAIT_FOREST_GUARD
 	)
 	verbs = list(
 		/mob/proc/haltyell
 	)
 
-	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_FOREST_GUARD_SECRETS)
 	languages = list(/datum/language/gronnic)
 
 /datum/job/forestwarden/after_spawn(mob/living/carbon/human/spawned, client/player_client)

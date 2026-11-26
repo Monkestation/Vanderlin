@@ -1,10 +1,10 @@
 /datum/job/forestguard //TODO: change all descriptions
 	title = JOB_FOREST_GUARD
 	tutorial = "Decades ago, your ancestors were a mercenary band that earned their keep here. Now you inherit their oaths. Protect the forests from beasts and aid travelers. They will never stay for long, but at least with your battle-family by your side, you will never die alone."
-	department_flag = GALLOWBAND
+	department_flag = FOREST_GUARD
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_FORGUARD
-	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
+	factions = list(FACTION_FOREST_GUARD, FACTION_TOWN)
 	total_positions = 3
 	spawn_positions = 3
 	selection_color = "#0d6929"
@@ -84,7 +84,7 @@
 /datum/job/advclass/forestguard
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 	banned_patrons = list()
-	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
+	factions = list(FACTION_FOREST_GUARD, FACTION_TOWN)
 
 /datum/attribute_holder/sheet/job/forestguard/infantry
 	raw_attribute_list = list(
@@ -127,9 +127,9 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
-		TRAIT_GALLOWBAND
+		TRAIT_FOREST_GUARD
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_FOREST_GUARD_SECRETS)
 
 /datum/outfit/forestguard/infantry
 	name = JOB_FOREST_GUARD_THEGN_RAVAGER
@@ -184,9 +184,9 @@
 	traits = list(
 		TRAIT_DODGEEXPERT,
 		TRAIT_FORAGER,
-		TRAIT_GALLOWBAND
+		TRAIT_FOREST_GUARD
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_FOREST_GUARD_SECRETS)
 
 /datum/outfit/forestguard/ranger
 	name = JOB_FOREST_GUARD_THEGN_RANGER
@@ -242,9 +242,9 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_IGNOREDAMAGESLOWDOWN,
 		TRAIT_FORAGER,
-		TRAIT_GALLOWBAND
+		TRAIT_FOREST_GUARD
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_FOREST_GUARD_SECRETS)
 
 /datum/outfit/forestguard/reaver
 	name = JOB_FOREST_GUARD_THEGN_REAVER
@@ -300,9 +300,9 @@
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
 		TRAIT_CLOSECOMBAT,
-		TRAIT_GALLOWBAND
+		TRAIT_FOREST_GUARD
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_FOREST_GUARD_SECRETS)
 	verbs = list(
 		/mob/proc/haltyell
 	)
@@ -364,9 +364,9 @@
 	traits = list(
 		TRAIT_MEDIUMARMOR,
 		TRAIT_FORAGER,
-		TRAIT_GALLOWBAND
+		TRAIT_FOREST_GUARD
 	)
-	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_GALLOWBAND_SECRETS)
+	mind_traits = list(TRAIT_KNOWBANDITS, TRAIT_FOREST_GUARD_SECRETS)
 	verbs = list(
 		/mob/proc/haltyell
 	)

@@ -1,5 +1,5 @@
-/datum/job/forestguard_classic
-	title = JOB_FOREST_GUARD_CLASSIC
+/datum/job/forestguard
+	title = JOB_FOREST_GUARD
 	tutorial = "You've been keeping the streets clean of neer-do-wells and taffers for most of your time in the garrison.\
 	You've been through the wringer - alongside soldiers in the short-lived Goblin Wars. \
 	The Wars were rough, the few who survived came back changed. Perhaps you'd agree. \
@@ -26,7 +26,7 @@
 	cmode_music = 'sound/music/cmode/garrison/CombatForestGarrison2.ogg'
 	starting_wage = 30
 
-	outfit = /datum/outfit/forestguard_classic
+	outfit = /datum/outfit/forestguard
 	advclass_cat_rolls = list(CTAG_FORGARRISON = 20)
 
 	job_bitflag = BITFLAG_GARRISON
@@ -40,7 +40,7 @@
 		/mob/proc/haltyell
 	)
 
-/datum/outfit/forestguard_classic
+/datum/outfit/forestguard
 	name = "Forest Guard Base"
 	pants = /obj/item/clothing/pants/trou/leather
 	shoes = /obj/item/clothing/shoes/boots/darkboots
@@ -49,17 +49,17 @@
 	belt = /obj/item/storage/belt/leather/fgarrison
 	backl = /obj/item/storage/backpack/satchel
 
-/datum/outfit/forestguard_classic/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
+/datum/outfit/forestguard/pre_equip(mob/living/carbon/human/equipped_human, visuals_only)
 	. = ..()
 	if(SSmapping.config.map_name == "Rosewood")
 		cloak = /obj/item/clothing/cloak/forrestercloak/snow
 	else
 		cloak = /obj/item/clothing/cloak/forrestercloak
 
-/datum/job/advclass/forestguard_classic
+/datum/job/advclass/forestguard
 	exp_types_granted = list(EXP_TYPE_GARRISON, EXP_TYPE_COMBAT)
 
-/datum/attribute_holder/sheet/job/forestguard_classic/infantry
+/datum/attribute_holder/sheet/job/forestguard/infantry
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_ENDURANCE = 3,
@@ -85,15 +85,15 @@
 		/datum/attribute/skill/combat/unarmed = 30
 	)
 
-/datum/job/advclass/forestguard_classic/infantry
+/datum/job/advclass/forestguard/infantry
 	title = "Forest Ravager"
 	tutorial = "In the goblin wars- you alone were deployed to the front lines, caving skulls and chopping legs - saving your family-at-arms through your reckless diversions. With your bloodied axe and flail, every swing and crack was another hatch on your tally. Now that the War's over, even with your indomitable spirit and tireless zeal - let's see if that still rings true."
-	outfit = /datum/outfit/forestguard_classic/infantry
+	outfit = /datum/outfit/forestguard/infantry
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard_classic/infantry
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/infantry
 
 	traits = list(
 		TRAIT_MEDIUMARMOR,
@@ -101,7 +101,7 @@
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 
-/datum/outfit/forestguard_classic/infantry
+/datum/outfit/forestguard/infantry
 	name = "Forest Ravager"
 	head = /obj/item/clothing/head/helmet/medium/decorated/skullmet
 	neck = /obj/item/clothing/neck/gorget
@@ -116,7 +116,7 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1
 	)
 
-/datum/attribute_holder/sheet/job/forestguard_classic/ranger
+/datum/attribute_holder/sheet/job/forestguard/ranger
 	raw_attribute_list = list(
 		STAT_STRENGTH = -3,
 		STAT_ENDURANCE = 1,
@@ -139,15 +139,15 @@
 		/datum/attribute/skill/combat/wrestling = 10
 	)
 
-/datum/job/advclass/forestguard_classic/ranger
+/datum/job/advclass/forestguard/ranger
 	title = "Forest Ranger"
 	tutorial = "In the Wars you were always one of the fastest, as well as one of the frailest in the platoon. Your trusty bow has served you well- of course, none you've set your sights on have found the tongue to disagree."
-	outfit = /datum/outfit/forestguard_classic/ranger
+	outfit = /datum/outfit/forestguard/ranger
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard_classic/ranger
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/ranger
 
 	traits = list(
 		TRAIT_DODGEEXPERT,
@@ -155,7 +155,7 @@
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 
-/datum/outfit/forestguard_classic/ranger
+/datum/outfit/forestguard/ranger
 	name = "Forest Ranger"
 	head = /obj/item/clothing/head/helmet/medium/decorated/skullmet
 	neck = /obj/item/clothing/neck/highcollier
@@ -170,7 +170,7 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1
 	)
 
-/datum/attribute_holder/sheet/job/forestguard_classic/reaver
+/datum/attribute_holder/sheet/job/forestguard/reaver
 	raw_attribute_list = list(
 		STAT_STRENGTH = 2,
 		STAT_CONSTITUTION = 2,
@@ -192,15 +192,15 @@
 		/datum/attribute/skill/combat/axesmaces = 30
 	)
 
-/datum/job/advclass/forestguard_classic/reaver
+/datum/job/advclass/forestguard/reaver
 	title = "Forest Reaver"
 	tutorial = "In the Wars you took an oath to never shy from a hit. Axe in hand, thirsting for blood, you simply enjoy the <i>chaos of battle...</i>"
-	outfit = /datum/outfit/forestguard_classic/reaver
+	outfit = /datum/outfit/forestguard/reaver
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_MIDDLEAGED, AGE_OLD, AGE_IMMORTAL)
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard_classic/reaver
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/reaver
 
 	traits = list(
 		TRAIT_DUALWIELDER,
@@ -210,7 +210,7 @@
 	)
 	mind_traits = list(TRAIT_KNOWBANDITS)
 
-/datum/outfit/forestguard_classic/reaver
+/datum/outfit/forestguard/reaver
 	name = "Forest Reaver"
 	head = /obj/item/clothing/head/helmet/medium/decorated/skullmet
 	neck = /obj/item/clothing/neck/gorget
@@ -225,7 +225,7 @@
 		/obj/item/storage/belt/pouch/coins/poor = 1
 	)
 
-/datum/attribute_holder/sheet/job/forestguard_classic/ruffian
+/datum/attribute_holder/sheet/job/forestguard/ruffian
 	attribute_variance = list(
 		STAT_STRENGTH = list(-1, 1),
 		STAT_INTELLIGENCE = list(-2, 2),
@@ -253,15 +253,15 @@
 		/datum/attribute/skill/craft/tanning = 20
 	)
 
-/datum/job/advclass/forestguard_classic/ruffian
+/datum/job/advclass/forestguard/ruffian
 	title = "Forest Ruffian"
 	tutorial = "For your terrible orphan pranks and antics in the city, you were rounded up by the city's Watch and put to work in the infamous forest garrison. \n\n A ruffian by circumstance, a proven listener of war stories - you might just become more than a troublemaker."
-	outfit = /datum/outfit/forestguard_classic/ruffian
+	outfit = /datum/outfit/forestguard/ruffian
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_ages = list(AGE_CHILD)
 	blacklisted_species = list(SPEC_ID_HALFLING, SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG, SPEC_ID_HALF_SNOW_ELF, SPEC_ID_SNOW_ELF)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard_classic/ruffian
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/ruffian
 
 	traits = list(
 		TRAIT_FORAGER,
@@ -273,7 +273,7 @@
 		/mob/proc/haltyellorphan
 	)
 
-/datum/attribute_holder/sheet/job/forestguard_classic/rat
+/datum/attribute_holder/sheet/job/forestguard/rat
 	attribute_variance = list(
 		STAT_STRENGTH = list(-1, 1),
 		STAT_INTELLIGENCE = list(-2, 2),
@@ -302,14 +302,14 @@
 		/datum/attribute/skill/craft/tanning = 20
 	)
 
-/datum/job/advclass/forestguard_classic/rat
+/datum/job/advclass/forestguard/rat
 	title = "Forest Rat"
 	tutorial = "Fed up with your antics in the city, you were rounded up by the city's Watch and put to work in the infamous forest garrison. \n\n Who knows, even despite your disadvantages, - you might just become more than a troublemaker."
-	outfit = /datum/outfit/forestguard_classic/ruffian
+	outfit = /datum/outfit/forestguard/ruffian
 	category_tags = list(CTAG_FORGARRISON)
 	allowed_races = list(SPEC_ID_KOBOLD, SPEC_ID_KOBOLD_FORMIKRAG)
 
-	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard_classic/rat
+	attribute_sheet = /datum/attribute_holder/sheet/job/forestguard/rat
 
 	traits = list(
 		TRAIT_FORAGER,
@@ -322,7 +322,7 @@
 	)
 
 
-/datum/outfit/forestguard_classic/ruffian
+/datum/outfit/forestguard/ruffian
 	name = "Forest Ruffian"
 	head = /obj/item/clothing/head/helmet/medium/decorated/rousskullmet
 	neck = /obj/item/clothing/neck/highcollier

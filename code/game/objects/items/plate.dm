@@ -219,7 +219,7 @@
 
 /obj/item/plate/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/plate/gold
 	name = "gold platter"

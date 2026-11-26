@@ -54,7 +54,7 @@
 
 /obj/item/reagent_containers/glass/cup/silver/Initialize(mapload, vol)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/reagent_containers/glass/cup/golden
 	name = "golden goblet"

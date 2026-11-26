@@ -4,7 +4,7 @@
 	/// Daily wage paid out at dawn, set per job type. 0 = unpaid.
 	var/starting_wage = 0
 	/// The name of the job , used for preferences, bans and more. Make sure you know what you're doing before changing this.
-	var/title = "NOPE"
+	var/title = JOB_INVALID
 	///List of viable alternative jobs
 	var/list/alt_titles
 	/// Alternative titles selectable for female-presenting mobs
@@ -280,7 +280,7 @@
 			jobs_i_know |= X
 		for(var/X in GLOB.garrison_positions)
 			jobs_i_know |= X
-		for(var/X in GLOB.gallowband_positions)
+		for(var/X in GLOB.forest_guard_positions)
 			jobs_i_know |= X
 		for(var/X in GLOB.noble_positions)
 			jobs_i_know |= X
@@ -302,7 +302,7 @@
 			jobs_that_know_me |= X
 		for(var/X in GLOB.garrison_positions)
 			jobs_that_know_me |= X
-		for(var/X in GLOB.gallowband_positions)
+		for(var/X in GLOB.forest_guard_positions)
 			jobs_that_know_me |= X
 		for(var/X in GLOB.noble_positions)
 			jobs_that_know_me |= X

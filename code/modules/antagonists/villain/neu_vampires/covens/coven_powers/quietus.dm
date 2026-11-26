@@ -249,9 +249,10 @@
 		return
 	. = ..()
 	for(var/atom/I in lastattacker.get_equipped_items())
-		var/datum/enchantment/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/silver)
-		if(ench)
-			to_chat(owner, span_danger("Silver dispells the curse! They are protected for now."))
+		var/datum/enchantment/on_hit/silver/ench = SSenchantment.get_enchantment(I, /datum/enchantment/on_hit/silver)
+		var/datum/enchantment/on_hit/truesilver/t_ench = SSenchantment.get_enchantment(I, /datum/enchantment/on_hit/truesilver)
+		if(ench || t_ench)
+			to_chat(owner, span_danger("[t_ench ? "Truesilver" : "Silver"] dispells the curse! They are protected for now."))
 			return
 
 	lastattacker.adjust_stamina(80)

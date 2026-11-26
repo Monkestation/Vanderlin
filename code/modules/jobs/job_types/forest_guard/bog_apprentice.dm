@@ -19,11 +19,11 @@
 
 /datum/job/bog_apprentice
 	title = JOB_BOGWITCH_APP
-	tutorial = "You were dragged out of the mud by the Bog Witch on one of their expeditions- shivering, hungry, and alone. They taught you the ways of the Great Hunt, and in the eclectic methods of the their practice. You work yourself to the bone to tend the crops, stir the cauldrons, and run messages between the Witch and the Gallowband. When the Witch dies, you alone will carry the tradition forward."
-	department_flag = GALLOWBAND
+	tutorial = "You were dragged out of the mud by the Bog Witch on one of their expeditions- shivering, hungry, and alone. They taught you the ways of the Great Hunt, and in the eclectic methods of the their practice. You work yourself to the bone to tend the crops, stir the cauldrons, and run messages between the Witch and the Forest Guard. When the Witch dies, you alone will carry the tradition forward."
+	department_flag = FOREST_GUARD
 	job_flags = (JOB_ANNOUNCE_ARRIVAL | JOB_SHOW_IN_CREDITS | JOB_EQUIP_RANK | JOB_NEW_PLAYER_JOINABLE)
 	display_order = JDO_BOGWITCH_APP
-	factions = list(FACTION_GALLOWBAND, FACTION_TOWN)
+	factions = list(FACTION_FOREST_GUARD, FACTION_TOWN)
 	total_positions = 0
 	spawn_positions = 0
 	allowed_races = RACES_PLAYER_ALL
@@ -49,9 +49,9 @@
 	traits = list(
 		TRAIT_FORAGER,
 		TRAIT_STEELHEARTED,
-		TRAIT_GALLOWBAND
+		TRAIT_FOREST_GUARD
 	)
-	mind_traits = list(TRAIT_GALLOWBAND_SECRETS)
+	mind_traits = list(TRAIT_FOREST_GUARD_SECRETS)
 	languages = list(/datum/language/gronnic)
 
 /datum/job/bog_apprentice/after_spawn(mob/living/carbon/human/spawned, client/player_client)

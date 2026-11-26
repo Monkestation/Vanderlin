@@ -25,7 +25,7 @@
 
 /obj/item/ore/dust/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/ore/dust/iron
 	name = "iron dust"
@@ -54,4 +54,4 @@
 
 /obj/item/ore/dust/bloodstone/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)

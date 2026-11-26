@@ -131,7 +131,7 @@
 	pants = /obj/item/clothing/pants/tights/colored/black
 	shoes = /obj/item/clothing/shoes/shortboots
 	belt = /obj/item/storage/belt/leather/plaquesilver
-	beltl = /obj/item/weapon/flail/silver/noc
+	beltl = /obj/item/weapon/flail/noc
 	beltr = /obj/item/storage/keyring/oracle
 	armor = /obj/item/clothing/shirt/robe/noc
 	backl = /obj/item/storage/backpack/satchel

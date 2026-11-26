@@ -12,3 +12,10 @@
 	ui_category = "Special Items"
 	triumph_cost_permanent = 100000 //Intentional impractical cost.
 	loadout_flags = LOADOUT_FLAG_NO_RENT
+
+/datum/loadout_item/cabbit_scroll
+	name = "Cabbit Scroll"
+	item_path = /obj/item/book/granter/spell/magick/cabbit
+	ui_category = "Special Items"
+	triumph_cost_permanent = 100000 //Intentional impractical cost.
+	loadout_flags = LOADOUT_FLAG_NO_RENT

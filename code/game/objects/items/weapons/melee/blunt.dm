@@ -320,7 +320,7 @@
 
 /obj/item/weapon/mace/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 /obj/item/weapon/mace/bloodsteel/barmace
 	name = "bloodsteel bar mace"
@@ -578,7 +578,7 @@
 
 /obj/item/weapon/mace/goden/steel/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 //................ Psydonian Grand Mace ............... //
 /obj/item/weapon/mace/goden/psydon
@@ -598,7 +598,7 @@
 
 /obj/item/weapon/mace/goden/psydon/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/mace/goden/psydon/getonmobprop(tag)
 	. = ..()
@@ -732,15 +732,19 @@
 
 /obj/item/weapon/mace/warhammer/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
-/obj/item/weapon/mace/warhammer/silver/truesilver
+/obj/item/weapon/mace/warhammer/truesilver
 	name = "truesilver warhammer"
 	desc = "A warhammer forged from truesilver, made to fight nite-creachers in the Moon Prince's name. Living or dead, none that walk the nite to prey on the innocent can withstand it."
 	icon_state = "lunar_hammer"
 	sellprice = 120
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_WARHAMMER * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/mace/warhammer/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/mace/warhammer/blacksteel
 	name = "blacksteel warhammer"
@@ -765,7 +769,7 @@
 
 /obj/item/weapon/mace/warhammer/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 //................ Elven Club  ............... //
 
@@ -823,7 +827,7 @@
 
 /obj/item/weapon/mace/elvenclub/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 //................ Silver ............... //
 /obj/item/weapon/mace/silver
@@ -842,7 +846,7 @@
 
 /obj/item/weapon/mace/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/mace/silver/barmace
 	name = "silver bar mace"
@@ -852,12 +856,20 @@
 	force_wielded = DAMAGE_MACE_WIELD + 2
 	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_SILVER
 
-/obj/item/weapon/mace/silver/barmace/lunar
+/obj/item/weapon/mace/truesilver_barmace
 	name = "truesilver bar mace"
 	desc = "A long flanged mace of pure truesilver, a flashing symbol of the Moon Prince's will."
 	icon_state = "lunar_barmace"
 	melting_material = /datum/material/truesilver
+	force = DAMAGE_MACE + 2
+	force_wielded = DAMAGE_MACE_WIELD + 2
+	wdefense = GOOD_PARRY
+	wbalance = DODGE_CHANCE_NORMAL
 	max_integrity = INTEGRITY_BARMACE * INTEGRITY_MOD_TRUESILVER
+
+/obj/item/weapon/mace/truesilver_barmace/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/mace/rungu/silver
 	name = "silver rungu"
@@ -874,7 +886,7 @@
 
 /obj/item/weapon/mace/rungu/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/mace/gada
 	name = "regal gada"
@@ -889,7 +901,7 @@
 
 /obj/item/weapon/mace/gada/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 //................ BRONZE ............... //
 

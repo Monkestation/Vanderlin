@@ -21,8 +21,8 @@
 		return "inquisition"
 	if(department_flag & UNDEAD)
 		return "undead"
-	if(department_flag & GALLOWBAND)
-		return "gallowband"
+	if(department_flag & FOREST_GUARD)
+		return "forest guard"
 	if(department_flag & ADMIN_SPECIAL)
 		return "special"
 	return null
