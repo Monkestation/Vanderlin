@@ -165,6 +165,7 @@
 				victim.CombatKnockdown(30)
 			visible_message("<span class='danger'>[src] crashes into [victim]!",\
 				"<span class='danger'>I violently crash into [victim]!</span>")
+			CombatKnockdown(1.5 SECONDS)
 		playsound(src, "genblunt", 100, TRUE)
 
 //Throwing stuff
