@@ -91,6 +91,7 @@
 			spawned.cmode_music = 'sound/music/cmode/antag/CombatBandit1.ogg'
 		if(/datum/patron/inhumen/baotha)
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/knives, 40, 40)
+			spawned.clamped_adjust_skill_level(/datum/attribute/skill/combat/polearms, 35, 35)
 			spawned.clamped_adjust_skill_level(/datum/attribute/skill/craft/alchemy, 20, 20)
 			ADD_TRAIT(spawned, TRAIT_DUALWIELDER, TRAIT_GENERIC)
 			spawned.cmode_music = 'sound/music/cmode/antag/CombatBaotha.ogg'
@@ -227,6 +228,7 @@
 			shoes = /obj/item/clothing/shoes/boots/armor/inhumen/baotha
 			beltr = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
 			beltl = /obj/item/weapon/knife/dagger/steel/inhumen/baotha
+			backr = /obj/item/weapon/polearm/spear/steel/baotha
 		if(/datum/patron/psydon,  /datum/patron/psydon/extremist)
 			wrists = /obj/item/clothing/neck/psycross/gold
 			armor = /obj/item/clothing/armor/cuirass/fluted
