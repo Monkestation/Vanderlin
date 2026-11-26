@@ -1,5 +1,4 @@
 {
-	
     "spellcheck": {
 		" u ": " you ",
 		" i ": " I ",
@@ -20,8 +19,6 @@
 		"Cant ": "Can't ",
 		"dont ": "don't ",
 		"Dont ": "Don't ",
-		"wont ": "won't ",
-		"Wont ": "Won't ",
 		" arent ": " aren't ",
 		"Arent ": "Aren't ",
 		"shouldnt ": "shouldn't ",
@@ -30,6 +27,4 @@
 		"Youre ": "You're ",
 		"theyre": "they're"
 		}
-	
-	
 }
