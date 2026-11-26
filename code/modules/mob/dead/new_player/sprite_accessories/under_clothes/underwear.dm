@@ -45,6 +45,12 @@
 	specuse = RACES_UNDERWEAR_FEMALE
 	roundstart = FALSE
 
+/datum/sprite_accessory/underwear/female_dwarf_leotard
+	name = "FemLeotardD"
+	icon_state = "female_dwarf_leotard"
+	gender = FEMALE
+	specuse = list(SPEC_ID_DWARF, SPEC_ID_HALFLING)
+
 //For use on Younglings
 /datum/sprite_accessory/underwear/child
 	name = "Youngling"
