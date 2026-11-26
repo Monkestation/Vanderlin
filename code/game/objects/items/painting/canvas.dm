@@ -35,6 +35,7 @@
 	var/current_overlays = 0
 
 	var/loads_painting = FALSE
+	var/savefile
 
 /obj/item/canvas/Initialize()
 	. = ..()
@@ -49,12 +50,27 @@
 	underlays += base
 	icon = draw
 	RegisterSignal(src, COMSIG_MOVABLE_TURF_ENTERED, PROC_REF(remove_showers))
+	if(savefile)
+		load_drawing()
 
 /obj/item/canvas/Destroy()
 	for(var/mob/mob as anything in showers)
 		remove_shower(mob)
 	QDEL_NULL(used_canvas)
 	return ..()
+
+/obj/item/canvas/proc/load_drawing()
+	var/list/data = SSpaintings.file2playerpainting(savefile)
+	icon = icon(SSpaintings.get_painting_filename(savefile))
+	var/icon/new_icon = getFlatIcon(src)
+	new_icon.Scale(160, 160)
+	used_canvas.draw.Blend(new_icon, ICON_OVERLAY)
+	used_canvas.icon = used_canvas.draw
+	title = data["painting_title"]
+	author = data["author"]
+	author_ckey = data["author_ckey"]
+	name = title
+	desc = "Painted by: [author]."
 
 /obj/item/canvas/attack_hand(mob/user)
 	. = ..()
@@ -144,6 +160,7 @@
 		current_overlays = 0
 		cut_overlays()
 		overlay_to_index = list()
+	loads_painting = TRUE
 
 /obj/item/canvas/proc/upload_painting()
 	if(!author || !title)
@@ -154,6 +171,13 @@
 		icon = rendered
 		SSpaintings.playerpainting2file(icon, title, author, author_ckey, canvas_size, src)
 		SSpaintings.update_paintings()
+		savefile = url_encode(title)
+
+/obj/item/canvas/get_save_vars()
+	. = ..()
+	. -= NAMEOF(src, icon)
+	. -= NAMEOF(src, icon_state)
+	. += NAMEOF(src, savefile)
 
 /atom/movable/screen/canvas
 	icon = 'icons/paint_supplies/canvas/canvas_32x32.dmi'
