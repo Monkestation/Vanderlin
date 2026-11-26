@@ -381,9 +381,12 @@
 			if(islist(value))
 				value = pick(value)
 
-			message = replacetextEx(message, " [uppertext(key)]", " [uppertext(value)]")
-			message = replacetextEx(message, " [capitalize(key)]", " [capitalize(value)]")
-			message = replacetextEx(message, " [key]", " [value]")
+			var/key_text = (copytext(key, 1, 2) == " ") ? copytext(key, 2) : key
+			var/value_text = (copytext(value, 1, 2) == " ") ? copytext(value, 2) : value
+			if(uppertext(key_text) != capitalize(key_text))
+				message = replacetextEx(message, " [uppertext(key_text)]", " [uppertext(value_text)]")
+			message = replacetextEx(message, " [capitalize(key_text)]", " [capitalize(value_text)]")
+			message = replacetextEx(message, " [key_text]", " [value_text]")
 
 
 		var/mob/living/carbon/human/human
@@ -459,9 +462,12 @@
 						if(islist(value))
 							value = pick(value)
 
-						message = replacetextEx(message, " [uppertext(key)]", " [uppertext(value)]")
-						message = replacetextEx(message, " [capitalize(key)]", " [capitalize(value)]")
-						message = replacetextEx(message, " [key]", " [value]")
+						var/key_text = (copytext(key, 1, 2) == " ") ? copytext(key, 2) : key
+						var/value_text = (copytext(value, 1, 2) == " ") ? copytext(value, 2) : value
+						if(uppertext(key_text) != capitalize(key_text))
+							message = replacetextEx(message, " [uppertext(key_text)]", " [uppertext(value_text)]")
+						message = replacetextEx(message, " [capitalize(key_text)]", " [capitalize(value_text)]")
+						message = replacetextEx(message, " [key_text]", " [value_text]")
 
 	speech_args[SPEECH_MESSAGE] = trim(message)
 
