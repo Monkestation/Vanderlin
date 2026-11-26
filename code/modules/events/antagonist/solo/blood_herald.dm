@@ -40,8 +40,6 @@
 		/datum/job/advclass/combat/assassin,
 		/datum/job/tomb_warden,
 		/datum/job/forestwarden,
-		/datum/job/forestenforcer,
-		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 		/datum/job/admin/oracle,

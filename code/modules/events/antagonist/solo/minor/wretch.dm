@@ -26,8 +26,6 @@
 		/datum/job/gmtemplar,
 		/datum/job/templar,
 		/datum/job/forestwarden,
-		/datum/job/forestenforcer,
-		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/admin/oracle,
 		/datum/job/admin/lunar_champion,
