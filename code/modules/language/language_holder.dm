@@ -11,6 +11,7 @@
 	/// This is primarily for adding mutual understanding from other sources at runtime.
 	/// Format: list(language_type = list(source = % of understanding))
 	var/list/other_mutual_understanding
+	var/accent = ACCENT_DEFAULT
 
 /datum/language_holder/New(owner)
 	src.owner = owner

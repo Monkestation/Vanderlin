@@ -2,7 +2,7 @@
 	savefile_key = "selected_accent"
 	savefile_identifier = PREF_CHARACTER
 	category = "character"
-	should_apply = FALSE
+	post_mind_pref = TRUE
 
 /datum/preference/choiced/selected_accent/init_possible_values(datum/preferences/prefs)
 	return GLOB.accent_list
@@ -11,13 +11,15 @@
 	return ACCENT_DEFAULT
 
 /datum/preference/choiced/selected_accent/apply_to_human(mob/living/carbon/human/H, value, datum/preferences/prefs)
-	H.accent = value
+	var/datum/language_holder/lh = H.get_language_holder()
+	if(lh)
+		lh.accent = value
 
 /datum/preference/choiced/selected_accent/handle_link(datum/preferences/prefs, mob/user)
 	var/list/available = list(ACCENT_DEFAULT)
 
-	if(length(prefs.pref_species.multiple_accents))
-		for(var/accent_name in prefs.pref_species.multiple_accents)
+	if(length(prefs.pref_species.selectable_accents))
+		for(var/accent_name in prefs.pref_species.selectable_accents)
 			available |= accent_name
 
 	var/culture_type = prefs.read_preference(/datum/preference/choiced/culture)

@@ -75,11 +75,9 @@
 		devotion.make_acolyte()
 		devotion.grant_to(spawned)
 
-	var/datum/species/species = spawned.dna?.species
-	if(species)
-		species.native_language = "Osslandic"
-		species.accent_language = species.get_accent(species.native_language)
-
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_OSSLAND
 
 /datum/outfit/forestpreacher
 	name = JOB_FOREST_PREACHER

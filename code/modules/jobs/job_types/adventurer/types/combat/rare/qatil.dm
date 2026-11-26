@@ -52,14 +52,9 @@
 	if(!species)
 		return
 
-	if(species.id == SPEC_ID_HUMEN)
-		species.native_language = "Zalad"
-		species.accent_language = species.get_accent(species.native_language)
-
-	else if((species.id == SPEC_ID_HALF_ELF) || (species.id == SPEC_ID_HALF_DROW))
-		if(species.native_language == "Imperial")
-			species.native_language = "Zalad"
-			species.accent_language = species.get_accent(species.native_language)
+	var/datum/language_holder/lh = spawned.get_language_holder()
+	if(lh)
+		lh.accent = ACCENT_ZALAD
 
 /datum/outfit/adventurer/qatil
 	name = "Qatil (Adventurer)"
