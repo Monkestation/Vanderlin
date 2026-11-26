@@ -10,7 +10,7 @@
 	charge_required = FALSE
 	cooldown_time = 3 SECONDS
 	spell_cost = 0
-	check_flags = NONE
+	check_flags = AB_CHECK_CONSCIOUS
 
 	/// tracking if we're already in basic stasis
 	var/stasis = FALSE

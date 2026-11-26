@@ -153,6 +153,8 @@
 		"Amazonite" = SKIN_COLOR_AMAZONITE, // - (Turquoise)
 		"Limestone" = SKIN_COLOR_LIMESTONE, // - (Tan)
 		"Zinc" = SKIN_COLOR_ZINC, // - (Light aqua)
+		"Iron" = SKIN_COLOR_IRON_A, // - (Grey)
+		"Clay" = SKIN_COLOR_CLAY, // - (Reddish Orange)
 	))
 
 /datum/species/aasimar/get_hairc_list()
