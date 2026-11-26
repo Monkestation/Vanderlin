@@ -158,9 +158,9 @@
 
 /mob/living/proc/get_shield_block_chance()
 	var/obj/item/weapon/shield = get_active_held_item()
-	if(!(istype(offhand, /obj/item/weapon/shield) || istype(offhand, /obj/item/weapon/scabbard/blackmeadow)))
+	if(!(istype(shield)))
 		shield = get_inactive_held_item()
-	if(!(istype(offhand, /obj/item/weapon/shield) || istype(offhand, /obj/item/weapon/scabbard/blackmeadow)))
+	if(!(istype(shield)))
 		return 0
 
 	var/shield_skill = max(1, GET_MOB_SKILL_VALUE_OLD(src, /datum/attribute/skill/combat/shields))
@@ -183,7 +183,7 @@
 	if(mainhand && mainhand.can_parry)
 		mainhand_defense += GET_MOB_SKILL_VALUE(src, mainhand.associated_skill)
 		// If mainhand is a shield we keep it.
-		if(istype(offhand, /obj/item/weapon/shield) || istype(offhand, /obj/item/weapon/scabbard/blackmeadow))
+		if(istype(mainhand, /obj/item/weapon/shield) || istype(mainhand, /obj/item/weapon/scabbard/blackmeadow))
 			force_shield = TRUE
 			used_weapon = mainhand
 
@@ -258,7 +258,7 @@
 
 	// Defender skill gain
 	if((body_position != LYING_DOWN) && attacker_skill && (defender_skill < attacker_skill - SKILL_RANK_NOVICE))
-		if(used_weapon == get_inactive_held_item() && istype(offhand, /obj/item/weapon/shield) || istype(offhand, /obj/item/weapon/scabbard/blackmeadow))
+		if(used_weapon == get_inactive_held_item() && istype(used_weapon, /obj/item/weapon/shield))
 			var/boon = H.get_learning_boon(/obj/item/weapon/shield)
 			H.adjust_experience(/datum/attribute/skill/combat/shields, max(round(GET_MOB_ATTRIBUTE_VALUE(H, STAT_INTELLIGENCE) * boon), 0), FALSE)
 		else
