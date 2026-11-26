@@ -68,12 +68,11 @@
 
 /datum/hud/new_player/proc/everybody_shakes(datum/source)
 	SIGNAL_HANDLER
-	//var/list/hud_elements = subtypesof(/atom/movable/screen/lobby)
 
 	for(var/atom/movable/screen/element in static_inventory)
 		animate(element, element.transform = element.transform.Translate(x = -2 - rand(2, 4), y = 2 + rand(1, 3)), time = 6, easing = ELASTIC_EASING, flags = ANIMATION_PARALLEL)
-		animate(element, element.transform = element.transform.Translate(x = -1 - rand(2, 4), y = 2 + rand(1, 3)), time = 3, easing = ELASTIC_EASING)
-		animate(element, element.transform = matrix(), time = 3, easing = ELASTIC_EASING)
+		animate(element.transform = element.transform.Translate(x = -1 - rand(2, 4), y = 2 + rand(1, 3)), time = 3, easing = ELASTIC_EASING)
+		animate(element.transform = matrix(), time = 3, easing = ELASTIC_EASING)
 
 	shake_camera(mymob, 4, 2)
 
