@@ -31,7 +31,6 @@
 	},
 /area/indoors/mountains/anvil/upperkeep)
 "aag" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -251,7 +250,6 @@
 /turf/open/floor/grass/yel,
 /area/indoors/town/church/inquisition)
 "aaY" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/herringbone,
@@ -389,7 +387,6 @@
 /area/indoors/mountains/anvil/upperkeep)
 "abB" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil/S,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -462,7 +459,7 @@
 /turf/open/floor/church/rust,
 /area/indoors/mountains/anvil/keep)
 "abV" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/cobblerock/alt,
@@ -805,7 +802,6 @@
 /turf/open/floor/herringbone,
 /area/under/mountains/anvil/upper)
 "adG" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -917,7 +913,7 @@
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
 "aef" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "aeg" = (
@@ -999,7 +995,6 @@
 /turf/open/floor/concrete,
 /area/under/mountains/anvil/lower)
 "aez" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -1468,7 +1463,6 @@
 /area/under/mountains/anvil/upper)
 "agZ" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "ahb" = (
@@ -2029,12 +2023,11 @@
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
 "ajE" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "ajF" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
@@ -2202,7 +2195,6 @@
 /turf/open/floor/hexstone,
 /area/indoors/mountains/anvil/keep)
 "akv" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/stone,
@@ -2663,7 +2655,6 @@
 	},
 /area/indoors/mountains/anvil/upperkeep)
 "amJ" = (
-/obj/effect/decal/cleanable/sigil/W,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -2806,7 +2797,6 @@
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "anw" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -3326,7 +3316,6 @@
 /turf/open/floor/church/rust,
 /area/indoors/mountains/anvil/keep)
 "aqf" = (
-/obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
 "aqg" = (
@@ -3526,7 +3515,6 @@
 /turf/open/floor/plasteel/maniac/damaged,
 /area/under/mountains/anvil/lower)
 "ari" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -3803,7 +3791,7 @@
 /turf/open/floor/cobble/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "asE" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/blood/gibs/up,
 /turf/open/floor/herringbone,
@@ -3842,7 +3830,6 @@
 /turf/open/floor/tile/diamond/blue,
 /area/under/mountains/anvil/upper)
 "asS" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
@@ -3862,7 +3849,6 @@
 /turf/open/floor/cobblerock,
 /area/indoors/mountains/anvil/upperkeep)
 "asY" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -4219,7 +4205,6 @@
 /turf/open/floor/concrete,
 /area/indoors/mountains/anvil/keep)
 "auv" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -5688,7 +5673,6 @@
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "aAY" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -5953,7 +5937,6 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
 "aCh" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
@@ -6823,7 +6806,6 @@
 /turf/open/openspace,
 /area/indoors/town/church/inquisition)
 "aGE" = (
-/obj/effect/decal/cleanable/sigil/W,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
 "aGG" = (
@@ -7523,7 +7505,6 @@
 /turf/open/floor/carpet/royalblack,
 /area/indoors/town/church/inquisition)
 "aKl" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -7695,7 +7676,6 @@
 /turf/open/floor/cobblerock/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "aLa" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -7851,7 +7831,6 @@
 /turf/open/floor/churchbrick,
 /area/indoors/town/church/inquisition)
 "aLQ" = (
-/obj/effect/decal/cleanable/sigil/W,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -7896,7 +7875,6 @@
 /turf/open/floor/church/purple,
 /area/indoors/town/church/inquisition)
 "aLY" = (
-/obj/effect/decal/cleanable/sigil/SW,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
 "aLZ" = (
@@ -8374,7 +8352,7 @@
 /turf/open/floor/naturalstone,
 /area/under/mountains/anvil/lower)
 "aOo" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
@@ -8766,7 +8744,6 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aQo" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -8782,7 +8759,6 @@
 /turf/open/floor/cobble/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "aQs" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -8890,7 +8866,6 @@
 /area/under/mountains/anvil/upper)
 "aQT" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil/SW,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -9004,7 +8979,6 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/keep)
 "aRu" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
@@ -9506,7 +9480,7 @@
 /turf/open/floor/hexstone,
 /area/indoors/mountains/anvil/keep)
 "aTH" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -9529,7 +9503,6 @@
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
 "aTP" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
 "aTR" = (
@@ -9629,7 +9602,6 @@
 /area/indoors/town/church/inquisition)
 "aUl" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "aUm" = (
@@ -9962,7 +9934,6 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/vault)
 "aWb" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "aWc" = (
@@ -10001,7 +9972,6 @@
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
 "aWm" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
@@ -10226,7 +10196,6 @@
 /turf/open/floor/cobble/snow,
 /area/outdoors/mountains/anvil/snowyforest)
 "aXo" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
@@ -10572,7 +10541,6 @@
 /turf/open/floor/cobble/snow,
 /area/under/mountains/anvil/upper)
 "aYN" = (
-/obj/effect/decal/cleanable/sigil/S,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
 "aYO" = (
@@ -10670,7 +10638,7 @@
 /turf/open/floor/plasteel/maniac,
 /area/under/mountains/anvil/lower)
 "aZv" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
@@ -11630,7 +11598,6 @@
 /turf/open/floor/blocks/newstone/alt,
 /area/indoors/mountains/anvil/upperkeep)
 "eKS" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
@@ -12312,7 +12279,6 @@
 /turf/open/floor/dirt,
 /area/indoors/mountains/anvil/keep)
 "itM" = (
-/obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/vault)
@@ -12434,7 +12400,6 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "jgd" = (
-/obj/effect/decal/cleanable/sigil/N,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
 "jie" = (
@@ -12516,7 +12481,6 @@
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
 "jCJ" = (
-/obj/effect/decal/cleanable/sigil/W,
 /obj/effect/decal/cleanable/blood/tracks{
 	dir = 10
 	},
@@ -13603,7 +13567,6 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "pSL" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/blood/gibs/core,
 /turf/open/floor/cobblerock/alt,
@@ -13718,7 +13681,6 @@
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
 "qyf" = (
-/obj/effect/decal/cleanable/sigil/E,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -13792,7 +13754,6 @@
 /turf/open/floor/herringbone,
 /area/indoors/town/clocktower)
 "qXg" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
 "qYf" = (
@@ -13800,7 +13761,6 @@
 /turf/open/floor/tile/masonic/single,
 /area/indoors/mountains/anvil/upperkeep)
 "qZn" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/vault)
@@ -14353,7 +14313,6 @@
 	},
 /area/indoors/mountains/anvil/upperkeep)
 "tZk" = (
-/obj/effect/decal/cleanable/sigil/SE,
 /obj/effect/decal/cleanable/debris/stone,
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
@@ -14639,7 +14598,7 @@
 /turf/open/floor/herringbone,
 /area/indoors/mountains/anvil/upperkeep)
 "voh" = (
-/obj/effect/decal/cleanable/sigil,
+/obj/effect/decal/cleanable/ritual_rune/arcyne/crafting/sigil,
 /obj/effect/decal/cleanable/blood/gibs/torso,
 /turf/open/floor/cobblerock/alt,
 /area/indoors/mountains/anvil/upperkeep)
@@ -14703,7 +14662,6 @@
 	},
 /area/indoors/mountains/anvil/upperkeep)
 "vEe" = (
-/obj/effect/decal/cleanable/sigil/NE,
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/blood/footprints,
 /turf/open/floor/cobblerock/alt,
@@ -15108,7 +15066,6 @@
 /turf/open/floor/cobble,
 /area/indoors/mountains/anvil/upperkeep)
 "yeU" = (
-/obj/effect/decal/cleanable/sigil/NW,
 /obj/effect/decal/cleanable/debris/stone,
 /obj/effect/decal/cleanable/blood/tracks,
 /turf/open/floor/cobblerock/alt,
