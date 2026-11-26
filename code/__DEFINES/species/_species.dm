@@ -79,7 +79,6 @@
 	SPEC_ID_ORC,\
 	SPEC_ID_ZIZOMBIE,\
 	SPEC_ID_HUMAN_SPACE,\
-	SPEC_ID_DWARF_ORC,\
 )
 
 /// Species where males get underwear, identical to above, elves handled seperately
