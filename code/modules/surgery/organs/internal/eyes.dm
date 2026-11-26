@@ -54,6 +54,12 @@
 	var/overlay_ignore_lighting = FALSE
 	/// Glows with emissive in the dark
 	var/glows = FALSE
+	/// Does this eye have blinking animations?
+	var/blink_animation = TRUE
+	// A abstract eyelid object (yes, really) used to animate blinking
+	var/obj/effect/abstract/eyelid_effect/eyelid
+	var/mutable_appearance/eyelid_overlay
+	var/obj/item/bodypart/head/wound_signal_head
 
 /obj/item/organ/eyes/left
 	zone = BODY_ZONE_PRECISE_L_EYE
@@ -61,9 +67,43 @@
 
 /obj/item/organ/eyes/Initialize()
 	. = ..()
+	eye_icon_state = (side == RIGHT_SIDE) ? "eye-right" : "eye-left"
 	if(!owner && !eye_color)
 		eye_color = random_eye_color(TRUE)
+
+	if(blink_animation)
+		eyelid = new /obj/effect/abstract/eyelid_effect(src, eye_icon_state)
+
 	update_appearance()
+
+/obj/item/organ/eyes/Destroy()
+	if(ishuman(owner))
+		detach_eyelid(owner)
+	QDEL_NULL(eyelid)
+
+	. = ..()
+
+/obj/item/organ/eyes/proc/generate_body_overlay(image/overlay, obj/item/bodypart/head/my_head)
+	. = list()
+
+	var/generated_eye = generate_eye_overlay(overlay, my_head)
+	if(!generated_eye)
+		return
+
+	. += generated_eye
+
+	. += get_eyelid_overlay(overlay, my_head)
+
+/obj/item/organ/eyes/proc/generate_eye_overlay(image/overlay, obj/item/bodypart/head/my_head)
+	. = overlay
+
+	if(!eye_icon_state)
+		return
+
+	overlay.icon_state = eye_icon_state
+
+	if(eye_color)
+		overlay.color = eye_color
 
 /obj/item/organ/eyes/update_overlays()
 	. = ..()
@@ -76,6 +116,129 @@
 			emissive_iris.color = eye_color || "#FFFFFF"
 			. += emissive_iris
 
+#define BLINK_DURATION 0.15 SECONDS
+
+/// Modifies eye overlays to also act as eyelids, both for blinking and for when you're knocked out cold
+/obj/item/organ/eyes/proc/get_eyelid_overlay(image/eye, obj/item/bodypart/head/my_head)
+	var/mob/living/carbon/human/parent = my_head.owner
+
+	if(!istype(parent))
+		return
+
+	if(HAS_TRAIT(parent, TRAIT_NO_EYELIDS))
+		return
+
+	var/base_eyelid_color = my_head.skin_tone
+	var/eyelid_color = get_eyelid_color(base_eyelid_color)
+	// If we're knocked out, just color the eyes
+	if(IS_DEAD_OR_INCAP(parent))
+		eye.color = eyelid_color
+		return
+
+	if(!blink_animation || HAS_TRAIT(parent, TRAIT_PREVENT_BLINKING))
+		return
+
+	attach_eyelid(parent, base_eyelid_color)
+	return eyelid_overlay
+
+/obj/item/organ/eyes/proc/get_eyelid_color(base_color)
+	if(!base_color)
+		return "#0f010c"
+	return BlendRGB(base_color, "#000000", 0.3)
+
+/obj/item/organ/eyes/proc/attach_eyelid(mob/living/carbon/human/parent, eyelid_color)
+	if(!eyelid || !parent || HAS_TRAIT(parent, TRAIT_NO_EYELIDS))
+		return
+	eyelid.render_target = "*[REF(src)]_eyelid"
+	if(eyelid_color)
+		eyelid.color = get_eyelid_color(eyelid_color)
+	parent.vis_contents |= eyelid
+	if(!eyelid_overlay)
+		eyelid_overlay = mutable_appearance(layer = -EYES_LAYER + 0.1)
+		eyelid_overlay.render_source = eyelid.render_target
+		parent.add_overlay(eyelid_overlay)
+
+/obj/item/organ/eyes/proc/detach_eyelid(mob/living/carbon/human/parent)
+	if(!parent)
+		return
+	if(eyelid)
+		parent.vis_contents -= eyelid
+	if(eyelid_overlay)
+		parent.cut_overlay(eyelid_overlay)
+		eyelid_overlay = null
+
+/obj/item/organ/eyes/proc/update_eyelid_state()
+	if(!eyelid || !ishuman(owner))
+		return
+
+	var/mob/living/carbon/human/human_owner = owner
+	var/obj/item/bodypart/head/head = human_owner.get_bodypart(BODY_ZONE_HEAD)
+	attach_eyelid(human_owner, head?.skin_tone)
+	var/should_close_eyelid = human_owner.eyesclosed || human_owner.stat >= UNCONSCIOUS || has_eye_wound(head)
+	animate(eyelid, alpha = should_close_eyelid ? 255 : 0, time = 0, flags = ANIMATION_END_NOW)
+
+/obj/item/organ/eyes/proc/has_eye_wound(obj/item/bodypart/head/head)
+	if(!head)
+		return FALSE
+	for(var/datum/wound/wound as anything in head.wounds)
+		if(!istype(wound, /datum/wound/facial/eyes) && !istype(wound, /datum/wound/fracture/head/eyes))
+			continue
+		if(zone in wound.viable_zones)
+			return TRUE
+	return FALSE
+
+/obj/item/organ/eyes/proc/register_head_wound_signal(obj/item/bodypart/head/head)
+	if(wound_signal_head == head)
+		return
+	unregister_head_wound_signal()
+	if(!head)
+		return
+	wound_signal_head = head
+	RegisterSignal(head, COMSIG_BODYPART_WOUND_REMOVED, PROC_REF(on_eye_wound_removed))
+
+/obj/item/organ/eyes/proc/unregister_head_wound_signal()
+	if(!wound_signal_head)
+		return
+	UnregisterSignal(wound_signal_head, COMSIG_BODYPART_WOUND_REMOVED)
+	wound_signal_head = null
+
+/obj/item/organ/eyes/proc/on_eye_wound_gained(mob/living/source, datum/wound/wound)
+	SIGNAL_HANDLER
+	if(istype(wound, /datum/wound/facial/eyes) || istype(wound, /datum/wound/fracture/head/eyes))
+		update_eyelid_state()
+
+/obj/item/organ/eyes/proc/on_eye_wound_removed(obj/item/bodypart/head/source, datum/wound/wound)
+	SIGNAL_HANDLER
+	if(istype(wound, /datum/wound/facial/eyes) || istype(wound, /datum/wound/fracture/head/eyes))
+		update_eyelid_state()
+
+/obj/item/organ/eyes/proc/blink_once(duration = BLINK_DURATION)
+	if(!eyelid || !blink_animation)
+		return
+	if(ishuman(owner))
+		var/mob/living/carbon/human/human_owner = owner
+		if(human_owner.eyesclosed || human_owner.stat >= UNCONSCIOUS || has_eye_wound(human_owner.get_bodypart(BODY_ZONE_HEAD)))
+			update_eyelid_state()
+			return
+
+	animate(eyelid, alpha = 255, time = 0, flags = ANIMATION_END_NOW)
+	animate(time = duration)
+	animate(alpha = 0, time = 0)
+
+/obj/effect/abstract/eyelid_effect
+	name = "eyelid"
+	icon = 'icons/mob/human_face.dmi'
+	layer = -EYES_LAYER + 0.1
+	vis_flags = VIS_INHERIT_DIR | VIS_INHERIT_PLANE | VIS_INHERIT_ID
+	color = "#0f010c"
+
+/obj/effect/abstract/eyelid_effect/Initialize(mapload, new_state)
+	. = ..()
+	icon_state = new_state
+	alpha = 0
+
+#undef BLINK_DURATION
+
 /obj/item/organ/eyes/switch_side(new_side = RIGHT_SIDE)
 	side = new_side
 	if(side == RIGHT_SIDE)
@@ -84,6 +247,8 @@
 	else
 		zone = BODY_ZONE_PRECISE_L_EYE
 		eye_icon_state = "eye-left"
+	if(eyelid)
+		eyelid.icon_state = eye_icon_state
 	if(!owner)
 		current_zone = zone
 	update_appearance()
@@ -107,6 +272,15 @@
 	organ_owner.eye_organs.len = max(length(organ_owner.eye_organs), sight_index)
 	organ_owner.eye_organs[sight_index] = src
 
+	if(ishuman(organ_owner))
+		var/mob/living/carbon/human/human_owner = organ_owner
+		var/obj/item/bodypart/head/head = human_owner.get_bodypart(BODY_ZONE_HEAD)
+		RegisterSignal(organ_owner, COMSIG_LIVING_WOUND_GAINED, PROC_REF(on_eye_wound_gained))
+		register_head_wound_signal(head)
+		attach_eyelid(human_owner, head?.skin_tone)
+		update_eyelid_state()
+		head?.start_eye_blinking()
+
 	if(!(owner.status_flags & BUILDING_ORGANS))
 		if(ishuman(owner))
 			var/mob/living/carbon/human/HMN = owner
@@ -124,6 +298,11 @@
 		eyet?.update_appearance(UPDATE_OVERLAYS)
 
 /obj/item/organ/eyes/on_mob_remove(mob/living/carbon/organ_owner, special, movement_flags)
+	if(ishuman(organ_owner))
+		detach_eyelid(organ_owner)
+		UnregisterSignal(organ_owner, COMSIG_LIVING_WOUND_GAINED)
+	unregister_head_wound_signal()
+
 	. = ..()
 
 	var/sight_index = (side == RIGHT_SIDE) ? 2 : 1
