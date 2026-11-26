@@ -439,7 +439,7 @@
 		I.modify_max_integrity(I.max_integrity + added_int)
 		I.name = "blessed [I.name]"
 		if(silver)
-			I.enchant(/datum/enchantment/silver)
+			I.enchant(/datum/enchantment/on_hit/silver)
 
 /obj/effect/temp_visual/censer_dust
 	icon = 'icons/effects/effects.dmi'

@@ -41,7 +41,7 @@
 /obj/item/statue/silver/Initialize()
 	. = ..()
 	icon_state = "sstatue[pick(1,2)]"
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /*	..................   Misc   ................... */
 /obj/item/statue/silver/gnome

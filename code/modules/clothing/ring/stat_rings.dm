@@ -157,7 +157,7 @@
 
 /obj/item/clothing/ring/statdorpel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/ring/statdorpel/equipped(mob/living/user, slot)
 	. = ..()

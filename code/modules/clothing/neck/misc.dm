@@ -26,7 +26,7 @@
 
 /obj/item/clothing/neck/silveramulet/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/clothing/neck/jadeamulet
 	name = "joapstone amulet"
@@ -538,7 +538,7 @@
 
 /obj/item/clothing/neck/gorget/silver/Initialize()
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/collar_detonator
 	name = "collar detonator"

@@ -1,4 +1,37 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"aa" = (
+/obj/structure/gate/bars{
+	redstone_id = "FireGate1";
+	name = "Hell gate"
+	},
+/turf/open/floor/cobble,
+/area/under/tomb)
+"ab" = (
+/obj/structure/rack/shelf/biggest,
+/obj/effect/dungeon_loot_spawner/medium,
+/turf/open/floor/cobble,
+/area/under/tomb/indoors)
+"ac" = (
+/obj/effect/dungeon_loot_spawner/low/chest,
+/turf/open/floor/cobble,
+/area/under/tomb/indoors)
+"ad" = (
+/mob/living/carbon/human/species/skeleton/npc/ambush,
+/turf/open/floor/cobble,
+/area/under/tomb/indoors)
+"af" = (
+/obj/structure/bed,
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/herringbone,
+/area/under/tomb/indoors)
+"ag" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/turf/open/floor/herringbone,
+/area/under/tomb/indoors)
+"ah" = (
+/obj/effect/dungeon_loot_spawner/medium/chest,
+/turf/open/floor/herringbone,
+/area/under/tomb/indoors)
 "ai" = (
 /obj/structure/bars/pipe{
 	dir = 9;
@@ -7,6 +40,31 @@
 	},
 /turf/open/openspace,
 /area/under/tomb)
+"aj" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_strength = 18;
+	base_speed = 15;
+	base_constitution = 16;
+	base_endurance = 16;
+	base_fortune = 14;
+	candodge = 0
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/cloak/captain,
+/obj/item/clothing/shoes/boots/armor,
+/obj/item/clothing/gloves/plate,
+/obj/item/weapon/sword/long/exe/cloth,
+/obj/item/clothing/neck/chaincoif,
+/obj/item/clothing/armor/brigandine,
+/obj/item/clothing/pants/platelegs,
+/obj/item/clothing/head/helmet/heavy/ravoxhelm,
+/turf/open/floor/cobblerock,
+/area/under/tomb/wilds)
+"ak" = (
+/obj/structure/table/wood/fancy/purple,
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/carpet/purple,
+/area/under/tomb/indoors)
 "al" = (
 /obj/structure/bars/pipe{
 	dir = 8;
@@ -15,12 +73,39 @@
 	},
 /turf/open/openspace,
 /area/under/tomb/indoors/royal)
+"am" = (
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/herringbone,
+/area/under/tomb/indoors)
+"an" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/obj/effect/dungeon_loot_spawner/low/chest,
+/turf/open/floor/herringbone,
+/area/under/tomb/indoors)
+"ao" = (
+/obj/effect/dungeon_loot_spawner/low/chest,
+/turf/open/floor/tile/masonic/inverted,
+/area/under/tomb/indoors)
 "ap" = (
 /obj/effect/mapping_helpers/secret_door_creator{
 	redstone_id = "CastleSecret3"
 	},
 /turf/closed/wall/mineral/craftstone,
 /area/under/tomb/indoors/royal)
+"aq" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/structure/spider/stickyweb,
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb/indoors)
+"ar" = (
+/obj/effect/dungeon_loot_spawner/medium/chest,
+/turf/open/floor/blocks,
+/area/under/tomb/indoors)
+"as" = (
+/obj/structure/table/vtable/v2,
+/turf/open/floor/carpet/red,
+/area/under/tomb/indoors)
 "at" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/twig,
@@ -32,6 +117,33 @@
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
+"aw" = (
+/obj/structure/winch{
+	redstone_id = "FireGate3"
+	},
+/turf/open/floor/cobblerock,
+/area/under/tomb/wilds)
+"ax" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_strength = 15;
+	base_speed = 15;
+	base_constitution = 14;
+	base_endurance = 14;
+	base_fortune = 12;
+	candodge = 0;
+	real_name = "Undead Knight"
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/weapon/shield/tower/buckleriron,
+/obj/item/weapon/sword/rapier/dec,
+/obj/item/clothing/cloak/half/guardsecond,
+/obj/item/clothing/gloves/plate,
+/obj/item/clothing/armor/plate,
+/obj/item/clothing/pants/platelegs,
+/obj/item/clothing/shoes/boots/armor,
+/obj/item/clothing/head/helmet/visored/hounskull,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/royal)
 "ay" = (
 /obj/structure/door/stone,
 /turf/open/floor/herringbone,
@@ -41,11 +153,57 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
+"aA" = (
+/obj/structure/table/vtable/v2,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/royal)
+"aB" = (
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/cloak/half/guardsecond,
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_strength = 15;
+	base_speed = 15;
+	base_constitution = 14;
+	base_endurance = 14;
+	base_fortune = 12;
+	candodge = 0;
+	real_name = "Undead Knight"
+	},
+/obj/item/clothing/armor/plate/full,
+/obj/item/clothing/gloves/plate,
+/obj/item/clothing/pants/platelegs,
+/obj/item/clothing/shoes/boots/armor,
+/obj/item/clothing/head/helmet/heavy/decorated/hounskull,
+/obj/item/weapon/mace/warhammer/steel,
+/obj/item/weapon/shield/tower/buckleriron,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/royal)
 "aC" = (
-/obj/structure/table/stone_small,
-/obj/item/statue/gold,
-/turf/open/floor/tile/masonic/single,
-/area/under/tomb/indoors/magic)
+/obj/structure/gate/bars{
+	redstone_id = "FireGate3"
+	},
+/turf/open/floor/cobble,
+/area/under/tomb/indoors/royal)
+"aD" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_strength = 15;
+	base_speed = 15;
+	base_constitution = 14;
+	base_endurance = 14;
+	base_fortune = 12;
+	candodge = 0;
+	real_name = "Undead Knight"
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/cloak/half/guardsecond,
+/obj/item/clothing/armor/plate/full,
+/obj/item/clothing/gloves/plate,
+/obj/item/clothing/pants/platelegs,
+/obj/item/clothing/shoes/boots/armor,
+/obj/item/clothing/head/helmet/heavy/decorated/bucket,
+/obj/item/weapon/sword/long,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/royal)
 "aE" = (
 /obj/structure/bars/pipe{
 	dir = 10;
@@ -65,26 +223,203 @@
 	},
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors)
+"aG" = (
+/obj/effect/dungeon_loot_spawner/medium,
+/turf/open/floor/churchmarble,
+/area/under/tomb/indoors/royal)
+"aH" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_strength = 15;
+	base_speed = 15;
+	base_constitution = 14;
+	base_endurance = 14;
+	base_fortune = 12;
+	candodge = 0;
+	real_name = "Undead Knight"
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/structure/fluff/railing/border,
+/obj/item/weapon/polearm/halberd/bardiche,
+/obj/item/clothing/cloak/half/colored/red,
+/obj/item/clothing/armor/plate/full,
+/obj/item/clothing/gloves/plate,
+/obj/item/clothing/pants/platelegs,
+/obj/item/clothing/shoes/boots/armor,
+/obj/item/clothing/head/helmet/heavy/decorated/bascinet,
+/turf/open/floor/churchbrick,
+/area/under/tomb/indoors/royal)
+"aI" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	real_name = "Forgotten King";
+	base_speed = 20;
+	base_perception = 12;
+	base_intelligence = 18;
+	base_fortune = 20;
+	base_strength = 12;
+	base_endurance = 12;
+	base_constitution = 12
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/shirt/tunic/noblecoat,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/item/clothing/gloves/leather/masterwork,
+/obj/item/weapon/polearm/woodstaff/quarterstaff/steel,
+/obj/item/clothing/cloak/lordcloak/ladycloak,
+/obj/item/clothing/head/crown/circlet/shell,
+/turf/open/floor/carpet/lord/center,
+/area/under/tomb/indoors/royal)
 "aJ" = (
 /obj/structure/stairs{
 	dir = 8
 	},
 /turf/open/floor/tile/masonic/inverted,
 /area/under/tomb/indoors)
+"aK" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_strength = 15;
+	base_speed = 15;
+	base_constitution = 14;
+	base_endurance = 14;
+	base_fortune = 12;
+	candodge = 0;
+	real_name = "Undead Knight"
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/structure/fluff/railing/border,
+/obj/item/clothing/cloak/half/vet,
+/obj/item/clothing/armor/plate/full,
+/obj/item/clothing/gloves/plate,
+/obj/item/clothing/pants/platelegs,
+/obj/item/clothing/shoes/boots/armor,
+/obj/item/clothing/head/helmet/heavy/decorated/knight,
+/obj/item/weapon/hammer/sledgehammer/war,
+/turf/open/floor/churchbrick,
+/area/under/tomb/indoors/royal)
 "aL" = (
 /obj/structure/door/violet,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
+"aM" = (
+/obj/structure/fluff/walldeco/painting/castle{
+	pixel_x = 0;
+	pixel_y = 33
+	},
+/obj/structure/table/wood/fancy,
+/obj/effect/dungeon_loot_spawner/high,
+/turf/open/floor/churchbrick,
+/area/under/tomb/indoors/royal)
 "aN" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb)
+"aO" = (
+/obj/structure/rack/shelf/biggest,
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/tile,
+/area/under/tomb/indoors/royal)
+"aP" = (
+/obj/item/clothing/head/crown/circlet/sleepless,
+/turf/open/floor/tile,
+/area/under/tomb/indoors/royal)
+"aQ" = (
+/obj/structure/rack/shelf/biggest,
+/obj/effect/dungeon_loot_spawner/high,
+/turf/open/floor/tile,
+/area/under/tomb/indoors/royal)
+"aR" = (
+/obj/structure/table/wood/plain_alt,
+/turf/open/floor/hexstone,
+/area/under/tomb/indoors)
+"aS" = (
+/obj/structure/rack/shelf/biggest,
+/turf/open/floor/tile,
+/area/under/tomb/indoors/royal)
+"aT" = (
+/obj/structure/closet/crate/chest/crate,
+/turf/open/floor/hexstone,
+/area/under/tomb/indoors)
+"aU" = (
+/obj/effect/dungeon_loot_spawner/medium/chest,
+/turf/open/floor/tile,
+/area/under/tomb/indoors/royal)
+"aV" = (
+/obj/structure/fluff/walldeco/bigpainting/lake,
+/obj/structure/table/wood/fancy/royalblack,
+/obj/item/clothing/head/crown/circlet/sleepless{
+	pixel_y = 8;
+	pixel_x = 0
+	},
+/turf/open/floor/tile,
+/area/under/tomb/indoors/royal)
 "aW" = (
 /obj/structure/window/stained,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors/royal)
+"aX" = (
+/obj/structure/closet/crate/chest/gold,
+/turf/open/floor/tile,
+/area/under/tomb/indoors/royal)
+"aY" = (
+/obj/structure/flora/grass/bush,
+/obj/structure/closet/dirthole/closed,
+/obj/item/alch/golddust,
+/obj/item/alch/golddust,
+/obj/item/ore/gold,
+/obj/item/ore/gold,
+/obj/effect/mapping_helpers/structure/grave_spawner/t3,
+/turf/open/floor/dirt,
+/area/under/tomb/wilds)
+"aZ" = (
+/turf/open/floor/twig,
+/area/under/tomb)
+"ba" = (
+/obj/structure/rack/shelf/biggest,
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/ruinedwood/darker,
+/area/under/tomb/indoors)
+"bb" = (
+/obj/structure/rack/shelf/big,
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/ruinedwood/darker,
+/area/under/tomb/indoors)
+"bc" = (
+/obj/effect/dungeon_loot_spawner/medium/chest,
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb/indoors)
+"bd" = (
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/obj/structure/table/wood/fancy/red{
+	pixel_x = 5;
+	pixel_y = -5
+	},
+/obj/effect/dungeon_loot_spawner/medium,
+/turf/open/floor/ruinedwood/chevron,
+/area/under/tomb/indoors)
+"be" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/turf/open/floor/ruinedwood/chevron,
+/area/under/tomb/indoors)
+"bf" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment,
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/pants/trou/artipants,
+/obj/item/clothing/shirt/undershirt/artificer,
+/obj/item/clothing/armor/leather/jacket/artijacket,
+/obj/item/clothing/head/articap,
+/obj/item/clothing/shoes/nobleboot/thighboots,
+/obj/item/weapon/knife/dagger/steel,
+/turf/open/floor/carpet/red,
+/area/under/tomb/indoors)
 "bg" = (
 /obj/structure/bars/pipe{
 	dir = 1;
@@ -97,6 +432,11 @@
 /obj/structure/chair/wood/alt,
 /turf/open/floor/tile/masonic/inverted,
 /area/under/tomb/indoors)
+"bi" = (
+/obj/structure/table/wood/plain,
+/obj/effect/dungeon_loot_spawner/medium,
+/turf/open/floor/carpet/red,
+/area/under/tomb/indoors)
 "bj" = (
 /turf/closed/wall/mineral/pipe,
 /area/under/tomb/wilds)
@@ -108,6 +448,21 @@
 	},
 /turf/open/openspace,
 /area/under/tomb/indoors/royal)
+"bl" = (
+/obj/structure/fluff/railing/border,
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border{
+	dir = 10
+	},
+/obj/structure/table/wood/fancy/red{
+	pixel_x = 4;
+	pixel_y = 3
+	},
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/ruinedwood/chevron,
+/area/under/tomb/indoors)
 "bm" = (
 /obj/structure/door/violet,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -119,20 +474,183 @@
 /obj/item/statue/silver,
 /turf/open/floor/tile/masonic/inverted,
 /area/under/tomb/indoors)
+"bo" = (
+/obj/structure/closet/crate/chest/crate,
+/turf/open/floor/ruinedwood/chevron,
+/area/under/tomb/indoors)
+"bp" = (
+/obj/effect/dungeon_loot_spawner/medium/chest,
+/turf/open/floor/tile/masonic/single,
+/area/under/tomb/indoors/magic)
+"bq" = (
+/obj/structure/table/stone_small,
+/obj/structure/fluff/walldeco/painting/seraphina{
+	pixel_x = -32;
+	pixel_y = 0
+	},
+/turf/open/floor/tile/masonic/single,
+/area/under/tomb/indoors/magic)
+"br" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_strength = 15;
+	base_speed = 15;
+	base_constitution = 14;
+	base_endurance = 14;
+	base_fortune = 12;
+	candodge = 0
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/clothing/armor/plate/rust,
+/obj/item/clothing/gloves/plate/rust,
+/obj/item/clothing/head/helmet/heavy/rust,
+/obj/item/clothing/pants/platelegs/rust,
+/obj/item/clothing/shoes/boots/armor/light/rust,
+/obj/item/clothing/neck/chaincoif,
+/obj/item/weapon/shield/tower/metal,
+/obj/item/weapon/mace/warhammer,
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb/indoors)
+"bs" = (
+/obj/structure/table/stone_small,
+/turf/open/floor/tile/masonic/single,
+/area/under/tomb/indoors/magic)
+"bt" = (
+/obj/structure/table/stone_small,
+/obj/effect/dungeon_loot_spawner/high,
+/turf/open/floor/tile/masonic/single,
+/area/under/tomb/indoors/magic)
+"bu" = (
+/obj/structure/closet/crate/crafted_closet/inn/south,
+/obj/item/clothing/neck/psycross/zizo,
+/turf/open/floor/tile/masonic/single,
+/area/under/tomb/indoors/magic)
 "bv" = (
 /obj/item/natural/rock,
 /obj/structure/rack/shelf/big,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
+"bw" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/effect/spawner/map_spawner/loot,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/ruinedwood/chevron,
+/area/under/tomb/indoors)
+"bx" = (
+/obj/effect/dungeon_loot_spawner/medium/chest,
+/turf/open/floor/ruinedwood/chevron,
+/area/under/tomb/indoors)
+"by" = (
+/obj/structure/table/stone_small,
+/obj/item/paper{
+	pixel_x = 10;
+	pixel_y = 3
+	},
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/tile/masonic/spiral,
+/area/under/tomb/indoors)
+"bz" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border{
+	dir = 5
+	},
+/obj/structure/fluff/telescope,
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb)
 "bA" = (
 /obj/structure/bed,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
+"bB" = (
+/obj/structure/bed/inn,
+/obj/item/bedsheet/fabric{
+	pixel_x = 0;
+	pixel_y = 7
+	},
+/turf/open/floor/ruinedwood/chevron,
+/area/under/tomb/indoors)
+"bC" = (
+/obj/effect/dungeon_loot_spawner/medium/chest,
+/turf/open/floor/tile/masonic/spiral,
+/area/under/tomb/indoors)
+"bD" = (
+/obj/structure/closet/crate/drawer,
+/turf/open/floor/tile/masonic/spiral,
+/area/under/tomb/indoors)
+"bE" = (
+/obj/structure/table/church,
+/obj/item/reagent_containers/glass/cup/glassware{
+	pixel_x = -4;
+	pixel_y = 16
+	},
+/obj/item/candle/floorcandle0/lit,
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb/indoors)
 "bF" = (
 /mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/metal/barograte,
 /area/under/tomb)
+"bG" = (
+/obj/structure/table/church/m,
+/obj/item/candle/floorcandle1/lit,
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb/indoors)
+"bH" = (
+/obj/structure/table/church{
+	dir = 1
+	},
+/obj/item/reagent_containers/glass/cup/silver{
+	pixel_x = 6;
+	pixel_y = 9
+	},
+/obj/item/candle/floorcandle0/lit,
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb/indoors)
+"bI" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/obj/structure/fluff/railing/border{
+	dir = 8
+	},
+/obj/structure/fluff/railing/border{
+	dir = 9
+	},
+/obj/structure/table/wood/fancy/purple{
+	pixel_x = 4;
+	pixel_y = -7
+	},
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/ruinedwood/spiral,
+/area/under/tomb)
+"bJ" = (
+/mob/living/carbon/human/species/skeleton/npc/no_equipment{
+	base_strength = 15;
+	base_speed = 15;
+	base_constitution = 14;
+	base_endurance = 14;
+	base_fortune = 12;
+	candodge = 0
+	},
+/obj/effect/mapping_helpers/floor_clothing_equipper,
+/obj/item/weapon/polearm/spear/hoplite,
+/obj/item/weapon/shield/tower/hoplite,
+/obj/item/clothing/armor/plate/rust,
+/obj/item/clothing/gloves/plate/rust,
+/obj/item/clothing/pants/platelegs/rust,
+/obj/item/clothing/shoes/boots/armor/light/rust,
+/obj/item/clothing/neck/chaincoif,
+/turf/open/floor/carpet/red,
+/area/under/tomb/indoors)
+"bK" = (
+/obj/structure/fluff/railing/border,
+/turf/open/floor/ruinedwood/chevron,
+/area/under/tomb/indoors)
 "bL" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/fabric_double,
@@ -141,6 +659,16 @@
 	pixel_y = 0
 	},
 /turf/open/floor/tile/masonic/inverted,
+/area/under/tomb/indoors)
+"bM" = (
+/obj/structure/table/wood/plain,
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/carpet/royalblack,
+/area/under/tomb/indoors)
+"bN" = (
+/obj/structure/table/wood/plain,
+/obj/structure/spider/stickyweb,
+/turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors)
 "bO" = (
 /obj/item/alch/bone,
@@ -153,12 +681,31 @@
 /obj/structure/table/wood/reinf_long,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
+"bQ" = (
+/obj/structure/table/wood/plain,
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/tile/masonic/inverted,
+/area/under/tomb/indoors)
+"bR" = (
+/obj/machinery/light/fueled/wallfire/candle,
+/turf/open/floor/carpet/royalblack,
+/area/under/tomb/indoors)
+"bS" = (
+/turf/open/floor/metal,
+/area/under/tomb)
 "bT" = (
 /obj/structure/stairs/stone{
 	dir = 8
 	},
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
+"bU" = (
+/obj/structure/gate/bars{
+	redstone_id = "FireGate2";
+	name = "hell gate"
+	},
+/turf/open/floor/cobble,
+/area/under/tomb)
 "bZ" = (
 /obj/structure/bars/pipe{
 	dir = 8;
@@ -303,11 +850,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"ea" = (
-/obj/structure/table/wood/plain,
-/obj/effect/spawner/map_spawner/loot/potion_vitals,
-/turf/open/floor/tile/masonic/inverted,
-/area/under/tomb/indoors)
 "ed" = (
 /obj/structure/door/iron/bars,
 /obj/effect/mapping_helpers/access/locker,
@@ -354,19 +896,11 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/churchbrick,
 /area/under/tomb/indoors/royal)
-"eu" = (
-/obj/structure/closet/crate/crafted_closet/inn,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/herringbone,
-/area/under/tomb/indoors)
 "ey" = (
 /obj/structure/bookcase,
 /obj/structure/spider/stickyweb,
 /turf/open/floor/tile/masonic/inverted,
 /area/under/tomb/indoors)
-"eE" = (
-/turf/closed/wall/mineral/tent,
-/area/under/tomb)
 "eF" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/cobble,
@@ -414,21 +948,11 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb)
-"fa" = (
-/obj/structure/table/wood/plain,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/carpet/red,
-/area/under/tomb/indoors)
 "fc" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /obj/structure/chair/bench/couchablack,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/royal)
-"fe" = (
-/obj/structure/table/wood/plain,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/tile/masonic/inverted,
-/area/under/tomb/indoors)
 "fk" = (
 /obj/structure/table/wood/reinf_long,
 /obj/item/reagent_containers/glass/cup/glassware{
@@ -458,11 +982,6 @@
 /mob/living/simple_animal/hostile/retaliate/blood,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
-"fH" = (
-/obj/structure/closet/crate/chest,
-/obj/effect/spawner/map_spawner/loot/armor,
-/turf/open/floor/tile/masonic/inverted,
-/area/under/tomb/indoors)
 "fI" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/locker,
@@ -473,11 +992,6 @@
 /obj/structure/bars,
 /turf/open/floor/cobblerock,
 /area/under/tomb/wilds)
-"fP" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/ruinedwood/darker,
-/area/under/tomb/indoors)
 "fS" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -516,11 +1030,6 @@
 /mob/living/carbon/human/species/skeleton/npc/ambush,
 /turf/open/floor/carpet/purple,
 /area/under/tomb/indoors)
-"gk" = (
-/obj/structure/table/vtable/v2,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/carpet/red,
-/area/under/tomb/indoors)
 "gl" = (
 /obj/structure/fermentation_keg/random/beer,
 /obj/effect/decal/cleanable/blood,
@@ -556,11 +1065,6 @@
 "gT" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/wood/nosmooth,
-/area/under/tomb/indoors)
-"gV" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot/potion_stats,
-/turf/open/floor/herringbone,
 /area/under/tomb/indoors)
 "gX" = (
 /obj/structure/table/wood/plain_alt,
@@ -674,12 +1178,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors)
-"ih" = (
-/obj/structure/closet/crate/crafted_closet/inn,
-/obj/effect/spawner/map_spawner/loot,
-/obj/structure/spider/stickyweb,
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
 "ii" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -690,22 +1188,6 @@
 /obj/effect/decal/cleanable/blood/gibs/old,
 /turf/open/floor/cobble,
 /area/under/tomb)
-"is" = (
-/obj/structure/fluff/railing/border{
-	dir = 4
-	},
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/fluff/railing/border{
-	dir = 5
-	},
-/obj/structure/scrying/nocdevice{
-	pixel_x = -7;
-	pixel_y = 0
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb)
 "iu" = (
 /obj/structure/trap/spike,
 /turf/open/floor/hexstone,
@@ -714,33 +1196,6 @@
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/cobble,
 /area/under/tomb/wilds)
-"iw" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	base_strength = 15;
-	base_speed = 15;
-	base_constitution = 14;
-	base_endurance = 14;
-	base_fortune = 12;
-	candodge = 0;
-	real_name = "Undead Knight"
-	},
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/structure/fluff/railing/border,
-/obj/item/clothing/ring/silver/toper,
-/obj/item/clothing/cloak/half/vet,
-/obj/item/clothing/armor/plate/full,
-/obj/item/clothing/gloves/plate,
-/obj/item/clothing/pants/platelegs,
-/obj/item/clothing/shoes/boots/armor,
-/obj/item/clothing/head/helmet/heavy/decorated/knight,
-/obj/item/weapon/hammer/sledgehammer/war,
-/turf/open/floor/churchbrick,
-/area/under/tomb/indoors/royal)
-"iy" = (
-/obj/structure/table/stone_small,
-/obj/effect/spawner/map_spawner/loot/magic,
-/turf/open/floor/tile/masonic/single,
-/area/under/tomb/indoors/magic)
 "iA" = (
 /obj/structure/stairs/stone,
 /turf/open/floor/ruinedwood/darker,
@@ -754,15 +1209,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
-"iK" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/ingot/gold,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
-"iP" = (
-/obj/item/ingot/gold,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
 "iS" = (
 /obj/structure/bars/pipe{
 	dir = 1;
@@ -770,28 +1216,6 @@
 	pixel_x = -13
 	},
 /turf/open/openspace,
-/area/under/tomb/indoors/royal)
-"iT" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	base_strength = 15;
-	base_speed = 15;
-	base_constitution = 14;
-	base_endurance = 14;
-	base_fortune = 12;
-	candodge = 0;
-	real_name = "Undead Knight"
-	},
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/weapon/shield/tower/buckleriron,
-/obj/item/weapon/sword/rapier/dec,
-/obj/item/clothing/ring/gold,
-/obj/item/clothing/cloak/half/guardsecond,
-/obj/item/clothing/gloves/plate,
-/obj/item/clothing/armor/plate,
-/obj/item/clothing/pants/platelegs,
-/obj/item/clothing/shoes/boots/armor,
-/obj/item/clothing/head/helmet/visored/hounskull,
-/turf/open/floor/churchmarble,
 /area/under/tomb/indoors/royal)
 "iV" = (
 /obj/structure/bars/pipe,
@@ -829,14 +1253,6 @@
 	},
 /turf/open/openspace,
 /area/under/tomb)
-"jk" = (
-/obj/structure/table/wood/reinf_long,
-/obj/item/reagent_containers/glass/cup/golden{
-	pixel_x = -6;
-	pixel_y = 13
-	},
-/turf/open/floor/carpet/red,
-/area/under/tomb/indoors)
 "jm" = (
 /obj/structure/bookcase/random,
 /obj/machinery/light/fueled/wallfire/candle,
@@ -857,17 +1273,6 @@
 /obj/structure/chair/bench/couchablack/r,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/royal)
-"jA" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
-"jK" = (
-/obj/structure/winch{
-	redstone_id = "FireGate3"
-	},
-/turf/open/floor/cobblerock,
-/area/under/tomb/wilds)
 "jU" = (
 /obj/item/rope/chain,
 /obj/structure/trap/shock,
@@ -929,27 +1334,6 @@
 /obj/structure/trap/shock,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
-"kH" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	real_name = "Forgotten King";
-	base_speed = 20;
-	base_perception = 12;
-	base_intelligence = 18;
-	base_fortune = 20;
-	base_strength = 12;
-	base_endurance = 12;
-	base_constitution = 12
-	},
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/shirt/tunic/noblecoat,
-/obj/item/clothing/shoes/nobleboot/thighboots,
-/obj/item/clothing/gloves/leather/masterwork,
-/obj/item/clothing/head/crown/circlet/sleepless,
-/obj/item/weapon/polearm/woodstaff/quarterstaff/steel,
-/obj/item/clothing/ring/gold/dorpel,
-/obj/item/clothing/cloak/lordcloak/ladycloak,
-/turf/open/floor/carpet/lord/center,
-/area/under/tomb/indoors/royal)
 "kM" = (
 /obj/structure/fluff/railing/border{
 	dir = 4
@@ -990,14 +1374,6 @@
 	},
 /turf/open/openspace,
 /area/under/tomb)
-"lh" = (
-/obj/structure/closet/crate/crafted_closet/inn/south,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/obj/item/statue/silver,
-/obj/item/clothing/neck/gorget/hoplite,
-/obj/item/clothing/shirt/robe/magus,
-/turf/open/floor/tile/masonic/single,
-/area/under/tomb/indoors/magic)
 "lj" = (
 /obj/item/chair/stool/bar,
 /obj/item/reagent_containers/glass/cup/wooden,
@@ -1011,16 +1387,6 @@
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/royal)
-"ln" = (
-/obj/structure/closet/crate/chest,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/ruinedwood/chevron,
-/area/under/tomb/indoors)
-"lo" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/weapon/knife/dagger/silver,
-/turf/open/floor/cobble,
-/area/under/tomb/indoors)
 "lv" = (
 /obj/structure/fluff/railing/border{
 	dir = 10
@@ -1038,12 +1404,6 @@
 	},
 /turf/open/openspace,
 /area/under/tomb)
-"lF" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot/medium,
-/obj/item/reagent_containers/glass/carafe/gold,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
 "lO" = (
 /obj/structure/fermentation_keg/random/beer,
 /turf/open/floor/hexstone,
@@ -1126,11 +1486,6 @@
 /obj/effect/mapping_helpers/access/locker,
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
-"mn" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/hexstone,
-/area/under/tomb/indoors)
 "mq" = (
 /obj/structure/stairs/stone{
 	dir = 4
@@ -1185,12 +1540,6 @@
 /mob/living/simple_animal/hostile/retaliate/saigabuck,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
-"mJ" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot/medium,
-/obj/item/ingot/gold,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
 "mK" = (
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/ruinedwood/darker,
@@ -1222,24 +1571,10 @@
 /obj/structure/trap/wall_projectile,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"mY" = (
-/obj/structure/table/wood/plain,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/tile/masonic/inverted,
-/area/under/tomb/indoors)
 "nk" = (
 /obj/item/natural/stone,
 /turf/open/floor/naturalstone,
 /area/under/tomb/indoors)
-"nm" = (
-/obj/structure/closet/crate/chest/neu_fancy,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/tile/masonic/single,
-/area/under/tomb/indoors/magic)
-"nv" = (
-/obj/item/clothing/ring/gold/blortz,
-/turf/open/floor/metal,
-/area/under/tomb)
 "nw" = (
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/cobble,
@@ -1250,23 +1585,6 @@
 	},
 /turf/open/floor/cobblerock,
 /area/under/tomb/wilds)
-"nC" = (
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/obj/structure/table/wood/fancy/red{
-	pixel_x = 5;
-	pixel_y = -5
-	},
-/obj/item/statue/silver,
-/turf/open/floor/ruinedwood/chevron,
-/area/under/tomb/indoors)
 "nD" = (
 /obj/structure/fluff/railing/border{
 	dir = 6
@@ -1312,20 +1630,6 @@
 "nP" = (
 /obj/structure/chair/bench/coucha/redright,
 /turf/open/floor/carpet/red,
-/area/under/tomb/indoors)
-"nR" = (
-/obj/structure/bed,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/herringbone,
-/area/under/tomb/indoors)
-"nU" = (
-/obj/structure/bed/inn,
-/obj/item/bedsheet/fabric{
-	pixel_x = 0;
-	pixel_y = 7
-	},
-/obj/item/clothing/ring/silver/gemerald,
-/turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
 "nX" = (
 /obj/structure/bars,
@@ -1410,12 +1714,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"pq" = (
-/obj/structure/fluff/walldeco/bigpainting/lake,
-/obj/structure/table/wood/fancy/royalblack,
-/obj/item/riddleofsteel,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
 "pu" = (
 /obj/structure/door/stone,
 /obj/effect/mapping_helpers/access/locker,
@@ -1459,11 +1757,6 @@
 	dir = 8
 	},
 /turf/open/floor/tile/masonic/inverted,
-/area/under/tomb/indoors)
-"pR" = (
-/obj/structure/table/wood/plain,
-/obj/item/reagent_containers/glass/cup/golden,
-/turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors)
 "pT" = (
 /turf/open/floor/ruinedwood/spiral,
@@ -1704,39 +1997,10 @@
 /obj/effect/decal/remains/human,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
-"tx" = (
-/obj/structure/closet/crate/crafted_closet/inn,
-/obj/effect/spawner/map_spawner/loot/rare,
-/turf/open/floor/ruinedwood/chevron,
-/area/under/tomb/indoors)
 "tH" = (
 /obj/structure/table/wood/plain_alt,
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/hexstone,
-/area/under/tomb/indoors)
-"tO" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	base_strength = 15;
-	base_speed = 15;
-	base_constitution = 14;
-	base_endurance = 14;
-	base_fortune = 12;
-	candodge = 0
-	},
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/ring/silver/gemerald,
-/obj/item/weapon/polearm/spear/hoplite,
-/obj/item/weapon/shield/tower/hoplite,
-/obj/item/clothing/armor/plate/rust,
-/obj/item/clothing/gloves/plate/rust,
-/obj/item/clothing/pants/platelegs/rust,
-/obj/item/clothing/shoes/boots/armor/light/rust,
-/obj/item/clothing/neck/chaincoif,
-/turf/open/floor/carpet/red,
-/area/under/tomb/indoors)
-"tT" = (
-/obj/effect/spawner/map_spawner/loot/armor,
-/turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "tU" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior,
@@ -1844,11 +2108,6 @@
 /obj/structure/door/violet,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"vw" = (
-/obj/structure/closet/crate/chest/old_crate,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
 "vx" = (
 /obj/structure/bed/inn/double,
 /obj/item/bedsheet/fabric_double,
@@ -1930,12 +2189,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/tile/kitchen,
 /area/under/tomb/indoors)
-"wI" = (
-/obj/structure/gate{
-	redstone_id = "FireGate3"
-	},
-/turf/open/floor/cobble,
-/area/under/tomb/indoors/royal)
 "wJ" = (
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/hexstone,
@@ -1968,13 +2221,6 @@
 "wZ" = (
 /mob/living/carbon/human/species/orc/ambush,
 /turf/open/floor/twig,
-/area/under/tomb/indoors)
-"xc" = (
-/obj/structure/closet/crate/crafted_closet/inn,
-/obj/effect/spawner/map_spawner/loot,
-/obj/structure/spider/stickyweb,
-/obj/item/statue/silver,
-/turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
 "xe" = (
 /obj/structure/lever/wall{
@@ -2020,26 +2266,6 @@
 /obj/item/reagent_containers/glass/bottle/whitewine,
 /turf/open/floor/carpet/royalblack,
 /area/under/tomb/indoors)
-"xv" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	base_strength = 18;
-	base_speed = 15;
-	base_constitution = 16;
-	base_endurance = 16;
-	base_fortune = 14;
-	candodge = 0
-	},
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/cloak/captain,
-/obj/item/clothing/head/helmet/visored/captain,
-/obj/item/clothing/pants/platelegs/captain,
-/obj/item/clothing/armor/brigandine/captain,
-/obj/item/clothing/shoes/boots/armor,
-/obj/item/clothing/gloves/plate,
-/obj/item/weapon/sword/long/exe/cloth,
-/obj/item/clothing/neck/chaincoif,
-/turf/open/floor/cobblerock,
-/area/under/tomb/wilds)
 "xx" = (
 /obj/structure/chair/wood{
 	dir = 1
@@ -2149,10 +2375,6 @@
 	},
 /turf/open/floor/metal,
 /area/under/tomb)
-"yy" = (
-/obj/item/reagent_containers/glass/carafe/gold,
-/turf/open/floor/blocks,
-/area/under/tomb/indoors)
 "yE" = (
 /obj/machinery/light/fueled/firebowl/standing/blue,
 /turf/open/floor/grass/red,
@@ -2164,28 +2386,6 @@
 /obj/item/ammo_holder/quiver/arrows,
 /turf/open/floor/ruinedwood/darker,
 /area/under/tomb/indoors)
-"yJ" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	base_strength = 15;
-	base_speed = 15;
-	base_constitution = 14;
-	base_endurance = 14;
-	base_fortune = 12;
-	candodge = 0;
-	real_name = "Undead Knight"
-	},
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/structure/fluff/railing/border,
-/obj/item/weapon/polearm/halberd/bardiche,
-/obj/item/clothing/ring/silver,
-/obj/item/clothing/cloak/half/colored/red,
-/obj/item/clothing/armor/plate/full,
-/obj/item/clothing/gloves/plate,
-/obj/item/clothing/pants/platelegs,
-/obj/item/clothing/shoes/boots/armor,
-/obj/item/clothing/head/helmet/heavy/decorated/bascinet,
-/turf/open/floor/churchbrick,
-/area/under/tomb/indoors/royal)
 "yK" = (
 /obj/machinery/light/fueled/firebowl/church,
 /turf/open/floor/naturalstone,
@@ -2223,10 +2423,6 @@
 	},
 /turf/open/floor/carpet/red,
 /area/under/tomb/indoors)
-"zk" = (
-/obj/item/clothing/ring/silver,
-/turf/open/floor/blocks,
-/area/under/tomb/indoors)
 "zn" = (
 /obj/item/ammo_casing/caseless/arrow,
 /turf/open/floor/metal/barograte,
@@ -2239,11 +2435,6 @@
 /mob/living/carbon/human/species/orc/warlord/skilled,
 /turf/open/floor/metal/barograte,
 /area/under/tomb)
-"zu" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/hexstone,
-/area/under/tomb/indoors)
 "zF" = (
 /obj/structure/fluff/walldeco/painting/castle{
 	pixel_x = -32;
@@ -2297,11 +2488,6 @@
 	},
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors)
-"Ae" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot/rare,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
 "Af" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /obj/structure/rack/shelf/big,
@@ -2362,11 +2548,6 @@
 	pixel_y = -2
 	},
 /turf/open/floor/herringbone,
-/area/under/tomb/indoors)
-"AF" = (
-/obj/effect/spawner/map_spawner/loot/medium,
-/mob/living/carbon/human/species/skeleton/npc/ambush,
-/turf/open/floor/cobble,
 /area/under/tomb/indoors)
 "AG" = (
 /obj/structure/window/stained,
@@ -2448,11 +2629,6 @@
 	},
 /turf/open/openspace,
 /area/under/tomb)
-"Bn" = (
-/obj/structure/rack/shelf/big,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/ruinedwood/darker,
-/area/under/tomb/indoors)
 "Bo" = (
 /obj/structure/fluff/railing/border,
 /turf/open/floor/cobble,
@@ -2485,10 +2661,6 @@
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
-"Bw" = (
-/obj/item/clothing/ring/gold/rontz,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
 "Bz" = (
 /mob/living/carbon/human/species/skeleton/npc/no_equipment{
 	base_strength = 15;
@@ -2681,12 +2853,6 @@
 /obj/structure/flora/grass/bush,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
-"De" = (
-/obj/structure/table/wood/plain,
-/obj/item/reagent_containers/glass/bottle/vial/strongpoison,
-/obj/structure/spider/stickyweb,
-/turf/open/floor/carpet/royalblack,
-/area/under/tomb/indoors)
 "Di" = (
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/closed/wall/mineral/craftstone,
@@ -2716,13 +2882,6 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors)
-"DY" = (
-/obj/structure/gate{
-	redstone_id = "FireGate1";
-	name = "Hell Gate"
-	},
-/turf/open/floor/cobble,
-/area/under/tomb)
 "Ea" = (
 /obj/structure/flora/grass/bush_meagre,
 /turf/open/floor/grass/red,
@@ -2734,18 +2893,6 @@
 "Ee" = (
 /mob/living/carbon/human/species/skeleton/npc/warrior/skilled,
 /turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
-"Eg" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment,
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/pants/trou/artipants,
-/obj/item/clothing/shirt/undershirt/artificer,
-/obj/item/clothing/armor/leather/jacket/artijacket,
-/obj/item/clothing/head/articap,
-/obj/item/clothing/shoes/nobleboot/thighboots,
-/obj/item/weapon/knife/dagger/steel,
-/obj/item/scomstone,
-/turf/open/floor/carpet/red,
 /area/under/tomb/indoors)
 "Eh" = (
 /obj/item/chair/wood,
@@ -2816,12 +2963,6 @@
 /obj/item/chair/chair_nobles,
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"Ff" = (
-/obj/structure/closet/crate/chest/gold,
-/obj/item/reagent_containers/glass/cup/golden,
-/obj/item/statue/gold,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
 "Fg" = (
 /obj/structure/bars/pipe{
 	dir = 1;
@@ -2834,12 +2975,6 @@
 /mob/living/carbon/human/species/orc/marauder,
 /turf/open/floor/cobblerock,
 /area/under/tomb)
-"Fk" = (
-/obj/structure/table/wood/fancy/purple,
-/obj/machinery/light/fueled/wallfire/candle,
-/obj/item/reagent_containers/glass/cup/golden,
-/turf/open/floor/carpet/purple,
-/area/under/tomb/indoors)
 "Fo" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/cleanable/blood/gibs/limb,
@@ -2936,11 +3071,6 @@
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/hexstone,
 /area/under/tomb/indoors)
-"Gs" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/item/ingot/silver,
-/turf/open/floor/cobble,
-/area/under/tomb/indoors)
 "Gt" = (
 /obj/item/ammo_holder/quiver/arrows,
 /turf/open/floor/ruinedwood/darker,
@@ -2967,35 +3097,6 @@
 	},
 /turf/open/openspace,
 /area/under/tomb)
-"GI" = (
-/obj/structure/table/stone_small,
-/obj/structure/fluff/walldeco/painting/seraphina{
-	pixel_x = -32;
-	pixel_y = 0
-	},
-/obj/item/clothing/ring/silver/dorpel,
-/turf/open/floor/tile/masonic/single,
-/area/under/tomb/indoors/magic)
-"GJ" = (
-/obj/structure/fluff/railing/border{
-	dir = 1
-	},
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/obj/structure/fluff/railing/border{
-	dir = 9
-	},
-/obj/structure/table/wood/fancy/purple{
-	pixel_x = 4;
-	pixel_y = -7
-	},
-/obj/item/reagent_containers/glass/carafe/silver{
-	pixel_x = 6;
-	pixel_y = -4
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb)
 "GR" = (
 /obj/structure/stairs{
 	dir = 8
@@ -3021,36 +3122,11 @@
 /obj/structure/stairs/stone,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
-"Hc" = (
-/obj/structure/table/church,
-/obj/item/reagent_containers/glass/cup/glassware{
-	pixel_x = -4;
-	pixel_y = 16
-	},
-/obj/item/candle/lit{
-	pixel_x = 2;
-	pixel_y = 4
-	},
-/obj/item/candle/lit{
-	pixel_x = 8;
-	pixel_y = 4
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
 "Hg" = (
 /obj/effect/decal/cleanable/sigil/N,
 /obj/effect/decal/cleanable/blood,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
-"Hj" = (
-/obj/structure/table/stone_small,
-/obj/item/paper{
-	pixel_x = 10;
-	pixel_y = 3
-	},
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/tile/masonic/spiral,
-/area/under/tomb/indoors)
 "Hk" = (
 /obj/item/chair/stool/bar,
 /turf/open/floor/naturalstone,
@@ -3089,20 +3165,6 @@
 /obj/structure/fluff/railing/border,
 /turf/open/floor/cobblerock,
 /area/under/tomb/wilds)
-"HG" = (
-/obj/structure/table/wood/reinf_long,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
-"HI" = (
-/obj/structure/fluff/walldeco/painting/castle{
-	pixel_x = 0;
-	pixel_y = 33
-	},
-/obj/structure/table/wood/fancy,
-/obj/effect/spawner/map_spawner/loot/rare,
-/turf/open/floor/churchbrick,
-/area/under/tomb/indoors/royal)
 "HM" = (
 /obj/structure/bed,
 /turf/open/floor/herringbone,
@@ -3119,32 +3181,8 @@
 /obj/machinery/light/fueled/wallfire/candle,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
-"HZ" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	base_strength = 15;
-	base_speed = 15;
-	base_constitution = 14;
-	base_endurance = 14;
-	base_fortune = 12;
-	candodge = 0
-	},
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/armor/plate/rust,
-/obj/item/clothing/gloves/plate/rust,
-/obj/item/clothing/head/helmet/heavy/rust,
-/obj/item/clothing/pants/platelegs/rust,
-/obj/item/clothing/shoes/boots/armor/light/rust,
-/obj/item/clothing/neck/chaincoif,
-/obj/item/weapon/mace/warhammer/steel,
-/obj/item/weapon/shield/tower/metal,
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
 "Ia" = (
 /turf/open/floor/carpet/lord/left,
-/area/under/tomb/indoors/royal)
-"Id" = (
-/obj/effect/spawner/map_spawner/loot/medium,
-/turf/open/floor/churchmarble,
 /area/under/tomb/indoors/royal)
 "Ie" = (
 /turf/open/floor/hexstone,
@@ -3172,55 +3210,11 @@
 /obj/structure/trap/chill,
 /turf/open/floor/blocks,
 /area/under/tomb/indoors)
-"Iv" = (
-/obj/item/reagent_containers/glass/cup/golden,
-/obj/machinery/light/fueled/wallfire/candle,
-/turf/open/floor/carpet/royalblack,
-/area/under/tomb/indoors)
-"Iy" = (
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/ring/silver/dorpel,
-/obj/item/clothing/cloak/half/guardsecond,
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	base_strength = 15;
-	base_speed = 15;
-	base_constitution = 14;
-	base_endurance = 14;
-	base_fortune = 12;
-	candodge = 0;
-	real_name = "Undead Knight"
-	},
-/obj/item/clothing/neck/mercmedal/grenzelhoft,
-/obj/item/clothing/armor/plate/full,
-/obj/item/clothing/gloves/plate,
-/obj/item/clothing/pants/platelegs,
-/obj/item/clothing/shoes/boots/armor,
-/obj/item/clothing/head/helmet/heavy/decorated/hounskull,
-/obj/item/weapon/mace/warhammer/steel,
-/obj/item/weapon/shield/tower/buckleriron,
-/turf/open/floor/churchmarble,
-/area/under/tomb/indoors/royal)
 "IC" = (
 /obj/effect/decal/cleanable/blood,
 /obj/machinery/light/fueled/firebowl/church,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
-"IF" = (
-/obj/structure/fluff/railing/border,
-/obj/structure/fluff/railing/border{
-	dir = 8
-	},
-/obj/structure/fluff/railing/border{
-	dir = 10
-	},
-/obj/structure/table/wood/fancy/red{
-	pixel_x = 4;
-	pixel_y = 3
-	},
-/obj/machinery/light/fueled/wallfire/candle/blue,
-/obj/item/statue/gold/loot,
-/turf/open/floor/ruinedwood/chevron,
-/area/under/tomb/indoors)
 "IK" = (
 /obj/item/reagent_containers/glass/cup/wooden,
 /turf/open/floor/twig,
@@ -3231,12 +3225,6 @@
 	},
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/darker,
-/area/under/tomb/indoors)
-"IV" = (
-/obj/structure/closet/crate/chest/gold,
-/obj/item/ingot/gold,
-/obj/item/ingot/silver,
-/turf/open/floor/blocks,
 /area/under/tomb/indoors)
 "IX" = (
 /obj/machinery/light/fueled/wallfire/candle,
@@ -3265,12 +3253,6 @@
 "Jx" = (
 /turf/closed/wall/mineral/craftstone,
 /area/under/tomb/indoors/royal)
-"Jy" = (
-/obj/structure/closet/crate/chest/neu,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/cobble,
-/area/under/tomb/indoors)
 "JI" = (
 /obj/structure/fluff/railing/border{
 	dir = 1
@@ -3316,11 +3298,6 @@
 "Ks" = (
 /turf/closed/wall/mineral/pipe,
 /area/under/tomb)
-"Ky" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/turf/open/floor/cobble,
-/area/under/tomb/indoors)
 "Kz" = (
 /obj/structure/table/wood/fancy/black,
 /turf/open/floor/churchmarble,
@@ -3379,50 +3356,10 @@
 /obj/structure/table/wood/fancy/black,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
-"Ls" = (
-/mob/living/carbon/human/species/skeleton/npc/no_equipment{
-	base_strength = 15;
-	base_speed = 15;
-	base_constitution = 14;
-	base_endurance = 14;
-	base_fortune = 12;
-	candodge = 0;
-	real_name = "Undead Knight"
-	},
-/obj/effect/mapping_helpers/floor_clothing_equipper,
-/obj/item/clothing/ring/gold,
-/obj/item/clothing/cloak/half/guardsecond,
-/obj/item/clothing/neck/mercmedal/grenzelhoft,
-/obj/item/clothing/armor/plate/full,
-/obj/item/clothing/gloves/plate,
-/obj/item/clothing/pants/platelegs,
-/obj/item/clothing/shoes/boots/armor,
-/obj/item/clothing/head/helmet/heavy/decorated/bucket,
-/obj/item/weapon/sword/long/judgement,
-/turf/open/floor/churchmarble,
-/area/under/tomb/indoors/royal)
 "Lv" = (
 /obj/item/natural/stone,
 /turf/open/floor/naturalstone,
 /area/under/tomb)
-"Lz" = (
-/obj/structure/table/church{
-	dir = 1
-	},
-/obj/item/reagent_containers/glass/cup/silver{
-	pixel_x = 6;
-	pixel_y = 9
-	},
-/obj/item/candle/lit{
-	pixel_x = -1;
-	pixel_y = 4
-	},
-/obj/item/candle/lit{
-	pixel_x = -7;
-	pixel_y = 11
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
 "LC" = (
 /obj/machinery/light/fueled/campfire/densefire,
 /turf/open/floor/cobble,
@@ -3717,10 +3654,6 @@
 /mob/living/carbon/human/species/goblin/cave,
 /turf/open/floor/herringbone,
 /area/under/tomb/indoors)
-"OK" = (
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
 "OM" = (
 /obj/machinery/light/fueled/wallfire/candle/blue,
 /turf/closed/mineral/bedrock,
@@ -3735,16 +3668,6 @@
 /obj/structure/flora/grass/bush/wall/tall,
 /turf/open/floor/grass/red,
 /area/under/tomb/wilds)
-"OT" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/ingot/silver,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
-"Pc" = (
-/obj/structure/table/wood/plain_alt,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/hexstone,
-/area/under/tomb/indoors)
 "Pd" = (
 /obj/structure/chair/bench/coucha,
 /obj/structure/spider/stickyweb,
@@ -3763,32 +3686,6 @@
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/wood/nosmooth,
 /area/under/tomb/indoors)
-"Pr" = (
-/obj/structure/table/church/m,
-/obj/item/candle/lit{
-	pixel_x = 5;
-	pixel_y = 4
-	},
-/obj/item/candle/lit{
-	pixel_x = 10;
-	pixel_y = 4
-	},
-/obj/item/candle/lit{
-	pixel_x = 1;
-	pixel_y = 10
-	},
-/obj/item/candle/lit{
-	pixel_x = -5;
-	pixel_y = 8
-	},
-/turf/open/floor/ruinedwood/spiral,
-/area/under/tomb/indoors)
-"Pv" = (
-/obj/structure/table/wood/plain,
-/obj/item/clothing/ring/silver,
-/obj/structure/spider/stickyweb,
-/turf/open/floor/carpet/royalblack,
-/area/under/tomb/indoors)
 "Px" = (
 /obj/item/ammo_casing/caseless/arrow,
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
@@ -3800,11 +3697,6 @@
 	},
 /turf/open/floor/ruinedwood/spiral,
 /area/under/tomb/indoors)
-"PC" = (
-/obj/structure/table/vtable/v2,
-/obj/effect/spawner/map_spawner/loot/medium,
-/turf/open/floor/churchmarble,
-/area/under/tomb/indoors/royal)
 "PE" = (
 /obj/structure/chair/wood/alt/chair_noble{
 	dir = 4
@@ -4020,11 +3912,6 @@
 	},
 /turf/open/floor/churchmarble,
 /area/under/tomb/indoors/royal)
-"RY" = (
-/obj/structure/closet/crate/drawer,
-/obj/item/statue/gold/loot,
-/turf/open/floor/tile/masonic/spiral,
-/area/under/tomb/indoors)
 "Sb" = (
 /obj/structure/rack/shelf/biggest,
 /obj/item/reagent_containers/glass/cup,
@@ -4049,12 +3936,6 @@
 /obj/structure/rack/shelf/biggest,
 /turf/open/floor/cobble,
 /area/under/tomb/indoors)
-"Ss" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/effect/spawner/map_spawner/loot/common,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/herringbone,
-/area/under/tomb/indoors)
 "St" = (
 /obj/structure/bars/pipe{
 	dir = 10;
@@ -4063,11 +3944,6 @@
 	},
 /turf/open/openspace,
 /area/under/tomb)
-"Su" = (
-/obj/structure/closet/crate/chest,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/turf/open/floor/tile/masonic/spiral,
-/area/under/tomb/indoors)
 "Sw" = (
 /obj/item/chair/fancy{
 	dir = 8
@@ -4102,11 +3978,6 @@
 /obj/effect/spawner/map_spawner/loot/food,
 /turf/open/floor/ruinedwood/chevron,
 /area/under/tomb/indoors)
-"SQ" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot/armor,
-/turf/open/floor/cobble,
-/area/under/tomb/indoors)
 "Te" = (
 /obj/structure/door/iron/bars,
 /turf/open/floor/cobble,
@@ -4135,11 +4006,6 @@
 	},
 /turf/open/floor/naturalstone,
 /area/under/tomb)
-"TC" = (
-/obj/structure/rack/shelf/biggest,
-/obj/effect/spawner/map_spawner/loot/medium,
-/turf/open/floor/cobble,
-/area/under/tomb/indoors)
 "TD" = (
 /obj/item/chair,
 /mob/living/carbon/human/species/orc/ambush,
@@ -4183,11 +4049,6 @@
 "TT" = (
 /turf/open/floor/wood/nosmooth,
 /area/under/tomb/indoors)
-"TU" = (
-/obj/structure/fluff/railing/border,
-/obj/effect/spawner/map_spawner/loot,
-/turf/open/floor/ruinedwood/chevron,
-/area/under/tomb/indoors)
 "TZ" = (
 /obj/structure/spider/stickyweb,
 /turf/open/floor/ruinedwood/chevron,
@@ -4224,11 +4085,6 @@
 /mob/living/carbon/human/species/goblin/npc/ambush,
 /turf/open/floor/cobble,
 /area/under/tomb)
-"Ui" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/ruinedwood/chevron,
-/area/under/tomb/indoors)
 "Uj" = (
 /mob/living/carbon/human/species/goblin/npc/ambush/cave,
 /turf/open/floor/cobble,
@@ -4378,10 +4234,6 @@
 /obj/effect/decal/cleanable/sigil/SE,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
-"Vx" = (
-/obj/item/ingot/gold,
-/turf/open/floor/blocks,
-/area/under/tomb/indoors)
 "VB" = (
 /obj/structure/bars/pipe{
 	dir = 5;
@@ -4438,11 +4290,6 @@
 "Wi" = (
 /obj/structure/bars,
 /turf/open/floor/cobble,
-/area/under/tomb/indoors)
-"Wk" = (
-/obj/structure/closet/crate/crafted_closet/dark,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors)
 "Wq" = (
 /obj/structure/bars/pipe{
@@ -4505,17 +4352,6 @@
 /obj/structure/bookcase/random/archive,
 /turf/open/floor/tile/masonic/single,
 /area/under/tomb/indoors/magic)
-"WQ" = (
-/obj/structure/flora/grass/bush,
-/obj/structure/closet/dirthole/closed,
-/obj/item/alch/golddust,
-/obj/item/alch/golddust,
-/obj/item/ore/gold,
-/obj/item/ore/gold,
-/obj/item/reagent_containers/glass/cup/golden,
-/obj/effect/mapping_helpers/structure/grave_spawner/t3,
-/turf/open/floor/dirt,
-/area/under/tomb/wilds)
 "WR" = (
 /obj/structure/fluff/railing/border,
 /obj/structure/trap/fire,
@@ -4625,17 +4461,6 @@
 /mob/living/simple_animal/hostile/retaliate/saiga,
 /turf/open/floor/dirt,
 /area/under/tomb/wilds)
-"Yo" = (
-/obj/structure/rack/shelf/biggest,
-/obj/item/statue/silver,
-/turf/open/floor/cobble,
-/area/under/tomb/indoors)
-"Yp" = (
-/obj/structure/closet/crate/chest/crate,
-/obj/machinery/light/fueled/wallfire/candle,
-/obj/effect/spawner/map_spawner/loot/common,
-/turf/open/floor/herringbone,
-/area/under/tomb/indoors)
 "Yv" = (
 /obj/structure/door/stone,
 /turf/open/floor/ruinedwood/chevron,
@@ -4723,27 +4548,6 @@
 /mob/living/carbon/human/species/skeleton/npc/peasant,
 /turf/open/floor/tile/masonic/spiral,
 /area/under/tomb/indoors)
-"Zt" = (
-/obj/structure/closet/crate/chest/gold,
-/obj/effect/spawner/map_spawner/loot/medium,
-/obj/effect/spawner/map_spawner/loot/weapon,
-/obj/effect/spawner/map_spawner/loot/armor,
-/obj/effect/spawner/map_spawner/loot/armor,
-/turf/open/floor/blocks,
-/area/under/tomb/indoors)
-"Zx" = (
-/obj/structure/gate{
-	redstone_id = "FireGate2";
-	name = "Hearth Gate"
-	},
-/turf/open/floor/cobble,
-/area/under/tomb)
-"ZA" = (
-/obj/structure/closet/crate/chest/gold,
-/obj/effect/spawner/map_spawner/loot/rare,
-/obj/item/reagent_containers/glass/cup/golden,
-/turf/open/floor/tile,
-/area/under/tomb/indoors/royal)
 "ZE" = (
 /obj/structure/fluff/railing/border{
 	dir = 8
@@ -4867,7 +4671,7 @@ rk
 wb
 cz
 pL
-eu
+ag
 rk
 rk
 rk
@@ -4939,7 +4743,7 @@ rk
 da
 cz
 Gd
-Ss
+ah
 rk
 rk
 rk
@@ -5008,7 +4812,7 @@ Tw
 Dp
 fJ
 rk
-Fk
+ak
 Gd
 pL
 XL
@@ -5017,7 +4821,7 @@ bT
 rk
 vL
 iI
-Jy
+ac
 dP
 wn
 Cb
@@ -5376,8 +5180,8 @@ zo
 zo
 rk
 Dv
-tT
-AF
+QY
+ad
 QY
 Cb
 Cb
@@ -5447,10 +5251,10 @@ av
 av
 UM
 rk
-Ky
-TC
-SQ
-Ky
+ab
+jc
+jc
+ab
 Cb
 Cb
 Cb
@@ -5650,9 +5454,9 @@ OO
 ym
 zo
 rk
-zk
 au
-Vx
+au
+ar
 rk
 rk
 rk
@@ -5723,8 +5527,8 @@ av
 av
 rk
 au
-Zt
-yy
+au
+ar
 rk
 rk
 rk
@@ -5869,11 +5673,11 @@ rk
 rk
 rk
 rk
-ih
+aq
 BL
 pT
 wR
-HG
+bP
 xx
 pT
 pT
@@ -6066,7 +5870,7 @@ Xf
 (19,1,1) = {"
 Xf
 rk
-zu
+zT
 Va
 Ie
 Ie
@@ -6097,7 +5901,7 @@ rk
 rk
 Qv
 Qv
-Yo
+ab
 Qv
 wn
 Cb
@@ -6222,7 +6026,7 @@ Jx
 Jx
 OB
 WL
-PC
+aA
 WL
 PE
 ot
@@ -6241,7 +6045,7 @@ wn
 wn
 gr
 Ai
-Gs
+Ai
 QY
 gv
 Hb
@@ -6283,7 +6087,7 @@ Xf
 Xf
 rk
 zT
-mn
+aT
 sS
 mb
 rk
@@ -6293,7 +6097,7 @@ Jx
 AR
 WL
 WL
-CR
+WL
 WL
 WL
 Kz
@@ -6383,8 +6187,8 @@ Mg
 oQ
 UM
 wn
-lo
 jc
+ab
 Qv
 Qv
 Cb
@@ -6498,21 +6302,21 @@ Xf
 (25,1,1) = {"
 Xf
 Jx
-lF
-OT
-jA
-iK
+aS
+aQ
+aS
+aO
 ap
-HI
+aM
 Dq
-yJ
+aH
 WL
 XN
-Iy
+aB
 WL
 XN
 WL
-iT
+ax
 Jx
 mh
 ny
@@ -6570,9 +6374,9 @@ LJ
 (26,1,1) = {"
 Xf
 Jx
-Ff
-iP
-Bw
+aU
+VD
+VD
 VD
 ap
 Ia
@@ -6585,7 +6389,7 @@ Ia
 Ia
 Ia
 Ia
-wI
+aC
 tY
 tY
 lv
@@ -6599,13 +6403,13 @@ tY
 OO
 tY
 tY
-Zx
+bU
 iH
 pz
 Xb
 Yw
 Zb
-DY
+aa
 Gx
 Vs
 eG
@@ -6642,14 +6446,14 @@ TF
 (27,1,1) = {"
 Xf
 Jx
-pq
+aV
 wS
 VD
 VD
 ap
 qx
 WX
-kH
+aI
 di
 qx
 qx
@@ -6667,7 +6471,7 @@ OO
 tY
 XO
 OO
-xv
+aj
 OO
 OO
 OO
@@ -6714,10 +6518,10 @@ wj
 (28,1,1) = {"
 Xf
 Jx
-ZA
-OK
-iP
+aX
 VD
+VD
+aP
 ap
 uY
 uY
@@ -6786,17 +6590,17 @@ Zb
 (29,1,1) = {"
 Xf
 Jx
-jA
-mJ
-OT
-Ae
+aS
+aQ
+aS
+aQ
 ap
 Cz
 Dq
-iw
+aK
 WL
 oh
-Ls
+aD
 WL
 oh
 WL
@@ -6866,7 +6670,7 @@ Jx
 Jx
 hV
 es
-Id
+aG
 Jx
 lm
 WL
@@ -6874,7 +6678,7 @@ Jx
 lm
 WL
 Jx
-jK
+aw
 zV
 Bo
 Dc
@@ -7310,9 +7114,9 @@ Lk
 cR
 cR
 vd
-fH
+ao
 rk
-gV
+am
 XL
 HM
 XL
@@ -7384,7 +7188,7 @@ ch
 Eh
 HN
 rk
-Yp
+an
 xR
 rk
 XL
@@ -7452,7 +7256,7 @@ av
 LF
 ey
 EU
-gk
+as
 cR
 HN
 ml
@@ -7461,7 +7265,7 @@ XL
 HM
 OI
 WA
-nR
+af
 rk
 Bq
 nk
@@ -7578,7 +7382,7 @@ Xf
 (40,1,1) = {"
 Xf
 CZ
-WQ
+aY
 av
 oQ
 zc
@@ -7797,7 +7601,7 @@ rk
 ET
 th
 wG
-Pc
+aR
 UN
 hg
 lj
@@ -8452,18 +8256,18 @@ rk
 rk
 rk
 wn
-Wk
+bC
 ZG
 AM
 ZG
-Hj
+by
 rk
 rk
 zJ
-iy
-aC
-GI
-nm
+bt
+bs
+bq
+bp
 rk
 kU
 RK
@@ -8524,7 +8328,7 @@ Em
 Hx
 pT
 wn
-Su
+ZG
 tU
 ZG
 aF
@@ -8619,7 +8423,7 @@ wn
 Cb
 Cb
 mK
-fP
+ba
 Cb
 Cb
 Cb
@@ -8675,7 +8479,7 @@ ZG
 iW
 rk
 rk
-lh
+bu
 fC
 MP
 Vw
@@ -8740,7 +8544,7 @@ cA
 cR
 mU
 wn
-RY
+bD
 CX
 ZG
 ZG
@@ -8788,9 +8592,9 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -8810,7 +8614,7 @@ Eh
 zh
 zh
 cR
-Hc
+bE
 wn
 rk
 YP
@@ -8859,11 +8663,11 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -8877,12 +8681,12 @@ LX
 rk
 hm
 yR
-jk
+DD
 DD
 fk
 DD
 cR
-Pr
+bG
 wn
 lw
 lw
@@ -8931,11 +8735,11 @@ Xf
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 Xf
 Xf
@@ -8954,7 +8758,7 @@ qy
 oB
 qy
 cR
-Lz
+bH
 rk
 lw
 lw
@@ -9003,11 +8807,11 @@ Xf
 Xf
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 Xf
 Xf
@@ -9025,7 +8829,7 @@ cA
 cR
 cR
 cR
-tO
+bJ
 pT
 YP
 Wq
@@ -9076,9 +8880,9 @@ Xf
 lw
 lw
 lw
-eE
-eE
-eE
+aZ
+aZ
+aZ
 lw
 lw
 lw
@@ -9152,9 +8956,9 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -9223,11 +9027,11 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -9255,7 +9059,7 @@ wn
 wn
 wn
 az
-HG
+bc
 wR
 pT
 pT
@@ -9295,11 +9099,11 @@ lw
 Xf
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -9326,7 +9130,7 @@ rk
 wn
 BL
 BL
-HZ
+br
 pT
 pT
 pT
@@ -9367,11 +9171,11 @@ lw
 Xf
 Xf
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -9439,11 +9243,11 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -9458,7 +9262,7 @@ au
 YP
 cf
 lw
-GJ
+bI
 NC
 Db
 Bg
@@ -9511,11 +9315,11 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -9584,9 +9388,9 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
+aZ
+aZ
+aZ
 lw
 Xf
 Xf
@@ -9648,13 +9452,13 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 lw
 lw
@@ -9698,7 +9502,7 @@ rk
 Cb
 Cb
 Cb
-Bn
+Ec
 Jt
 Jt
 Ev
@@ -9719,15 +9523,15 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 lw
 lw
@@ -9770,7 +9574,7 @@ lw
 Cb
 Cb
 Cb
-Ec
+bb
 Jt
 sw
 cr
@@ -9791,15 +9595,15 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 lw
 lw
@@ -9810,7 +9614,7 @@ Xf
 "}
 (21,1,2) = {"
 rk
-IV
+ar
 AP
 Cw
 oH
@@ -9863,15 +9667,15 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 lw
 lw
@@ -9935,14 +9739,14 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 lw
@@ -10009,12 +9813,12 @@ lw
 lw
 lw
 Xf
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 lw
@@ -10173,7 +9977,7 @@ Xf
 rk
 MW
 Ro
-pR
+bM
 Ro
 rk
 Jx
@@ -10243,7 +10047,7 @@ Mn
 (27,1,2) = {"
 Xf
 rk
-Iv
+bR
 Ro
 Ro
 qN
@@ -10317,7 +10121,7 @@ Xf
 rk
 Mp
 mt
-De
+bN
 Ov
 rk
 Jx
@@ -10389,7 +10193,7 @@ Xf
 rk
 hc
 Ro
-Pv
+bN
 kk
 rk
 Jx
@@ -10516,13 +10320,13 @@ Xf
 Xf
 Xf
 lw
-eE
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -10587,15 +10391,15 @@ Xf
 Xf
 Xf
 lw
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 Xf
 Xf
@@ -10617,7 +10421,7 @@ Ts
 xK
 zF
 TZ
-xc
+bw
 rk
 lw
 lw
@@ -10659,15 +10463,15 @@ Xf
 Xf
 lw
 lw
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 Xf
 Xf
@@ -10731,15 +10535,15 @@ Xf
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 Xf
 Xf
@@ -10805,12 +10609,12 @@ lw
 lw
 lw
 Xf
-eE
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 lw
 lw
@@ -10829,11 +10633,11 @@ Yv
 xK
 xK
 xK
-nU
+bB
 Ln
 xK
 xK
-ln
+bx
 rk
 rk
 xZ
@@ -10987,7 +10791,7 @@ Qq
 rk
 TM
 tp
-fa
+bi
 cR
 pT
 rk
@@ -11046,7 +10850,7 @@ lw
 iV
 lw
 lw
-is
+bz
 aN
 aN
 aN
@@ -11060,7 +10864,7 @@ rk
 pT
 nP
 TO
-Eg
+bf
 pT
 rk
 wn
@@ -11094,9 +10898,9 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
+aZ
+aZ
+aZ
 lw
 lw
 lw
@@ -11165,11 +10969,11 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 lw
 lw
@@ -11179,7 +10983,7 @@ Xf
 (40,1,2) = {"
 Xf
 Ks
-nv
+bS
 ZH
 lw
 lw
@@ -11237,11 +11041,11 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 lw
 Xf
@@ -11309,11 +11113,11 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 lw
 Xf
@@ -11349,7 +11153,7 @@ qX
 pT
 pT
 pT
-vw
+bc
 rk
 wn
 Cb
@@ -11382,9 +11186,9 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
+aZ
+aZ
+aZ
 lw
 lw
 Xf
@@ -11396,11 +11200,11 @@ Xf
 Xf
 wn
 bh
-mY
+bQ
 mE
 FH
 sk
-fe
+sk
 hn
 TD
 rk
@@ -11451,9 +11255,9 @@ lw
 lw
 Xf
 Xf
-eE
-eE
-eE
+aZ
+aZ
+aZ
 lw
 lw
 lw
@@ -11522,11 +11326,11 @@ lw
 lw
 lw
 Xf
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 Xf
 Xf
@@ -11594,11 +11398,11 @@ lw
 lw
 lw
 Xf
-eE
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
+aZ
 lw
 Xf
 Xf
@@ -11615,7 +11419,7 @@ FH
 FH
 HN
 Co
-TU
+bK
 xD
 pc
 pc
@@ -11633,11 +11437,11 @@ rk
 DM
 YP
 rk
-IF
+bl
 EH
 pT
 EH
-nC
+bd
 rk
 ll
 Cb
@@ -11667,10 +11471,10 @@ lw
 lw
 Xf
 Xf
-eE
-eE
-eE
-eE
+aZ
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -11684,7 +11488,7 @@ Xf
 Xf
 wn
 bh
-ea
+sk
 HN
 GR
 aJ
@@ -11739,9 +11543,9 @@ lw
 lw
 lw
 lw
-eE
-eE
-eE
+aZ
+aZ
+aZ
 Xf
 Xf
 Xf
@@ -11849,11 +11653,11 @@ lw
 lw
 lw
 rk
-Ui
+bo
 cR
 vx
 wV
-tx
+be
 rk
 Cb
 Cb

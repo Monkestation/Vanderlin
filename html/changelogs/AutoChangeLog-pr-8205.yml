@@ -1,0 +1,5 @@
+author: "ModDownloading"
+delete-after: True
+changes:
+  - balance: "Scabbards and sheaths can now be used to parry in offhand like shields."
+  - bugfix: "Katanas now have their proper intents in two-handed grips."

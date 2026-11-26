@@ -93,16 +93,23 @@
 
 /obj/item/weapon/whip/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
-/obj/item/weapon/whip/silver/truesilver
+/obj/item/weapon/whip/truesilver
 	name = "truesilver whip"
 	desc = "A blued leather corded whip with a handle, core and tip forged with truesilver."
 	icon_state = "whip_lunar"
+	force = DAMAGE_WHIP + 2
+	resistance_flags = FIRE_PROOF
 	smeltresult = null
 	melt_amount = 100
 	melting_material = /datum/material/truesilver
 	max_integrity = INTEGRITY_WHIP * INTEGRITY_MOD_TRUESILVER
+	item_weight = 550 GRAMS
+
+/obj/item/weapon/whip/truesilver/Initialize(mapload)
+	. = ..()
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 //................ Psydon Whip ............... //
 /obj/item/weapon/whip/psydon
@@ -155,7 +162,7 @@
 
 /obj/item/weapon/whip/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 //................ Caning Stick.................//
 /obj/item/weapon/whip/cane
@@ -297,4 +304,4 @@
 
 /obj/item/weapon/whip/urumi/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)

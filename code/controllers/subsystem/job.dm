@@ -68,7 +68,9 @@ SUBSYSTEM_DEF(job)
 	if(!player || !player.mind || !job)
 		JobDebug("AR has failed, Player: [player], Rank: [job.get_informed_title(player)]")
 		return FALSE
-	if(is_banned_from(player.ckey, job.title) || QDELETED(player))
+	if(QDELETED(player))
+		return FALSE
+	if(is_role_banned(player.ckey, job.title) || is_banned_from(player.ckey, job.title))
 		return FALSE
 	if(!job.player_old_enough(player.client))
 		return FALSE
@@ -106,7 +108,7 @@ SUBSYSTEM_DEF(job)
 
 	var/datum/preferences/player_prefs = player.client.prefs
 
-	if(is_role_banned(player.ckey, job.title))
+	if(is_role_banned(player.ckey, job.title) || is_banned_from(player.ckey, job.title))
 		JobDebug("Eligibility failed: role banned, Player: [player], Job: [job.title]")
 		return FALSE
 
