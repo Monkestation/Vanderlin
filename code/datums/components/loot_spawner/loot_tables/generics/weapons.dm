@@ -13,7 +13,7 @@
 	name = "copper weapons"
 	loot_table = list(
 		/obj/item/weapon/mace/bludgeon/copper = 15,
-		/obj/item/weapon/axe/copper = 15,
+		/obj/item/weapon/axe/hatchet/copper = 15,
 		/obj/item/weapon/knife/copper = 15,
 		/obj/item/weapon/sword/long/rider/copper = 15,
 		/obj/item/weapon/sword/coppermesser = 15,

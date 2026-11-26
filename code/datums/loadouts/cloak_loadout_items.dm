@@ -141,6 +141,12 @@
 	ui_category = "Cloaks"
 	triumph_cost_permanent = 100
 
+/datum/loadout_item/huntercloakbush
+	name = "Hunter's Bush Cloak"
+	ui_category = "Cloaks"
+	item_path = /obj/item/clothing/cloak/raincloak/bush
+	triumph_cost_permanent = 150
+
 /datum/loadout_item/forestcloaksnow
 	name = "Forester's Snow Cloak"
 	ui_category = "Cloaks"

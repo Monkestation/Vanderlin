@@ -36,7 +36,7 @@
 /datum/anvil_recipe/weapons/copper/caxe
 	name = "Copper Hatchet"
 	additional_items = list(/obj/item/ingot/copper = 1)
-	created_item = /obj/item/weapon/axe/copper
+	created_item = /obj/item/weapon/axe/hatchet/copper
 
 /datum/anvil_recipe/weapons/copper/cbludgeon
 	name = "Copper Bludgeon"
@@ -171,17 +171,25 @@
 	appro_skill = /datum/attribute/skill/craft/engineering
 	additional_items = list(/obj/item/natural/wood/plank = 1)
 	created_item = /obj/item/ammo_casing/caseless/arrow
-	output_amount = 5
+	output_amount = 20
 	category = "Ammo"
-	craftdiff = 0
+	craftdiff = 1
+
+/datum/anvil_recipe/weapons/iron/arrows/broadhead
+	name = "Broadhead Arrows"
+	created_item = /obj/item/ammo_casing/caseless/arrow/broadhead
 
 /datum/anvil_recipe/weapons/iron/bolts
 	name = "Crossbow Bolts"
 	appro_skill = /datum/attribute/skill/craft/engineering
 	additional_items = list(/obj/item/natural/wood/plank = 1)
 	created_item = /obj/item/ammo_casing/caseless/bolt
-	output_amount = 5
+	output_amount = 20
 	category = "Ammo"
+
+/datum/anvil_recipe/weapons/iron/bolts/broadhead
+	name = "Broadhead Crossbow Bolts"
+	created_item = /obj/item/ammo_casing/caseless/bolt/broadhead
 
 /datum/anvil_recipe/weapons/iron/javelin
 	name = "Iron Javelins"
@@ -199,6 +207,11 @@
 	name = "Iron Axe"
 	additional_items = list(/obj/item/grown/log/tree/stick = 1)
 	created_item = /obj/item/weapon/axe/iron
+
+/datum/anvil_recipe/weapons/iron/hatchet
+	name = "Iron Hatchet"
+	additional_items = list(/obj/item/grown/log/tree/stick = 1)
+	created_item = /obj/item/weapon/axe/hatchet
 
 /datum/anvil_recipe/weapons/iron/nsapo
 	name = "Iron Kasuyu"
@@ -292,6 +305,10 @@
 	created_item = /obj/item/weapon/knife/villager
 	output_amount = 3
 	craftdiff = 0
+
+/datum/anvil_recipe/weapons/iron/huntknife
+	name = "Hunting Knife"
+	created_item = /obj/item/weapon/knife/hunting
 
 /datum/anvil_recipe/weapons/iron/cleaver
 	name = "Cleaver"
@@ -729,10 +746,6 @@
 	name = "Glaive"
 	additional_items = list(/obj/item/grown/log/tree/small = 1)
 	created_item = /obj/item/weapon/polearm/halberd/bardiche/glaive
-
-/datum/anvil_recipe/weapons/steel/huntknife
-	name = "Hunting Knife"
-	created_item = /obj/item/weapon/knife/hunting
 
 /datum/anvil_recipe/weapons/steel/kiteshield
 	name = "Kite Shield"

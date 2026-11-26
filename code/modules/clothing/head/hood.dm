@@ -196,6 +196,8 @@
 	icon_state = "leatherhood"
 	item_state = "leatherhood"
 	prevent_crits = MINOR_CRITICALS
+	body_parts_covered = NECK
+	hooded_body_parts_covered = HEAD_EXCEPT_FACE | NECK
 	armor_type = /datum/armor/leather
 	blocksound = SOFTUNDERHIT
 	item_weight = 145 GRAMS
@@ -204,7 +206,6 @@
 	name = "hardened leather hood"
 	desc = "A simple if foreboding hood made out of expertly treated leather. Worn more by those venturing out into the wilds, rather than street thugs and honest yeoman."
 	max_integrity = INTEGRITY_OLD_STRONG
-	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	prevent_crits = ALL_EXCEPT_CHOP_AND_STAB
 	armor_type = /datum/armor/head/leather/advanced
 
@@ -212,7 +213,6 @@
 	name = "masterwork leather hood"
 	desc = "A simple if foreboding hood made out of masterfully treated and tanned leather. Worn by veteran hunters and adventurers venturing out into the wilds, this hood will keep out most anything, besides death, and fire."
 	max_integrity = INTEGRITY_OLD_STRONG + 100
-	body_parts_covered = HEAD_EXCEPT_MOUTH | NECK
 	prevent_crits = ALL_EXCEPT_STAB
 	armor_type = /datum/armor/head/leather/master
 
