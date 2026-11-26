@@ -236,6 +236,7 @@ GLOBAL_PROTECT(admin_verbs_debug)
 	/client/proc/cmd_regenerate_asset_cache,
 	/client/proc/cmd_clear_smart_asset_cache,
 	/client/proc/select_job_pack_debug,
+	/client/proc/debug_shake,
 )
 GLOBAL_LIST_INIT(admin_verbs_possess, list(/proc/possess, GLOBAL_PROC_REF(release)))
 GLOBAL_PROTECT(admin_verbs_possess)
@@ -300,7 +301,8 @@ GLOBAL_LIST_INIT(admin_verbs_hideable, list(
 	/client/proc/panicbunker,
 	/client/proc/cmd_display_del_log,
 	/client/proc/toggle_combo_hud,
-	/client/proc/debug_huds
+	/client/proc/debug_huds,
+	/client/proc/debug_shake,
 	))
 GLOBAL_PROTECT(admin_verbs_hideable)
 
@@ -355,7 +357,7 @@ GLOBAL_PROTECT(admin_verbs_hideable)
 		GLOB.admin_verbs_spawn,
 		GLOB.admin_verbs_debug_mapping,
 		/client/proc/disable_debug_verbs,
-		/client/proc/readmin
+		/client/proc/readmin,
 	)
 	remove_verb(src, verbs)
 

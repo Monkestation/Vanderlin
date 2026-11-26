@@ -119,6 +119,20 @@ GLOBAL_REAL(Master, /datum/controller/master)
 
 	Master.ui_interact(usr)
 
+/client/proc/debug_shake()
+	set name = "Debug Shake"
+	set desc = "Shake the camera for debugging purposes."
+	set category = "Debug"
+
+	if(!check_rights(R_SERVER|R_DEBUG))
+		return
+
+	var/how_long = input(src, "how long?", "pro", 20)
+
+	var/how_much = input(src, "how much?", "pro", 2)
+
+	shake_camera(src.mob, how_long, how_much)
+
 /datum/controller/master/ui_status(mob/user, datum/ui_state/state)
 	if(!user.client?.holder?.check_for_rights(R_SERVER|R_DEBUG))
 		return UI_CLOSE

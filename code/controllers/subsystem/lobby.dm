@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(lobbymenu)
 	while(currentrun.len)
 		var/mob/dead/new_player/player = currentrun[currentrun.len]
 		currentrun.len--
-		if(player.client)
-			player.lobby_refresh()
+		//if(player.client)
+			//player.legacy_lobby_refresh() // old
 		if (MC_TICK_CHECK)
 			return

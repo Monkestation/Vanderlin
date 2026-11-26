@@ -453,3 +453,7 @@
 /turf/closed/mineral/bedrock/Melt()
 	to_be_destroyed = FALSE
 	return src
+
+/turf/closed/mineral/bedrock/black
+	icon = 'icons/turf/floors.dmi'
+	icon_state = "black"

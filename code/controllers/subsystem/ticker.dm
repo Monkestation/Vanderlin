@@ -2,10 +2,12 @@
 #define SS_TICKER_TRAIT "SS_Ticker"
 
 /proc/low_memory_force_start()
+	/*
 	for(var/mob/dead/new_player/player as anything in GLOB.new_player_list)
 		player.ready = PLAYER_READY_TO_PLAY
 
 	SSticker.start_immediately = TRUE
+	*/
 	//SSticker.fire()
 GLOBAL_VAR_INIT(round_timer, INITIAL_ROUND_TIMER)
 
