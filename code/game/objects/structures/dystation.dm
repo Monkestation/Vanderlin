@@ -109,7 +109,7 @@
 		dat += "<A href='byond://?src=[ref];action=eject'>Remove item.</A>"
 		dat += "<HR>"
 
-		dat += "Color: <span style='color:[active_color];'>&#9898;</span>"
+		dat += "Color: <span style='color:[active_color];'>&#9670;</span>"
 		dat += "<BR>"
 		dat += "<A href='byond://?src=[ref];action=select'>Select new color.</A>"
 		dat += "<BR>"
@@ -145,6 +145,7 @@
 			if(!choice)
 				return
 			active_color = selectable_colors[choice]
+			interact(user) // refresh the menu
 
 		if("paint")
 			if(!inserted)
