@@ -19,7 +19,7 @@
 	tutorial = "You are one of the Hand's loyal Agents. \
 	You have a gun. \
 	<i>BACKSTORY TO BE FINISHED LATER</i>."
-	allowed_races = RACES_PLAYER_GRENZ_MERC
+	allowed_races = list(SPEC_ID_TIEFLING, RACES_PLAYER_GRENZ_MERC)
 	outfit = /datum/outfit/courtagent/surefire
 
 	attribute_sheet = /datum/attribute_holder/sheet/job/courtagent/surefire
