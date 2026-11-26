@@ -67,6 +67,7 @@
 		TRAIT_PSYDONITE,
 		TRAIT_FOREIGNER,
 		TRAIT_RECOGNIZED,
+		TRAIT_CULTURAL_KNOWLEDGE, // travelled far and wide and is experienced.
 	)
 
 /datum/job/advclass/puritan/ordinator/after_spawn(mob/living/carbon/human/spawned, client/player_client)
