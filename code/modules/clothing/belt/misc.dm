@@ -60,10 +60,10 @@
 		/obj/item/key/forrestgarrison,
 	)
 
-/obj/item/storage/belt/leather/gallowband
+/obj/item/storage/belt/leather/forest_guard
 	populate_contents = list(
 		/obj/item/needle/thorn,
-		/obj/item/storage/keyring/gallowband,
+		/obj/item/storage/keyring/forest_guard,
 	)
 
 /obj/item/storage/belt/leather/townguard //they get their keys + dagger there

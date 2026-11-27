@@ -315,14 +315,8 @@
 /obj/item/storage/keyring/bogwitch
 	keys = list(/obj/item/key/bogwitch, /obj/item/key/gallowband)
 
-/obj/item/storage/keyring/gallowband
+/obj/item/storage/keyring/forest_guard
 	keys = list(/obj/item/key/gallowband, /obj/item/key/gallowband/secure)
 
-/obj/item/storage/keyring/gallowband/hersir
-	keys = list(/obj/item/key/gallowband, /obj/item/key/gallowband/secure, /obj/item/key/gallowband/hersir)
-
-/obj/item/storage/keyring/gallowband/gothi
-	keys = list(/obj/item/key/gallowband, /obj/item/key/gallowband/secure, /obj/item/key/gallowband/gothi)
-
-/obj/item/storage/keyring/gallowband/warden
-	keys = list(/obj/item/key/gallowband, /obj/item/key/gallowband/secure, /obj/item/key/gallowband/gothi, /obj/item/key/gallowband/hersir, /obj/item/key/gallowband/warden)
+/obj/item/storage/keyring/forest_guard/warden
+	keys = list(/obj/item/key/gallowband, /obj/item/key/gallowband/secure, /obj/item/key/gallowband/warden)

@@ -990,7 +990,7 @@
 	dir = 1
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/metal/alt,
 /area/indoors/town/cell)
 "kf" = (
@@ -1092,7 +1092,7 @@
 	dir = 8
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/metal/alt,
 /area/indoors/town/cell)
 "la" = (
@@ -1337,7 +1337,7 @@
 /area/outdoors/bog)
 "nh" = (
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /obj/structure/door/green{
 	name = "Salem Garrison"
 	},
@@ -2159,7 +2159,7 @@
 	name = "forrest warden bedroom"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "xp" = (
@@ -3164,7 +3164,7 @@
 	name = "Salem Garrison"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/hexstone,
 /area/indoors/villagegarrison)
 "Ii" = (
@@ -3237,7 +3237,7 @@
 	name = "forrest garrison barracks"
 	},
 /obj/effect/mapping_helpers/access/locker,
-/obj/effect/mapping_helpers/access/keyset/gallowband/general,
+/obj/effect/mapping_helpers/access/keyset/forest_guard/general,
 /turf/open/floor/ruinedwood/darker,
 /area/indoors/villagegarrison)
 "IP" = (

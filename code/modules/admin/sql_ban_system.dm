@@ -287,7 +287,7 @@
 			"Youngfolk" = GLOB.youngfolk_positions,
 			"Company" = GLOB.company_positions,
 			"Outsiders" = GLOB.allmig_positions,
-			"Gallowband" = GLOB.gallowband_positions,
+			"Forest Guard" = GLOB.forest_guard_positions,
 		)
 
 		// Build a flat lookup of every role title that's already in a category,

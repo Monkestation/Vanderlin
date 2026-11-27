@@ -41,8 +41,6 @@
 		/datum/job/magician,
 		/datum/job/archivist,
 		/datum/job/forestwarden,
-		/datum/job/forestenforcer,
-		/datum/job/forestpreacher,
 		/datum/job/bogwitch,
 		/datum/job/bog_apprentice,
 		/datum/job/admin/oracle,

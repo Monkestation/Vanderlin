@@ -45,7 +45,7 @@
 	FACTION_BUMS, \
 	FACTION_VIKINGS, \
 	FACTION_MATTHIOS, \
-	FACTION_GALLOWBAND \
+	FACTION_FOREST_GUARD \
 )
 
 #define FACTION_NONE "None"
@@ -69,7 +69,7 @@
 #define FACTION_ORCS "Orcs"
 #define FACTION_BUMS "Bums"
 #define FACTION_VIKINGS "Vikings"
-#define FACTION_GALLOWBAND "Gallowband"
+#define FACTION_FOREST_GUARD "Forest Guard"
 #define FACTION_INQUISITION	"Inquisition"
 #define FACTION_MEAT "Meat"
 #define FACTION_DEEP "Deep"
@@ -102,7 +102,7 @@
 #define INQUISITION 	(1<<9)
 
 #define UNDEAD			(1<<10)
-#define GALLOWBAND		(1<<11)
+#define FOREST_GUARD		(1<<11)
 
 #define ADMIN_SPECIAL	(1<<12)
 
@@ -303,20 +303,8 @@
 
 #define JOB_BOGWITCH "Bog Witch"
 #define JOB_BOGWITCH_APP "Bog Witch Apprentice"
-#define JOB_FOREST_WARDEN_CLASSIC "Forest Warden"
-#define JOB_FOREST_GUARD_CLASSIC "Forest Guard"
-#define JOB_FOREST_WARDEN "Warden of the Woods"
-#define JOB_FOREST_ENFORCER "Hersir"
-#define JOB_FOREST_PREACHER "Gothi"
-#define JOB_FOREST_SUPPORT "Vinnumaour"
-#define JOB_FOREST_SUPPORT_FEM "Vinnukona"
-#define JOB_FOREST_GUARD "Gallowband"
-#define JOB_FOREST_GUARD_HUSKARL_SCOUT "Huskarl Scout"
-#define JOB_FOREST_GUARD_HUSKARL_FIGHTER "Huskarl Fighter"
-#define JOB_FOREST_GUARD_THEGN_REAVER "Thegn Reaver"
-#define JOB_FOREST_GUARD_THEGN_RAVAGER "Thegn Ravager"
-#define JOB_FOREST_GUARD_THEGN_RANGER "Thegn Ranger"
-
+#define JOB_FOREST_WARDEN "Forest Warden"
+#define JOB_FOREST_GUARD "Forest Guard"
 
 #define JOB_PRAFEKT "Herr Prafekt"
 #define JOB_SACRESTANTS "Sacrestants"

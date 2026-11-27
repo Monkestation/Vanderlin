@@ -28,12 +28,10 @@
 #define ACCESS_CAPTAIN "captain"
 #define ACCESS_GATE "gate"
 
-// Gallowband
-#define ACCESS_GALLOWBAND "gallowband"
-#define ACCESS_GALLOWBAND_SECURE "gallowband_secure"
-#define ACCESS_GALLOWBAND_HERSIR "gallowband_hersir"
-#define ACCESS_GALLOWBAND_WARDEN "gallowband_warden"
-#define ACCESS_GALLOWBAND_GOTHI "gallowband_gothi"
+// Forest Guard
+#define ACCESS_FOREST_GUARD "forest_guard"
+#define ACCESS_FOREST_GUARD_SECURE "forest_guard_secure"
+#define ACCESS_FOREST_GUARD_WARDEN "forest_warden"
 
 // Church
 #define ACCESS_CHURCH "church"

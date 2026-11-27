@@ -480,7 +480,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_VAMP_DREAMS "vamp_dreams"
 #define TRAIT_VAMP_OFFERED "offered_vampirism"
 #define TRAIT_INHUMENCAMP "inhumencamp"
-#define TRAIT_GALLOWBAND "gallowband"
+#define TRAIT_FOREST_GUARD "forestguard"
 #define TRAIT_INTRAINING "intraining" //allows certain roles to bypass the average skill limitation of training dummies
 #define TRAIT_STEELHEARTED "Steel Hearted" //no bad mood from dismembering or seeing this
 #define TRAIT_IWASUNZOMBIFIED "iwasunzombified" //prevents PQ gain from curing a zombie twice
@@ -607,7 +607,7 @@ Remember to update _globalvars/traits.dm if you're adding/removing/renaming trai
 #define TRAIT_KNOW_THIEF_DOORS "know_thief_doors"
 #define TRAIT_KNOW_COURTAGENT_DOORS "know_courtagent_doors"
 #define TRAIT_KNOW_ROUS_DOORS "know_rous_doors" //Event purposes.
-#define TRAIT_GALLOWBAND_SECRETS "know_gallowband_secrets"
+#define TRAIT_FOREST_GUARD_SECRETS "know_forest_secrets"
 
 // JOB RELATED TRAITS
 #define TRAIT_MALUMFIRE "Professional Smith"
