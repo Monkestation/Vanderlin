@@ -146,7 +146,7 @@
 		if("Cuirass Set")
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/cuirass, ITEM_SLOT_ARMOR, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/armor/gambeson/arming, ITEM_SLOT_SHIRT, TRUE)
-			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/chainlegs/iron, ITEM_SLOT_PANTS, TRUE)
+			spawned.equip_to_slot_or_del(new /obj/item/clothing/pants/chainlegs, ITEM_SLOT_PANTS, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/wrists/bracers, ITEM_SLOT_WRISTS, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/gloves/chain, ITEM_SLOT_GLOVES, TRUE)
 			spawned.equip_to_slot_or_del(new /obj/item/clothing/neck/bevor, ITEM_SLOT_NECK, TRUE)
@@ -421,8 +421,8 @@
 	name = "Serjeant Men-At-Arms"
 	armor = /obj/item/clothing/armor/brigandine
 	shirt = /obj/item/clothing/armor/gambeson/arming
-	pants = /obj/item/clothing/pants/chainlegs/iron
-	wrists = /obj/item/clothing/wrists/bracers
+	pants = /obj/item/clothing/pants/chainlegs
+	wrists = /obj/item/clothing/wrists/bracers/leather
 	gloves = /obj/item/clothing/gloves/chain
 	neck = /obj/item/clothing/neck/bevor
 	backpack_contents = list(
