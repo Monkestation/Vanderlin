@@ -1,8 +1,0 @@
-author: "TheDoktorZ"
-delete-after: True
-changes:
-  - balance: "Updated the ancient military equipment imports."
-  - bugfix: "Added an updated face for the Returning Bannermen."
-  - bugfix: "Guard recruits get the main class title now so they can get wages."
-  - bugfix: "Changed the \"watch boots\" to something Archeon would probably like more."
-  - spellcheck: "MAA are no longer plural in titles."

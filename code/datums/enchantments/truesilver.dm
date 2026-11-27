@@ -5,7 +5,7 @@
 #define TRUESILVER_BANE_MAX_STACKS 6
 #define TRUESILVER_BANE_COOLDOWN (4 SECONDS)
 
-/datum/enchantment/truesilver
+/datum/enchantment/on_hit/truesilver
 	enchantment_name = "Truesilver's light"
 	examine_text = SPAN_GOD_NOC("Noc's light shines through it. The absolute bane of nitecreachers.")
 	essence_recipe = list(
@@ -15,11 +15,12 @@
 	)
 	var/list/last_used = list()
 	var/active_item = FALSE
+	cooldown_time = TRUESILVER_BANE_COOLDOWN
 
-/datum/enchantment/truesilver/register_triggers(atom/item)
+/datum/enchantment/on_hit/truesilver/register_triggers(atom/item)
 	. = ..()
-	registered_signals += COMSIG_ITEM_ATTACK
-	RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
+	// registered_signals += COMSIG_ITEM_ATTACK
+	// RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
 	//registered_signals += COMSIG_ITEM_PICKUP
 	//RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	registered_signals += COMSIG_ITEM_EQUIPPED
@@ -27,11 +28,11 @@
 	registered_signals += COMSIG_ITEM_DROPPED
 	RegisterSignal(item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 
-/datum/enchantment/truesilver/proc/on_drop(obj/item/i, mob/living/user)
+/datum/enchantment/on_hit/truesilver/proc/on_drop(obj/item/i, mob/living/user)
 	active_item = FALSE
 	STOP_PROCESSING(SSenchantment, src)
 
-/datum/enchantment/truesilver/proc/affected_by_bane(mob/target)
+/datum/enchantment/on_hit/truesilver/proc/affected_by_bane(mob/target)
 	if(!ishuman(target) || !target.mind || HAS_TRAIT(target, TRAIT_TRUESILVER_IMMUNE))
 		return TRUESILVER_UNAFFECTED
 	var/datum/antagonist/vampire/vamp_datum = target.mind.has_antag_datum(/datum/antagonist/vampire)
@@ -56,12 +57,10 @@
 		return TRUESILVER_AFFECTED
 	return TRUESILVER_UNAFFECTED
 
-/datum/enchantment/truesilver/proc/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
+/datum/enchantment/on_hit/truesilver/apply_attack_effects(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
 	if(!user.CanReach(target))
 		return
 	if(!ishuman(target))
-		return
-	if(world.time < (src.last_used["ON-HIT"] + TRUESILVER_BANE_COOLDOWN))
 		return
 	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
 		return
@@ -95,21 +94,21 @@
 	last_used["ON-HIT"] = world.time
 	return
 
-/datum/enchantment/truesilver/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/on_hit/truesilver/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
 	last_used["PULSE"] = (world.time + 10 SECONDS)
 	last_used["BLESSING"] = (world.time + 15 SECONDS)
 	apply_bane(i, user, FALSE)
 	apply_blessing(i, user)
 	START_PROCESSING(SSenchantment, src)
 
-/datum/enchantment/truesilver/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/on_hit/truesilver/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
 	last_used["PULSE"] = (world.time + 10 SECONDS)
 	last_used["BLESSING"] = (world.time + 15 SECONDS)
 	apply_bane(i, user, FALSE)
 	apply_blessing(i, user)
 	START_PROCESSING(SSenchantment, src)
 
-/datum/enchantment/truesilver/proc/apply_bane(obj/item/i, mob/living/carbon/human/user, pulse)
+/datum/enchantment/on_hit/truesilver/proc/apply_bane(obj/item/i, mob/living/carbon/human/user, pulse)
 	if(pulse && (world.time < (last_used["PULSE"] + 10 SECONDS)))
 		return FALSE
 	var/affected = affected_by_bane(user)
@@ -136,7 +135,7 @@
 			user.fire_act(1, 10)
 	return TRUE
 
-/datum/enchantment/truesilver/proc/apply_blessing(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/on_hit/truesilver/proc/apply_blessing(obj/item/i, mob/living/carbon/human/user)
 	if(world.time < (last_used["BLESSING"] + 15 SECONDS))
 		return FALSE
 	var/affected = affected_by_bane(user)
@@ -148,7 +147,7 @@
 	user.apply_status_effect(/datum/status_effect/buff/truesilver_blessing)
 	return TRUE
 
-/datum/enchantment/truesilver/proc/on_bite(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/on_hit/truesilver/proc/on_bite(obj/item/i, mob/living/carbon/human/user)
 	var/affected = affected_by_bane(user)
 	if(!affected)
 		return FALSE
@@ -166,7 +165,7 @@
 			user.fire_act(1, 2)
 	return TRUE
 
-/datum/enchantment/truesilver/process(delta_time)
+/datum/enchantment/on_hit/truesilver/process(delta_time)
 	if(!enchanted_item)
 		STOP_PROCESSING(SSenchantment, src)
 		return

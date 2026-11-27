@@ -3,7 +3,7 @@
 #define SILVER_BANE_MAX_STACKS 6
 #define SILVER_BANE_COOLDOWN (3 SECONDS)
 
-/datum/enchantment/silver
+/datum/enchantment/on_hit/silver
 	enchantment_name = "Nightlurkers Bane"
 	examine_text = span_silver("It's a bane to all who lurk at night.")
 	essence_recipe = list(
@@ -12,11 +12,12 @@
 	)
 	var/list/last_used = list()
 	var/active_item = FALSE
+	cooldown_time = SILVER_BANE_COOLDOWN
 
-/datum/enchantment/silver/register_triggers(atom/item)
+/datum/enchantment/on_hit/silver/register_triggers(atom/item)
 	. = ..()
-	registered_signals += COMSIG_ITEM_ATTACK
-	RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
+	// registered_signals += COMSIG_ITEM_ATTACK
+	// RegisterSignal(item, COMSIG_ITEM_ATTACK, PROC_REF(on_hit))
 	//registered_signals += COMSIG_ITEM_PICKUP
 	//RegisterSignal(item, COMSIG_ITEM_PICKUP, PROC_REF(on_pickup))
 	registered_signals += COMSIG_ITEM_EQUIPPED
@@ -24,12 +25,12 @@
 	registered_signals += COMSIG_ITEM_DROPPED
 	RegisterSignal(item, COMSIG_ITEM_DROPPED, PROC_REF(on_drop))
 
-/datum/enchantment/silver/proc/on_drop(obj/item/i, mob/living/user)
+/datum/enchantment/on_hit/silver/proc/on_drop(obj/item/i, mob/living/user)
 	if(active_item)
 		active_item = FALSE
 	STOP_PROCESSING(SSenchantment, src)
 
-/datum/enchantment/silver/proc/affected_by_bane(mob/target)
+/datum/enchantment/on_hit/silver/proc/affected_by_bane(mob/target)
 	if(!ishuman(target) || !target.mind)
 		return UNAFFECTED
 	if(HAS_TRAIT(target, TRAIT_SILVER_IMMUNE) || HAS_TRAIT(target, TRAIT_TRUESILVER_IMMUNE))
@@ -45,12 +46,10 @@
 		return AFFECTED
 	return UNAFFECTED
 
-/datum/enchantment/silver/proc/on_hit(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
+/datum/enchantment/on_hit/silver/apply_attack_effects(obj/item/source, mob/living/carbon/human/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
 	if(!user.CanReach(target))
 		return
 	if(!ishuman(target))
-		return
-	if(world.time < (src.last_used["ON-HIT"] + SILVER_BANE_COOLDOWN))
 		return
 	if(!istype(source, /obj/item/weapon) || (istype(source, /obj/item/weapon/scabbard)))
 		return
@@ -77,17 +76,17 @@
 	last_used["ON-HIT"] = world.time
 	return
 
-/datum/enchantment/silver/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/on_hit/silver/proc/on_equip(obj/item/i, mob/living/carbon/human/user)
 	last_used["PULSE"] = (world.time + 15 SECONDS)
 	apply_bane(i, user, FALSE)
 	START_PROCESSING(SSenchantment, src)
 
-/datum/enchantment/silver/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/on_hit/silver/proc/on_pickup(obj/item/i, mob/living/carbon/human/user)
 	last_used["PULSE"] = (world.time + 15 SECONDS)
 	apply_bane(i, user, FALSE)
 	START_PROCESSING(SSenchantment, src)
 
-/datum/enchantment/silver/proc/apply_bane(obj/item/i, mob/living/carbon/human/user, pulse)
+/datum/enchantment/on_hit/silver/proc/apply_bane(obj/item/i, mob/living/carbon/human/user, pulse)
 	if(pulse && (world.time < (last_used["PULSE"] + 15 SECONDS)))
 		return
 	var/affected = affected_by_bane(user)
@@ -107,7 +106,7 @@
 		user.adjustFireLoss(25)
 		user.fire_act(1, 10)
 
-/datum/enchantment/silver/proc/on_bite(obj/item/i, mob/living/carbon/human/user)
+/datum/enchantment/on_hit/silver/proc/on_bite(obj/item/i, mob/living/carbon/human/user)
 	var/affected = affected_by_bane(user)
 	if(!affected)
 		return FALSE
@@ -117,7 +116,7 @@
 		user.Paralyze(1 SECONDS)
 	return TRUE
 
-/datum/enchantment/silver/process(delta_time)
+/datum/enchantment/on_hit/silver/process(delta_time)
 	if(!enchanted_item)
 		STOP_PROCESSING(SSenchantment, src)
 		return

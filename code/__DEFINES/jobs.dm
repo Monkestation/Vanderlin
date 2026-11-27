@@ -323,6 +323,7 @@
 #define JOB_ABSOLVER "Absolver"
 #define JOB_ADEPT "Adept"
 
+#define JOB_INVALID "INVALID CLASS"
 
 #define JOB_ALCHEMIST "Alchemist"
 #define JOB_LUMBERJACK "Lumberjack"

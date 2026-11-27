@@ -6,7 +6,7 @@
 	var/last_scale_number = 1
 
 	var/mob/living/walk_to_target
-	var/walk_to_duration = 0
+	COOLDOWN_DECLARE(walk_to_duration)
 	var/walk_to_steps_taken = 0
 
 	var/celerity_visual = FALSE

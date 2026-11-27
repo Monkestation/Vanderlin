@@ -311,7 +311,7 @@
 
 /obj/item/weapon/axe/battle/bloodsteel/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/bloodcurse)
+	enchant(/datum/enchantment/on_hit/bloodcurse)
 
 //------------------ Silver Axe ---------------//
 /obj/item/weapon/axe/silver
@@ -328,7 +328,7 @@
 
 /obj/item/weapon/axe/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 /obj/item/weapon/axe/silver/getonmobprop(tag)
 	. = ..()
@@ -599,7 +599,7 @@
 
 /obj/item/weapon/greataxe/truesilver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/truesilver)
+	enchant(/datum/enchantment/on_hit/truesilver)
 
 /obj/item/weapon/greataxe/blacksteel
 	name = "blacksteel greataxe"

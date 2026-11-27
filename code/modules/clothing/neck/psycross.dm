@@ -188,7 +188,7 @@
 
 /obj/item/clothing/neck/psycross/silver/Initialize(mapload)
 	. = ..()
-	enchant(/datum/enchantment/silver)
+	enchant(/datum/enchantment/on_hit/silver)
 
 // PANTHEON SILVER PSYCROSSES START
 /obj/item/clothing/neck/psycross/silver/divine
