@@ -1,0 +1,2064 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ad" = (
+/mob/living/simple_animal/hostile/deepone,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"ak" = (
+/obj/structure/chair/wood,
+/mob/living/simple_animal/hostile/deepone/arm,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"al" = (
+/obj/structure/flora/tree/underworld{
+	color = "#7D9BAE";
+	desc = "Twisted wood formed into the shape of a tree";
+	name = "Twisted Wood"
+	},
+/turf/open/water/ocean/abyss,
+/area/outdoors/bog)
+"aq" = (
+/obj/structure/flora/shells,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"aI" = (
+/turf/open/openspace,
+/area/indoors/shelter/bog/inhumen_camp)
+"aP" = (
+/obj/structure/flora/starfish,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"aU" = (
+/obj/machinery/light/fueled/firebowl/stumpb,
+/turf/open/floor/abyss_tile/three,
+/area/outdoors/bog)
+"bd" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/abyss_tile/two,
+/area/indoors/shelter/bog/inhumen_camp)
+"bu" = (
+/turf/open/floor/abyss_sand/path,
+/area/under/tomb)
+"bZ" = (
+/obj/structure/flora/shells,
+/turf/open/floor/abyss_sand,
+/area/outdoors/bog)
+"cd" = (
+/obj/structure/flora/rock/water,
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"cC" = (
+/obj/machinery/light/fueled/firebowl/standing/blue,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"dk" = (
+/turf/open/openspace,
+/area/outdoors/bog)
+"dq" = (
+/obj/effect/dungeon_directional_helper/north,
+/turf/open/floor/abyss_sand,
+/area/under/tomb)
+"dv" = (
+/obj/structure/flora/shells,
+/obj/machinery/light/fueled/firebowl/stumpb,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"ef" = (
+/obj/structure/flora/rock/water,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"eC" = (
+/obj/structure/flora/starfish,
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"ft" = (
+/obj/structure/flora/driftwood,
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"fY" = (
+/obj/machinery/light/fueled/firebowl/standing/blue,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"fZ" = (
+/obj/structure/stairs/abyss{
+	icon_state = "coral-13"
+	},
+/turf/closed/wall/mineral/abyssal,
+/area/indoors/shelter/bog/inhumen_camp)
+"gH" = (
+/obj/structure/flora/starfish{
+	icon_state = "starfish-3"
+	},
+/turf/open/floor/abyss_sand,
+/area/outdoors/bog)
+"gX" = (
+/obj/machinery/light/fueled/firebowl/standing/blue,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"gY" = (
+/obj/effect/decal/cleanable/blood/gibs/torso,
+/obj/effect/decal/cleanable/blood/wallsplatter,
+/obj/item/book/abyssor,
+/mob/living/carbon/human/species/triton/base/very_skilled/naked,
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"gZ" = (
+/obj/machinery/light/fueled/firebowl/stumpb,
+/turf/open/floor/abyss_tile,
+/area/outdoors/bog)
+"hh" = (
+/obj/structure/flora/ocean_plants,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"hk" = (
+/obj/structure/table/wood/large/corner_blue,
+/obj/item/gem/opal,
+/turf/open/floor/abyss_tile/two,
+/area/indoors/shelter/bog/inhumen_camp)
+"iv" = (
+/obj/structure/bars,
+/obj/structure/bars,
+/turf/open/floor/abyss_tile/two,
+/area/indoors/shelter/bog/inhumen_camp)
+"iC" = (
+/obj/effect/decal/cleanable/blood/gibs/down,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"iV" = (
+/obj/structure/door/abyss,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"iW" = (
+/obj/structure/door/abyss,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"je" = (
+/obj/structure/fluff/railing/border{
+	dir = 4
+	},
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"jm" = (
+/obj/structure/flora/rock/coral,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"jq" = (
+/turf/open/water/ocean/abyss,
+/area/outdoors/bog)
+"jt" = (
+/obj/machinery/light/fueled/firebowl/stumpb,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"jC" = (
+/obj/structure/flora/shells,
+/mob/living/carbon/human/species/triton/base/unskilled/medium_gear,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"jR" = (
+/obj/effect/decal/cleanable/blood/gibs/core,
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"kd" = (
+/obj/structure/abyss_window,
+/turf/closed/wall/mineral/abyssal,
+/area/indoors/shelter/bog/inhumen_camp)
+"kp" = (
+/obj/machinery/light/fueled/firebowl/firebowlb,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"kJ" = (
+/obj/effect/decal/cleanable/blood/gibs/body,
+/obj/effect/decal/cleanable/blood/gibs/up,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"kT" = (
+/obj/structure/table/stone_small,
+/obj/item/weapon/polearm/spear/naginata,
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"lb" = (
+/obj/structure/flora/rock/coral,
+/turf/open/water/ocean/abyss,
+/area/outdoors/bog)
+"le" = (
+/obj/structure/flora/starfish{
+	icon_state = "shell-5"
+	},
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"lq" = (
+/obj/structure/flora/starfish{
+	icon_state = "driftwood-4"
+	},
+/turf/open/floor/abyss_sand,
+/area/outdoors/bog)
+"lx" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/clothing/head/helmet/heavy/necked/abyssor,
+/obj/item/clothing/armor/brigandine/abyssor,
+/obj/item/clothing/cloak/stabard/templar/abyssor,
+/obj/item/clothing/neck/bevor/bronze,
+/obj/item/clothing/shoes/boots/armor/light,
+/obj/item/clothing/pants/chainlegs,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"lI" = (
+/turf/open/openspace,
+/area/under/tomb)
+"mn" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/machinery/light/fueled/firebowl/stumpb,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"mz" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/stairs/stone{
+	dir = 1;
+	color = "#7D9BAE"
+	},
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"mU" = (
+/obj/machinery/light/fueled/firebowl/stumpb,
+/turf/open/floor/abyss_tile/two,
+/area/outdoors/bog)
+"nM" = (
+/obj/structure/flora/starfish{
+	icon_state = "starfish-3"
+	},
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"ol" = (
+/obj/structure/stairs/stone{
+	dir = 1;
+	color = "#7D9BAE"
+	},
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"oo" = (
+/obj/structure/door/abyss,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"ot" = (
+/obj/structure/flora/starfish,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"ox" = (
+/obj/structure/flora/grass/water,
+/turf/open/water/ocean/abyss,
+/area/outdoors/bog)
+"oF" = (
+/obj/effect/decal/cleanable/blood/puddle,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"pp" = (
+/obj/structure/bed/shit,
+/obj/effect/building_node/spawning_grounds,
+/obj/effect/decal/cleanable/dirt/cobweb/cobweb2,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"qj" = (
+/obj/structure/flora/ocean_plants,
+/turf/open/floor/abyss_sand,
+/area/outdoors/bog)
+"qA" = (
+/obj/structure/flora/pillar,
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"qL" = (
+/obj/structure/flora/pillar,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"rn" = (
+/obj/structure/flora/shells,
+/turf/open/floor/abyss_sand,
+/area/under/tomb)
+"sp" = (
+/obj/machinery/light/fueled/hearth,
+/obj/item/cooking/pan,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"sY" = (
+/obj/structure/flora/ocean_plants,
+/turf/open/water/ocean/abyss,
+/area/outdoors/bog)
+"tw" = (
+/obj/structure/flora/rock/coral,
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"tx" = (
+/obj/structure/flora/rock/water,
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"tJ" = (
+/obj/structure/closet/crate/crafted_closet/inn,
+/obj/item/clothing/shirt/robe/abyssor,
+/obj/item/clothing/head/padded/abyssor,
+/obj/item/clothing/neck/psycross/silver/divine/abyssor,
+/obj/item/weapon/polearm/spear/hoplite/abyssal,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"ub" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/gibs/down,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"ue" = (
+/obj/structure/closet/crate/drawer,
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"uh" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/effect/decal/cleanable/blood/gibs/body,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"uN" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/machinery/light/fueled/torchholder/metal_torch/east,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"uS" = (
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/wool,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"vN" = (
+/obj/structure/flora/shells,
+/turf/open/floor/abyss_sand/path,
+/area/under/tomb)
+"wo" = (
+/mob/living/simple_animal/hostile/deepone,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"wq" = (
+/obj/structure/table/wood/large/corner_blue,
+/obj/item/natural/fur/rous,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"wz" = (
+/obj/effect/dungeon_directional_helper/east/top,
+/turf/open/floor/abyss_sand,
+/area/under/tomb)
+"wM" = (
+/obj/structure/closet/crate/drawer,
+/obj/effect/dungeon_loot_spawner/medium,
+/turf/open/floor/abyss_tile/two,
+/area/indoors/shelter/bog/inhumen_camp)
+"xa" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"xc" = (
+/mob/living/carbon/human/species/triton/base/unskilled/light_gear,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"xq" = (
+/obj/structure/table/wood/cloth/blue,
+/obj/item/fishing/lure/daisy_chain,
+/obj/item/fishing/lure/plug,
+/obj/structure/fluff/millstone,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"xS" = (
+/obj/effect/decal/cleanable/blood/footprints,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"xW" = (
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"yb" = (
+/obj/structure/flora/shells,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"yh" = (
+/obj/structure/flora/starfish{
+	icon_state = "shell-2"
+	},
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"yC" = (
+/obj/structure/table/wood/cloth/blue,
+/obj/item/fishingrod,
+/obj/item/reagent_containers/glass/bottle/water,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"yH" = (
+/obj/machinery/light/fueled/firebowl/standing/blue,
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"yO" = (
+/obj/structure/fluff/railing/border{
+	dir = 1
+	},
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"yS" = (
+/obj/effect/decal/carpet/square/black,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"zd" = (
+/obj/effect/decal/cleanable/blood/gibs/torso,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/machinery/light/fueled/torchholder/metal_torch/west,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"zu" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/effect/decal/cleanable/generic,
+/obj/effect/decal/remains/human,
+/obj/item/reagent_containers/food/snacks/rotten/bacon,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"zI" = (
+/turf/open/floor/abyss_tile,
+/area/outdoors/bog)
+"Aa" = (
+/obj/machinery/light/fueled/firebowl/standing/blue,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"AA" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/lootable_structure/fish_barrel,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"AO" = (
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"Bf" = (
+/turf/open/floor/abyss_tile/two,
+/area/indoors/shelter/bog/inhumen_camp)
+"Bt" = (
+/obj/structure/flora/starfish,
+/turf/open/floor/abyss_sand,
+/area/outdoors/bog)
+"BE" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/flora/shells,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"Ck" = (
+/obj/structure/bed/wool/double,
+/obj/item/bedsheet/double_pelt,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"Dw" = (
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"DC" = (
+/obj/structure/table/stone_small,
+/obj/item/weapon/katar/abyssor,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"DH" = (
+/obj/structure/door/abyss,
+/obj/effect/decal/cleanable/blood/footprints,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"DR" = (
+/obj/structure/table/wood/cloth/blue,
+/obj/item/fishing/reel/deluxe,
+/obj/item/fishing/hook/deluxe,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"Ev" = (
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/wool,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"EW" = (
+/turf/closed/mineral/bedrock,
+/area/under/tomb)
+"Fk" = (
+/obj/structure/flora/starfish{
+	icon_state = "shell-5"
+	},
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"FX" = (
+/mob/living/carbon/human/species/triton/base/unskilled/medium_gear,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"Gy" = (
+/obj/structure/lootable_structure/powder_sack,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"GE" = (
+/mob/living/carbon/human/species/triton/base/skilled/heavy_gear,
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"Hw" = (
+/mob/living/simple_animal/hostile/deepone,
+/obj/structure/flora/ocean_plants,
+/turf/open/water/ocean/abyss,
+/area/indoors/shelter/bog/inhumen_camp)
+"HX" = (
+/obj/structure/flora/ocean_plants,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"Iy" = (
+/turf/closed/wall/mineral/abyssal,
+/area/indoors/shelter/bog/inhumen_camp)
+"II" = (
+/turf/open/water/ocean/abyss,
+/area/indoors/shelter/bog/inhumen_camp)
+"IX" = (
+/obj/effect/dungeon_directional_helper/west,
+/turf/open/floor/abyss_sand,
+/area/under/tomb)
+"Ji" = (
+/mob/living/simple_animal/hostile/deepone/arm,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"Jm" = (
+/obj/machinery/light/fueled/oven,
+/turf/closed/wall/mineral/abyssal,
+/area/indoors/shelter/bog/inhumen_camp)
+"Js" = (
+/obj/structure/flora/rock/coral,
+/turf/open/floor/abyss_sand,
+/area/outdoors/bog)
+"Kg" = (
+/obj/effect/decal/cleanable/blood/gibs/body,
+/obj/effect/decal/cleanable/blood/gibs/core,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"Kq" = (
+/mob/living/simple_animal/hostile/deepone,
+/obj/structure/flora/starfish{
+	icon_state = "clutter8"
+	},
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"KF" = (
+/obj/structure/flora/rock/water,
+/turf/open/water/ocean/abyss,
+/area/outdoors/bog)
+"KG" = (
+/obj/structure/toilet/filled,
+/obj/item/weapon/knife/dagger/steel/stiletto,
+/turf/open/floor/abyss_tile/two,
+/area/indoors/shelter/bog/inhumen_camp)
+"KP" = (
+/obj/structure/flora/ocean_plants,
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"Le" = (
+/obj/machinery/light/fueled/firebowl/standing/blue,
+/turf/open/floor/abyss_tile/two,
+/area/indoors/shelter/bog/inhumen_camp)
+"Lk" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/obj/structure/bed/mediocre,
+/obj/item/bedsheet/wool,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"Lu" = (
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"Lw" = (
+/obj/structure/flora/driftwood,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"LA" = (
+/obj/effect/dungeon_loot_spawner/low,
+/turf/open/water/blood,
+/area/indoors/shelter/bog/inhumen_camp)
+"Mo" = (
+/obj/structure/stairs/abyss{
+	icon_state = "coral-7"
+	},
+/turf/closed/wall/mineral/abyssal,
+/area/indoors/shelter/bog/inhumen_camp)
+"MC" = (
+/obj/structure/flora/ocean_plants,
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"ME" = (
+/obj/structure/closet/crate/drawer,
+/obj/item/natural/worms/leech/abyssoid,
+/obj/effect/dungeon_loot_spawner/high,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"MS" = (
+/obj/structure/flora/grass/water/reeds,
+/turf/open/water/ocean/abyss,
+/area/outdoors/bog)
+"Nd" = (
+/obj/structure/flora/rock/water,
+/turf/open/floor/abyss_sand,
+/area/indoors/shelter/bog/inhumen_camp)
+"NZ" = (
+/obj/structure/flora/shells,
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"Or" = (
+/obj/effect/decal/cleanable/blood/splatter,
+/turf/closed/wall/mineral/abyssal,
+/area/indoors/shelter/bog/inhumen_camp)
+"OF" = (
+/obj/item/natural/worms/leech/abyssoid,
+/turf/open/water/ocean/abyss,
+/area/indoors/shelter/bog/inhumen_camp)
+"Pa" = (
+/obj/effect/dungeon_loot_spawner/high/chest,
+/obj/structure/closet/crate/chest/gold,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"Pp" = (
+/mob/living/simple_animal/hostile/deepone/arm,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"Pr" = (
+/obj/effect/decal/cleanable/blood/footprints,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"PJ" = (
+/obj/item/gem/oyster,
+/obj/structure/table/wood/fancy/blue,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"PL" = (
+/obj/effect/dungeon_directional_helper/south,
+/turf/open/floor/abyss_sand,
+/area/under/tomb)
+"Qe" = (
+/turf/open/floor/abyss_sand,
+/area/outdoors/bog)
+"QY" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/obj/effect/decal/cleanable/blood/gibs/body,
+/obj/machinery/light/fueled/torchholder/metal_torch/west,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"TJ" = (
+/obj/structure/door/iron/bars/cell,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"UB" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"UD" = (
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"UK" = (
+/obj/structure/flora/driftwood,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"UP" = (
+/obj/structure/flora/starfish{
+	icon_state = "starfish-3"
+	},
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"Vm" = (
+/obj/structure/door/abyss,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"Wn" = (
+/obj/effect/decal/cleanable/blood/gibs/limb,
+/obj/effect/decal/cleanable/blood/wallsplatter,
+/obj/machinery/light/fueled/torchholder/metal_torch/east,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"WJ" = (
+/obj/structure/flora/rock/coral,
+/turf/open/floor/abyss_sand/path,
+/area/indoors/shelter/bog/inhumen_camp)
+"WT" = (
+/turf/open/floor/abyss_sand,
+/area/under/tomb)
+"WV" = (
+/obj/machinery/light/fueled/wallfire/candle/blue,
+/turf/open/floor/abyss_tile,
+/area/indoors/shelter/bog/inhumen_camp)
+"Xv" = (
+/turf/open/floor/abyss_tile/two,
+/area/outdoors/bog)
+"XB" = (
+/obj/effect/decal/cleanable/blood/old,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"XE" = (
+/obj/effect/decal/cleanable/blood,
+/obj/effect/decal/cleanable/blood/footprints,
+/obj/effect/decal/cleanable/blood/drip,
+/obj/item/soap/cult,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"Yz" = (
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"YO" = (
+/turf/open/floor/abyss_tile/three,
+/area/outdoors/bog)
+"YP" = (
+/obj/structure/bars,
+/turf/open/floor/abyss_tile/three,
+/area/indoors/shelter/bog/inhumen_camp)
+"Zx" = (
+/obj/structure/flora/starfish{
+	icon_state = "searock-1"
+	},
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+"ZO" = (
+/obj/item/gem/coral,
+/turf/open/floor/abyss_sand/path,
+/area/outdoors/bog)
+
+(1,1,1) = {"
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+bu
+rn
+bu
+IX
+bu
+bu
+WT
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+"}
+(2,1,1) = {"
+EW
+MS
+jq
+jq
+lb
+jq
+jq
+Yz
+Yz
+Yz
+Zx
+Qe
+Qe
+lq
+Yz
+Yz
+Yz
+Yz
+Yz
+Qe
+jq
+jq
+KF
+jq
+EW
+"}
+(3,1,1) = {"
+EW
+lb
+jq
+jq
+jq
+bZ
+Yz
+Iy
+Iy
+Iy
+YO
+Xv
+YO
+Xv
+zI
+Iy
+Iy
+Iy
+Yz
+MC
+Yz
+ox
+jq
+jq
+EW
+"}
+(4,1,1) = {"
+EW
+jq
+ox
+ft
+Qe
+Yz
+Iy
+Iy
+Iy
+Iy
+aU
+YO
+zI
+zI
+aU
+Iy
+Iy
+Iy
+Iy
+Yz
+NZ
+ft
+jq
+al
+EW
+"}
+(5,1,1) = {"
+EW
+jq
+Bt
+bZ
+Qe
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+kd
+Vm
+kd
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Yz
+eC
+Qe
+jq
+EW
+"}
+(6,1,1) = {"
+EW
+bZ
+Qe
+Qe
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Aa
+UD
+UD
+UD
+fY
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Qe
+Yz
+MC
+EW
+"}
+(7,1,1) = {"
+EW
+Yz
+Yz
+Iy
+Iy
+xa
+Dw
+Dw
+LA
+Iy
+UD
+UD
+AO
+UD
+UD
+Iy
+Lk
+ue
+Ev
+tJ
+Iy
+Iy
+Qe
+NZ
+EW
+"}
+(8,1,1) = {"
+EW
+Yz
+Iy
+Iy
+Iy
+Dw
+XE
+Pr
+Pr
+DH
+xS
+AO
+UD
+Bf
+xW
+iW
+AO
+UD
+UD
+wo
+Iy
+Iy
+fZ
+Qe
+EW
+"}
+(9,1,1) = {"
+EW
+Qe
+Iy
+Iy
+Iy
+xa
+Dw
+Dw
+Dw
+Iy
+UD
+UD
+xW
+xW
+Lu
+Iy
+Lk
+wM
+uS
+tJ
+Iy
+Iy
+Iy
+Qe
+EW
+"}
+(10,1,1) = {"
+WT
+Yz
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Bf
+Ji
+Lu
+Lu
+Lu
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+fZ
+Iy
+Qe
+bu
+"}
+(11,1,1) = {"
+bu
+bZ
+YO
+mU
+Iy
+Aa
+xW
+xW
+xW
+xW
+xW
+jt
+hh
+Lu
+WJ
+Lu
+xW
+UD
+UD
+Le
+Iy
+mU
+YO
+Yz
+vN
+"}
+(12,1,1) = {"
+WT
+Qe
+YO
+zI
+kd
+AO
+xW
+UP
+Lu
+ef
+Lu
+yb
+Lu
+ad
+Lu
+aq
+Bf
+UD
+UD
+UD
+kd
+YO
+YO
+le
+bu
+"}
+(13,1,1) = {"
+dq
+Yz
+YO
+YO
+Vm
+UD
+UD
+xW
+UK
+Lu
+II
+II
+PJ
+Lu
+Lu
+xW
+AO
+UD
+UD
+UD
+Vm
+YO
+YO
+Qe
+PL
+"}
+(14,1,1) = {"
+vN
+Yz
+YO
+YO
+kd
+UD
+AO
+Bf
+xW
+ad
+dv
+II
+II
+jt
+WJ
+Lu
+xW
+AO
+UD
+AO
+kd
+YO
+zI
+Yz
+WT
+"}
+(15,1,1) = {"
+WT
+Yz
+zI
+aU
+Iy
+Aa
+UD
+UD
+UD
+xW
+Lu
+hh
+II
+II
+Lu
+Lu
+xW
+UD
+UD
+Aa
+Iy
+aU
+YO
+NZ
+bu
+"}
+(16,1,1) = {"
+WT
+Yz
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Bf
+Lu
+Fk
+UK
+ad
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Qe
+bu
+"}
+(17,1,1) = {"
+EW
+Qe
+Iy
+Iy
+Iy
+mn
+Pp
+UD
+Bf
+Iy
+UD
+UD
+Bf
+Lu
+Lu
+Iy
+AA
+Gy
+Bf
+yC
+Iy
+Iy
+Mo
+Qe
+EW
+"}
+(18,1,1) = {"
+EW
+jq
+Iy
+Iy
+Iy
+Iy
+ol
+UD
+UD
+iW
+UD
+UD
+UD
+UD
+AO
+iW
+AO
+AO
+wo
+DR
+Iy
+Iy
+Mo
+Yz
+EW
+"}
+(19,1,1) = {"
+EW
+jq
+jq
+Iy
+Iy
+Iy
+ol
+AO
+UD
+Iy
+UD
+AO
+UD
+UD
+UD
+Jm
+sp
+UD
+UD
+xq
+Iy
+Iy
+Yz
+Yz
+EW
+"}
+(20,1,1) = {"
+EW
+eC
+jq
+jq
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Aa
+UD
+UD
+AO
+Aa
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Js
+Qe
+Yz
+EW
+"}
+(21,1,1) = {"
+EW
+Yz
+MC
+Yz
+NZ
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+kd
+Vm
+kd
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Qe
+Qe
+eC
+Js
+EW
+"}
+(22,1,1) = {"
+EW
+KF
+ZO
+Yz
+gH
+Yz
+Iy
+Iy
+Iy
+Iy
+gZ
+Xv
+YO
+YO
+gZ
+Iy
+Iy
+Iy
+Iy
+Qe
+Qe
+qj
+Yz
+Yz
+EW
+"}
+(23,1,1) = {"
+EW
+sY
+jq
+bZ
+jq
+MC
+NZ
+Iy
+Iy
+Iy
+YO
+YO
+YO
+zI
+YO
+Iy
+Iy
+Iy
+Yz
+tw
+bZ
+Yz
+MC
+nM
+EW
+"}
+(24,1,1) = {"
+EW
+jq
+sY
+jq
+KF
+jq
+Qe
+Qe
+Yz
+Yz
+NZ
+gH
+Yz
+cd
+Qe
+Qe
+Qe
+Yz
+Qe
+Qe
+Yz
+Js
+Qe
+Qe
+EW
+"}
+(25,1,1) = {"
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+bu
+bu
+bu
+wz
+bu
+WT
+rn
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+"}
+
+(1,1,2) = {"
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+lI
+lI
+lI
+lI
+lI
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+"}
+(2,1,2) = {"
+EW
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+EW
+"}
+(3,1,2) = {"
+EW
+dk
+dk
+dk
+dk
+dk
+dk
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+dk
+dk
+dk
+dk
+dk
+dk
+EW
+"}
+(4,1,2) = {"
+EW
+dk
+dk
+dk
+dk
+dk
+Iy
+Iy
+Iy
+Iy
+gX
+xW
+xW
+Nd
+gX
+Iy
+Iy
+Iy
+Iy
+dk
+dk
+dk
+dk
+dk
+EW
+"}
+(5,1,2) = {"
+EW
+dk
+dk
+dk
+dk
+Iy
+Iy
+Iy
+Nd
+xW
+xW
+HX
+Lu
+yb
+Lu
+Iy
+Iy
+Iy
+Iy
+Iy
+dk
+dk
+dk
+dk
+EW
+"}
+(6,1,2) = {"
+EW
+dk
+dk
+dk
+Iy
+Iy
+Iy
+kp
+aq
+HX
+xW
+Lu
+aP
+Hw
+OF
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+dk
+dk
+dk
+EW
+"}
+(7,1,2) = {"
+EW
+dk
+dk
+Iy
+Iy
+jm
+HX
+xW
+xW
+xc
+yb
+Lu
+AO
+UD
+UD
+Iy
+lx
+Bf
+Bf
+Aa
+Iy
+Iy
+dk
+dk
+EW
+"}
+(8,1,2) = {"
+EW
+dk
+Iy
+Iy
+Iy
+BE
+ot
+Lu
+Lu
+Lu
+Lu
+UD
+UD
+wo
+AO
+Iy
+WV
+yS
+UD
+UD
+Iy
+Iy
+Iy
+dk
+EW
+"}
+(9,1,2) = {"
+EW
+dk
+Iy
+Iy
+Iy
+Lu
+Lu
+Lu
+Aa
+UD
+Aa
+UD
+UD
+Bf
+Aa
+Iy
+Ck
+ME
+UD
+Pa
+Iy
+Iy
+Iy
+dk
+EW
+"}
+(10,1,2) = {"
+EW
+dk
+Iy
+Iy
+Iy
+Iy
+iV
+Iy
+Iy
+Iy
+Iy
+Iy
+Vm
+Iy
+Iy
+Iy
+Iy
+Iy
+iW
+Iy
+Iy
+Iy
+Iy
+dk
+EW
+"}
+(11,1,2) = {"
+lI
+dk
+Iy
+xa
+tx
+Lu
+AO
+UD
+UD
+Iy
+XB
+uN
+Dw
+Wn
+jR
+Or
+UB
+UD
+AO
+UD
+Dw
+yH
+Iy
+dk
+lI
+"}
+(12,1,2) = {"
+lI
+dk
+Iy
+Dw
+Dw
+yb
+Lu
+UD
+UD
+Iy
+oF
+Dw
+Dw
+Dw
+iC
+Or
+qL
+AO
+UD
+Dw
+Dw
+qA
+Iy
+dk
+lI
+"}
+(13,1,2) = {"
+lI
+dk
+Iy
+Dw
+Dw
+Kq
+Lu
+ad
+AO
+Iy
+Dw
+Dw
+gY
+Dw
+Dw
+Iy
+UD
+UD
+UD
+Dw
+GE
+kT
+Iy
+dk
+lI
+"}
+(14,1,2) = {"
+lI
+dk
+Iy
+Dw
+tx
+Dw
+ot
+Lu
+yb
+Iy
+kJ
+Dw
+Dw
+Dw
+Kg
+Iy
+qL
+AO
+UD
+Dw
+Dw
+qA
+Iy
+dk
+lI
+"}
+(15,1,2) = {"
+lI
+dk
+Iy
+KP
+Dw
+Dw
+xW
+UK
+Lu
+Iy
+uh
+zd
+Dw
+QY
+ub
+Iy
+UB
+AO
+UD
+UD
+Dw
+yH
+Iy
+dk
+lI
+"}
+(16,1,2) = {"
+EW
+dk
+Iy
+Iy
+Iy
+Iy
+oo
+Iy
+Iy
+Iy
+Iy
+Iy
+Vm
+Iy
+Iy
+Iy
+Iy
+Vm
+Iy
+Iy
+Iy
+Iy
+Iy
+dk
+EW
+"}
+(17,1,2) = {"
+EW
+dk
+Iy
+Iy
+Iy
+UB
+je
+ot
+ef
+Iy
+cC
+Lu
+UD
+UD
+Aa
+Iy
+bd
+UD
+UD
+wq
+Iy
+Iy
+Iy
+dk
+EW
+"}
+(18,1,2) = {"
+EW
+dk
+Iy
+Iy
+Iy
+ol
+aI
+yO
+UK
+Iy
+Lu
+Lu
+yb
+UD
+AO
+iW
+UD
+UD
+ak
+hk
+Iy
+Iy
+Iy
+dk
+EW
+"}
+(19,1,2) = {"
+EW
+dk
+dk
+Iy
+Iy
+mz
+aI
+yO
+aq
+Iy
+yh
+hh
+Lu
+Lu
+ot
+Iy
+AO
+Bf
+Bf
+Iy
+Iy
+Iy
+dk
+dk
+EW
+"}
+(20,1,2) = {"
+EW
+dk
+dk
+dk
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+xW
+FX
+Lu
+jC
+xW
+Iy
+TJ
+iv
+YP
+Iy
+Iy
+dk
+dk
+dk
+EW
+"}
+(21,1,2) = {"
+EW
+dk
+dk
+dk
+dk
+Iy
+Iy
+Iy
+Iy
+Iy
+HX
+Lw
+Lu
+aq
+HX
+Iy
+zu
+KG
+Iy
+Iy
+dk
+dk
+dk
+dk
+EW
+"}
+(22,1,2) = {"
+EW
+dk
+dk
+dk
+dk
+dk
+Iy
+Iy
+Iy
+Iy
+gX
+xW
+DC
+Nd
+gX
+Iy
+pp
+Iy
+Iy
+dk
+dk
+dk
+dk
+dk
+EW
+"}
+(23,1,2) = {"
+EW
+dk
+dk
+dk
+dk
+dk
+dk
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+Iy
+dk
+dk
+dk
+dk
+dk
+dk
+EW
+"}
+(24,1,2) = {"
+EW
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+dk
+EW
+"}
+(25,1,2) = {"
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+lI
+lI
+lI
+lI
+lI
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+EW
+"}
