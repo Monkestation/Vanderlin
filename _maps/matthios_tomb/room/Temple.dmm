@@ -79,9 +79,6 @@
 /turf/open/floor/abyss_tile,
 /area/indoors/shelter/bog/inhumen_camp)
 "fZ" = (
-/obj/structure/stairs/abyss{
-	icon_state = "coral-13"
-	},
 /turf/closed/wall/mineral/abyssal,
 /area/indoors/shelter/bog/inhumen_camp)
 "gH" = (
