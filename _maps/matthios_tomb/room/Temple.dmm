@@ -567,9 +567,6 @@
 /turf/open/water/blood,
 /area/indoors/shelter/bog/inhumen_camp)
 "Mo" = (
-/obj/structure/stairs/abyss{
-	icon_state = "coral-7"
-	},
 /turf/closed/wall/mineral/abyssal,
 /area/indoors/shelter/bog/inhumen_camp)
 "MC" = (
