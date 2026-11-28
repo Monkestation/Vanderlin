@@ -593,3 +593,18 @@
 	east_offset = 12
 	north_offset = 12
 	south_offset = 12
+
+/datum/map_template/dungeon/room/Temple
+    mappath = "_maps/matthios_tomb/room/Temple.dmm"
+    id = "Temple"
+    width = 25
+    height = 25
+    rarity = 200
+
+    west_offset = 14
+    east_offset = 14
+    north_offset = 12
+    south_offset = 12
+
+    unique = TRUE
+    min_depth = 10
