@@ -593,4 +593,3 @@
 
     unique = TRUE
     min_depth = 10
-	
