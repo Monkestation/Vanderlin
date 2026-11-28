@@ -568,17 +568,6 @@
 	unique = TRUE
 	min_depth = 10
 
-/datum/map_template/dungeon/room/mwoutpost
-	mappath = "_maps/matthios_tomb/room/mwoutpost.dmm"
-	id = "mwoutpost"
-	width = 25
-	height = 25
-
-	west_offset = 12
-	east_offset = 12
-	north_offset = 12
-	south_offset = 12
-
 /datum/map_template/dungeon/room/Temple
     mappath = "_maps/matthios_tomb/room/Temple.dmm"
     id = "Temple"
@@ -593,3 +582,14 @@
 
     unique = TRUE
     min_depth = 10
+	
+/datum/map_template/dungeon/room/mwoutpost
+	mappath = "_maps/matthios_tomb/room/mwoutpost.dmm"
+	id = "mwoutpost"
+	width = 25
+	height = 25
+
+	west_offset = 12
+	east_offset = 12
+	north_offset = 12
+	south_offset = 12
